@@ -2,7 +2,7 @@ swagger: '2.0'
 schemes:
   - https
 host: api.cognitive.microsoft.com
-basePath: /localbusinesses/v7.0/search
+basePath: /bing
 info:
   contact:
     x-twitter: microsoft
@@ -44,7 +44,7 @@ parameters:
       name: XBingApisSDK
     x-ms-parameter-location: method
 paths:
-  /localbusinesses/v7.0/search:
+  /v7.0/localbusinesses/search:
     get:
       operationId: Local_Search
       parameters:

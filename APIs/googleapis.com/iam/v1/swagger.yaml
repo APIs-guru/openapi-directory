@@ -1242,9 +1242,13 @@ paths:
       parameters:
         - description: |-
             Optional. The policy format version to be returned.
-            Acceptable values are 0, 1, and 3.
-            If the value is 0, or the field is omitted, policy format version 1 will be
-            returned.
+
+            Valid values are 0, 1, and 3. Requests specifying an invalid value will be
+            rejected.
+
+            Requests for policies with any conditional bindings must specify version 3.
+            Policies without any conditional bindings may specify any valid value or
+            leave the field unset.
           in: query
           name: options.requestedPolicyVersion
           type: integer
@@ -1984,7 +1988,15 @@ definitions:
         format: byte
         type: string
       version:
-        description: Deprecated.
+        description: |-
+          Specifies the format of the policy.
+
+          Valid values are 0, 1, and 3. Requests specifying an invalid value will be
+          rejected.
+
+          Policies with any conditional bindings must specify version 3. Policies
+          without any conditional bindings may specify any valid value or leave the
+          field unset.
         format: int32
         type: integer
     type: object
@@ -2285,7 +2297,11 @@ definitions:
         format: google-datetime
         type: string
       validBeforeTime:
-        description: The key can be used before this timestamp.
+        description: |-
+          The key can be used before this timestamp.
+          For system-managed key pairs, this timestamp is the end time for the
+          private key signing operation. The public key could still be used
+          for verification for a few hours after this time.
         format: google-datetime
         type: string
     type: object

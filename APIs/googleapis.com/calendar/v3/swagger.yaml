@@ -2526,7 +2526,7 @@ definitions:
         description: 'For an instance of a recurring event, this is the time at which this event would start according to the recurrence data in the recurring event identified by recurringEventId. It uniquely identifies the instance within the recurring event series even if the instance was moved to a different time. Immutable.'
       privateCopy:
         default: false
-        description: Whether this is a private event copy where changes are not shared with other copies on other calendars. Optional. Immutable. The default is False.
+        description: 'If set to True, Event propagation is disabled. Note that it is not the same thing as Private event properties. Optional. Immutable. The default is False.'
         type: boolean
       recurrence:
         description: 'List of RRULE, EXRULE, RDATE and EXDATE lines for a recurring event, as specified in RFC5545. Note that DTSTART and DTEND lines are not allowed in this field; event start and end times are specified in the start and end fields. This field is omitted for single events or instances of recurring events.'

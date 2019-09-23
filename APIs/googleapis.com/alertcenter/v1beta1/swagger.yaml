@@ -804,6 +804,15 @@ definitions:
         format: google-datetime
         type: string
     type: object
+  AppMakerSqlSetupNotification:
+    description: Alerts from App Maker to notify admins to set up default SQL instance.
+    properties:
+      requestInfo:
+        description: List of applications with requests for default SQL set up.
+        items:
+          $ref: '#/definitions/RequestInfo'
+        type: array
+    type: object
   Attachment:
     description: Attachment with application-specific information about an alert.
     properties:
@@ -1174,6 +1183,26 @@ definitions:
         items:
           $ref: '#/definitions/GmailMessageInfo'
         type: array
+    type: object
+  RequestInfo:
+    description: Requests for one application that needs default SQL setup.
+    properties:
+      appDeveloperEmail:
+        description: |-
+          List of app developers who triggered notifications for above
+          application.
+        items:
+          type: string
+        type: array
+      appKey:
+        description: Required. The application that requires the SQL setup.
+        type: string
+      numberOfRequests:
+        description: |-
+          Required. Number of requests sent for this application to set up default
+          SQL instance.
+        format: int64
+        type: string
     type: object
   Settings:
     description: Customer-level settings.

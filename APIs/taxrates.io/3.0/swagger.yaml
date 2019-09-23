@@ -27,99 +27,11 @@ consumes:
 produces:
   - application/json
 securityDefinitions:
-  Bearer:
+  Apikey:
     in: header
     name: Authorization
     type: apiKey
 paths:
-  /oauth/token:
-    get:
-      description: This the very first URL you must hit when you want to use taxrates.io API. When you got your Client ID key and Client Secret key you are able to use our API resources.
-      parameters:
-        - description: 'Domain name: api.taxrates.io'
-          in: query
-          name: domain
-          required: true
-          type: string
-        - description: Your Client ID goes here. Check the dashboard if you do not know your Client ID.
-          in: query
-          name: clientid
-          required: true
-          type: string
-        - description: Your Client Secret key goes here. Check the dashboard if you do not know your Client Secret key.
-          in: query
-          name: clientsecret
-          required: true
-          type: string
-        - description: You have to use api_member as a scope.
-          in: query
-          name: clientscope
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Success. JSON formatted string in return.
-          schema:
-            properties:
-              clientid:
-                description: Your Client ID key
-                type: string
-              domain:
-                description: The domain you are operating
-                type: string
-              token:
-                description: Your token
-                type: string
-              valid_to:
-                description: The date until your token is valid
-                type: string
-            type: object
-        '404':
-          description: No Client ID found.
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-      summary: Token generating URL
-      tags:
-        - Authentication
-  /v1/oauth/dialog:
-    get:
-      description: This is the second endpoint you have to hit. When you got your token here you can generate your Bearer authorization header. The header will be used to authorize every API call.
-      parameters:
-        - description: 'Domain name: api.taxrates.io'
-          in: query
-          name: domain
-          required: true
-          type: string
-        - description: The token you got from <<token>> endpoint
-          in: query
-          name: token
-          required: true
-          type: string
-        - description: You have to use api_member as a scope.
-          in: query
-          name: clientscope
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Success. JSON formatted authorization string in return.
-          schema:
-            properties:
-              Authorization:
-                description: 'Bearer: __Your authorization key will appear here__'
-                type: string
-            type: object
-        '404':
-          description: No valid token found You have to call <<token>> endpoint to get/refresh your token first.
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-      summary: Authorization endpoint
-      tags:
-        - Authentication
   /v1/tax/byaddress:
     post:
       description: This endpoint returns tax rates for the country based on the address provided
@@ -152,7 +64,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
       security:
-        - Bearer: []
+        - Apikey: []
       summary: Get tax rates by address
       tags:
         - Tax service
@@ -192,7 +104,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
       security:
-        - Bearer: []
+        - Apikey: []
       summary: Returns tax rate for selected country
       tags:
         - Tax service
@@ -234,7 +146,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
       security:
-        - Bearer: []
+        - Apikey: []
       summary: Tax rates by geolocation based on Customer IP address
       tags:
         - Tax service
@@ -271,7 +183,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
       security:
-        - Bearer: []
+        - Apikey: []
       summary: Get all tax rates
       tags:
         - Tax service

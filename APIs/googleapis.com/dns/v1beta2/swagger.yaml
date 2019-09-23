@@ -1323,7 +1323,7 @@ definitions:
   ManagedZoneDnsSecConfig:
     properties:
       defaultKeySpecs:
-        description: Specifies parameters that will be used for generating initial DnsKeys for this ManagedZone. Can only be changed while state is OFF.
+        description: Specifies parameters for generating initial DnsKeys for this ManagedZone. Can only be changed while the state is OFF.
         items:
           $ref: '#/definitions/DnsKeySpec'
         type: array
@@ -1332,7 +1332,7 @@ definitions:
         description: 'Identifies what kind of resource this is. Value: the fixed string "dns#managedZoneDnsSecConfig".'
         type: string
       nonExistence:
-        description: Specifies the mechanism used to provide authenticated denial-of-existence responses. Can only be changed while state is OFF.
+        description: Specifies the mechanism for authenticated denial-of-existence responses. Can only be changed while the state is OFF.
         enum:
           - nsec
           - nsec3
@@ -1400,7 +1400,7 @@ definitions:
   ManagedZonePeeringConfigTargetNetwork:
     properties:
       deactivateTime:
-        description: 'If this zone has been deactivated (possibly because the producer network it targeted was deleted), the time at which it was deactivated. If the peering connection is still active, this will be the empty string. This is in RFC3339 text format. Output only.'
+        description: 'The time at which the zone was deactivated, in RFC 3339 date-time format. An empty string indicates that the peering connection is active. The producer network can deactivate a zone. The zone is automatically deactivated if the producer network that the zone targeted is deleted. Output only.'
         type: string
       kind:
         default: 'dns#managedZonePeeringConfigTargetNetwork'

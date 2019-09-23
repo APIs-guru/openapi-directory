@@ -560,6 +560,17 @@ definitions:
         items:
           $ref: '#/definitions/GoogleCloudVideointelligenceV1_LabelAnnotation'
         type: array
+      segmentPresenceLabelAnnotations:
+        description: |-
+          Presence label annotations on video level or user specified segment level.
+          There is exactly one element for each unique label. Compared to the
+          existing topical `segment_label_annotations`, this field presents more
+          fine-grained, segment-level labels detected in video content and is made
+          available only when the client sets `LabelDetectionConfig.model` to
+          "builtin/latest" in the request.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1_LabelAnnotation'
+        type: array
       shotAnnotations:
         description: Shot annotations. Each shot is represented as a video segment.
         items:
@@ -569,6 +580,16 @@ definitions:
         description: |-
           Topical label annotations on shot level.
           There is exactly one element for each unique label.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1_LabelAnnotation'
+        type: array
+      shotPresenceLabelAnnotations:
+        description: |-
+          Presence label annotations on shot level. There is exactly one element for
+          each unique label. Compared to the existing topical
+          `shot_label_annotations`, this field presents more fine-grained, shot-level
+          labels detected in video content and is made available only when the client
+          sets `LabelDetectionConfig.model` to "builtin/latest" in the request.
         items:
           $ref: '#/definitions/GoogleCloudVideointelligenceV1_LabelAnnotation'
         type: array
@@ -1052,6 +1073,17 @@ definitions:
         items:
           $ref: '#/definitions/GoogleCloudVideointelligenceV1beta2_LabelAnnotation'
         type: array
+      segmentPresenceLabelAnnotations:
+        description: |-
+          Presence label annotations on video level or user specified segment level.
+          There is exactly one element for each unique label. Compared to the
+          existing topical `segment_label_annotations`, this field presents more
+          fine-grained, segment-level labels detected in video content and is made
+          available only when the client sets `LabelDetectionConfig.model` to
+          "builtin/latest" in the request.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1beta2_LabelAnnotation'
+        type: array
       shotAnnotations:
         description: Shot annotations. Each shot is represented as a video segment.
         items:
@@ -1061,6 +1093,16 @@ definitions:
         description: |-
           Topical label annotations on shot level.
           There is exactly one element for each unique label.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1beta2_LabelAnnotation'
+        type: array
+      shotPresenceLabelAnnotations:
+        description: |-
+          Presence label annotations on shot level. There is exactly one element for
+          each unique label. Compared to the existing topical
+          `shot_label_annotations`, this field presents more fine-grained, shot-level
+          labels detected in video content and is made available only when the client
+          sets `LabelDetectionConfig.model` to "builtin/latest" in the request.
         items:
           $ref: '#/definitions/GoogleCloudVideointelligenceV1beta2_LabelAnnotation'
         type: array
@@ -1544,6 +1586,17 @@ definitions:
         items:
           $ref: '#/definitions/GoogleCloudVideointelligenceV1p1beta1_LabelAnnotation'
         type: array
+      segmentPresenceLabelAnnotations:
+        description: |-
+          Presence label annotations on video level or user specified segment level.
+          There is exactly one element for each unique label. Compared to the
+          existing topical `segment_label_annotations`, this field presents more
+          fine-grained, segment-level labels detected in video content and is made
+          available only when the client sets `LabelDetectionConfig.model` to
+          "builtin/latest" in the request.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p1beta1_LabelAnnotation'
+        type: array
       shotAnnotations:
         description: Shot annotations. Each shot is represented as a video segment.
         items:
@@ -1553,6 +1606,16 @@ definitions:
         description: |-
           Topical label annotations on shot level.
           There is exactly one element for each unique label.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p1beta1_LabelAnnotation'
+        type: array
+      shotPresenceLabelAnnotations:
+        description: |-
+          Presence label annotations on shot level. There is exactly one element for
+          each unique label. Compared to the existing topical
+          `shot_label_annotations`, this field presents more fine-grained, shot-level
+          labels detected in video content and is made available only when the client
+          sets `LabelDetectionConfig.model` to "builtin/latest" in the request.
         items:
           $ref: '#/definitions/GoogleCloudVideointelligenceV1p1beta1_LabelAnnotation'
         type: array
@@ -2279,6 +2342,17 @@ definitions:
         items:
           $ref: '#/definitions/GoogleCloudVideointelligenceV1p2beta1_LabelAnnotation'
         type: array
+      segmentPresenceLabelAnnotations:
+        description: |-
+          Presence label annotations on video level or user specified segment level.
+          There is exactly one element for each unique label. Compared to the
+          existing topical `segment_label_annotations`, this field presents more
+          fine-grained, segment-level labels detected in video content and is made
+          available only when the client sets `LabelDetectionConfig.model` to
+          "builtin/latest" in the request.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p2beta1_LabelAnnotation'
+        type: array
       shotAnnotations:
         description: Shot annotations. Each shot is represented as a video segment.
         items:
@@ -2288,6 +2362,16 @@ definitions:
         description: |-
           Topical label annotations on shot level.
           There is exactly one element for each unique label.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p2beta1_LabelAnnotation'
+        type: array
+      shotPresenceLabelAnnotations:
+        description: |-
+          Presence label annotations on shot level. There is exactly one element for
+          each unique label. Compared to the existing topical
+          `shot_label_annotations`, this field presents more fine-grained, shot-level
+          labels detected in video content and is made available only when the client
+          sets `LabelDetectionConfig.model` to "builtin/latest" in the request.
         items:
           $ref: '#/definitions/GoogleCloudVideointelligenceV1p2beta1_LabelAnnotation'
         type: array
@@ -2937,6 +3021,17 @@ definitions:
         items:
           $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_LabelAnnotation'
         type: array
+      segmentPresenceLabelAnnotations:
+        description: |-
+          Presence label annotations on video level or user specified segment level.
+          There is exactly one element for each unique label. Compared to the
+          existing topical `segment_label_annotations`, this field presents more
+          fine-grained, segment-level labels detected in video content and is made
+          available only when the client sets `LabelDetectionConfig.model` to
+          "builtin/latest" in the request.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_LabelAnnotation'
+        type: array
       shotAnnotations:
         description: Shot annotations. Each shot is represented as a video segment.
         items:
@@ -2946,6 +3041,16 @@ definitions:
         description: |-
           Topical label annotations on shot level.
           There is exactly one element for each unique label.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_LabelAnnotation'
+        type: array
+      shotPresenceLabelAnnotations:
+        description: |-
+          Presence label annotations on shot level. There is exactly one element for
+          each unique label. Compared to the existing topical
+          `shot_label_annotations`, this field presents more fine-grained, shot-level
+          labels detected in video content and is made available only when the client
+          sets `LabelDetectionConfig.model` to "builtin/latest" in the request.
         items:
           $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_LabelAnnotation'
         type: array

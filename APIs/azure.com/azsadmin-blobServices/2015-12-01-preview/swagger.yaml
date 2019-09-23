@@ -78,148 +78,7 @@ paths:
         '200':
           description: OK -- The BLOB service has been returned.
           schema:
-            allOf:
-              - description: Base resource object.
-                properties:
-                  id:
-                    description: Resource ID.
-                    readOnly: true
-                    type: string
-                  location:
-                    description: Resource location.
-                    readOnly: true
-                    type: string
-                  name:
-                    description: Resource Name.
-                    readOnly: true
-                    type: string
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: Resource tags.
-                    readOnly: true
-                    type: object
-                  type:
-                    description: Resource type.
-                    readOnly: true
-                    type: string
-                type: object
-                x-ms-azure-resource: true
-            description: The BLOB service.
-            properties:
-              properties:
-                allOf:
-                  - description: Storage service.
-                    properties:
-                      healthStatus:
-                        description: Current health status.
-                        enum:
-                          - Unknown
-                          - Healthy
-                          - Warning
-                          - Critical
-                        readOnly: true
-                        type: string
-                        x-ms-enum:
-                          modelAsString: true
-                          name: HealthStatus
-                      version:
-                        description: Storage service version.
-                        type: string
-                description: Blob service properties.
-                properties:
-                  settings:
-                    allOf:
-                      - allOf:
-                          - allOf:
-                              - description: Storage service settings.
-                                properties:
-                                  frontEndCallbackThreadsCount:
-                                    description: Front end callback threads count.
-                                    format: int32
-                                    type: integer
-                                  frontEndCpuBasedKeepAliveThrottlingCpuMonitorIntervalInSeconds:
-                                    description: Interval (in second) of CPU monitor for front end CPU based keep-alive throttling.
-                                    format: int32
-                                    type: integer
-                                  frontEndCpuBasedKeepAliveThrottlingEnabled:
-                                    description: Switch of front end CPU based keep-alive throttling.
-                                    type: boolean
-                                  frontEndCpuBasedKeepAliveThrottlingPercentCpuThreshold:
-                                    description: Threshold (% percentage) of front end CPU based keep-alive throttling.
-                                    format: float
-                                    type: number
-                                  frontEndCpuBasedKeepAliveThrottlingPercentRequestsToThrottle:
-                                    description: Threshold (% percentage) of requests to throttle in front end CPU based keep-alive throttling.
-                                    format: float
-                                    type: number
-                                  frontEndMaxMillisecondsBetweenMemorySamples:
-                                    description: Maximum interval (in millisecond) between memory samples of front end.
-                                    format: int32
-                                    type: integer
-                                  frontEndMemoryThrottleThresholdSettings:
-                                    description: Front end memory throttle threshold settings.
-                                    type: string
-                                  frontEndMemoryThrottlingEnabled:
-                                    description: Switch of front end memory throttling.
-                                    type: boolean
-                                  frontEndMinThreadPoolThreads:
-                                    description: Front end minimum number of threads in thread pool.
-                                    format: int32
-                                    type: integer
-                                  frontEndThreadPoolBasedKeepAliveIOCompletionThreshold:
-                                    description: Threshold of front end thread pool based keep-alive IO completion.
-                                    format: int32
-                                    type: integer
-                                  frontEndThreadPoolBasedKeepAliveMonitorIntervalInSeconds:
-                                    description: Monitor interval (in seconds) of front end thread pool based keep-alive monitor.
-                                    format: int32
-                                    type: integer
-                                  frontEndThreadPoolBasedKeepAlivePercentage:
-                                    description: Percentage (%) of front end thread pool based keep-alive.
-                                    format: float
-                                    type: number
-                                  frontEndThreadPoolBasedKeepAliveWorkerThreadThreshold:
-                                    description: Threshold of front end thread pool based keep-alive worker thread.
-                                    format: int32
-                                    type: integer
-                                  frontEndUseSlaTimeInAvailability:
-                                    description: Switch of whether front end uses SLA time in availability.
-                                    type: boolean
-                                type: object
-                            description: Settings of storage services.
-                            properties:
-                              frontEndHttpListenPort:
-                                description: The HTTP port of the storage service front end.
-                                format: int32
-                                type: integer
-                              frontEndHttpsListenPort:
-                                description: The HTTPs port of the storage service front end.
-                                format: int32
-                                type: integer
-                            type: object
-                        description: Settings of BLOB service.
-                        properties:
-                          blobSvcContainerGcInterval:
-                            description: 'The interval, in seconds, of container garbage collection.'
-                            format: int32
-                            readOnly: true
-                            type: integer
-                          blobSvcShallowGcInterval:
-                            description: 'The interval ,in seconds, of shallow garbage collection.'
-                            format: int32
-                            readOnly: true
-                            type: integer
-                          blobSvcStreamMapMinContainerOccupancyPercent:
-                            description: The minimal container occupancy percent for stream mapping.
-                            format: int32
-                            readOnly: true
-                            type: integer
-                        type: object
-                    description: Blob service settings.
-                    type: object
-                type: object
-            type: object
+            $ref: '#/definitions/BlobService'
         '404':
           description: NOT FOUND -- The specified farm was not found.
       tags:
@@ -946,142 +805,30 @@ definitions:
         properties:
           id:
             description: Resource ID.
-            readOnly: true
             type: string
           location:
             description: Resource location.
-            readOnly: true
             type: string
           name:
             description: Resource Name.
-            readOnly: true
             type: string
           tags:
             additionalProperties:
               type: string
             description: Resource tags.
-            readOnly: true
             type: object
           type:
             description: Resource type.
-            readOnly: true
             type: string
         type: object
         x-ms-azure-resource: true
     description: The BLOB service.
     properties:
       properties:
-        allOf:
-          - description: Storage service.
-            properties:
-              healthStatus:
-                description: Current health status.
-                enum:
-                  - Unknown
-                  - Healthy
-                  - Warning
-                  - Critical
-                readOnly: true
-                type: string
-                x-ms-enum:
-                  modelAsString: true
-                  name: HealthStatus
-              version:
-                description: Storage service version.
-                type: string
+        $ref: '#/definitions/BlobServiceProperties'
         description: Blob service properties.
-        properties:
-          settings:
-            allOf:
-              - allOf:
-                  - allOf:
-                      - description: Storage service settings.
-                        properties:
-                          frontEndCallbackThreadsCount:
-                            description: Front end callback threads count.
-                            format: int32
-                            type: integer
-                          frontEndCpuBasedKeepAliveThrottlingCpuMonitorIntervalInSeconds:
-                            description: Interval (in second) of CPU monitor for front end CPU based keep-alive throttling.
-                            format: int32
-                            type: integer
-                          frontEndCpuBasedKeepAliveThrottlingEnabled:
-                            description: Switch of front end CPU based keep-alive throttling.
-                            type: boolean
-                          frontEndCpuBasedKeepAliveThrottlingPercentCpuThreshold:
-                            description: Threshold (% percentage) of front end CPU based keep-alive throttling.
-                            format: float
-                            type: number
-                          frontEndCpuBasedKeepAliveThrottlingPercentRequestsToThrottle:
-                            description: Threshold (% percentage) of requests to throttle in front end CPU based keep-alive throttling.
-                            format: float
-                            type: number
-                          frontEndMaxMillisecondsBetweenMemorySamples:
-                            description: Maximum interval (in millisecond) between memory samples of front end.
-                            format: int32
-                            type: integer
-                          frontEndMemoryThrottleThresholdSettings:
-                            description: Front end memory throttle threshold settings.
-                            type: string
-                          frontEndMemoryThrottlingEnabled:
-                            description: Switch of front end memory throttling.
-                            type: boolean
-                          frontEndMinThreadPoolThreads:
-                            description: Front end minimum number of threads in thread pool.
-                            format: int32
-                            type: integer
-                          frontEndThreadPoolBasedKeepAliveIOCompletionThreshold:
-                            description: Threshold of front end thread pool based keep-alive IO completion.
-                            format: int32
-                            type: integer
-                          frontEndThreadPoolBasedKeepAliveMonitorIntervalInSeconds:
-                            description: Monitor interval (in seconds) of front end thread pool based keep-alive monitor.
-                            format: int32
-                            type: integer
-                          frontEndThreadPoolBasedKeepAlivePercentage:
-                            description: Percentage (%) of front end thread pool based keep-alive.
-                            format: float
-                            type: number
-                          frontEndThreadPoolBasedKeepAliveWorkerThreadThreshold:
-                            description: Threshold of front end thread pool based keep-alive worker thread.
-                            format: int32
-                            type: integer
-                          frontEndUseSlaTimeInAvailability:
-                            description: Switch of whether front end uses SLA time in availability.
-                            type: boolean
-                        type: object
-                    description: Settings of storage services.
-                    properties:
-                      frontEndHttpListenPort:
-                        description: The HTTP port of the storage service front end.
-                        format: int32
-                        type: integer
-                      frontEndHttpsListenPort:
-                        description: The HTTPs port of the storage service front end.
-                        format: int32
-                        type: integer
-                    type: object
-                description: Settings of BLOB service.
-                properties:
-                  blobSvcContainerGcInterval:
-                    description: 'The interval, in seconds, of container garbage collection.'
-                    format: int32
-                    readOnly: true
-                    type: integer
-                  blobSvcShallowGcInterval:
-                    description: 'The interval ,in seconds, of shallow garbage collection.'
-                    format: int32
-                    readOnly: true
-                    type: integer
-                  blobSvcStreamMapMinContainerOccupancyPercent:
-                    description: The minimal container occupancy percent for stream mapping.
-                    format: int32
-                    readOnly: true
-                    type: integer
-                type: object
-            description: Blob service settings.
-            type: object
-        type: object
+        readOnly: true
+        x-ms-client-flatten: true
     type: object
   BlobServiceProperties:
     allOf:
@@ -1105,184 +852,14 @@ definitions:
     description: Blob service properties.
     properties:
       settings:
-        allOf:
-          - allOf:
-              - allOf:
-                  - description: Storage service settings.
-                    properties:
-                      frontEndCallbackThreadsCount:
-                        description: Front end callback threads count.
-                        format: int32
-                        type: integer
-                      frontEndCpuBasedKeepAliveThrottlingCpuMonitorIntervalInSeconds:
-                        description: Interval (in second) of CPU monitor for front end CPU based keep-alive throttling.
-                        format: int32
-                        type: integer
-                      frontEndCpuBasedKeepAliveThrottlingEnabled:
-                        description: Switch of front end CPU based keep-alive throttling.
-                        type: boolean
-                      frontEndCpuBasedKeepAliveThrottlingPercentCpuThreshold:
-                        description: Threshold (% percentage) of front end CPU based keep-alive throttling.
-                        format: float
-                        type: number
-                      frontEndCpuBasedKeepAliveThrottlingPercentRequestsToThrottle:
-                        description: Threshold (% percentage) of requests to throttle in front end CPU based keep-alive throttling.
-                        format: float
-                        type: number
-                      frontEndMaxMillisecondsBetweenMemorySamples:
-                        description: Maximum interval (in millisecond) between memory samples of front end.
-                        format: int32
-                        type: integer
-                      frontEndMemoryThrottleThresholdSettings:
-                        description: Front end memory throttle threshold settings.
-                        type: string
-                      frontEndMemoryThrottlingEnabled:
-                        description: Switch of front end memory throttling.
-                        type: boolean
-                      frontEndMinThreadPoolThreads:
-                        description: Front end minimum number of threads in thread pool.
-                        format: int32
-                        type: integer
-                      frontEndThreadPoolBasedKeepAliveIOCompletionThreshold:
-                        description: Threshold of front end thread pool based keep-alive IO completion.
-                        format: int32
-                        type: integer
-                      frontEndThreadPoolBasedKeepAliveMonitorIntervalInSeconds:
-                        description: Monitor interval (in seconds) of front end thread pool based keep-alive monitor.
-                        format: int32
-                        type: integer
-                      frontEndThreadPoolBasedKeepAlivePercentage:
-                        description: Percentage (%) of front end thread pool based keep-alive.
-                        format: float
-                        type: number
-                      frontEndThreadPoolBasedKeepAliveWorkerThreadThreshold:
-                        description: Threshold of front end thread pool based keep-alive worker thread.
-                        format: int32
-                        type: integer
-                      frontEndUseSlaTimeInAvailability:
-                        description: Switch of whether front end uses SLA time in availability.
-                        type: boolean
-                    type: object
-                description: Settings of storage services.
-                properties:
-                  frontEndHttpListenPort:
-                    description: The HTTP port of the storage service front end.
-                    format: int32
-                    type: integer
-                  frontEndHttpsListenPort:
-                    description: The HTTPs port of the storage service front end.
-                    format: int32
-                    type: integer
-                type: object
-            description: Settings of BLOB service.
-            properties:
-              blobSvcContainerGcInterval:
-                description: 'The interval, in seconds, of container garbage collection.'
-                format: int32
-                readOnly: true
-                type: integer
-              blobSvcShallowGcInterval:
-                description: 'The interval ,in seconds, of shallow garbage collection.'
-                format: int32
-                readOnly: true
-                type: integer
-              blobSvcStreamMapMinContainerOccupancyPercent:
-                description: The minimal container occupancy percent for stream mapping.
-                format: int32
-                readOnly: true
-                type: integer
-            type: object
+        $ref: '#/definitions/BlobServiceSettings'
         description: Blob service settings.
-        type: object
+        readOnly: true
+        x-ms-client-flatten: true
     type: object
   BlobServiceSettings:
     allOf:
-      - allOf:
-          - allOf:
-              - description: Storage service settings.
-                properties:
-                  frontEndCallbackThreadsCount:
-                    description: Front end callback threads count.
-                    format: int32
-                    type: integer
-                  frontEndCpuBasedKeepAliveThrottlingCpuMonitorIntervalInSeconds:
-                    description: Interval (in second) of CPU monitor for front end CPU based keep-alive throttling.
-                    format: int32
-                    type: integer
-                  frontEndCpuBasedKeepAliveThrottlingEnabled:
-                    description: Switch of front end CPU based keep-alive throttling.
-                    type: boolean
-                  frontEndCpuBasedKeepAliveThrottlingPercentCpuThreshold:
-                    description: Threshold (% percentage) of front end CPU based keep-alive throttling.
-                    format: float
-                    type: number
-                  frontEndCpuBasedKeepAliveThrottlingPercentRequestsToThrottle:
-                    description: Threshold (% percentage) of requests to throttle in front end CPU based keep-alive throttling.
-                    format: float
-                    type: number
-                  frontEndMaxMillisecondsBetweenMemorySamples:
-                    description: Maximum interval (in millisecond) between memory samples of front end.
-                    format: int32
-                    type: integer
-                  frontEndMemoryThrottleThresholdSettings:
-                    description: Front end memory throttle threshold settings.
-                    type: string
-                  frontEndMemoryThrottlingEnabled:
-                    description: Switch of front end memory throttling.
-                    type: boolean
-                  frontEndMinThreadPoolThreads:
-                    description: Front end minimum number of threads in thread pool.
-                    format: int32
-                    type: integer
-                  frontEndThreadPoolBasedKeepAliveIOCompletionThreshold:
-                    description: Threshold of front end thread pool based keep-alive IO completion.
-                    format: int32
-                    type: integer
-                  frontEndThreadPoolBasedKeepAliveMonitorIntervalInSeconds:
-                    description: Monitor interval (in seconds) of front end thread pool based keep-alive monitor.
-                    format: int32
-                    type: integer
-                  frontEndThreadPoolBasedKeepAlivePercentage:
-                    description: Percentage (%) of front end thread pool based keep-alive.
-                    format: float
-                    type: number
-                  frontEndThreadPoolBasedKeepAliveWorkerThreadThreshold:
-                    description: Threshold of front end thread pool based keep-alive worker thread.
-                    format: int32
-                    type: integer
-                  frontEndUseSlaTimeInAvailability:
-                    description: Switch of whether front end uses SLA time in availability.
-                    type: boolean
-                type: object
-            description: Settings of storage services.
-            properties:
-              frontEndHttpListenPort:
-                description: The HTTP port of the storage service front end.
-                format: int32
-                type: integer
-              frontEndHttpsListenPort:
-                description: The HTTPs port of the storage service front end.
-                format: int32
-                type: integer
-            type: object
-        description: Settings of BLOB service.
-        properties:
-          blobSvcContainerGcInterval:
-            description: 'The interval, in seconds, of container garbage collection.'
-            format: int32
-            readOnly: true
-            type: integer
-          blobSvcShallowGcInterval:
-            description: 'The interval ,in seconds, of shallow garbage collection.'
-            format: int32
-            readOnly: true
-            type: integer
-          blobSvcStreamMapMinContainerOccupancyPercent:
-            description: The minimal container occupancy percent for stream mapping.
-            format: int32
-            readOnly: true
-            type: integer
-        type: object
+      - $ref: '#/definitions/BlobServiceWritableSettings'
     description: Blob service settings.
     type: object
   BlobServiceWritableSettings:

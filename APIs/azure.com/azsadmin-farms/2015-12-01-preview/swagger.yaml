@@ -61,269 +61,7 @@ paths:
         '200':
           description: OK -- The list of storage farms has been returned.
           schema:
-            description: Pageable list of storage farms.
-            properties:
-              nextLink:
-                description: URI to the next page.
-                readOnly: true
-                type: string
-              value:
-                description: List of storage farms.
-                items:
-                  allOf:
-                    - description: Base resource object.
-                      properties:
-                        id:
-                          description: Resource ID.
-                          readOnly: true
-                          type: string
-                        location:
-                          description: Resource location.
-                          readOnly: true
-                          type: string
-                        name:
-                          description: Resource Name.
-                          readOnly: true
-                          type: string
-                        tags:
-                          additionalProperties:
-                            type: string
-                          description: Resource tags.
-                          readOnly: true
-                          type: object
-                        type:
-                          description: Resource type.
-                          readOnly: true
-                          type: string
-                      type: object
-                      x-ms-azure-resource: true
-                  description: Storage farm.
-                  properties:
-                    properties:
-                      description: The properties of storage farm.
-                      properties:
-                        farmId:
-                          description: Farm identifier.
-                          readOnly: true
-                          type: string
-                        settings:
-                          description: Storage farm settings.
-                          properties:
-                            bandwidthThrottleIsEnabled:
-                              description: Switch of bandwidth throttle enablement.
-                              readOnly: true
-                              type: boolean
-                            corsAllowedOriginsList:
-                              description: The list of allowed origins.
-                              readOnly: true
-                              type: string
-                            dataCenterUriHostSuffixes:
-                              description: The suffixes of URI of hosts in data center.
-                              readOnly: true
-                              type: string
-                            defaultEgressThresholdInGbps:
-                              description: Default egress threshold (in Gbps).
-                              format: float
-                              readOnly: true
-                              type: number
-                            defaultIngressThresholdInGbps:
-                              description: Default ingress threshold (in Gbps).
-                              format: float
-                              readOnly: true
-                              type: number
-                            defaultIntranetEgressThresholdInGbps:
-                              description: Default Intranet egress threshold (in Gbps).
-                              format: float
-                              readOnly: true
-                              type: number
-                            defaultIntranetIngressThresholdInGbps:
-                              description: Default Intranet ingress threshold (in Gbps).
-                              format: float
-                              readOnly: true
-                              type: number
-                            defaultRequestThresholdInTps:
-                              description: Default request threshold (in TPS).
-                              format: float
-                              readOnly: true
-                              type: number
-                            defaultThrottleProbabilityDecayIntervalInSeconds:
-                              description: Interval (in seconds) of default throttle probability decay.
-                              format: int32
-                              readOnly: true
-                              type: integer
-                            defaultTotalEgressThresholdInGbps:
-                              description: Default total egress threshold (in Gbps).
-                              format: float
-                              readOnly: true
-                              type: number
-                            defaultTotalIngressThresholdInGbps:
-                              description: Default total ingress threshold (in Gbps).
-                              format: float
-                              readOnly: true
-                              type: number
-                            feedbackRefreshIntervalInSeconds:
-                              description: Interval (in seconds) of feedback refresh.
-                              format: int32
-                              readOnly: true
-                              type: integer
-                            gracePeriodForFullThrottlingInRefreshIntervals:
-                              description: Grace period for full throttling in refresh intervals.
-                              format: int32
-                              readOnly: true
-                              type: integer
-                            gracePeriodMaxThrottleProbability:
-                              description: Maximum probability of throttle in grace period.
-                              format: float
-                              readOnly: true
-                              type: number
-                            hostStyleHttpPort:
-                              description: Host style HTTP port.
-                              format: int32
-                              readOnly: true
-                              type: integer
-                            hostStyleHttpsPort:
-                              description: Host style HTTPs port.
-                              format: int32
-                              readOnly: true
-                              type: integer
-                            minimumEgressThresholdInGbps:
-                              description: Minimum egress threshold (in Gbps).
-                              format: float
-                              readOnly: true
-                              type: number
-                            minimumIngressThresholdInGbps:
-                              description: Minimum ingress threshold (in Gbps).
-                              format: float
-                              readOnly: true
-                              type: number
-                            minimumIntranetEgressThresholdInGbps:
-                              description: Minimum Intranet egress threshold (in Gbps).
-                              format: float
-                              readOnly: true
-                              type: number
-                            minimumIntranetIngressThresholdInGbps:
-                              description: Minimum Intranet ingress threshold (in Gbps).
-                              format: float
-                              readOnly: true
-                              type: number
-                            minimumRequestThresholdInTps:
-                              description: Minimum request threshold (in TPS).
-                              format: float
-                              readOnly: true
-                              type: number
-                            minimumTotalEgressThresholdInGbps:
-                              description: Minimum total egress threshold (in Gbp
-                              format: float
-                              readOnly: true
-                              type: number
-                            minimumTotalIngressThresholdInGbps:
-                              description: Minimum total ingress threshold (in Gbps).
-                              format: float
-                              readOnly: true
-                              type: number
-                            numberOfAccountsToSync:
-                              description: Number of accounts to sync.
-                              format: int32
-                              readOnly: true
-                              type: integer
-                            overallEgressThresholdInGbps:
-                              description: Overall egress threshold (in Gbps).
-                              format: float
-                              readOnly: true
-                              type: number
-                            overallIngressThresholdInGbps:
-                              description: Overall ingress threshold (in Gbps)
-                              format: float
-                              readOnly: true
-                              type: number
-                            overallIntranetEgressThresholdInGbps:
-                              description: Overall Intranet egress threshold (in Gbps).
-                              format: float
-                              readOnly: true
-                              type: number
-                            overallIntranetIngressThresholdInGbps:
-                              description: Overall Intranet ingress threshold (in Gbps).
-                              format: float
-                              readOnly: true
-                              type: number
-                            overallRequestThresholdInTps:
-                              description: Overall request threshold (in TPS).
-                              format: float
-                              readOnly: true
-                              type: number
-                            overallTotalEgressThresholdInGbps:
-                              description: Overall total egress threshold (in Gbps).
-                              format: float
-                              readOnly: true
-                              type: number
-                            overallTotalIngressThresholdInGbps:
-                              description: Overall total ingress threshold (in Gbps).
-                              format: float
-                              readOnly: true
-                              type: number
-                            retentionPeriodForDeletedStorageAccountsInDays:
-                              description: The retention period (in days) for deleted storage account.
-                              format: int32
-                              readOnly: true
-                              type: integer
-                            settingsPollingIntervalInSecond:
-                              description: The polling interval (in second).
-                              format: int32
-                              readOnly: true
-                              type: integer
-                            toleranceFactorForEgress:
-                              description: Tolerance factor for egress.
-                              format: float
-                              readOnly: true
-                              type: number
-                            toleranceFactorForIngress:
-                              description: Tolerance factor for ingress.
-                              format: float
-                              readOnly: true
-                              type: number
-                            toleranceFactorForIntranetEgress:
-                              description: Tolerance factor for Intranet egress.
-                              format: float
-                              readOnly: true
-                              type: number
-                            toleranceFactorForIntranetIngress:
-                              description: Tolerance factor for Intranet ingress.
-                              format: float
-                              readOnly: true
-                              type: number
-                            toleranceFactorForTotalEgress:
-                              description: Tolerance factor for total egress.
-                              format: float
-                              readOnly: true
-                              type: number
-                            toleranceFactorForTotalIngress:
-                              description: Tolerance factor for total ingress.
-                              format: float
-                              readOnly: true
-                              type: number
-                            toleranceFactorForTps:
-                              description: Tolerance factor for TPS.
-                              format: float
-                              readOnly: true
-                              type: number
-                            usageCollectionIntervalInSeconds:
-                              description: Interval (in seconds) of storage usage collection.
-                              format: int32
-                              readOnly: true
-                              type: integer
-                          type: object
-                        settingsStore:
-                          description: The settings of storage farm.
-                          readOnly: true
-                          type: string
-                        version:
-                          description: Resource version.
-                          readOnly: true
-                          type: string
-                      type: object
-                  type: object
-                type: array
-            type: object
+            $ref: '#/definitions/FarmList'
       tags:
         - Farms
       x-ms-examples:
@@ -419,258 +157,7 @@ paths:
         '200':
           description: OK -- The farm has been returned.
           schema:
-            allOf:
-              - description: Base resource object.
-                properties:
-                  id:
-                    description: Resource ID.
-                    readOnly: true
-                    type: string
-                  location:
-                    description: Resource location.
-                    readOnly: true
-                    type: string
-                  name:
-                    description: Resource Name.
-                    readOnly: true
-                    type: string
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: Resource tags.
-                    readOnly: true
-                    type: object
-                  type:
-                    description: Resource type.
-                    readOnly: true
-                    type: string
-                type: object
-                x-ms-azure-resource: true
-            description: Storage farm.
-            properties:
-              properties:
-                description: The properties of storage farm.
-                properties:
-                  farmId:
-                    description: Farm identifier.
-                    readOnly: true
-                    type: string
-                  settings:
-                    description: Storage farm settings.
-                    properties:
-                      bandwidthThrottleIsEnabled:
-                        description: Switch of bandwidth throttle enablement.
-                        readOnly: true
-                        type: boolean
-                      corsAllowedOriginsList:
-                        description: The list of allowed origins.
-                        readOnly: true
-                        type: string
-                      dataCenterUriHostSuffixes:
-                        description: The suffixes of URI of hosts in data center.
-                        readOnly: true
-                        type: string
-                      defaultEgressThresholdInGbps:
-                        description: Default egress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      defaultIngressThresholdInGbps:
-                        description: Default ingress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      defaultIntranetEgressThresholdInGbps:
-                        description: Default Intranet egress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      defaultIntranetIngressThresholdInGbps:
-                        description: Default Intranet ingress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      defaultRequestThresholdInTps:
-                        description: Default request threshold (in TPS).
-                        format: float
-                        readOnly: true
-                        type: number
-                      defaultThrottleProbabilityDecayIntervalInSeconds:
-                        description: Interval (in seconds) of default throttle probability decay.
-                        format: int32
-                        readOnly: true
-                        type: integer
-                      defaultTotalEgressThresholdInGbps:
-                        description: Default total egress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      defaultTotalIngressThresholdInGbps:
-                        description: Default total ingress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      feedbackRefreshIntervalInSeconds:
-                        description: Interval (in seconds) of feedback refresh.
-                        format: int32
-                        readOnly: true
-                        type: integer
-                      gracePeriodForFullThrottlingInRefreshIntervals:
-                        description: Grace period for full throttling in refresh intervals.
-                        format: int32
-                        readOnly: true
-                        type: integer
-                      gracePeriodMaxThrottleProbability:
-                        description: Maximum probability of throttle in grace period.
-                        format: float
-                        readOnly: true
-                        type: number
-                      hostStyleHttpPort:
-                        description: Host style HTTP port.
-                        format: int32
-                        readOnly: true
-                        type: integer
-                      hostStyleHttpsPort:
-                        description: Host style HTTPs port.
-                        format: int32
-                        readOnly: true
-                        type: integer
-                      minimumEgressThresholdInGbps:
-                        description: Minimum egress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      minimumIngressThresholdInGbps:
-                        description: Minimum ingress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      minimumIntranetEgressThresholdInGbps:
-                        description: Minimum Intranet egress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      minimumIntranetIngressThresholdInGbps:
-                        description: Minimum Intranet ingress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      minimumRequestThresholdInTps:
-                        description: Minimum request threshold (in TPS).
-                        format: float
-                        readOnly: true
-                        type: number
-                      minimumTotalEgressThresholdInGbps:
-                        description: Minimum total egress threshold (in Gbp
-                        format: float
-                        readOnly: true
-                        type: number
-                      minimumTotalIngressThresholdInGbps:
-                        description: Minimum total ingress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      numberOfAccountsToSync:
-                        description: Number of accounts to sync.
-                        format: int32
-                        readOnly: true
-                        type: integer
-                      overallEgressThresholdInGbps:
-                        description: Overall egress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      overallIngressThresholdInGbps:
-                        description: Overall ingress threshold (in Gbps)
-                        format: float
-                        readOnly: true
-                        type: number
-                      overallIntranetEgressThresholdInGbps:
-                        description: Overall Intranet egress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      overallIntranetIngressThresholdInGbps:
-                        description: Overall Intranet ingress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      overallRequestThresholdInTps:
-                        description: Overall request threshold (in TPS).
-                        format: float
-                        readOnly: true
-                        type: number
-                      overallTotalEgressThresholdInGbps:
-                        description: Overall total egress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      overallTotalIngressThresholdInGbps:
-                        description: Overall total ingress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      retentionPeriodForDeletedStorageAccountsInDays:
-                        description: The retention period (in days) for deleted storage account.
-                        format: int32
-                        readOnly: true
-                        type: integer
-                      settingsPollingIntervalInSecond:
-                        description: The polling interval (in second).
-                        format: int32
-                        readOnly: true
-                        type: integer
-                      toleranceFactorForEgress:
-                        description: Tolerance factor for egress.
-                        format: float
-                        readOnly: true
-                        type: number
-                      toleranceFactorForIngress:
-                        description: Tolerance factor for ingress.
-                        format: float
-                        readOnly: true
-                        type: number
-                      toleranceFactorForIntranetEgress:
-                        description: Tolerance factor for Intranet egress.
-                        format: float
-                        readOnly: true
-                        type: number
-                      toleranceFactorForIntranetIngress:
-                        description: Tolerance factor for Intranet ingress.
-                        format: float
-                        readOnly: true
-                        type: number
-                      toleranceFactorForTotalEgress:
-                        description: Tolerance factor for total egress.
-                        format: float
-                        readOnly: true
-                        type: number
-                      toleranceFactorForTotalIngress:
-                        description: Tolerance factor for total ingress.
-                        format: float
-                        readOnly: true
-                        type: number
-                      toleranceFactorForTps:
-                        description: Tolerance factor for TPS.
-                        format: float
-                        readOnly: true
-                        type: number
-                      usageCollectionIntervalInSeconds:
-                        description: Interval (in seconds) of storage usage collection.
-                        format: int32
-                        readOnly: true
-                        type: integer
-                    type: object
-                  settingsStore:
-                    description: The settings of storage farm.
-                    readOnly: true
-                    type: string
-                  version:
-                    description: Resource version.
-                    readOnly: true
-                    type: string
-                type: object
-            type: object
+            $ref: '#/definitions/Farm'
         '404':
           description: NOT FOUND -- The specified farm was not found.
       tags:
@@ -767,514 +254,12 @@ paths:
           name: farmObject
           required: true
           schema:
-            allOf:
-              - description: Base resource object.
-                properties:
-                  id:
-                    description: Resource ID.
-                    readOnly: true
-                    type: string
-                  location:
-                    description: Resource location.
-                    readOnly: true
-                    type: string
-                  name:
-                    description: Resource Name.
-                    readOnly: true
-                    type: string
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: Resource tags.
-                    readOnly: true
-                    type: object
-                  type:
-                    description: Resource type.
-                    readOnly: true
-                    type: string
-                type: object
-                x-ms-azure-resource: true
-            description: Storage farm.
-            properties:
-              properties:
-                description: The properties of storage farm.
-                properties:
-                  farmId:
-                    description: Farm identifier.
-                    readOnly: true
-                    type: string
-                  settings:
-                    description: Storage farm settings.
-                    properties:
-                      bandwidthThrottleIsEnabled:
-                        description: Switch of bandwidth throttle enablement.
-                        readOnly: true
-                        type: boolean
-                      corsAllowedOriginsList:
-                        description: The list of allowed origins.
-                        readOnly: true
-                        type: string
-                      dataCenterUriHostSuffixes:
-                        description: The suffixes of URI of hosts in data center.
-                        readOnly: true
-                        type: string
-                      defaultEgressThresholdInGbps:
-                        description: Default egress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      defaultIngressThresholdInGbps:
-                        description: Default ingress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      defaultIntranetEgressThresholdInGbps:
-                        description: Default Intranet egress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      defaultIntranetIngressThresholdInGbps:
-                        description: Default Intranet ingress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      defaultRequestThresholdInTps:
-                        description: Default request threshold (in TPS).
-                        format: float
-                        readOnly: true
-                        type: number
-                      defaultThrottleProbabilityDecayIntervalInSeconds:
-                        description: Interval (in seconds) of default throttle probability decay.
-                        format: int32
-                        readOnly: true
-                        type: integer
-                      defaultTotalEgressThresholdInGbps:
-                        description: Default total egress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      defaultTotalIngressThresholdInGbps:
-                        description: Default total ingress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      feedbackRefreshIntervalInSeconds:
-                        description: Interval (in seconds) of feedback refresh.
-                        format: int32
-                        readOnly: true
-                        type: integer
-                      gracePeriodForFullThrottlingInRefreshIntervals:
-                        description: Grace period for full throttling in refresh intervals.
-                        format: int32
-                        readOnly: true
-                        type: integer
-                      gracePeriodMaxThrottleProbability:
-                        description: Maximum probability of throttle in grace period.
-                        format: float
-                        readOnly: true
-                        type: number
-                      hostStyleHttpPort:
-                        description: Host style HTTP port.
-                        format: int32
-                        readOnly: true
-                        type: integer
-                      hostStyleHttpsPort:
-                        description: Host style HTTPs port.
-                        format: int32
-                        readOnly: true
-                        type: integer
-                      minimumEgressThresholdInGbps:
-                        description: Minimum egress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      minimumIngressThresholdInGbps:
-                        description: Minimum ingress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      minimumIntranetEgressThresholdInGbps:
-                        description: Minimum Intranet egress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      minimumIntranetIngressThresholdInGbps:
-                        description: Minimum Intranet ingress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      minimumRequestThresholdInTps:
-                        description: Minimum request threshold (in TPS).
-                        format: float
-                        readOnly: true
-                        type: number
-                      minimumTotalEgressThresholdInGbps:
-                        description: Minimum total egress threshold (in Gbp
-                        format: float
-                        readOnly: true
-                        type: number
-                      minimumTotalIngressThresholdInGbps:
-                        description: Minimum total ingress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      numberOfAccountsToSync:
-                        description: Number of accounts to sync.
-                        format: int32
-                        readOnly: true
-                        type: integer
-                      overallEgressThresholdInGbps:
-                        description: Overall egress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      overallIngressThresholdInGbps:
-                        description: Overall ingress threshold (in Gbps)
-                        format: float
-                        readOnly: true
-                        type: number
-                      overallIntranetEgressThresholdInGbps:
-                        description: Overall Intranet egress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      overallIntranetIngressThresholdInGbps:
-                        description: Overall Intranet ingress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      overallRequestThresholdInTps:
-                        description: Overall request threshold (in TPS).
-                        format: float
-                        readOnly: true
-                        type: number
-                      overallTotalEgressThresholdInGbps:
-                        description: Overall total egress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      overallTotalIngressThresholdInGbps:
-                        description: Overall total ingress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      retentionPeriodForDeletedStorageAccountsInDays:
-                        description: The retention period (in days) for deleted storage account.
-                        format: int32
-                        readOnly: true
-                        type: integer
-                      settingsPollingIntervalInSecond:
-                        description: The polling interval (in second).
-                        format: int32
-                        readOnly: true
-                        type: integer
-                      toleranceFactorForEgress:
-                        description: Tolerance factor for egress.
-                        format: float
-                        readOnly: true
-                        type: number
-                      toleranceFactorForIngress:
-                        description: Tolerance factor for ingress.
-                        format: float
-                        readOnly: true
-                        type: number
-                      toleranceFactorForIntranetEgress:
-                        description: Tolerance factor for Intranet egress.
-                        format: float
-                        readOnly: true
-                        type: number
-                      toleranceFactorForIntranetIngress:
-                        description: Tolerance factor for Intranet ingress.
-                        format: float
-                        readOnly: true
-                        type: number
-                      toleranceFactorForTotalEgress:
-                        description: Tolerance factor for total egress.
-                        format: float
-                        readOnly: true
-                        type: number
-                      toleranceFactorForTotalIngress:
-                        description: Tolerance factor for total ingress.
-                        format: float
-                        readOnly: true
-                        type: number
-                      toleranceFactorForTps:
-                        description: Tolerance factor for TPS.
-                        format: float
-                        readOnly: true
-                        type: number
-                      usageCollectionIntervalInSeconds:
-                        description: Interval (in seconds) of storage usage collection.
-                        format: int32
-                        readOnly: true
-                        type: integer
-                    type: object
-                  settingsStore:
-                    description: The settings of storage farm.
-                    readOnly: true
-                    type: string
-                  version:
-                    description: Resource version.
-                    readOnly: true
-                    type: string
-                type: object
-            type: object
+            $ref: '#/definitions/Farm'
       responses:
         '200':
           description: OK -- The properties and settings of storage farm have been updated.
           schema:
-            allOf:
-              - description: Base resource object.
-                properties:
-                  id:
-                    description: Resource ID.
-                    readOnly: true
-                    type: string
-                  location:
-                    description: Resource location.
-                    readOnly: true
-                    type: string
-                  name:
-                    description: Resource Name.
-                    readOnly: true
-                    type: string
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: Resource tags.
-                    readOnly: true
-                    type: object
-                  type:
-                    description: Resource type.
-                    readOnly: true
-                    type: string
-                type: object
-                x-ms-azure-resource: true
-            description: Storage farm.
-            properties:
-              properties:
-                description: The properties of storage farm.
-                properties:
-                  farmId:
-                    description: Farm identifier.
-                    readOnly: true
-                    type: string
-                  settings:
-                    description: Storage farm settings.
-                    properties:
-                      bandwidthThrottleIsEnabled:
-                        description: Switch of bandwidth throttle enablement.
-                        readOnly: true
-                        type: boolean
-                      corsAllowedOriginsList:
-                        description: The list of allowed origins.
-                        readOnly: true
-                        type: string
-                      dataCenterUriHostSuffixes:
-                        description: The suffixes of URI of hosts in data center.
-                        readOnly: true
-                        type: string
-                      defaultEgressThresholdInGbps:
-                        description: Default egress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      defaultIngressThresholdInGbps:
-                        description: Default ingress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      defaultIntranetEgressThresholdInGbps:
-                        description: Default Intranet egress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      defaultIntranetIngressThresholdInGbps:
-                        description: Default Intranet ingress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      defaultRequestThresholdInTps:
-                        description: Default request threshold (in TPS).
-                        format: float
-                        readOnly: true
-                        type: number
-                      defaultThrottleProbabilityDecayIntervalInSeconds:
-                        description: Interval (in seconds) of default throttle probability decay.
-                        format: int32
-                        readOnly: true
-                        type: integer
-                      defaultTotalEgressThresholdInGbps:
-                        description: Default total egress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      defaultTotalIngressThresholdInGbps:
-                        description: Default total ingress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      feedbackRefreshIntervalInSeconds:
-                        description: Interval (in seconds) of feedback refresh.
-                        format: int32
-                        readOnly: true
-                        type: integer
-                      gracePeriodForFullThrottlingInRefreshIntervals:
-                        description: Grace period for full throttling in refresh intervals.
-                        format: int32
-                        readOnly: true
-                        type: integer
-                      gracePeriodMaxThrottleProbability:
-                        description: Maximum probability of throttle in grace period.
-                        format: float
-                        readOnly: true
-                        type: number
-                      hostStyleHttpPort:
-                        description: Host style HTTP port.
-                        format: int32
-                        readOnly: true
-                        type: integer
-                      hostStyleHttpsPort:
-                        description: Host style HTTPs port.
-                        format: int32
-                        readOnly: true
-                        type: integer
-                      minimumEgressThresholdInGbps:
-                        description: Minimum egress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      minimumIngressThresholdInGbps:
-                        description: Minimum ingress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      minimumIntranetEgressThresholdInGbps:
-                        description: Minimum Intranet egress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      minimumIntranetIngressThresholdInGbps:
-                        description: Minimum Intranet ingress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      minimumRequestThresholdInTps:
-                        description: Minimum request threshold (in TPS).
-                        format: float
-                        readOnly: true
-                        type: number
-                      minimumTotalEgressThresholdInGbps:
-                        description: Minimum total egress threshold (in Gbp
-                        format: float
-                        readOnly: true
-                        type: number
-                      minimumTotalIngressThresholdInGbps:
-                        description: Minimum total ingress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      numberOfAccountsToSync:
-                        description: Number of accounts to sync.
-                        format: int32
-                        readOnly: true
-                        type: integer
-                      overallEgressThresholdInGbps:
-                        description: Overall egress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      overallIngressThresholdInGbps:
-                        description: Overall ingress threshold (in Gbps)
-                        format: float
-                        readOnly: true
-                        type: number
-                      overallIntranetEgressThresholdInGbps:
-                        description: Overall Intranet egress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      overallIntranetIngressThresholdInGbps:
-                        description: Overall Intranet ingress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      overallRequestThresholdInTps:
-                        description: Overall request threshold (in TPS).
-                        format: float
-                        readOnly: true
-                        type: number
-                      overallTotalEgressThresholdInGbps:
-                        description: Overall total egress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      overallTotalIngressThresholdInGbps:
-                        description: Overall total ingress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      retentionPeriodForDeletedStorageAccountsInDays:
-                        description: The retention period (in days) for deleted storage account.
-                        format: int32
-                        readOnly: true
-                        type: integer
-                      settingsPollingIntervalInSecond:
-                        description: The polling interval (in second).
-                        format: int32
-                        readOnly: true
-                        type: integer
-                      toleranceFactorForEgress:
-                        description: Tolerance factor for egress.
-                        format: float
-                        readOnly: true
-                        type: number
-                      toleranceFactorForIngress:
-                        description: Tolerance factor for ingress.
-                        format: float
-                        readOnly: true
-                        type: number
-                      toleranceFactorForIntranetEgress:
-                        description: Tolerance factor for Intranet egress.
-                        format: float
-                        readOnly: true
-                        type: number
-                      toleranceFactorForIntranetIngress:
-                        description: Tolerance factor for Intranet ingress.
-                        format: float
-                        readOnly: true
-                        type: number
-                      toleranceFactorForTotalEgress:
-                        description: Tolerance factor for total egress.
-                        format: float
-                        readOnly: true
-                        type: number
-                      toleranceFactorForTotalIngress:
-                        description: Tolerance factor for total ingress.
-                        format: float
-                        readOnly: true
-                        type: number
-                      toleranceFactorForTps:
-                        description: Tolerance factor for TPS.
-                        format: float
-                        readOnly: true
-                        type: number
-                      usageCollectionIntervalInSeconds:
-                        description: Interval (in seconds) of storage usage collection.
-                        format: int32
-                        readOnly: true
-                        type: integer
-                    type: object
-                  settingsStore:
-                    description: The settings of storage farm.
-                    readOnly: true
-                    type: string
-                  version:
-                    description: Resource version.
-                    readOnly: true
-                    type: string
-                type: object
-            type: object
+            $ref: '#/definitions/Farm'
       tags:
         - Farms
       x-ms-examples:
@@ -1419,299 +404,12 @@ paths:
           name: farmObject
           required: true
           schema:
-            allOf:
-              - description: Base resource object.
-                properties:
-                  id:
-                    description: Resource ID.
-                    readOnly: true
-                    type: string
-                  location:
-                    description: Resource location.
-                    readOnly: true
-                    type: string
-                  name:
-                    description: Resource Name.
-                    readOnly: true
-                    type: string
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: Resource tags.
-                    readOnly: true
-                    type: object
-                  type:
-                    description: Resource type.
-                    readOnly: true
-                    type: string
-                type: object
-                x-ms-azure-resource: true
-            description: Storage farm properties.
-            properties:
-              properties:
-                description: Setting access string.
-                properties:
-                  settingAccessString:
-                    description: Setting access string.
-                    type: string
-                type: object
-            type: object
+            $ref: '#/definitions/FarmCreationProperties'
       responses:
         '200':
           description: OK -- The new storage farm has been created.
           schema:
-            allOf:
-              - description: Base resource object.
-                properties:
-                  id:
-                    description: Resource ID.
-                    readOnly: true
-                    type: string
-                  location:
-                    description: Resource location.
-                    readOnly: true
-                    type: string
-                  name:
-                    description: Resource Name.
-                    readOnly: true
-                    type: string
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: Resource tags.
-                    readOnly: true
-                    type: object
-                  type:
-                    description: Resource type.
-                    readOnly: true
-                    type: string
-                type: object
-                x-ms-azure-resource: true
-            description: Storage farm.
-            properties:
-              properties:
-                description: The properties of storage farm.
-                properties:
-                  farmId:
-                    description: Farm identifier.
-                    readOnly: true
-                    type: string
-                  settings:
-                    description: Storage farm settings.
-                    properties:
-                      bandwidthThrottleIsEnabled:
-                        description: Switch of bandwidth throttle enablement.
-                        readOnly: true
-                        type: boolean
-                      corsAllowedOriginsList:
-                        description: The list of allowed origins.
-                        readOnly: true
-                        type: string
-                      dataCenterUriHostSuffixes:
-                        description: The suffixes of URI of hosts in data center.
-                        readOnly: true
-                        type: string
-                      defaultEgressThresholdInGbps:
-                        description: Default egress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      defaultIngressThresholdInGbps:
-                        description: Default ingress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      defaultIntranetEgressThresholdInGbps:
-                        description: Default Intranet egress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      defaultIntranetIngressThresholdInGbps:
-                        description: Default Intranet ingress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      defaultRequestThresholdInTps:
-                        description: Default request threshold (in TPS).
-                        format: float
-                        readOnly: true
-                        type: number
-                      defaultThrottleProbabilityDecayIntervalInSeconds:
-                        description: Interval (in seconds) of default throttle probability decay.
-                        format: int32
-                        readOnly: true
-                        type: integer
-                      defaultTotalEgressThresholdInGbps:
-                        description: Default total egress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      defaultTotalIngressThresholdInGbps:
-                        description: Default total ingress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      feedbackRefreshIntervalInSeconds:
-                        description: Interval (in seconds) of feedback refresh.
-                        format: int32
-                        readOnly: true
-                        type: integer
-                      gracePeriodForFullThrottlingInRefreshIntervals:
-                        description: Grace period for full throttling in refresh intervals.
-                        format: int32
-                        readOnly: true
-                        type: integer
-                      gracePeriodMaxThrottleProbability:
-                        description: Maximum probability of throttle in grace period.
-                        format: float
-                        readOnly: true
-                        type: number
-                      hostStyleHttpPort:
-                        description: Host style HTTP port.
-                        format: int32
-                        readOnly: true
-                        type: integer
-                      hostStyleHttpsPort:
-                        description: Host style HTTPs port.
-                        format: int32
-                        readOnly: true
-                        type: integer
-                      minimumEgressThresholdInGbps:
-                        description: Minimum egress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      minimumIngressThresholdInGbps:
-                        description: Minimum ingress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      minimumIntranetEgressThresholdInGbps:
-                        description: Minimum Intranet egress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      minimumIntranetIngressThresholdInGbps:
-                        description: Minimum Intranet ingress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      minimumRequestThresholdInTps:
-                        description: Minimum request threshold (in TPS).
-                        format: float
-                        readOnly: true
-                        type: number
-                      minimumTotalEgressThresholdInGbps:
-                        description: Minimum total egress threshold (in Gbp
-                        format: float
-                        readOnly: true
-                        type: number
-                      minimumTotalIngressThresholdInGbps:
-                        description: Minimum total ingress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      numberOfAccountsToSync:
-                        description: Number of accounts to sync.
-                        format: int32
-                        readOnly: true
-                        type: integer
-                      overallEgressThresholdInGbps:
-                        description: Overall egress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      overallIngressThresholdInGbps:
-                        description: Overall ingress threshold (in Gbps)
-                        format: float
-                        readOnly: true
-                        type: number
-                      overallIntranetEgressThresholdInGbps:
-                        description: Overall Intranet egress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      overallIntranetIngressThresholdInGbps:
-                        description: Overall Intranet ingress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      overallRequestThresholdInTps:
-                        description: Overall request threshold (in TPS).
-                        format: float
-                        readOnly: true
-                        type: number
-                      overallTotalEgressThresholdInGbps:
-                        description: Overall total egress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      overallTotalIngressThresholdInGbps:
-                        description: Overall total ingress threshold (in Gbps).
-                        format: float
-                        readOnly: true
-                        type: number
-                      retentionPeriodForDeletedStorageAccountsInDays:
-                        description: The retention period (in days) for deleted storage account.
-                        format: int32
-                        readOnly: true
-                        type: integer
-                      settingsPollingIntervalInSecond:
-                        description: The polling interval (in second).
-                        format: int32
-                        readOnly: true
-                        type: integer
-                      toleranceFactorForEgress:
-                        description: Tolerance factor for egress.
-                        format: float
-                        readOnly: true
-                        type: number
-                      toleranceFactorForIngress:
-                        description: Tolerance factor for ingress.
-                        format: float
-                        readOnly: true
-                        type: number
-                      toleranceFactorForIntranetEgress:
-                        description: Tolerance factor for Intranet egress.
-                        format: float
-                        readOnly: true
-                        type: number
-                      toleranceFactorForIntranetIngress:
-                        description: Tolerance factor for Intranet ingress.
-                        format: float
-                        readOnly: true
-                        type: number
-                      toleranceFactorForTotalEgress:
-                        description: Tolerance factor for total egress.
-                        format: float
-                        readOnly: true
-                        type: number
-                      toleranceFactorForTotalIngress:
-                        description: Tolerance factor for total ingress.
-                        format: float
-                        readOnly: true
-                        type: number
-                      toleranceFactorForTps:
-                        description: Tolerance factor for TPS.
-                        format: float
-                        readOnly: true
-                        type: number
-                      usageCollectionIntervalInSeconds:
-                        description: Interval (in seconds) of storage usage collection.
-                        format: int32
-                        readOnly: true
-                        type: integer
-                    type: object
-                  settingsStore:
-                    description: The settings of storage farm.
-                    readOnly: true
-                    type: string
-                  version:
-                    description: Resource version.
-                    readOnly: true
-                    type: string
-                type: object
-            type: object
+            $ref: '#/definitions/Farm'
       tags:
         - Farms
       x-ms-examples:
@@ -2338,252 +1036,29 @@ definitions:
         properties:
           id:
             description: Resource ID.
-            readOnly: true
             type: string
           location:
             description: Resource location.
-            readOnly: true
             type: string
           name:
             description: Resource Name.
-            readOnly: true
             type: string
           tags:
             additionalProperties:
               type: string
             description: Resource tags.
-            readOnly: true
             type: object
           type:
             description: Resource type.
-            readOnly: true
             type: string
         type: object
         x-ms-azure-resource: true
     description: Storage farm.
     properties:
       properties:
-        description: The properties of storage farm.
-        properties:
-          farmId:
-            description: Farm identifier.
-            readOnly: true
-            type: string
-          settings:
-            description: Storage farm settings.
-            properties:
-              bandwidthThrottleIsEnabled:
-                description: Switch of bandwidth throttle enablement.
-                readOnly: true
-                type: boolean
-              corsAllowedOriginsList:
-                description: The list of allowed origins.
-                readOnly: true
-                type: string
-              dataCenterUriHostSuffixes:
-                description: The suffixes of URI of hosts in data center.
-                readOnly: true
-                type: string
-              defaultEgressThresholdInGbps:
-                description: Default egress threshold (in Gbps).
-                format: float
-                readOnly: true
-                type: number
-              defaultIngressThresholdInGbps:
-                description: Default ingress threshold (in Gbps).
-                format: float
-                readOnly: true
-                type: number
-              defaultIntranetEgressThresholdInGbps:
-                description: Default Intranet egress threshold (in Gbps).
-                format: float
-                readOnly: true
-                type: number
-              defaultIntranetIngressThresholdInGbps:
-                description: Default Intranet ingress threshold (in Gbps).
-                format: float
-                readOnly: true
-                type: number
-              defaultRequestThresholdInTps:
-                description: Default request threshold (in TPS).
-                format: float
-                readOnly: true
-                type: number
-              defaultThrottleProbabilityDecayIntervalInSeconds:
-                description: Interval (in seconds) of default throttle probability decay.
-                format: int32
-                readOnly: true
-                type: integer
-              defaultTotalEgressThresholdInGbps:
-                description: Default total egress threshold (in Gbps).
-                format: float
-                readOnly: true
-                type: number
-              defaultTotalIngressThresholdInGbps:
-                description: Default total ingress threshold (in Gbps).
-                format: float
-                readOnly: true
-                type: number
-              feedbackRefreshIntervalInSeconds:
-                description: Interval (in seconds) of feedback refresh.
-                format: int32
-                readOnly: true
-                type: integer
-              gracePeriodForFullThrottlingInRefreshIntervals:
-                description: Grace period for full throttling in refresh intervals.
-                format: int32
-                readOnly: true
-                type: integer
-              gracePeriodMaxThrottleProbability:
-                description: Maximum probability of throttle in grace period.
-                format: float
-                readOnly: true
-                type: number
-              hostStyleHttpPort:
-                description: Host style HTTP port.
-                format: int32
-                readOnly: true
-                type: integer
-              hostStyleHttpsPort:
-                description: Host style HTTPs port.
-                format: int32
-                readOnly: true
-                type: integer
-              minimumEgressThresholdInGbps:
-                description: Minimum egress threshold (in Gbps).
-                format: float
-                readOnly: true
-                type: number
-              minimumIngressThresholdInGbps:
-                description: Minimum ingress threshold (in Gbps).
-                format: float
-                readOnly: true
-                type: number
-              minimumIntranetEgressThresholdInGbps:
-                description: Minimum Intranet egress threshold (in Gbps).
-                format: float
-                readOnly: true
-                type: number
-              minimumIntranetIngressThresholdInGbps:
-                description: Minimum Intranet ingress threshold (in Gbps).
-                format: float
-                readOnly: true
-                type: number
-              minimumRequestThresholdInTps:
-                description: Minimum request threshold (in TPS).
-                format: float
-                readOnly: true
-                type: number
-              minimumTotalEgressThresholdInGbps:
-                description: Minimum total egress threshold (in Gbp
-                format: float
-                readOnly: true
-                type: number
-              minimumTotalIngressThresholdInGbps:
-                description: Minimum total ingress threshold (in Gbps).
-                format: float
-                readOnly: true
-                type: number
-              numberOfAccountsToSync:
-                description: Number of accounts to sync.
-                format: int32
-                readOnly: true
-                type: integer
-              overallEgressThresholdInGbps:
-                description: Overall egress threshold (in Gbps).
-                format: float
-                readOnly: true
-                type: number
-              overallIngressThresholdInGbps:
-                description: Overall ingress threshold (in Gbps)
-                format: float
-                readOnly: true
-                type: number
-              overallIntranetEgressThresholdInGbps:
-                description: Overall Intranet egress threshold (in Gbps).
-                format: float
-                readOnly: true
-                type: number
-              overallIntranetIngressThresholdInGbps:
-                description: Overall Intranet ingress threshold (in Gbps).
-                format: float
-                readOnly: true
-                type: number
-              overallRequestThresholdInTps:
-                description: Overall request threshold (in TPS).
-                format: float
-                readOnly: true
-                type: number
-              overallTotalEgressThresholdInGbps:
-                description: Overall total egress threshold (in Gbps).
-                format: float
-                readOnly: true
-                type: number
-              overallTotalIngressThresholdInGbps:
-                description: Overall total ingress threshold (in Gbps).
-                format: float
-                readOnly: true
-                type: number
-              retentionPeriodForDeletedStorageAccountsInDays:
-                description: The retention period (in days) for deleted storage account.
-                format: int32
-                readOnly: true
-                type: integer
-              settingsPollingIntervalInSecond:
-                description: The polling interval (in second).
-                format: int32
-                readOnly: true
-                type: integer
-              toleranceFactorForEgress:
-                description: Tolerance factor for egress.
-                format: float
-                readOnly: true
-                type: number
-              toleranceFactorForIngress:
-                description: Tolerance factor for ingress.
-                format: float
-                readOnly: true
-                type: number
-              toleranceFactorForIntranetEgress:
-                description: Tolerance factor for Intranet egress.
-                format: float
-                readOnly: true
-                type: number
-              toleranceFactorForIntranetIngress:
-                description: Tolerance factor for Intranet ingress.
-                format: float
-                readOnly: true
-                type: number
-              toleranceFactorForTotalEgress:
-                description: Tolerance factor for total egress.
-                format: float
-                readOnly: true
-                type: number
-              toleranceFactorForTotalIngress:
-                description: Tolerance factor for total ingress.
-                format: float
-                readOnly: true
-                type: number
-              toleranceFactorForTps:
-                description: Tolerance factor for TPS.
-                format: float
-                readOnly: true
-                type: number
-              usageCollectionIntervalInSeconds:
-                description: Interval (in seconds) of storage usage collection.
-                format: int32
-                readOnly: true
-                type: integer
-            type: object
-          settingsStore:
-            description: The settings of storage farm.
-            readOnly: true
-            type: string
-          version:
-            description: Resource version.
-            readOnly: true
-            type: string
-        type: object
+        $ref: '#/definitions/FarmProperties'
+        description: Storage farm properties.
+        x-ms-client-flatten: true
     type: object
   FarmCreationProperties:
     allOf:
@@ -2591,37 +1066,29 @@ definitions:
         properties:
           id:
             description: Resource ID.
-            readOnly: true
             type: string
           location:
             description: Resource location.
-            readOnly: true
             type: string
           name:
             description: Resource Name.
-            readOnly: true
             type: string
           tags:
             additionalProperties:
               type: string
             description: Resource tags.
-            readOnly: true
             type: object
           type:
             description: Resource type.
-            readOnly: true
             type: string
         type: object
         x-ms-azure-resource: true
     description: Storage farm properties.
     properties:
       properties:
-        description: Setting access string.
-        properties:
-          settingAccessString:
-            description: Setting access string.
-            type: string
-        type: object
+        $ref: '#/definitions/SettingAccessString'
+        description: Storage farm properties.
+        x-ms-client-flatten: true
     type: object
   FarmList:
     description: Pageable list of storage farms.
@@ -2633,258 +1100,7 @@ definitions:
       value:
         description: List of storage farms.
         items:
-          allOf:
-            - description: Base resource object.
-              properties:
-                id:
-                  description: Resource ID.
-                  readOnly: true
-                  type: string
-                location:
-                  description: Resource location.
-                  readOnly: true
-                  type: string
-                name:
-                  description: Resource Name.
-                  readOnly: true
-                  type: string
-                tags:
-                  additionalProperties:
-                    type: string
-                  description: Resource tags.
-                  readOnly: true
-                  type: object
-                type:
-                  description: Resource type.
-                  readOnly: true
-                  type: string
-              type: object
-              x-ms-azure-resource: true
-          description: Storage farm.
-          properties:
-            properties:
-              description: The properties of storage farm.
-              properties:
-                farmId:
-                  description: Farm identifier.
-                  readOnly: true
-                  type: string
-                settings:
-                  description: Storage farm settings.
-                  properties:
-                    bandwidthThrottleIsEnabled:
-                      description: Switch of bandwidth throttle enablement.
-                      readOnly: true
-                      type: boolean
-                    corsAllowedOriginsList:
-                      description: The list of allowed origins.
-                      readOnly: true
-                      type: string
-                    dataCenterUriHostSuffixes:
-                      description: The suffixes of URI of hosts in data center.
-                      readOnly: true
-                      type: string
-                    defaultEgressThresholdInGbps:
-                      description: Default egress threshold (in Gbps).
-                      format: float
-                      readOnly: true
-                      type: number
-                    defaultIngressThresholdInGbps:
-                      description: Default ingress threshold (in Gbps).
-                      format: float
-                      readOnly: true
-                      type: number
-                    defaultIntranetEgressThresholdInGbps:
-                      description: Default Intranet egress threshold (in Gbps).
-                      format: float
-                      readOnly: true
-                      type: number
-                    defaultIntranetIngressThresholdInGbps:
-                      description: Default Intranet ingress threshold (in Gbps).
-                      format: float
-                      readOnly: true
-                      type: number
-                    defaultRequestThresholdInTps:
-                      description: Default request threshold (in TPS).
-                      format: float
-                      readOnly: true
-                      type: number
-                    defaultThrottleProbabilityDecayIntervalInSeconds:
-                      description: Interval (in seconds) of default throttle probability decay.
-                      format: int32
-                      readOnly: true
-                      type: integer
-                    defaultTotalEgressThresholdInGbps:
-                      description: Default total egress threshold (in Gbps).
-                      format: float
-                      readOnly: true
-                      type: number
-                    defaultTotalIngressThresholdInGbps:
-                      description: Default total ingress threshold (in Gbps).
-                      format: float
-                      readOnly: true
-                      type: number
-                    feedbackRefreshIntervalInSeconds:
-                      description: Interval (in seconds) of feedback refresh.
-                      format: int32
-                      readOnly: true
-                      type: integer
-                    gracePeriodForFullThrottlingInRefreshIntervals:
-                      description: Grace period for full throttling in refresh intervals.
-                      format: int32
-                      readOnly: true
-                      type: integer
-                    gracePeriodMaxThrottleProbability:
-                      description: Maximum probability of throttle in grace period.
-                      format: float
-                      readOnly: true
-                      type: number
-                    hostStyleHttpPort:
-                      description: Host style HTTP port.
-                      format: int32
-                      readOnly: true
-                      type: integer
-                    hostStyleHttpsPort:
-                      description: Host style HTTPs port.
-                      format: int32
-                      readOnly: true
-                      type: integer
-                    minimumEgressThresholdInGbps:
-                      description: Minimum egress threshold (in Gbps).
-                      format: float
-                      readOnly: true
-                      type: number
-                    minimumIngressThresholdInGbps:
-                      description: Minimum ingress threshold (in Gbps).
-                      format: float
-                      readOnly: true
-                      type: number
-                    minimumIntranetEgressThresholdInGbps:
-                      description: Minimum Intranet egress threshold (in Gbps).
-                      format: float
-                      readOnly: true
-                      type: number
-                    minimumIntranetIngressThresholdInGbps:
-                      description: Minimum Intranet ingress threshold (in Gbps).
-                      format: float
-                      readOnly: true
-                      type: number
-                    minimumRequestThresholdInTps:
-                      description: Minimum request threshold (in TPS).
-                      format: float
-                      readOnly: true
-                      type: number
-                    minimumTotalEgressThresholdInGbps:
-                      description: Minimum total egress threshold (in Gbp
-                      format: float
-                      readOnly: true
-                      type: number
-                    minimumTotalIngressThresholdInGbps:
-                      description: Minimum total ingress threshold (in Gbps).
-                      format: float
-                      readOnly: true
-                      type: number
-                    numberOfAccountsToSync:
-                      description: Number of accounts to sync.
-                      format: int32
-                      readOnly: true
-                      type: integer
-                    overallEgressThresholdInGbps:
-                      description: Overall egress threshold (in Gbps).
-                      format: float
-                      readOnly: true
-                      type: number
-                    overallIngressThresholdInGbps:
-                      description: Overall ingress threshold (in Gbps)
-                      format: float
-                      readOnly: true
-                      type: number
-                    overallIntranetEgressThresholdInGbps:
-                      description: Overall Intranet egress threshold (in Gbps).
-                      format: float
-                      readOnly: true
-                      type: number
-                    overallIntranetIngressThresholdInGbps:
-                      description: Overall Intranet ingress threshold (in Gbps).
-                      format: float
-                      readOnly: true
-                      type: number
-                    overallRequestThresholdInTps:
-                      description: Overall request threshold (in TPS).
-                      format: float
-                      readOnly: true
-                      type: number
-                    overallTotalEgressThresholdInGbps:
-                      description: Overall total egress threshold (in Gbps).
-                      format: float
-                      readOnly: true
-                      type: number
-                    overallTotalIngressThresholdInGbps:
-                      description: Overall total ingress threshold (in Gbps).
-                      format: float
-                      readOnly: true
-                      type: number
-                    retentionPeriodForDeletedStorageAccountsInDays:
-                      description: The retention period (in days) for deleted storage account.
-                      format: int32
-                      readOnly: true
-                      type: integer
-                    settingsPollingIntervalInSecond:
-                      description: The polling interval (in second).
-                      format: int32
-                      readOnly: true
-                      type: integer
-                    toleranceFactorForEgress:
-                      description: Tolerance factor for egress.
-                      format: float
-                      readOnly: true
-                      type: number
-                    toleranceFactorForIngress:
-                      description: Tolerance factor for ingress.
-                      format: float
-                      readOnly: true
-                      type: number
-                    toleranceFactorForIntranetEgress:
-                      description: Tolerance factor for Intranet egress.
-                      format: float
-                      readOnly: true
-                      type: number
-                    toleranceFactorForIntranetIngress:
-                      description: Tolerance factor for Intranet ingress.
-                      format: float
-                      readOnly: true
-                      type: number
-                    toleranceFactorForTotalEgress:
-                      description: Tolerance factor for total egress.
-                      format: float
-                      readOnly: true
-                      type: number
-                    toleranceFactorForTotalIngress:
-                      description: Tolerance factor for total ingress.
-                      format: float
-                      readOnly: true
-                      type: number
-                    toleranceFactorForTps:
-                      description: Tolerance factor for TPS.
-                      format: float
-                      readOnly: true
-                      type: number
-                    usageCollectionIntervalInSeconds:
-                      description: Interval (in seconds) of storage usage collection.
-                      format: int32
-                      readOnly: true
-                      type: integer
-                  type: object
-                settingsStore:
-                  description: The settings of storage farm.
-                  readOnly: true
-                  type: string
-                version:
-                  description: Resource version.
-                  readOnly: true
-                  type: string
-              type: object
-          type: object
+          $ref: '#/definitions/Farm'
         type: array
     type: object
   FarmProperties:
@@ -2892,221 +1108,16 @@ definitions:
     properties:
       farmId:
         description: Farm identifier.
-        readOnly: true
         type: string
       settings:
-        description: Storage farm settings.
-        properties:
-          bandwidthThrottleIsEnabled:
-            description: Switch of bandwidth throttle enablement.
-            readOnly: true
-            type: boolean
-          corsAllowedOriginsList:
-            description: The list of allowed origins.
-            readOnly: true
-            type: string
-          dataCenterUriHostSuffixes:
-            description: The suffixes of URI of hosts in data center.
-            readOnly: true
-            type: string
-          defaultEgressThresholdInGbps:
-            description: Default egress threshold (in Gbps).
-            format: float
-            readOnly: true
-            type: number
-          defaultIngressThresholdInGbps:
-            description: Default ingress threshold (in Gbps).
-            format: float
-            readOnly: true
-            type: number
-          defaultIntranetEgressThresholdInGbps:
-            description: Default Intranet egress threshold (in Gbps).
-            format: float
-            readOnly: true
-            type: number
-          defaultIntranetIngressThresholdInGbps:
-            description: Default Intranet ingress threshold (in Gbps).
-            format: float
-            readOnly: true
-            type: number
-          defaultRequestThresholdInTps:
-            description: Default request threshold (in TPS).
-            format: float
-            readOnly: true
-            type: number
-          defaultThrottleProbabilityDecayIntervalInSeconds:
-            description: Interval (in seconds) of default throttle probability decay.
-            format: int32
-            readOnly: true
-            type: integer
-          defaultTotalEgressThresholdInGbps:
-            description: Default total egress threshold (in Gbps).
-            format: float
-            readOnly: true
-            type: number
-          defaultTotalIngressThresholdInGbps:
-            description: Default total ingress threshold (in Gbps).
-            format: float
-            readOnly: true
-            type: number
-          feedbackRefreshIntervalInSeconds:
-            description: Interval (in seconds) of feedback refresh.
-            format: int32
-            readOnly: true
-            type: integer
-          gracePeriodForFullThrottlingInRefreshIntervals:
-            description: Grace period for full throttling in refresh intervals.
-            format: int32
-            readOnly: true
-            type: integer
-          gracePeriodMaxThrottleProbability:
-            description: Maximum probability of throttle in grace period.
-            format: float
-            readOnly: true
-            type: number
-          hostStyleHttpPort:
-            description: Host style HTTP port.
-            format: int32
-            readOnly: true
-            type: integer
-          hostStyleHttpsPort:
-            description: Host style HTTPs port.
-            format: int32
-            readOnly: true
-            type: integer
-          minimumEgressThresholdInGbps:
-            description: Minimum egress threshold (in Gbps).
-            format: float
-            readOnly: true
-            type: number
-          minimumIngressThresholdInGbps:
-            description: Minimum ingress threshold (in Gbps).
-            format: float
-            readOnly: true
-            type: number
-          minimumIntranetEgressThresholdInGbps:
-            description: Minimum Intranet egress threshold (in Gbps).
-            format: float
-            readOnly: true
-            type: number
-          minimumIntranetIngressThresholdInGbps:
-            description: Minimum Intranet ingress threshold (in Gbps).
-            format: float
-            readOnly: true
-            type: number
-          minimumRequestThresholdInTps:
-            description: Minimum request threshold (in TPS).
-            format: float
-            readOnly: true
-            type: number
-          minimumTotalEgressThresholdInGbps:
-            description: Minimum total egress threshold (in Gbp
-            format: float
-            readOnly: true
-            type: number
-          minimumTotalIngressThresholdInGbps:
-            description: Minimum total ingress threshold (in Gbps).
-            format: float
-            readOnly: true
-            type: number
-          numberOfAccountsToSync:
-            description: Number of accounts to sync.
-            format: int32
-            readOnly: true
-            type: integer
-          overallEgressThresholdInGbps:
-            description: Overall egress threshold (in Gbps).
-            format: float
-            readOnly: true
-            type: number
-          overallIngressThresholdInGbps:
-            description: Overall ingress threshold (in Gbps)
-            format: float
-            readOnly: true
-            type: number
-          overallIntranetEgressThresholdInGbps:
-            description: Overall Intranet egress threshold (in Gbps).
-            format: float
-            readOnly: true
-            type: number
-          overallIntranetIngressThresholdInGbps:
-            description: Overall Intranet ingress threshold (in Gbps).
-            format: float
-            readOnly: true
-            type: number
-          overallRequestThresholdInTps:
-            description: Overall request threshold (in TPS).
-            format: float
-            readOnly: true
-            type: number
-          overallTotalEgressThresholdInGbps:
-            description: Overall total egress threshold (in Gbps).
-            format: float
-            readOnly: true
-            type: number
-          overallTotalIngressThresholdInGbps:
-            description: Overall total ingress threshold (in Gbps).
-            format: float
-            readOnly: true
-            type: number
-          retentionPeriodForDeletedStorageAccountsInDays:
-            description: The retention period (in days) for deleted storage account.
-            format: int32
-            readOnly: true
-            type: integer
-          settingsPollingIntervalInSecond:
-            description: The polling interval (in second).
-            format: int32
-            readOnly: true
-            type: integer
-          toleranceFactorForEgress:
-            description: Tolerance factor for egress.
-            format: float
-            readOnly: true
-            type: number
-          toleranceFactorForIngress:
-            description: Tolerance factor for ingress.
-            format: float
-            readOnly: true
-            type: number
-          toleranceFactorForIntranetEgress:
-            description: Tolerance factor for Intranet egress.
-            format: float
-            readOnly: true
-            type: number
-          toleranceFactorForIntranetIngress:
-            description: Tolerance factor for Intranet ingress.
-            format: float
-            readOnly: true
-            type: number
-          toleranceFactorForTotalEgress:
-            description: Tolerance factor for total egress.
-            format: float
-            readOnly: true
-            type: number
-          toleranceFactorForTotalIngress:
-            description: Tolerance factor for total ingress.
-            format: float
-            readOnly: true
-            type: number
-          toleranceFactorForTps:
-            description: Tolerance factor for TPS.
-            format: float
-            readOnly: true
-            type: number
-          usageCollectionIntervalInSeconds:
-            description: Interval (in seconds) of storage usage collection.
-            format: int32
-            readOnly: true
-            type: integer
-        type: object
+        $ref: '#/definitions/FarmSettings'
+        description: The properties of storage farm.
+        x-ms-client-flatten: true
       settingsStore:
         description: The settings of storage farm.
-        readOnly: true
         type: string
       version:
         description: Resource version.
-        readOnly: true
         type: string
     type: object
   FarmSettings:
@@ -3114,205 +1125,164 @@ definitions:
     properties:
       bandwidthThrottleIsEnabled:
         description: Switch of bandwidth throttle enablement.
-        readOnly: true
         type: boolean
       corsAllowedOriginsList:
         description: The list of allowed origins.
-        readOnly: true
         type: string
       dataCenterUriHostSuffixes:
         description: The suffixes of URI of hosts in data center.
-        readOnly: true
         type: string
       defaultEgressThresholdInGbps:
         description: Default egress threshold (in Gbps).
         format: float
-        readOnly: true
         type: number
       defaultIngressThresholdInGbps:
         description: Default ingress threshold (in Gbps).
         format: float
-        readOnly: true
         type: number
       defaultIntranetEgressThresholdInGbps:
         description: Default Intranet egress threshold (in Gbps).
         format: float
-        readOnly: true
         type: number
       defaultIntranetIngressThresholdInGbps:
         description: Default Intranet ingress threshold (in Gbps).
         format: float
-        readOnly: true
         type: number
       defaultRequestThresholdInTps:
         description: Default request threshold (in TPS).
         format: float
-        readOnly: true
         type: number
       defaultThrottleProbabilityDecayIntervalInSeconds:
         description: Interval (in seconds) of default throttle probability decay.
         format: int32
-        readOnly: true
         type: integer
       defaultTotalEgressThresholdInGbps:
         description: Default total egress threshold (in Gbps).
         format: float
-        readOnly: true
         type: number
       defaultTotalIngressThresholdInGbps:
         description: Default total ingress threshold (in Gbps).
         format: float
-        readOnly: true
         type: number
       feedbackRefreshIntervalInSeconds:
         description: Interval (in seconds) of feedback refresh.
         format: int32
-        readOnly: true
         type: integer
       gracePeriodForFullThrottlingInRefreshIntervals:
         description: Grace period for full throttling in refresh intervals.
         format: int32
-        readOnly: true
         type: integer
       gracePeriodMaxThrottleProbability:
         description: Maximum probability of throttle in grace period.
         format: float
-        readOnly: true
         type: number
       hostStyleHttpPort:
         description: Host style HTTP port.
         format: int32
-        readOnly: true
         type: integer
       hostStyleHttpsPort:
         description: Host style HTTPs port.
         format: int32
-        readOnly: true
         type: integer
       minimumEgressThresholdInGbps:
         description: Minimum egress threshold (in Gbps).
         format: float
-        readOnly: true
         type: number
       minimumIngressThresholdInGbps:
         description: Minimum ingress threshold (in Gbps).
         format: float
-        readOnly: true
         type: number
       minimumIntranetEgressThresholdInGbps:
         description: Minimum Intranet egress threshold (in Gbps).
         format: float
-        readOnly: true
         type: number
       minimumIntranetIngressThresholdInGbps:
         description: Minimum Intranet ingress threshold (in Gbps).
         format: float
-        readOnly: true
         type: number
       minimumRequestThresholdInTps:
         description: Minimum request threshold (in TPS).
         format: float
-        readOnly: true
         type: number
       minimumTotalEgressThresholdInGbps:
         description: Minimum total egress threshold (in Gbp
         format: float
-        readOnly: true
         type: number
       minimumTotalIngressThresholdInGbps:
         description: Minimum total ingress threshold (in Gbps).
         format: float
-        readOnly: true
         type: number
       numberOfAccountsToSync:
         description: Number of accounts to sync.
         format: int32
-        readOnly: true
         type: integer
       overallEgressThresholdInGbps:
         description: Overall egress threshold (in Gbps).
         format: float
-        readOnly: true
         type: number
       overallIngressThresholdInGbps:
         description: Overall ingress threshold (in Gbps)
         format: float
-        readOnly: true
         type: number
       overallIntranetEgressThresholdInGbps:
         description: Overall Intranet egress threshold (in Gbps).
         format: float
-        readOnly: true
         type: number
       overallIntranetIngressThresholdInGbps:
         description: Overall Intranet ingress threshold (in Gbps).
         format: float
-        readOnly: true
         type: number
       overallRequestThresholdInTps:
         description: Overall request threshold (in TPS).
         format: float
-        readOnly: true
         type: number
       overallTotalEgressThresholdInGbps:
         description: Overall total egress threshold (in Gbps).
         format: float
-        readOnly: true
         type: number
       overallTotalIngressThresholdInGbps:
         description: Overall total ingress threshold (in Gbps).
         format: float
-        readOnly: true
         type: number
       retentionPeriodForDeletedStorageAccountsInDays:
         description: The retention period (in days) for deleted storage account.
         format: int32
-        readOnly: true
         type: integer
       settingsPollingIntervalInSecond:
         description: The polling interval (in second).
         format: int32
-        readOnly: true
         type: integer
       toleranceFactorForEgress:
         description: Tolerance factor for egress.
         format: float
-        readOnly: true
         type: number
       toleranceFactorForIngress:
         description: Tolerance factor for ingress.
         format: float
-        readOnly: true
         type: number
       toleranceFactorForIntranetEgress:
         description: Tolerance factor for Intranet egress.
         format: float
-        readOnly: true
         type: number
       toleranceFactorForIntranetIngress:
         description: Tolerance factor for Intranet ingress.
         format: float
-        readOnly: true
         type: number
       toleranceFactorForTotalEgress:
         description: Tolerance factor for total egress.
         format: float
-        readOnly: true
         type: number
       toleranceFactorForTotalIngress:
         description: Tolerance factor for total ingress.
         format: float
-        readOnly: true
         type: number
       toleranceFactorForTps:
         description: Tolerance factor for TPS.
         format: float
-        readOnly: true
         type: number
       usageCollectionIntervalInSeconds:
         description: Interval (in seconds) of storage usage collection.
         format: int32
-        readOnly: true
         type: integer
     type: object
   SettingAccessString:

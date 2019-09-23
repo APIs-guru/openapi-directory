@@ -1169,9 +1169,6 @@ paths:
                                     openidProviderId:
                                       description: OAuth authorization server identifier.
                                       type: string
-                                subscriptionKeyRequired:
-                                  description: 'Specifies whether subscription key is required during call to this API, true - API is included into closed products only, false - API is included into open products alone, null - there is a mix of products.'
-                                  type: boolean
                             description:
                               description: Description of the API. May include HTML formatting tags.
                               type: string
@@ -1641,9 +1638,6 @@ paths:
                               openidProviderId:
                                 description: OAuth authorization server identifier.
                                 type: string
-                          subscriptionKeyRequired:
-                            description: 'Specifies whether subscription key is required during call to this API, true - API is included into closed products only, false - API is included into open products alone, null - there is a mix of products.'
-                            type: boolean
                       description:
                         description: Description of the API. May include HTML formatting tags.
                         type: string
@@ -1818,9 +1812,6 @@ paths:
                               openidProviderId:
                                 description: OAuth authorization server identifier.
                                 type: string
-                          subscriptionKeyRequired:
-                            description: 'Specifies whether subscription key is required during call to this API, true - API is included into closed products only, false - API is included into open products alone, null - there is a mix of products.'
-                            type: boolean
                       description:
                         description: Description of the API. May include HTML formatting tags.
                         type: string

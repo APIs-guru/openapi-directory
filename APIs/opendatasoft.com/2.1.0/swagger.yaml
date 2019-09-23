@@ -191,7 +191,7 @@ parameters:
       There are 2 sources available:
 
       * catalog: the catalog of datasets on your portal
-      * opendatasoft: OpenDataSoft's repository of public datasets, also available at
+      * opendatasoft: Opendatasoft's repository of public datasets, also available at
         [data.opendatasoft.com](https://data.opendatasoft.com/page/home/)
     enum:
       - catalog
@@ -252,7 +252,7 @@ paths:
 
         Provides links for:
         * catalog, your domain's list of datasets
-        * opendatasoft, all datasets on the OpenDataSoft network
+        * opendatasoft, all datasets on the Opendatasoft network
       operationId: getRoot
       responses:
         '200':
@@ -518,9 +518,10 @@ paths:
         - $ref: '#/parameters/source'
         - $ref: '#/parameters/dataset_id'
         - $ref: '#/parameters/where'
-        - $ref: '#/parameters/select'
         - $ref: '#/parameters/rows_export'
         - $ref: '#/parameters/start'
+        - $ref: '#/parameters/sort'
+        - $ref: '#/parameters/select'
         - $ref: '#/parameters/timezone'
         - default: ;
           description: 'Provide a different delimiter (default '','').'
@@ -554,6 +555,8 @@ paths:
         - $ref: '#/parameters/search'
         - $ref: '#/parameters/rows_export'
         - $ref: '#/parameters/start'
+        - $ref: '#/parameters/sort'
+        - $ref: '#/parameters/select'
         - $ref: '#/parameters/timezone'
         - $ref: '#/parameters/pretty'
       responses:
@@ -576,6 +579,8 @@ paths:
         - $ref: '#/parameters/search'
         - $ref: '#/parameters/rows_export'
         - $ref: '#/parameters/start'
+        - $ref: '#/parameters/sort'
+        - $ref: '#/parameters/select'
         - $ref: '#/parameters/timezone'
       responses:
         '200':
@@ -597,6 +602,8 @@ paths:
         - $ref: '#/parameters/search'
         - $ref: '#/parameters/rows_export'
         - $ref: '#/parameters/start'
+        - $ref: '#/parameters/sort'
+        - $ref: '#/parameters/select'
         - $ref: '#/parameters/pretty'
         - $ref: '#/parameters/timezone'
       responses:
@@ -619,6 +626,8 @@ paths:
         - $ref: '#/parameters/search'
         - $ref: '#/parameters/rows_export'
         - $ref: '#/parameters/start'
+        - $ref: '#/parameters/sort'
+        - $ref: '#/parameters/select'
         - $ref: '#/parameters/timezone'
       produces:
         - text/plain
@@ -642,6 +651,8 @@ paths:
         - $ref: '#/parameters/search'
         - $ref: '#/parameters/rows_export'
         - $ref: '#/parameters/start'
+        - $ref: '#/parameters/sort'
+        - $ref: '#/parameters/select'
         - $ref: '#/parameters/timezone'
       produces:
         - application/zip
@@ -665,6 +676,8 @@ paths:
         - $ref: '#/parameters/search'
         - $ref: '#/parameters/rows_export'
         - $ref: '#/parameters/start'
+        - $ref: '#/parameters/sort'
+        - $ref: '#/parameters/select'
         - $ref: '#/parameters/timezone'
       produces:
         - application/vnd.ms-excel

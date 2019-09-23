@@ -497,12 +497,13 @@ paths:
       tags:
         - customers
     get:
-      description: Gets the details of a device.
-      operationId: androiddeviceprovisioning.customers.devices.get
+      description: |-
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: androiddeviceprovisioning.operations.get
       parameters:
-        - description: |-
-            Required. The device to get. An API resource name in the format
-            `customers/[CUSTOMER_ID]/devices/[DEVICE_ID]`.
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -512,9 +513,9 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Device'
+            $ref: '#/definitions/Operation'
       tags:
-        - customers
+        - operations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'

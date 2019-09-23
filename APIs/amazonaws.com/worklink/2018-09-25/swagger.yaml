@@ -1,168 +1,193 @@
 swagger: '2.0'
+schemes:
+  - https
+  - http
+host: worklink.amazonaws.com
+basePath: /
 info:
-  version: '2018-09-25'
-  x-release: v4
-  title: Amazon WorkLink
-  description: 'Amazon WorkLink is a cloud-based service that provides secure access to internal websites and web apps from iOS phones. In a single step, your users, such as employees, can access internal websites as efficiently as they access any other public website. They enter a URL in their web browser, or choose a link to an internal website in an email. Amazon WorkLink authenticates the user''s access and securely renders authorized internal web content in a secure rendering service in the AWS cloud. Amazon WorkLink doesn''t download or store any internal web content on mobile devices.'
-  x-logo:
-    url: 'https://twitter.com/awscloud/profile_image?size=original'
-    backgroundColor: '#FFFFFF'
-  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
-    name: Mike Ralphson
     email: mike.ralphson@gmail.com
+    name: Mike Ralphson
     url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
+  description: 'Amazon WorkLink is a cloud-based service that provides secure access to internal websites and web apps from iOS phones. In a single step, your users, such as employees, can access internal websites as efficiently as they access any other public website. They enter a URL in their web browser, or choose a link to an internal website in an email. Amazon WorkLink authenticates the user''s access and securely renders authorized internal web content in a secure rendering service in the AWS cloud. Amazon WorkLink doesn''t download or store any internal web content on mobile devices.'
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
-  x-providerName: amazonaws.com
-  x-serviceName: worklink
-  x-origin:
-    - contentType: application/json
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/worklink-2018-09-25.normal.json'
-      converter:
-        url: 'https://github.com/mermade/aws2openapi'
-        version: 1.0.0
-      x-apisguru-direct: true
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  title: Amazon WorkLink
+  version: '2018-09-25'
   x-apiClientRegistration:
     url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
+  x-logo:
+    backgroundColor: '#FFFFFF'
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+  x-origin:
+    - contentType: application/json
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/worklink-2018-09-25.normal.json'
+      x-apisguru-direct: true
   x-preferred: true
+  x-providerName: amazonaws.com
+  x-release: v4
+  x-serviceName: worklink
 externalDocs:
   description: Amazon Web Services documentation
   url: 'https://docs.aws.amazon.com/worklink/'
-host: worklink.amazonaws.com
-basePath: /
-schemes:
-  - https
-  - http
-x-servers:
-  - url: 'http://worklink.{region}.amazonaws.com'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-        default: us-east-1
-    description: The WorkLink multi-region endpoint
-  - url: 'https://worklink.{region}.amazonaws.com'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-        default: us-east-1
-    description: The WorkLink multi-region endpoint
-  - url: 'http://worklink.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-        default: cn-north-1
-    description: The WorkLink endpoint for China (Beijing) and China (Ningxia)
-  - url: 'https://worklink.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-        default: cn-north-1
-    description: The WorkLink endpoint for China (Beijing) and China (Ningxia)
 consumes:
   - application/json
 produces:
   - application/json
-parameters:
-  X-Amz-Content-Sha256:
-    name: X-Amz-Content-Sha256
-    in: header
-    type: string
-    required: false
-  X-Amz-Date:
-    name: X-Amz-Date
-    in: header
-    type: string
-    required: false
-  X-Amz-Algorithm:
-    name: X-Amz-Algorithm
-    in: header
-    type: string
-    required: false
-  X-Amz-Credential:
-    name: X-Amz-Credential
-    in: header
-    type: string
-    required: false
-  X-Amz-Security-Token:
-    name: X-Amz-Security-Token
-    in: header
-    type: string
-    required: false
-  X-Amz-Signature:
-    name: X-Amz-Signature
-    in: header
-    type: string
-    required: false
-  X-Amz-SignedHeaders:
-    name: X-Amz-SignedHeaders
-    in: header
-    type: string
-    required: false
 securityDefinitions:
   hmac:
-    type: apiKey
-    name: Authorization
-    in: header
     description: Amazon Signature authorization v4
+    in: header
+    name: Authorization
+    type: apiKey
     x-amazon-apigateway-authtype: awsSigv4
 security:
   - hmac: []
+parameters:
+  X-Amz-Algorithm:
+    in: header
+    name: X-Amz-Algorithm
+    required: false
+    type: string
+  X-Amz-Content-Sha256:
+    in: header
+    name: X-Amz-Content-Sha256
+    required: false
+    type: string
+  X-Amz-Credential:
+    in: header
+    name: X-Amz-Credential
+    required: false
+    type: string
+  X-Amz-Date:
+    in: header
+    name: X-Amz-Date
+    required: false
+    type: string
+  X-Amz-Security-Token:
+    in: header
+    name: X-Amz-Security-Token
+    required: false
+    type: string
+  X-Amz-Signature:
+    in: header
+    name: X-Amz-Signature
+    required: false
+    type: string
+  X-Amz-SignedHeaders:
+    in: header
+    name: X-Amz-SignedHeaders
+    required: false
+    type: string
 paths:
-  /associateDomain:
+  /UpdateFleetMetadata:
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
-      operationId: AssociateDomain
+      description: 'Updates fleet metadata, such as DisplayName.'
+      operationId: UpdateFleetMetadata
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              DisplayName:
+                description: The fleet name to display. The existing DisplayName is unset if null is passed.
+                maxLength: 100
+                type: string
+              FleetArn:
+                description: The ARN of the fleet.
+                maxLength: 2048
+                minLength: 20
+                type: string
+              OptimizeForEndUserLocation:
+                description: 'The option to optimize for better performance by routing traffic through the closest AWS Region to users, which may be outside of your home Region.'
+                type: boolean
+            required:
+              - FleetArn
+            type: object
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateFleetMetadataResponse'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+  /associateDomain:
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
       description: Specifies a domain to be associated to Amazon WorkLink.
+      operationId: AssociateDomain
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              AcmCertificateArn:
+                description: The ARN of an issued ACM certificate that is valid for the domain being associated.
+                pattern: 'arn:[\w+=/,.@-]+:[\w+=/,.@-]+:[\w+=/,.@-]*:[0-9]+:[\w+=,.@-]+(/[\w+=/,.@-]+)*'
+                type: string
+              DisplayName:
+                description: The name to display.
+                maxLength: 100
+                type: string
+              DomainName:
+                description: The fully qualified domain name (FQDN).
+                maxLength: 253
+                minLength: 1
+                pattern: '^[a-zA-Z0-9]?((?!-)([A-Za-z0-9-]*[A-Za-z0-9])\.)+[a-zA-Z0-9]+$'
+                type: string
+              FleetArn:
+                description: The Amazon Resource Name (ARN) of the fleet.
+                maxLength: 2048
+                minLength: 20
+                type: string
+            required:
+              - FleetArn
+              - DomainName
+              - AcmCertificateArn
+            type: object
       responses:
         '200':
           description: Success
@@ -192,36 +217,7 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - FleetArn
-              - DomainName
-              - AcmCertificateArn
-            properties:
-              FleetArn:
-                description: The Amazon Resource Name (ARN) of the fleet.
-                type: string
-                minLength: 20
-                maxLength: 2048
-              DomainName:
-                description: The fully qualified domain name (FQDN).
-                type: string
-                pattern: '^[a-zA-Z0-9]?((?!-)([A-Za-z0-9-]*[A-Za-z0-9])\.)+[a-zA-Z0-9]+$'
-                minLength: 1
-                maxLength: 253
-              DisplayName:
-                description: The name to display.
-                type: string
-                maxLength: 100
-              AcmCertificateArn:
-                description: The ARN of an issued ACM certificate that is valid for the domain being associated.
-                type: string
-                pattern: 'arn:[\w+=/,.@-]+:[\w+=/,.@-]+:[\w+=/,.@-]*:[0-9]+:[\w+=,.@-]+(/[\w+=/,.@-]+)*'
+  /associateWebsiteAuthorizationProvider:
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -230,10 +226,35 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /associateWebsiteAuthorizationProvider:
     post:
-      operationId: AssociateWebsiteAuthorizationProvider
       description: Associates a website authorization provider with a specified fleet. This is used to authorize users against associated websites in the company network.
+      operationId: AssociateWebsiteAuthorizationProvider
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              AuthorizationProviderType:
+                description: The authorization provider type.
+                enum:
+                  - SAML
+                type: string
+              DomainName:
+                description: The domain name of the authorization provider. This applies only to SAML-based authorization providers.
+                maxLength: 253
+                minLength: 1
+                pattern: '^[a-zA-Z0-9]?((?!-)([A-Za-z0-9-]*[A-Za-z0-9])\.)+[a-zA-Z0-9]+$'
+                type: string
+              FleetArn:
+                description: The ARN of the fleet.
+                maxLength: 2048
+                minLength: 20
+                type: string
+            required:
+              - FleetArn
+              - AuthorizationProviderType
+            type: object
       responses:
         '200':
           description: Success
@@ -263,32 +284,7 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - FleetArn
-              - AuthorizationProviderType
-            properties:
-              FleetArn:
-                description: The ARN of the fleet.
-                type: string
-                minLength: 20
-                maxLength: 2048
-              AuthorizationProviderType:
-                description: The authorization provider type.
-                type: string
-                enum:
-                  - SAML
-              DomainName:
-                description: The domain name of the authorization provider. This applies only to SAML-based authorization providers.
-                type: string
-                pattern: '^[a-zA-Z0-9]?((?!-)([A-Za-z0-9-]*[A-Za-z0-9])\.)+[a-zA-Z0-9]+$'
-                minLength: 1
-                maxLength: 253
+  /associateWebsiteCertificateAuthority:
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -297,10 +293,34 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /associateWebsiteCertificateAuthority:
     post:
-      operationId: AssociateWebsiteCertificateAuthority
       description: Imports the root certificate of a certificate authority (CA) used to obtain TLS certificates used by associated websites within the company network.
+      operationId: AssociateWebsiteCertificateAuthority
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              Certificate:
+                description: The root certificate of the CA.
+                maxLength: 8192
+                minLength: 1
+                pattern: '-{5}BEGIN CERTIFICATE-{5}\u000D?\u000A([A-Za-z0-9/+]{64}\u000D?\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\u000D?\u000A-{5}END CERTIFICATE-{5}(\u000D?\u000A)?'
+                type: string
+              DisplayName:
+                description: The certificate name to display.
+                maxLength: 100
+                type: string
+              FleetArn:
+                description: The ARN of the fleet.
+                maxLength: 2048
+                minLength: 20
+                type: string
+            required:
+              - FleetArn
+              - Certificate
+            type: object
       responses:
         '200':
           description: Success
@@ -330,31 +350,7 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - FleetArn
-              - Certificate
-            properties:
-              FleetArn:
-                description: The ARN of the fleet.
-                type: string
-                minLength: 20
-                maxLength: 2048
-              Certificate:
-                description: The root certificate of the CA.
-                type: string
-                pattern: '-{5}BEGIN CERTIFICATE-{5}\u000D?\u000A([A-Za-z0-9/+]{64}\u000D?\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\u000D?\u000A-{5}END CERTIFICATE-{5}(\u000D?\u000A)?'
-                minLength: 1
-                maxLength: 8192
-              DisplayName:
-                description: The certificate name to display.
-                type: string
-                maxLength: 100
+  /createFleet:
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -363,10 +359,31 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /createFleet:
     post:
-      operationId: CreateFleet
       description: Creates a fleet. A fleet consists of resources and the configuration that delivers associated websites to authorized users who download and set up the Amazon WorkLink app.
+      operationId: CreateFleet
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              DisplayName:
+                description: The fleet name to display.
+                maxLength: 100
+                type: string
+              FleetName:
+                description: A unique name for the fleet.
+                maxLength: 48
+                minLength: 1
+                pattern: '^[a-z0-9](?:[a-z0-9\-]{0,46}[a-z0-9])?$'
+                type: string
+              OptimizeForEndUserLocation:
+                description: 'The option to optimize for better performance by routing traffic through the closest AWS Region to users, which may be outside of your home Region.'
+                type: boolean
+            required:
+              - FleetName
+            type: object
       responses:
         '200':
           description: Success
@@ -396,28 +413,7 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - FleetName
-            properties:
-              FleetName:
-                description: A unique name for the fleet.
-                type: string
-                pattern: '^[a-z0-9](?:[a-z0-9\-]{0,46}[a-z0-9])?$'
-                minLength: 1
-                maxLength: 48
-              DisplayName:
-                description: The fleet name to display.
-                type: string
-                maxLength: 100
-              OptimizeForEndUserLocation:
-                description: 'The option to optimize for better performance by routing traffic through the closest AWS Region to users, which may be outside of your home Region.'
-                type: boolean
+  /deleteFleet:
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -426,10 +422,23 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /deleteFleet:
     post:
-      operationId: DeleteFleet
       description: 'Deletes a fleet. Prevents users from accessing previously associated websites. '
+      operationId: DeleteFleet
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              FleetArn:
+                description: The ARN of the fleet.
+                maxLength: 2048
+                minLength: 20
+                type: string
+            required:
+              - FleetArn
+            type: object
       responses:
         '200':
           description: Success
@@ -455,20 +464,7 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - FleetArn
-            properties:
-              FleetArn:
-                description: The ARN of the fleet.
-                type: string
-                minLength: 20
-                maxLength: 2048
+  /describeAuditStreamConfiguration:
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -477,10 +473,23 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /describeAuditStreamConfiguration:
     post:
-      operationId: DescribeAuditStreamConfiguration
       description: Describes the configuration for delivering audit streams to the customer account.
+      operationId: DescribeAuditStreamConfiguration
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              FleetArn:
+                description: The ARN of the fleet.
+                maxLength: 2048
+                minLength: 20
+                type: string
+            required:
+              - FleetArn
+            type: object
       responses:
         '200':
           description: Success
@@ -506,20 +515,7 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - FleetArn
-            properties:
-              FleetArn:
-                description: The ARN of the fleet.
-                type: string
-                minLength: 20
-                maxLength: 2048
+  /describeCompanyNetworkConfiguration:
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -528,10 +524,23 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /describeCompanyNetworkConfiguration:
     post:
-      operationId: DescribeCompanyNetworkConfiguration
       description: Describes the networking configuration to access the internal websites associated with the specified fleet.
+      operationId: DescribeCompanyNetworkConfiguration
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              FleetArn:
+                description: The ARN of the fleet.
+                maxLength: 2048
+                minLength: 20
+                type: string
+            required:
+              - FleetArn
+            type: object
       responses:
         '200':
           description: Success
@@ -557,20 +566,7 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - FleetArn
-            properties:
-              FleetArn:
-                description: The ARN of the fleet.
-                type: string
-                minLength: 20
-                maxLength: 2048
+  /describeDevice:
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -579,10 +575,29 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /describeDevice:
     post:
-      operationId: DescribeDevice
       description: Provides information about a user's device.
+      operationId: DescribeDevice
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              DeviceId:
+                description: A unique identifier for a registered user's device.
+                maxLength: 256
+                minLength: 1
+                type: string
+              FleetArn:
+                description: The ARN of the fleet.
+                maxLength: 2048
+                minLength: 20
+                type: string
+            required:
+              - FleetArn
+              - DeviceId
+            type: object
       responses:
         '200':
           description: Success
@@ -608,26 +623,7 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - FleetArn
-              - DeviceId
-            properties:
-              FleetArn:
-                description: The ARN of the fleet.
-                type: string
-                minLength: 20
-                maxLength: 2048
-              DeviceId:
-                description: A unique identifier for a registered user's device.
-                type: string
-                minLength: 1
-                maxLength: 256
+  /describeDevicePolicyConfiguration:
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -636,10 +632,23 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /describeDevicePolicyConfiguration:
     post:
-      operationId: DescribeDevicePolicyConfiguration
       description: Describes the device policy configuration for the specified fleet.
+      operationId: DescribeDevicePolicyConfiguration
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              FleetArn:
+                description: The ARN of the fleet.
+                maxLength: 2048
+                minLength: 20
+                type: string
+            required:
+              - FleetArn
+            type: object
       responses:
         '200':
           description: Success
@@ -665,20 +674,7 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - FleetArn
-            properties:
-              FleetArn:
-                description: The ARN of the fleet.
-                type: string
-                minLength: 20
-                maxLength: 2048
+  /describeDomain:
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -687,10 +683,30 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /describeDomain:
     post:
-      operationId: DescribeDomain
       description: Provides information about the domain.
+      operationId: DescribeDomain
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              DomainName:
+                description: The name of the domain.
+                maxLength: 253
+                minLength: 1
+                pattern: '^[a-zA-Z0-9]?((?!-)([A-Za-z0-9-]*[A-Za-z0-9])\.)+[a-zA-Z0-9]+$'
+                type: string
+              FleetArn:
+                description: The ARN of the fleet.
+                maxLength: 2048
+                minLength: 20
+                type: string
+            required:
+              - FleetArn
+              - DomainName
+            type: object
       responses:
         '200':
           description: Success
@@ -716,27 +732,7 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - FleetArn
-              - DomainName
-            properties:
-              FleetArn:
-                description: The ARN of the fleet.
-                type: string
-                minLength: 20
-                maxLength: 2048
-              DomainName:
-                description: The name of the domain.
-                type: string
-                pattern: '^[a-zA-Z0-9]?((?!-)([A-Za-z0-9-]*[A-Za-z0-9])\.)+[a-zA-Z0-9]+$'
-                minLength: 1
-                maxLength: 253
+  /describeFleetMetadata:
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -745,10 +741,23 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /describeFleetMetadata:
     post:
-      operationId: DescribeFleetMetadata
       description: 'Provides basic information for the specified fleet, excluding identity provider, networking, and device configuration details.'
+      operationId: DescribeFleetMetadata
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              FleetArn:
+                description: The ARN of the fleet.
+                maxLength: 2048
+                minLength: 20
+                type: string
+            required:
+              - FleetArn
+            type: object
       responses:
         '200':
           description: Success
@@ -774,20 +783,7 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - FleetArn
-            properties:
-              FleetArn:
-                description: The ARN of the fleet.
-                type: string
-                minLength: 20
-                maxLength: 2048
+  /describeIdentityProviderConfiguration:
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -796,10 +792,23 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /describeIdentityProviderConfiguration:
     post:
-      operationId: DescribeIdentityProviderConfiguration
       description: Describes the identity provider configuration of the specified fleet.
+      operationId: DescribeIdentityProviderConfiguration
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              FleetArn:
+                description: The ARN of the fleet.
+                maxLength: 2048
+                minLength: 20
+                type: string
+            required:
+              - FleetArn
+            type: object
       responses:
         '200':
           description: Success
@@ -825,20 +834,7 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - FleetArn
-            properties:
-              FleetArn:
-                description: The ARN of the fleet.
-                type: string
-                minLength: 20
-                maxLength: 2048
+  /describeWebsiteCertificateAuthority:
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -847,10 +843,29 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /describeWebsiteCertificateAuthority:
     post:
-      operationId: DescribeWebsiteCertificateAuthority
       description: Provides information about the certificate authority.
+      operationId: DescribeWebsiteCertificateAuthority
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              FleetArn:
+                description: The ARN of the fleet.
+                maxLength: 2048
+                minLength: 20
+                type: string
+              WebsiteCaId:
+                description: A unique identifier for the certificate authority.
+                maxLength: 256
+                minLength: 1
+                type: string
+            required:
+              - FleetArn
+              - WebsiteCaId
+            type: object
       responses:
         '200':
           description: Success
@@ -876,26 +891,7 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - FleetArn
-              - WebsiteCaId
-            properties:
-              FleetArn:
-                description: The ARN of the fleet.
-                type: string
-                minLength: 20
-                maxLength: 2048
-              WebsiteCaId:
-                description: A unique identifier for the certificate authority.
-                type: string
-                minLength: 1
-                maxLength: 256
+  /disassociateDomain:
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -904,10 +900,30 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /disassociateDomain:
     post:
-      operationId: DisassociateDomain
       description: 'Disassociates a domain from Amazon WorkLink. End users lose the ability to access the domain with Amazon WorkLink. '
+      operationId: DisassociateDomain
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              DomainName:
+                description: The name of the domain.
+                maxLength: 253
+                minLength: 1
+                pattern: '^[a-zA-Z0-9]?((?!-)([A-Za-z0-9-]*[A-Za-z0-9])\.)+[a-zA-Z0-9]+$'
+                type: string
+              FleetArn:
+                description: The ARN of the fleet.
+                maxLength: 2048
+                minLength: 20
+                type: string
+            required:
+              - FleetArn
+              - DomainName
+            type: object
       responses:
         '200':
           description: Success
@@ -933,27 +949,7 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - FleetArn
-              - DomainName
-            properties:
-              FleetArn:
-                description: The ARN of the fleet.
-                type: string
-                minLength: 20
-                maxLength: 2048
-              DomainName:
-                description: The name of the domain.
-                type: string
-                pattern: '^[a-zA-Z0-9]?((?!-)([A-Za-z0-9-]*[A-Za-z0-9])\.)+[a-zA-Z0-9]+$'
-                minLength: 1
-                maxLength: 253
+  /disassociateWebsiteAuthorizationProvider:
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -962,10 +958,29 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /disassociateWebsiteAuthorizationProvider:
     post:
-      operationId: DisassociateWebsiteAuthorizationProvider
       description: 'Disassociates a website authorization provider from a specified fleet. After the disassociation, users can''t load any associated websites that require this authorization provider.'
+      operationId: DisassociateWebsiteAuthorizationProvider
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              AuthorizationProviderId:
+                description: A unique identifier for the authorization provider.
+                maxLength: 256
+                minLength: 1
+                type: string
+              FleetArn:
+                description: The ARN of the fleet.
+                maxLength: 2048
+                minLength: 20
+                type: string
+            required:
+              - FleetArn
+              - AuthorizationProviderId
+            type: object
       responses:
         '200':
           description: Success
@@ -995,26 +1010,7 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - FleetArn
-              - AuthorizationProviderId
-            properties:
-              FleetArn:
-                description: The ARN of the fleet.
-                type: string
-                minLength: 20
-                maxLength: 2048
-              AuthorizationProviderId:
-                description: A unique identifier for the authorization provider.
-                type: string
-                minLength: 1
-                maxLength: 256
+  /disassociateWebsiteCertificateAuthority:
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1023,10 +1019,29 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /disassociateWebsiteCertificateAuthority:
     post:
-      operationId: DisassociateWebsiteCertificateAuthority
       description: Removes a certificate authority (CA).
+      operationId: DisassociateWebsiteCertificateAuthority
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              FleetArn:
+                description: The ARN of the fleet.
+                maxLength: 2048
+                minLength: 20
+                type: string
+              WebsiteCaId:
+                description: A unique identifier for the CA.
+                maxLength: 256
+                minLength: 1
+                type: string
+            required:
+              - FleetArn
+              - WebsiteCaId
+            type: object
       responses:
         '200':
           description: Success
@@ -1052,26 +1067,7 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - FleetArn
-              - WebsiteCaId
-            properties:
-              FleetArn:
-                description: The ARN of the fleet.
-                type: string
-                minLength: 20
-                maxLength: 2048
-              WebsiteCaId:
-                description: A unique identifier for the CA.
-                type: string
-                minLength: 1
-                maxLength: 256
+  /listDevices:
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1080,10 +1076,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /listDevices:
     post:
-      operationId: ListDevices
       description: Retrieves a list of devices registered with the specified fleet.
+      operationId: ListDevices
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              FleetArn:
+                description: The ARN of the fleet.
+                maxLength: 2048
+                minLength: 20
+                type: string
+              MaxResults:
+                description: The maximum number of results to be included in the next page.
+                minimum: 1
+                type: integer
+              NextToken:
+                description: 'The pagination token used to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+                maxLength: 4096
+                minLength: 1
+                pattern: '[\w\-]+'
+                type: string
+            required:
+              - FleetArn
+            type: object
+        - description: Pagination limit
+          in: query
+          name: MaxResults
+          required: false
+          type: string
+        - description: Pagination token
+          in: query
+          name: NextToken
+          required: false
+          type: string
       responses:
         '200':
           description: Success
@@ -1109,40 +1138,7 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - FleetArn
-            properties:
-              FleetArn:
-                description: The ARN of the fleet.
-                type: string
-                minLength: 20
-                maxLength: 2048
-              NextToken:
-                description: 'The pagination token used to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
-                type: string
-                pattern: '[\w\-]+'
-                minLength: 1
-                maxLength: 4096
-              MaxResults:
-                description: The maximum number of results to be included in the next page.
-                type: integer
-                minimum: 1
-        - name: MaxResults
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
-        - name: NextToken
-          type: string
-          in: query
-          description: Pagination token
-          required: false
+  /listDomains:
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1151,10 +1147,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /listDomains:
     post:
-      operationId: ListDomains
       description: Retrieves a list of domains associated to a specified fleet.
+      operationId: ListDomains
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              FleetArn:
+                description: The ARN of the fleet.
+                maxLength: 2048
+                minLength: 20
+                type: string
+              MaxResults:
+                description: The maximum number of results to be included in the next page.
+                minimum: 1
+                type: integer
+              NextToken:
+                description: 'The pagination token used to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+                maxLength: 4096
+                minLength: 1
+                pattern: '[\w\-]+'
+                type: string
+            required:
+              - FleetArn
+            type: object
+        - description: Pagination limit
+          in: query
+          name: MaxResults
+          required: false
+          type: string
+        - description: Pagination token
+          in: query
+          name: NextToken
+          required: false
+          type: string
       responses:
         '200':
           description: Success
@@ -1176,40 +1205,7 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - FleetArn
-            properties:
-              FleetArn:
-                description: The ARN of the fleet.
-                type: string
-                minLength: 20
-                maxLength: 2048
-              NextToken:
-                description: 'The pagination token used to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
-                type: string
-                pattern: '[\w\-]+'
-                minLength: 1
-                maxLength: 4096
-              MaxResults:
-                description: The maximum number of results to be included in the next page.
-                type: integer
-                minimum: 1
-        - name: MaxResults
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
-        - name: NextToken
-          type: string
-          in: query
-          description: Pagination token
-          required: false
+  /listFleets:
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1218,10 +1214,36 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /listFleets:
     post:
-      operationId: ListFleets
       description: Retrieves a list of fleets for the current account and Region.
+      operationId: ListFleets
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              MaxResults:
+                description: The maximum number of results to be included in the next page.
+                minimum: 1
+                type: integer
+              NextToken:
+                description: 'The pagination token used to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+                maxLength: 4096
+                minLength: 1
+                pattern: '[\w\-]+'
+                type: string
+            type: object
+        - description: Pagination limit
+          in: query
+          name: MaxResults
+          required: false
+          type: string
+        - description: Pagination token
+          in: query
+          name: NextToken
+          required: false
+          type: string
       responses:
         '200':
           description: Success
@@ -1243,33 +1265,7 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            properties:
-              NextToken:
-                description: 'The pagination token used to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
-                type: string
-                pattern: '[\w\-]+'
-                minLength: 1
-                maxLength: 4096
-              MaxResults:
-                description: The maximum number of results to be included in the next page.
-                type: integer
-                minimum: 1
-        - name: MaxResults
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
-        - name: NextToken
-          type: string
-          in: query
-          description: Pagination token
-          required: false
+  /listWebsiteAuthorizationProviders:
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1278,10 +1274,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /listWebsiteAuthorizationProviders:
     post:
-      operationId: ListWebsiteAuthorizationProviders
       description: Retrieves a list of website authorization providers associated with a specified fleet.
+      operationId: ListWebsiteAuthorizationProviders
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              FleetArn:
+                description: The ARN of the fleet.
+                maxLength: 2048
+                minLength: 20
+                type: string
+              MaxResults:
+                description: The maximum number of results to be included in the next page.
+                minimum: 1
+                type: integer
+              NextToken:
+                description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+                maxLength: 4096
+                minLength: 1
+                pattern: '[\w\-]+'
+                type: string
+            required:
+              - FleetArn
+            type: object
+        - description: Pagination limit
+          in: query
+          name: MaxResults
+          required: false
+          type: string
+        - description: Pagination token
+          in: query
+          name: NextToken
+          required: false
+          type: string
       responses:
         '200':
           description: Success
@@ -1307,40 +1336,7 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - FleetArn
-            properties:
-              FleetArn:
-                description: The ARN of the fleet.
-                type: string
-                minLength: 20
-                maxLength: 2048
-              NextToken:
-                description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
-                type: string
-                pattern: '[\w\-]+'
-                minLength: 1
-                maxLength: 4096
-              MaxResults:
-                description: The maximum number of results to be included in the next page.
-                type: integer
-                minimum: 1
-        - name: MaxResults
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
-        - name: NextToken
-          type: string
-          in: query
-          description: Pagination token
-          required: false
+  /listWebsiteCertificateAuthorities:
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1349,10 +1345,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /listWebsiteCertificateAuthorities:
     post:
-      operationId: ListWebsiteCertificateAuthorities
       description: Retrieves a list of certificate authorities added for the current account and Region.
+      operationId: ListWebsiteCertificateAuthorities
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              FleetArn:
+                description: The ARN of the fleet.
+                maxLength: 2048
+                minLength: 20
+                type: string
+              MaxResults:
+                description: The maximum number of results to be included in the next page.
+                minimum: 1
+                type: integer
+              NextToken:
+                description: 'The pagination token used to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+                maxLength: 4096
+                minLength: 1
+                pattern: '[\w\-]+'
+                type: string
+            required:
+              - FleetArn
+            type: object
+        - description: Pagination limit
+          in: query
+          name: MaxResults
+          required: false
+          type: string
+        - description: Pagination token
+          in: query
+          name: NextToken
+          required: false
+          type: string
       responses:
         '200':
           description: Success
@@ -1374,40 +1403,7 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - FleetArn
-            properties:
-              FleetArn:
-                description: The ARN of the fleet.
-                type: string
-                minLength: 20
-                maxLength: 2048
-              MaxResults:
-                description: The maximum number of results to be included in the next page.
-                type: integer
-                minimum: 1
-              NextToken:
-                description: 'The pagination token used to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
-                type: string
-                pattern: '[\w\-]+'
-                minLength: 1
-                maxLength: 4096
-        - name: MaxResults
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
-        - name: NextToken
-          type: string
-          in: query
-          description: Pagination token
-          required: false
+  /restoreDomainAccess:
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1416,10 +1412,30 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /restoreDomainAccess:
     post:
-      operationId: RestoreDomainAccess
       description: Moves a domain to ACTIVE status if it was in the INACTIVE status.
+      operationId: RestoreDomainAccess
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              DomainName:
+                description: The name of the domain.
+                maxLength: 253
+                minLength: 1
+                pattern: '^[a-zA-Z0-9]?((?!-)([A-Za-z0-9-]*[A-Za-z0-9])\.)+[a-zA-Z0-9]+$'
+                type: string
+              FleetArn:
+                description: The ARN of the fleet.
+                maxLength: 2048
+                minLength: 20
+                type: string
+            required:
+              - FleetArn
+              - DomainName
+            type: object
       responses:
         '200':
           description: Success
@@ -1445,27 +1461,7 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - FleetArn
-              - DomainName
-            properties:
-              FleetArn:
-                description: The ARN of the fleet.
-                type: string
-                minLength: 20
-                maxLength: 2048
-              DomainName:
-                description: The name of the domain.
-                type: string
-                pattern: '^[a-zA-Z0-9]?((?!-)([A-Za-z0-9-]*[A-Za-z0-9])\.)+[a-zA-Z0-9]+$'
-                minLength: 1
-                maxLength: 253
+  /revokeDomainAccess:
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1474,10 +1470,30 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /revokeDomainAccess:
     post:
-      operationId: RevokeDomainAccess
       description: Moves a domain to INACTIVE status if it was in the ACTIVE status.
+      operationId: RevokeDomainAccess
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              DomainName:
+                description: The name of the domain.
+                maxLength: 253
+                minLength: 1
+                pattern: '^[a-zA-Z0-9]?((?!-)([A-Za-z0-9-]*[A-Za-z0-9])\.)+[a-zA-Z0-9]+$'
+                type: string
+              FleetArn:
+                description: The ARN of the fleet.
+                maxLength: 2048
+                minLength: 20
+                type: string
+            required:
+              - FleetArn
+              - DomainName
+            type: object
       responses:
         '200':
           description: Success
@@ -1503,27 +1519,7 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - FleetArn
-              - DomainName
-            properties:
-              FleetArn:
-                description: The ARN of the fleet.
-                type: string
-                minLength: 20
-                maxLength: 2048
-              DomainName:
-                description: The name of the domain.
-                type: string
-                pattern: '^[a-zA-Z0-9]?((?!-)([A-Za-z0-9-]*[A-Za-z0-9])\.)+[a-zA-Z0-9]+$'
-                minLength: 1
-                maxLength: 253
+  /signOutUser:
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1532,10 +1528,29 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /signOutUser:
     post:
-      operationId: SignOutUser
       description: Signs the user out from all of their devices. The user can sign in again if they have valid credentials.
+      operationId: SignOutUser
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              FleetArn:
+                description: The ARN of the fleet.
+                maxLength: 2048
+                minLength: 20
+                type: string
+              Username:
+                description: The name of the user.
+                maxLength: 256
+                minLength: 1
+                type: string
+            required:
+              - FleetArn
+              - Username
+            type: object
       responses:
         '200':
           description: Success
@@ -1561,26 +1576,7 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - FleetArn
-              - Username
-            properties:
-              FleetArn:
-                description: The ARN of the fleet.
-                type: string
-                minLength: 20
-                maxLength: 2048
-              Username:
-                description: The name of the user.
-                type: string
-                minLength: 1
-                maxLength: 256
+  /updateAuditStreamConfiguration:
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1589,10 +1585,26 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /updateAuditStreamConfiguration:
     post:
-      operationId: UpdateAuditStreamConfiguration
       description: Updates the audit stream configuration for the fleet.
+      operationId: UpdateAuditStreamConfiguration
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              AuditStreamArn:
+                description: The ARN of the Amazon Kinesis data stream that receives the audit events.
+                type: string
+              FleetArn:
+                description: The ARN of the fleet.
+                maxLength: 2048
+                minLength: 20
+                type: string
+            required:
+              - FleetArn
+            type: object
       responses:
         '200':
           description: Success
@@ -1618,23 +1630,7 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - FleetArn
-            properties:
-              FleetArn:
-                description: The ARN of the fleet.
-                type: string
-                minLength: 20
-                maxLength: 2048
-              AuditStreamArn:
-                description: The ARN of the Amazon Kinesis data stream that receives the audit events.
-                type: string
+  /updateCompanyNetworkConfiguration:
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1643,10 +1639,41 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /updateCompanyNetworkConfiguration:
     post:
-      operationId: UpdateCompanyNetworkConfiguration
       description: Updates the company network configuration for the fleet.
+      operationId: UpdateCompanyNetworkConfiguration
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              FleetArn:
+                description: The ARN of the fleet.
+                maxLength: 2048
+                minLength: 20
+                type: string
+              SecurityGroupIds:
+                description: The security groups associated with access to the provided subnets.
+                items:
+                  $ref: '#/definitions/SecurityGroupId'
+                maxItems: 5
+                type: array
+              SubnetIds:
+                description: The subnets used for X-ENI connections from Amazon WorkLink rendering containers.
+                items:
+                  $ref: '#/definitions/SubnetId'
+                type: array
+              VpcId:
+                description: The VPC with connectivity to associated websites.
+                pattern: '^vpc-([0-9a-f]{8}|[0-9a-f]{17})$'
+                type: string
+            required:
+              - FleetArn
+              - VpcId
+              - SubnetIds
+              - SecurityGroupIds
+            type: object
       responses:
         '200':
           description: Success
@@ -1672,38 +1699,7 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - FleetArn
-              - VpcId
-              - SubnetIds
-              - SecurityGroupIds
-            properties:
-              FleetArn:
-                description: The ARN of the fleet.
-                type: string
-                minLength: 20
-                maxLength: 2048
-              VpcId:
-                description: The VPC with connectivity to associated websites.
-                type: string
-                pattern: '^vpc-([0-9a-f]{8}|[0-9a-f]{17})$'
-              SubnetIds:
-                description: The subnets used for X-ENI connections from Amazon WorkLink rendering containers.
-                type: array
-                items:
-                  $ref: '#/definitions/SubnetId'
-              SecurityGroupIds:
-                description: The security groups associated with access to the provided subnets.
-                type: array
-                items:
-                  $ref: '#/definitions/SecurityGroupId'
-                maxItems: 5
+  /updateDevicePolicyConfiguration:
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1712,10 +1708,29 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /updateDevicePolicyConfiguration:
     post:
-      operationId: UpdateDevicePolicyConfiguration
       description: Updates the device policy configuration for the fleet.
+      operationId: UpdateDevicePolicyConfiguration
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              DeviceCaCertificate:
+                description: 'The certificate chain, including intermediate certificates and the root certificate authority certificate used to issue device certificates.'
+                maxLength: 32768
+                minLength: 1
+                pattern: '(-{5}BEGIN CERTIFICATE-{5}\u000D?\u000A([A-Za-z0-9/+]{64}\u000D?\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\u000D?\u000A-{5}END CERTIFICATE-{5}\u000D?\u000A)*-{5}BEGIN CERTIFICATE-{5}\u000D?\u000A([A-Za-z0-9/+]{64}\u000D?\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\u000D?\u000A-{5}END CERTIFICATE-{5}(\u000D?\u000A)?'
+                type: string
+              FleetArn:
+                description: The ARN of the fleet.
+                maxLength: 2048
+                minLength: 20
+                type: string
+            required:
+              - FleetArn
+            type: object
       responses:
         '200':
           description: Success
@@ -1741,26 +1756,7 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - FleetArn
-            properties:
-              FleetArn:
-                description: The ARN of the fleet.
-                type: string
-                minLength: 20
-                maxLength: 2048
-              DeviceCaCertificate:
-                description: 'The certificate chain, including intermediate certificates and the root certificate authority certificate used to issue device certificates.'
-                type: string
-                pattern: '(-{5}BEGIN CERTIFICATE-{5}\u000D?\u000A([A-Za-z0-9/+]{64}\u000D?\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\u000D?\u000A-{5}END CERTIFICATE-{5}\u000D?\u000A)*-{5}BEGIN CERTIFICATE-{5}\u000D?\u000A([A-Za-z0-9/+]{64}\u000D?\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\u000D?\u000A-{5}END CERTIFICATE-{5}(\u000D?\u000A)?'
-                minLength: 1
-                maxLength: 32768
+  /updateDomainMetadata:
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1769,10 +1765,34 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /updateDomainMetadata:
     post:
-      operationId: UpdateDomainMetadata
       description: 'Updates domain metadata, such as DisplayName.'
+      operationId: UpdateDomainMetadata
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              DisplayName:
+                description: The name to display.
+                maxLength: 100
+                type: string
+              DomainName:
+                description: The name of the domain.
+                maxLength: 253
+                minLength: 1
+                pattern: '^[a-zA-Z0-9]?((?!-)([A-Za-z0-9-]*[A-Za-z0-9])\.)+[a-zA-Z0-9]+$'
+                type: string
+              FleetArn:
+                description: The ARN of the fleet.
+                maxLength: 2048
+                minLength: 20
+                type: string
+            required:
+              - FleetArn
+              - DomainName
+            type: object
       responses:
         '200':
           description: Success
@@ -1798,101 +1818,43 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - FleetArn
-              - DomainName
-            properties:
-              FleetArn:
-                description: The ARN of the fleet.
-                type: string
-                minLength: 20
-                maxLength: 2048
-              DomainName:
-                description: The name of the domain.
-                type: string
-                pattern: '^[a-zA-Z0-9]?((?!-)([A-Za-z0-9-]*[A-Za-z0-9])\.)+[a-zA-Z0-9]+$'
-                minLength: 1
-                maxLength: 253
-              DisplayName:
-                description: The name to display.
-                type: string
-                maxLength: 100
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /UpdateFleetMetadata:
-    post:
-      operationId: UpdateFleetMetadata
-      description: 'Updates fleet metadata, such as DisplayName.'
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/UpdateFleetMetadataResponse'
-        '480':
-          description: UnauthorizedException
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '481':
-          description: InternalServerErrorException
-          schema:
-            $ref: '#/definitions/InternalServerErrorException'
-        '482':
-          description: InvalidRequestException
-          schema:
-            $ref: '#/definitions/InvalidRequestException'
-        '483':
-          description: ResourceNotFoundException
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
-        '484':
-          description: TooManyRequestsException
-          schema:
-            $ref: '#/definitions/TooManyRequestsException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - FleetArn
-            properties:
-              FleetArn:
-                description: The ARN of the fleet.
-                type: string
-                minLength: 20
-                maxLength: 2048
-              DisplayName:
-                description: The fleet name to display. The existing DisplayName is unset if null is passed.
-                type: string
-                maxLength: 100
-              OptimizeForEndUserLocation:
-                description: 'The option to optimize for better performance by routing traffic through the closest AWS Region to users, which may be outside of your home Region.'
-                type: boolean
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /updateIdentityProviderConfiguration:
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
-      operationId: UpdateIdentityProviderConfiguration
       description: Updates the identity provider configuration for the fleet.
+      operationId: UpdateIdentityProviderConfiguration
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              FleetArn:
+                description: The ARN of the fleet.
+                maxLength: 2048
+                minLength: 20
+                type: string
+              IdentityProviderSamlMetadata:
+                description: The SAML metadata document provided by the customer’s identity provider. The existing IdentityProviderSamlMetadata is unset if null is passed.
+                maxLength: 204800
+                minLength: 1
+                type: string
+              IdentityProviderType:
+                description: The type of identity provider.
+                enum:
+                  - SAML
+                type: string
+            required:
+              - FleetArn
+              - IdentityProviderType
+            type: object
       responses:
         '200':
           description: Success
@@ -1918,100 +1880,204 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - FleetArn
-              - IdentityProviderType
-            properties:
-              FleetArn:
-                description: The ARN of the fleet.
-                type: string
-                minLength: 20
-                maxLength: 2048
-              IdentityProviderType:
-                description: The type of identity provider.
-                type: string
-                enum:
-                  - SAML
-              IdentityProviderSamlMetadata:
-                description: The SAML metadata document provided by the customer’s identity provider. The existing IdentityProviderSamlMetadata is unset if null is passed.
-                type: string
-                minLength: 1
-                maxLength: 204800
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
+  AcmCertificateArn:
+    pattern: 'arn:[\w+=/,.@-]+:[\w+=/,.@-]+:[\w+=/,.@-]*:[0-9]+:[\w+=,.@-]+(/[\w+=/,.@-]+)*'
+    type: string
+  AssociateDomainRequest:
+    properties:
+      AcmCertificateArn:
+        $ref: '#/definitions/AcmCertificateArn'
+        description: The ARN of an issued ACM certificate that is valid for the domain being associated.
+      DisplayName:
+        $ref: '#/definitions/DisplayName'
+        description: The name to display.
+      DomainName:
+        $ref: '#/definitions/DomainName'
+        description: The fully qualified domain name (FQDN).
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The Amazon Resource Name (ARN) of the fleet.
+    required:
+      - FleetArn
+      - DomainName
+      - AcmCertificateArn
+    type: object
   AssociateDomainResponse:
-    type: object
     properties: {}
-  UnauthorizedException: {}
-  InternalServerErrorException: {}
-  InvalidRequestException: {}
-  ResourceNotFoundException: {}
-  ResourceAlreadyExistsException: {}
-  TooManyRequestsException: {}
-  AssociateWebsiteAuthorizationProviderResponse:
     type: object
+  AssociateWebsiteAuthorizationProviderRequest:
+    properties:
+      AuthorizationProviderType:
+        $ref: '#/definitions/AuthorizationProviderType'
+        description: The authorization provider type.
+      DomainName:
+        $ref: '#/definitions/DomainName'
+        description: The domain name of the authorization provider. This applies only to SAML-based authorization providers.
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+    required:
+      - FleetArn
+      - AuthorizationProviderType
+    type: object
+  AssociateWebsiteAuthorizationProviderResponse:
     properties:
       AuthorizationProviderId:
         $ref: '#/definitions/Id'
         description: A unique identifier for the authorization provider.
-  AssociateWebsiteCertificateAuthorityResponse:
     type: object
+  AssociateWebsiteCertificateAuthorityRequest:
+    properties:
+      Certificate:
+        $ref: '#/definitions/Certificate'
+        description: The root certificate of the CA.
+      DisplayName:
+        $ref: '#/definitions/DisplayName'
+        description: The certificate name to display.
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+    required:
+      - FleetArn
+      - Certificate
+    type: object
+  AssociateWebsiteCertificateAuthorityResponse:
     properties:
       WebsiteCaId:
         $ref: '#/definitions/Id'
         description: A unique identifier for the CA.
-  CreateFleetResponse:
     type: object
+  AuditStreamArn:
+    type: string
+  AuthorizationProviderType:
+    enum:
+      - SAML
+    type: string
+  Boolean:
+    type: boolean
+  Certificate:
+    maxLength: 8192
+    minLength: 1
+    pattern: '-{5}BEGIN CERTIFICATE-{5}\u000D?\u000A([A-Za-z0-9/+]{64}\u000D?\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\u000D?\u000A-{5}END CERTIFICATE-{5}(\u000D?\u000A)?'
+    type: string
+  CertificateChain:
+    maxLength: 32768
+    minLength: 1
+    pattern: '(-{5}BEGIN CERTIFICATE-{5}\u000D?\u000A([A-Za-z0-9/+]{64}\u000D?\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\u000D?\u000A-{5}END CERTIFICATE-{5}\u000D?\u000A)*-{5}BEGIN CERTIFICATE-{5}\u000D?\u000A([A-Za-z0-9/+]{64}\u000D?\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\u000D?\u000A-{5}END CERTIFICATE-{5}(\u000D?\u000A)?'
+    type: string
+  CompanyCode:
+    maxLength: 32
+    minLength: 1
+    type: string
+  CreateFleetRequest:
+    properties:
+      DisplayName:
+        $ref: '#/definitions/DisplayName'
+        description: The fleet name to display.
+      FleetName:
+        $ref: '#/definitions/FleetName'
+        description: A unique name for the fleet.
+      OptimizeForEndUserLocation:
+        $ref: '#/definitions/Boolean'
+        description: 'The option to optimize for better performance by routing traffic through the closest AWS Region to users, which may be outside of your home Region.'
+    required:
+      - FleetName
+    type: object
+  CreateFleetResponse:
     properties:
       FleetArn:
         $ref: '#/definitions/FleetArn'
         description: The ARN of the fleet.
+    type: object
+  DateTime:
+    format: date-time
+    type: string
+  DeleteFleetRequest:
+    properties:
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+    required:
+      - FleetArn
+    type: object
   DeleteFleetResponse:
-    type: object
     properties: {}
-  DescribeAuditStreamConfigurationResponse:
     type: object
+  DescribeAuditStreamConfigurationRequest:
+    properties:
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+    required:
+      - FleetArn
+    type: object
+  DescribeAuditStreamConfigurationResponse:
     properties:
       AuditStreamArn:
         $ref: '#/definitions/AuditStreamArn'
         description: The ARN of the Amazon Kinesis data stream that will receive the audit events.
-  DescribeCompanyNetworkConfigurationResponse:
     type: object
+  DescribeCompanyNetworkConfigurationRequest:
     properties:
-      VpcId:
-        $ref: '#/definitions/VpcId'
-        description: The VPC with connectivity to associated websites.
-      SubnetIds:
-        $ref: '#/definitions/SubnetIds'
-        description: The subnets used for X-ENI connections from Amazon WorkLink rendering containers.
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+    required:
+      - FleetArn
+    type: object
+  DescribeCompanyNetworkConfigurationResponse:
+    properties:
       SecurityGroupIds:
         $ref: '#/definitions/SecurityGroupIds'
         description: The security groups associated with access to the provided subnets.
-  DescribeDeviceResponse:
+      SubnetIds:
+        $ref: '#/definitions/SubnetIds'
+        description: The subnets used for X-ENI connections from Amazon WorkLink rendering containers.
+      VpcId:
+        $ref: '#/definitions/VpcId'
+        description: The VPC with connectivity to associated websites.
     type: object
+  DescribeDevicePolicyConfigurationRequest:
     properties:
-      Status:
-        $ref: '#/definitions/DeviceStatus'
-        description: The current state of the device.
-      Model:
-        $ref: '#/definitions/DeviceModel'
-        description: The model of the device.
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+    required:
+      - FleetArn
+    type: object
+  DescribeDevicePolicyConfigurationResponse:
+    properties:
+      DeviceCaCertificate:
+        $ref: '#/definitions/Certificate'
+        description: 'The certificate chain, including intermediate certificates and the root certificate authority certificate used to issue device certificates.'
+    type: object
+  DescribeDeviceRequest:
+    properties:
+      DeviceId:
+        $ref: '#/definitions/Id'
+        description: A unique identifier for a registered user's device.
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+    required:
+      - FleetArn
+      - DeviceId
+    type: object
+  DescribeDeviceResponse:
+    properties:
+      FirstAccessedTime:
+        $ref: '#/definitions/DateTime'
+        description: The date that the device first signed in to Amazon WorkLink.
+      LastAccessedTime:
+        $ref: '#/definitions/DateTime'
+        description: The date that the device last accessed Amazon WorkLink.
       Manufacturer:
         $ref: '#/definitions/DeviceManufacturer'
         description: The manufacturer of the device.
+      Model:
+        $ref: '#/definitions/DeviceModel'
+        description: The model of the device.
       OperatingSystem:
         $ref: '#/definitions/DeviceOperatingSystemName'
         description: The operating system of the device.
@@ -2021,77 +2087,108 @@ definitions:
       PatchLevel:
         $ref: '#/definitions/DevicePatchLevel'
         description: The operating system patch level of the device.
-      FirstAccessedTime:
-        $ref: '#/definitions/DateTime'
-        description: The date that the device first signed in to Amazon WorkLink.
-      LastAccessedTime:
-        $ref: '#/definitions/DateTime'
-        description: The date that the device last accessed Amazon WorkLink.
+      Status:
+        $ref: '#/definitions/DeviceStatus'
+        description: The current state of the device.
       Username:
         $ref: '#/definitions/Username'
         description: The user name associated with the device.
-  DescribeDevicePolicyConfigurationResponse:
     type: object
-    properties:
-      DeviceCaCertificate:
-        $ref: '#/definitions/Certificate'
-        description: 'The certificate chain, including intermediate certificates and the root certificate authority certificate used to issue device certificates.'
-  DescribeDomainResponse:
-    type: object
+  DescribeDomainRequest:
     properties:
       DomainName:
         $ref: '#/definitions/DomainName'
         description: The name of the domain.
-      DisplayName:
-        $ref: '#/definitions/DisplayName'
-        description: The name to display.
-      CreatedTime:
-        $ref: '#/definitions/DateTime'
-        description: The time that the domain was added.
-      DomainStatus:
-        $ref: '#/definitions/DomainStatus'
-        description: The current state for the domain.
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+    required:
+      - FleetArn
+      - DomainName
+    type: object
+  DescribeDomainResponse:
+    properties:
       AcmCertificateArn:
         $ref: '#/definitions/AcmCertificateArn'
         description: The ARN of an issued ACM certificate that is valid for the domain being associated.
-  DescribeFleetMetadataResponse:
-    type: object
-    properties:
       CreatedTime:
         $ref: '#/definitions/DateTime'
-        description: The time that the fleet was created.
-      LastUpdatedTime:
-        $ref: '#/definitions/DateTime'
-        description: The time that the fleet was last updated.
-      FleetName:
-        $ref: '#/definitions/FleetName'
-        description: The name of the fleet.
+        description: The time that the domain was added.
       DisplayName:
         $ref: '#/definitions/DisplayName'
         description: The name to display.
-      OptimizeForEndUserLocation:
-        $ref: '#/definitions/Boolean'
-        description: 'The option to optimize for better performance by routing traffic through the closest AWS Region to users, which may be outside of your home Region.'
+      DomainName:
+        $ref: '#/definitions/DomainName'
+        description: The name of the domain.
+      DomainStatus:
+        $ref: '#/definitions/DomainStatus'
+        description: The current state for the domain.
+    type: object
+  DescribeFleetMetadataRequest:
+    properties:
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+    required:
+      - FleetArn
+    type: object
+  DescribeFleetMetadataResponse:
+    properties:
       CompanyCode:
         $ref: '#/definitions/CompanyCode'
         description: The identifier used by users to sign in to the Amazon WorkLink app.
+      CreatedTime:
+        $ref: '#/definitions/DateTime'
+        description: The time that the fleet was created.
+      DisplayName:
+        $ref: '#/definitions/DisplayName'
+        description: The name to display.
+      FleetName:
+        $ref: '#/definitions/FleetName'
+        description: The name of the fleet.
       FleetStatus:
         $ref: '#/definitions/FleetStatus'
         description: The current state of the fleet.
-  DescribeIdentityProviderConfigurationResponse:
+      LastUpdatedTime:
+        $ref: '#/definitions/DateTime'
+        description: The time that the fleet was last updated.
+      OptimizeForEndUserLocation:
+        $ref: '#/definitions/Boolean'
+        description: 'The option to optimize for better performance by routing traffic through the closest AWS Region to users, which may be outside of your home Region.'
     type: object
+  DescribeIdentityProviderConfigurationRequest:
     properties:
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+    required:
+      - FleetArn
+    type: object
+  DescribeIdentityProviderConfigurationResponse:
+    properties:
+      IdentityProviderSamlMetadata:
+        $ref: '#/definitions/SamlMetadata'
+        description: The SAML metadata document provided by the user’s identity provider.
       IdentityProviderType:
         $ref: '#/definitions/IdentityProviderType'
         description: The type of identity provider.
       ServiceProviderSamlMetadata:
         $ref: '#/definitions/SamlMetadata'
         description: The SAML metadata document uploaded to the user’s identity provider.
-      IdentityProviderSamlMetadata:
-        $ref: '#/definitions/SamlMetadata'
-        description: The SAML metadata document provided by the user’s identity provider.
-  DescribeWebsiteCertificateAuthorityResponse:
     type: object
+  DescribeWebsiteCertificateAuthorityRequest:
+    properties:
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+      WebsiteCaId:
+        $ref: '#/definitions/Id'
+        description: A unique identifier for the certificate authority.
+    required:
+      - FleetArn
+      - WebsiteCaId
+    type: object
+  DescribeWebsiteCertificateAuthorityResponse:
     properties:
       Certificate:
         $ref: '#/definitions/Certificate'
@@ -2102,304 +2199,100 @@ definitions:
       DisplayName:
         $ref: '#/definitions/DisplayName'
         description: The certificate name to display.
-  DisassociateDomainResponse:
     type: object
-    properties: {}
-  DisassociateWebsiteAuthorizationProviderResponse:
-    type: object
-    properties: {}
-  DisassociateWebsiteCertificateAuthorityResponse:
-    type: object
-    properties: {}
-  ListDevicesResponse:
-    type: object
-    properties:
-      Devices:
-        $ref: '#/definitions/DeviceSummaryList'
-        description: Information about the devices.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'The pagination token used to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
-  ListDomainsResponse:
-    type: object
-    properties:
-      Domains:
-        $ref: '#/definitions/DomainSummaryList'
-        description: Information about the domains.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'The pagination token used to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
-  ListFleetsResponse:
-    type: object
-    properties:
-      FleetSummaryList:
-        $ref: '#/definitions/FleetSummaryList'
-        description: The summary list of the fleets.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'The pagination token used to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
-  ListWebsiteAuthorizationProvidersResponse:
-    type: object
-    properties:
-      WebsiteAuthorizationProviders:
-        $ref: '#/definitions/WebsiteAuthorizationProvidersSummaryList'
-        description: The website authorization providers.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
-  ListWebsiteCertificateAuthoritiesResponse:
-    type: object
-    properties:
-      WebsiteCertificateAuthorities:
-        $ref: '#/definitions/WebsiteCaSummaryList'
-        description: Information about the certificates.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'The pagination token used to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
-  RestoreDomainAccessResponse:
-    type: object
-    properties: {}
-  RevokeDomainAccessResponse:
-    type: object
-    properties: {}
-  SignOutUserResponse:
-    type: object
-    properties: {}
-  UpdateAuditStreamConfigurationResponse:
-    type: object
-    properties: {}
-  UpdateCompanyNetworkConfigurationResponse:
-    type: object
-    properties: {}
-  SubnetId:
-    type: string
-    pattern: '^subnet-([0-9a-f]{8}|[0-9a-f]{17})$'
-  SecurityGroupId:
-    type: string
-    pattern: '^sg-([0-9a-f]{8}|[0-9a-f]{17})$'
-  UpdateDevicePolicyConfigurationResponse:
-    type: object
-    properties: {}
-  UpdateDomainMetadataResponse:
-    type: object
-    properties: {}
-  UpdateFleetMetadataResponse:
-    type: object
-    properties: {}
-  UpdateIdentityProviderConfigurationResponse:
-    type: object
-    properties: {}
-  AcmCertificateArn:
-    type: string
-    pattern: 'arn:[\w+=/,.@-]+:[\w+=/,.@-]+:[\w+=/,.@-]*:[0-9]+:[\w+=,.@-]+(/[\w+=/,.@-]+)*'
-  FleetArn:
-    type: string
-    minLength: 20
-    maxLength: 2048
-  DomainName:
-    type: string
-    pattern: '^[a-zA-Z0-9]?((?!-)([A-Za-z0-9-]*[A-Za-z0-9])\.)+[a-zA-Z0-9]+$'
-    minLength: 1
-    maxLength: 253
-  DisplayName:
-    type: string
-    maxLength: 100
-  AssociateDomainRequest:
-    type: object
-    required:
-      - FleetArn
-      - DomainName
-      - AcmCertificateArn
-    properties:
-      FleetArn:
-        $ref: '#/definitions/FleetArn'
-        description: The Amazon Resource Name (ARN) of the fleet.
-      DomainName:
-        $ref: '#/definitions/DomainName'
-        description: The fully qualified domain name (FQDN).
-      DisplayName:
-        $ref: '#/definitions/DisplayName'
-        description: The name to display.
-      AcmCertificateArn:
-        $ref: '#/definitions/AcmCertificateArn'
-        description: The ARN of an issued ACM certificate that is valid for the domain being associated.
-  AuthorizationProviderType:
-    type: string
-    enum:
-      - SAML
-  AssociateWebsiteAuthorizationProviderRequest:
-    type: object
-    required:
-      - FleetArn
-      - AuthorizationProviderType
-    properties:
-      FleetArn:
-        $ref: '#/definitions/FleetArn'
-        description: The ARN of the fleet.
-      AuthorizationProviderType:
-        $ref: '#/definitions/AuthorizationProviderType'
-        description: The authorization provider type.
-      DomainName:
-        $ref: '#/definitions/DomainName'
-        description: The domain name of the authorization provider. This applies only to SAML-based authorization providers.
-  Id:
-    type: string
-    minLength: 1
+  DeviceManufacturer:
     maxLength: 256
-  Certificate:
-    type: string
-    pattern: '-{5}BEGIN CERTIFICATE-{5}\u000D?\u000A([A-Za-z0-9/+]{64}\u000D?\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\u000D?\u000A-{5}END CERTIFICATE-{5}(\u000D?\u000A)?'
     minLength: 1
-    maxLength: 8192
-  AssociateWebsiteCertificateAuthorityRequest:
-    type: object
-    required:
-      - FleetArn
-      - Certificate
-    properties:
-      FleetArn:
-        $ref: '#/definitions/FleetArn'
-        description: The ARN of the fleet.
-      Certificate:
-        $ref: '#/definitions/Certificate'
-        description: The root certificate of the CA.
-      DisplayName:
-        $ref: '#/definitions/DisplayName'
-        description: The certificate name to display.
-  AuditStreamArn:
     type: string
-  Boolean:
-    type: boolean
-  CertificateChain:
-    type: string
-    pattern: '(-{5}BEGIN CERTIFICATE-{5}\u000D?\u000A([A-Za-z0-9/+]{64}\u000D?\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\u000D?\u000A-{5}END CERTIFICATE-{5}\u000D?\u000A)*-{5}BEGIN CERTIFICATE-{5}\u000D?\u000A([A-Za-z0-9/+]{64}\u000D?\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\u000D?\u000A-{5}END CERTIFICATE-{5}(\u000D?\u000A)?'
+  DeviceModel:
+    maxLength: 256
     minLength: 1
-    maxLength: 32768
-  CompanyCode:
     type: string
+  DeviceOperatingSystemName:
+    maxLength: 256
     minLength: 1
-    maxLength: 32
-  FleetName:
     type: string
-    pattern: '^[a-z0-9](?:[a-z0-9\-]{0,46}[a-z0-9])?$'
+  DeviceOperatingSystemVersion:
+    maxLength: 256
     minLength: 1
-    maxLength: 48
-  CreateFleetRequest:
-    type: object
-    required:
-      - FleetName
-    properties:
-      FleetName:
-        $ref: '#/definitions/FleetName'
-        description: A unique name for the fleet.
-      DisplayName:
-        $ref: '#/definitions/DisplayName'
-        description: The fleet name to display.
-      OptimizeForEndUserLocation:
-        $ref: '#/definitions/Boolean'
-        description: 'The option to optimize for better performance by routing traffic through the closest AWS Region to users, which may be outside of your home Region.'
-  DateTime:
     type: string
-    format: date-time
-  DeleteFleetRequest:
-    type: object
-    required:
-      - FleetArn
-    properties:
-      FleetArn:
-        $ref: '#/definitions/FleetArn'
-        description: The ARN of the fleet.
-  DescribeAuditStreamConfigurationRequest:
-    type: object
-    required:
-      - FleetArn
-    properties:
-      FleetArn:
-        $ref: '#/definitions/FleetArn'
-        description: The ARN of the fleet.
-  DescribeCompanyNetworkConfigurationRequest:
-    type: object
-    required:
-      - FleetArn
-    properties:
-      FleetArn:
-        $ref: '#/definitions/FleetArn'
-        description: The ARN of the fleet.
-  VpcId:
+  DevicePatchLevel:
+    maxLength: 256
+    minLength: 1
     type: string
-    pattern: '^vpc-([0-9a-f]{8}|[0-9a-f]{17})$'
-  SubnetIds:
-    type: array
-    items:
-      $ref: '#/definitions/SubnetId'
-  SecurityGroupIds:
-    type: array
-    items:
-      $ref: '#/definitions/SecurityGroupId'
-    maxItems: 5
-  DescribeDevicePolicyConfigurationRequest:
-    type: object
-    required:
-      - FleetArn
-    properties:
-      FleetArn:
-        $ref: '#/definitions/FleetArn'
-        description: The ARN of the fleet.
-  DescribeDeviceRequest:
-    type: object
-    required:
-      - FleetArn
-      - DeviceId
-    properties:
-      FleetArn:
-        $ref: '#/definitions/FleetArn'
-        description: The ARN of the fleet.
-      DeviceId:
-        $ref: '#/definitions/Id'
-        description: A unique identifier for a registered user's device.
   DeviceStatus:
-    type: string
     enum:
       - ACTIVE
       - SIGNED_OUT
-  DeviceModel:
     type: string
-    minLength: 1
-    maxLength: 256
-  DeviceManufacturer:
-    type: string
-    minLength: 1
-    maxLength: 256
-  DeviceOperatingSystemName:
-    type: string
-    minLength: 1
-    maxLength: 256
-  DeviceOperatingSystemVersion:
-    type: string
-    minLength: 1
-    maxLength: 256
-  DevicePatchLevel:
-    type: string
-    minLength: 1
-    maxLength: 256
-  Username:
-    type: string
-    minLength: 1
-    maxLength: 256
-  DescribeDomainRequest:
+  DeviceSummary:
+    description: The summary of devices.
+    properties:
+      DeviceId:
+        $ref: '#/definitions/Id'
+        description: The ID of the device.
+      DeviceStatus:
+        $ref: '#/definitions/DeviceStatus'
+        description: The status of the device.
     type: object
+  DeviceSummaryList:
+    items:
+      $ref: '#/definitions/DeviceSummary'
+    type: array
+  DisassociateDomainRequest:
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+        description: The name of the domain.
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
     required:
       - FleetArn
       - DomainName
+    type: object
+  DisassociateDomainResponse:
+    properties: {}
+    type: object
+  DisassociateWebsiteAuthorizationProviderRequest:
+    properties:
+      AuthorizationProviderId:
+        $ref: '#/definitions/Id'
+        description: A unique identifier for the authorization provider.
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+    required:
+      - FleetArn
+      - AuthorizationProviderId
+    type: object
+  DisassociateWebsiteAuthorizationProviderResponse:
+    properties: {}
+    type: object
+  DisassociateWebsiteCertificateAuthorityRequest:
     properties:
       FleetArn:
         $ref: '#/definitions/FleetArn'
         description: The ARN of the fleet.
-      DomainName:
-        $ref: '#/definitions/DomainName'
-        description: The name of the domain.
-  DomainStatus:
+      WebsiteCaId:
+        $ref: '#/definitions/Id'
+        description: A unique identifier for the CA.
+    required:
+      - FleetArn
+      - WebsiteCaId
+    type: object
+  DisassociateWebsiteCertificateAuthorityResponse:
+    properties: {}
+    type: object
+  DisplayName:
+    maxLength: 100
     type: string
+  DomainName:
+    maxLength: 253
+    minLength: 1
+    pattern: '^[a-zA-Z0-9]?((?!-)([A-Za-z0-9-]*[A-Za-z0-9])\.)+[a-zA-Z0-9]+$'
+    type: string
+  DomainStatus:
     enum:
       - PENDING_VALIDATION
       - ASSOCIATING
@@ -2409,16 +2302,41 @@ definitions:
       - DISASSOCIATED
       - FAILED_TO_ASSOCIATE
       - FAILED_TO_DISASSOCIATE
-  DescribeFleetMetadataRequest:
-    type: object
-    required:
-      - FleetArn
-    properties:
-      FleetArn:
-        $ref: '#/definitions/FleetArn'
-        description: The ARN of the fleet.
-  FleetStatus:
     type: string
+  DomainSummary:
+    description: The summary of the domain.
+    properties:
+      CreatedTime:
+        $ref: '#/definitions/DateTime'
+        description: The time that the domain was created.
+      DisplayName:
+        $ref: '#/definitions/DisplayName'
+        description: The name to display.
+      DomainName:
+        $ref: '#/definitions/DomainName'
+        description: The name of the domain.
+      DomainStatus:
+        $ref: '#/definitions/DomainStatus'
+        description: The status of the domain.
+    required:
+      - DomainName
+      - CreatedTime
+      - DomainStatus
+    type: object
+  DomainSummaryList:
+    items:
+      $ref: '#/definitions/DomainSummary'
+    type: array
+  FleetArn:
+    maxLength: 2048
+    minLength: 20
+    type: string
+  FleetName:
+    maxLength: 48
+    minLength: 1
+    pattern: '^[a-z0-9](?:[a-z0-9\-]{0,46}[a-z0-9])?$'
+    type: string
+  FleetStatus:
     enum:
       - CREATING
       - ACTIVE
@@ -2426,204 +2344,134 @@ definitions:
       - DELETED
       - FAILED_TO_CREATE
       - FAILED_TO_DELETE
-  DescribeIdentityProviderConfigurationRequest:
-    type: object
-    required:
-      - FleetArn
-    properties:
-      FleetArn:
-        $ref: '#/definitions/FleetArn'
-        description: The ARN of the fleet.
-  IdentityProviderType:
     type: string
-    enum:
-      - SAML
-  SamlMetadata:
-    type: string
-    minLength: 1
-    maxLength: 204800
-  DescribeWebsiteCertificateAuthorityRequest:
-    type: object
-    required:
-      - FleetArn
-      - WebsiteCaId
-    properties:
-      FleetArn:
-        $ref: '#/definitions/FleetArn'
-        description: The ARN of the fleet.
-      WebsiteCaId:
-        $ref: '#/definitions/Id'
-        description: A unique identifier for the certificate authority.
-  DeviceSummary:
-    type: object
-    properties:
-      DeviceId:
-        $ref: '#/definitions/Id'
-        description: The ID of the device.
-      DeviceStatus:
-        $ref: '#/definitions/DeviceStatus'
-        description: The status of the device.
-    description: The summary of devices.
-  DeviceSummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/DeviceSummary'
-  DisassociateDomainRequest:
-    type: object
-    required:
-      - FleetArn
-      - DomainName
-    properties:
-      FleetArn:
-        $ref: '#/definitions/FleetArn'
-        description: The ARN of the fleet.
-      DomainName:
-        $ref: '#/definitions/DomainName'
-        description: The name of the domain.
-  DisassociateWebsiteAuthorizationProviderRequest:
-    type: object
-    required:
-      - FleetArn
-      - AuthorizationProviderId
-    properties:
-      FleetArn:
-        $ref: '#/definitions/FleetArn'
-        description: The ARN of the fleet.
-      AuthorizationProviderId:
-        $ref: '#/definitions/Id'
-        description: A unique identifier for the authorization provider.
-  DisassociateWebsiteCertificateAuthorityRequest:
-    type: object
-    required:
-      - FleetArn
-      - WebsiteCaId
-    properties:
-      FleetArn:
-        $ref: '#/definitions/FleetArn'
-        description: The ARN of the fleet.
-      WebsiteCaId:
-        $ref: '#/definitions/Id'
-        description: A unique identifier for the CA.
-  DomainSummary:
-    type: object
-    required:
-      - DomainName
-      - CreatedTime
-      - DomainStatus
-    properties:
-      DomainName:
-        $ref: '#/definitions/DomainName'
-        description: The name of the domain.
-      DisplayName:
-        $ref: '#/definitions/DisplayName'
-        description: The name to display.
-      CreatedTime:
-        $ref: '#/definitions/DateTime'
-        description: The time that the domain was created.
-      DomainStatus:
-        $ref: '#/definitions/DomainStatus'
-        description: The status of the domain.
-    description: The summary of the domain.
-  DomainSummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/DomainSummary'
   FleetSummary:
-    type: object
+    description: The summary of the fleet.
     properties:
-      FleetArn:
-        $ref: '#/definitions/FleetArn'
-        description: The ARN of the fleet.
-      CreatedTime:
-        $ref: '#/definitions/DateTime'
-        description: The time when the fleet was created.
-      LastUpdatedTime:
-        $ref: '#/definitions/DateTime'
-        description: The time when the fleet was last updated.
-      FleetName:
-        $ref: '#/definitions/FleetName'
-        description: The name of the fleet.
-      DisplayName:
-        $ref: '#/definitions/DisplayName'
-        description: The name to display.
       CompanyCode:
         $ref: '#/definitions/CompanyCode'
         description: The identifier used by users to sign into the Amazon WorkLink app.
+      CreatedTime:
+        $ref: '#/definitions/DateTime'
+        description: The time when the fleet was created.
+      DisplayName:
+        $ref: '#/definitions/DisplayName'
+        description: The name to display.
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+      FleetName:
+        $ref: '#/definitions/FleetName'
+        description: The name of the fleet.
       FleetStatus:
         $ref: '#/definitions/FleetStatus'
         description: The status of the fleet.
-    description: The summary of the fleet.
+      LastUpdatedTime:
+        $ref: '#/definitions/DateTime'
+        description: The time when the fleet was last updated.
+    type: object
   FleetSummaryList:
-    type: array
     items:
       $ref: '#/definitions/FleetSummary'
-  NextToken:
-    type: string
-    pattern: '[\w\-]+'
+    type: array
+  Id:
+    maxLength: 256
     minLength: 1
-    maxLength: 4096
-  MaxResults:
-    type: integer
-    minimum: 1
+    type: string
+  IdentityProviderType:
+    enum:
+      - SAML
+    type: string
+  InternalServerErrorException: {}
+  InvalidRequestException: {}
   ListDevicesRequest:
-    type: object
-    required:
-      - FleetArn
     properties:
       FleetArn:
         $ref: '#/definitions/FleetArn'
         description: The ARN of the fleet.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'The pagination token used to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
       MaxResults:
         $ref: '#/definitions/MaxResults'
         description: The maximum number of results to be included in the next page.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The pagination token used to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+    required:
+      - FleetArn
+    type: object
+  ListDevicesResponse:
+    properties:
+      Devices:
+        $ref: '#/definitions/DeviceSummaryList'
+        description: Information about the devices.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The pagination token used to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
+    type: object
   ListDomainsRequest:
-    type: object
-    required:
-      - FleetArn
     properties:
       FleetArn:
         $ref: '#/definitions/FleetArn'
         description: The ARN of the fleet.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'The pagination token used to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
       MaxResults:
         $ref: '#/definitions/MaxResults'
         description: The maximum number of results to be included in the next page.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The pagination token used to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+    required:
+      - FleetArn
+    type: object
+  ListDomainsResponse:
+    properties:
+      Domains:
+        $ref: '#/definitions/DomainSummaryList'
+        description: Information about the domains.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The pagination token used to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
+    type: object
   ListFleetsRequest:
-    type: object
     properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'The pagination token used to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
       MaxResults:
         $ref: '#/definitions/MaxResults'
         description: The maximum number of results to be included in the next page.
-  ListWebsiteAuthorizationProvidersRequest:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The pagination token used to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
     type: object
-    required:
-      - FleetArn
+  ListFleetsResponse:
+    properties:
+      FleetSummaryList:
+        $ref: '#/definitions/FleetSummaryList'
+        description: The summary list of the fleets.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The pagination token used to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
+    type: object
+  ListWebsiteAuthorizationProvidersRequest:
     properties:
       FleetArn:
         $ref: '#/definitions/FleetArn'
         description: The ARN of the fleet.
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of results to be included in the next page.
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: The maximum number of results to be included in the next page.
-  WebsiteAuthorizationProvidersSummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/WebsiteAuthorizationProviderSummary'
-  ListWebsiteCertificateAuthoritiesRequest:
-    type: object
     required:
       - FleetArn
+    type: object
+  ListWebsiteAuthorizationProvidersResponse:
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+      WebsiteAuthorizationProviders:
+        $ref: '#/definitions/WebsiteAuthorizationProvidersSummaryList'
+        description: The website authorization providers.
+    type: object
+  ListWebsiteCertificateAuthoritiesRequest:
     properties:
       FleetArn:
         $ref: '#/definitions/FleetArn'
@@ -2634,39 +2482,71 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'The pagination token used to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
-  WebsiteCaSummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/WebsiteCaSummary'
+    required:
+      - FleetArn
+    type: object
+  ListWebsiteCertificateAuthoritiesResponse:
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The pagination token used to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
+      WebsiteCertificateAuthorities:
+        $ref: '#/definitions/WebsiteCaSummaryList'
+        description: Information about the certificates.
+    type: object
+  MaxResults:
+    minimum: 1
+    type: integer
+  NextToken:
+    maxLength: 4096
+    minLength: 1
+    pattern: '[\w\-]+'
+    type: string
+  ResourceAlreadyExistsException: {}
+  ResourceNotFoundException: {}
   RestoreDomainAccessRequest:
-    type: object
-    required:
-      - FleetArn
-      - DomainName
     properties:
-      FleetArn:
-        $ref: '#/definitions/FleetArn'
-        description: The ARN of the fleet.
       DomainName:
         $ref: '#/definitions/DomainName'
         description: The name of the domain.
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+    required:
+      - FleetArn
+      - DomainName
+    type: object
+  RestoreDomainAccessResponse:
+    properties: {}
+    type: object
   RevokeDomainAccessRequest:
-    type: object
-    required:
-      - FleetArn
-      - DomainName
     properties:
-      FleetArn:
-        $ref: '#/definitions/FleetArn'
-        description: The ARN of the fleet.
       DomainName:
         $ref: '#/definitions/DomainName'
         description: The name of the domain.
-  SignOutUserRequest:
-    type: object
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
     required:
       - FleetArn
-      - Username
+      - DomainName
+    type: object
+  RevokeDomainAccessResponse:
+    properties: {}
+    type: object
+  SamlMetadata:
+    maxLength: 204800
+    minLength: 1
+    type: string
+  SecurityGroupId:
+    pattern: '^sg-([0-9a-f]{8}|[0-9a-f]{17})$'
+    type: string
+  SecurityGroupIds:
+    items:
+      $ref: '#/definitions/SecurityGroupId'
+    maxItems: 5
+    type: array
+  SignOutUserRequest:
     properties:
       FleetArn:
         $ref: '#/definitions/FleetArn'
@@ -2674,96 +2554,135 @@ definitions:
       Username:
         $ref: '#/definitions/Username'
         description: The name of the user.
-  UpdateAuditStreamConfigurationRequest:
-    type: object
     required:
       - FleetArn
+      - Username
+    type: object
+  SignOutUserResponse:
+    properties: {}
+    type: object
+  SubnetId:
+    pattern: '^subnet-([0-9a-f]{8}|[0-9a-f]{17})$'
+    type: string
+  SubnetIds:
+    items:
+      $ref: '#/definitions/SubnetId'
+    type: array
+  TooManyRequestsException: {}
+  UnauthorizedException: {}
+  UpdateAuditStreamConfigurationRequest:
+    properties:
+      AuditStreamArn:
+        $ref: '#/definitions/AuditStreamArn'
+        description: The ARN of the Amazon Kinesis data stream that receives the audit events.
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+    required:
+      - FleetArn
+    type: object
+  UpdateAuditStreamConfigurationResponse:
+    properties: {}
+    type: object
+  UpdateCompanyNetworkConfigurationRequest:
     properties:
       FleetArn:
         $ref: '#/definitions/FleetArn'
         description: The ARN of the fleet.
-      AuditStreamArn:
-        $ref: '#/definitions/AuditStreamArn'
-        description: The ARN of the Amazon Kinesis data stream that receives the audit events.
-  UpdateCompanyNetworkConfigurationRequest:
-    type: object
+      SecurityGroupIds:
+        $ref: '#/definitions/SecurityGroupIds'
+        description: The security groups associated with access to the provided subnets.
+      SubnetIds:
+        $ref: '#/definitions/SubnetIds'
+        description: The subnets used for X-ENI connections from Amazon WorkLink rendering containers.
+      VpcId:
+        $ref: '#/definitions/VpcId'
+        description: The VPC with connectivity to associated websites.
     required:
       - FleetArn
       - VpcId
       - SubnetIds
       - SecurityGroupIds
-    properties:
-      FleetArn:
-        $ref: '#/definitions/FleetArn'
-        description: The ARN of the fleet.
-      VpcId:
-        $ref: '#/definitions/VpcId'
-        description: The VPC with connectivity to associated websites.
-      SubnetIds:
-        $ref: '#/definitions/SubnetIds'
-        description: The subnets used for X-ENI connections from Amazon WorkLink rendering containers.
-      SecurityGroupIds:
-        $ref: '#/definitions/SecurityGroupIds'
-        description: The security groups associated with access to the provided subnets.
-  UpdateDevicePolicyConfigurationRequest:
     type: object
-    required:
-      - FleetArn
+  UpdateCompanyNetworkConfigurationResponse:
+    properties: {}
+    type: object
+  UpdateDevicePolicyConfigurationRequest:
     properties:
-      FleetArn:
-        $ref: '#/definitions/FleetArn'
-        description: The ARN of the fleet.
       DeviceCaCertificate:
         $ref: '#/definitions/CertificateChain'
         description: 'The certificate chain, including intermediate certificates and the root certificate authority certificate used to issue device certificates.'
-  UpdateDomainMetadataRequest:
-    type: object
-    required:
-      - FleetArn
-      - DomainName
-    properties:
       FleetArn:
         $ref: '#/definitions/FleetArn'
         description: The ARN of the fleet.
-      DomainName:
-        $ref: '#/definitions/DomainName'
-        description: The name of the domain.
+    required:
+      - FleetArn
+    type: object
+  UpdateDevicePolicyConfigurationResponse:
+    properties: {}
+    type: object
+  UpdateDomainMetadataRequest:
+    properties:
       DisplayName:
         $ref: '#/definitions/DisplayName'
         description: The name to display.
-  UpdateFleetMetadataRequest:
-    type: object
-    required:
-      - FleetArn
-    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+        description: The name of the domain.
       FleetArn:
         $ref: '#/definitions/FleetArn'
         description: The ARN of the fleet.
+    required:
+      - FleetArn
+      - DomainName
+    type: object
+  UpdateDomainMetadataResponse:
+    properties: {}
+    type: object
+  UpdateFleetMetadataRequest:
+    properties:
       DisplayName:
         $ref: '#/definitions/DisplayName'
         description: The fleet name to display. The existing DisplayName is unset if null is passed.
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
       OptimizeForEndUserLocation:
         $ref: '#/definitions/Boolean'
         description: 'The option to optimize for better performance by routing traffic through the closest AWS Region to users, which may be outside of your home Region.'
-  UpdateIdentityProviderConfigurationRequest:
-    type: object
     required:
       - FleetArn
-      - IdentityProviderType
+    type: object
+  UpdateFleetMetadataResponse:
+    properties: {}
+    type: object
+  UpdateIdentityProviderConfigurationRequest:
     properties:
       FleetArn:
         $ref: '#/definitions/FleetArn'
         description: The ARN of the fleet.
-      IdentityProviderType:
-        $ref: '#/definitions/IdentityProviderType'
-        description: The type of identity provider.
       IdentityProviderSamlMetadata:
         $ref: '#/definitions/SamlMetadata'
         description: The SAML metadata document provided by the customer’s identity provider. The existing IdentityProviderSamlMetadata is unset if null is passed.
-  WebsiteAuthorizationProviderSummary:
-    type: object
+      IdentityProviderType:
+        $ref: '#/definitions/IdentityProviderType'
+        description: The type of identity provider.
     required:
-      - AuthorizationProviderType
+      - FleetArn
+      - IdentityProviderType
+    type: object
+  UpdateIdentityProviderConfigurationResponse:
+    properties: {}
+    type: object
+  Username:
+    maxLength: 256
+    minLength: 1
+    type: string
+  VpcId:
+    pattern: '^vpc-([0-9a-f]{8}|[0-9a-f]{17})$'
+    type: string
+  WebsiteAuthorizationProviderSummary:
+    description: The summary of the website authorization provider.
     properties:
       AuthorizationProviderId:
         $ref: '#/definitions/Id'
@@ -2771,23 +2690,104 @@ definitions:
       AuthorizationProviderType:
         $ref: '#/definitions/AuthorizationProviderType'
         description: The authorization provider type.
-      DomainName:
-        $ref: '#/definitions/DomainName'
-        description: The domain name of the authorization provider. This applies only to SAML-based authorization providers.
       CreatedTime:
         $ref: '#/definitions/DateTime'
         description: The time of creation.
-    description: The summary of the website authorization provider.
-  WebsiteCaSummary:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+        description: The domain name of the authorization provider. This applies only to SAML-based authorization providers.
+    required:
+      - AuthorizationProviderType
     type: object
+  WebsiteAuthorizationProvidersSummaryList:
+    items:
+      $ref: '#/definitions/WebsiteAuthorizationProviderSummary'
+    type: array
+  WebsiteCaSummary:
+    description: The summary of the certificate authority (CA).
     properties:
-      WebsiteCaId:
-        $ref: '#/definitions/Id'
-        description: A unique identifier for the CA.
       CreatedTime:
         $ref: '#/definitions/DateTime'
         description: The time when the CA was added.
       DisplayName:
         $ref: '#/definitions/DisplayName'
         description: The name to display.
-    description: The summary of the certificate authority (CA).
+      WebsiteCaId:
+        $ref: '#/definitions/Id'
+        description: A unique identifier for the CA.
+    type: object
+  WebsiteCaSummaryList:
+    items:
+      $ref: '#/definitions/WebsiteCaSummary'
+    type: array
+x-servers:
+  - description: The WorkLink multi-region endpoint
+    url: 'http://worklink.{region}.amazonaws.com'
+    variables:
+      region:
+        default: us-east-1
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+  - description: The WorkLink multi-region endpoint
+    url: 'https://worklink.{region}.amazonaws.com'
+    variables:
+      region:
+        default: us-east-1
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+  - description: The WorkLink endpoint for China (Beijing) and China (Ningxia)
+    url: 'http://worklink.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        default: cn-north-1
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+  - description: The WorkLink endpoint for China (Beijing) and China (Ningxia)
+    url: 'https://worklink.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        default: cn-north-1
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1

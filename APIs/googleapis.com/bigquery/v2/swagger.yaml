@@ -397,7 +397,7 @@ paths:
         role.
       operationId: bigquery.models.list
       parameters:
-        - description: Dataset ID of the models to list.
+        - description: Required. Dataset ID of the models to list.
           in: path
           name: datasetId
           required: true
@@ -415,7 +415,7 @@ paths:
           in: query
           name: pageToken
           type: string
-        - description: Project ID of the models to list.
+        - description: Required. Project ID of the models to list.
           in: path
           name: projectId
           required: true
@@ -458,19 +458,19 @@ paths:
       description: Deletes the model specified by modelId from the dataset.
       operationId: bigquery.models.delete
       parameters:
-        - description: Dataset ID of the model to delete.
+        - description: Required. Dataset ID of the model to delete.
           in: path
           name: datasetId
           required: true
           type: string
           x-reservedExpansion: true
-        - description: Model ID of the model to delete.
+        - description: Required. Model ID of the model to delete.
           in: path
           name: modelId
           required: true
           type: string
           x-reservedExpansion: true
-        - description: Project ID of the model to delete.
+        - description: Required. Project ID of the model to delete.
           in: path
           name: projectId
           required: true
@@ -494,19 +494,19 @@ paths:
       description: Gets the specified model resource by model ID.
       operationId: bigquery.models.get
       parameters:
-        - description: Dataset ID of the requested model.
+        - description: Required. Dataset ID of the requested model.
           in: path
           name: datasetId
           required: true
           type: string
           x-reservedExpansion: true
-        - description: Model ID of the requested model.
+        - description: Required. Model ID of the requested model.
           in: path
           name: modelId
           required: true
           type: string
           x-reservedExpansion: true
-        - description: Project ID of the requested model.
+        - description: Required. Project ID of the requested model.
           in: path
           name: projectId
           required: true
@@ -552,19 +552,19 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/Model'
-        - description: Dataset ID of the model to patch.
+        - description: Required. Dataset ID of the model to patch.
           in: path
           name: datasetId
           required: true
           type: string
           x-reservedExpansion: true
-        - description: Model ID of the model to patch.
+        - description: Required. Model ID of the model to patch.
           in: path
           name: modelId
           required: true
           type: string
           x-reservedExpansion: true
-        - description: Project ID of the model to patch.
+        - description: Required. Project ID of the model to patch.
           in: path
           name: projectId
           required: true
@@ -593,7 +593,7 @@ paths:
         role.
       operationId: bigquery.routines.list
       parameters:
-        - description: Dataset ID of the routines to list
+        - description: Required. Dataset ID of the routines to list
           in: path
           name: datasetId
           required: true
@@ -611,7 +611,7 @@ paths:
           in: query
           name: pageToken
           type: string
-        - description: Project ID of the routines to list
+        - description: Required. Project ID of the routines to list
           in: path
           name: projectId
           required: true
@@ -657,13 +657,13 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/Routine'
-        - description: Dataset ID of the new routine
+        - description: Required. Dataset ID of the new routine
           in: path
           name: datasetId
           required: true
           type: string
           x-reservedExpansion: true
-        - description: Project ID of the new routine
+        - description: Required. Project ID of the new routine
           in: path
           name: projectId
           required: true
@@ -690,19 +690,19 @@ paths:
       description: Deletes the routine specified by routineId from the dataset.
       operationId: bigquery.routines.delete
       parameters:
-        - description: Dataset ID of the routine to delete
+        - description: Required. Dataset ID of the routine to delete
           in: path
           name: datasetId
           required: true
           type: string
           x-reservedExpansion: true
-        - description: Project ID of the routine to delete
+        - description: Required. Project ID of the routine to delete
           in: path
           name: projectId
           required: true
           type: string
           x-reservedExpansion: true
-        - description: Routine ID of the routine to delete
+        - description: Required. Routine ID of the routine to delete
           in: path
           name: routineId
           required: true
@@ -726,7 +726,7 @@ paths:
       description: Gets the specified routine resource by routine ID.
       operationId: bigquery.routines.get
       parameters:
-        - description: Dataset ID of the requested routine
+        - description: Required. Dataset ID of the requested routine
           in: path
           name: datasetId
           required: true
@@ -738,13 +738,13 @@ paths:
           in: query
           name: fieldMask
           type: string
-        - description: Project ID of the requested routine
+        - description: Required. Project ID of the requested routine
           in: path
           name: projectId
           required: true
           type: string
           x-reservedExpansion: true
-        - description: Routine ID of the requested routine
+        - description: Required. Routine ID of the requested routine
           in: path
           name: routineId
           required: true
@@ -792,19 +792,19 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/Routine'
-        - description: Dataset ID of the routine to update
+        - description: Required. Dataset ID of the routine to update
           in: path
           name: datasetId
           required: true
           type: string
           x-reservedExpansion: true
-        - description: Project ID of the routine to update
+        - description: Required. Project ID of the routine to update
           in: path
           name: projectId
           required: true
           type: string
           x-reservedExpansion: true
-        - description: Routine ID of the routine to update
+        - description: Required. Routine ID of the routine to update
           in: path
           name: routineId
           required: true
@@ -1656,9 +1656,7 @@ definitions:
           - INOUT
         type: string
       name:
-        description: |-
-          Optional. The name of this argument. Can be absent for function return
-          argument.
+        description: Optional. The name of this argument. Can be absent for function return argument.
         type: string
     type: object
   BigQueryModelTraining:
@@ -2889,6 +2887,9 @@ definitions:
       reservation_id:
         description: '[Output-only] Name of the primary reservation assigned to this job. Note that this could be different than reservations reported in the reservation usage field if parent reservations were used to execute this job.'
         type: string
+      scriptStatistics:
+        $ref: '#/definitions/ScriptStatistics'
+        description: '[Output-only] Statistics for a child job of a script.'
       startTime:
         description: '[Output-only] Start time of this job, in milliseconds since the epoch. This field will be present when the job transitions from the PENDING state to either RUNNING or DONE.'
         format: int64
@@ -3112,13 +3113,11 @@ definitions:
   Model:
     properties:
       creationTime:
-        description: |-
-          Output only. The time when this model was created, in millisecs since the
-          epoch.
+        description: 'Output only. The time when this model was created, in millisecs since the epoch.'
         format: int64
         type: string
       description:
-        description: '[Optional] A user-friendly description of this model.'
+        description: Optional. A user-friendly description of this model.
         type: string
       encryptionConfiguration:
         $ref: '#/definitions/EncryptionConfiguration'
@@ -3131,8 +3130,8 @@ definitions:
         type: string
       expirationTime:
         description: |-
-          [Optional] The time when this model expires, in milliseconds since the
-          epoch. If not present, the model will persist indefinitely. Expired models
+          Optional. The time when this model expires, in milliseconds since the epoch.
+          If not present, the model will persist indefinitely. Expired models
           will be deleted and their storage reclaimed.  The defaultTableExpirationMs
           property of the encapsulating dataset can be used to set a default
           expirationTime on newly created models.
@@ -3144,7 +3143,7 @@ definitions:
           $ref: '#/definitions/StandardSqlField'
         type: array
       friendlyName:
-        description: '[Optional] A descriptive name for this model.'
+        description: Optional. A descriptive name for this model.
         type: string
       labelColumns:
         description: |-
@@ -3157,17 +3156,15 @@ definitions:
         additionalProperties:
           type: string
         description: |-
-          [Optional] The labels associated with this model. You can use these to
-          organize and group your models. Label keys and values can be no longer
+          The labels associated with this model. You can use these to organize
+          and group your models. Label keys and values can be no longer
           than 63 characters, can only contain lowercase letters, numeric
           characters, underscores and dashes. International characters are allowed.
           Label values are optional. Label keys must start with a letter and each
           label in the list must have a different key.
         type: object
       lastModifiedTime:
-        description: |-
-          Output only. The time when this model was last modified, in millisecs
-          since the epoch.
+        description: 'Output only. The time when this model was last modified, in millisecs since the epoch.'
         format: int64
         type: string
       location:
@@ -3188,9 +3185,7 @@ definitions:
           - TENSORFLOW
         type: string
       trainingRuns:
-        description: |-
-          Output only. Information for all training runs in increasing order of
-          start_time.
+        description: Output only. Information for all training runs in increasing order of start_time.
         items:
           $ref: '#/definitions/TrainingRun'
         type: array
@@ -3538,6 +3533,9 @@ definitions:
 
           Note that both \n are replaced with linebreaks.
         type: string
+      description:
+        description: 'Optional. [Experimental] The description of the routine if defined.'
+        type: string
       etag:
         description: Output only. A hash of this resource.
         type: string
@@ -3590,7 +3588,7 @@ definitions:
         $ref: '#/definitions/RoutineReference'
         description: Required. Reference describing the ID of this routine.
       routineType:
-        description: Required.
+        description: Required. The type of routine.
         enum:
           - ROUTINE_TYPE_UNSPECIFIED
           - SCALAR_FUNCTION
@@ -3619,6 +3617,42 @@ definitions:
         description: Info describing predicted label distribution.
         items:
           $ref: '#/definitions/Entry'
+        type: array
+    type: object
+  ScriptStackFrame:
+    properties:
+      endColumn:
+        description: '[Output-only] One-based end column.'
+        format: int32
+        type: integer
+      endLine:
+        description: '[Output-only] One-based end line.'
+        format: int32
+        type: integer
+      procedureId:
+        description: '[Output-only] Name of the active procedure, empty if in a top-level script.'
+        type: string
+      startColumn:
+        description: '[Output-only] One-based start column.'
+        format: int32
+        type: integer
+      startLine:
+        description: '[Output-only] One-based start line.'
+        format: int32
+        type: integer
+      text:
+        description: '[Output-only] Text of the current statement/expression.'
+        type: string
+    type: object
+  ScriptStatistics:
+    properties:
+      evaluationKind:
+        description: '[Output-only] Whether this child job was a statement or expression.'
+        type: string
+      stackFrames:
+        description: 'Stack trace showing the line/column/procedure name of each frame on the stack at the point where the current evaluation happened. The leaf frame is first, the primary script is last. Never empty.'
+        items:
+          $ref: '#/definitions/ScriptStackFrame'
         type: array
     type: object
   StandardSqlDataType:

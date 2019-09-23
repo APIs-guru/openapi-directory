@@ -148,7 +148,7 @@ paths:
           enum:
             - proof
             - spell
-          in: formData
+          in: query
           name: Mode
           required: false
           type: string
@@ -156,17 +156,17 @@ paths:
             modelAsString: true
             name: Mode
         - description: 'A string that gives context to the text string. For example, the text string petal is valid. However, if you set preContextText to bike, the context changes and the text string becomes not valid. In this case, the API suggests that you change petal to pedal (as in bike pedal). This text is not checked for grammar or spelling errors. The combined length of the text string, preContextText string, and postContextText string may not exceed 10,000 characters. You may specify this parameter in the query string of a GET request or in the body of a POST request.'
-          in: formData
+          in: query
           name: PreContextText
           required: false
           type: string
         - description: 'A string that gives context to the text string. For example, the text string read is valid. However, if you set postContextText to carpet, the context changes and the text string becomes not valid. In this case, the API suggests that you change read to red (as in red carpet). This text is not checked for grammar or spelling errors. The combined length of the text string, preContextText string, and postContextText string may not exceed 10,000 characters. You may specify this parameter in the query string of a GET request or in the body of a POST request.'
-          in: formData
+          in: query
           name: PostContextText
           required: false
           type: string
         - description: 'The text string to check for spelling and grammar errors. The combined length of the text string, preContextText string, and postContextText string may not exceed 10,000 characters. You may specify this parameter in the query string of a GET request or in the body of a POST request. Because of the query string length limit, you''ll typically use a POST request unless you''re checking only short strings.'
-          in: formData
+          in: query
           name: Text
           required: true
           type: string

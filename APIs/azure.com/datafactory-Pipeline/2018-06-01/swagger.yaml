@@ -767,6 +767,9 @@ definitions:
       - $ref: '#/definitions/CopySink'
     description: A copy activity Common Data Service for Apps sink.
     properties:
+      alternateKeyName:
+        description: 'The logical name of the alternate key which will be used when upserting records. Type: string (or Expression with resultType string).'
+        type: object
       ignoreNullValues:
         description: 'The flag indicating whether to ignore null values from input dataset (except key fields) during write operation. Default is false. Type: boolean (or Expression with resultType boolean).'
         type: object
@@ -1438,6 +1441,9 @@ definitions:
       - $ref: '#/definitions/CopySink'
     description: A copy activity Dynamics CRM sink.
     properties:
+      alternateKeyName:
+        description: 'The logical name of the alternate key which will be used when upserting records. Type: string (or Expression with resultType string).'
+        type: object
       ignoreNullValues:
         description: 'The flag indicating whether to ignore null values from input dataset (except key fields) during write operation. Default is false. Type: boolean (or Expression with resultType boolean).'
         type: object
@@ -1466,6 +1472,9 @@ definitions:
       - $ref: '#/definitions/CopySink'
     description: A copy activity Dynamics sink.
     properties:
+      alternateKeyName:
+        description: 'The logical name of the alternate key which will be used when upserting records. Type: string (or Expression with resultType string).'
+        type: object
       ignoreNullValues:
         description: 'The flag indicating whether ignore null values from input dataset (except key fields) during write operation. Default is false. Type: boolean (or Expression with resultType boolean).'
         type: object

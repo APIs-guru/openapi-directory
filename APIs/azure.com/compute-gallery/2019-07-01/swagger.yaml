@@ -1623,10 +1623,12 @@ paths:
                   dataDiskImages:
                     - hostCaching: None
                       lun: 1
-                      source: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{diskSnapshotName}'
+                      source:
+                        id: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{diskSnapshotName}'
                   osDiskImage:
                     hostCaching: ReadOnly
-                    source: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{snapshotName}'
+                    source:
+                      id: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{snapshotName}'
             galleryImageVersionName: 1.0.0
             galleryName: myGalleryName
             resourceGroupName: myResourceGroup
@@ -1654,11 +1656,13 @@ paths:
                       - hostCaching: None
                         lun: 1
                         sizeInGB: 10
-                        source: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{diskSnapshotName}'
+                        source:
+                          id: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{diskSnapshotName}'
                     osDiskImage:
                       hostCaching: ReadOnly
                       sizeInGB: 10
-                      source: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{osSnapshotName}'
+                      source:
+                        id: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{osSnapshotName}'
             '201':
               body:
                 location: West US
@@ -1681,11 +1685,13 @@ paths:
                       - hostCaching: None
                         lun: 1
                         sizeInGB: 10
-                        source: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{diskSnapshotName}'
+                        source:
+                          id: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{diskSnapshotName}'
                     osDiskImage:
                       hostCaching: ReadOnly
                       sizeInGB: 10
-                      source: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{osSnapshotName}'
+                      source:
+                        id: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{osSnapshotName}'
             '202':
               body:
                 location: West US
@@ -1708,11 +1714,13 @@ paths:
                       - hostCaching: None
                         lun: 1
                         sizeInGB: 10
-                        source: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{diskSnapshotName}'
+                        source:
+                          id: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{diskSnapshotName}'
                     osDiskImage:
                       hostCaching: ReadOnly
                       sizeInGB: 10
-                      source: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{snapshotName}'
+                      source:
+                        id: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{osSnapshotName}'
       x-ms-long-running-operation: true
 definitions:
   ApiError:

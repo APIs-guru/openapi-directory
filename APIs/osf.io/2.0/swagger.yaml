@@ -1933,6 +1933,934 @@ paths:
       tags:
         - Files
       x-response-schema: File Version
+  /groups/:
+    get:
+      description: |-
+        *NOTE* This feature is experimental and subject to change at any time. It may only be available on certain environments.
+
+        A paginated list of groups.  Only groups the logged-in user belongs to will be returned. The returned groups are sorted by their `date_modified`, with the most recently updated groups appearing first.
+
+        #### Returns
+        Returns a JSON object containing `data` and `links` keys.
+
+        The `data` key contains an array of 10 groups. Each resource in the array is a separate group object and contains the full representation of the group, meaning additional requests to a group's detail view are not necessary.
+
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
+
+        #### Filtering
+
+        You can optionally request that the response only include groups that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/groups/5c0571f4b146c900085f39a3/?filter[name]=lab.
+
+        Groups may be filtered by their `name`.
+        You can learn more about advanced filtering features [here](#tag/Filtering).
+      operationId: groups_list
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              data:
+                - attributes:
+                    date_created: '2013-10-22T20:07:57.674000'
+                    date_modified: '2017-02-09T20:37:49.060000'
+                    name: COS Science Lab
+                  id: 5c0571f4b146c900085f39a3
+                  links:
+                    html: 'https://osf.io/5c0571f4b146c900085f39a3/'
+                    self: 'https://api.osf.io/v2/groups/5c0571f4b146c900085f39a3/'
+                  relationships:
+                    members:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/groups/5c0571f4b146c900085f39a3/members/'
+                          meta: {}
+                  type: groups
+              links:
+                first: null
+                last: null
+                meta:
+                  per_page: 10
+                  total: 1
+                next: null
+                prev: null
+                self: 'https://api.osf.io/v2/groups/'
+          schema:
+            items:
+              example:
+                data:
+                  attributes:
+                    name: My Lab Group
+                  type: groups
+              properties:
+                attributes:
+                  description: The properties of the group entity.
+                  properties:
+                    date_created:
+                      description: 'The time at which the group was created, as an iso8601 formatted timestamp.'
+                      format: date-time
+                      readOnly: true
+                      type: string
+                    date_modified:
+                      description: 'The time at which the group was last modified, as an iso8601 formatted timestamp.'
+                      format: date-time
+                      readOnly: true
+                      type: string
+                    name:
+                      description: The name of the group.
+                      readOnly: false
+                      type: string
+                  readOnly: false
+                  required:
+                    - name
+                  title: Attributes
+                  type: object
+                id:
+                  description: The unique identifier of the group entity.
+                  readOnly: true
+                  type: string
+                links:
+                  description: URLs to alternative representations of the group entity.
+                  properties:
+                    html:
+                      description: A link to the group's page on the OSF.
+                      format: URL
+                      readOnly: true
+                      type: string
+                    self:
+                      description: A link to the canonical API endpoint of this group.
+                      format: URL
+                      readOnly: true
+                      type: string
+                  readOnly: true
+                  title: Links
+                  type: object
+                relationships:
+                  description: URLs to other entities or entity collections that have a relationship to the group entity.
+                  properties:
+                    members:
+                      description: A link to the list of the members of this group.
+                      readOnly: true
+                      type: string
+                  readOnly: false
+                  title: Relationships
+                  type: object
+                type:
+                  description: The type identifier of the group entity (`groups`).
+                  readOnly: false
+                  type: string
+              required:
+                - type
+                - attributes
+              title: Group
+              type: object
+            type: array
+      summary: List groups
+      tags:
+        - Groups
+      x-response-schema: Group
+    post:
+      consumes:
+        - application/json
+      description: |-
+        *NOTE* This feature is experimental and subject to change at any time. It may only be available on certain environments.
+
+        Creates a new group.
+        On the OSF, a group is a collection of users; examples are a lab group or a class. Users can add other users to groups, and then allow that group to access a project or several projects.
+        #### Required
+        Required fields for creating a group include:
+
+        &nbsp;&nbsp;&nbsp;&nbsp;`name`
+
+        Note: The creator is automatically made a manager of the group.
+        #### Returns
+        Returns a JSON object with a `data` key containing the representation of the created group, if the request is successful.
+
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
+      operationId: groups
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            example:
+              data:
+                attributes:
+                  name: My Lab Group
+                type: groups
+            properties:
+              attributes:
+                description: The properties of the group entity.
+                properties:
+                  date_created:
+                    description: 'The time at which the group was created, as an iso8601 formatted timestamp.'
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  date_modified:
+                    description: 'The time at which the group was last modified, as an iso8601 formatted timestamp.'
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  name:
+                    description: The name of the group.
+                    readOnly: false
+                    type: string
+                readOnly: false
+                required:
+                  - name
+                title: Attributes
+                type: object
+              id:
+                description: The unique identifier of the group entity.
+                readOnly: true
+                type: string
+              links:
+                description: URLs to alternative representations of the group entity.
+                properties:
+                  html:
+                    description: A link to the group's page on the OSF.
+                    format: URL
+                    readOnly: true
+                    type: string
+                  self:
+                    description: A link to the canonical API endpoint of this group.
+                    format: URL
+                    readOnly: true
+                    type: string
+                readOnly: true
+                title: Links
+                type: object
+              relationships:
+                description: URLs to other entities or entity collections that have a relationship to the group entity.
+                properties:
+                  members:
+                    description: A link to the list of the members of this group.
+                    readOnly: true
+                    type: string
+                readOnly: false
+                title: Relationships
+                type: object
+              type:
+                description: The type identifier of the group entity (`groups`).
+                readOnly: false
+                type: string
+            required:
+              - type
+              - attributes
+            title: Group
+            type: object
+      responses:
+        '201':
+          description: Success
+      summary: Create a group
+      tags:
+        - Groups
+      x-response-schema: Group
+  '/groups/{group_id}/':
+    delete:
+      description: |-
+        *NOTE* This feature is experimental and subject to change at any time. It may only be available on certain environments.
+
+        Permanently deletes a group. This action cannot be undone.
+
+        #### Permissions
+
+        Only group managers may delete a group. Attempting to delete a group for which you are not a manager will result in a **403 Forbidden** response.
+
+        #### Returns
+
+        If the request is successful, no content is returned.
+
+        If the request is unsuccessful, a JSON object with an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
+      operationId: groups_delete
+      parameters:
+        - description: The unique identifier of the group.
+          in: path
+          name: group_id
+          required: true
+          type: string
+      responses:
+        '204':
+          description: No content
+      summary: Delete a group
+      tags:
+        - Groups
+    get:
+      description: |-
+        *NOTE* This feature is experimental and subject to change at any time. It may only be available on certain environments.
+
+        Retrieves the details of a given group
+        #### Permissions
+        Any user can retrieve a group.
+        Authentication is not required to view the details of a specific group.
+        #### Returns
+        Returns a JSON object with a data key that has a representation of the serialized group.
+      operationId: groups_read
+      parameters:
+        - description: The unique identifier of the group.
+          in: path
+          name: group_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              data:
+                - attributes:
+                    date_created: '2013-10-22T20:07:57.674000'
+                    date_modified: '2017-02-09T20:37:49.060000'
+                    name: COS Science Lab
+                  id: 5c0571f4b146c900085f39a3
+                  links:
+                    html: 'https://osf.io/5c0571f4b146c900085f39a3/'
+                    self: 'https://api.ßosf.io/v2/groups/5c0571f4b146c900085f39a3/'
+                  relationships:
+                    members:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/groups/5c0571f4b146c900085f39a3/members/'
+                          meta: {}
+                  type: groups
+              links:
+                first: null
+                last: null
+                meta:
+                  per_page: 10
+                  total: 1
+                next: null
+                prev: null
+                self: 'https://api.osf.io/v2/groups/'
+          schema:
+            example:
+              data:
+                attributes:
+                  name: My Lab Group
+                type: groups
+            properties:
+              attributes:
+                description: The properties of the group entity.
+                properties:
+                  date_created:
+                    description: 'The time at which the group was created, as an iso8601 formatted timestamp.'
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  date_modified:
+                    description: 'The time at which the group was last modified, as an iso8601 formatted timestamp.'
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  name:
+                    description: The name of the group.
+                    readOnly: false
+                    type: string
+                readOnly: false
+                required:
+                  - name
+                title: Attributes
+                type: object
+              id:
+                description: The unique identifier of the group entity.
+                readOnly: true
+                type: string
+              links:
+                description: URLs to alternative representations of the group entity.
+                properties:
+                  html:
+                    description: A link to the group's page on the OSF.
+                    format: URL
+                    readOnly: true
+                    type: string
+                  self:
+                    description: A link to the canonical API endpoint of this group.
+                    format: URL
+                    readOnly: true
+                    type: string
+                readOnly: true
+                title: Links
+                type: object
+              relationships:
+                description: URLs to other entities or entity collections that have a relationship to the group entity.
+                properties:
+                  members:
+                    description: A link to the list of the members of this group.
+                    readOnly: true
+                    type: string
+                readOnly: false
+                title: Relationships
+                type: object
+              type:
+                description: The type identifier of the group entity (`groups`).
+                readOnly: false
+                type: string
+            required:
+              - type
+              - attributes
+            title: Group
+            type: object
+      summary: Retrieve a group
+      tags:
+        - Groups
+      x-response-schema: Group
+    patch:
+      consumes:
+        - application/json
+      description: |-
+        *NOTE* This feature is experimental and subject to change at any time. It may only be available on certain environments.
+
+        Updates a group by setting the values of the attributes specified in the request body. Any unspecified attributes will be left unchanged.
+
+        Groups can be updated with either a **PUT** or **PATCH** request. The `name` field is mandatory in a **PUT** request, and optional in a **PATCH**.
+
+        #### Permissions
+        Only managers of a group may update the group. Attempting to update a group for which you do not have manager access will result in a **403 Forbidden** response.
+
+        #### Returns
+
+        Returns a JSON object with a `data` key containing the new representation of the updated node, if the request is successful.
+
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
+      operationId: group_partial_update
+      parameters:
+        - description: The unique identifier of the group.
+          in: path
+          name: group_id
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            example:
+              data:
+                attributes:
+                  name: My new group name
+                id: '{group_id}'
+                type: groups
+            type: object
+      responses:
+        '200':
+          description: OK
+      summary: Update a group
+      tags:
+        - Groups
+      x-response-schema: Group
+  '/groups/{group_id}/members/':
+    get:
+      description: |-
+        *NOTE* This feature is experimental and subject to change at any time. It may only be available on certain environments.
+
+        A paginated list of the group members.
+        Groups are collections of users. A user can either be a group member or a group manager. Group managers can update group membership. All group members can be added as a unit to a project or several projects.
+        #### Returns
+
+        Returns a JSON object containing `data` and `links` keys.
+
+        The `data` key contains an array of 10 members. Each resource in the array contains the full representation of the member, meaning additional requests to a member's detail view are not necessary. The user's role in the group and full_name are top-level attributes. Additionally, if a member hasn't yet claimed their OSF account, they will have an unregistered_member attribute.  To see more details about the user in the group, follow the `users` relationship.
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
+
+        #### Filtering
+        You can optionally request that the response only include members that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/groups/5c0571f4b146c900085f39a3/members/?filter[role]=manager.
+
+        Contributors may be filtered by their `role` and `full_name` attributes.
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
+      operationId: group_members_list
+      parameters:
+        - description: The unique identifier of the group.
+          in: path
+          name: group_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              data:
+                - attributes:
+                    full_name: Grapes McGee
+                    role: manager
+                    unregistered_contributor: null
+                  id: 5c0571f4b146c900085f39a3-typ46
+                  links:
+                    self: 'https://api.osf.io/v2/groups/5c0571f4b146c900085f39a3/members/'
+                  relationships:
+                    users:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/users/typ46/'
+                          meta: {}
+                  type: group-members
+              links:
+                first: null
+                last: null
+                meta:
+                  per_page: 10
+                  total: 9
+                  total_bibliographic: 1
+                next: null
+                prev: null
+          schema:
+            items:
+              example:
+                data:
+                  attributes:
+                    role: manager
+                  relationships:
+                    user:
+                      data:
+                        id: '{user_id}'
+                        type: users
+                  type: group-members
+              properties:
+                attributes:
+                  description: The properties of the contributor entity.
+                  properties:
+                    email:
+                      description: 'The unregistered user email. Writeable when adding an unregistered member to your group, instead of an existing OSF user.'
+                      readOnly: false
+                      type: string
+                    full_name:
+                      description: 'The full name of the user, used for display on the OSF. Writeable when adding an unregistered member to your group, instead of an existing OSF user.'
+                      readOnly: false
+                      type: string
+                    role:
+                      description: The permission level of the group member. The default value is 'member'.
+                      enum:
+                        - manager
+                        - member
+                      readOnly: false
+                      type: string
+                    unregistered_member:
+                      description: The assigned name of the group member if the member has not yet claimed their account.
+                      readOnly: true
+                      type: string
+                  readOnly: false
+                  title: Attributes
+                  type: object
+                id:
+                  description: 'The identifier of the group member entity. Member identifiers have the form {group_id}-{user_id}.'
+                  readOnly: true
+                  type: string
+                links:
+                  description: URLs to alternative representations of the group member entity.
+                  properties:
+                    self:
+                      description: A link to the the canonical API endpoint for the group member.
+                      format: URL
+                      readOnly: true
+                      type: string
+                  readOnly: true
+                  title: Links
+                  type: object
+                relationships:
+                  description: URLs to other entities or entity collections that have a relationship to the group member entity.
+                  properties:
+                    user:
+                      description: A relationship to the user object
+                      readOnly: false
+                      type: string
+                  readOnly: false
+                  required:
+                    - user
+                  title: Relationships
+                  type: object
+                type:
+                  description: The type identifier of the group member entity (`group-members`).
+                  readOnly: true
+                  type: string
+              required:
+                - type
+                - relationships
+              title: Group Member
+              type: object
+            type: array
+      summary: List all group members
+      tags:
+        - Groups
+      x-response-schema: Group Member
+    post:
+      consumes:
+        - application/json
+      description: |-
+        *NOTE* This feature is experimental and subject to change at any time. It may only be available on certain environments.
+
+        Adds a member to a group, effectively creating a relationship between the group and a user.
+        Groups are collections of users. A user can either be a group member or a group manager. Group managers can update group membership. All group members can be added as a unit to a project or several projects.
+        #### Permissions
+        Only a group manager can add a member to the group.
+        #### Required
+        A relationship object with a `data` key, containing the `users` type and valid user ID is required.  You can specify the member's role with the `role` attribute. Default role is `member`.  To add an unregistered member to a group, specify a `full_name` and `email` combination under `attributes`.
+        #### Returns
+        Returns a JSON object with a `data` key containing the representation of the new group member, if the request is successful.
+
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
+      operationId: group_members_create
+      parameters:
+        - description: The unique identifier of the group.
+          in: path
+          name: group_id
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            example:
+              data:
+                attributes:
+                  role: manager
+                relationships:
+                  user:
+                    data:
+                      id: '{user_id}'
+                      type: users
+                type: group-members
+            properties:
+              attributes:
+                description: The properties of the contributor entity.
+                properties:
+                  email:
+                    description: 'The unregistered user email. Writeable when adding an unregistered member to your group, instead of an existing OSF user.'
+                    readOnly: false
+                    type: string
+                  full_name:
+                    description: 'The full name of the user, used for display on the OSF. Writeable when adding an unregistered member to your group, instead of an existing OSF user.'
+                    readOnly: false
+                    type: string
+                  role:
+                    description: The permission level of the group member. The default value is 'member'.
+                    enum:
+                      - manager
+                      - member
+                    readOnly: false
+                    type: string
+                  unregistered_member:
+                    description: The assigned name of the group member if the member has not yet claimed their account.
+                    readOnly: true
+                    type: string
+                readOnly: false
+                title: Attributes
+                type: object
+              id:
+                description: 'The identifier of the group member entity. Member identifiers have the form {group_id}-{user_id}.'
+                readOnly: true
+                type: string
+              links:
+                description: URLs to alternative representations of the group member entity.
+                properties:
+                  self:
+                    description: A link to the the canonical API endpoint for the group member.
+                    format: URL
+                    readOnly: true
+                    type: string
+                readOnly: true
+                title: Links
+                type: object
+              relationships:
+                description: URLs to other entities or entity collections that have a relationship to the group member entity.
+                properties:
+                  user:
+                    description: A relationship to the user object
+                    readOnly: false
+                    type: string
+                readOnly: false
+                required:
+                  - user
+                title: Relationships
+                type: object
+              type:
+                description: The type identifier of the group member entity (`group-members`).
+                readOnly: true
+                type: string
+            required:
+              - type
+              - relationships
+            title: Group Member
+            type: object
+      responses:
+        '201':
+          description: Success
+      summary: Create a group member
+      tags:
+        - Groups
+      x-response-schema: Group Member
+  '/groups/{group_id}/members/{user_id}/':
+    delete:
+      description: |-
+        *NOTE* This feature is experimental and subject to change at any time. It may only be available on certain environments.
+
+        Removes a member from a group. This request only removes the relationship between the group and the user, it does not delete the user itself.
+
+        A group must always have at least one manager, and attempting to remove the only manager from a group will result in a **400 Bad Request** response.
+        #### Permissions
+        A user can remove themselves as a member. Otherwise, only project managers can remove members.
+        #### Returns
+        If the request is successful, no content is returned.
+
+        If the request is unsuccessful, a JSON object with an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
+      operationId: group_members_delete
+      parameters:
+        - description: The unique identifier of the group.
+          in: path
+          name: group_id
+          required: true
+          type: string
+        - description: The unique identifier of the user.
+          in: path
+          name: user_id
+          required: true
+          type: string
+      responses:
+        '204':
+          description: No content
+      summary: Delete a group member
+      tags:
+        - Groups
+    get:
+      description: |-
+        *NOTE* This feature is experimental and subject to change at any time. It may only be available on certain environments.
+
+        Retrieves the details of a given group member.
+
+        Groups are collections of users that can be added to a project or several projects.  Group members either have a `manager` or `member` role.
+        #### Returns
+        Returns a JSON object with a `data` key containing the representation of the requested contributor, if the request is successful.
+
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
+      operationId: group_members_read
+      parameters:
+        - description: The unique identifier of the group.
+          in: path
+          name: group_id
+          required: true
+          type: string
+        - description: The unique identifier of the user.
+          in: path
+          name: user_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              data:
+                - attributes:
+                    full_name: Grapes McGee
+                    role: manager
+                    unregistered_contributor: null
+                  id: 5c0571f4b146c900085f39a3-typ46
+                  links:
+                    self: 'https://api.osf.io/v2/groups/5c0571f4b146c900085f39a3/members/'
+                  relationships:
+                    users:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/users/typ46/'
+                          meta: {}
+                  type: group-members
+              links:
+                first: null
+                last: null
+                meta:
+                  per_page: 10
+                  total: 9
+                  total_bibliographic: 1
+                next: null
+                prev: null
+          schema:
+            example:
+              data:
+                attributes:
+                  role: manager
+                relationships:
+                  user:
+                    data:
+                      id: '{user_id}'
+                      type: users
+                type: group-members
+            properties:
+              attributes:
+                description: The properties of the contributor entity.
+                properties:
+                  email:
+                    description: 'The unregistered user email. Writeable when adding an unregistered member to your group, instead of an existing OSF user.'
+                    readOnly: false
+                    type: string
+                  full_name:
+                    description: 'The full name of the user, used for display on the OSF. Writeable when adding an unregistered member to your group, instead of an existing OSF user.'
+                    readOnly: false
+                    type: string
+                  role:
+                    description: The permission level of the group member. The default value is 'member'.
+                    enum:
+                      - manager
+                      - member
+                    readOnly: false
+                    type: string
+                  unregistered_member:
+                    description: The assigned name of the group member if the member has not yet claimed their account.
+                    readOnly: true
+                    type: string
+                readOnly: false
+                title: Attributes
+                type: object
+              id:
+                description: 'The identifier of the group member entity. Member identifiers have the form {group_id}-{user_id}.'
+                readOnly: true
+                type: string
+              links:
+                description: URLs to alternative representations of the group member entity.
+                properties:
+                  self:
+                    description: A link to the the canonical API endpoint for the group member.
+                    format: URL
+                    readOnly: true
+                    type: string
+                readOnly: true
+                title: Links
+                type: object
+              relationships:
+                description: URLs to other entities or entity collections that have a relationship to the group member entity.
+                properties:
+                  user:
+                    description: A relationship to the user object
+                    readOnly: false
+                    type: string
+                readOnly: false
+                required:
+                  - user
+                title: Relationships
+                type: object
+              type:
+                description: The type identifier of the group member entity (`group-members`).
+                readOnly: true
+                type: string
+            required:
+              - type
+              - relationships
+            title: Group Member
+            type: object
+      summary: Retrieve a group member
+      tags:
+        - Groups
+      x-response-schema: Group Member
+    patch:
+      consumes:
+        - application/json
+      description: |-
+        *NOTE* This feature is experimental and subject to change at any time. It may only be available on certain environments.
+
+        Updates a group member by setting the values of the attributes specified in the request body. Any unspecified attributes will be left unchanged.
+
+        Group members can be updated with either a **PUT** or **PATCH** request. Since this endpoint has no mandatory attributes, PUT and PATCH are functionally the same.
+        #### Permissions
+        Only group managers can update group membership.
+        #### Returns
+        Returns a JSON object with a `data` key containing the new representation of the updated contributor, if the request is successful.
+
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
+
+        If the given user is not already in the member list, a 404 Not Found error will be returned. A group must always have at least one manager, and any attempt to downgrade the permissions of a sole manager will result in a 400 Bad Request error.
+      operationId: group_members_partial_update
+      parameters:
+        - description: The unique identifier of the group.
+          in: path
+          name: group_id
+          required: true
+          type: string
+        - description: The unique identifier of the user.
+          in: path
+          name: user_id
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            example:
+              data:
+                attributes:
+                  role: manager
+                relationships:
+                  user:
+                    data:
+                      id: '{user_id}'
+                      type: users
+                type: group-members
+            properties:
+              attributes:
+                description: The properties of the contributor entity.
+                properties:
+                  email:
+                    description: 'The unregistered user email. Writeable when adding an unregistered member to your group, instead of an existing OSF user.'
+                    readOnly: false
+                    type: string
+                  full_name:
+                    description: 'The full name of the user, used for display on the OSF. Writeable when adding an unregistered member to your group, instead of an existing OSF user.'
+                    readOnly: false
+                    type: string
+                  role:
+                    description: The permission level of the group member. The default value is 'member'.
+                    enum:
+                      - manager
+                      - member
+                    readOnly: false
+                    type: string
+                  unregistered_member:
+                    description: The assigned name of the group member if the member has not yet claimed their account.
+                    readOnly: true
+                    type: string
+                readOnly: false
+                title: Attributes
+                type: object
+              id:
+                description: 'The identifier of the group member entity. Member identifiers have the form {group_id}-{user_id}.'
+                readOnly: true
+                type: string
+              links:
+                description: URLs to alternative representations of the group member entity.
+                properties:
+                  self:
+                    description: A link to the the canonical API endpoint for the group member.
+                    format: URL
+                    readOnly: true
+                    type: string
+                readOnly: true
+                title: Links
+                type: object
+              relationships:
+                description: URLs to other entities or entity collections that have a relationship to the group member entity.
+                properties:
+                  user:
+                    description: A relationship to the user object
+                    readOnly: false
+                    type: string
+                readOnly: false
+                required:
+                  - user
+                title: Relationships
+                type: object
+              type:
+                description: The type identifier of the group member entity (`group-members`).
+                readOnly: true
+                type: string
+            required:
+              - type
+              - relationships
+            title: Group Member
+            type: object
+      responses:
+        '200':
+          description: OK
+      summary: Update a group member
+      tags:
+        - Groups
+      x-response-schema: Group Member
   /institutions/:
     get:
       description: |-
@@ -2556,6 +3484,10 @@ paths:
                       description: A link to the list of nodes that are forks of this node.
                       readOnly: true
                       type: string
+                    groups:
+                      description: A link to the list of groups that have permissions to the node.
+                      readOnly: true
+                      type: string
                     identifiers:
                       description: A link to the list of identifiers for this node (i.e. DOI identifiers).
                       readOnly: true
@@ -2984,6 +3916,10 @@ paths:
                     default_region:
                       description: The storage region where the user's files will be stored by default.
                       readOnly: false
+                      type: string
+                    groups:
+                      description: A link to the list of groups that a user belongs to.
+                      readOnly: true
                       type: string
                     institutions:
                       description: A link to the list of institutions the user is affiliated with.
@@ -4340,6 +5276,10 @@ paths:
                       description: A link to the list of nodes that are forks of this node.
                       readOnly: true
                       type: string
+                    groups:
+                      description: A link to the list of groups that have permissions to the node.
+                      readOnly: true
+                      type: string
                     identifiers:
                       description: A link to the list of identifiers for this node (i.e. DOI identifiers).
                       readOnly: true
@@ -4596,6 +5536,10 @@ paths:
                     description: A link to the list of nodes that are forks of this node.
                     readOnly: true
                     type: string
+                  groups:
+                    description: A link to the list of groups that have permissions to the node.
+                    readOnly: true
+                    type: string
                   identifiers:
                     description: A link to the list of identifiers for this node (i.e. DOI identifiers).
                     readOnly: true
@@ -4785,6 +5729,11 @@ paths:
                     links:
                       related:
                         href: 'https://api.osf.io/v2/nodes/e81xl/forks/'
+                        meta: {}
+                  groups:
+                    links:
+                      related:
+                        href: 'https://api.osf.io/v2/nodes/e81xl/groups/'
                         meta: {}
                   identifiers:
                     links:
@@ -4998,6 +5947,10 @@ paths:
                     type: string
                   forks:
                     description: A link to the list of nodes that are forks of this node.
+                    readOnly: true
+                    type: string
+                  groups:
+                    description: A link to the list of groups that have permissions to the node.
                     readOnly: true
                     type: string
                   identifiers:
@@ -5817,6 +6770,10 @@ paths:
                       description: A link to the list of nodes that are forks of this node.
                       readOnly: true
                       type: string
+                    groups:
+                      description: A link to the list of groups that have permissions to the node.
+                      readOnly: true
+                      type: string
                     identifiers:
                       description: A link to the list of identifiers for this node (i.e. DOI identifiers).
                       readOnly: true
@@ -6082,6 +7039,10 @@ paths:
                     type: string
                   forks:
                     description: A link to the list of nodes that are forks of this node.
+                    readOnly: true
+                    type: string
+                  groups:
+                    description: A link to the list of groups that have permissions to the node.
                     readOnly: true
                     type: string
                   identifiers:
@@ -6471,6 +7432,10 @@ paths:
                     type: string
                   forks:
                     description: A link to the list of nodes that are forks of this node.
+                    readOnly: true
+                    type: string
+                  groups:
+                    description: A link to the list of groups that have permissions to the node.
                     readOnly: true
                     type: string
                   identifiers:
@@ -9546,6 +10511,10 @@ paths:
                       description: A link to the list of nodes that are forks of this node.
                       readOnly: true
                       type: string
+                    groups:
+                      description: A link to the list of groups that have permissions to the node.
+                      readOnly: true
+                      type: string
                     identifiers:
                       description: A link to the list of identifiers for this node (i.e. DOI identifiers).
                       readOnly: true
@@ -9809,6 +10778,10 @@ paths:
                     description: A link to the list of nodes that are forks of this node.
                     readOnly: true
                     type: string
+                  groups:
+                    description: A link to the list of groups that have permissions to the node.
+                    readOnly: true
+                    type: string
                   identifiers:
                     description: A link to the list of identifiers for this node (i.e. DOI identifiers).
                     readOnly: true
@@ -9876,6 +10849,526 @@ paths:
       tags:
         - Nodes
       x-response-schema: Node
+  '/nodes/{node_id}/groups/':
+    get:
+      description: |-
+        *NOTE* This feature is experimental and subject to change at any time. It may only be available on certain environments.
+
+        A paginated list of the groups that have permissions to the node, sorted by their date_modified.
+
+        Groups are collections of users that can be added to a node.  All members of the group will be granted the same permission to the node.
+        #### Returns
+
+        Returns a JSON object containing `data` and `links` keys.
+
+        The `data` key contains an array of 10 groups. Each resource in the array contains the full representation of the group, meaning additional requests to a group's detail view are not necessary.
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
+
+        #### Filtering
+
+        You can optionally request that the response only include groups that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/nodes/y9jdt/groups/?filter[admin]=true.
+
+        Node Groups may be filtered by their `name` and `permission` attributes.
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
+      operationId: node_groups_list
+      parameters:
+        - description: The unique identifier of the node.
+          in: path
+          name: node_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              data:
+                - attributes:
+                    name: My Lab Group
+                    permission: admin
+                  id: y9jdt-5c0571f4b146c900085f39a3
+                  links:
+                    self: 'https://api.osf.io/v2/nodes/y9jdt/groups/5c0571f4b146c900085f39a3/'
+                  relationships:
+                    groups:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/groups/5c0571f4b146c900085f39a3/'
+                          meta: {}
+                  type: node-groups
+              links:
+                first: null
+                last: null
+                meta:
+                  per_page: 10
+                  total: 9
+                  total_bibliographic: 1
+                next: null
+                prev: null
+          schema:
+            items:
+              example:
+                data:
+                  attributes:
+                    permission: write
+                  relationships:
+                    groups:
+                      data:
+                        id: '{group_id}'
+                        type: groups
+                  type: node-groups
+              properties:
+                attributes:
+                  description: The properties of the node group entity.
+                  properties:
+                    date_created:
+                      description: 'The time at which the group was created, as an iso8601 formatted timestamp.'
+                      format: date-time
+                      readOnly: true
+                      type: string
+                    date_modified:
+                      description: 'The time at which the group was last modified, as an iso8601 formatted timestamp.'
+                      format: date-time
+                      readOnly: true
+                      type: string
+                    name:
+                      description: The name of the group that has permission to the node.
+                      readOnly: true
+                      type: string
+                    permission:
+                      description: The permission level of the node group. The default value is 'write'.
+                      enum:
+                        - read
+                        - write
+                        - admin
+                      readOnly: false
+                      type: string
+                  readOnly: false
+                  title: Attributes
+                  type: object
+                id:
+                  description: 'The identifier of the node_group entity. Node group identifiers have the form {node_id}-{group_id}.'
+                  readOnly: true
+                  type: string
+                links:
+                  description: URLs to alternative representations of the node group entity.
+                  properties:
+                    self:
+                      description: A link to the the canonical API endpoint for the node group.
+                      format: URL
+                      readOnly: true
+                      type: string
+                  readOnly: true
+                  title: Links
+                  type: object
+                relationships:
+                  description: URLs to other entities or entity collections that have a relationship to the contributor entity.
+                  properties:
+                    group:
+                      description: A relationship to the group that has permission to the node.
+                      readOnly: true
+                      type: string
+                  readOnly: false
+                  required:
+                    - group
+                  title: Relationships
+                  type: object
+                type:
+                  description: The type identifier of the node group entity (`node_groups`).
+                  readOnly: true
+                  type: string
+              required:
+                - type
+                - relationships
+              title: Node Group
+              type: object
+            type: array
+      summary: List all node groups
+      tags:
+        - Nodes
+      x-response-schema: Groups
+    post:
+      consumes:
+        - application/json
+      description: |-
+        *NOTE* This feature is experimental and subject to change at any time. It may only be available on certain environments.
+
+        Adds a group to a node, effectively creating a relationship between the node and a group.
+
+        Groups are collections of users that can be added to a node.  All members of the group will be granted the same permission to the node.
+        #### Permissions
+        Only group managers that also have admin permissions to a node, can add a group to a node.
+        #### Required
+        A relationship object with a `data` key, containing the `groups` type and valid group ID is required.
+
+        All attributes describing the relationship between the group and the node are optional.
+        #### Returns
+        Returns a JSON object with a `data` key containing the representation of the new node group, if the request is successful.
+
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
+      operationId: node_groups_create_create
+      parameters:
+        - description: The unique identifier of the node.
+          in: path
+          name: node_id
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            example:
+              data:
+                attributes:
+                  permission: write
+                relationships:
+                  groups:
+                    data:
+                      id: '{group_id}'
+                      type: groups
+                type: node-groups
+            properties:
+              attributes:
+                description: The properties of the node group entity.
+                properties:
+                  date_created:
+                    description: 'The time at which the group was created, as an iso8601 formatted timestamp.'
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  date_modified:
+                    description: 'The time at which the group was last modified, as an iso8601 formatted timestamp.'
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  name:
+                    description: The name of the group that has permission to the node.
+                    readOnly: true
+                    type: string
+                  permission:
+                    description: The permission level of the node group. The default value is 'write'.
+                    enum:
+                      - read
+                      - write
+                      - admin
+                    readOnly: false
+                    type: string
+                readOnly: false
+                title: Attributes
+                type: object
+              id:
+                description: 'The identifier of the node_group entity. Node group identifiers have the form {node_id}-{group_id}.'
+                readOnly: true
+                type: string
+              links:
+                description: URLs to alternative representations of the node group entity.
+                properties:
+                  self:
+                    description: A link to the the canonical API endpoint for the node group.
+                    format: URL
+                    readOnly: true
+                    type: string
+                readOnly: true
+                title: Links
+                type: object
+              relationships:
+                description: URLs to other entities or entity collections that have a relationship to the contributor entity.
+                properties:
+                  group:
+                    description: A relationship to the group that has permission to the node.
+                    readOnly: true
+                    type: string
+                readOnly: false
+                required:
+                  - group
+                title: Relationships
+                type: object
+              type:
+                description: The type identifier of the node group entity (`node_groups`).
+                readOnly: true
+                type: string
+            required:
+              - type
+              - relationships
+            title: Node Group
+            type: object
+      responses:
+        '201':
+          description: Success
+      summary: Create a node group
+      tags:
+        - Nodes
+      x-response-schema: Groups
+  '/nodes/{node_id}/groups/{group_id}':
+    delete:
+      description: |-
+        *NOTE* This feature is experimental and subject to change at any time. It may only be available on certain environments.
+
+        Removes a group from a node. This request only removes the relationship between the node and the group, it does not delete the group itself.
+
+        A node must always have at least one admin, and attempting to remove the only admin from a node will result in a **400 Bad Request** response.
+        #### Permissions
+        A manager of the group or a project administrator can remove the group from the node.
+
+        #### Returns
+        If the request is successful, no content is returned.
+
+        If the request is unsuccessful, a JSON object with an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
+      operationId: nodes_groups_delete
+      parameters:
+        - description: The unique identifier of the node.
+          in: path
+          name: node_id
+          required: true
+          type: string
+        - description: The unique identifier of the group.
+          in: path
+          name: group_id
+          required: true
+          type: string
+      responses:
+        '204':
+          description: No content
+      summary: Delete a node group
+      tags:
+        - Nodes
+    get:
+      description: |-
+        *NOTE* This feature is experimental and subject to change at any time. It may only be available on certain environments.
+
+        Retrieves the details of a given node group.
+
+        Groups are collections of users that can be added to a node.  All members of the group will be granted the same permission to the node.
+        #### Returns
+        Returns a JSON object with a `data` key containing the representation of the requested contributor, if the request is successful.
+
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
+      operationId: nodes_groups_read
+      parameters:
+        - description: The unique identifier of the node.
+          in: path
+          name: node_id
+          required: true
+          type: string
+        - description: The unique identifier of the group.
+          in: path
+          name: group_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              data:
+                attributes:
+                  name: My Lab
+                  permission: admin
+                id: y9jdt-5c0571f4b146c900085f39a3
+                links:
+                  self: 'https://api.osf.io/v2/nodes/y9jdt/groups/5c0571f4b146c900085f39a3/'
+                relationships:
+                  groups:
+                    links:
+                      related:
+                        href: 'https://api.osf.io/v2/groups/5c0571f4b146c900085f39a3/'
+                        meta: {}
+                type: node-groups
+          schema:
+            example:
+              data:
+                attributes:
+                  permission: write
+                relationships:
+                  groups:
+                    data:
+                      id: '{group_id}'
+                      type: groups
+                type: node-groups
+            properties:
+              attributes:
+                description: The properties of the node group entity.
+                properties:
+                  date_created:
+                    description: 'The time at which the group was created, as an iso8601 formatted timestamp.'
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  date_modified:
+                    description: 'The time at which the group was last modified, as an iso8601 formatted timestamp.'
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  name:
+                    description: The name of the group that has permission to the node.
+                    readOnly: true
+                    type: string
+                  permission:
+                    description: The permission level of the node group. The default value is 'write'.
+                    enum:
+                      - read
+                      - write
+                      - admin
+                    readOnly: false
+                    type: string
+                readOnly: false
+                title: Attributes
+                type: object
+              id:
+                description: 'The identifier of the node_group entity. Node group identifiers have the form {node_id}-{group_id}.'
+                readOnly: true
+                type: string
+              links:
+                description: URLs to alternative representations of the node group entity.
+                properties:
+                  self:
+                    description: A link to the the canonical API endpoint for the node group.
+                    format: URL
+                    readOnly: true
+                    type: string
+                readOnly: true
+                title: Links
+                type: object
+              relationships:
+                description: URLs to other entities or entity collections that have a relationship to the contributor entity.
+                properties:
+                  group:
+                    description: A relationship to the group that has permission to the node.
+                    readOnly: true
+                    type: string
+                readOnly: false
+                required:
+                  - group
+                title: Relationships
+                type: object
+              type:
+                description: The type identifier of the node group entity (`node_groups`).
+                readOnly: true
+                type: string
+            required:
+              - type
+              - relationships
+            title: Node Group
+            type: object
+      summary: Retrieve a node group
+      tags:
+        - Nodes
+      x-response-schema: Group
+    patch:
+      consumes:
+        - application/json
+      description: |-
+        *NOTE* This feature is experimental and subject to change at any time. It may only be available on certain environments.
+
+        Updates the permission the group has to the node.
+        Node groups can be updated with either a **PUT** or **PATCH** request. Since this endpoint has no mandatory attributes, PUT and PATCH are functionally the same.
+        #### Permissions
+        Only project administrators can update the permissions a group has to the node.
+        #### Returns
+        Returns a JSON object with a `data` key containing the new representation of the updated contributor, if the request is successful.
+
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
+
+        If the given group is not already in the group list, a 404 Not Found error will be returned.
+      operationId: nodes_groups_partial_update
+      parameters:
+        - description: The unique identifier of the node.
+          in: path
+          name: node_id
+          required: true
+          type: string
+        - description: The unique identifier of the group.
+          in: path
+          name: group_id
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            example:
+              data:
+                attributes:
+                  permission: write
+                relationships:
+                  groups:
+                    data:
+                      id: '{group_id}'
+                      type: groups
+                type: node-groups
+            properties:
+              attributes:
+                description: The properties of the node group entity.
+                properties:
+                  date_created:
+                    description: 'The time at which the group was created, as an iso8601 formatted timestamp.'
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  date_modified:
+                    description: 'The time at which the group was last modified, as an iso8601 formatted timestamp.'
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  name:
+                    description: The name of the group that has permission to the node.
+                    readOnly: true
+                    type: string
+                  permission:
+                    description: The permission level of the node group. The default value is 'write'.
+                    enum:
+                      - read
+                      - write
+                      - admin
+                    readOnly: false
+                    type: string
+                readOnly: false
+                title: Attributes
+                type: object
+              id:
+                description: 'The identifier of the node_group entity. Node group identifiers have the form {node_id}-{group_id}.'
+                readOnly: true
+                type: string
+              links:
+                description: URLs to alternative representations of the node group entity.
+                properties:
+                  self:
+                    description: A link to the the canonical API endpoint for the node group.
+                    format: URL
+                    readOnly: true
+                    type: string
+                readOnly: true
+                title: Links
+                type: object
+              relationships:
+                description: URLs to other entities or entity collections that have a relationship to the contributor entity.
+                properties:
+                  group:
+                    description: A relationship to the group that has permission to the node.
+                    readOnly: true
+                    type: string
+                readOnly: false
+                required:
+                  - group
+                title: Relationships
+                type: object
+              type:
+                description: The type identifier of the node group entity (`node_groups`).
+                readOnly: true
+                type: string
+            required:
+              - type
+              - relationships
+            title: Node Group
+            type: object
+      responses:
+        '200':
+          description: OK
+      summary: Update a node group
+      tags:
+        - Nodes
+      x-response-schema: Group
   '/nodes/{node_id}/identifiers/':
     get:
       description: |-
@@ -10714,6 +12207,10 @@ paths:
                       type: string
                     forks:
                       description: A link to the list of nodes that are forks of this node.
+                      readOnly: true
+                      type: string
+                    groups:
+                      description: A link to the list of groups that have permissions to the node.
                       readOnly: true
                       type: string
                     identifiers:
@@ -19374,6 +20871,10 @@ paths:
                       description: A link to the list of nodes that are forks of this node.
                       readOnly: true
                       type: string
+                    groups:
+                      description: A link to the list of groups that have permissions to the node.
+                      readOnly: true
+                      type: string
                     identifiers:
                       description: A link to the list of identifiers for this node (i.e. DOI identifiers).
                       readOnly: true
@@ -20901,6 +22402,10 @@ paths:
                           description: A link to the list of nodes that are forks of this node.
                           readOnly: true
                           type: string
+                        groups:
+                          description: A link to the list of groups that have permissions to the node.
+                          readOnly: true
+                          type: string
                         identifiers:
                           description: A link to the list of identifiers for this node (i.e. DOI identifiers).
                           readOnly: true
@@ -21810,6 +23315,10 @@ paths:
                           description: A link to the list of nodes that are forks of this node.
                           readOnly: true
                           type: string
+                        groups:
+                          description: A link to the list of groups that have permissions to the node.
+                          readOnly: true
+                          type: string
                         identifiers:
                           description: A link to the list of identifiers for this node (i.e. DOI identifiers).
                           readOnly: true
@@ -22594,6 +24103,10 @@ paths:
                           description: The storage region where the user's files will be stored by default.
                           readOnly: false
                           type: string
+                        groups:
+                          description: A link to the list of groups that a user belongs to.
+                          readOnly: true
+                          type: string
                         institutions:
                           description: A link to the list of institutions the user is affiliated with.
                           readOnly: true
@@ -23120,6 +24633,10 @@ paths:
                       description: The storage region where the user's files will be stored by default.
                       readOnly: false
                       type: string
+                    groups:
+                      description: A link to the list of groups that a user belongs to.
+                      readOnly: true
+                      type: string
                     institutions:
                       description: A link to the list of institutions the user is affiliated with.
                       readOnly: true
@@ -23342,6 +24859,10 @@ paths:
                     description: The storage region where the user's files will be stored by default.
                     readOnly: false
                     type: string
+                  groups:
+                    description: A link to the list of groups that a user belongs to.
+                    readOnly: true
+                    type: string
                   institutions:
                     description: A link to the list of institutions the user is affiliated with.
                     readOnly: true
@@ -23526,6 +25047,10 @@ paths:
                   default_region:
                     description: The storage region where the user's files will be stored by default.
                     readOnly: false
+                    type: string
+                  groups:
+                    description: A link to the list of groups that a user belongs to.
+                    readOnly: true
                     type: string
                   institutions:
                     description: A link to the list of institutions the user is affiliated with.
@@ -23993,6 +25518,135 @@ paths:
       tags:
         - Users
       x-response-schema: Addon Account
+  '/users/{user_id}/groups/':
+    get:
+      description: |-
+        A paginated list of groups that a user belongs to. The returned groups are sorted by their `date_modified`, with the most recently updated groups appearing first.
+        If the user ID in the path is the same as the logged-in user, all groups will be returned. Otherwise, only the groups that the logged-in user and the requested user both belong to will be returned.
+        #### Returns
+        Returns a JSON object containing `data` and `links` keys.
+
+        The `data` key contains an array of 10 groups. Each resource in the array is a separate group object and contains the full representation of the group, meaning additional requests to a group's detail view are not necessary.
+
+        The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
+
+        #### Filtering
+
+        You can optionally request that the response only include groups that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/users/cdi38/groups/?filter[name]=lab.
+
+        Groups may be filtered by their `name`.
+        You can learn more about advanced filtering features [here](#tag/Filtering).
+      operationId: users_groups_list
+      parameters:
+        - description: The unique identifier of the user.
+          in: path
+          name: user_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              data:
+                - attributes:
+                    date_created: '2013-10-22T20:07:57.674000'
+                    date_modified: '2017-02-09T20:37:49.060000'
+                    name: COS Science Lab
+                  id: 5c0571f4b146c900085f39a3
+                  links:
+                    html: 'https://osf.io/5c0571f4b146c900085f39a3/'
+                    self: 'https://api.osf.io/v2/groups/5c0571f4b146c900085f39a3/'
+                  relationships:
+                    members:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/groups/5c0571f4b146c900085f39a3/members/'
+                          meta: {}
+                  type: groups
+              links:
+                first: null
+                last: null
+                meta:
+                  per_page: 10
+                  total: 1
+                next: null
+                prev: null
+                self: 'https://api.osf.io/v2/users/alh38/groups/'
+          schema:
+            items:
+              example:
+                data:
+                  attributes:
+                    name: My Lab Group
+                  type: groups
+              properties:
+                attributes:
+                  description: The properties of the group entity.
+                  properties:
+                    date_created:
+                      description: 'The time at which the group was created, as an iso8601 formatted timestamp.'
+                      format: date-time
+                      readOnly: true
+                      type: string
+                    date_modified:
+                      description: 'The time at which the group was last modified, as an iso8601 formatted timestamp.'
+                      format: date-time
+                      readOnly: true
+                      type: string
+                    name:
+                      description: The name of the group.
+                      readOnly: false
+                      type: string
+                  readOnly: false
+                  required:
+                    - name
+                  title: Attributes
+                  type: object
+                id:
+                  description: The unique identifier of the group entity.
+                  readOnly: true
+                  type: string
+                links:
+                  description: URLs to alternative representations of the group entity.
+                  properties:
+                    html:
+                      description: A link to the group's page on the OSF.
+                      format: URL
+                      readOnly: true
+                      type: string
+                    self:
+                      description: A link to the canonical API endpoint of this group.
+                      format: URL
+                      readOnly: true
+                      type: string
+                  readOnly: true
+                  title: Links
+                  type: object
+                relationships:
+                  description: URLs to other entities or entity collections that have a relationship to the group entity.
+                  properties:
+                    members:
+                      description: A link to the list of the members of this group.
+                      readOnly: true
+                      type: string
+                  readOnly: false
+                  title: Relationships
+                  type: object
+                type:
+                  description: The type identifier of the group entity (`groups`).
+                  readOnly: false
+                  type: string
+              required:
+                - type
+                - attributes
+              title: Group
+              type: object
+            type: array
+      summary: List user groups
+      tags:
+        - Users
+      x-response-schema: Group
   '/users/{user_id}/identities/{identities_id}/':
     delete:
       description: |-
@@ -24562,6 +26216,10 @@ paths:
                       type: string
                     forks:
                       description: A link to the list of nodes that are forks of this node.
+                      readOnly: true
+                      type: string
+                    groups:
+                      description: A link to the list of groups that have permissions to the node.
                       readOnly: true
                       type: string
                     identifiers:
@@ -26013,6 +27671,10 @@ paths:
                       description: A link to the list of nodes that are forks of this node.
                       readOnly: true
                       type: string
+                    groups:
+                      description: A link to the list of groups that have permissions to the node.
+                      readOnly: true
+                      type: string
                     identifiers:
                       description: A link to the list of identifiers for this node (i.e. DOI identifiers).
                       readOnly: true
@@ -26777,6 +28439,7 @@ x-tagGroups:
       - Citations
       - Comments
       - Files
+      - Groups
       - Licenses
       - Logs
       - Institutions

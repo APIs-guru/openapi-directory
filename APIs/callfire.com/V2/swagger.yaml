@@ -3546,6 +3546,61 @@ paths:
       x-sample-js-url: /js/keywords/updateKeywordLeaseConfig.js
       x-sample-php-url: /php/keywords/updateKeywordLeaseConfig.php
       x-sample-python-url: /python/keywords/updateKeywordLeaseConfig.py
+  '/keywords/leases/id/{id}':
+    get:
+      description: Get keyword by id
+      operationId: getKeywordLeaseById
+      parameters:
+        - description: '~'
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: 'Limit fields received in response. E.g. fields: id, name or fields items (id, name), see more at [partial response](https://developers.callfire.com/docs.html#partial-response) page.'
+          in: query
+          name: fields
+          required: false
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/KeywordLease'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      security:
+        - basicAuth: []
+      summary: Find a keyword by id
+      tags:
+        - keywords
+      x-sample-csharp-url: /csharp/keywords/getKeywordLeaseById.cs
+      x-sample-curl-request-url: /curl/keywords/getKeywordLeaseById.sh
+      x-sample-curl-response-url: /curl/keywords/getKeywordLeaseById.json
+      x-sample-description-url: /description/keywords/getKeywordLeaseById.md
+      x-sample-go-url: /go/keywords/getKeywordLeaseById.go
+      x-sample-java-url: /java/keywords/getKeywordLeaseById.java
+      x-sample-js-url: /js/keywords/getKeywordLeaseById.js
+      x-sample-php-url: /php/keywords/getKeywordLeaseById.php
+      x-sample-python-url: /python/keywords/getKeywordLeaseById.py
   '/keywords/leases/{keyword}':
     get:
       description: Searches for all keywords owned by user

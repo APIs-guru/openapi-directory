@@ -555,6 +555,55 @@ paths:
                 name: Primary
                 readOnly: false
                 value: '000000000000000000000000000000000000000000000000000000'
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/listKeyValue':
+    post:
+      description: Lists a configuration store key-value.
+      operationId: ConfigurationStores_ListKeyValue
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ConfigStoreNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - description: The parameters for retrieving a key-value.
+          in: body
+          name: listKeyValueParameters
+          required: true
+          schema:
+            $ref: '#/definitions/ListKeyValueParameters'
+      responses:
+        '200':
+          description: The request was successful; the request was well-formed and received properly.
+          schema:
+            $ref: '#/definitions/KeyValue'
+        default:
+          description: Error response describing why the operation failed
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - ConfigurationStores
+      x-ms-examples:
+        ConfigurationStores_ListKeyValue:
+          parameters:
+            api-version: 2019-02-01-preview
+            configStoreName: fayeh
+            listKeyValueParameters:
+              key: MaxRequests
+              label: dev
+            resourceGroupName: myResourceGroup
+            subscriptionId: c80fb759-c965-4c6a-9110-9b2b2d038882
+          responses:
+            '200':
+              body:
+                contentType: ''
+                eTag: 4f6dd610dd5e4deebc7fbaef685fb903
+                key: MaxRequests
+                label: dev
+                lastModified: '2017-12-05T02:41:26+00:00'
+                locked: false
+                tags:
+                  t1: value1
+                  t2: value2
+                value: '100'
 definitions:
   ApiKey:
     description: An API key used for authenticating with a configuration store endpoint.
@@ -692,6 +741,57 @@ definitions:
       message:
         description: Error message.
         type: string
+  KeyValue:
+    description: The result of a request to retrieve a key-value from the specified configuration store.
+    properties:
+      contentType:
+        description: "The content type of the key-value's value.\r\nProviding a proper content-type can enable transformations of values when they are retrieved by applications."
+        readOnly: true
+        type: string
+      eTag:
+        description: An ETag indicating the state of a key-value within a configuration store.
+        readOnly: true
+        type: string
+      key:
+        description: "The primary identifier of a key-value.\r\nThe key is used in unison with the label to uniquely identify a key-value."
+        readOnly: true
+        type: string
+      label:
+        description: "A value used to group key-values.\r\nThe label is used in unison with the key to uniquely identify a key-value."
+        readOnly: true
+        type: string
+      lastModified:
+        description: The last time a modifying operation was performed on the given key-value.
+        format: date-time
+        readOnly: true
+        type: string
+      locked:
+        description: "A value indicating whether the key-value is locked.\r\nA locked key-value may not be modified until it is unlocked."
+        readOnly: true
+        type: boolean
+      tags:
+        additionalProperties:
+          type: string
+        description: A dictionary of tags that can help identify what a key-value may be applicable for.
+        readOnly: true
+        type: object
+      value:
+        description: The value of the key-value.
+        readOnly: true
+        type: string
+    type: object
+  ListKeyValueParameters:
+    description: The parameters used to list a configuration store key-value
+    properties:
+      key:
+        description: The key to retrieve.
+        type: string
+      label:
+        description: The label of the key.
+        type: string
+    required:
+      - key
+    type: object
   NameAvailabilityStatus:
     description: The result of a request to check the availability of a resource name.
     properties:

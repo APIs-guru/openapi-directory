@@ -1,169 +1,118 @@
 swagger: '2.0'
+schemes:
+  - https
+  - http
+host: comprehendmedical.amazonaws.com
+basePath: /
+x-hasEquivalentPaths: true
 info:
-  version: '2018-10-30'
-  x-release: v4
-  title: AWS Comprehend Medical
-  description: ' Comprehend Medical extracts structured information from unstructured clinical text. Use these actions to gain insight in your documents. '
-  x-logo:
-    url: 'https://twitter.com/awscloud/profile_image?size=original'
-    backgroundColor: '#FFFFFF'
-  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
-    name: Mike Ralphson
     email: mike.ralphson@gmail.com
+    name: Mike Ralphson
     url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
+  description: ' Comprehend Medical extracts structured information from unstructured clinical text. Use these actions to gain insight in your documents. '
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
-  x-providerName: amazonaws.com
-  x-serviceName: comprehendmedical
-  x-origin:
-    - contentType: application/json
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/comprehendmedical-2018-10-30.normal.json'
-      converter:
-        url: 'https://github.com/mermade/aws2openapi'
-        version: 1.0.0
-      x-apisguru-direct: true
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  title: AWS Comprehend Medical
+  version: '2018-10-30'
   x-apiClientRegistration:
     url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
+  x-logo:
+    backgroundColor: '#FFFFFF'
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+  x-origin:
+    - contentType: application/json
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/comprehendmedical-2018-10-30.normal.json'
+      x-apisguru-direct: true
   x-preferred: true
+  x-providerName: amazonaws.com
+  x-release: v4
+  x-serviceName: comprehendmedical
 externalDocs:
   description: Amazon Web Services documentation
   url: 'https://docs.aws.amazon.com/comprehendmedical/'
-host: comprehendmedical.amazonaws.com
-basePath: /
-schemes:
-  - https
-  - http
-x-servers:
-  - url: 'http://comprehendmedical.{region}.amazonaws.com'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-        default: us-east-1
-    description: The ComprehendMedical multi-region endpoint
-  - url: 'https://comprehendmedical.{region}.amazonaws.com'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-        default: us-east-1
-    description: The ComprehendMedical multi-region endpoint
-  - url: 'http://comprehendmedical.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-        default: cn-north-1
-    description: The ComprehendMedical endpoint for China (Beijing) and China (Ningxia)
-  - url: 'https://comprehendmedical.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-        default: cn-north-1
-    description: The ComprehendMedical endpoint for China (Beijing) and China (Ningxia)
-x-hasEquivalentPaths: true
 consumes:
   - application/json
 produces:
   - application/json
-parameters:
-  X-Amz-Content-Sha256:
-    name: X-Amz-Content-Sha256
-    in: header
-    type: string
-    required: false
-  X-Amz-Date:
-    name: X-Amz-Date
-    in: header
-    type: string
-    required: false
-  X-Amz-Algorithm:
-    name: X-Amz-Algorithm
-    in: header
-    type: string
-    required: false
-  X-Amz-Credential:
-    name: X-Amz-Credential
-    in: header
-    type: string
-    required: false
-  X-Amz-Security-Token:
-    name: X-Amz-Security-Token
-    in: header
-    type: string
-    required: false
-  X-Amz-Signature:
-    name: X-Amz-Signature
-    in: header
-    type: string
-    required: false
-  X-Amz-SignedHeaders:
-    name: X-Amz-SignedHeaders
-    in: header
-    type: string
-    required: false
 securityDefinitions:
   hmac:
-    type: apiKey
-    name: Authorization
-    in: header
     description: Amazon Signature authorization v4
+    in: header
+    name: Authorization
+    type: apiKey
     x-amazon-apigateway-authtype: awsSigv4
 security:
   - hmac: []
+parameters:
+  X-Amz-Algorithm:
+    in: header
+    name: X-Amz-Algorithm
+    required: false
+    type: string
+  X-Amz-Content-Sha256:
+    in: header
+    name: X-Amz-Content-Sha256
+    required: false
+    type: string
+  X-Amz-Credential:
+    in: header
+    name: X-Amz-Credential
+    required: false
+    type: string
+  X-Amz-Date:
+    in: header
+    name: X-Amz-Date
+    required: false
+    type: string
+  X-Amz-Security-Token:
+    in: header
+    name: X-Amz-Security-Token
+    required: false
+    type: string
+  X-Amz-Signature:
+    in: header
+    name: X-Amz-Signature
+    required: false
+    type: string
+  X-Amz-SignedHeaders:
+    in: header
+    name: X-Amz-SignedHeaders
+    required: false
+    type: string
 paths:
   '/#X-Amz-Target=ComprehendMedical_20181030.DetectEntities':
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
-      operationId: DetectEntities
       description: ' Inspects the clinical text for a variety of medical entities and returns specific information about them such as entity category, location, and confidence score on that information .'
+      operationId: DetectEntities
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DetectEntitiesRequest'
+        - enum:
+            - ComprehendMedical_20181030.DetectEntities
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -193,18 +142,7 @@ paths:
           description: TextSizeLimitExceededException
           schema:
             $ref: '#/definitions/TextSizeLimitExceededException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DetectEntitiesRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - ComprehendMedical_20181030.DetectEntities
+  '/#X-Amz-Target=ComprehendMedical_20181030.DetectPHI':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -213,10 +151,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ComprehendMedical_20181030.DetectPHI':
     post:
-      operationId: DetectPHI
       description: ' Inspects the clinical text for personal health information (PHI) entities and entity category, location, and confidence score on that information.'
+      operationId: DetectPHI
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DetectPHIRequest'
+        - enum:
+            - ComprehendMedical_20181030.DetectPHI
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -246,59 +195,81 @@ paths:
           description: TextSizeLimitExceededException
           schema:
             $ref: '#/definitions/TextSizeLimitExceededException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DetectPHIRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - ComprehendMedical_20181030.DetectPHI
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  DetectEntitiesResponse:
-    type: object
-    required:
-      - Entities
+  Attribute:
+    description: ' An extracted segment of the text that is an attribute of an entity, or otherwise related to an entity, such as the dosage of a medication taken. It contains information about the attribute such as id, begin and end offset within the input text, and the segment of the input text. '
     properties:
-      Entities:
-        $ref: '#/definitions/EntityList'
-        description: ' The collection of medical entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence that Comprehend Medical has in the detection and analysis. Attributes and traits of the entity are also returned.'
-      UnmappedAttributes:
-        $ref: '#/definitions/UnmappedAttributeList'
-        description: ' Attributes extracted from the input text that we were unable to relate to an entity.'
-      PaginationToken:
+      BeginOffset:
+        $ref: '#/definitions/Integer'
+        description: ' The 0-based character offset in the input text that shows where the attribute begins. The offset returns the UTF-8 code point in the string. '
+      EndOffset:
+        $ref: '#/definitions/Integer'
+        description: ' The 0-based character offset in the input text that shows where the attribute ends. The offset returns the UTF-8 code point in the string. '
+      Id:
+        $ref: '#/definitions/Integer'
+        description: ' The numeric identifier for this attribute. This is a monotonically increasing id unique within this response rather than a global unique identifier. '
+      RelationshipScore:
+        $ref: '#/definitions/Float'
+        description: ' The level of confidence that Comprehend Medical has that this attribute is correctly related to this entity. '
+      Score:
+        $ref: '#/definitions/Float'
+        description: ' The level of confidence that Comprehend Medical has that the segment of text is correctly recognized as an attribute. '
+      Text:
         $ref: '#/definitions/String'
-        description: ' If the result of the previous request to DetectEntities was truncated, include the Paginationtoken to fetch the next page of entities.'
-  DetectEntitiesRequest:
+        description: ' The segment of input text extracted as this attribute.'
+      Traits:
+        $ref: '#/definitions/TraitList'
+        description: ' Contextual information for this attribute. '
+      Type:
+        $ref: '#/definitions/EntitySubType'
+        description: ' The type of attribute. '
     type: object
-    required:
-      - Text
+  AttributeList:
+    items:
+      $ref: '#/definitions/Attribute'
+    type: array
+  AttributeName:
+    enum:
+      - SIGN
+      - SYMPTOM
+      - DIAGNOSIS
+      - NEGATION
+    type: string
+  BoundedLengthString:
+    maxLength: 20000
+    minLength: 1
+    type: string
+  DetectEntitiesRequest:
     properties:
       Text:
         $ref: '#/definitions/BoundedLengthString'
         description: ' A UTF-8 text string containing the clinical content being examined for entities. Each string must contain fewer than 20,000 bytes of characters.'
-  InternalServerException: {}
-  ServiceUnavailableException: {}
-  TooManyRequestsException: {}
-  InvalidRequestException: {}
-  InvalidEncodingException: {}
-  TextSizeLimitExceededException: {}
-  DetectPHIResponse:
+    required:
+      - Text
     type: object
+  DetectEntitiesResponse:
+    properties:
+      Entities:
+        $ref: '#/definitions/EntityList'
+        description: ' The collection of medical entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence that Comprehend Medical has in the detection and analysis. Attributes and traits of the entity are also returned.'
+      PaginationToken:
+        $ref: '#/definitions/String'
+        description: ' If the result of the previous request to DetectEntities was truncated, include the Paginationtoken to fetch the next page of entities.'
+      UnmappedAttributes:
+        $ref: '#/definitions/UnmappedAttributeList'
+        description: ' Attributes extracted from the input text that we were unable to relate to an entity.'
     required:
       - Entities
+    type: object
+  DetectPHIRequest:
+    properties:
+      Text:
+        $ref: '#/definitions/BoundedLengthString'
+        description: ' A UTF-8 text string containing the clinical content being examined for PHI entities. Each string must contain fewer than 20,000 bytes of characters. '
+    required:
+      - Text
+    type: object
+  DetectPHIResponse:
     properties:
       Entities:
         $ref: '#/definitions/EntityList'
@@ -306,16 +277,45 @@ definitions:
       PaginationToken:
         $ref: '#/definitions/String'
         description: ' If the result of the previous request to DetectPHI was truncated, include the Paginationtoken to fetch the next page of PHI entities. '
-  DetectPHIRequest:
-    type: object
     required:
-      - Text
+      - Entities
+    type: object
+  Entity:
+    description: ' Provides information about an extracted medical entity.'
     properties:
+      Attributes:
+        $ref: '#/definitions/AttributeList'
+        description: ' The extracted attributes that relate to this entity.'
+      BeginOffset:
+        $ref: '#/definitions/Integer'
+        description: ' The 0-based character offset in the input text that shows where the entity begins. The offset returns the UTF-8 code point in the string. '
+      Category:
+        $ref: '#/definitions/EntityType'
+        description: ' The category of the entity.'
+      EndOffset:
+        $ref: '#/definitions/Integer'
+        description: ' The 0-based character offset in the input text that shows where the entity ends. The offset returns the UTF-8 code point in the string. '
+      Id:
+        $ref: '#/definitions/Integer'
+        description: ' The numeric identifier for the entity. This is a monotonically increasing id unique within this response rather than a global unique identifier. '
+      Score:
+        $ref: '#/definitions/Float'
+        description: The level of confidence that Comprehend Medical has in the accuracy of the detection.
       Text:
-        $ref: '#/definitions/BoundedLengthString'
-        description: ' A UTF-8 text string containing the clinical content being examined for PHI entities. Each string must contain fewer than 20,000 bytes of characters. '
+        $ref: '#/definitions/String'
+        description: ' The segment of input text extracted as this entity.'
+      Traits:
+        $ref: '#/definitions/TraitList'
+        description: Contextual information for the entity
+      Type:
+        $ref: '#/definitions/EntitySubType'
+        description: ' Describes the specific type of entity with category of entities. '
+    type: object
+  EntityList:
+    items:
+      $ref: '#/definitions/Entity'
+    type: array
   EntitySubType:
-    type: string
     enum:
       - NAME
       - DOSAGE
@@ -345,110 +345,31 @@ definitions:
       - DIRECTION
       - QUALITY
       - QUANTITY
-  Float:
-    type: number
-    format: float
-  Integer:
-    type: integer
-  String:
     type: string
-    minLength: 1
-  TraitList:
-    type: array
-    items:
-      $ref: '#/definitions/Trait'
-  Attribute:
-    type: object
-    properties:
-      Type:
-        $ref: '#/definitions/EntitySubType'
-        description: ' The type of attribute. '
-      Score:
-        $ref: '#/definitions/Float'
-        description: ' The level of confidence that Comprehend Medical has that the segment of text is correctly recognized as an attribute. '
-      RelationshipScore:
-        $ref: '#/definitions/Float'
-        description: ' The level of confidence that Comprehend Medical has that this attribute is correctly related to this entity. '
-      Id:
-        $ref: '#/definitions/Integer'
-        description: ' The numeric identifier for this attribute. This is a monotonically increasing id unique within this response rather than a global unique identifier. '
-      BeginOffset:
-        $ref: '#/definitions/Integer'
-        description: ' The 0-based character offset in the input text that shows where the attribute begins. The offset returns the UTF-8 code point in the string. '
-      EndOffset:
-        $ref: '#/definitions/Integer'
-        description: ' The 0-based character offset in the input text that shows where the attribute ends. The offset returns the UTF-8 code point in the string. '
-      Text:
-        $ref: '#/definitions/String'
-        description: ' The segment of input text extracted as this attribute.'
-      Traits:
-        $ref: '#/definitions/TraitList'
-        description: ' Contextual information for this attribute. '
-    description: ' An extracted segment of the text that is an attribute of an entity, or otherwise related to an entity, such as the dosage of a medication taken. It contains information about the attribute such as id, begin and end offset within the input text, and the segment of the input text. '
-  AttributeList:
-    type: array
-    items:
-      $ref: '#/definitions/Attribute'
-  AttributeName:
-    type: string
-    enum:
-      - SIGN
-      - SYMPTOM
-      - DIAGNOSIS
-      - NEGATION
-  BoundedLengthString:
-    type: string
-    minLength: 1
-    maxLength: 20000
-  EntityList:
-    type: array
-    items:
-      $ref: '#/definitions/Entity'
-  UnmappedAttributeList:
-    type: array
-    items:
-      $ref: '#/definitions/UnmappedAttribute'
   EntityType:
-    type: string
     enum:
       - MEDICATION
       - MEDICAL_CONDITION
       - PROTECTED_HEALTH_INFORMATION
       - TEST_TREATMENT_PROCEDURE
       - ANATOMY
-  Entity:
-    type: object
-    properties:
-      Id:
-        $ref: '#/definitions/Integer'
-        description: ' The numeric identifier for the entity. This is a monotonically increasing id unique within this response rather than a global unique identifier. '
-      BeginOffset:
-        $ref: '#/definitions/Integer'
-        description: ' The 0-based character offset in the input text that shows where the entity begins. The offset returns the UTF-8 code point in the string. '
-      EndOffset:
-        $ref: '#/definitions/Integer'
-        description: ' The 0-based character offset in the input text that shows where the entity ends. The offset returns the UTF-8 code point in the string. '
-      Score:
-        $ref: '#/definitions/Float'
-        description: The level of confidence that Comprehend Medical has in the accuracy of the detection.
-      Text:
-        $ref: '#/definitions/String'
-        description: ' The segment of input text extracted as this entity.'
-      Category:
-        $ref: '#/definitions/EntityType'
-        description: ' The category of the entity.'
-      Type:
-        $ref: '#/definitions/EntitySubType'
-        description: ' Describes the specific type of entity with category of entities. '
-      Traits:
-        $ref: '#/definitions/TraitList'
-        description: Contextual information for the entity
-      Attributes:
-        $ref: '#/definitions/AttributeList'
-        description: ' The extracted attributes that relate to this entity.'
-    description: ' Provides information about an extracted medical entity.'
+    type: string
+  Float:
+    format: float
+    type: number
+  Integer:
+    type: integer
+  InternalServerException: {}
+  InvalidEncodingException: {}
+  InvalidRequestException: {}
+  ServiceUnavailableException: {}
+  String:
+    minLength: 1
+    type: string
+  TextSizeLimitExceededException: {}
+  TooManyRequestsException: {}
   Trait:
-    type: object
+    description: ' Provides contextual information about the extracted entity. '
     properties:
       Name:
         $ref: '#/definitions/AttributeName'
@@ -456,14 +377,93 @@ definitions:
       Score:
         $ref: '#/definitions/Float'
         description: ' The level of confidence that Comprehend Medical has in the accuracy of this trait.'
-    description: ' Provides contextual information about the extracted entity. '
-  UnmappedAttribute:
     type: object
+  TraitList:
+    items:
+      $ref: '#/definitions/Trait'
+    type: array
+  UnmappedAttribute:
+    description: ' An attribute that we extracted, but were unable to relate to an entity. '
     properties:
-      Type:
-        $ref: '#/definitions/EntityType'
-        description: ' The type of the attribute, could be one of the following values: "MEDICATION", "MEDICAL_CONDITION", "ANATOMY", "TEST_AND_TREATMENT_PROCEDURE" or "PERSONAL_HEALTH_INFORMATION". '
       Attribute:
         $ref: '#/definitions/Attribute'
         description: ' The specific attribute that has been extracted but not mapped to an entity. '
-    description: ' An attribute that we extracted, but were unable to relate to an entity. '
+      Type:
+        $ref: '#/definitions/EntityType'
+        description: ' The type of the attribute, could be one of the following values: "MEDICATION", "MEDICAL_CONDITION", "ANATOMY", "TEST_AND_TREATMENT_PROCEDURE" or "PERSONAL_HEALTH_INFORMATION". '
+    type: object
+  UnmappedAttributeList:
+    items:
+      $ref: '#/definitions/UnmappedAttribute'
+    type: array
+x-servers:
+  - description: The ComprehendMedical multi-region endpoint
+    url: 'http://comprehendmedical.{region}.amazonaws.com'
+    variables:
+      region:
+        default: us-east-1
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+  - description: The ComprehendMedical multi-region endpoint
+    url: 'https://comprehendmedical.{region}.amazonaws.com'
+    variables:
+      region:
+        default: us-east-1
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+  - description: The ComprehendMedical endpoint for China (Beijing) and China (Ningxia)
+    url: 'http://comprehendmedical.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        default: cn-north-1
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+  - description: The ComprehendMedical endpoint for China (Beijing) and China (Ningxia)
+    url: 'https://comprehendmedical.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        default: cn-north-1
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1

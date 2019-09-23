@@ -770,15 +770,15 @@ definitions:
         example: jsmith@somewhere.com
         type: string
       customer_firm_name:
-        description: '<strong>Format: </strong>Variable length, up to 64 AN<br><strong>Description: </strong>Customer Business name if applicable.'
+        description: '<strong>Format: </strong>Variable length, up to 64 AN<br><strong>Description: </strong>Customer Business name if applicable.<br><strong>Conditional Requirement: </strong>Either customer first and last name or firm name is required. '
         example: Qualpay
         type: string
       customer_first_name:
-        description: '<strong>Format: </strong>Variable length, up to 32 AN<br><strong>Description: </strong>Customer first name.'
+        description: '<strong>Format: </strong>Variable length, up to 32 AN<br><strong>Description: </strong>Customer first name.<br><strong>Conditional Requirement: </strong>Either customer first and last name or firm name is required. '
         example: Joe
         type: string
       customer_last_name:
-        description: '<strong>Format: </strong>Variable length, up to 32 AN<br><strong>Description: </strong>Customer last name.'
+        description: '<strong>Format: </strong>Variable length, up to 32 AN<br><strong>Description: </strong>Customer last name.<br><strong>Conditional Requirement: </strong>Either customer first and last name or firm name is required. '
         example: Smith
         type: string
       customer_phone:
@@ -790,9 +790,6 @@ definitions:
         items:
           $ref: '#/definitions/ShippingAddress'
         type: array
-    required:
-      - customer_first_name
-      - customer_last_name
     type: object
   PGApiBadResponse:
     properties:
@@ -821,7 +818,7 @@ definitions:
     properties:
       developer_id:
         description: |
-          <strong>Format: </strong>Variable length, up to 16 AN<br><strong>Description: </strong>Use to indicate which company developed the integration to Qualpay or the name of the payment solution that is connected to Qualpay.  Suggested usage is softwareABCv1.0 or companyXYZv2.0.
+          <strong>Format: </strong>Variable length, up to 32 AN<br><strong>Description: </strong>Use to indicate which company developed the integration to Qualpay or the name of the payment solution that is connected to Qualpay.  Suggested usage is softwareABCv1.0 or companyXYZv2.0.
         example: QualpayV1.2
         type: string
       echo_fields:
@@ -902,7 +899,7 @@ definitions:
         type: number
       developer_id:
         description: |
-          <strong>Format: </strong>Variable length, up to 16 AN<br><strong>Description: </strong>Use to indicate which company developed the integration to Qualpay or the name of the payment solution that is connected to Qualpay.  Suggested usage is softwareABCv1.0 or companyXYZv2.0.
+          <strong>Format: </strong>Variable length, up to 32 AN<br><strong>Description: </strong>Use to indicate which company developed the integration to Qualpay or the name of the payment solution that is connected to Qualpay.  Suggested usage is softwareABCv1.0 or companyXYZv2.0.
         example: QualpayV1.2
         type: string
       echo_fields:
@@ -996,8 +993,9 @@ definitions:
   PGApiEmailReceiptRequest:
     properties:
       developer_id:
-        description: '<strong>Format: </strong>Variable length, up to 16 AN<br><strong>Description: </strong>Used to indicate which company developed the integration to the Qualpay Payment Gateway. This may also be used to provide the payment solution name that is connected to the Qualpay Payment Gateway.'
-        example: MyIntegration
+        description: |
+          <strong>Format: </strong>Variable length, up to 32 AN<br><strong>Description: </strong>Use to indicate which company developed the integration to Qualpay or the name of the payment solution that is connected to Qualpay.  Suggested usage is softwareABCv1.0 or companyXYZv2.0.
+        example: QualpayV1.2
         type: string
       email_address:
         description: ' AN<br><strong>Description: </strong>An array of email addresses to which the transaction receipt should be sent to. '
@@ -1073,7 +1071,7 @@ definitions:
         type: number
       developer_id:
         description: |
-          <strong>Format: </strong>Variable length, up to 16 AN<br><strong>Description: </strong>Use to indicate which company developed the integration to Qualpay or the name of the payment solution that is connected to Qualpay.  Suggested usage is softwareABCv1.0 or companyXYZv2.0.
+          <strong>Format: </strong>Variable length, up to 32 AN<br><strong>Description: </strong>Use to indicate which company developed the integration to Qualpay or the name of the payment solution that is connected to Qualpay.  Suggested usage is softwareABCv1.0 or companyXYZv2.0.
         example: QualpayV1.2
         type: string
       echo_fields:
@@ -1223,7 +1221,7 @@ definitions:
         type: string
       developer_id:
         description: |
-          <strong>Format: </strong>Variable length, up to 16 AN<br><strong>Description: </strong>Use to indicate which company developed the integration to Qualpay or the name of the payment solution that is connected to Qualpay.  Suggested usage is softwareABCv1.0 or companyXYZv2.0.
+          <strong>Format: </strong>Variable length, up to 32 AN<br><strong>Description: </strong>Use to indicate which company developed the integration to Qualpay or the name of the payment solution that is connected to Qualpay.  Suggested usage is softwareABCv1.0 or companyXYZv2.0.
         example: QualpayV1.2
         type: string
       echo_fields:
@@ -1399,7 +1397,7 @@ definitions:
         type: string
       developer_id:
         description: |
-          <strong>Format: </strong>Variable length, up to 16 AN<br><strong>Description: </strong>Use to indicate which company developed the integration to Qualpay or the name of the payment solution that is connected to Qualpay.  Suggested usage is softwareABCv1.0 or companyXYZv2.0.
+          <strong>Format: </strong>Variable length, up to 32 AN<br><strong>Description: </strong>Use to indicate which company developed the integration to Qualpay or the name of the payment solution that is connected to Qualpay.  Suggested usage is softwareABCv1.0 or companyXYZv2.0.
         example: QualpayV1.2
         type: string
       echo_fields:
@@ -1630,7 +1628,7 @@ definitions:
         type: string
       developer_id:
         description: |
-          <strong>Format: </strong>Variable length, up to 16 AN<br><strong>Description: </strong>Use to indicate which company developed the integration to Qualpay or the name of the payment solution that is connected to Qualpay.  Suggested usage is softwareABCv1.0 or companyXYZv2.0.
+          <strong>Format: </strong>Variable length, up to 32 AN<br><strong>Description: </strong>Use to indicate which company developed the integration to Qualpay or the name of the payment solution that is connected to Qualpay.  Suggested usage is softwareABCv1.0 or companyXYZv2.0.
         example: QualpayV1.2
         type: string
       echo_fields:
@@ -1734,7 +1732,7 @@ definitions:
     properties:
       developer_id:
         description: |
-          <strong>Format: </strong>Variable length, up to 16 AN<br><strong>Description: </strong>Use to indicate which company developed the integration to Qualpay or the name of the payment solution that is connected to Qualpay.  Suggested usage is softwareABCv1.0 or companyXYZv2.0.
+          <strong>Format: </strong>Variable length, up to 32 AN<br><strong>Description: </strong>Use to indicate which company developed the integration to Qualpay or the name of the payment solution that is connected to Qualpay.  Suggested usage is softwareABCv1.0 or companyXYZv2.0.
         example: QualpayV1.2
         type: string
       echo_fields:

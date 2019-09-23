@@ -326,37 +326,23 @@ paths:
       tags:
         - transferOperations
     get:
-      description: Lists transfer operations.
-      operationId: storagetransfer.transferOperations.list
+      description: |-
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: storagetransfer.transferOperations.get
       parameters:
-        - description: |-
-            Required. A list of query parameters specified as JSON text in the form of: {"project_id":"my_project_id",
-             "job_names":["jobid1","jobid2",...],
-             "operation_names":["opid1","opid2",...],
-             "transfer_statuses":["status1","status2",...]}.
-            Since `job_names`, `operation_names`, and `transfer_statuses` support multiple values, they must be specified with array notation. `project_id` is required. `job_names`, `operation_names`, and `transfer_statuses` are optional. The valid values for `transfer_statuses` are case-insensitive: `IN_PROGRESS`, `PAUSED`, `SUCCESS`, `FAILED`, and `ABORTED`.
-          in: query
-          name: filter
-          type: string
-        - description: Required. The value `transferOperations`.
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - description: The list page size. The max allowed value is 256.
-          in: query
-          name: pageSize
-          type: integer
-        - description: The list page token.
-          in: query
-          name: pageToken
-          type: string
       responses:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/ListOperationsResponse'
+            $ref: '#/definitions/Operation'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -851,25 +837,46 @@ definitions:
       scheduleEndDate:
         $ref: '#/definitions/Date'
         description: |-
-          The last day the recurring transfer will be run. If `scheduleEndDate`
-          is the same as `scheduleStartDate`, the transfer will be executed only
-          once.
+          The last day a transfer runs. Date boundaries are determined relative to
+          UTC time. A job will run once per 24 hours within the following guidelines:
+
+          *   If `scheduleEndDate` and `scheduleStartDate` are the same and in the
+              future relative to UTC, the transfer is executed only one time.
+          *   If `scheduleEndDate` is later than `scheduleStartDate` and
+              `scheduleEndDate` is in the future relative to UTC, the job will
+              run each day at `startTimeOfDay` through `scheduleEndDate`.
       scheduleStartDate:
         $ref: '#/definitions/Date'
         description: |-
-          Required. The first day the recurring transfer is scheduled to run. If
-          `scheduleStartDate` is in the past, the transfer will run for the first
-          time on the following day.
+          Required. The start date of a transfer. Date boundaries are determined
+          relative to UTC time. If `scheduleStartDate` and `startTimeOfDay` are in
+          the past relative to the job's creation time, the transfer starts the day
+          after you schedule the transfer request.
+
+          Note: When starting jobs at or near midnight UTC it is possible that
+          a job will start later than expected. For example, if you send an outbound
+          request on June 1 one millisecond prior to midnight UTC and the Storage
+          Transfer Service server receives the request on June 2, then it will create
+          a TransferJob with `scheduleStartDate` set to June 2 and a `startTimeOfDay`
+          set to midnight UTC. The first scheduled TransferOperation will take place
+          on June 3 at midnight UTC.
       startTimeOfDay:
         $ref: '#/definitions/TimeOfDay'
         description: |-
-          The time in UTC at which the transfer will be scheduled to start in a day.
-          Transfers may start later than this time. If not specified, recurring and
-          one-time transfers that are scheduled to run today will run immediately;
-          recurring transfers that are scheduled to run on a future date will start
-          at approximately midnight UTC on that date. Note that when configuring a
-          transfer with the Cloud Platform Console, the transfer's start time in a
-          day is specified in your local timezone.
+          The time in UTC that a transfer job is scheduled to run. Transfers may
+          start later than this time.
+
+          If `startTimeOfDay` is not specified:
+
+          *   One-time transfers run immediately.
+          *   Recurring transfers run immediately, and each day at midnight UTC,
+              through `scheduleEndDate`.
+
+          If `startTimeOfDay` is specified:
+
+          *   One-time transfers run at the specified time.
+          *   Recurring transfers run at the specified time each day, through
+              `scheduleEndDate`.
     type: object
   Status:
     description: |-

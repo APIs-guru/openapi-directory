@@ -122,12 +122,10 @@ tags:
 paths:
   '/v1beta1/{name}':
     delete:
-      description: Deletes the specified version.
-      operationId: firebasehosting.sites.versions.delete
+      description: Deletes the existing domain mapping on the specified site.
+      operationId: firebasehosting.sites.domains.delete
       parameters:
-        - description: |-
-            Required. The name of the version to be deleted, in the format:
-            <code>sites/<var>site-name</var>/versions/<var>versionID</var></code>
+        - description: Required. The name of the domain association to delete.
           in: path
           name: name
           required: true

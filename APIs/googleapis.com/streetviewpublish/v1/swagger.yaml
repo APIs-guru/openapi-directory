@@ -215,7 +215,7 @@ paths:
           required: true
           type: string
         - description: |-
-            Mask that identifies fields on the photo metadata to update.
+            Required. Mask that identifies fields on the photo metadata to update.
             If not present, the old Photo
             metadata is entirely replaced with the
             new Photo metadata in this request.
@@ -315,7 +315,7 @@ paths:
           required: true
           type: string
         - description: |-
-            Specifies if a download URL for the photo bytes should be returned in the
+            Required. Specifies if a download URL for the photo bytes should be returned in the
             Photo response.
           enum:
             - BASIC
@@ -411,7 +411,7 @@ paths:
       operationId: streetviewpublish.photos.list
       parameters:
         - description: |-
-            The filter expression. For example: `placeId=ChIJj61dQgK6j4AR4GeTYWZsKWw`.
+            Required. The filter expression. For example: `placeId=ChIJj61dQgK6j4AR4GeTYWZsKWw`.
 
             The only filter supported at the moment is `placeId`.
           in: query
@@ -445,7 +445,7 @@ paths:
           name: pageToken
           type: string
         - description: |-
-            Specifies if a download URL for the photos bytes should be returned in the
+            Required. Specifies if a download URL for the photos bytes should be returned in the
             Photos response.
           enum:
             - BASIC
@@ -567,7 +567,7 @@ paths:
           name: photoIds
           type: array
         - description: |-
-            Specifies if a download URL for the photo bytes should be returned in the
+            Required. Specifies if a download URL for the photo bytes should be returned in the
             Photo response.
           enum:
             - BASIC
@@ -1064,7 +1064,7 @@ definitions:
           new metadata.
       updateMask:
         description: |-
-          Mask that identifies fields on the photo metadata to update.
+          Required. Mask that identifies fields on the photo metadata to update.
           If not present, the old Photo
           metadata is entirely replaced with the
           new Photo metadata in this request.

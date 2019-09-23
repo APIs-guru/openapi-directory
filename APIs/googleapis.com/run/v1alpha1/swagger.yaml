@@ -388,8 +388,8 @@ paths:
       tags:
         - namespaces
     get:
-      description: Rpc to get information about a trigger.
-      operationId: run.namespaces.triggers.get
+      description: Rpc to get information about an EventType.
+      operationId: run.namespaces.eventtypes.get
       parameters:
         - description: |-
             The name of the trigger being retrieved. If needed, replace
@@ -403,7 +403,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Trigger'
+            $ref: '#/definitions/EventType'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -686,11 +686,11 @@ paths:
       tags:
         - namespaces
     get:
-      description: Rpc to get information about a revision.
-      operationId: run.namespaces.revisions.get
+      description: Rpc to get information about a configuration.
+      operationId: run.namespaces.configurations.get
       parameters:
         - description: |-
-            The name of the revision being retrieved. If needed, replace
+            The name of the configuration being retrieved. If needed, replace
             {namespace_id} with the project ID.
           in: path
           name: name
@@ -701,7 +701,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Revision'
+            $ref: '#/definitions/Configuration'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -1075,11 +1075,8 @@ paths:
         - namespaces
   '/v1alpha1/{name}':
     delete:
-      description: |-
-        Rpc to delete a service.
-        This will cause the Service to stop serving traffic and will delete the
-        child entities like Routes, Configurations and Revisions.
-      operationId: run.projects.locations.services.delete
+      description: Rpc to delete a domain mapping.
+      operationId: run.projects.locations.domainmappings.delete
       parameters:
         - description: Cloud Run currently ignores this parameter.
           in: query
@@ -1090,7 +1087,7 @@ paths:
           name: kind
           type: string
         - description: |-
-            The name of the service being deleted. If needed, replace
+            The name of the domain mapping being deleted. If needed, replace
             {namespace_id} with the project ID.
           in: path
           name: name
@@ -1127,11 +1124,11 @@ paths:
       tags:
         - projects
     get:
-      description: Rpc to get information about a service.
-      operationId: run.projects.locations.services.get
+      description: Rpc to get information about a domain mapping.
+      operationId: run.projects.locations.domainmappings.get
       parameters:
         - description: |-
-            The name of the service being retrieved. If needed, replace
+            The name of the domain mapping being retrieved. If needed, replace
             {namespace_id} with the project ID.
           in: path
           name: name
@@ -1142,7 +1139,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Service'
+            $ref: '#/definitions/DomainMapping'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -2222,9 +2219,23 @@ definitions:
     properties:
       localObjectReference:
         $ref: '#/definitions/LocalObjectReference'
-        description: The ConfigMap to select from.
+        description: |-
+          This field should not be used directly as it is meant to be inlined
+          directly into the message. Use the "name" field instead.
+      name:
+        description: |-
+          Cloud Run fully managed: not supported
+
+          Cloud Run for Anthos: supported
+
+          The ConfigMap to select from.
+        type: string
       optional:
         description: |-
+          Cloud Run fully managed: not supported
+
+          Cloud Run for Anthos: supported
+
           Specify whether the ConfigMap must be defined
           +optional
         type: boolean
@@ -2248,11 +2259,16 @@ definitions:
       localObjectReference:
         $ref: '#/definitions/LocalObjectReference'
         description: |-
+          This field should not be used directly as it is meant to be inlined
+          directly into the message. Use the "name" field instead.
+      name:
+        description: |-
           Cloud Run fully managed: not supported
 
           Cloud Run on GKE: supported
 
           The ConfigMap to select from.
+        type: string
       optional:
         description: |-
           Cloud Run fully managed: not supported
@@ -3222,6 +3238,11 @@ definitions:
           Details for the regions used during a global call including any failures.
           This is not populated when targeting a specific region.
         type: object
+      unreachable:
+        description: Locations that could not be reached.
+        items:
+          type: string
+        type: array
     type: object
   ListEventTypesResponse:
     description: ListEventTypesResponse is a list of EventType resources.
@@ -4384,9 +4405,23 @@ definitions:
     properties:
       localObjectReference:
         $ref: '#/definitions/LocalObjectReference'
-        description: The Secret to select from.
+        description: |-
+          This field should not be used directly as it is meant to be inlined
+          directly into the message. Use the "name" field instead.
+      name:
+        description: |-
+          Cloud Run fully managed: not supported
+
+          Cloud Run for Anthos: supported
+
+          The Secret to select from.
+        type: string
       optional:
         description: |-
+          Cloud Run fully managed: not supported
+
+          Cloud Run for Anthos: supported
+
           Specify whether the Secret must be defined
           +optional
         type: boolean
@@ -4410,11 +4445,16 @@ definitions:
       localObjectReference:
         $ref: '#/definitions/LocalObjectReference'
         description: |-
+          This field should not be used directly as it is meant to be inlined
+          directly into the message. Use the "name" field instead.
+      name:
+        description: |-
           Cloud Run fully managed: not supported
 
           Cloud Run on GKE: supported
 
           The name of the secret in the pod's namespace to select from.
+        type: string
       optional:
         description: |-
           Cloud Run fully managed: not supported

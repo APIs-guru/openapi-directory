@@ -180,15 +180,13 @@ paths:
       - $ref: '#/parameters/upload_protocol'
   '/v1beta1/{name}':
     get:
-      description: Returns the service configuration and enabled state for a given service.
-      operationId: serviceusage.services.get
+      description: |-
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: serviceusage.operations.get
       parameters:
-        - description: |-
-            Name of the consumer and service to get the `ConsumerState` for.
-
-            An example name would be:
-            `projects/123/services/serviceusage.googleapis.com`
-            where `123` is the project number (not project ID).
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -198,18 +196,18 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Service'
+            $ref: '#/definitions/Operation'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - 'https://www.googleapis.com/auth/service.management'
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - 'https://www.googleapis.com/auth/service.management'
       tags:
-        - services
+        - operations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -1332,6 +1330,22 @@ definitions:
         description: |-
           The field type URL, without the scheme, for message or enumeration
           types. Example: `"type.googleapis.com/google.protobuf.Timestamp"`.
+        type: string
+    type: object
+  GetServiceIdentityResponse:
+    description: Response message for getting service identity.
+    properties:
+      identity:
+        $ref: '#/definitions/ServiceIdentity'
+        description: |-
+          Service identity that service producer can use to access consumer
+          resources. If exists is true, it contains email and unique_id. If exists is
+          false, it contains pre-constructed email and empty unique_id.
+      state:
+        description: Service identity state.
+        enum:
+          - IDENTITY_STATE_UNSPECIFIED
+          - ACTIVE
         type: string
     type: object
   GoogleApiService:
@@ -2793,10 +2807,7 @@ definitions:
         type: string
       duration:
         description: |-
-          Duration of this limit in textual notation. Example: "100s", "24h", "1d".
-          For duration longer than a day, only multiple of days is supported. We
-          support only "100s" and "1d" for now. Additional support will be added in
-          the future. "0" indicates indefinite duration.
+          Duration of this limit in textual notation. Must be "100s" or "1d".
 
           Used by group-based quotas only.
         type: string

@@ -151,6 +151,7 @@ paths:
               properties:
                 appliedScopeType: Shared
                 appliedScopes: null
+                billingPlan: Monthly
                 billingScopeId: /subscriptions/ed3a1871-612d-abcd-a849-c2542a68be83
                 displayName: TestReservationOrder
                 quantity: '1'
@@ -165,10 +166,26 @@ paths:
               body:
                 properties:
                   billingCurrencyTotal:
-                    amount: 466
+                    amount: 46
                     currencyCode: USD
+                  paymentSchedule:
+                    - billingCurrencyTotal:
+                        amount: 40
+                        currencyCode: EUR
+                      dueDate: '2019-05-14'
+                      pricingCurrencyTotal:
+                        amount: 46
+                        currencyCode: USD
+                    - dueDate: '2019-06-14'
+                      pricingCurrencyTotal:
+                        amount: 46
+                        currencyCode: USD
+                    - dueDate: '2019-07-14'
+                      pricingCurrencyTotal:
+                        amount: 46
+                        currencyCode: USD
                   pricingCurrencyTotal:
-                    amount: 466
+                    amount: 46
                     currencyCode: USD
                   reservationOrderId: 6d9cec54-7de8-abcd-9de7-80f5d634f2d2
                   skuDescription: standard_D1
@@ -292,6 +309,7 @@ paths:
                     id: /providers/microsoft.capacity/reservationOrders/1e6407ba-37a5-499f-80ed-a3f0f338e443
                     name: 1e6407ba-37a5-499f-80ed-a3f0f338e443
                     properties:
+                      billingPlan: Monthly
                       createdDateTime: '2017-08-29T21:22:56.8541664Z'
                       displayName: cabri
                       expiryDate: '2018-08-29'
@@ -306,6 +324,7 @@ paths:
                     id: /providers/microsoft.capacity/reservationOrders/1ea6e203-288e-4732-b9e1-da8bbe10c614
                     name: 1ea6e203-288e-4732-b9e1-da8bbe10c614
                     properties:
+                      billingPlan: Monthly
                       createdDateTime: '2017-08-30T12:58:20.526Z'
                       displayName: cabri
                       expiryDate: '2018-08-30'
@@ -320,6 +339,7 @@ paths:
                     id: /providers/microsoft.capacity/reservationOrders/1f14354c-dc12-4c8d-8090-6f295a3a34aa
                     name: 1f14354c-dc12-4c8d-8090-6f295a3a34aa
                     properties:
+                      billingPlan: Monthly
                       createdDateTime: '2017-08-30T03:51:49.8083758Z'
                       displayName: cabri
                       expiryDate: '2018-08-30'
@@ -339,6 +359,11 @@ paths:
       parameters:
         - $ref: '#/parameters/ReservationOrderIdParameter'
         - $ref: '#/parameters/ApiVersionParameter'
+        - description: May be used to expand the planInformation.
+          in: query
+          name: $expand
+          required: false
+          type: string
       responses:
         '200':
           description: Get the details of the `ReservationOrder`.
@@ -363,12 +388,106 @@ paths:
                 id: /providers/microsoft.capacity/reservationOrders/1f14354c-dc12-4c8d-8090-6f295a3a34aa
                 name: 1f14354c-dc12-4c8d-8090-6f295a3a34aa
                 properties:
+                  billingPlan: Monthly
                   createdDateTime: '2017-08-30T03:51:49.8083758Z'
                   displayName: cabri
                   expiryDate: '2018-08-30'
                   originalQuantity: 7
                   provisioningState: Succeeded
                   requestDateTime: '2017-08-30T03:49:19.0252126Z'
+                  reservations:
+                    - id: /providers/microsoft.capacity/reservationOrders/1f14354c-dc12-4c8d-8090-6f295a3a34aa/reservations/c8c926bd-fc5d-4e29-9d43-b68340ac23a6
+                  term: P1Y
+                type: Microsoft.Capacity/reservationOrders
+        GetReservationWithExpandPayments:
+          parameters:
+            $expand: schedule
+            api-version: '2019-04-01'
+            reservationOrderId: a075419f-44cc-497f-b68a-14ee811d48b9
+          responses:
+            '200':
+              body:
+                etag: 7
+                id: /providers/microsoft.capacity/reservationOrders/1f14354c-dc12-4c8d-8090-6f295a3a34aa
+                name: 1f14354c-dc12-4c8d-8090-6f295a3a34aa
+                properties:
+                  billingPlan: Monthly
+                  createdDateTime: '2019-08-30T03:51:49Z'
+                  displayName: cabri
+                  expiryDate: '2018-08-30'
+                  originalQuantity: 7
+                  planInformation:
+                    nextPaymentDueDate: '2019-09-30'
+                    pricingCurrencyTotal:
+                      amount: 466
+                      currencyCode: USD
+                    startDate: '2019-08-30'
+                    transactions:
+                      - billingAccount: '23456'
+                        billingCurrencyTotal:
+                          amount: 466
+                          currencyCode: USD
+                        dueDate: '2019-09-30'
+                        paymentDate: '2019-09-30'
+                        pricingCurrencyTotal:
+                          amount: 466
+                          currencyCode: USD
+                        status: Succeeded
+                      - billingAccount: '23456'
+                        billingCurrencyTotal:
+                          amount: 466
+                          currencyCode: USD
+                        dueDate: '2019-10-30'
+                        extendedStatusInfo:
+                          message: Credit card charge failed.
+                          statusCode: PaymentDeclined
+                        paymentDate: '2019-10-30'
+                        pricingCurrencyTotal:
+                          amount: 466
+                          currencyCode: USD
+                        status: Failed
+                      - billingAccount: '23456'
+                        billingCurrencyTotal:
+                          amount: 466
+                          currencyCode: USD
+                        dueDate: '2019-10-31'
+                        paymentDate: '2019-10-31'
+                        pricingCurrencyTotal:
+                          amount: 466
+                          currencyCode: USD
+                        status: Succeeded
+                      - billingAccount: '23456'
+                        billingCurrencyTotal:
+                          amount: 466
+                          currencyCode: USD
+                        dueDate: '2019-11-30'
+                        paymentDate: '2019-11-30'
+                        pricingCurrencyTotal:
+                          amount: 466
+                          currencyCode: USD
+                        status: Succeeded
+                      - billingAccount: '23456'
+                        billingCurrencyTotal:
+                          amount: 466
+                          currencyCode: USD
+                        dueDate: '2019-07-14'
+                        paymentDate: '2019-06-14'
+                        pricingCurrencyTotal:
+                          amount: 466
+                          currencyCode: USD
+                        status: Scheduled
+                      - billingAccount: '23456'
+                        billingCurrencyTotal:
+                          amount: 466
+                          currencyCode: USD
+                        dueDate: '2019-06-14'
+                        paymentDate: '2019-08-14'
+                        pricingCurrencyTotal:
+                          amount: 466
+                          currencyCode: USD
+                        status: Scheduled
+                  provisioningState: Succeeded
+                  requestDateTime: '2019-08-30T03:49:19Z'
                   reservations:
                     - id: /providers/microsoft.capacity/reservationOrders/1f14354c-dc12-4c8d-8090-6f295a3a34aa/reservations/c8c926bd-fc5d-4e29-9d43-b68340ac23a6
                   term: P1Y
@@ -405,6 +524,7 @@ paths:
               properties:
                 appliedScopeType: Shared
                 appliedScopes: null
+                billingPlan: Monthly
                 billingScopeId: /subscriptions/ed3a1871-612d-abcd-a849-c2542a68be83
                 displayName: TestReservationOrder
                 quantity: '1'
@@ -423,6 +543,7 @@ paths:
                 id: /providers/microsoft.capacity/reservationOrders/1f14354c-dc12-4c8d-8090-6f295a3a34aa
                 name: 1f14354c-dc12-4c8d-8090-6f295a3a34aa
                 properties:
+                  billingPlan: Monthly
                   createdDateTime: '2017-08-30T03:51:49.8083758Z'
                   displayName: cabri
                   expiryDate: '2018-08-30'
@@ -439,6 +560,7 @@ paths:
                 id: /providers/microsoft.capacity/reservationOrders/1f14354c-dc12-4c8d-8090-6f295a3a34aa
                 name: 1f14354c-dc12-4c8d-8090-6f295a3a34aa
                 properties:
+                  billingPlan: Monthly
                   createdDateTime: '2017-08-30T03:51:49.8083758Z'
                   displayName: cabri
                   expiryDate: '2018-08-30'
@@ -497,6 +619,7 @@ paths:
                     appliedScopeType: Single
                     appliedScopes:
                       - /subscriptions/98df3792-7962-4f18-8be2-d5576f122de3
+                    billingPlan: Monthly
                     billingScopeId: /subscriptions/19376483-64b8-49e4-a931-d5248828720a
                     displayName: cabri_test
                     effectiveDateTime: '2017-09-22T22:46:32.7632798Z'
@@ -526,6 +649,7 @@ paths:
                     appliedScopeType: Single
                     appliedScopes:
                       - /subscriptions/98df3792-7962-4f18-8be2-d5576f122de3
+                    billingPlan: Monthly
                     billingScopeId: /subscriptions/19376483-64b8-49e4-a931-d5248828720a
                     displayName: cabri_test
                     effectiveDateTime: '2017-09-22T22:46:32.7632798Z'
@@ -555,6 +679,7 @@ paths:
                     appliedScopeType: Single
                     appliedScopes:
                       - /subscriptions/98df3792-7962-4f18-8be2-d5576f122de3
+                    billingPlan: Monthly
                     billingScopeId: /subscriptions/19376483-64b8-49e4-a931-d5248828720a
                     displayName: cabri_test
                     effectiveDateTime: '2017-09-22T22:46:32.7632798Z'
@@ -575,6 +700,8 @@ paths:
                   type: Microsoft.Capacity/reservationOrders/reservations
             '202': {}
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: location
   '/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations':
     get:
       description: List `Reservation`s within a single `ReservationOrder`.
@@ -611,6 +738,7 @@ paths:
                       appliedScopeType: Single
                       appliedScopes:
                         - /subscriptions/98df3792-7962-4f18-8be2-d5576f122de3
+                      billingPlan: Monthly
                       billingScopeId: /subscriptions/19376483-64b8-49e4-a931-d5248828720a
                       displayName: cabri_test
                       effectiveDateTime: '2017-09-22T01:00:30.9253826Z'
@@ -640,6 +768,7 @@ paths:
                       appliedScopeType: Single
                       appliedScopes:
                         - /subscriptions/98df3792-7962-4f18-8be2-d5576f122de3
+                      billingPlan: Monthly
                       billingScopeId: /subscriptions/19376483-64b8-49e4-a931-d5248828720a
                       displayName: cabri_test
                       effectiveDateTime: '2017-09-22T22:46:32.7632798Z'
@@ -669,6 +798,7 @@ paths:
                       appliedScopeType: Single
                       appliedScopes:
                         - /subscriptions/98df3792-7962-4f18-8be2-d5576f122de3
+                      billingPlan: Monthly
                       billingScopeId: /subscriptions/19376483-64b8-49e4-a931-d5248828720a
                       displayName: cabri_test
                       effectiveDateTime: '2017-09-22T22:46:32.7632798Z'
@@ -698,6 +828,7 @@ paths:
                       appliedScopeType: Single
                       appliedScopes:
                         - /subscriptions/98df3792-7962-4f18-8be2-d5576f122de3
+                      billingPlan: Monthly
                       billingScopeId: /subscriptions/19376483-64b8-49e4-a931-d5248828720a
                       displayName: cabri_test
                       effectiveDateTime: '2017-09-22T22:46:32.7632798Z'
@@ -757,6 +888,7 @@ paths:
                   appliedScopeType: Single
                   appliedScopes:
                     - /subscriptions/98df3792-7962-4f18-8be2-d5576f122de3
+                  billingPlan: Monthly
                   billingScopeId: /subscriptions/19376483-64b8-49e4-a931-d5248828720a
                   displayName: cabri_test
                   effectiveDateTime: '2017-09-22T22:46:32.7632798Z'
@@ -841,6 +973,7 @@ paths:
                 name: 276e7ae4-84d0-4da6-ab4b-d6b94f3557da/6ef59113-3482-40da-8d79-787f823e34bc
                 properties:
                   appliedScopeType: Shared
+                  billingPlan: Monthly
                   billingScopeId: /subscriptions/19376483-64b8-49e4-a931-d5248828720a
                   displayName: cabri_test
                   effectiveDateTime: '2017-09-22T23:57:48.1891638Z'
@@ -937,6 +1070,7 @@ paths:
                     name: 276e7ae4-84d0-4da6-ab4b-d6b94f3557da/6ef59113-3482-40da-8d79-787f823e34bc/4
                     properties:
                       appliedScopeType: Shared
+                      billingPlan: Monthly
                       displayName: cabri_test
                       effectiveDateTime: '2017-09-22T23:57:48.1891638Z'
                       expiryDate: '2018-09-22'
@@ -961,6 +1095,7 @@ paths:
                       appliedScopeType: Single
                       appliedScopes:
                         - /subscriptions/98df3792-7962-4f18-8be2-d5576f122de3
+                      billingPlan: Monthly
                       displayName: cabri_test
                       effectiveDateTime: '2017-09-22T22:46:32.7632798Z'
                       expiryDate: '2018-09-22'
@@ -988,6 +1123,7 @@ paths:
                       appliedScopeType: Single
                       appliedScopes:
                         - /subscriptions/98df3792-7962-4f18-8be2-d5576f122de3
+                      billingPlan: Monthly
                       displayName: cabri_test
                       effectiveDateTime: '2017-09-22T22:46:32.7632798Z'
                       expiryDate: '2018-09-22'
@@ -1076,6 +1212,7 @@ paths:
                     appliedScopeType: Single
                     appliedScopes:
                       - /subscriptions/98df3792-7962-4f18-8be2-d5576f122de3
+                    billingPlan: Monthly
                     billingScopeId: /subscriptions/19376483-64b8-49e4-a931-d5248828720a
                     displayName: cabri_test
                     effectiveDateTime: '2017-09-22T01:00:30.9253826Z'
@@ -1100,6 +1237,7 @@ paths:
                     appliedScopeType: Single
                     appliedScopes:
                       - /subscriptions/98df3792-7962-4f18-8be2-d5576f122de3
+                    billingPlan: Monthly
                     billingScopeId: /subscriptions/19376483-64b8-49e4-a931-d5248828720a
                     displayName: cabri_test
                     effectiveDateTime: '2017-09-22T01:00:30.9253826Z'
@@ -1124,6 +1262,7 @@ paths:
                     appliedScopeType: Single
                     appliedScopes:
                       - /subscriptions/98df3792-7962-4f18-8be2-d5576f122de3
+                    billingPlan: Monthly
                     billingScopeId: /subscriptions/19376483-64b8-49e4-a931-d5248828720a
                     displayName: cabri_test
                     effectiveDateTime: '2017-09-22T01:00:30.9253826Z'
@@ -1147,9 +1286,11 @@ paths:
                   type: Microsoft.Capacity/reservationOrders/reservations
             '202': {}
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: location
   '/subscriptions/{subscriptionId}/providers/Microsoft.Capacity/appliedReservations':
     get:
-      description: Get applicable `Reservation`s that are applied to this subscription.
+      description: Get applicable `Reservation`s that are applied to this subscription or a resource group under this subscription.
       operationId: GetAppliedReservationList
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
@@ -1225,7 +1366,14 @@ paths:
           responses:
             '200':
               body:
-                - locations:
+                - billingPlans:
+                    - P1Y:
+                        - Upfront
+                        - Monthly
+                    - P3Y:
+                        - Upfront
+                        - Monthly
+                  locations:
                     - eastus
                   name: Standard_DS5_v2
                   resourceType: VirtualMachines
@@ -1244,7 +1392,14 @@ paths:
                   terms:
                     - P1Y
                     - P3Y
-                - locations:
+                - billingPlans:
+                    - P1Y:
+                        - Upfront
+                        - Monthly
+                    - P3Y:
+                        - Upfront
+                        - Monthly
+                  locations:
                     - eastus
                   name: Standard_D1
                   resourceType: VirtualMachines
@@ -1271,7 +1426,14 @@ paths:
                   terms:
                     - P1Y
                     - P3Y
-                - locations:
+                - billingPlans:
+                    - P1Y:
+                        - Upfront
+                        - Monthly
+                    - P3Y:
+                        - Upfront
+                        - Monthly
+                  locations:
                     - eastus
                   name: Standard_F2
                   resourceType: VirtualMachines
@@ -1366,6 +1528,10 @@ definitions:
       isBillingPartnerManaged:
         description: True if billing is managed by Microsoft Partner. Used only for CSP accounts.
         type: boolean
+      paymentSchedule:
+        items:
+          $ref: '#/definitions/PaymentDetail'
+        type: array
       pricingCurrencyTotal:
         description: Amount that Microsoft uses for record. Used during refund for calculating refund limit. Tax is not included.
         properties:
@@ -1386,6 +1552,19 @@ definitions:
     type: object
   Catalog:
     properties:
+      billingPlans:
+        description: The billing plan options available for this SKU.
+        items:
+          additionalProperties:
+            items:
+              $ref: '#/definitions/ReservationBillingPlan'
+            type: array
+          properties:
+            name:
+              $ref: '#/definitions/ReservationTerm'
+              description: The term for the billing SKU is available for.
+          type: object
+        type: array
       locations:
         items:
           description: 'The set of locations that the SKU is available. If not specified, the SKU is available in all locations.'
@@ -1576,6 +1755,51 @@ definitions:
             $ref: '#/definitions/PurchaseRequest'
         type: object
     type: object
+  PaymentDetail:
+    description: Information about payment related to a reservation order.
+    properties:
+      billingAccount:
+        description: Shows the Account that is charged for this payment.
+        type: string
+      billingCurrencyTotal:
+        $ref: '#/definitions/Price'
+        description: Amount charged in Billing currency. Tax not included. Is null for future payments
+      dueDate:
+        description: Date when the payment needs to be done.
+        format: date
+        type: string
+      extendedStatusInfo:
+        $ref: '#/definitions/ExtendedStatusInfo'
+      paymentDate:
+        description: Date when the transaction is completed. Is null when it is scheduled.
+        format: date
+        type: string
+      pricingCurrencyTotal:
+        $ref: '#/definitions/Price'
+        description: Amount in pricing currency. Tax not included.
+      status:
+        $ref: '#/definitions/PaymentStatus'
+    type: object
+  PaymentStatus:
+    description: 'Describes whether the payment is completed, failed, cancelled or scheduled in the future.'
+    enum:
+      - Succeeded
+      - Failed
+      - Scheduled
+      - Cancelled
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: PaymentStatus
+  Price:
+    properties:
+      amount:
+        format: double
+        type: number
+      currencyCode:
+        description: The ISO 4217 3-letter currency code for the currency used by this purchase record.
+        type: string
+    type: object
   Properties:
     properties:
       properties:
@@ -1598,6 +1822,8 @@ definitions:
         $ref: '#/definitions/AppliedScopeType'
       appliedScopes:
         $ref: '#/definitions/AppliedScopes'
+      billingPlan:
+        $ref: '#/definitions/ReservationBillingPlan'
       billingScopeId:
         $ref: '#/definitions/BillingScopeId'
       displayName:
@@ -1643,6 +1869,15 @@ definitions:
       purchaseProperties:
         $ref: '#/definitions/PurchaseRequest'
     type: object
+  ReservationBillingPlan:
+    description: Represent the billing plans.
+    enum:
+      - Upfront
+      - Monthly
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: ReservationBillingPlan
   ReservationList:
     properties:
       nextLink:
@@ -1664,6 +1899,25 @@ definitions:
           type: string
         type: array
     type: object
+  ReservationOrderBillingPlanInformation:
+    description: Information describing the type of billing plan for this reservation.
+    properties:
+      nextPaymentDueDate:
+        description: 'For recurring billing plans, indicates the date when next payment will be processed. Null when total is paid off.'
+        format: date
+        type: string
+      pricingCurrencyTotal:
+        $ref: '#/definitions/Price'
+        description: Amount of money to be paid for the Order. Tax is not included.
+      startDate:
+        description: Date when the billing plan has started.
+        format: date
+        type: string
+      transactions:
+        items:
+          $ref: '#/definitions/PaymentDetail'
+        type: array
+    type: object
   ReservationOrderList:
     properties:
       nextLink:
@@ -1676,6 +1930,8 @@ definitions:
     type: object
   ReservationOrderProperties:
     properties:
+      billingPlan:
+        $ref: '#/definitions/ReservationBillingPlan'
       createdDateTime:
         description: This is the DateTime when the reservation was created.
         format: date-time
@@ -1689,6 +1945,8 @@ definitions:
         type: string
       originalQuantity:
         $ref: '#/definitions/ReservationQuantity'
+      planInformation:
+        $ref: '#/definitions/ReservationOrderBillingPlanInformation'
       provisioningState:
         description: Current state of the reservation.
         type: string
@@ -1730,6 +1988,8 @@ definitions:
         $ref: '#/definitions/AppliedScopeType'
       appliedScopes:
         $ref: '#/definitions/AppliedScopes'
+      billingPlan:
+        $ref: '#/definitions/ReservationBillingPlan'
       billingScopeId:
         $ref: '#/definitions/BillingScopeId'
       displayName:

@@ -187,7 +187,7 @@ paths:
         '202':
           description: The request was successful; the operation will complete asynchronously.
         '204':
-          description: The scope map does not exist in the subscription.
+          description: The scopemap does not exist in the subscription.
       tags:
         - ScopeMaps
       x-ms-examples:
@@ -810,7 +810,7 @@ definitions:
     description: The password that will be used for authenticating the token of a container registry.
     properties:
       creationTime:
-        description: The password created datetime of the password.
+        description: The creation datetime of the password.
         format: date-time
         type: string
       expiry:
@@ -870,7 +870,7 @@ definitions:
         type: string
         x-ms-enum:
           modelAsString: true
-          name: Status
+          name: TokenStatus
     type: object
   TokenUpdateParameters:
     description: The parameters for updating a token.

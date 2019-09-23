@@ -576,28 +576,31 @@ definitions:
         description: 'The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).'
         type: object
       existingClusterId:
-        description: 'The id of an existing cluster that will be used for all runs of this job. Type: string (or Expression with resultType string).'
+        description: 'The id of an existing interactive cluster that will be used for all runs of this activity. Type: string (or Expression with resultType string).'
+        type: object
+      instancePoolId:
+        description: 'The id of an existing instance pool that will be used for all runs of this activity. Type: string (or Expression with resultType string).'
         type: object
       newClusterCustomTags:
         additionalProperties:
           description: 'Type: string (or Expression with resultType string).'
           type: object
-        description: Additional tags for cluster resources.
+        description: Additional tags for cluster resources. This property is ignored in instance pool configurations.
         type: object
       newClusterDriverNodeType:
-        description: 'The driver node type for the new cluster. Type: string (or Expression with resultType string).'
+        description: 'The driver node type for the new job cluster. This property is ignored in instance pool configurations. Type: string (or Expression with resultType string).'
         type: object
       newClusterEnableElasticDisk:
-        description: 'Enable the elastic disk on the new cluster. Type: boolean (or Expression with resultType boolean).'
+        description: 'Enable the elastic disk on the new cluster. This property is now ignored, and takes the default elastic disk behavior in Databricks (elastic disks are always enabled). Type: boolean (or Expression with resultType boolean).'
         type: object
       newClusterInitScripts:
         description: 'User-defined initialization scripts for the new cluster. Type: array of strings (or Expression with resultType array of strings).'
         type: object
       newClusterNodeType:
-        description: 'The node types of new cluster. Type: string (or Expression with resultType string).'
+        description: 'The node type of the new job cluster. This property is required if newClusterVersion is specified and instancePoolId is not specified. If instancePoolId is specified, this property is ignored. Type: string (or Expression with resultType string).'
         type: object
       newClusterNumOfWorker:
-        description: 'Number of worker nodes that new cluster should have. A string formatted Int32, like ''1'' means numOfWorker is 1 or ''1:10'' means auto-scale from 1 as min and 10 as max. Type: string (or Expression with resultType string).'
+        description: 'If not using an existing interactive cluster, this specifies the number of worker nodes to use for the new job cluster or instance pool. For new job clusters, this a string-formatted Int32, like ''1'' means numOfWorker is 1 or ''1:10'' means auto-scale from 1 (min) to 10 (max). For instance pools, this is a string-formatted Int32, and can only specify a fixed number of worker nodes, such as ''2''. Required if newClusterVersion is specified. Type: string (or Expression with resultType string).'
         type: object
       newClusterSparkConf:
         additionalProperties:
@@ -612,7 +615,7 @@ definitions:
         description: 'A set of optional, user-specified Spark environment variables key-value pairs.'
         type: object
       newClusterVersion:
-        description: 'The Spark version of new cluster. Type: string (or Expression with resultType string).'
+        description: 'If not using an existing interactive cluster, this specifies the Spark version of a new job cluster or instance pool nodes created for each run of this activity. Required if instancePoolId is specified. Type: string (or Expression with resultType string).'
         type: object
     required:
       - domain

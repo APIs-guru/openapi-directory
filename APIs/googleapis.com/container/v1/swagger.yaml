@@ -3108,7 +3108,7 @@ definitions:
       acceleratorType:
         description: |-
           The accelerator type resource name. List of supported accelerators
-          [here](/compute/docs/gpus/#Introduction)
+          [here](/compute/docs/gpus)
         type: string
     type: object
   AddonsConfig:
@@ -3505,6 +3505,9 @@ definitions:
           The desired image type for the node pool.
           NOTE: Set the "desired_node_pool" field as well.
         type: string
+      desiredIntraNodeVisibilityConfig:
+        $ref: '#/definitions/IntraNodeVisibilityConfig'
+        description: The desired config of Intra-node visibility.
       desiredLocations:
         description: |-
           The desired list of Google Compute Engine
@@ -3713,6 +3716,11 @@ definitions:
   GetJSONWebKeysResponse:
     description: GetJSONWebKeysResponse is a valid JSON Web Key Set as specififed in rfc 7517
     properties:
+      cacheHeader:
+        $ref: '#/definitions/HttpCacheControlResponseHeader'
+        description: |-
+          OnePlatform automatically extracts this field and uses it to set the HTTP
+          Cache-Control header.
       keys:
         description: |-
           The public component of the keys used by the cluster to sign token
@@ -3726,6 +3734,11 @@ definitions:
       GetOpenIDConfigResponse is an OIDC discovery document for the cluster.
       See the OpenID Connect Discovery 1.0 specification for details.
     properties:
+      cacheHeader:
+        $ref: '#/definitions/HttpCacheControlResponseHeader'
+        description: |-
+          OnePlatform automatically extracts this field and uses it to set the HTTP
+          Cache-Control header.
       claims_supported:
         description: Supported claims.
         items:
@@ -3770,6 +3783,20 @@ definitions:
           When enabled, it ensures that a Heapster pod is running in the cluster,
           which is also used by the Cloud Monitoring service.
         type: boolean
+    type: object
+  HttpCacheControlResponseHeader:
+    description: 'RFC-2616: cache control support'
+    properties:
+      age:
+        description: '14.6 response cache age, in seconds since the response is generated'
+        format: int64
+        type: string
+      directive:
+        description: 14.9 request and response directives
+        type: string
+      expires:
+        description: '14.21 response cache expires, in RFC 1123 date format'
+        type: string
     type: object
   HttpLoadBalancing:
     description: |-
@@ -3900,6 +3927,15 @@ definitions:
         type: string
       useIpAliases:
         description: Whether alias IPs will be used for pod IPs in the cluster.
+        type: boolean
+    type: object
+  IntraNodeVisibilityConfig:
+    description: |-
+      IntraNodeVisibilityConfig contains the desired config of the intra-node
+      visibility on this cluster.
+    properties:
+      enabled:
+        description: Enables intra node visibility for this cluster.
         type: boolean
     type: object
   Jwk:
@@ -4098,6 +4134,11 @@ definitions:
   NetworkConfig:
     description: NetworkConfig reports the relative names of network & subnetwork.
     properties:
+      enableIntraNodeVisibility:
+        description: |-
+          Whether Intra-node visibility is enabled for this cluster.
+          This makes same node pod to pod traffic visible for VPC network.
+        type: boolean
       network:
         description: |-
           Output only. The relative name of the Google Compute Engine
@@ -4184,9 +4225,9 @@ definitions:
         description: |-
           The number of local SSD disks to be attached to the node.
 
-          The limit for this value is dependant upon the maximum number of
+          The limit for this value is dependent upon the maximum number of
           disks available on a machine per zone. See:
-          https://cloud.google.com/compute/docs/disks/local-ssd#local_ssd_limits
+          https://cloud.google.com/compute/docs/disks/local-ssd
           for more information.
         format: int32
         type: integer

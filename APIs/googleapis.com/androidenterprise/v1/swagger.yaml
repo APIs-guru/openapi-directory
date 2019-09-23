@@ -710,7 +710,7 @@ paths:
         - products
   '/enterprises/{enterpriseId}/products/{productId}/managedConfigurationsSettings':
     get:
-      description: Lists all the managed configurations settings for the specified app. Only the ID and the name is set.
+      description: Lists all the managed configurations settings for the specified app.
       operationId: androidenterprise.managedconfigurationssettings.list
       parameters:
         - description: The ID of the enterprise.
@@ -3715,11 +3715,6 @@ definitions:
         description: 'The last updated time of the managed configuration settings in milliseconds since 1970-01-01T00:00:00Z.'
         format: int64
         type: string
-      managedProperty:
-        description: The set of managed properties for this configuration.
-        items:
-          $ref: '#/definitions/ManagedProperty'
-        type: array
       mcmId:
         description: The ID of the managed configurations settings.
         type: string

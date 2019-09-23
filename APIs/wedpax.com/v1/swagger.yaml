@@ -19,6 +19,117 @@ securityDefinitions:
     name: Authorization
     type: apiKey
 paths:
+  /api/ServiceQuery/Get:
+    get:
+      consumes: []
+      parameters:
+        - format: int32
+          in: query
+          name: CurrentPage
+          required: false
+          type: integer
+        - format: int32
+          in: query
+          name: PageSize
+          required: false
+          type: integer
+        - in: query
+          name: Sorting.PropertyName
+          required: false
+          type: string
+        - in: query
+          name: Sorting.OrderByDescending
+          required: false
+          type: boolean
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PagedResultDto[WeddingVendorDto]'
+      tags:
+        - ServiceQuery
+  /api/ServiceQuery/Search:
+    get:
+      consumes: []
+      operationId: Search
+      parameters:
+        - in: query
+          name: City
+          required: false
+          type: string
+        - format: int32
+          in: query
+          name: CatgoryId
+          required: false
+          type: integer
+        - format: int32
+          in: query
+          name: PageNumber
+          required: false
+          type: integer
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/ServiceListModel'
+            type: array
+            uniqueItems: false
+      tags:
+        - ServiceQuery
+  /api/ServiceQuery/UserService:
+    get:
+      consumes: []
+      operationId: UserService
+      parameters:
+        - format: int64
+          in: query
+          name: serviceId
+          required: false
+          type: integer
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateWeddingVendorDto'
+      tags:
+        - ServiceQuery
+  /api/ServiceQuery/UserServices:
+    get:
+      consumes: []
+      operationId: UserServices
+      parameters:
+        - format: int64
+          in: query
+          name: userId
+          required: false
+          type: integer
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/UserServicesDto'
+            type: array
+            uniqueItems: false
+      tags:
+        - ServiceQuery
   /api/TokenAuth/Authenticate:
     post:
       consumes:
@@ -102,6 +213,26 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/LoginModel'
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AuthenticateResultModel'
+      tags:
+        - TokenAuth
+  /api/TokenAuth/RefreshToken:
+    get:
+      consumes: []
+      operationId: RefreshToken
+      parameters:
+        - in: query
+          name: userName
+          required: false
+          type: string
       produces:
         - text/plain
         - application/json
@@ -1260,31 +1391,6 @@ paths:
             $ref: '#/definitions/UserDto'
       tags:
         - User
-  /api/services/app/WeddingVendorServices/AddVendorFacility:
-    post:
-      consumes:
-        - application/json-patch+json
-        - application/json
-        - text/json
-        - application/*+json
-      operationId: AddVendorFacility
-      parameters:
-        - in: body
-          name: model
-          required: false
-          schema:
-            $ref: '#/definitions/WeddingVendorAddFacilityDto'
-      produces:
-        - text/plain
-        - application/json
-        - text/json
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/WeddingVendorDto'
-      tags:
-        - WeddingVendorServices
   /api/services/app/WeddingVendorServices/Create:
     post:
       consumes:
@@ -1377,65 +1483,6 @@ paths:
             $ref: '#/definitions/PagedResultDto[WeddingVendorDto]'
       tags:
         - WeddingVendorServices
-  /api/services/app/WeddingVendorServices/MapToListDto:
-    post:
-      consumes:
-        - application/json-patch+json
-        - application/json
-        - text/json
-        - application/*+json
-      operationId: MapToListDto
-      parameters:
-        - in: body
-          name: model
-          required: false
-          schema:
-            items:
-              $ref: '#/definitions/WeddingVendor'
-            type: array
-            uniqueItems: false
-      produces:
-        - text/plain
-        - application/json
-        - text/json
-      responses:
-        '200':
-          description: Success
-          schema:
-            items:
-              $ref: '#/definitions/ServiceListModel'
-            type: array
-            uniqueItems: false
-      tags:
-        - WeddingVendorServices
-  /api/services/app/WeddingVendorServices/ServiceSearch:
-    post:
-      consumes:
-        - application/json-patch+json
-        - application/json
-        - text/json
-        - application/*+json
-      operationId: ServiceSearch
-      parameters:
-        - in: body
-          name: searchModel
-          required: false
-          schema:
-            $ref: '#/definitions/ServiceSearchModel'
-      produces:
-        - text/plain
-        - application/json
-        - text/json
-      responses:
-        '200':
-          description: Success
-          schema:
-            items:
-              $ref: '#/definitions/ServiceListModel'
-            type: array
-            uniqueItems: false
-      tags:
-        - WeddingVendorServices
   /api/services/app/WeddingVendorServices/Update:
     put:
       consumes:
@@ -1458,31 +1505,6 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/WeddingVendorDto'
-      tags:
-        - WeddingVendorServices
-  /api/services/app/WeddingVendorServices/Vendors:
-    post:
-      consumes:
-        - application/json-patch+json
-        - application/json
-        - text/json
-        - application/*+json
-      operationId: Vendors
-      parameters:
-        - in: body
-          name: model
-          required: false
-          schema:
-            $ref: '#/definitions/PagingDto'
-      produces:
-        - text/plain
-        - application/json
-        - text/json
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/PagedResultDto[WeddingVendorDto]'
       tags:
         - WeddingVendorServices
 definitions:
@@ -1523,6 +1545,11 @@ definitions:
       expireInSeconds:
         format: int32
         type: integer
+      roles:
+        items:
+          type: string
+        type: array
+        uniqueItems: false
       userId:
         format: int64
         type: integer
@@ -1550,21 +1577,13 @@ definitions:
         type: integer
       images:
         items:
-          $ref: '#/definitions/VendorImagesMap'
+          $ref: '#/definitions/ServiceImages'
         type: array
         uniqueItems: false
       mainImage:
         type: string
-      registerStep:
-        enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          - 4
-          - 5
-        format: int32
-        type: integer
+      phone:
+        type: string
       status:
         type: boolean
       title:
@@ -1699,7 +1718,15 @@ definitions:
       description:
         minLength: 20
         type: string
+      lat:
+        format: double
+        type: number
+      lng:
+        format: double
+        type: number
       mainImage:
+        type: string
+      phone:
         type: string
       serviceFacilities:
         items:
@@ -1707,9 +1734,6 @@ definitions:
           type: integer
         type: array
         uniqueItems: false
-      serviceId:
-        format: int32
-        type: integer
       title:
         maxLength: 60
         minLength: 3
@@ -1792,8 +1816,6 @@ definitions:
         format: double
         type: number
       locality:
-        type: string
-      phone:
         type: string
       place:
         type: string
@@ -2029,17 +2051,6 @@ definitions:
         format: int32
         type: integer
     type: object
-  PagingDto:
-    properties:
-      currentPage:
-        format: int32
-        type: integer
-      pageSize:
-        format: int32
-        type: integer
-      sorting:
-        $ref: '#/definitions/SortModel'
-    type: object
   PermissionDto:
     properties:
       description:
@@ -2251,23 +2262,6 @@ definitions:
     required:
       - title
     type: object
-  ServiceFacility:
-    properties:
-      icon:
-        readOnly: true
-        type: string
-      id:
-        format: int32
-        type: integer
-      serviceFacilities:
-        items:
-          $ref: '#/definitions/ServiceFacilityMap'
-        type: array
-        uniqueItems: false
-      title:
-        readOnly: true
-        type: string
-    type: object
   ServiceFacilityCreateDto:
     properties:
       icon:
@@ -2287,19 +2281,6 @@ definitions:
       title:
         type: string
     type: object
-  ServiceFacilityMap:
-    properties:
-      facility:
-        $ref: '#/definitions/ServiceFacility'
-      facilityId:
-        format: int32
-        type: integer
-      vendorId:
-        format: int64
-        type: integer
-      weddingVendor:
-        $ref: '#/definitions/WeddingVendor'
-    type: object
   ServiceFacilityUpdateDto:
     properties:
       icon:
@@ -2314,6 +2295,8 @@ definitions:
     properties:
       alt:
         type: string
+      baseServices:
+        $ref: '#/definitions/BaseServices'
       creationTime:
         format: date-time
         type: string
@@ -2322,6 +2305,9 @@ definitions:
         type: integer
       isMain:
         type: boolean
+      serviceId:
+        format: int64
+        type: integer
       state:
         type: boolean
       thumbUrl:
@@ -2330,14 +2316,6 @@ definitions:
         type: string
       url:
         type: string
-      vendorImagesMap:
-        items:
-          $ref: '#/definitions/VendorImagesMap'
-        type: array
-        uniqueItems: false
-      venorId:
-        format: int64
-        type: integer
     required:
       - url
       - thumbUrl
@@ -2378,14 +2356,6 @@ definitions:
       title:
         type: string
     type: object
-  ServiceSearchModel:
-    properties:
-      catgoryId:
-        format: int32
-        type: integer
-      city:
-        type: string
-    type: object
   Setting:
     properties:
       creationTime:
@@ -2419,13 +2389,6 @@ definitions:
         type: string
     required:
       - name
-    type: object
-  SortModel:
-    properties:
-      orderByDescending:
-        type: boolean
-      propertyName:
-        type: string
     type: object
   TenantDto:
     properties:
@@ -2467,17 +2430,41 @@ definitions:
       capacity:
         format: int32
         type: integer
+      categoryId:
+        format: int32
+        type: integer
       description:
-        maxLength: 300
         minLength: 20
         type: string
+      facilityDtos:
+        items:
+          $ref: '#/definitions/ServiceFacilityDto'
+        type: array
+        uniqueItems: false
       id:
         format: int64
         type: integer
+      lat:
+        format: double
+        type: number
+      lng:
+        format: double
+        type: number
       mainImage:
         type: string
+      phone:
+        type: string
+      title:
+        maxLength: 60
+        minLength: 3
+        type: string
+      userId:
+        format: int64
+        type: integer
     required:
+      - title
       - description
+      - categoryId
     type: object
   User:
     properties:
@@ -2787,6 +2774,18 @@ definitions:
         format: int64
         type: integer
     type: object
+  UserServicesDto:
+    properties:
+      mainImage:
+        type: string
+      serviceId:
+        format: int64
+        type: integer
+      status:
+        type: boolean
+      title:
+        type: string
+    type: object
   UserToken:
     properties:
       expireDate:
@@ -2813,87 +2812,6 @@ definitions:
         maxLength: 512
         minLength: 0
         type: string
-    type: object
-  VendorImagesMap:
-    properties:
-      baseServices:
-        $ref: '#/definitions/BaseServices'
-      imageId:
-        format: int64
-        type: integer
-      serviceImages:
-        $ref: '#/definitions/ServiceImages'
-      vendorId:
-        format: int64
-        type: integer
-    type: object
-  WeddingVendor:
-    properties:
-      capacity:
-        format: int32
-        type: integer
-      category:
-        $ref: '#/definitions/ServiceCategory'
-      categoryId:
-        format: int32
-        type: integer
-      creationTime:
-        format: date-time
-        type: string
-      description:
-        minLength: 20
-        type: string
-      geoDetails:
-        $ref: '#/definitions/GeoDetails'
-      id:
-        format: int64
-        type: integer
-      images:
-        items:
-          $ref: '#/definitions/VendorImagesMap'
-        type: array
-        uniqueItems: false
-      mainImage:
-        type: string
-      registerStep:
-        enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          - 4
-          - 5
-        format: int32
-        type: integer
-      serviceFacilities:
-        items:
-          $ref: '#/definitions/ServiceFacilityMap'
-        type: array
-        uniqueItems: false
-      status:
-        type: boolean
-      title:
-        type: string
-      user:
-        $ref: '#/definitions/User'
-    required:
-      - description
-      - user
-      - categoryId
-      - images
-      - category
-    type: object
-  WeddingVendorAddFacilityDto:
-    properties:
-      facility:
-        items:
-          format: int32
-          type: integer
-        type: array
-        uniqueItems: false
-      serviceId:
-        format: int64
-        type: integer
     type: object
   WeddingVendorDto:
     properties:

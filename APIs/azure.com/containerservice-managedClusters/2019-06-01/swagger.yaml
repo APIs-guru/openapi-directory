@@ -825,49 +825,6 @@ paths:
                   vmSize: Standard_DS1_v2
                 type: Microsoft.ContainerService/managedClusters/agentPools
       x-ms-long-running-operation: true
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/agentPools/{agentPoolName}/availableAgentPoolVersions':
-    get:
-      description: Gets a list of supported versions for the specified agent pool.
-      operationId: AgentPools_GetAvailableAgentPoolVersions
-      parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/ResourceNameParameter'
-        - description: The name of the agent pool.
-          in: path
-          name: agentPoolName
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/AgentPoolAvailableVersions'
-      summary: Gets a list of supported versions for the specified agent pool.
-      tags:
-        - AgentPools
-      x-ms-examples:
-        Get available versions for agent pool:
-          parameters:
-            agentPoolName: agentpool1
-            api-version: '2019-06-01'
-            resourceGroupName: rg1
-            resourceName: clustername1
-            subscriptionId: subid1
-          responses:
-            '200':
-              body:
-                id: /subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/agentpool1/availableAgentpoolVersions
-                name: default
-                properties:
-                  agentPoolVersions:
-                    - kubernetesVersion: 1.12.7
-                    - kubernetesVersion: 1.12.8
-                    - default: true
-                      isPreview: true
-                      kubernetesVersion: 1.13.5
-                type: Microsoft.ContainerService/managedClusters/availableAgentpoolVersions
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/agentPools/{agentPoolName}/upgradeProfiles/default':
     get:
       description: Gets the details of the upgrade profile for an agent pool with a specified resource group and managed cluster name.
@@ -913,6 +870,43 @@ paths:
                   upgrades:
                     - kubernetesVersion: 1.13.5
                 type: Microsoft.ContainerService/managedClusters/agentPools/upgradeProfiles
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/availableAgentPoolVersions':
+    get:
+      description: Gets a list of supported versions for the specified agent pool.
+      operationId: AgentPools_GetAvailableAgentPoolVersions
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ResourceNameParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AgentPoolAvailableVersions'
+      summary: Gets a list of supported versions for the specified agent pool.
+      tags:
+        - AgentPools
+      x-ms-examples:
+        Get available versions for agent pool:
+          parameters:
+            api-version: '2019-06-01'
+            resourceGroupName: rg1
+            resourceName: clustername1
+            subscriptionId: subid1
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/availableagentpoolversions
+                name: default
+                properties:
+                  agentPoolVersions:
+                    - kubernetesVersion: 1.12.7
+                    - kubernetesVersion: 1.12.8
+                    - default: true
+                      isPreview: true
+                      kubernetesVersion: 1.13.5
+                type: Microsoft.ContainerService/managedClusters/availableAgentpoolVersions
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/listClusterAdminCredential':
     post:
       description: Gets cluster admin credential of the managed cluster with a specified resource group and name.

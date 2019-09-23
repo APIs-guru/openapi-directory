@@ -67,78 +67,7 @@ paths:
         '200':
           description: OK -- The list of storage shares has been returned.
           schema:
-            description: List of storage shares.
-            items:
-              allOf:
-                - description: Base resource object.
-                  properties:
-                    id:
-                      description: Resource ID.
-                      readOnly: true
-                      type: string
-                    location:
-                      description: Resource location.
-                      readOnly: true
-                      type: string
-                    name:
-                      description: Resource Name.
-                      readOnly: true
-                      type: string
-                    tags:
-                      additionalProperties:
-                        type: string
-                      description: Resource tags.
-                      readOnly: true
-                      type: object
-                    type:
-                      description: Resource type.
-                      readOnly: true
-                      type: string
-                  type: object
-                  x-ms-azure-resource: true
-              description: Storage share.
-              properties:
-                properties:
-                  description: Storage share properties.
-                  properties:
-                    freeCapacity:
-                      description: The free space of the storage share in bytes.
-                      format: int64
-                      readOnly: true
-                      type: integer
-                    healthStatus:
-                      description: Current health status.
-                      enum:
-                        - Unknown
-                        - Healthy
-                        - Warning
-                        - Critical
-                      readOnly: true
-                      type: string
-                      x-ms-enum:
-                        modelAsString: true
-                        name: HealthStatus
-                    shareName:
-                      description: The name of the storage share.
-                      readOnly: true
-                      type: string
-                    totalCapacity:
-                      description: The total capacity of the storage share in bytes.
-                      format: int64
-                      readOnly: true
-                      type: integer
-                    uncPath:
-                      description: The UNC path to the storage share.
-                      readOnly: true
-                      type: string
-                    usedCapacity:
-                      description: The used capacity of the storage share in bytes.
-                      format: int64
-                      readOnly: true
-                      type: integer
-                  type: object
-              type: object
-            type: array
+            $ref: '#/definitions/ShareList'
         '404':
           description: NOT FOUND -- The farm cannot be found.
       tags:
@@ -204,75 +133,7 @@ paths:
         '200':
           description: OK -- The storage share has been returned.
           schema:
-            allOf:
-              - description: Base resource object.
-                properties:
-                  id:
-                    description: Resource ID.
-                    readOnly: true
-                    type: string
-                  location:
-                    description: Resource location.
-                    readOnly: true
-                    type: string
-                  name:
-                    description: Resource Name.
-                    readOnly: true
-                    type: string
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: Resource tags.
-                    readOnly: true
-                    type: object
-                  type:
-                    description: Resource type.
-                    readOnly: true
-                    type: string
-                type: object
-                x-ms-azure-resource: true
-            description: Storage share.
-            properties:
-              properties:
-                description: Storage share properties.
-                properties:
-                  freeCapacity:
-                    description: The free space of the storage share in bytes.
-                    format: int64
-                    readOnly: true
-                    type: integer
-                  healthStatus:
-                    description: Current health status.
-                    enum:
-                      - Unknown
-                      - Healthy
-                      - Warning
-                      - Critical
-                    readOnly: true
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: HealthStatus
-                  shareName:
-                    description: The name of the storage share.
-                    readOnly: true
-                    type: string
-                  totalCapacity:
-                    description: The total capacity of the storage share in bytes.
-                    format: int64
-                    readOnly: true
-                    type: integer
-                  uncPath:
-                    description: The UNC path to the storage share.
-                    readOnly: true
-                    type: string
-                  usedCapacity:
-                    description: The used capacity of the storage share in bytes.
-                    format: int64
-                    readOnly: true
-                    type: integer
-                type: object
-            type: object
+            $ref: '#/definitions/Share'
         '404':
           description: NOT FOUND -- The farm or storage share cannot be found.
       tags:
@@ -736,142 +597,35 @@ definitions:
         properties:
           id:
             description: Resource ID.
-            readOnly: true
             type: string
           location:
             description: Resource location.
-            readOnly: true
             type: string
           name:
             description: Resource Name.
-            readOnly: true
             type: string
           tags:
             additionalProperties:
               type: string
             description: Resource tags.
-            readOnly: true
             type: object
           type:
             description: Resource type.
-            readOnly: true
             type: string
         type: object
         x-ms-azure-resource: true
     description: Storage share.
     properties:
       properties:
+        $ref: '#/definitions/ShareProperties'
         description: Storage share properties.
-        properties:
-          freeCapacity:
-            description: The free space of the storage share in bytes.
-            format: int64
-            readOnly: true
-            type: integer
-          healthStatus:
-            description: Current health status.
-            enum:
-              - Unknown
-              - Healthy
-              - Warning
-              - Critical
-            readOnly: true
-            type: string
-            x-ms-enum:
-              modelAsString: true
-              name: HealthStatus
-          shareName:
-            description: The name of the storage share.
-            readOnly: true
-            type: string
-          totalCapacity:
-            description: The total capacity of the storage share in bytes.
-            format: int64
-            readOnly: true
-            type: integer
-          uncPath:
-            description: The UNC path to the storage share.
-            readOnly: true
-            type: string
-          usedCapacity:
-            description: The used capacity of the storage share in bytes.
-            format: int64
-            readOnly: true
-            type: integer
-        type: object
+        readOnly: true
+        x-ms-client-flatten: true
     type: object
   ShareList:
     description: List of storage shares.
     items:
-      allOf:
-        - description: Base resource object.
-          properties:
-            id:
-              description: Resource ID.
-              readOnly: true
-              type: string
-            location:
-              description: Resource location.
-              readOnly: true
-              type: string
-            name:
-              description: Resource Name.
-              readOnly: true
-              type: string
-            tags:
-              additionalProperties:
-                type: string
-              description: Resource tags.
-              readOnly: true
-              type: object
-            type:
-              description: Resource type.
-              readOnly: true
-              type: string
-          type: object
-          x-ms-azure-resource: true
-      description: Storage share.
-      properties:
-        properties:
-          description: Storage share properties.
-          properties:
-            freeCapacity:
-              description: The free space of the storage share in bytes.
-              format: int64
-              readOnly: true
-              type: integer
-            healthStatus:
-              description: Current health status.
-              enum:
-                - Unknown
-                - Healthy
-                - Warning
-                - Critical
-              readOnly: true
-              type: string
-              x-ms-enum:
-                modelAsString: true
-                name: HealthStatus
-            shareName:
-              description: The name of the storage share.
-              readOnly: true
-              type: string
-            totalCapacity:
-              description: The total capacity of the storage share in bytes.
-              format: int64
-              readOnly: true
-              type: integer
-            uncPath:
-              description: The UNC path to the storage share.
-              readOnly: true
-              type: string
-            usedCapacity:
-              description: The used capacity of the storage share in bytes.
-              format: int64
-              readOnly: true
-              type: integer
-          type: object
-      type: object
+      $ref: '#/definitions/Share'
     type: array
   ShareProperties:
     description: Storage share properties.

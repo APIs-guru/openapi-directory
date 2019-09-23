@@ -199,10 +199,10 @@ paths:
         - signupUrls
   '/v1/{name}':
     delete:
-      description: 'Deletes an enrollment token. This operation invalidates the token, preventing its future use.'
-      operationId: androidmanagement.enterprises.enrollmentTokens.delete
+      description: Deletes a web app.
+      operationId: androidmanagement.enterprises.webApps.delete
       parameters:
-        - description: 'The name of the enrollment token in the form enterprises/{enterpriseId}/enrollmentTokens/{enrollmentTokenId}.'
+        - description: 'The name of the web app in the form enterprises/{enterpriseId}/webApps/{packageName}.'
           in: path
           name: name
           required: true
@@ -232,14 +232,14 @@ paths:
       tags:
         - enterprises
     get:
-      description: Gets info about an application.
-      operationId: androidmanagement.enterprises.applications.get
+      description: Gets a web app.
+      operationId: androidmanagement.enterprises.webApps.get
       parameters:
         - description: 'The preferred language for localized application info, as a BCP47 tag (e.g. "en-US", "de"). If not specified the default language of the application will be used.'
           in: query
           name: languageCode
           type: string
-        - description: 'The name of the application in the form enterprises/{enterpriseId}/applications/{package_name}.'
+        - description: 'The name of the web app in the form enterprises/{enterpriseId}/webApp/{packageName}.'
           in: path
           name: name
           required: true
@@ -249,7 +249,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Application'
+            $ref: '#/definitions/WebApp'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidmanagement'
@@ -625,9 +625,24 @@ definitions:
         format: int32
         type: integer
     type: object
+  AppTrackInfo:
+    description: Id to name association of a app track.
+    properties:
+      trackAlias:
+        description: 'The track name associated with the trackId, set in the Play Console. The name is modifiable from Play Console.'
+        type: string
+      trackId:
+        description: 'The unmodifiable unique track identifier, taken from the releaseTrackId in the URL of the Play Console page that displays the app’s track information.'
+        type: string
+    type: object
   Application:
     description: Information about an app.
     properties:
+      appTracks:
+        description: Application tracks visible to the enterprise.
+        items:
+          $ref: '#/definitions/AppTrackInfo'
+        type: array
       managedProperties:
         description: The set of managed properties available to be pre-configured for the app.
         items:
@@ -682,6 +697,11 @@ definitions:
   ApplicationPolicy:
     description: Policy for an individual app.
     properties:
+      accessibleTrackIds:
+        description: 'List of the app’s track IDs that a device belonging to the enterprise can access. If the list contains multiple track IDs, devices receive the latest version among all accessible tracks. If the list contains no track IDs, devices only have access to the app’s production track. More details about each track are available in AppTrackInfo.'
+        items:
+          type: string
+        type: array
       defaultPermissionPolicy:
         description: 'The default policy for all permissions requested by the app. If specified, this overrides the policy-level default_permission_policy which applies to all apps. It does not override the permission_grants which applies to all apps.'
         enum:
@@ -1016,7 +1036,7 @@ definitions:
       systemProperties:
         additionalProperties:
           type: string
-        description: Map of selected system properties name and value related to the device.
+        description: Map of selected system properties name and value related to the device. This information is only available if systemPropertiesEnabled is true in the device's policy.
         type: object
       user:
         $ref: '#/definitions/User'
@@ -1828,6 +1848,9 @@ definitions:
             - TRUST_AGENTS
             - DISABLE_FINGERPRINT
             - DISABLE_REMOTE_INPUT
+            - FACE
+            - IRIS
+            - BIOMETRICS
             - ALL_FEATURES
           type: string
         type: array
@@ -1896,6 +1919,9 @@ definitions:
         items:
           $ref: '#/definitions/PermissionGrant'
         type: array
+      permittedAccessibilityServices:
+        $ref: '#/definitions/PackageNameList'
+        description: 'Specifies permitted accessibility services. If the field is not set, any accessibility service can be used. If the field is set, only the accessibility services in this list and the system''s built-in accessibility services can be used. In particular, if the field is set to empty, only the system''s built-in accessibility services can be used.'
       permittedInputMethods:
         $ref: '#/definitions/PackageNameList'
         description: 'If present, only the input methods provided by packages in this list are permitted. If this field is present, but the list is empty, then only system input methods are permitted.'
@@ -2016,15 +2042,15 @@ definitions:
         description: 'An action to reset a fully managed device or delete a work profile. Note: blockAction must also be specified.'
     type: object
   PostureDetail:
-    description: Detail that provides further information if the device is not in the most secure state.
+    description: Additional details regarding the security posture of the device.
     properties:
       advice:
-        description: Corresponding pieces of advice to mitigate the security risk.
+        description: Corresponding admin-facing advice to mitigate this security risk and improve the security posture of the device.
         items:
           $ref: '#/definitions/UserFacingMessage'
         type: array
       securityRisk:
-        description: The risk that makes the device not in the most secure state.
+        description: A specific security risk that negatively affects the security posture of the device.
         enum:
           - SECURITY_RISK_UNSPECIFIED
           - UNKNOWN_OS
@@ -2075,7 +2101,7 @@ definitions:
         type: integer
     type: object
   SecurityPosture:
-    description: . Device's security posture value that reflects how secure the device is.
+    description: 'The security posture of the device, as determined by the current device state and the policies applied.'
     properties:
       devicePosture:
         description: Device's security posture value.
@@ -2086,7 +2112,7 @@ definitions:
           - POTENTIALLY_COMPROMISED
         type: string
       postureDetails:
-        description: Details that provide further information if the device is not in the most secure state.
+        description: Additional details regarding the security posture of the device.
         items:
           $ref: '#/definitions/PostureDetail'
         type: array

@@ -2400,7 +2400,10 @@ definitions:
     properties:
       digest:
         description: 'The image digest identify the analysis. Archived analyses are based on digest, tag records are restored as analysis is restored.'
+        pattern: '^sha256:[a-fA-F0-9]{64}$'
         type: string
+    required:
+      - digest
     type: object
   AnalysisArchiveSummary:
     description: 'A summarization of the analysis archive, including size, counts, etc. This archive stores image analysis only, never the actual image content or layers.'
@@ -2925,10 +2928,11 @@ definitions:
         format: date-time
         type: string
       digest:
-        description: 'A full pullable digest reference for an image. e.g. docker.io/nginx@sha256:abc123. Deprecated in favor of the ''source'' field'
+        description: 'A digest string for an image, maybe a pull string or just a digest. e.g. nginx@sha256:123 or sha256:abc123. If a pull string, it must have same regisry/repo as the tag field. Deprecated in favor of the ''source'' field'
         type: string
       dockerfile:
-        description: 'Content of the dockerfile for the image, if available. Deprecated in favor of the ''source'' field.'
+        description: 'Base64 encoded content of the dockerfile for the image, if available. Deprecated in favor of the ''source'' field.'
+        pattern: '^[a-zA-Z0-9+/=]+$'
         type: string
       image_type:
         description: 'Optional. The type of image this is adding, defaults to "docker". This can be ommitted until multiple image types are supported.'
@@ -3370,7 +3374,8 @@ definitions:
         format: date-time
         type: string
       dockerfile:
-        description: 'Content of the dockerfile used to build the image, if available.'
+        description: 'Base64 encoded content of the dockerfile used to build the image, if available.'
+        pattern: '^[a-zA-Z0-9+/=]+$'
         type: string
       pullstring:
         description: 'A digest-based pullstring (e.g. docker.io/nginx@sha256:123abc)'
@@ -3378,16 +3383,23 @@ definitions:
       tag:
         description: 'A docker pull string (e.g. docker.io/nginx:latest, or docker.io/nginx@sha256:abd) to retrieve the image'
         type: string
+    required:
+      - pullstring
+      - tag
+      - creation_timestamp_override
     type: object
   RegistryTagSource:
     description: 'An image reference using a tag in a registry, this is the most common source type.'
     properties:
       dockerfile:
-        description: 'Content of the dockerfile used to build the image, if available.'
+        description: 'Base64 encoded content of the dockerfile used to build the image, if available.'
+        pattern: '^[a-zA-Z0-9+/=]+$'
         type: string
       pullstring:
         description: 'A docker pull string (e.g. docker.io/nginx:latest, or docker.io/nginx@sha256:abd) to retrieve the image'
         type: string
+    required:
+      - pullstring
     type: object
   RepositoryTagList:
     description: List of discovered tags in a repository

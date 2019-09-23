@@ -56,22 +56,7 @@ parameters:
     name: migrationParameters
     required: true
     schema:
-      description: Parameters of container migration job.
-      properties:
-        containerName:
-          description: The name of the container to be migrated.
-          type: string
-        destinationShareUncPath:
-          description: The UNC path of the destination share for migration.
-          type: string
-        storageAccountName:
-          description: The name of the storage account where the container locates.
-          type: string
-      required:
-        - storageAccountName
-        - containerName
-        - destinationShareUncPath
-      type: object
+      $ref: '#/definitions/MigrationParameters'
     x-ms-parameter-location: method
   StartIndexParameter:
     description: The starting index the resource provider uses.
@@ -119,57 +104,7 @@ paths:
         '200':
           description: OK -- Operation has been accepted and processed
           schema:
-            description: The result of the container migration.
-            properties:
-              containerName:
-                description: The name of the container to be migrated.
-                readOnly: true
-                type: string
-              destinationShareName:
-                description: The name of the destination storage share.
-                readOnly: true
-                type: string
-              failureReason:
-                description: The migration failure reason.
-                readOnly: true
-                type: string
-              jobId:
-                description: The migration job ID.
-                readOnly: true
-                type: string
-              migrationStatus:
-                enum:
-                  - Active
-                  - Paused
-                  - Deleted
-                  - Rollback
-                  - Complete
-                  - Canceled
-                  - Failed
-                  - All
-                type: string
-                x-ms-enum:
-                  modelAsString: true
-                  name: MigrationState
-              sourceShareName:
-                description: The name of the source storage share.
-                readOnly: true
-                type: string
-              storageAccountName:
-                description: The storage account name.
-                readOnly: true
-                type: string
-              subEntitiesCompleted:
-                description: The number of entities which have been migrated.
-                format: int64
-                readOnly: true
-                type: integer
-              subEntitiesFailed:
-                description: The number of entities which failed in migration.
-                format: int64
-                readOnly: true
-                type: integer
-            type: object
+            $ref: '#/definitions/MigrationResult'
       tags:
         - Containers
       x-ms-examples:
@@ -229,111 +164,11 @@ paths:
         '200':
           description: OK -- Operation has been accepted and processed
           schema:
-            description: The result of the container migration.
-            properties:
-              containerName:
-                description: The name of the container to be migrated.
-                readOnly: true
-                type: string
-              destinationShareName:
-                description: The name of the destination storage share.
-                readOnly: true
-                type: string
-              failureReason:
-                description: The migration failure reason.
-                readOnly: true
-                type: string
-              jobId:
-                description: The migration job ID.
-                readOnly: true
-                type: string
-              migrationStatus:
-                enum:
-                  - Active
-                  - Paused
-                  - Deleted
-                  - Rollback
-                  - Complete
-                  - Canceled
-                  - Failed
-                  - All
-                type: string
-                x-ms-enum:
-                  modelAsString: true
-                  name: MigrationState
-              sourceShareName:
-                description: The name of the source storage share.
-                readOnly: true
-                type: string
-              storageAccountName:
-                description: The storage account name.
-                readOnly: true
-                type: string
-              subEntitiesCompleted:
-                description: The number of entities which have been migrated.
-                format: int64
-                readOnly: true
-                type: integer
-              subEntitiesFailed:
-                description: The number of entities which failed in migration.
-                format: int64
-                readOnly: true
-                type: integer
-            type: object
+            $ref: '#/definitions/MigrationResult'
         '202':
           description: ACCEPTED - Operation has been accepted will be processed asynchronously
           schema:
-            description: The result of the container migration.
-            properties:
-              containerName:
-                description: The name of the container to be migrated.
-                readOnly: true
-                type: string
-              destinationShareName:
-                description: The name of the destination storage share.
-                readOnly: true
-                type: string
-              failureReason:
-                description: The migration failure reason.
-                readOnly: true
-                type: string
-              jobId:
-                description: The migration job ID.
-                readOnly: true
-                type: string
-              migrationStatus:
-                enum:
-                  - Active
-                  - Paused
-                  - Deleted
-                  - Rollback
-                  - Complete
-                  - Canceled
-                  - Failed
-                  - All
-                type: string
-                x-ms-enum:
-                  modelAsString: true
-                  name: MigrationState
-              sourceShareName:
-                description: The name of the source storage share.
-                readOnly: true
-                type: string
-              storageAccountName:
-                description: The storage account name.
-                readOnly: true
-                type: string
-              subEntitiesCompleted:
-                description: The number of entities which have been migrated.
-                format: int64
-                readOnly: true
-                type: integer
-              subEntitiesFailed:
-                description: The number of entities which failed in migration.
-                format: int64
-                readOnly: true
-                type: integer
-            type: object
+            $ref: '#/definitions/MigrationResult'
       tags:
         - Containers
       x-ms-examples:
@@ -402,66 +237,14 @@ paths:
           name: api-version
           required: true
           type: string
-        - description: The container migration intent.
-          in: query
-          name: Intent
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The maximum number of containers.
-          format: int32
-          in: query
-          name: MaxCount
-          required: false
-          type: integer
-          x-ms-parameter-location: method
-        - description: The starting index the resource provider uses.
-          format: int32
-          in: query
-          name: StartIndex
-          required: false
-          type: integer
-          x-ms-parameter-location: method
+        - $ref: '#/parameters/MigrationIntentParameter'
+        - $ref: '#/parameters/MaxCountParameter'
+        - $ref: '#/parameters/StartIndexParameter'
       responses:
         '200':
           description: OK -- The list of containers has been returned.
           schema:
-            description: List of containers.
-            items:
-              description: Container properties.
-              properties:
-                accountid:
-                  description: The ID of the storage account.
-                  readOnly: true
-                  type: string
-                accountname:
-                  description: The name of storage account where the container locates.
-                  readOnly: true
-                  type: string
-                containerState:
-                  description: The current state of the container.
-                  readOnly: true
-                  type: string
-                containerid:
-                  description: The container ID.
-                  format: int64
-                  readOnly: true
-                  type: integer
-                containername:
-                  description: Container name.
-                  readOnly: true
-                  type: string
-                sharename:
-                  description: The name of the share where the container locates.
-                  readOnly: true
-                  type: string
-                usedBytesInPrimaryVolume:
-                  description: 'The used space, in bytes, of the container in the primary volume.'
-                  format: int64
-                  readOnly: true
-                  type: integer
-              type: object
-            type: array
+            $ref: '#/definitions/ContainerList'
         '404':
           description: NOT FOUND -- The specified farm or share was not found.
       tags:
@@ -595,25 +378,20 @@ paths:
                   properties:
                     id:
                       description: Resource ID.
-                      readOnly: true
                       type: string
                     location:
                       description: Resource location.
-                      readOnly: true
                       type: string
                     name:
                       description: Resource Name.
-                      readOnly: true
                       type: string
                     tags:
                       additionalProperties:
                         type: string
                       description: Resource tags.
-                      readOnly: true
                       type: object
                     type:
                       description: Resource type.
-                      readOnly: true
                       type: string
                   type: object
                   x-ms-azure-resource: true
@@ -711,137 +489,16 @@ paths:
           name: api-version
           required: true
           type: string
-        - description: The parameters of container migration job.
-          in: body
-          name: migrationParameters
-          required: true
-          schema:
-            description: Parameters of container migration job.
-            properties:
-              containerName:
-                description: The name of the container to be migrated.
-                type: string
-              destinationShareUncPath:
-                description: The UNC path of the destination share for migration.
-                type: string
-              storageAccountName:
-                description: The name of the storage account where the container locates.
-                type: string
-            required:
-              - storageAccountName
-              - containerName
-              - destinationShareUncPath
-            type: object
-          x-ms-parameter-location: method
+        - $ref: '#/parameters/MigrationParameterParameter'
       responses:
         '200':
           description: OK -- Container has been migrated
           schema:
-            description: The result of the container migration.
-            properties:
-              containerName:
-                description: The name of the container to be migrated.
-                readOnly: true
-                type: string
-              destinationShareName:
-                description: The name of the destination storage share.
-                readOnly: true
-                type: string
-              failureReason:
-                description: The migration failure reason.
-                readOnly: true
-                type: string
-              jobId:
-                description: The migration job ID.
-                readOnly: true
-                type: string
-              migrationStatus:
-                enum:
-                  - Active
-                  - Paused
-                  - Deleted
-                  - Rollback
-                  - Complete
-                  - Canceled
-                  - Failed
-                  - All
-                type: string
-                x-ms-enum:
-                  modelAsString: true
-                  name: MigrationState
-              sourceShareName:
-                description: The name of the source storage share.
-                readOnly: true
-                type: string
-              storageAccountName:
-                description: The storage account name.
-                readOnly: true
-                type: string
-              subEntitiesCompleted:
-                description: The number of entities which have been migrated.
-                format: int64
-                readOnly: true
-                type: integer
-              subEntitiesFailed:
-                description: The number of entities which failed in migration.
-                format: int64
-                readOnly: true
-                type: integer
-            type: object
+            $ref: '#/definitions/MigrationResult'
         '202':
           description: ACCEPTED -- Operation accepted and will be performed asynchronously
           schema:
-            description: The result of the container migration.
-            properties:
-              containerName:
-                description: The name of the container to be migrated.
-                readOnly: true
-                type: string
-              destinationShareName:
-                description: The name of the destination storage share.
-                readOnly: true
-                type: string
-              failureReason:
-                description: The migration failure reason.
-                readOnly: true
-                type: string
-              jobId:
-                description: The migration job ID.
-                readOnly: true
-                type: string
-              migrationStatus:
-                enum:
-                  - Active
-                  - Paused
-                  - Deleted
-                  - Rollback
-                  - Complete
-                  - Canceled
-                  - Failed
-                  - All
-                type: string
-                x-ms-enum:
-                  modelAsString: true
-                  name: MigrationState
-              sourceShareName:
-                description: The name of the source storage share.
-                readOnly: true
-                type: string
-              storageAccountName:
-                description: The storage account name.
-                readOnly: true
-                type: string
-              subEntitiesCompleted:
-                description: The number of entities which have been migrated.
-                format: int64
-                readOnly: true
-                type: integer
-              subEntitiesFailed:
-                description: The number of entities which failed in migration.
-                format: int64
-                readOnly: true
-                type: integer
-            type: object
+            $ref: '#/definitions/MigrationResult'
       tags:
         - Containers
       x-ms-examples:
@@ -918,39 +575,7 @@ definitions:
   ContainerList:
     description: List of containers.
     items:
-      description: Container properties.
-      properties:
-        accountid:
-          description: The ID of the storage account.
-          readOnly: true
-          type: string
-        accountname:
-          description: The name of storage account where the container locates.
-          readOnly: true
-          type: string
-        containerState:
-          description: The current state of the container.
-          readOnly: true
-          type: string
-        containerid:
-          description: The container ID.
-          format: int64
-          readOnly: true
-          type: integer
-        containername:
-          description: Container name.
-          readOnly: true
-          type: string
-        sharename:
-          description: The name of the share where the container locates.
-          readOnly: true
-          type: string
-        usedBytesInPrimaryVolume:
-          description: 'The used space, in bytes, of the container in the primary volume.'
-          format: int64
-          readOnly: true
-          type: integer
-      type: object
+      $ref: '#/definitions/Container'
     type: array
   MigrationParameters:
     description: Parameters of container migration job.
@@ -989,19 +614,9 @@ definitions:
         readOnly: true
         type: string
       migrationStatus:
-        enum:
-          - Active
-          - Paused
-          - Deleted
-          - Rollback
-          - Complete
-          - Canceled
-          - Failed
-          - All
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: MigrationState
+        $ref: '#/definitions/MigrationState'
+        description: The migration status.
+        readOnly: true
       sourceShareName:
         description: The name of the source storage share.
         readOnly: true

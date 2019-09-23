@@ -760,6 +760,19 @@ definitions:
         items:
           $ref: '#/definitions/InputConfig'
         type: array
+      labels:
+        additionalProperties:
+          type: string
+        description: |-
+          Optional. The labels with user-defined metadata for the request.
+
+          Label keys and values can be no longer than 63 characters
+          (Unicode codepoints), can only contain lowercase letters, numeric
+          characters, underscores and dashes. International characters are allowed.
+          Label values are optional. Label keys must start with a letter.
+
+          See https://goo.gl/xmQnxf for more information on and examples of labels.
+        type: object
       models:
         additionalProperties:
           type: string
@@ -806,6 +819,19 @@ definitions:
       content:
         description: The content of the input stored as a string.
         type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: |-
+          Optional. The labels with user-defined metadata for the request.
+
+          Label keys and values can be no longer than 63 characters
+          (Unicode codepoints), can only contain lowercase letters, numeric
+          characters, underscores and dashes. International characters are allowed.
+          Label values are optional. Label keys must start with a letter.
+
+          See https://goo.gl/xmQnxf for more information on and examples of labels.
+        type: object
       mimeType:
         description: |-
           Optional. The format of the source text, for example, "text/html",
@@ -1282,6 +1308,19 @@ definitions:
           Optional. Glossary to be applied. The glossary must be
           within the same region (have the same location-id) as the model, otherwise
           an INVALID_ARGUMENT (400) error is returned.
+      labels:
+        additionalProperties:
+          type: string
+        description: |-
+          Optional. The labels with user-defined metadata for the request.
+
+          Label keys and values can be no longer than 63 characters
+          (Unicode codepoints), can only contain lowercase letters, numeric
+          characters, underscores and dashes. International characters are allowed.
+          Label values are optional. Label keys must start with a letter.
+
+          See https://goo.gl/xmQnxf for more information on and examples of labels.
+        type: object
       mimeType:
         description: |-
           Optional. The format of the source text, for example, "text/html",

@@ -1,169 +1,214 @@
 swagger: '2.0'
+schemes:
+  - https
+  - http
+host: qldb.amazonaws.com
+basePath: /
+x-hasEquivalentPaths: true
 info:
-  version: '2019-01-02'
-  x-release: v4
-  title: Amazon QLDB
-  description: The control plane for Amazon QLDB
-  x-logo:
-    url: 'https://twitter.com/awscloud/profile_image?size=original'
-    backgroundColor: '#FFFFFF'
-  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
-    name: Mike Ralphson
     email: mike.ralphson@gmail.com
+    name: Mike Ralphson
     url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
+  description: The control plane for Amazon QLDB
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
-  x-providerName: amazonaws.com
-  x-serviceName: qldb
-  x-origin:
-    - contentType: application/json
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/qldb-2019-01-02.normal.json'
-      converter:
-        url: 'https://github.com/mermade/aws2openapi'
-        version: 1.0.0
-      x-apisguru-direct: true
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  title: Amazon QLDB
+  version: '2019-01-02'
   x-apiClientRegistration:
     url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
+  x-logo:
+    backgroundColor: '#FFFFFF'
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+  x-origin:
+    - contentType: application/json
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/qldb-2019-01-02.normal.json'
+      x-apisguru-direct: true
   x-preferred: true
+  x-providerName: amazonaws.com
+  x-release: v4
+  x-serviceName: qldb
 externalDocs:
   description: Amazon Web Services documentation
   url: 'https://docs.aws.amazon.com/qldb/'
-host: qldb.amazonaws.com
-basePath: /
-schemes:
-  - https
-  - http
-x-servers:
-  - url: 'http://qldb.{region}.amazonaws.com'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-        default: us-east-1
-    description: The QLDB multi-region endpoint
-  - url: 'https://qldb.{region}.amazonaws.com'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-        default: us-east-1
-    description: The QLDB multi-region endpoint
-  - url: 'http://qldb.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-        default: cn-north-1
-    description: The QLDB endpoint for China (Beijing) and China (Ningxia)
-  - url: 'https://qldb.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-        default: cn-north-1
-    description: The QLDB endpoint for China (Beijing) and China (Ningxia)
-x-hasEquivalentPaths: true
 consumes:
   - application/json
 produces:
   - application/json
-parameters:
-  X-Amz-Content-Sha256:
-    name: X-Amz-Content-Sha256
-    in: header
-    type: string
-    required: false
-  X-Amz-Date:
-    name: X-Amz-Date
-    in: header
-    type: string
-    required: false
-  X-Amz-Algorithm:
-    name: X-Amz-Algorithm
-    in: header
-    type: string
-    required: false
-  X-Amz-Credential:
-    name: X-Amz-Credential
-    in: header
-    type: string
-    required: false
-  X-Amz-Security-Token:
-    name: X-Amz-Security-Token
-    in: header
-    type: string
-    required: false
-  X-Amz-Signature:
-    name: X-Amz-Signature
-    in: header
-    type: string
-    required: false
-  X-Amz-SignedHeaders:
-    name: X-Amz-SignedHeaders
-    in: header
-    type: string
-    required: false
 securityDefinitions:
   hmac:
-    type: apiKey
-    name: Authorization
-    in: header
     description: Amazon Signature authorization v4
+    in: header
+    name: Authorization
+    type: apiKey
     x-amazon-apigateway-authtype: awsSigv4
 security:
   - hmac: []
+parameters:
+  X-Amz-Algorithm:
+    in: header
+    name: X-Amz-Algorithm
+    required: false
+    type: string
+  X-Amz-Content-Sha256:
+    in: header
+    name: X-Amz-Content-Sha256
+    required: false
+    type: string
+  X-Amz-Credential:
+    in: header
+    name: X-Amz-Credential
+    required: false
+    type: string
+  X-Amz-Date:
+    in: header
+    name: X-Amz-Date
+    required: false
+    type: string
+  X-Amz-Security-Token:
+    in: header
+    name: X-Amz-Security-Token
+    required: false
+    type: string
+  X-Amz-Signature:
+    in: header
+    name: X-Amz-Signature
+    required: false
+    type: string
+  X-Amz-SignedHeaders:
+    in: header
+    name: X-Amz-SignedHeaders
+    required: false
+    type: string
 paths:
+  /journal-s3-exports:
+    get:
+      description: '<p>Returns an array of journal export job descriptions for all ledgers that are associated with the current AWS account and Region.</p> <p>This action returns a maximum of <code>MaxResults</code> items, and is paginated so that you can retrieve all the items by calling <code>ListJournalS3Exports</code> multiple times.</p>'
+      operationId: ListJournalS3Exports
+      parameters:
+        - description: The maximum number of results to return in a single <code>ListJournalS3Exports</code> request. (The actual number of results returned might be fewer.)
+          in: query
+          maximum: 100
+          minimum: 1
+          name: max_results
+          required: false
+          type: integer
+        - description: 'A pagination token, indicating that you want to retrieve the next page of results. If you received a value for <code>NextToken</code> in the response from a previous <code>ListJournalS3Exports</code> call, then you should use that value as input here.'
+          in: query
+          maxLength: 1024
+          minLength: 4
+          name: next_token
+          pattern: '^[A-Za-z-0-9+/=]+$'
+          required: false
+          type: string
+        - description: Pagination limit
+          in: query
+          name: MaxResults
+          required: false
+          type: string
+        - description: Pagination token
+          in: query
+          name: NextToken
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListJournalS3ExportsResponse'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /ledgers:
+    get:
+      description: <p>Returns an array of ledger summaries that are associated with the current AWS account and Region.</p> <p>This action returns a maximum of 100 items and is paginated so that you can retrieve all the items by calling <code>ListLedgers</code> multiple times.</p>
+      operationId: ListLedgers
+      parameters:
+        - description: The maximum number of results to return in a single <code>ListLedgers</code> request. (The actual number of results returned might be fewer.)
+          in: query
+          maximum: 100
+          minimum: 1
+          name: max_results
+          required: false
+          type: integer
+        - description: 'A pagination token, indicating that you want to retrieve the next page of results. If you received a value for <code>NextToken</code> in the response from a previous <code>ListLedgers</code> call, then you should use that value as input here.'
+          in: query
+          maxLength: 1024
+          minLength: 4
+          name: next_token
+          pattern: '^[A-Za-z-0-9+/=]+$'
+          required: false
+          type: string
+        - description: Pagination limit
+          in: query
+          name: MaxResults
+          required: false
+          type: string
+        - description: Pagination token
+          in: query
+          name: NextToken
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListLedgersResponse'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
-      operationId: CreateLedger
       description: Creates a new ledger in your AWS account.
+      operationId: CreateLedger
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              DeletionProtection:
+                description: '<p>The flag that prevents a ledger from being deleted by any user. If not provided on ledger creation, this feature is enabled (<code>true</code>) by default.</p> <p>If deletion protection is enabled, you must first disable it before you can delete the ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>. The QLDB console disables deletion protection for you when you use it to delete a ledger.</p>'
+                type: boolean
+              Name:
+                description: The name of the ledger that you want to create. The name must be unique among all of your ledgers in the current AWS Region.
+                maxLength: 32
+                minLength: 1
+                pattern: '(?!^.*--)(?!^[0-9]+$)(?!^-)(?!.*-$)^[A-Za-z0-9-]+$'
+                type: string
+              PermissionsMode:
+                description: The permissions mode to assign to the ledger that you want to create.
+                enum:
+                  - ALLOW_ALL
+                type: string
+              Tags:
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
+                description: The key-value pairs to add as tags to the ledger that you want to create. Tag keys are case sensitive. Tag values are case sensitive and can be null.
+                maxProperties: 200
+                minProperties: 0
+                type: object
+            required:
+              - Name
+              - PermissionsMode
+            type: object
       responses:
         '200':
           description: Success
@@ -185,83 +230,19 @@ paths:
           description: ResourceInUseException
           schema:
             $ref: '#/definitions/ResourceInUseException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - Name
-              - PermissionsMode
-            properties:
-              Name:
-                description: The name of the ledger that you want to create. The name must be unique among all of your ledgers in the current AWS Region.
-                type: string
-                pattern: '(?!^.*--)(?!^[0-9]+$)(?!^-)(?!.*-$)^[A-Za-z0-9-]+$'
-                minLength: 1
-                maxLength: 32
-              Tags:
-                description: The key-value pairs to add as tags to the ledger that you want to create. Tag keys are case sensitive. Tag values are case sensitive and can be null.
-                type: object
-                minProperties: 0
-                maxProperties: 200
-                additionalProperties:
-                  $ref: '#/definitions/TagValue'
-              PermissionsMode:
-                description: The permissions mode to assign to the ledger that you want to create.
-                type: string
-                enum:
-                  - ALLOW_ALL
-              DeletionProtection:
-                description: '<p>The flag that prevents a ledger from being deleted by any user. If not provided on ledger creation, this feature is enabled (<code>true</code>) by default.</p> <p>If deletion protection is enabled, you must first disable it before you can delete the ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>. The QLDB console disables deletion protection for you when you use it to delete a ledger.</p>'
-                type: boolean
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-    get:
-      operationId: ListLedgers
-      description: <p>Returns an array of ledger summaries that are associated with the current AWS account and Region.</p> <p>This action returns a maximum of 100 items and is paginated so that you can retrieve all the items by calling <code>ListLedgers</code> multiple times.</p>
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/ListLedgersResponse'
-      parameters:
-        - name: max_results
-          in: query
-          required: false
-          description: The maximum number of results to return in a single <code>ListLedgers</code> request. (The actual number of results returned might be fewer.)
-          type: integer
-          minimum: 1
-          maximum: 100
-        - name: next_token
-          in: query
-          required: false
-          description: 'A pagination token, indicating that you want to retrieve the next page of results. If you received a value for <code>NextToken</code> in the response from a previous <code>ListLedgers</code> call, then you should use that value as input here.'
-          type: string
-          pattern: '^[A-Za-z-0-9+/=]+$'
-          minLength: 4
-          maxLength: 1024
-        - name: MaxResults
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
-        - name: NextToken
-          type: string
-          in: query
-          description: Pagination token
-          required: false
   '/ledgers/{name}':
     delete:
-      operationId: DeleteLedger
       description: '<p>Deletes a ledger and all of its contents. This action is irreversible.</p> <p>If deletion protection is enabled, you must first disable it before you can delete the ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>. The QLDB console disables deletion protection for you when you use it to delete a ledger.</p>'
+      operationId: DeleteLedger
+      parameters:
+        - description: The name of the ledger that you want to delete.
+          in: path
+          maxLength: 32
+          minLength: 1
+          name: name
+          pattern: '(?!^.*--)(?!^[0-9]+$)(?!^-)(?!.*-$)^[A-Za-z0-9-]+$'
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -281,26 +262,18 @@ paths:
           description: ResourcePreconditionNotMetException
           schema:
             $ref: '#/definitions/ResourcePreconditionNotMetException'
-      parameters:
-        - name: name
-          in: path
-          required: true
-          description: The name of the ledger that you want to delete.
-          type: string
-          pattern: '(?!^.*--)(?!^[0-9]+$)(?!^-)(?!.*-$)^[A-Za-z0-9-]+$'
-          minLength: 1
-          maxLength: 32
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
-      operationId: DescribeLedger
       description: 'Returns information about a ledger, including its state and when it was created.'
+      operationId: DescribeLedger
+      parameters:
+        - description: The name of the ledger that you want to describe.
+          in: path
+          maxLength: 32
+          minLength: 1
+          name: name
+          pattern: '(?!^.*--)(?!^[0-9]+$)(?!^-)(?!.*-$)^[A-Za-z0-9-]+$'
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -314,18 +287,35 @@ paths:
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-      parameters:
-        - name: name
-          in: path
-          required: true
-          description: The name of the ledger that you want to describe.
-          type: string
-          pattern: '(?!^.*--)(?!^[0-9]+$)(?!^-)(?!.*-$)^[A-Za-z0-9-]+$'
-          minLength: 1
-          maxLength: 32
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     patch:
-      operationId: UpdateLedger
       description: Updates properties on a ledger.
+      operationId: UpdateLedger
+      parameters:
+        - description: The name of the ledger.
+          in: path
+          maxLength: 32
+          minLength: 1
+          name: name
+          pattern: '(?!^.*--)(?!^[0-9]+$)(?!^-)(?!.*-$)^[A-Za-z0-9-]+$'
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              DeletionProtection:
+                description: '<p>The flag that prevents a ledger from being deleted by any user. If not provided on ledger creation, this feature is enabled (<code>true</code>) by default.</p> <p>If deletion protection is enabled, you must first disable it before you can delete the ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>. The QLDB console disables deletion protection for you when you use it to delete a ledger.</p>'
+                type: boolean
+            type: object
       responses:
         '200':
           description: Success
@@ -339,179 +329,49 @@ paths:
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-      parameters:
-        - name: name
-          in: path
-          required: true
-          description: The name of the ledger.
-          type: string
-          pattern: '(?!^.*--)(?!^[0-9]+$)(?!^-)(?!.*-$)^[A-Za-z0-9-]+$'
-          minLength: 1
-          maxLength: 32
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            properties:
-              DeletionProtection:
-                description: '<p>The flag that prevents a ledger from being deleted by any user. If not provided on ledger creation, this feature is enabled (<code>true</code>) by default.</p> <p>If deletion protection is enabled, you must first disable it before you can delete the ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>. The QLDB console disables deletion protection for you when you use it to delete a ledger.</p>'
-                type: boolean
-  '/ledgers/{name}/journal-s3-exports/{exportId}':
-    get:
-      operationId: DescribeJournalS3Export
-      description: '<p>Returns information about a journal export job, including the ledger name, export ID, when it was created, current status, and its start and end time export parameters.</p> <p>If the export job with the given <code>ExportId</code> doesn''t exist, then throws <code>ResourceNotFoundException</code>.</p> <p>If the ledger with the given <code>Name</code> doesn''t exist, then throws <code>ResourceNotFoundException</code>.</p>'
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/DescribeJournalS3ExportResponse'
-        '480':
-          description: ResourceNotFoundException
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
-      parameters:
-        - name: name
-          in: path
-          required: true
-          description: The name of the ledger.
-          type: string
-          pattern: '(?!^.*--)(?!^[0-9]+$)(?!^-)(?!.*-$)^[A-Za-z0-9-]+$'
-          minLength: 1
-          maxLength: 32
-        - name: exportId
-          in: path
-          required: true
-          description: The unique ID of the journal export job that you want to describe.
-          type: string
-          pattern: '^[A-Za-z-0-9]+$'
-          minLength: 22
-          maxLength: 22
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/ledgers/{name}/journal-s3-exports':
-    post:
-      operationId: ExportJournalToS3
-      description: '<p>Exports journal contents within a date and time range from a ledger into a specified Amazon Simple Storage Service (Amazon S3) bucket. The data is written as files in Amazon Ion format.</p> <p>If the ledger with the given <code>Name</code> doesn''t exist, then throws <code>ResourceNotFoundException</code>.</p> <p>If the ledger with the given <code>Name</code> is in <code>CREATING</code> status, then throws <code>ResourcePreconditionNotMetException</code>.</p> <p>You can initiate up to two concurrent journal export requests for each ledger. Beyond this limit, journal export requests throw <code>LimitExceededException</code>.</p>'
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/ExportJournalToS3Response'
-        '480':
-          description: ResourceNotFoundException
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
-        '481':
-          description: ResourcePreconditionNotMetException
-          schema:
-            $ref: '#/definitions/ResourcePreconditionNotMetException'
-      parameters:
-        - name: name
-          in: path
-          required: true
-          description: The name of the ledger.
-          type: string
-          pattern: '(?!^.*--)(?!^[0-9]+$)(?!^-)(?!.*-$)^[A-Za-z0-9-]+$'
-          minLength: 1
-          maxLength: 32
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - InclusiveStartTime
-              - ExclusiveEndTime
-              - S3ExportConfiguration
-              - RoleArn
-            properties:
-              InclusiveStartTime:
-                description: '<p>The inclusive start date and time for the range of journal contents that you want to export.</p> <p>The <code>InclusiveStartTime</code> must be in <code>ISO 8601</code> date and time format and in Universal Coordinated Time (UTC). For example: <code>2019-06-13T21:36:34Z</code> </p> <p>The <code>InclusiveStartTime</code> must be before <code>ExclusiveEndTime</code>.</p> <p>If you provide an <code>InclusiveStartTime</code> that is before the ledger''s <code>CreationDateTime</code>, Amazon QLDB defaults it to the ledger''s <code>CreationDateTime</code>.</p>'
-                type: string
-                format: date-time
-              ExclusiveEndTime:
-                description: '<p>The exclusive end date and time for the range of journal contents that you want to export.</p> <p>The <code>ExclusiveEndTime</code> must be in <code>ISO 8601</code> date and time format and in Universal Coordinated Time (UTC). For example: <code>2019-06-13T21:36:34Z</code> </p> <p>The <code>ExclusiveEndTime</code> must be less than or equal to the current UTC date and time.</p>'
-                type: string
-                format: date-time
-              S3ExportConfiguration:
-                description: The Amazon Simple Storage Service (Amazon S3) bucket location in which a journal export job writes the journal contents.
-                type: object
-                properties:
-                  Bucket:
-                    $ref: '#/definitions/S3Bucket'
-                    description: '<p>The Amazon S3 bucket name in which a journal export job writes the journal contents.</p> <p>The bucket name must comply with the Amazon S3 bucket naming conventions. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html">Bucket Restrictions and Limitations</a> in the <i>Amazon S3 Developer Guide</i>.</p>'
-                  Prefix:
-                    $ref: '#/definitions/S3Prefix'
-                    description: '<p>The prefix for the Amazon S3 bucket in which a journal export job writes the journal contents.</p> <p>The prefix must comply with Amazon S3 key naming rules and restrictions. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html">Object Key and Metadata</a> in the <i>Amazon S3 Developer Guide</i>.</p> <p>The following are examples of valid <code>Prefix</code> values:</p> <ul> <li> <p> <code>JournalExports-ForMyLedger/Testing/</code> </p> </li> <li> <p> <code>JournalExports</code> </p> </li> <li> <p> <code>My:Tests/</code> </p> </li> </ul>'
-                  EncryptionConfiguration:
-                    $ref: '#/definitions/S3EncryptionConfiguration'
-                    description: The encryption settings that are used by a journal export job to write data in an Amazon S3 bucket.
-              RoleArn:
-                description: '<p>The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for a journal export job to do the following:</p> <ul> <li> <p>Write objects into your Amazon Simple Storage Service (Amazon S3) bucket.</p> </li> <li> <p>(Optional) Use your customer master key (CMK) in AWS Key Management Service (AWS KMS) for server-side encryption of your exported data.</p> </li> </ul>'
-                type: string
-                minLength: 20
-                maxLength: 1600
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-    get:
-      operationId: ListJournalS3ExportsForLedger
-      description: '<p>Returns an array of journal export job descriptions for a specified ledger.</p> <p>This action returns a maximum of <code>MaxResults</code> items, and is paginated so that you can retrieve all the items by calling <code>ListJournalS3ExportsForLedger</code> multiple times.</p>'
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/ListJournalS3ExportsForLedgerResponse'
-      parameters:
-        - name: name
-          in: path
-          required: true
-          description: The name of the ledger.
-          type: string
-          pattern: '(?!^.*--)(?!^[0-9]+$)(?!^-)(?!.*-$)^[A-Za-z0-9-]+$'
-          minLength: 1
-          maxLength: 32
-        - name: max_results
-          in: query
-          required: false
-          description: The maximum number of results to return in a single <code>ListJournalS3ExportsForLedger</code> request. (The actual number of results returned might be fewer.)
-          type: integer
-          minimum: 1
-          maximum: 100
-        - name: next_token
-          in: query
-          required: false
-          description: 'A pagination token, indicating that you want to retrieve the next page of results. If you received a value for <code>NextToken</code> in the response from a previous <code>ListJournalS3ExportsForLedger</code> call, then you should use that value as input here.'
-          type: string
-          pattern: '^[A-Za-z-0-9+/=]+$'
-          minLength: 4
-          maxLength: 1024
-        - name: MaxResults
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
-        - name: NextToken
-          type: string
-          in: query
-          description: Pagination token
-          required: false
   '/ledgers/{name}/block':
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
-      operationId: GetBlock
       description: '<p>Returns a journal block object at a specified address in a ledger. Also returns a proof of the specified block for verification if <code>DigestTipAddress</code> is provided.</p> <p>If the specified ledger doesn''t exist or is in <code>DELETING</code> status, then throws <code>ResourceNotFoundException</code>.</p> <p>If the specified ledger is in <code>CREATING</code> status, then throws <code>ResourcePreconditionNotMetException</code>.</p> <p>If no block exists with the specified address, then throws <code>InvalidParameterException</code>.</p>'
+      operationId: GetBlock
+      parameters:
+        - description: The name of the ledger.
+          in: path
+          maxLength: 32
+          minLength: 1
+          name: name
+          pattern: '(?!^.*--)(?!^[0-9]+$)(?!^-)(?!.*-$)^[A-Za-z0-9-]+$'
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              BlockAddress:
+                description: A structure that can contain an Amazon Ion value in multiple encoding formats.
+                properties:
+                  IonText:
+                    $ref: '#/definitions/IonText'
+                    description: An Amazon Ion plaintext value contained in a <code>ValueHolder</code> structure.
+                type: object
+              DigestTipAddress:
+                description: A structure that can contain an Amazon Ion value in multiple encoding formats.
+                properties:
+                  IonText:
+                    $ref: '#/definitions/IonText'
+                    description: An Amazon Ion plaintext value contained in a <code>ValueHolder</code> structure.
+                type: object
+            required:
+              - BlockAddress
+            type: object
       responses:
         '200':
           description: Success
@@ -529,37 +389,7 @@ paths:
           description: ResourcePreconditionNotMetException
           schema:
             $ref: '#/definitions/ResourcePreconditionNotMetException'
-      parameters:
-        - name: name
-          in: path
-          required: true
-          description: The name of the ledger.
-          type: string
-          pattern: '(?!^.*--)(?!^[0-9]+$)(?!^-)(?!.*-$)^[A-Za-z0-9-]+$'
-          minLength: 1
-          maxLength: 32
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - BlockAddress
-            properties:
-              BlockAddress:
-                description: A structure that can contain an Amazon Ion value in multiple encoding formats.
-                type: object
-                properties:
-                  IonText:
-                    $ref: '#/definitions/IonText'
-                    description: An Amazon Ion plaintext value contained in a <code>ValueHolder</code> structure.
-              DigestTipAddress:
-                description: A structure that can contain an Amazon Ion value in multiple encoding formats.
-                type: object
-                properties:
-                  IonText:
-                    $ref: '#/definitions/IonText'
-                    description: An Amazon Ion plaintext value contained in a <code>ValueHolder</code> structure.
+  '/ledgers/{name}/digest':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -568,10 +398,18 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/ledgers/{name}/digest':
     post:
-      operationId: GetDigest
       description: Returns the digest of a ledger at the latest committed block in the journal. The response includes a 256-bit hash value and a block address.
+      operationId: GetDigest
+      parameters:
+        - description: The name of the ledger.
+          in: path
+          maxLength: 32
+          minLength: 1
+          name: name
+          pattern: '(?!^.*--)(?!^[0-9]+$)(?!^-)(?!.*-$)^[A-Za-z0-9-]+$'
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -589,15 +427,149 @@ paths:
           description: ResourcePreconditionNotMetException
           schema:
             $ref: '#/definitions/ResourcePreconditionNotMetException'
+  '/ledgers/{name}/journal-s3-exports':
+    get:
+      description: '<p>Returns an array of journal export job descriptions for a specified ledger.</p> <p>This action returns a maximum of <code>MaxResults</code> items, and is paginated so that you can retrieve all the items by calling <code>ListJournalS3ExportsForLedger</code> multiple times.</p>'
+      operationId: ListJournalS3ExportsForLedger
       parameters:
-        - name: name
+        - description: The name of the ledger.
           in: path
-          required: true
-          description: The name of the ledger.
-          type: string
-          pattern: '(?!^.*--)(?!^[0-9]+$)(?!^-)(?!.*-$)^[A-Za-z0-9-]+$'
-          minLength: 1
           maxLength: 32
+          minLength: 1
+          name: name
+          pattern: '(?!^.*--)(?!^[0-9]+$)(?!^-)(?!.*-$)^[A-Za-z0-9-]+$'
+          required: true
+          type: string
+        - description: The maximum number of results to return in a single <code>ListJournalS3ExportsForLedger</code> request. (The actual number of results returned might be fewer.)
+          in: query
+          maximum: 100
+          minimum: 1
+          name: max_results
+          required: false
+          type: integer
+        - description: 'A pagination token, indicating that you want to retrieve the next page of results. If you received a value for <code>NextToken</code> in the response from a previous <code>ListJournalS3ExportsForLedger</code> call, then you should use that value as input here.'
+          in: query
+          maxLength: 1024
+          minLength: 4
+          name: next_token
+          pattern: '^[A-Za-z-0-9+/=]+$'
+          required: false
+          type: string
+        - description: Pagination limit
+          in: query
+          name: MaxResults
+          required: false
+          type: string
+        - description: Pagination token
+          in: query
+          name: NextToken
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListJournalS3ExportsForLedgerResponse'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      description: '<p>Exports journal contents within a date and time range from a ledger into a specified Amazon Simple Storage Service (Amazon S3) bucket. The data is written as files in Amazon Ion format.</p> <p>If the ledger with the given <code>Name</code> doesn''t exist, then throws <code>ResourceNotFoundException</code>.</p> <p>If the ledger with the given <code>Name</code> is in <code>CREATING</code> status, then throws <code>ResourcePreconditionNotMetException</code>.</p> <p>You can initiate up to two concurrent journal export requests for each ledger. Beyond this limit, journal export requests throw <code>LimitExceededException</code>.</p>'
+      operationId: ExportJournalToS3
+      parameters:
+        - description: The name of the ledger.
+          in: path
+          maxLength: 32
+          minLength: 1
+          name: name
+          pattern: '(?!^.*--)(?!^[0-9]+$)(?!^-)(?!.*-$)^[A-Za-z0-9-]+$'
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              ExclusiveEndTime:
+                description: '<p>The exclusive end date and time for the range of journal contents that you want to export.</p> <p>The <code>ExclusiveEndTime</code> must be in <code>ISO 8601</code> date and time format and in Universal Coordinated Time (UTC). For example: <code>2019-06-13T21:36:34Z</code> </p> <p>The <code>ExclusiveEndTime</code> must be less than or equal to the current UTC date and time.</p>'
+                format: date-time
+                type: string
+              InclusiveStartTime:
+                description: '<p>The inclusive start date and time for the range of journal contents that you want to export.</p> <p>The <code>InclusiveStartTime</code> must be in <code>ISO 8601</code> date and time format and in Universal Coordinated Time (UTC). For example: <code>2019-06-13T21:36:34Z</code> </p> <p>The <code>InclusiveStartTime</code> must be before <code>ExclusiveEndTime</code>.</p> <p>If you provide an <code>InclusiveStartTime</code> that is before the ledger''s <code>CreationDateTime</code>, Amazon QLDB defaults it to the ledger''s <code>CreationDateTime</code>.</p>'
+                format: date-time
+                type: string
+              RoleArn:
+                description: '<p>The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for a journal export job to do the following:</p> <ul> <li> <p>Write objects into your Amazon Simple Storage Service (Amazon S3) bucket.</p> </li> <li> <p>(Optional) Use your customer master key (CMK) in AWS Key Management Service (AWS KMS) for server-side encryption of your exported data.</p> </li> </ul>'
+                maxLength: 1600
+                minLength: 20
+                type: string
+              S3ExportConfiguration:
+                description: The Amazon Simple Storage Service (Amazon S3) bucket location in which a journal export job writes the journal contents.
+                properties:
+                  Bucket:
+                    $ref: '#/definitions/S3Bucket'
+                    description: '<p>The Amazon S3 bucket name in which a journal export job writes the journal contents.</p> <p>The bucket name must comply with the Amazon S3 bucket naming conventions. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html">Bucket Restrictions and Limitations</a> in the <i>Amazon S3 Developer Guide</i>.</p>'
+                  EncryptionConfiguration:
+                    $ref: '#/definitions/S3EncryptionConfiguration'
+                    description: The encryption settings that are used by a journal export job to write data in an Amazon S3 bucket.
+                  Prefix:
+                    $ref: '#/definitions/S3Prefix'
+                    description: '<p>The prefix for the Amazon S3 bucket in which a journal export job writes the journal contents.</p> <p>The prefix must comply with Amazon S3 key naming rules and restrictions. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html">Object Key and Metadata</a> in the <i>Amazon S3 Developer Guide</i>.</p> <p>The following are examples of valid <code>Prefix</code> values:</p> <ul> <li> <p> <code>JournalExports-ForMyLedger/Testing/</code> </p> </li> <li> <p> <code>JournalExports</code> </p> </li> <li> <p> <code>My:Tests/</code> </p> </li> </ul>'
+                type: object
+            required:
+              - InclusiveStartTime
+              - ExclusiveEndTime
+              - S3ExportConfiguration
+              - RoleArn
+            type: object
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ExportJournalToS3Response'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ResourcePreconditionNotMetException
+          schema:
+            $ref: '#/definitions/ResourcePreconditionNotMetException'
+  '/ledgers/{name}/journal-s3-exports/{exportId}':
+    get:
+      description: '<p>Returns information about a journal export job, including the ledger name, export ID, when it was created, current status, and its start and end time export parameters.</p> <p>If the export job with the given <code>ExportId</code> doesn''t exist, then throws <code>ResourceNotFoundException</code>.</p> <p>If the ledger with the given <code>Name</code> doesn''t exist, then throws <code>ResourceNotFoundException</code>.</p>'
+      operationId: DescribeJournalS3Export
+      parameters:
+        - description: The name of the ledger.
+          in: path
+          maxLength: 32
+          minLength: 1
+          name: name
+          pattern: '(?!^.*--)(?!^[0-9]+$)(?!^-)(?!.*-$)^[A-Za-z0-9-]+$'
+          required: true
+          type: string
+        - description: The unique ID of the journal export job that you want to describe.
+          in: path
+          maxLength: 22
+          minLength: 22
+          name: exportId
+          pattern: '^[A-Za-z-0-9]+$'
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeJournalS3ExportResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -607,9 +579,55 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/ledgers/{name}/revision':
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
-      operationId: GetRevision
       description: Returns a revision data object for a specified document ID and block address. Also returns a proof of the specified revision for verification if <code>DigestTipAddress</code> is provided.
+      operationId: GetRevision
+      parameters:
+        - description: The name of the ledger.
+          in: path
+          maxLength: 32
+          minLength: 1
+          name: name
+          pattern: '(?!^.*--)(?!^[0-9]+$)(?!^-)(?!.*-$)^[A-Za-z0-9-]+$'
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              BlockAddress:
+                description: A structure that can contain an Amazon Ion value in multiple encoding formats.
+                properties:
+                  IonText:
+                    $ref: '#/definitions/IonText'
+                    description: An Amazon Ion plaintext value contained in a <code>ValueHolder</code> structure.
+                type: object
+              DigestTipAddress:
+                description: A structure that can contain an Amazon Ion value in multiple encoding formats.
+                properties:
+                  IonText:
+                    $ref: '#/definitions/IonText'
+                    description: An Amazon Ion plaintext value contained in a <code>ValueHolder</code> structure.
+                type: object
+              DocumentId:
+                description: The unique ID of the document to be verified.
+                maxLength: 22
+                minLength: 22
+                pattern: '^[A-Za-z-0-9]+$'
+                type: string
+            required:
+              - BlockAddress
+              - DocumentId
+            type: object
       responses:
         '200':
           description: Success
@@ -627,99 +645,18 @@ paths:
           description: ResourcePreconditionNotMetException
           schema:
             $ref: '#/definitions/ResourcePreconditionNotMetException'
-      parameters:
-        - name: name
-          in: path
-          required: true
-          description: The name of the ledger.
-          type: string
-          pattern: '(?!^.*--)(?!^[0-9]+$)(?!^-)(?!.*-$)^[A-Za-z0-9-]+$'
-          minLength: 1
-          maxLength: 32
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - BlockAddress
-              - DocumentId
-            properties:
-              BlockAddress:
-                description: A structure that can contain an Amazon Ion value in multiple encoding formats.
-                type: object
-                properties:
-                  IonText:
-                    $ref: '#/definitions/IonText'
-                    description: An Amazon Ion plaintext value contained in a <code>ValueHolder</code> structure.
-              DocumentId:
-                description: The unique ID of the document to be verified.
-                type: string
-                pattern: '^[A-Za-z-0-9]+$'
-                minLength: 22
-                maxLength: 22
-              DigestTipAddress:
-                description: A structure that can contain an Amazon Ion value in multiple encoding formats.
-                type: object
-                properties:
-                  IonText:
-                    $ref: '#/definitions/IonText'
-                    description: An Amazon Ion plaintext value contained in a <code>ValueHolder</code> structure.
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /journal-s3-exports:
-    get:
-      operationId: ListJournalS3Exports
-      description: '<p>Returns an array of journal export job descriptions for all ledgers that are associated with the current AWS account and Region.</p> <p>This action returns a maximum of <code>MaxResults</code> items, and is paginated so that you can retrieve all the items by calling <code>ListJournalS3Exports</code> multiple times.</p>'
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/ListJournalS3ExportsResponse'
-      parameters:
-        - name: max_results
-          in: query
-          required: false
-          description: The maximum number of results to return in a single <code>ListJournalS3Exports</code> request. (The actual number of results returned might be fewer.)
-          type: integer
-          minimum: 1
-          maximum: 100
-        - name: next_token
-          in: query
-          required: false
-          description: 'A pagination token, indicating that you want to retrieve the next page of results. If you received a value for <code>NextToken</code> in the response from a previous <code>ListJournalS3Exports</code> call, then you should use that value as input here.'
-          type: string
-          pattern: '^[A-Za-z-0-9+/=]+$'
-          minLength: 4
-          maxLength: 1024
-        - name: MaxResults
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
-        - name: NextToken
-          type: string
-          in: query
-          description: Pagination token
-          required: false
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/tags/{resourceArn}':
     get:
-      operationId: ListTagsForResource
       description: Returns all tags for a specified Amazon QLDB resource.
+      operationId: ListTagsForResource
+      parameters:
+        - description: '<p>The Amazon Resource Name (ARN) for which you want to list the tags. For example:</p> <p> <code>arn:aws:qldb:us-east-1:123456789012:ledger/exampleLedger</code> </p>'
+          in: path
+          maxLength: 1600
+          minLength: 20
+          name: resourceArn
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -733,14 +670,6 @@ paths:
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-      parameters:
-        - name: resourceArn
-          in: path
-          required: true
-          description: '<p>The Amazon Resource Name (ARN) for which you want to list the tags. For example:</p> <p> <code>arn:aws:qldb:us-east-1:123456789012:ledger/exampleLedger</code> </p>'
-          type: string
-          minLength: 20
-          maxLength: 1600
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -750,8 +679,31 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
-      operationId: TagResource
       description: '<p>Adds one or more tags to a specified Amazon QLDB resource.</p> <p>A resource can have up to 50 tags. If you try to create more than 50 tags for a resource, your request fails and returns an error.</p>'
+      operationId: TagResource
+      parameters:
+        - description: '<p>The Amazon Resource Name (ARN) to which you want to add the tags. For example:</p> <p> <code>arn:aws:qldb:us-east-1:123456789012:ledger/exampleLedger</code> </p>'
+          in: path
+          maxLength: 1600
+          minLength: 20
+          name: resourceArn
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              Tags:
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
+                description: 'The key-value pairs to add as tags to the specified QLDB resource. Tag keys are case sensitive. If you specify a key that already exists for the resource, your request fails and returns an error. Tag values are case sensitive and can be null.'
+                maxProperties: 200
+                minProperties: 0
+                type: object
+            required:
+              - Tags
+            type: object
       responses:
         '200':
           description: Success
@@ -765,33 +717,25 @@ paths:
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-      parameters:
-        - name: resourceArn
-          in: path
-          required: true
-          description: '<p>The Amazon Resource Name (ARN) to which you want to add the tags. For example:</p> <p> <code>arn:aws:qldb:us-east-1:123456789012:ledger/exampleLedger</code> </p>'
-          type: string
-          minLength: 20
-          maxLength: 1600
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - Tags
-            properties:
-              Tags:
-                description: 'The key-value pairs to add as tags to the specified QLDB resource. Tag keys are case sensitive. If you specify a key that already exists for the resource, your request fails and returns an error. Tag values are case sensitive and can be null.'
-                type: object
-                minProperties: 0
-                maxProperties: 200
-                additionalProperties:
-                  $ref: '#/definitions/TagValue'
   '/tags/{resourceArn}#tagKeys':
     delete:
-      operationId: UntagResource
       description: Removes one or more tags from a specified Amazon QLDB resource. You can specify up to 50 tag keys to remove.
+      operationId: UntagResource
+      parameters:
+        - description: '<p>The Amazon Resource Name (ARN) from which you want to remove the tags. For example:</p> <p> <code>arn:aws:qldb:us-east-1:123456789012:ledger/exampleLedger</code> </p>'
+          in: path
+          maxLength: 1600
+          minLength: 20
+          name: resourceArn
+          required: true
+          type: string
+        - description: The list of tag keys that you want to remove.
+          in: query
+          items:
+            type: string
+          name: tagKeys
+          required: true
+          type: array
       responses:
         '200':
           description: Success
@@ -805,21 +749,6 @@ paths:
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-      parameters:
-        - name: resourceArn
-          in: path
-          required: true
-          description: '<p>The Amazon Resource Name (ARN) from which you want to remove the tags. For example:</p> <p> <code>arn:aws:qldb:us-east-1:123456789012:ledger/exampleLedger</code> </p>'
-          type: string
-          minLength: 20
-          maxLength: 1600
-        - name: tagKeys
-          in: query
-          required: true
-          description: The list of tag keys that you want to remove.
-          type: array
-          items:
-            type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -829,93 +758,133 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  CreateLedgerResponse:
-    type: object
+  Arn:
+    maxLength: 1600
+    minLength: 20
+    type: string
+  CreateLedgerRequest:
     properties:
+      DeletionProtection:
+        $ref: '#/definitions/DeletionProtection'
+        description: '<p>The flag that prevents a ledger from being deleted by any user. If not provided on ledger creation, this feature is enabled (<code>true</code>) by default.</p> <p>If deletion protection is enabled, you must first disable it before you can delete the ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>. The QLDB console disables deletion protection for you when you use it to delete a ledger.</p>'
       Name:
         $ref: '#/definitions/LedgerName'
-        description: The name of the ledger.
+        description: The name of the ledger that you want to create. The name must be unique among all of your ledgers in the current AWS Region.
+      PermissionsMode:
+        $ref: '#/definitions/PermissionsMode'
+        description: The permissions mode to assign to the ledger that you want to create.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: The key-value pairs to add as tags to the ledger that you want to create. Tag keys are case sensitive. Tag values are case sensitive and can be null.
+    required:
+      - Name
+      - PermissionsMode
+    type: object
+  CreateLedgerResponse:
+    properties:
       Arn:
         $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) for the ledger.
-      State:
-        $ref: '#/definitions/LedgerState'
-        description: The current status of the ledger.
       CreationDateTime:
         $ref: '#/definitions/Timestamp'
         description: 'The date and time, in epoch time format, when the ledger was created. (Epoch time format is the number of seconds elapsed since 12:00:00 AM January 1, 1970 UTC.)'
       DeletionProtection:
         $ref: '#/definitions/DeletionProtection'
         description: '<p>The flag that prevents a ledger from being deleted by any user. If not provided on ledger creation, this feature is enabled (<code>true</code>) by default.</p> <p>If deletion protection is enabled, you must first disable it before you can delete the ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>. The QLDB console disables deletion protection for you when you use it to delete a ledger.</p>'
-  TagValue:
-    type: string
-    minLength: 0
-    maxLength: 256
-  InvalidParameterException: {}
-  ResourceAlreadyExistsException: {}
-  LimitExceededException: {}
-  ResourceInUseException: {}
-  ResourceNotFoundException: {}
-  ResourcePreconditionNotMetException: {}
-  DescribeJournalS3ExportResponse:
+      Name:
+        $ref: '#/definitions/LedgerName'
+        description: The name of the ledger.
+      State:
+        $ref: '#/definitions/LedgerState'
+        description: The current status of the ledger.
     type: object
-    required:
-      - ExportDescription
+  DeleteLedgerRequest:
+    properties: {}
+    type: object
+  DeletionProtection:
+    type: boolean
+  DescribeJournalS3ExportRequest:
+    properties: {}
+    type: object
+  DescribeJournalS3ExportResponse:
     properties:
       ExportDescription:
         $ref: '#/definitions/JournalS3ExportDescription'
         description: Information about the journal export job returned by a <code>DescribeJournalS3Export</code> request.
-  DescribeLedgerResponse:
+    required:
+      - ExportDescription
     type: object
+  DescribeLedgerRequest:
+    properties: {}
+    type: object
+  DescribeLedgerResponse:
     properties:
-      Name:
-        $ref: '#/definitions/LedgerName'
-        description: The name of the ledger.
       Arn:
         $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) for the ledger.
-      State:
-        $ref: '#/definitions/LedgerState'
-        description: The current status of the ledger.
       CreationDateTime:
         $ref: '#/definitions/Timestamp'
         description: 'The date and time, in epoch time format, when the ledger was created. (Epoch time format is the number of seconds elapsed since 12:00:00 AM January 1, 1970 UTC.)'
       DeletionProtection:
         $ref: '#/definitions/DeletionProtection'
         description: '<p>The flag that prevents a ledger from being deleted by any user. If not provided on ledger creation, this feature is enabled (<code>true</code>) by default.</p> <p>If deletion protection is enabled, you must first disable it before you can delete the ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>. The QLDB console disables deletion protection for you when you use it to delete a ledger.</p>'
-  ExportJournalToS3Response:
+      Name:
+        $ref: '#/definitions/LedgerName'
+        description: The name of the ledger.
+      State:
+        $ref: '#/definitions/LedgerState'
+        description: The current status of the ledger.
     type: object
+  Digest:
+    maxLength: 32
+    minLength: 32
+    type: string
+  ExportJournalToS3Request:
+    properties:
+      ExclusiveEndTime:
+        $ref: '#/definitions/Timestamp'
+        description: '<p>The exclusive end date and time for the range of journal contents that you want to export.</p> <p>The <code>ExclusiveEndTime</code> must be in <code>ISO 8601</code> date and time format and in Universal Coordinated Time (UTC). For example: <code>2019-06-13T21:36:34Z</code> </p> <p>The <code>ExclusiveEndTime</code> must be less than or equal to the current UTC date and time.</p>'
+      InclusiveStartTime:
+        $ref: '#/definitions/Timestamp'
+        description: '<p>The inclusive start date and time for the range of journal contents that you want to export.</p> <p>The <code>InclusiveStartTime</code> must be in <code>ISO 8601</code> date and time format and in Universal Coordinated Time (UTC). For example: <code>2019-06-13T21:36:34Z</code> </p> <p>The <code>InclusiveStartTime</code> must be before <code>ExclusiveEndTime</code>.</p> <p>If you provide an <code>InclusiveStartTime</code> that is before the ledger''s <code>CreationDateTime</code>, Amazon QLDB defaults it to the ledger''s <code>CreationDateTime</code>.</p>'
+      RoleArn:
+        $ref: '#/definitions/Arn'
+        description: '<p>The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for a journal export job to do the following:</p> <ul> <li> <p>Write objects into your Amazon Simple Storage Service (Amazon S3) bucket.</p> </li> <li> <p>(Optional) Use your customer master key (CMK) in AWS Key Management Service (AWS KMS) for server-side encryption of your exported data.</p> </li> </ul>'
+      S3ExportConfiguration:
+        $ref: '#/definitions/S3ExportConfiguration'
+        description: The configuration settings of the Amazon S3 bucket destination for your export request.
     required:
-      - ExportId
+      - InclusiveStartTime
+      - ExclusiveEndTime
+      - S3ExportConfiguration
+      - RoleArn
+    type: object
+  ExportJournalToS3Response:
     properties:
       ExportId:
         $ref: '#/definitions/UniqueId'
         description: '<p>The unique ID that QLDB assigns to each journal export job.</p> <p>To describe your export request and check the status of the job, you can use <code>ExportId</code> to call <code>DescribeJournalS3Export</code>.</p>'
-  S3Bucket:
-    type: string
-    pattern: '^[A-Za-z-0-9-_.]+$'
-    minLength: 3
-    maxLength: 255
-  S3Prefix:
-    type: string
-    minLength: 0
-    maxLength: 128
-  S3EncryptionConfiguration:
-    type: object
     required:
-      - ObjectEncryptionType
+      - ExportId
+    type: object
+  ExportStatus:
+    enum:
+      - IN_PROGRESS
+      - COMPLETED
+      - CANCELLED
+    type: string
+  GetBlockRequest:
     properties:
-      ObjectEncryptionType:
-        $ref: '#/definitions/S3ObjectEncryptionType'
-        description: '<p>The Amazon S3 object encryption type.</p> <p>To learn more about server-side encryption options in Amazon S3, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html">Protecting Data Using Server-Side Encryption</a> in the <i>Amazon S3 Developer Guide</i>.</p>'
-      KmsKeyArn:
-        $ref: '#/definitions/Arn'
-        description: <p>The Amazon Resource Name (ARN) for a customer master key (CMK) in AWS Key Management Service (AWS KMS).</p> <p>You must provide a <code>KmsKeyArn</code> if you specify <code>SSE_KMS</code> as the <code>ObjectEncryptionType</code>.</p> <p> <code>KmsKeyArn</code> is not required if you specify <code>SSE_S3</code> as the <code>ObjectEncryptionType</code>.</p>
-    description: The encryption settings that are used by a journal export job to write data in an Amazon Simple Storage Service (Amazon S3) bucket.
-  GetBlockResponse:
-    type: object
+      BlockAddress:
+        $ref: '#/definitions/ValueHolder'
+        description: '<p>The location of the block that you want to request. An address is an Amazon Ion structure that has two fields: <code>strandId</code> and <code>sequenceNo</code>.</p> <p>For example: <code>{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:14}</code> </p>'
+      DigestTipAddress:
+        $ref: '#/definitions/ValueHolder'
+        description: '<p>The latest block location covered by the digest for which to request a proof. An address is an Amazon Ion structure that has two fields: <code>strandId</code> and <code>sequenceNo</code>.</p> <p>For example: <code>{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49}</code> </p>'
     required:
-      - Block
+      - BlockAddress
+    type: object
+  GetBlockResponse:
     properties:
       Block:
         $ref: '#/definitions/ValueHolder'
@@ -923,16 +892,13 @@ definitions:
       Proof:
         $ref: '#/definitions/ValueHolder'
         description: 'The proof object in Amazon Ion format returned by a <code>GetBlock</code> request. A proof contains the list of hash values required to recalculate the specified digest using a Merkle tree, starting with the specified block.'
-  IonText:
-    type: string
-    minLength: 1
-    maxLength: 1048576
-    format: password
-  GetDigestResponse:
-    type: object
     required:
-      - Digest
-      - DigestTipAddress
+      - Block
+    type: object
+  GetDigestRequest:
+    properties: {}
+    type: object
+  GetDigestResponse:
     properties:
       Digest:
         $ref: '#/definitions/Digest'
@@ -940,10 +906,26 @@ definitions:
       DigestTipAddress:
         $ref: '#/definitions/ValueHolder'
         description: 'The latest block location covered by the digest that you requested. An address is an Amazon Ion structure that has two fields: <code>strandId</code> and <code>sequenceNo</code>.'
-  GetRevisionResponse:
-    type: object
     required:
-      - Revision
+      - Digest
+      - DigestTipAddress
+    type: object
+  GetRevisionRequest:
+    properties:
+      BlockAddress:
+        $ref: '#/definitions/ValueHolder'
+        description: '<p>The block location of the document revision to be verified. An address is an Amazon Ion structure that has two fields: <code>strandId</code> and <code>sequenceNo</code>.</p> <p>For example: <code>{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:14}</code> </p>'
+      DigestTipAddress:
+        $ref: '#/definitions/ValueHolder'
+        description: '<p>The latest block location covered by the digest for which to request a proof. An address is an Amazon Ion structure that has two fields: <code>strandId</code> and <code>sequenceNo</code>.</p> <p>For example: <code>{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49}</code> </p>'
+      DocumentId:
+        $ref: '#/definitions/UniqueId'
+        description: The unique ID of the document to be verified.
+    required:
+      - BlockAddress
+      - DocumentId
+    type: object
+  GetRevisionResponse:
     properties:
       Proof:
         $ref: '#/definitions/ValueHolder'
@@ -951,129 +933,41 @@ definitions:
       Revision:
         $ref: '#/definitions/ValueHolder'
         description: The document revision data object in Amazon Ion format.
-  ListJournalS3ExportsResponse:
+    required:
+      - Revision
     type: object
-    properties:
-      JournalS3Exports:
-        $ref: '#/definitions/JournalS3ExportList'
-        description: The array of journal export job descriptions for all ledgers that are associated with the current AWS account and Region.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: '<ul> <li> <p>If <code>NextToken</code> is empty, then the last page of results has been processed and there are no more results to be retrieved.</p> </li> <li> <p>If <code>NextToken</code> is <i>not</i> empty, then there are more results available. To retrieve the next page of results, use the value of <code>NextToken</code> in a subsequent <code>ListJournalS3Exports</code> call.</p> </li> </ul>'
-  ListJournalS3ExportsForLedgerResponse:
-    type: object
-    properties:
-      JournalS3Exports:
-        $ref: '#/definitions/JournalS3ExportList'
-        description: The array of journal export job descriptions that are associated with the specified ledger.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: '<ul> <li> <p>If <code>NextToken</code> is empty, then the last page of results has been processed and there are no more results to be retrieved.</p> </li> <li> <p>If <code>NextToken</code> is <i>not</i> empty, then there are more results available. To retrieve the next page of results, use the value of <code>NextToken</code> in a subsequent <code>ListJournalS3ExportsForLedger</code> call.</p> </li> </ul>'
-  ListLedgersResponse:
-    type: object
-    properties:
-      Ledgers:
-        $ref: '#/definitions/LedgerList'
-        description: The array of ledger summaries that are associated with the current AWS account and Region.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: '<p>A pagination token, indicating whether there are more results available:</p> <ul> <li> <p>If <code>NextToken</code> is empty, then the last page of results has been processed and there are no more results to be retrieved.</p> </li> <li> <p>If <code>NextToken</code> is <i>not</i> empty, then there are more results available. To retrieve the next page of results, use the value of <code>NextToken</code> in a subsequent <code>ListLedgers</code> call.</p> </li> </ul>'
-  ListTagsForResourceResponse:
-    type: object
-    properties:
-      Tags:
-        $ref: '#/definitions/Tags'
-        description: The tags that are currently associated with the specified Amazon QLDB resource.
-  TagResourceResponse:
-    type: object
-    properties: {}
-  UntagResourceResponse:
-    type: object
-    properties: {}
-  TagKey:
-    type: string
+  InvalidParameterException: {}
+  IonText:
+    format: password
+    maxLength: 1048576
     minLength: 1
-    maxLength: 128
-  UpdateLedgerResponse:
-    type: object
+    type: string
+  JournalS3ExportDescription:
+    description: 'The information about a journal export job, including the ledger name, export ID, when it was created, current status, and its start and end time export parameters.'
     properties:
-      Name:
+      ExclusiveEndTime:
+        $ref: '#/definitions/Timestamp'
+        description: The exclusive end date and time for the range of journal contents that are specified in the original export request.
+      ExportCreationTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'The date and time, in epoch time format, when the export job was created. (Epoch time format is the number of seconds elapsed since 12:00:00 AM January 1, 1970 UTC.)'
+      ExportId:
+        $ref: '#/definitions/UniqueId'
+        description: The unique ID of the journal export job.
+      InclusiveStartTime:
+        $ref: '#/definitions/Timestamp'
+        description: The inclusive start date and time for the range of journal contents that are specified in the original export request.
+      LedgerName:
         $ref: '#/definitions/LedgerName'
         description: The name of the ledger.
-      Arn:
+      RoleArn:
         $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) for the ledger.
-      State:
-        $ref: '#/definitions/LedgerState'
-        description: The current status of the ledger.
-      CreationDateTime:
-        $ref: '#/definitions/Timestamp'
-        description: 'The date and time, in epoch time format, when the ledger was created. (Epoch time format is the number of seconds elapsed since 12:00:00 AM January 1, 1970 UTC.)'
-      DeletionProtection:
-        $ref: '#/definitions/DeletionProtection'
-        description: '<p>The flag that prevents a ledger from being deleted by any user. If not provided on ledger creation, this feature is enabled (<code>true</code>) by default.</p> <p>If deletion protection is enabled, you must first disable it before you can delete the ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>. The QLDB console disables deletion protection for you when you use it to delete a ledger.</p>'
-  Arn:
-    type: string
-    minLength: 20
-    maxLength: 1600
-  LedgerName:
-    type: string
-    pattern: '(?!^.*--)(?!^[0-9]+$)(?!^-)(?!.*-$)^[A-Za-z0-9-]+$'
-    minLength: 1
-    maxLength: 32
-  Tags:
-    type: object
-    minProperties: 0
-    maxProperties: 200
-    additionalProperties:
-      $ref: '#/definitions/TagValue'
-  PermissionsMode:
-    type: string
-    enum:
-      - ALLOW_ALL
-  DeletionProtection:
-    type: boolean
-  CreateLedgerRequest:
-    type: object
-    required:
-      - Name
-      - PermissionsMode
-    properties:
-      Name:
-        $ref: '#/definitions/LedgerName'
-        description: The name of the ledger that you want to create. The name must be unique among all of your ledgers in the current AWS Region.
-      Tags:
-        $ref: '#/definitions/Tags'
-        description: The key-value pairs to add as tags to the ledger that you want to create. Tag keys are case sensitive. Tag values are case sensitive and can be null.
-      PermissionsMode:
-        $ref: '#/definitions/PermissionsMode'
-        description: The permissions mode to assign to the ledger that you want to create.
-      DeletionProtection:
-        $ref: '#/definitions/DeletionProtection'
-        description: '<p>The flag that prevents a ledger from being deleted by any user. If not provided on ledger creation, this feature is enabled (<code>true</code>) by default.</p> <p>If deletion protection is enabled, you must first disable it before you can delete the ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>. The QLDB console disables deletion protection for you when you use it to delete a ledger.</p>'
-  LedgerState:
-    type: string
-    enum:
-      - CREATING
-      - ACTIVE
-      - DELETING
-      - DELETED
-  Timestamp:
-    type: string
-    format: date-time
-  DeleteLedgerRequest:
-    type: object
-    properties: {}
-  UniqueId:
-    type: string
-    pattern: '^[A-Za-z-0-9]+$'
-    minLength: 22
-    maxLength: 22
-  DescribeJournalS3ExportRequest:
-    type: object
-    properties: {}
-  JournalS3ExportDescription:
-    type: object
+        description: '<p>The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for a journal export job to do the following:</p> <ul> <li> <p>Write objects into your Amazon Simple Storage Service (Amazon S3) bucket.</p> </li> <li> <p>(Optional) Use your customer master key (CMK) in AWS Key Management Service (AWS KMS) for server-side encryption of your exported data.</p> </li> </ul>'
+      S3ExportConfiguration:
+        $ref: '#/definitions/S3ExportConfiguration'
+      Status:
+        $ref: '#/definitions/ExportStatus'
+        description: The current state of the journal export job.
     required:
       - LedgerName
       - ExportId
@@ -1083,185 +977,291 @@ definitions:
       - ExclusiveEndTime
       - S3ExportConfiguration
       - RoleArn
-    properties:
-      LedgerName:
-        $ref: '#/definitions/LedgerName'
-        description: The name of the ledger.
-      ExportId:
-        $ref: '#/definitions/UniqueId'
-        description: The unique ID of the journal export job.
-      ExportCreationTime:
-        $ref: '#/definitions/Timestamp'
-        description: 'The date and time, in epoch time format, when the export job was created. (Epoch time format is the number of seconds elapsed since 12:00:00 AM January 1, 1970 UTC.)'
-      Status:
-        $ref: '#/definitions/ExportStatus'
-        description: The current state of the journal export job.
-      InclusiveStartTime:
-        $ref: '#/definitions/Timestamp'
-        description: The inclusive start date and time for the range of journal contents that are specified in the original export request.
-      ExclusiveEndTime:
-        $ref: '#/definitions/Timestamp'
-        description: The exclusive end date and time for the range of journal contents that are specified in the original export request.
-      S3ExportConfiguration:
-        $ref: '#/definitions/S3ExportConfiguration'
-      RoleArn:
-        $ref: '#/definitions/Arn'
-        description: '<p>The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for a journal export job to do the following:</p> <ul> <li> <p>Write objects into your Amazon Simple Storage Service (Amazon S3) bucket.</p> </li> <li> <p>(Optional) Use your customer master key (CMK) in AWS Key Management Service (AWS KMS) for server-side encryption of your exported data.</p> </li> </ul>'
-    description: 'The information about a journal export job, including the ledger name, export ID, when it was created, current status, and its start and end time export parameters.'
-  DescribeLedgerRequest:
     type: object
-    properties: {}
-  Digest:
-    type: string
-    minLength: 32
-    maxLength: 32
-  S3ExportConfiguration:
-    type: object
-    required:
-      - Bucket
-      - Prefix
-      - EncryptionConfiguration
-    properties:
-      Bucket:
-        $ref: '#/definitions/S3Bucket'
-        description: '<p>The Amazon S3 bucket name in which a journal export job writes the journal contents.</p> <p>The bucket name must comply with the Amazon S3 bucket naming conventions. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html">Bucket Restrictions and Limitations</a> in the <i>Amazon S3 Developer Guide</i>.</p>'
-      Prefix:
-        $ref: '#/definitions/S3Prefix'
-        description: '<p>The prefix for the Amazon S3 bucket in which a journal export job writes the journal contents.</p> <p>The prefix must comply with Amazon S3 key naming rules and restrictions. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html">Object Key and Metadata</a> in the <i>Amazon S3 Developer Guide</i>.</p> <p>The following are examples of valid <code>Prefix</code> values:</p> <ul> <li> <p> <code>JournalExports-ForMyLedger/Testing/</code> </p> </li> <li> <p> <code>JournalExports</code> </p> </li> <li> <p> <code>My:Tests/</code> </p> </li> </ul>'
-      EncryptionConfiguration:
-        $ref: '#/definitions/S3EncryptionConfiguration'
-        description: The encryption settings that are used by a journal export job to write data in an Amazon S3 bucket.
-    description: The Amazon Simple Storage Service (Amazon S3) bucket location in which a journal export job writes the journal contents.
-  ExportJournalToS3Request:
-    type: object
-    required:
-      - InclusiveStartTime
-      - ExclusiveEndTime
-      - S3ExportConfiguration
-      - RoleArn
-    properties:
-      InclusiveStartTime:
-        $ref: '#/definitions/Timestamp'
-        description: '<p>The inclusive start date and time for the range of journal contents that you want to export.</p> <p>The <code>InclusiveStartTime</code> must be in <code>ISO 8601</code> date and time format and in Universal Coordinated Time (UTC). For example: <code>2019-06-13T21:36:34Z</code> </p> <p>The <code>InclusiveStartTime</code> must be before <code>ExclusiveEndTime</code>.</p> <p>If you provide an <code>InclusiveStartTime</code> that is before the ledger''s <code>CreationDateTime</code>, Amazon QLDB defaults it to the ledger''s <code>CreationDateTime</code>.</p>'
-      ExclusiveEndTime:
-        $ref: '#/definitions/Timestamp'
-        description: '<p>The exclusive end date and time for the range of journal contents that you want to export.</p> <p>The <code>ExclusiveEndTime</code> must be in <code>ISO 8601</code> date and time format and in Universal Coordinated Time (UTC). For example: <code>2019-06-13T21:36:34Z</code> </p> <p>The <code>ExclusiveEndTime</code> must be less than or equal to the current UTC date and time.</p>'
-      S3ExportConfiguration:
-        $ref: '#/definitions/S3ExportConfiguration'
-        description: The configuration settings of the Amazon S3 bucket destination for your export request.
-      RoleArn:
-        $ref: '#/definitions/Arn'
-        description: '<p>The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for a journal export job to do the following:</p> <ul> <li> <p>Write objects into your Amazon Simple Storage Service (Amazon S3) bucket.</p> </li> <li> <p>(Optional) Use your customer master key (CMK) in AWS Key Management Service (AWS KMS) for server-side encryption of your exported data.</p> </li> </ul>'
-  ExportStatus:
-    type: string
-    enum:
-      - IN_PROGRESS
-      - COMPLETED
-      - CANCELLED
-  ValueHolder:
-    type: object
-    properties:
-      IonText:
-        $ref: '#/definitions/IonText'
-        description: An Amazon Ion plaintext value contained in a <code>ValueHolder</code> structure.
-    description: A structure that can contain an Amazon Ion value in multiple encoding formats.
-  GetBlockRequest:
-    type: object
-    required:
-      - BlockAddress
-    properties:
-      BlockAddress:
-        $ref: '#/definitions/ValueHolder'
-        description: '<p>The location of the block that you want to request. An address is an Amazon Ion structure that has two fields: <code>strandId</code> and <code>sequenceNo</code>.</p> <p>For example: <code>{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:14}</code> </p>'
-      DigestTipAddress:
-        $ref: '#/definitions/ValueHolder'
-        description: '<p>The latest block location covered by the digest for which to request a proof. An address is an Amazon Ion structure that has two fields: <code>strandId</code> and <code>sequenceNo</code>.</p> <p>For example: <code>{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49}</code> </p>'
-  GetDigestRequest:
-    type: object
-    properties: {}
-  GetRevisionRequest:
-    type: object
-    required:
-      - BlockAddress
-      - DocumentId
-    properties:
-      BlockAddress:
-        $ref: '#/definitions/ValueHolder'
-        description: '<p>The block location of the document revision to be verified. An address is an Amazon Ion structure that has two fields: <code>strandId</code> and <code>sequenceNo</code>.</p> <p>For example: <code>{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:14}</code> </p>'
-      DocumentId:
-        $ref: '#/definitions/UniqueId'
-        description: The unique ID of the document to be verified.
-      DigestTipAddress:
-        $ref: '#/definitions/ValueHolder'
-        description: '<p>The latest block location covered by the digest for which to request a proof. An address is an Amazon Ion structure that has two fields: <code>strandId</code> and <code>sequenceNo</code>.</p> <p>For example: <code>{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49}</code> </p>'
   JournalS3ExportList:
-    type: array
     items:
       $ref: '#/definitions/JournalS3ExportDescription'
+    type: array
+  LedgerList:
+    items:
+      $ref: '#/definitions/LedgerSummary'
+    type: array
+  LedgerName:
+    maxLength: 32
+    minLength: 1
+    pattern: '(?!^.*--)(?!^[0-9]+$)(?!^-)(?!.*-$)^[A-Za-z0-9-]+$'
+    type: string
+  LedgerState:
+    enum:
+      - CREATING
+      - ACTIVE
+      - DELETING
+      - DELETED
+    type: string
   LedgerSummary:
-    type: object
+    description: 'Information about a ledger, including its name, state, and when it was created.'
     properties:
+      CreationDateTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'The date and time, in epoch time format, when the ledger was created. (Epoch time format is the number of seconds elapsed since 12:00:00 AM January 1, 1970 UTC.)'
       Name:
         $ref: '#/definitions/LedgerName'
         description: The name of the ledger.
       State:
         $ref: '#/definitions/LedgerState'
         description: The current status of the ledger.
-      CreationDateTime:
-        $ref: '#/definitions/Timestamp'
-        description: 'The date and time, in epoch time format, when the ledger was created. (Epoch time format is the number of seconds elapsed since 12:00:00 AM January 1, 1970 UTC.)'
-    description: 'Information about a ledger, including its name, state, and when it was created.'
-  LedgerList:
-    type: array
-    items:
-      $ref: '#/definitions/LedgerSummary'
-  MaxResults:
-    type: integer
-    minimum: 1
-    maximum: 100
-  NextToken:
-    type: string
-    pattern: '^[A-Za-z-0-9+/=]+$'
-    minLength: 4
-    maxLength: 1024
+    type: object
+  LimitExceededException: {}
   ListJournalS3ExportsForLedgerRequest:
-    type: object
     properties: {}
+    type: object
+  ListJournalS3ExportsForLedgerResponse:
+    properties:
+      JournalS3Exports:
+        $ref: '#/definitions/JournalS3ExportList'
+        description: The array of journal export job descriptions that are associated with the specified ledger.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: '<ul> <li> <p>If <code>NextToken</code> is empty, then the last page of results has been processed and there are no more results to be retrieved.</p> </li> <li> <p>If <code>NextToken</code> is <i>not</i> empty, then there are more results available. To retrieve the next page of results, use the value of <code>NextToken</code> in a subsequent <code>ListJournalS3ExportsForLedger</code> call.</p> </li> </ul>'
+    type: object
   ListJournalS3ExportsRequest:
-    type: object
     properties: {}
+    type: object
+  ListJournalS3ExportsResponse:
+    properties:
+      JournalS3Exports:
+        $ref: '#/definitions/JournalS3ExportList'
+        description: The array of journal export job descriptions for all ledgers that are associated with the current AWS account and Region.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: '<ul> <li> <p>If <code>NextToken</code> is empty, then the last page of results has been processed and there are no more results to be retrieved.</p> </li> <li> <p>If <code>NextToken</code> is <i>not</i> empty, then there are more results available. To retrieve the next page of results, use the value of <code>NextToken</code> in a subsequent <code>ListJournalS3Exports</code> call.</p> </li> </ul>'
+    type: object
   ListLedgersRequest:
-    type: object
     properties: {}
+    type: object
+  ListLedgersResponse:
+    properties:
+      Ledgers:
+        $ref: '#/definitions/LedgerList'
+        description: The array of ledger summaries that are associated with the current AWS account and Region.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: '<p>A pagination token, indicating whether there are more results available:</p> <ul> <li> <p>If <code>NextToken</code> is empty, then the last page of results has been processed and there are no more results to be retrieved.</p> </li> <li> <p>If <code>NextToken</code> is <i>not</i> empty, then there are more results available. To retrieve the next page of results, use the value of <code>NextToken</code> in a subsequent <code>ListLedgers</code> call.</p> </li> </ul>'
+    type: object
   ListTagsForResourceRequest:
-    type: object
     properties: {}
-  S3ObjectEncryptionType:
+    type: object
+  ListTagsForResourceResponse:
+    properties:
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: The tags that are currently associated with the specified Amazon QLDB resource.
+    type: object
+  MaxResults:
+    maximum: 100
+    minimum: 1
+    type: integer
+  NextToken:
+    maxLength: 1024
+    minLength: 4
+    pattern: '^[A-Za-z-0-9+/=]+$'
     type: string
+  PermissionsMode:
+    enum:
+      - ALLOW_ALL
+    type: string
+  ResourceAlreadyExistsException: {}
+  ResourceInUseException: {}
+  ResourceNotFoundException: {}
+  ResourcePreconditionNotMetException: {}
+  S3Bucket:
+    maxLength: 255
+    minLength: 3
+    pattern: '^[A-Za-z-0-9-_.]+$'
+    type: string
+  S3EncryptionConfiguration:
+    description: The encryption settings that are used by a journal export job to write data in an Amazon Simple Storage Service (Amazon S3) bucket.
+    properties:
+      KmsKeyArn:
+        $ref: '#/definitions/Arn'
+        description: <p>The Amazon Resource Name (ARN) for a customer master key (CMK) in AWS Key Management Service (AWS KMS).</p> <p>You must provide a <code>KmsKeyArn</code> if you specify <code>SSE_KMS</code> as the <code>ObjectEncryptionType</code>.</p> <p> <code>KmsKeyArn</code> is not required if you specify <code>SSE_S3</code> as the <code>ObjectEncryptionType</code>.</p>
+      ObjectEncryptionType:
+        $ref: '#/definitions/S3ObjectEncryptionType'
+        description: '<p>The Amazon S3 object encryption type.</p> <p>To learn more about server-side encryption options in Amazon S3, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html">Protecting Data Using Server-Side Encryption</a> in the <i>Amazon S3 Developer Guide</i>.</p>'
+    required:
+      - ObjectEncryptionType
+    type: object
+  S3ExportConfiguration:
+    description: The Amazon Simple Storage Service (Amazon S3) bucket location in which a journal export job writes the journal contents.
+    properties:
+      Bucket:
+        $ref: '#/definitions/S3Bucket'
+        description: '<p>The Amazon S3 bucket name in which a journal export job writes the journal contents.</p> <p>The bucket name must comply with the Amazon S3 bucket naming conventions. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html">Bucket Restrictions and Limitations</a> in the <i>Amazon S3 Developer Guide</i>.</p>'
+      EncryptionConfiguration:
+        $ref: '#/definitions/S3EncryptionConfiguration'
+        description: The encryption settings that are used by a journal export job to write data in an Amazon S3 bucket.
+      Prefix:
+        $ref: '#/definitions/S3Prefix'
+        description: '<p>The prefix for the Amazon S3 bucket in which a journal export job writes the journal contents.</p> <p>The prefix must comply with Amazon S3 key naming rules and restrictions. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html">Object Key and Metadata</a> in the <i>Amazon S3 Developer Guide</i>.</p> <p>The following are examples of valid <code>Prefix</code> values:</p> <ul> <li> <p> <code>JournalExports-ForMyLedger/Testing/</code> </p> </li> <li> <p> <code>JournalExports</code> </p> </li> <li> <p> <code>My:Tests/</code> </p> </li> </ul>'
+    required:
+      - Bucket
+      - Prefix
+      - EncryptionConfiguration
+    type: object
+  S3ObjectEncryptionType:
     enum:
       - SSE_KMS
       - SSE_S3
       - NO_ENCRYPTION
+    type: string
+  S3Prefix:
+    maxLength: 128
+    minLength: 0
+    type: string
+  TagKey:
+    maxLength: 128
+    minLength: 1
+    type: string
   TagKeyList:
-    type: array
     items:
       $ref: '#/definitions/TagKey'
-    minItems: 0
     maxItems: 200
+    minItems: 0
+    type: array
   TagResourceRequest:
-    type: object
-    required:
-      - Tags
     properties:
       Tags:
         $ref: '#/definitions/Tags'
         description: 'The key-value pairs to add as tags to the specified QLDB resource. Tag keys are case sensitive. If you specify a key that already exists for the resource, your request fails and returns an error. Tag values are case sensitive and can be null.'
-  UntagResourceRequest:
+    required:
+      - Tags
     type: object
+  TagResourceResponse:
     properties: {}
-  UpdateLedgerRequest:
     type: object
+  TagValue:
+    maxLength: 256
+    minLength: 0
+    type: string
+  Tags:
+    additionalProperties:
+      $ref: '#/definitions/TagValue'
+    maxProperties: 200
+    minProperties: 0
+    type: object
+  Timestamp:
+    format: date-time
+    type: string
+  UniqueId:
+    maxLength: 22
+    minLength: 22
+    pattern: '^[A-Za-z-0-9]+$'
+    type: string
+  UntagResourceRequest:
+    properties: {}
+    type: object
+  UntagResourceResponse:
+    properties: {}
+    type: object
+  UpdateLedgerRequest:
     properties:
       DeletionProtection:
         $ref: '#/definitions/DeletionProtection'
         description: '<p>The flag that prevents a ledger from being deleted by any user. If not provided on ledger creation, this feature is enabled (<code>true</code>) by default.</p> <p>If deletion protection is enabled, you must first disable it before you can delete the ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>. The QLDB console disables deletion protection for you when you use it to delete a ledger.</p>'
+    type: object
+  UpdateLedgerResponse:
+    properties:
+      Arn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) for the ledger.
+      CreationDateTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'The date and time, in epoch time format, when the ledger was created. (Epoch time format is the number of seconds elapsed since 12:00:00 AM January 1, 1970 UTC.)'
+      DeletionProtection:
+        $ref: '#/definitions/DeletionProtection'
+        description: '<p>The flag that prevents a ledger from being deleted by any user. If not provided on ledger creation, this feature is enabled (<code>true</code>) by default.</p> <p>If deletion protection is enabled, you must first disable it before you can delete the ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>. The QLDB console disables deletion protection for you when you use it to delete a ledger.</p>'
+      Name:
+        $ref: '#/definitions/LedgerName'
+        description: The name of the ledger.
+      State:
+        $ref: '#/definitions/LedgerState'
+        description: The current status of the ledger.
+    type: object
+  ValueHolder:
+    description: A structure that can contain an Amazon Ion value in multiple encoding formats.
+    properties:
+      IonText:
+        $ref: '#/definitions/IonText'
+        description: An Amazon Ion plaintext value contained in a <code>ValueHolder</code> structure.
+    type: object
+x-servers:
+  - description: The QLDB multi-region endpoint
+    url: 'http://qldb.{region}.amazonaws.com'
+    variables:
+      region:
+        default: us-east-1
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+  - description: The QLDB multi-region endpoint
+    url: 'https://qldb.{region}.amazonaws.com'
+    variables:
+      region:
+        default: us-east-1
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+  - description: The QLDB endpoint for China (Beijing) and China (Ningxia)
+    url: 'http://qldb.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        default: cn-north-1
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+  - description: The QLDB endpoint for China (Beijing) and China (Ningxia)
+    url: 'https://qldb.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        default: cn-north-1
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1

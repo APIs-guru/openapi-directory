@@ -2751,6 +2751,65 @@ paths:
             subscriptionId: SubscriptionId
           responses:
             '200': {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/networkRuleSets':
+    get:
+      description: Gets list of NetworkRuleSet for a Namespace.
+      operationId: Namespaces_ListNetworkRuleSets
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/NamespaceNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: List of NetworkRuleSets for Namespace successfully returned.
+          schema:
+            $ref: '#/definitions/NetworkRuleSetListResult'
+        default:
+          description: ServiceBus error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Namespaces
+      x-ms-examples:
+        NameSpaceNetworkRuleSetList:
+          parameters:
+            api-version: '2017-04-01'
+            namespaceName: sdk-Namespace-6019
+            resourceGroupName: ResourceGroup
+            subscriptionId: Subscription
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/subscriptionid/resourceGroups/resourcegroupid/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace-9659/networkrulesets/default
+                    name: default
+                    properties:
+                      defaultAction: Deny
+                      ipRules:
+                        - action: Allow
+                          ipMask: 1.1.1.1
+                        - action: Allow
+                          ipMask: 1.1.1.2
+                        - action: Allow
+                          ipMask: 1.1.1.3
+                        - action: Allow
+                          ipMask: 1.1.1.4
+                        - action: Allow
+                          ipMask: 1.1.1.5
+                      virtualNetworkRules:
+                        - ignoreMissingVnetServiceEndpoint: true
+                          subnet:
+                            id: /subscriptions/subscriptionid/resourcegroups/resourcegroupid/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet2
+                        - ignoreMissingVnetServiceEndpoint: false
+                          subnet:
+                            id: /subscriptions/subscriptionid/resourcegroups/resourcegroupid/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet3
+                        - ignoreMissingVnetServiceEndpoint: false
+                          subnet:
+                            id: /subscriptions/subscriptionid/resourcegroups/resourcegroupid/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet6
+                    type: Microsoft.ServiceBus/Namespaces/NetworkRuleSet
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/networkRuleSets/default':
     get:
       description: Gets NetworkRuleSet for a Namespace.
@@ -4746,6 +4805,17 @@ definitions:
               $ref: '#/definitions/NWRuleSetVirtualNetworkRules'
             type: array
         x-ms-client-flatten: true
+  NetworkRuleSetListResult:
+    description: The response of the List NetworkRuleSet operation.
+    properties:
+      nextLink:
+        description: Link to the next set of results. Not empty if Value contains incomplete list of NetworkRuleSet.
+        type: string
+      value:
+        description: Result of the List NetworkRuleSet operation.
+        items:
+          $ref: '#/definitions/NetworkRuleSet'
+        type: array
   Operation:
     description: A ServiceBus REST API operation
     properties:
@@ -5316,7 +5386,8 @@ definitions:
         default: 20
         description: 'This property is reserved for future use. An integer value showing the compatibility level, currently hard-coded to 20.'
         format: int32
-        readOnly: true
+        maximum: 20
+        minimum: 20
         type: integer
       requiresPreprocessing:
         default: true

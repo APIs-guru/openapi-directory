@@ -264,11 +264,12 @@ paths:
             subscriptionId: subscription-id
           responses:
             '200':
-              id: someid
-              name: samplename
-              properties:
-                provisioningState: Succeedded
-              type: sampletype
+              body:
+                id: someid
+                name: samplename
+                properties:
+                  provisioningState: Succeeded
+                type: sampletype
     patch:
       description: Updates a EnterpriseKnowledgeGraph Service
       operationId: EnterpriseKnowledgeGraph_Update
@@ -316,11 +317,12 @@ paths:
             subscriptionId: subscription-id
           responses:
             '201':
-              id: someid
-              name: samplename
-              properties:
-                provisioningState: Accepted
-              type: sampletype
+              body:
+                id: someid
+                name: samplename
+                properties:
+                  provisioningState: Creating
+                type: sampletype
     put:
       description: Creates a EnterpriseKnowledgeGraph Service. EnterpriseKnowledgeGraph Service is a resource group wide resource type.
       operationId: EnterpriseKnowledgeGraph_Create
@@ -365,11 +367,12 @@ paths:
             subscriptionId: subscription-id
           responses:
             '201':
-              id: someid
-              name: samplename
-              properties:
-                provisioningState: Accepted
-              type: sampletype
+              body:
+                id: someid
+                name: samplename
+                properties:
+                  provisioningState: Creating
+                type: sampletype
 definitions:
   EnterpriseKnowledgeGraph:
     allOf:

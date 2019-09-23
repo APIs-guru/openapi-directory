@@ -108,6 +108,7 @@ paths:
                         createdDateTime: '2018-08-28T07:47:11.3081476Z'
                         deploymentID: d3236bc0-6a46-4877-a9da-6fe69e9661df
                         encryptionCertThumbprint: BDB07F879C1F1A05B74EB43AEAF5E5B5F84DCEA8
+                        isCloudRecoveryReady: true
                         oemVersion: null
                         roleStatus:
                           - roleName: NRP
@@ -199,6 +200,7 @@ paths:
                     createdDateTime: '2018-08-28T07:47:11.3081476Z'
                     deploymentID: d3236bc0-6a46-4877-a9da-6fe69e9661df
                     encryptionCertThumbprint: BDB07F879C1F1A05B74EB43AEAF5E5B5F84DCEA8
+                    isCloudRecoveryReady: true
                     oemVersion: null
                     roleStatus:
                       - roleName: NRP
@@ -354,6 +356,10 @@ definitions:
         description: The thumbprint of the certificate used to encrypt the backup encryption key.
         readOnly: true
         type: string
+      isCloudRecoveryReady:
+        description: True if the backup can be used for cloud recovery scenario.
+        readOnly: true
+        type: boolean
       oemVersion:
         description: OEM version.
         readOnly: true

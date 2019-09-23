@@ -41,7 +41,7 @@ parameters:
     name: action
     required: true
     schema:
-      $ref: '#/definitions/Action'
+      $ref: '#/definitions/ActionRequest'
     x-ms-parameter-location: method
   ActionId:
     description: Action ID
@@ -205,6 +205,21 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
+  RelationInputModel:
+    description: The relation input model
+    in: body
+    name: relationInputModel
+    required: true
+    schema:
+      $ref: '#/definitions/RelationsModelInput'
+    x-ms-parameter-location: method
+  RelationName:
+    description: Relation Name
+    in: path
+    name: relationName
+    required: true
+    type: string
+    x-ms-parameter-location: method
   ResourceGroupName:
     description: The name of the resource group within the user's subscription. The name is case insensitive.
     in: path
@@ -355,30 +370,31 @@ paths:
                     name: 65360bb0-8986-4ade-a89d-af3cf44d28aa
                     properties:
                       alertRulesCreatedByTemplateCount: 0
-                      createdDateUTC: '2019-02-27T00:00:00'
-                      description: |
-                        This alert monitors changes to VPC settings such as new ACL entries and routes in route tables.
-                        More information: https://medium.com/@GorillaStack/the-most-important-aws-cloudtrail-security-events-to-track-a5b9873f8255
-                      displayName: AWS - Changes to VPC settings
-                      query: |
-
+                      createdDateUTC: '2019-02-27T00:00:00Z'
+                      description: |-
+                        This alert monitors changes to Amazon VPC (Virtual Private Cloud) settings such as new ACL entries and routes in route tables.
+                        More information: https://medium.com/@GorillaStack/the-most-important-aws-cloudtrail-security-events-to-track-a5b9873f8255 
+                        and https://aws.amazon.com/vpc/
+                      displayName: Changes to Amazon VPC settings
+                      query: |-
                         let timeframe = 1d;
                         AWSCloudTrail
                         | where TimeGenerated >= ago(timeframe)
                         | where EventName == "CreateNetworkAclEntry"
-                             or EventName == "CreateRoute"
+                            or EventName == "CreateRoute"
                         | project TimeGenerated, EventName, EventTypeName, UserIdentityAccountId, UserIdentityPrincipalid, UserAgent, UserIdentityUserName, SessionMfaAuthenticated, SourceIpAddress, AWSRegion, EventSource, AdditionalEventData, ResponseElements
-                      queryFrequency: '1.00:00:00'
-                      queryPeriod: '1.00:00:00'
+                        | extend AccountCustomEntity = UserIdentityUserName, IPCustomEntity = SourceIpAddress
+                      queryFrequency: P1D
+                      queryPeriod: P1D
                       requiredDataConnectors:
                         - connectorId: AWS
                           dataTypes:
-                            AWSCloudTrail: NotExist
+                            AWSCloudTrail: Exist
                       severity: Low
-                      status: NotAvailable
+                      status: Available
                       tactics:
-                        - LateralMovement
                         - PrivilegeEscalation
+                        - LateralMovement
                       triggerOperator: GreaterThan
                       triggerThreshold: 0
                     type: Microsoft.SecurityInsights/AlertRuleTemplates
@@ -387,29 +403,27 @@ paths:
                     name: f71aba3d-28fb-450b-b192-4e76a83015c8
                     properties:
                       alertRulesCreatedByTemplateCount: 0
-                      createdDateUTC: '2019-07-25T00:00:00'
+                      createdDateUTC: '2019-07-25T00:00:00Z'
                       description: |
                         Place holder: Fusion uses graph powered machine learning algorithms to correlate between millions of lower fidelity anomalous activities from different products such as Azure AD Identity Protection, and Microsoft Cloud App Security, to combine them into a manageable number of interesting security cases.
-                      displayName: Fusion Detections
+                      displayName: Advanced Multi-Stage Attack Detection
+                      severity: High
                       status: Available
                       tactics:
                         - Persistence
+                        - LateralMovement
                         - Exfiltration
+                        - CommandAndControl
                     type: Microsoft.SecurityInsights/AlertRuleTemplates
-                  - id: /subscriptions/bd794837-4d29-4647-9105-6339bfdb4e6a/resourceGroups/mms-eus/providers/Microsoft.OperationalInsights/workspaces/avdvirInt/providers/Microsoft.SecurityInsights/AlertRuleTemplates/eb7b4e69-085d-44dd-9227-9b0d67af9fe7
-                    kind: Filter
-                    name: eb7b4e69-085d-44dd-9227-9b0d67af9fe7
+                  - id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/AlertRuleTemplates/b3cfc7c0-092c-481c-a55b-34a3979758cb
+                    kind: MicrosoftSecurityIncidentCreation
+                    name: b3cfc7c0-092c-481c-a55b-34a3979758cb
                     properties:
                       alertRulesCreatedByTemplateCount: 0
-                      createdDateUTC: '2019-07-16T00:00:00'
-                      description: |
-                        All alerts from AADIP
-                      displayName: All alerts from AADIP
-                      filterProduct: Azure Active Directory Identity Protection
-                      requiredDataConnectors:
-                        - connectorId: AzureActiveDirectoryIdentityProtection
-                          dataTypes:
-                            SecurityAlert: Exist
+                      createdDateUTC: '2019-07-16T00:00:00Z'
+                      description: Create incidents based on all alerts generated in Microsoft Cloud App Security
+                      displayName: Create incidents based on Microsoft Cloud App Security alerts
+                      productFilter: Microsoft Cloud App Security
                       status: Available
                     type: Microsoft.SecurityInsights/AlertRuleTemplates
       x-ms-pageable:
@@ -453,30 +467,31 @@ paths:
                 name: 65360bb0-8986-4ade-a89d-af3cf44d28aa
                 properties:
                   alertRulesCreatedByTemplateCount: 0
-                  createdDateUTC: '2019-02-27T00:00:00'
-                  description: |
-                    This alert monitors changes to VPC settings such as new ACL entries and routes in route tables.
-                    More information: https://medium.com/@GorillaStack/the-most-important-aws-cloudtrail-security-events-to-track-a5b9873f8255
-                  displayName: AWS - Changes to VPC settings
-                  query: |
-
+                  createdDateUTC: '2019-02-27T00:00:00Z'
+                  description: |-
+                    This alert monitors changes to Amazon VPC (Virtual Private Cloud) settings such as new ACL entries and routes in route tables.
+                    More information: https://medium.com/@GorillaStack/the-most-important-aws-cloudtrail-security-events-to-track-a5b9873f8255 
+                    and https://aws.amazon.com/vpc/
+                  displayName: Changes to Amazon VPC settings
+                  query: |-
                     let timeframe = 1d;
                     AWSCloudTrail
                     | where TimeGenerated >= ago(timeframe)
                     | where EventName == "CreateNetworkAclEntry"
-                         or EventName == "CreateRoute"
+                        or EventName == "CreateRoute"
                     | project TimeGenerated, EventName, EventTypeName, UserIdentityAccountId, UserIdentityPrincipalid, UserAgent, UserIdentityUserName, SessionMfaAuthenticated, SourceIpAddress, AWSRegion, EventSource, AdditionalEventData, ResponseElements
-                  queryFrequency: '1.00:00:00'
-                  queryPeriod: '1.00:00:00'
+                    | extend AccountCustomEntity = UserIdentityUserName, IPCustomEntity = SourceIpAddress
+                  queryFrequency: P1D
+                  queryPeriod: P1D
                   requiredDataConnectors:
                     - connectorId: AWS
                       dataTypes:
-                        AWSCloudTrail: NotExist
+                        AWSCloudTrail: Exist
                   severity: Low
-                  status: NotAvailable
+                  status: Available
                   tactics:
-                    - LateralMovement
                     - PrivilegeEscalation
+                    - LateralMovement
                   triggerOperator: GreaterThan
                   triggerThreshold: 0
                 type: Microsoft.SecurityInsights/AlertRuleTemplates
@@ -502,7 +517,7 @@ paths:
       tags:
         - Alert Rules
       x-ms-examples:
-        Get all scheduled alert rules.:
+        Get all alert rules.:
           parameters:
             api-version: 2019-01-01-preview
             operationalInsightsResourceProvider: Microsoft.OperationalIinsights
@@ -518,6 +533,7 @@ paths:
                     kind: Scheduled
                     name: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
                     properties:
+                      alertRuleTemplateName: null
                       description: ''
                       displayName: Rule2
                       enabled: true
@@ -528,8 +544,52 @@ paths:
                       severity: High
                       suppressionDuration: PT1H
                       suppressionEnabled: false
+                      tactics:
+                        - Persistence
+                        - LateralMovement
                       triggerOperator: GreaterThan
                       triggerThreshold: 0
+                    type: Microsoft.SecurityInsights/alertRules
+                  - etag: '"260097e0-0000-0d00-0000-5d6fa88f0000"'
+                    id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/microsoftSecurityIncidentCreationRuleExample
+                    kind: MicrosoftSecurityIncidentCreation
+                    name: microsoftSecurityIncidentCreationRuleExample
+                    properties:
+                      alertRuleTemplateName: null
+                      description: null
+                      displayName: testing displayname
+                      displayNamesFilter: null
+                      enabled: true
+                      lastModifiedUtc: '2019-09-04T12:05:35.7296311Z'
+                      productFilter: Microsoft Cloud App Security
+                      severitiesFilter: null
+                      tactics: []
+                    type: Microsoft.SecurityInsights/alertRules
+                  - etag: '"25005c11-0000-0d00-0000-5d6cc0e20000"'
+                    id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/myFirstFusionRule
+                    kind: Fusion
+                    name: myFirstFusionRule
+                    properties:
+                      alertRuleTemplateName: f71aba3d-28fb-450b-b192-4e76a83015c8
+                      description: |-
+                        In this mode, Sentinel combines low fidelity alerts, which themselves may not be actionable, and events across multiple products, into high fidelity security interesting incidents. The system looks at multiple products to produce actionable incidents. Custom tailored to each tenant, Fusion not only reduces false positive rates but also can detect attacks with limited or missing information. 
+                        Incidents generated by Fusion system will encase two or more alerts. By design, Fusion incidents are low volume, high fidelity and will be high severity, which is why Fusion is turned ON by default in Azure Sentinel.
+
+                        For Fusion to work, please configure the following data sources in Data Connectors tab:
+                        Required - Azure Active Directory Identity Protection
+                        Required - Microsoft Cloud App Security
+                        If Available - Palo Alto Network
+
+                        For full list of scenarios covered by Fusion, and detail instructions on how to configure the required data sources, go to aka.ms/SentinelFusion
+                      displayName: Advanced Multi-Stage Attack Detection
+                      enabled: false
+                      lastModifiedUtc: '2019-09-02T07:12:34.9065092Z'
+                      severity: High
+                      tactics:
+                        - Persistence
+                        - LateralMovement
+                        - Exfiltration
+                        - CommandAndControl
                     type: Microsoft.SecurityInsights/alertRules
       x-ms-pageable:
         nextLinkName: nextLink
@@ -556,7 +616,7 @@ paths:
       tags:
         - Alert Rules
       x-ms-examples:
-        Delete a scheduled alert rule.:
+        Delete an alert rule.:
           parameters:
             api-version: 2019-01-01-preview
             operationalInsightsResourceProvider: Microsoft.OperationalIinsights
@@ -589,7 +649,70 @@ paths:
       tags:
         - Alert Rules
       x-ms-examples:
-        Get a scheduled alert rule.:
+        Get a Fusion alert rule.:
+          parameters:
+            api-version: 2019-01-01-preview
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            ruleId: myFirstFusionRule
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                etag: '"260090e2-0000-0d00-0000-5d6fb8670000"'
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/myFirstFusionRule
+                kind: Fusion
+                name: myFirstFusionRule
+                properties:
+                  alertRuleTemplateName: f71aba3d-28fb-450b-b192-4e76a83015c8
+                  description: |-
+                    In this mode, Sentinel combines low fidelity alerts, which themselves may not be actionable, and events across multiple products, into high fidelity security interesting incidents. The system looks at multiple products to produce actionable incidents. Custom tailored to each tenant, Fusion not only reduces false positive rates but also can detect attacks with limited or missing information. 
+                    Incidents generated by Fusion system will encase two or more alerts. By design, Fusion incidents are low volume, high fidelity and will be high severity, which is why Fusion is turned ON by default in Azure Sentinel.
+
+                    For Fusion to work, please configure the following data sources in Data Connectors tab:
+                    Required - Azure Active Directory Identity Protection
+                    Required - Microsoft Cloud App Security
+                    If Available - Palo Alto Network
+
+                    For full list of scenarios covered by Fusion, and detail instructions on how to configure the required data sources, go to aka.ms/SentinelFusion
+                  displayName: Advanced Multi-Stage Attack Detection
+                  enabled: true
+                  lastModifiedUtc: '2019-09-04T13:13:11.5340061Z'
+                  severity: High
+                  tactics:
+                    - Persistence
+                    - LateralMovement
+                    - Exfiltration
+                    - CommandAndControl
+                type: Microsoft.SecurityInsights/alertRules
+        Get a MicrosoftSecurityIncidentCreation rule.:
+          parameters:
+            api-version: 2019-01-01-preview
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            ruleId: microsoftSecurityIncidentCreationRuleExample
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                etag: '"260097e0-0000-0d00-0000-5d6fa88f0000"'
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/microsoftSecurityIncidentCreationRuleExample
+                kind: MicrosoftSecurityIncidentCreation
+                name: microsoftSecurityIncidentCreationRuleExample
+                properties:
+                  alertRuleTemplateName: null
+                  description: null
+                  displayName: testing displayname
+                  displayNamesFilter: null
+                  enabled: true
+                  lastModifiedUtc: '2019-09-04T12:05:35.7296311Z'
+                  productFilter: Microsoft Cloud App Security
+                  severitiesFilter: null
+                  tactics: []
+                type: Microsoft.SecurityInsights/alertRules
+        Get a Scheduled alert rule.:
           parameters:
             api-version: 2019-01-01-preview
             operationalInsightsResourceProvider: Microsoft.OperationalIinsights
@@ -605,6 +728,7 @@ paths:
                 kind: Scheduled
                 name: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
                 properties:
+                  alertRuleTemplateName: null
                   description: ''
                   displayName: Rule2
                   enabled: true
@@ -615,6 +739,9 @@ paths:
                   severity: High
                   suppressionDuration: PT1H
                   suppressionEnabled: false
+                  tactics:
+                    - Persistence
+                    - LateralMovement
                   triggerOperator: GreaterThan
                   triggerThreshold: 0
                 type: Microsoft.SecurityInsights/alertRules
@@ -645,13 +772,132 @@ paths:
       tags:
         - Alert Rules
       x-ms-examples:
-        Creates or updates a scheduled alert rule.:
+        Creates or updates a Fusion alert rule.:
+          parameters:
+            alertRule:
+              etag: 3d00c3ca-0000-0100-0000-5d42d5010000
+              kind: Fusion
+              properties:
+                alertRuleTemplateName: f71aba3d-28fb-450b-b192-4e76a83015c8
+                enabled: 'true'
+            api-version: 2019-01-01-preview
+            operationalInsightsResourceProvider: Microsoft.OperationalInsights
+            resourceGroupName: myRg
+            ruleId: myFirstFusionRule
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                etag: '"260090e2-0000-0d00-0000-5d6fb8670000"'
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/myFirstFusionRule
+                kind: Fusion
+                name: myFirstFusionRule
+                properties:
+                  alertRuleTemplateName: f71aba3d-28fb-450b-b192-4e76a83015c8
+                  description: |-
+                    In this mode, Sentinel combines low fidelity alerts, which themselves may not be actionable, and events across multiple products, into high fidelity security interesting incidents. The system looks at multiple products to produce actionable incidents. Custom tailored to each tenant, Fusion not only reduces false positive rates but also can detect attacks with limited or missing information. 
+                    Incidents generated by Fusion system will encase two or more alerts. By design, Fusion incidents are low volume, high fidelity and will be high severity, which is why Fusion is turned ON by default in Azure Sentinel.
+
+                    For Fusion to work, please configure the following data sources in Data Connectors tab:
+                    Required - Azure Active Directory Identity Protection
+                    Required - Microsoft Cloud App Security
+                    If Available - Palo Alto Network
+
+                    For full list of scenarios covered by Fusion, and detail instructions on how to configure the required data sources, go to aka.ms/SentinelFusion
+                  displayName: Advanced Multi-Stage Attack Detection
+                  enabled: true
+                  lastModifiedUtc: '2019-09-04T13:13:11.5340061Z'
+                  severity: High
+                  tactics:
+                    - Persistence
+                    - LateralMovement
+                    - Exfiltration
+                    - CommandAndControl
+                type: Microsoft.SecurityInsights/alertRules
+            '201':
+              body:
+                etag: '"260090e2-0000-0d00-0000-5d6fb8670000"'
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/myFirstFusionRule
+                kind: Fusion
+                name: myFirstFusionRule
+                properties:
+                  alertRuleTemplateName: f71aba3d-28fb-450b-b192-4e76a83015c8
+                  description: |-
+                    In this mode, Sentinel combines low fidelity alerts, which themselves may not be actionable, and events across multiple products, into high fidelity security interesting incidents. The system looks at multiple products to produce actionable incidents. Custom tailored to each tenant, Fusion not only reduces false positive rates but also can detect attacks with limited or missing information. 
+                    Incidents generated by Fusion system will encase two or more alerts. By design, Fusion incidents are low volume, high fidelity and will be high severity, which is why Fusion is turned ON by default in Azure Sentinel.
+
+                    For Fusion to work, please configure the following data sources in Data Connectors tab:
+                    Required - Azure Active Directory Identity Protection
+                    Required - Microsoft Cloud App Security
+                    If Available - Palo Alto Network
+
+                    For full list of scenarios covered by Fusion, and detail instructions on how to configure the required data sources, go to aka.ms/SentinelFusion
+                  displayName: Advanced Multi-Stage Attack Detection
+                  enabled: true
+                  lastModifiedUtc: '2019-09-04T13:13:11.5340061Z'
+                  severity: High
+                  tactics:
+                    - Persistence
+                    - LateralMovement
+                    - Exfiltration
+                    - CommandAndControl
+                type: Microsoft.SecurityInsights/alertRules
+        Creates or updates a MicrosoftSecurityIncidentCreation rule.:
+          parameters:
+            alertRule:
+              etag: '"260097e0-0000-0d00-0000-5d6fa88f0000"'
+              kind: MicrosoftSecurityIncidentCreation
+              properties:
+                displayName: testing displayname
+                enabled: true
+                productFilter: Microsoft Cloud App Security
+            api-version: 2019-01-01-preview
+            operationalInsightsResourceProvider: Microsoft.OperationalInsights
+            resourceGroupName: myRg
+            ruleId: microsoftSecurityIncidentCreationRuleExample
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                etag: '"260097e0-0000-0d00-0000-5d6fa88f0000"'
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/microsoftSecurityIncidentCreationRuleExample
+                kind: MicrosoftSecurityIncidentCreation
+                name: microsoftSecurityIncidentCreationRuleExample
+                properties:
+                  alertRuleTemplateName: null
+                  description: null
+                  displayName: testing displayname
+                  displayNamesFilter: null
+                  enabled: true
+                  lastModifiedUtc: '2019-09-04T12:05:35.7296311Z'
+                  productFilter: Microsoft Cloud App Security
+                  severitiesFilter: null
+                  tactics: []
+                type: Microsoft.SecurityInsights/alertRules
+            '201':
+              body:
+                etag: '"260097e0-0000-0d00-0000-5d6fa88f0000"'
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/microsoftSecurityIncidentCreationRuleExample
+                kind: MicrosoftSecurityIncidentCreation
+                name: microsoftSecurityIncidentCreationRuleExample
+                properties:
+                  alertRuleTemplateName: null
+                  description: null
+                  displayName: testing displayname
+                  displayNamesFilter: null
+                  enabled: true
+                  lastModifiedUtc: '2019-09-04T12:05:35.7296311Z'
+                  productFilter: Microsoft Cloud App Security
+                  severitiesFilter: null
+                  tactics: []
+                type: Microsoft.SecurityInsights/alertRules
+        Creates or updates a Scheduled alert rule.:
           parameters:
             alertRule:
               etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
-              id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/73e01a99-5cd7-4139-a149-9f2736ff2ab5
               kind: Scheduled
-              name: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
               properties:
                 description: ''
                 displayName: Rule2
@@ -662,9 +908,11 @@ paths:
                 severity: High
                 suppressionDuration: PT1H
                 suppressionEnabled: false
+                tactics:
+                  - Persistence
+                  - LateralMovement
                 triggerOperator: GreaterThan
                 triggerThreshold: 0
-              type: Microsoft.SecurityInsights/alertRules
             api-version: 2019-01-01-preview
             operationalInsightsResourceProvider: Microsoft.OperationalInsights
             resourceGroupName: myRg
@@ -679,6 +927,7 @@ paths:
                 kind: Scheduled
                 name: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
                 properties:
+                  alertRuleTemplateName: null
                   description: ''
                   displayName: Rule2
                   enabled: true
@@ -689,6 +938,9 @@ paths:
                   severity: High
                   suppressionDuration: PT1H
                   suppressionEnabled: false
+                  tactics:
+                    - Persistence
+                    - LateralMovement
                   triggerOperator: GreaterThan
                   triggerThreshold: 0
                 type: Microsoft.SecurityInsights/alertRules
@@ -699,15 +951,20 @@ paths:
                 kind: Scheduled
                 name: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
                 properties:
+                  alertRuleTemplateName: null
                   description: ''
                   displayName: Rule2
                   enabled: true
+                  lastModifiedUtc: '2019-01-01T13:15:30Z'
                   query: ProtectionStatus | extend HostCustomEntity = Computer | extend IPCustomEntity = ComputerIP_Hidden
                   queryFrequency: PT1H
                   queryPeriod: P2DT1H30M
                   severity: High
                   suppressionDuration: PT1H
                   suppressionEnabled: false
+                  tactics:
+                    - Persistence
+                    - LateralMovement
                   triggerOperator: GreaterThan
                   triggerThreshold: 0
                 type: Microsoft.SecurityInsights/alertRules
@@ -750,7 +1007,7 @@ paths:
                     id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/73e01a99-5cd7-4139-a149-9f2736ff2ab5/actions/912bec42-cb66-4c03-ac63-1761b6898c3e
                     name: 912bec42-cb66-4c03-ac63-1761b6898c3e
                     properties:
-                      triggerUri: 'https://prod-31.northcentralus.logic.azure.com:443/workflows/cd3765391efd48549fd7681ded1d48d7/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=signature'
+                      workflowId: cd3765391efd48549fd7681ded1d48d7
                     type: Microsoft.SecurityInsights/alertRules/actions
       x-ms-pageable:
         nextLinkName: nextLink
@@ -805,7 +1062,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Action'
+            $ref: '#/definitions/ActionResponse'
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -829,7 +1086,7 @@ paths:
                 id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/73e01a99-5cd7-4139-a149-9f2736ff2ab5/actions/912bec42-cb66-4c03-ac63-1761b6898c3e
                 name: 912bec42-cb66-4c03-ac63-1761b6898c3e
                 properties:
-                  triggerUri: 'https://prod-31.northcentralus.logic.azure.com:443/workflows/cd3765391efd48549fd7681ded1d48d7/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=signature'
+                  workflowId: cd3765391efd48549fd7681ded1d48d7
                 type: Microsoft.SecurityInsights/alertRules/actions
     put:
       description: Creates or updates the action of alert rule.
@@ -847,11 +1104,11 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Action'
+            $ref: '#/definitions/ActionResponse'
         '201':
           description: Created
           schema:
-            $ref: '#/definitions/Action'
+            $ref: '#/definitions/ActionResponse'
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -882,7 +1139,7 @@ paths:
                 id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/73e01a99-5cd7-4139-a149-9f2736ff2ab5/actions/912bec42-cb66-4c03-ac63-1761b6898c3e
                 name: 912bec42-cb66-4c03-ac63-1761b6898c3e
                 properties:
-                  triggerUri: 'https://prod-31.northcentralus.logic.azure.com:443/workflows/cd3765391efd48549fd7681ded1d48d7/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=signature'
+                  workflowId: cd3765391efd48549fd7681ded1d48d7
                 type: Microsoft.SecurityInsights/alertRules/actions
             '201':
               body:
@@ -890,7 +1147,7 @@ paths:
                 id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/73e01a99-5cd7-4139-a149-9f2736ff2ab5/actions/912bec42-cb66-4c03-ac63-1761b6898c3e
                 name: 912bec42-cb66-4c03-ac63-1761b6898c3e
                 properties:
-                  triggerUri: 'https://prod-31.northcentralus.logic.azure.com:443/workflows/cd3765391efd48549fd7681ded1d48d7/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=signature'
+                  workflowId: cd3765391efd48549fd7681ded1d48d7
                 type: Microsoft.SecurityInsights/alertRules/actions
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/bookmarks':
     get:
@@ -946,7 +1203,7 @@ paths:
                         email: john@contoso.com
                         name: john doe
                         objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
-                    type: Microsoft.SecurityInsights/cases
+                    type: Microsoft.SecurityInsights/bookmarks
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/bookmarks/{bookmarkId}':
@@ -1145,8 +1402,216 @@ paths:
                     name: john doe
                     objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
                 type: Microsoft.SecurityInsights/bookmarks
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/bookmarks/{bookmarkId}/relations':
+    get:
+      description: Gets all bookmark relations.
+      operationId: BookmarkRelations_List
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+        - $ref: '#/parameters/BookmarkId'
+        - $ref: '#/parameters/ODataFilter'
+        - $ref: '#/parameters/ODataOrderBy'
+        - $ref: '#/parameters/ODataTop'
+        - $ref: '#/parameters/ODataSkipToken'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BookmarkRelationList'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - BookmarkRelations
+      x-ms-examples:
+        Get all bookmark relations.:
+          parameters:
+            api-version: 2019-01-01-preview
+            bookmarkId: 2216d0e1-91e3-4902-89fd-d2df8c535096
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                value:
+                  - etag: 190057d0-0000-0d00-0000-5c6f5adb0000
+                    id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/bookmarks/2216d0e1-91e3-4902-89fd-d2df8c535096/relations/4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+                    kind: CasesToBookmarks
+                    name: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+                    properties:
+                      bookmarkId: 2216d0e1-91e3-4902-89fd-d2df8c535096
+                      caseIdentifier: afbd324f-6c48-459c-8710-8d1e1cd03812
+                      caseSeverity: High
+                      caseTitle: Test case
+                      relationName: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+                    type: Microsoft.SecurityInsights/bookmarks/relations
+      x-ms-odata: '#/definitions/BookmarkRelation'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/bookmarks/{bookmarkId}/relations/{relationName}':
+    delete:
+      description: Delete the bookmark relation.
+      operationId: BookmarkRelations_DeleteRelation
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+        - $ref: '#/parameters/BookmarkId'
+        - $ref: '#/parameters/RelationName'
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - BookmarkRelations
+      x-ms-examples:
+        Delete the bookmark relation.:
+          parameters:
+            api-version: 2019-01-01-preview
+            bookmarkId: 2216d0e1-91e3-4902-89fd-d2df8c535096
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            relationName: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200': {}
+            '204': {}
+    get:
+      description: Gets a bookmark relation.
+      operationId: BookmarkRelations_GetRelation
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+        - $ref: '#/parameters/BookmarkId'
+        - $ref: '#/parameters/RelationName'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BookmarkRelation'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - BookmarkRelations
+      x-ms-examples:
+        Get a bookmark relation.:
+          parameters:
+            api-version: 2019-01-01-preview
+            bookmarkId: 2216d0e1-91e3-4902-89fd-d2df8c535096
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            relationName: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                etag: 190057d0-0000-0d00-0000-5c6f5adb0000
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/bookmarks/2216d0e1-91e3-4902-89fd-d2df8c535096/relations/4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+                kind: CasesToBookmarks
+                name: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+                properties:
+                  bookmarkId: 2216d0e1-91e3-4902-89fd-d2df8c535096
+                  caseIdentifier: afbd324f-6c48-459c-8710-8d1e1cd03812
+                  caseSeverity: High
+                  caseTitle: Test case
+                  relationName: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+                type: Microsoft.SecurityInsights/bookmarks/relations
+    put:
+      description: Creates the bookmark relation.
+      operationId: BookmarkRelations_CreateOrUpdateRelation
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+        - $ref: '#/parameters/BookmarkId'
+        - $ref: '#/parameters/RelationName'
+        - $ref: '#/parameters/RelationInputModel'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BookmarkRelation'
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/BookmarkRelation'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - BookmarkRelations
+      x-ms-examples:
+        Creates or updates a bookmark relation.:
+          parameters:
+            api-version: 2019-01-01-preview
+            bookmarkId: 2216d0e1-91e3-4902-89fd-d2df8c535096
+            operationalInsightsResourceProvider: Microsoft.OperationalInsights
+            relationInputModel:
+              properties:
+                sourceRelationNode:
+                  relationNodeId: afbd324f-6c48-459c-8710-8d1e1cd03812
+                  relationNodeKind: Case
+                targetRelationNode:
+                  relationNodeId: 2216d0e1-91e3-4902-89fd-d2df8c535096
+                  relationNodeKind: Bookmark
+            relationName: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                etag: 190057d0-0000-0d00-0000-5c6f5adb0000
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/bookmarks/2216d0e1-91e3-4902-89fd-d2df8c535096/relations/4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+                kind: CasesToBookmarks
+                name: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+                properties:
+                  bookmarkId: 2216d0e1-91e3-4902-89fd-d2df8c535096
+                  caseIdentifier: afbd324f-6c48-459c-8710-8d1e1cd03812
+                  caseSeverity: High
+                  caseTitle: Test case
+                  relationName: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+                type: Microsoft.SecurityInsights/bookmarks/relations
+            '201':
+              body:
+                etag: 190057d0-0000-0d00-0000-5c6f5adb0000
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/bookmarks/2216d0e1-91e3-4902-89fd-d2df8c535096/relations/4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+                kind: CasesToBookmarks
+                name: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+                properties:
+                  bookmarkId: 2216d0e1-91e3-4902-89fd-d2df8c535096
+                  caseIdentifier: afbd324f-6c48-459c-8710-8d1e1cd03812
+                  caseSeverity: High
+                  caseTitle: Test case
+                  relationName: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+                type: Microsoft.SecurityInsights/bookmarks/relations
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases':
     get:
+      deprecated: true
       description: Gets all cases.
       operationId: Cases_List
       parameters:
@@ -1215,6 +1680,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases/{caseId}':
     delete:
+      deprecated: true
       description: Delete the case.
       operationId: Cases_Delete
       parameters:
@@ -1248,6 +1714,7 @@ paths:
             '200': {}
             '204': {}
     get:
+      deprecated: true
       description: Gets a case.
       operationId: Cases_Get
       parameters:
@@ -1308,6 +1775,7 @@ paths:
                   totalComments: 3
                 type: Microsoft.SecurityInsights/cases
     put:
+      deprecated: true
       description: Creates or updates the case.
       operationId: Cases_CreateOrUpdate
       parameters:
@@ -1412,6 +1880,7 @@ paths:
                 type: Microsoft.SecurityInsights/cases
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases/{caseId}/comments':
     get:
+      deprecated: true
       description: Gets all case comments.
       operationId: Comments_ListByCase
       parameters:
@@ -1464,6 +1933,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases/{caseId}/comments/{caseCommentId}':
     get:
+      deprecated: true
       description: Gets a case comment.
       operationId: Cases_GetComment
       parameters:
@@ -1509,6 +1979,7 @@ paths:
                     objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
                 type: Microsoft.SecurityInsights/cases/comments
     put:
+      deprecated: true
       description: Creates the case comment.
       operationId: CaseComments_CreateComment
       parameters:
@@ -1557,6 +2028,213 @@ paths:
                     name: john doe
                     objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
                 type: Microsoft.SecurityInsights/cases/comments
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases/{caseId}/relations':
+    get:
+      deprecated: true
+      description: Gets all case relations.
+      operationId: CaseRelations_List
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+        - $ref: '#/parameters/CaseId'
+        - $ref: '#/parameters/ODataFilter'
+        - $ref: '#/parameters/ODataOrderBy'
+        - $ref: '#/parameters/ODataTop'
+        - $ref: '#/parameters/ODataSkipToken'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CaseRelationList'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - CaseRelations
+      x-ms-examples:
+        Get all case relations.:
+          parameters:
+            api-version: 2019-01-01-preview
+            caseId: afbd324f-6c48-459c-8710-8d1e1cd03812
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                value:
+                  - etag: 190057d0-0000-0d00-0000-5c6f5adb0000
+                    id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/cases/afbd324f-6c48-459c-8710-8d1e1cd03812/relations/4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+                    kind: CasesToBookmarks
+                    name: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+                    properties:
+                      bookmarkId: 2216d0e1-91e3-4902-89fd-d2df8c535096
+                      bookmarkName: Test bookmark
+                      caseIdentifier: afbd324f-6c48-459c-8710-8d1e1cd03812
+                      relationName: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+                    type: Microsoft.SecurityInsights/cases/relations
+      x-ms-odata: '#/definitions/CaseRelation'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases/{caseId}/relations/{relationName}':
+    delete:
+      deprecated: true
+      description: Delete the case relation.
+      operationId: CaseRelations_DeleteRelation
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+        - $ref: '#/parameters/CaseId'
+        - $ref: '#/parameters/RelationName'
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - CaseRelations
+      x-ms-examples:
+        Delete the case relation.:
+          parameters:
+            api-version: 2019-01-01-preview
+            caseId: afbd324f-6c48-459c-8710-8d1e1cd03812
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            relationName: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200': {}
+            '204': {}
+    get:
+      deprecated: true
+      description: Gets a case relation.
+      operationId: CaseRelations_GetRelation
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+        - $ref: '#/parameters/CaseId'
+        - $ref: '#/parameters/RelationName'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CaseRelation'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - CaseRelations
+      x-ms-examples:
+        Get a case relation.:
+          parameters:
+            api-version: 2019-01-01-preview
+            caseId: afbd324f-6c48-459c-8710-8d1e1cd03812
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            relationName: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                etag: 190057d0-0000-0d00-0000-5c6f5adb0000
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/cases/afbd324f-6c48-459c-8710-8d1e1cd03812/relations/4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+                kind: CasesToBookmarks
+                name: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+                properties:
+                  bookmarkId: 2216d0e1-91e3-4902-89fd-d2df8c535096
+                  bookmarkName: Test bookmark
+                  caseIdentifier: afbd324f-6c48-459c-8710-8d1e1cd03812
+                  relationName: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+                type: Microsoft.SecurityInsights/cases/relations
+    put:
+      deprecated: true
+      description: Creates or updates the case relation.
+      operationId: CaseRelations_CreateOrUpdateRelation
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+        - $ref: '#/parameters/CaseId'
+        - $ref: '#/parameters/RelationName'
+        - $ref: '#/parameters/RelationInputModel'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CaseRelation'
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/CaseRelation'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - CaseRelations
+      x-ms-examples:
+        Creates or updates a case relation.:
+          parameters:
+            api-version: 2019-01-01-preview
+            caseId: afbd324f-6c48-459c-8710-8d1e1cd03812
+            operationalInsightsResourceProvider: Microsoft.OperationalInsights
+            relationInputModel:
+              properties:
+                sourceRelationNode:
+                  relationNodeId: afbd324f-6c48-459c-8710-8d1e1cd03812
+                  relationNodeKind: Case
+                targetRelationNode:
+                  relationNodeId: 2216d0e1-91e3-4902-89fd-d2df8c535096
+                  relationNodeKind: Bookmark
+            relationName: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                etag: 190057d0-0000-0d00-0000-5c6f5adb0000
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/cases/afbd324f-6c48-459c-8710-8d1e1cd03812/relations/4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+                kind: CasesToBookmarks
+                name: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+                properties:
+                  bookmarkId: 2216d0e1-91e3-4902-89fd-d2df8c535096
+                  bookmarkName: Test bookmark
+                  caseIdentifier: afbd324f-6c48-459c-8710-8d1e1cd03812
+                  relationName: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+                type: Microsoft.SecurityInsights/cases/relations
+            '201':
+              body:
+                etag: 190057d0-0000-0d00-0000-5c6f5adb0000
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/cases/afbd324f-6c48-459c-8710-8d1e1cd03812/relations/4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+                kind: CasesToBookmarks
+                name: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+                properties:
+                  bookmarkId: 2216d0e1-91e3-4902-89fd-d2df8c535096
+                  bookmarkName: Test bookmark
+                  caseIdentifier: afbd324f-6c48-459c-8710-8d1e1cd03812
+                  relationName: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+                type: Microsoft.SecurityInsights/cases/relations
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors':
     get:
       description: Gets all data connectors.
@@ -2907,7 +3585,24 @@ definitions:
         readOnly: true
         type: string
     type: object
-  Action:
+  ActionRequest:
+    allOf:
+      - $ref: '#/definitions/ResourceWithEtag'
+    description: Action for alert rule.
+    properties:
+      properties:
+        $ref: '#/definitions/ActionRequestProperties'
+        description: Action properties for put request
+        x-ms-client-flatten: true
+    type: object
+  ActionRequestProperties:
+    description: Action property bag.
+    properties:
+      triggerUri:
+        description: Logic App Callback URL for this specific workflow.
+        type: string
+    type: object
+  ActionResponse:
     allOf:
       - $ref: '#/definitions/Resource'
     description: Action for alert rule.
@@ -2916,15 +3611,15 @@ definitions:
         description: Etag of the action.
         type: string
       properties:
-        $ref: '#/definitions/ActionProperties'
-        description: Action properties
+        $ref: '#/definitions/ActionResponseProperties'
+        description: Action properties for get request
         x-ms-client-flatten: true
     type: object
-  ActionProperties:
+  ActionResponseProperties:
     description: Action property bag.
     properties:
-      triggerUri:
-        description: The uri for the action to trigger.
+      workflowId:
+        description: The name of the logic app's workflow.
         type: string
     type: object
   ActionsList:
@@ -2937,7 +3632,7 @@ definitions:
       value:
         description: Array of actions.
         items:
-          $ref: '#/definitions/Action'
+          $ref: '#/definitions/ActionResponse'
         type: array
     required:
       - value
@@ -2962,14 +3657,10 @@ definitions:
     type: object
   AlertRule:
     allOf:
-      - $ref: '#/definitions/Resource'
+      - $ref: '#/definitions/ResourceWithEtag'
       - $ref: '#/definitions/AlertRuleKind'
     description: Alert rule.
     discriminator: kind
-    properties:
-      etag:
-        description: Etag of the alert rule.
-        type: string
     type: object
   AlertRuleKind:
     description: Describes an Azure resource with kind.
@@ -2978,7 +3669,7 @@ definitions:
         description: The kind of the alert rule
         enum:
           - Scheduled
-          - Filter
+          - MicrosoftSecurityIncidentCreation
           - Fusion
         type: string
         x-ms-enum:
@@ -2986,7 +3677,7 @@ definitions:
           name: AlertRuleKind
           values:
             - value: Scheduled
-            - value: Filter
+            - value: MicrosoftSecurityIncidentCreation
             - value: Fusion
     type: object
   AlertRuleTemplate:
@@ -2995,10 +3686,51 @@ definitions:
       - $ref: '#/definitions/AlertRuleKind'
     description: Alert rule template.
     discriminator: kind
+    type: object
+  AlertRuleTemplatePropertiesBase:
+    description: Base alert rule template property bag.
     properties:
-      etag:
-        description: Etag of the alert rule.
+      alertRulesCreatedByTemplateCount:
+        description: the number of alert rules that were created by this template
+        type: integer
+      createdDateUTC:
+        description: The time that this alert rule template has been added.
+        format: date-time
+        readOnly: true
         type: string
+      description:
+        description: The description of the alert rule template.
+        type: string
+      displayName:
+        description: The display name for alert rule template.
+        type: string
+      requiredDataConnectors:
+        description: The required data connectors for this template
+        items:
+          $ref: '#/definitions/DataConnectorStatus'
+        type: array
+      status:
+        description: The alert rule template status.
+        enum:
+          - Installed
+          - Available
+          - NotAvailable
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: TemplateStatus
+          values:
+            - description: Alert rule template installed. and can not use more then once
+              value: Installed
+            - description: Alert rule template is available.
+              value: Available
+            - description: Alert rule template is not available
+              value: NotAvailable
+      tactics:
+        description: The tactics of the alert rule template
+        items:
+          $ref: '#/definitions/AttackTactic'
+        type: array
     type: object
   AlertRuleTemplatesList:
     description: List all the alert rule templates.
@@ -3048,7 +3780,7 @@ definitions:
       - Informational
     type: string
     x-ms-enum:
-      modelAsString: false
+      modelAsString: true
       name: AlertSeverity
       values:
         - description: High severity
@@ -3082,9 +3814,10 @@ definitions:
       - Collection
       - Exfiltration
       - CommandAndControl
+      - Impact
     type: string
     x-ms-enum:
-      modelAsString: false
+      modelAsString: true
       name: AttackTactic
   AwsCloudTrailDataConnector:
     allOf:
@@ -3137,58 +3870,11 @@ definitions:
         readOnly: true
         type: string
     type: object
-  BaseAlertRuleTemplateProperties:
-    description: Base alert rule template property bag.
-    properties:
-      alertRulesCreatedByTemplateCount:
-        description: the number of alert rules that were created by this template
-        type: integer
-      createdDateUTC:
-        description: The time that this alert rule template has been added.
-        readOnly: true
-        type: string
-      description:
-        description: The description of the alert rule template.
-        type: string
-      displayName:
-        description: The display name for alert rule template.
-        type: string
-      requiredDataConnectors:
-        description: The required data connectors for this template
-        items:
-          $ref: '#/definitions/DataConnectorStatus'
-        type: array
-      status:
-        description: The alert rule template status.
-        enum:
-          - Installed
-          - Available
-          - NotAvailable
-        type: string
-        x-ms-enum:
-          modelAsString: false
-          name: TemplateStatus
-          values:
-            - description: Alert rule template installed. and can not use more then once
-              value: Installed
-            - description: Alert rule template is available.
-              value: Available
-            - description: Alert rule template is not available
-              value: NotAvailable
-      tactics:
-        description: The tactics of the alert rule template
-        items:
-          $ref: '#/definitions/AttackTactic'
-        type: array
-    type: object
   Bookmark:
     allOf:
-      - $ref: '#/definitions/Resource'
+      - $ref: '#/definitions/ResourceWithEtag'
     description: Represents a bookmark in Azure Security Insights.
     properties:
-      etag:
-        description: Etag of the bookmark.
-        type: string
       properties:
         $ref: '#/definitions/BookmarkProperties'
         description: Bookmark properties
@@ -3248,14 +3934,58 @@ definitions:
       - displayName
       - query
     type: object
+  BookmarkRelation:
+    allOf:
+      - $ref: '#/definitions/RelationBase'
+    description: Represents a bookmark relation
+    properties:
+      properties:
+        $ref: '#/definitions/BookmarkRelationProperties'
+        description: Bookmark relation properties
+        x-ms-client-flatten: true
+    type: object
+  BookmarkRelationList:
+    description: List of bookmark relations.
+    properties:
+      nextLink:
+        description: URL to fetch the next set of relations.
+        readOnly: true
+        type: string
+      value:
+        description: Array of relations.
+        items:
+          $ref: '#/definitions/BookmarkRelation'
+        type: array
+    required:
+      - value
+  BookmarkRelationProperties:
+    description: Bookmark relation properties
+    properties:
+      bookmarkId:
+        description: The case related bookmark id
+        type: string
+      caseIdentifier:
+        description: The case identifier
+        type: string
+      caseSeverity:
+        description: The case severity
+        type: string
+      caseTitle:
+        description: The case title
+        type: string
+      relationName:
+        description: Name of relation
+        type: string
+    required:
+      - relationName
+      - caseIdentifier
+      - bookmarkId
+    type: object
   Case:
     allOf:
-      - $ref: '#/definitions/Resource'
+      - $ref: '#/definitions/ResourceWithEtag'
     description: Represents a case in Azure Security Insights.
     properties:
-      etag:
-        description: Etag of the alert rule.
-        type: string
       properties:
         $ref: '#/definitions/CaseProperties'
         description: Case properties
@@ -3448,6 +4178,50 @@ definitions:
       - status
       - startTimeUtc
     type: object
+  CaseRelation:
+    allOf:
+      - $ref: '#/definitions/RelationBase'
+    description: Represents a case relation
+    properties:
+      properties:
+        $ref: '#/definitions/CaseRelationProperties'
+        description: Case relation properties
+        x-ms-client-flatten: true
+    type: object
+  CaseRelationList:
+    description: List of case relations.
+    properties:
+      nextLink:
+        description: URL to fetch the next set of relations.
+        readOnly: true
+        type: string
+      value:
+        description: Array of relations.
+        items:
+          $ref: '#/definitions/CaseRelation'
+        type: array
+    required:
+      - value
+  CaseRelationProperties:
+    description: Case relation properties
+    properties:
+      bookmarkId:
+        description: The case related bookmark id
+        type: string
+      bookmarkName:
+        description: The case related bookmark name
+        type: string
+      caseIdentifier:
+        description: The case identifier
+        type: string
+      relationName:
+        description: Name of relation
+        type: string
+    required:
+      - relationName
+      - caseIdentifier
+      - bookmarkId
+    type: object
   CasesAggregation:
     allOf:
       - $ref: '#/definitions/Aggregations'
@@ -3566,14 +4340,10 @@ definitions:
     x-ms-external: true
   DataConnector:
     allOf:
-      - $ref: '#/definitions/Resource'
+      - $ref: '#/definitions/ResourceWithEtag'
       - $ref: '#/definitions/DataConnectorKind'
     description: Data connector.
     discriminator: kind
-    properties:
-      etag:
-        description: Etag of the data connector.
-        type: string
     type: object
   DataConnectorDataTypeCommon:
     description: Common field for data type in data connectors.
@@ -3643,7 +4413,7 @@ definitions:
             - NotExist
           type: string
           x-ms-enum:
-            modelAsString: false
+            modelAsString: true
             name: DataTypeStatus
         description: The data types availability map
         type: object
@@ -4046,69 +4816,75 @@ definitions:
         readOnly: true
         type: string
     type: object
-  FilterAlertRuleTemplate:
+  FusionAlertRule:
     allOf:
-      - $ref: '#/definitions/AlertRuleTemplate'
-    description: Represents filter alert rule template.
+      - $ref: '#/definitions/AlertRule'
+    description: Represents Fusion alert rule.
     properties:
       properties:
-        allOf:
-          - $ref: '#/definitions/BaseAlertRuleTemplateProperties'
-          - $ref: '#/definitions/FilterAlertRuleTemplateProperties'
-        description: Filter alert rule template properties
-        required:
-          - displayName
-          - description
-          - createdDateUTC
-          - status
-          - alertRulesCreatedByTemplateCount
-          - filterProduct
+        $ref: '#/definitions/FusionAlertRuleProperties'
+        description: Fusion alert rule properties
         x-ms-client-flatten: true
     type: object
-    x-ms-discriminator-value: Filter
-  FilterAlertRuleTemplateProperties:
-    description: Filter alert rule template property bag.
+    x-ms-discriminator-value: Fusion
+  FusionAlertRuleProperties:
+    description: Fusion alert rule base property bag.
     properties:
-      filterProduct:
-        description: The filter product name for this template rule.
+      alertRuleTemplateName:
+        description: The Name of the alert rule template used to create this rule.
         type: string
-      filterSeverities:
-        description: the alert’s severities on which the cases will be generated
+      description:
+        description: The description of the alert rule.
+        readOnly: true
+        type: string
+      displayName:
+        description: The display name for alerts created by this alert rule.
+        readOnly: true
+        type: string
+      enabled:
+        description: Determines whether this alert rule is enabled or disabled.
+        type: boolean
+      lastModifiedUtc:
+        description: The last time that this alert has been modified.
+        format: date-time
+        readOnly: true
+        type: string
+      severity:
+        $ref: '#/definitions/AlertSeverity'
+        description: The severity for alerts created by this alert rule.
+        readOnly: true
+      tactics:
+        description: The tactics of the alert rule
         items:
-          $ref: '#/definitions/AlertSeverity'
+          $ref: '#/definitions/AttackTactic'
+        readOnly: true
         type: array
-      filterTitles:
-        description: the alert’s titles on which the cases will be generated
-        items:
-          type: string
-        type: array
+    required:
+      - alertRuleTemplateName
+      - enabled
     type: object
   FusionAlertRuleTemplate:
     allOf:
       - $ref: '#/definitions/AlertRuleTemplate'
-    description: Represents fusion alert rule template.
+    description: Represents Fusion alert rule template.
     properties:
       properties:
         allOf:
-          - $ref: '#/definitions/BaseAlertRuleTemplateProperties'
-          - $ref: '#/definitions/FusionAlertRuleTemplateProperties'
+          - $ref: '#/definitions/AlertRuleTemplatePropertiesBase'
         description: Fusion alert rule template properties
+        properties:
+          severity:
+            $ref: '#/definitions/AlertSeverity'
+            description: The severity for alerts created by this alert rule.
         required:
           - displayName
           - description
-          - createdDateUTC
           - status
+          - severity
           - alertRulesCreatedByTemplateCount
         x-ms-client-flatten: true
     type: object
     x-ms-discriminator-value: Fusion
-  FusionAlertRuleTemplateProperties:
-    description: Filter alert rule template property bag.
-    properties:
-      severity:
-        $ref: '#/definitions/AlertSeverity'
-        description: The severity for alerts created by this alert rule.
-    type: object
   GeoLocation:
     description: The geo-location context attached to the ip entity
     properties:
@@ -4333,6 +5109,96 @@ definitions:
         readOnly: true
         type: array
     type: object
+  MicrosoftSecurityIncidentCreationAlertRule:
+    allOf:
+      - $ref: '#/definitions/AlertRule'
+    description: Represents MicrosoftSecurityIncidentCreation rule.
+    properties:
+      properties:
+        $ref: '#/definitions/MicrosoftSecurityIncidentCreationAlertRuleProperties'
+        description: MicrosoftSecurityIncidentCreation rule properties
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: MicrosoftSecurityIncidentCreation
+  MicrosoftSecurityIncidentCreationAlertRuleCommonProperties:
+    description: MicrosoftSecurityIncidentCreation rule common property bag.
+    properties:
+      displayNamesFilter:
+        description: the alerts' displayNames on which the cases will be generated
+        items:
+          type: string
+        type: array
+      productFilter:
+        description: The alerts' productName on which the cases will be generated
+        enum:
+          - Microsoft Cloud App Security
+          - Azure Security Center
+          - Azure Advanced Threat Protection
+          - Azure Active Directory Identity Protection
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: MicrosoftSecurityProductName
+      severitiesFilter:
+        description: the alerts' severities on which the cases will be generated
+        items:
+          $ref: '#/definitions/AlertSeverity'
+        type: array
+    required:
+      - productFilter
+    type: object
+  MicrosoftSecurityIncidentCreationAlertRuleProperties:
+    allOf:
+      - $ref: '#/definitions/MicrosoftSecurityIncidentCreationAlertRuleCommonProperties'
+    description: MicrosoftSecurityIncidentCreation rule property bag.
+    properties:
+      alertRuleTemplateName:
+        description: The Name of the alert rule template used to create this rule.
+        type: string
+      description:
+        description: The description of the alert rule.
+        type: string
+      displayName:
+        description: The display name for alerts created by this alert rule.
+        type: string
+      enabled:
+        description: Determines whether this alert rule is enabled or disabled.
+        type: boolean
+      lastModifiedUtc:
+        description: The last time that this alert has been modified.
+        format: date-time
+        readOnly: true
+        type: string
+      tactics:
+        description: The tactics of the alert rule
+        items:
+          $ref: '#/definitions/AttackTactic'
+        type: array
+    required:
+      - displayName
+      - enabled
+      - productFilter
+    type: object
+  MicrosoftSecurityIncidentCreationAlertRuleTemplate:
+    allOf:
+      - $ref: '#/definitions/AlertRuleTemplate'
+    description: Represents MicrosoftSecurityIncidentCreation rule template.
+    properties:
+      properties:
+        allOf:
+          - $ref: '#/definitions/AlertRuleTemplatePropertiesBase'
+          - $ref: '#/definitions/MicrosoftSecurityIncidentCreationAlertRuleCommonProperties'
+        description: MicrosoftSecurityIncidentCreation rule template properties
+        required:
+          - displayName
+          - description
+          - createdDateUTC
+          - status
+          - alertRulesCreatedByTemplateCount
+          - productFilter
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: MicrosoftSecurityIncidentCreation
   OfficeConsent:
     allOf:
       - $ref: '#/definitions/Resource'
@@ -4626,6 +5492,83 @@ definitions:
             - description: QWord value type
               value: QWord
     type: object
+  RelationBase:
+    allOf:
+      - $ref: '#/definitions/Resource'
+      - properties:
+          etag:
+            description: ETag for relation
+            type: string
+          kind:
+            description: The type of relation node
+            enum:
+              - CasesToBookmarks
+            readOnly: true
+            type: string
+            x-ms-enum:
+              modelAsString: true
+              name: RelationTypes
+              values:
+                - description: Relations between cases and bookmarks
+                  value: CasesToBookmarks
+        type: object
+    description: Represents a relation
+    type: object
+  RelationNode:
+    description: Relation node
+    properties:
+      etag:
+        description: Etag for relation node
+        type: string
+      relationAdditionalProperties:
+        additionalProperties:
+          type: string
+        description: Additional set of properties
+        type: object
+      relationNodeId:
+        description: Relation Node Id
+        type: string
+      relationNodeKind:
+        description: The type of relation node
+        enum:
+          - Case
+          - Bookmark
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: RelationNodeKind
+          values:
+            - description: Case node part of the relation
+              value: Case
+            - description: Bookmark node part of the relation
+              value: Bookmark
+    type: object
+  RelationsModelInput:
+    allOf:
+      - $ref: '#/definitions/RelationBase'
+    description: Relation input model
+    properties:
+      properties:
+        $ref: '#/definitions/RelationsModelInputProperties'
+        description: Relation input properties
+        x-ms-client-flatten: true
+    type: object
+  RelationsModelInputProperties:
+    description: Relation input properties
+    properties:
+      relationName:
+        description: Name of relation
+        type: string
+      sourceRelationNode:
+        $ref: '#/definitions/RelationNode'
+        description: Relation source node
+        type: object
+      targetRelationNode:
+        $ref: '#/definitions/RelationNode'
+        description: Relation target node
+        type: object
+    type: object
   Resource:
     description: An azure resource object
     properties:
@@ -4642,6 +5585,14 @@ definitions:
         readOnly: true
         type: string
     x-ms-azure-resource: true
+  ResourceWithEtag:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: An azure resource object with an Etag property
+    properties:
+      etag:
+        description: Etag of the azure resource
+        type: string
   ScheduledAlertRule:
     allOf:
       - $ref: '#/definitions/AlertRule'
@@ -4653,89 +5604,7 @@ definitions:
         x-ms-client-flatten: true
     type: object
     x-ms-discriminator-value: Scheduled
-  ScheduledAlertRuleProperties:
-    description: Alert rule property bag.
-    properties:
-      description:
-        description: The description of the alert rule.
-        type: string
-      displayName:
-        description: The display name for alerts created by this alert rule.
-        type: string
-      enabled:
-        description: Determines whether this alert rule is enabled or disabled.
-        type: boolean
-      lastModifiedUtc:
-        description: The last time that this alert has been modified.
-        readOnly: true
-        type: string
-      query:
-        description: The query that creates alerts for this rule.
-        type: string
-      queryFrequency:
-        description: The frequency (in ISO 8601 duration format) for this alert rule to run.
-        format: duration
-        type: string
-      queryPeriod:
-        description: The period (in ISO 8601 duration format) that this alert rule looks at.
-        format: duration
-        type: string
-      severity:
-        $ref: '#/definitions/AlertSeverity'
-        description: The severity for alerts created by this alert rule.
-      suppressionDuration:
-        description: The suppression (in ISO 8601 duration format) to wait since last time this alert rule been triggered.
-        format: duration
-        type: string
-      suppressionEnabled:
-        description: Determines whether the suppression for this alert rule is enabled or disabled.
-        type: boolean
-      triggerOperator:
-        $ref: '#/definitions/AlertRuleTriggerOperator'
-        description: The operation against the threshold that triggers alert rule.
-      triggerThreshold:
-        description: The threshold triggers this alert rule.
-        type: integer
-    required:
-      - displayName
-      - description
-      - severity
-      - enabled
-      - query
-      - queryFrequency
-      - queryPeriod
-      - triggerOperator
-      - triggerThreshold
-      - suppressionEnabled
-      - suppressionDuration
-    type: object
-  ScheduledAlertRuleTemplate:
-    allOf:
-      - $ref: '#/definitions/AlertRuleTemplate'
-    description: Represents scheduled alert rule template.
-    properties:
-      properties:
-        allOf:
-          - $ref: '#/definitions/BaseAlertRuleTemplateProperties'
-          - $ref: '#/definitions/ScheduledAlertRuleTemplateProperties'
-        description: Scheduled alert rule template properties
-        required:
-          - displayName
-          - description
-          - createdDateUTC
-          - status
-          - requiredDataConnectors
-          - alertRulesCreatedByTemplateCount
-          - severity
-          - query
-          - queryFrequency
-          - queryPeriod
-          - triggerOperator
-          - triggerThreshold
-        x-ms-client-flatten: true
-    type: object
-    x-ms-discriminator-value: Scheduled
-  ScheduledAlertRuleTemplateProperties:
+  ScheduledAlertRuleCommonProperties:
     description: Schedule alert rule template property bag.
     properties:
       query:
@@ -4759,6 +5628,76 @@ definitions:
         description: The threshold triggers this alert rule.
         type: integer
     type: object
+  ScheduledAlertRuleProperties:
+    allOf:
+      - $ref: '#/definitions/ScheduledAlertRuleCommonProperties'
+    description: Scheduled alert rule base property bag.
+    properties:
+      alertRuleTemplateName:
+        description: The Name of the alert rule template used to create this rule.
+        type: string
+      description:
+        description: The description of the alert rule.
+        type: string
+      displayName:
+        description: The display name for alerts created by this alert rule.
+        type: string
+      enabled:
+        description: Determines whether this alert rule is enabled or disabled.
+        type: boolean
+      lastModifiedUtc:
+        description: The last time that this alert rule has been modified.
+        format: date-time
+        readOnly: true
+        type: string
+      suppressionDuration:
+        description: The suppression (in ISO 8601 duration format) to wait since last time this alert rule been triggered.
+        format: duration
+        type: string
+      suppressionEnabled:
+        description: Determines whether the suppression for this alert rule is enabled or disabled.
+        type: boolean
+      tactics:
+        description: The tactics of the alert rule
+        items:
+          $ref: '#/definitions/AttackTactic'
+        type: array
+    required:
+      - displayName
+      - enabled
+      - severity
+      - query
+      - queryFrequency
+      - queryPeriod
+      - triggerOperator
+      - triggerThreshold
+      - suppressionEnabled
+      - suppressionDuration
+    type: object
+  ScheduledAlertRuleTemplate:
+    allOf:
+      - $ref: '#/definitions/AlertRuleTemplate'
+    description: Represents scheduled alert rule template.
+    properties:
+      properties:
+        allOf:
+          - $ref: '#/definitions/AlertRuleTemplatePropertiesBase'
+          - $ref: '#/definitions/ScheduledAlertRuleCommonProperties'
+        description: Scheduled alert rule template properties
+        required:
+          - displayName
+          - description
+          - status
+          - alertRulesCreatedByTemplateCount
+          - severity
+          - query
+          - queryFrequency
+          - queryPeriod
+          - triggerOperator
+          - triggerThreshold
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: Scheduled
   SecurityAlert:
     allOf:
       - $ref: '#/definitions/Entity'
@@ -5008,14 +5947,10 @@ definitions:
     type: object
   Settings:
     allOf:
-      - $ref: '#/definitions/Resource'
+      - $ref: '#/definitions/ResourceWithEtag'
       - $ref: '#/definitions/SettingsKind'
     description: The Setting.
     discriminator: kind
-    properties:
-      etag:
-        description: Etag of the alert rule.
-        type: string
     type: object
   SettingsKind:
     description: Describes an Azure resource with kind.

@@ -372,6 +372,8 @@ definitions:
         type: array
   Game:
     properties:
+      AwayRotationNumber:
+        type: integer
       AwayTeam:
         type: string
       AwayTeamID:
@@ -401,6 +403,8 @@ definitions:
       GlobalGameID:
         type: integer
       GlobalHomeTeamID:
+        type: integer
+      HomeRotationNumber:
         type: integer
       HomeTeam:
         type: string
@@ -515,6 +519,12 @@ definitions:
       Name:
         type: string
       PlayoffRank:
+        type: integer
+      RankSeason:
+        type: integer
+      RankSeasonType:
+        type: integer
+      RankWeek:
         type: integer
       School:
         type: string

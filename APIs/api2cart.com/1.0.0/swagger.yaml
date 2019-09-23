@@ -1931,103 +1931,15 @@ paths:
   /cart.coupon.add.json:
     post:
       consumes:
-        - application/x-www-form-urlencoded
+        - application/json
       description: Create new coupon
       operationId: CartCouponAdd
       parameters:
-        - description: Store Id
-          in: query
-          name: store_id
-          required: false
-          type: string
-        - description: Coupon code
-          in: query
-          name: code
+        - in: body
+          name: body
           required: true
-          type: string
-        - description: Coupon name
-          in: query
-          name: name
-          required: false
-          type: string
-        - description: Entity codes
-          in: query
-          items:
-            type: string
-          name: codes
-          required: false
-          type: array
-        - description: Coupon discount type
-          enum:
-            - percent
-            - fixed
-          in: query
-          name: action_type
-          required: true
-          type: string
-        - description: Defines where discount should be applied
-          enum:
-            - order_total
-            - item_price
-            - shipping
-          in: query
-          name: action_apply_to
-          required: true
-          type: string
-        - description: 'Specify how discount should be applied. If scope=matching_items, then discount will be applied to each of the items that match action conditions. Scope order means that discount will be applied once.'
-          enum:
-            - order
-            - matching_items
-          in: query
-          name: action_scope
-          required: true
-          type: string
-        - description: Defines the discount amount value.
-          in: query
-          name: action_amount
-          required: true
-          type: number
-        - default: now
-          description: Defines when discount code will be available.
-          in: query
-          name: date_start
-          required: false
-          type: string
-        - description: Defines when discount code will be expired.
-          in: query
-          name: date_end
-          required: false
-          type: string
-        - description: Usage limit for coupon.
-          in: query
-          name: usage_limit
-          required: false
-          type: integer
-        - description: Usage limit per customer.
-          in: query
-          name: usage_limit_per_customer
-          required: false
-          type: integer
-        - description: Defines entity for action condition.
-          in: query
-          name: action_condition_entity
-          required: false
-          type: string
-        - description: Defines entity attribute code for action condition.
-          in: query
-          name: action_condition_key
-          required: false
-          type: string
-        - description: Defines condition operator.
-          in: query
-          name: action_condition_operator
-          required: false
-          type: string
-        - description: Defines condition attribute value/s. Can be comma separated string.
-          in: query
-          name: action_condition_value
-          required: false
-          type: string
+          schema:
+            $ref: '#/definitions/CartCouponAdd'
       produces:
         - application/json
       responses:
@@ -7175,136 +7087,15 @@ paths:
   /product.variant.add.json:
     post:
       consumes:
-        - application/x-www-form-urlencoded
+        - application/json
       description: Add variant to product.
       operationId: ProductVariantAdd
       parameters:
-        - description: Defines product's id where the variant has to be added
-          in: query
-          name: product_id
+        - in: body
+          name: body
           required: true
-          type: string
-        - description: Defines variant's name that has to be added
-          in: query
-          name: name
-          required: false
-          type: string
-        - description: Specifies variant's model that has to be added
-          in: query
-          name: model
-          required: true
-          type: string
-        - description: Defines new product's variant price
-          in: query
-          name: price
-          required: false
-          type: number
-        - description: Defines variant's attributes list
-          in: query
-          items:
-            type: string
-          name: attributes
-          required: false
-          type: array
-        - description: Specifies variant's description
-          in: query
-          name: description
-          required: false
-          type: string
-        - description: Specifies variant's model that has to be added
-          in: query
-          name: special_price
-          required: false
-          type: number
-        - description: Defines the date of special price creation
-          in: query
-          name: sprice_create
-          required: false
-          type: string
-        - description: Defines the date of special price modification
-          in: query
-          name: sprice_modified
-          required: false
-          type: string
-        - description: Defines the term of special price offer duration
-          in: query
-          name: sprice_expire
-          required: false
-          type: string
-        - default: true
-          description: Specifies the set of visible/invisible product's variants for users
-          in: query
-          name: available_for_view
-          required: false
-          type: boolean
-        - default: true
-          description: Specifies the set of visible/invisible product's variants for sale
-          in: query
-          name: available_for_sale
-          required: false
-          type: boolean
-        - default: 0
-          description: Weight
-          in: query
-          name: weight
-          required: false
-          type: number
-        - description: Defines short description
-          in: query
-          name: short_description
-          required: false
-          type: string
-        - description: This parameter is used for selecting a warehouse where you need to set/modify a product quantity.
-          in: query
-          name: warehouse_id
-          required: false
-          type: string
-        - default: 0
-          description: Defines product variant's quantity that has to be added
-          in: query
-          name: quantity
-          required: false
-          type: number
-        - description: Defines the date of entity creation
-          in: query
-          name: created_at
-          required: false
-          type: string
-        - description: Specifies the product variant's manufacturer
-          in: query
-          name: manufacturer
-          required: false
-          type: string
-        - description: Defines tax classes where entity has to be added
-          in: query
-          name: tax_class_id
-          required: false
-          type: integer
-        - description: Defines unique meta title for each entity
-          in: query
-          name: meta_title
-          required: false
-          type: string
-        - description: Defines unique meta keywords for each entity
-          in: query
-          name: meta_keywords
-          required: false
-          type: string
-        - description: Defines unique meta description of a entity
-          in: query
-          name: meta_description
-          required: false
-          type: string
-        - description: Defines unique product variant's URL
-          in: query
-          name: url
-          required: false
-          type: string
-        - description: Add variants specified by store id
-          in: query
-          name: store_id
-          required: false
-          type: string
+          schema:
+            $ref: '#/definitions/ProductVariantAdd'
       produces:
         - application/json
       responses:
@@ -8438,6 +8229,76 @@ definitions:
       store_id:
         description: Store Id
         type: string
+    type: object
+  CartCouponAdd:
+    properties:
+      action_amount:
+        description: Defines the discount amount value.
+        type: number
+      action_apply_to:
+        description: Defines where discount should be applied
+        enum:
+          - order_total
+          - item_price
+          - shipping
+        type: string
+      action_condition_entity:
+        description: Defines entity for action condition.
+        type: string
+      action_condition_key:
+        description: Defines entity attribute code for action condition.
+        type: string
+      action_condition_operator:
+        description: Defines condition operator.
+        type: string
+      action_condition_value:
+        description: Defines condition attribute value/s. Can be comma separated string.
+        type: string
+      action_scope:
+        description: 'Specify how discount should be applied. If scope=matching_items, then discount will be applied to each of the items that match action conditions. Scope order means that discount will be applied once.'
+        enum:
+          - order
+          - matching_items
+        type: string
+      action_type:
+        description: Coupon discount type
+        enum:
+          - percent
+          - fixed
+        type: string
+      code:
+        description: Coupon code
+        type: string
+      codes:
+        description: Entity codes
+        items:
+          type: string
+        type: array
+      date_end:
+        description: Defines when discount code will be expired.
+        type: string
+      date_start:
+        default: now
+        description: Defines when discount code will be available.
+        type: string
+      name:
+        description: Coupon name
+        type: string
+      store_id:
+        description: Store Id
+        type: string
+      usage_limit:
+        description: Usage limit for coupon.
+        type: integer
+      usage_limit_per_customer:
+        description: Usage limit per customer.
+        type: integer
+    required:
+      - code
+      - action_type
+      - action_apply_to
+      - action_scope
+      - action_amount
     type: object
   Cart_ShippingZone:
     properties:
@@ -10181,6 +10042,9 @@ definitions:
         default: '0'
         description: Assign product to the stores that is specified by comma-separated stores' id
         type: string
+      tags:
+        description: Product tags
+        type: string
       tax_class_id:
         description: Defines tax classes where entity has to be added
         type: integer
@@ -10290,6 +10154,90 @@ definitions:
       - product_id
       - name
       - tax_rates
+    type: object
+  ProductVariantAdd:
+    properties:
+      attributes:
+        description: Defines variant's attributes list
+        items:
+          type: string
+        type: array
+      available_for_sale:
+        default: true
+        description: Specifies the set of visible/invisible product's variants for sale
+        type: boolean
+      available_for_view:
+        default: true
+        description: Specifies the set of visible/invisible product's variants for users
+        type: boolean
+      created_at:
+        description: Defines the date of entity creation
+        type: string
+      description:
+        description: Specifies variant's description
+        type: string
+      manufacturer:
+        description: Specifies the product variant's manufacturer
+        type: string
+      meta_description:
+        description: Defines unique meta description of a entity
+        type: string
+      meta_keywords:
+        description: Defines unique meta keywords for each entity
+        type: string
+      meta_title:
+        description: Defines unique meta title for each entity
+        type: string
+      model:
+        description: Specifies variant's model that has to be added
+        type: string
+      name:
+        description: Defines variant's name that has to be added
+        type: string
+      price:
+        description: Defines new product's variant price
+        type: number
+      product_id:
+        description: Defines product's id where the variant has to be added
+        type: string
+      quantity:
+        default: 0
+        description: Defines product variant's quantity that has to be added
+        type: number
+      short_description:
+        description: Defines short description
+        type: string
+      special_price:
+        description: Specifies variant's model that has to be added
+        type: number
+      sprice_create:
+        description: Defines the date of special price creation
+        type: string
+      sprice_expire:
+        description: Defines the term of special price offer duration
+        type: string
+      sprice_modified:
+        description: Defines the date of special price modification
+        type: string
+      store_id:
+        description: Add variants specified by store id
+        type: string
+      tax_class_id:
+        description: Defines tax classes where entity has to be added
+        type: integer
+      url:
+        description: Defines unique product variant's URL
+        type: string
+      warehouse_id:
+        description: This parameter is used for selecting a warehouse where you need to set/modify a product quantity.
+        type: string
+      weight:
+        default: 0
+        description: Weight
+        type: number
+    required:
+      - product_id
+      - model
     type: object
   ProductVariantPriceAdd:
     properties:

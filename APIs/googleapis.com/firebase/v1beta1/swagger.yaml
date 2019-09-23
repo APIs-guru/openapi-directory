@@ -298,15 +298,13 @@ paths:
       tags:
         - projects
     get:
-      description: Gets the AndroidApp identified by the specified resource name.
-      operationId: firebase.projects.androidApps.get
+      description: |-
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: firebase.operations.get
       parameters:
-        - description: |-
-            The fully qualified resource name of the App, in the format:
-            <br><code>projects/<var>projectId</var>/androidApps/<var>appId</var></code>
-            <br>As an <var>appId</var> is a unique identifier, the Unique Resource
-            from Sub-Collection access pattern may be used here, in the format:
-            <br><code>projects/-/androidApps/<var>appId</var></code>
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -316,7 +314,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/AndroidApp'
+            $ref: '#/definitions/Operation'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -335,7 +333,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/firebase.readonly'
       tags:
-        - projects
+        - operations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -350,17 +348,17 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     patch:
       description: |-
-        Updates the attributes of the AndroidApp identified by the specified
+        Updates the attributes of the IosApp identified by the specified
         resource name.
-      operationId: firebase.projects.androidApps.patch
+      operationId: firebase.projects.iosApps.patch
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/AndroidApp'
+            $ref: '#/definitions/IosApp'
         - description: |-
             The fully qualified resource name of the App, in the format:
-            <br><code>projects/<var>projectId</var>/androidApps/<var>appId</var></code>
+            <br><code>projects/<var>projectId</var>/iosApps/<var>appId</var></code>
           in: path
           name: name
           required: true
@@ -368,7 +366,7 @@ paths:
           x-reservedExpansion: true
         - description: |-
             Specifies which fields to update.
-            <br>Note that the fields `name`, `appId`, `projectId`, and `packageName`
+            <br>Note that the fields `name`, `appId`, `projectId`, and `bundleId`
             are all immutable.
           in: query
           name: updateMask
@@ -377,7 +375,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/AndroidApp'
+            $ref: '#/definitions/IosApp'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'

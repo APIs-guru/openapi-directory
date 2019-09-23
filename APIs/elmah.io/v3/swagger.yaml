@@ -5,6 +5,7 @@ host: api.elmah.io
 info:
   contact:
     x-twitter: elmah_io
+  description: 'This is the public REST API for elmah.io. All of the integrations communicates with elmah.io through this API.<br/><br/>For additional help getting started with the API, visit the following help articles:<br/><ul><li>[Using the REST API](https://docs.elmah.io/using-the-rest-api/)</li><li>[Where is my API key?](https://docs.elmah.io/where-is-my-api-key/)</li><li>[Where is my log ID?](https://docs.elmah.io/where-is-my-log-id/)</li><li>[How to configure API key permissions](https://docs.elmah.io/how-to-configure-api-key-permissions/)</li></ul>'
   title: elmah.io
   version: v3
   x-apisguru-categories:
@@ -17,71 +18,80 @@ info:
       version: '2.0'
   x-providerName: elmah.io
 securityDefinitions:
-  apiKey:
-    description: API Key Authentication
+  api_key:
+    description: 'All requests on the elmah.io API needs to include an API key. The API key can be provided as part of the query string or as a request header. The name of the API key needs to be <code>api_key</code>.<br/><br/>Additional resources:<br/><ul><li>[Where is my API key?](https://docs.elmah.io/where-is-my-api-key/)</li><li>[How to configure API key permissions](https://docs.elmah.io/how-to-configure-api-key-permissions/)</li></ul>'
     in: query
     name: api_key
     type: apiKey
+security:
+  - api_key: []
+tags: []
 paths:
   /v3/deployments:
     get:
       consumes: []
-      deprecated: false
       operationId: Deployments_GetAll
+      parameters: []
       produces:
+        - text/plain
         - application/json
         - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
-          description: OK
+          description: Request for deployments successful.
           schema:
             items:
               $ref: '#/definitions/Deployment'
             type: array
+            uniqueItems: false
+        '401':
+          description: API key not valid or no access to resource.
         '402':
-          description: Tried to call the deployment API without deployment tracking enabled.
+          description: Tried to call the deployment API without deployment tracking enabled or trial expired.
+        '429':
+          description: A maximum of 500 requests per minute and 3600 requests per hour are permitted
       summary: Fetch a list of deployments.
       tags:
         - Deployments
     post:
       consumes:
+        - application/json-patch+json
         - application/json
         - text/json
-        - application/xml
-        - text/xml
-        - application/x-www-form-urlencoded
-      deprecated: false
+        - application/*+json
       operationId: Deployments_Create
       parameters:
         - description: The deployment object to create.
           in: body
           name: deployment
-          required: true
+          required: false
           schema:
             $ref: '#/definitions/CreateDeployment'
       produces:
+        - text/plain
         - application/json
         - text/json
-        - application/xml
-        - text/xml
       responses:
         '201':
-          description: Deployment where successfully created.
+          description: Deployment was created.
+          schema:
+            $ref: '#/definitions/CreateDeploymentResult'
         '400':
           description: Model not valid.
+        '401':
+          description: API key not valid or no access to resource.
         '402':
-          description: Tried to call the deployment API without deployment tracking enabled.
+          description: Tried to call the deployment API without deployment tracking enabled or trial expired.
         '409':
           description: Existing deployment with same version number already found in organization.
+        '429':
+          description: A maximum of 500 requests per minute and 3600 requests per hour are permitted
       summary: Create a new deployment.
       tags:
         - Deployments
   '/v3/deployments/{id}':
     delete:
       consumes: []
-      deprecated: false
       description: This endpoint doesn't clear the version number of messages already annotated with this deployment version.
       operationId: Deployments_Delete
       parameters:
@@ -93,19 +103,22 @@ paths:
       produces: []
       responses:
         '204':
-          description: No Content
+          description: Deployment was deleted.
         '400':
-          description: Id not specified
+          description: Id not specified.
+        '401':
+          description: API key not valid or no access to resource.
         '402':
-          description: Tried to call the deployment API without deployment tracking enabled.
+          description: Tried to call the deployment API without deployment tracking enabled or trial expired.
         '404':
           description: Deployment with specified id not found.
+        '429':
+          description: A maximum of 500 requests per minute and 3600 requests per hour are permitted
       summary: Delete a deployment by its ID.
       tags:
         - Deployments
     get:
       consumes: []
-      deprecated: false
       operationId: Deployments_Get
       parameters:
         - description: The ID of the deployment to fetch.
@@ -114,83 +127,88 @@ paths:
           required: true
           type: string
       produces:
+        - text/plain
         - application/json
         - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
-          description: OK
+          description: Request for deployment successful.
           schema:
             $ref: '#/definitions/Deployment'
         '400':
-          description: Id not specified
+          description: Id not specified.
+        '401':
+          description: API key not valid or no access to resource.
         '402':
-          description: Tried to call the deployment API without deployment tracking enabled.
-        '404':
           description: Deployment with specified id not found.
+        '429':
+          description: A maximum of 500 requests per minute and 3600 requests per hour are permitted
       summary: Fetch a deployment by its ID.
       tags:
         - Deployments
   /v3/logs:
     get:
       consumes: []
-      deprecated: false
       operationId: Logs_GetAll
+      parameters: []
       produces:
+        - text/plain
         - application/json
         - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
-          description: Request for logs successful
+          description: Request for logs successful.
           schema:
             items:
               $ref: '#/definitions/Log'
             type: array
+            uniqueItems: false
         '401':
-          description: No access to logs
+          description: API key not valid or no access to resource.
         '402':
           description: Tried to call the logs API but the trial expired.
+        '429':
+          description: A maximum of 500 requests per minute and 3600 requests per hour are permitted
       summary: Fetch a list of logs.
       tags:
         - Logs
     post:
       consumes:
+        - application/json-patch+json
         - application/json
         - text/json
-        - application/xml
-        - text/xml
-        - application/x-www-form-urlencoded
-      deprecated: false
+        - application/*+json
       operationId: Logs_Create
       parameters:
         - description: The log object to create.
           in: body
           name: log
-          required: true
+          required: false
           schema:
             $ref: '#/definitions/CreateLog'
       produces:
+        - text/plain
         - application/json
         - text/json
-        - application/xml
-        - text/xml
       responses:
         '201':
           description: Log where successfully created.
+          schema:
+            $ref: '#/definitions/CreateLogResult'
+        '400':
+          description: Something wrong with the parameters.
         '401':
-          description: No access to logs.
+          description: API key not valid or no access to resource.
         '402':
           description: Tried to call the logs API but the trial expired.
+        '429':
+          description: A maximum of 500 requests per minute and 3600 requests per hour are permitted
       summary: Create a new log.
       tags:
         - Logs
   '/v3/logs/{id}':
     get:
       consumes: []
-      deprecated: false
       operationId: Logs_Get
       parameters:
         - description: The ID of the log to fetch.
@@ -199,33 +217,32 @@ paths:
           required: true
           type: string
       produces:
+        - text/plain
         - application/json
         - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
-          description: Request for log successful
+          description: Request for log successful.
           schema:
             $ref: '#/definitions/Log'
         '401':
-          description: No access to log
+          description: API key not valid or no access to resource.
         '402':
           description: Tried to call the logs API but the trial expired.
         '404':
-          description: Log not found
+          description: Log not found.
+        '429':
+          description: A maximum of 500 requests per minute and 3600 requests per hour are permitted
       summary: Fetch a log by its ID.
       tags:
         - Logs
   '/v3/messages/{logId}':
     delete:
       consumes:
+        - application/json-patch+json
         - application/json
         - text/json
-        - application/xml
-        - text/xml
-        - application/x-www-form-urlencoded
-      deprecated: false
+        - application/*+json
       operationId: Messages_DeleteAll
       parameters:
         - description: The ID of the log containing the message.
@@ -236,21 +253,19 @@ paths:
         - description: 'A search object containing query, time filters etc.'
           in: body
           name: search
-          required: true
+          required: false
           schema:
             $ref: '#/definitions/Search'
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
+      produces: []
       responses:
         '200':
           description: Messages where deleted.
         '400':
-          description: Something wrong with the query parameters
+          description: Something wrong with the query parameters.
         '401':
-          description: No access to log.
+          description: API key not valid or no access to resource.
+        '402':
+          description: Tried to call the logs API but the trial expired.
         '404':
           description: Log not found.
         '429':
@@ -260,7 +275,6 @@ paths:
         - Messages
     get:
       consumes: []
-      deprecated: false
       operationId: Messages_GetAll
       parameters:
         - description: The ID of the log containing the messages.
@@ -268,13 +282,15 @@ paths:
           name: logId
           required: true
           type: string
-        - description: The page number of the result.
+        - default: 0
+          description: The page number of the result.
           format: int32
           in: query
           name: pageIndex
           required: false
           type: integer
-        - description: The number of messages to load (max 100) or 15 if not set.
+        - default: 15
+          description: The number of messages to load (max 100) or 15 if not set.
           format: int32
           in: query
           name: pageSize
@@ -297,25 +313,27 @@ paths:
           name: to
           required: false
           type: string
-        - description: Include headers like server variables and cookies in the result (slower).
+        - default: false
+          description: Include headers like server variables and cookies in the result (slower).
           in: query
           name: includeHeaders
           required: false
           type: boolean
       produces:
+        - text/plain
         - application/json
         - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
-          description: Log found and may contain messages
+          description: Log found and may contain messages.
           schema:
             $ref: '#/definitions/MessagesResult'
         '400':
-          description: Something wrong with the query parameters
+          description: Something wrong with the query parameters.
         '401':
-          description: No access to log
+          description: API key not valid or no access to resource.
+        '402':
+          description: Tried to call the logs API but the trial expired.
         '429':
           description: A maximum of 500 requests per minute and 3600 requests per hour are permitted
       summary: Fetch messages from a log.
@@ -323,12 +341,10 @@ paths:
         - Messages
     post:
       consumes:
+        - application/json-patch+json
         - application/json
         - text/json
-        - application/xml
-        - text/xml
-        - application/x-www-form-urlencoded
-      deprecated: false
+        - application/*+json
       operationId: Messages_Create
       parameters:
         - description: The ID of the log which should contain the new message.
@@ -339,25 +355,26 @@ paths:
         - description: The message object to create.
           in: body
           name: message
-          required: true
+          required: false
           schema:
             $ref: '#/definitions/CreateMessage'
       produces:
+        - text/plain
         - application/json
         - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
-          description: Message where not created.
+          description: Message was not created.
         '201':
-          description: Message where successfully created.
+          description: Message was successfully created.
+          schema:
+            $ref: '#/definitions/CreateMessageResult'
         '400':
-          description: Something wrong with the query parameters
+          description: Something wrong with the query parameters.
         '401':
-          description: No access to log
-        '403':
-          description: Request limit reached and message where not created.
+          description: API key not valid or no access to resource.
+        '402':
+          description: Tried to call the logs API but the trial expired.
         '404':
           description: Log not found.
         '413':
@@ -370,12 +387,10 @@ paths:
   '/v3/messages/{logId}/_bulk':
     post:
       consumes:
+        - application/json-patch+json
         - application/json
         - text/json
-        - application/xml
-        - text/xml
-        - application/x-www-form-urlencoded
-      deprecated: false
+        - application/*+json
       operationId: Messages_CreateBulk
       parameters:
         - description: The ID of the log which should contain the new messages.
@@ -386,16 +401,16 @@ paths:
         - description: The messages to create.
           in: body
           name: messages
-          required: true
+          required: false
           schema:
             items:
               $ref: '#/definitions/CreateMessage'
             type: array
+            uniqueItems: false
       produces:
+        - text/plain
         - application/json
         - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: Zero or more messages where successfully created. Check the response body for details.
@@ -403,23 +418,23 @@ paths:
             items:
               $ref: '#/definitions/CreateBulkMessageResult'
             type: array
+            uniqueItems: false
         '400':
           description: Something wrong with the query parameters.
         '401':
-          description: No access to log.
-        '403':
-          description: Request limit reached and message where not created.
+          description: API key not valid or no access to resource.
+        '402':
+          description: Tried to call the logs API but the trial expired.
         '404':
           description: Log not found.
         '429':
-          description: A maximum of 500 requests per minute and 3600 requests per hour are permitted.
+          description: A maximum of 500 requests per minute and 3600 requests per hour are permitted
       summary: Create one or more new messages.
       tags:
         - Messages
   '/v3/messages/{logId}/{id}':
     delete:
       consumes: []
-      deprecated: false
       operationId: Messages_Delete
       parameters:
         - description: The ID of the message to delete.
@@ -432,18 +447,16 @@ paths:
           name: logId
           required: true
           type: string
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
+      produces: []
       responses:
         '200':
           description: Message where deleted.
         '400':
-          description: Something wrong with the query parameters
+          description: Something wrong with the query parameters.
         '401':
-          description: No access to log.
+          description: API key not valid or no access to resource.
+        '402':
+          description: Tried to call the logs API but the trial expired.
         '404':
           description: Log or message not found.
         '429':
@@ -453,7 +466,6 @@ paths:
         - Messages
     get:
       consumes: []
-      deprecated: false
       operationId: Messages_Get
       parameters:
         - description: The ID of the message to fetch.
@@ -467,19 +479,20 @@ paths:
           required: true
           type: string
       produces:
+        - text/plain
         - application/json
         - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: Message found.
           schema:
             $ref: '#/definitions/Message'
         '400':
-          description: Something wrong with the query parameters
+          description: Something wrong with the query parameters.
         '401':
-          description: No access to log
+          description: API key not valid or no access to resource.
+        '402':
+          description: Tried to call the logs API but the trial expired.
         '404':
           description: Message not found.
         '429':
@@ -490,7 +503,6 @@ paths:
   '/v3/messages/{logId}/{id}/_hide':
     post:
       consumes: []
-      deprecated: false
       operationId: Messages_Hide
       parameters:
         - description: The ID of the message to hide.
@@ -503,18 +515,16 @@ paths:
           name: logId
           required: true
           type: string
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
+      produces: []
       responses:
         '200':
-          description: Message where hidden.
+          description: Message was hidden.
         '400':
-          description: Something wrong with the query parameters
+          description: Something wrong with the query parameters.
         '401':
-          description: No access to log.
+          description: API key not valid or no access to resource.
+        '402':
+          description: Tried to call the logs API but the trial expired.
         '404':
           description: Message not found.
         '429':
@@ -525,11 +535,11 @@ paths:
 definitions:
   CreateBulkMessageResult:
     properties:
-      Location:
+      location:
         description: The location of the created message if StatusCode equals Created.
         type: string
-      StatusCode:
-        description: Status code of the individual messages as if it were being created through the non-bulk endpoint.
+      statusCode:
+        description: "Status code of the individual messages as if it were being created through the non-bulk endpoint.\r\nIf a message was succesfully created, the status code will be 201 and location will contain an URL.\r\nIf a message was ignored, the status code will be 200 and the location will be empty."
         format: int32
         type: integer
     type: object
@@ -543,24 +553,38 @@ definitions:
         description: Optional description of this deployment. Can be markdown or clear text.
         type: string
       logId:
-        description: "As default, deployments are attached all logs of the organization. If you want a deployment to\r\n            attach to a single log only, set this to the ID of that log."
+        description: "As default, deployments are attached all logs of the organization. If you want a deployment to\r\nattach to a single log only, set this to the ID of that log."
         type: string
       userEmail:
-        description: "The email of the person responsible for creating this deployment. This can be the email taken from\r\n            your deployment server (like VSTS or Octopus)."
+        description: "The email of the person responsible for creating this deployment. This can be the email taken from\r\nyour deployment server (like VSTS or Octopus)."
         type: string
       userName:
-        description: "The name of the person responsible for creating this deployment. This can be the name taken from\r\n            your deployment server (like VSTS or Octopus)."
+        description: "The name of the person responsible for creating this deployment. This can be the name taken from\r\nyour deployment server (like VSTS or Octopus)."
         type: string
       version:
-        description: "The version number of this deployment. The value of version can be a SemVer compliant string or any other\r\n            syntax that you are using as your version numbering scheme."
+        description: "The version number of this deployment. The value of version can be a SemVer compliant string or any other\r\nsyntax that you are using as your version numbering scheme."
         type: string
     required:
       - version
+    type: object
+  CreateDeploymentResult:
+    properties:
+      location:
+        description: The location of the created deployment.
+        type: string
     type: object
   CreateLog:
     properties:
       name:
         description: Name of the new log.
+        type: string
+    required:
+      - name
+    type: object
+  CreateLogResult:
+    properties:
+      location:
+        description: The location of the created log.
         type: string
     type: object
   CreateMessage:
@@ -573,11 +597,13 @@ definitions:
         items:
           $ref: '#/definitions/Item'
         type: array
+        uniqueItems: false
       data:
-        description: "A key/value pair of user-defined fields and their values. When logging an exception, the Data dictionary of\r\n            the exception is copied to this property. You can add additional key/value pairs, by modifying the Data\r\n            dictionary on the exception or by supplying additional key/values to this API."
+        description: "A key/value pair of user-defined fields and their values. When logging an exception, the Data dictionary of\r\nthe exception is copied to this property. You can add additional key/value pairs, by modifying the Data\r\ndictionary on the exception or by supplying additional key/values to this API."
         items:
           $ref: '#/definitions/Item'
         type: array
+        uniqueItems: false
       dateTime:
         description: 'The date and time in UTC of the message. If you don''t provide us with a value in dateTime, we will set the current date and time in UTC.'
         format: date-time
@@ -590,6 +616,7 @@ definitions:
         items:
           $ref: '#/definitions/Item'
         type: array
+        uniqueItems: false
       hostname:
         description: The hostname of the server logging the message.
         type: string
@@ -601,11 +628,13 @@ definitions:
         items:
           $ref: '#/definitions/Item'
         type: array
+        uniqueItems: false
       serverVariables:
         description: A key/value pair of server values. Server variables are typically related to handling requests in a webserver but could be used for other types of information as well.
         items:
           $ref: '#/definitions/Item'
         type: array
+        uniqueItems: false
       severity:
         description: 'An enum value representing the severity of this message. The following values are allowed: Verbose, Debug, Information, Warning, Error, Fatal'
         type: string
@@ -613,14 +642,14 @@ definitions:
         description: The source of the code logging the message. This could be the assembly name.
         type: string
       statusCode:
-        description: "If the message logged relates to a HTTP status code, you can put the code in this property. This would probably only be relevant for errors,\r\n            but could be used for logging successful status codes as well."
+        description: "If the message logged relates to a HTTP status code, you can put the code in this property. This would probably only be relevant for errors,\r\nbut could be used for logging successful status codes as well."
         format: int32
         type: integer
       title:
         description: The textual title or headline of the message to log.
         type: string
       titleTemplate:
-        description: "The title template of the message to log. This property can be used from logging frameworks that supports\r\n            structured logging like: \"{user} says {quote}\". In the example, titleTemplate will be this string and title\r\n            will be \"Gilfoyle says It's not magic. It's talent and sweat\"."
+        description: "The title template of the message to log. This property can be used from logging frameworks that supports\r\nstructured logging like: \"{user} says {quote}\". In the example, titleTemplate will be this string and title\r\nwill be \"Gilfoyle says It's not magic. It's talent and sweat\"."
         type: string
       type:
         description: 'The type of message. If logging an error, the type of the exception would go into type but you can put anything in there, that makes sense for your domain.'
@@ -632,7 +661,13 @@ definitions:
         description: An identification of the user triggering this message. You can put the users email address or your user key into this property.
         type: string
       version:
-        description: "Versions can be used to distinguish messages from different versions of your software. The value of version can be a SemVer compliant string or any other\r\n            syntax that you are using as your version numbering scheme."
+        description: "Versions can be used to distinguish messages from different versions of your software. The value of version can be a SemVer compliant string or any other\r\nsyntax that you are using as your version numbering scheme."
+        type: string
+    type: object
+  CreateMessageResult:
+    properties:
+      location:
+        description: The location of the created message.
         type: string
     type: object
   Deployment:
@@ -642,7 +677,7 @@ definitions:
         format: date-time
         type: string
       createdBy:
-        description: "The elmah.io id of the user creating this deployment. Since deployments are created on a subscription,\r\n            the CreatedBy will contain the id of the user with the subscription."
+        description: "The elmah.io id of the user creating this deployment. Since deployments are created on a subscription,\r\nthe CreatedBy will contain the id of the user with the subscription."
         type: string
       description:
         description: Sescription of this deployment in markdown or clear text.
@@ -651,7 +686,7 @@ definitions:
         description: The ID of this deployment.
         type: string
       logId:
-        description: "If the deployment is attached a single log, this property is set to the ID of that log.\r\n            If null, the deployment is attached all logs on the organization."
+        description: "If the deployment is attached a single log, this property is set to the ID of that log.\r\nIf null, the deployment is attached all logs on the organization."
         type: string
       userEmail:
         description: The email of the person responsible for creating this deployment.
@@ -660,7 +695,7 @@ definitions:
         description: The name of the person responsible for creating this deployment.
         type: string
       version:
-        description: "The version number of this deployment. The value of version can be a SemVer compliant string or any other\r\n            syntax that you are using as your version numbering scheme."
+        description: "The version number of this deployment. The value of version can be a SemVer compliant string or any other\r\nsyntax that you are using as your version numbering scheme."
         type: string
     type: object
   Item:
@@ -675,10 +710,10 @@ definitions:
     type: object
   Log:
     properties:
-      Id:
+      id:
         description: ID of the log.
         type: string
-      Name:
+      name:
         description: Name of the log.
         type: string
     type: object
@@ -692,11 +727,13 @@ definitions:
         items:
           $ref: '#/definitions/Item'
         type: array
+        uniqueItems: false
       data:
-        description: "A key/value pair of user-defined fields and their values. When logging an exception, the Data dictionary of\r\n            the exception is copied to this property. You can add additional key/value pairs, by modifying the Data\r\n            dictionary on the exception or by supplying additional key/values to this API."
+        description: "A key/value pair of user-defined fields and their values. When logging an exception, the Data dictionary of\r\nthe exception is copied to this property. You can add additional key/value pairs, by modifying the Data\r\ndictionary on the exception or by supplying additional key/values to this API."
         items:
           $ref: '#/definitions/Item'
         type: array
+        uniqueItems: false
       dateTime:
         description: 'The date and time in UTC of the message. If you don''t provide us with a value in dateTime, we will set the current date and time in UTC.'
         format: date-time
@@ -709,6 +746,7 @@ definitions:
         items:
           $ref: '#/definitions/Item'
         type: array
+        uniqueItems: false
       hostname:
         description: The hostname of the server logging the message.
         type: string
@@ -723,11 +761,13 @@ definitions:
         items:
           $ref: '#/definitions/Item'
         type: array
+        uniqueItems: false
       serverVariables:
         description: A key/value pair of server values. Server variables are typically related to handling requests in a webserver but could be used for other types of information as well.
         items:
           $ref: '#/definitions/Item'
         type: array
+        uniqueItems: false
       severity:
         description: 'An enum value representing the severity of this message. The following values are allowed: Verbose, Debug, Information, Warning, Error, Fatal'
         type: string
@@ -735,14 +775,14 @@ definitions:
         description: The source of the code logging the message. This could be the assembly name.
         type: string
       statusCode:
-        description: "If the message logged relates to a HTTP status code, you can put the code in this property. This would probably only be relevant for errors,\r\n            but could be used for logging successful status codes as well."
+        description: "If the message logged relates to a HTTP status code, you can put the code in this property. This would probably only be relevant for errors,\r\nbut could be used for logging successful status codes as well."
         format: int32
         type: integer
       title:
         description: The textual title or headline of the message to log.
         type: string
       titleTemplate:
-        description: "The title template of the message to log. This property can be used from logging frameworks that supports\r\n            structured logging like: \"{user} says {quote}\". In the example, titleTemplate will be this string and title\r\n            will be \"Gilfoyle says It's not magic. It's talent and sweat\"."
+        description: "The title template of the message to log. This property can be used from logging frameworks that supports\r\nstructured logging like: \"{user} says {quote}\". In the example, titleTemplate will be this string and title\r\nwill be \"Gilfoyle says It's not magic. It's talent and sweat\"."
         type: string
       type:
         description: 'The type of message. If logging an error, the type of the exception would go into type but you can put anything in there, that makes sense for your domain.'
@@ -754,7 +794,7 @@ definitions:
         description: An identification of the user triggering this message. You can put the users email address or your user key into this property.
         type: string
       version:
-        description: "Versions can be used to distinguish messages from different versions of your software. The value of version can be a SemVer compliant string or any other\r\n            syntax that you are using as your version numbering scheme."
+        description: "Versions can be used to distinguish messages from different versions of your software. The value of version can be a SemVer compliant string or any other\r\nsyntax that you are using as your version numbering scheme."
         type: string
     type: object
   MessageOverview:
@@ -767,11 +807,13 @@ definitions:
         items:
           $ref: '#/definitions/Item'
         type: array
+        uniqueItems: false
       data:
-        description: "A key/value pair of user-defined fields and their values. When logging an exception, the Data dictionary of\r\n            the exception is copied to this property. You can add additional key/value pairs, by modifying the Data\r\n            dictionary on the exception or by supplying additional key/values to this API."
+        description: "A key/value pair of user-defined fields and their values. When logging an exception, the Data dictionary of\r\nthe exception is copied to this property. You can add additional key/value pairs, by modifying the Data\r\ndictionary on the exception or by supplying additional key/values to this API."
         items:
           $ref: '#/definitions/Item'
         type: array
+        uniqueItems: false
       dateTime:
         description: 'The date and time in UTC of the message. If you don''t provide us with a value in dateTime, we will set the current date and time in UTC.'
         format: date-time
@@ -784,6 +826,7 @@ definitions:
         items:
           $ref: '#/definitions/Item'
         type: array
+        uniqueItems: false
       hostname:
         description: The hostname of the server logging the message.
         type: string
@@ -798,11 +841,13 @@ definitions:
         items:
           $ref: '#/definitions/Item'
         type: array
+        uniqueItems: false
       serverVariables:
         description: A key/value pair of server values. Server variables are typically related to handling requests in a webserver but could be used for other types of information as well.
         items:
           $ref: '#/definitions/Item'
         type: array
+        uniqueItems: false
       severity:
         description: 'An enum value representing the severity of this message. The following values are allowed: Verbose, Debug, Information, Warning, Error, Fatal'
         type: string
@@ -810,14 +855,14 @@ definitions:
         description: The source of the code logging the message. This could be the assembly name.
         type: string
       statusCode:
-        description: "If the message logged relates to a HTTP status code, you can put the code in this property. This would probably only be relevant for errors,\r\n            but could be used for logging successful status codes as well."
+        description: "If the message logged relates to a HTTP status code, you can put the code in this property. This would probably only be relevant for errors,\r\nbut could be used for logging successful status codes as well."
         format: int32
         type: integer
       title:
         description: The textual title or headline of the message to log.
         type: string
       titleTemplate:
-        description: "The title template of the message to log. This property can be used from logging frameworks that supports\r\n            structured logging like: \"{user} says {quote}\". In the example, titleTemplate will be this string and title\r\n            will be \"Gilfoyle says It's not magic. It's talent and sweat\"."
+        description: "The title template of the message to log. This property can be used from logging frameworks that supports\r\nstructured logging like: \"{user} says {quote}\". In the example, titleTemplate will be this string and title\r\nwill be \"Gilfoyle says It's not magic. It's talent and sweat\"."
         type: string
       type:
         description: 'The type of message. If logging an error, the type of the exception would go into type but you can put anything in there, that makes sense for your domain.'
@@ -829,7 +874,7 @@ definitions:
         description: An identification of the user triggering this message. You can put the users email address or your user key into this property.
         type: string
       version:
-        description: "Versions can be used to distinguish messages from different versions of your software. The value of version can be a SemVer compliant string or any other\r\n            syntax that you are using as your version numbering scheme."
+        description: "Versions can be used to distinguish messages from different versions of your software. The value of version can be a SemVer compliant string or any other\r\nsyntax that you are using as your version numbering scheme."
         type: string
     type: object
   MessagesResult:
@@ -839,24 +884,22 @@ definitions:
         items:
           $ref: '#/definitions/MessageOverview'
         type: array
+        uniqueItems: false
       total:
         description: The total number of log messages found.
         format: int32
         type: integer
     type: object
-  Object:
-    properties: {}
-    type: object
   Search:
     properties:
-      From:
+      from:
         description: Search from this date.
         format: date-time
         type: string
-      Query:
+      query:
         description: Lucene query.
         type: string
-      To:
+      to:
         description: Search to this date.
         format: date-time
         type: string

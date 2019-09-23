@@ -369,9 +369,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
-        Creates multiple new sessions. If the requested number of sessions would
-        cause the database to exceed its session limit, returns a
-        RESOURCE_EXHAUSTED error.
+        Creates multiple new sessions.
 
         This API can be used to initialize a session cache on the clients.
         See https://goo.gl/TgSFN2 for best practices on session cache management.
@@ -434,13 +432,12 @@ paths:
       tags:
         - projects
     get:
-      description: |-
-        Gets a session. Returns `NOT_FOUND` if the session does not exist.
-        This is mainly useful for determining whether a session is still
-        alive.
-      operationId: spanner.projects.instances.databases.sessions.get
+      description: Gets information about a particular instance configuration.
+      operationId: spanner.projects.instanceConfigs.get
       parameters:
-        - description: Required. The name of the session to retrieve.
+        - description: |-
+            Required. The name of the requested instance configuration. Values are of
+            the form `projects/<project>/instanceConfigs/<config>`.
           in: path
           name: name
           required: true
@@ -450,16 +447,16 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Session'
+            $ref: '#/definitions/InstanceConfig'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/spanner.data'
+            - 'https://www.googleapis.com/auth/spanner.admin'
           Oauth2c:
-            - 'https://www.googleapis.com/auth/spanner.data'
+            - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
     parameters:
@@ -1565,7 +1562,6 @@ definitions:
           specific number of sessions are desired, the client can make additional
           calls to BatchCreateSessions (adjusting
           session_count as necessary).
-          The maximum allowed sessions are documented at https://goo.gl/hBUQED.
         format: int32
         type: integer
       sessionTemplate:
@@ -2070,7 +2066,7 @@ definitions:
       requestedPolicyVersion:
         description: |-
           Optional. The policy format version to be returned.
-          Acceptable values are 0 and 1.
+          Acceptable values are 0, 1, and 3.
           If the value is 0, or the field is omitted, policy format version 1 will be
           returned.
         format: int32
@@ -2419,6 +2415,11 @@ definitions:
           deleted, and the column values provided are inserted
           instead. Unlike insert_or_update, this means any values not
           explicitly written become `NULL`.
+
+          In an interleaved table, if you create the child table with the
+          `ON DELETE CASCADE` annotation, then replacing a parent row
+          also deletes the child rows. Otherwise, you must delete the
+          child rows before you replace the parent row.
       update:
         $ref: '#/definitions/Write'
         description: |-

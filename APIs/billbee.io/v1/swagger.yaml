@@ -1846,6 +1846,21 @@ paths:
       summary: Get a list of all shipments optionally filtered by date. All parameters are optional.
       tags:
         - Shipments
+  /api/v1/shipment/shippingcarriers:
+    get:
+      consumes: []
+      operationId: Shipment_GetShippingCarrier
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+      summary: Queries the currently available shipping carriers.
+      tags:
+        - Shipments
   /api/v1/shipment/shippingproviders:
     get:
       consumes: []
@@ -2419,6 +2434,8 @@ definitions:
           - 13
           - 14
           - 15
+          - 16
+          - 17
         format: int32
         type: integer
     type: object
@@ -2705,6 +2722,7 @@ definitions:
           - 101
           - 102
           - 103
+          - 104
         format: int32
         type: integer
       PaymentReference:
@@ -3317,7 +3335,7 @@ definitions:
     description: Data of the shipment to be created
     properties:
       CarrierId:
-        description: "Optional the id of a shipping carrier that should be assigend to the shipment\r\nWill override the carrier from the shipment product\r\n0: other,\r\n1: dhlExpress,\r\n2: dhl,\r\n3: hermes,\r\n4: dpd,\r\n5: ups,\r\n6: gls,\r\n7: dpag,\r\n8: OePost,\r\n9: fedex,\r\n10: generalOvernight,\r\n11: tnt,\r\n12: liefery,\r\n13: iloxx,\r\n14: parcel_one"
+        description: "Optional the id of a shipping carrier that should be assigend to the shipment\r\nWill override the carrier from the shipment product.\r\nPlease use the integer value from this Enumeration:\r\n{Billbee.Interfaces.Shipping.Enums.ShippingCarrier}"
         format: int32
         type: integer
       Comment:

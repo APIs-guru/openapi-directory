@@ -5490,6 +5490,9 @@ definitions:
       paymentStatus:
         description: The status of the payment.
         type: string
+      pickupDetails:
+        $ref: '#/definitions/OrderPickupDetails'
+        description: Pickup details for shipments of type pickup.
       placedDate:
         description: 'The date when the order was placed, in ISO 8601 format.'
         type: string
@@ -5702,6 +5705,10 @@ definitions:
         description: Number of items pending.
         format: uint32
         type: integer
+      quantityReadyForPickup:
+        description: Number of items ready for pickup.
+        format: uint32
+        type: integer
       quantityReturned:
         description: Number of items returned.
         format: uint32
@@ -5822,6 +5829,9 @@ definitions:
       shipByDate:
         description: 'The ship by date, in ISO 8601 format.'
         type: string
+      type:
+        description: Type of shipment. Indicates whether deliveryDetails or pickupDetails is applicable for this shipment.
+        type: string
     type: object
   OrderLineItemShippingDetailsMethod:
     properties:
@@ -5880,6 +5890,29 @@ definitions:
           - "UNIONPAY" 
           - "VISA" 
           - ""
+        type: string
+    type: object
+  OrderPickupDetails:
+    properties:
+      address:
+        $ref: '#/definitions/OrderAddress'
+        description: Address of the pickup location where the shipment should be sent. Note that recipientName in the address is the name of the business at the pickup location.
+      collectors:
+        description: Collectors authorized to pick up shipment from the pickup location.
+        items:
+          $ref: '#/definitions/OrderPickupDetailsCollector'
+        type: array
+      locationId:
+        description: ID of the pickup location.
+        type: string
+    type: object
+  OrderPickupDetailsCollector:
+    properties:
+      name:
+        description: Name of the person picking up the shipment.
+        type: string
+      phoneNumber:
+        description: Phone number of the person picking up the shipment.
         type: string
     type: object
   OrderRefund:
@@ -8379,6 +8412,9 @@ definitions:
         description: The details of the payment method.
       predefinedDeliveryAddress:
         description: Identifier of one of the predefined delivery addresses for the delivery.
+        type: string
+      predefinedPickupDetails:
+        description: Identifier of one of the predefined pickup details. Required for orders containing line items with shipping type pickup.
         type: string
       promotions:
         description: Deprecated. Ignored if provided.

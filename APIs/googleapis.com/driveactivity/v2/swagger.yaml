@@ -483,7 +483,9 @@ definitions:
         description: The Drive item is a file.
       driveFolder:
         $ref: '#/definitions/DriveFolder'
-        description: The Drive item is a folder.
+        description: |-
+          The Drive item is a folder. Includes information about the type of
+          folder.
       file:
         $ref: '#/definitions/File'
         description: This field is deprecated; please use the `driveFile` field instead.

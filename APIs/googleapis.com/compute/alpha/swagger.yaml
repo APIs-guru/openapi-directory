@@ -34887,7 +34887,7 @@ definitions:
         description: '[Output Only] shielded vm initial state stored on disk'
       source:
         description: |-
-          Specifies a valid partial or full URL to an existing Persistent Disk resource. When creating a new instance, one of initializeParams.sourceImage or disks.source is required except for local SSD.
+          Specifies a valid partial or full URL to an existing Persistent Disk resource. When creating a new instance, one of initializeParams.sourceImage or initializeParams.sourceSnapshot or disks.source is required except for local SSD.
 
           If desired, you can also attach existing non-root persistent disks using this property. This field is only applicable for persistent disks.
 
@@ -34952,7 +34952,7 @@ definitions:
         type: array
       sourceImage:
         description: |-
-          The source image to create this disk. When creating a new instance, one of initializeParams.sourceImage or disks.source is required except for local SSD.
+          The source image to create this disk. When creating a new instance, one of initializeParams.sourceImage or initializeParams.sourceSnapshot or disks.source is required except for local SSD.
 
           To create a disk with one of the public operating system images, specify the image by its family name. For example, specify family/debian-9 to use the latest Debian 9 image:
           projects/debian-cloud/global/images/family/debian-9
@@ -34980,7 +34980,7 @@ definitions:
           Instance templates do not store customer-supplied encryption keys, so you cannot create disks for instances in a managed instance group if the source images are encrypted with your own keys.
       sourceSnapshot:
         description: |-
-          The source snapshot to create this disk. When creating a new instance, one of initializeParams.sourceSnapshot or disks.source is required except for local SSD.
+          The source snapshot to create this disk. When creating a new instance, one of initializeParams.sourceSnapshot or initializeParams.sourceImage or disks.source is required except for local SSD.
 
           To create a disk with a snapshot that you created, specify the snapshot name in the following format:
           global/snapshots/my-backup
@@ -36637,6 +36637,7 @@ definitions:
           - GENERAL_PURPOSE
           - GENERAL_PURPOSE_E2
           - GENERAL_PURPOSE_N2
+          - GENERAL_PURPOSE_N2D
           - MEMORY_OPTIMIZED
           - TYPE_UNSPECIFIED
         type: string
@@ -39084,6 +39085,15 @@ definitions:
         items:
           type: string
         type: array
+      healthStatusAggregationPolicy:
+        description: |-
+          Optional. Policy for how the results from multiple health checks for the same endpoint are aggregated. Defaults to NO_AGGREGATION if unspecified.  
+          - NO_AGGREGATION. An EndpointHealth message is returned for each backend in the health check service. 
+          - AND. If any backend's health check reports UNHEALTHY, then UNHEALTHY is the HealthState of the entire health check service. If all backend's are healthy, the HealthState of the health check service is HEALTHY. .
+        enum:
+          - AND
+          - NO_AGGREGATION
+        type: string
       healthStatusAggregationStrategy:
         description: |-
           Policy for how the results from multiple health checks for the same endpoint are aggregated.  
@@ -45002,6 +45012,7 @@ definitions:
       mode:
         enum:
           - MODE_UNSPECIFIED
+          - 'OFF'
           - 'ON'
         type: string
     type: object
@@ -53197,7 +53208,7 @@ definitions:
     description: |-
       Represents a Target TCP Proxy resource.
 
-      A target TCP proxy is a component of a TCP Proxy load balancer. Global forwarding rules reference ta target TCP proxy, and the target proxy then references an external backend service. For more information, read TCP Proxy Load Balancing Concepts. (== resource_for beta.targetTcpProxies ==) (== resource_for v1.targetTcpProxies ==)
+      A target TCP proxy is a component of a TCP Proxy load balancer. Global forwarding rules reference target TCP proxy, and the target proxy then references an external backend service. For more information, read TCP Proxy Load Balancing Concepts. (== resource_for beta.targetTcpProxies ==) (== resource_for v1.targetTcpProxies ==)
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'

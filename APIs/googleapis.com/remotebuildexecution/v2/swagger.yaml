@@ -2011,12 +2011,12 @@ definitions:
     description: AcceleratorConfig defines the accelerator cards to attach to the VM.
     properties:
       acceleratorCount:
-        description: The number of the guest accelerator cards exposed to this VM.
+        description: The number of guest accelerator cards exposed to each VM.
         format: int64
         type: string
       acceleratorType:
         description: |-
-          The type of accelerator to attach to this VM, e.g. "nvidia-tesla-k80" for
+          The type of accelerator to attach to each VM, e.g. "nvidia-tesla-k80" for
           nVidia Tesla K80.
         type: string
     type: object
@@ -2256,6 +2256,15 @@ definitions:
         description: |-
           Minimum CPU platform to use when creating the worker.
           See [CPU Platforms](https://cloud.google.com/compute/docs/cpu-platforms).
+        type: string
+      networkAccess:
+        description: |-
+          Determines the type of network access granted to workers. Possible values:
+
+          - "public": Workers can connect to the public internet.
+          - "private": Workers can only connect to Google APIs and services.
+          - "restricted-private": Workers can only connect to Google APIs that are
+            reachable through `restricted.googleapis.com` (`199.36.153.4/30`).
         type: string
       reserved:
         description: |-

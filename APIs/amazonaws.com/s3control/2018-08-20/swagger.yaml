@@ -1,168 +1,332 @@
 swagger: '2.0'
+schemes:
+  - https
+  - http
+host: s3-control.amazonaws.com
+basePath: /
 info:
-  version: '2018-08-20'
-  x-release: s3v4
-  title: AWS S3 Control
-  description: ' AWS S3 Control provides access to Amazon S3 control plane operations. '
-  x-logo:
-    url: 'https://twitter.com/awscloud/profile_image?size=original'
-    backgroundColor: '#FFFFFF'
-  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
-    name: Mike Ralphson
     email: mike.ralphson@gmail.com
+    name: Mike Ralphson
     url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
+  description: ' AWS S3 Control provides access to Amazon S3 control plane operations. '
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
-  x-providerName: amazonaws.com
-  x-serviceName: s3control
-  x-origin:
-    - contentType: application/json
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/s3control-2018-08-20.normal.json'
-      converter:
-        url: 'https://github.com/mermade/aws2openapi'
-        version: 1.0.0
-      x-apisguru-direct: true
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  title: AWS S3 Control
+  version: '2018-08-20'
   x-apiClientRegistration:
     url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
+  x-logo:
+    backgroundColor: '#FFFFFF'
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+  x-origin:
+    - contentType: application/json
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/s3control-2018-08-20.normal.json'
+      x-apisguru-direct: true
   x-preferred: true
+  x-providerName: amazonaws.com
+  x-release: s3v4
+  x-serviceName: s3control
 externalDocs:
   description: Amazon Web Services documentation
   url: 'https://docs.aws.amazon.com/s3-control/'
-host: s3-control.amazonaws.com
-basePath: /
-schemes:
-  - https
-  - http
-x-servers:
-  - url: 'http://s3-control.{region}.amazonaws.com'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-        default: us-east-1
-    description: The AWS S3 Control multi-region endpoint
-  - url: 'https://s3-control.{region}.amazonaws.com'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-        default: us-east-1
-    description: The AWS S3 Control multi-region endpoint
-  - url: 'http://s3-control.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-        default: cn-north-1
-    description: The AWS S3 Control endpoint for China (Beijing) and China (Ningxia)
-  - url: 'https://s3-control.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-        default: cn-north-1
-    description: The AWS S3 Control endpoint for China (Beijing) and China (Ningxia)
 consumes:
   - text/xml
 produces:
   - text/xml
-parameters:
-  X-Amz-Content-Sha256:
-    name: X-Amz-Content-Sha256
-    in: header
-    type: string
-    required: false
-  X-Amz-Date:
-    name: X-Amz-Date
-    in: header
-    type: string
-    required: false
-  X-Amz-Algorithm:
-    name: X-Amz-Algorithm
-    in: header
-    type: string
-    required: false
-  X-Amz-Credential:
-    name: X-Amz-Credential
-    in: header
-    type: string
-    required: false
-  X-Amz-Security-Token:
-    name: X-Amz-Security-Token
-    in: header
-    type: string
-    required: false
-  X-Amz-Signature:
-    name: X-Amz-Signature
-    in: header
-    type: string
-    required: false
-  X-Amz-SignedHeaders:
-    name: X-Amz-SignedHeaders
-    in: header
-    type: string
-    required: false
 securityDefinitions:
   hmac:
-    type: apiKey
-    name: Authorization
-    in: header
     description: Amazon Signature authorization v4
+    in: header
+    name: Authorization
+    type: apiKey
     x-amazon-apigateway-authtype: awsSigv4
 security:
   - hmac: []
+parameters:
+  X-Amz-Algorithm:
+    in: header
+    name: X-Amz-Algorithm
+    required: false
+    type: string
+  X-Amz-Content-Sha256:
+    in: header
+    name: X-Amz-Content-Sha256
+    required: false
+    type: string
+  X-Amz-Credential:
+    in: header
+    name: X-Amz-Credential
+    required: false
+    type: string
+  X-Amz-Date:
+    in: header
+    name: X-Amz-Date
+    required: false
+    type: string
+  X-Amz-Security-Token:
+    in: header
+    name: X-Amz-Security-Token
+    required: false
+    type: string
+  X-Amz-Signature:
+    in: header
+    name: X-Amz-Signature
+    required: false
+    type: string
+  X-Amz-SignedHeaders:
+    in: header
+    name: X-Amz-SignedHeaders
+    required: false
+    type: string
 paths:
+  '/v20180820/configuration/publicAccessBlock#x-amz-account-id':
+    delete:
+      description: Deletes the block public access configuration for the specified account.
+      operationId: DeletePublicAccessBlock
+      parameters:
+        - description: The account ID for the AWS account whose block public access configuration you want to delete.
+          in: header
+          maxLength: 64
+          name: x-amz-account-id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+    get:
+      description: <p/>
+      operationId: GetPublicAccessBlock
+      parameters:
+        - description: <p/>
+          in: header
+          maxLength: 64
+          name: x-amz-account-id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetPublicAccessBlockOutput'
+        '480':
+          description: NoSuchPublicAccessBlockConfiguration
+          schema:
+            $ref: '#/definitions/NoSuchPublicAccessBlockConfiguration'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    put:
+      description: <p/>
+      operationId: PutPublicAccessBlock
+      parameters:
+        - description: <p/>
+          in: header
+          maxLength: 64
+          name: x-amz-account-id
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              PublicAccessBlockConfiguration:
+                description: <p/>
+                properties:
+                  BlockPublicAcls:
+                    $ref: '#/definitions/Setting'
+                    description: <p/>
+                  BlockPublicPolicy:
+                    $ref: '#/definitions/Setting'
+                    description: <p/>
+                  IgnorePublicAcls:
+                    $ref: '#/definitions/Setting'
+                    description: <p/>
+                  RestrictPublicBuckets:
+                    $ref: '#/definitions/Setting'
+                    description: <p/>
+                type: object
+            required:
+              - PublicAccessBlockConfiguration
+            type: object
+      responses:
+        '200':
+          description: Success
   '/v20180820/jobs#x-amz-account-id':
+    get:
+      description: Lists current jobs and jobs that have ended within the last 30 days for the AWS account making the request.
+      operationId: ListJobs
+      parameters:
+        - description: <p/>
+          in: header
+          maxLength: 64
+          name: x-amz-account-id
+          required: true
+          type: string
+        - description: The <code>List Jobs</code> request returns jobs that match the statuses listed in this element.
+          in: query
+          items:
+            type: string
+          name: jobStatuses
+          required: false
+          type: array
+        - description: A pagination token to request the next page of results. Use the token that Amazon S3 returned in the <code>NextToken</code> element of the <code>ListJobsResult</code> from the previous <code>List Jobs</code> request.
+          in: query
+          maxLength: 1024
+          minLength: 1
+          name: nextToken
+          required: false
+          type: string
+        - description: 'The maximum number of jobs that Amazon S3 will include in the <code>List Jobs</code> response. If there are more jobs than this number, the response will include a pagination token in the <code>NextToken</code> field to enable you to retrieve the next page of results.'
+          in: query
+          maximum: 1000
+          minimum: 1
+          name: maxResults
+          required: false
+          type: integer
+        - description: Pagination limit
+          in: query
+          name: MaxResults
+          required: false
+          type: string
+        - description: Pagination token
+          in: query
+          name: NextToken
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListJobsResult'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+        '482':
+          description: InvalidNextTokenException
+          schema:
+            $ref: '#/definitions/InvalidNextTokenException'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
-      operationId: CreateJob
       description: Creates an Amazon S3 batch operations job.
+      operationId: CreateJob
+      parameters:
+        - description: <p/>
+          in: header
+          maxLength: 64
+          name: x-amz-account-id
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              ClientRequestToken:
+                description: An idempotency token to ensure that you don't accidentally submit the same request twice. You can use any string up to the maximum length.
+                maxLength: 64
+                minLength: 1
+                type: string
+              ConfirmationRequired:
+                description: Indicates whether confirmation is required before Amazon S3 runs the job. Confirmation is only required for jobs created through the Amazon S3 console.
+                type: boolean
+              Description:
+                description: A description for this job. You can use any string within the permitted length. Descriptions don't need to be unique and can be used for multiple jobs.
+                maxLength: 256
+                minLength: 1
+                type: string
+              Manifest:
+                description: Contains the configuration information for a job's manifest.
+                properties:
+                  Location:
+                    $ref: '#/definitions/JobManifestLocation'
+                    description: Contains the information required to locate the specified job's manifest.
+                  Spec:
+                    $ref: '#/definitions/JobManifestSpec'
+                    description: 'Describes the format of the specified job''s manifest. If the manifest is in CSV format, also describes the columns contained within the manifest.'
+                type: object
+              Operation:
+                description: 'The operation that you want this job to perform on each object listed in the manifest. For more information about the available operations, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-operations.html">Available Operations</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.'
+                properties:
+                  LambdaInvoke:
+                    $ref: '#/definitions/LambdaInvokeOperation'
+                    description: Directs the specified job to invoke an AWS Lambda function on each object in the manifest.
+                  S3InitiateRestoreObject:
+                    $ref: '#/definitions/S3InitiateRestoreObjectOperation'
+                    description: Directs the specified job to execute an Initiate Glacier Restore call on each object in the manifest.
+                  S3PutObjectAcl:
+                    $ref: '#/definitions/S3SetObjectAclOperation'
+                    description: Directs the specified job to execute a PUT Object acl call on each object in the manifest.
+                  S3PutObjectCopy:
+                    $ref: '#/definitions/S3CopyObjectOperation'
+                    description: Directs the specified job to execute a PUT Copy object call on each object in the manifest.
+                  S3PutObjectTagging:
+                    $ref: '#/definitions/S3SetObjectTaggingOperation'
+                    description: Directs the specified job to execute a PUT Object tagging call on each object in the manifest.
+                type: object
+              Priority:
+                description: The numerical priority for this job. Higher numbers indicate higher priority.
+                maximum: 2147483647
+                minimum: 0
+                type: integer
+              Report:
+                description: Contains the configuration parameters for a job-completion report.
+                properties:
+                  Bucket:
+                    $ref: '#/definitions/S3BucketArnString'
+                    description: The bucket where specified job-completion report will be stored.
+                  Enabled:
+                    $ref: '#/definitions/Boolean'
+                    description: Indicates whether the specified job will generate a job-completion report.
+                  Format:
+                    $ref: '#/definitions/JobReportFormat'
+                    description: The format of the specified job-completion report.
+                  Prefix:
+                    $ref: '#/definitions/ReportPrefixString'
+                    description: An optional prefix to describe where in the specified bucket the job-completion report will be stored. Amazon S3 will store the job-completion report at &lt;prefix&gt;/job-&lt;job-id&gt;/report.json.
+                  ReportScope:
+                    $ref: '#/definitions/JobReportScope'
+                    description: Indicates whether the job-completion report will include details of all tasks or only failed tasks.
+                type: object
+              RoleArn:
+                description: The Amazon Resource Name (ARN) for the Identity and Access Management (IAM) Role that batch operations will use to execute this job's operation on each object in the manifest.
+                maxLength: 2048
+                minLength: 1
+                type: string
+            required:
+              - Operation
+              - Report
+              - ClientRequestToken
+              - Manifest
+              - Priority
+              - RoleArn
+            type: object
       responses:
         '200':
           description: Success
@@ -184,245 +348,24 @@ paths:
           description: InternalServiceException
           schema:
             $ref: '#/definitions/InternalServiceException'
-      parameters:
-        - name: x-amz-account-id
-          in: header
-          required: true
-          description: <p/>
-          type: string
-          maxLength: 64
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - Operation
-              - Report
-              - ClientRequestToken
-              - Manifest
-              - Priority
-              - RoleArn
-            properties:
-              ConfirmationRequired:
-                description: Indicates whether confirmation is required before Amazon S3 runs the job. Confirmation is only required for jobs created through the Amazon S3 console.
-                type: boolean
-              Operation:
-                description: 'The operation that you want this job to perform on each object listed in the manifest. For more information about the available operations, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-operations.html">Available Operations</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.'
-                type: object
-                properties:
-                  LambdaInvoke:
-                    $ref: '#/definitions/LambdaInvokeOperation'
-                    description: Directs the specified job to invoke an AWS Lambda function on each object in the manifest.
-                  S3PutObjectCopy:
-                    $ref: '#/definitions/S3CopyObjectOperation'
-                    description: Directs the specified job to execute a PUT Copy object call on each object in the manifest.
-                  S3PutObjectAcl:
-                    $ref: '#/definitions/S3SetObjectAclOperation'
-                    description: Directs the specified job to execute a PUT Object acl call on each object in the manifest.
-                  S3PutObjectTagging:
-                    $ref: '#/definitions/S3SetObjectTaggingOperation'
-                    description: Directs the specified job to execute a PUT Object tagging call on each object in the manifest.
-                  S3InitiateRestoreObject:
-                    $ref: '#/definitions/S3InitiateRestoreObjectOperation'
-                    description: Directs the specified job to execute an Initiate Glacier Restore call on each object in the manifest.
-              Report:
-                description: Contains the configuration parameters for a job-completion report.
-                type: object
-                properties:
-                  Bucket:
-                    $ref: '#/definitions/S3BucketArnString'
-                    description: The bucket where specified job-completion report will be stored.
-                  Format:
-                    $ref: '#/definitions/JobReportFormat'
-                    description: The format of the specified job-completion report.
-                  Enabled:
-                    $ref: '#/definitions/Boolean'
-                    description: Indicates whether the specified job will generate a job-completion report.
-                  Prefix:
-                    $ref: '#/definitions/ReportPrefixString'
-                    description: An optional prefix to describe where in the specified bucket the job-completion report will be stored. Amazon S3 will store the job-completion report at &lt;prefix&gt;/job-&lt;job-id&gt;/report.json.
-                  ReportScope:
-                    $ref: '#/definitions/JobReportScope'
-                    description: Indicates whether the job-completion report will include details of all tasks or only failed tasks.
-              ClientRequestToken:
-                description: An idempotency token to ensure that you don't accidentally submit the same request twice. You can use any string up to the maximum length.
-                type: string
-                minLength: 1
-                maxLength: 64
-              Manifest:
-                description: Contains the configuration information for a job's manifest.
-                type: object
-                properties:
-                  Spec:
-                    $ref: '#/definitions/JobManifestSpec'
-                    description: 'Describes the format of the specified job''s manifest. If the manifest is in CSV format, also describes the columns contained within the manifest.'
-                  Location:
-                    $ref: '#/definitions/JobManifestLocation'
-                    description: Contains the information required to locate the specified job's manifest.
-              Description:
-                description: A description for this job. You can use any string within the permitted length. Descriptions don't need to be unique and can be used for multiple jobs.
-                type: string
-                minLength: 1
-                maxLength: 256
-              Priority:
-                description: The numerical priority for this job. Higher numbers indicate higher priority.
-                type: integer
-                minimum: 0
-                maximum: 2147483647
-              RoleArn:
-                description: The Amazon Resource Name (ARN) for the Identity and Access Management (IAM) Role that batch operations will use to execute this job's operation on each object in the manifest.
-                type: string
-                minLength: 1
-                maxLength: 2048
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-    get:
-      operationId: ListJobs
-      description: Lists current jobs and jobs that have ended within the last 30 days for the AWS account making the request.
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/ListJobsResult'
-        '480':
-          description: InvalidRequestException
-          schema:
-            $ref: '#/definitions/InvalidRequestException'
-        '481':
-          description: InternalServiceException
-          schema:
-            $ref: '#/definitions/InternalServiceException'
-        '482':
-          description: InvalidNextTokenException
-          schema:
-            $ref: '#/definitions/InvalidNextTokenException'
-      parameters:
-        - name: x-amz-account-id
-          in: header
-          required: true
-          description: <p/>
-          type: string
-          maxLength: 64
-        - name: jobStatuses
-          in: query
-          required: false
-          description: The <code>List Jobs</code> request returns jobs that match the statuses listed in this element.
-          type: array
-          items:
-            type: string
-        - name: nextToken
-          in: query
-          required: false
-          description: A pagination token to request the next page of results. Use the token that Amazon S3 returned in the <code>NextToken</code> element of the <code>ListJobsResult</code> from the previous <code>List Jobs</code> request.
-          type: string
-          minLength: 1
-          maxLength: 1024
-        - name: maxResults
-          in: query
-          required: false
-          description: 'The maximum number of jobs that Amazon S3 will include in the <code>List Jobs</code> response. If there are more jobs than this number, the response will include a pagination token in the <code>NextToken</code> field to enable you to retrieve the next page of results.'
-          type: integer
-          minimum: 1
-          maximum: 1000
-        - name: MaxResults
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
-        - name: NextToken
-          type: string
-          in: query
-          description: Pagination token
-          required: false
-  '/v20180820/configuration/publicAccessBlock#x-amz-account-id':
-    delete:
-      operationId: DeletePublicAccessBlock
-      description: Deletes the block public access configuration for the specified account.
-      responses:
-        '200':
-          description: Success
-      parameters:
-        - name: x-amz-account-id
-          in: header
-          required: true
-          description: The account ID for the AWS account whose block public access configuration you want to delete.
-          type: string
-          maxLength: 64
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-    get:
-      operationId: GetPublicAccessBlock
-      description: <p/>
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/GetPublicAccessBlockOutput'
-        '480':
-          description: NoSuchPublicAccessBlockConfiguration
-          schema:
-            $ref: '#/definitions/NoSuchPublicAccessBlockConfiguration'
-      parameters:
-        - name: x-amz-account-id
-          in: header
-          required: true
-          description: <p/>
-          type: string
-          maxLength: 64
-    put:
-      operationId: PutPublicAccessBlock
-      description: <p/>
-      responses:
-        '200':
-          description: Success
-      parameters:
-        - name: x-amz-account-id
-          in: header
-          required: true
-          description: <p/>
-          type: string
-          maxLength: 64
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - PublicAccessBlockConfiguration
-            properties:
-              PublicAccessBlockConfiguration:
-                description: <p/>
-                type: object
-                properties:
-                  BlockPublicAcls:
-                    $ref: '#/definitions/Setting'
-                    description: <p/>
-                  IgnorePublicAcls:
-                    $ref: '#/definitions/Setting'
-                    description: <p/>
-                  BlockPublicPolicy:
-                    $ref: '#/definitions/Setting'
-                    description: <p/>
-                  RestrictPublicBuckets:
-                    $ref: '#/definitions/Setting'
-                    description: <p/>
   '/v20180820/jobs/{id}#x-amz-account-id':
     get:
-      operationId: DescribeJob
       description: Retrieves the configuration parameters and status for a batch operations job.
+      operationId: DescribeJob
+      parameters:
+        - description: <p/>
+          in: header
+          maxLength: 64
+          name: x-amz-account-id
+          required: true
+          type: string
+        - description: The ID for the job whose information you want to retrieve.
+          in: path
+          maxLength: 36
+          minLength: 5
+          name: id
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -444,20 +387,6 @@ paths:
           description: InternalServiceException
           schema:
             $ref: '#/definitions/InternalServiceException'
-      parameters:
-        - name: x-amz-account-id
-          in: header
-          required: true
-          description: <p/>
-          type: string
-          maxLength: 64
-        - name: id
-          in: path
-          required: true
-          description: The ID for the job whose information you want to retrieve.
-          type: string
-          minLength: 5
-          maxLength: 36
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -467,9 +396,38 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/v20180820/jobs/{id}/priority#x-amz-account-id&priority':
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
-      operationId: UpdateJobPriority
       description: Updates an existing job's priority.
+      operationId: UpdateJobPriority
+      parameters:
+        - description: <p/>
+          in: header
+          maxLength: 64
+          name: x-amz-account-id
+          required: true
+          type: string
+        - description: The ID for the job whose priority you want to update.
+          in: path
+          maxLength: 36
+          minLength: 5
+          name: id
+          required: true
+          type: string
+        - description: The priority you want to assign to this job.
+          in: query
+          maximum: 2147483647
+          minimum: 0
+          name: priority
+          required: true
+          type: integer
       responses:
         '200':
           description: Success
@@ -491,27 +449,7 @@ paths:
           description: InternalServiceException
           schema:
             $ref: '#/definitions/InternalServiceException'
-      parameters:
-        - name: x-amz-account-id
-          in: header
-          required: true
-          description: <p/>
-          type: string
-          maxLength: 64
-        - name: id
-          in: path
-          required: true
-          description: The ID for the job whose priority you want to update.
-          type: string
-          minLength: 5
-          maxLength: 36
-        - name: priority
-          in: query
-          required: true
-          description: The priority you want to assign to this job.
-          type: integer
-          minimum: 0
-          maximum: 2147483647
+  '/v20180820/jobs/{id}/status#x-amz-account-id&requestedJobStatus':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -520,10 +458,38 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/v20180820/jobs/{id}/status#x-amz-account-id&requestedJobStatus':
     post:
-      operationId: UpdateJobStatus
       description: Updates the status for the specified job. Use this operation to confirm that you want to run a job or to cancel an existing job.
+      operationId: UpdateJobStatus
+      parameters:
+        - description: <p/>
+          in: header
+          maxLength: 64
+          name: x-amz-account-id
+          required: true
+          type: string
+        - description: The ID of the job whose status you want to update.
+          in: path
+          maxLength: 36
+          minLength: 5
+          name: id
+          required: true
+          type: string
+        - description: The status that you want to move the specified job to.
+          enum:
+            - Cancelled
+            - Ready
+          in: query
+          name: requestedJobStatus
+          required: true
+          type: string
+        - description: A description of the reason why you want to change the specified job's status. This field can be any string up to the maximum length.
+          in: query
+          maxLength: 256
+          minLength: 1
+          name: statusUpdateReason
+          required: false
+          type: string
       responses:
         '200':
           description: Success
@@ -549,205 +515,334 @@ paths:
           description: InternalServiceException
           schema:
             $ref: '#/definitions/InternalServiceException'
-      parameters:
-        - name: x-amz-account-id
-          in: header
-          required: true
-          description: <p/>
-          type: string
-          maxLength: 64
-        - name: id
-          in: path
-          required: true
-          description: The ID of the job whose status you want to update.
-          type: string
-          minLength: 5
-          maxLength: 36
-        - name: requestedJobStatus
-          in: query
-          required: true
-          description: The status that you want to move the specified job to.
-          type: string
-          enum:
-            - Cancelled
-            - Ready
-        - name: statusUpdateReason
-          in: query
-          required: false
-          description: A description of the reason why you want to change the specified job's status. This field can be any string up to the maximum length.
-          type: string
-          minLength: 1
-          maxLength: 256
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  CreateJobResult:
+  AccountId:
+    maxLength: 64
+    type: string
+  BadRequestException: {}
+  Boolean:
+    type: boolean
+  ConfirmationRequired:
+    type: boolean
+  CreateJobRequest:
+    properties:
+      ClientRequestToken:
+        $ref: '#/definitions/NonEmptyMaxLength64String'
+        description: An idempotency token to ensure that you don't accidentally submit the same request twice. You can use any string up to the maximum length.
+      ConfirmationRequired:
+        $ref: '#/definitions/ConfirmationRequired'
+        description: Indicates whether confirmation is required before Amazon S3 runs the job. Confirmation is only required for jobs created through the Amazon S3 console.
+      Description:
+        $ref: '#/definitions/NonEmptyMaxLength256String'
+        description: A description for this job. You can use any string within the permitted length. Descriptions don't need to be unique and can be used for multiple jobs.
+      Manifest:
+        $ref: '#/definitions/JobManifest'
+        description: Configuration parameters for the manifest.
+      Operation:
+        $ref: '#/definitions/JobOperation'
+        description: 'The operation that you want this job to perform on each object listed in the manifest. For more information about the available operations, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-operations.html">Available Operations</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.'
+      Priority:
+        $ref: '#/definitions/JobPriority'
+        description: The numerical priority for this job. Higher numbers indicate higher priority.
+      Report:
+        $ref: '#/definitions/JobReport'
+        description: Configuration parameters for the optional job-completion report.
+      RoleArn:
+        $ref: '#/definitions/IAMRoleArn'
+        description: The Amazon Resource Name (ARN) for the Identity and Access Management (IAM) Role that batch operations will use to execute this job's operation on each object in the manifest.
+    required:
+      - Operation
+      - Report
+      - ClientRequestToken
+      - Manifest
+      - Priority
+      - RoleArn
     type: object
+  CreateJobResult:
     properties:
       JobId:
         $ref: '#/definitions/JobId'
         description: The ID for this job. Amazon S3 generates this ID automatically and returns it after a successful <code>Create Job</code> request.
-  LambdaInvokeOperation:
     type: object
-    properties:
-      FunctionArn:
-        $ref: '#/definitions/NonEmptyMaxLength1024String'
-        description: The Amazon Resource Name (ARN) for the AWS Lambda function that the specified job will invoke for each object in the manifest.
-    description: Contains the configuration parameters for a <code>Lambda Invoke</code> operation.
-  S3CopyObjectOperation:
+  DeletePublicAccessBlockRequest:
+    properties: {}
     type: object
-    properties:
-      TargetResource:
-        $ref: '#/definitions/S3BucketArnString'
-        description: <p/>
-      CannedAccessControlList:
-        $ref: '#/definitions/S3CannedAccessControlList'
-        description: <p/>
-      AccessControlGrants:
-        $ref: '#/definitions/S3GrantList'
-        description: <p/>
-      MetadataDirective:
-        $ref: '#/definitions/S3MetadataDirective'
-        description: <p/>
-      ModifiedSinceConstraint:
-        $ref: '#/definitions/TimeStamp'
-        description: <p/>
-      NewObjectMetadata:
-        $ref: '#/definitions/S3ObjectMetadata'
-        description: <p/>
-      NewObjectTagging:
-        $ref: '#/definitions/S3TagSet'
-        description: <p/>
-      RedirectLocation:
-        $ref: '#/definitions/NonEmptyMaxLength2048String'
-        description: <p/>
-      RequesterPays:
-        $ref: '#/definitions/Boolean'
-        description: <p/>
-      StorageClass:
-        $ref: '#/definitions/S3StorageClass'
-        description: <p/>
-      UnModifiedSinceConstraint:
-        $ref: '#/definitions/TimeStamp'
-        description: <p/>
-      SSEAwsKmsKeyId:
-        $ref: '#/definitions/KmsKeyArnString'
-        description: <p/>
-      TargetKeyPrefix:
-        $ref: '#/definitions/NonEmptyMaxLength1024String'
-      ObjectLockLegalHoldStatus:
-        $ref: '#/definitions/S3ObjectLockLegalHoldStatus'
-      ObjectLockMode:
-        $ref: '#/definitions/S3ObjectLockMode'
-      ObjectLockRetainUntilDate:
-        $ref: '#/definitions/TimeStamp'
-    description: 'Contains the configuration parameters for a PUT Copy object operation. Amazon S3 batch operations passes each value through to the underlying PUT Copy object API. For more information about the parameters for this operation, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html">PUT Object - Copy</a>.'
-  S3SetObjectAclOperation:
+  DescribeJobRequest:
+    properties: {}
     type: object
+  DescribeJobResult:
     properties:
-      AccessControlPolicy:
-        $ref: '#/definitions/S3AccessControlPolicy'
-        description: <p/>
-    description: 'Contains the configuration parameters for a Set Object ACL operation. Amazon S3 batch operations passes each value through to the underlying PUT Object acl API. For more information about the parameters for this operation, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTacl.html">PUT Object acl</a>.'
-  S3SetObjectTaggingOperation:
+      Job:
+        $ref: '#/definitions/JobDescriptor'
+        description: Contains the configuration parameters and status for the job specified in the <code>Describe Job</code> request.
     type: object
+  GetPublicAccessBlockOutput:
     properties:
-      TagSet:
-        $ref: '#/definitions/S3TagSet'
+      PublicAccessBlockConfiguration:
+        $ref: '#/definitions/PublicAccessBlockConfiguration'
         description: <p/>
-    description: 'Contains the configuration parameters for a Set Object Tagging operation. Amazon S3 batch operations passes each value through to the underlying PUT Object tagging API. For more information about the parameters for this operation, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTtagging.html">PUT Object tagging</a>.'
-  S3InitiateRestoreObjectOperation:
     type: object
-    properties:
-      ExpirationInDays:
-        $ref: '#/definitions/S3ExpirationInDays'
-        description: <p/>
-      GlacierJobTier:
-        $ref: '#/definitions/S3GlacierJobTier'
-        description: <p/>
-    description: 'Contains the configuration parameters for an Initiate Glacier Restore job. Amazon S3 batch operations passes each value through to the underlying POST Object restore API. For more information about the parameters for this operation, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOSTrestore.html#RESTObjectPOSTrestore-restore-request">Restoring Archives</a>.'
-  S3BucketArnString:
-    type: string
+  GetPublicAccessBlockRequest:
+    properties: {}
+    type: object
+  IAMRoleArn:
+    maxLength: 2048
     minLength: 1
-    maxLength: 128
-  JobReportFormat:
     type: string
-    enum:
-      - Report_CSV_20180820
-  Boolean:
-    type: boolean
-  ReportPrefixString:
-    type: string
+  IdempotencyException: {}
+  InternalServiceException: {}
+  InvalidNextTokenException: {}
+  InvalidRequestException: {}
+  JobArn:
+    maxLength: 1024
     minLength: 1
-    maxLength: 512
-  JobReportScope:
     type: string
-    enum:
-      - AllTasks
-      - FailedTasksOnly
-  JobManifestSpec:
+  JobCreationTime:
+    format: date-time
+    type: string
+  JobDescriptor:
+    description: A container element for the job configuration and status information returned by a <code>Describe Job</code> request.
+    properties:
+      ConfirmationRequired:
+        $ref: '#/definitions/ConfirmationRequired'
+        description: Indicates whether confirmation is required before Amazon S3 begins running the specified job. Confirmation is required only for jobs created through the Amazon S3 console.
+      CreationTime:
+        $ref: '#/definitions/JobCreationTime'
+        description: A timestamp indicating when this job was created.
+      Description:
+        $ref: '#/definitions/NonEmptyMaxLength256String'
+        description: 'The description for this job, if one was provided in this job''s <code>Create Job</code> request.'
+      FailureReasons:
+        $ref: '#/definitions/JobFailureList'
+        description: 'If the specified job failed, this field contains information describing the failure.'
+      JobArn:
+        $ref: '#/definitions/JobArn'
+        description: The Amazon Resource Name (ARN) for this job.
+      JobId:
+        $ref: '#/definitions/JobId'
+        description: The ID for the specified job.
+      Manifest:
+        $ref: '#/definitions/JobManifest'
+        description: The configuration information for the specified job's manifest object.
+      Operation:
+        $ref: '#/definitions/JobOperation'
+        description: The operation that the specified job is configured to execute on the objects listed in the manifest.
+      Priority:
+        $ref: '#/definitions/JobPriority'
+        description: The priority of the specified job.
+      ProgressSummary:
+        $ref: '#/definitions/JobProgressSummary'
+        description: 'Describes the total number of tasks that the specified job has executed, the number of tasks that succeeded, and the number of tasks that failed.'
+      Report:
+        $ref: '#/definitions/JobReport'
+        description: Contains the configuration information for the job-completion report if you requested one in the <code>Create Job</code> request.
+      RoleArn:
+        $ref: '#/definitions/IAMRoleArn'
+        description: The Amazon Resource Name (ARN) for the Identity and Access Management (IAM) Role assigned to execute the tasks for this job.
+      Status:
+        $ref: '#/definitions/JobStatus'
+        description: The current status of the specified job.
+      StatusUpdateReason:
+        $ref: '#/definitions/JobStatusUpdateReason'
+        description: <p/>
+      SuspendedCause:
+        $ref: '#/definitions/SuspendedCause'
+        description: 'The reason why the specified job was suspended. A job is only suspended if you create it through the Amazon S3 console. When you create the job, it enters the <code>Suspended</code> state to await confirmation before running. After you confirm the job, it automatically exits the <code>Suspended</code> state.'
+      SuspendedDate:
+        $ref: '#/definitions/SuspendedDate'
+        description: 'The timestamp when this job was suspended, if it has been suspended.'
+      TerminationDate:
+        $ref: '#/definitions/JobTerminationDate'
+        description: 'A timestamp indicating when this job terminated. A job''s termination date is the date and time when it succeeded, failed, or was canceled.'
     type: object
+  JobFailure:
+    description: 'If this job failed, this element indicates why the job failed.'
+    properties:
+      FailureCode:
+        $ref: '#/definitions/JobFailureCode'
+        description: 'The failure code, if any, for the specified job.'
+      FailureReason:
+        $ref: '#/definitions/JobFailureReason'
+        description: 'The failure reason, if any, for the specified job.'
+    type: object
+  JobFailureCode:
+    maxLength: 64
+    minLength: 1
+    type: string
+  JobFailureList:
+    items:
+      $ref: '#/definitions/JobFailure'
+    type: array
+  JobFailureReason:
+    maxLength: 256
+    minLength: 1
+    type: string
+  JobId:
+    maxLength: 36
+    minLength: 5
+    type: string
+  JobListDescriptor:
+    description: Contains the configuration and status information for a single job retrieved as part of a job list.
+    properties:
+      CreationTime:
+        $ref: '#/definitions/JobCreationTime'
+        description: A timestamp indicating when the specified job was created.
+      Description:
+        $ref: '#/definitions/NonEmptyMaxLength256String'
+        description: The user-specified description that was included in the specified job's <code>Create Job</code> request.
+      JobId:
+        $ref: '#/definitions/JobId'
+        description: The ID for the specified job.
+      Operation:
+        $ref: '#/definitions/OperationName'
+        description: The operation that the specified job is configured to run on each object listed in the manifest.
+      Priority:
+        $ref: '#/definitions/JobPriority'
+        description: The current priority for the specified job.
+      ProgressSummary:
+        $ref: '#/definitions/JobProgressSummary'
+        description: 'Describes the total number of tasks that the specified job has executed, the number of tasks that succeeded, and the number of tasks that failed.'
+      Status:
+        $ref: '#/definitions/JobStatus'
+        description: The specified job's current status.
+      TerminationDate:
+        $ref: '#/definitions/JobTerminationDate'
+        description: 'A timestamp indicating when the specified job terminated. A job''s termination date is the date and time when it succeeded, failed, or was canceled.'
+    type: object
+  JobListDescriptorList:
+    items:
+      $ref: '#/definitions/JobListDescriptor'
+    type: array
+  JobManifest:
+    description: Contains the configuration information for a job's manifest.
+    properties:
+      Location:
+        $ref: '#/definitions/JobManifestLocation'
+        description: Contains the information required to locate the specified job's manifest.
+      Spec:
+        $ref: '#/definitions/JobManifestSpec'
+        description: 'Describes the format of the specified job''s manifest. If the manifest is in CSV format, also describes the columns contained within the manifest.'
     required:
-      - Format
-    properties:
-      Format:
-        $ref: '#/definitions/JobManifestFormat'
-        description: Indicates which of the available formats the specified manifest uses.
-      Fields:
-        $ref: '#/definitions/JobManifestFieldList'
-        description: 'If the specified manifest object is in the <code>S3BatchOperations_CSV_20180820</code> format, this element describes which columns contain the required data.'
-    description: 'Describes the format of a manifest. If the manifest is in CSV format, also describes the columns contained within the manifest.'
+      - Spec
+      - Location
+    type: object
+  JobManifestFieldList:
+    items:
+      $ref: '#/definitions/JobManifestFieldName'
+    type: array
+  JobManifestFieldName:
+    enum:
+      - Ignore
+      - Bucket
+      - Key
+      - VersionId
+    type: string
+  JobManifestFormat:
+    enum:
+      - S3BatchOperations_CSV_20180820
+      - S3InventoryReport_CSV_20161130
+    type: string
   JobManifestLocation:
-    type: object
-    required:
-      - ObjectArn
-      - ETag
+    description: Contains the information required to locate a manifest object.
     properties:
+      ETag:
+        $ref: '#/definitions/NonEmptyMaxLength1024String'
+        description: The ETag for the specified manifest object.
       ObjectArn:
         $ref: '#/definitions/S3KeyArnString'
         description: The Amazon Resource Name (ARN) for a manifest object.
       ObjectVersionId:
         $ref: '#/definitions/S3ObjectVersionId'
         description: The optional version ID to identify a specific version of the manifest object.
-      ETag:
-        $ref: '#/definitions/NonEmptyMaxLength1024String'
-        description: The ETag for the specified manifest object.
-    description: Contains the information required to locate a manifest object.
-  TooManyRequestsException: {}
-  BadRequestException: {}
-  IdempotencyException: {}
-  InternalServiceException: {}
-  DescribeJobResult:
+    required:
+      - ObjectArn
+      - ETag
     type: object
+  JobManifestSpec:
+    description: 'Describes the format of a manifest. If the manifest is in CSV format, also describes the columns contained within the manifest.'
     properties:
-      Job:
-        $ref: '#/definitions/JobDescriptor'
-        description: Contains the configuration parameters and status for the job specified in the <code>Describe Job</code> request.
-  NotFoundException: {}
-  GetPublicAccessBlockOutput:
+      Fields:
+        $ref: '#/definitions/JobManifestFieldList'
+        description: 'If the specified manifest object is in the <code>S3BatchOperations_CSV_20180820</code> format, this element describes which columns contain the required data.'
+      Format:
+        $ref: '#/definitions/JobManifestFormat'
+        description: Indicates which of the available formats the specified manifest uses.
+    required:
+      - Format
     type: object
+  JobNumberOfTasksFailed:
+    minimum: 0
+    type: integer
+  JobNumberOfTasksSucceeded:
+    minimum: 0
+    type: integer
+  JobOperation:
+    description: 'The operation that you want this job to perform on each object listed in the manifest. For more information about the available operations, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-operations.html">Available Operations</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.'
     properties:
-      PublicAccessBlockConfiguration:
-        $ref: '#/definitions/PublicAccessBlockConfiguration'
+      LambdaInvoke:
+        $ref: '#/definitions/LambdaInvokeOperation'
+        description: Directs the specified job to invoke an AWS Lambda function on each object in the manifest.
+      S3InitiateRestoreObject:
+        $ref: '#/definitions/S3InitiateRestoreObjectOperation'
+        description: Directs the specified job to execute an Initiate Glacier Restore call on each object in the manifest.
+      S3PutObjectAcl:
+        $ref: '#/definitions/S3SetObjectAclOperation'
+        description: Directs the specified job to execute a PUT Object acl call on each object in the manifest.
+      S3PutObjectCopy:
+        $ref: '#/definitions/S3CopyObjectOperation'
+        description: Directs the specified job to execute a PUT Copy object call on each object in the manifest.
+      S3PutObjectTagging:
+        $ref: '#/definitions/S3SetObjectTaggingOperation'
+        description: Directs the specified job to execute a PUT Object tagging call on each object in the manifest.
+    type: object
+  JobPriority:
+    maximum: 2147483647
+    minimum: 0
+    type: integer
+  JobProgressSummary:
+    description: 'Describes the total number of tasks that the specified job has executed, the number of tasks that succeeded, and the number of tasks that failed.'
+    properties:
+      NumberOfTasksFailed:
+        $ref: '#/definitions/JobNumberOfTasksFailed'
         description: <p/>
-  NoSuchPublicAccessBlockConfiguration: {}
-  ListJobsResult:
+      NumberOfTasksSucceeded:
+        $ref: '#/definitions/JobNumberOfTasksSucceeded'
+        description: <p/>
+      TotalNumberOfTasks:
+        $ref: '#/definitions/JobTotalNumberOfTasks'
+        description: <p/>
     type: object
+  JobReport:
+    description: Contains the configuration parameters for a job-completion report.
     properties:
-      NextToken:
-        $ref: '#/definitions/NonEmptyMaxLength1024String'
-        description: 'If the <code>List Jobs</code> request produced more than the maximum number of results, you can pass this value into a subsequent <code>List Jobs</code> request in order to retrieve the next page of results.'
-      Jobs:
-        $ref: '#/definitions/JobListDescriptorList'
-        description: The list of current jobs and jobs that have ended within the last 30 days.
-  JobStatus:
+      Bucket:
+        $ref: '#/definitions/S3BucketArnString'
+        description: The bucket where specified job-completion report will be stored.
+      Enabled:
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether the specified job will generate a job-completion report.
+      Format:
+        $ref: '#/definitions/JobReportFormat'
+        description: The format of the specified job-completion report.
+      Prefix:
+        $ref: '#/definitions/ReportPrefixString'
+        description: An optional prefix to describe where in the specified bucket the job-completion report will be stored. Amazon S3 will store the job-completion report at &lt;prefix&gt;/job-&lt;job-id&gt;/report.json.
+      ReportScope:
+        $ref: '#/definitions/JobReportScope'
+        description: Indicates whether the job-completion report will include details of all tasks or only failed tasks.
+    required:
+      - Enabled
+    type: object
+  JobReportFormat:
+    enum:
+      - Report_CSV_20180820
     type: string
+  JobReportScope:
+    enum:
+      - AllTasks
+      - FailedTasksOnly
+    type: string
+  JobStatus:
     enum:
       - Active
       - Cancelled
@@ -762,425 +857,140 @@ definitions:
       - Preparing
       - Ready
       - Suspended
-  InvalidRequestException: {}
-  InvalidNextTokenException: {}
-  Setting:
-    type: boolean
-  UpdateJobPriorityResult:
-    type: object
-    required:
-      - JobId
-      - Priority
-    properties:
-      JobId:
-        $ref: '#/definitions/JobId'
-        description: The ID for the job whose priority Amazon S3 updated.
-      Priority:
-        $ref: '#/definitions/JobPriority'
-        description: The new priority assigned to the specified job.
-  UpdateJobStatusResult:
-    type: object
-    properties:
-      JobId:
-        $ref: '#/definitions/JobId'
-        description: The ID for the job whose status was updated.
-      Status:
-        $ref: '#/definitions/JobStatus'
-        description: The current status for the specified job.
-      StatusUpdateReason:
-        $ref: '#/definitions/JobStatusUpdateReason'
-        description: The reason that the specified job's status was updated.
+    type: string
   JobStatusException: {}
-  AccountId:
-    type: string
-    maxLength: 64
-  ConfirmationRequired:
-    type: boolean
-  JobOperation:
-    type: object
-    properties:
-      LambdaInvoke:
-        $ref: '#/definitions/LambdaInvokeOperation'
-        description: Directs the specified job to invoke an AWS Lambda function on each object in the manifest.
-      S3PutObjectCopy:
-        $ref: '#/definitions/S3CopyObjectOperation'
-        description: Directs the specified job to execute a PUT Copy object call on each object in the manifest.
-      S3PutObjectAcl:
-        $ref: '#/definitions/S3SetObjectAclOperation'
-        description: Directs the specified job to execute a PUT Object acl call on each object in the manifest.
-      S3PutObjectTagging:
-        $ref: '#/definitions/S3SetObjectTaggingOperation'
-        description: Directs the specified job to execute a PUT Object tagging call on each object in the manifest.
-      S3InitiateRestoreObject:
-        $ref: '#/definitions/S3InitiateRestoreObjectOperation'
-        description: Directs the specified job to execute an Initiate Glacier Restore call on each object in the manifest.
-    description: 'The operation that you want this job to perform on each object listed in the manifest. For more information about the available operations, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-operations.html">Available Operations</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.'
-  JobReport:
-    type: object
-    required:
-      - Enabled
-    properties:
-      Bucket:
-        $ref: '#/definitions/S3BucketArnString'
-        description: The bucket where specified job-completion report will be stored.
-      Format:
-        $ref: '#/definitions/JobReportFormat'
-        description: The format of the specified job-completion report.
-      Enabled:
-        $ref: '#/definitions/Boolean'
-        description: Indicates whether the specified job will generate a job-completion report.
-      Prefix:
-        $ref: '#/definitions/ReportPrefixString'
-        description: An optional prefix to describe where in the specified bucket the job-completion report will be stored. Amazon S3 will store the job-completion report at &lt;prefix&gt;/job-&lt;job-id&gt;/report.json.
-      ReportScope:
-        $ref: '#/definitions/JobReportScope'
-        description: Indicates whether the job-completion report will include details of all tasks or only failed tasks.
-    description: Contains the configuration parameters for a job-completion report.
-  NonEmptyMaxLength64String:
-    type: string
-    minLength: 1
-    maxLength: 64
-  JobManifest:
-    type: object
-    required:
-      - Spec
-      - Location
-    properties:
-      Spec:
-        $ref: '#/definitions/JobManifestSpec'
-        description: 'Describes the format of the specified job''s manifest. If the manifest is in CSV format, also describes the columns contained within the manifest.'
-      Location:
-        $ref: '#/definitions/JobManifestLocation'
-        description: Contains the information required to locate the specified job's manifest.
-    description: Contains the configuration information for a job's manifest.
-  NonEmptyMaxLength256String:
-    type: string
-    minLength: 1
-    maxLength: 256
-  JobPriority:
-    type: integer
-    minimum: 0
-    maximum: 2147483647
-  IAMRoleArn:
-    type: string
-    minLength: 1
-    maxLength: 2048
-  CreateJobRequest:
-    type: object
-    required:
-      - Operation
-      - Report
-      - ClientRequestToken
-      - Manifest
-      - Priority
-      - RoleArn
-    properties:
-      ConfirmationRequired:
-        $ref: '#/definitions/ConfirmationRequired'
-        description: Indicates whether confirmation is required before Amazon S3 runs the job. Confirmation is only required for jobs created through the Amazon S3 console.
-      Operation:
-        $ref: '#/definitions/JobOperation'
-        description: 'The operation that you want this job to perform on each object listed in the manifest. For more information about the available operations, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-operations.html">Available Operations</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.'
-      Report:
-        $ref: '#/definitions/JobReport'
-        description: Configuration parameters for the optional job-completion report.
-      ClientRequestToken:
-        $ref: '#/definitions/NonEmptyMaxLength64String'
-        description: An idempotency token to ensure that you don't accidentally submit the same request twice. You can use any string up to the maximum length.
-      Manifest:
-        $ref: '#/definitions/JobManifest'
-        description: Configuration parameters for the manifest.
-      Description:
-        $ref: '#/definitions/NonEmptyMaxLength256String'
-        description: A description for this job. You can use any string within the permitted length. Descriptions don't need to be unique and can be used for multiple jobs.
-      Priority:
-        $ref: '#/definitions/JobPriority'
-        description: The numerical priority for this job. Higher numbers indicate higher priority.
-      RoleArn:
-        $ref: '#/definitions/IAMRoleArn'
-        description: The Amazon Resource Name (ARN) for the Identity and Access Management (IAM) Role that batch operations will use to execute this job's operation on each object in the manifest.
-  JobId:
-    type: string
-    minLength: 5
-    maxLength: 36
-  DeletePublicAccessBlockRequest:
-    type: object
-    properties: {}
-  DescribeJobRequest:
-    type: object
-    properties: {}
-  JobDescriptor:
-    type: object
-    properties:
-      JobId:
-        $ref: '#/definitions/JobId'
-        description: The ID for the specified job.
-      ConfirmationRequired:
-        $ref: '#/definitions/ConfirmationRequired'
-        description: Indicates whether confirmation is required before Amazon S3 begins running the specified job. Confirmation is required only for jobs created through the Amazon S3 console.
-      Description:
-        $ref: '#/definitions/NonEmptyMaxLength256String'
-        description: 'The description for this job, if one was provided in this job''s <code>Create Job</code> request.'
-      JobArn:
-        $ref: '#/definitions/JobArn'
-        description: The Amazon Resource Name (ARN) for this job.
-      Status:
-        $ref: '#/definitions/JobStatus'
-        description: The current status of the specified job.
-      Manifest:
-        $ref: '#/definitions/JobManifest'
-        description: The configuration information for the specified job's manifest object.
-      Operation:
-        $ref: '#/definitions/JobOperation'
-        description: The operation that the specified job is configured to execute on the objects listed in the manifest.
-      Priority:
-        $ref: '#/definitions/JobPriority'
-        description: The priority of the specified job.
-      ProgressSummary:
-        $ref: '#/definitions/JobProgressSummary'
-        description: 'Describes the total number of tasks that the specified job has executed, the number of tasks that succeeded, and the number of tasks that failed.'
-      StatusUpdateReason:
-        $ref: '#/definitions/JobStatusUpdateReason'
-        description: <p/>
-      FailureReasons:
-        $ref: '#/definitions/JobFailureList'
-        description: 'If the specified job failed, this field contains information describing the failure.'
-      Report:
-        $ref: '#/definitions/JobReport'
-        description: Contains the configuration information for the job-completion report if you requested one in the <code>Create Job</code> request.
-      CreationTime:
-        $ref: '#/definitions/JobCreationTime'
-        description: A timestamp indicating when this job was created.
-      TerminationDate:
-        $ref: '#/definitions/JobTerminationDate'
-        description: 'A timestamp indicating when this job terminated. A job''s termination date is the date and time when it succeeded, failed, or was canceled.'
-      RoleArn:
-        $ref: '#/definitions/IAMRoleArn'
-        description: The Amazon Resource Name (ARN) for the Identity and Access Management (IAM) Role assigned to execute the tasks for this job.
-      SuspendedDate:
-        $ref: '#/definitions/SuspendedDate'
-        description: 'The timestamp when this job was suspended, if it has been suspended.'
-      SuspendedCause:
-        $ref: '#/definitions/SuspendedCause'
-        description: 'The reason why the specified job was suspended. A job is only suspended if you create it through the Amazon S3 console. When you create the job, it enters the <code>Suspended</code> state to await confirmation before running. After you confirm the job, it automatically exits the <code>Suspended</code> state.'
-    description: A container element for the job configuration and status information returned by a <code>Describe Job</code> request.
-  PublicAccessBlockConfiguration:
-    type: object
-    properties:
-      BlockPublicAcls:
-        $ref: '#/definitions/Setting'
-        description: <p/>
-      IgnorePublicAcls:
-        $ref: '#/definitions/Setting'
-        description: <p/>
-      BlockPublicPolicy:
-        $ref: '#/definitions/Setting'
-        description: <p/>
-      RestrictPublicBuckets:
-        $ref: '#/definitions/Setting'
-        description: <p/>
-    description: <p/>
-  GetPublicAccessBlockRequest:
-    type: object
-    properties: {}
-  JobArn:
-    type: string
-    minLength: 1
-    maxLength: 1024
-  JobCreationTime:
-    type: string
-    format: date-time
-  JobProgressSummary:
-    type: object
-    properties:
-      TotalNumberOfTasks:
-        $ref: '#/definitions/JobTotalNumberOfTasks'
-        description: <p/>
-      NumberOfTasksSucceeded:
-        $ref: '#/definitions/JobNumberOfTasksSucceeded'
-        description: <p/>
-      NumberOfTasksFailed:
-        $ref: '#/definitions/JobNumberOfTasksFailed'
-        description: <p/>
-    description: 'Describes the total number of tasks that the specified job has executed, the number of tasks that succeeded, and the number of tasks that failed.'
-  JobStatusUpdateReason:
-    type: string
-    minLength: 1
-    maxLength: 256
-  JobFailureList:
-    type: array
+  JobStatusList:
     items:
-      $ref: '#/definitions/JobFailure'
-  JobTerminationDate:
-    type: string
-    format: date-time
-  SuspendedDate:
-    type: string
-    format: date-time
-  SuspendedCause:
-    type: string
-    minLength: 1
-    maxLength: 1024
-  JobFailureCode:
-    type: string
-    minLength: 1
-    maxLength: 64
-  JobFailureReason:
-    type: string
-    minLength: 1
+      $ref: '#/definitions/JobStatus'
+    type: array
+  JobStatusUpdateReason:
     maxLength: 256
-  JobFailure:
-    type: object
-    properties:
-      FailureCode:
-        $ref: '#/definitions/JobFailureCode'
-        description: 'The failure code, if any, for the specified job.'
-      FailureReason:
-        $ref: '#/definitions/JobFailureReason'
-        description: 'The failure reason, if any, for the specified job.'
-    description: 'If this job failed, this element indicates why the job failed.'
-  OperationName:
+    minLength: 1
     type: string
+  JobTerminationDate:
+    format: date-time
+    type: string
+  JobTotalNumberOfTasks:
+    minimum: 0
+    type: integer
+  KmsKeyArnString:
+    maxLength: 2000
+    minLength: 1
+    type: string
+  LambdaInvokeOperation:
+    description: Contains the configuration parameters for a <code>Lambda Invoke</code> operation.
+    properties:
+      FunctionArn:
+        $ref: '#/definitions/NonEmptyMaxLength1024String'
+        description: The Amazon Resource Name (ARN) for the AWS Lambda function that the specified job will invoke for each object in the manifest.
+    type: object
+  ListJobsRequest:
+    properties: {}
+    type: object
+  ListJobsResult:
+    properties:
+      Jobs:
+        $ref: '#/definitions/JobListDescriptorList'
+        description: The list of current jobs and jobs that have ended within the last 30 days.
+      NextToken:
+        $ref: '#/definitions/NonEmptyMaxLength1024String'
+        description: 'If the <code>List Jobs</code> request produced more than the maximum number of results, you can pass this value into a subsequent <code>List Jobs</code> request in order to retrieve the next page of results.'
+    type: object
+  MaxLength1024String:
+    maxLength: 1024
+    type: string
+  MaxResults:
+    maximum: 1000
+    minimum: 1
+    type: integer
+  NoSuchPublicAccessBlockConfiguration: {}
+  NonEmptyMaxLength1024String:
+    maxLength: 1024
+    minLength: 1
+    type: string
+  NonEmptyMaxLength2048String:
+    maxLength: 2048
+    minLength: 1
+    type: string
+  NonEmptyMaxLength256String:
+    maxLength: 256
+    minLength: 1
+    type: string
+  NonEmptyMaxLength64String:
+    maxLength: 64
+    minLength: 1
+    type: string
+  NotFoundException: {}
+  OperationName:
     enum:
       - LambdaInvoke
       - S3PutObjectCopy
       - S3PutObjectAcl
       - S3PutObjectTagging
       - S3InitiateRestoreObject
-  JobListDescriptor:
-    type: object
+    type: string
+  PublicAccessBlockConfiguration:
+    description: <p/>
     properties:
-      JobId:
-        $ref: '#/definitions/JobId'
-        description: The ID for the specified job.
-      Description:
-        $ref: '#/definitions/NonEmptyMaxLength256String'
-        description: The user-specified description that was included in the specified job's <code>Create Job</code> request.
-      Operation:
-        $ref: '#/definitions/OperationName'
-        description: The operation that the specified job is configured to run on each object listed in the manifest.
-      Priority:
-        $ref: '#/definitions/JobPriority'
-        description: The current priority for the specified job.
-      Status:
-        $ref: '#/definitions/JobStatus'
-        description: The specified job's current status.
-      CreationTime:
-        $ref: '#/definitions/JobCreationTime'
-        description: A timestamp indicating when the specified job was created.
-      TerminationDate:
-        $ref: '#/definitions/JobTerminationDate'
-        description: 'A timestamp indicating when the specified job terminated. A job''s termination date is the date and time when it succeeded, failed, or was canceled.'
-      ProgressSummary:
-        $ref: '#/definitions/JobProgressSummary'
-        description: 'Describes the total number of tasks that the specified job has executed, the number of tasks that succeeded, and the number of tasks that failed.'
-    description: Contains the configuration and status information for a single job retrieved as part of a job list.
-  JobListDescriptorList:
-    type: array
-    items:
-      $ref: '#/definitions/JobListDescriptor'
-  JobManifestFieldName:
-    type: string
-    enum:
-      - Ignore
-      - Bucket
-      - Key
-      - VersionId
-  JobManifestFieldList:
-    type: array
-    items:
-      $ref: '#/definitions/JobManifestFieldName'
-  JobManifestFormat:
-    type: string
-    enum:
-      - S3BatchOperations_CSV_20180820
-      - S3InventoryReport_CSV_20161130
-  S3KeyArnString:
-    type: string
-    minLength: 1
-    maxLength: 2000
-  S3ObjectVersionId:
-    type: string
-    minLength: 1
-    maxLength: 2000
-  NonEmptyMaxLength1024String:
-    type: string
-    minLength: 1
-    maxLength: 1024
-  JobNumberOfTasksFailed:
-    type: integer
-    minimum: 0
-  JobNumberOfTasksSucceeded:
-    type: integer
-    minimum: 0
-  JobTotalNumberOfTasks:
-    type: integer
-    minimum: 0
-  JobStatusList:
-    type: array
-    items:
-      $ref: '#/definitions/JobStatus'
-  KmsKeyArnString:
-    type: string
-    minLength: 1
-    maxLength: 2000
-  MaxResults:
-    type: integer
-    minimum: 1
-    maximum: 1000
-  ListJobsRequest:
+      BlockPublicAcls:
+        $ref: '#/definitions/Setting'
+        description: <p/>
+      BlockPublicPolicy:
+        $ref: '#/definitions/Setting'
+        description: <p/>
+      IgnorePublicAcls:
+        $ref: '#/definitions/Setting'
+        description: <p/>
+      RestrictPublicBuckets:
+        $ref: '#/definitions/Setting'
+        description: <p/>
     type: object
-    properties: {}
-  MaxLength1024String:
-    type: string
-    maxLength: 1024
-  NonEmptyMaxLength2048String:
-    type: string
-    minLength: 1
-    maxLength: 2048
   PutPublicAccessBlockRequest:
-    type: object
-    required:
-      - PublicAccessBlockConfiguration
     properties:
       PublicAccessBlockConfiguration:
         $ref: '#/definitions/PublicAccessBlockConfiguration'
         description: <p/>
+    required:
+      - PublicAccessBlockConfiguration
+    type: object
     xml:
       namespace: 'http://awss3control.amazonaws.com/doc/2018-08-20/'
-  RequestedJobStatus:
+  ReportPrefixString:
+    maxLength: 512
+    minLength: 1
     type: string
+  RequestedJobStatus:
     enum:
       - Cancelled
       - Ready
-  S3ObjectOwner:
-    type: object
-    properties:
-      ID:
-        $ref: '#/definitions/NonEmptyMaxLength1024String'
-        description: <p/>
-      DisplayName:
-        $ref: '#/definitions/NonEmptyMaxLength1024String'
-        description: <p/>
-    description: <p/>
-  S3GrantList:
-    type: array
-    items:
-      $ref: '#/definitions/S3Grant'
+    type: string
   S3AccessControlList:
-    type: object
-    required:
-      - Owner
+    description: <p/>
     properties:
-      Owner:
-        $ref: '#/definitions/S3ObjectOwner'
-        description: <p/>
       Grants:
         $ref: '#/definitions/S3GrantList'
         description: <p/>
+      Owner:
+        $ref: '#/definitions/S3ObjectOwner'
+        description: <p/>
+    required:
+      - Owner
+    type: object
+  S3AccessControlPolicy:
     description: <p/>
-  S3CannedAccessControlList:
+    properties:
+      AccessControlList:
+        $ref: '#/definitions/S3AccessControlList'
+        description: <p/>
+      CannedAccessControlList:
+        $ref: '#/definitions/S3CannedAccessControlList'
+        description: <p/>
+    type: object
+  S3BucketArnString:
+    maxLength: 128
+    minLength: 1
     type: string
+  S3CannedAccessControlList:
     enum:
       - private
       - public-read
@@ -1189,29 +999,130 @@ definitions:
       - authenticated-read
       - bucket-owner-read
       - bucket-owner-full-control
-  S3AccessControlPolicy:
-    type: object
+    type: string
+  S3ContentLength:
+    minimum: 0
+    type: integer
+  S3CopyObjectOperation:
+    description: 'Contains the configuration parameters for a PUT Copy object operation. Amazon S3 batch operations passes each value through to the underlying PUT Copy object API. For more information about the parameters for this operation, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html">PUT Object - Copy</a>.'
     properties:
-      AccessControlList:
-        $ref: '#/definitions/S3AccessControlList'
+      AccessControlGrants:
+        $ref: '#/definitions/S3GrantList'
         description: <p/>
       CannedAccessControlList:
         $ref: '#/definitions/S3CannedAccessControlList'
         description: <p/>
-    description: <p/>
-  S3ContentLength:
-    type: integer
+      MetadataDirective:
+        $ref: '#/definitions/S3MetadataDirective'
+        description: <p/>
+      ModifiedSinceConstraint:
+        $ref: '#/definitions/TimeStamp'
+        description: <p/>
+      NewObjectMetadata:
+        $ref: '#/definitions/S3ObjectMetadata'
+        description: <p/>
+      NewObjectTagging:
+        $ref: '#/definitions/S3TagSet'
+        description: <p/>
+      ObjectLockLegalHoldStatus:
+        $ref: '#/definitions/S3ObjectLockLegalHoldStatus'
+      ObjectLockMode:
+        $ref: '#/definitions/S3ObjectLockMode'
+      ObjectLockRetainUntilDate:
+        $ref: '#/definitions/TimeStamp'
+      RedirectLocation:
+        $ref: '#/definitions/NonEmptyMaxLength2048String'
+        description: <p/>
+      RequesterPays:
+        $ref: '#/definitions/Boolean'
+        description: <p/>
+      SSEAwsKmsKeyId:
+        $ref: '#/definitions/KmsKeyArnString'
+        description: <p/>
+      StorageClass:
+        $ref: '#/definitions/S3StorageClass'
+        description: <p/>
+      TargetKeyPrefix:
+        $ref: '#/definitions/NonEmptyMaxLength1024String'
+      TargetResource:
+        $ref: '#/definitions/S3BucketArnString'
+        description: <p/>
+      UnModifiedSinceConstraint:
+        $ref: '#/definitions/TimeStamp'
+        description: <p/>
+    type: object
+  S3ExpirationInDays:
     minimum: 0
-  S3MetadataDirective:
+    type: integer
+  S3GlacierJobTier:
+    enum:
+      - BULK
+      - STANDARD
     type: string
+  S3Grant:
+    description: <p/>
+    properties:
+      Grantee:
+        $ref: '#/definitions/S3Grantee'
+        description: <p/>
+      Permission:
+        $ref: '#/definitions/S3Permission'
+        description: <p/>
+    type: object
+  S3GrantList:
+    items:
+      $ref: '#/definitions/S3Grant'
+    type: array
+  S3Grantee:
+    description: <p/>
+    properties:
+      DisplayName:
+        $ref: '#/definitions/NonEmptyMaxLength1024String'
+        description: <p/>
+      Identifier:
+        $ref: '#/definitions/NonEmptyMaxLength1024String'
+        description: <p/>
+      TypeIdentifier:
+        $ref: '#/definitions/S3GranteeTypeIdentifier'
+        description: <p/>
+    type: object
+  S3GranteeTypeIdentifier:
+    enum:
+      - id
+      - emailAddress
+      - uri
+    type: string
+  S3InitiateRestoreObjectOperation:
+    description: 'Contains the configuration parameters for an Initiate Glacier Restore job. Amazon S3 batch operations passes each value through to the underlying POST Object restore API. For more information about the parameters for this operation, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOSTrestore.html#RESTObjectPOSTrestore-restore-request">Restoring Archives</a>.'
+    properties:
+      ExpirationInDays:
+        $ref: '#/definitions/S3ExpirationInDays'
+        description: <p/>
+      GlacierJobTier:
+        $ref: '#/definitions/S3GlacierJobTier'
+        description: <p/>
+    type: object
+  S3KeyArnString:
+    maxLength: 2000
+    minLength: 1
+    type: string
+  S3MetadataDirective:
     enum:
       - COPY
       - REPLACE
-  TimeStamp:
     type: string
-    format: date-time
+  S3ObjectLockLegalHoldStatus:
+    enum:
+      - 'OFF'
+      - 'ON'
+    type: string
+  S3ObjectLockMode:
+    enum:
+      - COMPLIANCE
+      - GOVERNANCE
+    type: string
   S3ObjectMetadata:
-    type: object
+    description: <p/>
     properties:
       CacheControl:
         $ref: '#/definitions/NonEmptyMaxLength1024String'
@@ -1224,9 +1135,6 @@ definitions:
         description: <p/>
       ContentLanguage:
         $ref: '#/definitions/NonEmptyMaxLength1024String'
-        description: <p/>
-      UserMetadata:
-        $ref: '#/definitions/S3UserMetadata'
         description: <p/>
       ContentLength:
         $ref: '#/definitions/S3ContentLength'
@@ -1246,13 +1154,52 @@ definitions:
       SSEAlgorithm:
         $ref: '#/definitions/S3SSEAlgorithm'
         description: <p/>
+      UserMetadata:
+        $ref: '#/definitions/S3UserMetadata'
+        description: <p/>
+    type: object
+  S3ObjectOwner:
     description: <p/>
-  S3TagSet:
-    type: array
-    items:
-      $ref: '#/definitions/S3Tag'
-  S3StorageClass:
+    properties:
+      DisplayName:
+        $ref: '#/definitions/NonEmptyMaxLength1024String'
+        description: <p/>
+      ID:
+        $ref: '#/definitions/NonEmptyMaxLength1024String'
+        description: <p/>
+    type: object
+  S3ObjectVersionId:
+    maxLength: 2000
+    minLength: 1
     type: string
+  S3Permission:
+    enum:
+      - FULL_CONTROL
+      - READ
+      - WRITE
+      - READ_ACP
+      - WRITE_ACP
+    type: string
+  S3SSEAlgorithm:
+    enum:
+      - AES256
+      - KMS
+    type: string
+  S3SetObjectAclOperation:
+    description: 'Contains the configuration parameters for a Set Object ACL operation. Amazon S3 batch operations passes each value through to the underlying PUT Object acl API. For more information about the parameters for this operation, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTacl.html">PUT Object acl</a>.'
+    properties:
+      AccessControlPolicy:
+        $ref: '#/definitions/S3AccessControlPolicy'
+        description: <p/>
+    type: object
+  S3SetObjectTaggingOperation:
+    description: 'Contains the configuration parameters for a Set Object Tagging operation. Amazon S3 batch operations passes each value through to the underlying PUT Object tagging API. For more information about the parameters for this operation, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTtagging.html">PUT Object tagging</a>.'
+    properties:
+      TagSet:
+        $ref: '#/definitions/S3TagSet'
+        description: <p/>
+    type: object
+  S3StorageClass:
     enum:
       - STANDARD
       - STANDARD_IA
@@ -1260,76 +1207,9 @@ definitions:
       - GLACIER
       - INTELLIGENT_TIERING
       - DEEP_ARCHIVE
-  S3ObjectLockLegalHoldStatus:
     type: string
-    enum:
-      - 'OFF'
-      - 'ON'
-  S3ObjectLockMode:
-    type: string
-    enum:
-      - COMPLIANCE
-      - GOVERNANCE
-  S3ExpirationInDays:
-    type: integer
-    minimum: 0
-  S3GlacierJobTier:
-    type: string
-    enum:
-      - BULK
-      - STANDARD
-  S3Grantee:
-    type: object
-    properties:
-      TypeIdentifier:
-        $ref: '#/definitions/S3GranteeTypeIdentifier'
-        description: <p/>
-      Identifier:
-        $ref: '#/definitions/NonEmptyMaxLength1024String'
-        description: <p/>
-      DisplayName:
-        $ref: '#/definitions/NonEmptyMaxLength1024String'
-        description: <p/>
-    description: <p/>
-  S3Permission:
-    type: string
-    enum:
-      - FULL_CONTROL
-      - READ
-      - WRITE
-      - READ_ACP
-      - WRITE_ACP
-  S3Grant:
-    type: object
-    properties:
-      Grantee:
-        $ref: '#/definitions/S3Grantee'
-        description: <p/>
-      Permission:
-        $ref: '#/definitions/S3Permission'
-        description: <p/>
-    description: <p/>
-  S3GranteeTypeIdentifier:
-    type: string
-    enum:
-      - id
-      - emailAddress
-      - uri
-  S3UserMetadata:
-    type: object
-    maxProperties: 8192
-    additionalProperties:
-      $ref: '#/definitions/MaxLength1024String'
-  S3SSEAlgorithm:
-    type: string
-    enum:
-      - AES256
-      - KMS
   S3Tag:
-    type: object
-    required:
-      - Key
-      - Value
+    description: <p/>
     properties:
       Key:
         $ref: '#/definitions/NonEmptyMaxLength1024String'
@@ -1337,10 +1217,130 @@ definitions:
       Value:
         $ref: '#/definitions/MaxLength1024String'
         description: <p/>
-    description: <p/>
+    required:
+      - Key
+      - Value
+    type: object
+  S3TagSet:
+    items:
+      $ref: '#/definitions/S3Tag'
+    type: array
+  S3UserMetadata:
+    additionalProperties:
+      $ref: '#/definitions/MaxLength1024String'
+    maxProperties: 8192
+    type: object
+  Setting:
+    type: boolean
+  SuspendedCause:
+    maxLength: 1024
+    minLength: 1
+    type: string
+  SuspendedDate:
+    format: date-time
+    type: string
+  TimeStamp:
+    format: date-time
+    type: string
+  TooManyRequestsException: {}
   UpdateJobPriorityRequest:
-    type: object
     properties: {}
+    type: object
+  UpdateJobPriorityResult:
+    properties:
+      JobId:
+        $ref: '#/definitions/JobId'
+        description: The ID for the job whose priority Amazon S3 updated.
+      Priority:
+        $ref: '#/definitions/JobPriority'
+        description: The new priority assigned to the specified job.
+    required:
+      - JobId
+      - Priority
+    type: object
   UpdateJobStatusRequest:
-    type: object
     properties: {}
+    type: object
+  UpdateJobStatusResult:
+    properties:
+      JobId:
+        $ref: '#/definitions/JobId'
+        description: The ID for the job whose status was updated.
+      Status:
+        $ref: '#/definitions/JobStatus'
+        description: The current status for the specified job.
+      StatusUpdateReason:
+        $ref: '#/definitions/JobStatusUpdateReason'
+        description: The reason that the specified job's status was updated.
+    type: object
+x-servers:
+  - description: The AWS S3 Control multi-region endpoint
+    url: 'http://s3-control.{region}.amazonaws.com'
+    variables:
+      region:
+        default: us-east-1
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+  - description: The AWS S3 Control multi-region endpoint
+    url: 'https://s3-control.{region}.amazonaws.com'
+    variables:
+      region:
+        default: us-east-1
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+  - description: The AWS S3 Control endpoint for China (Beijing) and China (Ningxia)
+    url: 'http://s3-control.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        default: cn-north-1
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+  - description: The AWS S3 Control endpoint for China (Beijing) and China (Ningxia)
+    url: 'https://s3-control.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        default: cn-north-1
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1

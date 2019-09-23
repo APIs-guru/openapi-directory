@@ -137,7 +137,7 @@ paths:
         - application/xml
         - text/xml
         - application/x-www-form-urlencoded
-      description: Requires TaskID and a list of field names to update. The FieldsToUpdate field accepts a string array containing field names that should be updated.
+      description: Requires CompanyID and a list of field names to update. The FieldsToUpdate field accepts a string array containing field names that should be updated.
       operationId: Company_Put
       parameters:
         - description: ''
@@ -154,7 +154,7 @@ paths:
       security:
         - oauth2:
             - write_contacts
-      summary: Update a Task.
+      summary: Update a Company record.
       tags:
         - Company
   '/api/Company/{id}':
@@ -3607,12 +3607,17 @@ definitions:
     type: object
   TimesheetDetails:
     properties:
+      ApprovedBy:
+        type: string
       CategoryName:
         type: string
       CustomerIDFK:
         format: int32
         type: integer
       CustomerName:
+        type: string
+      DateApproved:
+        format: date-time
         type: string
       DateCreated:
         format: date-time
@@ -3763,6 +3768,9 @@ definitions:
           type: string
         type: array
       PercentComplete:
+        format: int32
+        type: integer
+      SectionIDFK:
         format: int32
         type: integer
       Tags:

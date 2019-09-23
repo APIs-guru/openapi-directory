@@ -49,7 +49,7 @@ parameters:
 paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extensions':
     get:
-      description: Gets database extensions.
+      description: Gets database extensions. This API is deprecated and should not be used.
       operationId: Extensions_ListByDatabase
       parameters:
         - description: The API version to use for the request.
@@ -85,6 +85,50 @@ paths:
         - ImportExport
       x-ms-pageable:
         nextLinkName: null
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extensions/{extensionName}':
+    get:
+      description: Gets a database extension. This API is deprecated and should not be used.
+      operationId: Extensions_Get
+      parameters:
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the database to import into
+          in: path
+          name: databaseName
+          required: true
+          type: string
+        - description: The name of the extension to get
+          enum:
+            - import
+          in: path
+          name: extensionName
+          required: true
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: ExtensionName
+      responses:
+        '200':
+          description: OK
+      tags:
+        - ImportExport
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/transparentDataEncryption':
     get:
       deprecated: true

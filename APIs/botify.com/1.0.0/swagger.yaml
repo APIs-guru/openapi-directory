@@ -3270,20 +3270,28 @@ definitions:
     type: object
   User:
     properties:
+      company_name:
+        type: string
+      date_joined:
+        format: date-time
+        type: string
       email:
         type: string
       first_name:
         type: string
-      full_name:
+      is_organization:
         readOnly: true
         type: string
       last_name:
         type: string
-      username:
-        description: 'Required. 30 characters or fewer. Letters, numbers and /-/_/. characters'
+      login:
+        readOnly: true
         type: string
-    required:
-      - username
+      status:
+        type: string
+      url:
+        readOnly: true
+        type: string
     type: object
   string:
     properties: {}

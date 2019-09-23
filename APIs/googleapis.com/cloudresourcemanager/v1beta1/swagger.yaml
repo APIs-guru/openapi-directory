@@ -617,7 +617,11 @@ paths:
         + Project does not support `allUsers` and `allAuthenticatedUsers` as
         `members` in a `Binding` of a `Policy`.
 
-        + The owner role can be granted only to `user` and `serviceAccount`.
+        + The owner role can be granted to a `user`, `serviceAccount`, or a group
+        that is part of an organization. For example,
+        group@myownpersonaldomain.com could be added as an owner to a project in
+        the myownpersonaldomain.com organization, but not the examplepetstore.com
+        organization.
 
         + Service accounts can be made owners of a project directly
         without any restrictions. However, to be added as an owner, a user must be
@@ -774,7 +778,7 @@ paths:
           schema:
             $ref: '#/definitions/Organization'
         - description: |-
-            Output Only. The resource name of the organization. This is the
+            Output only. The resource name of the organization. This is the
             organization's relative path in the API. Its format is
             "organizations/[organization_id]". For example, "organizations/1234".
           in: path
@@ -1213,9 +1217,13 @@ definitions:
       requestedPolicyVersion:
         description: |-
           Optional. The policy format version to be returned.
-          Acceptable values are 0, 1, and 3.
-          If the value is 0, or the field is omitted, policy format version 1 will be
-          returned.
+
+          Valid values are 0, 1, and 3. Requests specifying an invalid value will be
+          rejected.
+
+          Requests for policies with any conditional bindings must specify version 3.
+          Policies without any conditional bindings may specify any valid value or
+          leave the field unset.
         format: int32
         type: integer
     type: object
@@ -1274,9 +1282,7 @@ definitions:
       (e.g., company) resources belong.
     properties:
       creationTime:
-        description: |-
-          Timestamp when the Organization was created. Assigned by the server.
-          @OutputOnly
+        description: Timestamp when the Organization was created. Assigned by the server.
         format: google-datetime
         type: string
       displayName:
@@ -1285,12 +1291,9 @@ definitions:
           GCP Console UI. This string is set by the server and cannot be
           changed. The string will be set to the primary domain (for example,
           "google.com") of the G Suite customer that owns the organization.
-          @OutputOnly
         type: string
       lifecycleState:
-        description: |-
-          The organization's current lifecycle state. Assigned by the server.
-          @OutputOnly
+        description: The organization's current lifecycle state. Assigned by the server.
         enum:
           - LIFECYCLE_STATE_UNSPECIFIED
           - ACTIVE
@@ -1298,7 +1301,7 @@ definitions:
         type: string
       name:
         description: |-
-          Output Only. The resource name of the organization. This is the
+          Output only. The resource name of the organization. This is the
           organization's relative path in the API. Its format is
           "organizations/[organization_id]". For example, "organizations/1234".
         type: string
@@ -1401,7 +1404,15 @@ definitions:
         format: byte
         type: string
       version:
-        description: Deprecated.
+        description: |-
+          Specifies the format of the policy.
+
+          Valid values are 0, 1, and 3. Requests specifying an invalid value will be
+          rejected.
+
+          Policies with any conditional bindings must specify version 3. Policies
+          without any conditional bindings may specify any valid value or leave the
+          field unset.
         format: int32
         type: integer
     type: object

@@ -98,17 +98,23 @@ paths:
                         - description: Description for rule group 1.
                           ruleGroupName: Group1
                           rules:
-                            - description: Generic managed web application firewall rule.
+                            - defaultAction: Block
+                              defaultState: Enabled
+                              description: Generic managed web application firewall rule.
                               ruleId: GROUP1-0001
-                            - description: Generic managed web application firewall rule.
+                            - defaultAction: Block
+                              defaultState: Disabled
+                              description: Generic managed web application firewall rule.
                               ruleId: GROUP1-0002
                         - description: Description for rule group 2.
                           ruleGroupName: Group2
                           rules:
-                            - description: Generic managed web application firewall rule.
+                            - defaultAction: Allow
+                              defaultState: Enabled
+                              description: Generic managed web application firewall rule.
                               ruleId: GROUP2-0001
                       ruleSetType: DefaultRuleSet
-                      ruleSetVersion: preview-1.0
+                      ruleSetVersion: '1.0'
                     type: Microsoft.Network/frontdoorwebapplicationfirewallmanagedrulesets
       x-ms-pageable:
         nextLinkName: nextLink
@@ -768,6 +774,14 @@ definitions:
   ManagedRuleDefinition:
     description: Describes a managed rule definition.
     properties:
+      defaultAction:
+        $ref: '#/definitions/ActionType'
+        description: Describes the default action to be applied when the managed rule matches.
+        readOnly: true
+      defaultState:
+        $ref: '#/definitions/ManagedRuleEnabledState'
+        description: Describes the default state for the managed rule.
+        readOnly: true
       description:
         description: Describes the functionality of the managed rule.
         readOnly: true
@@ -776,6 +790,15 @@ definitions:
         description: Identifier for the managed rule.
         readOnly: true
         type: string
+  ManagedRuleEnabledState:
+    description: Describes if the managed rule is in enabled or disabled state.
+    enum:
+      - Disabled
+      - Enabled
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: ManagedRuleEnabledState
   ManagedRuleGroupDefinition:
     description: Describes a managed rule group.
     properties:
@@ -813,14 +836,8 @@ definitions:
         $ref: '#/definitions/ActionType'
         description: Describes the override action to be applied when rule matches.
       enabledState:
+        $ref: '#/definitions/ManagedRuleEnabledState'
         description: Describes if the managed rule is in enabled or disabled state. Defaults to Disabled if not specified.
-        enum:
-          - Disabled
-          - Enabled
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: ManagedRuleEnabledState
       ruleId:
         description: Identifier for the managed rule.
         type: string

@@ -77,211 +77,12 @@ paths:
           name: api-version
           required: true
           type: string
-        - description: Switch for whether summary or detailed information is returned.
-          in: query
-          name: summary
-          required: true
-          type: boolean
-          x-ms-parameter-location: method
+        - $ref: '#/parameters/SummaryParameter'
       responses:
         '200':
           description: OK -- The list of storage accounts has been returned.
           schema:
-            description: Pageable list of storage accounts.
-            properties:
-              nextLink:
-                description: URI to the next page.
-                readOnly: true
-                type: string
-              value:
-                description: List of storage accounts.
-                items:
-                  allOf:
-                    - description: Base resource object.
-                      properties:
-                        id:
-                          description: Resource ID.
-                          readOnly: true
-                          type: string
-                        location:
-                          description: Resource location.
-                          readOnly: true
-                          type: string
-                        name:
-                          description: Resource Name.
-                          readOnly: true
-                          type: string
-                        tags:
-                          additionalProperties:
-                            type: string
-                          description: Resource tags.
-                          readOnly: true
-                          type: object
-                        type:
-                          description: Resource type.
-                          readOnly: true
-                          type: string
-                      type: object
-                      x-ms-azure-resource: true
-                  description: Properties of the storage account.
-                  properties:
-                    properties:
-                      description: Properties of a storage account.
-                      properties:
-                        accountId:
-                          description: 'Internal storage account ID, which is not visible to tenant.'
-                          readOnly: true
-                          type: string
-                        accountStatus:
-                          description: The state of storage account in WAC.
-                          enum:
-                            - Active
-                            - Deleted
-                            - OutOfRetentionPeriod
-                            - Recycled
-                          type: string
-                          x-ms-enum:
-                            modelAsString: true
-                            name: StorageAccountStatus
-                        accountType:
-                          description: Storage account type.
-                          enum:
-                            - Standard_LRS
-                            - Standard_GRS
-                            - Standard_ZRS
-                            - Standard_RAGRS
-                            - Premium_LRS
-                          type: string
-                          x-ms-enum:
-                            modelAsString: true
-                            name: StorageAccountType
-                        acquisitionOperationCount:
-                          description: The count of acquisitions in the storage account.
-                          format: int32
-                          readOnly: true
-                          type: integer
-                        alternateName:
-                          description: Alternative storage account name being used during undelete operation.
-                          readOnly: true
-                          type: string
-                        creationTime:
-                          description: The creation date and time of storage account in UTC.
-                          readOnly: true
-                          type: string
-                        currentOperation:
-                          description: The permissions of storage account in WAC.
-                          enum:
-                            - None
-                            - Create
-                            - Update
-                            - Suspend
-                            - Delete
-                            - Undelete
-                          readOnly: true
-                          type: string
-                          x-ms-enum:
-                            modelAsString: true
-                            name: StorageAccountOperation
-                        customDomain:
-                          description: The custom domain the user assigned to this storage account.
-                          readOnly: true
-                          type: string
-                        deletedTime:
-                          description: The date-time when the storage account was deleted.
-                          format: date-time
-                          readOnly: true
-                          type: string
-                        permissions:
-                          description: Current operation being performed on Storage Account
-                          enum:
-                            - Empty
-                            - None
-                            - Read
-                            - Delete
-                            - Write
-                            - Full
-                          type: string
-                          x-ms-enum:
-                            modelAsString: true
-                            name: WacAccountPermissions
-                        primaryEndpoints:
-                          additionalProperties:
-                            type: string
-                          description: 'The URLs that are used to perform a retrieval of a public BLOB, queue, or table object.'
-                          readOnly: true
-                        primaryLocation:
-                          description: The primary location for the storage account.
-                          readOnly: true
-                          type: string
-                        provisioningState:
-                          description: Storage account state.
-                          enum:
-                            - Creating
-                            - Succeeded
-                            - Suspended
-                          readOnly: true
-                          type: string
-                          x-ms-enum:
-                            modelAsString: true
-                            name: StorageAccountState
-                        recoveredTime:
-                          description: The time when the storage account is undeleted.
-                          format: date-time
-                          readOnly: true
-                          type: string
-                        recycledTime:
-                          description: The time when the storage account is physically deleted.
-                          format: date-time
-                          readOnly: true
-                          type: string
-                        resourceAdminApiVersion:
-                          description: Storage admin REST API version.
-                          readOnly: true
-                          type: string
-                        statusOfPrimary:
-                          description: Gets the status indicating whether the primary location of the storage account is available or unavailable.
-                          enum:
-                            - Available
-                            - Unavailable
-                          readOnly: true
-                          type: string
-                          x-ms-enum:
-                            modelAsString: true
-                            name: LocationStatus
-                        tenantResourceGroupName:
-                          description: The name of resource group under which the storage account locates.
-                          readOnly: true
-                          type: string
-                        tenantStorageAccountName:
-                          description: Storage account name from tenant view.
-                          readOnly: true
-                          type: string
-                        tenantSubscriptionId:
-                          description: Subscription ID of the subscription under which the storage account locates.
-                          readOnly: true
-                          type: string
-                        tenantViewId:
-                          description: Resource URI of storage account from tenant view.
-                          readOnly: true
-                          type: string
-                        wacInternalState:
-                          description: Current operation being performed on Storage Account
-                          enum:
-                            - None
-                            - Active
-                            - Deleted
-                            - AboveQuota
-                            - Suspended
-                            - All
-                          type: string
-                          x-ms-enum:
-                            modelAsString: true
-                            name: WacAccountStates
-                      type: object
-                  type: object
-                readOnly: true
-                type: array
-            type: object
+            $ref: '#/definitions/StorageAccountList'
         '404':
           description: NOT FOUND -- The specified farm was not found.
       tags:
@@ -515,12 +316,7 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: 'Internal storage account ID, which is not visible to tenant.'
-          in: path
-          name: accountId
-          required: true
-          type: string
-          x-ms-parameter-location: method
+        - $ref: '#/parameters/AccountIdParameter'
         - description: REST Api Version.
           in: query
           name: api-version
@@ -530,189 +326,7 @@ paths:
         '200':
           description: OK -- The storage account has been returned.
           schema:
-            allOf:
-              - description: Base resource object.
-                properties:
-                  id:
-                    description: Resource ID.
-                    readOnly: true
-                    type: string
-                  location:
-                    description: Resource location.
-                    readOnly: true
-                    type: string
-                  name:
-                    description: Resource Name.
-                    readOnly: true
-                    type: string
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: Resource tags.
-                    readOnly: true
-                    type: object
-                  type:
-                    description: Resource type.
-                    readOnly: true
-                    type: string
-                type: object
-                x-ms-azure-resource: true
-            description: Properties of the storage account.
-            properties:
-              properties:
-                description: Properties of a storage account.
-                properties:
-                  accountId:
-                    description: 'Internal storage account ID, which is not visible to tenant.'
-                    readOnly: true
-                    type: string
-                  accountStatus:
-                    description: The state of storage account in WAC.
-                    enum:
-                      - Active
-                      - Deleted
-                      - OutOfRetentionPeriod
-                      - Recycled
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: StorageAccountStatus
-                  accountType:
-                    description: Storage account type.
-                    enum:
-                      - Standard_LRS
-                      - Standard_GRS
-                      - Standard_ZRS
-                      - Standard_RAGRS
-                      - Premium_LRS
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: StorageAccountType
-                  acquisitionOperationCount:
-                    description: The count of acquisitions in the storage account.
-                    format: int32
-                    readOnly: true
-                    type: integer
-                  alternateName:
-                    description: Alternative storage account name being used during undelete operation.
-                    readOnly: true
-                    type: string
-                  creationTime:
-                    description: The creation date and time of storage account in UTC.
-                    readOnly: true
-                    type: string
-                  currentOperation:
-                    description: The permissions of storage account in WAC.
-                    enum:
-                      - None
-                      - Create
-                      - Update
-                      - Suspend
-                      - Delete
-                      - Undelete
-                    readOnly: true
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: StorageAccountOperation
-                  customDomain:
-                    description: The custom domain the user assigned to this storage account.
-                    readOnly: true
-                    type: string
-                  deletedTime:
-                    description: The date-time when the storage account was deleted.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  permissions:
-                    description: Current operation being performed on Storage Account
-                    enum:
-                      - Empty
-                      - None
-                      - Read
-                      - Delete
-                      - Write
-                      - Full
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: WacAccountPermissions
-                  primaryEndpoints:
-                    additionalProperties:
-                      type: string
-                    description: 'The URLs that are used to perform a retrieval of a public BLOB, queue, or table object.'
-                    readOnly: true
-                  primaryLocation:
-                    description: The primary location for the storage account.
-                    readOnly: true
-                    type: string
-                  provisioningState:
-                    description: Storage account state.
-                    enum:
-                      - Creating
-                      - Succeeded
-                      - Suspended
-                    readOnly: true
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: StorageAccountState
-                  recoveredTime:
-                    description: The time when the storage account is undeleted.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  recycledTime:
-                    description: The time when the storage account is physically deleted.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  resourceAdminApiVersion:
-                    description: Storage admin REST API version.
-                    readOnly: true
-                    type: string
-                  statusOfPrimary:
-                    description: Gets the status indicating whether the primary location of the storage account is available or unavailable.
-                    enum:
-                      - Available
-                      - Unavailable
-                    readOnly: true
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: LocationStatus
-                  tenantResourceGroupName:
-                    description: The name of resource group under which the storage account locates.
-                    readOnly: true
-                    type: string
-                  tenantStorageAccountName:
-                    description: Storage account name from tenant view.
-                    readOnly: true
-                    type: string
-                  tenantSubscriptionId:
-                    description: Subscription ID of the subscription under which the storage account locates.
-                    readOnly: true
-                    type: string
-                  tenantViewId:
-                    description: Resource URI of storage account from tenant view.
-                    readOnly: true
-                    type: string
-                  wacInternalState:
-                    description: Current operation being performed on Storage Account
-                    enum:
-                      - None
-                      - Active
-                      - Deleted
-                      - AboveQuota
-                      - Suspended
-                      - All
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: WacAccountStates
-                type: object
-            type: object
+            $ref: '#/definitions/StorageAccount'
         '404':
           description: NOT FOUND -- The storage account or farm was not found.
       tags:
@@ -775,12 +389,7 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: 'Internal storage account ID, which is not visible to tenant.'
-          in: path
-          name: accountId
-          required: true
-          type: string
-          x-ms-parameter-location: method
+        - $ref: '#/parameters/AccountIdParameter'
         - description: REST Api Version.
           in: query
           name: api-version
@@ -819,183 +428,30 @@ definitions:
         properties:
           id:
             description: Resource ID.
-            readOnly: true
             type: string
           location:
             description: Resource location.
-            readOnly: true
             type: string
           name:
             description: Resource Name.
-            readOnly: true
             type: string
           tags:
             additionalProperties:
               type: string
             description: Resource tags.
-            readOnly: true
             type: object
           type:
             description: Resource type.
-            readOnly: true
             type: string
         type: object
         x-ms-azure-resource: true
     description: Properties of the storage account.
     properties:
       properties:
-        description: Properties of a storage account.
-        properties:
-          accountId:
-            description: 'Internal storage account ID, which is not visible to tenant.'
-            readOnly: true
-            type: string
-          accountStatus:
-            description: The state of storage account in WAC.
-            enum:
-              - Active
-              - Deleted
-              - OutOfRetentionPeriod
-              - Recycled
-            type: string
-            x-ms-enum:
-              modelAsString: true
-              name: StorageAccountStatus
-          accountType:
-            description: Storage account type.
-            enum:
-              - Standard_LRS
-              - Standard_GRS
-              - Standard_ZRS
-              - Standard_RAGRS
-              - Premium_LRS
-            type: string
-            x-ms-enum:
-              modelAsString: true
-              name: StorageAccountType
-          acquisitionOperationCount:
-            description: The count of acquisitions in the storage account.
-            format: int32
-            readOnly: true
-            type: integer
-          alternateName:
-            description: Alternative storage account name being used during undelete operation.
-            readOnly: true
-            type: string
-          creationTime:
-            description: The creation date and time of storage account in UTC.
-            readOnly: true
-            type: string
-          currentOperation:
-            description: The permissions of storage account in WAC.
-            enum:
-              - None
-              - Create
-              - Update
-              - Suspend
-              - Delete
-              - Undelete
-            readOnly: true
-            type: string
-            x-ms-enum:
-              modelAsString: true
-              name: StorageAccountOperation
-          customDomain:
-            description: The custom domain the user assigned to this storage account.
-            readOnly: true
-            type: string
-          deletedTime:
-            description: The date-time when the storage account was deleted.
-            format: date-time
-            readOnly: true
-            type: string
-          permissions:
-            description: Current operation being performed on Storage Account
-            enum:
-              - Empty
-              - None
-              - Read
-              - Delete
-              - Write
-              - Full
-            type: string
-            x-ms-enum:
-              modelAsString: true
-              name: WacAccountPermissions
-          primaryEndpoints:
-            additionalProperties:
-              type: string
-            description: 'The URLs that are used to perform a retrieval of a public BLOB, queue, or table object.'
-            readOnly: true
-          primaryLocation:
-            description: The primary location for the storage account.
-            readOnly: true
-            type: string
-          provisioningState:
-            description: Storage account state.
-            enum:
-              - Creating
-              - Succeeded
-              - Suspended
-            readOnly: true
-            type: string
-            x-ms-enum:
-              modelAsString: true
-              name: StorageAccountState
-          recoveredTime:
-            description: The time when the storage account is undeleted.
-            format: date-time
-            readOnly: true
-            type: string
-          recycledTime:
-            description: The time when the storage account is physically deleted.
-            format: date-time
-            readOnly: true
-            type: string
-          resourceAdminApiVersion:
-            description: Storage admin REST API version.
-            readOnly: true
-            type: string
-          statusOfPrimary:
-            description: Gets the status indicating whether the primary location of the storage account is available or unavailable.
-            enum:
-              - Available
-              - Unavailable
-            readOnly: true
-            type: string
-            x-ms-enum:
-              modelAsString: true
-              name: LocationStatus
-          tenantResourceGroupName:
-            description: The name of resource group under which the storage account locates.
-            readOnly: true
-            type: string
-          tenantStorageAccountName:
-            description: Storage account name from tenant view.
-            readOnly: true
-            type: string
-          tenantSubscriptionId:
-            description: Subscription ID of the subscription under which the storage account locates.
-            readOnly: true
-            type: string
-          tenantViewId:
-            description: Resource URI of storage account from tenant view.
-            readOnly: true
-            type: string
-          wacInternalState:
-            description: Current operation being performed on Storage Account
-            enum:
-              - None
-              - Active
-              - Deleted
-              - AboveQuota
-              - Suspended
-              - All
-            type: string
-            x-ms-enum:
-              modelAsString: true
-              name: WacAccountStates
-        type: object
+        $ref: '#/definitions/StorageAccountProperties'
+        description: Properties of the storage account.
+        readOnly: true
+        x-ms-client-flatten: true
     type: object
   StorageAccountList:
     description: Pageable list of storage accounts.
@@ -1007,189 +463,7 @@ definitions:
       value:
         description: List of storage accounts.
         items:
-          allOf:
-            - description: Base resource object.
-              properties:
-                id:
-                  description: Resource ID.
-                  readOnly: true
-                  type: string
-                location:
-                  description: Resource location.
-                  readOnly: true
-                  type: string
-                name:
-                  description: Resource Name.
-                  readOnly: true
-                  type: string
-                tags:
-                  additionalProperties:
-                    type: string
-                  description: Resource tags.
-                  readOnly: true
-                  type: object
-                type:
-                  description: Resource type.
-                  readOnly: true
-                  type: string
-              type: object
-              x-ms-azure-resource: true
-          description: Properties of the storage account.
-          properties:
-            properties:
-              description: Properties of a storage account.
-              properties:
-                accountId:
-                  description: 'Internal storage account ID, which is not visible to tenant.'
-                  readOnly: true
-                  type: string
-                accountStatus:
-                  description: The state of storage account in WAC.
-                  enum:
-                    - Active
-                    - Deleted
-                    - OutOfRetentionPeriod
-                    - Recycled
-                  type: string
-                  x-ms-enum:
-                    modelAsString: true
-                    name: StorageAccountStatus
-                accountType:
-                  description: Storage account type.
-                  enum:
-                    - Standard_LRS
-                    - Standard_GRS
-                    - Standard_ZRS
-                    - Standard_RAGRS
-                    - Premium_LRS
-                  type: string
-                  x-ms-enum:
-                    modelAsString: true
-                    name: StorageAccountType
-                acquisitionOperationCount:
-                  description: The count of acquisitions in the storage account.
-                  format: int32
-                  readOnly: true
-                  type: integer
-                alternateName:
-                  description: Alternative storage account name being used during undelete operation.
-                  readOnly: true
-                  type: string
-                creationTime:
-                  description: The creation date and time of storage account in UTC.
-                  readOnly: true
-                  type: string
-                currentOperation:
-                  description: The permissions of storage account in WAC.
-                  enum:
-                    - None
-                    - Create
-                    - Update
-                    - Suspend
-                    - Delete
-                    - Undelete
-                  readOnly: true
-                  type: string
-                  x-ms-enum:
-                    modelAsString: true
-                    name: StorageAccountOperation
-                customDomain:
-                  description: The custom domain the user assigned to this storage account.
-                  readOnly: true
-                  type: string
-                deletedTime:
-                  description: The date-time when the storage account was deleted.
-                  format: date-time
-                  readOnly: true
-                  type: string
-                permissions:
-                  description: Current operation being performed on Storage Account
-                  enum:
-                    - Empty
-                    - None
-                    - Read
-                    - Delete
-                    - Write
-                    - Full
-                  type: string
-                  x-ms-enum:
-                    modelAsString: true
-                    name: WacAccountPermissions
-                primaryEndpoints:
-                  additionalProperties:
-                    type: string
-                  description: 'The URLs that are used to perform a retrieval of a public BLOB, queue, or table object.'
-                  readOnly: true
-                primaryLocation:
-                  description: The primary location for the storage account.
-                  readOnly: true
-                  type: string
-                provisioningState:
-                  description: Storage account state.
-                  enum:
-                    - Creating
-                    - Succeeded
-                    - Suspended
-                  readOnly: true
-                  type: string
-                  x-ms-enum:
-                    modelAsString: true
-                    name: StorageAccountState
-                recoveredTime:
-                  description: The time when the storage account is undeleted.
-                  format: date-time
-                  readOnly: true
-                  type: string
-                recycledTime:
-                  description: The time when the storage account is physically deleted.
-                  format: date-time
-                  readOnly: true
-                  type: string
-                resourceAdminApiVersion:
-                  description: Storage admin REST API version.
-                  readOnly: true
-                  type: string
-                statusOfPrimary:
-                  description: Gets the status indicating whether the primary location of the storage account is available or unavailable.
-                  enum:
-                    - Available
-                    - Unavailable
-                  readOnly: true
-                  type: string
-                  x-ms-enum:
-                    modelAsString: true
-                    name: LocationStatus
-                tenantResourceGroupName:
-                  description: The name of resource group under which the storage account locates.
-                  readOnly: true
-                  type: string
-                tenantStorageAccountName:
-                  description: Storage account name from tenant view.
-                  readOnly: true
-                  type: string
-                tenantSubscriptionId:
-                  description: Subscription ID of the subscription under which the storage account locates.
-                  readOnly: true
-                  type: string
-                tenantViewId:
-                  description: Resource URI of storage account from tenant view.
-                  readOnly: true
-                  type: string
-                wacInternalState:
-                  description: Current operation being performed on Storage Account
-                  enum:
-                    - None
-                    - Active
-                    - Deleted
-                    - AboveQuota
-                    - Suspended
-                    - All
-                  type: string
-                  x-ms-enum:
-                    modelAsString: true
-                    name: WacAccountStates
-              type: object
-          type: object
+          $ref: '#/definitions/StorageAccount'
         readOnly: true
         type: array
     type: object
@@ -1215,28 +489,12 @@ definitions:
         readOnly: true
         type: string
       accountStatus:
-        description: The state of storage account in WAC.
-        enum:
-          - Active
-          - Deleted
-          - OutOfRetentionPeriod
-          - Recycled
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: StorageAccountStatus
+        $ref: '#/definitions/StorageAccountStatus'
+        description: The status of storage account.
       accountType:
+        $ref: '#/definitions/StorageAccountType'
         description: Storage account type.
-        enum:
-          - Standard_LRS
-          - Standard_GRS
-          - Standard_ZRS
-          - Standard_RAGRS
-          - Premium_LRS
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: StorageAccountType
+        readOnly: true
       acquisitionOperationCount:
         description: The count of acquisitions in the storage account.
         format: int32
@@ -1251,19 +509,9 @@ definitions:
         readOnly: true
         type: string
       currentOperation:
-        description: The permissions of storage account in WAC.
-        enum:
-          - None
-          - Create
-          - Update
-          - Suspend
-          - Delete
-          - Undelete
+        $ref: '#/definitions/StorageAccountOperation'
+        description: Current operation being performed on Storage Account
         readOnly: true
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: StorageAccountOperation
       customDomain:
         description: The custom domain the user assigned to this storage account.
         readOnly: true
@@ -1274,18 +522,9 @@ definitions:
         readOnly: true
         type: string
       permissions:
-        description: Current operation being performed on Storage Account
-        enum:
-          - Empty
-          - None
-          - Read
-          - Delete
-          - Write
-          - Full
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: WacAccountPermissions
+        $ref: '#/definitions/WacAccountPermissions'
+        description: The permissions on the storage account.
+        readOnly: true
       primaryEndpoints:
         additionalProperties:
           type: string
@@ -1296,16 +535,9 @@ definitions:
         readOnly: true
         type: string
       provisioningState:
-        description: Storage account state.
-        enum:
-          - Creating
-          - Succeeded
-          - Suspended
+        $ref: '#/definitions/StorageAccountState'
+        description: The provisioning state of storage account.
         readOnly: true
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: StorageAccountState
       recoveredTime:
         description: The time when the storage account is undeleted.
         format: date-time
@@ -1321,15 +553,9 @@ definitions:
         readOnly: true
         type: string
       statusOfPrimary:
-        description: Gets the status indicating whether the primary location of the storage account is available or unavailable.
-        enum:
-          - Available
-          - Unavailable
+        $ref: '#/definitions/LocationStatus'
+        description: The status of primary location of storage account.
         readOnly: true
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: LocationStatus
       tenantResourceGroupName:
         description: The name of resource group under which the storage account locates.
         readOnly: true
@@ -1347,18 +573,9 @@ definitions:
         readOnly: true
         type: string
       wacInternalState:
-        description: Current operation being performed on Storage Account
-        enum:
-          - None
-          - Active
-          - Deleted
-          - AboveQuota
-          - Suspended
-          - All
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: WacAccountStates
+        $ref: '#/definitions/WacAccountStates'
+        description: The internal state of storage account in WAC.
+        readOnly: true
     type: object
   StorageAccountState:
     description: Storage account state.

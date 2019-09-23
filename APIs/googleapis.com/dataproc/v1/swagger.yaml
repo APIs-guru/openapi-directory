@@ -664,13 +664,13 @@ paths:
         - projects
   '/v1/{name}':
     delete:
-      description: Deletes a workflow template. It does not cancel in-progress workflows.
-      operationId: dataproc.projects.locations.workflowTemplates.delete
+      description: Deletes an autoscaling policy. It is an error to delete an autoscaling policy that is in use by one or more clusters.
+      operationId: dataproc.projects.regions.autoscalingPolicies.delete
       parameters:
         - description: |-
-            Required. The resource name of the workflow template, as described in https://cloud.google.com/apis/design/resource_names.
-            For projects.regions.workflowTemplates.delete, the resource name of the template has the following format:  projects/{project_id}/regions/{region}/workflowTemplates/{template_id}
-            For projects.locations.workflowTemplates.instantiate, the resource name  of the template has the following format:  projects/{project_id}/locations/{location}/workflowTemplates/{template_id}
+            Required. The "resource name" of the autoscaling policy, as described in https://cloud.google.com/apis/design/resource_names.
+            For projects.regions.autoscalingPolicies.delete, the resource name  of the policy has the following format:  projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}
+            For projects.locations.autoscalingPolicies.delete, the resource name  of the policy has the following format:  projects/{project_id}/locations/{location}/autoscalingPolicies/{policy_id}
           in: path
           name: name
           required: true
@@ -693,26 +693,18 @@ paths:
       tags:
         - projects
     get:
-      description: Retrieves the latest workflow template.Can retrieve previously instantiated template by specifying optional version parameter.
-      operationId: dataproc.projects.locations.workflowTemplates.get
+      description: Retrieves autoscaling policy.
+      operationId: dataproc.projects.regions.autoscalingPolicies.get
       parameters:
         - description: |-
-            Required. The resource name of the workflow template, as described in https://cloud.google.com/apis/design/resource_names.
-            For projects.regions.workflowTemplates.get, the resource name of the  template has the following format:  projects/{project_id}/regions/{region}/workflowTemplates/{template_id}
-            For projects.locations.workflowTemplates.get, the resource name of the  template has the following format:  projects/{project_id}/locations/{location}/workflowTemplates/{template_id}
+            Required. The "resource name" of the autoscaling policy, as described in https://cloud.google.com/apis/design/resource_names.
+            For projects.regions.autoscalingPolicies.get, the resource name  of the policy has the following format:  projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}
+            For projects.locations.autoscalingPolicies.get, the resource name  of the policy has the following format:  projects/{project_id}/locations/{location}/autoscalingPolicies/{policy_id}
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - description: The standard list page size.
-          in: query
-          name: pageSize
-          type: integer
-        - description: The standard list page token.
-          in: query
-          name: pageToken
-          type: string
         - description: 'Optional. The version of workflow template to retrieve. Only previously instantiated versions can be retrieved.If unspecified, retrieves the current version.'
           in: query
           name: version
@@ -721,7 +713,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/WorkflowTemplate'
+            $ref: '#/definitions/AutoscalingPolicy'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -742,17 +734,17 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     put:
-      description: Updates (replaces) workflow template. The updated template must contain version that matches the current server version.
-      operationId: dataproc.projects.locations.workflowTemplates.update
+      description: 'Updates (replaces) autoscaling policy.Disabled check for update_mask, because all updates will be full replacements.'
+      operationId: dataproc.projects.regions.autoscalingPolicies.update
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/WorkflowTemplate'
+            $ref: '#/definitions/AutoscalingPolicy'
         - description: |-
-            Output only. The resource name of the workflow template, as described in https://cloud.google.com/apis/design/resource_names.
-            For projects.regions.workflowTemplates, the resource name of the  template has the following format:  projects/{project_id}/regions/{region}/workflowTemplates/{template_id}
-            For projects.locations.workflowTemplates, the resource name of the  template has the following format:  projects/{project_id}/locations/{location}/workflowTemplates/{template_id}
+            Output only. The "resource name" of the autoscaling policy, as described in https://cloud.google.com/apis/design/resource_names.
+            For projects.regions.autoscalingPolicies, the resource name of the  policy has the following format:  projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}
+            For projects.locations.autoscalingPolicies, the resource name of the  policy has the following format:  projects/{project_id}/locations/{location}/autoscalingPolicies/{policy_id}
           in: path
           name: name
           required: true
@@ -762,7 +754,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/WorkflowTemplate'
+            $ref: '#/definitions/AutoscalingPolicy'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -820,7 +812,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Instantiates a template and begins execution.The returned Operation can be used to track execution of workflow by polling operations.get. The Operation will complete when entire workflow is finished.The running workflow can be aborted via operations.cancel. This will cause any inflight jobs to be cancelled and workflow-owned clusters to be deleted.The Operation.metadata will be WorkflowMetadata. Also see Using WorkflowMetadata.On successful completion, Operation.response will be Empty.'
-      operationId: dataproc.projects.locations.workflowTemplates.instantiate
+      operationId: dataproc.projects.regions.workflowTemplates.instantiate
       parameters:
         - in: body
           name: body
@@ -847,10 +839,85 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
+  '/v1/{parent}/autoscalingPolicies':
+    get:
+      description: Lists autoscaling policies in the project.
+      operationId: dataproc.projects.regions.autoscalingPolicies.list
+      parameters:
+        - description: Optional. The maximum number of results to return in each response. Must be less than or equal to 1000. Defaults to 100.
+          in: query
+          name: pageSize
+          type: integer
+        - description: 'Optional. The page token, returned by a previous call, to request the next page of results.'
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
+            Required. The "resource name" of the region or location, as described in https://cloud.google.com/apis/design/resource_names.
+            For projects.regions.autoscalingPolicies.list, the resource name  of the region has the following format:  projects/{project_id}/regions/{region}
+            For projects.locations.autoscalingPolicies.list, the resource name  of the location has the following format:  projects/{project_id}/locations/{location}
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListAutoscalingPoliciesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Creates new autoscaling policy.
+      operationId: dataproc.projects.regions.autoscalingPolicies.create
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AutoscalingPolicy'
+        - description: |-
+            Required. The "resource name" of the region or location, as described in https://cloud.google.com/apis/design/resource_names.
+            For projects.regions.autoscalingPolicies.create, the resource name  of the region has the following format:  projects/{project_id}/regions/{region}
+            For projects.locations.autoscalingPolicies.create, the resource name  of the location has the following format:  projects/{project_id}/locations/{location}
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AutoscalingPolicy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
   '/v1/{parent}/workflowTemplates':
     get:
       description: Lists workflows that match the specified filter in the request.
-      operationId: dataproc.projects.locations.workflowTemplates.list
+      operationId: dataproc.projects.regions.workflowTemplates.list
       parameters:
         - description: Optional. The maximum number of results to return in each response.
           in: query
@@ -895,7 +962,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates new workflow template.
-      operationId: dataproc.projects.locations.workflowTemplates.create
+      operationId: dataproc.projects.regions.workflowTemplates.create
       parameters:
         - in: body
           name: body
@@ -937,7 +1004,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Instantiates a template and begins execution.This method is equivalent to executing the sequence CreateWorkflowTemplate, InstantiateWorkflowTemplate, DeleteWorkflowTemplate.The returned Operation can be used to track execution of workflow by polling operations.get. The Operation will complete when entire workflow is finished.The running workflow can be aborted via operations.cancel. This will cause any inflight jobs to be cancelled and workflow-owned clusters to be deleted.The Operation.metadata will be WorkflowMetadata. Also see Using WorkflowMetadata.On successful completion, Operation.response will be Empty.'
-      operationId: dataproc.projects.locations.workflowTemplates.instantiateInline
+      operationId: dataproc.projects.regions.workflowTemplates.instantiateInline
       parameters:
         - in: body
           name: body
@@ -983,7 +1050,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
-      operationId: dataproc.projects.locations.workflowTemplates.getIamPolicy
+      operationId: dataproc.projects.regions.jobs.getIamPolicy
       parameters:
         - in: body
           name: body
@@ -1022,7 +1089,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Sets the access control policy on the specified resource. Replaces any existing policy.
-      operationId: dataproc.projects.locations.workflowTemplates.setIamPolicy
+      operationId: dataproc.projects.regions.jobs.setIamPolicy
       parameters:
         - in: body
           name: body
@@ -1061,7 +1128,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a NOT_FOUND error.Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may "fail open" without warning.'
-      operationId: dataproc.projects.locations.workflowTemplates.testIamPermissions
+      operationId: dataproc.projects.regions.jobs.testIamPermissions
       parameters:
         - in: body
           name: body
@@ -1100,6 +1167,72 @@ definitions:
           projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80
           nvidia-tesla-k80Auto Zone Exception: If you are using the Cloud Dataproc Auto Zone Placement feature, you must use the short name of the accelerator type resource, for example, nvidia-tesla-k80.
         type: string
+    type: object
+  AutoscalingConfig:
+    description: Autoscaling Policy config associated with the cluster.
+    properties:
+      policyUri:
+        description: |-
+          Optional. The autoscaling policy used by the cluster.Only resource names including projectid and location (region) are valid. Examples:
+          https://www.googleapis.com/compute/v1/projects/[project_id]/locations/[dataproc_region]/autoscalingPolicies/[policy_id]
+          projects/[project_id]/locations/[dataproc_region]/autoscalingPolicies/[policy_id]Note that the policy must be in the same project and Cloud Dataproc region.
+        type: string
+    type: object
+  AutoscalingPolicy:
+    description: Describes an autoscaling policy for Dataproc cluster autoscaler.
+    properties:
+      basicAlgorithm:
+        $ref: '#/definitions/BasicAutoscalingAlgorithm'
+      id:
+        description: 'Required. The policy id.The id must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). Cannot begin or end with underscore or hyphen. Must consist of between 3 and 50 characters.'
+        type: string
+      name:
+        description: |-
+          Output only. The "resource name" of the autoscaling policy, as described in https://cloud.google.com/apis/design/resource_names.
+          For projects.regions.autoscalingPolicies, the resource name of the  policy has the following format:  projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}
+          For projects.locations.autoscalingPolicies, the resource name of the  policy has the following format:  projects/{project_id}/locations/{location}/autoscalingPolicies/{policy_id}
+        type: string
+      secondaryWorkerConfig:
+        $ref: '#/definitions/InstanceGroupAutoscalingPolicyConfig'
+        description: Optional. Describes how the autoscaler will operate for secondary workers.
+      workerConfig:
+        $ref: '#/definitions/InstanceGroupAutoscalingPolicyConfig'
+        description: Required. Describes how the autoscaler will operate for primary workers.
+    type: object
+  BasicAutoscalingAlgorithm:
+    description: Basic algorithm for autoscaling.
+    properties:
+      cooldownPeriod:
+        description: 'Optional. Duration between scaling events. A scaling period starts after the update operation from the previous event has completed.Bounds: 2m, 1d. Default: 2m.'
+        format: google-duration
+        type: string
+      yarnConfig:
+        $ref: '#/definitions/BasicYarnAutoscalingConfig'
+        description: Required. YARN autoscaling configuration.
+    type: object
+  BasicYarnAutoscalingConfig:
+    description: Basic autoscaling configurations for YARN.
+    properties:
+      gracefulDecommissionTimeout:
+        description: 'Required. Timeout for YARN graceful decommissioning of Node Managers. Specifies the duration to wait for jobs to complete before forcefully removing workers (and potentially interrupting jobs). Only applicable to downscaling operations.Bounds: 0s, 1d.'
+        format: google-duration
+        type: string
+      scaleDownFactor:
+        description: 'Required. Fraction of average pending memory in the last cooldown period for which to remove workers. A scale-down factor of 1 will result in scaling down so that there is no available memory remaining after the update (more aggressive scaling). A scale-down factor of 0 disables removing workers, which can be beneficial for autoscaling a single job.Bounds: 0.0, 1.0.'
+        format: double
+        type: number
+      scaleDownMinWorkerFraction:
+        description: 'Optional. Minimum scale-down threshold as a fraction of total cluster size before scaling occurs. For example, in a 20-worker cluster, a threshold of 0.1 means the autoscaler must recommend at least a 2 worker scale-down for the cluster to scale. A threshold of 0 means the autoscaler will scale down on any recommended change.Bounds: 0.0, 1.0. Default: 0.0.'
+        format: double
+        type: number
+      scaleUpFactor:
+        description: 'Required. Fraction of average pending memory in the last cooldown period for which to add workers. A scale-up factor of 1.0 will result in scaling up so that there is no pending memory remaining after the update (more aggressive scaling). A scale-up factor closer to 0 will result in a smaller magnitude of scaling up (less aggressive scaling).Bounds: 0.0, 1.0.'
+        format: double
+        type: number
+      scaleUpMinWorkerFraction:
+        description: 'Optional. Minimum scale-up threshold as a fraction of total cluster size before scaling occurs. For example, in a 20-worker cluster, a threshold of 0.1 means the autoscaler must recommend at least a 2-worker scale-up for the cluster to scale. A threshold of 0 means the autoscaler will scale up on any recommended change.Bounds: 0.0, 1.0. Default: 0.0.'
+        format: double
+        type: number
     type: object
   Binding:
     description: Associates members with a role.
@@ -1162,6 +1295,9 @@ definitions:
   ClusterConfig:
     description: The cluster config.
     properties:
+      autoscalingConfig:
+        $ref: '#/definitions/AutoscalingConfig'
+        description: Optional. Autoscaling config for the policy associated with the cluster. Cluster does not autoscale if this field is unset.
       configBucket:
         description: 'Optional. A Google Cloud Storage bucket used to stage job dependencies, config files, and job driver console output. If you do not specify a staging bucket, Cloud Dataproc will determine a Cloud Storage location (US, ASIA, or EU) for your cluster''s staging bucket according to the Google Compute Engine zone where your cluster is deployed, and then create and manage this project-level, per-location bucket (see Cloud Dataproc staging bucket).'
         type: string
@@ -1458,7 +1594,7 @@ definitions:
     description: Encapsulates settings provided to GetIamPolicy.
     properties:
       requestedPolicyVersion:
-        description: 'Optional. The policy format version to be returned. Acceptable values are 0, 1, and 3. If the value is 0, or the field is omitted, policy format version 1 will be returned.'
+        description: 'Optional. The policy format version to be returned.Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected.Requests for policies with any conditional bindings must specify version 3. Policies without any conditional bindings may specify any valid value or leave the field unset.'
         format: int32
         type: integer
     type: object
@@ -1527,6 +1663,22 @@ definitions:
           type: string
         description: 'Optional. Mapping of query variable names to values (equivalent to the Hive command: SET name="value";).'
         type: object
+    type: object
+  InstanceGroupAutoscalingPolicyConfig:
+    description: 'Configuration for the size bounds of an instance group, including its proportional size to other groups.'
+    properties:
+      maxInstances:
+        description: 'Optional. Maximum number of instances for this group. Required for primary workers. Note that by default, clusters will not use secondary workers. Required for secondary workers if the minimum secondary instances is set.Primary workers - Bounds: [min_instances, ). Required. Secondary workers - Bounds: [min_instances, ). Default: 0.'
+        format: int32
+        type: integer
+      minInstances:
+        description: 'Optional. Minimum number of instances for this group.Primary workers - Bounds: 2, max_instances. Default: 2. Secondary workers - Bounds: 0, max_instances. Default: 0.'
+        format: int32
+        type: integer
+      weight:
+        description: 'Optional. Weight for the instance group, which is used to determine the fraction of total workers in the cluster from this instance group. For example, if primary workers have weight 2, and secondary workers have weight 1, the cluster will have approximately 2 primary workers for each secondary worker.The cluster may not reach the specified balance if constrained by min/max bounds or other autoscaling settings. For example, if max_instances for secondary workers is 0, then only primary workers will be added. The cluster can also be out of balance when created.If weight is not set on any instance group, the cluster will default to equal weight for all groups: the cluster will attempt to maintain an equal number of workers in each group within the configured size bounds for each group. If weight is set for one group only, the cluster will default to zero weight on the unset group. For example if weight is set only on primary workers, the cluster will use primary workers only and no secondary workers.'
+        format: int32
+        type: integer
     type: object
   InstanceGroupConfig:
     description: 'Optional. The config settings for Compute Engine resources in an instance group, such as a master or worker group.'
@@ -1733,6 +1885,9 @@ definitions:
       kmsKeyUri:
         description: Required. The uri of the KMS key used to encrypt various sensitive files.
         type: string
+      realm:
+        description: 'Optional. The name of the on-cluster Kerberos realm. If not specified, the uppercased domain of hostnames will be the realm.'
+        type: string
       rootPrincipalPasswordUri:
         description: Required. The Cloud Storage URI of a KMS encrypted file containing the root principal password.
         type: string
@@ -1766,6 +1921,18 @@ definitions:
         description: Output only. The time when cluster became idle (most recent job finished) and became eligible for deletion due to idleness.
         format: google-datetime
         type: string
+    type: object
+  ListAutoscalingPoliciesResponse:
+    description: A response to a request to list autoscaling policies in a project.
+    properties:
+      nextPageToken:
+        description: Output only. This token is included in the response if there are more results to fetch.
+        type: string
+      policies:
+        description: Output only. Autoscaling policies list.
+        items:
+          $ref: '#/definitions/AutoscalingPolicy'
+        type: array
     type: object
   ListClustersResponse:
     description: The list of all clusters in a project.
@@ -2015,7 +2182,7 @@ definitions:
         format: byte
         type: string
       version:
-        description: Deprecated.
+        description: 'Specifies the format of the policy.Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected.Policies with any conditional bindings must specify version 3. Policies without any conditional bindings may specify any valid value or leave the field unset.'
         format: int32
         type: integer
     type: object
