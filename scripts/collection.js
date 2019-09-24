@@ -1216,7 +1216,7 @@ function convertToSwagger(spec,exPatch,command) {
 function parseHost(swagger, altSource) {
   var swHost = swagger.host;
 
-  if (swagger.openapi) {
+  if (swagger.openapi && swagger.servers) {
     let u = url.parse(swagger.servers[0].url);
     swHost = u.hostname;
   }
