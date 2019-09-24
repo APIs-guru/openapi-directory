@@ -1,118 +1,169 @@
 swagger: '2.0'
-schemes:
-  - https
-  - http
-host: license-manager.amazonaws.com
-basePath: /
-x-hasEquivalentPaths: true
 info:
+  version: '2018-08-01'
+  x-release: v4
+  title: AWS License Manager
+  description: '<fullname> AWS License Manager </fullname> <p> <i>This is the AWS License Manager API Reference.</i> It provides descriptions, syntax, and usage examples for each of the actions and data types for License Manager. The topic for each action shows the Query API request parameters and the XML response. You can also view the XML request elements in the WSDL. </p> <p> Alternatively, you can use one of the AWS SDKs to access an API that''s tailored to the programming language or platform that you''re using. For more information, see <a href="http://aws.amazon.com/tools/#SDKs">AWS SDKs</a>. </p>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
-    email: mike.ralphson@gmail.com
     name: Mike Ralphson
+    email: mike.ralphson@gmail.com
     url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
-  description: '<fullname> AWS License Manager </fullname> <p> <i>This is the AWS License Manager API Reference.</i> It provides descriptions, syntax, and usage examples for each of the actions and data types for License Manager. The topic for each action shows the Query API request parameters and the XML response. You can also view the XML request elements in the WSDL. </p> <p> Alternatively, you can use one of the AWS SDKs to access an API that''s tailored to the programming language or platform that you''re using. For more information, see <a href="http://aws.amazon.com/tools/#SDKs">AWS SDKs</a>. </p>'
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
-  termsOfService: 'https://aws.amazon.com/service-terms/'
-  title: AWS License Manager
-  version: '2018-08-01'
+  x-providerName: amazonaws.com
+  x-serviceName: license-manager
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/license-manager-2018-08-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
   x-apiClientRegistration:
     url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
-  x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://twitter.com/awscloud/profile_image?size=original'
-  x-origin:
-    - contentType: application/json
-      converter:
-        url: 'https://github.com/mermade/aws2openapi'
-        version: 1.0.0
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/license-manager-2018-08-01.normal.json'
-      x-apisguru-direct: true
   x-preferred: true
-  x-providerName: amazonaws.com
-  x-release: v4
-  x-serviceName: license-manager
 externalDocs:
   description: Amazon Web Services documentation
   url: 'https://docs.aws.amazon.com/license-manager/'
+host: license-manager.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+x-servers:
+  - url: 'http://license-manager.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The AWS License Manager multi-region endpoint
+  - url: 'https://license-manager.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The AWS License Manager multi-region endpoint
+  - url: 'http://license-manager.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS License Manager endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://license-manager.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS License Manager endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 consumes:
   - application/json
 produces:
   - application/json
+parameters:
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
 securityDefinitions:
   hmac:
-    description: Amazon Signature authorization v4
-    in: header
-    name: Authorization
     type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
     x-amazon-apigateway-authtype: awsSigv4
 security:
   - hmac: []
-parameters:
-  X-Amz-Algorithm:
-    in: header
-    name: X-Amz-Algorithm
-    required: false
-    type: string
-  X-Amz-Content-Sha256:
-    in: header
-    name: X-Amz-Content-Sha256
-    required: false
-    type: string
-  X-Amz-Credential:
-    in: header
-    name: X-Amz-Credential
-    required: false
-    type: string
-  X-Amz-Date:
-    in: header
-    name: X-Amz-Date
-    required: false
-    type: string
-  X-Amz-Security-Token:
-    in: header
-    name: X-Amz-Security-Token
-    required: false
-    type: string
-  X-Amz-Signature:
-    in: header
-    name: X-Amz-Signature
-    required: false
-    type: string
-  X-Amz-SignedHeaders:
-    in: header
-    name: X-Amz-SignedHeaders
-    required: false
-    type: string
 paths:
   '/#X-Amz-Target=AWSLicenseManager.CreateLicenseConfiguration':
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
-      description: 'Creates a new license configuration object. A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (licensing by instance, socket, CPU, or VCPU), tenancy (shared tenancy, Amazon EC2 Dedicated Instance, Amazon EC2 Dedicated Host, or any of these), host affinity (how long a VM must be associated with a host), the number of licenses purchased and used.'
       operationId: CreateLicenseConfiguration
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/CreateLicenseConfigurationRequest'
-        - enum:
-            - AWSLicenseManager.CreateLicenseConfiguration
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: 'Creates a new license configuration object. A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (licensing by instance, socket, CPU, or VCPU), tenancy (shared tenancy, Amazon EC2 Dedicated Instance, Amazon EC2 Dedicated Host, or any of these), host affinity (how long a VM must be associated with a host), the number of licenses purchased and used.'
       responses:
         '200':
           description: Success
@@ -142,7 +193,18 @@ paths:
           description: RateLimitExceededException
           schema:
             $ref: '#/definitions/RateLimitExceededException'
-  '/#X-Amz-Target=AWSLicenseManager.DeleteLicenseConfiguration':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateLicenseConfigurationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLicenseManager.CreateLicenseConfiguration
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -151,21 +213,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSLicenseManager.DeleteLicenseConfiguration':
     post:
-      description: Deletes an existing license configuration. This action fails if the configuration is in use.
       operationId: DeleteLicenseConfiguration
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteLicenseConfigurationRequest'
-        - enum:
-            - AWSLicenseManager.DeleteLicenseConfiguration
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: Deletes an existing license configuration. This action fails if the configuration is in use.
       responses:
         '200':
           description: Success
@@ -191,7 +242,18 @@ paths:
           description: RateLimitExceededException
           schema:
             $ref: '#/definitions/RateLimitExceededException'
-  '/#X-Amz-Target=AWSLicenseManager.GetLicenseConfiguration':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteLicenseConfigurationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLicenseManager.DeleteLicenseConfiguration
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -200,21 +262,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSLicenseManager.GetLicenseConfiguration':
     post:
-      description: Returns a detailed description of a license configuration.
       operationId: GetLicenseConfiguration
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetLicenseConfigurationRequest'
-        - enum:
-            - AWSLicenseManager.GetLicenseConfiguration
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: Returns a detailed description of a license configuration.
       responses:
         '200':
           description: Success
@@ -240,7 +291,18 @@ paths:
           description: RateLimitExceededException
           schema:
             $ref: '#/definitions/RateLimitExceededException'
-  '/#X-Amz-Target=AWSLicenseManager.GetServiceSettings':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetLicenseConfigurationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLicenseManager.GetLicenseConfiguration
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -249,21 +311,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSLicenseManager.GetServiceSettings':
     post:
-      description: 'Gets License Manager settings for a region. Exposes the configured S3 bucket, SNS topic, etc., for inspection. '
       operationId: GetServiceSettings
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetServiceSettingsRequest'
-        - enum:
-            - AWSLicenseManager.GetServiceSettings
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: 'Gets License Manager settings for a region. Exposes the configured S3 bucket, SNS topic, etc., for inspection. '
       responses:
         '200':
           description: Success
@@ -285,7 +336,18 @@ paths:
           description: RateLimitExceededException
           schema:
             $ref: '#/definitions/RateLimitExceededException'
-  '/#X-Amz-Target=AWSLicenseManager.ListAssociationsForLicenseConfiguration':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetServiceSettingsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLicenseManager.GetServiceSettings
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -294,21 +356,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSLicenseManager.ListAssociationsForLicenseConfiguration':
     post:
-      description: 'Lists the resource associations for a license configuration. Resource associations need not consume licenses from a license configuration. For example, an AMI or a stopped instance may not consume a license (depending on the license rules). Use this operation to find all resources associated with a license configuration.'
       operationId: ListAssociationsForLicenseConfiguration
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListAssociationsForLicenseConfigurationRequest'
-        - enum:
-            - AWSLicenseManager.ListAssociationsForLicenseConfiguration
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: 'Lists the resource associations for a license configuration. Resource associations need not consume licenses from a license configuration. For example, an AMI or a stopped instance may not consume a license (depending on the license rules). Use this operation to find all resources associated with a license configuration.'
       responses:
         '200':
           description: Success
@@ -338,7 +389,18 @@ paths:
           description: RateLimitExceededException
           schema:
             $ref: '#/definitions/RateLimitExceededException'
-  '/#X-Amz-Target=AWSLicenseManager.ListLicenseConfigurations':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListAssociationsForLicenseConfigurationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLicenseManager.ListAssociationsForLicenseConfiguration
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -347,21 +409,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSLicenseManager.ListLicenseConfigurations':
     post:
-      description: 'Lists license configuration objects for an account, each containing the name, description, license type, and other license terms modeled from a license agreement.'
       operationId: ListLicenseConfigurations
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListLicenseConfigurationsRequest'
-        - enum:
-            - AWSLicenseManager.ListLicenseConfigurations
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: 'Lists license configuration objects for an account, each containing the name, description, license type, and other license terms modeled from a license agreement.'
       responses:
         '200':
           description: Success
@@ -391,7 +442,18 @@ paths:
           description: RateLimitExceededException
           schema:
             $ref: '#/definitions/RateLimitExceededException'
-  '/#X-Amz-Target=AWSLicenseManager.ListLicenseSpecificationsForResource':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListLicenseConfigurationsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLicenseManager.ListLicenseConfigurations
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -400,21 +462,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSLicenseManager.ListLicenseSpecificationsForResource':
     post:
-      description: Returns the license configuration for a resource.
       operationId: ListLicenseSpecificationsForResource
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListLicenseSpecificationsForResourceRequest'
-        - enum:
-            - AWSLicenseManager.ListLicenseSpecificationsForResource
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: Returns the license configuration for a resource.
       responses:
         '200':
           description: Success
@@ -440,7 +491,18 @@ paths:
           description: RateLimitExceededException
           schema:
             $ref: '#/definitions/RateLimitExceededException'
-  '/#X-Amz-Target=AWSLicenseManager.ListResourceInventory':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListLicenseSpecificationsForResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLicenseManager.ListLicenseSpecificationsForResource
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -449,21 +511,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSLicenseManager.ListResourceInventory':
     post:
-      description: Returns a detailed list of resources.
       operationId: ListResourceInventory
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListResourceInventoryRequest'
-        - enum:
-            - AWSLicenseManager.ListResourceInventory
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: Returns a detailed list of resources.
       responses:
         '200':
           description: Success
@@ -497,7 +548,18 @@ paths:
           description: RateLimitExceededException
           schema:
             $ref: '#/definitions/RateLimitExceededException'
-  '/#X-Amz-Target=AWSLicenseManager.ListTagsForResource':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListResourceInventoryRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLicenseManager.ListResourceInventory
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -506,21 +568,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSLicenseManager.ListTagsForResource':
     post:
-      description: Lists tags attached to a resource.
       operationId: ListTagsForResource
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListTagsForResourceRequest'
-        - enum:
-            - AWSLicenseManager.ListTagsForResource
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: Lists tags attached to a resource.
       responses:
         '200':
           description: Success
@@ -546,7 +597,18 @@ paths:
           description: RateLimitExceededException
           schema:
             $ref: '#/definitions/RateLimitExceededException'
-  '/#X-Amz-Target=AWSLicenseManager.ListUsageForLicenseConfiguration':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTagsForResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLicenseManager.ListTagsForResource
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -555,21 +617,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSLicenseManager.ListUsageForLicenseConfiguration':
     post:
-      description: 'Lists all license usage records for a license configuration, displaying license consumption details by resource at a selected point in time. Use this action to audit the current license consumption for any license inventory and configuration.'
       operationId: ListUsageForLicenseConfiguration
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListUsageForLicenseConfigurationRequest'
-        - enum:
-            - AWSLicenseManager.ListUsageForLicenseConfiguration
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: 'Lists all license usage records for a license configuration, displaying license consumption details by resource at a selected point in time. Use this action to audit the current license consumption for any license inventory and configuration.'
       responses:
         '200':
           description: Success
@@ -599,7 +650,18 @@ paths:
           description: RateLimitExceededException
           schema:
             $ref: '#/definitions/RateLimitExceededException'
-  '/#X-Amz-Target=AWSLicenseManager.TagResource':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListUsageForLicenseConfigurationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLicenseManager.ListUsageForLicenseConfiguration
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -608,21 +670,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSLicenseManager.TagResource':
     post:
-      description: Attach one of more tags to any resource.
       operationId: TagResource
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/TagResourceRequest'
-        - enum:
-            - AWSLicenseManager.TagResource
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: Attach one of more tags to any resource.
       responses:
         '200':
           description: Success
@@ -648,7 +699,18 @@ paths:
           description: RateLimitExceededException
           schema:
             $ref: '#/definitions/RateLimitExceededException'
-  '/#X-Amz-Target=AWSLicenseManager.UntagResource':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TagResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLicenseManager.TagResource
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -657,21 +719,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSLicenseManager.UntagResource':
     post:
-      description: Remove tags from a resource.
       operationId: UntagResource
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/UntagResourceRequest'
-        - enum:
-            - AWSLicenseManager.UntagResource
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: Remove tags from a resource.
       responses:
         '200':
           description: Success
@@ -697,7 +748,18 @@ paths:
           description: RateLimitExceededException
           schema:
             $ref: '#/definitions/RateLimitExceededException'
-  '/#X-Amz-Target=AWSLicenseManager.UpdateLicenseConfiguration':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UntagResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLicenseManager.UntagResource
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -706,21 +768,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSLicenseManager.UpdateLicenseConfiguration':
     post:
-      description: 'Modifies the attributes of an existing license configuration object. A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (Instances, cores, sockets, VCPUs), tenancy (shared or Dedicated Host), host affinity (how long a VM is associated with a host), the number of licenses purchased and used.'
       operationId: UpdateLicenseConfiguration
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/UpdateLicenseConfigurationRequest'
-        - enum:
-            - AWSLicenseManager.UpdateLicenseConfiguration
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: 'Modifies the attributes of an existing license configuration object. A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (Instances, cores, sockets, VCPUs), tenancy (shared or Dedicated Host), host affinity (how long a VM is associated with a host), the number of licenses purchased and used.'
       responses:
         '200':
           description: Success
@@ -746,7 +797,18 @@ paths:
           description: RateLimitExceededException
           schema:
             $ref: '#/definitions/RateLimitExceededException'
-  '/#X-Amz-Target=AWSLicenseManager.UpdateLicenseSpecificationsForResource':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateLicenseConfigurationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLicenseManager.UpdateLicenseConfiguration
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -755,21 +817,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSLicenseManager.UpdateLicenseSpecificationsForResource':
     post:
-      description: 'Adds or removes license configurations for a specified AWS resource. This operation currently supports updating the license specifications of AMIs, instances, and hosts. Launch templates and AWS CloudFormation templates are not managed from this operation as those resources send the license configurations directly to a resource creation operation, such as <code>RunInstances</code>.'
       operationId: UpdateLicenseSpecificationsForResource
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/UpdateLicenseSpecificationsForResourceRequest'
-        - enum:
-            - AWSLicenseManager.UpdateLicenseSpecificationsForResource
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: 'Adds or removes license configurations for a specified AWS resource. This operation currently supports updating the license specifications of AMIs, instances, and hosts. Launch templates and AWS CloudFormation templates are not managed from this operation as those resources send the license configurations directly to a resource creation operation, such as <code>RunInstances</code>.'
       responses:
         '200':
           description: Success
@@ -803,7 +854,18 @@ paths:
           description: RateLimitExceededException
           schema:
             $ref: '#/definitions/RateLimitExceededException'
-  '/#X-Amz-Target=AWSLicenseManager.UpdateServiceSettings':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateLicenseSpecificationsForResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLicenseManager.UpdateLicenseSpecificationsForResource
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -812,21 +874,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSLicenseManager.UpdateServiceSettings':
     post:
-      description: Updates License Manager service settings.
       operationId: UpdateServiceSettings
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/UpdateServiceSettingsRequest'
-        - enum:
-            - AWSLicenseManager.UpdateServiceSettings
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: Updates License Manager service settings.
       responses:
         '200':
           description: Success
@@ -852,322 +903,161 @@ paths:
           description: RateLimitExceededException
           schema:
             $ref: '#/definitions/RateLimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateServiceSettingsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLicenseManager.UpdateServiceSettings
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  AccessDeniedException: {}
-  AuthorizationException: {}
-  Boolean:
-    type: boolean
-  BoxBoolean:
-    type: boolean
-  BoxInteger:
-    type: integer
-  BoxLong:
-    type: integer
-  ConsumedLicenseSummary:
-    description: Details about license consumption.
-    properties:
-      ConsumedLicenses:
-        $ref: '#/definitions/BoxLong'
-        description: Number of licenses consumed by a resource.
-      ResourceType:
-        $ref: '#/definitions/ResourceType'
-        description: 'Resource type of the resource consuming a license (instance, host, or AMI).'
+  CreateLicenseConfigurationResponse:
     type: object
-  ConsumedLicenseSummaryList:
-    items:
-      $ref: '#/definitions/ConsumedLicenseSummary'
-    type: array
-  CreateLicenseConfigurationRequest:
     properties:
+      LicenseConfigurationArn:
+        $ref: '#/definitions/String'
+        description: ARN of the license configuration object after its creation.
+  CreateLicenseConfigurationRequest:
+    type: object
+    required:
+      - Name
+      - LicenseCountingType
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: Name of the license configuration.
       Description:
         $ref: '#/definitions/String'
         description: Human-friendly description of the license configuration.
+      LicenseCountingType:
+        $ref: '#/definitions/LicenseCountingType'
+        description: Dimension to use to track the license inventory.
       LicenseCount:
         $ref: '#/definitions/BoxLong'
         description: Number of licenses managed by the license configuration.
       LicenseCountHardLimit:
         $ref: '#/definitions/BoxBoolean'
         description: Flag indicating whether hard or soft license enforcement is used. Exceeding a hard limit results in the blocked deployment of new instances.
-      LicenseCountingType:
-        $ref: '#/definitions/LicenseCountingType'
-        description: Dimension to use to track the license inventory.
       LicenseRules:
         $ref: '#/definitions/StringList'
         description: Array of configured License Manager rules.
-      Name:
-        $ref: '#/definitions/String'
-        description: Name of the license configuration.
       Tags:
         $ref: '#/definitions/TagList'
         description: '<p>The tags to apply to the resources during launch. You can only tag instances and volumes on launch. The specified tags are applied to all instances or volumes that are created during launch. To tag a resource after it has been created, see CreateTags .</p> <p/>'
-    required:
-      - Name
-      - LicenseCountingType
+  InvalidParameterValueException: {}
+  ServerInternalException: {}
+  ResourceLimitExceededException: {}
+  AuthorizationException: {}
+  AccessDeniedException: {}
+  RateLimitExceededException: {}
+  DeleteLicenseConfigurationResponse:
     type: object
-  CreateLicenseConfigurationResponse:
-    properties:
-      LicenseConfigurationArn:
-        $ref: '#/definitions/String'
-        description: ARN of the license configuration object after its creation.
-    type: object
-  DateTime:
-    format: date-time
-    type: string
+    properties: {}
   DeleteLicenseConfigurationRequest:
+    type: object
+    required:
+      - LicenseConfigurationArn
     properties:
       LicenseConfigurationArn:
         $ref: '#/definitions/String'
         description: Unique ID of the configuration object to delete.
-    required:
-      - LicenseConfigurationArn
-    type: object
-  DeleteLicenseConfigurationResponse:
-    properties: {}
-    type: object
-  FailedDependencyException: {}
-  Filter:
-    description: 'A filter name and value pair that is used to return a more specific list of results from a describe operation. Filters can be used to match a set of resources by specific criteria, such as tags, attributes, or IDs. The filters supported by a <code>Describe</code> operation are documented with the <code>Describe</code> operation.'
-    properties:
-      Name:
-        $ref: '#/definitions/FilterName'
-        description: Name of the filter. Filter names are case-sensitive.
-      Values:
-        $ref: '#/definitions/FilterValues'
-        description: One or more filter values. Filter values are case-sensitive.
-    type: object
-  FilterLimitExceededException: {}
-  FilterName:
-    type: string
-  FilterValue:
-    type: string
-  FilterValues:
-    items:
-      $ref: '#/definitions/FilterValue'
-    type: array
-  Filters:
-    items:
-      $ref: '#/definitions/Filter'
-    type: array
-  GetLicenseConfigurationRequest:
-    properties:
-      LicenseConfigurationArn:
-        $ref: '#/definitions/String'
-        description: ARN of the license configuration being requested.
-    required:
-      - LicenseConfigurationArn
-    type: object
   GetLicenseConfigurationResponse:
+    type: object
     properties:
-      ConsumedLicenseSummaryList:
-        $ref: '#/definitions/ConsumedLicenseSummaryList'
-        description: List of summaries for consumed licenses used by various resources.
-      ConsumedLicenses:
-        $ref: '#/definitions/BoxLong'
-        description: Number of licenses assigned to resources.
-      Description:
-        $ref: '#/definitions/String'
-        description: Description of the license configuration.
-      LicenseConfigurationArn:
-        $ref: '#/definitions/String'
-        description: ARN of the license configuration requested.
       LicenseConfigurationId:
         $ref: '#/definitions/String'
         description: Unique ID for the license configuration.
-      LicenseCount:
-        $ref: '#/definitions/BoxLong'
-        description: Number of available licenses.
-      LicenseCountHardLimit:
-        $ref: '#/definitions/BoxBoolean'
-        description: Sets the number of available licenses as a hard limit.
+      LicenseConfigurationArn:
+        $ref: '#/definitions/String'
+        description: ARN of the license configuration requested.
+      Name:
+        $ref: '#/definitions/String'
+        description: Name of the license configuration.
+      Description:
+        $ref: '#/definitions/String'
+        description: Description of the license configuration.
       LicenseCountingType:
         $ref: '#/definitions/LicenseCountingType'
         description: 'Dimension on which the licenses are counted (for example, instances, cores, sockets, or VCPUs).'
       LicenseRules:
         $ref: '#/definitions/StringList'
         description: List of flexible text strings designating license rules.
-      ManagedResourceSummaryList:
-        $ref: '#/definitions/ManagedResourceSummaryList'
-        description: List of summaries of managed resources.
-      Name:
-        $ref: '#/definitions/String'
-        description: Name of the license configuration.
-      OwnerAccountId:
-        $ref: '#/definitions/String'
-        description: Owner account ID for the license configuration.
+      LicenseCount:
+        $ref: '#/definitions/BoxLong'
+        description: Number of available licenses.
+      LicenseCountHardLimit:
+        $ref: '#/definitions/BoxBoolean'
+        description: Sets the number of available licenses as a hard limit.
+      ConsumedLicenses:
+        $ref: '#/definitions/BoxLong'
+        description: Number of licenses assigned to resources.
       Status:
         $ref: '#/definitions/String'
         description: 'License configuration status (active, etc.).'
+      OwnerAccountId:
+        $ref: '#/definitions/String'
+        description: Owner account ID for the license configuration.
+      ConsumedLicenseSummaryList:
+        $ref: '#/definitions/ConsumedLicenseSummaryList'
+        description: List of summaries for consumed licenses used by various resources.
+      ManagedResourceSummaryList:
+        $ref: '#/definitions/ManagedResourceSummaryList'
+        description: List of summaries of managed resources.
       Tags:
         $ref: '#/definitions/TagList'
         description: List of tags attached to the license configuration.
+  GetLicenseConfigurationRequest:
     type: object
-  GetServiceSettingsRequest:
-    properties: {}
-    type: object
-  GetServiceSettingsResponse:
+    required:
+      - LicenseConfigurationArn
     properties:
-      EnableCrossAccountsDiscovery:
-        $ref: '#/definitions/BoxBoolean'
-        description: Indicates whether cross-account discovery has been enabled.
-      OrganizationConfiguration:
-        $ref: '#/definitions/OrganizationConfiguration'
-        description: Indicates whether AWS Organizations has been integrated with License Manager for cross-account discovery.
+      LicenseConfigurationArn:
+        $ref: '#/definitions/String'
+        description: ARN of the license configuration being requested.
+  GetServiceSettingsResponse:
+    type: object
+    properties:
       S3BucketArn:
         $ref: '#/definitions/String'
         description: 'Regional S3 bucket path for storing reports, license trail event data, discovery data, etc.'
       SnsTopicArn:
         $ref: '#/definitions/String'
         description: SNS topic configured to receive notifications from License Manager.
-    type: object
-  InvalidParameterValueException: {}
-  InvalidResourceStateException: {}
-  InventoryFilter:
-    description: An inventory filter object.
-    properties:
-      Condition:
-        $ref: '#/definitions/InventoryFilterCondition'
-        description: The condition of the filter.
-      Name:
-        $ref: '#/definitions/String'
-        description: The name of the filter.
-      Value:
-        $ref: '#/definitions/String'
-        description: Value of the filter.
-    required:
-      - Name
-      - Condition
-    type: object
-  InventoryFilterCondition:
-    enum:
-      - EQUALS
-      - NOT_EQUALS
-      - BEGINS_WITH
-      - CONTAINS
-    type: string
-  InventoryFilterList:
-    items:
-      $ref: '#/definitions/InventoryFilter'
-    type: array
-  LicenseConfiguration:
-    description: 'A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (licensing by instance, socket, CPU, or VCPU), tenancy (shared tenancy, Amazon EC2 Dedicated Instance, Amazon EC2 Dedicated Host, or any of these), host affinity (how long a VM must be associated with a host), the number of licenses purchased and used.'
-    properties:
-      ConsumedLicenseSummaryList:
-        $ref: '#/definitions/ConsumedLicenseSummaryList'
-        description: List of summaries for licenses consumed by various resources.
-      ConsumedLicenses:
-        $ref: '#/definitions/BoxLong'
-        description: 'Number of licenses consumed. '
-      Description:
-        $ref: '#/definitions/String'
-        description: Description of the license configuration.
-      LicenseConfigurationArn:
-        $ref: '#/definitions/String'
-        description: ARN of the <code>LicenseConfiguration</code> object.
-      LicenseConfigurationId:
-        $ref: '#/definitions/String'
-        description: Unique ID of the <code>LicenseConfiguration</code> object.
-      LicenseCount:
-        $ref: '#/definitions/BoxLong'
-        description: Number of licenses managed by the license configuration.
-      LicenseCountHardLimit:
+      OrganizationConfiguration:
+        $ref: '#/definitions/OrganizationConfiguration'
+        description: Indicates whether AWS Organizations has been integrated with License Manager for cross-account discovery.
+      EnableCrossAccountsDiscovery:
         $ref: '#/definitions/BoxBoolean'
-        description: Sets the number of available licenses as a hard limit.
-      LicenseCountingType:
-        $ref: '#/definitions/LicenseCountingType'
-        description: Dimension to use to track license inventory.
-      LicenseRules:
-        $ref: '#/definitions/StringList'
-        description: Array of configured License Manager rules.
-      ManagedResourceSummaryList:
-        $ref: '#/definitions/ManagedResourceSummaryList'
-        description: List of summaries for managed resources.
-      Name:
-        $ref: '#/definitions/String'
-        description: Name of the license configuration.
-      OwnerAccountId:
-        $ref: '#/definitions/String'
-        description: Account ID of the license configuration's owner.
-      Status:
-        $ref: '#/definitions/String'
-        description: Status of the license configuration.
+        description: Indicates whether cross-account discovery has been enabled.
+  GetServiceSettingsRequest:
     type: object
-  LicenseConfigurationAssociation:
-    description: Describes a server resource that is associated with a license configuration.
-    properties:
-      AssociationTime:
-        $ref: '#/definitions/DateTime'
-        description: Time when the license configuration was associated with the resource.
-      ResourceArn:
-        $ref: '#/definitions/String'
-        description: ARN of the resource associated with the license configuration.
-      ResourceOwnerId:
-        $ref: '#/definitions/String'
-        description: ID of the AWS account that owns the resource consuming licenses.
-      ResourceType:
-        $ref: '#/definitions/ResourceType'
-        description: Type of server resource.
+    properties: {}
+  ListAssociationsForLicenseConfigurationResponse:
     type: object
-  LicenseConfigurationAssociations:
-    items:
-      $ref: '#/definitions/LicenseConfigurationAssociation'
-    type: array
-  LicenseConfigurationStatus:
-    enum:
-      - AVAILABLE
-      - DISABLED
-    type: string
-  LicenseConfigurationUsage:
-    description: Contains details of the usage of each resource from the license pool.
     properties:
-      AssociationTime:
-        $ref: '#/definitions/DateTime'
-        description: Time when the license configuration was initially associated with a resource.
-      ConsumedLicenses:
-        $ref: '#/definitions/BoxLong'
-        description: Number of licenses consumed out of the total provisioned in the license configuration.
-      ResourceArn:
+      LicenseConfigurationAssociations:
+        $ref: '#/definitions/LicenseConfigurationAssociations'
+        description: 'Lists association objects for the license configuration, each containing the association time, number of consumed licenses, resource ARN, resource ID, account ID that owns the resource, resource size, and resource type.'
+      NextToken:
         $ref: '#/definitions/String'
-        description: ARN of the resource associated with a license configuration.
-      ResourceOwnerId:
-        $ref: '#/definitions/String'
-        description: ID of the account that owns a resource that is associated with the license configuration.
-      ResourceStatus:
-        $ref: '#/definitions/String'
-        description: Status of a resource associated with the license configuration.
-      ResourceType:
-        $ref: '#/definitions/ResourceType'
-        description: Type of resource associated with athe license configuration.
+        description: Token for the next set of results.
+  ListAssociationsForLicenseConfigurationRequest:
     type: object
-  LicenseConfigurationUsageList:
-    items:
-      $ref: '#/definitions/LicenseConfigurationUsage'
-    type: array
-  LicenseConfigurations:
-    items:
-      $ref: '#/definitions/LicenseConfiguration'
-    type: array
-  LicenseCountingType:
-    enum:
-      - vCPU
-      - Instance
-      - Core
-      - Socket
-    type: string
-  LicenseSpecification:
-    description: Object used for associating a license configuration with a resource.
-    properties:
-      LicenseConfigurationArn:
-        $ref: '#/definitions/String'
-        description: ARN of the <code>LicenseConfiguration</code> object.
     required:
       - LicenseConfigurationArn
-    type: object
-  LicenseSpecifications:
-    items:
-      $ref: '#/definitions/LicenseSpecification'
-    type: array
-  LicenseUsageException: {}
-  ListAssociationsForLicenseConfigurationRequest:
     properties:
       LicenseConfigurationArn:
         $ref: '#/definitions/String'
@@ -1178,23 +1068,19 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: Token for the next set of results.
-    required:
-      - LicenseConfigurationArn
+  FilterLimitExceededException: {}
+  ListLicenseConfigurationsResponse:
     type: object
-  ListAssociationsForLicenseConfigurationResponse:
     properties:
-      LicenseConfigurationAssociations:
-        $ref: '#/definitions/LicenseConfigurationAssociations'
-        description: 'Lists association objects for the license configuration, each containing the association time, number of consumed licenses, resource ARN, resource ID, account ID that owns the resource, resource size, and resource type.'
+      LicenseConfigurations:
+        $ref: '#/definitions/LicenseConfigurations'
+        description: Array of license configuration objects.
       NextToken:
         $ref: '#/definitions/String'
         description: Token for the next set of results.
-    type: object
   ListLicenseConfigurationsRequest:
+    type: object
     properties:
-      Filters:
-        $ref: '#/definitions/Filters'
-        description: One or more filters.
       LicenseConfigurationArns:
         $ref: '#/definitions/StringList'
         description: An array of ARNs for the calling account’s license configurations.
@@ -1204,31 +1090,11 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: Token for the next set of results.
-    type: object
-  ListLicenseConfigurationsResponse:
-    properties:
-      LicenseConfigurations:
-        $ref: '#/definitions/LicenseConfigurations'
-        description: Array of license configuration objects.
-      NextToken:
-        $ref: '#/definitions/String'
-        description: Token for the next set of results.
-    type: object
-  ListLicenseSpecificationsForResourceRequest:
-    properties:
-      MaxResults:
-        $ref: '#/definitions/BoxInteger'
-        description: 'Maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
-      NextToken:
-        $ref: '#/definitions/String'
-        description: Token for the next set of results.
-      ResourceArn:
-        $ref: '#/definitions/String'
-        description: ARN of an AMI or Amazon EC2 instance that has an associated license configuration.
-    required:
-      - ResourceArn
-    type: object
+      Filters:
+        $ref: '#/definitions/Filters'
+        description: One or more filters.
   ListLicenseSpecificationsForResourceResponse:
+    type: object
     properties:
       LicenseSpecifications:
         $ref: '#/definitions/LicenseSpecifications'
@@ -1236,47 +1102,70 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: Token for the next set of results.
+  ListLicenseSpecificationsForResourceRequest:
     type: object
-  ListResourceInventoryRequest:
+    required:
+      - ResourceArn
     properties:
-      Filters:
-        $ref: '#/definitions/InventoryFilterList'
-        description: One or more filters.
+      ResourceArn:
+        $ref: '#/definitions/String'
+        description: ARN of an AMI or Amazon EC2 instance that has an associated license configuration.
       MaxResults:
         $ref: '#/definitions/BoxInteger'
         description: 'Maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
       NextToken:
         $ref: '#/definitions/String'
         description: Token for the next set of results.
-    type: object
   ListResourceInventoryResponse:
+    type: object
     properties:
-      NextToken:
-        $ref: '#/definitions/String'
-        description: Token for the next set of results.
       ResourceInventoryList:
         $ref: '#/definitions/ResourceInventoryList'
         description: The detailed list of resources.
-    type: object
-  ListTagsForResourceRequest:
-    properties:
-      ResourceArn:
+      NextToken:
         $ref: '#/definitions/String'
-        description: ARN for the resource.
-    required:
-      - ResourceArn
+        description: Token for the next set of results.
+  ListResourceInventoryRequest:
     type: object
+    properties:
+      MaxResults:
+        $ref: '#/definitions/BoxInteger'
+        description: 'Maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Token for the next set of results.
+      Filters:
+        $ref: '#/definitions/InventoryFilterList'
+        description: One or more filters.
+  FailedDependencyException: {}
   ListTagsForResourceResponse:
+    type: object
     properties:
       Tags:
         $ref: '#/definitions/TagList'
         description: List of tags attached to the resource.
+  ListTagsForResourceRequest:
     type: object
-  ListUsageForLicenseConfigurationRequest:
+    required:
+      - ResourceArn
     properties:
-      Filters:
-        $ref: '#/definitions/Filters'
-        description: List of filters to apply.
+      ResourceArn:
+        $ref: '#/definitions/String'
+        description: ARN for the resource.
+  ListUsageForLicenseConfigurationResponse:
+    type: object
+    properties:
+      LicenseConfigurationUsageList:
+        $ref: '#/definitions/LicenseConfigurationUsageList'
+        description: An array of <code>LicenseConfigurationUsage</code> objects.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Token for the next set of results.
+  ListUsageForLicenseConfigurationRequest:
+    type: object
+    required:
+      - LicenseConfigurationArn
+    properties:
       LicenseConfigurationArn:
         $ref: '#/definitions/String'
         description: ARN of the targeted <code>LicenseConfiguration</code> object.
@@ -1286,101 +1175,17 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: Token for the next set of results.
-    required:
-      - LicenseConfigurationArn
+      Filters:
+        $ref: '#/definitions/Filters'
+        description: List of filters to apply.
+  TagResourceResponse:
     type: object
-  ListUsageForLicenseConfigurationResponse:
-    properties:
-      LicenseConfigurationUsageList:
-        $ref: '#/definitions/LicenseConfigurationUsageList'
-        description: An array of <code>LicenseConfigurationUsage</code> objects.
-      NextToken:
-        $ref: '#/definitions/String'
-        description: Token for the next set of results.
-    type: object
-  ManagedResourceSummary:
-    description: Summary for a resource.
-    properties:
-      AssociationCount:
-        $ref: '#/definitions/BoxLong'
-        description: Number of resources associated with licenses.
-      ResourceType:
-        $ref: '#/definitions/ResourceType'
-        description: 'Type of resource associated with a license (instance, host, or AMI).'
-    type: object
-  ManagedResourceSummaryList:
-    items:
-      $ref: '#/definitions/ManagedResourceSummary'
-    type: array
-  OrganizationConfiguration:
-    description: Object containing configuration information for AWS Organizations.
-    properties:
-      EnableIntegration:
-        $ref: '#/definitions/Boolean'
-        description: Flag to activate AWS Organization integration.
-    required:
-      - EnableIntegration
-    type: object
-  RateLimitExceededException: {}
-  ResourceInventory:
-    description: A set of attributes that describe a resource.
-    properties:
-      Platform:
-        $ref: '#/definitions/String'
-        description: The platform of the resource.
-      PlatformVersion:
-        $ref: '#/definitions/String'
-        description: Platform version of the resource in the inventory.
-      ResourceArn:
-        $ref: '#/definitions/String'
-        description: The ARN of the resource.
-      ResourceId:
-        $ref: '#/definitions/String'
-        description: Unique ID of the resource.
-      ResourceOwningAccountId:
-        $ref: '#/definitions/String'
-        description: Unique ID of the account that owns the resource.
-      ResourceType:
-        $ref: '#/definitions/ResourceType'
-        description: The type of resource.
-    type: object
-  ResourceInventoryList:
-    items:
-      $ref: '#/definitions/ResourceInventory'
-    type: array
-  ResourceLimitExceededException: {}
-  ResourceType:
-    enum:
-      - EC2_INSTANCE
-      - EC2_HOST
-      - EC2_AMI
-    type: string
-  ServerInternalException: {}
-  String:
-    type: string
-  StringList:
-    items:
-      $ref: '#/definitions/String'
-    type: array
-  Tag:
-    description: Tag for a resource in a key-value format.
-    properties:
-      Key:
-        $ref: '#/definitions/String'
-        description: Key for the resource tag.
-      Value:
-        $ref: '#/definitions/String'
-        description: Value for the resource tag.
-    type: object
-  TagKeyList:
-    items:
-      $ref: '#/definitions/String'
-    type: array
-  TagList:
-    items:
-      $ref: '#/definitions/Tag'
-    type: array
+    properties: {}
   TagResourceRequest:
+    type: object
+    required:
+      - ResourceArn
+      - Tags
     properties:
       ResourceArn:
         $ref: '#/definitions/String'
@@ -1388,14 +1193,14 @@ definitions:
       Tags:
         $ref: '#/definitions/TagList'
         description: Names of the tags to attach to the resource.
+  UntagResourceResponse:
+    type: object
+    properties: {}
+  UntagResourceRequest:
+    type: object
     required:
       - ResourceArn
-      - Tags
-    type: object
-  TagResourceResponse:
-    properties: {}
-    type: object
-  UntagResourceRequest:
+      - TagKeys
     properties:
       ResourceArn:
         $ref: '#/definitions/String'
@@ -1403,145 +1208,340 @@ definitions:
       TagKeys:
         $ref: '#/definitions/TagKeyList'
         description: List keys identifying tags to remove.
-    required:
-      - ResourceArn
-      - TagKeys
+  UpdateLicenseConfigurationResponse:
     type: object
-  UntagResourceResponse:
     properties: {}
-    type: object
   UpdateLicenseConfigurationRequest:
+    type: object
+    required:
+      - LicenseConfigurationArn
     properties:
-      Description:
-        $ref: '#/definitions/String'
-        description: New human-friendly description of the license configuration.
       LicenseConfigurationArn:
         $ref: '#/definitions/String'
         description: ARN for a license configuration.
       LicenseConfigurationStatus:
         $ref: '#/definitions/LicenseConfigurationStatus'
         description: New status of the license configuration (<code>ACTIVE</code> or <code>INACTIVE</code>).
+      LicenseRules:
+        $ref: '#/definitions/StringList'
+        description: List of flexible text strings designating license rules.
       LicenseCount:
         $ref: '#/definitions/BoxLong'
         description: New number of licenses managed by the license configuration.
       LicenseCountHardLimit:
         $ref: '#/definitions/BoxBoolean'
         description: Sets the number of available licenses as a hard limit.
-      LicenseRules:
-        $ref: '#/definitions/StringList'
-        description: List of flexible text strings designating license rules.
       Name:
         $ref: '#/definitions/String'
         description: New name of the license configuration.
-    required:
-      - LicenseConfigurationArn
+      Description:
+        $ref: '#/definitions/String'
+        description: New human-friendly description of the license configuration.
+  UpdateLicenseSpecificationsForResourceResponse:
     type: object
-  UpdateLicenseConfigurationResponse:
     properties: {}
-    type: object
   UpdateLicenseSpecificationsForResourceRequest:
+    type: object
+    required:
+      - ResourceArn
     properties:
+      ResourceArn:
+        $ref: '#/definitions/String'
+        description: ARN for an AWS server resource.
       AddLicenseSpecifications:
         $ref: '#/definitions/LicenseSpecifications'
         description: License configuration ARNs to be added to a resource.
       RemoveLicenseSpecifications:
         $ref: '#/definitions/LicenseSpecifications'
         description: License configuration ARNs to be removed from a resource.
-      ResourceArn:
-        $ref: '#/definitions/String'
-        description: ARN for an AWS server resource.
-    required:
-      - ResourceArn
+  InvalidResourceStateException: {}
+  LicenseUsageException: {}
+  UpdateServiceSettingsResponse:
     type: object
-  UpdateLicenseSpecificationsForResourceResponse:
     properties: {}
-    type: object
   UpdateServiceSettingsRequest:
+    type: object
     properties:
-      EnableCrossAccountsDiscovery:
-        $ref: '#/definitions/BoxBoolean'
-        description: Activates cross-account discovery.
-      OrganizationConfiguration:
-        $ref: '#/definitions/OrganizationConfiguration'
-        description: Integrates AWS Organizations with License Manager for cross-account discovery.
       S3BucketArn:
         $ref: '#/definitions/String'
         description: ARN of the Amazon S3 bucket where License Manager information is stored.
       SnsTopicArn:
         $ref: '#/definitions/String'
         description: ARN of the Amazon SNS topic used for License Manager alerts.
+      OrganizationConfiguration:
+        $ref: '#/definitions/OrganizationConfiguration'
+        description: Integrates AWS Organizations with License Manager for cross-account discovery.
+      EnableCrossAccountsDiscovery:
+        $ref: '#/definitions/BoxBoolean'
+        description: Activates cross-account discovery.
+  Boolean:
+    type: boolean
+  BoxBoolean:
+    type: boolean
+  BoxInteger:
+    type: integer
+  BoxLong:
+    type: integer
+  ResourceType:
+    type: string
+    enum:
+      - EC2_INSTANCE
+      - EC2_HOST
+      - EC2_AMI
+  ConsumedLicenseSummary:
     type: object
-  UpdateServiceSettingsResponse:
-    properties: {}
+    properties:
+      ResourceType:
+        $ref: '#/definitions/ResourceType'
+        description: 'Resource type of the resource consuming a license (instance, host, or AMI).'
+      ConsumedLicenses:
+        $ref: '#/definitions/BoxLong'
+        description: Number of licenses consumed by a resource.
+    description: Details about license consumption.
+  ConsumedLicenseSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/ConsumedLicenseSummary'
+  String:
+    type: string
+  LicenseCountingType:
+    type: string
+    enum:
+      - vCPU
+      - Instance
+      - Core
+      - Socket
+  StringList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+  DateTime:
+    type: string
+    format: date-time
+  FilterName:
+    type: string
+  FilterValues:
+    type: array
+    items:
+      $ref: '#/definitions/FilterValue'
+  Filter:
     type: object
-x-servers:
-  - description: The AWS License Manager multi-region endpoint
-    url: 'http://license-manager.{region}.amazonaws.com'
-    variables:
-      region:
-        default: us-east-1
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-  - description: The AWS License Manager multi-region endpoint
-    url: 'https://license-manager.{region}.amazonaws.com'
-    variables:
-      region:
-        default: us-east-1
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-  - description: The AWS License Manager endpoint for China (Beijing) and China (Ningxia)
-    url: 'http://license-manager.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        default: cn-north-1
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-  - description: The AWS License Manager endpoint for China (Beijing) and China (Ningxia)
-    url: 'https://license-manager.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        default: cn-north-1
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
+    properties:
+      Name:
+        $ref: '#/definitions/FilterName'
+        description: Name of the filter. Filter names are case-sensitive.
+      Values:
+        $ref: '#/definitions/FilterValues'
+        description: One or more filter values. Filter values are case-sensitive.
+    description: 'A filter name and value pair that is used to return a more specific list of results from a describe operation. Filters can be used to match a set of resources by specific criteria, such as tags, attributes, or IDs. The filters supported by a <code>Describe</code> operation are documented with the <code>Describe</code> operation.'
+  FilterValue:
+    type: string
+  Filters:
+    type: array
+    items:
+      $ref: '#/definitions/Filter'
+  ManagedResourceSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/ManagedResourceSummary'
+  OrganizationConfiguration:
+    type: object
+    required:
+      - EnableIntegration
+    properties:
+      EnableIntegration:
+        $ref: '#/definitions/Boolean'
+        description: Flag to activate AWS Organization integration.
+    description: Object containing configuration information for AWS Organizations.
+  InventoryFilterCondition:
+    type: string
+    enum:
+      - EQUALS
+      - NOT_EQUALS
+      - BEGINS_WITH
+      - CONTAINS
+  InventoryFilter:
+    type: object
+    required:
+      - Name
+      - Condition
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: The name of the filter.
+      Condition:
+        $ref: '#/definitions/InventoryFilterCondition'
+        description: The condition of the filter.
+      Value:
+        $ref: '#/definitions/String'
+        description: Value of the filter.
+    description: An inventory filter object.
+  InventoryFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/InventoryFilter'
+  LicenseConfiguration:
+    type: object
+    properties:
+      LicenseConfigurationId:
+        $ref: '#/definitions/String'
+        description: Unique ID of the <code>LicenseConfiguration</code> object.
+      LicenseConfigurationArn:
+        $ref: '#/definitions/String'
+        description: ARN of the <code>LicenseConfiguration</code> object.
+      Name:
+        $ref: '#/definitions/String'
+        description: Name of the license configuration.
+      Description:
+        $ref: '#/definitions/String'
+        description: Description of the license configuration.
+      LicenseCountingType:
+        $ref: '#/definitions/LicenseCountingType'
+        description: Dimension to use to track license inventory.
+      LicenseRules:
+        $ref: '#/definitions/StringList'
+        description: Array of configured License Manager rules.
+      LicenseCount:
+        $ref: '#/definitions/BoxLong'
+        description: Number of licenses managed by the license configuration.
+      LicenseCountHardLimit:
+        $ref: '#/definitions/BoxBoolean'
+        description: Sets the number of available licenses as a hard limit.
+      ConsumedLicenses:
+        $ref: '#/definitions/BoxLong'
+        description: 'Number of licenses consumed. '
+      Status:
+        $ref: '#/definitions/String'
+        description: Status of the license configuration.
+      OwnerAccountId:
+        $ref: '#/definitions/String'
+        description: Account ID of the license configuration's owner.
+      ConsumedLicenseSummaryList:
+        $ref: '#/definitions/ConsumedLicenseSummaryList'
+        description: List of summaries for licenses consumed by various resources.
+      ManagedResourceSummaryList:
+        $ref: '#/definitions/ManagedResourceSummaryList'
+        description: List of summaries for managed resources.
+    description: 'A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (licensing by instance, socket, CPU, or VCPU), tenancy (shared tenancy, Amazon EC2 Dedicated Instance, Amazon EC2 Dedicated Host, or any of these), host affinity (how long a VM must be associated with a host), the number of licenses purchased and used.'
+  LicenseConfigurationAssociation:
+    type: object
+    properties:
+      ResourceArn:
+        $ref: '#/definitions/String'
+        description: ARN of the resource associated with the license configuration.
+      ResourceType:
+        $ref: '#/definitions/ResourceType'
+        description: Type of server resource.
+      ResourceOwnerId:
+        $ref: '#/definitions/String'
+        description: ID of the AWS account that owns the resource consuming licenses.
+      AssociationTime:
+        $ref: '#/definitions/DateTime'
+        description: Time when the license configuration was associated with the resource.
+    description: Describes a server resource that is associated with a license configuration.
+  LicenseConfigurationAssociations:
+    type: array
+    items:
+      $ref: '#/definitions/LicenseConfigurationAssociation'
+  LicenseConfigurationStatus:
+    type: string
+    enum:
+      - AVAILABLE
+      - DISABLED
+  LicenseConfigurationUsage:
+    type: object
+    properties:
+      ResourceArn:
+        $ref: '#/definitions/String'
+        description: ARN of the resource associated with a license configuration.
+      ResourceType:
+        $ref: '#/definitions/ResourceType'
+        description: Type of resource associated with athe license configuration.
+      ResourceStatus:
+        $ref: '#/definitions/String'
+        description: Status of a resource associated with the license configuration.
+      ResourceOwnerId:
+        $ref: '#/definitions/String'
+        description: ID of the account that owns a resource that is associated with the license configuration.
+      AssociationTime:
+        $ref: '#/definitions/DateTime'
+        description: Time when the license configuration was initially associated with a resource.
+      ConsumedLicenses:
+        $ref: '#/definitions/BoxLong'
+        description: Number of licenses consumed out of the total provisioned in the license configuration.
+    description: Contains details of the usage of each resource from the license pool.
+  LicenseConfigurationUsageList:
+    type: array
+    items:
+      $ref: '#/definitions/LicenseConfigurationUsage'
+  LicenseConfigurations:
+    type: array
+    items:
+      $ref: '#/definitions/LicenseConfiguration'
+  LicenseSpecification:
+    type: object
+    required:
+      - LicenseConfigurationArn
+    properties:
+      LicenseConfigurationArn:
+        $ref: '#/definitions/String'
+        description: ARN of the <code>LicenseConfiguration</code> object.
+    description: Object used for associating a license configuration with a resource.
+  LicenseSpecifications:
+    type: array
+    items:
+      $ref: '#/definitions/LicenseSpecification'
+  ResourceInventoryList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceInventory'
+  ManagedResourceSummary:
+    type: object
+    properties:
+      ResourceType:
+        $ref: '#/definitions/ResourceType'
+        description: 'Type of resource associated with a license (instance, host, or AMI).'
+      AssociationCount:
+        $ref: '#/definitions/BoxLong'
+        description: Number of resources associated with licenses.
+    description: Summary for a resource.
+  ResourceInventory:
+    type: object
+    properties:
+      ResourceId:
+        $ref: '#/definitions/String'
+        description: Unique ID of the resource.
+      ResourceType:
+        $ref: '#/definitions/ResourceType'
+        description: The type of resource.
+      ResourceArn:
+        $ref: '#/definitions/String'
+        description: The ARN of the resource.
+      Platform:
+        $ref: '#/definitions/String'
+        description: The platform of the resource.
+      PlatformVersion:
+        $ref: '#/definitions/String'
+        description: Platform version of the resource in the inventory.
+      ResourceOwningAccountId:
+        $ref: '#/definitions/String'
+        description: Unique ID of the account that owns the resource.
+    description: A set of attributes that describe a resource.
+  Tag:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/String'
+        description: Key for the resource tag.
+      Value:
+        $ref: '#/definitions/String'
+        description: Value for the resource tag.
+    description: Tag for a resource in a key-value format.
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/String'

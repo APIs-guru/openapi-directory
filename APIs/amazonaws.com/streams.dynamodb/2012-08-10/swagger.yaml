@@ -1,118 +1,169 @@
 swagger: '2.0'
-schemes:
-  - https
-  - http
-host: streams.dynamodb.amazonaws.com
-basePath: /
-x-hasEquivalentPaths: true
 info:
+  version: '2012-08-10'
+  x-release: v4
+  title: Amazon DynamoDB Streams
+  description: '<fullname>Amazon DynamoDB</fullname> <p>Amazon DynamoDB Streams provides API actions for accessing streams and processing stream records. To learn more about application development with Streams, see <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html">Capturing Table Activity with DynamoDB Streams</a> in the Amazon DynamoDB Developer Guide.</p>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
-    email: mike.ralphson@gmail.com
     name: Mike Ralphson
+    email: mike.ralphson@gmail.com
     url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
-  description: '<fullname>Amazon DynamoDB</fullname> <p>Amazon DynamoDB Streams provides API actions for accessing streams and processing stream records. To learn more about application development with Streams, see <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html">Capturing Table Activity with DynamoDB Streams</a> in the Amazon DynamoDB Developer Guide.</p>'
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
-  termsOfService: 'https://aws.amazon.com/service-terms/'
-  title: Amazon DynamoDB Streams
-  version: '2012-08-10'
+  x-providerName: amazonaws.com
+  x-serviceName: streams.dynamodb
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/streams.dynamodb-2012-08-10.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
   x-apiClientRegistration:
     url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
-  x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://twitter.com/awscloud/profile_image?size=original'
-  x-origin:
-    - contentType: application/json
-      converter:
-        url: 'https://github.com/mermade/aws2openapi'
-        version: 1.0.0
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/streams.dynamodb-2012-08-10.normal.json'
-      x-apisguru-direct: true
   x-preferred: true
-  x-providerName: amazonaws.com
-  x-release: v4
-  x-serviceName: streams.dynamodb
 externalDocs:
   description: Amazon Web Services documentation
   url: 'https://docs.aws.amazon.com/dynamodb/'
+host: streams.dynamodb.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+x-servers:
+  - url: 'http://streams.dynamodb.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Amazon DynamoDB Streams multi-region endpoint
+  - url: 'https://streams.dynamodb.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Amazon DynamoDB Streams multi-region endpoint
+  - url: 'http://streams.dynamodb.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon DynamoDB Streams endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://streams.dynamodb.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon DynamoDB Streams endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 consumes:
   - application/json
 produces:
   - application/json
+parameters:
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
 securityDefinitions:
   hmac:
-    description: Amazon Signature authorization v4
-    in: header
-    name: Authorization
     type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
     x-amazon-apigateway-authtype: awsSigv4
 security:
   - hmac: []
-parameters:
-  X-Amz-Algorithm:
-    in: header
-    name: X-Amz-Algorithm
-    required: false
-    type: string
-  X-Amz-Content-Sha256:
-    in: header
-    name: X-Amz-Content-Sha256
-    required: false
-    type: string
-  X-Amz-Credential:
-    in: header
-    name: X-Amz-Credential
-    required: false
-    type: string
-  X-Amz-Date:
-    in: header
-    name: X-Amz-Date
-    required: false
-    type: string
-  X-Amz-Security-Token:
-    in: header
-    name: X-Amz-Security-Token
-    required: false
-    type: string
-  X-Amz-Signature:
-    in: header
-    name: X-Amz-Signature
-    required: false
-    type: string
-  X-Amz-SignedHeaders:
-    in: header
-    name: X-Amz-SignedHeaders
-    required: false
-    type: string
 paths:
   '/#X-Amz-Target=DynamoDBStreams_20120810.DescribeStream':
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
-      description: '<p>Returns information about a stream, including the current status of the stream, its Amazon Resource Name (ARN), the composition of its shards, and its corresponding DynamoDB table.</p> <note> <p>You can call <code>DescribeStream</code> at a maximum rate of 10 times per second.</p> </note> <p>Each shard in the stream has a <code>SequenceNumberRange</code> associated with it. If the <code>SequenceNumberRange</code> has a <code>StartingSequenceNumber</code> but no <code>EndingSequenceNumber</code>, then the shard is still open (able to receive more stream records). If both <code>StartingSequenceNumber</code> and <code>EndingSequenceNumber</code> are present, then that shard is closed and can no longer receive more data.</p>'
       operationId: DescribeStream
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeStreamInput'
-        - enum:
-            - DynamoDBStreams_20120810.DescribeStream
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: '<p>Returns information about a stream, including the current status of the stream, its Amazon Resource Name (ARN), the composition of its shards, and its corresponding DynamoDB table.</p> <note> <p>You can call <code>DescribeStream</code> at a maximum rate of 10 times per second.</p> </note> <p>Each shard in the stream has a <code>SequenceNumberRange</code> associated with it. If the <code>SequenceNumberRange</code> has a <code>StartingSequenceNumber</code> but no <code>EndingSequenceNumber</code>, then the shard is still open (able to receive more stream records). If both <code>StartingSequenceNumber</code> and <code>EndingSequenceNumber</code> are present, then that shard is closed and can no longer receive more data.</p>'
       responses:
         '200':
           description: Success
@@ -126,7 +177,18 @@ paths:
           description: InternalServerError
           schema:
             $ref: '#/definitions/InternalServerError'
-  '/#X-Amz-Target=DynamoDBStreams_20120810.GetRecords':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeStreamInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DynamoDBStreams_20120810.DescribeStream
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -135,21 +197,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=DynamoDBStreams_20120810.GetRecords':
     post:
-      description: '<p>Retrieves the stream records from a given shard.</p> <p>Specify a shard iterator using the <code>ShardIterator</code> parameter. The shard iterator specifies the position in the shard from which you want to start reading stream records sequentially. If there are no stream records available in the portion of the shard that the iterator points to, <code>GetRecords</code> returns an empty list. Note that it might take multiple calls to get to a portion of the shard that contains stream records.</p> <note> <p> <code>GetRecords</code> can retrieve a maximum of 1 MB of data or 1000 stream records, whichever comes first.</p> </note>'
       operationId: GetRecords
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetRecordsInput'
-        - enum:
-            - DynamoDBStreams_20120810.GetRecords
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: '<p>Retrieves the stream records from a given shard.</p> <p>Specify a shard iterator using the <code>ShardIterator</code> parameter. The shard iterator specifies the position in the shard from which you want to start reading stream records sequentially. If there are no stream records available in the portion of the shard that the iterator points to, <code>GetRecords</code> returns an empty list. Note that it might take multiple calls to get to a portion of the shard that contains stream records.</p> <note> <p> <code>GetRecords</code> can retrieve a maximum of 1 MB of data or 1000 stream records, whichever comes first.</p> </note>'
       responses:
         '200':
           description: Success
@@ -175,7 +226,18 @@ paths:
           description: TrimmedDataAccessException
           schema:
             $ref: '#/definitions/TrimmedDataAccessException'
-  '/#X-Amz-Target=DynamoDBStreams_20120810.GetShardIterator':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetRecordsInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DynamoDBStreams_20120810.GetRecords
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -184,21 +246,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=DynamoDBStreams_20120810.GetShardIterator':
     post:
-      description: <p>Returns a shard iterator. A shard iterator provides information about how to retrieve the stream records from within a shard. Use the shard iterator in a subsequent <code>GetRecords</code> request to read the stream records from the shard.</p> <note> <p>A shard iterator expires 15 minutes after it is returned to the requester.</p> </note>
       operationId: GetShardIterator
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetShardIteratorInput'
-        - enum:
-            - DynamoDBStreams_20120810.GetShardIterator
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: <p>Returns a shard iterator. A shard iterator provides information about how to retrieve the stream records from within a shard. Use the shard iterator in a subsequent <code>GetRecords</code> request to read the stream records from the shard.</p> <note> <p>A shard iterator expires 15 minutes after it is returned to the requester.</p> </note>
       responses:
         '200':
           description: Success
@@ -216,7 +267,18 @@ paths:
           description: TrimmedDataAccessException
           schema:
             $ref: '#/definitions/TrimmedDataAccessException'
-  '/#X-Amz-Target=DynamoDBStreams_20120810.ListStreams':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetShardIteratorInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DynamoDBStreams_20120810.GetShardIterator
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -225,21 +287,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=DynamoDBStreams_20120810.ListStreams':
     post:
-      description: '<p>Returns an array of stream ARNs associated with the current account and endpoint. If the <code>TableName</code> parameter is present, then <code>ListStreams</code> will return only the streams ARNs for that table.</p> <note> <p>You can call <code>ListStreams</code> at a maximum rate of 5 times per second.</p> </note>'
       operationId: ListStreams
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListStreamsInput'
-        - enum:
-            - DynamoDBStreams_20120810.ListStreams
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: '<p>Returns an array of stream ARNs associated with the current account and endpoint. If the <code>TableName</code> parameter is present, then <code>ListStreams</code> will return only the streams ARNs for that table.</p> <note> <p>You can call <code>ListStreams</code> at a maximum rate of 5 times per second.</p> </note>'
       responses:
         '200':
           description: Success
@@ -253,76 +304,29 @@ paths:
           description: InternalServerError
           schema:
             $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListStreamsInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DynamoDBStreams_20120810.ListStreams
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  AttributeMap:
-    additionalProperties:
-      $ref: '#/definitions/AttributeValue'
-    type: object
-  AttributeName:
-    maxLength: 65535
-    type: string
-  AttributeValue:
-    description: '<p>Represents the data for an attribute. You can set one, and only one, of the elements.</p> <p>Each attribute in an item is a name-value pair. An attribute can be single-valued or multi-valued set. For example, a book item can have title and authors attributes. Each book has one title but can have many authors. The multi-valued attribute is a set; duplicate values are not allowed.</p>'
-    properties:
-      B:
-        $ref: '#/definitions/BinaryAttributeValue'
-        description: A Binary data type.
-      BOOL:
-        $ref: '#/definitions/BooleanAttributeValue'
-        description: A Boolean data type.
-      BS:
-        $ref: '#/definitions/BinarySetAttributeValue'
-        description: A Binary Set data type.
-      L:
-        $ref: '#/definitions/ListAttributeValue'
-        description: A List data type.
-      M:
-        $ref: '#/definitions/MapAttributeValue'
-        description: A Map data type.
-      'N':
-        $ref: '#/definitions/NumberAttributeValue'
-        description: A Number data type.
-      NS:
-        $ref: '#/definitions/NumberSetAttributeValue'
-        description: A Number Set data type.
-      'NULL':
-        $ref: '#/definitions/NullAttributeValue'
-        description: A Null data type.
-      S:
-        $ref: '#/definitions/StringAttributeValue'
-        description: A String data type.
-      SS:
-        $ref: '#/definitions/StringSetAttributeValue'
-        description: A String Set data type.
-    type: object
-  BinaryAttributeValue:
-    type: string
-  BinarySetAttributeValue:
-    items:
-      $ref: '#/definitions/BinaryAttributeValue'
-    type: array
-  BooleanAttributeValue:
-    type: boolean
-  Date:
-    format: date-time
-    type: string
-  DescribeStreamInput:
-    description: Represents the input of a <code>DescribeStream</code> operation.
-    properties:
-      ExclusiveStartShardId:
-        $ref: '#/definitions/ShardId'
-        description: 'The shard ID of the first item that this operation will evaluate. Use the value that was returned for <code>LastEvaluatedShardId</code> in the previous operation. '
-      Limit:
-        $ref: '#/definitions/PositiveIntegerObject'
-        description: The maximum number of shard objects to return. The upper limit is 100.
-      StreamArn:
-        $ref: '#/definitions/StreamArn'
-        description: The Amazon Resource Name (ARN) for the stream.
-    required:
-      - StreamArn
-    type: object
   DescribeStreamOutput:
-    description: Represents the output of a <code>DescribeStream</code> operation.
+    type: object
     example:
       StreamDescription:
         CreationRequestDateTime: 'Wed May 20 13:51:10 PDT 2015'
@@ -359,30 +363,38 @@ definitions:
       StreamDescription:
         $ref: '#/definitions/StreamDescription'
         description: 'A complete description of the stream, including its creation date and time, the DynamoDB table associated with the stream, the shard IDs within the stream, and the beginning and ending sequence numbers of stream records within the shards.'
+    description: Represents the output of a <code>DescribeStream</code> operation.
+  DescribeStreamInput:
     type: object
-  ErrorMessage:
-    type: string
-  ExpiredIteratorException:
-    description: The shard iterator has expired and can no longer be used to retrieve stream records. A shard iterator expires 15 minutes after it is retrieved using the <code>GetShardIterator</code> action.
+    required:
+      - StreamArn
+    properties:
+      StreamArn:
+        $ref: '#/definitions/StreamArn'
+        description: The Amazon Resource Name (ARN) for the stream.
+      Limit:
+        $ref: '#/definitions/PositiveIntegerObject'
+        description: The maximum number of shard objects to return. The upper limit is 100.
+      ExclusiveStartShardId:
+        $ref: '#/definitions/ShardId'
+        description: 'The shard ID of the first item that this operation will evaluate. Use the value that was returned for <code>LastEvaluatedShardId</code> in the previous operation. '
+    description: Represents the input of a <code>DescribeStream</code> operation.
+  ResourceNotFoundException:
+    type: object
     properties:
       message:
         $ref: '#/definitions/ErrorMessage'
-        description: The provided iterator exceeds the maximum age allowed.
+        description: The resource which is being requested does not exist.
+    description: The operation tried to access a nonexistent stream.
+  InternalServerError:
     type: object
-  GetRecordsInput:
-    description: Represents the input of a <code>GetRecords</code> operation.
     properties:
-      Limit:
-        $ref: '#/definitions/PositiveIntegerObject'
-        description: The maximum number of records to return from the shard. The upper limit is 1000.
-      ShardIterator:
-        $ref: '#/definitions/ShardIterator'
-        description: A shard iterator that was retrieved from a previous GetShardIterator operation. This iterator can be used to access the stream records in this shard.
-    required:
-      - ShardIterator
-    type: object
+      message:
+        $ref: '#/definitions/ErrorMessage'
+        description: The server encountered an internal error trying to fulfill the request.
+    description: An error occurred on the server side.
   GetRecordsOutput:
-    description: Represents the output of a <code>GetRecords</code> operation.
+    type: object
     example:
       NextShardIterator: 'arn:aws:dynamodb:us-west-2:111122223333:table/Forum/stream/2015-05-20T20:51:10.252|1|AAAAAAAAAAGQBYshYDEe ... <remaining characters omitted> ...'
       Records:
@@ -432,113 +444,77 @@ definitions:
           eventSource: 'aws:dynamodb'
           eventVersion: '1.0'
     properties:
-      NextShardIterator:
-        $ref: '#/definitions/ShardIterator'
-        description: 'The next position in the shard from which to start sequentially reading stream records. If set to <code>null</code>, the shard has been closed and the requested iterator will not return any more data.'
       Records:
         $ref: '#/definitions/RecordList'
         description: 'The stream records from the shard, which were retrieved using the shard iterator.'
+      NextShardIterator:
+        $ref: '#/definitions/ShardIterator'
+        description: 'The next position in the shard from which to start sequentially reading stream records. If set to <code>null</code>, the shard has been closed and the requested iterator will not return any more data.'
+    description: Represents the output of a <code>GetRecords</code> operation.
+  GetRecordsInput:
     type: object
-  GetShardIteratorInput:
-    description: Represents the input of a <code>GetShardIterator</code> operation.
-    properties:
-      SequenceNumber:
-        $ref: '#/definitions/SequenceNumber'
-        description: The sequence number of a stream record in the shard from which to start reading.
-      ShardId:
-        $ref: '#/definitions/ShardId'
-        description: The identifier of the shard. The iterator will be returned for this shard ID.
-      ShardIteratorType:
-        $ref: '#/definitions/ShardIteratorType'
-        description: '<p>Determines how the shard iterator is used to start reading stream records from the shard:</p> <ul> <li> <p> <code>AT_SEQUENCE_NUMBER</code> - Start reading exactly from the position denoted by a specific sequence number.</p> </li> <li> <p> <code>AFTER_SEQUENCE_NUMBER</code> - Start reading right after the position denoted by a specific sequence number.</p> </li> <li> <p> <code>TRIM_HORIZON</code> - Start reading at the last (untrimmed) stream record, which is the oldest record in the shard. In DynamoDB Streams, there is a 24 hour limit on data retention. Stream records whose age exceeds this limit are subject to removal (trimming) from the stream.</p> </li> <li> <p> <code>LATEST</code> - Start reading just after the most recent stream record in the shard, so that you always read the most recent data in the shard.</p> </li> </ul>'
-      StreamArn:
-        $ref: '#/definitions/StreamArn'
-        description: The Amazon Resource Name (ARN) for the stream.
     required:
-      - StreamArn
-      - ShardId
-      - ShardIteratorType
+      - ShardIterator
+    properties:
+      ShardIterator:
+        $ref: '#/definitions/ShardIterator'
+        description: A shard iterator that was retrieved from a previous GetShardIterator operation. This iterator can be used to access the stream records in this shard.
+      Limit:
+        $ref: '#/definitions/PositiveIntegerObject'
+        description: The maximum number of records to return from the shard. The upper limit is 1000.
+    description: Represents the input of a <code>GetRecords</code> operation.
+  LimitExceededException:
     type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+        description: Too many operations for a given subscriber.
+    description: 'Your request rate is too high. The AWS SDKs for DynamoDB automatically retry requests that receive this exception. Your request is eventually successful, unless your retry queue is too large to finish. Reduce the frequency of requests and use exponential backoff. For more information, go to <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ErrorHandling.html#APIRetries">Error Retries and Exponential Backoff</a> in the <i>Amazon DynamoDB Developer Guide</i>.'
+  ExpiredIteratorException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+        description: The provided iterator exceeds the maximum age allowed.
+    description: The shard iterator has expired and can no longer be used to retrieve stream records. A shard iterator expires 15 minutes after it is retrieved using the <code>GetShardIterator</code> action.
+  TrimmedDataAccessException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+        description: '"The data you are trying to access has been trimmed.'
+    description: '<p>The operation attempted to read past the oldest stream record in a shard.</p> <p>In DynamoDB Streams, there is a 24 hour limit on data retention. Stream records whose age exceeds this limit are subject to removal (trimming) from the stream. You might receive a TrimmedDataAccessException if:</p> <ul> <li><p>You request a shard iterator with a sequence number older than the trim point (24 hours).</p> </li> <li><p>You obtain a shard iterator, but before you use the iterator in a <code>GetRecords</code> request, a stream record in the shard exceeds the 24 hour period and is trimmed. This causes the iterator to access a record that no longer exists.</p> </li> </ul>'
   GetShardIteratorOutput:
-    description: Represents the output of a <code>GetShardIterator</code> operation.
+    type: object
     example:
       ShardIterator: 'arn:aws:dynamodb:us-west-2:111122223333:table/Forum/stream/2015-05-20T20:51:10.252|1|AAAAAAAAAAEvJp6D+zaQ...  <remaining characters omitted> ...'
     properties:
       ShardIterator:
         $ref: '#/definitions/ShardIterator'
         description: The position in the shard from which to start reading stream records sequentially. A shard iterator specifies this position using the sequence number of a stream record in a shard.
+    description: Represents the output of a <code>GetShardIterator</code> operation.
+  GetShardIteratorInput:
     type: object
-  Identity:
-    description: Contains details about the type of identity that made the request.
-    properties:
-      PrincipalId:
-        $ref: '#/definitions/String'
-        description: 'A unique identifier for the entity that made the call. For Time To Live, the principalId is "dynamodb.amazonaws.com".'
-      Type:
-        $ref: '#/definitions/String'
-        description: 'The type of the identity. For Time To Live, the type is "Service".'
-    type: object
-  InternalServerError:
-    description: An error occurred on the server side.
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: The server encountered an internal error trying to fulfill the request.
-    type: object
-  KeySchema:
-    items:
-      $ref: '#/definitions/KeySchemaElement'
-    maxItems: 2
-    minItems: 1
-    type: array
-  KeySchemaAttributeName:
-    maxLength: 255
-    minLength: 1
-    type: string
-  KeySchemaElement:
-    description: '<p>Represents <i>a single element</i> of a key schema. A key schema specifies the attributes that make up the primary key of a table, or the key attributes of an index.</p> <p>A <code>KeySchemaElement</code> represents exactly one attribute of the primary key. For example, a simple primary key (partition key) would be represented by one <code>KeySchemaElement</code>. A composite primary key (partition key and sort key) would require one <code>KeySchemaElement</code> for the partition key, and another <code>KeySchemaElement</code> for the sort key.</p> <note> <p>The partition key of an item is also known as its <i>hash attribute</i>. The term "hash attribute" derives from DynamoDB''s usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values.</p> <p>The sort key of an item is also known as its <i>range attribute</i>. The term "range attribute" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value.</p> </note>'
-    properties:
-      AttributeName:
-        $ref: '#/definitions/KeySchemaAttributeName'
-        description: The name of a key attribute.
-      KeyType:
-        $ref: '#/definitions/KeyType'
-        description: 'The attribute data, consisting of the data type and the attribute value itself.'
     required:
-      - AttributeName
-      - KeyType
-    type: object
-  KeyType:
-    enum:
-      - HASH
-      - RANGE
-    type: string
-  LimitExceededException:
-    description: 'Your request rate is too high. The AWS SDKs for DynamoDB automatically retry requests that receive this exception. Your request is eventually successful, unless your retry queue is too large to finish. Reduce the frequency of requests and use exponential backoff. For more information, go to <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ErrorHandling.html#APIRetries">Error Retries and Exponential Backoff</a> in the <i>Amazon DynamoDB Developer Guide</i>.'
+      - StreamArn
+      - ShardId
+      - ShardIteratorType
     properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: Too many operations for a given subscriber.
-    type: object
-  ListAttributeValue:
-    items:
-      $ref: '#/definitions/AttributeValue'
-    type: array
-  ListStreamsInput:
-    description: Represents the input of a <code>ListStreams</code> operation.
-    properties:
-      ExclusiveStartStreamArn:
+      StreamArn:
         $ref: '#/definitions/StreamArn'
-        description: 'The ARN (Amazon Resource Name) of the first item that this operation will evaluate. Use the value that was returned for <code>LastEvaluatedStreamArn</code> in the previous operation. '
-      Limit:
-        $ref: '#/definitions/PositiveIntegerObject'
-        description: The maximum number of streams to return. The upper limit is 100.
-      TableName:
-        $ref: '#/definitions/TableName'
-        description: 'If this parameter is provided, then only the streams associated with this table name are returned.'
-    type: object
+        description: The Amazon Resource Name (ARN) for the stream.
+      ShardId:
+        $ref: '#/definitions/ShardId'
+        description: The identifier of the shard. The iterator will be returned for this shard ID.
+      ShardIteratorType:
+        $ref: '#/definitions/ShardIteratorType'
+        description: '<p>Determines how the shard iterator is used to start reading stream records from the shard:</p> <ul> <li> <p> <code>AT_SEQUENCE_NUMBER</code> - Start reading exactly from the position denoted by a specific sequence number.</p> </li> <li> <p> <code>AFTER_SEQUENCE_NUMBER</code> - Start reading right after the position denoted by a specific sequence number.</p> </li> <li> <p> <code>TRIM_HORIZON</code> - Start reading at the last (untrimmed) stream record, which is the oldest record in the shard. In DynamoDB Streams, there is a 24 hour limit on data retention. Stream records whose age exceeds this limit are subject to removal (trimming) from the stream.</p> </li> <li> <p> <code>LATEST</code> - Start reading just after the most recent stream record in the shard, so that you always read the most recent data in the shard.</p> </li> </ul>'
+      SequenceNumber:
+        $ref: '#/definitions/SequenceNumber'
+        description: The sequence number of a stream record in the shard from which to start reading.
+    description: Represents the input of a <code>GetShardIterator</code> operation.
   ListStreamsOutput:
-    description: Represents the output of a <code>ListStreams</code> operation.
+    type: object
     example:
       Streams:
         - StreamArn: 'arn:aws:dynamodb:us-wesst-2:111122223333:table/Forum/stream/2015-05-20T20:51:10.252'
@@ -551,151 +527,114 @@ definitions:
           StreamLabel: '2015-05-19T23:03:50.641'
           TableName: Forum
     properties:
-      LastEvaluatedStreamArn:
-        $ref: '#/definitions/StreamArn'
-        description: '<p>The stream ARN of the item where the operation stopped, inclusive of the previous result set. Use this value to start a new operation, excluding this value in the new request.</p> <p>If <code>LastEvaluatedStreamArn</code> is empty, then the "last page" of results has been processed and there is no more data to be retrieved.</p> <p>If <code>LastEvaluatedStreamArn</code> is not empty, it does not necessarily mean that there is more data in the result set. The only way to know when you have reached the end of the result set is when <code>LastEvaluatedStreamArn</code> is empty.</p>'
       Streams:
         $ref: '#/definitions/StreamList'
         description: A list of stream descriptors associated with the current account and endpoint.
-    type: object
-  MapAttributeValue:
-    additionalProperties:
-      $ref: '#/definitions/AttributeValue'
-    type: object
-  NullAttributeValue:
-    type: boolean
-  NumberAttributeValue:
-    type: string
-  NumberSetAttributeValue:
-    items:
-      $ref: '#/definitions/NumberAttributeValue'
-    type: array
-  OperationType:
-    enum:
-      - INSERT
-      - MODIFY
-      - REMOVE
-    type: string
-  PositiveIntegerObject:
-    minimum: 1
-    type: integer
-  PositiveLongObject:
-    minimum: 1
-    type: integer
-  Record:
-    description: A description of a unique event within a stream.
-    properties:
-      awsRegion:
-        $ref: '#/definitions/String'
-        description: The region in which the <code>GetRecords</code> request was received.
-      dynamodb:
-        $ref: '#/definitions/StreamRecord'
-        description: 'The main body of the stream record, containing all of the DynamoDB-specific fields.'
-      eventID:
-        $ref: '#/definitions/String'
-        description: A globally unique identifier for the event that was recorded in this stream record.
-      eventName:
-        $ref: '#/definitions/OperationType'
-        description: '<p>The type of data modification that was performed on the DynamoDB table:</p> <ul> <li> <p> <code>INSERT</code> - a new item was added to the table.</p> </li> <li> <p> <code>MODIFY</code> - one or more of an existing item''s attributes were modified.</p> </li> <li> <p> <code>REMOVE</code> - the item was deleted from the table</p> </li> </ul>'
-      eventSource:
-        $ref: '#/definitions/String'
-        description: 'The AWS service from which the stream record originated. For DynamoDB Streams, this is <code>aws:dynamodb</code>.'
-      eventVersion:
-        $ref: '#/definitions/String'
-        description: '<p>The version number of the stream record format. This number is updated whenever the structure of <code>Record</code> is modified.</p> <p>Client applications must not assume that <code>eventVersion</code> will remain at a particular value, as this number is subject to change at any time. In general, <code>eventVersion</code> will only increase as the low-level DynamoDB Streams API evolves.</p>'
-      userIdentity:
-        $ref: '#/definitions/Identity'
-        description: '<p>Items that are deleted by the Time to Live process after expiration have the following fields: </p> <ul> <li> <p>Records[].userIdentity.type</p> <p>"Service"</p> </li> <li> <p>Records[].userIdentity.principalId</p> <p>"dynamodb.amazonaws.com"</p> </li> </ul>'
-    type: object
-  RecordList:
-    items:
-      $ref: '#/definitions/Record'
-    type: array
-  ResourceNotFoundException:
-    description: The operation tried to access a nonexistent stream.
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: The resource which is being requested does not exist.
-    type: object
-  SequenceNumber:
-    maxLength: 40
-    minLength: 21
-    type: string
-  SequenceNumberRange:
-    description: The beginning and ending sequence numbers for the stream records contained within a shard.
-    properties:
-      EndingSequenceNumber:
-        $ref: '#/definitions/SequenceNumber'
-        description: The last sequence number.
-      StartingSequenceNumber:
-        $ref: '#/definitions/SequenceNumber'
-        description: The first sequence number.
-    type: object
-  Shard:
-    description: A uniquely identified group of stream records within a stream.
-    properties:
-      ParentShardId:
-        $ref: '#/definitions/ShardId'
-        description: The shard ID of the current shard's parent.
-      SequenceNumberRange:
-        $ref: '#/definitions/SequenceNumberRange'
-        description: The range of possible sequence numbers for the shard.
-      ShardId:
-        $ref: '#/definitions/ShardId'
-        description: The system-generated identifier for this shard.
-    type: object
-  ShardDescriptionList:
-    items:
-      $ref: '#/definitions/Shard'
-    type: array
-  ShardId:
-    maxLength: 65
-    minLength: 28
-    type: string
-  ShardIterator:
-    maxLength: 2048
-    minLength: 1
-    type: string
-  ShardIteratorType:
-    enum:
-      - TRIM_HORIZON
-      - LATEST
-      - AT_SEQUENCE_NUMBER
-      - AFTER_SEQUENCE_NUMBER
-    type: string
-  Stream:
-    description: Represents all of the data describing a particular stream.
-    properties:
-      StreamArn:
+      LastEvaluatedStreamArn:
         $ref: '#/definitions/StreamArn'
-        description: The Amazon Resource Name (ARN) for the stream.
-      StreamLabel:
-        $ref: '#/definitions/String'
-        description: '<p>A timestamp, in ISO 8601 format, for this stream.</p> <p>Note that <code>LatestStreamLabel</code> is not a unique identifier for the stream, because it is possible that a stream from another table might have the same timestamp. However, the combination of the following three elements is guaranteed to be unique:</p> <ul> <li> <p>the AWS customer ID.</p> </li> <li> <p>the table name</p> </li> <li> <p>the <code>StreamLabel</code> </p> </li> </ul>'
+        description: '<p>The stream ARN of the item where the operation stopped, inclusive of the previous result set. Use this value to start a new operation, excluding this value in the new request.</p> <p>If <code>LastEvaluatedStreamArn</code> is empty, then the "last page" of results has been processed and there is no more data to be retrieved.</p> <p>If <code>LastEvaluatedStreamArn</code> is not empty, it does not necessarily mean that there is more data in the result set. The only way to know when you have reached the end of the result set is when <code>LastEvaluatedStreamArn</code> is empty.</p>'
+    description: Represents the output of a <code>ListStreams</code> operation.
+  ListStreamsInput:
+    type: object
+    properties:
       TableName:
         $ref: '#/definitions/TableName'
-        description: The DynamoDB table with which the stream is associated.
+        description: 'If this parameter is provided, then only the streams associated with this table name are returned.'
+      Limit:
+        $ref: '#/definitions/PositiveIntegerObject'
+        description: The maximum number of streams to return. The upper limit is 100.
+      ExclusiveStartStreamArn:
+        $ref: '#/definitions/StreamArn'
+        description: 'The ARN (Amazon Resource Name) of the first item that this operation will evaluate. Use the value that was returned for <code>LastEvaluatedStreamArn</code> in the previous operation. '
+    description: Represents the input of a <code>ListStreams</code> operation.
+  AttributeValue:
     type: object
-  StreamArn:
-    maxLength: 1024
-    minLength: 37
-    type: string
-  StreamDescription:
-    description: Represents all of the data describing a particular stream.
     properties:
-      CreationRequestDateTime:
-        $ref: '#/definitions/Date'
-        description: The date and time when the request to create this stream was issued.
-      KeySchema:
-        $ref: '#/definitions/KeySchema'
-        description: The key attribute(s) of the stream's DynamoDB table.
-      LastEvaluatedShardId:
-        $ref: '#/definitions/ShardId'
-        description: '<p>The shard ID of the item where the operation stopped, inclusive of the previous result set. Use this value to start a new operation, excluding this value in the new request.</p> <p>If <code>LastEvaluatedShardId</code> is empty, then the "last page" of results has been processed and there is currently no more data to be retrieved.</p> <p>If <code>LastEvaluatedShardId</code> is not empty, it does not necessarily mean that there is more data in the result set. The only way to know when you have reached the end of the result set is when <code>LastEvaluatedShardId</code> is empty.</p>'
-      Shards:
-        $ref: '#/definitions/ShardDescriptionList'
-        description: The shards that comprise the stream.
+      S:
+        $ref: '#/definitions/StringAttributeValue'
+        description: A String data type.
+      'N':
+        $ref: '#/definitions/NumberAttributeValue'
+        description: A Number data type.
+      B:
+        $ref: '#/definitions/BinaryAttributeValue'
+        description: A Binary data type.
+      SS:
+        $ref: '#/definitions/StringSetAttributeValue'
+        description: A String Set data type.
+      NS:
+        $ref: '#/definitions/NumberSetAttributeValue'
+        description: A Number Set data type.
+      BS:
+        $ref: '#/definitions/BinarySetAttributeValue'
+        description: A Binary Set data type.
+      M:
+        $ref: '#/definitions/MapAttributeValue'
+        description: A Map data type.
+      L:
+        $ref: '#/definitions/ListAttributeValue'
+        description: A List data type.
+      'NULL':
+        $ref: '#/definitions/NullAttributeValue'
+        description: A Null data type.
+      BOOL:
+        $ref: '#/definitions/BooleanAttributeValue'
+        description: A Boolean data type.
+    description: '<p>Represents the data for an attribute. You can set one, and only one, of the elements.</p> <p>Each attribute in an item is a name-value pair. An attribute can be single-valued or multi-valued set. For example, a book item can have title and authors attributes. Each book has one title but can have many authors. The multi-valued attribute is a set; duplicate values are not allowed.</p>'
+  AttributeMap:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/AttributeValue'
+  AttributeName:
+    type: string
+    maxLength: 65535
+  StringAttributeValue:
+    type: string
+  NumberAttributeValue:
+    type: string
+  BinaryAttributeValue:
+    type: string
+  StringSetAttributeValue:
+    type: array
+    items:
+      $ref: '#/definitions/StringAttributeValue'
+  NumberSetAttributeValue:
+    type: array
+    items:
+      $ref: '#/definitions/NumberAttributeValue'
+  BinarySetAttributeValue:
+    type: array
+    items:
+      $ref: '#/definitions/BinaryAttributeValue'
+  MapAttributeValue:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/AttributeValue'
+  ListAttributeValue:
+    type: array
+    items:
+      $ref: '#/definitions/AttributeValue'
+  NullAttributeValue:
+    type: boolean
+  BooleanAttributeValue:
+    type: boolean
+  Date:
+    type: string
+    format: date-time
+  StreamArn:
+    type: string
+    minLength: 37
+    maxLength: 1024
+  PositiveIntegerObject:
+    type: integer
+    minimum: 1
+  ShardId:
+    type: string
+    minLength: 28
+    maxLength: 65
+  StreamDescription:
+    type: object
+    properties:
       StreamArn:
         $ref: '#/definitions/StreamArn'
         description: The Amazon Resource Name (ARN) for the stream.
@@ -708,16 +647,103 @@ definitions:
       StreamViewType:
         $ref: '#/definitions/StreamViewType'
         description: '<p>Indicates the format of the records within this stream:</p> <ul> <li> <p> <code>KEYS_ONLY</code> - only the key attributes of items that were modified in the DynamoDB table.</p> </li> <li> <p> <code>NEW_IMAGE</code> - entire items from the table, as they appeared after they were modified.</p> </li> <li> <p> <code>OLD_IMAGE</code> - entire items from the table, as they appeared before they were modified.</p> </li> <li> <p> <code>NEW_AND_OLD_IMAGES</code> - both the new and the old images of the items from the table.</p> </li> </ul>'
+      CreationRequestDateTime:
+        $ref: '#/definitions/Date'
+        description: The date and time when the request to create this stream was issued.
       TableName:
         $ref: '#/definitions/TableName'
         description: The DynamoDB table with which the stream is associated.
+      KeySchema:
+        $ref: '#/definitions/KeySchema'
+        description: The key attribute(s) of the stream's DynamoDB table.
+      Shards:
+        $ref: '#/definitions/ShardDescriptionList'
+        description: The shards that comprise the stream.
+      LastEvaluatedShardId:
+        $ref: '#/definitions/ShardId'
+        description: '<p>The shard ID of the item where the operation stopped, inclusive of the previous result set. Use this value to start a new operation, excluding this value in the new request.</p> <p>If <code>LastEvaluatedShardId</code> is empty, then the "last page" of results has been processed and there is currently no more data to be retrieved.</p> <p>If <code>LastEvaluatedShardId</code> is not empty, it does not necessarily mean that there is more data in the result set. The only way to know when you have reached the end of the result set is when <code>LastEvaluatedShardId</code> is empty.</p>'
+    description: Represents all of the data describing a particular stream.
+  ErrorMessage:
+    type: string
+  ShardIterator:
+    type: string
+    minLength: 1
+    maxLength: 2048
+  RecordList:
+    type: array
+    items:
+      $ref: '#/definitions/Record'
+  ShardIteratorType:
+    type: string
+    enum:
+      - TRIM_HORIZON
+      - LATEST
+      - AT_SEQUENCE_NUMBER
+      - AFTER_SEQUENCE_NUMBER
+  SequenceNumber:
+    type: string
+    minLength: 21
+    maxLength: 40
+  String:
+    type: string
+  Identity:
     type: object
+    properties:
+      PrincipalId:
+        $ref: '#/definitions/String'
+        description: 'A unique identifier for the entity that made the call. For Time To Live, the principalId is "dynamodb.amazonaws.com".'
+      Type:
+        $ref: '#/definitions/String'
+        description: 'The type of the identity. For Time To Live, the type is "Service".'
+    description: Contains details about the type of identity that made the request.
+  KeySchemaElement:
+    type: object
+    required:
+      - AttributeName
+      - KeyType
+    properties:
+      AttributeName:
+        $ref: '#/definitions/KeySchemaAttributeName'
+        description: The name of a key attribute.
+      KeyType:
+        $ref: '#/definitions/KeyType'
+        description: 'The attribute data, consisting of the data type and the attribute value itself.'
+    description: '<p>Represents <i>a single element</i> of a key schema. A key schema specifies the attributes that make up the primary key of a table, or the key attributes of an index.</p> <p>A <code>KeySchemaElement</code> represents exactly one attribute of the primary key. For example, a simple primary key (partition key) would be represented by one <code>KeySchemaElement</code>. A composite primary key (partition key and sort key) would require one <code>KeySchemaElement</code> for the partition key, and another <code>KeySchemaElement</code> for the sort key.</p> <note> <p>The partition key of an item is also known as its <i>hash attribute</i>. The term "hash attribute" derives from DynamoDB''s usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values.</p> <p>The sort key of an item is also known as its <i>range attribute</i>. The term "range attribute" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value.</p> </note>'
+  KeySchema:
+    type: array
+    items:
+      $ref: '#/definitions/KeySchemaElement'
+    minItems: 1
+    maxItems: 2
+  KeySchemaAttributeName:
+    type: string
+    minLength: 1
+    maxLength: 255
+  KeyType:
+    type: string
+    enum:
+      - HASH
+      - RANGE
+  TableName:
+    type: string
+    pattern: '[a-zA-Z0-9_.-]+'
+    minLength: 3
+    maxLength: 255
   StreamList:
+    type: array
     items:
       $ref: '#/definitions/Stream'
-    type: array
+  OperationType:
+    type: string
+    enum:
+      - INSERT
+      - MODIFY
+      - REMOVE
+  PositiveLongObject:
+    type: integer
+    minimum: 1
   StreamRecord:
-    description: A description of a single data modification that was performed on an item in a DynamoDB table.
+    type: object
     properties:
       ApproximateCreationDateTime:
         $ref: '#/definitions/Date'
@@ -740,109 +766,83 @@ definitions:
       StreamViewType:
         $ref: '#/definitions/StreamViewType'
         description: '<p>The type of data from the modified DynamoDB item that was captured in this stream record:</p> <ul> <li> <p> <code>KEYS_ONLY</code> - only the key attributes of the modified item.</p> </li> <li> <p> <code>NEW_IMAGE</code> - the entire item, as it appeared after it was modified.</p> </li> <li> <p> <code>OLD_IMAGE</code> - the entire item, as it appeared before it was modified.</p> </li> <li> <p> <code>NEW_AND_OLD_IMAGES</code> - both the new and the old item images of the item.</p> </li> </ul>'
+    description: A description of a single data modification that was performed on an item in a DynamoDB table.
+  Record:
     type: object
+    properties:
+      eventID:
+        $ref: '#/definitions/String'
+        description: A globally unique identifier for the event that was recorded in this stream record.
+      eventName:
+        $ref: '#/definitions/OperationType'
+        description: '<p>The type of data modification that was performed on the DynamoDB table:</p> <ul> <li> <p> <code>INSERT</code> - a new item was added to the table.</p> </li> <li> <p> <code>MODIFY</code> - one or more of an existing item''s attributes were modified.</p> </li> <li> <p> <code>REMOVE</code> - the item was deleted from the table</p> </li> </ul>'
+      eventVersion:
+        $ref: '#/definitions/String'
+        description: '<p>The version number of the stream record format. This number is updated whenever the structure of <code>Record</code> is modified.</p> <p>Client applications must not assume that <code>eventVersion</code> will remain at a particular value, as this number is subject to change at any time. In general, <code>eventVersion</code> will only increase as the low-level DynamoDB Streams API evolves.</p>'
+      eventSource:
+        $ref: '#/definitions/String'
+        description: 'The AWS service from which the stream record originated. For DynamoDB Streams, this is <code>aws:dynamodb</code>.'
+      awsRegion:
+        $ref: '#/definitions/String'
+        description: The region in which the <code>GetRecords</code> request was received.
+      dynamodb:
+        $ref: '#/definitions/StreamRecord'
+        description: 'The main body of the stream record, containing all of the DynamoDB-specific fields.'
+      userIdentity:
+        $ref: '#/definitions/Identity'
+        description: '<p>Items that are deleted by the Time to Live process after expiration have the following fields: </p> <ul> <li> <p>Records[].userIdentity.type</p> <p>"Service"</p> </li> <li> <p>Records[].userIdentity.principalId</p> <p>"dynamodb.amazonaws.com"</p> </li> </ul>'
+    description: A description of a unique event within a stream.
+  SequenceNumberRange:
+    type: object
+    properties:
+      StartingSequenceNumber:
+        $ref: '#/definitions/SequenceNumber'
+        description: The first sequence number.
+      EndingSequenceNumber:
+        $ref: '#/definitions/SequenceNumber'
+        description: The last sequence number.
+    description: The beginning and ending sequence numbers for the stream records contained within a shard.
+  Shard:
+    type: object
+    properties:
+      ShardId:
+        $ref: '#/definitions/ShardId'
+        description: The system-generated identifier for this shard.
+      SequenceNumberRange:
+        $ref: '#/definitions/SequenceNumberRange'
+        description: The range of possible sequence numbers for the shard.
+      ParentShardId:
+        $ref: '#/definitions/ShardId'
+        description: The shard ID of the current shard's parent.
+    description: A uniquely identified group of stream records within a stream.
+  ShardDescriptionList:
+    type: array
+    items:
+      $ref: '#/definitions/Shard'
+  Stream:
+    type: object
+    properties:
+      StreamArn:
+        $ref: '#/definitions/StreamArn'
+        description: The Amazon Resource Name (ARN) for the stream.
+      TableName:
+        $ref: '#/definitions/TableName'
+        description: The DynamoDB table with which the stream is associated.
+      StreamLabel:
+        $ref: '#/definitions/String'
+        description: '<p>A timestamp, in ISO 8601 format, for this stream.</p> <p>Note that <code>LatestStreamLabel</code> is not a unique identifier for the stream, because it is possible that a stream from another table might have the same timestamp. However, the combination of the following three elements is guaranteed to be unique:</p> <ul> <li> <p>the AWS customer ID.</p> </li> <li> <p>the table name</p> </li> <li> <p>the <code>StreamLabel</code> </p> </li> </ul>'
+    description: Represents all of the data describing a particular stream.
   StreamStatus:
+    type: string
     enum:
       - ENABLING
       - ENABLED
       - DISABLING
       - DISABLED
-    type: string
   StreamViewType:
+    type: string
     enum:
       - NEW_IMAGE
       - OLD_IMAGE
       - NEW_AND_OLD_IMAGES
       - KEYS_ONLY
-    type: string
-  String:
-    type: string
-  StringAttributeValue:
-    type: string
-  StringSetAttributeValue:
-    items:
-      $ref: '#/definitions/StringAttributeValue'
-    type: array
-  TableName:
-    maxLength: 255
-    minLength: 3
-    pattern: '[a-zA-Z0-9_.-]+'
-    type: string
-  TrimmedDataAccessException:
-    description: '<p>The operation attempted to read past the oldest stream record in a shard.</p> <p>In DynamoDB Streams, there is a 24 hour limit on data retention. Stream records whose age exceeds this limit are subject to removal (trimming) from the stream. You might receive a TrimmedDataAccessException if:</p> <ul> <li><p>You request a shard iterator with a sequence number older than the trim point (24 hours).</p> </li> <li><p>You obtain a shard iterator, but before you use the iterator in a <code>GetRecords</code> request, a stream record in the shard exceeds the 24 hour period and is trimmed. This causes the iterator to access a record that no longer exists.</p> </li> </ul>'
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: '"The data you are trying to access has been trimmed.'
-    type: object
-x-servers:
-  - description: The Amazon DynamoDB Streams multi-region endpoint
-    url: 'http://streams.dynamodb.{region}.amazonaws.com'
-    variables:
-      region:
-        default: us-east-1
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-  - description: The Amazon DynamoDB Streams multi-region endpoint
-    url: 'https://streams.dynamodb.{region}.amazonaws.com'
-    variables:
-      region:
-        default: us-east-1
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-  - description: The Amazon DynamoDB Streams endpoint for China (Beijing) and China (Ningxia)
-    url: 'http://streams.dynamodb.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        default: cn-north-1
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-  - description: The Amazon DynamoDB Streams endpoint for China (Beijing) and China (Ningxia)
-    url: 'https://streams.dynamodb.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        default: cn-north-1
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1

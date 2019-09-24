@@ -1,118 +1,169 @@
 swagger: '2.0'
-schemes:
-  - https
-  - http
-host: datasync.amazonaws.com
-basePath: /
-x-hasEquivalentPaths: true
 info:
+  version: '2018-11-09'
+  x-release: v4
+  title: AWS DataSync
+  description: <fullname>AWS DataSync</fullname> <p>AWS DataSync is a managed data transfer service that makes it simpler for you to automate moving data between on-premises storage and Amazon Simple Storage Service (Amazon S3) or Amazon Elastic File System (Amazon EFS). </p> <p>This API interface reference for AWS DataSync contains documentation for a programming interface that you can use to manage AWS DataSync.</p>
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
-    email: mike.ralphson@gmail.com
     name: Mike Ralphson
+    email: mike.ralphson@gmail.com
     url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
-  description: <fullname>AWS DataSync</fullname> <p>AWS DataSync is a managed data transfer service that makes it simpler for you to automate moving data between on-premises storage and Amazon Simple Storage Service (Amazon S3) or Amazon Elastic File System (Amazon EFS). </p> <p>This API interface reference for AWS DataSync contains documentation for a programming interface that you can use to manage AWS DataSync.</p>
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
-  termsOfService: 'https://aws.amazon.com/service-terms/'
-  title: AWS DataSync
-  version: '2018-11-09'
+  x-providerName: amazonaws.com
+  x-serviceName: datasync
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/datasync-2018-11-09.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
   x-apiClientRegistration:
     url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
-  x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://twitter.com/awscloud/profile_image?size=original'
-  x-origin:
-    - contentType: application/json
-      converter:
-        url: 'https://github.com/mermade/aws2openapi'
-        version: 1.0.0
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/datasync-2018-11-09.normal.json'
-      x-apisguru-direct: true
   x-preferred: true
-  x-providerName: amazonaws.com
-  x-release: v4
-  x-serviceName: datasync
 externalDocs:
   description: Amazon Web Services documentation
   url: 'https://docs.aws.amazon.com/datasync/'
+host: datasync.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+x-servers:
+  - url: 'http://datasync.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The DataSync multi-region endpoint
+  - url: 'https://datasync.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The DataSync multi-region endpoint
+  - url: 'http://datasync.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The DataSync endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://datasync.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The DataSync endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 consumes:
   - application/json
 produces:
   - application/json
+parameters:
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
 securityDefinitions:
   hmac:
-    description: Amazon Signature authorization v4
-    in: header
-    name: Authorization
     type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
     x-amazon-apigateway-authtype: awsSigv4
 security:
   - hmac: []
-parameters:
-  X-Amz-Algorithm:
-    in: header
-    name: X-Amz-Algorithm
-    required: false
-    type: string
-  X-Amz-Content-Sha256:
-    in: header
-    name: X-Amz-Content-Sha256
-    required: false
-    type: string
-  X-Amz-Credential:
-    in: header
-    name: X-Amz-Credential
-    required: false
-    type: string
-  X-Amz-Date:
-    in: header
-    name: X-Amz-Date
-    required: false
-    type: string
-  X-Amz-Security-Token:
-    in: header
-    name: X-Amz-Security-Token
-    required: false
-    type: string
-  X-Amz-Signature:
-    in: header
-    name: X-Amz-Signature
-    required: false
-    type: string
-  X-Amz-SignedHeaders:
-    in: header
-    name: X-Amz-SignedHeaders
-    required: false
-    type: string
 paths:
   '/#X-Amz-Target=FmrsService.CancelTaskExecution':
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
-      description: '<p>Cancels execution of a task. </p> <p>When you cancel a task execution, the transfer of some files are abruptly interrupted. The contents of files that are transferred to the destination might be incomplete or inconsistent with the source files. However, if you start a new task execution on the same task and you allow the task execution to complete, file content on the destination is complete and consistent. This applies to other unexpected failures that interrupt a task execution. In all of these cases, AWS DataSync successfully complete the transfer when you start the next task execution.</p>'
       operationId: CancelTaskExecution
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/CancelTaskExecutionRequest'
-        - enum:
-            - FmrsService.CancelTaskExecution
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: '<p>Cancels execution of a task. </p> <p>When you cancel a task execution, the transfer of some files are abruptly interrupted. The contents of files that are transferred to the destination might be incomplete or inconsistent with the source files. However, if you start a new task execution on the same task and you allow the task execution to complete, file content on the destination is complete and consistent. This applies to other unexpected failures that interrupt a task execution. In all of these cases, AWS DataSync successfully complete the transfer when you start the next task execution.</p>'
       responses:
         '200':
           description: Success
@@ -126,7 +177,18 @@ paths:
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
-  '/#X-Amz-Target=FmrsService.CreateAgent':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CancelTaskExecutionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.CancelTaskExecution
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -135,21 +197,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=FmrsService.CreateAgent':
     post:
-      description: '<p>Activates an AWS DataSync agent that you have deployed on your host. The activation process associates your agent with your account. In the activation process, you specify information such as the AWS Region that you want to activate the agent in. You activate the agent in the AWS Region where your target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this AWS Region.</p> <p>You can activate the agent in a VPC (Virtual private Cloud) or provide the agent access to a VPC endpoint so you can run tasks without going over the public Internet.</p> <p>You can use an agent for more than one location. If a task uses multiple agents, all of them need to have status AVAILABLE for the task to run. If you use multiple agents for a source location, the status of all the agents must be AVAILABLE for the task to run. </p> <p>Agents are automatically updated by AWS on a regular basis, using a mechanism that ensures minimal interruption to your tasks.</p> <p/>'
       operationId: CreateAgent
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/CreateAgentRequest'
-        - enum:
-            - FmrsService.CreateAgent
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: '<p>Activates an AWS DataSync agent that you have deployed on your host. The activation process associates your agent with your account. In the activation process, you specify information such as the AWS Region that you want to activate the agent in. You activate the agent in the AWS Region where your target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this AWS Region.</p> <p>You can activate the agent in a VPC (Virtual private Cloud) or provide the agent access to a VPC endpoint so you can run tasks without going over the public Internet.</p> <p>You can use an agent for more than one location. If a task uses multiple agents, all of them need to have status AVAILABLE for the task to run. If you use multiple agents for a source location, the status of all the agents must be AVAILABLE for the task to run. </p> <p>Agents are automatically updated by AWS on a regular basis, using a mechanism that ensures minimal interruption to your tasks.</p> <p/>'
       responses:
         '200':
           description: Success
@@ -163,7 +214,18 @@ paths:
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
-  '/#X-Amz-Target=FmrsService.CreateLocationEfs':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateAgentRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.CreateAgent
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -172,21 +234,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=FmrsService.CreateLocationEfs':
     post:
-      description: Creates an endpoint for an Amazon EFS file system.
       operationId: CreateLocationEfs
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/CreateLocationEfsRequest'
-        - enum:
-            - FmrsService.CreateLocationEfs
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: Creates an endpoint for an Amazon EFS file system.
       responses:
         '200':
           description: Success
@@ -200,7 +251,18 @@ paths:
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
-  '/#X-Amz-Target=FmrsService.CreateLocationNfs':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateLocationEfsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.CreateLocationEfs
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -209,21 +271,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=FmrsService.CreateLocationNfs':
     post:
-      description: Creates an endpoint for a Network File System (NFS) file system.
       operationId: CreateLocationNfs
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/CreateLocationNfsRequest'
-        - enum:
-            - FmrsService.CreateLocationNfs
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: Creates an endpoint for a Network File System (NFS) file system.
       responses:
         '200':
           description: Success
@@ -237,7 +288,18 @@ paths:
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
-  '/#X-Amz-Target=FmrsService.CreateLocationS3':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateLocationNfsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.CreateLocationNfs
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -246,21 +308,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=FmrsService.CreateLocationS3':
     post:
-      description: '<p>Creates an endpoint for an Amazon S3 bucket.</p> <p>For AWS DataSync to access a destination S3 bucket, it needs an AWS Identity and Access Management (IAM) role that has the required permissions. You can set up the required permissions by creating an IAM policy that grants the required permissions and attaching the policy to the role. An example of such a policy is shown in the examples section.</p> <p>For more information, see Configuring Amazon S3 Location Settings in the <i>AWS DataSync User Guide.</i> </p>'
       operationId: CreateLocationS3
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/CreateLocationS3Request'
-        - enum:
-            - FmrsService.CreateLocationS3
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: '<p>Creates an endpoint for an Amazon S3 bucket.</p> <p>For AWS DataSync to access a destination S3 bucket, it needs an AWS Identity and Access Management (IAM) role that has the required permissions. You can set up the required permissions by creating an IAM policy that grants the required permissions and attaching the policy to the role. An example of such a policy is shown in the examples section.</p> <p>For more information, see Configuring Amazon S3 Location Settings in the <i>AWS DataSync User Guide.</i> </p>'
       responses:
         '200':
           description: Success
@@ -274,7 +325,18 @@ paths:
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
-  '/#X-Amz-Target=FmrsService.CreateLocationSmb':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateLocationS3Request'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.CreateLocationS3
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -283,21 +345,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=FmrsService.CreateLocationSmb':
     post:
-      description: Creates an endpoint for a Server Message Block (SMB) file system.
       operationId: CreateLocationSmb
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/CreateLocationSmbRequest'
-        - enum:
-            - FmrsService.CreateLocationSmb
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: Creates an endpoint for a Server Message Block (SMB) file system.
       responses:
         '200':
           description: Success
@@ -311,7 +362,18 @@ paths:
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
-  '/#X-Amz-Target=FmrsService.CreateTask':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateLocationSmbRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.CreateLocationSmb
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -320,21 +382,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=FmrsService.CreateTask':
     post:
-      description: '<p>Creates a task. A task is a set of two locations (source and destination) and a set of Options that you use to control the behavior of a task. If you don''t specify Options when you create a task, AWS DataSync populates them with service defaults.</p> <p>When you create a task, it first enters the CREATING state. During CREATING AWS DataSync attempts to mount the on-premises Network File System (NFS) location. The task transitions to the AVAILABLE state without waiting for the AWS location to become mounted. If required, AWS DataSync mounts the AWS location before each task execution.</p> <p>If an agent that is associated with a source (NFS) location goes offline, the task transitions to the UNAVAILABLE status. If the status of the task remains in the CREATING status for more than a few minutes, it means that your agent might be having trouble mounting the source NFS file system. Check the task''s ErrorCode and ErrorDetail. Mount issues are often caused by either a misconfigured firewall or a mistyped NFS server host name.</p>'
       operationId: CreateTask
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/CreateTaskRequest'
-        - enum:
-            - FmrsService.CreateTask
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: '<p>Creates a task. A task is a set of two locations (source and destination) and a set of Options that you use to control the behavior of a task. If you don''t specify Options when you create a task, AWS DataSync populates them with service defaults.</p> <p>When you create a task, it first enters the CREATING state. During CREATING AWS DataSync attempts to mount the on-premises Network File System (NFS) location. The task transitions to the AVAILABLE state without waiting for the AWS location to become mounted. If required, AWS DataSync mounts the AWS location before each task execution.</p> <p>If an agent that is associated with a source (NFS) location goes offline, the task transitions to the UNAVAILABLE status. If the status of the task remains in the CREATING status for more than a few minutes, it means that your agent might be having trouble mounting the source NFS file system. Check the task''s ErrorCode and ErrorDetail. Mount issues are often caused by either a misconfigured firewall or a mistyped NFS server host name.</p>'
       responses:
         '200':
           description: Success
@@ -348,7 +399,18 @@ paths:
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
-  '/#X-Amz-Target=FmrsService.DeleteAgent':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateTaskRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.CreateTask
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -357,21 +419,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=FmrsService.DeleteAgent':
     post:
-      description: 'Deletes an agent. To specify which agent to delete, use the Amazon Resource Name (ARN) of the agent in your request. The operation disassociates the agent from your AWS account. However, it doesn''t delete the agent virtual machine (VM) from your on-premises environment.'
       operationId: DeleteAgent
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteAgentRequest'
-        - enum:
-            - FmrsService.DeleteAgent
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: 'Deletes an agent. To specify which agent to delete, use the Amazon Resource Name (ARN) of the agent in your request. The operation disassociates the agent from your AWS account. However, it doesn''t delete the agent virtual machine (VM) from your on-premises environment.'
       responses:
         '200':
           description: Success
@@ -385,7 +436,18 @@ paths:
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
-  '/#X-Amz-Target=FmrsService.DeleteLocation':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteAgentRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.DeleteAgent
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -394,21 +456,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=FmrsService.DeleteLocation':
     post:
-      description: 'Deletes the configuration of a location used by AWS DataSync. '
       operationId: DeleteLocation
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteLocationRequest'
-        - enum:
-            - FmrsService.DeleteLocation
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: 'Deletes the configuration of a location used by AWS DataSync. '
       responses:
         '200':
           description: Success
@@ -422,7 +473,18 @@ paths:
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
-  '/#X-Amz-Target=FmrsService.DeleteTask':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteLocationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.DeleteLocation
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -431,21 +493,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=FmrsService.DeleteTask':
     post:
-      description: Deletes a task.
       operationId: DeleteTask
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteTaskRequest'
-        - enum:
-            - FmrsService.DeleteTask
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: Deletes a task.
       responses:
         '200':
           description: Success
@@ -459,7 +510,18 @@ paths:
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
-  '/#X-Amz-Target=FmrsService.DescribeAgent':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteTaskRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.DeleteTask
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -468,21 +530,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=FmrsService.DescribeAgent':
     post:
-      description: 'Returns metadata such as the name, the network interfaces, and the status (that is, whether the agent is running or not) for an agent. To specify which agent to describe, use the Amazon Resource Name (ARN) of the agent in your request. '
       operationId: DescribeAgent
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeAgentRequest'
-        - enum:
-            - FmrsService.DescribeAgent
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: 'Returns metadata such as the name, the network interfaces, and the status (that is, whether the agent is running or not) for an agent. To specify which agent to describe, use the Amazon Resource Name (ARN) of the agent in your request. '
       responses:
         '200':
           description: Success
@@ -496,7 +547,18 @@ paths:
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
-  '/#X-Amz-Target=FmrsService.DescribeLocationEfs':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeAgentRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.DescribeAgent
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -505,21 +567,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=FmrsService.DescribeLocationEfs':
     post:
-      description: 'Returns metadata, such as the path information about an Amazon EFS location.'
       operationId: DescribeLocationEfs
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeLocationEfsRequest'
-        - enum:
-            - FmrsService.DescribeLocationEfs
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: 'Returns metadata, such as the path information about an Amazon EFS location.'
       responses:
         '200':
           description: Success
@@ -533,7 +584,18 @@ paths:
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
-  '/#X-Amz-Target=FmrsService.DescribeLocationNfs':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeLocationEfsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.DescribeLocationEfs
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -542,21 +604,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=FmrsService.DescribeLocationNfs':
     post:
-      description: 'Returns metadata, such as the path information, about a NFS location.'
       operationId: DescribeLocationNfs
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeLocationNfsRequest'
-        - enum:
-            - FmrsService.DescribeLocationNfs
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: 'Returns metadata, such as the path information, about a NFS location.'
       responses:
         '200':
           description: Success
@@ -570,7 +621,18 @@ paths:
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
-  '/#X-Amz-Target=FmrsService.DescribeLocationS3':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeLocationNfsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.DescribeLocationNfs
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -579,21 +641,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=FmrsService.DescribeLocationS3':
     post:
-      description: 'Returns metadata, such as bucket name, about an Amazon S3 bucket location.'
       operationId: DescribeLocationS3
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeLocationS3Request'
-        - enum:
-            - FmrsService.DescribeLocationS3
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: 'Returns metadata, such as bucket name, about an Amazon S3 bucket location.'
       responses:
         '200':
           description: Success
@@ -607,7 +658,18 @@ paths:
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
-  '/#X-Amz-Target=FmrsService.DescribeLocationSmb':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeLocationS3Request'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.DescribeLocationS3
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -616,21 +678,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=FmrsService.DescribeLocationSmb':
     post:
-      description: 'Returns metadata, such as the path and user information about a SMB location.'
       operationId: DescribeLocationSmb
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeLocationSmbRequest'
-        - enum:
-            - FmrsService.DescribeLocationSmb
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: 'Returns metadata, such as the path and user information about a SMB location.'
       responses:
         '200':
           description: Success
@@ -644,7 +695,18 @@ paths:
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
-  '/#X-Amz-Target=FmrsService.DescribeTask':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeLocationSmbRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.DescribeLocationSmb
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -653,21 +715,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=FmrsService.DescribeTask':
     post:
-      description: Returns metadata about a task.
       operationId: DescribeTask
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeTaskRequest'
-        - enum:
-            - FmrsService.DescribeTask
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: Returns metadata about a task.
       responses:
         '200':
           description: Success
@@ -681,7 +732,18 @@ paths:
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
-  '/#X-Amz-Target=FmrsService.DescribeTaskExecution':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeTaskRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.DescribeTask
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -690,21 +752,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=FmrsService.DescribeTaskExecution':
     post:
-      description: Returns detailed metadata about a task that is being executed.
       operationId: DescribeTaskExecution
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeTaskExecutionRequest'
-        - enum:
-            - FmrsService.DescribeTaskExecution
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: Returns detailed metadata about a task that is being executed.
       responses:
         '200':
           description: Success
@@ -718,7 +769,18 @@ paths:
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
-  '/#X-Amz-Target=FmrsService.ListAgents':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeTaskExecutionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.DescribeTaskExecution
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -727,31 +789,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=FmrsService.ListAgents':
     post:
-      description: '<p>Returns a list of agents owned by an AWS account in the AWS Region specified in the request. The returned list is ordered by agent Amazon Resource Name (ARN).</p> <p>By default, this operation returns a maximum of 100 agents. This operation supports pagination that enables you to optionally reduce the number of agents returned in a response.</p> <p>If you have more agents than are returned in a response (that is, the response returns only a truncated list of your agents), the response contains a marker that you can specify in your next request to fetch the next page of agents.</p>'
       operationId: ListAgents
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListAgentsRequest'
-        - description: Pagination limit
-          in: query
-          name: MaxResults
-          required: false
-          type: string
-        - description: Pagination token
-          in: query
-          name: NextToken
-          required: false
-          type: string
-        - enum:
-            - FmrsService.ListAgents
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: '<p>Returns a list of agents owned by an AWS account in the AWS Region specified in the request. The returned list is ordered by agent Amazon Resource Name (ARN).</p> <p>By default, this operation returns a maximum of 100 agents. This operation supports pagination that enables you to optionally reduce the number of agents returned in a response.</p> <p>If you have more agents than are returned in a response (that is, the response returns only a truncated list of your agents), the response contains a marker that you can specify in your next request to fetch the next page of agents.</p>'
       responses:
         '200':
           description: Success
@@ -765,7 +806,28 @@ paths:
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
-  '/#X-Amz-Target=FmrsService.ListLocations':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListAgentsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.ListAgents
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -774,31 +836,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=FmrsService.ListLocations':
     post:
-      description: '<p>Returns a lists of source and destination locations.</p> <p>If you have more locations than are returned in a response (that is, the response returns only a truncated list of your agents), the response contains a token that you can specify in your next request to fetch the next page of locations.</p>'
       operationId: ListLocations
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListLocationsRequest'
-        - description: Pagination limit
-          in: query
-          name: MaxResults
-          required: false
-          type: string
-        - description: Pagination token
-          in: query
-          name: NextToken
-          required: false
-          type: string
-        - enum:
-            - FmrsService.ListLocations
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: '<p>Returns a lists of source and destination locations.</p> <p>If you have more locations than are returned in a response (that is, the response returns only a truncated list of your agents), the response contains a token that you can specify in your next request to fetch the next page of locations.</p>'
       responses:
         '200':
           description: Success
@@ -812,7 +853,28 @@ paths:
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
-  '/#X-Amz-Target=FmrsService.ListTagsForResource':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListLocationsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.ListLocations
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -821,31 +883,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=FmrsService.ListTagsForResource':
     post:
-      description: 'Returns all the tags associated with a specified resources. '
       operationId: ListTagsForResource
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListTagsForResourceRequest'
-        - description: Pagination limit
-          in: query
-          name: MaxResults
-          required: false
-          type: string
-        - description: Pagination token
-          in: query
-          name: NextToken
-          required: false
-          type: string
-        - enum:
-            - FmrsService.ListTagsForResource
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: 'Returns all the tags associated with a specified resources. '
       responses:
         '200':
           description: Success
@@ -859,7 +900,28 @@ paths:
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
-  '/#X-Amz-Target=FmrsService.ListTaskExecutions':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTagsForResourceRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.ListTagsForResource
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -868,31 +930,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=FmrsService.ListTaskExecutions':
     post:
-      description: Returns a list of executed tasks.
       operationId: ListTaskExecutions
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListTaskExecutionsRequest'
-        - description: Pagination limit
-          in: query
-          name: MaxResults
-          required: false
-          type: string
-        - description: Pagination token
-          in: query
-          name: NextToken
-          required: false
-          type: string
-        - enum:
-            - FmrsService.ListTaskExecutions
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: Returns a list of executed tasks.
       responses:
         '200':
           description: Success
@@ -906,7 +947,28 @@ paths:
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
-  '/#X-Amz-Target=FmrsService.ListTasks':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTaskExecutionsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.ListTaskExecutions
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -915,31 +977,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=FmrsService.ListTasks':
     post:
-      description: Returns a list of all the tasks.
       operationId: ListTasks
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListTasksRequest'
-        - description: Pagination limit
-          in: query
-          name: MaxResults
-          required: false
-          type: string
-        - description: Pagination token
-          in: query
-          name: NextToken
-          required: false
-          type: string
-        - enum:
-            - FmrsService.ListTasks
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: Returns a list of all the tasks.
       responses:
         '200':
           description: Success
@@ -953,7 +994,28 @@ paths:
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
-  '/#X-Amz-Target=FmrsService.StartTaskExecution':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTasksRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.ListTasks
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -962,21 +1024,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=FmrsService.StartTaskExecution':
     post:
-      description: '<p>Starts a specific invocation of a task. A <code>TaskExecution</code> value represents an individual run of a task. Each task can have at most one <code>TaskExecution</code> at a time.</p> <p> <code>TaskExecution</code> has the following transition phases: INITIALIZING | PREPARING | TRANSFERRING | VERIFYING | SUCCESS/FAILURE. </p> <p>For detailed information, see the Task Execution section in the Components and Terminology topic in the <i>AWS DataSync User Guide</i>.</p>'
       operationId: StartTaskExecution
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/StartTaskExecutionRequest'
-        - enum:
-            - FmrsService.StartTaskExecution
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: '<p>Starts a specific invocation of a task. A <code>TaskExecution</code> value represents an individual run of a task. Each task can have at most one <code>TaskExecution</code> at a time.</p> <p> <code>TaskExecution</code> has the following transition phases: INITIALIZING | PREPARING | TRANSFERRING | VERIFYING | SUCCESS/FAILURE. </p> <p>For detailed information, see the Task Execution section in the Components and Terminology topic in the <i>AWS DataSync User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -990,7 +1041,18 @@ paths:
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
-  '/#X-Amz-Target=FmrsService.TagResource':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StartTaskExecutionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.StartTaskExecution
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -999,21 +1061,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=FmrsService.TagResource':
     post:
-      description: Applies a key-value pair to an AWS resource.
       operationId: TagResource
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/TagResourceRequest'
-        - enum:
-            - FmrsService.TagResource
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: Applies a key-value pair to an AWS resource.
       responses:
         '200':
           description: Success
@@ -1027,7 +1078,18 @@ paths:
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
-  '/#X-Amz-Target=FmrsService.UntagResource':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TagResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.TagResource
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1036,21 +1098,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=FmrsService.UntagResource':
     post:
-      description: Removes a tag from an AWS resource.
       operationId: UntagResource
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/UntagResourceRequest'
-        - enum:
-            - FmrsService.UntagResource
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: Removes a tag from an AWS resource.
       responses:
         '200':
           description: Success
@@ -1064,7 +1115,18 @@ paths:
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
-  '/#X-Amz-Target=FmrsService.UpdateAgent':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UntagResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.UntagResource
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1073,21 +1135,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=FmrsService.UpdateAgent':
     post:
-      description: Updates the name of an agent.
       operationId: UpdateAgent
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/UpdateAgentRequest'
-        - enum:
-            - FmrsService.UpdateAgent
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: Updates the name of an agent.
       responses:
         '200':
           description: Success
@@ -1101,7 +1152,18 @@ paths:
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
-  '/#X-Amz-Target=FmrsService.UpdateTask':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateAgentRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.UpdateAgent
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1110,21 +1172,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=FmrsService.UpdateTask':
     post:
-      description: Updates the metadata associated with a task.
       operationId: UpdateTask
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/UpdateTaskRequest'
-        - enum:
-            - FmrsService.UpdateTask
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: Updates the metadata associated with a task.
       responses:
         '200':
           description: Success
@@ -1138,27 +1189,725 @@ paths:
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateTaskRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.UpdateTask
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
+  CancelTaskExecutionResponse:
+    type: object
+    properties: {}
+  CancelTaskExecutionRequest:
+    type: object
+    required:
+      - TaskExecutionArn
+    properties:
+      TaskExecutionArn:
+        $ref: '#/definitions/TaskExecutionArn'
+        description: The Amazon Resource Name (ARN) of the task execution to cancel.
+    description: CancelTaskExecutionRequest
+  InvalidRequestException: {}
+  InternalException: {}
+  CreateAgentResponse:
+    type: object
+    properties:
+      AgentArn:
+        $ref: '#/definitions/AgentArn'
+        description: The Amazon Resource Name (ARN) of the agent. Use the <code>ListAgents</code> operation to return a list of agents for your account and AWS Region.
+    description: CreateAgentResponse
+  CreateAgentRequest:
+    type: object
+    required:
+      - ActivationKey
+    properties:
+      ActivationKey:
+        $ref: '#/definitions/ActivationKey'
+        description: '<p>Your agent activation key. You can get the activation key either by sending an HTTP GET request with redirects that enable you to get the agent IP address (port 80). Alternatively, you can get it from the AWS DataSync console.</p> <p>The redirect URL returned in the response provides you the activation key for your agent in the query string parameter <code>activationKey</code>. It might also include other activation-related parameters; however, these are merely defaults. The arguments you pass to this API call determine the actual configuration of your agent.</p> <p>For more information, see Activating an Agent in the <i>AWS DataSync User Guide.</i> </p>'
+      AgentName:
+        $ref: '#/definitions/TagValue'
+        description: The name you configured for your agent. This value is a text reference that is used to identify the agent in the console.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: '<p>The key-value pair that represents the tag that you want to associate with the agent. The value can be an empty string. This value helps you manage, filter, and search for your agents.</p> <note> <p>Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @. </p> </note>'
+      VpcEndpointId:
+        $ref: '#/definitions/VpcEndpointId'
+        description: '<p>The ID of the VPC (Virtual Private Cloud) endpoint that the agent has access to. This is the client-side VPC endpoint, also called a PrivateLink. If you don''t have a PrivateLink VPC endpoint, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html#create-endpoint-service">Creating a VPC Endpoint Service Configuration</a> in the AWS VPC User Guide.</p> <p>VPC endpoint ID looks like this: <code>vpce-01234d5aff67890e1</code>.</p>'
+      SubnetArns:
+        $ref: '#/definitions/PLSubnetArnList'
+        description: 'The Amazon Resource Names (ARNs) of the subnets in which DataSync will create Elastic Network Interfaces (ENIs) for each data transfer task. The agent that runs a task must be private. When you start a task that is associated with an agent created in a VPC, or one that has access to an IP address in a VPC, then the task is also private. In this case, DataSync creates four ENIs for each task in your subnet. For a data transfer to work, the agent must be able to route to all these four ENIs.'
+      SecurityGroupArns:
+        $ref: '#/definitions/PLSecurityGroupArnList'
+        description: The ARNs of the security groups used to protect your data transfer task subnets. See <a>CreateAgentRequest$SubnetArns</a>.
+    description: CreateAgentRequest
+  CreateLocationEfsResponse:
+    type: object
+    properties:
+      LocationArn:
+        $ref: '#/definitions/LocationArn'
+        description: The Amazon Resource Name (ARN) of the Amazon EFS file system location that is created.
+    description: CreateLocationEfs
+  CreateLocationEfsRequest:
+    type: object
+    required:
+      - EfsFilesystemArn
+      - Ec2Config
+    properties:
+      Subdirectory:
+        $ref: '#/definitions/Subdirectory'
+        description: 'A subdirectory in the location’s path. This subdirectory in the EFS file system is used to read data from the EFS source location or write data to the EFS destination. By default, AWS DataSync uses the root directory.'
+      EfsFilesystemArn:
+        $ref: '#/definitions/EfsFilesystemArn'
+        description: The Amazon Resource Name (ARN) for the Amazon EFS file system.
+      Ec2Config:
+        $ref: '#/definitions/Ec2Config'
+        description: '<p>The subnet and security group that the Amazon EFS file system uses. The security group that you provide needs to be able to communicate with the security group on the mount target in the subnet specified.</p> <p>The exact relationship between security group M (of the mount target) and security group S (which you provide for DataSync to use at this stage) is as follows: </p> <ul> <li> <p> Security group M (which you associate with the mount target) must allow inbound access for the Transmission Control Protocol (TCP) on the NFS port (2049) from security group S. You can enable inbound connections either by IP address (CIDR range) or security group. </p> </li> <li> <p>Security group S (provided to DataSync to access EFS) should have a rule that enables outbound connections to the NFS port on one of the file system’s mount targets. You can enable outbound connections either by IP address (CIDR range) or security group.</p> <p>For information about security groups and mount targets, see Security Groups for Amazon EC2 Instances and Mount Targets in the <i>Amazon EFS User Guide.</i> </p> </li> </ul>'
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: 'The key-value pair that represents a tag that you want to add to the resource. The value can be an empty string. This value helps you manage, filter, and search for your resources. We recommend that you create a name tag for your location.'
+    description: CreateLocationEfsRequest
+  CreateLocationNfsResponse:
+    type: object
+    properties:
+      LocationArn:
+        $ref: '#/definitions/LocationArn'
+        description: The Amazon Resource Name (ARN) of the source NFS file system location that is created.
+    description: CreateLocationNfsResponse
+  CreateLocationNfsRequest:
+    type: object
+    required:
+      - Subdirectory
+      - ServerHostname
+      - OnPremConfig
+    properties:
+      Subdirectory:
+        $ref: '#/definitions/NonEmptySubdirectory'
+        description: '<p>The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination. The NFS path should be a path that''s exported by the NFS server, or a subdirectory of that path. The path should be such that it can be mounted by other NFS clients in your network. </p> <p>To see all the paths exported by your NFS server. run "<code>showmount -e nfs-server-name</code>" from an NFS client that has access to your server. You can specify any directory that appears in the results, and any subdirectory of that directory. Ensure that the NFS export is accessible without Kerberos authentication. </p> <p>To transfer all the data in the folder you specified, DataSync needs to have permissions to read all the data. To ensure this, either configure the NFS export with <code>no_root_squash,</code> or ensure that the permissions for all of the files that you want DataSync allow read access for all users. Doing either enables the agent to read the files. For the agent to access directories, you must additionally enable all execute access.</p> <p>For information about NFS export configuration, see 18.7. The /etc/exports Configuration File in the Red Hat Enterprise Linux documentation.</p>'
+      ServerHostname:
+        $ref: '#/definitions/ServerHostname'
+        description: <p>The name of the NFS server. This value is the IP address or Domain Name Service (DNS) name of the NFS server. An agent that is installed on-premises uses this host name to mount the NFS server in a network. </p> <note> <p>This name must either be DNS-compliant or must be an IP version 4 (IPv4) address.</p> </note>
+      OnPremConfig:
+        $ref: '#/definitions/OnPremConfig'
+        description: Contains a list of Amazon Resource Names (ARNs) of agents that are used to connect to an NFS server.
+      MountOptions:
+        $ref: '#/definitions/NfsMountOptions'
+        description: The NFS mount options that DataSync can use to mount your NFS share.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The key-value pair that represents the tag that you want to add to the location. The value can be an empty string. We recommend using tags to name your resources.
+    description: CreateLocationNfsRequest
+  CreateLocationS3Response:
+    type: object
+    properties:
+      LocationArn:
+        $ref: '#/definitions/LocationArn'
+        description: The Amazon Resource Name (ARN) of the source Amazon S3 bucket location that is created.
+    description: CreateLocationS3Response
+  CreateLocationS3Request:
+    type: object
+    required:
+      - S3BucketArn
+      - S3Config
+    properties:
+      Subdirectory:
+        $ref: '#/definitions/Subdirectory'
+        description: A subdirectory in the Amazon S3 bucket. This subdirectory in Amazon S3 is used to read data from the S3 source location or write data to the S3 destination.
+      S3BucketArn:
+        $ref: '#/definitions/S3BucketArn'
+        description: The Amazon Resource Name (ARN) of the Amazon S3 bucket.
+      S3Config:
+        $ref: '#/definitions/S3Config'
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The key-value pair that represents the tag that you want to add to the location. The value can be an empty string. We recommend using tags to name your resources.
+    description: CreateLocationS3Request
+  CreateLocationSmbResponse:
+    type: object
+    properties:
+      LocationArn:
+        $ref: '#/definitions/LocationArn'
+        description: The Amazon Resource Name (ARN) of the source SMB file system location that is created.
+    description: CreateLocationSmbResponse
+  CreateLocationSmbRequest:
+    type: object
+    required:
+      - Subdirectory
+      - ServerHostname
+      - User
+      - Password
+      - AgentArns
+    properties:
+      Subdirectory:
+        $ref: '#/definitions/NonEmptySubdirectory'
+        description: '<p>The subdirectory in the SMB file system that is used to read data from the SMB source location or write data to the SMB destination. The SMB path should be a path that''s exported by the SMB server, or a subdirectory of that path. The path should be such that it can be mounted by other SMB clients in your network.</p> <p>To transfer all the data in the folder you specified, DataSync needs to have permissions to mount the SMB share, as well as to access all the data in that share. To ensure this, either ensure that the user/password specified belongs to the user who can mount the share, and who has the appropriate permissions for all of the files and directories that you want DataSync to access, or use credentials of a member of the Backup Operators group to mount the share. Doing either enables the agent to access the data. For the agent to access directories, you must additionally enable all execute access.</p>'
+      ServerHostname:
+        $ref: '#/definitions/ServerHostname'
+        description: <p>The name of the SMB server. This value is the IP address or Domain Name Service (DNS) name of the SMB server. An agent that is installed on-premises uses this host name to mount the SMB server in a network.</p> <note> <p>This name must either be DNS-compliant or must be an IP version 4 (IPv4) address.</p> </note>
+      User:
+        $ref: '#/definitions/SmbUser'
+        description: 'The user who can mount the share, has the permissions to access files and directories in the SMB share.'
+      Domain:
+        $ref: '#/definitions/SmbDomain'
+        description: The name of the domain that the SMB server belongs to.
+      Password:
+        $ref: '#/definitions/SmbPassword'
+        description: The password of the user who has permission to access the SMB server.
+      AgentArns:
+        $ref: '#/definitions/AgentArnList'
+        description: 'The Amazon Resource Names (ARNs) of agents to use for a Simple Message Block (SMB) location. '
+      MountOptions:
+        $ref: '#/definitions/SmbMountOptions'
+        description: The mount options that are available for DataSync to use to access an SMB location.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The key-value pair that represents the tag that you want to add to the location. The value can be an empty string. We recommend using tags to name your resources.
+    description: CreateLocationSmbRequest
+  CreateTaskResponse:
+    type: object
+    properties:
+      TaskArn:
+        $ref: '#/definitions/TaskArn'
+        description: The Amazon Resource Name (ARN) of the task.
+    description: CreateTaskResponse
+  CreateTaskRequest:
+    type: object
+    required:
+      - SourceLocationArn
+      - DestinationLocationArn
+    properties:
+      SourceLocationArn:
+        $ref: '#/definitions/LocationArn'
+        description: The Amazon Resource Name (ARN) of the source location for the task.
+      DestinationLocationArn:
+        $ref: '#/definitions/LocationArn'
+        description: 'The Amazon Resource Name (ARN) of an AWS storage resource''s location. '
+      CloudWatchLogGroupArn:
+        $ref: '#/definitions/LogGroupArn'
+        description: '<p>The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that is used to monitor and log events in the task. </p> <p>For more information on these groups, see Working with Log Groups and Log Streams in the <i>Amazon CloudWatch User Guide.</i> </p> <p>For more information about how to use CloudWatch Logs with DataSync, see Monitoring Your Task in the <i>AWS DataSync User Guide.</i> </p>'
+      Name:
+        $ref: '#/definitions/TagValue'
+        description: 'The name of a task. This value is a text reference that is used to identify the task in the console. '
+      Options:
+        $ref: '#/definitions/Options'
+        description: '<p>The set of configuration options that control the behavior of a single execution of the task that occurs when you call <code>StartTaskExecution</code>. You can configure these options to preserve metadata such as user ID (UID) and group ID (GID), file permissions, data integrity verification, and so on.</p> <p>For each individual task execution, you can override these options by specifying the <code>OverrideOptions</code> before starting a the task execution. For more information, see the operation. </p>'
+      Excludes:
+        $ref: '#/definitions/FilterList'
+        description: '<p>A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example, <code>"/folder1|/folder2"</code> </p> <p> </p>'
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: 'The key-value pair that represents the tag that you want to add to the resource. The value can be an empty string. '
+    description: CreateTaskRequest
+  DeleteAgentResponse:
+    type: object
+    properties: {}
+  DeleteAgentRequest:
+    type: object
+    required:
+      - AgentArn
+    properties:
+      AgentArn:
+        $ref: '#/definitions/AgentArn'
+        description: The Amazon Resource Name (ARN) of the agent to delete. Use the <code>ListAgents</code> operation to return a list of agents for your account and AWS Region.
+    description: DeleteAgentRequest
+  DeleteLocationResponse:
+    type: object
+    properties: {}
+  DeleteLocationRequest:
+    type: object
+    required:
+      - LocationArn
+    properties:
+      LocationArn:
+        $ref: '#/definitions/LocationArn'
+        description: The Amazon Resource Name (ARN) of the location to delete.
+    description: DeleteLocation
+  DeleteTaskResponse:
+    type: object
+    properties: {}
+  DeleteTaskRequest:
+    type: object
+    required:
+      - TaskArn
+    properties:
+      TaskArn:
+        $ref: '#/definitions/TaskArn'
+        description: The Amazon Resource Name (ARN) of the task to delete.
+    description: DeleteTask
+  DescribeAgentResponse:
+    type: object
+    properties:
+      AgentArn:
+        $ref: '#/definitions/AgentArn'
+        description: The Amazon Resource Name (ARN) of the agent.
+      Name:
+        $ref: '#/definitions/TagValue'
+        description: The name of the agent.
+      Status:
+        $ref: '#/definitions/AgentStatus'
+        description: 'The status of the agent. If the status is ONLINE, then the agent is configured properly and is available to use. The Running status is the normal running status for an agent. If the status is OFFLINE, the agent''s VM is turned off or the agent is in an unhealthy state. When the issue that caused the unhealthy state is resolved, the agent returns to ONLINE status.'
+      LastConnectionTime:
+        $ref: '#/definitions/Time'
+        description: The time that the agent last connected to DataSyc.
+      CreationTime:
+        $ref: '#/definitions/Time'
+        description: 'The time that the agent was activated (that is, created in your account).'
+      EndpointType:
+        $ref: '#/definitions/EndpointType'
+        description: 'The type of endpoint that your agent is connected to. If the endpoint is a VPC endpoint, the agent is not accessible over the public Internet. '
+      PrivateLinkConfig:
+        $ref: '#/definitions/PrivateLinkConfig'
+    description: DescribeAgentResponse
+  DescribeAgentRequest:
+    type: object
+    required:
+      - AgentArn
+    properties:
+      AgentArn:
+        $ref: '#/definitions/AgentArn'
+        description: The Amazon Resource Name (ARN) of the agent to describe.
+    description: DescribeAgent
+  DescribeLocationEfsResponse:
+    type: object
+    properties:
+      LocationArn:
+        $ref: '#/definitions/LocationArn'
+        description: The Amazon resource Name (ARN) of the EFS location that was described.
+      LocationUri:
+        $ref: '#/definitions/LocationUri'
+        description: The URL of the EFS location that was described.
+      Ec2Config:
+        $ref: '#/definitions/Ec2Config'
+      CreationTime:
+        $ref: '#/definitions/Time'
+        description: The time that the EFS location was created.
+    description: DescribeLocationEfsResponse
+  DescribeLocationEfsRequest:
+    type: object
+    required:
+      - LocationArn
+    properties:
+      LocationArn:
+        $ref: '#/definitions/LocationArn'
+        description: The Amazon Resource Name (ARN) of the EFS location to describe.
+    description: DescribeLocationEfsRequest
+  DescribeLocationNfsResponse:
+    type: object
+    properties:
+      LocationArn:
+        $ref: '#/definitions/LocationArn'
+        description: The Amazon resource Name (ARN) of the NFS location that was described.
+      LocationUri:
+        $ref: '#/definitions/LocationUri'
+        description: The URL of the source NFS location that was described.
+      OnPremConfig:
+        $ref: '#/definitions/OnPremConfig'
+      MountOptions:
+        $ref: '#/definitions/NfsMountOptions'
+        description: The NFS mount options that DataSync used to mount your NFS share.
+      CreationTime:
+        $ref: '#/definitions/Time'
+        description: The time that the NFS location was created.
+    description: DescribeLocationNfsResponse
+  DescribeLocationNfsRequest:
+    type: object
+    required:
+      - LocationArn
+    properties:
+      LocationArn:
+        $ref: '#/definitions/LocationArn'
+        description: The Amazon resource Name (ARN) of the NFS location to describe.
+    description: DescribeLocationNfsRequest
+  DescribeLocationS3Response:
+    type: object
+    properties:
+      LocationArn:
+        $ref: '#/definitions/LocationArn'
+        description: The Amazon Resource Name (ARN) of the Amazon S3 bucket location.
+      LocationUri:
+        $ref: '#/definitions/LocationUri'
+        description: The URL of the Amazon S3 location that was described.
+      S3Config:
+        $ref: '#/definitions/S3Config'
+      CreationTime:
+        $ref: '#/definitions/Time'
+        description: The time that the Amazon S3 bucket location was created.
+    description: DescribeLocationS3Response
+  DescribeLocationS3Request:
+    type: object
+    required:
+      - LocationArn
+    properties:
+      LocationArn:
+        $ref: '#/definitions/LocationArn'
+        description: The Amazon Resource Name (ARN) of the Amazon S3 bucket location to describe.
+    description: DescribeLocationS3Request
+  DescribeLocationSmbResponse:
+    type: object
+    properties:
+      LocationArn:
+        $ref: '#/definitions/LocationArn'
+        description: The Amazon resource Name (ARN) of the SMB location that was described.
+      LocationUri:
+        $ref: '#/definitions/LocationUri'
+        description: The URL of the source SBM location that was described.
+      AgentArns:
+        $ref: '#/definitions/AgentArnList'
+        description: The Amazon Resource Name (ARN) of the source SMB file system location that is created.
+      User:
+        $ref: '#/definitions/SmbUser'
+        description: The user who is logged on the SMB server.
+      Domain:
+        $ref: '#/definitions/SmbDomain'
+        description: The name of the domain that the SMB server belongs to.
+      MountOptions:
+        $ref: '#/definitions/SmbMountOptions'
+        description: The mount options that are available for DataSync to use to access an SMB location.
+      CreationTime:
+        $ref: '#/definitions/Time'
+        description: The time that the SMB location was created.
+    description: DescribeLocationSmbResponse
+  DescribeLocationSmbRequest:
+    type: object
+    required:
+      - LocationArn
+    properties:
+      LocationArn:
+        $ref: '#/definitions/LocationArn'
+        description: The Amazon resource Name (ARN) of the SMB location to describe.
+    description: DescribeLocationSmbRequest
+  DescribeTaskResponse:
+    type: object
+    properties:
+      TaskArn:
+        $ref: '#/definitions/TaskArn'
+        description: The Amazon Resource Name (ARN) of the task that was described.
+      Status:
+        $ref: '#/definitions/TaskStatus'
+        description: '<p>The status of the task that was described.</p> <p>For detailed information about task execution statuses, see Understanding Task Statuses in the <i>AWS DataSync User Guide.</i> </p>'
+      Name:
+        $ref: '#/definitions/TagValue'
+        description: The name of the task that was described.
+      CurrentTaskExecutionArn:
+        $ref: '#/definitions/TaskExecutionArn'
+        description: The Amazon Resource Name (ARN) of the task execution that is syncing files.
+      SourceLocationArn:
+        $ref: '#/definitions/LocationArn'
+        description: The Amazon Resource Name (ARN) of the source file system's location.
+      DestinationLocationArn:
+        $ref: '#/definitions/LocationArn'
+        description: The Amazon Resource Name (ARN) of the AWS storage resource's location.
+      CloudWatchLogGroupArn:
+        $ref: '#/definitions/LogGroupArn'
+        description: '<p>The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that was used to monitor and log events in the task.</p> <p>For more information on these groups, see Working with Log Groups and Log Streams in the <i>Amazon CloudWatch User Guide</i>.</p>'
+      SourceNetworkInterfaceArns:
+        $ref: '#/definitions/SourceNetworkInterfaceArns'
+        description: The Amazon Resource Name (ARN) of the source ENIs (Elastic Network Interface) that was created for your subnet.
+      DestinationNetworkInterfaceArns:
+        $ref: '#/definitions/DestinationNetworkInterfaceArns'
+        description: The Amazon Resource Name (ARN) of the destination ENIs (Elastic Network Interface) that was created for your subnet.
+      Options:
+        $ref: '#/definitions/Options'
+        description: '<p>The set of configuration options that control the behavior of a single execution of the task that occurs when you call <code>StartTaskExecution</code>. You can configure these options to preserve metadata such as user ID (UID) and group (GID), file permissions, data integrity verification, and so on.</p> <p>For each individual task execution, you can override these options by specifying the overriding <code>OverrideOptions</code> value to operation. </p>'
+      Excludes:
+        $ref: '#/definitions/FilterList'
+        description: '<p>A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example: <code>"/folder1|/folder2"</code> </p> <p> </p>'
+      ErrorCode:
+        $ref: '#/definitions/string'
+        description: Errors that AWS DataSync encountered during execution of the task. You can use this error code to help troubleshoot issues.
+      ErrorDetail:
+        $ref: '#/definitions/string'
+        description: 'Detailed description of an error that was encountered during the task execution. You can use this information to help troubleshoot issues. '
+      CreationTime:
+        $ref: '#/definitions/Time'
+        description: The time that the task was created.
+    description: DescribeTaskResponse
+  DescribeTaskRequest:
+    type: object
+    required:
+      - TaskArn
+    properties:
+      TaskArn:
+        $ref: '#/definitions/TaskArn'
+        description: The Amazon Resource Name (ARN) of the task to describe.
+    description: DescribeTaskRequest
+  DescribeTaskExecutionResponse:
+    type: object
+    properties:
+      TaskExecutionArn:
+        $ref: '#/definitions/TaskExecutionArn'
+        description: '<p>The Amazon Resource Name (ARN) of the task execution that was described. <code>TaskExecutionArn</code> is hierarchical and includes <code>TaskArn</code> for the task that was executed. </p> <p>For example, a <code>TaskExecution</code> value with the ARN <code>arn:aws:datasync:us-east-1:111222333444:task/task-0208075f79cedf4a2/execution/exec-08ef1e88ec491019b</code> executed the task with the ARN <code>arn:aws:datasync:us-east-1:111222333444:task/task-0208075f79cedf4a2</code>. </p>'
+      Status:
+        $ref: '#/definitions/TaskExecutionStatus'
+        description: '<p>The status of the task execution. </p> <p>For detailed information about task execution statuses, see Understanding Task Statuses in the <i>AWS DataSync User Guide.</i> </p>'
+      Options:
+        $ref: '#/definitions/Options'
+      Excludes:
+        $ref: '#/definitions/FilterList'
+        description: '<p>A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example: <code>"/folder1|/folder2"</code> </p> <p> </p>'
+      Includes:
+        $ref: '#/definitions/FilterList'
+        description: '<p>A list of filter rules that determines which files to include when running a task. The list should contain a single filter string that consists of the patterns to include. The patterns are delimited by "|" (that is, a pipe), for example: <code>"/folder1|/folder2"</code> </p> <p> </p>'
+      StartTime:
+        $ref: '#/definitions/Time'
+        description: The time that the task execution was started.
+      EstimatedFilesToTransfer:
+        $ref: '#/definitions/long'
+        description: 'The expected number of files that is to be transferred over the network. This value is calculated during the PREPARING phase, before the TRANSFERRING phase. This value is the expected number of files to be transferred. It''s calculated based on comparing the content of the source and destination locations and finding the delta that needs to be transferred. '
+      EstimatedBytesToTransfer:
+        $ref: '#/definitions/long'
+        description: The estimated physical number of bytes that is to be transferred over the network.
+      FilesTransferred:
+        $ref: '#/definitions/long'
+        description: '<p>The actual number of files that was transferred over the network. This value is calculated and updated on an ongoing basis during the TRANSFERRING phase. It''s updated periodically when each file is read from the source and sent over the network. </p> <p>If failures occur during a transfer, this value can be less than <code>EstimatedFilesToTransfer</code>. This value can also be greater than <code>EstimatedFilesTransferred</code> in some cases. This element is implementation-specific for some location types, so don''t use it as an indicator for a correct file number or to monitor your task execution.</p>'
+      BytesWritten:
+        $ref: '#/definitions/long'
+        description: The number of logical bytes written to the destination AWS storage resource.
+      BytesTransferred:
+        $ref: '#/definitions/long'
+        description: The physical number of bytes transferred over the network.
+      Result:
+        $ref: '#/definitions/TaskExecutionResultDetail'
+        description: The result of the task execution.
+    description: DescribeTaskExecutionResponse
+  DescribeTaskExecutionRequest:
+    type: object
+    required:
+      - TaskExecutionArn
+    properties:
+      TaskExecutionArn:
+        $ref: '#/definitions/TaskExecutionArn'
+        description: The Amazon Resource Name (ARN) of the task that is being executed.
+    description: DescribeTaskExecutionRequest
+  ListAgentsResponse:
+    type: object
+    properties:
+      Agents:
+        $ref: '#/definitions/AgentList'
+        description: A list of agents in your account.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: An opaque string that indicates the position at which to begin returning the next list of agents.
+    description: ListAgentsResponse
+  ListAgentsRequest:
+    type: object
+    properties:
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of agents to list.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: An opaque string that indicates the position at which to begin the next list of agents.
+    description: ListAgentsRequest
+  ListLocationsResponse:
+    type: object
+    properties:
+      Locations:
+        $ref: '#/definitions/LocationList'
+        description: An array that contains a list of locations.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: An opaque string that indicates the position at which to begin returning the next list of locations.
+    description: ListLocationsResponse
+  ListLocationsRequest:
+    type: object
+    properties:
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of locations to return.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: An opaque string that indicates the position at which to begin the next list of locations.
+    description: ListLocationsRequest
+  ListTagsForResourceResponse:
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: Array of resource tags.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: An opaque string that indicates the position at which to begin returning the next list of resource tags.
+    description: ListTagsForResourceResponse
+  ListTagsForResourceRequest:
+    type: object
+    required:
+      - ResourceArn
+    properties:
+      ResourceArn:
+        $ref: '#/definitions/TaggableResourceArn'
+        description: The Amazon Resource Name (ARN) of the resource whose tags to list.
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of locations to return.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: An opaque string that indicates the position at which to begin the next list of locations.
+    description: ListTagsForResourceRequest
+  ListTaskExecutionsResponse:
+    type: object
+    properties:
+      TaskExecutions:
+        $ref: '#/definitions/TaskExecutionList'
+        description: A list of executed tasks.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: An opaque string that indicates the position at which to begin returning the next list of executed tasks.
+    description: ListTaskExecutionsResponse
+  ListTaskExecutionsRequest:
+    type: object
+    properties:
+      TaskArn:
+        $ref: '#/definitions/TaskArn'
+        description: The Amazon Resource Name (ARN) of the task whose tasks you want to list.
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of executed tasks to list.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: An opaque string that indicates the position at which to begin the next list of the executed tasks.
+    description: ListTaskExecutions
+  ListTasksResponse:
+    type: object
+    properties:
+      Tasks:
+        $ref: '#/definitions/TaskList'
+        description: A list of all the tasks that are returned.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: An opaque string that indicates the position at which to begin returning the next list of tasks.
+    description: ListTasksResponse
+  ListTasksRequest:
+    type: object
+    properties:
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of tasks to return.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: An opaque string that indicates the position at which to begin the next list of tasks.
+    description: ListTasksRequest
+  StartTaskExecutionResponse:
+    type: object
+    properties:
+      TaskExecutionArn:
+        $ref: '#/definitions/TaskExecutionArn'
+        description: The Amazon Resource Name (ARN) of the specific task execution that was started.
+    description: StartTaskExecutionResponse
+  StartTaskExecutionRequest:
+    type: object
+    required:
+      - TaskArn
+    properties:
+      TaskArn:
+        $ref: '#/definitions/TaskArn'
+        description: The Amazon Resource Name (ARN) of the task to start.
+      OverrideOptions:
+        $ref: '#/definitions/Options'
+      Includes:
+        $ref: '#/definitions/FilterList'
+        description: '<p>A list of filter rules that determines which files to include when running a task. The pattern should contain a single filter string that consists of the patterns to include. The patterns are delimited by "|" (that is, a pipe). For example: <code>"/folder1|/folder2"</code> </p> <p> </p>'
+    description: StartTaskExecutionRequest
+  TagResourceResponse:
+    type: object
+    properties: {}
+  TagResourceRequest:
+    type: object
+    required:
+      - ResourceArn
+      - Tags
+    properties:
+      ResourceArn:
+        $ref: '#/definitions/TaggableResourceArn'
+        description: The Amazon Resource Name (ARN) of the resource to apply the tag to.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags to apply.
+    description: TagResourceRequest
+  UntagResourceResponse:
+    type: object
+    properties: {}
+  UntagResourceRequest:
+    type: object
+    required:
+      - ResourceArn
+      - Keys
+    properties:
+      ResourceArn:
+        $ref: '#/definitions/TaggableResourceArn'
+        description: The Amazon Resource Name (ARN) of the resource to remove the tag from.
+      Keys:
+        $ref: '#/definitions/TagKeyList'
+        description: The keys in the key-value pair in the tag to remove.
+    description: UntagResourceRequest
+  UpdateAgentResponse:
+    type: object
+    properties: {}
+  UpdateAgentRequest:
+    type: object
+    required:
+      - AgentArn
+    properties:
+      AgentArn:
+        $ref: '#/definitions/AgentArn'
+        description: The Amazon Resource Name (ARN) of the agent to update.
+      Name:
+        $ref: '#/definitions/TagValue'
+        description: The name that you want to use to configure the agent.
+    description: UpdateAgentRequest
+  UpdateTaskResponse:
+    type: object
+    properties: {}
+  UpdateTaskRequest:
+    type: object
+    required:
+      - TaskArn
+    properties:
+      TaskArn:
+        $ref: '#/definitions/TaskArn'
+        description: The Amazon Resource Name (ARN) of the resource name of the task to update.
+      Options:
+        $ref: '#/definitions/Options'
+      Excludes:
+        $ref: '#/definitions/FilterList'
+        description: '<p>A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example: <code>"/folder1|/folder2"</code> </p> <p> </p>'
+      Name:
+        $ref: '#/definitions/TagValue'
+        description: The name of the task to update.
+      CloudWatchLogGroupArn:
+        $ref: '#/definitions/LogGroupArn'
+        description: The Amazon Resource Name (ARN) of the resource name of the CloudWatch LogGroup.
+    description: UpdateTaskResponse
   ActivationKey:
-    maxLength: 29
+    type: string
     pattern: '[A-Z0-9]{5}(-[A-Z0-9]{5}){4}'
-    type: string
+    maxLength: 29
   AgentArn:
-    maxLength: 128
-    pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$'
     type: string
+    pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$'
+    maxLength: 128
   AgentArnList:
+    type: array
     items:
       $ref: '#/definitions/AgentArn'
-    maxItems: 64
     minItems: 1
-    type: array
-  AgentList:
-    items:
-      $ref: '#/definitions/AgentListEntry'
-    type: array
+    maxItems: 64
   AgentListEntry:
-    description: Represents a single entry in a list of agents. <code>AgentListEntry</code> returns an array that contains a list of agents when the <a>ListAgents</a> operation is called.
+    type: object
     properties:
       AgentArn:
         $ref: '#/definitions/AgentArn'
@@ -1169,1003 +1918,222 @@ definitions:
       Status:
         $ref: '#/definitions/AgentStatus'
         description: The status of the agent.
-    type: object
+    description: Represents a single entry in a list of agents. <code>AgentListEntry</code> returns an array that contains a list of agents when the <a>ListAgents</a> operation is called.
+  AgentList:
+    type: array
+    items:
+      $ref: '#/definitions/AgentListEntry'
+  TagValue:
+    type: string
+    pattern: '^[a-zA-Z0-9\s+=._:/-]+$'
+    minLength: 1
+    maxLength: 256
   AgentStatus:
+    type: string
     enum:
       - ONLINE
       - OFFLINE
-    type: string
   Atime:
+    type: string
     enum:
       - NONE
       - BEST_EFFORT
-    type: string
   BytesPerSecond:
+    type: integer
     minimum: -1
-    type: integer
-  CancelTaskExecutionRequest:
-    description: CancelTaskExecutionRequest
-    properties:
-      TaskExecutionArn:
-        $ref: '#/definitions/TaskExecutionArn'
-        description: The Amazon Resource Name (ARN) of the task execution to cancel.
-    required:
-      - TaskExecutionArn
-    type: object
-  CancelTaskExecutionResponse:
-    properties: {}
-    type: object
-  CreateAgentRequest:
-    description: CreateAgentRequest
-    properties:
-      ActivationKey:
-        $ref: '#/definitions/ActivationKey'
-        description: '<p>Your agent activation key. You can get the activation key either by sending an HTTP GET request with redirects that enable you to get the agent IP address (port 80). Alternatively, you can get it from the AWS DataSync console.</p> <p>The redirect URL returned in the response provides you the activation key for your agent in the query string parameter <code>activationKey</code>. It might also include other activation-related parameters; however, these are merely defaults. The arguments you pass to this API call determine the actual configuration of your agent.</p> <p>For more information, see Activating an Agent in the <i>AWS DataSync User Guide.</i> </p>'
-      AgentName:
-        $ref: '#/definitions/TagValue'
-        description: The name you configured for your agent. This value is a text reference that is used to identify the agent in the console.
-      SecurityGroupArns:
-        $ref: '#/definitions/PLSecurityGroupArnList'
-        description: The ARNs of the security groups used to protect your data transfer task subnets. See <a>CreateAgentRequest$SubnetArns</a>.
-      SubnetArns:
-        $ref: '#/definitions/PLSubnetArnList'
-        description: 'The Amazon Resource Names (ARNs) of the subnets in which DataSync will create Elastic Network Interfaces (ENIs) for each data transfer task. The agent that runs a task must be private. When you start a task that is associated with an agent created in a VPC, or one that has access to an IP address in a VPC, then the task is also private. In this case, DataSync creates four ENIs for each task in your subnet. For a data transfer to work, the agent must be able to route to all these four ENIs.'
-      Tags:
-        $ref: '#/definitions/TagList'
-        description: '<p>The key-value pair that represents the tag that you want to associate with the agent. The value can be an empty string. This value helps you manage, filter, and search for your agents.</p> <note> <p>Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @. </p> </note>'
-      VpcEndpointId:
-        $ref: '#/definitions/VpcEndpointId'
-        description: '<p>The ID of the VPC (Virtual Private Cloud) endpoint that the agent has access to. This is the client-side VPC endpoint, also called a PrivateLink. If you don''t have a PrivateLink VPC endpoint, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html#create-endpoint-service">Creating a VPC Endpoint Service Configuration</a> in the AWS VPC User Guide.</p> <p>VPC endpoint ID looks like this: <code>vpce-01234d5aff67890e1</code>.</p>'
-    required:
-      - ActivationKey
-    type: object
-  CreateAgentResponse:
-    description: CreateAgentResponse
-    properties:
-      AgentArn:
-        $ref: '#/definitions/AgentArn'
-        description: The Amazon Resource Name (ARN) of the agent. Use the <code>ListAgents</code> operation to return a list of agents for your account and AWS Region.
-    type: object
-  CreateLocationEfsRequest:
-    description: CreateLocationEfsRequest
-    properties:
-      Ec2Config:
-        $ref: '#/definitions/Ec2Config'
-        description: '<p>The subnet and security group that the Amazon EFS file system uses. The security group that you provide needs to be able to communicate with the security group on the mount target in the subnet specified.</p> <p>The exact relationship between security group M (of the mount target) and security group S (which you provide for DataSync to use at this stage) is as follows: </p> <ul> <li> <p> Security group M (which you associate with the mount target) must allow inbound access for the Transmission Control Protocol (TCP) on the NFS port (2049) from security group S. You can enable inbound connections either by IP address (CIDR range) or security group. </p> </li> <li> <p>Security group S (provided to DataSync to access EFS) should have a rule that enables outbound connections to the NFS port on one of the file system’s mount targets. You can enable outbound connections either by IP address (CIDR range) or security group.</p> <p>For information about security groups and mount targets, see Security Groups for Amazon EC2 Instances and Mount Targets in the <i>Amazon EFS User Guide.</i> </p> </li> </ul>'
-      EfsFilesystemArn:
-        $ref: '#/definitions/EfsFilesystemArn'
-        description: The Amazon Resource Name (ARN) for the Amazon EFS file system.
-      Subdirectory:
-        $ref: '#/definitions/Subdirectory'
-        description: 'A subdirectory in the location’s path. This subdirectory in the EFS file system is used to read data from the EFS source location or write data to the EFS destination. By default, AWS DataSync uses the root directory.'
-      Tags:
-        $ref: '#/definitions/TagList'
-        description: 'The key-value pair that represents a tag that you want to add to the resource. The value can be an empty string. This value helps you manage, filter, and search for your resources. We recommend that you create a name tag for your location.'
-    required:
-      - EfsFilesystemArn
-      - Ec2Config
-    type: object
-  CreateLocationEfsResponse:
-    description: CreateLocationEfs
-    properties:
-      LocationArn:
-        $ref: '#/definitions/LocationArn'
-        description: The Amazon Resource Name (ARN) of the Amazon EFS file system location that is created.
-    type: object
-  CreateLocationNfsRequest:
-    description: CreateLocationNfsRequest
-    properties:
-      MountOptions:
-        $ref: '#/definitions/NfsMountOptions'
-        description: The NFS mount options that DataSync can use to mount your NFS share.
-      OnPremConfig:
-        $ref: '#/definitions/OnPremConfig'
-        description: Contains a list of Amazon Resource Names (ARNs) of agents that are used to connect to an NFS server.
-      ServerHostname:
-        $ref: '#/definitions/ServerHostname'
-        description: <p>The name of the NFS server. This value is the IP address or Domain Name Service (DNS) name of the NFS server. An agent that is installed on-premises uses this host name to mount the NFS server in a network. </p> <note> <p>This name must either be DNS-compliant or must be an IP version 4 (IPv4) address.</p> </note>
-      Subdirectory:
-        $ref: '#/definitions/NonEmptySubdirectory'
-        description: '<p>The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination. The NFS path should be a path that''s exported by the NFS server, or a subdirectory of that path. The path should be such that it can be mounted by other NFS clients in your network. </p> <p>To see all the paths exported by your NFS server. run "<code>showmount -e nfs-server-name</code>" from an NFS client that has access to your server. You can specify any directory that appears in the results, and any subdirectory of that directory. Ensure that the NFS export is accessible without Kerberos authentication. </p> <p>To transfer all the data in the folder you specified, DataSync needs to have permissions to read all the data. To ensure this, either configure the NFS export with <code>no_root_squash,</code> or ensure that the permissions for all of the files that you want DataSync allow read access for all users. Doing either enables the agent to read the files. For the agent to access directories, you must additionally enable all execute access.</p> <p>For information about NFS export configuration, see 18.7. The /etc/exports Configuration File in the Red Hat Enterprise Linux documentation.</p>'
-      Tags:
-        $ref: '#/definitions/TagList'
-        description: The key-value pair that represents the tag that you want to add to the location. The value can be an empty string. We recommend using tags to name your resources.
-    required:
-      - Subdirectory
-      - ServerHostname
-      - OnPremConfig
-    type: object
-  CreateLocationNfsResponse:
-    description: CreateLocationNfsResponse
-    properties:
-      LocationArn:
-        $ref: '#/definitions/LocationArn'
-        description: The Amazon Resource Name (ARN) of the source NFS file system location that is created.
-    type: object
-  CreateLocationS3Request:
-    description: CreateLocationS3Request
-    properties:
-      S3BucketArn:
-        $ref: '#/definitions/S3BucketArn'
-        description: The Amazon Resource Name (ARN) of the Amazon S3 bucket.
-      S3Config:
-        $ref: '#/definitions/S3Config'
-      Subdirectory:
-        $ref: '#/definitions/Subdirectory'
-        description: A subdirectory in the Amazon S3 bucket. This subdirectory in Amazon S3 is used to read data from the S3 source location or write data to the S3 destination.
-      Tags:
-        $ref: '#/definitions/TagList'
-        description: The key-value pair that represents the tag that you want to add to the location. The value can be an empty string. We recommend using tags to name your resources.
-    required:
-      - S3BucketArn
-      - S3Config
-    type: object
-  CreateLocationS3Response:
-    description: CreateLocationS3Response
-    properties:
-      LocationArn:
-        $ref: '#/definitions/LocationArn'
-        description: The Amazon Resource Name (ARN) of the source Amazon S3 bucket location that is created.
-    type: object
-  CreateLocationSmbRequest:
-    description: CreateLocationSmbRequest
-    properties:
-      AgentArns:
-        $ref: '#/definitions/AgentArnList'
-        description: 'The Amazon Resource Names (ARNs) of agents to use for a Simple Message Block (SMB) location. '
-      Domain:
-        $ref: '#/definitions/SmbDomain'
-        description: The name of the domain that the SMB server belongs to.
-      MountOptions:
-        $ref: '#/definitions/SmbMountOptions'
-        description: The mount options that are available for DataSync to use to access an SMB location.
-      Password:
-        $ref: '#/definitions/SmbPassword'
-        description: The password of the user who has permission to access the SMB server.
-      ServerHostname:
-        $ref: '#/definitions/ServerHostname'
-        description: <p>The name of the SMB server. This value is the IP address or Domain Name Service (DNS) name of the SMB server. An agent that is installed on-premises uses this host name to mount the SMB server in a network.</p> <note> <p>This name must either be DNS-compliant or must be an IP version 4 (IPv4) address.</p> </note>
-      Subdirectory:
-        $ref: '#/definitions/NonEmptySubdirectory'
-        description: '<p>The subdirectory in the SMB file system that is used to read data from the SMB source location or write data to the SMB destination. The SMB path should be a path that''s exported by the SMB server, or a subdirectory of that path. The path should be such that it can be mounted by other SMB clients in your network.</p> <p>To transfer all the data in the folder you specified, DataSync needs to have permissions to mount the SMB share, as well as to access all the data in that share. To ensure this, either ensure that the user/password specified belongs to the user who can mount the share, and who has the appropriate permissions for all of the files and directories that you want DataSync to access, or use credentials of a member of the Backup Operators group to mount the share. Doing either enables the agent to access the data. For the agent to access directories, you must additionally enable all execute access.</p>'
-      Tags:
-        $ref: '#/definitions/TagList'
-        description: The key-value pair that represents the tag that you want to add to the location. The value can be an empty string. We recommend using tags to name your resources.
-      User:
-        $ref: '#/definitions/SmbUser'
-        description: 'The user who can mount the share, has the permissions to access files and directories in the SMB share.'
-    required:
-      - Subdirectory
-      - ServerHostname
-      - User
-      - Password
-      - AgentArns
-    type: object
-  CreateLocationSmbResponse:
-    description: CreateLocationSmbResponse
-    properties:
-      LocationArn:
-        $ref: '#/definitions/LocationArn'
-        description: The Amazon Resource Name (ARN) of the source SMB file system location that is created.
-    type: object
-  CreateTaskRequest:
-    description: CreateTaskRequest
-    properties:
-      CloudWatchLogGroupArn:
-        $ref: '#/definitions/LogGroupArn'
-        description: '<p>The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that is used to monitor and log events in the task. </p> <p>For more information on these groups, see Working with Log Groups and Log Streams in the <i>Amazon CloudWatch User Guide.</i> </p> <p>For more information about how to use CloudWatch Logs with DataSync, see Monitoring Your Task in the <i>AWS DataSync User Guide.</i> </p>'
-      DestinationLocationArn:
-        $ref: '#/definitions/LocationArn'
-        description: 'The Amazon Resource Name (ARN) of an AWS storage resource''s location. '
-      Excludes:
-        $ref: '#/definitions/FilterList'
-        description: '<p>A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example, <code>"/folder1|/folder2"</code> </p> <p> </p>'
-      Name:
-        $ref: '#/definitions/TagValue'
-        description: 'The name of a task. This value is a text reference that is used to identify the task in the console. '
-      Options:
-        $ref: '#/definitions/Options'
-        description: '<p>The set of configuration options that control the behavior of a single execution of the task that occurs when you call <code>StartTaskExecution</code>. You can configure these options to preserve metadata such as user ID (UID) and group ID (GID), file permissions, data integrity verification, and so on.</p> <p>For each individual task execution, you can override these options by specifying the <code>OverrideOptions</code> before starting a the task execution. For more information, see the operation. </p>'
-      SourceLocationArn:
-        $ref: '#/definitions/LocationArn'
-        description: The Amazon Resource Name (ARN) of the source location for the task.
-      Tags:
-        $ref: '#/definitions/TagList'
-        description: 'The key-value pair that represents the tag that you want to add to the resource. The value can be an empty string. '
-    required:
-      - SourceLocationArn
-      - DestinationLocationArn
-    type: object
-  CreateTaskResponse:
-    description: CreateTaskResponse
-    properties:
-      TaskArn:
-        $ref: '#/definitions/TaskArn'
-        description: The Amazon Resource Name (ARN) of the task.
-    type: object
-  DeleteAgentRequest:
-    description: DeleteAgentRequest
-    properties:
-      AgentArn:
-        $ref: '#/definitions/AgentArn'
-        description: The Amazon Resource Name (ARN) of the agent to delete. Use the <code>ListAgents</code> operation to return a list of agents for your account and AWS Region.
-    required:
-      - AgentArn
-    type: object
-  DeleteAgentResponse:
-    properties: {}
-    type: object
-  DeleteLocationRequest:
-    description: DeleteLocation
-    properties:
-      LocationArn:
-        $ref: '#/definitions/LocationArn'
-        description: The Amazon Resource Name (ARN) of the location to delete.
-    required:
-      - LocationArn
-    type: object
-  DeleteLocationResponse:
-    properties: {}
-    type: object
-  DeleteTaskRequest:
-    description: DeleteTask
-    properties:
-      TaskArn:
-        $ref: '#/definitions/TaskArn'
-        description: The Amazon Resource Name (ARN) of the task to delete.
-    required:
-      - TaskArn
-    type: object
-  DeleteTaskResponse:
-    properties: {}
-    type: object
-  DescribeAgentRequest:
-    description: DescribeAgent
-    properties:
-      AgentArn:
-        $ref: '#/definitions/AgentArn'
-        description: The Amazon Resource Name (ARN) of the agent to describe.
-    required:
-      - AgentArn
-    type: object
-  DescribeAgentResponse:
-    description: DescribeAgentResponse
-    properties:
-      AgentArn:
-        $ref: '#/definitions/AgentArn'
-        description: The Amazon Resource Name (ARN) of the agent.
-      CreationTime:
-        $ref: '#/definitions/Time'
-        description: 'The time that the agent was activated (that is, created in your account).'
-      EndpointType:
-        $ref: '#/definitions/EndpointType'
-        description: 'The type of endpoint that your agent is connected to. If the endpoint is a VPC endpoint, the agent is not accessible over the public Internet. '
-      LastConnectionTime:
-        $ref: '#/definitions/Time'
-        description: The time that the agent last connected to DataSyc.
-      Name:
-        $ref: '#/definitions/TagValue'
-        description: The name of the agent.
-      PrivateLinkConfig:
-        $ref: '#/definitions/PrivateLinkConfig'
-      Status:
-        $ref: '#/definitions/AgentStatus'
-        description: 'The status of the agent. If the status is ONLINE, then the agent is configured properly and is available to use. The Running status is the normal running status for an agent. If the status is OFFLINE, the agent''s VM is turned off or the agent is in an unhealthy state. When the issue that caused the unhealthy state is resolved, the agent returns to ONLINE status.'
-    type: object
-  DescribeLocationEfsRequest:
-    description: DescribeLocationEfsRequest
-    properties:
-      LocationArn:
-        $ref: '#/definitions/LocationArn'
-        description: The Amazon Resource Name (ARN) of the EFS location to describe.
-    required:
-      - LocationArn
-    type: object
-  DescribeLocationEfsResponse:
-    description: DescribeLocationEfsResponse
-    properties:
-      CreationTime:
-        $ref: '#/definitions/Time'
-        description: The time that the EFS location was created.
-      Ec2Config:
-        $ref: '#/definitions/Ec2Config'
-      LocationArn:
-        $ref: '#/definitions/LocationArn'
-        description: The Amazon resource Name (ARN) of the EFS location that was described.
-      LocationUri:
-        $ref: '#/definitions/LocationUri'
-        description: The URL of the EFS location that was described.
-    type: object
-  DescribeLocationNfsRequest:
-    description: DescribeLocationNfsRequest
-    properties:
-      LocationArn:
-        $ref: '#/definitions/LocationArn'
-        description: The Amazon resource Name (ARN) of the NFS location to describe.
-    required:
-      - LocationArn
-    type: object
-  DescribeLocationNfsResponse:
-    description: DescribeLocationNfsResponse
-    properties:
-      CreationTime:
-        $ref: '#/definitions/Time'
-        description: The time that the NFS location was created.
-      LocationArn:
-        $ref: '#/definitions/LocationArn'
-        description: The Amazon resource Name (ARN) of the NFS location that was described.
-      LocationUri:
-        $ref: '#/definitions/LocationUri'
-        description: The URL of the source NFS location that was described.
-      MountOptions:
-        $ref: '#/definitions/NfsMountOptions'
-        description: The NFS mount options that DataSync used to mount your NFS share.
-      OnPremConfig:
-        $ref: '#/definitions/OnPremConfig'
-    type: object
-  DescribeLocationS3Request:
-    description: DescribeLocationS3Request
-    properties:
-      LocationArn:
-        $ref: '#/definitions/LocationArn'
-        description: The Amazon Resource Name (ARN) of the Amazon S3 bucket location to describe.
-    required:
-      - LocationArn
-    type: object
-  DescribeLocationS3Response:
-    description: DescribeLocationS3Response
-    properties:
-      CreationTime:
-        $ref: '#/definitions/Time'
-        description: The time that the Amazon S3 bucket location was created.
-      LocationArn:
-        $ref: '#/definitions/LocationArn'
-        description: The Amazon Resource Name (ARN) of the Amazon S3 bucket location.
-      LocationUri:
-        $ref: '#/definitions/LocationUri'
-        description: The URL of the Amazon S3 location that was described.
-      S3Config:
-        $ref: '#/definitions/S3Config'
-    type: object
-  DescribeLocationSmbRequest:
-    description: DescribeLocationSmbRequest
-    properties:
-      LocationArn:
-        $ref: '#/definitions/LocationArn'
-        description: The Amazon resource Name (ARN) of the SMB location to describe.
-    required:
-      - LocationArn
-    type: object
-  DescribeLocationSmbResponse:
-    description: DescribeLocationSmbResponse
-    properties:
-      AgentArns:
-        $ref: '#/definitions/AgentArnList'
-        description: The Amazon Resource Name (ARN) of the source SMB file system location that is created.
-      CreationTime:
-        $ref: '#/definitions/Time'
-        description: The time that the SMB location was created.
-      Domain:
-        $ref: '#/definitions/SmbDomain'
-        description: The name of the domain that the SMB server belongs to.
-      LocationArn:
-        $ref: '#/definitions/LocationArn'
-        description: The Amazon resource Name (ARN) of the SMB location that was described.
-      LocationUri:
-        $ref: '#/definitions/LocationUri'
-        description: The URL of the source SBM location that was described.
-      MountOptions:
-        $ref: '#/definitions/SmbMountOptions'
-        description: The mount options that are available for DataSync to use to access an SMB location.
-      User:
-        $ref: '#/definitions/SmbUser'
-        description: The user who is logged on the SMB server.
-    type: object
-  DescribeTaskExecutionRequest:
-    description: DescribeTaskExecutionRequest
-    properties:
-      TaskExecutionArn:
-        $ref: '#/definitions/TaskExecutionArn'
-        description: The Amazon Resource Name (ARN) of the task that is being executed.
-    required:
-      - TaskExecutionArn
-    type: object
-  DescribeTaskExecutionResponse:
-    description: DescribeTaskExecutionResponse
-    properties:
-      BytesTransferred:
-        $ref: '#/definitions/long'
-        description: The physical number of bytes transferred over the network.
-      BytesWritten:
-        $ref: '#/definitions/long'
-        description: The number of logical bytes written to the destination AWS storage resource.
-      EstimatedBytesToTransfer:
-        $ref: '#/definitions/long'
-        description: The estimated physical number of bytes that is to be transferred over the network.
-      EstimatedFilesToTransfer:
-        $ref: '#/definitions/long'
-        description: 'The expected number of files that is to be transferred over the network. This value is calculated during the PREPARING phase, before the TRANSFERRING phase. This value is the expected number of files to be transferred. It''s calculated based on comparing the content of the source and destination locations and finding the delta that needs to be transferred. '
-      Excludes:
-        $ref: '#/definitions/FilterList'
-        description: '<p>A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example: <code>"/folder1|/folder2"</code> </p> <p> </p>'
-      FilesTransferred:
-        $ref: '#/definitions/long'
-        description: '<p>The actual number of files that was transferred over the network. This value is calculated and updated on an ongoing basis during the TRANSFERRING phase. It''s updated periodically when each file is read from the source and sent over the network. </p> <p>If failures occur during a transfer, this value can be less than <code>EstimatedFilesToTransfer</code>. This value can also be greater than <code>EstimatedFilesTransferred</code> in some cases. This element is implementation-specific for some location types, so don''t use it as an indicator for a correct file number or to monitor your task execution.</p>'
-      Includes:
-        $ref: '#/definitions/FilterList'
-        description: '<p>A list of filter rules that determines which files to include when running a task. The list should contain a single filter string that consists of the patterns to include. The patterns are delimited by "|" (that is, a pipe), for example: <code>"/folder1|/folder2"</code> </p> <p> </p>'
-      Options:
-        $ref: '#/definitions/Options'
-      Result:
-        $ref: '#/definitions/TaskExecutionResultDetail'
-        description: The result of the task execution.
-      StartTime:
-        $ref: '#/definitions/Time'
-        description: The time that the task execution was started.
-      Status:
-        $ref: '#/definitions/TaskExecutionStatus'
-        description: '<p>The status of the task execution. </p> <p>For detailed information about task execution statuses, see Understanding Task Statuses in the <i>AWS DataSync User Guide.</i> </p>'
-      TaskExecutionArn:
-        $ref: '#/definitions/TaskExecutionArn'
-        description: '<p>The Amazon Resource Name (ARN) of the task execution that was described. <code>TaskExecutionArn</code> is hierarchical and includes <code>TaskArn</code> for the task that was executed. </p> <p>For example, a <code>TaskExecution</code> value with the ARN <code>arn:aws:datasync:us-east-1:111222333444:task/task-0208075f79cedf4a2/execution/exec-08ef1e88ec491019b</code> executed the task with the ARN <code>arn:aws:datasync:us-east-1:111222333444:task/task-0208075f79cedf4a2</code>. </p>'
-    type: object
-  DescribeTaskRequest:
-    description: DescribeTaskRequest
-    properties:
-      TaskArn:
-        $ref: '#/definitions/TaskArn'
-        description: The Amazon Resource Name (ARN) of the task to describe.
-    required:
-      - TaskArn
-    type: object
-  DescribeTaskResponse:
-    description: DescribeTaskResponse
-    properties:
-      CloudWatchLogGroupArn:
-        $ref: '#/definitions/LogGroupArn'
-        description: '<p>The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that was used to monitor and log events in the task.</p> <p>For more information on these groups, see Working with Log Groups and Log Streams in the <i>Amazon CloudWatch User Guide</i>.</p>'
-      CreationTime:
-        $ref: '#/definitions/Time'
-        description: The time that the task was created.
-      CurrentTaskExecutionArn:
-        $ref: '#/definitions/TaskExecutionArn'
-        description: The Amazon Resource Name (ARN) of the task execution that is syncing files.
-      DestinationLocationArn:
-        $ref: '#/definitions/LocationArn'
-        description: The Amazon Resource Name (ARN) of the AWS storage resource's location.
-      DestinationNetworkInterfaceArns:
-        $ref: '#/definitions/DestinationNetworkInterfaceArns'
-        description: The Amazon Resource Name (ARN) of the destination ENIs (Elastic Network Interface) that was created for your subnet.
-      ErrorCode:
-        $ref: '#/definitions/string'
-        description: Errors that AWS DataSync encountered during execution of the task. You can use this error code to help troubleshoot issues.
-      ErrorDetail:
-        $ref: '#/definitions/string'
-        description: 'Detailed description of an error that was encountered during the task execution. You can use this information to help troubleshoot issues. '
-      Excludes:
-        $ref: '#/definitions/FilterList'
-        description: '<p>A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example: <code>"/folder1|/folder2"</code> </p> <p> </p>'
-      Name:
-        $ref: '#/definitions/TagValue'
-        description: The name of the task that was described.
-      Options:
-        $ref: '#/definitions/Options'
-        description: '<p>The set of configuration options that control the behavior of a single execution of the task that occurs when you call <code>StartTaskExecution</code>. You can configure these options to preserve metadata such as user ID (UID) and group (GID), file permissions, data integrity verification, and so on.</p> <p>For each individual task execution, you can override these options by specifying the overriding <code>OverrideOptions</code> value to operation. </p>'
-      SourceLocationArn:
-        $ref: '#/definitions/LocationArn'
-        description: The Amazon Resource Name (ARN) of the source file system's location.
-      SourceNetworkInterfaceArns:
-        $ref: '#/definitions/SourceNetworkInterfaceArns'
-        description: The Amazon Resource Name (ARN) of the source ENIs (Elastic Network Interface) that was created for your subnet.
-      Status:
-        $ref: '#/definitions/TaskStatus'
-        description: '<p>The status of the task that was described.</p> <p>For detailed information about task execution statuses, see Understanding Task Statuses in the <i>AWS DataSync User Guide.</i> </p>'
-      TaskArn:
-        $ref: '#/definitions/TaskArn'
-        description: The Amazon Resource Name (ARN) of the task that was described.
-    type: object
-  DestinationNetworkInterfaceArns:
-    items:
-      $ref: '#/definitions/NetworkInterfaceArn'
+  TaskExecutionArn:
+    type: string
+    pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]*:[0-9]{12}:task/task-[0-9a-f]{17}/execution/exec-[0-9a-f]{17}$'
+    maxLength: 128
+  TagList:
     type: array
-  Duration:
-    minimum: 0
-    type: integer
+    items:
+      $ref: '#/definitions/TagListEntry'
+    minItems: 0
+    maxItems: 55
+  VpcEndpointId:
+    type: string
+    pattern: '^vpce-[0-9a-f]{17}$'
+  PLSubnetArnList:
+    type: array
+    items:
+      $ref: '#/definitions/Ec2SubnetArn'
+    minItems: 1
+    maxItems: 1
+  PLSecurityGroupArnList:
+    type: array
+    items:
+      $ref: '#/definitions/Ec2SecurityGroupArn'
+    minItems: 1
+    maxItems: 1
+  Subdirectory:
+    type: string
+    pattern: '^[a-zA-Z0-9_\-\./]*$'
+    maxLength: 4096
+  EfsFilesystemArn:
+    type: string
+    pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):elasticfilesystem:[a-z\-0-9]*:[0-9]{12}:file-system/fs-.*$'
+    maxLength: 128
   Ec2Config:
-    description: 'The subnet and the security group that DataSync uses to access target EFS file system. The subnet must have at least one mount target for that file system. The security group that you provide needs to be able to communicate with the security group on the mount target in the subnet specified. '
-    properties:
-      SecurityGroupArns:
-        $ref: '#/definitions/Ec2SecurityGroupArnList'
-        description: The Amazon Resource Names (ARNs) of the security groups that are configured for the Amazon EC2 resource.
-      SubnetArn:
-        $ref: '#/definitions/Ec2SubnetArn'
-        description: The ARN of the subnet and the security group that DataSync uses to access the target EFS file system.
+    type: object
     required:
       - SubnetArn
       - SecurityGroupArns
-    type: object
-  Ec2SecurityGroupArn:
-    maxLength: 128
-    pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\-0-9]*:[0-9]{12}:security-group/.*$'
-    type: string
-  Ec2SecurityGroupArnList:
-    items:
-      $ref: '#/definitions/Ec2SecurityGroupArn'
-    maxItems: 5
-    minItems: 1
-    type: array
-  Ec2SubnetArn:
-    maxLength: 128
-    pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\-0-9]*:[0-9]{12}:subnet/.*$'
-    type: string
-  EfsFilesystemArn:
-    maxLength: 128
-    pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):elasticfilesystem:[a-z\-0-9]*:[0-9]{12}:file-system/fs-.*$'
-    type: string
-  Endpoint:
-    maxLength: 15
-    minLength: 7
-    pattern: '\A(25[0-5]|2[0-4]\d|[0-1]?\d?\d)(\.(25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3}\z'
-    type: string
-  EndpointType:
-    enum:
-      - PUBLIC
-      - PRIVATE_LINK
-    type: string
-  FilterList:
-    items:
-      $ref: '#/definitions/FilterRule'
-    maxItems: 1
-    minItems: 0
-    type: array
-  FilterRule:
-    description: 'Specifies which files, folders and objects to include or exclude when transferring files from source to destination.'
     properties:
-      FilterType:
-        $ref: '#/definitions/FilterType'
-        description: The type of filter rule to apply. AWS DataSync only supports the SIMPLE_PATTERN rule type.
-      Value:
-        $ref: '#/definitions/FilterValue'
-        description: '<p>A single filter string that consists of the patterns to include or exclude. The patterns are delimited by "|" (that is, a pipe), for example: <code>/folder1|/folder2</code> </p> <p> </p>'
-    type: object
-  FilterType:
-    enum:
-      - SIMPLE_PATTERN
-    maxLength: 128
-    pattern: '^[A-Z0-9_]+$'
-    type: string
-  FilterValue:
-    maxLength: 409600
-    pattern: '^[^\x00]+$'
-    type: string
-  Gid:
-    enum:
-      - NONE
-      - INT_VALUE
-      - NAME
-      - BOTH
-    type: string
-  IamRoleArn:
-    maxLength: 2048
-    pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*$'
-    type: string
-  InternalException: {}
-  InvalidRequestException: {}
-  ListAgentsRequest:
-    description: ListAgentsRequest
-    properties:
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: The maximum number of agents to list.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: An opaque string that indicates the position at which to begin the next list of agents.
-    type: object
-  ListAgentsResponse:
-    description: ListAgentsResponse
-    properties:
-      Agents:
-        $ref: '#/definitions/AgentList'
-        description: A list of agents in your account.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: An opaque string that indicates the position at which to begin returning the next list of agents.
-    type: object
-  ListLocationsRequest:
-    description: ListLocationsRequest
-    properties:
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: The maximum number of locations to return.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: An opaque string that indicates the position at which to begin the next list of locations.
-    type: object
-  ListLocationsResponse:
-    description: ListLocationsResponse
-    properties:
-      Locations:
-        $ref: '#/definitions/LocationList'
-        description: An array that contains a list of locations.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: An opaque string that indicates the position at which to begin returning the next list of locations.
-    type: object
-  ListTagsForResourceRequest:
-    description: ListTagsForResourceRequest
-    properties:
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: The maximum number of locations to return.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: An opaque string that indicates the position at which to begin the next list of locations.
-      ResourceArn:
-        $ref: '#/definitions/TaggableResourceArn'
-        description: The Amazon Resource Name (ARN) of the resource whose tags to list.
-    required:
-      - ResourceArn
-    type: object
-  ListTagsForResourceResponse:
-    description: ListTagsForResourceResponse
-    properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: An opaque string that indicates the position at which to begin returning the next list of resource tags.
-      Tags:
-        $ref: '#/definitions/TagList'
-        description: Array of resource tags.
-    type: object
-  ListTaskExecutionsRequest:
-    description: ListTaskExecutions
-    properties:
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: The maximum number of executed tasks to list.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: An opaque string that indicates the position at which to begin the next list of the executed tasks.
-      TaskArn:
-        $ref: '#/definitions/TaskArn'
-        description: The Amazon Resource Name (ARN) of the task whose tasks you want to list.
-    type: object
-  ListTaskExecutionsResponse:
-    description: ListTaskExecutionsResponse
-    properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: An opaque string that indicates the position at which to begin returning the next list of executed tasks.
-      TaskExecutions:
-        $ref: '#/definitions/TaskExecutionList'
-        description: A list of executed tasks.
-    type: object
-  ListTasksRequest:
-    description: ListTasksRequest
-    properties:
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: The maximum number of tasks to return.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: An opaque string that indicates the position at which to begin the next list of tasks.
-    type: object
-  ListTasksResponse:
-    description: ListTasksResponse
-    properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: An opaque string that indicates the position at which to begin returning the next list of tasks.
-      Tasks:
-        $ref: '#/definitions/TaskList'
-        description: A list of all the tasks that are returned.
-    type: object
+      SubnetArn:
+        $ref: '#/definitions/Ec2SubnetArn'
+        description: The ARN of the subnet and the security group that DataSync uses to access the target EFS file system.
+      SecurityGroupArns:
+        $ref: '#/definitions/Ec2SecurityGroupArnList'
+        description: The Amazon Resource Names (ARNs) of the security groups that are configured for the Amazon EC2 resource.
+    description: 'The subnet and the security group that DataSync uses to access target EFS file system. The subnet must have at least one mount target for that file system. The security group that you provide needs to be able to communicate with the security group on the mount target in the subnet specified. '
   LocationArn:
-    maxLength: 128
+    type: string
     pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$'
-    type: string
-  LocationList:
-    items:
-      $ref: '#/definitions/LocationListEntry'
-    type: array
-  LocationListEntry:
-    description: Represents a single entry in a list of locations. <code>LocationListEntry</code> returns an array that contains a list of locations when the <a>ListLocations</a> operation is called.
-    properties:
-      LocationArn:
-        $ref: '#/definitions/LocationArn'
-        description: 'The Amazon Resource Name (ARN) of the location. For Network File System (NFS) or Amazon EFS, the location is the export path. For Amazon S3, the location is the prefix path that you want to mount and use as the root of the location.'
-      LocationUri:
-        $ref: '#/definitions/LocationUri'
-        description: '<p>Represents a list of URLs of a location. <code>LocationUri</code> returns an array that contains a list of locations when the <a>ListLocations</a> operation is called.</p> <p>Format: <code>TYPE://GLOBAL_ID/SUBDIR</code>.</p> <p>TYPE designates the type of location. Valid values: NFS | EFS | S3.</p> <p>GLOBAL_ID is the globally unique identifier of the resource that backs the location. An example for EFS is <code>us-east-2.fs-abcd1234</code>. An example for Amazon S3 is the bucket name, such as <code>myBucket</code>. An example for NFS is a valid IPv4 address or a host name compliant with Domain Name Service (DNS).</p> <p>SUBDIR is a valid file system path, delimited by forward slashes as is the *nix convention. For NFS and Amazon EFS, it''s the export path to mount the location. For Amazon S3, it''s the prefix path that you mount to and treat as the root of the location.</p> <p/>'
-    type: object
-  LocationUri:
-    maxLength: 4355
-    pattern: '^(efs|nfs|s3|smb)://[a-zA-Z0-9.\-]+$'
-    type: string
-  LogGroupArn:
-    maxLength: 562
-    pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):logs:[a-z\-0-9]*:[0-9]{12}:log-group:([^:\*]*)$'
-    type: string
-  MaxResults:
-    maximum: 100
-    minimum: 0
-    type: integer
-  Mtime:
-    enum:
-      - NONE
-      - PRESERVE
-    type: string
-  NetworkInterfaceArn:
     maxLength: 128
-    pattern: '^arn:aws[\-a-z]{0,}:ec2:[a-z\-0-9]*:[0-9]{12}:network-interface/eni-[0-9a-f]+$'
-    type: string
-  NextToken:
-    maxLength: 65535
-    pattern: '[a-zA-Z0-9=_-]+'
-    type: string
-  NfsMountOptions:
-    description: Represents the mount options that are available for DataSync to access an NFS location.
-    properties:
-      Version:
-        $ref: '#/definitions/NfsVersion'
-        description: 'The specific NFS version that you want DataSync to use to mount your NFS share. If you don''t specify a version, DataSync defaults to <code>AUTOMATIC</code>. That is, DataSync automatically selects a version based on negotiation with the NFS server.'
-    type: object
-  NfsVersion:
-    enum:
-      - AUTOMATIC
-      - NFS3
-      - NFS4_0
-      - NFS4_1
-    type: string
   NonEmptySubdirectory:
-    maxLength: 4096
-    pattern: '^[a-zA-Z0-9_\-\./]+$'
     type: string
+    pattern: '^[a-zA-Z0-9_\-\./]+$'
+    maxLength: 4096
+  ServerHostname:
+    type: string
+    pattern: '^(([a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9\-]*[A-Za-z0-9])$'
+    maxLength: 255
   OnPremConfig:
-    description: A list of Amazon Resource Names (ARNs) of agents to use for a Network File System (NFS) location.
+    type: object
+    required:
+      - AgentArns
     properties:
       AgentArns:
         $ref: '#/definitions/AgentArnList'
         description: ARNs)of the agents to use for an NFS location.
-    required:
-      - AgentArns
+    description: A list of Amazon Resource Names (ARNs) of agents to use for a Network File System (NFS) location.
+  NfsMountOptions:
     type: object
-  Options:
-    description: '<p>Represents the options that are available to control the behavior of a <a>StartTaskExecution</a> operation. Behavior includes preserving metadata such as user ID (UID), group ID (GID), and file permissions, and also overwriting files in the destination, data integrity verification, and so on.</p> <p>A task has a set of default options associated with it. If you don''t specify an option in <a>StartTaskExecution</a>, the default value is used. You can override the defaults options on each task execution by specifying an overriding <code>Options</code> value to <a>StartTaskExecution</a>.</p>'
     properties:
+      Version:
+        $ref: '#/definitions/NfsVersion'
+        description: 'The specific NFS version that you want DataSync to use to mount your NFS share. If you don''t specify a version, DataSync defaults to <code>AUTOMATIC</code>. That is, DataSync automatically selects a version based on negotiation with the NFS server.'
+    description: Represents the mount options that are available for DataSync to access an NFS location.
+  S3BucketArn:
+    type: string
+    pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):s3:::([^/]*)$'
+    maxLength: 76
+  S3Config:
+    type: object
+    required:
+      - BucketAccessRoleArn
+    properties:
+      BucketAccessRoleArn:
+        $ref: '#/definitions/IamRoleArn'
+        description: 'The Amazon S3 bucket to access. This bucket is used as a parameter in the <a>CreateLocationS3</a> operation. '
+    description: '<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that is used to access an Amazon S3 bucket.</p> <p>For detailed information about using such a role, see Creating a Location for Amazon S3 in the <i>AWS DataSync User Guide</i>.</p>'
+  SmbUser:
+    type: string
+    pattern: '^[^\\x5B\\x5D\\/:;|=,+*?]{1,104}$'
+    maxLength: 104
+  SmbDomain:
+    type: string
+    pattern: '^([A-Za-z0-9]+[A-Za-z0-9-.]*)*[A-Za-z0-9-]*[A-Za-z0-9]$'
+    maxLength: 253
+  SmbPassword:
+    type: string
+    pattern: '^.{0,104}$'
+    maxLength: 104
+  SmbMountOptions:
+    type: object
+    properties:
+      Version:
+        $ref: '#/definitions/SmbVersion'
+        description: 'The specific SMB version that you want DataSync to use to mount your SMB share. If you don''t specify a version, DataSync defaults to <code>AUTOMATIC</code>. That is, DataSync automatically selects a version based on negotiation with the SMB Server server.'
+    description: Represents the mount options that are available for DataSync to access an SMB location.
+  LogGroupArn:
+    type: string
+    pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):logs:[a-z\-0-9]*:[0-9]{12}:log-group:([^:\*]*)$'
+    maxLength: 562
+  Options:
+    type: object
+    properties:
+      VerifyMode:
+        $ref: '#/definitions/VerifyMode'
+        description: '<p>A value that determines whether a data integrity verification should be performed at the end of a task execution after all data and metadata have been transferred. </p> <p>Default value: POINT_IN_TIME_CONSISTENT.</p> <p>POINT_IN_TIME_CONSISTENT: Perform verification (recommended). </p> <p>NONE: Skip verification.</p>'
       Atime:
         $ref: '#/definitions/Atime'
         description: '<p>A file metadata value that shows the last time a file was accessed (that is, when the file was read or written to). If you set <code>Atime</code> to BEST_EFFORT, DataSync attempts to preserve the original <code>Atime</code> attribute on all source files (that is, the version before the PREPARING phase). However, <code>Atime</code>''s behavior is not fully standard across platforms, so AWS DataSync can only do this on a best-effort basis. </p> <p>Default value: BEST_EFFORT.</p> <p>BEST_EFFORT: Attempt to preserve the per-file <code>Atime</code> value (recommended).</p> <p>NONE: Ignore <code>Atime</code>.</p> <note> <p>If <code>Atime</code> is set to BEST_EFFORT, <code>Mtime</code> must be set to PRESERVE. </p> <p>If <code>Atime</code> is set to NONE, <code>Mtime</code> must also be NONE. </p> </note>'
-      BytesPerSecond:
-        $ref: '#/definitions/BytesPerSecond'
-        description: 'A value that limits the bandwidth used by AWS DataSync. For example, if you want AWS DataSync to use a maximum of 1 MB, set this value to <code>1048576</code> (<code>=1024*1024</code>).'
-      Gid:
-        $ref: '#/definitions/Gid'
-        description: '<p>The group ID (GID) of the file''s owners. </p> <p>Default value: INT_VALUE. This preserves the integer value of the ID.</p> <p>INT_VALUE: Preserve the integer value of user ID (UID) and GID (recommended).</p> <p>NONE: Ignore UID and GID. </p>'
       Mtime:
         $ref: '#/definitions/Mtime'
         description: '<p>A value that indicates the last time that a file was modified (that is, a file was written to) before the PREPARING phase. </p> <p>Default value: PRESERVE. </p> <p>PRESERVE: Preserve original <code>Mtime</code> (recommended)</p> <p> NONE: Ignore <code>Mtime</code>. </p> <note> <p>If <code>Mtime</code> is set to PRESERVE, <code>Atime</code> must be set to BEST_EFFORT.</p> <p>If <code>Mtime</code> is set to NONE, <code>Atime</code> must also be set to NONE. </p> </note>'
-      PosixPermissions:
-        $ref: '#/definitions/PosixPermissions'
-        description: '<p>A value that determines which users or groups can access a file for a specific purpose such as reading, writing, or execution of the file. </p> <p>Default value: PRESERVE.</p> <p>PRESERVE: Preserve POSIX-style permissions (recommended).</p> <p>NONE: Ignore permissions. </p> <note> <p>AWS DataSync can preserve extant permissions of a source location.</p> </note>'
+      Uid:
+        $ref: '#/definitions/Uid'
+        description: '<p>The user ID (UID) of the file''s owner. </p> <p>Default value: INT_VALUE. This preserves the integer value of the ID.</p> <p>INT_VALUE: Preserve the integer value of UID and group ID (GID) (recommended).</p> <p>NONE: Ignore UID and GID. </p>'
+      Gid:
+        $ref: '#/definitions/Gid'
+        description: '<p>The group ID (GID) of the file''s owners. </p> <p>Default value: INT_VALUE. This preserves the integer value of the ID.</p> <p>INT_VALUE: Preserve the integer value of user ID (UID) and GID (recommended).</p> <p>NONE: Ignore UID and GID. </p>'
       PreserveDeletedFiles:
         $ref: '#/definitions/PreserveDeletedFiles'
         description: '<p>A value that specifies whether files in the destination that don''t exist in the source file system should be preserved. </p> <p>Default value: PRESERVE.</p> <p>PRESERVE: Ignore such destination files (recommended). </p> <p>REMOVE: Delete destination files that aren’t present in the source.</p>'
       PreserveDevices:
         $ref: '#/definitions/PreserveDevices'
         description: '<p>A value that determines whether AWS DataSync should preserve the metadata of block and character devices in the source file system, and recreate the files with that device name and metadata on the destination.</p> <note> <p>AWS DataSync can''t sync the actual contents of such devices, because they are nonterminal and don''t return an end-of-file (EOF) marker.</p> </note> <p>Default value: NONE.</p> <p>NONE: Ignore special devices (recommended). </p> <p>PRESERVE: Preserve character and block device metadata. This option isn''t currently supported for Amazon EFS. </p>'
-      Uid:
-        $ref: '#/definitions/Uid'
-        description: '<p>The user ID (UID) of the file''s owner. </p> <p>Default value: INT_VALUE. This preserves the integer value of the ID.</p> <p>INT_VALUE: Preserve the integer value of UID and group ID (GID) (recommended).</p> <p>NONE: Ignore UID and GID. </p>'
-      VerifyMode:
-        $ref: '#/definitions/VerifyMode'
-        description: '<p>A value that determines whether a data integrity verification should be performed at the end of a task execution after all data and metadata have been transferred. </p> <p>Default value: POINT_IN_TIME_CONSISTENT.</p> <p>POINT_IN_TIME_CONSISTENT: Perform verification (recommended). </p> <p>NONE: Skip verification.</p>'
-    type: object
-  PLSecurityGroupArnList:
-    items:
-      $ref: '#/definitions/Ec2SecurityGroupArn'
-    maxItems: 1
-    minItems: 1
+      PosixPermissions:
+        $ref: '#/definitions/PosixPermissions'
+        description: '<p>A value that determines which users or groups can access a file for a specific purpose such as reading, writing, or execution of the file. </p> <p>Default value: PRESERVE.</p> <p>PRESERVE: Preserve POSIX-style permissions (recommended).</p> <p>NONE: Ignore permissions. </p> <note> <p>AWS DataSync can preserve extant permissions of a source location.</p> </note>'
+      BytesPerSecond:
+        $ref: '#/definitions/BytesPerSecond'
+        description: 'A value that limits the bandwidth used by AWS DataSync. For example, if you want AWS DataSync to use a maximum of 1 MB, set this value to <code>1048576</code> (<code>=1024*1024</code>).'
+    description: '<p>Represents the options that are available to control the behavior of a <a>StartTaskExecution</a> operation. Behavior includes preserving metadata such as user ID (UID), group ID (GID), and file permissions, and also overwriting files in the destination, data integrity verification, and so on.</p> <p>A task has a set of default options associated with it. If you don''t specify an option in <a>StartTaskExecution</a>, the default value is used. You can override the defaults options on each task execution by specifying an overriding <code>Options</code> value to <a>StartTaskExecution</a>.</p>'
+  FilterList:
     type: array
-  PLSubnetArnList:
     items:
-      $ref: '#/definitions/Ec2SubnetArn'
+      $ref: '#/definitions/FilterRule'
+    minItems: 0
     maxItems: 1
-    minItems: 1
-    type: array
-  PhaseStatus:
-    enum:
-      - PENDING
-      - SUCCESS
-      - ERROR
+  TaskArn:
     type: string
-  PosixPermissions:
-    enum:
-      - NONE
-      - BEST_EFFORT
-      - PRESERVE
+    pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]*:[0-9]{12}:task/task-[0-9a-f]{17}$'
+    maxLength: 128
+  Time:
     type: string
-  PreserveDeletedFiles:
-    enum:
-      - PRESERVE
-      - REMOVE
+    format: date-time
+  EndpointType:
     type: string
-  PreserveDevices:
     enum:
-      - NONE
-      - PRESERVE
-    type: string
+      - PUBLIC
+      - PRIVATE_LINK
   PrivateLinkConfig:
-    description: 'The VPC endpoint, subnet and security group that an agent uses to access IP addresses in a VPC (Virtual Private Cloud).'
+    type: object
     properties:
-      PrivateLinkEndpoint:
-        $ref: '#/definitions/Endpoint'
-        description: 'The private endpoint that is configured for an agent that has access to IP addresses in a <a href="https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html">PrivateLink</a>. An agent that is configured with this endpoint will not be accessible over the public Internet.'
-      SecurityGroupArns:
-        $ref: '#/definitions/PLSecurityGroupArnList'
-        description: The Amazon Resource Names (ARNs) of the security groups that are configured for the EC2 resource that hosts an agent activated in a VPC or an agent that has access to a VPC endpoint.
-      SubnetArns:
-        $ref: '#/definitions/PLSubnetArnList'
-        description: The Amazon Resource Names (ARNs) of the subnets that are configured for an agent activated in a VPC or an agent that has access to a VPC endpoint.
       VpcEndpointId:
         $ref: '#/definitions/VpcEndpointId'
         description: The ID of the VPC endpoint that is configured for an agent. An agent that is configured with a VPC endpoint will not be accessible over the public Internet.
-    type: object
-  S3BucketArn:
-    maxLength: 76
-    pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):s3:::([^/]*)$'
+      PrivateLinkEndpoint:
+        $ref: '#/definitions/Endpoint'
+        description: 'The private endpoint that is configured for an agent that has access to IP addresses in a <a href="https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html">PrivateLink</a>. An agent that is configured with this endpoint will not be accessible over the public Internet.'
+      SubnetArns:
+        $ref: '#/definitions/PLSubnetArnList'
+        description: The Amazon Resource Names (ARNs) of the subnets that are configured for an agent activated in a VPC or an agent that has access to a VPC endpoint.
+      SecurityGroupArns:
+        $ref: '#/definitions/PLSecurityGroupArnList'
+        description: The Amazon Resource Names (ARNs) of the security groups that are configured for the EC2 resource that hosts an agent activated in a VPC or an agent that has access to a VPC endpoint.
+    description: 'The VPC endpoint, subnet and security group that an agent uses to access IP addresses in a VPC (Virtual Private Cloud).'
+  LocationUri:
     type: string
-  S3Config:
-    description: '<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that is used to access an Amazon S3 bucket.</p> <p>For detailed information about using such a role, see Creating a Location for Amazon S3 in the <i>AWS DataSync User Guide</i>.</p>'
-    properties:
-      BucketAccessRoleArn:
-        $ref: '#/definitions/IamRoleArn'
-        description: 'The Amazon S3 bucket to access. This bucket is used as a parameter in the <a>CreateLocationS3</a> operation. '
-    required:
-      - BucketAccessRoleArn
-    type: object
-  ServerHostname:
-    maxLength: 255
-    pattern: '^(([a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9\-]*[A-Za-z0-9])$'
+    pattern: '^(efs|nfs|s3|smb)://[a-zA-Z0-9.\-]+$'
+    maxLength: 4355
+  TaskExecutionStatus:
     type: string
-  SmbDomain:
-    maxLength: 253
-    pattern: '^([A-Za-z0-9]+[A-Za-z0-9-.]*)*[A-Za-z0-9-]*[A-Za-z0-9]$'
-    type: string
-  SmbMountOptions:
-    description: Represents the mount options that are available for DataSync to access an SMB location.
-    properties:
-      Version:
-        $ref: '#/definitions/SmbVersion'
-        description: 'The specific SMB version that you want DataSync to use to mount your SMB share. If you don''t specify a version, DataSync defaults to <code>AUTOMATIC</code>. That is, DataSync automatically selects a version based on negotiation with the SMB Server server.'
-    type: object
-  SmbPassword:
-    maxLength: 104
-    pattern: '^.{0,104}$'
-    type: string
-  SmbUser:
-    maxLength: 104
-    pattern: '^[^\\x5B\\x5D\\/:;|=,+*?]{1,104}$'
-    type: string
-  SmbVersion:
     enum:
-      - AUTOMATIC
-      - SMB2
-      - SMB3
-    type: string
-  SourceNetworkInterfaceArns:
-    items:
-      $ref: '#/definitions/NetworkInterfaceArn'
-    type: array
-  StartTaskExecutionRequest:
-    description: StartTaskExecutionRequest
-    properties:
-      Includes:
-        $ref: '#/definitions/FilterList'
-        description: '<p>A list of filter rules that determines which files to include when running a task. The pattern should contain a single filter string that consists of the patterns to include. The patterns are delimited by "|" (that is, a pipe). For example: <code>"/folder1|/folder2"</code> </p> <p> </p>'
-      OverrideOptions:
-        $ref: '#/definitions/Options'
-      TaskArn:
-        $ref: '#/definitions/TaskArn'
-        description: The Amazon Resource Name (ARN) of the task to start.
-    required:
-      - TaskArn
-    type: object
-  StartTaskExecutionResponse:
-    description: StartTaskExecutionResponse
-    properties:
-      TaskExecutionArn:
-        $ref: '#/definitions/TaskExecutionArn'
-        description: The Amazon Resource Name (ARN) of the specific task execution that was started.
-    type: object
-  Subdirectory:
-    maxLength: 4096
-    pattern: '^[a-zA-Z0-9_\-\./]*$'
-    type: string
-  TagKey:
-    maxLength: 256
-    minLength: 1
-    pattern: '^[a-zA-Z0-9\s+=._:/-]+$'
-    type: string
-  TagKeyList:
-    items:
-      $ref: '#/definitions/TagKey'
-    maxItems: 50
-    minItems: 1
-    type: array
-  TagList:
-    items:
-      $ref: '#/definitions/TagListEntry'
-    maxItems: 55
-    minItems: 0
-    type: array
-  TagListEntry:
-    description: Represents a single entry in a list of AWS resource tags. <code>TagListEntry</code> returns an array that contains a list of tasks when the <a>ListTagsForResource</a> operation is called.
-    properties:
-      Key:
-        $ref: '#/definitions/TagKey'
-        description: The key for an AWS resource tag.
-      Value:
-        $ref: '#/definitions/TagValue'
-        description: The value for an AWS resource tag.
-    required:
-      - Key
-    type: object
-  TagResourceRequest:
-    description: TagResourceRequest
-    properties:
-      ResourceArn:
-        $ref: '#/definitions/TaggableResourceArn'
-        description: The Amazon Resource Name (ARN) of the resource to apply the tag to.
-      Tags:
-        $ref: '#/definitions/TagList'
-        description: The tags to apply.
-    required:
-      - ResourceArn
-      - Tags
-    type: object
-  TagResourceResponse:
-    properties: {}
-    type: object
-  TagValue:
-    maxLength: 256
-    minLength: 1
-    pattern: '^[a-zA-Z0-9\s+=._:/-]+$'
-    type: string
-  TaggableResourceArn:
-    maxLength: 128
-    pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]+:[0-9]{12}:(agent|task|location)/(agent|task|loc)-[0-9a-z]{17}$'
-    type: string
-  TaskArn:
-    maxLength: 128
-    pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]*:[0-9]{12}:task/task-[0-9a-f]{17}$'
-    type: string
-  TaskExecutionArn:
-    maxLength: 128
-    pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]*:[0-9]{12}:task/task-[0-9a-f]{17}/execution/exec-[0-9a-f]{17}$'
-    type: string
-  TaskExecutionList:
-    items:
-      $ref: '#/definitions/TaskExecutionListEntry'
-    type: array
-  TaskExecutionListEntry:
-    description: Represents a single entry in a list of task executions. <code>TaskExecutionListEntry</code> returns an array that contains a list of specific invocations of a task when <a>ListTaskExecutions</a> operation is called.
-    properties:
-      Status:
-        $ref: '#/definitions/TaskExecutionStatus'
-        description: The status of a task execution.
-      TaskExecutionArn:
-        $ref: '#/definitions/TaskExecutionArn'
-        description: The Amazon Resource Name (ARN) of the task that was executed.
-    type: object
+      - LAUNCHING
+      - PREPARING
+      - TRANSFERRING
+      - VERIFYING
+      - SUCCESS
+      - ERROR
+  long:
+    type: integer
   TaskExecutionResultDetail:
-    description: 'Describes the detailed result of a <code>TaskExecution</code> operation. This result includes the time in milliseconds spent in each phase, the status of the task execution, and the errors encountered.'
+    type: object
     properties:
-      ErrorCode:
-        $ref: '#/definitions/string'
-        description: Errors that AWS DataSync encountered during execution of the task. You can use this error code to help troubleshoot issues.
-      ErrorDetail:
-        $ref: '#/definitions/string'
-        description: 'Detailed description of an error that was encountered during the task execution. You can use this information to help troubleshoot issues. '
       PrepareDuration:
         $ref: '#/definitions/Duration'
         description: 'The total time in milliseconds that AWS DataSync spent in the PREPARING phase. '
@@ -2184,184 +2152,216 @@ definitions:
       VerifyStatus:
         $ref: '#/definitions/PhaseStatus'
         description: The status of the VERIFYING Phase.
-    type: object
-  TaskExecutionStatus:
-    enum:
-      - LAUNCHING
-      - PREPARING
-      - TRANSFERRING
-      - VERIFYING
-      - SUCCESS
-      - ERROR
-    type: string
-  TaskList:
-    items:
-      $ref: '#/definitions/TaskListEntry'
-    type: array
-  TaskListEntry:
-    description: Represents a single entry in a list of tasks. <code>TaskListEntry</code> returns an array that contains a list of tasks when the <a>ListTasks</a> operation is called. A task includes the source and destination file systems to sync and the options to use for the tasks.
-    properties:
-      Name:
-        $ref: '#/definitions/TagValue'
-        description: The name of the task.
-      Status:
-        $ref: '#/definitions/TaskStatus'
-        description: The status of the task.
-      TaskArn:
-        $ref: '#/definitions/TaskArn'
-        description: The Amazon Resource Name (ARN) of the task.
-    type: object
+      ErrorCode:
+        $ref: '#/definitions/string'
+        description: Errors that AWS DataSync encountered during execution of the task. You can use this error code to help troubleshoot issues.
+      ErrorDetail:
+        $ref: '#/definitions/string'
+        description: 'Detailed description of an error that was encountered during the task execution. You can use this information to help troubleshoot issues. '
+    description: 'Describes the detailed result of a <code>TaskExecution</code> operation. This result includes the time in milliseconds spent in each phase, the status of the task execution, and the errors encountered.'
   TaskStatus:
+    type: string
     enum:
       - AVAILABLE
       - CREATING
       - RUNNING
       - UNAVAILABLE
+  SourceNetworkInterfaceArns:
+    type: array
+    items:
+      $ref: '#/definitions/NetworkInterfaceArn'
+  DestinationNetworkInterfaceArns:
+    type: array
+    items:
+      $ref: '#/definitions/NetworkInterfaceArn'
+  string:
     type: string
-  Time:
-    format: date-time
+  NetworkInterfaceArn:
     type: string
-  Uid:
+    pattern: '^arn:aws[\-a-z]{0,}:ec2:[a-z\-0-9]*:[0-9]{12}:network-interface/eni-[0-9a-f]+$'
+    maxLength: 128
+  Duration:
+    type: integer
+    minimum: 0
+  Ec2SubnetArn:
+    type: string
+    pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\-0-9]*:[0-9]{12}:subnet/.*$'
+    maxLength: 128
+  Ec2SecurityGroupArnList:
+    type: array
+    items:
+      $ref: '#/definitions/Ec2SecurityGroupArn'
+    minItems: 1
+    maxItems: 5
+  Ec2SecurityGroupArn:
+    type: string
+    pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\-0-9]*:[0-9]{12}:security-group/.*$'
+    maxLength: 128
+  Endpoint:
+    type: string
+    pattern: '\A(25[0-5]|2[0-4]\d|[0-1]?\d?\d)(\.(25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3}\z'
+    minLength: 7
+    maxLength: 15
+  FilterRule:
+    type: object
+    properties:
+      FilterType:
+        $ref: '#/definitions/FilterType'
+        description: The type of filter rule to apply. AWS DataSync only supports the SIMPLE_PATTERN rule type.
+      Value:
+        $ref: '#/definitions/FilterValue'
+        description: '<p>A single filter string that consists of the patterns to include or exclude. The patterns are delimited by "|" (that is, a pipe), for example: <code>/folder1|/folder2</code> </p> <p> </p>'
+    description: 'Specifies which files, folders and objects to include or exclude when transferring files from source to destination.'
+  FilterType:
+    type: string
+    enum:
+      - SIMPLE_PATTERN
+    pattern: '^[A-Z0-9_]+$'
+    maxLength: 128
+  FilterValue:
+    type: string
+    pattern: '^[^\x00]+$'
+    maxLength: 409600
+  Gid:
+    type: string
     enum:
       - NONE
       - INT_VALUE
       - NAME
       - BOTH
+  IamRoleArn:
     type: string
-  UntagResourceRequest:
-    description: UntagResourceRequest
+    pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*$'
+    maxLength: 2048
+  MaxResults:
+    type: integer
+    minimum: 0
+    maximum: 100
+  NextToken:
+    type: string
+    pattern: '[a-zA-Z0-9=_-]+'
+    maxLength: 65535
+  LocationList:
+    type: array
+    items:
+      $ref: '#/definitions/LocationListEntry'
+  TaggableResourceArn:
+    type: string
+    pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]+:[0-9]{12}:(agent|task|location)/(agent|task|loc)-[0-9a-z]{17}$'
+    maxLength: 128
+  TaskExecutionList:
+    type: array
+    items:
+      $ref: '#/definitions/TaskExecutionListEntry'
+  TaskList:
+    type: array
+    items:
+      $ref: '#/definitions/TaskListEntry'
+  LocationListEntry:
+    type: object
     properties:
-      Keys:
-        $ref: '#/definitions/TagKeyList'
-        description: The keys in the key-value pair in the tag to remove.
-      ResourceArn:
-        $ref: '#/definitions/TaggableResourceArn'
-        description: The Amazon Resource Name (ARN) of the resource to remove the tag from.
-    required:
-      - ResourceArn
-      - Keys
-    type: object
-  UntagResourceResponse:
-    properties: {}
-    type: object
-  UpdateAgentRequest:
-    description: UpdateAgentRequest
-    properties:
-      AgentArn:
-        $ref: '#/definitions/AgentArn'
-        description: The Amazon Resource Name (ARN) of the agent to update.
-      Name:
-        $ref: '#/definitions/TagValue'
-        description: The name that you want to use to configure the agent.
-    required:
-      - AgentArn
-    type: object
-  UpdateAgentResponse:
-    properties: {}
-    type: object
-  UpdateTaskRequest:
-    description: UpdateTaskResponse
-    properties:
-      CloudWatchLogGroupArn:
-        $ref: '#/definitions/LogGroupArn'
-        description: The Amazon Resource Name (ARN) of the resource name of the CloudWatch LogGroup.
-      Excludes:
-        $ref: '#/definitions/FilterList'
-        description: '<p>A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example: <code>"/folder1|/folder2"</code> </p> <p> </p>'
-      Name:
-        $ref: '#/definitions/TagValue'
-        description: The name of the task to update.
-      Options:
-        $ref: '#/definitions/Options'
-      TaskArn:
-        $ref: '#/definitions/TaskArn'
-        description: The Amazon Resource Name (ARN) of the resource name of the task to update.
-    required:
-      - TaskArn
-    type: object
-  UpdateTaskResponse:
-    properties: {}
-    type: object
+      LocationArn:
+        $ref: '#/definitions/LocationArn'
+        description: 'The Amazon Resource Name (ARN) of the location. For Network File System (NFS) or Amazon EFS, the location is the export path. For Amazon S3, the location is the prefix path that you want to mount and use as the root of the location.'
+      LocationUri:
+        $ref: '#/definitions/LocationUri'
+        description: '<p>Represents a list of URLs of a location. <code>LocationUri</code> returns an array that contains a list of locations when the <a>ListLocations</a> operation is called.</p> <p>Format: <code>TYPE://GLOBAL_ID/SUBDIR</code>.</p> <p>TYPE designates the type of location. Valid values: NFS | EFS | S3.</p> <p>GLOBAL_ID is the globally unique identifier of the resource that backs the location. An example for EFS is <code>us-east-2.fs-abcd1234</code>. An example for Amazon S3 is the bucket name, such as <code>myBucket</code>. An example for NFS is a valid IPv4 address or a host name compliant with Domain Name Service (DNS).</p> <p>SUBDIR is a valid file system path, delimited by forward slashes as is the *nix convention. For NFS and Amazon EFS, it''s the export path to mount the location. For Amazon S3, it''s the prefix path that you mount to and treat as the root of the location.</p> <p/>'
+    description: Represents a single entry in a list of locations. <code>LocationListEntry</code> returns an array that contains a list of locations when the <a>ListLocations</a> operation is called.
+  Mtime:
+    type: string
+    enum:
+      - NONE
+      - PRESERVE
+  NfsVersion:
+    type: string
+    enum:
+      - AUTOMATIC
+      - NFS3
+      - NFS4_0
+      - NFS4_1
   VerifyMode:
+    type: string
     enum:
       - POINT_IN_TIME_CONSISTENT
       - NONE
+  Uid:
     type: string
-  VpcEndpointId:
-    pattern: '^vpce-[0-9a-f]{17}$'
+    enum:
+      - NONE
+      - INT_VALUE
+      - NAME
+      - BOTH
+  PreserveDeletedFiles:
     type: string
-  long:
-    type: integer
-  string:
+    enum:
+      - PRESERVE
+      - REMOVE
+  PreserveDevices:
     type: string
-x-servers:
-  - description: The DataSync multi-region endpoint
-    url: 'http://datasync.{region}.amazonaws.com'
-    variables:
-      region:
-        default: us-east-1
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-  - description: The DataSync multi-region endpoint
-    url: 'https://datasync.{region}.amazonaws.com'
-    variables:
-      region:
-        default: us-east-1
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-  - description: The DataSync endpoint for China (Beijing) and China (Ningxia)
-    url: 'http://datasync.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        default: cn-north-1
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-  - description: The DataSync endpoint for China (Beijing) and China (Ningxia)
-    url: 'https://datasync.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        default: cn-north-1
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
+    enum:
+      - NONE
+      - PRESERVE
+  PosixPermissions:
+    type: string
+    enum:
+      - NONE
+      - BEST_EFFORT
+      - PRESERVE
+  PhaseStatus:
+    type: string
+    enum:
+      - PENDING
+      - SUCCESS
+      - ERROR
+  SmbVersion:
+    type: string
+    enum:
+      - AUTOMATIC
+      - SMB2
+      - SMB3
+  TagKey:
+    type: string
+    pattern: '^[a-zA-Z0-9\s+=._:/-]+$'
+    minLength: 1
+    maxLength: 256
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+    minItems: 1
+    maxItems: 50
+  TagListEntry:
+    type: object
+    required:
+      - Key
+    properties:
+      Key:
+        $ref: '#/definitions/TagKey'
+        description: The key for an AWS resource tag.
+      Value:
+        $ref: '#/definitions/TagValue'
+        description: The value for an AWS resource tag.
+    description: Represents a single entry in a list of AWS resource tags. <code>TagListEntry</code> returns an array that contains a list of tasks when the <a>ListTagsForResource</a> operation is called.
+  TaskExecutionListEntry:
+    type: object
+    properties:
+      TaskExecutionArn:
+        $ref: '#/definitions/TaskExecutionArn'
+        description: The Amazon Resource Name (ARN) of the task that was executed.
+      Status:
+        $ref: '#/definitions/TaskExecutionStatus'
+        description: The status of a task execution.
+    description: Represents a single entry in a list of task executions. <code>TaskExecutionListEntry</code> returns an array that contains a list of specific invocations of a task when <a>ListTaskExecutions</a> operation is called.
+  TaskListEntry:
+    type: object
+    properties:
+      TaskArn:
+        $ref: '#/definitions/TaskArn'
+        description: The Amazon Resource Name (ARN) of the task.
+      Status:
+        $ref: '#/definitions/TaskStatus'
+        description: The status of the task.
+      Name:
+        $ref: '#/definitions/TagValue'
+        description: The name of the task.
+    description: Represents a single entry in a list of tasks. <code>TaskListEntry</code> returns an array that contains a list of tasks when the <a>ListTasks</a> operation is called. A task includes the source and destination file systems to sync and the options to use for the tasks.

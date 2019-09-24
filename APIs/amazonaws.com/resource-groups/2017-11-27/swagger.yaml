@@ -1,141 +1,168 @@
 swagger: '2.0'
-schemes:
-  - https
-  - http
-host: resource-groups.amazonaws.com
-basePath: /
 info:
+  version: '2017-11-27'
+  x-release: v4
+  title: AWS Resource Groups
+  description: '<fullname>AWS Resource Groups</fullname> <p>AWS Resource Groups lets you organize AWS resources such as Amazon EC2 instances, Amazon Relational Database Service databases, and Amazon S3 buckets into groups using criteria that you define as tags. A resource group is a collection of resources that match the resource types specified in a query, and share one or more tags or portions of tags. You can create a group of resources based on their roles in your cloud infrastructure, lifecycle stages, regions, application layers, or virtually any criteria. Resource groups enable you to automate management tasks, such as those in AWS Systems Manager Automation documents, on tag-related resources in AWS Systems Manager. Groups of tagged resources also let you quickly view a custom console in AWS Systems Manager that shows AWS Config compliance and other monitoring data about member resources.</p> <p>To create a resource group, build a resource query, and specify tags that identify the criteria that members of the group have in common. Tags are key-value pairs.</p> <p>For more information about Resource Groups, see the <a href="https://docs.aws.amazon.com/ARG/latest/userguide/welcome.html">AWS Resource Groups User Guide</a>.</p> <p>AWS Resource Groups uses a REST-compliant API that you can use to perform the following types of operations.</p> <ul> <li> <p>Create, Read, Update, and Delete (CRUD) operations on resource groups and resource query entities</p> </li> <li> <p>Applying, editing, and removing tags from resource groups</p> </li> <li> <p>Resolving resource group member ARNs so they can be returned as search results</p> </li> <li> <p>Getting data about resources that are members of a group</p> </li> <li> <p>Searching AWS resources based on a resource query</p> </li> </ul>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
-    email: mike.ralphson@gmail.com
     name: Mike Ralphson
+    email: mike.ralphson@gmail.com
     url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
-  description: '<fullname>AWS Resource Groups</fullname> <p>AWS Resource Groups lets you organize AWS resources such as Amazon EC2 instances, Amazon Relational Database Service databases, and Amazon S3 buckets into groups using criteria that you define as tags. A resource group is a collection of resources that match the resource types specified in a query, and share one or more tags or portions of tags. You can create a group of resources based on their roles in your cloud infrastructure, lifecycle stages, regions, application layers, or virtually any criteria. Resource groups enable you to automate management tasks, such as those in AWS Systems Manager Automation documents, on tag-related resources in AWS Systems Manager. Groups of tagged resources also let you quickly view a custom console in AWS Systems Manager that shows AWS Config compliance and other monitoring data about member resources.</p> <p>To create a resource group, build a resource query, and specify tags that identify the criteria that members of the group have in common. Tags are key-value pairs.</p> <p>For more information about Resource Groups, see the <a href="https://docs.aws.amazon.com/ARG/latest/userguide/welcome.html">AWS Resource Groups User Guide</a>.</p> <p>AWS Resource Groups uses a REST-compliant API that you can use to perform the following types of operations.</p> <ul> <li> <p>Create, Read, Update, and Delete (CRUD) operations on resource groups and resource query entities</p> </li> <li> <p>Applying, editing, and removing tags from resource groups</p> </li> <li> <p>Resolving resource group member ARNs so they can be returned as search results</p> </li> <li> <p>Getting data about resources that are members of a group</p> </li> <li> <p>Searching AWS resources based on a resource query</p> </li> </ul>'
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
-  termsOfService: 'https://aws.amazon.com/service-terms/'
-  title: AWS Resource Groups
-  version: '2017-11-27'
+  x-providerName: amazonaws.com
+  x-serviceName: resource-groups
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/resource-groups-2017-11-27.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
   x-apiClientRegistration:
     url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
-  x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://twitter.com/awscloud/profile_image?size=original'
-  x-origin:
-    - contentType: application/json
-      converter:
-        url: 'https://github.com/mermade/aws2openapi'
-        version: 1.0.0
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/resource-groups-2017-11-27.normal.json'
-      x-apisguru-direct: true
   x-preferred: true
-  x-providerName: amazonaws.com
-  x-release: v4
-  x-serviceName: resource-groups
 externalDocs:
   description: Amazon Web Services documentation
   url: 'https://docs.aws.amazon.com/resource-groups/'
+host: resource-groups.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+x-servers:
+  - url: 'http://resource-groups.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Resource Groups multi-region endpoint
+  - url: 'https://resource-groups.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Resource Groups multi-region endpoint
+  - url: 'http://resource-groups.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Resource Groups endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://resource-groups.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Resource Groups endpoint for China (Beijing) and China (Ningxia)
 consumes:
   - application/json
 produces:
   - application/json
+parameters:
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
 securityDefinitions:
   hmac:
-    description: Amazon Signature authorization v4
-    in: header
-    name: Authorization
     type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
     x-amazon-apigateway-authtype: awsSigv4
 security:
   - hmac: []
-parameters:
-  X-Amz-Algorithm:
-    in: header
-    name: X-Amz-Algorithm
-    required: false
-    type: string
-  X-Amz-Content-Sha256:
-    in: header
-    name: X-Amz-Content-Sha256
-    required: false
-    type: string
-  X-Amz-Credential:
-    in: header
-    name: X-Amz-Credential
-    required: false
-    type: string
-  X-Amz-Date:
-    in: header
-    name: X-Amz-Date
-    required: false
-    type: string
-  X-Amz-Security-Token:
-    in: header
-    name: X-Amz-Security-Token
-    required: false
-    type: string
-  X-Amz-Signature:
-    in: header
-    name: X-Amz-Signature
-    required: false
-    type: string
-  X-Amz-SignedHeaders:
-    in: header
-    name: X-Amz-SignedHeaders
-    required: false
-    type: string
 paths:
   /groups:
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
-      description: 'Creates a group with a specified name, description, and resource query.'
       operationId: CreateGroup
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            properties:
-              Description:
-                description: 'The description of the resource group. Descriptions can have a maximum of 511 characters, including letters, numbers, hyphens, underscores, punctuation, and spaces.'
-                maxLength: 512
-                pattern: '[\sa-zA-Z0-9_\.-]*'
-                type: string
-              Name:
-                description: 'The name of the group, which is the identifier of the group in other operations. A resource group name cannot be updated after it is created. A resource group name can have a maximum of 128 characters, including letters, numbers, hyphens, dots, and underscores. The name cannot start with <code>AWS</code> or <code>aws</code>; these are reserved. A resource group name must be unique within your account.'
-                maxLength: 128
-                minLength: 1
-                pattern: '[a-zA-Z0-9_\.-]+'
-                type: string
-              ResourceQuery:
-                description: The query that is used to define a resource group or a search for resources.
-                properties:
-                  Query:
-                    $ref: '#/definitions/Query'
-                    description: The query that defines a group or a search.
-                  Type:
-                    $ref: '#/definitions/QueryType'
-                    description: '<p>The type of the query. The valid values in this release are <code>TAG_FILTERS_1_0</code> and <code>CLOUDFORMATION_STACK_1_0</code>.</p> <p> <i> <code>TAG_FILTERS_1_0:</code> </i> A JSON syntax that lets you specify a collection of simple tag filters for resource types and tags, as supported by the AWS Tagging API <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html">GetResources</a> operation. If you specify more than one tag key, only resources that match all tag keys, and at least one value of each specified tag key, are returned in your query. If you specify more than one value for a tag key, a resource matches the filter if it has a tag key value that matches <i>any</i> of the specified values.</p> <p>For example, consider the following sample query for resources that have two tags, <code>Stage</code> and <code>Version</code>, with two values each. (<code>[{"Key":"Stage","Values":["Test","Deploy"]},{"Key":"Version","Values":["1","2"]}]</code>) The results of this query might include the following.</p> <ul> <li> <p>An EC2 instance that has the following two tags: <code>{"Key":"Stage","Value":"Deploy"}</code>, and <code>{"Key":"Version","Value":"2"}</code> </p> </li> <li> <p>An S3 bucket that has the following two tags: {"Key":"Stage","Value":"Test"}, and {"Key":"Version","Value":"1"}</p> </li> </ul> <p>The query would not return the following results, however. The following EC2 instance does not have all tag keys specified in the filter, so it is rejected. The RDS database has all of the tag keys, but no values that match at least one of the specified tag key values in the filter.</p> <ul> <li> <p>An EC2 instance that has only the following tag: <code>{"Key":"Stage","Value":"Deploy"}</code>.</p> </li> <li> <p>An RDS database that has the following two tags: <code>{"Key":"Stage","Value":"Archived"}</code>, and <code>{"Key":"Version","Value":"4"}</code> </p> </li> </ul> <p> <i> <code>CLOUDFORMATION_STACK_1_0:</code> </i> A JSON syntax that lets you specify a CloudFormation stack ARN.</p>'
-                type: object
-              Tags:
-                additionalProperties:
-                  $ref: '#/definitions/TagValue'
-                description: 'The tags to add to the group. A tag is a string-to-string map of key-value pairs. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
-                type: object
-            required:
-              - Name
-              - ResourceQuery
-            type: object
+      description: 'Creates a group with a specified name, description, and resource query.'
       responses:
         '200':
           description: Success
@@ -161,7 +188,42 @@ paths:
           description: InternalServerErrorException
           schema:
             $ref: '#/definitions/InternalServerErrorException'
-  /groups-list:
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - Name
+              - ResourceQuery
+            properties:
+              Name:
+                description: 'The name of the group, which is the identifier of the group in other operations. A resource group name cannot be updated after it is created. A resource group name can have a maximum of 128 characters, including letters, numbers, hyphens, dots, and underscores. The name cannot start with <code>AWS</code> or <code>aws</code>; these are reserved. A resource group name must be unique within your account.'
+                type: string
+                pattern: '[a-zA-Z0-9_\.-]+'
+                minLength: 1
+                maxLength: 128
+              Description:
+                description: 'The description of the resource group. Descriptions can have a maximum of 511 characters, including letters, numbers, hyphens, underscores, punctuation, and spaces.'
+                type: string
+                pattern: '[\sa-zA-Z0-9_\.-]*'
+                maxLength: 512
+              ResourceQuery:
+                description: The query that is used to define a resource group or a search for resources.
+                type: object
+                properties:
+                  Type:
+                    $ref: '#/definitions/QueryType'
+                    description: '<p>The type of the query. The valid values in this release are <code>TAG_FILTERS_1_0</code> and <code>CLOUDFORMATION_STACK_1_0</code>.</p> <p> <i> <code>TAG_FILTERS_1_0:</code> </i> A JSON syntax that lets you specify a collection of simple tag filters for resource types and tags, as supported by the AWS Tagging API <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html">GetResources</a> operation. If you specify more than one tag key, only resources that match all tag keys, and at least one value of each specified tag key, are returned in your query. If you specify more than one value for a tag key, a resource matches the filter if it has a tag key value that matches <i>any</i> of the specified values.</p> <p>For example, consider the following sample query for resources that have two tags, <code>Stage</code> and <code>Version</code>, with two values each. (<code>[{"Key":"Stage","Values":["Test","Deploy"]},{"Key":"Version","Values":["1","2"]}]</code>) The results of this query might include the following.</p> <ul> <li> <p>An EC2 instance that has the following two tags: <code>{"Key":"Stage","Value":"Deploy"}</code>, and <code>{"Key":"Version","Value":"2"}</code> </p> </li> <li> <p>An S3 bucket that has the following two tags: {"Key":"Stage","Value":"Test"}, and {"Key":"Version","Value":"1"}</p> </li> </ul> <p>The query would not return the following results, however. The following EC2 instance does not have all tag keys specified in the filter, so it is rejected. The RDS database has all of the tag keys, but no values that match at least one of the specified tag key values in the filter.</p> <ul> <li> <p>An EC2 instance that has only the following tag: <code>{"Key":"Stage","Value":"Deploy"}</code>.</p> </li> <li> <p>An RDS database that has the following two tags: <code>{"Key":"Stage","Value":"Archived"}</code>, and <code>{"Key":"Version","Value":"4"}</code> </p> </li> </ul> <p> <i> <code>CLOUDFORMATION_STACK_1_0:</code> </i> A JSON syntax that lets you specify a CloudFormation stack ARN.</p>'
+                  Query:
+                    $ref: '#/definitions/Query'
+                    description: The query that defines a group or a search.
+              Tags:
+                description: 'The tags to add to the group. A tag is a string-to-string map of key-value pairs. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -170,84 +232,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-    post:
-      description: Returns a list of existing resource groups in your account.
-      operationId: ListGroups
-      parameters:
-        - description: 'The maximum number of resource group results that are returned by ListGroups in paginated output. By default, this number is 50.'
-          in: query
-          maximum: 50
-          minimum: 1
-          name: maxResults
-          required: false
-          type: integer
-        - description: 'The NextToken value that is returned in a paginated <code>ListGroups</code> request. To get the next page of results, run the call again, add the NextToken parameter, and specify the NextToken value.'
-          in: query
-          maxLength: 8192
-          minLength: 0
-          name: nextToken
-          pattern: '^[a-zA-Z0-9+/]*={0,2}$'
-          required: false
-          type: string
-        - in: body
-          name: body
-          required: true
-          schema:
-            properties:
-              Filters:
-                description: '<p>Filters, formatted as GroupFilter objects, that you want to apply to a ListGroups operation.</p> <ul> <li> <p> <code>resource-type</code> - Filter groups by resource type. Specify up to five resource types in the format AWS::ServiceCode::ResourceType. For example, AWS::EC2::Instance, or AWS::S3::Bucket.</p> </li> </ul>'
-                items:
-                  $ref: '#/definitions/GroupFilter'
-                type: array
-            type: object
-        - description: Pagination limit
-          in: query
-          name: MaxResults
-          required: false
-          type: string
-        - description: Pagination token
-          in: query
-          name: NextToken
-          required: false
-          type: string
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/ListGroupsOutput'
-        '480':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '482':
-          description: MethodNotAllowedException
-          schema:
-            $ref: '#/definitions/MethodNotAllowedException'
-        '483':
-          description: TooManyRequestsException
-          schema:
-            $ref: '#/definitions/TooManyRequestsException'
-        '484':
-          description: InternalServerErrorException
-          schema:
-            $ref: '#/definitions/InternalServerErrorException'
   '/groups/{GroupName}':
     delete:
-      description: Deletes a specified resource group. Deleting a resource group does not delete resources that are members of the group; it only deletes the group structure.
       operationId: DeleteGroup
-      parameters:
-        - description: The name of the resource group to delete.
-          in: path
-          maxLength: 128
-          minLength: 1
-          name: GroupName
-          pattern: '[a-zA-Z0-9_\.-]+'
-          required: true
-          type: string
+      description: Deletes a specified resource group. Deleting a resource group does not delete resources that are members of the group; it only deletes the group structure.
       responses:
         '200':
           description: Success
@@ -277,18 +265,26 @@ paths:
           description: InternalServerErrorException
           schema:
             $ref: '#/definitions/InternalServerErrorException'
-    get:
-      description: Returns information about a specified resource group.
-      operationId: GetGroup
       parameters:
-        - description: The name of the resource group.
+        - name: GroupName
           in: path
-          maxLength: 128
-          minLength: 1
-          name: GroupName
-          pattern: '[a-zA-Z0-9_\.-]+'
           required: true
+          description: The name of the resource group to delete.
           type: string
+          pattern: '[a-zA-Z0-9_\.-]+'
+          minLength: 1
+          maxLength: 128
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetGroup
+      description: Returns information about a specified resource group.
       responses:
         '200':
           description: Success
@@ -318,37 +314,18 @@ paths:
           description: InternalServerErrorException
           schema:
             $ref: '#/definitions/InternalServerErrorException'
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-    put:
-      description: Updates an existing group with a new or changed description. You cannot update the name of a resource group.
-      operationId: UpdateGroup
       parameters:
-        - description: The name of the resource group for which you want to update its description.
+        - name: GroupName
           in: path
-          maxLength: 128
-          minLength: 1
-          name: GroupName
-          pattern: '[a-zA-Z0-9_\.-]+'
           required: true
+          description: The name of the resource group.
           type: string
-        - in: body
-          name: body
-          required: true
-          schema:
-            properties:
-              Description:
-                description: 'The description of the resource group. Descriptions can have a maximum of 511 characters, including letters, numbers, hyphens, underscores, punctuation, and spaces.'
-                maxLength: 512
-                pattern: '[\sa-zA-Z0-9_\.-]*'
-                type: string
-            type: object
+          pattern: '[a-zA-Z0-9_\.-]+'
+          minLength: 1
+          maxLength: 128
+    put:
+      operationId: UpdateGroup
+      description: Updates an existing group with a new or changed description. You cannot update the name of a resource group.
       responses:
         '200':
           description: Success
@@ -378,19 +355,30 @@ paths:
           description: InternalServerErrorException
           schema:
             $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: GroupName
+          in: path
+          required: true
+          description: The name of the resource group for which you want to update its description.
+          type: string
+          pattern: '[a-zA-Z0-9_\.-]+'
+          minLength: 1
+          maxLength: 128
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              Description:
+                description: 'The description of the resource group. Descriptions can have a maximum of 511 characters, including letters, numbers, hyphens, underscores, punctuation, and spaces.'
+                type: string
+                pattern: '[\sa-zA-Z0-9_\.-]*'
+                maxLength: 512
   '/groups/{GroupName}/query':
     get:
-      description: Returns the resource query associated with the specified resource group.
       operationId: GetGroupQuery
-      parameters:
-        - description: The name of the resource group.
-          in: path
-          maxLength: 128
-          minLength: 1
-          name: GroupName
-          pattern: '[a-zA-Z0-9_\.-]+'
-          required: true
-          type: string
+      description: Returns the resource query associated with the specified resource group.
       responses:
         '200':
           description: Success
@@ -420,6 +408,15 @@ paths:
           description: InternalServerErrorException
           schema:
             $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: GroupName
+          in: path
+          required: true
+          description: The name of the resource group.
+          type: string
+          pattern: '[a-zA-Z0-9_\.-]+'
+          minLength: 1
+          maxLength: 128
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -429,35 +426,8 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     put:
-      description: Updates the resource query of a group.
       operationId: UpdateGroupQuery
-      parameters:
-        - description: The name of the resource group for which you want to edit the query.
-          in: path
-          maxLength: 128
-          minLength: 1
-          name: GroupName
-          pattern: '[a-zA-Z0-9_\.-]+'
-          required: true
-          type: string
-        - in: body
-          name: body
-          required: true
-          schema:
-            properties:
-              ResourceQuery:
-                description: The query that is used to define a resource group or a search for resources.
-                properties:
-                  Query:
-                    $ref: '#/definitions/Query'
-                    description: The query that defines a group or a search.
-                  Type:
-                    $ref: '#/definitions/QueryType'
-                    description: '<p>The type of the query. The valid values in this release are <code>TAG_FILTERS_1_0</code> and <code>CLOUDFORMATION_STACK_1_0</code>.</p> <p> <i> <code>TAG_FILTERS_1_0:</code> </i> A JSON syntax that lets you specify a collection of simple tag filters for resource types and tags, as supported by the AWS Tagging API <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html">GetResources</a> operation. If you specify more than one tag key, only resources that match all tag keys, and at least one value of each specified tag key, are returned in your query. If you specify more than one value for a tag key, a resource matches the filter if it has a tag key value that matches <i>any</i> of the specified values.</p> <p>For example, consider the following sample query for resources that have two tags, <code>Stage</code> and <code>Version</code>, with two values each. (<code>[{"Key":"Stage","Values":["Test","Deploy"]},{"Key":"Version","Values":["1","2"]}]</code>) The results of this query might include the following.</p> <ul> <li> <p>An EC2 instance that has the following two tags: <code>{"Key":"Stage","Value":"Deploy"}</code>, and <code>{"Key":"Version","Value":"2"}</code> </p> </li> <li> <p>An S3 bucket that has the following two tags: {"Key":"Stage","Value":"Test"}, and {"Key":"Version","Value":"1"}</p> </li> </ul> <p>The query would not return the following results, however. The following EC2 instance does not have all tag keys specified in the filter, so it is rejected. The RDS database has all of the tag keys, but no values that match at least one of the specified tag key values in the filter.</p> <ul> <li> <p>An EC2 instance that has only the following tag: <code>{"Key":"Stage","Value":"Deploy"}</code>.</p> </li> <li> <p>An RDS database that has the following two tags: <code>{"Key":"Stage","Value":"Archived"}</code>, and <code>{"Key":"Version","Value":"4"}</code> </p> </li> </ul> <p> <i> <code>CLOUDFORMATION_STACK_1_0:</code> </i> A JSON syntax that lets you specify a CloudFormation stack ARN.</p>'
-                type: object
-            required:
-              - ResourceQuery
-            type: object
+      description: Updates the resource query of a group.
       responses:
         '200':
           description: Success
@@ -487,7 +457,75 @@ paths:
           description: InternalServerErrorException
           schema:
             $ref: '#/definitions/InternalServerErrorException'
-  '/groups/{GroupName}/resource-identifiers-list':
+      parameters:
+        - name: GroupName
+          in: path
+          required: true
+          description: The name of the resource group for which you want to edit the query.
+          type: string
+          pattern: '[a-zA-Z0-9_\.-]+'
+          minLength: 1
+          maxLength: 128
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - ResourceQuery
+            properties:
+              ResourceQuery:
+                description: The query that is used to define a resource group or a search for resources.
+                type: object
+                properties:
+                  Type:
+                    $ref: '#/definitions/QueryType'
+                    description: '<p>The type of the query. The valid values in this release are <code>TAG_FILTERS_1_0</code> and <code>CLOUDFORMATION_STACK_1_0</code>.</p> <p> <i> <code>TAG_FILTERS_1_0:</code> </i> A JSON syntax that lets you specify a collection of simple tag filters for resource types and tags, as supported by the AWS Tagging API <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html">GetResources</a> operation. If you specify more than one tag key, only resources that match all tag keys, and at least one value of each specified tag key, are returned in your query. If you specify more than one value for a tag key, a resource matches the filter if it has a tag key value that matches <i>any</i> of the specified values.</p> <p>For example, consider the following sample query for resources that have two tags, <code>Stage</code> and <code>Version</code>, with two values each. (<code>[{"Key":"Stage","Values":["Test","Deploy"]},{"Key":"Version","Values":["1","2"]}]</code>) The results of this query might include the following.</p> <ul> <li> <p>An EC2 instance that has the following two tags: <code>{"Key":"Stage","Value":"Deploy"}</code>, and <code>{"Key":"Version","Value":"2"}</code> </p> </li> <li> <p>An S3 bucket that has the following two tags: {"Key":"Stage","Value":"Test"}, and {"Key":"Version","Value":"1"}</p> </li> </ul> <p>The query would not return the following results, however. The following EC2 instance does not have all tag keys specified in the filter, so it is rejected. The RDS database has all of the tag keys, but no values that match at least one of the specified tag key values in the filter.</p> <ul> <li> <p>An EC2 instance that has only the following tag: <code>{"Key":"Stage","Value":"Deploy"}</code>.</p> </li> <li> <p>An RDS database that has the following two tags: <code>{"Key":"Stage","Value":"Archived"}</code>, and <code>{"Key":"Version","Value":"4"}</code> </p> </li> </ul> <p> <i> <code>CLOUDFORMATION_STACK_1_0:</code> </i> A JSON syntax that lets you specify a CloudFormation stack ARN.</p>'
+                  Query:
+                    $ref: '#/definitions/Query'
+                    description: The query that defines a group or a search.
+  '/resources/{Arn}/tags':
+    get:
+      operationId: GetTags
+      description: 'Returns a list of tags that are associated with a resource group, specified by an ARN.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetTagsOutput'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '485':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: Arn
+          in: path
+          required: true
+          description: The ARN of the resource group for which you want a list of tags. The resource must exist within the account you are using.
+          type: string
+          pattern: 'arn:aws(-[a-z]+)*:resource-groups:[a-z]{2}-[a-z]+-\d{1}:[0-9]{12}:group/[a-zA-Z0-9_\.-]{1,128}'
+          minLength: 12
+          maxLength: 1600
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -496,54 +534,118 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-    post:
-      description: Returns a list of ARNs of resources that are members of a specified resource group.
-      operationId: ListGroupResources
+    put:
+      operationId: Tag
+      description: Adds tags to a resource group with the specified ARN. Existing tags on a resource group are not changed if they are not specified in the request parameters.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TagOutput'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '485':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
       parameters:
-        - description: The name of the resource group.
+        - name: Arn
           in: path
-          maxLength: 128
-          minLength: 1
-          name: GroupName
-          pattern: '[a-zA-Z0-9_\.-]+'
           required: true
+          description: The ARN of the resource to which to add tags.
           type: string
-        - description: 'The maximum number of group member ARNs that are returned in a single call by ListGroupResources, in paginated output. By default, this number is 50.'
-          in: query
-          maximum: 50
-          minimum: 1
-          name: maxResults
-          required: false
-          type: integer
-        - description: 'The NextToken value that is returned in a paginated ListGroupResources request. To get the next page of results, run the call again, add the NextToken parameter, and specify the NextToken value.'
-          in: query
-          maxLength: 8192
-          minLength: 0
-          name: nextToken
-          pattern: '^[a-zA-Z0-9+/]*={0,2}$'
-          required: false
-          type: string
-        - in: body
-          name: body
+          pattern: 'arn:aws(-[a-z]+)*:resource-groups:[a-z]{2}-[a-z]+-\d{1}:[0-9]{12}:group/[a-zA-Z0-9_\.-]{1,128}'
+          minLength: 12
+          maxLength: 1600
+        - name: body
+          in: body
           required: true
           schema:
-            properties:
-              Filters:
-                description: '<p>Filters, formatted as ResourceFilter objects, that you want to apply to a ListGroupResources operation.</p> <ul> <li> <p> <code>resource-type</code> - Filter resources by their type. Specify up to five resource types in the format AWS::ServiceCode::ResourceType. For example, AWS::EC2::Instance, or AWS::S3::Bucket.</p> </li> </ul>'
-                items:
-                  $ref: '#/definitions/ResourceFilter'
-                type: array
             type: object
-        - description: Pagination limit
-          in: query
-          name: MaxResults
-          required: false
+            required:
+              - Tags
+            properties:
+              Tags:
+                description: 'The tags to add to the specified resource. A tag is a string-to-string map of key-value pairs. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
+    patch:
+      operationId: Untag
+      description: Deletes specified tags from a specified resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UntagOutput'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '485':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: Arn
+          in: path
+          required: true
+          description: The ARN of the resource from which to remove tags.
           type: string
-        - description: Pagination token
-          in: query
-          name: NextToken
-          required: false
-          type: string
+          pattern: 'arn:aws(-[a-z]+)*:resource-groups:[a-z]{2}-[a-z]+-\d{1}:[0-9]{12}:group/[a-zA-Z0-9_\.-]{1,128}'
+          minLength: 12
+          maxLength: 1600
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - Keys
+            properties:
+              Keys:
+                description: The keys of the tags to be removed.
+                type: array
+                items:
+                  $ref: '#/definitions/TagKey'
+  '/groups/{GroupName}/resource-identifiers-list':
+    post:
+      operationId: ListGroupResources
+      description: Returns a list of ARNs of resources that are members of a specified resource group.
       responses:
         '200':
           description: Success
@@ -577,7 +679,51 @@ paths:
           description: InternalServerErrorException
           schema:
             $ref: '#/definitions/InternalServerErrorException'
-  /resources/search:
+      parameters:
+        - name: GroupName
+          in: path
+          required: true
+          description: The name of the resource group.
+          type: string
+          pattern: '[a-zA-Z0-9_\.-]+'
+          minLength: 1
+          maxLength: 128
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The maximum number of group member ARNs that are returned in a single call by ListGroupResources, in paginated output. By default, this number is 50.'
+          type: integer
+          minimum: 1
+          maximum: 50
+        - name: nextToken
+          in: query
+          required: false
+          description: 'The NextToken value that is returned in a paginated ListGroupResources request. To get the next page of results, run the call again, add the NextToken parameter, and specify the NextToken value.'
+          type: string
+          pattern: '^[a-zA-Z0-9+/]*={0,2}$'
+          minLength: 0
+          maxLength: 8192
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              Filters:
+                description: '<p>Filters, formatted as ResourceFilter objects, that you want to apply to a ListGroupResources operation.</p> <ul> <li> <p> <code>resource-type</code> - Filter resources by their type. Specify up to five resource types in the format AWS::ServiceCode::ResourceType. For example, AWS::EC2::Instance, or AWS::S3::Bucket.</p> </li> </ul>'
+                type: array
+                items:
+                  $ref: '#/definitions/ResourceFilter'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -586,49 +732,84 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /groups-list:
     post:
-      description: Returns a list of AWS resource identifiers that matches a specified query. The query uses the same format as a resource query in a CreateGroup or UpdateGroupQuery operation.
-      operationId: SearchResources
+      operationId: ListGroups
+      description: Returns a list of existing resource groups in your account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListGroupsOutput'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '482':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '484':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
       parameters:
-        - in: body
-          name: body
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The maximum number of resource group results that are returned by ListGroups in paginated output. By default, this number is 50.'
+          type: integer
+          minimum: 1
+          maximum: 50
+        - name: nextToken
+          in: query
+          required: false
+          description: 'The NextToken value that is returned in a paginated <code>ListGroups</code> request. To get the next page of results, run the call again, add the NextToken parameter, and specify the NextToken value.'
+          type: string
+          pattern: '^[a-zA-Z0-9+/]*={0,2}$'
+          minLength: 0
+          maxLength: 8192
+        - name: body
+          in: body
           required: true
           schema:
-            properties:
-              MaxResults:
-                description: 'The maximum number of group member ARNs returned by <code>SearchResources</code> in paginated output. By default, this number is 50.'
-                maximum: 50
-                minimum: 1
-                type: integer
-              NextToken:
-                description: 'The NextToken value that is returned in a paginated <code>SearchResources</code> request. To get the next page of results, run the call again, add the NextToken parameter, and specify the NextToken value.'
-                maxLength: 8192
-                minLength: 0
-                pattern: '^[a-zA-Z0-9+/]*={0,2}$'
-                type: string
-              ResourceQuery:
-                description: The query that is used to define a resource group or a search for resources.
-                properties:
-                  Query:
-                    $ref: '#/definitions/Query'
-                    description: The query that defines a group or a search.
-                  Type:
-                    $ref: '#/definitions/QueryType'
-                    description: '<p>The type of the query. The valid values in this release are <code>TAG_FILTERS_1_0</code> and <code>CLOUDFORMATION_STACK_1_0</code>.</p> <p> <i> <code>TAG_FILTERS_1_0:</code> </i> A JSON syntax that lets you specify a collection of simple tag filters for resource types and tags, as supported by the AWS Tagging API <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html">GetResources</a> operation. If you specify more than one tag key, only resources that match all tag keys, and at least one value of each specified tag key, are returned in your query. If you specify more than one value for a tag key, a resource matches the filter if it has a tag key value that matches <i>any</i> of the specified values.</p> <p>For example, consider the following sample query for resources that have two tags, <code>Stage</code> and <code>Version</code>, with two values each. (<code>[{"Key":"Stage","Values":["Test","Deploy"]},{"Key":"Version","Values":["1","2"]}]</code>) The results of this query might include the following.</p> <ul> <li> <p>An EC2 instance that has the following two tags: <code>{"Key":"Stage","Value":"Deploy"}</code>, and <code>{"Key":"Version","Value":"2"}</code> </p> </li> <li> <p>An S3 bucket that has the following two tags: {"Key":"Stage","Value":"Test"}, and {"Key":"Version","Value":"1"}</p> </li> </ul> <p>The query would not return the following results, however. The following EC2 instance does not have all tag keys specified in the filter, so it is rejected. The RDS database has all of the tag keys, but no values that match at least one of the specified tag key values in the filter.</p> <ul> <li> <p>An EC2 instance that has only the following tag: <code>{"Key":"Stage","Value":"Deploy"}</code>.</p> </li> <li> <p>An RDS database that has the following two tags: <code>{"Key":"Stage","Value":"Archived"}</code>, and <code>{"Key":"Version","Value":"4"}</code> </p> </li> </ul> <p> <i> <code>CLOUDFORMATION_STACK_1_0:</code> </i> A JSON syntax that lets you specify a CloudFormation stack ARN.</p>'
-                type: object
-            required:
-              - ResourceQuery
             type: object
-        - description: Pagination limit
-          in: query
-          name: MaxResults
-          required: false
+            properties:
+              Filters:
+                description: '<p>Filters, formatted as GroupFilter objects, that you want to apply to a ListGroups operation.</p> <ul> <li> <p> <code>resource-type</code> - Filter groups by resource type. Specify up to five resource types in the format AWS::ServiceCode::ResourceType. For example, AWS::EC2::Instance, or AWS::S3::Bucket.</p> </li> </ul>'
+                type: array
+                items:
+                  $ref: '#/definitions/GroupFilter'
+        - name: MaxResults
           type: string
-        - description: Pagination token
           in: query
-          name: NextToken
+          description: Pagination limit
           required: false
+        - name: NextToken
           type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /resources/search:
+    post:
+      operationId: SearchResources
+      description: Returns a list of AWS resource identifiers that matches a specified query. The query uses the same format as a resource query in a CreateGroup or UpdateGroupQuery operation.
       responses:
         '200':
           description: Success
@@ -658,48 +839,46 @@ paths:
           description: InternalServerErrorException
           schema:
             $ref: '#/definitions/InternalServerErrorException'
-  '/resources/{Arn}/tags':
-    get:
-      description: 'Returns a list of tags that are associated with a resource group, specified by an ARN.'
-      operationId: GetTags
       parameters:
-        - description: The ARN of the resource group for which you want a list of tags. The resource must exist within the account you are using.
-          in: path
-          maxLength: 1600
-          minLength: 12
-          name: Arn
-          pattern: 'arn:aws(-[a-z]+)*:resource-groups:[a-z]{2}-[a-z]+-\d{1}:[0-9]{12}:group/[a-zA-Z0-9_\.-]{1,128}'
+        - name: body
+          in: body
           required: true
+          schema:
+            type: object
+            required:
+              - ResourceQuery
+            properties:
+              ResourceQuery:
+                description: The query that is used to define a resource group or a search for resources.
+                type: object
+                properties:
+                  Type:
+                    $ref: '#/definitions/QueryType'
+                    description: '<p>The type of the query. The valid values in this release are <code>TAG_FILTERS_1_0</code> and <code>CLOUDFORMATION_STACK_1_0</code>.</p> <p> <i> <code>TAG_FILTERS_1_0:</code> </i> A JSON syntax that lets you specify a collection of simple tag filters for resource types and tags, as supported by the AWS Tagging API <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html">GetResources</a> operation. If you specify more than one tag key, only resources that match all tag keys, and at least one value of each specified tag key, are returned in your query. If you specify more than one value for a tag key, a resource matches the filter if it has a tag key value that matches <i>any</i> of the specified values.</p> <p>For example, consider the following sample query for resources that have two tags, <code>Stage</code> and <code>Version</code>, with two values each. (<code>[{"Key":"Stage","Values":["Test","Deploy"]},{"Key":"Version","Values":["1","2"]}]</code>) The results of this query might include the following.</p> <ul> <li> <p>An EC2 instance that has the following two tags: <code>{"Key":"Stage","Value":"Deploy"}</code>, and <code>{"Key":"Version","Value":"2"}</code> </p> </li> <li> <p>An S3 bucket that has the following two tags: {"Key":"Stage","Value":"Test"}, and {"Key":"Version","Value":"1"}</p> </li> </ul> <p>The query would not return the following results, however. The following EC2 instance does not have all tag keys specified in the filter, so it is rejected. The RDS database has all of the tag keys, but no values that match at least one of the specified tag key values in the filter.</p> <ul> <li> <p>An EC2 instance that has only the following tag: <code>{"Key":"Stage","Value":"Deploy"}</code>.</p> </li> <li> <p>An RDS database that has the following two tags: <code>{"Key":"Stage","Value":"Archived"}</code>, and <code>{"Key":"Version","Value":"4"}</code> </p> </li> </ul> <p> <i> <code>CLOUDFORMATION_STACK_1_0:</code> </i> A JSON syntax that lets you specify a CloudFormation stack ARN.</p>'
+                  Query:
+                    $ref: '#/definitions/Query'
+                    description: The query that defines a group or a search.
+              MaxResults:
+                description: 'The maximum number of group member ARNs returned by <code>SearchResources</code> in paginated output. By default, this number is 50.'
+                type: integer
+                minimum: 1
+                maximum: 50
+              NextToken:
+                description: 'The NextToken value that is returned in a paginated <code>SearchResources</code> request. To get the next page of results, run the call again, add the NextToken parameter, and specify the NextToken value.'
+                type: string
+                pattern: '^[a-zA-Z0-9+/]*={0,2}$'
+                minLength: 0
+                maxLength: 8192
+        - name: MaxResults
           type: string
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/GetTagsOutput'
-        '480':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '482':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '483':
-          description: MethodNotAllowedException
-          schema:
-            $ref: '#/definitions/MethodNotAllowedException'
-        '484':
-          description: TooManyRequestsException
-          schema:
-            $ref: '#/definitions/TooManyRequestsException'
-        '485':
-          description: InternalServerErrorException
-          schema:
-            $ref: '#/definitions/InternalServerErrorException'
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -708,135 +887,9 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-    patch:
-      description: Deletes specified tags from a specified resource.
-      operationId: Untag
-      parameters:
-        - description: The ARN of the resource from which to remove tags.
-          in: path
-          maxLength: 1600
-          minLength: 12
-          name: Arn
-          pattern: 'arn:aws(-[a-z]+)*:resource-groups:[a-z]{2}-[a-z]+-\d{1}:[0-9]{12}:group/[a-zA-Z0-9_\.-]{1,128}'
-          required: true
-          type: string
-        - in: body
-          name: body
-          required: true
-          schema:
-            properties:
-              Keys:
-                description: The keys of the tags to be removed.
-                items:
-                  $ref: '#/definitions/TagKey'
-                type: array
-            required:
-              - Keys
-            type: object
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/UntagOutput'
-        '480':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '482':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '483':
-          description: MethodNotAllowedException
-          schema:
-            $ref: '#/definitions/MethodNotAllowedException'
-        '484':
-          description: TooManyRequestsException
-          schema:
-            $ref: '#/definitions/TooManyRequestsException'
-        '485':
-          description: InternalServerErrorException
-          schema:
-            $ref: '#/definitions/InternalServerErrorException'
-    put:
-      description: Adds tags to a resource group with the specified ARN. Existing tags on a resource group are not changed if they are not specified in the request parameters.
-      operationId: Tag
-      parameters:
-        - description: The ARN of the resource to which to add tags.
-          in: path
-          maxLength: 1600
-          minLength: 12
-          name: Arn
-          pattern: 'arn:aws(-[a-z]+)*:resource-groups:[a-z]{2}-[a-z]+-\d{1}:[0-9]{12}:group/[a-zA-Z0-9_\.-]{1,128}'
-          required: true
-          type: string
-        - in: body
-          name: body
-          required: true
-          schema:
-            properties:
-              Tags:
-                additionalProperties:
-                  $ref: '#/definitions/TagValue'
-                description: 'The tags to add to the specified resource. A tag is a string-to-string map of key-value pairs. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
-                type: object
-            required:
-              - Tags
-            type: object
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/TagOutput'
-        '480':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '482':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '483':
-          description: MethodNotAllowedException
-          schema:
-            $ref: '#/definitions/MethodNotAllowedException'
-        '484':
-          description: TooManyRequestsException
-          schema:
-            $ref: '#/definitions/TooManyRequestsException'
-        '485':
-          description: InternalServerErrorException
-          schema:
-            $ref: '#/definitions/InternalServerErrorException'
 definitions:
-  BadRequestException: {}
-  CreateGroupInput:
-    properties:
-      Description:
-        $ref: '#/definitions/GroupDescription'
-        description: 'The description of the resource group. Descriptions can have a maximum of 511 characters, including letters, numbers, hyphens, underscores, punctuation, and spaces.'
-      Name:
-        $ref: '#/definitions/GroupName'
-        description: 'The name of the group, which is the identifier of the group in other operations. A resource group name cannot be updated after it is created. A resource group name can have a maximum of 128 characters, including letters, numbers, hyphens, dots, and underscores. The name cannot start with <code>AWS</code> or <code>aws</code>; these are reserved. A resource group name must be unique within your account.'
-      ResourceQuery:
-        $ref: '#/definitions/ResourceQuery'
-        description: The resource query that determines which AWS resources are members of this group.
-      Tags:
-        $ref: '#/definitions/Tags'
-        description: 'The tags to add to the group. A tag is a string-to-string map of key-value pairs. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
-    required:
-      - Name
-      - ResourceQuery
-    type: object
   CreateGroupOutput:
+    type: object
     properties:
       Group:
         $ref: '#/definitions/Group'
@@ -847,39 +900,49 @@ definitions:
       Tags:
         $ref: '#/definitions/Tags'
         description: The tags associated with the group.
-    type: object
-  DeleteGroupInput:
-    properties: {}
-    type: object
+  QueryType:
+    type: string
+    enum:
+      - TAG_FILTERS_1_0
+      - CLOUDFORMATION_STACK_1_0
+    pattern: ^\w+$
+    minLength: 1
+    maxLength: 128
+  Query:
+    type: string
+    pattern: '[\s\S]*'
+    maxLength: 4096
+  TagValue:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 0
+    maxLength: 256
+  BadRequestException: {}
+  ForbiddenException: {}
+  MethodNotAllowedException: {}
+  TooManyRequestsException: {}
+  InternalServerErrorException: {}
   DeleteGroupOutput:
+    type: object
     properties:
       Group:
         $ref: '#/definitions/Group'
         description: A full description of the deleted resource group.
-    type: object
-  ForbiddenException: {}
-  GetGroupInput:
-    properties: {}
-    type: object
+  NotFoundException: {}
   GetGroupOutput:
+    type: object
     properties:
       Group:
         $ref: '#/definitions/Group'
         description: A full description of the resource group.
-    type: object
-  GetGroupQueryInput:
-    properties: {}
-    type: object
   GetGroupQueryOutput:
+    type: object
     properties:
       GroupQuery:
         $ref: '#/definitions/GroupQuery'
         description: The resource query associated with the specified group.
-    type: object
-  GetTagsInput:
-    properties: {}
-    type: object
   GetTagsOutput:
+    type: object
     properties:
       Arn:
         $ref: '#/definitions/GroupArn'
@@ -887,126 +950,34 @@ definitions:
       Tags:
         $ref: '#/definitions/Tags'
         description: The tags associated with the specified resource group.
-    type: object
-  Group:
-    description: A resource group.
-    properties:
-      Description:
-        $ref: '#/definitions/GroupDescription'
-        description: The description of the resource group.
-      GroupArn:
-        $ref: '#/definitions/GroupArn'
-        description: The ARN of a resource group.
-      Name:
-        $ref: '#/definitions/GroupName'
-        description: The name of a resource group.
-    required:
-      - GroupArn
-      - Name
-    type: object
-  GroupArn:
-    maxLength: 1600
-    minLength: 12
-    pattern: 'arn:aws(-[a-z]+)*:resource-groups:[a-z]{2}-[a-z]+-\d{1}:[0-9]{12}:group/[a-zA-Z0-9_\.-]{1,128}'
-    type: string
-  GroupDescription:
-    maxLength: 512
-    pattern: '[\sa-zA-Z0-9_\.-]*'
-    type: string
-  GroupFilter:
-    description: A filter name and value pair that is used to obtain more specific results from a list of groups.
-    properties:
-      Name:
-        $ref: '#/definitions/GroupFilterName'
-        description: The name of the filter. Filter names are case-sensitive.
-      Values:
-        $ref: '#/definitions/GroupFilterValues'
-        description: 'One or more filter values. Allowed filter values vary by group filter name, and are case-sensitive.'
-    required:
-      - Name
-      - Values
-    type: object
-  GroupFilterList:
-    items:
-      $ref: '#/definitions/GroupFilter'
-    type: array
-  GroupFilterName:
-    enum:
-      - resource-type
-    type: string
-  GroupFilterValue:
-    maxLength: 128
-    minLength: 1
-    pattern: 'AWS::(AllSupported|[a-zA-Z0-9]+::[a-zA-Z0-9]+)'
-    type: string
-  GroupFilterValues:
-    items:
-      $ref: '#/definitions/GroupFilterValue'
-    maxItems: 5
-    minItems: 1
-    type: array
-  GroupIdentifier:
-    description: The ARN and group name of a group.
-    properties:
-      GroupArn:
-        $ref: '#/definitions/GroupArn'
-        description: The ARN of a resource group.
-      GroupName:
-        $ref: '#/definitions/GroupName'
-        description: The name of a resource group.
-    type: object
-  GroupIdentifierList:
-    items:
-      $ref: '#/definitions/GroupIdentifier'
-    type: array
-  GroupList:
-    items:
-      $ref: '#/definitions/Group'
-    type: array
-  GroupName:
-    maxLength: 128
-    minLength: 1
-    pattern: '[a-zA-Z0-9_\.-]+'
-    type: string
-  GroupQuery:
-    description: The underlying resource query of a resource group. Resources that match query results are part of the group.
-    properties:
-      GroupName:
-        $ref: '#/definitions/GroupName'
-        description: The name of a resource group that is associated with a specific resource query.
-      ResourceQuery:
-        $ref: '#/definitions/ResourceQuery'
-        description: The resource query which determines which AWS resources are members of the associated resource group.
-    required:
-      - GroupName
-      - ResourceQuery
-    type: object
-  InternalServerErrorException: {}
-  ListGroupResourcesInput:
-    properties:
-      Filters:
-        $ref: '#/definitions/ResourceFilterList'
-        description: '<p>Filters, formatted as ResourceFilter objects, that you want to apply to a ListGroupResources operation.</p> <ul> <li> <p> <code>resource-type</code> - Filter resources by their type. Specify up to five resource types in the format AWS::ServiceCode::ResourceType. For example, AWS::EC2::Instance, or AWS::S3::Bucket.</p> </li> </ul>'
-    type: object
   ListGroupResourcesOutput:
+    type: object
     properties:
+      ResourceIdentifiers:
+        $ref: '#/definitions/ResourceIdentifierList'
+        description: The ARNs and resource types of resources that are members of the group that you specified.
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'The NextToken value to include in a subsequent <code>ListGroupResources</code> request, to get more results.'
       QueryErrors:
         $ref: '#/definitions/QueryErrorList'
         description: A list of <code>QueryError</code> objects. Each error is an object that contains <code>ErrorCode</code> and <code>Message</code> structures. Possible values for <code>ErrorCode</code> are <code>CLOUDFORMATION_STACK_INACTIVE</code> and <code>CLOUDFORMATION_STACK_NOT_EXISTING</code>.
-      ResourceIdentifiers:
-        $ref: '#/definitions/ResourceIdentifierList'
-        description: The ARNs and resource types of resources that are members of the group that you specified.
+  ResourceFilter:
     type: object
-  ListGroupsInput:
+    required:
+      - Name
+      - Values
     properties:
-      Filters:
-        $ref: '#/definitions/GroupFilterList'
-        description: '<p>Filters, formatted as GroupFilter objects, that you want to apply to a ListGroups operation.</p> <ul> <li> <p> <code>resource-type</code> - Filter groups by resource type. Specify up to five resource types in the format AWS::ServiceCode::ResourceType. For example, AWS::EC2::Instance, or AWS::S3::Bucket.</p> </li> </ul>'
-    type: object
+      Name:
+        $ref: '#/definitions/ResourceFilterName'
+        description: The name of the filter. Filter names are case-sensitive.
+      Values:
+        $ref: '#/definitions/ResourceFilterValues'
+        description: 'One or more filter values. Allowed filter values vary by resource filter name, and are case-sensitive.'
+    description: A filter name and value pair that is used to obtain more specific results from a list of resources.
+  UnauthorizedException: {}
   ListGroupsOutput:
+    type: object
     properties:
       GroupIdentifiers:
         $ref: '#/definitions/GroupIdentifierList'
@@ -1017,160 +988,33 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'The NextToken value to include in a subsequent <code>ListGroups</code> request, to get more results.'
+  GroupFilter:
     type: object
-  MaxResults:
-    maximum: 50
-    minimum: 1
-    type: integer
-  MethodNotAllowedException: {}
-  NextToken:
-    maxLength: 8192
-    minLength: 0
-    pattern: '^[a-zA-Z0-9+/]*={0,2}$'
-    type: string
-  NotFoundException: {}
-  Query:
-    maxLength: 4096
-    pattern: '[\s\S]*'
-    type: string
-  QueryError:
-    description: 'A two-part error structure that can occur in <code>ListGroupResources</code> or <code>SearchResources</code> operations on CloudFormation stack-based queries. The error occurs if the CloudFormation stack on which the query is based either does not exist, or has a status that renders the stack inactive. A <code>QueryError</code> occurrence does not necessarily mean that AWS Resource Groups could not complete the operation, but the resulting group might have no member resources.'
-    properties:
-      ErrorCode:
-        $ref: '#/definitions/QueryErrorCode'
-        description: Possible values are <code>CLOUDFORMATION_STACK_INACTIVE</code> and <code>CLOUDFORMATION_STACK_NOT_EXISTING</code>.
-      Message:
-        $ref: '#/definitions/QueryErrorMessage'
-        description: 'A message that explains the <code>ErrorCode</code> value. Messages might state that the specified CloudFormation stack does not exist (or no longer exists). For <code>CLOUDFORMATION_STACK_INACTIVE</code>, the message typically states that the CloudFormation stack has a status that is not (or no longer) active, such as <code>CREATE_FAILED</code>.'
-    type: object
-  QueryErrorCode:
-    enum:
-      - CLOUDFORMATION_STACK_INACTIVE
-      - CLOUDFORMATION_STACK_NOT_EXISTING
-    type: string
-  QueryErrorList:
-    items:
-      $ref: '#/definitions/QueryError'
-    type: array
-  QueryErrorMessage:
-    type: string
-  QueryType:
-    enum:
-      - TAG_FILTERS_1_0
-      - CLOUDFORMATION_STACK_1_0
-    maxLength: 128
-    minLength: 1
-    pattern: ^\w+$
-    type: string
-  ResourceArn:
-    pattern: 'arn:aws(-[a-z]+)*:[a-z0-9\-]*:([a-z]{2}-[a-z]+-\d{1})?:([0-9]{12})?:.+'
-    type: string
-  ResourceFilter:
-    description: A filter name and value pair that is used to obtain more specific results from a list of resources.
-    properties:
-      Name:
-        $ref: '#/definitions/ResourceFilterName'
-        description: The name of the filter. Filter names are case-sensitive.
-      Values:
-        $ref: '#/definitions/ResourceFilterValues'
-        description: 'One or more filter values. Allowed filter values vary by resource filter name, and are case-sensitive.'
     required:
       - Name
       - Values
-    type: object
-  ResourceFilterList:
-    items:
-      $ref: '#/definitions/ResourceFilter'
-    type: array
-  ResourceFilterName:
-    enum:
-      - resource-type
-    type: string
-  ResourceFilterValue:
-    maxLength: 128
-    minLength: 1
-    pattern: 'AWS::[a-zA-Z0-9]+::[a-zA-Z0-9]+'
-    type: string
-  ResourceFilterValues:
-    items:
-      $ref: '#/definitions/ResourceFilterValue'
-    maxItems: 5
-    minItems: 1
-    type: array
-  ResourceIdentifier:
-    description: 'The ARN of a resource, and its resource type.'
     properties:
-      ResourceArn:
-        $ref: '#/definitions/ResourceArn'
-        description: The ARN of a resource.
-      ResourceType:
-        $ref: '#/definitions/ResourceType'
-        description: 'The resource type of a resource, such as <code>AWS::EC2::Instance</code>.'
-    type: object
-  ResourceIdentifierList:
-    items:
-      $ref: '#/definitions/ResourceIdentifier'
-    type: array
-  ResourceQuery:
-    description: The query that is used to define a resource group or a search for resources.
-    properties:
-      Query:
-        $ref: '#/definitions/Query'
-        description: The query that defines a group or a search.
-      Type:
-        $ref: '#/definitions/QueryType'
-        description: '<p>The type of the query. The valid values in this release are <code>TAG_FILTERS_1_0</code> and <code>CLOUDFORMATION_STACK_1_0</code>.</p> <p> <i> <code>TAG_FILTERS_1_0:</code> </i> A JSON syntax that lets you specify a collection of simple tag filters for resource types and tags, as supported by the AWS Tagging API <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html">GetResources</a> operation. If you specify more than one tag key, only resources that match all tag keys, and at least one value of each specified tag key, are returned in your query. If you specify more than one value for a tag key, a resource matches the filter if it has a tag key value that matches <i>any</i> of the specified values.</p> <p>For example, consider the following sample query for resources that have two tags, <code>Stage</code> and <code>Version</code>, with two values each. (<code>[{"Key":"Stage","Values":["Test","Deploy"]},{"Key":"Version","Values":["1","2"]}]</code>) The results of this query might include the following.</p> <ul> <li> <p>An EC2 instance that has the following two tags: <code>{"Key":"Stage","Value":"Deploy"}</code>, and <code>{"Key":"Version","Value":"2"}</code> </p> </li> <li> <p>An S3 bucket that has the following two tags: {"Key":"Stage","Value":"Test"}, and {"Key":"Version","Value":"1"}</p> </li> </ul> <p>The query would not return the following results, however. The following EC2 instance does not have all tag keys specified in the filter, so it is rejected. The RDS database has all of the tag keys, but no values that match at least one of the specified tag key values in the filter.</p> <ul> <li> <p>An EC2 instance that has only the following tag: <code>{"Key":"Stage","Value":"Deploy"}</code>.</p> </li> <li> <p>An RDS database that has the following two tags: <code>{"Key":"Stage","Value":"Archived"}</code>, and <code>{"Key":"Version","Value":"4"}</code> </p> </li> </ul> <p> <i> <code>CLOUDFORMATION_STACK_1_0:</code> </i> A JSON syntax that lets you specify a CloudFormation stack ARN.</p>'
-    required:
-      - Type
-      - Query
-    type: object
-  ResourceType:
-    pattern: 'AWS::[a-zA-Z0-9]+::\w+'
-    type: string
-  SearchResourcesInput:
-    properties:
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of group member ARNs returned by <code>SearchResources</code> in paginated output. By default, this number is 50.'
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'The NextToken value that is returned in a paginated <code>SearchResources</code> request. To get the next page of results, run the call again, add the NextToken parameter, and specify the NextToken value.'
-      ResourceQuery:
-        $ref: '#/definitions/ResourceQuery'
-        description: 'The search query, using the same formats that are supported for resource group definition.'
-    required:
-      - ResourceQuery
-    type: object
+      Name:
+        $ref: '#/definitions/GroupFilterName'
+        description: The name of the filter. Filter names are case-sensitive.
+      Values:
+        $ref: '#/definitions/GroupFilterValues'
+        description: 'One or more filter values. Allowed filter values vary by group filter name, and are case-sensitive.'
+    description: A filter name and value pair that is used to obtain more specific results from a list of groups.
   SearchResourcesOutput:
+    type: object
     properties:
+      ResourceIdentifiers:
+        $ref: '#/definitions/ResourceIdentifierList'
+        description: The ARNs and resource types of resources that are members of the group that you specified.
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'The NextToken value to include in a subsequent <code>SearchResources</code> request, to get more results.'
       QueryErrors:
         $ref: '#/definitions/QueryErrorList'
         description: A list of <code>QueryError</code> objects. Each error is an object that contains <code>ErrorCode</code> and <code>Message</code> structures. Possible values for <code>ErrorCode</code> are <code>CLOUDFORMATION_STACK_INACTIVE</code> and <code>CLOUDFORMATION_STACK_NOT_EXISTING</code>.
-      ResourceIdentifiers:
-        $ref: '#/definitions/ResourceIdentifierList'
-        description: The ARNs and resource types of resources that are members of the group that you specified.
-    type: object
-  TagInput:
-    properties:
-      Tags:
-        $ref: '#/definitions/Tags'
-        description: 'The tags to add to the specified resource. A tag is a string-to-string map of key-value pairs. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
-    required:
-      - Tags
-    type: object
-  TagKey:
-    maxLength: 128
-    minLength: 1
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    type: string
-  TagKeyList:
-    items:
-      $ref: '#/definitions/TagKey'
-    type: array
   TagOutput:
+    type: object
     properties:
       Arn:
         $ref: '#/definitions/GroupArn'
@@ -1178,27 +1022,8 @@ definitions:
       Tags:
         $ref: '#/definitions/Tags'
         description: The tags that have been added to the specified resource.
-    type: object
-  TagValue:
-    maxLength: 256
-    minLength: 0
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    type: string
-  Tags:
-    additionalProperties:
-      $ref: '#/definitions/TagValue'
-    type: object
-  TooManyRequestsException: {}
-  UnauthorizedException: {}
-  UntagInput:
-    properties:
-      Keys:
-        $ref: '#/definitions/TagKeyList'
-        description: The keys of the tags to be removed.
-    required:
-      - Keys
-    type: object
   UntagOutput:
+    type: object
     properties:
       Arn:
         $ref: '#/definitions/GroupArn'
@@ -1206,101 +1031,276 @@ definitions:
       Keys:
         $ref: '#/definitions/TagKeyList'
         description: The keys of tags that have been removed.
-    type: object
-  UpdateGroupInput:
-    properties:
-      Description:
-        $ref: '#/definitions/GroupDescription'
-        description: 'The description of the resource group. Descriptions can have a maximum of 511 characters, including letters, numbers, hyphens, underscores, punctuation, and spaces.'
-    type: object
+  TagKey:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 1
+    maxLength: 128
   UpdateGroupOutput:
+    type: object
     properties:
       Group:
         $ref: '#/definitions/Group'
         description: The full description of the resource group after it has been updated.
-    type: object
-  UpdateGroupQueryInput:
-    properties:
-      ResourceQuery:
-        $ref: '#/definitions/ResourceQuery'
-        description: The resource query that determines which AWS resources are members of the resource group.
-    required:
-      - ResourceQuery
-    type: object
   UpdateGroupQueryOutput:
+    type: object
     properties:
       GroupQuery:
         $ref: '#/definitions/GroupQuery'
         description: The resource query associated with the resource group after the update.
+  GroupName:
+    type: string
+    pattern: '[a-zA-Z0-9_\.-]+'
+    minLength: 1
+    maxLength: 128
+  GroupDescription:
+    type: string
+    pattern: '[\sa-zA-Z0-9_\.-]*'
+    maxLength: 512
+  ResourceQuery:
     type: object
-x-servers:
-  - description: The Resource Groups multi-region endpoint
-    url: 'http://resource-groups.{region}.amazonaws.com'
-    variables:
-      region:
-        default: us-east-1
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-  - description: The Resource Groups multi-region endpoint
-    url: 'https://resource-groups.{region}.amazonaws.com'
-    variables:
-      region:
-        default: us-east-1
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-  - description: The Resource Groups endpoint for China (Beijing) and China (Ningxia)
-    url: 'http://resource-groups.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        default: cn-north-1
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-  - description: The Resource Groups endpoint for China (Beijing) and China (Ningxia)
-    url: 'https://resource-groups.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        default: cn-north-1
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
+    required:
+      - Type
+      - Query
+    properties:
+      Type:
+        $ref: '#/definitions/QueryType'
+        description: '<p>The type of the query. The valid values in this release are <code>TAG_FILTERS_1_0</code> and <code>CLOUDFORMATION_STACK_1_0</code>.</p> <p> <i> <code>TAG_FILTERS_1_0:</code> </i> A JSON syntax that lets you specify a collection of simple tag filters for resource types and tags, as supported by the AWS Tagging API <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html">GetResources</a> operation. If you specify more than one tag key, only resources that match all tag keys, and at least one value of each specified tag key, are returned in your query. If you specify more than one value for a tag key, a resource matches the filter if it has a tag key value that matches <i>any</i> of the specified values.</p> <p>For example, consider the following sample query for resources that have two tags, <code>Stage</code> and <code>Version</code>, with two values each. (<code>[{"Key":"Stage","Values":["Test","Deploy"]},{"Key":"Version","Values":["1","2"]}]</code>) The results of this query might include the following.</p> <ul> <li> <p>An EC2 instance that has the following two tags: <code>{"Key":"Stage","Value":"Deploy"}</code>, and <code>{"Key":"Version","Value":"2"}</code> </p> </li> <li> <p>An S3 bucket that has the following two tags: {"Key":"Stage","Value":"Test"}, and {"Key":"Version","Value":"1"}</p> </li> </ul> <p>The query would not return the following results, however. The following EC2 instance does not have all tag keys specified in the filter, so it is rejected. The RDS database has all of the tag keys, but no values that match at least one of the specified tag key values in the filter.</p> <ul> <li> <p>An EC2 instance that has only the following tag: <code>{"Key":"Stage","Value":"Deploy"}</code>.</p> </li> <li> <p>An RDS database that has the following two tags: <code>{"Key":"Stage","Value":"Archived"}</code>, and <code>{"Key":"Version","Value":"4"}</code> </p> </li> </ul> <p> <i> <code>CLOUDFORMATION_STACK_1_0:</code> </i> A JSON syntax that lets you specify a CloudFormation stack ARN.</p>'
+      Query:
+        $ref: '#/definitions/Query'
+        description: The query that defines a group or a search.
+    description: The query that is used to define a resource group or a search for resources.
+  Tags:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/TagValue'
+  CreateGroupInput:
+    type: object
+    required:
+      - Name
+      - ResourceQuery
+    properties:
+      Name:
+        $ref: '#/definitions/GroupName'
+        description: 'The name of the group, which is the identifier of the group in other operations. A resource group name cannot be updated after it is created. A resource group name can have a maximum of 128 characters, including letters, numbers, hyphens, dots, and underscores. The name cannot start with <code>AWS</code> or <code>aws</code>; these are reserved. A resource group name must be unique within your account.'
+      Description:
+        $ref: '#/definitions/GroupDescription'
+        description: 'The description of the resource group. Descriptions can have a maximum of 511 characters, including letters, numbers, hyphens, underscores, punctuation, and spaces.'
+      ResourceQuery:
+        $ref: '#/definitions/ResourceQuery'
+        description: The resource query that determines which AWS resources are members of this group.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: 'The tags to add to the group. A tag is a string-to-string map of key-value pairs. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
+  Group:
+    type: object
+    required:
+      - GroupArn
+      - Name
+    properties:
+      GroupArn:
+        $ref: '#/definitions/GroupArn'
+        description: The ARN of a resource group.
+      Name:
+        $ref: '#/definitions/GroupName'
+        description: The name of a resource group.
+      Description:
+        $ref: '#/definitions/GroupDescription'
+        description: The description of the resource group.
+    description: A resource group.
+  DeleteGroupInput:
+    type: object
+    properties: {}
+  GetGroupInput:
+    type: object
+    properties: {}
+  GetGroupQueryInput:
+    type: object
+    properties: {}
+  GroupQuery:
+    type: object
+    required:
+      - GroupName
+      - ResourceQuery
+    properties:
+      GroupName:
+        $ref: '#/definitions/GroupName'
+        description: The name of a resource group that is associated with a specific resource query.
+      ResourceQuery:
+        $ref: '#/definitions/ResourceQuery'
+        description: The resource query which determines which AWS resources are members of the associated resource group.
+    description: The underlying resource query of a resource group. Resources that match query results are part of the group.
+  GroupArn:
+    type: string
+    pattern: 'arn:aws(-[a-z]+)*:resource-groups:[a-z]{2}-[a-z]+-\d{1}:[0-9]{12}:group/[a-zA-Z0-9_\.-]{1,128}'
+    minLength: 12
+    maxLength: 1600
+  GetTagsInput:
+    type: object
+    properties: {}
+  GroupFilterName:
+    type: string
+    enum:
+      - resource-type
+  GroupFilterValues:
+    type: array
+    items:
+      $ref: '#/definitions/GroupFilterValue'
+    minItems: 1
+    maxItems: 5
+  GroupFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/GroupFilter'
+  GroupFilterValue:
+    type: string
+    pattern: 'AWS::(AllSupported|[a-zA-Z0-9]+::[a-zA-Z0-9]+)'
+    minLength: 1
+    maxLength: 128
+  GroupIdentifier:
+    type: object
+    properties:
+      GroupName:
+        $ref: '#/definitions/GroupName'
+        description: The name of a resource group.
+      GroupArn:
+        $ref: '#/definitions/GroupArn'
+        description: The ARN of a resource group.
+    description: The ARN and group name of a group.
+  GroupIdentifierList:
+    type: array
+    items:
+      $ref: '#/definitions/GroupIdentifier'
+  GroupList:
+    type: array
+    items:
+      $ref: '#/definitions/Group'
+  ResourceFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceFilter'
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 50
+  NextToken:
+    type: string
+    pattern: '^[a-zA-Z0-9+/]*={0,2}$'
+    minLength: 0
+    maxLength: 8192
+  ListGroupResourcesInput:
+    type: object
+    properties:
+      Filters:
+        $ref: '#/definitions/ResourceFilterList'
+        description: '<p>Filters, formatted as ResourceFilter objects, that you want to apply to a ListGroupResources operation.</p> <ul> <li> <p> <code>resource-type</code> - Filter resources by their type. Specify up to five resource types in the format AWS::ServiceCode::ResourceType. For example, AWS::EC2::Instance, or AWS::S3::Bucket.</p> </li> </ul>'
+  ResourceIdentifierList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceIdentifier'
+  QueryErrorList:
+    type: array
+    items:
+      $ref: '#/definitions/QueryError'
+  ListGroupsInput:
+    type: object
+    properties:
+      Filters:
+        $ref: '#/definitions/GroupFilterList'
+        description: '<p>Filters, formatted as GroupFilter objects, that you want to apply to a ListGroups operation.</p> <ul> <li> <p> <code>resource-type</code> - Filter groups by resource type. Specify up to five resource types in the format AWS::ServiceCode::ResourceType. For example, AWS::EC2::Instance, or AWS::S3::Bucket.</p> </li> </ul>'
+  QueryErrorCode:
+    type: string
+    enum:
+      - CLOUDFORMATION_STACK_INACTIVE
+      - CLOUDFORMATION_STACK_NOT_EXISTING
+  QueryErrorMessage:
+    type: string
+  QueryError:
+    type: object
+    properties:
+      ErrorCode:
+        $ref: '#/definitions/QueryErrorCode'
+        description: Possible values are <code>CLOUDFORMATION_STACK_INACTIVE</code> and <code>CLOUDFORMATION_STACK_NOT_EXISTING</code>.
+      Message:
+        $ref: '#/definitions/QueryErrorMessage'
+        description: 'A message that explains the <code>ErrorCode</code> value. Messages might state that the specified CloudFormation stack does not exist (or no longer exists). For <code>CLOUDFORMATION_STACK_INACTIVE</code>, the message typically states that the CloudFormation stack has a status that is not (or no longer) active, such as <code>CREATE_FAILED</code>.'
+    description: 'A two-part error structure that can occur in <code>ListGroupResources</code> or <code>SearchResources</code> operations on CloudFormation stack-based queries. The error occurs if the CloudFormation stack on which the query is based either does not exist, or has a status that renders the stack inactive. A <code>QueryError</code> occurrence does not necessarily mean that AWS Resource Groups could not complete the operation, but the resulting group might have no member resources.'
+  ResourceArn:
+    type: string
+    pattern: 'arn:aws(-[a-z]+)*:[a-z0-9\-]*:([a-z]{2}-[a-z]+-\d{1})?:([0-9]{12})?:.+'
+  ResourceFilterName:
+    type: string
+    enum:
+      - resource-type
+  ResourceFilterValues:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceFilterValue'
+    minItems: 1
+    maxItems: 5
+  ResourceFilterValue:
+    type: string
+    pattern: 'AWS::[a-zA-Z0-9]+::[a-zA-Z0-9]+'
+    minLength: 1
+    maxLength: 128
+  ResourceType:
+    type: string
+    pattern: 'AWS::[a-zA-Z0-9]+::\w+'
+  ResourceIdentifier:
+    type: object
+    properties:
+      ResourceArn:
+        $ref: '#/definitions/ResourceArn'
+        description: The ARN of a resource.
+      ResourceType:
+        $ref: '#/definitions/ResourceType'
+        description: 'The resource type of a resource, such as <code>AWS::EC2::Instance</code>.'
+    description: 'The ARN of a resource, and its resource type.'
+  SearchResourcesInput:
+    type: object
+    required:
+      - ResourceQuery
+    properties:
+      ResourceQuery:
+        $ref: '#/definitions/ResourceQuery'
+        description: 'The search query, using the same formats that are supported for resource group definition.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of group member ARNs returned by <code>SearchResources</code> in paginated output. By default, this number is 50.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The NextToken value that is returned in a paginated <code>SearchResources</code> request. To get the next page of results, run the call again, add the NextToken parameter, and specify the NextToken value.'
+  TagInput:
+    type: object
+    required:
+      - Tags
+    properties:
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: 'The tags to add to the specified resource. A tag is a string-to-string map of key-value pairs. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+  UntagInput:
+    type: object
+    required:
+      - Keys
+    properties:
+      Keys:
+        $ref: '#/definitions/TagKeyList'
+        description: The keys of the tags to be removed.
+  UpdateGroupInput:
+    type: object
+    properties:
+      Description:
+        $ref: '#/definitions/GroupDescription'
+        description: 'The description of the resource group. Descriptions can have a maximum of 511 characters, including letters, numbers, hyphens, underscores, punctuation, and spaces.'
+  UpdateGroupQueryInput:
+    type: object
+    required:
+      - ResourceQuery
+    properties:
+      ResourceQuery:
+        $ref: '#/definitions/ResourceQuery'
+        description: The resource query that determines which AWS resources are members of the resource group.

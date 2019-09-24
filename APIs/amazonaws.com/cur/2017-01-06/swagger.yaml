@@ -1,118 +1,169 @@
 swagger: '2.0'
-schemes:
-  - https
-  - http
-host: cur.amazonaws.com
-basePath: /
-x-hasEquivalentPaths: true
 info:
+  version: '2017-01-06'
+  x-release: v4
+  title: AWS Cost and Usage Report Service
+  description: '<p>The AWS Cost and Usage Report API enables you to programmatically create, query, and delete AWS Cost and Usage report definitions.</p> <p>AWS Cost and Usage reports track the monthly AWS costs and usage associated with your AWS account. The report contains line items for each unique combination of AWS product, usage type, and operation that your AWS account uses. You can configure the AWS Cost and Usage report to show only the data that you want, using the AWS Cost and Usage API.</p> <p>Service Endpoint</p> <p>The AWS Cost and Usage Report API provides the following endpoint:</p> <ul> <li> <p>cur.us-east-1.amazonaws.com</p> </li> </ul>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
-    email: mike.ralphson@gmail.com
     name: Mike Ralphson
+    email: mike.ralphson@gmail.com
     url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
-  description: '<p>The AWS Cost and Usage Report API enables you to programmatically create, query, and delete AWS Cost and Usage report definitions.</p> <p>AWS Cost and Usage reports track the monthly AWS costs and usage associated with your AWS account. The report contains line items for each unique combination of AWS product, usage type, and operation that your AWS account uses. You can configure the AWS Cost and Usage report to show only the data that you want, using the AWS Cost and Usage API.</p> <p>Service Endpoint</p> <p>The AWS Cost and Usage Report API provides the following endpoint:</p> <ul> <li> <p>cur.us-east-1.amazonaws.com</p> </li> </ul>'
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
-  termsOfService: 'https://aws.amazon.com/service-terms/'
-  title: AWS Cost and Usage Report Service
-  version: '2017-01-06'
+  x-providerName: amazonaws.com
+  x-serviceName: cur
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/cur-2017-01-06.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
   x-apiClientRegistration:
     url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
-  x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://twitter.com/awscloud/profile_image?size=original'
-  x-origin:
-    - contentType: application/json
-      converter:
-        url: 'https://github.com/mermade/aws2openapi'
-        version: 1.0.0
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/cur-2017-01-06.normal.json'
-      x-apisguru-direct: true
   x-preferred: true
-  x-providerName: amazonaws.com
-  x-release: v4
-  x-serviceName: cur
 externalDocs:
   description: Amazon Web Services documentation
   url: 'https://docs.aws.amazon.com/cur/'
+host: cur.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+x-servers:
+  - url: 'http://cur.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The AWS Cost and Usage Report Service multi-region endpoint
+  - url: 'https://cur.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The AWS Cost and Usage Report Service multi-region endpoint
+  - url: 'http://cur.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS Cost and Usage Report Service endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://cur.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS Cost and Usage Report Service endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 consumes:
   - application/json
 produces:
   - application/json
+parameters:
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
 securityDefinitions:
   hmac:
-    description: Amazon Signature authorization v4
-    in: header
-    name: Authorization
     type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
     x-amazon-apigateway-authtype: awsSigv4
 security:
   - hmac: []
-parameters:
-  X-Amz-Algorithm:
-    in: header
-    name: X-Amz-Algorithm
-    required: false
-    type: string
-  X-Amz-Content-Sha256:
-    in: header
-    name: X-Amz-Content-Sha256
-    required: false
-    type: string
-  X-Amz-Credential:
-    in: header
-    name: X-Amz-Credential
-    required: false
-    type: string
-  X-Amz-Date:
-    in: header
-    name: X-Amz-Date
-    required: false
-    type: string
-  X-Amz-Security-Token:
-    in: header
-    name: X-Amz-Security-Token
-    required: false
-    type: string
-  X-Amz-Signature:
-    in: header
-    name: X-Amz-Signature
-    required: false
-    type: string
-  X-Amz-SignedHeaders:
-    in: header
-    name: X-Amz-SignedHeaders
-    required: false
-    type: string
 paths:
   '/#X-Amz-Target=AWSOrigamiServiceGatewayService.DeleteReportDefinition':
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
-      description: Deletes the specified report.
       operationId: DeleteReportDefinition
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteReportDefinitionRequest'
-        - enum:
-            - AWSOrigamiServiceGatewayService.DeleteReportDefinition
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: Deletes the specified report.
       responses:
         '200':
           description: Success
@@ -126,7 +177,18 @@ paths:
           description: ValidationException
           schema:
             $ref: '#/definitions/ValidationException'
-  '/#X-Amz-Target=AWSOrigamiServiceGatewayService.DescribeReportDefinitions':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteReportDefinitionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSOrigamiServiceGatewayService.DeleteReportDefinition
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -135,31 +197,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSOrigamiServiceGatewayService.DescribeReportDefinitions':
     post:
-      description: Lists the AWS Cost and Usage reports available to this account.
       operationId: DescribeReportDefinitions
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeReportDefinitionsRequest'
-        - description: Pagination limit
-          in: query
-          name: MaxResults
-          required: false
-          type: string
-        - description: Pagination token
-          in: query
-          name: NextToken
-          required: false
-          type: string
-        - enum:
-            - AWSOrigamiServiceGatewayService.DescribeReportDefinitions
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: Lists the AWS Cost and Usage reports available to this account.
       responses:
         '200':
           description: Success
@@ -169,7 +210,28 @@ paths:
           description: InternalErrorException
           schema:
             $ref: '#/definitions/InternalErrorException'
-  '/#X-Amz-Target=AWSOrigamiServiceGatewayService.ModifyReportDefinition':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeReportDefinitionsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSOrigamiServiceGatewayService.DescribeReportDefinitions
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -178,21 +240,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSOrigamiServiceGatewayService.ModifyReportDefinition':
     post:
-      description: Allows you to programatically update your report preferences.
       operationId: ModifyReportDefinition
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/ModifyReportDefinitionRequest'
-        - enum:
-            - AWSOrigamiServiceGatewayService.ModifyReportDefinition
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: Allows you to programatically update your report preferences.
       responses:
         '200':
           description: Success
@@ -206,7 +257,18 @@ paths:
           description: ValidationException
           schema:
             $ref: '#/definitions/ValidationException'
-  '/#X-Amz-Target=AWSOrigamiServiceGatewayService.PutReportDefinition':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ModifyReportDefinitionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSOrigamiServiceGatewayService.ModifyReportDefinition
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -215,21 +277,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSOrigamiServiceGatewayService.PutReportDefinition':
     post:
-      description: Creates a new report using the description that you provide.
       operationId: PutReportDefinition
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/PutReportDefinitionRequest'
-        - enum:
-            - AWSOrigamiServiceGatewayService.PutReportDefinition
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: Creates a new report using the description that you provide.
       responses:
         '200':
           description: Success
@@ -251,66 +302,43 @@ paths:
           description: ValidationException
           schema:
             $ref: '#/definitions/ValidationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutReportDefinitionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSOrigamiServiceGatewayService.PutReportDefinition
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  AWSRegion:
-    description: The region of the S3 bucket that AWS delivers the report into.
-    enum:
-      - us-east-1
-      - us-west-1
-      - us-west-2
-      - eu-central-1
-      - eu-west-1
-      - ap-southeast-1
-      - ap-southeast-2
-      - ap-northeast-1
-      - eu-north-1
-      - ap-northeast-3
-      - ap-east-1
-    type: string
-  AdditionalArtifact:
-    description: The types of manifest that you want AWS to create for this report.
-    enum:
-      - REDSHIFT
-      - QUICKSIGHT
-      - ATHENA
-    type: string
-  AdditionalArtifactList:
-    description: A list of additional artifacts.
-    items:
-      $ref: '#/definitions/AdditionalArtifact'
-    type: array
-  CompressionFormat:
-    description: The compression format that AWS uses for the report.
-    enum:
-      - ZIP
-      - GZIP
-      - Parquet
-    type: string
-  DeleteReportDefinitionRequest:
-    description: Deletes the specified report.
-    properties:
-      ReportName:
-        $ref: '#/definitions/ReportName'
-    type: object
   DeleteReportDefinitionResponse:
-    description: 'If the action is successful, the service sends back an HTTP 200 response.'
+    type: object
     properties:
       ResponseMessage:
         $ref: '#/definitions/DeleteResponseMessage'
-    type: object
-  DeleteResponseMessage:
-    description: Whether the deletion was successful or not.
-    type: string
-  DescribeReportDefinitionsRequest:
-    description: Requests a list of AWS Cost and Usage reports owned by the account.
-    properties:
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-      NextToken:
-        $ref: '#/definitions/GenericString'
-    type: object
-  DescribeReportDefinitionsResponse:
     description: 'If the action is successful, the service sends back an HTTP 200 response.'
+  DeleteReportDefinitionRequest:
+    type: object
+    properties:
+      ReportName:
+        $ref: '#/definitions/ReportName'
+    description: Deletes the specified report.
+  InternalErrorException: {}
+  ValidationException: {}
+  DescribeReportDefinitionsResponse:
+    type: object
     example:
       ReportDefinitions:
         - AdditionalArtifacts:
@@ -336,79 +364,105 @@ definitions:
           S3Region: us-east-1
           TimeUnit: HOURLY
     properties:
-      NextToken:
-        $ref: '#/definitions/GenericString'
       ReportDefinitions:
         $ref: '#/definitions/ReportDefinitionList'
         description: A list of AWS Cost and Usage reports owned by the account.
+      NextToken:
+        $ref: '#/definitions/GenericString'
+    description: 'If the action is successful, the service sends back an HTTP 200 response.'
+  DescribeReportDefinitionsRequest:
     type: object
-  DuplicateReportNameException: {}
-  GenericString:
-    description: A generic string.
-    type: string
-  InternalErrorException: {}
-  MaxResults:
-    description: The maximum number of results that AWS returns for the operation.
-    maximum: 5
-    minimum: 5
-    type: integer
-  ModifyReportDefinitionRequest:
     properties:
-      ReportDefinition:
-        $ref: '#/definitions/ReportDefinition'
-      ReportName:
-        $ref: '#/definitions/ReportName'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+      NextToken:
+        $ref: '#/definitions/GenericString'
+    description: Requests a list of AWS Cost and Usage reports owned by the account.
+  ModifyReportDefinitionResponse:
+    type: object
+    properties: {}
+  ModifyReportDefinitionRequest:
+    type: object
     required:
       - ReportName
       - ReportDefinition
+    properties:
+      ReportName:
+        $ref: '#/definitions/ReportName'
+      ReportDefinition:
+        $ref: '#/definitions/ReportDefinition'
+  PutReportDefinitionResponse:
     type: object
-  ModifyReportDefinitionResponse:
     properties: {}
-    type: object
+    description: 'If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.'
   PutReportDefinitionRequest:
-    description: Creates a Cost and Usage Report.
+    type: object
+    required:
+      - ReportDefinition
     properties:
       ReportDefinition:
         $ref: '#/definitions/ReportDefinition'
         description: 'Represents the output of the PutReportDefinition operation. The content consists of the detailed metadata and data file information. '
-    required:
-      - ReportDefinition
-    type: object
-  PutReportDefinitionResponse:
-    description: 'If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.'
-    properties: {}
-    type: object
-  RefreshClosedReports:
-    type: boolean
+    description: Creates a Cost and Usage Report.
+  DuplicateReportNameException: {}
+  ReportLimitReachedException: {}
+  AWSRegion:
+    type: string
+    enum:
+      - us-east-1
+      - us-west-1
+      - us-west-2
+      - eu-central-1
+      - eu-west-1
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-northeast-1
+      - eu-north-1
+      - ap-northeast-3
+      - ap-east-1
+    description: The region of the S3 bucket that AWS delivers the report into.
+  AdditionalArtifact:
+    type: string
+    enum:
+      - REDSHIFT
+      - QUICKSIGHT
+      - ATHENA
+    description: The types of manifest that you want AWS to create for this report.
+  AdditionalArtifactList:
+    type: array
+    description: A list of additional artifacts.
+    items:
+      $ref: '#/definitions/AdditionalArtifact'
+  CompressionFormat:
+    type: string
+    enum:
+      - ZIP
+      - GZIP
+      - Parquet
+    description: The compression format that AWS uses for the report.
+  ReportName:
+    type: string
+    pattern: '[0-9A-Za-z!\-_.*\''()]+'
+    description: 'The name of the report that you want to create. The name must be unique, is case sensitive, and can''t include spaces. '
+    maxLength: 256
+  DeleteResponseMessage:
+    type: string
+    description: Whether the deletion was successful or not.
+  MaxResults:
+    type: integer
+    description: The maximum number of results that AWS returns for the operation.
+    minimum: 5
+    maximum: 5
+  GenericString:
+    type: string
+    description: A generic string.
+  ReportDefinitionList:
+    type: array
+    description: A list of report definitions.
+    items:
+      $ref: '#/definitions/ReportDefinition'
   ReportDefinition:
-    description: 'The definition of AWS Cost and Usage Report. You can specify the report name, time unit, report format, compression format, S3 bucket, additional artifacts, and schema elements in the definition. '
-    properties:
-      AdditionalArtifacts:
-        $ref: '#/definitions/AdditionalArtifactList'
-        description: A list of manifests that you want Amazon Web Services to create for this report.
-      AdditionalSchemaElements:
-        $ref: '#/definitions/SchemaElementList'
-        description: 'A list of strings that indicate additional content that Amazon Web Services includes in the report, such as individual resource IDs. '
-      Compression:
-        $ref: '#/definitions/CompressionFormat'
-      Format:
-        $ref: '#/definitions/ReportFormat'
-      RefreshClosedReports:
-        $ref: '#/definitions/RefreshClosedReports'
-        description: 'Whether you want Amazon Web Services to update your reports after they have been finalized if Amazon Web Services detects charges related to previous months. These charges can include refunds, credits, or support fees.'
-      ReportName:
-        $ref: '#/definitions/ReportName'
-      ReportVersioning:
-        $ref: '#/definitions/ReportVersioning'
-        description: Whether you want Amazon Web Services to overwrite the previous version of each report or to deliver the report in addition to the previous versions.
-      S3Bucket:
-        $ref: '#/definitions/S3Bucket'
-      S3Prefix:
-        $ref: '#/definitions/S3Prefix'
-      S3Region:
-        $ref: '#/definitions/AWSRegion'
-      TimeUnit:
-        $ref: '#/definitions/TimeUnit'
+    type: object
     required:
       - ReportName
       - TimeUnit
@@ -418,123 +472,69 @@ definitions:
       - S3Bucket
       - S3Prefix
       - S3Region
-    type: object
-  ReportDefinitionList:
-    description: A list of report definitions.
-    items:
-      $ref: '#/definitions/ReportDefinition'
-    type: array
-  ReportFormat:
-    description: The format that AWS saves the report in.
-    enum:
-      - textORcsv
-      - Parquet
-    type: string
-  ReportLimitReachedException: {}
-  ReportName:
-    description: 'The name of the report that you want to create. The name must be unique, is case sensitive, and can''t include spaces. '
-    maxLength: 256
-    pattern: '[0-9A-Za-z!\-_.*\''()]+'
-    type: string
-  ReportVersioning:
-    enum:
-      - CREATE_NEW_REPORT
-      - OVERWRITE_REPORT
-    type: string
-  S3Bucket:
-    description: The S3 bucket where AWS delivers the report.
-    maxLength: 256
-    type: string
-  S3Prefix:
-    description: The prefix that AWS adds to the report name when AWS delivers the report. Your prefix can't include spaces.
-    maxLength: 256
-    pattern: '[0-9A-Za-z!\-_.*\''()/]*'
-    type: string
-  SchemaElement:
-    description: 'Whether or not AWS includes resource IDs in the report. '
-    enum:
-      - RESOURCES
-    type: string
-  SchemaElementList:
-    description: 'A list of strings that indicate the content that is included in the report, such as service or usage type.'
-    items:
-      $ref: '#/definitions/SchemaElement'
-    type: array
+    properties:
+      ReportName:
+        $ref: '#/definitions/ReportName'
+      TimeUnit:
+        $ref: '#/definitions/TimeUnit'
+      Format:
+        $ref: '#/definitions/ReportFormat'
+      Compression:
+        $ref: '#/definitions/CompressionFormat'
+      AdditionalSchemaElements:
+        $ref: '#/definitions/SchemaElementList'
+        description: 'A list of strings that indicate additional content that Amazon Web Services includes in the report, such as individual resource IDs. '
+      S3Bucket:
+        $ref: '#/definitions/S3Bucket'
+      S3Prefix:
+        $ref: '#/definitions/S3Prefix'
+      S3Region:
+        $ref: '#/definitions/AWSRegion'
+      AdditionalArtifacts:
+        $ref: '#/definitions/AdditionalArtifactList'
+        description: A list of manifests that you want Amazon Web Services to create for this report.
+      RefreshClosedReports:
+        $ref: '#/definitions/RefreshClosedReports'
+        description: 'Whether you want Amazon Web Services to update your reports after they have been finalized if Amazon Web Services detects charges related to previous months. These charges can include refunds, credits, or support fees.'
+      ReportVersioning:
+        $ref: '#/definitions/ReportVersioning'
+        description: Whether you want Amazon Web Services to overwrite the previous version of each report or to deliver the report in addition to the previous versions.
+    description: 'The definition of AWS Cost and Usage Report. You can specify the report name, time unit, report format, compression format, S3 bucket, additional artifacts, and schema elements in the definition. '
+  RefreshClosedReports:
+    type: boolean
   TimeUnit:
-    description: 'The length of time covered by the report. '
+    type: string
     enum:
       - HOURLY
       - DAILY
+    description: 'The length of time covered by the report. '
+  ReportFormat:
     type: string
-  ValidationException: {}
-x-servers:
-  - description: The AWS Cost and Usage Report Service multi-region endpoint
-    url: 'http://cur.{region}.amazonaws.com'
-    variables:
-      region:
-        default: us-east-1
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-  - description: The AWS Cost and Usage Report Service multi-region endpoint
-    url: 'https://cur.{region}.amazonaws.com'
-    variables:
-      region:
-        default: us-east-1
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-  - description: The AWS Cost and Usage Report Service endpoint for China (Beijing) and China (Ningxia)
-    url: 'http://cur.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        default: cn-north-1
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-  - description: The AWS Cost and Usage Report Service endpoint for China (Beijing) and China (Ningxia)
-    url: 'https://cur.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        default: cn-north-1
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
+    enum:
+      - textORcsv
+      - Parquet
+    description: The format that AWS saves the report in.
+  SchemaElementList:
+    type: array
+    description: 'A list of strings that indicate the content that is included in the report, such as service or usage type.'
+    items:
+      $ref: '#/definitions/SchemaElement'
+  S3Bucket:
+    type: string
+    description: The S3 bucket where AWS delivers the report.
+    maxLength: 256
+  S3Prefix:
+    type: string
+    pattern: '[0-9A-Za-z!\-_.*\''()/]*'
+    description: The prefix that AWS adds to the report name when AWS delivers the report. Your prefix can't include spaces.
+    maxLength: 256
+  ReportVersioning:
+    type: string
+    enum:
+      - CREATE_NEW_REPORT
+      - OVERWRITE_REPORT
+  SchemaElement:
+    type: string
+    enum:
+      - RESOURCES
+    description: 'Whether or not AWS includes resource IDs in the report. '

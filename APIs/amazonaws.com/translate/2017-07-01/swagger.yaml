@@ -1,118 +1,169 @@
 swagger: '2.0'
-schemes:
-  - https
-  - http
-host: translate.amazonaws.com
-basePath: /
-x-hasEquivalentPaths: true
 info:
+  version: '2017-07-01'
+  x-release: v4
+  title: Amazon Translate
+  description: Provides translation between one source language and another of the same set of languages.
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
-    email: mike.ralphson@gmail.com
     name: Mike Ralphson
+    email: mike.ralphson@gmail.com
     url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
-  description: Provides translation between one source language and another of the same set of languages.
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
-  termsOfService: 'https://aws.amazon.com/service-terms/'
-  title: Amazon Translate
-  version: '2017-07-01'
+  x-providerName: amazonaws.com
+  x-serviceName: translate
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/translate-2017-07-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
   x-apiClientRegistration:
     url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
-  x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://twitter.com/awscloud/profile_image?size=original'
-  x-origin:
-    - contentType: application/json
-      converter:
-        url: 'https://github.com/mermade/aws2openapi'
-        version: 1.0.0
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/translate-2017-07-01.normal.json'
-      x-apisguru-direct: true
   x-preferred: true
-  x-providerName: amazonaws.com
-  x-release: v4
-  x-serviceName: translate
 externalDocs:
   description: Amazon Web Services documentation
   url: 'https://docs.aws.amazon.com/translate/'
+host: translate.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+x-servers:
+  - url: 'http://translate.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Amazon Translate multi-region endpoint
+  - url: 'https://translate.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Amazon Translate multi-region endpoint
+  - url: 'http://translate.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon Translate endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://translate.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon Translate endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 consumes:
   - application/json
 produces:
   - application/json
+parameters:
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
 securityDefinitions:
   hmac:
-    description: Amazon Signature authorization v4
-    in: header
-    name: Authorization
     type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
     x-amazon-apigateway-authtype: awsSigv4
 security:
   - hmac: []
-parameters:
-  X-Amz-Algorithm:
-    in: header
-    name: X-Amz-Algorithm
-    required: false
-    type: string
-  X-Amz-Content-Sha256:
-    in: header
-    name: X-Amz-Content-Sha256
-    required: false
-    type: string
-  X-Amz-Credential:
-    in: header
-    name: X-Amz-Credential
-    required: false
-    type: string
-  X-Amz-Date:
-    in: header
-    name: X-Amz-Date
-    required: false
-    type: string
-  X-Amz-Security-Token:
-    in: header
-    name: X-Amz-Security-Token
-    required: false
-    type: string
-  X-Amz-Signature:
-    in: header
-    name: X-Amz-Signature
-    required: false
-    type: string
-  X-Amz-SignedHeaders:
-    in: header
-    name: X-Amz-SignedHeaders
-    required: false
-    type: string
 paths:
   '/#X-Amz-Target=AWSShineFrontendService_20170701.DeleteTerminology':
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
-      description: A synchronous action that deletes a custom terminology.
       operationId: DeleteTerminology
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteTerminologyRequest'
-        - enum:
-            - AWSShineFrontendService_20170701.DeleteTerminology
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: A synchronous action that deletes a custom terminology.
       responses:
         '200':
           description: Success
@@ -128,7 +179,18 @@ paths:
           description: InternalServerException
           schema:
             $ref: '#/definitions/InternalServerException'
-  '/#X-Amz-Target=AWSShineFrontendService_20170701.GetTerminology':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteTerminologyRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSShineFrontendService_20170701.DeleteTerminology
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -137,21 +199,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSShineFrontendService_20170701.GetTerminology':
     post:
-      description: Retrieves a custom terminology.
       operationId: GetTerminology
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetTerminologyRequest'
-        - enum:
-            - AWSShineFrontendService_20170701.GetTerminology
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: Retrieves a custom terminology.
       responses:
         '200':
           description: Success
@@ -173,7 +224,18 @@ paths:
           description: InternalServerException
           schema:
             $ref: '#/definitions/InternalServerException'
-  '/#X-Amz-Target=AWSShineFrontendService_20170701.ImportTerminology':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetTerminologyRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSShineFrontendService_20170701.GetTerminology
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -182,21 +244,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSShineFrontendService_20170701.ImportTerminology':
     post:
-      description: '<p>Creates or updates a custom terminology, depending on whether or not one already exists for the given terminology name. Importing a terminology with the same name as an existing one will merge the terminologies based on the chosen merge strategy. Currently, the only supported merge strategy is OVERWRITE, and so the imported terminology will overwrite an existing terminology of the same name.</p> <p>If you import a terminology that overwrites an existing one, the new terminology take up to 10 minutes to fully propagate and be available for use in a translation due to cache policies with the DataPlane service that performs the translations.</p>'
       operationId: ImportTerminology
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/ImportTerminologyRequest'
-        - enum:
-            - AWSShineFrontendService_20170701.ImportTerminology
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: '<p>Creates or updates a custom terminology, depending on whether or not one already exists for the given terminology name. Importing a terminology with the same name as an existing one will merge the terminologies based on the chosen merge strategy. Currently, the only supported merge strategy is OVERWRITE, and so the imported terminology will overwrite an existing terminology of the same name.</p> <p>If you import a terminology that overwrites an existing one, the new terminology take up to 10 minutes to fully propagate and be available for use in a translation due to cache policies with the DataPlane service that performs the translations.</p>'
       responses:
         '200':
           description: Success
@@ -218,7 +269,18 @@ paths:
           description: InternalServerException
           schema:
             $ref: '#/definitions/InternalServerException'
-  '/#X-Amz-Target=AWSShineFrontendService_20170701.ListTerminologies':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ImportTerminologyRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSShineFrontendService_20170701.ImportTerminology
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -227,21 +289,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSShineFrontendService_20170701.ListTerminologies':
     post:
-      description: Provides a list of custom terminologies associated with your account.
       operationId: ListTerminologies
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListTerminologiesRequest'
-        - enum:
-            - AWSShineFrontendService_20170701.ListTerminologies
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: Provides a list of custom terminologies associated with your account.
       responses:
         '200':
           description: Success
@@ -259,7 +310,18 @@ paths:
           description: InternalServerException
           schema:
             $ref: '#/definitions/InternalServerException'
-  '/#X-Amz-Target=AWSShineFrontendService_20170701.TranslateText':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTerminologiesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSShineFrontendService_20170701.ListTerminologies
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -268,21 +330,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSShineFrontendService_20170701.TranslateText':
     post:
-      description: '<p>Translates input text from the source language to the target language. It is not necessary to use English (en) as either the source or the target language but not all language combinations are supported by Amazon Translate. For more information, see <a href="http://docs.aws.amazon.com/translate/latest/dg/pairs.html">Supported Language Pairs</a>.</p> <ul> <li> <p>Arabic (ar)</p> </li> <li> <p>Chinese (Simplified) (zh)</p> </li> <li> <p>Chinese (Traditional) (zh-TW)</p> </li> <li> <p>Czech (cs)</p> </li> <li> <p>Danish (da)</p> </li> <li> <p>Dutch (nl)</p> </li> <li> <p>English (en)</p> </li> <li> <p>Finnish (fi)</p> </li> <li> <p>French (fr)</p> </li> <li> <p>German (de)</p> </li> <li> <p>Hebrew (he)</p> </li> <li> <p>Indonesian (id)</p> </li> <li> <p>Italian (it)</p> </li> <li> <p>Japanese (ja)</p> </li> <li> <p>Korean (ko)</p> </li> <li> <p>Polish (pl)</p> </li> <li> <p>Portuguese (pt)</p> </li> <li> <p>Russian (ru)</p> </li> <li> <p>Spanish (es)</p> </li> <li> <p>Swedish (sv)</p> </li> <li> <p>Turkish (tr)</p> </li> </ul> <p>To have Amazon Translate determine the source language of your text, you can specify <code>auto</code> in the <code>SourceLanguageCode</code> field. If you specify <code>auto</code>, Amazon Translate will call Amazon Comprehend to determine the source language.</p>'
       operationId: TranslateText
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/TranslateTextRequest'
-        - enum:
-            - AWSShineFrontendService_20170701.TranslateText
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: '<p>Translates input text from the source language to the target language. It is not necessary to use English (en) as either the source or the target language but not all language combinations are supported by Amazon Translate. For more information, see <a href="http://docs.aws.amazon.com/translate/latest/dg/pairs.html">Supported Language Pairs</a>.</p> <ul> <li> <p>Arabic (ar)</p> </li> <li> <p>Chinese (Simplified) (zh)</p> </li> <li> <p>Chinese (Traditional) (zh-TW)</p> </li> <li> <p>Czech (cs)</p> </li> <li> <p>Danish (da)</p> </li> <li> <p>Dutch (nl)</p> </li> <li> <p>English (en)</p> </li> <li> <p>Finnish (fi)</p> </li> <li> <p>French (fr)</p> </li> <li> <p>German (de)</p> </li> <li> <p>Hebrew (he)</p> </li> <li> <p>Indonesian (id)</p> </li> <li> <p>Italian (it)</p> </li> <li> <p>Japanese (ja)</p> </li> <li> <p>Korean (ko)</p> </li> <li> <p>Polish (pl)</p> </li> <li> <p>Portuguese (pt)</p> </li> <li> <p>Russian (ru)</p> </li> <li> <p>Spanish (es)</p> </li> <li> <p>Swedish (sv)</p> </li> <li> <p>Turkish (tr)</p> </li> </ul> <p>To have Amazon Translate determine the source language of your text, you can specify <code>auto</code> in the <code>SourceLanguageCode</code> field. If you specify <code>auto</code>, Amazon Translate will call Amazon Comprehend to determine the source language.</p>'
       responses:
         '200':
           description: Success
@@ -320,62 +371,52 @@ paths:
           description: ServiceUnavailableException
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TranslateTextRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSShineFrontendService_20170701.TranslateText
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  AppliedTerminology:
-    description: 'The custom terminology applied to the input text by Amazon Translate for the translated text response. This is optional in the response and will only be present if you specified terminology input in the request. Currently, only one terminology can be applied per TranslateText request.'
-    properties:
-      Name:
-        $ref: '#/definitions/ResourceName'
-        description: The name of the custom terminology applied to the input text by Amazon Translate for the translated text response.
-      Terms:
-        $ref: '#/definitions/TermList'
-        description: 'The specific terms of the custom terminology applied to the input text by Amazon Translate for the translated text response. A maximum of 250 terms will be returned, and the specific terms applied will be the first 250 terms in the source text. '
-    type: object
-  AppliedTerminologyList:
-    items:
-      $ref: '#/definitions/AppliedTerminology'
-    type: array
-  BoundedLengthString:
-    maxLength: 5000
-    minLength: 1
-    pattern: '[\P{M}\p{M}]{1,5000}'
-    type: string
   DeleteTerminologyRequest:
+    type: object
+    required:
+      - Name
     properties:
       Name:
         $ref: '#/definitions/ResourceName'
         description: 'The name of the custom terminology being deleted. '
+  ResourceNotFoundException: {}
+  TooManyRequestsException: {}
+  InternalServerException: {}
+  GetTerminologyResponse:
+    type: object
+    properties:
+      TerminologyProperties:
+        $ref: '#/definitions/TerminologyProperties'
+        description: The properties of the custom terminology being retrieved.
+      TerminologyDataLocation:
+        $ref: '#/definitions/TerminologyDataLocation'
+        description: The data location of the custom terminology being retrieved. The custom terminology file is returned in a presigned url that has a 30 minute expiration.
+  GetTerminologyRequest:
+    type: object
     required:
       - Name
-    type: object
-  Description:
-    maxLength: 256
-    pattern: '[\P{M}\p{M}]{0,256}'
-    type: string
-  DetectedLanguageLowConfidenceException: {}
-  EncryptionKey:
-    description: The encryption key used to encrypt the custom terminologies used by Amazon Translate.
-    properties:
-      Id:
-        $ref: '#/definitions/EncryptionKeyID'
-        description: The Amazon Resource Name (ARN) of the encryption key being used to encrypt the custom terminology.
-      Type:
-        $ref: '#/definitions/EncryptionKeyType'
-        description: The type of encryption key used by Amazon Translate to encrypt custom terminologies.
-    required:
-      - Type
-      - Id
-    type: object
-  EncryptionKeyID:
-    maxLength: 400
-    minLength: 1
-    pattern: '(arn:aws((-us-gov)|(-cn))?:kms:)?([a-z]{2}-[a-z]+-\d:)?(\d{12}:)?(((key/)?[a-zA-Z0-9-_]+)|(alias/[a-zA-Z0-9:/_-]+))'
-    type: string
-  EncryptionKeyType:
-    enum:
-      - KMS
-    type: string
-  GetTerminologyRequest:
+      - TerminologyDataFormat
     properties:
       Name:
         $ref: '#/definitions/ResourceName'
@@ -383,125 +424,212 @@ definitions:
       TerminologyDataFormat:
         $ref: '#/definitions/TerminologyDataFormat'
         description: 'The data format of the custom terminology being retrieved, either CSV or TMX.'
-    required:
-      - Name
-      - TerminologyDataFormat
-    type: object
-  GetTerminologyResponse:
-    properties:
-      TerminologyDataLocation:
-        $ref: '#/definitions/TerminologyDataLocation'
-        description: The data location of the custom terminology being retrieved. The custom terminology file is returned in a presigned url that has a 30 minute expiration.
-      TerminologyProperties:
-        $ref: '#/definitions/TerminologyProperties'
-        description: The properties of the custom terminology being retrieved.
-    type: object
-  ImportTerminologyRequest:
-    properties:
-      Description:
-        $ref: '#/definitions/Description'
-        description: The description of the custom terminology being imported.
-      EncryptionKey:
-        $ref: '#/definitions/EncryptionKey'
-        description: The encryption key for the custom terminology being imported.
-      MergeStrategy:
-        $ref: '#/definitions/MergeStrategy'
-        description: 'The merge strategy of the custom terminology being imported. Currently, only the OVERWRITE merge strategy is supported. In this case, the imported terminology will overwrite an existing terminology of the same name.'
-      Name:
-        $ref: '#/definitions/ResourceName'
-        description: The name of the custom terminology being imported.
-      TerminologyData:
-        $ref: '#/definitions/TerminologyData'
-        description: The terminology data for the custom terminology being imported.
-    required:
-      - Name
-      - MergeStrategy
-      - TerminologyData
-    type: object
+  InvalidParameterValueException: {}
   ImportTerminologyResponse:
+    type: object
     properties:
       TerminologyProperties:
         $ref: '#/definitions/TerminologyProperties'
         description: The properties of the custom terminology being imported.
+  ImportTerminologyRequest:
     type: object
-  Integer:
-    type: integer
-  InternalServerException: {}
-  InvalidParameterValueException: {}
-  InvalidRequestException: {}
-  LanguageCodeString:
-    maxLength: 5
-    minLength: 2
-    type: string
-  LanguageCodeStringList:
-    items:
-      $ref: '#/definitions/LanguageCodeString'
-    type: array
+    required:
+      - Name
+      - MergeStrategy
+      - TerminologyData
+    properties:
+      Name:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the custom terminology being imported.
+      MergeStrategy:
+        $ref: '#/definitions/MergeStrategy'
+        description: 'The merge strategy of the custom terminology being imported. Currently, only the OVERWRITE merge strategy is supported. In this case, the imported terminology will overwrite an existing terminology of the same name.'
+      Description:
+        $ref: '#/definitions/Description'
+        description: The description of the custom terminology being imported.
+      TerminologyData:
+        $ref: '#/definitions/TerminologyData'
+        description: The terminology data for the custom terminology being imported.
+      EncryptionKey:
+        $ref: '#/definitions/EncryptionKey'
+        description: The encryption key for the custom terminology being imported.
   LimitExceededException: {}
-  ListTerminologiesRequest:
-    properties:
-      MaxResults:
-        $ref: '#/definitions/MaxResultsInteger'
-        description: The maximum number of custom terminologies returned per list request.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'If the result of the request to ListTerminologies was truncated, include the NextToken to fetch the next group of custom terminologies. '
-    type: object
   ListTerminologiesResponse:
+    type: object
     properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: ' If the response to the ListTerminologies was truncated, the NextToken fetches the next group of custom terminologies. '
       TerminologyPropertiesList:
         $ref: '#/definitions/TerminologyPropertiesList'
         description: The properties list of the custom terminologies returned on the list request.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: ' If the response to the ListTerminologies was truncated, the NextToken fetches the next group of custom terminologies. '
+  ListTerminologiesRequest:
     type: object
-  MaxResultsInteger:
-    maximum: 500
-    minimum: 1
-    type: integer
-  MergeStrategy:
-    enum:
-      - OVERWRITE
-    type: string
-  NextToken:
-    maxLength: 8192
-    pattern: '\p{ASCII}{0,8192}'
-    type: string
-  ResourceName:
-    maxLength: 256
-    minLength: 1
-    pattern: '^([A-Za-z0-9-]_?)+$'
-    type: string
-  ResourceNameList:
-    items:
-      $ref: '#/definitions/ResourceName'
-    type: array
-  ResourceNotFoundException: {}
-  ServiceUnavailableException: {}
-  String:
-    maxLength: 10000
-    pattern: '[\P{M}\p{M}]{0,10000}'
-    type: string
-  Term:
-    description: The term being translated by the custom terminology.
     properties:
-      SourceText:
-        $ref: '#/definitions/String'
-        description: The source text of the term being translated by the custom terminology.
-      TargetText:
-        $ref: '#/definitions/String'
-        description: The target text of the term being translated by the custom terminology.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If the result of the request to ListTerminologies was truncated, include the NextToken to fetch the next group of custom terminologies. '
+      MaxResults:
+        $ref: '#/definitions/MaxResultsInteger'
+        description: The maximum number of custom terminologies returned per list request.
+  TranslateTextResponse:
     type: object
+    required:
+      - TranslatedText
+      - SourceLanguageCode
+      - TargetLanguageCode
+    properties:
+      TranslatedText:
+        $ref: '#/definitions/String'
+        description: The the translated text. The maximum length of this text is 5kb.
+      SourceLanguageCode:
+        $ref: '#/definitions/LanguageCodeString'
+        description: 'The language code for the language of the source text. '
+      TargetLanguageCode:
+        $ref: '#/definitions/LanguageCodeString'
+        description: 'The language code for the language of the target text. '
+      AppliedTerminologies:
+        $ref: '#/definitions/AppliedTerminologyList'
+        description: The names of the custom terminologies applied to the input text by Amazon Translate for the translated text response.
+  TranslateTextRequest:
+    type: object
+    required:
+      - Text
+      - SourceLanguageCode
+      - TargetLanguageCode
+    properties:
+      Text:
+        $ref: '#/definitions/BoundedLengthString'
+        description: 'The text to translate. The text string can be a maximum of 5,000 bytes long. Depending on your character set, this may be fewer than 5,000 characters.'
+      TerminologyNames:
+        $ref: '#/definitions/ResourceNameList'
+        description: The TerminologyNames list that is taken as input to the TranslateText request. This has a minimum length of 0 and a maximum length of 1.
+      SourceLanguageCode:
+        $ref: '#/definitions/LanguageCodeString'
+        description: '<p>The language code for the language of the source text. The language must be a language supported by Amazon Translate. </p> <p>To have Amazon Translate determine the source language of your text, you can specify <code>auto</code> in the <code>SourceLanguageCode</code> field. If you specify <code>auto</code>, Amazon Translate will call Amazon Comprehend to determine the source language.</p>'
+      TargetLanguageCode:
+        $ref: '#/definitions/LanguageCodeString'
+        description: The language code requested for the language of the target text. The language must be a language supported by Amazon Translate.
+  InvalidRequestException: {}
+  TextSizeLimitExceededException: {}
+  UnsupportedLanguagePairException: {}
+  DetectedLanguageLowConfidenceException: {}
+  ServiceUnavailableException: {}
+  ResourceName:
+    type: string
+    pattern: '^([A-Za-z0-9-]_?)+$'
+    minLength: 1
+    maxLength: 256
   TermList:
+    type: array
     items:
       $ref: '#/definitions/Term'
+  AppliedTerminology:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the custom terminology applied to the input text by Amazon Translate for the translated text response.
+      Terms:
+        $ref: '#/definitions/TermList'
+        description: 'The specific terms of the custom terminology applied to the input text by Amazon Translate for the translated text response. A maximum of 250 terms will be returned, and the specific terms applied will be the first 250 terms in the source text. '
+    description: 'The custom terminology applied to the input text by Amazon Translate for the translated text response. This is optional in the response and will only be present if you specified terminology input in the request. Currently, only one terminology can be applied per TranslateText request.'
+  AppliedTerminologyList:
     type: array
-  TerminologyArn:
-    pattern: '^arn:aws((-us-gov)|(-cn))?:translate:[a-zA-Z0-9-]+:[0-9]{12}:terminology/.+?/.+?$'
+    items:
+      $ref: '#/definitions/AppliedTerminology'
+  BoundedLengthString:
     type: string
+    pattern: '[\P{M}\p{M}]{1,5000}'
+    minLength: 1
+    maxLength: 5000
+  Description:
+    type: string
+    pattern: '[\P{M}\p{M}]{0,256}'
+    maxLength: 256
+  EncryptionKeyType:
+    type: string
+    enum:
+      - KMS
+  EncryptionKeyID:
+    type: string
+    pattern: '(arn:aws((-us-gov)|(-cn))?:kms:)?([a-z]{2}-[a-z]+-\d:)?(\d{12}:)?(((key/)?[a-zA-Z0-9-_]+)|(alias/[a-zA-Z0-9:/_-]+))'
+    minLength: 1
+    maxLength: 400
+  EncryptionKey:
+    type: object
+    required:
+      - Type
+      - Id
+    properties:
+      Type:
+        $ref: '#/definitions/EncryptionKeyType'
+        description: The type of encryption key used by Amazon Translate to encrypt custom terminologies.
+      Id:
+        $ref: '#/definitions/EncryptionKeyID'
+        description: The Amazon Resource Name (ARN) of the encryption key being used to encrypt the custom terminology.
+    description: The encryption key used to encrypt the custom terminologies used by Amazon Translate.
+  TerminologyDataFormat:
+    type: string
+    enum:
+      - CSV
+      - TMX
+  TerminologyProperties:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the custom terminology.
+      Description:
+        $ref: '#/definitions/Description'
+        description: The description of the custom terminology properties.
+      Arn:
+        $ref: '#/definitions/TerminologyArn'
+        description: ' The Amazon Resource Name (ARN) of the custom terminology. '
+      SourceLanguageCode:
+        $ref: '#/definitions/LanguageCodeString'
+        description: The language code for the source text of the translation request for which the custom terminology is being used.
+      TargetLanguageCodes:
+        $ref: '#/definitions/LanguageCodeStringList'
+        description: The language codes for the target languages available with the custom terminology file. All possible target languages are returned in array.
+      EncryptionKey:
+        $ref: '#/definitions/EncryptionKey'
+        description: The encryption key for the custom terminology.
+      SizeBytes:
+        $ref: '#/definitions/Integer'
+        description: The size of the file used when importing a custom terminology.
+      TermCount:
+        $ref: '#/definitions/Integer'
+        description: The number of terms included in the custom terminology.
+      CreatedAt:
+        $ref: '#/definitions/Timestamp'
+        description: 'The time at which the custom terminology was created, based on the timestamp.'
+      LastUpdatedAt:
+        $ref: '#/definitions/Timestamp'
+        description: 'The time at which the custom terminology was last update, based on the timestamp.'
+    description: The properties of the custom terminology.
+  TerminologyDataLocation:
+    type: object
+    required:
+      - RepositoryType
+      - Location
+    properties:
+      RepositoryType:
+        $ref: '#/definitions/String'
+        description: The repository type for the custom terminology data.
+      Location:
+        $ref: '#/definitions/String'
+        description: The location of the custom terminology data.
+    description: The location of the custom terminology data.
+  MergeStrategy:
+    type: string
+    enum:
+      - OVERWRITE
   TerminologyData:
-    description: The data associated with the custom terminology.
+    type: object
+    required:
+      - File
+      - Format
     properties:
       File:
         $ref: '#/definitions/TerminologyFile'
@@ -509,182 +637,54 @@ definitions:
       Format:
         $ref: '#/definitions/TerminologyDataFormat'
         description: The data format of the custom terminology. Either CSV or TMX.
-    required:
-      - File
-      - Format
-    type: object
-  TerminologyDataFormat:
-    enum:
-      - CSV
-      - TMX
+    description: The data associated with the custom terminology.
+  Integer:
+    type: integer
+  LanguageCodeString:
     type: string
-  TerminologyDataLocation:
-    description: The location of the custom terminology data.
-    properties:
-      Location:
-        $ref: '#/definitions/String'
-        description: The location of the custom terminology data.
-      RepositoryType:
-        $ref: '#/definitions/String'
-        description: The repository type for the custom terminology data.
-    required:
-      - RepositoryType
-      - Location
-    type: object
-  TerminologyFile:
-    format: password
-    maxLength: 10485760
+    minLength: 2
+    maxLength: 5
+  LanguageCodeStringList:
+    type: array
+    items:
+      $ref: '#/definitions/LanguageCodeString'
+  NextToken:
     type: string
-  TerminologyProperties:
-    description: The properties of the custom terminology.
-    properties:
-      Arn:
-        $ref: '#/definitions/TerminologyArn'
-        description: ' The Amazon Resource Name (ARN) of the custom terminology. '
-      CreatedAt:
-        $ref: '#/definitions/Timestamp'
-        description: 'The time at which the custom terminology was created, based on the timestamp.'
-      Description:
-        $ref: '#/definitions/Description'
-        description: The description of the custom terminology properties.
-      EncryptionKey:
-        $ref: '#/definitions/EncryptionKey'
-        description: The encryption key for the custom terminology.
-      LastUpdatedAt:
-        $ref: '#/definitions/Timestamp'
-        description: 'The time at which the custom terminology was last update, based on the timestamp.'
-      Name:
-        $ref: '#/definitions/ResourceName'
-        description: The name of the custom terminology.
-      SizeBytes:
-        $ref: '#/definitions/Integer'
-        description: The size of the file used when importing a custom terminology.
-      SourceLanguageCode:
-        $ref: '#/definitions/LanguageCodeString'
-        description: The language code for the source text of the translation request for which the custom terminology is being used.
-      TargetLanguageCodes:
-        $ref: '#/definitions/LanguageCodeStringList'
-        description: The language codes for the target languages available with the custom terminology file. All possible target languages are returned in array.
-      TermCount:
-        $ref: '#/definitions/Integer'
-        description: The number of terms included in the custom terminology.
-    type: object
+    pattern: '\p{ASCII}{0,8192}'
+    maxLength: 8192
+  MaxResultsInteger:
+    type: integer
+    minimum: 1
+    maximum: 500
   TerminologyPropertiesList:
+    type: array
     items:
       $ref: '#/definitions/TerminologyProperties'
+  ResourceNameList:
     type: array
-  TextSizeLimitExceededException: {}
-  Timestamp:
-    format: date-time
+    items:
+      $ref: '#/definitions/ResourceName'
+  String:
     type: string
-  TooManyRequestsException: {}
-  TranslateTextRequest:
-    properties:
-      SourceLanguageCode:
-        $ref: '#/definitions/LanguageCodeString'
-        description: '<p>The language code for the language of the source text. The language must be a language supported by Amazon Translate. </p> <p>To have Amazon Translate determine the source language of your text, you can specify <code>auto</code> in the <code>SourceLanguageCode</code> field. If you specify <code>auto</code>, Amazon Translate will call Amazon Comprehend to determine the source language.</p>'
-      TargetLanguageCode:
-        $ref: '#/definitions/LanguageCodeString'
-        description: The language code requested for the language of the target text. The language must be a language supported by Amazon Translate.
-      TerminologyNames:
-        $ref: '#/definitions/ResourceNameList'
-        description: The TerminologyNames list that is taken as input to the TranslateText request. This has a minimum length of 0 and a maximum length of 1.
-      Text:
-        $ref: '#/definitions/BoundedLengthString'
-        description: 'The text to translate. The text string can be a maximum of 5,000 bytes long. Depending on your character set, this may be fewer than 5,000 characters.'
-    required:
-      - Text
-      - SourceLanguageCode
-      - TargetLanguageCode
+    pattern: '[\P{M}\p{M}]{0,10000}'
+    maxLength: 10000
+  Term:
     type: object
-  TranslateTextResponse:
     properties:
-      AppliedTerminologies:
-        $ref: '#/definitions/AppliedTerminologyList'
-        description: The names of the custom terminologies applied to the input text by Amazon Translate for the translated text response.
-      SourceLanguageCode:
-        $ref: '#/definitions/LanguageCodeString'
-        description: 'The language code for the language of the source text. '
-      TargetLanguageCode:
-        $ref: '#/definitions/LanguageCodeString'
-        description: 'The language code for the language of the target text. '
-      TranslatedText:
+      SourceText:
         $ref: '#/definitions/String'
-        description: The the translated text. The maximum length of this text is 5kb.
-    required:
-      - TranslatedText
-      - SourceLanguageCode
-      - TargetLanguageCode
-    type: object
-  UnsupportedLanguagePairException: {}
-x-servers:
-  - description: The Amazon Translate multi-region endpoint
-    url: 'http://translate.{region}.amazonaws.com'
-    variables:
-      region:
-        default: us-east-1
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-  - description: The Amazon Translate multi-region endpoint
-    url: 'https://translate.{region}.amazonaws.com'
-    variables:
-      region:
-        default: us-east-1
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-  - description: The Amazon Translate endpoint for China (Beijing) and China (Ningxia)
-    url: 'http://translate.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        default: cn-north-1
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-  - description: The Amazon Translate endpoint for China (Beijing) and China (Ningxia)
-    url: 'https://translate.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        default: cn-north-1
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
+        description: The source text of the term being translated by the custom terminology.
+      TargetText:
+        $ref: '#/definitions/String'
+        description: The target text of the term being translated by the custom terminology.
+    description: The term being translated by the custom terminology.
+  TerminologyArn:
+    type: string
+    pattern: '^arn:aws((-us-gov)|(-cn))?:translate:[a-zA-Z0-9-]+:[0-9]{12}:terminology/.+?/.+?$'
+  TerminologyFile:
+    type: string
+    maxLength: 10485760
+    format: password
+  Timestamp:
+    type: string
+    format: date-time
