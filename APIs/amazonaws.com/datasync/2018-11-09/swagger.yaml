@@ -311,7 +311,7 @@ paths:
   '/#X-Amz-Target=FmrsService.CreateLocationS3':
     post:
       operationId: CreateLocationS3
-      description: '<p>Creates an endpoint for an Amazon S3 bucket.</p> <p>For AWS DataSync to access a destination S3 bucket, it needs an AWS Identity and Access Management (IAM) role that has the required permissions. You can set up the required permissions by creating an IAM policy that grants the required permissions and attaching the policy to the role. An example of such a policy is shown in the examples section.</p> <p>For more information, see Configuring Amazon S3 Location Settings in the <i>AWS DataSync User Guide.</i> </p>'
+      description: '<p>Creates an endpoint for an Amazon S3 bucket.</p> <p>For AWS DataSync to access a destination S3 bucket, it needs an AWS Identity and Access Management (IAM) role that has the required permissions. You can set up the required permissions by creating an IAM policy that grants the required permissions and attaching the policy to the role. An example of such a policy is shown in the examples section.</p> <p>For more information, see https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html#create-s3-location in the <i>AWS DataSync User Guide.</i> </p>'
       responses:
         '200':
           description: Success
@@ -1250,7 +1250,7 @@ definitions:
         description: '<p>The ID of the VPC (Virtual Private Cloud) endpoint that the agent has access to. This is the client-side VPC endpoint, also called a PrivateLink. If you don''t have a PrivateLink VPC endpoint, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html#create-endpoint-service">Creating a VPC Endpoint Service Configuration</a> in the AWS VPC User Guide.</p> <p>VPC endpoint ID looks like this: <code>vpce-01234d5aff67890e1</code>.</p>'
       SubnetArns:
         $ref: '#/definitions/PLSubnetArnList'
-        description: 'The Amazon Resource Names (ARNs) of the subnets in which DataSync will create Elastic Network Interfaces (ENIs) for each data transfer task. The agent that runs a task must be private. When you start a task that is associated with an agent created in a VPC, or one that has access to an IP address in a VPC, then the task is also private. In this case, DataSync creates four ENIs for each task in your subnet. For a data transfer to work, the agent must be able to route to all these four ENIs.'
+        description: 'The Amazon Resource Names (ARNs) of the subnets in which DataSync will create elastic network interfaces for each data transfer task. The agent that runs a task must be private. When you start a task that is associated with an agent created in a VPC, or one that has access to an IP address in a VPC, then the task is also private. In this case, DataSync creates four network interfaces for each task in your subnet. For a data transfer to work, the agent must be able to route to all these four network interfaces.'
       SecurityGroupArns:
         $ref: '#/definitions/PLSecurityGroupArnList'
         description: The ARNs of the security groups used to protect your data transfer task subnets. See <a>CreateAgentRequest$SubnetArns</a>.
@@ -1330,6 +1330,9 @@ definitions:
       S3BucketArn:
         $ref: '#/definitions/S3BucketArn'
         description: The Amazon Resource Name (ARN) of the Amazon S3 bucket.
+      S3StorageClass:
+        $ref: '#/definitions/S3StorageClass'
+        description: 'The Amazon S3 storage class that you want to store your files in when this location is used as a task destination. For more information about S3 storage classes, see <a href="https://aws.amazon.com/s3/storage-classes/">Amazon S3 Storage Classes</a> in the <i>Amazon Simple Storage Service Developer Guide</i>. Some storage classes have behaviors that can affect your S3 storage cost. For detailed information, see <a>using-storage-classes</a>.'
       S3Config:
         $ref: '#/definitions/S3Config'
       Tags:
@@ -1357,22 +1360,22 @@ definitions:
         description: '<p>The subdirectory in the SMB file system that is used to read data from the SMB source location or write data to the SMB destination. The SMB path should be a path that''s exported by the SMB server, or a subdirectory of that path. The path should be such that it can be mounted by other SMB clients in your network.</p> <p>To transfer all the data in the folder you specified, DataSync needs to have permissions to mount the SMB share, as well as to access all the data in that share. To ensure this, either ensure that the user/password specified belongs to the user who can mount the share, and who has the appropriate permissions for all of the files and directories that you want DataSync to access, or use credentials of a member of the Backup Operators group to mount the share. Doing either enables the agent to access the data. For the agent to access directories, you must additionally enable all execute access.</p>'
       ServerHostname:
         $ref: '#/definitions/ServerHostname'
-        description: <p>The name of the SMB server. This value is the IP address or Domain Name Service (DNS) name of the SMB server. An agent that is installed on-premises uses this host name to mount the SMB server in a network.</p> <note> <p>This name must either be DNS-compliant or must be an IP version 4 (IPv4) address.</p> </note>
+        description: <p>The name of the SMB server. This value is the IP address or Domain Name Service (DNS) name of the SMB server. An agent that is installed on-premises uses this hostname to mount the SMB server in a network.</p> <note> <p>This name must either be DNS-compliant or must be an IP version 4 (IPv4) address.</p> </note>
       User:
         $ref: '#/definitions/SmbUser'
-        description: 'The user who can mount the share, has the permissions to access files and directories in the SMB share.'
+        description: 'The user who can mount the share, has the permissions to access files and folders in the SMB share.'
       Domain:
         $ref: '#/definitions/SmbDomain'
-        description: The name of the domain that the SMB server belongs to.
+        description: The name of the Windows domain that the SMB server belongs to.
       Password:
         $ref: '#/definitions/SmbPassword'
-        description: The password of the user who has permission to access the SMB server.
+        description: 'The password of the user who can mount the share, has the permissions to access files and folders in the SMB share.'
       AgentArns:
         $ref: '#/definitions/AgentArnList'
         description: 'The Amazon Resource Names (ARNs) of agents to use for a Simple Message Block (SMB) location. '
       MountOptions:
         $ref: '#/definitions/SmbMountOptions'
-        description: The mount options that are available for DataSync to use to access an SMB location.
+        description: The mount options used by DataSync to access the SMB server.
       Tags:
         $ref: '#/definitions/TagList'
         description: The key-value pair that represents the tag that you want to add to the location. The value can be an empty string. We recommend using tags to name your resources.
@@ -1471,6 +1474,7 @@ definitions:
         description: 'The type of endpoint that your agent is connected to. If the endpoint is a VPC endpoint, the agent is not accessible over the public Internet. '
       PrivateLinkConfig:
         $ref: '#/definitions/PrivateLinkConfig'
+        description: The subnet and the security group that DataSync used to access a VPC endpoint.
     description: DescribeAgentResponse
   DescribeAgentRequest:
     type: object
@@ -1541,6 +1545,9 @@ definitions:
       LocationUri:
         $ref: '#/definitions/LocationUri'
         description: The URL of the Amazon S3 location that was described.
+      S3StorageClass:
+        $ref: '#/definitions/S3StorageClass'
+        description: 'The Amazon S3 storage class that you chose to store your files in when this location is used as a task destination. For more information about S3 storage classes, see <a href="https://aws.amazon.com/s3/storage-classes/">Amazon S3 Storage Classes</a> in the <i>Amazon Simple Storage Service Developer Guide</i>. Some storage classes have behaviors that can affect your S3 storage cost. For detailed information, see <a>using-storage-classes</a>.'
       S3Config:
         $ref: '#/definitions/S3Config'
       CreationTime:
@@ -1570,10 +1577,10 @@ definitions:
         description: The Amazon Resource Name (ARN) of the source SMB file system location that is created.
       User:
         $ref: '#/definitions/SmbUser'
-        description: The user who is logged on the SMB server.
+        description: 'The user who can mount the share, has the permissions to access files and folders in the SMB share.'
       Domain:
         $ref: '#/definitions/SmbDomain'
-        description: The name of the domain that the SMB server belongs to.
+        description: The name of the Windows domain that the SMB server belongs to.
       MountOptions:
         $ref: '#/definitions/SmbMountOptions'
         description: The mount options that are available for DataSync to use to access an SMB location.
@@ -2013,12 +2020,21 @@ definitions:
     properties:
       Version:
         $ref: '#/definitions/NfsVersion'
-        description: 'The specific NFS version that you want DataSync to use to mount your NFS share. If you don''t specify a version, DataSync defaults to <code>AUTOMATIC</code>. That is, DataSync automatically selects a version based on negotiation with the NFS server.'
+        description: '<p>The specific NFS version that you want DataSync to use to mount your NFS share. If the server refuses to use the version specified, the sync will fail. If you don''t specify a version, DataSync defaults to <code>AUTOMATIC</code>. That is, DataSync automatically selects a version based on negotiation with the NFS server.</p> <p>You can specify the following NFS versions:</p> <ul> <li> <p> <b> <a href="https://tools.ietf.org/html/rfc1813">NFSv3</a> </b> - stateless protocol version that allows for asynchronous writes on the server.</p> </li> <li> <p> <b> <a href="https://tools.ietf.org/html/rfc3530">NFSv4.0</a> </b> - stateful, firewall-friendly protocol version that supports delegations and pseudo filesystems.</p> </li> <li> <p> <b> <a href="https://tools.ietf.org/html/rfc5661">NFSv4.1</a> </b> - stateful protocol version that supports sessions, directory delegations, and parallel data processing. Version 4.1 also includes all features available in version 4.0.</p> </li> </ul>'
     description: Represents the mount options that are available for DataSync to access an NFS location.
   S3BucketArn:
     type: string
     pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):s3:::([^/]*)$'
     maxLength: 76
+  S3StorageClass:
+    type: string
+    enum:
+      - STANDARD
+      - STANDARD_IA
+      - ONEZONE_IA
+      - INTELLIGENT_TIERING
+      - GLACIER
+      - DEEP_ARCHIVE
   S3Config:
     type: object
     required:
@@ -2045,7 +2061,7 @@ definitions:
     properties:
       Version:
         $ref: '#/definitions/SmbVersion'
-        description: 'The specific SMB version that you want DataSync to use to mount your SMB share. If you don''t specify a version, DataSync defaults to <code>AUTOMATIC</code>. That is, DataSync automatically selects a version based on negotiation with the SMB Server server.'
+        description: 'The specific SMB version that you want DataSync to use to mount your SMB share. If you don''t specify a version, DataSync defaults to <code>AUTOMATIC</code>. That is, DataSync automatically selects a version based on negotiation with the SMB server.'
     description: Represents the mount options that are available for DataSync to access an SMB location.
   LogGroupArn:
     type: string
@@ -2056,7 +2072,10 @@ definitions:
     properties:
       VerifyMode:
         $ref: '#/definitions/VerifyMode'
-        description: '<p>A value that determines whether a data integrity verification should be performed at the end of a task execution after all data and metadata have been transferred. </p> <p>Default value: POINT_IN_TIME_CONSISTENT.</p> <p>POINT_IN_TIME_CONSISTENT: Perform verification (recommended). </p> <p>NONE: Skip verification.</p>'
+        description: '<p>A value that determines whether a data integrity verification should be performed at the end of a task execution after all data and metadata have been transferred. </p> <p>Default value: POINT_IN_TIME_CONSISTENT.</p> <p>POINT_IN_TIME_CONSISTENT: Perform verification (recommended). </p> <p>ONLY_FILES_TRANSFERRED: Perform verification on only files that were transferred.</p> <p>NONE: Skip verification.</p>'
+      OverwriteMode:
+        $ref: '#/definitions/OverwriteMode'
+        description: '<p>A value that determines whether files at the destination should be overwritten or preserved when copying files. If set to <code>NEVER</code> a destination file will not be replaced by a source file, even if the destination file differs from the source file. If you modify files in the destination and you sync the files, you can use this value to protect against overwriting those changes. </p> <p>Some storage classes have specific behaviors that can affect your S3 storage cost. For detailed information, see <a>using-storage-classes</a> in the <i>AWS DataSync User Guide</i>.</p>'
       Atime:
         $ref: '#/definitions/Atime'
         description: '<p>A file metadata value that shows the last time a file was accessed (that is, when the file was read or written to). If you set <code>Atime</code> to BEST_EFFORT, DataSync attempts to preserve the original <code>Atime</code> attribute on all source files (that is, the version before the PREPARING phase). However, <code>Atime</code>''s behavior is not fully standard across platforms, so AWS DataSync can only do this on a best-effort basis. </p> <p>Default value: BEST_EFFORT.</p> <p>BEST_EFFORT: Attempt to preserve the per-file <code>Atime</code> value (recommended).</p> <p>NONE: Ignore <code>Atime</code>.</p> <note> <p>If <code>Atime</code> is set to BEST_EFFORT, <code>Mtime</code> must be set to PRESERVE. </p> <p>If <code>Atime</code> is set to NONE, <code>Mtime</code> must also be NONE. </p> </note>'
@@ -2071,7 +2090,7 @@ definitions:
         description: '<p>The group ID (GID) of the file''s owners. </p> <p>Default value: INT_VALUE. This preserves the integer value of the ID.</p> <p>INT_VALUE: Preserve the integer value of user ID (UID) and GID (recommended).</p> <p>NONE: Ignore UID and GID. </p>'
       PreserveDeletedFiles:
         $ref: '#/definitions/PreserveDeletedFiles'
-        description: '<p>A value that specifies whether files in the destination that don''t exist in the source file system should be preserved. </p> <p>Default value: PRESERVE.</p> <p>PRESERVE: Ignore such destination files (recommended). </p> <p>REMOVE: Delete destination files that aren’t present in the source.</p>'
+        description: '<p>A value that specifies whether files in the destination that don''t exist in the source file system should be preserved. This option can affect your storage cost. If your task deletes objects, you might incur minimum storage duration charges for certain storage classes. For detailed information, see <a>using-storage-classes</a> in the <i>AWS DataSync User Guide</i>.</p> <p>Default value: PRESERVE.</p> <p>PRESERVE: Ignore such destination files (recommended). </p> <p>REMOVE: Delete destination files that aren’t present in the source.</p>'
       PreserveDevices:
         $ref: '#/definitions/PreserveDevices'
         description: '<p>A value that determines whether AWS DataSync should preserve the metadata of block and character devices in the source file system, and recreate the files with that device name and metadata on the destination.</p> <note> <p>AWS DataSync can''t sync the actual contents of such devices, because they are nonterminal and don''t return an end-of-file (EOF) marker.</p> </note> <p>Default value: NONE.</p> <p>NONE: Ignore special devices (recommended). </p> <p>PRESERVE: Preserve character and block device metadata. This option isn''t currently supported for Amazon EFS. </p>'
@@ -2283,7 +2302,13 @@ definitions:
     type: string
     enum:
       - POINT_IN_TIME_CONSISTENT
+      - ONLY_FILES_TRANSFERRED
       - NONE
+  OverwriteMode:
+    type: string
+    enum:
+      - ALWAYS
+      - NEVER
   Uid:
     type: string
     enum:

@@ -3,7 +3,7 @@ info:
   version: '2018-10-30'
   x-release: v4
   title: AWS Comprehend Medical
-  description: ' Comprehend Medical extracts structured information from unstructured clinical text. Use these actions to gain insight in your documents. '
+  description: ' Amazon Comprehend Medical extracts structured information from unstructured clinical text. Use these actions to gain insight in your documents. '
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -160,10 +160,101 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
+  '/#X-Amz-Target=ComprehendMedical_20181030.DescribeEntitiesDetectionV2Job':
+    post:
+      operationId: DescribeEntitiesDetectionV2Job
+      description: Gets the properties associated with a medical entities detection job. Use this operation to get the status of a detection job.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeEntitiesDetectionV2JobResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeEntitiesDetectionV2JobRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - ComprehendMedical_20181030.DescribeEntitiesDetectionV2Job
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=ComprehendMedical_20181030.DescribePHIDetectionJob':
+    post:
+      operationId: DescribePHIDetectionJob
+      description: Gets the properties associated with a protected health information (PHI) detection job. Use this operation to get the status of a detection job.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribePHIDetectionJobResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribePHIDetectionJobRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - ComprehendMedical_20181030.DescribePHIDetectionJob
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=ComprehendMedical_20181030.DetectEntities':
     post:
+      deprecated: true
       operationId: DetectEntities
-      description: ' Inspects the clinical text for a variety of medical entities and returns specific information about them such as entity category, location, and confidence score on that information .'
+      description: '<p>The <code>DetectEntities</code> operation is deprecated. You should use the <a>DetectEntitiesV2</a> operation instead.</p> <p> Inspects the clinical text for a variety of medical entities and returns specific information about them such as entity category, location, and confidence score on that information .</p>'
       responses:
         '200':
           description: Success
@@ -213,10 +304,63 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=ComprehendMedical_20181030.DetectEntitiesV2':
+    post:
+      operationId: DetectEntitiesV2
+      description: '<p>Inspects the clinical text for a variety of medical entities and returns specific information about them such as entity category, location, and confidence score on that information.</p> <p>The <code>DetectEntitiesV2</code> operation replaces the <a>DetectEntities</a> operation. This new action uses a different model for determining the entities in your medical text and changes the way that some entities are returned in the output. You should use the <code>DetectEntitiesV2</code> operation in all new applications.</p> <p>The <code>DetectEntitiesV2</code> operation returns the <code>Acuity</code> and <code>Direction</code> entities as attributes instead of types. It does not return the <code>Quality</code> or <code>Quantity</code> entities.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DetectEntitiesV2Response'
+        '480':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '481':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '483':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '484':
+          description: InvalidEncodingException
+          schema:
+            $ref: '#/definitions/InvalidEncodingException'
+        '485':
+          description: TextSizeLimitExceededException
+          schema:
+            $ref: '#/definitions/TextSizeLimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DetectEntitiesV2Request'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - ComprehendMedical_20181030.DetectEntitiesV2
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=ComprehendMedical_20181030.DetectPHI':
     post:
       operationId: DetectPHI
-      description: ' Inspects the clinical text for personal health information (PHI) entities and entity category, location, and confidence score on that information.'
+      description: ' Inspects the clinical text for protected health information (PHI) entities and entity category, location, and confidence score on that information.'
       responses:
         '200':
           description: Success
@@ -266,21 +410,319 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=ComprehendMedical_20181030.ListEntitiesDetectionV2Jobs':
+    post:
+      operationId: ListEntitiesDetectionV2Jobs
+      description: Gets a list of medical entity detection jobs that you have submitted.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListEntitiesDetectionV2JobsResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '483':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListEntitiesDetectionV2JobsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - ComprehendMedical_20181030.ListEntitiesDetectionV2Jobs
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=ComprehendMedical_20181030.ListPHIDetectionJobs':
+    post:
+      operationId: ListPHIDetectionJobs
+      description: Gets a list of protected health information (PHI) detection jobs that you have submitted.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListPHIDetectionJobsResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '483':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListPHIDetectionJobsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - ComprehendMedical_20181030.ListPHIDetectionJobs
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=ComprehendMedical_20181030.StartEntitiesDetectionV2Job':
+    post:
+      operationId: StartEntitiesDetectionV2Job
+      description: Starts an asynchronous medical entity detection job for a collection of documents. Use the <code>DescribeEntitiesDetectionV2Job</code> operation to track the status of a job.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartEntitiesDetectionV2JobResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StartEntitiesDetectionV2JobRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - ComprehendMedical_20181030.StartEntitiesDetectionV2Job
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=ComprehendMedical_20181030.StartPHIDetectionJob':
+    post:
+      operationId: StartPHIDetectionJob
+      description: Starts an asynchronous job to detect protected health information (PHI). Use the <code>DescribePHIDetectionJob</code> operation to track the status of a job.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartPHIDetectionJobResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StartPHIDetectionJobRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - ComprehendMedical_20181030.StartPHIDetectionJob
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=ComprehendMedical_20181030.StopEntitiesDetectionV2Job':
+    post:
+      operationId: StopEntitiesDetectionV2Job
+      description: Stops a medical entities detection job in progress.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StopEntitiesDetectionV2JobResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StopEntitiesDetectionV2JobRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - ComprehendMedical_20181030.StopEntitiesDetectionV2Job
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=ComprehendMedical_20181030.StopPHIDetectionJob':
+    post:
+      operationId: StopPHIDetectionJob
+      description: Stops a protected health information (PHI) detection job in progress.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StopPHIDetectionJobResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StopPHIDetectionJobRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - ComprehendMedical_20181030.StopPHIDetectionJob
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
+  DescribeEntitiesDetectionV2JobResponse:
+    type: object
+    properties:
+      ComprehendMedicalAsyncJobProperties:
+        $ref: '#/definitions/ComprehendMedicalAsyncJobProperties'
+        description: An object that contains the properties associated with a detection job.
+  DescribeEntitiesDetectionV2JobRequest:
+    type: object
+    required:
+      - JobId
+    properties:
+      JobId:
+        $ref: '#/definitions/JobId'
+        description: The identifier that Amazon Comprehend Medical generated for the job. The <code>StartEntitiesDetectionV2Job</code> operation returns this identifier in its response.
+  InvalidRequestException: {}
+  TooManyRequestsException: {}
+  ResourceNotFoundException: {}
+  InternalServerException: {}
+  DescribePHIDetectionJobResponse:
+    type: object
+    properties:
+      ComprehendMedicalAsyncJobProperties:
+        $ref: '#/definitions/ComprehendMedicalAsyncJobProperties'
+        description: An object that contains the properties associated with a detection job.
+  DescribePHIDetectionJobRequest:
+    type: object
+    required:
+      - JobId
+    properties:
+      JobId:
+        $ref: '#/definitions/JobId'
+        description: The identifier that Amazon Comprehend Medical generated for the job. The <code>StartPHIDetectionJob</code> operation returns this identifier in its response.
   DetectEntitiesResponse:
     type: object
     required:
       - Entities
+      - ModelVersion
     properties:
       Entities:
         $ref: '#/definitions/EntityList'
-        description: ' The collection of medical entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence that Comprehend Medical has in the detection and analysis. Attributes and traits of the entity are also returned.'
+        description: ' The collection of medical entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence that Amazon Comprehend Medical has in the detection and analysis. Attributes and traits of the entity are also returned.'
       UnmappedAttributes:
         $ref: '#/definitions/UnmappedAttributeList'
         description: ' Attributes extracted from the input text that we were unable to relate to an entity.'
       PaginationToken:
         $ref: '#/definitions/String'
-        description: ' If the result of the previous request to DetectEntities was truncated, include the Paginationtoken to fetch the next page of entities.'
+        description: ' If the result of the previous request to <code>DetectEntities</code> was truncated, include the <code>PaginationToken</code> to fetch the next page of entities.'
+      ModelVersion:
+        $ref: '#/definitions/String'
+        description: The version of the model used to analyze the documents. The version number looks like X.X.X. You can use this information to track the model used for a particular batch of documents.
   DetectEntitiesRequest:
     type: object
     required:
@@ -289,23 +731,50 @@ definitions:
       Text:
         $ref: '#/definitions/BoundedLengthString'
         description: ' A UTF-8 text string containing the clinical content being examined for entities. Each string must contain fewer than 20,000 bytes of characters.'
-  InternalServerException: {}
   ServiceUnavailableException: {}
-  TooManyRequestsException: {}
-  InvalidRequestException: {}
   InvalidEncodingException: {}
   TextSizeLimitExceededException: {}
+  DetectEntitiesV2Response:
+    type: object
+    required:
+      - Entities
+      - ModelVersion
+    properties:
+      Entities:
+        $ref: '#/definitions/EntityList'
+        description: 'The collection of medical entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence in the detection and analysis. Attributes and traits of the entity are also returned.'
+      UnmappedAttributes:
+        $ref: '#/definitions/UnmappedAttributeList'
+        description: Attributes extracted from the input text that couldn't be related to an entity.
+      PaginationToken:
+        $ref: '#/definitions/String'
+        description: 'If the result to the <code>DetectEntitiesV2</code> operation was truncated, include the <code>PaginationToken</code> to fetch the next page of entities.'
+      ModelVersion:
+        $ref: '#/definitions/String'
+        description: The version of the model used to analyze the documents. The version number looks like X.X.X. You can use this information to track the model used for a particular batch of documents.
+  DetectEntitiesV2Request:
+    type: object
+    required:
+      - Text
+    properties:
+      Text:
+        $ref: '#/definitions/BoundedLengthString'
+        description: 'A UTF-8 string containing the clinical content being examined for entities. Each string must contain fewer than 20,000 bytes of characters.'
   DetectPHIResponse:
     type: object
     required:
       - Entities
+      - ModelVersion
     properties:
       Entities:
         $ref: '#/definitions/EntityList'
-        description: ' The collection of PHI entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence that Comprehend Medical has in its detection. '
+        description: ' The collection of PHI entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence that Amazon Comprehend Medical has in its detection. '
       PaginationToken:
         $ref: '#/definitions/String'
-        description: ' If the result of the previous request to DetectPHI was truncated, include the Paginationtoken to fetch the next page of PHI entities. '
+        description: ' If the result of the previous request to <code>DetectPHI</code> was truncated, include the <code>PaginationToken</code> to fetch the next page of PHI entities. '
+      ModelVersion:
+        $ref: '#/definitions/String'
+        description: The version of the model used to analyze the documents. The version number looks like X.X.X. You can use this information to track the model used for a particular batch of documents.
   DetectPHIRequest:
     type: object
     required:
@@ -314,6 +783,149 @@ definitions:
       Text:
         $ref: '#/definitions/BoundedLengthString'
         description: ' A UTF-8 text string containing the clinical content being examined for PHI entities. Each string must contain fewer than 20,000 bytes of characters. '
+  ListEntitiesDetectionV2JobsResponse:
+    type: object
+    properties:
+      ComprehendMedicalAsyncJobPropertiesList:
+        $ref: '#/definitions/ComprehendMedicalAsyncJobPropertiesList'
+        description: A list containing the properties of each job returned.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Identifies the next page of results to return.
+  ListEntitiesDetectionV2JobsRequest:
+    type: object
+    properties:
+      Filter:
+        $ref: '#/definitions/ComprehendMedicalAsyncJobFilter'
+        description: 'Filters the jobs that are returned. You can filter jobs based on their names, status, or the date and time that they were submitted. You can only set one filter at a time.'
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Identifies the next page of results to return.
+      MaxResults:
+        $ref: '#/definitions/MaxResultsInteger'
+        description: The maximum number of results to return in each page. The default is 100.
+  ValidationException: {}
+  ListPHIDetectionJobsResponse:
+    type: object
+    properties:
+      ComprehendMedicalAsyncJobPropertiesList:
+        $ref: '#/definitions/ComprehendMedicalAsyncJobPropertiesList'
+        description: A list containing the properties of each job returned.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Identifies the next page of results to return.
+  ListPHIDetectionJobsRequest:
+    type: object
+    properties:
+      Filter:
+        $ref: '#/definitions/ComprehendMedicalAsyncJobFilter'
+        description: 'Filters the jobs that are returned. You can filter jobs based on their names, status, or the date and time that they were submitted. You can only set one filter at a time.'
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Identifies the next page of results to return.
+      MaxResults:
+        $ref: '#/definitions/MaxResultsInteger'
+        description: The maximum number of results to return in each page. The default is 100.
+  StartEntitiesDetectionV2JobResponse:
+    type: object
+    properties:
+      JobId:
+        $ref: '#/definitions/JobId'
+        description: 'The identifier generated for the job. To get the status of a job, use this identifier with the <code>DescribeEntitiesDetectionV2Job</code> operation.'
+  StartEntitiesDetectionV2JobRequest:
+    type: object
+    required:
+      - InputDataConfig
+      - OutputDataConfig
+      - DataAccessRoleArn
+      - LanguageCode
+    properties:
+      InputDataConfig:
+        $ref: '#/definitions/InputDataConfig'
+        description: Specifies the format and location of the input data for the job.
+      OutputDataConfig:
+        $ref: '#/definitions/OutputDataConfig'
+        description: Specifies where to send the output files.
+      DataAccessRoleArn:
+        $ref: '#/definitions/IamRoleArn'
+        description: 'The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend Medical read access to your input data. For more information, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med"> Role-Based Permissions Required for Asynchronous Operations</a>.'
+      JobName:
+        $ref: '#/definitions/JobName'
+        description: The identifier of the job.
+      ClientRequestToken:
+        $ref: '#/definitions/ClientRequestTokenString'
+        description: 'A unique identifier for the request. If you don''t set the client request token, Amazon Comprehend Medical generates one.'
+      KMSKey:
+        $ref: '#/definitions/KMSKey'
+        description: 'An AWS Key Management Service key to encrypt your output files. If you do not specify a key, the files are written in plain text.'
+      LanguageCode:
+        $ref: '#/definitions/LanguageCode'
+        description: The language of the input documents. All documents must be in the same language.
+  StartPHIDetectionJobResponse:
+    type: object
+    properties:
+      JobId:
+        $ref: '#/definitions/JobId'
+        description: 'The identifier generated for the job. To get the status of a job, use this identifier with the <code>DescribePHIDetectionJob</code> operation.'
+  StartPHIDetectionJobRequest:
+    type: object
+    required:
+      - InputDataConfig
+      - OutputDataConfig
+      - DataAccessRoleArn
+      - LanguageCode
+    properties:
+      InputDataConfig:
+        $ref: '#/definitions/InputDataConfig'
+        description: Specifies the format and location of the input data for the job.
+      OutputDataConfig:
+        $ref: '#/definitions/OutputDataConfig'
+        description: Specifies where to send the output files.
+      DataAccessRoleArn:
+        $ref: '#/definitions/IamRoleArn'
+        description: 'The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend Medical read access to your input data. For more information, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med"> Role-Based Permissions Required for Asynchronous Operations</a>.'
+      JobName:
+        $ref: '#/definitions/JobName'
+        description: The identifier of the job.
+      ClientRequestToken:
+        $ref: '#/definitions/ClientRequestTokenString'
+        description: 'A unique identifier for the request. If you don''t set the client request token, Amazon Comprehend Medical generates one.'
+      KMSKey:
+        $ref: '#/definitions/KMSKey'
+        description: 'An AWS Key Management Service key to encrypt your output files. If you do not specify a key, the files are written in plain text.'
+      LanguageCode:
+        $ref: '#/definitions/LanguageCode'
+        description: The language of the input documents. All documents must be in the same language.
+  StopEntitiesDetectionV2JobResponse:
+    type: object
+    properties:
+      JobId:
+        $ref: '#/definitions/JobId'
+        description: The identifier of the medical entities detection job that was stopped.
+  StopEntitiesDetectionV2JobRequest:
+    type: object
+    required:
+      - JobId
+    properties:
+      JobId:
+        $ref: '#/definitions/JobId'
+        description: The identifier of the medical entities job to stop.
+  StopPHIDetectionJobResponse:
+    type: object
+    properties:
+      JobId:
+        $ref: '#/definitions/JobId'
+        description: The identifier of the PHI detection job that was stopped.
+  StopPHIDetectionJobRequest:
+    type: object
+    required:
+      - JobId
+    properties:
+      JobId:
+        $ref: '#/definitions/JobId'
+        description: The identifier of the PHI detection job to stop.
+  AnyLengthString:
+    type: string
   EntitySubType:
     type: string
     enum:
@@ -365,10 +977,10 @@ definitions:
         description: ' The type of attribute. '
       Score:
         $ref: '#/definitions/Float'
-        description: ' The level of confidence that Comprehend Medical has that the segment of text is correctly recognized as an attribute. '
+        description: ' The level of confidence that Amazon Comprehend Medical has that the segment of text is correctly recognized as an attribute. '
       RelationshipScore:
         $ref: '#/definitions/Float'
-        description: ' The level of confidence that Comprehend Medical has that this attribute is correctly related to this entity. '
+        description: ' The level of confidence that Amazon Comprehend Medical has that this attribute is correctly related to this entity. '
       Id:
         $ref: '#/definitions/Integer'
         description: ' The numeric identifier for this attribute. This is a monotonically increasing id unique within this response rather than a global unique identifier. '
@@ -400,6 +1012,144 @@ definitions:
     type: string
     minLength: 1
     maxLength: 20000
+  ClientRequestTokenString:
+    type: string
+    pattern: '^[a-zA-Z0-9-]+$'
+    minLength: 1
+    maxLength: 64
+  JobName:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$'
+    minLength: 1
+    maxLength: 256
+  JobStatus:
+    type: string
+    enum:
+      - SUBMITTED
+      - IN_PROGRESS
+      - COMPLETED
+      - PARTIAL_SUCCESS
+      - FAILED
+      - STOP_REQUESTED
+      - STOPPED
+  Timestamp:
+    type: string
+    format: date-time
+  ComprehendMedicalAsyncJobFilter:
+    type: object
+    properties:
+      JobName:
+        $ref: '#/definitions/JobName'
+        description: Filters on the name of the job.
+      JobStatus:
+        $ref: '#/definitions/JobStatus'
+        description: Filters the list of jobs based on job status. Returns only jobs with the specified status.
+      SubmitTimeBefore:
+        $ref: '#/definitions/Timestamp'
+        description: 'Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted before the specified time. Jobs are returned in ascending order, oldest to newest.'
+      SubmitTimeAfter:
+        $ref: '#/definitions/Timestamp'
+        description: 'Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted after the specified time. Jobs are returned in descending order, newest to oldest.'
+    description: Provides information for filtering a list of detection jobs.
+  JobId:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$'
+    minLength: 1
+    maxLength: 32
+  InputDataConfig:
+    type: object
+    required:
+      - S3Bucket
+    properties:
+      S3Bucket:
+        $ref: '#/definitions/S3Bucket'
+        description: <p>The URI of the S3 bucket that contains the input data. The bucket must be in the same region as the API endpoint that you are calling.</p> <p>Each file in the document collection must be less than 40 KB. You can store a maximum of 30 GB in the bucket.</p>
+      S3Key:
+        $ref: '#/definitions/S3Key'
+        description: The path to the input data files in the S3 bucket.
+    description: The input properties for an entities detection job
+  OutputDataConfig:
+    type: object
+    required:
+      - S3Bucket
+    properties:
+      S3Bucket:
+        $ref: '#/definitions/S3Bucket'
+        description: 'When you use the <code>OutputDataConfig</code> object with asynchronous operations, you specify the Amazon S3 location where you want to write the output data. The URI must be in the same region as the API endpoint that you are calling. The location is used as the prefix for the actual location of the output.'
+      S3Key:
+        $ref: '#/definitions/S3Key'
+        description: The path to the output data files in the S3 bucket. Amazon Comprehend Medical creates an output directory using the job ID so that the output from one job does not overwrite the output of another.
+    description: The output properties for a detection job.
+  LanguageCode:
+    type: string
+    enum:
+      - en
+  IamRoleArn:
+    type: string
+    pattern: 'arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+'
+    minLength: 20
+    maxLength: 2048
+  ManifestFilePath:
+    type: string
+    minLength: 1
+    maxLength: 4096
+  KMSKey:
+    type: string
+    pattern: .*
+    minLength: 1
+    maxLength: 2048
+  ModelVersion:
+    type: string
+  ComprehendMedicalAsyncJobProperties:
+    type: object
+    properties:
+      JobId:
+        $ref: '#/definitions/JobId'
+        description: The identifier assigned to the detection job.
+      JobName:
+        $ref: '#/definitions/JobName'
+        description: The name that you assigned to the detection job.
+      JobStatus:
+        $ref: '#/definitions/JobStatus'
+        description: 'The current status of the detection job. If the status is <code>FAILED</code>, the <code>Message</code> field shows the reason for the failure.'
+      Message:
+        $ref: '#/definitions/AnyLengthString'
+        description: A description of the status of a job.
+      SubmitTime:
+        $ref: '#/definitions/Timestamp'
+        description: The time that the detection job was submitted for processing.
+      EndTime:
+        $ref: '#/definitions/Timestamp'
+        description: The time that the detection job completed.
+      ExpirationTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'The date and time that job metadata is deleted from the server. Output files in your S3 bucket will not be deleted. After the metadata is deleted, the job will no longer appear in the results of the <code>ListEntitiesDetectionV2Job</code> or the <code>ListPHIDetectionJobs</code> operation.'
+      InputDataConfig:
+        $ref: '#/definitions/InputDataConfig'
+        description: The input data configuration that you supplied when you created the detection job.
+      OutputDataConfig:
+        $ref: '#/definitions/OutputDataConfig'
+        description: The output data configuration that you supplied when you created the detection job.
+      LanguageCode:
+        $ref: '#/definitions/LanguageCode'
+        description: The language code of the input documents.
+      DataAccessRoleArn:
+        $ref: '#/definitions/IamRoleArn'
+        description: The Amazon Resource Name (ARN) that gives Amazon Comprehend Medical read access to your input data.
+      ManifestFilePath:
+        $ref: '#/definitions/ManifestFilePath'
+        description: The path to the file that describes the results of a batch job.
+      KMSKey:
+        $ref: '#/definitions/KMSKey'
+        description: 'The AWS Key Management Service key, if any, used to encrypt the output files. '
+      ModelVersion:
+        $ref: '#/definitions/ModelVersion'
+        description: The version of the model used to analyze the documents. The version number looks like X.X.X. You can use this information to track the model used for a particular batch of documents.
+    description: Provides information about a detection job.
+  ComprehendMedicalAsyncJobPropertiesList:
+    type: array
+    items:
+      $ref: '#/definitions/ComprehendMedicalAsyncJobProperties'
   EntityList:
     type: array
     items:
@@ -430,7 +1180,7 @@ definitions:
         description: ' The 0-based character offset in the input text that shows where the entity ends. The offset returns the UTF-8 code point in the string. '
       Score:
         $ref: '#/definitions/Float'
-        description: The level of confidence that Comprehend Medical has in the accuracy of the detection.
+        description: The level of confidence that Amazon Comprehend Medical has in the accuracy of the detection.
       Text:
         $ref: '#/definitions/String'
         description: ' The segment of input text extracted as this entity.'
@@ -447,6 +1197,19 @@ definitions:
         $ref: '#/definitions/AttributeList'
         description: ' The extracted attributes that relate to this entity.'
     description: ' Provides information about an extracted medical entity.'
+  S3Bucket:
+    type: string
+    pattern: '^[0-9a-z\.\-_]*(?!\.)$'
+    minLength: 3
+    maxLength: 63
+  S3Key:
+    type: string
+    pattern: .*
+    maxLength: 1024
+  MaxResultsInteger:
+    type: integer
+    minimum: 1
+    maximum: 500
   Trait:
     type: object
     properties:
@@ -455,14 +1218,14 @@ definitions:
         description: ' Provides a name or contextual description about the trait. '
       Score:
         $ref: '#/definitions/Float'
-        description: ' The level of confidence that Comprehend Medical has in the accuracy of this trait.'
+        description: ' The level of confidence that Amazon Comprehend Medical has in the accuracy of this trait.'
     description: ' Provides contextual information about the extracted entity. '
   UnmappedAttribute:
     type: object
     properties:
       Type:
         $ref: '#/definitions/EntityType'
-        description: ' The type of the attribute, could be one of the following values: "MEDICATION", "MEDICAL_CONDITION", "ANATOMY", "TEST_AND_TREATMENT_PROCEDURE" or "PERSONAL_HEALTH_INFORMATION". '
+        description: ' The type of the attribute, could be one of the following values: "MEDICATION", "MEDICAL_CONDITION", "ANATOMY", "TEST_AND_TREATMENT_PROCEDURE" or "PROTECTED_HEALTH_INFORMATION". '
       Attribute:
         $ref: '#/definitions/Attribute'
         description: ' The specific attribute that has been extracted but not mapped to an entity. '
