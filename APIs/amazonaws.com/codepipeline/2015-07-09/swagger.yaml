@@ -3,7 +3,7 @@ info:
   version: '2015-07-09'
   x-release: v4
   title: AWS CodePipeline
-  description: '<fullname>AWS CodePipeline</fullname> <p> <b>Overview</b> </p> <p>This is the AWS CodePipeline API Reference. This guide provides descriptions of the actions and data types for AWS CodePipeline. Some functionality for your pipeline is only configurable through the API. For additional information, see the <a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html">AWS CodePipeline User Guide</a>.</p> <p>You can use the AWS CodePipeline API to work with pipelines, stages, actions, and transitions, as described below.</p> <p> <i>Pipelines</i> are models of automated release processes. Each pipeline is uniquely named, and consists of stages, actions, and transitions. </p> <p>You can work with pipelines by calling:</p> <ul> <li> <p> <a>CreatePipeline</a>, which creates a uniquely-named pipeline.</p> </li> <li> <p> <a>DeletePipeline</a>, which deletes the specified pipeline.</p> </li> <li> <p> <a>GetPipeline</a>, which returns information about the pipeline structure and pipeline metadata, including the pipeline Amazon Resource Name (ARN).</p> </li> <li> <p> <a>GetPipelineExecution</a>, which returns information about a specific execution of a pipeline.</p> </li> <li> <p> <a>GetPipelineState</a>, which returns information about the current state of the stages and actions of a pipeline.</p> </li> <li> <p> <a>ListActionExecutions</a>, which returns action-level details for past executions. The details include full stage and action-level details, including individual action duration, status, any errors which occurred during the execution, and input and output artifact location details.</p> </li> <li> <p> <a>ListPipelines</a>, which gets a summary of all of the pipelines associated with your account.</p> </li> <li> <p> <a>ListPipelineExecutions</a>, which gets a summary of the most recent executions for a pipeline.</p> </li> <li> <p> <a>StartPipelineExecution</a>, which runs the the most recent revision of an artifact through the pipeline.</p> </li> <li> <p> <a>UpdatePipeline</a>, which updates a pipeline with edits or changes to the structure of the pipeline.</p> </li> </ul> <p>Pipelines include <i>stages</i>. Each stage contains one or more actions that must complete before the next stage begins. A stage will result in success or failure. If a stage fails, then the pipeline stops at that stage and will remain stopped until either a new version of an artifact appears in the source location, or a user takes action to re-run the most recent artifact through the pipeline. You can call <a>GetPipelineState</a>, which displays the status of a pipeline, including the status of stages in the pipeline, or <a>GetPipeline</a>, which returns the entire structure of the pipeline, including the stages of that pipeline. For more information about the structure of stages and actions, also refer to the <a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-structure.html">AWS CodePipeline Pipeline Structure Reference</a>.</p> <p>Pipeline stages include <i>actions</i>, which are categorized into categories such as source or build actions performed within a stage of a pipeline. For example, you can use a source action to import artifacts into a pipeline from a source such as Amazon S3. Like stages, you do not work with actions directly in most cases, but you do define and interact with actions when working with pipeline operations such as <a>CreatePipeline</a> and <a>GetPipelineState</a>. Valid action categories are:</p> <ul> <li> <p>Source</p> </li> <li> <p>Build</p> </li> <li> <p>Test</p> </li> <li> <p>Deploy</p> </li> <li> <p>Approval</p> </li> <li> <p>Invoke</p> </li> </ul> <p>Pipelines also include <i>transitions</i>, which allow the transition of artifacts from one stage to the next in a pipeline after the actions in one stage complete.</p> <p>You can work with transitions by calling:</p> <ul> <li> <p> <a>DisableStageTransition</a>, which prevents artifacts from transitioning to the next stage in a pipeline.</p> </li> <li> <p> <a>EnableStageTransition</a>, which enables transition of artifacts between stages in a pipeline. </p> </li> </ul> <p> <b>Using the API to integrate with AWS CodePipeline</b> </p> <p>For third-party integrators or developers who want to create their own integrations with AWS CodePipeline, the expected sequence varies from the standard API user. In order to integrate with AWS CodePipeline, developers will need to work with the following items:</p> <p> <b>Jobs</b>, which are instances of an action. For example, a job for a source action might import a revision of an artifact from a source. </p> <p>You can work with jobs by calling:</p> <ul> <li> <p> <a>AcknowledgeJob</a>, which confirms whether a job worker has received the specified job,</p> </li> <li> <p> <a>GetJobDetails</a>, which returns the details of a job,</p> </li> <li> <p> <a>PollForJobs</a>, which determines whether there are any jobs to act upon, </p> </li> <li> <p> <a>PutJobFailureResult</a>, which provides details of a job failure, and</p> </li> <li> <p> <a>PutJobSuccessResult</a>, which provides details of a job success.</p> </li> </ul> <p> <b>Third party jobs</b>, which are instances of an action created by a partner action and integrated into AWS CodePipeline. Partner actions are created by members of the AWS Partner Network.</p> <p>You can work with third party jobs by calling:</p> <ul> <li> <p> <a>AcknowledgeThirdPartyJob</a>, which confirms whether a job worker has received the specified job,</p> </li> <li> <p> <a>GetThirdPartyJobDetails</a>, which requests the details of a job for a partner action,</p> </li> <li> <p> <a>PollForThirdPartyJobs</a>, which determines whether there are any jobs to act upon, </p> </li> <li> <p> <a>PutThirdPartyJobFailureResult</a>, which provides details of a job failure, and</p> </li> <li> <p> <a>PutThirdPartyJobSuccessResult</a>, which provides details of a job success.</p> </li> </ul>'
+  description: '<fullname>AWS CodePipeline</fullname> <p> <b>Overview</b> </p> <p>This is the AWS CodePipeline API Reference. This guide provides descriptions of the actions and data types for AWS CodePipeline. Some functionality for your pipeline can only be configured through the API. For more information, see the <a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html">AWS CodePipeline User Guide</a>.</p> <p>You can use the AWS CodePipeline API to work with pipelines, stages, actions, and transitions.</p> <p> <i>Pipelines</i> are models of automated release processes. Each pipeline is uniquely named, and consists of stages, actions, and transitions. </p> <p>You can work with pipelines by calling:</p> <ul> <li> <p> <a>CreatePipeline</a>, which creates a uniquely named pipeline.</p> </li> <li> <p> <a>DeletePipeline</a>, which deletes the specified pipeline.</p> </li> <li> <p> <a>GetPipeline</a>, which returns information about the pipeline structure and pipeline metadata, including the pipeline Amazon Resource Name (ARN).</p> </li> <li> <p> <a>GetPipelineExecution</a>, which returns information about a specific execution of a pipeline.</p> </li> <li> <p> <a>GetPipelineState</a>, which returns information about the current state of the stages and actions of a pipeline.</p> </li> <li> <p> <a>ListActionExecutions</a>, which returns action-level details for past executions. The details include full stage and action-level details, including individual action duration, status, any errors that occurred during the execution, and input and output artifact location details.</p> </li> <li> <p> <a>ListPipelines</a>, which gets a summary of all of the pipelines associated with your account.</p> </li> <li> <p> <a>ListPipelineExecutions</a>, which gets a summary of the most recent executions for a pipeline.</p> </li> <li> <p> <a>StartPipelineExecution</a>, which runs the most recent revision of an artifact through the pipeline.</p> </li> <li> <p> <a>UpdatePipeline</a>, which updates a pipeline with edits or changes to the structure of the pipeline.</p> </li> </ul> <p>Pipelines include <i>stages</i>. Each stage contains one or more actions that must complete before the next stage begins. A stage results in success or failure. If a stage fails, the pipeline stops at that stage and remains stopped until either a new version of an artifact appears in the source location, or a user takes action to rerun the most recent artifact through the pipeline. You can call <a>GetPipelineState</a>, which displays the status of a pipeline, including the status of stages in the pipeline, or <a>GetPipeline</a>, which returns the entire structure of the pipeline, including the stages of that pipeline. For more information about the structure of stages and actions, see <a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-structure.html">AWS CodePipeline Pipeline Structure Reference</a>.</p> <p>Pipeline stages include <i>actions</i> that are categorized into categories such as source or build actions performed in a stage of a pipeline. For example, you can use a source action to import artifacts into a pipeline from a source such as Amazon S3. Like stages, you do not work with actions directly in most cases, but you do define and interact with actions when working with pipeline operations such as <a>CreatePipeline</a> and <a>GetPipelineState</a>. Valid action categories are:</p> <ul> <li> <p>Source</p> </li> <li> <p>Build</p> </li> <li> <p>Test</p> </li> <li> <p>Deploy</p> </li> <li> <p>Approval</p> </li> <li> <p>Invoke</p> </li> </ul> <p>Pipelines also include <i>transitions</i>, which allow the transition of artifacts from one stage to the next in a pipeline after the actions in one stage complete.</p> <p>You can work with transitions by calling:</p> <ul> <li> <p> <a>DisableStageTransition</a>, which prevents artifacts from transitioning to the next stage in a pipeline.</p> </li> <li> <p> <a>EnableStageTransition</a>, which enables transition of artifacts between stages in a pipeline. </p> </li> </ul> <p> <b>Using the API to integrate with AWS CodePipeline</b> </p> <p>For third-party integrators or developers who want to create their own integrations with AWS CodePipeline, the expected sequence varies from the standard API user. To integrate with AWS CodePipeline, developers need to work with the following items:</p> <p> <b>Jobs</b>, which are instances of an action. For example, a job for a source action might import a revision of an artifact from a source. </p> <p>You can work with jobs by calling:</p> <ul> <li> <p> <a>AcknowledgeJob</a>, which confirms whether a job worker has received the specified job.</p> </li> <li> <p> <a>GetJobDetails</a>, which returns the details of a job.</p> </li> <li> <p> <a>PollForJobs</a>, which determines whether there are any jobs to act on.</p> </li> <li> <p> <a>PutJobFailureResult</a>, which provides details of a job failure. </p> </li> <li> <p> <a>PutJobSuccessResult</a>, which provides details of a job success.</p> </li> </ul> <p> <b>Third party jobs</b>, which are instances of an action created by a partner action and integrated into AWS CodePipeline. Partner actions are created by members of the AWS Partner Network.</p> <p>You can work with third party jobs by calling:</p> <ul> <li> <p> <a>AcknowledgeThirdPartyJob</a>, which confirms whether a job worker has received the specified job.</p> </li> <li> <p> <a>GetThirdPartyJobDetails</a>, which requests the details of a job for a partner action.</p> </li> <li> <p> <a>PollForThirdPartyJobs</a>, which determines whether there are any jobs to act on. </p> </li> <li> <p> <a>PutThirdPartyJobFailureResult</a>, which provides details of a job failure.</p> </li> <li> <p> <a>PutThirdPartyJobSuccessResult</a>, which provides details of a job success.</p> </li> </ul>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -163,7 +163,7 @@ paths:
   '/#X-Amz-Target=CodePipeline_20150709.AcknowledgeJob':
     post:
       operationId: AcknowledgeJob
-      description: Returns information about a specified job and whether that job has been received by the job worker. Only used for custom actions.
+      description: Returns information about a specified job and whether that job has been received by the job worker. Used for custom actions only.
       responses:
         '200':
           description: Success
@@ -204,7 +204,7 @@ paths:
   '/#X-Amz-Target=CodePipeline_20150709.AcknowledgeThirdPartyJob':
     post:
       operationId: AcknowledgeThirdPartyJob
-      description: Confirms a job worker has received the specified job. Only used for partner actions.
+      description: Confirms a job worker has received the specified job. Used for partner actions only.
       responses:
         '200':
           description: Success
@@ -367,7 +367,7 @@ paths:
   '/#X-Amz-Target=CodePipeline_20150709.DeleteCustomActionType':
     post:
       operationId: DeleteCustomActionType
-      description: '<p>Marks a custom action as deleted. <code>PollForJobs</code> for the custom action will fail after the action is marked for deletion. Only used for custom actions.</p> <important> <p>To re-create a custom action after it has been deleted you must use a string in the version field that has never been used before. This string can be an incremented version number, for example. To restore a deleted custom action, use a JSON file that is identical to the deleted action, including the original string in the version field.</p> </important>'
+      description: '<p>Marks a custom action as deleted. <code>PollForJobs</code> for the custom action fails after the action is marked for deletion. Used for custom actions only.</p> <important> <p>To re-create a custom action after it has been deleted you must use a string in the version field that has never been used before. This string can be an incremented version number, for example. To restore a deleted custom action, use a JSON file that is identical to the deleted action, including the original string in the version field.</p> </important>'
       responses:
         '200':
           description: Success
@@ -437,7 +437,7 @@ paths:
   '/#X-Amz-Target=CodePipeline_20150709.DeleteWebhook':
     post:
       operationId: DeleteWebhook
-      description: 'Deletes a previously created webhook by name. Deleting the webhook stops AWS CodePipeline from starting a pipeline every time an external event occurs. The API will return successfully when trying to delete a webhook that is already deleted. If a deleted webhook is re-created by calling PutWebhook with the same name, it will have a different URL.'
+      description: 'Deletes a previously created webhook by name. Deleting the webhook stops AWS CodePipeline from starting a pipeline every time an external event occurs. The API returns successfully when trying to delete a webhook that is already deleted. If a deleted webhook is re-created by calling PutWebhook with the same name, it will have a different URL.'
       responses:
         '200':
           description: Success
@@ -474,7 +474,7 @@ paths:
   '/#X-Amz-Target=CodePipeline_20150709.DeregisterWebhookWithThirdParty':
     post:
       operationId: DeregisterWebhookWithThirdParty
-      description: Removes the connection between the webhook that was created by CodePipeline and the external tool with events to be detected. Currently only supported for webhooks that target an action type of GitHub.
+      description: Removes the connection between the webhook that was created by CodePipeline and the external tool with events to be detected. Currently supported only for webhooks that target an action type of GitHub.
       responses:
         '200':
           description: Success
@@ -589,7 +589,7 @@ paths:
   '/#X-Amz-Target=CodePipeline_20150709.GetJobDetails':
     post:
       operationId: GetJobDetails
-      description: '<p>Returns information about a job. Only used for custom actions.</p> <important> <p>When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts. Additionally, this API returns any secret values defined for the action.</p> </important>'
+      description: '<p>Returns information about a job. Used for custom actions only.</p> <important> <p>When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts. This API also returns any secret values defined for the action.</p> </important>'
       responses:
         '200':
           description: Success
@@ -745,7 +745,7 @@ paths:
   '/#X-Amz-Target=CodePipeline_20150709.GetThirdPartyJobDetails':
     post:
       operationId: GetThirdPartyJobDetails
-      description: '<p>Requests the details of a job for a third party action. Only used for partner actions.</p> <important> <p>When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts. Additionally, this API returns any secret values defined for the action.</p> </important>'
+      description: '<p>Requests the details of a job for a third party action. Used for partner actions only.</p> <important> <p>When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts. This API also returns any secret values defined for the action.</p> </important>'
       responses:
         '200':
           description: Success
@@ -980,7 +980,7 @@ paths:
   '/#X-Amz-Target=CodePipeline_20150709.ListTagsForResource':
     post:
       operationId: ListTagsForResource
-      description: Gets the set of key/value pairs (metadata) that are used to manage the resource.
+      description: Gets the set of key-value pairs (metadata) that are used to manage the resource.
       responses:
         '200':
           description: Success
@@ -1035,7 +1035,7 @@ paths:
   '/#X-Amz-Target=CodePipeline_20150709.ListWebhooks':
     post:
       operationId: ListWebhooks
-      description: 'Gets a listing of all the webhooks in this region for this account. The output lists all webhooks and includes the webhook URL and ARN, as well the configuration for each webhook.'
+      description: Gets a listing of all the webhooks in this AWS Region for this account. The output lists all webhooks and includes the webhook URL and ARN and the configuration for each webhook.
       responses:
         '200':
           description: Success
@@ -1082,7 +1082,7 @@ paths:
   '/#X-Amz-Target=CodePipeline_20150709.PollForJobs':
     post:
       operationId: PollForJobs
-      description: '<p>Returns information about any jobs for AWS CodePipeline to act upon. <code>PollForJobs</code> is only valid for action types with "Custom" in the owner field. If the action type contains "AWS" or "ThirdParty" in the owner field, the <code>PollForJobs</code> action returns an error.</p> <important> <p>When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts. Additionally, this API returns any secret values defined for the action.</p> </important>'
+      description: '<p>Returns information about any jobs for AWS CodePipeline to act on. <code>PollForJobs</code> is valid only for action types with "Custom" in the owner field. If the action type contains "AWS" or "ThirdParty" in the owner field, the <code>PollForJobs</code> action returns an error.</p> <important> <p>When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts. This API also returns any secret values defined for the action.</p> </important>'
       responses:
         '200':
           description: Success
@@ -1119,7 +1119,7 @@ paths:
   '/#X-Amz-Target=CodePipeline_20150709.PollForThirdPartyJobs':
     post:
       operationId: PollForThirdPartyJobs
-      description: '<p>Determines whether there are any third party jobs for a job worker to act on. Only used for partner actions.</p> <important> <p>When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts.</p> </important>'
+      description: '<p>Determines whether there are any third party jobs for a job worker to act on. Used for partner actions only.</p> <important> <p>When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts.</p> </important>'
       responses:
         '200':
           description: Success
@@ -1254,7 +1254,7 @@ paths:
   '/#X-Amz-Target=CodePipeline_20150709.PutJobFailureResult':
     post:
       operationId: PutJobFailureResult
-      description: Represents the failure of a job as returned to the pipeline by a job worker. Only used for custom actions.
+      description: Represents the failure of a job as returned to the pipeline by a job worker. Used for custom actions only.
       responses:
         '200':
           description: Success
@@ -1293,7 +1293,7 @@ paths:
   '/#X-Amz-Target=CodePipeline_20150709.PutJobSuccessResult':
     post:
       operationId: PutJobSuccessResult
-      description: Represents the success of a job as returned to the pipeline by a job worker. Only used for custom actions.
+      description: Represents the success of a job as returned to the pipeline by a job worker. Used for custom actions only.
       responses:
         '200':
           description: Success
@@ -1332,7 +1332,7 @@ paths:
   '/#X-Amz-Target=CodePipeline_20150709.PutThirdPartyJobFailureResult':
     post:
       operationId: PutThirdPartyJobFailureResult
-      description: Represents the failure of a third party job as returned to the pipeline by a job worker. Only used for partner actions.
+      description: Represents the failure of a third party job as returned to the pipeline by a job worker. Used for partner actions only.
       responses:
         '200':
           description: Success
@@ -1375,7 +1375,7 @@ paths:
   '/#X-Amz-Target=CodePipeline_20150709.PutThirdPartyJobSuccessResult':
     post:
       operationId: PutThirdPartyJobSuccessResult
-      description: Represents the success of a third party job as returned to the pipeline by a job worker. Only used for partner actions.
+      description: Represents the success of a third party job as returned to the pipeline by a job worker. Used for partner actions only.
       responses:
         '200':
           description: Success
@@ -1516,7 +1516,7 @@ paths:
   '/#X-Amz-Target=CodePipeline_20150709.RetryStageExecution':
     post:
       operationId: RetryStageExecution
-      description: Resumes the pipeline execution by retrying the last failed actions in a stage.
+      description: 'Resumes the pipeline execution by retrying the last failed actions in a stage. You can retry a stage immediately if any of the actions in the stage fail. When you retry, all actions that are still in progress continue working, and failed actions are triggered again.'
       responses:
         '200':
           description: Success
@@ -1704,7 +1704,7 @@ paths:
   '/#X-Amz-Target=CodePipeline_20150709.UpdatePipeline':
     post:
       operationId: UpdatePipeline
-      description: Updates a specified pipeline with edits or changes to its structure. Use a JSON file with the pipeline structure in conjunction with <code>UpdatePipeline</code> to provide the full structure of the pipeline. Updating the pipeline increases the version number of the pipeline by 1.
+      description: Updates a specified pipeline with edits or changes to its structure. Use a JSON file with the pipeline structure and <code>UpdatePipeline</code> to provide the full structure of the pipeline. Updating the pipeline increases the version number of the pipeline by 1.
       responses:
         '200':
           description: Success
@@ -1943,10 +1943,10 @@ definitions:
         description: The name of the stage where you want to disable the inbound or outbound transition of artifacts.
       transitionType:
         $ref: '#/definitions/StageTransitionType'
-        description: 'Specifies whether artifacts will be prevented from transitioning into the stage and being processed by the actions in that stage (inbound), or prevented from transitioning from the stage after they have been processed by the actions in that stage (outbound).'
+        description: 'Specifies whether artifacts are prevented from transitioning into the stage and being processed by the actions in that stage (inbound), or prevented from transitioning from the stage after they have been processed by the actions in that stage (outbound).'
       reason:
         $ref: '#/definitions/DisabledReason'
-        description: 'The reason given to the user why a stage is disabled, such as waiting for manual approval or manual tests. This message is displayed in the pipeline console UI.'
+        description: 'The reason given to the user that a stage is disabled, such as waiting for manual approval or manual tests. This message is displayed in the pipeline console UI.'
     description: Represents the input of a <code>DisableStageTransition</code> action.
   PipelineNotFoundException: {}
   StageNotFoundException: {}
@@ -1965,7 +1965,7 @@ definitions:
         description: 'The name of the stage where you want to enable the transition of artifacts, either into the stage (inbound) or from that stage to the next stage (outbound).'
       transitionType:
         $ref: '#/definitions/StageTransitionType'
-        description: Specifies whether artifacts will be allowed to enter the stage and be processed by the actions in that stage (inbound) or whether already-processed artifacts will be allowed to transition to the next stage (outbound).
+        description: Specifies whether artifacts are allowed to enter the stage and be processed by the actions in that stage (inbound) or whether already processed artifacts are allowed to transition to the next stage (outbound).
     description: Represents the input of an <code>EnableStageTransition</code> action.
   GetJobDetailsOutput:
     type: object
@@ -2000,10 +2000,10 @@ definitions:
     properties:
       name:
         $ref: '#/definitions/PipelineName'
-        description: The name of the pipeline for which you want to get information. Pipeline names must be unique under an Amazon Web Services (AWS) user account.
+        description: The name of the pipeline for which you want to get information. Pipeline names must be unique under an AWS user account.
       version:
         $ref: '#/definitions/PipelineVersion'
-        description: 'The version number of the pipeline. If you do not specify a version, defaults to the most current version.'
+        description: 'The version number of the pipeline. If you do not specify a version, defaults to the current version.'
     description: Represents the input of a <code>GetPipeline</code> action.
   PipelineVersionNotFoundException: {}
   GetPipelineExecutionOutput:
@@ -2035,7 +2035,7 @@ definitions:
         description: The name of the pipeline for which you want to get the state.
       pipelineVersion:
         $ref: '#/definitions/PipelineVersion'
-        description: <p>The version number of the pipeline.</p> <note> <p>A newly-created pipeline is always assigned a version number of <code>1</code>.</p> </note>
+        description: <p>The version number of the pipeline.</p> <note> <p>A newly created pipeline is always assigned a version number of <code>1</code>.</p> </note>
       stageStates:
         $ref: '#/definitions/StageStateList'
         description: 'A list of the pipeline stage output information, including stage name, state, most recent run details, whether the stage is disabled, and other data.'
@@ -2113,7 +2113,7 @@ definitions:
         description: Provides details of the action types.
       nextToken:
         $ref: '#/definitions/NextToken'
-        description: 'If the amount of returned information is significantly large, an identifier is also returned which can be used in a subsequent list action types call to return the next set of action types in the list.'
+        description: 'If the amount of returned information is significantly large, an identifier is also returned. It can be used in a subsequent list action types call to return the next set of action types in the list.'
     description: Represents the output of a <code>ListActionTypes</code> action.
   ListActionTypesInput:
     type: object
@@ -2158,14 +2158,14 @@ definitions:
         description: The list of pipelines.
       nextToken:
         $ref: '#/definitions/NextToken'
-        description: 'If the amount of returned information is significantly large, an identifier is also returned which can be used in a subsequent list pipelines call to return the next set of pipelines in the list.'
+        description: 'If the amount of returned information is significantly large, an identifier is also returned. It can be used in a subsequent list pipelines call to return the next set of pipelines in the list.'
     description: Represents the output of a <code>ListPipelines</code> action.
   ListPipelinesInput:
     type: object
     properties:
       nextToken:
         $ref: '#/definitions/NextToken'
-        description: 'An identifier that was returned from the previous list pipelines call, which can be used to return the next set of pipelines in the list.'
+        description: An identifier that was returned from the previous list pipelines call. It can be used to return the next set of pipelines in the list.
     description: Represents the input of a <code>ListPipelines</code> action.
   ListTagsForResourceOutput:
     type: object
@@ -2175,7 +2175,7 @@ definitions:
         description: The tags for the resource.
       nextToken:
         $ref: '#/definitions/NextToken'
-        description: 'If the amount of returned information is significantly large, an identifier is also returned and can be used in a subsequent API call to return the next page of the list. However, the ListTagsforResource call lists all available tags in one call and does not use pagination.'
+        description: 'If the amount of returned information is significantly large, an identifier is also returned and can be used in a subsequent API call to return the next page of the list. The ListTagsforResource call lists all available tags in one call and does not use pagination.'
   ListTagsForResourceInput:
     type: object
     required:
@@ -2186,7 +2186,7 @@ definitions:
         description: The Amazon Resource Name (ARN) of the resource to get tags for.
       nextToken:
         $ref: '#/definitions/NextToken'
-        description: 'The token that was returned from the previous API call, which would be used to return the next page of the list. However, the ListTagsforResource call lists all available tags in one call and does not use pagination.'
+        description: 'The token that was returned from the previous API call, which would be used to return the next page of the list. The ListTagsforResource call lists all available tags in one call and does not use pagination.'
       maxResults:
         $ref: '#/definitions/MaxResults'
         description: The maximum number of results to return in a single call.
@@ -2230,7 +2230,7 @@ definitions:
         description: The maximum number of jobs to return in a poll for jobs call.
       queryParam:
         $ref: '#/definitions/QueryParamMap'
-        description: 'A map of property names and values. For an action type with no queryable properties, this value must be null or an empty map. For an action type with a queryable property, you must supply that property as a key in the map. Only jobs whose action configuration matches the mapped value will be returned.'
+        description: 'A map of property names and values. For an action type with no queryable properties, this value must be null or an empty map. For an action type with a queryable property, you must supply that property as a key in the map. Only jobs whose action configuration matches the mapped value are returned.'
     description: Represents the input of a <code>PollForJobs</code> action.
   ActionTypeNotFoundException: {}
   PollForThirdPartyJobsOutput:
@@ -2272,13 +2272,13 @@ definitions:
     properties:
       pipelineName:
         $ref: '#/definitions/PipelineName'
-        description: The name of the pipeline that will start processing the revision to the source.
+        description: The name of the pipeline that starts processing the revision to the source.
       stageName:
         $ref: '#/definitions/StageName'
-        description: The name of the stage that contains the action that will act upon the revision.
+        description: The name of the stage that contains the action that acts on the revision.
       actionName:
         $ref: '#/definitions/ActionName'
-        description: The name of the action that will process the revision.
+        description: The name of the action that processes the revision.
       actionRevision:
         $ref: '#/definitions/ActionRevision'
         description: Represents information about the version (or revision) of an action.
@@ -2314,7 +2314,7 @@ definitions:
         description: Represents information about the result of the approval request.
       token:
         $ref: '#/definitions/ApprovalToken'
-        description: The system-generated token used to identify a unique approval request. The token for each open approval request can be obtained using the <a>GetPipelineState</a> action and is used to validate that the approval request corresponding to this token is still valid.
+        description: The system-generated token used to identify a unique approval request. The token for each open approval request can be obtained using the <a>GetPipelineState</a> action. It is used to validate that the approval request corresponding to this token is still valid.
     description: Represents the input of a <code>PutApprovalResult</code> action.
   InvalidApprovalTokenException: {}
   ApprovalAlreadyCompletedException: {}
@@ -2342,10 +2342,10 @@ definitions:
         description: The unique system-generated ID of the job that succeeded. This is the same ID returned from <code>PollForJobs</code>.
       currentRevision:
         $ref: '#/definitions/CurrentRevision'
-        description: The ID of the current revision of the artifact successfully worked upon by the job.
+        description: The ID of the current revision of the artifact successfully worked on by the job.
       continuationToken:
         $ref: '#/definitions/ContinuationToken'
-        description: 'A token generated by a job worker, such as an AWS CodeDeploy deployment ID, that a successful job provides to identify a custom action in progress. Future jobs will use this token in order to identify the running instance of the action. It can be reused to return additional information about the progress of the custom action. When the action is complete, no continuation token should be supplied.'
+        description: 'A token generated by a job worker, such as an AWS CodeDeploy deployment ID, that a successful job provides to identify a custom action in progress. Future jobs use this token to identify the running instance of the action. It can be reused to return more information about the progress of the custom action. When the action is complete, no continuation token should be supplied.'
       executionDetails:
         $ref: '#/definitions/ExecutionDetails'
         description: 'The execution details of the successful job, such as the actions taken by the job worker.'
@@ -2384,7 +2384,7 @@ definitions:
         description: Represents information about a current revision.
       continuationToken:
         $ref: '#/definitions/ContinuationToken'
-        description: 'A token generated by a job worker, such as an AWS CodeDeploy deployment ID, that a successful job provides to identify a partner action in progress. Future jobs will use this token in order to identify the running instance of the action. It can be reused to return additional information about the progress of the partner action. When the action is complete, no continuation token should be supplied.'
+        description: 'A token generated by a job worker, such as an AWS CodeDeploy deployment ID, that a successful job provides to identify a partner action in progress. Future jobs use this token to identify the running instance of the action. It can be reused to return more information about the progress of the partner action. When the action is complete, no continuation token should be supplied.'
       executionDetails:
         $ref: '#/definitions/ExecutionDetails'
         description: 'The details of the actions taken and results produced on an artifact as it passes through stages in the pipeline. '
@@ -2402,7 +2402,7 @@ definitions:
     properties:
       webhook:
         $ref: '#/definitions/WebhookDefinition'
-        description: 'The detail provided in an input file to create the webhook, such as the webhook name, the pipeline name, and the action name. Give the webhook a unique name which identifies the webhook being defined. You may choose to name the webhook after the pipeline and action it targets so that you can easily recognize what it''s used for later.'
+        description: 'The detail provided in an input file to create the webhook, such as the webhook name, the pipeline name, and the action name. Give the webhook a unique name that helps you identify it. You might name the webhook after the pipeline and action it targets so that you can easily recognize what it''s used for later.'
       tags:
         $ref: '#/definitions/TagList'
         description: The tags for the webhook.
@@ -2626,13 +2626,13 @@ definitions:
         description: Whether the configuration property is a key.
       secret:
         $ref: '#/definitions/Boolean'
-        description: '<p>Whether the configuration property is secret. Secrets are hidden from all calls except for <code>GetJobDetails</code>, <code>GetThirdPartyJobDetails</code>, <code>PollForJobs</code>, and <code>PollForThirdPartyJobs</code>.</p> <p>When updating a pipeline, passing * * * * * without changing any other values of the action will preserve the prior value of the secret.</p>'
+        description: '<p>Whether the configuration property is secret. Secrets are hidden from all calls except for <code>GetJobDetails</code>, <code>GetThirdPartyJobDetails</code>, <code>PollForJobs</code>, and <code>PollForThirdPartyJobs</code>.</p> <p>When updating a pipeline, passing * * * * * without changing any other values of the action preserves the previous value of the secret.</p>'
       queryable:
         $ref: '#/definitions/Boolean'
-        description: '<p>Indicates that the property will be used in conjunction with <code>PollForJobs</code>. When creating a custom action, an action can have up to one queryable property. If it has one, that property must be both required and not secret.</p> <p>If you create a pipeline with a custom action type, and that custom action contains a queryable property, the value for that configuration property is subject to additional restrictions. The value must be less than or equal to twenty (20) characters. The value can contain only alphanumeric characters, underscores, and hyphens.</p>'
+        description: '<p>Indicates that the property is used with <code>PollForJobs</code>. When creating a custom action, an action can have up to one queryable property. If it has one, that property must be both required and not secret.</p> <p>If you create a pipeline with a custom action type, and that custom action contains a queryable property, the value for that configuration property is subject to other restrictions. The value must be less than or equal to twenty (20) characters. The value can contain only alphanumeric characters, underscores, and hyphens.</p>'
       description:
         $ref: '#/definitions/Description'
-        description: The description of the action configuration property that will be displayed to users.
+        description: The description of the action configuration property that is displayed to users.
       type:
         $ref: '#/definitions/ActionConfigurationPropertyType'
         description: The type of the configuration property.
@@ -2659,11 +2659,11 @@ definitions:
     properties:
       name:
         $ref: '#/definitions/ActionName'
-        description: The name of the action within the context of a job.
+        description: The name of the action in the context of a job.
       actionExecutionId:
         $ref: '#/definitions/ActionExecutionId'
         description: The system-generated unique ID that corresponds to an action's execution.
-    description: Represents the context of an action within the stage of a pipeline to a job worker.
+    description: Represents the context of an action in the stage of a pipeline to a job worker.
   ActionTypeId:
     type: object
     required:
@@ -2674,13 +2674,13 @@ definitions:
     properties:
       category:
         $ref: '#/definitions/ActionCategory'
-        description: 'A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Valid categories are limited to one of the values below.'
+        description: 'A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Valid categories are limited to one of the following values. '
       owner:
         $ref: '#/definitions/ActionOwner'
         description: The creator of the action being called.
       provider:
         $ref: '#/definitions/ActionProvider'
-        description: 'The provider of the service being called by the action. Valid providers are determined by the action category. For example, an action in the Deploy category type might have a provider of AWS CodeDeploy, which would be specified as CodeDeploy. To reference a list of action providers by action type, see <a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#actions-valid-providers">Valid Action Types and Providers in CodePipeline</a>.'
+        description: 'The provider of the service being called by the action. Valid providers are determined by the action category. For example, an action in the Deploy category type might have a provider of AWS CodeDeploy, which would be specified as CodeDeploy. For more information, see <a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#actions-valid-providers">Valid Action Types and Providers in CodePipeline</a>.'
       version:
         $ref: '#/definitions/Version'
         description: A string that describes the action version.
@@ -2727,7 +2727,7 @@ definitions:
         description: 'The name or ID of the artifact consumed by the action, such as a test or build artifact.'
       roleArn:
         $ref: '#/definitions/RoleArn'
-        description: The ARN of the IAM service role that will perform the declared action. This is assumed through the roleArn for the pipeline.
+        description: The ARN of the IAM service role that performs the declared action. This is assumed through the roleArn for the pipeline.
       region:
         $ref: '#/definitions/AWSRegionName'
         description: 'The action declaration''s AWS Region, such as us-east-1.'
@@ -2766,7 +2766,7 @@ definitions:
     properties:
       code:
         $ref: '#/definitions/Code'
-        description: The system ID or error number code of the error.
+        description: The system ID or number code of the error.
       message:
         $ref: '#/definitions/Message'
         description: The text of the error message.
@@ -2785,7 +2785,7 @@ definitions:
         description: The last status change of the action.
       token:
         $ref: '#/definitions/ActionExecutionToken'
-        description: The system-generated token used to identify a unique approval request. The token for each open approval request can be obtained using the <code>GetPipelineState</code> command and is used to validate that the approval request corresponding to this token is still valid.
+        description: The system-generated token used to identify a unique approval request. The token for each open approval request can be obtained using the <code>GetPipelineState</code> command. It is used to validate that the approval request corresponding to this token is still valid.
       lastUpdatedBy:
         $ref: '#/definitions/LastUpdatedBy'
         description: The ARN of the user who last changed the pipeline.
@@ -2794,7 +2794,7 @@ definitions:
         description: The external ID of the run of the action.
       externalExecutionUrl:
         $ref: '#/definitions/Url'
-        description: 'The URL of a resource external to AWS that will be used when running the action, for example an external repository URL.'
+        description: 'The URL of a resource external to AWS that is used when running the action (for example, an external repository URL).'
       percentComplete:
         $ref: '#/definitions/Percentage'
         description: A percentage of completeness of the action as it runs.
@@ -2938,7 +2938,7 @@ definitions:
         description: The system-generated unique ID that identifies the revision number of the action.
       revisionChangeId:
         $ref: '#/definitions/RevisionChangeIdentifier'
-        description: 'The unique identifier of the change that set the state to this revision, for example a deployment ID or timestamp.'
+        description: 'The unique identifier of the change that set the state to this revision (for example, a deployment ID or timestamp).'
       created:
         $ref: '#/definitions/Timestamp'
         description: 'The date and time when the most recent version of the action was created, in timestamp format.'
@@ -2974,10 +2974,10 @@ definitions:
         description: The URL of a sign-up page where users can sign up for an external service and perform initial configuration of the action provided by that service.
       entityUrlTemplate:
         $ref: '#/definitions/UrlTemplate'
-        description: 'The URL returned to the AWS CodePipeline console that provides a deep link to the resources of the external system, such as the configuration page for an AWS CodeDeploy deployment group. This link is provided as part of the action display within the pipeline.'
+        description: 'The URL returned to the AWS CodePipeline console that provides a deep link to the resources of the external system, such as the configuration page for an AWS CodeDeploy deployment group. This link is provided as part of the action display in the pipeline.'
       executionUrlTemplate:
         $ref: '#/definitions/UrlTemplate'
-        description: 'The URL returned to the AWS CodePipeline console that contains a link to the top-level landing page for the external system, such as console page for AWS CodeDeploy. This link is shown on the pipeline view page in the AWS CodePipeline console and provides a link to the execution entity of the external action.'
+        description: 'The URL returned to the AWS CodePipeline console that contains a link to the top-level landing page for the external system, such as the console page for AWS CodeDeploy. This link is shown on the pipeline view page in the AWS CodePipeline console and provides a link to the execution entity of the external action.'
       revisionUrlTemplate:
         $ref: '#/definitions/UrlTemplate'
         description: The URL returned to the AWS CodePipeline console that contains a link to the page where customers can update or change the configuration of the external action.
@@ -3083,7 +3083,7 @@ definitions:
       location:
         $ref: '#/definitions/ArtifactLocation'
         description: The location of an artifact.
-    description: Represents information about an artifact that will be worked upon by actions in the pipeline.
+    description: Represents information about an artifact that is worked on by actions in the pipeline.
   S3Location:
     type: object
     properties:
@@ -3142,7 +3142,7 @@ definitions:
     properties:
       name:
         $ref: '#/definitions/ArtifactName'
-        description: 'The name of an artifact. This name might be system-generated, such as "MyApp", or might be defined by the user when an action is created.'
+        description: 'The name of an artifact. This name might be system-generated, such as "MyApp", or defined by the user when an action is created.'
       revisionId:
         $ref: '#/definitions/Revision'
         description: The revision ID of the artifact.
@@ -3196,11 +3196,11 @@ definitions:
         description: 'The type of the artifact store, such as S3.'
       location:
         $ref: '#/definitions/ArtifactStoreLocation'
-        description: The Amazon S3 bucket used for storing the artifacts for a pipeline. You can specify the name of an S3 bucket but not a folder within the bucket. A folder to contain the pipeline artifacts is created for you based on the name of the pipeline. You can use any Amazon S3 bucket in the same AWS Region as the pipeline to store your pipeline artifacts.
+        description: The Amazon S3 bucket used for storing the artifacts for a pipeline. You can specify the name of an S3 bucket but not a folder in the bucket. A folder to contain the pipeline artifacts is created for you based on the name of the pipeline. You can use any Amazon S3 bucket in the same AWS Region as the pipeline to store your pipeline artifacts.
       encryptionKey:
         $ref: '#/definitions/EncryptionKey'
         description: 'The encryption key used to encrypt the data in the artifact store, such as an AWS Key Management Service (AWS KMS) key. If this is undefined, the default key for Amazon S3 is used.'
-    description: '<p>The Amazon S3 bucket where artifacts are stored for the pipeline.</p> <note> <p>You must include either <code>artifactStore</code> or <code>artifactStores</code> in your pipeline, but you cannot use both. If you create a cross-region action in your pipeline, you must use <code>artifactStores</code>.</p> </note>'
+    description: '<p>The Amazon S3 bucket where artifacts for the pipeline are stored.</p> <note> <p>You must include either <code>artifactStore</code> or <code>artifactStores</code> in your pipeline, but you cannot use both. If you create a cross-region action in your pipeline, you must use <code>artifactStores</code>.</p> </note>'
   ArtifactStoreMap:
     type: object
     additionalProperties:
@@ -3262,13 +3262,13 @@ definitions:
         description: '<p>Represents information about the Amazon S3 bucket where artifacts are stored for the pipeline.</p> <note> <p>You must include either <code>artifactStore</code> or <code>artifactStores</code> in your pipeline, but you cannot use both. If you create a cross-region action in your pipeline, you must use <code>artifactStores</code>.</p> </note>'
       artifactStores:
         $ref: '#/definitions/ArtifactStoreMap'
-        description: '<p>A mapping of <code>artifactStore</code> objects and their corresponding regions. There must be an artifact store for the pipeline region and for each cross-region action within the pipeline.</p> <note> <p>You must include either <code>artifactStore</code> or <code>artifactStores</code> in your pipeline, but you cannot use both. If you create a cross-region action in your pipeline, you must use <code>artifactStores</code>.</p> </note>'
+        description: '<p>A mapping of <code>artifactStore</code> objects and their corresponding AWS Regions. There must be an artifact store for the pipeline Region and for each cross-region action in the pipeline.</p> <note> <p>You must include either <code>artifactStore</code> or <code>artifactStores</code> in your pipeline, but you cannot use both. If you create a cross-region action in your pipeline, you must use <code>artifactStores</code>.</p> </note>'
       stages:
         $ref: '#/definitions/PipelineStageDeclarationList'
         description: The stage in which to perform the action.
       version:
         $ref: '#/definitions/PipelineVersion'
-        description: The version number of the pipeline. A new pipeline always has a version number of 1. This number is automatically incremented when a pipeline is updated.
+        description: The version number of the pipeline. A new pipeline always has a version number of 1. This number is incremented when a pipeline is updated.
     description: Represents the structure of actions and stages to be performed in the pipeline.
   Time:
     type: string
@@ -3337,7 +3337,7 @@ definitions:
         description: 'The system-generated unique ID of this action used to identify this job worker in any external systems, such as AWS CodeDeploy.'
       percentComplete:
         $ref: '#/definitions/Percentage'
-        description: 'The percentage of work completed on the action, represented on a scale of zero to one hundred percent.'
+        description: 'The percentage of work completed on the action, represented on a scale of 0 to 100 percent.'
     description: The details of the actions taken and results produced on an artifact as it passes through stages in the pipeline.
   TriggerType:
     type: string
@@ -3395,7 +3395,7 @@ definitions:
         description: The unique system-generated ID of the job.
       data:
         $ref: '#/definitions/JobData'
-        description: 'Represents additional information about a job required for a job worker to complete the job. '
+        description: 'Represents other information about a job required for a job worker to complete the job. '
       accountId:
         $ref: '#/definitions/AccountId'
         description: The AWS account ID associated with the job.
@@ -3456,7 +3456,7 @@ definitions:
     properties:
       name:
         $ref: '#/definitions/ArtifactName'
-        description: '<p>The name of the artifact to be worked on, for example, "My App".</p> <p>The input artifact of an action must exactly match the output artifact declared in a preceding action, but the input artifact does not have to be the next action in strict sequence from the action that provided the output artifact. Actions in parallel can declare different output artifacts, which are in turn consumed by different following actions.</p>'
+        description: '<p>The name of the artifact to be worked on (for example, "My App").</p> <p>The input artifact of an action must exactly match the output artifact declared in a preceding action, but the input artifact does not have to be the next action in strict sequence from the action that provided the output artifact. Actions in parallel can declare different output artifacts, which are in turn consumed by different following actions.</p>'
     description: 'Represents information about an artifact to be worked on, such as a test or build artifact.'
   JobData:
     type: object
@@ -3469,7 +3469,7 @@ definitions:
         description: Represents information about an action configuration.
       pipelineContext:
         $ref: '#/definitions/PipelineContext'
-        description: <p>Represents information about a pipeline to a job worker.</p> <note> <p>Includes <code>pipelineArn</code> and <code>pipelineExecutionId</code> for Custom jobs.</p> </note>
+        description: <p>Represents information about a pipeline to a job worker.</p> <note> <p>Includes <code>pipelineArn</code> and <code>pipelineExecutionId</code> for custom jobs.</p> </note>
       inputArtifacts:
         $ref: '#/definitions/ArtifactList'
         description: The artifact supplied to the job.
@@ -3481,11 +3481,11 @@ definitions:
         description: Represents an AWS session credentials object. These credentials are temporary credentials that are issued by AWS Secure Token Service (STS). They can be used to access input and output artifacts in the Amazon S3 bucket used to store artifacts for the pipeline in AWS CodePipeline.
       continuationToken:
         $ref: '#/definitions/ContinuationToken'
-        description: 'A system-generated token, such as a AWS CodeDeploy deployment ID, that a job requires in order to continue the job asynchronously.'
+        description: 'A system-generated token, such as a AWS CodeDeploy deployment ID, required by a job to continue the job asynchronously.'
       encryptionKey:
         $ref: '#/definitions/EncryptionKey'
         description: 'Represents information about the key used to encrypt data in the artifact store, such as an AWS Key Management Service (AWS KMS) key. '
-    description: Represents additional information about a job required for a job worker to complete the job.
+    description: Represents other information about a job required for a job worker to complete the job.
   Job:
     type: object
     properties:
@@ -3494,7 +3494,7 @@ definitions:
         description: The unique system-generated ID of the job.
       data:
         $ref: '#/definitions/JobData'
-        description: Additional data about a job.
+        description: Other data about a job.
       nonce:
         $ref: '#/definitions/Nonce'
         description: A system-generated random number that AWS CodePipeline uses to ensure that the job is being worked on by only one job worker. Use this number in an <a>AcknowledgeJob</a> request.
@@ -3513,7 +3513,7 @@ definitions:
         description: The stage of the pipeline.
       action:
         $ref: '#/definitions/ActionContext'
-        description: The context of an action to a job worker within the stage of a pipeline.
+        description: The context of an action to a job worker in the stage of a pipeline.
       pipelineArn:
         $ref: '#/definitions/PipelineArn'
         description: The Amazon Resource Name (ARN) of the pipeline.
@@ -3577,7 +3577,7 @@ definitions:
         description: A list of rules applied to the body/payload sent in the POST request to a webhook URL. All defined rules must pass for the request to be accepted and the pipeline started.
       authentication:
         $ref: '#/definitions/WebhookAuthenticationType'
-        description: '<p>Supported options are GITHUB_HMAC, IP and UNAUTHENTICATED.</p> <ul> <li> <p>For information about the authentication scheme implemented by GITHUB_HMAC, see <a href="https://developer.github.com/webhooks/securing/">Securing your webhooks</a> on the GitHub Developer website.</p> </li> <li> <p> IP will reject webhooks trigger requests unless they originate from an IP within the IP range whitelisted in the authentication configuration.</p> </li> <li> <p> UNAUTHENTICATED will accept all webhook trigger requests regardless of origin.</p> </li> </ul>'
+        description: '<p>Supported options are GITHUB_HMAC, IP, and UNAUTHENTICATED.</p> <ul> <li> <p>For information about the authentication scheme implemented by GITHUB_HMAC, see <a href="https://developer.github.com/webhooks/securing/">Securing your webhooks</a> on the GitHub Developer website.</p> </li> <li> <p> IP rejects webhooks trigger requests unless they originate from an IP address in the IP range whitelisted in the authentication configuration.</p> </li> <li> <p> UNAUTHENTICATED accepts all webhook trigger requests regardless of origin.</p> </li> </ul>'
       authenticationConfiguration:
         $ref: '#/definitions/WebhookAuthConfiguration'
         description: 'Properties that configure the authentication applied to incoming webhook trigger requests. The required properties depend on the authentication type. For GITHUB_HMAC, only the <code>SecretToken </code>property must be set. For IP, only the <code>AllowedIPRange </code>property must be set to a valid CIDR range. For UNAUTHENTICATED, no properties can be set.'
@@ -3606,7 +3606,7 @@ definitions:
         description: 'The detail returned for each webhook, such as the webhook authentication type and filter rules.'
       url:
         $ref: '#/definitions/WebhookUrl'
-        description: 'A unique URL generated by CodePipeline. When a POST request is made to this URL, the defined pipeline is started as long as the body of the post request satisfies the defined authentication and filtering conditions. Deleting and re-creating a webhook will make the old URL invalid and generate a new URL.'
+        description: 'A unique URL generated by CodePipeline. When a POST request is made to this URL, the defined pipeline is started as long as the body of the post request satisfies the defined authentication and filtering conditions. Deleting and re-creating a webhook makes the old URL invalid and generates a new one.'
       errorMessage:
         $ref: '#/definitions/WebhookErrorMessage'
         description: The text of the error message about the webhook.
@@ -3845,7 +3845,7 @@ definitions:
       value:
         $ref: '#/definitions/TagValue'
         description: The tag's value.
-    description: A tag is a key/value pair that is used to manage the resource.
+    description: A tag is a key-value pair that is used to manage the resource.
   TagKeyList:
     type: array
     items:
@@ -3859,7 +3859,7 @@ definitions:
       jobId:
         $ref: '#/definitions/JobId'
         description: The identifier used to identify the job in AWS CodePipeline.
-    description: A response to a <code>PollForThirdPartyJobs </code>request returned by AWS CodePipeline when there is a job to be worked upon by a partner action.
+    description: A response to a <code>PollForThirdPartyJobs</code> request returned by AWS CodePipeline when there is a job to be worked on by a partner action.
   ThirdPartyJobData:
     type: object
     properties:
@@ -3874,16 +3874,16 @@ definitions:
         description: <p>Represents information about a pipeline to a job worker.</p> <note> <p>Does not include <code>pipelineArn</code> and <code>pipelineExecutionId</code> for ThirdParty jobs.</p> </note>
       inputArtifacts:
         $ref: '#/definitions/ArtifactList'
-        description: 'The name of the artifact that will be worked upon by the action, if any. This name might be system-generated, such as "MyApp", or might be defined by the user when the action is created. The input artifact name must match the name of an output artifact generated by an action in an earlier action or stage of the pipeline.'
+        description: 'The name of the artifact that is worked on by the action, if any. This name might be system-generated, such as "MyApp", or it might be defined by the user when the action is created. The input artifact name must match the name of an output artifact generated by an action in an earlier action or stage of the pipeline.'
       outputArtifacts:
         $ref: '#/definitions/ArtifactList'
-        description: 'The name of the artifact that will be the result of the action, if any. This name might be system-generated, such as "MyBuiltApp", or might be defined by the user when the action is created.'
+        description: 'The name of the artifact that is the result of the action, if any. This name might be system-generated, such as "MyBuiltApp", or it might be defined by the user when the action is created.'
       artifactCredentials:
         $ref: '#/definitions/AWSSessionCredentials'
         description: 'Represents an AWS session credentials object. These credentials are temporary credentials that are issued by AWS Secure Token Service (STS). They can be used to access input and output artifacts in the Amazon S3 bucket used to store artifact for the pipeline in AWS CodePipeline. '
       continuationToken:
         $ref: '#/definitions/ContinuationToken'
-        description: 'A system-generated token, such as a AWS CodeDeploy deployment ID, that a job requires in order to continue the job asynchronously.'
+        description: 'A system-generated token, such as a AWS CodeDeploy deployment ID, that a job requires to continue the job asynchronously.'
       encryptionKey:
         $ref: '#/definitions/EncryptionKey'
         description: 'The encryption key used to encrypt and decrypt data in the artifact store for the pipeline, such as an AWS Key Management Service (AWS KMS) key. This is optional and might not be present.'
@@ -3901,7 +3901,7 @@ definitions:
     properties:
       AllowedIPRange:
         $ref: '#/definitions/WebhookAuthConfigurationAllowedIPRange'
-        description: 'The property used to configure acceptance of webhooks within a specific IP range. For IP, only the <code>AllowedIPRange</code> property must be set, and this property must be set to a valid CIDR range.'
+        description: 'The property used to configure acceptance of webhooks in an IP address range. For IP, only the <code>AllowedIPRange</code> property must be set. This property must be set to a valid CIDR range.'
       SecretToken:
         $ref: '#/definitions/WebhookAuthConfigurationSecretToken'
         description: 'The property used to configure GitHub authentication. For GITHUB_HMAC, only the <code>SecretToken</code> property must be set.'
@@ -3924,8 +3924,8 @@ definitions:
     properties:
       jsonPath:
         $ref: '#/definitions/JsonPath'
-        description: 'A JsonPath expression that will be applied to the body/payload of the webhook. The value selected by the JsonPath expression must match the value specified in the <code>MatchEquals</code> field, otherwise the request will be ignored. For more information about JsonPath expressions, see <a href="https://github.com/json-path/JsonPath">Java JsonPath implementation</a> in GitHub.'
+        description: 'A JsonPath expression that is applied to the body/payload of the webhook. The value selected by the JsonPath expression must match the value specified in the <code>MatchEquals</code> field. Otherwise, the request is ignored. For more information, see <a href="https://github.com/json-path/JsonPath">Java JsonPath implementation</a> in GitHub.'
       matchEquals:
         $ref: '#/definitions/MatchEquals'
-        description: 'The value selected by the <code>JsonPath</code> expression must match what is supplied in the <code>MatchEquals</code> field, otherwise the request will be ignored. Properties from the target action configuration can be included as placeholders in this value by surrounding the action configuration key with curly braces. For example, if the value supplied here is "refs/heads/{Branch}" and the target action has an action configuration property called "Branch" with a value of "master", the <code>MatchEquals</code> value will be evaluated as "refs/heads/master". For a list of action configuration properties for built-in action types, see <a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#action-requirements">Pipeline Structure Reference Action Requirements</a>.'
+        description: 'The value selected by the <code>JsonPath</code> expression must match what is supplied in the <code>MatchEquals</code> field. Otherwise, the request is ignored. Properties from the target action configuration can be included as placeholders in this value by surrounding the action configuration key with curly brackets. For example, if the value supplied here is "refs/heads/{Branch}" and the target action has an action configuration property called "Branch" with a value of "master", the <code>MatchEquals</code> value is evaluated as "refs/heads/master". For a list of action configuration properties for built-in action types, see <a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#action-requirements">Pipeline Structure Reference Action Requirements</a>.'
     description: The event criteria that specify when a webhook notification is sent to your URL.
