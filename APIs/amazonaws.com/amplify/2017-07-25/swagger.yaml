@@ -295,6 +295,9 @@ paths:
                   buildSpec:
                     $ref: '#/definitions/BuildSpec'
                     description: ' BuildSpec for the auto created branch. '
+                  enablePullRequestPreview:
+                    $ref: '#/definitions/EnablePullRequestPreview'
+                    description: ' Enables Pull Request Preview for auto created branch. '
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -403,6 +406,7 @@ paths:
                   - BETA
                   - DEVELOPMENT
                   - EXPERIMENTAL
+                  - PULL_REQUEST
               framework:
                 description: ' Framework for the branch. '
                 type: string
@@ -444,6 +448,9 @@ paths:
                 description: ' Display name for a branch, will use as the default domain prefix. '
                 type: string
                 maxLength: 255
+              enablePullRequestPreview:
+                description: ' Enables Pull Request Preview for this branch. '
+                type: boolean
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -967,6 +974,22 @@ paths:
                   buildSpec:
                     $ref: '#/definitions/BuildSpec'
                     description: ' BuildSpec for the auto created branch. '
+                  enablePullRequestPreview:
+                    $ref: '#/definitions/EnablePullRequestPreview'
+                    description: ' Enables Pull Request Preview for auto created branch. '
+              repository:
+                description: ' Repository for an Amplify App '
+                type: string
+                maxLength: 1000
+              oauthToken:
+                description: ' OAuth token for 3rd party source control system for an Amplify App, used to create webhook and read-only deploy key. OAuth token is not stored. '
+                type: string
+                maxLength: 100
+              accessToken:
+                description: ' Personal Access token for 3rd party source control system for an Amplify App, used to create webhook and read-only deploy key. Token is not stored. '
+                type: string
+                minLength: 1
+                maxLength: 255
   '/apps/{appId}/branches/{branchName}':
     delete:
       operationId: DeleteBranch
@@ -1123,6 +1146,7 @@ paths:
                   - BETA
                   - DEVELOPMENT
                   - EXPERIMENTAL
+                  - PULL_REQUEST
               enableNotification:
                 description: ' Enables notifications for the branch. '
                 type: boolean
@@ -1153,6 +1177,9 @@ paths:
                 description: ' Display name for a branch, will use as the default domain prefix. '
                 type: string
                 maxLength: 255
+              enablePullRequestPreview:
+                description: ' Enables Pull Request Preview for this branch. '
+                type: boolean
   '/apps/{appId}/domains/{domainName}':
     delete:
       operationId: DeleteDomainAssociation
@@ -1537,6 +1564,189 @@ paths:
                 description: ' Description for a webhook. '
                 type: string
                 maxLength: 1000
+  '/apps/{appId}/accesslogs':
+    post:
+      operationId: GenerateAccessLogs
+      description: ' Retrieve website access logs for a specific time range via a pre-signed URL. Optionally, deliver the logs to a given S3 bucket. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GenerateAccessLogsResult'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: appId
+          in: path
+          required: true
+          description: ' Unique Id for an Amplify App. '
+          type: string
+          minLength: 1
+          maxLength: 255
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - domainName
+            properties:
+              startTime:
+                description: ' The time at which the logs should start, inclusive. '
+                type: string
+                format: date-time
+              endTime:
+                description: ' The time at which the logs should end, inclusive. '
+                type: string
+                format: date-time
+              domainName:
+                description: ' Name of the domain. '
+                type: string
+                maxLength: 255
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/artifacts/{artifactId}':
+    get:
+      operationId: GetArtifactUrl
+      description: ' Retrieves artifact info that corresponds to a artifactId. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetArtifactUrlResult'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: artifactId
+          in: path
+          required: true
+          description: ' Unique Id for a artifact. '
+          type: string
+          maxLength: 255
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/apps/{appId}/branches/{branchName}/jobs/{jobId}/artifacts':
+    get:
+      operationId: ListArtifacts
+      description: ' List artifacts with an app, a branch, a job and an artifact type. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListArtifactsResult'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: appId
+          in: path
+          required: true
+          description: ' Unique Id for an Amplify App. '
+          type: string
+          minLength: 1
+          maxLength: 255
+        - name: branchName
+          in: path
+          required: true
+          description: ' Name for a branch, part of an Amplify App. '
+          type: string
+          minLength: 1
+          maxLength: 255
+        - name: jobId
+          in: path
+          required: true
+          description: ' Unique Id for an Job. '
+          type: string
+          maxLength: 255
+        - name: nextToken
+          in: query
+          required: false
+          description: ' Pagination token. Set to null to start listing artifacts from start. If non-null pagination token is returned in a result, then pass its value in here to list more artifacts. '
+          type: string
+          maxLength: 2000
+        - name: maxResults
+          in: query
+          required: false
+          description: ' Maximum number of records to list in a single response. '
+          type: integer
+          minimum: 1
+          maximum: 100
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              artifactType:
+                description: ' Type for an artifact. '
+                type: string
+                enum:
+                  - TEST
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/apps/{appId}/branches/{branchName}/jobs':
     get:
       operationId: ListJobs
@@ -1967,6 +2177,7 @@ definitions:
       - BETA
       - DEVELOPMENT
       - EXPERIMENTAL
+      - PULL_REQUEST
   Framework:
     type: string
     maxLength: 255
@@ -1986,6 +2197,8 @@ definitions:
     description: ' BuildSpec file for Amplify app build. '
     minLength: 1
     maxLength: 25000
+  EnablePullRequestPreview:
+    type: boolean
   BadRequestException: {}
   UnauthorizedException: {}
   InternalFailureException: {}
@@ -2092,6 +2305,13 @@ definitions:
         $ref: '#/definitions/Webhook'
         description: ' Webhook structure. '
     description: ' Result structure for the delete webhook request. '
+  GenerateAccessLogsResult:
+    type: object
+    properties:
+      logUrl:
+        $ref: '#/definitions/LogUrl'
+        description: ' Pre-signed URL for the requested access logs. '
+    description: ' Result structure for the generate access logs request. '
   GetAppResult:
     type: object
     required:
@@ -2099,6 +2319,19 @@ definitions:
     properties:
       app:
         $ref: '#/definitions/App'
+  GetArtifactUrlResult:
+    type: object
+    required:
+      - artifactId
+      - artifactUrl
+    properties:
+      artifactId:
+        $ref: '#/definitions/ArtifactId'
+        description: ' Unique Id for a artifact. '
+      artifactUrl:
+        $ref: '#/definitions/ArtifactUrl'
+        description: ' Presigned url for the artifact. '
+    description: ' Result structure for the get artifact request. '
   GetBranchResult:
     type: object
     required:
@@ -2143,6 +2376,18 @@ definitions:
         $ref: '#/definitions/NextToken'
         description: ' Pagination token. Set to null to start listing Apps from start. If non-null pagination token is returned in a result, then pass its value in here to list more projects. '
     description: ' Result structure for an Amplify App list request. '
+  ListArtifactsResult:
+    type: object
+    required:
+      - artifacts
+    properties:
+      artifacts:
+        $ref: '#/definitions/Artifacts'
+        description: ' List of artifacts. '
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: ' Pagination token. If non-null pagination token is returned in a result, then pass its value in another request to fetch more entries. '
+    description: ' Result structure for the list artifacts request. '
   ListBranchesResult:
     type: object
     required:
@@ -2375,6 +2620,9 @@ definitions:
       buildSpec:
         $ref: '#/definitions/BuildSpec'
         description: ' BuildSpec for the auto created branch. '
+      enablePullRequestPreview:
+        $ref: '#/definitions/EnablePullRequestPreview'
+        description: ' Enables Pull Request Preview for auto created branch. '
     description: ' Structure with auto branch creation config. '
   App:
     type: object
@@ -2460,6 +2708,36 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/App'
+  ArtifactFileName:
+    type: string
+    maxLength: 1000
+  ArtifactId:
+    type: string
+    maxLength: 255
+  Artifact:
+    type: object
+    required:
+      - artifactFileName
+      - artifactId
+    properties:
+      artifactFileName:
+        $ref: '#/definitions/ArtifactFileName'
+        description: ' File name for the artifact. '
+      artifactId:
+        $ref: '#/definitions/ArtifactId'
+        description: ' Unique Id for a artifact. '
+    description: ' Structure for artifact. '
+  ArtifactType:
+    type: string
+    enum:
+      - TEST
+  ArtifactUrl:
+    type: string
+    maxLength: 1000
+  Artifacts:
+    type: array
+    items:
+      $ref: '#/definitions/Artifact'
   ArtifactsUrl:
     type: string
     maxLength: 1000
@@ -2517,6 +2795,7 @@ definitions:
       - totalNumberOfJobs
       - enableBasicAuth
       - ttl
+      - enablePullRequestPreview
     properties:
       branchArn:
         $ref: '#/definitions/BranchArn'
@@ -2581,6 +2860,15 @@ definitions:
       associatedResources:
         $ref: '#/definitions/AssociatedResources'
         description: ' List of custom resources that are linked to this branch. '
+      enablePullRequestPreview:
+        $ref: '#/definitions/EnablePullRequestPreview'
+        description: ' Enables Pull Request Preview for this branch. '
+      destinationBranch:
+        $ref: '#/definitions/BranchName'
+        description: ' The destination branch if the branch is a pull request branch. '
+      sourceBranch:
+        $ref: '#/definitions/BranchName'
+        description: ' The source branch if the branch is a pull request branch. '
     description: ' Branch for an Amplify App, which maps to a 3rd party repository branch. '
   Branches:
     type: array
@@ -2709,6 +2997,9 @@ definitions:
       displayName:
         $ref: '#/definitions/DisplayName'
         description: ' Display name for a branch, will use as the default domain prefix. '
+      enablePullRequestPreview:
+        $ref: '#/definitions/EnablePullRequestPreview'
+        description: ' Enables Pull Request Preview for this branch. '
     description: ' Request structure for a branch create request. '
   FileMap:
     type: object
@@ -2848,7 +3139,7 @@ definitions:
   Status:
     type: string
     minLength: 3
-    maxLength: 3
+    maxLength: 7
   DNSRecord:
     type: string
     maxLength: 1000
@@ -2954,10 +3245,35 @@ definitions:
   FileName:
     type: string
     maxLength: 255
+  StartTime:
+    type: string
+    format: date-time
+  GenerateAccessLogsRequest:
+    type: object
+    required:
+      - domainName
+    properties:
+      startTime:
+        $ref: '#/definitions/StartTime'
+        description: ' The time at which the logs should start, inclusive. '
+      endTime:
+        $ref: '#/definitions/EndTime'
+        description: ' The time at which the logs should end, inclusive. '
+      domainName:
+        $ref: '#/definitions/DomainName'
+        description: ' Name of the domain. '
+    description: ' Request structure for the generate access logs request. '
+  LogUrl:
+    type: string
+    maxLength: 1000
   GetAppRequest:
     type: object
     properties: {}
     description: ' Request structure for get App request. '
+  GetArtifactUrlRequest:
+    type: object
+    properties: {}
+    description: ' Request structure for the get artifact request. '
   GetBranchRequest:
     type: object
     properties: {}
@@ -3011,9 +3327,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/JobSummary'
-  StartTime:
-    type: string
-    format: date-time
   JobType:
     type: string
     enum:
@@ -3036,6 +3349,13 @@ definitions:
     type: object
     properties: {}
     description: ' Request structure for an Amplify App list request. '
+  ListArtifactsRequest:
+    type: object
+    properties:
+      artifactType:
+        $ref: '#/definitions/ArtifactType'
+        description: ' Type for an artifact. '
+    description: ' Request structure for the list artifacts request. '
   ListBranchesRequest:
     type: object
     properties: {}
@@ -3063,9 +3383,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Webhook'
-  LogUrl:
-    type: string
-    maxLength: 1000
   Screenshots:
     type: object
     additionalProperties:
@@ -3110,6 +3427,12 @@ definitions:
   StepName:
     type: string
     maxLength: 255
+  TestArtifactsUrl:
+    type: string
+    maxLength: 1000
+  TestConfigUrl:
+    type: string
+    maxLength: 1000
   Step:
     type: object
     required:
@@ -3136,6 +3459,12 @@ definitions:
       artifactsUrl:
         $ref: '#/definitions/ArtifactsUrl'
         description: ' URL to the artifact for the execution step. '
+      testArtifactsUrl:
+        $ref: '#/definitions/TestArtifactsUrl'
+        description: ' URL to the test artifact for the execution step. '
+      testConfigUrl:
+        $ref: '#/definitions/TestConfigUrl'
+        description: ' URL to the test config for the execution step. '
       screenshots:
         $ref: '#/definitions/Screenshots'
         description: ' List of screenshot URLs for the execution step, if relevant. '
@@ -3232,7 +3561,16 @@ definitions:
         description: ' Automated branch creation glob patterns for the Amplify App. '
       autoBranchCreationConfig:
         $ref: '#/definitions/AutoBranchCreationConfig'
-        description: ' Automated branch creation config for the Amplify App. '
+        description: ' Automated branch creation branchConfig for the Amplify App. '
+      repository:
+        $ref: '#/definitions/Repository'
+        description: ' Repository for an Amplify App '
+      oauthToken:
+        $ref: '#/definitions/OauthToken'
+        description: ' OAuth token for 3rd party source control system for an Amplify App, used to create webhook and read-only deploy key. OAuth token is not stored. '
+      accessToken:
+        $ref: '#/definitions/AccessToken'
+        description: ' Personal Access token for 3rd party source control system for an Amplify App, used to create webhook and read-only deploy key. Token is not stored. '
     description: ' Request structure for update App request. '
   UpdateBranchRequest:
     type: object
@@ -3270,6 +3608,9 @@ definitions:
       displayName:
         $ref: '#/definitions/DisplayName'
         description: ' Display name for a branch, will use as the default domain prefix. '
+      enablePullRequestPreview:
+        $ref: '#/definitions/EnablePullRequestPreview'
+        description: ' Enables Pull Request Preview for this branch. '
     description: ' Request structure for update branch request. '
   UpdateDomainAssociationRequest:
     type: object
