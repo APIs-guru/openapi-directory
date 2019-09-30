@@ -176,7 +176,7 @@ paths:
       operationId: cloudfunctions.projects.locations.functions.list
       parameters:
         - description: |-
-            The project and location from which the function should be listed,
+            Required. The project and location from which the function should be listed,
             specified in the format `projects/*/locations/*`
             If you want to list functions in all locations, use "-" in place of a
             location.
@@ -233,7 +233,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudFunction'
         - description: |-
-            The project and location in which the function should be created, specified
+            Required. The project and location in which the function should be created, specified
             in the format `projects/*/locations/*`
           in: path
           name: location
@@ -260,7 +260,7 @@ paths:
         remove this function.
       operationId: cloudfunctions.projects.locations.functions.delete
       parameters:
-        - description: The name of the function which should be deleted.
+        - description: Required. The name of the function which should be deleted.
           in: path
           name: name
           required: true
@@ -279,10 +279,13 @@ paths:
       tags:
         - projects
     get:
-      description: Returns a function with the given name from the requested project.
-      operationId: cloudfunctions.projects.locations.functions.get
+      description: |-
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: cloudfunctions.operations.get
       parameters:
-        - description: The name of the function which details should be obtained.
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -292,14 +295,14 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/CloudFunction'
+            $ref: '#/definitions/Operation'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - operations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -320,7 +323,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/CloudFunction'
-        - description: The name of the function to be updated.
+        - description: Required. The name of the function to be updated.
           in: path
           name: name
           required: true
@@ -410,7 +413,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/CallFunctionRequest'
-        - description: The name of the function to be called.
+        - description: Required. The name of the function to be called.
           in: path
           name: name
           required: true
@@ -545,7 +548,7 @@ definitions:
     description: Request for the `CallFunction` method.
     properties:
       data:
-        description: Input to be passed to the function.
+        description: Required. Input to be passed to the function.
         type: string
     type: object
   CallFunctionResponse:

@@ -29458,7 +29458,7 @@ definitions:
           type: string
         type: array
       ignoreChildExemptions:
-        description: 'Specifies whether principals can be exempted for the same LogType in lower-level resource policies. If true, any lower-level exemptions will be ignored.'
+        description: ''
         type: boolean
       logType:
         description: The log type that this config enables.
@@ -39341,14 +39341,15 @@ definitions:
         description: |-
           The list of path rules. Use this list instead of routeRules when routing based on simple path matching is all that's required. The order by which path rules are specified does not matter. Matches are always done on the longest-path-first basis.
           For example: a pathRule with a path /a/b/c/* will match before /a/b/* irrespective of the order in which those paths appear in this list.
-          Only one of pathRules or routeRules must be set.
+          Within a given pathMatcher, only one of pathRules or routeRules must be set.
         items:
           $ref: '#/definitions/PathRule'
         type: array
       routeRules:
         description: |-
           The list of ordered HTTP route rules. Use this list instead of pathRules when advanced route matching and routing actions are desired. The order of specifying routeRules matters: the first rule that matches will cause its specified routing action to take effect.
-          Only one of pathRules or routeRules must be set.
+          Within a given pathMatcher, only one of pathRules or routeRules must be set.
+          routeRules are not supported in UrlMaps intended for External Load balancers.
         items:
           $ref: '#/definitions/HttpRouteRule'
         type: array
@@ -39433,7 +39434,12 @@ definitions:
           $ref: '#/definitions/Rule'
         type: array
       version:
-        description: Deprecated.
+        description: |-
+          Specifies the format of the policy.
+
+          Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected.
+
+          Policies with any conditional bindings must specify version 3. Policies without any conditional bindings may specify any valid value or leave the field unset.
         format: int32
         type: integer
     type: object

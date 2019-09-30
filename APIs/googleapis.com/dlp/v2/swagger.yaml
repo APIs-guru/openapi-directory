@@ -216,15 +216,14 @@ paths:
   '/v2/{name}':
     delete:
       description: |-
-        Deletes a stored infoType.
-        See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
-        learn more.
-      operationId: dlp.organizations.storedInfoTypes.delete
+        Deletes an InspectTemplate.
+        See https://cloud.google.com/dlp/docs/creating-templates to learn more.
+      operationId: dlp.organizations.inspectTemplates.delete
       parameters:
         - description: |-
-            Resource name of the organization and storedInfoType to be deleted, for
-            example `organizations/433245324/storedInfoTypes/432452342` or
-            projects/project-id/storedInfoTypes/432452342.
+            Resource name of the organization and inspectTemplate to be deleted, for
+            example `organizations/433245324/inspectTemplates/432452342` or
+            projects/project-id/inspectTemplates/432452342.
           in: path
           name: name
           required: true
@@ -244,15 +243,14 @@ paths:
         - organizations
     get:
       description: |-
-        Gets a stored infoType.
-        See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
-        learn more.
-      operationId: dlp.organizations.storedInfoTypes.get
+        Gets an InspectTemplate.
+        See https://cloud.google.com/dlp/docs/creating-templates to learn more.
+      operationId: dlp.organizations.inspectTemplates.get
       parameters:
         - description: |-
-            Resource name of the organization and storedInfoType to be read, for
-            example `organizations/433245324/storedInfoTypes/432452342` or
-            projects/project-id/storedInfoTypes/432452342.
+            Resource name of the organization and inspectTemplate to be read, for
+            example `organizations/433245324/inspectTemplates/432452342` or
+            projects/project-id/inspectTemplates/432452342.
           in: path
           name: name
           required: true
@@ -262,7 +260,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2StoredInfoType'
+            $ref: '#/definitions/GooglePrivacyDlpV2InspectTemplate'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -284,20 +282,18 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     patch:
       description: |-
-        Updates the stored infoType by creating a new version. The existing version
-        will continue to be used until the new version is ready.
-        See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
-        learn more.
-      operationId: dlp.organizations.storedInfoTypes.patch
+        Updates the InspectTemplate.
+        See https://cloud.google.com/dlp/docs/creating-templates to learn more.
+      operationId: dlp.organizations.inspectTemplates.patch
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2UpdateStoredInfoTypeRequest'
+            $ref: '#/definitions/GooglePrivacyDlpV2UpdateInspectTemplateRequest'
         - description: |-
-            Resource name of organization and storedInfoType to be updated, for
-            example `organizations/433245324/storedInfoTypes/432452342` or
-            projects/project-id/storedInfoTypes/432452342.
+            Resource name of organization and inspectTemplate to be updated, for
+            example `organizations/433245324/inspectTemplates/432452342` or
+            projects/project-id/inspectTemplates/432452342.
           in: path
           name: name
           required: true
@@ -307,7 +303,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2StoredInfoType'
+            $ref: '#/definitions/GooglePrivacyDlpV2InspectTemplate'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -3051,10 +3047,9 @@ definitions:
           system may automatically choose what detectors to run. By default this may
           be all types, but may change over time as detectors are updated.
 
-          The special InfoType name "ALL_BASIC" can be used to trigger all detectors,
-          but may change over time as new InfoTypes are added. If you need precise
-          control and predictability as to what detectors are run you should specify
-          specific InfoTypes listed in the reference.
+          If you need precise control and predictability as to what detectors are
+          run you should specify specific InfoTypes listed in the reference,
+          otherwise a default list will be used, which may change over time.
         items:
           $ref: '#/definitions/GooglePrivacyDlpV2InfoType'
         type: array
@@ -4213,6 +4208,7 @@ definitions:
           reverse. This requires that only reversible transformations
           be provided here. The reversible transformations are:
 
+           - `CryptoDeterministicConfig`
            - `CryptoReplaceFfxFpeConfig`
       reidentifyTemplateName:
         description: |-
@@ -4597,14 +4593,19 @@ definitions:
         $ref: '#/definitions/GooglePrivacyDlpV2FieldId'
         description: |-
           Specification of the field containing the timestamp of scanned items.
-          Used for data sources like Datastore or BigQuery.
-          If not specified for BigQuery, table last modification timestamp
-          is checked against given time span.
-          The valid data types of the timestamp field are:
-          for BigQuery - timestamp, date, datetime;
-          for Datastore - timestamp.
-          Datastore entity will be scanned if the timestamp property does not exist
-          or its value is empty or invalid.
+          Used for data sources like Datastore and BigQuery.
+
+          For BigQuery:
+          Required to filter out rows based on the given start and
+          end times. If not specified and the table was modified between the given
+          start and end times, the entire table will be scanned.
+          The valid data types of the timestamp field are: `INTEGER`, `DATE`,
+          `TIMESTAMP`, or `DATETIME` BigQuery column.
+
+          For Datastore.
+          Valid data types of the timestamp field are: `TIMESTAMP`.
+          Datastore entity will be scanned if the timestamp property does not
+          exist or its value is empty or invalid.
     type: object
   GooglePrivacyDlpV2TransformationOverview:
     description: Overview of the modifications that occurred.

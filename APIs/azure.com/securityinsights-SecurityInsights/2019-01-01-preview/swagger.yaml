@@ -3517,7 +3517,7 @@ definitions:
   ASCDataConnectorProperties:
     allOf:
       - $ref: '#/definitions/DataConnectorWithAlertsProperties'
-    description: MCAS (Microsoft Cloud App Security) data connector properties.
+    description: ASC (Azure Security Center) data connector properties.
     properties:
       subscriptionId:
         description: 'The subscription id to connect to, and get the data from.'
@@ -5586,13 +5586,24 @@ definitions:
         type: string
     x-ms-azure-resource: true
   ResourceWithEtag:
-    allOf:
-      - $ref: '#/definitions/Resource'
     description: An azure resource object with an Etag property
     properties:
       etag:
         description: Etag of the azure resource
         type: string
+      id:
+        description: Azure resource Id
+        readOnly: true
+        type: string
+      name:
+        description: Azure resource name
+        readOnly: true
+        type: string
+      type:
+        description: Azure resource type
+        readOnly: true
+        type: string
+    x-ms-azure-resource: true
   ScheduledAlertRule:
     allOf:
       - $ref: '#/definitions/AlertRule'

@@ -384,9 +384,9 @@ paths:
           name: content
           required: true
           type: string
-        - description: The upload_key used to upload any photos that should be attached to this reply.
+        - description: A comma separated list of the IDs of the photos that should be attached to this message.
           in: formData
-          name: upload_key
+          name: photo_ids
           required: false
           type: string
         - default: 1
@@ -818,12 +818,6 @@ paths:
           name: photo
           required: true
           type: file
-        - description: A client created identifier used to associate a photo or set of photos with a post (a  random number will work - must be <= 32 characters).
-          in: formData
-          maxLength: 32
-          name: upload_key
-          required: true
-          type: string
         - default: 1
           description: Client device pixel ratio used to determine thumbnail size (default 1.0).
           in: formData
@@ -838,8 +832,37 @@ paths:
           schema:
             $ref: '#/definitions/PhotoResult'
         '400':
-          description: Invalid upload_key or photo.
+          description: Invalid photo.
       summary: Create a photo
+      tags:
+        - photos
+  /photos/multiple:
+    get:
+      operationId: get_photos_by_ids
+      parameters:
+        - description: 'The IDs of the photos to retrieve.  If more than 50 photo IDs are passed, only the first 50 photos will be returned.'
+          in: query
+          name: photo_ids
+          required: true
+          type: string
+        - default: 1
+          description: Client device pixel ratio used to determine thumbnail size (default 1.0).
+          in: query
+          name: device_pixel_ratio
+          required: false
+          type: number
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The photos.
+          schema:
+            items:
+              $ref: '#/definitions/PhotoResult'
+            type: array
+        '400':
+          description: Missing or invalid parameters.
+      summary: Retrieve multiple photos
       tags:
         - photos
   '/photos/{photo_id}':
@@ -862,52 +885,6 @@ paths:
         '404':
           description: Photo not found.
       summary: Delete a photo
-      tags:
-        - photos
-  '/photos/{photo_id}/album':
-    get:
-      description: |
-        Every post with photos has a photo album associated with the post.   The photo album for a post can be retrieved by passing the photo_id of any photo that is attached to a post. This makes it easier for users edit the photos attached to their post when they are reposting.
-      operationId: get_photo_album
-      parameters:
-        - in: path
-          name: photo_id
-          required: true
-          type: string
-        - default: 1
-          description: Client device pixel ratio used to determine thumbnail size (default 1.0).
-          in: query
-          name: device_pixel_ratio
-          required: false
-          type: number
-        - description: 'If set to 1, a new upload_key will be returned to allow the user to alter the photos in the album.'
-          in: query
-          name: upload_key
-          required: false
-          type: integer
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: The album data.
-          schema:
-            properties:
-              photos:
-                items:
-                  $ref: '#/definitions/PhotoResult'
-                type: array
-              upload_key:
-                description: |
-                  An upload_key that can be used to alter the photos in the album. Will be null unless the upload_key parameter is set.
-                type: string
-            type: object
-        '400':
-          description: Invalid photo album.
-        '403':
-          description: The user doesn't have permission to retrieve the photo album.
-        '404':
-          description: Photo album not found.
-      summary: Retrieve a photo album
       tags:
         - photos
   '/photos/{photo_id}/rotate':
@@ -1137,9 +1114,9 @@ paths:
           name: longitude
           required: false
           type: number
-        - description: The upload_key used to upload any photos that should be attached to this post.
+        - description: A comma separated list of the IDs of the photos that should be attached to this post.
           in: formData
-          name: upload_key
+          name: photo_ids
           required: false
           type: string
         - description: |
@@ -1249,7 +1226,7 @@ paths:
           - content: A longer description of the item(s).
           - group_ids: An array of group IDs to submit the post to (if any).
           - fair_offer: If set to 1, the post will be posted with the Fair Offer Policy (only valid for offer posts - see https://trashnothing.com/fair_offer_policy ).
-          - upload_key: The key used to upload any photos that should be attached to this post.
+          - photo_ids: A comma separated list of the IDs of the photos that should be attached to this post.
           - latitude
           - longitude
 
@@ -1683,9 +1660,9 @@ paths:
           name: send_copy
           required: false
           type: integer
-        - description: The upload_key used to upload any photos that should be attached to this reply.
+        - description: A comma separated list of the IDs of the photos that should be attached to this reply.
           in: formData
-          name: upload_key
+          name: photo_ids
           required: false
           type: string
       produces:
@@ -3285,19 +3262,55 @@ definitions:
         description: The ID of the user that received the message (the recipient).
         type: string
     type: object
+  Photo:
+    example:
+      images:
+        - height: 120
+          url: 'https://trashnothing.com/img/2018-02-05/cfsbfm-39051735845_379baab73f.90x120.jpg'
+          width: 90
+        - height: 240
+          url: 'https://trashnothing.com/img/2018-02-05/cfsbfm-39051735845_379baab73f.180x240.jpg'
+          width: 180
+        - height: 360
+          url: 'https://trashnothing.com/img/2018-02-05/cfsbfm-39051735845_379baab73f.270x360.jpg'
+          width: 270
+        - height: 500
+          url: 'https://trashnothing.com/img/2018-02-05/cfsbfm-39051735845_379baab73f.375x500.jpg'
+          width: 375
+      photo_id: 695624-768616
+      thumbnail: 'https://trashnothing.com/img/2018-02-05/cfsbfm-39051735845_379baab73f.90x120.jpg'
+      url: 'https://trashnothing.com/img/2018-02-05/cfsbfm-39051735845_379baab73f.375x500.jpg'
+    properties:
+      images:
+        description: All the versions of this photo ordered from smallest to largest.  This list is guaranteed to include the photos specified by the above thumbnail and url properties.
+        items:
+          properties:
+            height:
+              type: integer
+            url:
+              type: string
+            width:
+              type: integer
+          type: object
+        type: array
+      photo_id:
+        type: string
+      thumbnail:
+        description: A URL to a thumbnail of this photo.  The size of the thumbnail depends on the device_pixel_ratio parameter and it is not guaranteed to be square.
+        type: string
+      url:
+        description: A URL to a large version of this photo (but not necessarily the largest size available).
+        type: string
+    type: object
   PhotoResult:
     description: The result of uploading or editing a photo.
     example:
-      album_url: 'https://trashnothing.com/pics/307731'
       photo_id: 987-423
       thumbnail:
         height: 120
         url: 'https://trashnothing.com/img/2018-02-02/307731-20180119_155358.90x120.jpg'
         width: 90
     properties:
-      album_url:
-        description: A URL to view all the photos uploaded using the upload_key that this photo was uploaded with.
-        type: string
       photo_id:
         type: string
       thumbnail:
@@ -3365,28 +3378,7 @@ definitions:
       photos:
         description: Details about the photos associated with this post (may be null if there are no photos).
         items:
-          properties:
-            images:
-              description: All the versions of this photo ordered from smallest to largest.  This list is guaranteed to include the photos specified by the above thumbnail and url properties.
-              items:
-                properties:
-                  height:
-                    type: integer
-                  url:
-                    type: string
-                  width:
-                    type: integer
-                type: object
-              type: array
-            photo_id:
-              type: string
-            thumbnail:
-              description: A URL to a thumbnail of this photo.  The size of the thumbnail depends on the device_pixel_ratio parameter and it is not guaranteed to be square.
-              type: string
-            url:
-              description: A URL to a large version of this photo (but not necessarily the largest size available).
-              type: string
-          type: object
+          $ref: '#/definitions/Photo'
         type: array
       post_id:
         type: string

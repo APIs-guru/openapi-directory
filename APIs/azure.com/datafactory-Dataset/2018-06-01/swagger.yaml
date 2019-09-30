@@ -277,6 +277,11 @@ definitions:
       - $ref: '#/definitions/DatasetLocation'
     description: The location of azure data lake store dataset.
     type: object
+  AzureFileStorageLocation:
+    allOf:
+      - $ref: '#/definitions/DatasetLocation'
+    description: The location of file server dataset.
+    type: object
   AzureMariaDBTableDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
@@ -304,6 +309,9 @@ definitions:
   AzureMySqlTableDatasetTypeProperties:
     description: Azure MySQL database dataset properties.
     properties:
+      table:
+        description: 'The name of Azure MySQL database table. Type: string (or Expression with resultType string).'
+        type: object
       tableName:
         description: 'The Azure MySQL database table name. Type: string (or Expression with resultType string).'
         type: object
@@ -543,6 +551,27 @@ definitions:
         type: object
     required:
       - collection
+  CosmosDbSqlApiCollectionDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Microsoft Azure CosmosDB (SQL API) Collection dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/CosmosDbSqlApiCollectionDatasetTypeProperties'
+        description: CosmosDB (SQL API) Collection dataset properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: CosmosDbSqlApiCollection
+  CosmosDbSqlApiCollectionDatasetTypeProperties:
+    description: CosmosDB (SQL API) Collection dataset properties.
+    properties:
+      collectionName:
+        description: 'CosmosDB (SQL API) collection name. Type: string (or Expression with resultType string).'
+        type: object
+    required:
+      - collectionName
   CouchbaseTableDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
@@ -1022,6 +1051,18 @@ definitions:
         x-ms-client-flatten: true
     type: object
     x-ms-discriminator-value: GoogleBigQueryObject
+  GoogleCloudStorageLocation:
+    allOf:
+      - $ref: '#/definitions/DatasetLocation'
+    description: The location of Google Cloud Storage dataset.
+    properties:
+      bucketName:
+        description: 'Specify the bucketName of Google Cloud Storage. Type: string (or Expression with resultType string)'
+        type: object
+      version:
+        description: 'Specify the version of Google Cloud Storage. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
   GreenplumDatasetTypeProperties:
     description: Greenplum Dataset Properties
     properties:

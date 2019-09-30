@@ -2183,6 +2183,16 @@ definitions:
           - DELTA
           - CUMULATIVE
         type: string
+      monitoredResourceTypes:
+        description: |-
+          Read-only. If present, then a time
+          series, which is identified partially by
+          a metric type and a MonitoredResourceDescriptor, that is associated
+          with this metric type can only be associated with one of the monitored
+          resource types listed here.
+        items:
+          type: string
+        type: array
       name:
         description: The resource name of the metric descriptor.
         type: string
@@ -2290,9 +2300,7 @@ definitions:
         format: google-duration
         type: string
       launchStage:
-        description: |-
-          Deprecated. Please use the MetricDescriptor.launch_stage instead.
-          The launch stage of the metric definition.
+        description: Deprecated. Must use the MetricDescriptor.launch_stage instead.
         enum:
           - LAUNCH_STAGE_UNSPECIFIED
           - EARLY_ACCESS

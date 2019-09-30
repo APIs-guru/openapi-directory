@@ -119,7 +119,7 @@ paths:
   '/v1alpha1/{name}':
     delete:
       description: Deletes the given `Note` from the system.
-      operationId: containeranalysis.projects.notes.delete
+      operationId: containeranalysis.providers.notes.delete
       parameters:
         - description: |-
             The name of the note in the form of
@@ -140,14 +140,14 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - providers
     get:
-      description: Gets a specific scan configuration for a project.
-      operationId: containeranalysis.projects.scanConfigs.get
+      description: Returns the requested `Note`.
+      operationId: containeranalysis.providers.notes.get
       parameters:
         - description: |-
-            The name of the ScanConfig in the form
-            projects/{project_id}/scanConfigs/{scan_config_id}
+            The name of the note in the form of
+            "providers/{provider_id}/notes/{NOTE_ID}"
           in: path
           name: name
           required: true
@@ -157,14 +157,14 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/ScanConfig'
+            $ref: '#/definitions/Note'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - providers
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -178,16 +178,16 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     patch:
-      description: Updates the scan configuration to a new value.
-      operationId: containeranalysis.projects.scanConfigs.patch
+      description: Updates an existing `Note`.
+      operationId: containeranalysis.providers.notes.patch
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/ScanConfig'
+            $ref: '#/definitions/Note'
         - description: |-
-            The scan config to update of the form
-            projects/{project_id}/scanConfigs/{scan_config_id}.
+            The name of the note.
+            Should be of the form "projects/{provider_id}/notes/{note_id}".
           in: path
           name: name
           required: true
@@ -201,26 +201,27 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/ScanConfig'
+            $ref: '#/definitions/Note'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - providers
   '/v1alpha1/{name}/notes':
     get:
-      description: Gets the `Note` attached to the given `Occurrence`.
-      operationId: containeranalysis.projects.occurrences.getNotes
+      description: Lists all `Notes` for a given project.
+      operationId: containeranalysis.providers.notes.list
       parameters:
         - description: The filter expression.
           in: query
           name: filter
           type: string
         - description: |-
-            The name of the occurrence in the form
-            "projects/{project_id}/occurrences/{OCCURRENCE_ID}"
+            The name field will contain the project Id for example:
+            "providers/{provider_id}
+            @Deprecated
           in: path
           name: name
           required: true
@@ -242,14 +243,14 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Note'
+            $ref: '#/definitions/ListNotesResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - providers
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -307,7 +308,7 @@ paths:
         Lists `Occurrences` referencing the specified `Note`. Use this method to
         get all occurrences referencing your `Note` across all your customer
         projects.
-      operationId: containeranalysis.projects.notes.occurrences.list
+      operationId: containeranalysis.providers.notes.occurrences.list
       parameters:
         - description: The filter expression.
           in: query
@@ -340,7 +341,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - providers
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -699,7 +700,7 @@ paths:
         error otherwise. The resource takes the following formats:
         `projects/{PROJECT_ID}/occurrences/{OCCURRENCE_ID}` for occurrences and
         projects/{PROJECT_ID}/notes/{NOTE_ID} for notes
-      operationId: containeranalysis.projects.notes.getIamPolicy
+      operationId: containeranalysis.providers.notes.getIamPolicy
       parameters:
         - in: body
           name: body
@@ -724,7 +725,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - providers
   '/v1alpha1/{resource}:setIamPolicy':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -752,7 +753,7 @@ paths:
         a `PERMISSION_DENIED` error otherwise. The resource takes the following
         formats: `projects/{projectid}/occurrences/{occurrenceid}` for occurrences
         and projects/{projectid}/notes/{noteid} for notes
-      operationId: containeranalysis.projects.notes.setIamPolicy
+      operationId: containeranalysis.providers.notes.setIamPolicy
       parameters:
         - in: body
           name: body
@@ -777,7 +778,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - providers
   '/v1alpha1/{resource}:testIamPermissions':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -801,7 +802,7 @@ paths:
         project, or a `PERMISSION_DENIED` error otherwise. The resource takes the
         following formats: `projects/{PROJECT_ID}/occurrences/{OCCURRENCE_ID}` for
         `Occurrences` and `projects/{PROJECT_ID}/notes/{NOTE_ID}` for `Notes`
-      operationId: containeranalysis.projects.notes.testIamPermissions
+      operationId: containeranalysis.providers.notes.testIamPermissions
       parameters:
         - in: body
           name: body
@@ -826,7 +827,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - providers
 definitions:
   Artifact:
     description: Artifact describes a build product.

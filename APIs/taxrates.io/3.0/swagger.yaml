@@ -6,7 +6,7 @@ basePath: /api
 info:
   contact:
     name: apiteam@taxrates.io
-  description: 'Taxrates.io API - the successfully streamlined tax rates monitoring process. Use ''Expand operation'' link on the right to see details. Start with authentication: get your token and generate authorization string. We recommend using <a href=''https://www.getpostman.com/'' target=_new>Postman</a> when discovering our API. Happy using!'
+  description: 'Taxrates.io API - the successfully streamlined tax rates monitoring process. We recommend using <a href=''https://www.getpostman.com/'' target=_new>Postman</a> when discovering our API. Happy using!'
   license:
     name: Private licence - only for using by authorized Members of taxrates.io
     url: 'http://taxrates.io/license/'
@@ -34,7 +34,68 @@ securityDefinitions:
 paths:
   /v1/tax/byaddress:
     post:
-      description: This endpoint returns tax rates for the country based on the address provided
+      description: |
+        This endpoint returns tax rates for the country based on the address provided <pre><code class="js">var taxrates_endpoint = 'tax/address';
+          var taxrates_params = '?domain=api.taxrates.io';
+          var taxrates_url = '/api/v1/';
+          var taxrates_body = '{
+            "street":"MyStreetName",
+            "street_number":"107",
+            "apartment_number":"d34",
+            "city":"Dublin",
+            "zip":"84534"
+            "state":"",
+            "country":"Ireland"
+          }';
+          if ( localStorage.getItem("Taxrates_API_Client_Secret") ){
+          jQuery.support.cors = true;
+          jQuery.ajax({
+              url: taxrates_url+taxrates_endpoint+taxrates_params,
+              type: 'post',
+              method: 'post',
+              dataType: "json",
+              data: taxrates_body,
+              beforeSend: function (request) {
+                      request.withCredentials = true;
+                      request.setRequestHeader("Authorization", "Apikey " + localStorage.getItem("Taxrates_API_Client_Secret"));
+              },
+              headers: {
+                "accept": "application/json"
+              },
+              contentType: 'application/json; charset=utf-8',
+              success: function (data) {
+                //Maintain errors inside success because the API may return 200 in general, but different code inside
+                  if(data.ErrorCode=='404' || data.ErrorCode=='500'){
+                    //Maintain errors here
+                    console.log(data.ErrorMessage);
+                    return false;
+                  }else{
+                    var rates = [];
+                    var i=0;
+                    jQuery.each(data.Rates, function(k, v) {
+                        if(v.hasOwnProperty("taxes")){
+                            jQuery.each(v.taxes, function(m, w) {
+                                rates[i] = [];
+                                //Only showing standard rate type
+                                if( w.Type == "standard" ){
+                                    rates[i][0] = w.Country;
+                                    rates[i][1] = w.Type;
+                                    rates[i][2] = w.data_value;
+                                    i++;
+                                }
+                            });
+                        }
+                    //Now you have all your rates inside rates variable.
+                    }).fail(function(xhr) {
+                            //Maintain your errors here
+                            return false;
+                    });
+                    return true;
+          }else{
+            //Not logged into taxrates.io
+            //Maintain your errors here
+            return false;
+          }</code></pre>
       parameters:
         - description: 'Domain name: api.taxrates.io'
           in: query
@@ -70,7 +131,59 @@ paths:
         - Tax service
   /v1/tax/countrycode:
     get:
-      description: This endpoint returns all available tax rates for selected country
+      description: |
+        This endpoint returns all available tax rates for selected country <pre><code class="js">var taxrates_endpoint = 'tax/countrycode';
+          var taxrates_params = {'domain':'api.taxrates.io', 'country_code':'IE'};
+          var taxrates_url = '/api/v1/';
+          if ( localStorage.getItem("Taxrates_API_Client_Secret") ){
+          jQuery.support.cors = true;
+          jQuery.ajax({
+              url: taxrates_url+taxrates_endpoint,
+              type: 'get',
+              method: 'get',
+              dataType: "json",
+              data: taxrates_params,
+              beforeSend: function (request) {
+                      request.withCredentials = true;
+                      request.setRequestHeader("Authorization", "Apikey " + localStorage.getItem("Taxrates_API_Client_Secret"));
+              },
+              headers: {
+                "accept": "application/json"
+              },
+              contentType: 'application/json; charset=utf-8',
+              success: function (data) {
+                //Maintain errors inside success because the API may return 200 in general, but different code inside
+                  if(data.ErrorCode=='404' || data.ErrorCode=='500'){
+                    //Maintain errors here
+                    console.log(data.ErrorMessage);
+                    return false;
+                  }else{
+                    var rates = [];
+                    var i=0;
+                    jQuery.each(data.Rates, function(k, v) {
+                        if(v.hasOwnProperty("taxes")){
+                            jQuery.each(v.taxes, function(m, w) {
+                                rates[i] = [];
+                                //Only showing standard rate type
+                                if( w.Type == "standard" ){
+                                    rates[i][0] = w.Country;
+                                    rates[i][1] = w.Type;
+                                    rates[i][2] = w.data_value;
+                                    i++;
+                                }
+                            });
+                        }
+                    //Now you have all your rates inside rates variable.
+                    }).fail(function(xhr) {
+                            //Maintain your errors here
+                            return false;
+                    });
+                    return true;
+          }else{
+            //Not logged into taxrates.io
+            //Maintain your errors here
+            return false;
+          }</code></pre>
       parameters:
         - description: 'Domain name: api.taxrates.io'
           in: query
@@ -110,7 +223,59 @@ paths:
         - Tax service
   /v1/tax/ip:
     get:
-      description: This endpoint will return tax rates for country discovered based on Customer's IP address
+      description: |
+        This endpoint will return tax rates for country discovered based on Customer's IP address <pre><code class="js">var taxrates_endpoint = 'tax/ip';
+          var taxrates_params = {'domain':'api.taxrates.io', 'ip':'208.80.152.201'};
+          var taxrates_url = '/api/v1/';
+          if ( localStorage.getItem("Taxrates_API_Client_Secret") ){
+          jQuery.support.cors = true;
+          jQuery.ajax({
+              url: taxrates_url+taxrates_endpoint,
+              type: 'get',
+              method: 'get',
+              dataType: "json",
+              data: taxrates_params,
+              beforeSend: function (request) {
+                      request.withCredentials = true;
+                      request.setRequestHeader("Authorization", "Apikey " + localStorage.getItem("Taxrates_API_Client_Secret"));
+              },
+              headers: {
+                "accept": "application/json"
+              },
+              contentType: 'application/json; charset=utf-8',
+              success: function (data) {
+                //Maintain errors inside success because the API may return 200 in general, but different code inside
+                  if(data.ErrorCode=='404' || data.ErrorCode=='500'){
+                    //Maintain errors here
+                    console.log(data.ErrorMessage);
+                    return false;
+                  }else{
+                    var rates = [];
+                    var i=0;
+                    jQuery.each(data.Rates, function(k, v) {
+                        if(v.hasOwnProperty("taxes")){
+                            jQuery.each(v.taxes, function(m, w) {
+                                rates[i] = [];
+                                //Only showing standard rate type
+                                if( w.Type == "standard" ){
+                                    rates[i][0] = w.Country;
+                                    rates[i][1] = w.Type;
+                                    rates[i][2] = w.data_value;
+                                    i++;
+                                }
+                            });
+                        }
+                    //Now you have all your rates inside rates variable.
+                    }).fail(function(xhr) {
+                            //Maintain your errors here
+                            return false;
+                    });
+                    return true;
+          }else{
+            //Not logged into taxrates.io
+            //Maintain your errors here
+            return false;
+          }</code></pre>
       parameters:
         - description: 'Domain name: api.taxrates.io'
           in: query
@@ -152,7 +317,60 @@ paths:
         - Tax service
   /v3/tax/rates:
     get:
-      description: This method returns all tax rates configured on Member's account using cursor. Use X-Cursor-Next header to recursively read all rates. Max limit is 500 records per request.
+      description: |
+        This method returns all tax rates configured on Member's account using cursor. Use X-Cursor-Next header to recursively read all rates. Max limit is 500 records per request. <pre><code class="js">
+          var taxrates_endpoint = 'tax/rates';
+          var taxrates_params = {'domain':'api.taxrates.io'};
+          var taxrates_url = '/api/v3/';
+          if ( localStorage.getItem("Taxrates_API_Client_Secret") ){
+          jQuery.support.cors = true;
+          jQuery.ajax({
+              url: taxrates_url+taxrates_endpoint,
+              type: 'get',
+              method: 'get',
+              dataType: "json",
+              data: taxrates_params,
+              beforeSend: function (request) {
+                      request.withCredentials = true;
+                      request.setRequestHeader("Authorization", "Apikey " + localStorage.getItem("Taxrates_API_Client_Secret"));
+              },
+              headers: {
+                "accept": "application/json"
+              },
+              contentType: 'application/json; charset=utf-8',
+              success: function (data) {
+                //Maintain errors inside success because the API may return 200 in general, but different code inside
+                  if(data.ErrorCode=='404' || data.ErrorCode=='500'){
+                    //Maintain errors here
+                    console.log(data.ErrorMessage);
+                    return false;
+                  }else{
+                    var rates = [];
+                    var i=0;
+                    var taxrates_range = '';
+                    jQuery.each(data, function(k, v) {
+                        if(v.hasOwnProperty("rates")){
+                            jQuery.each(v.rates, function(m, w) {
+                                rates[i] = [];
+                                //Only showing standard rate type
+                                if( w.Type == "standard" ){
+                                    rates[i][0] = w.Type;
+                                    rates[i][1] = w.data_value;
+                                    i++;
+                                }
+                            });
+                        }
+                    //Now you have all your rates inside rates variable.
+                    }).fail(function(xhr) {
+                            //Maintain your errors here
+                            return false;
+                    });
+                    return true;
+          }else{
+            //Not logged into taxrates.io
+            //Maintain your errors here
+            return false;
+          }</code></pre>
       parameters:
         - description: 'Domain name: api.taxrates.io'
           in: query

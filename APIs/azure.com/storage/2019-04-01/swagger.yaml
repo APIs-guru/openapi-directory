@@ -4288,6 +4288,7 @@ paths:
           responses:
             '200':
               body:
+                nextLink: 'https://sto1590endpoint/subscriptions/{subscription-id}/resourceGroups/res9290/providers/Microsoft.Storage/storageAccounts?api-version=2019-04-01&$maxpagesize=2&$skipToken=/sto1590'
                 value:
                   - id: '/subscriptions/{subscription-id}/resourceGroups/res2627/providers/Microsoft.Storage/storageAccounts/sto1125'
                     kind: Storage
@@ -4425,7 +4426,7 @@ paths:
                       key2: value2
                     type: Microsoft.Storage/storageAccounts
       x-ms-pageable:
-        nextLinkName: null
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts':
     get:
       description: Lists all the storage accounts available under the given resource group. Note that storage keys are not returned; use the ListKeys operation for this.
@@ -6182,6 +6183,10 @@ definitions:
   StorageAccountListResult:
     description: The response from the List Storage Accounts operation.
     properties:
+      nextLink:
+        description: Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size.
+        readOnly: true
+        type: string
       value:
         description: Gets the list of storage accounts and their properties.
         items:
@@ -6231,6 +6236,15 @@ definitions:
         description: Account HierarchicalNamespace enabled if sets to true.
         type: boolean
         x-ms-client-name: IsHnsEnabled
+      largeFileSharesState:
+        description: Allow large file shares if sets to Enabled. It cannot be disabled once it is enabled.
+        enum:
+          - Disabled
+          - Enabled
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: LargeFileSharesState
       lastGeoFailoverTime:
         description: Gets the timestamp of the most recent instance of a failover to the secondary location. Only the most recent timestamp is retained. This element is not returned if there has never been a failover instance. Only available if the accountType is Standard_GRS or Standard_RAGRS.
         format: date-time
@@ -6317,6 +6331,15 @@ definitions:
         description: Account HierarchicalNamespace enabled if sets to true.
         type: boolean
         x-ms-client-name: IsHnsEnabled
+      largeFileSharesState:
+        description: Allow large file shares if sets to Enabled. It cannot be disabled once it is enabled.
+        enum:
+          - Disabled
+          - Enabled
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: LargeFileSharesState
       networkAcls:
         $ref: '#/definitions/NetworkRuleSet'
         description: Network rule set
@@ -6346,6 +6369,15 @@ definitions:
       encryption:
         $ref: '#/definitions/Encryption'
         description: Provides the encryption settings on the account. The default setting is unencrypted.
+      largeFileSharesState:
+        description: Allow large file shares if sets to Enabled. It cannot be disabled once it is enabled.
+        enum:
+          - Disabled
+          - Enabled
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: LargeFileSharesState
       networkAcls:
         $ref: '#/definitions/NetworkRuleSet'
         description: Network rule set

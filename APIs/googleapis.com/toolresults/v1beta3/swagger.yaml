@@ -2273,7 +2273,7 @@ definitions:
     properties:
       sampleTime:
         $ref: '#/definitions/Timestamp'
-        description: Timestamp of collection
+        description: Timestamp of collection.
       value:
         description: Value observed
         format: double
@@ -2445,7 +2445,7 @@ definitions:
 
       A Step can be updated until its state is set to COMPLETE at which points it becomes immutable.
 
-      Next tag: 23
+      Next tag: 27
     properties:
       completionTime:
         $ref: '#/definitions/Timestamp'

@@ -185,6 +185,10 @@ paths:
                           usernames:
                             - recommendationAction: Recommended
                               username: Everyone
+                      protectionMode:
+                        exe: Audit
+                        msi: Audit
+                        script: None
                       recommendationStatus: Recommended
                       sourceSystem: Azure_AppLocker
                       vmRecommendations:
@@ -222,6 +226,10 @@ paths:
                           usernames:
                             - recommendationAction: Recommended
                               username: Everyone
+                      protectionMode:
+                        exe: Audit
+                        msi: None
+                        script: None
                       recommendationStatus: Recommended
                       sourceSystem: Azure_AppLocker
                       vmRecommendations:
@@ -317,6 +325,10 @@ paths:
                           usernames:
                             - recommendationAction: Recommended
                               username: NT AUTHORITY\SYSTEM
+                      protectionMode:
+                        exe: Audit
+                        msi: None
+                        script: None
                       recommendationStatus: Recommended
                       sourceSystem: Azure_AppLocker
                       vmRecommendations:
@@ -332,85 +344,6 @@ paths:
                         - configurationStatus: Configured
                           recommendationAction: Recommended
                           resourceId: /subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourcegroups/v-arrikl-scheduledapps/providers/microsoft.compute/virtualmachines/v-arrikl-14061
-                    type: Microsoft.Security/applicationWhitelistings
-                  - id: /subscriptions/3eeab341-f466-499c-a8be-85427e154baf/providers/Microsoft.Security/locations/centralus/applicationWhitelistings/GROUP2-RE
-                    location: centralus
-                    name: GROUP2-RE
-                    properties:
-                      configurationStatus: Configured
-                      enforcementMode: Audit
-                      issues: []
-                      pathRecommendations:
-                        - action: Recommended
-                          common: true
-                          configurationStatus: Configured
-                          fileType: Exe
-                          path: '[Exe] O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US\*\*\0.0.0.0'
-                          publisherInfo:
-                            binaryName: '*'
-                            productName: '*'
-                            publisherName: 'O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US'
-                            version: 0.0.0.0
-                          type: PublisherSignature
-                          userSids:
-                            - S-1-1-0
-                          usernames:
-                            - recommendationAction: Recommended
-                              username: Everyone
-                        - action: Add
-                          common: true
-                          configurationStatus: Configured
-                          fileType: Exe
-                          path: 'C:\bla.exe'
-                          type: File
-                          userSids:
-                            - S-1-1-0
-                          usernames:
-                            - recommendationAction: Recommended
-                              username: Everyone
-                      recommendationStatus: Recommended
-                      sourceSystem: Azure_AppLocker
-                      vmRecommendations:
-                        - configurationStatus: Configured
-                          recommendationAction: Recommended
-                          resourceId: /subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourcegroups/matanjittest/providers/microsoft.compute/virtualmachines/matansourcejit
-                        - configurationStatus: Configured
-                          recommendationAction: Recommended
-                          resourceId: /subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourcegroups/erelh-dsc/providers/microsoft.compute/virtualmachines/erelh-14010
-                        - configurationStatus: Configured
-                          recommendationAction: Recommended
-                          resourceId: /subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourcegroups/erelh-stable/providers/microsoft.compute/virtualmachines/erelh-16091
-                    type: Microsoft.Security/applicationWhitelistings
-                  - id: /subscriptions/3eeab341-f466-499c-a8be-85427e154baf/providers/Microsoft.Security/locations/westeurope/applicationWhitelistings/BENJITGROUP13
-                    location: westeurope
-                    name: BENJITGROUP13
-                    properties:
-                      configurationStatus: Configured
-                      enforcementMode: Audit
-                      issues: []
-                      pathRecommendations:
-                        - action: Recommended
-                          common: true
-                          configurationStatus: Configured
-                          fileType: Exe
-                          path: '[Exe] O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US\*\*\0.0.0.0'
-                          publisherInfo:
-                            binaryName: '*'
-                            productName: '*'
-                            publisherName: 'O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US'
-                            version: 0.0.0.0
-                          type: PublisherSignature
-                          userSids:
-                            - S-1-1-0
-                          usernames:
-                            - recommendationAction: Recommended
-                              username: Everyone
-                      recommendationStatus: Recommended
-                      sourceSystem: Azure_AppLocker
-                      vmRecommendations:
-                        - configurationStatus: Configured
-                          recommendationAction: Recommended
-                          resourceId: /subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourcegroups/bengr-jit-test/providers/microsoft.compute/virtualmachines/bengr-jit-test3
                     type: Microsoft.Security/applicationWhitelistings
                   - id: /subscriptions/3eeab341-f466-499c-a8be-85427e154baf/providers/Microsoft.Security/locations/westeurope/applicationWhitelistings/GROUP1
                     location: westeurope
@@ -844,43 +777,14 @@ paths:
                           usernames:
                             - recommendationAction: Recommended
                               username: omsagent
+                      protectionMode:
+                        executable: Audit
                       recommendationStatus: Recommended
                       sourceSystem: Azure_AuditD
                       vmRecommendations:
                         - configurationStatus: Configured
                           recommendationAction: Recommended
                           resourceId: /subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourcegroups/nic-no-pip/providers/microsoft.compute/virtualmachines/nic-no-pip-vm
-                    type: Microsoft.Security/applicationWhitelistings
-                  - id: /subscriptions/3eeab341-f466-499c-a8be-85427e154baf/providers/Microsoft.Security/locations/westeurope/applicationWhitelistings/GROUP2
-                    location: westeurope
-                    name: GROUP2
-                    properties:
-                      configurationStatus: Configured
-                      enforcementMode: Audit
-                      issues: []
-                      pathRecommendations:
-                        - action: Recommended
-                          common: true
-                          configurationStatus: Configured
-                          fileType: Exe
-                          path: '[Exe] O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US\*\*\0.0.0.0'
-                          publisherInfo:
-                            binaryName: '*'
-                            productName: '*'
-                            publisherName: 'O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US'
-                            version: 0.0.0.0
-                          type: PublisherSignature
-                          userSids:
-                            - S-1-1-0
-                          usernames:
-                            - recommendationAction: Recommended
-                              username: Everyone
-                      recommendationStatus: Recommended
-                      sourceSystem: Azure_AppLocker
-                      vmRecommendations:
-                        - configurationStatus: Configured
-                          recommendationAction: Recommended
-                          resourceId: /subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourcegroups/bengr-jit-test/providers/microsoft.compute/virtualmachines/bengr-jit-test1
                     type: Microsoft.Security/applicationWhitelistings
   '/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/applicationWhitelistings/{groupName}':
     get:
@@ -1009,6 +913,10 @@ paths:
                       usernames:
                         - recommendationAction: Recommended
                           username: Everyone
+                  protectionMode:
+                    exe: Audit
+                    msi: Audit
+                    script: None
                   recommendationStatus: Recommended
                   sourceSystem: Azure_AppLocker
                   vmRecommendations:
@@ -1132,6 +1040,10 @@ paths:
                     common: true
                     path: 'C:\directory\file.exe'
                     type: File
+                protectionMode:
+                  exe: Audit
+                  msi: None
+                  script: None
                 vmRecommendations:
                   - configurationStatus: Configured
                     recommendationAction: Recommended
@@ -1212,6 +1124,10 @@ paths:
                       usernames:
                         - recommendationAction: Recommended
                           username: Everyone
+                  protectionMode:
+                    exe: Audit
+                    msi: None
+                    script: None
                   recommendationStatus: Recommended
                   sourceSystem: Azure_AppLocker
                   vmRecommendations:
@@ -1264,6 +1180,8 @@ definitions:
         $ref: '#/definitions/AppWhitelistingIssuesSummaries'
       pathRecommendations:
         $ref: '#/definitions/PathRecommendations'
+      protectionMode:
+        $ref: '#/definitions/ProtectionMode'
       recommendationStatus:
         $ref: '#/definitions/RecommendationStatus'
       sourceSystem:
@@ -1307,8 +1225,12 @@ definitions:
     properties:
       enforcementMode:
         $ref: '#/definitions/EnforcementMode'
+        description: The enforcement mode of the group. Can also be defined per collection type by using ProtectionMode
       pathRecommendations:
         $ref: '#/definitions/PathRecommendations'
+      protectionMode:
+        $ref: '#/definitions/ProtectionMode'
+        description: The protection mode of the group per collection type. Can also be defined for all collection types by using EnforcementMode
       vmRecommendations:
         $ref: '#/definitions/VmRecommendations'
     type: object
@@ -1326,10 +1248,11 @@ definitions:
       - NoStatus
     type: string
   EnforcementMode:
-    description: The application control policy enforcement mode of the VM/server group
+    description: The application control policy enforcement/protection mode of the VM/server group
     enum:
       - Audit
       - Enforce
+      - None
     type: string
   FileType:
     description: The type of the file (for Linux files - Executable is used)
@@ -1380,6 +1303,18 @@ definitions:
     items:
       $ref: '#/definitions/PathRecommendation'
     type: array
+  ProtectionMode:
+    description: 'The protection mode of the collection/file types. Exe/Msi/Script are used for Windows, Executable is used for Linux.'
+    properties:
+      exe:
+        $ref: '#/definitions/EnforcementMode'
+      executable:
+        $ref: '#/definitions/EnforcementMode'
+      msi:
+        $ref: '#/definitions/EnforcementMode'
+      script:
+        $ref: '#/definitions/EnforcementMode'
+    type: object
   PublisherInfo:
     description: Represents the publisher information of a process/rule
     properties:

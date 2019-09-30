@@ -313,7 +313,7 @@ paths:
         AnnotateFileRequest.pages) frames (gif) or pages (pdf or tiff) from each
         file provided and perform detection and annotation for each image
         extracted.
-      operationId: vision.projects.files.annotate
+      operationId: vision.projects.locations.files.annotate
       parameters:
         - in: body
           name: body
@@ -374,7 +374,7 @@ paths:
         `google.longrunning.Operations` interface.
         `Operation.metadata` contains `OperationMetadata` (metadata).
         `Operation.response` contains `AsyncBatchAnnotateFilesResponse` (results).
-      operationId: vision.projects.files.asyncBatchAnnotate
+      operationId: vision.projects.locations.files.asyncBatchAnnotate
       parameters:
         - in: body
           name: body
@@ -429,7 +429,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Run image detection and annotation for a batch of images.
-      operationId: vision.projects.images.annotate
+      operationId: vision.projects.locations.images.annotate
       parameters:
         - in: body
           name: body
@@ -493,7 +493,7 @@ paths:
 
         This service will write image annotation outputs to json files in customer
         GCS bucket, each json file containing BatchAnnotateImagesResponse proto.
-      operationId: vision.projects.images.asyncBatchAnnotate
+      operationId: vision.projects.locations.images.asyncBatchAnnotate
       parameters:
         - in: body
           name: body

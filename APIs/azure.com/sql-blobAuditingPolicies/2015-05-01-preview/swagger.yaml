@@ -135,6 +135,7 @@ paths:
                 name: default
                 properties:
                   auditActionsAndGroups: []
+                  isAzureMonitorTargetEnabled: false
                   isStorageSecondaryKeyInUse: false
                   retentionDays: 0
                   state: Disabled
@@ -283,6 +284,7 @@ paths:
                     - SUCCESSFUL_DATABASE_AUTHENTICATION_GROUP
                     - FAILED_DATABASE_AUTHENTICATION_GROUP
                     - BATCH_COMPLETED_GROUP
+                  isAzureMonitorTargetEnabled: false
                   isStorageSecondaryKeyInUse: false
                   retentionDays: 0
                   state: Enabled
@@ -300,6 +302,7 @@ paths:
                     - SUCCESSFUL_DATABASE_AUTHENTICATION_GROUP
                     - FAILED_DATABASE_AUTHENTICATION_GROUP
                     - BATCH_COMPLETED_GROUP
+                  isAzureMonitorTargetEnabled: false
                   isStorageSecondaryKeyInUse: false
                   retentionDays: 0
                   state: Enabled

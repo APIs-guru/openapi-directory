@@ -1,48 +1,54 @@
 swagger: '2.0'
 schemes:
-  - https
+  - http
 host: www.refugerestrooms.org
 basePath: /api
 info:
   description: 'REFUGE is a web application that seeks to provide safe restroom access for transgender, intersex, and gender nonconforming individuals.'
-  title: Refuge Restrooms
-  version: v1
+  title: API title
+  version: 0.0.1
   x-apisguru-categories:
     - open_data
   x-logo:
     backgroundColor: '#4C4C4C'
     url: 'https://pbs.twimg.com/profile_images/432717338270380032/BZWevLrA.jpeg'
   x-origin:
-    - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.11
-      format: swagger
+    - format: swagger
       url: 'http://www.refugerestrooms.org/api/swagger_doc.json'
-      version: '1.2'
+      version: '2.0'
+  x-preferred: false
   x-providerName: refugerestrooms.org
 produces:
   - application/xml
   - application/json
-  - application/vnd.api+json
+  - application/octet-stream
   - text/plain
 tags:
-  - name: restrooms
+  - description: Operations about restrooms
+    name: restrooms
 paths:
-  /v1/restrooms.json:
+  /v1/restrooms:
     get:
-      operationId: GET--version-restrooms---format-
+      description: Get all restroom records ordered by date descending.
+      operationId: getV1Restrooms
       parameters:
-        - description: Page offset to fetch.
+        - default: 1
+          description: Page offset to fetch.
+          format: int32
           in: query
           name: page
           required: false
           type: integer
-        - description: Number of results to return per page.
+        - default: 10
+          description: Number of results to return per page.
+          format: int32
           in: query
           name: per_page
           required: false
           type: integer
-        - description: Pad a number of results.
+        - default: 0
+          description: Pad a number of results.
+          format: int32
           in: query
           name: offset
           required: false
@@ -57,27 +63,35 @@ paths:
           name: unisex
           required: false
           type: boolean
+      produces:
+        - application/json
       responses:
         '200':
-          description: No response was specified
-      summary: Get all restroom records ordered by date descending.
+          description: Get all restroom records ordered by date descending.
       tags:
         - restrooms
-  /v1/restrooms/by_date.json:
+  /v1/restrooms/by_date:
     get:
-      operationId: GET--version-restrooms-by_date---format-
+      description: Search for restroom records updated or created on or after a given date
+      operationId: getV1RestroomsByDate
       parameters:
-        - description: Page offset to fetch.
+        - default: 1
+          description: Page offset to fetch.
+          format: int32
           in: query
           name: page
           required: false
           type: integer
-        - description: Number of results to return per page.
+        - default: 10
+          description: Number of results to return per page.
+          format: int32
           in: query
           name: per_page
           required: false
           type: integer
-        - description: Pad a number of results.
+        - default: 0
+          description: Pad a number of results.
+          format: int32
           in: query
           name: offset
           required: false
@@ -98,41 +112,52 @@ paths:
           required: false
           type: boolean
         - description: Day
+          format: int32
           in: query
           name: day
           required: true
           type: integer
         - description: Month
+          format: int32
           in: query
           name: month
           required: true
           type: integer
         - description: Year
+          format: int32
           in: query
           name: year
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
         '200':
-          description: No response was specified
-      summary: Search for restroom records updated or created on or after a given date
+          description: Search for restroom records updated or created on or after a given date
       tags:
         - restrooms
-  /v1/restrooms/by_location.json:
+  /v1/restrooms/by_location:
     get:
-      operationId: GET--version-restrooms-by_location---format-
+      description: Search by location.
+      operationId: getV1RestroomsByLocation
       parameters:
-        - description: Page offset to fetch.
+        - default: 1
+          description: Page offset to fetch.
+          format: int32
           in: query
           name: page
           required: false
           type: integer
-        - description: Number of results to return per page.
+        - default: 10
+          description: Number of results to return per page.
+          format: int32
           in: query
           name: per_page
           required: false
           type: integer
-        - description: Pad a number of results.
+        - default: 0
+          description: Pad a number of results.
+          format: int32
           in: query
           name: offset
           required: false
@@ -159,27 +184,35 @@ paths:
           name: lng
           required: true
           type: number
+      produces:
+        - application/json
       responses:
         '200':
-          description: No response was specified
-      summary: Search by location.
+          description: Search by location.
       tags:
         - restrooms
-  /v1/restrooms/search.json:
+  /v1/restrooms/search:
     get:
-      operationId: GET--version-restrooms-search---format-
+      description: Perform full-text search of restroom records.
+      operationId: getV1RestroomsSearch
       parameters:
-        - description: Page offset to fetch.
+        - default: 1
+          description: Page offset to fetch.
+          format: int32
           in: query
           name: page
           required: false
           type: integer
-        - description: Number of results to return per page.
+        - default: 10
+          description: Number of results to return per page.
+          format: int32
           in: query
           name: per_page
           required: false
           type: integer
-        - description: Pad a number of results.
+        - default: 0
+          description: Pad a number of results.
+          format: int32
           in: query
           name: offset
           required: false
@@ -199,9 +232,10 @@ paths:
           name: query
           required: true
           type: string
+      produces:
+        - application/json
       responses:
         '200':
-          description: No response was specified
-      summary: Perform full-text search of restroom records.
+          description: Perform full-text search of restroom records.
       tags:
         - restrooms

@@ -138,8 +138,8 @@ paths:
       tags:
         - projects
     get:
-      description: Gets the details of a node.
-      operationId: tpu.projects.locations.nodes.get
+      description: Gets TensorFlow Version.
+      operationId: tpu.projects.locations.tensorflowVersions.get
       parameters:
         - description: The resource name.
           in: path
@@ -151,7 +151,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Node'
+            $ref: '#/definitions/TensorFlowVersion'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'

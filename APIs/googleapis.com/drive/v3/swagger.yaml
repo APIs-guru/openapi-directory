@@ -2969,7 +2969,7 @@ definitions:
           This is automatically updated when the name field changes, however it is not cleared if the new name does not contain a valid extension.
         type: string
       hasAugmentedPermissions:
-        description: Whether any users are granted file access directly on this file. This field is only populated for shared drive files.
+        description: Whether there are permissions directly on this file. This field is only populated for items in shared drives.
         type: boolean
       hasThumbnail:
         description: 'Whether this file has a thumbnail. This does not indicate whether the requesting app has access to the thumbnail. To check access, look for the presence of the thumbnailLink field.'

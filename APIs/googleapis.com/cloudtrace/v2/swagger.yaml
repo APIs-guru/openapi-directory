@@ -272,7 +272,7 @@ definitions:
     properties:
       spans:
         description: |-
-          A list of new spans. The span names must not match existing
+          Required. A list of new spans. The span names must not match existing
           spans, or the results are undefined.
         items:
           $ref: '#/definitions/Span'
@@ -394,7 +394,7 @@ definitions:
           span.
       childSpanCount:
         description: |-
-          An optional number of child spans that were generated while this span
+          Optional. The number of child spans that were generated while this span
           was active. If set, allows implementation to detect missing child spans.
         format: int32
         type: integer
@@ -435,7 +435,7 @@ definitions:
         type: string
       sameProcessAsParentSpan:
         description: |-
-          (Optional) Set this parameter to indicate whether this span is in
+          Optional. Set this parameter to indicate whether this span is in
           the same process as its parent. If you do not set this parameter,
           Stackdriver Trace is unable to take advantage of this helpful
           information.
@@ -468,7 +468,7 @@ definitions:
         type: string
       status:
         $ref: '#/definitions/Status'
-        description: An optional final status for this span.
+        description: Optional. The final status for this span.
       timeEvents:
         $ref: '#/definitions/TimeEvents'
         description: |-

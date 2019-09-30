@@ -1435,7 +1435,7 @@ paths:
             type: string
           name: status
           type: array
-        - description: ID of the user whose blogs are to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.
+        - description: ID of the user whose blogs are to be fetched. Either the word 'self' or the user's profile identifier.
           in: path
           name: userId
           required: true
@@ -1486,7 +1486,7 @@ paths:
           in: query
           name: maxPosts
           type: integer
-        - description: ID of the user whose blogs are to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.
+        - description: ID of the user whose blogs are to be fetched. Either the word 'self' or the user's profile identifier.
           in: path
           name: userId
           required: true
@@ -1568,7 +1568,7 @@ paths:
             type: string
           name: status
           type: array
-        - description: ID of the user for the per-user information to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.
+        - description: ID of the user for the per-user information to be fetched. Either the word 'self' or the user's profile identifier.
           in: path
           name: userId
           required: true
@@ -1624,7 +1624,7 @@ paths:
           name: postId
           required: true
           type: string
-        - description: ID of the user for the per-user information to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.
+        - description: ID of the user for the per-user information to be fetched. Either the word 'self' or the user's profile identifier.
           in: path
           name: userId
           required: true

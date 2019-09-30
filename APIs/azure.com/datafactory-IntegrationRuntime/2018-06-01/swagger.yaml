@@ -159,6 +159,9 @@ definitions:
       type: object
     description: The compute resource properties for managed integration runtime.
     properties:
+      dataFlowProperties:
+        $ref: '#/definitions/IntegrationRuntimeDataFlowProperties'
+        description: Data flow properties for managed integration runtime.
       location:
         description: 'The location for managed integration runtime. The supported regions could be found on https://docs.microsoft.com/en-us/azure/data-factory/data-factory-data-movement-activities'
         type: string
@@ -233,6 +236,29 @@ definitions:
           - value
         type: object
         x-ms-discriminator-value: SecureString
+    type: object
+  IntegrationRuntimeDataFlowProperties:
+    additionalProperties:
+      type: object
+    description: Data flow properties for managed integration runtime.
+    properties:
+      computeType:
+        description: Compute type of the cluster which will execute data flow job.
+        enum:
+          - General
+          - MemoryOptimized
+          - ComputeOptimized
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: DataFlowComputeType
+      coreCount:
+        description: 'Core count of the cluster which will execute data flow job. Supported values are: 8, 16, 32, 48, 80, 144 and 272.'
+        type: integer
+      timeToLive:
+        description: Time to live (in minutes) setting of the cluster which will execute data flow job.
+        minimum: 0
+        type: integer
     type: object
   IntegrationRuntimeDataProxyProperties:
     description: Data proxy properties for a managed dedicated integration runtime.

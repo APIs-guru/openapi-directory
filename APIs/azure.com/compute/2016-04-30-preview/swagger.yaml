@@ -774,6 +774,21 @@ paths:
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
           responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage'
+                location: westus
+                name: myImage
+                properties:
+                  provisioningState: Creating
+                  storageProfile:
+                    dataDisks: []
+                    osDisk:
+                      blobUri: 'https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd'
+                      caching: ReadWrite
+                      osState: Generalized
+                      osType: Linux
+                type: Microsoft.Compute/images
             '201':
               body:
                 id: '/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage'
@@ -805,6 +820,22 @@ paths:
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
           responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage'
+                location: westus
+                name: myImage
+                properties:
+                  provisioningState: Creating
+                  storageProfile:
+                    dataDisks: []
+                    osDisk:
+                      caching: ReadWrite
+                      managedDisk:
+                        id: 'subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk'
+                      osState: Generalized
+                      osType: Linux
+                type: Microsoft.Compute/images
             '201':
               body:
                 id: '/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage'
@@ -837,6 +868,22 @@ paths:
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
           responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage'
+                location: westus
+                name: myImage
+                properties:
+                  provisioningState: Creating
+                  storageProfile:
+                    dataDisks: []
+                    osDisk:
+                      caching: ReadWrite
+                      osState: Generalized
+                      osType: Linux
+                      snapshot:
+                        id: 'subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot'
+                type: Microsoft.Compute/images
             '201':
               body:
                 id: '/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage'
@@ -865,6 +912,24 @@ paths:
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
           responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage'
+                location: westus
+                name: myImage
+                properties:
+                  provisioningState: Creating
+                  sourceVirtualMachine:
+                    id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM'
+                  storageProfile:
+                    dataDisks: []
+                    osDisk:
+                      caching: ReadWrite
+                      managedDisk:
+                        id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myVM_OsDisk_1_6dc293b7d811433196903acf92665022'
+                      osState: Generalized
+                      osType: Linux
+                type: Microsoft.Compute/images
             '201':
               body:
                 id: '/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage'
@@ -901,6 +966,23 @@ paths:
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
           responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage'
+                location: westus
+                name: myImage
+                properties:
+                  provisioningState: Creating
+                  storageProfile:
+                    dataDisks:
+                      - blobUri: 'https://mystorageaccount.blob.core.windows.net/dataimages/dataimage.vhd'
+                        lun: 1
+                    osDisk:
+                      blobUri: 'https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd'
+                      caching: ReadWrite
+                      osState: Generalized
+                      osType: Linux
+                type: Microsoft.Compute/images
             '201':
               body:
                 id: '/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage'
@@ -938,6 +1020,25 @@ paths:
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
           responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage'
+                location: westus
+                name: myImage
+                properties:
+                  provisioningState: Creating
+                  storageProfile:
+                    dataDisks:
+                      - lun: 1
+                        managedDisk:
+                          id: 'subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk2'
+                    osDisk:
+                      caching: ReadWrite
+                      managedDisk:
+                        id: 'subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk'
+                      osState: Generalized
+                      osType: Linux
+                type: Microsoft.Compute/images
             '201':
               body:
                 id: '/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage'
@@ -977,6 +1078,25 @@ paths:
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
           responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage'
+                location: westus
+                name: myImage
+                properties:
+                  provisioningState: Creating
+                  storageProfile:
+                    dataDisks:
+                      - lun: 1
+                        snapshot:
+                          id: 'subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot2'
+                    osDisk:
+                      caching: ReadWrite
+                      osState: Generalized
+                      osType: Linux
+                      snapshot:
+                        id: 'subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot'
+                type: Microsoft.Compute/images
             '201':
               body:
                 id: '/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage'
@@ -2195,7 +2315,7 @@ paths:
         final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/redeploy':
     post:
-      description: The operation to redeploy a virtual machine.
+      description: 'Shuts down the virtual machine, moves it to a new node, and powers it back on.'
       operationId: VirtualMachines_Redeploy
       parameters:
         - description: The name of the resource group.

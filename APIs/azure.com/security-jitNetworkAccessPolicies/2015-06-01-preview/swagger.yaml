@@ -125,7 +125,8 @@ paths:
                     properties:
                       provisioningState: Succeeded
                       requests:
-                        - requestor: barbara@contoso.com
+                        - justification: testing a new version of the product
+                          requestor: barbara@contoso.com
                           startTimeUtc: '2018-05-17T08:06:45.5691611Z'
                           virtualMachines:
                             - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg1/providers/Microsoft.Compute/virtualMachines/vm1
@@ -215,7 +216,8 @@ paths:
                     properties:
                       provisioningState: Succeeded
                       requests:
-                        - requestor: barbara@contoso.com
+                        - justification: testing a new version of the product
+                          requestor: barbara@contoso.com
                           startTimeUtc: '2018-05-17T08:06:45.5691611Z'
                           virtualMachines:
                             - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg1/providers/Microsoft.Compute/virtualMachines/vm1
@@ -308,7 +310,8 @@ paths:
                     properties:
                       provisioningState: Succeeded
                       requests:
-                        - requestor: barbara@contoso.com
+                        - justification: testing a new version of the product
+                          requestor: barbara@contoso.com
                           startTimeUtc: '2018-05-17T08:06:45.5691611Z'
                           virtualMachines:
                             - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg1/providers/Microsoft.Compute/virtualMachines/vm1
@@ -408,7 +411,8 @@ paths:
                     properties:
                       provisioningState: Succeeded
                       requests:
-                        - requestor: barbara@contoso.com
+                        - justification: testing a new version of the product
+                          requestor: barbara@contoso.com
                           startTimeUtc: '2018-05-17T08:06:45.5691611Z'
                           virtualMachines:
                             - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg1/providers/Microsoft.Compute/virtualMachines/vm1
@@ -578,7 +582,8 @@ paths:
                 properties:
                   provisioningState: Succeeded
                   requests:
-                    - requestor: barbara@contoso.com
+                    - justification: testing a new version of the product
+                      requestor: barbara@contoso.com
                       startTimeUtc: '2018-05-17T08:06:45.5691611Z'
                       virtualMachines:
                         - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg1/providers/Microsoft.Compute/virtualMachines/vm1
@@ -796,6 +801,7 @@ paths:
             api-version: 2015-06-01-preview
             ascLocation: westeurope
             body:
+              justification: testing a new version of the product
               virtualMachines:
                 - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg1/providers/Microsoft.Compute/virtualMachines/vm1
                   ports:
@@ -809,6 +815,7 @@ paths:
           responses:
             '202':
               body:
+                justification: testing a new version of the product
                 requestor: barbara@contoso.com
                 startTimeUtc: '2018-07-12T08:53:03.3658798Z'
                 virtualMachines:
@@ -886,6 +893,9 @@ definitions:
     type: object
   JitNetworkAccessPolicyInitiateRequest:
     properties:
+      justification:
+        description: The justification for making the initiate request
+        type: string
       virtualMachines:
         description: A list of virtual machines & ports to open access for
         items:
@@ -980,6 +990,9 @@ definitions:
     type: object
   JitNetworkAccessRequest:
     properties:
+      justification:
+        description: The justification for making the initiate request
+        type: string
       requestor:
         description: The identity of the person who made the request
         type: string

@@ -148,7 +148,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/K8sIoApimachineryPkgApisMetaV1Status'
+            $ref: '#/definitions/Status'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -512,7 +512,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/K8sIoApimachineryPkgApisMetaV1Status'
+            $ref: '#/definitions/Status'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -964,8 +964,11 @@ paths:
         - namespaces
   '/v1/{name}':
     delete:
-      description: Delete a domain mapping.
-      operationId: run.projects.locations.domainmappings.delete
+      description: |-
+        Delete a service.
+        This will cause the Service to stop serving traffic and will delete the
+        child entities like Routes, Configurations and Revisions.
+      operationId: run.projects.locations.services.delete
       parameters:
         - description: Cloud Run currently ignores this parameter.
           in: query
@@ -976,7 +979,7 @@ paths:
           name: kind
           type: string
         - description: |-
-            The name of the domain mapping being deleted. If needed, replace
+            The name of the service being deleted. If needed, replace
             {namespace_id} with the project ID.
           in: path
           name: name
@@ -995,7 +998,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/K8sIoApimachineryPkgApisMetaV1Status'
+            $ref: '#/definitions/Status'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -1004,11 +1007,11 @@ paths:
       tags:
         - projects
     get:
-      description: Get information about a domain mapping.
-      operationId: run.projects.locations.domainmappings.get
+      description: Get information about a service.
+      operationId: run.projects.locations.services.get
       parameters:
         - description: |-
-            The name of the domain mapping being retrieved. If needed, replace
+            The name of the service being retrieved. If needed, replace
             {namespace_id} with the project ID.
           in: path
           name: name
@@ -1019,7 +1022,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/DomainMapping'
+            $ref: '#/definitions/Service'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -1041,7 +1044,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     put:
       description: |-
-        Replace a domain mapping.
+        Replace a service.
 
         Only the spec and metadata labels and annotations are modifiable. After
         the Update request, Cloud Run will work to make the 'status'
@@ -1049,14 +1052,14 @@ paths:
 
         May provide metadata.resourceVersion to enforce update from last read for
         optimistic concurrency control.
-      operationId: run.projects.locations.domainmappings.replaceDomainMapping
+      operationId: run.projects.locations.services.replaceService
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/DomainMapping'
+            $ref: '#/definitions/Service'
         - description: |-
-            The name of the domain mapping being retrieved. If needed, replace
+            The name of the service being replaced. If needed, replace
             {namespace_id} with the project ID.
           in: path
           name: name
@@ -1067,7 +1070,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/DomainMapping'
+            $ref: '#/definitions/Service'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -2014,7 +2017,7 @@ definitions:
         description: 'The kind of resource, in this case "AutoDomainMapping".'
         type: string
       metadata:
-        $ref: '#/definitions/K8sIoApimachineryPkgApisMetaV1ObjectMeta'
+        $ref: '#/definitions/ObjectMeta'
         description: Metadata associated with this BuildTemplate.
       spec:
         $ref: '#/definitions/AutoDomainMappingSpec'
@@ -2273,7 +2276,7 @@ definitions:
         description: 'The kind of resource, in this case always "Configuration".'
         type: string
       metadata:
-        $ref: '#/definitions/K8sIoApimachineryPkgApisMetaV1ObjectMeta'
+        $ref: '#/definitions/ObjectMeta'
         description: |-
           Metadata associated with this Configuration, including name, namespace,
           labels, and annotations.
@@ -2617,7 +2620,7 @@ definitions:
         description: 'The kind of resource, in this case "DomainMapping".'
         type: string
       metadata:
-        $ref: '#/definitions/K8sIoApimachineryPkgApisMetaV1ObjectMeta'
+        $ref: '#/definitions/ObjectMeta'
         description: Metadata associated with this BuildTemplate.
       spec:
         $ref: '#/definitions/DomainMappingSpec'
@@ -2866,36 +2869,6 @@ definitions:
           * "Ready": True when the Resource is ready.
         type: string
     type: object
-  GoogleRpcStatus:
-    description: |-
-      The `Status` type defines a logical error model that is suitable for
-      different programming environments, including REST APIs and RPC APIs. It is
-      used by [gRPC](https://github.com/grpc). Each `Status` message contains
-      three pieces of data: error code, error message, and error details.
-
-      You can find out more about this error model and how to work with it in the
-      [API Design Guide](https://cloud.google.com/apis/design/errors).
-    properties:
-      code:
-        description: 'The status code, which should be an enum value of google.rpc.Code.'
-        format: int32
-        type: integer
-      details:
-        description: |-
-          A list of messages that carry the error details.  There is a common set of
-          message types for APIs to use.
-        items:
-          additionalProperties:
-            description: Properties of the object. Contains field @type with type URL.
-          type: object
-        type: array
-      message:
-        description: |-
-          A developer-facing error message, which should be in English. Any
-          user-facing error message should be localized and sent in the
-          google.rpc.Status.details field, or localized by the client.
-        type: string
-    type: object
   HTTPGetAction:
     description: |-
       Cloud Run fully managed: not supported
@@ -3034,7 +3007,142 @@ definitions:
         format: int32
         type: integer
     type: object
-  K8sIoApimachineryPkgApisMetaV1ListMeta:
+  KeyToPath:
+    description: |-
+      Cloud Run fully managed: not supported
+
+      Cloud Run for Anthos: supported
+
+      Maps a string key to a path within a volume.
+    properties:
+      key:
+        description: |-
+          Cloud Run fully managed: not supported
+
+          Cloud Run for Anthos: supported
+
+          The key to project.
+        type: string
+      mode:
+        description: |-
+          (Optional)
+
+          Cloud Run fully managed: not supported
+
+          Cloud Run for Anthos: supported
+
+          Mode bits to use on this file, must be a value between 0 and 0777. If not
+          specified, the volume defaultMode will be used. This might be in conflict
+          with other options that affect the file mode, like fsGroup, and the result
+          can be other mode bits set.
+        format: int32
+        type: integer
+      path:
+        description: |-
+          Cloud Run fully managed: not supported
+
+          Cloud Run for Anthos: supported
+
+          The relative path of the file to map the key to.
+          May not be an absolute path.
+          May not contain the path element '..'.
+          May not start with the string '..'.
+        type: string
+    type: object
+  ListAuthorizedDomainsResponse:
+    description: A list of Authorized Domains.
+    properties:
+      domains:
+        description: The authorized domains belonging to the user.
+        items:
+          $ref: '#/definitions/AuthorizedDomain'
+        type: array
+      nextPageToken:
+        description: Continuation token for fetching the next page of results.
+        type: string
+    type: object
+  ListAutoDomainMappingsResponse:
+    description: ListAutoDomainMappingsResponse is a list of AutoDomainMapping resources.
+    properties:
+      apiVersion:
+        description: The API version for this call such as "serving.knative.dev/v1".
+        type: string
+      items:
+        description: List of AutoDomainMappings.
+        items:
+          $ref: '#/definitions/AutoDomainMapping'
+        type: array
+      kind:
+        description: 'The kind of this resource, in this case "AutoDomainMappingList".'
+        type: string
+      metadata:
+        $ref: '#/definitions/ListMeta'
+        description: Metadata associated with this AutoDomainMapping list.
+      unreachable:
+        description: Locations that could not be reached.
+        items:
+          type: string
+        type: array
+    type: object
+  ListConfigurationsResponse:
+    description: ListConfigurationsResponse is a list of Configuration resources.
+    properties:
+      apiVersion:
+        description: The API version for this call such as "serving.knative.dev/v1".
+        type: string
+      items:
+        description: List of Configurations.
+        items:
+          $ref: '#/definitions/Configuration'
+        type: array
+      kind:
+        description: 'The kind of this resource, in this case "ConfigurationList".'
+        type: string
+      metadata:
+        $ref: '#/definitions/ListMeta'
+        description: Metadata associated with this Configuration list.
+      unreachable:
+        description: Locations that could not be reached.
+        items:
+          type: string
+        type: array
+    type: object
+  ListDomainMappingsResponse:
+    description: ListDomainMappingsResponse is a list of DomainMapping resources.
+    properties:
+      apiVersion:
+        description: The API version for this call such as "domains.cloudrun.com/v1".
+        type: string
+      items:
+        description: List of DomainMappings.
+        items:
+          $ref: '#/definitions/DomainMapping'
+        type: array
+      kind:
+        description: 'The kind of this resource, in this case "DomainMappingList".'
+        type: string
+      metadata:
+        $ref: '#/definitions/ListMeta'
+        description: Metadata associated with this DomainMapping list.
+      unreachable:
+        description: Locations that could not be reached.
+        items:
+          type: string
+        type: array
+    type: object
+  ListLocationsResponse:
+    description: The response message for Locations.ListLocations.
+    properties:
+      locations:
+        description: A list of locations that matches the specified filter in the request.
+        items:
+          $ref: '#/definitions/Location'
+        type: array
+      nextPageToken:
+        description: The standard List next-page token.
+        type: string
+    type: object
+  ListMeta:
     description: |-
       ListMeta describes metadata that synthetic resources must have, including
       lists and various status objects. A resource may have only one of
@@ -3070,7 +3178,130 @@ definitions:
           +optional
         type: string
     type: object
-  K8sIoApimachineryPkgApisMetaV1ObjectMeta:
+  ListRevisionsResponse:
+    description: ListRevisionsResponse is a list of Revision resources.
+    properties:
+      apiVersion:
+        description: The API version for this call such as "serving.knative.dev/v1".
+        type: string
+      items:
+        description: List of Revisions.
+        items:
+          $ref: '#/definitions/Revision'
+        type: array
+      kind:
+        description: 'The kind of this resource, in this case "RevisionList".'
+        type: string
+      metadata:
+        $ref: '#/definitions/ListMeta'
+        description: Metadata associated with this revision list.
+      unreachable:
+        description: Locations that could not be reached.
+        items:
+          type: string
+        type: array
+    type: object
+  ListRoutesResponse:
+    description: ListRoutesResponse is a list of Route resources.
+    properties:
+      apiVersion:
+        description: The API version for this call such as "serving.knative.dev/v1".
+        type: string
+      items:
+        description: List of Routes.
+        items:
+          $ref: '#/definitions/Route'
+        type: array
+      kind:
+        description: 'The kind of this resource, in this case always "RouteList".'
+        type: string
+      metadata:
+        $ref: '#/definitions/ListMeta'
+        description: Metadata associated with this Route list.
+      unreachable:
+        description: Locations that could not be reached.
+        items:
+          type: string
+        type: array
+    type: object
+  ListServicesResponse:
+    description: A list of Service resources.
+    properties:
+      apiVersion:
+        description: The API version for this call such as "serving.knative.dev/v1".
+        type: string
+      items:
+        description: List of Services.
+        items:
+          $ref: '#/definitions/Service'
+        type: array
+      kind:
+        description: 'The kind of this resource, in this case "ServiceList".'
+        type: string
+      metadata:
+        $ref: '#/definitions/ListMeta'
+        description: Metadata associated with this Service list.
+      unreachable:
+        description: Locations that could not be reached.
+        items:
+          type: string
+        type: array
+    type: object
+  LocalObjectReference:
+    description: |-
+      Cloud Run fully managed: not supported
+
+      Cloud Run for Anthos: supported
+
+      LocalObjectReference contains enough information to let you locate the
+      referenced object inside the same namespace.
+    properties:
+      name:
+        description: |-
+          (Optional)
+
+          Cloud Run fully managed: not supported
+
+          Cloud Run for Anthos: supported
+
+          Name of the referent.
+          More info:
+          https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+        type: string
+    type: object
+  Location:
+    description: A resource that represents Google Cloud Platform location.
+    properties:
+      displayName:
+        description: |-
+          The friendly name for this location, typically a nearby city name.
+          For example, "Tokyo".
+        type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: |-
+          Cross-service attributes for the location. For example
+
+              {"cloud.googleapis.com/region": "us-east1"}
+        type: object
+      locationId:
+        description: 'The canonical id for this location. For example: `"us-east1"`.'
+        type: string
+      metadata:
+        additionalProperties:
+          description: Properties of the object. Contains field @type with type URL.
+        description: |-
+          Service-specific metadata. For example the available capacity at the given
+          location.
+        type: object
+      name:
+        description: |-
+          Resource name for the location, which may vary between implementations.
+          For example: `"projects/example-project/locations/us-east1"`
+        type: string
+    type: object
+  ObjectMeta:
     description: |-
       k8s.io.apimachinery.pkg.apis.meta.v1.ObjectMeta is metadata that all
       persisted resources must have, which includes all objects users must create.
@@ -3249,7 +3480,7 @@ definitions:
           List of objects that own this object. If ALL objects in the list have
           been deleted, this object will be garbage collected.
         items:
-          $ref: '#/definitions/K8sIoApimachineryPkgApisMetaV1OwnerReference'
+          $ref: '#/definitions/OwnerReference'
         type: array
       resourceVersion:
         description: |-
@@ -3290,7 +3521,7 @@ definitions:
           More info: http://kubernetes.io/docs/user-guide/identifiers#uids
         type: string
     type: object
-  K8sIoApimachineryPkgApisMetaV1OwnerReference:
+  OwnerReference:
     description: |-
       OwnerReference contains enough information to let you identify an owning
       object. Currently, an owning object must be in the same namespace, so there
@@ -3331,462 +3562,42 @@ definitions:
           More info: http://kubernetes.io/docs/user-guide/identifiers#uids
         type: string
     type: object
-  K8sIoApimachineryPkgApisMetaV1Status:
-    description: Status is a return value for calls that don't return other objects
-    properties:
-      code:
-        description: |-
-          Suggested HTTP return code for this status, 0 if not set.
-          +optional
-        format: int32
-        type: integer
-      details:
-        $ref: '#/definitions/K8sIoApimachineryPkgApisMetaV1StatusDetails'
-        description: |-
-          Extended data associated with the reason.  Each reason may define its
-          own extended details. This field is optional and the data returned
-          is not guaranteed to conform to any schema except that defined by
-          the reason type.
-          +optional
-      message:
-        description: |-
-          A human-readable description of the status of this operation.
-          +optional
-        type: string
-      metadata:
-        $ref: '#/definitions/K8sIoApimachineryPkgApisMetaV1ListMeta'
-        description: |-
-          Standard list metadata.
-          More info:
-          https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds
-          +optional
-      reason:
-        description: |-
-          A machine-readable description of why this operation is in the
-          "Failure" status. If this value is empty there
-          is no information available. A Reason clarifies an HTTP status
-          code but does not override it.
-          +optional
-        type: string
-      status:
-        description: |-
-          Status of the operation.
-          One of: "Success" or "Failure".
-          More info:
-          https://git.k8s.io/community/contributors/devel/api-conventions.md#spec-and-status
-          +optional
-        type: string
-    type: object
-  K8sIoApimachineryPkgApisMetaV1StatusCause:
-    description: |-
-      StatusCause provides more information about an api.Status failure, including
-      cases when multiple errors are encountered.
-    properties:
-      field:
-        description: |-
-          The field of the resource that has caused this error, as named by its JSON
-          serialization. May include dot and postfix notation for nested attributes.
-          Arrays are zero-indexed.  Fields may appear more than once in an array of
-          causes due to fields having multiple errors.
-          Optional.
-
-          Examples:
-            "name" - the field "name" on the current resource
-            "items[0].name" - the field "name" on the first array entry in "items"
-          +optional
-        type: string
-      message:
-        description: |-
-          A human-readable description of the cause of the error.  This field may be
-          presented as-is to a reader.
-          +optional
-        type: string
-      reason:
-        description: |-
-          A machine-readable description of the cause of the error. If this value is
-          empty there is no information available.
-          +optional
-        type: string
-    type: object
-  K8sIoApimachineryPkgApisMetaV1StatusDetails:
-    description: |-
-      StatusDetails is a set of additional properties that MAY be set by the
-      server to provide additional information about a response. The Reason
-      field of a Status object defines what attributes will be set. Clients
-      must ignore fields that do not match the defined type of each attribute,
-      and should assume that any attribute may be empty, invalid, or under
-      defined.
-    properties:
-      causes:
-        description: |-
-          The Causes array includes more details associated with the StatusReason
-          failure. Not all StatusReasons may provide detailed causes.
-          +optional
-        items:
-          $ref: '#/definitions/K8sIoApimachineryPkgApisMetaV1StatusCause'
-        type: array
-      group:
-        description: |-
-          The group attribute of the resource associated with the status
-          StatusReason. +optional
-        type: string
-      kind:
-        description: |-
-          The kind attribute of the resource associated with the status StatusReason.
-          On some operations may differ from the requested resource Kind.
-          More info:
-          https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds
-          +optional
-        type: string
-      name:
-        description: |-
-          The name attribute of the resource associated with the status StatusReason
-          (when there is a single name which can be described).
-          +optional
-        type: string
-      retryAfterSeconds:
-        description: |-
-          If specified, the time in seconds before the operation should be retried.
-          Some errors may indicate the client must take an alternate action - for
-          those errors this field may indicate how long to wait before taking the
-          alternate action. +optional
-        format: int32
-        type: integer
-      uid:
-        description: |-
-          UID of the resource.
-          (when there is a single resource which can be described).
-          More info: http://kubernetes.io/docs/user-guide/identifiers#uids
-          +optional
-        type: string
-    type: object
-  KeyToPath:
-    description: |-
-      Cloud Run fully managed: not supported
-
-      Cloud Run for Anthos: supported
-
-      Maps a string key to a path within a volume.
-    properties:
-      key:
-        description: |-
-          Cloud Run fully managed: not supported
-
-          Cloud Run for Anthos: supported
-
-          The key to project.
-        type: string
-      mode:
-        description: |-
-          (Optional)
-
-          Cloud Run fully managed: not supported
-
-          Cloud Run for Anthos: supported
-
-          Mode bits to use on this file, must be a value between 0 and 0777. If not
-          specified, the volume defaultMode will be used. This might be in conflict
-          with other options that affect the file mode, like fsGroup, and the result
-          can be other mode bits set.
-        format: int32
-        type: integer
-      path:
-        description: |-
-          Cloud Run fully managed: not supported
-
-          Cloud Run for Anthos: supported
-
-          The relative path of the file to map the key to.
-          May not be an absolute path.
-          May not contain the path element '..'.
-          May not start with the string '..'.
-        type: string
-    type: object
-  ListAuthorizedDomainsResponse:
-    description: A list of Authorized Domains.
-    properties:
-      domains:
-        description: The authorized domains belonging to the user.
-        items:
-          $ref: '#/definitions/AuthorizedDomain'
-        type: array
-      nextPageToken:
-        description: Continuation token for fetching the next page of results.
-        type: string
-    type: object
-  ListAutoDomainMappingsResponse:
-    description: ListAutoDomainMappingsResponse is a list of AutoDomainMapping resources.
-    properties:
-      apiVersion:
-        description: The API version for this call such as "serving.knative.dev/v1".
-        type: string
-      items:
-        description: List of AutoDomainMappings.
-        items:
-          $ref: '#/definitions/AutoDomainMapping'
-        type: array
-      kind:
-        description: 'The kind of this resource, in this case "AutoDomainMappingList".'
-        type: string
-      metadata:
-        $ref: '#/definitions/K8sIoApimachineryPkgApisMetaV1ListMeta'
-        description: Metadata associated with this AutoDomainMapping list.
-      regionDetails:
-        additionalProperties:
-          $ref: '#/definitions/RegionDetails'
-        description: |-
-          Details for the regions used during a global call including any failures.
-          This is not populated when targeting a specific region.
-        type: object
-      unreachable:
-        description: Locations that could not be reached.
-        items:
-          type: string
-        type: array
-    type: object
-  ListConfigurationsResponse:
-    description: ListConfigurationsResponse is a list of Configuration resources.
-    properties:
-      apiVersion:
-        description: The API version for this call such as "serving.knative.dev/v1".
-        type: string
-      items:
-        description: List of Configurations.
-        items:
-          $ref: '#/definitions/Configuration'
-        type: array
-      kind:
-        description: 'The kind of this resource, in this case "ConfigurationList".'
-        type: string
-      metadata:
-        $ref: '#/definitions/K8sIoApimachineryPkgApisMetaV1ListMeta'
-        description: Metadata associated with this Configuration list.
-      regionDetails:
-        additionalProperties:
-          $ref: '#/definitions/RegionDetails'
-        description: |-
-          Details for the regions used during a global call including any failures.
-          This is not populated when targeting a specific region.
-        type: object
-      unreachable:
-        description: Locations that could not be reached.
-        items:
-          type: string
-        type: array
-    type: object
-  ListDomainMappingsResponse:
-    description: ListDomainMappingsResponse is a list of DomainMapping resources.
-    properties:
-      apiVersion:
-        description: The API version for this call such as "domains.cloudrun.com/v1".
-        type: string
-      items:
-        description: List of DomainMappings.
-        items:
-          $ref: '#/definitions/DomainMapping'
-        type: array
-      kind:
-        description: 'The kind of this resource, in this case "DomainMappingList".'
-        type: string
-      metadata:
-        $ref: '#/definitions/K8sIoApimachineryPkgApisMetaV1ListMeta'
-        description: Metadata associated with this DomainMapping list.
-      regionDetails:
-        additionalProperties:
-          $ref: '#/definitions/RegionDetails'
-        description: |-
-          Details for the regions used during a global call including any failures.
-          This is not populated when targeting a specific region.
-        type: object
-      unreachable:
-        description: Locations that could not be reached.
-        items:
-          type: string
-        type: array
-    type: object
-  ListLocationsResponse:
-    description: The response message for Locations.ListLocations.
-    properties:
-      locations:
-        description: A list of locations that matches the specified filter in the request.
-        items:
-          $ref: '#/definitions/Location'
-        type: array
-      nextPageToken:
-        description: The standard List next-page token.
-        type: string
-    type: object
-  ListRevisionsResponse:
-    description: ListRevisionsResponse is a list of Revision resources.
-    properties:
-      apiVersion:
-        description: The API version for this call such as "serving.knative.dev/v1".
-        type: string
-      items:
-        description: List of Revisions.
-        items:
-          $ref: '#/definitions/Revision'
-        type: array
-      kind:
-        description: 'The kind of this resource, in this case "RevisionList".'
-        type: string
-      metadata:
-        $ref: '#/definitions/K8sIoApimachineryPkgApisMetaV1ListMeta'
-        description: Metadata associated with this revision list.
-      regionDetails:
-        additionalProperties:
-          $ref: '#/definitions/RegionDetails'
-        description: |-
-          Details for the regions used during a global call including any failures.
-          This is not populated when targeting a specific region.
-        type: object
-      unreachable:
-        description: Locations that could not be reached.
-        items:
-          type: string
-        type: array
-    type: object
-  ListRoutesResponse:
-    description: ListRoutesResponse is a list of Route resources.
-    properties:
-      apiVersion:
-        description: The API version for this call such as "serving.knative.dev/v1".
-        type: string
-      items:
-        description: List of Routes.
-        items:
-          $ref: '#/definitions/Route'
-        type: array
-      kind:
-        description: 'The kind of this resource, in this case always "RouteList".'
-        type: string
-      metadata:
-        $ref: '#/definitions/K8sIoApimachineryPkgApisMetaV1ListMeta'
-        description: Metadata associated with this Route list.
-      regionDetails:
-        additionalProperties:
-          $ref: '#/definitions/RegionDetails'
-        description: |-
-          Details for the regions used during a global call including any failures.
-          This is not populated when targeting a specific region.
-        type: object
-      unreachable:
-        description: Locations that could not be reached.
-        items:
-          type: string
-        type: array
-    type: object
-  ListServicesResponse:
-    description: A list of Service resources.
-    properties:
-      apiVersion:
-        description: The API version for this call such as "serving.knative.dev/v1".
-        type: string
-      items:
-        description: List of Services.
-        items:
-          $ref: '#/definitions/Service'
-        type: array
-      kind:
-        description: 'The kind of this resource, in this case "ServiceList".'
-        type: string
-      metadata:
-        $ref: '#/definitions/K8sIoApimachineryPkgApisMetaV1ListMeta'
-        description: Metadata associated with this Service list.
-      regionDetails:
-        additionalProperties:
-          $ref: '#/definitions/RegionDetails'
-        description: |-
-          Details for the regions used during a global call including any failures.
-          This is not populated when targeting a specific region.
-        type: object
-      unreachable:
-        description: Locations that could not be reached.
-        items:
-          type: string
-        type: array
-    type: object
-  LocalObjectReference:
-    description: |-
-      Cloud Run fully managed: not supported
-
-      Cloud Run for Anthos: supported
-
-      LocalObjectReference contains enough information to let you locate the
-      referenced object inside the same namespace.
-    properties:
-      name:
-        description: |-
-          (Optional)
-
-          Cloud Run fully managed: not supported
-
-          Cloud Run for Anthos: supported
-
-          Name of the referent.
-          More info:
-          https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-        type: string
-    type: object
-  Location:
-    description: A resource that represents Google Cloud Platform location.
-    properties:
-      displayName:
-        description: |-
-          The friendly name for this location, typically a nearby city name.
-          For example, "Tokyo".
-        type: string
-      labels:
-        additionalProperties:
-          type: string
-        description: |-
-          Cross-service attributes for the location. For example
-
-              {"cloud.googleapis.com/region": "us-east1"}
-        type: object
-      locationId:
-        description: 'The canonical id for this location. For example: `"us-east1"`.'
-        type: string
-      metadata:
-        additionalProperties:
-          description: Properties of the object. Contains field @type with type URL.
-        description: |-
-          Service-specific metadata. For example the available capacity at the given
-          location.
-        type: object
-      name:
-        description: |-
-          Resource name for the location, which may vary between implementations.
-          For example: `"projects/example-project/locations/us-east1"`
-        type: string
-    type: object
   Policy:
     description: |-
       Defines an Identity and Access Management (IAM) policy. It is used to
       specify access control policies for Cloud Platform resources.
 
 
-      A `Policy` consists of a list of `bindings`. A `binding` binds a list of
-      `members` to a `role`, where the members can be user accounts, Google groups,
-      Google domains, and service accounts. A `role` is a named list of permissions
-      defined by IAM.
+      A `Policy` is a collection of `bindings`. A `binding` binds one or more
+      `members` to a single `role`. Members can be user accounts, service accounts,
+      Google groups, and domains (such as G Suite). A `role` is a named list of
+      permissions (defined by IAM or configured by users). A `binding` can
+      optionally specify a `condition`, which is a logic expression that further
+      constrains the role binding based on attributes about the request and/or
+      target resource.
 
       **JSON Example**
 
           {
             "bindings": [
               {
-                "role": "roles/owner",
+                "role": "role/resourcemanager.organizationAdmin",
                 "members": [
                   "user:mike@example.com",
                   "group:admins@example.com",
                   "domain:google.com",
-                  "serviceAccount:my-other-app@appspot.gserviceaccount.com"
+                  "serviceAccount:my-project-id@appspot.gserviceaccount.com"
                 ]
               },
               {
-                "role": "roles/viewer",
-                "members": ["user:sean@example.com"]
+                "role": "roles/resourcemanager.organizationViewer",
+                "members": ["user:eve@example.com"],
+                "condition": {
+                  "title": "expirable access",
+                  "description": "Does not grant access after Sep 2020",
+                  "expression": "request.time <
+                  timestamp('2020-10-01T00:00:00.000Z')",
+                }
               }
             ]
           }
@@ -3798,12 +3609,15 @@ definitions:
             - user:mike@example.com
             - group:admins@example.com
             - domain:google.com
-            - serviceAccount:my-other-app@appspot.gserviceaccount.com
-            role: roles/owner
+            - serviceAccount:my-project-id@appspot.gserviceaccount.com
+            role: roles/resourcemanager.organizationAdmin
           - members:
-            - user:sean@example.com
-            role: roles/viewer
-
+            - user:eve@example.com
+            role: roles/resourcemanager.organizationViewer
+            condition:
+              title: expirable access
+              description: Does not grant access after Sep 2020
+              expression: request.time < timestamp('2020-10-01T00:00:00.000Z')
 
       For a description of IAM and its features, see the
       [IAM developer's guide](https://cloud.google.com/iam/docs).
@@ -3815,7 +3629,8 @@ definitions:
         type: array
       bindings:
         description: |-
-          Associates a list of `members` to a `role`.
+          Associates a list of `members` to a `role`. Optionally may specify a
+          `condition` that determines when binding is in effect.
           `bindings` with no members will result in an error.
         items:
           $ref: '#/definitions/Binding'
@@ -3831,7 +3646,9 @@ definitions:
           ensure that their change will be applied to the same version of the policy.
 
           If no `etag` is provided in the call to `setIamPolicy`, then the existing
-          policy is overwritten.
+          policy is overwritten. Due to blind-set semantics of an etag-less policy,
+          'setIamPolicy' will not fail even if either of incoming or stored policy
+          does not meet the version requirements.
         format: byte
         type: string
       version:
@@ -3841,9 +3658,14 @@ definitions:
           Valid values are 0, 1, and 3. Requests specifying an invalid value will be
           rejected.
 
-          Policies with any conditional bindings must specify version 3. Policies
-          without any conditional bindings may specify any valid value or leave the
-          field unset.
+          Operations affecting conditional bindings must specify version 3. This can
+          be either setting a conditional policy, modifying a conditional binding,
+          or removing a conditional binding from the stored conditional policy.
+          Operations on non-conditional policies may specify any valid value or
+          leave the field unset.
+
+          If no etag is provided in the call to `setIamPolicy`, any version
+          compliance checks on the incoming and/or stored policy is skipped.
         format: int32
         type: integer
     type: object
@@ -3929,13 +3751,6 @@ definitions:
         format: int32
         type: integer
     type: object
-  RegionDetails:
-    description: Information for a regional call used for a global API.
-    properties:
-      error:
-        $ref: '#/definitions/GoogleRpcStatus'
-        description: The status indicating why the regional call failed
-    type: object
   ResourceRecord:
     description: A DNS resource record.
     properties:
@@ -4008,7 +3823,7 @@ definitions:
         description: 'The kind of this resource, in this case "Revision".'
         type: string
       metadata:
-        $ref: '#/definitions/K8sIoApimachineryPkgApisMetaV1ObjectMeta'
+        $ref: '#/definitions/ObjectMeta'
         description: |-
           Metadata associated with this Revision, including name, namespace, labels,
           and annotations.
@@ -4122,7 +3937,7 @@ definitions:
       https://github.com/kubernetes/api/blob/e771f807/core/v1/types.go#L3179-L3190
     properties:
       metadata:
-        $ref: '#/definitions/K8sIoApimachineryPkgApisMetaV1ObjectMeta'
+        $ref: '#/definitions/ObjectMeta'
         description: |-
           Optional metadata for this Revision, including labels and annotations. Name
           will be generated by the Configuration.
@@ -4156,7 +3971,7 @@ definitions:
         description: 'The kind of this resource, in this case always "Route".'
         type: string
       metadata:
-        $ref: '#/definitions/K8sIoApimachineryPkgApisMetaV1ObjectMeta'
+        $ref: '#/definitions/ObjectMeta'
         description: |-
           Metadata associated with this Route, including name, namespace, labels,
           and annotations.
@@ -4411,7 +4226,7 @@ definitions:
         description: 'The kind of resource, in this case "Service".'
         type: string
       metadata:
-        $ref: '#/definitions/K8sIoApimachineryPkgApisMetaV1ObjectMeta'
+        $ref: '#/definitions/ObjectMeta'
         description: |-
           Metadata associated with this Service, including name, namespace, labels,
           and annotations.
@@ -4523,6 +4338,135 @@ definitions:
           paths: "bindings, etag"
           This field is only used by Cloud IAM.
         format: google-fieldmask
+        type: string
+    type: object
+  Status:
+    description: Status is a return value for calls that don't return other objects
+    properties:
+      code:
+        description: |-
+          Suggested HTTP return code for this status, 0 if not set.
+          +optional
+        format: int32
+        type: integer
+      details:
+        $ref: '#/definitions/StatusDetails'
+        description: |-
+          Extended data associated with the reason.  Each reason may define its
+          own extended details. This field is optional and the data returned
+          is not guaranteed to conform to any schema except that defined by
+          the reason type.
+          +optional
+      message:
+        description: |-
+          A human-readable description of the status of this operation.
+          +optional
+        type: string
+      metadata:
+        $ref: '#/definitions/ListMeta'
+        description: |-
+          Standard list metadata.
+          More info:
+          https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds
+          +optional
+      reason:
+        description: |-
+          A machine-readable description of why this operation is in the
+          "Failure" status. If this value is empty there
+          is no information available. A Reason clarifies an HTTP status
+          code but does not override it.
+          +optional
+        type: string
+      status:
+        description: |-
+          Status of the operation.
+          One of: "Success" or "Failure".
+          More info:
+          https://git.k8s.io/community/contributors/devel/api-conventions.md#spec-and-status
+          +optional
+        type: string
+    type: object
+  StatusCause:
+    description: |-
+      StatusCause provides more information about an api.Status failure, including
+      cases when multiple errors are encountered.
+    properties:
+      field:
+        description: |-
+          The field of the resource that has caused this error, as named by its JSON
+          serialization. May include dot and postfix notation for nested attributes.
+          Arrays are zero-indexed.  Fields may appear more than once in an array of
+          causes due to fields having multiple errors.
+          Optional.
+
+          Examples:
+            "name" - the field "name" on the current resource
+            "items[0].name" - the field "name" on the first array entry in "items"
+          +optional
+        type: string
+      message:
+        description: |-
+          A human-readable description of the cause of the error.  This field may be
+          presented as-is to a reader.
+          +optional
+        type: string
+      reason:
+        description: |-
+          A machine-readable description of the cause of the error. If this value is
+          empty there is no information available.
+          +optional
+        type: string
+    type: object
+  StatusDetails:
+    description: |-
+      StatusDetails is a set of additional properties that MAY be set by the
+      server to provide additional information about a response. The Reason
+      field of a Status object defines what attributes will be set. Clients
+      must ignore fields that do not match the defined type of each attribute,
+      and should assume that any attribute may be empty, invalid, or under
+      defined.
+    properties:
+      causes:
+        description: |-
+          The Causes array includes more details associated with the StatusReason
+          failure. Not all StatusReasons may provide detailed causes.
+          +optional
+        items:
+          $ref: '#/definitions/StatusCause'
+        type: array
+      group:
+        description: |-
+          The group attribute of the resource associated with the status
+          StatusReason. +optional
+        type: string
+      kind:
+        description: |-
+          The kind attribute of the resource associated with the status StatusReason.
+          On some operations may differ from the requested resource Kind.
+          More info:
+          https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds
+          +optional
+        type: string
+      name:
+        description: |-
+          The name attribute of the resource associated with the status StatusReason
+          (when there is a single name which can be described).
+          +optional
+        type: string
+      retryAfterSeconds:
+        description: |-
+          If specified, the time in seconds before the operation should be retried.
+          Some errors may indicate the client must take an alternate action - for
+          those errors this field may indicate how long to wait before taking the
+          alternate action. +optional
+        format: int32
+        type: integer
+      uid:
+        description: |-
+          UID of the resource.
+          (when there is a single resource which can be described).
+          More info: http://kubernetes.io/docs/user-guide/identifiers#uids
+          +optional
         type: string
     type: object
   TCPSocketAction:

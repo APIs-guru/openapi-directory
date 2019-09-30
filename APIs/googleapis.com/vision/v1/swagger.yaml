@@ -331,12 +331,18 @@ paths:
         - projects
     get:
       description: |-
-        Gets the latest state of a long-running operation.  Clients can use this
-        method to poll the operation result at intervals as recommended by the API
-        service.
-      operationId: vision.projects.locations.operations.get
+        Gets information associated with a ProductSet.
+
+        Possible errors:
+
+        * Returns NOT_FOUND if the ProductSet does not exist.
+      operationId: vision.projects.locations.productSets.get
       parameters:
-        - description: The name of the operation resource.
+        - description: |-
+            Required. Resource name of the ProductSet to get.
+
+            Format is:
+            `projects/PROJECT_ID/locations/LOG_ID/productSets/PRODUCT_SET_ID`
           in: path
           name: name
           required: true
@@ -346,7 +352,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Operation'
+            $ref: '#/definitions/ProductSet'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'

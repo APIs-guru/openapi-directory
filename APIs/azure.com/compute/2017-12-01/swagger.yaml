@@ -3720,7 +3720,7 @@ paths:
         final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/redeploy':
     post:
-      description: Redeploy one or more virtual machines in a VM scale set.
+      description: 'Shuts down all the virtual machines in the virtual machine scale set, moves them to a new node, and powers them back on.'
       operationId: VirtualMachineScaleSets_Redeploy
       parameters:
         - description: The name of the resource group.
@@ -4206,7 +4206,7 @@ paths:
         final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/redeploy':
     post:
-      description: Redeploys a virtual machine in a VM scale set.
+      description: 'Shuts down the virtual machine in the virtual machine scale set, moves it to a new node, and powers it back on.'
       operationId: VirtualMachineScaleSetVMs_Redeploy
       parameters:
         - description: The name of the resource group.
@@ -6061,7 +6061,7 @@ paths:
         final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/redeploy':
     post:
-      description: The operation to redeploy a virtual machine.
+      description: 'Shuts down the virtual machine, moves it to a new node, and powers it back on.'
       operationId: VirtualMachines_Redeploy
       parameters:
         - description: The name of the resource group.

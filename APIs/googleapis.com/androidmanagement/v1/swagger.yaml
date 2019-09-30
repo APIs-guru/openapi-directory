@@ -199,10 +199,10 @@ paths:
         - signupUrls
   '/v1/{name}':
     delete:
-      description: Deletes a web app.
-      operationId: androidmanagement.enterprises.webApps.delete
+      description: 'Deletes an enrollment token. This operation invalidates the token, preventing its future use.'
+      operationId: androidmanagement.enterprises.enrollmentTokens.delete
       parameters:
-        - description: 'The name of the web app in the form enterprises/{enterpriseId}/webApps/{packageName}.'
+        - description: 'The name of the enrollment token in the form enterprises/{enterpriseId}/enrollmentTokens/{enrollmentTokenId}.'
           in: path
           name: name
           required: true
@@ -1921,7 +1921,7 @@ definitions:
         type: array
       permittedAccessibilityServices:
         $ref: '#/definitions/PackageNameList'
-        description: 'Specifies permitted accessibility services. If the field is not set, any accessibility service can be used. If the field is set, only the accessibility services in this list and the system''s built-in accessibility services can be used. In particular, if the field is set to empty, only the system''s built-in accessibility services can be used.'
+        description: 'Specifies permitted accessibility services. If the field is not set, any accessibility service can be used. If the field is set, only the accessibility services in this list and the system''s built-in accessibility service can be used. In particular, if the field is set to empty, only the system''s built-in accessibility servicess can be used.'
       permittedInputMethods:
         $ref: '#/definitions/PackageNameList'
         description: 'If present, only the input methods provided by packages in this list are permitted. If this field is present, but the list is empty, then only system input methods are permitted.'

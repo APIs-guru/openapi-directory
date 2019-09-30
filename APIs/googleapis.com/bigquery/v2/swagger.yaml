@@ -1659,6 +1659,99 @@ definitions:
         description: Optional. The name of this argument. Can be absent for function return argument.
         type: string
     type: object
+  ArimaCoefficients:
+    description: Arima coefficients.
+    properties:
+      autoRegressiveCoefficients:
+        description: 'Auto-regressive coefficients, an array of double.'
+        items:
+          format: double
+          type: number
+        type: array
+      interceptCoefficient:
+        description: 'Intercept coefficient, just a double not an array.'
+        format: double
+        type: number
+      movingAverageCoefficients:
+        description: 'Moving-average coefficients, an array of double.'
+        items:
+          format: double
+          type: number
+        type: array
+    type: object
+  ArimaFittingMetrics:
+    description: ARIMA model fitting metrics.
+    properties:
+      aic:
+        description: AIC
+        format: double
+        type: number
+      logLikelihood:
+        description: log-likelihood
+        format: double
+        type: number
+      variance:
+        description: variance.
+        format: double
+        type: number
+    type: object
+  ArimaModelInfo:
+    description: Arima model information.
+    properties:
+      arimaCoefficients:
+        $ref: '#/definitions/ArimaCoefficients'
+        description: Arima coefficients.
+      arimaFittingMetrics:
+        $ref: '#/definitions/ArimaFittingMetrics'
+        description: Arima fitting metrics.
+      nonSeasonalOrder:
+        $ref: '#/definitions/ArimaOrder'
+        description: Non-seasonal order.
+    type: object
+  ArimaOrder:
+    description: 'Arima order, can be used for both non-seasonal and seasonal parts.'
+    properties:
+      d:
+        description: Order of the differencing part.
+        format: int64
+        type: string
+      p:
+        description: Order of the autoregressive part.
+        format: int64
+        type: string
+      q:
+        description: Order of the moving-average part.
+        format: int64
+        type: string
+    type: object
+  ArimaResult:
+    description: |-
+      (Auto-)arima fitting result. Wrap everything in ArimaResult for easier
+      refactoring if we want to use model-specific iteration results.
+    properties:
+      arimaModelInfo:
+        description: |-
+          This message is repeated because there are multiple arima models
+          fitted in auto-arima. For non-auto-arima model, its size is one.
+        items:
+          $ref: '#/definitions/ArimaModelInfo'
+        type: array
+      seasonalPeriods:
+        description: |-
+          Seasonal periods. Repeated because multiple periods are supported for
+          one time series.
+        items:
+          enum:
+            - SEASONAL_PERIOD_TYPE_UNSPECIFIED
+            - NO_SEASONALITY
+            - DAILY
+            - WEEKLY
+            - MONTHLY
+            - QUARTERLY
+            - YEARLY
+          type: string
+        type: array
+    type: object
   BigQueryModelTraining:
     properties:
       currentIteration:
@@ -2443,6 +2536,8 @@ definitions:
   IterationResult:
     description: Information about a single iteration of the training run.
     properties:
+      arimaResult:
+        $ref: '#/definitions/ArimaResult'
       clusterInfos:
         description: Information about top clusters for clustering models.
         items:

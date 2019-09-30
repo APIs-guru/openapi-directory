@@ -10,7 +10,7 @@ info:
     x-twitter: taggun_io
   description: 'Expects only running software, real reactions, and beautifully crafted APIs to serve your every desire to transcribe a piece of paper to digital form.'
   title: taggun.io
-  version: 1.2.217
+  version: 1.2.221
   x-apisguru-categories:
     - text
   x-logo:
@@ -1017,7 +1017,13 @@ definitions:
         $ref: '#/definitions/IBAN'
       belgiumVATNumbers:
         $ref: '#/definitions/belgiumVATNumbers'
+      fapiaoInvoiceCode:
+        $ref: '#/definitions/invoiceNumber'
+      fapiaoInvoiceNumber:
+        $ref: '#/definitions/invoiceNumber'
       invoiceNumber:
+        $ref: '#/definitions/invoiceNumber'
+      qrCodeData:
         $ref: '#/definitions/invoiceNumber'
     type: object
   error:

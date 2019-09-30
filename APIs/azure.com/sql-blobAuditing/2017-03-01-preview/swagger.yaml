@@ -106,6 +106,53 @@ parameters:
     type: string
     x-ms-parameter-location: method
 paths:
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/auditingSettings':
+    get:
+      description: Lists auditing settings of a server.
+      operationId: ServerBlobAuditingPolicies_ListByServer
+      parameters:
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully retrieved server auditing settings.
+          schema:
+            $ref: '#/definitions/ServerBlobAuditingPolicyListResult'
+        default:
+          description: |-
+            *** Error Responses: ***
+
+             * 404 SubscriptionDoesNotHaveServer - The requested server was not found
+
+             * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.
+      tags:
+        - BlobAuditing
+      x-ms-examples:
+        List auditing settings of a server:
+          parameters:
+            api-version: 2017-03-01-preview
+            resourceGroupName: blobauditingtest-4799
+            serverName: blobauditingtest-6440
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/blobauditingtest-6852/providers/Microsoft.Sql/servers/blobauditingtest-2080/auditingSettings/default
+                    name: default
+                    properties:
+                      auditActionsAndGroups: []
+                      isAzureMonitorTargetEnabled: false
+                      isStorageSecondaryKeyInUse: false
+                      retentionDays: 0
+                      state: Disabled
+                      storageAccountSubscriptionId: 00000000-0000-0000-0000-000000000000
+                      storageEndpoint: ''
+                    type: Microsoft.Sql/servers/auditingSettings
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/auditingSettings/{blobAuditingPolicyName}':
     get:
       description: Gets a server's blob auditing policy.
@@ -126,6 +173,8 @@ paths:
             *** Error Responses: ***
 
              * 404 SubscriptionDoesNotHaveServer - The requested server was not found
+
+             * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.
       tags:
         - BlobAuditing
       x-ms-examples:
@@ -187,6 +236,8 @@ paths:
              * 400 InvalidBlobAuditActions - Invalid audit action
 
              * 404 SubscriptionDoesNotHaveServer - The requested server was not found
+
+             * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.
 
              * 409 ServerBlobAuditingPolicyInProgress - Set server blob auditing is already in progress.
       tags:
@@ -254,7 +305,6 @@ paths:
                     - SUCCESSFUL_DATABASE_AUTHENTICATION_GROUP
                     - FAILED_DATABASE_AUTHENTICATION_GROUP
                     - BATCH_COMPLETED_GROUP
-                  isAzureMonitorTargetEnabled: false
                   isStorageSecondaryKeyInUse: false
                   retentionDays: 6
                   state: Enabled
@@ -265,6 +315,60 @@ paths:
               operation: UpsertServerEngineAuditingPolicy
               startTime: '2017-11-22T09:34:54.72Z'
       x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/auditingSettings':
+    get:
+      description: Lists auditing settings of a database.
+      operationId: DatabaseBlobAuditingPolicies_ListByDatabase
+      parameters:
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - $ref: '#/parameters/DatabaseNameParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully retrieved database auditing settings.
+          schema:
+            $ref: '#/definitions/DatabaseBlobAuditingPolicyListResult'
+        default:
+          description: |-
+            *** Error Responses: ***
+
+             * 400 BlobAuditingIsNotSupportedOnResourceType - Blob Auditing is currently not supported for this resource type.
+
+             * 404 SourceDatabaseNotFound - The source database does not exist.
+
+             * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.
+
+             * 500 DatabaseIsUnavailable - Loading failed. Please try again later.
+      tags:
+        - BlobAuditing
+      x-ms-examples:
+        List audit settings of a database:
+          parameters:
+            api-version: 2015-05-01-preview
+            databaseName: testdb
+            resourceGroupName: blobauditingtest-6852
+            serverName: blobauditingtest-2080
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/blobauditingtest-6852/providers/Microsoft.Sql/servers/blobauditingtest-2080/databases/testdb
+                    kind: V12
+                    name: default
+                    properties:
+                      auditActionsAndGroups: []
+                      isAzureMonitorTargetEnabled: false
+                      isStorageSecondaryKeyInUse: false
+                      retentionDays: 0
+                      state: Disabled
+                      storageAccountSubscriptionId: 00000000-0000-0000-0000-000000000000
+                      storageEndpoint: ''
+                    type: Microsoft.Sql/servers/databases/auditingSettings
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/auditingSettings/{blobAuditingPolicyName}':
     get:
       description: Gets a database's blob auditing policy.
@@ -311,7 +415,7 @@ paths:
                 name: default
                 properties:
                   auditActionsAndGroups: []
-                  isAzureMonitorTargetEnabled: true
+                  isAzureMonitorTargetEnabled: false
                   isStorageSecondaryKeyInUse: false
                   retentionDays: 0
                   state: Disabled
@@ -356,6 +460,8 @@ paths:
              * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.
 
              * 400 BlobAuditingInvalidStorageAccountName - The provided storage account is not valid or does not exist.
+
+             * 400 UpdateNotAllowedOnPausedDatabase - User attempted to perform an update on a paused database.
 
              * 400 BlobAuditingInvalidStorageAccountCredentials - The provided storage account or access key is not valid.
 
@@ -506,7 +612,7 @@ paths:
                     - SUCCESSFUL_DATABASE_AUTHENTICATION_GROUP
                     - FAILED_DATABASE_AUTHENTICATION_GROUP
                     - BATCH_COMPLETED_GROUP
-                  isAzureMonitorTargetEnabled: true
+                  isAzureMonitorTargetEnabled: false
                   isStorageSecondaryKeyInUse: false
                   retentionDays: 0
                   state: Enabled
@@ -524,7 +630,7 @@ paths:
                     - SUCCESSFUL_DATABASE_AUTHENTICATION_GROUP
                     - FAILED_DATABASE_AUTHENTICATION_GROUP
                     - BATCH_COMPLETED_GROUP
-                  isAzureMonitorTargetEnabled: true
+                  isAzureMonitorTargetEnabled: false
                   isStorageSecondaryKeyInUse: false
                   retentionDays: 0
                   state: Enabled
@@ -627,6 +733,8 @@ paths:
              * 400 BlobAuditingPredicateExpressionEmpty - Invalid parameter 'predicateExpression', value can not be empty.
 
              * 400 BlobAuditingInvalidStorageAccountName - The provided storage account is not valid or does not exist.
+
+             * 400 UpdateNotAllowedOnPausedDatabase - User attempted to perform an update on a paused database.
 
              * 400 BlobAuditingInvalidStorageAccountCredentials - The provided storage account or access key is not valid.
 
@@ -814,6 +922,8 @@ paths:
             *** Error Responses: ***
 
              * 404 SubscriptionDoesNotHaveServer - The requested server was not found
+
+             * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.
       tags:
         - BlobAuditing
       x-ms-examples:
@@ -878,6 +988,8 @@ paths:
              * 400 InvalidBlobAuditActions - Invalid audit action
 
              * 404 SubscriptionDoesNotHaveServer - The requested server was not found
+
+             * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.
 
              * 409 ServerBlobAuditingPolicyInProgress - Set server blob auditing is already in progress.
       tags:
@@ -991,6 +1103,20 @@ definitions:
         $ref: '#/definitions/DatabaseBlobAuditingPolicyProperties'
         description: Resource properties.
         x-ms-client-flatten: true
+    type: object
+  DatabaseBlobAuditingPolicyListResult:
+    description: A list of database auditing settings.
+    properties:
+      nextLink:
+        description: Link to retrieve next page of results.
+        readOnly: true
+        type: string
+      value:
+        description: Array of results.
+        items:
+          $ref: '#/definitions/DatabaseBlobAuditingPolicy'
+        readOnly: true
+        type: array
     type: object
   DatabaseBlobAuditingPolicyProperties:
     description: Properties of a database blob auditing policy.
@@ -1213,6 +1339,20 @@ definitions:
         $ref: '#/definitions/ServerBlobAuditingPolicyProperties'
         description: Resource properties.
         x-ms-client-flatten: true
+    type: object
+  ServerBlobAuditingPolicyListResult:
+    description: A list of server auditing settings.
+    properties:
+      nextLink:
+        description: Link to retrieve next page of results.
+        readOnly: true
+        type: string
+      value:
+        description: Array of results.
+        items:
+          $ref: '#/definitions/ServerBlobAuditingPolicy'
+        readOnly: true
+        type: array
     type: object
   ServerBlobAuditingPolicyProperties:
     description: Properties of a server blob auditing policy.

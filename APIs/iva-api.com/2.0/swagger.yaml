@@ -3330,6 +3330,11 @@ paths:
           name: Description
           required: false
           type: string
+        - description: Originating network of SHOW Program to be matched.
+          in: query
+          name: OriginatingNetwork
+          required: false
+          type: string
         - description: Poster of Program to be matched.
           in: query
           name: Poster
@@ -3444,6 +3449,11 @@ paths:
         - description: Description of Program to be matched.
           in: formData
           name: Description
+          required: false
+          type: string
+        - description: Originating network of SHOW Program to be matched.
+          in: formData
+          name: OriginatingNetwork
           required: false
           type: string
         - description: Poster of Program to be matched.
@@ -19701,6 +19711,9 @@ definitions:
       LimitedResults:
         type: boolean
         x-nullable: false
+      OriginatingNetwork:
+        description: Originating network of SHOW Program to be matched.
+        type: string
       Poster:
         description: Poster of Program to be matched.
         type: string

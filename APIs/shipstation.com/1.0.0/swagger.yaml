@@ -222,6 +222,8 @@ tags:
 
       NOTES:
 
+      - *Can only be modified via the CreateOrder call. CreateLabelForOrder will default these fields to the values set prior to the call.
+
       - CreateLabelForOrder will not affect billTo values. Calls will default billTo fields to the values set in the order.
 
       - **Setting "billToParty" attribute to "my_other_account" is used when wanting to charge a second connected account for the same carrier.

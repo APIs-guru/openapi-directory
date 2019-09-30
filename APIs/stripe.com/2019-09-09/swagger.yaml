@@ -99,11 +99,11 @@ paths:
   /v1/account:
     delete:
       description: |-
-        <p>With <a href="/docs/connect">Connect</a>, you may delete Custom accounts you manage.</p>
+        <p>With <a href="/docs/connect">Connect</a>, you can delete Custom or Express accounts you manage.</p>
 
-        <p>Custom accounts created using test-mode keys can be deleted at any time. Custom accounts created using live-mode keys may only be deleted once all balances are zero.</p>
+        <p>Accounts created using test-mode keys can be deleted at any time. Accounts created using live-mode keys can only be deleted once all balances are zero.</p>
 
-        <p>If you are looking to close your own account, use the <a href="https://dashboard.stripe.com/account/data">data tab in your account settings</a> instead.</p>
+        <p>If you want to delete your own account, use the <a href="https://dashboard.stripe.com/account/data">data tab in your account settings</a> instead.</p>
       operationId: DeleteAccount
       parameters:
         - description: Body parameters for the request.
@@ -2392,11 +2392,11 @@ paths:
   '/v1/accounts/{account}':
     delete:
       description: |-
-        <p>With <a href="/docs/connect">Connect</a>, you may delete Custom accounts you manage.</p>
+        <p>With <a href="/docs/connect">Connect</a>, you can delete Custom or Express accounts you manage.</p>
 
-        <p>Custom accounts created using test-mode keys can be deleted at any time. Custom accounts created using live-mode keys may only be deleted once all balances are zero.</p>
+        <p>Accounts created using test-mode keys can be deleted at any time. Accounts created using live-mode keys can only be deleted once all balances are zero.</p>
 
-        <p>If you are looking to close your own account, use the <a href="https://dashboard.stripe.com/account/data">data tab in your account settings</a> instead.</p>
+        <p>If you want to delete your own account, use the <a href="https://dashboard.stripe.com/account/data">data tab in your account settings</a> instead.</p>
       operationId: DeleteAccountsAccount
       parameters:
         - description: 'The identifier of the account to be deleted. If none is provided, will default to the account of the API key.'
@@ -6025,7 +6025,7 @@ paths:
           schema:
             properties:
               billing_address_collection:
-                description: 'Specify whether Checkout should collect the customer''s billing address. If set to `required`, Checkout will always collect the customer''s billing address. If left blank or set to `auto` Checkout will only collect the billing address when necessary.'
+                description: 'Specify whether Checkout should collect the customer''s billing address. If set to `required`, Checkout will always collect the customer''s billing address. If not set or set to `auto` Checkout will only collect the billing address when necessary.'
                 enum:
                   - auto
                   - required
@@ -6041,12 +6041,15 @@ paths:
                 type: string
               customer:
                 description: |-
-                  ID of an existing customer, if one exists. If blank, Checkout will
-                  create a new customer object based on information provided during the
-                  session. The email stored on the customer will be used to prefill the
-                  email field on the Checkout page. If the customer changes their email
+                  ID of an existing customer, if one exists. Only supported for Checkout
+                  Sessions in `payment` or `subscription` mode, but not Checkout Sessions
+                  in `setup` mode. The email stored on the customer will be used to prefill
+                  the email field on the Checkout page. If the customer changes their email
                   on the Checkout page, the Customer object will be updated with the new
                   email.
+                  If blank for Checkout Sessions in `payment` or `subscription` mode,
+                  Checkout will create a new customer object based on information
+                  provided during the session.
                 type: string
               customer_email:
                 description: |-
@@ -6117,7 +6120,7 @@ paths:
                   - subscription
                 type: string
               payment_intent_data:
-                description: A subset of parameters to be passed to PaymentIntent creation.
+                description: A subset of parameters to be passed to PaymentIntent creation for Checkout Sessions in `payment` mode.
                 properties:
                   application_fee_amount:
                     type: integer
@@ -6194,7 +6197,7 @@ paths:
                   type: string
                 type: array
               setup_intent_data:
-                description: A subset of parameters to be passed to SetupIntent creation.
+                description: A subset of parameters to be passed to SetupIntent creation for Checkout Sessions in `setup` mode.
                 properties:
                   description:
                     type: string
@@ -6205,7 +6208,12 @@ paths:
                 title: setup_intent_data_param
                 type: object
               submit_type:
-                description: 'Describes the type of transaction being performed by Checkout in order to customize relevant text on the page, such as the submit button. `submit_type` can only be specified on Checkout Sessions using line items or a SKU, but not Checkout Sessions for subscriptions. Supported values are `auto`, `book`, `donate`, or `pay`.'
+                description: |-
+                  Describes the type of transaction being performed by Checkout in order to customize
+                  relevant text on the page, such as the submit button. `submit_type` can only be
+                  specified on Checkout Sessions in `payment` mode, but not Checkout Sessions
+                  in `subscription` or `setup` mode.
+                  Supported values are `auto`, `book`, `donate`, or `pay`.
                 enum:
                   - auto
                   - book
@@ -6213,7 +6221,7 @@ paths:
                   - pay
                 type: string
               subscription_data:
-                description: A subset of parameters to be passed to subscription creation.
+                description: A subset of parameters to be passed to subscription creation for Checkout Sessions in `subscription` mode.
                 properties:
                   application_fee_percent:
                     type: number
@@ -9266,38 +9274,6 @@ paths:
           description: Error response.
           schema:
             $ref: '#/definitions/error'
-  '/v1/events/{id}/retry':
-    post:
-      description: <p>Resend an event. This only works in testmode</p>
-      operationId: PostEventsIdRetry
-      parameters:
-        - in: path
-          name: id
-          required: true
-          type: string
-        - description: Body parameters for the request.
-          in: body
-          name: payload
-          required: false
-          schema:
-            properties:
-              expand:
-                description: Specifies which fields in the response should be expanded.
-                items:
-                  type: string
-                type: array
-              webhook_endpoint:
-                type: string
-            type: object
-      responses:
-        '200':
-          description: Successful response.
-          schema:
-            $ref: '#/definitions/event'
-        default:
-          description: Error response.
-          schema:
-            $ref: '#/definitions/error'
   /v1/exchange_rates:
     get:
       description: <p>Returns a list of objects that contain the rates at which foreign currencies are converted to one another. Only shows the currencies for which Stripe supports.</p>
@@ -10997,7 +10973,7 @@ paths:
                   type: string
                 type: array
               metadata:
-                type: object
+                description: Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
             type: object
       responses:
         '200':
@@ -11032,6 +11008,8 @@ paths:
               held_amount:
                 description: 'If the authorization''s `is_held_amount_controllable` property is `true`, you may provide this value to control how much to hold for the authorization. Must be positive (use [`decline`](https://stripe.com/docs/api/issuing/authorizations/decline) to decline an authorization request).'
                 type: integer
+              metadata:
+                description: Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
             type: object
       responses:
         '200':
@@ -11063,6 +11041,8 @@ paths:
                 items:
                   type: string
                 type: array
+              metadata:
+                description: Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
             type: object
       responses:
         '200':
@@ -11227,8 +11207,8 @@ paths:
                         - caterers
                         - charitable_and_social_service_organizations_fundraising
                         - chemicals_and_allied_products
-                        - chidrens_and_infants_wear_stores
                         - child_care_services
+                        - childrens_and_infants_wear_stores
                         - chiropodists_podiatrists
                         - chiropractors
                         - cigar_stores_and_stands
@@ -11517,8 +11497,8 @@ paths:
                         - caterers
                         - charitable_and_social_service_organizations_fundraising
                         - chemicals_and_allied_products
-                        - chidrens_and_infants_wear_stores
                         - child_care_services
+                        - childrens_and_infants_wear_stores
                         - chiropodists_podiatrists
                         - chiropractors
                         - cigar_stores_and_stands
@@ -11812,8 +11792,8 @@ paths:
                               - caterers
                               - charitable_and_social_service_organizations_fundraising
                               - chemicals_and_allied_products
-                              - chidrens_and_infants_wear_stores
                               - child_care_services
+                              - childrens_and_infants_wear_stores
                               - chiropodists_podiatrists
                               - chiropractors
                               - cigar_stores_and_stands
@@ -12237,8 +12217,8 @@ paths:
                         - caterers
                         - charitable_and_social_service_organizations_fundraising
                         - chemicals_and_allied_products
-                        - chidrens_and_infants_wear_stores
                         - child_care_services
+                        - childrens_and_infants_wear_stores
                         - chiropodists_podiatrists
                         - chiropractors
                         - cigar_stores_and_stands
@@ -12527,8 +12507,8 @@ paths:
                         - caterers
                         - charitable_and_social_service_organizations_fundraising
                         - chemicals_and_allied_products
-                        - chidrens_and_infants_wear_stores
                         - child_care_services
+                        - childrens_and_infants_wear_stores
                         - chiropodists_podiatrists
                         - chiropractors
                         - cigar_stores_and_stands
@@ -12822,8 +12802,8 @@ paths:
                               - caterers
                               - charitable_and_social_service_organizations_fundraising
                               - chemicals_and_allied_products
-                              - chidrens_and_infants_wear_stores
                               - child_care_services
+                              - childrens_and_infants_wear_stores
                               - chiropodists_podiatrists
                               - chiropractors
                               - cigar_stores_and_stands
@@ -13308,8 +13288,8 @@ paths:
                         - caterers
                         - charitable_and_social_service_organizations_fundraising
                         - chemicals_and_allied_products
-                        - chidrens_and_infants_wear_stores
                         - child_care_services
+                        - childrens_and_infants_wear_stores
                         - chiropodists_podiatrists
                         - chiropractors
                         - cigar_stores_and_stands
@@ -13598,8 +13578,8 @@ paths:
                         - caterers
                         - charitable_and_social_service_organizations_fundraising
                         - chemicals_and_allied_products
-                        - chidrens_and_infants_wear_stores
                         - child_care_services
+                        - childrens_and_infants_wear_stores
                         - chiropodists_podiatrists
                         - chiropractors
                         - cigar_stores_and_stands
@@ -13897,8 +13877,8 @@ paths:
                               - caterers
                               - charitable_and_social_service_organizations_fundraising
                               - chemicals_and_allied_products
-                              - chidrens_and_infants_wear_stores
                               - child_care_services
+                              - childrens_and_infants_wear_stores
                               - chiropodists_podiatrists
                               - chiropractors
                               - cigar_stores_and_stands
@@ -14333,8 +14313,8 @@ paths:
                         - caterers
                         - charitable_and_social_service_organizations_fundraising
                         - chemicals_and_allied_products
-                        - chidrens_and_infants_wear_stores
                         - child_care_services
+                        - childrens_and_infants_wear_stores
                         - chiropodists_podiatrists
                         - chiropractors
                         - cigar_stores_and_stands
@@ -14623,8 +14603,8 @@ paths:
                         - caterers
                         - charitable_and_social_service_organizations_fundraising
                         - chemicals_and_allied_products
-                        - chidrens_and_infants_wear_stores
                         - child_care_services
+                        - childrens_and_infants_wear_stores
                         - chiropodists_podiatrists
                         - chiropractors
                         - cigar_stores_and_stands
@@ -14922,8 +14902,8 @@ paths:
                               - caterers
                               - charitable_and_social_service_organizations_fundraising
                               - chemicals_and_allied_products
-                              - chidrens_and_infants_wear_stores
                               - child_care_services
+                              - childrens_and_infants_wear_stores
                               - chiropodists_podiatrists
                               - chiropractors
                               - cigar_stores_and_stands
@@ -15184,8 +15164,7 @@ paths:
                 items:
                   type: string
                 type: array
-              metadata:
-                type: object
+              metadata: {}
               status:
                 description: 'Specifies whether to permit authorizations on this card. Possible values are `active`, `inactive`, or the terminal states: `canceled`, `lost`, `stolen`.'
                 enum:
@@ -15207,7 +15186,7 @@ paths:
             $ref: '#/definitions/error'
   '/v1/issuing/cards/{card}/details':
     get:
-      description: '<p>For virtual cards only. Retrieves an Issuing <code>Card_details</code> object that contains <a href="/docs/issuing/cards/management#virtual-card-info">the sensitive details</a> of a virtual card.</p>'
+      description: '<p>For virtual cards only. Retrieves an Issuing <code>card_details</code> object that contains <a href="/docs/issuing/cards/management#virtual-card-info">the sensitive details</a> of a virtual card.</p>'
       operationId: GetIssuingCardsCardDetails
       parameters:
         - description: Specifies which fields in the response should be expanded.
@@ -15752,8 +15731,7 @@ paths:
                 items:
                   type: string
                 type: array
-              metadata:
-                type: object
+              metadata: {}
             type: object
       responses:
         '200':
@@ -17021,7 +16999,6 @@ paths:
                 description: 'The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name matching this value. It contains additional information specific to the PaymentMethod type. Required unless `payment_method` is specified (see the [Shared PaymentMethods](https://stripe.com/docs/payments/payment-methods/connect#shared-payment-methods) guide)'
                 enum:
                   - card
-                  - card_present
                 type: string
             type: object
       responses:
@@ -22684,6 +22661,125 @@ paths:
                 items:
                   type: string
                 type: array
+              person:
+                description: Information for the person this token will represent.
+                properties:
+                  address:
+                    properties:
+                      city:
+                        type: string
+                      country:
+                        type: string
+                      line1:
+                        type: string
+                      line2:
+                        type: string
+                      postal_code:
+                        type: string
+                      state:
+                        type: string
+                    title: address_specs
+                    type: object
+                  address_kana:
+                    properties:
+                      city:
+                        type: string
+                      country:
+                        type: string
+                      line1:
+                        type: string
+                      line2:
+                        type: string
+                      postal_code:
+                        type: string
+                      state:
+                        type: string
+                      town:
+                        type: string
+                    title: japan_address_kana_specs
+                    type: object
+                  address_kanji:
+                    properties:
+                      city:
+                        type: string
+                      country:
+                        type: string
+                      line1:
+                        type: string
+                      line2:
+                        type: string
+                      postal_code:
+                        type: string
+                      state:
+                        type: string
+                      town:
+                        type: string
+                    title: japan_address_kanji_specs
+                    type: object
+                  dob: {}
+                  email:
+                    type: string
+                  first_name:
+                    type: string
+                  first_name_kana:
+                    type: string
+                  first_name_kanji:
+                    type: string
+                  gender:
+                    type: string
+                  id_number:
+                    type: string
+                  last_name:
+                    type: string
+                  last_name_kana:
+                    type: string
+                  last_name_kanji:
+                    type: string
+                  maiden_name:
+                    type: string
+                  metadata:
+                    type: object
+                  phone:
+                    type: string
+                  relationship:
+                    properties:
+                      director:
+                        type: boolean
+                      executive:
+                        type: boolean
+                      owner:
+                        type: boolean
+                      percent_ownership: {}
+                      representative:
+                        type: boolean
+                      title:
+                        type: string
+                    title: relationship_specs
+                    type: object
+                  ssn_last_4:
+                    type: string
+                  verification:
+                    properties:
+                      additional_document:
+                        properties:
+                          back:
+                            type: string
+                          front:
+                            type: string
+                        title: person_verification_document_specs
+                        type: object
+                      document:
+                        properties:
+                          back:
+                            type: string
+                          front:
+                            type: string
+                        title: person_verification_document_specs
+                        type: object
+                    title: person_verification_specs
+                    type: object
+                title: person_token_specs
+                type: object
               pii:
                 description: The PII this token will represent.
                 properties:
@@ -23567,6 +23663,7 @@ paths:
                     - order.updated
                     - order_return.created
                     - payment_intent.amount_capturable_updated
+                    - payment_intent.canceled
                     - payment_intent.created
                     - payment_intent.payment_failed
                     - payment_intent.succeeded
@@ -23598,6 +23695,7 @@ paths:
                     - reporting.report_type.updated
                     - review.closed
                     - review.opened
+                    - setup_intent.canceled
                     - setup_intent.created
                     - setup_intent.setup_failed
                     - setup_intent.succeeded
@@ -23802,6 +23900,7 @@ paths:
                     - order.updated
                     - order_return.created
                     - payment_intent.amount_capturable_updated
+                    - payment_intent.canceled
                     - payment_intent.created
                     - payment_intent.payment_failed
                     - payment_intent.succeeded
@@ -23833,6 +23932,7 @@ paths:
                     - reporting.report_type.updated
                     - review.closed
                     - review.opened
+                    - setup_intent.canceled
                     - setup_intent.created
                     - setup_intent.setup_failed
                     - setup_intent.succeeded
@@ -23968,6 +24068,10 @@ definitions:
         $ref: '#/definitions/account_tos_acceptance'
       type:
         description: 'The Stripe account type. Can be `standard`, `express`, or `custom`.'
+        enum:
+          - custom
+          - express
+          - standard
         type: string
     required:
       - id
@@ -24085,7 +24189,7 @@ definitions:
           type: string
         type: array
       pending_verification:
-        description: 'Additional fields that may be required depending on the results of verification or review for provided requirements. If any of these fields become required, they appear in `currently_due` or `past_due`.'
+        description: 'Fields that may become required depending on the results of verification or review. An empty array unless an asynchronous verification is pending. If verification fails, the fields in this array become required and move to `currently_due` or `past_due`.'
         items:
           type: string
         type: array
@@ -24213,7 +24317,7 @@ definitions:
           type: string
         type: array
       pending_verification:
-        description: 'Additional fields that may be required depending on the results of verification or review for provided requirements. If any of these fields become required, they appear in `currently_due` or `past_due`.'
+        description: 'Fields that may become required depending on the results of verification or review. An empty array unless an asynchronous verification is pending. If verification fails, the fields in this array become required and move to `currently_due` or `past_due`.'
         items:
           type: string
         type: array
@@ -25414,9 +25518,11 @@ definitions:
         type: string
       customer:
         description: |-
-          The ID of the customer for this session. A new customer will be created
-          unless an existing customer was provided in when the session was
-          created.
+          The ID of the customer for this session.
+          For Checkout Sessions in `payment` or `subscription` mode, Checkout
+          will create a new customer object based on information provided
+          during the session unless an existing customer was provided when
+          the session was created.
         type: string
         x-expansionResources:
           oneOf:
@@ -25476,7 +25582,7 @@ definitions:
           - checkout.session
         type: string
       payment_intent:
-        description: The ID of the PaymentIntent for `payment` mode.
+        description: The ID of the PaymentIntent for Checkout Sessions in `payment` mode.
         type: string
         x-expansionResources:
           oneOf:
@@ -25489,19 +25595,18 @@ definitions:
           type: string
         type: array
       setup_intent:
-        description: The ID of the SetupIntent if mode was set to `setup`.
+        description: The ID of the SetupIntent for Checkout Sessions in `setup` mode.
         type: string
         x-expansionResources:
           oneOf:
             - $ref: '#/definitions/setup_intent'
       submit_type:
         description: |-
-          Describes the type of transaction being performed by Checkout in order
-          to customize relevant text on the page, such as the submit button.
-          `submit_type` can only be specified on Checkout Sessions using line
-          items or a SKU, but not Checkout Sessions for subscriptions. Supported
-          values are
-          `auto`, `book`, `donate`, or `pay`.
+          Describes the type of transaction being performed by Checkout in order to customize
+          relevant text on the page, such as the submit button. `submit_type` can only be
+          specified on Checkout Sessions in `payment` mode, but not Checkout Sessions
+          in `subscription` or `setup` mode.
+          Supported values are `auto`, `book`, `donate`, or `pay`.
         enum:
           - auto
           - book
@@ -25509,7 +25614,7 @@ definitions:
           - pay
         type: string
       subscription:
-        description: The ID of the subscription created if one or more plans were provided.
+        description: The ID of the subscription for Checkout Sessions in `subscription` mode.
         type: string
         x-expansionResources:
           oneOf:
@@ -28692,8 +28797,8 @@ definitions:
             - caterers
             - charitable_and_social_service_organizations_fundraising
             - chemicals_and_allied_products
-            - chidrens_and_infants_wear_stores
             - child_care_services
+            - childrens_and_infants_wear_stores
             - chiropodists_podiatrists
             - chiropractors
             - cigar_stores_and_stands
@@ -28983,8 +29088,8 @@ definitions:
             - caterers
             - charitable_and_social_service_organizations_fundraising
             - chemicals_and_allied_products
-            - chidrens_and_infants_wear_stores
             - child_care_services
+            - childrens_and_infants_wear_stores
             - chiropodists_podiatrists
             - chiropractors
             - cigar_stores_and_stands
@@ -29343,8 +29448,8 @@ definitions:
             - caterers
             - charitable_and_social_service_organizations_fundraising
             - chemicals_and_allied_products
-            - chidrens_and_infants_wear_stores
             - child_care_services
+            - childrens_and_infants_wear_stores
             - chiropodists_podiatrists
             - chiropractors
             - cigar_stores_and_stands
@@ -29664,8 +29769,8 @@ definitions:
             - caterers
             - charitable_and_social_service_organizations_fundraising
             - chemicals_and_allied_products
-            - chidrens_and_infants_wear_stores
             - child_care_services
+            - childrens_and_infants_wear_stores
             - chiropodists_podiatrists
             - chiropractors
             - cigar_stores_and_stands
@@ -29955,8 +30060,8 @@ definitions:
             - caterers
             - charitable_and_social_service_organizations_fundraising
             - chemicals_and_allied_products
-            - chidrens_and_infants_wear_stores
             - child_care_services
+            - childrens_and_infants_wear_stores
             - chiropodists_podiatrists
             - chiropractors
             - cigar_stores_and_stands
@@ -30263,8 +30368,8 @@ definitions:
             - caterers
             - charitable_and_social_service_organizations_fundraising
             - chemicals_and_allied_products
-            - chidrens_and_infants_wear_stores
             - child_care_services
+            - childrens_and_infants_wear_stores
             - chiropodists_podiatrists
             - chiropractors
             - cigar_stores_and_stands
@@ -30689,7 +30794,7 @@ definitions:
         description: 'A user-displayable string describing the verification state for the person. For example, this may say "Provided identity information could not be verified".'
         type: string
       details_code:
-        description: 'One of `scan_name_mismatch`, `failed_keyed_identity`, or `failed_other`. A machine-readable code specifying the verification state for the person.'
+        description: 'One of `document_address_mismatch`, `document_dob_mismatch`, `document_duplicate_type`, `document_id_number_mismatch`, `document_name_mismatch`, `failed_keyed_identity`, or `failed_other`. A machine-readable code specifying the verification state for the person.'
         type: string
       document:
         $ref: '#/definitions/legal_entity_person_verification_document'
@@ -30715,7 +30820,7 @@ definitions:
         description: 'A user-displayable string describing the verification state of this document. For example, if a document is uploaded and the picture is too fuzzy, this may say "Identity document is too unclear to read".'
         type: string
       details_code:
-        description: 'One of `document_corrupt`, `document_failed_copy`, `document_not_readable`, `document_failed_greyscale`, `document_not_uploaded`, `document_id_type_not_supported`, `document_id_country_not_supported`, `document_failed_other`, `document_fraudulent`, `document_invalid`, `document_manipulated`, `document_missing_back`, `document_missing_front`, `document_photo_mismatch`, `document_too_large`, or `document_failed_test_mode`. A machine-readable code specifying the verification state for this document.'
+        description: 'One of `document_corrupt`, `document_country_not_supported`, `document_expired`, `document_failed_copy`, `document_failed_other`, `document_failed_test_mode`, `document_fraudulent`, `document_failed_greyscale`, `document_incomplete`, `document_invalid`, `document_manipulated`, `document_missing_back`, `document_missing_front`, `document_not_readable`, `document_not_uploaded`, `document_photo_mismatch`, `document_too_large`, or `document_type_not_supported`. A machine-readable code specifying the verification state for this document.'
         type: string
       front:
         description: 'The front of an ID returned by a [file upload](#create_file) with a `purpose` value of `identity_document`.'
@@ -32060,6 +32165,9 @@ definitions:
       last4:
         description: Last four characters of the IBAN.
         type: string
+      mandate:
+        description: ID of the mandate used to make this payment.
+        type: string
     title: payment_method_details_sepa_debit
     type: object
     x-expandableFields: []
@@ -32349,7 +32457,7 @@ definitions:
           type: string
         type: array
       pending_verification:
-        description: 'Additional fields that may be required depending on the results of verification or review for provided requirements. If any of these fields become required, they appear in `currently_due` or `past_due`.'
+        description: 'Fields that may become required depending on the results of verification or review. An empty array unless an asynchronous verification is pending. If verification fails, the fields in this array become required and move to `currently_due` or `past_due`.'
         items:
           type: string
         type: array
@@ -33965,6 +34073,9 @@ definitions:
         type: string
       last4:
         description: Last 4 digits of account number associated with the transfer.
+        type: string
+      reference:
+        description: Sender entered arbitrary information about the transfer.
         type: string
       sender_name:
         description: Sender name associated with the transfer.

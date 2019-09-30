@@ -49,6 +49,9 @@ definitions:
           events:
             $ref: '#/definitions/BlobEventTypes'
             description: The type of events that cause this trigger to fire.
+          ignoreEmptyBlobs:
+            description: 'If set to true, blobs with zero bytes will be ignored.'
+            type: boolean
           scope:
             description: The ARM resource ID of the Storage Account.
             type: string

@@ -313,7 +313,7 @@ paths:
         AnnotateFileRequest.pages) frames (gif) or pages (pdf or tiff) from each
         file provided and perform detection and annotation for each image
         extracted.
-      operationId: vision.projects.files.annotate
+      operationId: vision.projects.locations.files.annotate
       parameters:
         - in: body
           name: body
@@ -374,7 +374,7 @@ paths:
         `google.longrunning.Operations` interface.
         `Operation.metadata` contains `OperationMetadata` (metadata).
         `Operation.response` contains `AsyncBatchAnnotateFilesResponse` (results).
-      operationId: vision.projects.files.asyncBatchAnnotate
+      operationId: vision.projects.locations.files.asyncBatchAnnotate
       parameters:
         - in: body
           name: body

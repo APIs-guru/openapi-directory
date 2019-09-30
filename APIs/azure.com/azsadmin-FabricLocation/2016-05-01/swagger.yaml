@@ -172,11 +172,12 @@ definitions:
             type: string
         type: object
         x-ms-azure-resource: true
-    description: Place holder for fabric location.
+    description: Fabric Location resource.
     properties:
       properties:
-        description: Empty object.
-        type: object
+        $ref: '#/definitions/FabricLocationModel'
+        description: Properties of a FabricLocation.
+        x-ms-client-flatten: true
     type: object
   FabricLocationList:
     description: Pageable list of fabric locations.
@@ -189,4 +190,47 @@ definitions:
         items:
           $ref: '#/definitions/FabricLocation'
         type: array
+    type: object
+  FabricLocationModel:
+    description: All properties of a fabric location resource.
+    properties:
+      exclusiveAdminOperationName:
+        description: Name of the running exclusive admin operation.
+        type: string
+      exclusiveAdminOperationRunning:
+        description: Value for whether an exclusive admin operation is running.
+        type: boolean
+      externalDsnIPAddress01:
+        description: First external IP address of the DNS server.
+        type: string
+      externalDsnIPAddress02:
+        description: Second external IP Address of the DNS server.
+        type: string
+      pepIpAddresses:
+        description: The IP addresses of the privileged endpoints.
+        items:
+          type: string
+        type: array
+      shutDownActionPlanEndTime:
+        description: Last known stamp stop time for the shut down action plan.
+        format: date-time
+        type: string
+      shutDownActionPlanStartTime:
+        description: Last known stamp start time for the shut down action plan
+        format: date-time
+        type: string
+      stampInformationId:
+        description: The deployment id of the stamp.
+        type: string
+      startUpActionPlanEndTime:
+        description: Last known stamp stop time for the start up action plan.
+        format: date-time
+        type: string
+      startUpActionPlanStartTime:
+        description: Last known stamp start time for the start up action plan.
+        format: date-time
+        type: string
+      timeServer:
+        description: The IP address of the time server.
+        type: string
     type: object

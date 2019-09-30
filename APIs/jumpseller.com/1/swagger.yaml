@@ -101,6 +101,19 @@ paths:
       summary: Create a new Category.
       tags:
         - Categories
+  /categories/count.json:
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Count'
+      summary: Count all Categories.
+      tags:
+        - Categories
   '/categories/{id}.json':
     delete:
       parameters:
@@ -618,6 +631,19 @@ paths:
       summary: Create a new Customer.
       tags:
         - Customers
+  /customers/count.json:
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Count'
+      summary: Count all Customers.
+      tags:
+        - Customers
   '/customers/email/{email}.json':
     get:
       parameters:
@@ -1090,7 +1116,7 @@ paths:
       tags:
         - Orders
     post:
-      description: 'Use the JSON format:<br/>''{ "order": {"status": "Paid", "shipping_method_id": 123, "products": [{ "id": 123, "qty": 1}], "customer": {"id": 123}}}''<br/>or in CURL:<br/>curl -X POST -d ''{ "order": {"status": "Paid", "shipping_method_id": 123, "products": [{ "id": 123, "qty": 1}], "customer": {"id": 123}}}'' "https://api.jumpseller.com/v1/orders.json?login=storecode&authtoken=XXXXX" -H "Content-Type:application/json" '
+      description: 'Use the JSON format:<br/>''{ "order": {"status": "Paid", "shipping_method_id": 123, "products": [{ "id": 123, "qty": 1}], "customer": {"id": 123}}}''<br/>or in CURL:<br/>curl -X POST -d ''{ "order": {"status": "Paid", "shipping_method_id": 123, "products": [{ "id": 123, "qty": 1}], "customer": {"id": 123}}}'' "https://610d738f.ngrok.io/api/v1/orders.json?login=storecode&authtoken=XXXXX" -H "Content-Type:application/json" '
       parameters:
         - $ref: '#/parameters/LoginParam'
         - $ref: '#/parameters/AuthtokenParam'
@@ -1200,7 +1226,7 @@ paths:
       tags:
         - Orders
     put:
-      description: 'Only ''status'', ''tracking_number'', ''tracking_company'', ''additional_information'' and ''additional_fields'' are available for update.<br/>Use the JSON format:<br/>''{ "order": {"status": "Paid", "tracking_company": "other", "tracking_number": "123456789", "additional_information": "My custom message.", "additional_fields": [{"label": "Gift Name", "value": "Duarte"}, {"label": "Gift Wrapping Color", "value": "Green"}]} }}''<br/>or in CURL:<br/>curl -X PUT -d ''{ "order": {"status": "Paid", "additional_information": "My custom message."}}'' "https://api.jumpseller.com/v1/orders/{id}.json?login=storecode&authtoken=XXXXX" -H "Content-Type:application/json" '
+      description: 'Only ''status'', ''tracking_number'', ''tracking_company'', ''additional_information'' and ''additional_fields'' are available for update.<br/>Use the JSON format:<br/>''{ "order": {"status": "Paid", "tracking_company": "other", "tracking_number": "123456789", "additional_information": "My custom message.", "additional_fields": [{"label": "Gift Name", "value": "Duarte"}, {"label": "Gift Wrapping Color", "value": "Green"}]} }}''<br/>or in CURL:<br/>curl -X PUT -d ''{ "order": {"status": "Paid", "additional_information": "My custom message."}}'' "https://610d738f.ngrok.io/api/v1/orders/{id}.json?login=storecode&authtoken=XXXXX" -H "Content-Type:application/json" '
       parameters:
         - $ref: '#/parameters/LoginParam'
         - $ref: '#/parameters/AuthtokenParam'

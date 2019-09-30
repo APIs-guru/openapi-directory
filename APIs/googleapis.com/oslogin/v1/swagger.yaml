@@ -383,6 +383,9 @@ definitions:
       homeDirectory:
         description: The path to the home directory for this account.
         type: string
+      name:
+        description: Output only. The canonical resource name.
+        type: string
       operatingSystemType:
         description: The operating system type where this account applies.
         enum:
@@ -424,5 +427,8 @@ definitions:
           Public key text in SSH format, defined by
           <a href="https://www.ietf.org/rfc/rfc4253.txt" target="_blank">RFC4253</a>
           section 6.6.
+        type: string
+      name:
+        description: Output only. The canonical resource name.
         type: string
     type: object

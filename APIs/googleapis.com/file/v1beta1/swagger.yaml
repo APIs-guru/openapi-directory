@@ -116,39 +116,12 @@ tags:
 paths:
   '/v1beta1/{name}':
     delete:
-      description: |-
-        Deletes a long-running operation. This method indicates that the client is
-        no longer interested in the operation result. It does not cancel the
-        operation. If the server doesn't support this method, it returns
-        `google.rpc.Code.UNIMPLEMENTED`.
-      operationId: file.projects.locations.operations.delete
+      description: Deletes an instance.
+      operationId: file.projects.locations.instances.delete
       parameters:
-        - description: The name of the operation resource to be deleted.
-          in: path
-          name: name
-          required: true
-          type: string
-          x-reservedExpansion: true
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Empty'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - projects
-    get:
-      description: |-
-        Gets the latest state of a long-running operation.  Clients can use this
-        method to poll the operation result at intervals as recommended by the API
-        service.
-      operationId: file.projects.locations.operations.get
-      parameters:
-        - description: The name of the operation resource.
+        - description: |-
+            The instance resource name, in the format
+            projects/{project_id}/locations/{location}/instances/{instance_id}
           in: path
           name: name
           required: true
@@ -159,6 +132,30 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    get:
+      description: Gets the details of a specific instance.
+      operationId: file.projects.locations.instances.get
+      parameters:
+        - description: |-
+            The instance resource name, in the format
+            projects/{project_id}/locations/{location}/instances/{instance_id}.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Instance'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'

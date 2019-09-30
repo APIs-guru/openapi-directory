@@ -1911,6 +1911,23 @@ paths:
           name: childTags
           required: false
           type: boolean
+        - description: Included entry types (optional).
+          enum:
+            - Nothing
+            - Album
+            - Artist
+            - DiscussionTopic
+            - PV
+            - ReleaseEvent
+            - ReleaseEventSeries
+            - Song
+            - SongList
+            - Tag
+            - User
+          in: query
+          name: entryTypes
+          required: false
+          type: string
         - description: Filter by entry status (optional).
           enum:
             - Draft

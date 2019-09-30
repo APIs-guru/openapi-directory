@@ -126,7 +126,7 @@ paths:
       operationId: bigquerydatatransfer.projects.transferConfigs.runs.delete
       parameters:
         - description: |-
-            The field will contain name of the resource requested, for example:
+            Required. The field will contain name of the resource requested, for example:
             `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}`
           in: path
           name: name
@@ -154,7 +154,7 @@ paths:
       operationId: bigquerydatatransfer.projects.transferConfigs.runs.get
       parameters:
         - description: |-
-            The field will contain name of the resource requested, for example:
+            Required. The field will contain name of the resource requested, for example:
             `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}`
           in: path
           name: name
@@ -240,7 +240,7 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - description: Required list of fields to be updated in this request.
+        - description: Required. Required list of fields to be updated in this request.
           in: query
           name: updateMask
           type: string
@@ -353,7 +353,7 @@ paths:
           schema:
             $ref: '#/definitions/CheckValidCredsRequest'
         - description: |-
-            The data source in the form:
+            Required. The data source in the form:
             `projects/{project_id}/dataSources/{data_source_id}`
           in: path
           name: name
@@ -405,7 +405,7 @@ paths:
           name: pageToken
           type: string
         - description: |-
-            The BigQuery project id for which data sources should be returned.
+            Required. The BigQuery project id for which data sources should be returned.
             Must be in the form: `projects/{project_id}`
           in: path
           name: parent
@@ -467,7 +467,7 @@ paths:
           name: pageToken
           type: string
         - description: |-
-            Name of transfer configuration for which transfer runs should be retrieved.
+            Required. Name of transfer configuration for which transfer runs should be retrieved.
             Format of transfer configuration resource name is:
             `projects/{project_id}/transferConfigs/{config_id}`.
           in: path
@@ -558,7 +558,7 @@ paths:
           name: pageToken
           type: string
         - description: |-
-            The BigQuery project id for which data sources
+            Required. The BigQuery project id for which data sources
             should be returned: `projects/{project_id}`.
           in: path
           name: parent
@@ -630,7 +630,7 @@ paths:
           schema:
             $ref: '#/definitions/TransferConfig'
         - description: |-
-            The BigQuery project id where the transfer configuration should be created.
+            Required. The BigQuery project id where the transfer configuration should be created.
             Must be in the format projects/{project_id}/locations/{location_id}
             If specified location and location of the destination bigquery dataset
             do not match - the request will fail.
@@ -694,7 +694,7 @@ paths:
           name: pageToken
           type: string
         - description: |-
-            Transfer run name in the form:
+            Required. Transfer run name in the form:
             `projects/{project_id}/transferConfigs/{config_Id}/runs/{run_id}`.
           in: path
           name: parent
@@ -764,7 +764,7 @@ paths:
           schema:
             $ref: '#/definitions/ScheduleTransferRunsRequest'
         - description: |-
-            Transfer configuration name in the form:
+            Required. Transfer configuration name in the form:
             `projects/{project_id}/transferConfigs/{config_id}`.
           in: path
           name: parent
@@ -1184,13 +1184,13 @@ definitions:
     properties:
       endTime:
         description: |-
-          End time of the range of transfer runs. For example,
+          Required. End time of the range of transfer runs. For example,
           `"2017-05-30T00:00:00+00:00"`.
         format: google-datetime
         type: string
       startTime:
         description: |-
-          Start time of the range of transfer runs. For example,
+          Required. Start time of the range of transfer runs. For example,
           `"2017-05-25T00:00:00+00:00"`.
         format: google-datetime
         type: string

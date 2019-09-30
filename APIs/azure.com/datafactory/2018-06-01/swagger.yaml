@@ -41,6 +41,16 @@ parameters:
     name: api-version
     required: true
     type: string
+  dataFlowName:
+    description: The data flow name.
+    in: path
+    maxLength: 260
+    minLength: 1
+    name: dataFlowName
+    pattern: '^[A-Za-z0-9_][^<>*#.%&:\\+?/]*$'
+    required: true
+    type: string
+    x-ms-parameter-location: method
   datasetName:
     description: The dataset name.
     in: path
@@ -1435,6 +1445,544 @@ paths:
                 x-ms-correlation-request-id: 657028b7-5e63-4d7c-b8e7-cb336ed92ff0
                 x-ms-ratelimit-remaining-subscription-writes: '1193'
                 x-ms-request-id: 657028b7-5e63-4d7c-b8e7-cb336ed92ff0
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/addDataFlowToDebugSession':
+    post:
+      description: Add a data flow into debug session.
+      operationId: DataFlowDebugSession_AddDataFlow
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - $ref: '#/parameters/resourceGroupName'
+        - $ref: '#/parameters/factoryName'
+        - $ref: '#/parameters/api-version'
+        - description: Data flow debug session definition with debug content.
+          in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/DataFlowDebugPackage'
+      responses:
+        '200':
+          description: OK.
+          schema:
+            $ref: '#/definitions/AddDataFlowToDebugSessionResponse'
+        default:
+          description: An error response received from the Azure Data Factory service.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - dataFlowDebugSession
+      x-ms-examples:
+        DataFlowDebugSession_AddDataFlow:
+          parameters:
+            api-version: '2018-06-01'
+            factoryName: exampleFactoryName
+            request:
+              dataFlow:
+                properties:
+                  type: MappingDataFlow
+                  typeProperties:
+                    script: "\n\nsource(output(\n\t\tColumn_1 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> source1"
+                    sinks: []
+                    sources:
+                      - dataset:
+                          referenceName: DelimitedText2
+                          type: DatasetReference
+                        name: source1
+                    transformations: []
+              datasets:
+                - properties:
+                    annotations: []
+                    linkedServiceName:
+                      referenceName: linkedService5
+                      type: LinkedServiceReference
+                    schema:
+                      - type: String
+                    type: DelimitedText
+                    typeProperties:
+                      columnDelimiter: ','
+                      escapeChar: \
+                      firstRowAsHeader: true
+                      location:
+                        container: dataflow-sample-data
+                        fileName: Ansiencoding.csv
+                        type: AzureBlobStorageLocation
+                      quoteChar: '"'
+              debugSettings:
+                datasetParameters:
+                  Movies:
+                    path: abc
+                  Output:
+                    time: def
+                parameters:
+                  sourcePath: Toy
+                sourceSettings:
+                  - rowLimit: 1000
+                    sourceName: source1
+                  - rowLimit: 222
+                    sourceName: source2
+              linkedServices:
+                - properties:
+                    annotations: []
+                    type: AzureBlobStorage
+                    typeProperties:
+                      connectionString: DefaultEndpointsProtocol=https;AccountName=<storageName>;EndpointSuffix=core.windows.net;
+                      encryptedCredential: <credential>
+              sessionId: f06ed247-9d07-49b2-b05e-2cb4a2fc871e
+            resourceGroupName: exampleResourceGroup
+            subscriptionId: 12345678-1234-1234-1234-12345678abc
+          responses:
+            '200':
+              body:
+                jobVersion: e5328ee7-c524-4207-8ba4-b709010db33d
+              headers:
+                Date: 'Sat, 16 Jun 2018 00:40:01 GMT'
+                X-Content-Type-Options: nosniff
+                x-ms-correlation-request-id: 2f955e10-c6df-45a7-97d4-81acdb8540cd
+                x-ms-ratelimit-remaining-subscription-reads: '14989'
+                x-ms-request-id: 2f955e10-c6df-45a7-97d4-81acdb8540cd
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/createDataFlowDebugSession':
+    post:
+      description: Creates a data flow debug session.
+      operationId: DataFlowDebugSession_Create
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - $ref: '#/parameters/resourceGroupName'
+        - $ref: '#/parameters/factoryName'
+        - $ref: '#/parameters/api-version'
+        - description: Data flow debug session definition
+          in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/CreateDataFlowDebugSessionRequest'
+      responses:
+        '200':
+          description: OK.
+          schema:
+            $ref: '#/definitions/CreateDataFlowDebugSessionResponse'
+        '202':
+          description: Accepted.
+          headers:
+            location:
+              description: URI to poll for asynchronous operation status.
+              type: string
+        default:
+          description: An error response received from the Azure Data Factory service.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - dataFlowDebugSession
+      x-ms-examples:
+        DataFlowDebugSession_Create:
+          parameters:
+            api-version: '2018-06-01'
+            factoryName: exampleFactoryName
+            request:
+              integrationRuntime:
+                properties:
+                  type: Managed
+                  typeProperties:
+                    computeProperties:
+                      dataFlowProperties:
+                        computeType: General
+                        coreCount: 48
+                        timeToLive: 10
+                      location: AutoResolve
+              timeToLive: 60
+            resourceGroupName: exampleResourceGroup
+            subscriptionId: 12345678-1234-1234-1234-12345678abc
+          responses:
+            '200':
+              body:
+                sessionId: 229c688c-944c-44ac-b31a-82d50f347154
+                status: Succeeded
+            '202':
+              headers:
+                Date: 'Sat, 16 Jun 2018 00:40:01 GMT'
+                X-Content-Type-Options: nosniff
+                location: 'https://management.azure.com/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/operationStatuses/dfCreateSession$$229c688c-944c-44ac-b31a-82d50f347154?api-version=2018-06-01'
+                x-ms-correlation-request-id: 2f955e10-c6df-45a7-97d4-81acdb8540cd
+                x-ms-ratelimit-remaining-subscription-reads: '14989'
+                x-ms-request-id: 2f955e10-c6df-45a7-97d4-81acdb8540cd
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/dataflows':
+    get:
+      description: Lists data flows.
+      operationId: DataFlows_ListByFactory
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - $ref: '#/parameters/resourceGroupName'
+        - $ref: '#/parameters/factoryName'
+        - $ref: '#/parameters/api-version'
+      responses:
+        '200':
+          description: OK.
+          schema:
+            $ref: '#/definitions/DataFlowListResponse'
+        default:
+          description: An error response received from the Azure Data Factory service.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - dataFlows
+      x-ms-examples:
+        DataFlows_ListByFactory:
+          parameters:
+            api-version: '2018-06-01'
+            factoryName: exampleFactoryName
+            resourceGroupName: exampleResourceGroup
+            subscriptionId: 12345678-1234-1234-1234-12345678abc
+          responses:
+            '200':
+              body:
+                value:
+                  - etag: 0a0068d4-0000-0000-0000-5b245bd30000
+                    id: /subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/dataflows/exampleDataFlow
+                    name: exampleDataFlow
+                    properties:
+                      description: 'Sample demo data flow to convert currencies showing usage of union, derive and conditional split transformation.'
+                      type: MappingDataFlow
+                      typeProperties:
+                        script: |-
+                          source(output(PreviousConversionRate as double,Country as string,DateTime1 as string,CurrentConversionRate as double),allowSchemaDrift: false,validateSchema: false) ~> USDCurrency
+                          source(output(PreviousConversionRate as double,Country as string,DateTime1 as string,CurrentConversionRate as double),allowSchemaDrift: true,validateSchema: false) ~> CADSource
+                          USDCurrency, CADSource union(byName: true)~> Union
+                          Union derive(NewCurrencyRate = round(CurrentConversionRate*1.25)) ~> NewCurrencyColumn
+                          NewCurrencyColumn split(Country == 'USD',Country == 'CAD',disjoint: false) ~> ConditionalSplit1@(USD, CAD)
+                          ConditionalSplit1@USD sink(saveMode:'overwrite' ) ~> USDSink
+                          ConditionalSplit1@CAD sink(saveMode:'overwrite' ) ~> CADSink
+                        sinks:
+                          - dataset:
+                              referenceName: USDOutput
+                              type: DatasetReference
+                            name: USDSink
+                          - dataset:
+                              referenceName: CADOutput
+                              type: DatasetReference
+                            name: CADSink
+                        sources:
+                          - dataset:
+                              referenceName: CurrencyDatasetUSD
+                              type: DatasetReference
+                            name: USDCurrency
+                          - dataset:
+                              referenceName: CurrencyDatasetCAD
+                              type: DatasetReference
+                            name: CADSource
+                    type: Microsoft.DataFactory/factories/dataflows
+              headers:
+                Date: 'Sat, 16 Jun 2018 00:37:40 GMT'
+                X-Content-Type-Options: nosniff
+                x-ms-correlation-request-id: 341c9ece-5062-448b-be98-3ccbf476ed5d
+                x-ms-ratelimit-remaining-subscription-reads: '14992'
+                x-ms-request-id: 341c9ece-5062-448b-be98-3ccbf476ed5d
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/dataflows/{dataFlowName}':
+    delete:
+      description: Deletes a data flow.
+      operationId: DataFlows_Delete
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - $ref: '#/parameters/resourceGroupName'
+        - $ref: '#/parameters/factoryName'
+        - $ref: '#/parameters/dataFlowName'
+        - $ref: '#/parameters/api-version'
+      responses:
+        '200':
+          description: OK.
+        '204':
+          description: No Content.
+        default:
+          description: An error response received from the Azure Data Factory service.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - dataFlows
+      x-ms-examples:
+        DataFlows_Delete:
+          parameters:
+            api-version: '2018-06-01'
+            dataFlowName: exampleDataFlow
+            factoryName: exampleFactoryName
+            resourceGroupName: exampleResourceGroup
+            subscriptionId: 12345678-1234-1234-1234-12345678abc
+          responses:
+            '200': {}
+            '204': {}
+    get:
+      description: Gets a data flow.
+      operationId: DataFlows_Get
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - $ref: '#/parameters/resourceGroupName'
+        - $ref: '#/parameters/factoryName'
+        - $ref: '#/parameters/dataFlowName'
+        - $ref: '#/parameters/api-version'
+        - description: 'ETag of the data flow entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned.'
+          in: header
+          name: If-None-Match
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK.
+          schema:
+            $ref: '#/definitions/DataFlowResource'
+        default:
+          description: An error response received from the Azure Data Factory service.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - dataFlows
+      x-ms-examples:
+        DataFlows_Get:
+          parameters:
+            api-version: '2018-06-01'
+            dataFlowName: exampleDataFlow
+            factoryName: exampleFactoryName
+            ifNoneMatch: 15004c4f-0000-0200-0000-5cbe090e0000
+            resourceGroupName: exampleResourceGroup
+            subscriptionId: 12345678-1234-1234-1234-12345678abc
+          responses:
+            '200':
+              body:
+                etag: 15004c4f-0000-0200-0000-5cbe090e0000
+                id: /subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/dataflows/exampleDataFlow
+                name: exampleDataFlow
+                properties:
+                  description: 'Sample demo data flow to convert currencies showing usage of union, derive and conditional split transformation.'
+                  type: MappingDataFlow
+                  typeProperties:
+                    script: |-
+                      source(output(PreviousConversionRate as double,Country as string,DateTime1 as string,CurrentConversionRate as double),allowSchemaDrift: false,validateSchema: false) ~> USDCurrency
+                      source(output(PreviousConversionRate as double,Country as string,DateTime1 as string,CurrentConversionRate as double),allowSchemaDrift: true,validateSchema: false) ~> CADSource
+                      USDCurrency, CADSource union(byName: true)~> Union
+                      Union derive(NewCurrencyRate = round(CurrentConversionRate*1.25)) ~> NewCurrencyColumn
+                      NewCurrencyColumn split(Country == 'USD',Country == 'CAD',disjoint: false) ~> ConditionalSplit1@(USD, CAD)
+                      ConditionalSplit1@USD sink(saveMode:'overwrite' ) ~> USDSink
+                      ConditionalSplit1@CAD sink(saveMode:'overwrite' ) ~> CADSink
+                    sinks:
+                      - dataset:
+                          referenceName: USDOutput
+                          type: DatasetReference
+                        name: USDSink
+                      - dataset:
+                          referenceName: CADOutput
+                          type: DatasetReference
+                        name: CADSink
+                    sources:
+                      - dataset:
+                          referenceName: CurrencyDatasetUSD
+                          type: DatasetReference
+                        name: USDCurrency
+                      - dataset:
+                          referenceName: CurrencyDatasetCAD
+                          type: DatasetReference
+                        name: CADSource
+                type: Microsoft.DataFactory/factories/dataflows
+              headers:
+                Date: 'Mon, 22 Apr 2019 18:33:50 GMT'
+                X-Content-Type-Options: nosniff
+                x-ms-correlation-request-id: 48983fb5-612a-44c6-8158-add7ffebb32b
+                x-ms-ratelimit-remaining-subscription-reads: '11993'
+                x-ms-request-id: 48983fb5-612a-44c6-8158-add7ffebb32b
+    put:
+      description: Creates or updates a data flow.
+      operationId: DataFlows_CreateOrUpdate
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - $ref: '#/parameters/resourceGroupName'
+        - $ref: '#/parameters/factoryName'
+        - $ref: '#/parameters/dataFlowName'
+        - $ref: '#/parameters/api-version'
+        - description: 'ETag of the data flow entity. Should only be specified for update, for which it should match existing entity or can be * for unconditional update.'
+          in: header
+          name: If-Match
+          required: false
+          type: string
+        - description: Data flow resource definition.
+          in: body
+          name: dataFlow
+          required: true
+          schema:
+            $ref: '#/definitions/DataFlowResource'
+      responses:
+        '200':
+          description: OK.
+          schema:
+            $ref: '#/definitions/DataFlowResource'
+        default:
+          description: An error response received from the Azure Data Factory service.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - dataFlows
+      x-ms-examples:
+        DataFlows_Create:
+          parameters:
+            api-version: '2018-06-01'
+            dataFlow:
+              properties:
+                description: 'Sample demo data flow to convert currencies showing usage of union, derive and conditional split transformation.'
+                type: MappingDataFlow
+                typeProperties:
+                  script: |-
+                    source(output(PreviousConversionRate as double,Country as string,DateTime1 as string,CurrentConversionRate as double),allowSchemaDrift: false,validateSchema: false) ~> USDCurrency
+                    source(output(PreviousConversionRate as double,Country as string,DateTime1 as string,CurrentConversionRate as double),allowSchemaDrift: true,validateSchema: false) ~> CADSource
+                    USDCurrency, CADSource union(byName: true)~> Union
+                    Union derive(NewCurrencyRate = round(CurrentConversionRate*1.25)) ~> NewCurrencyColumn
+                    NewCurrencyColumn split(Country == 'USD',Country == 'CAD',disjoint: false) ~> ConditionalSplit1@(USD, CAD)
+                    ConditionalSplit1@USD sink(saveMode:'overwrite' ) ~> USDSink
+                    ConditionalSplit1@CAD sink(saveMode:'overwrite' ) ~> CADSink
+                  sinks:
+                    - dataset:
+                        referenceName: USDOutput
+                        type: DatasetReference
+                      name: USDSink
+                    - dataset:
+                        referenceName: CADOutput
+                        type: DatasetReference
+                      name: CADSink
+                  sources:
+                    - dataset:
+                        referenceName: CurrencyDatasetUSD
+                        type: DatasetReference
+                      name: USDCurrency
+                    - dataset:
+                        referenceName: CurrencyDatasetCAD
+                        type: DatasetReference
+                      name: CADSource
+            dataFlowName: exampleDataFlow
+            factoryName: exampleFactoryName
+            ifMatch: null
+            resourceGroupName: exampleResourceGroup
+            subscriptionId: 12345678-1234-1234-1234-12345678abc
+          responses:
+            '200':
+              body:
+                etag: 0a0066d4-0000-0000-0000-5b245bd20000
+                id: /subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/datasets/exampleDataset
+                name: exampleDataFlow
+                properties:
+                  description: 'Sample demo data flow to convert currencies showing usage of union, derive and conditional split transformation.'
+                  type: MappingDataFlow
+                  typeProperties:
+                    script: |-
+                      source(output(PreviousConversionRate as double,Country as string,DateTime1 as string,CurrentConversionRate as double),allowSchemaDrift: false,validateSchema: false) ~> USDCurrency
+                      source(output(PreviousConversionRate as double,Country as string,DateTime1 as string,CurrentConversionRate as double),allowSchemaDrift: true,validateSchema: false) ~> CADSource
+                      USDCurrency, CADSource union(byName: true)~> Union
+                      Union derive(NewCurrencyRate = round(CurrentConversionRate*1.25)) ~> NewCurrencyColumn
+                      NewCurrencyColumn split(Country == 'USD',Country == 'CAD',disjoint: false) ~> ConditionalSplit1@(USD, CAD)
+                      ConditionalSplit1@USD sink(saveMode:'overwrite' ) ~> USDSink
+                      ConditionalSplit1@CAD sink(saveMode:'overwrite' ) ~> CADSink
+                    sinks:
+                      - dataset:
+                          referenceName: USDOutput
+                          type: DatasetReference
+                        name: USDSink
+                      - dataset:
+                          referenceName: CADOutput
+                          type: DatasetReference
+                        name: CADSink
+                    sources:
+                      - dataset:
+                          referenceName: CurrencyDatasetUSD
+                          type: DatasetReference
+                        name: USDCurrency
+                      - dataset:
+                          referenceName: CurrencyDatasetCAD
+                          type: DatasetReference
+                        name: CADSource
+                type: Microsoft.DataFactory/factories/dataflows
+              headers:
+                Date: 'Sat, 16 Jun 2019 00:37:38 GMT'
+                X-Content-Type-Options: nosniff
+                x-ms-correlation-request-id: ce95d6dd-c04d-4b02-b7ad-fe79c9b26df0
+                x-ms-ratelimit-remaining-subscription-writes: '1194'
+                x-ms-request-id: ce95d6dd-c04d-4b02-b7ad-fe79c9b26df0
+        DataFlows_Update:
+          parameters:
+            api-version: '2018-06-01'
+            dataFlow:
+              properties:
+                description: 'Sample demo data flow to convert currencies showing usage of union, derive and conditional split transformation.'
+                type: MappingDataFlow
+                typeProperties:
+                  script: |-
+                    source(output(PreviousConversionRate as double,Country as string,DateTime1 as string,CurrentConversionRate as double),allowSchemaDrift: false,validateSchema: false) ~> USDCurrency
+                    source(output(PreviousConversionRate as double,Country as string,DateTime1 as string,CurrentConversionRate as double),allowSchemaDrift: true,validateSchema: false) ~> CADSource
+                    USDCurrency, CADSource union(byName: true)~> Union
+                    Union derive(NewCurrencyRate = round(CurrentConversionRate*1.25)) ~> NewCurrencyColumn
+                    NewCurrencyColumn split(Country == 'USD',Country == 'CAD',disjoint: false) ~> ConditionalSplit1@(USD, CAD)
+                    ConditionalSplit1@USD sink(saveMode:'overwrite' ) ~> USDSink
+                    ConditionalSplit1@CAD sink(saveMode:'overwrite' ) ~> CADSink
+                  sinks:
+                    - dataset:
+                        referenceName: USDOutput
+                        type: DatasetReference
+                      name: USDSink
+                    - dataset:
+                        referenceName: CADOutput
+                        type: DatasetReference
+                      name: CADSink
+                  sources:
+                    - dataset:
+                        referenceName: CurrencyDatasetUSD
+                        type: DatasetReference
+                      name: USDCurrency
+                    - dataset:
+                        referenceName: CurrencyDatasetCAD
+                        type: DatasetReference
+                      name: CADSource
+            dataFlowName: exampleDataFlow
+            factoryName: exampleFactoryName
+            ifMatch: null
+            resourceGroupName: exampleResourceGroup
+            subscriptionId: 12345678-1234-1234-1234-12345678abc
+          responses:
+            '200':
+              body:
+                etag: 0a0068d4-0000-0000-0000-5b245bd30002
+                id: /subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/datasets/exampleDataset
+                name: exampleDataFlow
+                properties:
+                  description: 'Sample demo data flow to convert currencies showing usage of union, derive and conditional split transformation.'
+                  type: MappingDataFlow
+                  typeProperties:
+                    script: |-
+                      source(output(PreviousConversionRate as double,Country as string,DateTime1 as string,CurrentConversionRate as double),allowSchemaDrift: false,validateSchema: false) ~> USDCurrency
+                      source(output(PreviousConversionRate as double,Country as string,DateTime1 as string,CurrentConversionRate as double),allowSchemaDrift: true,validateSchema: false) ~> CADSource
+                      USDCurrency, CADSource union(byName: true)~> Union
+                      Union derive(NewCurrencyRate = round(CurrentConversionRate*1.25)) ~> NewCurrencyColumn
+                      NewCurrencyColumn split(Country == 'USD',Country == 'CAD',disjoint: false) ~> ConditionalSplit1@(USD, CAD)
+                      ConditionalSplit1@USD sink(saveMode:'overwrite' ) ~> USDSink
+                      ConditionalSplit1@CAD sink(saveMode:'overwrite' ) ~> CADSink
+                    sinks:
+                      - dataset:
+                          referenceName: USDOutput
+                          type: DatasetReference
+                        name: USDSink
+                      - dataset:
+                          referenceName: CADOutput
+                          type: DatasetReference
+                        name: CADSink
+                    sources:
+                      - dataset:
+                          referenceName: CurrencyDatasetUSD
+                          type: DatasetReference
+                        name: USDCurrency
+                      - dataset:
+                          referenceName: CurrencyDatasetCAD
+                          type: DatasetReference
+                        name: CADSource
+                type: Microsoft.DataFactory/factories/dataflows
+              headers:
+                Date: 'Sat, 16 Jun 2019 00:37:38 GMT'
+                X-Content-Type-Options: nosniff
+                x-ms-correlation-request-id: ce95d6dd-c04d-4b02-b7ad-fe79c9b26df0
+                x-ms-ratelimit-remaining-subscription-writes: '1193'
+                x-ms-request-id: ce95d6dd-c04d-4b02-b7ad-fe79c9b26df0
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/datasets':
     get:
       description: Lists datasets.
@@ -1761,6 +2309,106 @@ paths:
                 x-ms-correlation-request-id: e2e7f6be-e7ee-4aae-943f-6ff799e034f2
                 x-ms-ratelimit-remaining-subscription-writes: '1193'
                 x-ms-request-id: e2e7f6be-e7ee-4aae-943f-6ff799e034f2
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/deleteDataFlowDebugSession':
+    post:
+      description: Deletes a data flow debug session.
+      operationId: DataFlowDebugSession_Delete
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - $ref: '#/parameters/resourceGroupName'
+        - $ref: '#/parameters/factoryName'
+        - $ref: '#/parameters/api-version'
+        - description: Data flow debug session definition for deletion
+          in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteDataFlowDebugSessionRequest'
+      responses:
+        '200':
+          description: OK.
+        default:
+          description: An error response received from the Azure Data Factory service.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - dataFlowDebugSession
+      x-ms-examples:
+        DataFlowDebugSession_Delete:
+          parameters:
+            api-version: '2018-06-01'
+            factoryName: exampleFactoryName
+            request:
+              sessionId: 91fb57e0-8292-47be-89ff-c8f2d2bb2a7e
+            resourceGroupName: exampleResourceGroup
+            subscriptionId: 12345678-1234-1234-1234-12345678abc
+          responses:
+            '200':
+              headers:
+                Date: 'Sat, 16 Jun 2018 00:40:01 GMT'
+                X-Content-Type-Options: nosniff
+                x-ms-correlation-request-id: 2f955e10-c6df-45a7-97d4-81acdb8540cd
+                x-ms-ratelimit-remaining-subscription-reads: '14989'
+                x-ms-request-id: 2f955e10-c6df-45a7-97d4-81acdb8540cd
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/executeDataFlowDebugCommand':
+    post:
+      description: Execute a data flow debug command.
+      operationId: DataFlowDebugSession_ExecuteCommand
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - $ref: '#/parameters/resourceGroupName'
+        - $ref: '#/parameters/factoryName'
+        - $ref: '#/parameters/api-version'
+        - description: Data flow debug command definition.
+          in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/DataFlowDebugCommandRequest'
+      responses:
+        '200':
+          description: OK.
+          schema:
+            $ref: '#/definitions/DataFlowDebugCommandResponse'
+        '202':
+          description: Accepted.
+          headers:
+            location:
+              description: URI to poll for asynchronous operation status.
+              type: string
+        default:
+          description: An error response received from the Azure Data Factory service.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - dataFlowDebugSession
+      x-ms-examples:
+        DataFlowDebugSession_ExecuteCommand:
+          parameters:
+            api-version: '2018-06-01'
+            factoryName: exampleFactoryName
+            request:
+              command: executePreviewQuery
+              commandPayload:
+                rowLimits: 100
+                streamName: source1
+              sessionId: f06ed247-9d07-49b2-b05e-2cb4a2fc871e
+            resourceGroupName: exampleResourceGroup
+            subscriptionId: 12345678-1234-1234-1234-12345678abc
+          responses:
+            '200':
+              body:
+                data: some output
+                status: Succeeded
+            '202':
+              headers:
+                Date: 'Sat, 16 Jun 2018 00:40:01 GMT'
+                X-Content-Type-Options: nosniff
+                location: 'https://management.azure.com/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/operationResults/dfCommandOutput$$f06ed247-9d07-49b2-b05e-2cb4a2fc871e$$e5328ee7-c524-4207-8ba4-b709010db33d$$ace5eaf0-3e93-45ba-ada3-bf77da321a7b?api-version=2018-06-01'
+                x-ms-correlation-request-id: 2f955e10-c6df-45a7-97d4-81acdb8540cd
+                x-ms-ratelimit-remaining-subscription-reads: '14989'
+                x-ms-request-id: 2f955e10-c6df-45a7-97d4-81acdb8540cd
+      x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/getDataPlaneAccess':
     post:
       description: Get Data Plane access.
@@ -4480,6 +5128,53 @@ paths:
                 x-ms-correlation-request-id: 5c2b442b-d360-43ec-9268-f923f88f31fd
                 x-ms-ratelimit-remaining-subscription-writes: '1190'
                 x-ms-request-id: 5c2b442b-d360-43ec-9268-f923f88f31fd
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/queryDataFlowDebugSessions':
+    post:
+      description: Query all active data flow debug sessions.
+      operationId: DataFlowDebugSession_QueryByFactory
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - $ref: '#/parameters/resourceGroupName'
+        - $ref: '#/parameters/factoryName'
+        - $ref: '#/parameters/api-version'
+      responses:
+        '200':
+          description: OK.
+          schema:
+            $ref: '#/definitions/QueryDataFlowDebugSessionsResponse'
+        default:
+          description: An error response received from the Azure Data Factory service.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - dataFlowDebugSession
+      x-ms-examples:
+        DataFlowDebugSession_QueryByFactory:
+          parameters:
+            api-version: '2018-06-01'
+            factoryName: exampleFactoryName
+            resourceGroupName: exampleResourceGroup
+            subscriptionId: 12345678-1234-1234-1234-12345678abc
+          responses:
+            '200':
+              body:
+                value:
+                  - computeType: General
+                    coreCount: 48
+                    dataflowName: DebugSession-0a7e0d6e-f2b7-48cc-8cd8-618326f5662f
+                    lastActivityTime: '2019-09-05T18:28:00.9459674+00:00'
+                    sessionId: 229c688c-944c-44ac-b31a-82d50f347154
+                    startTime: '2019-09-05T18:23:20.3257799+00:00'
+                    timeToLiveInMinutes: 60
+                    userObjectId: 0a7e0d6e-f2b7-48cc-8cd8-618326f5662f
+              headers:
+                Date: 'Sat, 16 Jun 2018 00:40:01 GMT'
+                X-Content-Type-Options: nosniff
+                x-ms-correlation-request-id: 2f955e10-c6df-45a7-97d4-81acdb8540cd
+                x-ms-ratelimit-remaining-subscription-reads: '14989'
+                x-ms-request-id: 2f955e10-c6df-45a7-97d4-81acdb8540cd
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/queryPipelineRuns':
     post:
       description: Query pipeline runs in the factory based on input filter conditions.
@@ -5433,6 +6128,13 @@ definitions:
     required:
       - value
     type: object
+  AddDataFlowToDebugSessionResponse:
+    description: Response body structure for starting data flow debug session.
+    properties:
+      jobVersion:
+        description: The ID of data flow debug job version.
+        type: string
+    type: object
   AzureKeyVaultSecretReference:
     allOf:
       - $ref: '#/definitions/SecretBase'
@@ -5485,6 +6187,32 @@ definitions:
       - message
     type: object
     x-ms-external: true
+  CreateDataFlowDebugSessionRequest:
+    description: Request body structure for creating data flow debug session.
+    properties:
+      computeType:
+        description: Compute type of the cluster. The value will be overwritten by the same setting in integration runtime if provided.
+        type: string
+      coreCount:
+        description: Core count of the cluster. The value will be overwritten by the same setting in integration runtime if provided.
+        type: integer
+      integrationRuntime:
+        $ref: '#/definitions/IntegrationRuntimeResource'
+        description: Set to use integration runtime setting for data flow debug session.
+      timeToLive:
+        description: Time to live setting of the cluster in minutes.
+        type: integer
+    type: object
+  CreateDataFlowDebugSessionResponse:
+    description: Response body structure for creating data flow debug session.
+    properties:
+      sessionId:
+        description: The ID of data flow debug session.
+        type: string
+      status:
+        description: The state of the debug session.
+        type: string
+    type: object
   CreateLinkedIntegrationRuntimeRequest:
     description: The linked integration runtime information.
     properties:
@@ -5510,6 +6238,213 @@ definitions:
     required:
       - runId
     type: object
+  DataFlowDebugCommandPayload:
+    description: Structure of command payload.
+    properties:
+      columns:
+        description: Array of column names.
+        items:
+          type: string
+        type: array
+      expression:
+        description: The expression which is used for preview.
+        type: string
+      rowLimits:
+        description: Row limits for preview response.
+        type: integer
+      streamName:
+        description: The stream name which is used for preview.
+        type: string
+    required:
+      - streamName
+    type: object
+  DataFlowDebugCommandRequest:
+    description: Request body structure for data flow debug command.
+    properties:
+      command:
+        description: The command type.
+        enum:
+          - executePreviewQuery
+          - executeStatisticsQuery
+          - executeExpressionQuery
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: DataFlowDebugCommandType
+      commandPayload:
+        $ref: '#/definitions/DataFlowDebugCommandPayload'
+        description: The command payload object.
+      sessionId:
+        description: The ID of data flow debug session.
+        type: string
+    type: object
+  DataFlowDebugCommandResponse:
+    description: 'Response body structure of data flow result for data preview, statistics or expression preview.'
+    properties:
+      data:
+        description: 'The result data of data preview, statistics or expression preview.'
+        type: string
+      status:
+        description: 'The run status of data preview, statistics or expression preview.'
+        type: string
+    type: object
+  DataFlowDebugPackage:
+    additionalProperties:
+      type: object
+    description: Request body structure for starting data flow debug session.
+    properties:
+      dataFlow:
+        $ref: '#/definitions/DataFlowResource'
+        description: Data flow instance.
+      datasets:
+        description: List of datasets.
+        items:
+          $ref: '#/definitions/DatasetResource'
+        type: array
+      debugSettings:
+        description: Data flow debug settings.
+        properties:
+          datasetParameters:
+            description: Parameters for dataset.
+            type: object
+          parameters:
+            $ref: '#/definitions/ParameterValueSpecification'
+            description: Data flow parameters.
+          sourceSettings:
+            description: Source setting for data flow debug.
+            items:
+              $ref: '#/definitions/DataFlowSourceSetting'
+            type: array
+        type: object
+      linkedServices:
+        description: List of linked services.
+        items:
+          $ref: '#/definitions/LinkedServiceResource'
+        type: array
+      sessionId:
+        description: The ID of data flow debug session.
+        type: string
+      staging:
+        $ref: '#/definitions/DataFlowStagingInfo'
+        description: Staging info for debug session.
+    type: object
+  DataFlowDebugSessionInfo:
+    additionalProperties:
+      type: object
+    description: Data flow debug session info.
+    properties:
+      computeType:
+        description: Compute type of the cluster.
+        type: string
+      coreCount:
+        description: Core count of the cluster.
+        type: integer
+      dataFlowName:
+        description: The name of the data flow.
+        type: string
+      integrationRuntimeName:
+        description: Attached integration runtime name of data flow debug session.
+        type: string
+      lastActivityTime:
+        description: Last activity time of data flow debug session.
+        type: string
+      nodeCount:
+        description: Node count of the cluster. (deprecated property)
+        type: integer
+      sessionId:
+        description: The ID of data flow debug session.
+        type: string
+      startTime:
+        description: Start time of data flow debug session.
+        type: string
+      timeToLiveInMinutes:
+        description: Compute type of the cluster.
+        type: integer
+    type: object
+  DataFlowListResponse:
+    description: A list of data flow resources.
+    properties:
+      nextLink:
+        description: 'The link to the next page of results, if any remaining results exist.'
+        type: string
+      value:
+        description: List of data flows.
+        items:
+          $ref: '#/definitions/DataFlowResource'
+        type: array
+    required:
+      - value
+    type: object
+  DataFlowReference:
+    additionalProperties:
+      type: object
+    description: Data flow reference type.
+    properties:
+      datasetParameters:
+        description: Reference data flow parameters from dataset.
+        type: object
+      referenceName:
+        description: Reference data flow name.
+        type: string
+      type:
+        description: Data flow reference type.
+        enum:
+          - DataFlowReference
+        type: string
+    required:
+      - type
+      - referenceName
+  DataFlowResource:
+    allOf:
+      - $ref: '#/definitions/SubResource'
+    description: Data flow resource type.
+    properties:
+      properties:
+        description: Azure Data Factory nested object which contains a flow with data movements and transformations.
+        discriminator: type
+        properties:
+          annotations:
+            description: List of tags that can be used for describing the data flow.
+            items:
+              type: object
+            type: array
+          description:
+            description: The description of the data flow.
+            type: string
+          folder:
+            description: 'The folder that this data flow is in. If not specified, Data flow will appear at the root level.'
+            properties:
+              name:
+                description: The name of the folder that this data flow is in.
+                type: string
+            type: object
+          type:
+            description: Type of data flow.
+            type: string
+        type: object
+    required:
+      - properties
+  DataFlowSourceSetting:
+    additionalProperties:
+      type: object
+    description: Definition of data flow source setting for debug.
+    properties:
+      rowLimit:
+        description: Defines the row limit of data flow source in debug.
+        type: integer
+      sourceName:
+        description: The data flow source name.
+        type: string
+    type: object
+  DataFlowStagingInfo:
+    description: Staging info for execute data flow activity.
+    properties:
+      folderPath:
+        description: Folder path for staging blob.
+        type: string
+      linkedService:
+        $ref: '#/definitions/LinkedServiceReference'
+        description: Staging linked service reference.
   DatasetListResponse:
     description: A list of dataset resources.
     properties:
@@ -5627,6 +6562,13 @@ definitions:
         type: object
     required:
       - properties
+  DeleteDataFlowDebugSessionRequest:
+    description: Request body structure for deleting data flow debug session.
+    properties:
+      sessionId:
+        description: The ID of data flow debug session.
+        type: string
+    type: object
   ExposureControlRequest:
     description: The exposure control request.
     properties:
@@ -5809,6 +6751,15 @@ definitions:
       - projectName
     type: object
     x-ms-discriminator-value: FactoryVSTSConfiguration
+  GetDataFactoryOperationStatusResponse:
+    additionalProperties:
+      type: object
+    description: Response body structure for get data factory operation status.
+    properties:
+      status:
+        description: Status of the operation.
+        type: string
+    type: object
   GetSsisObjectMetadataRequest:
     description: The request payload of get SSIS object metadata.
     properties:
@@ -6544,6 +7495,18 @@ definitions:
         type: array
     required:
       - value
+    type: object
+  QueryDataFlowDebugSessionsResponse:
+    description: A list of active debug sessions.
+    properties:
+      nextLink:
+        description: 'The link to the next page of results, if any remaining results exist.'
+        type: string
+      value:
+        description: Array with all active debug sessions.
+        items:
+          $ref: '#/definitions/DataFlowDebugSessionInfo'
+        type: array
     type: object
   RerunTriggerListResponse:
     description: A list of rerun triggers.

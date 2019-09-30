@@ -1144,6 +1144,27 @@ definitions:
           $ref: '#/definitions/Orientation'
         type: array
     type: object
+  IosTestLoop:
+    description: |-
+      A test of an iOS application that implements one or more game loop scenarios.
+      This test type accepts an archived application (.ipa file) and a list of
+      integer scenarios that will be executed on the app sequentially.
+    properties:
+      appBundleId:
+        description: Output only. The bundle id for the application under test.
+        type: string
+      appIpa:
+        $ref: '#/definitions/FileReference'
+        description: Required. The .ipa of the application to test.
+      scenarios:
+        description: |-
+          The list of scenarios that should be run during the test. Defaults to the
+          single scenario 0 if unspecified.
+        items:
+          format: int32
+          type: integer
+        type: array
+    type: object
   IosTestSetup:
     description: A description of how to set up an iOS device prior to running the test.
     properties:
@@ -1562,6 +1583,9 @@ definitions:
           - TEST_NOT_APP_HOSTED
           - PLIST_CANNOT_BE_PARSED
           - TEST_ONLY_APK
+          - MALFORMED_IPA
+          - MISSING_URL_SCHEME
+          - MALFORMED_APP_BUNDLE
           - NO_CODE_APK
           - INVALID_INPUT_APK
           - INVALID_APK_PREVIEW_SDK
@@ -1680,6 +1704,9 @@ definitions:
       disableVideoRecording:
         description: Disables video recording. May reduce test latency.
         type: boolean
+      iosTestLoop:
+        $ref: '#/definitions/IosTestLoop'
+        description: An iOS application with a test loop.
       iosTestSetup:
         $ref: '#/definitions/IosTestSetup'
         description: Test setup requirements for iOS.

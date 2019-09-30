@@ -131,7 +131,7 @@ paths:
           name: endTime
           type: string
         - description: |-
-            An optional filter against labels for the request.
+            Optional. A filter against labels for the request.
 
             By default, searches use prefix matching. To specify exact match, prepend
             a plus symbol (`+`) to the search term.
@@ -165,7 +165,7 @@ paths:
           name: filter
           type: string
         - description: |-
-            Field used to sort the returned traces. Optional.
+            Optional. Field used to sort the returned traces.
             Can be one of the following:
 
             *   `trace_id`
@@ -182,19 +182,19 @@ paths:
           name: orderBy
           type: string
         - description: |-
-            Maximum number of traces to return. If not specified or <= 0, the
+            Optional. Maximum number of traces to return. If not specified or <= 0, the
             implementation selects a reasonable value.  The implementation may
-            return fewer traces than the requested page size. Optional.
+            return fewer traces than the requested page size.
           in: query
           name: pageSize
           type: integer
         - description: |-
             Token identifying the page of results to return. If provided, use the
-            value of the `next_page_token` field from a previous request. Optional.
+            value of the `next_page_token` field from a previous request.
           in: query
           name: pageToken
           type: string
-        - description: ID of the Cloud project where the trace data is stored.
+        - description: Required. ID of the Cloud project where the trace data is stored.
           in: path
           name: projectId
           required: true
@@ -206,7 +206,7 @@ paths:
           name: startTime
           type: string
         - description: |-
-            Type of data returned for traces in the list. Optional. Default is
+            Optional. Type of data returned for traces in the list. Default is
             `MINIMAL`.
           enum:
             - VIEW_TYPE_UNSPECIFIED
@@ -257,7 +257,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/Traces'
-        - description: ID of the Cloud project where the trace data is stored.
+        - description: Required. ID of the Cloud project where the trace data is stored.
           in: path
           name: projectId
           required: true
@@ -283,12 +283,12 @@ paths:
       description: Gets a single trace by its ID.
       operationId: cloudtrace.projects.traces.get
       parameters:
-        - description: ID of the Cloud project where the trace data is stored.
+        - description: Required. ID of the Cloud project where the trace data is stored.
           in: path
           name: projectId
           required: true
           type: string
-        - description: ID of the trace to return.
+        - description: Required. ID of the trace to return.
           in: path
           name: traceId
           required: true
@@ -444,7 +444,7 @@ definitions:
           cross-trace spans.
         type: string
       parentSpanId:
-        description: 'ID of the parent span, if any. Optional.'
+        description: 'Optional. ID of the parent span, if any.'
         format: uint64
         type: string
       spanId:

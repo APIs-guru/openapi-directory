@@ -1646,7 +1646,7 @@ paths:
         final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/redeploy':
     post:
-      description: The operation to redeploy a virtual machine.
+      description: 'Shuts down the virtual machine, moves it to a new node, and powers it back on.'
       operationId: VirtualMachines_Redeploy
       parameters:
         - description: The name of the resource group.

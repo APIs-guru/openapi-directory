@@ -1369,6 +1369,63 @@ paths:
       tags:
         - DataSetMapping
       x-ms-examples:
+        DataSetMappings_AdlsGen2File_Create:
+          parameters:
+            accountName: Account1
+            api-version: 2018-11-01-preview
+            dataSetMapping:
+              kind: AdlsGen2File
+              properties:
+                filePath: file21
+                fileSystem: fileSystem
+                outputType: Csv
+                resourceGroup: SampleResourceGroup
+                storageAccountName: storage2
+                subscriptionId: 433a8dfd-e5d5-4e77-ad86-90acdc75eb1a
+            dataSetMappingName: DatasetMapping1
+            resourceGroupName: SampleResourceGroup
+            shareSubscriptionName: ShareSubscription1
+            subscriptionId: 433a8dfd-e5d5-4e77-ad86-90acdc75eb1a
+          responses:
+            '200':
+              body:
+                id: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.DataShare/accounts/Account1/shareSubscriptions/ShareSubscription1/dataSetMappings/DatasetMapping1
+                kind: AdlsGen2File
+                name: DatasetMapping1
+                properties:
+                  dataSetId: a08f184b-0567-4b11-ba22-a1199336d226
+                  filePath: file21
+                  fileSystem: fileSystem
+                  outputType: Csv
+                  resourceGroup: SampleResourceGroup
+                  storageAccountName: storage2
+                  subscriptionId: 433a8dfd-e5d5-4e77-ad86-90acdc75eb1a
+                type: Microsoft.DataShare/DataSetMapping
+              headers:
+                Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
+                X-Content-Type-Options: nosniff
+                x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
+                x-ms-ratelimit-remaining-tenant-reads: '14999'
+                x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
+            '201':
+              body:
+                id: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.DataShare/accounts/Account1/shareSubscriptions/ShareSubscription1/dataSetMappings/DatasetMapping1
+                kind: AdlsGen2File
+                name: DatasetMapping1
+                properties:
+                  filePath: file21
+                  fileSystem: fileSystem
+                  outputType: Csv
+                  resourceGroup: SampleResourceGroup
+                  storageAccountName: storage2
+                  subscriptionId: 433a8dfd-e5d5-4e77-ad86-90acdc75eb1a
+                type: Microsoft.DataShare/DataSetMapping
+              headers:
+                Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
+                X-Content-Type-Options: nosniff
+                x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
+                x-ms-ratelimit-remaining-tenant-reads: '14999'
+                x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
         DataSetMappings_Create:
           parameters:
             accountName: Account1
@@ -1416,6 +1473,102 @@ paths:
                   resourceGroup: SampleResourceGroup
                   storageAccountName: storage2
                   subscriptionId: 433a8dfd-e5d5-4e77-ad86-90acdc75eb1a
+                type: Microsoft.DataShare/DataSetMapping
+              headers:
+                Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
+                X-Content-Type-Options: nosniff
+                x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
+                x-ms-ratelimit-remaining-tenant-reads: '14999'
+                x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
+        DataSetMappings_SqlDB_Create:
+          parameters:
+            accountName: Account1
+            api-version: 2018-11-01-preview
+            dataSetMapping:
+              kind: SqlDBTable
+              properties:
+                databaseName: Database1
+                sqlServerResourceId: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.Sql/servers/Server1
+                tableName: Table1
+            dataSetMappingName: DatasetMapping1
+            resourceGroupName: SampleResourceGroup
+            shareSubscriptionName: ShareSubscription1
+            subscriptionId: 433a8dfd-e5d5-4e77-ad86-90acdc75eb1a
+          responses:
+            '200':
+              body:
+                id: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.DataShare/accounts/Account1/shareSubscriptions/ShareSubscription1/dataSetMappings/DatasetMapping1
+                kind: SqlDBTable
+                name: DatasetMapping1
+                properties:
+                  dataSetId: a08f184b-0567-4b11-ba22-a1199336d226
+                  databaseName: Database1
+                  sqlServerResourceId: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.Sql/servers/Server1
+                  tableName: Table1
+                type: Microsoft.DataShare/DataSetMapping
+              headers:
+                Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
+                X-Content-Type-Options: nosniff
+                x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
+                x-ms-ratelimit-remaining-tenant-reads: '14999'
+                x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
+            '201':
+              body:
+                id: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.DataShare/accounts/Account1/shareSubscriptions/ShareSubscription1/dataSetMappings/DatasetMapping1
+                kind: SqlDBTable
+                name: DatasetMapping1
+                properties:
+                  databaseName: Database1
+                  sqlServerResourceId: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.Sql/servers/Server1
+                  tableName: Table1
+                type: Microsoft.DataShare/DataSetMapping
+              headers:
+                Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
+                X-Content-Type-Options: nosniff
+                x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
+                x-ms-ratelimit-remaining-tenant-reads: '14999'
+                x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
+        DataSetMappings_SqlDW_Create:
+          parameters:
+            accountName: Account1
+            api-version: 2018-11-01-preview
+            dataSetMapping:
+              kind: SqlDWTable
+              properties:
+                dataWarehouseName: DataWarehouse1
+                sqlServerResourceId: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.Sql/servers/Server1
+                tableName: Table1
+            dataSetMappingName: DatasetMapping1
+            resourceGroupName: SampleResourceGroup
+            shareSubscriptionName: ShareSubscription1
+            subscriptionId: 433a8dfd-e5d5-4e77-ad86-90acdc75eb1a
+          responses:
+            '200':
+              body:
+                id: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.DataShare/accounts/Account1/shareSubscriptions/ShareSubscription1/dataSetMappings/DatasetMapping1
+                kind: SqlDWTable
+                name: DatasetMapping1
+                properties:
+                  dataSetId: a08f184b-0567-4b11-ba22-a1199336d226
+                  dataWarehouseName: DataWarehouse1
+                  sqlServerResourceId: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.Sql/servers/Server1
+                  tableName: Table1
+                type: Microsoft.DataShare/DataSetMapping
+              headers:
+                Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
+                X-Content-Type-Options: nosniff
+                x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
+                x-ms-ratelimit-remaining-tenant-reads: '14999'
+                x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
+            '201':
+              body:
+                id: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.DataShare/accounts/Account1/shareSubscriptions/ShareSubscription1/dataSetMappings/DatasetMapping1
+                kind: SqlDWTable
+                name: DatasetMapping1
+                properties:
+                  dataWarehouseName: DataWarehouse1
+                  sqlServerResourceId: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.Sql/servers/Server1
+                  tableName: Table1
                 type: Microsoft.DataShare/DataSetMapping
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
@@ -2426,6 +2579,104 @@ paths:
                 x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
                 x-ms-ratelimit-remaining-tenant-reads: '14999'
                 x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
+        DataSets_SqlDBTable_Create:
+          parameters:
+            accountName: Account1
+            api-version: 2018-11-01-preview
+            dataSet:
+              kind: SqlDBTable
+              properties:
+                databaseName: SqlDB1
+                sqlServerResourceId: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.Sql/servers/Server1
+                tableName: Table1
+            dataSetName: Dataset1
+            resourceGroupName: SampleResourceGroup
+            shareName: Share1
+            subscriptionId: 433a8dfd-e5d5-4e77-ad86-90acdc75eb1a
+          responses:
+            '200':
+              body:
+                id: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.DataShare/accounts/Account1/shares/Share1/datasets/Dataset1
+                kind: SqlDBTable
+                name: null
+                properties:
+                  dataSetId: a08f184b-0567-4b11-ba22-a1199336d226
+                  databaseName: SqlDB1
+                  sqlServerResourceId: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.Sql/servers/Server1
+                  tableName: Table1
+                type: Microsoft.DataShare/DataSets
+              headers:
+                Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
+                X-Content-Type-Options: nosniff
+                x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
+                x-ms-ratelimit-remaining-tenant-reads: '14999'
+                x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
+            '201':
+              body:
+                id: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.DataShare/accounts/Account1/shares/Share1/datasets/Dataset1
+                kind: SqlDBTable
+                name: Dataset1
+                properties:
+                  dataSetId: a08f184b-0567-4b11-ba22-a1199336d226
+                  databaseName: SqlDB1
+                  sqlServerResourceId: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.Sql/servers/Server1
+                  tableName: Table1
+                type: Microsoft.DataShare/DataSet
+              headers:
+                Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
+                X-Content-Type-Options: nosniff
+                x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
+                x-ms-ratelimit-remaining-tenant-reads: '14999'
+                x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
+        DataSets_SqlDWTable_Create:
+          parameters:
+            accountName: Account1
+            api-version: 2018-11-01-preview
+            dataSet:
+              kind: SqlDWTable
+              properties:
+                dataWarehouseName: DataWarehouse1
+                sqlServerResourceId: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.Sql/servers/Server1
+                tableName: Table1
+            dataSetName: Dataset1
+            resourceGroupName: SampleResourceGroup
+            shareName: Share1
+            subscriptionId: 433a8dfd-e5d5-4e77-ad86-90acdc75eb1a
+          responses:
+            '200':
+              body:
+                id: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.DataShare/accounts/Account1/shares/Share1/datasets/Dataset1
+                kind: SqlDWTable
+                name: null
+                properties:
+                  dataSetId: a08f184b-0567-4b11-ba22-a1199336d226
+                  dataWarehouseName: DataWarehouse1
+                  sqlServerResourceId: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.Sql/servers/Server1
+                  tableName: Table1
+                type: Microsoft.DataShare/DataSets
+              headers:
+                Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
+                X-Content-Type-Options: nosniff
+                x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
+                x-ms-ratelimit-remaining-tenant-reads: '14999'
+                x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
+            '201':
+              body:
+                id: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.DataShare/accounts/Account1/shares/Share1/datasets/Dataset1
+                kind: SqlDWTable
+                name: Dataset1
+                properties:
+                  dataSetId: a08f184b-0567-4b11-ba22-a1199336d226
+                  dataWarehouseName: DataWarehouse1
+                  sqlServerResourceId: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.Sql/servers/Server1
+                  tableName: Table1
+                type: Microsoft.DataShare/DataSet
+              headers:
+                Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
+                X-Content-Type-Options: nosniff
+                x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
+                x-ms-ratelimit-remaining-tenant-reads: '14999'
+                x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shares/{shareName}/invitations':
     get:
       description: List invitations in a share
@@ -3368,7 +3619,7 @@ definitions:
         description: The ADLS account name.
         type: string
       dataSetId:
-        description: Unique DataSet id.
+        description: Unique id for identifying a data set resource
         readOnly: true
         type: string
       fileName:
@@ -3410,7 +3661,7 @@ definitions:
         description: The ADLS account name.
         type: string
       dataSetId:
-        description: Unique DataSet id.
+        description: Unique id for identifying a data set resource
         readOnly: true
         type: string
       folderPath:
@@ -3475,6 +3726,15 @@ definitions:
       fileSystem:
         description: File system to which the file belongs.
         type: string
+      outputType:
+        description: Type of output file
+        enum:
+          - Csv
+          - Parquet
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: outputType
       resourceGroup:
         description: Resource group of storage account.
         type: string
@@ -3495,7 +3755,7 @@ definitions:
     description: Properties of the ADLS Gen2 file data set.
     properties:
       dataSetId:
-        description: Unique DataSet id.
+        description: Unique id for identifying a data set resource
         readOnly: true
         type: string
       filePath:
@@ -3583,7 +3843,7 @@ definitions:
     description: Properties of the ADLS Gen2 file system data set.
     properties:
       dataSetId:
-        description: Unique DataSet id.
+        description: Unique id for identifying a data set resource
         readOnly: true
         type: string
       fileSystem:
@@ -3671,7 +3931,7 @@ definitions:
     description: Properties of the ADLS Gen2 folder data set.
     properties:
       dataSetId:
-        description: Unique DataSet id.
+        description: Unique id for identifying a data set resource
         readOnly: true
         type: string
       fileSystem:
@@ -3827,7 +4087,7 @@ definitions:
         description: BLOB Container name.
         type: string
       dataSetId:
-        description: Unique DataSet id.
+        description: Unique id for identifying a data set resource
         readOnly: true
         type: string
       resourceGroup:
@@ -3941,7 +4201,7 @@ definitions:
         description: Container that has the file path.
         type: string
       dataSetId:
-        description: Unique DataSet id.
+        description: Unique id for identifying a data set resource
         readOnly: true
         type: string
       prefix:
@@ -3984,6 +4244,15 @@ definitions:
       filePath:
         description: File path within the source data set
         type: string
+      outputType:
+        description: File output type
+        enum:
+          - Csv
+          - Parquet
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: outputType
       resourceGroup:
         description: Resource group of storage account.
         type: string
@@ -4007,7 +4276,7 @@ definitions:
         description: Container that has the file path.
         type: string
       dataSetId:
-        description: Unique DataSet id.
+        description: Unique id for identifying a data set resource
         readOnly: true
         type: string
       filePath:
@@ -4163,6 +4432,8 @@ definitions:
           - AdlsGen2File
           - AdlsGen1Folder
           - AdlsGen1File
+          - SqlDBTable
+          - SqlDWTable
         readOnly: true
         type: string
         x-ms-enum:
@@ -4186,6 +4457,8 @@ definitions:
           - AdlsGen2File
           - AdlsGen1Folder
           - AdlsGen1File
+          - SqlDBTable
+          - SqlDWTable
         type: string
         x-ms-enum:
           modelAsString: true
@@ -4221,6 +4494,8 @@ definitions:
           - AdlsGen2FileSystem
           - AdlsGen2Folder
           - AdlsGen2File
+          - SqlDBTable
+          - SqlDWTable
         type: string
         x-ms-enum:
           modelAsString: true
@@ -5083,6 +5358,146 @@ definitions:
     required:
       - value
     type: object
+  SqlDBTableDataSet:
+    allOf:
+      - $ref: '#/definitions/DataSet'
+    description: A SQL DB table dataset.
+    properties:
+      properties:
+        $ref: '#/definitions/SqlDBTableProperties'
+        description: SQL DB table dataset properties.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: SqlDBTable
+  SqlDBTableDataSetMapping:
+    allOf:
+      - $ref: '#/definitions/DataSetMapping'
+    description: A SQL DB Table dataset mapping.
+    properties:
+      properties:
+        $ref: '#/definitions/SqlDBTableDataSetMappingProperties'
+        description: Sql DB dataset mapping properties.
+        x-ms-client-flatten: true
+    required:
+      - properties
+    type: object
+    x-ms-discriminator-value: SqlDBTable
+  SqlDBTableDataSetMappingProperties:
+    description: Properties of the SQL DB table data set mapping.
+    properties:
+      dataSetId:
+        description: Gets the id of source dataset.
+        type: string
+      dataSetMappingStatus:
+        description: Gets the status of the dataset mapping.
+        enum:
+          - Ok
+          - Broken
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: dataSetMappingStatus
+      databaseName:
+        description: DatabaseName name of the sink data set
+        type: string
+      sqlServerResourceId:
+        description: Resource id of SQL server
+        type: string
+      tableName:
+        description: SQL DB table name.
+        type: string
+    required:
+      - databaseName
+      - tableName
+      - sqlServerResourceId
+    type: object
+  SqlDBTableProperties:
+    description: Properties of the SQL DB table data set.
+    properties:
+      dataSetId:
+        description: Unique id for identifying a data set resource
+        readOnly: true
+        type: string
+      databaseName:
+        description: Database name of the source data set
+        type: string
+      sqlServerResourceId:
+        description: Resource id of SQL server
+        type: string
+      tableName:
+        description: SQL DB table name.
+        type: string
+    type: object
+  SqlDWTableDataSet:
+    allOf:
+      - $ref: '#/definitions/DataSet'
+    description: A SQL DW table dataset.
+    properties:
+      properties:
+        $ref: '#/definitions/SqlDWTableProperties'
+        description: SQL DW table dataset properties.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: SqlDWTable
+  SqlDWTableDataSetMapping:
+    allOf:
+      - $ref: '#/definitions/DataSetMapping'
+    description: A SQL DW Table dataset mapping.
+    properties:
+      properties:
+        $ref: '#/definitions/SqlDWTableDataSetMappingProperties'
+        description: Sql DW dataset mapping properties.
+        x-ms-client-flatten: true
+    required:
+      - properties
+    type: object
+    x-ms-discriminator-value: SqlDWTable
+  SqlDWTableDataSetMappingProperties:
+    description: Properties of the SQL DW table data set mapping.
+    properties:
+      dataSetId:
+        description: Gets the id of source dataset.
+        type: string
+      dataSetMappingStatus:
+        description: Gets the status of the dataset mapping.
+        enum:
+          - Ok
+          - Broken
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: dataSetMappingStatus
+      dataWarehouseName:
+        description: DataWarehouse name of the source data set
+        type: string
+      sqlServerResourceId:
+        description: Resource id of SQL server
+        type: string
+      tableName:
+        description: SQL DW table name.
+        type: string
+    required:
+      - dataWarehouseName
+      - tableName
+      - sqlServerResourceId
+    type: object
+  SqlDWTableProperties:
+    description: Properties of the SQL DW table data set.
+    properties:
+      dataSetId:
+        description: Unique id for identifying a data set resource
+        readOnly: true
+        type: string
+      dataWarehouseName:
+        description: DataWarehouse name of the source data set
+        type: string
+      sqlServerResourceId:
+        description: Resource id of SQL server
+        type: string
+      tableName:
+        description: SQL DW table name.
+        type: string
+    type: object
   SynchronizationDetails:
     description: Synchronization details at dataset level
     properties:
@@ -5101,6 +5516,8 @@ definitions:
           - AdlsGen2File
           - AdlsGen1Folder
           - AdlsGen1File
+          - SqlDBTable
+          - SqlDWTable
         readOnly: true
         type: string
         x-ms-enum:
@@ -5134,6 +5551,16 @@ definitions:
         description: name of dataSet
         readOnly: true
         type: string
+      rowsCopied:
+        description: The number of files copied into the sink dataset.
+        format: int64
+        readOnly: true
+        type: integer
+      rowsRead:
+        description: The number of rows read from the source dataset.
+        format: int64
+        readOnly: true
+        type: integer
       sizeRead:
         description: The size of the data read from the source dataset in bytes.
         format: int64

@@ -38,6 +38,7 @@ securityDefinitions:
     scopes:
       'https://www.googleapis.com/auth/cloud-identity.groups': 'See, change, create, and delete any of the Cloud Identity Groups that you can access, including the members of each group'
       'https://www.googleapis.com/auth/cloud-identity.groups.readonly': 'See any Cloud Identity Groups that you can access, including group members and their emails'
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
     type: oauth2
   Oauth2c:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
@@ -46,6 +47,7 @@ securityDefinitions:
     scopes:
       'https://www.googleapis.com/auth/cloud-identity.groups': 'See, change, create, and delete any of the Cloud Identity Groups that you can access, including the members of each group'
       'https://www.googleapis.com/auth/cloud-identity.groups.readonly': 'See any Cloud Identity Groups that you can access, including group members and their emails'
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
     tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
@@ -147,6 +149,10 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-identity.groups'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-identity.groups'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - groups
   '/v1beta1/groups:lookup':
@@ -187,6 +193,10 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-identity.groups.readonly'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-identity.groups.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - groups
     parameters:
@@ -249,6 +259,10 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-identity.groups.readonly'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-identity.groups.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - groups
     parameters:
@@ -290,6 +304,10 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-identity.groups'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-identity.groups'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - groups
     get:
@@ -322,6 +340,10 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-identity.groups.readonly'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-identity.groups.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - groups
     parameters:
@@ -369,6 +391,10 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-identity.groups'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-identity.groups'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - groups
   '/v1beta1/{parent}/memberships':
@@ -418,6 +444,10 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-identity.groups.readonly'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-identity.groups.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - groups
     parameters:
@@ -459,6 +489,10 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-identity.groups'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-identity.groups'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - groups
   '/v1beta1/{parent}/memberships:lookup':
@@ -510,6 +544,10 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-identity.groups.readonly'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-identity.groups.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - groups
     parameters:

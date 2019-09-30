@@ -302,7 +302,7 @@ info:
 
     View the [Linode APIv3 Documentation](https://linode.com/apiv3).
   title: Linode
-  version: 4.4.0
+  version: 4.5.0
   x-apisguru-categories:
     - cloud
   x-origin:
@@ -1517,6 +1517,39 @@ paths:
               --longview_subscription longview-30 \
               --network_helper false
       x-linode-cli-action: settings-update
+      x-linode-grant: read_write
+    x-linode-cli-command: account
+  /account/settings/managed-enable:
+    post:
+      description: |
+        Enables Linode Managed for the entire account and sends a welcome email to the account's associated email address. Linode Managed can monitor any service or software stack reachable over TCP or HTTP. See our [Linode Managed guide](https://linode.com/docs/platform/linode-managed/) to learn more.
+      operationId: enableAccountManged
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Managed services enabled for account.
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+        - oauth:
+            - 'account:read_write'
+      summary: Enable Linode Managed
+      tags:
+        - Account
+      x-code-samples:
+        - lang: Shell
+          source: |
+            curl -H "Authorization: Bearer $TOKEN" \
+                -X POST \
+                https://api.linode.com/v4/account/settings/managed-enable
+        - lang: CLI
+          source: |
+            linode-cli account enable-managed
+      x-linode-cli-action: enable-managed
       x-linode-grant: read_write
     x-linode-cli-command: account
   /account/transfer:
@@ -3427,7 +3460,12 @@ paths:
                   type: integer
                 overwrite:
                   description: |
-                    If True, deletes all Disks and Configs on the target Linode before restoring.
+                    If True, deletes all Disks and Configs on the target Linode
+                    before restoring.
+
+                    If False, and the Disk image size is larger than the available
+                    space on the Linode, an error message indicating insufficient
+                    space is returned.
                   example: true
                   type: boolean
               required:
@@ -8729,7 +8767,7 @@ paths:
       operationId: getObjectStorageBucketContent
       parameters:
         - description: |
-            The "marker" for this request, which can be used to paginate through large buckets. This should be the name of the last object on the last page of results. Listing bucket contents *does not* support arbitrary page access.
+            The "marker" for this request, which can be used to paginate through large buckets. Its value should be the value of the `next_marker` property returned with the last page. Listing bucket contents *does not* support arbitrary page access. See the `next_marker` property in the responses section for more details.
           in: query
           name: marker
           required: false
@@ -10775,9 +10813,13 @@ paths:
                             propertyName: type
                           oneOf:
                             - $ref: '#/components/schemas/Linode'
+                              x-linode-ref-name: linode
                             - $ref: '#/components/schemas/Domain'
+                              x-linode-ref-name: domain
                             - $ref: '#/components/schemas/Volume'
+                              x-linode-ref-name: volume
                             - $ref: '#/components/schemas/NodeBalancer'
+                              x-linode-ref-name: nodeBalancer
                         type:
                           example: linode
                           type: string
@@ -13419,7 +13461,7 @@ components:
           x-linode-filterable: true
         region:
           description: |
-            This is the location where the Linode was deployed. This cannot be changed without [opening a support ticket](/api/v4/support-tickets/#post).
+            This is the location where the Linode was deployed. A Linode's region can only be changed by initiating a [cross data center migration](/api/v4/linode-instances-linode-id-migrate/#post).
           readOnly: true
           x-linode-cli-display: 4
           x-linode-filterable: true
@@ -15055,6 +15097,10 @@ components:
             An MD-5 hash of the object. `null` if this object represents a prefix.
           example: 9f254c71e28e033bf9e0e5262e3e72ab
           type: string
+        is_truncated:
+          description: Designates if there is another page of bucket objects.
+          example: true
+          type: boolean
         last_modified:
           description: |
             The date and time this object was last modified. `null` if this object represents a prefix.
@@ -15065,6 +15111,12 @@ components:
           description: |
             The name of this object or prefix.
           example: example
+          type: string
+        next_marker:
+          description: |
+            Returns the value you should pass to the `marker` query parameter to get the next page of objects. If there is no next page, `null` will be returned.
+          example: bd021c21-e734-4823-97a4-58b41c2cd4c8.892602.184
+          nullable: true
           type: string
         owner:
           description: |

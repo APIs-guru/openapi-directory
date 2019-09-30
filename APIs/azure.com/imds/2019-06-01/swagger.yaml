@@ -58,68 +58,6 @@ parameters:
     type: string
     x-ms-parameter-location: method
 paths:
-  /applications:
-    get:
-      description: Get list of the gallery applications.
-      operationId: GalleryApplications_List
-      parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/MetadataParameter'
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/GalleryApplications'
-        default:
-          description: Error response describing why the operation failed.
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-      x-ms-examples:
-        Get list of the gallery applications:
-          parameters:
-            Metadata: 'true'
-            api-version: '2019-06-01'
-          responses:
-            '200':
-              body:
-                applications:
-                  - enableHealthCheck: true
-                    packageFile:
-                      contentType: zip
-                      fileName: myapp.zip
-                      id: /subscriptions/12345678-65F4-4A5A-839F-E7CFB49F1541/resourceGroups/rgName/providers/Microsoft.Compute/galleries/msit-certified/applications/application/versions/1.0
-                      incarnationId: b845c18d-b249-4c7a-a4c3-ffdd51757ccd
-                    tags: '0'
-  /applications/app:
-    get:
-      description: Get application package.
-      operationId: GalleryApplication_Get
-      parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/MetadataParameter'
-        - description: Incarnation Id of the gallery application
-          in: query
-          name: incarnationId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/ApplicationResponse'
-        default:
-          description: Error response describing why the operation failed.
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-      x-ms-examples:
-        Get gallery application package:
-          parameters:
-            Metadata: 'true'
-            api-version: '2019-06-01'
-            incarnationId: b845c18d-b249-4c7a-a4c3-ffdd51757ccd
-          responses:
-            '200':
-              body: '{application binary package}'
   /attested/document:
     get:
       description: Get Attested Data for the Virtual Machine.
@@ -484,30 +422,6 @@ definitions:
         description: Error message indicating why the operation failed.
         type: string
     type: object
-  GalleryApplication:
-    description: This contains information about the gallery application.
-    properties:
-      enableHealthCheck:
-        description: It indicates if this application reports health status
-        type: boolean
-      packageFile:
-        $ref: '#/definitions/PackageFile'
-        description: Package properties of the gallery application
-      tags:
-        description: Optional attribute to passthrough value for more generic context
-        type: string
-    type: object
-  GalleryApplications:
-    description: This is the response from the GalleryApplications_List operation.
-    properties:
-      applications:
-        description: List of gallery applications
-        items:
-          $ref: '#/definitions/GalleryApplication'
-          description: This contains information about the gallery application.
-          type: object
-        type: array
-    type: object
   IdentityErrorResponse:
     description: This is the response from an Identity operation in the case an error occurs.
     properties:
@@ -713,22 +627,6 @@ definitions:
         type: object
       writeAcceleratorEnabled:
         description: This specifies whether or not writeAccelerator is enabled on the disk.
-        type: string
-    type: object
-  PackageFile:
-    description: Package properties of the gallery application.
-    properties:
-      contentType:
-        description: Application package type
-        type: string
-      fileName:
-        description: Application package file name
-        type: string
-      id:
-        description: Resource id of the gallery application
-        type: string
-      incarnationId:
-        description: Unique identifier for this particular application instance
         type: string
     type: object
   PlanProperties:

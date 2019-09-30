@@ -1,23 +1,18 @@
 openapi: 3.0.1
 servers:
-  - url: 'https://football-prediction-api.p.mashape.com'
+  - url: 'https://football-prediction-api.p.rapidapi.com'
 info:
   description: 'The Football Prediction API allows developers to get predictions for upcoming football (soccer) matches, results for past matches, and performance monitoring for statistical models.'
   title: Football Prediction
   version: '2'
-  x-apisguru-categories:
-    - analytics
-  x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://logo-core.clearbit.com/boggio-analytics.com'
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.18
+        version: 2.7.31
       format: openapi
       url: 'https://boggio-analytics.com/fp-api/schema/football-prediction-openapi.yaml'
       version: '3.0'
-  x-providerName: mashape.com
+  x-providerName: rapidapi.com
   x-serviceName: football-prediction
 paths:
   /api/v2/list-federations:
@@ -26,7 +21,7 @@ paths:
       parameters:
         - description: 'Your key obtained from https://boggio-analytics.com/fp-api/'
           in: header
-          name: X-Mashape-Key
+          name: X-RapidAPI-Key
           schema:
             format: uuid
             type: string
@@ -66,7 +61,7 @@ paths:
       parameters:
         - description: 'Your key obtained from https://boggio-analytics.com/fp-api/'
           in: header
-          name: X-Mashape-Key
+          name: X-RapidAPI-Key
           schema:
             format: uuid
             type: string
@@ -113,7 +108,7 @@ paths:
       parameters:
         - description: 'Your key obtained from https://boggio-analytics.com/fp-api/'
           in: header
-          name: X-Mashape-Key
+          name: X-RapidAPI-Key
           schema:
             format: uuid
             type: string
@@ -217,7 +212,7 @@ paths:
       parameters:
         - description: 'Your key obtained from https://boggio-analytics.com/fp-api/'
           in: header
-          name: X-Mashape-Key
+          name: X-RapidAPI-Key
           schema:
             format: uuid
             type: string

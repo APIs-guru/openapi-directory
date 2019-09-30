@@ -4935,7 +4935,7 @@ definitions:
         description: 'The full file extension; extracted from the title. May contain multiple concatenated extensions, such as "tar.gz". Removing an extension from the title does not clear this field; however, changing the extension on the title does update this field. This field is only populated for files with content stored in Google Drive; it is not populated for Google Docs or shortcut files.'
         type: string
       hasAugmentedPermissions:
-        description: Whether any users are granted file access directly on this file. This field is only populated for items in shared drives.
+        description: Whether there are permissions directly on this file. This field is only populated for items in shared drives.
         type: boolean
       hasThumbnail:
         description: 'Whether this file has a thumbnail. This does not indicate whether the requesting app has access to the thumbnail. To check access, look for the presence of the thumbnailLink field.'

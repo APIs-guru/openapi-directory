@@ -982,22 +982,27 @@ paths:
         <br>
         <br>Using this call, you can either:
         <ul>
-        <li>Provision a new Google Analytics property and associate the new
-        property with your `FirebaseProject`.</li>
-        <li>Associate an existing Google Analytics property with your
-        `FirebaseProject`.</li>
+        <li>Specify an `analyticsAccountId` to provision a new Google Analytics
+        property within the specified account and associate the new property with
+        your `FirebaseProject`.</li>
+        <li>Specify an existing `analyticsPropertyId` to associate the property
+        with your `FirebaseProject`.</li>
         </ul>
         <br>
         Note that when you call `AddGoogleAnalytics`:
-        <ul>
-        <li>Any Firebase Apps already in your `FirebaseProject` are
-        automatically provisioned as new <em>data streams</em> in the Google
-        Analytics property.</li>
-        <li>Any <em>data streams</em> already in the Google Analytics property are
-        automatically associated with their corresponding Firebase Apps (only
-        applies when an app's `packageName` or `bundleId` match those for an
-        existing data stream).</li>
-        </ul>
+        <ol>
+        <li>The first check determines if any existing data streams in the
+        Google Analytics property correspond to any existing Firebase Apps in your
+        `FirebaseProject` (based on the `packageName` or `bundleId` associated with
+        the data stream). Then, as applicable, the data streams and apps are
+        linked. Note that this auto-linking only applies to Android Apps and iOS
+        Apps.</li>
+        <li>If no corresponding data streams are found for your Firebase Apps,
+        new data streams are provisioned in the Google Analytics property
+        for each of your Firebase Apps. Note that a new data stream is always
+        provisioned for a Web App even if it was previously associated with a
+        data stream in your Analytics property.</li>
+        </ol>
         Learn more about the hierarchy and structure of Google Analytics
         accounts in the
         [Analytics
@@ -1081,7 +1086,10 @@ paths:
         <br>These resources may be re-associated later to the `FirebaseProject` by
         calling
         [`AddGoogleAnalytics`](../../v1beta1/projects/addGoogleAnalytics) and
-        specifying the same `analyticsPropertyId`.
+        specifying the same `analyticsPropertyId`. For Android Apps and iOS Apps,
+        this call re-links data streams with their corresponding apps. However,
+        for Web Apps, this call provisions a <em>new</em> data stream for each Web
+        App.
         <br>
         <br>To call `RemoveAnalytics`, a member must be an Owner for
         the `FirebaseProject`.
@@ -1351,8 +1359,13 @@ definitions:
           associated with the specified `FirebaseProject`.
       streamMappings:
         description: |-
-          A map of `AppId` to `StreamId` for each Firebase App in the specified
-          `FirebaseProject`. Each `AppId` and `StreamId` appears only once.
+          For Android Apps and iOS Apps: A map of `app` to `streamId` for each
+          Firebase App in the specified `FirebaseProject`. Each `app` and
+          `streamId` appears only once.<br>
+          <br>
+          For Web Apps: A map of `app` to `streamId` and `measurementId` for each
+          Firebase App in the specified `FirebaseProject`. Each `app`, `streamId`,
+          and `measurementId` appears only once.
         items:
           $ref: '#/definitions/StreamMapping'
         type: array
@@ -1946,9 +1959,22 @@ definitions:
         description: |-
           The fully qualified resource name of the Firebase App associated with the
           Google Analytics data stream, in the format:
-          <br><code>projects/<var>projectId</var>/iosApps/<var>appId</var></code>
-          or
           <br><code>projects/<var>projectId</var>/androidApps/<var>appId</var></code>
+          or
+          <code>projects/<var>projectId</var>/iosApps/<var>appId</var></code>
+          or
+          <code>projects/<var>projectId</var>/webApps/<var>appId</var></code>
+        type: string
+      measurementId:
+        description: |-
+          Applicable for Firebase Web Apps only.<br>
+          <br>The unique Google-assigned identifier of the Google Analytics web
+          stream associated with the Firebase Web App. Firebase SDKs use this ID to
+          interact with Google Analytics APIs.
+          <br>
+          <br>Learn more about this ID and Google Analytics web streams in the
+          [Analytics
+          documentation](https://support.google.com/analytics/topic/9303475).
         type: string
       streamId:
         description: |-
@@ -2043,6 +2069,21 @@ definitions:
           finalized yet. To set your project's default GCP resource location,
           call [`FinalizeDefaultLocation`](../projects.defaultLocation/finalize)
           after you add Firebase services to your project.
+        type: string
+      measurementId:
+        description: |-
+          The unique Google-assigned identifier of the Google Analytics web stream
+          associated with the Firebase Web App. Firebase SDKs use this ID to interact
+          with Google Analytics APIs.
+          <br>
+          <br>This field is only present if the App is linked to a web stream in a
+          Google Analytics App + Web property. Learn more about this ID and Google
+          Analytics web streams in the [Analytics
+          documentation](https://support.google.com/analytics/topic/9303475).
+          <br>
+          <br>To generate a `measurementId` and link the Web App with a Google
+          Analytics web stream, call
+          [`AddGoogleAnalytics`](../../v1beta1/projects/addGoogleAnalytics).
         type: string
       messagingSenderId:
         description: The sender ID for use with Firebase Cloud Messaging.

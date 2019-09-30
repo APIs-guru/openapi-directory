@@ -1377,8 +1377,8 @@ paths:
         - settings
   '/v1/settings/{name}':
     delete:
-      description: Deletes a datasource.
-      operationId: cloudsearch.settings.datasources.delete
+      description: Deletes a search application.
+      operationId: cloudsearch.settings.searchapplications.delete
       parameters:
         - description: |-
             If you are asked by Google to help with debugging, set this field.
@@ -1387,8 +1387,8 @@ paths:
           name: debugOptions.enableDebugging
           type: boolean
         - description: |-
-            Name of the datasource.
-            Format: datasources/{source_id}.
+            The name of the search application to be deleted.
+            <br />Format: applications/{application_id}.
           in: path
           name: name
           required: true
@@ -1409,14 +1409,14 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud_search.settings'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud_search.settings.indexing'
+            - 'https://www.googleapis.com/auth/cloud_search.settings.query'
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud_search.settings.indexing'
+            - 'https://www.googleapis.com/auth/cloud_search.settings.query'
       tags:
         - settings
     get:
-      description: Gets a datasource.
-      operationId: cloudsearch.settings.datasources.get
+      description: Gets the specified search application.
+      operationId: cloudsearch.settings.searchapplications.get
       parameters:
         - description: |-
             If you are asked by Google to help with debugging, set this field.
@@ -1425,8 +1425,8 @@ paths:
           name: debugOptions.enableDebugging
           type: boolean
         - description: |-
-            Name of the datasource resource.
-            Format: datasources/{source_id}.
+            Name of the search application.
+            <br />Format: applications/{application_id}.
           in: path
           name: name
           required: true
@@ -1436,7 +1436,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/DataSource'
+            $ref: '#/definitions/SearchApplication'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search'
@@ -1447,9 +1447,9 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud_search.settings'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud_search.settings.indexing'
+            - 'https://www.googleapis.com/auth/cloud_search.settings.query'
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud_search.settings.indexing'
+            - 'https://www.googleapis.com/auth/cloud_search.settings.query'
       tags:
         - settings
     parameters:
@@ -1465,17 +1465,16 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     put:
-      description: Updates a datasource.
-      operationId: cloudsearch.settings.datasources.update
+      description: Updates a search application.
+      operationId: cloudsearch.settings.searchapplications.update
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/UpdateDataSourceRequest'
+            $ref: '#/definitions/SearchApplication'
         - description: |-
-            Name of the datasource resource.
-            Format: datasources/{source_id}.
-            <br />The name is ignored when creating a datasource.
+            Name of the Search Application.
+            <br />Format: searchapplications/{application_id}.
           in: path
           name: name
           required: true
@@ -1496,9 +1495,9 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud_search.settings'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud_search.settings.indexing'
+            - 'https://www.googleapis.com/auth/cloud_search.settings.query'
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud_search.settings.indexing'
+            - 'https://www.googleapis.com/auth/cloud_search.settings.query'
       tags:
         - settings
   '/v1/settings/{name}:reset':

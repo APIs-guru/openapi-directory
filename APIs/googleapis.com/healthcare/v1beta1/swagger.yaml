@@ -1030,15 +1030,14 @@ paths:
         - projects
     get:
       description: |-
-        RetrieveRenderedFrames returns instances associated with the given study,
-        series, SOP Instance UID and frame numbers in an acceptable Rendered Media
-        Type. See
+        RetrieveFrames returns instances associated with the given study, series,
+        SOP Instance UID and frame numbers. See
         http://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_10.4.
-      operationId: healthcare.projects.locations.datasets.dicomStores.studies.series.instances.frames.retrieveRendered
+      operationId: healthcare.projects.locations.datasets.dicomStores.studies.series.instances.frames.retrieveFrames
       parameters:
         - description: |-
-            The path of the RetrieveRenderedFrames DICOMweb request (for example,
-            `studies/{study_uid}/series/{series_uid}/instances/{instance_uid}/frames/{frame_list}/rendered`).
+            The path of the RetrieveFrames DICOMweb request (for example,
+            `studies/{study_uid}/series/{series_uid}/instances/{instance_uid}/frames/{frame_list}`).
           in: path
           name: dicomWebPath
           required: true

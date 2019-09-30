@@ -908,6 +908,33 @@ paths:
       summary: Get season team stats
       tags:
         - stats
+  /stats/season/advanced:
+    get:
+      description: Advanced team season stats
+      operationId: getAdvancedTeamSeasonStats
+      parameters:
+        - description: Year filter (required if no team specified)
+          in: query
+          name: year
+          required: false
+          type: integer
+        - description: Team filter (required if no year specified)
+          in: query
+          name: team
+          required: false
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            items:
+              $ref: '#/definitions/AdvancedSeasonStat'
+            type: array
+        '400':
+          description: error
+      summary: Get advanced season team stats
+      tags:
+        - stats
   /talent:
     get:
       description: Team talent composite
@@ -1028,6 +1055,55 @@ paths:
       tags:
         - venues
 definitions:
+  AdvancedSeasonStat:
+    properties:
+      defense:
+        properties:
+          explosiveness:
+            type: number
+          passingDowns:
+            properties:
+              explosiveness:
+                type: number
+              successRate:
+                type: number
+            type: object
+          standardDowns:
+            properties:
+              explosiveness:
+                type: number
+              successRate:
+                type: number
+            type: object
+          successRate:
+            type: number
+        type: object
+      offense:
+        properties:
+          explosiveness:
+            type: number
+          passingDowns:
+            properties:
+              explosiveness:
+                type: number
+              successRate:
+                type: number
+            type: object
+          standardDowns:
+            properties:
+              explosiveness:
+                type: number
+              successRate:
+                type: number
+            type: object
+          successRate:
+            type: number
+        type: object
+      season:
+        type: integer
+      team:
+        type: string
+    type: object
   Conference:
     properties:
       abbreviation:
