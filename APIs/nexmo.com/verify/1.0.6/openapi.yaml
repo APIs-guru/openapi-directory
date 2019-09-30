@@ -1,0 +1,774 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://api.nexmo.com/verify'
+info:
+  contact:
+    email: devrel@nexmo.com
+    name: Nexmo DevRel
+    url: 'https://developer.nexmo.com/'
+  description: |-
+    The Verify API helps you to implement 2FA (two-factor authentication) in your applications. This is useful for:
+
+    * Protecting against spam, by preventing spammers from creating multiple accounts
+    * Monitoring suspicious activity, by forcing an account user to verify ownership of a number
+    * Ensuring that you can reach your users at any time because you have their correct phone number
+    More information is available at <https://developer.nexmo.com/verify>
+  license:
+    name: The MIT License (MIT)
+    url: 'https://opensource.org/licenses/MIT'
+  termsOfService: 'https://www.nexmo.com/terms-of-use'
+  title: Nexmo Verify
+  version: 1.0.6
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.7.31
+      format: openapi
+      url: 'https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/verify.yml'
+      version: '3.0'
+  x-providerName: nexmo.com
+  x-serviceName: verify
+externalDocs:
+  description: More information on the Verify product on our Developer Portal
+  url: 'https://developer.nexmo.com/verify'
+security:
+  - apiKey: []
+paths:
+  '/check/{format}':
+    get:
+      description: |-
+        Use Verify check to confirm that the PIN you received from your user matches the one sent by Nexmo in your Verify request.
+
+        1. Send the verification `code` that your user supplied, with the corresponding `request_id` from the Verify request.
+        2. Check the `status` of the response to determine if the code the user supplied matches the one sent by Nexmo.
+      operationId: verifyCheck
+      parameters:
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/api_secret'
+        - description: The Verify request to check. This is the `request_id` you received in the response to the Verify request.
+          example: abcdef012345...
+          in: query
+          name: request_id
+          required: true
+          schema:
+            maxLength: 32
+            type: string
+        - description: The verification code entered by your user.
+          example: '1234'
+          in: query
+          name: code
+          required: true
+          schema:
+            maxLength: 6
+            minLength: 4
+            type: string
+        - description: The IP address used by your user when they entered the verification code. Nexmo uses this information to identify fraud and spam. This ultimately benefits all Nexmo customers.
+          example: 123.0.0.255
+          in: query
+          name: ip_address
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/checkResponse'
+                  - $ref: '#/components/schemas/checkErrorResponse'
+            text/xml:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/checkResponse'
+                  - $ref: '#/components/schemas/checkErrorResponse'
+          description: OK
+      summary: Verify Check
+  '/control/{format}':
+    get:
+      description: |-
+        Control the progress of your Verify requests. To cancel an existing Verify request, or to trigger the next verification event:
+
+
+        1. Send a Verify control request with the appropriate command (`cmd`) for what you want to achieve.
+
+        2. Check the `status` in the response.
+      operationId: verifyControl
+      parameters:
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/api_secret'
+        - description: The `request_id` you received in the response to the Verify request.
+          example: abcdef012345...
+          in: query
+          name: request_id
+          required: true
+          schema:
+            type: string
+        - description: 'The command to execute, depending on whether you want to cancel  the verification process, or advance to the next verification event. You must wait at least 30 seconds before cancelling a Verify request.'
+          example: cancel
+          in: query
+          name: cmd
+          required: true
+          schema:
+            enum:
+              - cancel
+              - trigger_next_event
+            type: string
+            x-ms-enum:
+              values:
+                - description: stop the request
+                  value: cancel
+                - description: advance the request to the next part of the process.
+                  value: trigger_next_event
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/controlResponse'
+                  - $ref: '#/components/schemas/controlErrorResponse'
+            text/xml:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/controlResponse'
+                  - $ref: '#/components/schemas/controlErrorResponse'
+          description: OK
+      summary: Verify Control
+  '/search/{format}':
+    get:
+      description: |-
+        Use Verify search to check the status of past or current verification requests:
+
+        1. Send a Verify search request containing the `request_id`s of the verification requests you are interested in.
+        2. Use the `status` of each verification request in the `checks` array of the response object to determine the outcome.
+      operationId: verifySearch
+      parameters:
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/api_secret'
+        - description: The `request_id` you received in the Verify Request Response.
+          example: abcdef012345...
+          in: query
+          name: request_id
+          required: false
+          schema:
+            type: string
+        - description: More than one `request_id`. Each `request_id` is a new parameter in the Verify Search request.
+          explode: true
+          in: query
+          name: request_ids
+          required: false
+          schema:
+            items:
+              example: abcdef012345...
+              type: string
+            maxItems: 10
+            type: array
+          style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/searchResponse'
+                  - $ref: '#/components/schemas/searchErrorResponse'
+            text/xml:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/searchResponse'
+                  - $ref: '#/components/schemas/searchErrorResponse'
+          description: OK
+      summary: Verify Search
+  '/{format}':
+    get:
+      description: |-
+        Use Verify request to generate and send a PIN to your user:
+
+        1. Create a request to send a verification code to your user.
+
+        2. Check the `status` field in the response to ensure that your request was successful (zero is success).
+
+        3. Use the `request_id` field in the response for the Verify check.
+      operationId: verifyRequest
+      parameters:
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/api_secret'
+        - description: 'The mobile or landline phone number to verify. Unless you are setting `country` explicitly, this number must be in [E.164](https://en.wikipedia.org/wiki/E.164) format.'
+          example: '447700900000'
+          in: query
+          name: number
+          required: true
+          schema:
+            type: string
+        - description: 'If you do not provide `number` in international format or you are not sure if `number` is correctly formatted, specify the two-character country code in `country`. Verify will then format the number for you.'
+          example: GB
+          in: query
+          name: country
+          required: false
+          schema:
+            type: string
+        - description: 'An 18-character alphanumeric string you can use to personalize the verification request SMS body, to help users identify your company or application name. For example: "Your `Acme Inc` PIN is ..."'
+          example: Acme Inc
+          in: query
+          name: brand
+          required: true
+          schema:
+            maxLength: 18
+            type: string
+        - description: 'An 11-character alphanumeric string that represents the [identity of the sender](https://developer.nexmo.com/messaging/sms/guides/custom-sender-id)  of the verification request. Depending on the destination of the phone number you are sending the verification SMS to, restrictions might apply.'
+          example: ACME
+          in: query
+          name: sender_id
+          required: false
+          schema:
+            default: VERIFY
+            maxLength: 11
+            type: string
+        - description: The length of the verification code.
+          example: 6
+          in: query
+          name: code_length
+          required: false
+          schema:
+            default: 4
+            enum:
+              - 4
+              - 6
+            type: integer
+        - description: 'By default, the SMS or text-to-speech (TTS) message is generated in the locale that matches the `number`. For example, the text message or TTS message for a `33*` number is sent in French. Use this parameter to explicitly control the language, accent and gender used for the Verify request.'
+          example: en-us
+          in: query
+          name: lg
+          required: false
+          schema:
+            default: en-us
+            enum:
+              - de-de
+              - en-au
+              - en-gb
+              - en-us
+              - en-in
+              - es-es
+              - es-mx
+              - es-us
+              - fr-ca
+              - fr-fr
+              - is-is
+              - it-it
+              - ja-jp
+              - ko-kr
+              - nl-nl
+              - pl-pl
+              - pt-pt
+              - pt-br
+              - ro-ro
+              - ru-ru
+              - sv-se
+              - tr-tr
+              - zh-cn
+              - zh-tw
+            type: string
+            x-ms-enum:
+              values:
+                - description: 'German, German (female / male)'
+                  value: de-de
+                - description: 'English, Australian (female / male)'
+                  value: en-au
+                - description: 'English, UK (female / male)'
+                  value: en-gb
+                - description: 'English, US (female / male)'
+                  value: en-us
+                - description: 'English, Indian (female)'
+                  value: en-in
+                - description: 'Spanish, Spanish (female / male)'
+                  value: es-es
+                - description: 'Spanish, Mexican (female)'
+                  value: es-mx
+                - description: 'Spanish, US (female / male)'
+                  value: es-us
+                - description: 'French, Canadian (female)'
+                  value: fr-ca
+                - description: 'French, French (female / male)'
+                  value: fr-fr
+                - description: 'Icelandic, Icelandic (female / male)'
+                  value: is-is
+                - description: 'Italian, Italian (female / male)'
+                  value: it-it
+                - description: 'Japanese, Japanese (female / male)'
+                  value: ja-jp
+                - description: 'Korean, Korean (female / male)'
+                  value: ko-kr
+                - description: 'Dutch, Netherlands (female / male)'
+                  value: nl-nl
+                - description: 'Polish, Polish (female / male)'
+                  value: pl-pl
+                - description: 'Portuguese, Portuguese (male)'
+                  value: pt-pt
+                - description: 'Portuguese, Brazilian (female / male)'
+                  value: pt-br
+                - description: 'Romanian, Romanian (female)'
+                  value: ro-ro
+                - description: 'Russian, Russian (female)'
+                  value: ru-ru
+                - description: 'Swedish, Sweden (female)'
+                  value: sv-se
+                - description: 'Turkish, Turkish (female)'
+                  value: tr-tr
+                - description: 'Chinese (Mandarin), Simplified Chinese (female / male)'
+                  value: zh-cn
+                - description: 'Chinese, Traditional. Text only. If you request Taiwanese (`zh-tw`), the text message will be sent in Traditional Chinese, but the voice call uses a female voice speaking English with a Chinese accent.'
+                  value: zh-tw
+        - description: 'How long the generated verification code is valid for, in seconds. When you specify both `pin_expiry` and `next_event_wait` then `pin_expiry` must be an integer multiple of `next_event_wait` otherwise `pin_expiry` is defaulted to equal next_event_wait. See [changing the event timings](https://developer.nexmo.com/verify/guides/changing-default-timings).'
+          example: 240
+          in: query
+          name: pin_expiry
+          required: false
+          schema:
+            default: 300
+            maximum: 3600
+            minimum: 60
+            type: integer
+        - description: 'Specifies the wait time in seconds between attempts to deliver the verification code. '
+          example: 120
+          in: query
+          name: next_event_wait
+          required: false
+          schema:
+            default: 300
+            maximum: 900
+            minimum: 60
+            type: integer
+        - description: 'Selects the predefined sequence of SMS and TTS (Text To Speech) actions to use in order to convey the PIN to your user. For example, an id of 1 identifies the workflow SMS - TTS - TTS. For a list of all workflows and their associated ids, please visit the [developer portal](https://developer.nexmo.com/verify/guides/workflows-and-events).'
+          example: 4
+          in: query
+          name: workflow_id
+          required: false
+          schema:
+            default: 1
+            enum:
+              - 1
+              - 2
+              - 3
+              - 4
+              - 5
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/requestResponse'
+                  - $ref: '#/components/schemas/requestErrorResponse'
+            text/xml:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/requestResponse'
+                  - $ref: '#/components/schemas/requestErrorResponse'
+          description: OK
+      summary: Verify Request
+components:
+  parameters:
+    api_secret:
+      description: 'You can find your API secret in your Nexmo account [developer dashboard](https://dashboard.nexmo.com)'
+      in: query
+      name: api_secret
+      required: true
+      schema:
+        type: string
+    format:
+      description: The response format.
+      example: json
+      in: path
+      name: format
+      required: true
+      schema:
+        enum:
+          - json
+          - xml
+        type: string
+  schemas:
+    checkErrorResponse:
+      description: Error
+      properties:
+        error_text:
+          description: 'If the `status` is non-zero, this explains the error encountered.'
+          example: The code inserted does not match the expected value
+          type: string
+        request_id:
+          description: The `request_id` that you received in the response to the Verify request and used in the Verify check request.
+          example: abcdef012345...
+          type: string
+        status:
+          description: |
+            Code | Text | Description
+            -- | -- | --
+            0 | Success | The request was successfully accepted by Nexmo.
+            1 | Throttled | You are trying to send more than the maximum of 30 requests per second.
+            2 | Your request is incomplete and missing the mandatory parameter `$parameter` | The stated parameter is missing.
+            3 | Invalid value for parameter `$parameter` | Invalid value for parameter. If you see Facility not allowed in the error text, check that you are using the correct Base URL in your request.
+            4 | Invalid credentials were provided | The supplied API key or secret in the request is either invalid or disabled.
+            5 | Internal Error | An error occurred processing this request in the Cloud Communications Platform.
+            6 | The Nexmo platform was unable to process this message for the following reason: `$reason` | The request could not be routed.
+            7 | The number you are trying to verify is blacklisted for verification. |
+            8 | The api_key you supplied is for an account that has been barred from submitting messages. |
+            9 | Partner quota exceeded | Your account does not have sufficient credit to process this request.
+            10 | Concurrent verifications to the same number are not allowed | 
+            15 | The destination number is not in a supported network | The request has been rejected. Find out more about this error in the [Knowledge Base](https://help.nexmo.com/hc/en-us/articles/360018406532-Verify-On-demand-Service-to-High-Risk-Countries)
+            16 | The code inserted does not match the expected value |
+            17 | The wrong code was provided too many times | You can run Verify check on a specific `request_id` up to three times unless a new verification code is generated. If you check a request more than three times, it is set to FAILED and you cannot check it again.
+            18 | Too many request_ids provided | You added more than the maximum ten `request_id`s to your request.
+            19 | No more events are left to execute for this request |
+            101 | No request found | There are no matching verify requests.
+          enum:
+            - '0'
+            - '1'
+            - '2'
+            - '3'
+            - '4'
+            - '5'
+            - '6'
+            - '7'
+            - '8'
+            - '9'
+            - '10'
+            - '15'
+            - '16'
+            - '17'
+            - '18'
+            - '19'
+            - '101'
+          example: '16'
+          type: string
+      type: object
+      xml:
+        name: verify_response
+    checkResponse:
+      description: Success
+      properties:
+        currency:
+          description: The currency code.
+          example: EUR
+          type: string
+        estimated_price_messages_sent:
+          $ref: '#/components/schemas/estimated_price_messages_sent'
+        event_id:
+          description: 'The ID of the verification event, such as an SMS or TTS call.'
+          example: 0A00000012345678
+          type: string
+        price:
+          description: The cost incurred for this request.
+          example: '0.10000000'
+          type: string
+        request_id:
+          description: The `request_id` that you received in the response to the Verify request and used in the Verify check request.
+          example: abcdef012345...
+          type: string
+        status:
+          description: 'A value of `0` indicates that your user entered the correct code. If it is non-zero, check the `error_text`.'
+          example: '0'
+          type: string
+      type: object
+      xml:
+        name: verify_response
+    controlErrorResponse:
+      description: Error
+      properties:
+        error_text:
+          description: 'If the `status` is non-zero, this explains the error encountered.'
+          example: The requestId 'abcdef0123456789abcdef' does not exist or its no longer active.
+          type: string
+        status:
+          description: |
+            Code | Text | Description
+            -- | -- | --
+            0 | Success | The request was successfully accepted by Nexmo.
+            1 | Throttled | You are trying to send more than the maximum of 30 requests per second.
+            2 | Your request is incomplete and missing the mandatory parameter `$parameter` | The stated parameter is missing.
+            3 | Invalid value for parameter `$parameter` | Invalid value for parameter. If you see Facility not allowed in the error text, check that you are using the correct Base URL in your request.
+            4 | Invalid credentials were provided | The supplied API key or secret in the request is either invalid or disabled.
+            5 | Internal Error | An error occurred processing this request in the Cloud Communications Platform.
+            6 | The Nexmo platform was unable to process this message for the following reason: `$reason` | The request could not be routed.
+            7 | The number you are trying to verify is blacklisted for verification. |
+            8 | The api_key you supplied is for an account that has been barred from submitting messages. |
+            9 | Partner quota exceeded | Your account does not have sufficient credit to process this request.
+            10 | Concurrent verifications to the same number are not allowed | 
+            15 | The destination number is not in a supported network | The request has been rejected. Find out more about this error in the [Knowledge Base](https://help.nexmo.com/hc/en-us/articles/360018406532-Verify-On-demand-Service-to-High-Risk-Countries)
+            16 | The code inserted does not match the expected value |
+            17 | The wrong code was provided too many times | You can run Verify check on a specific `request_id` up to three times unless a new verification code is generated. If you check a request more than three times, it is set to FAILED and you cannot check it again.
+            18 | Too many request_ids provided | You added more than the maximum ten `request_id`s to your request.
+            19 | For `cancel`: Either you have not waited at least 30 secs after sending a Verify request before cancelling or Verify has made too many attempts to deliver the verification code for this request and you must now wait for the process to complete. For `trigger_next_event`: All attempts to deliver the verification code for this request have completed and there are no remaining events to advance to.
+            101 | No request found | There are no matching verify requests.
+          enum:
+            - '1'
+            - '2'
+            - '3'
+            - '4'
+            - '5'
+            - '6'
+            - '7'
+            - '8'
+            - '9'
+            - '10'
+            - '15'
+            - '16'
+            - '17'
+            - '18'
+            - '19'
+            - '101'
+          example: '6'
+          type: string
+      type: object
+      xml:
+        name: response
+    controlResponse:
+      description: Success
+      properties:
+        command:
+          description: The `cmd` you sent in the request.
+          enum:
+            - cancel
+            - trigger_next_event
+          example: cancel
+          type: string
+        status:
+          description: |
+            `cmd` | Code | Description
+            -- | -- | --
+            Any | 0 | Success
+          example: '0'
+          type: string
+      type: object
+      xml:
+        name: response
+    estimated_price_messages_sent:
+      description: |
+        This field may not be present, depending on your pricing model. The
+        value indicates the cost (in EUR) of the calls made and messages sent
+        for the verification process. This value may be updated during and
+        shortly after the request completes because user input events can
+        overlap with message/call events. When this field is present, the total
+        cost of the verification is the sum of this field and the `price` field.
+      example: '0.03330000'
+      type: string
+    requestErrorResponse:
+      description: Error
+      properties:
+        error_text:
+          description: 'If `status` is non-zero, this explains the error encountered.'
+          example: Your request is incomplete and missing the mandatory parameter `number`
+          type: string
+        request_id:
+          description: The unique ID of the Verify request. This may be blank in an error situation
+          example: abcdef012345...
+          maxLength: 32
+          type: string
+        status:
+          description: |
+            Code | Text | Description
+            -- | -- | --
+            0 | Success | The request was successfully accepted by Nexmo.
+            1 | Throttled | You are trying to send more than the maximum of 30 requests per second.
+            2 | Your request is incomplete and missing the mandatory parameter `$parameter` | The stated parameter is missing.
+            3 | Invalid value for parameter `$parameter` | Invalid value for parameter. If you see Facility not allowed in the error text, check that you are using the correct Base URL in your request.
+            4 | Invalid credentials were provided | The supplied API key or secret in the request is either invalid or disabled.
+            5 | Internal Error | An error occurred processing this request in the Cloud Communications Platform.
+            6 | The Nexmo platform was unable to process this message for the following reason: `$reason` | The request could not be routed.
+            7 | The number you are trying to verify is blacklisted for verification. |
+            8 | The api_key you supplied is for an account that has been barred from submitting messages. |
+            9 | Partner quota exceeded | Your account does not have sufficient credit to process this request.
+            10 | Concurrent verifications to the same number are not allowed | 
+            15 | The destination number is not in a supported network | The request has been rejected. Find out more about this error in the [Knowledge Base](https://help.nexmo.com/hc/en-us/articles/360018406532-Verify-On-demand-Service-to-High-Risk-Countries)
+            16 | The code inserted does not match the expected value |
+            17 | The wrong code was provided too many times | You can run Verify check on a specific `request_id` up to three times unless a new verification code is generated. If you check a request more than three times, it is set to FAILED and you cannot check it again.
+            18 | Too many request_ids provided | You added more than the maximum ten `request_id`s to your request.
+            19 | No more events are left to execute for this request |
+            20 | This account does not support the parameter: pin_code. | Only certain accounts have the ability to set the `pin_code`. Please contact your account manager for more information.
+            101 | No request found | There are no matching verify requests.
+          enum:
+            - '0'
+            - '1'
+            - '2'
+            - '3'
+            - '4'
+            - '5'
+            - '6'
+            - '7'
+            - '8'
+            - '9'
+            - '10'
+            - '15'
+            - '16'
+            - '17'
+            - '18'
+            - '19'
+            - '20'
+            - '101'
+          example: '2'
+          type: string
+      type: object
+      xml:
+        name: verify_response
+    requestResponse:
+      description: Success
+      properties:
+        request_id:
+          description: The unique ID of the Verify request. You need this `request_id` for the Verify check.
+          example: abcdef012345...
+          maxLength: 32
+          type: string
+        status:
+          example: '0'
+          type: string
+      type: object
+      xml:
+        name: verify_response
+    searchErrorResponse:
+      description: Error
+      properties:
+        error_text:
+          description: 'If `status` is not `SUCCESS`, this message explains the issue encountered.'
+          example: No response found
+          type: string
+        request_id:
+          description: The `request_id` that you received in the response to the Verify request and used in the Verify search request. May be empty in an error situation.
+          example: abcdef012345...
+          type: string
+        status:
+          description: |
+            Code | Description
+            -- | --
+            IN PROGRESS | The search is still in progress.
+            SUCCESS | Your user entered a correct verification code.
+            FAILED | Your user entered an incorrect code more than three times.
+            EXPIRED | Your user did not enter a code before the `pin_expiry` time elapsed.
+            CANCELLED | The verification process was cancelled by a Verify control request.
+            101 | You supplied an invalid `request_id`, or the data is not available. Note that for recently-completed requests, there can be a delay of up to 1 minute before the results are available in search.
+          enum:
+            - IN PROGRESS
+            - FAILED
+            - EXPIRED
+            - CANCELLED
+            - '101'
+          example: IN PROGRESS
+          type: string
+      type: object
+      xml:
+        name: verify_request
+    searchResponse:
+      description: Success
+      properties:
+        account_id:
+          description: The Nexmo account ID the request was for.
+          example: abcdef01
+          type: string
+        checks:
+          description: The list of checks made for this verification and their outcomes.
+          items:
+            properties:
+              code:
+                description: The code supplied with this check request
+                example: 987654
+                type: string
+              date_received:
+                description: 'The date and time this check was received (in the format YYYY-MM-DD HH:MM:SS)'
+                example: '2020-01-01 12:00:00'
+                type: string
+              ip_address:
+                description: 'The IP address, if available'
+                example: 123.0.0.255
+                type: string
+              status:
+                enum:
+                  - VALID
+                  - INVALID
+                type: string
+            type: object
+            xml:
+              name: check
+          type: array
+          xml:
+            wrapped: true
+        currency:
+          description: The currency code.
+          example: EUR
+          type: string
+        date_finalized:
+          description: 'The date and time the verification request was completed. This response parameter is in the following format YYYY-MM-DD HH:MM:SS.'
+          example: '2020-01-01 12:00:00'
+          type: string
+        date_submitted:
+          description: 'The date and time the verification request was submitted, in the following format YYYY-MM-DD HH:MM:SS.'
+          example: '2020-01-01 12:00:00'
+          type: string
+        estimated_price_messages_sent:
+          $ref: '#/components/schemas/estimated_price_messages_sent'
+        events:
+          description: 'The events that have taken place to verify this number, and their unique identifiers.'
+          items:
+            properties:
+              id:
+                type: string
+              type:
+                enum:
+                  - tts
+                  - sms
+                type: string
+            type: object
+            xml:
+              name: event
+          type: array
+          xml:
+            wrapped: true
+        first_event_date:
+          description: 'The time the first verification attempt was made, in the following format YYYY-MM-DD HH:MM:SS.'
+          example: '2020-01-01 12:00:00'
+          type: string
+        last_event_date:
+          description: 'The time the last verification attempt was made, in the following format YYYY-MM-DD HH:MM:SS.'
+          example: '2020-01-01 12:00:00'
+          type: string
+        number:
+          description: The phone number this verification request was used for.
+          example: '447700900000'
+          type: string
+        price:
+          description: The cost incurred for this verification request.
+          example: '0.10000000'
+          type: string
+        request_id:
+          description: The `request_id` that you received in the response to the Verify request and used in the Verify search request.
+          example: abcdef012345...
+          type: string
+        sender_id:
+          default: verify
+          description: The `sender_id` you provided in the Verify request.
+          example: mySenderId
+          type: string
+        status:
+          description: |
+            Code | Description
+            -- | --
+            IN PROGRESS | The search is still in progress.
+            SUCCESS | Your user entered a correct verification code.
+            FAILED | Your user entered an incorrect code more than three times.
+            EXPIRED | Your user did not enter a code before the `pin_expiry` time elapsed.
+            CANCELLED | The verification process was cancelled by a Verify control request.
+          enum:
+            - IN PROGRESS
+            - SUCCESS
+            - FAILED
+            - EXPIRED
+            - CANCELLED
+          example: IN PROGRESS
+          type: string
+      type: object
+      xml:
+        name: verify_request
+  securitySchemes:
+    apiKey:
+      description: 'You can find your API key in your Nexmo account [developer dashboard](https://dashboard.nexmo.com/)'
+      in: query
+      name: api_key
+      type: apiKey

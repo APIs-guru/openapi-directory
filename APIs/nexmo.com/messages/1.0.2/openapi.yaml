@@ -1,0 +1,522 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://rest.nexmo.com/search'
+info:
+  contact:
+    email: devrel@nexmo.com
+    name: Nexmo.com
+    url: 'https://developer.nexmo.com/'
+    x-twitter: Nexmo
+  description: 'The Messages API lets you retrieve messages you have sent via the SMS API by ID, as well as retrieve details of messages that were rejected.'
+  license:
+    name: The MIT License (MIT)
+    url: 'https://opensource.org/licenses/MIT'
+  termsOfService: 'https://www.nexmo.com/terms-of-use'
+  title: Nexmo Message Search
+  version: 1.0.2
+  x-apiClientRegistration: 'https://dashboard.nexmo.com/sign-up'
+  x-logo:
+    url: 'https://twitter.com/Nexmo/profile_image?size=original'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.7.31
+      format: openapi
+      url: 'https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/developer/messages.yml'
+      version: '3.0'
+  x-providerName: nexmo.com
+  x-serviceName: messages
+externalDocs:
+  url: 'https://developer.nexmo.com/api/developer/messages'
+  x-sha1: d8836c374e2a7504bd2cd59e05fcee440f67cb44
+security:
+  - apiKey: []
+    apiSecret: []
+paths:
+  /message:
+    get:
+      description: Retrieve information about a single message that you sent using SMS API or that was received on your number.
+      operationId: searchMessage
+      parameters:
+        - description: The ID of the message you want to retrieve.
+          example: 00A0B0C0
+          in: query
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/messageBase'
+                  - $ref: '#/components/schemas/messageMT'
+            application/xml:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/messageBase'
+                  - $ref: '#/components/schemas/messageMT'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorJson'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/errorXml'
+          description: Bad request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Unauthorized
+      summary: Get a single message
+  /messages:
+    get:
+      description: 'Retrieve multiple messages that you sent using the SMS API or that were received on your number. You may provide one or more `ids` are specified, or both `date` and `number`  to identify the messages.'
+      operationId: searchMessages
+      parameters:
+        - description: A message ID to search for. You can specify up to 10 message IDs to search for as query parameters.
+          example: ids=123456789&ids=987654321
+          in: query
+          name: ids
+          schema:
+            type: string
+        - description: 'The date the request to SMS API was submitted in the following format: `YYYY-MM-DD`'
+          example: '2020-01-01'
+          in: query
+          name: date
+          schema:
+            format: date
+            type: string
+        - description: The phone number the message was sent to.
+          example: '447700900000'
+          in: query
+          name: to
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/messages'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/messages'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorJson'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/errorXml'
+          description: Bad request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Unauthorized
+      summary: Search messages
+  /rejections:
+    get:
+      description: Search for messages that have been rejected by Nexmo. Messages rejected by the carrier do not appear.
+      operationId: searchRejections
+      parameters:
+        - description: 'The date the request to SMS API was submitted in the following format: `YYYY-MM-DD`'
+          example: '2020-01-01'
+          in: query
+          name: date
+          required: true
+          schema:
+            format: date
+            type: string
+        - description: The phone number the message was sent to.
+          example: '447700900000'
+          in: query
+          name: to
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rejections'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/rejections'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorJson'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/errorXml'
+          description: Bad request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Unauthorized
+      summary: Search for rejections
+components:
+  schemas:
+    error:
+      properties:
+        error-code:
+          $ref: '#/components/schemas/error-code'
+        error-code-label:
+          $ref: '#/components/schemas/error-code-label'
+      type: object
+    error-code:
+      description: Will be set if the `status` is not `accepted`.
+      enum:
+        - '0'
+        - '1'
+        - '2'
+        - '3'
+        - '4'
+        - '5'
+        - '6'
+        - '7'
+        - '8'
+        - '9'
+        - '10'
+        - '11'
+        - '12'
+        - '13'
+        - '14'
+        - '15'
+        - '99'
+        - '400'
+        - '401'
+      example: '0'
+      type: string
+      x-ms-enum:
+        name: error-code
+        values:
+          - description: Delivered.
+            value: '0'
+          - description: 'Unknown - either; An unknown error was received from the carrier who tried to send this this message. _or_ Depending on the carrier, that `to` is unknown. When you see this error, and `status` is rejected, always check if `to` in your request was valid.'
+            value: '1'
+          - description: 'Absent Subscriber Temporary - this message was not delivered because `to` was temporarily unavailable. For example, the handset used for `to` was out of coverage or switched off. This is a temporary failure, retry later for a positive result.'
+            value: '2'
+          - description: 'Absent Subscriber Permanent - `to` is no longer active, you should remove this phone number from your database.'
+            value: '3'
+          - description: 'Call barred by user - you should remove this phone number from your database. If the user wants to receive messages from you, they need to contact their carrier directly.'
+            value: '4'
+          - description: 'Portability Error - there is an issue after the user has changed carrier for `to` If the user wants to receive messages from you, they need to contact their carrier directly.'
+            value: '5'
+          - description: 'Anti-Spam Rejection - carriers often apply restrictions that block messages following different criteria. For example, on SenderID or message content.'
+            value: '6'
+          - description: Handset Busy - the handset associated with `to` was not available when this message was sent. If `status` is `Failed` this is a temporary failure; retry later for a positive result. If `status` is `Accepted` this message has is in the retry scheme and will be resent until it expires in 24-48 hours.
+            value: '7'
+          - description: 'Network Error - a network failure while sending your message. This is a temporary failure, retry later for a positive result.'
+            value: '8'
+          - description: 'Illegal Number - you tried to send a message to a blacklisted phone number. That is, the user has already sent a STOP opt-out message and no longer wishes to receive messages from you.'
+            value: '9'
+          - description: 'Invalid Message - the message could not be sent because one of the parameters in the message was incorrect. For example, incorrect `type` or `udh`'
+            value: '10'
+          - description: 'Unroutable - the chosen route to send your message is not available. This is because the phone number is either; Currently on an unsupported _or_ network. On a pre-paid or reseller account that could not receive a message sent by `from` To resolve this issue either email us at [support@nexmo.com](mailto:support@nexmo.com) or create a helpdesk ticket at [https://help.nexmo.com](https://help.nexmo.com).'
+            value: '11'
+          - description: Destination unreachable - the message could not be delivered to the phone number.
+            value: '12'
+          - description: Subscriber Age Restriction - the carrier blocked this message because the content is not suitable for `to` based on age restrictions.
+            value: '13'
+          - description: 'Number Blocked by Carrier - the carrier blocked this message. This could be due to several reasons. For example, `to` s plan does not include SMS or the account is suspended.'
+            value: '14'
+          - description: Pre-Paid - Insufficent funds - `to`’s pre-paid account does not have enough credit to receive the message.
+            value: '15'
+          - description: 'General Error - there is a problem with the chosen route to send your message. To resolve this issue either email us at [support@nexmo.com](mailto:support@nexmo.com) or create a helpdesk ticket at [https://help.nexmo.com](https://help.nexmo.com).'
+            value: '99'
+          - description: wrong parameters
+            value: '400'
+          - description: authentication failed
+            value: '401'
+    error-code-label:
+      description: A text label to explain `error-code`.
+      example: Delivered
+      type: string
+    errorJson:
+      properties:
+        error_title:
+          example: Bad Request
+          type: string
+        invalid_parameters:
+          additionalProperties:
+            example: Is required.
+            type: string
+          type: object
+        type:
+          example: BAD_REQUEST
+          type: string
+      type: object
+    errorXml:
+      properties:
+        error_title:
+          example: Bad Request
+          type: string
+        invalid_parameters:
+          items:
+            properties:
+              key:
+                example: date
+                type: string
+              value:
+                example: Is required.
+                type: string
+            type: object
+            xml:
+              name: entry
+          type: array
+        type:
+          example: BAD_REQUEST
+          type: string
+      type: object
+      xml:
+        name: error
+    messageBase:
+      description: Inbound (MO)
+      properties:
+        account-id:
+          description: Your API Key.
+          example: API_KEY
+          type: string
+        body:
+          description: The body of the message.
+          example: A text message sent using the Nexmo SMS API
+          type: string
+        date-received:
+          description: 'The date and time at UTC+0 when Platform received your request in the following format: `YYYY-MM-DD HH:MM:SS`.'
+          example: '2020-01-01 12:00:00'
+          type: string
+        from:
+          description: The sender ID the message was sent from. Could be a phone number or name.
+          example: Nexmo
+          type: string
+        message-id:
+          description: The id of the message you sent.
+          example: 0A00000000ABCD00
+          type: string
+        network:
+          description: 'The [MCCMNC](https://en.wikipedia.org/wiki/Mobile_Network_Code) for the carrier who delivered the message.'
+          example: '012345'
+          type: string
+        to:
+          description: The phone number the message was sent to.
+          example: 447700900000
+          type: string
+        type:
+          description: The message type. `MT` (mobile terminated or outbound) or `MO` (mobile originated or inbound)
+          enum:
+            - MO
+          example: MO
+          type: string
+      required:
+        - type
+        - message-id
+        - account-id
+        - network
+        - from
+        - to
+        - body
+        - date-received
+      type: object
+      xml:
+        name: message
+    messageMT:
+      description: Outbound (MT)
+      properties:
+        account-id:
+          $ref: '#/components/schemas/messageBase/properties/account-id'
+        body:
+          $ref: '#/components/schemas/messageBase/properties/body'
+        client-ref:
+          description: 'The [internal reference](https://developer.nexmo.com/api/sms#send-an-sms) you set in the request.'
+          example: my-personal-reference
+          maxLength: 40
+          type: string
+        date-closed:
+          description: 'The date and time at UTC+0 when Platform received the delivery receipt from the carrier who delivered the MT message. This parameter is in the following format `YYYY-MM-DD HH:MM:SS`.'
+          example: '2020-01-01 12:00:00'
+          format: date-time
+          type: string
+        date-received:
+          $ref: '#/components/schemas/messageBase/properties/date-received'
+        error-code:
+          $ref: '#/components/schemas/error-code'
+        error-code-label:
+          $ref: '#/components/schemas/error-code-label'
+        final-status:
+          description: The status of `message-id` at `date-closed`.
+          enum:
+            - DELIVRD
+            - EXPIRED
+            - UNDELIV
+            - REJECTD
+            - UNKNOWN
+          example: DELIVRD
+          type: string
+          x-ms-enum:
+            name: final-status
+            values:
+              - description: This message has been delivered to the phone number.
+                value: DELIVRD
+              - description: The target carrier did not send a status in the 48 hours after this message was delivered to them.
+                value: EXPIRED
+              - description: The target carrier failed to deliver this message.
+                value: UNDELIV
+              - description: The target carrier rejected this message.
+                value: REJECTD
+              - description: The target carrier has returned an undocumented status code.
+                value: UNKNOWN
+        from:
+          $ref: '#/components/schemas/messageBase/properties/from'
+        latency:
+          description: The overall latency between `date-received` and `date-closed` in milliseconds.
+          example: 3000
+          type: number
+        message-id:
+          $ref: '#/components/schemas/messageBase/properties/message-id'
+        network:
+          $ref: '#/components/schemas/messageBase/properties/network'
+        price:
+          description: Price in Euros for a MT message.
+          example: 0.0333
+          type: number
+        status:
+          description: A code that explains where the message is in the delivery process. If status is not `delivered` check `error-code` for more information. If status is `accepted` ignore the value of `error-code`.
+          enum:
+            - delivered
+            - expired
+            - failed
+            - rejected
+            - accepted
+            - buffered
+            - unknown
+          type: string
+          x-ms-enum:
+            name: status
+            values:
+              - description: This message has been delivered to the phone number.
+                value: delivered
+              - description: The target carrier did not send a status in the 48 hours after this message was delivered to them.
+                value: expired
+              - description: The target carrier failed to deliver this message.
+                value: failed
+              - description: The target carrier rejected this message.
+                value: rejected
+              - description: The target carrier has accepted to send this message.
+                value: accepted
+              - description: This message is in the process of being delivered.
+                value: buffered
+              - description: The target carrier has returned an undocumented status code.
+                value: unknown
+        to:
+          $ref: '#/components/schemas/messageBase/properties/to'
+        type:
+          description: The message type. `MT` (mobile terminated or outbound) or `MO` (mobile originated or inbound)
+          enum:
+            - MT
+          example: MT
+          type: string
+      required:
+        - type
+        - message-id
+        - account-id
+        - network
+        - from
+        - to
+        - body
+        - date-received
+        - price
+        - final-status
+        - date-closed
+        - latency
+      type: object
+      xml:
+        name: message
+    messages:
+      properties:
+        count:
+          description: The number of messages included in the response.
+          type: integer
+        items:
+          description: The messages in the response.
+          items:
+            oneOf:
+              - $ref: '#/components/schemas/messageBase'
+              - $ref: '#/components/schemas/messageMT'
+            type: object
+            xml:
+              name: message
+          type: array
+          xml:
+            wrapped: true
+      type: object
+    rejections:
+      properties:
+        count:
+          description: The number of messages included in the response.
+          type: integer
+        items:
+          items:
+            properties:
+              account-id:
+                $ref: '#/components/schemas/messageBase/properties/account-id'
+              date-received:
+                $ref: '#/components/schemas/messageBase/properties/date-received'
+              error-code:
+                $ref: '#/components/schemas/error-code'
+              error-code-label:
+                $ref: '#/components/schemas/error-code-label'
+              from:
+                $ref: '#/components/schemas/messageBase/properties/from'
+              to:
+                $ref: '#/components/schemas/messageBase/properties/to'
+            required:
+              - account-id
+              - from
+              - to
+              - date-received
+              - error-code
+              - error-code-label
+            type: object
+            xml:
+              name: rejection
+          type: array
+          xml:
+            wrapped: true
+      type: object
+  securitySchemes:
+    apiKey:
+      description: 'You can find your API key in your [account overview](https://dashboard.nexmo.com/account-overview)'
+      in: query
+      name: api_key
+      type: apiKey
+    apiSecret:
+      description: 'You can find your API secret in your [account overview](https://dashboard.nexmo.com/account-overview)'
+      in: query
+      name: api_secret
+      type: apiKey

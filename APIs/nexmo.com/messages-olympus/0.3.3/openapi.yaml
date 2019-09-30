@@ -1,0 +1,686 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://api.nexmo.com/v0.1'
+info:
+  contact:
+    email: devrel@nexmo.com
+    name: Nexmo DevRel
+    url: 'https://developer.nexmo.com/'
+  description: 'The Messaging API is a new API that consolidates all messaging channels. It encapsulates a user (developer) from having to use multiple APIs to interact with our various channels such as SMS, MMS, Viber, Facebook Messenger, etc. The API normalises information across all channels to abstracted to, from and content. This API is currently in Beta.'
+  title: Messages
+  version: 0.3.3
+  x-label: Beta
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.7.31
+      format: openapi
+      url: 'https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/messages-olympus.yml'
+      version: '3.0'
+  x-providerName: nexmo.com
+  x-serviceName: messages-olympus
+paths:
+  /messages:
+    post:
+      callbacks:
+        inbound-message:
+          '{$request.body#/callback}':
+            post:
+              description: An inbound message from a customer to you.
+              operationId: inbound-message
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/InboundMessage'
+                required: true
+              responses:
+                '200':
+                  description: Your server returns this code if it accepts the callback.
+              summary: Inbound Message
+              x-example-path: /webhooks/inbound-message
+        message-status:
+          '{$request.body#/callback}':
+            post:
+              description: 'Webhooks to inform about events happening to the message at communication level (has it been delivered, rejected by the provider...).'
+              operationId: message-status
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/MessageStatus'
+                required: true
+              responses:
+                '200':
+                  description: Your server returns this code if it accepts the callback.
+              summary: Message Status
+              x-example-path: /webhooks/message-status
+      operationId: NewMessage
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewMessage'
+        description: Send a Message.
+        required: true
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+          description: Accepted.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request.
+      security:
+        - bearerAuth: []
+        - basicAuth: []
+      summary: Send a Message
+components:
+  schemas:
+    AudioProperty:
+      properties:
+        url:
+          description: |
+            The URL of the audio attachment.
+
+            **messenger** supports .mp3.
+
+            **whatsapp** supports .aac, .m4a, .amr, .mp3 and .opus.
+          example: 'https://example.com/audio.mp3'
+          maxLength: 2000
+          minLength: 10
+          type: string
+      type: object
+    Error:
+      description: The error format is standardized to the 4xx/5xx range with a code and a human readable explanation.
+      properties:
+        detail:
+          example: Your request parameters did not validate.
+          type: string
+        instance:
+          example: f94b4e56604e07e5e5ad5a7228618f81
+          type: string
+        title:
+          example: Invalid Parameters
+          type: string
+        type:
+          example: 'https://www.nexmo.com/messages/Errors#InvalidParams'
+          type: string
+      required:
+        - type
+        - title
+        - detail
+        - instance
+    FileProperty:
+      properties:
+        caption:
+          description: Additional text to accompany the image. Only supported by WhatsApp. Optional. Only present if specified.
+          example: Additional text to accompany the image.
+          maxLength: 3000
+          minLength: 1
+          type: string
+        url:
+          description: |
+            The URL of the file attachment.
+
+            **messenger** supports a wide range of attachments including .zip, .csv and .pdf.
+
+            **whatsapp** supports .pdf, .doc(x), .ppt(x) and .xls(x).'
+          example: 'https://example.com/file.zip'
+          maxLength: 2000
+          minLength: 10
+          type: string
+      type: object
+    FromProperty:
+      properties:
+        id:
+          description: |
+            Your ID for the platform that you are sending from.
+
+            **Messenger**: This value should be the `to.id` value you received in the inbound messenger event.
+
+            **Viber**: This is your Service Message ID given to you by Nexmo Account Manager. To find out more please visit [nexmo.com/products/messages](https://www.nexmo.com/products/messages).
+          example: 0123456789012345
+          maxLength: 50
+          minLength: 1
+          type: string
+        number:
+          description: |
+            **SMS**: The phone number of the message recipient in the [E.164](https://en.wikipedia.org/wiki/E.164) format. Don't use a leading + or 00 when entering a phone number, start with the country code, for example, 447700900000.
+
+            **WhatsApp**: This is your WhatsApp Business Number  given to you by Nexmo Account Manager. To find out more please visit [nexmo.com/products/messages](https://www.nexmo.com/products/messages).
+
+            **MMS**: US shortcode
+          example: '447700900000'
+          maxLength: 50
+          minLength: 1
+          type: string
+        type:
+          description: The type of message that you want to send.
+          enum:
+            - sms
+            - viber_service_msg
+            - messenger
+            - whatsapp
+            - mms
+          example: sms
+          type: string
+      required:
+        - type
+      type: object
+    ImageProperty:
+      properties:
+        caption:
+          description: Additional text to accompany the image. Supported by WhatsApp and MMS.
+          example: Additional text to accompany the image.
+          maxLength: 3000
+          minLength: 1
+          type: string
+        url:
+          description: |
+            The URL of the image attachment. 
+
+            **messenger** and **mms** supports .jpg, .jpeg, .png and .gif.
+
+            **viber_service_msg** supports .jpg .jpeg, and .png.
+
+            **whatsapp** supports .jpg .jpeg, and .png.
+          example: 'https://example.com/image.jpg'
+          maxLength: 2000
+          minLength: 10
+          type: string
+      type: object
+    InboundMessage:
+      properties:
+        from:
+          properties:
+            id:
+              description: The ID of the sender.
+              example: 0123456789012345
+              type: string
+            number:
+              description: |
+                **WhatsApp** or **MMS**: 
+                The phone number of the message sender in the [E.164](https://en.wikipedia.org/wiki/E.164) format.
+              example: '447700900000'
+              maxLength: 50
+              minLength: 1
+              type: string
+            type:
+              description: The type of message being sent.
+              enum:
+                - messenger
+                - mms
+                - whatsapp
+              example: messenger
+              type: string
+          required:
+            - type
+          type: object
+        message:
+          properties:
+            content:
+              properties:
+                audio:
+                  $ref: '#/components/schemas/AudioProperty'
+                file:
+                  $ref: '#/components/schemas/FileProperty'
+                image:
+                  $ref: '#/components/schemas/ImageProperty'
+                location:
+                  $ref: '#/components/schemas/LocationProperty'
+                text:
+                  description: The body of the message.
+                  example: Hello World!
+                  type: string
+                type:
+                  description: |
+                    The type of message being received. 
+                    **whatsapp** and **messenger** supports `text`, `image`, `audio`, `video`, `file` and `location`. WhatsApp maximum inbound size is 64mb.
+                    **mms** supports `image`. 
+                  enum:
+                    - text
+                    - image
+                    - audio
+                    - video
+                    - file
+                    - location
+                  example: text
+                  type: string
+                video:
+                  $ref: '#/components/schemas/VideoPropertyInbound'
+              type: object
+          type: object
+        message_uuid:
+          description: The UUID of the message.
+          example: aaaaaaaa-bbbb-cccc-dddd-0123456789ab
+          type: string
+        timestamp:
+          description: The datetime of when the event occurred.
+          example: '2020-01-01T14:00:00.000Z'
+          format: ISO 8601
+          type: string
+        to:
+          properties:
+            id:
+              description: The ID of the recipient.
+              example: 0123456678901234
+              type: string
+            number:
+              description: |
+                **WhatsApp** or **MMS**: 
+                The phone number of the message recipient in the [E.164](https://en.wikipedia.org/wiki/E.164) format.
+              example: '447700900000'
+              maxLength: 50
+              minLength: 1
+              type: string
+            type:
+              description: The type of message being received.
+              enum:
+                - messenger
+                - mms
+                - whatsapp
+              example: messenger
+              type: string
+          required:
+            - type
+          type: object
+      required:
+        - message_uuid
+        - to
+        - from
+        - timestamp
+      type: object
+    LocationProperty:
+      properties:
+        address:
+          description: The address of the location attachment.
+          example: 15 Bonhill St London EC2A 4DN
+          type: string
+        lat:
+          description: The latitude of the location attachment.
+          example: '51.5228349'
+          type: string
+        long:
+          description: The longitude of the location attachment.
+          example: '-0.0854414'
+          type: string
+        name:
+          description: The name of the location attachment.
+          example: Nexmo London
+          type: string
+        url:
+          description: 'Depending on the provider, this can either be the location on a map or the website of the business at this location.'
+          type: string
+      type: object
+    MessageProperty:
+      properties:
+        content:
+          properties:
+            audio:
+              $ref: '#/components/schemas/AudioProperty'
+            file:
+              $ref: '#/components/schemas/FileProperty'
+            image:
+              $ref: '#/components/schemas/ImageProperty'
+            template:
+              $ref: '#/components/schemas/TemplateProperty'
+            text:
+              description: |
+                The text of the message.
+
+                **Messenger**: is limited to 640 characters, including unicode.
+
+                **SMS**: is limited to 1000 characters. The Messages API automatically detects unicode characters when sending SMS and sends the message as a unicode SMS. For more information on how concatenation and encoding please visit: [developer.nexmo.com/messaging/sms/guides/concatenation-and-encoding](https://developer.nexmo.com/messaging/sms/guides/concatenation-and-encoding).
+
+                **Viber**: is limited to 1000 characters, including unicode. 
+
+                **WhatsApp**: is limited to 4096 characters, including unicode.
+              example: 'Nexmo Verification code: 64873. Valid for 10 minutes.'
+              maxLength: 4096
+              minLength: 1
+              type: string
+            type:
+              description: |
+                The type of message that you are sending.
+
+                **Messenger**: supports `text`, `image`, `audio`, `video` and `file`.
+
+                **Viber Service Messages**: supports `image` and `text` and `custom`.
+
+                **WhatsApp**: supports `template`, `text`, `image`, `audio`, `file`, `video` and `custom`. Maxmimum outbound media size is 64mb.
+
+                **SMS**: supports `text`.
+
+                **MMS**: supports `image`.
+              enum:
+                - text
+                - image
+                - audio
+                - video
+                - file
+                - template
+                - custom
+              example: text
+              type: string
+            video:
+              $ref: '#/components/schemas/VideoProperty'
+          type: object
+        messenger:
+          properties:
+            category:
+              description: 'The use of different category tags enables the business to send messages for different use cases. For Facebook Messenger they need to comply with their [Messaging Types policy]( https://developers.facebook.com/docs/messenger-platform/send-messages#messaging_types). Nexmo maps our `category` to their `messaging_type`. If `message_tag` is used, then an additional `tag` for that type is mandatory. By default Nexmo sends the `response` category to Facebook Messenger.'
+              enum:
+                - response
+                - update
+                - message_tag
+              example: message_tag
+              type: string
+            tag:
+              description: '‘A full list of the possible tags is available on [developers.facebook.com](https://developers.facebook.com/docs/messenger-platform/send-messages/message-tags)'''
+              example: ticket_update
+              type: string
+          type: object
+        viber_service_msg:
+          properties:
+            category:
+              description: 'The use of different category tags enables the business to send messages for different use cases. For Viber Service Messages the first message sent from a business to a user must be personal, informative & a targeted message - not promotional. By default Nexmo sends the `transaction` category to Viber Service Messages.'
+              enum:
+                - transaction
+                - promotion
+              example: transaction
+              type: string
+            ttl:
+              description: Set the time-to-live of message to be delivered in seconds. i.e. if the message is not delivered in 600 seconds then delete the message.
+              example: 600
+              maximum: 259200
+              minimum: 30
+              type: integer
+            type:
+              description: 'Viber-specific type definition. To use "template", please contact Nexmo Account Manager to setup your templates. To find out more please visit [nexmo.com/products/messages](https://www.nexmo.com/products/messages).'
+              example: template
+              type: string
+          type: object
+        whatsapp:
+          properties:
+            locale:
+              description: 'We are using the industry standard, BCP 47, for locales. So in your API call to the /messages API you will need to put “en-GB” and this will refer to the “en_GB” template for WhatsApp.'
+              example: en-GB
+              type: string
+            policy:
+              description: 'There are two policies that you can specify when sending an Message Template: `deterministic` and `fallback`. `deterministic` — Deliver the Message Template in exactly the language and locale asked for. `fallback` — Deliver the Message Template in the language that matches users language/locale setting on device. If one can not be found, deliver using the specified fallback language.'
+              enum:
+                - fallback
+                - deterministic
+              example: deterministic
+              type: string
+          type: object
+      required:
+        - content
+      type: object
+    MessageStatus:
+      properties:
+        client_ref:
+          description: The client's reference.
+          example: my-personal-reference
+          type: string
+        error:
+          properties:
+            code:
+              description: 'The error code. See [our errors list](https://developer.nexmo.com/api-errors/messages-olympus) for a list of possible errors'
+              example: 1300
+              type: integer
+            reason:
+              description: 'Text describing the error. See [our errors list](https://developer.nexmo.com/api-errors/messages-olympus) for a list of possible errors'
+              example: Not part of the provider network
+              type: string
+          type: object
+        from:
+          $ref: '#/components/schemas/FromProperty'
+        message_uuid:
+          description: The UUID of the message.
+          example: aaaaaaaa-bbbb-cccc-dddd-0123456789ab
+          type: string
+        status:
+          description: The status of the message. The `read` message status is only available for `messenger` and `whatsapp`.
+          enum:
+            - submitted
+            - delivered
+            - read
+            - rejected
+            - undeliverable
+          example: delivered
+          type: string
+        timestamp:
+          $ref: '#/components/schemas/TimestampProperty'
+        to:
+          $ref: '#/components/schemas/ToProperty'
+        usage:
+          properties:
+            currency:
+              description: The charge currency in ISO 4217 format.
+              enum:
+                - EUR
+              example: EUR
+              type: string
+            price:
+              description: The charge amount as a stringified number.
+              example: '0.0333'
+              type: string
+          type: object
+      required:
+        - message_uuid
+        - to
+        - from
+        - timestamp
+        - status
+      type: object
+    NewMessage:
+      properties:
+        client_ref:
+          description: Client reference of up to 40 characters. The reference will be present in every message status.
+          example: my-personal-reference
+          type: string
+        from:
+          $ref: '#/components/schemas/FromProperty'
+        message:
+          $ref: '#/components/schemas/MessageProperty'
+        to:
+          $ref: '#/components/schemas/ToProperty'
+      required:
+        - to
+        - from
+        - message
+    Response:
+      properties:
+        message_uuid:
+          description: The UUID of the message.
+          example: aaaaaaaa-bbbb-cccc-dddd-0123456789ab
+          type: string
+      required:
+        - message_uuid
+    TemplateProperty:
+      properties:
+        name:
+          description: 'The name of the template. For WhatsApp use your Whatsapp namespace (available via Facebook Business Manager), followed by a colon `:` and the name of the template to use.'
+          example: 'WhatsApp_namespace:template_name'
+          type: string
+        parameters:
+          items:
+            properties:
+              default:
+                description: 'The parameters are an array. The first value being {{1}} in the template.'
+                example: '1234'
+                type: string
+            type: object
+          type: array
+      type: object
+    TimestampProperty:
+      description: The datetime of when the event occurred.
+      example: '2020-01-01T14:00:00.000Z'
+      format: ISO 8601
+      type: string
+    ToProperty:
+      properties:
+        id:
+          description: |
+            **Messenger**: The ID of the message recipient. This value should be the `from.id` value you received in the inbound messenger event.
+          example: 0123456789012345
+          maxLength: 50
+          minLength: 1
+          type: string
+        number:
+          description: |
+            **SMS**, **Viber**, **WhatsApp** or **MMS**: 
+            The phone number of the message recipient in the [E.164](https://en.wikipedia.org/wiki/E.164) format. Don't use a leading + or 00 when entering a phone number, start with the country code, for example, 447700900000.
+          example: '447700900000'
+          maxLength: 50
+          minLength: 1
+          type: string
+        type:
+          description: The type of message that you want to send.
+          enum:
+            - sms
+            - viber_service_msg
+            - messenger
+            - whatsapp
+            - mms
+          example: sms
+          type: string
+      required:
+        - type
+      type: object
+    VideoProperty:
+      properties:
+        url:
+          description: |
+            The URL of the video attachment.
+
+            **messenger** supports .mp4
+
+            **whatsapp** supports .mp4 and .3gpp. Note, only H.264 video codec and AAC audio codec is supported.
+          example: 'https://example.com/video.mp4'
+          maxLength: 2000
+          minLength: 10
+          type: string
+      type: object
+    VideoPropertyInbound:
+      properties:
+        caption:
+          description: Additional text to accompany the image. Only supported by WhatsApp. Only present if specified.
+          example: Additional text to accompany the image.
+          maxLength: 3000
+          minLength: 1
+          type: string
+        url:
+          description: |
+            The URL of the video attachment.
+
+            **messenger** and **whatsapp** supports .mp4.
+          example: 'https://example.com/video.mp4'
+          maxLength: 2000
+          minLength: 10
+          type: string
+      type: object
+  securitySchemes:
+    basicAuth:
+      scheme: basic
+      type: http
+    bearerAuth:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+x-errors:
+  '1000':
+    description: Throttled - You have exceeded the submission capacity allowed on this account. Please wait and retry
+  '1010':
+    description: Missing params - Your request is incomplete and missing some mandatory parameters.
+  '1020':
+    description: Invalid params  -  The value of one or more parameters is invalid.
+  '1021':
+    description: Invalid tag  -  The tag value is invalid.
+  '1022':
+    description: Invalid template  -  Invalid template or template parameters
+  '1030':
+    description: Internal error  -  There was an error processing your request in the Platform.
+  '1040':
+    description: 'Invalid message  -  The Platform was unable to process your request. For example, due to an unrecognised prefix for the phone number.'
+  '1050':
+    description: Number barred  -  The number you are trying to submit to is blacklisted and may not receive messages.
+  '1060':
+    description: Partner account barred  -  The `api_key` you supplied is for an account that has been barred from submitting messages.
+  '1070':
+    description: Partner quota exceeded  -  Your pre-paid account does not have sufficient credit to process this message.
+  '1080':
+    description: 'Account not enabled for REST  -  This account is not provisioned for REST submission, you should use SMPP on the SMS API.'
+  '1090':
+    description: Message too long  -  The length of `udh` and `body` was greater than 140 octets for a binary type SMS request.
+  '1100':
+    description: Communication Failed  -  Message was not submitted because there was a communication failure.
+  '1120':
+    description: 'Illegal Sender Address - rejected  -  Due to local regulations, the `SenderID` you set in from in the request was not accepted. Please check the Global messaging section.'
+  '1130':
+    description: Invalid TTL  -  The value of `ttl` in your request was invalid.
+  '1140':
+    description: Facility not allowed  -  Your request makes use of a facility that is not enabled on your account.
+  '1150':
+    description: 'Invalid Message class  -  The value of `message-`class in your request was out of range. See https://en.wikipedia.org/wiki/Data_Coding_Scheme.'
+  '1160':
+    description: 'Non White-listed Destination  -  The phone number you set in to is not in your pre-approved destination list. To send messages to this phone number, add it using Dashboard.'
+  '1170':
+    description: Invalid or Missing Msisdn Param  -  The phone number you supplied in the to parameter of your request was either missing or invalid.
+  '1180':
+    description: 'Absent Subscriber Temporary  -  This message was not delivered because to was temporarily unavailable. For example, the handset used for to was out of coverage or switched off. This is a temporary failure, retry later for a positive result.'
+  '1190':
+    description: 'Absent Subscriber Permanent  -  `to` is no longer active, You should remove this phone number from your database.'
+  '1200':
+    description: 'Portability Error  -  There is an issue after the user has changed carrier for to. If the user wants to receive messages from you, they need to contact their carrier directly.'
+  '1210':
+    description: Anti-Spam Rejection  -  Carriers often apply restrictions that block messages following different criteria. For example on SenderID or message content.
+  '1220':
+    description: 'Handset Busy  -  The handset associated with to was not available when this message was sent. If status is rejected, this is a temporary failure; retry later for a positive result. If status is submitted, this message has is in the retry scheme and will be resent until it expires in 24-48 hours.'
+  '1230':
+    description: 'Network Error  -  A network failure while sending your message. This is a temporary failure, retry later for a positive result.'
+  '1240':
+    description: 'Illegal Number  -  You tried to send a message to a blacklisted phone number. That is, the user has already sent a STOP opt-out message and no longer wishes to receive messages from you.'
+  '1241':
+    description: Too many send requests  -  Too many send requests to phone numbers.
+  '1250':
+    description: 'Unroutable  -  The chosen route to send your message is not available. This is because the phone number is either currently on an unsupported network or on a pre-paid or reseller account that could not receive a message sent by from. To resolve this issue either email us at support@nexmo.com or create a helpdesk ticket at https://help.nexmo.com.'
+  '1260':
+    description: Destination unreachable  -  The message could not be delivered to the phone number. If using Viber Service Messages your account might not be enabled for this country.
+  '1270':
+    description: Subscriber Age Restriction  -  The carrier blocked this message because the content is not suitable for to based on age restrictions.
+  '1280':
+    description: 'Number Blocked by Carrier  -  The carrier blocked this message. This could be due to several reasons. For example, to''s plan does not include SMS or the account is suspended.'
+  '1290':
+    description: Pre-Paid - Insufficient funds  -  to’s pre-paid account does not have enough credit to receive the message.
+  '1300':
+    description: Not part of the provider network  -  The number or ID is not a user in the provider network.
+  '1310':
+    description: Not suitable device  -  The user's device can't receive the message.
+  '1320':
+    description: Message already sent  -  The message was already sent.
+  '1330':
+    description: 'Unknown  -  An unknown error was received from the carrier who tried to send this this message. Depending on the carrier, that to is unknown. When you see this error, and status is rejected, always check if to in your request was valid.'
+  '1331':
+    description: Provider error  -  The provider is not responding or unable to process the request. Please try sending your message in a few minutes time.
+  '1340':
+    description: Outside of the allowed window  -  This message is sent outside of allowed response window.
+  '1350':
+    description: Phone matching fee not paid  -  Requires phone matching access fee to be paid by the Facebook Page.
+  '1360':
+    description: 'TTL was activated  -  TTL was activated, no callbacks and no charge will be issued.'
+  '1370':
+    description: Expired access Token - Please reauthenticate your Facebook Page with Nexmo.
+  '1380':
+    description: Invalid resource - Please check that the URL your provided to your resrouce is accesible and valid.
+  '1381':
+    description: Resource size is too large - Please try sending a smaller media file.
+  '1382':
+    description: Resource type is invalid - Please check that the file you are trying to send is valid.

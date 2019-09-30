@@ -21,7 +21,8 @@ var specSources = {
   'bclaws.ca': require('./bcgov'),
   'box.com': require('./box'),
   'fantasydata.net': require('./fantasydata'),
-  'adyen.com': require('./adyen')
+  'adyen.com': require('./adyen'),
+  'nexmo.com': require('./nexmo')
 };
 var catalogProviders = _.keys(specSources);
 
