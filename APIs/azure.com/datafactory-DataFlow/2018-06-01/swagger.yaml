@@ -1,0 +1,137 @@
+swagger: '2.0'
+schemes:
+  - https
+host: azure.local
+info:
+  title: DataFactoryManagementClient
+  version: '2018-06-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datafactory/resource-manager/Microsoft.DataFactory/stable/2018-06-01/entityTypes/DataFlow.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: datafactory-DataFlow
+  x-tags:
+    - Azure
+    - Microsoft
+paths: {}
+definitions:
+  DataFlow:
+    description: Azure Data Factory nested object which contains a flow with data movements and transformations.
+    discriminator: type
+    properties:
+      annotations:
+        description: List of tags that can be used for describing the data flow.
+        items:
+          type: object
+        type: array
+      description:
+        description: The description of the data flow.
+        type: string
+      folder:
+        description: 'The folder that this data flow is in. If not specified, Data flow will appear at the root level.'
+        properties:
+          name:
+            description: The name of the folder that this data flow is in.
+            type: string
+        type: object
+      type:
+        description: Type of data flow.
+        type: string
+    type: object
+  DataFlowSink:
+    allOf:
+      - $ref: '#/definitions/Transformation'
+    description: Transformation for data flow sink.
+    properties:
+      dataset:
+        description: Dataset reference type.
+        properties:
+          parameters:
+            additionalProperties:
+              type: object
+            description: An object mapping parameter names to argument values.
+            type: object
+          referenceName:
+            description: Reference dataset name.
+            type: string
+          type:
+            description: Dataset reference type.
+            enum:
+              - DatasetReference
+            type: string
+        required:
+          - type
+          - referenceName
+  DataFlowSource:
+    allOf:
+      - $ref: '#/definitions/Transformation'
+    description: Transformation for data flow source.
+    properties:
+      dataset:
+        description: Dataset reference type.
+        properties:
+          parameters:
+            additionalProperties:
+              type: object
+            description: An object mapping parameter names to argument values.
+            type: object
+          referenceName:
+            description: Reference dataset name.
+            type: string
+          type:
+            description: Dataset reference type.
+            enum:
+              - DatasetReference
+            type: string
+        required:
+          - type
+          - referenceName
+  MappingDataFlow:
+    allOf:
+      - $ref: '#/definitions/DataFlow'
+    description: Mapping data flow.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/MappingDataFlowTypeProperties'
+        description: Mapping data flow type properties.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: MappingDataFlow
+  MappingDataFlowTypeProperties:
+    description: Mapping data flow type properties.
+    properties:
+      script:
+        description: DataFlow script.
+        type: string
+      sinks:
+        description: List of sinks in data flow.
+        items:
+          $ref: '#/definitions/DataFlowSink'
+        type: array
+      sources:
+        description: List of sources in data flow.
+        items:
+          $ref: '#/definitions/DataFlowSource'
+        type: array
+      transformations:
+        description: List of transformations in data flow.
+        items:
+          $ref: '#/definitions/Transformation'
+        type: array
+  Transformation:
+    description: A data flow transformation.
+    properties:
+      description:
+        description: Transformation description.
+        type: string
+      name:
+        description: Transformation name.
+        type: string
+    required:
+      - name
+    type: object

@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/mediaservices/resource-manager/Microsoft.Media/preview/2019-05-01-preview/StreamingPoliciesAndStreamingLocators.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/mediaservices/resource-manager/Microsoft.Media/stable/2018-07-01/StreamingPoliciesAndStreamingLocators.json'
       version: '2.0'
   x-preferred: true
   x-providerName: azure.com
@@ -206,7 +206,6 @@ paths:
                   contentKeys: []
                   created: '2018-08-08T18:29:32.1154071Z'
                   endTime: '9999-12-31T23:59:59.9999999Z'
-                  filters: []
                   streamingLocatorId: 7684043b-f6d1-44a7-8bed-8a4aa474c5a4
                   streamingPolicyName: clearStreamingPolicy
                 type: Microsoft.Media/mediaservices/streamingLocators
@@ -260,10 +259,9 @@ paths:
                 properties:
                   assetName: ClimbingMountRainier
                   contentKeys: []
-                  created: '2019-06-06T17:28:03.7992857Z'
+                  created: '2018-08-08T18:29:32.4323237Z'
                   endTime: '9999-12-31T23:59:59.9999999Z'
-                  filters: []
-                  streamingLocatorId: 7ccb6b56-686c-4d93-a267-8117ee145878
+                  streamingLocatorId: e34b0fc4-3be0-4a3c-9793-1f6b7be5b013
                   streamingPolicyName: clearStreamingPolicy
                 type: Microsoft.Media/mediaservices/streamingLocators
         Creates a Streaming Locator with secure streaming:
@@ -287,23 +285,22 @@ paths:
                 properties:
                   assetName: ClimbingMountRainier
                   contentKeys:
-                    - id: 41ddc803-579c-4fe8-b298-b37be5924d9e
+                    - id: 1b2d5581-4518-4a51-ad8a-f55d3bf993d4
                       labelReferenceInStreamingPolicy: cbcsDefaultKey
                       tracks: []
                       type: CommonEncryptionCbcs
-                    - id: 68a5fd6e-ed9e-4cdf-b276-40304299dc4a
+                    - id: 1a9858b1-3566-4bf1-9fee-60f2fb98e7e4
                       labelReferenceInStreamingPolicy: cencDefaultKey
                       tracks: []
                       type: CommonEncryptionCenc
-                    - id: bfb7cbf3-5834-4d43-a87d-f25ed1b88ed3
+                    - id: 5faac86a-3aca-4d6b-99c0-6bb8cc3497a1
                       labelReferenceInStreamingPolicy: aesDefaultKey
                       tracks: []
                       type: EnvelopeEncryption
-                  created: '2019-06-06T17:28:03.9392829Z'
+                  created: '2018-08-08T18:29:32.6243295Z'
                   endTime: '2028-12-31T23:59:59.9999999Z'
-                  filters: []
                   startTime: '2018-03-01T00:00:00Z'
-                  streamingLocatorId: 1f5db621-0c21-43d7-a340-2b143d62d4e7
+                  streamingLocatorId: 962775be-41fb-452a-b0dc-72ca2543a945
                   streamingPolicyName: secureStreamingPolicy
                 type: Microsoft.Media/mediaservices/streamingLocators
         Creates a Streaming Locator with user defined content keys:
@@ -348,9 +345,8 @@ paths:
                       labelReferenceInStreamingPolicy: aesDefaultKey
                       tracks: []
                       type: EnvelopeEncryption
-                  created: '2019-06-06T18:00:49.849356Z'
+                  created: '2018-08-08T18:29:32.7859424Z'
                   endTime: '9999-12-31T23:59:59.9999999Z'
-                  filters: []
                   streamingLocatorId: 90000000-0000-0000-0000-00000000000a
                   streamingPolicyName: secureStreamingPolicy
                 type: Microsoft.Media/mediaservices/streamingLocators
@@ -958,7 +954,6 @@ paths:
                   customKeyAcquisitionUrlTemplate: 'https://contoso.com/{AssetAlternativeId}/envelope/{ContentKeyId}'
                   enabledProtocols:
                     dash: true
-                    download: false
                     hls: true
                     smoothStreaming: true
             resourceGroupName: contoso

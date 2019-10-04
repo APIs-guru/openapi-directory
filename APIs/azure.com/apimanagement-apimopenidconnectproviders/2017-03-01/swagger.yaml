@@ -1,7 +1,7 @@
 swagger: '2.0'
 schemes:
   - https
-host: management.azure.com
+host: azure.local
 info:
   description: 'Use these REST APIs for performing operations on OpenId Connect Provider entity associated with your Azure API Management deployment. API Management allows you to access APIs secured with token from [OpenID Connect Provider ](http://openid.net/connect/) to be accessed from the Developer Console.'
   title: ApiManagementClient
@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2017-03-01/apimopenidconnectproviders.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/control-plane/Microsoft.ApiManagement/preview/2017-03-01/apimopenidconnectproviders.json'
       version: '2.0'
   x-preferred: false
   x-providerName: azure.com
@@ -25,16 +25,12 @@ consumes:
 produces:
   - application/json
 securityDefinitions:
-  azure_auth:
-    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
-    description: Azure Active Directory OAuth2 Flow.
-    flow: implicit
-    scopes:
-      user_impersonation: impersonate your user account
-    type: oauth2
+  apim_key:
+    in: header
+    name: Authorization
+    type: apiKey
 security:
-  - azure_auth:
-      - user_impersonation
+  - apim_key: []
 parameters:
   OpenIdConnectIdParameter:
     description: Identifier of the OpenID Connect Provider.
@@ -46,26 +42,11 @@ parameters:
     type: string
     x-ms-parameter-location: method
 paths:
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/openidConnectProviders':
+  /openidConnectProviders:
     get:
       description: Lists all OpenID Connect Providers.
-      operationId: OpenIdConnectProvider_ListByService
+      operationId: OpenIdConnectProvider_List
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - description: |-
             | Field | Supported operators    | Supported functions                         |
             |-------|------------------------|---------------------------------------------|
@@ -96,11 +77,6 @@ paths:
           name: api-version
           required: true
           type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
       responses:
         '200':
           description: Lists of all the OpenId Connect Providers.
@@ -109,49 +85,27 @@ paths:
       tags:
         - OpenIdConnectProviders
       x-ms-examples:
-        ApiManagementListOpenIdConnectProviders:
+        ApiManagementListOpenIdConnectProvider:
           parameters:
             api-version: '2017-03-01'
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+            apimBaseUrl: apimservice1.management.azure-api.net
           responses:
             '200':
               body:
-                nextLink: ''
+                count: 1
                 value:
-                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/openidConnectProviders/templateOpenIdConnect2
-                    name: templateOpenIdConnect2
-                    properties:
-                      clientId: oidprovidertemplate2
-                      clientSecret: oidsecretproviderTemplate2
-                      description: open id provider template2
-                      displayName: templateoidprovider2
-                      metadataEndpoint: 'https://oidprovider-template2.net'
-                    type: Microsoft.ApiManagement/service/openidconnectproviders
+                  - clientId: oidprovidertemplate3
+                    id: /openidConnectProviders/op1
+                    metadataEndpoint: 'https://oidprovider-template3.net'
+                    name: templateoidprovider3
       x-ms-odata: '#/definitions/OpenidConnectProviderContract'
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/openidConnectProviders/{opid}':
+  '/openidConnectProviders/{opid}':
     delete:
       description: Deletes specific OpenID Connect Provider of the API Management service instance.
       operationId: OpenIdConnectProvider_Delete
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/OpenIdConnectIdParameter'
         - description: The entity state (Etag) version of the OpenID Connect Provider to delete. A value of "*" can be used for If-Match to unconditionally apply the operation.
           in: header
@@ -161,11 +115,6 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -200,44 +149,22 @@ paths:
       tags:
         - OpenIdConnectProviders
       x-ms-examples:
-        ApiManagementDeleteOpenIdConnectProvider:
+        ApiManagementDeleteOpenidconnectproviders:
           parameters:
             If-Match: '*'
             api-version: '2017-03-01'
+            apimBaseUrl: apimservice1.management.azure-api.net
             opid: templateOpenIdConnect3
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
           responses:
             '204': {}
     get:
       description: Gets specific OpenID Connect Provider.
       operationId: OpenIdConnectProvider_Get
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/OpenIdConnectIdParameter'
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -278,121 +205,22 @@ paths:
       tags:
         - OpenIdConnectProviders
       x-ms-examples:
-        ApiManagementGetOpenIdConnectProvider:
+        ApiManagementGetOpenIdConnectProviders:
           parameters:
             api-version: '2017-03-01'
-            opid: templateOpenIdConnect2
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+            apimBaseUrl: apimservice1.management.azure-api.net
+            opid: op1
           responses:
             '200':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/openidConnectProviders/templateOpenIdConnect2
-                name: templateOpenIdConnect2
-                properties:
-                  clientId: oidprovidertemplate2
-                  clientSecret: oidsecretproviderTemplate2
-                  description: open id provider template2
-                  displayName: templateoidprovider2
-                  metadataEndpoint: 'https://oidprovider-template2.net'
-                type: Microsoft.ApiManagement/service/openidconnectproviders
-    head:
-      description: Gets the entity state (Etag) version of the openIdConnectProvider specified by its identifier.
-      operationId: OpenIdConnectProvider_GetEntityTag
-      parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - $ref: '#/parameters/OpenIdConnectIdParameter'
-        - description: Version of the API to be used with the client request.
-          in: query
-          name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Specified openidConnectProvider entity exists and current entity state version is present in the ETag header.
-          headers:
-            ETag:
-              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-              type: string
-        default:
-          description: Error response describing why the operation failed.
-          schema:
-            description: Error Body contract.
-            properties:
-              code:
-                description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                type: string
-              details:
-                description: 'The list of invalid fields send in request, in case of validation error.'
-                items:
-                  description: Error Field contract.
-                  properties:
-                    code:
-                      description: Property level error code.
-                      type: string
-                    message:
-                      description: Human-readable representation of property-level error.
-                      type: string
-                    target:
-                      description: Property name.
-                      type: string
-                type: array
-              message:
-                description: Human-readable representation of the error.
-                type: string
-      tags:
-        - OpenIdConnectProviders
-      x-ms-examples:
-        ApiManagementHeadOpenIdConnectProvider:
-          parameters:
-            api-version: '2017-03-01'
-            opid: templateOpenIdConnect2
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
-          responses:
-            '200':
-              headers:
-                etag: AAAAAAAAAAa=
+                clientId: oidprovidertemplate3
+                id: /openidConnectProviders/op1
+                metadataEndpoint: 'https://oidprovider-template3.net'
+                name: templateoidprovider3
     patch:
       description: Updates the specific OpenID Connect Provider.
       operationId: OpenIdConnectProvider_Update
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/OpenIdConnectIdParameter'
         - description: Update parameters.
           in: body
@@ -408,11 +236,6 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -447,38 +270,20 @@ paths:
       tags:
         - OpenIdConnectProviders
       x-ms-examples:
-        ApiManagementUpdateOpenIdConnectProvider:
+        ApiManagementPatchOpenIdConnectProviders:
           parameters:
             If-Match: '*'
             api-version: '2017-03-01'
+            apimBaseUrl: apimservice1.management.azure-api.net
             opid: templateOpenIdConnect2
             parameters:
-              properties:
-                clientSecret: updatedsecret
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+              clientSecret: updatedsecret
           responses:
             '204': {}
     put:
       description: Creates or updates the OpenID Connect Provider.
       operationId: OpenIdConnectProvider_CreateOrUpdate
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/OpenIdConnectIdParameter'
         - description: Create parameters.
           in: body
@@ -489,11 +294,6 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -534,41 +334,35 @@ paths:
       tags:
         - OpenIdConnectProviders
       x-ms-examples:
-        ApiManagementCreateOpenIdConnectProvider:
+        ApiManagementPutOpenIdConnectProviders:
           parameters:
             api-version: '2017-03-01'
-            opid: templateOpenIdConnect3
+            apimBaseUrl: apimservice1.management.azure-api.net
+            opid: op1
             parameters:
-              properties:
-                clientId: oidprovidertemplate3
-                displayName: templateoidprovider3
-                metadataEndpoint: 'https://oidprovider-template3.net'
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+              clientId: oidprovidertemplate3
+              metadataEndpoint: 'https://oidprovider-template3.net'
+              name: templateoidprovider3
           responses:
             '200':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/openidConnectProviders/templateOpenIdConnect3
-                name: templateOpenIdConnect3
-                properties:
-                  clientId: oidprovidertemplate3
-                  displayName: templateoidprovider3
-                  metadataEndpoint: 'https://oidprovider-template3.net'
-                type: Microsoft.ApiManagement/service/openidconnectproviders
+                clientId: oidprovidertemplate3
+                id: /openidConnectProviders/op1
+                metadataEndpoint: 'https://oidprovider-template3.net'
+                name: templateoidprovider3
             '201':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/openidConnectProviders/templateOpenIdConnect3
-                name: templateOpenIdConnect3
-                properties:
-                  clientId: oidprovidertemplate3
-                  displayName: templateoidprovider3
-                  metadataEndpoint: 'https://oidprovider-template3.net'
-                type: Microsoft.ApiManagement/service/openidconnectproviders
+                clientId: oidprovidertemplate3
+                id: /openidConnectProviders/op1
+                metadataEndpoint: 'https://oidprovider-template3.net'
+                name: templateoidprovider3
 definitions:
   OpenIdConnectProviderCollection:
     description: Paged OpenIdProviders list representation.
     properties:
+      count:
+        description: Total number of entities
+        type: integer
       nextLink:
         description: Next page link if any.
         type: string
@@ -579,27 +373,12 @@ definitions:
         type: array
   OpenidConnectProviderContract:
     allOf:
-      - description: The Resource definition.
-        properties:
-          id:
-            description: Resource ID.
-            readOnly: true
-            type: string
-          name:
-            description: Resource name.
-            readOnly: true
-            type: string
-          type:
-            description: Resource type for API Management resource.
-            readOnly: true
-            type: string
-        x-ms-azure-resource: true
+      - $ref: '#/definitions/OpenidConnectProviderContractProperties'
     description: OpenId Connect Provider details.
     properties:
-      properties:
-        $ref: '#/definitions/OpenidConnectProviderContractProperties'
-        description: OpenId Connect Provider contract properties.
-        x-ms-client-flatten: true
+      id:
+        description: Identifier of the OpenId Connect Provider.
+        type: string
   OpenidConnectProviderContractProperties:
     description: OpenID Connect Providers Contract.
     properties:
@@ -612,25 +391,18 @@ definitions:
       description:
         description: User-friendly description of OpenID Connect Provider.
         type: string
-      displayName:
-        description: User-friendly OpenID Connect Provider name.
-        maxLength: 50
-        type: string
       metadataEndpoint:
         description: Metadata endpoint URI.
         type: string
+      name:
+        description: User-friendly OpenID Connect Provider name.
+        maxLength: 50
+        type: string
     required:
-      - displayName
+      - name
       - metadataEndpoint
       - clientId
   OpenidConnectProviderUpdateContract:
-    description: Parameters supplied to the Update OpenID Connect Provider operation.
-    properties:
-      properties:
-        $ref: '#/definitions/OpenidConnectProviderUpdateContractProperties'
-        description: OpenId Connect Provider Update contract properties.
-        x-ms-client-flatten: true
-  OpenidConnectProviderUpdateContractProperties:
     description: Parameters supplied to the Update OpenID Connect Provider operation.
     properties:
       clientId:
@@ -642,10 +414,21 @@ definitions:
       description:
         description: User-friendly description of OpenID Connect Provider.
         type: string
-      displayName:
-        description: User-friendly OpenID Connect Provider name.
-        maxLength: 50
-        type: string
       metadataEndpoint:
         description: Metadata endpoint URI.
         type: string
+      name:
+        description: User-friendly OpenID Connect Provider name.
+        maxLength: 50
+        type: string
+x-ms-parameterized-host:
+  hostTemplate: '{apimBaseUrl}'
+  parameters:
+    - description: 'The management endpoint of the API Management service, for example https://myapimservice.management.azure-api.net.'
+      in: path
+      name: apimBaseUrl
+      required: true
+      type: string
+      x-ms-skip-url-encoding: true
+  positionInOperation: first
+  useSchemePrefix: false

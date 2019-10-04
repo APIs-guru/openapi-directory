@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/mediaservices/resource-manager/Microsoft.Media/preview/2019-05-01-preview/Encoding.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/mediaservices/resource-manager/Microsoft.Media/stable/2018-07-01/Encoding.json'
       version: '2.0'
   x-preferred: true
   x-providerName: azure.com
@@ -352,7 +352,7 @@ paths:
                 outputs:
                   - preset:
                       '@odata.type': '#Microsoft.Media.BuiltInStandardEncoderPreset'
-                      presetName: H264MultipleBitrate720p
+                      presetName: H264SingleBitrateSD
                     relativePriority: High
             resourceGroupName: contosoresources
             subscriptionId: 00000000-0000-0000-0000-000000000000
@@ -363,14 +363,14 @@ paths:
                 id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/transformToUpdate
                 name: transformToUpdate
                 properties:
-                  created: '2019-05-29T17:01:44.2001108-07:00'
+                  created: '2019-05-16T00:42:55.0396825-07:00'
                   description: Example transform to illustrate update.
-                  lastModified: '2019-05-29T17:01:44.2761137-07:00'
+                  lastModified: '2019-05-16T00:42:55.1066827-07:00'
                   outputs:
                     - onError: StopProcessingJob
                       preset:
                         '@odata.type': '#Microsoft.Media.BuiltInStandardEncoderPreset'
-                        presetName: H264MultipleBitrate720p
+                        presetName: H264SingleBitrateSD
                       relativePriority: High
                 type: Microsoft.Media/mediaservices/transforms
     put:
@@ -413,11 +413,15 @@ paths:
             api-version: '2018-07-01'
             parameters:
               properties:
+                created: '0001-01-01T00:00:00-05:00'
                 description: Example Transform to illustrate create and update.
+                lastModified: '0001-01-01T00:00:00-05:00'
                 outputs:
-                  - preset:
+                  - onError: null
+                    preset:
                       '@odata.type': '#Microsoft.Media.BuiltInStandardEncoderPreset'
                       presetName: AdaptiveStreaming
+                    relativePriority: null
             resourceGroupName: contosoresources
             subscriptionId: 00000000-0000-0000-0000-000000000000
             transformName: createdTransform
@@ -427,9 +431,9 @@ paths:
                 id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/createdTransform
                 name: createdTransform
                 properties:
-                  created: '2019-05-29T17:01:44.0571152-07:00'
+                  created: '2018-08-08T16:29:57.9828393-04:00'
                   description: Example Transform to illustrate create and update.
-                  lastModified: '2019-05-29T17:01:44.0571152-07:00'
+                  lastModified: '2018-08-08T16:29:57.9998038-04:00'
                   outputs:
                     - onError: StopProcessingJob
                       preset:
@@ -442,9 +446,9 @@ paths:
                 id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/createdTransform
                 name: createdTransform
                 properties:
-                  created: '2019-05-29T17:01:44.0571152-07:00'
+                  created: '2018-08-08T16:29:57.9828393-04:00'
                   description: Example Transform to illustrate create and update.
-                  lastModified: '2019-05-29T17:01:44.0571152-07:00'
+                  lastModified: '2018-08-08T16:29:57.9828393-04:00'
                   outputs:
                     - onError: StopProcessingJob
                       preset:
@@ -471,7 +475,7 @@ paths:
           name: $filter
           required: false
           type: string
-        - description: Specifies the by which the result collection should be ordered.
+        - description: Specifies the key by which the result collection should be ordered.
           in: query
           name: $orderby
           required: false
@@ -1282,7 +1286,7 @@ definitions:
               value: H264MultipleBitrate1080p
             - description: 'Produces a set of 6 GOP-aligned MP4 files, ranging from 3400 kbps to 400 kbps, and stereo AAC audio. Resolution starts at 720p and goes down to 360p.'
               value: H264MultipleBitrate720p
-            - description: 'Produces a set of 5 GOP-aligned MP4 files, ranging from 1600 kbps to 400 kbps, and stereo AAC audio. Resolution starts at 480p and goes down to 360p.'
+            - description: 'Produces a set of 5 GOP-aligned MP4 files, ranging from 1600kbps to 400 kbps, and stereo AAC audio. Resolution starts at 480p and goes down to 360p.'
               value: H264MultipleBitrateSD
     required:
       - presetName

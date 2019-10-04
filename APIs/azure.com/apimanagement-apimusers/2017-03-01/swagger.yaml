@@ -1,7 +1,7 @@
 swagger: '2.0'
 schemes:
   - https
-host: management.azure.com
+host: azure.local
 info:
   description: Use these REST APIs for performing operations on User entity in Azure API Management deployment. The User entity in API Management represents the developers that call the APIs of the products to which they are subscribed.
   title: ApiManagementClient
@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2017-03-01/apimusers.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/control-plane/Microsoft.ApiManagement/preview/2017-03-01/apimusers.json'
       version: '2.0'
   x-preferred: false
   x-providerName: azure.com
@@ -25,16 +25,12 @@ consumes:
 produces:
   - application/json
 securityDefinitions:
-  azure_auth:
-    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
-    description: Azure Active Directory OAuth2 Flow.
-    flow: implicit
-    scopes:
-      user_impersonation: impersonate your user account
-    type: oauth2
+  apim_key:
+    in: header
+    name: Authorization
+    type: apiKey
 security:
-  - azure_auth:
-      - user_impersonation
+  - apim_key: []
 parameters:
   UserIdParameter:
     description: User identifier. Must be unique in the current API Management service instance.
@@ -47,26 +43,11 @@ parameters:
     type: string
     x-ms-parameter-location: method
 paths:
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users':
+  /users:
     get:
       description: Lists a collection of registered users in the specified service instance.
-      operationId: User_ListByService
+      operationId: User_List
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - description: |-
             | Field            | Supported operators    | Supported functions               |
             |------------------|------------------------|-----------------------------------|
@@ -100,11 +81,6 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -143,80 +119,51 @@ paths:
       x-ms-examples:
         ApiManagementListUsers:
           parameters:
+            Accept: application/json
             api-version: '2017-03-01'
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+            apimBaseUrl: apimservice1.management.azure-api.net
+            expandGroups: 'False'
           responses:
             '200':
               body:
-                nextLink: ''
+                count: 1
                 value:
-                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/1
-                    name: '1'
-                    properties:
-                      email: admin@live.com
-                      firstName: Administrator
-                      identities:
-                        - id: admin@live.com
-                          provider: Azure
-                      lastName: ''
-                      registrationDate: '2015-09-22T01:57:39.677Z'
-                      state: active
-                    type: Microsoft.ApiManagement/service/users
-                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/56eaec62baf08b06e46d27fd
-                    name: 56eaec62baf08b06e46d27fd
-                    properties:
-                      email: foo.bar.83@gmail.com
-                      firstName: foo
-                      identities:
-                        - id: foo.bar.83@gmail.com
-                          provider: Basic
-                      lastName: bar
-                      registrationDate: '2016-03-17T17:41:56.327Z'
-                      state: active
-                    type: Microsoft.ApiManagement/service/users
-                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/5931a75ae4bbd512a88c680b
-                    name: 5931a75ae4bbd512a88c680b
-                    properties:
-                      email: foobar@outlook.com
-                      firstName: foo
-                      identities:
-                        - id: '*************'
-                          provider: Microsoft
-                      lastName: bar
-                      registrationDate: '2017-06-02T17:58:50.357Z'
-                      state: active
-                    type: Microsoft.ApiManagement/service/users
+                  - email: admin@contoso.com
+                    firstName: Administrator
+                    id: /users/1
+                    identities:
+                      - id: admin@contoso.com
+                        provider: Azure
+                    lastName: ''
+                    registrationDate: '2018-01-12T13:39:28.527Z'
+                    state: active
       x-ms-odata: '#/definitions/UserContract'
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{uid}':
+  '/users/{uid}':
     delete:
       description: Deletes specific user.
       operationId: User_Delete
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/UserIdParameter'
-        - description: Whether to delete user's subscription or not.
+        - default: 'False'
+          description: Whether to delete user's subscription or not.
+          enum:
+            - 'False'
+            - 'True'
           in: query
           name: deleteSubscriptions
           required: false
-          type: boolean
+          type: string
+        - default: 'False'
+          description: Send an Account Closed Email notification to the User.
+          enum:
+            - 'False'
+            - 'True'
+          in: query
+          name: notify
+          required: false
+          type: string
         - description: The entity state (Etag) version of the user to delete. A value of "*" can be used for If-Match to unconditionally apply the operation.
           in: header
           name: If-Match
@@ -225,11 +172,6 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -264,44 +206,24 @@ paths:
       tags:
         - Users
       x-ms-examples:
-        ApiManagementDeleteUser:
+        ApiManagementDeleteUsers:
           parameters:
-            If-Match: '*'
+            If-Match: '"AAAAAAAACqkAAAAAAAAKqw=="'
             api-version: '2017-03-01'
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
-            uid: 5931a75ae4bbd512288c680b
+            apimBaseUrl: apimservice1.management.azure-api.net
+            deleteSubscriptions: 'False'
+            notify: 'False'
+            uid: 5a58bb00a40f7ef2e05bd23e
           responses:
             '204': {}
     get:
       description: Gets the details of the user specified by its identifier.
       operationId: User_Get
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/UserIdParameter'
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -342,124 +264,28 @@ paths:
       tags:
         - Users
       x-ms-examples:
-        ApiManagementGetUser:
+        ApiManagementGetUsers:
           parameters:
+            Accept: application/json
             api-version: '2017-03-01'
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
-            uid: 5931a75ae4bbd512a88c680b
+            apimBaseUrl: apimservice1.management.azure-api.net
+            uid: 5a58badfa40f7ef2e05bcd37
           responses:
             '200':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/5931a75ae4bbd512a88c680b
-                name: 5931a75ae4bbd512a88c680b
-                properties:
-                  email: foobar@outlook.com
-                  firstName: foo
-                  identities:
-                    - id: '*************'
-                      provider: Microsoft
-                  lastName: bar
-                  registrationDate: '2017-06-02T17:58:50.357Z'
-                  state: active
-                type: Microsoft.ApiManagement/service/users
-    head:
-      description: Gets the entity state (Etag) version of the user specified by its identifier.
-      operationId: User_GetEntityTag
-      parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - $ref: '#/parameters/UserIdParameter'
-        - description: Version of the API to be used with the client request.
-          in: query
-          name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Specified user entity exists and current entity state version is present in the ETag header.
-          headers:
-            ETag:
-              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-              type: string
-        default:
-          description: Error response describing why the operation failed.
-          schema:
-            description: Error Body contract.
-            properties:
-              code:
-                description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                type: string
-              details:
-                description: 'The list of invalid fields send in request, in case of validation error.'
-                items:
-                  description: Error Field contract.
-                  properties:
-                    code:
-                      description: Property level error code.
-                      type: string
-                    message:
-                      description: Human-readable representation of property-level error.
-                      type: string
-                    target:
-                      description: Property name.
-                      type: string
-                type: array
-              message:
-                description: Human-readable representation of the error.
-                type: string
-      tags:
-        - Users
-      x-ms-examples:
-        ApiManagementHeadUser:
-          parameters:
-            api-version: '2017-03-01'
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
-            uid: 5931a75ae4bbd512a88c680b
-          responses:
-            '200':
-              headers:
-                etag: AAAAAAAAAAa=
+                email: 5a58badfa40f7ef2e05bcd38@contoso.com
+                firstName: 5a58badfa40f7ef2e05bcd39
+                id: /users/5a58badfa40f7ef2e05bcd37
+                identities:
+                  - id: 5a58badfa40f7ef2e05bcd38@contoso.com
+                    provider: Basic
+                lastName: 5a58badfa40f7ef2e05bcd3a
+                registrationDate: '2018-01-12T13:40:47.3Z'
+                state: active
     patch:
       description: Updates the details of the user specified by its identifier.
       operationId: User_Update
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/UserIdParameter'
         - description: Update parameters.
           in: body
@@ -475,11 +301,6 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -519,40 +340,20 @@ paths:
       tags:
         - Users
       x-ms-examples:
-        ApiManagementUpdateUserBasic:
+        ApiManagementPatchUsers:
           parameters:
-            If-Match: '*'
+            If-Match: '"AAAAAAAAClEAAAAAAAAKUw=="'
             api-version: '2017-03-01'
+            apimBaseUrl: apimservice1.management.azure-api.net
             parameters:
-              properties:
-                email: foobar@outlook.com
-                firstName: foo
-                lastName: bar
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
-            uid: 5931a75ae4bbd512288c680b
+              state: active
+            uid: 5a58baf0a40f7ef2e05bcf5e
           responses:
             '204': {}
     put:
       description: Creates or Updates a user.
       operationId: User_CreateOrUpdate
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/UserIdParameter'
         - description: Create or update parameters.
           in: body
@@ -563,11 +364,6 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -608,79 +404,60 @@ paths:
       tags:
         - Users
       x-ms-examples:
-        ApiManagementCreateUserBasic:
+        ApiManagementPutUsers:
           parameters:
             api-version: '2017-03-01'
+            apimBaseUrl: apimservice1.management.azure-api.net
             parameters:
-              properties:
-                confirmation: signup
-                email: foobar@outlook.com
-                firstName: foo
-                lastName: bar
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
-            uid: 5931a75ae4bbd512288c680b
+              email: 5a58bac2a40f7ef2e05bc7d1@contoso.com
+              firstName: 5a58bac2a40f7ef2e05bc7d2
+              lastName: 5a58bac2a40f7ef2e05bc7d3
+              password: 5a58bac2a40f7ef2e05bc7d4
+            uid: 5a58bac2a40f7ef2e05bc7d0
           responses:
             '200':
               body:
-                id: /subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/5931a75ae4bbd512288c680b
-                name: 5931a75ae4bbd512288c680b
-                properties:
-                  email: foobar@outlook.com
-                  firstName: foo
-                  groups: []
-                  identities:
-                    - id: foobar@outlook.com
-                      provider: Basic
-                  lastName: bar
-                  registrationDate: '2018-01-07T21:21:29.16Z'
-                  state: active
-                type: Microsoft.ApiManagement/service/users
+                email: 5a58bac2a40f7ef2e05bc7d1@contoso.com
+                firstName: 5a58bac2a40f7ef2e05bc7d2
+                groups:
+                  - builtIn: true
+                    description: Developers is a built-in group. Its membership is managed by the system. Signed-in users fall into this group.
+                    id: /groups/developers
+                    name: Developers
+                    type: system
+                id: /users/5a58bac2a40f7ef2e05bc7d0
+                identities:
+                  - id: 5a58bac2a40f7ef2e05bc7d1@contoso.com
+                    provider: Basic
+                lastName: 5a58bac2a40f7ef2e05bc7d3
+                registrationDate: '2018-01-12T13:40:18.223Z'
+                state: active
             '201':
               body:
-                id: /subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/5931a75ae4bbd512288c680b
-                name: 5931a75ae4bbd512288c680b
-                properties:
-                  email: foobar@outlook.com
-                  firstName: foo
-                  groups: []
-                  identities:
-                    - id: foobar@outlook.com
-                      provider: Basic
-                  lastName: bar
-                  registrationDate: '2018-01-07T21:21:29.16Z'
-                  state: active
-                type: Microsoft.ApiManagement/service/users
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{uid}/generateSsoUrl':
+                email: 5a58bac2a40f7ef2e05bc7d1@contoso.com
+                firstName: 5a58bac2a40f7ef2e05bc7d2
+                groups:
+                  - builtIn: true
+                    description: Developers is a built-in group. Its membership is managed by the system. Signed-in users fall into this group.
+                    id: /groups/developers
+                    name: Developers
+                    type: system
+                id: /users/5a58bac2a40f7ef2e05bc7d0
+                identities:
+                  - id: 5a58bac2a40f7ef2e05bc7d1@contoso.com
+                    provider: Basic
+                lastName: 5a58bac2a40f7ef2e05bc7d3
+                registrationDate: '2018-01-12T13:40:18.223Z'
+                state: active
+  '/users/{uid}/generateSsoUrl':
     post:
       description: Retrieves a redirection URL containing an authentication token for signing a given user into the developer portal.
       operationId: User_GenerateSsoUrl
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/UserIdParameter'
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -718,37 +495,21 @@ paths:
       tags:
         - Users
       x-ms-examples:
-        ApiManagementUsersGenerateSsoUrl:
+        ApiManagementPostUsersGenerateSsoUrl:
           parameters:
+            Accept: application/json
             api-version: '2017-03-01'
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
-            uid: 57127d485157a511ace86ae7
+            apimBaseUrl: apimservice1.management.azure-api.net
+            uid: 5a58bb61a40f7ef2e05bdc0f
           responses:
             '200':
               body:
-                value: 'https://apimService1.portal.azure-api.net/signin-sso?token=57127d485157a511ace86ae7%26201706051624%267VY18MlwAom***********2bYr2bDQHg21OzQsNakExQ%3d%3d'
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{uid}/groups':
+                value: 'https://portal.apim.net/signin-sso?token=5a58bb61a40f7ef2e05bdc0f%26201801121347%26sR2koAEheTKPKakx88NkU1bZe5xmQ4xhX8Tk1CHFKKGVh4BMvy3ltuoSSt4B38L%2fIRxDs0saqAVc0l9I4Z8nLg%3d%3d'
+  '/users/{uid}/groups':
     get:
       description: Lists all user groups.
       operationId: UserGroup_List
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/UserIdParameter'
         - description: |-
             | Field       | Supported operators    | Supported functions                         |
@@ -781,17 +542,15 @@ paths:
           name: api-version
           required: true
           type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
       responses:
         '200':
           description: Lists a collection of Group entities.
           schema:
             description: Paged Group list representation.
             properties:
+              count:
+                description: Total number of entities
+                type: integer
               nextLink:
                 description: Next page link if any.
                 type: string
@@ -799,25 +558,7 @@ paths:
                 description: Page values.
                 items:
                   allOf:
-                    - description: The Resource definition.
-                      properties:
-                        id:
-                          description: Resource ID.
-                          readOnly: true
-                          type: string
-                        name:
-                          description: Resource name.
-                          readOnly: true
-                          type: string
-                        type:
-                          description: Resource type for API Management resource.
-                          readOnly: true
-                          type: string
-                      x-ms-azure-resource: true
-                  description: Contract details.
-                  properties:
-                    properties:
-                      description: Group contract Properties.
+                    - description: Developer group.
                       properties:
                         builtIn:
                           description: 'true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false.'
@@ -827,13 +568,13 @@ paths:
                           description: Group description. Can contain HTML formatting tags.
                           maxLength: 1000
                           type: string
-                        displayName:
+                        externalId:
+                          description: 'For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null.'
+                          type: string
+                        name:
                           description: Group name.
                           maxLength: 300
                           minLength: 1
-                          type: string
-                        externalId:
-                          description: 'For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null.'
                           type: string
                         type:
                           description: Group type.
@@ -846,7 +587,12 @@ paths:
                             modelAsString: false
                             name: GroupType
                       required:
-                        - displayName
+                        - name
+                  description: Contract details.
+                  properties:
+                    id:
+                      description: Identifier of the Group entity.
+                      type: string
                 type: array
         default:
           description: Error response describing why the operation failed.
@@ -877,58 +623,34 @@ paths:
       tags:
         - UserGroups
       x-ms-examples:
-        ApiManagementListUserGroups:
+        ApiManagementListUsersGroups:
           parameters:
+            Accept: application/json
             api-version: '2017-03-01'
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
-            uid: 57681833a40f7eb6c49f6acf
+            apimBaseUrl: apimservice1.management.azure-api.net
+            uid: 5a58bae5a40f7ef2e05bcd76
           responses:
             '200':
               body:
-                nextLink: ''
+                count: 1
                 value:
-                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/57681833a40f7eb6c49f6acf/groups/5600b57e7e8880006a020002
-                    name: 5600b57e7e8880006a020002
-                    properties:
-                      builtIn: true
-                      description: Developers is a built-in group. Its membership is managed by the system. Signed-in users fall into this group.
-                      displayName: Developers
-                      type: system
-                    type: Microsoft.ApiManagement/service/users/groups
+                  - builtIn: true
+                    description: Developers is a built-in group. Its membership is managed by the system. Signed-in users fall into this group.
+                    id: /groups/developers
+                    name: Developers
+                    type: system
       x-ms-odata: './apimgroups.json#/definitions/GroupContract'
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{uid}/identities':
+  '/users/{uid}/identities':
     get:
       description: Lists all user identities.
       operationId: UserIdentities_List
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/UserIdParameter'
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -967,39 +689,24 @@ paths:
       x-ms-examples:
         ApiManagementListUsersIdentities:
           parameters:
+            Accept: application/json
             api-version: '2017-03-01'
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
-            uid: 57f2af53bb17172280f44057
+            apimBaseUrl: apimservice1.management.azure-api.net
+            uid: 5a58bb0aa40f7ef2e05bd3c2
           responses:
             '200':
               body:
                 count: 1
-                nextLink: ''
                 value:
-                  - id: 086cf9********55ab
-                    provider: Microsoft
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{uid}/subscriptions':
+                  - id: 5a58bb09a40f7ef2e05bd3c1@contoso.com
+                    provider: Basic
+      x-ms-pageable:
+        nextLinkName: null
+  '/users/{uid}/subscriptions':
     get:
       description: Lists the collection of subscriptions of the specified user.
       operationId: UserSubscription_List
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/UserIdParameter'
         - description: |-
             | Field        | Supported operators    | Supported functions                         |
@@ -1035,17 +742,15 @@ paths:
           name: api-version
           required: true
           type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
       responses:
         '200':
           description: Lists a collection of Subscription entities.
           schema:
             description: Paged Subscriptions list representation.
             properties:
+              count:
+                description: Total number of entities
+                type: integer
               nextLink:
                 description: Next page link if any.
                 type: string
@@ -1053,36 +758,13 @@ paths:
                 description: Page values.
                 items:
                   allOf:
-                    - description: The Resource definition.
-                      properties:
-                        id:
-                          description: Resource ID.
-                          readOnly: true
-                          type: string
-                        name:
-                          description: Resource name.
-                          readOnly: true
-                          type: string
-                        type:
-                          description: Resource type for API Management resource.
-                          readOnly: true
-                          type: string
-                      x-ms-azure-resource: true
-                  description: Subscription details.
-                  properties:
-                    properties:
-                      description: Subscription details.
+                    - description: Subscription details.
                       properties:
                         createdDate:
                           description: |
                             Subscription creation date. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
                           format: date-time
                           readOnly: true
-                          type: string
-                        displayName:
-                          description: 'The name of the subscription, or null if the subscription has no name.'
-                          maxLength: 100
-                          minLength: 0
                           type: string
                         endDate:
                           description: |
@@ -1093,6 +775,11 @@ paths:
                           description: |
                             Subscription expiration date. The setting is for audit purposes only and the subscription is not automatically expired. The subscription lifecycle can be managed by using the `state` property. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
                           format: date-time
+                          type: string
+                        name:
+                          description: 'The name of the subscription, or null if the subscription has no name.'
+                          maxLength: 100
+                          minLength: 0
                           type: string
                         notificationDate:
                           description: |
@@ -1142,6 +829,11 @@ paths:
                         - state
                         - primaryKey
                         - secondaryKey
+                  description: Subscription details.
+                  properties:
+                    id:
+                      description: Identifier of the Subscription.
+                      type: string
                 type: array
         default:
           description: Error response describing why the operation failed.
@@ -1172,65 +864,34 @@ paths:
       tags:
         - UserSubscriptions
       x-ms-examples:
-        ApiManagementListUserSubscriptions:
+        ApiManagementListUsersSubscriptions:
           parameters:
+            $skip: 0
+            $top: 10000
+            Accept: application/json
             api-version: '2017-03-01'
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
-            uid: 57681833a40f7eb6c49f6acf
+            apimBaseUrl: apimservice1.management.azure-api.net
+            uid: '1'
           responses:
             '200':
               body:
-                nextLink: ''
+                count: 1
                 value:
-                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/57681833a40f7eb6c49f6acf/subscriptions/57681850a40f7eb6c49f6ae3
-                    name: 57681850a40f7eb6c49f6ae3
-                    properties:
-                      createdDate: '2016-06-20T16:22:39.547Z'
-                      displayName: 57681850a40f7eb6c49f6ae5
-                      primaryKey: 57681850a40f7eb6c49f6ae4
-                      productId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/products/5768181ea40f7eb6c49f6ac7
-                      secondaryKey: bbd884a96b3c41b49f34422dac74b345
-                      startDate: '2016-06-20T00:00:00Z'
-                      state: active
-                      userId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/57681833a40f7eb6c49f6acf
-                    type: Microsoft.ApiManagement/service/users/subscriptions
-                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/57681833a40f7eb6c49f6acf/subscriptions/57681850a40f7eb6c49f6b2b
-                    name: 57681850a40f7eb6c49f6b2b
-                    properties:
-                      createdDate: '2016-06-20T16:22:41.103Z'
-                      displayName: 57681850a40f7eb6c49f6b2d
-                      primaryKey: 57681850a40f7eb6c49f6b2c
-                      productId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/products/5768181ea40f7eb6c49f6ac7
-                      secondaryKey: 125f565d276647dc825d7f25ea40ee57
-                      startDate: '2016-06-20T00:00:00Z'
-                      state: active
-                      userId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/57681833a40f7eb6c49f6acf
-                    type: Microsoft.ApiManagement/service/users/subscriptions
+                  - createdDate: '2018-01-12T13:39:28.57Z'
+                    id: /subscriptions/5a58ba90a40f7e0034070001
+                    primaryKey: 2D9B138F40C1244CB6B48D0378865469
+                    productId: /products/starter
+                    secondaryKey: 5163734D7AF0CC4AB5A59345E1B6BF6D
+                    state: active
+                    userId: /users/1
       x-ms-odata: './apimsubscriptions.json#/definitions/SubscriptionContract'
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{uid}/token':
+  '/users/{uid}/token':
     post:
       description: Gets the Shared Access Authorization Token for the User.
       operationId: User_GetSharedAccessToken
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/UserIdParameter'
         - description: Create Authorization Token parameters.
           in: body
@@ -1241,11 +902,6 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -1283,16 +939,14 @@ paths:
       tags:
         - Users
       x-ms-examples:
-        ApiManagementUsersGetToken:
+        ApiManagementPostUsersToken:
           parameters:
             api-version: '2017-03-01'
+            apimBaseUrl: apimservice1.management.azure-api.net
             parameters:
               expiry: '2017-05-13T10:39:35Z'
               keyType: primary
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
-            uid: 57f2af53bb17172280f44057
+            uid: '1'
           responses:
             '200':
               body:
@@ -1307,6 +961,9 @@ definitions:
   UserCollection:
     description: Paged Users list representation.
     properties:
+      count:
+        description: Total number of entities
+        type: integer
       nextLink:
         description: Next page link if any.
         type: string
@@ -1317,27 +974,12 @@ definitions:
         type: array
   UserContract:
     allOf:
-      - description: The Resource definition.
-        properties:
-          id:
-            description: Resource ID.
-            readOnly: true
-            type: string
-          name:
-            description: Resource name.
-            readOnly: true
-            type: string
-          type:
-            description: Resource type for API Management resource.
-            readOnly: true
-            type: string
-        x-ms-azure-resource: true
+      - $ref: '#/definitions/UserContractProperties'
     description: User details.
     properties:
-      properties:
-        $ref: '#/definitions/UserContractProperties'
-        description: User entity contract properties.
-        x-ms-client-flatten: true
+      id:
+        description: Identifier of the entity.
+        type: string
   UserContractProperties:
     allOf:
       - $ref: '#/definitions/UserEntityBaseParameters'
@@ -1353,25 +995,7 @@ definitions:
         description: Collection of groups user is part of.
         items:
           allOf:
-            - description: The Resource definition.
-              properties:
-                id:
-                  description: Resource ID.
-                  readOnly: true
-                  type: string
-                name:
-                  description: Resource name.
-                  readOnly: true
-                  type: string
-                type:
-                  description: Resource type for API Management resource.
-                  readOnly: true
-                  type: string
-              x-ms-azure-resource: true
-          description: Contract details.
-          properties:
-            properties:
-              description: Group contract Properties.
+            - description: Developer group.
               properties:
                 builtIn:
                   description: 'true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false.'
@@ -1381,13 +1005,13 @@ definitions:
                   description: Group description. Can contain HTML formatting tags.
                   maxLength: 1000
                   type: string
-                displayName:
+                externalId:
+                  description: 'For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null.'
+                  type: string
+                name:
                   description: Group name.
                   maxLength: 300
                   minLength: 1
-                  type: string
-                externalId:
-                  description: 'For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null.'
                   type: string
                 type:
                   description: Group type.
@@ -1400,7 +1024,12 @@ definitions:
                     modelAsString: false
                     name: GroupType
               required:
-                - displayName
+                - name
+          description: Contract details.
+          properties:
+            id:
+              description: Identifier of the Group entity.
+              type: string
         readOnly: true
         type: array
       lastName:
@@ -1411,25 +1040,11 @@ definitions:
           Date of user registration. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
         format: date-time
         type: string
-  UserCreateParameterProperties:
+  UserCreateParameters:
     allOf:
       - $ref: '#/definitions/UserEntityBaseParameters'
     description: Parameters supplied to the Create User operation.
     properties:
-      confirmation:
-        description: Determines the type of confirmation e-mail that will be sent to the newly created user.
-        enum:
-          - signup
-          - invite
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: Confirmation
-          values:
-            - description: Send an e-mail to the user confirming they have successfully signed up.
-              value: signup
-            - description: Send an e-mail inviting the user to sign-up and complete registration.
-              value: invite
       email:
         description: Email address. Must not be empty and must be unique within the service instance.
         maxLength: 254
@@ -1452,13 +1067,6 @@ definitions:
       - email
       - firstName
       - lastName
-  UserCreateParameters:
-    description: User create details.
-    properties:
-      properties:
-        $ref: '#/definitions/UserCreateParameterProperties'
-        description: User entity create contract properties.
-        x-ms-client-flatten: true
   UserEntityBaseParameters:
     description: User Entity Base Parameters set.
     properties:
@@ -1477,21 +1085,10 @@ definitions:
         enum:
           - active
           - blocked
-          - pending
-          - deleted
         type: string
         x-ms-enum:
           modelAsString: true
           name: UserState
-          values:
-            - description: User state is active.
-              value: active
-            - description: User is blocked. Blocked users cannot authenticate at developer portal or call API.
-              value: blocked
-            - description: User account is pending. Requires identity confirmation before it can be made active.
-              value: pending
-            - description: User account is closed. All identities and related entities are removed.
-              value: deleted
   UserIdentityCollection:
     description: List of Users Identity list representation.
     properties:
@@ -1544,13 +1141,6 @@ definitions:
         description: Shared Access Authorization token for the User.
         type: string
   UserUpdateParameters:
-    description: User update parameters.
-    properties:
-      properties:
-        $ref: '#/definitions/UserUpdateParametersProperties'
-        description: User entity update contract properties.
-        x-ms-client-flatten: true
-  UserUpdateParametersProperties:
     allOf:
       - $ref: '#/definitions/UserEntityBaseParameters'
     description: Parameters supplied to the Update User operation.
@@ -1573,3 +1163,14 @@ definitions:
       password:
         description: User Password.
         type: string
+x-ms-parameterized-host:
+  hostTemplate: '{apimBaseUrl}'
+  parameters:
+    - description: 'The management endpoint of the API Management service, for example https://myapimservice.management.azure-api.net.'
+      in: path
+      name: apimBaseUrl
+      required: true
+      type: string
+      x-ms-skip-url-encoding: true
+  positionInOperation: first
+  useSchemePrefix: false

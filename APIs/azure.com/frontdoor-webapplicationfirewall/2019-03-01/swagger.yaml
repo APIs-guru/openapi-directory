@@ -3,7 +3,7 @@ schemes:
   - https
 host: management.azure.com
 info:
-  description: APIs to manage web application firewall rules.
+  description: APIs to manage web application firewall rules
   title: WebApplicationFirewallManagement
   version: '2019-03-01'
   x-apisguru-categories:
@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/frontdoor/resource-manager/Microsoft.Network/stable/2019-03-01/webapplicationfirewall.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/frontdoor/resource-manager/Microsoft.Network/preview/2019-03-01-preview/webapplicationfirewall.json'
       version: '2.0'
   x-preferred: true
   x-providerName: azure.com
@@ -98,23 +98,17 @@ paths:
                         - description: Description for rule group 1.
                           ruleGroupName: Group1
                           rules:
-                            - defaultAction: Block
-                              defaultState: Enabled
-                              description: Generic managed web application firewall rule.
+                            - description: Generic managed web application firewall rule.
                               ruleId: GROUP1-0001
-                            - defaultAction: Block
-                              defaultState: Disabled
-                              description: Generic managed web application firewall rule.
+                            - description: Generic managed web application firewall rule.
                               ruleId: GROUP1-0002
                         - description: Description for rule group 2.
                           ruleGroupName: Group2
                           rules:
-                            - defaultAction: Allow
-                              defaultState: Enabled
-                              description: Generic managed web application firewall rule.
+                            - description: Generic managed web application firewall rule.
                               ruleId: GROUP2-0001
                       ruleSetType: DefaultRuleSet
-                      ruleSetVersion: '1.0'
+                      ruleSetVersion: preview-1.0
                     type: Microsoft.Network/frontdoorwebapplicationfirewallmanagedrulesets
       x-ms-pageable:
         nextLinkName: nextLink
@@ -721,13 +715,10 @@ definitions:
         description: Describes priority of the rule. Rules with a lower value will be evaluated before rules with a higher value.
         type: integer
       rateLimitDurationInMinutes:
-        description: Time window for resetting the rate limit count. Default is 1 minute.
-        maximum: 5
-        minimum: 0
+        description: Defines rate limit duration. Default is 1 minute.
         type: integer
       rateLimitThreshold:
-        description: Number of allowed requests per client within the time window.
-        minimum: 0
+        description: Defines rate limit threshold.
         type: integer
       ruleType:
         description: Describes type of rule.
@@ -774,14 +765,6 @@ definitions:
   ManagedRuleDefinition:
     description: Describes a managed rule definition.
     properties:
-      defaultAction:
-        $ref: '#/definitions/ActionType'
-        description: Describes the default action to be applied when the managed rule matches.
-        readOnly: true
-      defaultState:
-        $ref: '#/definitions/ManagedRuleEnabledState'
-        description: Describes the default state for the managed rule.
-        readOnly: true
       description:
         description: Describes the functionality of the managed rule.
         readOnly: true
@@ -790,15 +773,6 @@ definitions:
         description: Identifier for the managed rule.
         readOnly: true
         type: string
-  ManagedRuleEnabledState:
-    description: Describes if the managed rule is in enabled or disabled state.
-    enum:
-      - Disabled
-      - Enabled
-    type: string
-    x-ms-enum:
-      modelAsString: true
-      name: ManagedRuleEnabledState
   ManagedRuleGroupDefinition:
     description: Describes a managed rule group.
     properties:
@@ -836,8 +810,14 @@ definitions:
         $ref: '#/definitions/ActionType'
         description: Describes the override action to be applied when rule matches.
       enabledState:
-        $ref: '#/definitions/ManagedRuleEnabledState'
         description: Describes if the managed rule is in enabled or disabled state. Defaults to Disabled if not specified.
+        enum:
+          - Disabled
+          - Enabled
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ManagedRuleEnabledState
       ruleId:
         description: Identifier for the managed rule.
         type: string
@@ -890,7 +870,6 @@ definitions:
     properties:
       properties:
         $ref: '#/definitions/ManagedRuleSetDefinitionProperties'
-        description: Properties for a managed rule set definition.
         x-ms-client-flatten: true
   ManagedRuleSetDefinitionList:
     description: List of managed rule set definitions available for use in a policy.
@@ -942,7 +921,7 @@ definitions:
           type: string
         type: array
       matchVariable:
-        description: Request variable to compare with.
+        description: Match variable to compare against.
         enum:
           - RemoteAddr
           - RequestMethod
@@ -952,7 +931,6 @@ definitions:
           - RequestHeader
           - RequestBody
           - Cookies
-          - SocketAddr
         type: string
         x-ms-enum:
           modelAsString: true
@@ -961,7 +939,7 @@ definitions:
         description: Describes if the result of this condition should be negated.
         type: boolean
       operator:
-        description: Comparison type to use for matching with the variable value.
+        description: Describes operator to be matched
         enum:
           - Any
           - IPMatch
@@ -980,7 +958,7 @@ definitions:
           modelAsString: true
           name: Operator
       selector:
-        description: 'Match against a specific key from the QueryString, PostArgs, RequestHeader or Cookies variables. Default is null.'
+        description: 'Selector can used to match against a specific key from QueryString, PostArgs, RequestHeader or Cookies.'
         type: string
       transforms:
         description: List of transforms.

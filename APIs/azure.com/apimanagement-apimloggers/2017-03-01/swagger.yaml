@@ -1,7 +1,7 @@
 swagger: '2.0'
 schemes:
   - https
-host: management.azure.com
+host: azure.local
 info:
   description: Use these REST APIs for performing operations on logger entity Azure API Management deployment.The Logger entity in API Management represents an event sink that you can use to log API Management events. Currently the Logger entity supports logging API Management events to Azure EventHub.
   title: ApiManagementClient
@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2017-03-01/apimloggers.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/control-plane/Microsoft.ApiManagement/preview/2017-03-01/apimloggers.json'
       version: '2.0'
   x-preferred: false
   x-providerName: azure.com
@@ -25,16 +25,12 @@ consumes:
 produces:
   - application/json
 securityDefinitions:
-  azure_auth:
-    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
-    description: Azure Active Directory OAuth2 Flow.
-    flow: implicit
-    scopes:
-      user_impersonation: impersonate your user account
-    type: oauth2
+  apim_key:
+    in: header
+    name: Authorization
+    type: apiKey
 security:
-  - azure_auth:
-      - user_impersonation
+  - apim_key: []
 parameters:
   LoggerIdParameter:
     description: Logger identifier. Must be unique in the API Management service instance.
@@ -46,28 +42,13 @@ parameters:
     type: string
     x-ms-parameter-location: method
 paths:
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/loggers':
+  /loggers:
     get:
       description: Lists a collection of loggers in the specified service instance.
       externalDocs:
         url: 'https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-log-event-hubs'
-      operationId: Logger_ListByService
+      operationId: Logger_List
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - description: |-
             | Field | Supported operators    | Supported functions                         |
             |-------|------------------------|---------------------------------------------|
@@ -96,11 +77,6 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -139,57 +115,36 @@ paths:
       x-ms-examples:
         ApiManagementListLoggers:
           parameters:
+            Accept: application/json
             api-version: '2017-03-01'
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+            apimBaseUrl: apimservice1.management.azure-api.net
           responses:
             '200':
               body:
-                nextLink: ''
+                count: 2
                 value:
-                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/loggers/buffered111
-                    name: buffered111
-                    properties:
-                      credentials:
-                        connectionString: 'Endpoint=sb://apimaccounts.servicebus.windows.net/;SharedAccessKeyName=Send;SharedAccessKey=*******************h=****'
-                      description: Sample description
-                      isBuffered: true
-                      loggerType: azureEventHub
-                    type: Microsoft.ApiManagement/service/loggers
-                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/loggers/loggerId
-                    name: loggerId
-                    properties:
-                      credentials:
-                        connectionString: '{{Logger-Credentials-59544ef2e4bbd50d9468c618}}'
-                        name: hydraeventhub
-                      description: adding a new logger
-                      isBuffered: true
-                      loggerType: azureEventHub
-                    type: Microsoft.ApiManagement/service/loggers
+                  - credentials:
+                      connectionString: '{{Logger-Credentials-5a58bc31a40f7e10489292a5}}'
+                      name: testeventhub3
+                    description: first eventhub logger
+                    id: /loggers/5a58bc28a40f7e10489292a3
+                    isBuffered: true
+                    loggerType: azureEventHub
+                  - credentials:
+                      connectionString: '{{Logger-Credentials-5a58bc39a40f7e104892931b}}'
+                      name: testeventhub3
+                    description: first eventhub logger
+                    id: /loggers/5a58bc37a40f7e1048929319
+                    isBuffered: true
+                    loggerType: azureEventHub
       x-ms-odata: '#/definitions/LoggerContract'
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/loggers/{loggerid}':
+  '/loggers/{loggerid}':
     delete:
       description: Deletes the specified logger.
       operationId: Logger_Delete
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/LoggerIdParameter'
         - description: The entity state (Etag) version of the logger to delete. A value of "*" can be used for If-Match to unconditionally apply the operation.
           in: header
@@ -199,11 +154,6 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -238,44 +188,22 @@ paths:
       tags:
         - Loggers
       x-ms-examples:
-        ApiManagementDeleteLogger:
+        ApiManagementDeleteLoggers:
           parameters:
-            If-Match: '*'
+            If-Match: '"AAAAAAAAF30="'
             api-version: '2017-03-01'
-            loggerid: loggerId
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+            apimBaseUrl: apimservice1.management.azure-api.net
+            loggerid: 5a58bc70a40f7e1048929950
           responses:
             '204': {}
     get:
       description: Gets the details of the logger specified by its identifier.
       operationId: Logger_Get
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/LoggerIdParameter'
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -316,122 +244,26 @@ paths:
       tags:
         - Loggers
       x-ms-examples:
-        ApiManagementGetLogger:
+        ApiManagementGetLoggers:
           parameters:
+            Accept: application/json
             api-version: '2017-03-01'
-            loggerid: templateLogger
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+            apimBaseUrl: apimservice1.management.azure-api.net
+            loggerid: 5a58bc37a40f7e1048929319
           responses:
             '200':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/loggers/kloudapilogger1
-                name: kloudapilogger1
-                properties:
-                  credentials:
-                    connectionString: 'Endpoint=sb://eventhubapim.servicebus.windows.net/;SharedAccessKeyName=Sender;SharedAccessKey=************'
-                    name: testeventhub4
-                  description: testeventhub3again
-                  isBuffered: true
-                  loggerType: azureEventHub
-                type: Microsoft.ApiManagement/service/loggers
-    head:
-      description: Gets the entity state (Etag) version of the logger specified by its identifier.
-      operationId: Logger_GetEntityTag
-      parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - $ref: '#/parameters/LoggerIdParameter'
-        - description: Version of the API to be used with the client request.
-          in: query
-          name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Specified logger entity exists and current entity state version is present in the ETag header.
-          headers:
-            ETag:
-              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-              type: string
-        default:
-          description: Error response describing why the operation failed.
-          schema:
-            description: Error Body contract.
-            properties:
-              code:
-                description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                type: string
-              details:
-                description: 'The list of invalid fields send in request, in case of validation error.'
-                items:
-                  description: Error Field contract.
-                  properties:
-                    code:
-                      description: Property level error code.
-                      type: string
-                    message:
-                      description: Human-readable representation of property-level error.
-                      type: string
-                    target:
-                      description: Property name.
-                      type: string
-                type: array
-              message:
-                description: Human-readable representation of the error.
-                type: string
-      tags:
-        - Loggers
-      x-ms-examples:
-        ApiManagementHeadLogger:
-          parameters:
-            api-version: '2017-03-01'
-            loggerid: templateLogger
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
-          responses:
-            '200':
-              headers:
-                etag: AAAAAAAAAAa=
+                credentials:
+                  connectionString: '{{Logger-Credentials-5a58bc39a40f7e104892931b}}'
+                  name: testeventhub3
+                description: first eventhub logger
+                id: /loggers/5a58bc37a40f7e1048929319
+                isBuffered: true
+                loggerType: azureEventHub
     patch:
       description: Updates an existing logger.
       operationId: Logger_Update
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/LoggerIdParameter'
         - description: Update parameters.
           in: body
@@ -447,11 +279,6 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -486,40 +313,22 @@ paths:
       tags:
         - Loggers
       x-ms-examples:
-        ApiManagementUpdateLogger:
+        ApiManagementPatchLoggers:
           parameters:
-            If-Match: '*'
+            If-Match: '"AAAAAAAAHDE="'
             api-version: '2017-03-01'
-            loggerid: loggerId
+            apimBaseUrl: apimservice1.management.azure-api.net
+            loggerid: 5a58bd45a40f7e104892a3aa
             parameters:
-              properties:
-                credentials:
-                  connectionString: 'Endpoint=sb://hydraeventhub-ns.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=********='
-                  name: hydraeventhub
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+              credentials:
+                connectionString: '{{EventHubConnectionString5a58bd47a40f7e104892a3b0}}'
+                name: testeventhub3
           responses:
             '204': {}
     put:
       description: Creates or Updates a logger.
       operationId: Logger_CreateOrUpdate
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/LoggerIdParameter'
         - description: Create parameters.
           in: body
@@ -530,11 +339,6 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -575,81 +379,36 @@ paths:
       tags:
         - Loggers
       x-ms-examples:
-        ApiManagementCreateAILogger:
+        ApiManagementPutLoggers:
           parameters:
             api-version: '2017-03-01'
-            loggerid: loggerId
+            apimBaseUrl: apimservice1.management.azure-api.net
+            loggerid: 5a58bc28a40f7e10489292a3
             parameters:
-              properties:
-                credentials:
-                  instrumentationKey: 11................a1
-                description: adding a new logger
-                loggerType: applicationInsights
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+              credentials:
+                connectionString: 'Endpoint=sb://contoso.servicebus.windows.net/;SharedAccessKeyName=SendPolicy;SharedAccessKey=sdfsdfdf'
+                name: testeventhub3
+              description: first eventhub logger
+              loggerType: azureEventHub
           responses:
             '200':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/loggers/loggerId
-                name: loggerId
-                properties:
-                  credentials:
-                    instrumentationKey: '{{5a.......2a}}'
-                  description: null
-                  isBuffered: false
-                  loggerType: applicationInsights
-                type: Microsoft.ApiManagement/service/loggers
-            '201':
-              body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/loggers/loggerId
-                name: loggerId
-                properties:
-                  credentials:
-                    instrumentationKey: '{{5a.......2a}}'
-                  description: null
-                  isBuffered: false
-                  loggerType: applicationInsights
-                type: Microsoft.ApiManagement/service/loggers
-        ApiManagementCreateEHLogger:
-          parameters:
-            api-version: '2017-03-01'
-            loggerid: loggerId
-            parameters:
-              properties:
                 credentials:
-                  connectionString: 'Endpoint=sb://hydraeventhub-ns.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=********='
-                  name: hydraeventhub
-                description: adding a new logger
+                  connectionString: '{{Logger-Credentials-5a58bc31a40f7e10489292a5}}'
+                  name: testeventhub3
+                description: first eventhub logger
+                id: /loggers/5a58bc28a40f7e10489292a3
+                isBuffered: true
                 loggerType: azureEventHub
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
-          responses:
-            '200':
-              body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/loggers/loggerId
-                name: loggerId
-                properties:
-                  credentials:
-                    connectionString: '{{59544ef2e4bbd50d9468c617}}'
-                    name: hydraeventhub
-                  description: adding a new logger
-                  isBuffered: true
-                  loggerType: azureEventHub
-                type: Microsoft.ApiManagement/service/loggers
             '201':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/loggers/loggerId
-                name: loggerId
-                properties:
-                  credentials:
-                    connectionString: '{{59544ef2e4bbd50d9468c617}}'
-                    name: hydraeventhub
-                  description: adding a new logger
-                  isBuffered: true
-                  loggerType: azureEventHub
-                type: Microsoft.ApiManagement/service/loggers
+                credentials:
+                  connectionString: '{{Logger-Credentials-5a58bc31a40f7e10489292a5}}'
+                  name: testeventhub3
+                description: first eventhub logger
+                id: /loggers/5a58bc28a40f7e10489292a3
+                isBuffered: true
+                loggerType: azureEventHub
 definitions:
   LoggerCollection:
     description: Paged Logger list representation.
@@ -668,36 +427,19 @@ definitions:
         type: array
   LoggerContract:
     allOf:
-      - description: The Resource definition.
-        properties:
-          id:
-            description: Resource ID.
-            readOnly: true
-            type: string
-          name:
-            description: Resource name.
-            readOnly: true
-            type: string
-          type:
-            description: Resource type for API Management resource.
-            readOnly: true
-            type: string
-        x-ms-azure-resource: true
+      - $ref: '#/definitions/LoggerContractProperties'
     description: Logger details.
     properties:
-      properties:
-        $ref: '#/definitions/LoggerContractProperties'
-        description: Logger entity contract properties.
-        x-ms-client-flatten: true
+      id:
+        description: Identifier of the Logger Entity.
+        type: string
   LoggerContractProperties:
     description: The Logger entity in API Management represents an event sink that you can use to log API Management events. Currently the Logger entity supports logging API Management events to Azure Event Hubs.
     properties:
       credentials:
         additionalProperties:
           type: string
-        description: |-
-          The name and SendRule connection string of the event hub for azureEventHub logger.
-          Instrumentation key for applicationInsights logger.
+        description: The name and SendRule connection string of the event hub.
         example:
           connectionString: 'Endpoint=sb://contoso-ns.servicebus.windows.net/;SharedAccessKeyName=Sender;SharedAccessKey=...'
           name: apim
@@ -713,7 +455,6 @@ definitions:
         description: Logger type.
         enum:
           - azureEventHub
-          - applicationInsights
         type: string
         x-ms-enum:
           modelAsString: true
@@ -721,92 +462,10 @@ definitions:
           values:
             - description: Azure Event Hub as log destination.
               value: azureEventHub
-            - description: Azure Application Insights as log destination.
-              value: applicationInsights
-      sampling:
-        $ref: '#/definitions/LoggerSamplingContract'
-        description: Sampling settings for an ApplicationInsights logger.
-        example:
-          sampling:
-            evaluationInterval: PT2M
-            samplingType: adaptive
     required:
       - loggerType
       - credentials
-  LoggerSamplingContract:
-    description: Sampling settings contract.
-    properties:
-      properties:
-        $ref: '#/definitions/LoggerSamplingProperties'
-        description: Sampling settings entity contract properties.
-        x-ms-client-flatten: true
-  LoggerSamplingProperties:
-    description: Sampling settings for an ApplicationInsights logger.
-    properties:
-      evaluationInterval:
-        description: Rate re-evaluation interval in ISO8601 format.
-        format: duration
-        maxLength: 2000
-        minLength: 1
-        type: string
-      initialPercentage:
-        description: Initial sampling rate.
-        format: double
-        type: number
-      maxPercentage:
-        description: Maximum allowed rate of sampling.
-        format: double
-        type: number
-      maxTelemetryItemsPerSecond:
-        description: Target rate of telemetry items per second.
-        format: int32
-        type: integer
-      minPercentage:
-        description: Minimum allowed rate of sampling.
-        format: double
-        type: number
-      movingAverageRatio:
-        description: Moving average ration assigned to most recent value.
-        format: double
-        type: number
-      percentage:
-        description: Rate of sampling for fixed-rate sampling.
-        format: double
-        type: number
-      percentageDecreaseTimeout:
-        description: Duration in ISO8601 format after which it's allowed to lower the sampling rate.
-        format: duration
-        maxLength: 2000
-        minLength: 1
-        type: string
-      percentageIncreaseTimeout:
-        description: Duration in ISO8601 format after which it's allowed to increase the sampling rate.
-        format: duration
-        maxLength: 2000
-        minLength: 1
-        type: string
-      samplingType:
-        description: Sampling type.
-        enum:
-          - fixed
-          - adaptive
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: SamplingType
-          values:
-            - description: Fixed-rate sampling.
-              value: fixed
-            - description: Sampling with a dynamically adjustable rate.
-              value: adaptive
   LoggerUpdateContract:
-    description: Logger update contract.
-    properties:
-      properties:
-        $ref: '#/definitions/LoggerUpdateParameters'
-        description: Logger entity update contract properties.
-        x-ms-client-flatten: true
-  LoggerUpdateParameters:
     description: Parameters supplied to the Update Logger operation.
     properties:
       credentials:
@@ -824,7 +483,6 @@ definitions:
         description: Logger type.
         enum:
           - azureEventHub
-          - applicationInsights
         type: string
         x-ms-enum:
           modelAsString: true
@@ -832,5 +490,14 @@ definitions:
           values:
             - description: Azure Event Hub as log destination.
               value: azureEventHub
-            - description: Azure Application Insights as log destination.
-              value: applicationInsights
+x-ms-parameterized-host:
+  hostTemplate: '{apimBaseUrl}'
+  parameters:
+    - description: 'The management endpoint of the API Management service, for example https://myapimservice.management.azure-api.net.'
+      in: path
+      name: apimBaseUrl
+      required: true
+      type: string
+      x-ms-skip-url-encoding: true
+  positionInOperation: first
+  useSchemePrefix: false

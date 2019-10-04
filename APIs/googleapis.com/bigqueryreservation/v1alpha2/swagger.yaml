@@ -1,0 +1,812 @@
+swagger: '2.0'
+schemes:
+  - https
+host: bigqueryreservation.googleapis.com
+basePath: /
+x-hasEquivalentPaths: true
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: A service to modify your BigQuery flat-rate reservations.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
+  title: BigQuery Reservation
+  version: v1alpha2
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.7.31
+      format: google
+      url: 'https://bigqueryreservation.googleapis.com/$discovery/rest?version=v1alpha2'
+      version: v1
+  x-preferred: false
+  x-providerName: googleapis.com
+  x-serviceName: bigqueryreservation
+externalDocs:
+  url: 'https://cloud.google.com/bigquery/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 implicit authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/bigquery': View and manage your data in Google BigQuery
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/bigquery': View and manage your data in Google BigQuery
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+    type: oauth2
+parameters:
+  $.xgafv:
+    description: V1 error format.
+    enum:
+      - '1'
+      - '2'
+    in: query
+    name: $.xgafv
+    type: string
+  access_token:
+    description: OAuth access token.
+    in: query
+    name: access_token
+    type: string
+  alt:
+    default: json
+    description: Data format for response.
+    enum:
+      - json
+      - media
+      - proto
+    in: query
+    name: alt
+    type: string
+  callback:
+    description: JSONP
+    in: query
+    name: callback
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+    in: query
+    name: quotaUser
+    type: string
+  uploadType:
+    description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+    in: query
+    name: uploadType
+    type: string
+  upload_protocol:
+    description: 'Upload protocol for media (e.g. "raw", "multipart").'
+    in: query
+    name: upload_protocol
+    type: string
+tags:
+  - name: projects
+paths:
+  '/v1alpha2/{name}':
+    delete:
+      description: |-
+        Deletes a reservation grant. No expansion will happen.
+        E.g:
+        organizationA contains project1 and project2. Reservation res1 exists.
+        CreateReservationGrant was invoked previously and following grants were
+        created explicitly:
+          <organizationA, res1>
+          <project1, res1>
+        Then deletion of <organizationA, res1> won't affect <project1, res1>. After
+        deletion of <organizationA, res1>, queries from project1 will still use
+        res1, while queries from project2 will use on-demand mode.
+      operationId: bigqueryreservation.projects.locations.reservationGrants.delete
+      parameters:
+        - description: |-
+            If true, deletes all the child reservations of the given reservation.
+            Otherwise, attempting to delete a reservation that has child
+            reservations will fail with error code
+            `google.rpc.Code.FAILED_PRECONDITION`.
+          in: query
+          name: force
+          type: boolean
+        - description: |-
+            Name of the resource, e.g.:
+              projects/myproject/locations/eu/reservationGrants/123
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    get:
+      description: Returns information about the slot pool.
+      operationId: bigqueryreservation.projects.locations.reservations.slotPools.get
+      parameters:
+        - description: |-
+            Resource name of the slot pool to retrieve. E.g.,
+               projects/myproject/locations/us-central1/reservations/my_reservation/slotPools/123
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SlotPool'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    patch:
+      description: |-
+        Updates an existing reservation resource. Applicable only for child
+        reservations.
+      operationId: bigqueryreservation.projects.locations.reservations.patch
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Reservation'
+        - description: |-
+            The resource name of the reservation, e.g.,
+            "projects/*/locations/*/reservations/dev/team/product". Reservation names
+            (e.g., "dev/team/product") exceeding a depth of six will fail with
+            `google.rpc.Code.INVALID_ARGUMENT`.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: Standard field mask for the set of fields to be updated.
+          in: query
+          name: updateMask
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Reservation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1alpha2/{parent}':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Creates a new reservation resource. Multiple reservations are created if
+        the ancestor reservations do not exist.
+      operationId: bigqueryreservation.projects.locations.reservations.createReservation
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Reservation'
+        - description: |-
+            Project, location, and (optionally) reservation name. E.g.,
+               projects/myproject/locations/us-central1/reservations/parent
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: |-
+            The reservation ID relative to the parent, e.g., "dev". This field must
+            only contain alphanumeric characters.
+          in: query
+          name: reservationId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Reservation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1alpha2/{parent}/reservationGrants':
+    get:
+      description: |-
+        Lists reservation grants.
+        Only explicitly created grants will be returned. E.g:
+        organizationA contains project1 and project2. Reservation res1 exists.
+        CreateReservationGrant was invoked previously and following grants were
+        created explicitly:
+          <organizationA, res1>
+          <project1, res1>
+        Then this API will just return the above two grants for reservation res1,
+        and no expansion/merge will happen.
+      operationId: bigqueryreservation.projects.locations.reservationGrants.list
+      parameters:
+        - description: The maximum number of items to return.
+          in: query
+          name: pageSize
+          type: integer
+        - description: 'The next_page_token value returned from a previous List request, if any.'
+          in: query
+          name: pageToken
+          type: string
+        - description: 'The parent resource name e.g.: projects/myproject/location/eu.'
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListReservationGrantsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Returns `google.rpc.Code.PERMISSION_DENIED` if user does not have
+        'bigquery.admin' permissions on the project using the reservation
+        and the project that owns this reservation.
+        Returns `google.rpc.Code.INVALID_ARGUMENT` when location of the grant
+        does not match location of the reservation.
+      operationId: bigqueryreservation.projects.locations.reservationGrants.create
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ReservationGrant'
+        - description: |-
+            The parent resource name of the reservation grant
+            E.g.: projects/myproject/location/eu.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ReservationGrant'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1alpha2/{parent}/reservations':
+    get:
+      description: Lists all the reservations for the project in the specified location.
+      operationId: bigqueryreservation.projects.locations.reservations.list
+      parameters:
+        - description: |-
+            Can be used to filter out reservations based on names, capacity, etc, e.g.:
+            filter="reservation.slot_capacity > 200"
+            filter="reservation.name = \"*dev/*\""
+            Advanced filtering syntax can be
+            [here](https://cloud.google.com/logging/docs/view/advanced-filters).
+          in: query
+          name: filter
+          type: string
+        - description: The maximum number of items to return.
+          in: query
+          name: pageSize
+          type: integer
+        - description: 'The next_page_token value returned from a previous List request, if any.'
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
+            The parent resource name containing project and location, e.g.:
+              "projects/myproject/locations/us-central1"
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListReservationsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Creates a new reservation resource. Multiple reservations are created if
+        the ancestor reservations do not exist.
+      operationId: bigqueryreservation.projects.locations.reservations.create
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Reservation'
+        - description: |-
+            Project, location, and (optionally) reservation name. E.g.,
+               projects/myproject/locations/us-central1/reservations/parent
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: |-
+            The reservation ID relative to the parent, e.g., "dev". This field must
+            only contain alphanumeric characters.
+          in: query
+          name: reservationId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Reservation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1alpha2/{parent}/slotPools':
+    get:
+      description: Lists all the slot pools for the reservation.
+      operationId: bigqueryreservation.projects.locations.reservations.slotPools.list
+      parameters:
+        - description: The maximum number of items to return.
+          in: query
+          name: pageSize
+          type: integer
+        - description: 'The next_page_token value returned from a previous List request, if any.'
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
+            Resource name of the parent reservation. Only top-level reservations can
+            have slot pools. E.g.,
+               projects/myproject/locations/us-central1/reservations/my_reservation
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListSlotPoolsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v1alpha2/{parent}:SearchReservationGrants':
+    get:
+      description: |-
+        Look up grants for a specified resource for a particular region.
+        If the request is about a project:
+          1) Grants created on the project will be returned if they exist.
+          2) Otherwise grants created on the closest ancestor will be returned.
+          3) Grants for different JobTypes will all be returned.
+        Same logic applies if the request is about a folder.
+        If the request is about an organization, then grants created on the
+        organization will be returned (organization doesn't have ancestors).
+        Comparing to ListReservationGrants, there are two behavior
+        differences:
+          1) permission on the grantee will be verified in this API.
+          2) Hierarchy lookup (project->folder->organization) happens in this API.
+      operationId: bigqueryreservation.projects.locations.searchReservationGrants
+      parameters:
+        - description: The maximum number of items to return.
+          in: query
+          name: pageSize
+          type: integer
+        - description: 'The next_page_token value returned from a previous List request, if any.'
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
+            The parent resource name (containing project and location), which owns the
+            grants. e.g.:
+              "projects/myproject/locations/us-central1".
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: |-
+            Please specify resource name as grantee in the query.
+            e.g., "grantee=projects/myproject"
+                  "grantee=folders/123"
+                  "grantee=organizations/456"
+          in: query
+          name: query
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SearchReservationGrantsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+definitions:
+  CreateSlotPoolMetadata:
+    description: |-
+      The metadata for operation returned from
+      ReservationService.CreateSlotPool.
+    properties:
+      slotPool:
+        description: |-
+          Resource name of the slot pool that is being created. E.g.,
+          projects/myproject/locations/us-central1/reservations/foo/slotPools/123
+        type: string
+    type: object
+  Empty:
+    description: |-
+      A generic empty message that you can re-use to avoid defining duplicated
+      empty messages in your APIs. A typical example is to use it as the request
+      or the response type of an API method. For instance:
+
+          service Foo {
+            rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+          }
+
+      The JSON representation for `Empty` is empty JSON object `{}`.
+    properties: {}
+    type: object
+  ListReservationGrantsResponse:
+    description: The response for ReservationService.ListReservationGrants.
+    properties:
+      nextPageToken:
+        description: |-
+          Token to retrieve the next page of results, or empty if there are no
+          more results in the list.
+        type: string
+      reservationGrants:
+        description: List of reservation grants visible to the user.
+        items:
+          $ref: '#/definitions/ReservationGrant'
+        type: array
+    type: object
+  ListReservationsResponse:
+    description: The response for ReservationService.ListReservations.
+    properties:
+      nextPageToken:
+        description: |-
+          Token to retrieve the next page of results, or empty if there are no
+          more results in the list.
+        type: string
+      reservations:
+        description: List of reservations visible to the user.
+        items:
+          $ref: '#/definitions/Reservation'
+        type: array
+    type: object
+  ListSlotPoolsResponse:
+    description: The response for ReservationService.ListSlotPools.
+    properties:
+      nextPageToken:
+        description: |-
+          Token to retrieve the next page of results, or empty if there are no
+          more results in the list.
+        type: string
+      slotPools:
+        description: List of slot pools visible to the user.
+        items:
+          $ref: '#/definitions/SlotPool'
+        type: array
+    type: object
+  LocationMetadata:
+    description: |-
+      BigQuery-specific metadata about a location. This will be set on
+      google.cloud.location.Location.metadata in Cloud Location API
+      responses.
+    properties:
+      legacyLocationId:
+        description: |-
+          The legacy BigQuery location ID, e.g. “EU” for the “europe” location.
+          This is for any API consumers that need the legacy “US” and “EU” locations.
+        type: string
+    type: object
+  Reservation:
+    description: A reservation is a mechanism used to guarantee slots to users.
+    properties:
+      name:
+        description: |-
+          The resource name of the reservation, e.g.,
+          "projects/*/locations/*/reservations/dev/team/product". Reservation names
+          (e.g., "dev/team/product") exceeding a depth of six will fail with
+          `google.rpc.Code.INVALID_ARGUMENT`.
+        type: string
+      slotCapacity:
+        description: |-
+          Maximum slots available to this reservation and its children. A slot is a
+          unit of computational power in BigQuery, and serves as the unit of
+          parallelism. In a scan of a multi-partitioned table, a single slot operates
+          on a single partition of the table.
+
+          If the new reservation's slot capacity exceed the parent's slot capacity or
+          if total slot capacity of the new reservation and its siblings exceeds the
+          parent's slot capacity, the request will fail with
+          `google.rpc.Code.RESOURCE_EXHAUSTED`.
+        format: int64
+        type: string
+      useParentReservation:
+        description: |-
+          If true, any query using this reservation will also be submitted to the
+          parent reservation. This allows the query to share the additional slot
+          capacity of the parent with other queries in the parent reservation. If the
+          parent also has this field set to true, then this process will continue
+          until it encounters a reservation for which this is false.
+          If false, a query using this reservation will
+          execute with the maximum slot capacity as specified above.
+          If not specified, default value is true.
+          Ignored for top-level reservation.
+        type: boolean
+    type: object
+  ReservationGrant:
+    description: |-
+      A ReservationGrant allows a project to submit jobs
+      of a certain type using slots from the specified reservation.
+    properties:
+      grantee:
+        description: |-
+          The resource which will use the reservation. E.g.
+          projects/myproject, folders/123, organizations/456.
+        type: string
+      jobType:
+        description: Which type of jobs will use the reservation.
+        enum:
+          - JOB_TYPE_UNSPECIFIED
+          - PIPELINE
+          - QUERY
+        type: string
+      name:
+        description: |-
+          Output only. Name of the resource. E.g.:
+          projects/myproject/locations/eu/reservationGrants/123.
+        type: string
+      reservation:
+        description: |-
+          Resource name of the reservation.
+          E.g., projects/myproject/locations/eu/reservations/my_reservation.
+          This reservation must be in the same location as the grant.
+          This reservation should belong to the same parent project.
+        type: string
+    type: object
+  SearchReservationGrantsResponse:
+    description: The response for ReservationService.SearchReservationGrants.
+    properties:
+      nextPageToken:
+        description: |-
+          Token to retrieve the next page of results, or empty if there are no
+          more results in the list.
+        type: string
+      reservationGrants:
+        description: List of reservation grants visible to the user.
+        items:
+          $ref: '#/definitions/ReservationGrant'
+        type: array
+    type: object
+  SlotPool:
+    description: |-
+      Slot pool is a way to purchase slots with some minimum committed period of
+      usage. Slot pool is immutable and cannot be deleted until the end of the
+      commitment period. After the end of the commitment period, slots are still
+      available but can be freely removed any time.
+
+      A slot pool resource exists as a child resource of a top-level reservation.
+      Sum of all the ACTIVE pools slot_count is always equal to the reservation
+      slot_capacity.
+    properties:
+      commitmentEndTime:
+        description: |-
+          Output only. The end of the commitment period. Slot pool cannot be
+          removed before commitment_end_time. It is applicable only for ACTIVE slot
+          pools and is computed as a combination of the plan and the time when the
+          slot pool became ACTIVE.
+        format: google-datetime
+        type: string
+      name:
+        description: |-
+          Output only. The resource name of the slot pool, e.g.,
+             projects/myproject/locations/us-central1/reservations/myreservation/slotPools/123
+        type: string
+      plan:
+        description: Slot pool commitment plan.
+        enum:
+          - COMMITMENT_PLAN_UNSPECIFIED
+          - MONTHLY
+          - ANNUAL
+        type: string
+      slotCount:
+        description: Number of slots in this pool.
+        format: int64
+        type: string
+      state:
+        description: Output only.
+        enum:
+          - STATE_UNSPECIFIED
+          - PENDING
+          - ACTIVE
+        type: string
+    type: object

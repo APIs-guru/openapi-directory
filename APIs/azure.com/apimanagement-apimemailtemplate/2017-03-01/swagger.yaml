@@ -1,7 +1,7 @@
 swagger: '2.0'
 schemes:
   - https
-host: management.azure.com
+host: azure.local
 info:
   description: Use these REST APIs for performing operations on Email Templates associated with your Azure API Management deployment.
   title: ApiManagementClient
@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2017-03-01/apimemailtemplate.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/control-plane/Microsoft.ApiManagement/preview/2017-03-01/apimemailtemplate.json'
       version: '2.0'
   x-preferred: false
   x-providerName: azure.com
@@ -25,16 +25,12 @@ consumes:
 produces:
   - application/json
 securityDefinitions:
-  azure_auth:
-    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
-    description: Azure Active Directory OAuth2 Flow.
-    flow: implicit
-    scopes:
-      user_impersonation: impersonate your user account
-    type: oauth2
+  apim_key:
+    in: header
+    name: Authorization
+    type: apiKey
 security:
-  - azure_auth:
-      - user_impersonation
+  - apim_key: []
 parameters:
   TemplateNameParameter:
     description: Email Template Name Identifier.
@@ -62,26 +58,19 @@ parameters:
       name: TemplateName
     x-ms-parameter-location: method
 paths:
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/templates':
+  /templates:
     get:
       description: Lists a collection of properties defined within a service instance.
-      operationId: EmailTemplate_ListByService
+      operationId: EmailTemplate_List
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
+        - description: |-
+            | Field          | Supported operators    | Supported functions                         |
+            |----------------|------------------------|---------------------------------------------|
+            | id             | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
+          in: query
+          name: $filter
+          required: false
           type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - description: Number of records to return.
           format: int32
           in: query
@@ -103,11 +92,6 @@ paths:
           name: api-version
           required: true
           type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
       responses:
         '200':
           description: A Collection of the Email Template for the specified API Management service instance.
@@ -116,61 +100,130 @@ paths:
       tags:
         - EmailTemplate
       x-ms-examples:
-        ApiManagementListEmailTemplates:
+        ApiManagementListTemplates:
           parameters:
             api-version: '2017-03-01'
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+            apimBaseUrl: apimservice1.management.azure-api.net
           responses:
             '200':
               body:
-                nextLink: ''
+                count: 14
                 value:
-                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/templates/ApplicationApprovedNotificationMessage
-                    name: ApplicationApprovedNotificationMessage
-                    properties:
-                      body: "<!DOCTYPE html >\r\n<html>\r\n  <head />\r\n  <body>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Dear $DevFirstName $DevLastName,</p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">\r\n          We are happy to let you know that your request to publish the $AppName application in the application gallery has been approved. Your application has been published and can be viewed <a href=\"http://$DevPortalUrl/Applications/Details/$AppId\">here</a>.\r\n        </p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Best,</p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">The $OrganizationName API Team</p>\r\n  </body>\r\n</html>"
-                      description: Developers who submitted their application for publication in the application gallery on the developer portal receive this email after their submission is approved.
-                      isDefault: true
-                      parameters:
-                        - name: AppId
-                          title: Application id
-                        - name: AppName
-                          title: Application name
-                        - name: DevFirstName
-                          title: Developer first name
-                        - name: DevLastName
-                          title: Developer last name
-                        - name: OrganizationName
-                          title: Organization name
-                        - name: DevPortalUrl
-                          title: Developer portal URL
-                      subject: Your application $AppName is published in the application gallery
-                      title: Application gallery submission approved
-                    type: Microsoft.ApiManagement/service/templates
+                  - body: "<!DOCTYPE html >\r\n<html>\r\n  <head />\r\n  <body>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Dear $DevFirstName $DevLastName,</p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">\r\n          We are happy to let you know that your request to publish the $AppName application in the application gallery has been approved. Your application has been published and can be viewed <a href=\"http://$DevPortalUrl/Applications/Details/$AppId\">here</a>.\r\n        </p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Best,</p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">The $OrganizationName API Team</p>\r\n  </body>\r\n</html>"
+                    description: Developers who submitted their application for publication in the application gallery on the developer portal receive this email after their submission is approved.
+                    id: /templates/ApplicationApprovedNotificationMessage
+                    isDefault: true
+                    parameters:
+                      - name: AppId
+                        title: Application id
+                      - name: AppName
+                        title: Application name
+                      - name: DevFirstName
+                        title: Developer first name
+                      - name: DevLastName
+                        title: Developer last name
+                      - name: OrganizationName
+                        title: Organization name
+                      - name: DevPortalUrl
+                        title: Developer portal URL
+                    subject: Your application $AppName is published in the application gallery
+                    title: Application gallery submission approved
+                  - body: "<!DOCTYPE html >\r\n<html>\r\n  <head />\r\n  <body>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Dear $DevFirstName $DevLastName,</p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">\r\n          On behalf of $OrganizationName and our customers we thank you for giving us a try. Your $OrganizationName API account is now closed.\r\n        </p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Thank you,</p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Your $OrganizationName Team</p>\r\n    <a href=\"$DevPortalUrl\">$DevPortalUrl</a>\r\n    <p />\r\n  </body>\r\n</html>"
+                    description: Developers receive this fairwell email after they close their account.
+                    id: /templates/AccountClosedDeveloper
+                    isDefault: true
+                    parameters:
+                      - name: DevFirstName
+                        title: Developer first name
+                      - name: DevLastName
+                        title: Developer last name
+                      - name: OrganizationName
+                        title: Organization name
+                      - name: DevPortalUrl
+                        title: Developer portal URL
+                    subject: Thank you for using the $OrganizationName API!
+                    title: Developer farewell letter
+                  - body: "<!DOCTYPE html >\r\n<html>\r\n  <head>\r\n    <style>\r\n          body {font-size:12pt; font-family:\"Segoe UI\",\"Segoe WP\",\"Tahoma\",\"Arial\",\"sans-serif\";}\r\n          .alert { color: red; }\r\n          .child1 { padding-left: 20px; }\r\n          .child2 { padding-left: 40px; }\r\n          .number { text-align: right; }\r\n          .text { text-align: left; }\r\n          th, td { padding: 4px 10px; min-width: 100px; }\r\n          th { background-color: #DDDDDD;}\r\n        </style>\r\n  </head>\r\n  <body>\r\n    <p>Greetings $DevFirstName $DevLastName!</p>\r\n    <p>\r\n          You are approaching the quota limit on you subscription to the <strong>$ProdName</strong> product (primary key $SubPrimaryKey).\r\n          #if ($QuotaResetDate != \"\")\r\n          This quota will be renewed on $QuotaResetDate.\r\n          #else\r\n          This quota will not be renewed.\r\n          #end\r\n        </p>\r\n    <p>Below are details on quota usage for the subscription:</p>\r\n    <p>\r\n      <table>\r\n        <thead>\r\n          <th class=\"text\">Quota Scope</th>\r\n          <th class=\"number\">Calls</th>\r\n          <th class=\"number\">Call Quota</th>\r\n          <th class=\"number\">Bandwidth</th>\r\n          <th class=\"number\">Bandwidth Quota</th>\r\n        </thead>\r\n        <tbody>\r\n          <tr>\r\n            <td class=\"text\">Subscription</td>\r\n            <td class=\"number\">\r\n                  #if ($CallsAlert == true)\r\n                  <span class=\"alert\">$Calls</span>\r\n                  #else\r\n                  $Calls\r\n                  #end\r\n                </td>\r\n            <td class=\"number\">$CallQuota</td>\r\n            <td class=\"number\">\r\n                  #if ($BandwidthAlert == true)\r\n                  <span class=\"alert\">$Bandwidth</span>\r\n                  #else\r\n                  $Bandwidth\r\n                  #end\r\n                </td>\r\n            <td class=\"number\">$BandwidthQuota</td>\r\n          </tr>\r\n              #foreach ($api in $Apis)\r\n              <tr><td class=\"child1 text\">API: $api.Name</td><td class=\"number\">\r\n                  #if ($api.CallsAlert == true)\r\n                  <span class=\"alert\">$api.Calls</span>\r\n                  #else\r\n                  $api.Calls\r\n                  #end\r\n                </td><td class=\"number\">$api.CallQuota</td><td class=\"number\">\r\n                  #if ($api.BandwidthAlert == true)\r\n                  <span class=\"alert\">$api.Bandwidth</span>\r\n                  #else\r\n                  $api.Bandwidth\r\n                  #end\r\n                </td><td class=\"number\">$api.BandwidthQuota</td></tr>\r\n              #foreach ($operation in $api.Operations)\r\n              <tr><td class=\"child2 text\">Operation: $operation.Name</td><td class=\"number\">\r\n                  #if ($operation.CallsAlert == true)\r\n                  <span class=\"alert\">$operation.Calls</span>\r\n                  #else\r\n                  $operation.Calls\r\n                  #end\r\n                </td><td class=\"number\">$operation.CallQuota</td><td class=\"number\">\r\n                  #if ($operation.BandwidthAlert == true)\r\n                  <span class=\"alert\">$operation.Bandwidth</span>\r\n                  #else\r\n                  $operation.Bandwidth\r\n                  #end\r\n                </td><td class=\"number\">$operation.BandwidthQuota</td></tr>\r\n              #end\r\n              #end\r\n            </tbody>\r\n      </table>\r\n    </p>\r\n    <p>Thank you,</p>\r\n    <p>$OrganizationName API Team</p>\r\n    <a href=\"$DevPortalUrl\">$DevPortalUrl</a>\r\n    <p />\r\n  </body>\r\n</html>"
+                    description: Developers receive this email to alert them when they are approaching a quota limit.
+                    id: /templates/QuotaLimitApproachingDeveloperNotificationMessage
+                    isDefault: true
+                    parameters:
+                      - name: DevFirstName
+                        title: Developer first name
+                      - name: DevLastName
+                        title: Developer last name
+                      - name: ProdName
+                        title: Product name
+                      - name: OrganizationName
+                        title: Organization name
+                      - name: SubPrimaryKey
+                        title: Primary Subscription key
+                      - name: DevPortalUrl
+                        title: Developer portal URL
+                      - name: QuotaResetDate
+                        title: Quota reset date
+                    subject: You are approaching an API quota limit
+                    title: Developer quota limit approaching notification
+                  - body: "<!DOCTYPE html >\r\n<html>\r\n  <head>\r\n    <meta charset=\"UTF-8\" />\r\n    <title>Letter</title>\r\n  </head>\r\n  <body>\r\n    <h1 style=\"color:#000505;font-size:18pt;font-family:'Segoe UI'\">\r\n          Welcome to <span style=\"color:#003363\">$OrganizationName API!</span></h1>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Dear $DevFirstName $DevLastName,</p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Your $OrganizationName API program registration is completed and we are thrilled to have you as a customer. Here are a few important bits of information for your reference:</p>\r\n    <table width=\"100%\" style=\"margin:20px 0\">\r\n      <tr>\r\n            #if ($IdentityProvider == \"Basic\")\r\n            <td width=\"50%\" style=\"height:40px;vertical-align:top;font-family:'Segoe UI';font-size:12pt\">\r\n              Please use the following <strong>username</strong> when signing into any of the ${OrganizationName}-hosted developer portals:\r\n            </td><td style=\"vertical-align:top;font-family:'Segoe UI';font-size:12pt\"><strong>$DevUsername</strong></td>\r\n            #else\r\n            <td width=\"50%\" style=\"height:40px;vertical-align:top;font-family:'Segoe UI';font-size:12pt\">\r\n              Please use the following <strong>$IdentityProvider account</strong> when signing into any of the ${OrganizationName}-hosted developer portals:\r\n            </td><td style=\"vertical-align:top;font-family:'Segoe UI';font-size:12pt\"><strong>$DevUsername</strong></td>            \r\n            #end\r\n          </tr>\r\n      <tr>\r\n        <td style=\"height:40px;vertical-align:top;font-family:'Segoe UI';font-size:12pt\">\r\n              We will direct all communications to the following <strong>email address</strong>:\r\n            </td>\r\n        <td style=\"vertical-align:top;font-family:'Segoe UI';font-size:12pt\">\r\n          <a href=\"mailto:$DevEmail\" style=\"text-decoration:none\">\r\n            <strong>$DevEmail</strong>\r\n          </a>\r\n        </td>\r\n      </tr>\r\n    </table>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Best of luck in your API pursuits!</p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">$OrganizationName API Team</p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">\r\n      <a href=\"$DevPortalUrl\">$DevPortalUrl</a>\r\n    </p>\r\n  </body>\r\n</html>"
+                    description: Developers receive this “welcome” email after they confirm their new account.
+                    id: /templates/NewDeveloperNotificationMessage
+                    isDefault: true
+                    parameters:
+                      - name: DevFirstName
+                        title: Developer first name
+                      - name: DevLastName
+                        title: Developer last name
+                      - name: DevUsername
+                        title: Developer user name
+                      - name: DevEmail
+                        title: Developer email
+                      - name: OrganizationName
+                        title: Organization name
+                      - name: DevPortalUrl
+                        title: Developer portal URL
+                      - name: IdentityProvider
+                        title: Identity Provider selected by Organization
+                    subject: Welcome to the $OrganizationName API!
+                    title: Developer welcome letter
+                  - body: "<!DOCTYPE html >\r\n<html>\r\n  <head>\r\n    <meta charset=\"UTF-8\" />\r\n    <title>Letter</title>\r\n  </head>\r\n  <body>\r\n    <table width=\"100%\">\r\n      <tr>\r\n        <td>\r\n          <p style=\"font-size:12pt;font-family:'Segoe UI'\">Dear $DevFirstName $DevLastName,</p>\r\n          <p style=\"font-size:12pt;font-family:'Segoe UI'\"></p>\r\n          <p style=\"font-size:12pt;font-family:'Segoe UI'\">You are receiving this email because you made a change to the email address on your $OrganizationName API account.</p>\r\n          <p style=\"font-size:12pt;font-family:'Segoe UI'\">Please click on the following link to confirm the change:</p>\r\n          <p style=\"font-size:12pt;font-family:'Segoe UI'\">\r\n            <a id=\"confirmUrl\" href=\"$ConfirmUrl\" style=\"text-decoration:none\">\r\n              <strong>$ConfirmUrl</strong>\r\n            </a>\r\n          </p>\r\n          <p style=\"font-size:12pt;font-family:'Segoe UI'\">If clicking the link does not work, please copy-and-paste or re-type it into your browser's address bar and hit \"Enter\".</p>\r\n          <p style=\"font-size:12pt;font-family:'Segoe UI'\">Thank you,</p>\r\n          <p style=\"font-size:12pt;font-family:'Segoe UI'\">$OrganizationName API Team</p>\r\n          <p style=\"font-size:12pt;font-family:'Segoe UI'\">\r\n            <a href=\"$DevPortalUrl\">$DevPortalUrl</a>\r\n          </p>\r\n        </td>\r\n      </tr>\r\n    </table>\r\n  </body>\r\n</html>"
+                    description: Developers receive this email to confirm a new e-mail address after they change their existing one associated with their account.
+                    id: /templates/EmailChangeIdentityDefault
+                    isDefault: true
+                    parameters:
+                      - name: DevFirstName
+                        title: Developer first name
+                      - name: DevLastName
+                        title: Developer last name
+                      - name: OrganizationName
+                        title: Organization name
+                      - name: DevPortalUrl
+                        title: Developer portal URL
+                      - name: ConfirmUrl
+                        title: Developer confirmation URL
+                    subject: Please confirm the new email associated with your $OrganizationName API account
+                    title: Email change confirmation
+                  - body: "<!DOCTYPE html >\r\n<html>\r\n  <head />\r\n  <body>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Dear $DevFirstName $DevLastName,</p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">\r\n          Your account has been created. Please follow the link below to visit the $OrganizationName developer portal and claim it:\r\n        </p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">\r\n      <a href=\"$ConfirmUrl\">$ConfirmUrl</a>\r\n    </p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Best,</p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">The $OrganizationName API Team</p>\r\n  </body>\r\n</html>"
+                    description: 'An e-mail invitation to create an account, sent on request by API publishers.'
+                    id: /templates/InviteUserNotificationMessage
+                    isDefault: true
+                    parameters:
+                      - name: OrganizationName
+                        title: Organization name
+                      - name: DevFirstName
+                        title: Developer first name
+                      - name: DevLastName
+                        title: Developer last name
+                      - name: ConfirmUrl
+                        title: Confirmation link
+                    subject: You are invited to join the $OrganizationName developer network
+                    title: Invite user
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/templates/{templateName}':
+  '/templates/{templateName}':
     delete:
       description: Reset the Email Template to default template provided by the API Management service instance.
       operationId: EmailTemplate_Delete
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/TemplateNameParameter'
         - description: The entity state (Etag) version of the Email Template to delete. A value of "*" can be used for If-Match to unconditionally apply the operation.
           in: header
@@ -180,11 +233,6 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -219,13 +267,12 @@ paths:
       tags:
         - EmailTemplates
       x-ms-examples:
-        ApiManagementDeleteEmailTemplate:
+        ApiManagementDeleteTemplates:
           parameters:
+            Accept: application/json
             If-Match: '*'
             api-version: '2017-03-01'
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+            apimBaseUrl: apimservice1.management.azure-api.net
             templateName: newIssueNotificationMessage
           responses:
             '204': {}
@@ -233,30 +280,10 @@ paths:
       description: Gets the details of the email template specified by its identifier.
       operationId: EmailTemplate_Get
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/TemplateNameParameter'
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -297,134 +324,38 @@ paths:
       tags:
         - EmailTemplates
       x-ms-examples:
-        ApiManagementGetEmailTemplate:
+        ApiManagementGetTemplates:
           parameters:
+            Accept: application/json
             api-version: '2017-03-01'
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
-            templateName: newIssueNotificationMessage
+            apimBaseUrl: apimservice1.management.azure-api.net
+            templateName: applicationApprovedNotificationMessage
           responses:
             '200':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/templates/NewIssueNotificationMessage
-                name: NewIssueNotificationMessage
-                properties:
-                  body: "<!DOCTYPE html >\r\n<html>\r\n  <head />\r\n  <body>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Dear $DevFirstName $DevLastName,</p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Thank you for contacting us. Our API team will review your issue and get back to you soon.</p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">\r\n          Click this <a href=\"http://$DevPortalUrl/issues/$IssueId\">link</a> to view or edit your request.\r\n        </p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Best,</p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">The $OrganizationName API Team</p>\r\n  </body>\r\n</html>"
-                  description: This email is sent to developers after they create a new topic on the Issues page of the developer portal.
-                  isDefault: true
-                  parameters:
-                    - name: DevFirstName
-                      title: Developer first name
-                    - name: DevLastName
-                      title: Developer last name
-                    - name: IssueId
-                      title: Issue id
-                    - name: IssueName
-                      title: Issue name
-                    - name: OrganizationName
-                      title: Organization name
-                    - name: DevPortalUrl
-                      title: Developer portal URL
-                  subject: Your request $IssueName was received
-                  title: New issue received
-                type: Microsoft.ApiManagement/service/templates
-    head:
-      description: Gets the entity state (Etag) version of the email template specified by its identifier.
-      operationId: EmailTemplate_GetEntityTag
-      parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - $ref: '#/parameters/TemplateNameParameter'
-        - description: Version of the API to be used with the client request.
-          in: query
-          name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Specified email template entity exists and current entity state version is present in the ETag header.
-          headers:
-            ETag:
-              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-              type: string
-        default:
-          description: Error response describing why the operation failed.
-          schema:
-            description: Error Body contract.
-            properties:
-              code:
-                description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                type: string
-              details:
-                description: 'The list of invalid fields send in request, in case of validation error.'
-                items:
-                  description: Error Field contract.
-                  properties:
-                    code:
-                      description: Property level error code.
-                      type: string
-                    message:
-                      description: Human-readable representation of property-level error.
-                      type: string
-                    target:
-                      description: Property name.
-                      type: string
-                type: array
-              message:
-                description: Human-readable representation of the error.
-                type: string
-      tags:
-        - EmailTemplates
-      x-ms-examples:
-        ApiManagementHeadEmailTemplate:
-          parameters:
-            api-version: '2017-03-01'
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
-            templateName: newIssueNotificationMessage
-          responses:
-            '200':
-              headers:
-                etag: AAAAAAAAAAa=
+                body: "<!DOCTYPE html >\r\n<html>\r\n  <head />\r\n  <body>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Dear $DevFirstName $DevLastName,</p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">\r\n          We are happy to let you know that your request to publish the $AppName application in the application gallery has been approved. Your application has been published and can be viewed <a href=\"http://$DevPortalUrl/Applications/Details/$AppId\">here</a>.\r\n        </p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Best,</p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">The $OrganizationName API Team</p>\r\n  </body>\r\n</html>"
+                description: Developers who submitted their application for publication in the application gallery on the developer portal receive this email after their submission is approved.
+                id: /templates/ApplicationApprovedNotificationMessage
+                isDefault: true
+                parameters:
+                  - name: AppId
+                    title: Application id
+                  - name: AppName
+                    title: Application name
+                  - name: DevFirstName
+                    title: Developer first name
+                  - name: DevLastName
+                    title: Developer last name
+                  - name: OrganizationName
+                    title: Organization name
+                  - name: DevPortalUrl
+                    title: Developer portal URL
+                subject: Your application $AppName is published in the application gallery
+                title: Application gallery submission approved
     patch:
       description: Updates the specific Email Template.
       operationId: EmailTemplate_Update
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/TemplateNameParameter'
         - description: Update parameters.
           in: body
@@ -435,11 +366,6 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -474,39 +400,20 @@ paths:
       tags:
         - EmailTemplates
       x-ms-examples:
-        ApiManagementUpdateEmailTemplate:
+        ApiManagementPatchTemplates:
           parameters:
-            If-Match: '*'
+            Accept: application/json
             api-version: '2017-03-01'
+            apimBaseUrl: apimservice1.management.azure-api.net
             parameters:
-              properties:
-                body: "<!DOCTYPE html >\r\n<html>\r\n  <head />\r\n  <body>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Dear $DevFirstName $DevLastName,</p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">\r\n          We are happy to let you know that your request to publish the $AppName application in the gallery has been approved. Your application has been published and can be viewed <a href=\"http://$DevPortalUrl/Applications/Details/$AppId\">here</a>.\r\n        </p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Best,</p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">The $OrganizationName API Team</p>\r\n  </body>\r\n</html>"
-                subject: Your application $AppName is published in the gallery
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
-            templateName: applicationApprovedNotificationMessage
+              subject: Your request for $IssueName was successfully received.
+            templateName: newIssueNotificationMessage
           responses:
             '204': {}
     put:
       description: Updates an Email Template.
       operationId: EmailTemplate_CreateOrUpdate
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/TemplateNameParameter'
         - description: Email Template update parameters.
           in: body
@@ -517,11 +424,6 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -562,69 +464,64 @@ paths:
       tags:
         - EmailTemplates
       x-ms-examples:
-        ApiManagementCreateEmailTemplate:
+        ApiManagementPutTemplates:
           parameters:
+            Accept: application/json
             api-version: '2017-03-01'
+            apimBaseUrl: apimservice1.management.azure-api.net
             parameters:
-              properties:
-                subject: Your request for $IssueName was successfully received.
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+              subject: Your request for $IssueName was successfully received.
             templateName: newIssueNotificationMessage
           responses:
             '200':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/templates/NewIssueNotificationMessage
-                name: NewIssueNotificationMessage
-                properties:
-                  body: "<!DOCTYPE html >\r\n<html>\r\n  <head />\r\n  <body>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Dear $DevFirstName $DevLastName,</p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Thank you for contacting us. Our API team will review your issue and get back to you soon.</p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">\r\n          Click this <a href=\"http://$DevPortalUrl/issues/$IssueId\">link</a> to view or edit your request.\r\n        </p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Best,</p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">The $OrganizationName API Team</p>\r\n  </body>\r\n</html>"
-                  description: This email is sent to developers after they create a new topic on the Issues page of the developer portal.
-                  isDefault: false
-                  parameters:
-                    - name: DevFirstName
-                      title: Developer first name
-                    - name: DevLastName
-                      title: Developer last name
-                    - name: IssueId
-                      title: Issue id
-                    - name: IssueName
-                      title: Issue name
-                    - name: OrganizationName
-                      title: Organization name
-                    - name: DevPortalUrl
-                      title: Developer portal URL
-                  subject: Your request for $IssueName was successfully received.
-                  title: New issue received
-                type: Microsoft.ApiManagement/service/templates
+                body: "<!DOCTYPE html >\r\n<html>\r\n  <head />\r\n  <body>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Dear $DevFirstName $DevLastName,</p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">\r\n          We are happy to let you know that your request to publish the $AppName application in the application gallery has been approved. Your application has been published and can be viewed <a href=\"http://$DevPortalUrl/Applications/Details/$AppId\">here</a>.\r\n        </p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Best,</p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">The $OrganizationName API Team</p>\r\n  </body>\r\n</html>"
+                description: Developers who submitted their application for publication in the application gallery on the developer portal receive this email after their submission is approved.
+                id: /templates/ApplicationApprovedNotificationMessage
+                isDefault: false
+                parameters:
+                  - name: AppId
+                    title: Application id
+                  - name: AppName
+                    title: Application name
+                  - name: DevFirstName
+                    title: Developer first name
+                  - name: DevLastName
+                    title: Developer last name
+                  - name: OrganizationName
+                    title: Organization name
+                  - name: DevPortalUrl
+                    title: Developer portal URL
+                subject: Your application $AppName is published in the application gallery
+                title: Application gallery submission approved
             '201':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/templates/NewIssueNotificationMessage
-                name: NewIssueNotificationMessage
-                properties:
-                  body: "<!DOCTYPE html >\r\n<html>\r\n  <head />\r\n  <body>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Dear $DevFirstName $DevLastName,</p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Thank you for contacting us. Our API team will review your issue and get back to you soon.</p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">\r\n          Click this <a href=\"http://$DevPortalUrl/issues/$IssueId\">link</a> to view or edit your request.\r\n        </p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Best,</p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">The $OrganizationName API Team</p>\r\n  </body>\r\n</html>"
-                  description: This email is sent to developers after they create a new topic on the Issues page of the developer portal.
-                  isDefault: false
-                  parameters:
-                    - name: DevFirstName
-                      title: Developer first name
-                    - name: DevLastName
-                      title: Developer last name
-                    - name: IssueId
-                      title: Issue id
-                    - name: IssueName
-                      title: Issue name
-                    - name: OrganizationName
-                      title: Organization name
-                    - name: DevPortalUrl
-                      title: Developer portal URL
-                  subject: Your request for $IssueName was successfully received.
-                  title: New issue received
-                type: Microsoft.ApiManagement/service/templates
+                body: "<!DOCTYPE html >\r\n<html>\r\n  <head />\r\n  <body>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Dear $DevFirstName $DevLastName,</p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">\r\n          We are happy to let you know that your request to publish the $AppName application in the application gallery has been approved. Your application has been published and can be viewed <a href=\"http://$DevPortalUrl/Applications/Details/$AppId\">here</a>.\r\n        </p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Best,</p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">The $OrganizationName API Team</p>\r\n  </body>\r\n</html>"
+                description: Developers who submitted their application for publication in the application gallery on the developer portal receive this email after their submission is approved.
+                id: /templates/ApplicationApprovedNotificationMessage
+                isDefault: false
+                parameters:
+                  - name: AppId
+                    title: Application id
+                  - name: AppName
+                    title: Application name
+                  - name: DevFirstName
+                    title: Developer first name
+                  - name: DevLastName
+                    title: Developer last name
+                  - name: OrganizationName
+                    title: Organization name
+                  - name: DevPortalUrl
+                    title: Developer portal URL
+                subject: Your application $AppName is published in the application gallery
+                title: Application gallery submission approved
 definitions:
   EmailTemplateCollection:
     description: Paged email template list representation.
     properties:
+      count:
+        description: Total number of entities
+        type: integer
       nextLink:
         description: Next page link if any.
         type: string
@@ -635,27 +532,12 @@ definitions:
         type: array
   EmailTemplateContract:
     allOf:
-      - description: The Resource definition.
-        properties:
-          id:
-            description: Resource ID.
-            readOnly: true
-            type: string
-          name:
-            description: Resource name.
-            readOnly: true
-            type: string
-          type:
-            description: Resource type for API Management resource.
-            readOnly: true
-            type: string
-        x-ms-azure-resource: true
+      - $ref: '#/definitions/EmailTemplateContractProperties'
     description: Email Template details.
     properties:
-      properties:
-        $ref: '#/definitions/EmailTemplateContractProperties'
-        description: Email Template entity contract properties.
-        x-ms-client-flatten: true
+      id:
+        description: Identifier of the Template Contract.
+        type: string
   EmailTemplateContractProperties:
     description: Email Template Contract properties.
     properties:
@@ -706,7 +588,7 @@ definitions:
         maxLength: 4096
         minLength: 1
         type: string
-  EmailTemplateUpdateParameterProperties:
+  EmailTemplateUpdateParameters:
     description: Email Template Update Contract properties.
     properties:
       body:
@@ -729,10 +611,14 @@ definitions:
       title:
         description: Title of the Template.
         type: string
-  EmailTemplateUpdateParameters:
-    description: Email Template update Parameters.
-    properties:
-      properties:
-        $ref: '#/definitions/EmailTemplateUpdateParameterProperties'
-        description: Email Template Update contract properties.
-        x-ms-client-flatten: true
+x-ms-parameterized-host:
+  hostTemplate: '{apimBaseUrl}'
+  parameters:
+    - description: 'The management endpoint of the API Management service, for example https://myapimservice.management.azure-api.net.'
+      in: path
+      name: apimBaseUrl
+      required: true
+      type: string
+      x-ms-skip-url-encoding: true
+  positionInOperation: first
+  useSchemePrefix: false

@@ -1,10 +1,10 @@
 swagger: '2.0'
 schemes:
   - https
-host: management.local.azurestack.external
+host: adminmanagement.local.azurestack.external
 info:
-  description: The User Subscription Management Client.
-  title: SubscriptionClient
+  description: The Admin Subscriptions Management Client.
+  title: SubscriptionsManagementClient
   version: '2015-11-01'
   x-apisguru-categories:
     - cloud
@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azsadmin/resource-manager/user-subscriptions/Microsoft.Subscriptions/preview/2015-11-01/Offer.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azsadmin/resource-manager/subscriptions/Microsoft.Subscriptions.Admin/preview/2015-11-01/Offer.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: azsadmin-Offer
@@ -34,99 +34,34 @@ securityDefinitions:
 security:
   - azure_auth:
       - user_impersonation
+parameters:
+  NewOfferParameter:
+    description: New offer.
+    in: body
+    name: newOffer
+    required: true
+    schema:
+      $ref: '#/definitions/Offer'
+    x-ms-parameter-location: method
+  PlanLinkParameter:
+    description: New plan link.
+    in: body
+    name: planLink
+    required: true
+    schema:
+      $ref: '#/definitions/PlanLinkDefinition'
+    x-ms-parameter-location: method
 paths:
-  '/delegatedProviders/{delegatedProviderId}/offers':
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/offers':
     get:
-      description: Get the list of offers for the specified delegated provider.
-      operationId: DelegatedProviderOffers_List
+      description: Get the list of offers.
+      operationId: Offers_ListAll
       parameters:
-        - description: Id of the delegated provider.
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
           in: path
-          name: delegatedProviderId
+          name: subscriptionId
           required: true
           type: string
-        - default: '2015-11-01'
-          description: Client Api Version.
-          in: query
-          name: api-version
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/OfferList'
-      tags:
-        - DelegatedProviderOffers
-      x-ms-examples:
-        Get the list of offers.:
-          parameters:
-            api-version: '2015-11-01'
-            delegatedProviderId: 0af9c33b-f7ac-4161-add5-17b2f0b6a669
-          responses:
-            '200':
-              body:
-                value:
-                  - description: ''
-                    displayName: TestOffer-def2432b-81ef-4480-9211-c18e808c3d1b
-                    id: /delegatedProviders/default/offers/TestOffer-def2432b-81ef-4480-9211-c18e808c3d1b
-                    name: TestOffer-def2432b-81ef-4480-9211-c18e808c3d1b
-                  - description: ''
-                    displayName: TestOffer-c2e9d93a-d8a2-4ec9-970e-3dcd8c47c525
-                    id: /delegatedProviders/default/offers/TestOffer-c2e9d93a-d8a2-4ec9-970e-3dcd8c47c525
-                    name: TestOffer-c2e9d93a-d8a2-4ec9-970e-3dcd8c47c525
-                  - description: ''
-                    displayName: TestOffer-37097402-a512-40c2-b779-f0b3a54e5596
-                    id: /delegatedProviders/default/offers/TestOffer-37097402-a512-40c2-b779-f0b3a54e5596
-                    name: TestOffer-37097402-a512-40c2-b779-f0b3a54e5596
-      x-ms-pageable:
-        nextLinkName: nextLink
-  '/delegatedProviders/{delegatedProviderId}/offers/{offerName}':
-    get:
-      description: Get the specified offer for the delegated provider.
-      operationId: DelegatedProviderOffers_Get
-      parameters:
-        - description: Id of the delegated provider.
-          in: path
-          name: delegatedProviderId
-          required: true
-          type: string
-        - description: Name of the offer.
-          in: path
-          name: offerName
-          required: true
-          type: string
-        - default: '2015-11-01'
-          description: Client Api Version.
-          in: query
-          name: api-version
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/Offer'
-      tags:
-        - DelegatedProviderOffers
-      x-ms-examples:
-        Get the specified offer name.:
-          parameters:
-            api-version: '2015-11-01'
-            delegatedProviderId: 0af9c33b-f7ac-4161-add5-17b2f0b6a669
-            offerName: TestOffer-def2432b-81ef-4480-9211-c18e808c3d1b
-          responses:
-            '200':
-              body:
-                description: ''
-                displayName: TestOffer-def2432b-81ef-4480-9211-c18e808c3d1b
-                id: /delegatedProviders/default/offers/TestOffer-def2432b-81ef-4480-9211-c18e808c3d1b
-                name: TestOffer-def2432b-81ef-4480-9211-c18e808c3d1b
-  /offers:
-    get:
-      description: Get the list of public offers for the root provider.
-      operationId: Offers_List
-      parameters:
         - default: '2015-11-01'
           description: Client Api Version.
           in: query
@@ -141,53 +76,838 @@ paths:
       tags:
         - Offers
       x-ms-examples:
-        Get the list of public offers for the root provider.:
+        Get the list of offers.:
           parameters:
             api-version: '2015-11-01'
+            resourceGroupName: RG1
+            subscriptionId: 0af9c33b-f7ac-4161-add5-17b2f0b6a669
           responses:
             '200':
               body:
                 value:
-                  - description: ''
-                    displayName: TestOffer-def2432b-81ef-4480-9211-c18e808c3d1b
-                    id: /delegatedProviders/default/offers/TestOffer-def2432b-81ef-4480-9211-c18e808c3d1b
-                    name: TestOffer-def2432b-81ef-4480-9211-c18e808c3d1b
-                  - description: ''
-                    displayName: TestOffer-c2e9d93a-d8a2-4ec9-970e-3dcd8c47c525
-                    id: /delegatedProviders/default/offers/TestOffer-c2e9d93a-d8a2-4ec9-970e-3dcd8c47c525
-                    name: TestOffer-c2e9d93a-d8a2-4ec9-970e-3dcd8c47c525
-                  - description: ''
-                    displayName: TestOffer-37097402-a512-40c2-b779-f0b3a54e5596
-                    id: /delegatedProviders/default/offers/TestOffer-37097402-a512-40c2-b779-f0b3a54e5596
-                    name: TestOffer-37097402-a512-40c2-b779-f0b3a54e5596
+                  - id: /subscriptions/0af9c33b-f7ac-4161-add5-17b2f0b6a669/resourceGroups/RG1/providers/Microsoft.Subscriptions.Admin/offers/sampleoffer1
+                    location: local
+                    name: sampleoffer1
+                    properties:
+                      basePlanIds:
+                        - /subscriptions/0af9c33b-f7ac-4161-add5-17b2f0b6a669/resourceGroups/RG1/providers/Microsoft.Subscriptions.Admin/plans/sampleplan1
+                      description: ''
+                      displayName: SampleOffer1
+                      externalReferenceId: ''
+                      maxSubscriptionsPerAccount: 0
+                      name: sampleoffer1
+                      state: Public
+                      subscriptionCount: 1
+                    type: Microsoft.Subscriptions.Admin/offers
+                  - id: /subscriptions/0af9c33b-f7ac-4161-add5-17b2f0b6a669/resourceGroups/ascansubscrrg479/providers/Microsoft.Subscriptions.Admin/offers/sampleoffer2
+                    location: local
+                    name: sampleoffer2
+                    properties:
+                      basePlanIds:
+                        - /subscriptions/0af9c33b-f7ac-4161-add5-17b2f0b6a669/resourceGroups/ascansubscrrg479/providers/Microsoft.Subscriptions.Admin/plans/sampleoffer2
+                      displayName: sampleoffer2
+                      maxSubscriptionsPerAccount: 0
+                      name: sampleoffer2
+                      state: Public
+                      subscriptionCount: 0
+                    tags: {}
+                    type: Microsoft.Subscriptions.Admin/offers
       x-ms-pageable:
         nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers':
+    get:
+      description: Get the list of offers under a resource group.
+      operationId: Offers_List
+      parameters:
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: The resource group the resource is located under.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - default: '2015-11-01'
+          description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OfferList'
+      tags:
+        - Offers
+      x-ms-examples:
+        Get the list of offers under a resource group.:
+          parameters:
+            api-version: '2015-11-01'
+            resourceGroupName: RG1
+            subscriptionId: 0af9c33b-f7ac-4161-add5-17b2f0b6a669
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/0af9c33b-f7ac-4161-add5-17b2f0b6a669/resourceGroups/RG1/providers/Microsoft.Subscriptions.Admin/offers/sampleoffer1
+                    location: local
+                    name: sampleoffer1
+                    properties:
+                      basePlanIds:
+                        - /subscriptions/0af9c33b-f7ac-4161-add5-17b2f0b6a669/resourceGroups/RG1/providers/Microsoft.Subscriptions.Admin/plans/sampleplan1
+                      description: ''
+                      displayName: SampleOffer1
+                      externalReferenceId: ''
+                      maxSubscriptionsPerAccount: 0
+                      name: sampleoffer1
+                      state: Public
+                      subscriptionCount: 1
+                    type: Microsoft.Subscriptions.Admin/offers
+                  - id: /subscriptions/0af9c33b-f7ac-4161-add5-17b2f0b6a669/resourceGroups/ascansubscrrg479/providers/Microsoft.Subscriptions.Admin/offers/sampleoffer2
+                    location: local
+                    name: sampleoffer2
+                    properties:
+                      basePlanIds:
+                        - /subscriptions/0af9c33b-f7ac-4161-add5-17b2f0b6a669/resourceGroups/ascansubscrrg479/providers/Microsoft.Subscriptions.Admin/plans/sampleoffer2
+                      displayName: sampleoffer2
+                      maxSubscriptionsPerAccount: 0
+                      name: sampleoffer2
+                      state: Public
+                      subscriptionCount: 0
+                    tags: {}
+                    type: Microsoft.Subscriptions.Admin/offers
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}':
+    delete:
+      description: Delete the specified offer.
+      operationId: Offers_Delete
+      parameters:
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: The resource group the resource is located under.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: Name of an offer.
+          in: path
+          name: offer
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - default: '2015-11-01'
+          description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+      tags:
+        - Offers
+      x-ms-examples:
+        Delete the specified offer.:
+          parameters:
+            api-version: '2015-11-01'
+            location: local
+            name: sampleoffer1
+            offer: offername
+            resourceGroupName: RG1
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+          responses:
+            '200': {}
+            '204': {}
+    get:
+      description: Get the specified offer.
+      operationId: Offers_Get
+      parameters:
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: The resource group the resource is located under.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: Name of an offer.
+          in: path
+          name: offer
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - default: '2015-11-01'
+          description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Offer'
+      tags:
+        - Offers
+      x-ms-examples:
+        Get the specified offer.:
+          parameters:
+            api-version: '2015-11-01'
+            offer: sampleoffer1
+            resourceGroupName: RG1
+            subscriptionId: 0af9c33b-f7ac-4161-add5-17b2f0b6a669
+          responses:
+            '200':
+              body:
+                id: /subscriptions/0af9c33b-f7ac-4161-add5-17b2f0b6a669/resourceGroups/RG1/providers/Microsoft.Subscriptions.Admin/offers/sampleoffer1
+                location: local
+                name: sampleoffer1
+                properties:
+                  basePlanIds:
+                    - /subscriptions/0af9c33b-f7ac-4161-add5-17b2f0b6a669/resourceGroups/RG1/providers/Microsoft.Subscriptions.Admin/plans/sampleplan1
+                  description: ''
+                  displayName: SampleOffer1
+                  externalReferenceId: ''
+                  maxSubscriptionsPerAccount: 0
+                  name: sampleoffer1
+                  state: Public
+                  subscriptionCount: 1
+                type: Microsoft.Subscriptions.Admin/offers
+    put:
+      description: Create or update the offer.
+      operationId: Offers_CreateOrUpdate
+      parameters:
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: The resource group the resource is located under.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: Name of an offer.
+          in: path
+          name: offer
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - default: '2015-11-01'
+          description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - $ref: '#/parameters/NewOfferParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Offer'
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/Offer'
+      tags:
+        - Offers
+      x-ms-examples:
+        Create or update the offer.:
+          parameters:
+            api-version: '2015-11-01'
+            location: local
+            newOffer:
+              properties:
+                basePlanIds:
+                  - /subscriptions/8ab2551d-41e5-489b-9273-1cdf1cbc7dc6/resourceGroups/Plans/providers/Microsoft.Subscriptions.Admin/plans/testplan
+                description: This is a test Offer
+                displayName: Test Offer
+                maxSubscriptionsPerAccount: 100
+                name: testOffer1
+                state: Private
+                subscriptionCount: 0
+            offer: sampleoffer1
+            resourceGroupName: RG1
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+          responses:
+            '200':
+              body:
+                id: /subscriptions/8ab2551d-41e5-489b-9273-1cdf1cbc7dc6/resourceGroups/testrg/providers/Microsoft.Subscriptions.Admin/offers/testOffer1
+                location: local
+                name: testOffer1
+                properties:
+                  basePlanIds:
+                    - /subscriptions/8ab2551d-41e5-489b-9273-1cdf1cbc7dc6/resourceGroups/Plans/providers/Microsoft.Subscriptions.Admin/plans/testplan
+                  description: This is a test Offer
+                  displayName: Test Offer
+                  maxSubscriptionsPerAccount: 100
+                  name: testOffer1
+                  state: Private
+                  subscriptionCount: 0
+                type: Microsoft.Subscriptions.Admin/offers
+            '201':
+              body:
+                id: /subscriptions/8ab2551d-41e5-489b-9273-1cdf1cbc7dc6/resourceGroups/testrg/providers/Microsoft.Subscriptions.Admin/offers/testOffer1
+                location: local
+                name: testOffer1
+                properties:
+                  basePlanIds:
+                    - /subscriptions/8ab2551d-41e5-489b-9273-1cdf1cbc7dc6/resourceGroups/Plans/providers/Microsoft.Subscriptions.Admin/plans/testplan
+                  description: This is a test Offer
+                  displayName: Test Offer
+                  maxSubscriptionsPerAccount: 100
+                  name: testOffer1
+                  state: Private
+                  subscriptionCount: 0
+                type: Microsoft.Subscriptions.Admin/offers
+  '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}/link':
+    post:
+      description: Links a plan to an offer.
+      operationId: Offers_Link
+      parameters:
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: The resource group the resource is located under.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: Name of an offer.
+          in: path
+          name: offer
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - $ref: '#/parameters/PlanLinkParameter'
+        - default: '2015-11-01'
+          description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Offer'
+      tags:
+        - Offers
+      x-ms-examples:
+        Links a plan to an offer.:
+          parameters:
+            api-version: '2015-11-01'
+            location: local
+            offer: sampleoffer1
+            planLink:
+              properties:
+                planLinkType: Addon
+                planName: sampleplan1
+            resourceGroupName: RG1
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+          responses:
+            '200':
+              body:
+                id: /subscriptions/36a6bf33-6df4-4acd-a30e-7b92c1c7b322/resourceGroups/RG1/providers/Microsoft.Subscriptions.Admin/offers/sampleoffer1
+                location: local
+                name: sampleoffer1
+                properties:
+                  addonPlans:
+                    - maxAcquisitionCount: 1
+                      planId: /subscriptions/36a6bf33-6df4-4acd-a30e-7b92c1c7b322/resourceGroups/TestRG-66c416e8-ad7c-4686-847e-5f84772d3217/providers/Microsoft.Subscriptions.Admin/plans/sampleplan1
+                  basePlanIds:
+                    - /subscriptions/36a6bf33-6df4-4acd-a30e-7b92c1c7b322/resourceGroups/RG1/providers/Microsoft.Subscriptions.Admin/plans/cnur5364tenantplan110
+                  displayName: sampleoffer1
+                  maxSubscriptionsPerAccount: 0
+                  name: sampleoffer1
+                  state: Public
+                  subscriptionCount: 2
+                tags: {}
+                type: Microsoft.Subscriptions.Admin/offers
+  '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}/metricDefinitions':
+    get:
+      description: Get the metric definitions.
+      operationId: Offers_ListMetricDefinitions
+      parameters:
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: The resource group the resource is located under.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: Name of an offer.
+          in: path
+          name: offer
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - default: '2015-11-01'
+          description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            description: List of metric definitions.
+            properties:
+              nextLink:
+                description: Continuation token
+                type: string
+              value:
+                description: Array of metric definitions.
+                items:
+                  description: Metric Definition
+                  properties:
+                    metricAvailabilities:
+                      description: List of metric definitions.
+                      items:
+                        description: Metric Definition
+                        properties:
+                          retention:
+                            description: the retention. Metrics may be queried for this interval.
+                            type: string
+                          timeGrain:
+                            description: The time grain. Metrics will be available for this time grain.
+                            type: string
+                        type: object
+                      type: array
+                    name:
+                      description: Metric definition name.
+                      type: string
+                    primaryAggregationType:
+                      description: The primary aggregation type for resource metric.
+                      enum:
+                        - None
+                        - Average
+                        - Total
+                        - Minimum
+                        - Maximum
+                        - Last
+                      type: string
+                      x-ms-enum:
+                        modelAsString: true
+                        name: MetricPrimaryAggregationType
+                        values:
+                          - description: No aggregation applied to resource.
+                            name: None
+                            value: None
+                          - description: The average aggregation type.
+                            name: Average
+                            value: Average
+                          - description: The total aggregation type.
+                            name: Total
+                            value: Total
+                          - description: The minimum aggregation type.
+                            name: Minimum
+                            value: Minimum
+                          - description: The maximum aggregation type.
+                            name: Maximum
+                            value: Maximum
+                          - description: The last aggregation type.
+                            name: Last
+                            value: Last
+                    unit:
+                      description: The resource metric unit.
+                      enum:
+                        - Count
+                        - Bytes
+                        - Seconds
+                        - CountPerSecond
+                        - BytesPerSecond
+                      type: string
+                      x-ms-enum:
+                        modelAsString: true
+                        name: MetricUnit
+                        values:
+                          - description: The count.
+                            name: Count
+                            value: Count
+                          - description: The bytes.
+                            name: Bytes
+                            value: Bytes
+                          - description: The seconds.
+                            name: Seconds
+                            value: Seconds
+                          - description: The count per second.
+                            name: CountPerSecond
+                            value: CountPerSecond
+                          - description: The bytes per second.
+                            name: BytesPerSecond
+                            value: BytesPerSecond
+                  type: object
+                type: array
+      tags:
+        - Offers
+      x-ms-examples:
+        Get the metric definitions.:
+          parameters:
+            api-version: '2015-11-01'
+            location: local
+            offer: sampleoffer1
+            resourceGroupName: RG1
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+          responses:
+            '200':
+              body:
+                nextLink: null
+                value: []
+  '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}/metrics':
+    get:
+      description: Get the offer metrics.
+      operationId: Offers_ListMetrics
+      parameters:
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: The resource group the resource is located under.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: Name of an offer.
+          in: path
+          name: offer
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - default: '2015-11-01'
+          description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            description: List of metrics.
+            properties:
+              nextLink:
+                description: Continuation token
+                type: string
+              value:
+                description: List of metrics.
+                items:
+                  description: The resource metric set that represents the metrics for a particular resource.
+                  properties:
+                    endTime:
+                      description: End time of the metric.
+                      format: date-time
+                      type: string
+                    metricUnit:
+                      description: The resource metric unit.
+                      enum:
+                        - Count
+                        - Bytes
+                        - Seconds
+                        - CountPerSecond
+                        - BytesPerSecond
+                      type: string
+                      x-ms-enum:
+                        modelAsString: true
+                        name: MetricUnit
+                        values:
+                          - description: The count.
+                            name: Count
+                            value: Count
+                          - description: The bytes.
+                            name: Bytes
+                            value: Bytes
+                          - description: The seconds.
+                            name: Seconds
+                            value: Seconds
+                          - description: The count per second.
+                            name: CountPerSecond
+                            value: CountPerSecond
+                          - description: The bytes per second.
+                            name: BytesPerSecond
+                            value: BytesPerSecond
+                    metricValues:
+                      description: List of metric values.
+                      items:
+                        description: Metric value
+                        properties:
+                          average:
+                            description: Average value for metric sample period.
+                            format: double
+                            type: number
+                          count:
+                            description: Number of measurements for metric sample period.
+                            type: integer
+                          maximum:
+                            description: Maximum value for metric sample period.
+                            format: double
+                            type: number
+                          minimum:
+                            description: Minimum value for metric sample period.
+                            format: double
+                            type: number
+                          properties:
+                            additionalProperties:
+                              type: string
+                            description: Extended properties.
+                            type: object
+                            x-ms-client-name: extendedProperties
+                          timeStamp:
+                            description: Timestamp of when the metric value was collected.
+                            format: date-time
+                            type: string
+                          total:
+                            description: Total value for metric sample period.
+                            format: double
+                            type: number
+                        type: object
+                      type: array
+                    startTime:
+                      description: Start time of the metric.
+                      format: date-time
+                      type: string
+                    timeGrain:
+                      description: Timespan of the metric.
+                      type: string
+                  type: object
+                type: array
+      tags:
+        - Offers
+      x-ms-examples:
+        Get the offer metrics.:
+          parameters:
+            api-version: '2015-11-01'
+            location: local
+            offer: sampleoffer1
+            resourceGroupName: RG1
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+          responses:
+            '200':
+              body:
+                nextLink: null
+                value: []
+  '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}/unlink':
+    post:
+      description: Unlink a plan from an offer.
+      operationId: Offers_Unlink
+      parameters:
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: The resource group the resource is located under.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: Name of an offer.
+          in: path
+          name: offer
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - $ref: '#/parameters/PlanLinkParameter'
+        - default: '2015-11-01'
+          description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Offer'
+      tags:
+        - Offers
+      x-ms-examples:
+        Unlink a plan from an offer.:
+          parameters:
+            api-version: '2015-11-01'
+            location: local
+            offer: sampleoffer1
+            planLink:
+              properties:
+                planLinkType: Addon
+                planName: SamplePlan
+            resourceGroupName: RG1
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+          responses:
+            '200':
+              body:
+                id: /subscriptions/36a6bf33-6df4-4acd-a30e-7b92c1c7b322/resourceGroups/RG1/providers/Microsoft.Subscriptions.Admin/offers/sampleoffer1
+                location: local
+                name: sampleoffer1
+                properties:
+                  addonPlans: []
+                  basePlanIds:
+                    - /subscriptions/36a6bf33-6df4-4acd-a30e-7b92c1c7b322/resourceGroups/RG1/providers/Microsoft.Subscriptions.Admin/plans/SamplePlan
+                  displayName: sampleoffer1
+                  maxSubscriptionsPerAccount: 0
+                  name: sampleoffer1
+                  state: Public
+                  subscriptionCount: 2
+                tags: {}
+                type: Microsoft.Subscriptions.Admin/offers
 definitions:
+  AccessibilityState:
+    description: Represents the state of the offer
+    enum:
+      - Private
+      - Public
+      - Decommissioned
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: AccessibilityState
+      values:
+        - description: The offer or plan is private. Only an Admin can see and manage it.
+          name: Private
+          value: Private
+        - description: The offer or plan is public. Users can see and self-subscribe to it.
+          name: Public
+          value: Public
+        - description: The offer or plan is decommissioned. Current subscriptions can still consume it but new subscriptions cannot.
+          name: Decommissioned
+          value: Decommissioned
+  AddonPlanDefinition:
+    description: Contains the name of the desired plan to be linked or unlinked from an offer.
+    properties:
+      maxAcquisitionCount:
+        description: 'Maximum number of instances that can be acquired by a single subscription. If not specified, the assumed value is 1.'
+        type: integer
+      planId:
+        description: Plan identifier.
+        type: string
+    type: object
   Offer:
+    allOf:
+      - description: Base Resource Object
+        properties:
+          id:
+            description: URI of the resource.
+            readOnly: true
+            type: string
+          location:
+            description: Location of the resource
+            type: string
+          name:
+            description: Name of the resource.
+            readOnly: true
+            type: string
+          tags:
+            additionalProperties:
+              type: string
+            description: List of key-value pairs.
+            readOnly: true
+            type: object
+          type:
+            description: Type of resource.
+            readOnly: true
+            type: string
+        type: object
+        x-ms-azure-resource: true
     description: Represents an offering of services against which a subscription can be created.
     properties:
+      properties:
+        $ref: '#/definitions/OfferProperties'
+        description: Represents an offering of services against which a subscription can be created.
+        x-ms-client-flatten: true
+    type: object
+  OfferList:
+    description: List of offers.
+    properties:
+      nextLink:
+        description: URI to next page.
+        type: string
+      value:
+        description: List of offers.
+        items:
+          $ref: '#/definitions/Offer'
+        type: array
+    type: object
+  OfferProperties:
+    description: Represents an offering of services against which a subscription can be created.
+    properties:
+      addonPlans:
+        description: References to add-on plans that a tenant can optionally acquire as a part of the offer.
+        items:
+          $ref: '#/definitions/AddonPlanDefinition'
+        type: array
+      basePlanIds:
+        description: Identifiers of the base plans that become available to the tenant immediately when a tenant subscribes to the offer.
+        items:
+          type: string
+        type: array
       description:
         description: Description of offer.
         type: string
       displayName:
         description: Display name of offer.
         type: string
-      id:
-        description: The offer ID
+      externalReferenceId:
+        description: External reference identifier.
         type: string
+      maxSubscriptionsPerAccount:
+        description: Maximum subscriptions per account.
+        type: integer
       name:
-        description: The name of the offer.
+        description: Name of the Offer.
         type: string
+      state:
+        $ref: '#/definitions/AccessibilityState'
+        description: Offer accessibility state.
+      subscriptionCount:
+        description: Current subscription count.
+        type: integer
     type: object
-  OfferList:
-    description: List of public offers.
+  PlanLinkDefinition:
+    description: Definition for linking and unlinking plans to offers.
     properties:
-      nextLink:
-        description: URI to next page.
+      maxAcquisitionCount:
+        description: The maximum acquisition count by subscribers
+        type: integer
+      planLinkType:
+        $ref: '#/definitions/PlanLinkType'
+        description: Type of the plan link.
+      planName:
+        description: Name of the plan.
         type: string
-      value:
-        description: List of public offers.
-        items:
-          $ref: '#/definitions/Offer'
-        type: array
     type: object
+  PlanLinkType:
+    description: Plan link type.
+    enum:
+      - None
+      - Base
+      - Addon
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: PlanLinkType
