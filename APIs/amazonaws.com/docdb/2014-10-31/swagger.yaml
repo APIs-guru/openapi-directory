@@ -779,12 +779,12 @@ paths:
         - name: MasterUsername
           in: query
           required: true
-          description: '<p>The name of the master user for the DB cluster.</p> <p>Constraints:</p> <ul> <li> <p>Must be from 1 to 16 letters or numbers.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot be a reserved word for the chosen database engine.</p> </li> </ul>'
+          description: '<p>The name of the master user for the DB cluster.</p> <p>Constraints:</p> <ul> <li> <p>Must be from 1 to 63 letters or numbers.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot be a reserved word for the chosen database engine.</p> </li> </ul>'
           type: string
         - name: MasterUserPassword
           in: query
           required: true
-          description: '<p>The password for the master database user. This password can contain any printable ASCII character except forward slash (/), double quote ("), or the "at" symbol (@).</p> <p>Constraints: Must contain from 8 to 41 characters.</p>'
+          description: '<p>The password for the master database user. This password can contain any printable ASCII character except forward slash (/), double quote ("), or the "at" symbol (@).</p> <p>Constraints: Must contain from 8 to 100 characters.</p>'
           type: string
         - name: PreferredBackupWindow
           in: query
@@ -967,12 +967,12 @@ paths:
         - name: MasterUsername
           in: formData
           required: true
-          description: '<p>The name of the master user for the DB cluster.</p> <p>Constraints:</p> <ul> <li> <p>Must be from 1 to 16 letters or numbers.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot be a reserved word for the chosen database engine.</p> </li> </ul>'
+          description: '<p>The name of the master user for the DB cluster.</p> <p>Constraints:</p> <ul> <li> <p>Must be from 1 to 63 letters or numbers.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot be a reserved word for the chosen database engine.</p> </li> </ul>'
           type: string
         - name: MasterUserPassword
           in: formData
           required: true
-          description: '<p>The password for the master database user. This password can contain any printable ASCII character except forward slash (/), double quote ("), or the "at" symbol (@).</p> <p>Constraints: Must contain from 8 to 41 characters.</p>'
+          description: '<p>The password for the master database user. This password can contain any printable ASCII character except forward slash (/), double quote ("), or the "at" symbol (@).</p> <p>Constraints: Must contain from 8 to 100 characters.</p>'
           type: string
         - name: PreferredBackupWindow
           in: formData
@@ -1369,7 +1369,7 @@ paths:
         - name: Tags
           in: query
           required: false
-          description: The tags to be assigned to the DB instance.
+          description: The tags to be assigned to the DB instance. You can assign up to 10 tags to an instance.
           type: array
           items:
             type: string
@@ -1506,7 +1506,7 @@ paths:
         - name: Tags
           in: formData
           required: false
-          description: The tags to be assigned to the DB instance.
+          description: The tags to be assigned to the DB instance. You can assign up to 10 tags to an instance.
           type: array
           items:
             type: string
@@ -2130,6 +2130,111 @@ paths:
           type: string
           enum:
             - DeleteDBSubnetGroup
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2014-10-31'
+  '/#Action=DescribeCertificates':
+    get:
+      x-aws-operation-name: DescribeCertificates
+      operationId: GET DescribeCertificates
+      description: Returns a list of certificate authority (CA) certificates provided by Amazon RDS for this AWS account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CertificateMessage'
+        '480':
+          description: CertificateNotFoundFault
+          schema:
+            $ref: '#/definitions/CertificateNotFoundFault'
+      parameters:
+        - name: CertificateIdentifier
+          in: query
+          required: false
+          description: '<p>The user-supplied certificate identifier. If this parameter is specified, information for only the specified certificate is returned. If this parameter is omitted, a list of up to <code>MaxRecords</code> certificates is returned. This parameter is not case sensitive.</p> <p>Constraints</p> <ul> <li> <p>Must match an existing <code>CertificateIdentifier</code>.</p> </li> </ul>'
+          type: string
+        - name: Filters
+          in: query
+          required: false
+          description: This parameter is not currently supported.
+          type: array
+          items:
+            type: string
+        - name: MaxRecords
+          in: query
+          required: false
+          description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.</p> <p>Default: 100</p> <p>Constraints:</p> <ul> <li> <p>Minimum: 20</p> </li> <li> <p>Maximum: 100</p> </li> </ul>'
+          type: integer
+        - name: Marker
+          in: query
+          required: false
+          description: 'An optional pagination token provided by a previous <code>DescribeCertificates</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeCertificates
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2014-10-31'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DescribeCertificates
+      operationId: POST DescribeCertificates
+      description: Returns a list of certificate authority (CA) certificates provided by Amazon RDS for this AWS account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CertificateMessage'
+        '480':
+          description: CertificateNotFoundFault
+          schema:
+            $ref: '#/definitions/CertificateNotFoundFault'
+      parameters:
+        - name: CertificateIdentifier
+          in: formData
+          required: false
+          description: '<p>The user-supplied certificate identifier. If this parameter is specified, information for only the specified certificate is returned. If this parameter is omitted, a list of up to <code>MaxRecords</code> certificates is returned. This parameter is not case sensitive.</p> <p>Constraints</p> <ul> <li> <p>Must match an existing <code>CertificateIdentifier</code>.</p> </li> </ul>'
+          type: string
+        - name: Filters
+          in: formData
+          required: false
+          description: This parameter is not currently supported.
+          type: array
+          items:
+            type: string
+        - name: MaxRecords
+          in: formData
+          required: false
+          description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.</p> <p>Default: 100</p> <p>Constraints:</p> <ul> <li> <p>Minimum: 20</p> </li> <li> <p>Maximum: 100</p> </li> </ul>'
+          type: integer
+        - name: Marker
+          in: formData
+          required: false
+          description: 'An optional pagination token provided by a previous <code>DescribeCertificates</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeCertificates
         - name: Version
           in: query
           required: true
@@ -3912,7 +4017,7 @@ paths:
         - name: MasterUserPassword
           in: query
           required: false
-          description: '<p>The password for the master database user. This password can contain any printable ASCII character except forward slash (/), double quote ("), or the "at" symbol (@).</p> <p>Constraints: Must contain from 8 to 41 characters.</p>'
+          description: '<p>The password for the master database user. This password can contain any printable ASCII character except forward slash (/), double quote ("), or the "at" symbol (@).</p> <p>Constraints: Must contain from 8 to 100 characters.</p>'
           type: string
         - name: PreferredBackupWindow
           in: query
@@ -4064,7 +4169,7 @@ paths:
         - name: MasterUserPassword
           in: formData
           required: false
-          description: '<p>The password for the master database user. This password can contain any printable ASCII character except forward slash (/), double quote ("), or the "at" symbol (@).</p> <p>Constraints: Must contain from 8 to 41 characters.</p>'
+          description: '<p>The password for the master database user. This password can contain any printable ASCII character except forward slash (/), double quote ("), or the "at" symbol (@).</p> <p>Constraints: Must contain from 8 to 100 characters.</p>'
           type: string
         - name: PreferredBackupWindow
           in: formData
@@ -4425,6 +4530,11 @@ paths:
           required: false
           description: '<p> The new DB instance identifier for the DB instance when renaming a DB instance. When you change the DB instance identifier, an instance reboot occurs immediately if you set <code>Apply Immediately</code> to <code>true</code>. It occurs during the next maintenance window if you set <code>Apply Immediately</code> to <code>false</code>. This value is stored as a lowercase string. </p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p>Example: <code>mydbinstance</code> </p>'
           type: string
+        - name: CACertificateIdentifier
+          in: query
+          required: false
+          description: Indicates the certificate that needs to be associated with the instance.
+          type: string
         - name: PromotionTier
           in: query
           required: false
@@ -4541,6 +4651,11 @@ paths:
           in: formData
           required: false
           description: '<p> The new DB instance identifier for the DB instance when renaming a DB instance. When you change the DB instance identifier, an instance reboot occurs immediately if you set <code>Apply Immediately</code> to <code>true</code>. It occurs during the next maintenance window if you set <code>Apply Immediately</code> to <code>false</code>. This value is stored as a lowercase string. </p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p>Example: <code>mydbinstance</code> </p>'
+          type: string
+        - name: CACertificateIdentifier
+          in: formData
+          required: false
+          description: Indicates the certificate that needs to be associated with the instance.
           type: string
         - name: PromotionTier
           in: formData
@@ -5867,16 +5982,15 @@ definitions:
         $ref: '#/definitions/DBInstance'
   DBSnapshotAlreadyExistsFault: {}
   InvalidDBSubnetStateFault: {}
-  DBClusterParameterGroupsMessage:
+  CertificateMessage:
     type: object
     properties:
+      Certificates:
+        $ref: '#/definitions/CertificateList'
+        description: A list of certificates for this AWS account.
       Marker:
         $ref: '#/definitions/String'
-        description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
-      DBClusterParameterGroups:
-        $ref: '#/definitions/DBClusterParameterGroupList'
-        description: A list of DB cluster parameter groups.
-    description: Represents the output of <a>DBClusterParameterGroups</a>.
+        description: 'An optional pagination token provided if the number of records retrieved is greater than <code>MaxRecords</code>. If this parameter is specified, the marker specifies the next record in the list. Including the value of <code>Marker</code> in the next call to <code>DescribeCertificates</code> results in the next page of certificates.'
   Filter:
     type: object
     required:
@@ -5890,6 +6004,17 @@ definitions:
         $ref: '#/definitions/FilterValueList'
         description: One or more filter values. Filter values are case sensitive.
     description: '<p>A named set of filter values, used to return a more specific list of results. You can use a filter to match a set of resources by specific criteria, such as IDs.</p> <p>Wildcards are not supported in filters.</p>'
+  CertificateNotFoundFault: {}
+  DBClusterParameterGroupsMessage:
+    type: object
+    properties:
+      Marker:
+        $ref: '#/definitions/String'
+        description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+      DBClusterParameterGroups:
+        $ref: '#/definitions/DBClusterParameterGroupList'
+        description: A list of DB cluster parameter groups.
+    description: Represents the output of <a>DBClusterParameterGroups</a>.
   DBClusterParameterGroupDetails:
     type: object
     properties:
@@ -6072,7 +6197,6 @@ definitions:
       DBInstance:
         $ref: '#/definitions/DBInstance'
   DBUpgradeDependencyFailureFault: {}
-  CertificateNotFoundFault: {}
   ModifyDBSubnetGroupResult:
     type: object
     properties:
@@ -6179,6 +6303,35 @@ definitions:
     type: boolean
   BooleanOptional:
     type: boolean
+  TStamp:
+    type: string
+    format: date-time
+  Certificate:
+    type: object
+    properties:
+      CertificateIdentifier:
+        $ref: '#/definitions/String'
+        description: '<p>The unique key that identifies a certificate.</p> <p>Example: <code>rds-ca-2019</code> </p>'
+      CertificateType:
+        $ref: '#/definitions/String'
+        description: '<p>The type of the certificate.</p> <p>Example: <code>CA</code> </p>'
+      Thumbprint:
+        $ref: '#/definitions/String'
+        description: The thumbprint of the certificate.
+      ValidFrom:
+        $ref: '#/definitions/TStamp'
+        description: '<p>The starting date-time from which the certificate is valid.</p> <p>Example: <code>2019-07-31T17:57:09Z</code> </p>'
+      ValidTill:
+        $ref: '#/definitions/TStamp'
+        description: '<p>The date-time after which the certificate is no longer valid.</p> <p>Example: <code>2024-07-31T17:57:09Z</code> </p>'
+      CertificateArn:
+        $ref: '#/definitions/String'
+        description: '<p>The Amazon Resource Name (ARN) for the certificate.</p> <p>Example: <code>arn:aws:rds:us-east-1::cert:rds-ca-2019</code> </p>'
+    description: A certificate authority (CA) certificate for an AWS account.
+  CertificateList:
+    type: array
+    items:
+      $ref: '#/definitions/Certificate'
   CloudwatchLogsExportConfiguration:
     type: object
     properties:
@@ -6348,10 +6501,10 @@ definitions:
         description: The port number on which the instances in the DB cluster accept connections.
       MasterUsername:
         $ref: '#/definitions/String'
-        description: '<p>The name of the master user for the DB cluster.</p> <p>Constraints:</p> <ul> <li> <p>Must be from 1 to 16 letters or numbers.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot be a reserved word for the chosen database engine.</p> </li> </ul>'
+        description: '<p>The name of the master user for the DB cluster.</p> <p>Constraints:</p> <ul> <li> <p>Must be from 1 to 63 letters or numbers.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot be a reserved word for the chosen database engine.</p> </li> </ul>'
       MasterUserPassword:
         $ref: '#/definitions/String'
-        description: '<p>The password for the master database user. This password can contain any printable ASCII character except forward slash (/), double quote ("), or the "at" symbol (@).</p> <p>Constraints: Must contain from 8 to 41 characters.</p>'
+        description: '<p>The password for the master database user. This password can contain any printable ASCII character except forward slash (/), double quote ("), or the "at" symbol (@).</p> <p>Constraints: Must contain from 8 to 100 characters.</p>'
       PreferredBackupWindow:
         $ref: '#/definitions/String'
         description: '<p>The daily time range during which automated backups are created if automated backups are enabled using the <code>BackupRetentionPeriod</code> parameter. </p> <p>The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region. </p> <p>Constraints:</p> <ul> <li> <p>Must be in the format <code>hh24:mi-hh24:mi</code>.</p> </li> <li> <p>Must be in Universal Coordinated Time (UTC).</p> </li> <li> <p>Must not conflict with the preferred maintenance window.</p> </li> <li> <p>Must be at least 30 minutes.</p> </li> </ul>'
@@ -6529,7 +6682,7 @@ definitions:
         description: '<p>Indicates that minor engine upgrades are applied automatically to the DB instance during the maintenance window.</p> <p>Default: <code>true</code> </p>'
       Tags:
         $ref: '#/definitions/TagList'
-        description: The tags to be assigned to the DB instance.
+        description: The tags to be assigned to the DB instance. You can assign up to 10 tags to an instance.
       DBClusterIdentifier:
         $ref: '#/definitions/String'
         description: The identifier of the DB cluster that the instance will belong to.
@@ -6590,7 +6743,7 @@ definitions:
         description: Indicates that minor version patches are applied automatically.
       PubliclyAccessible:
         $ref: '#/definitions/Boolean'
-        description: 'Specifies the availability options for the DB instance. A value of <code>true</code> specifies an internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of <code>false</code> specifies an internal instance with a DNS name that resolves to a private IP address.'
+        description: Not supported. Amazon DocumentDB does not currently support public endpoints. The value of <code>PubliclyAccessible</code> is always <code>false</code>.
       StatusInfos:
         $ref: '#/definitions/DBInstanceStatusInfoList'
         description: 'The status of a read replica. If the instance is not a read replica, this is blank.'
@@ -6599,13 +6752,16 @@ definitions:
         description: Contains the name of the DB cluster that the DB instance is a member of if the DB instance is a member of a DB cluster.
       StorageEncrypted:
         $ref: '#/definitions/Boolean'
-        description: Specifies whether the DB instance is encrypted.
+        description: Specifies whether or not the DB instance is encrypted.
       KmsKeyId:
         $ref: '#/definitions/String'
         description: ' If <code>StorageEncrypted</code> is <code>true</code>, the AWS KMS key identifier for the encrypted DB instance. '
       DbiResourceId:
         $ref: '#/definitions/String'
         description: 'The AWS Region-unique, immutable identifier for the DB instance. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB instance is accessed.'
+      CACertificateIdentifier:
+        $ref: '#/definitions/String'
+        description: The identifier of the CA certificate for this DB instance.
       PromotionTier:
         $ref: '#/definitions/IntegerOptional'
         description: A value that specifies the order in which an Amazon DocumentDB replica is promoted to the primary instance after a failure of the existing primary instance.
@@ -6660,11 +6816,8 @@ definitions:
         description: Detailed information about one or more subnets within a DB subnet group.
       DBSubnetGroupArn:
         $ref: '#/definitions/String'
-        description: The Amazon Resource Identifier (ARN) for the DB subnet group.
+        description: The Amazon Resource Name (ARN) for the DB subnet group.
     description: 'Detailed information about a DB subnet group. '
-  TStamp:
-    type: string
-    format: date-time
   DBClusterMemberList:
     type: array
     items:
@@ -6927,6 +7080,21 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Filter'
+  DescribeCertificatesMessage:
+    type: object
+    properties:
+      CertificateIdentifier:
+        $ref: '#/definitions/String'
+        description: '<p>The user-supplied certificate identifier. If this parameter is specified, information for only the specified certificate is returned. If this parameter is omitted, a list of up to <code>MaxRecords</code> certificates is returned. This parameter is not case sensitive.</p> <p>Constraints</p> <ul> <li> <p>Must match an existing <code>CertificateIdentifier</code>.</p> </li> </ul>'
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: This parameter is not currently supported.
+      MaxRecords:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.</p> <p>Default: 100</p> <p>Constraints:</p> <ul> <li> <p>Minimum: 20</p> </li> <li> <p>Maximum: 100</p> </li> </ul>'
+      Marker:
+        $ref: '#/definitions/String'
+        description: 'An optional pagination token provided by a previous <code>DescribeCertificates</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
   DescribeDBClusterParameterGroupsMessage:
     type: object
     properties:
@@ -7309,7 +7477,7 @@ definitions:
         description: '<p>The port number on which the DB cluster accepts connections.</p> <p>Constraints: Must be a value from <code>1150</code> to <code>65535</code>. </p> <p>Default: The same port as the original DB cluster.</p>'
       MasterUserPassword:
         $ref: '#/definitions/String'
-        description: '<p>The password for the master database user. This password can contain any printable ASCII character except forward slash (/), double quote ("), or the "at" symbol (@).</p> <p>Constraints: Must contain from 8 to 41 characters.</p>'
+        description: '<p>The password for the master database user. This password can contain any printable ASCII character except forward slash (/), double quote ("), or the "at" symbol (@).</p> <p>Constraints: Must contain from 8 to 100 characters.</p>'
       PreferredBackupWindow:
         $ref: '#/definitions/String'
         description: '<p>The daily time range during which automated backups are created if automated backups are enabled, using the <code>BackupRetentionPeriod</code> parameter. </p> <p>The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region. </p> <p>Constraints:</p> <ul> <li> <p>Must be in the format <code>hh24:mi-hh24:mi</code>.</p> </li> <li> <p>Must be in Universal Coordinated Time (UTC).</p> </li> <li> <p>Must not conflict with the preferred maintenance window.</p> </li> <li> <p>Must be at least 30 minutes.</p> </li> </ul>'
@@ -7381,6 +7549,9 @@ definitions:
       NewDBInstanceIdentifier:
         $ref: '#/definitions/String'
         description: '<p> The new DB instance identifier for the DB instance when renaming a DB instance. When you change the DB instance identifier, an instance reboot occurs immediately if you set <code>Apply Immediately</code> to <code>true</code>. It occurs during the next maintenance window if you set <code>Apply Immediately</code> to <code>false</code>. This value is stored as a lowercase string. </p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p>Example: <code>mydbinstance</code> </p>'
+      CACertificateIdentifier:
+        $ref: '#/definitions/String'
+        description: Indicates the certificate that needs to be associated with the instance.
       PromotionTier:
         $ref: '#/definitions/IntegerOptional'
         description: '<p>A value that specifies the order in which an Amazon DocumentDB replica is promoted to the primary instance after a failure of the existing primary instance.</p> <p>Default: 1</p> <p>Valid values: 0-15</p>'

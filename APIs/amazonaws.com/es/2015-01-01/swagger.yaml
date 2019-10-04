@@ -3,7 +3,7 @@ info:
   version: '2015-01-01'
   x-release: v4
   title: Amazon Elasticsearch Service
-  description: '<fullname>Amazon Elasticsearch Configuration Service</fullname> <p>Use the Amazon Elasticsearch configuration API to create, configure, and manage Elasticsearch domains.</p> <p>The endpoint for configuration service requests is region-specific: es.<i>region</i>.amazonaws.com. For example, es.us-east-1.amazonaws.com. For a current list of supported regions and endpoints, see <a href="http://docs.aws.amazon.com/general/latest/gr/rande.html#elasticsearch-service-regions" target="_blank">Regions and Endpoints</a>.</p>'
+  description: '<fullname>Amazon Elasticsearch Configuration Service</fullname> <p>Use the Amazon Elasticsearch Configuration API to create, configure, and manage Elasticsearch domains.</p> <p>For sample code that uses the Configuration API, see the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-configuration-samples.html">Amazon Elasticsearch Service Developer Guide</a>. The guide also contains <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-request-signing.html">sample code for sending signed HTTP requests to the Elasticsearch APIs</a>.</p> <p>The endpoint for configuration service requests is region-specific: es.<i>region</i>.amazonaws.com. For example, es.us-east-1.amazonaws.com. For a current list of supported regions and endpoints, see <a href="http://docs.aws.amazon.com/general/latest/gr/rande.html#elasticsearch-service-regions" target="_blank">Regions and Endpoints</a>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -415,6 +415,16 @@ paths:
                 type: object
                 additionalProperties:
                   $ref: '#/definitions/LogPublishingOption'
+              DomainEndpointOptions:
+                description: Options to configure endpoint for the Elasticsearch domain.
+                type: object
+                properties:
+                  EnforceHTTPS:
+                    $ref: '#/definitions/Boolean'
+                    description: Specify if only HTTPS endpoint should be enabled for the Elasticsearch domain.
+                  TLSSecurityPolicy:
+                    $ref: '#/definitions/TLSSecurityPolicy'
+                    description: 'Specify the TLS security policy that needs to be applied to the HTTPS endpoint of Elasticsearch domain. <br/> It can be one of the following values: <ul> <li><b>Policy-Min-TLS-1-0-2019-07: </b> TLS security policy which supports TLSv1.0 and higher.</li> <li><b>Policy-Min-TLS-1-2-2019-07: </b> TLS security policy which supports only TLSv1.2</li> </ul> '
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -701,6 +711,16 @@ paths:
                 type: object
                 additionalProperties:
                   $ref: '#/definitions/LogPublishingOption'
+              DomainEndpointOptions:
+                description: Options to configure endpoint for the Elasticsearch domain.
+                type: object
+                properties:
+                  EnforceHTTPS:
+                    $ref: '#/definitions/Boolean'
+                    description: Specify if only HTTPS endpoint should be enabled for the Elasticsearch domain.
+                  TLSSecurityPolicy:
+                    $ref: '#/definitions/TLSSecurityPolicy'
+                    description: 'Specify the TLS security policy that needs to be applied to the HTTPS endpoint of Elasticsearch domain. <br/> It can be one of the following values: <ul> <li><b>Policy-Min-TLS-1-0-2019-07: </b> TLS security policy which supports TLSv1.0 and higher.</li> <li><b>Policy-Min-TLS-1-2-2019-07: </b> TLS security policy which supports only TLSv1.2</li> </ul> '
   /2015-01-01/es/domain-info:
     post:
       operationId: DescribeElasticsearchDomains
@@ -1692,6 +1712,11 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: ' Specifies whether given log publishing option is enabled or not.'
     description: 'Log Publishing option that is set for given domain. <br/>Attributes and their details: <ul> <li>CloudWatchLogsLogGroupArn: ARN of the Cloudwatch log group to which log needs to be published.</li> <li>Enabled: Whether the log publishing for given log type is enabled or not</li> </ul> '
+  TLSSecurityPolicy:
+    type: string
+    enum:
+      - Policy-Min-TLS-1-0-2019-07
+      - Policy-Min-TLS-1-2-2019-07
   DisabledOperationException: {}
   InvalidTypeException: {}
   ResourceAlreadyExistsException: {}
@@ -2124,6 +2149,16 @@ definitions:
     type: object
     additionalProperties:
       $ref: '#/definitions/LogPublishingOption'
+  DomainEndpointOptions:
+    type: object
+    properties:
+      EnforceHTTPS:
+        $ref: '#/definitions/Boolean'
+        description: Specify if only HTTPS endpoint should be enabled for the Elasticsearch domain.
+      TLSSecurityPolicy:
+        $ref: '#/definitions/TLSSecurityPolicy'
+        description: 'Specify the TLS security policy that needs to be applied to the HTTPS endpoint of Elasticsearch domain. <br/> It can be one of the following values: <ul> <li><b>Policy-Min-TLS-1-0-2019-07: </b> TLS security policy which supports TLSv1.0 and higher.</li> <li><b>Policy-Min-TLS-1-2-2019-07: </b> TLS security policy which supports only TLSv1.2</li> </ul> '
+    description: Options to configure endpoint for the Elasticsearch domain.
   CreateElasticsearchDomainRequest:
     type: object
     required:
@@ -2131,7 +2166,7 @@ definitions:
     properties:
       DomainName:
         $ref: '#/definitions/DomainName'
-        description: 'The name of the Elasticsearch domain that you are creating. Domain names are unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+        description: 'The name of the Elasticsearch domain that you are creating. Domain names are unique across the domains owned by an account within an AWS region. Domain names must start with a lowercase letter and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
       ElasticsearchVersion:
         $ref: '#/definitions/ElasticsearchVersionString'
         description: 'String of format X.Y to specify version for the Elasticsearch domain eg. "1.5" or "2.3". For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomains" target="_blank">Creating Elasticsearch Domains</a> in the <i>Amazon Elasticsearch Service Developer Guide</i>.'
@@ -2165,6 +2200,9 @@ definitions:
       LogPublishingOptions:
         $ref: '#/definitions/LogPublishingOptions'
         description: 'Map of <code>LogType</code> and <code>LogPublishingOption</code>, each containing options to publish a given type of Elasticsearch log.'
+      DomainEndpointOptions:
+        $ref: '#/definitions/DomainEndpointOptions'
+        description: Options to specify configuration that will be applied to the domain endpoint.
   ElasticsearchDomainStatus:
     type: object
     required:
@@ -2235,6 +2273,9 @@ definitions:
       ServiceSoftwareOptions:
         $ref: '#/definitions/ServiceSoftwareOptions'
         description: The current status of the Elasticsearch domain's service software.
+      DomainEndpointOptions:
+        $ref: '#/definitions/DomainEndpointOptions'
+        description: The current status of the Elasticsearch domain's endpoint options.
     description: The current status of an Elasticsearch domain.
   DeleteElasticsearchDomainRequest:
     type: object
@@ -2291,6 +2332,9 @@ definitions:
       LogPublishingOptions:
         $ref: '#/definitions/LogPublishingOptionsStatus'
         description: Log publishing options for the given domain.
+      DomainEndpointOptions:
+        $ref: '#/definitions/DomainEndpointOptionsStatus'
+        description: Specifies the <code>DomainEndpointOptions</code> for the Elasticsearch domain.
     description: The configuration of an Elasticsearch domain.
   DescribeElasticsearchDomainRequest:
     type: object
@@ -2350,6 +2394,19 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ReservedElasticsearchInstance'
+  DomainEndpointOptionsStatus:
+    type: object
+    required:
+      - Options
+      - Status
+    properties:
+      Options:
+        $ref: '#/definitions/DomainEndpointOptions'
+        description: Options to configure endpoint for the Elasticsearch domain.
+      Status:
+        $ref: '#/definitions/OptionStatus'
+        description: 'The status of the endpoint options for the Elasticsearch domain. See <code>OptionStatus</code> for the status information that''s included. '
+    description: The configured endpoint options for the domain and their current status.
   DomainId:
     type: string
     description: Unique identifier for an Elasticsearch domain.
@@ -2817,6 +2874,9 @@ definitions:
       LogPublishingOptions:
         $ref: '#/definitions/LogPublishingOptions'
         description: 'Map of <code>LogType</code> and <code>LogPublishingOption</code>, each containing options to publish a given type of Elasticsearch log.'
+      DomainEndpointOptions:
+        $ref: '#/definitions/DomainEndpointOptions'
+        description: Options to specify configuration that will be applied to the domain endpoint.
     description: Container for the parameters to the <code><a>UpdateElasticsearchDomain</a></code> operation. Specifies the type and number of instances in the domain cluster.
   UpgradeElasticsearchDomainRequest:
     type: object

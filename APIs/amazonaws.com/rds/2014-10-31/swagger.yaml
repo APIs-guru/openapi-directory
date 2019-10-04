@@ -1720,6 +1720,10 @@ paths:
           description: InvalidGlobalClusterStateFault
           schema:
             $ref: '#/definitions/InvalidGlobalClusterStateFault'
+        '497':
+          description: DomainNotFoundFault
+          schema:
+            $ref: '#/definitions/DomainNotFoundFault'
       parameters:
         - name: AvailabilityZones
           in: query
@@ -2006,6 +2010,10 @@ paths:
           description: InvalidGlobalClusterStateFault
           schema:
             $ref: '#/definitions/InvalidGlobalClusterStateFault'
+        '497':
+          description: DomainNotFoundFault
+          schema:
+            $ref: '#/definitions/DomainNotFoundFault'
       parameters:
         - name: AvailabilityZones
           in: formData
@@ -2857,7 +2865,7 @@ paths:
         - name: Domain
           in: query
           required: false
-          description: 'For an Amazon RDS DB instance that''s running Microsoft SQL Server, this parameter specifies the Active Directory directory ID to create the instance in. Amazon RDS uses Windows Authentication to authenticate users that connect to the DB instance. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/DeveloperGuide/USER_SQLServerWinAuth.html">Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL Server</a> in the <i>Amazon RDS User Guide</i>. '
+          description: '<p>The Active Directory directory ID to create the DB instance in. Currently, only Microsoft SQL Server and Oracle DB instances can be created in an Active Directory Domain.</p> <p>For Microsoft SQL Server DB instances, Amazon RDS can use Windows Authentication to authenticate users that connect to the DB instance. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html"> Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL Server</a> in the <i>Amazon RDS User Guide</i>.</p> <p>For Oracle DB instance, Amazon RDS can use Kerberos Authentication to authenticate users that connect to the DB instance. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html"> Using Kerberos Authentication with Amazon RDS for Oracle</a> in the <i>Amazon RDS User Guide</i>.</p> <p/>'
           type: string
         - name: CopyTagsToSnapshot
           in: query
@@ -3203,7 +3211,7 @@ paths:
         - name: Domain
           in: formData
           required: false
-          description: 'For an Amazon RDS DB instance that''s running Microsoft SQL Server, this parameter specifies the Active Directory directory ID to create the instance in. Amazon RDS uses Windows Authentication to authenticate users that connect to the DB instance. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/DeveloperGuide/USER_SQLServerWinAuth.html">Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL Server</a> in the <i>Amazon RDS User Guide</i>. '
+          description: '<p>The Active Directory directory ID to create the DB instance in. Currently, only Microsoft SQL Server and Oracle DB instances can be created in an Active Directory Domain.</p> <p>For Microsoft SQL Server DB instances, Amazon RDS can use Windows Authentication to authenticate users that connect to the DB instance. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html"> Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL Server</a> in the <i>Amazon RDS User Guide</i>.</p> <p>For Oracle DB instance, Amazon RDS can use Kerberos Authentication to authenticate users that connect to the DB instance. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html"> Using Kerberos Authentication with Amazon RDS for Oracle</a> in the <i>Amazon RDS User Guide</i>.</p> <p/>'
           type: string
         - name: CopyTagsToSnapshot
           in: formData
@@ -3373,6 +3381,10 @@ paths:
           description: KMSKeyNotAccessibleFault
           schema:
             $ref: '#/definitions/KMSKeyNotAccessibleFault'
+        '498':
+          description: DomainNotFoundFault
+          schema:
+            $ref: '#/definitions/DomainNotFoundFault'
       parameters:
         - name: DBInstanceIdentifier
           in: query
@@ -3522,6 +3534,16 @@ paths:
           required: false
           description: 'A value that indicates whether the DB instance has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. By default, deletion protection is disabled. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html"> Deleting a DB Instance</a>. '
           type: boolean
+        - name: Domain
+          in: query
+          required: false
+          description: '<p>The Active Directory directory ID to create the DB instance in.</p> <p>For Oracle DB instances, Amazon RDS can use Kerberos Authentication to authenticate users that connect to the DB instance. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html"> Using Kerberos Authentication with Amazon RDS for Oracle</a> in the <i>Amazon RDS User Guide</i>.</p>'
+          type: string
+        - name: DomainIAMRoleName
+          in: query
+          required: false
+          description: Specify the name of the IAM role to be used when making API calls to the Directory Service.
+          type: string
         - name: SourceRegion
           in: query
           required: false
@@ -3628,6 +3650,10 @@ paths:
           description: KMSKeyNotAccessibleFault
           schema:
             $ref: '#/definitions/KMSKeyNotAccessibleFault'
+        '498':
+          description: DomainNotFoundFault
+          schema:
+            $ref: '#/definitions/DomainNotFoundFault'
       parameters:
         - name: DBInstanceIdentifier
           in: formData
@@ -3777,6 +3803,16 @@ paths:
           required: false
           description: 'A value that indicates whether the DB instance has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. By default, deletion protection is disabled. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html"> Deleting a DB Instance</a>. '
           type: boolean
+        - name: Domain
+          in: formData
+          required: false
+          description: '<p>The Active Directory directory ID to create the DB instance in.</p> <p>For Oracle DB instances, Amazon RDS can use Kerberos Authentication to authenticate users that connect to the DB instance. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html"> Using Kerberos Authentication with Amazon RDS for Oracle</a> in the <i>Amazon RDS User Guide</i>.</p>'
+          type: string
+        - name: DomainIAMRoleName
+          in: formData
+          required: false
+          description: Specify the name of the IAM role to be used when making API calls to the Directory Service.
+          type: string
         - name: SourceRegion
           in: formData
           required: false
@@ -7118,7 +7154,7 @@ paths:
         - name: Filters
           in: query
           required: false
-          description: '<p>A filter that specifies one or more DB instances to describe.</p> <p>Supported filters:</p> <ul> <li> <p> <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB instances associated with the DB clusters identified by these ARNs.</p> </li> <li> <p> <code>db-instance-id</code> - Accepts DB instance identifiers and DB instance Amazon Resource Names (ARNs). The results list will only include information about the DB instances identified by these ARNs.</p> </li> <li> <p> <code>dbi-resource-id</code> - Accepts DB instance resource identifiers. The results list will only include information about the DB instances identified by these resource identifiers.</p> </li> </ul>'
+          description: '<p>A filter that specifies one or more DB instances to describe.</p> <p>Supported filters:</p> <ul> <li> <p> <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB instances associated with the DB clusters identified by these ARNs.</p> </li> <li> <p> <code>db-instance-id</code> - Accepts DB instance identifiers and DB instance Amazon Resource Names (ARNs). The results list will only include information about the DB instances identified by these ARNs.</p> </li> <li> <p> <code>dbi-resource-id</code> - Accepts DB instance resource identifiers. The results list will only include information about the DB instances identified by these DB instance resource identifiers.</p> </li> <li> <p> <code>domain</code> - Accepts Active Directory directory IDs. The results list will only include information about the DB instances associated with these domains.</p> </li> <li> <p> <code>engine</code> - Accepts engine names. The results list will only include information about the DB instances for these engines.</p> </li> </ul>'
           type: array
           items:
             type: string
@@ -7174,7 +7210,7 @@ paths:
         - name: Filters
           in: formData
           required: false
-          description: '<p>A filter that specifies one or more DB instances to describe.</p> <p>Supported filters:</p> <ul> <li> <p> <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB instances associated with the DB clusters identified by these ARNs.</p> </li> <li> <p> <code>db-instance-id</code> - Accepts DB instance identifiers and DB instance Amazon Resource Names (ARNs). The results list will only include information about the DB instances identified by these ARNs.</p> </li> <li> <p> <code>dbi-resource-id</code> - Accepts DB instance resource identifiers. The results list will only include information about the DB instances identified by these resource identifiers.</p> </li> </ul>'
+          description: '<p>A filter that specifies one or more DB instances to describe.</p> <p>Supported filters:</p> <ul> <li> <p> <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB instances associated with the DB clusters identified by these ARNs.</p> </li> <li> <p> <code>db-instance-id</code> - Accepts DB instance identifiers and DB instance Amazon Resource Names (ARNs). The results list will only include information about the DB instances identified by these ARNs.</p> </li> <li> <p> <code>dbi-resource-id</code> - Accepts DB instance resource identifiers. The results list will only include information about the DB instances identified by these DB instance resource identifiers.</p> </li> <li> <p> <code>domain</code> - Accepts Active Directory directory IDs. The results list will only include information about the DB instances associated with these domains.</p> </li> <li> <p> <code>engine</code> - Accepts engine names. The results list will only include information about the DB instances for these engines.</p> </li> </ul>'
           type: array
           items:
             type: string
@@ -10099,6 +10135,10 @@ paths:
           description: DBClusterAlreadyExistsFault
           schema:
             $ref: '#/definitions/DBClusterAlreadyExistsFault'
+        '491':
+          description: DomainNotFoundFault
+          schema:
+            $ref: '#/definitions/DomainNotFoundFault'
       parameters:
         - name: DBClusterIdentifier
           in: query
@@ -10316,6 +10356,10 @@ paths:
           description: DBClusterAlreadyExistsFault
           schema:
             $ref: '#/definitions/DBClusterAlreadyExistsFault'
+        '491':
+          description: DomainNotFoundFault
+          schema:
+            $ref: '#/definitions/DomainNotFoundFault'
       parameters:
         - name: DBClusterIdentifier
           in: formData
@@ -11037,7 +11081,7 @@ paths:
         - name: Domain
           in: query
           required: false
-          description: 'The Active Directory Domain to move the instance to. Specify <code>none</code> to remove the instance from its current domain. The domain must be created prior to this operation. Currently only a Microsoft SQL Server instance can be created in a Active Directory Domain. '
+          description: '<p>The Active Directory directory ID to move the DB instance to. Specify <code>none</code> to remove the instance from its current domain. The domain must be created prior to this operation. Currently, only Microsoft SQL Server and Oracle DB instances can be created in an Active Directory Domain. </p> <p>For Microsoft SQL Server DB instances, Amazon RDS can use Windows Authentication to authenticate users that connect to the DB instance. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html"> Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL Server</a> in the <i>Amazon RDS User Guide</i>.</p> <p>For Oracle DB instances, Amazon RDS can use Kerberos Authentication to authenticate users that connect to the DB instance. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html"> Using Kerberos Authentication with Amazon RDS for Oracle</a> in the <i>Amazon RDS User Guide</i>.</p>'
           type: string
         - name: CopyTagsToSnapshot
           in: query
@@ -11357,7 +11401,7 @@ paths:
         - name: Domain
           in: formData
           required: false
-          description: 'The Active Directory Domain to move the instance to. Specify <code>none</code> to remove the instance from its current domain. The domain must be created prior to this operation. Currently only a Microsoft SQL Server instance can be created in a Active Directory Domain. '
+          description: '<p>The Active Directory directory ID to move the DB instance to. Specify <code>none</code> to remove the instance from its current domain. The domain must be created prior to this operation. Currently, only Microsoft SQL Server and Oracle DB instances can be created in an Active Directory Domain. </p> <p>For Microsoft SQL Server DB instances, Amazon RDS can use Windows Authentication to authenticate users that connect to the DB instance. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html"> Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL Server</a> in the <i>Amazon RDS User Guide</i>.</p> <p>For Oracle DB instances, Amazon RDS can use Kerberos Authentication to authenticate users that connect to the DB instance. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html"> Using Kerberos Authentication with Amazon RDS for Oracle</a> in the <i>Amazon RDS User Guide</i>.</p>'
           type: string
         - name: CopyTagsToSnapshot
           in: formData
@@ -13413,6 +13457,10 @@ paths:
           schema:
             $ref: '#/definitions/DBClusterNotFoundFault'
         '492':
+          description: DomainNotFoundFault
+          schema:
+            $ref: '#/definitions/DomainNotFoundFault'
+        '493':
           description: InsufficientStorageClusterCapacityFault
           schema:
             $ref: '#/definitions/InsufficientStorageClusterCapacityFault'
@@ -13648,6 +13696,10 @@ paths:
           schema:
             $ref: '#/definitions/DBClusterNotFoundFault'
         '492':
+          description: DomainNotFoundFault
+          schema:
+            $ref: '#/definitions/DomainNotFoundFault'
+        '493':
           description: InsufficientStorageClusterCapacityFault
           schema:
             $ref: '#/definitions/InsufficientStorageClusterCapacityFault'
@@ -13896,6 +13948,10 @@ paths:
           schema:
             $ref: '#/definitions/KMSKeyNotAccessibleFault'
         '497':
+          description: DomainNotFoundFault
+          schema:
+            $ref: '#/definitions/DomainNotFoundFault'
+        '498':
           description: DBClusterParameterGroupNotFoundFault
           schema:
             $ref: '#/definitions/DBClusterParameterGroupNotFoundFault'
@@ -14131,6 +14187,10 @@ paths:
           schema:
             $ref: '#/definitions/KMSKeyNotAccessibleFault'
         '497':
+          description: DomainNotFoundFault
+          schema:
+            $ref: '#/definitions/DomainNotFoundFault'
+        '498':
           description: DBClusterParameterGroupNotFoundFault
           schema:
             $ref: '#/definitions/DBClusterParameterGroupNotFoundFault'
@@ -14355,6 +14415,10 @@ paths:
           schema:
             $ref: '#/definitions/StorageQuotaExceededFault'
         '496':
+          description: DomainNotFoundFault
+          schema:
+            $ref: '#/definitions/DomainNotFoundFault'
+        '497':
           description: DBClusterParameterGroupNotFoundFault
           schema:
             $ref: '#/definitions/DBClusterParameterGroupNotFoundFault'
@@ -14545,6 +14609,10 @@ paths:
           schema:
             $ref: '#/definitions/StorageQuotaExceededFault'
         '496':
+          description: DomainNotFoundFault
+          schema:
+            $ref: '#/definitions/DomainNotFoundFault'
+        '497':
           description: DBClusterParameterGroupNotFoundFault
           schema:
             $ref: '#/definitions/DBClusterParameterGroupNotFoundFault'
@@ -14846,7 +14914,7 @@ paths:
         - name: Domain
           in: query
           required: false
-          description: Specify the Active Directory Domain to restore the instance in.
+          description: '<p>Specify the Active Directory directory ID to restore the DB instance in. The domain must be created prior to this operation. Currently, only Microsoft SQL Server and Oracle DB instances can be created in an Active Directory Domain. </p> <p>For Microsoft SQL Server DB instances, Amazon RDS can use Windows Authentication to authenticate users that connect to the DB instance. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html"> Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL Server</a> in the <i>Amazon RDS User Guide</i>.</p> <p>For Oracle DB instances, Amazon RDS can use Kerberos Authentication to authenticate users that connect to the DB instance. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html"> Using Kerberos Authentication with Amazon RDS for Oracle</a> in the <i>Amazon RDS User Guide</i>.</p>'
           type: string
         - name: CopyTagsToSnapshot
           in: query
@@ -15104,7 +15172,7 @@ paths:
         - name: Domain
           in: formData
           required: false
-          description: Specify the Active Directory Domain to restore the instance in.
+          description: '<p>Specify the Active Directory directory ID to restore the DB instance in. The domain must be created prior to this operation. Currently, only Microsoft SQL Server and Oracle DB instances can be created in an Active Directory Domain. </p> <p>For Microsoft SQL Server DB instances, Amazon RDS can use Windows Authentication to authenticate users that connect to the DB instance. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html"> Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL Server</a> in the <i>Amazon RDS User Guide</i>.</p> <p>For Oracle DB instances, Amazon RDS can use Kerberos Authentication to authenticate users that connect to the DB instance. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html"> Using Kerberos Authentication with Amazon RDS for Oracle</a> in the <i>Amazon RDS User Guide</i>.</p>'
           type: string
         - name: CopyTagsToSnapshot
           in: formData
@@ -16018,7 +16086,7 @@ paths:
         - name: Domain
           in: query
           required: false
-          description: Specify the Active Directory Domain to restore the instance in.
+          description: '<p>Specify the Active Directory directory ID to restore the DB instance in. The domain must be created prior to this operation. Currently, only Microsoft SQL Server and Oracle DB instances can be created in an Active Directory Domain. </p> <p>For Microsoft SQL Server DB instances, Amazon RDS can use Windows Authentication to authenticate users that connect to the DB instance. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html"> Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL Server</a> in the <i>Amazon RDS User Guide</i>.</p> <p>For Oracle DB instances, Amazon RDS can use Kerberos Authentication to authenticate users that connect to the DB instance. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html"> Using Kerberos Authentication with Amazon RDS for Oracle</a> in the <i>Amazon RDS User Guide</i>.</p>'
           type: string
         - name: DomainIAMRoleName
           in: query
@@ -16300,7 +16368,7 @@ paths:
         - name: Domain
           in: formData
           required: false
-          description: Specify the Active Directory Domain to restore the instance in.
+          description: '<p>Specify the Active Directory directory ID to restore the DB instance in. The domain must be created prior to this operation. Currently, only Microsoft SQL Server and Oracle DB instances can be created in an Active Directory Domain. </p> <p>For Microsoft SQL Server DB instances, Amazon RDS can use Windows Authentication to authenticate users that connect to the DB instance. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html"> Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL Server</a> in the <i>Amazon RDS User Guide</i>.</p> <p>For Oracle DB instances, Amazon RDS can use Kerberos Authentication to authenticate users that connect to the DB instance. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html"> Using Kerberos Authentication with Amazon RDS for Oracle</a> in the <i>Amazon RDS User Guide</i>.</p>'
           type: string
         - name: DomainIAMRoleName
           in: formData
@@ -17308,6 +17376,7 @@ definitions:
   DBSubnetGroupDoesNotCoverEnoughAZs: {}
   GlobalClusterNotFoundFault: {}
   InvalidGlobalClusterStateFault: {}
+  DomainNotFoundFault: {}
   DBClusterEndpoint:
     type: object
     properties:
@@ -17375,7 +17444,6 @@ definitions:
   ProvisionedIopsNotAvailableInAZFault: {}
   StorageTypeNotSupportedFault: {}
   AuthorizationNotFoundFault: {}
-  DomainNotFoundFault: {}
   BackupPolicyNotFoundFault: {}
   CreateDBInstanceReadReplicaResult:
     type: object
@@ -19174,7 +19242,7 @@ definitions:
         description: '<p>The AWS KMS key identifier for an encrypted DB instance.</p> <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are creating a DB instance with the same AWS account that owns the KMS encryption key used to encrypt the new DB instance, then you can use the KMS key alias instead of the ARN for the KM encryption key.</p> <p> <b>Amazon Aurora</b> </p> <p>Not applicable. The KMS key identifier is managed by the DB cluster. For more information, see <code>CreateDBCluster</code>.</p> <p>If <code>StorageEncrypted</code> is enabled, and you do not specify a value for the <code>KmsKeyId</code> parameter, then Amazon RDS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.</p>'
       Domain:
         $ref: '#/definitions/String'
-        description: 'For an Amazon RDS DB instance that''s running Microsoft SQL Server, this parameter specifies the Active Directory directory ID to create the instance in. Amazon RDS uses Windows Authentication to authenticate users that connect to the DB instance. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/DeveloperGuide/USER_SQLServerWinAuth.html">Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL Server</a> in the <i>Amazon RDS User Guide</i>. '
+        description: '<p>The Active Directory directory ID to create the DB instance in. Currently, only Microsoft SQL Server and Oracle DB instances can be created in an Active Directory Domain.</p> <p>For Microsoft SQL Server DB instances, Amazon RDS can use Windows Authentication to authenticate users that connect to the DB instance. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html"> Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL Server</a> in the <i>Amazon RDS User Guide</i>.</p> <p>For Oracle DB instance, Amazon RDS can use Kerberos Authentication to authenticate users that connect to the DB instance. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html"> Using Kerberos Authentication with Amazon RDS for Oracle</a> in the <i>Amazon RDS User Guide</i>.</p> <p/>'
       CopyTagsToSnapshot:
         $ref: '#/definitions/BooleanOptional'
         description: '<p>A value that indicates whether to copy tags from the DB instance to snapshots of the DB instance. By default, tags are not copied.</p> <p> <b>Amazon Aurora</b> </p> <p>Not applicable. Copying tags to snapshots is managed by the DB cluster. Setting this value for an Aurora DB instance has no effect on the DB cluster setting.</p>'
@@ -19307,6 +19375,12 @@ definitions:
       DeletionProtection:
         $ref: '#/definitions/BooleanOptional'
         description: 'A value that indicates whether the DB instance has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. By default, deletion protection is disabled. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html"> Deleting a DB Instance</a>. '
+      Domain:
+        $ref: '#/definitions/String'
+        description: '<p>The Active Directory directory ID to create the DB instance in.</p> <p>For Oracle DB instances, Amazon RDS can use Kerberos Authentication to authenticate users that connect to the DB instance. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html"> Using Kerberos Authentication with Amazon RDS for Oracle</a> in the <i>Amazon RDS User Guide</i>.</p>'
+      DomainIAMRoleName:
+        $ref: '#/definitions/String'
+        description: Specify the name of the IAM role to be used when making API calls to the Directory Service.
       SourceRegion:
         $ref: '#/definitions/String'
         description: The ID of the region that contains the source for the read replica.
@@ -20535,7 +20609,7 @@ definitions:
         description: '<p>The user-supplied instance identifier. If this parameter is specified, information from only the specific DB instance is returned. This parameter isn''t case-sensitive.</p> <p>Constraints:</p> <ul> <li> <p>If supplied, must match the identifier of an existing DBInstance.</p> </li> </ul>'
       Filters:
         $ref: '#/definitions/FilterList'
-        description: '<p>A filter that specifies one or more DB instances to describe.</p> <p>Supported filters:</p> <ul> <li> <p> <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB instances associated with the DB clusters identified by these ARNs.</p> </li> <li> <p> <code>db-instance-id</code> - Accepts DB instance identifiers and DB instance Amazon Resource Names (ARNs). The results list will only include information about the DB instances identified by these ARNs.</p> </li> <li> <p> <code>dbi-resource-id</code> - Accepts DB instance resource identifiers. The results list will only include information about the DB instances identified by these resource identifiers.</p> </li> </ul>'
+        description: '<p>A filter that specifies one or more DB instances to describe.</p> <p>Supported filters:</p> <ul> <li> <p> <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB instances associated with the DB clusters identified by these ARNs.</p> </li> <li> <p> <code>db-instance-id</code> - Accepts DB instance identifiers and DB instance Amazon Resource Names (ARNs). The results list will only include information about the DB instances identified by these ARNs.</p> </li> <li> <p> <code>dbi-resource-id</code> - Accepts DB instance resource identifiers. The results list will only include information about the DB instances identified by these DB instance resource identifiers.</p> </li> <li> <p> <code>domain</code> - Accepts Active Directory directory IDs. The results list will only include information about the DB instances associated with these domains.</p> </li> <li> <p> <code>engine</code> - Accepts engine names. The results list will only include information about the DB instances for these engines.</p> </li> </ul>'
       MaxRecords:
         $ref: '#/definitions/IntegerOptional'
         description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
@@ -21427,7 +21501,7 @@ definitions:
         description: Indicates the certificate that needs to be associated with the instance.
       Domain:
         $ref: '#/definitions/String'
-        description: 'The Active Directory Domain to move the instance to. Specify <code>none</code> to remove the instance from its current domain. The domain must be created prior to this operation. Currently only a Microsoft SQL Server instance can be created in a Active Directory Domain. '
+        description: '<p>The Active Directory directory ID to move the DB instance to. Specify <code>none</code> to remove the instance from its current domain. The domain must be created prior to this operation. Currently, only Microsoft SQL Server and Oracle DB instances can be created in an Active Directory Domain. </p> <p>For Microsoft SQL Server DB instances, Amazon RDS can use Windows Authentication to authenticate users that connect to the DB instance. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html"> Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL Server</a> in the <i>Amazon RDS User Guide</i>.</p> <p>For Oracle DB instances, Amazon RDS can use Kerberos Authentication to authenticate users that connect to the DB instance. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html"> Using Kerberos Authentication with Amazon RDS for Oracle</a> in the <i>Amazon RDS User Guide</i>.</p>'
       CopyTagsToSnapshot:
         $ref: '#/definitions/BooleanOptional'
         description: '<p>A value that indicates whether to copy all tags from the DB instance to snapshots of the DB instance. By default, tags are not copied.</p> <p> <b>Amazon Aurora</b> </p> <p>Not applicable. Copying tags to snapshots is managed by the DB cluster. Setting this value for an Aurora DB instance has no effect on the DB cluster setting. For more information, see <code>ModifyDBCluster</code>.</p>'
@@ -21869,6 +21943,9 @@ definitions:
       SupportsStorageAutoscaling:
         $ref: '#/definitions/BooleanOptional'
         description: Whether or not Amazon RDS can automatically scale storage for DB instances that use the specified instance class.
+      SupportsKerberosAuthentication:
+        $ref: '#/definitions/BooleanOptional'
+        description: Whether a DB instance supports Kerberos Authentication.
     description: <p>Contains a list of available options for a DB instance.</p> <p> This data type is used as a response element in the <code>DescribeOrderableDBInstanceOptions</code> action. </p>
   OrderableDBInstanceOptionsList:
     type: array
@@ -22475,7 +22552,7 @@ definitions:
         description: '<p> A list of EC2 VPC security groups to associate with this DB instance. </p> <p> Default: The default EC2 VPC security group for the DB subnet group''s VPC. </p>'
       Domain:
         $ref: '#/definitions/String'
-        description: Specify the Active Directory Domain to restore the instance in.
+        description: '<p>Specify the Active Directory directory ID to restore the DB instance in. The domain must be created prior to this operation. Currently, only Microsoft SQL Server and Oracle DB instances can be created in an Active Directory Domain. </p> <p>For Microsoft SQL Server DB instances, Amazon RDS can use Windows Authentication to authenticate users that connect to the DB instance. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html"> Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL Server</a> in the <i>Amazon RDS User Guide</i>.</p> <p>For Oracle DB instances, Amazon RDS can use Kerberos Authentication to authenticate users that connect to the DB instance. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html"> Using Kerberos Authentication with Amazon RDS for Oracle</a> in the <i>Amazon RDS User Guide</i>.</p>'
       CopyTagsToSnapshot:
         $ref: '#/definitions/BooleanOptional'
         description: 'A value that indicates whether to copy all tags from the restored DB instance to snapshots of the DB instance. By default, tags are not copied.'
@@ -22713,7 +22790,7 @@ definitions:
         description: '<p> A list of EC2 VPC security groups to associate with this DB instance. </p> <p> Default: The default EC2 VPC security group for the DB subnet group''s VPC. </p>'
       Domain:
         $ref: '#/definitions/String'
-        description: Specify the Active Directory Domain to restore the instance in.
+        description: '<p>Specify the Active Directory directory ID to restore the DB instance in. The domain must be created prior to this operation. Currently, only Microsoft SQL Server and Oracle DB instances can be created in an Active Directory Domain. </p> <p>For Microsoft SQL Server DB instances, Amazon RDS can use Windows Authentication to authenticate users that connect to the DB instance. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html"> Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL Server</a> in the <i>Amazon RDS User Guide</i>.</p> <p>For Oracle DB instances, Amazon RDS can use Kerberos Authentication to authenticate users that connect to the DB instance. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html"> Using Kerberos Authentication with Amazon RDS for Oracle</a> in the <i>Amazon RDS User Guide</i>.</p>'
       DomainIAMRoleName:
         $ref: '#/definitions/String'
         description: Specify the name of the IAM role to be used when making API calls to the Directory Service.

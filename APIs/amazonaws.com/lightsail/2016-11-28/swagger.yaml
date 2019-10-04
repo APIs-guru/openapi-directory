@@ -220,7 +220,7 @@ paths:
   '/#X-Amz-Target=Lightsail_20161128.AttachDisk':
     post:
       operationId: AttachDisk
-      description: '<p>Attaches a block storage disk to a running or stopped Lightsail instance and exposes it to the instance with the specified disk name.</p> <p>The <code>attach disk</code> operation supports tag-based access control via resource tags applied to the resource identified by diskName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
+      description: '<p>Attaches a block storage disk to a running or stopped Lightsail instance and exposes it to the instance with the specified disk name.</p> <p>The <code>attach disk</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>disk name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -277,7 +277,7 @@ paths:
   '/#X-Amz-Target=Lightsail_20161128.AttachInstancesToLoadBalancer':
     post:
       operationId: AttachInstancesToLoadBalancer
-      description: '<p>Attaches one or more Lightsail instances to a load balancer.</p> <p>After some time, the instances are attached to the load balancer and the health check status is available.</p> <p>The <code>attach instances to load balancer</code> operation supports tag-based access control via resource tags applied to the resource identified by loadBalancerName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
+      description: '<p>Attaches one or more Lightsail instances to a load balancer.</p> <p>After some time, the instances are attached to the load balancer and the health check status is available.</p> <p>The <code>attach instances to load balancer</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>load balancer name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -334,7 +334,7 @@ paths:
   '/#X-Amz-Target=Lightsail_20161128.AttachLoadBalancerTlsCertificate':
     post:
       operationId: AttachLoadBalancerTlsCertificate
-      description: '<p>Attaches a Transport Layer Security (TLS) certificate to your load balancer. TLS is just an updated, more secure version of Secure Socket Layer (SSL).</p> <p>Once you create and validate your certificate, you can attach it to your load balancer. You can also use this API to rotate the certificates on your account. Use the <code>AttachLoadBalancerTlsCertificate</code> operation with the non-attached certificate, and it will replace the existing one and become the attached certificate.</p> <p>The <code>attach load balancer tls certificate</code> operation supports tag-based access control via resource tags applied to the resource identified by loadBalancerName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
+      description: '<p>Attaches a Transport Layer Security (TLS) certificate to your load balancer. TLS is just an updated, more secure version of Secure Socket Layer (SSL).</p> <p>Once you create and validate your certificate, you can attach it to your load balancer. You can also use this API to rotate the certificates on your account. Use the <code>attach load balancer tls certificate</code> operation with the non-attached certificate, and it will replace the existing one and become the attached certificate.</p> <p>The <code>attach load balancer tls certificate</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>load balancer name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -448,7 +448,7 @@ paths:
   '/#X-Amz-Target=Lightsail_20161128.CloseInstancePublicPorts':
     post:
       operationId: CloseInstancePublicPorts
-      description: '<p>Closes the public ports on a specific Amazon Lightsail instance.</p> <p>The <code>close instance public ports</code> operation supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
+      description: '<p>Closes the public ports on a specific Amazon Lightsail instance.</p> <p>The <code>close instance public ports</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>instance name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -505,7 +505,7 @@ paths:
   '/#X-Amz-Target=Lightsail_20161128.CopySnapshot':
     post:
       operationId: CopySnapshot
-      description: Copies an instance or disk snapshot from one AWS Region to another in Amazon Lightsail.
+      description: '<p>Copies a manual instance or disk snapshot as another manual snapshot, or copies an automatic instance or disk snapshot as a manual snapshot. This operation can also be used to copy a manual or automatic snapshot of an instance or a disk from one AWS Region to another in Amazon Lightsail.</p> <p>When copying a <i>manual snapshot</i>, be sure to define the <code>source region</code>, <code>source snapshot name</code>, and <code>target snapshot name</code> parameters.</p> <p>When copying an <i>automatic snapshot</i>, be sure to define the <code>source region</code>, <code>source resource name</code>, <code>target snapshot name</code>, and either the <code>restore date</code> or the <code>use latest restorable auto snapshot</code> parameters.</p> <note> <p>Database snapshots cannot be copied at this time.</p> </note>'
       responses:
         '200':
           description: Success
@@ -619,7 +619,7 @@ paths:
   '/#X-Amz-Target=Lightsail_20161128.CreateDisk':
     post:
       operationId: CreateDisk
-      description: '<p>Creates a block storage disk that can be attached to a Lightsail instance in the same Availability Zone (e.g., <code>us-east-2a</code>). The disk is created in the regional endpoint that you send the HTTP request to. For more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/overview/article/understanding-regions-and-availability-zones-in-amazon-lightsail">Regions and Availability Zones in Lightsail</a>.</p> <p>The <code>create disk</code> operation supports tag-based access control via request tags. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
+      description: '<p>Creates a block storage disk that can be attached to an Amazon Lightsail instance in the same Availability Zone (e.g., <code>us-east-2a</code>).</p> <p>The <code>create disk</code> operation supports tag-based access control via request tags. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -676,7 +676,7 @@ paths:
   '/#X-Amz-Target=Lightsail_20161128.CreateDiskFromSnapshot':
     post:
       operationId: CreateDiskFromSnapshot
-      description: '<p>Creates a block storage disk from a disk snapshot that can be attached to a Lightsail instance in the same Availability Zone (e.g., <code>us-east-2a</code>). The disk is created in the regional endpoint that you send the HTTP request to. For more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/overview/article/understanding-regions-and-availability-zones-in-amazon-lightsail">Regions and Availability Zones in Lightsail</a>.</p> <p>The <code>create disk from snapshot</code> operation supports tag-based access control via request tags and resource tags applied to the resource identified by diskSnapshotName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
+      description: '<p>Creates a block storage disk from a manual or automatic snapshot of a disk. The resulting disk can be attached to an Amazon Lightsail instance in the same Availability Zone (e.g., <code>us-east-2a</code>).</p> <p>The <code>create disk from snapshot</code> operation supports tag-based access control via request tags and resource tags applied to the resource identified by <code>disk snapshot name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -847,7 +847,7 @@ paths:
   '/#X-Amz-Target=Lightsail_20161128.CreateDomainEntry':
     post:
       operationId: CreateDomainEntry
-      description: '<p>Creates one of the following entry records associated with the domain: Address (A), canonical name (CNAME), mail exchanger (MX), name server (NS), start of authority (SOA), service locator (SRV), or text (TXT).</p> <p>The <code>create domain entry</code> operation supports tag-based access control via resource tags applied to the resource identified by domainName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
+      description: '<p>Creates one of the following entry records associated with the domain: Address (A), canonical name (CNAME), mail exchanger (MX), name server (NS), start of authority (SOA), service locator (SRV), or text (TXT).</p> <p>The <code>create domain entry</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>domain name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -961,7 +961,7 @@ paths:
   '/#X-Amz-Target=Lightsail_20161128.CreateInstances':
     post:
       operationId: CreateInstances
-      description: '<p>Creates one or more Amazon Lightsail virtual private servers, or <i>instances</i>. Create instances using active blueprints. Inactive blueprints are listed to support customers with existing instances but are not necessarily available for launch of new instances. Blueprints are marked inactive when they become outdated due to operating system updates or new application releases. Use the get blueprints operation to return a list of available blueprints.</p> <p>The <code>create instances</code> operation supports tag-based access control via request tags. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
+      description: '<p>Creates one or more Amazon Lightsail instances.</p> <p>The <code>create instances</code> operation supports tag-based access control via request tags. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1018,7 +1018,7 @@ paths:
   '/#X-Amz-Target=Lightsail_20161128.CreateInstancesFromSnapshot':
     post:
       operationId: CreateInstancesFromSnapshot
-      description: '<p>Uses a specific snapshot as a blueprint for creating one or more new instances that are based on that identical configuration.</p> <p>The <code>create instances from snapshot</code> operation supports tag-based access control via request tags and resource tags applied to the resource identified by instanceSnapshotName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
+      description: '<p>Creates one or more new instances from a manual or automatic snapshot of an instance.</p> <p>The <code>create instances from snapshot</code> operation supports tag-based access control via request tags and resource tags applied to the resource identified by <code>instance snapshot name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1189,7 +1189,7 @@ paths:
   '/#X-Amz-Target=Lightsail_20161128.CreateLoadBalancerTlsCertificate':
     post:
       operationId: CreateLoadBalancerTlsCertificate
-      description: '<p>Creates a Lightsail load balancer TLS certificate.</p> <p>TLS is just an updated, more secure version of Secure Socket Layer (SSL).</p> <p>The <code>create load balancer tls certificate</code> operation supports tag-based access control via resource tags applied to the resource identified by loadBalancerName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
+      description: '<p>Creates a Lightsail load balancer TLS certificate.</p> <p>TLS is just an updated, more secure version of Secure Socket Layer (SSL).</p> <p>The <code>create load balancer tls certificate</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>load balancer name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1414,10 +1414,63 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=Lightsail_20161128.DeleteAutoSnapshot':
+    post:
+      operationId: DeleteAutoSnapshot
+      description: Deletes an automatic snapshot for an instance or disk.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteAutoSnapshotResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteAutoSnapshotRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Lightsail_20161128.DeleteAutoSnapshot
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=Lightsail_20161128.DeleteDisk':
     post:
       operationId: DeleteDisk
-      description: '<p>Deletes the specified block storage disk. The disk must be in the <code>available</code> state (not attached to a Lightsail instance).</p> <note> <p>The disk may remain in the <code>deleting</code> state for several minutes.</p> </note> <p>The <code>delete disk</code> operation supports tag-based access control via resource tags applied to the resource identified by diskName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
+      description: '<p>Deletes the specified block storage disk. The disk must be in the <code>available</code> state (not attached to a Lightsail instance).</p> <note> <p>The disk may remain in the <code>deleting</code> state for several minutes.</p> </note> <p>The <code>delete disk</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>disk name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1474,7 +1527,7 @@ paths:
   '/#X-Amz-Target=Lightsail_20161128.DeleteDiskSnapshot':
     post:
       operationId: DeleteDiskSnapshot
-      description: '<p>Deletes the specified disk snapshot.</p> <p>When you make periodic snapshots of a disk, the snapshots are incremental, and only the blocks on the device that have changed since your last snapshot are saved in the new snapshot. When you delete a snapshot, only the data not needed for any other snapshot is removed. So regardless of which prior snapshots have been deleted, all active snapshots will have access to all the information needed to restore the disk.</p> <p>The <code>delete disk snapshot</code> operation supports tag-based access control via resource tags applied to the resource identified by diskSnapshotName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
+      description: '<p>Deletes the specified disk snapshot.</p> <p>When you make periodic snapshots of a disk, the snapshots are incremental, and only the blocks on the device that have changed since your last snapshot are saved in the new snapshot. When you delete a snapshot, only the data not needed for any other snapshot is removed. So regardless of which prior snapshots have been deleted, all active snapshots will have access to all the information needed to restore the disk.</p> <p>The <code>delete disk snapshot</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>disk snapshot name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1531,7 +1584,7 @@ paths:
   '/#X-Amz-Target=Lightsail_20161128.DeleteDomain':
     post:
       operationId: DeleteDomain
-      description: '<p>Deletes the specified domain recordset and all of its domain records.</p> <p>The <code>delete domain</code> operation supports tag-based access control via resource tags applied to the resource identified by domainName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
+      description: '<p>Deletes the specified domain recordset and all of its domain records.</p> <p>The <code>delete domain</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>domain name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1588,7 +1641,7 @@ paths:
   '/#X-Amz-Target=Lightsail_20161128.DeleteDomainEntry':
     post:
       operationId: DeleteDomainEntry
-      description: '<p>Deletes a specific domain entry.</p> <p>The <code>delete domain entry</code> operation supports tag-based access control via resource tags applied to the resource identified by domainName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
+      description: '<p>Deletes a specific domain entry.</p> <p>The <code>delete domain entry</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>domain name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1645,7 +1698,7 @@ paths:
   '/#X-Amz-Target=Lightsail_20161128.DeleteInstance':
     post:
       operationId: DeleteInstance
-      description: '<p>Deletes a specific Amazon Lightsail virtual private server, or <i>instance</i>.</p> <p>The <code>delete instance</code> operation supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
+      description: '<p>Deletes an Amazon Lightsail instance.</p> <p>The <code>delete instance</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>instance name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1702,7 +1755,7 @@ paths:
   '/#X-Amz-Target=Lightsail_20161128.DeleteInstanceSnapshot':
     post:
       operationId: DeleteInstanceSnapshot
-      description: '<p>Deletes a specific snapshot of a virtual private server (or <i>instance</i>).</p> <p>The <code>delete instance snapshot</code> operation supports tag-based access control via resource tags applied to the resource identified by instanceSnapshotName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
+      description: '<p>Deletes a specific snapshot of a virtual private server (or <i>instance</i>).</p> <p>The <code>delete instance snapshot</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>instance snapshot name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1759,7 +1812,7 @@ paths:
   '/#X-Amz-Target=Lightsail_20161128.DeleteKeyPair':
     post:
       operationId: DeleteKeyPair
-      description: '<p>Deletes a specific SSH key pair.</p> <p>The <code>delete key pair</code> operation supports tag-based access control via resource tags applied to the resource identified by keyPairName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
+      description: '<p>Deletes a specific SSH key pair.</p> <p>The <code>delete key pair</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>key pair name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1873,7 +1926,7 @@ paths:
   '/#X-Amz-Target=Lightsail_20161128.DeleteLoadBalancer':
     post:
       operationId: DeleteLoadBalancer
-      description: '<p>Deletes a Lightsail load balancer and all its associated SSL/TLS certificates. Once the load balancer is deleted, you will need to create a new load balancer, create a new certificate, and verify domain ownership again.</p> <p>The <code>delete load balancer</code> operation supports tag-based access control via resource tags applied to the resource identified by loadBalancerName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
+      description: '<p>Deletes a Lightsail load balancer and all its associated SSL/TLS certificates. Once the load balancer is deleted, you will need to create a new load balancer, create a new certificate, and verify domain ownership again.</p> <p>The <code>delete load balancer</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>load balancer name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1930,7 +1983,7 @@ paths:
   '/#X-Amz-Target=Lightsail_20161128.DeleteLoadBalancerTlsCertificate':
     post:
       operationId: DeleteLoadBalancerTlsCertificate
-      description: '<p>Deletes an SSL/TLS certificate associated with a Lightsail load balancer.</p> <p>The <code>delete load balancer tls certificate</code> operation supports tag-based access control via resource tags applied to the resource identified by loadBalancerName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
+      description: '<p>Deletes an SSL/TLS certificate associated with a Lightsail load balancer.</p> <p>The <code>delete load balancer tls certificate</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>load balancer name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -2101,7 +2154,7 @@ paths:
   '/#X-Amz-Target=Lightsail_20161128.DetachDisk':
     post:
       operationId: DetachDisk
-      description: '<p>Detaches a stopped block storage disk from a Lightsail instance. Make sure to unmount any file systems on the device within your operating system before stopping the instance and detaching the disk.</p> <p>The <code>detach disk</code> operation supports tag-based access control via resource tags applied to the resource identified by diskName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
+      description: '<p>Detaches a stopped block storage disk from a Lightsail instance. Make sure to unmount any file systems on the device within your operating system before stopping the instance and detaching the disk.</p> <p>The <code>detach disk</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>disk name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -2158,7 +2211,7 @@ paths:
   '/#X-Amz-Target=Lightsail_20161128.DetachInstancesFromLoadBalancer':
     post:
       operationId: DetachInstancesFromLoadBalancer
-      description: '<p>Detaches the specified instances from a Lightsail load balancer.</p> <p>This operation waits until the instances are no longer needed before they are detached from the load balancer.</p> <p>The <code>detach instances from load balancer</code> operation supports tag-based access control via resource tags applied to the resource identified by loadBalancerName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
+      description: '<p>Detaches the specified instances from a Lightsail load balancer.</p> <p>This operation waits until the instances are no longer needed before they are detached from the load balancer.</p> <p>The <code>detach instances from load balancer</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>load balancer name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -2269,6 +2322,59 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=Lightsail_20161128.DisableAddOn':
+    post:
+      operationId: DisableAddOn
+      description: 'Disables an add-on for an Amazon Lightsail resource. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots">Lightsail Dev Guide</a>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DisableAddOnResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DisableAddOnRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Lightsail_20161128.DisableAddOn
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=Lightsail_20161128.DownloadDefaultKeyPair':
     post:
       operationId: DownloadDefaultKeyPair
@@ -2326,10 +2432,63 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=Lightsail_20161128.EnableAddOn':
+    post:
+      operationId: EnableAddOn
+      description: 'Enables or modifies an add-on for an Amazon Lightsail resource. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots">Lightsail Dev Guide</a>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/EnableAddOnResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/EnableAddOnRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Lightsail_20161128.EnableAddOn
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=Lightsail_20161128.ExportSnapshot':
     post:
       operationId: ExportSnapshot
-      description: '<p>Exports an Amazon Lightsail instance or block storage disk snapshot to Amazon Elastic Compute Cloud (Amazon EC2). This operation results in an export snapshot record that can be used with the <code>create cloud formation stack</code> operation to create new Amazon EC2 instances.</p> <p>Exported instance snapshots appear in Amazon EC2 as Amazon Machine Images (AMIs), and the instance system disk appears as an Amazon Elastic Block Store (Amazon EBS) volume. Exported disk snapshots appear in Amazon EC2 as Amazon EBS volumes. Snapshots are exported to the same Amazon Web Services Region in Amazon EC2 as the source Lightsail snapshot.</p> <p/> <p>The <code>export snapshot</code> operation supports tag-based access control via resource tags applied to the resource identified by sourceSnapshotName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p> <note> <p>Use the <code>get instance snapshots</code> or <code>get disk snapshots</code> operations to get a list of snapshots that you can export to Amazon EC2.</p> </note>'
+      description: '<p>Exports an Amazon Lightsail instance or block storage disk snapshot to Amazon Elastic Compute Cloud (Amazon EC2). This operation results in an export snapshot record that can be used with the <code>create cloud formation stack</code> operation to create new Amazon EC2 instances.</p> <p>Exported instance snapshots appear in Amazon EC2 as Amazon Machine Images (AMIs), and the instance system disk appears as an Amazon Elastic Block Store (Amazon EBS) volume. Exported disk snapshots appear in Amazon EC2 as Amazon EBS volumes. Snapshots are exported to the same Amazon Web Services Region in Amazon EC2 as the source Lightsail snapshot.</p> <p/> <p>The <code>export snapshot</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>source snapshot name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p> <note> <p>Use the <code>get instance snapshots</code> or <code>get disk snapshots</code> operations to get a list of snapshots that you can export to Amazon EC2.</p> </note>'
       responses:
         '200':
           description: Success
@@ -2440,10 +2599,63 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=Lightsail_20161128.GetAutoSnapshots':
+    post:
+      operationId: GetAutoSnapshots
+      description: 'Returns the available automatic snapshots for the specified resource name. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots">Lightsail Dev Guide</a>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetAutoSnapshotsResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetAutoSnapshotsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Lightsail_20161128.GetAutoSnapshots
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=Lightsail_20161128.GetBlueprints':
     post:
       operationId: GetBlueprints
-      description: 'Returns the list of available instance images, or <i>blueprints</i>. You can use a blueprint to create a new virtual private server already running a specific operating system, as well as a preinstalled app or development stack. The software each instance is running depends on the blueprint image you choose.'
+      description: '<p>Returns the list of available instance images, or <i>blueprints</i>. You can use a blueprint to create a new instance already running a specific operating system, as well as a preinstalled app or development stack. The software each instance is running depends on the blueprint image you choose.</p> <note> <p>Use active blueprints when creating new instances. Inactive blueprints are listed to support customers with existing instances and are not necessarily available to create new instances. Blueprints are marked inactive when they become outdated due to operating system updates or new application releases.</p> </note>'
       responses:
         '200':
           description: Success
@@ -3070,7 +3282,7 @@ paths:
   '/#X-Amz-Target=Lightsail_20161128.GetInstanceAccessDetails':
     post:
       operationId: GetInstanceAccessDetails
-      description: '<p>Returns temporary SSH keys you can use to connect to a specific virtual private server, or <i>instance</i>.</p> <p>The <code>get instance access details</code> operation supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
+      description: '<p>Returns temporary SSH keys you can use to connect to a specific virtual private server, or <i>instance</i>.</p> <p>The <code>get instance access details</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>instance name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -4381,7 +4593,7 @@ paths:
   '/#X-Amz-Target=Lightsail_20161128.GetRelationalDatabaseMasterUserPassword':
     post:
       operationId: GetRelationalDatabaseMasterUserPassword
-      description: '<p>Returns the current, previous, or pending versions of the master user password for a Lightsail database.</p> <p>The <code>asdf</code> operation GetRelationalDatabaseMasterUserPassword supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName.</p>'
+      description: '<p>Returns the current, previous, or pending versions of the master user password for a Lightsail database.</p> <p>The <code>GetRelationalDatabaseMasterUserPassword</code> operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName.</p>'
       responses:
         '200':
           description: Success
@@ -4951,7 +5163,7 @@ paths:
   '/#X-Amz-Target=Lightsail_20161128.OpenInstancePublicPorts':
     post:
       operationId: OpenInstancePublicPorts
-      description: '<p>Adds public ports to an Amazon Lightsail instance.</p> <p>The <code>open instance public ports</code> operation supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
+      description: '<p>Adds public ports to an Amazon Lightsail instance.</p> <p>The <code>open instance public ports</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>instance name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -5065,7 +5277,7 @@ paths:
   '/#X-Amz-Target=Lightsail_20161128.PutInstancePublicPorts':
     post:
       operationId: PutInstancePublicPorts
-      description: '<p>Sets the specified open ports for an Amazon Lightsail instance, and closes all ports for every protocol not included in the current request.</p> <p>The <code>put instance public ports</code> operation supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
+      description: '<p>Sets the specified open ports for an Amazon Lightsail instance, and closes all ports for every protocol not included in the current request.</p> <p>The <code>put instance public ports</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>instance name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -5122,7 +5334,7 @@ paths:
   '/#X-Amz-Target=Lightsail_20161128.RebootInstance':
     post:
       operationId: RebootInstance
-      description: '<p>Restarts a specific instance.</p> <p>The <code>reboot instance</code> operation supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
+      description: '<p>Restarts a specific instance.</p> <p>The <code>reboot instance</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>instance name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -5293,7 +5505,7 @@ paths:
   '/#X-Amz-Target=Lightsail_20161128.StartInstance':
     post:
       operationId: StartInstance
-      description: '<p>Starts a specific Amazon Lightsail instance from a stopped state. To restart an instance, use the <code>reboot instance</code> operation.</p> <note> <p>When you start a stopped instance, Lightsail assigns a new public IP address to the instance. To use the same IP address after stopping and starting an instance, create a static IP address and attach it to the instance. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/lightsail-create-static-ip">Lightsail Dev Guide</a>.</p> </note> <p>The <code>start instance</code> operation supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
+      description: '<p>Starts a specific Amazon Lightsail instance from a stopped state. To restart an instance, use the <code>reboot instance</code> operation.</p> <note> <p>When you start a stopped instance, Lightsail assigns a new public IP address to the instance. To use the same IP address after stopping and starting an instance, create a static IP address and attach it to the instance. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/lightsail-create-static-ip">Lightsail Dev Guide</a>.</p> </note> <p>The <code>start instance</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>instance name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -5407,7 +5619,7 @@ paths:
   '/#X-Amz-Target=Lightsail_20161128.StopInstance':
     post:
       operationId: StopInstance
-      description: '<p>Stops a specific Amazon Lightsail instance that is currently running.</p> <note> <p>When you start a stopped instance, Lightsail assigns a new public IP address to the instance. To use the same IP address after stopping and starting an instance, create a static IP address and attach it to the instance. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/lightsail-create-static-ip">Lightsail Dev Guide</a>.</p> </note> <p>The <code>stop instance</code> operation supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
+      description: '<p>Stops a specific Amazon Lightsail instance that is currently running.</p> <note> <p>When you start a stopped instance, Lightsail assigns a new public IP address to the instance. To use the same IP address after stopping and starting an instance, create a static IP address and attach it to the instance. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/lightsail-create-static-ip">Lightsail Dev Guide</a>.</p> </note> <p>The <code>stop instance</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>instance name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -5521,7 +5733,7 @@ paths:
   '/#X-Amz-Target=Lightsail_20161128.TagResource':
     post:
       operationId: TagResource
-      description: '<p>Adds one or more tags to the specified Amazon Lightsail resource. Each resource can have a maximum of 50 tags. Each tag consists of a key and an optional value. Tag keys must be unique per resource. For more information about tags, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags">Lightsail Dev Guide</a>.</p> <p>The <code>tag resource</code> operation supports tag-based access control via request tags and resource tags applied to the resource identified by resourceName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
+      description: '<p>Adds one or more tags to the specified Amazon Lightsail resource. Each resource can have a maximum of 50 tags. Each tag consists of a key and an optional value. Tag keys must be unique per resource. For more information about tags, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags">Lightsail Dev Guide</a>.</p> <p>The <code>tag resource</code> operation supports tag-based access control via request tags and resource tags applied to the resource identified by <code>resource name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -5635,7 +5847,7 @@ paths:
   '/#X-Amz-Target=Lightsail_20161128.UntagResource':
     post:
       operationId: UntagResource
-      description: '<p>Deletes the specified set of tag keys and their values from the specified Amazon Lightsail resource.</p> <p>The <code>untag resource</code> operation supports tag-based access control via request tags and resource tags applied to the resource identified by resourceName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
+      description: '<p>Deletes the specified set of tag keys and their values from the specified Amazon Lightsail resource.</p> <p>The <code>untag resource</code> operation supports tag-based access control via request tags and resource tags applied to the resource identified by <code>resource name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -5692,7 +5904,7 @@ paths:
   '/#X-Amz-Target=Lightsail_20161128.UpdateDomainEntry':
     post:
       operationId: UpdateDomainEntry
-      description: '<p>Updates a domain recordset after it is created.</p> <p>The <code>update domain entry</code> operation supports tag-based access control via resource tags applied to the resource identified by domainName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
+      description: '<p>Updates a domain recordset after it is created.</p> <p>The <code>update domain entry</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>domain name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -5749,7 +5961,7 @@ paths:
   '/#X-Amz-Target=Lightsail_20161128.UpdateLoadBalancerAttribute':
     post:
       operationId: UpdateLoadBalancerAttribute
-      description: '<p>Updates the specified attribute for a load balancer. You can only update one attribute at a time.</p> <p>The <code>update load balancer attribute</code> operation supports tag-based access control via resource tags applied to the resource identified by loadBalancerName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
+      description: '<p>Updates the specified attribute for a load balancer. You can only update one attribute at a time.</p> <p>The <code>update load balancer attribute</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>load balancer name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -6042,19 +6254,27 @@ definitions:
   CopySnapshotRequest:
     type: object
     required:
-      - sourceSnapshotName
       - targetSnapshotName
       - sourceRegion
     properties:
       sourceSnapshotName:
         $ref: '#/definitions/ResourceName'
-        description: The name of the source instance or disk snapshot to be copied.
+        description: <p>The name of the source instance or disk snapshot to be copied.</p> <note> <p>Define this parameter only when copying a manual snapshot as another manual snapshot.</p> </note>
+      sourceResourceName:
+        $ref: '#/definitions/string'
+        description: '<p>The name of the source resource from which the automatic snapshot was created.</p> <note> <p>Define this parameter only when copying an automatic snapshot as a manual snapshot. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots">Lightsail Dev Guide</a>.</p> </note>'
+      restoreDate:
+        $ref: '#/definitions/string'
+        description: '<p>The date of the automatic snapshot to copy for the new manual snapshot.</p> <p>Use the <code>get auto snapshots</code> operation to identify the dates of the available automatic snapshots.</p> <p>Constraints:</p> <ul> <li> <p>Must be specified in <code>YYYY-MM-DD</code> format.</p> </li> <li> <p>This parameter cannot be defined together with the <code>use latest restorable auto snapshot</code> parameter. The <code>restore date</code> and <code>use latest restorable auto snapshot</code> parameters are mutually exclusive.</p> </li> </ul> <note> <p>Define this parameter only when copying an automatic snapshot as a manual snapshot. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots">Lightsail Dev Guide</a>.</p> </note>'
+      useLatestRestorableAutoSnapshot:
+        $ref: '#/definitions/boolean'
+        description: '<p>A Boolean value to indicate whether to use the latest available automatic snapshot.</p> <p>This parameter cannot be defined together with the <code>restore date</code> parameter. The <code>use latest restorable auto snapshot</code> and <code>restore date</code> parameters are mutually exclusive.</p> <note> <p>Define this parameter only when copying an automatic snapshot as a manual snapshot. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots">Lightsail Dev Guide</a>.</p> </note>'
       targetSnapshotName:
         $ref: '#/definitions/ResourceName'
         description: The name of the new instance or disk snapshot to be created as a copy.
       sourceRegion:
         $ref: '#/definitions/RegionName'
-        description: The AWS Region where the source snapshot is located.
+        description: The AWS Region where the source manual or automatic snapshot is located.
   CreateCloudFormationStackResult:
     type: object
     properties:
@@ -6087,13 +6307,16 @@ definitions:
         description: 'The unique Lightsail disk name (e.g., <code>my-disk</code>).'
       availabilityZone:
         $ref: '#/definitions/NonEmptyString'
-        description: '<p>The Availability Zone where you want to create the disk (e.g., <code>us-east-2a</code>). Choose the same Availability Zone as the Lightsail instance where you want to create the disk.</p> <p>Use the GetRegions operation to list the Availability Zones where Lightsail is currently available.</p>'
+        description: '<p>The Availability Zone where you want to create the disk (e.g., <code>us-east-2a</code>). Use the same Availability Zone as the Lightsail instance to which you want to attach the disk.</p> <p>Use the <code>get regions</code> operation to list the Availability Zones where Lightsail is currently available.</p>'
       sizeInGb:
         $ref: '#/definitions/integer'
         description: 'The size of the disk in GB (e.g., <code>32</code>).'
       tags:
         $ref: '#/definitions/TagList'
         description: '<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>'
+      addOns:
+        $ref: '#/definitions/AddOnRequestList'
+        description: An array of objects that represent the add-ons to enable for the new disk.
   CreateDiskFromSnapshotResult:
     type: object
     properties:
@@ -6104,7 +6327,6 @@ definitions:
     type: object
     required:
       - diskName
-      - diskSnapshotName
       - availabilityZone
       - sizeInGb
     properties:
@@ -6113,7 +6335,7 @@ definitions:
         description: 'The unique Lightsail disk name (e.g., <code>my-disk</code>).'
       diskSnapshotName:
         $ref: '#/definitions/ResourceName'
-        description: 'The name of the disk snapshot (e.g., <code>my-snapshot</code>) from which to create the new storage disk.'
+        description: '<p>The name of the disk snapshot (e.g., <code>my-snapshot</code>) from which to create the new storage disk.</p> <p>This parameter cannot be defined together with the <code>source disk name</code> parameter. The <code>disk snapshot name</code> and <code>source disk name</code> parameters are mutually exclusive.</p>'
       availabilityZone:
         $ref: '#/definitions/NonEmptyString'
         description: '<p>The Availability Zone where you want to create the disk (e.g., <code>us-east-2a</code>). Choose the same Availability Zone as the Lightsail instance where you want to create the disk.</p> <p>Use the GetRegions operation to list the Availability Zones where Lightsail is currently available.</p>'
@@ -6123,6 +6345,18 @@ definitions:
       tags:
         $ref: '#/definitions/TagList'
         description: '<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>'
+      addOns:
+        $ref: '#/definitions/AddOnRequestList'
+        description: An array of objects that represent the add-ons to enable for the new disk.
+      sourceDiskName:
+        $ref: '#/definitions/string'
+        description: '<p>The name of the source disk from which the source automatic snapshot was created.</p> <p>This parameter cannot be defined together with the <code>disk snapshot name</code> parameter. The <code>source disk name</code> and <code>disk snapshot name</code> parameters are mutually exclusive.</p> <note> <p>Define this parameter only when creating a new disk from an automatic snapshot. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots">Lightsail Dev Guide</a>.</p> </note>'
+      restoreDate:
+        $ref: '#/definitions/string'
+        description: '<p>The date of the automatic snapshot to use for the new disk.</p> <p>Use the <code>get auto snapshots</code> operation to identify the dates of the available automatic snapshots.</p> <p>Constraints:</p> <ul> <li> <p>Must be specified in <code>YYYY-MM-DD</code> format.</p> </li> <li> <p>This parameter cannot be defined together with the <code>use latest restorable auto snapshot</code> parameter. The <code>restore date</code> and <code>use latest restorable auto snapshot</code> parameters are mutually exclusive.</p> </li> </ul> <note> <p>Define this parameter only when creating a new disk from an automatic snapshot. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots">Lightsail Dev Guide</a>.</p> </note>'
+      useLatestRestorableAutoSnapshot:
+        $ref: '#/definitions/boolean'
+        description: '<p>A Boolean value to indicate whether to use the latest available automatic snapshot.</p> <p>This parameter cannot be defined together with the <code>restore date</code> parameter. The <code>use latest restorable auto snapshot</code> and <code>restore date</code> parameters are mutually exclusive.</p> <note> <p>Define this parameter only when creating a new disk from an automatic snapshot. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots">Lightsail Dev Guide</a>.</p> </note>'
   CreateDiskSnapshotResult:
     type: object
     properties:
@@ -6227,7 +6461,7 @@ definitions:
         description: '<p>(Deprecated) The name for your custom image.</p> <note> <p>In releases prior to June 12, 2017, this parameter was ignored by the API. It is now deprecated.</p> </note>'
       blueprintId:
         $ref: '#/definitions/NonEmptyString'
-        description: 'The ID for a virtual private server image (e.g., <code>app_wordpress_4_4</code> or <code>app_lamp_7_0</code>). Use the get blueprints operation to return a list of available images (or <i>blueprints</i>).'
+        description: '<p>The ID for a virtual private server image (e.g., <code>app_wordpress_4_4</code> or <code>app_lamp_7_0</code>). Use the <code>get blueprints</code> operation to return a list of available images (or <i>blueprints</i>).</p> <note> <p>Use active blueprints when creating new instances. Inactive blueprints are listed to support customers with existing instances and are not necessarily available to create new instances. Blueprints are marked inactive when they become outdated due to operating system updates or new application releases.</p> </note>'
       bundleId:
         $ref: '#/definitions/NonEmptyString'
         description: 'The bundle of specification information for your virtual private server (or <i>instance</i>), including the pricing plan (e.g., <code>micro_1_0</code>).'
@@ -6240,6 +6474,9 @@ definitions:
       tags:
         $ref: '#/definitions/TagList'
         description: '<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>'
+      addOns:
+        $ref: '#/definitions/AddOnRequestList'
+        description: An array of objects representing the add-ons to enable for the new instance.
   CreateInstancesFromSnapshotResult:
     type: object
     properties:
@@ -6251,7 +6488,6 @@ definitions:
     required:
       - instanceNames
       - availabilityZone
-      - instanceSnapshotName
       - bundleId
     properties:
       instanceNames:
@@ -6265,7 +6501,7 @@ definitions:
         description: 'The Availability Zone where you want to create your instances. Use the following formatting: <code>us-east-2a</code> (case sensitive). You can get a list of Availability Zones by using the <a href="http://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRegions.html">get regions</a> operation. Be sure to add the <code>include Availability Zones</code> parameter to your request.'
       instanceSnapshotName:
         $ref: '#/definitions/ResourceName'
-        description: The name of the instance snapshot on which you are basing your new instances. Use the get instance snapshots operation to return information about your existing snapshots.
+        description: <p>The name of the instance snapshot on which you are basing your new instances. Use the get instance snapshots operation to return information about your existing snapshots.</p> <p>This parameter cannot be defined together with the <code>source instance name</code> parameter. The <code>instance snapshot name</code> and <code>source instance name</code> parameters are mutually exclusive.</p>
       bundleId:
         $ref: '#/definitions/NonEmptyString'
         description: 'The bundle of specification information for your virtual private server (or <i>instance</i>), including the pricing plan (e.g., <code>micro_1_0</code>).'
@@ -6278,6 +6514,18 @@ definitions:
       tags:
         $ref: '#/definitions/TagList'
         description: '<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>'
+      addOns:
+        $ref: '#/definitions/AddOnRequestList'
+        description: An array of objects representing the add-ons to enable for the new instance.
+      sourceInstanceName:
+        $ref: '#/definitions/string'
+        description: '<p>The name of the source instance from which the source automatic snapshot was created.</p> <p>This parameter cannot be defined together with the <code>instance snapshot name</code> parameter. The <code>source instance name</code> and <code>instance snapshot name</code> parameters are mutually exclusive.</p> <note> <p>Define this parameter only when creating a new instance from an automatic snapshot. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots">Lightsail Dev Guide</a>.</p> </note>'
+      restoreDate:
+        $ref: '#/definitions/string'
+        description: '<p>The date of the automatic snapshot to use for the new instance.</p> <p>Use the <code>get auto snapshots</code> operation to identify the dates of the available automatic snapshots.</p> <p>Constraints:</p> <ul> <li> <p>Must be specified in <code>YYYY-MM-DD</code> format.</p> </li> <li> <p>This parameter cannot be defined together with the <code>use latest restorable auto snapshot</code> parameter. The <code>restore date</code> and <code>use latest restorable auto snapshot</code> parameters are mutually exclusive.</p> </li> </ul> <note> <p>Define this parameter only when creating a new instance from an automatic snapshot. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots">Lightsail Dev Guide</a>.</p> </note>'
+      useLatestRestorableAutoSnapshot:
+        $ref: '#/definitions/boolean'
+        description: '<p>A Boolean value to indicate whether to use the latest available automatic snapshot.</p> <p>This parameter cannot be defined together with the <code>restore date</code> parameter. The <code>use latest restorable auto snapshot</code> and <code>restore date</code> parameters are mutually exclusive.</p> <note> <p>Define this parameter only when creating a new instance from an automatic snapshot. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots">Lightsail Dev Guide</a>.</p> </note>'
   CreateKeyPairResult:
     type: object
     properties:
@@ -6403,10 +6651,10 @@ definitions:
         description: '<p>The password for the master user of your new database. The password can include any printable ASCII character except "/", """, or "@".</p> <p>Constraints: Must contain 8 to 41 characters.</p>'
       preferredBackupWindow:
         $ref: '#/definitions/string'
-        description: '<p>The daily time range during which automated backups are created for your new database if automated backups are enabled.</p> <p>The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region. For more information about the preferred backup window time blocks for each region, see the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupWindow">Working With Backups</a> guide in the Amazon Relational Database Service (Amazon RDS) documentation.</p> <p>Constraints:</p> <ul> <li> <p>Must be in the <code>hh24:mi-hh24:mi</code> format.</p> <p>Example: <code>16:00-16:30</code> </p> </li> <li> <p>Specified in Universal Coordinated Time (UTC).</p> </li> <li> <p>Must not conflict with the preferred maintenance window.</p> </li> <li> <p>Must be at least 30 minutes.</p> </li> </ul>'
+        description: '<p>The daily time range during which automated backups are created for your new database if automated backups are enabled.</p> <p>The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region. For more information about the preferred backup window time blocks for each region, see the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupWindow">Working With Backups</a> guide in the Amazon Relational Database Service (Amazon RDS) documentation.</p> <p>Constraints:</p> <ul> <li> <p>Must be in the <code>hh24:mi-hh24:mi</code> format.</p> <p>Example: <code>16:00-16:30</code> </p> </li> <li> <p>Specified in Coordinated Universal Time (UTC).</p> </li> <li> <p>Must not conflict with the preferred maintenance window.</p> </li> <li> <p>Must be at least 30 minutes.</p> </li> </ul>'
       preferredMaintenanceWindow:
         $ref: '#/definitions/string'
-        description: '<p>The weekly time range during which system maintenance can occur on your new database.</p> <p>The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week.</p> <p>Constraints:</p> <ul> <li> <p>Must be in the <code>ddd:hh24:mi-ddd:hh24:mi</code> format.</p> </li> <li> <p>Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.</p> </li> <li> <p>Must be at least 30 minutes.</p> </li> <li> <p>Specified in Universal Coordinated Time (UTC).</p> </li> <li> <p>Example: <code>Tue:17:00-Tue:17:30</code> </p> </li> </ul>'
+        description: '<p>The weekly time range during which system maintenance can occur on your new database.</p> <p>The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week.</p> <p>Constraints:</p> <ul> <li> <p>Must be in the <code>ddd:hh24:mi-ddd:hh24:mi</code> format.</p> </li> <li> <p>Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.</p> </li> <li> <p>Must be at least 30 minutes.</p> </li> <li> <p>Specified in Coordinated Universal Time (UTC).</p> </li> <li> <p>Example: <code>Tue:17:00-Tue:17:30</code> </p> </li> </ul>'
       publiclyAccessible:
         $ref: '#/definitions/boolean'
         description: Specifies the accessibility options for your new database. A value of <code>true</code> specifies a database that is available to resources outside of your Lightsail account. A value of <code>false</code> specifies a database that is available only to your Lightsail resources in the same region as your database.
@@ -6444,7 +6692,7 @@ definitions:
         description: The name of the source database.
       restoreTime:
         $ref: '#/definitions/IsoDate'
-        description: '<p>The date and time to restore your database from.</p> <p>Constraints:</p> <ul> <li> <p>Must be before the latest restorable time for the database.</p> </li> <li> <p>Cannot be specified if the <code>use latest restorable time</code> parameter is <code>true</code>.</p> </li> <li> <p>Specified in Universal Coordinated Time (UTC).</p> </li> <li> <p>Specified in the Unix time format.</p> <p>For example, if you wish to use a restore time of October 1, 2018, at 8 PM UTC, then you input <code>1538424000</code> as the restore time.</p> </li> </ul>'
+        description: '<p>The date and time to restore your database from.</p> <p>Constraints:</p> <ul> <li> <p>Must be before the latest restorable time for the database.</p> </li> <li> <p>Cannot be specified if the <code>use latest restorable time</code> parameter is <code>true</code>.</p> </li> <li> <p>Specified in Coordinated Universal Time (UTC).</p> </li> <li> <p>Specified in the Unix time format.</p> <p>For example, if you wish to use a restore time of October 1, 2018, at 8 PM UTC, then you input <code>1538424000</code> as the restore time.</p> </li> </ul>'
       useLatestRestorableTime:
         $ref: '#/definitions/boolean'
         description: '<p>Specifies whether your database is restored from the latest backup time. A value of <code>true</code> restores from the latest backup time. </p> <p>Default: <code>false</code> </p> <p>Constraints: Cannot be specified if the <code>restore time</code> parameter is provided.</p>'
@@ -6472,12 +6720,30 @@ definitions:
       tags:
         $ref: '#/definitions/TagList'
         description: '<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>'
+  DeleteAutoSnapshotResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An array of objects that describe the result of your request.
+  DeleteAutoSnapshotRequest:
+    type: object
+    required:
+      - resourceName
+      - date
+    properties:
+      resourceName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the source resource from which to delete the automatic snapshot.
+      date:
+        $ref: '#/definitions/AutoSnapshotDate'
+        description: <p>The date of the automatic snapshot to delete in <code>YYYY-MM-DD</code> format.</p> <p>Use the <code>get auto snapshots</code> operation to get the available automatic snapshots for a resource.</p>
   DeleteDiskResult:
     type: object
     properties:
       operations:
         $ref: '#/definitions/OperationList'
-        description: An object describing the API operations.
+        description: An array of objects that describe the result of your request.
   DeleteDiskRequest:
     type: object
     required:
@@ -6486,6 +6752,9 @@ definitions:
       diskName:
         $ref: '#/definitions/ResourceName'
         description: 'The unique name of the disk you want to delete (e.g., <code>my-disk</code>).'
+      forceDeleteAddOns:
+        $ref: '#/definitions/boolean'
+        description: A Boolean value to indicate whether to delete the enabled add-ons for the disk.
   DeleteDiskSnapshotResult:
     type: object
     properties:
@@ -6546,6 +6815,9 @@ definitions:
       instanceName:
         $ref: '#/definitions/ResourceName'
         description: The name of the instance to delete.
+      forceDeleteAddOns:
+        $ref: '#/definitions/boolean'
+        description: A Boolean value to indicate whether to delete the enabled add-ons for the disk.
   DeleteInstanceSnapshotResult:
     type: object
     properties:
@@ -6703,6 +6975,24 @@ definitions:
       staticIpName:
         $ref: '#/definitions/ResourceName'
         description: The name of the static IP to detach from the instance.
+  DisableAddOnResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An array of objects that describe the result of your request.
+  DisableAddOnRequest:
+    type: object
+    required:
+      - addOnType
+      - resourceName
+    properties:
+      addOnType:
+        $ref: '#/definitions/AddOnType'
+        description: The add-on type to disable.
+      resourceName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the source resource from which to disable the add-on.
   DownloadDefaultKeyPairResult:
     type: object
     properties:
@@ -6715,6 +7005,24 @@ definitions:
   DownloadDefaultKeyPairRequest:
     type: object
     properties: {}
+  EnableAddOnResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An array of objects that describe the result of your request.
+  EnableAddOnRequest:
+    type: object
+    required:
+      - resourceName
+      - addOnRequest
+    properties:
+      resourceName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the source resource for which to enable or modify the add-on.
+      addOnRequest:
+        $ref: '#/definitions/AddOnRequest'
+        description: An array of strings representing the add-on to enable or modify.
   ExportSnapshotResult:
     type: object
     properties:
@@ -6744,6 +7052,26 @@ definitions:
       pageToken:
         $ref: '#/definitions/string'
         description: A token used for paginating results from your get active names request.
+  GetAutoSnapshotsResult:
+    type: object
+    properties:
+      resourceName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the source resource for the automatic snapshots.
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+        description: 'The resource type (e.g., <code>Instance</code> or <code>Disk</code>).'
+      autoSnapshots:
+        $ref: '#/definitions/AutoSnapshotDetailsList'
+        description: An array of objects that describe the automatic snapshots that are available for the specified source resource.asdf
+  GetAutoSnapshotsRequest:
+    type: object
+    required:
+      - resourceName
+    properties:
+      resourceName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the source resource from which to get automatic snapshot information.
   GetBlueprintsResult:
     type: object
     properties:
@@ -7314,13 +7642,13 @@ definitions:
         description: <p>The name of the log stream.</p> <p>Use the <code>get relational database log streams</code> operation to get a list of available log streams.</p>
       startTime:
         $ref: '#/definitions/IsoDate'
-        description: '<p>The start of the time interval from which to get log events.</p> <p>Constraints:</p> <ul> <li> <p>Specified in Universal Coordinated Time (UTC).</p> </li> <li> <p>Specified in the Unix time format.</p> <p>For example, if you wish to use a start time of October 1, 2018, at 8 PM UTC, then you input <code>1538424000</code> as the start time.</p> </li> </ul>'
+        description: '<p>The start of the time interval from which to get log events.</p> <p>Constraints:</p> <ul> <li> <p>Specified in Coordinated Universal Time (UTC).</p> </li> <li> <p>Specified in the Unix time format.</p> <p>For example, if you wish to use a start time of October 1, 2018, at 8 PM UTC, then you input <code>1538424000</code> as the start time.</p> </li> </ul>'
       endTime:
         $ref: '#/definitions/IsoDate'
-        description: '<p>The end of the time interval from which to get log events.</p> <p>Constraints:</p> <ul> <li> <p>Specified in Universal Coordinated Time (UTC).</p> </li> <li> <p>Specified in the Unix time format.</p> <p>For example, if you wish to use an end time of October 1, 2018, at 8 PM UTC, then you input <code>1538424000</code> as the end time.</p> </li> </ul>'
+        description: '<p>The end of the time interval from which to get log events.</p> <p>Constraints:</p> <ul> <li> <p>Specified in Coordinated Universal Time (UTC).</p> </li> <li> <p>Specified in the Unix time format.</p> <p>For example, if you wish to use an end time of October 1, 2018, at 8 PM UTC, then you input <code>1538424000</code> as the end time.</p> </li> </ul>'
       startFromHead:
         $ref: '#/definitions/boolean'
-        description: '<p>Parameter to specify if the log should start from head or tail. If <code>true</code> is specified, the log event starts from the head of the log. If <code>false</code> is specified, the log event starts from the tail of the log.</p> <p>Default: <code>false</code> </p>'
+        description: '<p>Parameter to specify if the log should start from head or tail. If <code>true</code> is specified, the log event starts from the head of the log. If <code>false</code> is specified, the log event starts from the tail of the log.</p> <note> <p>For PostgreSQL, the default value of <code>false</code> is the only option available.</p> </note>'
       pageToken:
         $ref: '#/definitions/string'
         description: A token used for advancing to a specific page of results for your <code>get relational database log events</code> request.
@@ -7389,10 +7717,10 @@ definitions:
         description: 'The granularity, in seconds, of the returned data points.'
       startTime:
         $ref: '#/definitions/IsoDate'
-        description: '<p>The start of the time interval from which to get metric data.</p> <p>Constraints:</p> <ul> <li> <p>Specified in Universal Coordinated Time (UTC).</p> </li> <li> <p>Specified in the Unix time format.</p> <p>For example, if you wish to use a start time of October 1, 2018, at 8 PM UTC, then you input <code>1538424000</code> as the start time.</p> </li> </ul>'
+        description: '<p>The start of the time interval from which to get metric data.</p> <p>Constraints:</p> <ul> <li> <p>Specified in Coordinated Universal Time (UTC).</p> </li> <li> <p>Specified in the Unix time format.</p> <p>For example, if you wish to use a start time of October 1, 2018, at 8 PM UTC, then you input <code>1538424000</code> as the start time.</p> </li> </ul>'
       endTime:
         $ref: '#/definitions/IsoDate'
-        description: '<p>The end of the time interval from which to get metric data.</p> <p>Constraints:</p> <ul> <li> <p>Specified in Universal Coordinated Time (UTC).</p> </li> <li> <p>Specified in the Unix time format.</p> <p>For example, if you wish to use an end time of October 1, 2018, at 8 PM UTC, then you input <code>1538424000</code> as the end time.</p> </li> </ul>'
+        description: '<p>The end of the time interval from which to get metric data.</p> <p>Constraints:</p> <ul> <li> <p>Specified in Coordinated Universal Time (UTC).</p> </li> <li> <p>Specified in the Unix time format.</p> <p>For example, if you wish to use an end time of October 1, 2018, at 8 PM UTC, then you input <code>1538424000</code> as the end time.</p> </li> </ul>'
       unit:
         $ref: '#/definitions/MetricUnit'
         description: The unit for the metric data request.
@@ -7683,6 +8011,9 @@ definitions:
       resourceName:
         $ref: '#/definitions/ResourceName'
         description: The name of the resource to which you are adding tags.
+      resourceArn:
+        $ref: '#/definitions/ResourceArn'
+        description: The Amazon Resource Name (ARN) of the resource to which you want to add a tag.
       tags:
         $ref: '#/definitions/TagList'
         description: The tag key and optional value.
@@ -7710,6 +8041,9 @@ definitions:
       resourceName:
         $ref: '#/definitions/ResourceName'
         description: The name of the resource from which you are removing a tag.
+      resourceArn:
+        $ref: '#/definitions/ResourceArn'
+        description: The Amazon Resource Name (ARN) of the resource from which you want to remove a tag.
       tagKeys:
         $ref: '#/definitions/TagKeyList'
         description: The tag keys to delete from the specified resource.
@@ -7775,10 +8109,10 @@ definitions:
         description: '<p>When <code>true</code>, the master user password is changed to a new strong password generated by Lightsail.</p> <p>Use the <code>get relational database master user password</code> operation to get the new password.</p>'
       preferredBackupWindow:
         $ref: '#/definitions/string'
-        description: '<p>The daily time range during which automated backups are created for your database if automated backups are enabled.</p> <p>Constraints:</p> <ul> <li> <p>Must be in the <code>hh24:mi-hh24:mi</code> format.</p> <p>Example: <code>16:00-16:30</code> </p> </li> <li> <p>Specified in Universal Coordinated Time (UTC).</p> </li> <li> <p>Must not conflict with the preferred maintenance window.</p> </li> <li> <p>Must be at least 30 minutes.</p> </li> </ul>'
+        description: '<p>The daily time range during which automated backups are created for your database if automated backups are enabled.</p> <p>Constraints:</p> <ul> <li> <p>Must be in the <code>hh24:mi-hh24:mi</code> format.</p> <p>Example: <code>16:00-16:30</code> </p> </li> <li> <p>Specified in Coordinated Universal Time (UTC).</p> </li> <li> <p>Must not conflict with the preferred maintenance window.</p> </li> <li> <p>Must be at least 30 minutes.</p> </li> </ul>'
       preferredMaintenanceWindow:
         $ref: '#/definitions/string'
-        description: '<p>The weekly time range during which system maintenance can occur on your database.</p> <p>The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week.</p> <p>Constraints:</p> <ul> <li> <p>Must be in the <code>ddd:hh24:mi-ddd:hh24:mi</code> format.</p> </li> <li> <p>Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.</p> </li> <li> <p>Must be at least 30 minutes.</p> </li> <li> <p>Specified in Universal Coordinated Time (UTC).</p> </li> <li> <p>Example: <code>Tue:17:00-Tue:17:30</code> </p> </li> </ul>'
+        description: '<p>The weekly time range during which system maintenance can occur on your database.</p> <p>The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week.</p> <p>Constraints:</p> <ul> <li> <p>Must be in the <code>ddd:hh24:mi-ddd:hh24:mi</code> format.</p> </li> <li> <p>Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.</p> </li> <li> <p>Must be at least 30 minutes.</p> </li> <li> <p>Specified in Coordinated Universal Time (UTC).</p> </li> <li> <p>Example: <code>Tue:17:00-Tue:17:30</code> </p> </li> </ul>'
       enableBackupRetention:
         $ref: '#/definitions/boolean'
         description: '<p>When <code>true</code>, enables automated backup retention for your database.</p> <p>Updates are applied during the next maintenance window because this can result in an outage.</p>'
@@ -7814,6 +8148,58 @@ definitions:
     enum:
       - inbound
       - outbound
+  string:
+    type: string
+  TimeOfDay:
+    type: string
+    pattern: '^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$'
+  AddOn:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/string'
+        description: The name of the add-on.
+      status:
+        $ref: '#/definitions/string'
+        description: The status of the add-on.
+      snapshotTimeOfDay:
+        $ref: '#/definitions/TimeOfDay'
+        description: '<p>The daily time when an automatic snapshot is created.</p> <p>The time shown is in <code>HH:00</code> format, and in Coordinated Universal Time (UTC).</p> <p>The snapshot is automatically created between the time shown and up to 45 minutes after.</p>'
+      nextSnapshotTimeOfDay:
+        $ref: '#/definitions/TimeOfDay'
+        description: '<p>The next daily time an automatic snapshot will be created.</p> <p>The time shown is in <code>HH:00</code> format, and in Coordinated Universal Time (UTC).</p> <p>The snapshot is automatically created between the time shown and up to 45 minutes after.</p>'
+    description: Describes an add-on that is enabled for an Amazon Lightsail resource.
+  AddOnList:
+    type: array
+    items:
+      $ref: '#/definitions/AddOn'
+  AddOnType:
+    type: string
+    enum:
+      - AutoSnapshot
+  AutoSnapshotAddOnRequest:
+    type: object
+    properties:
+      snapshotTimeOfDay:
+        $ref: '#/definitions/TimeOfDay'
+        description: '<p>The daily time when an automatic snapshot will be created.</p> <p>Constraints:</p> <ul> <li> <p>Must be in <code>HH:00</code> format, and in an hourly increment.</p> </li> <li> <p>Specified in Coordinated Universal Time (UTC).</p> </li> <li> <p>The snapshot will be automatically created between the time specified and up to 45 minutes after.</p> </li> </ul>'
+    description: '<p>Describes a request to enable or modify the automatic snapshot add-on for an Amazon Lightsail instance or disk.</p> <p>When you modify the automatic snapshot time for a resource, it is typically effective immediately except under the following conditions:</p> <ul> <li> <p>If an automatic snapshot has been created for the current day, and you change the snapshot time to a later time of day, then the new snapshot time will be effective the following day. This ensures that two snapshots are not created for the current day.</p> </li> <li> <p>If an automatic snapshot has not yet been created for the current day, and you change the snapshot time to an earlier time of day, then the new snapshot time will be effective the following day and a snapshot is automatically created at the previously set time for the current day. This ensures that a snapshot is created for the current day.</p> </li> <li> <p>If an automatic snapshot has not yet been created for the current day, and you change the snapshot time to a time that is within 30 minutes from your current time, then the new snapshot time will be effective the following day and a snapshot is automatically created at the previously set time for the current day. This ensures that a snapshot is created for the current day, because 30 minutes is required between your current time and the new snapshot time that you specify.</p> </li> <li> <p>If an automatic snapshot is scheduled to be created within 30 minutes from your current time and you change the snapshot time, then the new snapshot time will be effective the following day and a snapshot is automatically created at the previously set time for the current day. This ensures that a snapshot is created for the current day, because 30 minutes is required between your current time and the new snapshot time that you specify.</p> </li> </ul>'
+  AddOnRequest:
+    type: object
+    required:
+      - addOnType
+    properties:
+      addOnType:
+        $ref: '#/definitions/AddOnType'
+        description: The add-on type.
+      autoSnapshotAddOnRequest:
+        $ref: '#/definitions/AutoSnapshotAddOnRequest'
+        description: An object that represents additional parameters when enabling or modifying the automatic snapshot add-on.
+    description: '<p>Describes a request to enable, modify, or disable an add-on for an Amazon Lightsail resource.</p> <note> <p>An additional cost may be associated with enabling add-ons. For more information, see the <a href="https://aws.amazon.com/lightsail/pricing/">Lightsail pricing page</a>.</p> </note>'
+  AddOnRequestList:
+    type: array
+    items:
+      $ref: '#/definitions/AddOnRequest'
   ResourceName:
     type: string
     pattern: '\w[\w\-]*\w'
@@ -7828,6 +8214,22 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ResourceName'
+  integer:
+    type: integer
+  AttachedDisk:
+    type: object
+    properties:
+      path:
+        $ref: '#/definitions/string'
+        description: 'The path of the disk (e.g., <code>/dev/xvdf</code>).'
+      sizeInGb:
+        $ref: '#/definitions/integer'
+        description: The size of the disk in GB.
+    description: 'Describes a block storage disk that is attached to an instance, and is included in an automatic snapshot.'
+  AttachedDiskList:
+    type: array
+    items:
+      $ref: '#/definitions/AttachedDisk'
   DiskMapList:
     type: array
     items:
@@ -7836,6 +8238,39 @@ definitions:
     type: object
     additionalProperties:
       $ref: '#/definitions/DiskMapList'
+  AutoSnapshotDate:
+    type: string
+    pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'
+  IsoDate:
+    type: string
+    format: date-time
+  AutoSnapshotStatus:
+    type: string
+    enum:
+      - Success
+      - Failed
+      - InProgress
+      - NotFound
+  AutoSnapshotDetails:
+    type: object
+    properties:
+      date:
+        $ref: '#/definitions/string'
+        description: The date of the automatic snapshot in <code>YYYY-MM-DD</code> format.
+      createdAt:
+        $ref: '#/definitions/IsoDate'
+        description: The timestamp when the automatic snapshot was created.
+      status:
+        $ref: '#/definitions/AutoSnapshotStatus'
+        description: The status of the automatic snapshot.
+      fromAttachedDisks:
+        $ref: '#/definitions/AttachedDiskList'
+        description: An array of objects that describe the block storage disks attached to the instance when the automatic snapshot was created.
+    description: Describes an automatic snapshot.
+  AutoSnapshotDetailsList:
+    type: array
+    items:
+      $ref: '#/definitions/AutoSnapshotDetails'
   AvailabilityZone:
     type: object
     properties:
@@ -7857,12 +8292,8 @@ definitions:
     enum:
       - os
       - app
-  string:
-    type: string
   boolean:
     type: boolean
-  integer:
-    type: integer
   InstancePlatform:
     type: string
     enum:
@@ -7990,7 +8421,7 @@ definitions:
         description: 'The timestamp when the operation was initialized (e.g., <code>1479816991.349</code>).'
       location:
         $ref: '#/definitions/ResourceLocation'
-        description: The region and Availability Zone.
+        description: The AWS Region and Availability Zone.
       isTerminal:
         $ref: '#/definitions/boolean'
         description: A Boolean value indicating whether the operation is terminal.
@@ -8013,9 +8444,6 @@ definitions:
         $ref: '#/definitions/string'
         description: The error details.
     description: Describes the API operation.
-  IsoDate:
-    type: string
-    format: date-time
   ResourceLocation:
     type: object
     properties:
@@ -8236,6 +8664,9 @@ definitions:
       tags:
         $ref: '#/definitions/TagList'
         description: 'The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags">Lightsail Dev Guide</a>.'
+      addOns:
+        $ref: '#/definitions/AddOnList'
+        description: An array of objects representing the add-ons enabled on the disk.
       sizeInGb:
         $ref: '#/definitions/integer'
         description: The size of the disk in GB.
@@ -8263,7 +8694,7 @@ definitions:
       gbInUse:
         $ref: '#/definitions/integer'
         description: '<p>(Deprecated) The number of GB in use by the disk.</p> <note> <p>In releases prior to November 14, 2017, this parameter was not included in the API response. It is now deprecated.</p> </note>'
-    description: Describes a system disk or an block storage disk.
+    description: Describes a system disk or a block storage disk.
   DiskInfo:
     type: object
     properties:
@@ -8350,6 +8781,9 @@ definitions:
       fromInstanceArn:
         $ref: '#/definitions/NonEmptyString'
         description: The Amazon Resource Name (ARN) of the source instance from which the disk (system volume) snapshot was created.
+      isFromAutoSnapshot:
+        $ref: '#/definitions/boolean'
+        description: A Boolean value indicating whether the snapshot was created from an automatic snapshot.
     description: Describes a block storage disk snapshot.
   DiskSnapshotInfo:
     type: object
@@ -8614,6 +9048,9 @@ definitions:
       bundleId:
         $ref: '#/definitions/NonEmptyString'
         description: 'The bundle for the instance (e.g., <code>micro_1_0</code>).'
+      addOns:
+        $ref: '#/definitions/AddOnList'
+        description: An array of objects representing the add-ons enabled on the instance.
       isStaticIp:
         $ref: '#/definitions/boolean'
         description: A Boolean value indicating whether this instance has a static IP assigned to it.
@@ -8687,10 +9124,13 @@ definitions:
       fromBundleId:
         $ref: '#/definitions/string'
         description: 'The bundle ID from which you created the snapshot (e.g., <code>micro_1_0</code>).'
+      isFromAutoSnapshot:
+        $ref: '#/definitions/boolean'
+        description: A Boolean value indicating whether the snapshot was created from an automatic snapshot.
       sizeInGb:
         $ref: '#/definitions/integer'
         description: The size in GB of the SSD.
-    description: 'Describes the snapshot of the virtual private server, or <i>instance</i>.'
+    description: Describes an instance snapshot.
   InstanceSnapshotList:
     type: array
     items:
@@ -9517,6 +9957,8 @@ definitions:
       - StartRelationalDatabase
       - RebootRelationalDatabase
       - StopRelationalDatabase
+      - EnableAddOn
+      - DisableAddOn
   OperationStatus:
     type: string
     enum:
@@ -9705,6 +10147,9 @@ definitions:
         $ref: '#/definitions/string'
         description: Specifies the value of the parameter.
     description: Describes the parameters of a database.
+  ResourceArn:
+    type: string
+    pattern: '^arn:(aws[^:]*):([a-zA-Z0-9-]+):([a-z0-9-]+):([0-9]+):([a-zA-Z]+)/([a-zA-Z0-9-]+)$'
   StringMax256:
     type: string
     minLength: 1

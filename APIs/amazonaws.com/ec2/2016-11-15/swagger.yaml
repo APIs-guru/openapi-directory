@@ -11880,6 +11880,83 @@ paths:
           type: string
           enum:
             - '2016-11-15'
+  '/#Action=DeleteQueuedReservedInstances':
+    get:
+      x-aws-operation-name: DeleteQueuedReservedInstances
+      operationId: GET DeleteQueuedReservedInstances
+      description: Deletes the queued purchases for the specified Reserved Instances.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteQueuedReservedInstancesResult'
+      parameters:
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          type: boolean
+        - name: ReservedInstancesId
+          in: query
+          required: true
+          description: The IDs of the Reserved Instances.
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteQueuedReservedInstances
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2016-11-15'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DeleteQueuedReservedInstances
+      operationId: POST DeleteQueuedReservedInstances
+      description: Deletes the queued purchases for the specified Reserved Instances.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteQueuedReservedInstancesResult'
+      parameters:
+        - name: DryRun
+          in: formData
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          type: boolean
+        - name: ReservedInstancesId
+          in: formData
+          required: true
+          description: The IDs of the Reserved Instances.
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteQueuedReservedInstances
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2016-11-15'
   '/#Action=DeleteRoute':
     get:
       x-aws-operation-name: DeleteRoute
@@ -34010,7 +34087,7 @@ paths:
     get:
       x-aws-operation-name: PurchaseReservedInstancesOffering
       operationId: GET PurchaseReservedInstancesOffering
-      description: '<p>Purchases a Reserved Instance for use with your account. With Reserved Instances, you pay a lower hourly rate compared to On-Demand instance pricing.</p> <p>Use <a>DescribeReservedInstancesOfferings</a> to get a list of Reserved Instance offerings that match your specifications. After you''ve purchased a Reserved Instance, you can check for your new Reserved Instance with <a>DescribeReservedInstances</a>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts-on-demand-reserved-instances.html">Reserved Instances</a> and <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html">Reserved Instance Marketplace</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
+      description: '<p>Purchases a Reserved Instance for use with your account. With Reserved Instances, you pay a lower hourly rate compared to On-Demand instance pricing.</p> <p>Use <a>DescribeReservedInstancesOfferings</a> to get a list of Reserved Instance offerings that match your specifications. After you''ve purchased a Reserved Instance, you can check for your new Reserved Instance with <a>DescribeReservedInstances</a>.</p> <p>To queue a purchase for a future date and time, specify a purchase time. If you do not specify a purchase time, the default is the current time.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts-on-demand-reserved-instances.html">Reserved Instances</a> and <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html">Reserved Instance Marketplace</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -34044,6 +34121,12 @@ paths:
             Describes the limit price of a Reserved Instance offering.
             The currency in which the <code>limitPrice</code> amount is specified. At this time, the only supported currency is <code>USD</code>.
           type: string
+        - name: PurchaseTime
+          in: query
+          required: false
+          description: The time at which to purchase the Reserved Instance.
+          type: string
+          format: date-time
         - name: Action
           in: query
           required: true
@@ -34067,7 +34150,7 @@ paths:
     post:
       x-aws-operation-name: PurchaseReservedInstancesOffering
       operationId: POST PurchaseReservedInstancesOffering
-      description: '<p>Purchases a Reserved Instance for use with your account. With Reserved Instances, you pay a lower hourly rate compared to On-Demand instance pricing.</p> <p>Use <a>DescribeReservedInstancesOfferings</a> to get a list of Reserved Instance offerings that match your specifications. After you''ve purchased a Reserved Instance, you can check for your new Reserved Instance with <a>DescribeReservedInstances</a>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts-on-demand-reserved-instances.html">Reserved Instances</a> and <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html">Reserved Instance Marketplace</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
+      description: '<p>Purchases a Reserved Instance for use with your account. With Reserved Instances, you pay a lower hourly rate compared to On-Demand instance pricing.</p> <p>Use <a>DescribeReservedInstancesOfferings</a> to get a list of Reserved Instance offerings that match your specifications. After you''ve purchased a Reserved Instance, you can check for your new Reserved Instance with <a>DescribeReservedInstances</a>.</p> <p>To queue a purchase for a future date and time, specify a purchase time. If you do not specify a purchase time, the default is the current time.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts-on-demand-reserved-instances.html">Reserved Instances</a> and <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html">Reserved Instance Marketplace</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -34101,6 +34184,12 @@ paths:
             Describes the limit price of a Reserved Instance offering.
             The currency in which the <code>limitPrice</code> amount is specified. At this time, the only supported currency is <code>USD</code>.
           type: string
+        - name: PurchaseTime
+          in: formData
+          required: false
+          description: The time at which to purchase the Reserved Instance.
+          type: string
+          format: date-time
         - name: Action
           in: query
           required: true
@@ -36182,7 +36271,7 @@ paths:
         - name: ValidFrom
           in: query
           required: false
-          description: 'The start date of the request. If this is a one-time request, the request becomes active at this date and time and remains active until all instances launch, the request expires, or the request is canceled. If the request is persistent, the request becomes active at this date and time and remains active until it expires or is canceled.'
+          description: '<p>The start date of the request. If this is a one-time request, the request becomes active at this date and time and remains active until all instances launch, the request expires, or the request is canceled. If the request is persistent, the request becomes active at this date and time and remains active until it expires or is canceled.</p> <p>The specified start date and time cannot be equal to the current date and time. You must specify a start date and time that occurs after the current date and time.</p>'
           type: string
           format: date-time
         - name: ValidUntil
@@ -36380,7 +36469,7 @@ paths:
         - name: ValidFrom
           in: formData
           required: false
-          description: 'The start date of the request. If this is a one-time request, the request becomes active at this date and time and remains active until all instances launch, the request expires, or the request is canceled. If the request is persistent, the request becomes active at this date and time and remains active until it expires or is canceled.'
+          description: '<p>The start date of the request. If this is a one-time request, the request becomes active at this date and time and remains active until all instances launch, the request expires, or the request is canceled. If the request is persistent, the request becomes active at this date and time and remains active until it expires or is canceled.</p> <p>The specified start date and time cannot be equal to the current date and time. You must specify a start date and time that occurs after the current date and time.</p>'
           type: string
           format: date-time
         - name: ValidUntil
@@ -41456,6 +41545,15 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Returns <code>true</code> if the request succeeds, otherwise returns an error.'
     description: Contains the output for DeleteNetworkInterfacePermission.
+  DeleteQueuedReservedInstancesResult:
+    type: object
+    properties:
+      SuccessfulQueuedPurchaseDeletions:
+        $ref: '#/definitions/SuccessfulQueuedPurchaseDeletionSet'
+        description: Information about the queued purchases that were successfully deleted.
+      FailedQueuedPurchaseDeletions:
+        $ref: '#/definitions/FailedQueuedPurchaseDeletionSet'
+        description: Information about the queued purchases that could not be deleted.
   DeleteTrafficMirrorFilterResult:
     type: object
     properties:
@@ -45624,7 +45722,7 @@ definitions:
     properties:
       DeleteOnTermination:
         $ref: '#/definitions/Boolean'
-        description: Indicates whether the EBS volume is deleted on instance termination.
+        description: 'Indicates whether the EBS volume is deleted on instance termination. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html#preserving-volumes-on-termination">Preserving Amazon EBS Volumes on Instance Termination</a> in the Amazon Elastic Compute Cloud User Guide.'
       Iops:
         $ref: '#/definitions/Integer'
         description: '<p>The number of I/O operations per second (IOPS) that the volume supports. For <code>io1</code> volumes, this represents the number of IOPS that are provisioned for the volume. For <code>gp2</code> volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Constraints: Range is 100-16,000 IOPS for <code>gp2</code> volumes and 100 to 64,000IOPS for <code>io1</code> volumes in most Regions. Maximum <code>io1</code> IOPS of 64,000 is guaranteed only on <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances">Nitro-based instances</a>. Other instance families guarantee performance up to 32,000 IOPS. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Condition: This parameter is required for requests to create <code>io1</code> volumes; it is not used in requests to create <code>gp2</code>, <code>st1</code>, <code>sc1</code>, or <code>standard</code> volumes.</p>'
@@ -49317,6 +49415,47 @@ definitions:
       GroupName:
         $ref: '#/definitions/String'
         description: The name of the placement group.
+  DeleteQueuedReservedInstancesErrorCode:
+    type: string
+    enum:
+      - reserved-instances-id-invalid
+      - reserved-instances-not-in-queued-state
+      - unexpected-error
+  DeleteQueuedReservedInstancesError:
+    type: object
+    properties:
+      Code:
+        $ref: '#/definitions/DeleteQueuedReservedInstancesErrorCode'
+        description: The error code.
+      Message:
+        $ref: '#/definitions/String'
+        description: The error message.
+    description: Describes the error for a Reserved Instance whose queued purchase could not be deleted.
+  DeleteQueuedReservedInstancesIdList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+    minItems: 1
+    maxItems: 100
+  DeleteQueuedReservedInstancesRequest:
+    type: object
+    required:
+      - ReservedInstancesIds
+    properties:
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+      ReservedInstancesIds:
+        $ref: '#/definitions/DeleteQueuedReservedInstancesIdList'
+        description: The IDs of the Reserved Instances.
+  SuccessfulQueuedPurchaseDeletionSet:
+    type: array
+    items:
+      $ref: '#/definitions/SuccessfulQueuedPurchaseDeletion'
+  FailedQueuedPurchaseDeletionSet:
+    type: array
+    items:
+      $ref: '#/definitions/FailedQueuedPurchaseDeletion'
   DeleteRouteRequest:
     type: object
     required:
@@ -52862,6 +53001,16 @@ definitions:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+  FailedQueuedPurchaseDeletion:
+    type: object
+    properties:
+      Error:
+        $ref: '#/definitions/DeleteQueuedReservedInstancesError'
+        description: The error.
+      ReservedInstancesId:
+        $ref: '#/definitions/String'
+        description: The ID of the Reserved Instance.
+    description: Describes a Reserved Instance whose queued purchase was not deleted.
   FleetActivityStatus:
     type: string
     enum:
@@ -56752,6 +56901,9 @@ definitions:
       LimitPrice:
         $ref: '#/definitions/ReservedInstanceLimitPrice'
         description: Specified for Reserved Instance Marketplace offerings to limit the total order and ensure that the Reserved Instances are not purchased at unexpected prices.
+      PurchaseTime:
+        $ref: '#/definitions/DateTime'
+        description: The time at which to purchase the Reserved Instance.
     description: Contains the parameters for PurchaseReservedInstancesOffering.
   PurchaseScheduledInstancesRequest:
     type: object
@@ -57311,7 +57463,7 @@ definitions:
         description: '<p>The Spot Instance request type.</p> <p>Default: <code>one-time</code> </p>'
       ValidFrom:
         $ref: '#/definitions/DateTime'
-        description: 'The start date of the request. If this is a one-time request, the request becomes active at this date and time and remains active until all instances launch, the request expires, or the request is canceled. If the request is persistent, the request becomes active at this date and time and remains active until it expires or is canceled.'
+        description: '<p>The start date of the request. If this is a one-time request, the request becomes active at this date and time and remains active until all instances launch, the request expires, or the request is canceled. If the request is persistent, the request becomes active at this date and time and remains active until it expires or is canceled.</p> <p>The specified start date and time cannot be equal to the current date and time. You must specify a start date and time that occurs after the current date and time.</p>'
       ValidUntil:
         $ref: '#/definitions/DateTime'
         description: 'The end date of the request. If this is a one-time request, the request remains active until all instances launch, the request is canceled, or this date is reached. If the request is persistent, it remains active until it is canceled or this date is reached. The default end date is 7 days from the current date.'
@@ -57336,6 +57488,8 @@ definitions:
       - active
       - payment-failed
       - retired
+      - queued
+      - queued-deleted
   scope:
     type: string
     enum:
@@ -58578,6 +58732,13 @@ definitions:
         $ref: '#/definitions/String'
         description: The ID of the instance.
     description: Describes the T2 or T3 instance whose credit option for CPU usage was successfully modified.
+  SuccessfulQueuedPurchaseDeletion:
+    type: object
+    properties:
+      ReservedInstancesId:
+        $ref: '#/definitions/String'
+        description: The ID of the Reserved Instance.
+    description: Describes a Reserved Instance whose queued purchase was successfully deleted.
   TagDescription:
     type: object
     properties:
