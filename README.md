@@ -60,6 +60,7 @@ Existing integrations
 
  - https://any-api.com - **Documentation and Test Consoles for Public APIs**
  - https://datafire.io - **allows you to process and transfer data between APIs, databases, and more**
+ - https://pipedream.com/ - **The integration platform built for developers**
  - [https://sdks.io](https://sdks.io/Search/FindSDKs?Bridge=APIs.guru) - Explore Automatically Generated SDKs
  - [https://cenit.io](https://cenit.io/directory?spec=swagger) - Data integration platform
  - [commandcar](https://github.com/tikalk/commandcar#installing-from-api-models) - Curl on steroids
