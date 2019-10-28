@@ -140,14 +140,18 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
         '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
           description: ThrottledClientException
           schema:
             $ref: '#/definitions/ThrottledClientException'
-        '485':
+        '486':
           description: ServiceUnavailableException
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
-        '486':
+        '487':
           description: ServiceFailureException
           schema:
             $ref: '#/definitions/ServiceFailureException'
@@ -192,7 +196,7 @@ paths:
   '/voice-connectors/{voiceConnectorId}#operation=associate-phone-numbers':
     post:
       operationId: AssociatePhoneNumbersWithVoiceConnector
-      description: Associates a phone number with the specified Amazon Chime Voice Connector.
+      description: Associates phone numbers with the specified Amazon Chime Voice Connector.
       responses:
         '200':
           description: Success
@@ -215,14 +219,18 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
         '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
           description: ThrottledClientException
           schema:
             $ref: '#/definitions/ThrottledClientException'
-        '485':
+        '486':
           description: ServiceUnavailableException
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
-        '486':
+        '487':
           description: ServiceFailureException
           schema:
             $ref: '#/definitions/ServiceFailureException'
@@ -244,6 +252,85 @@ paths:
                 type: array
                 items:
                   $ref: '#/definitions/E164PhoneNumber'
+              ForceAssociate:
+                description: 'If true, associates the provided phone numbers with the provided Amazon Chime Voice Connector and removes any previously existing associations. If false, does not associate any phone numbers that have previously existing associations.'
+                type: boolean
+        - name: operation
+          in: query
+          required: true
+          type: string
+          enum:
+            - associate-phone-numbers
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/voice-connector-groups/{voiceConnectorGroupId}#operation=associate-phone-numbers':
+    post:
+      operationId: AssociatePhoneNumbersWithVoiceConnectorGroup
+      description: Associates phone numbers with the specified Amazon Chime Voice Connector group.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AssociatePhoneNumbersWithVoiceConnectorGroupResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '486':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: voiceConnectorGroupId
+          in: path
+          required: true
+          description: The Amazon Chime Voice Connector group ID.
+          type: string
+          pattern: .*\S.*
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              E164PhoneNumbers:
+                description: 'List of phone numbers, in E.164 format.'
+                type: array
+                items:
+                  $ref: '#/definitions/E164PhoneNumber'
+              ForceAssociate:
+                description: 'If true, associates the provided phone numbers with the provided Amazon Chime Voice Connector Group and removes any previously existing associations. If false, does not associate any phone numbers that have previously existing associations.'
+                type: boolean
         - name: operation
           in: query
           required: true
@@ -471,7 +558,7 @@ paths:
   '/phone-numbers#operation=batch-update':
     post:
       operationId: BatchUpdatePhoneNumber
-      description: 'Updates phone number product types. Choose from Amazon Chime Business Calling and Amazon Chime Voice Connector product types. For toll-free numbers, you can use only the Amazon Chime Voice Connector product type.'
+      description: '<p>Updates phone number product types or calling names. You can update one attribute at a time for each <code>UpdatePhoneNumberRequestItem</code>. For example, you can update either the product type or the calling name.</p> <p>For product types, choose from Amazon Chime Business Calling and Amazon Chime Voice Connector. For toll-free numbers, you must use the Amazon Chime Voice Connector product type.</p> <p>Updates to outbound calling names can take up to 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.</p>'
       responses:
         '200':
           description: Success
@@ -515,7 +602,7 @@ paths:
               - UpdatePhoneNumberRequestItems
             properties:
               UpdatePhoneNumberRequestItems:
-                description: The request containing the phone number IDs and product types to update.
+                description: The request containing the phone number IDs and product types or calling names to update.
                 type: array
                 items:
                   $ref: '#/definitions/UpdatePhoneNumberRequestItem'
@@ -924,36 +1011,54 @@ paths:
           required: false
           description: The token to use to retrieve the next page of results.
           type: string
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
   /phone-number-orders:
     post:
       operationId: CreatePhoneNumberOrder
-      description: 'Creates an order for phone numbers to be provisioned. Choose from Amazon Chime Business Calling and Amazon Chime Voice Connector product types. For toll-free numbers, you can use only the Amazon Chime Voice Connector product type.'
+      description: 'Creates an order for phone numbers to be provisioned. Choose from Amazon Chime Business Calling and Amazon Chime Voice Connector product types. For toll-free numbers, you must use the Amazon Chime Voice Connector product type.'
       responses:
         '201':
           description: Success
           schema:
             $ref: '#/definitions/CreatePhoneNumberOrderResponse'
         '480':
-          description: UnauthorizedClientException
+          description: BadRequestException
           schema:
-            $ref: '#/definitions/UnauthorizedClientException'
+            $ref: '#/definitions/BadRequestException'
         '481':
           description: ForbiddenException
           schema:
             $ref: '#/definitions/ForbiddenException'
         '482':
-          description: BadRequestException
+          description: AccessDeniedException
           schema:
-            $ref: '#/definitions/BadRequestException'
+            $ref: '#/definitions/AccessDeniedException'
         '483':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '484':
           description: ThrottledClientException
           schema:
             $ref: '#/definitions/ThrottledClientException'
-        '484':
+        '485':
+          description: ResourceLimitExceededException
+          schema:
+            $ref: '#/definitions/ResourceLimitExceededException'
+        '486':
           description: ServiceUnavailableException
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
-        '485':
+        '487':
           description: ServiceFailureException
           schema:
             $ref: '#/definitions/ServiceFailureException'
@@ -1044,12 +1149,84 @@ paths:
   /voice-connectors:
     post:
       operationId: CreateVoiceConnector
-      description: 'Creates an Amazon Chime Voice Connector under the administrator''s AWS account. Enabling <a>CreateVoiceConnectorRequest$RequireEncryption</a> configures your Amazon Chime Voice Connector to use TLS transport for SIP signaling and Secure RTP (SRTP) for media. Inbound calls use TLS transport, and unencrypted outbound calls are blocked.'
+      description: '<p>Creates an Amazon Chime Voice Connector under the administrator''s AWS account. You can choose to create an Amazon Chime Voice Connector in a specific AWS Region.</p> <p>Enabling <a>CreateVoiceConnectorRequest$RequireEncryption</a> configures your Amazon Chime Voice Connector to use TLS transport for SIP signaling and Secure RTP (SRTP) for media. Inbound calls use TLS transport, and unencrypted outbound calls are blocked.</p>'
       responses:
         '201':
           description: Success
           schema:
             $ref: '#/definitions/CreateVoiceConnectorResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '482':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '483':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ResourceLimitExceededException
+          schema:
+            $ref: '#/definitions/ResourceLimitExceededException'
+        '486':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - Name
+              - RequireEncryption
+            properties:
+              Name:
+                description: The name of the Amazon Chime Voice Connector.
+                type: string
+                minLength: 1
+                maxLength: 256
+              AwsRegion:
+                description: 'The AWS Region in which the Amazon Chime Voice Connector is created. Default value: <code>us-east-1</code>.'
+                type: string
+                enum:
+                  - us-east-1
+                  - us-west-2
+              RequireEncryption:
+                description: 'When enabled, requires encryption for the Amazon Chime Voice Connector.'
+                type: boolean
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListVoiceConnectors
+      description: Lists the Amazon Chime Voice Connectors for the administrator's AWS account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListVoiceConnectorsResponse'
         '480':
           description: UnauthorizedClientException
           schema:
@@ -1075,6 +1252,70 @@ paths:
           schema:
             $ref: '#/definitions/ServiceFailureException'
       parameters:
+        - name: next-token
+          in: query
+          required: false
+          description: The token to use to retrieve the next page of results.
+          type: string
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of results to return in a single call.
+          type: integer
+          minimum: 1
+          maximum: 99
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+  /voice-connector-groups:
+    post:
+      operationId: CreateVoiceConnectorGroup
+      description: <p>Creates an Amazon Chime Voice Connector group under the administrator's AWS account. You can associate up to three existing Amazon Chime Voice Connectors with the Amazon Chime Voice Connector group by including <code>VoiceConnectorItems</code> in the request.</p> <p>You can include Amazon Chime Voice Connectors from different AWS Regions in your group. This creates a fault tolerant mechanism for fallback in case of availability events.</p>
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateVoiceConnectorGroupResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '482':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '483':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ResourceLimitExceededException
+          schema:
+            $ref: '#/definitions/ResourceLimitExceededException'
+        '486':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
         - name: body
           in: body
           required: true
@@ -1082,16 +1323,17 @@ paths:
             type: object
             required:
               - Name
-              - RequireEncryption
             properties:
               Name:
-                description: The name of the Amazon Chime Voice Connector.
+                description: The name of the Amazon Chime Voice Connector group.
                 type: string
                 minLength: 1
                 maxLength: 256
-              RequireEncryption:
-                description: 'When enabled, requires encryption for the Amazon Chime Voice Connector.'
-                type: boolean
+              VoiceConnectorItems:
+                description: The Amazon Chime Voice Connectors to route inbound calls to.
+                type: array
+                items:
+                  $ref: '#/definitions/VoiceConnectorItem'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1101,13 +1343,13 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
-      operationId: ListVoiceConnectors
-      description: Lists the Amazon Chime Voice Connectors for the administrator's AWS account.
+      operationId: ListVoiceConnectorGroups
+      description: Lists the Amazon Chime Voice Connector groups for the administrator's AWS account.
       responses:
         '200':
           description: Success
           schema:
-            $ref: '#/definitions/ListVoiceConnectorsResponse'
+            $ref: '#/definitions/ListVoiceConnectorGroupsResponse'
         '480':
           description: UnauthorizedClientException
           schema:
@@ -1566,7 +1808,7 @@ paths:
           type: string
     post:
       operationId: UpdatePhoneNumber
-      description: 'Updates phone number details, such as product type, for the specified phone number ID. For toll-free numbers, you can use only the Amazon Chime Voice Connector product type.'
+      description: '<p>Updates phone number details, such as product type or calling name, for the specified phone number ID. You can update one phone number detail at a time. For example, you can update either the product type or the calling name in one action.</p> <p>For toll-free numbers, you must use the Amazon Chime Voice Connector product type.</p> <p>Updates to outbound calling names can take up to 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.</p>'
       responses:
         '200':
           description: Success
@@ -1618,10 +1860,15 @@ paths:
                 enum:
                   - BusinessCalling
                   - VoiceConnector
+              CallingName:
+                description: The outbound calling name associated with the phone number.
+                type: string
+                pattern: '^$|^[a-zA-Z0-9 ]{2,15}$'
+                format: password
   '/voice-connectors/{voiceConnectorId}':
     delete:
       operationId: DeleteVoiceConnector
-      description: Deletes the specified Amazon Chime Voice Connector. Any phone numbers assigned to the Amazon Chime Voice Connector must be unassigned from it before it can be deleted.
+      description: Deletes the specified Amazon Chime Voice Connector. Any phone numbers associated with the Amazon Chime Voice Connector must be disassociated from it before it can be deleted.
       responses:
         '204':
           description: Success
@@ -1642,14 +1889,18 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
         '484':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '485':
           description: ThrottledClientException
           schema:
             $ref: '#/definitions/ThrottledClientException'
-        '485':
+        '486':
           description: ServiceUnavailableException
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
-        '486':
+        '487':
           description: ServiceFailureException
           schema:
             $ref: '#/definitions/ServiceFailureException'
@@ -1771,6 +2022,169 @@ paths:
               RequireEncryption:
                 description: 'When enabled, requires encryption for the Amazon Chime Voice Connector.'
                 type: boolean
+  '/voice-connector-groups/{voiceConnectorGroupId}':
+    delete:
+      operationId: DeleteVoiceConnectorGroup
+      description: Deletes the specified Amazon Chime Voice Connector group. Any <code>VoiceConnectorItems</code> and phone numbers associated with the group must be removed before it can be deleted.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '485':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '486':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: voiceConnectorGroupId
+          in: path
+          required: true
+          description: The Amazon Chime Voice Connector group ID.
+          type: string
+          pattern: .*\S.*
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetVoiceConnectorGroup
+      description: 'Retrieves details for the specified Amazon Chime Voice Connector group, such as timestamps, name, and associated <code>VoiceConnectorItems</code>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetVoiceConnectorGroupResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: voiceConnectorGroupId
+          in: path
+          required: true
+          description: The Amazon Chime Voice Connector group ID.
+          type: string
+          pattern: .*\S.*
+    put:
+      operationId: UpdateVoiceConnectorGroup
+      description: 'Updates details for the specified Amazon Chime Voice Connector group, such as the name and Amazon Chime Voice Connector priority ranking.'
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateVoiceConnectorGroupResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '485':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '486':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: voiceConnectorGroupId
+          in: path
+          required: true
+          description: The Amazon Chime Voice Connector group ID.
+          type: string
+          pattern: .*\S.*
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - Name
+              - VoiceConnectorItems
+            properties:
+              Name:
+                description: The name of the Amazon Chime Voice Connector group.
+                type: string
+                minLength: 1
+                maxLength: 256
+              VoiceConnectorItems:
+                description: The <code>VoiceConnectorItems</code> to associate with the group.
+                type: array
+                items:
+                  $ref: '#/definitions/VoiceConnectorItem'
   '/voice-connectors/{voiceConnectorId}/origination':
     delete:
       operationId: DeleteVoiceConnectorOrigination
@@ -1925,6 +2339,160 @@ paths:
                   Disabled:
                     $ref: '#/definitions/Boolean'
                     description: 'When origination settings are disabled, inbound calls are not enabled for your Amazon Chime Voice Connector.'
+  '/voice-connectors/{voiceConnectorId}/streaming-configuration':
+    delete:
+      operationId: DeleteVoiceConnectorStreamingConfiguration
+      description: Deletes the streaming configuration for the specified Amazon Chime Voice Connector.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: voiceConnectorId
+          in: path
+          required: true
+          description: The Amazon Chime Voice Connector ID.
+          type: string
+          pattern: .*\S.*
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetVoiceConnectorStreamingConfiguration
+      description: 'Retrieves the streaming configuration details for the specified Amazon Chime Voice Connector. Shows whether media streaming is enabled for sending to Amazon Kinesis, and shows the retention period for the Amazon Kinesis data, in hours.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetVoiceConnectorStreamingConfigurationResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: voiceConnectorId
+          in: path
+          required: true
+          description: The Amazon Chime Voice Connector ID.
+          type: string
+          pattern: .*\S.*
+    put:
+      operationId: PutVoiceConnectorStreamingConfiguration
+      description: 'Adds a streaming configuration for the specified Amazon Chime Voice Connector. The streaming configuration specifies whether media streaming is enabled for sending to Amazon Kinesis, and sets the retention period for the Amazon Kinesis data, in hours.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutVoiceConnectorStreamingConfigurationResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: voiceConnectorId
+          in: path
+          required: true
+          description: The Amazon Chime Voice Connector ID.
+          type: string
+          pattern: .*\S.*
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - StreamingConfiguration
+            properties:
+              StreamingConfiguration:
+                description: 'The streaming configuration associated with an Amazon Chime Voice Connector. Specifies whether media streaming is enabled for sending to Amazon Kinesis, and shows the retention period for the Amazon Kinesis data, in hours.'
+                type: object
+                properties:
+                  DataRetentionInHours:
+                    $ref: '#/definitions/DataRetentionInHours'
+                    description: 'The retention period for the Amazon Kinesis data, in hours.'
+                  Disabled:
+                    $ref: '#/definitions/Boolean'
+                    description: 'When true, media streaming to Amazon Kinesis is turned off.'
   '/voice-connectors/{voiceConnectorId}/termination':
     delete:
       operationId: DeleteVoiceConnectorTermination
@@ -2043,14 +2611,18 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
         '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
           description: ThrottledClientException
           schema:
             $ref: '#/definitions/ThrottledClientException'
-        '485':
+        '486':
           description: ServiceUnavailableException
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
-        '486':
+        '487':
           description: ServiceFailureException
           schema:
             $ref: '#/definitions/ServiceFailureException'
@@ -2081,10 +2653,10 @@ paths:
                     description: The default caller ID phone number.
                   CallingRegions:
                     $ref: '#/definitions/CallingRegionList'
-                    description: The countries to which calls are allowed.
+                    description: 'The countries to which calls are allowed, in ISO 3166-1 alpha-2 format. Required.'
                   CidrAllowedList:
                     $ref: '#/definitions/StringList'
-                    description: 'The IP addresses allowed to make calls, in CIDR format.'
+                    description: 'The IP addresses allowed to make calls, in CIDR format. Required.'
                   Disabled:
                     $ref: '#/definitions/Boolean'
                     description: 'When termination settings are disabled, outbound calls can not be made.'
@@ -2220,7 +2792,7 @@ paths:
   '/voice-connectors/{voiceConnectorId}#operation=disassociate-phone-numbers':
     post:
       operationId: DisassociatePhoneNumbersFromVoiceConnector
-      description: Disassociates the specified phone number from the specified Amazon Chime Voice Connector.
+      description: Disassociates the specified phone numbers from the specified Amazon Chime Voice Connector.
       responses:
         '200':
           description: Success
@@ -2259,6 +2831,75 @@ paths:
           in: path
           required: true
           description: The Amazon Chime Voice Connector ID.
+          type: string
+          pattern: .*\S.*
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              E164PhoneNumbers:
+                description: 'List of phone numbers, in E.164 format.'
+                type: array
+                items:
+                  $ref: '#/definitions/E164PhoneNumber'
+        - name: operation
+          in: query
+          required: true
+          type: string
+          enum:
+            - disassociate-phone-numbers
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/voice-connector-groups/{voiceConnectorGroupId}#operation=disassociate-phone-numbers':
+    post:
+      operationId: DisassociatePhoneNumbersFromVoiceConnectorGroup
+      description: Disassociates the specified phone numbers from the specified Amazon Chime Voice Connector group.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DisassociatePhoneNumbersFromVoiceConnectorGroupResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: voiceConnectorGroupId
+          in: path
+          required: true
+          description: The Amazon Chime Voice Connector group ID.
           type: string
           pattern: .*\S.*
         - name: body
@@ -2658,6 +3299,91 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /settings/phone-number:
+    get:
+      operationId: GetPhoneNumberSettings
+      description: 'Retrieves the phone number settings for the administrator''s AWS account, such as the default outbound calling name.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetPhoneNumberSettingsResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '483':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: UpdatePhoneNumberSettings
+      description: 'Updates the phone number settings for the administrator''s AWS account, such as the default outbound calling name. You can update the default outbound calling name once every seven days. Outbound calling names can take up to 72 hours to be updated.'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '483':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - CallingName
+            properties:
+              CallingName:
+                description: The default outbound calling name for the account.
+                type: string
+                pattern: '^$|^[a-zA-Z0-9 ]{2,15}$'
+                format: password
   '/accounts/{accountId}/users/{userId}':
     get:
       operationId: GetUser
@@ -2895,6 +3621,116 @@ paths:
                   Telephony:
                     $ref: '#/definitions/TelephonySettings'
                     description: The telephony settings associated with the user.
+  '/voice-connectors/{voiceConnectorId}/logging-configuration':
+    get:
+      operationId: GetVoiceConnectorLoggingConfiguration
+      description: Retrieves the logging configuration details for the specified Amazon Chime Voice Connector. Shows whether SIP message logs are enabled for sending to Amazon CloudWatch Logs.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetVoiceConnectorLoggingConfigurationResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: voiceConnectorId
+          in: path
+          required: true
+          description: The Amazon Chime Voice Connector ID.
+          type: string
+          pattern: .*\S.*
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: PutVoiceConnectorLoggingConfiguration
+      description: Adds a logging configuration for the specified Amazon Chime Voice Connector. The logging configuration specifies whether SIP message logs are enabled for sending to Amazon CloudWatch Logs.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutVoiceConnectorLoggingConfigurationResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: voiceConnectorId
+          in: path
+          required: true
+          description: The Amazon Chime Voice Connector ID.
+          type: string
+          pattern: .*\S.*
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - LoggingConfiguration
+            properties:
+              LoggingConfiguration:
+                description: The logging configuration associated with an Amazon Chime Voice Connector. Specifies whether SIP message logs are enabled for sending to Amazon CloudWatch Logs.
+                type: object
+                properties:
+                  EnableSIPLogs:
+                    $ref: '#/definitions/Boolean'
+                    description: 'When true, enables SIP message logs for sending to Amazon CloudWatch Logs.'
   '/voice-connectors/{voiceConnectorId}/termination/health':
     get:
       operationId: GetVoiceConnectorTerminationHealth
@@ -3022,7 +3858,7 @@ paths:
   /phone-numbers:
     get:
       operationId: ListPhoneNumbers
-      description: 'Lists the phone numbers for the specified Amazon Chime account, Amazon Chime user, or Amazon Chime Voice Connector.'
+      description: 'Lists the phone numbers for the specified Amazon Chime account, Amazon Chime user, Amazon Chime Voice Connector, or Amazon Chime Voice Connector group.'
       responses:
         '200':
           description: Success
@@ -3084,6 +3920,7 @@ paths:
             - AccountId
             - UserId
             - VoiceConnectorId
+            - VoiceConnectorGroupId
         - name: filter-value
           in: query
           required: false
@@ -3456,10 +4293,14 @@ paths:
           schema:
             $ref: '#/definitions/ThrottledClientException'
         '485':
+          description: ResourceLimitExceededException
+          schema:
+            $ref: '#/definitions/ResourceLimitExceededException'
+        '486':
           description: ServiceUnavailableException
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
-        '486':
+        '487':
           description: ServiceFailureException
           schema:
             $ref: '#/definitions/ServiceFailureException'
@@ -3494,26 +4335,30 @@ paths:
           schema:
             $ref: '#/definitions/SearchAvailablePhoneNumbersResponse'
         '480':
-          description: UnauthorizedClientException
+          description: BadRequestException
           schema:
-            $ref: '#/definitions/UnauthorizedClientException'
+            $ref: '#/definitions/BadRequestException'
         '481':
           description: ForbiddenException
           schema:
             $ref: '#/definitions/ForbiddenException'
         '482':
-          description: BadRequestException
+          description: AccessDeniedException
           schema:
-            $ref: '#/definitions/BadRequestException'
+            $ref: '#/definitions/AccessDeniedException'
         '483':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '484':
           description: ThrottledClientException
           schema:
             $ref: '#/definitions/ThrottledClientException'
-        '484':
+        '485':
           description: ServiceUnavailableException
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
-        '485':
+        '486':
           description: ServiceFailureException
           schema:
             $ref: '#/definitions/ServiceFailureException'
@@ -3580,6 +4425,7 @@ definitions:
   NotFoundException: {}
   ForbiddenException: {}
   BadRequestException: {}
+  AccessDeniedException: {}
   ThrottledClientException: {}
   ServiceUnavailableException: {}
   ServiceFailureException: {}
@@ -3593,6 +4439,12 @@ definitions:
     type: string
     pattern: '^\+?[1-9]\d{1,14}$'
     format: password
+  AssociatePhoneNumbersWithVoiceConnectorGroupResponse:
+    type: object
+    properties:
+      PhoneNumberErrors:
+        $ref: '#/definitions/PhoneNumberErrorList'
+        description: 'If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and error messages.'
   BatchDeletePhoneNumberResponse:
     type: object
     properties:
@@ -3633,7 +4485,10 @@ definitions:
       ProductType:
         $ref: '#/definitions/PhoneNumberProductType'
         description: The product type to update.
-    description: 'The phone number ID and product type fields to update, used with the <a>BatchUpdatePhoneNumber</a> and <a>UpdatePhoneNumber</a> actions.'
+      CallingName:
+        $ref: '#/definitions/CallingName'
+        description: The outbound calling name to update.
+    description: 'The phone number ID, product type, or calling name fields to update, used with the <a>BatchUpdatePhoneNumber</a> and <a>UpdatePhoneNumber</a> actions.'
   BatchUpdateUserResponse:
     type: object
     properties:
@@ -3677,10 +4532,30 @@ definitions:
       VoiceConnector:
         $ref: '#/definitions/VoiceConnector'
         description: The Amazon Chime Voice Connector details.
+  CreateVoiceConnectorGroupResponse:
+    type: object
+    properties:
+      VoiceConnectorGroup:
+        $ref: '#/definitions/VoiceConnectorGroup'
+        description: The Amazon Chime Voice Connector group details.
+  VoiceConnectorItem:
+    type: object
+    required:
+      - VoiceConnectorId
+      - Priority
+    properties:
+      VoiceConnectorId:
+        $ref: '#/definitions/NonEmptyString'
+        description: The Amazon Chime Voice Connector ID.
+      Priority:
+        $ref: '#/definitions/VoiceConnectorItemPriority'
+        description: 'The priority associated with the Amazon Chime Voice Connector, with 1 being the highest priority. Higher priority Amazon Chime Voice Connectors are attempted first. '
+    description: 'For Amazon Chime Voice Connector groups, the Amazon Chime Voice Connectors to which to route inbound calls. Includes priority configuration settings. Limit: 3 <code>VoiceConnectorItems</code> per Amazon Chime Voice Connector group.'
   DeleteAccountResponse:
     type: object
     properties: {}
   UnprocessableEntityException: {}
+  ConflictException: {}
   SensitiveString:
     type: string
     format: password
@@ -3688,6 +4563,12 @@ definitions:
     type: object
     properties: {}
   DisassociatePhoneNumbersFromVoiceConnectorResponse:
+    type: object
+    properties:
+      PhoneNumberErrors:
+        $ref: '#/definitions/PhoneNumberErrorList'
+        description: 'If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and error messages.'
+  DisassociatePhoneNumbersFromVoiceConnectorGroupResponse:
     type: object
     properties:
       PhoneNumberErrors:
@@ -3738,6 +4619,15 @@ definitions:
       PhoneNumberOrder:
         $ref: '#/definitions/PhoneNumberOrder'
         description: The phone number order details.
+  GetPhoneNumberSettingsResponse:
+    type: object
+    properties:
+      CallingName:
+        $ref: '#/definitions/CallingName'
+        description: The default outbound calling name for the account.
+      CallingNameUpdatedTimestamp:
+        $ref: '#/definitions/Iso8601Timestamp'
+        description: 'The updated outbound calling name timestamp, in ISO 8601 format.'
   GetUserResponse:
     type: object
     properties:
@@ -3756,12 +4646,30 @@ definitions:
       VoiceConnector:
         $ref: '#/definitions/VoiceConnector'
         description: The Amazon Chime Voice Connector details.
+  GetVoiceConnectorGroupResponse:
+    type: object
+    properties:
+      VoiceConnectorGroup:
+        $ref: '#/definitions/VoiceConnectorGroup'
+        description: The Amazon Chime Voice Connector group details.
+  GetVoiceConnectorLoggingConfigurationResponse:
+    type: object
+    properties:
+      LoggingConfiguration:
+        $ref: '#/definitions/LoggingConfiguration'
+        description: The logging configuration details.
   GetVoiceConnectorOriginationResponse:
     type: object
     properties:
       Origination:
         $ref: '#/definitions/Origination'
         description: The origination setting details.
+  GetVoiceConnectorStreamingConfigurationResponse:
+    type: object
+    properties:
+      StreamingConfiguration:
+        $ref: '#/definitions/StreamingConfiguration'
+        description: The streaming configuration details.
   GetVoiceConnectorTerminationResponse:
     type: object
     properties:
@@ -3829,6 +4737,15 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results.
+  ListVoiceConnectorGroupsResponse:
+    type: object
+    properties:
+      VoiceConnectorGroups:
+        $ref: '#/definitions/VoiceConnectorGroupList'
+        description: The details of the Amazon Chime Voice Connector groups.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token to use to retrieve the next page of results.
   ListVoiceConnectorTerminationCredentialsResponse:
     type: object
     properties:
@@ -3852,6 +4769,14 @@ definitions:
     properties:
       EventsConfiguration:
         $ref: '#/definitions/EventsConfiguration'
+  PutVoiceConnectorLoggingConfigurationResponse:
+    type: object
+    properties:
+      LoggingConfiguration:
+        $ref: '#/definitions/LoggingConfiguration'
+        description: The updated logging configuration details.
+  Boolean:
+    type: boolean
   PutVoiceConnectorOriginationResponse:
     type: object
     properties:
@@ -3862,8 +4787,15 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/OriginationRoute'
-  Boolean:
-    type: boolean
+  PutVoiceConnectorStreamingConfigurationResponse:
+    type: object
+    properties:
+      StreamingConfiguration:
+        $ref: '#/definitions/StreamingConfiguration'
+        description: The updated streaming configuration details.
+  DataRetentionInHours:
+    type: integer
+    minimum: 0
   PutVoiceConnectorTerminationResponse:
     type: object
     properties:
@@ -3923,7 +4855,6 @@ definitions:
   UpdateAccountSettingsResponse:
     type: object
     properties: {}
-  ConflictException: {}
   UpdateBotResponse:
     type: object
     properties:
@@ -3964,7 +4895,13 @@ definitions:
     properties:
       VoiceConnector:
         $ref: '#/definitions/VoiceConnector'
-        description: The Amazon Chime Voice Connector details.
+        description: The updated Amazon Chime Voice Connector details.
+  UpdateVoiceConnectorGroupResponse:
+    type: object
+    properties:
+      VoiceConnectorGroup:
+        $ref: '#/definitions/VoiceConnectorGroup'
+        description: The updated Amazon Chime Voice Connector group details.
   AccountType:
     type: string
     enum:
@@ -4046,16 +4983,30 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/E164PhoneNumber'
+  NullableBoolean:
+    type: boolean
+  AssociatePhoneNumbersWithVoiceConnectorGroupRequest:
+    type: object
+    properties:
+      E164PhoneNumbers:
+        $ref: '#/definitions/E164PhoneNumberList'
+        description: 'List of phone numbers, in E.164 format.'
+      ForceAssociate:
+        $ref: '#/definitions/NullableBoolean'
+        description: 'If true, associates the provided phone numbers with the provided Amazon Chime Voice Connector Group and removes any previously existing associations. If false, does not associate any phone numbers that have previously existing associations.'
+  PhoneNumberErrorList:
+    type: array
+    items:
+      $ref: '#/definitions/PhoneNumberError'
   AssociatePhoneNumbersWithVoiceConnectorRequest:
     type: object
     properties:
       E164PhoneNumbers:
         $ref: '#/definitions/E164PhoneNumberList'
         description: 'List of phone numbers, in E.164 format.'
-  PhoneNumberErrorList:
-    type: array
-    items:
-      $ref: '#/definitions/PhoneNumberError'
+      ForceAssociate:
+        $ref: '#/definitions/NullableBoolean'
+        description: 'If true, associates the provided phone numbers with the provided Amazon Chime Voice Connector and removes any previously existing associations. If false, does not associate any phone numbers that have previously existing associations.'
   NonEmptyStringList:
     type: array
     items:
@@ -4105,7 +5056,7 @@ definitions:
     properties:
       UpdatePhoneNumberRequestItems:
         $ref: '#/definitions/UpdatePhoneNumberRequestItemList'
-        description: The request containing the phone number IDs and product types to update.
+        description: The request containing the phone number IDs and product types or calling names to update.
   UpdateUserRequestItemList:
     type: array
     items:
@@ -4123,8 +5074,6 @@ definitions:
     type: string
     enum:
       - ChatBot
-  NullableBoolean:
-    type: boolean
   Bot:
     type: object
     properties:
@@ -4167,6 +5116,17 @@ definitions:
         $ref: '#/definitions/String'
         description: The Amazon S3 bucket designated for call detail record storage.
     description: The Amazon Chime Business Calling settings for the administrator's AWS account. Includes any Amazon S3 buckets designated for storing call detail records.
+  CallingName:
+    type: string
+    pattern: '^$|^[a-zA-Z0-9 ]{2,15}$'
+    format: password
+  CallingNameStatus:
+    type: string
+    enum:
+      - Unassigned
+      - UpdateInProgress
+      - UpdateSucceeded
+      - UpdateFailed
   CallingRegion:
     type: string
   CreateAccountRequest:
@@ -4227,10 +5187,53 @@ definitions:
         $ref: '#/definitions/Iso8601Timestamp'
         description: 'The updated phone number order timestamp, in ISO 8601 format.'
     description: The details of a phone number order created for Amazon Chime.
+  VoiceConnectorGroupName:
+    type: string
+    minLength: 1
+    maxLength: 256
+  VoiceConnectorItemList:
+    type: array
+    items:
+      $ref: '#/definitions/VoiceConnectorItem'
+  CreateVoiceConnectorGroupRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/VoiceConnectorGroupName'
+        description: The name of the Amazon Chime Voice Connector group.
+      VoiceConnectorItems:
+        $ref: '#/definitions/VoiceConnectorItemList'
+        description: The Amazon Chime Voice Connectors to route inbound calls to.
+  VoiceConnectorGroup:
+    type: object
+    properties:
+      VoiceConnectorGroupId:
+        $ref: '#/definitions/NonEmptyString'
+        description: The Amazon Chime Voice Connector group ID.
+      Name:
+        $ref: '#/definitions/VoiceConnectorGroupName'
+        description: The name of the Amazon Chime Voice Connector group.
+      VoiceConnectorItems:
+        $ref: '#/definitions/VoiceConnectorItemList'
+        description: The Amazon Chime Voice Connectors to which to route inbound calls.
+      CreatedTimestamp:
+        $ref: '#/definitions/Iso8601Timestamp'
+        description: 'The Amazon Chime Voice Connector group creation timestamp, in ISO 8601 format.'
+      UpdatedTimestamp:
+        $ref: '#/definitions/Iso8601Timestamp'
+        description: 'The updated Amazon Chime Voice Connector group timestamp, in ISO 8601 format.'
+    description: 'The Amazon Chime Voice Connector group configuration, including associated Amazon Chime Voice Connectors. You can include Amazon Chime Voice Connectors from different AWS Regions in your group. This creates a fault tolerant mechanism for fallback in case of availability events.'
   VoiceConnectorName:
     type: string
     minLength: 1
     maxLength: 256
+  VoiceConnectorAwsRegion:
+    type: string
+    enum:
+      - us-east-1
+      - us-west-2
   CreateVoiceConnectorRequest:
     type: object
     required:
@@ -4240,6 +5243,9 @@ definitions:
       Name:
         $ref: '#/definitions/VoiceConnectorName'
         description: The name of the Amazon Chime Voice Connector.
+      AwsRegion:
+        $ref: '#/definitions/VoiceConnectorAwsRegion'
+        description: 'The AWS Region in which the Amazon Chime Voice Connector is created. Default value: <code>us-east-1</code>.'
       RequireEncryption:
         $ref: '#/definitions/Boolean'
         description: 'When enabled, requires encryption for the Amazon Chime Voice Connector.'
@@ -4249,6 +5255,9 @@ definitions:
       VoiceConnectorId:
         $ref: '#/definitions/NonEmptyString'
         description: The Amazon Chime Voice Connector ID.
+      AwsRegion:
+        $ref: '#/definitions/VoiceConnectorAwsRegion'
+        description: 'The AWS Region in which the Amazon Chime Voice Connector is created. Default: <code>us-east-1</code>.'
       Name:
         $ref: '#/definitions/VoiceConnectorName'
         description: The name of the Amazon Chime Voice Connector.
@@ -4278,10 +5287,16 @@ definitions:
   DeletePhoneNumberRequest:
     type: object
     properties: {}
+  DeleteVoiceConnectorGroupRequest:
+    type: object
+    properties: {}
   DeleteVoiceConnectorOriginationRequest:
     type: object
     properties: {}
   DeleteVoiceConnectorRequest:
+    type: object
+    properties: {}
+  DeleteVoiceConnectorStreamingConfigurationRequest:
     type: object
     properties: {}
   SensitiveStringList:
@@ -4300,6 +5315,12 @@ definitions:
   DisassociatePhoneNumberFromUserRequest:
     type: object
     properties: {}
+  DisassociatePhoneNumbersFromVoiceConnectorGroupRequest:
+    type: object
+    properties:
+      E164PhoneNumbers:
+        $ref: '#/definitions/E164PhoneNumberList'
+        description: 'List of phone numbers, in E.164 format.'
   DisassociatePhoneNumbersFromVoiceConnectorRequest:
     type: object
     properties:
@@ -4315,16 +5336,20 @@ definitions:
   ErrorCode:
     type: string
     enum:
-      - Unauthorized
-      - Forbidden
-      - NotFound
       - BadRequest
       - Conflict
-      - ServiceFailure
-      - ServiceUnavailable
-      - Unprocessable
-      - Throttled
+      - Forbidden
+      - NotFound
       - PreconditionFailed
+      - ResourceLimitExceeded
+      - ServiceFailure
+      - AccessDenied
+      - ServiceUnavailable
+      - Throttled
+      - Unauthorized
+      - Unprocessable
+      - VoiceConnectorGroupAssociationsExist
+      - PhoneNumberAssociationsExist
   EventsConfiguration:
     type: object
     properties:
@@ -4390,6 +5415,12 @@ definitions:
       Associations:
         $ref: '#/definitions/PhoneNumberAssociationList'
         description: The phone number associations.
+      CallingName:
+        $ref: '#/definitions/CallingName'
+        description: The outbound calling name associated with the phone number.
+      CallingNameStatus:
+        $ref: '#/definitions/CallingNameStatus'
+        description: The outbound calling name status.
       CreatedTimestamp:
         $ref: '#/definitions/Iso8601Timestamp'
         description: 'The phone number creation timestamp, in ISO 8601 format.'
@@ -4454,6 +5485,19 @@ definitions:
         $ref: '#/definitions/TelephonySettings'
         description: The telephony settings associated with the user.
     description: 'Settings associated with an Amazon Chime user, including inbound and outbound calling and text messaging.'
+  GetVoiceConnectorGroupRequest:
+    type: object
+    properties: {}
+  GetVoiceConnectorLoggingConfigurationRequest:
+    type: object
+    properties: {}
+  LoggingConfiguration:
+    type: object
+    properties:
+      EnableSIPLogs:
+        $ref: '#/definitions/Boolean'
+        description: 'When true, enables SIP message logs for sending to Amazon CloudWatch Logs.'
+    description: The logging configuration associated with an Amazon Chime Voice Connector. Specifies whether SIP message logs are enabled for sending to Amazon CloudWatch Logs.
   GetVoiceConnectorOriginationRequest:
     type: object
     properties: {}
@@ -4470,6 +5514,21 @@ definitions:
   GetVoiceConnectorRequest:
     type: object
     properties: {}
+  GetVoiceConnectorStreamingConfigurationRequest:
+    type: object
+    properties: {}
+  StreamingConfiguration:
+    type: object
+    required:
+      - DataRetentionInHours
+    properties:
+      DataRetentionInHours:
+        $ref: '#/definitions/DataRetentionInHours'
+        description: 'The retention period for the Amazon Kinesis data, in hours.'
+      Disabled:
+        $ref: '#/definitions/Boolean'
+        description: 'When true, media streaming to Amazon Kinesis is turned off.'
+    description: 'The streaming configuration associated with an Amazon Chime Voice Connector. Specifies whether media streaming is enabled for sending to Amazon Kinesis, and shows the retention period for the Amazon Kinesis data, in hours.'
   GetVoiceConnectorTerminationHealthRequest:
     type: object
     properties: {}
@@ -4497,10 +5556,10 @@ definitions:
         description: The default caller ID phone number.
       CallingRegions:
         $ref: '#/definitions/CallingRegionList'
-        description: The countries to which calls are allowed.
+        description: 'The countries to which calls are allowed, in ISO 3166-1 alpha-2 format. Required.'
       CidrAllowedList:
         $ref: '#/definitions/StringList'
-        description: 'The IP addresses allowed to make calls, in CIDR format.'
+        description: 'The IP addresses allowed to make calls, in CIDR format. Required.'
       Disabled:
         $ref: '#/definitions/Boolean'
         description: 'When termination settings are disabled, outbound calls can not be made.'
@@ -4582,6 +5641,7 @@ definitions:
       - AccountId
       - UserId
       - VoiceConnectorId
+      - VoiceConnectorGroupId
   ListPhoneNumbersRequest:
     type: object
     properties: {}
@@ -4596,6 +5656,13 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/User'
+  ListVoiceConnectorGroupsRequest:
+    type: object
+    properties: {}
+  VoiceConnectorGroupList:
+    type: array
+    items:
+      $ref: '#/definitions/VoiceConnectorGroup'
   ListVoiceConnectorTerminationCredentialsRequest:
     type: object
     properties: {}
@@ -4651,7 +5718,7 @@ definitions:
     properties:
       Host:
         $ref: '#/definitions/String'
-        description: The FODN or IP address to contact for origination traffic.
+        description: The FQDN or IP address to contact for origination traffic.
       Port:
         $ref: '#/definitions/Port'
         description: The designated origination route port. Defaults to 5060.
@@ -4664,7 +5731,7 @@ definitions:
       Weight:
         $ref: '#/definitions/OriginationRouteWeight'
         description: 'The weight associated with the host. If hosts are equal in priority, calls are distributed among them based on their relative weight.'
-    description: 'Origination routes define call distribution properties for your SIP hosts to receive inbound calls using your Amazon Chime Voice Connector. Limit: 10 origination routes per Amazon Chime Voice Connector.'
+    description: 'Origination routes define call distribution properties for your SIP hosts to receive inbound calls using your Amazon Chime Voice Connector. Limit: Ten origination routes for each Amazon Chime Voice Connector.'
   PhoneNumberType:
     type: string
     enum:
@@ -4691,7 +5758,7 @@ definitions:
       OutboundMMS:
         $ref: '#/definitions/NullableBoolean'
         description: Allows or denies outbound MMS messaging for the specified phone number.
-    description: 'The phone number capabilities, such as enabled inbound and outbound calling and text messaging.'
+    description: 'The phone number capabilities for Amazon Chime Business Calling phone numbers, such as enabled inbound and outbound calling and text messaging.'
   PhoneNumberAssociationList:
     type: array
     items:
@@ -4704,11 +5771,11 @@ definitions:
         description: Contains the ID for the entity specified in Name.
       Name:
         $ref: '#/definitions/PhoneNumberAssociationName'
-        description: 'Defines the association with an Amazon Chime account ID, user ID, or Amazon Chime Voice Connector ID.'
+        description: 'Defines the association with an Amazon Chime account ID, user ID, Amazon Chime Voice Connector ID, or Amazon Chime Voice Connector group ID.'
       AssociatedTimestamp:
         $ref: '#/definitions/Iso8601Timestamp'
         description: 'The timestamp of the phone number association, in ISO 8601 format.'
-    description: 'The phone number associations, such as Amazon Chime account ID, Amazon Chime user ID, or Amazon Chime Voice Connector ID.'
+    description: 'The phone number associations, such as Amazon Chime account ID, Amazon Chime user ID, Amazon Chime Voice Connector ID, or Amazon Chime Voice Connector group ID.'
   PhoneNumberError:
     type: object
     properties:
@@ -4742,6 +5809,14 @@ definitions:
       LambdaFunctionArn:
         $ref: '#/definitions/SensitiveString'
         description: Lambda function ARN that allows the bot to receive outgoing events.
+  PutVoiceConnectorLoggingConfigurationRequest:
+    type: object
+    required:
+      - LoggingConfiguration
+    properties:
+      LoggingConfiguration:
+        $ref: '#/definitions/LoggingConfiguration'
+        description: The logging configuration details to add.
   PutVoiceConnectorOriginationRequest:
     type: object
     required:
@@ -4750,6 +5825,14 @@ definitions:
       Origination:
         $ref: '#/definitions/Origination'
         description: The origination setting details to add.
+  PutVoiceConnectorStreamingConfigurationRequest:
+    type: object
+    required:
+      - StreamingConfiguration
+    properties:
+      StreamingConfiguration:
+        $ref: '#/definitions/StreamingConfiguration'
+        description: The streaming configuration details to add.
   PutVoiceConnectorTerminationCredentialsRequest:
     type: object
     properties:
@@ -4825,6 +5908,17 @@ definitions:
       ProductType:
         $ref: '#/definitions/PhoneNumberProductType'
         description: The product type.
+      CallingName:
+        $ref: '#/definitions/CallingName'
+        description: The outbound calling name associated with the phone number.
+  UpdatePhoneNumberSettingsRequest:
+    type: object
+    required:
+      - CallingName
+    properties:
+      CallingName:
+        $ref: '#/definitions/CallingName'
+        description: The default outbound calling name for the account.
   UpdateUserRequest:
     type: object
     properties:
@@ -4839,6 +5933,18 @@ definitions:
       UserSettings:
         $ref: '#/definitions/UserSettings'
         description: The user settings to update.
+  UpdateVoiceConnectorGroupRequest:
+    type: object
+    required:
+      - Name
+      - VoiceConnectorItems
+    properties:
+      Name:
+        $ref: '#/definitions/VoiceConnectorGroupName'
+        description: The name of the Amazon Chime Voice Connector group.
+      VoiceConnectorItems:
+        $ref: '#/definitions/VoiceConnectorItemList'
+        description: The <code>VoiceConnectorItems</code> to associate with the group.
   UpdateVoiceConnectorRequest:
     type: object
     required:
@@ -4864,3 +5970,7 @@ definitions:
         $ref: '#/definitions/String'
         description: The error message.
     description: 'The list of errors returned when errors are encountered during the <a>BatchSuspendUser</a>, <a>BatchUnsuspendUser</a>, or <a>BatchUpdateUser</a> actions. This includes user IDs, error codes, and error messages.'
+  VoiceConnectorItemPriority:
+    type: integer
+    minimum: 1
+    maximum: 99

@@ -511,6 +511,7 @@ paths:
               greengrassGroupId:
                 description: The Greengrass group id.
                 type: string
+                pattern: .*
                 minLength: 1
                 maxLength: 1224
               tags:
@@ -2551,11 +2552,13 @@ definitions:
     type: string
     enum:
       - ROS
+      - ROS2
   RobotSoftwareSuiteVersionType:
     type: string
     enum:
       - Kinetic
       - Melodic
+      - Dashing
   CreateRobotApplicationVersionResponse:
     type: object
     properties:
@@ -2620,7 +2623,7 @@ definitions:
       - RosbagPlay
   SimulationSoftwareSuiteVersionType:
     type: string
-    pattern: 7|9|Kinetic|Melodic
+    pattern: 7|9|Kinetic|Melodic|Dashing
   RenderingEngineType:
     type: string
     enum:
@@ -3411,6 +3414,7 @@ definitions:
         description: 'The current revision id for the robot application. If you provide a value and it matches the latest revision ID, a new version will be created.'
   Id:
     type: string
+    pattern: .*
     minLength: 1
     maxLength: 1224
   CreateRobotRequest:
@@ -3784,6 +3788,7 @@ definitions:
     maxItems: 200
   Path:
     type: string
+    pattern: .*
     minLength: 1
     maxLength: 1024
   EnvironmentVariableMap:
@@ -3898,6 +3903,7 @@ definitions:
     maxLength: 1024
   EnvironmentVariableValue:
     type: string
+    pattern: .*
     minLength: 1
     maxLength: 1024
   FilterValues:

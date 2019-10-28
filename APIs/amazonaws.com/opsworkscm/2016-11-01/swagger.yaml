@@ -249,7 +249,7 @@ paths:
   '/#X-Amz-Target=OpsWorksCM_V2016_11_01.CreateServer':
     post:
       operationId: CreateServer
-      description: '<p> Creates and immedately starts a new server. The server is ready to use when it is in the <code>HEALTHY</code> state. By default, you can create a maximum of 10 servers. </p> <p> This operation is asynchronous. </p> <p> A <code>LimitExceededException</code> is thrown when you have created the maximum number of servers (10). A <code>ResourceAlreadyExistsException</code> is thrown when a server with the same name already exists in the account. A <code>ResourceNotFoundException</code> is thrown when you specify a backup ID that is not valid or is for a backup that does not exist. A <code>ValidationException</code> is thrown when parameters of the request are not valid. </p> <p> If you do not specify a security group by adding the <code>SecurityGroupIds</code> parameter, AWS OpsWorks creates a new security group. </p> <p> <i>Chef Automate:</i> The default security group opens the Chef server to the world on TCP port 443. If a KeyName is present, AWS OpsWorks enables SSH access. SSH is also open to the world on TCP port 22. </p> <p> <i>Puppet Enterprise:</i> The default security group opens TCP ports 22, 443, 4433, 8140, 8142, 8143, and 8170. If a KeyName is present, AWS OpsWorks enables SSH access. SSH is also open to the world on TCP port 22. </p> <p>By default, your server is accessible from any IP address. We recommend that you update your security group rules to allow access from known IP addresses and address ranges only. To edit security group rules, open Security Groups in the navigation pane of the EC2 management console. </p>'
+      description: '<p> Creates and immedately starts a new server. The server is ready to use when it is in the <code>HEALTHY</code> state. By default, you can create a maximum of 10 servers. </p> <p> This operation is asynchronous. </p> <p> A <code>LimitExceededException</code> is thrown when you have created the maximum number of servers (10). A <code>ResourceAlreadyExistsException</code> is thrown when a server with the same name already exists in the account. A <code>ResourceNotFoundException</code> is thrown when you specify a backup ID that is not valid or is for a backup that does not exist. A <code>ValidationException</code> is thrown when parameters of the request are not valid. </p> <p> If you do not specify a security group by adding the <code>SecurityGroupIds</code> parameter, AWS OpsWorks creates a new security group. </p> <p> <i>Chef Automate:</i> The default security group opens the Chef server to the world on TCP port 443. If a KeyName is present, AWS OpsWorks enables SSH access. SSH is also open to the world on TCP port 22. </p> <p> <i>Puppet Enterprise:</i> The default security group opens TCP ports 22, 443, 4433, 8140, 8142, 8143, and 8170. If a KeyName is present, AWS OpsWorks enables SSH access. SSH is also open to the world on TCP port 22. </p> <p>By default, your server is accessible from any IP address. We recommend that you update your security group rules to allow access from known IP addresses and address ranges only. To edit security group rules, open Security Groups in the navigation pane of the EC2 management console. </p> <p>To specify your own domain for a server, and provide your own self-signed or CA-signed certificate and private key, specify values for <code>CustomDomain</code>, <code>CustomCertificate</code>, and <code>CustomPrivateKey</code>.</p>'
       responses:
         '200':
           description: Success
@@ -869,6 +869,15 @@ definitions:
       AssociatePublicIpAddress:
         $ref: '#/definitions/Boolean'
         description: ' Associate a public IP address with a server that you are launching. Valid values are <code>true</code> or <code>false</code>. The default value is <code>true</code>. '
+      CustomDomain:
+        $ref: '#/definitions/CustomDomain'
+        description: 'An optional public endpoint of a server, such as <code>https://aws.my-company.com</code>. To access the server, create a CNAME DNS record in your preferred DNS service that points the custom domain to the endpoint that is generated when the server is created (the value of the CreateServer Endpoint attribute). You cannot access the server by using the generated <code>Endpoint</code> value if the server is using a custom domain. If you specify a custom domain, you must also specify values for <code>CustomCertificate</code> and <code>CustomPrivateKey</code>.'
+      CustomCertificate:
+        $ref: '#/definitions/CustomCertificate'
+        description: '<p>A PEM-formatted HTTPS certificate. The value can be be a single, self-signed certificate, or a certificate chain. If you specify a custom certificate, you must also specify values for <code>CustomDomain</code> and <code>CustomPrivateKey</code>. The following are requirements for the <code>CustomCertificate</code> value:</p> <ul> <li> <p>You can provide either a self-signed, custom certificate, or the full certificate chain.</p> </li> <li> <p>The certificate must be a valid X509 certificate, or a certificate chain in PEM format.</p> </li> <li> <p>The certificate must be valid at the time of upload. A certificate can''t be used before its validity period begins (the certificate''s <code>NotBefore</code> date), or after it expires (the certificate''s <code>NotAfter</code> date).</p> </li> <li> <p>The certificate’s common name or subject alternative names (SANs), if present, must match the value of <code>CustomDomain</code>.</p> </li> <li> <p>The certificate must match the value of <code>CustomPrivateKey</code>.</p> </li> </ul>'
+      CustomPrivateKey:
+        $ref: '#/definitions/CustomPrivateKey'
+        description: 'A private key in PEM format for connecting to the server by using HTTPS. The private key must not be encrypted; it cannot be protected by a password or passphrase. If you specify a custom private key, you must also specify values for <code>CustomDomain</code> and <code>CustomCertificate</code>.'
       DisableAutomatedBackup:
         $ref: '#/definitions/Boolean'
         description: ' Enable or disable scheduled backups. Valid values are <code>true</code> or <code>false</code>. The default value is <code>true</code>. '
@@ -1169,6 +1178,8 @@ definitions:
         description: 'The value to set for the attribute. '
   String:
     type: string
+    pattern: \(\?s\).*
+    maxLength: 10000
   Integer:
     type: integer
   AccountAttribute:
@@ -1198,12 +1209,15 @@ definitions:
     type: string
     pattern: '^[\-\p{Alnum}_:.]+$'
     description: 'The node name that is used by <code>chef-client</code> or <code>puppet-agent</code>for a new node. We recommend to use a unique FQDN as hostname. For more information, see the <a href="https://docs.aws.amazon.com/https:/docs.chef.io/nodes.html#about-node-names">Chef</a> or <a href="https://docs.aws.amazon.com/https:/docs.puppet.com/puppet/4.10/man/agent.html">Puppet</a> documentation. '
+    maxLength: 10000
   EngineAttributes:
     type: array
     items:
       $ref: '#/definitions/EngineAttribute'
   NodeAssociationStatusToken:
     type: string
+    pattern: \(\?s\).*
+    maxLength: 10000
   AttributeName:
     type: string
     pattern: '[A-Z][A-Z0-9_]*'
@@ -1211,8 +1225,11 @@ definitions:
     maxLength: 64
   AttributeValue:
     type: string
+    pattern: \(\?s\).*
+    maxLength: 10000
   BackupId:
     type: string
+    pattern: '[a-zA-Z][a-zA-Z0-9\-\.\:]*'
     maxLength: 79
   BackupType:
     type: string
@@ -1226,6 +1243,7 @@ definitions:
     type: string
     pattern: '^((Mon|Tue|Wed|Thu|Fri|Sat|Sun):)?([0-1][0-9]|2[0-3]):[0-5][0-9]$'
     description: '<p> <code>DDD:HH:MM</code> (weekly start time) or <code>HH:MM</code> (daily start time). </p> <p> Time windows always use coordinated universal time (UTC). Valid strings for day of week (<code>DDD</code>) are: <code>Mon</code>, <code>Tue</code>, <code>Wed</code>, <code>Thr</code>, <code>Fri</code>, <code>Sat</code>, or <code>Sun</code>.</p>'
+    maxLength: 10000
   Strings:
     type: array
     items:
@@ -1322,14 +1340,31 @@ definitions:
       $ref: '#/definitions/Backup'
   Boolean:
     type: boolean
+  CustomDomain:
+    type: string
+    pattern: '^(((?!-)[A-Za-z0-9-]{0,62}[A-Za-z0-9])\.)+((?!-)[A-Za-z0-9-]{1,62}[A-Za-z0-9])$'
+    maxLength: 253
+  CustomCertificate:
+    type: string
+    pattern: \(\?s\)\s*-----BEGIN CERTIFICATE-----.\+-----END CERTIFICATE-----\s*
+    maxLength: 2097152
+  CustomPrivateKey:
+    type: string
+    pattern: '\(\?ms\)\s*^-----BEGIN \(\?-s:.*\)PRIVATE KEY-----$.*\?^-----END \(\?-s:.*\)PRIVATE KEY-----$\s*'
+    maxLength: 4096
+    format: password
   InstanceProfileArn:
     type: string
     pattern: 'arn:aws:iam::[0-9]{12}:instance-profile/.*'
+    maxLength: 10000
   KeyPair:
     type: string
+    pattern: .*
+    maxLength: 10000
   ServiceRoleArn:
     type: string
     pattern: 'arn:aws:iam::[0-9]{12}:role/.*'
+    maxLength: 10000
   Server:
     type: object
     properties:
@@ -1348,12 +1383,15 @@ definitions:
       CloudFormationStackArn:
         $ref: '#/definitions/String'
         description: 'The ARN of the CloudFormation stack that was used to create the server. '
+      CustomDomain:
+        $ref: '#/definitions/CustomDomain'
+        description: 'An optional public endpoint of a server, such as <code>https://aws.my-company.com</code>. You cannot access the server by using the <code>Endpoint</code> value if the server has a <code>CustomDomain</code> specified.'
       DisableAutomatedBackup:
         $ref: '#/definitions/Boolean'
         description: 'Disables automated backups. The number of stored backups is dependent on the value of PreferredBackupCount. '
       Endpoint:
         $ref: '#/definitions/String'
-        description: ' A DNS name that can be used to access the engine. Example: <code>myserver-asdfghjkl.us-east-1.opsworks.io</code> '
+        description: ' A DNS name that can be used to access the engine. Example: <code>myserver-asdfghjkl.us-east-1.opsworks.io</code>. You cannot access the server by using the <code>Endpoint</code> value if the server has a <code>CustomDomain</code> specified. '
       Engine:
         $ref: '#/definitions/String'
         description: 'The engine type of the server. Valid values in this release include <code>ChefAutomate</code> and <code>Puppet</code>. '
@@ -1405,6 +1443,8 @@ definitions:
     description: 'Describes a configuration management server. '
   NextToken:
     type: string
+    pattern: \(\?s\).*
+    maxLength: 10000
   MaxResults:
     type: integer
     minimum: 1
@@ -1425,8 +1465,12 @@ definitions:
       $ref: '#/definitions/Server'
   EngineAttributeName:
     type: string
+    pattern: \(\?s\).*
+    maxLength: 10000
   EngineAttributeValue:
     type: string
+    pattern: \(\?s\).*
+    maxLength: 10000
     format: password
   EngineAttribute:
     type: object

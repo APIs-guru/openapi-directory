@@ -413,8 +413,15 @@ paths:
       parameters:
         - name: ReplicationGroupIds
           in: query
-          required: true
+          required: false
           description: The replication group IDs
+          type: array
+          items:
+            type: string
+        - name: CacheClusterIds
+          in: query
+          required: false
+          description: The cache cluster IDs
           type: array
           items:
             type: string
@@ -463,8 +470,15 @@ paths:
       parameters:
         - name: ReplicationGroupIds
           in: formData
-          required: true
+          required: false
           description: The replication group IDs
+          type: array
+          items:
+            type: string
+        - name: CacheClusterIds
+          in: formData
+          required: false
+          description: The cache cluster IDs
           type: array
           items:
             type: string
@@ -506,8 +520,15 @@ paths:
       parameters:
         - name: ReplicationGroupIds
           in: query
-          required: true
+          required: false
           description: The replication group IDs
+          type: array
+          items:
+            type: string
+        - name: CacheClusterIds
+          in: query
+          required: false
+          description: The cache cluster IDs
           type: array
           items:
             type: string
@@ -556,8 +577,15 @@ paths:
       parameters:
         - name: ReplicationGroupIds
           in: formData
-          required: true
+          required: false
           description: The replication group IDs
+          type: array
+          items:
+            type: string
+        - name: CacheClusterIds
+          in: formData
+          required: false
+          description: The cache cluster IDs
           type: array
           items:
             type: string
@@ -4600,6 +4628,18 @@ paths:
           type: array
           items:
             type: string
+        - name: CacheClusterIds
+          in: query
+          required: false
+          description: The cache cluster IDs
+          type: array
+          items:
+            type: string
+        - name: Engine
+          in: query
+          required: false
+          description: 'The Elasticache engine to which the update applies. Either Redis or Memcached '
+          type: string
         - name: ServiceUpdateStatus
           in: query
           required: false
@@ -4691,6 +4731,18 @@ paths:
           type: array
           items:
             type: string
+        - name: CacheClusterIds
+          in: formData
+          required: false
+          description: The cache cluster IDs
+          type: array
+          items:
+            type: string
+        - name: Engine
+          in: formData
+          required: false
+          description: 'The Elasticache engine to which the update applies. Either Redis or Memcached '
+          type: string
         - name: ServiceUpdateStatus
           in: formData
           required: false
@@ -7463,27 +7515,36 @@ definitions:
     items:
       $ref: '#/definitions/String'
     maxItems: 20
+  CacheClusterIdList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+    maxItems: 20
   BatchApplyUpdateActionMessage:
     type: object
     required:
-      - ReplicationGroupIds
       - ServiceUpdateName
     properties:
       ReplicationGroupIds:
         $ref: '#/definitions/ReplicationGroupIdList'
         description: The replication group IDs
+      CacheClusterIds:
+        $ref: '#/definitions/CacheClusterIdList'
+        description: The cache cluster IDs
       ServiceUpdateName:
         $ref: '#/definitions/String'
         description: The unique ID of the service update
   BatchStopUpdateActionMessage:
     type: object
     required:
-      - ReplicationGroupIds
       - ServiceUpdateName
     properties:
       ReplicationGroupIds:
         $ref: '#/definitions/ReplicationGroupIdList'
         description: The replication group IDs
+      CacheClusterIds:
+        $ref: '#/definitions/CacheClusterIdList'
+        description: The cache cluster IDs
       ServiceUpdateName:
         $ref: '#/definitions/String'
         description: The unique ID of the service update
@@ -7742,6 +7803,52 @@ definitions:
         $ref: '#/definitions/String'
         description: The value for the cache node type.
     description: A value that applies only to a certain cache node type.
+  NodeUpdateStatus:
+    type: string
+    enum:
+      - not-applied
+      - waiting-to-start
+      - in-progress
+      - stopping
+      - stopped
+      - complete
+  NodeUpdateInitiatedBy:
+    type: string
+    enum:
+      - system
+      - customer
+  CacheNodeUpdateStatus:
+    type: object
+    properties:
+      CacheNodeId:
+        $ref: '#/definitions/String'
+        description: The node ID of the cache cluster
+      NodeUpdateStatus:
+        $ref: '#/definitions/NodeUpdateStatus'
+        description: The update status of the node
+      NodeDeletionDate:
+        $ref: '#/definitions/TStamp'
+        description: The deletion date of the node
+      NodeUpdateStartDate:
+        $ref: '#/definitions/TStamp'
+        description: The start date of the update for a node
+      NodeUpdateEndDate:
+        $ref: '#/definitions/TStamp'
+        description: The end date of the update for a node
+      NodeUpdateInitiatedBy:
+        $ref: '#/definitions/NodeUpdateInitiatedBy'
+        description: Reflects whether the update was initiated by the customer or automatically applied
+      NodeUpdateInitiatedDate:
+        $ref: '#/definitions/TStamp'
+        description: The date when the update is triggered
+      NodeUpdateStatusModifiedDate:
+        $ref: '#/definitions/TStamp'
+        description: The date when the NodeUpdateStatus was last modified&gt;
+    description: The status of the service update on the cache node
+  CacheNodeUpdateStatusList:
+    type: array
+    items:
+      $ref: '#/definitions/CacheNodeUpdateStatus'
   CacheParameterGroup:
     type: object
     properties:
@@ -8615,6 +8722,12 @@ definitions:
       ReplicationGroupIds:
         $ref: '#/definitions/ReplicationGroupIdList'
         description: The replication group IDs
+      CacheClusterIds:
+        $ref: '#/definitions/CacheClusterIdList'
+        description: The cache cluster IDs
+      Engine:
+        $ref: '#/definitions/String'
+        description: 'The Elasticache engine to which the update applies. Either Redis or Memcached '
       ServiceUpdateStatus:
         $ref: '#/definitions/ServiceUpdateStatusList'
         description: The status of the service update
@@ -8946,20 +9059,6 @@ definitions:
         $ref: '#/definitions/String'
         description: The role that is currently assigned to the node - <code>primary</code> or <code>replica</code>. This member is only applicable for Redis (cluster mode disabled) replication groups.
     description: Represents a single node within a node group (shard).
-  NodeUpdateStatus:
-    type: string
-    enum:
-      - not-applied
-      - waiting-to-start
-      - in-progress
-      - stopping
-      - stopped
-      - complete
-  NodeUpdateInitiatedBy:
-    type: string
-    enum:
-      - system
-      - customer
   NodeGroupMemberUpdateStatus:
     type: object
     properties:
@@ -9080,6 +9179,9 @@ definitions:
       ReplicationGroupId:
         $ref: '#/definitions/String'
         description: The ID of the replication group
+      CacheClusterId:
+        $ref: '#/definitions/String'
+        description: The ID of the cache cluster
       ServiceUpdateName:
         $ref: '#/definitions/String'
         description: The unique ID of the service update
@@ -9338,10 +9440,10 @@ definitions:
         description: Reflects the nature of the service update
       Engine:
         $ref: '#/definitions/String'
-        description: The Redis engine to which the service update applies
+        description: The Elasticache engine to which the update applies. Either Redis or Memcached
       EngineVersion:
         $ref: '#/definitions/String'
-        description: The Redis engine version to which the service update applies
+        description: The Elasticache engine version to which the update applies. Either Redis or Memcached engine version
       AutoUpdateAfterRecommendedApplyByDate:
         $ref: '#/definitions/BooleanOptional'
         description: 'Indicates whether the service update will be automatically applied once the recommended apply-by date has expired. '
@@ -9387,6 +9489,9 @@ definitions:
       ReplicationGroupId:
         $ref: '#/definitions/String'
         description: The replication group ID
+      CacheClusterId:
+        $ref: '#/definitions/String'
+        description: The ID of the cache cluster
       ServiceUpdateName:
         $ref: '#/definitions/String'
         description: The unique ID of the service update
@@ -9407,6 +9512,9 @@ definitions:
       ReplicationGroupId:
         $ref: '#/definitions/String'
         description: The ID of the replication group
+      CacheClusterId:
+        $ref: '#/definitions/String'
+        description: The ID of the cache cluster
       ServiceUpdateName:
         $ref: '#/definitions/String'
         description: The unique ID of the service update
@@ -9443,9 +9551,15 @@ definitions:
       NodeGroupUpdateStatus:
         $ref: '#/definitions/NodeGroupUpdateStatusList'
         description: The status of the service update on the node group
+      CacheNodeUpdateStatus:
+        $ref: '#/definitions/CacheNodeUpdateStatusList'
+        description: The status of the service update on the cache node
       EstimatedUpdateTime:
         $ref: '#/definitions/String'
         description: The estimated length of time for the update to complete
+      Engine:
+        $ref: '#/definitions/String'
+        description: The Elasticache engine to which the update applies. Either Redis or Memcached
     description: The status of the service update for a specific replication group
   UpdateActionList:
     type: array

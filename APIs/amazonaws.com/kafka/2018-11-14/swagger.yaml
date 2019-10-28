@@ -227,7 +227,8 @@ paths:
                     $ref: '#/definitions/BrokerAZDistribution'
                     description: |2-
 
-                                  <p>The distribution of broker nodes across Availability Zones.</p>
+                                  <p>The distribution of broker nodes across Availability Zones. This is an optional parameter. If you don't specify it, Amazon MSK gives it the value DEFAULT. You can also explicitly set this parameter to the value DEFAULT. No other values are currently allowed.</p>
+                               <p>Amazon MSK distributes the broker nodes evenly across the Availability Zones that correspond to the subnets you provide when you create the cluster.</p>
                                
                   ClientSubnets:
                     $ref: '#/definitions/__listOf__string'
@@ -1257,6 +1258,78 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/clusters/{clusterArn}/nodes/count':
+    put:
+      operationId: UpdateBrokerCount
+      description: |2-
+
+                    <p>Updates the number of broker nodes in the cluster.</p>
+                 
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateBrokerCountResponse'
+        '480':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '484':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: clusterArn
+          in: path
+          required: true
+          description: |2-
+
+                        <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>
+                     
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - currentVersion
+              - targetNumberOfBrokerNodes
+            properties:
+              currentVersion:
+                description: |2-
+
+                              <p>The version of cluster to update from. A successful operation will then generate a new version.</p>
+                           
+                type: string
+              targetNumberOfBrokerNodes:
+                description: |2-
+
+                              <p>The number of broker nodes that you want the cluster to have after this operation completes successfully.</p>
+                           
+                type: integer
+                minimum: 1
+                maximum: 15
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/v1/clusters/{clusterArn}/nodes/storage':
     put:
       operationId: UpdateBrokerStorage
@@ -1444,7 +1517,8 @@ definitions:
       - DEFAULT
     description: |2-
 
-                  <p>The distribution of broker nodes across Availability Zones. By default, broker nodes are distributed among three Availability Zones. Currently, the only supported value is DEFAULT. You can either specify this value explicitly or leave it out.</p>
+                  <p>The distribution of broker nodes across Availability Zones. This is an optional parameter. If you don't specify it, Amazon MSK gives it the value DEFAULT. You can also explicitly set this parameter to the value DEFAULT. No other values are currently allowed.</p>
+               <p>Amazon MSK distributes the broker nodes evenly across the Availability Zones that correspond to the subnets you provide when you create the cluster.</p>
                
   __listOf__string:
     type: array
@@ -1769,6 +1843,21 @@ definitions:
 
                       <p>The key-value pair for the resource tag.</p>
                    
+  UpdateBrokerCountResponse:
+    type: object
+    properties:
+      ClusterArn:
+        $ref: '#/definitions/__string'
+        description: |2-
+
+                      <p>The Amazon Resource Name (ARN) of the cluster.</p>
+                   
+      ClusterOperationArn:
+        $ref: '#/definitions/__string'
+        description: |2-
+
+                      <p>The Amazon Resource Name (ARN) of the cluster operation.</p>
+                   
   UpdateBrokerStorageResponse:
     type: object
     properties:
@@ -1833,7 +1922,8 @@ definitions:
         $ref: '#/definitions/BrokerAZDistribution'
         description: |2-
 
-                      <p>The distribution of broker nodes across Availability Zones.</p>
+                      <p>The distribution of broker nodes across Availability Zones. This is an optional parameter. If you don't specify it, Amazon MSK gives it the value DEFAULT. You can also explicitly set this parameter to the value DEFAULT. No other values are currently allowed.</p>
+                   <p>Amazon MSK distributes the broker nodes evenly across the Availability Zones that correspond to the subnets you provide when you create the cluster.</p>
                    
       ClientSubnets:
         $ref: '#/definitions/__listOf__string'
@@ -2601,6 +2691,24 @@ definitions:
   UntagResourceRequest:
     type: object
     properties: {}
+  UpdateBrokerCountRequest:
+    type: object
+    required:
+      - CurrentVersion
+      - TargetNumberOfBrokerNodes
+    properties:
+      CurrentVersion:
+        $ref: '#/definitions/__string'
+        description: |2-
+
+                      <p>The version of cluster to update from. A successful operation will then generate a new version.</p>
+                   
+      TargetNumberOfBrokerNodes:
+        $ref: '#/definitions/__integerMin1Max15'
+        description: |2-
+
+                      <p>The number of broker nodes that you want the cluster to have after this operation completes successfully.</p>
+                   
   UpdateBrokerStorageRequest:
     type: object
     required:

@@ -3,7 +3,7 @@ info:
   version: '2016-06-30'
   x-release: v4
   title: Amazon Import/Export Snowball
-  description: 'AWS Snowball is a petabyte-scale data transport solution that uses secure devices to transfer large amounts of data between your on-premises data centers and Amazon Simple Storage Service (Amazon S3). The commands described here provide access to the same functionality that is available in the AWS Snowball Management Console, which enables you to create and manage jobs for Snowball and Snowball Edge devices. To transfer data locally with a device, you''ll need to use the Snowball client or the Amazon S3 API adapter for Snowball.'
+  description: 'AWS Snowball is a petabyte-scale data transport solution that uses secure devices to transfer large amounts of data between your on-premises data centers and Amazon Simple Storage Service (Amazon S3). The Snowball commands described here provide access to the same functionality that is available in the AWS Snowball Management Console, which enables you to create and manage jobs for Snowball. To transfer data locally with a Snowball device, you''ll need to use the Snowball client or the Amazon S3 API adapter for Snowball. For more information, see the <a href="https://docs.aws.amazon.com/AWSImportExport/latest/ug/api-reference.html">User Guide</a>.'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -622,6 +622,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSIESnowballJobManagementService.GetSoftwareUpdates':
+    post:
+      operationId: GetSoftwareUpdates
+      description: Returns an Amazon S3 presigned URL for an update file associated with a specified <code>JobId</code>.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetSoftwareUpdatesResult'
+        '480':
+          description: InvalidResourceException
+          schema:
+            $ref: '#/definitions/InvalidResourceException'
+        '481':
+          description: InvalidJobStateException
+          schema:
+            $ref: '#/definitions/InvalidJobStateException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetSoftwareUpdatesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSIESnowballJobManagementService.GetSoftwareUpdates
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AWSIESnowballJobManagementService.ListClusterJobs':
     post:
       operationId: ListClusterJobs
@@ -695,7 +732,7 @@ paths:
   '/#X-Amz-Target=AWSIESnowballJobManagementService.ListCompatibleImages':
     post:
       operationId: ListCompatibleImages
-      description: 'This action returns a list of the different Amazon EC2 Amazon Machine Images (AMIs) that are owned by your AWS account that would be supported for use on <code>EDGE</code>, <code>EDGE_C</code>, and <code>EDGE_CG</code> devices. For more information on compatible AMIs, see <a href="http://docs.aws.amazon.com/snowball/latest/developer-guide/using-ec2.html">Using Amazon EC2 Compute Instances</a> in the <i>AWS Snowball Developer Guide</i>.'
+      description: 'This action returns a list of the different Amazon EC2 Amazon Machine Images (AMIs) that are owned by your AWS account that would be supported for use on a Snowball Edge device. Currently, supported AMIs are based on the CentOS 7 (x86_64) - with Updates HVM, Ubuntu Server 14.04 LTS (HVM), and Ubuntu 16.04 LTS - Xenial (HVM) images, available on the AWS Marketplace.'
       responses:
         '200':
           description: Success
@@ -949,16 +986,16 @@ definitions:
         description: The ID for the address that you want the cluster shipped to.
       KmsKeyARN:
         $ref: '#/definitions/KmsKeyARN'
-        description: 'The <code>KmsKeyARN</code> value that you want to associate with this cluster. <code>KmsKeyARN</code> values are created by using the <a href="http://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html">CreateKey</a> API action in AWS Key Management Service (AWS KMS). '
+        description: 'The <code>KmsKeyARN</code> value that you want to associate with this cluster. <code>KmsKeyARN</code> values are created by using the <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html">CreateKey</a> API action in AWS Key Management Service (AWS KMS). '
       RoleARN:
         $ref: '#/definitions/RoleARN'
-        description: 'The <code>RoleARN</code> that you want to associate with this cluster. <code>RoleArn</code> values are created by using the <a href="http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html">CreateRole</a> API action in AWS Identity and Access Management (IAM).'
+        description: 'The <code>RoleARN</code> that you want to associate with this cluster. <code>RoleArn</code> values are created by using the <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html">CreateRole</a> API action in AWS Identity and Access Management (IAM).'
       SnowballType:
         $ref: '#/definitions/SnowballType'
-        description: 'The type of AWS Snowball device to use for this cluster. The only supported device types for cluster jobs are <code>EDGE</code>, <code>EDGE_C</code>, and <code>EDGE_CG</code>.'
+        description: 'The type of AWS Snowball device to use for this cluster. Currently, the only supported device type for cluster jobs is <code>EDGE</code>.'
       ShippingOption:
         $ref: '#/definitions/ShippingOption'
-        description: '<p>The shipping speed for each node in this cluster. This speed doesn''t dictate how soon you''ll get each Snowball Edge device, rather it represents how quickly each device moves to its destination while in transit. Regional shipping speeds are as follows:</p> <ul> <li> <p>In Australia, you have access to express shipping. Typically, devices shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snowball Edges shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, devices are delivered in one to seven days.</p> </li> <li> <p>In the US, you have access to one-day shipping and two-day shipping.</p> </li> </ul>'
+        description: '<p>The shipping speed for each node in this cluster. This speed doesn''t dictate how soon you''ll get each Snowball Edge device, rather it represents how quickly each device moves to its destination while in transit. Regional shipping speeds are as follows:</p> <ul> <li> <p>In Australia, you have access to express shipping. Typically, devices shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snowball Edges shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, Snowball Edges are delivered in one to seven days.</p> </li> <li> <p>In the US, you have access to one-day shipping and two-day shipping.</p> </li> </ul>'
       Notification:
         $ref: '#/definitions/Notification'
         description: The Amazon Simple Notification Service (Amazon SNS) notification settings for this cluster.
@@ -992,10 +1029,10 @@ definitions:
         description: The ID for the address that you want the Snowball shipped to.
       KmsKeyARN:
         $ref: '#/definitions/KmsKeyARN'
-        description: 'The <code>KmsKeyARN</code> that you want to associate with this job. <code>KmsKeyARN</code>s are created using the <a href="http://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html">CreateKey</a> AWS Key Management Service (KMS) API action.'
+        description: 'The <code>KmsKeyARN</code> that you want to associate with this job. <code>KmsKeyARN</code>s are created using the <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html">CreateKey</a> AWS Key Management Service (KMS) API action.'
       RoleARN:
         $ref: '#/definitions/RoleARN'
-        description: 'The <code>RoleARN</code> that you want to associate with this job. <code>RoleArn</code>s are created using the <a href="http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html">CreateRole</a> AWS Identity and Access Management (IAM) API action.'
+        description: 'The <code>RoleARN</code> that you want to associate with this job. <code>RoleArn</code>s are created using the <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html">CreateRole</a> AWS Identity and Access Management (IAM) API action.'
       SnowballCapacityPreference:
         $ref: '#/definitions/SnowballCapacity'
         description: 'If your job is being created in one of the US regions, you have the option of specifying what size Snowball you''d like for this job. In all other regions, Snowballs come with 80 TB in storage capacity.'
@@ -1010,7 +1047,7 @@ definitions:
         description: 'The ID of a cluster. If you''re creating a job for a node in a cluster, you need to provide only this <code>clusterId</code> value. The other job attributes are inherited from the cluster.'
       SnowballType:
         $ref: '#/definitions/SnowballType'
-        description: 'The type of AWS Snowball device to use for this job. The only supported device types for cluster jobs are <code>EDGE</code>, <code>EDGE_C</code>, and <code>EDGE_CG</code>.'
+        description: 'The type of AWS Snowball device to use for this job. Currently, the only supported device type for cluster jobs is <code>EDGE</code>.'
       ForwardingAddressId:
         $ref: '#/definitions/AddressId'
         description: The forwarding address ID for a job. This field is not supported in most regions.
@@ -1187,6 +1224,20 @@ definitions:
   GetSnowballUsageRequest:
     type: object
     properties: {}
+  GetSoftwareUpdatesResult:
+    type: object
+    properties:
+      UpdatesURI:
+        $ref: '#/definitions/String'
+        description: 'The Amazon S3 presigned URL for the update file associated with the specified <code>JobId</code> value. The software update will be available for 2 days after this request is made. To access an update after the 2 days have passed, you''ll have to make another call to <code>GetSoftwareUpdates</code>.'
+  GetSoftwareUpdatesRequest:
+    type: object
+    required:
+      - JobId
+    properties:
+      JobId:
+        $ref: '#/definitions/JobId'
+        description: 'The ID for a job that you want to get the software update file for, for example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.'
   ListClusterJobsResult:
     type: object
     example:
@@ -1276,7 +1327,7 @@ definitions:
     properties:
       CompatibleImages:
         $ref: '#/definitions/CompatibleImageList'
-        description: A JSON-formatted object that describes a compatible AMI.
+        description: 'A JSON-formatted object that describes a compatible AMI, including the ID and name for a Snowball Edge AMI.'
       NextToken:
         $ref: '#/definitions/String'
         description: 'Because HTTP requests are stateless, this is the starting point for your next list of returned images.'
@@ -1285,7 +1336,7 @@ definitions:
     properties:
       MaxResults:
         $ref: '#/definitions/ListLimit'
-        description: 'The maximum number of results for the list of compatible images. Currently, each supported device can store 10 AMIs.'
+        description: 'The maximum number of results for the list of compatible images. Currently, a Snowball Edge device can store 10 AMIs.'
       NextToken:
         $ref: '#/definitions/String'
         description: 'HTTP requests are stateless. To identify what object comes "next" in the list of compatible images, you can specify a value for <code>NextToken</code> as the starting point for your list of returned images.'
@@ -1329,7 +1380,7 @@ definitions:
         description: 'The cluster ID of the cluster that you want to update, for example <code>CID123e4567-e89b-12d3-a456-426655440000</code>.'
       RoleARN:
         $ref: '#/definitions/RoleARN'
-        description: 'The new role Amazon Resource Name (ARN) that you want to associate with this cluster. To create a role ARN, use the <a href="http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html">CreateRole</a> API action in AWS Identity and Access Management (IAM).'
+        description: 'The new role Amazon Resource Name (ARN) that you want to associate with this cluster. To create a role ARN, use the <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html">CreateRole</a> API action in AWS Identity and Access Management (IAM).'
       Description:
         $ref: '#/definitions/String'
         description: The updated description of this cluster.
@@ -1361,7 +1412,7 @@ definitions:
         description: 'The job ID of the job that you want to update, for example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.'
       RoleARN:
         $ref: '#/definitions/RoleARN'
-        description: 'The new role Amazon Resource Name (ARN) that you want to associate with this job. To create a role ARN, use the <a href="http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html">CreateRole</a>AWS Identity and Access Management (IAM) API action.'
+        description: 'The new role Amazon Resource Name (ARN) that you want to associate with this job. To create a role ARN, use the <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html">CreateRole</a>AWS Identity and Access Management (IAM) API action.'
       Notification:
         $ref: '#/definitions/Notification'
         description: The new or updated <a>Notification</a> object.
@@ -1535,7 +1586,7 @@ definitions:
     properties:
       SnsTopicARN:
         $ref: '#/definitions/SnsTopicARN'
-        description: '<p>The new SNS <code>TopicArn</code> that you want to associate with this job. You can create Amazon Resource Names (ARNs) for topics by using the <a href="http://docs.aws.amazon.com/sns/latest/api/API_CreateTopic.html">CreateTopic</a> Amazon SNS API action.</p> <p>You can subscribe email addresses to an Amazon SNS topic through the AWS Management Console, or by using the <a href="http://docs.aws.amazon.com/sns/latest/api/API_Subscribe.html">Subscribe</a> AWS Simple Notification Service (SNS) API action.</p>'
+        description: '<p>The new SNS <code>TopicArn</code> that you want to associate with this job. You can create Amazon Resource Names (ARNs) for topics by using the <a href="https://docs.aws.amazon.com/sns/latest/api/API_CreateTopic.html">CreateTopic</a> Amazon SNS API action.</p> <p>You can subscribe email addresses to an Amazon SNS topic through the AWS Management Console, or by using the <a href="https://docs.aws.amazon.com/sns/latest/api/API_Subscribe.html">Subscribe</a> AWS Simple Notification Service (SNS) API action.</p>'
       JobStatesToNotify:
         $ref: '#/definitions/JobStateList'
         description: The list of job states that will trigger a notification for this job.
@@ -1554,10 +1605,10 @@ definitions:
         description: The optional description of the cluster.
       KmsKeyARN:
         $ref: '#/definitions/KmsKeyARN'
-        description: 'The <code>KmsKeyARN</code> Amazon Resource Name (ARN) associated with this cluster. This ARN was created using the <a href="http://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html">CreateKey</a> API action in AWS Key Management Service (AWS KMS).'
+        description: 'The <code>KmsKeyARN</code> Amazon Resource Name (ARN) associated with this cluster. This ARN was created using the <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html">CreateKey</a> API action in AWS Key Management Service (AWS KMS).'
       RoleARN:
         $ref: '#/definitions/RoleARN'
-        description: 'The role ARN associated with this cluster. This ARN was created using the <a href="http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html">CreateRole</a> API action in AWS Identity and Access Management (IAM).'
+        description: 'The role ARN associated with this cluster. This ARN was created using the <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html">CreateRole</a> API action in AWS Identity and Access Management (IAM).'
       ClusterState:
         $ref: '#/definitions/ClusterState'
         description: The current status of the cluster.
@@ -1566,7 +1617,7 @@ definitions:
         description: 'The type of job for this cluster. Currently, the only job type supported for clusters is <code>LOCAL_USE</code>.'
       SnowballType:
         $ref: '#/definitions/SnowballType'
-        description: 'The type of AWS Snowball device to use for this cluster. The only supported device types for cluster jobs are <code>EDGE</code>, <code>EDGE_C</code>, and <code>EDGE_CG</code>.'
+        description: 'The type of AWS Snowball device to use for this cluster. Currently, the only supported device type for cluster jobs is <code>EDGE</code>.'
       CreationDate:
         $ref: '#/definitions/Timestamp'
         description: The creation date for this cluster.
@@ -1578,7 +1629,7 @@ definitions:
         description: The automatically generated ID for a specific address.
       ShippingOption:
         $ref: '#/definitions/ShippingOption'
-        description: '<p>The shipping speed for each node in this cluster. This speed doesn''t dictate how soon you''ll get each device, rather it represents how quickly each device moves to its destination while in transit. Regional shipping speeds are as follows:</p> <ul> <li> <p>In Australia, you have access to express shipping. Typically, devices shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, devices shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, devices are delivered in one to seven days.</p> </li> <li> <p>In the US, you have access to one-day shipping and two-day shipping.</p> </li> </ul>'
+        description: '<p>The shipping speed for each node in this cluster. This speed doesn''t dictate how soon you''ll get each Snowball Edge device, rather it represents how quickly each device moves to its destination while in transit. Regional shipping speeds are as follows:</p> <ul> <li> <p>In Australia, you have access to express shipping. Typically, devices shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snowball Edges shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, Snowball Edges are delivered in one to seven days.</p> </li> <li> <p>In the US, you have access to one-day shipping and two-day shipping.</p> </li> </ul>'
       Notification:
         $ref: '#/definitions/Notification'
         description: The Amazon Simple Notification Service (Amazon SNS) notification settings for this cluster.
@@ -1595,7 +1646,7 @@ definitions:
       Name:
         $ref: '#/definitions/String'
         description: The optional name of a compatible image.
-    description: 'A JSON-formatted object that describes a compatible Amazon Machine Image (AMI). For more information on compatible AMIs, see <a href="http://docs.aws.amazon.com/snowball/latest/developer-guide/using-ec2.html">Using Amazon EC2 Compute Instances</a> in the <i>AWS Snowball Developer Guide</i>.'
+    description: 'A JSON-formatted object that describes a compatible Amazon Machine Image (AMI), including the ID and name for a Snowball Edge AMI. This AMI is compatible with the device''s physical hardware requirements, and it should be able to be run in an SBE1 instance on the device.'
   CompatibleImageList:
     type: array
     items:
@@ -1656,10 +1707,10 @@ definitions:
         description: 'The description of the job, provided at job creation.'
       KmsKeyARN:
         $ref: '#/definitions/KmsKeyARN'
-        description: 'The Amazon Resource Name (ARN) for the AWS Key Management Service (AWS KMS) key associated with this job. This ARN was created using the <a href="http://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html">CreateKey</a> API action in AWS KMS.'
+        description: 'The Amazon Resource Name (ARN) for the AWS Key Management Service (AWS KMS) key associated with this job. This ARN was created using the <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html">CreateKey</a> API action in AWS KMS.'
       RoleARN:
         $ref: '#/definitions/RoleARN'
-        description: 'The role ARN associated with this job. This ARN was created using the <a href="http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html">CreateRole</a> API action in AWS Identity and Access Management (IAM).'
+        description: 'The role ARN associated with this job. This ARN was created using the <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html">CreateRole</a> API action in AWS Identity and Access Management (IAM).'
       AddressId:
         $ref: '#/definitions/AddressId'
         description: The ID for the address that you want the Snowball shipped to.
@@ -1699,7 +1750,7 @@ definitions:
         description: The ID of the AMI in Amazon EC2.
       SnowballAmiId:
         $ref: '#/definitions/String'
-        description: The ID of the AMI on the supported device.
+        description: The ID of the AMI on the Snowball Edge device.
     description: 'A JSON-formatted object that contains the IDs for an Amazon Machine Image (AMI), including the Amazon EC2 AMI ID and the Snowball Edge AMI ID. Each AMI has these two IDs to simplify identifying the AMI in both the AWS Cloud and on the device.'
   Ec2AmiResourceList:
     type: array

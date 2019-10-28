@@ -215,49 +215,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-    get:
-      operationId: GetSession
-      description: 'Returns session information for a specified bot, alias, and user ID.'
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/GetSessionResponse'
-        '480':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '481':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '482':
-          description: LimitExceededException
-          schema:
-            $ref: '#/definitions/LimitExceededException'
-        '483':
-          description: InternalFailureException
-          schema:
-            $ref: '#/definitions/InternalFailureException'
-      parameters:
-        - name: botName
-          in: path
-          required: true
-          description: The name of the bot that contains the session data.
-          type: string
-        - name: botAlias
-          in: path
-          required: true
-          description: The alias in use for the bot that contains the session data.
-          type: string
-        - name: userId
-          in: path
-          required: true
-          description: 'The ID of the client application user. Amazon Lex uses this to identify a user''s conversation with your bot. '
-          type: string
-          pattern: '[0-9a-zA-Z._:-]+'
-          minLength: 2
-          maxLength: 100
     post:
       operationId: PutSession
       description: '<p>Creates a new session or modifies an existing session with an Amazon Lex bot. Use this operation to enable your application to set the state of the bot.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/how-session-api.html">Managing Sessions</a>.</p>'
@@ -360,6 +317,73 @@ paths:
                   messageFormat:
                     $ref: '#/definitions/MessageFormatType'
                     description: '<ul> <li> <p> <code>PlainText</code> - The message contains plain UTF-8 text.</p> </li> <li> <p> <code>CustomPayload</code> - The message is a custom format for the client.</p> </li> <li> <p> <code>SSML</code> - The message contains text formatted for voice output.</p> </li> <li> <p> <code>Composite</code> - The message contains an escaped JSON object containing one or more messages. For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/howitworks-manage-prompts.html">Message Groups</a>. </p> </li> </ul>'
+              recentIntentSummaryView:
+                description: '<p>A summary of the recent intents for the bot. You can use the intent summary view to set a checkpoint label on an intent and modify attributes of intents. You can also use it to remove or add intent summary objects to the list.</p> <p>An intent that you modify or add to the list must make sense for the bot. For example, the intent name must be valid for the bot. You must provide valid values for:</p> <ul> <li> <p> <code>intentName</code> </p> </li> <li> <p>slot names</p> </li> <li> <p> <code>slotToElict</code> </p> </li> </ul> <p>If you send the <code>recentIntentSummaryView</code> parameter in a <code>PutSession</code> request, the contents of the new summary view replaces the old summary view. For example, if a <code>GetSession</code> request returns three intents in the summary view and you call <code>PutSession</code> with one intent in the summary view, the next call to <code>GetSession</code> will only return one intent.</p>'
+                type: array
+                items:
+                  $ref: '#/definitions/IntentSummary'
+                minItems: 0
+                maxItems: 3
+  '/bot/{botName}/alias/{botAlias}/user/{userId}/session/':
+    get:
+      operationId: GetSession
+      description: 'Returns session information for a specified bot, alias, and user ID.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetSessionResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: botName
+          in: path
+          required: true
+          description: The name of the bot that contains the session data.
+          type: string
+        - name: botAlias
+          in: path
+          required: true
+          description: The alias in use for the bot that contains the session data.
+          type: string
+        - name: userId
+          in: path
+          required: true
+          description: 'The ID of the client application user. Amazon Lex uses this to identify a user''s conversation with your bot. '
+          type: string
+          pattern: '[0-9a-zA-Z._:-]+'
+          minLength: 2
+          maxLength: 100
+        - name: checkpointLabelFilter
+          in: query
+          required: false
+          description: '<p>A string used to filter the intents returned in the <code>recentIntentSummaryView</code> structure. </p> <p>When you specify a filter, only intents with their <code>checkpointLabel</code> field set to that string are returned.</p>'
+          type: string
+          pattern: '[a-zA-Z0-9-]+'
+          minLength: 1
+          maxLength: 255
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/bot/{botName}/alias/{botAlias}/user/{userId}/content#Content-Type':
     post:
       operationId: PostContent
@@ -476,7 +500,7 @@ paths:
   '/bot/{botName}/alias/{botAlias}/user/{userId}/text':
     post:
       operationId: PostText
-      description: '<p>Sends user input (text or SSML) to Amazon Lex. Client applications can use this API to send requests to Amazon Lex at runtime. Amazon Lex then interprets the user input using the machine learning model it built for the bot. </p> <p> In response, Amazon Lex returns the next <code>message</code> to convey to the user an optional <code>responseCard</code> to display. Consider the following example messages: </p> <ul> <li> <p> For a user input "I would like a pizza", Amazon Lex might return a response with a message eliciting slot data (for example, PizzaSize): "What size pizza would you like?" </p> </li> <li> <p> After the user provides all of the pizza order information, Amazon Lex might return a response with a message to obtain user confirmation "Proceed with the pizza order?". </p> </li> <li> <p> After the user replies to a confirmation prompt with a "yes", Amazon Lex might return a conclusion statement: "Thank you, your cheese pizza has been ordered.". </p> </li> </ul> <p> Not all Amazon Lex messages require a user response. For example, a conclusion statement does not require a response. Some messages require only a "yes" or "no" user response. In addition to the <code>message</code>, Amazon Lex provides additional context about the message in the response that you might use to enhance client behavior, for example, to display the appropriate client user interface. These are the <code>slotToElicit</code>, <code>dialogState</code>, <code>intentName</code>, and <code>slots</code> fields in the response. Consider the following examples: </p> <ul> <li> <p>If the message is to elicit slot data, Amazon Lex returns the following context information:</p> <ul> <li> <p> <code>dialogState</code> set to ElicitSlot </p> </li> <li> <p> <code>intentName</code> set to the intent name in the current context </p> </li> <li> <p> <code>slotToElicit</code> set to the slot name for which the <code>message</code> is eliciting information </p> </li> <li> <p> <code>slots</code> set to a map of slots, configured for the intent, with currently known values </p> </li> </ul> </li> <li> <p> If the message is a confirmation prompt, the <code>dialogState</code> is set to ConfirmIntent and <code>SlotToElicit</code> is set to null. </p> </li> <li> <p>If the message is a clarification prompt (configured for the intent) that indicates that user intent is not understood, the <code>dialogState</code> is set to ElicitIntent and <code>slotToElicit</code> is set to null. </p> </li> </ul> <p> In addition, Amazon Lex also returns your application-specific <code>sessionAttributes</code>. For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html">Managing Conversation Context</a>. </p>'
+      description: '<p>Sends user input to Amazon Lex. Client applications can use this API to send requests to Amazon Lex at runtime. Amazon Lex then interprets the user input using the machine learning model it built for the bot. </p> <p> In response, Amazon Lex returns the next <code>message</code> to convey to the user an optional <code>responseCard</code> to display. Consider the following example messages: </p> <ul> <li> <p> For a user input "I would like a pizza", Amazon Lex might return a response with a message eliciting slot data (for example, PizzaSize): "What size pizza would you like?" </p> </li> <li> <p> After the user provides all of the pizza order information, Amazon Lex might return a response with a message to obtain user confirmation "Proceed with the pizza order?". </p> </li> <li> <p> After the user replies to a confirmation prompt with a "yes", Amazon Lex might return a conclusion statement: "Thank you, your cheese pizza has been ordered.". </p> </li> </ul> <p> Not all Amazon Lex messages require a user response. For example, a conclusion statement does not require a response. Some messages require only a "yes" or "no" user response. In addition to the <code>message</code>, Amazon Lex provides additional context about the message in the response that you might use to enhance client behavior, for example, to display the appropriate client user interface. These are the <code>slotToElicit</code>, <code>dialogState</code>, <code>intentName</code>, and <code>slots</code> fields in the response. Consider the following examples: </p> <ul> <li> <p>If the message is to elicit slot data, Amazon Lex returns the following context information:</p> <ul> <li> <p> <code>dialogState</code> set to ElicitSlot </p> </li> <li> <p> <code>intentName</code> set to the intent name in the current context </p> </li> <li> <p> <code>slotToElicit</code> set to the slot name for which the <code>message</code> is eliciting information </p> </li> <li> <p> <code>slots</code> set to a map of slots, configured for the intent, with currently known values </p> </li> </ul> </li> <li> <p> If the message is a confirmation prompt, the <code>dialogState</code> is set to ConfirmIntent and <code>SlotToElicit</code> is set to null. </p> </li> <li> <p>If the message is a clarification prompt (configured for the intent) that indicates that user intent is not understood, the <code>dialogState</code> is set to ElicitIntent and <code>slotToElicit</code> is set to null. </p> </li> </ul> <p> In addition, Amazon Lex also returns your application-specific <code>sessionAttributes</code>. For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html">Managing Conversation Context</a>. </p>'
       responses:
         '200':
           description: Success
@@ -591,7 +615,7 @@ definitions:
     properties:
       recentIntentSummaryView:
         $ref: '#/definitions/IntentSummaryList'
-        description: 'An array of information about the intents used in the session. The array can contain a maximum of three summaries. If more than three intents are used in the session, the <code>recentIntentSummaryView</code> operation contains information about the last three intents used.'
+        description: '<p>An array of information about the intents used in the session. The array can contain a maximum of three summaries. If more than three intents are used in the session, the <code>recentIntentSummaryView</code> operation contains information about the last three intents used.</p> <p>If you set the <code>checkpointLabelFilter</code> parameter in the request, the array contains only the intents with the specified label.</p>'
       sessionAttributes:
         $ref: '#/definitions/StringMap'
         description: Map of key/value pairs representing the session-specific context information. It contains application information passed between Amazon Lex and a client application.
@@ -680,6 +704,33 @@ definitions:
       - CustomPayload
       - SSML
       - Composite
+  IntentSummary:
+    type: object
+    required:
+      - dialogActionType
+    properties:
+      intentName:
+        $ref: '#/definitions/IntentName'
+        description: The name of the intent.
+      checkpointLabel:
+        $ref: '#/definitions/IntentSummaryCheckpointLabel'
+        description: <p>A user-defined label that identifies a particular intent. You can use this label to return to a previous intent. </p> <p>Use the <code>checkpointLabelFilter</code> parameter of the <code>GetSessionRequest</code> operation to filter the intents returned by the operation to those with only the specified label.</p>
+      slots:
+        $ref: '#/definitions/StringMap'
+        description: 'Map of the slots that have been gathered and their values. '
+      confirmationStatus:
+        $ref: '#/definitions/ConfirmationStatus'
+        description: '<p>The status of the intent after the user responds to the confirmation prompt. If the user confirms the intent, Amazon Lex sets this field to <code>Confirmed</code>. If the user denies the intent, Amazon Lex sets this value to <code>Denied</code>. The possible values are:</p> <ul> <li> <p> <code>Confirmed</code> - The user has responded "Yes" to the confirmation prompt, confirming that the intent is complete and that it is ready to be fulfilled.</p> </li> <li> <p> <code>Denied</code> - The user has responded "No" to the confirmation prompt.</p> </li> <li> <p> <code>None</code> - The user has never been prompted for confirmation; or, the user was prompted but did not confirm or deny the prompt.</p> </li> </ul>'
+      dialogActionType:
+        $ref: '#/definitions/DialogActionType'
+        description: '<p>The next action that the bot should take in its interaction with the user. The possible values are:</p> <ul> <li> <p> <code>ConfirmIntent</code> - The next action is asking the user if the intent is complete and ready to be fulfilled. This is a yes/no question such as "Place the order?"</p> </li> <li> <p> <code>Close</code> - Indicates that the there will not be a response from the user. For example, the statement "Your order has been placed" does not require a response.</p> </li> <li> <p> <code>ElicitIntent</code> - The next action is to determine the intent that the user wants to fulfill.</p> </li> <li> <p> <code>ElicitSlot</code> - The next action is to elicit a slot value from the user.</p> </li> </ul>'
+      fulfillmentState:
+        $ref: '#/definitions/FulfillmentState'
+        description: '<p>The fulfillment state of the intent. The possible values are:</p> <ul> <li> <p> <code>Failed</code> - The Lambda function associated with the intent failed to fulfill the intent.</p> </li> <li> <p> <code>Fulfilled</code> - The intent has fulfilled by the Lambda function associated with the intent. </p> </li> <li> <p> <code>ReadyForFulfillment</code> - All of the information necessary for the intent is present and the intent ready to be fulfilled by the client application.</p> </li> </ul>'
+      slotToElicit:
+        $ref: '#/definitions/String'
+        description: 'The next slot to elicit from the user. If there is not slot to elicit, the field is blank.'
+    description: 'Provides information about the state of an intent. You can use this information to get the current state of an intent so that you can process the intent, or so that you can return the intent to its previous state.'
   Accept:
     type: string
   AttributesString:
@@ -799,6 +850,11 @@ definitions:
         $ref: '#/definitions/listOfButtons'
         description: The list of options to show to the user.
     description: 'Represents an option rendered to the user when a prompt is shown. It could be an image, a button, a link, or text. '
+  IntentSummaryCheckpointLabel:
+    type: string
+    pattern: '[a-zA-Z0-9-]+'
+    minLength: 1
+    maxLength: 255
   GetSessionRequest:
     type: object
     properties: {}
@@ -810,30 +866,6 @@ definitions:
     maxItems: 3
   HttpContentType:
     type: string
-  IntentSummary:
-    type: object
-    required:
-      - dialogActionType
-    properties:
-      intentName:
-        $ref: '#/definitions/IntentName'
-        description: The name of the intent.
-      slots:
-        $ref: '#/definitions/StringMap'
-        description: 'Map of the slots that have been gathered and their values. '
-      confirmationStatus:
-        $ref: '#/definitions/ConfirmationStatus'
-        description: '<p>The status of the intent after the user responds to the confirmation prompt. If the user confirms the intent, Amazon Lex sets this field to <code>Confirmed</code>. If the user denies the intent, Amazon Lex sets this value to <code>Denied</code>. The possible values are:</p> <ul> <li> <p> <code>Confirmed</code> - The user has responded "Yes" to the confirmation prompt, confirming that the intent is complete and that it is ready to be fulfilled.</p> </li> <li> <p> <code>Denied</code> - The user has responded "No" to the confirmation prompt.</p> </li> <li> <p> <code>None</code> - The user has never been prompted for confirmation; or, the user was prompted but did not confirm or deny the prompt.</p> </li> </ul>'
-      dialogActionType:
-        $ref: '#/definitions/DialogActionType'
-        description: '<p>The next action that the bot should take in its interaction with the user. The possible values are:</p> <ul> <li> <p> <code>ConfirmIntent</code> - The next action is asking the user if the intent is complete and ready to be fulfilled. This is a yes/no question such as "Place the order?"</p> </li> <li> <p> <code>Close</code> - Indicates that the there will not be a response from the user. For example, the statement "Your order has been placed" does not require a response.</p> </li> <li> <p> <code>ElicitIntent</code> - The next action is to determine the intent that the user wants to fulfill.</p> </li> <li> <p> <code>ElicitSlot</code> - The next action is to elicit a slot value from the user.</p> </li> </ul>'
-      fulfillmentState:
-        $ref: '#/definitions/FulfillmentState'
-        description: '<p>The fulfillment state of the intent. The possible values are:</p> <ul> <li> <p> <code>Failed</code> - The Lambda function associated with the intent failed to fulfill the intent.</p> </li> <li> <p> <code>Fulfilled</code> - The intent has fulfilled by the Lambda function associated with the intent. </p> </li> <li> <p> <code>ReadyForFulfillment</code> - All of the information necessary for the intent is present and the intent ready to be fulfilled by the client application.</p> </li> </ul>'
-      slotToElicit:
-        $ref: '#/definitions/String'
-        description: 'The next slot to elicit from the user. If there is not slot to elicit, the field is blank.'
-    description: 'Provides information about the state of an intent. You can use this information to get the current state of an intent so that you can process the intent, or so that you can return the intent to its previous state.'
   PostContentRequest:
     type: object
     required:
@@ -878,6 +910,9 @@ definitions:
       dialogAction:
         $ref: '#/definitions/DialogAction'
         description: Sets the next action that the bot should take to fulfill the conversation.
+      recentIntentSummaryView:
+        $ref: '#/definitions/IntentSummaryList'
+        description: '<p>A summary of the recent intents for the bot. You can use the intent summary view to set a checkpoint label on an intent and modify attributes of intents. You can also use it to remove or add intent summary objects to the list.</p> <p>An intent that you modify or add to the list must make sense for the bot. For example, the intent name must be valid for the bot. You must provide valid values for:</p> <ul> <li> <p> <code>intentName</code> </p> </li> <li> <p>slot names</p> </li> <li> <p> <code>slotToElict</code> </p> </li> </ul> <p>If you send the <code>recentIntentSummaryView</code> parameter in a <code>PutSession</code> request, the contents of the new summary view replaces the old summary view. For example, if a <code>GetSession</code> request returns three intents in the summary view and you call <code>PutSession</code> with one intent in the summary view, the next call to <code>GetSession</code> will only return one intent.</p>'
   genericAttachmentList:
     type: array
     items:

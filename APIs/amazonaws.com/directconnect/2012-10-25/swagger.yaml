@@ -1169,7 +1169,7 @@ paths:
   '/#X-Amz-Target=OvertureService.DeleteDirectConnectGateway':
     post:
       operationId: DeleteDirectConnectGateway
-      description: Deletes the specified Direct Connect gateway. You must first delete all virtual interfaces that are attached to the Direct Connect gateway and disassociate all virtual private gateways that are associated with the Direct Connect gateway.
+      description: Deletes the specified Direct Connect gateway. You must first delete all virtual interfaces that are attached to the Direct Connect gateway and disassociate all virtual private gateways associated with the Direct Connect gateway.
       responses:
         '200':
           description: Success
@@ -1206,7 +1206,7 @@ paths:
   '/#X-Amz-Target=OvertureService.DeleteDirectConnectGatewayAssociation':
     post:
       operationId: DeleteDirectConnectGatewayAssociation
-      description: Deletes the association between the specified Direct Connect gateway and virtual private gateway.
+      description: '<p>Deletes the association between the specified Direct Connect gateway and virtual private gateway.</p> <p>We recommend that you specify the <code>associationID</code> to delete the association. Alternatively, if you own virtual gateway and a Direct Connect gateway association, you can specify the <code>virtualGatewayId</code> and <code>directConnectGatewayId</code> to delete an association.</p>'
       responses:
         '200':
           description: Success
@@ -2280,7 +2280,10 @@ definitions:
         description: Indicates whether the connection supports a secondary BGP peer in the same address family (IPv4/IPv6).
       tags:
         $ref: '#/definitions/TagList'
-        description: Any tags assigned to the connection.
+        description: The tags associated with the connection.
+      providerName:
+        $ref: '#/definitions/ProviderName'
+        description: The name of the service provider associated with the connection.
     description: Information about an AWS Direct Connect connection.
   AllocateConnectionOnInterconnectRequest:
     type: object
@@ -2332,7 +2335,7 @@ definitions:
         description: The dedicated VLAN provisioned to the hosted connection.
       tags:
         $ref: '#/definitions/TagList'
-        description: The tags to assign to the hosted connection.
+        description: The tags associated with the connection.
   DuplicateTagKeysException: {}
   TooManyTagsException: {}
   VirtualInterface:
@@ -2361,7 +2364,7 @@ definitions:
         description: The ID of the VLAN.
       asn:
         $ref: '#/definitions/ASN'
-        description: The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
+        description: <p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p> <p>The valid values are 1-2147483647.</p>
       amazonSideAsn:
         $ref: '#/definitions/LongAsn'
         description: The autonomous system number (ASN) for the Amazon side of the connection.
@@ -2409,7 +2412,7 @@ definitions:
         description: The Direct Connect endpoint on which the virtual interface terminates.
       tags:
         $ref: '#/definitions/TagList'
-        description: Any tags assigned to the virtual interface.
+        description: The tags associated with the virtual interface.
     description: Information about a virtual interface.
   AllocatePrivateVirtualInterfaceRequest:
     type: object
@@ -2602,7 +2605,10 @@ definitions:
         description: The ID of the LAG.
       tags:
         $ref: '#/definitions/TagList'
-        description: The tags to assign to the connection.
+        description: The tags to associate with the lag.
+      providerName:
+        $ref: '#/definitions/ProviderName'
+        description: The name of the service provider associated with the requested connection.
   CreateDirectConnectGatewayResult:
     type: object
     properties:
@@ -2639,7 +2645,7 @@ definitions:
         description: The ID of the virtual private gateway or transit gateway.
       addAllowedPrefixesToDirectConnectGateway:
         $ref: '#/definitions/RouteFilterPrefixList'
-        description: '<p>The Amazon VPC prefixes to advertise to the Direct Connect gateway</p> <p>For information about how to set the prefixes, see <a href="https://docs.aws.amazon.com/directconnect/latest/UserGuide/multi-account-associate-vgw.html#allowed-prefixes">Allowed Prefixes</a> in the <i>AWS Direct Connect User Guide</i>.</p>'
+        description: '<p>The Amazon VPC prefixes to advertise to the Direct Connect gateway</p> <p>This parameter is required when you create an association to a transit gateway.</p> <p>For information about how to set the prefixes, see <a href="https://docs.aws.amazon.com/directconnect/latest/UserGuide/multi-account-associate-vgw.html#allowed-prefixes">Allowed Prefixes</a> in the <i>AWS Direct Connect User Guide</i>.</p>'
       virtualGatewayId:
         $ref: '#/definitions/VirtualGatewayId'
         description: The ID of the virtual private gateway.
@@ -2712,7 +2718,10 @@ definitions:
         description: Indicates whether the interconnect supports a secondary BGP in the same address family (IPv4/IPv6).
       tags:
         $ref: '#/definitions/TagList'
-        description: Any tags assigned to the interconnect.
+        description: The tags associated with the interconnect.
+      providerName:
+        $ref: '#/definitions/ProviderName'
+        description: The name of the service provider associated with the interconnect.
     description: Information about an interconnect.
   CreateInterconnectRequest:
     type: object
@@ -2735,7 +2744,10 @@ definitions:
         description: The ID of the LAG.
       tags:
         $ref: '#/definitions/TagList'
-        description: 'The tags to assign to the interconnect,'
+        description: The tags to associate with the interconnect.
+      providerName:
+        $ref: '#/definitions/ProviderName'
+        description: The name of the service provider associated with the interconnect.
   Lag:
     type: object
     properties:
@@ -2786,7 +2798,10 @@ definitions:
         description: Indicates whether the LAG supports a secondary BGP peer in the same address family (IPv4/IPv6).
       tags:
         $ref: '#/definitions/TagList'
-        description: Any tags assigned to link aggregation group (LAG).
+        description: The tags associated with the LAG.
+      providerName:
+        $ref: '#/definitions/ProviderName'
+        description: The name of the service provider associated with the LAG.
     description: Information about a link aggregation group (LAG).
   CreateLagRequest:
     type: object
@@ -2813,10 +2828,13 @@ definitions:
         description: The ID of an existing connection to migrate to the LAG.
       tags:
         $ref: '#/definitions/TagList'
-        description: The tags to assign to the link aggregation group (LAG).
+        description: The tags to associate with the LAG.
       childConnectionTags:
         $ref: '#/definitions/TagList'
-        description: The tags to assign to the child connections of the LAG. Only newly created child connections as the result of creating a LAG connection are assigned the provided tags. The tags are not assigned to an existing connection that is provided via the “connectionId” parameter that will be migrated to the LAG.
+        description: The tags to associate with the automtically created LAGs.
+      providerName:
+        $ref: '#/definitions/ProviderName'
+        description: The name of the service provider associated with the LAG.
   CreatePrivateVirtualInterfaceRequest:
     type: object
     required:
@@ -3254,7 +3272,7 @@ definitions:
         description: The Amazon Resource Name (ARN) of the resource.
       tags:
         $ref: '#/definitions/TagList'
-        description: The tags to assign.
+        description: The tags to add.
   UntagResourceResponse:
     type: object
     properties: {}
@@ -3393,7 +3411,7 @@ definitions:
         description: The ID of the VLAN.
       asn:
         $ref: '#/definitions/ASN'
-        description: The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
+        description: <p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p> <p>The valid values are 1-2147483647.</p>
       mtu:
         $ref: '#/definitions/MTU'
         description: 'The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 9001. The default value is 1500.'
@@ -3411,7 +3429,7 @@ definitions:
         description: The IP address assigned to the customer interface.
       tags:
         $ref: '#/definitions/TagList'
-        description: Any tags assigned to the private virtual interface to be provisioned on a connection.
+        description: The tags associated with the private virtual interface.
     description: Information about a private virtual interface to be provisioned on a connection.
   NewPublicVirtualInterfaceAllocation:
     type: object
@@ -3428,7 +3446,7 @@ definitions:
         description: The ID of the VLAN.
       asn:
         $ref: '#/definitions/ASN'
-        description: The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
+        description: <p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p> <p>The valid values are 1-2147483647.</p>
       authKey:
         $ref: '#/definitions/BGPAuthKey'
         description: The authentication key for BGP configuration. This string has a minimum length of 6 characters and and a maximun lenth of 80 characters.
@@ -3446,7 +3464,7 @@ definitions:
         description: The routes to be advertised to the AWS network in this Region. Applies to public virtual interfaces.
       tags:
         $ref: '#/definitions/TagList'
-        description: Any tags assigned to the public virtual interface to be provisioned on a connection.
+        description: The tags associated with the public virtual interface.
     description: Information about a public virtual interface to be provisioned on a connection.
   NewTransitVirtualInterfaceAllocation:
     type: object
@@ -3459,13 +3477,13 @@ definitions:
         description: The ID of the VLAN.
       asn:
         $ref: '#/definitions/ASN'
-        description: The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
+        description: <p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p> <p>The valid values are 1-2147483647.</p>
       mtu:
         $ref: '#/definitions/MTU'
-        description: 'The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 8500. The default value is 1500. '
+        description: 'The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 9001. The default value is 1500. '
       authKey:
         $ref: '#/definitions/BGPAuthKey'
-        description: The authentication key for BGP configuration.
+        description: The authentication key for BGP configuration. This string has a minimum length of 6 characters and and a maximun lenth of 80 characters.
       amazonAddress:
         $ref: '#/definitions/AmazonAddress'
         description: The IP address assigned to the Amazon interface.
@@ -3477,8 +3495,8 @@ definitions:
         description: The address family for the BGP peer.
       tags:
         $ref: '#/definitions/TagList'
-        description: Any tags assigned to the transit virtual interface.
-    description: Information about a transit virtual interface.
+        description: The tags associated with the transitive virtual interface.
+    description: Information about a transit virtual interface to be provisioned on a connection.
   AmazonAddress:
     type: string
   LagId:
@@ -3622,6 +3640,8 @@ definitions:
       - unknown
       - 'yes'
       - 'no'
+  ProviderName:
+    type: string
   ConnectionList:
     type: array
     items:
@@ -3719,7 +3739,7 @@ definitions:
         description: The ID of the VLAN.
       asn:
         $ref: '#/definitions/ASN'
-        description: The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
+        description: <p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p> <p>The valid values are 1-2147483647.</p>
       mtu:
         $ref: '#/definitions/MTU'
         description: 'The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 9001. The default value is 1500.'
@@ -3743,7 +3763,7 @@ definitions:
         description: The ID of the Direct Connect gateway.
       tags:
         $ref: '#/definitions/TagList'
-        description: Any tags assigned to the private virtual interface.
+        description: The tags associated with the private virtual interface.
     description: Information about a private virtual interface.
   NewPublicVirtualInterface:
     type: object
@@ -3760,7 +3780,7 @@ definitions:
         description: The ID of the VLAN.
       asn:
         $ref: '#/definitions/ASN'
-        description: The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
+        description: <p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p> <p>The valid values are 1-2147483647.</p>
       authKey:
         $ref: '#/definitions/BGPAuthKey'
         description: The authentication key for BGP configuration. This string has a minimum length of 6 characters and and a maximun lenth of 80 characters.
@@ -3778,7 +3798,7 @@ definitions:
         description: The routes to be advertised to the AWS network in this Region. Applies to public virtual interfaces.
       tags:
         $ref: '#/definitions/TagList'
-        description: Any tags assigned to the public virtual interface.
+        description: The tags associated with the public virtual interface.
     description: Information about a public virtual interface.
   NewTransitVirtualInterface:
     type: object
@@ -3791,13 +3811,13 @@ definitions:
         description: The ID of the VLAN.
       asn:
         $ref: '#/definitions/ASN'
-        description: The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
+        description: <p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p> <p>The valid values are 1-2147483647.</p>
       mtu:
         $ref: '#/definitions/MTU'
-        description: 'The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 8500. The default value is 1500. '
+        description: 'The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 9001. The default value is 1500.'
       authKey:
         $ref: '#/definitions/BGPAuthKey'
-        description: The authentication key for BGP configuration.
+        description: The authentication key for BGP configuration. This string has a minimum length of 6 characters and and a maximun lenth of 80 characters.
       amazonAddress:
         $ref: '#/definitions/AmazonAddress'
         description: The IP address assigned to the Amazon interface.
@@ -3812,8 +3832,8 @@ definitions:
         description: The ID of the Direct Connect gateway.
       tags:
         $ref: '#/definitions/TagList'
-        description: Any tags assigned to the transit virtual interface.
-    description: Information about the transit virtual interface.
+        description: The tags associated with the transitive virtual interface.
+    description: Information about a transit virtual interface.
   DirectConnectGatewayAssociationId:
     type: string
   InterconnectState:
@@ -3826,8 +3846,6 @@ definitions:
       - deleting
       - deleted
       - unknown
-  ProviderName:
-    type: string
   LoaContentType:
     type: string
     enum:
@@ -3919,7 +3937,7 @@ definitions:
         description: '<p>The state of the attachment. The following are the possible values:</p> <ul> <li> <p> <code>attaching</code>: The initial state after a virtual interface is created using the Direct Connect gateway.</p> </li> <li> <p> <code>attached</code>: The Direct Connect gateway and virtual interface are attached and ready to pass traffic.</p> </li> <li> <p> <code>detaching</code>: The initial state after calling <a>DeleteVirtualInterface</a>.</p> </li> <li> <p> <code>detached</code>: The virtual interface is detached from the Direct Connect gateway. Traffic flow between the Direct Connect gateway and virtual interface is stopped.</p> </li> </ul>'
       attachmentType:
         $ref: '#/definitions/DirectConnectGatewayAttachmentType'
-        description: The interface type.
+        description: The type of attachment.
       stateChangeError:
         $ref: '#/definitions/StateChangeError'
         description: The error message if the state of an object failed to advance.
@@ -3944,6 +3962,10 @@ definitions:
       $ref: '#/definitions/Lag'
   LoaContent:
     type: string
+  ProviderList:
+    type: array
+    items:
+      $ref: '#/definitions/ProviderName'
   Location:
     type: object
     properties:
@@ -3956,6 +3978,9 @@ definitions:
       availablePortSpeeds:
         $ref: '#/definitions/AvailablePortSpeeds'
         description: The available port speeds for the location.
+      availableProviders:
+        $ref: '#/definitions/ProviderList'
+        description: The name of the service provider for the location.
     description: Information about an AWS Direct Connect location.
   LocationList:
     type: array

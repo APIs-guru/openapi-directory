@@ -190,7 +190,7 @@ paths:
                 description: The AWS Batch job ID of the job to cancel.
                 type: string
               reason:
-                description: 'A message to attach to the job that explains the reason for canceling it. This message is returned by future <a>DescribeJobs</a> operations on the job. This message is also recorded in the AWS Batch activity logs. '
+                description: A message to attach to the job that explains the reason for canceling it. This message is returned by future <a>DescribeJobs</a> operations on the job. This message is also recorded in the AWS Batch activity logs.
                 type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
@@ -250,19 +250,22 @@ paths:
                 properties:
                   type:
                     $ref: '#/definitions/CRType'
-                    description: 'The type of compute environment: EC2 or SPOT.'
+                    description: 'The type of compute environment: <code>EC2</code> or <code>SPOT</code>.'
+                  allocationStrategy:
+                    $ref: '#/definitions/CRAllocationStrategy'
+                    description: 'The allocation strategy to use for the compute resource in case not enough instances of the best fitting instance type can be allocated. This could be due to availability of the instance type in the region or <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html">Amazon EC2 service limits</a>. If this is not specified, the default is <code>BEST_FIT</code>, which will use only the best fitting instance type, waiting for additional capacity if it''s not available. This allocation strategy keeps costs lower but can limit scaling. <code>BEST_FIT_PROGRESSIVE</code> will select an additional instance type that is large enough to meet the requirements of the jobs in the queue, with a preference for an instance type with a lower cost. <code>SPOT_CAPACITY_OPTIMIZED</code> is only available for Spot Instance compute resources and will select an additional instance type that is large enough to meet the requirements of the jobs in the queue, with a preference for an instance type that is less likely to be interrupted.'
                   minvCpus:
                     $ref: '#/definitions/Integer'
-                    description: 'The minimum number of EC2 vCPUs that an environment should maintain (even if the compute environment is <code>DISABLED</code>). '
+                    description: The minimum number of Amazon EC2 vCPUs that an environment should maintain (even if the compute environment is <code>DISABLED</code>).
                   maxvCpus:
                     $ref: '#/definitions/Integer'
-                    description: 'The maximum number of EC2 vCPUs that an environment can reach. '
+                    description: The maximum number of Amazon EC2 vCPUs that an environment can reach.
                   desiredvCpus:
                     $ref: '#/definitions/Integer'
-                    description: 'The desired number of EC2 vCPUS in the compute environment. '
+                    description: The desired number of Amazon EC2 vCPUS in the compute environment.
                   instanceTypes:
                     $ref: '#/definitions/StringList'
-                    description: 'The instances types that may be launched. You can specify instance families to launch any instance type within those families (for example, <code>c4</code> or <code>p3</code>), or you can specify specific sizes within a family (such as <code>c4.8xlarge</code>). You can also choose <code>optimal</code> to pick instance types (from the C, M, and R instance families) on the fly that match the demand of your job queues.'
+                    description: 'The instances types that may be launched. You can specify instance families to launch any instance type within those families (for example, <code>c5</code> or <code>p3</code>), or you can specify specific sizes within a family (such as <code>c5.8xlarge</code>). You can also choose <code>optimal</code> to pick instance types (from the C, M, and R instance families) on the fly that match the demand of your job queues.'
                   imageId:
                     $ref: '#/definitions/String'
                     description: The Amazon Machine Image (AMI) ID used for instances launched in the compute environment.
@@ -271,10 +274,10 @@ paths:
                     description: 'The VPC subnets into which the compute resources are launched. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html">VPCs and Subnets</a> in the <i>Amazon VPC User Guide</i>.'
                   securityGroupIds:
                     $ref: '#/definitions/StringList'
-                    description: 'The EC2 security group that is associated with instances launched in the compute environment. '
+                    description: 'The Amazon EC2 security groups associated with instances launched in the compute environment. One or more security groups must be specified, either in <code>securityGroupIds</code> or using a launch template referenced in <code>launchTemplate</code>. If security groups are specified using both <code>securityGroupIds</code> and <code>launchTemplate</code>, the values in <code>securityGroupIds</code> will be used.'
                   ec2KeyPair:
                     $ref: '#/definitions/String'
-                    description: The EC2 key pair that is used for instances launched in the compute environment.
+                    description: The Amazon EC2 key pair that is used for instances launched in the compute environment.
                   instanceRole:
                     $ref: '#/definitions/String'
                     description: 'The Amazon ECS instance profile applied to Amazon EC2 instances in a compute environment. You can specify the short name or full Amazon Resource Name (ARN) of an instance profile. For example, <code> <i>ecsInstanceRole</i> </code> or <code>arn:aws:iam::<i>&lt;aws_account_id&gt;</i>:instance-profile/<i>ecsInstanceRole</i> </code>. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/instance_IAM_role.html">Amazon ECS Instance Role</a> in the <i>AWS Batch User Guide</i>.'
@@ -286,7 +289,7 @@ paths:
                     description: 'The Amazon EC2 placement group to associate with your compute resources. If you intend to submit multi-node parallel jobs to your compute environment, you should consider creating a cluster placement group and associate it with your compute resources. This keeps your multi-node parallel job on a logical grouping of instances within a single Availability Zone with high network flow potential. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html">Placement Groups</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.'
                   bidPercentage:
                     $ref: '#/definitions/Integer'
-                    description: 'The maximum percentage that a Spot Instance price can be when compared with the On-Demand price for that instance type before instances are launched. For example, if your maximum percentage is 20%, then the Spot price must be below 20% of the current On-Demand price for that EC2 instance. You always pay the lowest (market) price and never more than your maximum percentage. If you leave this field empty, the default value is 100% of the On-Demand price.'
+                    description: 'The maximum percentage that a Spot Instance price can be when compared with the On-Demand price for that instance type before instances are launched. For example, if your maximum percentage is 20%, then the Spot price must be below 20% of the current On-Demand price for that Amazon EC2 instance. You always pay the lowest (market) price and never more than your maximum percentage. If you leave this field empty, the default value is 100% of the On-Demand price.'
                   spotIamFleetRole:
                     $ref: '#/definitions/String'
                     description: 'The Amazon Resource Name (ARN) of the Amazon EC2 Spot Fleet IAM role applied to a <code>SPOT</code> compute environment. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/spot_fleet_IAM_role.html">Amazon EC2 Spot Fleet Role</a> in the <i>AWS Batch User Guide</i>.'
@@ -384,7 +387,7 @@ paths:
               - computeEnvironment
             properties:
               computeEnvironment:
-                description: 'The name or Amazon Resource Name (ARN) of the compute environment to delete. '
+                description: The name or Amazon Resource Name (ARN) of the compute environment to delete.
                 type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
@@ -397,7 +400,7 @@ paths:
   /v1/deletejobqueue:
     post:
       operationId: DeleteJobQueue
-      description: <p>Deletes the specified job queue. You must first disable submissions for a queue with the <a>UpdateJobQueue</a> operation. All jobs in the queue are terminated when you delete a job queue.</p> <p>It is not necessary to disassociate compute environments from a queue before submitting a <code>DeleteJobQueue</code> request. </p>
+      description: <p>Deletes the specified job queue. You must first disable submissions for a queue with the <a>UpdateJobQueue</a> operation. All jobs in the queue are terminated when you delete a job queue.</p> <p>It is not necessary to disassociate compute environments from a queue before submitting a <code>DeleteJobQueue</code> request.</p>
       responses:
         '200':
           description: Success
@@ -421,7 +424,7 @@ paths:
               - jobQueue
             properties:
               jobQueue:
-                description: 'The short name or full Amazon Resource Name (ARN) of the queue to delete. '
+                description: The short name or full Amazon Resource Name (ARN) of the queue to delete.
                 type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
@@ -458,7 +461,7 @@ paths:
               - jobDefinition
             properties:
               jobDefinition:
-                description: 'The name and revision (<code>name:revision</code>) or full Amazon Resource Name (ARN) of the job definition to deregister. '
+                description: 'The name and revision (<code>name:revision</code>) or full Amazon Resource Name (ARN) of the job definition to deregister.'
                 type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
@@ -493,7 +496,7 @@ paths:
             type: object
             properties:
               computeEnvironments:
-                description: 'A list of up to 100 compute environment names or full Amazon Resource Name (ARN) entries. '
+                description: A list of up to 100 compute environment names or full Amazon Resource Name (ARN) entries.
                 type: array
                 items:
                   $ref: '#/definitions/String'
@@ -743,7 +746,7 @@ paths:
   /v1/registerjobdefinition:
     post:
       operationId: RegisterJobDefinition
-      description: 'Registers an AWS Batch job definition. '
+      description: Registers an AWS Batch job definition.
       responses:
         '200':
           description: Success
@@ -869,7 +872,7 @@ paths:
   /v1/submitjob:
     post:
       operationId: SubmitJob
-      description: 'Submits an AWS Batch job from a job definition. Parameters specified during <a>SubmitJob</a> override parameters defined in the job definition. '
+      description: Submits an AWS Batch job from a job definition. Parameters specified during <a>SubmitJob</a> override parameters defined in the job definition.
       responses:
         '200':
           description: Success
@@ -895,10 +898,10 @@ paths:
               - jobDefinition
             properties:
               jobName:
-                description: 'The name of the job. The first character must be alphanumeric, and up to 128 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed. '
+                description: 'The name of the job. The first character must be alphanumeric, and up to 128 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed.'
                 type: string
               jobQueue:
-                description: 'The job queue into which the job is submitted. You can specify either the name or the Amazon Resource Name (ARN) of the queue. '
+                description: The job queue into which the job is submitted. You can specify either the name or the Amazon Resource Name (ARN) of the queue.
                 type: string
               arrayProperties:
                 description: An object representing an AWS Batch array job.
@@ -1005,7 +1008,7 @@ paths:
                 description: The AWS Batch job ID of the job to terminate.
                 type: string
               reason:
-                description: 'A message to attach to the job that explains the reason for canceling it. This message is returned by future <a>DescribeJobs</a> operations on the job. This message is also recorded in the AWS Batch activity logs. '
+                description: A message to attach to the job that explains the reason for canceling it. This message is returned by future <a>DescribeJobs</a> operations on the job. This message is also recorded in the AWS Batch activity logs.
                 type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
@@ -1056,13 +1059,13 @@ paths:
                 properties:
                   minvCpus:
                     $ref: '#/definitions/Integer'
-                    description: The minimum number of EC2 vCPUs that an environment should maintain.
+                    description: The minimum number of Amazon EC2 vCPUs that an environment should maintain.
                   maxvCpus:
                     $ref: '#/definitions/Integer'
-                    description: The maximum number of EC2 vCPUs that an environment can reach.
+                    description: The maximum number of Amazon EC2 vCPUs that an environment can reach.
                   desiredvCpus:
                     $ref: '#/definitions/Integer'
-                    description: The desired number of EC2 vCPUS in the compute environment.
+                    description: The desired number of Amazon EC2 vCPUS in the compute environment.
               serviceRole:
                 description: '<p>The full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch to make calls to other AWS services on your behalf.</p> <p>If your specified role has a path other than <code>/</code>, then you must either specify the full role ARN (this is recommended) or prefix the role name with the path.</p> <note> <p>Depending on how you created your AWS Batch service role, its ARN may contain the <code>service-role</code> path prefix. When you only specify the name of the service role, AWS Batch assumes that your ARN does not use the <code>service-role</code> path prefix. Because of this, we recommend that you specify the full ARN of your service role when you create compute environments.</p> </note>'
                 type: string
@@ -1113,7 +1116,7 @@ paths:
                 description: 'The priority of the job queue. Job queues with a higher priority (or a higher integer value for the <code>priority</code> parameter) are evaluated first when associated with the same compute environment. Priority is determined in descending order, for example, a job queue with a priority value of <code>10</code> is given scheduling preference over a job queue with a priority value of <code>1</code>.'
                 type: integer
               computeEnvironmentOrder:
-                description: 'Details the set of compute environments mapped to a job queue and their order relative to each other. This is one of the parameters used by the job scheduler to determine which compute environment should execute a given job. '
+                description: Details the set of compute environments mapped to a job queue and their order relative to each other. This is one of the parameters used by the job scheduler to determine which compute environment should execute a given job.
                 type: array
                 items:
                   $ref: '#/definitions/ComputeEnvironmentOrder'
@@ -1143,12 +1146,18 @@ definitions:
         description: The name of the compute environment.
       computeEnvironmentArn:
         $ref: '#/definitions/String'
-        description: 'The Amazon Resource Name (ARN) of the compute environment. '
+        description: The Amazon Resource Name (ARN) of the compute environment.
   CRType:
     type: string
     enum:
       - EC2
       - SPOT
+  CRAllocationStrategy:
+    type: string
+    enum:
+      - BEST_FIT
+      - BEST_FIT_PROGRESSIVE
+      - SPOT_CAPACITY_OPTIMIZED
   Integer:
     type: integer
   StringList:
@@ -1173,7 +1182,7 @@ definitions:
       version:
         $ref: '#/definitions/String'
         description: '<p>The version number of the launch template.</p> <p>Default: The default version of the launch template.</p>'
-    description: 'An object representing a launch template associated with a compute resource. You must specify either the launch template ID or launch template name in the request, but not both. '
+    description: 'An object representing a launch template associated with a compute resource. You must specify either the launch template ID or launch template name in the request, but not both.'
   CreateJobQueueResponse:
     type: object
     required:
@@ -1273,7 +1282,7 @@ definitions:
     properties:
       jobDefinitions:
         $ref: '#/definitions/JobDefinitionList'
-        description: 'The list of job definitions. '
+        description: The list of job definitions.
       nextToken:
         $ref: '#/definitions/String'
         description: 'The <code>nextToken</code> value to include in a future <code>DescribeJobDefinitions</code> request. When the results of a <code>DescribeJobDefinitions</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
@@ -1293,7 +1302,7 @@ definitions:
     properties:
       jobQueues:
         $ref: '#/definitions/JobQueueDetailList'
-        description: 'The list of job queues. '
+        description: The list of job queues.
       nextToken:
         $ref: '#/definitions/String'
         description: 'The <code>nextToken</code> value to include in a future <code>DescribeJobQueues</code> request. When the results of a <code>DescribeJobQueues</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
@@ -1327,7 +1336,7 @@ definitions:
     properties:
       jobs:
         $ref: '#/definitions/JobDetailList'
-        description: 'The list of jobs. '
+        description: The list of jobs.
   ListJobsResponse:
     type: object
     required:
@@ -1359,7 +1368,7 @@ definitions:
         description: The name of the job definition.
       jobDefinitionArn:
         $ref: '#/definitions/String'
-        description: 'The Amazon Resource Name (ARN) of the job definition. '
+        description: The Amazon Resource Name (ARN) of the job definition.
       revision:
         $ref: '#/definitions/Integer'
         description: The revision of the job definition.
@@ -1407,7 +1416,7 @@ definitions:
     properties:
       jobName:
         $ref: '#/definitions/String'
-        description: 'The name of the job. '
+        description: The name of the job.
       jobId:
         $ref: '#/definitions/String'
         description: The unique identifier for the job.
@@ -1440,7 +1449,7 @@ definitions:
         description: The name of the compute environment.
       computeEnvironmentArn:
         $ref: '#/definitions/String'
-        description: 'The Amazon Resource Name (ARN) of the compute environment. '
+        description: The Amazon Resource Name (ARN) of the compute environment.
   UpdateJobQueueResponse:
     type: object
     example:
@@ -1570,7 +1579,7 @@ definitions:
         description: The AWS Batch job ID of the job to cancel.
       reason:
         $ref: '#/definitions/String'
-        description: 'A message to attach to the job that explains the reason for canceling it. This message is returned by future <a>DescribeJobs</a> operations on the job. This message is also recorded in the AWS Batch activity logs. '
+        description: A message to attach to the job that explains the reason for canceling it. This message is returned by future <a>DescribeJobs</a> operations on the job. This message is also recorded in the AWS Batch activity logs.
   ComputeResource:
     type: object
     required:
@@ -1583,19 +1592,22 @@ definitions:
     properties:
       type:
         $ref: '#/definitions/CRType'
-        description: 'The type of compute environment: EC2 or SPOT.'
+        description: 'The type of compute environment: <code>EC2</code> or <code>SPOT</code>.'
+      allocationStrategy:
+        $ref: '#/definitions/CRAllocationStrategy'
+        description: 'The allocation strategy to use for the compute resource in case not enough instances of the best fitting instance type can be allocated. This could be due to availability of the instance type in the region or <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html">Amazon EC2 service limits</a>. If this is not specified, the default is <code>BEST_FIT</code>, which will use only the best fitting instance type, waiting for additional capacity if it''s not available. This allocation strategy keeps costs lower but can limit scaling. <code>BEST_FIT_PROGRESSIVE</code> will select an additional instance type that is large enough to meet the requirements of the jobs in the queue, with a preference for an instance type with a lower cost. <code>SPOT_CAPACITY_OPTIMIZED</code> is only available for Spot Instance compute resources and will select an additional instance type that is large enough to meet the requirements of the jobs in the queue, with a preference for an instance type that is less likely to be interrupted.'
       minvCpus:
         $ref: '#/definitions/Integer'
-        description: 'The minimum number of EC2 vCPUs that an environment should maintain (even if the compute environment is <code>DISABLED</code>). '
+        description: The minimum number of Amazon EC2 vCPUs that an environment should maintain (even if the compute environment is <code>DISABLED</code>).
       maxvCpus:
         $ref: '#/definitions/Integer'
-        description: 'The maximum number of EC2 vCPUs that an environment can reach. '
+        description: The maximum number of Amazon EC2 vCPUs that an environment can reach.
       desiredvCpus:
         $ref: '#/definitions/Integer'
-        description: 'The desired number of EC2 vCPUS in the compute environment. '
+        description: The desired number of Amazon EC2 vCPUS in the compute environment.
       instanceTypes:
         $ref: '#/definitions/StringList'
-        description: 'The instances types that may be launched. You can specify instance families to launch any instance type within those families (for example, <code>c4</code> or <code>p3</code>), or you can specify specific sizes within a family (such as <code>c4.8xlarge</code>). You can also choose <code>optimal</code> to pick instance types (from the C, M, and R instance families) on the fly that match the demand of your job queues.'
+        description: 'The instances types that may be launched. You can specify instance families to launch any instance type within those families (for example, <code>c5</code> or <code>p3</code>), or you can specify specific sizes within a family (such as <code>c5.8xlarge</code>). You can also choose <code>optimal</code> to pick instance types (from the C, M, and R instance families) on the fly that match the demand of your job queues.'
       imageId:
         $ref: '#/definitions/String'
         description: The Amazon Machine Image (AMI) ID used for instances launched in the compute environment.
@@ -1604,10 +1616,10 @@ definitions:
         description: 'The VPC subnets into which the compute resources are launched. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html">VPCs and Subnets</a> in the <i>Amazon VPC User Guide</i>.'
       securityGroupIds:
         $ref: '#/definitions/StringList'
-        description: 'The EC2 security group that is associated with instances launched in the compute environment. '
+        description: 'The Amazon EC2 security groups associated with instances launched in the compute environment. One or more security groups must be specified, either in <code>securityGroupIds</code> or using a launch template referenced in <code>launchTemplate</code>. If security groups are specified using both <code>securityGroupIds</code> and <code>launchTemplate</code>, the values in <code>securityGroupIds</code> will be used.'
       ec2KeyPair:
         $ref: '#/definitions/String'
-        description: The EC2 key pair that is used for instances launched in the compute environment.
+        description: The Amazon EC2 key pair that is used for instances launched in the compute environment.
       instanceRole:
         $ref: '#/definitions/String'
         description: 'The Amazon ECS instance profile applied to Amazon EC2 instances in a compute environment. You can specify the short name or full Amazon Resource Name (ARN) of an instance profile. For example, <code> <i>ecsInstanceRole</i> </code> or <code>arn:aws:iam::<i>&lt;aws_account_id&gt;</i>:instance-profile/<i>ecsInstanceRole</i> </code>. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/instance_IAM_role.html">Amazon ECS Instance Role</a> in the <i>AWS Batch User Guide</i>.'
@@ -1619,7 +1631,7 @@ definitions:
         description: 'The Amazon EC2 placement group to associate with your compute resources. If you intend to submit multi-node parallel jobs to your compute environment, you should consider creating a cluster placement group and associate it with your compute resources. This keeps your multi-node parallel job on a logical grouping of instances within a single Availability Zone with high network flow potential. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html">Placement Groups</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.'
       bidPercentage:
         $ref: '#/definitions/Integer'
-        description: 'The maximum percentage that a Spot Instance price can be when compared with the On-Demand price for that instance type before instances are launched. For example, if your maximum percentage is 20%, then the Spot price must be below 20% of the current On-Demand price for that EC2 instance. You always pay the lowest (market) price and never more than your maximum percentage. If you leave this field empty, the default value is 100% of the On-Demand price.'
+        description: 'The maximum percentage that a Spot Instance price can be when compared with the On-Demand price for that instance type before instances are launched. For example, if your maximum percentage is 20%, then the Spot price must be below 20% of the current On-Demand price for that Amazon EC2 instance. You always pay the lowest (market) price and never more than your maximum percentage. If you leave this field empty, the default value is 100% of the On-Demand price.'
       spotIamFleetRole:
         $ref: '#/definitions/String'
         description: 'The Amazon Resource Name (ARN) of the Amazon EC2 Spot Fleet IAM role applied to a <code>SPOT</code> compute environment. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/spot_fleet_IAM_role.html">Amazon EC2 Spot Fleet Role</a> in the <i>AWS Batch User Guide</i>.'
@@ -1636,19 +1648,19 @@ definitions:
     properties:
       computeEnvironmentName:
         $ref: '#/definitions/String'
-        description: 'The name of the compute environment. '
+        description: The name of the compute environment.
       computeEnvironmentArn:
         $ref: '#/definitions/String'
-        description: 'The Amazon Resource Name (ARN) of the compute environment. '
+        description: The Amazon Resource Name (ARN) of the compute environment.
       ecsClusterArn:
         $ref: '#/definitions/String'
-        description: 'The Amazon Resource Name (ARN) of the underlying Amazon ECS cluster used by the compute environment. '
+        description: The Amazon Resource Name (ARN) of the underlying Amazon ECS cluster used by the compute environment.
       type:
         $ref: '#/definitions/CEType'
         description: The type of the compute environment.
       state:
         $ref: '#/definitions/CEState'
-        description: '<p>The state of the compute environment. The valid values are <code>ENABLED</code> or <code>DISABLED</code>. </p> <p>If the state is <code>ENABLED</code>, then the AWS Batch scheduler can attempt to place jobs from an associated job queue on the compute resources within the environment. If the compute environment is managed, then it can scale its instances out or in automatically, based on the job queue demand.</p> <p>If the state is <code>DISABLED</code>, then the AWS Batch scheduler does not attempt to place jobs within the environment. Jobs in a <code>STARTING</code> or <code>RUNNING</code> state continue to progress normally. Managed compute environments in the <code>DISABLED</code> state do not scale out. However, they scale in to <code>minvCpus</code> value after instances become idle.</p>'
+        description: '<p>The state of the compute environment. The valid values are <code>ENABLED</code> or <code>DISABLED</code>.</p> <p>If the state is <code>ENABLED</code>, then the AWS Batch scheduler can attempt to place jobs from an associated job queue on the compute resources within the environment. If the compute environment is managed, then it can scale its instances out or in automatically, based on the job queue demand.</p> <p>If the state is <code>DISABLED</code>, then the AWS Batch scheduler does not attempt to place jobs within the environment. Jobs in a <code>STARTING</code> or <code>RUNNING</code> state continue to progress normally. Managed compute environments in the <code>DISABLED</code> state do not scale out. However, they scale in to <code>minvCpus</code> value after instances become idle.</p>'
       status:
         $ref: '#/definitions/CEStatus'
         description: 'The current status of the compute environment (for example, <code>CREATING</code> or <code>VALID</code>).'
@@ -1657,7 +1669,7 @@ definitions:
         description: 'A short, human-readable string to provide additional details about the current status of the compute environment.'
       computeResources:
         $ref: '#/definitions/ComputeResource'
-        description: 'The compute resources defined for the compute environment. '
+        description: The compute resources defined for the compute environment.
       serviceRole:
         $ref: '#/definitions/String'
         description: The service role associated with the compute environment that allows AWS Batch to make calls to AWS API operations on your behalf.
@@ -1675,13 +1687,13 @@ definitions:
     properties:
       minvCpus:
         $ref: '#/definitions/Integer'
-        description: The minimum number of EC2 vCPUs that an environment should maintain.
+        description: The minimum number of Amazon EC2 vCPUs that an environment should maintain.
       maxvCpus:
         $ref: '#/definitions/Integer'
-        description: The maximum number of EC2 vCPUs that an environment can reach.
+        description: The maximum number of Amazon EC2 vCPUs that an environment can reach.
       desiredvCpus:
         $ref: '#/definitions/Integer'
-        description: The desired number of EC2 vCPUS in the compute environment.
+        description: The desired number of Amazon EC2 vCPUS in the compute environment.
     description: An object representing the attributes of a compute environment that can be updated.
   ContainerDetail:
     type: object
@@ -1691,16 +1703,16 @@ definitions:
         description: The image used to start the container.
       vcpus:
         $ref: '#/definitions/Integer'
-        description: 'The number of VCPUs allocated for the job. '
+        description: The number of VCPUs allocated for the job.
       memory:
         $ref: '#/definitions/Integer'
         description: The number of MiB of memory reserved for the job.
       command:
         $ref: '#/definitions/StringList'
-        description: 'The command that is passed to the container. '
+        description: The command that is passed to the container.
       jobRoleArn:
         $ref: '#/definitions/String'
-        description: 'The Amazon Resource Name (ARN) associated with the job upon execution. '
+        description: The Amazon Resource Name (ARN) associated with the job upon execution.
       volumes:
         $ref: '#/definitions/Volumes'
         description: A list of volumes associated with the job.
@@ -1884,7 +1896,7 @@ definitions:
     properties:
       computeEnvironment:
         $ref: '#/definitions/String'
-        description: 'The name or Amazon Resource Name (ARN) of the compute environment to delete. '
+        description: The name or Amazon Resource Name (ARN) of the compute environment to delete.
   DeleteJobQueueRequest:
     type: object
     required:
@@ -1892,7 +1904,7 @@ definitions:
     properties:
       jobQueue:
         $ref: '#/definitions/String'
-        description: 'The short name or full Amazon Resource Name (ARN) of the queue to delete. '
+        description: The short name or full Amazon Resource Name (ARN) of the queue to delete.
   DeregisterJobDefinitionRequest:
     type: object
     required:
@@ -1900,13 +1912,13 @@ definitions:
     properties:
       jobDefinition:
         $ref: '#/definitions/String'
-        description: 'The name and revision (<code>name:revision</code>) or full Amazon Resource Name (ARN) of the job definition to deregister. '
+        description: 'The name and revision (<code>name:revision</code>) or full Amazon Resource Name (ARN) of the job definition to deregister.'
   DescribeComputeEnvironmentsRequest:
     type: object
     properties:
       computeEnvironments:
         $ref: '#/definitions/StringList'
-        description: 'A list of up to 100 compute environment names or full Amazon Resource Name (ARN) entries. '
+        description: A list of up to 100 compute environment names or full Amazon Resource Name (ARN) entries.
       maxResults:
         $ref: '#/definitions/Integer'
         description: 'The maximum number of cluster results returned by <code>DescribeComputeEnvironments</code> in paginated output. When this parameter is used, <code>DescribeComputeEnvironments</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeComputeEnvironments</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>DescribeComputeEnvironments</code> returns up to 100 results and a <code>nextToken</code> value if applicable.'
@@ -2063,10 +2075,10 @@ definitions:
     properties:
       jobDefinitionName:
         $ref: '#/definitions/String'
-        description: 'The name of the job definition. '
+        description: The name of the job definition.
       jobDefinitionArn:
         $ref: '#/definitions/String'
-        description: 'The Amazon Resource Name (ARN) for the job definition. '
+        description: The Amazon Resource Name (ARN) for the job definition.
       revision:
         $ref: '#/definitions/Integer'
         description: The revision of the job definition.
@@ -2084,7 +2096,7 @@ definitions:
         description: The retry strategy to use for failed jobs that are submitted with this job definition.
       containerProperties:
         $ref: '#/definitions/ContainerProperties'
-        description: 'An object with various properties specific to container-based jobs. '
+        description: An object with various properties specific to container-based jobs.
       timeout:
         $ref: '#/definitions/JobTimeout'
         description: The timeout configuration for jobs that are submitted with this job definition. You can specify a timeout duration after which AWS Batch terminates your jobs if they have not finished.
@@ -2142,13 +2154,13 @@ definitions:
         description: The Amazon Resource Name (ARN) of the job queue with which the job is associated.
       status:
         $ref: '#/definitions/JobStatus'
-        description: '<p>The current status for the job. </p> <note> <p>If your jobs do not progress to <code>STARTING</code>, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#job_stuck_in_runnable">Jobs Stuck in RUNNABLE Status</a> in the troubleshooting section of the <i>AWS Batch User Guide</i>.</p> </note>'
+        description: '<p>The current status for the job.</p> <note> <p>If your jobs do not progress to <code>STARTING</code>, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#job_stuck_in_runnable">Jobs Stuck in RUNNABLE Status</a> in the troubleshooting section of the <i>AWS Batch User Guide</i>.</p> </note>'
       attempts:
         $ref: '#/definitions/AttemptDetails'
         description: A list of job attempts associated with this job.
       statusReason:
         $ref: '#/definitions/String'
-        description: 'A short, human-readable string to provide additional details about the current status of the job. '
+        description: 'A short, human-readable string to provide additional details about the current status of the job.'
       createdAt:
         $ref: '#/definitions/Long'
         description: 'The Unix timestamp (in seconds and milliseconds) for when the job was created. For non-array jobs and parent array jobs, this is when the job entered the <code>SUBMITTED</code> state (at the time <a>SubmitJob</a> was called). For array child jobs, this is when the child job was spawned by its parent and entered the <code>PENDING</code> state.'
@@ -2169,7 +2181,7 @@ definitions:
         description: The job definition that is used by this job.
       parameters:
         $ref: '#/definitions/ParametersMap'
-        description: 'Additional parameters passed to the job that replace parameter substitution placeholders or override any corresponding parameter defaults from the job definition. '
+        description: Additional parameters passed to the job that replace parameter substitution placeholders or override any corresponding parameter defaults from the job definition.
       container:
         $ref: '#/definitions/ContainerDetail'
         description: An object representing the details of the container that is associated with the job.
@@ -2184,7 +2196,7 @@ definitions:
         description: 'The array properties of the job, if it is an array job.'
       timeout:
         $ref: '#/definitions/JobTimeout'
-        description: 'The timeout configuration for the job. '
+        description: The timeout configuration for the job.
     description: An object representing an AWS Batch job.
   JobQueueDetail:
     type: object
@@ -2212,7 +2224,7 @@ definitions:
         description: 'A short, human-readable string to provide additional details about the current status of the job queue.'
       priority:
         $ref: '#/definitions/Integer'
-        description: 'The priority of the job queue. '
+        description: The priority of the job queue.
       computeEnvironmentOrder:
         $ref: '#/definitions/ComputeEnvironmentOrders'
         description: The compute environments that are attached to the job queue and the order in which job placement is preferred. Compute environments are selected for job placement in ascending order.
@@ -2347,7 +2359,7 @@ definitions:
     properties:
       targetNodes:
         $ref: '#/definitions/String'
-        description: 'The range of nodes, using node index values. A range of <code>0:3</code> indicates nodes with index values of <code>0</code> through <code>3</code>. If the starting range value is omitted (<code>:n</code>), then <code>0</code> is used to start the range. If the ending range value is omitted (<code>n:</code>), then the highest possible node index is used to end the range. Your accumulative node ranges must account for all nodes (0:n). You may nest node ranges, for example 0:10 and 4:5, in which case the 4:5 range properties override the 0:10 properties. '
+        description: 'The range of nodes, using node index values. A range of <code>0:3</code> indicates nodes with index values of <code>0</code> through <code>3</code>. If the starting range value is omitted (<code>:n</code>), then <code>0</code> is used to start the range. If the ending range value is omitted (<code>n:</code>), then the highest possible node index is used to end the range. Your accumulative node ranges must account for all nodes (0:n). You may nest node ranges, for example 0:10 and 4:5, in which case the 4:5 range properties override the 0:10 properties.'
       container:
         $ref: '#/definitions/ContainerProperties'
         description: The container details for the node range.
@@ -2375,7 +2387,7 @@ definitions:
         description: 'An object with various properties specific to multi-node parallel jobs. If you specify node properties for a job, it becomes a multi-node parallel job. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/multi-node-parallel-jobs.html">Multi-node Parallel Jobs</a> in the <i>AWS Batch User Guide</i>. If the job definition''s <code>type</code> parameter is <code>container</code>, then you must specify either <code>containerProperties</code> or <code>nodeProperties</code>.'
       retryStrategy:
         $ref: '#/definitions/RetryStrategy'
-        description: 'The retry strategy to use for failed jobs that are submitted with this job definition. Any retry strategy that is specified during a <a>SubmitJob</a> operation overrides the retry strategy defined here. If a job is terminated due to a timeout, it is not retried. '
+        description: 'The retry strategy to use for failed jobs that are submitted with this job definition. Any retry strategy that is specified during a <a>SubmitJob</a> operation overrides the retry strategy defined here. If a job is terminated due to a timeout, it is not retried.'
       timeout:
         $ref: '#/definitions/JobTimeout'
         description: 'The timeout configuration for jobs that are submitted with this job definition, after which AWS Batch terminates your jobs if they have not finished. If a job is terminated due to a timeout, it is not retried. The minimum value for the timeout is 60 seconds. Any timeout configuration that is specified during a <a>SubmitJob</a> operation overrides the timeout configuration defined here. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html">Job Timeouts</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
@@ -2405,10 +2417,10 @@ definitions:
     properties:
       jobName:
         $ref: '#/definitions/String'
-        description: 'The name of the job. The first character must be alphanumeric, and up to 128 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed. '
+        description: 'The name of the job. The first character must be alphanumeric, and up to 128 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed.'
       jobQueue:
         $ref: '#/definitions/String'
-        description: 'The job queue into which the job is submitted. You can specify either the name or the Amazon Resource Name (ARN) of the queue. '
+        description: The job queue into which the job is submitted. You can specify either the name or the Amazon Resource Name (ARN) of the queue.
       arrayProperties:
         $ref: '#/definitions/ArrayProperties'
         description: 'The array properties for the submitted job, such as the size of the array. The array size can be between 2 and 10,000. If you specify array properties for a job, it becomes an array job. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/array_jobs.html">Array Jobs</a> in the <i>AWS Batch User Guide</i>.'
@@ -2444,7 +2456,7 @@ definitions:
         description: The AWS Batch job ID of the job to terminate.
       reason:
         $ref: '#/definitions/String'
-        description: 'A message to attach to the job that explains the reason for canceling it. This message is returned by future <a>DescribeJobs</a> operations on the job. This message is also recorded in the AWS Batch activity logs. '
+        description: A message to attach to the job that explains the reason for canceling it. This message is returned by future <a>DescribeJobs</a> operations on the job. This message is also recorded in the AWS Batch activity logs.
   Ulimit:
     type: object
     required:
@@ -2495,7 +2507,7 @@ definitions:
         description: 'The priority of the job queue. Job queues with a higher priority (or a higher integer value for the <code>priority</code> parameter) are evaluated first when associated with the same compute environment. Priority is determined in descending order, for example, a job queue with a priority value of <code>10</code> is given scheduling preference over a job queue with a priority value of <code>1</code>.'
       computeEnvironmentOrder:
         $ref: '#/definitions/ComputeEnvironmentOrders'
-        description: 'Details the set of compute environments mapped to a job queue and their order relative to each other. This is one of the parameters used by the job scheduler to determine which compute environment should execute a given job. '
+        description: Details the set of compute environments mapped to a job queue and their order relative to each other. This is one of the parameters used by the job scheduler to determine which compute environment should execute a given job.
   Volume:
     type: object
     properties:

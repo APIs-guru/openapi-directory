@@ -3,7 +3,7 @@ info:
   version: '2018-07-26'
   x-release: v4
   title: Amazon Pinpoint Email Service
-  description: '<fullname>Amazon Pinpoint Email Service</fullname> <p>This document contains reference information for the <a href="https://aws.amazon.com/pinpoint">Amazon Pinpoint</a> Email API, version 1.0. This document is best used in conjunction with the <a href="https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html">Amazon Pinpoint Developer Guide</a>.</p> <p>The Amazon Pinpoint Email API is available in several AWS Regions and it provides an endpoint for each of these Regions. For a list of all the Regions and endpoints where the API is currently available, see <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#pinpoint_region">AWS Regions and Endpoints</a> in the <i>Amazon Web Services General Reference</i>.</p> <p>In each Region, AWS maintains multiple Availability Zones. These Availability Zones are physically isolated from each other, but are united by private, low-latency, high-throughput, and highly redundant network connections. These Availability Zones enable us to provide very high levels of availability and redundancy, while also minimizing latency. To learn more about the number of Availability Zones that are available in each Region, see <a href="http://aws.amazon.com/about-aws/global-infrastructure/">AWS Global Infrastructure</a>.</p>'
+  description: '<fullname>Amazon Pinpoint Email Service</fullname> <p>Welcome to the <i>Amazon Pinpoint Email API Reference</i>. This guide provides information about the Amazon Pinpoint Email API (version 1.0), including supported operations, data types, parameters, and schemas.</p> <p> <a href="https://aws.amazon.com/pinpoint">Amazon Pinpoint</a> is an AWS service that you can use to engage with your customers across multiple messaging channels. You can use Amazon Pinpoint to send email, SMS text messages, voice messages, and push notifications. The Amazon Pinpoint Email API provides programmatic access to options that are unique to the email channel and supplement the options provided by the Amazon Pinpoint API.</p> <p>If you''re new to Amazon Pinpoint, you might find it helpful to also review the <a href="https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html">Amazon Pinpoint Developer Guide</a>. The <i>Amazon Pinpoint Developer Guide</i> provides tutorials, code samples, and procedures that demonstrate how to use Amazon Pinpoint features programmatically and how to integrate Amazon Pinpoint functionality into mobile apps and other types of applications. The guide also provides information about key topics such as Amazon Pinpoint integration with other AWS services and the limits that apply to using the service.</p> <p>The Amazon Pinpoint Email API is available in several AWS Regions and it provides an endpoint for each of these Regions. For a list of all the Regions and endpoints where the API is currently available, see <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#pinpoint_region">AWS Service Endpoints</a> in the <i>Amazon Web Services General Reference</i>. To learn more about AWS Regions, see <a href="https://docs.aws.amazon.com/general/latest/gr/rande-manage.html">Managing AWS Regions</a> in the <i>Amazon Web Services General Reference</i>.</p> <p>In each Region, AWS maintains multiple Availability Zones. These Availability Zones are physically isolated from each other, but are united by private, low-latency, high-throughput, and highly redundant network connections. These Availability Zones enable us to provide very high levels of availability and redundancy, while also minimizing latency. To learn more about the number of Availability Zones that are available in each Region, see <a href="http://aws.amazon.com/about-aws/global-infrastructure/">AWS Global Infrastructure</a>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -219,7 +219,7 @@ paths:
                 properties:
                   TlsPolicy:
                     $ref: '#/definitions/TlsPolicy'
-                    description: 'Specifies whether Amazon Pinpoint should require that incoming email is delivered over a connection that’s encrypted by using Transport Layer Security (TLS). If this value is set to <code>Require</code>, Amazon Pinpoint will bounce email messages that cannot be delivered over TLS. The default value is <code>Optional</code>.'
+                    description: 'Specifies whether messages that use the configuration set are required to use Transport Layer Security (TLS). If the value is <code>Require</code>, messages are only delivered if a TLS connection can be established. If the value is <code>Optional</code>, messages can be delivered in plain text if a TLS connection can''t be established.'
                   SendingPoolName:
                     $ref: '#/definitions/PoolName'
                     description: The name of the dedicated IP pool that you want to associate with the configuration set.
@@ -535,6 +535,9 @@ paths:
                   Raw:
                     $ref: '#/definitions/RawMessage'
                     description: '<p>The raw email message. The message has to meet the following criteria:</p> <ul> <li> <p>The message has to contain a header and a body, separated by one blank line.</p> </li> <li> <p>All of the required header fields must be present in the message.</p> </li> <li> <p>Each part of a multipart MIME message must be formatted properly.</p> </li> <li> <p>If you include attachments, they must be in a file format that Amazon Pinpoint supports. </p> </li> <li> <p>The entire message must be Base64 encoded.</p> </li> <li> <p>If any of the MIME parts in your message contain content that is outside of the 7-bit ASCII character range, you should encode that content to ensure that recipients'' email clients render the message properly.</p> </li> <li> <p>The length of any single line of text in the message can''t exceed 1,000 characters. This restriction is defined in <a href="https://tools.ietf.org/html/rfc5321">RFC 5321</a>.</p> </li> </ul>'
+                  Template:
+                    $ref: '#/definitions/Template'
+                    description: The template to use for the email message.
               Tags:
                 description: An array of objects that define the tags (keys and values) that you want to associate with the predictive inbox placement test.
                 type: array
@@ -1466,7 +1469,7 @@ paths:
             type: object
             properties:
               TlsPolicy:
-                description: 'Specifies whether Amazon Pinpoint should require that incoming email is delivered over a connection encrypted with Transport Layer Security (TLS). If this parameter is set to <code>Require</code>, Amazon Pinpoint rejects emails that weren''t received over TLS. If the parameter is set to <code>Optional</code>, then Amazon Pinpoint accepts emails that weren''t received over TLS. The default value is <code>Optional</code>.'
+                description: 'Specifies whether messages that use the configuration set are required to use Transport Layer Security (TLS). If the value is <code>Require</code>, messages are only delivered if a TLS connection can be established. If the value is <code>Optional</code>, messages can be delivered in plain text if a TLS connection can''t be established.'
                 type: string
                 enum:
                   - REQUIRE
@@ -1929,6 +1932,9 @@ paths:
                   Raw:
                     $ref: '#/definitions/RawMessage'
                     description: '<p>The raw email message. The message has to meet the following criteria:</p> <ul> <li> <p>The message has to contain a header and a body, separated by one blank line.</p> </li> <li> <p>All of the required header fields must be present in the message.</p> </li> <li> <p>Each part of a multipart MIME message must be formatted properly.</p> </li> <li> <p>If you include attachments, they must be in a file format that Amazon Pinpoint supports. </p> </li> <li> <p>The entire message must be Base64 encoded.</p> </li> <li> <p>If any of the MIME parts in your message contain content that is outside of the 7-bit ASCII character range, you should encode that content to ensure that recipients'' email clients render the message properly.</p> </li> <li> <p>The length of any single line of text in the message can''t exceed 1,000 characters. This restriction is defined in <a href="https://tools.ietf.org/html/rfc5321">RFC 5321</a>.</p> </li> </ul>'
+                  Template:
+                    $ref: '#/definitions/Template'
+                    description: The template to use for the email message.
               EmailTags:
                 description: A list of message tags.
                 type: array
@@ -2055,7 +2061,7 @@ definitions:
     enum:
       - REQUIRE
       - OPTIONAL
-    description: 'Specifies whether Amazon Pinpoint should require that incoming email is delivered over a connection encrypted with Transport Layer Security (TLS). If this parameter is set to <code>Require</code>, Amazon Pinpoint rejects emails that weren''t received over TLS. If the parameter is set to <code>Optional</code>, then Amazon Pinpoint accepts emails that weren''t received over TLS. The default value is <code>Optional</code>.'
+    description: 'Specifies whether messages that use the configuration set are required to use Transport Layer Security (TLS). If the value is <code>Require</code>, messages are only delivered if a TLS connection can be established. If the value is <code>Optional</code>, messages can be delivered in plain text if a TLS connection can''t be established.'
   PoolName:
     type: string
     description: The name of a dedicated IP pool.
@@ -2169,6 +2175,15 @@ definitions:
         $ref: '#/definitions/RawMessageData'
         description: '<p>The raw email message. The message has to meet the following criteria:</p> <ul> <li> <p>The message has to contain a header and a body, separated by one blank line.</p> </li> <li> <p>All of the required header fields must be present in the message.</p> </li> <li> <p>Each part of a multipart MIME message must be formatted properly.</p> </li> <li> <p>Attachments must be in a file format that Amazon Pinpoint supports. </p> </li> <li> <p>The entire message must be Base64 encoded.</p> </li> <li> <p>If any of the MIME parts in your message contain content that is outside of the 7-bit ASCII character range, you should encode that content to ensure that recipients'' email clients render the message properly.</p> </li> <li> <p>The length of any single line of text in the message can''t exceed 1,000 characters. This restriction is defined in <a href="https://tools.ietf.org/html/rfc5321">RFC 5321</a>.</p> </li> </ul>'
     description: The raw email message.
+  Template:
+    type: object
+    properties:
+      TemplateArn:
+        $ref: '#/definitions/TemplateArn'
+        description: The Amazon Resource Name (ARN) of the template.
+      TemplateData:
+        $ref: '#/definitions/TemplateData'
+        description: An object that defines the values to use for message variables in the template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the value to use for that variable.
   AccountSuspendedException: {}
   SendingPausedException: {}
   MessageRejected: {}
@@ -2691,7 +2706,7 @@ definitions:
     properties:
       TlsPolicy:
         $ref: '#/definitions/TlsPolicy'
-        description: 'Specifies whether Amazon Pinpoint should require that incoming email is delivered over a connection that’s encrypted by using Transport Layer Security (TLS). If this value is set to <code>Require</code>, Amazon Pinpoint will bounce email messages that cannot be delivered over TLS. The default value is <code>Optional</code>.'
+        description: 'Specifies whether messages that use the configuration set are required to use Transport Layer Security (TLS). If the value is <code>Require</code>, messages are only delivered if a TLS connection can be established. If the value is <code>Optional</code>, messages can be delivered in plain text if a TLS connection can''t be established.'
       SendingPoolName:
         $ref: '#/definitions/PoolName'
         description: The name of the dedicated IP pool that you want to associate with the configuration set.
@@ -2765,6 +2780,9 @@ definitions:
       Raw:
         $ref: '#/definitions/RawMessage'
         description: '<p>The raw email message. The message has to meet the following criteria:</p> <ul> <li> <p>The message has to contain a header and a body, separated by one blank line.</p> </li> <li> <p>All of the required header fields must be present in the message.</p> </li> <li> <p>Each part of a multipart MIME message must be formatted properly.</p> </li> <li> <p>If you include attachments, they must be in a file format that Amazon Pinpoint supports. </p> </li> <li> <p>The entire message must be Base64 encoded.</p> </li> <li> <p>If any of the MIME parts in your message contain content that is outside of the 7-bit ASCII character range, you should encode that content to ensure that recipients'' email clients render the message properly.</p> </li> <li> <p>The length of any single line of text in the message can''t exceed 1,000 characters. This restriction is defined in <a href="https://tools.ietf.org/html/rfc5321">RFC 5321</a>.</p> </li> </ul>'
+      Template:
+        $ref: '#/definitions/Template'
+        description: The template to use for the email message.
     description: 'An object that defines the entire content of the email, including the message headers and the body content. You can create a simple email message, in which you specify the subject and the text and HTML versions of the message body. You can also create raw messages, in which you specify a complete MIME-formatted message. Raw messages can include attachments and custom headers.'
   CreateDeliverabilityTestReportRequest:
     type: object
@@ -3366,7 +3384,7 @@ definitions:
     properties:
       TlsPolicy:
         $ref: '#/definitions/TlsPolicy'
-        description: Whether Amazon Pinpoint should require that incoming email is delivered over a connection encrypted with Transport Layer Security (TLS).
+        description: 'Specifies whether messages that use the configuration set are required to use Transport Layer Security (TLS). If the value is <code>Require</code>, messages are only delivered if a TLS connection can be established. If the value is <code>Optional</code>, messages can be delivered in plain text if a TLS connection can''t be established.'
       SendingPoolName:
         $ref: '#/definitions/SendingPoolName'
         description: The name of the dedicated IP pool that you want to associate with the configuration set.
@@ -3498,6 +3516,11 @@ definitions:
       Tags:
         $ref: '#/definitions/TagList'
         description: A list of the tags that you want to add to the resource. A tag consists of a required tag key (<code>Key</code>) and an associated tag value (<code>Value</code>). The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.
+  TemplateArn:
+    type: string
+  TemplateData:
+    type: string
+    maxLength: 262144
   UntagResourceRequest:
     type: object
     properties: {}

@@ -256,7 +256,7 @@ paths:
         - name: page-size
           in: query
           required: false
-          description: The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
+          description: The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.
           type: string
         - name: token
           in: query
@@ -350,6 +350,8 @@ paths:
                   tags:
                     $ref: '#/definitions/MapOf__string'
                     description: A string-to-string map of key-value pairs that defines the tags to associate with the campaign. Each tag consists of a required tag key and an associated tag value.
+                  TemplateConfiguration:
+                    $ref: '#/definitions/TemplateConfiguration'
                   TreatmentDescription:
                     $ref: '#/definitions/__string'
                     description: The custom description of a variation of the campaign to use for A/B testing.
@@ -405,17 +407,222 @@ paths:
         - name: page-size
           in: query
           required: false
-          description: The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
+          description: The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.
           type: string
         - name: token
           in: query
           required: false
           description: The NextToken string that specifies which page of results to return in a paginated response.
           type: string
+  '/v1/templates/{template-name}/email':
+    post:
+      operationId: CreateEmailTemplate
+      description: Creates a message template that you can use in messages that are sent through the email channel.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateEmailTemplateResponse'
+        '480':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '481':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '483':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '484':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: template-name
+          in: path
+          required: true
+          description: 'The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.'
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - EmailTemplateRequest
+            properties:
+              EmailTemplateRequest:
+                description: Specifies the content and settings for a message template that can be used in messages that are sent through the email channel.
+                type: object
+                properties:
+                  HtmlPart:
+                    $ref: '#/definitions/__string'
+                    description: 'The message body, in HTML format, to use in email messages that are based on the message template. We recommend using HTML format for email clients that support HTML. You can include links, formatted text, and more in an HTML message.'
+                  Subject:
+                    $ref: '#/definitions/__string'
+                    description: 'The subject line, or title, to use in email messages that are based on the message template.'
+                  tags:
+                    $ref: '#/definitions/MapOf__string'
+                    description: A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+                  TextPart:
+                    $ref: '#/definitions/__string'
+                    description: 'The message body, in text format, to use in email messages that are based on the message template. We recommend using text format for email clients that don''t support HTML and clients that are connected to high-latency networks, such as mobile devices.'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteEmailTemplate
+      description: Deletes a message template that was designed for use in messages that were sent through the email channel.
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteEmailTemplateResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: template-name
+          in: path
+          required: true
+          description: 'The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.'
+          type: string
+    get:
+      operationId: GetEmailTemplate
+      description: Retrieves the content and settings for a message template that you can use in messages that are sent through the email channel.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetEmailTemplateResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: template-name
+          in: path
+          required: true
+          description: 'The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.'
+          type: string
+    put:
+      operationId: UpdateEmailTemplate
+      description: Updates an existing message template that you can use in messages that are sent through the email channel.
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateEmailTemplateResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: template-name
+          in: path
+          required: true
+          description: 'The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.'
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - EmailTemplateRequest
+            properties:
+              EmailTemplateRequest:
+                description: Specifies the content and settings for a message template that can be used in messages that are sent through the email channel.
+                type: object
+                properties:
+                  HtmlPart:
+                    $ref: '#/definitions/__string'
+                    description: 'The message body, in HTML format, to use in email messages that are based on the message template. We recommend using HTML format for email clients that support HTML. You can include links, formatted text, and more in an HTML message.'
+                  Subject:
+                    $ref: '#/definitions/__string'
+                    description: 'The subject line, or title, to use in email messages that are based on the message template.'
+                  tags:
+                    $ref: '#/definitions/MapOf__string'
+                    description: A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+                  TextPart:
+                    $ref: '#/definitions/__string'
+                    description: 'The message body, in text format, to use in email messages that are based on the message template. We recommend using text format for email clients that don''t support HTML and clients that are connected to high-latency networks, such as mobile devices.'
   '/v1/apps/{application-id}/jobs/export':
     post:
       operationId: CreateExportJob
-      description: Creates a new export job for an application.
+      description: Creates an export job for an application.
       responses:
         '202':
           description: Success
@@ -524,7 +731,7 @@ paths:
         - name: page-size
           in: query
           required: false
-          description: The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
+          description: The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.
           type: string
         - name: token
           in: query
@@ -534,7 +741,7 @@ paths:
   '/v1/apps/{application-id}/jobs/import':
     post:
       operationId: CreateImportJob
-      description: Creates a new import job for an application.
+      description: Creates an import job for an application.
       responses:
         '201':
           description: Success
@@ -655,13 +862,230 @@ paths:
         - name: page-size
           in: query
           required: false
-          description: The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
+          description: The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.
           type: string
         - name: token
           in: query
           required: false
           description: The NextToken string that specifies which page of results to return in a paginated response.
           type: string
+  '/v1/templates/{template-name}/push':
+    post:
+      operationId: CreatePushTemplate
+      description: Creates a message template that you can use in messages that are sent through a push notification channel.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreatePushTemplateResponse'
+        '480':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '481':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '483':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '484':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: template-name
+          in: path
+          required: true
+          description: 'The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.'
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - PushNotificationTemplateRequest
+            properties:
+              PushNotificationTemplateRequest:
+                description: Specifies the content and settings for a message template that can be used in messages that are sent through a push notification channel.
+                type: object
+                properties:
+                  ADM:
+                    $ref: '#/definitions/AndroidPushNotificationTemplate'
+                    description: The message template to use for the ADM (Amazon Device Messaging) channel. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).
+                  APNS:
+                    $ref: '#/definitions/APNSPushNotificationTemplate'
+                    description: The message template to use for the APNs (Apple Push Notification service) channel. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).
+                  Baidu:
+                    $ref: '#/definitions/AndroidPushNotificationTemplate'
+                    description: The message template to use for the Baidu (Baidu Cloud Push) channel. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).
+                  Default:
+                    $ref: '#/definitions/DefaultPushNotificationTemplate'
+                    description: The default message template to use for push notification channels.
+                  GCM:
+                    $ref: '#/definitions/AndroidPushNotificationTemplate'
+                    description: 'The message template to use for the GCM channel, which is used to send notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).'
+                  tags:
+                    $ref: '#/definitions/MapOf__string'
+                    description: A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeletePushTemplate
+      description: Deletes a message template that was designed for use in messages that were sent through a push notification channel.
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeletePushTemplateResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: template-name
+          in: path
+          required: true
+          description: 'The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.'
+          type: string
+    get:
+      operationId: GetPushTemplate
+      description: Retrieves the content and settings for a message template that you can use in messages that are sent through a push notification channel.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetPushTemplateResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: template-name
+          in: path
+          required: true
+          description: 'The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.'
+          type: string
+    put:
+      operationId: UpdatePushTemplate
+      description: Updates an existing message template that you can use in messages that are sent through a push notification channel.
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdatePushTemplateResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: template-name
+          in: path
+          required: true
+          description: 'The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.'
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - PushNotificationTemplateRequest
+            properties:
+              PushNotificationTemplateRequest:
+                description: Specifies the content and settings for a message template that can be used in messages that are sent through a push notification channel.
+                type: object
+                properties:
+                  ADM:
+                    $ref: '#/definitions/AndroidPushNotificationTemplate'
+                    description: The message template to use for the ADM (Amazon Device Messaging) channel. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).
+                  APNS:
+                    $ref: '#/definitions/APNSPushNotificationTemplate'
+                    description: The message template to use for the APNs (Apple Push Notification service) channel. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).
+                  Baidu:
+                    $ref: '#/definitions/AndroidPushNotificationTemplate'
+                    description: The message template to use for the Baidu (Baidu Cloud Push) channel. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).
+                  Default:
+                    $ref: '#/definitions/DefaultPushNotificationTemplate'
+                    description: The default message template to use for push notification channels.
+                  GCM:
+                    $ref: '#/definitions/AndroidPushNotificationTemplate'
+                    description: 'The message template to use for the GCM channel, which is used to send notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).'
+                  tags:
+                    $ref: '#/definitions/MapOf__string'
+                    description: A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
   '/v1/apps/{application-id}/segments':
     post:
       operationId: CreateSegment
@@ -774,13 +1198,206 @@ paths:
         - name: page-size
           in: query
           required: false
-          description: The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
+          description: The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.
           type: string
         - name: token
           in: query
           required: false
           description: The NextToken string that specifies which page of results to return in a paginated response.
           type: string
+  '/v1/templates/{template-name}/sms':
+    post:
+      operationId: CreateSmsTemplate
+      description: Creates a message template that you can use in messages that are sent through the SMS channel.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateSmsTemplateResponse'
+        '480':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '481':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '483':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '484':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: template-name
+          in: path
+          required: true
+          description: 'The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.'
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - SMSTemplateRequest
+            properties:
+              SMSTemplateRequest:
+                description: Specifies the content and settings for a message template that can be used in text messages that are sent through the SMS channel.
+                type: object
+                properties:
+                  Body:
+                    $ref: '#/definitions/__string'
+                    description: The message body to use in text messages that are based on the message template.
+                  tags:
+                    $ref: '#/definitions/MapOf__string'
+                    description: A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteSmsTemplate
+      description: Deletes a message template that was designed for use in messages that were sent through the SMS channel.
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteSmsTemplateResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: template-name
+          in: path
+          required: true
+          description: 'The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.'
+          type: string
+    get:
+      operationId: GetSmsTemplate
+      description: Retrieves the content and settings for a message template that you can use in messages that are sent through the SMS channel.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetSmsTemplateResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: template-name
+          in: path
+          required: true
+          description: 'The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.'
+          type: string
+    put:
+      operationId: UpdateSmsTemplate
+      description: Updates an existing message template that you can use in messages that are sent through the SMS channel.
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateSmsTemplateResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: template-name
+          in: path
+          required: true
+          description: 'The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.'
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - SMSTemplateRequest
+            properties:
+              SMSTemplateRequest:
+                description: Specifies the content and settings for a message template that can be used in text messages that are sent through the SMS channel.
+                type: object
+                properties:
+                  Body:
+                    $ref: '#/definitions/__string'
+                    description: The message body to use in text messages that are based on the message template.
+                  tags:
+                    $ref: '#/definitions/MapOf__string'
+                    description: A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
   '/v1/apps/{application-id}/channels/adm':
     delete:
       operationId: DeleteAdmChannel
@@ -868,7 +1485,7 @@ paths:
           type: string
     put:
       operationId: UpdateAdmChannel
-      description: Updates the ADM channel settings for an application.
+      description: Enables the ADM channel for an application or updates the status and settings of the ADM channel for an application.
       responses:
         '200':
           description: Success
@@ -1012,7 +1629,7 @@ paths:
           type: string
     put:
       operationId: UpdateApnsChannel
-      description: Updates the APNs channel settings for an application.
+      description: Enables the APNs channel for an application or updates the status and settings of the APNs channel for an application.
       responses:
         '200':
           description: Success
@@ -1171,7 +1788,7 @@ paths:
           type: string
     put:
       operationId: UpdateApnsSandboxChannel
-      description: Updates the APNs sandbox channel settings for an application.
+      description: Enables the APNs sandbox channel for an application or updates the status and settings of the APNs sandbox channel for an application.
       responses:
         '200':
           description: Success
@@ -1330,7 +1947,7 @@ paths:
           type: string
     put:
       operationId: UpdateApnsVoipChannel
-      description: Updates the APNs VoIP channel settings for an application.
+      description: Enables the APNs VoIP channel for an application or updates the status and settings of the APNs VoIP channel for an application.
       responses:
         '200':
           description: Success
@@ -1489,7 +2106,7 @@ paths:
           type: string
     put:
       operationId: UpdateApnsVoipSandboxChannel
-      description: Updates the settings for the APNs VoIP sandbox channel for an application.
+      description: Enables the APNs VoIP sandbox channel for an application or updates the status and settings of the APNs VoIP sandbox channel for an application.
       responses:
         '200':
           description: Success
@@ -1695,7 +2312,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetBaiduChannel
-      description: Retrieves information about the status and settings of the Baidu Cloud Push channel for an application.
+      description: Retrieves information about the status and settings of the Baidu channel for an application.
       responses:
         '200':
           description: Success
@@ -1733,7 +2350,7 @@ paths:
           type: string
     put:
       operationId: UpdateBaiduChannel
-      description: Updates the settings of the Baidu channel for an application.
+      description: Enables the Baidu channel for an application or updates the status and settings of the Baidu channel for an application.
       responses:
         '200':
           description: Success
@@ -1976,6 +2593,8 @@ paths:
                   tags:
                     $ref: '#/definitions/MapOf__string'
                     description: A string-to-string map of key-value pairs that defines the tags to associate with the campaign. Each tag consists of a required tag key and an associated tag value.
+                  TemplateConfiguration:
+                    $ref: '#/definitions/TemplateConfiguration'
                   TreatmentDescription:
                     $ref: '#/definitions/__string'
                     description: The custom description of a variation of the campaign to use for A/B testing.
@@ -2069,7 +2688,7 @@ paths:
           type: string
     put:
       operationId: UpdateEmailChannel
-      description: Updates the status and settings of the email channel for an application.
+      description: Enables the email channel for an application or updates the status and settings of the email channel for an application.
       responses:
         '200':
           description: Success
@@ -2299,7 +2918,7 @@ paths:
                     description: 'The date and time, in ISO 8601 format, when the endpoint is updated.'
                   EndpointStatus:
                     $ref: '#/definitions/__string'
-                    description: Not used.
+                    description: '<p>Specifies whether to send messages or push notifications to the endpoint. Valid values are: ACTIVE, messages are sent to the endpoint; and, INACTIVE, messages aren’t sent to the endpoint.</p> <p>Amazon Pinpoint automatically sets this value to ACTIVE when you create an endpoint or update an existing endpoint. Amazon Pinpoint automatically sets this value to INACTIVE if you update another endpoint that has the same address specified by the Address property.</p>'
                   Location:
                     $ref: '#/definitions/EndpointLocation'
                     description: The geographic information for the endpoint.
@@ -2546,7 +3165,7 @@ paths:
           type: string
     put:
       operationId: UpdateGcmChannel
-      description: Updates the status and settings of the GCM channel for an application.
+      description: Enables the GCM channel for an application or updates the status and settings of the GCM channel for an application.
       responses:
         '200':
           description: Success
@@ -2596,7 +3215,7 @@ paths:
                 properties:
                   ApiKey:
                     $ref: '#/definitions/__string'
-                    description: 'The API key, also referred to as a <i>server key</i>, that you received from Google to communicate with Google services.'
+                    description: 'The Web API Key, also referred to as an <i>API_KEY</i> or <i>server key</i>, that you received from Google to communicate with Google services.'
                   Enabled:
                     $ref: '#/definitions/__boolean'
                     description: Specifies whether to enable the GCM channel for the application.
@@ -2849,7 +3468,7 @@ paths:
           type: string
     put:
       operationId: UpdateSmsChannel
-      description: Updates the status and settings of the SMS channel for an application.
+      description: Enables the SMS channel for an application or updates the status and settings of the SMS channel for an application.
       responses:
         '200':
           description: Success
@@ -3088,7 +3707,7 @@ paths:
           type: string
     put:
       operationId: UpdateVoiceChannel
-      description: Updates the status and settings of the voice channel for an application.
+      description: Enables the voice channel for an application or updates the status and settings of the voice channel for an application.
       responses:
         '200':
           description: Success
@@ -3142,7 +3761,7 @@ paths:
   '/v1/apps/{application-id}/kpis/daterange/{kpi-name}':
     get:
       operationId: GetApplicationDateRangeKpi
-      description: ' <p>Retrieves (queries) pre-aggregated data for a standard metric that applies to an application.</p>'
+      description: Retrieves (queries) pre-aggregated data for a standard metric that applies to an application.
       responses:
         '200':
           description: Success
@@ -3181,28 +3800,28 @@ paths:
         - name: end-time
           in: query
           required: false
-          description: 'The last date to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in ISO 8601 format, for example: 2019-07-19 for July 19, 2019. To define a date range that ends at a specific time, specify the date and time in ISO 8601 format, for example: 2019-07-19T20:00Z for 8:00 PM July 19, 2019.'
+          description: 'The last date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format, for example: 2019-07-19T00:00:00Z for July 19, 2019 and 2019-07-19T20:00:00Z for 8:00 PM July 19, 2019.'
           type: string
           format: date-time
         - name: kpi-name
           in: path
           required: true
-          description: 'The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, to retrieve data for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. Examples are attempted-deliveries and successful-deliveries. For a list of valid values, see the <a href="developerguide.html">Amazon Pinpoint Developer Guide</a>.'
+          description: 'The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, to retrieve data for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. Examples are email-open-rate and successful-delivery-rate. For a list of valid values, see the <a href="developerguide.html">Amazon Pinpoint Developer Guide</a>.'
           type: string
         - name: next-token
           in: query
           required: false
-          description: The NextToken string that specifies which page of results to return in a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
+          description: The NextToken string that specifies which page of results to return in a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.
           type: string
         - name: page-size
           in: query
           required: false
-          description: The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
+          description: The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.
           type: string
         - name: start-time
           in: query
           required: false
-          description: 'The first date to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in ISO 8601 format, for example: 2019-07-15 for July 15, 2019. To define a date range that begins at a specific time, specify the date and time in ISO 8601 format, for example: 2019-07-15T16:00Z for 4:00 PM July 15, 2019.'
+          description: 'The first date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format, for example: 2019-07-15T00:00:00Z for July 15, 2019 and 2019-07-15T16:00:00Z for 4:00 PM July 15, 2019.'
           type: string
           format: date-time
     parameters:
@@ -3369,7 +3988,7 @@ paths:
         - name: page-size
           in: query
           required: false
-          description: The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
+          description: The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.
           type: string
         - name: token
           in: query
@@ -3387,7 +4006,7 @@ paths:
   '/v1/apps/{application-id}/campaigns/{campaign-id}/kpis/daterange/{kpi-name}':
     get:
       operationId: GetCampaignDateRangeKpi
-      description: ' <p>Retrieves (queries) pre-aggregated data for a standard metric that applies to a campaign.</p>'
+      description: Retrieves (queries) pre-aggregated data for a standard metric that applies to a campaign.
       responses:
         '200':
           description: Success
@@ -3431,28 +4050,28 @@ paths:
         - name: end-time
           in: query
           required: false
-          description: 'The last date to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in ISO 8601 format, for example: 2019-07-19 for July 19, 2019. To define a date range that ends at a specific time, specify the date and time in ISO 8601 format, for example: 2019-07-19T20:00Z for 8:00 PM July 19, 2019.'
+          description: 'The last date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format, for example: 2019-07-19T00:00:00Z for July 19, 2019 and 2019-07-19T20:00:00Z for 8:00 PM July 19, 2019.'
           type: string
           format: date-time
         - name: kpi-name
           in: path
           required: true
-          description: 'The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, to retrieve data for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. Examples are attempted-deliveries and successful-deliveries. For a list of valid values, see the <a href="developerguide.html">Amazon Pinpoint Developer Guide</a>.'
+          description: 'The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, to retrieve data for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. Examples are email-open-rate and successful-delivery-rate. For a list of valid values, see the <a href="developerguide.html">Amazon Pinpoint Developer Guide</a>.'
           type: string
         - name: next-token
           in: query
           required: false
-          description: The NextToken string that specifies which page of results to return in a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
+          description: The NextToken string that specifies which page of results to return in a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.
           type: string
         - name: page-size
           in: query
           required: false
-          description: The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
+          description: The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.
           type: string
         - name: start-time
           in: query
           required: false
-          description: 'The first date to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in ISO 8601 format, for example: 2019-07-15 for July 15, 2019. To define a date range that begins at a specific time, specify the date and time in ISO 8601 format, for example: 2019-07-15T16:00Z for 4:00 PM July 15, 2019.'
+          description: 'The first date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format, for example: 2019-07-15T00:00:00Z for July 15, 2019 and 2019-07-15T16:00:00Z for 4:00 PM July 15, 2019.'
           type: string
           format: date-time
     parameters:
@@ -3567,7 +4186,7 @@ paths:
         - name: page-size
           in: query
           required: false
-          description: The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
+          description: The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.
           type: string
         - name: token
           in: query
@@ -3775,7 +4394,7 @@ paths:
         - name: page-size
           in: query
           required: false
-          description: The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
+          description: The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.
           type: string
         - name: segment-id
           in: path
@@ -3837,7 +4456,7 @@ paths:
         - name: page-size
           in: query
           required: false
-          description: The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
+          description: The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.
           type: string
         - name: segment-id
           in: path
@@ -3956,7 +4575,7 @@ paths:
         - name: page-size
           in: query
           required: false
-          description: The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
+          description: The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.
           type: string
         - name: segment-id
           in: path
@@ -3979,7 +4598,7 @@ paths:
   '/v1/tags/{resource-arn}':
     get:
       operationId: ListTagsForResource
-      description: 'Retrieves all the tags (keys and values) that are associated with an application, campaign, or segment.'
+      description: 'Retrieves all the tags (keys and values) that are associated with an application, campaign, message template, or segment.'
       responses:
         '200':
           description: Success
@@ -3989,7 +4608,7 @@ paths:
         - name: resource-arn
           in: path
           required: true
-          description: 'The Amazon Resource Name (ARN) of the application, campaign, or segment.'
+          description: 'The Amazon Resource Name (ARN) of the application, campaign, message template, or segment.'
           type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
@@ -4001,7 +4620,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
       operationId: TagResource
-      description: 'Adds one or more tags (keys and values) to an application, campaign, or segment.'
+      description: 'Adds one or more tags (keys and values) to an application, campaign, message template, or segment.'
       responses:
         '204':
           description: Success
@@ -4009,7 +4628,7 @@ paths:
         - name: resource-arn
           in: path
           required: true
-          description: 'The Amazon Resource Name (ARN) of the application, campaign, or segment.'
+          description: 'The Amazon Resource Name (ARN) of the application, campaign, message template, or segment.'
           type: string
         - name: body
           in: body
@@ -4020,12 +4639,74 @@ paths:
               - TagsModel
             properties:
               TagsModel:
-                description: 'Specifies the tags (keys and values) for an application, campaign, or segment.'
+                description: 'Specifies the tags (keys and values) for an application, campaign, message template, or segment.'
                 type: object
                 properties:
                   tags:
                     $ref: '#/definitions/MapOf__string'
-                    description: '<p>A string-to-string map of key-value pairs that defines the tags for an application, campaign, or segment. A project, campaign, or segment can have a maximum of 50 tags.</p> <p>Each tag consists of a required tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>'
+                    description: '<p>A string-to-string map of key-value pairs that defines the tags for an application, campaign, message template, or segment. Each project, campaign, message template, or segment can have a maximum of 50 tags.</p> <p>Each tag consists of a required tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>'
+  /v1/templates:
+    get:
+      operationId: ListTemplates
+      description: Retrieves information about all the message templates that are associated with your Amazon Pinpoint account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTemplatesResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: next-token
+          in: query
+          required: false
+          description: The NextToken string that specifies which page of results to return in a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.
+          type: string
+        - name: page-size
+          in: query
+          required: false
+          description: The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.
+          type: string
+        - name: prefix
+          in: query
+          required: false
+          description: 'The substring to match in the names of the message templates to include in the results. If you specify this value, Amazon Pinpoint returns only those templates whose names begin with the value that you specify.'
+          type: string
+        - name: template-type
+          in: query
+          required: false
+          description: 'The type of message template to include in the results. Valid values are: EMAIL, SMS, and PUSH. To include all types of templates in the results, don''t include this parameter in your request.'
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /v1/phone/number/validate:
     post:
       operationId: PhoneNumberValidate
@@ -4278,6 +4959,9 @@ paths:
                   MessageConfiguration:
                     $ref: '#/definitions/DirectMessageConfiguration'
                     description: The set of properties that defines the configuration settings for the message.
+                  TemplateConfiguration:
+                    $ref: '#/definitions/TemplateConfiguration'
+                    description: The message template to use for the message.
                   TraceId:
                     $ref: '#/definitions/__string'
                     description: The unique identifier for tracing the message. This identifier is visible to message recipients.
@@ -4346,6 +5030,9 @@ paths:
                   MessageConfiguration:
                     $ref: '#/definitions/DirectMessageConfiguration'
                     description: The message definitions for the default message and any default messages that you defined for specific channels.
+                  TemplateConfiguration:
+                    $ref: '#/definitions/TemplateConfiguration'
+                    description: The message template to use for the message.
                   TraceId:
                     $ref: '#/definitions/__string'
                     description: The unique identifier for tracing the message. This identifier is visible to message recipients.
@@ -4363,7 +5050,7 @@ paths:
   '/v1/tags/{resource-arn}#tagKeys':
     delete:
       operationId: UntagResource
-      description: 'Removes one or more tags (keys and values) from an application, campaign, or segment.'
+      description: 'Removes one or more tags (keys and values) from an application, campaign, message template, or segment.'
       responses:
         '204':
           description: Success
@@ -4371,12 +5058,12 @@ paths:
         - name: resource-arn
           in: path
           required: true
-          description: 'The Amazon Resource Name (ARN) of the application, campaign, or segment.'
+          description: 'The Amazon Resource Name (ARN) of the application, campaign, message template, or segment.'
           type: string
         - name: tagKeys
           in: query
           required: true
-          description: 'The key of the tag to remove from the application, campaign, or segment. To remove multiple tags, append the tagKeys parameter and argument for each additional tag to remove, separated by an ampersand (&amp;).'
+          description: 'The key of the tag to remove from the application, campaign, message template, or segment. To remove multiple tags, append the tagKeys parameter and argument for each additional tag to remove, separated by an ampersand (&amp;).'
           type: array
           items:
             type: string
@@ -4570,6 +5257,26 @@ definitions:
                             UTC+10, UTC+10:30, UTC+11, UTC+12, UTC+13, UTC-02, UTC-03, UTC-04, UTC-05, UTC-06,
                             UTC-07, UTC-08, UTC-09, UTC-10, and UTC-11.
     description: Specifies the schedule settings for a campaign.
+  TemplateConfiguration:
+    type: object
+    properties:
+      EmailTemplate:
+        $ref: '#/definitions/Template'
+        description: The email template to use for the message.
+      PushTemplate:
+        $ref: '#/definitions/Template'
+        description: The push notification template to use for the message.
+      SMSTemplate:
+        $ref: '#/definitions/Template'
+        description: The SMS template to use for the message.
+    description: 'Specifies the message template to use for the message, for each type of channel.'
+  CreateEmailTemplateResponse:
+    type: object
+    required:
+      - CreateTemplateMessageBody
+    properties:
+      CreateTemplateMessageBody:
+        $ref: '#/definitions/CreateTemplateMessageBody'
   CreateExportJobResponse:
     type: object
     required:
@@ -4589,6 +5296,82 @@ definitions:
     enum:
       - CSV
       - JSON
+  CreatePushTemplateResponse:
+    type: object
+    required:
+      - CreateTemplateMessageBody
+    properties:
+      CreateTemplateMessageBody:
+        $ref: '#/definitions/CreateTemplateMessageBody'
+  AndroidPushNotificationTemplate:
+    type: object
+    properties:
+      Action:
+        $ref: '#/definitions/Action'
+        description: '<p>The action to occur if a recipient taps a push notification that''s based on the message template. Valid values are:</p> <ul><li><p>OPEN_APP - Your app opens or it becomes the foreground app if it was sent to the background. This is the default action.</p></li> <li><p>DEEP_LINK - Your app opens and displays a designated user interface in the app. This action uses the deep-linking features of the Android platform.</p></li> <li><p>URL - The default mobile browser on the recipient''s device opens and loads the web page at a URL that you specify.</p></li></ul>'
+      Body:
+        $ref: '#/definitions/__string'
+        description: The message body to use in a push notification that's based on the message template.
+      ImageIconUrl:
+        $ref: '#/definitions/__string'
+        description: The URL of the large icon image to display in the content view of a push notification that's based on the message template.
+      ImageUrl:
+        $ref: '#/definitions/__string'
+        description: The URL of an image to display in a push notification that's based on the message template.
+      SmallImageIconUrl:
+        $ref: '#/definitions/__string'
+        description: The URL of the small icon image to display in the status bar and the content view of a push notification that's based on the message template.
+      Sound:
+        $ref: '#/definitions/__string'
+        description: 'The sound to play when a recipient receives a push notification that''s based on the message template. You can use the default stream or specify the file name of a sound resource that''s bundled in your app. On an Android platform, the sound file must reside in /res/raw/.'
+      Title:
+        $ref: '#/definitions/__string'
+        description: The title to use in a push notification that's based on the message template. This title appears above the notification message on a recipient's device.
+      Url:
+        $ref: '#/definitions/__string'
+        description: 'The URL to open in a recipient''s default mobile browser, if a recipient taps a a push notification that''s based on the message template and the value of the Action property is URL.'
+    description: 'Specifies the content and settings for a message template can be used in push notifications that are sent through the ADM (Amazon Device Messaging), GCM (Firebase Cloud Messaging, formerly Google Cloud Messaging), or Baidu (Baidu Cloud Push) channel.'
+  APNSPushNotificationTemplate:
+    type: object
+    properties:
+      Action:
+        $ref: '#/definitions/Action'
+        description: '<p>The action to occur if a recipient taps a push notification that''s based on the message template. Valid values are:</p> <ul><li><p>OPEN_APP - Your app opens or it becomes the foreground app if it was sent to the background. This is the default action.</p></li> <li><p>DEEP_LINK - Your app opens and displays a designated user interface in the app. This setting uses the deep-linking features of the iOS platform.</p></li> <li><p>URL - The default mobile browser on the recipient''s device opens and loads the web page at a URL that you specify.</p></li></ul>'
+      Body:
+        $ref: '#/definitions/__string'
+        description: The message body to use in push notifications that are based on the message template.
+      MediaUrl:
+        $ref: '#/definitions/__string'
+        description: The URL of an image or video to display in push notifications that are based on the message template.
+      Sound:
+        $ref: '#/definitions/__string'
+        description: 'The key for the sound to play when the recipient receives a push notification that''s based on the message template. The value for this key is the name of a sound file in your app''s main bundle or the Library/Sounds folder in your app''s data container. If the sound file can''t be found or you specify default for the value, the system plays the default alert sound.'
+      Title:
+        $ref: '#/definitions/__string'
+        description: The title to use in push notifications that are based on the message template. This title appears above the notification message on a recipient's device.
+      Url:
+        $ref: '#/definitions/__string'
+        description: 'The URL to open in the recipient''s default mobile browser, if a recipient taps a push notification that''s based on the message template and the value of the Action property is URL.'
+    description: Specifies the content and settings for a message template that can be used in push notifications that are sent through the APNs (Apple Push Notification service) channel.
+  DefaultPushNotificationTemplate:
+    type: object
+    properties:
+      Action:
+        $ref: '#/definitions/Action'
+        description: '<p>The action to occur if a recipient taps a push notification that''s based on the message template. Valid values are:</p> <ul><li><p>OPEN_APP - Your app opens or it becomes the foreground app if it was sent to the background. This is the default action.</p></li> <li><p>DEEP_LINK - Your app opens and displays a designated user interface in the app. This setting uses the deep-linking features of the iOS and Android platforms.</p></li> <li><p>URL - The default mobile browser on the recipient''s device opens and loads the web page at a URL that you specify.</p></li></ul>'
+      Body:
+        $ref: '#/definitions/__string'
+        description: The message body to use in push notifications that are based on the message template.
+      Sound:
+        $ref: '#/definitions/__string'
+        description: '<p>The sound to play when a recipient receives a push notification that''s based on the message template. You can use the default stream or specify the file name of a sound resource that''s bundled in your app. On an Android platform, the sound file must reside in /res/raw/.</p> <p>For an iOS platform, this value is the key for the name of a sound file in your app''s main bundle or the Library/Sounds folder in your app''s data container. If the sound file can''t be found or you specify default for the value, the system plays the default alert sound.</p>'
+      Title:
+        $ref: '#/definitions/__string'
+        description: The title to use in push notifications that are based on the message template. This title appears above the notification message on a recipient's device.
+      Url:
+        $ref: '#/definitions/__string'
+        description: 'The URL to open in a recipient''s default mobile browser, if a recipient taps a push notification that''s based on the message template and the value of the Action property is URL.'
+    description: Specifies the settings and content for the default message template that's used in messages that are sent through a push notification channel.
   CreateSegmentResponse:
     type: object
     required:
@@ -4628,6 +5411,13 @@ definitions:
         $ref: '#/definitions/Include'
         description: 'Specifies how to handle multiple segment groups for the segment. For example, if the segment includes three segment groups, whether the resulting segment includes endpoints that match all, any, or none of the segment groups.'
     description: Specifies the settings that define the relationships between segment groups for a segment.
+  CreateSmsTemplateResponse:
+    type: object
+    required:
+      - CreateTemplateMessageBody
+    properties:
+      CreateTemplateMessageBody:
+        $ref: '#/definitions/CreateTemplateMessageBody'
   DeleteAdmChannelResponse:
     type: object
     required:
@@ -4691,6 +5481,13 @@ definitions:
     properties:
       EmailChannelResponse:
         $ref: '#/definitions/EmailChannelResponse'
+  DeleteEmailTemplateResponse:
+    type: object
+    required:
+      - MessageBody
+    properties:
+      MessageBody:
+        $ref: '#/definitions/MessageBody'
   DeleteEndpointResponse:
     type: object
     required:
@@ -4712,6 +5509,13 @@ definitions:
     properties:
       GCMChannelResponse:
         $ref: '#/definitions/GCMChannelResponse'
+  DeletePushTemplateResponse:
+    type: object
+    required:
+      - MessageBody
+    properties:
+      MessageBody:
+        $ref: '#/definitions/MessageBody'
   DeleteSegmentResponse:
     type: object
     required:
@@ -4726,6 +5530,13 @@ definitions:
     properties:
       SMSChannelResponse:
         $ref: '#/definitions/SMSChannelResponse'
+  DeleteSmsTemplateResponse:
+    type: object
+    required:
+      - MessageBody
+    properties:
+      MessageBody:
+        $ref: '#/definitions/MessageBody'
   DeleteUserEndpointsResponse:
     type: object
     required:
@@ -4866,6 +5677,13 @@ definitions:
     properties:
       EmailChannelResponse:
         $ref: '#/definitions/EmailChannelResponse'
+  GetEmailTemplateResponse:
+    type: object
+    required:
+      - EmailTemplateResponse
+    properties:
+      EmailTemplateResponse:
+        $ref: '#/definitions/EmailTemplateResponse'
   GetEndpointResponse:
     type: object
     required:
@@ -4915,6 +5733,13 @@ definitions:
     properties:
       ImportJobsResponse:
         $ref: '#/definitions/ImportJobsResponse'
+  GetPushTemplateResponse:
+    type: object
+    required:
+      - PushNotificationTemplateResponse
+    properties:
+      PushNotificationTemplateResponse:
+        $ref: '#/definitions/PushNotificationTemplateResponse'
   GetSegmentResponse:
     type: object
     required:
@@ -4964,6 +5789,13 @@ definitions:
     properties:
       SMSChannelResponse:
         $ref: '#/definitions/SMSChannelResponse'
+  GetSmsTemplateResponse:
+    type: object
+    required:
+      - SMSTemplateResponse
+    properties:
+      SMSTemplateResponse:
+        $ref: '#/definitions/SMSTemplateResponse'
   GetUserEndpointsResponse:
     type: object
     required:
@@ -4985,6 +5817,13 @@ definitions:
     properties:
       TagsModel:
         $ref: '#/definitions/TagsModel'
+  ListTemplatesResponse:
+    type: object
+    required:
+      - TemplatesResponse
+    properties:
+      TemplatesResponse:
+        $ref: '#/definitions/TemplatesResponse'
   PhoneNumberValidateResponse:
     type: object
     required:
@@ -5053,7 +5892,7 @@ definitions:
         description: The default message body for all channels.
       DefaultPushNotificationMessage:
         $ref: '#/definitions/DefaultPushNotificationMessage'
-        description: The default push notification message for all push channels.
+        description: The default push notification message for all push notification channels.
       EmailMessage:
         $ref: '#/definitions/EmailMessage'
         description: The default message for the email channel. This message overrides the default message (DefaultMessage).
@@ -5147,6 +5986,13 @@ definitions:
     properties:
       EmailChannelResponse:
         $ref: '#/definitions/EmailChannelResponse'
+  UpdateEmailTemplateResponse:
+    type: object
+    required:
+      - MessageBody
+    properties:
+      MessageBody:
+        $ref: '#/definitions/MessageBody'
   UpdateEndpointResponse:
     type: object
     required:
@@ -5254,6 +6100,13 @@ definitions:
     properties:
       GCMChannelResponse:
         $ref: '#/definitions/GCMChannelResponse'
+  UpdatePushTemplateResponse:
+    type: object
+    required:
+      - MessageBody
+    properties:
+      MessageBody:
+        $ref: '#/definitions/MessageBody'
   UpdateSegmentResponse:
     type: object
     required:
@@ -5268,6 +6121,13 @@ definitions:
     properties:
       SMSChannelResponse:
         $ref: '#/definitions/SMSChannelResponse'
+  UpdateSmsTemplateResponse:
+    type: object
+    required:
+      - MessageBody
+    properties:
+      MessageBody:
+        $ref: '#/definitions/MessageBody'
   UpdateVoiceChannelResponse:
     type: object
     required:
@@ -5487,13 +6347,13 @@ definitions:
         description: '<p>para>5 - Low priority, the notification might be delayed, delivered as part of a group, or throttled.</p>/listitem> <li><p>10 - High priority, the notification is sent immediately. This is the default value. A high priority notification should trigger an alert, play a sound, or badge your app''s icon on the recipient''s device.</p></li>/para> <p>Amazon Pinpoint specifies this value in the apns-priority request header when it sends the notification message to APNs.</p> <p>The equivalent values for Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), are normal, for 5, and high, for 10. If you specify an FCM value for this property, Amazon Pinpoint accepts and converts the value to the corresponding APNs value.</p>'
       RawContent:
         $ref: '#/definitions/__string'
-        description: 'The raw, JSON-formatted string to use as the payload for the notification message. This value overrides the message.'
+        description: '<p>The raw, JSON-formatted string to use as the payload for the notification message. This value overrides the message.</p> <note><p>If you specify the raw content of an APNs push notification, the message payload has to include the content-available key. The value of the content-available key has to be an integer, and can only be 0 or 1. If you''re sending a standard notification, set the value of content-available to 0. If you''re sending a silent (background) notification, set the value of content-available to 1. Additionally, silent notification payloads can''t include the alert, badge, or sound keys. For more information, see <a href="https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification">Generating a Remote Notification</a> and <a href="https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/pushing_background_updates_to_your_app">Pushing Background Updates to Your App</a> on the Apple Developer website.</p></note>'
       SilentPush:
         $ref: '#/definitions/__boolean'
-        description: 'Specifies whether the notification is a silent push notification, which is a push notification that doesn''t display on a recipient''s device. Silent push notifications can be used for cases such as updating an app''s configuration, displaying messages in an in-app message center, or supporting phone home functionality.'
+        description: '<p>Specifies whether the notification is a silent push notification. A silent (or background) push notification isn''t displayed on recipients'' devices. You can use silent push notifications to make small updates to your app, or to display messages in an in-app message center.</p> <p>Amazon Pinpoint uses this property to determine the correct value for the apns-push-type request header when it sends the notification message to APNs. If you specify a value of true for this property, Amazon Pinpoint sets the value for the apns-push-type header field to background.</p> <note><p>If you specify the raw content of an APNs push notification, the message payload has to include the content-available key. For silent (background) notifications, set the value of content-available to 1. Additionally, the message payload for a silent notification can''t include the alert, badge, or sound keys. For more information, see <a href="https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification">Generating a Remote Notification</a> and <a href="https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/pushing_background_updates_to_your_app">Pushing Background Updates to Your App</a> on the Apple Developer website.</p> <p>Apple has indicated that they will throttle "excessive" background notifications based on current traffic volumes. To prevent your notifications being throttled, Apple recommends that you send no more than 3 silent push notifications to each recipient per hour.</p></note>'
       Sound:
         $ref: '#/definitions/__string'
-        description: 'The key for the sound to play when the recipient receives the push notification. The value of this key is the name of a sound file in your app''s main bundle or the Library/Sounds folder in your app''s data container. If the sound file can''t be found or you specify default for the value, the system plays the default alert sound.'
+        description: 'The key for the sound to play when the recipient receives the push notification. The value for this key is the name of a sound file in your app''s main bundle or the Library/Sounds folder in your app''s data container. If the sound file can''t be found or you specify default for the value, the system plays the default alert sound.'
       Substitutions:
         $ref: '#/definitions/MapOfListOf__string'
         description: The default message variables to use in the notification message. You can override these default variables with individual address variables.
@@ -5831,19 +6691,19 @@ definitions:
         description: The unique identifier for the application that the metric applies to.
       EndTime:
         $ref: '#/definitions/__timestampIso8601'
-        description: 'The last date or date and time of the date range that was used to filter the query results, in ISO 8601 format. The date range is inclusive.'
+        description: 'The last date and time of the date range that was used to filter the query results, in extended ISO 8601 format. The date range is inclusive.'
       KpiName:
         $ref: '#/definitions/__string'
-        description: 'The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, that the data was retrieved for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. For a list of valid values, see the <a href="developerguide.html">Amazon Pinpoint Developer Guide</a>.'
+        description: 'The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, that the data was retrieved for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. For a list of valid values, see the <a href="https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html">Amazon Pinpoint Developer Guide</a>.'
       KpiResult:
         $ref: '#/definitions/BaseKpiResult'
         description: An array of objects that contains the results of the query. Each object contains the value for the metric and metadata about that value.
       NextToken:
         $ref: '#/definitions/__string'
-        description: The string to use in a subsequent request to get the next page of results in a paginated response. This value is null for the App Metrics resource. The App Metrics resource returns all results in a single page.
+        description: The string to use in a subsequent request to get the next page of results in a paginated response. This value is null for the Application Metrics resource. The Application Metrics resource returns all results in a single page.
       StartTime:
         $ref: '#/definitions/__timestampIso8601'
-        description: 'The first date or date and time of the date range that was used to filter the query results, in ISO 8601 format. The date range is inclusive.'
+        description: 'The first date and time of the date range that was used to filter the query results, in extended ISO 8601 format. The date range is inclusive.'
     description: 'Provides the results of a query that retrieved the data for a standard metric that applies to an application, and provides information about that query.'
   ApplicationResponse:
     type: object
@@ -5928,7 +6788,7 @@ definitions:
         description: The unique identifier for the application.
       AttributeType:
         $ref: '#/definitions/__string'
-        description: '<p>The type of attribute or attributes that were removed from the endpoints. Valid values are:</p> <ul><li><p>endpoint-custom-attributes - Custom attributes that describe endpoints</p></li> <li><p>endpoint-custom-metrics - Custom metrics that your app reports to Amazon Pinpoint for endpoints</p></li> <li><p>endpoint-user-attributes - Custom attributes that describe users</p></li></ul>'
+        description: '<p>The type of attribute or attributes that were removed from the endpoints. Valid values are:</p> <ul><li><p>endpoint-custom-attributes - Custom attributes that describe endpoints.</p></li> <li><p>endpoint-custom-metrics - Custom metrics that your app reports to Amazon Pinpoint for endpoints.</p></li> <li><p>endpoint-user-attributes - Custom attributes that describe users.</p></li></ul>'
       Attributes:
         $ref: '#/definitions/ListOf__string'
         description: An array that specifies the names of the attributes that were removed from the endpoints.
@@ -6057,10 +6917,10 @@ definitions:
         description: The unique identifier for the campaign that the metric applies to.
       EndTime:
         $ref: '#/definitions/__timestampIso8601'
-        description: 'The last date or date and time of the date range that was used to filter the query results, in ISO 8601 format. The date range is inclusive.'
+        description: 'The last date and time of the date range that was used to filter the query results, in extended ISO 8601 format. The date range is inclusive.'
       KpiName:
         $ref: '#/definitions/__string'
-        description: 'The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, that the data was retrieved for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. For a list of valid values, see the <a href="developerguide.html">Amazon Pinpoint Developer Guide</a>.'
+        description: 'The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, that the data was retrieved for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. For a list of valid values, see the <a href="https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html">Amazon Pinpoint Developer Guide</a>.'
       KpiResult:
         $ref: '#/definitions/BaseKpiResult'
         description: An array of objects that contains the results of the query. Each object contains the value for the metric and metadata about that value.
@@ -6069,7 +6929,7 @@ definitions:
         description: The string to use in a subsequent request to get the next page of results in a paginated response. This value is null for the Campaign Metrics resource. The Campaign Metrics resource returns all results in a single page.
       StartTime:
         $ref: '#/definitions/__timestampIso8601'
-        description: 'The first date or date and time of the date range that was used to filter the query results, in ISO 8601 format. The date range is inclusive.'
+        description: 'The first date and time of the date range that was used to filter the query results, in extended ISO 8601 format. The date range is inclusive.'
     description: 'Provides the results of a query that retrieved the data for a standard metric that applies to a campaign, and provides information about that query.'
   CampaignEmailMessage:
     type: object
@@ -6204,6 +7064,8 @@ definitions:
       tags:
         $ref: '#/definitions/MapOf__string'
         description: A string-to-string map of key-value pairs that identifies the tags that are associated with the campaign. Each tag consists of a required tag key and an associated tag value.
+      TemplateConfiguration:
+        $ref: '#/definitions/TemplateConfiguration'
       TreatmentDescription:
         $ref: '#/definitions/__string'
         description: The custom description of a variation of the campaign that's used for A/B testing.
@@ -6359,6 +7221,8 @@ definitions:
       tags:
         $ref: '#/definitions/MapOf__string'
         description: A string-to-string map of key-value pairs that defines the tags to associate with the campaign. Each tag consists of a required tag key and an associated tag value.
+      TemplateConfiguration:
+        $ref: '#/definitions/TemplateConfiguration'
       TreatmentDescription:
         $ref: '#/definitions/__string'
         description: The custom description of a variation of the campaign to use for A/B testing.
@@ -6373,6 +7237,43 @@ definitions:
     properties:
       WriteCampaignRequest:
         $ref: '#/definitions/WriteCampaignRequest'
+  EmailTemplateRequest:
+    type: object
+    properties:
+      HtmlPart:
+        $ref: '#/definitions/__string'
+        description: 'The message body, in HTML format, to use in email messages that are based on the message template. We recommend using HTML format for email clients that support HTML. You can include links, formatted text, and more in an HTML message.'
+      Subject:
+        $ref: '#/definitions/__string'
+        description: 'The subject line, or title, to use in email messages that are based on the message template.'
+      tags:
+        $ref: '#/definitions/MapOf__string'
+        description: A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+      TextPart:
+        $ref: '#/definitions/__string'
+        description: 'The message body, in text format, to use in email messages that are based on the message template. We recommend using text format for email clients that don''t support HTML and clients that are connected to high-latency networks, such as mobile devices.'
+    description: Specifies the content and settings for a message template that can be used in messages that are sent through the email channel.
+  CreateEmailTemplateRequest:
+    type: object
+    required:
+      - EmailTemplateRequest
+    properties:
+      EmailTemplateRequest:
+        $ref: '#/definitions/EmailTemplateRequest'
+        description: Creates a new message template that you can use in messages that are sent through the email channel.
+  CreateTemplateMessageBody:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: The Amazon Resource Name (ARN) of the message template.
+      Message:
+        $ref: '#/definitions/__string'
+        description: The message that's returned from the API.
+      RequestID:
+        $ref: '#/definitions/__string'
+        description: The unique identifier for the request or response.
+    description: Provides information about an API request or response.
   ExportJobRequest:
     type: object
     required:
@@ -6538,6 +7439,36 @@ definitions:
         $ref: '#/definitions/__string'
         description: The job type. This value is IMPORT for import jobs.
     description: Provides information about the status and settings of a job that imports endpoint definitions from one or more files. The files can be stored in an Amazon Simple Storage Service (Amazon S3) bucket or uploaded directly from a computer by using the Amazon Pinpoint console.
+  PushNotificationTemplateRequest:
+    type: object
+    properties:
+      ADM:
+        $ref: '#/definitions/AndroidPushNotificationTemplate'
+        description: The message template to use for the ADM (Amazon Device Messaging) channel. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).
+      APNS:
+        $ref: '#/definitions/APNSPushNotificationTemplate'
+        description: The message template to use for the APNs (Apple Push Notification service) channel. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).
+      Baidu:
+        $ref: '#/definitions/AndroidPushNotificationTemplate'
+        description: The message template to use for the Baidu (Baidu Cloud Push) channel. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).
+      Default:
+        $ref: '#/definitions/DefaultPushNotificationTemplate'
+        description: The default message template to use for push notification channels.
+      GCM:
+        $ref: '#/definitions/AndroidPushNotificationTemplate'
+        description: 'The message template to use for the GCM channel, which is used to send notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).'
+      tags:
+        $ref: '#/definitions/MapOf__string'
+        description: A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+    description: Specifies the content and settings for a message template that can be used in messages that are sent through a push notification channel.
+  CreatePushTemplateRequest:
+    type: object
+    required:
+      - PushNotificationTemplateRequest
+    properties:
+      PushNotificationTemplateRequest:
+        $ref: '#/definitions/PushNotificationTemplateRequest'
+        description: Creates a message template that you can use in messages that are sent through a push notification channel.
   WriteSegmentRequest:
     type: object
     properties:
@@ -6607,6 +7538,24 @@ definitions:
         $ref: '#/definitions/__integer'
         description: The version number of the segment.
     description: 'Provides information about the configuration, dimension, and other settings for a segment.'
+  SMSTemplateRequest:
+    type: object
+    properties:
+      Body:
+        $ref: '#/definitions/__string'
+        description: The message body to use in text messages that are based on the message template.
+      tags:
+        $ref: '#/definitions/MapOf__string'
+        description: A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+    description: Specifies the content and settings for a message template that can be used in text messages that are sent through the SMS channel.
+  CreateSmsTemplateRequest:
+    type: object
+    required:
+      - SMSTemplateRequest
+    properties:
+      SMSTemplateRequest:
+        $ref: '#/definitions/SMSTemplateRequest'
+        description: Creates a message template that you can use in messages that are sent through the SMS channel.
   DefaultMessage:
     type: object
     properties:
@@ -6720,6 +7669,19 @@ definitions:
         $ref: '#/definitions/__integer'
         description: The current version of the email channel.
     description: Provides information about the status and settings of the email channel for an application.
+  DeleteEmailTemplateRequest:
+    type: object
+    properties: {}
+  MessageBody:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+        description: The message that's returned from the API.
+      RequestID:
+        $ref: '#/definitions/__string'
+        description: The unique identifier for the request or response.
+    description: Provides information about an API request or response.
   DeleteEndpointRequest:
     type: object
     properties: {}
@@ -6752,7 +7714,7 @@ definitions:
         description: 'The date and time, in ISO 8601 format, when the endpoint was last updated.'
       EndpointStatus:
         $ref: '#/definitions/__string'
-        description: Not used.
+        description: '<p>Specifies whether messages or push notifications are sent to the endpoint. Possible values are: ACTIVE, messages are sent to the endpoint; and, INACTIVE, messages aren’t sent to the endpoint.</p> <p>Amazon Pinpoint automatically sets this value to ACTIVE when you create an endpoint or update an existing endpoint. Amazon Pinpoint automatically sets this value to INACTIVE if you update another endpoint that has the same address specified by the Address property.</p>'
       Id:
         $ref: '#/definitions/__string'
         description: The unique identifier that you assigned to the endpoint. The identifier should be a globally unique identifier (GUID) to ensure that it doesn't conflict with other endpoint identifiers that are associated with the application.
@@ -6821,7 +7783,7 @@ definitions:
         description: The date and time when the GCM channel was enabled.
       Credential:
         $ref: '#/definitions/__string'
-        description: 'The API key, also referred to as a <i>server key</i>, that you received from Google to communicate with Google services.'
+        description: 'The Web API Key, also referred to as an <i>API_KEY</i> or <i>server key</i>, that you received from Google to communicate with Google services.'
       Enabled:
         $ref: '#/definitions/__boolean'
         description: Specifies whether the GCM channel is enabled for the application.
@@ -6847,6 +7809,9 @@ definitions:
         $ref: '#/definitions/__integer'
         description: The current version of the GCM channel.
     description: 'Provides information about the status and settings of the GCM channel for an application. The GCM channel enables Amazon Pinpoint to send push notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service.'
+  DeletePushTemplateRequest:
+    type: object
+    properties: {}
   DeleteSegmentRequest:
     type: object
     properties: {}
@@ -6901,6 +7866,9 @@ definitions:
         $ref: '#/definitions/__integer'
         description: The current version of the SMS channel.
     description: Provides information about the status and settings of the SMS channel for an application.
+  DeleteSmsTemplateRequest:
+    type: object
+    properties: {}
   DeleteUserEndpointsRequest:
     type: object
     properties: {}
@@ -7061,7 +8029,7 @@ definitions:
         description: 'The SMS message type. Valid values are: TRANSACTIONAL, the message is critical or time-sensitive, such as a one-time password that supports a customer transaction; and, PROMOTIONAL, the message is not critical or time-sensitive, such as a marketing message.'
       OriginationNumber:
         $ref: '#/definitions/__string'
-        description: 'The number that the SMS message originates from. This should be one of the dedicated long codes or short codes that you requested from AWS Support and is assigned to your AWS account. If you don''t specify a long or short code, Amazon Pinpoint assigns a random long code to the SMS message.'
+        description: 'The number to send the SMS message from. This value should be one of the dedicated long or short codes that''s assigned to your AWS account. If you don''t specify a long or short code, Amazon Pinpoint assigns a random long code to the SMS message and sends the message from that code.'
       SenderId:
         $ref: '#/definitions/__string'
         description: The sender ID to display as the sender of the message on a recipient's device. Support for sender IDs varies by country or region.
@@ -7080,7 +8048,7 @@ definitions:
         description: 'The language to use when delivering the message. For a list of supported languages, see the <a href="AmazonPollyDG.html">Amazon Polly Developer Guide</a>.'
       OriginationNumber:
         $ref: '#/definitions/__string'
-        description: 'The phone number from the pool or messaging service to send the message from. Although it isn''t required, we recommend that you specify the phone number in E.164 format to ensure prompt and accurate delivery.'
+        description: 'The long code to send the voice message from. This value should be one of the dedicated long codes that''s assigned to your AWS account. Although it isn''t required, we recommend that you specify the long code in E.164 format, for example +12065550100, to ensure prompt and accurate delivery of the message.'
       Substitutions:
         $ref: '#/definitions/MapOfListOf__string'
         description: The default message variables to use in the voice message. You can override the default variables with individual address variables.
@@ -7136,7 +8104,49 @@ definitions:
       TextPart:
         $ref: '#/definitions/SimpleEmailPart'
         description: 'The body of the email message, in text format. We recommend using a text part for email clients that don''t support HTML and clients that are connected to high-latency networks, such as mobile devices.'
-    description: 'Specifies the content of an email message, composed of a subject, a text part, and an HTML part.'
+    description: 'Specifies the contents of an email message, composed of a subject, a text part, and an HTML part.'
+  TemplateType:
+    type: string
+    enum:
+      - EMAIL
+      - SMS
+      - PUSH
+  EmailTemplateResponse:
+    type: object
+    required:
+      - LastModifiedDate
+      - CreationDate
+      - TemplateName
+      - TemplateType
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: The Amazon Resource Name (ARN) of the message template.
+      CreationDate:
+        $ref: '#/definitions/__string'
+        description: The date when the message template was created.
+      HtmlPart:
+        $ref: '#/definitions/__string'
+        description: 'The message body, in HTML format, that''s used in email messages that are based on the message template.'
+      LastModifiedDate:
+        $ref: '#/definitions/__string'
+        description: The date when the message template was last modified.
+      Subject:
+        $ref: '#/definitions/__string'
+        description: 'The subject line, or title, that''s used in email messages that are based on the message template.'
+      tags:
+        $ref: '#/definitions/MapOf__string'
+        description: A string-to-string map of key-value pairs that identifies the tags that are associated with the message template. Each tag consists of a required tag key and an associated tag value.
+      TemplateName:
+        $ref: '#/definitions/__string'
+        description: The name of the message template.
+      TemplateType:
+        $ref: '#/definitions/TemplateType'
+        description: 'The type of channel that the message template is designed for. For an email template, this value is EMAIL.'
+      TextPart:
+        $ref: '#/definitions/__string'
+        description: 'The message body, in text format, that''s used in email messages that are based on the message template.'
+    description: Provides information about the content and settings for a message template that can be used in messages that are sent through the email channel.
   EndpointBatchItem:
     type: object
     properties:
@@ -7157,7 +8167,7 @@ definitions:
         description: 'The date and time, in ISO 8601 format, when the endpoint was created or updated.'
       EndpointStatus:
         $ref: '#/definitions/__string'
-        description: Not used.
+        description: '<p>Specifies whether to send messages or push notifications to the endpoint. Valid values are: ACTIVE, messages are sent to the endpoint; and, INACTIVE, messages aren’t sent to the endpoint.</p> <p>Amazon Pinpoint automatically sets this value to ACTIVE when you create an endpoint or update an existing endpoint. Amazon Pinpoint automatically sets this value to INACTIVE if you update another endpoint that has the same address specified by the Address property.</p>'
       Id:
         $ref: '#/definitions/__string'
         description: The unique identifier for the endpoint in the context of the batch.
@@ -7222,7 +8232,7 @@ definitions:
         description: The status message for delivering the message.
       UpdatedToken:
         $ref: '#/definitions/__string'
-        description: 'For push notifications that are sent through the GCM channel, specifies whether the token was updated as part of delivering the message.'
+        description: 'For push notifications that are sent through the GCM channel, specifies whether the endpoint''s device registration token was updated as part of delivering the message.'
     description: Provides information about the delivery status and results of sending a message directly to an endpoint.
   EndpointRequest:
     type: object
@@ -7244,7 +8254,7 @@ definitions:
         description: 'The date and time, in ISO 8601 format, when the endpoint is updated.'
       EndpointStatus:
         $ref: '#/definitions/__string'
-        description: Not used.
+        description: '<p>Specifies whether to send messages or push notifications to the endpoint. Valid values are: ACTIVE, messages are sent to the endpoint; and, INACTIVE, messages aren’t sent to the endpoint.</p> <p>Amazon Pinpoint automatically sets this value to ACTIVE when you create an endpoint or update an existing endpoint. Amazon Pinpoint automatically sets this value to INACTIVE if you update another endpoint that has the same address specified by the Address property.</p>'
       Location:
         $ref: '#/definitions/EndpointLocation'
         description: The geographic information for the endpoint.
@@ -7390,7 +8400,7 @@ definitions:
         description: 'The date and time, in ISO 8601 format, when the endpoint was last updated.'
       EndpointStatus:
         $ref: '#/definitions/__string'
-        description: 'The status of the update request for the endpoint. Possible values are: INACTIVE, the update failed; and, ACTIVE, the endpoint was updated successfully.'
+        description: '<p>Specifies whether to send messages or push notifications to the endpoint. Valid values are: ACTIVE, messages are sent to the endpoint; and, INACTIVE, messages aren’t sent to the endpoint.</p> <p>Amazon Pinpoint automatically sets this value to ACTIVE when you create an endpoint or update an existing endpoint. Amazon Pinpoint automatically sets this value to INACTIVE if you update another endpoint that has the same address specified by the Address property.</p>'
       Location:
         $ref: '#/definitions/EndpointLocation'
         description: The geographic information for the endpoint.
@@ -7505,7 +8515,7 @@ definitions:
     properties:
       ApiKey:
         $ref: '#/definitions/__string'
-        description: 'The API key, also referred to as a <i>server key</i>, that you received from Google to communicate with Google services.'
+        description: 'The Web API Key, also referred to as an <i>API_KEY</i> or <i>server key</i>, that you received from Google to communicate with Google services.'
       Enabled:
         $ref: '#/definitions/__boolean'
         description: Specifies whether to enable the GCM channel for the application.
@@ -7589,6 +8599,9 @@ definitions:
   GetEmailChannelRequest:
     type: object
     properties: {}
+  GetEmailTemplateRequest:
+    type: object
+    properties: {}
   GetEndpointRequest:
     type: object
     properties: {}
@@ -7622,6 +8635,51 @@ definitions:
         $ref: '#/definitions/__string'
         description: The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.
     description: Provides information about the status and settings of all the import jobs that are associated with an application or segment. An import job is a job that imports endpoint definitions from one or more files.
+  GetPushTemplateRequest:
+    type: object
+    properties: {}
+  PushNotificationTemplateResponse:
+    type: object
+    required:
+      - LastModifiedDate
+      - CreationDate
+      - TemplateName
+      - TemplateType
+    properties:
+      ADM:
+        $ref: '#/definitions/AndroidPushNotificationTemplate'
+        description: The message template that's used for the ADM (Amazon Device Messaging) channel. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).
+      APNS:
+        $ref: '#/definitions/APNSPushNotificationTemplate'
+        description: The message template that's used for the APNs (Apple Push Notification service) channel. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).
+      Arn:
+        $ref: '#/definitions/__string'
+        description: The Amazon Resource Name (ARN) of the message template.
+      Baidu:
+        $ref: '#/definitions/AndroidPushNotificationTemplate'
+        description: The message template that's used for the Baidu (Baidu Cloud Push) channel. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).
+      CreationDate:
+        $ref: '#/definitions/__string'
+        description: The date when the message template was created.
+      Default:
+        $ref: '#/definitions/DefaultPushNotificationTemplate'
+        description: The default message template that's used for push notification channels.
+      GCM:
+        $ref: '#/definitions/AndroidPushNotificationTemplate'
+        description: 'The message template that''s used for the GCM channel, which is used to send notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).'
+      LastModifiedDate:
+        $ref: '#/definitions/__string'
+        description: The date when the message template was last modified.
+      tags:
+        $ref: '#/definitions/MapOf__string'
+        description: A string-to-string map of key-value pairs that identifies the tags that are associated with the message template. Each tag consists of a required tag key and an associated tag value.
+      TemplateName:
+        $ref: '#/definitions/__string'
+        description: The name of the message template.
+      TemplateType:
+        $ref: '#/definitions/TemplateType'
+        description: 'The type of channel that the message template is designed for. For a push notification template, this value is PUSH.'
+    description: Provides information about the content and settings for a message template that can be used in messages that are sent through a push notification channel.
   GetSegmentExportJobsRequest:
     type: object
     properties: {}
@@ -7655,6 +8713,39 @@ definitions:
   GetSmsChannelRequest:
     type: object
     properties: {}
+  GetSmsTemplateRequest:
+    type: object
+    properties: {}
+  SMSTemplateResponse:
+    type: object
+    required:
+      - LastModifiedDate
+      - CreationDate
+      - TemplateName
+      - TemplateType
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: The Amazon Resource Name (ARN) of the message template.
+      Body:
+        $ref: '#/definitions/__string'
+        description: The message body that's used in text messages that are based on the message template.
+      CreationDate:
+        $ref: '#/definitions/__string'
+        description: The date when the message template was created.
+      LastModifiedDate:
+        $ref: '#/definitions/__string'
+        description: The date when the message template was last modified.
+      tags:
+        $ref: '#/definitions/MapOf__string'
+        description: A string-to-string map of key-value pairs that identifies the tags that are associated with the message template. Each tag consists of a required tag key and an associated tag value.
+      TemplateName:
+        $ref: '#/definitions/__string'
+        description: The name of the message template.
+      TemplateType:
+        $ref: '#/definitions/TemplateType'
+        description: 'The type of channel that the message template is designed for. For an SMS template, this value is SMS.'
+    description: Provides information about the content and settings for a message template that can be used in text messages that are sent through the SMS channel.
   GetUserEndpointsRequest:
     type: object
     properties: {}
@@ -7727,8 +8818,23 @@ definitions:
     properties:
       tags:
         $ref: '#/definitions/MapOf__string'
-        description: '<p>A string-to-string map of key-value pairs that defines the tags for an application, campaign, or segment. A project, campaign, or segment can have a maximum of 50 tags.</p> <p>Each tag consists of a required tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>'
-    description: 'Specifies the tags (keys and values) for an application, campaign, or segment.'
+        description: '<p>A string-to-string map of key-value pairs that defines the tags for an application, campaign, message template, or segment. Each project, campaign, message template, or segment can have a maximum of 50 tags.</p> <p>Each tag consists of a required tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>'
+    description: 'Specifies the tags (keys and values) for an application, campaign, message template, or segment.'
+  ListTemplatesRequest:
+    type: object
+    properties: {}
+  TemplatesResponse:
+    type: object
+    required:
+      - Item
+    properties:
+      Item:
+        $ref: '#/definitions/ListOfTemplateResponse'
+        description: 'An array of responses, one for each message template that''s associated with your Amazon Pinpoint account and meets any filter criteria that you specified in the request.'
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.
+    description: Provides information about all the message templates that are associated with your Amazon Pinpoint account.
   Message:
     type: object
     properties:
@@ -7769,16 +8875,6 @@ definitions:
         $ref: '#/definitions/__string'
         description: 'The URL to open in a recipient''s default mobile browser, if a recipient taps the push notification and the value of the Action property is URL.'
     description: Specifies the content and settings for a push notification that's sent to recipients of a campaign.
-  MessageBody:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/__string'
-        description: The message that's returned from the API.
-      RequestID:
-        $ref: '#/definitions/__string'
-        description: The unique identifier for the request or response.
-    description: Provides information about an API request or response.
   MessageRequest:
     type: object
     required:
@@ -7796,6 +8892,9 @@ definitions:
       MessageConfiguration:
         $ref: '#/definitions/DirectMessageConfiguration'
         description: The set of properties that defines the configuration settings for the message.
+      TemplateConfiguration:
+        $ref: '#/definitions/TemplateConfiguration'
+        description: The message template to use for the message.
       TraceId:
         $ref: '#/definitions/__string'
         description: The unique identifier for tracing the message. This identifier is visible to message recipients.
@@ -7846,7 +8945,7 @@ definitions:
         description: The status message for delivering the message.
       UpdatedToken:
         $ref: '#/definitions/__string'
-        description: 'For push notifications that are sent through the GCM channel, specifies whether the token was updated as part of delivering the message.'
+        description: 'For push notifications that are sent through the GCM channel, specifies whether the endpoint''s device registration token was updated as part of delivering the message.'
     description: Provides information about the results of sending a message directly to an endpoint address.
   MetricDimension:
     type: object
@@ -8002,10 +9101,10 @@ definitions:
     properties:
       GroupedBys:
         $ref: '#/definitions/ListOfResultRowValue'
-        description: ' <p>An array of objects that defines the field and field values that were used to group data in a result set that contains multiple results. This value is null if the data in a result set isn’t grouped.</p>'
+        description: An array of objects that defines the field and field values that were used to group data in a result set that contains multiple results. This value is null if the data in a result set isn’t grouped.
       Values:
         $ref: '#/definitions/ListOfResultRowValue'
-        description: ' <p>An array of objects that provides pre-aggregated values for a standard metric that applies to an application or campaign.</p>'
+        description: An array of objects that provides pre-aggregated values for a standard metric that applies to an application or campaign.
     description: Provides the results of a query that retrieved the data for a standard metric that applies to an application or campaign.
   ResultRowValue:
     type: object
@@ -8016,14 +9115,14 @@ definitions:
     properties:
       Key:
         $ref: '#/definitions/__string'
-        description: ' <p>The name of the field that Amazon Pinpoint uses to store the value specified by the Value property.</p>'
+        description: The name of the field that Amazon Pinpoint uses to store the value specified by the Value property.
       Type:
         $ref: '#/definitions/__string'
         description: ' <p>The data type of the value specified by the Value property.</p>'
       Value:
         $ref: '#/definitions/__string'
-        description: ' <p>In a Values object, the value for the metric that the query retrieved data for. In a GroupedBys object, the value for the field that was used to group data in a result set that contains multiple results (Values objects).</p>'
-    description: ' <p>Provides a single value and metadata about that value as part of an array of query results for a standard metric that applies to an application or campaign.</p>'
+        description: 'In a Values object, the value for the metric that the query retrieved data for. In a GroupedBys object, the value for the field that was used to group data in a result set that contains multiple results (Values objects).'
+    description: Provides a single value and metadata about that value as part of an array of query results for a standard metric that applies to an application or campaign.
   SMSChannelRequest:
     type: object
     properties:
@@ -8188,6 +9287,9 @@ definitions:
       MessageConfiguration:
         $ref: '#/definitions/DirectMessageConfiguration'
         description: The message definitions for the default message and any default messages that you defined for specific channels.
+      TemplateConfiguration:
+        $ref: '#/definitions/TemplateConfiguration'
+        description: The message template to use for the message.
       TraceId:
         $ref: '#/definitions/__string'
         description: The unique identifier for tracing the message. This identifier is visible to message recipients.
@@ -8238,6 +9340,44 @@ definitions:
     properties:
       TagsModel:
         $ref: '#/definitions/TagsModel'
+  Template:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/__string'
+        description: 'The name of the message template to use for the message. If specified, this value must match the name of an existing message template.'
+    description: Specifies the name of the message template to use for the message.
+  TemplateResponse:
+    type: object
+    required:
+      - LastModifiedDate
+      - CreationDate
+      - TemplateName
+      - TemplateType
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: The Amazon Resource Name (ARN) of the message template.
+      CreationDate:
+        $ref: '#/definitions/__string'
+        description: The date when the message template was created.
+      LastModifiedDate:
+        $ref: '#/definitions/__string'
+        description: The date when the message template was last modified.
+      tags:
+        $ref: '#/definitions/MapOf__string'
+        description: A string-to-string map of key-value pairs that identifies the tags that are associated with the message template. Each tag consists of a required tag key and an associated tag value.
+      TemplateName:
+        $ref: '#/definitions/__string'
+        description: The name of the message template.
+      TemplateType:
+        $ref: '#/definitions/TemplateType'
+        description: The type of channel that the message template is designed for.
+    description: Provides information about a message template that's associated with your Amazon Pinpoint account.
+  ListOfTemplateResponse:
+    type: array
+    items:
+      $ref: '#/definitions/TemplateResponse'
   TreatmentResource:
     type: object
     required:
@@ -8259,6 +9399,8 @@ definitions:
       State:
         $ref: '#/definitions/CampaignState'
         description: The status of the treatment.
+      TemplateConfiguration:
+        $ref: '#/definitions/TemplateConfiguration'
       TreatmentDescription:
         $ref: '#/definitions/__string'
         description: The custom description of the treatment.
@@ -8348,6 +9490,13 @@ definitions:
     properties:
       EmailChannelRequest:
         $ref: '#/definitions/EmailChannelRequest'
+  UpdateEmailTemplateRequest:
+    type: object
+    required:
+      - EmailTemplateRequest
+    properties:
+      EmailTemplateRequest:
+        $ref: '#/definitions/EmailTemplateRequest'
   UpdateEndpointRequest:
     type: object
     required:
@@ -8369,6 +9518,14 @@ definitions:
     properties:
       GCMChannelRequest:
         $ref: '#/definitions/GCMChannelRequest'
+  UpdatePushTemplateRequest:
+    type: object
+    required:
+      - PushNotificationTemplateRequest
+    properties:
+      PushNotificationTemplateRequest:
+        $ref: '#/definitions/PushNotificationTemplateRequest'
+        description: Updates an existing message template that you can use in messages that are sent through a push notification channel.
   UpdateSegmentRequest:
     type: object
     required:
@@ -8383,6 +9540,13 @@ definitions:
     properties:
       SMSChannelRequest:
         $ref: '#/definitions/SMSChannelRequest'
+  UpdateSmsTemplateRequest:
+    type: object
+    required:
+      - SMSTemplateRequest
+    properties:
+      SMSTemplateRequest:
+        $ref: '#/definitions/SMSTemplateRequest'
   VoiceChannelRequest:
     type: object
     properties:
@@ -8411,6 +9575,8 @@ definitions:
       SizePercent:
         $ref: '#/definitions/__integer'
         description: The allocated percentage of users (segment members) to send the treatment to.
+      TemplateConfiguration:
+        $ref: '#/definitions/TemplateConfiguration'
       TreatmentDescription:
         $ref: '#/definitions/__string'
         description: The custom description of the treatment.

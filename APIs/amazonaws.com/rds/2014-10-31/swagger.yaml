@@ -3,7 +3,7 @@ info:
   version: '2014-10-31'
   x-release: v4
   title: Amazon Relational Database Service
-  description: '<fullname>Amazon Relational Database Service</fullname> <p> </p> <p>Amazon Relational Database Service (Amazon RDS) is a web service that makes it easier to set up, operate, and scale a relational database in the cloud. It provides cost-efficient, resizable capacity for an industry-standard relational database and manages common database administration tasks, freeing up developers to focus on what makes their applications and businesses unique.</p> <p>Amazon RDS gives you access to the capabilities of a MySQL, MariaDB, PostgreSQL, Microsoft SQL Server, Oracle, or Amazon Aurora database server. These capabilities mean that the code, applications, and tools you already use today with your existing databases work with Amazon RDS without modification. Amazon RDS automatically backs up your database and maintains the database software that powers your DB instance. Amazon RDS is flexible: you can scale your DB instance''s compute resources and storage capacity to meet your application''s demand. As with all Amazon Web Services, there are no up-front investments, and you pay only for the resources you use.</p> <p>This interface reference for Amazon RDS contains documentation for a programming or command line interface you can use to manage Amazon RDS. Note that Amazon RDS is asynchronous, which means that some interfaces might require techniques such as polling or callback functions to determine when a command has been applied. In this reference, the parameter descriptions indicate whether a command is applied immediately, on the next instance reboot, or during the maintenance window. The reference structure is as follows, and we list following some related topics from the user guide.</p> <p> <b>Amazon RDS API Reference</b> </p> <ul> <li> <p>For the alphabetical list of API actions, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_Operations.html">API Actions</a>.</p> </li> <li> <p>For the alphabetical list of data types, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_Types.html">Data Types</a>.</p> </li> <li> <p>For a list of common query parameters, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/CommonParameters.html">Common Parameters</a>.</p> </li> <li> <p>For descriptions of the error codes, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/CommonErrors.html">Common Errors</a>.</p> </li> </ul> <p> <b>Amazon RDS User Guide</b> </p> <ul> <li> <p>For a summary of the Amazon RDS interfaces, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html#Welcome.Interfaces">Available RDS Interfaces</a>.</p> </li> <li> <p>For more information about how to use the Query API, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Using_the_Query_API.html">Using the Query API</a>.</p> </li> </ul>'
+  description: '<fullname>Amazon Relational Database Service</fullname> <p> </p> <p>Amazon Relational Database Service (Amazon RDS) is a web service that makes it easier to set up, operate, and scale a relational database in the cloud. It provides cost-efficient, resizeable capacity for an industry-standard relational database and manages common database administration tasks, freeing up developers to focus on what makes their applications and businesses unique.</p> <p>Amazon RDS gives you access to the capabilities of a MySQL, MariaDB, PostgreSQL, Microsoft SQL Server, Oracle, or Amazon Aurora database server. These capabilities mean that the code, applications, and tools you already use today with your existing databases work with Amazon RDS without modification. Amazon RDS automatically backs up your database and maintains the database software that powers your DB instance. Amazon RDS is flexible: you can scale your DB instance''s compute resources and storage capacity to meet your application''s demand. As with all Amazon Web Services, there are no up-front investments, and you pay only for the resources you use.</p> <p>This interface reference for Amazon RDS contains documentation for a programming or command line interface you can use to manage Amazon RDS. Note that Amazon RDS is asynchronous, which means that some interfaces might require techniques such as polling or callback functions to determine when a command has been applied. In this reference, the parameter descriptions indicate whether a command is applied immediately, on the next instance reboot, or during the maintenance window. The reference structure is as follows, and we list following some related topics from the user guide.</p> <p> <b>Amazon RDS API Reference</b> </p> <ul> <li> <p>For the alphabetical list of API actions, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_Operations.html">API Actions</a>.</p> </li> <li> <p>For the alphabetical list of data types, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_Types.html">Data Types</a>.</p> </li> <li> <p>For a list of common query parameters, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/CommonParameters.html">Common Parameters</a>.</p> </li> <li> <p>For descriptions of the error codes, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/CommonErrors.html">Common Errors</a>.</p> </li> </ul> <p> <b>Amazon RDS User Guide</b> </p> <ul> <li> <p>For a summary of the Amazon RDS interfaces, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html#Welcome.Interfaces">Available RDS Interfaces</a>.</p> </li> <li> <p>For more information about how to use the Query API, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Using_the_Query_API.html">Using the Query API</a>.</p> </li> </ul>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -1642,6 +1642,123 @@ paths:
           type: string
           enum:
             - '2014-10-31'
+  '/#Action=CreateCustomAvailabilityZone':
+    get:
+      x-aws-operation-name: CreateCustomAvailabilityZone
+      operationId: GET CreateCustomAvailabilityZone
+      description: '<p>Creates a custom Availability Zone (AZ).</p> <p>A custom AZ is an on-premises AZ that is integrated with a VMware vSphere cluster.</p> <p>For more information about RDS on VMware, see the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html"> <i>RDS on VMware User Guide.</i> </a> </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateCustomAvailabilityZoneResult'
+        '480':
+          description: CustomAvailabilityZoneAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/CustomAvailabilityZoneAlreadyExistsFault'
+        '481':
+          description: CustomAvailabilityZoneQuotaExceededFault
+          schema:
+            $ref: '#/definitions/CustomAvailabilityZoneQuotaExceededFault'
+        '482':
+          description: KMSKeyNotAccessibleFault
+          schema:
+            $ref: '#/definitions/KMSKeyNotAccessibleFault'
+      parameters:
+        - name: CustomAvailabilityZoneName
+          in: query
+          required: true
+          description: The name of the custom Availability Zone (AZ).
+          type: string
+        - name: ExistingVpnId
+          in: query
+          required: false
+          description: The ID of an existing virtual private network (VPN) between the Amazon RDS website and the VMware vSphere cluster.
+          type: string
+        - name: NewVpnTunnelName
+          in: query
+          required: false
+          description: <p>The name of a new VPN tunnel between the Amazon RDS website and the VMware vSphere cluster.</p> <p>Specify this parameter only if <code>ExistingVpnId</code> is not specified.</p>
+          type: string
+        - name: VpnTunnelOriginatorIP
+          in: query
+          required: false
+          description: <p>The IP address of network traffic from your on-premises data center. A custom AZ receives the network traffic.</p> <p>Specify this parameter only if <code>ExistingVpnId</code> is not specified.</p>
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - CreateCustomAvailabilityZone
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2014-10-31'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: CreateCustomAvailabilityZone
+      operationId: POST CreateCustomAvailabilityZone
+      description: '<p>Creates a custom Availability Zone (AZ).</p> <p>A custom AZ is an on-premises AZ that is integrated with a VMware vSphere cluster.</p> <p>For more information about RDS on VMware, see the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html"> <i>RDS on VMware User Guide.</i> </a> </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateCustomAvailabilityZoneResult'
+        '480':
+          description: CustomAvailabilityZoneAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/CustomAvailabilityZoneAlreadyExistsFault'
+        '481':
+          description: CustomAvailabilityZoneQuotaExceededFault
+          schema:
+            $ref: '#/definitions/CustomAvailabilityZoneQuotaExceededFault'
+        '482':
+          description: KMSKeyNotAccessibleFault
+          schema:
+            $ref: '#/definitions/KMSKeyNotAccessibleFault'
+      parameters:
+        - name: CustomAvailabilityZoneName
+          in: formData
+          required: true
+          description: The name of the custom Availability Zone (AZ).
+          type: string
+        - name: ExistingVpnId
+          in: formData
+          required: false
+          description: The ID of an existing virtual private network (VPN) between the Amazon RDS website and the VMware vSphere cluster.
+          type: string
+        - name: NewVpnTunnelName
+          in: formData
+          required: false
+          description: <p>The name of a new VPN tunnel between the Amazon RDS website and the VMware vSphere cluster.</p> <p>Specify this parameter only if <code>ExistingVpnId</code> is not specified.</p>
+          type: string
+        - name: VpnTunnelOriginatorIP
+          in: formData
+          required: false
+          description: <p>The IP address of network traffic from your on-premises data center. A custom AZ receives the network traffic.</p> <p>Specify this parameter only if <code>ExistingVpnId</code> is not specified.</p>
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - CreateCustomAvailabilityZone
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2014-10-31'
   '/#Action=CreateDBCluster':
     get:
       x-aws-operation-name: CreateDBCluster
@@ -2753,7 +2870,7 @@ paths:
         - name: AvailabilityZone
           in: query
           required: false
-          description: '<p> The Availability Zone (AZ) where the database will be created. For information on AWS Regions and Availability Zones, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html">Regions and Availability Zones</a>. </p> <p>Default: A random, system-chosen Availability Zone in the endpoint''s AWS Region.</p> <p> Example: <code>us-east-1d</code> </p> <p> Constraint: The <code>AvailabilityZone</code> parameter can''t be specified if the DB instance is a Multi-AZ deployment. The specified Availability Zone must be in the same AWS Region as the current endpoint. </p>'
+          description: '<p> The Availability Zone (AZ) where the database will be created. For information on AWS Regions and Availability Zones, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html">Regions and Availability Zones</a>. </p> <p>Default: A random, system-chosen Availability Zone in the endpoint''s AWS Region.</p> <p> Example: <code>us-east-1d</code> </p> <p> Constraint: The <code>AvailabilityZone</code> parameter can''t be specified if the DB instance is a Multi-AZ deployment. The specified Availability Zone must be in the same AWS Region as the current endpoint. </p> <note> <p>If you''re creating a DB instance in an RDS on VMware environment, specify the identifier of the custom Availability Zone to create the DB instance in.</p> <p>For more information about RDS on VMware, see the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html"> <i>RDS on VMware User Guide.</i> </a> </p> </note>'
           type: string
         - name: DBSubnetGroupName
           in: query
@@ -3099,7 +3216,7 @@ paths:
         - name: AvailabilityZone
           in: formData
           required: false
-          description: '<p> The Availability Zone (AZ) where the database will be created. For information on AWS Regions and Availability Zones, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html">Regions and Availability Zones</a>. </p> <p>Default: A random, system-chosen Availability Zone in the endpoint''s AWS Region.</p> <p> Example: <code>us-east-1d</code> </p> <p> Constraint: The <code>AvailabilityZone</code> parameter can''t be specified if the DB instance is a Multi-AZ deployment. The specified Availability Zone must be in the same AWS Region as the current endpoint. </p>'
+          description: '<p> The Availability Zone (AZ) where the database will be created. For information on AWS Regions and Availability Zones, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html">Regions and Availability Zones</a>. </p> <p>Default: A random, system-chosen Availability Zone in the endpoint''s AWS Region.</p> <p> Example: <code>us-east-1d</code> </p> <p> Constraint: The <code>AvailabilityZone</code> parameter can''t be specified if the DB instance is a Multi-AZ deployment. The specified Availability Zone must be in the same AWS Region as the current endpoint. </p> <note> <p>If you''re creating a DB instance in an RDS on VMware environment, specify the identifier of the custom Availability Zone to create the DB instance in.</p> <p>For more information about RDS on VMware, see the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html"> <i>RDS on VMware User Guide.</i> </a> </p> </note>'
           type: string
         - name: DBSubnetGroupName
           in: formData
@@ -4783,6 +4900,85 @@ paths:
           type: string
           enum:
             - '2014-10-31'
+  '/#Action=DeleteCustomAvailabilityZone':
+    get:
+      x-aws-operation-name: DeleteCustomAvailabilityZone
+      operationId: GET DeleteCustomAvailabilityZone
+      description: '<p>Deletes a custom Availability Zone (AZ).</p> <p>A custom AZ is an on-premises AZ that is integrated with a VMware vSphere cluster.</p> <p>For more information about RDS on VMware, see the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html"> <i>RDS on VMware User Guide.</i> </a> </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteCustomAvailabilityZoneResult'
+        '480':
+          description: CustomAvailabilityZoneNotFoundFault
+          schema:
+            $ref: '#/definitions/CustomAvailabilityZoneNotFoundFault'
+        '481':
+          description: KMSKeyNotAccessibleFault
+          schema:
+            $ref: '#/definitions/KMSKeyNotAccessibleFault'
+      parameters:
+        - name: CustomAvailabilityZoneId
+          in: query
+          required: true
+          description: The custom AZ identifier.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteCustomAvailabilityZone
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2014-10-31'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DeleteCustomAvailabilityZone
+      operationId: POST DeleteCustomAvailabilityZone
+      description: '<p>Deletes a custom Availability Zone (AZ).</p> <p>A custom AZ is an on-premises AZ that is integrated with a VMware vSphere cluster.</p> <p>For more information about RDS on VMware, see the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html"> <i>RDS on VMware User Guide.</i> </a> </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteCustomAvailabilityZoneResult'
+        '480':
+          description: CustomAvailabilityZoneNotFoundFault
+          schema:
+            $ref: '#/definitions/CustomAvailabilityZoneNotFoundFault'
+        '481':
+          description: KMSKeyNotAccessibleFault
+          schema:
+            $ref: '#/definitions/KMSKeyNotAccessibleFault'
+      parameters:
+        - name: CustomAvailabilityZoneId
+          in: formData
+          required: true
+          description: The custom AZ identifier.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteCustomAvailabilityZone
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2014-10-31'
   '/#Action=DeleteDBCluster':
     get:
       x-aws-operation-name: DeleteDBCluster
@@ -5837,6 +6033,77 @@ paths:
           type: string
           enum:
             - '2014-10-31'
+  '/#Action=DeleteInstallationMedia':
+    get:
+      x-aws-operation-name: DeleteInstallationMedia
+      operationId: GET DeleteInstallationMedia
+      description: 'Deletes the installation media for an on-premises, bring your own media (BYOM) DB engine, such as Microsoft SQL Server.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/InstallationMedia'
+        '480':
+          description: InstallationMediaNotFoundFault
+          schema:
+            $ref: '#/definitions/InstallationMediaNotFoundFault'
+      parameters:
+        - name: InstallationMediaId
+          in: query
+          required: true
+          description: The installation media ID.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteInstallationMedia
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2014-10-31'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DeleteInstallationMedia
+      operationId: POST DeleteInstallationMedia
+      description: 'Deletes the installation media for an on-premises, bring your own media (BYOM) DB engine, such as Microsoft SQL Server.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/InstallationMedia'
+        '480':
+          description: InstallationMediaNotFoundFault
+          schema:
+            $ref: '#/definitions/InstallationMediaNotFoundFault'
+      parameters:
+        - name: InstallationMediaId
+          in: formData
+          required: true
+          description: The installation media ID.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteInstallationMedia
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2014-10-31'
   '/#Action=DeleteOptionGroup':
     get:
       x-aws-operation-name: DeleteOptionGroup
@@ -5995,7 +6262,7 @@ paths:
         - name: MaxRecords
           in: query
           required: false
-          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: query
@@ -6051,7 +6318,7 @@ paths:
         - name: MaxRecords
           in: formData
           required: false
-          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: formData
@@ -6064,6 +6331,111 @@ paths:
           type: string
           enum:
             - DescribeCertificates
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2014-10-31'
+  '/#Action=DescribeCustomAvailabilityZones':
+    get:
+      x-aws-operation-name: DescribeCustomAvailabilityZones
+      operationId: GET DescribeCustomAvailabilityZones
+      description: '<p>Returns information about custom Availability Zones (AZs).</p> <p>A custom AZ is an on-premises AZ that is integrated with a VMware vSphere cluster.</p> <p>For more information about RDS on VMware, see the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html"> <i>RDS on VMware User Guide.</i> </a> </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CustomAvailabilityZoneMessage'
+        '480':
+          description: CustomAvailabilityZoneNotFoundFault
+          schema:
+            $ref: '#/definitions/CustomAvailabilityZoneNotFoundFault'
+      parameters:
+        - name: CustomAvailabilityZoneId
+          in: query
+          required: false
+          description: 'The custom AZ identifier. If this parameter is specified, information from only the specific custom AZ is returned.'
+          type: string
+        - name: Filters
+          in: query
+          required: false
+          description: A filter that specifies one or more custom AZs to describe.
+          type: array
+          items:
+            type: string
+        - name: MaxRecords
+          in: query
+          required: false
+          description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.</p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          type: integer
+        - name: Marker
+          in: query
+          required: false
+          description: 'An optional pagination token provided by a previous <code>DescribeCustomAvailabilityZones</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeCustomAvailabilityZones
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2014-10-31'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DescribeCustomAvailabilityZones
+      operationId: POST DescribeCustomAvailabilityZones
+      description: '<p>Returns information about custom Availability Zones (AZs).</p> <p>A custom AZ is an on-premises AZ that is integrated with a VMware vSphere cluster.</p> <p>For more information about RDS on VMware, see the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html"> <i>RDS on VMware User Guide.</i> </a> </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CustomAvailabilityZoneMessage'
+        '480':
+          description: CustomAvailabilityZoneNotFoundFault
+          schema:
+            $ref: '#/definitions/CustomAvailabilityZoneNotFoundFault'
+      parameters:
+        - name: CustomAvailabilityZoneId
+          in: formData
+          required: false
+          description: 'The custom AZ identifier. If this parameter is specified, information from only the specific custom AZ is returned.'
+          type: string
+        - name: Filters
+          in: formData
+          required: false
+          description: A filter that specifies one or more custom AZs to describe.
+          type: array
+          items:
+            type: string
+        - name: MaxRecords
+          in: formData
+          required: false
+          description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.</p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          type: integer
+        - name: Marker
+          in: formData
+          required: false
+          description: 'An optional pagination token provided by a previous <code>DescribeCustomAvailabilityZones</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeCustomAvailabilityZones
         - name: Version
           in: query
           required: true
@@ -6109,7 +6481,7 @@ paths:
         - name: MaxRecords
           in: query
           required: false
-          description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: query
@@ -6174,7 +6546,7 @@ paths:
         - name: MaxRecords
           in: formData
           required: false
-          description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: formData
@@ -6228,7 +6600,7 @@ paths:
         - name: MaxRecords
           in: query
           required: false
-          description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: query
@@ -6289,7 +6661,7 @@ paths:
         - name: MaxRecords
           in: formData
           required: false
-          description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: formData
@@ -6338,7 +6710,7 @@ paths:
         - name: MaxRecords
           in: query
           required: false
-          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: query
@@ -6394,7 +6766,7 @@ paths:
         - name: MaxRecords
           in: formData
           required: false
-          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: formData
@@ -6448,7 +6820,7 @@ paths:
         - name: MaxRecords
           in: query
           required: false
-          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: query
@@ -6509,7 +6881,7 @@ paths:
         - name: MaxRecords
           in: formData
           required: false
-          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: formData
@@ -6639,7 +7011,7 @@ paths:
         - name: MaxRecords
           in: query
           required: false
-          description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: query
@@ -6715,7 +7087,7 @@ paths:
         - name: MaxRecords
           in: formData
           required: false
-          description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: formData
@@ -6774,7 +7146,7 @@ paths:
         - name: MaxRecords
           in: query
           required: false
-          description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: query
@@ -6835,7 +7207,7 @@ paths:
         - name: MaxRecords
           in: formData
           required: false
-          description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: formData
@@ -6895,7 +7267,7 @@ paths:
         - name: MaxRecords
           in: query
           required: false
-          description: '<p> The maximum number of records to include in the response. If more than the <code>MaxRecords</code> value is available, a pagination token called a marker is included in the response so that the following results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more than the <code>MaxRecords</code> value is available, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: query
@@ -6977,7 +7349,7 @@ paths:
         - name: MaxRecords
           in: formData
           required: false
-          description: '<p> The maximum number of records to include in the response. If more than the <code>MaxRecords</code> value is available, a pagination token called a marker is included in the response so that the following results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more than the <code>MaxRecords</code> value is available, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: formData
@@ -7051,7 +7423,7 @@ paths:
         - name: MaxRecords
           in: query
           required: false
-          description: 'The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.'
+          description: 'The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.'
           type: integer
         - name: Marker
           in: query
@@ -7112,7 +7484,7 @@ paths:
         - name: MaxRecords
           in: formData
           required: false
-          description: 'The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.'
+          description: 'The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.'
           type: integer
         - name: Marker
           in: formData
@@ -7161,7 +7533,7 @@ paths:
         - name: MaxRecords
           in: query
           required: false
-          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: query
@@ -7217,7 +7589,7 @@ paths:
         - name: MaxRecords
           in: formData
           required: false
-          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: formData
@@ -7281,7 +7653,7 @@ paths:
         - name: MaxRecords
           in: query
           required: false
-          description: 'The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.'
+          description: 'The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.'
           type: integer
         - name: Marker
           in: query
@@ -7352,7 +7724,7 @@ paths:
         - name: MaxRecords
           in: formData
           required: false
-          description: 'The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.'
+          description: 'The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.'
           type: integer
         - name: Marker
           in: formData
@@ -7401,7 +7773,7 @@ paths:
         - name: MaxRecords
           in: query
           required: false
-          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: query
@@ -7457,7 +7829,7 @@ paths:
         - name: MaxRecords
           in: formData
           required: false
-          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: formData
@@ -7511,7 +7883,7 @@ paths:
         - name: MaxRecords
           in: query
           required: false
-          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: query
@@ -7572,7 +7944,7 @@ paths:
         - name: MaxRecords
           in: formData
           required: false
-          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: formData
@@ -7621,7 +7993,7 @@ paths:
         - name: MaxRecords
           in: query
           required: false
-          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: query
@@ -7677,7 +8049,7 @@ paths:
         - name: MaxRecords
           in: formData
           required: false
-          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: formData
@@ -7807,7 +8179,7 @@ paths:
         - name: MaxRecords
           in: query
           required: false
-          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: query
@@ -7888,7 +8260,7 @@ paths:
         - name: MaxRecords
           in: formData
           required: false
-          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: formData
@@ -7952,7 +8324,7 @@ paths:
         - name: MaxRecords
           in: query
           required: false
-          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: query
@@ -8008,7 +8380,7 @@ paths:
         - name: MaxRecords
           in: formData
           required: false
-          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: formData
@@ -8053,7 +8425,7 @@ paths:
         - name: MaxRecords
           in: query
           required: false
-          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: query
@@ -8105,7 +8477,7 @@ paths:
         - name: MaxRecords
           in: formData
           required: false
-          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: formData
@@ -8150,7 +8522,7 @@ paths:
         - name: MaxRecords
           in: query
           required: false
-          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: query
@@ -8202,7 +8574,7 @@ paths:
         - name: MaxRecords
           in: formData
           required: false
-          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: formData
@@ -8328,7 +8700,7 @@ paths:
         - name: MaxRecords
           in: query
           required: false
-          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: query
@@ -8384,7 +8756,7 @@ paths:
         - name: MaxRecords
           in: formData
           required: false
-          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: formData
@@ -8465,7 +8837,7 @@ paths:
         - name: MaxRecords
           in: query
           required: false
-          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: query
@@ -8553,7 +8925,7 @@ paths:
         - name: MaxRecords
           in: formData
           required: false
-          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: formData
@@ -8602,7 +8974,7 @@ paths:
         - name: MaxRecords
           in: query
           required: false
-          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: query
@@ -8658,7 +9030,7 @@ paths:
         - name: MaxRecords
           in: formData
           required: false
-          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: formData
@@ -8671,6 +9043,111 @@ paths:
           type: string
           enum:
             - DescribeGlobalClusters
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2014-10-31'
+  '/#Action=DescribeInstallationMedia':
+    get:
+      x-aws-operation-name: DescribeInstallationMedia
+      operationId: GET DescribeInstallationMedia
+      description: 'Describes the available installation media for on-premises, bring your own media (BYOM) DB engines, such as Microsoft SQL Server.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/InstallationMediaMessage'
+        '480':
+          description: InstallationMediaNotFoundFault
+          schema:
+            $ref: '#/definitions/InstallationMediaNotFoundFault'
+      parameters:
+        - name: InstallationMediaId
+          in: query
+          required: false
+          description: The installation media ID.
+          type: string
+        - name: Filters
+          in: query
+          required: false
+          description: '<p>A filter that specifies one or more installation media to describe. Supported filters include the following:</p> <ul> <li> <p> <code>custom-availability-zone-id</code> - Accepts custom Availability Zone (AZ) identifiers. The results list includes information about only the custom AZs identified by these identifiers.</p> </li> <li> <p> <code>engine</code> - Accepts database engines. The results list includes information about only the database engines identified by these identifiers.</p> <p>For more information about the valid engines for installation media, see <a>ImportInstallationMedia</a>.</p> </li> </ul>'
+          type: array
+          items:
+            type: string
+        - name: MaxRecords
+          in: query
+          required: false
+          description: 'An optional pagination token provided by a previous DescribeInstallationMedia request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+          type: integer
+        - name: Marker
+          in: query
+          required: false
+          description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeInstallationMedia
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2014-10-31'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DescribeInstallationMedia
+      operationId: POST DescribeInstallationMedia
+      description: 'Describes the available installation media for on-premises, bring your own media (BYOM) DB engines, such as Microsoft SQL Server.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/InstallationMediaMessage'
+        '480':
+          description: InstallationMediaNotFoundFault
+          schema:
+            $ref: '#/definitions/InstallationMediaNotFoundFault'
+      parameters:
+        - name: InstallationMediaId
+          in: formData
+          required: false
+          description: The installation media ID.
+          type: string
+        - name: Filters
+          in: formData
+          required: false
+          description: '<p>A filter that specifies one or more installation media to describe. Supported filters include the following:</p> <ul> <li> <p> <code>custom-availability-zone-id</code> - Accepts custom Availability Zone (AZ) identifiers. The results list includes information about only the custom AZs identified by these identifiers.</p> </li> <li> <p> <code>engine</code> - Accepts database engines. The results list includes information about only the database engines identified by these identifiers.</p> <p>For more information about the valid engines for installation media, see <a>ImportInstallationMedia</a>.</p> </li> </ul>'
+          type: array
+          items:
+            type: string
+        - name: MaxRecords
+          in: formData
+          required: false
+          description: 'An optional pagination token provided by a previous DescribeInstallationMedia request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+          type: integer
+        - name: Marker
+          in: formData
+          required: false
+          description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeInstallationMedia
         - name: Version
           in: query
           required: true
@@ -8708,7 +9185,7 @@ paths:
         - name: MaxRecords
           in: query
           required: false
-          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: query
@@ -8765,7 +9242,7 @@ paths:
         - name: MaxRecords
           in: formData
           required: false
-          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: formData
@@ -8819,7 +9296,7 @@ paths:
         - name: MaxRecords
           in: query
           required: false
-          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: EngineName
           in: query
@@ -8885,7 +9362,7 @@ paths:
         - name: MaxRecords
           in: formData
           required: false
-          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: EngineName
           in: formData
@@ -8955,7 +9432,7 @@ paths:
         - name: MaxRecords
           in: query
           required: false
-          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: query
@@ -9027,7 +9504,7 @@ paths:
         - name: MaxRecords
           in: formData
           required: false
-          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: formData
@@ -9081,7 +9558,7 @@ paths:
         - name: MaxRecords
           in: query
           required: false
-          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Action
           in: query
@@ -9137,7 +9614,7 @@ paths:
         - name: MaxRecords
           in: formData
           required: false
-          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Action
           in: query
@@ -9216,7 +9693,7 @@ paths:
         - name: MaxRecords
           in: query
           required: false
-          description: '<p> The maximum number of records to include in the response. If more than the <code>MaxRecords</code> value is available, a pagination token called a marker is included in the response so that the following results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more than the <code>MaxRecords</code> value is available, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: query
@@ -9307,7 +9784,7 @@ paths:
         - name: MaxRecords
           in: formData
           required: false
-          description: '<p> The maximum number of records to include in the response. If more than the <code>MaxRecords</code> value is available, a pagination token called a marker is included in the response so that the following results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more than the <code>MaxRecords</code> value is available, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: formData
@@ -9381,7 +9858,7 @@ paths:
         - name: MaxRecords
           in: query
           required: false
-          description: '<p> The maximum number of records to include in the response. If more than the <code>MaxRecords</code> value is available, a pagination token called a marker is included in the response so that the following results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more than the <code>MaxRecords</code> value is available, a pagination token called a marker is included in the response so that you can retrieve the reamaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: query
@@ -9462,7 +9939,7 @@ paths:
         - name: MaxRecords
           in: formData
           required: false
-          description: '<p> The maximum number of records to include in the response. If more than the <code>MaxRecords</code> value is available, a pagination token called a marker is included in the response so that the following results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p> The maximum number of records to include in the response. If more than the <code>MaxRecords</code> value is available, a pagination token called a marker is included in the response so that you can retrieve the reamaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: formData
@@ -9500,7 +9977,7 @@ paths:
         - name: MaxRecords
           in: query
           required: false
-          description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: query
@@ -9552,7 +10029,7 @@ paths:
         - name: MaxRecords
           in: formData
           required: false
-          description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
           type: integer
         - name: Marker
           in: formData
@@ -9857,6 +10334,125 @@ paths:
           type: string
           enum:
             - FailoverDBCluster
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2014-10-31'
+  '/#Action=ImportInstallationMedia':
+    get:
+      x-aws-operation-name: ImportInstallationMedia
+      operationId: GET ImportInstallationMedia
+      description: 'Imports the installation media for an on-premises, bring your own media (BYOM) DB engine, such as SQL Server.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/InstallationMedia'
+        '480':
+          description: CustomAvailabilityZoneNotFoundFault
+          schema:
+            $ref: '#/definitions/CustomAvailabilityZoneNotFoundFault'
+        '481':
+          description: InstallationMediaAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/InstallationMediaAlreadyExistsFault'
+      parameters:
+        - name: CustomAvailabilityZoneId
+          in: query
+          required: true
+          description: The identifier of the custom Availability Zone (AZ) to import the installation media to.
+          type: string
+        - name: Engine
+          in: query
+          required: true
+          description: '<p>The name of the database engine to be used for this instance. </p> <p>The list only includes supported on-premises, bring your own media (BYOM) DB engines. </p> <p>Valid Values: </p> <ul> <li> <p> <code>sqlserver-ee</code> </p> </li> <li> <p> <code>sqlserver-se</code> </p> </li> <li> <p> <code>sqlserver-ex</code> </p> </li> <li> <p> <code>sqlserver-web</code> </p> </li> </ul>'
+          type: string
+        - name: EngineVersion
+          in: query
+          required: true
+          description: '<p>The version number of the database engine to use.</p> <p>For a list of valid engine versions, call <a>DescribeDBEngineVersions</a>.</p> <p>The following are the database engines and links to information about the major and minor versions. The list only includes supported on-premises, bring your own media (BYOM) DB engines.</p> <p> <b>Microsoft SQL Server</b> </p> <p>See <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.FeatureSupport">Version and Feature Support on Amazon RDS</a> in the <i>Amazon RDS User Guide.</i> </p>'
+          type: string
+        - name: EngineInstallationMediaPath
+          in: query
+          required: true
+          description: '<p>The path to the installation media for the specified DB engine.</p> <p>Example: <code>SQLServerISO/en_sql_server_2016_enterprise_x64_dvd_8701793.iso</code> </p>'
+          type: string
+        - name: OSInstallationMediaPath
+          in: query
+          required: true
+          description: '<p>The path to the installation media for the operating system associated with the specified DB engine.</p> <p>Example: <code>WindowsISO/en_windows_server_2016_x64_dvd_9327751.iso</code> </p>'
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ImportInstallationMedia
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2014-10-31'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: ImportInstallationMedia
+      operationId: POST ImportInstallationMedia
+      description: 'Imports the installation media for an on-premises, bring your own media (BYOM) DB engine, such as SQL Server.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/InstallationMedia'
+        '480':
+          description: CustomAvailabilityZoneNotFoundFault
+          schema:
+            $ref: '#/definitions/CustomAvailabilityZoneNotFoundFault'
+        '481':
+          description: InstallationMediaAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/InstallationMediaAlreadyExistsFault'
+      parameters:
+        - name: CustomAvailabilityZoneId
+          in: formData
+          required: true
+          description: The identifier of the custom Availability Zone (AZ) to import the installation media to.
+          type: string
+        - name: Engine
+          in: formData
+          required: true
+          description: '<p>The name of the database engine to be used for this instance. </p> <p>The list only includes supported on-premises, bring your own media (BYOM) DB engines. </p> <p>Valid Values: </p> <ul> <li> <p> <code>sqlserver-ee</code> </p> </li> <li> <p> <code>sqlserver-se</code> </p> </li> <li> <p> <code>sqlserver-ex</code> </p> </li> <li> <p> <code>sqlserver-web</code> </p> </li> </ul>'
+          type: string
+        - name: EngineVersion
+          in: formData
+          required: true
+          description: '<p>The version number of the database engine to use.</p> <p>For a list of valid engine versions, call <a>DescribeDBEngineVersions</a>.</p> <p>The following are the database engines and links to information about the major and minor versions. The list only includes supported on-premises, bring your own media (BYOM) DB engines.</p> <p> <b>Microsoft SQL Server</b> </p> <p>See <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.FeatureSupport">Version and Feature Support on Amazon RDS</a> in the <i>Amazon RDS User Guide.</i> </p>'
+          type: string
+        - name: EngineInstallationMediaPath
+          in: formData
+          required: true
+          description: '<p>The path to the installation media for the specified DB engine.</p> <p>Example: <code>SQLServerISO/en_sql_server_2016_enterprise_x64_dvd_8701793.iso</code> </p>'
+          type: string
+        - name: OSInstallationMediaPath
+          in: formData
+          required: true
+          description: '<p>The path to the installation media for the operating system associated with the specified DB engine.</p> <p>Example: <code>WindowsISO/en_windows_server_2016_x64_dvd_9327751.iso</code> </p>'
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ImportInstallationMedia
         - name: Version
           in: query
           required: true
@@ -17353,6 +17949,13 @@ definitions:
   OptionGroupAlreadyExistsFault: {}
   OptionGroupNotFoundFault: {}
   OptionGroupQuotaExceededFault: {}
+  CreateCustomAvailabilityZoneResult:
+    type: object
+    properties:
+      CustomAvailabilityZone:
+        $ref: '#/definitions/CustomAvailabilityZone'
+  CustomAvailabilityZoneAlreadyExistsFault: {}
+  CustomAvailabilityZoneQuotaExceededFault: {}
   CreateDBClusterResult:
     type: object
     properties:
@@ -17501,6 +18104,12 @@ definitions:
     properties:
       OptionGroup:
         $ref: '#/definitions/OptionGroup'
+  DeleteCustomAvailabilityZoneResult:
+    type: object
+    properties:
+      CustomAvailabilityZone:
+        $ref: '#/definitions/CustomAvailabilityZone'
+  CustomAvailabilityZoneNotFoundFault: {}
   DeleteDBClusterResult:
     type: object
     properties:
@@ -17544,6 +18153,35 @@ definitions:
     properties:
       GlobalCluster:
         $ref: '#/definitions/GlobalCluster'
+  InstallationMedia:
+    type: object
+    properties:
+      InstallationMediaId:
+        $ref: '#/definitions/String'
+        description: The installation media ID.
+      CustomAvailabilityZoneId:
+        $ref: '#/definitions/String'
+        description: The custom Availability Zone (AZ) that contains the installation media.
+      Engine:
+        $ref: '#/definitions/String'
+        description: The DB engine.
+      EngineVersion:
+        $ref: '#/definitions/String'
+        description: The engine version of the DB engine.
+      EngineInstallationMediaPath:
+        $ref: '#/definitions/String'
+        description: The path to the installation media for the DB engine.
+      OSInstallationMediaPath:
+        $ref: '#/definitions/String'
+        description: The path to the installation media for the operating system associated with the DB engine.
+      Status:
+        $ref: '#/definitions/String'
+        description: The status of the installation media.
+      FailureCause:
+        $ref: '#/definitions/InstallationMediaFailureCause'
+        description: 'If an installation media failure occurred, the cause of the failure.'
+    description: 'Contains the installation media for on-premises, bring your own media (BYOM) DB engines, such as Microsoft SQL Server.'
+  InstallationMediaNotFoundFault: {}
   InvalidOptionGroupStateFault: {}
   AccountAttributesMessage:
     type: object
@@ -17576,6 +18214,15 @@ definitions:
         description: One or more filter values. Filter values are case-sensitive.
     description: '<p>A filter name and value pair that is used to return a more specific list of results from a describe operation. Filters can be used to match a set of resources by specific criteria, such as IDs. The filters supported by a describe operation are documented with the describe operation.</p> <note> <p>Currently, wildcards are not supported in filters.</p> </note> <p>The following actions can be filtered:</p> <ul> <li> <p> <code>DescribeDBClusterBacktracks</code> </p> </li> <li> <p> <code>DescribeDBClusterEndpoints</code> </p> </li> <li> <p> <code>DescribeDBClusters</code> </p> </li> <li> <p> <code>DescribeDBInstances</code> </p> </li> <li> <p> <code>DescribePendingMaintenanceActions</code> </p> </li> </ul>'
   CertificateNotFoundFault: {}
+  CustomAvailabilityZoneMessage:
+    type: object
+    properties:
+      Marker:
+        $ref: '#/definitions/String'
+        description: 'An optional pagination token provided by a previous <code>DescribeCustomAvailabilityZones</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+      CustomAvailabilityZones:
+        $ref: '#/definitions/CustomAvailabilityZoneList'
+        description: The list of <a>CustomAvailabilityZone</a> objects for the AWS account.
   DBClusterBacktrackMessage:
     type: object
     properties:
@@ -17782,6 +18429,15 @@ definitions:
       GlobalClusters:
         $ref: '#/definitions/GlobalClusterList'
         description: ' The list of global clusters returned by this request. '
+  InstallationMediaMessage:
+    type: object
+    properties:
+      Marker:
+        $ref: '#/definitions/String'
+        description: 'An optional pagination token provided by a previous <a>DescribeInstallationMedia</a> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+      InstallationMedia:
+        $ref: '#/definitions/InstallationMediaList'
+        description: The list of <a>InstallationMedia</a> objects for the AWS account.
   OptionGroupOptionsMessage:
     type: object
     properties:
@@ -17877,6 +18533,7 @@ definitions:
     properties:
       DBCluster:
         $ref: '#/definitions/DBCluster'
+  InstallationMediaAlreadyExistsFault: {}
   TagListMessage:
     type: object
     properties:
@@ -18789,6 +19446,40 @@ definitions:
         $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) for the option group.
     description: <p/>
+  CreateCustomAvailabilityZoneMessage:
+    type: object
+    required:
+      - CustomAvailabilityZoneName
+    properties:
+      CustomAvailabilityZoneName:
+        $ref: '#/definitions/String'
+        description: The name of the custom Availability Zone (AZ).
+      ExistingVpnId:
+        $ref: '#/definitions/String'
+        description: The ID of an existing virtual private network (VPN) between the Amazon RDS website and the VMware vSphere cluster.
+      NewVpnTunnelName:
+        $ref: '#/definitions/String'
+        description: <p>The name of a new VPN tunnel between the Amazon RDS website and the VMware vSphere cluster.</p> <p>Specify this parameter only if <code>ExistingVpnId</code> is not specified.</p>
+      VpnTunnelOriginatorIP:
+        $ref: '#/definitions/String'
+        description: <p>The IP address of network traffic from your on-premises data center. A custom AZ receives the network traffic.</p> <p>Specify this parameter only if <code>ExistingVpnId</code> is not specified.</p>
+    description: <p/>
+  CustomAvailabilityZone:
+    type: object
+    properties:
+      CustomAvailabilityZoneId:
+        $ref: '#/definitions/String'
+        description: <p>The identifier of the custom AZ.</p> <p>Amazon RDS generates a unique identifier when a custom AZ is created.</p>
+      CustomAvailabilityZoneName:
+        $ref: '#/definitions/String'
+        description: The name of the custom AZ.
+      CustomAvailabilityZoneStatus:
+        $ref: '#/definitions/String'
+        description: The status of the custom AZ.
+      VpnDetails:
+        $ref: '#/definitions/VpnDetails'
+        description: Information about the virtual private network (VPN) between the VMware vSphere cluster and the AWS website.
+    description: '<p>A custom Availability Zone (AZ) is an on-premises AZ that is integrated with a VMware vSphere cluster.</p> <p>For more information about RDS on VMware, see the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html"> <i>RDS on VMware User Guide.</i> </a> </p>'
   StringList:
     type: array
     items:
@@ -19176,7 +19867,7 @@ definitions:
         description: '<p>A list of Amazon EC2 VPC security groups to associate with this DB instance.</p> <p> <b>Amazon Aurora</b> </p> <p>Not applicable. The associated list of EC2 VPC security groups is managed by the DB cluster.</p> <p>Default: The default EC2 VPC security group for the DB subnet group''s VPC.</p>'
       AvailabilityZone:
         $ref: '#/definitions/String'
-        description: '<p> The Availability Zone (AZ) where the database will be created. For information on AWS Regions and Availability Zones, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html">Regions and Availability Zones</a>. </p> <p>Default: A random, system-chosen Availability Zone in the endpoint''s AWS Region.</p> <p> Example: <code>us-east-1d</code> </p> <p> Constraint: The <code>AvailabilityZone</code> parameter can''t be specified if the DB instance is a Multi-AZ deployment. The specified Availability Zone must be in the same AWS Region as the current endpoint. </p>'
+        description: '<p> The Availability Zone (AZ) where the database will be created. For information on AWS Regions and Availability Zones, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html">Regions and Availability Zones</a>. </p> <p>Default: A random, system-chosen Availability Zone in the endpoint''s AWS Region.</p> <p> Example: <code>us-east-1d</code> </p> <p> Constraint: The <code>AvailabilityZone</code> parameter can''t be specified if the DB instance is a Multi-AZ deployment. The specified Availability Zone must be in the same AWS Region as the current endpoint. </p> <note> <p>If you''re creating a DB instance in an RDS on VMware environment, specify the identifier of the custom Availability Zone to create the DB instance in.</p> <p>For more information about RDS on VMware, see the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html"> <i>RDS on VMware User Guide.</i> </a> </p> </note>'
       DBSubnetGroupName:
         $ref: '#/definitions/String'
         description: '<p>A DB subnet group to associate with this DB instance.</p> <p>If there is no DB subnet group, then it is a non-VPC DB instance.</p>'
@@ -19776,6 +20467,32 @@ definitions:
         $ref: '#/definitions/TagList'
         description: Tags to assign to the option group.
     description: <p/>
+  VpnDetails:
+    type: object
+    properties:
+      VpnId:
+        $ref: '#/definitions/String'
+        description: The ID of the VPN.
+      VpnTunnelOriginatorIP:
+        $ref: '#/definitions/String'
+        description: The IP address of network traffic from your on-premises data center. A custom AZ receives the network traffic.
+      VpnGatewayIp:
+        $ref: '#/definitions/String'
+        description: The IP address of network traffic from AWS to your on-premises data center.
+      VpnPSK:
+        $ref: '#/definitions/StringSensitive'
+        description: The preshared key (PSK) for the VPN.
+      VpnName:
+        $ref: '#/definitions/String'
+        description: The name of the VPN.
+      VpnState:
+        $ref: '#/definitions/String'
+        description: The state of the VPN.
+    description: '<p>Information about the virtual private network (VPN) between the VMware vSphere cluster and the AWS website.</p> <p>For more information about RDS on VMware, see the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html"> <i>RDS on VMware User Guide.</i> </a> </p>'
+  CustomAvailabilityZoneList:
+    type: array
+    items:
+      $ref: '#/definitions/CustomAvailabilityZone'
   DBClusterOptionGroupMemberships:
     type: array
     items:
@@ -20263,6 +20980,14 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/DBSubnetGroup'
+  DeleteCustomAvailabilityZoneMessage:
+    type: object
+    required:
+      - CustomAvailabilityZoneId
+    properties:
+      CustomAvailabilityZoneId:
+        $ref: '#/definitions/String'
+        description: The custom AZ identifier.
   DeleteDBClusterEndpointMessage:
     type: object
     required:
@@ -20384,6 +21109,14 @@ definitions:
       GlobalClusterIdentifier:
         $ref: '#/definitions/String'
         description: ' The cluster identifier of the global database cluster being deleted. '
+  DeleteInstallationMediaMessage:
+    type: object
+    required:
+      - InstallationMediaId
+    properties:
+      InstallationMediaId:
+        $ref: '#/definitions/String'
+        description: The installation media ID.
   DeleteOptionGroupMessage:
     type: object
     required:
@@ -20412,11 +21145,26 @@ definitions:
         description: This parameter is not currently supported.
       MaxRecords:
         $ref: '#/definitions/IntegerOptional'
-        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
       Marker:
         $ref: '#/definitions/String'
         description: ' An optional pagination token provided by a previous <code>DescribeCertificates</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
     description: <p/>
+  DescribeCustomAvailabilityZonesMessage:
+    type: object
+    properties:
+      CustomAvailabilityZoneId:
+        $ref: '#/definitions/String'
+        description: 'The custom AZ identifier. If this parameter is specified, information from only the specific custom AZ is returned.'
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: A filter that specifies one or more custom AZs to describe.
+      MaxRecords:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.</p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+      Marker:
+        $ref: '#/definitions/String'
+        description: 'An optional pagination token provided by a previous <code>DescribeCustomAvailabilityZones</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
   DescribeDBClusterBacktracksMessage:
     type: object
     required:
@@ -20433,7 +21181,7 @@ definitions:
         description: '<p>A filter that specifies one or more DB clusters to describe. Supported filters include the following:</p> <ul> <li> <p> <code>db-cluster-backtrack-id</code> - Accepts backtrack identifiers. The results list includes information about only the backtracks identified by these identifiers.</p> </li> <li> <p> <code>db-cluster-backtrack-status</code> - Accepts any of the following backtrack status values:</p> <ul> <li> <p> <code>applying</code> </p> </li> <li> <p> <code>completed</code> </p> </li> <li> <p> <code>failed</code> </p> </li> <li> <p> <code>pending</code> </p> </li> </ul> <p>The results list includes information about only the backtracks identified by these values.</p> </li> </ul>'
       MaxRecords:
         $ref: '#/definitions/IntegerOptional'
-        description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+        description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
       Marker:
         $ref: '#/definitions/String'
         description: ' An optional pagination token provided by a previous <code>DescribeDBClusterBacktracks</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
@@ -20452,7 +21200,7 @@ definitions:
         description: 'A set of name-value pairs that define which endpoints to include in the output. The filters are specified as name-value pairs, in the format <code>Name=<i>endpoint_type</i>,Values=<i>endpoint_type1</i>,<i>endpoint_type2</i>,...</code>. <code>Name</code> can be one of: <code>db-cluster-endpoint-type</code>, <code>db-cluster-endpoint-custom-type</code>, <code>db-cluster-endpoint-id</code>, <code>db-cluster-endpoint-status</code>. <code>Values</code> for the <code> db-cluster-endpoint-type</code> filter can be one or more of: <code>reader</code>, <code>writer</code>, <code>custom</code>. <code>Values</code> for the <code>db-cluster-endpoint-custom-type</code> filter can be one or more of: <code>reader</code>, <code>any</code>. <code>Values</code> for the <code>db-cluster-endpoint-status</code> filter can be one or more of: <code>available</code>, <code>creating</code>, <code>deleting</code>, <code>modifying</code>. '
       MaxRecords:
         $ref: '#/definitions/IntegerOptional'
-        description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+        description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
       Marker:
         $ref: '#/definitions/String'
         description: ' An optional pagination token provided by a previous <code>DescribeDBClusterEndpoints</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
@@ -20467,7 +21215,7 @@ definitions:
         description: This parameter is not currently supported.
       MaxRecords:
         $ref: '#/definitions/IntegerOptional'
-        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
       Marker:
         $ref: '#/definitions/String'
         description: ' An optional pagination token provided by a previous <code>DescribeDBClusterParameterGroups</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
@@ -20488,7 +21236,7 @@ definitions:
         description: This parameter is not currently supported.
       MaxRecords:
         $ref: '#/definitions/IntegerOptional'
-        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
       Marker:
         $ref: '#/definitions/String'
         description: ' An optional pagination token provided by a previous <code>DescribeDBClusterParameters</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
@@ -20519,7 +21267,7 @@ definitions:
         description: '<p>A filter that specifies one or more DB cluster snapshots to describe.</p> <p>Supported filters:</p> <ul> <li> <p> <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs).</p> </li> <li> <p> <code>db-cluster-snapshot-id</code> - Accepts DB cluster snapshot identifiers.</p> </li> <li> <p> <code>snapshot-type</code> - Accepts types of DB cluster snapshots.</p> </li> <li> <p> <code>engine</code> - Accepts names of database engines.</p> </li> </ul>'
       MaxRecords:
         $ref: '#/definitions/IntegerOptional'
-        description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+        description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
       Marker:
         $ref: '#/definitions/String'
         description: 'An optional pagination token provided by a previous <code>DescribeDBClusterSnapshots</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
@@ -20541,7 +21289,7 @@ definitions:
         description: '<p>A filter that specifies one or more DB clusters to describe.</p> <p>Supported filters:</p> <ul> <li> <p> <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB clusters identified by these ARNs.</p> </li> </ul>'
       MaxRecords:
         $ref: '#/definitions/IntegerOptional'
-        description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+        description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
       Marker:
         $ref: '#/definitions/String'
         description: 'An optional pagination token provided by a previous <code>DescribeDBClusters</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
@@ -20566,7 +21314,7 @@ definitions:
         description: This parameter is not currently supported.
       MaxRecords:
         $ref: '#/definitions/IntegerOptional'
-        description: '<p> The maximum number of records to include in the response. If more than the <code>MaxRecords</code> value is available, a pagination token called a marker is included in the response so that the following results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+        description: '<p> The maximum number of records to include in the response. If more than the <code>MaxRecords</code> value is available, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
       Marker:
         $ref: '#/definitions/String'
         description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
@@ -20596,7 +21344,7 @@ definitions:
         description: '<p>A filter that specifies which resources to return based on status.</p> <p>Supported filters are the following:</p> <ul> <li> <p> <code>status</code> </p> <ul> <li> <p> <code>active</code> - automated backups for current instances</p> </li> <li> <p> <code>retained</code> - automated backups for deleted instances</p> </li> <li> <p> <code>creating</code> - automated backups that are waiting for the first automated snapshot to be available</p> </li> </ul> </li> <li> <p> <code>db-instance-id</code> - Accepts DB instance identifiers and Amazon Resource Names (ARNs) for DB instances. The results list includes only information about the DB instance automated backupss identified by these ARNs.</p> </li> <li> <p> <code>dbi-resource-id</code> - Accepts DB instance resource identifiers and DB Amazon Resource Names (ARNs) for DB instances. The results list includes only information about the DB instance resources identified by these ARNs.</p> </li> </ul> <p>Returns all resources by default. The status for each resource is specified in the response.</p>'
       MaxRecords:
         $ref: '#/definitions/IntegerOptional'
-        description: 'The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.'
+        description: 'The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.'
       Marker:
         $ref: '#/definitions/String'
         description: 'The pagination token provided in the previous request. If this parameter is specified the response includes only records beyond the marker, up to <code>MaxRecords</code>.'
@@ -20612,7 +21360,7 @@ definitions:
         description: '<p>A filter that specifies one or more DB instances to describe.</p> <p>Supported filters:</p> <ul> <li> <p> <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB instances associated with the DB clusters identified by these ARNs.</p> </li> <li> <p> <code>db-instance-id</code> - Accepts DB instance identifiers and DB instance Amazon Resource Names (ARNs). The results list will only include information about the DB instances identified by these ARNs.</p> </li> <li> <p> <code>dbi-resource-id</code> - Accepts DB instance resource identifiers. The results list will only include information about the DB instances identified by these DB instance resource identifiers.</p> </li> <li> <p> <code>domain</code> - Accepts Active Directory directory IDs. The results list will only include information about the DB instances associated with these domains.</p> </li> <li> <p> <code>engine</code> - Accepts engine names. The results list will only include information about the DB instances for these engines.</p> </li> </ul>'
       MaxRecords:
         $ref: '#/definitions/IntegerOptional'
-        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
       Marker:
         $ref: '#/definitions/String'
         description: ' An optional pagination token provided by a previous <code>DescribeDBInstances</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
@@ -20656,7 +21404,7 @@ definitions:
         description: This parameter is not currently supported.
       MaxRecords:
         $ref: '#/definitions/IntegerOptional'
-        description: 'The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.'
+        description: 'The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.'
       Marker:
         $ref: '#/definitions/String'
         description: 'The pagination token provided in the previous request. If this parameter is specified the response includes only records beyond the marker, up to MaxRecords.'
@@ -20672,7 +21420,7 @@ definitions:
         description: This parameter is not currently supported.
       MaxRecords:
         $ref: '#/definitions/IntegerOptional'
-        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
       Marker:
         $ref: '#/definitions/String'
         description: ' An optional pagination token provided by a previous <code>DescribeDBParameterGroups</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
@@ -20693,7 +21441,7 @@ definitions:
         description: This parameter is not currently supported.
       MaxRecords:
         $ref: '#/definitions/IntegerOptional'
-        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
       Marker:
         $ref: '#/definitions/String'
         description: ' An optional pagination token provided by a previous <code>DescribeDBParameters</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
@@ -20708,7 +21456,7 @@ definitions:
         description: This parameter is not currently supported.
       MaxRecords:
         $ref: '#/definitions/IntegerOptional'
-        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
       Marker:
         $ref: '#/definitions/String'
         description: ' An optional pagination token provided by a previous <code>DescribeDBSecurityGroups</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
@@ -20739,7 +21487,7 @@ definitions:
         description: '<p>A filter that specifies one or more DB snapshots to describe.</p> <p>Supported filters:</p> <ul> <li> <p> <code>db-instance-id</code> - Accepts DB instance identifiers and DB instance Amazon Resource Names (ARNs).</p> </li> <li> <p> <code>db-snapshot-id</code> - Accepts DB snapshot identifiers.</p> </li> <li> <p> <code>dbi-resource-id</code> - Accepts identifiers of source DB instances.</p> </li> <li> <p> <code>snapshot-type</code> - Accepts types of DB snapshots.</p> </li> <li> <p> <code>engine</code> - Accepts names of database engines.</p> </li> </ul>'
       MaxRecords:
         $ref: '#/definitions/IntegerOptional'
-        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
       Marker:
         $ref: '#/definitions/String'
         description: ' An optional pagination token provided by a previous <code>DescribeDBSnapshots</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
@@ -20764,7 +21512,7 @@ definitions:
         description: This parameter is not currently supported.
       MaxRecords:
         $ref: '#/definitions/IntegerOptional'
-        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
       Marker:
         $ref: '#/definitions/String'
         description: ' An optional pagination token provided by a previous DescribeDBSubnetGroups request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
@@ -20782,7 +21530,7 @@ definitions:
         description: This parameter is not currently supported.
       MaxRecords:
         $ref: '#/definitions/IntegerOptional'
-        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
       Marker:
         $ref: '#/definitions/String'
         description: ' An optional pagination token provided by a previous <code>DescribeEngineDefaultClusterParameters</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
@@ -20813,7 +21561,7 @@ definitions:
         description: This parameter is not currently supported.
       MaxRecords:
         $ref: '#/definitions/IntegerOptional'
-        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
       Marker:
         $ref: '#/definitions/String'
         description: ' An optional pagination token provided by a previous <code>DescribeEngineDefaultParameters</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
@@ -20839,7 +21587,7 @@ definitions:
         description: This parameter is not currently supported.
       MaxRecords:
         $ref: '#/definitions/IntegerOptional'
-        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
       Marker:
         $ref: '#/definitions/String'
         description: ' An optional pagination token provided by a previous DescribeOrderableDBInstanceOptions request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code> . '
@@ -20879,7 +21627,7 @@ definitions:
         description: This parameter is not currently supported.
       MaxRecords:
         $ref: '#/definitions/IntegerOptional'
-        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
       Marker:
         $ref: '#/definitions/String'
         description: ' An optional pagination token provided by a previous DescribeEvents request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
@@ -20895,10 +21643,25 @@ definitions:
         description: '<p>A filter that specifies one or more global DB clusters to describe.</p> <p>Supported filters:</p> <ul> <li> <p> <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB clusters identified by these ARNs.</p> </li> </ul>'
       MaxRecords:
         $ref: '#/definitions/IntegerOptional'
-        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
       Marker:
         $ref: '#/definitions/String'
         description: ' An optional pagination token provided by a previous <code>DescribeGlobalClusters</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
+  DescribeInstallationMediaMessage:
+    type: object
+    properties:
+      InstallationMediaId:
+        $ref: '#/definitions/String'
+        description: The installation media ID.
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: '<p>A filter that specifies one or more installation media to describe. Supported filters include the following:</p> <ul> <li> <p> <code>custom-availability-zone-id</code> - Accepts custom Availability Zone (AZ) identifiers. The results list includes information about only the custom AZs identified by these identifiers.</p> </li> <li> <p> <code>engine</code> - Accepts database engines. The results list includes information about only the database engines identified by these identifiers.</p> <p>For more information about the valid engines for installation media, see <a>ImportInstallationMedia</a>.</p> </li> </ul>'
+      MaxRecords:
+        $ref: '#/definitions/IntegerOptional'
+        description: 'An optional pagination token provided by a previous DescribeInstallationMedia request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+      Marker:
+        $ref: '#/definitions/String'
+        description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
   DescribeOptionGroupOptionsMessage:
     type: object
     required:
@@ -20915,7 +21678,7 @@ definitions:
         description: This parameter is not currently supported.
       MaxRecords:
         $ref: '#/definitions/IntegerOptional'
-        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
       Marker:
         $ref: '#/definitions/String'
         description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
@@ -20934,7 +21697,7 @@ definitions:
         description: ' An optional pagination token provided by a previous DescribeOptionGroups request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
       MaxRecords:
         $ref: '#/definitions/IntegerOptional'
-        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
       EngineName:
         $ref: '#/definitions/String'
         description: Filters the list of option groups to only include groups associated with a specific database engine.
@@ -20967,7 +21730,7 @@ definitions:
         description: This parameter is not currently supported.
       MaxRecords:
         $ref: '#/definitions/IntegerOptional'
-        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
       Marker:
         $ref: '#/definitions/String'
         description: ' An optional pagination token provided by a previous DescribeOrderableDBInstanceOptions request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code> . '
@@ -20986,7 +21749,7 @@ definitions:
         description: ' An optional pagination token provided by a previous <code>DescribePendingMaintenanceActions</code> request. If this parameter is specified, the response includes only records beyond the marker, up to a number of records specified by <code>MaxRecords</code>. '
       MaxRecords:
         $ref: '#/definitions/IntegerOptional'
-        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
     description: <p/>
   DescribeReservedDBInstancesMessage:
     type: object
@@ -21020,7 +21783,7 @@ definitions:
         description: This parameter is not currently supported.
       MaxRecords:
         $ref: '#/definitions/IntegerOptional'
-        description: '<p> The maximum number of records to include in the response. If more than the <code>MaxRecords</code> value is available, a pagination token called a marker is included in the response so that the following results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+        description: '<p> The maximum number of records to include in the response. If more than the <code>MaxRecords</code> value is available, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
       Marker:
         $ref: '#/definitions/String'
         description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
@@ -21051,7 +21814,7 @@ definitions:
         description: This parameter is not currently supported.
       MaxRecords:
         $ref: '#/definitions/IntegerOptional'
-        description: '<p> The maximum number of records to include in the response. If more than the <code>MaxRecords</code> value is available, a pagination token called a marker is included in the response so that the following results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+        description: '<p> The maximum number of records to include in the response. If more than the <code>MaxRecords</code> value is available, a pagination token called a marker is included in the response so that you can retrieve the reamaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
       Marker:
         $ref: '#/definitions/String'
         description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
@@ -21064,7 +21827,7 @@ definitions:
         description: '<p>The source AWS Region name. For example, <code>us-east-1</code>.</p> <p>Constraints:</p> <ul> <li> <p>Must specify a valid AWS Region name.</p> </li> </ul>'
       MaxRecords:
         $ref: '#/definitions/IntegerOptional'
-        description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+        description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
       Marker:
         $ref: '#/definitions/String'
         description: 'An optional pagination token provided by a previous <code>DescribeSourceRegions</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
@@ -21257,6 +22020,41 @@ definitions:
         $ref: '#/definitions/String'
         description: Specifies the IP range.
     description: ' This data type is used as a response element in the <code>DescribeDBSecurityGroups</code> action. '
+  ImportInstallationMediaMessage:
+    type: object
+    required:
+      - CustomAvailabilityZoneId
+      - Engine
+      - EngineVersion
+      - EngineInstallationMediaPath
+      - OSInstallationMediaPath
+    properties:
+      CustomAvailabilityZoneId:
+        $ref: '#/definitions/String'
+        description: The identifier of the custom Availability Zone (AZ) to import the installation media to.
+      Engine:
+        $ref: '#/definitions/String'
+        description: '<p>The name of the database engine to be used for this instance. </p> <p>The list only includes supported on-premises, bring your own media (BYOM) DB engines. </p> <p>Valid Values: </p> <ul> <li> <p> <code>sqlserver-ee</code> </p> </li> <li> <p> <code>sqlserver-se</code> </p> </li> <li> <p> <code>sqlserver-ex</code> </p> </li> <li> <p> <code>sqlserver-web</code> </p> </li> </ul>'
+      EngineVersion:
+        $ref: '#/definitions/String'
+        description: '<p>The version number of the database engine to use.</p> <p>For a list of valid engine versions, call <a>DescribeDBEngineVersions</a>.</p> <p>The following are the database engines and links to information about the major and minor versions. The list only includes supported on-premises, bring your own media (BYOM) DB engines.</p> <p> <b>Microsoft SQL Server</b> </p> <p>See <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.FeatureSupport">Version and Feature Support on Amazon RDS</a> in the <i>Amazon RDS User Guide.</i> </p>'
+      EngineInstallationMediaPath:
+        $ref: '#/definitions/String'
+        description: '<p>The path to the installation media for the specified DB engine.</p> <p>Example: <code>SQLServerISO/en_sql_server_2016_enterprise_x64_dvd_8701793.iso</code> </p>'
+      OSInstallationMediaPath:
+        $ref: '#/definitions/String'
+        description: '<p>The path to the installation media for the operating system associated with the specified DB engine.</p> <p>Example: <code>WindowsISO/en_windows_server_2016_x64_dvd_9327751.iso</code> </p>'
+  InstallationMediaFailureCause:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/String'
+        description: The reason that an installation media import failed.
+    description: 'Contains the cause of an installation media failure. Installation media is used for on-premises, bring your own media (BYOM) DB engines, such as Microsoft SQL Server.'
+  InstallationMediaList:
+    type: array
+    items:
+      $ref: '#/definitions/InstallationMedia'
   KeyList:
     type: array
     items:
@@ -22919,6 +23717,9 @@ definitions:
       DBSnapshotIdentifier:
         $ref: '#/definitions/String'
         description: ' The user-supplied instance identifier of the DB Snapshot created immediately before the DB instance is stopped. '
+  StringSensitive:
+    type: string
+    format: password
   Subnet:
     type: object
     properties:

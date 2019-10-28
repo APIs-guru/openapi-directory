@@ -1523,6 +1523,7 @@ paths:
                 description: The architecture of the cores which are the targets of an update.
                 type: string
                 enum:
+                  - armv6l
                   - armv7l
                   - x86_64
                   - aarch64
@@ -4694,6 +4695,7 @@ definitions:
   UpdateTargetsArchitecture:
     type: string
     enum:
+      - armv6l
       - armv7l
       - x86_64
       - aarch64

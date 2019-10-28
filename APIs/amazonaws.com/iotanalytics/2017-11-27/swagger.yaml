@@ -318,15 +318,15 @@ paths:
                 minLength: 1
                 maxLength: 128
               channelStorage:
-                description: Where channel data is stored.
+                description: 'Where channel data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after creation of the channel.'
                 type: object
                 properties:
                   serviceManagedS3:
                     $ref: '#/definitions/ServiceManagedChannelS3Storage'
-                    description: Use this to store channel data in an S3 bucket managed by the AWS IoT Analytics service.
+                    description: Use this to store channel data in an S3 bucket managed by the AWS IoT Analytics service. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the channel.
                   customerManagedS3:
                     $ref: '#/definitions/CustomerManagedChannelS3Storage'
-                    description: Use this to store channel data in an S3 bucket that you manage.
+                    description: 'Use this to store channel data in an S3 bucket that you manage. If customer managed storage is selected, the "retentionPeriod" parameter is ignored. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the channel.'
               retentionPeriod:
                 description: 'How long, in days, message data is kept.'
                 type: object
@@ -712,15 +712,15 @@ paths:
                 minLength: 1
                 maxLength: 128
               datastoreStorage:
-                description: Where data store data is stored.
+                description: 'Where data store data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after the data store is created.'
                 type: object
                 properties:
                   serviceManagedS3:
                     $ref: '#/definitions/ServiceManagedDatastoreS3Storage'
-                    description: Use this to store data store data in an S3 bucket managed by the AWS IoT Analytics service.
+                    description: Use this to store data store data in an S3 bucket managed by the AWS IoT Analytics service. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the data store.
                   customerManagedS3:
                     $ref: '#/definitions/CustomerManagedDatastoreS3Storage'
-                    description: Use this to store data store data in an S3 bucket that you manage.
+                    description: 'Use this to store data store data in an S3 bucket that you manage. When customer managed storage is selected, the "retentionPeriod" parameter is ignored. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the data store.'
               retentionPeriod:
                 description: 'How long, in days, message data is kept.'
                 type: object
@@ -786,7 +786,7 @@ paths:
   /pipelines:
     post:
       operationId: CreatePipeline
-      description: 'Creates a pipeline. A pipeline consumes messages from one or more channels and allows you to process the messages before storing them in a data store. You must specify both a <code>channel</code> and a <code>datastore</code> activity and, optionally, as many as 23 additional activities in the <code>pipelineActivities</code> array.'
+      description: 'Creates a pipeline. A pipeline consumes messages from a channel and allows you to process the messages before storing them in a data store. You must specify both a <code>channel</code> and a <code>datastore</code> activity and, optionally, as many as 23 additional activities in the <code>pipelineActivities</code> array.'
       responses:
         '201':
           description: Success
@@ -975,7 +975,7 @@ paths:
         - name: includeStatistics
           in: query
           required: false
-          description: 'If true, additional statistical information about the channel is included in the response.'
+          description: 'If true, additional statistical information about the channel is included in the response. This feature cannot be used with a channel whose S3 storage is customer-managed.'
           type: boolean
     put:
       operationId: UpdateChannel
@@ -1019,15 +1019,15 @@ paths:
             type: object
             properties:
               channelStorage:
-                description: Where channel data is stored.
+                description: 'Where channel data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after creation of the channel.'
                 type: object
                 properties:
                   serviceManagedS3:
                     $ref: '#/definitions/ServiceManagedChannelS3Storage'
-                    description: Use this to store channel data in an S3 bucket managed by the AWS IoT Analytics service.
+                    description: Use this to store channel data in an S3 bucket managed by the AWS IoT Analytics service. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the channel.
                   customerManagedS3:
                     $ref: '#/definitions/CustomerManagedChannelS3Storage'
-                    description: Use this to store channel data in an S3 bucket that you manage.
+                    description: 'Use this to store channel data in an S3 bucket that you manage. If customer managed storage is selected, the "retentionPeriod" parameter is ignored. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the channel.'
               retentionPeriod:
                 description: 'How long, in days, message data is kept.'
                 type: object
@@ -1287,7 +1287,7 @@ paths:
         - name: includeStatistics
           in: query
           required: false
-          description: 'If true, additional statistical information about the datastore is included in the response.'
+          description: 'If true, additional statistical information about the data store is included in the response. This feature cannot be used with a data store whose S3 storage is customer-managed.'
           type: boolean
     put:
       operationId: UpdateDatastore
@@ -1341,15 +1341,15 @@ paths:
                     $ref: '#/definitions/RetentionPeriodInDays'
                     description: The number of days that message data is kept. The "unlimited" parameter must be false.
               datastoreStorage:
-                description: Where data store data is stored.
+                description: 'Where data store data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after the data store is created.'
                 type: object
                 properties:
                   serviceManagedS3:
                     $ref: '#/definitions/ServiceManagedDatastoreS3Storage'
-                    description: Use this to store data store data in an S3 bucket managed by the AWS IoT Analytics service.
+                    description: Use this to store data store data in an S3 bucket managed by the AWS IoT Analytics service. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the data store.
                   customerManagedS3:
                     $ref: '#/definitions/CustomerManagedDatastoreS3Storage'
-                    description: Use this to store data store data in an S3 bucket that you manage.
+                    description: 'Use this to store data store data in an S3 bucket that you manage. When customer managed storage is selected, the "retentionPeriod" parameter is ignored. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the data store.'
   '/pipelines/{pipelineName}':
     delete:
       operationId: DeletePipeline
@@ -2053,7 +2053,7 @@ definitions:
   ServiceManagedChannelS3Storage:
     type: object
     properties: {}
-    description: Use this to store channel data in an S3 bucket managed by the AWS IoT Analytics service.
+    description: Use this to store channel data in an S3 bucket managed by the AWS IoT Analytics service. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the channel.
   CustomerManagedChannelS3Storage:
     type: object
     required:
@@ -2065,11 +2065,11 @@ definitions:
         description: The name of the Amazon S3 bucket in which channel data is stored.
       keyPrefix:
         $ref: '#/definitions/S3KeyPrefix'
-        description: The prefix used to create the keys of the channel data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key).
+        description: '[Optional] The prefix used to create the keys of the channel data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key). The prefix must end with a ''/''.'
       roleArn:
         $ref: '#/definitions/RoleArn'
         description: The ARN of the role which grants AWS IoT Analytics permission to interact with your Amazon S3 resources.
-    description: Use this to store channel data in an S3 bucket that you manage.
+    description: 'Use this to store channel data in an S3 bucket that you manage. If customer managed storage is selected, the "retentionPeriod" parameter is ignored. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the channel.'
   UnlimitedRetentionPeriod:
     type: boolean
   RetentionPeriodInDays:
@@ -2164,7 +2164,7 @@ definitions:
   ServiceManagedDatastoreS3Storage:
     type: object
     properties: {}
-    description: Use this to store data store data in an S3 bucket managed by the AWS IoT Analytics service.
+    description: Use this to store data store data in an S3 bucket managed by the AWS IoT Analytics service. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the data store.
   CustomerManagedDatastoreS3Storage:
     type: object
     required:
@@ -2176,11 +2176,11 @@ definitions:
         description: The name of the Amazon S3 bucket in which data store data is stored.
       keyPrefix:
         $ref: '#/definitions/S3KeyPrefix'
-        description: The prefix used to create the keys of the data store data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key).
+        description: '[Optional] The prefix used to create the keys of the data store data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key). The prefix must end with a ''/''.'
       roleArn:
         $ref: '#/definitions/RoleArn'
         description: The ARN of the role which grants AWS IoT Analytics permission to interact with your Amazon S3 resources.
-    description: Use this to store data store data in an S3 bucket that you manage.
+    description: 'Use this to store data store data in an S3 bucket that you manage. When customer managed storage is selected, the "retentionPeriod" parameter is ignored. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the data store.'
   CreatePipelineResponse:
     type: object
     properties:
@@ -2642,11 +2642,11 @@ definitions:
     properties:
       serviceManagedS3:
         $ref: '#/definitions/ServiceManagedChannelS3Storage'
-        description: Use this to store channel data in an S3 bucket managed by the AWS IoT Analytics service.
+        description: Use this to store channel data in an S3 bucket managed by the AWS IoT Analytics service. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the channel.
       customerManagedS3:
         $ref: '#/definitions/CustomerManagedChannelS3Storage'
-        description: Use this to store channel data in an S3 bucket that you manage.
-    description: Where channel data is stored.
+        description: 'Use this to store channel data in an S3 bucket that you manage. If customer managed storage is selected, the "retentionPeriod" parameter is ignored. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the channel.'
+    description: 'Where channel data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after creation of the channel.'
   ChannelArn:
     type: string
   ChannelStatus:
@@ -2676,7 +2676,7 @@ definitions:
         description: The name of the channel.
       storage:
         $ref: '#/definitions/ChannelStorage'
-        description: Where channel data is stored.
+        description: 'Where channel data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after creation of the channel.'
       arn:
         $ref: '#/definitions/ChannelArn'
         description: The ARN of the channel.
@@ -2722,7 +2722,7 @@ definitions:
         description: The name of the Amazon S3 bucket in which channel data is stored.
       keyPrefix:
         $ref: '#/definitions/S3KeyPrefix'
-        description: The prefix used to create the keys of the channel data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key).
+        description: '[Optional] The prefix used to create the keys of the channel data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key). The prefix must end with a ''/''.'
       roleArn:
         $ref: '#/definitions/RoleArn'
         description: The ARN of the role which grants AWS IoT Analytics permission to interact with your Amazon S3 resources.
@@ -2823,10 +2823,10 @@ definitions:
         description: The name of the channel.
       channelStorage:
         $ref: '#/definitions/ChannelStorage'
-        description: Where channel data is stored.
+        description: 'Where channel data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after creation of the channel.'
       retentionPeriod:
         $ref: '#/definitions/RetentionPeriod'
-        description: 'How long, in days, message data is kept for the channel.'
+        description: 'How long, in days, message data is kept for the channel. When "customerManagedS3" storage is selected, this parameter is ignored.'
       tags:
         $ref: '#/definitions/TagList'
         description: Metadata which can be used to manage the channel.
@@ -2909,11 +2909,11 @@ definitions:
     properties:
       serviceManagedS3:
         $ref: '#/definitions/ServiceManagedDatastoreS3Storage'
-        description: Use this to store data store data in an S3 bucket managed by the AWS IoT Analytics service.
+        description: Use this to store data store data in an S3 bucket managed by the AWS IoT Analytics service. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the data store.
       customerManagedS3:
         $ref: '#/definitions/CustomerManagedDatastoreS3Storage'
-        description: Use this to store data store data in an S3 bucket that you manage.
-    description: Where data store data is stored.
+        description: 'Use this to store data store data in an S3 bucket that you manage. When customer managed storage is selected, the "retentionPeriod" parameter is ignored. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the data store.'
+    description: 'Where data store data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after the data store is created.'
   CreateDatastoreRequest:
     type: object
     required:
@@ -2924,10 +2924,10 @@ definitions:
         description: The name of the data store.
       datastoreStorage:
         $ref: '#/definitions/DatastoreStorage'
-        description: Where data store data is stored.
+        description: 'Where data store data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after the data store is created.'
       retentionPeriod:
         $ref: '#/definitions/RetentionPeriod'
-        description: 'How long, in days, message data is kept for the data store.'
+        description: 'How long, in days, message data is kept for the data store. When "customerManagedS3" storage is selected, this parameter is ignored.'
       tags:
         $ref: '#/definitions/TagList'
         description: Metadata which can be used to manage the data store.
@@ -2969,7 +2969,7 @@ definitions:
         description: The name of the Amazon S3 bucket in which data store data is stored.
       keyPrefix:
         $ref: '#/definitions/S3KeyPrefix'
-        description: The prefix used to create the keys of the data store data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key).
+        description: '[Optional] The prefix used to create the keys of the data store data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key). The prefix must end with a ''/''.'
       roleArn:
         $ref: '#/definitions/RoleArn'
         description: The ARN of the role which grants AWS IoT Analytics permission to interact with your Amazon S3 resources.
@@ -3077,7 +3077,7 @@ definitions:
         description: The name of the Amazon S3 bucket to which data set contents are delivered.
       key:
         $ref: '#/definitions/BucketKeyExpression'
-        description: The key of the data set contents object. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key).
+        description: 'The key of the data set contents object. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key). To produce a unique key, you can use "!{iotanalytics:scheduledTime}" to insert the time of the scheduled SQL query run, or "!{iotanalytics:versioned} to insert a unique hash identifying the data set, for example: "/DataSet/!{iotanalytics:scheduledTime}/!{iotanalytics:versioned}.csv".'
       glueConfiguration:
         $ref: '#/definitions/GlueConfiguration'
         description: 'Configuration information for coordination with the AWS Glue ETL (extract, transform and load) service.'
@@ -3130,6 +3130,9 @@ definitions:
       scheduleTime:
         $ref: '#/definitions/Timestamp'
         description: The time the creation of the data set contents was scheduled to start.
+      completionTime:
+        $ref: '#/definitions/Timestamp'
+        description: The time the dataset content status was updated to SUCCEEDED or FAILED.
     description: Summary information about data set contents.
   DatasetContentSummaries:
     type: array
@@ -3216,7 +3219,7 @@ definitions:
         description: The name of the data store.
       storage:
         $ref: '#/definitions/DatastoreStorage'
-        description: Where data store data is stored.
+        description: 'Where data store data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after the data store is created.'
       arn:
         $ref: '#/definitions/DatastoreArn'
         description: The ARN of the data store.
@@ -3225,7 +3228,7 @@ definitions:
         description: '<p>The status of a data store:</p> <dl> <dt>CREATING</dt> <dd> <p>The data store is being created.</p> </dd> <dt>ACTIVE</dt> <dd> <p>The data store has been created and can be used.</p> </dd> <dt>DELETING</dt> <dd> <p>The data store is being deleted.</p> </dd> </dl>'
       retentionPeriod:
         $ref: '#/definitions/RetentionPeriod'
-        description: 'How long, in days, message data is kept for the data store.'
+        description: 'How long, in days, message data is kept for the data store. When "customerManagedS3" storage is selected, this parameter is ignored.'
       creationTime:
         $ref: '#/definitions/Timestamp'
         description: When the data store was created.
@@ -3600,10 +3603,10 @@ definitions:
     properties:
       channelStorage:
         $ref: '#/definitions/ChannelStorage'
-        description: Where channel data is stored.
+        description: 'Where channel data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after creation of the channel.'
       retentionPeriod:
         $ref: '#/definitions/RetentionPeriod'
-        description: 'How long, in days, message data is kept for the channel.'
+        description: 'How long, in days, message data is kept for the channel. The retention period cannot be updated if the channel''s S3 storage is customer-managed.'
   UpdateDatasetRequest:
     type: object
     required:
@@ -3629,10 +3632,10 @@ definitions:
     properties:
       retentionPeriod:
         $ref: '#/definitions/RetentionPeriod'
-        description: 'How long, in days, message data is kept for the data store.'
+        description: 'How long, in days, message data is kept for the data store. The retention period cannot be updated if the data store''s S3 storage is customer-managed.'
       datastoreStorage:
         $ref: '#/definitions/DatastoreStorage'
-        description: Where data store data is stored.
+        description: 'Where data store data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after the data store is created.'
   UpdatePipelineRequest:
     type: object
     required:
