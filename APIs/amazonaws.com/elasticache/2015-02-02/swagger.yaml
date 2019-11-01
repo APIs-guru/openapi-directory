@@ -606,6 +606,103 @@ paths:
           type: string
           enum:
             - '2015-02-02'
+  '/#Action=CompleteMigration':
+    get:
+      x-aws-operation-name: CompleteMigration
+      operationId: GET CompleteMigration
+      description: Complete the migration of data.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CompleteMigrationResponse'
+        '480':
+          description: ReplicationGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/ReplicationGroupNotFoundFault'
+        '481':
+          description: InvalidReplicationGroupStateFault
+          schema:
+            $ref: '#/definitions/InvalidReplicationGroupStateFault'
+        '482':
+          description: ReplicationGroupNotUnderMigrationFault
+          schema:
+            $ref: '#/definitions/ReplicationGroupNotUnderMigrationFault'
+      parameters:
+        - name: ReplicationGroupId
+          in: query
+          required: true
+          description: The ID of the replication group to which data is being migrated.
+          type: string
+        - name: Force
+          in: query
+          required: false
+          description: Forces the migration to stop without ensuring that data is in sync. It is recommended to use this option only to abort the migration and not recommended when application wants to continue migration to ElastiCache.
+          type: boolean
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - CompleteMigration
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2015-02-02'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: CompleteMigration
+      operationId: POST CompleteMigration
+      description: Complete the migration of data.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CompleteMigrationResponse'
+        '480':
+          description: ReplicationGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/ReplicationGroupNotFoundFault'
+        '481':
+          description: InvalidReplicationGroupStateFault
+          schema:
+            $ref: '#/definitions/InvalidReplicationGroupStateFault'
+        '482':
+          description: ReplicationGroupNotUnderMigrationFault
+          schema:
+            $ref: '#/definitions/ReplicationGroupNotUnderMigrationFault'
+      parameters:
+        - name: ReplicationGroupId
+          in: formData
+          required: true
+          description: The ID of the replication group to which data is being migrated.
+          type: string
+        - name: Force
+          in: formData
+          required: false
+          description: Forces the migration to stop without ensuring that data is in sync. It is recommended to use this option only to abort the migration and not recommended when application wants to continue migration to ElastiCache.
+          type: boolean
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - CompleteMigration
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2015-02-02'
   '/#Action=CopySnapshot':
     get:
       x-aws-operation-name: CopySnapshot
@@ -940,7 +1037,7 @@ paths:
         - name: AuthToken
           in: query
           required: false
-          description: '<p> <b>Reserved parameter.</b> The password used to access a password protected server.</p> <p>Password constraints:</p> <ul> <li> <p>Must be only printable ASCII characters.</p> </li> <li> <p>Must be at least 16 characters and no more than 128 characters in length.</p> </li> <li> <p>Cannot contain any of the following characters: ''/'', ''"'', or ''@''. </p> </li> </ul> <p>For more information, see <a href="http://redis.io/commands/AUTH">AUTH password</a> at http://redis.io/commands/AUTH.</p>'
+          description: '<p> <b>Reserved parameter.</b> The password used to access a password protected server.</p> <p>Password constraints:</p> <ul> <li> <p>Must be only printable ASCII characters.</p> </li> <li> <p>Must be at least 16 characters and no more than 128 characters in length.</p> </li> <li> <p>The only permitted printable special characters are !, &amp;, #, $, ^, &lt;, &gt;, and -. Other printable special characters cannot be used in the AUTH token.</p> </li> </ul> <p>For more information, see <a href="http://redis.io/commands/AUTH">AUTH password</a> at http://redis.io/commands/AUTH.</p>'
           type: string
         - name: Action
           in: query
@@ -1154,7 +1251,7 @@ paths:
         - name: AuthToken
           in: formData
           required: false
-          description: '<p> <b>Reserved parameter.</b> The password used to access a password protected server.</p> <p>Password constraints:</p> <ul> <li> <p>Must be only printable ASCII characters.</p> </li> <li> <p>Must be at least 16 characters and no more than 128 characters in length.</p> </li> <li> <p>Cannot contain any of the following characters: ''/'', ''"'', or ''@''. </p> </li> </ul> <p>For more information, see <a href="http://redis.io/commands/AUTH">AUTH password</a> at http://redis.io/commands/AUTH.</p>'
+          description: '<p> <b>Reserved parameter.</b> The password used to access a password protected server.</p> <p>Password constraints:</p> <ul> <li> <p>Must be only printable ASCII characters.</p> </li> <li> <p>Must be at least 16 characters and no more than 128 characters in length.</p> </li> <li> <p>The only permitted printable special characters are !, &amp;, #, $, ^, &lt;, &gt;, and -. Other printable special characters cannot be used in the AUTH token.</p> </li> </ul> <p>For more information, see <a href="http://redis.io/commands/AUTH">AUTH password</a> at http://redis.io/commands/AUTH.</p>'
           type: string
         - name: Action
           in: query
@@ -1726,7 +1823,7 @@ paths:
         - name: AuthToken
           in: query
           required: false
-          description: '<p> <b>Reserved parameter.</b> The password used to access a password protected server.</p> <p> <code>AuthToken</code> can be specified only on replication groups where <code>TransitEncryptionEnabled</code> is <code>true</code>.</p> <important> <p>For HIPAA compliance, you must specify <code>TransitEncryptionEnabled</code> as <code>true</code>, an <code>AuthToken</code>, and a <code>CacheSubnetGroup</code>.</p> </important> <p>Password constraints:</p> <ul> <li> <p>Must be only printable ASCII characters.</p> </li> <li> <p>Must be at least 16 characters and no more than 128 characters in length.</p> </li> <li> <p>Cannot contain any of the following characters: ''/'', ''"'', or ''@''. </p> </li> </ul> <p>For more information, see <a href="http://redis.io/commands/AUTH">AUTH password</a> at http://redis.io/commands/AUTH.</p>'
+          description: '<p> <b>Reserved parameter.</b> The password used to access a password protected server.</p> <p> <code>AuthToken</code> can be specified only on replication groups where <code>TransitEncryptionEnabled</code> is <code>true</code>.</p> <important> <p>For HIPAA compliance, you must specify <code>TransitEncryptionEnabled</code> as <code>true</code>, an <code>AuthToken</code>, and a <code>CacheSubnetGroup</code>.</p> </important> <p>Password constraints:</p> <ul> <li> <p>Must be only printable ASCII characters.</p> </li> <li> <p>Must be at least 16 characters and no more than 128 characters in length.</p> </li> <li> <p>The only permitted printable special characters are !, &amp;, #, $, ^, &lt;, &gt;, and -. Other printable special characters cannot be used in the AUTH token.</p> </li> </ul> <p>For more information, see <a href="http://redis.io/commands/AUTH">AUTH password</a> at http://redis.io/commands/AUTH.</p>'
           type: string
         - name: TransitEncryptionEnabled
           in: query
@@ -1973,7 +2070,7 @@ paths:
         - name: AuthToken
           in: formData
           required: false
-          description: '<p> <b>Reserved parameter.</b> The password used to access a password protected server.</p> <p> <code>AuthToken</code> can be specified only on replication groups where <code>TransitEncryptionEnabled</code> is <code>true</code>.</p> <important> <p>For HIPAA compliance, you must specify <code>TransitEncryptionEnabled</code> as <code>true</code>, an <code>AuthToken</code>, and a <code>CacheSubnetGroup</code>.</p> </important> <p>Password constraints:</p> <ul> <li> <p>Must be only printable ASCII characters.</p> </li> <li> <p>Must be at least 16 characters and no more than 128 characters in length.</p> </li> <li> <p>Cannot contain any of the following characters: ''/'', ''"'', or ''@''. </p> </li> </ul> <p>For more information, see <a href="http://redis.io/commands/AUTH">AUTH password</a> at http://redis.io/commands/AUTH.</p>'
+          description: '<p> <b>Reserved parameter.</b> The password used to access a password protected server.</p> <p> <code>AuthToken</code> can be specified only on replication groups where <code>TransitEncryptionEnabled</code> is <code>true</code>.</p> <important> <p>For HIPAA compliance, you must specify <code>TransitEncryptionEnabled</code> as <code>true</code>, an <code>AuthToken</code>, and a <code>CacheSubnetGroup</code>.</p> </important> <p>Password constraints:</p> <ul> <li> <p>Must be only printable ASCII characters.</p> </li> <li> <p>Must be at least 16 characters and no more than 128 characters in length.</p> </li> <li> <p>The only permitted printable special characters are !, &amp;, #, $, ^, &lt;, &gt;, and -. Other printable special characters cannot be used in the AUTH token.</p> </li> </ul> <p>For more information, see <a href="http://redis.io/commands/AUTH">AUTH password</a> at http://redis.io/commands/AUTH.</p>'
           type: string
         - name: TransitEncryptionEnabled
           in: formData
@@ -5256,7 +5353,7 @@ paths:
         - name: AZMode
           in: query
           required: false
-          description: '<p>Specifies whether the new nodes in this Memcached cluster are all created in a single Availability Zone or created across multiple Availability Zones.</p> <p>Valid values: <code>single-az</code> | <code>cross-az</code>.</p> <p>This option is only supported for Memcached clusters.</p> <note> <p>You cannot specify <code>single-az</code> if the Memcached cluster already has cache nodes in different Availability Zones. If <code>cross-az</code> is specified, existing Memcached nodes remain in their current Availability Zone.</p> <p>Only newly created nodes are located in different Availability Zones. For instructions on how to move existing Memcached nodes to different Availability Zones, see the <b>Availability Zone Considerations</b> section of <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/CacheNodes.SupportedTypes.html">Cache Node Considerations for Memcached</a>.</p> </note>'
+          description: '<p>Specifies whether the new nodes in this Memcached cluster are all created in a single Availability Zone or created across multiple Availability Zones.</p> <p>Valid values: <code>single-az</code> | <code>cross-az</code>.</p> <p>This option is only supported for Memcached clusters.</p> <note> <p>You cannot specify <code>single-az</code> if the Memcached cluster already has cache nodes in different Availability Zones. If <code>cross-az</code> is specified, existing Memcached nodes remain in their current Availability Zone.</p> <p>Only newly created nodes are located in different Availability Zones. </p> </note>'
           type: string
           enum:
             - single-az
@@ -5332,6 +5429,19 @@ paths:
           required: false
           description: A valid cache node type that you want to scale this cluster up to.
           type: string
+        - name: AuthToken
+          in: query
+          required: false
+          description: '<p>Reserved parameter. The password used to access a password protected server. This parameter must be specified with the <code>auth-token-update</code> parameter. Password constraints:</p> <ul> <li> <p>Must be only printable ASCII characters</p> </li> <li> <p>Must be at least 16 characters and no more than 128 characters in length</p> </li> <li> <p>Cannot contain any of the following characters: ''/'', ''"'', or ''@'', ''%''</p> </li> </ul> <p> For more information, see AUTH password at <a href="http://redis.io/commands/AUTH">AUTH</a>.</p>'
+          type: string
+        - name: AuthTokenUpdateStrategy
+          in: query
+          required: false
+          description: '<p>Specifies the strategy to use to update the AUTH token. This parameter must be specified with the <code>auth-token</code> parameter. Possible values:</p> <ul> <li> <p>Rotate</p> </li> <li> <p>Set</p> </li> </ul> <p> For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html">Authenticating Users with Redis AUTH</a> </p>'
+          type: string
+          enum:
+            - SET
+            - ROTATE
         - name: Action
           in: query
           required: true
@@ -5426,7 +5536,7 @@ paths:
         - name: AZMode
           in: formData
           required: false
-          description: '<p>Specifies whether the new nodes in this Memcached cluster are all created in a single Availability Zone or created across multiple Availability Zones.</p> <p>Valid values: <code>single-az</code> | <code>cross-az</code>.</p> <p>This option is only supported for Memcached clusters.</p> <note> <p>You cannot specify <code>single-az</code> if the Memcached cluster already has cache nodes in different Availability Zones. If <code>cross-az</code> is specified, existing Memcached nodes remain in their current Availability Zone.</p> <p>Only newly created nodes are located in different Availability Zones. For instructions on how to move existing Memcached nodes to different Availability Zones, see the <b>Availability Zone Considerations</b> section of <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/CacheNodes.SupportedTypes.html">Cache Node Considerations for Memcached</a>.</p> </note>'
+          description: '<p>Specifies whether the new nodes in this Memcached cluster are all created in a single Availability Zone or created across multiple Availability Zones.</p> <p>Valid values: <code>single-az</code> | <code>cross-az</code>.</p> <p>This option is only supported for Memcached clusters.</p> <note> <p>You cannot specify <code>single-az</code> if the Memcached cluster already has cache nodes in different Availability Zones. If <code>cross-az</code> is specified, existing Memcached nodes remain in their current Availability Zone.</p> <p>Only newly created nodes are located in different Availability Zones. </p> </note>'
           type: string
           enum:
             - single-az
@@ -5502,6 +5612,19 @@ paths:
           required: false
           description: A valid cache node type that you want to scale this cluster up to.
           type: string
+        - name: AuthToken
+          in: formData
+          required: false
+          description: '<p>Reserved parameter. The password used to access a password protected server. This parameter must be specified with the <code>auth-token-update</code> parameter. Password constraints:</p> <ul> <li> <p>Must be only printable ASCII characters</p> </li> <li> <p>Must be at least 16 characters and no more than 128 characters in length</p> </li> <li> <p>Cannot contain any of the following characters: ''/'', ''"'', or ''@'', ''%''</p> </li> </ul> <p> For more information, see AUTH password at <a href="http://redis.io/commands/AUTH">AUTH</a>.</p>'
+          type: string
+        - name: AuthTokenUpdateStrategy
+          in: formData
+          required: false
+          description: '<p>Specifies the strategy to use to update the AUTH token. This parameter must be specified with the <code>auth-token</code> parameter. Possible values:</p> <ul> <li> <p>Rotate</p> </li> <li> <p>Set</p> </li> </ul> <p> For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html">Authenticating Users with Redis AUTH</a> </p>'
+          type: string
+          enum:
+            - SET
+            - ROTATE
         - name: Action
           in: query
           required: true
@@ -5834,6 +5957,11 @@ paths:
           required: false
           description: '<p>Determines whether a read replica is automatically promoted to read/write primary if the existing primary encounters a failure.</p> <p>Valid values: <code>true</code> | <code>false</code> </p> <p>Amazon ElastiCache for Redis does not support Multi-AZ with automatic failover on:</p> <ul> <li> <p>Redis versions earlier than 2.8.6.</p> </li> <li> <p>Redis (cluster mode disabled): T1 node types.</p> </li> <li> <p>Redis (cluster mode enabled): T1 node types.</p> </li> </ul>'
           type: boolean
+        - name: NodeGroupId
+          in: query
+          required: false
+          description: Deprecated. This parameter is not used.
+          type: string
         - name: CacheSecurityGroupNames
           in: query
           required: false
@@ -5898,11 +6026,19 @@ paths:
           required: false
           description: A valid cache node type that you want to scale this replication group to.
           type: string
-        - name: NodeGroupId
+        - name: AuthToken
           in: query
           required: false
-          description: Deprecated. This parameter is not used.
+          description: '<p>Reserved parameter. The password used to access a password protected server. This parameter must be specified with the <code>auth-token-update-strategy </code> parameter. Password constraints:</p> <ul> <li> <p>Must be only printable ASCII characters</p> </li> <li> <p>Must be at least 16 characters and no more than 128 characters in length</p> </li> <li> <p>Cannot contain any of the following characters: ''/'', ''"'', or ''@'', ''%''</p> </li> </ul> <p> For more information, see AUTH password at <a href="http://redis.io/commands/AUTH">AUTH</a>.</p>'
           type: string
+        - name: AuthTokenUpdateStrategy
+          in: query
+          required: false
+          description: '<p>Specifies the strategy to use to update the AUTH token. This parameter must be specified with the <code>auth-token</code> parameter. Possible values:</p> <ul> <li> <p>Rotate</p> </li> <li> <p>Set</p> </li> </ul> <p> For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html">Authenticating Users with Redis AUTH</a> </p>'
+          type: string
+          enum:
+            - SET
+            - ROTATE
         - name: Action
           in: query
           required: true
@@ -6014,6 +6150,11 @@ paths:
           required: false
           description: '<p>Determines whether a read replica is automatically promoted to read/write primary if the existing primary encounters a failure.</p> <p>Valid values: <code>true</code> | <code>false</code> </p> <p>Amazon ElastiCache for Redis does not support Multi-AZ with automatic failover on:</p> <ul> <li> <p>Redis versions earlier than 2.8.6.</p> </li> <li> <p>Redis (cluster mode disabled): T1 node types.</p> </li> <li> <p>Redis (cluster mode enabled): T1 node types.</p> </li> </ul>'
           type: boolean
+        - name: NodeGroupId
+          in: formData
+          required: false
+          description: Deprecated. This parameter is not used.
+          type: string
         - name: CacheSecurityGroupNames
           in: formData
           required: false
@@ -6078,11 +6219,19 @@ paths:
           required: false
           description: A valid cache node type that you want to scale this replication group to.
           type: string
-        - name: NodeGroupId
+        - name: AuthToken
           in: formData
           required: false
-          description: Deprecated. This parameter is not used.
+          description: '<p>Reserved parameter. The password used to access a password protected server. This parameter must be specified with the <code>auth-token-update-strategy </code> parameter. Password constraints:</p> <ul> <li> <p>Must be only printable ASCII characters</p> </li> <li> <p>Must be at least 16 characters and no more than 128 characters in length</p> </li> <li> <p>Cannot contain any of the following characters: ''/'', ''"'', or ''@'', ''%''</p> </li> </ul> <p> For more information, see AUTH password at <a href="http://redis.io/commands/AUTH">AUTH</a>.</p>'
           type: string
+        - name: AuthTokenUpdateStrategy
+          in: formData
+          required: false
+          description: '<p>Specifies the strategy to use to update the AUTH token. This parameter must be specified with the <code>auth-token</code> parameter. Possible values:</p> <ul> <li> <p>Rotate</p> </li> <li> <p>Set</p> </li> </ul> <p> For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html">Authenticating Users with Redis AUTH</a> </p>'
+          type: string
+          enum:
+            - SET
+            - ROTATE
         - name: Action
           in: query
           required: true
@@ -6867,6 +7016,115 @@ paths:
           type: string
           enum:
             - '2015-02-02'
+  '/#Action=StartMigration':
+    get:
+      x-aws-operation-name: StartMigration
+      operationId: GET StartMigration
+      description: Start the migration of data.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartMigrationResponse'
+        '480':
+          description: ReplicationGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/ReplicationGroupNotFoundFault'
+        '481':
+          description: InvalidReplicationGroupStateFault
+          schema:
+            $ref: '#/definitions/InvalidReplicationGroupStateFault'
+        '482':
+          description: ReplicationGroupAlreadyUnderMigrationFault
+          schema:
+            $ref: '#/definitions/ReplicationGroupAlreadyUnderMigrationFault'
+        '483':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+      parameters:
+        - name: ReplicationGroupId
+          in: query
+          required: true
+          description: The ID of the replication group to which data should be migrated.
+          type: string
+        - name: CustomerNodeEndpointList
+          in: query
+          required: true
+          description: 'List of endpoints from which data should be migrated. For Redis (cluster mode disabled), list should have only one element.'
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - StartMigration
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2015-02-02'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: StartMigration
+      operationId: POST StartMigration
+      description: Start the migration of data.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartMigrationResponse'
+        '480':
+          description: ReplicationGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/ReplicationGroupNotFoundFault'
+        '481':
+          description: InvalidReplicationGroupStateFault
+          schema:
+            $ref: '#/definitions/InvalidReplicationGroupStateFault'
+        '482':
+          description: ReplicationGroupAlreadyUnderMigrationFault
+          schema:
+            $ref: '#/definitions/ReplicationGroupAlreadyUnderMigrationFault'
+        '483':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+      parameters:
+        - name: ReplicationGroupId
+          in: formData
+          required: true
+          description: The ID of the replication group to which data should be migrated.
+          type: string
+        - name: CustomerNodeEndpointList
+          in: formData
+          required: true
+          description: 'List of endpoints from which data should be migrated. For Redis (cluster mode disabled), list should have only one element.'
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - StartMigration
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2015-02-02'
   '/#Action=TestFailover':
     get:
       x-aws-operation-name: TestFailover
@@ -7062,6 +7320,14 @@ definitions:
   String:
     type: string
   ServiceUpdateNotFoundFault: {}
+  CompleteMigrationResponse:
+    type: object
+    properties:
+      ReplicationGroup:
+        $ref: '#/definitions/ReplicationGroup'
+  ReplicationGroupNotFoundFault: {}
+  InvalidReplicationGroupStateFault: {}
+  ReplicationGroupNotUnderMigrationFault: {}
   CopySnapshotResult:
     type: object
     properties:
@@ -7075,8 +7341,6 @@ definitions:
     properties:
       CacheCluster:
         $ref: '#/definitions/CacheCluster'
-  ReplicationGroupNotFoundFault: {}
-  InvalidReplicationGroupStateFault: {}
   CacheClusterAlreadyExistsFault: {}
   InsufficientCacheClusterCapacityFault: {}
   CacheSubnetGroupNotFoundFault: {}
@@ -7425,6 +7689,22 @@ definitions:
       CacheSecurityGroup:
         $ref: '#/definitions/CacheSecurityGroup'
   AuthorizationNotFoundFault: {}
+  StartMigrationResponse:
+    type: object
+    properties:
+      ReplicationGroup:
+        $ref: '#/definitions/ReplicationGroup'
+  CustomerNodeEndpoint:
+    type: object
+    properties:
+      Address:
+        $ref: '#/definitions/String'
+        description: The address of the node endpoint
+      Port:
+        $ref: '#/definitions/IntegerOptional'
+        description: The port of the node endpoint
+    description: The endpoint from which data should be migrated.
+  ReplicationGroupAlreadyUnderMigrationFault: {}
   TestFailoverResult:
     type: object
     properties:
@@ -7459,6 +7739,16 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/String'
+  AuthTokenUpdateStatus:
+    type: string
+    enum:
+      - SETTING
+      - ROTATING
+  AuthTokenUpdateStrategyType:
+    type: string
+    enum:
+      - SET
+      - ROTATE
   AuthorizeCacheSecurityGroupIngressMessage:
     type: object
     required:
@@ -7579,6 +7869,9 @@ definitions:
       CacheNodeType:
         $ref: '#/definitions/String'
         description: The cache node type that this cluster or replication group is scaled to.
+      AuthTokenStatus:
+        $ref: '#/definitions/AuthTokenUpdateStatus'
+        description: The auth token status
     description: 'A group of settings that are applied to the cluster in the future, or that are currently being applied.'
   NotificationConfiguration:
     type: object
@@ -7686,6 +7979,9 @@ definitions:
       AuthTokenEnabled:
         $ref: '#/definitions/BooleanOptional'
         description: '<p>A flag that enables using an <code>AuthToken</code> (password) when issuing Redis commands.</p> <p>Default: <code>false</code> </p>'
+      AuthTokenLastModifiedDate:
+        $ref: '#/definitions/TStamp'
+        description: The date the auth token was last modified
       TransitEncryptionEnabled:
         $ref: '#/definitions/BooleanOptional'
         description: '<p>A flag that enables in-transit encryption when set to <code>true</code>.</p> <p>You cannot modify the value of <code>TransitEncryptionEnabled</code> after the cluster is created. To enable in-transit encryption on a cluster you must set <code>TransitEncryptionEnabled</code> to <code>true</code> when you create a cluster.</p> <p> <b>Required:</b> Only available when creating a replication group in an Amazon VPC using redis version <code>3.2.6</code>, <code>4.x</code> or later.</p> <p>Default: <code>false</code> </p>'
@@ -7920,6 +8216,75 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/String'
+  CompleteMigrationMessage:
+    type: object
+    required:
+      - ReplicationGroupId
+    properties:
+      ReplicationGroupId:
+        $ref: '#/definitions/String'
+        description: The ID of the replication group to which data is being migrated.
+      Force:
+        $ref: '#/definitions/Boolean'
+        description: Forces the migration to stop without ensuring that data is in sync. It is recommended to use this option only to abort the migration and not recommended when application wants to continue migration to ElastiCache.
+  ReplicationGroup:
+    type: object
+    properties:
+      ReplicationGroupId:
+        $ref: '#/definitions/String'
+        description: The identifier for the replication group.
+      Description:
+        $ref: '#/definitions/String'
+        description: The user supplied description of the replication group.
+      Status:
+        $ref: '#/definitions/String'
+        description: 'The current state of this replication group - <code>creating</code>, <code>available</code>, <code>modifying</code>, <code>deleting</code>, <code>create-failed</code>, <code>snapshotting</code>.'
+      PendingModifiedValues:
+        $ref: '#/definitions/ReplicationGroupPendingModifiedValues'
+        description: 'A group of settings to be applied to the replication group, either immediately or during the next maintenance window.'
+      MemberClusters:
+        $ref: '#/definitions/ClusterIdList'
+        description: The names of all the cache clusters that are part of this replication group.
+      NodeGroups:
+        $ref: '#/definitions/NodeGroupList'
+        description: 'A list of node groups in this replication group. For Redis (cluster mode disabled) replication groups, this is a single-element list. For Redis (cluster mode enabled) replication groups, the list contains an entry for each node group (shard).'
+      SnapshottingClusterId:
+        $ref: '#/definitions/String'
+        description: The cluster ID that is used as the daily snapshot source for the replication group.
+      AutomaticFailover:
+        $ref: '#/definitions/AutomaticFailoverStatus'
+        description: '<p>Indicates the status of Multi-AZ with automatic failover for this Redis replication group.</p> <p>Amazon ElastiCache for Redis does not support Multi-AZ with automatic failover on:</p> <ul> <li> <p>Redis versions earlier than 2.8.6.</p> </li> <li> <p>Redis (cluster mode disabled): T1 node types.</p> </li> <li> <p>Redis (cluster mode enabled): T1 node types.</p> </li> </ul>'
+      ConfigurationEndpoint:
+        $ref: '#/definitions/Endpoint'
+        description: The configuration endpoint for this replication group. Use the configuration endpoint to connect to this replication group.
+      SnapshotRetentionLimit:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p>The number of days for which ElastiCache retains automatic cluster snapshots before deleting them. For example, if you set <code>SnapshotRetentionLimit</code> to 5, a snapshot that was taken today is retained for 5 days before being deleted.</p> <important> <p> If the value of <code>SnapshotRetentionLimit</code> is set to zero (0), backups are turned off.</p> </important>'
+      SnapshotWindow:
+        $ref: '#/definitions/String'
+        description: '<p>The daily time range (in UTC) during which ElastiCache begins taking a daily snapshot of your node group (shard).</p> <p>Example: <code>05:00-09:00</code> </p> <p>If you do not specify this parameter, ElastiCache automatically chooses an appropriate time range.</p> <note> <p>This parameter is only valid if the <code>Engine</code> parameter is <code>redis</code>.</p> </note>'
+      ClusterEnabled:
+        $ref: '#/definitions/BooleanOptional'
+        description: '<p>A flag indicating whether or not this replication group is cluster enabled; i.e., whether its data can be partitioned across multiple shards (API/CLI: node groups).</p> <p>Valid values: <code>true</code> | <code>false</code> </p>'
+      CacheNodeType:
+        $ref: '#/definitions/String'
+        description: The name of the compute and memory capacity node type for each node in the replication group.
+      AuthTokenEnabled:
+        $ref: '#/definitions/BooleanOptional'
+        description: '<p>A flag that enables using an <code>AuthToken</code> (password) when issuing Redis commands.</p> <p>Default: <code>false</code> </p>'
+      AuthTokenLastModifiedDate:
+        $ref: '#/definitions/TStamp'
+        description: The date the auth token was last modified
+      TransitEncryptionEnabled:
+        $ref: '#/definitions/BooleanOptional'
+        description: '<p>A flag that enables in-transit encryption when set to <code>true</code>.</p> <p>You cannot modify the value of <code>TransitEncryptionEnabled</code> after the cluster is created. To enable in-transit encryption on a cluster you must set <code>TransitEncryptionEnabled</code> to <code>true</code> when you create a cluster.</p> <p> <b>Required:</b> Only available when creating a replication group in an Amazon VPC using redis version <code>3.2.6</code>, <code>4.x</code> or later.</p> <p>Default: <code>false</code> </p>'
+      AtRestEncryptionEnabled:
+        $ref: '#/definitions/BooleanOptional'
+        description: '<p>A flag that enables encryption at-rest when set to <code>true</code>.</p> <p>You cannot modify the value of <code>AtRestEncryptionEnabled</code> after the cluster is created. To enable encryption at-rest on a cluster you must set <code>AtRestEncryptionEnabled</code> to <code>true</code> when you create a cluster.</p> <p> <b>Required:</b> Only available when creating a replication group in an Amazon VPC using redis version <code>3.2.6</code>, <code>4.x</code> or later.</p> <p>Default: <code>false</code> </p>'
+      KmsKeyId:
+        $ref: '#/definitions/String'
+        description: The ID of the KMS key used to encrypt the disk in the cluster.
+    description: Contains all of the attributes of a specific Redis replication group.
   Integer:
     type: integer
   PreferredAvailabilityZoneList:
@@ -8105,7 +8470,7 @@ definitions:
         description: '<p>The daily time range (in UTC) during which ElastiCache begins taking a daily snapshot of your node group (shard).</p> <p>Example: <code>05:00-09:00</code> </p> <p>If you do not specify this parameter, ElastiCache automatically chooses an appropriate time range.</p> <note> <p>This parameter is only valid if the <code>Engine</code> parameter is <code>redis</code>.</p> </note>'
       AuthToken:
         $ref: '#/definitions/String'
-        description: '<p> <b>Reserved parameter.</b> The password used to access a password protected server.</p> <p>Password constraints:</p> <ul> <li> <p>Must be only printable ASCII characters.</p> </li> <li> <p>Must be at least 16 characters and no more than 128 characters in length.</p> </li> <li> <p>Cannot contain any of the following characters: ''/'', ''"'', or ''@''. </p> </li> </ul> <p>For more information, see <a href="http://redis.io/commands/AUTH">AUTH password</a> at http://redis.io/commands/AUTH.</p>'
+        description: '<p> <b>Reserved parameter.</b> The password used to access a password protected server.</p> <p>Password constraints:</p> <ul> <li> <p>Must be only printable ASCII characters.</p> </li> <li> <p>Must be at least 16 characters and no more than 128 characters in length.</p> </li> <li> <p>The only permitted printable special characters are !, &amp;, #, $, ^, &lt;, &gt;, and -. Other printable special characters cannot be used in the AUTH token.</p> </li> </ul> <p>For more information, see <a href="http://redis.io/commands/AUTH">AUTH password</a> at http://redis.io/commands/AUTH.</p>'
     description: Represents the input of a CreateCacheCluster operation.
   CreateCacheParameterGroupMessage:
     type: object
@@ -8245,7 +8610,7 @@ definitions:
         description: '<p>The daily time range (in UTC) during which ElastiCache begins taking a daily snapshot of your node group (shard).</p> <p>Example: <code>05:00-09:00</code> </p> <p>If you do not specify this parameter, ElastiCache automatically chooses an appropriate time range.</p>'
       AuthToken:
         $ref: '#/definitions/String'
-        description: '<p> <b>Reserved parameter.</b> The password used to access a password protected server.</p> <p> <code>AuthToken</code> can be specified only on replication groups where <code>TransitEncryptionEnabled</code> is <code>true</code>.</p> <important> <p>For HIPAA compliance, you must specify <code>TransitEncryptionEnabled</code> as <code>true</code>, an <code>AuthToken</code>, and a <code>CacheSubnetGroup</code>.</p> </important> <p>Password constraints:</p> <ul> <li> <p>Must be only printable ASCII characters.</p> </li> <li> <p>Must be at least 16 characters and no more than 128 characters in length.</p> </li> <li> <p>Cannot contain any of the following characters: ''/'', ''"'', or ''@''. </p> </li> </ul> <p>For more information, see <a href="http://redis.io/commands/AUTH">AUTH password</a> at http://redis.io/commands/AUTH.</p>'
+        description: '<p> <b>Reserved parameter.</b> The password used to access a password protected server.</p> <p> <code>AuthToken</code> can be specified only on replication groups where <code>TransitEncryptionEnabled</code> is <code>true</code>.</p> <important> <p>For HIPAA compliance, you must specify <code>TransitEncryptionEnabled</code> as <code>true</code>, an <code>AuthToken</code>, and a <code>CacheSubnetGroup</code>.</p> </important> <p>Password constraints:</p> <ul> <li> <p>Must be only printable ASCII characters.</p> </li> <li> <p>Must be at least 16 characters and no more than 128 characters in length.</p> </li> <li> <p>The only permitted printable special characters are !, &amp;, #, $, ^, &lt;, &gt;, and -. Other printable special characters cannot be used in the AUTH token.</p> </li> </ul> <p>For more information, see <a href="http://redis.io/commands/AUTH">AUTH password</a> at http://redis.io/commands/AUTH.</p>'
       TransitEncryptionEnabled:
         $ref: '#/definitions/BooleanOptional'
         description: '<p>A flag that enables in-transit encryption when set to <code>true</code>.</p> <p>You cannot modify the value of <code>TransitEncryptionEnabled</code> after the cluster is created. To enable in-transit encryption on a cluster you must set <code>TransitEncryptionEnabled</code> to <code>true</code> when you create a cluster.</p> <p>This parameter is valid only if the <code>Engine</code> parameter is <code>redis</code>, the <code>EngineVersion</code> parameter is <code>3.2.6</code>, <code>4.x</code> or later, and the cluster is being created in an Amazon VPC.</p> <p>If you enable in-transit encryption, you must also specify a value for <code>CacheSubnetGroup</code>.</p> <p> <b>Required:</b> Only available when creating a replication group in an Amazon VPC using redis version <code>3.2.6</code>, <code>4.x</code> or later.</p> <p>Default: <code>false</code> </p> <important> <p>For HIPAA compliance, you must specify <code>TransitEncryptionEnabled</code> as <code>true</code>, an <code>AuthToken</code>, and a <code>CacheSubnetGroup</code>.</p> </important>'
@@ -8256,61 +8621,6 @@ definitions:
         $ref: '#/definitions/String'
         description: The ID of the KMS key used to encrypt the disk on the cluster.
     description: Represents the input of a <code>CreateReplicationGroup</code> operation.
-  ReplicationGroup:
-    type: object
-    properties:
-      ReplicationGroupId:
-        $ref: '#/definitions/String'
-        description: The identifier for the replication group.
-      Description:
-        $ref: '#/definitions/String'
-        description: The user supplied description of the replication group.
-      Status:
-        $ref: '#/definitions/String'
-        description: 'The current state of this replication group - <code>creating</code>, <code>available</code>, <code>modifying</code>, <code>deleting</code>, <code>create-failed</code>, <code>snapshotting</code>.'
-      PendingModifiedValues:
-        $ref: '#/definitions/ReplicationGroupPendingModifiedValues'
-        description: 'A group of settings to be applied to the replication group, either immediately or during the next maintenance window.'
-      MemberClusters:
-        $ref: '#/definitions/ClusterIdList'
-        description: The names of all the cache clusters that are part of this replication group.
-      NodeGroups:
-        $ref: '#/definitions/NodeGroupList'
-        description: 'A list of node groups in this replication group. For Redis (cluster mode disabled) replication groups, this is a single-element list. For Redis (cluster mode enabled) replication groups, the list contains an entry for each node group (shard).'
-      SnapshottingClusterId:
-        $ref: '#/definitions/String'
-        description: The cluster ID that is used as the daily snapshot source for the replication group.
-      AutomaticFailover:
-        $ref: '#/definitions/AutomaticFailoverStatus'
-        description: '<p>Indicates the status of Multi-AZ with automatic failover for this Redis replication group.</p> <p>Amazon ElastiCache for Redis does not support Multi-AZ with automatic failover on:</p> <ul> <li> <p>Redis versions earlier than 2.8.6.</p> </li> <li> <p>Redis (cluster mode disabled): T1 node types.</p> </li> <li> <p>Redis (cluster mode enabled): T1 node types.</p> </li> </ul>'
-      ConfigurationEndpoint:
-        $ref: '#/definitions/Endpoint'
-        description: The configuration endpoint for this replication group. Use the configuration endpoint to connect to this replication group.
-      SnapshotRetentionLimit:
-        $ref: '#/definitions/IntegerOptional'
-        description: '<p>The number of days for which ElastiCache retains automatic cluster snapshots before deleting them. For example, if you set <code>SnapshotRetentionLimit</code> to 5, a snapshot that was taken today is retained for 5 days before being deleted.</p> <important> <p> If the value of <code>SnapshotRetentionLimit</code> is set to zero (0), backups are turned off.</p> </important>'
-      SnapshotWindow:
-        $ref: '#/definitions/String'
-        description: '<p>The daily time range (in UTC) during which ElastiCache begins taking a daily snapshot of your node group (shard).</p> <p>Example: <code>05:00-09:00</code> </p> <p>If you do not specify this parameter, ElastiCache automatically chooses an appropriate time range.</p> <note> <p>This parameter is only valid if the <code>Engine</code> parameter is <code>redis</code>.</p> </note>'
-      ClusterEnabled:
-        $ref: '#/definitions/BooleanOptional'
-        description: '<p>A flag indicating whether or not this replication group is cluster enabled; i.e., whether its data can be partitioned across multiple shards (API/CLI: node groups).</p> <p>Valid values: <code>true</code> | <code>false</code> </p>'
-      CacheNodeType:
-        $ref: '#/definitions/String'
-        description: The name of the compute and memory capacity node type for each node in the replication group.
-      AuthTokenEnabled:
-        $ref: '#/definitions/BooleanOptional'
-        description: '<p>A flag that enables using an <code>AuthToken</code> (password) when issuing Redis commands.</p> <p>Default: <code>false</code> </p>'
-      TransitEncryptionEnabled:
-        $ref: '#/definitions/BooleanOptional'
-        description: '<p>A flag that enables in-transit encryption when set to <code>true</code>.</p> <p>You cannot modify the value of <code>TransitEncryptionEnabled</code> after the cluster is created. To enable in-transit encryption on a cluster you must set <code>TransitEncryptionEnabled</code> to <code>true</code> when you create a cluster.</p> <p> <b>Required:</b> Only available when creating a replication group in an Amazon VPC using redis version <code>3.2.6</code>, <code>4.x</code> or later.</p> <p>Default: <code>false</code> </p>'
-      AtRestEncryptionEnabled:
-        $ref: '#/definitions/BooleanOptional'
-        description: '<p>A flag that enables encryption at-rest when set to <code>true</code>.</p> <p>You cannot modify the value of <code>AtRestEncryptionEnabled</code> after the cluster is created. To enable encryption at-rest on a cluster you must set <code>AtRestEncryptionEnabled</code> to <code>true</code> when you create a cluster.</p> <p> <b>Required:</b> Only available when creating a replication group in an Amazon VPC using redis version <code>3.2.6</code>, <code>4.x</code> or later.</p> <p>Default: <code>false</code> </p>'
-      KmsKeyId:
-        $ref: '#/definitions/String'
-        description: The ID of the KMS key used to encrypt the disk in the cluster.
-    description: Contains all of the attributes of a specific Redis replication group.
   CreateSnapshotMessage:
     type: object
     required:
@@ -8329,6 +8639,10 @@ definitions:
         $ref: '#/definitions/String'
         description: The ID of the KMS key used to encrypt the snapshot.
     description: Represents the input of a <code>CreateSnapshot</code> operation.
+  CustomerNodeEndpointList:
+    type: array
+    items:
+      $ref: '#/definitions/CustomerNodeEndpoint'
   ReplicaConfigurationList:
     type: array
     items:
@@ -8839,7 +9153,7 @@ definitions:
         description: '<p>A list of cache node IDs to be removed. A node ID is a numeric identifier (0001, 0002, etc.). This parameter is only valid when <code>NumCacheNodes</code> is less than the existing number of cache nodes. The number of cache node IDs supplied in this parameter must match the difference between the existing number of cache nodes in the cluster or pending cache nodes, whichever is greater, and the value of <code>NumCacheNodes</code> in the request.</p> <p>For example: If you have 3 active cache nodes, 7 pending cache nodes, and the number of cache nodes in this <code>ModifyCacheCluster</code> call is 5, you must list 2 (7 - 5) cache node IDs to remove.</p>'
       AZMode:
         $ref: '#/definitions/AZMode'
-        description: '<p>Specifies whether the new nodes in this Memcached cluster are all created in a single Availability Zone or created across multiple Availability Zones.</p> <p>Valid values: <code>single-az</code> | <code>cross-az</code>.</p> <p>This option is only supported for Memcached clusters.</p> <note> <p>You cannot specify <code>single-az</code> if the Memcached cluster already has cache nodes in different Availability Zones. If <code>cross-az</code> is specified, existing Memcached nodes remain in their current Availability Zone.</p> <p>Only newly created nodes are located in different Availability Zones. For instructions on how to move existing Memcached nodes to different Availability Zones, see the <b>Availability Zone Considerations</b> section of <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/CacheNodes.SupportedTypes.html">Cache Node Considerations for Memcached</a>.</p> </note>'
+        description: '<p>Specifies whether the new nodes in this Memcached cluster are all created in a single Availability Zone or created across multiple Availability Zones.</p> <p>Valid values: <code>single-az</code> | <code>cross-az</code>.</p> <p>This option is only supported for Memcached clusters.</p> <note> <p>You cannot specify <code>single-az</code> if the Memcached cluster already has cache nodes in different Availability Zones. If <code>cross-az</code> is specified, existing Memcached nodes remain in their current Availability Zone.</p> <p>Only newly created nodes are located in different Availability Zones. </p> </note>'
       NewAvailabilityZones:
         $ref: '#/definitions/PreferredAvailabilityZoneList'
         description: '<p>The list of Availability Zones where the new Memcached cache nodes are created.</p> <p>This parameter is only valid when <code>NumCacheNodes</code> in the request is greater than the sum of the number of active cache nodes and the number of cache nodes pending creation (which may be zero). The number of Availability Zones supplied in this list must match the cache nodes being added in this request.</p> <p>This option is only supported on Memcached clusters.</p> <p>Scenarios:</p> <ul> <li> <p> <b>Scenario 1:</b> You have 3 active nodes and wish to add 2 nodes. Specify <code>NumCacheNodes=5</code> (3 + 2) and optionally specify two Availability Zones for the two new nodes.</p> </li> <li> <p> <b>Scenario 2:</b> You have 3 active nodes and 2 nodes pending creation (from the scenario 1 call) and want to add 1 more node. Specify <code>NumCacheNodes=6</code> ((3 + 2) + 1) and optionally specify an Availability Zone for the new node.</p> </li> <li> <p> <b>Scenario 3:</b> You want to cancel all pending operations. Specify <code>NumCacheNodes=3</code> to cancel all pending operations.</p> </li> </ul> <p>The Availability Zone placement of nodes pending creation cannot be modified. If you wish to cancel any nodes pending creation, add 0 nodes by setting <code>NumCacheNodes</code> to the number of current nodes.</p> <p>If <code>cross-az</code> is specified, existing Memcached nodes remain in their current Availability Zone. Only newly created nodes can be located in different Availability Zones. For guidance on how to move existing Memcached nodes to different Availability Zones, see the <b>Availability Zone Considerations</b> section of <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/CacheNodes.SupportedTypes.html">Cache Node Considerations for Memcached</a>.</p> <p> <b>Impact of new add/remove requests upon pending requests</b> </p> <ul> <li> <p>Scenario-1</p> <ul> <li> <p>Pending Action: Delete</p> </li> <li> <p>New Request: Delete</p> </li> <li> <p>Result: The new delete, pending or immediate, replaces the pending delete.</p> </li> </ul> </li> <li> <p>Scenario-2</p> <ul> <li> <p>Pending Action: Delete</p> </li> <li> <p>New Request: Create</p> </li> <li> <p>Result: The new create, pending or immediate, replaces the pending delete.</p> </li> </ul> </li> <li> <p>Scenario-3</p> <ul> <li> <p>Pending Action: Create</p> </li> <li> <p>New Request: Delete</p> </li> <li> <p>Result: The new delete, pending or immediate, replaces the pending create.</p> </li> </ul> </li> <li> <p>Scenario-4</p> <ul> <li> <p>Pending Action: Create</p> </li> <li> <p>New Request: Create</p> </li> <li> <p>Result: The new create is added to the pending create.</p> <important> <p> <b>Important:</b> If the new create request is <b>Apply Immediately - Yes</b>, all creates are performed immediately. If the new create request is <b>Apply Immediately - No</b>, all creates are pending.</p> </important> </li> </ul> </li> </ul>'
@@ -8879,6 +9193,12 @@ definitions:
       CacheNodeType:
         $ref: '#/definitions/String'
         description: A valid cache node type that you want to scale this cluster up to.
+      AuthToken:
+        $ref: '#/definitions/String'
+        description: '<p>Reserved parameter. The password used to access a password protected server. This parameter must be specified with the <code>auth-token-update</code> parameter. Password constraints:</p> <ul> <li> <p>Must be only printable ASCII characters</p> </li> <li> <p>Must be at least 16 characters and no more than 128 characters in length</p> </li> <li> <p>Cannot contain any of the following characters: ''/'', ''"'', or ''@'', ''%''</p> </li> </ul> <p> For more information, see AUTH password at <a href="http://redis.io/commands/AUTH">AUTH</a>.</p>'
+      AuthTokenUpdateStrategy:
+        $ref: '#/definitions/AuthTokenUpdateStrategyType'
+        description: '<p>Specifies the strategy to use to update the AUTH token. This parameter must be specified with the <code>auth-token</code> parameter. Possible values:</p> <ul> <li> <p>Rotate</p> </li> <li> <p>Set</p> </li> </ul> <p> For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html">Authenticating Users with Redis AUTH</a> </p>'
     description: Represents the input of a <code>ModifyCacheCluster</code> operation.
   ParameterNameValueList:
     type: array
@@ -8932,6 +9252,9 @@ definitions:
       AutomaticFailoverEnabled:
         $ref: '#/definitions/BooleanOptional'
         description: '<p>Determines whether a read replica is automatically promoted to read/write primary if the existing primary encounters a failure.</p> <p>Valid values: <code>true</code> | <code>false</code> </p> <p>Amazon ElastiCache for Redis does not support Multi-AZ with automatic failover on:</p> <ul> <li> <p>Redis versions earlier than 2.8.6.</p> </li> <li> <p>Redis (cluster mode disabled): T1 node types.</p> </li> <li> <p>Redis (cluster mode enabled): T1 node types.</p> </li> </ul>'
+      NodeGroupId:
+        $ref: '#/definitions/String'
+        description: Deprecated. This parameter is not used.
       CacheSecurityGroupNames:
         $ref: '#/definitions/CacheSecurityGroupNameList'
         description: '<p>A list of cache security group names to authorize for the clusters in this replication group. This change is asynchronously applied as soon as possible.</p> <p>This parameter can be used only with replication group containing clusters running outside of an Amazon Virtual Private Cloud (Amazon VPC).</p> <p>Constraints: Must contain no more than 255 alphanumeric characters. Must not be <code>Default</code>.</p>'
@@ -8968,9 +9291,12 @@ definitions:
       CacheNodeType:
         $ref: '#/definitions/String'
         description: A valid cache node type that you want to scale this replication group to.
-      NodeGroupId:
+      AuthToken:
         $ref: '#/definitions/String'
-        description: Deprecated. This parameter is not used.
+        description: '<p>Reserved parameter. The password used to access a password protected server. This parameter must be specified with the <code>auth-token-update-strategy </code> parameter. Password constraints:</p> <ul> <li> <p>Must be only printable ASCII characters</p> </li> <li> <p>Must be at least 16 characters and no more than 128 characters in length</p> </li> <li> <p>Cannot contain any of the following characters: ''/'', ''"'', or ''@'', ''%''</p> </li> </ul> <p> For more information, see AUTH password at <a href="http://redis.io/commands/AUTH">AUTH</a>.</p>'
+      AuthTokenUpdateStrategy:
+        $ref: '#/definitions/AuthTokenUpdateStrategyType'
+        description: '<p>Specifies the strategy to use to update the AUTH token. This parameter must be specified with the <code>auth-token</code> parameter. Possible values:</p> <ul> <li> <p>Rotate</p> </li> <li> <p>Set</p> </li> </ul> <p> For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html">Authenticating Users with Redis AUTH</a> </p>'
     description: Represents the input of a <code>ModifyReplicationGroups</code> operation.
   ReshardingConfigurationList:
     type: array
@@ -9303,6 +9629,9 @@ definitions:
       Resharding:
         $ref: '#/definitions/ReshardingStatus'
         description: The status of an online resharding operation.
+      AuthTokenStatus:
+        $ref: '#/definitions/AuthTokenUpdateStatus'
+        description: The auth token status
     description: 'The settings to be applied to the Redis replication group, either immediately or during the next maintenance window.'
   ReplicationGroupList:
     type: array
@@ -9461,6 +9790,18 @@ definitions:
       - 'yes'
       - 'no'
       - n/a
+  StartMigrationMessage:
+    type: object
+    required:
+      - ReplicationGroupId
+      - CustomerNodeEndpointList
+    properties:
+      ReplicationGroupId:
+        $ref: '#/definitions/String'
+        description: The ID of the replication group to which data should be migrated.
+      CustomerNodeEndpointList:
+        $ref: '#/definitions/CustomerNodeEndpointList'
+        description: 'List of endpoints from which data should be migrated. For Redis (cluster mode disabled), list should have only one element.'
   Subnet:
     type: object
     properties:

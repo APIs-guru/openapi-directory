@@ -347,7 +347,7 @@ paths:
   '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.CreateRepository':
     post:
       operationId: CreateRepository
-      description: Creates an image repository.
+      description: 'Creates an Amazon Elastic Container Registry (Amazon ECR) repository, where users can push and pull Docker images. For more information, see <a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/Repositories.html">Amazon ECR Repositories</a> in the <i>Amazon Elastic Container Registry User Guide</i>.'
       responses:
         '200':
           description: Success
@@ -524,6 +524,65 @@ paths:
           type: string
           enum:
             - AmazonEC2ContainerRegistry_V20150921.DeleteRepositoryPolicy
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.DescribeImageScanFindings':
+    post:
+      operationId: DescribeImageScanFindings
+      description: Describes the image scan findings for the specified image.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeImageScanFindingsResponse'
+        '480':
+          description: ServerException
+          schema:
+            $ref: '#/definitions/ServerException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: RepositoryNotFoundException
+          schema:
+            $ref: '#/definitions/RepositoryNotFoundException'
+        '483':
+          description: ImageNotFoundException
+          schema:
+            $ref: '#/definitions/ImageNotFoundException'
+        '484':
+          description: ScanNotFoundException
+          schema:
+            $ref: '#/definitions/ScanNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeImageScanFindingsRequest'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonEC2ContainerRegistry_V20150921.DescribeImageScanFindings
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -800,6 +859,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetLifecyclePolicyPreviewRequest'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -1049,6 +1118,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.PutImageScanningConfiguration':
+    post:
+      operationId: PutImageScanningConfiguration
+      description: Updates the image scanning configuration for a repository.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutImageScanningConfigurationResponse'
+        '480':
+          description: ServerException
+          schema:
+            $ref: '#/definitions/ServerException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: RepositoryNotFoundException
+          schema:
+            $ref: '#/definitions/RepositoryNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutImageScanningConfigurationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonEC2ContainerRegistry_V20150921.PutImageScanningConfiguration
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.PutImageTagMutability':
     post:
       operationId: PutImageTagMutability
@@ -1164,6 +1274,51 @@ paths:
           type: string
           enum:
             - AmazonEC2ContainerRegistry_V20150921.SetRepositoryPolicy
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.StartImageScan':
+    post:
+      operationId: StartImageScan
+      description: Starts an image vulnerability scan.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartImageScanResponse'
+        '480':
+          description: ServerException
+          schema:
+            $ref: '#/definitions/ServerException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: RepositoryNotFoundException
+          schema:
+            $ref: '#/definitions/RepositoryNotFoundException'
+        '483':
+          description: ImageNotFoundException
+          schema:
+            $ref: '#/definitions/ImageNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StartImageScanRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonEC2ContainerRegistry_V20150921.StartImageScan
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1535,6 +1690,9 @@ definitions:
       imageTagMutability:
         $ref: '#/definitions/ImageTagMutability'
         description: 'The tag mutability setting for the repository. If this parameter is omitted, the default setting of <code>MUTABLE</code> will be used which will allow image tags to be overwritten. If <code>IMMUTABLE</code> is specified, all image tags within the repository will be immutable which will prevent them from being overwritten.'
+      imageScanningConfiguration:
+        $ref: '#/definitions/ImageScanningConfiguration'
+        description: The image scanning configuration for the repository. This setting determines whether images are scanned for known vulnerabilities after being pushed to the repository.
   InvalidTagParameterException: {}
   TooManyTagsException: {}
   RepositoryAlreadyExistsException: {}
@@ -1620,6 +1778,48 @@ definitions:
         $ref: '#/definitions/RepositoryName'
         description: The name of the repository that is associated with the repository policy to delete.
   RepositoryPolicyNotFoundException: {}
+  DescribeImageScanFindingsResponse:
+    type: object
+    properties:
+      registryId:
+        $ref: '#/definitions/RegistryId'
+        description: The registry ID associated with the request.
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The repository name associated with the request.
+      imageId:
+        $ref: '#/definitions/ImageIdentifier'
+      imageScanStatus:
+        $ref: '#/definitions/ImageScanStatus'
+        description: The current state of the scan.
+      imageScanFindings:
+        $ref: '#/definitions/ImageScanFindings'
+        description: The information contained in the image scan findings.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The <code>nextToken</code> value to include in a future <code>DescribeImageScanFindings</code> request. When the results of a <code>DescribeImageScanFindings</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is null when there are no more results to return.'
+  DescribeImageScanFindingsRequest:
+    type: object
+    required:
+      - repositoryName
+      - imageId
+    properties:
+      registryId:
+        $ref: '#/definitions/RegistryId'
+        description: 'The AWS account ID associated with the registry that contains the repository in which to describe the image scan findings for. If you do not specify a registry, the default registry is assumed.'
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The repository for the image for which to describe the scan findings.
+      imageId:
+        $ref: '#/definitions/ImageIdentifier'
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The <code>nextToken</code> value returned from a previous paginated <code>DescribeImageScanFindings</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is null when there are no more results to return.
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of image scan results returned by <code>DescribeImageScanFindings</code> in paginated output. When this parameter is used, <code>DescribeImageScanFindings</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeImageScanFindings</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 1000. If this parameter is not used, then <code>DescribeImageScanFindings</code> returns up to 100 results and a <code>nextToken</code> value, if applicable.'
+  ImageNotFoundException: {}
+  ScanNotFoundException: {}
   DescribeImagesResponse:
     type: object
     properties:
@@ -1652,7 +1852,6 @@ definitions:
       filter:
         $ref: '#/definitions/DescribeImagesFilter'
         description: The filter key and value with which to filter your <code>DescribeImages</code> results.
-  ImageNotFoundException: {}
   DescribeRepositoriesResponse:
     type: object
     example:
@@ -1933,6 +2132,33 @@ definitions:
         description: The tag to associate with the image. This parameter is required for images that use the Docker Image Manifest V2 Schema 2 or OCI formats.
   ImageAlreadyExistsException: {}
   ImageTagAlreadyExistsException: {}
+  PutImageScanningConfigurationResponse:
+    type: object
+    properties:
+      registryId:
+        $ref: '#/definitions/RegistryId'
+        description: The registry ID associated with the request.
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The repository name associated with the request.
+      imageScanningConfiguration:
+        $ref: '#/definitions/ImageScanningConfiguration'
+        description: The image scanning configuration setting for the repository.
+  PutImageScanningConfigurationRequest:
+    type: object
+    required:
+      - repositoryName
+      - imageScanningConfiguration
+    properties:
+      registryId:
+        $ref: '#/definitions/RegistryId'
+        description: 'The AWS account ID associated with the registry that contains the repository in which to update the image scanning configuration setting. If you do not specify a registry, the default registry is assumed.'
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository in which to update the image scanning configuration setting.
+      imageScanningConfiguration:
+        $ref: '#/definitions/ImageScanningConfiguration'
+        description: The image scanning configuration for the repository. This setting determines whether images are scanned for known vulnerabilities after being pushed to the repository.
   PutImageTagMutabilityResponse:
     type: object
     properties:
@@ -2017,6 +2243,34 @@ definitions:
       force:
         $ref: '#/definitions/ForceFlag'
         description: 'If the policy you are attempting to set on a repository policy would prevent you from setting another policy in the future, you must force the <a>SetRepositoryPolicy</a> operation. This is intended to prevent accidental repository lock outs.'
+  StartImageScanResponse:
+    type: object
+    properties:
+      registryId:
+        $ref: '#/definitions/RegistryId'
+        description: The registry ID associated with the request.
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The repository name associated with the request.
+      imageId:
+        $ref: '#/definitions/ImageIdentifier'
+      imageScanStatus:
+        $ref: '#/definitions/ImageScanStatus'
+        description: The current state of the scan.
+  StartImageScanRequest:
+    type: object
+    required:
+      - repositoryName
+      - imageId
+    properties:
+      registryId:
+        $ref: '#/definitions/RegistryId'
+        description: 'The AWS account ID associated with the registry that contains the repository in which to start an image scan request. If you do not specify a registry, the default registry is assumed.'
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository that contains the images to scan.
+      imageId:
+        $ref: '#/definitions/ImageIdentifier'
   StartLifecyclePolicyPreviewResponse:
     type: object
     properties:
@@ -2122,6 +2376,32 @@ definitions:
   InvalidLayerPartException: {}
   Arn:
     type: string
+  AttributeKey:
+    type: string
+    minLength: 1
+    maxLength: 128
+  AttributeValue:
+    type: string
+    minLength: 1
+    maxLength: 256
+  Attribute:
+    type: object
+    required:
+      - key
+    properties:
+      key:
+        $ref: '#/definitions/AttributeKey'
+        description: The attribute key.
+      value:
+        $ref: '#/definitions/AttributeValue'
+        description: The value assigned to the attribute key.
+    description: This data type is used in the <a>ImageScanFinding</a> data type.
+  AttributeList:
+    type: array
+    items:
+      $ref: '#/definitions/Attribute'
+    minItems: 0
+    maxItems: 50
   Base64:
     type: string
     pattern: ^\S+$
@@ -2214,6 +2494,13 @@ definitions:
     enum:
       - MUTABLE
       - IMMUTABLE
+  ImageScanningConfiguration:
+    type: object
+    properties:
+      scanOnPush:
+        $ref: '#/definitions/ScanOnPushFlag'
+        description: 'The setting that determines whether images are scanned after being pushed to a repository. If set to <code>true</code>, images will be scanned after being pushed. If this parameter is not specified, it will default to <code>false</code> and images will not be scanned unless a scan is manually started with the <a>StartImageScan</a> API.'
+    description: The image scanning configuration for a repository.
   Repository:
     type: object
     properties:
@@ -2235,6 +2522,8 @@ definitions:
       imageTagMutability:
         $ref: '#/definitions/ImageTagMutability'
         description: The tag mutability setting for the repository.
+      imageScanningConfiguration:
+        $ref: '#/definitions/ImageScanningConfiguration'
     description: An object representing a repository.
   CreationTimestamp:
     type: string
@@ -2252,6 +2541,48 @@ definitions:
     maxLength: 10240
   ForceFlag:
     type: boolean
+  ImageIdentifier:
+    type: object
+    properties:
+      imageDigest:
+        $ref: '#/definitions/ImageDigest'
+        description: The <code>sha256</code> digest of the image manifest.
+      imageTag:
+        $ref: '#/definitions/ImageTag'
+        description: The tag used for the image.
+    description: An object with identifying information for an Amazon ECR image.
+  NextToken:
+    type: string
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 1000
+  ImageScanStatus:
+    type: object
+    properties:
+      status:
+        $ref: '#/definitions/ScanStatus'
+        description: The current state of an image scan.
+      description:
+        $ref: '#/definitions/ScanStatusDescription'
+        description: The description of the image scan status.
+    description: The current status of an image scan.
+  ImageScanFindings:
+    type: object
+    properties:
+      imageScanCompletedAt:
+        $ref: '#/definitions/ScanTimestamp'
+        description: The time of the last completed image scan.
+      vulnerabilitySourceUpdatedAt:
+        $ref: '#/definitions/VulnerabilitySourceUpdateTimestamp'
+        description: The time when the vulnerability data was last scanned.
+      findings:
+        $ref: '#/definitions/ImageScanFindingList'
+        description: The findings from the image scan.
+      findingSeverityCounts:
+        $ref: '#/definitions/FindingSeverityCounts'
+        description: 'The image vulnerability counts, sorted by severity.'
+    description: The details of an image scan.
   TagStatus:
     type: string
     enum:
@@ -2265,12 +2596,6 @@ definitions:
         $ref: '#/definitions/TagStatus'
         description: The tag status with which to filter your <a>DescribeImages</a> results. You can filter results based on whether they are <code>TAGGED</code> or <code>UNTAGGED</code>.
     description: An object representing a filter on a <a>DescribeImages</a> operation.
-  NextToken:
-    type: string
-  MaxResults:
-    type: integer
-    minimum: 1
-    maximum: 1000
   ImageDetailList:
     type: array
     items:
@@ -2285,6 +2610,26 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Repository'
+  FindingDescription:
+    type: string
+  FindingName:
+    type: string
+  FindingSeverity:
+    type: string
+    enum:
+      - INFORMATIONAL
+      - LOW
+      - MEDIUM
+      - HIGH
+      - CRITICAL
+      - UNDEFINED
+  SeverityCount:
+    type: integer
+    minimum: 0
+  FindingSeverityCounts:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/SeverityCount'
   GetAuthorizationTokenRegistryIdList:
     type: array
     items:
@@ -2322,18 +2667,10 @@ definitions:
         $ref: '#/definitions/ImageCount'
         description: The number of expiring images.
     description: The summary of the lifecycle policy preview request.
-  ImageIdentifier:
-    type: object
-    properties:
-      imageDigest:
-        $ref: '#/definitions/ImageDigest'
-        description: The <code>sha256</code> digest of the image manifest.
-      imageTag:
-        $ref: '#/definitions/ImageTag'
-        description: The tag used for the image.
-    description: An object with identifying information for an Amazon ECR image.
   ImageManifest:
     type: string
+    minLength: 1
+    maxLength: 4194304
   Image:
     type: object
     properties:
@@ -2368,6 +2705,19 @@ definitions:
   PushTimestamp:
     type: string
     format: date-time
+  ImageScanFindingsSummary:
+    type: object
+    properties:
+      imageScanCompletedAt:
+        $ref: '#/definitions/ScanTimestamp'
+        description: The time of the last completed image scan.
+      vulnerabilitySourceUpdatedAt:
+        $ref: '#/definitions/VulnerabilitySourceUpdateTimestamp'
+        description: The time when the vulnerability data was last scanned.
+      findingSeverityCounts:
+        $ref: '#/definitions/FindingSeverityCounts'
+        description: 'The image vulnerability counts, sorted by severity.'
+    description: A summary of the last completed image scan.
   ImageDetail:
     type: object
     properties:
@@ -2389,6 +2739,12 @@ definitions:
       imagePushedAt:
         $ref: '#/definitions/PushTimestamp'
         description: 'The date and time, expressed in standard JavaScript date format, at which the current image was pushed to the repository. '
+      imageScanStatus:
+        $ref: '#/definitions/ImageScanStatus'
+        description: The current state of the scan.
+      imageScanFindingsSummary:
+        $ref: '#/definitions/ImageScanFindingsSummary'
+        description: A summary of the last completed image scan.
     description: An object that describes an image returned by a <a>DescribeImages</a> operation.
   ImageFailureCode:
     type: string
@@ -2417,6 +2773,45 @@ definitions:
     type: string
     minLength: 1
     maxLength: 300
+  ImageScanFinding:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/FindingName'
+        description: 'The name associated with the finding, usually a CVE number.'
+      description:
+        $ref: '#/definitions/FindingDescription'
+        description: The description of the finding.
+      uri:
+        $ref: '#/definitions/Url'
+        description: A link containing additional details about the security vulnerability.
+      severity:
+        $ref: '#/definitions/FindingSeverity'
+        description: The finding severity.
+      attributes:
+        $ref: '#/definitions/AttributeList'
+        description: A collection of attributes of the host from which the finding is generated.
+    description: Contains information about an image scan finding.
+  ImageScanFindingList:
+    type: array
+    items:
+      $ref: '#/definitions/ImageScanFinding'
+  ScanTimestamp:
+    type: string
+    format: date-time
+  VulnerabilitySourceUpdateTimestamp:
+    type: string
+    format: date-time
+  ScanStatus:
+    type: string
+    enum:
+      - IN_PROGRESS
+      - COMPLETE
+      - FAILED
+  ScanStatusDescription:
+    type: string
+  ScanOnPushFlag:
+    type: boolean
   PartSize:
     type: integer
     minimum: 0
@@ -2467,6 +2862,8 @@ definitions:
     description: An object representing an Amazon ECR image layer failure.
   LayerPartBlob:
     type: string
+    minLength: 0
+    maxLength: 20971520
   LifecyclePolicyRuleAction:
     type: object
     properties:

@@ -4173,6 +4173,16 @@ paths:
                   JSON:
                     $ref: '#/definitions/JSONOutput'
                     description: Specifies JSON as request's output serialization format.
+              ScanRange:
+                description: 'Specifies the byte range of the object to get the records from. A record is processed when its first byte is contained by the range. This parameter is optional, but when specified, it must not be empty. See RFC 2616, Section 14.35.1 about how to specify the start and end of the range.'
+                type: object
+                properties:
+                  Start:
+                    $ref: '#/definitions/Start'
+                    description: 'Specifies the start of the byte range. This parameter is optional. Valid values: non-negative integers. The default value is 0.'
+                  End:
+                    $ref: '#/definitions/End'
+                    description: 'Specifies the end of the byte range. This parameter is optional. Valid values: non-negative integers. The default value is one less than the size of the object being queried.'
         - name: select
           in: query
           required: true
@@ -4420,7 +4430,7 @@ definitions:
   CreateBucketOutput:
     type: object
     example:
-      Location: /examplebucket
+      Location: 'http://examplebucket.s3.amazonaws.com/'
     properties: {}
   BucketLocationConstraint:
     type: string
@@ -4467,12 +4477,10 @@ definitions:
     type: object
     example:
       Deleted:
-        - DeleteMarker: 'true'
-          DeleteMarkerVersionId: A._w1z6EFiCF5uhtQMDal9JDkID9tQ7F
-          Key: objectkey1
-        - DeleteMarker: 'true'
-          DeleteMarkerVersionId: iOd_ORxhkKe_e8G8_oSGxt2PjsCZKlkt
-          Key: objectkey2
+        - Key: HappyFace.jpg
+          VersionId: yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd
+        - Key: HappyFace.jpg
+          VersionId: 2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b
     properties:
       Deleted:
         $ref: '#/definitions/DeletedObjects'
@@ -4708,12 +4716,12 @@ definitions:
     type: object
     example:
       AcceptRanges: bytes
-      ContentLength: '10'
-      ContentRange: bytes 0-9/43
-      ContentType: text/plain
-      ETag: '"0d94420ffd0bc68cd3d152506b97a9cc"'
-      LastModified: 'Thu, 09 Oct 2014 22:57:28 GMT'
+      ContentLength: '3191'
+      ContentType: image/jpeg
+      ETag: '"6805f2cfc46c0f04559748bb039d69ae"'
+      LastModified: 'Thu, 15 Dec 2016 01:19:41 GMT'
       Metadata: {}
+      TagCount: 2
       VersionId: 'null'
     properties:
       Body:
@@ -4781,11 +4789,9 @@ definitions:
       - TagSet
     example:
       TagSet:
-        - Key: Key4
-          Value: Value4
-        - Key: Key3
-          Value: Value3
-      VersionId: 'null'
+        - Key: Key1
+          Value: Value1
+      VersionId: ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI
     properties:
       TagSet:
         $ref: '#/definitions/TagSet'
@@ -4886,27 +4892,34 @@ definitions:
   ListMultipartUploadsOutput:
     type: object
     example:
+      Bucket: acl1
+      IsTruncated: true
+      KeyMarker: ''
+      MaxUploads: '2'
+      NextKeyMarker: someobjectkey
+      NextUploadIdMarker: examplelo91lv1iwvWpvCiJWugw2xXLPAD7Z8cJyX9.WiIRgNrdG6Ldsn.9FtS63TCl1Uf5faTB.1U5Ckcbmdw--
+      UploadIdMarker: ''
       Uploads:
         - Initiated: '2014-05-01T05:40:58.000Z'
           Initiator:
-            DisplayName: display-name
+            DisplayName: ownder-display-name
             ID: examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc
           Key: JavaFile
           Owner:
-            DisplayName: display-name
-            ID: examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc
+            DisplayName: mohanataws
+            ID: 852b113e7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc
           StorageClass: STANDARD
-          UploadId: examplelUa.CInXklLQtSMJITdUnoZ1Y5GACB5UckOtspm5zbDMCkPF_qkfZzMiFZ6dksmcnqxJyIBvQMG9X9Q--
+          UploadId: gZ30jIqlUa.CInXklLQtSMJITdUnoZ1Y5GACB5UckOtspm5zbDMCkPF_qkfZzMiFZ6dksmcnqxJyIBvQMG9X9Q--
         - Initiated: '2014-05-01T05:41:27.000Z'
           Initiator:
-            DisplayName: display-name
+            DisplayName: ownder-display-name
             ID: examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc
           Key: JavaFile
           Owner:
-            DisplayName: display-name
+            DisplayName: ownder-display-name
             ID: examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc
           StorageClass: STANDARD
-          UploadId: examplelo91lv1iwvWpvCiJWugw2xXLPAD7Z8cJyX9.WiIRgNrdG6Ldsn.9FtS63TCl1Uf5faTB.1U5Ckcbmdw--
+          UploadId: b7tZSqIlo91lv1iwvWpvCiJWugw2xXLPAD7Z8cJyX9.WiIRgNrdG6Ldsn.9FtS63TCl1Uf5faTB.1U5Ckcbmdw--
     properties:
       Bucket:
         $ref: '#/definitions/BucketName'
@@ -5614,6 +5627,10 @@ definitions:
         $ref: '#/definitions/RecordDelimiter'
         description: The value used to separate individual records in the output.
     description: <p/>
+  Start:
+    type: integer
+  End:
+    type: integer
   UploadPartOutput:
     type: object
     example:
@@ -5623,8 +5640,8 @@ definitions:
     type: object
     example:
       CopyPartResult:
-        ETag: '"65d16d19e65a7508a51f043180edcc36"'
-        LastModified: '2016-12-29T21:44:28.000Z'
+        ETag: '"b0c6f0e7e054ab8fa2536a2677f8734d"'
+        LastModified: '2016-12-29T21:24:43.000Z'
     properties:
       CopyPartResult:
         $ref: '#/definitions/CopyPartResult'
@@ -6871,6 +6888,7 @@ definitions:
       - ObjectLockRetainUntilDate
       - ObjectLockMode
       - ObjectLockLegalHoldStatus
+      - IntelligentTieringAccessTier
   IsPublic:
     type: boolean
   IsTruncated:
@@ -7836,6 +7854,15 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/MetadataEntry'
+  ScanRange:
+    type: object
+    properties:
+      Start:
+        $ref: '#/definitions/Start'
+        description: 'Specifies the start of the byte range. This parameter is optional. Valid values: non-negative integers. The default value is 0.'
+      End:
+        $ref: '#/definitions/End'
+        description: 'Specifies the end of the byte range. This parameter is optional. Valid values: non-negative integers. The default value is one less than the size of the object being queried.'
   StatsEvent:
     type: object
     properties:
@@ -7885,6 +7912,9 @@ definitions:
       OutputSerialization:
         $ref: '#/definitions/OutputSerialization'
         description: Describes the format of the data that you want Amazon S3 to return in response.
+      ScanRange:
+        $ref: '#/definitions/ScanRange'
+        description: 'Specifies the byte range of the object to get the records from. A record is processed when its first byte is contained by the range. This parameter is optional, but when specified, it must not be empty. See RFC 2616, Section 14.35.1 about how to specify the start and end of the range.'
     description: 'Request to filter the contents of an Amazon S3 object based on a simple Structured Query Language (SQL) statement. In the request, along with the SQL expression, you must specify a data serialization format (JSON or CSV) of the object. Amazon S3 uses this to parse object data into records. It returns only records that match the specified SQL expression. You must also specify the data serialization format for the response. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html">S3Select API Documentation</a>.'
   ServerSideEncryptionByDefault:
     type: object

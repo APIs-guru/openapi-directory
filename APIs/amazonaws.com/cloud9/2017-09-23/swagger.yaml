@@ -917,11 +917,16 @@ definitions:
           arn: 'arn:aws:cloud9:us-east-2:123456789012:environment:8d9967e2f0624182b74e7690ad69ebEX'
           description: This is my demonstration environment.
           id: 8d9967e2f0624182b74e7690ad69ebEX
+          lifecycle:
+            status: CREATED
           ownerArn: 'arn:aws:iam::123456789012:user/MyDemoUser'
         - name: another-demo-environment
           type: ssh
           arn: 'arn:aws:cloud9:us-east-2:123456789012:environment:349c86d4579e4e7298d500ff57a6b2EX'
+          description: ''
           id: 349c86d4579e4e7298d500ff57a6b2EX
+          lifecycle:
+            status: CREATED
           ownerArn: 'arn:aws:sts::123456789012:assumed-role/AnotherDemoUser/AnotherDemoUser'
     properties:
       environments:
@@ -1037,7 +1042,7 @@ definitions:
     maxLength: 30
   UserArn:
     type: string
-    pattern: 'arn:aws:(iam|sts)::\d+:(root|user|federated-user|assumed-role)\/?\S*'
+    pattern: '^arn:aws:(iam|sts)::\d+:(root|(user\/[\w+=/:,.@-]{1,64}|federated-user\/[\w+=/:,.@-]{2,32}|assumed-role\/[\w+=/:,.@-]{1,64}\/[\w+=/:,.@-]{1,64}))$'
   MemberPermissions:
     type: string
     enum:
@@ -1100,7 +1105,7 @@ definitions:
     properties:
       status:
         $ref: '#/definitions/EnvironmentLifecycleStatus'
-        description: '<p>The current creation or deletion lifecycle state of the environment.</p> <ul> <li> <p> <code>CREATED</code>: The environment was successfully created.</p> </li> <li> <p> <code>DELETE_FAILED</code>: The environment failed to delete.</p> </li> <li> <p> <code>DELETING</code>: The environment is in the process of being deleted.</p> </li> </ul>'
+        description: '<p>The current creation or deletion lifecycle state of the environment.</p> <ul> <li> <p> <code>CREATING</code>: The environment is in the process of being created.</p> </li> <li> <p> <code>CREATED</code>: The environment was successfully created.</p> </li> <li> <p> <code>CREATE_FAILED</code>: The environment failed to be created.</p> </li> <li> <p> <code>DELETING</code>: The environment is in the process of being deleted.</p> </li> <li> <p> <code>DELETE_FAILED</code>: The environment failed to delete.</p> </li> </ul>'
       reason:
         $ref: '#/definitions/String'
         description: Any informational message about the lifecycle state of the environment.
@@ -1140,7 +1145,9 @@ definitions:
   EnvironmentLifecycleStatus:
     type: string
     enum:
+      - CREATING
       - CREATED
+      - CREATE_FAILED
       - DELETING
       - DELETE_FAILED
   Permissions:

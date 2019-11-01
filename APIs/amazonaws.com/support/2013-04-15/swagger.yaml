@@ -3,7 +3,7 @@ info:
   version: '2013-04-15'
   x-release: v4
   title: AWS Support
-  description: '<fullname>AWS Support</fullname> <p>The AWS Support API reference is intended for programmers who need detailed information about the AWS Support operations and data types. This service enables you to manage your AWS Support cases programmatically. It uses HTTP methods that return results in JSON format.</p> <p>The AWS Support service also exposes a set of <a href="http://aws.amazon.com/premiumsupport/trustedadvisor/">Trusted Advisor</a> features. You can retrieve a list of checks and their descriptions, get check results, specify checks to refresh, and get the refresh status of checks. </p> <p>The following list describes the AWS Support case management operations:</p> <ul> <li> <p> <b>Service names, issue categories, and available severity levels. </b>The <a>DescribeServices</a> and <a>DescribeSeverityLevels</a> operations return AWS service names, service codes, service categories, and problem severity levels. You use these values when you call the <a>CreateCase</a> operation. </p> </li> <li> <p> <b>Case creation, case details, and case resolution.</b> The <a>CreateCase</a>, <a>DescribeCases</a>, <a>DescribeAttachment</a>, and <a>ResolveCase</a> operations create AWS Support cases, retrieve information about cases, and resolve cases.</p> </li> <li> <p> <b>Case communication.</b> The <a>DescribeCommunications</a>, <a>AddCommunicationToCase</a>, and <a>AddAttachmentsToSet</a> operations retrieve and add communications and attachments to AWS Support cases. </p> </li> </ul> <p>The following list describes the operations available from the AWS Support service for Trusted Advisor:</p> <ul> <li> <p> <a>DescribeTrustedAdvisorChecks</a> returns the list of checks that run against your AWS resources.</p> </li> <li> <p>Using the <code>checkId</code> for a specific check returned by <a>DescribeTrustedAdvisorChecks</a>, you can call <a>DescribeTrustedAdvisorCheckResult</a> to obtain the results for the check you specified.</p> </li> <li> <p> <a>DescribeTrustedAdvisorCheckSummaries</a> returns summarized results for one or more Trusted Advisor checks.</p> </li> <li> <p> <a>RefreshTrustedAdvisorCheck</a> requests that Trusted Advisor rerun a specified check. </p> </li> <li> <p> <a>DescribeTrustedAdvisorCheckRefreshStatuses</a> reports the refresh status of one or more checks. </p> </li> </ul> <p>For authentication of requests, AWS Support uses <a href="http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 Signing Process</a>.</p> <p>See <a href="http://docs.aws.amazon.com/awssupport/latest/user/Welcome.html">About the AWS Support API</a> in the <i>AWS Support User Guide</i> for information about how to use this service to create and manage your support cases, and how to call Trusted Advisor for results of checks on your resources. </p>'
+  description: '<fullname>AWS Support</fullname> <p>The AWS Support API reference is intended for programmers who need detailed information about the AWS Support operations and data types. This service enables you to manage your AWS Support cases programmatically. It uses HTTP methods that return results in JSON format.</p> <p>The AWS Support service also exposes a set of <a href="http://aws.amazon.com/premiumsupport/trustedadvisor/">Trusted Advisor</a> features. You can retrieve a list of checks and their descriptions, get check results, specify checks to refresh, and get the refresh status of checks.</p> <p>The following list describes the AWS Support case management operations:</p> <ul> <li> <p> <b>Service names, issue categories, and available severity levels. </b>The <a>DescribeServices</a> and <a>DescribeSeverityLevels</a> operations return AWS service names, service codes, service categories, and problem severity levels. You use these values when you call the <a>CreateCase</a> operation.</p> </li> <li> <p> <b>Case creation, case details, and case resolution.</b> The <a>CreateCase</a>, <a>DescribeCases</a>, <a>DescribeAttachment</a>, and <a>ResolveCase</a> operations create AWS Support cases, retrieve information about cases, and resolve cases.</p> </li> <li> <p> <b>Case communication.</b> The <a>DescribeCommunications</a>, <a>AddCommunicationToCase</a>, and <a>AddAttachmentsToSet</a> operations retrieve and add communications and attachments to AWS Support cases.</p> </li> </ul> <p>The following list describes the operations available from the AWS Support service for Trusted Advisor:</p> <ul> <li> <p> <a>DescribeTrustedAdvisorChecks</a> returns the list of checks that run against your AWS resources.</p> </li> <li> <p>Using the <code>checkId</code> for a specific check returned by <a>DescribeTrustedAdvisorChecks</a>, you can call <a>DescribeTrustedAdvisorCheckResult</a> to obtain the results for the check you specified.</p> </li> <li> <p> <a>DescribeTrustedAdvisorCheckSummaries</a> returns summarized results for one or more Trusted Advisor checks.</p> </li> <li> <p> <a>RefreshTrustedAdvisorCheck</a> requests that Trusted Advisor rerun a specified check.</p> </li> <li> <p> <a>DescribeTrustedAdvisorCheckRefreshStatuses</a> reports the refresh status of one or more checks.</p> </li> </ul> <p>For authentication of requests, AWS Support uses <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 Signing Process</a>.</p> <p>See <a href="https://docs.aws.amazon.com/awssupport/latest/user/Welcome.html">About the AWS Support API</a> in the <i>AWS Support User Guide</i> for information about how to use this service to create and manage your support cases, and how to call Trusted Advisor for results of checks on your resources.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -208,7 +208,7 @@ paths:
   '/#X-Amz-Target=AWSSupport_20130415.CreateCase':
     post:
       operationId: CreateCase
-      description: '<p>Creates a new case in the AWS Support Center. This operation is modeled on the behavior of the AWS Support Center <a href="https://console.aws.amazon.com/support/home#/case/create">Create Case</a> page. Its parameters require you to specify the following information: </p> <ul> <li> <p> <b>issueType.</b> The type of issue for the case. You can specify either "customer-service" or "technical." If you do not indicate a value, the default is "technical." </p> </li> <li> <p> <b>serviceCode.</b> The code for an AWS service. You obtain the <code>serviceCode</code> by calling <a>DescribeServices</a>. </p> </li> <li> <p> <b>categoryCode.</b> The category for the service defined for the <code>serviceCode</code> value. You also obtain the category code for a service by calling <a>DescribeServices</a>. Each AWS service defines its own set of category codes. </p> </li> <li> <p> <b>severityCode.</b> A value that indicates the urgency of the case, which in turn determines the response time according to your service level agreement with AWS Support. You obtain the SeverityCode by calling <a>DescribeSeverityLevels</a>.</p> </li> <li> <p> <b>subject.</b> The <b>Subject</b> field on the AWS Support Center <a href="https://console.aws.amazon.com/support/home#/case/create">Create Case</a> page.</p> </li> <li> <p> <b>communicationBody.</b> The <b>Description</b> field on the AWS Support Center <a href="https://console.aws.amazon.com/support/home#/case/create">Create Case</a> page.</p> </li> <li> <p> <b>attachmentSetId.</b> The ID of a set of attachments that has been created by using <a>AddAttachmentsToSet</a>.</p> </li> <li> <p> <b>language.</b> The human language in which AWS Support handles the case. English and Japanese are currently supported.</p> </li> <li> <p> <b>ccEmailAddresses.</b> The AWS Support Center <b>CC</b> field on the <a href="https://console.aws.amazon.com/support/home#/case/create">Create Case</a> page. You can list email addresses to be copied on any correspondence about the case. The account that opens the case is already identified by passing the AWS Credentials in the HTTP POST method or in a method or function call from one of the programming languages supported by an <a href="http://aws.amazon.com/tools/">AWS SDK</a>. </p> </li> </ul> <note> <p>To add additional communication or attachments to an existing case, use <a>AddCommunicationToCase</a>.</p> </note> <p>A successful <a>CreateCase</a> request returns an AWS Support case number. Case numbers are used by the <a>DescribeCases</a> operation to retrieve existing AWS Support cases. </p>'
+      description: '<p>Creates a new case in the AWS Support Center. This operation is modeled on the behavior of the AWS Support Center <a href="https://console.aws.amazon.com/support/home#/case/create">Create Case</a> page. Its parameters require you to specify the following information:</p> <ul> <li> <p> <b>issueType.</b> The type of issue for the case. You can specify either "customer-service" or "technical." If you do not indicate a value, the default is "technical."</p> <note> <p>Service limit increases are not supported by the Support API; you must submit service limit increase requests in <a href="https://console.aws.amazon.com/support">Support Center</a>.</p> <p>The <code>caseId</code> is not the <code>displayId</code> that appears in <a href="https://console.aws.amazon.com/support">Support Center</a>. You can use the <a>DescribeCases</a> API to get the <code>displayId</code>.</p> </note> </li> <li> <p> <b>serviceCode.</b> The code for an AWS service. You can get the possible <code>serviceCode</code> values by calling <a>DescribeServices</a>.</p> </li> <li> <p> <b>categoryCode.</b> The category for the service defined for the <code>serviceCode</code> value. You also get the category code for a service by calling <a>DescribeServices</a>. Each AWS service defines its own set of category codes.</p> </li> <li> <p> <b>severityCode.</b> A value that indicates the urgency of the case, which in turn determines the response time according to your service level agreement with AWS Support. You can get the possible <code>severityCode</code> values by calling <a>DescribeSeverityLevels</a>. For more information about the meaning of the codes, see <a>SeverityLevel</a> and <a href="https://docs.aws.amazon.com/awssupport/latest/user/getting-started.html#choosing-severity">Choosing a Severity</a>.</p> </li> <li> <p> <b>subject.</b> The <b>Subject</b> field on the AWS Support Center <a href="https://console.aws.amazon.com/support/home#/case/create">Create Case</a> page.</p> </li> <li> <p> <b>communicationBody.</b> The <b>Description</b> field on the AWS Support Center <a href="https://console.aws.amazon.com/support/home#/case/create">Create Case</a> page.</p> </li> <li> <p> <b>attachmentSetId.</b> The ID of a set of attachments that has been created by using <a>AddAttachmentsToSet</a>.</p> </li> <li> <p> <b>language.</b> The human language in which AWS Support handles the case. English and Japanese are currently supported.</p> </li> <li> <p> <b>ccEmailAddresses.</b> The AWS Support Center <b>CC</b> field on the <a href="https://console.aws.amazon.com/support/home#/case/create">Create Case</a> page. You can list email addresses to be copied on any correspondence about the case. The account that opens the case is already identified by passing the AWS Credentials in the HTTP POST method or in a method or function call from one of the programming languages supported by an <a href="http://aws.amazon.com/tools/">AWS SDK</a>. </p> </li> </ul> <note> <p>To add additional communication or attachments to an existing case, use <a>AddCommunicationToCase</a>.</p> </note> <p>A successful <a>CreateCase</a> request returns an AWS Support case number. Case numbers are used by the <a>DescribeCases</a> operation to retrieve existing AWS Support cases.</p>'
       responses:
         '200':
           description: Success
@@ -294,7 +294,7 @@ paths:
   '/#X-Amz-Target=AWSSupport_20130415.DescribeCases':
     post:
       operationId: DescribeCases
-      description: '<p>Returns a list of cases that you specify by passing one or more case IDs. In addition, you can filter the cases by date by setting values for the <code>afterTime</code> and <code>beforeTime</code> request parameters. You can set values for the <code>includeResolvedCases</code> and <code>includeCommunications</code> request parameters to control how much information is returned. </p> <p>Case data is available for 12 months after creation. If a case was created more than 12 months ago, a request for data might cause an error.</p> <p>The response returns the following in JSON format:</p> <ul> <li> <p>One or more <a>CaseDetails</a> data types. </p> </li> <li> <p>One or more <code>nextToken</code> values, which specify where to paginate the returned records represented by the <code>CaseDetails</code> objects.</p> </li> </ul>'
+      description: '<p>Returns a list of cases that you specify by passing one or more case IDs. In addition, you can filter the cases by date by setting values for the <code>afterTime</code> and <code>beforeTime</code> request parameters. You can set values for the <code>includeResolvedCases</code> and <code>includeCommunications</code> request parameters to control how much information is returned.</p> <p>Case data is available for 12 months after creation. If a case was created more than 12 months ago, a request for data might cause an error.</p> <p>The response returns the following in JSON format:</p> <ul> <li> <p>One or more <a>CaseDetails</a> data types.</p> </li> <li> <p>One or more <code>nextToken</code> values, which specify where to paginate the returned records represented by the <code>CaseDetails</code> objects.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -421,7 +421,7 @@ paths:
   '/#X-Amz-Target=AWSSupport_20130415.DescribeSeverityLevels':
     post:
       operationId: DescribeSeverityLevels
-      description: 'Returns the list of severity levels that you can assign to an AWS Support case. The severity level for a case is also a field in the <a>CaseDetails</a> data type included in any <a>CreateCase</a> request. '
+      description: Returns the list of severity levels that you can assign to an AWS Support case. The severity level for a case is also a field in the <a>CaseDetails</a> data type included in any <a>CreateCase</a> request.
       responses:
         '200':
           description: Success
@@ -553,7 +553,7 @@ paths:
   '/#X-Amz-Target=AWSSupport_20130415.DescribeTrustedAdvisorChecks':
     post:
       operationId: DescribeTrustedAdvisorChecks
-      description: 'Returns information about all available Trusted Advisor checks, including name, ID, category, description, and metadata. You must specify a language code; English ("en") and Japanese ("ja") are currently supported. The response contains a <a>TrustedAdvisorCheckDescription</a> for each check.'
+      description: 'Returns information about all available Trusted Advisor checks, including name, ID, category, description, and metadata. You must specify a language code; English ("en") and Japanese ("ja") are currently supported. The response contains a <a>TrustedAdvisorCheckDescription</a> for each check. The region must be set to us-east-1.'
       responses:
         '200':
           description: Success
@@ -586,7 +586,7 @@ paths:
   '/#X-Amz-Target=AWSSupport_20130415.RefreshTrustedAdvisorCheck':
     post:
       operationId: RefreshTrustedAdvisorCheck
-      description: '<p>Requests a refresh of the Trusted Advisor check that has the specified check ID. Check IDs can be obtained by calling <a>DescribeTrustedAdvisorChecks</a>.</p> <note> <p>Some checks are refreshed automatically, and they cannot be refreshed by using this operation. Use of the <code>RefreshTrustedAdvisorCheck</code> operation for these checks causes an <code>InvalidParameterValue</code> error.</p> </note> <p>The response contains a <a>TrustedAdvisorCheckRefreshStatus</a> object, which contains these fields:</p> <ul> <li> <p> <b>status.</b> The refresh status of the check: "none", "enqueued", "processing", "success", or "abandoned".</p> </li> <li> <p> <b>millisUntilNextRefreshable.</b> The amount of time, in milliseconds, until the check is eligible for refresh.</p> </li> <li> <p> <b>checkId.</b> The unique identifier for the check.</p> </li> </ul>'
+      description: '<p>Requests a refresh of the Trusted Advisor check that has the specified check ID. Check IDs can be obtained by calling <a>DescribeTrustedAdvisorChecks</a>.</p> <note> <p>Some checks are refreshed automatically, and they cannot be refreshed by using this operation. Use of the <code>RefreshTrustedAdvisorCheck</code> operation for these checks causes an <code>InvalidParameterValue</code> error.</p> </note> <p>The response contains a <a>TrustedAdvisorCheckRefreshStatus</a> object, which contains these fields:</p> <ul> <li> <p> <b>status.</b> The refresh status of the check: </p> <ul> <li> <p> <code>none:</code> The check is not refreshed or the non-success status exceeds the timeout</p> </li> <li> <p> <code>enqueued:</code> The check refresh requests has entered the refresh queue</p> </li> <li> <p> <code>processing:</code> The check refresh request is picked up by the rule processing engine</p> </li> <li> <p> <code>success:</code> The check is successfully refreshed</p> </li> <li> <p> <code>abandoned:</code> The check refresh has failed</p> </li> </ul> </li> <li> <p> <b>millisUntilNextRefreshable.</b> The amount of time, in milliseconds, until the check is eligible for refresh.</p> </li> <li> <p> <b>checkId.</b> The unique identifier for the check.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -676,41 +676,11 @@ definitions:
         $ref: '#/definitions/Attachments'
         description: 'One or more attachments to add to the set. The limit is 3 attachments per set, and the size limit is 5 MB per attachment.'
     description: <p/>
-  InternalServerError:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: An internal server error occurred.
-    description: An internal server error occurred.
-  AttachmentSetIdNotFound:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: An attachment set with the specified ID could not be found.
-    description: An attachment set with the specified ID could not be found.
-  AttachmentSetExpired:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: The expiration time of the attachment set has passed. The set expires 1 hour after it is created.
-    description: The expiration time of the attachment set has passed. The set expires 1 hour after it is created.
-  AttachmentSetSizeLimitExceeded:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: A limit for the size of an attachment set has been exceeded. The limits are 3 attachments and 5 MB per attachment.
-    description: A limit for the size of an attachment set has been exceeded. The limits are 3 attachments and 5 MB per attachment.
-  AttachmentLimitExceeded:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: The limit for the number of attachment sets created in a short period of time has been exceeded.
-    description: The limit for the number of attachment sets created in a short period of time has been exceeded.
+  InternalServerError: {}
+  AttachmentSetIdNotFound: {}
+  AttachmentSetExpired: {}
+  AttachmentSetSizeLimitExceeded: {}
+  AttachmentLimitExceeded: {}
   AddCommunicationToCaseResponse:
     type: object
     properties:
@@ -736,20 +706,14 @@ definitions:
         $ref: '#/definitions/AttachmentSetId'
         description: 'The ID of a set of one or more attachments for the communication to add to the case. Create the set by calling <a>AddAttachmentsToSet</a> '
     description: To be written.
-  CaseIdNotFound:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: The requested <code>CaseId</code> could not be located.
-    description: The requested <code>caseId</code> could not be located.
+  CaseIdNotFound: {}
   CreateCaseResponse:
     type: object
     properties:
       caseId:
         $ref: '#/definitions/CaseId'
         description: 'The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i> '
-    description: 'The AWS Support case ID returned by a successful completion of the <a>CreateCase</a> operation. '
+    description: The AWS Support case ID returned by a successful completion of the <a>CreateCase</a> operation.
   CreateCaseRequest:
     type: object
     required:
@@ -764,7 +728,7 @@ definitions:
         description: The code for the AWS service returned by the call to <a>DescribeServices</a>.
       severityCode:
         $ref: '#/definitions/SeverityCode'
-        description: '<p>The code for the severity level returned by the call to <a>DescribeSeverityLevels</a>.</p> <note> <p>The availability of severity levels depends on each customer''s support subscription. In other words, your subscription may not necessarily require the urgent level of response time.</p> </note>'
+        description: <p>The code for the severity level returned by the call to <a>DescribeSeverityLevels</a>.</p> <note> <p>The availability of severity levels depends on the support plan for the account.</p> </note>
       categoryCode:
         $ref: '#/definitions/CategoryCode'
         description: The category of problem for the AWS Support case.
@@ -779,18 +743,11 @@ definitions:
         description: The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English ("en") and Japanese ("ja"). Language parameters must be passed explicitly for operations that take them.
       issueType:
         $ref: '#/definitions/IssueType'
-        description: 'The type of issue for the case. You can specify either "customer-service" or "technical." If you do not indicate a value, the default is "technical."'
+        description: '<p>The type of issue for the case. You can specify either "customer-service" or "technical." If you do not indicate a value, the default is "technical."</p> <note> <p>Service limit increases are not supported by the Support API; you must submit service limit increase requests in <a href="https://console.aws.amazon.com/support">Support Center</a>.</p> </note>'
       attachmentSetId:
         $ref: '#/definitions/AttachmentSetId'
         description: The ID of a set of one or more attachments for the case. Create the set by using <a>AddAttachmentsToSet</a>.
-    description: <p/>
-  CaseCreationLimitExceeded:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: An error message that indicates that you have exceeded the number of cases you can have open.
-    description: The case creation limit for the account has been exceeded.
+  CaseCreationLimitExceeded: {}
   DescribeAttachmentResponse:
     type: object
     properties:
@@ -806,20 +763,8 @@ definitions:
       attachmentId:
         $ref: '#/definitions/AttachmentId'
         description: The ID of the attachment to return. Attachment IDs are returned by the <a>DescribeCommunications</a> operation.
-  DescribeAttachmentLimitExceeded:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: The limit for the number of <a>DescribeAttachment</a> requests in a short period of time has been exceeded.
-    description: The limit for the number of <a>DescribeAttachment</a> requests in a short period of time has been exceeded.
-  AttachmentIdNotFound:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: An attachment with the specified ID could not be found.
-    description: An attachment with the specified ID could not be found.
+  DescribeAttachmentLimitExceeded: {}
+  AttachmentIdNotFound: {}
   DescribeCasesResponse:
     type: object
     properties:
@@ -860,7 +805,6 @@ definitions:
       includeCommunications:
         $ref: '#/definitions/IncludeCommunications'
         description: Specifies whether communications should be included in the <a>DescribeCases</a> results. The default is <i>true</i>.
-    description: <p/>
   DescribeCommunicationsResponse:
     type: object
     properties:
@@ -891,7 +835,6 @@ definitions:
       maxResults:
         $ref: '#/definitions/MaxResults'
         description: The maximum number of results to return before paginating.
-    description: <p/>
   DescribeServicesResponse:
     type: object
     properties:
@@ -908,7 +851,6 @@ definitions:
       language:
         $ref: '#/definitions/Language'
         description: The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English ("en") and Japanese ("ja"). Language parameters must be passed explicitly for operations that take them.
-    description: <p/>
   DescribeSeverityLevelsResponse:
     type: object
     properties:
@@ -922,7 +864,6 @@ definitions:
       language:
         $ref: '#/definitions/Language'
         description: The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English ("en") and Japanese ("ja"). Language parameters must be passed explicitly for operations that take them.
-    description: <p/>
   DescribeTrustedAdvisorCheckRefreshStatusesResponse:
     type: object
     required:
@@ -977,7 +918,6 @@ definitions:
       checkIds:
         $ref: '#/definitions/StringList'
         description: The IDs of the Trusted Advisor checks.
-    description: <p/>
   DescribeTrustedAdvisorChecksResponse:
     type: object
     required:
@@ -1030,7 +970,6 @@ definitions:
       caseId:
         $ref: '#/definitions/CaseId'
         description: 'The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i> '
-    description: <p/>
   AttachmentSetId:
     type: string
   Attachments:
@@ -1081,8 +1020,6 @@ definitions:
         $ref: '#/definitions/FileName'
         description: The file name of the attachment.
     description: The file name and ID of an attachment to a case communication. You can use the ID to retrieve the attachment with the <a>DescribeAttachment</a> operation.
-  ErrorMessage:
-    type: string
   AttachmentSet:
     type: array
     items:
@@ -1133,10 +1070,10 @@ definitions:
         description: The subject line for the case in the AWS Support Center.
       status:
         $ref: '#/definitions/Status'
-        description: The status of the case.
+        description: 'The status of the case. Valid values: <code>resolved</code> | <code>pending-customer-action</code> | <code>opened</code> | <code>unassigned</code> | <code>work-in-progress</code>.'
       serviceCode:
         $ref: '#/definitions/ServiceCode'
-        description: The code for the AWS service returned by the call to <a>DescribeServices</a>.
+        description: The code for the AWS service. You can get a list of codes and the corresponding service names by calling <a>DescribeServices</a>.
       categoryCode:
         $ref: '#/definitions/CategoryCode'
         description: The category of problem for the AWS Support case.
@@ -1158,7 +1095,7 @@ definitions:
       language:
         $ref: '#/definitions/Language'
         description: The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English ("en") and Japanese ("ja"). Language parameters must be passed explicitly for operations that take them.
-    description: '<p>A JSON-formatted object that contains the metadata for a support case. It is contained the response from a <a>DescribeCases</a> request. <b>CaseDetails</b> contains the following fields:</p> <ul> <li> <p> <b>caseId.</b> The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i>.</p> </li> <li> <p> <b>categoryCode.</b> The category of problem for the AWS Support case. Corresponds to the CategoryCode values returned by a call to <a>DescribeServices</a>.</p> </li> <li> <p> <b>displayId.</b> The identifier for the case on pages in the AWS Support Center.</p> </li> <li> <p> <b>language.</b> The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English ("en") and Japanese ("ja"). Language parameters must be passed explicitly for operations that take them.</p> </li> <li> <p> <b>recentCommunications.</b> One or more <a>Communication</a> objects. Fields of these objects are <code>attachments</code>, <code>body</code>, <code>caseId</code>, <code>submittedBy</code>, and <code>timeCreated</code>.</p> </li> <li> <p> <b>nextToken.</b> A resumption point for pagination.</p> </li> <li> <p> <b>serviceCode.</b> The identifier for the AWS service that corresponds to the service code defined in the call to <a>DescribeServices</a>.</p> </li> <li> <p> <b>severityCode. </b>The severity code assigned to the case. Contains one of the values returned by the call to <a>DescribeSeverityLevels</a>.</p> </li> <li> <p> <b>status.</b> The status of the case in the AWS Support Center.</p> </li> <li> <p> <b>subject.</b> The subject line of the case.</p> </li> <li> <p> <b>submittedBy.</b> The email address of the account that submitted the case.</p> </li> <li> <p> <b>timeCreated.</b> The time the case was created, in ISO-8601 format.</p> </li> </ul>'
+    description: '<p>A JSON-formatted object that contains the metadata for a support case. It is contained the response from a <a>DescribeCases</a> request. <b>CaseDetails</b> contains the following fields:</p> <ul> <li> <p> <b>caseId.</b> The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i>.</p> </li> <li> <p> <b>categoryCode.</b> The category of problem for the AWS Support case. Corresponds to the CategoryCode values returned by a call to <a>DescribeServices</a>.</p> </li> <li> <p> <b>displayId.</b> The identifier for the case on pages in the AWS Support Center.</p> </li> <li> <p> <b>language.</b> The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English ("en") and Japanese ("ja"). Language parameters must be passed explicitly for operations that take them.</p> </li> <li> <p> <b>recentCommunications.</b> One or more <a>Communication</a> objects. Fields of these objects are <code>attachments</code>, <code>body</code>, <code>caseId</code>, <code>submittedBy</code>, and <code>timeCreated</code>.</p> </li> <li> <p> <b>nextToken.</b> A resumption point for pagination.</p> </li> <li> <p> <b>serviceCode.</b> The identifier for the AWS service that corresponds to the service code defined in the call to <a>DescribeServices</a>.</p> </li> <li> <p> <b>severityCode.</b> The severity code assigned to the case. Contains one of the values returned by the call to <a>DescribeSeverityLevels</a>. The possible values are: <code>low</code>, <code>normal</code>, <code>high</code>, <code>urgent</code>, and <code>critical</code>.</p> </li> <li> <p> <b>status.</b> The status of the case in the AWS Support Center. The possible values are: <code>resolved</code>, <code>pending-customer-action</code>, <code>opened</code>, <code>unassigned</code>, and <code>work-in-progress</code>.</p> </li> <li> <p> <b>subject.</b> The subject line of the case.</p> </li> <li> <p> <b>submittedBy.</b> The email address of the account that submitted the case.</p> </li> <li> <p> <b>timeCreated.</b> The time the case was created, in ISO-8601 format.</p> </li> </ul>'
   CaseIdList:
     type: array
     items:
@@ -1200,14 +1137,14 @@ definitions:
         description: The text of the communication between the customer and AWS Support.
       submittedBy:
         $ref: '#/definitions/SubmittedBy'
-        description: The email address of the account that submitted the AWS Support case.
+        description: 'The identity of the account that submitted, or responded to, the support case. Customer entries include the role or IAM user as well as the email address. For example, "AdminRole (Role) &lt;someone@example.com&gt;. Entries from the AWS Support team display "Amazon Web Services," and do not show an email address. '
       timeCreated:
         $ref: '#/definitions/TimeCreated'
         description: The time the communication was created.
       attachmentSet:
         $ref: '#/definitions/AttachmentSet'
         description: Information about the attachments to the case communication.
-    description: 'A communication associated with an AWS Support case. The communication consists of the case ID, the message body, attachment information, the account email address, and the date and time of the communication.'
+    description: 'A communication associated with an AWS Support case. The communication consists of the case ID, the message body, attachment information, the submitter of the communication, and the date and time of the communication.'
   CommunicationList:
     type: array
     items:
@@ -1301,7 +1238,7 @@ definitions:
         description: The unique identifier for the Trusted Advisor check.
       status:
         $ref: '#/definitions/String'
-        description: 'The status of the Trusted Advisor check for which a refresh has been requested: "none", "enqueued", "processing", "success", or "abandoned".'
+        description: '<p>The status of the Trusted Advisor check for which a refresh has been requested: </p> <ul> <li> <p> <code>none:</code> The check is not refreshed or the non-success status exceeds the timeout</p> </li> <li> <p> <code>enqueued:</code> The check refresh requests has entered the refresh queue</p> </li> <li> <p> <code>processing:</code> The check refresh request is picked up by the rule processing engine</p> </li> <li> <p> <code>success:</code> The check is successfully refreshed</p> </li> <li> <p> <code>abandoned:</code> The check refresh has failed</p> </li> </ul>'
       millisUntilNextRefreshable:
         $ref: '#/definitions/Long'
         description: 'The amount of time, in milliseconds, until the Trusted Advisor check is eligible for refresh.'
@@ -1320,7 +1257,7 @@ definitions:
       categories:
         $ref: '#/definitions/CategoryList'
         description: A list of categories that describe the type of support issue a case describes. Categories consist of a category name and a category code. Category names and codes are passed to AWS Support when you call <a>CreateCase</a>.
-    description: 'Information about an AWS service returned by the <a>DescribeServices</a> operation. '
+    description: Information about an AWS service returned by the <a>DescribeServices</a> operation.
   SeverityLevelCode:
     type: string
   SeverityLevelName:
@@ -1330,11 +1267,11 @@ definitions:
     properties:
       code:
         $ref: '#/definitions/SeverityLevelCode'
-        description: 'One of four values: "low," "medium," "high," and "urgent". These values correspond to response times returned to the caller in <code>severityLevel.name</code>. '
+        description: '<p>The code for case severity level.</p> <p>Valid values: <code>low</code> | <code>normal</code> | <code>high</code> | <code>urgent</code> | <code>critical</code> </p>'
       name:
         $ref: '#/definitions/SeverityLevelName'
-        description: The name of the severity level that corresponds to the severity level code.
-    description: A code and name pair that represent a severity level that can be applied to a support case.
+        description: '<p>The name of the severity level that corresponds to the severity level code.</p> <note> <p>The values returned by the API differ from the values that are displayed in the AWS Support Center. For example, for the code "low", the API name is "Low", but the name in the Support Center is "General guidance". These are the Support Center code/name mappings:</p> <ul> <li> <p> <code>low</code>: General guidance</p> </li> <li> <p> <code>normal</code>: System impaired</p> </li> <li> <p> <code>high</code>: Production system impaired</p> </li> <li> <p> <code>urgent</code>: Production system down</p> </li> <li> <p> <code>critical</code>: Business-critical system down</p> </li> </ul> </note> <p>For more information, see <a href="https://docs.aws.amazon.com/awssupport/latest/user/getting-started.html#choosing-severity">Choosing a Severity</a> </p>'
+    description: 'A code and name pair that represents the severity level of a support case. The available values depend on the support plan for the account. For more information, see <a href="https://docs.aws.amazon.com/awssupport/latest/user/getting-started.html#choosing-severity">Choosing a Severity</a>.'
   TrustedAdvisorCostOptimizingSummary:
     type: object
     required:
@@ -1400,7 +1337,7 @@ definitions:
       resourcesSuppressed:
         $ref: '#/definitions/Long'
         description: The number of AWS resources ignored by Trusted Advisor because they were marked as suppressed by the user.
-    description: 'Details about AWS resources that were analyzed in a call to Trusted Advisor <a>DescribeTrustedAdvisorCheckSummaries</a>. '
+    description: Details about AWS resources that were analyzed in a call to Trusted Advisor <a>DescribeTrustedAdvisorCheckSummaries</a>.
   TrustedAdvisorResourceDetailList:
     type: array
     items:
@@ -1453,5 +1390,5 @@ definitions:
         description: Specifies whether the AWS resource was ignored by Trusted Advisor because it was marked as suppressed by the user.
       metadata:
         $ref: '#/definitions/StringList'
-        description: 'Additional information about the identified resource. The exact metadata and its order can be obtained by inspecting the <a>TrustedAdvisorCheckDescription</a> object returned by the call to <a>DescribeTrustedAdvisorChecks</a>. <b>Metadata</b> contains all the data that is shown in the Excel download, even in those cases where the UI shows just summary data. '
+        description: 'Additional information about the identified resource. The exact metadata and its order can be obtained by inspecting the <a>TrustedAdvisorCheckDescription</a> object returned by the call to <a>DescribeTrustedAdvisorChecks</a>. <b>Metadata</b> contains all the data that is shown in the Excel download, even in those cases where the UI shows just summary data.'
     description: Contains information about a resource identified by a Trusted Advisor check.

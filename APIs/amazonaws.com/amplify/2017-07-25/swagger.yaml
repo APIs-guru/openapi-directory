@@ -298,6 +298,9 @@ paths:
                   enablePullRequestPreview:
                     $ref: '#/definitions/EnablePullRequestPreview'
                     description: ' Enables Pull Request Preview for auto created branch. '
+                  pullRequestEnvironmentName:
+                    $ref: '#/definitions/PullRequestEnvironmentName'
+                    description: ' The Amplify Environment name for the pull request. '
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -451,6 +454,15 @@ paths:
               enablePullRequestPreview:
                 description: ' Enables Pull Request Preview for this branch. '
                 type: boolean
+              pullRequestEnvironmentName:
+                description: ' The Amplify Environment name for the pull request. '
+                type: string
+                maxLength: 20
+              backendEnvironmentArn:
+                description: ' ARN for a Backend Environment, part of an Amplify App. '
+                type: string
+                minLength: 1
+                maxLength: 1000
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -614,7 +626,7 @@ paths:
                 type: string
                 maxLength: 255
               enableAutoSubDomain:
-                description: ' Enables automated creation of Subdomains for branches. '
+                description: ' Enables automated creation of Subdomains for branches. (Currently not supported) '
                 type: boolean
               subDomainSettings:
                 description: ' Setting structure for the Subdomain. '
@@ -977,6 +989,9 @@ paths:
                   enablePullRequestPreview:
                     $ref: '#/definitions/EnablePullRequestPreview'
                     description: ' Enables Pull Request Preview for auto created branch. '
+                  pullRequestEnvironmentName:
+                    $ref: '#/definitions/PullRequestEnvironmentName'
+                    description: ' The Amplify Environment name for the pull request. '
               repository:
                 description: ' Repository for an Amplify App '
                 type: string
@@ -1180,6 +1195,15 @@ paths:
               enablePullRequestPreview:
                 description: ' Enables Pull Request Preview for this branch. '
                 type: boolean
+              pullRequestEnvironmentName:
+                description: ' The Amplify Environment name for the pull request. '
+                type: string
+                maxLength: 20
+              backendEnvironmentArn:
+                description: ' ARN for a Backend Environment, part of an Amplify App. '
+                type: string
+                minLength: 1
+                maxLength: 1000
   '/apps/{appId}/domains/{domainName}':
     delete:
       operationId: DeleteDomainAssociation
@@ -1320,7 +1344,7 @@ paths:
               - subDomainSettings
             properties:
               enableAutoSubDomain:
-                description: ' Enables automated creation of Subdomains for branches. '
+                description: ' Enables automated creation of Subdomains for branches. (Currently not supported) '
                 type: boolean
               subDomainSettings:
                 description: ' Setting structure for the Subdomain. '
@@ -1567,7 +1591,7 @@ paths:
   '/apps/{appId}/accesslogs':
     post:
       operationId: GenerateAccessLogs
-      description: ' Retrieve website access logs for a specific time range via a pre-signed URL. Optionally, deliver the logs to a given S3 bucket. '
+      description: ' Retrieve website access logs for a specific time range via a pre-signed URL. '
       responses:
         '200':
           description: Success
@@ -1728,17 +1752,6 @@ paths:
           type: integer
           minimum: 1
           maximum: 100
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            properties:
-              artifactType:
-                description: ' Type for an artifact. '
-                type: string
-                enum:
-                  - TEST
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -2199,6 +2212,9 @@ definitions:
     maxLength: 25000
   EnablePullRequestPreview:
     type: boolean
+  PullRequestEnvironmentName:
+    type: string
+    maxLength: 20
   BadRequestException: {}
   UnauthorizedException: {}
   InternalFailureException: {}
@@ -2623,6 +2639,9 @@ definitions:
       enablePullRequestPreview:
         $ref: '#/definitions/EnablePullRequestPreview'
         description: ' Enables Pull Request Preview for auto created branch. '
+      pullRequestEnvironmentName:
+        $ref: '#/definitions/PullRequestEnvironmentName'
+        description: ' The Amplify Environment name for the pull request. '
     description: ' Structure with auto branch creation config. '
   App:
     type: object
@@ -2727,10 +2746,6 @@ definitions:
         $ref: '#/definitions/ArtifactId'
         description: ' Unique Id for a artifact. '
     description: ' Structure for artifact. '
-  ArtifactType:
-    type: string
-    enum:
-      - TEST
   ArtifactUrl:
     type: string
     maxLength: 1000
@@ -2749,6 +2764,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AssociatedResource'
+  BackendEnvironmentArn:
+    type: string
+    minLength: 1
+    maxLength: 1000
   BranchArn:
     type: string
     maxLength: 1000
@@ -2863,12 +2882,18 @@ definitions:
       enablePullRequestPreview:
         $ref: '#/definitions/EnablePullRequestPreview'
         description: ' Enables Pull Request Preview for this branch. '
+      pullRequestEnvironmentName:
+        $ref: '#/definitions/PullRequestEnvironmentName'
+        description: ' The Amplify Environment name for the pull request. '
       destinationBranch:
         $ref: '#/definitions/BranchName'
         description: ' The destination branch if the branch is a pull request branch. '
       sourceBranch:
         $ref: '#/definitions/BranchName'
         description: ' The source branch if the branch is a pull request branch. '
+      backendEnvironmentArn:
+        $ref: '#/definitions/BackendEnvironmentArn'
+        description: ' ARN for a Backend Environment, part of an Amplify App. '
     description: ' Branch for an Amplify App, which maps to a 3rd party repository branch. '
   Branches:
     type: array
@@ -3000,6 +3025,12 @@ definitions:
       enablePullRequestPreview:
         $ref: '#/definitions/EnablePullRequestPreview'
         description: ' Enables Pull Request Preview for this branch. '
+      pullRequestEnvironmentName:
+        $ref: '#/definitions/PullRequestEnvironmentName'
+        description: ' The Amplify Environment name for the pull request. '
+      backendEnvironmentArn:
+        $ref: '#/definitions/BackendEnvironmentArn'
+        description: ' ARN for a Backend Environment, part of an Amplify App. '
     description: ' Request structure for a branch create request. '
   FileMap:
     type: object
@@ -3043,7 +3074,7 @@ definitions:
         description: ' Domain name for the Domain Association. '
       enableAutoSubDomain:
         $ref: '#/definitions/EnableAutoSubDomain'
-        description: ' Enables automated creation of Subdomains for branches. '
+        description: ' Enables automated creation of Subdomains for branches. (Currently not supported) '
       subDomainSettings:
         $ref: '#/definitions/SubDomainSettings'
         description: ' Setting structure for the Subdomain. '
@@ -3066,7 +3097,7 @@ definitions:
         description: ' Name of the domain. '
       enableAutoSubDomain:
         $ref: '#/definitions/EnableAutoSubDomain'
-        description: ' Enables automated creation of Subdomains for branches. '
+        description: ' Enables automated creation of Subdomains for branches. (Currently not supported) '
       domainStatus:
         $ref: '#/definitions/DomainStatus'
         description: ' Status fo the Domain Association. '
@@ -3277,7 +3308,7 @@ definitions:
   GetBranchRequest:
     type: object
     properties: {}
-    description: ' Result structure for get branch request. '
+    description: ' Request structure for get branch request. '
   GetDomainAssociationRequest:
     type: object
     properties: {}
@@ -3351,10 +3382,7 @@ definitions:
     description: ' Request structure for an Amplify App list request. '
   ListArtifactsRequest:
     type: object
-    properties:
-      artifactType:
-        $ref: '#/definitions/ArtifactType'
-        description: ' Type for an artifact. '
+    properties: {}
     description: ' Request structure for the list artifacts request. '
   ListBranchesRequest:
     type: object
@@ -3611,6 +3639,12 @@ definitions:
       enablePullRequestPreview:
         $ref: '#/definitions/EnablePullRequestPreview'
         description: ' Enables Pull Request Preview for this branch. '
+      pullRequestEnvironmentName:
+        $ref: '#/definitions/PullRequestEnvironmentName'
+        description: ' The Amplify Environment name for the pull request. '
+      backendEnvironmentArn:
+        $ref: '#/definitions/BackendEnvironmentArn'
+        description: ' ARN for a Backend Environment, part of an Amplify App. '
     description: ' Request structure for update branch request. '
   UpdateDomainAssociationRequest:
     type: object
@@ -3619,7 +3653,7 @@ definitions:
     properties:
       enableAutoSubDomain:
         $ref: '#/definitions/EnableAutoSubDomain'
-        description: ' Enables automated creation of Subdomains for branches. '
+        description: ' Enables automated creation of Subdomains for branches. (Currently not supported) '
       subDomainSettings:
         $ref: '#/definitions/SubDomainSettings'
         description: ' Setting structure for the Subdomain. '
