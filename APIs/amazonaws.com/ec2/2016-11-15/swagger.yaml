@@ -4778,7 +4778,7 @@ paths:
           in: query
           description: |-
             Describes the configuration of Spot Instances in an EC2 Fleet request.
-            <p>Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet.</p> <p>If the allocation strategy is <code>lowestPrice</code>, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy.</p> <p>If the allocation strategy is <code>diversified</code>, EC2 Fleet launches instances from all the Spot Instance pools that you specify.</p> <p>If the allocation strategy is <code>capacityOptimized</code>, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.</p>
+            <p>Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet.</p> <p>If the allocation strategy is <code>lowest-price</code>, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy.</p> <p>If the allocation strategy is <code>diversified</code>, EC2 Fleet launches instances from all the Spot Instance pools that you specify.</p> <p>If the allocation strategy is <code>capacity-optimized</code>, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.</p>
           type: string
         - name: SpotOptions.InstanceInterruptionBehavior
           in: query
@@ -4967,7 +4967,7 @@ paths:
           in: formData
           description: |-
             Describes the configuration of Spot Instances in an EC2 Fleet request.
-            <p>Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet.</p> <p>If the allocation strategy is <code>lowestPrice</code>, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy.</p> <p>If the allocation strategy is <code>diversified</code>, EC2 Fleet launches instances from all the Spot Instance pools that you specify.</p> <p>If the allocation strategy is <code>capacityOptimized</code>, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.</p>
+            <p>Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet.</p> <p>If the allocation strategy is <code>lowest-price</code>, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy.</p> <p>If the allocation strategy is <code>diversified</code>, EC2 Fleet launches instances from all the Spot Instance pools that you specify.</p> <p>If the allocation strategy is <code>capacity-optimized</code>, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.</p>
           type: string
         - name: SpotOptions.InstanceInterruptionBehavior
           in: formData
@@ -6049,7 +6049,7 @@ paths:
           in: query
           description: |-
             The information to include in the launch template.
-            Indicates whether an instance is enabled for hibernation. This parameter is valid only if the instance meets the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites">hibernation prerequisites</a>. Hibernation is currently supported only for Amazon Linux. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html">Hibernate Your Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.
+            Indicates whether an instance is enabled for hibernation. This parameter is valid only if the instance meets the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites">hibernation prerequisites</a>. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html">Hibernate Your Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.
           type: string
         - name: TagSpecification
           in: query
@@ -6276,7 +6276,7 @@ paths:
           in: formData
           description: |-
             The information to include in the launch template.
-            Indicates whether an instance is enabled for hibernation. This parameter is valid only if the instance meets the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites">hibernation prerequisites</a>. Hibernation is currently supported only for Amazon Linux. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html">Hibernate Your Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.
+            Indicates whether an instance is enabled for hibernation. This parameter is valid only if the instance meets the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites">hibernation prerequisites</a>. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html">Hibernate Your Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.
           type: string
         - name: TagSpecification
           in: formData
@@ -6506,7 +6506,7 @@ paths:
           in: query
           description: |-
             The information to include in the launch template.
-            Indicates whether an instance is enabled for hibernation. This parameter is valid only if the instance meets the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites">hibernation prerequisites</a>. Hibernation is currently supported only for Amazon Linux. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html">Hibernate Your Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.
+            Indicates whether an instance is enabled for hibernation. This parameter is valid only if the instance meets the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites">hibernation prerequisites</a>. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html">Hibernate Your Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.
           type: string
         - name: Action
           in: query
@@ -6736,7 +6736,7 @@ paths:
           in: formData
           description: |-
             The information to include in the launch template.
-            Indicates whether an instance is enabled for hibernation. This parameter is valid only if the instance meets the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites">hibernation prerequisites</a>. Hibernation is currently supported only for Amazon Linux. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html">Hibernate Your Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.
+            Indicates whether an instance is enabled for hibernation. This parameter is valid only if the instance meets the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites">hibernation prerequisites</a>. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html">Hibernate Your Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.
           type: string
         - name: Action
           in: query
@@ -7991,7 +7991,7 @@ paths:
     get:
       x-aws-operation-name: CreateSnapshots
       operationId: GET CreateSnapshots
-      description: 'Creates crash-consistent snapshots of multiple EBS volumes and stores the data in S3. Volumes are chosen by specifying an instance. Any attached volumes will produce one snapshot each that is crash-consistent across the instance. Boot volumes can be excluded by changing the paramaters. '
+      description: 'Creates crash-consistent snapshots of multiple EBS volumes and stores the data in S3. Volumes are chosen by specifying an instance. Any attached volumes will produce one snapshot each that is crash-consistent across the instance. Boot volumes can be excluded by changing the parameters. '
       responses:
         '200':
           description: Success
@@ -8057,7 +8057,7 @@ paths:
     post:
       x-aws-operation-name: CreateSnapshots
       operationId: POST CreateSnapshots
-      description: 'Creates crash-consistent snapshots of multiple EBS volumes and stores the data in S3. Volumes are chosen by specifying an instance. Any attached volumes will produce one snapshot each that is crash-consistent across the instance. Boot volumes can be excluded by changing the paramaters. '
+      description: 'Creates crash-consistent snapshots of multiple EBS volumes and stores the data in S3. Volumes are chosen by specifying an instance. Any attached volumes will produce one snapshot each that is crash-consistent across the instance. Boot volumes can be excluded by changing the parameters. '
       responses:
         '200':
           description: Success
@@ -8399,7 +8399,7 @@ paths:
     get:
       x-aws-operation-name: CreateTrafficMirrorFilter
       operationId: GET CreateTrafficMirrorFilter
-      description: '<p>Creates a Traffic Mirror filter.</p> <p>A Traffic Mirror filter is a set of rules that defines the traffic to mirror.</p> <p>By default, no traffic is mirrored. To mirror traffic, use <a>CreateTrafficMirrorFilterRule</a> to add Traffic Mirror rules to the filter. The rules you add define what traffic gets mirrored. You can also use <a>ModifyTrafficMirrorFilterNetworkServices</a> to mirror supported network services.</p>'
+      description: '<p>Creates a Traffic Mirror filter.</p> <p>A Traffic Mirror filter is a set of rules that defines the traffic to mirror.</p> <p>By default, no traffic is mirrored. To mirror traffic, use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTrafficMirrorFilterRule.htm">CreateTrafficMirrorFilterRule</a> to add Traffic Mirror rules to the filter. The rules you add define what traffic gets mirrored. You can also use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyTrafficMirrorFilterNetworkServices.html">ModifyTrafficMirrorFilterNetworkServices</a> to mirror supported network services.</p>'
       responses:
         '200':
           description: Success
@@ -8451,7 +8451,7 @@ paths:
     post:
       x-aws-operation-name: CreateTrafficMirrorFilter
       operationId: POST CreateTrafficMirrorFilter
-      description: '<p>Creates a Traffic Mirror filter.</p> <p>A Traffic Mirror filter is a set of rules that defines the traffic to mirror.</p> <p>By default, no traffic is mirrored. To mirror traffic, use <a>CreateTrafficMirrorFilterRule</a> to add Traffic Mirror rules to the filter. The rules you add define what traffic gets mirrored. You can also use <a>ModifyTrafficMirrorFilterNetworkServices</a> to mirror supported network services.</p>'
+      description: '<p>Creates a Traffic Mirror filter.</p> <p>A Traffic Mirror filter is a set of rules that defines the traffic to mirror.</p> <p>By default, no traffic is mirrored. To mirror traffic, use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTrafficMirrorFilterRule.htm">CreateTrafficMirrorFilterRule</a> to add Traffic Mirror rules to the filter. The rules you add define what traffic gets mirrored. You can also use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyTrafficMirrorFilterNetworkServices.html">ModifyTrafficMirrorFilterNetworkServices</a> to mirror supported network services.</p>'
       responses:
         '200':
           description: Success
@@ -8496,7 +8496,7 @@ paths:
     get:
       x-aws-operation-name: CreateTrafficMirrorFilterRule
       operationId: GET CreateTrafficMirrorFilterRule
-      description: <p>Creates a Traffic Mirror rule. </p> <p>A Traffic Mirror rule defines the Traffic Mirror source traffic to mirror.</p> <p>You need the Traffic Mirror filter ID when you create the rule.</p>
+      description: <p>Creates a Traffic Mirror filter rule. </p> <p>A Traffic Mirror rule defines the Traffic Mirror source traffic to mirror.</p> <p>You need the Traffic Mirror filter ID when you create the rule.</p>
       responses:
         '200':
           description: Success
@@ -8606,7 +8606,7 @@ paths:
     post:
       x-aws-operation-name: CreateTrafficMirrorFilterRule
       operationId: POST CreateTrafficMirrorFilterRule
-      description: <p>Creates a Traffic Mirror rule. </p> <p>A Traffic Mirror rule defines the Traffic Mirror source traffic to mirror.</p> <p>You need the Traffic Mirror filter ID when you create the rule.</p>
+      description: <p>Creates a Traffic Mirror filter rule. </p> <p>A Traffic Mirror rule defines the Traffic Mirror source traffic to mirror.</p> <p>You need the Traffic Mirror filter ID when you create the rule.</p>
       responses:
         '200':
           description: Success
@@ -8709,7 +8709,7 @@ paths:
     get:
       x-aws-operation-name: CreateTrafficMirrorSession
       operationId: GET CreateTrafficMirrorSession
-      description: '<p>Creates a Traffic Mirror session.</p> <p>A Traffic Mirror session actively copies packets from a Traffic Mirror source to a Traffic Mirror target. Create a filter, and then assign it to the session to define a subset of the traffic to mirror, for example all TCP traffic.</p> <p>The Traffic Mirror source and the Traffic Mirror target (monitoring appliances) can be in the same VPC, or in a different VPC connected via VPC peering or a transit gateway. </p> <p>By default, no traffic is mirrored. Use <a>CreateTrafficMirrorFilter</a> to create filter rules that specify the traffic to mirror.</p>'
+      description: '<p>Creates a Traffic Mirror session.</p> <p>A Traffic Mirror session actively copies packets from a Traffic Mirror source to a Traffic Mirror target. Create a filter, and then assign it to the session to define a subset of the traffic to mirror, for example all TCP traffic.</p> <p>The Traffic Mirror source and the Traffic Mirror target (monitoring appliances) can be in the same VPC, or in a different VPC connected via VPC peering or a transit gateway. </p> <p>By default, no traffic is mirrored. Use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTrafficMirrorFilter.htm">CreateTrafficMirrorFilter</a> to create filter rules that specify the traffic to mirror.</p>'
       responses:
         '200':
           description: Success
@@ -8734,7 +8734,7 @@ paths:
         - name: PacketLength
           in: query
           required: false
-          description: '<p>The number of bytes in each packet to mirror. These are bytes after the VXLAN header. Do not specify this parameter when you want to mirror the entire packet. To mirror a subset of the packet, set this to the length (in bytes) that you want to mirror. For example, if you set this value to 1network0, then the first 100 bytes that meet the filter criteria are copied to the target.</p> <p>If you do not want to mirror the entire packet, use the <code>PacketLength</code> parameter to specify the number of bytes in each packet to mirror.</p>'
+          description: '<p>The number of bytes in each packet to mirror. These are bytes after the VXLAN header. Do not specify this parameter when you want to mirror the entire packet. To mirror a subset of the packet, set this to the length (in bytes) that you want to mirror. For example, if you set this value to 100, then the first 100 bytes that meet the filter criteria are copied to the target.</p> <p>If you do not want to mirror the entire packet, use the <code>PacketLength</code> parameter to specify the number of bytes in each packet to mirror.</p>'
           type: integer
         - name: SessionNumber
           in: query
@@ -8791,7 +8791,7 @@ paths:
     post:
       x-aws-operation-name: CreateTrafficMirrorSession
       operationId: POST CreateTrafficMirrorSession
-      description: '<p>Creates a Traffic Mirror session.</p> <p>A Traffic Mirror session actively copies packets from a Traffic Mirror source to a Traffic Mirror target. Create a filter, and then assign it to the session to define a subset of the traffic to mirror, for example all TCP traffic.</p> <p>The Traffic Mirror source and the Traffic Mirror target (monitoring appliances) can be in the same VPC, or in a different VPC connected via VPC peering or a transit gateway. </p> <p>By default, no traffic is mirrored. Use <a>CreateTrafficMirrorFilter</a> to create filter rules that specify the traffic to mirror.</p>'
+      description: '<p>Creates a Traffic Mirror session.</p> <p>A Traffic Mirror session actively copies packets from a Traffic Mirror source to a Traffic Mirror target. Create a filter, and then assign it to the session to define a subset of the traffic to mirror, for example all TCP traffic.</p> <p>The Traffic Mirror source and the Traffic Mirror target (monitoring appliances) can be in the same VPC, or in a different VPC connected via VPC peering or a transit gateway. </p> <p>By default, no traffic is mirrored. Use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTrafficMirrorFilter.htm">CreateTrafficMirrorFilter</a> to create filter rules that specify the traffic to mirror.</p>'
       responses:
         '200':
           description: Success
@@ -8816,7 +8816,7 @@ paths:
         - name: PacketLength
           in: formData
           required: false
-          description: '<p>The number of bytes in each packet to mirror. These are bytes after the VXLAN header. Do not specify this parameter when you want to mirror the entire packet. To mirror a subset of the packet, set this to the length (in bytes) that you want to mirror. For example, if you set this value to 1network0, then the first 100 bytes that meet the filter criteria are copied to the target.</p> <p>If you do not want to mirror the entire packet, use the <code>PacketLength</code> parameter to specify the number of bytes in each packet to mirror.</p>'
+          description: '<p>The number of bytes in each packet to mirror. These are bytes after the VXLAN header. Do not specify this parameter when you want to mirror the entire packet. To mirror a subset of the packet, set this to the length (in bytes) that you want to mirror. For example, if you set this value to 100, then the first 100 bytes that meet the filter criteria are copied to the target.</p> <p>If you do not want to mirror the entire packet, use the <code>PacketLength</code> parameter to specify the number of bytes in each packet to mirror.</p>'
           type: integer
         - name: SessionNumber
           in: formData
@@ -8866,7 +8866,7 @@ paths:
     get:
       x-aws-operation-name: CreateTrafficMirrorTarget
       operationId: GET CreateTrafficMirrorTarget
-      description: '<p>Creates a target for your Traffic Mirror session.</p> <p>A Traffic Mirror target is the destination for mirrored traffic. The Traffic Mirror source and the Traffic Mirror target (monitoring appliances) can be in the same VPC, or in different VPCs connected via VPC peering or a transit gateway.</p> <p>A Traffic Mirror target can be a network interface, or a Network Load Balancer.</p> <p>To use the target in a Traffic Mirror session, use <a>CreateTrafficMirrorSession</a>.</p>'
+      description: '<p>Creates a target for your Traffic Mirror session.</p> <p>A Traffic Mirror target is the destination for mirrored traffic. The Traffic Mirror source and the Traffic Mirror target (monitoring appliances) can be in the same VPC, or in different VPCs connected via VPC peering or a transit gateway.</p> <p>A Traffic Mirror target can be a network interface, or a Network Load Balancer.</p> <p>To use the target in a Traffic Mirror session, use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTrafficMirrorSession.htm">CreateTrafficMirrorSession</a>.</p>'
       responses:
         '200':
           description: Success
@@ -8928,7 +8928,7 @@ paths:
     post:
       x-aws-operation-name: CreateTrafficMirrorTarget
       operationId: POST CreateTrafficMirrorTarget
-      description: '<p>Creates a target for your Traffic Mirror session.</p> <p>A Traffic Mirror target is the destination for mirrored traffic. The Traffic Mirror source and the Traffic Mirror target (monitoring appliances) can be in the same VPC, or in different VPCs connected via VPC peering or a transit gateway.</p> <p>A Traffic Mirror target can be a network interface, or a Network Load Balancer.</p> <p>To use the target in a Traffic Mirror session, use <a>CreateTrafficMirrorSession</a>.</p>'
+      description: '<p>Creates a target for your Traffic Mirror session.</p> <p>A Traffic Mirror target is the destination for mirrored traffic. The Traffic Mirror source and the Traffic Mirror target (monitoring appliances) can be in the same VPC, or in different VPCs connected via VPC peering or a transit gateway.</p> <p>A Traffic Mirror target can be a network interface, or a Network Load Balancer.</p> <p>To use the target in a Traffic Mirror session, use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTrafficMirrorSession.htm">CreateTrafficMirrorSession</a>.</p>'
       responses:
         '200':
           description: Success
@@ -20229,6 +20229,8 @@ paths:
             - u-6tb1.metal
             - u-9tb1.metal
             - u-12tb1.metal
+            - u-18tb1.metal
+            - u-24tb1.metal
             - a1.medium
             - a1.large
             - a1.xlarge
@@ -20620,6 +20622,8 @@ paths:
             - u-6tb1.metal
             - u-9tb1.metal
             - u-12tb1.metal
+            - u-18tb1.metal
+            - u-24tb1.metal
             - a1.medium
             - a1.large
             - a1.xlarge
@@ -29604,7 +29608,7 @@ paths:
     get:
       x-aws-operation-name: ModifyFleet
       operationId: GET ModifyFleet
-      description: '<p>Modifies the specified EC2 Fleet.</p> <p>You can only modify an EC2 Fleet request of type <code>maintain</code>.</p> <p>While the EC2 Fleet is being modified, it is in the <code>modifying</code> state.</p> <p>To scale up your EC2 Fleet, increase its target capacity. The EC2 Fleet launches the additional Spot Instances according to the allocation strategy for the EC2 Fleet request. If the allocation strategy is <code>lowestPrice</code>, the EC2 Fleet launches instances using the Spot Instance pool with the lowest price. If the allocation strategy is <code>diversified</code>, the EC2 Fleet distributes the instances across the Spot Instance pools. If the allocation strategy is <code>capacityOptimized</code>, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.</p> <p>To scale down your EC2 Fleet, decrease its target capacity. First, the EC2 Fleet cancels any open requests that exceed the new target capacity. You can request that the EC2 Fleet terminate Spot Instances until the size of the fleet no longer exceeds the new target capacity. If the allocation strategy is <code>lowestPrice</code>, the EC2 Fleet terminates the instances with the highest price per unit. If the allocation strategy is <code>capacityOptimized</code>, the EC2 Fleet terminates the instances in the Spot Instance pools that have the least available Spot Instance capacity. If the allocation strategy is <code>diversified</code>, the EC2 Fleet terminates instances across the Spot Instance pools. Alternatively, you can request that the EC2 Fleet keep the fleet at its current size, but not replace any Spot Instances that are interrupted or that you terminate manually.</p> <p>If you are finished with your EC2 Fleet for now, but will use it again later, you can set the target capacity to 0.</p>'
+      description: '<p>Modifies the specified EC2 Fleet.</p> <p>You can only modify an EC2 Fleet request of type <code>maintain</code>.</p> <p>While the EC2 Fleet is being modified, it is in the <code>modifying</code> state.</p> <p>To scale up your EC2 Fleet, increase its target capacity. The EC2 Fleet launches the additional Spot Instances according to the allocation strategy for the EC2 Fleet request. If the allocation strategy is <code>lowest-price</code>, the EC2 Fleet launches instances using the Spot Instance pool with the lowest price. If the allocation strategy is <code>diversified</code>, the EC2 Fleet distributes the instances across the Spot Instance pools. If the allocation strategy is <code>capacity-optimized</code>, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.</p> <p>To scale down your EC2 Fleet, decrease its target capacity. First, the EC2 Fleet cancels any open requests that exceed the new target capacity. You can request that the EC2 Fleet terminate Spot Instances until the size of the fleet no longer exceeds the new target capacity. If the allocation strategy is <code>lowest-price</code>, the EC2 Fleet terminates the instances with the highest price per unit. If the allocation strategy is <code>capacity-optimized</code>, the EC2 Fleet terminates the instances in the Spot Instance pools that have the least available Spot Instance capacity. If the allocation strategy is <code>diversified</code>, the EC2 Fleet terminates instances across the Spot Instance pools. Alternatively, you can request that the EC2 Fleet keep the fleet at its current size, but not replace any Spot Instances that are interrupted or that you terminate manually.</p> <p>If you are finished with your EC2 Fleet for now, but will use it again later, you can set the target capacity to 0.</p>'
       responses:
         '200':
           description: Success
@@ -29676,7 +29680,7 @@ paths:
     post:
       x-aws-operation-name: ModifyFleet
       operationId: POST ModifyFleet
-      description: '<p>Modifies the specified EC2 Fleet.</p> <p>You can only modify an EC2 Fleet request of type <code>maintain</code>.</p> <p>While the EC2 Fleet is being modified, it is in the <code>modifying</code> state.</p> <p>To scale up your EC2 Fleet, increase its target capacity. The EC2 Fleet launches the additional Spot Instances according to the allocation strategy for the EC2 Fleet request. If the allocation strategy is <code>lowestPrice</code>, the EC2 Fleet launches instances using the Spot Instance pool with the lowest price. If the allocation strategy is <code>diversified</code>, the EC2 Fleet distributes the instances across the Spot Instance pools. If the allocation strategy is <code>capacityOptimized</code>, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.</p> <p>To scale down your EC2 Fleet, decrease its target capacity. First, the EC2 Fleet cancels any open requests that exceed the new target capacity. You can request that the EC2 Fleet terminate Spot Instances until the size of the fleet no longer exceeds the new target capacity. If the allocation strategy is <code>lowestPrice</code>, the EC2 Fleet terminates the instances with the highest price per unit. If the allocation strategy is <code>capacityOptimized</code>, the EC2 Fleet terminates the instances in the Spot Instance pools that have the least available Spot Instance capacity. If the allocation strategy is <code>diversified</code>, the EC2 Fleet terminates instances across the Spot Instance pools. Alternatively, you can request that the EC2 Fleet keep the fleet at its current size, but not replace any Spot Instances that are interrupted or that you terminate manually.</p> <p>If you are finished with your EC2 Fleet for now, but will use it again later, you can set the target capacity to 0.</p>'
+      description: '<p>Modifies the specified EC2 Fleet.</p> <p>You can only modify an EC2 Fleet request of type <code>maintain</code>.</p> <p>While the EC2 Fleet is being modified, it is in the <code>modifying</code> state.</p> <p>To scale up your EC2 Fleet, increase its target capacity. The EC2 Fleet launches the additional Spot Instances according to the allocation strategy for the EC2 Fleet request. If the allocation strategy is <code>lowest-price</code>, the EC2 Fleet launches instances using the Spot Instance pool with the lowest price. If the allocation strategy is <code>diversified</code>, the EC2 Fleet distributes the instances across the Spot Instance pools. If the allocation strategy is <code>capacity-optimized</code>, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.</p> <p>To scale down your EC2 Fleet, decrease its target capacity. First, the EC2 Fleet cancels any open requests that exceed the new target capacity. You can request that the EC2 Fleet terminate Spot Instances until the size of the fleet no longer exceeds the new target capacity. If the allocation strategy is <code>lowest-price</code>, the EC2 Fleet terminates the instances with the highest price per unit. If the allocation strategy is <code>capacity-optimized</code>, the EC2 Fleet terminates the instances in the Spot Instance pools that have the least available Spot Instance capacity. If the allocation strategy is <code>diversified</code>, the EC2 Fleet terminates instances across the Spot Instance pools. Alternatively, you can request that the EC2 Fleet keep the fleet at its current size, but not replace any Spot Instances that are interrupted or that you terminate manually.</p> <p>If you are finished with your EC2 Fleet for now, but will use it again later, you can set the target capacity to 0.</p>'
       responses:
         '200':
           description: Success
@@ -31725,7 +31729,7 @@ paths:
     get:
       x-aws-operation-name: ModifyTrafficMirrorFilterNetworkServices
       operationId: GET ModifyTrafficMirrorFilterNetworkServices
-      description: '<p>Allows or restricts mirroring network services.</p> <p> By default, Amazon DNS network services are not eligible for Traffic Mirror. Use <code>AddNetworkServices</code> to add network services to a Traffic Mirror filter. When a network service is added to the Traffic Mirror filter, all traffic related to that network service will be mirrored. When you no longer want to mirror network services, use <code>RemoveNetworkServices</code> to remove the network services from the Traffic Mirror filter. </p> <p>FFor information about filter rule properties, see <a href="https://docs.aws.amazon.com/vpc/latest/mirroring/traffic-mirroring-considerations.html#traffic-mirroring-network-services">Network Services</a> in the <i>Traffic Mirroring User Guide </i>.</p>'
+      description: '<p>Allows or restricts mirroring network services.</p> <p> By default, Amazon DNS network services are not eligible for Traffic Mirror. Use <code>AddNetworkServices</code> to add network services to a Traffic Mirror filter. When a network service is added to the Traffic Mirror filter, all traffic related to that network service will be mirrored. When you no longer want to mirror network services, use <code>RemoveNetworkServices</code> to remove the network services from the Traffic Mirror filter. </p> <p>For information about filter rule properties, see <a href="https://docs.aws.amazon.com/vpc/latest/mirroring/traffic-mirroring-considerations.html">Network Services</a> in the <i>Traffic Mirroring User Guide </i>.</p>'
       responses:
         '200':
           description: Success
@@ -31779,7 +31783,7 @@ paths:
     post:
       x-aws-operation-name: ModifyTrafficMirrorFilterNetworkServices
       operationId: POST ModifyTrafficMirrorFilterNetworkServices
-      description: '<p>Allows or restricts mirroring network services.</p> <p> By default, Amazon DNS network services are not eligible for Traffic Mirror. Use <code>AddNetworkServices</code> to add network services to a Traffic Mirror filter. When a network service is added to the Traffic Mirror filter, all traffic related to that network service will be mirrored. When you no longer want to mirror network services, use <code>RemoveNetworkServices</code> to remove the network services from the Traffic Mirror filter. </p> <p>FFor information about filter rule properties, see <a href="https://docs.aws.amazon.com/vpc/latest/mirroring/traffic-mirroring-considerations.html#traffic-mirroring-network-services">Network Services</a> in the <i>Traffic Mirroring User Guide </i>.</p>'
+      description: '<p>Allows or restricts mirroring network services.</p> <p> By default, Amazon DNS network services are not eligible for Traffic Mirror. Use <code>AddNetworkServices</code> to add network services to a Traffic Mirror filter. When a network service is added to the Traffic Mirror filter, all traffic related to that network service will be mirrored. When you no longer want to mirror network services, use <code>RemoveNetworkServices</code> to remove the network services from the Traffic Mirror filter. </p> <p>For information about filter rule properties, see <a href="https://docs.aws.amazon.com/vpc/latest/mirroring/traffic-mirroring-considerations.html">Network Services</a> in the <i>Traffic Mirroring User Guide </i>.</p>'
       responses:
         '200':
           description: Success
@@ -34204,7 +34208,7 @@ paths:
         - name: PurchaseTime
           in: query
           required: false
-          description: The time at which to purchase the Reserved Instance.
+          description: 'The time at which to purchase the Reserved Instance, in UTC format (for example, <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>Z).'
           type: string
           format: date-time
         - name: Action
@@ -34267,7 +34271,7 @@ paths:
         - name: PurchaseTime
           in: formData
           required: false
-          description: The time at which to purchase the Reserved Instance.
+          description: 'The time at which to purchase the Reserved Instance, in UTC format (for example, <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>Z).'
           type: string
           format: date-time
         - name: Action
@@ -37810,6 +37814,8 @@ paths:
             - u-6tb1.metal
             - u-9tb1.metal
             - u-12tb1.metal
+            - u-18tb1.metal
+            - u-24tb1.metal
             - a1.medium
             - a1.large
             - a1.xlarge
@@ -38098,7 +38104,7 @@ paths:
         - name: HibernationOptions.Configured
           in: query
           description: |-
-            Indicates whether your instance is configured for hibernation. This parameter is valid only if the instance meets the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites">hibernation prerequisites</a>. Hibernation is currently supported only for Amazon Linux. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html">Hibernate Your Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.
+            Indicates whether your instance is configured for hibernation. This parameter is valid only if the instance meets the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites">hibernation prerequisites</a>. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html">Hibernate Your Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.
             <p>If you set this parameter to <code>true</code>, your instance is enabled for hibernation.</p> <p>Default: <code>false</code> </p>
           type: string
         - name: LicenseSpecification
@@ -38380,6 +38386,8 @@ paths:
             - u-6tb1.metal
             - u-9tb1.metal
             - u-12tb1.metal
+            - u-18tb1.metal
+            - u-24tb1.metal
             - a1.medium
             - a1.large
             - a1.xlarge
@@ -38668,7 +38676,7 @@ paths:
         - name: HibernationOptions.Configured
           in: formData
           description: |-
-            Indicates whether your instance is configured for hibernation. This parameter is valid only if the instance meets the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites">hibernation prerequisites</a>. Hibernation is currently supported only for Amazon Linux. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html">Hibernate Your Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.
+            Indicates whether your instance is configured for hibernation. This parameter is valid only if the instance meets the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites">hibernation prerequisites</a>. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html">Hibernate Your Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.
             <p>If you set this parameter to <code>true</code>, your instance is enabled for hibernation.</p> <p>Default: <code>false</code> </p>
           type: string
         - name: LicenseSpecification
@@ -40574,7 +40582,7 @@ definitions:
         $ref: '#/definitions/String'
         description: The SHA-1 digest of the DER encoded private key.
       KeyMaterial:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SensitiveUserData'
         description: An unencrypted PEM encoded RSA private key.
       KeyName:
         $ref: '#/definitions/String'
@@ -40839,6 +40847,8 @@ definitions:
       - u-6tb1.metal
       - u-9tb1.metal
       - u-12tb1.metal
+      - u-18tb1.metal
+      - u-24tb1.metal
       - a1.medium
       - a1.large
       - a1.xlarge
@@ -40980,7 +40990,7 @@ definitions:
       Configured:
         $ref: '#/definitions/Boolean'
         description: '<p>If you set this parameter to <code>true</code>, the instance is enabled for hibernation.</p> <p>Default: <code>false</code> </p>'
-    description: 'Indicates whether the instance is configured for hibernation. This parameter is valid only if the instance meets the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites">hibernation prerequisites</a>. Hibernation is currently supported only for Amazon Linux.'
+    description: 'Indicates whether the instance is configured for hibernation. This parameter is valid only if the instance meets the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites">hibernation prerequisites</a>.'
   LaunchTemplateBlockDeviceMappingRequest:
     type: object
     properties:
@@ -43551,6 +43561,8 @@ definitions:
       TotalUpfrontPrice:
         $ref: '#/definitions/String'
         description: The potential total upfront price. This is billed immediately.
+  HostId:
+    type: string
   GetLaunchTemplateDataResult:
     type: object
     example:
@@ -44907,13 +44919,15 @@ definitions:
         $ref: '#/definitions/TargetConfigurationRequestSet'
         description: The configuration of the target Convertible Reserved Instance to exchange for your current Convertible Reserved Instances.
     description: Contains the parameters for accepting the quote.
+  TransitGatewayAttachmentId:
+    type: string
   AcceptTransitGatewayVpcAttachmentRequest:
     type: object
     required:
       - TransitGatewayAttachmentId
     properties:
       TransitGatewayAttachmentId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayAttachmentId'
         description: The ID of the attachment.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -44949,6 +44963,8 @@ definitions:
         $ref: '#/definitions/TagList'
         description: The tags for the VPC attachment.
     description: Describes a VPC attachment.
+  ServiceId:
+    type: string
   AcceptVpcEndpointConnectionsRequest:
     type: object
     required:
@@ -44959,7 +44975,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       ServiceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ServiceId'
         description: The ID of the endpoint service.
       VpcEndpointIds:
         $ref: '#/definitions/ValueStringList'
@@ -44968,6 +44984,8 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/UnsuccessfulItem'
+  VpcPeeringConnectionId:
+    type: string
   AcceptVpcPeeringConnectionRequest:
     type: object
     properties:
@@ -44975,7 +44993,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       VpcPeeringConnectionId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpcPeeringConnectionId'
         description: The ID of the VPC peering connection. You must specify this parameter in the request.
   VpcPeeringConnection:
     type: object
@@ -45200,6 +45218,8 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/String'
+  AllocationId:
+    type: string
   AllocationIdList:
     type: array
     items:
@@ -45236,6 +45256,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AllowedPrincipal'
+  ClientVpnEndpointId:
+    type: string
+  VpcId:
+    type: string
   ClientVpnSecurityGroupIdSet:
     type: array
     items:
@@ -45248,10 +45272,10 @@ definitions:
       - SecurityGroupIds
     properties:
       ClientVpnEndpointId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ClientVpnEndpointId'
         description: The ID of the Client VPN endpoint.
       VpcId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpcId'
         description: The ID of the VPC in which the associated target network is located.
       SecurityGroupIds:
         $ref: '#/definitions/ClientVpnSecurityGroupIdSet'
@@ -45263,6 +45287,8 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/String'
+  NetworkInterfaceId:
+    type: string
   AssignIpv6AddressesRequest:
     type: object
     required:
@@ -45275,7 +45301,7 @@ definitions:
         $ref: '#/definitions/Ipv6AddressList'
         description: One or more specific IPv6 addresses to be assigned to the network interface. You can't use this option if you're specifying a number of IPv6 addresses.
       NetworkInterfaceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/NetworkInterfaceId'
         description: The ID of the network interface.
   PrivateIpAddressStringList:
     type: array
@@ -45290,7 +45316,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: Indicates whether to allow an IP address that is already assigned to another network interface or instance to be reassigned to the specified network interface.
       NetworkInterfaceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/NetworkInterfaceId'
         description: The ID of the network interface.
       PrivateIpAddresses:
         $ref: '#/definitions/PrivateIpAddressStringList'
@@ -45310,14 +45336,16 @@ definitions:
         $ref: '#/definitions/String'
         description: The private IP address assigned to the network interface.
     description: Describes the private IP addresses assigned to a network interface.
+  InstanceId:
+    type: string
   AssociateAddressRequest:
     type: object
     properties:
       AllocationId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/AllocationId'
         description: '[EC2-VPC] The allocation ID. This is required for EC2-VPC.'
       InstanceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/InstanceId'
         description: 'The ID of the instance. This is required for EC2-Classic. For EC2-VPC, you can specify either the instance ID or the network interface ID, but not both. The operation fails if you specify an instance ID unless exactly one network interface is attached.'
       PublicIp:
         $ref: '#/definitions/String'
@@ -45329,11 +45357,13 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       NetworkInterfaceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/NetworkInterfaceId'
         description: '<p>[EC2-VPC] The ID of the network interface. If the instance has more than one network interface, you must specify a network interface ID.</p> <p>For EC2-VPC, you can specify either the instance ID or the network interface ID, but not both. </p>'
       PrivateIpAddress:
         $ref: '#/definitions/String'
         description: '[EC2-VPC] The primary or secondary private IP address to associate with the Elastic IP address. If no private IP address is specified, the Elastic IP address is associated with the primary private IP address.'
+  SubnetId:
+    type: string
   AssociateClientVpnTargetNetworkRequest:
     type: object
     required:
@@ -45341,10 +45371,10 @@ definitions:
       - SubnetId
     properties:
       ClientVpnEndpointId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ClientVpnEndpointId'
         description: The ID of the Client VPN endpoint.
       SubnetId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SubnetId'
         description: The ID of the subnet to associate with the Client VPN endpoint.
       ClientToken:
         $ref: '#/definitions/String'
@@ -45362,6 +45392,8 @@ definitions:
         $ref: '#/definitions/String'
         description: 'A message about the status of the target network association, if applicable.'
     description: Describes the state of a target network association.
+  DhcpOptionsId:
+    type: string
   AssociateDhcpOptionsRequest:
     type: object
     required:
@@ -45369,10 +45401,10 @@ definitions:
       - VpcId
     properties:
       DhcpOptionsId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/DhcpOptionsId'
         description: 'The ID of the DHCP options set, or <code>default</code> to associate no DHCP options with the VPC.'
       VpcId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpcId'
         description: The ID of the VPC.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -45387,7 +45419,7 @@ definitions:
         $ref: '#/definitions/IamInstanceProfileSpecification'
         description: The IAM instance profile.
       InstanceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/InstanceId'
         description: The ID of the instance.
   IamInstanceProfileAssociation:
     type: object
@@ -45408,6 +45440,8 @@ definitions:
         $ref: '#/definitions/DateTime'
         description: The time the IAM instance profile was associated with the instance.
     description: Describes an association between an IAM instance profile and an instance.
+  RouteTableId:
+    type: string
   AssociateRouteTableRequest:
     type: object
     required:
@@ -45418,10 +45452,10 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       RouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/RouteTableId'
         description: The ID of the route table.
       SubnetId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SubnetId'
         description: The ID of the subnet.
   AssociateSubnetCidrBlockRequest:
     type: object
@@ -45433,7 +45467,7 @@ definitions:
         $ref: '#/definitions/String'
         description: The IPv6 CIDR block for your subnet. The subnet must have a /64 prefix length.
       SubnetId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SubnetId'
         description: The ID of your subnet.
   SubnetIpv6CidrBlockAssociation:
     type: object
@@ -45448,6 +45482,8 @@ definitions:
         $ref: '#/definitions/SubnetCidrBlockState'
         description: Information about the state of the CIDR block.
     description: Describes an IPv6 CIDR block associated with a subnet.
+  TransitGatewayRouteTableId:
+    type: string
   AssociateTransitGatewayRouteTableRequest:
     type: object
     required:
@@ -45455,10 +45491,10 @@ definitions:
       - TransitGatewayAttachmentId
     properties:
       TransitGatewayRouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayRouteTableId'
         description: The ID of the transit gateway route table.
       TransitGatewayAttachmentId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayAttachmentId'
         description: The ID of the attachment.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -45494,7 +45530,7 @@ definitions:
         $ref: '#/definitions/String'
         description: An IPv4 CIDR block to associate with the VPC.
       VpcId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpcId'
         description: The ID of the VPC.
   VpcIpv6CidrBlockAssociation:
     type: object
@@ -45570,11 +45606,13 @@ definitions:
         $ref: '#/definitions/GroupIdStringList'
         description: The ID of one or more of the VPC's security groups. You cannot specify security groups from a different VPC.
       InstanceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/InstanceId'
         description: The ID of an EC2-Classic instance to link to the ClassicLink-enabled VPC.
       VpcId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpcId'
         description: The ID of a ClassicLink-enabled VPC.
+  InternetGatewayId:
+    type: string
   AttachInternetGatewayRequest:
     type: object
     required:
@@ -45585,10 +45623,10 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       InternetGatewayId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/InternetGatewayId'
         description: The ID of the internet gateway.
       VpcId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpcId'
         description: The ID of the VPC.
   AttachNetworkInterfaceRequest:
     type: object
@@ -45604,12 +45642,14 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       InstanceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/InstanceId'
         description: The ID of the instance.
       NetworkInterfaceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/NetworkInterfaceId'
         description: The ID of the network interface.
     description: Contains the parameters for AttachNetworkInterface.
+  VolumeId:
+    type: string
   AttachVolumeRequest:
     type: object
     required:
@@ -45621,15 +45661,17 @@ definitions:
         $ref: '#/definitions/String'
         description: 'The device name (for example, <code>/dev/sdh</code> or <code>xvdh</code>).'
       InstanceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/InstanceId'
         description: The ID of the instance.
       VolumeId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VolumeId'
         description: The ID of the EBS volume. The volume and instance must be within the same Availability Zone.
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
     description: Contains the parameters for AttachVolume.
+  VpnGatewayId:
+    type: string
   AttachVpnGatewayRequest:
     type: object
     required:
@@ -45637,10 +45679,10 @@ definitions:
       - VpnGatewayId
     properties:
       VpcId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpcId'
         description: The ID of the VPC.
       VpnGatewayId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpnGatewayId'
         description: The ID of the virtual private gateway.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -45656,6 +45698,8 @@ definitions:
         $ref: '#/definitions/String'
         description: The ID of the VPC.
     description: Describes an attachment between a virtual private gateway and a VPC.
+  AttachmentId:
+    type: string
   AttachmentStatus:
     type: string
     enum:
@@ -45720,7 +45764,7 @@ definitions:
       - TargetNetworkCidr
     properties:
       ClientVpnEndpointId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ClientVpnEndpointId'
         description: The ID of the Client VPN endpoint.
       TargetNetworkCidr:
         $ref: '#/definitions/String'
@@ -45943,7 +45987,7 @@ definitions:
       - Storage
     properties:
       InstanceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/InstanceId'
         description: '<p>The ID of the instance to bundle.</p> <p>Type: String</p> <p>Default: None</p> <p>Required: Yes</p>'
       Storage:
         $ref: '#/definitions/Storage'
@@ -46037,24 +46081,28 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
     description: Contains the parameters for CancelBundleTask.
+  CapacityReservationId:
+    type: string
   CancelCapacityReservationRequest:
     type: object
     required:
       - CapacityReservationId
     properties:
       CapacityReservationId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/CapacityReservationId'
         description: The ID of the Capacity Reservation to be cancelled.
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+  ConversionTaskId:
+    type: string
   CancelConversionRequest:
     type: object
     required:
       - ConversionTaskId
     properties:
       ConversionTaskId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ConversionTaskId'
         description: The ID of the conversion task.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -46062,14 +46110,18 @@ definitions:
       ReasonMessage:
         $ref: '#/definitions/String'
         description: The reason for canceling the conversion task.
+  ExportTaskId:
+    type: string
   CancelExportTaskRequest:
     type: object
     required:
       - ExportTaskId
     properties:
       ExportTaskId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ExportTaskId'
         description: The ID of the export task. This is the ID returned by <code>CreateInstanceExportTask</code>.
+  ImportTaskId:
+    type: string
   CancelImportTaskRequest:
     type: object
     properties:
@@ -46080,15 +46132,17 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       ImportTaskId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ImportTaskId'
         description: The ID of the import image or import snapshot task to be canceled.
+  ReservedInstancesListingId:
+    type: string
   CancelReservedInstancesListingRequest:
     type: object
     required:
       - ReservedInstancesListingId
     properties:
       ReservedInstancesListingId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ReservedInstancesListingId'
         description: The ID of the Reserved Instance listing.
     description: Contains the parameters for CancelReservedInstancesListing.
   ReservedInstancesListingList:
@@ -46695,7 +46749,7 @@ definitions:
       - ProductCode
     properties:
       InstanceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/InstanceId'
         description: The ID of the instance.
       ProductCode:
         $ref: '#/definitions/String'
@@ -46750,6 +46804,8 @@ definitions:
         $ref: '#/definitions/ConnectionNotificationState'
         description: The state of the notification.
     description: Describes a connection notification for a VPC endpoint or VPC endpoint service.
+  ConnectionNotificationId:
+    type: string
   ConnectionNotificationSet:
     type: array
     items:
@@ -46849,6 +46905,8 @@ definitions:
       ClientToken:
         $ref: '#/definitions/String'
         description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html">Ensuring Idempotency</a>.'
+  KmsKeyId:
+    type: string
   CopyImageRequest:
     type: object
     required:
@@ -46866,7 +46924,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Specifies whether the destination snapshots of the copied image should be encrypted. You can encrypt a copy of an unencrypted snapshot, but you cannot create an unencrypted copy of an encrypted snapshot. The default CMK for EBS is used unless you specify a non-default AWS Key Management Service (AWS KMS) CMK using <code>KmsKeyId</code>. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
       KmsKeyId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/KmsKeyId'
         description: '<p>An identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted volume. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. If a <code>KmsKeyId</code> is specified, the <code>Encrypted</code> flag must also be set. </p> <p>To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. When using an alias name, prefix it with "alias/". For example:</p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Alias name: <code>alias/ExampleAlias</code> </p> </li> <li> <p>Alias ARN: <code>arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias</code> </p> </li> </ul> <p>AWS parses <code>KmsKeyId</code> asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. This action will eventually report failure. </p> <p>The specified CMK must exist in the Region that the snapshot is being copied to. </p>'
       Name:
         $ref: '#/definitions/String'
@@ -46897,7 +46955,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'To encrypt a copy of an unencrypted snapshot if encryption by default is not enabled, enable encryption using this parameter. Otherwise, omit this parameter. Encrypted snapshots are encrypted, even if you omit this parameter and encryption by default is not enabled. You cannot set this parameter to false. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
       KmsKeyId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/KmsKeyId'
         description: '<p>The identifier of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use for Amazon EBS encryption. If this parameter is not specified, your AWS managed CMK for EBS is used. If <code>KmsKeyId</code> is specified, the encrypted state must be <code>true</code>.</p> <p>You can specify the CMK using any of the following:</p> <ul> <li> <p>Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.</p> </li> <li> <p>Key alias. For example, alias/ExampleAlias.</p> </li> <li> <p>Key ARN. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:key/<i>abcd1234-a123-456a-a12b-a123b4cd56ef</i>.</p> </li> <li> <p>Alias ARN. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:alias/<i>ExampleAlias</i>.</p> </li> </ul> <p>AWS authenticates the CMK asynchronously. Therefore, if you specify an ID, alias, or ARN that is not valid, the action can appear to complete, but eventually fails.</p>'
       PresignedUrl:
         $ref: '#/definitions/String'
@@ -47034,7 +47092,7 @@ definitions:
       - TargetVpcSubnetId
     properties:
       ClientVpnEndpointId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ClientVpnEndpointId'
         description: The ID of the Client VPN endpoint to which to add the route.
       DestinationCidrBlock:
         $ref: '#/definitions/String'
@@ -47242,7 +47300,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       VpcId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpcId'
         description: The ID of the VPC for which to create the egress-only internet gateway.
   EgressOnlyInternetGateway:
     type: object
@@ -47325,7 +47383,7 @@ definitions:
     properties:
       AllocationStrategy:
         $ref: '#/definitions/SpotAllocationStrategy'
-        description: '<p>Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet.</p> <p>If the allocation strategy is <code>lowestPrice</code>, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy.</p> <p>If the allocation strategy is <code>diversified</code>, EC2 Fleet launches instances from all the Spot Instance pools that you specify.</p> <p>If the allocation strategy is <code>capacityOptimized</code>, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.</p>'
+        description: '<p>Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet.</p> <p>If the allocation strategy is <code>lowest-price</code>, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy.</p> <p>If the allocation strategy is <code>diversified</code>, EC2 Fleet launches instances from all the Spot Instance pools that you specify.</p> <p>If the allocation strategy is <code>capacity-optimized</code>, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.</p>'
       InstanceInterruptionBehavior:
         $ref: '#/definitions/SpotInstanceInterruptionBehavior'
         description: The behavior when a Spot Instance is interrupted. The default is <code>terminate</code>.
@@ -47543,7 +47601,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       InstanceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/InstanceId'
         description: The ID of the instance.
       Name:
         $ref: '#/definitions/String'
@@ -47585,7 +47643,7 @@ definitions:
         $ref: '#/definitions/ExportToS3TaskSpecification'
         description: The format and location for an instance export task.
       InstanceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/InstanceId'
         description: The ID of the instance.
       TargetEnvironment:
         $ref: '#/definitions/ExportEnvironment'
@@ -47634,13 +47692,15 @@ definitions:
         $ref: '#/definitions/TagList'
         description: Any tags assigned to the internet gateway.
     description: Describes an internet gateway.
+  KeyPairName:
+    type: string
   CreateKeyPairRequest:
     type: object
     required:
       - KeyName
     properties:
       KeyName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/KeyPairName'
         description: '<p>A unique name for the key pair.</p> <p>Constraints: Up to 255 ASCII characters</p>'
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -47725,7 +47785,7 @@ definitions:
         description: The license configurations.
       HibernationOptions:
         $ref: '#/definitions/LaunchTemplateHibernationOptionsRequest'
-        description: 'Indicates whether an instance is enabled for hibernation. This parameter is valid only if the instance meets the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites">hibernation prerequisites</a>. Hibernation is currently supported only for Amazon Linux. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html">Hibernate Your Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
+        description: 'Indicates whether an instance is enabled for hibernation. This parameter is valid only if the instance meets the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites">hibernation prerequisites</a>. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html">Hibernate Your Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
     description: The information to include in the launch template.
   CreateLaunchTemplateRequest:
     type: object
@@ -47776,6 +47836,8 @@ definitions:
         $ref: '#/definitions/TagList'
         description: The tags for the launch template.
     description: Describes a launch template.
+  LaunchTemplateId:
+    type: string
   CreateLaunchTemplateVersionRequest:
     type: object
     required:
@@ -47788,7 +47850,7 @@ definitions:
         $ref: '#/definitions/String'
         description: '<p>Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring Idempotency</a>.</p> <p>Constraint: Maximum 128 ASCII characters.</p>'
       LaunchTemplateId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/LaunchTemplateId'
         description: The ID of the launch template. You must specify either the launch template ID or launch template name in the request.
       LaunchTemplateName:
         $ref: '#/definitions/LaunchTemplateName'
@@ -47837,13 +47899,13 @@ definitions:
       - SubnetId
     properties:
       AllocationId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/AllocationId'
         description: 'The allocation ID of an Elastic IP address to associate with the NAT gateway. If the Elastic IP address is associated with another resource, you must first disassociate it.'
       ClientToken:
         $ref: '#/definitions/String'
         description: '<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">How to Ensure Idempotency</a>.</p> <p>Constraint: Maximum 64 ASCII characters.</p>'
       SubnetId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SubnetId'
         description: The subnet in which to create the NAT gateway.
   NatGateway:
     type: object
@@ -47892,6 +47954,8 @@ definitions:
         $ref: '#/definitions/Integer'
         description: The ICMP type. A value of -1 means all types.
     description: Describes the ICMP type and code.
+  NetworkAclId:
+    type: string
   PortRange:
     type: object
     properties:
@@ -47932,7 +47996,7 @@ definitions:
         $ref: '#/definitions/String'
         description: 'The IPv6 network range to allow or deny, in CIDR notation (for example <code>2001:db8:1234:1a00::/64</code>).'
       NetworkAclId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/NetworkAclId'
         description: The ID of the network ACL.
       PortRange:
         $ref: '#/definitions/PortRange'
@@ -47955,7 +48019,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       VpcId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpcId'
         description: The ID of the VPC.
   NetworkAcl:
     type: object
@@ -47994,7 +48058,7 @@ definitions:
       - Permission
     properties:
       NetworkInterfaceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/NetworkInterfaceId'
         description: The ID of the network interface.
       AwsAccountId:
         $ref: '#/definitions/String'
@@ -48076,7 +48140,7 @@ definitions:
         $ref: '#/definitions/NetworkInterfaceCreationType'
         description: 'Indicates the type of network interface. To create an Elastic Fabric Adapter (EFA), specify <code>efa</code>. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html"> Elastic Fabric Adapter</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
       SubnetId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SubnetId'
         description: The ID of the subnet to associate with the network interface.
     description: Contains the parameters for CreateNetworkInterface.
   NetworkInterface:
@@ -48189,6 +48253,12 @@ definitions:
         $ref: '#/definitions/String'
         description: The ID of the active Standard Reserved Instance.
     description: Contains the parameters for CreateReservedInstancesListing.
+  RouteTableGatewayId:
+    type: string
+  NatGatewayId:
+    type: string
+  TransitGatewayId:
+    type: string
   CreateRouteRequest:
     type: object
     required:
@@ -48204,28 +48274,28 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       EgressOnlyInternetGatewayId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/EgressOnlyInternetGatewayId'
         description: '[IPv6 traffic only] The ID of an egress-only internet gateway.'
       GatewayId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/RouteTableGatewayId'
         description: The ID of an internet gateway or virtual private gateway attached to your VPC.
       InstanceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/InstanceId'
         description: The ID of a NAT instance in your VPC. The operation fails if you specify an instance ID unless exactly one network interface is attached.
       NatGatewayId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/NatGatewayId'
         description: '[IPv4 traffic only] The ID of a NAT gateway.'
       TransitGatewayId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayId'
         description: The ID of a transit gateway.
       NetworkInterfaceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/NetworkInterfaceId'
         description: The ID of a network interface.
       RouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/RouteTableId'
         description: The ID of the route table for the route.
       VpcPeeringConnectionId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpcPeeringConnectionId'
         description: The ID of a VPC peering connection.
   CreateRouteTableRequest:
     type: object
@@ -48236,7 +48306,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       VpcId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpcId'
         description: The ID of the VPC.
   RouteTable:
     type: object
@@ -48276,7 +48346,7 @@ definitions:
         $ref: '#/definitions/String'
         description: '<p>The name of the security group.</p> <p>Constraints: Up to 255 characters in length. Cannot start with <code>sg-</code>.</p> <p>Constraints for EC2-Classic: ASCII characters</p> <p>Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=&amp;;{}!$*</p>'
       VpcId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpcId'
         description: '[EC2-VPC] The ID of the VPC. Required for EC2-VPC.'
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -48290,7 +48360,7 @@ definitions:
         $ref: '#/definitions/String'
         description: A description for the snapshot.
       VolumeId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VolumeId'
         description: The ID of the EBS volume.
       TagSpecifications:
         $ref: '#/definitions/TagSpecificationList'
@@ -48386,7 +48456,7 @@ definitions:
         $ref: '#/definitions/String'
         description: 'The IPv6 network range for the subnet, in CIDR notation. The subnet size must use a /64 prefix length.'
       VpcId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpcId'
         description: The ID of the VPC.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -48447,6 +48517,8 @@ definitions:
         $ref: '#/definitions/TagList'
         description: The tags assigned to the Traffic Mirror filter.
     description: Describes the Traffic Mirror filter.
+  TrafficMirrorFilterId:
+    type: string
   TrafficDirection:
     type: string
     enum:
@@ -48478,7 +48550,7 @@ definitions:
       - SourceCidrBlock
     properties:
       TrafficMirrorFilterId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TrafficMirrorFilterId'
         description: The ID of the filter that this rule is associated with.
       TrafficDirection:
         $ref: '#/definitions/TrafficDirection'
@@ -48550,6 +48622,8 @@ definitions:
         $ref: '#/definitions/String'
         description: The description of the Traffic Mirror rule.
     description: Describes the Traffic Mirror rule.
+  TrafficMirrorTargetId:
+    type: string
   CreateTrafficMirrorSessionRequest:
     type: object
     required:
@@ -48559,17 +48633,17 @@ definitions:
       - SessionNumber
     properties:
       NetworkInterfaceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/NetworkInterfaceId'
         description: The ID of the source network interface.
       TrafficMirrorTargetId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TrafficMirrorTargetId'
         description: The ID of the Traffic Mirror target.
       TrafficMirrorFilterId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TrafficMirrorFilterId'
         description: The ID of the Traffic Mirror filter.
       PacketLength:
         $ref: '#/definitions/Integer'
-        description: '<p>The number of bytes in each packet to mirror. These are bytes after the VXLAN header. Do not specify this parameter when you want to mirror the entire packet. To mirror a subset of the packet, set this to the length (in bytes) that you want to mirror. For example, if you set this value to 1network0, then the first 100 bytes that meet the filter criteria are copied to the target.</p> <p>If you do not want to mirror the entire packet, use the <code>PacketLength</code> parameter to specify the number of bytes in each packet to mirror.</p>'
+        description: '<p>The number of bytes in each packet to mirror. These are bytes after the VXLAN header. Do not specify this parameter when you want to mirror the entire packet. To mirror a subset of the packet, set this to the length (in bytes) that you want to mirror. For example, if you set this value to 100, then the first 100 bytes that meet the filter criteria are copied to the target.</p> <p>If you do not want to mirror the entire packet, use the <code>PacketLength</code> parameter to specify the number of bytes in each packet to mirror.</p>'
       SessionNumber:
         $ref: '#/definitions/Integer'
         description: <p>The session number determines the order in which sessions are evaluated when an interface is used by multiple sessions. The first session with a matching filter is the one that mirrors the packets.</p> <p>Valid values are 1-32766.</p>
@@ -48626,7 +48700,7 @@ definitions:
     type: object
     properties:
       NetworkInterfaceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/NetworkInterfaceId'
         description: The network interface ID that is associated with the target.
       NetworkLoadBalancerArn:
         $ref: '#/definitions/String'
@@ -48743,10 +48817,10 @@ definitions:
         $ref: '#/definitions/String'
         description: The CIDR range used for destination matches. Routing decisions are based on the most specific match.
       TransitGatewayRouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayRouteTableId'
         description: The ID of the transit gateway route table.
       TransitGatewayAttachmentId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayAttachmentId'
         description: The ID of the attachment.
       Blackhole:
         $ref: '#/definitions/Boolean'
@@ -48776,7 +48850,7 @@ definitions:
       - TransitGatewayId
     properties:
       TransitGatewayId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayId'
         description: The ID of the transit gateway.
       TagSpecifications:
         $ref: '#/definitions/TagSpecificationList'
@@ -48827,10 +48901,10 @@ definitions:
       - SubnetIds
     properties:
       TransitGatewayId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayId'
         description: The ID of the transit gateway.
       VpcId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpcId'
         description: The ID of the VPC.
       SubnetIds:
         $ref: '#/definitions/ValueStringList'
@@ -48858,6 +48932,8 @@ definitions:
         $ref: '#/definitions/CreateVolumePermissionList'
         description: Removes the specified AWS account ID or group from the list.
     description: Describes modifications to the list of create volume permissions for a volume.
+  SnapshotId:
+    type: string
   VolumeType:
     type: string
     enum:
@@ -48881,13 +48957,13 @@ definitions:
         $ref: '#/definitions/Integer'
         description: '<p>The number of I/O operations per second (IOPS) to provision for the volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 64,000 IOPS for volumes in most Regions. Maximum IOPS of 64,000 is guaranteed only on <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances">Nitro-based instances</a>. Other instance families guarantee performance up to 32,000 IOPS. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>This parameter is valid only for Provisioned IOPS SSD (io1) volumes.</p>'
       KmsKeyId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/KmsKeyId'
         description: '<p>The identifier of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use for Amazon EBS encryption. If this parameter is not specified, your AWS managed CMK for EBS is used. If <code>KmsKeyId</code> is specified, the encrypted state must be <code>true</code>.</p> <p>You can specify the CMK using any of the following:</p> <ul> <li> <p>Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.</p> </li> <li> <p>Key alias. For example, alias/ExampleAlias.</p> </li> <li> <p>Key ARN. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:key/<i>abcd1234-a123-456a-a12b-a123b4cd56ef</i>.</p> </li> <li> <p>Alias ARN. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:alias/<i>ExampleAlias</i>.</p> </li> </ul> <p>AWS authenticates the CMK asynchronously. Therefore, if you specify an ID, alias, or ARN that is not valid, the action can appear to complete, but eventually fails.</p>'
       Size:
         $ref: '#/definitions/Integer'
         description: '<p>The size of the volume, in GiBs.</p> <p>Constraints: 1-16,384 for <code>gp2</code>, 4-16,384 for <code>io1</code>, 500-16,384 for <code>st1</code>, 500-16,384 for <code>sc1</code>, and 1-1,024 for <code>standard</code>. If you specify a snapshot, the volume size must be equal to or larger than the snapshot size.</p> <p>Default: If you''re creating the volume from a snapshot and don''t specify a volume size, the default is the snapshot size.</p> <note> <p>At least one of Size or SnapshotId is required.</p> </note>'
       SnapshotId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SnapshotId'
         description: <p>The snapshot from which to create the volume.</p> <note> <p>At least one of Size or SnapshotId are required.</p> </note>
       VolumeType:
         $ref: '#/definitions/VolumeType'
@@ -48899,6 +48975,8 @@ definitions:
         $ref: '#/definitions/TagSpecificationList'
         description: The tags to apply to the volume during creation.
     description: Contains the parameters for CreateVolume.
+  VpcEndpointId:
+    type: string
   CreateVpcEndpointConnectionNotificationRequest:
     type: object
     required:
@@ -48909,10 +48987,10 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       ServiceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ServiceId'
         description: The ID of the endpoint service.
       VpcEndpointId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpcEndpointId'
         description: 'The ID of the endpoint. '
       ConnectionNotificationArn:
         $ref: '#/definitions/String'
@@ -48941,7 +49019,7 @@ definitions:
         $ref: '#/definitions/VpcEndpointType'
         description: '<p>The type of endpoint.</p> <p>Default: Gateway</p>'
       VpcId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpcId'
         description: The ID of the VPC in which the endpoint will be used.
       ServiceName:
         $ref: '#/definitions/String'
@@ -49084,7 +49162,7 @@ definitions:
         $ref: '#/definitions/String'
         description: The ID of the VPC with which you are creating the VPC peering connection. You must specify this parameter in the request.
       VpcId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpcId'
         description: The ID of the requester VPC. You must specify this parameter in the request.
       PeerRegion:
         $ref: '#/definitions/String'
@@ -49106,6 +49184,8 @@ definitions:
       InstanceTenancy:
         $ref: '#/definitions/Tenancy'
         description: '<p>The tenancy options for instances launched into the VPC. For <code>default</code>, instances are launched with shared tenancy by default. You can launch instances with any tenancy into a shared tenancy VPC. For <code>dedicated</code>, instances are launched as dedicated tenancy instances by default. You can only launch instances with a tenancy of <code>dedicated</code> or <code>host</code> into a dedicated tenancy VPC. </p> <p> <b>Important:</b> The <code>host</code> value cannot be used with this parameter. Use the <code>default</code> or <code>dedicated</code> values only.</p> <p>Default: <code>default</code> </p>'
+  CustomerGatewayId:
+    type: string
   VpnConnectionOptionsSpecification:
     type: object
     properties:
@@ -49123,16 +49203,16 @@ definitions:
       - Type
     properties:
       CustomerGatewayId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/CustomerGatewayId'
         description: The ID of the customer gateway.
       Type:
         $ref: '#/definitions/String'
         description: The type of VPN connection (<code>ipsec.1</code>).
       VpnGatewayId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpnGatewayId'
         description: 'The ID of the virtual private gateway. If you specify a virtual private gateway, you cannot specify a transit gateway.'
       TransitGatewayId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayId'
         description: 'The ID of the transit gateway. If you specify a transit gateway, you cannot specify a virtual private gateway.'
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -49181,6 +49261,8 @@ definitions:
         $ref: '#/definitions/VgwTelemetryList'
         description: Information about the VPN tunnel.
     description: Describes a VPN connection.
+  VpnConnectionId:
+    type: string
   CreateVpnConnectionRouteRequest:
     type: object
     required:
@@ -49191,7 +49273,7 @@ definitions:
         $ref: '#/definitions/String'
         description: The CIDR block associated with the local subnet of the customer network.
       VpnConnectionId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpnConnectionId'
         description: The ID of the VPN connection.
     description: Contains the parameters for CreateVpnConnectionRoute.
   CreateVpnGatewayRequest:
@@ -49263,7 +49345,7 @@ definitions:
       - ClientVpnEndpointId
     properties:
       ClientVpnEndpointId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ClientVpnEndpointId'
         description: The ID of the Client VPN to be deleted.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -49275,7 +49357,7 @@ definitions:
       - DestinationCidrBlock
     properties:
       ClientVpnEndpointId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ClientVpnEndpointId'
         description: The ID of the Client VPN endpoint from which the route is to be deleted.
       TargetVpcSubnetId:
         $ref: '#/definitions/String'
@@ -49292,7 +49374,7 @@ definitions:
       - CustomerGatewayId
     properties:
       CustomerGatewayId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/CustomerGatewayId'
         description: The ID of the customer gateway.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -49304,7 +49386,7 @@ definitions:
       - DhcpOptionsId
     properties:
       DhcpOptionsId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/DhcpOptionsId'
         description: The ID of the DHCP options set.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -49408,6 +49490,8 @@ definitions:
       FlowLogIds:
         $ref: '#/definitions/ValueStringList'
         description: '<p>One or more flow log IDs.</p> <p>Constraint: Maximum of 1000 flow log IDs.</p>'
+  FpgaImageId:
+    type: string
   DeleteFpgaImageRequest:
     type: object
     required:
@@ -49417,7 +49501,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       FpgaImageId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/FpgaImageId'
         description: The ID of the AFI.
   DeleteInternetGatewayRequest:
     type: object
@@ -49428,7 +49512,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       InternetGatewayId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/InternetGatewayId'
         description: The ID of the internet gateway.
   DeleteKeyPairRequest:
     type: object
@@ -49448,7 +49532,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       LaunchTemplateId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/LaunchTemplateId'
         description: The ID of the launch template. You must specify either the launch template ID or launch template name in the request.
       LaunchTemplateName:
         $ref: '#/definitions/LaunchTemplateName'
@@ -49466,7 +49550,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       LaunchTemplateId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/LaunchTemplateId'
         description: The ID of the launch template. You must specify either the launch template ID or launch template name in the request.
       LaunchTemplateName:
         $ref: '#/definitions/LaunchTemplateName'
@@ -49527,7 +49611,7 @@ definitions:
       - NatGatewayId
     properties:
       NatGatewayId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/NatGatewayId'
         description: The ID of the NAT gateway.
   DeleteNetworkAclEntryRequest:
     type: object
@@ -49543,7 +49627,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: Indicates whether the rule is an egress rule.
       NetworkAclId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/NetworkAclId'
         description: The ID of the network ACL.
       RuleNumber:
         $ref: '#/definitions/Integer'
@@ -49557,7 +49641,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       NetworkAclId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/NetworkAclId'
         description: The ID of the network ACL.
   DeleteNetworkInterfacePermissionRequest:
     type: object
@@ -49583,7 +49667,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       NetworkInterfaceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/NetworkInterfaceId'
         description: The ID of the network interface.
     description: Contains the parameters for DeleteNetworkInterface.
   DeletePlacementGroupRequest:
@@ -49653,7 +49737,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       RouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/RouteTableId'
         description: The ID of the route table.
   DeleteRouteTableRequest:
     type: object
@@ -49684,7 +49768,7 @@ definitions:
       - SnapshotId
     properties:
       SnapshotId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SnapshotId'
         description: The ID of the EBS snapshot.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -49703,7 +49787,7 @@ definitions:
       - SubnetId
     properties:
       SubnetId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SubnetId'
         description: The ID of the subnet.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -49728,29 +49812,33 @@ definitions:
       - TrafficMirrorFilterId
     properties:
       TrafficMirrorFilterId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TrafficMirrorFilterId'
         description: The ID of the Traffic Mirror filter.
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+  TrafficMirrorFilterRuleId:
+    type: string
   DeleteTrafficMirrorFilterRuleRequest:
     type: object
     required:
       - TrafficMirrorFilterRuleId
     properties:
       TrafficMirrorFilterRuleId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TrafficMirrorFilterRuleId'
         description: The ID of the Traffic Mirror rule.
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+  TrafficMirrorSessionId:
+    type: string
   DeleteTrafficMirrorSessionRequest:
     type: object
     required:
       - TrafficMirrorSessionId
     properties:
       TrafficMirrorSessionId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TrafficMirrorSessionId'
         description: The ID of the Traffic Mirror session.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -49761,7 +49849,7 @@ definitions:
       - TrafficMirrorTargetId
     properties:
       TrafficMirrorTargetId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TrafficMirrorTargetId'
         description: The ID of the Traffic Mirror target.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -49772,7 +49860,7 @@ definitions:
       - TransitGatewayId
     properties:
       TransitGatewayId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayId'
         description: The ID of the transit gateway.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -49784,7 +49872,7 @@ definitions:
       - DestinationCidrBlock
     properties:
       TransitGatewayRouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayRouteTableId'
         description: The ID of the transit gateway route table.
       DestinationCidrBlock:
         $ref: '#/definitions/String'
@@ -49798,7 +49886,7 @@ definitions:
       - TransitGatewayRouteTableId
     properties:
       TransitGatewayRouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayRouteTableId'
         description: The ID of the transit gateway route table.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -49809,7 +49897,7 @@ definitions:
       - TransitGatewayAttachmentId
     properties:
       TransitGatewayAttachmentId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayAttachmentId'
         description: The ID of the attachment.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -49820,7 +49908,7 @@ definitions:
       - VolumeId
     properties:
       VolumeId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VolumeId'
         description: The ID of the volume.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -49869,7 +49957,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       VpcPeeringConnectionId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpcPeeringConnectionId'
         description: The ID of the VPC peering connection.
   DeleteVpcRequest:
     type: object
@@ -49877,7 +49965,7 @@ definitions:
       - VpcId
     properties:
       VpcId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpcId'
         description: The ID of the VPC.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -49888,7 +49976,7 @@ definitions:
       - VpnConnectionId
     properties:
       VpnConnectionId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpnConnectionId'
         description: The ID of the VPN connection.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -49904,7 +49992,7 @@ definitions:
         $ref: '#/definitions/String'
         description: The CIDR block associated with the local subnet of the customer network.
       VpnConnectionId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpnConnectionId'
         description: The ID of the VPN connection.
     description: Contains the parameters for DeleteVpnConnectionRoute.
   DeleteVpnGatewayRequest:
@@ -49913,7 +50001,7 @@ definitions:
       - VpnGatewayId
     properties:
       VpnGatewayId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpnGatewayId'
         description: The ID of the virtual private gateway.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -49930,13 +50018,15 @@ definitions:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+  ImageId:
+    type: string
   DeregisterImageRequest:
     type: object
     required:
       - ImageId
     properties:
       ImageId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ImageId'
         description: The ID of the AMI.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -51889,7 +51979,7 @@ definitions:
         $ref: '#/definitions/DescribeStaleSecurityGroupsNextToken'
         description: The token for the next set of items to return. (You received this token from a prior call.)
       VpcId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpcId'
         description: The ID of the VPC.
   StaleSecurityGroupSet:
     type: array
@@ -52502,10 +52592,10 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       InstanceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/InstanceId'
         description: The ID of the instance to unlink from the VPC.
       VpcId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpcId'
         description: The ID of the VPC to which the instance is linked.
   DetachInternetGatewayRequest:
     type: object
@@ -52517,10 +52607,10 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       InternetGatewayId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/InternetGatewayId'
         description: The ID of the internet gateway.
       VpcId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpcId'
         description: The ID of the VPC.
   DetachNetworkInterfaceRequest:
     type: object
@@ -52528,7 +52618,7 @@ definitions:
       - AttachmentId
     properties:
       AttachmentId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/AttachmentId'
         description: The ID of the attachment.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -52549,10 +52639,10 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Forces detachment if the previous detachment attempt did not occur cleanly (for example, logging into an instance, unmounting the volume, and detaching normally). This option can lead to data loss or a corrupted file system. Use this option only as a last resort to detach a volume from a failed instance. The instance won''t have an opportunity to flush file system caches or file system metadata. If you use this option, you must perform file system check and repair procedures.'
       InstanceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/InstanceId'
         description: The ID of the instance.
       VolumeId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VolumeId'
         description: The ID of the volume.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -52565,10 +52655,10 @@ definitions:
       - VpnGatewayId
     properties:
       VpcId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpcId'
         description: The ID of the VPC.
       VpnGatewayId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpnGatewayId'
         description: The ID of the virtual private gateway.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -52610,10 +52700,10 @@ definitions:
       - TransitGatewayAttachmentId
     properties:
       TransitGatewayRouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayRouteTableId'
         description: The ID of the propagation route table.
       TransitGatewayAttachmentId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayAttachmentId'
         description: The ID of the attachment.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -52644,17 +52734,17 @@ definitions:
       - RouteTableId
     properties:
       GatewayId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpnGatewayId'
         description: The ID of the virtual private gateway.
       RouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/RouteTableId'
         description: The ID of the route table.
     description: Contains the parameters for DisableVgwRoutePropagation.
   DisableVpcClassicLinkDnsSupportRequest:
     type: object
     properties:
       VpcId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpcId'
         description: The ID of the VPC.
   DisableVpcClassicLinkRequest:
     type: object
@@ -52665,7 +52755,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       VpcId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpcId'
         description: The ID of the VPC.
   DisassociateAddressRequest:
     type: object
@@ -52686,7 +52776,7 @@ definitions:
       - AssociationId
     properties:
       ClientVpnEndpointId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ClientVpnEndpointId'
         description: The ID of the Client VPN endpoint from which to disassociate the target network.
       AssociationId:
         $ref: '#/definitions/String'
@@ -52702,24 +52792,28 @@ definitions:
       AssociationId:
         $ref: '#/definitions/String'
         description: The ID of the IAM instance profile association.
+  RouteTableAssociationId:
+    type: string
   DisassociateRouteTableRequest:
     type: object
     required:
       - AssociationId
     properties:
       AssociationId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/RouteTableAssociationId'
         description: The association ID representing the current association between the route table and subnet.
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+  SubnetCidrAssociationId:
+    type: string
   DisassociateSubnetCidrBlockRequest:
     type: object
     required:
       - AssociationId
     properties:
       AssociationId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SubnetCidrAssociationId'
         description: The association ID for the CIDR block.
   DisassociateTransitGatewayRouteTableRequest:
     type: object
@@ -52728,21 +52822,23 @@ definitions:
       - TransitGatewayAttachmentId
     properties:
       TransitGatewayRouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayRouteTableId'
         description: The ID of the transit gateway route table.
       TransitGatewayAttachmentId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayAttachmentId'
         description: The ID of the attachment.
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+  VpcCidrAssociationId:
+    type: string
   DisassociateVpcCidrBlockRequest:
     type: object
     required:
       - AssociationId
     properties:
       AssociationId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpcCidrAssociationId'
         description: The association ID for the CIDR block.
   DiskImageDetail:
     type: object
@@ -52964,10 +53060,10 @@ definitions:
       - TransitGatewayAttachmentId
     properties:
       TransitGatewayRouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayRouteTableId'
         description: The ID of the propagation route table.
       TransitGatewayAttachmentId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayAttachmentId'
         description: The ID of the attachment.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -52979,10 +53075,10 @@ definitions:
       - RouteTableId
     properties:
       GatewayId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpnGatewayId'
         description: 'The ID of the virtual private gateway that is attached to a VPC. The virtual private gateway must be attached to the same VPC that the routing tables are associated with. '
       RouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/RouteTableId'
         description: 'The ID of the route table. The routing table must be associated with the same VPC that the virtual private gateway is attached to. '
     description: Contains the parameters for EnableVgwRoutePropagation.
   EnableVolumeIORequest:
@@ -52994,14 +53090,14 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       VolumeId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VolumeId'
         description: The ID of the volume.
     description: Contains the parameters for EnableVolumeIO.
   EnableVpcClassicLinkDnsSupportRequest:
     type: object
     properties:
       VpcId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpcId'
         description: The ID of the VPC.
   EnableVpcClassicLinkRequest:
     type: object
@@ -53012,7 +53108,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       VpcId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpcId'
         description: The ID of the VPC.
   EventCode:
     type: string
@@ -53041,7 +53137,7 @@ definitions:
       - ClientVpnEndpointId
     properties:
       ClientVpnEndpointId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ClientVpnEndpointId'
         description: The ID of the Client VPN endpoint.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -53052,7 +53148,7 @@ definitions:
       - ClientVpnEndpointId
     properties:
       ClientVpnEndpointId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ClientVpnEndpointId'
         description: The ID of the Client VPN endpoint.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -53089,7 +53185,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       ImageId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ImageId'
         description: The ID of the image.
       S3ExportLocation:
         $ref: '#/definitions/ExportTaskS3LocationRequest'
@@ -53172,7 +53268,7 @@ definitions:
       - S3Bucket
     properties:
       TransitGatewayRouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayRouteTableId'
         description: The ID of the route table.
       Filters:
         $ref: '#/definitions/FilterList'
@@ -53225,13 +53321,13 @@ definitions:
     properties:
       AllocationStrategy:
         $ref: '#/definitions/SpotAllocationStrategy'
-        description: '<p>Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet.</p> <p>If the allocation strategy is <code>lowestPrice</code>, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy.</p> <p>If the allocation strategy is <code>diversified</code>, EC2 Fleet launches instances from all the Spot Instance pools that you specify.</p> <p>If the allocation strategy is <code>capacityOptimized</code>, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.</p>'
+        description: '<p>Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet.</p> <p>If the allocation strategy is <code>lowest-price</code>, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy.</p> <p>If the allocation strategy is <code>diversified</code>, EC2 Fleet launches instances from all the Spot Instance pools that you specify.</p> <p>If the allocation strategy is <code>capacity-optimized</code>, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.</p>'
       InstanceInterruptionBehavior:
         $ref: '#/definitions/SpotInstanceInterruptionBehavior'
         description: The behavior when a Spot Instance is interrupted. The default is <code>terminate</code>.
       InstancePoolsToUseCount:
         $ref: '#/definitions/Integer'
-        description: The number of Spot pools across which to allocate your target Spot capacity. Valid only when <b>AllocationStrategy</b> is set to <code>lowestPrice</code>. EC2 Fleet selects the cheapest Spot pools and evenly allocates your target Spot capacity across the number of Spot pools that you specify.
+        description: The number of Spot pools across which to allocate your target Spot capacity. Valid only when <b>AllocationStrategy</b> is set to <code>lowest-price</code>. EC2 Fleet selects the cheapest Spot pools and evenly allocates your target Spot capacity across the number of Spot pools that you specify.
       SingleInstanceType:
         $ref: '#/definitions/Boolean'
         description: Indicates that the fleet uses a single instance type to launch all Spot Instances in the fleet.
@@ -53569,7 +53665,7 @@ definitions:
       - CapacityReservationId
     properties:
       CapacityReservationId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/CapacityReservationId'
         description: The ID of the Capacity Reservation.
       NextToken:
         $ref: '#/definitions/String'
@@ -53590,7 +53686,7 @@ definitions:
       - InstanceId
     properties:
       InstanceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/InstanceId'
         description: The ID of the instance.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -53607,7 +53703,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       InstanceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/InstanceId'
         description: The ID of the instance.
       WakeUp:
         $ref: '#/definitions/Boolean'
@@ -53627,7 +53723,9 @@ definitions:
   RequestHostIdSet:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/HostId'
+  OfferingId:
+    type: string
   GetHostReservationPurchasePreviewRequest:
     type: object
     required:
@@ -53638,7 +53736,7 @@ definitions:
         $ref: '#/definitions/RequestHostIdSet'
         description: The IDs of the Dedicated Hosts with which the reservation is associated.
       OfferingId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/OfferingId'
         description: The offering ID of the reservation.
   PurchaseSet:
     type: array
@@ -53653,7 +53751,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       InstanceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/InstanceId'
         description: The ID of the instance.
   ResponseLaunchTemplateData:
     type: object
@@ -53740,7 +53838,7 @@ definitions:
       - InstanceId
     properties:
       InstanceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/InstanceId'
         description: The ID of the Windows instance.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -53787,7 +53885,7 @@ definitions:
       - TransitGatewayAttachmentId
     properties:
       TransitGatewayAttachmentId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayAttachmentId'
         description: The ID of the attachment.
       Filters:
         $ref: '#/definitions/FilterList'
@@ -53811,7 +53909,7 @@ definitions:
       - TransitGatewayRouteTableId
     properties:
       TransitGatewayRouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayRouteTableId'
         description: The ID of the transit gateway route table.
       Filters:
         $ref: '#/definitions/FilterList'
@@ -53835,7 +53933,7 @@ definitions:
       - TransitGatewayRouteTableId
     properties:
       TransitGatewayRouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayRouteTableId'
         description: The ID of the transit gateway route table.
       Filters:
         $ref: '#/definitions/FilterList'
@@ -53883,14 +53981,14 @@ definitions:
       Configured:
         $ref: '#/definitions/Boolean'
         description: 'If this parameter is set to <code>true</code>, your instance is enabled for hibernation; otherwise, it is not enabled for hibernation.'
-    description: 'Indicates whether your instance is configured for hibernation. This parameter is valid only if the instance meets the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites">hibernation prerequisites</a>. Hibernation is currently supported only for Amazon Linux. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html">Hibernate Your Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
+    description: 'Indicates whether your instance is configured for hibernation. This parameter is valid only if the instance meets the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites">hibernation prerequisites</a>. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html">Hibernate Your Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
   HibernationOptionsRequest:
     type: object
     properties:
       Configured:
         $ref: '#/definitions/Boolean'
         description: '<p>If you set this parameter to <code>true</code>, your instance is enabled for hibernation.</p> <p>Default: <code>false</code> </p>'
-    description: 'Indicates whether your instance is configured for hibernation. This parameter is valid only if the instance meets the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites">hibernation prerequisites</a>. Hibernation is currently supported only for Amazon Linux. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html">Hibernate Your Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
+    description: 'Indicates whether your instance is configured for hibernation. This parameter is valid only if the instance meets the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites">hibernation prerequisites</a>. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html">Hibernate Your Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
   HistoryRecord:
     type: object
     properties:
@@ -54247,7 +54345,7 @@ definitions:
       - CertificateRevocationList
     properties:
       ClientVpnEndpointId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ClientVpnEndpointId'
         description: The ID of the Client VPN endpoint to which the client certificate revocation list applies.
       CertificateRevocationList:
         $ref: '#/definitions/String'
@@ -54283,7 +54381,7 @@ definitions:
         $ref: '#/definitions/String'
         description: '<p>The target hypervisor platform.</p> <p>Valid values: <code>xen</code> </p>'
       KmsKeyId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/KmsKeyId'
         description: '<p>An identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted AMI. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. If a <code>KmsKeyId</code> is specified, the <code>Encrypted</code> flag must also be set. </p> <p>The CMK identifier may be provided in any of the following formats: </p> <ul> <li> <p>Key ID</p> </li> <li> <p>Key alias. The alias ARN contains the <code>arn:aws:kms</code> namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the <code>alias</code> namespace, and then the CMK alias. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:alias/<i>ExampleAlias</i>.</p> </li> <li> <p>ARN using key ID. The ID ARN contains the <code>arn:aws:kms</code> namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the <code>key</code> namespace, and then the CMK ID. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:key/<i>abcd1234-a123-456a-a12b-a123b4cd56ef</i>.</p> </li> <li> <p>ARN using key alias. The alias ARN contains the <code>arn:aws:kms</code> namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the <code>alias</code> namespace, and then the CMK alias. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:alias/<i>ExampleAlias</i>. </p> </li> </ul> <p>AWS parses <code>KmsKeyId</code> asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. This action will eventually report failure. </p> <p>The specified CMK must exist in the Region that the AMI is being copied to.</p>'
       LicenseType:
         $ref: '#/definitions/String'
@@ -54480,7 +54578,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Specifies whether the destination snapshot of the imported image should be encrypted. The default CMK for EBS is used unless you specify a non-default AWS Key Management Service (AWS KMS) CMK using <code>KmsKeyId</code>. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
       KmsKeyId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/KmsKeyId'
         description: '<p>An identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted snapshot. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. If a <code>KmsKeyId</code> is specified, the <code>Encrypted</code> flag must also be set. </p> <p>The CMK identifier may be provided in any of the following formats: </p> <ul> <li> <p>Key ID</p> </li> <li> <p>Key alias. The alias ARN contains the <code>arn:aws:kms</code> namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the <code>alias</code> namespace, and then the CMK alias. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:alias/<i>ExampleAlias</i>.</p> </li> <li> <p>ARN using key ID. The ID ARN contains the <code>arn:aws:kms</code> namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the <code>key</code> namespace, and then the CMK ID. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:key/<i>abcd1234-a123-456a-a12b-a123b4cd56ef</i>.</p> </li> <li> <p>ARN using key alias. The alias ARN contains the <code>arn:aws:kms</code> namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the <code>alias</code> namespace, and then the CMK alias. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:alias/<i>ExampleAlias</i>. </p> </li> </ul> <p>AWS parses <code>KmsKeyId</code> asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. This action will eventually report failure. </p> <p>The specified CMK must exist in the Region that the snapshot is being copied to.</p>'
       RoleName:
         $ref: '#/definitions/String'
@@ -54780,8 +54878,6 @@ definitions:
     items:
       $ref: '#/definitions/InstanceCreditSpecificationRequest'
   InstanceEventId:
-    type: string
-  InstanceId:
     type: string
   InstanceIdSet:
     type: array
@@ -55131,6 +55227,11 @@ definitions:
         $ref: '#/definitions/String'
         description: '<p>A description for the security group rule that references this IPv6 address range.</p> <p>Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=;{}!$*</p>'
     description: '[EC2-VPC only] Describes an IPv6 range.'
+  KernelId:
+    type: string
+  SensitiveUserData:
+    type: string
+    format: password
   KeyPairInfo:
     type: object
     properties:
@@ -55577,7 +55678,7 @@ definitions:
       - CapacityReservationId
     properties:
       CapacityReservationId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/CapacityReservationId'
         description: The ID of the Capacity Reservation.
       InstanceCount:
         $ref: '#/definitions/Integer'
@@ -55597,7 +55698,7 @@ definitions:
       - ClientVpnEndpointId
     properties:
       ClientVpnEndpointId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ClientVpnEndpointId'
         description: The ID of the Client VPN endpoint to modify.
       ServerCertificateArn:
         $ref: '#/definitions/String'
@@ -55623,7 +55724,7 @@ definitions:
       - KmsKeyId
     properties:
       KmsKeyId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/KmsKeyId'
         description: '<p>The identifier of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use for Amazon EBS encryption. If this parameter is not specified, your AWS managed CMK for EBS is used. If <code>KmsKeyId</code> is specified, the encrypted state must be <code>true</code>.</p> <p>You can specify the CMK using any of the following:</p> <ul> <li> <p>Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.</p> </li> <li> <p>Key alias. For example, alias/ExampleAlias.</p> </li> <li> <p>Key ARN. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:key/<i>abcd1234-a123-456a-a12b-a123b4cd56ef</i>.</p> </li> <li> <p>Alias ARN. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:alias/<i>ExampleAlias</i>.</p> </li> </ul> <p>AWS authenticates the CMK asynchronously. Therefore, if you specify an ID, alias, or ARN that is not valid, the action can appear to complete, but eventually fails.</p>'
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -55672,7 +55773,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       FpgaImageId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/FpgaImageId'
         description: The ID of the AFI.
       Attribute:
         $ref: '#/definitions/FpgaImageAttributeName'
@@ -55756,7 +55857,7 @@ definitions:
         $ref: '#/definitions/AttributeValue'
         description: A new description for the AMI.
       ImageId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ImageId'
         description: The ID of the AMI.
       LaunchPermission:
         $ref: '#/definitions/LaunchPermissionModifications'
@@ -55810,7 +55911,7 @@ definitions:
         $ref: '#/definitions/GroupIdStringList'
         description: '[EC2-VPC] Changes the security groups of the instance. You must specify at least one security group, even if it''s just the default security group for the VPC. You must specify the security group ID, not the security group name.'
       InstanceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/InstanceId'
         description: The ID of the instance.
       InstanceInitiatedShutdownBehavior:
         $ref: '#/definitions/AttributeValue'
@@ -55840,7 +55941,7 @@ definitions:
       - CapacityReservationSpecification
     properties:
       InstanceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/InstanceId'
         description: The ID of the instance to be modified.
       CapacityReservationSpecification:
         $ref: '#/definitions/CapacityReservationSpecification'
@@ -55881,7 +55982,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       InstanceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/InstanceId'
         description: The ID of the instance with the scheduled event.
       InstanceEventId:
         $ref: '#/definitions/String'
@@ -55889,6 +55990,8 @@ definitions:
       NotBefore:
         $ref: '#/definitions/DateTime'
         description: The new date and time when the event will take place.
+  PlacementGroupName:
+    type: string
   ModifyInstancePlacementRequest:
     type: object
     required:
@@ -55898,13 +56001,13 @@ definitions:
         $ref: '#/definitions/Affinity'
         description: The affinity setting for the instance.
       GroupName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/PlacementGroupName'
         description: '<p>The name of the placement group in which to place the instance. For spread placement groups, the instance must have a tenancy of <code>default</code>. For cluster and partition placement groups, the instance must have a tenancy of <code>default</code> or <code>dedicated</code>.</p> <p>To remove an instance from a placement group, specify an empty string ("").</p>'
       HostId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/HostId'
         description: The ID of the Dedicated Host with which to associate the instance.
       InstanceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/InstanceId'
         description: The ID of the instance that you are modifying.
       Tenancy:
         $ref: '#/definitions/HostTenancy'
@@ -55922,7 +56025,7 @@ definitions:
         $ref: '#/definitions/String'
         description: '<p>Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring Idempotency</a>.</p> <p>Constraint: Maximum 128 ASCII characters.</p>'
       LaunchTemplateId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/LaunchTemplateId'
         description: The ID of the launch template. You must specify either the launch template ID or launch template name in the request.
       LaunchTemplateName:
         $ref: '#/definitions/LaunchTemplateName'
@@ -55958,7 +56061,7 @@ definitions:
         $ref: '#/definitions/SecurityGroupIdStringList'
         description: 'Changes the security groups for the network interface. The new set of groups you specify replaces the current set. You must specify at least one group, even if it''s just the default security group in the VPC. You must specify the ID of the security group, not the name.'
       NetworkInterfaceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/NetworkInterfaceId'
         description: The ID of the network interface.
       SourceDestCheck:
         $ref: '#/definitions/AttributeBooleanValue'
@@ -56002,7 +56105,7 @@ definitions:
         $ref: '#/definitions/OperationType'
         description: The type of operation to perform to the attribute.
       SnapshotId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SnapshotId'
         description: The ID of the snapshot.
       UserIds:
         $ref: '#/definitions/UserIdStringList'
@@ -56011,6 +56114,8 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
     description: Contains the parameters for ModifySnapshotAttribute.
+  SpotFleetRequestId:
+    type: string
   ModifySpotFleetRequestRequest:
     type: object
     required:
@@ -56020,7 +56125,7 @@ definitions:
         $ref: '#/definitions/ExcessCapacityTerminationPolicy'
         description: Indicates whether running Spot Instances should be terminated if the target capacity of the Spot Fleet request is decreased below the current size of the Spot Fleet.
       SpotFleetRequestId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SpotFleetRequestId'
         description: The ID of the Spot Fleet request.
       TargetCapacity:
         $ref: '#/definitions/Integer'
@@ -56041,7 +56146,7 @@ definitions:
         $ref: '#/definitions/AttributeBooleanValue'
         description: Specify <code>true</code> to indicate that ENIs attached to instances created in the specified subnet should be assigned a public IPv4 address.
       SubnetId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SubnetId'
         description: The ID of the subnet.
   TrafficMirrorNetworkServiceList:
     type: array
@@ -56053,7 +56158,7 @@ definitions:
       - TrafficMirrorFilterId
     properties:
       TrafficMirrorFilterId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TrafficMirrorFilterId'
         description: The ID of the Traffic Mirror filter.
       AddNetworkServices:
         $ref: '#/definitions/TrafficMirrorNetworkServiceList'
@@ -56074,7 +56179,7 @@ definitions:
       - TrafficMirrorFilterRuleId
     properties:
       TrafficMirrorFilterRuleId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TrafficMirrorFilterRuleId'
         description: The ID of the Traffic Mirror rule.
       TrafficDirection:
         $ref: '#/definitions/TrafficDirection'
@@ -56119,13 +56224,13 @@ definitions:
       - TrafficMirrorSessionId
     properties:
       TrafficMirrorSessionId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TrafficMirrorSessionId'
         description: The ID of the Traffic Mirror session.
       TrafficMirrorTargetId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TrafficMirrorTargetId'
         description: 'The Traffic Mirror target. The target must be in the same VPC as the source, or have a VPC peering connection with the source.'
       TrafficMirrorFilterId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TrafficMirrorFilterId'
         description: The ID of the Traffic Mirror filter.
       PacketLength:
         $ref: '#/definitions/Integer'
@@ -56161,7 +56266,7 @@ definitions:
       - TransitGatewayAttachmentId
     properties:
       TransitGatewayAttachmentId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayAttachmentId'
         description: The ID of the attachment.
       AddSubnetIds:
         $ref: '#/definitions/ValueStringList'
@@ -56184,7 +56289,7 @@ definitions:
         $ref: '#/definitions/AttributeBooleanValue'
         description: Indicates whether the volume should be auto-enabled for I/O operations.
       VolumeId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VolumeId'
         description: The ID of the volume.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -56199,7 +56304,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       VolumeId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VolumeId'
         description: The ID of the volume.
       Size:
         $ref: '#/definitions/Integer'
@@ -56262,7 +56367,7 @@ definitions:
         $ref: '#/definitions/AttributeBooleanValue'
         description: '<p>Indicates whether the DNS resolution is supported for the VPC. If enabled, queries to the Amazon provided DNS server at the 169.254.169.253 IP address, or the reserved IP address at the base of the VPC network range "plus two" succeed. If disabled, the Amazon provided DNS service in the VPC that resolves public DNS hostnames to IP addresses is not enabled.</p> <p>You cannot modify the DNS resolution and DNS hostnames attributes in the same request. Use separate requests for each attribute.</p>'
       VpcId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpcId'
         description: The ID of the VPC.
   ModifyVpcEndpointConnectionNotificationRequest:
     type: object
@@ -56273,7 +56378,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       ConnectionNotificationId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ConnectionNotificationId'
         description: The ID of the notification.
       ConnectionNotificationArn:
         $ref: '#/definitions/String'
@@ -56290,7 +56395,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       VpcEndpointId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpcEndpointId'
         description: The ID of the endpoint.
       ResetPolicy:
         $ref: '#/definitions/Boolean'
@@ -56329,7 +56434,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       ServiceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ServiceId'
         description: The ID of the service.
       AcceptanceRequired:
         $ref: '#/definitions/Boolean'
@@ -56385,7 +56490,7 @@ definitions:
         $ref: '#/definitions/PeeringConnectionOptionsRequest'
         description: The VPC peering connection options for the requester VPC.
       VpcPeeringConnectionId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpcPeeringConnectionId'
         description: The ID of the VPC peering connection.
   PeeringConnectionOptions:
     type: object
@@ -56411,7 +56516,7 @@ definitions:
       - InstanceTenancy
     properties:
       VpcId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpcId'
         description: The ID of the VPC.
       InstanceTenancy:
         $ref: '#/definitions/VpcTenancy'
@@ -56425,16 +56530,16 @@ definitions:
       - VpnConnectionId
     properties:
       VpnConnectionId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpnConnectionId'
         description: The ID of the VPN connection.
       TransitGatewayId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayId'
         description: The ID of the transit gateway.
       CustomerGatewayId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/CustomerGatewayId'
         description: The ID of the customer gateway at your end of the VPN connection.
       VpnGatewayId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpnGatewayId'
         description: The ID of the virtual private gateway at the AWS side of the VPN connection.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -56446,7 +56551,7 @@ definitions:
       - VpnTunnelOutsideIpAddress
     properties:
       VpnConnectionId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpnConnectionId'
         description: The ID of the AWS Site-to-Site VPN connection.
       VpnTunnelOutsideIpAddress:
         $ref: '#/definitions/String'
@@ -56511,7 +56616,7 @@ definitions:
       - TunnelOptions
     properties:
       VpnConnectionId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpnConnectionId'
         description: The ID of the AWS Site-to-Site VPN connection.
       VpnTunnelOutsideIpAddress:
         $ref: '#/definitions/String'
@@ -56640,6 +56745,8 @@ definitions:
         $ref: '#/definitions/String'
         description: The ID of the subnet.
     description: Describes an association between a network ACL and a subnet.
+  NetworkAclAssociationId:
+    type: string
   NetworkAclEntry:
     type: object
     properties:
@@ -57048,7 +57155,7 @@ definitions:
         $ref: '#/definitions/String'
         description: 'The specified limit is checked against the total upfront cost of the reservation (calculated as the offering''s upfront cost multiplied by the host count). If the total upfront cost is greater than the specified price limit, the request fails. This is used to ensure that the purchase does not exceed the expected upfront cost of the purchase. At this time, the only supported currency is <code>USD</code>. For example, to indicate a limit price of USD 100, specify 100.00.'
       OfferingId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/OfferingId'
         description: The ID of the offering.
   PurchaseRequestSet:
     type: array
@@ -57085,7 +57192,7 @@ definitions:
         description: Specified for Reserved Instance Marketplace offerings to limit the total order and ensure that the Reserved Instances are not purchased at unexpected prices.
       PurchaseTime:
         $ref: '#/definitions/DateTime'
-        description: The time at which to purchase the Reserved Instance.
+        description: 'The time at which to purchase the Reserved Instance, in UTC format (for example, <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>Z).'
     description: Contains the parameters for PurchaseReservedInstancesOffering.
   PurchaseScheduledInstancesRequest:
     type: object
@@ -57155,6 +57262,8 @@ definitions:
         $ref: '#/definitions/Integer'
         description: The total number of hours for a single instance for the entire term.
     description: Describes a Scheduled Instance.
+  RamdiskId:
+    type: string
   ReasonCodesList:
     type: array
     items:
@@ -57225,7 +57334,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: <p>Set to <code>true</code> to enable enhanced networking with ENA for the AMI and any instances that you launch from the AMI.</p> <p>This option is supported only for HVM AMIs. Specifying this option with a PV AMI can make instances launched from the AMI unreachable.</p>
       KernelId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/KernelId'
         description: The ID of the kernel.
       Name:
         $ref: '#/definitions/String'
@@ -57234,7 +57343,7 @@ definitions:
         $ref: '#/definitions/BillingProductList'
         description: 'The billing product codes. Your account must be authorized to specify billing product codes. Otherwise, you can use the AWS Marketplace to bill for the use of an AMI.'
       RamdiskId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/RamdiskId'
         description: The ID of the RAM disk.
       RootDeviceName:
         $ref: '#/definitions/String'
@@ -57252,7 +57361,7 @@ definitions:
       - TransitGatewayAttachmentId
     properties:
       TransitGatewayAttachmentId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayAttachmentId'
         description: The ID of the attachment.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -57267,7 +57376,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       ServiceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ServiceId'
         description: The ID of the service.
       VpcEndpointIds:
         $ref: '#/definitions/ValueStringList'
@@ -57281,13 +57390,13 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       VpcPeeringConnectionId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpcPeeringConnectionId'
         description: The ID of the VPC peering connection.
   ReleaseAddressRequest:
     type: object
     properties:
       AllocationId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/AllocationId'
         description: '[EC2-VPC] The allocation ID. Required for EC2-VPC.'
       PublicIp:
         $ref: '#/definitions/String'
@@ -57322,13 +57431,13 @@ definitions:
       - NetworkAclId
     properties:
       AssociationId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/NetworkAclAssociationId'
         description: The ID of the current association between the original network ACL and the subnet.
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       NetworkAclId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/NetworkAclId'
         description: The ID of the new network ACL to associate with the subnet.
   ReplaceNetworkAclEntryRequest:
     type: object
@@ -57355,7 +57464,7 @@ definitions:
         $ref: '#/definitions/String'
         description: 'The IPv6 network range to allow or deny, in CIDR notation (for example <code>2001:bd8:1234:1a00::/64</code>).'
       NetworkAclId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/NetworkAclId'
         description: The ID of the ACL.
       PortRange:
         $ref: '#/definitions/PortRange'
@@ -57384,28 +57493,28 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       EgressOnlyInternetGatewayId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/EgressOnlyInternetGatewayId'
         description: '[IPv6 traffic only] The ID of an egress-only internet gateway.'
       GatewayId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/RouteTableGatewayId'
         description: The ID of an internet gateway or virtual private gateway.
       InstanceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/InstanceId'
         description: The ID of a NAT instance in your VPC.
       NatGatewayId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/NatGatewayId'
         description: '[IPv4 traffic only] The ID of a NAT gateway.'
       TransitGatewayId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayId'
         description: The ID of a transit gateway.
       NetworkInterfaceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/NetworkInterfaceId'
         description: The ID of a network interface.
       RouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/RouteTableId'
         description: The ID of the route table.
       VpcPeeringConnectionId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpcPeeringConnectionId'
         description: The ID of a VPC peering connection.
   ReplaceRouteTableAssociationRequest:
     type: object
@@ -57414,13 +57523,13 @@ definitions:
       - RouteTableId
     properties:
       AssociationId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/RouteTableAssociationId'
         description: The association ID.
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       RouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/RouteTableId'
         description: The ID of the new route table to associate with the subnet.
   ReplaceTransitGatewayRouteRequest:
     type: object
@@ -57432,10 +57541,10 @@ definitions:
         $ref: '#/definitions/String'
         description: The CIDR range used for the destination match. Routing decisions are based on the most specific match.
       TransitGatewayRouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayRouteTableId'
         description: The ID of the route table.
       TransitGatewayAttachmentId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayAttachmentId'
         description: The ID of the attachment.
       Blackhole:
         $ref: '#/definitions/Boolean'
@@ -57893,7 +58002,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       FpgaImageId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/FpgaImageId'
         description: The ID of the AFI.
       Attribute:
         $ref: '#/definitions/ResetFpgaImageAttributeName'
@@ -57912,7 +58021,7 @@ definitions:
         $ref: '#/definitions/ResetImageAttributeName'
         description: The attribute to reset (currently you can only reset the launch permission attribute).
       ImageId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ImageId'
         description: The ID of the AMI.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -57931,7 +58040,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       InstanceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/InstanceId'
         description: The ID of the instance.
   ResetNetworkInterfaceAttributeRequest:
     type: object
@@ -57942,7 +58051,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       NetworkInterfaceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/NetworkInterfaceId'
         description: The ID of the network interface.
       SourceDestCheck:
         $ref: '#/definitions/String'
@@ -57958,7 +58067,7 @@ definitions:
         $ref: '#/definitions/SnapshotAttributeName'
         description: 'The attribute to reset. Currently, only the attribute for permission to create volumes can be reset.'
       SnapshotId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SnapshotId'
         description: The ID of the snapshot.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -57982,7 +58091,7 @@ definitions:
       - TargetNetworkCidr
     properties:
       ClientVpnEndpointId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ClientVpnEndpointId'
         description: The ID of the Client VPN endpoint with which the authorization rule is associated.
       TargetNetworkCidr:
         $ref: '#/definitions/String'
@@ -58149,7 +58258,7 @@ definitions:
         $ref: '#/definitions/BlockDeviceMappingRequestList'
         description: The block device mapping entries.
       ImageId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ImageId'
         description: The ID of the AMI. An AMI ID is required to launch an instance and must be specified here or in a launch template.
       InstanceType:
         $ref: '#/definitions/InstanceType'
@@ -58298,6 +58407,8 @@ definitions:
         $ref: '#/definitions/String'
         description: The base64-encoded MIME user data.
     description: '<p>Describes the launch specification for a Scheduled Instance.</p> <p>If you are launching the Scheduled Instance in EC2-VPC, you must specify the ID of the subnet. You can specify the subnet using either <code>SubnetId</code> or <code>NetworkInterface</code>.</p>'
+  ScheduledInstanceId:
+    type: string
   RunScheduledInstancesRequest:
     type: object
     required:
@@ -58317,7 +58428,7 @@ definitions:
         $ref: '#/definitions/ScheduledInstancesLaunchSpecification'
         description: 'The launch specification. You must match the instance type, Availability Zone, network, and platform of the schedule that you purchased.'
       ScheduledInstanceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ScheduledInstanceId'
         description: The Scheduled Instance ID.
     description: Contains the parameters for RunScheduledInstances.
   ScheduledInstanceRecurrence:
@@ -58422,7 +58533,7 @@ definitions:
       - Filters
     properties:
       TransitGatewayRouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayRouteTableId'
         description: The ID of the transit gateway route table.
       Filters:
         $ref: '#/definitions/FilterList'
@@ -58484,7 +58595,7 @@ definitions:
       - InstanceId
     properties:
       InstanceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/InstanceId'
         description: The ID of the instance.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -59003,7 +59114,7 @@ definitions:
       - ClientVpnEndpointId
     properties:
       ClientVpnEndpointId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ClientVpnEndpointId'
         description: The ID of the Client VPN endpoint to which the client is connected.
       ConnectionId:
         $ref: '#/definitions/String'
@@ -59330,7 +59441,7 @@ definitions:
         $ref: '#/definitions/Ipv6AddressList'
         description: The IPv6 addresses to unassign from the network interface.
       NetworkInterfaceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/NetworkInterfaceId'
         description: The ID of the network interface.
   UnassignPrivateIpAddressesRequest:
     type: object
@@ -59339,7 +59450,7 @@ definitions:
       - PrivateIpAddresses
     properties:
       NetworkInterfaceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/NetworkInterfaceId'
         description: The ID of the network interface.
       PrivateIpAddresses:
         $ref: '#/definitions/PrivateIpAddressStringList'

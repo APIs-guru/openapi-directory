@@ -11373,7 +11373,7 @@ definitions:
   SessionTarget:
     type: string
     minLength: 1
-    maxLength: 50
+    maxLength: 400
   SnapshotId:
     type: string
     pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'
@@ -13576,7 +13576,7 @@ definitions:
   SessionFilterValue:
     type: string
     minLength: 1
-    maxLength: 200
+    maxLength: 400
   SessionFilter:
     type: object
     required:

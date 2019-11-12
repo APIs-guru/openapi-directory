@@ -3366,6 +3366,12 @@ definitions:
       - de
       - it
       - pt
+      - ar
+      - hi
+      - ja
+      - ko
+      - zh
+      - zh-TW
   ListOfDetectEntitiesResult:
     type: array
     items:
@@ -3517,7 +3523,7 @@ definitions:
     maxLength: 256
   ComprehendArnName:
     type: string
-    pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+    pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*$'
     maxLength: 63
   IamRoleArn:
     type: string
@@ -4188,7 +4194,7 @@ definitions:
         description: 'Detailed information about the accuracy of the entity recognizer for a specific item on the list of entity types. '
       NumberOfTrainMentions:
         $ref: '#/definitions/Integer'
-        description: 'indicates the number of times the given entity name was seen in the training data. '
+        description: 'Indicates the number of times the given entity type was seen in the training data. '
     description: Individual item from the list of entity types in the metadata of an entity recognizer.
   EntityTypesEvaluationMetrics:
     type: object

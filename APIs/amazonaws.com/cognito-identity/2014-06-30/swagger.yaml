@@ -163,7 +163,7 @@ paths:
   '/#X-Amz-Target=AWSCognitoIdentityService.CreateIdentityPool':
     post:
       operationId: CreateIdentityPool
-      description: '<p>Creates a new identity pool. The identity pool is a store of user identity information that is specific to your AWS account. The limit on identity pools is 60 per account. The keys for <code>SupportedLoginProviders</code> are as follows:</p> <ul> <li> <p>Facebook: <code>graph.facebook.com</code> </p> </li> <li> <p>Google: <code>accounts.google.com</code> </p> </li> <li> <p>Amazon: <code>www.amazon.com</code> </p> </li> <li> <p>Twitter: <code>api.twitter.com</code> </p> </li> <li> <p>Digits: <code>www.digits.com</code> </p> </li> </ul> <p>You must use AWS Developer credentials to call this API.</p>'
+      description: '<p>Creates a new identity pool. The identity pool is a store of user identity information that is specific to your AWS account. The keys for <code>SupportedLoginProviders</code> are as follows:</p> <ul> <li> <p>Facebook: <code>graph.facebook.com</code> </p> </li> <li> <p>Google: <code>accounts.google.com</code> </p> </li> <li> <p>Amazon: <code>www.amazon.com</code> </p> </li> <li> <p>Twitter: <code>api.twitter.com</code> </p> </li> <li> <p>Digits: <code>www.digits.com</code> </p> </li> </ul> <p>You must use AWS Developer credentials to call this API.</p>'
       responses:
         '200':
           description: Success
@@ -1278,6 +1278,9 @@ definitions:
       AllowUnauthenticatedIdentities:
         $ref: '#/definitions/IdentityPoolUnauthenticated'
         description: TRUE if the identity pool supports unauthenticated logins.
+      AllowClassicFlow:
+        $ref: '#/definitions/ClassicFlow'
+        description: 'Enables or disables the Basic (Classic) authentication flow. For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flow.html">Identity Pools (Federated Identities) Authentication Flow</a> in the <i>Amazon Cognito Developer Guide</i>.'
       SupportedLoginProviders:
         $ref: '#/definitions/IdentityProviders'
         description: 'Optional key:value pairs mapping provider names to provider app IDs.'
@@ -1309,6 +1312,9 @@ definitions:
       AllowUnauthenticatedIdentities:
         $ref: '#/definitions/IdentityPoolUnauthenticated'
         description: TRUE if the identity pool supports unauthenticated logins.
+      AllowClassicFlow:
+        $ref: '#/definitions/ClassicFlow'
+        description: 'Enables or disables the Basic (Classic) authentication flow. For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flow.html">Identity Pools (Federated Identities) Authentication Flow</a> in the <i>Amazon Cognito Developer Guide</i>.'
       SupportedLoginProviders:
         $ref: '#/definitions/IdentityProviders'
         description: 'Optional key:value pairs mapping provider names to provider app IDs.'
@@ -1514,7 +1520,7 @@ definitions:
         description: 'A set of optional name-value pairs that map provider names to provider tokens. Each name-value pair represents a user from a public provider or developer provider. If the user is from a developer provider, the name-value pair will follow the syntax <code>"developer_provider_name": "developer_user_identifier"</code>. The developer provider is the "domain" by which Cognito will refer to your users; you provided this domain while creating/updating the identity pool. The developer user identifier is an identifier from your backend that uniquely identifies a user. When you create an identity pool, you can specify the supported logins.'
       TokenDuration:
         $ref: '#/definitions/TokenDuration'
-        description: 'The expiration time of the token, in seconds. You can specify a custom expiration time for the token so that you can cache it. If you don''t provide an expiration time, the token is valid for 15 minutes. You can exchange the token with Amazon STS for temporary AWS credentials, which are valid for a maximum of one hour. The maximum token duration you can set is 24 hours. You should take care in setting the expiration time for a token, as there are significant security implications: an attacker could use a leaked token to access your AWS resources for the token''s duration.'
+        description: '<p>The expiration time of the token, in seconds. You can specify a custom expiration time for the token so that you can cache it. If you don''t provide an expiration time, the token is valid for 15 minutes. You can exchange the token with Amazon STS for temporary AWS credentials, which are valid for a maximum of one hour. The maximum token duration you can set is 24 hours. You should take care in setting the expiration time for a token, as there are significant security implications: an attacker could use a leaked token to access your AWS resources for the token''s duration.</p> <note> <p>Please provide for a small grace period, usually no more than 5 minutes, to account for clock skew.</p> </note>'
     description: Input to the <code>GetOpenIdTokenForDeveloperIdentity</code> action.
   DeveloperUserAlreadyRegisteredException: {}
   ListIdentitiesResponse:
@@ -1671,6 +1677,7 @@ definitions:
     type: object
     required:
       - ResourceArn
+      - Tags
     properties:
       ResourceArn:
         $ref: '#/definitions/ARNString'
@@ -1723,6 +1730,7 @@ definitions:
     type: object
     required:
       - ResourceArn
+      - TagKeys
     properties:
       ResourceArn:
         $ref: '#/definitions/ARNString'
@@ -1755,6 +1763,8 @@ definitions:
     type: string
     minLength: 1
     maxLength: 128
+  ClassicFlow:
+    type: boolean
   CognitoIdentityProviderName:
     type: string
     pattern: '[\w._:/-]+'
@@ -1786,7 +1796,7 @@ definitions:
       $ref: '#/definitions/CognitoIdentityProvider'
   IdentityPoolName:
     type: string
-    pattern: '[\w ]+'
+    pattern: '[\w\s+=,.@-]+'
     minLength: 1
     maxLength: 128
   IdentityPoolUnauthenticated:

@@ -136,6 +136,10 @@ paths:
           description: DuplicateRecordException
           schema:
             $ref: '#/definitions/DuplicateRecordException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
       parameters:
         - name: body
           in: body
@@ -185,6 +189,10 @@ paths:
           description: DuplicateRecordException
           schema:
             $ref: '#/definitions/DuplicateRecordException'
+        '485':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
       parameters:
         - name: body
           in: body
@@ -234,6 +242,10 @@ paths:
           description: NotFoundException
           schema:
             $ref: '#/definitions/NotFoundException'
+        '485':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
       parameters:
         - name: body
           in: body
@@ -275,6 +287,10 @@ paths:
           description: NotFoundException
           schema:
             $ref: '#/definitions/NotFoundException'
+        '483':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
       parameters:
         - name: body
           in: body
@@ -316,6 +332,10 @@ paths:
           description: NotFoundException
           schema:
             $ref: '#/definitions/NotFoundException'
+        '483':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
       parameters:
         - name: body
           in: body
@@ -357,6 +377,10 @@ paths:
           description: NotFoundException
           schema:
             $ref: '#/definitions/NotFoundException'
+        '483':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
       parameters:
         - name: body
           in: body
@@ -398,6 +422,10 @@ paths:
           description: NotFoundException
           schema:
             $ref: '#/definitions/NotFoundException'
+        '483':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
       parameters:
         - name: body
           in: body
@@ -447,6 +475,10 @@ paths:
           description: ExpiredNextTokenException
           schema:
             $ref: '#/definitions/ExpiredNextTokenException'
+        '485':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
       parameters:
         - name: body
           in: body
@@ -496,6 +528,10 @@ paths:
           description: ExpiredNextTokenException
           schema:
             $ref: '#/definitions/ExpiredNextTokenException'
+        '485':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
       parameters:
         - name: body
           in: body
@@ -545,6 +581,10 @@ paths:
           description: ExpiredNextTokenException
           schema:
             $ref: '#/definitions/ExpiredNextTokenException'
+        '485':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
       parameters:
         - name: body
           in: body
@@ -594,6 +634,10 @@ paths:
           description: ExpiredNextTokenException
           schema:
             $ref: '#/definitions/ExpiredNextTokenException'
+        '485':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
       parameters:
         - name: body
           in: body
@@ -635,6 +679,10 @@ paths:
           description: NotFoundException
           schema:
             $ref: '#/definitions/NotFoundException'
+        '483':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
       parameters:
         - name: body
           in: body
@@ -680,6 +728,10 @@ paths:
           description: DuplicateRecordException
           schema:
             $ref: '#/definitions/DuplicateRecordException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
       parameters:
         - name: body
           in: body
@@ -725,6 +777,10 @@ paths:
           description: DuplicateRecordException
           schema:
             $ref: '#/definitions/DuplicateRecordException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
       parameters:
         - name: body
           in: body
@@ -770,6 +826,7 @@ definitions:
   InternalErrorException: {}
   CreationLimitExceededException: {}
   DuplicateRecordException: {}
+  AccessDeniedException: {}
   CreateNotificationResponse:
     type: object
     properties: {}
@@ -1197,6 +1254,8 @@ definitions:
       - COST
       - RI_UTILIZATION
       - RI_COVERAGE
+      - SAVINGS_PLANS_UTILIZATION
+      - SAVINGS_PLANS_COVERAGE
     description: '<p> The type of a budget. It must be one of the following types: </p> <p> <code>COST</code>, <code>USAGE</code>, <code>RI_UTILIZATION</code>, or <code>RI_COVERAGE</code>.</p>'
   GenericTimestamp:
     type: string
@@ -1214,7 +1273,7 @@ definitions:
         description: 'The name of a budget. The name must be unique within an account. The <code>:</code> and <code>\</code> characters aren''t allowed in <code>BudgetName</code>.'
       BudgetLimit:
         $ref: '#/definitions/Spend'
-        description: '<p>The total amount of cost, usage, RI utilization, or RI coverage that you want to track with your budget.</p> <p> <code>BudgetLimit</code> is required for cost or usage budgets, but optional for RI utilization or coverage budgets. RI utilization or coverage budgets default to <code>100</code>, which is the only valid value for RI utilization or coverage budgets. You can''t use <code>BudgetLimit</code> with <code>PlannedBudgetLimits</code> for <code>CreateBudget</code> and <code>UpdateBudget</code> actions. </p>'
+        description: '<p>The total amount of cost, usage, RI utilization, RI coverage, Savings Plans utilization, or Savings Plans coverage that you want to track with your budget.</p> <p> <code>BudgetLimit</code> is required for cost or usage budgets, but optional for RI or Savings Plans utilization or coverage budgets. RI and Savings Plans utilization or coverage budgets default to <code>100</code>, which is the only valid value for RI or Savings Plans utilization or coverage budgets. You can''t use <code>BudgetLimit</code> with <code>PlannedBudgetLimits</code> for <code>CreateBudget</code> and <code>UpdateBudget</code> actions. </p>'
       PlannedBudgetLimits:
         $ref: '#/definitions/PlannedBudgetLimits'
         description: '<p>A map containing multiple <code>BudgetLimit</code>, including current or future limits.</p> <p> <code>PlannedBudgetLimits</code> is available for cost or usage budget and supports monthly and quarterly <code>TimeUnit</code>. </p> <p>For monthly budgets, provide 12 months of <code>PlannedBudgetLimits</code> values. This must start from the current month and include the next 11 months. The <code>key</code> is the start of the month, <code>UTC</code> in epoch seconds. </p> <p>For quarterly budgets, provide 4 quarters of <code>PlannedBudgetLimits</code> value entries in standard calendar quarter increments. This must start from the current quarter and include the next 3 quarters. The <code>key</code> is the start of the quarter, <code>UTC</code> in epoch seconds. </p> <p>If the planned budget expires before 12 months for monthly or 4 quarters for quarterly, provide the <code>PlannedBudgetLimits</code> values only for the remaining periods.</p> <p>If the budget begins at a date in the future, provide <code>PlannedBudgetLimits</code> values from the start date of the budget. </p> <p>After all of the <code>BudgetLimit</code> values in <code>PlannedBudgetLimits</code> are used, the budget continues to use the last limit as the <code>BudgetLimit</code>. At that point, the planned budget provides the same experience as a fixed budget. </p> <p> <code>DescribeBudget</code> and <code>DescribeBudgets</code> response along with <code>PlannedBudgetLimits</code> will also contain <code>BudgetLimit</code> representing the current month or quarter limit present in <code>PlannedBudgetLimits</code>. This only applies to budgets created with <code>PlannedBudgetLimits</code>. Budgets created without <code>PlannedBudgetLimits</code> will only contain <code>BudgetLimit</code>, and no <code>PlannedBudgetLimits</code>.</p>'
@@ -1223,10 +1282,10 @@ definitions:
         description: '<p>The cost filters, such as service or tag, that are applied to a budget.</p> <p>AWS Budgets supports the following services as a filter for RI budgets:</p> <ul> <li> <p>Amazon Elastic Compute Cloud - Compute</p> </li> <li> <p>Amazon Redshift</p> </li> <li> <p>Amazon Relational Database Service</p> </li> <li> <p>Amazon ElastiCache</p> </li> <li> <p>Amazon Elasticsearch Service</p> </li> </ul>'
       CostTypes:
         $ref: '#/definitions/CostTypes'
-        description: '<p>The types of costs that are included in this <code>COST</code> budget.</p> <p> <code>USAGE</code>, <code>RI_UTILIZATION</code>, and <code>RI_COVERAGE</code> budgets do not have <code>CostTypes</code>.</p>'
+        description: '<p>The types of costs that are included in this <code>COST</code> budget.</p> <p> <code>USAGE</code>, <code>RI_UTILIZATION</code>, <code>RI_COVERAGE</code>, <code>Savings_Plans_Utilization</code>, and <code>Savings_Plans_Coverage</code> budgets do not have <code>CostTypes</code>.</p>'
       TimeUnit:
         $ref: '#/definitions/TimeUnit'
-        description: The length of time until a budget resets the actual and forecasted spend. <code>DAILY</code> is available only for <code>RI_UTILIZATION</code> and <code>RI_COVERAGE</code> budgets.
+        description: 'The length of time until a budget resets the actual and forecasted spend. <code>DAILY</code> is available only for <code>RI_UTILIZATION</code>, <code>RI_COVERAGE</code>, <code>Savings_Plans_Utilization</code>, and <code>Savings_Plans_Coverage</code> budgets.'
       TimePeriod:
         $ref: '#/definitions/TimePeriod'
         description: '<p>The period of time that is covered by a budget. The period has a start date and an end date. The start date must come before the end date. The end date must come before <code>06/15/87 00:00 UTC</code>. </p> <p>If you create your budget and don''t specify a start date, AWS defaults to the start of your chosen time period (DAILY, MONTHLY, QUARTERLY, or ANNUALLY). For example, if you created your budget on January 24, 2018, chose <code>DAILY</code>, and didn''t set a start date, AWS set your start date to <code>01/24/18 00:00 UTC</code>. If you chose <code>MONTHLY</code>, AWS set your start date to <code>01/01/18 00:00 UTC</code>. If you didn''t specify an end date, AWS set your end date to <code>06/15/87 00:00 UTC</code>. The defaults are the same for the AWS Billing and Cost Management console and the API. </p> <p>You can change either date with the <code>UpdateBudget</code> operation.</p> <p>After the end date, AWS deletes the budget and all associated notifications and subscribers.</p>'
@@ -1235,7 +1294,7 @@ definitions:
         description: The actual and forecasted cost or usage that the budget tracks.
       BudgetType:
         $ref: '#/definitions/BudgetType'
-        description: 'Whether this budget tracks costs, usage, RI utilization, or RI coverage.'
+        description: 'Whether this budget tracks costs, usage, RI utilization, RI coverage, Savings Plans utilization, or Savings Plans coverage.'
       LastUpdatedTime:
         $ref: '#/definitions/GenericTimestamp'
         description: The last time that you updated this budget.
@@ -1341,7 +1400,7 @@ definitions:
         description: The type of notification that AWS sends to a subscriber.
       Address:
         $ref: '#/definitions/SubscriberAddress'
-        description: '<p>The address that AWS sends budget notifications to, either an SNS topic or an email.</p> <p>AWS validates the address for a <code>CreateSubscriber</code> request with the <code>.*</code> regex.</p>'
+        description: '<p>The address that AWS sends budget notifications to, either an SNS topic or an email.</p> <p>When you create a subscriber, the value of <code>Address</code> can''t contain line breaks.</p>'
     description: '<p>The subscriber to a budget notification. The subscriber consists of a subscription type and either an Amazon SNS topic or an email address.</p> <p>For example, an email subscriber would have the following parameters:</p> <ul> <li> <p>A <code>subscriptionType</code> of <code>EMAIL</code> </p> </li> <li> <p>An <code>address</code> of <code>example@example.com</code> </p> </li> </ul>'
   MaxResults:
     type: integer
@@ -1415,7 +1474,7 @@ definitions:
     description: ' The subscription type of the subscriber. It can be SMS or EMAIL.'
   SubscriberAddress:
     type: string
-    pattern: \(\?s\).*
+    pattern: '(.*[\n\r\t\f\ ]?)*'
     description: ' A string that contains an email address or SNS topic for the subscriber''s address.'
     minLength: 1
     maxLength: 2147483647

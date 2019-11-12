@@ -366,6 +366,9 @@ paths:
                   robotDeploymentTimeoutInSeconds:
                     $ref: '#/definitions/DeploymentTimeout'
                     description: 'The amount of time, in seconds, to wait for deployment to a single robot to complete. Choose a time between 1 minute and 7 days. The default is 5 hours.'
+                  downloadConditionFile:
+                    $ref: '#/definitions/S3Object'
+                    description: The download condition file.
               clientRequestToken:
                 description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
                 type: string
@@ -2446,6 +2449,22 @@ definitions:
     maximum: 100
   DeploymentTimeout:
     type: integer
+  S3Object:
+    type: object
+    required:
+      - bucket
+      - key
+    properties:
+      bucket:
+        $ref: '#/definitions/S3Bucket'
+        description: The bucket containing the object.
+      key:
+        $ref: '#/definitions/S3Key'
+        description: The key of the object.
+      etag:
+        $ref: '#/definitions/S3Etag'
+        description: The etag of the object.
+    description: Information about an S3 object.
   DeploymentApplicationConfig:
     type: object
     required:
@@ -3266,6 +3285,9 @@ definitions:
       robotDeploymentTimeoutInSeconds:
         $ref: '#/definitions/DeploymentTimeout'
         description: 'The amount of time, in seconds, to wait for deployment to a single robot to complete. Choose a time between 1 minute and 7 days. The default is 5 hours.'
+      downloadConditionFile:
+        $ref: '#/definitions/S3Object'
+        description: The download condition file.
     description: Information about a deployment configuration.
   DeploymentApplicationConfigs:
     type: array
@@ -3331,6 +3353,7 @@ definitions:
       - PreLaunchFileFailure
       - PostLaunchFileFailure
       - BadPermissionError
+      - DownloadConditionFailed
       - InternalServerError
   CreatedAt:
     type: string
@@ -4126,6 +4149,7 @@ definitions:
     enum:
       - Validating
       - DownloadingExtracting
+      - ExecutingDownloadCondition
       - ExecutingPreLaunch
       - Launching
       - ExecutingPostLaunch
@@ -4345,7 +4369,7 @@ definitions:
         description: VPC configuration information.
       networkInterface:
         $ref: '#/definitions/NetworkInterface'
-        description: <p/>
+        description: Information about a network interface.
     description: Information about a simulation job.
   SimulationJobSummary:
     type: object
