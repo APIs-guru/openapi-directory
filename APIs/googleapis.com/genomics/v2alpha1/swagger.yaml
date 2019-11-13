@@ -491,6 +491,11 @@ definitions:
           description: Properties of the object. Contains field @type with type URL.
         description: A workflow specific event occurred.
         type: object
+      events:
+        description: A list of timestamped events.
+        items:
+          $ref: '#/definitions/TimestampedEvent'
+        type: array
       result:
         $ref: '#/definitions/Status'
         description: The operation has finished with the given result.
@@ -1075,6 +1080,21 @@ definitions:
           A developer-facing error message, which should be in English. Any
           user-facing error message should be localized and sent in the
           google.rpc.Status.details field, or localized by the client.
+        type: string
+    type: object
+  TimestampedEvent:
+    description: |-
+      An event that occured in the operation assigned to the
+      worker and the time of occurance.
+    properties:
+      data:
+        additionalProperties:
+          description: Properties of the object. Contains field @type with type URL.
+        description: The event data.
+        type: object
+      timestamp:
+        description: The time when the event happened.
+        format: google-datetime
         type: string
     type: object
   UnexpectedExitStatusEvent:

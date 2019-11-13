@@ -199,10 +199,10 @@ paths:
         - signupUrls
   '/v1/{name}':
     delete:
-      description: 'Deletes an enrollment token. This operation invalidates the token, preventing its future use.'
-      operationId: androidmanagement.enterprises.enrollmentTokens.delete
+      description: 'Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn''t support this method, it returns google.rpc.Code.UNIMPLEMENTED.'
+      operationId: androidmanagement.enterprises.devices.operations.delete
       parameters:
-        - description: 'The name of the enrollment token in the form enterprises/{enterpriseId}/enrollmentTokens/{enrollmentTokenId}.'
+        - description: The name of the operation resource to be deleted.
           in: path
           name: name
           required: true
@@ -232,14 +232,14 @@ paths:
       tags:
         - enterprises
     get:
-      description: Gets a web app.
-      operationId: androidmanagement.enterprises.webApps.get
+      description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
+      operationId: androidmanagement.enterprises.devices.operations.get
       parameters:
         - description: 'The preferred language for localized application info, as a BCP47 tag (e.g. "en-US", "de"). If not specified the default language of the application will be used.'
           in: query
           name: languageCode
           type: string
-        - description: 'The name of the web app in the form enterprises/{enterpriseId}/webApp/{packageName}.'
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -249,7 +249,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/WebApp'
+            $ref: '#/definitions/Operation'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidmanagement'
@@ -270,14 +270,14 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     patch:
-      description: Updates a web app.
-      operationId: androidmanagement.enterprises.webApps.patch
+      description: Updates a device.
+      operationId: androidmanagement.enterprises.devices.patch
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/WebApp'
-        - description: 'The name of the web app in the form enterprises/{enterpriseId}/webApps/{packageName}.'
+            $ref: '#/definitions/Device'
+        - description: 'The name of the device in the form enterprises/{enterpriseId}/devices/{deviceId}.'
           in: path
           name: name
           required: true
@@ -291,7 +291,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/WebApp'
+            $ref: '#/definitions/Device'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidmanagement'
@@ -1453,6 +1453,7 @@ definitions:
           - CHOICE
           - MULTISELECT
           - HIDDEN
+          - BUNDLE
           - BUNDLE_ARRAY
         type: string
     type: object
@@ -1714,7 +1715,7 @@ definitions:
         type: string
     type: object
   Policy:
-    description: A policy resources represents a group settings that govern the behavior of a managed device and the apps installed on it.
+    description: A policy resource represents a group of settings that govern the behavior of a managed device and the apps installed on it.
     properties:
       accountTypesWithManagementDisabled:
         description: Account types that can't be managed by the user.
@@ -1913,7 +1914,7 @@ definitions:
         type: array
       passwordRequirements:
         $ref: '#/definitions/PasswordRequirements'
-        description: Password requirements. DEPRECATED - Use password_policies
+        description: Password requirements. The field password_requirements.require_password_unlock must not be set. DEPRECATED - Use password_policies.
       permissionGrants:
         description: Explicit permission or group grants or denials for all apps. These values override the default_permission_policy.
         items:
@@ -2330,6 +2331,18 @@ definitions:
   WebToken:
     description: A web token used to access the managed Google Play iframe.
     properties:
+      enabledFeatures:
+        description: 'The features to enable. Use this if you want to control exactly which feature(s) will be activated; leave empty to allow all features.Restrictions / things to note: <ul> <li> If no features are listed here, all features are enabled — this is the  default behavior where you give access to all features to your admins. <li> This must not contain any FEATURE_UNSPECIFIED values. <li> Repeated values are ignored </ul>'
+        items:
+          enum:
+            - FEATURE_UNSPECIFIED
+            - PLAY_SEARCH
+            - PRIVATE_APPS
+            - WEB_APPS
+            - STORE_BUILDER
+            - MANAGED_CONFIGURATIONS
+          type: string
+        type: array
       name:
         description: 'The name of the web token, which is generated by the server during creation in the form enterprises/{enterpriseId}/webTokens/{webTokenId}.'
         type: string

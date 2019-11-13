@@ -252,7 +252,7 @@ paths:
         - subscriptions
   '/customers/{customerId}/subscriptions/{subscriptionId}':
     delete:
-      description: Cancel or transfer a subscription to direct.
+      description: 'Cancel, suspend, or transfer a subscription to direct.'
       operationId: reseller.subscriptions.delete
       parameters:
         - description: 'Either the customer''s primary domain name or the customer''s unique identifier. If using the domain name, we do not recommend using a customerId as a key for persistent data. If the domain name for a customerId is changed, the Google system automatically updates.'

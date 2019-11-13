@@ -376,7 +376,7 @@ paths:
         Existing Bindings remains, but are inactive. The Role can be undeleted
         within 7 days. After 7 days the Role is deleted and all Bindings associated
         with the role are removed.
-      operationId: iam.projects.roles.delete
+      operationId: iam.organizations.roles.delete
       parameters:
         - description: Used to perform a consistent read-modify-write.
           in: query
@@ -419,10 +419,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
     get:
       description: Gets a Role definition.
-      operationId: iam.roles.get
+      operationId: iam.organizations.roles.get
       parameters:
         - description: |-
             The `name` parameter's value depends on the target resource for the
@@ -478,7 +478,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - roles
+        - organizations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -493,7 +493,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     patch:
       description: Updates a Role definition.
-      operationId: iam.projects.roles.patch
+      operationId: iam.organizations.roles.patch
       parameters:
         - in: body
           name: body
@@ -540,7 +540,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
     put:
       description: |-
         Note: This method is in the process of being deprecated. Use
@@ -1033,7 +1033,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Undelete a Role, bringing it back in its previous state.'
-      operationId: iam.projects.roles.undelete
+      operationId: iam.organizations.roles.undelete
       parameters:
         - in: body
           name: body
@@ -1076,11 +1076,11 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
   '/v1/{parent}/roles':
     get:
       description: Lists the Roles defined on a resource.
-      operationId: iam.projects.roles.list
+      operationId: iam.organizations.roles.list
       parameters:
         - description: Optional limit on the number of roles to include in the response.
           in: query
@@ -1149,7 +1149,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -1164,7 +1164,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates a new Role.
-      operationId: iam.projects.roles.create
+      operationId: iam.organizations.roles.create
       parameters:
         - in: body
           name: body
@@ -1207,7 +1207,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
   '/v1/{resource}:getIamPolicy':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -1567,9 +1567,7 @@ definitions:
         type: string
       condition:
         $ref: '#/definitions/Expr'
-        description: |-
-          The condition that is associated with this binding. This field is logged
-          only for Cloud Audit Logging.
+        description: The condition that is associated with this binding.
       member:
         description: |-
           A single identity requesting access for a Cloud Platform resource.
@@ -1808,7 +1806,7 @@ definitions:
       validationUnitName:
         description: |-
           The validation unit name, for instance
-          “lintValidationUnits/ConditionComplexityCheck”.
+          "lintValidationUnits/ConditionComplexityCheck".
         type: string
     type: object
   ListRolesResponse:
@@ -1872,13 +1870,14 @@ definitions:
           - NOT_SUPPORTED
         type: string
       description:
-        description: A brief description of what this Permission is used for.
+        description: |-
+          A brief description of what this Permission is used for.
+          This permission can ONLY be used in predefined roles.
         type: string
       name:
         description: The name of this Permission.
         type: string
       onlyInPredefinedRoles:
-        description: This permission can ONLY be used in predefined roles.
         type: boolean
       primaryPermission:
         description: |-
@@ -1932,7 +1931,7 @@ definitions:
           {
             "bindings": [
               {
-                "role": "role/resourcemanager.organizationAdmin",
+                "role": "roles/resourcemanager.organizationAdmin",
                 "members": [
                   "user:mike@example.com",
                   "group:admins@example.com",
@@ -2278,6 +2277,13 @@ definitions:
           - ORIGIN_UNSPECIFIED
           - USER_PROVIDED
           - GOOGLE_PROVIDED
+        type: string
+      keyType:
+        description: The key type.
+        enum:
+          - KEY_TYPE_UNSPECIFIED
+          - USER_MANAGED
+          - SYSTEM_MANAGED
         type: string
       name:
         description: |-

@@ -114,6 +114,79 @@ parameters:
 tags:
   - name: v1
 paths:
+  '/v1/{name}:iapSettings':
+    get:
+      description: Gets the IAP settings on a particular IAP protected resource.
+      operationId: iap.getIapSettings
+      parameters:
+        - description: |-
+            Required. The resource name for which to retrieve the settings.
+            Authorization: Requires the `getSettings` permission for the associated
+            resource.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/IapSettings'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - v1
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    patch:
+      description: |-
+        Updates the IAP settings on a particular IAP protected resource. It
+        replaces all fields unless the `update_mask` is set.
+      operationId: iap.updateIapSettings
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/IapSettings'
+        - description: Required. The resource name of the IAP protected resource.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: |-
+            The field mask specifying which IAP settings should be updated.
+            If omitted, the all of the settings are updated. See
+            https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+          in: query
+          name: updateMask
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/IapSettings'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - v1
   '/v1/{resource}:getIamPolicy':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -250,6 +323,26 @@ paths:
       tags:
         - v1
 definitions:
+  AccessSettings:
+    description: Access related settings for IAP protected apps.
+    properties:
+      corsSettings:
+        $ref: '#/definitions/CorsSettings'
+        description: Configuration to allow cross-origin requests via IAP.
+      gcipSettings:
+        $ref: '#/definitions/GcipSettings'
+        description: GCIP claims and endpoint configurations for 3p identity providers.
+      oauthSettings:
+        $ref: '#/definitions/OAuthSettings'
+        description: Settings to configure IAP's OAuth behavior.
+    type: object
+  ApplicationSettings:
+    description: Wrapper over application specific settings for IAP.
+    properties:
+      csmSettings:
+        $ref: '#/definitions/CsmSettings'
+        description: Settings to configure IAP's behavior for a CSM mesh.
+    type: object
   Binding:
     description: Associates `members` with a `role`.
     properties:
@@ -294,6 +387,30 @@ definitions:
           For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
         type: string
     type: object
+  CorsSettings:
+    description: |-
+      Allows customers to configure HTTP request paths that'll allow HTTP OPTIONS
+      call to bypass authentication and authorization.
+    properties:
+      allowHttpOptions:
+        description: |-
+          Configuration to allow HTTP OPTIONS calls to skip authorization. If
+          undefined, IAP will not apply any special logic to OPTIONS requests.
+        type: boolean
+    type: object
+  CsmSettings:
+    description: |-
+      Configuration for RCTokens generated for CSM workloads protected by IAP.
+      RCTokens are IAP generated JWTs that can be verified at the application. The
+      RCToken is primarily used for ISTIO deployments, and can be scoped to a
+      single mesh by configuring the audience field accordingly
+    properties:
+      rctokenAud:
+        description: |-
+          Audience claim set in the generated RCToken. This value is not validated by
+          IAP.
+        type: string
+    type: object
   Expr:
     description: |-
       Represents an expression text. Example:
@@ -327,6 +444,27 @@ definitions:
           expression.
         type: string
     type: object
+  GcipSettings:
+    description: Allows customers to configure tenant_id for GCIP instance per-app.
+    properties:
+      loginPageUri:
+        description: |-
+          Login page URI associated with the GCIP tenants.
+          Typically, all resources within the same project share the same login page,
+          though it could be overridden at the sub resource level.
+        type: string
+      tenantIds:
+        description: |-
+          GCIP tenant ids that are linked to the IAP resource.
+          tenant_ids could be a string beginning with a number character to indicate
+          authenticating with GCIP tenant flow, or in the format of _<ProjectNumber>
+          to indicate authenticating with GCIP agent flow.
+          If agent flow is used, tenant_ids should only contain one single element,
+          while for tenant flow, tenant_ids can contain multiple elements.
+        items:
+          type: string
+        type: array
+    type: object
   GetIamPolicyRequest:
     description: Request message for `GetIamPolicy` method.
     properties:
@@ -352,6 +490,31 @@ definitions:
         format: int32
         type: integer
     type: object
+  IapSettings:
+    description: The IAP configurable settings.
+    properties:
+      accessSettings:
+        $ref: '#/definitions/AccessSettings'
+        description: Top level wrapper for all access related setting in IAP
+      applicationSettings:
+        $ref: '#/definitions/ApplicationSettings'
+        description: Top level wrapper for all application related settings in IAP
+      name:
+        description: Required. The resource name of the IAP protected resource.
+        type: string
+    type: object
+  OAuthSettings:
+    description: Configuration for OAuth login&consent flow behavior.
+    properties:
+      loginHint:
+        description: |-
+          Domain hint to send as hd=? parameter in OAuth request flow. Enables
+          redirect to primary IDP by skipping Google's login screen.
+          https://developers.google.com/identity/protocols/OpenIDConnect#hd-param
+          Note: IAP does not verify that the id token's hd claim matches this value
+          since access behavior is managed by IAM policies.
+        type: string
+    type: object
   Policy:
     description: |-
       Defines an Identity and Access Management (IAM) policy. It is used to
@@ -371,7 +534,7 @@ definitions:
           {
             "bindings": [
               {
-                "role": "role/resourcemanager.organizationAdmin",
+                "role": "roles/resourcemanager.organizationAdmin",
                 "members": [
                   "user:mike@example.com",
                   "group:admins@example.com",

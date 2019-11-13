@@ -2755,6 +2755,9 @@ definitions:
       orderId:
         description: The order id associated with the purchase of the inapp product.
         type: string
+      productId:
+        description: The inapp product SKU.
+        type: string
       purchaseState:
         description: |-
           The purchase state of the order. Possible values are:  
@@ -2766,6 +2769,9 @@ definitions:
       purchaseTimeMillis:
         description: 'The time the product was purchased, in milliseconds since the epoch (Jan 1, 1970).'
         format: int64
+        type: string
+      purchaseToken:
+        description: The purchase token generated to identify this purchase.
         type: string
       purchaseType:
         description: |-

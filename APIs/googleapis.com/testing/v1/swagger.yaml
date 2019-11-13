@@ -465,6 +465,9 @@ definitions:
           - USE_ORCHESTRATOR
           - DO_NOT_USE_ORCHESTRATOR
         type: string
+      shardingOption:
+        $ref: '#/definitions/ShardingOption'
+        description: The option to run tests in multiple shards in parallel.
       testApk:
         $ref: '#/definitions/FileReference'
         description: Required. The APK containing the test code to be executed.
@@ -1077,7 +1080,7 @@ definitions:
   IosModel:
     description: |-
       A description of an iOS device tests may be run on.
-      Next tag: 10
+      Next tag: 11
     properties:
       deviceCapabilities:
         description: |-
@@ -1272,6 +1275,22 @@ definitions:
           type: string
         type: array
     type: object
+  ManualSharding:
+    description: |-
+      Shards test cases into the specified groups of packages, classes, and/or
+      methods.
+
+      With manual sharding enabled, specifying test targets via
+      environment_variables or in InstrumentationTest is invalid.
+    properties:
+      testTargetsForShard:
+        description: |-
+          Required. Group of packages, classes, and/or test methods to be run for
+          each shard. The number of shard_test_targets must be > 1, and <= 50.
+        items:
+          $ref: '#/definitions/TestTargetsForShard'
+        type: array
+    type: object
   NetworkConfiguration:
     properties:
       downRule:
@@ -1430,6 +1449,33 @@ definitions:
         format: google-duration
         type: string
     type: object
+  Shard:
+    description: Output only. Details about the shard.
+    properties:
+      numShards:
+        description: Output only. The total number of shards.
+        format: int32
+        type: integer
+      shardIndex:
+        description: Output only. The index of the shard among all the shards.
+        format: int32
+        type: integer
+      testTargetsForShard:
+        $ref: '#/definitions/TestTargetsForShard'
+        description: Output only. Test targets for each shard.
+    type: object
+  ShardingOption:
+    description: Options for enabling sharding.
+    properties:
+      manualSharding:
+        $ref: '#/definitions/ManualSharding'
+        description: |-
+          Shards test cases into the specified groups of packages, classes, and/or
+          methods.
+      uniformSharding:
+        $ref: '#/definitions/UniformSharding'
+        description: Uniformly shards test cases given a total number of shards.
+    type: object
   StartActivityIntent:
     description: 'A starting intent specified by an action, uri, and categories.'
     properties:
@@ -1497,6 +1543,9 @@ definitions:
       projectId:
         description: Output only. The cloud project that owns the test execution.
         type: string
+      shard:
+        $ref: '#/definitions/Shard'
+        description: Output only. Details about the shard.
       state:
         description: |-
           Output only. Indicates the current progress of the test execution
@@ -1726,6 +1775,20 @@ definitions:
         format: google-duration
         type: string
     type: object
+  TestTargetsForShard:
+    description: Test targets for a shard.
+    properties:
+      testTargets:
+        description: |-
+          Group of packages, classes, and/or test methods to be run for each shard.
+          The targets need to be specified in AndroidJUnitRunner argument format. For
+          example, “package com.my.packages” “class com.my.package.MyClass”.
+
+          The number of shard_test_targets must be greater than 0.
+        items:
+          type: string
+        type: array
+    type: object
   ToolResultsExecution:
     description: |-
       Represents a tool results execution resource.
@@ -1794,6 +1857,19 @@ definitions:
         description: Packet loss ratio (0.0 - 1.0).
         format: float
         type: number
+    type: object
+  UniformSharding:
+    description: |-
+      Uniformly shards test cases given a total number of shards.
+
+      For Instrumentation test, it will be translated to “-e numShard” “-e
+      shardIndex” AndroidJUnitRunner arguments. With uniform sharding enabled,
+      specifying these sharding arguments via environment_variables is invalid.
+    properties:
+      numShards:
+        description: 'Required. Total number of shards. The number must be > 1, and <= 50.'
+        format: int32
+        type: integer
     type: object
   XcodeVersion:
     description: An Xcode version that an iOS version is compatible with.

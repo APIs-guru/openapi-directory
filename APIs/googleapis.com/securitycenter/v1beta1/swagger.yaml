@@ -190,8 +190,8 @@ paths:
             The relative resource name of the SecurityMarks. See:
             https://cloud.google.com/apis/design/resource_names#relative_resource_name
             Examples:
-            "organizations/123/assets/456/securityMarks"
-            "organizations/123/sources/456/findings/789/securityMarks".
+            "organizations/{organization_id}/assets/{asset_id}/securityMarks"
+            "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}/securityMarks".
           in: path
           name: name
           required: true
@@ -291,7 +291,7 @@ paths:
             Required. The relative resource name of the finding. See:
             https://cloud.google.com/apis/design/resource_names#relative_resource_name
             Example:
-            "organizations/123/sources/456/finding/789".
+            "organizations/{organization_id}/sources/{source_id}/finding/{finding_id}".
           in: path
           name: name
           required: true
@@ -540,7 +540,7 @@ paths:
         Lists an organization or source's findings.
 
         To list across all sources provide a `-` as the source id.
-        Example: /v1beta1/organizations/123/sources/-/findings
+        Example: /v1beta1/organizations/{organization_id}/sources/-/findings
       operationId: securitycenter.organizations.sources.findings.list
       parameters:
         - description: |-
@@ -607,7 +607,7 @@ paths:
             Required. Name of the source the findings belong to. Its format is
             "organizations/[organization_id]/sources/[source_id]". To list across all
             sources provide a source_id of `-`. For example:
-            organizations/123/sources/-
+            organizations/{organization_id}/sources/-
           in: path
           name: parent
           required: true
@@ -701,7 +701,7 @@ paths:
         specified properties.
 
         To group across all sources provide a `-` as the source id.
-        Example: /v1beta1/organizations/123/sources/-/findings
+        Example: /v1beta1/organizations/{organization_id}/sources/-/findings
       operationId: securitycenter.organizations.sources.findings.group
       parameters:
         - in: body
@@ -712,7 +712,7 @@ paths:
             Required. Name of the source to groupBy. Its format is
             "organizations/[organization_id]/sources/[source_id]". To groupBy across
             all sources provide a source_id of `-`. For example:
-            organizations/123/sources/-
+            organizations/{organization_id}/sources/-
           in: path
           name: parent
           required: true
@@ -950,7 +950,7 @@ definitions:
           The relative resource name of this asset. See:
           https://cloud.google.com/apis/design/resource_names#relative_resource_name
           Example:
-          "organizations/123/assets/456".
+          "organizations/{organization_id}/assets/{asset_id}".
         type: string
       resourceProperties:
         additionalProperties: {}
@@ -1227,7 +1227,7 @@ definitions:
           The relative resource name of this finding. See:
           https://cloud.google.com/apis/design/resource_names#relative_resource_name
           Example:
-          "organizations/123/sources/456/findings/789"
+          "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}"
         type: string
       parent:
         description: |-
@@ -1235,7 +1235,7 @@ definitions:
           https://cloud.google.com/apis/design/resource_names#relative_resource_name
           This field is immutable after creation time.
           For example:
-          "organizations/123/sources/456"
+          "organizations/{organization_id}/sources/{source_id}"
         type: string
       resourceName:
         description: |-
@@ -1688,7 +1688,7 @@ definitions:
           The relative resource name of the settings. See:
           https://cloud.google.com/apis/design/resource_names#relative_resource_name
           Example:
-          "organizations/123/organizationSettings".
+          "organizations/{organization_id}/organizationSettings".
         type: string
     type: object
   Policy:
@@ -1710,7 +1710,7 @@ definitions:
           {
             "bindings": [
               {
-                "role": "role/resourcemanager.organizationAdmin",
+                "role": "roles/resourcemanager.organizationAdmin",
                 "members": [
                   "user:mike@example.com",
                   "group:admins@example.com",
@@ -1860,8 +1860,8 @@ definitions:
           The relative resource name of the SecurityMarks. See:
           https://cloud.google.com/apis/design/resource_names#relative_resource_name
           Examples:
-          "organizations/123/assets/456/securityMarks"
-          "organizations/123/sources/456/findings/789/securityMarks".
+          "organizations/{organization_id}/assets/{asset_id}/securityMarks"
+          "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}/securityMarks".
         type: string
     type: object
   SetFindingStateRequest:
@@ -1928,7 +1928,7 @@ definitions:
           The relative resource name of this source. See:
           https://cloud.google.com/apis/design/resource_names#relative_resource_name
           Example:
-          "organizations/123/sources/456"
+          "organizations/{organization_id}/sources/{source_id}"
         type: string
     type: object
   Status:

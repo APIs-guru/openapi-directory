@@ -825,13 +825,13 @@ paths:
       tags:
         - liens
     get:
-      description: Fetches an Organization resource identified by the specified resource name.
-      operationId: cloudresourcemanager.organizations.get
+      description: |-
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: cloudresourcemanager.operations.get
       parameters:
-        - description: |-
-            The resource name of the Organization to fetch. This is the organization's
-            relative path in the API, formatted as "organizations/[organizationId]".
-            For example, "organizations/1234".
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -841,7 +841,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Organization'
+            $ref: '#/definitions/Operation'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -852,7 +852,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
-        - organizations
+        - operations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -880,7 +880,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Clears a `Policy` from a resource.
-      operationId: cloudresourcemanager.organizations.clearOrgPolicy
+      operationId: cloudresourcemanager.projects.clearOrgPolicy
       parameters:
         - in: body
           name: body
@@ -903,7 +903,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
   '/v1/{resource}:getEffectiveOrgPolicy':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -924,7 +924,7 @@ paths:
         an `etag`set because it is a computed `Policy` across multiple resources.
         Subtrees of Resource Manager resource hierarchy with 'under:' prefix will
         not be expanded.
-      operationId: cloudresourcemanager.organizations.getEffectiveOrgPolicy
+      operationId: cloudresourcemanager.projects.getEffectiveOrgPolicy
       parameters:
         - in: body
           name: body
@@ -951,7 +951,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
-        - organizations
+        - projects
   '/v1/{resource}:getIamPolicy':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -1024,7 +1024,7 @@ paths:
         values including `POLICY_TYPE_NOT_SET` for the `policy_type oneof`. The
         `etag` value can be used with `SetOrgPolicy()` to create or update a
         `Policy` during read-modify-write.
-      operationId: cloudresourcemanager.organizations.getOrgPolicy
+      operationId: cloudresourcemanager.projects.getOrgPolicy
       parameters:
         - in: body
           name: body
@@ -1051,7 +1051,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
-        - organizations
+        - projects
   '/v1/{resource}:listAvailableOrgPolicyConstraints':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -1067,7 +1067,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Lists `Constraints` that could be applied on the specified resource.
-      operationId: cloudresourcemanager.organizations.listAvailableOrgPolicyConstraints
+      operationId: cloudresourcemanager.projects.listAvailableOrgPolicyConstraints
       parameters:
         - in: body
           name: body
@@ -1094,7 +1094,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
-        - organizations
+        - projects
   '/v1/{resource}:listOrgPolicies':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -1110,7 +1110,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Lists all the `Policies` set for a particular resource.
-      operationId: cloudresourcemanager.organizations.listOrgPolicies
+      operationId: cloudresourcemanager.projects.listOrgPolicies
       parameters:
         - in: body
           name: body
@@ -1137,7 +1137,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
-        - organizations
+        - projects
   '/v1/{resource}:setIamPolicy':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -1205,7 +1205,7 @@ paths:
 
         Not supplying an `etag` on the request `Policy` results in an unconditional
         write of the `Policy`.
-      operationId: cloudresourcemanager.organizations.setOrgPolicy
+      operationId: cloudresourcemanager.projects.setOrgPolicy
       parameters:
         - in: body
           name: body
@@ -1228,7 +1228,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
   '/v1/{resource}:testIamPermissions':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -1874,9 +1874,9 @@ definitions:
       if the value contains a ":". Values prefixed with "is:" are treated the
       same as values with no prefix.
       Ancestry subtrees must be in one of the following formats:
-          - “projects/<project-id>”, e.g. “projects/tokyo-rain-123”
-          - “folders/<folder-id>”, e.g. “folders/1234”
-          - “organizations/<organization-id>”, e.g. “organizations/1234”
+          - "projects/<project-id>", e.g. "projects/tokyo-rain-123"
+          - "folders/<folder-id>", e.g. "folders/1234"
+          - "organizations/<organization-id>", e.g. "organizations/1234"
       The `supports_under` field of the associated `Constraint`  defines whether
       ancestry prefixes can be used. You can set `allowed_values` and
       `denied_values` in the same `Policy` if `all_values` is
@@ -1936,7 +1936,7 @@ definitions:
 
           Example 1 (no inherited values):
             `organizations/foo` has a `Policy` with values:
-              {allowed_values: “E1” allowed_values:”E2”}
+              {allowed_values: "E1" allowed_values:"E2"}
             `projects/bar` has `inherit_from_parent` `false` and values:
               {allowed_values: "E3" allowed_values: "E4"}
           The accepted values at `organizations/foo` are `E1`, `E2`.
@@ -1944,9 +1944,9 @@ definitions:
 
           Example 2 (inherited values):
             `organizations/foo` has a `Policy` with values:
-              {allowed_values: “E1” allowed_values:”E2”}
+              {allowed_values: "E1" allowed_values:"E2"}
             `projects/bar` has a `Policy` with values:
-              {value: “E3” value: ”E4” inherit_from_parent: true}
+              {value: "E3" value: "E4" inherit_from_parent: true}
           The accepted values at `organizations/foo` are `E1`, `E2`.
           The accepted values at `projects/bar` are `E1`, `E2`, `E3`, and `E4`.
 
@@ -1960,7 +1960,7 @@ definitions:
 
           Example 4 (RestoreDefault):
             `organizations/foo` has a `Policy` with values:
-              {allowed_values: “E1” allowed_values:”E2”}
+              {allowed_values: "E1" allowed_values:"E2"}
             `projects/bar` has a `Policy` with values:
               {RestoreDefault: {}}
           The accepted values at `organizations/foo` are `E1`, `E2`.
@@ -1977,7 +1977,7 @@ definitions:
 
           Example 6 (ListConstraint allowing all):
             `organizations/foo` has a `Policy` with values:
-              {allowed_values: “E1” allowed_values: ”E2”}
+              {allowed_values: "E1" allowed_values: "E2"}
             `projects/bar` has a `Policy` with:
               {all: ALLOW}
           The accepted values at `organizations/foo` are `E1`, E2`.
@@ -1985,7 +1985,7 @@ definitions:
 
           Example 7 (ListConstraint allowing none):
             `organizations/foo` has a `Policy` with values:
-              {allowed_values: “E1” allowed_values: ”E2”}
+              {allowed_values: "E1" allowed_values: "E2"}
             `projects/bar` has a `Policy` with:
               {all: DENY}
           The accepted values at `organizations/foo` are `E1`, E2`.
@@ -2196,27 +2196,36 @@ definitions:
       specify access control policies for Cloud Platform resources.
 
 
-      A `Policy` consists of a list of `bindings`. A `binding` binds a list of
-      `members` to a `role`, where the members can be user accounts, Google groups,
-      Google domains, and service accounts. A `role` is a named list of permissions
-      defined by IAM.
+      A `Policy` is a collection of `bindings`. A `binding` binds one or more
+      `members` to a single `role`. Members can be user accounts, service accounts,
+      Google groups, and domains (such as G Suite). A `role` is a named list of
+      permissions (defined by IAM or configured by users). A `binding` can
+      optionally specify a `condition`, which is a logic expression that further
+      constrains the role binding based on attributes about the request and/or
+      target resource.
 
       **JSON Example**
 
           {
             "bindings": [
               {
-                "role": "roles/owner",
+                "role": "roles/resourcemanager.organizationAdmin",
                 "members": [
                   "user:mike@example.com",
                   "group:admins@example.com",
                   "domain:google.com",
-                  "serviceAccount:my-other-app@appspot.gserviceaccount.com"
+                  "serviceAccount:my-project-id@appspot.gserviceaccount.com"
                 ]
               },
               {
-                "role": "roles/viewer",
-                "members": ["user:sean@example.com"]
+                "role": "roles/resourcemanager.organizationViewer",
+                "members": ["user:eve@example.com"],
+                "condition": {
+                  "title": "expirable access",
+                  "description": "Does not grant access after Sep 2020",
+                  "expression": "request.time <
+                  timestamp('2020-10-01T00:00:00.000Z')",
+                }
               }
             ]
           }
@@ -2228,12 +2237,15 @@ definitions:
             - user:mike@example.com
             - group:admins@example.com
             - domain:google.com
-            - serviceAccount:my-other-app@appspot.gserviceaccount.com
-            role: roles/owner
+            - serviceAccount:my-project-id@appspot.gserviceaccount.com
+            role: roles/resourcemanager.organizationAdmin
           - members:
-            - user:sean@example.com
-            role: roles/viewer
-
+            - user:eve@example.com
+            role: roles/resourcemanager.organizationViewer
+            condition:
+              title: expirable access
+              description: Does not grant access after Sep 2020
+              expression: request.time < timestamp('2020-10-01T00:00:00.000Z')
 
       For a description of IAM and its features, see the
       [IAM developer's guide](https://cloud.google.com/iam/docs).
@@ -2245,7 +2257,8 @@ definitions:
         type: array
       bindings:
         description: |-
-          Associates a list of `members` to a `role`.
+          Associates a list of `members` to a `role`. Optionally may specify a
+          `condition` that determines when binding is in effect.
           `bindings` with no members will result in an error.
         items:
           $ref: '#/definitions/Binding'
@@ -2261,7 +2274,9 @@ definitions:
           ensure that their change will be applied to the same version of the policy.
 
           If no `etag` is provided in the call to `setIamPolicy`, then the existing
-          policy is overwritten.
+          policy is overwritten. Due to blind-set semantics of an etag-less policy,
+          'setIamPolicy' will not fail even if either of incoming or stored policy
+          does not meet the version requirements.
         format: byte
         type: string
       version:
@@ -2271,9 +2286,14 @@ definitions:
           Valid values are 0, 1, and 3. Requests specifying an invalid value will be
           rejected.
 
-          Policies with any conditional bindings must specify version 3. Policies
-          without any conditional bindings may specify any valid value or leave the
-          field unset.
+          Operations affecting conditional bindings must specify version 3. This can
+          be either setting a conditional policy, modifying a conditional binding,
+          or removing a conditional binding from the stored conditional policy.
+          Operations on non-conditional policies may specify any valid value or
+          leave the field unset.
+
+          If no etag is provided in the call to `setIamPolicy`, any version
+          compliance checks on the incoming and/or stored policy is skipped.
         format: int32
         type: integer
     type: object
@@ -2397,7 +2417,7 @@ definitions:
       type:
         description: |-
           Required field representing the resource type this id is for.
-          At present, the valid types are: "organization" and "folder".
+          At present, the valid types are: "organization", "folder", and "project".
         type: string
     type: object
   RestoreDefault:

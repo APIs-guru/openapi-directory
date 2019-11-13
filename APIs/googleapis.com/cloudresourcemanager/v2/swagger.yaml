@@ -171,21 +171,18 @@ paths:
         identified parent.
       operationId: cloudresourcemanager.folders.list
       parameters:
-        - description: |-
-            The maximum number of Folders to return in the response.
-            This field is optional.
+        - description: Optional. The maximum number of Folders to return in the response.
           in: query
           name: pageSize
           type: integer
         - description: |-
-            A pagination token returned from a previous call to `ListFolders`
+            Optional. A pagination token returned from a previous call to `ListFolders`
             that indicates where this listing should continue from.
-            This field is optional.
           in: query
           name: pageToken
           type: string
         - description: |-
-            The resource name of the Organization or Folder whose Folders are
+            Required. The resource name of the Organization or Folder whose Folders are
             being listed.
             Must be of the form `folders/{folder_id}` or `organizations/{org_id}`.
             Access to this method is controlled by checking the
@@ -194,9 +191,9 @@ paths:
           name: parent
           type: string
         - description: |-
-            Controls whether Folders in the
+            Optional. Controls whether Folders in the
             DELETE_REQUESTED
-            state should be returned. Defaults to false. This field is optional.
+            state should be returned. Defaults to false.
           in: query
           name: showDeleted
           type: boolean
@@ -264,7 +261,7 @@ paths:
           schema:
             $ref: '#/definitions/Folder'
         - description: |-
-            The resource name of the new Folder's parent.
+            Required. The resource name of the new Folder's parent.
             Must be of the form `folders/{folder_id}` or `organizations/{org_id}`.
           in: query
           name: parent
@@ -339,7 +336,7 @@ paths:
       operationId: cloudresourcemanager.folders.delete
       parameters:
         - description: |-
-            the resource name of the Folder to be deleted.
+            Required. the resource name of the Folder to be deleted.
             Must be of the form `folders/{folder_id}`.
           in: path
           name: name
@@ -368,7 +365,7 @@ paths:
       operationId: cloudresourcemanager.folders.get
       parameters:
         - description: |-
-            The resource name of the Folder to retrieve.
+            Required. The resource name of the Folder to retrieve.
             Must be of the form `folders/{folder_id}`.
           in: path
           name: name
@@ -435,7 +432,7 @@ paths:
           type: string
           x-reservedExpansion: true
         - description: |-
-            Fields to be updated.
+            Required. Fields to be updated.
             Only the `display_name` can be updated.
           in: query
           name: updateMask
@@ -491,7 +488,7 @@ paths:
           schema:
             $ref: '#/definitions/MoveFolderRequest'
         - description: |-
-            The resource name of the Folder to move.
+            Required. The resource name of the Folder to move.
             Must be of the form folders/{folder_id}
           in: path
           name: name
@@ -542,7 +539,7 @@ paths:
           schema:
             $ref: '#/definitions/UndeleteFolderRequest'
         - description: |-
-            The resource name of the Folder to undelete.
+            Required. The resource name of the Folder to undelete.
             Must be of the form `folders/{folder_id}`.
           in: path
           name: name
@@ -923,7 +920,7 @@ definitions:
         type: string
       parent:
         description: |-
-          The Folder’s parent's resource name.
+          Required. The Folder’s parent's resource name.
           Updates to the folder's parent must be performed via
           MoveFolder.
         type: string
@@ -1009,7 +1006,6 @@ definitions:
         description: |-
           A pagination token returned from a previous call to `ListFolders`
           that indicates from where listing should continue.
-          This field is optional.
         type: string
     type: object
   MoveFolderRequest:
@@ -1017,7 +1013,7 @@ definitions:
     properties:
       destinationParent:
         description: |-
-          The resource name of the Folder or Organization to reparent
+          Required. The resource name of the Folder or Organization to reparent
           the folder under.
           Must be of the form `folders/{folder_id}` or `organizations/{org_id}`.
         type: string
@@ -1071,27 +1067,36 @@ definitions:
       specify access control policies for Cloud Platform resources.
 
 
-      A `Policy` consists of a list of `bindings`. A `binding` binds a list of
-      `members` to a `role`, where the members can be user accounts, Google groups,
-      Google domains, and service accounts. A `role` is a named list of permissions
-      defined by IAM.
+      A `Policy` is a collection of `bindings`. A `binding` binds one or more
+      `members` to a single `role`. Members can be user accounts, service accounts,
+      Google groups, and domains (such as G Suite). A `role` is a named list of
+      permissions (defined by IAM or configured by users). A `binding` can
+      optionally specify a `condition`, which is a logic expression that further
+      constrains the role binding based on attributes about the request and/or
+      target resource.
 
       **JSON Example**
 
           {
             "bindings": [
               {
-                "role": "roles/owner",
+                "role": "roles/resourcemanager.organizationAdmin",
                 "members": [
                   "user:mike@example.com",
                   "group:admins@example.com",
                   "domain:google.com",
-                  "serviceAccount:my-other-app@appspot.gserviceaccount.com"
+                  "serviceAccount:my-project-id@appspot.gserviceaccount.com"
                 ]
               },
               {
-                "role": "roles/viewer",
-                "members": ["user:sean@example.com"]
+                "role": "roles/resourcemanager.organizationViewer",
+                "members": ["user:eve@example.com"],
+                "condition": {
+                  "title": "expirable access",
+                  "description": "Does not grant access after Sep 2020",
+                  "expression": "request.time <
+                  timestamp('2020-10-01T00:00:00.000Z')",
+                }
               }
             ]
           }
@@ -1103,12 +1108,15 @@ definitions:
             - user:mike@example.com
             - group:admins@example.com
             - domain:google.com
-            - serviceAccount:my-other-app@appspot.gserviceaccount.com
-            role: roles/owner
+            - serviceAccount:my-project-id@appspot.gserviceaccount.com
+            role: roles/resourcemanager.organizationAdmin
           - members:
-            - user:sean@example.com
-            role: roles/viewer
-
+            - user:eve@example.com
+            role: roles/resourcemanager.organizationViewer
+            condition:
+              title: expirable access
+              description: Does not grant access after Sep 2020
+              expression: request.time < timestamp('2020-10-01T00:00:00.000Z')
 
       For a description of IAM and its features, see the
       [IAM developer's guide](https://cloud.google.com/iam/docs).
@@ -1120,7 +1128,8 @@ definitions:
         type: array
       bindings:
         description: |-
-          Associates a list of `members` to a `role`.
+          Associates a list of `members` to a `role`. Optionally may specify a
+          `condition` that determines when binding is in effect.
           `bindings` with no members will result in an error.
         items:
           $ref: '#/definitions/Binding'
@@ -1136,7 +1145,9 @@ definitions:
           ensure that their change will be applied to the same version of the policy.
 
           If no `etag` is provided in the call to `setIamPolicy`, then the existing
-          policy is overwritten.
+          policy is overwritten. Due to blind-set semantics of an etag-less policy,
+          'setIamPolicy' will not fail even if either of incoming or stored policy
+          does not meet the version requirements.
         format: byte
         type: string
       version:
@@ -1146,9 +1157,14 @@ definitions:
           Valid values are 0, 1, and 3. Requests specifying an invalid value will be
           rejected.
 
-          Policies with any conditional bindings must specify version 3. Policies
-          without any conditional bindings may specify any valid value or leave the
-          field unset.
+          Operations affecting conditional bindings must specify version 3. This can
+          be either setting a conditional policy, modifying a conditional binding,
+          or removing a conditional binding from the stored conditional policy.
+          Operations on non-conditional policies may specify any valid value or
+          leave the field unset.
+
+          If no etag is provided in the call to `setIamPolicy`, any version
+          compliance checks on the incoming and/or stored policy is skipped.
         format: int32
         type: integer
     type: object
@@ -1176,16 +1192,13 @@ definitions:
     description: The request message for searching folders.
     properties:
       pageSize:
-        description: |-
-          The maximum number of folders to return in the response.
-          This field is optional.
+        description: Optional. The maximum number of folders to return in the response.
         format: int32
         type: integer
       pageToken:
         description: |-
-          A pagination token returned from a previous call to `SearchFolders`
+          Optional. A pagination token returned from a previous call to `SearchFolders`
           that indicates from where search should continue.
-          This field is optional.
         type: string
       query:
         description: |-
@@ -1228,7 +1241,6 @@ definitions:
         description: |-
           A pagination token returned from a previous call to `SearchFolders`
           that indicates from where searching should continue.
-          This field is optional.
         type: string
     type: object
   SetIamPolicyRequest:

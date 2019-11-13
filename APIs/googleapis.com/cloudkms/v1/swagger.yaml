@@ -121,10 +121,10 @@ tags:
 paths:
   '/v1/{name}':
     get:
-      description: Returns metadata for a given ImportJob.
-      operationId: cloudkms.projects.locations.keyRings.importJobs.get
+      description: Returns metadata for a given CryptoKeyVersion.
+      operationId: cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.get
       parameters:
-        - description: The name of the ImportJob to get.
+        - description: Required. The name of the CryptoKeyVersion to get.
           in: path
           name: name
           required: true
@@ -134,7 +134,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/ImportJob'
+            $ref: '#/definitions/CryptoKeyVersion'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -181,7 +181,7 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - description: Required list of fields to be updated in this request.
+        - description: Required. List of fields to be updated in this request.
           in: query
           name: updateMask
           type: string
@@ -262,7 +262,7 @@ paths:
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.getPublicKey
       parameters:
         - description: |-
-            The name of the CryptoKeyVersion public key to
+            Required. The name of the CryptoKeyVersion public key to
             get.
           in: path
           name: name
@@ -471,7 +471,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/DestroyCryptoKeyVersionRequest'
-        - description: The resource name of the CryptoKeyVersion to destroy.
+        - description: Required. The resource name of the CryptoKeyVersion to destroy.
           in: path
           name: name
           required: true
@@ -572,7 +572,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/RestoreCryptoKeyVersionRequest'
-        - description: The resource name of the CryptoKeyVersion to restore.
+        - description: Required. The resource name of the CryptoKeyVersion to restore.
           in: path
           name: name
           required: true
@@ -618,7 +618,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/UpdateCryptoKeyPrimaryVersionRequest'
-        - description: The resource name of the CryptoKey to update.
+        - description: Required. The resource name of the CryptoKey to update.
           in: path
           name: name
           required: true
@@ -662,7 +662,7 @@ paths:
           name: orderBy
           type: string
         - description: |-
-            Optional limit on the number of CryptoKeyVersions to
+            Optional. Optional limit on the number of CryptoKeyVersions to
             include in the response. Further CryptoKeyVersions can
             subsequently be obtained by including the
             ListCryptoKeyVersionsResponse.next_page_token in a subsequent request.
@@ -671,7 +671,7 @@ paths:
           name: pageSize
           type: integer
         - description: |-
-            Optional pagination token, returned earlier via
+            Optional. Optional pagination token, returned earlier via
             ListCryptoKeyVersionsResponse.next_page_token.
           in: query
           name: pageToken
@@ -828,7 +828,7 @@ paths:
           name: orderBy
           type: string
         - description: |-
-            Optional limit on the number of CryptoKeys to include in the
+            Optional. Optional limit on the number of CryptoKeys to include in the
             response.  Further CryptoKeys can subsequently be obtained by
             including the ListCryptoKeysResponse.next_page_token in a subsequent
             request.  If unspecified, the server will pick an appropriate default.
@@ -836,7 +836,7 @@ paths:
           name: pageSize
           type: integer
         - description: |-
-            Optional pagination token, returned earlier via
+            Optional. Optional pagination token, returned earlier via
             ListCryptoKeysResponse.next_page_token.
           in: query
           name: pageToken
@@ -958,7 +958,7 @@ paths:
           name: orderBy
           type: string
         - description: |-
-            Optional limit on the number of ImportJobs to include in the
+            Optional. Optional limit on the number of ImportJobs to include in the
             response. Further ImportJobs can subsequently be obtained by
             including the ListImportJobsResponse.next_page_token in a subsequent
             request. If unspecified, the server will pick an appropriate default.
@@ -966,7 +966,7 @@ paths:
           name: pageSize
           type: integer
         - description: |-
-            Optional pagination token, returned earlier via
+            Optional. Optional pagination token, returned earlier via
             ListImportJobsResponse.next_page_token.
           in: query
           name: pageToken
@@ -1070,7 +1070,7 @@ paths:
           name: orderBy
           type: string
         - description: |-
-            Optional limit on the number of KeyRings to include in the
+            Optional. Optional limit on the number of KeyRings to include in the
             response.  Further KeyRings can subsequently be obtained by
             including the ListKeyRingsResponse.next_page_token in a subsequent
             request.  If unspecified, the server will pick an appropriate default.
@@ -1078,7 +1078,7 @@ paths:
           name: pageSize
           type: integer
         - description: |-
-            Optional pagination token, returned earlier via
+            Optional. Optional pagination token, returned earlier via
             ListKeyRingsResponse.next_page_token.
           in: query
           name: pageToken
@@ -1163,7 +1163,7 @@ paths:
         Gets the access control policy for a resource.
         Returns an empty policy if the resource exists and does not have a policy
         set.
-      operationId: cloudkms.projects.locations.keyRings.importJobs.getIamPolicy
+      operationId: cloudkms.projects.locations.keyRings.cryptoKeys.getIamPolicy
       parameters:
         - description: |-
             Optional. The policy format version to be returned.
@@ -1230,7 +1230,9 @@ paths:
       description: |-
         Sets the access control policy on the specified resource. Replaces any
         existing policy.
-      operationId: cloudkms.projects.locations.keyRings.importJobs.setIamPolicy
+
+        Can return Public Errors: NOT_FOUND, INVALID_ARGUMENT and PERMISSION_DENIED
+      operationId: cloudkms.projects.locations.keyRings.cryptoKeys.setIamPolicy
       parameters:
         - in: body
           name: body
@@ -1282,7 +1284,7 @@ paths:
         Note: This operation is designed to be used for building permission-aware
         UIs and command-line tools, not for authorization checking. This operation
         may "fail open" without warning.
-      operationId: cloudkms.projects.locations.keyRings.importJobs.testIamPermissions
+      operationId: cloudkms.projects.locations.keyRings.cryptoKeys.testIamPermissions
       parameters:
         - in: body
           name: body
@@ -1553,7 +1555,7 @@ definitions:
           ENCRYPT_DECRYPT have a
           primary. For other keys, this field will be omitted.
       purpose:
-        description: The immutable purpose of this CryptoKey.
+        description: Immutable. The immutable purpose of this CryptoKey.
         enum:
           - CRYPTO_KEY_PURPOSE_UNSPECIFIED
           - ENCRYPT_DECRYPT
@@ -1740,7 +1742,7 @@ definitions:
     properties:
       additionalAuthenticatedData:
         description: |-
-          Optional data that must match the data originally supplied in
+          Optional. Optional data that must match the data originally supplied in
           EncryptRequest.additional_authenticated_data.
         format: byte
         type: string
@@ -1784,7 +1786,7 @@ definitions:
     properties:
       additionalAuthenticatedData:
         description: |-
-          Optional data that, if specified, must also be provided during decryption
+          Optional. Optional data that, if specified, must also be provided during decryption
           through DecryptRequest.additional_authenticated_data.
 
           The maximum size depends on the key version's
@@ -1904,6 +1906,11 @@ definitions:
             </li>
           </ol>
 
+          If importing symmetric key material, it is expected that the unwrapped
+          key contains plain bytes. If importing asymmetric key material, it is
+          expected that the unwrapped key is in PKCS#8-encoded DER format (the
+          PrivateKeyInfo structure from RFC 5208).
+
           This format is the same as the format produced by PKCS#11 mechanism
           CKM_RSA_AES_KEY_WRAP.
         format: byte
@@ -1968,9 +1975,7 @@ definitions:
         format: google-datetime
         type: string
       importMethod:
-        description: |-
-          Required and immutable. The wrapping method to be used for incoming
-          key material.
+        description: Required. Immutable. The wrapping method to be used for incoming key material.
         enum:
           - IMPORT_METHOD_UNSPECIFIED
           - RSA_OAEP_3072_SHA1_AES_256
@@ -1983,8 +1988,7 @@ definitions:
         type: string
       protectionLevel:
         description: |-
-          Required and immutable. The protection level of the ImportJob. This
-          must match the
+          Required. Immutable. The protection level of the ImportJob. This must match the
           protection_level of the
           version_template on the CryptoKey you
           attempt to import into.
@@ -2178,27 +2182,36 @@ definitions:
       specify access control policies for Cloud Platform resources.
 
 
-      A `Policy` consists of a list of `bindings`. A `binding` binds a list of
-      `members` to a `role`, where the members can be user accounts, Google groups,
-      Google domains, and service accounts. A `role` is a named list of permissions
-      defined by IAM.
+      A `Policy` is a collection of `bindings`. A `binding` binds one or more
+      `members` to a single `role`. Members can be user accounts, service accounts,
+      Google groups, and domains (such as G Suite). A `role` is a named list of
+      permissions (defined by IAM or configured by users). A `binding` can
+      optionally specify a `condition`, which is a logic expression that further
+      constrains the role binding based on attributes about the request and/or
+      target resource.
 
       **JSON Example**
 
           {
             "bindings": [
               {
-                "role": "roles/owner",
+                "role": "roles/resourcemanager.organizationAdmin",
                 "members": [
                   "user:mike@example.com",
                   "group:admins@example.com",
                   "domain:google.com",
-                  "serviceAccount:my-other-app@appspot.gserviceaccount.com"
+                  "serviceAccount:my-project-id@appspot.gserviceaccount.com"
                 ]
               },
               {
-                "role": "roles/viewer",
-                "members": ["user:sean@example.com"]
+                "role": "roles/resourcemanager.organizationViewer",
+                "members": ["user:eve@example.com"],
+                "condition": {
+                  "title": "expirable access",
+                  "description": "Does not grant access after Sep 2020",
+                  "expression": "request.time <
+                  timestamp('2020-10-01T00:00:00.000Z')",
+                }
               }
             ]
           }
@@ -2210,12 +2223,15 @@ definitions:
             - user:mike@example.com
             - group:admins@example.com
             - domain:google.com
-            - serviceAccount:my-other-app@appspot.gserviceaccount.com
-            role: roles/owner
+            - serviceAccount:my-project-id@appspot.gserviceaccount.com
+            role: roles/resourcemanager.organizationAdmin
           - members:
-            - user:sean@example.com
-            role: roles/viewer
-
+            - user:eve@example.com
+            role: roles/resourcemanager.organizationViewer
+            condition:
+              title: expirable access
+              description: Does not grant access after Sep 2020
+              expression: request.time < timestamp('2020-10-01T00:00:00.000Z')
 
       For a description of IAM and its features, see the
       [IAM developer's guide](https://cloud.google.com/iam/docs).
@@ -2227,7 +2243,8 @@ definitions:
         type: array
       bindings:
         description: |-
-          Associates a list of `members` to a `role`.
+          Associates a list of `members` to a `role`. Optionally may specify a
+          `condition` that determines when binding is in effect.
           `bindings` with no members will result in an error.
         items:
           $ref: '#/definitions/Binding'
@@ -2243,7 +2260,9 @@ definitions:
           ensure that their change will be applied to the same version of the policy.
 
           If no `etag` is provided in the call to `setIamPolicy`, then the existing
-          policy is overwritten.
+          policy is overwritten. Due to blind-set semantics of an etag-less policy,
+          'setIamPolicy' will not fail even if either of incoming or stored policy
+          does not meet the version requirements.
         format: byte
         type: string
       version:
@@ -2253,9 +2272,14 @@ definitions:
           Valid values are 0, 1, and 3. Requests specifying an invalid value will be
           rejected.
 
-          Policies with any conditional bindings must specify version 3. Policies
-          without any conditional bindings may specify any valid value or leave the
-          field unset.
+          Operations affecting conditional bindings must specify version 3. This can
+          be either setting a conditional policy, modifying a conditional binding,
+          or removing a conditional binding from the stored conditional policy.
+          Operations on non-conditional policies may specify any valid value or
+          leave the field unset.
+
+          If no etag is provided in the call to `setIamPolicy`, any version
+          compliance checks on the incoming and/or stored policy is skipped.
         format: int32
         type: integer
     type: object
@@ -2347,7 +2371,7 @@ definitions:
     description: Request message for KeyManagementService.UpdateCryptoKeyPrimaryVersion.
     properties:
       cryptoKeyVersionId:
-        description: The id of the child CryptoKeyVersion to use as primary.
+        description: Required. The id of the child CryptoKeyVersion to use as primary.
         type: string
     type: object
   WrappingPublicKey:

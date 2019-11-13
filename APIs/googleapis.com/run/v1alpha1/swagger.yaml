@@ -635,13 +635,10 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - namespaces
-  '/apis/serving.knative.dev/v1alpha1/{name}':
+  '/apis/events.cloud.google.com/v1alpha1/{name}':
     delete:
-      description: |-
-        Rpc to delete a service.
-        This will cause the Service to stop serving traffic and will delete the
-        child entities like Routes, Configurations and Revisions.
-      operationId: run.namespaces.services.delete
+      description: Rpc to delete a pubsub.
+      operationId: run.namespaces.pubsubs.delete
       parameters:
         - description: Cloud Run currently ignores this parameter.
           in: query
@@ -652,7 +649,222 @@ paths:
           name: kind
           type: string
         - description: |-
-            The name of the service being deleted. If needed, replace
+            The name of the pubsub being deleted. If needed, replace
+            {namespace_id} with the project ID.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: |-
+            Specifies the propagation policy of delete. Cloud Run currently ignores
+            this setting, and deletes in the background. Please see
+            kubernetes.io/docs/concepts/workloads/controllers/garbage-collection/ for
+            more information.
+          in: query
+          name: propagationPolicy
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - namespaces
+    get:
+      description: Rpc to get information about a pubsub.
+      operationId: run.namespaces.pubsubs.get
+      parameters:
+        - description: |-
+            The name of the pubsub being retrieved. If needed, replace
+            {namespace_id} with the project ID.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PubSub'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - namespaces
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    put:
+      description: |-
+        Rpc to replace a pubsub.
+
+        Only the spec and metadata labels and annotations are modifiable. After
+        the Update request, Cloud Run will work to make the 'status'
+        match the requested 'spec'.
+
+        May provide metadata.resourceVersion to enforce update from last read for
+        optimistic concurrency control.
+      operationId: run.namespaces.pubsubs.replacePubSub
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PubSub'
+        - description: |-
+            The name of the pubsub being retrieved. If needed, replace
+            {namespace_id} with the project ID.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PubSub'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - namespaces
+  '/apis/events.cloud.google.com/v1alpha1/{parent}/pubsubs':
+    get:
+      description: Rpc to list pubsubs.
+      operationId: run.namespaces.pubsubs.list
+      parameters:
+        - description: Optional encoded string to continue paging.
+          in: query
+          name: continue
+          type: string
+        - description: |-
+            Allows to filter resources based on a specific value for a field name.
+            Send this in a query string format. i.e. 'metadata.name%3Dlorem'.
+            Not currently used by Cloud Run.
+          in: query
+          name: fieldSelector
+          type: string
+        - description: Not currently used by Cloud Run.
+          in: query
+          name: includeUninitialized
+          type: boolean
+        - description: |-
+            Allows to filter resources based on a label. Supported operations are
+            =, !=, exists, in, and notIn.
+          in: query
+          name: labelSelector
+          type: string
+        - description: The maximum number of records that should be returned.
+          in: query
+          name: limit
+          type: integer
+        - description: |-
+            The project ID or project number from which the pubsubs should
+            be listed.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: |-
+            The baseline resource version from which the list or watch operation should
+            start. Not currently used by Cloud Run.
+          in: query
+          name: resourceVersion
+          type: string
+        - description: |-
+            Flag that indicates that the client expects to watch this resource as well.
+            Not currently used by Cloud Run.
+          in: query
+          name: watch
+          type: boolean
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListPubSubsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - namespaces
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Creates a new pubsub.
+      operationId: run.namespaces.pubsubs.create
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PubSub'
+        - description: |-
+            The project ID or project number in which this pubsub should
+            be created.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PubSub'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - namespaces
+  '/apis/serving.knative.dev/v1alpha1/{name}':
+    delete:
+      description: Rpc to delete a revision.
+      operationId: run.namespaces.revisions.delete
+      parameters:
+        - description: Cloud Run currently ignores this parameter.
+          in: query
+          name: apiVersion
+          type: string
+        - description: Cloud Run currently ignores this parameter.
+          in: query
+          name: kind
+          type: string
+        - description: |-
+            The name of the revision being deleted. If needed, replace
             {namespace_id} with the project ID.
           in: path
           name: name
@@ -689,11 +901,11 @@ paths:
       tags:
         - namespaces
     get:
-      description: Rpc to get information about a service.
-      operationId: run.namespaces.services.get
+      description: Rpc to get information about a configuration.
+      operationId: run.namespaces.configurations.get
       parameters:
         - description: |-
-            The name of the service being retrieved. If needed, replace
+            The name of the configuration being retrieved. If needed, replace
             {namespace_id} with the project ID.
           in: path
           name: name
@@ -704,7 +916,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Service'
+            $ref: '#/definitions/Configuration'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -1127,11 +1339,11 @@ paths:
       tags:
         - projects
     get:
-      description: Rpc to get information about a domain mapping.
-      operationId: run.projects.locations.domainmappings.get
+      description: Rpc to get information about a configuration.
+      operationId: run.projects.locations.configurations.get
       parameters:
         - description: |-
-            The name of the domain mapping being retrieved. If needed, replace
+            The name of the configuration being retrieved. If needed, replace
             {namespace_id} with the project ID.
           in: path
           name: name
@@ -1142,7 +1354,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/DomainMapping'
+            $ref: '#/definitions/Configuration'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -1164,7 +1376,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     put:
       description: |-
-        Rpc to replace a service.
+        Rpc to replace a pubsub.
 
         Only the spec and metadata labels and annotations are modifiable. After
         the Update request, Cloud Run will work to make the 'status'
@@ -1172,14 +1384,14 @@ paths:
 
         May provide metadata.resourceVersion to enforce update from last read for
         optimistic concurrency control.
-      operationId: run.projects.locations.services.replaceService
+      operationId: run.projects.locations.pubsubs.replacePubSub
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/Service'
+            $ref: '#/definitions/PubSub'
         - description: |-
-            The name of the service being replaced. If needed, replace
+            The name of the pubsub being retrieved. If needed, replace
             {namespace_id} with the project ID.
           in: path
           name: name
@@ -1190,7 +1402,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Service'
+            $ref: '#/definitions/PubSub'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -1538,6 +1750,108 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
+  '/v1alpha1/{parent}/pubsubs':
+    get:
+      description: Rpc to list pubsubs.
+      operationId: run.projects.locations.pubsubs.list
+      parameters:
+        - description: Optional encoded string to continue paging.
+          in: query
+          name: continue
+          type: string
+        - description: |-
+            Allows to filter resources based on a specific value for a field name.
+            Send this in a query string format. i.e. 'metadata.name%3Dlorem'.
+            Not currently used by Cloud Run.
+          in: query
+          name: fieldSelector
+          type: string
+        - description: Not currently used by Cloud Run.
+          in: query
+          name: includeUninitialized
+          type: boolean
+        - description: |-
+            Allows to filter resources based on a label. Supported operations are
+            =, !=, exists, in, and notIn.
+          in: query
+          name: labelSelector
+          type: string
+        - description: The maximum number of records that should be returned.
+          in: query
+          name: limit
+          type: integer
+        - description: |-
+            The project ID or project number from which the pubsubs should
+            be listed.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: |-
+            The baseline resource version from which the list or watch operation should
+            start. Not currently used by Cloud Run.
+          in: query
+          name: resourceVersion
+          type: string
+        - description: |-
+            Flag that indicates that the client expects to watch this resource as well.
+            Not currently used by Cloud Run.
+          in: query
+          name: watch
+          type: boolean
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListPubSubsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Creates a new pubsub.
+      operationId: run.projects.locations.pubsubs.create
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PubSub'
+        - description: |-
+            The project ID or project number in which this pubsub should
+            be created.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PubSub'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
   '/v1alpha1/{parent}/revisions':
     get:
       description: Rpc to list revisions.
@@ -2212,6 +2526,49 @@ definitions:
           type: string
         type: array
     type: object
+  CloudEventOverrides:
+    description: |-
+      CloudEventOverrides defines arguments for a Source that control the output
+      format of the CloudEvents produced by the Source.
+    properties:
+      extensions:
+        additionalProperties:
+          type: string
+        description: |-
+          Extensions specify what attribute are added or overridden on the outbound
+          event. Each `Extensions` key-value pair are set on the event as an
+          attribute extension independently.
+          +optional
+        type: object
+    type: object
+  Condition:
+    description: Condition defines a generic condition for a Resource
+    properties:
+      lastTransitionTime:
+        description: Optional. Last time the condition transitioned from one status to another.
+        format: google-datetime
+        type: string
+      message:
+        description: Optional. Human readable message indicating details about the current status.
+        type: string
+      reason:
+        description: Optional. One-word CamelCase reason for the condition's last transition.
+        type: string
+      severity:
+        description: 'Optional. How to interpret failures of this condition, one of Error, Warning, Info'
+        type: string
+      status:
+        description: 'Status of the condition, one of True, False, Unknown.'
+        type: string
+      type:
+        description: |-
+          type is used to communicate the status of the reconciliation process.
+          See also:
+          https://github.com/knative/serving/blob/master/docs/spec/errors.md#error-conditions-and-reporting
+          Types common to all resources include:
+          * "Ready": True when the Resource is ready.
+        type: string
+    type: object
   ConfigMapEnvSource:
     description: |-
       ConfigMapEnvSource selects a ConfigMap to populate the environment
@@ -2681,6 +3038,21 @@ definitions:
           Protocol for port. Must be UDP or TCP.
           Defaults to "TCP".
           +optional
+        type: string
+    type: object
+  Destination:
+    properties:
+      ref:
+        $ref: '#/definitions/ObjectReference'
+        description: |-
+          ObjectReference points to an Addressable.
+          + optional
+      uri:
+        description: |-
+          URI is for direct URI Designations or used with the resulting URL from
+          Addressable ObjectReference. If used with an ObjectReference, will be
+          appended to the path of the resulting URL from the Addressable.
+          + optional
         type: string
     type: object
   DomainMapping:
@@ -3274,6 +3646,29 @@ definitions:
           +optional
         type: string
     type: object
+  ListPubSubsResponse:
+    description: ListPubSubsResponse is a list of PubSub resources.
+    properties:
+      apiVersion:
+        description: The API version for this call such as "events.cloud.google.com/v1alpha1".
+        type: string
+      items:
+        description: List of PubSubs.
+        items:
+          $ref: '#/definitions/PubSub'
+        type: array
+      kind:
+        description: 'The kind of this resource, in this case "PubSubList".'
+        type: string
+      metadata:
+        $ref: '#/definitions/ListMeta'
+        description: Metadata associated with this PubSub list.
+      unreachable:
+        description: Locations that could not be reached.
+        items:
+          type: string
+        type: array
+    type: object
   ListRevisionsResponse:
     description: ListRevisionsResponse is a list of Revision resources.
     properties:
@@ -3731,7 +4126,7 @@ definitions:
           {
             "bindings": [
               {
-                "role": "role/resourcemanager.organizationAdmin",
+                "role": "roles/resourcemanager.organizationAdmin",
                 "members": [
                   "user:mike@example.com",
                   "group:admins@example.com",
@@ -3864,6 +4259,111 @@ definitions:
           +optional
         format: int32
         type: integer
+    type: object
+  PubSub:
+    properties:
+      apiVersion:
+        description: The API version for this call such as "events.cloud.google.com/v1alpha1".
+        type: string
+      kind:
+        description: 'The kind of resource, in this case "PubSub".'
+        type: string
+      metadata:
+        $ref: '#/definitions/ObjectMeta'
+        description: Metadata associated with this PubSub.
+      spec:
+        $ref: '#/definitions/PubSubSpec'
+        description: Spec defines the desired state of the PubSub.
+      status:
+        $ref: '#/definitions/PubSubStatus'
+        description: |-
+          Status represents the current state of the PubSub. This data may be
+          out of date. +optional
+    type: object
+  PubSubSpec:
+    description: The desired state of the PubSub.
+    properties:
+      ackDeadline:
+        description: |-
+          AckDeadline is the default maximum time after a subscriber receives a
+          message before the subscriber should acknowledge the message. Defaults
+          to 30 seconds ('30s').
+          +optional
+        type: string
+      ceOverrides:
+        $ref: '#/definitions/CloudEventOverrides'
+        description: |-
+          CloudEventOverrides defines overrides to control the output format and
+          modifications of the event sent to the sink.
+          +optional
+      project:
+        description: |-
+          Project is the ID of the Google Cloud Project that the PubSub Topic exists
+          in. If omitted, defaults to same as the cluster. +optional
+        type: string
+      pubsubSecret:
+        $ref: '#/definitions/SecretKeySelector'
+        description: |-
+          PubSubSecret is the credential to use to create
+          Topic / PullSubscription resources. If omitted, uses Secret.
+      retainAckedMessages:
+        description: |-
+          RetainAckedMessages defines whether to retain acknowledged messages. If
+          true, acknowledged messages will not be expunged until they fall out of
+          the RetentionDuration window.
+        type: boolean
+      retentionDuration:
+        description: |-
+          RetentionDuration defines how long to retain messages in backlog, from
+          the time of publish. If RetainAckedMessages is true, this duration
+          affects the retention of acknowledged messages, otherwise only
+          unacknowledged messages are retained. Cannot be longer than 7 days or
+          shorter than 10 minutes. Defaults to 7 days ('7d').
+          +optional
+        type: string
+      secret:
+        $ref: '#/definitions/SecretKeySelector'
+        description: |-
+          Secret is the credential to use to create the Scheduler Job.
+          If not specified, defaults to:
+          Name: google-cloud-key
+          Key: key.json
+          +optional
+      sink:
+        $ref: '#/definitions/Destination'
+        description: |-
+          Sink is a reference to an object that will resolve to a domain name or a
+          URI directly to use as the sink.
+      topic:
+        description: |-
+          Topic is the ID of the PubSub Topic to Subscribe to. It must
+          be in the form of the unique identifier within the project, not the
+          entire name. E.g. it must be 'laconia', not
+          'projects/my-proj/topics/laconia'.
+        type: string
+    type: object
+  PubSubStatus:
+    description: PubSubStatus represents the current state of a PubSub.
+    properties:
+      conditions:
+        description: |-
+          Array of observed PubSubConditions, indicating the current state
+          of the PubSub.
+        items:
+          $ref: '#/definitions/Condition'
+        type: array
+      observedGeneration:
+        description: |-
+          ObservedGeneration is the 'Generation' of the PubSub that
+          was last processed by the controller.
+        format: int32
+        type: integer
+      sinkUri:
+        description: |-
+          SinkURI is the current active sink URI that has been configured for the
+          Source.
+          +optional
+        type: string
     type: object
   Quantity:
     description: |-
@@ -4977,17 +5477,12 @@ definitions:
         type: object
       sourceAndType:
         $ref: '#/definitions/TriggerFilterSourceAndType'
-        description: |-
-          SourceAndType filters events based on exact matches on the
-          CloudEvents type and source attributes. This field has been replaced by the
-          Attributes field.
-
-          +optional
+        description: SourceAndType is DEPRECATED and replaced by the Attributes field.
     type: object
   TriggerFilterSourceAndType:
     description: |-
-      TriggerFilterSourceAndType filters events based on exact matches on the cloud
-      event's type and source attributes. Only exact matches will pass the filter.
+      TriggerFilterSourceAndType is DEPRECATED. Filters are now contained in the
+      map of attributes in TriggerFilter proto.
     properties:
       source:
         type: string

@@ -396,12 +396,8 @@ paths:
         - projects
   '/v1/{name}':
     delete:
-      description: |-
-        Deletes a long-running operation. This method indicates that the client is
-        no longer interested in the operation result. It does not cancel the
-        operation. If the server doesn't support this method, it returns
-        `google.rpc.Code.UNIMPLEMENTED`.
-      operationId: firestore.projects.databases.operations.delete
+      description: Deletes a document.
+      operationId: firestore.projects.databases.documents.delete
       parameters:
         - description: |-
             When set to `true`, the target document must exist.
@@ -415,7 +411,9 @@ paths:
           in: query
           name: currentDocument.updateTime
           type: string
-        - description: The name of the operation resource to be deleted.
+        - description: |-
+            The resource name of the Document to delete. In the format:
+            `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
           in: path
           name: name
           required: true
@@ -1632,6 +1630,8 @@ definitions:
           - GREATER_THAN_OR_EQUAL
           - EQUAL
           - ARRAY_CONTAINS
+          - IN
+          - ARRAY_CONTAINS_ANY
         type: string
       value:
         $ref: '#/definitions/Value'

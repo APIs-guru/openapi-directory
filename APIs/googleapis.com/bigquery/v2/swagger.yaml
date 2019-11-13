@@ -732,12 +732,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - description: |-
-            If set, only the Routine fields in the field mask are returned in the
-            response. If unset, all Routine fields are returned.
-          in: query
-          name: fieldMask
-          type: string
         - description: Required. Project ID of the requested routine
           in: path
           name: projectId
@@ -2067,9 +2061,21 @@ definitions:
         pattern: .?
         type: string
       skipLeadingRows:
-        description: '[Optional] The number of rows at the top of a CSV file that BigQuery will skip when reading the data. The default value is 0. This property is useful if you have header rows in the file that should be skipped.'
+        description: '[Optional] The number of rows at the top of a CSV file that BigQuery will skip when reading the data. The default value is 0. This property is useful if you have header rows in the file that should be skipped. When autodetect is on, the behavior is the following: * skipLeadingRows unspecified - Autodetect tries to detect headers in the first row. If they are not detected, the row is read as data. Otherwise data is read starting from the second row. * skipLeadingRows is 0 - Instructs autodetect that there are no headers and data should be read starting from the first row. * skipLeadingRows = N > 0 - Autodetect skips N-1 rows and tries to detect headers in row N. If headers are not detected, row N is just skipped. Otherwise row N is used to extract column names for the detected schema.'
         format: int64
         type: string
+    type: object
+  DataSplitResult:
+    description: |-
+      Data split result. This contains references to the training and evaluation
+      data tables that were used to train the model.
+    properties:
+      evaluationTable:
+        $ref: '#/definitions/TableReference'
+        description: Table reference of the evaluation data after split.
+      trainingTable:
+        $ref: '#/definitions/TableReference'
+        description: Table reference of the training data after split.
     type: object
   Dataset:
     properties:
@@ -2417,7 +2423,7 @@ definitions:
         $ref: '#/definitions/GoogleSheetsOptions'
         description: '[Optional] Additional options if sourceFormat is set to GOOGLE_SHEETS.'
       hivePartitioningMode:
-        description: '[Optional, Trusted Tester] If hive partitioning is enabled, which mode to use. Two modes are supported: - AUTO: automatically infer partition key name(s) and type(s). - STRINGS: automatic infer partition key name(s). All types are strings. Not all storage formats support hive partitioning -- requesting hive partitioning on an unsupported format will lead to an error. Note: this setting is in the process of being deprecated in favor of hivePartitioningOptions.'
+        description: '[Optional, Trusted Tester] Deprecated, do not use. Please set hivePartitioningOptions instead.'
         type: string
       hivePartitioningOptions:
         $ref: '#/definitions/HivePartitioningOptions'
@@ -2701,7 +2707,7 @@ definitions:
         description: '[Optional] The separator for fields in a CSV file. The separator can be any ISO-8859-1 single-byte character. To use a character in the range 128-255, you must encode the character as UTF8. BigQuery converts the string to ISO-8859-1 encoding, and then uses the first byte of the encoded string to split the data in its raw, binary state. BigQuery also supports the escape sequence "\t" to specify a tab separator. The default value is a comma ('','').'
         type: string
       hivePartitioningMode:
-        description: '[Optional, Trusted Tester] If hive partitioning is enabled, which mode to use. Two modes are supported: - AUTO: automatically infer partition key name(s) and type(s). - STRINGS: automatic infer partition key name(s). All types are strings. Not all storage formats support hive partitioning -- requesting hive partitioning on an unsupported format will lead to an error.'
+        description: '[Optional, Trusted Tester] Deprecated, do not use. Please set hivePartitioningOptions instead.'
         type: string
       hivePartitioningOptions:
         $ref: '#/definitions/HivePartitioningOptions'
@@ -3067,7 +3073,7 @@ definitions:
         $ref: '#/definitions/TableSchema'
         description: '[Output-only] The schema of the results. Present only for successful dry run of non-legacy SQL queries.'
       statementType:
-        description: 'The type of query statement, if valid. Possible values (new values might be added in the future): "SELECT": SELECT query. "INSERT": INSERT query; see https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language. "UPDATE": UPDATE query; see https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language. "DELETE": DELETE query; see https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language. "MERGE": MERGE query; see https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language. "ALTER_TABLE": ALTER TABLE query. "ALTER_VIEW": ALTER VIEW query. "CREATE_FUNCTION": CREATE FUNCTION query. "CREATE_MODEL": CREATE [OR REPLACE] MODEL ... AS SELECT ... . "CREATE_PROCEDURE": CREATE PROCEDURE query. "CREATE_TABLE": CREATE [OR REPLACE] TABLE without AS SELECT. "CREATE_TABLE_AS_SELECT": CREATE [OR REPLACE] TABLE ... AS SELECT ... . "CREATE_VIEW": CREATE [OR REPLACE] VIEW ... AS SELECT ... . "DROP_FUNCTION" : DROP FUNCTION query. "DROP_PROCEDURE": DROP PROCEDURE query. "DROP_TABLE": DROP TABLE query. "DROP_VIEW": DROP VIEW query.'
+        description: 'The type of query statement, if valid. Possible values (new values might be added in the future): "SELECT": SELECT query. "INSERT": INSERT query; see https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language. "UPDATE": UPDATE query; see https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language. "DELETE": DELETE query; see https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language. "MERGE": MERGE query; see https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language. "ALTER_TABLE": ALTER TABLE query. "ALTER_VIEW": ALTER VIEW query. "ASSERT": ASSERT condition AS ''description''. "CREATE_FUNCTION": CREATE FUNCTION query. "CREATE_MODEL": CREATE [OR REPLACE] MODEL ... AS SELECT ... . "CREATE_PROCEDURE": CREATE PROCEDURE query. "CREATE_TABLE": CREATE [OR REPLACE] TABLE without AS SELECT. "CREATE_TABLE_AS_SELECT": CREATE [OR REPLACE] TABLE ... AS SELECT ... . "CREATE_VIEW": CREATE [OR REPLACE] VIEW ... AS SELECT ... . "DROP_FUNCTION" : DROP FUNCTION query. "DROP_PROCEDURE": DROP PROCEDURE query. "DROP_TABLE": DROP TABLE query. "DROP_VIEW": DROP VIEW query.'
         type: string
       timeline:
         description: '[Output-only] [Beta] Describes a timeline of job execution.'
@@ -3176,9 +3182,10 @@ definitions:
         type: string
       routines:
         description: |-
-          Routines in the requested dataset. Only the following fields are populated:
+          Routines in the requested dataset. Unless read_mask is set in the request,
+          only the following fields are populated:
           etag, project_id, dataset_id, routine_id, routine_type, creation_time,
-          last_modified_time, language.
+          last_modified_time, and language.
         items:
           $ref: '#/definitions/Routine'
         type: array
@@ -3197,12 +3204,19 @@ definitions:
     type: object
   MaterializedViewDefinition:
     properties:
+      enableRefresh:
+        description: '[Optional] [TrustedTester] Enable automatic refresh of the materialized view when the base table is updated. The default value is "true".'
+        type: boolean
       lastRefreshTime:
         description: '[Output-only] [TrustedTester] The time when this materialized view was last modified, in milliseconds since the epoch.'
         format: int64
         type: string
       query:
         description: '[Required] A query whose result is persisted.'
+        type: string
+      refreshIntervalMs:
+        description: '[Optional] [TrustedTester] The maximum frequency at which this materialized view will be refreshed. The default value is "1800000" (30 minutes).'
+        format: int64
         type: string
     type: object
   Model:
@@ -3899,7 +3913,7 @@ definitions:
         description: '[TrustedTester] Range partitioning specification for this table. Only one of timePartitioning and rangePartitioning should be specified.'
       requirePartitionFilter:
         default: false
-        description: '[Beta] [Optional] If set to true, queries over this table require a partition filter that can be used for partition elimination to be specified.'
+        description: '[Optional] If set to true, queries over this table require a partition filter that can be used for partition elimination to be specified.'
         type: boolean
       schema:
         $ref: '#/definitions/TableSchema'
@@ -4024,6 +4038,14 @@ definitions:
       name:
         description: '[Required] The field name. The name must contain only letters (a-z, A-Z), numbers (0-9), or underscores (_), and must start with a letter or underscore. The maximum length is 128 characters.'
         type: string
+      policyTags:
+        properties:
+          names:
+            description: 'A list of category resource names. For example, "projects/1/location/eu/taxonomies/2/policyTags/3". At most 1 policy tag is allowed.'
+            items:
+              type: string
+            type: array
+        type: object
       type:
         description: '[Required] The field data type. Possible values include STRING, BYTES, INTEGER, INT64 (same as INTEGER), FLOAT, FLOAT64 (same as FLOAT), BOOLEAN, BOOL (same as BOOLEAN), TIMESTAMP, DATE, TIME, DATETIME, RECORD (where RECORD indicates that the field contains a nested schema) or STRUCT (same as RECORD).'
         type: string
@@ -4070,6 +4092,9 @@ definitions:
                 type: string
               description: The labels associated with this table. You can use these to organize and group your tables.
               type: object
+            rangePartitioning:
+              $ref: '#/definitions/RangePartitioning'
+              description: 'The range partitioning specification for this table, if configured.'
             tableReference:
               $ref: '#/definitions/TableReference'
               description: A reference uniquely identifying the table.
@@ -4204,6 +4229,7 @@ definitions:
           - KMEANS_INITIALIZATION_METHOD_UNSPECIFIED
           - RANDOM
           - CUSTOM
+          - KMEANS_PLUS_PLUS
         type: string
       l1Regularization:
         description: L1 regularization coefficient.
@@ -4275,6 +4301,11 @@ definitions:
   TrainingRun:
     description: Information about a single training query run for the model.
     properties:
+      dataSplitResult:
+        $ref: '#/definitions/DataSplitResult'
+        description: |-
+          Data split result of the training run. Only set when the input data is
+          actually split.
       evaluationMetrics:
         $ref: '#/definitions/EvaluationMetrics'
         description: |-

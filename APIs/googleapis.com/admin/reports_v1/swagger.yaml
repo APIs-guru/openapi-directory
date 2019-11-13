@@ -31,7 +31,7 @@ info:
   x-providerName: googleapis.com
   x-serviceName: admin
 externalDocs:
-  url: 'https://developers.google.com/admin-sdk/reports/'
+  url: /admin-sdk/reports/
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
@@ -99,54 +99,96 @@ tags:
 paths:
   '/activity/users/{userKey}/applications/{applicationName}':
     get:
-      description: Retrieves a list of activities for a specific customer and application.
+      description: 'Retrieves a list of activities for a specific customer''s account and application such as the Admin console application or the Google Drive application. For more information, see the guides for administrator and Google Drive activity reports. For more information about the activity report''s parameters, see the activity parameters reference guides.'
       operationId: reports.activities.list
       parameters:
-        - description: IP Address of host where the event was performed. Supports both IPv4 and IPv6 addresses.
+        - description: 'The Internet Protocol (IP) Address of host where the event was performed. This is an additional way to filter a report''s summary using the IP address of the user whose activity is being reported. This IP address may or may not reflect the user''s physical location. For example, the IP address can be the user''s proxy server''s address or a virtual private network (VPN) address. This parameter supports both IPv4 and IPv6 address versions.'
           in: query
           name: actorIpAddress
           type: string
         - description: Application name for which the events are to be retrieved.
+          enum:
+            - access_transparency
+            - admin
+            - calendar
+            - chat
+            - drive
+            - gcp
+            - gplus
+            - groups
+            - groups_enterprise
+            - jamboard
+            - login
+            - meet
+            - mobile
+            - rules
+            - saml
+            - token
+            - user_accounts
           in: path
           name: applicationName
           required: true
           type: string
-        - description: Represents the customer for which the data is to be fetched.
+        - description: The unique ID of the customer to retrieve data for.
           in: query
           name: customerId
           type: string
-        - description: Return events which occurred at or before this time.
+        - description: |-
+            Sets the end of the range of time shown in the report. The date is in the RFC 3339 format, for example 2010-10-28T10:26:35.000Z. The default value is the approximate time of the API request. An API report has three basic time concepts:  
+            - Date of the API's request for a report: When the API created and retrieved the report. 
+            - Report's start time: The beginning of the timespan shown in the report. The startTime must be before the endTime (if specified) and the current time when the request is made, or the API returns an error. 
+            - Report's end time: The end of the timespan shown in the report. For example, the timespan of events summarized in a report can start in April and end in May. The report itself can be requested in August.  If the endTime is not specified, the report returns all activities from the startTime until the current time or the most recent 180 days if the startTime is more than 180 days in the past.
           in: query
           name: endTime
           type: string
-        - description: Name of the event being queried.
+        - description: 'The name of the event being queried by the API. Each eventName is related to a specific G Suite service or feature which the API organizes into types of events. An example is the Google Calendar events in the Admin console application''s reports. The Calendar Settings type structure has all of the Calendar eventName activities reported by the API. When an administrator changes a Calendar setting, the API reports this activity in the Calendar Settings type and eventName parameters. For more information about eventName query strings and parameters, see the list of event names for various applications above in applicationName.'
           in: query
           name: eventName
           type: string
-        - description: 'Event parameters in the form [parameter1 name][operator][parameter1 value],[parameter2 name][operator][parameter2 value],...'
+        - description: |-
+            The filters query string is a comma-separated list. The list is composed of event parameters that are manipulated by relational operators. Event parameters are in the form [parameter1 name][relational operator][parameter1 value],[parameter2 name][relational operator][parameter2 value],... 
+            These event parameters are associated with a specific eventName. An empty report is returned if the filtered request's parameter does not belong to the eventName. For more information about eventName parameters, see the list of event names for various applications above in applicationName.
+
+            In the following Admin Activity example, the <> operator is URL-encoded in the request's query string (%3C%3E):
+            GET...&eventName=CHANGE_CALENDAR_SETTING &filters=NEW_VALUE%3C%3EREAD_ONLY_ACCESS
+
+            In the following Drive example, the list can be a view or edit event's doc_id parameter with a value that is manipulated by an 'equal to' (==) or 'not equal to' (<>) relational operator. In the first example, the report returns each edited document's doc_id. In the second example, the report returns each viewed document's doc_id that equals the value 12345 and does not return any viewed document's which have a doc_id value of 98765. The <> operator is URL-encoded in the request's query string (%3C%3E):
+
+            GET...&eventName=edit&filters=doc_id GET...&eventName=view&filters=doc_id==12345,doc_id%3C%3E98765
+
+            The relational operators include:  
+            - == - 'equal to'. 
+            - <> - 'not equal to'. It is URL-encoded (%3C%3E). 
+            - < - 'less than'. It is URL-encoded (%3C). 
+            - <= - 'less than or equal to'. It is URL-encoded (%3C=). 
+            - > - 'greater than'. It is URL-encoded (%3E). 
+            - >= - 'greater than or equal to'. It is URL-encoded (%3E=).  
+            Note: The API doesn't accept multiple values of a parameter. If a particular parameter is supplied more than once in the API request, the API only accepts the last value of that request parameter.
+            In addition, if an invalid request parameter is supplied in the API request, the API ignores that request parameter and returns the response corresponding to the remaining valid request parameters. If no parameters are requested, all parameters are returned.
           in: query
           name: filters
           type: string
-        - description: Number of activity records to be shown in each page.
+        - default: 1000
+          description: 'Determines how many activity records are shown on each response page. For example, if the request sets maxResults=1 and the report has two activities, the report has two pages. The response''s nextPageToken property has the token to the second page. The maxResults query string is optional in the request. The default value is 1000.'
           in: query
           maximum: 1000
           minimum: 1
           name: maxResults
           type: integer
         - default: ''
-          description: the organizational unit's(OU) ID to filter activities from users belonging to a specific OU or one of its sub-OU(s)
+          description: 'ID of the organizational unit to report on. Activity records will be shown only for users who belong to the specified organizational unit. Data before Dec 17, 2018 doesn''t appear in the filtered results.'
           in: query
           name: orgUnitID
           type: string
-        - description: Token to specify next page.
+        - description: 'The token to specify next page. A report with multiple pages has a nextPageToken property in the response. In your follow-on request getting the next page of the report, enter the nextPageToken value in the pageToken query string.'
           in: query
           name: pageToken
           type: string
-        - description: Return events which occurred at or after this time.
+        - description: 'Sets the beginning of the range of time shown in the report. The date is in the RFC 3339 format, for example 2010-10-28T10:26:35.000Z. The report returns all activities from startTime until endTime. The startTime must be before the endTime (if specified) and the current time when the request is made, or the API returns an error.'
           in: query
           name: startTime
           type: string
-        - description: 'Represents the profile id or the user email for which the data should be filtered. When ''all'' is specified as the userKey, it returns usageReports for all users.'
+        - description: 'Represents the profile ID or the user email for which the data should be filtered. Can be all for all information, or userKey for a user''s unique G Suite profile ID or their primary email address.'
           in: path
           name: userKey
           required: true
@@ -181,46 +223,88 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Push changes to activities
+      description: 'Start receiving notifications for account activities. For more information, see Receiving Push Notifications.'
       operationId: reports.activities.watch
       parameters:
-        - description: IP Address of host where the event was performed. Supports both IPv4 and IPv6 addresses.
+        - description: 'The Internet Protocol (IP) Address of host where the event was performed. This is an additional way to filter a report''s summary using the IP address of the user whose activity is being reported. This IP address may or may not reflect the user''s physical location. For example, the IP address can be the user''s proxy server''s address or a virtual private network (VPN) address. This parameter supports both IPv4 and IPv6 address versions.'
           in: query
           name: actorIpAddress
           type: string
         - description: Application name for which the events are to be retrieved.
+          enum:
+            - access_transparency
+            - admin
+            - calendar
+            - chat
+            - drive
+            - gcp
+            - gplus
+            - groups
+            - groups_enterprise
+            - jamboard
+            - login
+            - meet
+            - mobile
+            - rules
+            - saml
+            - token
+            - user_accounts
           in: path
           name: applicationName
           required: true
           type: string
-        - description: Represents the customer for which the data is to be fetched.
+        - description: The unique ID of the customer to retrieve data for.
           in: query
           name: customerId
           type: string
-        - description: Return events which occurred at or before this time.
+        - description: |-
+            Sets the end of the range of time shown in the report. The date is in the RFC 3339 format, for example 2010-10-28T10:26:35.000Z. The default value is the approximate time of the API request. An API report has three basic time concepts:  
+            - Date of the API's request for a report: When the API created and retrieved the report. 
+            - Report's start time: The beginning of the timespan shown in the report. The startTime must be before the endTime (if specified) and the current time when the request is made, or the API returns an error. 
+            - Report's end time: The end of the timespan shown in the report. For example, the timespan of events summarized in a report can start in April and end in May. The report itself can be requested in August.  If the endTime is not specified, the report returns all activities from the startTime until the current time or the most recent 180 days if the startTime is more than 180 days in the past.
           in: query
           name: endTime
           type: string
-        - description: Name of the event being queried.
+        - description: 'The name of the event being queried by the API. Each eventName is related to a specific G Suite service or feature which the API organizes into types of events. An example is the Google Calendar events in the Admin console application''s reports. The Calendar Settings type structure has all of the Calendar eventName activities reported by the API. When an administrator changes a Calendar setting, the API reports this activity in the Calendar Settings type and eventName parameters. For more information about eventName query strings and parameters, see the list of event names for various applications above in applicationName.'
           in: query
           name: eventName
           type: string
-        - description: 'Event parameters in the form [parameter1 name][operator][parameter1 value],[parameter2 name][operator][parameter2 value],...'
+        - description: |-
+            The filters query string is a comma-separated list. The list is composed of event parameters that are manipulated by relational operators. Event parameters are in the form [parameter1 name][relational operator][parameter1 value],[parameter2 name][relational operator][parameter2 value],... 
+            These event parameters are associated with a specific eventName. An empty report is returned if the filtered request's parameter does not belong to the eventName. For more information about eventName parameters, see the list of event names for various applications above in applicationName.
+
+            In the following Admin Activity example, the <> operator is URL-encoded in the request's query string (%3C%3E):
+            GET...&eventName=CHANGE_CALENDAR_SETTING &filters=NEW_VALUE%3C%3EREAD_ONLY_ACCESS
+
+            In the following Drive example, the list can be a view or edit event's doc_id parameter with a value that is manipulated by an 'equal to' (==) or 'not equal to' (<>) relational operator. In the first example, the report returns each edited document's doc_id. In the second example, the report returns each viewed document's doc_id that equals the value 12345 and does not return any viewed document's which have a doc_id value of 98765. The <> operator is URL-encoded in the request's query string (%3C%3E):
+
+            GET...&eventName=edit&filters=doc_id GET...&eventName=view&filters=doc_id==12345,doc_id%3C%3E98765
+
+            The relational operators include:  
+            - == - 'equal to'. 
+            - <> - 'not equal to'. It is URL-encoded (%3C%3E). 
+            - < - 'less than'. It is URL-encoded (%3C). 
+            - <= - 'less than or equal to'. It is URL-encoded (%3C=). 
+            - > - 'greater than'. It is URL-encoded (%3E). 
+            - >= - 'greater than or equal to'. It is URL-encoded (%3E=).  
+            Note: The API doesn't accept multiple values of a parameter. If a particular parameter is supplied more than once in the API request, the API only accepts the last value of that request parameter.
+            In addition, if an invalid request parameter is supplied in the API request, the API ignores that request parameter and returns the response corresponding to the remaining valid request parameters. If no parameters are requested, all parameters are returned.
           in: query
           name: filters
           type: string
-        - description: Number of activity records to be shown in each page.
+        - default: 1000
+          description: 'Determines how many activity records are shown on each response page. For example, if the request sets maxResults=1 and the report has two activities, the report has two pages. The response''s nextPageToken property has the token to the second page. The maxResults query string is optional in the request. The default value is 1000.'
           in: query
           maximum: 1000
           minimum: 1
           name: maxResults
           type: integer
         - default: ''
-          description: the organizational unit's(OU) ID to filter activities from users belonging to a specific OU or one of its sub-OU(s)
+          description: 'ID of the organizational unit to report on. Activity records will be shown only for users who belong to the specified organizational unit. Data before Dec 17, 2018 doesn''t appear in the filtered results.'
           in: query
           name: orgUnitID
           type: string
-        - description: Token to specify next page.
+        - description: 'The token to specify next page. A report with multiple pages has a nextPageToken property in the response. In your follow-on request getting the next page of the report, enter the nextPageToken value in the pageToken query string.'
           in: query
           name: pageToken
           type: string
@@ -228,11 +312,11 @@ paths:
           name: resource
           schema:
             $ref: '#/definitions/Channel'
-        - description: Return events which occurred at or after this time.
+        - description: 'Sets the beginning of the range of time shown in the report. The date is in the RFC 3339 format, for example 2010-10-28T10:26:35.000Z. The report returns all activities from startTime until endTime. The startTime must be before the endTime (if specified) and the current time when the request is made, or the API returns an error.'
           in: query
           name: startTime
           type: string
-        - description: 'Represents the profile id or the user email for which the data should be filtered. When ''all'' is specified as the userKey, it returns usageReports for all users.'
+        - description: 'Represents the profile ID or the user email for which the data should be filtered. Can be all for all information, or userKey for a user''s unique G Suite profile ID or their primary email address.'
           in: path
           name: userKey
           required: true
@@ -278,23 +362,29 @@ paths:
         - channels
   '/usage/dates/{date}':
     get:
-      description: Retrieves a report which is a collection of properties / statistics for a specific customer.
+      description: 'Retrieves a report which is a collection of properties and statistics for a specific customer''s account. For more information, see the Customers Usage Report guide. For more information about the customer report''s parameters, see the Customers Usage parameters reference guides.'
       operationId: reports.customerUsageReports.get
       parameters:
-        - description: Represents the customer for which the data is to be fetched.
+        - description: The unique ID of the customer to retrieve data for.
           in: query
           name: customerId
           type: string
-        - description: Represents the date in yyyy-mm-dd format for which the data is to be fetched.
+        - description: 'Represents the date the usage occurred. The timestamp is in the ISO 8601 format, yyyy-mm-dd. We recommend you use your account''s time zone for this.'
           in: path
           name: date
           required: true
           type: string
-        - description: Token to specify next page.
+        - description: 'Token to specify next page. A report with multiple pages has a nextPageToken property in the response. For your follow-on requests getting all of the report''s pages, enter the nextPageToken value in the pageToken query string.'
           in: query
           name: pageToken
           type: string
-        - description: 'Represents the application name, parameter name pairs to fetch in csv as app_name1:param_name1, app_name2:param_name2.'
+        - description: |-
+            The parameters query string is a comma-separated list of event parameters that refine a report's results. The parameter is associated with a specific application. The application values for the Customers usage report include accounts, app_maker, apps_scripts, calendar, classroom, cros, docs, gmail, gplus, device_management, meet, and sites.
+            A parameters query string is in the CSV form of app_name1:param_name1, app_name2:param_name2.
+            Note: The API doesn't accept multiple values of a parameter. If a particular parameter is supplied more than once in the API request, the API only accepts the last value of that request parameter.
+            In addition, if an invalid request parameter is supplied in the API request, the API ignores that request parameter and returns the response corresponding to the remaining valid request parameters.
+
+            An example of an invalid request parameter is one that does not belong to the application. If no parameters are requested, all parameters are returned.
           in: query
           name: parameters
           type: string
@@ -320,41 +410,65 @@ paths:
       - $ref: '#/parameters/userIp'
   '/usage/users/{userKey}/dates/{date}':
     get:
-      description: Retrieves a report which is a collection of properties / statistics for a set of users.
+      description: 'Retrieves a report which is a collection of properties and statistics for a set of users with the account. For more information, see the User Usage Report guide. For more information about the user report''s parameters, see the Users Usage parameters reference guides.'
       operationId: reports.userUsageReport.get
       parameters:
-        - description: Represents the customer for which the data is to be fetched.
+        - description: The unique ID of the customer to retrieve data for.
           in: query
           name: customerId
           type: string
-        - description: Represents the date in yyyy-mm-dd format for which the data is to be fetched.
+        - description: 'Represents the date the usage occurred. The timestamp is in the ISO 8601 format, yyyy-mm-dd. We recommend you use your account''s time zone for this.'
           in: path
           name: date
           required: true
           type: string
-        - description: Represents the set of filters including parameter operator value.
+        - description: |-
+            The filters query string is a comma-separated list of an application's event parameters where the parameter's value is manipulated by a relational operator. The filters query string includes the name of the application whose usage is returned in the report. The application values for the Users Usage Report include accounts, docs, and gmail.
+            Filters are in the form [application name]:[parameter name][relational operator][parameter value],....
+
+            In this example, the <> 'not equal to' operator is URL-encoded in the request's query string (%3C%3E):
+            GET https://www.googleapis.com/admin/reports/v1/usage/users/all/dates/2013-03-03 ?parameters=accounts:last_login_time &filters=accounts:last_login_time>2010-10-28T10:26:35.000Z
+
+
+            The relational operators include:  
+            - == - 'equal to'. 
+            - <> - 'not equal to'. It is URL-encoded (%3C%3E). 
+            - < - 'less than'. It is URL-encoded (%3C). 
+            - <= - 'less than or equal to'. It is URL-encoded (%3C=). 
+            - > - 'greater than'. It is URL-encoded (%3E). 
+            - >= - 'greater than or equal to'. It is URL-encoded (%3E=).
           in: query
           name: filters
           type: string
-        - description: Maximum number of results to return. Maximum allowed is 1000
+        - default: 1000
+          description: |-
+            Determines how many activity records are shown on each response page. For example, if the request sets maxResults=1 and the report has two activities, the report has two pages. The response's nextPageToken property has the token to the second page.
+            The maxResults query string is optional.
           in: query
           maximum: 1000
+          minimum: 1
           name: maxResults
           type: integer
         - default: ''
-          description: the organizational unit's ID to filter usage parameters from users belonging to a specific OU or one of its sub-OU(s).
+          description: 'ID of the organizational unit to report on. User activity will be shown only for users who belong to the specified organizational unit. Data before Dec 17, 2018 doesn''t appear in the filtered results.'
           in: query
           name: orgUnitID
           type: string
-        - description: Token to specify next page.
+        - description: 'Token to specify next page. A report with multiple pages has a nextPageToken property in the response. In your follow-on request getting the next page of the report, enter the nextPageToken value in the pageToken query string.'
           in: query
           name: pageToken
           type: string
-        - description: 'Represents the application name, parameter name pairs to fetch in csv as app_name1:param_name1, app_name2:param_name2.'
+        - description: |-
+            The parameters query string is a comma-separated list of event parameters that refine a report's results. The parameter is associated with a specific application. The application values for the Customers usage report include accounts, app_maker, apps_scripts, calendar, classroom, cros, docs, gmail, gplus, device_management, meet, and sites.
+            A parameters query string is in the CSV form of app_name1:param_name1, app_name2:param_name2.
+            Note: The API doesn't accept multiple values of a parameter.
+            If a particular parameter is supplied more than once in the API request, the API only accepts the last value of that request parameter. In addition, if an invalid request parameter is supplied in the API request, the API ignores that request parameter and returns the response corresponding to the remaining valid request parameters.
+
+            An example of an invalid request parameter is one that does not belong to the application. If no parameters are requested, all parameters are returned.
           in: query
           name: parameters
           type: string
-        - description: Represents the profile id or the user email for which the data should be filtered.
+        - description: 'Represents the profile ID or the user email for which the data should be filtered. Can be all for all information, or userKey for a user''s unique G Suite profile ID or their primary email address.'
           in: path
           name: userKey
           required: true
@@ -381,42 +495,69 @@ paths:
       - $ref: '#/parameters/userIp'
   '/usage/{entityType}/{entityKey}/dates/{date}':
     get:
-      description: Retrieves a report which is a collection of properties / statistics for a set of objects.
+      description: 'Retrieves a report which is a collection of properties and statistics for entities used by users within the account. For more information, see the Entities Usage Report guide. For more information about the entities report''s parameters, see the Entities Usage parameters reference guides.'
       operationId: reports.entityUsageReports.get
       parameters:
-        - description: Represents the customer for which the data is to be fetched.
+        - description: The unique ID of the customer to retrieve data for.
           in: query
           name: customerId
           type: string
-        - description: Represents the date in yyyy-mm-dd format for which the data is to be fetched.
+        - description: 'Represents the date the usage occurred. The timestamp is in the ISO 8601 format, yyyy-mm-dd. We recommend you use your account''s time zone for this.'
           in: path
           name: date
           required: true
           type: string
-        - description: Represents the key of object for which the data should be filtered.
+        - description: Represents the key of the object to filter the data with.
+          enum:
+            - all
+            - entityKey
           in: path
           name: entityKey
           required: true
           type: string
-        - description: Type of object. Should be one of - gplus_communities.
+        - description: Represents the type of entity for the report.
+          enum:
+            - gplus_communities
           in: path
           name: entityType
           required: true
           type: string
-        - description: Represents the set of filters including parameter operator value.
+        - description: |-
+            The filters query string is a comma-separated list of an application's event parameters where the parameter's value is manipulated by a relational operator. The filters query string includes the name of the application whose usage is returned in the report. The application values for the Entities usage report include accounts, docs, and gmail.
+            Filters are in the form [application name]:[parameter name][relational operator][parameter value],....
+
+            In this example, the <> 'not equal to' operator is URL-encoded in the request's query string (%3C%3E):
+            GET https://www.googleapis.com/admin/reports/v1/usage/gplus_communities/all/dates/2017-12-01 ?parameters=gplus:community_name,gplus:num_total_members &filters=gplus:num_total_members>0
+
+
+            The relational operators include:  
+            - == - 'equal to'. 
+            - <> - 'not equal to'. It is URL-encoded (%3C%3E). 
+            - < - 'less than'. It is URL-encoded (%3C). 
+            - <= - 'less than or equal to'. It is URL-encoded (%3C=). 
+            - > - 'greater than'. It is URL-encoded (%3E). 
+            - >= - 'greater than or equal to'. It is URL-encoded (%3E=).  Filters can only be applied to numeric parameters.
           in: query
           name: filters
           type: string
-        - description: Maximum number of results to return. Maximum allowed is 1000
+        - default: 1000
+          description: 'Determines how many activity records are shown on each response page. For example, if the request sets maxResults=1 and the report has two activities, the report has two pages. The response''s nextPageToken property has the token to the second page.'
           in: query
           maximum: 1000
+          minimum: 1
           name: maxResults
           type: integer
-        - description: Token to specify next page.
+        - description: 'Token to specify next page. A report with multiple pages has a nextPageToken property in the response. In your follow-on request getting the next page of the report, enter the nextPageToken value in the pageToken query string.'
           in: query
           name: pageToken
           type: string
-        - description: 'Represents the application name, parameter name pairs to fetch in csv as app_name1:param_name1, app_name2:param_name2.'
+        - description: |-
+            The parameters query string is a comma-separated list of event parameters that refine a report's results. The parameter is associated with a specific application. The application values for the Entities usage report are only gplus.
+            A parameter query string is in the CSV form of [app_name1:param_name1], [app_name2:param_name2]....
+            Note: The API doesn't accept multiple values of a parameter. If a particular parameter is supplied more than once in the API request, the API only accepts the last value of that request parameter.
+            In addition, if an invalid request parameter is supplied in the API request, the API ignores that request parameter and returns the response corresponding to the remaining valid request parameters.
+
+            An example of an invalid request parameter is one that does not belong to the application. If no parameters are requested, all parameters are returned.
           in: query
           name: parameters
           type: string
@@ -448,16 +589,16 @@ definitions:
         description: ETag of the resource.
         type: string
       items:
-        description: Each record in read response.
+        description: Each activity record in the response.
         items:
           $ref: '#/definitions/Activity'
         type: array
       kind:
         default: 'admin#reports#activities'
-        description: Kind of list response this is.
+        description: 'The type of API resource. For an activity report, the value is reports#activities.'
         type: string
       nextPageToken:
-        description: Token for retrieving the next page
+        description: Token for retrieving the follow-on next page of the report. The nextPageToken value is used in the request's pageToken query string.
         type: string
     type: object
   Activity:
@@ -467,67 +608,72 @@ definitions:
         description: User doing the action.
         properties:
           callerType:
-            description: User or OAuth 2LO request.
+            description: The type of actor.
             type: string
           email:
-            description: Email address of the user.
+            description: The primary email address of the actor. May be absent if there is no email address associated with the actor.
             type: string
           key:
-            description: 'For OAuth 2LO API requests, consumer_key of the requestor.'
+            description: Only present when callerType is KEY. Can be the consumer_key of the requestor for OAuth 2LO API requests or an identifier for robot accounts.
             type: string
           profileId:
-            description: Obfuscated user id of the user.
+            description: The unique G Suite profile ID of the actor. May be absent if the actor is not a G Suite user.
             type: string
         type: object
       etag:
         description: ETag of the entry.
         type: string
       events:
-        description: Activity events.
+        description: Activity events in the report.
         items:
           properties:
             name:
-              description: Name of event.
+              description: |-
+                Name of the event. This is the specific name of the activity reported by the API. And each eventName is related to a specific G Suite service or feature which the API organizes into types of events.
+                For eventName request parameters in general:  
+                - If no eventName is given, the report returns all possible instances of an eventName.  
+                - When you request an eventName, the API's response returns all activities which contain that eventName. It is possible that the returned activities will have other eventName properties in addition to the one requested.   
+                For more information about eventName properties, see the list of event names for various applications above in applicationName.
               type: string
             parameters:
-              description: Parameter value pairs for various applications.
+              description: 'Parameter value pairs for various applications. For more information about eventName parameters, see the list of event names for various applications above in applicationName.'
               items:
                 properties:
                   boolValue:
                     description: Boolean value of the parameter.
                     type: boolean
                   intValue:
-                    description: Integral value of the parameter.
+                    description: Integer value of the parameter.
                     format: int64
                     type: string
                   messageValue:
-                    description: Nested value of the parameter.
+                    description: 'Nested parameter value pairs associated with this parameter. Complex value type for a parameter are returned as a list of parameter values. For example, the address parameter may have a value as [{parameter: [{name: city, value: abc}]}]'
                     properties:
                       parameter:
-                        description: Looping to get parameter values.
+                        description: Parameter values
                         items:
                           $ref: '#/definitions/NestedParameter'
                         type: array
                     type: object
                   multiIntValue:
-                    description: Multi-int value of the parameter.
+                    description: Integer values of the parameter.
                     items:
                       format: int64
                       type: string
                     type: array
                   multiMessageValue:
-                    description: Nested values of the parameter.
+                    description: List of messageValue objects.
                     items:
                       properties:
                         parameter:
-                          description: Parameter value.
+                          description: Parameter values
                           items:
                             $ref: '#/definitions/NestedParameter'
                           type: array
                       type: object
                     type: array
                   multiValue:
-                    description: Multi-string value of the parameter.
+                    description: String values of the parameter.
                     items:
                       type: string
                     type: array
@@ -540,7 +686,7 @@ definitions:
                 type: object
               type: array
             type:
-              description: Type of event.
+              description: 'Type of event. The G Suite service or feature that an administrator changes is identified in the type property which identifies an event using the eventName property. For a full list of the API''s type categories, see the list of event names for various applications above in applicationName.'
               type: string
           type: object
         type: array
@@ -548,13 +694,13 @@ definitions:
         description: Unique identifier for each activity record.
         properties:
           applicationName:
-            description: Application name to which the event belongs.
+            description: Application name to which the event belongs. For possible values see the list of applications above in applicationName.
             type: string
           customerId:
-            description: Obfuscated customer ID of the source customer.
+            description: The unique identifier for a G suite account.
             type: string
           time:
-            description: Time of occurrence of the activity.
+            description: Time of occurrence of the activity. This is in UNIX epoch time in seconds.
             format: date-time
             type: string
           uniqueQualifier:
@@ -563,14 +709,14 @@ definitions:
             type: string
         type: object
       ipAddress:
-        description: IP Address of the user doing the action.
+        description: 'IP address of the user doing the action. This is the Internet Protocol (IP) address of the user when logging into G Suite which may or may not reflect the user''s physical location. For example, the IP address can be the user''s proxy server''s address or a virtual private network (VPN) address. The API supports IPv4 and IPv6.'
         type: string
       kind:
         default: 'admin#reports#activity'
-        description: Kind of resource this is.
+        description: 'The type of API resource. For an activity report, the value is audit#activity.'
         type: string
       ownerDomain:
-        description: Domain of source customer.
+        description: This is the domain that is affected by the report's event. For example domain of Admin console or the Drive application's document owner.
         type: string
     type: object
   Channel:
@@ -619,7 +765,7 @@ definitions:
         description: Boolean value of the parameter.
         type: boolean
       intValue:
-        description: Integral value of the parameter.
+        description: Integer value of the parameter.
         format: int64
         type: string
       multiBoolValue:
@@ -628,7 +774,7 @@ definitions:
           type: boolean
         type: array
       multiIntValue:
-        description: Multiple integral values of the parameter.
+        description: Multiple integer values of the parameter.
         items:
           format: int64
           type: string
@@ -649,14 +795,14 @@ definitions:
     description: JSON template for a usage report.
     properties:
       date:
-        description: The date to which the record belongs.
+        description: The date of the report request.
         readOnly: true
         type: string
       entity:
         description: Information about the type of the item.
         properties:
           customerId:
-            description: Obfuscated customer id for the record.
+            description: The unique identifier of the customer's account.
             readOnly: true
             type: string
           entityId:
@@ -664,15 +810,15 @@ definitions:
             readOnly: true
             type: string
           profileId:
-            description: Obfuscated user id for the record.
+            description: The user's immutable G Suite profile identifier.
             readOnly: true
             type: string
           type:
-            description: 'The type of item, can be customer, user, or entity (aka. object).'
+            description: The type of item. The value is customer.
             readOnly: true
             type: string
           userEmail:
-            description: user's email. Only relevant if entity.type = "USER"
+            description: The user's email address. Only relevant if entity.type = "USER"
             readOnly: true
             type: string
         readOnly: true
@@ -682,10 +828,10 @@ definitions:
         type: string
       kind:
         default: 'admin#reports#usageReport'
-        description: The kind of object.
+        description: 'The type of API resource. For a usage report, the value is admin#reports#usageReport.'
         type: string
       parameters:
-        description: Parameter value pairs for various applications.
+        description: 'Parameter value pairs for various applications. For the Customers usage report parameters and values, see the customer usage parameters reference.'
         items:
           properties:
             boolValue:
@@ -693,12 +839,12 @@ definitions:
               readOnly: true
               type: boolean
             datetimeValue:
-              description: RFC 3339 formatted value of the parameter.
+              description: 'The RFC 3339 formatted value of the parameter, for example 2010-10-28T10:26:35.000Z.'
               format: date-time
               readOnly: true
               type: string
             intValue:
-              description: Integral value of the parameter.
+              description: Integer value of the parameter.
               format: int64
               readOnly: true
               type: string
@@ -710,7 +856,6 @@ definitions:
               readOnly: true
               type: array
             name:
-              description: The name of the parameter.
               type: string
             stringValue:
               description: String value of the parameter.
@@ -721,17 +866,16 @@ definitions:
         type: array
     type: object
   UsageReports:
-    description: JSON template for a collection of usage reports.
     properties:
       etag:
         description: ETag of the resource.
         type: string
       kind:
         default: 'admin#reports#usageReports'
-        description: The kind of object.
+        description: 'The type of API resource. For a usage report, the value is admin#reports#usageReports.'
         type: string
       nextPageToken:
-        description: Token for retrieving the next page
+        description: 'Token to specify next page. A report with multiple pages has a nextPageToken property in the response. For your follow-on requests getting all of the report''s pages, enter the nextPageToken value in the pageToken query string.'
         type: string
       usageReports:
         description: Various application parameter records.
@@ -739,14 +883,14 @@ definitions:
           $ref: '#/definitions/UsageReport'
         type: array
       warnings:
-        description: Warnings if any.
+        description: 'Warnings, if any.'
         items:
           properties:
             code:
-              description: Machine readable code / warning type.
+              description: Machine readable code or warning type. The warning code value is 200.
               type: string
             data:
-              description: Key-Value pairs to give detailed information on the warning.
+              description: Key-value pairs to give detailed information on the warning.
               items:
                 properties:
                   key:
@@ -758,7 +902,10 @@ definitions:
                 type: object
               type: array
             message:
-              description: Human readable message for the warning.
+              description: |-
+                The human readable messages for a warning are:  
+                - Data is not available warning - Sorry, data for date yyyy-mm-dd for application "application name" is not available.  
+                - Partial data is available warning - Data for date yyyy-mm-dd for application "application name" is not available right now, please try again after a few hours.
               type: string
           type: object
         type: array

@@ -412,7 +412,7 @@ paths:
           schema:
             $ref: '#/definitions/Group'
         - description: |-
-            [Resource name](https://cloud.google.com/apis/design/resource_names) of the
+            Output only. [Resource name](https://cloud.google.com/apis/design/resource_names) of the
             Group in the format: `groups/{group_id}`, where group_id is the unique ID
             assigned to the Group.
 
@@ -635,7 +635,7 @@ definitions:
     properties:
       createTime:
         description: |-
-          The time when the Group was created.
+          Output only. The time when the Group was created.
           Output only.
         format: google-datetime
         type: string
@@ -652,20 +652,20 @@ definitions:
       groupKey:
         $ref: '#/definitions/EntityKey'
         description: |-
-          EntityKey of the Group.
+          Required. Immutable. EntityKey of the Group.
 
           Must be set when creating a Group, read-only afterwards.
       labels:
         additionalProperties:
           type: string
         description: |-
-          `Required`. Labels for Group resource.
+          Required. `Required`. Labels for Group resource.
           For creating Groups under a namespace, set label key to
           'labels/system/groups/external' and label value as empty.
         type: object
       name:
         description: |-
-          [Resource name](https://cloud.google.com/apis/design/resource_names) of the
+          Output only. [Resource name](https://cloud.google.com/apis/design/resource_names) of the
           Group in the format: `groups/{group_id}`, where group_id is the unique ID
           assigned to the Group.
 
@@ -673,14 +673,14 @@ definitions:
         type: string
       parent:
         description: |-
-          The entity under which this Group resides in Cloud Identity resource
+          Required. Immutable. The entity under which this Group resides in Cloud Identity resource
           hierarchy. Must be set when creating a Group, read-only afterwards.
 
           Currently allowed types: `identitysources`.
         type: string
       updateTime:
         description: |-
-          The time when the Group was last updated.
+          Output only. The time when the Group was last updated.
           Output only.
         format: google-datetime
         type: string
@@ -739,12 +739,12 @@ definitions:
     description: Resource representing a Membership within a Group
     properties:
       createTime:
-        description: Creation timestamp of the Membership. Output only.
+        description: Output only. Creation timestamp of the Membership. Output only.
         format: google-datetime
         type: string
       name:
         description: |-
-          [Resource name](https://cloud.google.com/apis/design/resource_names) of the
+          Output only. [Resource name](https://cloud.google.com/apis/design/resource_names) of the
           Membership in the format: `groups/{group_id}/memberships/{member_id}`,
           where group_id is the unique ID assigned to the Group to which Membership
           belongs to, and member_id is the unique ID assigned to the member
@@ -754,7 +754,7 @@ definitions:
       preferredMemberKey:
         $ref: '#/definitions/EntityKey'
         description: |-
-          EntityKey of the entity to be added as the member. Must be set while
+          Required. Immutable. EntityKey of the entity to be added as the member. Must be set while
           creating a Membership, read-only afterwards.
 
           Currently allowed entity types: `Users`, `Groups`.
@@ -767,7 +767,7 @@ definitions:
           $ref: '#/definitions/MembershipRole'
         type: array
       updateTime:
-        description: Last updated timestamp of the Membership. Output only.
+        description: Output only. Last updated timestamp of the Membership. Output only.
         format: google-datetime
         type: string
     type: object

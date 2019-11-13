@@ -97,7 +97,6 @@ tags:
   - name: inventory
   - name: liasettings
   - name: orderinvoices
-  - name: orderpayments
   - name: orderreports
   - name: orderreturns
   - name: orders
@@ -673,40 +672,6 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
-    patch:
-      description: Updates a Merchant Center account. This method supports patch semantics.
-      operationId: content.accounts.patch
-      parameters:
-        - description: The ID of the account.
-          in: path
-          name: accountId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Account'
-        - description: 'Flag to simulate a request like in a live environment. If set to true, dry-run mode checks the validity of the request and returns errors (if any).'
-          in: query
-          name: dryRun
-          type: boolean
-        - description: 'The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and accountId must be the ID of a sub-account of this account.'
-          in: path
-          name: merchantId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Account'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - accounts
     put:
       description: Updates a Merchant Center account.
       operationId: content.accounts.update
@@ -979,40 +944,6 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
-    patch:
-      description: Updates the tax settings of the account. This method supports patch semantics.
-      operationId: content.accounttax.patch
-      parameters:
-        - description: The ID of the account for which to get/update account tax settings.
-          in: path
-          name: accountId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AccountTax'
-        - description: 'Flag to simulate a request like in a live environment. If set to true, dry-run mode checks the validity of the request and returns errors (if any).'
-          in: query
-          name: dryRun
-          type: boolean
-        - description: 'The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and accountId must be the ID of a sub-account of this account.'
-          in: path
-          name: merchantId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/AccountTax'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - accounttax
     put:
       description: Updates the tax settings of the account.
       operationId: content.accounttax.update
@@ -1177,40 +1108,6 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
-    patch:
-      description: Updates a datafeed configuration of your Merchant Center account. This method supports patch semantics.
-      operationId: content.datafeeds.patch
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Datafeed'
-        - description: The ID of the datafeed.
-          in: path
-          name: datafeedId
-          required: true
-          type: string
-        - description: 'Flag to simulate a request like in a live environment. If set to true, dry-run mode checks the validity of the request and returns errors (if any).'
-          in: query
-          name: dryRun
-          type: boolean
-        - description: The ID of the account that manages the datafeed. This account cannot be a multi-client account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Datafeed'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - datafeeds
     put:
       description: Updates a datafeed configuration of your Merchant Center account.
       operationId: content.datafeeds.update
@@ -1486,40 +1383,6 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
-    patch:
-      description: Updates the LIA settings of the account. This method supports patch semantics.
-      operationId: content.liasettings.patch
-      parameters:
-        - description: The ID of the account for which to get or update LIA settings.
-          in: path
-          name: accountId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/LiaSettings'
-        - description: 'Flag to simulate a request like in a live environment. If set to true, dry-run mode checks the validity of the request and returns errors (if any).'
-          in: query
-          name: dryRun
-          type: boolean
-        - description: 'The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and accountId must be the ID of a sub-account of this account.'
-          in: path
-          name: merchantId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/LiaSettings'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - liasettings
     put:
       description: Updates the LIA settings of the account.
       operationId: content.liasettings.update
@@ -1850,162 +1713,6 @@ paths:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - orderinvoices
-  '/{merchantId}/orderpayments/{orderId}/notifyAuthApproved':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Notify about successfully authorizing user's payment method for a given amount.
-      operationId: content.orderpayments.notifyauthapproved
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrderpaymentsNotifyAuthApprovedRequest'
-        - description: The ID of the account that manages the order. This cannot be a multi-client account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: The ID of the order for for which payment authorization is happening.
-          in: path
-          name: orderId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/OrderpaymentsNotifyAuthApprovedResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - orderpayments
-  '/{merchantId}/orderpayments/{orderId}/notifyAuthDeclined':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Notify about failure to authorize user's payment method.
-      operationId: content.orderpayments.notifyauthdeclined
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrderpaymentsNotifyAuthDeclinedRequest'
-        - description: The ID of the account that manages the order. This cannot be a multi-client account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: The ID of the order for which payment authorization was declined.
-          in: path
-          name: orderId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/OrderpaymentsNotifyAuthDeclinedResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - orderpayments
-  '/{merchantId}/orderpayments/{orderId}/notifyCharge':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Notify about charge on user's selected payments method.
-      operationId: content.orderpayments.notifycharge
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrderpaymentsNotifyChargeRequest'
-        - description: The ID of the account that manages the order. This cannot be a multi-client account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: The ID of the order for which charge is happening.
-          in: path
-          name: orderId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/OrderpaymentsNotifyChargeResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - orderpayments
-  '/{merchantId}/orderpayments/{orderId}/notifyRefund':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Notify about refund on user's selected payments method.
-      operationId: content.orderpayments.notifyrefund
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrderpaymentsNotifyRefundRequest'
-        - description: The ID of the account that manages the order. This cannot be a multi-client account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: The ID of the order for which charge is happening.
-          in: path
-          name: orderId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/OrderpaymentsNotifyRefundResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - orderpayments
   '/{merchantId}/orderreports/disbursements':
     get:
       description: Retrieves a report for disbursements from your Merchant Center account.
@@ -3425,40 +3132,6 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
-    patch:
-      description: Updates the shipping settings of the account. This method supports patch semantics.
-      operationId: content.shippingsettings.patch
-      parameters:
-        - description: The ID of the account for which to get/update shipping settings.
-          in: path
-          name: accountId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ShippingSettings'
-        - description: 'Flag to simulate a request like in a live environment. If set to true, dry-run mode checks the validity of the request and returns errors (if any).'
-          in: query
-          name: dryRun
-          type: boolean
-        - description: 'The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and accountId must be the ID of a sub-account of this account.'
-          in: path
-          name: merchantId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ShippingSettings'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - shippingsettings
     put:
       description: Updates the shipping settings of the account.
       operationId: content.shippingsettings.update
@@ -3707,7 +3380,7 @@ paths:
       - $ref: '#/parameters/userIp'
 definitions:
   Account:
-    description: 'Account data. After the creation of a new account it may take a few minutes before it is fully operational. The methods delete, insert, patch, and update require the admin role.'
+    description: 'Account data. After the creation of a new account it may take a few minutes before it is fully operational. The methods delete, insert, and update require the admin role.'
     properties:
       adultContent:
         description: Indicates whether the merchant sells adult content.
@@ -4613,7 +4286,14 @@ definitions:
           type: string
         type: array
       includedDestinations:
-        description: The list of destinations to include for this target (corresponds to checked check boxes in Merchant Center). Default destinations are always included unless provided in excludedDestinations.
+        description: |-
+          The list of destinations to include for this target (corresponds to checked check boxes in Merchant Center). Default destinations are always included unless provided in excludedDestinations.
+
+          List of supported destinations (if available to the account):  
+          - DisplayAds 
+          - Shopping 
+          - ShoppingActions 
+          - SurfacesAcrossGoogle
         items:
           type: string
         type: array
@@ -5449,7 +5129,7 @@ definitions:
         type: string
     type: object
   Order:
-    description: Order. All methods require the order manager role.
+    description: Order. Production access (all methods) requires the order manager role. Sandbox access does not.
     properties:
       acknowledged:
         description: Whether the order was acknowledged.
@@ -6029,7 +5709,8 @@ definitions:
           - "lasership" 
           - "mpx" 
           - "uds" 
-          - "efw"  
+          - "efw" 
+          - "jd logistics"  
 
           Acceptable values for FR are:  
           - "colissimo" 
@@ -6039,7 +5720,9 @@ definitions:
           - "bpost" 
           - "colis prive" 
           - "boxtal" 
-          - "geodis"
+          - "geodis" 
+          - "tnt" 
+          - "la poste"
         type: string
       creationDate:
         description: 'Date on which the shipment has been created, in ISO 8601 format.'
@@ -6151,89 +5834,6 @@ definitions:
         type: string
       reason:
         description: '[required] Reason for the return.'
-        type: string
-    type: object
-  OrderpaymentsNotifyAuthApprovedRequest:
-    properties:
-      authAmountPretax:
-        $ref: '#/definitions/Price'
-        description: Authorized amount for pre-tax charge on user's credit card.
-      authAmountTax:
-        $ref: '#/definitions/Price'
-        description: Authorized amount for tax charge on user's credit card.
-    type: object
-  OrderpaymentsNotifyAuthApprovedResponse:
-    properties:
-      executionStatus:
-        description: The status of the execution.
-        type: string
-      kind:
-        default: 'content#orderpaymentsNotifyAuthApprovedResponse'
-        description: 'Identifies what kind of resource this is. Value: the fixed string "content#orderpaymentsNotifyAuthApprovedResponse".'
-        type: string
-    type: object
-  OrderpaymentsNotifyAuthDeclinedRequest:
-    properties:
-      declineReason:
-        description: Reason why payment authorization was declined.
-        type: string
-    type: object
-  OrderpaymentsNotifyAuthDeclinedResponse:
-    properties:
-      executionStatus:
-        description: The status of the execution.
-        type: string
-      kind:
-        default: 'content#orderpaymentsNotifyAuthDeclinedResponse'
-        description: 'Identifies what kind of resource this is. Value: the fixed string "content#orderpaymentsNotifyAuthDeclinedResponse".'
-        type: string
-    type: object
-  OrderpaymentsNotifyChargeRequest:
-    properties:
-      chargeState:
-        description: Whether charge was successful.
-        type: string
-      invoiceId:
-        description: Deprecated. Please use invoiceIds instead.
-        type: string
-      invoiceIds:
-        description: Invoice IDs from the orderinvoices service that correspond to the charge.
-        items:
-          type: string
-        type: array
-    type: object
-  OrderpaymentsNotifyChargeResponse:
-    properties:
-      executionStatus:
-        description: The status of the execution.
-        type: string
-      kind:
-        default: 'content#orderpaymentsNotifyChargeResponse'
-        description: 'Identifies what kind of resource this is. Value: the fixed string "content#orderpaymentsNotifyChargeResponse".'
-        type: string
-    type: object
-  OrderpaymentsNotifyRefundRequest:
-    properties:
-      invoiceId:
-        description: Deprecated. Please use invoiceIds instead.
-        type: string
-      invoiceIds:
-        description: Invoice IDs from the orderinvoices service that correspond to the refund.
-        items:
-          type: string
-        type: array
-      refundState:
-        description: Whether refund was successful.
-        type: string
-    type: object
-  OrderpaymentsNotifyRefundResponse:
-    properties:
-      executionStatus:
-        description: The status of the execution.
-        type: string
-      kind:
-        default: 'content#orderpaymentsNotifyRefundResponse'
-        description: 'Identifies what kind of resource this is. Value: the fixed string "content#orderpaymentsNotifyRefundResponse".'
         type: string
     type: object
   OrderreportsListDisbursementsResponse:
@@ -7707,7 +7307,7 @@ definitions:
         description: The cut of the item. Recommended for apparel items.
         type: string
       sizes:
-        description: Size of the item.
+        description: 'Size of the item. Only one value is allowed. For variants with different sizes, insert a separate product for each size with the same itemGroupId value (see size definition).'
         items:
           type: string
         type: array

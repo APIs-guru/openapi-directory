@@ -270,8 +270,8 @@ paths:
       - $ref: '#/parameters/upload_protocol'
   '/v2/{logName}':
     delete:
-      description: Deletes all the log entries in a log. The log reappears if it receives new entries. Log entries written shortly before the delete operation might not be deleted.
-      operationId: logging.organizations.logs.delete
+      description: Deletes all the log entries in a log. The log reappears if it receives new entries. Log entries written shortly before the delete operation might not be deleted. Entries received after the delete operation with a timestamp before the operation will be deleted.
+      operationId: logging.billingAccounts.logs.delete
       parameters:
         - description: |-
             Required. The resource name of the log to delete:
@@ -300,7 +300,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - organizations
+        - billingAccounts
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -434,7 +434,7 @@ paths:
   '/v2/{name}':
     delete:
       description: Deletes an exclusion.
-      operationId: logging.organizations.exclusions.delete
+      operationId: logging.billingAccounts.exclusions.delete
       parameters:
         - description: |-
             Required. The resource name of an existing exclusion to delete:
@@ -463,10 +463,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - organizations
+        - billingAccounts
     get:
       description: Gets the description of an exclusion.
-      operationId: logging.organizations.exclusions.get
+      operationId: logging.billingAccounts.exclusions.get
       parameters:
         - description: |-
             Required. The resource name of an existing exclusion:
@@ -503,7 +503,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - organizations
+        - billingAccounts
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -518,7 +518,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     patch:
       description: Changes one or more properties of an existing exclusion.
-      operationId: logging.organizations.exclusions.patch
+      operationId: logging.billingAccounts.exclusions.patch
       parameters:
         - in: body
           name: body
@@ -555,11 +555,11 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - organizations
+        - billingAccounts
   '/v2/{parent}/exclusions':
     get:
       description: Lists all the exclusions in a parent resource.
-      operationId: logging.organizations.exclusions.list
+      operationId: logging.billingAccounts.exclusions.list
       parameters:
         - description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. The presence of nextPageToken in the response indicates that more results might be available.
           in: query
@@ -603,7 +603,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - organizations
+        - billingAccounts
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -618,7 +618,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates a new exclusion in a specified parent resource. Only log entries belonging to that resource can be excluded. You can have up to 10 exclusions in a resource.
-      operationId: logging.organizations.exclusions.create
+      operationId: logging.billingAccounts.exclusions.create
       parameters:
         - in: body
           name: body
@@ -651,11 +651,11 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - organizations
+        - billingAccounts
   '/v2/{parent}/logs':
     get:
       description: 'Lists the logs in projects, organizations, folders, or billing accounts. Only logs that have entries are listed.'
-      operationId: logging.organizations.logs.list
+      operationId: logging.billingAccounts.logs.list
       parameters:
         - description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. The presence of nextPageToken in the response indicates that more results might be available.
           in: query
@@ -699,7 +699,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - organizations
+        - billingAccounts
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -809,7 +809,7 @@ paths:
   '/v2/{parent}/sinks':
     get:
       description: Lists sinks.
-      operationId: logging.organizations.sinks.list
+      operationId: logging.billingAccounts.sinks.list
       parameters:
         - description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. The presence of nextPageToken in the response indicates that more results might be available.
           in: query
@@ -853,7 +853,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - organizations
+        - billingAccounts
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -868,7 +868,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Creates a sink that exports specified log entries to a destination. The export of newly-ingested log entries begins immediately, unless the sink''s writer_identity is not permitted to write to the destination. A sink can export log entries only from the resource owning the sink.'
-      operationId: logging.organizations.sinks.create
+      operationId: logging.billingAccounts.sinks.create
       parameters:
         - in: body
           name: body
@@ -905,11 +905,11 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - organizations
+        - billingAccounts
   '/v2/{sinkName}':
     delete:
       description: 'Deletes a sink. If the sink has a unique writer_identity, then that service account is also deleted.'
-      operationId: logging.organizations.sinks.delete
+      operationId: logging.billingAccounts.sinks.delete
       parameters:
         - description: |-
             Required. The full resource name of the sink to delete, including the parent resource and the sink identifier:
@@ -938,10 +938,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - organizations
+        - billingAccounts
     get:
       description: Gets a sink.
-      operationId: logging.organizations.sinks.get
+      operationId: logging.billingAccounts.sinks.get
       parameters:
         - description: |-
             Required. The resource name of the sink:
@@ -978,7 +978,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - organizations
+        - billingAccounts
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -993,7 +993,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     patch:
       description: 'Updates a sink. This method replaces the following fields in the existing sink with values from the new sink: destination, and filter.The updated sink might also have a new writer_identity; see the unique_writer_identity field.'
-      operationId: logging.organizations.sinks.patch
+      operationId: logging.billingAccounts.sinks.patch
       parameters:
         - in: body
           name: body
@@ -1038,10 +1038,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - organizations
+        - billingAccounts
     put:
       description: 'Updates a sink. This method replaces the following fields in the existing sink with values from the new sink: destination, and filter.The updated sink might also have a new writer_identity; see the unique_writer_identity field.'
-      operationId: logging.organizations.sinks.update
+      operationId: logging.billingAccounts.sinks.update
       parameters:
         - in: body
           name: body
@@ -1086,7 +1086,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - organizations
+        - billingAccounts
 definitions:
   BigQueryOptions:
     description: Options that change functionality of a sink exporting data to BigQuery.
@@ -1248,7 +1248,7 @@ definitions:
     description: The parameters to ListLogEntries.
     properties:
       filter:
-        description: Optional. A filter that chooses which log entries to return. See Advanced Logs Filters. Only log entries that match the filter are returned. An empty filter matches all log entries in the resources listed in resource_names. Referencing a parent resource that is not listed in resource_names will cause the filter to return no results. The maximum length of the filter is 20000 characters.
+        description: Optional. A filter that chooses which log entries to return. See Advanced Logs Queries. Only log entries that match the filter are returned. An empty filter matches all log entries in the resources listed in resource_names. Referencing a parent resource that is not listed in resource_names will cause the filter to return no results. The maximum length of the filter is 20000 characters.
         type: string
       orderBy:
         description: 'Optional. How the results should be sorted. Presently, the only permitted values are "timestamp asc" (default) and "timestamp desc". The first option returns entries in order of increasing values of LogEntry.timestamp (oldest first), and the second option returns entries in order of decreasing timestamps (newest first). Entries with equal timestamps are returned in order of their insert_id values.'
@@ -1559,6 +1559,10 @@ definitions:
           "pubsub.googleapis.com/projects/[PROJECT_ID]/topics/[TOPIC_ID]"
           The sink's writer_identity, set when the sink is created, must have permission to write to the destination or else the log entries are not exported. For more information, see Exporting Logs with Sinks.
         type: string
+      endTime:
+        description: Do not use. This field is ignored.
+        format: google-datetime
+        type: string
       filter:
         description: |
           Optional. An advanced logs filter. The only exported log entries are those that are in the resource owning the sink and that match the filter. For example:
@@ -1579,6 +1583,10 @@ definitions:
           - VERSION_FORMAT_UNSPECIFIED
           - V2
           - V1
+        type: string
+      startTime:
+        description: Do not use. This field is ignored.
+        format: google-datetime
         type: string
       updateTime:
         description: Output only. The last update timestamp of the sink.This field may not be present for older sinks.
@@ -1623,6 +1631,11 @@ definitions:
           - DELTA
           - CUMULATIVE
         type: string
+      monitoredResourceTypes:
+        description: 'Read-only. If present, then a time series, which is identified partially by a metric type and a MonitoredResourceDescriptor, that is associated with this metric type can only be associated with one of the monitored resource types listed here.'
+        items:
+          type: string
+        type: array
       name:
         description: The resource name of the metric descriptor.
         type: string
@@ -1698,7 +1711,7 @@ definitions:
         format: google-duration
         type: string
       launchStage:
-        description: Deprecated. Please use the MetricDescriptor.launch_stage instead. The launch stage of the metric definition.
+        description: Deprecated. Must use the MetricDescriptor.launch_stage instead.
         enum:
           - LAUNCH_STAGE_UNSPECIFIED
           - EARLY_ACCESS

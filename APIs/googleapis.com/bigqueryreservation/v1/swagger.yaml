@@ -208,17 +208,6 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
 definitions:
-  CreateCapacityCommitmentMetadata:
-    description: |-
-      The metadata for operation returned from
-      ReservationService.CreateCapacityCommitment.
-    properties:
-      capacityCommitment:
-        description: |-
-          Resource name of the capacity commitment that is being created. E.g.,
-          projects/myproject/locations/US/capacityCommitments/123
-        type: string
-    type: object
   Empty:
     description: |-
       A generic empty message that you can re-use to avoid defining duplicated

@@ -307,7 +307,7 @@ paths:
     post:
       description: |-
         Prevents the supplied keys' IDs from being auto-allocated by Cloud
-        Datastore.
+        Datastore. Used for imports only; other workloads are not supported.
       operationId: datastore.projects.reserveIds
       parameters:
         - in: body

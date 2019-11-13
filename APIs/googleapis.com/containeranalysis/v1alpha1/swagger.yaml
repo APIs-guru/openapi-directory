@@ -119,7 +119,7 @@ paths:
   '/v1alpha1/{name}':
     delete:
       description: Deletes the given `Note` from the system.
-      operationId: containeranalysis.providers.notes.delete
+      operationId: containeranalysis.projects.notes.delete
       parameters:
         - description: |-
             The name of the note in the form of
@@ -140,14 +140,14 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - providers
+        - projects
     get:
-      description: Returns the requested `Note`.
-      operationId: containeranalysis.providers.notes.get
+      description: Gets a specific scan configuration for a project.
+      operationId: containeranalysis.projects.scanConfigs.get
       parameters:
         - description: |-
-            The name of the note in the form of
-            "providers/{provider_id}/notes/{NOTE_ID}"
+            The name of the ScanConfig in the form
+            projects/{project_id}/scanConfigs/{scan_config_id}
           in: path
           name: name
           required: true
@@ -157,14 +157,14 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Note'
+            $ref: '#/definitions/ScanConfig'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - providers
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -178,16 +178,16 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     patch:
-      description: Updates an existing `Note`.
-      operationId: containeranalysis.providers.notes.patch
+      description: Updates the scan configuration to a new value.
+      operationId: containeranalysis.projects.scanConfigs.patch
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/Note'
+            $ref: '#/definitions/ScanConfig'
         - description: |-
-            The name of the note.
-            Should be of the form "projects/{provider_id}/notes/{note_id}".
+            The scan config to update of the form
+            projects/{project_id}/scanConfigs/{scan_config_id}.
           in: path
           name: name
           required: true
@@ -201,27 +201,26 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Note'
+            $ref: '#/definitions/ScanConfig'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - providers
+        - projects
   '/v1alpha1/{name}/notes':
     get:
-      description: Lists all `Notes` for a given project.
-      operationId: containeranalysis.providers.notes.list
+      description: Gets the `Note` attached to the given `Occurrence`.
+      operationId: containeranalysis.projects.occurrences.getNotes
       parameters:
         - description: The filter expression.
           in: query
           name: filter
           type: string
         - description: |-
-            The name field will contain the project Id for example:
-            "providers/{provider_id}
-            @Deprecated
+            The name of the occurrence in the form
+            "projects/{project_id}/occurrences/{OCCURRENCE_ID}"
           in: path
           name: name
           required: true
@@ -243,14 +242,14 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/ListNotesResponse'
+            $ref: '#/definitions/Note'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - providers
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -308,7 +307,7 @@ paths:
         Lists `Occurrences` referencing the specified `Note`. Use this method to
         get all occurrences referencing your `Note` across all your customer
         projects.
-      operationId: containeranalysis.providers.notes.occurrences.list
+      operationId: containeranalysis.projects.notes.occurrences.list
       parameters:
         - description: The filter expression.
           in: query
@@ -341,7 +340,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - providers
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -700,7 +699,7 @@ paths:
         error otherwise. The resource takes the following formats:
         `projects/{PROJECT_ID}/occurrences/{OCCURRENCE_ID}` for occurrences and
         projects/{PROJECT_ID}/notes/{NOTE_ID} for notes
-      operationId: containeranalysis.providers.notes.getIamPolicy
+      operationId: containeranalysis.projects.notes.getIamPolicy
       parameters:
         - in: body
           name: body
@@ -725,7 +724,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - providers
+        - projects
   '/v1alpha1/{resource}:setIamPolicy':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -753,7 +752,7 @@ paths:
         a `PERMISSION_DENIED` error otherwise. The resource takes the following
         formats: `projects/{projectid}/occurrences/{occurrenceid}` for occurrences
         and projects/{projectid}/notes/{noteid} for notes
-      operationId: containeranalysis.providers.notes.setIamPolicy
+      operationId: containeranalysis.projects.notes.setIamPolicy
       parameters:
         - in: body
           name: body
@@ -778,7 +777,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - providers
+        - projects
   '/v1alpha1/{resource}:testIamPermissions':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -802,7 +801,7 @@ paths:
         project, or a `PERMISSION_DENIED` error otherwise. The resource takes the
         following formats: `projects/{PROJECT_ID}/occurrences/{OCCURRENCE_ID}` for
         `Occurrences` and `projects/{PROJECT_ID}/notes/{NOTE_ID}` for `Notes`
-      operationId: containeranalysis.providers.notes.testIamPermissions
+      operationId: containeranalysis.projects.notes.testIamPermissions
       parameters:
         - in: body
           name: body
@@ -827,7 +826,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - providers
+        - projects
 definitions:
   Artifact:
     description: Artifact describes a build product.
@@ -1995,27 +1994,36 @@ definitions:
       specify access control policies for Cloud Platform resources.
 
 
-      A `Policy` consists of a list of `bindings`. A `binding` binds a list of
-      `members` to a `role`, where the members can be user accounts, Google groups,
-      Google domains, and service accounts. A `role` is a named list of permissions
-      defined by IAM.
+      A `Policy` is a collection of `bindings`. A `binding` binds one or more
+      `members` to a single `role`. Members can be user accounts, service accounts,
+      Google groups, and domains (such as G Suite). A `role` is a named list of
+      permissions (defined by IAM or configured by users). A `binding` can
+      optionally specify a `condition`, which is a logic expression that further
+      constrains the role binding based on attributes about the request and/or
+      target resource.
 
       **JSON Example**
 
           {
             "bindings": [
               {
-                "role": "roles/owner",
+                "role": "roles/resourcemanager.organizationAdmin",
                 "members": [
                   "user:mike@example.com",
                   "group:admins@example.com",
                   "domain:google.com",
-                  "serviceAccount:my-other-app@appspot.gserviceaccount.com"
+                  "serviceAccount:my-project-id@appspot.gserviceaccount.com"
                 ]
               },
               {
-                "role": "roles/viewer",
-                "members": ["user:sean@example.com"]
+                "role": "roles/resourcemanager.organizationViewer",
+                "members": ["user:eve@example.com"],
+                "condition": {
+                  "title": "expirable access",
+                  "description": "Does not grant access after Sep 2020",
+                  "expression": "request.time <
+                  timestamp('2020-10-01T00:00:00.000Z')",
+                }
               }
             ]
           }
@@ -2027,19 +2035,23 @@ definitions:
             - user:mike@example.com
             - group:admins@example.com
             - domain:google.com
-            - serviceAccount:my-other-app@appspot.gserviceaccount.com
-            role: roles/owner
+            - serviceAccount:my-project-id@appspot.gserviceaccount.com
+            role: roles/resourcemanager.organizationAdmin
           - members:
-            - user:sean@example.com
-            role: roles/viewer
-
+            - user:eve@example.com
+            role: roles/resourcemanager.organizationViewer
+            condition:
+              title: expirable access
+              description: Does not grant access after Sep 2020
+              expression: request.time < timestamp('2020-10-01T00:00:00.000Z')
 
       For a description of IAM and its features, see the
       [IAM developer's guide](https://cloud.google.com/iam/docs).
     properties:
       bindings:
         description: |-
-          Associates a list of `members` to a `role`.
+          Associates a list of `members` to a `role`. Optionally may specify a
+          `condition` that determines when binding is in effect.
           `bindings` with no members will result in an error.
         items:
           $ref: '#/definitions/Binding'
@@ -2055,7 +2067,9 @@ definitions:
           ensure that their change will be applied to the same version of the policy.
 
           If no `etag` is provided in the call to `setIamPolicy`, then the existing
-          policy is overwritten.
+          policy is overwritten. Due to blind-set semantics of an etag-less policy,
+          'setIamPolicy' will not fail even if either of incoming or stored policy
+          does not meet the version requirements.
         format: byte
         type: string
       version:
@@ -2065,9 +2079,14 @@ definitions:
           Valid values are 0, 1, and 3. Requests specifying an invalid value will be
           rejected.
 
-          Policies with any conditional bindings must specify version 3. Policies
-          without any conditional bindings may specify any valid value or leave the
-          field unset.
+          Operations affecting conditional bindings must specify version 3. This can
+          be either setting a conditional policy, modifying a conditional binding,
+          or removing a conditional binding from the stored conditional policy.
+          Operations on non-conditional policies may specify any valid value or
+          leave the field unset.
+
+          If no etag is provided in the call to `setIamPolicy`, any version
+          compliance checks on the incoming and/or stored policy is skipped.
         format: int32
         type: integer
     type: object

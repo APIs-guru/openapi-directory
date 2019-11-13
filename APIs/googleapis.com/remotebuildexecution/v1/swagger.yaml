@@ -1173,11 +1173,23 @@ definitions:
           (includes pulling the Docker image, if necessary).
         format: google-duration
         type: string
+      dockerPrepStartTime:
+        description: The timestamp when docker prepartion begins.
+        format: google-datetime
+        type: string
       download:
         description: |-
           The time spent downloading the input files and constructing the working
           directory.
         format: google-duration
+        type: string
+      downloadStartTime:
+        description: The timestamp when downloading the input files begins.
+        format: google-datetime
+        type: string
+      execStartTime:
+        description: The timestamp when execution begins.
+        format: google-datetime
         type: string
       execution:
         description: 'The time spent executing the command (i.e., doing useful work).'
@@ -1198,6 +1210,10 @@ definitions:
       upload:
         description: The time spent uploading the output files.
         format: google-duration
+        type: string
+      uploadStartTime:
+        description: The timestamp when uploading the output files begins.
+        format: google-datetime
         type: string
     type: object
   GoogleDevtoolsRemotebuildbotCommandEvents:

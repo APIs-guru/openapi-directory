@@ -1548,7 +1548,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
   '/v1beta/apps/{appsId}/services/{servicesId}/versions/{versionsId}/instances/{instancesId}':
     delete:
-      description: Stops a running instance.
+      description: 'Stops a running instance.The instance might be automatically recreated based on the scaling settings of the version. For more information, see "How Instances are Managed" (standard environment (https://cloud.google.com/appengine/docs/standard/python/how-instances-are-managed) | flexible environment (https://cloud.google.com/appengine/docs/flexible/python/how-instances-are-managed)).To ensure that instances are not re-created and avoid getting billed, you can stop all instances within the target version by changing the serving status of the version to STOPPED with the apps.services.versions.patch (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions/patch) method.'
       operationId: appengine.apps.services.versions.instances.delete
       parameters:
         - description: 'Part of `name`. Name of the resource requested. Example: apps/myapp/services/default/versions/v1/instances/instance-1.'
@@ -2798,7 +2798,7 @@ definitions:
         type: string
     type: object
   Service:
-    description: 'A Service resource is a logical component of an application that can share state and communicate in a secure fashion with other services. For example, an application that handles customer requests might include separate services to handle tasks such as backend data analysis or API requests from mobile devices. Each service has a collection of versions that define a specific set of code used to implement the functionality of that service.'
+    description: 'A Service resource is a logical component of an application that can share state and communicate in a secure fashion with other services. For example, an application that handles customer requests might include separate services to handle tasks such as backend data analysis or API requests from mobile devices. Each service has a collection of versions that define a specific set of code used to implement the functionality of that service. Next tag: 6'
     properties:
       id:
         description: 'Relative name of the service within the application. Example: default.@OutputOnly'

@@ -343,6 +343,17 @@ definitions:
           Name of the device given by the third party. This includes names given to
           the device via third party device manufacturer's app, model names for the
           device, etc.
+      notificationSupportedByAgent:
+        description: |-
+          Indicates whether the device is capable of sending notifications. This
+          field will be set by the agent (partner) on an incoming SYNC. If a device
+          is not capable of generating notifications, the partner should set this
+          flag to false. If a partner is not capable of calling
+          ReportStateAndNotification to send notifications to Google, the partner
+          should set this flag to false. If there is a user setting in the partner
+          app to enable notifications and it is turned off, the partner should set
+          this flag to false.
+        type: boolean
       otherDeviceIds:
         description: |-
           IDs of other devices associated with this device. This is used to

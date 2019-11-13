@@ -852,7 +852,7 @@ paths:
           name: ignoreDefaultVisibility
           type: boolean
         - default: false
-          description: Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Google Drive.
+          description: 'Whether to set the ''keepForever'' field in the new head revision. This is only applicable to files with binary content in Google Drive. Only 200 revisions for the file can be kept forever. If the limit is reached, try deleting pinned revisions.'
           in: query
           name: keepRevisionForever
           type: boolean
@@ -1088,7 +1088,7 @@ paths:
           required: true
           type: string
         - default: false
-          description: Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Google Drive.
+          description: 'Whether to set the ''keepForever'' field in the new head revision. This is only applicable to files with binary content in Google Drive. Only 200 revisions for the file can be kept forever. If the limit is reached, try deleting pinned revisions.'
           in: query
           name: keepRevisionForever
           type: boolean
@@ -1586,7 +1586,7 @@ paths:
           name: ignoreDefaultVisibility
           type: boolean
         - default: false
-          description: Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Google Drive.
+          description: 'Whether to set the ''keepForever'' field in the new head revision. This is only applicable to files with binary content in Google Drive. Only 200 revisions for the file can be kept forever. If the limit is reached, try deleting pinned revisions.'
           in: query
           name: keepRevisionForever
           type: boolean
@@ -2612,7 +2612,7 @@ definitions:
         type: string
       author:
         $ref: '#/definitions/User'
-        description: The user who created the comment.
+        description: The author of the comment. The author's email address and permission ID will not be populated.
       content:
         description: 'The plain text content of the comment. This field is used for setting the content, while htmlContent should be displayed.'
         type: string
@@ -3391,7 +3391,7 @@ definitions:
         type: string
       author:
         $ref: '#/definitions/User'
-        description: The user who created the reply.
+        description: The author of the reply. The author's email address and permission ID will not be populated.
       content:
         description: 'The plain text content of the reply. This field is used for setting the content, while htmlContent should be displayed. This is required on creates if no action is specified.'
         type: string

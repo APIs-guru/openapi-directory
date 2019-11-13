@@ -1313,6 +1313,9 @@ definitions:
       privateVisibilityConfig:
         $ref: '#/definitions/ManagedZonePrivateVisibilityConfig'
         description: 'For privately visible zones, the set of Virtual Private Cloud resources that the zone is visible from.'
+      reverseLookupConfig:
+        $ref: '#/definitions/ManagedZoneReverseLookupConfig'
+        description: The presence of this field indicates that this is a managed reverse lookup zone and Cloud DNS will resolve reverse lookup queries using automatically configured records for VPC resources. This only applies to networks listed under private_visibility_config.
       visibility:
         description: 'The zone''s visibility: public zones are exposed to the Internet, while private zones are visible only to Virtual Private Cloud resources.'
         enum:
@@ -1359,6 +1362,12 @@ definitions:
     type: object
   ManagedZoneForwardingConfigNameServerTarget:
     properties:
+      forwardingPath:
+        description: 'Forwarding path for this NameServerTarget, if unset or set to DEFAULT, Cloud DNS will make forwarding decision based on address ranges, i.e. RFC1918 addresses go to the VPC, Non-RFC1918 addresses go to the Internet. When set to PRIVATE, Cloud DNS will always send queries through VPC for this target'
+        enum:
+          - default
+          - private
+        type: string
       ipv4Address:
         description: IPv4 address of a target name server.
         type: string
@@ -1430,6 +1439,13 @@ definitions:
         type: string
       networkUrl:
         description: 'The fully qualified URL of the VPC network to bind to. This should be formatted like https://www.googleapis.com/compute/v1/projects/{project}/global/networks/{network}'
+        type: string
+    type: object
+  ManagedZoneReverseLookupConfig:
+    properties:
+      kind:
+        default: 'dns#managedZoneReverseLookupConfig'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dns#managedZoneReverseLookupConfig".'
         type: string
     type: object
   ManagedZonesListResponse:
@@ -1582,6 +1598,12 @@ definitions:
     type: object
   PolicyAlternativeNameServerConfigTargetNameServer:
     properties:
+      forwardingPath:
+        description: 'Forwarding path for this TargetNameServer, if unset or set to DEFAULT, Cloud DNS will make forwarding decision based on address ranges, i.e. RFC1918 addresses go to the VPC, Non-RFC1918 addresses go to the Internet. When set to PRIVATE, Cloud DNS will always send queries through VPC for this target'
+        enum:
+          - default
+          - private
+        type: string
       ipv4Address:
         description: IPv4 address to forward to.
         type: string

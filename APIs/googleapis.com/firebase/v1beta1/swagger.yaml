@@ -298,13 +298,15 @@ paths:
       tags:
         - projects
     get:
-      description: |-
-        Gets the latest state of a long-running operation.  Clients can use this
-        method to poll the operation result at intervals as recommended by the API
-        service.
-      operationId: firebase.operations.get
+      description: Gets the configuration artifact associated with the specified IosApp.
+      operationId: firebase.projects.iosApps.getConfig
       parameters:
-        - description: The name of the operation resource.
+        - description: |-
+            The resource name of the App configuration to download, in the format:
+            <br><code>projects/<var>projectId</var>/iosApps/<var>appId</var>/config</code>
+            <br>As an <var>appId</var> is a unique identifier, the Unique Resource
+            from Sub-Collection access pattern may be used here, in the format:
+            <br><code>projects/-/iosApps/<var>appId</var></code>
           in: path
           name: name
           required: true
@@ -314,7 +316,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Operation'
+            $ref: '#/definitions/IosAppConfig'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -333,7 +335,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/firebase.readonly'
       tags:
-        - operations
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'

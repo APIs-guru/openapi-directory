@@ -313,7 +313,7 @@ paths:
         AnnotateFileRequest.pages) frames (gif) or pages (pdf or tiff) from each
         file provided and perform detection and annotation for each image
         extracted.
-      operationId: vision.projects.locations.files.annotate
+      operationId: vision.projects.files.annotate
       parameters:
         - in: body
           name: body
@@ -374,7 +374,7 @@ paths:
         `google.longrunning.Operations` interface.
         `Operation.metadata` contains `OperationMetadata` (metadata).
         `Operation.response` contains `AsyncBatchAnnotateFilesResponse` (results).
-      operationId: vision.projects.locations.files.asyncBatchAnnotate
+      operationId: vision.projects.files.asyncBatchAnnotate
       parameters:
         - in: body
           name: body
@@ -429,7 +429,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Run image detection and annotation for a batch of images.
-      operationId: vision.projects.locations.images.annotate
+      operationId: vision.projects.images.annotate
       parameters:
         - in: body
           name: body
@@ -493,7 +493,7 @@ paths:
 
         This service will write image annotation outputs to json files in customer
         GCS bucket, each json file containing BatchAnnotateImagesResponse proto.
-      operationId: vision.projects.locations.images.asyncBatchAnnotate
+      operationId: vision.projects.images.asyncBatchAnnotate
       parameters:
         - in: body
           name: body
@@ -2336,7 +2336,7 @@ definitions:
         $ref: '#/definitions/GoogleCloudVisionV1p1beta1BoundingPoly'
         description: |-
           The bounding polygon around the area of interest in the image.
-          Optional. If it is not specified, system discretion will be applied.
+          If it is not specified, system discretion will be applied.
       filter:
         description: |-
           The filtering expression. This can be used to restrict search results based
@@ -5329,9 +5329,6 @@ definitions:
       imagePropertiesAnnotation:
         $ref: '#/definitions/GoogleCloudVisionV1p4beta1ImageProperties'
         description: 'If present, image properties were extracted successfully.'
-      imageQualityAnnotation:
-        $ref: '#/definitions/GoogleCloudVisionV1p4beta1ImageQuality'
-        description: 'If present, image quality calculation has completed successfully.'
       labelAnnotations:
         description: 'If present, label detection has completed successfully.'
         items:
@@ -5357,9 +5354,6 @@ definitions:
       productSearchResults:
         $ref: '#/definitions/GoogleCloudVisionV1p4beta1ProductSearchResults'
         description: 'If present, product search has completed successfully.'
-      qualityOptimizationResult:
-        $ref: '#/definitions/GoogleCloudVisionV1p4beta1QualityOptimizationResult'
-        description: 'If present, image quality optimization has completed successfully.'
       safeSearchAnnotation:
         $ref: '#/definitions/GoogleCloudVisionV1p4beta1SafeSearchAnnotation'
         description: 'If present, safe-search annotation has completed successfully.'
@@ -5497,6 +5491,21 @@ definitions:
         items:
           $ref: '#/definitions/GoogleCloudVisionV1p4beta1Vertex'
         type: array
+    type: object
+  GoogleCloudVisionV1p4beta1Celebrity:
+    description: A Celebrity is a group of Faces with an identity.
+    properties:
+      description:
+        description: The Celebrity's description.
+        type: string
+      displayName:
+        description: The Celebrity's display name.
+        type: string
+      name:
+        description: |-
+          The resource name of the preloaded Celebrity. Has the format
+          `builtin/{mid}`.
+        type: string
     type: object
   GoogleCloudVisionV1p4beta1ColorInfo:
     description: |-
@@ -5698,6 +5707,15 @@ definitions:
           [-180,180].
         format: float
         type: number
+      recognitionResult:
+        description: |-
+          Additional recognition information. Only computed if
+          image_context.face_recognition_params is provided, **and** a match is found
+          to a Celebrity in the input CelebritySet. This field is
+          sorted in order of decreasing confidence values.
+        items:
+          $ref: '#/definitions/GoogleCloudVisionV1p4beta1FaceRecognitionResult'
+        type: array
       rollAngle:
         description: |-
           Roll angle, which indicates the amount of clockwise/anti-clockwise rotation
@@ -5788,6 +5806,17 @@ definitions:
           - CHIN_RIGHT_GONION
         type: string
     type: object
+  GoogleCloudVisionV1p4beta1FaceRecognitionResult:
+    description: Information about a face's identity.
+    properties:
+      celebrity:
+        $ref: '#/definitions/GoogleCloudVisionV1p4beta1Celebrity'
+        description: The Celebrity that this face was matched to.
+      confidence:
+        description: 'Recognition confidence. Range [0, 1].'
+        format: float
+        type: number
+    type: object
   GoogleCloudVisionV1p4beta1GcsDestination:
     description: The Google Cloud Storage location where the output will be written to.
     properties:
@@ -5847,18 +5876,6 @@ definitions:
       dominantColors:
         $ref: '#/definitions/GoogleCloudVisionV1p4beta1DominantColorsAnnotation'
         description: 'If present, dominant colors completed successfully.'
-    type: object
-  GoogleCloudVisionV1p4beta1ImageQuality:
-    description: 'Stores image quality scores, could be aesthetic quality or technical quality.'
-    properties:
-      qualityScore:
-        description: |-
-          A score representing the aesthetic/technical quality of the image. The
-          score is in range [0, 1]. Higher value corresponds to more professional
-          looking photos. 0 means the image looks very bad, 1 means the image with
-          very high quality.
-        format: float
-        type: number
     type: object
   GoogleCloudVisionV1p4beta1ImportProductSetsResponse:
     description: |-
@@ -6234,25 +6251,6 @@ definitions:
         description: Value of the property.
         type: string
     type: object
-  GoogleCloudVisionV1p4beta1QualityOptimizationResult:
-    description: Stores enhanced image bytes.
-    properties:
-      image:
-        description: Optimized image bytes.
-        format: byte
-        type: string
-      mimeType:
-        description: Mime type of the output image.
-        type: string
-      qualityOptimizationType:
-        description: Required optimization type.
-        enum:
-          - TYPE_UNSPECIFIED
-          - COMPRESSION
-          - ENHANCEMENT
-          - QUALITY_SCORE
-        type: string
-    type: object
   GoogleCloudVisionV1p4beta1ReferenceImage:
     description: |-
       A `ReferenceImage` represents a product image and its associated metadata,
@@ -6307,12 +6305,6 @@ definitions:
           - LIKELY
           - VERY_LIKELY
         type: string
-      adultConfidence:
-        description: |-
-          Confidence of adult_score. Range [0, 1]. 0 means not confident, 1 means
-          very confident.
-        format: float
-        type: number
       medical:
         description: Likelihood that this is a medical image.
         enum:
@@ -6323,18 +6315,6 @@ definitions:
           - LIKELY
           - VERY_LIKELY
         type: string
-      medicalConfidence:
-        description: |-
-          Confidence of medical_score. Range [0, 1]. 0 means not confident, 1 means
-          very confident.
-        format: float
-        type: number
-      nsfwConfidence:
-        description: |-
-          Confidence of nsfw_score. Range [0, 1]. 0 means not confident, 1 means very
-          confident.
-        format: float
-        type: number
       racy:
         description: |-
           Likelihood that the request image contains racy content. Racy content may
@@ -6349,12 +6329,6 @@ definitions:
           - LIKELY
           - VERY_LIKELY
         type: string
-      racyConfidence:
-        description: |-
-          Confidence of racy_score. Range [0, 1]. 0 means not confident, 1 means very
-          confident.
-        format: float
-        type: number
       spoof:
         description: |-
           Spoof likelihood. The likelihood that an modification
@@ -6368,12 +6342,6 @@ definitions:
           - LIKELY
           - VERY_LIKELY
         type: string
-      spoofConfidence:
-        description: |-
-          Confidence of spoof_score. Range [0, 1]. 0 means not confident, 1 means
-          very confident.
-        format: float
-        type: number
       violence:
         description: Likelihood that this image contains violent content.
         enum:
@@ -6384,12 +6352,6 @@ definitions:
           - LIKELY
           - VERY_LIKELY
         type: string
-      violenceConfidence:
-        description: |-
-          Confidence of violence_score. Range [0, 1]. 0 means not confident, 1 means
-          very confident.
-        format: float
-        type: number
     type: object
   GoogleCloudVisionV1p4beta1Symbol:
     description: A single symbol representation.
@@ -7202,12 +7164,6 @@ definitions:
           - LIKELY
           - VERY_LIKELY
         type: string
-      adultConfidence:
-        description: |-
-          Confidence of adult_score. Range [0, 1]. 0 means not confident, 1 means
-          very confident.
-        format: float
-        type: number
       medical:
         description: Likelihood that this is a medical image.
         enum:
@@ -7218,18 +7174,6 @@ definitions:
           - LIKELY
           - VERY_LIKELY
         type: string
-      medicalConfidence:
-        description: |-
-          Confidence of medical_score. Range [0, 1]. 0 means not confident, 1 means
-          very confident.
-        format: float
-        type: number
-      nsfwConfidence:
-        description: |-
-          Confidence of nsfw_score. Range [0, 1]. 0 means not confident, 1 means very
-          confident.
-        format: float
-        type: number
       racy:
         description: |-
           Likelihood that the request image contains racy content. Racy content may
@@ -7244,12 +7188,6 @@ definitions:
           - LIKELY
           - VERY_LIKELY
         type: string
-      racyConfidence:
-        description: |-
-          Confidence of racy_score. Range [0, 1]. 0 means not confident, 1 means very
-          confident.
-        format: float
-        type: number
       spoof:
         description: |-
           Spoof likelihood. The likelihood that an modification
@@ -7263,12 +7201,6 @@ definitions:
           - LIKELY
           - VERY_LIKELY
         type: string
-      spoofConfidence:
-        description: |-
-          Confidence of spoof_score. Range [0, 1]. 0 means not confident, 1 means
-          very confident.
-        format: float
-        type: number
       violence:
         description: Likelihood that this image contains violent content.
         enum:
@@ -7279,12 +7211,6 @@ definitions:
           - LIKELY
           - VERY_LIKELY
         type: string
-      violenceConfidence:
-        description: |-
-          Confidence of violence_score. Range [0, 1]. 0 means not confident, 1 means
-          very confident.
-        format: float
-        type: number
     type: object
   Status:
     description: |-

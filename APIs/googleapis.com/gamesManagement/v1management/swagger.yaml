@@ -93,7 +93,6 @@ tags:
   - name: applications
   - name: events
   - name: players
-  - name: quests
   - name: rooms
   - name: scores
   - name: turnBasedMatches
@@ -511,133 +510,6 @@ paths:
             - 'https://www.googleapis.com/auth/games'
       tags:
         - scores
-  /quests/reset:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Resets all player progress on all quests for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application.
-      operationId: gamesManagement.quests.resetAll
-      responses:
-        '200':
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/games'
-      tags:
-        - quests
-  /quests/resetAllForAllPlayers:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Resets all draft quests for all players. This method is only available to user accounts for your developer console.
-      operationId: gamesManagement.quests.resetAllForAllPlayers
-      responses:
-        '200':
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/games'
-      tags:
-        - quests
-  /quests/resetMultipleForAllPlayers:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Resets quests with the given IDs for all players. This method is only available to user accounts for your developer console. Only draft quests may be reset.
-      operationId: gamesManagement.quests.resetMultipleForAllPlayers
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/QuestsResetMultipleForAllRequest'
-      responses:
-        '200':
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/games'
-      tags:
-        - quests
-  '/quests/{questId}/reset':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Resets all player progress on the quest with the given ID for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application.
-      operationId: gamesManagement.quests.reset
-      parameters:
-        - description: The ID of the quest.
-          in: path
-          name: questId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/games'
-      tags:
-        - quests
-  '/quests/{questId}/resetForAllPlayers':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Resets all player progress on the quest with the given ID for all players. This method is only available to user accounts for your developer console. Only draft quests can be reset.
-      operationId: gamesManagement.quests.resetForAllPlayers
-      parameters:
-        - description: The ID of the quest.
-          in: path
-          name: questId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/games'
-      tags:
-        - quests
   /rooms/reset:
     parameters:
       - $ref: '#/parameters/alt'
@@ -978,6 +850,8 @@ definitions:
       playerId:
         description: The ID of the player.
         type: string
+      playerStattus:
+        type: string
       profileSettings:
         $ref: '#/definitions/ProfileSettings'
         description: The player's profile settings. Controls whether or not the player's profile is visible to other players.
@@ -1028,19 +902,6 @@ definitions:
         type: string
       profileVisible:
         type: boolean
-    type: object
-  QuestsResetMultipleForAllRequest:
-    description: This is a JSON template for multiple quests reset all request.
-    properties:
-      kind:
-        default: 'gamesManagement#questsResetMultipleForAllRequest'
-        description: 'Uniquely identifies the type of this resource. Value is always the fixed string gamesManagement#questsResetMultipleForAllRequest.'
-        type: string
-      quest_ids:
-        description: The IDs of quests to reset.
-        items:
-          type: string
-        type: array
     type: object
   ScoresResetMultipleForAllRequest:
     description: This is a JSON template for multiple scores reset all request.

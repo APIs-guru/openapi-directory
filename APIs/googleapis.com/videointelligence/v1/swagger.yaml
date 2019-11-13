@@ -451,7 +451,7 @@ definitions:
     description: Video annotation request.
     properties:
       features:
-        description: Requested video annotation features.
+        description: Required. Requested video annotation features.
         items:
           enum:
             - FEATURE_UNSPECIFIED
@@ -485,13 +485,13 @@ definitions:
         type: string
       locationId:
         description: |-
-          Optional cloud region where annotation should take place. Supported cloud
+          Optional. Cloud region where annotation should take place. Supported cloud
           regions: `us-east1`, `us-west1`, `europe-west1`, `asia-east1`. If no region
           is specified, a region will be determined based on video file location.
         type: string
       outputUri:
         description: |-
-          Optional location where the output (in JSON format) should be stored.
+          Optional. Location where the output (in JSON format) should be stored.
           Currently, only [Google Cloud Storage](https://cloud.google.com/storage/)
           URIs are supported, which must be specified in the following format:
           `gs://bucket-id/object-id` (other URI formats return
@@ -809,7 +809,7 @@ definitions:
     properties:
       phrases:
         description: |-
-          *Optional* A list of strings containing words and phrases "hints" so that
+          Optional. A list of strings containing words and phrases "hints" so that
           the speech recognition is more likely to recognize them. This can be used
           to improve the accuracy for specific words and phrases, for example, if
           specific commands are typically spoken by the user. This can also be used
@@ -858,10 +858,9 @@ definitions:
         type: array
       languageCode:
         description: |-
-          Output only. The
-          [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag of the
-          language in this result. This language code was detected to have the most
-          likelihood of being spoken in the audio.
+          Output only. The [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag of
+          the language in this result. This language code was detected to have the
+          most likelihood of being spoken in the audio.
         type: string
     type: object
   GoogleCloudVideointelligenceV1_SpeechTranscriptionConfig:
@@ -869,7 +868,7 @@ definitions:
     properties:
       audioTracks:
         description: |-
-          *Optional* For file formats, such as MXF or MKV, supporting multiple audio
+          Optional. For file formats, such as MXF or MKV, supporting multiple audio
           tracks, specify up to two tracks. Default: track 0.
         items:
           format: int32
@@ -877,15 +876,14 @@ definitions:
         type: array
       diarizationSpeakerCount:
         description: |-
-          *Optional*
-          If set, specifies the estimated number of speakers in the conversation.
+          Optional. If set, specifies the estimated number of speakers in the conversation.
           If not set, defaults to '2'.
           Ignored unless enable_speaker_diarization is set to true.
         format: int32
         type: integer
       enableAutomaticPunctuation:
         description: |-
-          *Optional* If 'true', adds punctuation to recognition result hypotheses.
+          Optional. If 'true', adds punctuation to recognition result hypotheses.
           This feature is only available in select languages. Setting this for
           requests in other languages has no effect at all. The default 'false' value
           does not add punctuation to result hypotheses. NOTE: "This is currently
@@ -894,7 +892,7 @@ definitions:
         type: boolean
       enableSpeakerDiarization:
         description: |-
-          *Optional* If 'true', enables speaker detection for each recognized word in
+          Optional. If 'true', enables speaker detection for each recognized word in
           the top alternative of the recognition result using a speaker_tag provided
           in the WordInfo.
           Note: When this is true, we send all the words from the beginning of the
@@ -904,20 +902,20 @@ definitions:
         type: boolean
       enableWordConfidence:
         description: |-
-          *Optional* If `true`, the top result includes a list of words and the
+          Optional. If `true`, the top result includes a list of words and the
           confidence for those words. If `false`, no word-level confidence
           information is returned. The default is `false`.
         type: boolean
       filterProfanity:
         description: |-
-          *Optional* If set to `true`, the server will attempt to filter out
+          Optional. If set to `true`, the server will attempt to filter out
           profanities, replacing all but the initial character in each filtered word
           with asterisks, e.g. "f***". If set to `false` or omitted, profanities
           won't be filtered out.
         type: boolean
       languageCode:
         description: |-
-          *Required* The language of the supplied audio as a
+          Required. *Required* The language of the supplied audio as a
           [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag.
           Example: "en-US".
           See [Language Support](https://cloud.google.com/speech/docs/languages)
@@ -925,7 +923,7 @@ definitions:
         type: string
       maxAlternatives:
         description: |-
-          *Optional* Maximum number of recognition hypotheses to be returned.
+          Optional. Maximum number of recognition hypotheses to be returned.
           Specifically, the maximum number of `SpeechRecognitionAlternative` messages
           within each `SpeechTranscription`. The server may return fewer than
           `max_alternatives`. Valid values are `0`-`30`. A value of `0` or `1` will
@@ -933,7 +931,7 @@ definitions:
         format: int32
         type: integer
       speechContexts:
-        description: '*Optional* A means to provide context to assist the speech recognition.'
+        description: Optional. A means to provide context to assist the speech recognition.
         items:
           $ref: '#/definitions/GoogleCloudVideointelligenceV1_SpeechContext'
         type: array
@@ -1495,10 +1493,9 @@ definitions:
         type: array
       languageCode:
         description: |-
-          Output only. The
-          [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag of the
-          language in this result. This language code was detected to have the most
-          likelihood of being spoken in the audio.
+          Output only. The [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag of
+          the language in this result. This language code was detected to have the
+          most likelihood of being spoken in the audio.
         type: string
     type: object
   GoogleCloudVideointelligenceV1beta2_TextAnnotation:
@@ -2008,10 +2005,9 @@ definitions:
         type: array
       languageCode:
         description: |-
-          Output only. The
-          [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag of the
-          language in this result. This language code was detected to have the most
-          likelihood of being spoken in the audio.
+          Output only. The [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag of
+          the language in this result. This language code was detected to have the
+          most likelihood of being spoken in the audio.
         type: string
     type: object
   GoogleCloudVideointelligenceV1p1beta1_TextAnnotation:
@@ -2521,10 +2517,9 @@ definitions:
         type: array
       languageCode:
         description: |-
-          Output only. The
-          [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag of the
-          language in this result. This language code was detected to have the most
-          likelihood of being spoken in the audio.
+          Output only. The [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag of
+          the language in this result. This language code was detected to have the
+          most likelihood of being spoken in the audio.
         type: string
     type: object
   GoogleCloudVideointelligenceV1p2beta1_TextAnnotation:
@@ -2784,6 +2779,50 @@ definitions:
           $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_VideoAnnotationResults'
         type: array
     type: object
+  GoogleCloudVideointelligenceV1p3beta1_Celebrity:
+    description: Celebrity definition.
+    properties:
+      description:
+        description: |-
+          Textual description of additional information about the celebrity, if
+          applicable.
+        type: string
+      displayName:
+        description: The celebrity name.
+        type: string
+      name:
+        description: |-
+          The resource name of the celebrity. Have the format
+          `video-intelligence/kg-mid` indicates a celebrity from preloaded gallery.
+          kg-mid is the id in Google knowledge graph, which is unique for the
+          celebrity.
+        type: string
+    type: object
+  GoogleCloudVideointelligenceV1p3beta1_CelebrityRecognitionAnnotation:
+    description: Celebrity recognition annotation per video.
+    properties:
+      celebrityTracks:
+        description: |-
+          The tracks detected from the input video, including recognized celebrities
+          and other detected faces in the video.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_CelebrityTrack'
+        type: array
+    type: object
+  GoogleCloudVideointelligenceV1p3beta1_CelebrityTrack:
+    description: |-
+      The annotation result of a celebrity face track. RecognizedCelebrity field
+      could be empty if the face track does not have any matched celebrities.
+    properties:
+      celebrities:
+        description: Top N match of the celebrities for the face in this track.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_RecognizedCelebrity'
+        type: array
+      faceTrack:
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_Track'
+        description: A track of a person's face.
+    type: object
   GoogleCloudVideointelligenceV1p3beta1_DetectedAttribute:
     description: A generic detected attribute represented by name in string format.
     properties:
@@ -3036,6 +3075,17 @@ definitions:
         format: google-duration
         type: string
     type: object
+  GoogleCloudVideointelligenceV1p3beta1_RecognizedCelebrity:
+    description: The recognized celebrity with confidence score.
+    properties:
+      celebrity:
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_Celebrity'
+        description: The recognized celebrity.
+      confidence:
+        description: 'Recognition confidence. Range [0, 1].'
+        format: float
+        type: number
+    type: object
   GoogleCloudVideointelligenceV1p3beta1_SpeechRecognitionAlternative:
     description: Alternative hypotheses (a.k.a. n-best list).
     properties:
@@ -3075,10 +3125,9 @@ definitions:
         type: array
       languageCode:
         description: |-
-          Output only. The
-          [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag of the
-          language in this result. This language code was detected to have the most
-          likelihood of being spoken in the audio.
+          Output only. The [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag of
+          the language in this result. This language code was detected to have the
+          most likelihood of being spoken in the audio.
         type: string
     type: object
   GoogleCloudVideointelligenceV1p3beta1_StreamingAnnotateVideoResponse:
@@ -3176,8 +3225,7 @@ definitions:
     type: object
   GoogleCloudVideointelligenceV1p3beta1_TimestampedObject:
     description: |-
-      For tracking related features, such as LOGO_RECOGNITION, FACE_DETECTION,
-      CELEBRITY_RECOGNITION, PERSON_DETECTION.
+      For tracking related features.
       An object at time_offset with attributes, and located with
       normalized_bounding_box.
     properties:
@@ -3233,6 +3281,7 @@ definitions:
           - TEXT_DETECTION
           - OBJECT_TRACKING
           - LOGO_RECOGNITION
+          - CELEBRITY_RECOGNITION
         type: string
       inputUri:
         description: |-
@@ -3262,6 +3311,9 @@ definitions:
   GoogleCloudVideointelligenceV1p3beta1_VideoAnnotationResults:
     description: Annotation results for a single video.
     properties:
+      celebrityRecognitionAnnotations:
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_CelebrityRecognitionAnnotation'
+        description: Celebrity recognition annotations.
       error:
         $ref: '#/definitions/GoogleRpc_Status'
         description: |-

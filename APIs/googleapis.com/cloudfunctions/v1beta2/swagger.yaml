@@ -130,7 +130,7 @@ paths:
         is the parent resource, without the operations collection id.
       operationId: cloudfunctions.operations.list
       parameters:
-        - description: 'Required. A filter for matching the requested operations.<br><br> The supported formats of <b>filter</b> are:<br> To query for specific function: <code>project:*,location:*,function:*</code><br> To query for all of the latest operations for a project: <code>project:*,latest:true</code>'
+        - description: 'Required. A filter for matching the requested operations.<br><br> The supported formats of <b>filter</b> are:<br> To query for a specific function: <code>project:*,location:*,function:*</code><br> To query for all of the latest operations for a project: <code>project:*,latest:true</code>'
           in: query
           name: filter
           type: string
@@ -138,11 +138,11 @@ paths:
           in: query
           name: name
           type: string
-        - description: The standard list page size.
+        - description: 'The maximum number of records that should be returned.<br> Requested page size cannot exceed 100. If not set, the default page size is 100.<br><br> Pagination is only supported when querying for a specific function.'
           in: query
           name: pageSize
           type: integer
-        - description: The standard list page token.
+        - description: 'Token identifying which result to start with, which is returned by a previous list call.<br><br> Pagination is only supported when querying for a specific function.'
           in: query
           name: pageToken
           type: string
@@ -179,7 +179,9 @@ paths:
             Required. The project and location from which the function should be listed,
             specified in the format `projects/*/locations/*`
             If you want to list functions in all locations, use "-" in place of a
-            location.
+            location. When listing functions in all locations, if one or more
+            location(s) are unreachable, the response will contain functions from all
+            reachable locations along with the names of any unreachable locations.
           in: path
           name: location
           required: true
@@ -279,13 +281,10 @@ paths:
       tags:
         - projects
     get:
-      description: |-
-        Gets the latest state of a long-running operation.  Clients can use this
-        method to poll the operation result at intervals as recommended by the API
-        service.
-      operationId: cloudfunctions.operations.get
+      description: Returns a function with the given name from the requested project.
+      operationId: cloudfunctions.projects.locations.functions.get
       parameters:
-        - description: The name of the operation resource.
+        - description: Required. The name of the function which details should be obtained.
           in: path
           name: name
           required: true
@@ -295,14 +294,14 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Operation'
+            $ref: '#/definitions/CloudFunction'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - operations
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -820,6 +819,13 @@ definitions:
           google.cloud.functions.v1beta2.ListFunctionsRequest
           to get more functions.
         type: string
+      unreachable:
+        description: |-
+          Locations that could not be reached. The response does not include any
+          functions from these locations.
+        items:
+          type: string
+        type: array
     type: object
   ListLocationsResponse:
     description: The response message for Locations.ListLocations.

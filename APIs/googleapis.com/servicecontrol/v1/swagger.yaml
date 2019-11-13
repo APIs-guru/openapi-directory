@@ -556,6 +556,11 @@ definitions:
           principal email address is redacted for all read-only operations that fail
           with a "permission denied" error.
         type: string
+      principalSubject:
+        description: |-
+          String representation of identity of requesting party.
+          Populated for both first and third party identities.
+        type: string
       serviceAccountDelegationInfo:
         description: |-
           Identity delegation history of an authenticated service account that makes
@@ -1370,16 +1375,6 @@ definitions:
           Represents the properties needed for quota check. Applicable only if this
           operation is for a quota check request. If this is not specified, no quota
           check will be performed.
-      resourceContainer:
-        description: |-
-          DO NOT USE. This field is deprecated, use "resources" field instead.
-          The resource name of the parent of a resource in the resource hierarchy.
-
-          This can be in one of the following formats:
-              - “projects/<project-id or project-number>”
-              - “folders/<folder-id>”
-              - “organizations/<organization-id>”
-        type: string
       resources:
         description: |-
           The resources that are involved in the operation.
@@ -1546,10 +1541,11 @@ definitions:
           of the service that generated the operation, and guarantees idempotency in
           case of retries.
 
-          UUID version 4 is recommended, though not required. In scenarios where an
-          operation is computed from existing information and an idempotent id is
-          desirable for deduplication purpose, UUID version 5 is recommended. See
-          RFC 4122 for details.
+          In order to ensure best performance and latency in the Quota backends,
+          operation_ids are optimally associated with time, so that related
+          operations can be accessed fast in storage. For this reason, the
+          recommended token for services that intend to operate at a high QPS is
+          Unix time in nanos + UUID
         type: string
       quotaMetrics:
         description: |-

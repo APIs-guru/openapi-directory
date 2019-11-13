@@ -1379,6 +1379,24 @@ definitions:
         $ref: '#/definitions/SheetProperties'
         description: The properties of the newly added sheet.
     type: object
+  AddSlicerRequest:
+    description: Adds a slicer to a sheet in the spreadsheet.
+    properties:
+      slicer:
+        $ref: '#/definitions/Slicer'
+        description: |-
+          The slicer that should be added to the spreadsheet, including
+          the position where it should be placed. The slicerId field is optional; if one is not set, an id
+          will be randomly generated. (It is an error to specify the ID
+          of a slicer that already exists.)
+    type: object
+  AddSlicerResponse:
+    description: The result of adding a slicer to a spreadsheet.
+    properties:
+      slicer:
+        $ref: '#/definitions/Slicer'
+        description: The newly added slicer.
+    type: object
   AppendCellsRequest:
     description: |-
       Adds new cells after the last row with data in a sheet,
@@ -1528,6 +1546,40 @@ definitions:
       secondBandColor:
         $ref: '#/definitions/Color'
         description: The second color that is alternating. (Required)
+    type: object
+  BaselineValueFormat:
+    description: Formatting options for baseline value.
+    properties:
+      comparisonType:
+        description: The comparison type of key value with baseline value.
+        enum:
+          - COMPARISON_TYPE_UNDEFINED
+          - ABSOLUTE_DIFFERENCE
+          - PERCENTAGE_DIFFERENCE
+        type: string
+      description:
+        description: |-
+          Description which is appended after the baseline value.
+          This field is optional.
+        type: string
+      negativeColor:
+        $ref: '#/definitions/Color'
+        description: |-
+          Color to be used, in case baseline value represents a negative change for
+          key value. This field is optional.
+      position:
+        $ref: '#/definitions/TextPosition'
+        description: |-
+          Specifies the horizontal text positioning of baseline value.
+          This field is optional. If not specified, default positioning is used.
+      positiveColor:
+        $ref: '#/definitions/Color'
+        description: |-
+          Color to be used, in case baseline value represents a positive change for
+          key value. This field is optional.
+      textFormat:
+        $ref: '#/definitions/TextFormat'
+        description: Text formatting options for baseline value.
     type: object
   BasicChartAxis:
     description: |-
@@ -2487,6 +2539,20 @@ definitions:
           - PRETTY
         type: string
     type: object
+  ChartCustomNumberFormatOptions:
+    description: Custom number formatting options for chart attributes.
+    properties:
+      prefix:
+        description: |-
+          Custom prefix to be prepended to the chart attribute.
+          This field is optional.
+        type: string
+      suffix:
+        description: |-
+          Custom suffix to be appended to the chart attribute.
+          This field is optional.
+        type: string
+    type: object
   ChartData:
     description: The data included in a domain or series.
     properties:
@@ -2576,6 +2642,9 @@ definitions:
       pieChart:
         $ref: '#/definitions/PieChartSpec'
         description: A pie chart specification.
+      scorecardChart:
+        $ref: '#/definitions/ScorecardChartSpec'
+        description: A scorecard chart specification.
       subtitle:
         description: The subtitle of the chart.
         type: string
@@ -3567,6 +3636,19 @@ definitions:
         items:
           type: string
         type: array
+      visibleBackgroundColor:
+        $ref: '#/definitions/Color'
+        description: |-
+          The background fill color to filter by; only cells with this fill color are
+          shown. Mutually exclusive with all other filter criteria. Requests to set
+          this field will fail with a 400 error if any other filter criteria field is
+          set.
+      visibleForegroundColor:
+        $ref: '#/definitions/Color'
+        description: |-
+          The text color to filter by; only cells with this text color are shown.
+          Mutually exclusive with all other filter criteria. Requests to set this
+          field will fail with a 400 error if any other filter criteria field is set.
     type: object
   FilterView:
     description: A filter view.
@@ -4048,6 +4130,18 @@ definitions:
           rounds to perform.
         format: int32
         type: integer
+    type: object
+  KeyValueFormat:
+    description: Formatting options for key value.
+    properties:
+      position:
+        $ref: '#/definitions/TextPosition'
+        description: |-
+          Specifies the horizontal text positioning of key value.
+          This field is optional. If not specified, default positioning is used.
+      textFormat:
+        $ref: '#/definitions/TextFormat'
+        description: Text formatting options for key value.
     type: object
   LineStyle:
     description: Properties that describe the style of a line.
@@ -4750,6 +4844,9 @@ definitions:
       addSheet:
         $ref: '#/definitions/AddSheetRequest'
         description: Adds a sheet.
+      addSlicer:
+        $ref: '#/definitions/AddSlicerRequest'
+        description: Adds a slicer.
       appendCells:
         $ref: '#/definitions/AppendCellsRequest'
         description: Appends cells after the last row with data in a sheet.
@@ -4901,6 +4998,9 @@ definitions:
       updateSheetProperties:
         $ref: '#/definitions/UpdateSheetPropertiesRequest'
         description: Updates a sheet's properties.
+      updateSlicerSpec:
+        $ref: '#/definitions/UpdateSlicerSpecRequest'
+        description: Updates a slicer's specifications.
       updateSpreadsheetProperties:
         $ref: '#/definitions/UpdateSpreadsheetPropertiesRequest'
         description: Updates the spreadsheet's properties.
@@ -4929,6 +5029,9 @@ definitions:
       addSheet:
         $ref: '#/definitions/AddSheetResponse'
         description: A reply from adding a sheet.
+      addSlicer:
+        $ref: '#/definitions/AddSlicerResponse'
+        description: A reply from adding a slicer.
       createDeveloperMetadata:
         $ref: '#/definitions/CreateDeveloperMetadataResponse'
         description: A reply from creating a developer metadata entry.
@@ -4974,6 +5077,67 @@ definitions:
         items:
           $ref: '#/definitions/CellData'
         type: array
+    type: object
+  ScorecardChartSpec:
+    description: |-
+      A scorecard chart. Scorecard charts are used to highlight key performance
+      indicators, known as KPIs, on the spreadsheet. A scorecard chart can
+      represent things like total sales, average cost, or a top selling item. You
+      can specify a single data value, or aggregate over a range of data.
+      Percentage or absolute difference from a baseline value can be highlighted,
+      like changes over time.
+    properties:
+      aggregateType:
+        description: |-
+          The aggregation type for key and baseline chart data in scorecard chart.
+          This field is optional.
+        enum:
+          - CHART_AGGREGATE_TYPE_UNSPECIFIED
+          - AVERAGE
+          - COUNT
+          - MAX
+          - MEDIAN
+          - MIN
+          - SUM
+        type: string
+      baselineValueData:
+        $ref: '#/definitions/ChartData'
+        description: |-
+          The data for scorecard baseline value.
+          This field is optional.
+      baselineValueFormat:
+        $ref: '#/definitions/BaselineValueFormat'
+        description: |-
+          Formatting options for baseline value.
+          This field is needed only if baseline_value_data is specified.
+      customFormatOptions:
+        $ref: '#/definitions/ChartCustomNumberFormatOptions'
+        description: |-
+          Custom formatting options for numeric key/baseline values in scorecard
+          chart. This field is used only when number_format_source is set to
+          CUSTOM. This field is optional.
+      keyValueData:
+        $ref: '#/definitions/ChartData'
+        description: The data for scorecard key value.
+      keyValueFormat:
+        $ref: '#/definitions/KeyValueFormat'
+        description: Formatting options for key value.
+      numberFormatSource:
+        description: |-
+          The number format source used in the scorecard chart.
+          This field is optional.
+        enum:
+          - CHART_NUMBER_FORMAT_SOURCE_UNDEFINED
+          - FROM_DATA
+          - CUSTOM
+        type: string
+      scaleFactor:
+        description: |-
+          Value to scale scorecard key and baseline value. For example, a factor of
+          10 can be used to divide all values in the chart by 10.
+          This field is optional.
+        format: double
+        type: number
     type: object
   SearchDeveloperMetadataRequest:
     description: |-
@@ -5090,6 +5254,11 @@ definitions:
         items:
           $ref: '#/definitions/DimensionGroup'
         type: array
+      slicers:
+        description: The slicers on this sheet.
+        items:
+          $ref: '#/definitions/Slicer'
+        type: array
     type: object
   SheetProperties:
     description: Properties of a sheet.
@@ -5143,6 +5312,61 @@ definitions:
         description: The name of the sheet.
         type: string
     type: object
+  Slicer:
+    description: A slicer in a sheet.
+    properties:
+      position:
+        $ref: '#/definitions/EmbeddedObjectPosition'
+        description: |-
+          The position of the slicer. Note that slicer can be positioned only on
+          existing sheet. Also, width and height of slicer can be automatically
+          adjusted to keep it within permitted limits.
+      slicerId:
+        description: The ID of the slicer.
+        format: int32
+        type: integer
+      spec:
+        $ref: '#/definitions/SlicerSpec'
+        description: The specification of the slicer.
+    type: object
+  SlicerSpec:
+    description: The specifications of a slicer.
+    properties:
+      applyToPivotTables:
+        description: |-
+          True if the filter should apply to pivot tables.
+          If not set, default to `True`.
+        type: boolean
+      backgroundColor:
+        $ref: '#/definitions/Color'
+        description: The background color of the slicer.
+      columnIndex:
+        description: The column index in the data table on which the filter is applied to.
+        format: int32
+        type: integer
+      dataRange:
+        $ref: '#/definitions/GridRange'
+        description: The data range of the slicer.
+      filterCriteria:
+        $ref: '#/definitions/FilterCriteria'
+        description: The filtering criteria of the slicer.
+      horizontalAlignment:
+        description: |-
+          The horizontal alignment of title in the slicer.
+          If unspecified, defaults to `LEFT`
+        enum:
+          - HORIZONTAL_ALIGN_UNSPECIFIED
+          - LEFT
+          - CENTER
+          - RIGHT
+        type: string
+      textFormat:
+        $ref: '#/definitions/TextFormat'
+        description: The text format of title in the slicer.
+      title:
+        description: The title of the slicer.
+        type: string
+    type: object
   SortRangeRequest:
     description: Sorts data in rows based on a sort order per column.
     properties:
@@ -5160,10 +5384,22 @@ definitions:
   SortSpec:
     description: A sort order associated with a specific column or row.
     properties:
+      backgroundColor:
+        $ref: '#/definitions/Color'
+        description: |-
+          The background fill color to sort by. Mutually exclusive with sorting by
+          text color. Requests to set this field will fail with a 400 error if
+          foreground color is also set.
       dimensionIndex:
         description: The dimension the sort should be applied to.
         format: int32
         type: integer
+      foregroundColor:
+        $ref: '#/definitions/Color'
+        description: |-
+          The text color to sort by. Mutually exclusive with sorting by background
+          fill color. Requests to set this field will fail with a 400 error if
+          background color is also set.
       sortOrder:
         description: The order data should be sorted.
         enum:
@@ -5827,6 +6063,27 @@ definitions:
       properties:
         $ref: '#/definitions/SheetProperties'
         description: The properties to update.
+    type: object
+  UpdateSlicerSpecRequest:
+    description: |-
+      Updates a slicer’s specifications.
+      (This does not move or resize a slicer. To move or resize a slicer use
+      UpdateEmbeddedObjectPositionRequest.
+    properties:
+      fields:
+        description: |-
+          The fields that should be updated.  At least one field must be specified.
+          The root `SlicerSpec` is implied and should not be specified. A single "*"`
+          can be used as short-hand for listing every field.
+        format: google-fieldmask
+        type: string
+      slicerId:
+        description: The id of the slicer to update.
+        format: int32
+        type: integer
+      spec:
+        $ref: '#/definitions/SlicerSpec'
+        description: The specification to apply to the slicer.
     type: object
   UpdateSpreadsheetPropertiesRequest:
     description: Updates properties of a spreadsheet.

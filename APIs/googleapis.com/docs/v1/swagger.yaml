@@ -479,6 +479,50 @@ definitions:
           style of a column break can affect content layout as well as the styling of
           text inserted adjacent to it.
     type: object
+  CreateFooterRequest:
+    description: |-
+      Creates a Footer. The new footer will be
+      applied to the DocumentStyle.
+
+      If a footer of the specified type already exists then a 400 bad request error
+      will be returned.
+    properties:
+      type:
+        description: The type of footer to create.
+        enum:
+          - HEADER_FOOTER_TYPE_UNSPECIFIED
+          - DEFAULT
+        type: string
+    type: object
+  CreateFooterResponse:
+    description: The result of creating a footer.
+    properties:
+      footerId:
+        description: The ID of the created footer.
+        type: string
+    type: object
+  CreateHeaderRequest:
+    description: |-
+      Creates a Header. The new header will be
+      applied to the DocumentStyle.
+
+      If a header of the specified type already exists then a 400 bad request error
+      will be returned.
+    properties:
+      type:
+        description: The type of header to create.
+        enum:
+          - HEADER_FOOTER_TYPE_UNSPECIFIED
+          - DEFAULT
+        type: string
+    type: object
+  CreateHeaderResponse:
+    description: The result of creating a header.
+    properties:
+      headerId:
+        description: The ID of the created header.
+        type: string
+    type: object
   CreateNamedRangeRequest:
     description: |-
       Creates a NamedRange referencing the given
@@ -2651,9 +2695,51 @@ definitions:
           with the image, and exposed via the ImageProperties.source_uri field.
         type: string
     type: object
+  ReplaceNamedRangeContentRequest:
+    description: |-
+      Replaces the contents of the specified
+      NamedRange or
+      NamedRanges with the given replacement
+      content.
+
+      Note that an individual NamedRange may
+      consist of multiple discontinuous
+      ranges. In this case, only the
+      content in the first range will be replaced. The other ranges and their
+      content will be deleted.
+
+      In cases where replacing or deleting any ranges would result in an invalid
+      document structure, a 400 bad request error is returned.
+    properties:
+      namedRangeId:
+        description: |-
+          The ID of the named range whose content will be replaced.
+
+          If there is no named range with the given ID a 400 bad request error is
+          returned.
+        type: string
+      namedRangeName:
+        description: |-
+          The name of the NamedRanges whose
+          content will be replaced.
+
+          If there are multiple named ranges with the given name, then
+          the content of each one will be replaced. If there are no named ranges
+          with the given name, then the request will be a no-op.
+        type: string
+      text:
+        description: Replaces the content of the specified named range(s) with the given text.
+        type: string
+    type: object
   Request:
     description: A single update to apply to a document.
     properties:
+      createFooter:
+        $ref: '#/definitions/CreateFooterRequest'
+        description: Creates a footer.
+      createHeader:
+        $ref: '#/definitions/CreateHeaderRequest'
+        description: Creates a header.
       createNamedRange:
         $ref: '#/definitions/CreateNamedRangeRequest'
         description: Creates a named range.
@@ -2705,6 +2791,9 @@ definitions:
       replaceImage:
         $ref: '#/definitions/ReplaceImageRequest'
         description: Replaces an image in the document.
+      replaceNamedRangeContent:
+        $ref: '#/definitions/ReplaceNamedRangeContentRequest'
+        description: Replaces the content in a named range.
       unmergeTableCells:
         $ref: '#/definitions/UnmergeTableCellsRequest'
         description: Unmerges cells in a table.
@@ -2730,6 +2819,12 @@ definitions:
   Response:
     description: A single response from an update.
     properties:
+      createFooter:
+        $ref: '#/definitions/CreateFooterResponse'
+        description: The result of creating a footer.
+      createHeader:
+        $ref: '#/definitions/CreateHeaderResponse'
+        description: The result of creating a header.
       createNamedRange:
         $ref: '#/definitions/CreateNamedRangeResponse'
         description: The result of creating a named range.

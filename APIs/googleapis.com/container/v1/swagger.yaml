@@ -3142,6 +3142,20 @@ definitions:
           is enabled or not on the Master, it does not track whether network policy
           is enabled for the nodes.
     type: object
+  AuthenticatorGroupsConfig:
+    description: Configuration for returning group information from authenticators.
+    properties:
+      enabled:
+        description: |-
+          Whether this cluster should return group membership lookups
+          during authentication using a group of security groups.
+        type: boolean
+      securityGroup:
+        description: |-
+          The name of the security group-of-groups to be used. Only relevant
+          if enabled = true.
+        type: string
+    type: object
   AutoUpgradeOptions:
     description: |-
       AutoUpgradeOptions defines the set of options for the user to control how
@@ -3159,12 +3173,39 @@ definitions:
           with the description of the upgrade.
         type: string
     type: object
+  AutoprovisioningNodePoolDefaults:
+    description: |-
+      AutoprovisioningNodePoolDefaults contains defaults for a node pool created
+      by NAP.
+    properties:
+      oauthScopes:
+        description: |-
+          Scopes that are used by NAP when creating node pools. If oauth_scopes are
+          specified, service_account should be empty.
+        items:
+          type: string
+        type: array
+      serviceAccount:
+        description: |-
+          The Google Cloud Platform Service Account to be used by the node VMs. If
+          service_account is specified, scopes should be empty.
+        type: string
+    type: object
   BigQueryDestination:
     description: Parameters for using BigQuery as the destination of resource usage export.
     properties:
       datasetId:
         description: The ID of a BigQuery Dataset.
         type: string
+    type: object
+  BinaryAuthorization:
+    description: Configuration for Binary Authorization.
+    properties:
+      enabled:
+        description: |-
+          Enable Binary Authorization for this cluster. If enabled, all container
+          images will be validated by Binary Authorization.
+        type: boolean
     type: object
   CancelOperationRequest:
     description: CancelOperationRequest cancels a single operation.
@@ -3215,6 +3256,15 @@ definitions:
       addonsConfig:
         $ref: '#/definitions/AddonsConfig'
         description: Configurations for the various addons available to run in the cluster.
+      authenticatorGroupsConfig:
+        $ref: '#/definitions/AuthenticatorGroupsConfig'
+        description: Configuration controlling RBAC group membership information.
+      autoscaling:
+        $ref: '#/definitions/ClusterAutoscaling'
+        description: Cluster-level autoscaling configuration.
+      binaryAuthorization:
+        $ref: '#/definitions/BinaryAuthorization'
+        description: Configuration for Binary Authorization.
       clusterIpv4Cidr:
         description: |-
           The IP address range of the container pods in this cluster, in
@@ -3249,6 +3299,9 @@ definitions:
           currently at multiple versions because they're in the process of being
           upgraded, this reflects the minimum version of all nodes.
         type: string
+      databaseEncryption:
+        $ref: '#/definitions/DatabaseEncryption'
+        description: Configuration of etcd encryption.
       defaultMaxPodsConstraint:
         $ref: '#/definitions/MaxPodsConstraint'
         description: |-
@@ -3349,7 +3402,7 @@ definitions:
           Currently available options:
 
           * "logging.googleapis.com/kubernetes" - the Google Cloud Logging
-          service with Kubernetes-native resource model in Stackdriver
+          service with Kubernetes-native resource model
           * `logging.googleapis.com` - the Google Cloud Logging service.
           * `none` - no logs will be exported from the cluster.
           * if left as an empty string,`logging.googleapis.com` will be used.
@@ -3380,7 +3433,8 @@ definitions:
       name:
         description: |-
           The name of this cluster. The name must be unique within this project
-          and zone, and can be up to 40 characters with the following restrictions:
+          and location (e.g. zone or region), and can be up to 40 characters with
+          the following restrictions:
 
           * Lowercase letters, numbers, and hyphens only.
           * Must start with a letter.
@@ -3483,6 +3537,9 @@ definitions:
           [CIDR](http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
           notation (e.g. `1.2.3.4/29`).
         type: string
+      verticalPodAutoscaling:
+        $ref: '#/definitions/VerticalPodAutoscaling'
+        description: Cluster-level Vertical Pod Autoscaling configuration.
       zone:
         description: |-
           [Output only] The name of the Google Compute Engine
@@ -3490,6 +3547,36 @@ definitions:
           resides.
           This field is deprecated, use location instead.
         type: string
+    type: object
+  ClusterAutoscaling:
+    description: |-
+      ClusterAutoscaling contains global, per-cluster information
+      required by Cluster Autoscaler to automatically adjust
+      the size of the cluster and create/delete
+      node pools based on the current needs.
+    properties:
+      autoprovisioningLocations:
+        description: |-
+          The list of Google Compute Engine [zones](/compute/docs/zones#available)
+          in which the NodePool's nodes can be created by NAP.
+        items:
+          type: string
+        type: array
+      autoprovisioningNodePoolDefaults:
+        $ref: '#/definitions/AutoprovisioningNodePoolDefaults'
+        description: |-
+          AutoprovisioningNodePoolDefaults contains defaults for a node pool
+          created by NAP.
+      enableNodeAutoprovisioning:
+        description: Enables automatic node pool creation and deletion.
+        type: boolean
+      resourceLimits:
+        description: |-
+          Contains global constraints regarding minimum and maximum
+          amount of resources in the cluster.
+        items:
+          $ref: '#/definitions/ResourceLimit'
+        type: array
     type: object
   ClusterUpdate:
     description: |-
@@ -3500,6 +3587,15 @@ definitions:
       desiredAddonsConfig:
         $ref: '#/definitions/AddonsConfig'
         description: Configurations for the various addons available to run in the cluster.
+      desiredBinaryAuthorization:
+        $ref: '#/definitions/BinaryAuthorization'
+        description: The desired configuration options for the Binary Authorization feature.
+      desiredClusterAutoscaling:
+        $ref: '#/definitions/ClusterAutoscaling'
+        description: Cluster-level autoscaling configuration.
+      desiredDatabaseEncryption:
+        $ref: '#/definitions/DatabaseEncryption'
+        description: Configuration of etcd encryption.
       desiredImageType:
         description: |-
           The desired image type for the node pool.
@@ -3526,7 +3622,7 @@ definitions:
           Currently available options:
 
           * "logging.googleapis.com/kubernetes" - the Google Cloud Logging
-          service with Kubernetes-native resource model in Stackdriver
+          service with Kubernetes-native resource model
           * "logging.googleapis.com" - the Google Cloud Logging service
           * "none" - no logs will be exported from the cluster
         type: string
@@ -3552,7 +3648,7 @@ definitions:
           Currently available options:
 
           * "monitoring.googleapis.com/kubernetes" - the Google Cloud Monitoring
-          service with Kubernetes-native resource model in Stackdriver
+          service with Kubernetes-native resource model
           * "monitoring.googleapis.com" - the Google Cloud Monitoring service
           * "none" - no metrics will be exported from the cluster
         type: string
@@ -3587,6 +3683,9 @@ definitions:
       desiredResourceUsageExportConfig:
         $ref: '#/definitions/ResourceUsageExportConfig'
         description: The desired configuration for exporting resource usage.
+      desiredVerticalPodAutoscaling:
+        $ref: '#/definitions/VerticalPodAutoscaling'
+        description: Cluster-level Vertical Pod Autoscaling configuration.
     type: object
   CompleteIPRotationRequest:
     description: CompleteIPRotationRequest moves the cluster master back into single-IP mode.
@@ -3698,6 +3797,22 @@ definitions:
           Time within the maintenance window to start the maintenance operations.
           Time format should be in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt)
           format "HH:MM", where HH : [00-23] and MM : [00-59] GMT.
+        type: string
+    type: object
+  DatabaseEncryption:
+    description: Configuration of etcd encryption.
+    properties:
+      keyName:
+        description: |-
+          Name of CloudKMS key to use for the encryption of secrets in etcd.
+          Ex. projects/my-project/locations/global/keyRings/my-ring/cryptoKeys/my-key
+        type: string
+      state:
+        description: Denotes the state of etcd encryption.
+        enum:
+          - UNKNOWN
+          - ENCRYPTED
+          - DECRYPTED
         type: string
     type: object
   Empty:
@@ -4316,6 +4431,9 @@ definitions:
           The Google Cloud Platform Service Account to be used by the node VMs. If
           no Service Account is specified, the "default" service account is used.
         type: string
+      shieldedInstanceConfig:
+        $ref: '#/definitions/ShieldedInstanceConfig'
+        description: Shielded Instance options.
       tags:
         description: |-
           The list of instance tags applied to all nodes. Tags are used to identify
@@ -4438,6 +4556,9 @@ definitions:
       NodePoolAutoscaling contains information required by cluster autoscaler to
       adjust the size of the node pool to the current cluster usage.
     properties:
+      autoprovisioned:
+        description: Can this node pool be deleted automatically.
+        type: boolean
       enabled:
         description: Is autoscaling enabled for this node pool.
         type: boolean
@@ -4586,6 +4707,23 @@ definitions:
         type: string
       publicEndpoint:
         description: Output only. The external IP address of this cluster's master endpoint.
+        type: string
+    type: object
+  ResourceLimit:
+    description: |-
+      Contains information about amount of some resource in the cluster.
+      For memory, value should be in GB.
+    properties:
+      maximum:
+        description: Maximum amount of the resource in the cluster.
+        format: int64
+        type: string
+      minimum:
+        description: Minimum amount of the resource in the cluster.
+        format: int64
+        type: string
+      resourceType:
+        description: 'Resource name "cpu", "memory" or gpu-specific string.'
         type: string
     type: object
   ResourceUsageExportConfig:
@@ -4927,7 +5065,7 @@ definitions:
           Currently available options:
 
           * "monitoring.googleapis.com/kubernetes" - the Google Cloud Monitoring
-          service with Kubernetes-native resource model in Stackdriver
+          service with Kubernetes-native resource model
           * "monitoring.googleapis.com" - the Google Cloud Monitoring service
           * "none" - no metrics will be exported from the cluster
         type: string
@@ -5093,6 +5231,27 @@ definitions:
           This field has been deprecated and replaced by the name field.
         type: string
     type: object
+  ShieldedInstanceConfig:
+    description: A set of Shielded Instance options.
+    properties:
+      enableIntegrityMonitoring:
+        description: |-
+          Defines whether the instance has integrity monitoring enabled.
+
+          Enables monitoring and attestation of the boot integrity of the instance.
+          The attestation is performed against the integrity policy baseline. This
+          baseline is initially derived from the implicitly trusted boot image when
+          the instance is created.
+        type: boolean
+      enableSecureBoot:
+        description: |-
+          Defines whether the instance has Secure Boot enabled.
+
+          Secure Boot helps ensure that the system only runs authentic software by
+          verifying the digital signature of all boot components, and halting the
+          boot process if signature verification fails.
+        type: boolean
+    type: object
   StartIPRotationRequest:
     description: |-
       StartIPRotationRequest creates a new IP for the cluster and then performs
@@ -5138,6 +5297,7 @@ definitions:
           - GKE_SERVICE_ACCOUNT_DELETED
           - GCE_QUOTA_EXCEEDED
           - SET_BY_OPERATOR
+          - CLOUD_KMS_KEY_ERROR
         type: string
       message:
         description: Human-friendly representation of the condition
@@ -5314,4 +5474,14 @@ definitions:
           - IN_USE_SHAREABLE_POD
           - IN_USE_MANAGED_POD
         type: string
+    type: object
+  VerticalPodAutoscaling:
+    description: |-
+      VerticalPodAutoscaling contains global, per-cluster information
+      required by Vertical Pod Autoscaler to automatically adjust
+      the resources of pods controlled by it.
+    properties:
+      enabled:
+        description: Enables vertical pod autoscaling.
+        type: boolean
     type: object

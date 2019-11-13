@@ -134,20 +134,27 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     put:
-      description: Creates the given topic with the given name.
-      operationId: pubsub.projects.topics.create
+      description: |-
+        Creates a subscription to a given topic.
+        If the subscription already exists, returns `ALREADY_EXISTS`.
+        If the corresponding topic doesn't exist, returns `NOT_FOUND`.
+
+        If the name is not provided in the request, the server will assign a random
+        name for this subscription on the same project as the topic. Note that
+        for REST API requests, you must specify a name.
+      operationId: pubsub.projects.subscriptions.create
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/Topic'
+            $ref: '#/definitions/Subscription'
         - description: |-
-            The name of the topic. It must have the format
-            `"projects/{project}/topics/{topic}"`. `{topic}` must start with a letter,
-            and contain only letters (`[A-Za-z]`), numbers (`[0-9]`), dashes (`-`),
-            underscores (`_`), periods (`.`), tildes (`~`), plus (`+`) or percent
-            signs (`%`). It must be between 3 and 255 characters in length, and it
-            must not start with `"goog"`.
+            The name of the subscription. It must have the format
+            `"projects/{project}/subscriptions/{subscription}"`. `{subscription}` must
+            start with a letter, and contain only letters (`[A-Za-z]`), numbers
+            (`[0-9]`), dashes (`-`), underscores (`_`), periods (`.`), tildes (`~`),
+            plus (`+`) or percent signs (`%`). It must be between 3 and 255 characters
+            in length, and it must not start with `"goog"`.
           in: path
           name: name
           required: true
@@ -157,7 +164,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Topic'
+            $ref: '#/definitions/Subscription'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -275,7 +282,7 @@ paths:
         Gets the access control policy for a resource.
         Returns an empty policy if the resource exists and does not have a policy
         set.
-      operationId: pubsub.projects.topics.getIamPolicy
+      operationId: pubsub.projects.subscriptions.getIamPolicy
       parameters:
         - description: |-
             Optional. The policy format version to be returned.
@@ -342,7 +349,9 @@ paths:
       description: |-
         Sets the access control policy on the specified resource. Replaces any
         existing policy.
-      operationId: pubsub.projects.topics.setIamPolicy
+
+        Can return Public Errors: NOT_FOUND, INVALID_ARGUMENT and PERMISSION_DENIED
+      operationId: pubsub.projects.subscriptions.setIamPolicy
       parameters:
         - in: body
           name: body
@@ -394,7 +403,7 @@ paths:
         Note: This operation is designed to be used for building permission-aware
         UIs and command-line tools, not for authorization checking. This operation
         may "fail open" without warning.
-      operationId: pubsub.projects.topics.testIamPermissions
+      operationId: pubsub.projects.subscriptions.testIamPermissions
       parameters:
         - in: body
           name: body
@@ -1066,27 +1075,36 @@ definitions:
       specify access control policies for Cloud Platform resources.
 
 
-      A `Policy` consists of a list of `bindings`. A `binding` binds a list of
-      `members` to a `role`, where the members can be user accounts, Google groups,
-      Google domains, and service accounts. A `role` is a named list of permissions
-      defined by IAM.
+      A `Policy` is a collection of `bindings`. A `binding` binds one or more
+      `members` to a single `role`. Members can be user accounts, service accounts,
+      Google groups, and domains (such as G Suite). A `role` is a named list of
+      permissions (defined by IAM or configured by users). A `binding` can
+      optionally specify a `condition`, which is a logic expression that further
+      constrains the role binding based on attributes about the request and/or
+      target resource.
 
       **JSON Example**
 
           {
             "bindings": [
               {
-                "role": "roles/owner",
+                "role": "roles/resourcemanager.organizationAdmin",
                 "members": [
                   "user:mike@example.com",
                   "group:admins@example.com",
                   "domain:google.com",
-                  "serviceAccount:my-other-app@appspot.gserviceaccount.com"
+                  "serviceAccount:my-project-id@appspot.gserviceaccount.com"
                 ]
               },
               {
-                "role": "roles/viewer",
-                "members": ["user:sean@example.com"]
+                "role": "roles/resourcemanager.organizationViewer",
+                "members": ["user:eve@example.com"],
+                "condition": {
+                  "title": "expirable access",
+                  "description": "Does not grant access after Sep 2020",
+                  "expression": "request.time <
+                  timestamp('2020-10-01T00:00:00.000Z')",
+                }
               }
             ]
           }
@@ -1098,19 +1116,23 @@ definitions:
             - user:mike@example.com
             - group:admins@example.com
             - domain:google.com
-            - serviceAccount:my-other-app@appspot.gserviceaccount.com
-            role: roles/owner
+            - serviceAccount:my-project-id@appspot.gserviceaccount.com
+            role: roles/resourcemanager.organizationAdmin
           - members:
-            - user:sean@example.com
-            role: roles/viewer
-
+            - user:eve@example.com
+            role: roles/resourcemanager.organizationViewer
+            condition:
+              title: expirable access
+              description: Does not grant access after Sep 2020
+              expression: request.time < timestamp('2020-10-01T00:00:00.000Z')
 
       For a description of IAM and its features, see the
       [IAM developer's guide](https://cloud.google.com/iam/docs).
     properties:
       bindings:
         description: |-
-          Associates a list of `members` to a `role`.
+          Associates a list of `members` to a `role`. Optionally may specify a
+          `condition` that determines when binding is in effect.
           `bindings` with no members will result in an error.
         items:
           $ref: '#/definitions/Binding'
@@ -1126,7 +1148,9 @@ definitions:
           ensure that their change will be applied to the same version of the policy.
 
           If no `etag` is provided in the call to `setIamPolicy`, then the existing
-          policy is overwritten.
+          policy is overwritten. Due to blind-set semantics of an etag-less policy,
+          'setIamPolicy' will not fail even if either of incoming or stored policy
+          does not meet the version requirements.
         format: byte
         type: string
       version:
@@ -1136,9 +1160,14 @@ definitions:
           Valid values are 0, 1, and 3. Requests specifying an invalid value will be
           rejected.
 
-          Policies with any conditional bindings must specify version 3. Policies
-          without any conditional bindings may specify any valid value or leave the
-          field unset.
+          Operations affecting conditional bindings must specify version 3. This can
+          be either setting a conditional policy, modifying a conditional binding,
+          or removing a conditional binding from the stored conditional policy.
+          Operations on non-conditional policies may specify any valid value or
+          leave the field unset.
+
+          If no etag is provided in the call to `setIamPolicy`, any version
+          compliance checks on the incoming and/or stored policy is skipped.
         format: int32
         type: integer
     type: object

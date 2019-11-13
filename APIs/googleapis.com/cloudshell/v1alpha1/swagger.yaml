@@ -398,7 +398,9 @@ definitions:
           "gcr.io/dev-con/cloud-devshell:latest".
         type: string
       id:
-        description: 'Output only. The environment''s identifier, which is always "default".'
+        description: |-
+          Output only. The environment's identifier, unique among the user's
+          environments.
         type: string
       name:
         description: |-
@@ -418,6 +420,16 @@ definitions:
         items:
           $ref: '#/definitions/PublicKey'
         type: array
+      size:
+        description: |-
+          Indicates the size of the backing VM running the environment.  If set to
+          something other than DEFAULT, it will be reverted to the default VM size
+          after vm_size_expire_time.
+        enum:
+          - VM_SIZE_UNSPECIFIED
+          - DEFAULT
+          - BOOSTED
+        type: string
       sshHost:
         description: |-
           Output only. Host to which clients can connect to initiate SSH sessions
@@ -442,11 +454,25 @@ definitions:
           - STARTING
           - RUNNING
         type: string
+      vmSizeExpireTime:
+        description: |-
+          Output only. The time when the Environment will expire back to the default
+          VM size.
+        format: google-datetime
+        type: string
       webHost:
         description: |-
           Output only. Host to which clients can connect to initiate HTTPS or WSS
           connections with the environment.
         type: string
+      webPorts:
+        description: |-
+          Output only. Ports to which clients can connect to initiate HTTPS or WSS
+          connections with the environment.
+        items:
+          format: int32
+          type: integer
+        type: array
     type: object
   Operation:
     description: |-

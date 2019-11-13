@@ -65,6 +65,7 @@ securityDefinitions:
       'https://www.googleapis.com/auth/admin.directory.user.security': Manage data access permissions for users on your domain
       'https://www.googleapis.com/auth/admin.directory.userschema': View and manage the provisioning of user schemas on your domain
       'https://www.googleapis.com/auth/admin.directory.userschema.readonly': View user schemas on your domain
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
     type: oauth2
   Oauth2c:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
@@ -98,6 +99,7 @@ securityDefinitions:
       'https://www.googleapis.com/auth/admin.directory.user.security': Manage data access permissions for users on your domain
       'https://www.googleapis.com/auth/admin.directory.userschema': View and manage the provisioning of user schemas on your domain
       'https://www.googleapis.com/auth/admin.directory.userschema.readonly': View user schemas on your domain
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
     tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
@@ -199,6 +201,10 @@ paths:
             - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
           Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - channels
   '/customer/{customerId}/devices/chromeos':
@@ -3241,6 +3247,10 @@ paths:
             - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
           Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - users
     parameters:
@@ -3375,6 +3385,10 @@ paths:
             - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
           Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - users
   '/users/{userKey}':
@@ -4524,7 +4538,7 @@ definitions:
         description: Chromebook Mac Address on ethernet network interface (Read-only)
         type: string
       ethernetMacAddress0:
-        description: '(Read-only) MAC address used by the Chromebook’s internal ethernet port, and for onboard network (ethernet) interface. The format is twelve (12) hexadecimal digits without any delimiter (uppercase letters). This is only relevant for Dell devices.'
+        description: '(Read-only) MAC address used by the Chromebook’s internal ethernet port, and for onboard network (ethernet) interface. The format is twelve (12) hexadecimal digits without any delimiter (uppercase letters). This is only relevant for some devices.'
         type: string
       firmwareVersion:
         description: Chromebook firmware version (Read-only)
@@ -4548,7 +4562,7 @@ definitions:
         description: (Read-only) The date the device was manufactured in yyyy-mm-dd format.
         type: string
       meid:
-        description: Mobile Equipment identifier for the 3G mobile card in the Chromebook (Read-only)
+        description: Contains either the Mobile Equipment identifier (MEID) or the International Mobile Equipment Identity (IMEI) for the 3G mobile card in the Chromebook (Read-only)
         type: string
       model:
         description: Chromebook Model (Read-only)

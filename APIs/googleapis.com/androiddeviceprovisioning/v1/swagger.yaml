@@ -497,12 +497,12 @@ paths:
       tags:
         - customers
     get:
-      description: Gets the details of a device.
-      operationId: androiddeviceprovisioning.customers.devices.get
+      description: Gets a device.
+      operationId: androiddeviceprovisioning.partners.devices.get
       parameters:
         - description: |-
-            Required. The device to get. An API resource name in the format
-            `customers/[CUSTOMER_ID]/devices/[DEVICE_ID]`.
+            Required. The device API resource name in the format
+            `partners/[PARTNER_ID]/devices/[DEVICE_ID]`.
           in: path
           name: name
           required: true
@@ -514,7 +514,7 @@ paths:
           schema:
             $ref: '#/definitions/Device'
       tags:
-        - customers
+        - partners
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'

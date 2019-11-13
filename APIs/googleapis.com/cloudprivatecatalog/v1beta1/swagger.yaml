@@ -121,7 +121,7 @@ paths:
       description: |-
         Search Catalog resources that consumers have access to, within the
         scope of the consumer cloud resource hierarchy context.
-      operationId: cloudprivatecatalog.projects.catalogs.search
+      operationId: cloudprivatecatalog.folders.catalogs.search
       parameters:
         - description: The maximum number of entries that are requested.
           in: query
@@ -163,7 +163,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - folders
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -181,7 +181,7 @@ paths:
       description: |-
         Search Product resources that consumers have access to, within the
         scope of the consumer cloud resource hierarchy context.
-      operationId: cloudprivatecatalog.projects.products.search
+      operationId: cloudprivatecatalog.folders.products.search
       parameters:
         - description: The maximum number of entries that are requested.
           in: query
@@ -224,7 +224,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - folders
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -242,7 +242,7 @@ paths:
       description: |-
         Search Version resources that consumers have access to, within the
         scope of the consumer cloud resource hierarchy context.
-      operationId: cloudprivatecatalog.projects.versions.search
+      operationId: cloudprivatecatalog.folders.versions.search
       parameters:
         - description: The maximum number of entries that are requested.
           in: query
@@ -285,7 +285,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - folders
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'

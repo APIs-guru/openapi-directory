@@ -299,8 +299,8 @@ paths:
       - $ref: '#/parameters/upload_protocol'
   '/v1/debug/{parent}/unmappedids':
     get:
-      description: Lists unmapped user identities for an identity source.
-      operationId: cloudsearch.debug.identitysources.unmappedids.list
+      description: List all unmapped identities for a specific item.
+      operationId: cloudsearch.debug.datasources.items.unmappedids.list
       parameters:
         - description: |-
             If you are asked by Google to help with debugging, set this field.
@@ -319,8 +319,8 @@ paths:
           name: pageToken
           type: string
         - description: |-
-            The name of the identity source, in the following format:
-            identitysources/{source_id}
+            The name of the item, in the following format:
+            datasources/{source_id}/items/{ID}
           in: path
           name: parent
           required: true
@@ -369,7 +369,9 @@ paths:
     delete:
       description: |-
         Deletes Item resource for the
-        specified resource name.
+        specified resource name. This API requires an admin or service account
+        to execute. The service account used is the one whitelisted in the
+        corresponding data source.
       operationId: cloudsearch.indexing.datasources.items.delete
       parameters:
         - description: |-
@@ -430,7 +432,11 @@ paths:
       tags:
         - indexing
     get:
-      description: Gets Item resource by item name.
+      description: |-
+        Gets Item resource by item name.
+
+        This API requires an admin or service account to execute.  The service
+        account used is the one whitelisted in the corresponding data source.
       operationId: cloudsearch.indexing.datasources.items.get
       parameters:
         - description: |-
@@ -483,16 +489,32 @@ paths:
       - $ref: '#/parameters/upload_protocol'
   '/v1/indexing/{name}/items':
     get:
-      description: Lists all or a subset of Item resources.
+      description: |-
+        Lists all or a subset of Item resources.
+
+        This API requires an admin or service account to execute. The service
+        account used is the one whitelisted in the corresponding data source.
       operationId: cloudsearch.indexing.datasources.items.list
       parameters:
         - description: |-
             When set to true, the indexing system only populates the following fields:
             name,
             version,
+            queue.
             metadata.hash,
+            metadata.title,
+            metadata.sourceRepositoryURL,
+            metadata.objectType,
+            metadata.createTime,
+            metadata.updateTime,
+            metadata.contentLanguage,
+            metadata.mimeType,
             structured_data.hash,
-            content.hash.
+            content.hash,
+            itemType,
+            itemStatus.code,
+            itemStatus.processingError.code,
+            itemStatus.repositoryError.type,
             <br />If this value is false, then all the fields are populated in Item.
           in: query
           name: brief
@@ -574,6 +596,9 @@ paths:
       description: |-
         Deletes all items in a queue. This method is useful for deleting stale
         items.
+
+        This API requires an admin or service account to execute. The service
+        account used is the one whitelisted in the corresponding data source.
       operationId: cloudsearch.indexing.datasources.items.deleteQueueItems
       parameters:
         - in: body
@@ -644,6 +669,9 @@ paths:
 
         Items automatically become available (unreserved) after 4 hours even if no
         update or push method is called.
+
+        This API requires an admin or service account to execute. The service
+        account used is the one whitelisted in the corresponding data source.
       operationId: cloudsearch.indexing.datasources.items.poll
       parameters:
         - in: body
@@ -692,6 +720,9 @@ paths:
         Unreserves all items from a queue, making them all eligible to be
         polled.  This method is useful for resetting the indexing queue
         after a connector has been restarted.
+
+        This API requires an admin or service account to execute. The service
+        account used is the one whitelisted in the corresponding data source.
       operationId: cloudsearch.indexing.datasources.items.unreserve
       parameters:
         - in: body
@@ -867,6 +898,9 @@ paths:
         does not exist.
         This method does not support partial updates.  Fields with no provided
         values are cleared out in the Cloud Search index.
+
+        This API requires an admin or service account to execute. The service
+        account used is the one whitelisted in the corresponding data source.
       operationId: cloudsearch.indexing.datasources.items.index
       parameters:
         - in: body
@@ -913,7 +947,11 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Pushes an item onto a queue for later polling and updating.
+      description: |-
+        Pushes an item onto a queue for later polling and updating.
+
+        This API requires an admin or service account to execute. The service
+        account used is the one whitelisted in the corresponding data source.
       operationId: cloudsearch.indexing.datasources.items.push
       parameters:
         - in: body
@@ -966,6 +1004,9 @@ paths:
         than 100 KB, it's easier to embed the content
         inline within
         an index request.
+
+        This API requires an admin or service account to execute. The service
+        account used is the one whitelisted in the corresponding data source.
       operationId: cloudsearch.indexing.datasources.items.upload
       parameters:
         - in: body
@@ -1125,10 +1166,15 @@ paths:
             http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
             For translations.
 
+            Set this field using the language set in browser or for the page. In the
+            event that the user's language preference is known, set this field to the
+            known user language.
+
             When specified, the documents in search results are biased towards the
             specified language.
-            Suggest API does not use this parameter. It autocompletes only based on
-            characters in the query.
+
+            The suggest API does not use this parameter. Instead, suggest autocompletes
+            only based on characters in the query.
           in: query
           name: requestOptions.languageCode
           type: string
@@ -1684,6 +1730,396 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
+  /v1/stats/query:
+    get:
+      description: Get the query statistics for customer
+      operationId: cloudsearch.stats.getQuery
+      parameters:
+        - description: Day of month. Must be from 1 to 31 and valid for the year and month.
+          in: query
+          name: fromDate.day
+          type: integer
+        - description: Month of date. Must be from 1 to 12.
+          in: query
+          name: fromDate.month
+          type: integer
+        - description: Year of date. Must be from 1 to 9999.
+          in: query
+          name: fromDate.year
+          type: integer
+        - description: Day of month. Must be from 1 to 31 and valid for the year and month.
+          in: query
+          name: toDate.day
+          type: integer
+        - description: Month of date. Must be from 1 to 12.
+          in: query
+          name: toDate.month
+          type: integer
+        - description: Year of date. Must be from 1 to 9999.
+          in: query
+          name: toDate.year
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GetCustomerQueryStatsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.stats'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search.stats'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.stats.indexing'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search.stats.indexing'
+      tags:
+        - stats
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v1/stats/query/{name}':
+    get:
+      description: Get the query statistics for search application
+      operationId: cloudsearch.stats.query.searchapplications.get
+      parameters:
+        - description: Day of month. Must be from 1 to 31 and valid for the year and month.
+          in: query
+          name: fromDate.day
+          type: integer
+        - description: Month of date. Must be from 1 to 12.
+          in: query
+          name: fromDate.month
+          type: integer
+        - description: Year of date. Must be from 1 to 9999.
+          in: query
+          name: fromDate.year
+          type: integer
+        - description: |-
+            The resource id of the search application query stats, in the following
+            format: searchapplications/{application_id}
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: Day of month. Must be from 1 to 31 and valid for the year and month.
+          in: query
+          name: toDate.day
+          type: integer
+        - description: Month of date. Must be from 1 to 12.
+          in: query
+          name: toDate.month
+          type: integer
+        - description: Year of date. Must be from 1 to 9999.
+          in: query
+          name: toDate.year
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GetSearchApplicationQueryStatsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.stats'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search.stats'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.stats.indexing'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search.stats.indexing'
+      tags:
+        - stats
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  /v1/stats/session:
+    get:
+      description: 'Get the # of search sessions for the customer'
+      operationId: cloudsearch.stats.getSession
+      parameters:
+        - description: Day of month. Must be from 1 to 31 and valid for the year and month.
+          in: query
+          name: fromDate.day
+          type: integer
+        - description: Month of date. Must be from 1 to 12.
+          in: query
+          name: fromDate.month
+          type: integer
+        - description: Year of date. Must be from 1 to 9999.
+          in: query
+          name: fromDate.year
+          type: integer
+        - description: Day of month. Must be from 1 to 31 and valid for the year and month.
+          in: query
+          name: toDate.day
+          type: integer
+        - description: Month of date. Must be from 1 to 12.
+          in: query
+          name: toDate.month
+          type: integer
+        - description: Year of date. Must be from 1 to 9999.
+          in: query
+          name: toDate.year
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GetCustomerSessionStatsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.stats'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search.stats'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.stats.indexing'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search.stats.indexing'
+      tags:
+        - stats
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v1/stats/session/{name}':
+    get:
+      description: 'Get the # of search sessions for the search application'
+      operationId: cloudsearch.stats.session.searchapplications.get
+      parameters:
+        - description: Day of month. Must be from 1 to 31 and valid for the year and month.
+          in: query
+          name: fromDate.day
+          type: integer
+        - description: Month of date. Must be from 1 to 12.
+          in: query
+          name: fromDate.month
+          type: integer
+        - description: Year of date. Must be from 1 to 9999.
+          in: query
+          name: fromDate.year
+          type: integer
+        - description: |-
+            The resource id of the search application session stats, in the following
+            format: searchapplications/{application_id}
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: Day of month. Must be from 1 to 31 and valid for the year and month.
+          in: query
+          name: toDate.day
+          type: integer
+        - description: Month of date. Must be from 1 to 12.
+          in: query
+          name: toDate.month
+          type: integer
+        - description: Year of date. Must be from 1 to 9999.
+          in: query
+          name: toDate.year
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GetSearchApplicationSessionStatsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.stats'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search.stats'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.stats.indexing'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search.stats.indexing'
+      tags:
+        - stats
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  /v1/stats/user:
+    get:
+      description: Get the users statistics for customer
+      operationId: cloudsearch.stats.getUser
+      parameters:
+        - description: Day of month. Must be from 1 to 31 and valid for the year and month.
+          in: query
+          name: fromDate.day
+          type: integer
+        - description: Month of date. Must be from 1 to 12.
+          in: query
+          name: fromDate.month
+          type: integer
+        - description: Year of date. Must be from 1 to 9999.
+          in: query
+          name: fromDate.year
+          type: integer
+        - description: Day of month. Must be from 1 to 31 and valid for the year and month.
+          in: query
+          name: toDate.day
+          type: integer
+        - description: Month of date. Must be from 1 to 12.
+          in: query
+          name: toDate.month
+          type: integer
+        - description: Year of date. Must be from 1 to 9999.
+          in: query
+          name: toDate.year
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GetCustomerUserStatsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.stats'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search.stats'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.stats.indexing'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search.stats.indexing'
+      tags:
+        - stats
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v1/stats/user/{name}':
+    get:
+      description: Get the users statistics for search application
+      operationId: cloudsearch.stats.user.searchapplications.get
+      parameters:
+        - description: Day of month. Must be from 1 to 31 and valid for the year and month.
+          in: query
+          name: fromDate.day
+          type: integer
+        - description: Month of date. Must be from 1 to 12.
+          in: query
+          name: fromDate.month
+          type: integer
+        - description: Year of date. Must be from 1 to 9999.
+          in: query
+          name: fromDate.year
+          type: integer
+        - description: |-
+            The resource id of the search application session stats, in the following
+            format: searchapplications/{application_id}
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: Day of month. Must be from 1 to 31 and valid for the year and month.
+          in: query
+          name: toDate.day
+          type: integer
+        - description: Month of date. Must be from 1 to 12.
+          in: query
+          name: toDate.month
+          type: integer
+        - description: Year of date. Must be from 1 to 9999.
+          in: query
+          name: toDate.year
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GetSearchApplicationUserStatsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.stats'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search.stats'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.stats.indexing'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search.stats.indexing'
+      tags:
+        - stats
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/{name}':
     get:
       description: |-
@@ -1802,6 +2238,50 @@ definitions:
         items:
           $ref: '#/definitions/ItemCountByStatus'
         type: array
+    type: object
+  CustomerQueryStats:
+    properties:
+      date:
+        $ref: '#/definitions/Date'
+        description: |-
+          Date for which query stats were calculated. Stats calculated on the next
+          day close to midnight are returned.
+      queryCountByStatus:
+        items:
+          $ref: '#/definitions/QueryCountByStatus'
+        type: array
+    type: object
+  CustomerSessionStats:
+    properties:
+      date:
+        $ref: '#/definitions/Date'
+        description: |-
+          Date for which session stats were calculated. Stats calculated on the next
+          day close to midnight are returned.
+      searchSessionsCount:
+        description: The count of search sessions on the day
+        format: int64
+        type: string
+    type: object
+  CustomerUserStats:
+    properties:
+      date:
+        $ref: '#/definitions/Date'
+        description: |-
+          Date for which session stats were calculated. Stats calculated on the next
+          day close to midnight are returned.
+      oneDayActiveUsersCount:
+        description: The count of unique active users in the past one day
+        format: int64
+        type: string
+      sevenDaysActiveUsersCount:
+        description: The count of unique active users in the past seven days
+        format: int64
+        type: string
+      thirtyDaysActiveUsersCount:
+        description: The count of unique active users in the past thirty days
+        format: int64
+        type: string
     type: object
   DataSource:
     description: |-
@@ -2398,12 +2878,54 @@ definitions:
           $ref: '#/definitions/CustomerIndexStats'
         type: array
     type: object
+  GetCustomerQueryStatsResponse:
+    properties:
+      stats:
+        items:
+          $ref: '#/definitions/CustomerQueryStats'
+        type: array
+    type: object
+  GetCustomerSessionStatsResponse:
+    properties:
+      stats:
+        items:
+          $ref: '#/definitions/CustomerSessionStats'
+        type: array
+    type: object
+  GetCustomerUserStatsResponse:
+    properties:
+      stats:
+        items:
+          $ref: '#/definitions/CustomerUserStats'
+        type: array
+    type: object
   GetDataSourceIndexStatsResponse:
     properties:
       stats:
         description: 'Summary of indexed item counts, one for each day in the requested range.'
         items:
           $ref: '#/definitions/DataSourceIndexStats'
+        type: array
+    type: object
+  GetSearchApplicationQueryStatsResponse:
+    properties:
+      stats:
+        items:
+          $ref: '#/definitions/SearchApplicationQueryStats'
+        type: array
+    type: object
+  GetSearchApplicationSessionStatsResponse:
+    properties:
+      stats:
+        items:
+          $ref: '#/definitions/SearchApplicationSessionStats'
+        type: array
+    type: object
+  GetSearchApplicationUserStatsResponse:
+    properties:
+      stats:
+        items:
+          $ref: '#/definitions/SearchApplicationUserStats'
         type: array
     type: object
   GmailActionRestrict:
@@ -3574,6 +4096,16 @@ definitions:
         $ref: '#/definitions/PushItem'
         description: Item to push onto the queue.
     type: object
+  QueryCountByStatus:
+    properties:
+      count:
+        format: int64
+        type: string
+      statusCode:
+        description: This represents the http status code.
+        format: int32
+        type: integer
+    type: object
   QueryInterpretation:
     properties:
       interpretationType:
@@ -3589,6 +4121,15 @@ definitions:
           "from:john source:mail". This field will not be filled when the reason is
           NO_RESULTS_FOUND_FOR_USER_QUERY.
         type: string
+      reason:
+        description: |-
+          The reason for interpretation of the query. This field will not be
+          UNSPECIFIED if the interpretation type is not NONE.
+        enum:
+          - UNSPECIFIED
+          - QUERY_HAS_NATURAL_LANGUAGE_INTENT
+          - NO_RESULTS_FOUND_FOR_USER_QUERY
+        type: string
     type: object
   QueryInterpretationOptions:
     description: Options to interpret user query.
@@ -3598,6 +4139,13 @@ definitions:
           Flag to disable natural language (NL) interpretation of queries. Default is
           false, Set to true to disable natural language interpretation. NL
           interpretation only applies to predefined datasources.
+        type: boolean
+      enableVerbatimMode:
+        description: |-
+          Enable this flag to turn off all internal optimizations like natural
+          language (NL) interpretation of queries, supplemental result retrieval,
+          and usage of synonyms including custom ones.
+          Nl interpretation will be disabled if either one of the two flags is true.
         type: boolean
     type: object
   QueryItem:
@@ -3730,10 +4278,15 @@ definitions:
           http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
           For translations.
 
+          Set this field using the language set in browser or for the page. In the
+          event that the user's language preference is known, set this field to the
+          known user language.
+
           When specified, the documents in search results are biased towards the
           specified language.
-          Suggest API does not use this parameter. It autocompletes only based on
-          characters in the query.
+
+          The suggest API does not use this parameter. Instead, suggest autocompletes
+          only based on characters in the query.
         type: string
       searchApplicationId:
         description: Id of the application created using SearchApplicationsService.
@@ -3941,6 +4494,50 @@ definitions:
         items:
           $ref: '#/definitions/SourceConfig'
         type: array
+    type: object
+  SearchApplicationQueryStats:
+    properties:
+      date:
+        $ref: '#/definitions/Date'
+        description: |-
+          Date for which query stats were calculated. Stats calculated on the next
+          day close to midnight are returned.
+      queryCountByStatus:
+        items:
+          $ref: '#/definitions/QueryCountByStatus'
+        type: array
+    type: object
+  SearchApplicationSessionStats:
+    properties:
+      date:
+        $ref: '#/definitions/Date'
+        description: |-
+          Date for which session stats were calculated. Stats calculated on the next
+          day close to midnight are returned.
+      searchSessionsCount:
+        description: The count of search sessions on the day
+        format: int64
+        type: string
+    type: object
+  SearchApplicationUserStats:
+    properties:
+      date:
+        $ref: '#/definitions/Date'
+        description: |-
+          Date for which session stats were calculated. Stats calculated on the next
+          day close to midnight are returned.
+      oneDayActiveUsersCount:
+        description: The count of unique active users in the past one day
+        format: int64
+        type: string
+      sevenDaysActiveUsersCount:
+        description: The count of unique active users in the past seven days
+        format: int64
+        type: string
+      thirtyDaysActiveUsersCount:
+        description: The count of unique active users in the past thirty days
+        format: int64
+        type: string
     type: object
   SearchItemsByViewUrlRequest:
     properties:

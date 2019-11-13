@@ -136,7 +136,7 @@ paths:
           in: query
           name: pageToken
           type: string
-        - description: ID of the project.
+        - description: Required. ID of the project.
           in: path
           name: projectId
           required: true
@@ -178,7 +178,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/Build'
-        - description: ID of the project.
+        - description: Required. ID of the project.
           in: path
           name: projectId
           required: true
@@ -204,12 +204,12 @@ paths:
         `FAILURE`, or `WORKING`), and timing information.
       operationId: cloudbuild.projects.builds.get
       parameters:
-        - description: ID of the build.
+        - description: Required. ID of the build.
           in: path
           name: id
           required: true
           type: string
-        - description: ID of the project.
+        - description: Required. ID of the project.
           in: path
           name: projectId
           required: true
@@ -259,12 +259,12 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/CancelBuildRequest'
-        - description: ID of the build.
+        - description: Required. ID of the build.
           in: path
           name: id
           required: true
           type: string
-        - description: ID of the project.
+        - description: Required. ID of the project.
           in: path
           name: projectId
           required: true
@@ -329,12 +329,12 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/RetryBuildRequest'
-        - description: Build ID of the original build.
+        - description: Required. Build ID of the original build.
           in: path
           name: id
           required: true
           type: string
-        - description: ID of the project.
+        - description: Required. ID of the project.
           in: path
           name: projectId
           required: true
@@ -367,7 +367,7 @@ paths:
           in: query
           name: pageToken
           type: string
-        - description: ID of the project for which to list BuildTriggers.
+        - description: Required. ID of the project for which to list BuildTriggers.
           in: path
           name: projectId
           required: true
@@ -407,7 +407,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/BuildTrigger'
-        - description: ID of the project for which to configure automatic builds.
+        - description: Required. ID of the project for which to configure automatic builds.
           in: path
           name: projectId
           required: true
@@ -432,12 +432,12 @@ paths:
         This API is experimental.
       operationId: cloudbuild.projects.triggers.delete
       parameters:
-        - description: ID of the project that owns the trigger.
+        - description: Required. ID of the project that owns the trigger.
           in: path
           name: projectId
           required: true
           type: string
-        - description: ID of the `BuildTrigger` to delete.
+        - description: Required. ID of the `BuildTrigger` to delete.
           in: path
           name: triggerId
           required: true
@@ -461,12 +461,12 @@ paths:
         This API is experimental.
       operationId: cloudbuild.projects.triggers.get
       parameters:
-        - description: ID of the project that owns the trigger.
+        - description: Required. ID of the project that owns the trigger.
           in: path
           name: projectId
           required: true
           type: string
-        - description: ID of the `BuildTrigger` to get.
+        - description: Required. Identifier (`id` or `name`) of the `BuildTrigger` to get.
           in: path
           name: triggerId
           required: true
@@ -506,12 +506,12 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/BuildTrigger'
-        - description: ID of the project that owns the trigger.
+        - description: Required. ID of the project that owns the trigger.
           in: path
           name: projectId
           required: true
           type: string
-        - description: ID of the `BuildTrigger` to update.
+        - description: Required. ID of the `BuildTrigger` to update.
           in: path
           name: triggerId
           required: true
@@ -549,12 +549,12 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/RepoSource'
-        - description: ID of the project.
+        - description: Required. ID of the project.
           in: path
           name: projectId
           required: true
           type: string
-        - description: ID of the trigger.
+        - description: Required. ID of the trigger.
           in: path
           name: triggerId
           required: true
@@ -1146,6 +1146,8 @@ definitions:
         description: |-
           GitHubEventsConfig describes the configuration of a trigger that creates
           a build whenever a GitHub event is received.
+
+          Mutually exclusive with `trigger_template`.
       id:
         description: Output only. Unique identifier of the trigger.
         type: string
@@ -1197,6 +1199,8 @@ definitions:
           Branch and tag names in trigger templates are interpreted as regular
           expressions. Any branch or tag change that matches that regular expression
           will trigger a build.
+
+          Mutually exclusive with `github`.
     type: object
   BuiltImage:
     description: An image built by the pipeline.
@@ -1433,10 +1437,15 @@ definitions:
           project ID requesting the build is assumed.
         type: string
       repoName:
-        description: |-
-          Name of the Cloud Source Repository. If omitted, the name "default" is
-          assumed.
+        description: Required. Name of the Cloud Source Repository.
         type: string
+      substitutions:
+        additionalProperties:
+          type: string
+        description: |-
+          Substitutions to use in a triggered build.
+          Should only be used with RunBuildTrigger
+        type: object
       tagName:
         description: |-
           Regex matching tags to build.

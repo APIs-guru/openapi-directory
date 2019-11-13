@@ -128,7 +128,7 @@ paths:
       operationId: oslogin.users.projects.delete
       parameters:
         - description: |-
-            A reference to the POSIX account to update. POSIX accounts are identified
+            Required. A reference to the POSIX account to update. POSIX accounts are identified
             by the project ID they are associated with. A reference to the POSIX
             account is in format `users/{user}/projects/{project}`.
           in: path
@@ -157,7 +157,7 @@ paths:
       operationId: oslogin.users.sshPublicKeys.get
       parameters:
         - description: |-
-            The fingerprint of the public key to retrieve. Public keys are identified
+            Required. The fingerprint of the public key to retrieve. Public keys are identified
             by their SHA-256 fingerprint. The fingerprint of the public key is in
             format `users/{user}/sshPublicKeys/{fingerprint}`.
           in: path
@@ -204,7 +204,7 @@ paths:
           schema:
             $ref: '#/definitions/SshPublicKey'
         - description: |-
-            The fingerprint of the public key to update. Public keys are identified by
+            Required. The fingerprint of the public key to update. Public keys are identified by
             their SHA-256 fingerprint. The fingerprint of the public key is in format
             `users/{user}/sshPublicKeys/{fingerprint}`.
           in: path
@@ -239,7 +239,7 @@ paths:
         on Google Compute Engine.
       operationId: oslogin.users.getLoginProfile
       parameters:
-        - description: 'The unique ID for the user in format `users/{user}`.'
+        - description: 'Required. The unique ID for the user in format `users/{user}`.'
           in: path
           name: name
           required: true
@@ -366,7 +366,7 @@ definitions:
       Google Compute Engine.
     properties:
       name:
-        description: A unique user ID.
+        description: Required. A unique user ID.
         type: string
       posixAccounts:
         description: The list of POSIX accounts associated with the user.

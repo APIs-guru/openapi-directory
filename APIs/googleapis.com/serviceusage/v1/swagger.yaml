@@ -210,15 +210,13 @@ paths:
       tags:
         - operations
     get:
-      description: Returns the service configuration and enabled state for a given service.
-      operationId: serviceusage.services.get
+      description: |-
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: serviceusage.operations.get
       parameters:
-        - description: |-
-            Name of the consumer and service to get the `ConsumerState` for.
-
-            An example name would be:
-            `projects/123/services/serviceusage.googleapis.com` where `123` is the
-            project number.
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -228,18 +226,18 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GoogleApiServiceusageV1Service'
+            $ref: '#/definitions/Operation'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - 'https://www.googleapis.com/auth/service.management'
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - 'https://www.googleapis.com/auth/service.management'
       tags:
-        - services
+        - operations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -1684,6 +1682,38 @@ definitions:
       usage:
         $ref: '#/definitions/Usage'
         description: Configuration controlling usage of this service.
+    type: object
+  GoogleApiServiceusageV1beta1GetServiceIdentityResponse:
+    description: Response message for getting service identity.
+    properties:
+      identity:
+        $ref: '#/definitions/GoogleApiServiceusageV1beta1ServiceIdentity'
+        description: |-
+          Service identity that service producer can use to access consumer
+          resources. If exists is true, it contains email and unique_id. If exists is
+          false, it contains pre-constructed email and empty unique_id.
+      state:
+        description: Service identity state.
+        enum:
+          - IDENTITY_STATE_UNSPECIFIED
+          - ACTIVE
+        type: string
+    type: object
+  GoogleApiServiceusageV1beta1ServiceIdentity:
+    description: |-
+      Service identity for a service. This is the identity that service producer
+      should use to access consumer resources.
+    properties:
+      email:
+        description: |-
+          The email address of the service account that a service producer would use
+          to access consumer resources.
+        type: string
+      uniqueId:
+        description: |-
+          The unique and stable id of the service account.
+          https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts#ServiceAccount
+        type: string
     type: object
   Http:
     description: |-

@@ -850,10 +850,15 @@ definitions:
           project ID requesting the build is assumed.
         type: string
       repoName:
-        description: |-
-          Name of the Cloud Source Repository. If omitted, the name "default" is
-          assumed.
+        description: Required. Name of the Cloud Source Repository.
         type: string
+      substitutions:
+        additionalProperties:
+          type: string
+        description: |-
+          Substitutions to use in a triggered build.
+          Should only be used with RunBuildTrigger
+        type: object
       tagName:
         description: |-
           Regex matching tags to build.

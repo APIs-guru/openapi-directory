@@ -121,13 +121,12 @@ paths:
   '/v3beta1/{name}':
     delete:
       description: |-
-        Deletes a long-running operation. This method indicates that the client is
-        no longer interested in the operation result. It does not cancel the
-        operation. If the server doesn't support this method, it returns
-        `google.rpc.Code.UNIMPLEMENTED`.
-      operationId: translate.projects.locations.operations.delete
+        Deletes a glossary, or cancels glossary construction
+        if the glossary isn't created yet.
+        Returns NOT_FOUND, if the glossary doesn't exist.
+      operationId: translate.projects.locations.glossaries.delete
       parameters:
-        - description: The name of the operation resource to be deleted.
+        - description: Required. The name of the glossary to delete.
           in: path
           name: name
           required: true
@@ -137,7 +136,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: '#/definitions/Operation'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -151,12 +150,11 @@ paths:
         - projects
     get:
       description: |-
-        Gets the latest state of a long-running operation.  Clients can use this
-        method to poll the operation result at intervals as recommended by the API
-        service.
-      operationId: translate.projects.locations.operations.get
+        Gets a glossary. Returns NOT_FOUND, if the glossary doesn't
+        exist.
+      operationId: translate.projects.locations.glossaries.get
       parameters:
-        - description: The name of the operation resource.
+        - description: Required. The name of the glossary to retrieve.
           in: path
           name: name
           required: true
@@ -166,7 +164,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Operation'
+            $ref: '#/definitions/Glossary'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -515,11 +513,11 @@ paths:
             The format depends on model type:
 
             - AutoML Translation models:
-              `projects/{project-id}/locations/{location-id}/models/{model-id}`
+              `projects/{project-number-or-id}/locations/{location-id}/models/{model-id}`
 
             - General (built-in) models:
-              `projects/{project-id}/locations/{location-id}/models/general/nmt`,
-              `projects/{project-id}/locations/{location-id}/models/general/base`
+              `projects/{project-number-or-id}/locations/{location-id}/models/general/nmt`,
+              `projects/{project-number-or-id}/locations/{location-id}/models/general/base`
 
 
             Returns languages supported by the specified model.
@@ -531,11 +529,11 @@ paths:
             Required. Project or location to make a call. Must refer to a caller's
             project.
 
-            Format: `projects/{project-id}` or
-            `projects/{project-id}/locations/{location-id}`.
+            Format: `projects/{project-number-or-id}` or
+            `projects/{project-number-or-id}/locations/{location-id}`.
 
-            For global calls, use `projects/{project-id}/locations/global` or
-            `projects/{project-id}`.
+            For global calls, use `projects/{project-number-or-id}/locations/global` or
+            `projects/{project-number-or-id}`.
 
             Non-global location is required for AutoML models.
 
@@ -605,7 +603,7 @@ paths:
         - description: |-
             Required. Location to make a call. Must refer to a caller's project.
 
-            Format: `projects/{project-id}/locations/{location-id}`.
+            Format: `projects/{project-number-or-id}/locations/{location-id}`.
 
             The `global` location is not supported for batch translation.
 
@@ -654,11 +652,11 @@ paths:
             Required. Project or location to make a call. Must refer to a caller's
             project.
 
-            Format: `projects/{project-id}/locations/{location-id}` or
-            `projects/{project-id}`.
+            Format: `projects/{project-number-or-id}/locations/{location-id}` or
+            `projects/{project-number-or-id}`.
 
-            For global calls, use `projects/{project-id}/locations/global` or
-            `projects/{project-id}`.
+            For global calls, use `projects/{project-number-or-id}/locations/global` or
+            `projects/{project-number-or-id}`.
 
             Only models within the same region (has same location-id) can be used.
             Otherwise an INVALID_ARGUMENT (400) error is returned.
@@ -708,11 +706,11 @@ paths:
             Required. Project or location to make a call. Must refer to a caller's
             project.
 
-            Format: `projects/{project-id}` or
-            `projects/{project-id}/locations/{location-id}`.
+            Format: `projects/{project-number-or-id}` or
+            `projects/{project-number-or-id}/locations/{location-id}`.
 
-            For global calls, use `projects/{project-id}/locations/global` or
-            `projects/{project-id}`.
+            For global calls, use `projects/{project-number-or-id}/locations/global` or
+            `projects/{project-number-or-id}`.
 
             Non-global location is required for requests using AutoML models or
             custom glossaries.
@@ -771,7 +769,7 @@ definitions:
           characters, underscores and dashes. International characters are allowed.
           Label values are optional. Label keys must start with a letter.
 
-          See https://goo.gl/xmQnxf for more information on and examples of labels.
+          See https://cloud.google.com/translate/docs/labels for more information.
         type: object
       models:
         additionalProperties:
@@ -784,11 +782,11 @@ definitions:
           The value format depends on model type:
 
           - AutoML Translation models:
-            `projects/{project-id}/locations/{location-id}/models/{model-id}`
+            `projects/{project-number-or-id}/locations/{location-id}/models/{model-id}`
 
           - General (built-in) models:
-            `projects/{project-id}/locations/{location-id}/models/general/nmt`,
-            `projects/{project-id}/locations/{location-id}/models/general/base`
+            `projects/{project-number-or-id}/locations/{location-id}/models/general/nmt`,
+            `projects/{project-number-or-id}/locations/{location-id}/models/general/base`
 
 
           If the map is empty or a specific model is
@@ -830,7 +828,7 @@ definitions:
           characters, underscores and dashes. International characters are allowed.
           Label values are optional. Label keys must start with a letter.
 
-          See https://goo.gl/xmQnxf for more information on and examples of labels.
+          See https://cloud.google.com/translate/docs/labels for more information.
         type: object
       mimeType:
         description: |-
@@ -842,10 +840,10 @@ definitions:
           Optional. The language detection model to be used.
 
           Format:
-          `projects/{project-id}/locations/{location-id}/models/language-detection/{model-id}`
+          `projects/{project-number-or-id}/locations/{location-id}/models/language-detection/{model-id}`
 
           Only one language detection model is currently supported:
-          `projects/{project-id}/locations/{location-id}/models/language-detection/default`.
+          `projects/{project-number-or-id}/locations/{location-id}/models/language-detection/default`.
 
           If not specified, the default model is used.
         type: string
@@ -929,7 +927,7 @@ definitions:
       name:
         description: |-
           Required. The resource name of the glossary. Glossary names have the form
-          `projects/{project-id}/locations/{location-id}/glossaries/{glossary-id}`.
+          `projects/{project-number-or-id}/locations/{location-id}/glossaries/{glossary-id}`.
         type: string
       submitTime:
         description: Output only. When CreateGlossary was called.
@@ -1319,7 +1317,7 @@ definitions:
           characters, underscores and dashes. International characters are allowed.
           Label values are optional. Label keys must start with a letter.
 
-          See https://goo.gl/xmQnxf for more information on and examples of labels.
+          See https://cloud.google.com/translate/docs/labels for more information.
         type: object
       mimeType:
         description: |-
@@ -1333,16 +1331,16 @@ definitions:
           The format depends on model type:
 
           - AutoML Translation models:
-            `projects/{project-id}/locations/{location-id}/models/{model-id}`
+            `projects/{project-number-or-id}/locations/{location-id}/models/{model-id}`
 
           - General (built-in) models:
-            `projects/{project-id}/locations/{location-id}/models/general/nmt`,
-            `projects/{project-id}/locations/{location-id}/models/general/base`
+            `projects/{project-number-or-id}/locations/{location-id}/models/general/nmt`,
+            `projects/{project-number-or-id}/locations/{location-id}/models/general/base`
 
 
           For global (non-regionalized) requests, use `location-id` `global`.
           For example,
-          `projects/{project-id}/locations/global/models/general/nmt`.
+          `projects/{project-number-or-id}/locations/global/models/general/nmt`.
 
           If missing, the system decides which google base model to use.
         type: string
@@ -1397,7 +1395,13 @@ definitions:
       model:
         description: |-
           Only present when `model` is present in the request.
-          This is same as `model` provided in the request.
+          `model` here is normalized to have project number.
+
+          For example:
+          If the `model` requested in TranslationTextRequest is
+          `projects/{project-id}/locations/{location-id}/models/general/nmt` then
+          `model` here would be normalized to
+          `projects/{project-number}/locations/{location-id}/models/general/nmt`.
         type: string
       translatedText:
         description: Text translated into the target language.

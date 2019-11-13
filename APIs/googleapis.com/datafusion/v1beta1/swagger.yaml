@@ -121,12 +121,39 @@ tags:
 paths:
   '/v1beta1/{name}':
     delete:
-      description: Deletes a single Date Fusion instance.
-      operationId: datafusion.projects.locations.instances.delete
+      description: |-
+        Deletes a long-running operation. This method indicates that the client is
+        no longer interested in the operation result. It does not cancel the
+        operation. If the server doesn't support this method, it returns
+        `google.rpc.Code.UNIMPLEMENTED`.
+      operationId: datafusion.projects.locations.operations.delete
       parameters:
-        - description: |-
-            The instance resource name in the format
-            projects/{project}/locations/{location}/instances/{instance}
+        - description: The name of the operation resource to be deleted.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    get:
+      description: |-
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: datafusion.projects.locations.operations.get
+      parameters:
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -137,30 +164,6 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Operation'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - projects
-    get:
-      description: Gets details of a single Data Fusion instance.
-      operationId: datafusion.projects.locations.instances.get
-      parameters:
-        - description: |-
-            The instance resource name in the format
-            projects/{project}/locations/{location}/instances/{instance}.
-          in: path
-          name: name
-          required: true
-          type: string
-          x-reservedExpansion: true
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Instance'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -557,6 +560,18 @@ paths:
       operationId: datafusion.projects.locations.instances.getIamPolicy
       parameters:
         - description: |-
+            Optional. The policy format version to be returned.
+
+            Valid values are 0, 1, and 3. Requests specifying an invalid value will be
+            rejected.
+
+            Requests for policies with any conditional bindings must specify version 3.
+            Policies without any conditional bindings may specify any valid value or
+            leave the field unset.
+          in: query
+          name: options.requestedPolicyVersion
+          type: integer
+        - description: |-
             REQUIRED: The resource for which the policy is being requested.
             See the operation documentation for the appropriate value for this field.
           in: path
@@ -605,6 +620,8 @@ paths:
       description: |-
         Sets the access control policy on the specified resource. Replaces any
         existing policy.
+
+        Can return Public Errors: NOT_FOUND, INVALID_ARGUMENT and PERMISSION_DENIED
       operationId: datafusion.projects.locations.instances.setIamPolicy
       parameters:
         - in: body
@@ -702,7 +719,7 @@ definitions:
                   {
                     "log_type": "DATA_READ",
                     "exempted_members": [
-                      "user:foo@gmail.com"
+                      "user:jose@example.com"
                     ]
                   },
                   {
@@ -714,7 +731,7 @@ definitions:
                 ]
               },
               {
-                "service": "fooservice.googleapis.com"
+                "service": "sampleservice.googleapis.com"
                 "audit_log_configs": [
                   {
                     "log_type": "DATA_READ",
@@ -722,7 +739,7 @@ definitions:
                   {
                     "log_type": "DATA_WRITE",
                     "exempted_members": [
-                      "user:bar@gmail.com"
+                      "user:aliya@example.com"
                     ]
                   }
                 ]
@@ -730,9 +747,9 @@ definitions:
             ]
           }
 
-      For fooservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ
-      logging. It also exempts foo@gmail.com from DATA_READ logging, and
-      bar@gmail.com from DATA_WRITE logging.
+      For sampleservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ
+      logging. It also exempts jose@example.com from DATA_READ logging, and
+      aliya@example.com from DATA_WRITE logging.
     properties:
       auditLogConfigs:
         description: The configuration for logging of each type of permission.
@@ -760,7 +777,7 @@ definitions:
               {
                 "log_type": "DATA_READ",
                 "exempted_members": [
-                  "user:foo@gmail.com"
+                  "user:jose@example.com"
                 ]
               },
               {
@@ -770,7 +787,7 @@ definitions:
           }
 
       This enables 'DATA_READ' and 'DATA_WRITE' logging, while exempting
-      foo@gmail.com from DATA_READ logging.
+      jose@example.com from DATA_READ logging.
     properties:
       exemptedMembers:
         description: |-
@@ -780,6 +797,8 @@ definitions:
         items:
           type: string
         type: array
+      ignoreChildExemptions:
+        type: boolean
       logType:
         description: The log type that this config enables.
         enum:
@@ -824,7 +843,7 @@ definitions:
              who is authenticated with a Google account or a service account.
 
           * `user:{emailid}`: An email address that represents a specific Google
-             account. For example, `alice@gmail.com` .
+             account. For example, `alice@example.com` .
 
 
           * `serviceAccount:{emailid}`: An email address that represents a service
@@ -909,7 +928,7 @@ definitions:
         type: array
     type: object
   CounterOptions:
-    description: |-
+    description: |
       Increment a streamz counter with the specified metric and field names.
 
       Metric names should start with a '/', generally be lowercase-only,
@@ -929,17 +948,36 @@ definitions:
 
       Examples:
         counter { metric: "/debug_access_count"  field: "iam_principal" }
-        ==> increment counter /iam/policy/backend_debug_access_count
+        ==> increment counter /iam/policy/debug_access_count
                               {iam_principal=[value of IAMContext.principal]}
-
-      At this time we do not support multiple field names (though this may be
-      supported in the future).
     properties:
+      customFields:
+        description: Custom fields.
+        items:
+          $ref: '#/definitions/CustomField'
+        type: array
       field:
         description: The field value to attribute.
         type: string
       metric:
         description: The metric to update.
+        type: string
+    type: object
+  CustomField:
+    description: |-
+      Custom fields.
+      These can be used to create a counter with arbitrary field/value
+      pairs.
+      See: go/rpcsp-custom-fields.
+    properties:
+      name:
+        description: Name is the field name.
+        type: string
+      value:
+        description: |-
+          Value is the field value. It is important that in contrast to the
+          CounterOptions.field, the value here is a constant that is not
+          derived from the IAMContext.
         type: string
     type: object
   DataAccessOptions:
@@ -1003,6 +1041,16 @@ definitions:
   Instance:
     description: Represents a Data Fusion instance.
     properties:
+      apiEndpoint:
+        description: Output only. Endpoint on which the REST APIs is accessible.
+        type: string
+      availableVersion:
+        description: |-
+          Available versions that the instance can be upgraded to using
+          UpdateInstanceRequest.
+        items:
+          $ref: '#/definitions/Version'
+        type: array
       createTime:
         description: Output only. The time the instance was created.
         format: google-datetime
@@ -1056,9 +1104,7 @@ definitions:
           the customer project."
         type: string
       serviceEndpoint:
-        description: |-
-          Output only. Endpoint on which the Data Fusion UI and REST APIs are
-          accessible.
+        description: Output only. Endpoint on which the Data Fusion UI is accessible.
         type: string
       state:
         description: Output only. The current state of this Data Fusion instance.
@@ -1071,6 +1117,8 @@ definitions:
           - UPGRADING
           - RESTARTING
           - UPDATING
+          - AUTO_UPDATING
+          - AUTO_UPGRADING
         type: string
       stateMessage:
         description: |-
@@ -1089,7 +1137,7 @@ definitions:
         format: google-datetime
         type: string
       version:
-        description: Output only. Current version of the Data Fusion.
+        description: Current version of the Data Fusion. Only specifiable in Update.
         type: string
       zone:
         description: Name of the zone in which the Data Fusion instance will be created.
@@ -1201,7 +1249,9 @@ definitions:
       network:
         description: |-
           Name of the network in the customer project with which the Tenant Project
-          will be peered for executing pipelines.
+          will be peered for executing pipelines. In case of shared VPC where the
+          network resides in another host project the network should specified in
+          the form of projects/{host-project-id}/global/networks/{network}
         type: string
     type: object
   Operation:
@@ -1284,27 +1334,36 @@ definitions:
       specify access control policies for Cloud Platform resources.
 
 
-      A `Policy` consists of a list of `bindings`. A `binding` binds a list of
-      `members` to a `role`, where the members can be user accounts, Google groups,
-      Google domains, and service accounts. A `role` is a named list of permissions
-      defined by IAM.
+      A `Policy` is a collection of `bindings`. A `binding` binds one or more
+      `members` to a single `role`. Members can be user accounts, service accounts,
+      Google groups, and domains (such as G Suite). A `role` is a named list of
+      permissions (defined by IAM or configured by users). A `binding` can
+      optionally specify a `condition`, which is a logic expression that further
+      constrains the role binding based on attributes about the request and/or
+      target resource.
 
       **JSON Example**
 
           {
             "bindings": [
               {
-                "role": "roles/owner",
+                "role": "roles/resourcemanager.organizationAdmin",
                 "members": [
                   "user:mike@example.com",
                   "group:admins@example.com",
                   "domain:google.com",
-                  "serviceAccount:my-other-app@appspot.gserviceaccount.com"
+                  "serviceAccount:my-project-id@appspot.gserviceaccount.com"
                 ]
               },
               {
-                "role": "roles/viewer",
-                "members": ["user:sean@example.com"]
+                "role": "roles/resourcemanager.organizationViewer",
+                "members": ["user:eve@example.com"],
+                "condition": {
+                  "title": "expirable access",
+                  "description": "Does not grant access after Sep 2020",
+                  "expression": "request.time <
+                  timestamp('2020-10-01T00:00:00.000Z')",
+                }
               }
             ]
           }
@@ -1316,12 +1375,15 @@ definitions:
             - user:mike@example.com
             - group:admins@example.com
             - domain:google.com
-            - serviceAccount:my-other-app@appspot.gserviceaccount.com
-            role: roles/owner
+            - serviceAccount:my-project-id@appspot.gserviceaccount.com
+            role: roles/resourcemanager.organizationAdmin
           - members:
-            - user:sean@example.com
-            role: roles/viewer
-
+            - user:eve@example.com
+            role: roles/resourcemanager.organizationViewer
+            condition:
+              title: expirable access
+              description: Does not grant access after Sep 2020
+              expression: request.time < timestamp('2020-10-01T00:00:00.000Z')
 
       For a description of IAM and its features, see the
       [IAM developer's guide](https://cloud.google.com/iam/docs).
@@ -1333,7 +1395,8 @@ definitions:
         type: array
       bindings:
         description: |-
-          Associates a list of `members` to a `role`.
+          Associates a list of `members` to a `role`. Optionally may specify a
+          `condition` that determines when binding is in effect.
           `bindings` with no members will result in an error.
         items:
           $ref: '#/definitions/Binding'
@@ -1349,7 +1412,9 @@ definitions:
           ensure that their change will be applied to the same version of the policy.
 
           If no `etag` is provided in the call to `setIamPolicy`, then the existing
-          policy is overwritten blindly.
+          policy is overwritten. Due to blind-set semantics of an etag-less policy,
+          'setIamPolicy' will not fail even if either of incoming or stored policy
+          does not meet the version requirements.
         format: byte
         type: string
       iamOwned:
@@ -1369,7 +1434,20 @@ definitions:
           $ref: '#/definitions/Rule'
         type: array
       version:
-        description: Deprecated.
+        description: |-
+          Specifies the format of the policy.
+
+          Valid values are 0, 1, and 3. Requests specifying an invalid value will be
+          rejected.
+
+          Operations affecting conditional bindings must specify version 3. This can
+          be either setting a conditional policy, modifying a conditional binding,
+          or removing a conditional binding from the stored conditional policy.
+          Operations on non-conditional policies may specify any valid value or
+          leave the field unset.
+
+          If no etag is provided in the call to `setIamPolicy`, any version
+          compliance checks on the incoming and/or stored policy is skipped.
         format: int32
         type: integer
     type: object
@@ -1511,4 +1589,11 @@ definitions:
       Request message for upgrading a Data Fusion instance.
       To change the instance properties, instance update should be used.
     properties: {}
+    type: object
+  Version:
+    description: The Data Fusion version.
+    properties:
+      versionNumber:
+        description: 'The version number of the Data Fusion instance, such as ''6.0.1.0''.'
+        type: string
     type: object

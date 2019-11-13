@@ -138,7 +138,9 @@ paths:
         contact groups are not populated.
       operationId: people.contactGroups.list
       parameters:
-        - description: The maximum number of resources to return.
+        - description: |-
+            Optional. The maximum number of resources to return. Valid values are between 1 and
+            1000, inclusive. Defaults to 30 if not set or set to 0.
           in: query
           name: pageSize
           type: integer
@@ -210,12 +212,14 @@ paths:
         a list of contact group resource names.
       operationId: people.contactGroups.batchGet
       parameters:
-        - description: Specifies the maximum number of members to return for each group.
+        - description: |-
+            Optional. Specifies the maximum number of members to return for each group. Defaults
+            to 0 if not set, which will return zero members.
           in: query
           name: maxMembers
           type: integer
         - collectionFormat: multi
-          description: The resource names of the contact groups to get.
+          description: Required. The resource names of the contact groups to get.
           in: query
           items:
             type: string
@@ -260,9 +264,8 @@ paths:
       operationId: people.people.getBatchGet
       parameters:
         - description: |-
-            **Required.** A field mask to restrict which fields on each person are
-            returned. Multiple fields can be specified by separating them with commas.
-            Valid values are:
+            Required. A field mask to restrict which fields on each person are returned. Multiple
+            fields can be specified by separating them with commas. Valid values are:
 
             * addresses
             * ageRanges
@@ -297,15 +300,15 @@ paths:
           name: personFields
           type: string
         - description: |-
-            **Required.** Comma-separated list of person fields to be included in the
-            response. Each path should start with `person.`: for example,
-            `person.names` or `person.photos`.
+            Required. Comma-separated list of person fields to be included in the response. Each
+            path should start with `person.`: for example, `person.names` or
+            `person.photos`.
           in: query
           name: requestMask.includeField
           type: string
         - collectionFormat: multi
           description: |-
-            The resource names of the people to provide information about.
+            Required. The resource names of the people to provide information about.
 
             - To get information about the authenticated user, specify `people/me`.
             - To get information about a google account, specify
@@ -393,10 +396,6 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/Person'
-        - description: The resource name of the owning person resource.
-          in: query
-          name: parent
-          type: string
       responses:
         '200':
           description: Successful response
@@ -416,11 +415,11 @@ paths:
         specifying a contact group resource name.
       operationId: people.contactGroups.delete
       parameters:
-        - description: Set to true to also delete the contacts in the specified group.
+        - description: Optional. Set to true to also delete the contacts in the specified group.
           in: query
           name: deleteContacts
           type: boolean
-        - description: The resource name of the contact group to delete.
+        - description: Required. The resource name of the contact group to delete.
           in: path
           name: resourceName
           required: true
@@ -444,18 +443,20 @@ paths:
         a contact group resource name.
       operationId: people.contactGroups.get
       parameters:
-        - description: Specifies the maximum number of members to return.
+        - description: |-
+            Optional. Specifies the maximum number of members to return. Defaults to 0 if not
+            set, which will return zero members.
           in: query
           name: maxMembers
           type: integer
         - description: |-
-            **Required.** Comma-separated list of person fields to be included in the
-            response. Each path should start with `person.`: for example,
-            `person.names` or `person.photos`.
+            Required. Comma-separated list of person fields to be included in the response. Each
+            path should start with `person.`: for example, `person.names` or
+            `person.photos`.
           in: query
           name: requestMask.includeField
           type: string
-        - description: The resource name of the contact group to get.
+        - description: Required. The resource name of the contact group to get.
           in: path
           name: resourceName
           required: true
@@ -553,8 +554,8 @@ paths:
       operationId: people.people.connections.list
       parameters:
         - description: |-
-            The number of connections to include in the response. Valid values are
-            between 1 and 2000, inclusive. Defaults to 100.
+            Optional. The number of connections to include in the response. Valid values are
+            between 1 and 2000, inclusive. Defaults to 100 if not set or set to 0.
           in: query
           name: pageSize
           type: integer
@@ -563,9 +564,8 @@ paths:
           name: pageToken
           type: string
         - description: |-
-            **Required.** A field mask to restrict which fields on each person are
-            returned. Multiple fields can be specified by separating them with commas.
-            Valid values are:
+            Required. A field mask to restrict which fields on each person are returned. Multiple
+            fields can be specified by separating them with commas. Valid values are:
 
             * addresses
             * ageRanges
@@ -600,9 +600,9 @@ paths:
           name: personFields
           type: string
         - description: |-
-            **Required.** Comma-separated list of person fields to be included in the
-            response. Each path should start with `person.`: for example,
-            `person.names` or `person.photos`.
+            Required. Comma-separated list of person fields to be included in the response. Each
+            path should start with `person.`: for example, `person.names` or
+            `person.photos`.
           in: query
           name: requestMask.includeField
           type: string
@@ -614,7 +614,7 @@ paths:
           in: query
           name: requestSyncToken
           type: boolean
-        - description: The resource name to return connections for. Only `people/me` is valid.
+        - description: Required. The resource name to return connections for. Only `people/me` is valid.
           in: path
           name: resourceName
           required: true
@@ -692,7 +692,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/ModifyContactGroupMembersRequest'
-        - description: The resource name of the contact group to modify.
+        - description: Required. The resource name of the contact group to modify.
           in: path
           name: resourceName
           required: true
@@ -715,7 +715,7 @@ paths:
       description: Delete a contact person. Any non-contact data will not be deleted.
       operationId: people.people.deleteContact
       parameters:
-        - description: The resource name of the contact to delete.
+        - description: Required. The resource name of the contact to delete.
           in: path
           name: resourceName
           required: true
@@ -751,10 +751,9 @@ paths:
       operationId: people.people.deleteContactPhoto
       parameters:
         - description: |-
-            **Optional.** Not specifying any fields will skip the post mutate read.
-            A field mask to restrict which fields on the person are
-            returned. Multiple fields can be specified by separating them with commas.
-            Valid values are:
+            Optional. A field mask to restrict which fields on the person are returned. Multiple
+            fields can be specified by separating them with commas. Defaults to empty
+            if not set, which will skip the post mutate get. Valid values are:
 
             * addresses
             * ageRanges
@@ -788,7 +787,7 @@ paths:
           in: query
           name: personFields
           type: string
-        - description: The resource name of the contact whose photo will be deleted.
+        - description: Required. The resource name of the contact whose photo will be deleted.
           in: path
           name: resourceName
           required: true
@@ -862,8 +861,8 @@ paths:
           type: string
           x-reservedExpansion: true
         - description: |-
-            **Required.** A field mask to restrict which fields on the person are
-            updated. Multiple fields can be specified by separating them with commas.
+            Required. A field mask to restrict which fields on the person are updated. Multiple
+            fields can be specified by separating them with commas.
             All updated fields will be replaced. Valid values are:
 
             * addresses
@@ -922,7 +921,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/UpdateContactPhotoRequest'
-        - description: Person resource name
+        - description: Required. Person resource name
           in: path
           name: resourceName
           required: true
@@ -962,7 +961,7 @@ definitions:
         type: string
       formattedType:
         description: |-
-          The read-only type of the address translated and formatted in the viewer's
+          Output only. The type of the address translated and formatted in the viewer's
           account locale or the `Accept-Language` HTTP header locale.
         type: string
       formattedValue:
@@ -1072,12 +1071,12 @@ definitions:
         type: string
       formattedName:
         description: |-
-          The read-only name translated and formatted in the viewer's account locale
+          Output only. The name translated and formatted in the viewer's account locale
           or the `Accept-Language` HTTP header locale for system groups names.
           Group names set by the owner are the same as name.
         type: string
       groupType:
-        description: The read-only contact group type.
+        description: Output only. The contact group type.
         enum:
           - GROUP_TYPE_UNSPECIFIED
           - USER_CONTACT_GROUP
@@ -1085,13 +1084,13 @@ definitions:
         type: string
       memberCount:
         description: |-
-          The total number of contacts in the group irrespective of max members in
+          Output only. The total number of contacts in the group irrespective of max members in
           specified in the request.
         format: int32
         type: integer
       memberResourceNames:
         description: |-
-          The list of contact person resource names that are members of the contact
+          Output only. The list of contact person resource names that are members of the contact
           group. The field is not populated for LIST requests and can only be updated
           through the
           [ModifyContactGroupMembers](/people/api/rest/v1/contactgroups/members/modify).
@@ -1100,7 +1099,7 @@ definitions:
         type: array
       metadata:
         $ref: '#/definitions/ContactGroupMetadata'
-        description: Metadata about the contact group.
+        description: Output only. Metadata about the contact group.
       name:
         description: |-
           The contact group name set by the group owner or a system provided name
@@ -1116,7 +1115,7 @@ definitions:
     description: A Google contact group membership.
     properties:
       contactGroupId:
-        description: The read-only contact group ID for the contact group membership.
+        description: Output only. The contact group ID for the contact group membership.
         type: string
       contactGroupResourceName:
         description: |-
@@ -1129,16 +1128,16 @@ definitions:
         type: string
     type: object
   ContactGroupMetadata:
-    description: The read-only metadata about a contact group.
+    description: The metadata about a contact group.
     properties:
       deleted:
         description: |-
-          True if the contact group resource has been deleted. Populated only for
+          Output only. True if the contact group resource has been deleted. Populated only for
           [`ListContactGroups`](/people/api/rest/v1/contactgroups/list) requests
           that include a sync token.
         type: boolean
       updateTime:
-        description: The time the group was last updated.
+        description: Output only. The time the group was last updated.
         format: google-datetime
         type: string
     type: object
@@ -1157,7 +1156,7 @@ definitions:
     type: object
   CoverPhoto:
     description: |-
-      A person's read-only cover photo. A large image shown on the person's
+      A person's cover photo. A large image shown on the person's
       profile page that represents who they are or what they care about.
     properties:
       default:
@@ -1177,7 +1176,7 @@ definitions:
     properties:
       contactGroup:
         $ref: '#/definitions/ContactGroup'
-        description: The contact group to create.
+        description: Required. The contact group to create.
     type: object
   Date:
     description: |-
@@ -1222,7 +1221,7 @@ definitions:
           DeleteContactPhotoRequest; otherwise this will be unset.
     type: object
   DomainMembership:
-    description: A read-only G Suite Domain membership.
+    description: A G Suite Domain membership.
     properties:
       inViewerDomain:
         description: True if the person is in the viewer's G Suite domain.
@@ -1236,7 +1235,7 @@ definitions:
         type: string
       formattedType:
         description: |-
-          The read-only type of the email address translated and formatted in the
+          Output only. The type of the email address translated and formatted in the
           viewer's account locale or the `Accept-Language` HTTP header locale.
         type: string
       metadata:
@@ -1276,7 +1275,7 @@ definitions:
         description: The date of the event.
       formattedType:
         description: |-
-          The read-only type of the event translated and formatted in the
+          Output only. The type of the event translated and formatted in the
           viewer's account locale or the `Accept-Language` HTTP header locale.
         type: string
       metadata:
@@ -1304,7 +1303,7 @@ definitions:
         description: The source of the field.
       verified:
         description: |-
-          True if the field is verified; false if the field is unverified. A
+          Output only. True if the field is verified; false if the field is unverified. A
           verified field is typically a name, email address, phone number, or
           website that has been confirmed to be owned by the person.
         type: boolean
@@ -1314,7 +1313,7 @@ definitions:
     properties:
       formattedValue:
         description: |-
-          The read-only value of the gender translated and formatted in the viewer's
+          Output only. The value of the gender translated and formatted in the viewer's
           account locale or the `Accept-Language` HTTP header locale.
         type: string
       metadata:
@@ -1344,12 +1343,12 @@ definitions:
     properties:
       formattedProtocol:
         description: |-
-          The read-only protocol of the IM client formatted in the viewer's account
+          Output only. The protocol of the IM client formatted in the viewer's account
           locale or the `Accept-Language` HTTP header locale.
         type: string
       formattedType:
         description: |-
-          The read-only type of the IM client translated and formatted in the
+          Output only. The type of the IM client translated and formatted in the
           viewer's account locale or the `Accept-Language` HTTP header locale.
         type: string
       metadata:
@@ -1460,7 +1459,7 @@ definitions:
         description: The contact group membership.
       domainMembership:
         $ref: '#/definitions/DomainMembership'
-        description: The read-only domain membership.
+        description: Output only. The domain membership.
       metadata:
         $ref: '#/definitions/FieldMetadata'
         description: Metadata about the membership.
@@ -1473,15 +1472,15 @@ definitions:
     properties:
       resourceNamesToAdd:
         description: |-
-          The resource names of the contact people to add in the form of in the form
+          The resource names of the contact people to add in the form of
           `people/`<var>person_id</var>.
         items:
           type: string
         type: array
       resourceNamesToRemove:
         description: |-
-          The resource names of the contact people to remove in the form of in the
-          form of `people/`<var>person_id</var>.
+          The resource names of the contact people to remove in the form of
+          `people/`<var>person_id</var>.
         items:
           type: string
         type: array
@@ -1507,12 +1506,12 @@ definitions:
     properties:
       displayName:
         description: |-
-          The read-only display name formatted according to the locale specified by
+          Output only. The display name formatted according to the locale specified by
           the viewer's account or the `Accept-Language` HTTP header.
         type: string
       displayNameLastFirst:
         description: |-
-          The read-only display name with the last name first formatted according to
+          Output only. The display name with the last name first formatted according to
           the locale specified by the viewer's account or the
           `Accept-Language` HTTP header.
         type: string
@@ -1605,7 +1604,7 @@ definitions:
         description: The end date when the person left the organization.
       formattedType:
         description: |-
-          The read-only type of the organization translated and formatted in the
+          Output only. The type of the organization translated and formatted in the
           viewer's account locale or the `Accept-Language` HTTP header locale.
         type: string
       jobDescription:
@@ -1659,9 +1658,9 @@ definitions:
         type: array
       ageRange:
         description: |-
-          **DEPRECATED** (Please use `person.ageRanges` instead)**
+          Output only. **DEPRECATED** (Please use `person.ageRanges` instead)**
 
-          The person's read-only age range.
+          The person's age range.
         enum:
           - AGE_RANGE_UNSPECIFIED
           - LESS_THAN_EIGHTEEN
@@ -1669,7 +1668,7 @@ definitions:
           - TWENTY_ONE_OR_OLDER
         type: string
       ageRanges:
-        description: The person's read-only age ranges.
+        description: Output only. The person's age ranges.
         items:
           $ref: '#/definitions/AgeRangeType'
         type: array
@@ -1689,7 +1688,7 @@ definitions:
           $ref: '#/definitions/BraggingRights'
         type: array
       coverPhotos:
-        description: The person's read-only cover photos.
+        description: Output only. The person's cover photos.
         items:
           $ref: '#/definitions/CoverPhoto'
         type: array
@@ -1735,7 +1734,7 @@ definitions:
         type: array
       metadata:
         $ref: '#/definitions/PersonMetadata'
-        description: Read-only metadata about the person.
+        description: Output only. Metadata about the person.
       names:
         description: The person's names.
         items:
@@ -1762,7 +1761,7 @@ definitions:
           $ref: '#/definitions/PhoneNumber'
         type: array
       photos:
-        description: The person's read-only photos.
+        description: Output only. The person's photos.
         items:
           $ref: '#/definitions/Photo'
         type: array
@@ -1772,12 +1771,12 @@ definitions:
           $ref: '#/definitions/Relation'
         type: array
       relationshipInterests:
-        description: The person's read-only relationship interests.
+        description: Output only. The person's relationship interests.
         items:
           $ref: '#/definitions/RelationshipInterest'
         type: array
       relationshipStatuses:
-        description: The person's read-only relationship statuses.
+        description: Output only. The person's relationship statuses.
         items:
           $ref: '#/definitions/RelationshipStatus'
         type: array
@@ -1803,7 +1802,7 @@ definitions:
           $ref: '#/definitions/Skill'
         type: array
       taglines:
-        description: The person's read-only taglines.
+        description: Output only. The person's taglines.
         items:
           $ref: '#/definitions/Tagline'
         type: array
@@ -1819,22 +1818,22 @@ definitions:
         type: array
     type: object
   PersonMetadata:
-    description: The read-only metadata about a person.
+    description: The metadata about a person.
     properties:
       deleted:
         description: |-
-          True if the person resource has been deleted. Populated only for
+          Output only. True if the person resource has been deleted. Populated only for
           [`connections.list`](/people/api/rest/v1/people.connections/list) requests
           that include a sync token.
         type: boolean
       linkedPeopleResourceNames:
-        description: Resource names of people linked to this resource.
+        description: Output only. Resource names of people linked to this resource.
         items:
           type: string
         type: array
       objectType:
         description: |-
-          **DEPRECATED** (Please use
+          Output only. **DEPRECATED** (Please use
           `person.metadata.sources.profileMetadata.objectType` instead)
 
           The type of the person object.
@@ -1845,7 +1844,7 @@ definitions:
         type: string
       previousResourceNames:
         description: |-
-          Any former resource names this person has had. Populated only for
+          Output only. Any former resource names this person has had. Populated only for
           [`connections.list`](/people/api/rest/v1/people.connections/list) requests
           that include a sync token.
 
@@ -1893,13 +1892,13 @@ definitions:
     properties:
       canonicalForm:
         description: |-
-          The read-only canonicalized [ITU-T
+          Output only. The canonicalized [ITU-T
           E.164](https://law.resource.org/pub/us/cfr/ibr/004/itu-t.E.164.1.2008.pdf)
           form of the phone number.
         type: string
       formattedType:
         description: |-
-          The read-only type of the phone number translated and formatted in the
+          Output only. The type of the phone number translated and formatted in the
           viewer's account locale or the `Accept-Language` HTTP header locale.
         type: string
       metadata:
@@ -1929,7 +1928,7 @@ definitions:
     type: object
   Photo:
     description: |-
-      A person's read-only photo. A picture shown next to the person's name to
+      A person's photo. A picture shown next to the person's name to
       help others recognize the person.
     properties:
       default:
@@ -1948,17 +1947,17 @@ definitions:
         type: string
     type: object
   ProfileMetadata:
-    description: The read-only metadata about a profile.
+    description: The metadata about a profile.
     properties:
       objectType:
-        description: The profile object type.
+        description: Output only. The profile object type.
         enum:
           - OBJECT_TYPE_UNSPECIFIED
           - PERSON
           - PAGE
         type: string
       userTypes:
-        description: The user types.
+        description: Output only. The user types.
         items:
           enum:
             - USER_TYPE_UNKNOWN
@@ -1973,8 +1972,8 @@ definitions:
     properties:
       formattedType:
         description: |-
-          The type of the relation translated and formatted in the viewer's account
-          locale or the locale specified in the Accept-Language HTTP header.
+          Output only. The type of the relation translated and formatted in the viewer's
+          account locale or the locale specified in the Accept-Language HTTP header.
         type: string
       metadata:
         $ref: '#/definitions/FieldMetadata'
@@ -2004,13 +2003,13 @@ definitions:
         type: string
     type: object
   RelationshipInterest:
-    description: A person's read-only relationship interest .
+    description: A person's relationship interest .
     properties:
       formattedValue:
         description: |-
-          The value of the relationship interest translated and formatted in the
-          viewer's account locale or the locale specified in the Accept-Language
-          HTTP header.
+          Output only. The value of the relationship interest translated and formatted
+          in the viewer's account locale or the locale specified in the
+          Accept-Language HTTP header.
         type: string
       metadata:
         $ref: '#/definitions/FieldMetadata'
@@ -2027,11 +2026,11 @@ definitions:
         type: string
     type: object
   RelationshipStatus:
-    description: A person's read-only relationship status.
+    description: A person's relationship status.
     properties:
       formattedValue:
         description: |-
-          The read-only value of the relationship status translated and formatted in
+          Output only. The value of the relationship status translated and formatted in
           the viewer's account locale or the `Accept-Language` HTTP header locale.
         type: string
       metadata:
@@ -2075,7 +2074,7 @@ definitions:
     properties:
       formattedType:
         description: |-
-          The read-only type of the SIP address translated and formatted in the
+          Output only. The type of the SIP address translated and formatted in the
           viewer's account locale or the `Accept-Language` HTTP header locale.
         type: string
       metadata:
@@ -2124,7 +2123,7 @@ definitions:
       profileMetadata:
         $ref: '#/definitions/ProfileMetadata'
         description: |-
-          **Only populated in `person.metadata.sources`.**
+          Output only. **Only populated in `person.metadata.sources`.**
 
           Metadata about a source of type PROFILE.
       type:
@@ -2138,7 +2137,7 @@ definitions:
         type: string
       updateTime:
         description: |-
-          **Only populated in `person.metadata.sources`.**
+          Output only. **Only populated in `person.metadata.sources`.**
 
           Last update timestamp of this source.
         format: google-datetime
@@ -2175,7 +2174,7 @@ definitions:
         type: string
     type: object
   Tagline:
-    description: A read-only brief one-line description of the person.
+    description: A brief one-line description of the person.
     properties:
       metadata:
         $ref: '#/definitions/FieldMetadata'
@@ -2191,7 +2190,7 @@ definitions:
     properties:
       contactGroup:
         $ref: '#/definitions/ContactGroup'
-        description: The contact group to update.
+        description: Required. The contact group to update.
     type: object
   UpdateContactPhotoRequest:
     description: |-
@@ -2200,10 +2199,9 @@ definitions:
     properties:
       personFields:
         description: |-
-          **Optional.** Not specifying any fields will skip the post mutate read.
-          A field mask to restrict which fields on the person are
-          returned. Multiple fields can be specified by separating them with commas.
-          Valid values are:
+          Optional. A field mask to restrict which fields on the person are returned. Multiple
+          fields can be specified by separating them with commas. Defaults to empty
+          if not set, which will skip the post mutate get. Valid values are:
 
           * addresses
           * ageRanges
@@ -2237,7 +2235,7 @@ definitions:
         format: google-fieldmask
         type: string
       photoBytes:
-        description: Raw photo bytes
+        description: Required. Raw photo bytes
         format: byte
         type: string
     type: object
@@ -2255,7 +2253,7 @@ definitions:
     properties:
       formattedType:
         description: |-
-          The read-only type of the URL translated and formatted in the viewer's
+          Output only. The type of the URL translated and formatted in the viewer's
           account locale or the `Accept-Language` HTTP header locale.
         type: string
       metadata:

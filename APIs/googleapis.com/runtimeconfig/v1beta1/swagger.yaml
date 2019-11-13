@@ -708,6 +708,8 @@ paths:
       description: |-
         Sets the access control policy on the specified resource. Replaces any
         existing policy.
+
+        Can return Public Errors: NOT_FOUND, INVALID_ARGUMENT and PERMISSION_DENIED
       operationId: runtimeconfig.projects.configs.setIamPolicy
       parameters:
         - in: body

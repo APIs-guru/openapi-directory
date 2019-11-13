@@ -1522,6 +1522,9 @@ definitions:
       enableInboundForwarding:
         description: 'Allows networks bound to this policy to receive DNS queries sent by VMs or applications over VPN connections. When enabled, a virtual IP address will be allocated from each of the sub-networks that are bound to this policy.'
         type: boolean
+      enableLogging:
+        description: Controls whether logging is enabled for the networks bound to this policy. Defaults to no logging if not set.
+        type: boolean
       id:
         description: Unique identifier for the resource; defined by the server (output only).
         format: uint64

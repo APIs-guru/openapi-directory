@@ -3456,7 +3456,7 @@ paths:
       - $ref: '#/parameters/userIp'
 definitions:
   Account:
-    description: 'Account data. After the creation of a new account it may take a few minutes before it is fully operational. The methods delete, insert, patch, and update require the admin role.'
+    description: 'Account data. After the creation of a new account it may take a few minutes before it is fully operational. The methods delete, insert, and update require the admin role.'
     properties:
       adsLinks:
         description: 'List of linked Ads accounts that are active or pending approval. To create a new link request, add a new link with status active to the list. It will remain in a pending state until approved or rejected either in the Ads interface or through the AdWords API. To delete an active link, or to cancel a link request, remove it from the list.'
@@ -4287,7 +4287,14 @@ definitions:
           type: string
         type: array
       includedDestinations:
-        description: The list of destinations to include for this target (corresponds to checked check boxes in Merchant Center). Default destinations are always included unless provided in excludedDestinations.
+        description: |-
+          The list of destinations to include for this target (corresponds to checked check boxes in Merchant Center). Default destinations are always included unless provided in excludedDestinations.
+
+          List of supported destinations (if available to the account):  
+          - DisplayAds 
+          - Shopping 
+          - ShoppingActions 
+          - SurfacesAcrossGoogle
         items:
           type: string
         type: array
@@ -4933,7 +4940,7 @@ definitions:
         type: string
     type: object
   Order:
-    description: Order. All methods require the order manager role.
+    description: Order. Production access (all methods) requires the order manager role. Sandbox access does not.
     properties:
       acknowledged:
         description: Whether the order was acknowledged.
@@ -5348,12 +5355,15 @@ definitions:
           $ref: '#/definitions/OrderPromotionItem'
         type: array
       appliedItems:
-        description: Items which this promotion have been applied to.
+        description: Items which this promotion have been applied to. Do not provide for orders.createtestorder.
         items:
           $ref: '#/definitions/OrderPromotionItem'
         type: array
+      endTime:
+        description: 'Promotion end time in ISO 8601 format. Date, time, and offset required, e.g., "2020-01-02T09:00:00+01:00" or "2020-01-02T09:00:00Z".'
+        type: string
       funder:
-        description: The party funding the promotion.
+        description: The party funding the promotion. Only merchant is supported for orders.createtestorder.
         type: string
       merchantPromotionId:
         description: This field is used to identify promotions within merchants' own systems.
@@ -5362,29 +5372,37 @@ definitions:
         $ref: '#/definitions/Price'
         description: Estimated discount applied to price. Amount is pre-tax or post-tax depending on location of order.
       shortTitle:
-        description: A short title of the promotion to be shown on the checkout page.
+        description: A short title of the promotion to be shown on the checkout page. Do not provide for orders.createtestorder.
+        type: string
+      startTime:
+        description: 'Promotion start time in ISO 8601 format. Date, time, and offset required, e.g., "2020-01-02T09:00:00+01:00" or "2020-01-02T09:00:00Z".'
         type: string
       subtype:
-        description: The category of the promotion.
+        description: The category of the promotion. Only moneyOff is supported for orders.createtestorder.
         type: string
       taxValue:
         $ref: '#/definitions/Price'
-        description: Estimated discount applied to tax (if allowed by law).
+        description: Estimated discount applied to tax (if allowed by law). Do not provide for orders.createtestorder.
       title:
         description: The title of the promotion.
         type: string
       type:
-        description: The scope of the promotion.
+        description: The scope of the promotion. Only product is supported for orders.createtestorder.
         type: string
     type: object
   OrderPromotionItem:
     properties:
       lineItemId:
+        description: The line item ID of a product. Do not provide for orders.createtestorder.
+        type: string
+      offerId:
+        description: Offer ID of a product. Only for orders.createtestorder.
         type: string
       productId:
+        description: orders.createtestorder.
         type: string
       quantity:
-        description: The quantity of the associated product.
+        description: The quantity of the associated product. Do not provide for orders.createtestorder.
         format: int32
         type: integer
     type: object
@@ -5499,7 +5517,8 @@ definitions:
           - "lasership" 
           - "mpx" 
           - "uds" 
-          - "efw"  
+          - "efw" 
+          - "jd logistics"  
 
           Acceptable values for FR are:  
           - "colissimo" 
@@ -5509,7 +5528,9 @@ definitions:
           - "bpost" 
           - "colis prive" 
           - "boxtal" 
-          - "geodis"
+          - "geodis" 
+          - "tnt" 
+          - "la poste"
         type: string
       creationDate:
         description: 'Date on which the shipment has been created, in ISO 8601 format.'
@@ -6686,7 +6707,7 @@ definitions:
         description: The cut of the item. Recommended for apparel items.
         type: string
       sizes:
-        description: Size of the item.
+        description: 'Size of the item. Only one value is allowed. For variants with different sizes, insert a separate product for each size with the same itemGroupId value (see size definition).'
         items:
           type: string
         type: array

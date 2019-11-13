@@ -122,12 +122,10 @@ tags:
 paths:
   '/v1beta1/{name}':
     delete:
-      description: Deletes the specified version.
-      operationId: firebasehosting.sites.versions.delete
+      description: Deletes the existing domain mapping on the specified site.
+      operationId: firebasehosting.sites.domains.delete
       parameters:
-        - description: |-
-            Required. The name of the version to be deleted, in the format:
-            <code>sites/<var>site-name</var>/versions/<var>versionID</var></code>
+        - description: Required. The name of the domain association to delete.
           in: path
           name: name
           required: true
@@ -898,6 +896,22 @@ definitions:
           using a forward slash and the hash of the file appended to the end.
         type: string
     type: object
+  PreviewConfig:
+    description: |-
+      Version preview configuration. If active and unexpired,
+      this version will be accessible via a custom URL even
+      if it is not the currently released version.
+    properties:
+      active:
+        description: 'If true, preview URLs are enabled for this version.'
+        type: boolean
+      expireTime:
+        description: |-
+          Indicates the expiration time for previewing this
+          version; preview URL requests received after this time will 404.
+        format: google-datetime
+        type: string
+    type: object
   Redirect:
     description: |-
       A [`redirect`](/docs/hosting/full-config#redirects) represents the
@@ -1115,6 +1129,13 @@ definitions:
           This name is provided in the response body when you call the
           [`CreateVersion`](../sites.versions/create) endpoint.
         type: string
+      preview:
+        $ref: '#/definitions/PreviewConfig'
+        description: |-
+          Version preview configuration for the site version. This configuration
+          specfies whether previewing is enabled for this site version. Version
+          previews allow you to preview your site at a custom URL before
+          releasing it as the live version.
       status:
         description: |-
           The deploy status of a version.

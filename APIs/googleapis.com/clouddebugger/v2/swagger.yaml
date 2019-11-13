@@ -183,7 +183,7 @@ paths:
         setting those breakpoints again.
       operationId: clouddebugger.controller.debuggees.breakpoints.list
       parameters:
-        - description: Identifies the debuggee.
+        - description: Required. Identifies the debuggee.
           in: path
           name: debuggeeId
           required: true
@@ -263,7 +263,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/UpdateActiveBreakpointRequest'
-        - description: Identifies the debuggee being debugged.
+        - description: Required. Identifies the debuggee being debugged.
           in: path
           name: debuggeeId
           required: true
@@ -295,7 +295,7 @@ paths:
       operationId: clouddebugger.debugger.debuggees.list
       parameters:
         - description: |-
-            The client version making the call.
+            Required. The client version making the call.
             Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
           in: query
           name: clientVersion
@@ -306,7 +306,7 @@ paths:
           in: query
           name: includeInactive
           type: boolean
-        - description: Project number of a Google Cloud project whose debuggees to list.
+        - description: Required. Project number of a Google Cloud project whose debuggees to list.
           in: query
           name: project
           type: string
@@ -351,12 +351,12 @@ paths:
           name: action.value
           type: string
         - description: |-
-            The client version making the call.
+            Required. The client version making the call.
             Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
           in: query
           name: clientVersion
           type: string
-        - description: ID of the debuggee whose breakpoints to list.
+        - description: Required. ID of the debuggee whose breakpoints to list.
           in: path
           name: debuggeeId
           required: true
@@ -438,12 +438,12 @@ paths:
           schema:
             $ref: '#/definitions/Breakpoint'
         - description: |-
-            The client version making the call.
+            Required. The client version making the call.
             Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
           in: query
           name: clientVersion
           type: string
-        - description: ID of the debuggee where the breakpoint is to be set.
+        - description: Required. ID of the debuggee where the breakpoint is to be set.
           in: path
           name: debuggeeId
           required: true
@@ -469,18 +469,18 @@ paths:
       description: Deletes the breakpoint from the debuggee.
       operationId: clouddebugger.debugger.debuggees.breakpoints.delete
       parameters:
-        - description: ID of the breakpoint to delete.
+        - description: Required. ID of the breakpoint to delete.
           in: path
           name: breakpointId
           required: true
           type: string
         - description: |-
-            The client version making the call.
+            Required. The client version making the call.
             Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
           in: query
           name: clientVersion
           type: string
-        - description: ID of the debuggee whose breakpoint to delete.
+        - description: Required. ID of the debuggee whose breakpoint to delete.
           in: path
           name: debuggeeId
           required: true
@@ -505,18 +505,18 @@ paths:
       description: Gets breakpoint information.
       operationId: clouddebugger.debugger.debuggees.breakpoints.get
       parameters:
-        - description: ID of the breakpoint to get.
+        - description: Required. ID of the breakpoint to get.
           in: path
           name: breakpointId
           required: true
           type: string
         - description: |-
-            The client version making the call.
+            Required. The client version making the call.
             Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
           in: query
           name: clientVersion
           type: string
-        - description: ID of the debuggee whose breakpoint to get.
+        - description: Required. ID of the debuggee whose breakpoint to get.
           in: path
           name: debuggeeId
           required: true
@@ -979,7 +979,7 @@ definitions:
       debuggee:
         $ref: '#/definitions/Debuggee'
         description: |-
-          Debuggee information to register.
+          Required. Debuggee information to register.
           The fields `project`, `uniquifier`, `description` and `agent_version`
           of the debuggee must be set.
     type: object
@@ -1106,7 +1106,7 @@ definitions:
       breakpoint:
         $ref: '#/definitions/Breakpoint'
         description: |-
-          Updated breakpoint information.
+          Required. Updated breakpoint information.
           The field `id` must be set.
           The agent must echo all Breakpoint specification fields in the update.
     type: object

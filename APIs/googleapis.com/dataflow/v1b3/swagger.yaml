@@ -4254,6 +4254,13 @@ definitions:
           Whether to bypass the safety checks for the job's temporary directory.
           Use with caution.
         type: boolean
+      ipConfiguration:
+        description: Configuration for VM IPs.
+        enum:
+          - WORKER_IP_UNSPECIFIED
+          - WORKER_IP_PUBLIC
+          - WORKER_IP_PRIVATE
+        type: string
       kmsKeyName:
         description: |-
           Optional. Name for the Cloud KMS key for the job.
@@ -4293,11 +4300,6 @@ definitions:
           The Cloud Storage path to use for temporary files.
           Must be a valid Cloud Storage URL, beginning with `gs://`.
         type: string
-      usePrivateIps:
-        description: |-
-          Optional. Specifies whether worker pools should be started with private IP addresses.
-          False by default.
-        type: boolean
       workerRegion:
         description: |-
           The Compute Engine region

@@ -7,12 +7,12 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: Views and manages licenses for your domain.
+  description: Licensing API to view and manage licenses for your domain
   license:
     name: Creative Commons Attribution 3.0
     url: 'http://creativecommons.org/licenses/by/3.0/'
   termsOfService: 'https://developers.google.com/terms/'
-  title: Enterprise License Manager
+  title: Licensing
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -31,7 +31,7 @@ info:
   x-providerName: googleapis.com
   x-serviceName: licensing
 externalDocs:
-  url: 'https://developers.google.com/google-apps/licensing/'
+  url: 'https://developers.google.com/admin-sdk/licensing/'
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
@@ -101,19 +101,19 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Assign License.
+      description: Assign a license.
       operationId: licensing.licenseAssignments.insert
       parameters:
         - in: body
           name: body
           schema:
             $ref: '#/definitions/LicenseAssignmentInsert'
-        - description: Name for product
+        - description: 'A product''s unique identifier. For more information about products in this version of the API, see Products and SKUs.'
           in: path
           name: productId
           required: true
           type: string
-        - description: Name for sku
+        - description: 'A product SKU''s unique identifier. For more information about available SKUs in this version of the API, see Products and SKUs.'
           in: path
           name: skuId
           required: true
@@ -132,20 +132,23 @@ paths:
         - licenseAssignments
   '/{productId}/sku/{skuId}/user/{userId}':
     delete:
-      description: Revoke License.
+      description: Revoke a license.
       operationId: licensing.licenseAssignments.delete
       parameters:
-        - description: Name for product
+        - description: 'A product''s unique identifier. For more information about products in this version of the API, see Products and SKUs.'
           in: path
           name: productId
           required: true
           type: string
-        - description: Name for sku
+        - description: 'A product SKU''s unique identifier. For more information about available SKUs in this version of the API, see Products and SKUs.'
           in: path
           name: skuId
           required: true
           type: string
-        - description: email id or unique Id of the user
+        - description: |-
+            The user's current primary email address. If the user's email address changes, use the new email address in your API requests.
+            Since a userId is subject to change, do not use a userId value as a key for persistent data. This key could break if the current user's email address changes.
+            If the userId is suspended, the license status changes.
           in: path
           name: userId
           required: true
@@ -161,20 +164,23 @@ paths:
       tags:
         - licenseAssignments
     get:
-      description: Get license assignment of a particular product and sku for a user
+      description: Get a specific user's license by product SKU.
       operationId: licensing.licenseAssignments.get
       parameters:
-        - description: Name for product
+        - description: 'A product''s unique identifier. For more information about products in this version of the API, see Products and SKUs.'
           in: path
           name: productId
           required: true
           type: string
-        - description: Name for sku
+        - description: 'A product SKU''s unique identifier. For more information about available SKUs in this version of the API, see Products and SKUs.'
           in: path
           name: skuId
           required: true
           type: string
-        - description: email id or unique Id of the user
+        - description: |-
+            The user's current primary email address. If the user's email address changes, use the new email address in your API requests.
+            Since a userId is subject to change, do not use a userId value as a key for persistent data. This key could break if the current user's email address changes.
+            If the userId is suspended, the license status changes.
           in: path
           name: userId
           required: true
@@ -200,24 +206,27 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Assign License. This method supports patch semantics.
+      description: Reassign a user's product SKU with a different SKU in the same product. This method supports patch semantics.
       operationId: licensing.licenseAssignments.patch
       parameters:
         - in: body
           name: body
           schema:
             $ref: '#/definitions/LicenseAssignment'
-        - description: Name for product
+        - description: 'A product''s unique identifier. For more information about products in this version of the API, see Products and SKUs.'
           in: path
           name: productId
           required: true
           type: string
-        - description: Name for sku for which license would be revoked
+        - description: 'A product SKU''s unique identifier. For more information about available SKUs in this version of the API, see Products and SKUs.'
           in: path
           name: skuId
           required: true
           type: string
-        - description: email id or unique Id of the user
+        - description: |-
+            The user's current primary email address. If the user's email address changes, use the new email address in your API requests.
+            Since a userId is subject to change, do not use a userId value as a key for persistent data. This key could break if the current user's email address changes.
+            If the userId is suspended, the license status changes.
           in: path
           name: userId
           required: true
@@ -235,24 +244,27 @@ paths:
       tags:
         - licenseAssignments
     put:
-      description: Assign License.
+      description: Reassign a user's product SKU with a different SKU in the same product.
       operationId: licensing.licenseAssignments.update
       parameters:
         - in: body
           name: body
           schema:
             $ref: '#/definitions/LicenseAssignment'
-        - description: Name for product
+        - description: 'A product''s unique identifier. For more information about products in this version of the API, see Products and SKUs.'
           in: path
           name: productId
           required: true
           type: string
-        - description: Name for sku for which license would be revoked
+        - description: 'A product SKU''s unique identifier. For more information about available SKUs in this version of the API, see Products and SKUs.'
           in: path
           name: skuId
           required: true
           type: string
-        - description: email id or unique Id of the user
+        - description: |-
+            The user's current primary email address. If the user's email address changes, use the new email address in your API requests.
+            Since a userId is subject to change, do not use a userId value as a key for persistent data. This key could break if the current user's email address changes.
+            If the userId is suspended, the license status changes.
           in: path
           name: userId
           required: true
@@ -271,32 +283,34 @@ paths:
         - licenseAssignments
   '/{productId}/sku/{skuId}/users':
     get:
-      description: List license assignments for given product and sku of the customer.
+      description: List all users assigned licenses for a specific product SKU.
       operationId: licensing.licenseAssignments.listForProductAndSku
       parameters:
-        - description: CustomerId represents the customer for whom licenseassignments are queried
+        - description: |-
+            Customer's customerId. A previous version of this API accepted the primary domain name as a value for this field.
+            If the customer is suspended, the server returns an error.
           in: query
           name: customerId
           required: true
           type: string
         - default: 100
-          description: Maximum number of campaigns to return at one time. Must be positive. Optional. Default value is 100.
+          description: The maxResults query string determines how many entries are returned on each page of a large response. This is an optional parameter. The value must be a positive number.
           in: query
           maximum: 1000
           minimum: 1
           name: maxResults
           type: integer
         - default: ''
-          description: Token to fetch the next page.Optional. By default server will return first page
+          description: 'Token to fetch the next page of data. The maxResults query string is related to the pageToken since maxResults determines how many entries are returned on each page. This is an optional query string. If not specified, the server returns the first page.'
           in: query
           name: pageToken
           type: string
-        - description: Name for product
+        - description: 'A product''s unique identifier. For more information about products in this version of the API, see Products and SKUs.'
           in: path
           name: productId
           required: true
           type: string
-        - description: Name for sku
+        - description: 'A product SKU''s unique identifier. For more information about available SKUs in this version of the API, see Products and SKUs.'
           in: path
           name: skuId
           required: true
@@ -323,27 +337,29 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{productId}/users':
     get:
-      description: List license assignments for given product of the customer.
+      description: List all users assigned licenses for a specific product SKU.
       operationId: licensing.licenseAssignments.listForProduct
       parameters:
-        - description: CustomerId represents the customer for whom licenseassignments are queried
+        - description: |-
+            Customer's customerId. A previous version of this API accepted the primary domain name as a value for this field.
+            If the customer is suspended, the server returns an error.
           in: query
           name: customerId
           required: true
           type: string
         - default: 100
-          description: Maximum number of campaigns to return at one time. Must be positive. Optional. Default value is 100.
+          description: The maxResults query string determines how many entries are returned on each page of a large response. This is an optional parameter. The value must be a positive number.
           in: query
           maximum: 1000
           minimum: 1
           name: maxResults
           type: integer
         - default: ''
-          description: Token to fetch the next page.Optional. By default server will return first page
+          description: 'Token to fetch the next page of data. The maxResults query string is related to the pageToken since maxResults determines how many entries are returned on each page. This is an optional query string. If not specified, the server returns the first page.'
           in: query
           name: pageToken
           type: string
-        - description: Name for product
+        - description: 'A product''s unique identifier. For more information about products in this version of the API, see Products and SKUs.'
           in: path
           name: productId
           required: true
@@ -370,7 +386,7 @@ paths:
       - $ref: '#/parameters/userIp'
 definitions:
   LicenseAssignment:
-    description: Template for LiscenseAssignment Resource
+    description: Representation of a license assignment.
     properties:
       etags:
         description: ETag of the resource.
@@ -380,7 +396,7 @@ definitions:
         description: Identifies the resource as a LicenseAssignment.
         type: string
       productId:
-        description: Id of the product.
+        description: 'A product''s unique identifier. For more information about products in this version of the API, see Product and SKU IDs.'
         type: string
       productName:
         description: Display Name of the product.
@@ -389,17 +405,17 @@ definitions:
         description: Link to this page.
         type: string
       skuId:
-        description: Id of the sku of the product.
+        description: 'A product SKU''s unique identifier. For more information about available SKUs in this version of the API, see Products and SKUs.'
         type: string
       skuName:
         description: Display Name of the sku of the product.
         type: string
       userId:
-        description: Email id of the user.
+        description: 'The user''s current primary email address. If the user''s email address changes, use the new email address in your API requests. Since a userId is subject to change, do not use a userId value as a key for persistent data. This key could break if the current user''s email address changes. If the userId is suspended, the license status changes.'
         type: string
     type: object
   LicenseAssignmentInsert:
-    description: Template for LicenseAssignment Insert request
+    description: Representation of a license assignment.
     properties:
       userId:
         description: Email id of the user
@@ -421,6 +437,6 @@ definitions:
         description: Identifies the resource as a collection of LicenseAssignments.
         type: string
       nextPageToken:
-        description: 'The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.'
+        description: The token that you must submit in a subsequent request to retrieve additional license results matching your query parameters. The maxResults query string is related to the nextPageToken since maxResults determines how many entries are returned on each next page.
         type: string
     type: object

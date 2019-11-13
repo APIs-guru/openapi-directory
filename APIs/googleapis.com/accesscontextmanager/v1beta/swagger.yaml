@@ -193,17 +193,17 @@ paths:
   '/v1beta/{name}':
     delete:
       description: |-
-        Delete an Access Level by resource
+        Delete an Service Perimeter by resource
         name. The longrunning operation from this RPC will have a successful status
-        once the Access Level has been removed
-        from long-lasting storage.
-      operationId: accesscontextmanager.accessPolicies.accessLevels.delete
+        once the Service Perimeter has been
+        removed from long-lasting storage.
+      operationId: accesscontextmanager.accessPolicies.servicePerimeters.delete
       parameters:
         - description: |-
-            Required. Resource name for the Access Level.
+            Required. Resource name for the Service Perimeter.
 
             Format:
-            `accessPolicies/{policy_id}/accessLevels/{access_level_id}`
+            `accessPolicies/{policy_id}/servicePerimeters/{service_perimeter_id}`
           in: path
           name: name
           required: true
@@ -223,9 +223,9 @@ paths:
         - accessPolicies
     get:
       description: |-
-        Get an Access Level by resource
+        Get an Service Perimeter by resource
         name.
-      operationId: accesscontextmanager.accessPolicies.accessLevels.get
+      operationId: accesscontextmanager.accessPolicies.servicePerimeters.get
       parameters:
         - description: |-
             Whether to return `BasicLevels` in the Cloud Common Expression
@@ -243,10 +243,10 @@ paths:
           name: accessLevelFormat
           type: string
         - description: |-
-            Required. Resource name for the Access Level.
+            Required. Resource name for the Service Perimeter.
 
             Format:
-            `accessPolicies/{policy_id}/accessLevels/{access_level_id}`
+            `accessPolicies/{policy_id}/servicePerimeters/{service_perimeters_id}`
           in: path
           name: name
           required: true
@@ -256,7 +256,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/AccessLevel'
+            $ref: '#/definitions/ServicePerimeter'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -278,21 +278,21 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     patch:
       description: |-
-        Update an Access Level. The longrunning
-        operation from this RPC will have a successful status once the changes to
-        the Access Level have propagated
-        to long-lasting storage. Access Levels containing
+        Update an Service Perimeter. The
+        longrunning operation from this RPC will have a successful status once the
+        changes to the Service Perimeter have
+        propagated to long-lasting storage. Service Perimeter containing
         errors will result in an error response for the first error encountered.
-      operationId: accesscontextmanager.accessPolicies.accessLevels.patch
+      operationId: accesscontextmanager.accessPolicies.servicePerimeters.patch
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/AccessLevel'
+            $ref: '#/definitions/ServicePerimeter'
         - description: |-
-            Required. Resource name for the Access Level. The `short_name` component
-            must begin with a letter and only include alphanumeric and '_'. Format:
-            `accessPolicies/{policy_id}/accessLevels/{short_name}`
+            Required. Resource name for the ServicePerimeter.  The `short_name`
+            component must begin with a letter and only include alphanumeric and '_'.
+            Format: `accessPolicies/{policy_id}/servicePerimeters/{short_name}`
           in: path
           name: name
           required: true
@@ -582,24 +582,6 @@ definitions:
           $ref: '#/definitions/Condition'
         type: array
     type: object
-  BridgeServiceRestriction:
-    description: |-
-      Alpha. Specifies which services are granted access via this Bridge Service
-      Perimeter.
-    properties:
-      allowedServices:
-        description: |-
-          The list of APIs usable through the Bridge Perimeter. Must be empty
-          unless 'enable_restriction' is True.
-        items:
-          type: string
-        type: array
-      enableRestriction:
-        description: |-
-          Whether to restrict the set of APIs callable through the Bridge Service
-          Perimeter.
-        type: boolean
-    type: object
   Condition:
     description: |-
       A condition necessary for an `AccessLevel` to be granted. The Condition is an
@@ -712,24 +694,6 @@ definitions:
           Defaults to `false`.
         type: boolean
     type: object
-  IngressServiceRestriction:
-    description: |-
-      Alpha. Specifies how Access Levels are to be used for accessing the Service
-      Perimeter.
-    properties:
-      allowedServices:
-        description: |-
-          The list of APIs usable with a valid Access Level. Must be empty unless
-          'enable_restriction' is True.
-        items:
-          type: string
-        type: array
-      enableRestriction:
-        description: |-
-          Whether to restrict the set of APIs callable outside the Service
-          Perimeter via Access Levels.
-        type: boolean
-    type: object
   ListAccessLevelsResponse:
     description: A response to `ListAccessLevelsRequest`.
     properties:
@@ -837,7 +801,7 @@ definitions:
         description: |-
           Only allows requests from devices with a verified Chrome OS.
           Verifications includes requirements that the device is enterprise-managed,
-          conformant to Dasher domain policies, and the caller has permission to call
+          conformant to domain policies, and the caller has permission to call
           the API targeted by the request.
         type: boolean
     type: object
@@ -912,14 +876,6 @@ definitions:
         items:
           type: string
         type: array
-      bridgeServiceRestriction:
-        $ref: '#/definitions/BridgeServiceRestriction'
-        description: |-
-          Alpha. Configuration for what services are accessible via the Bridge
-          Perimeter. Must be empty for non-Bridge Perimeters.
-      ingressServiceRestriction:
-        $ref: '#/definitions/IngressServiceRestriction'
-        description: Alpha. Configuration for which services may be used with Access Levels.
       resources:
         description: |-
           A list of GCP resources that are inside of the service perimeter.

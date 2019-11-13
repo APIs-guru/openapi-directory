@@ -1735,7 +1735,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Updates an existing comment. This method supports patch semantics.
+      description: Updates an existing comment.
       operationId: drive.comments.patch
       parameters:
         - in: body
@@ -1982,7 +1982,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Updates an existing reply. This method supports patch semantics.
+      description: Updates an existing reply.
       operationId: drive.replies.patch
       parameters:
         - in: body
@@ -3255,7 +3255,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Updates a revision. This method supports patch semantics.
+      description: Updates a revision.
       operationId: drive.revisions.patch
       parameters:
         - in: body
@@ -4153,7 +4153,7 @@ definitions:
           type: object
         type: array
       quotaBytesTotal:
-        description: The total number of quota bytes.
+        description: The total number of quota bytes. This is only relevant when quotaType is LIMITED.
         format: int64
         type: string
       quotaBytesUsed:
@@ -4496,7 +4496,7 @@ definitions:
         type: string
       author:
         $ref: '#/definitions/User'
-        description: The user who wrote this comment.
+        description: The author of the comment. The author's email address and permission ID will not be populated.
       commentId:
         description: The ID of the comment.
         type: string
@@ -4579,7 +4579,7 @@ definitions:
     properties:
       author:
         $ref: '#/definitions/User'
-        description: The user who wrote this reply.
+        description: The author of the reply. The author's email address and permission ID will not be populated.
       content:
         description: The plain text content used to create this reply. This is not HTML safe and should only be used as a starting point to make edits to a reply's content. This field is required on inserts if no verb is specified (resolve/reopen).
         type: string
@@ -5571,7 +5571,7 @@ definitions:
         description: The original filename when this revision was created. This will only be populated on files with content stored in Drive.
         type: string
       pinned:
-        description: Whether this revision is pinned to prevent automatic purging. This will only be populated and can only be modified on files with content stored in Drive which are not Google Docs. Revisions can also be pinned when they are created through the drive.files.insert/update/copy by using the pinned query parameter.
+        description: 'Whether this revision is pinned to prevent automatic purging. This will only be populated and can only be modified on files with content stored in Drive which are not Google Docs. Revisions can also be pinned when they are created through the drive.files.insert/update/copy by using the pinned query parameter. Pinned revisions are stored indefinitely using additional storage quota, up to a maximum of 200 revisions.'
         type: boolean
       publishAuto:
         description: Whether subsequent revisions will be automatically republished. This is only populated and can only be modified for Google Docs.

@@ -99,7 +99,7 @@ paths:
       description: Lists the applications available for data transfer for a customer.
       operationId: datatransfer.applications.list
       parameters:
-        - description: Immutable ID of the Google Apps account.
+        - description: Immutable ID of the G Suite account.
           in: query
           name: customerId
           type: string
@@ -176,7 +176,7 @@ paths:
       description: 'Lists the transfers for a customer by source user, destination user, or status.'
       operationId: datatransfer.transfers.list
       parameters:
-        - description: Immutable ID of the Google Apps account.
+        - description: Immutable ID of the G Suite account.
           in: query
           name: customerId
           type: string
@@ -299,7 +299,7 @@ definitions:
         description: The application's name.
         type: string
       transferParams:
-        description: The list of all possible transfer parameters for this application. These parameters can be used to select the data of the user in this application to be transfered.
+        description: The list of all possible transfer parameters for this application. These parameters can be used to select the data of the user in this application to be transferred.
         items:
           $ref: '#/definitions/ApplicationTransferParam'
         type: array
@@ -312,7 +312,7 @@ definitions:
         format: int64
         type: string
       applicationTransferParams:
-        description: The transfer parameters for the application. These parameters are used to select the data which will get transfered in context of this application.
+        description: The transfer parameters for the application. These parameters are used to select the data which will get transferred in context of this application.
         items:
           $ref: '#/definitions/ApplicationTransferParam'
         type: array
@@ -327,7 +327,7 @@ definitions:
         description: 'The type of the transfer parameter. eg: ''PRIVACY_LEVEL'''
         type: string
       value:
-        description: 'The value of the coressponding transfer parameter. eg: ''PRIVATE'' or ''SHARED'''
+        description: 'The value of the corresponding transfer parameter. eg: ''PRIVATE'' or ''SHARED'''
         items:
           type: string
         type: array
@@ -370,10 +370,10 @@ definitions:
         description: Identifies the resource as a DataTransfer request.
         type: string
       newOwnerUserId:
-        description: ID of the user to whom the data is being transfered.
+        description: ID of the user to whom the data is being transferred.
         type: string
       oldOwnerUserId:
-        description: ID of the user whose data is being transfered.
+        description: ID of the user whose data is being transferred.
         type: string
       overallTransferStatusCode:
         description: Overall transfer status (Read-only).
