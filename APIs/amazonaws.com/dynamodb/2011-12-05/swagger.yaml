@@ -178,6 +178,10 @@ paths:
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
         '482':
+          description: RequestLimitExceeded
+          schema:
+            $ref: '#/definitions/RequestLimitExceeded'
+        '483':
           description: InternalServerError
           schema:
             $ref: '#/definitions/InternalServerError'
@@ -228,6 +232,10 @@ paths:
           schema:
             $ref: '#/definitions/LimitExceededException'
         '483':
+          description: RequestLimitExceeded
+          schema:
+            $ref: '#/definitions/RequestLimitExceeded'
+        '484':
           description: InternalServerError
           schema:
             $ref: '#/definitions/InternalServerError'
@@ -318,6 +326,10 @@ paths:
           schema:
             $ref: '#/definitions/LimitExceededException'
         '484':
+          description: RequestLimitExceeded
+          schema:
+            $ref: '#/definitions/RequestLimitExceeded'
+        '485':
           description: InternalServerError
           schema:
             $ref: '#/definitions/InternalServerError'
@@ -441,6 +453,10 @@ paths:
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
         '482':
+          description: RequestLimitExceeded
+          schema:
+            $ref: '#/definitions/RequestLimitExceeded'
+        '483':
           description: InternalServerError
           schema:
             $ref: '#/definitions/InternalServerError'
@@ -533,6 +549,10 @@ paths:
           schema:
             $ref: '#/definitions/LimitExceededException'
         '484':
+          description: RequestLimitExceeded
+          schema:
+            $ref: '#/definitions/RequestLimitExceeded'
+        '485':
           description: InternalServerError
           schema:
             $ref: '#/definitions/InternalServerError'
@@ -574,6 +594,10 @@ paths:
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
         '482':
+          description: RequestLimitExceeded
+          schema:
+            $ref: '#/definitions/RequestLimitExceeded'
+        '483':
           description: InternalServerError
           schema:
             $ref: '#/definitions/InternalServerError'
@@ -625,6 +649,10 @@ paths:
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
         '482':
+          description: RequestLimitExceeded
+          schema:
+            $ref: '#/definitions/RequestLimitExceeded'
+        '483':
           description: InternalServerError
           schema:
             $ref: '#/definitions/InternalServerError'
@@ -684,6 +712,10 @@ paths:
           schema:
             $ref: '#/definitions/LimitExceededException'
         '484':
+          description: RequestLimitExceeded
+          schema:
+            $ref: '#/definitions/RequestLimitExceeded'
+        '485':
           description: InternalServerError
           schema:
             $ref: '#/definitions/InternalServerError'
@@ -770,6 +802,7 @@ definitions:
         $ref: '#/definitions/BatchGetRequestMap'
   ProvisionedThroughputExceededException: {}
   ResourceNotFoundException: {}
+  RequestLimitExceeded: {}
   InternalServerError: {}
   BatchWriteItemOutput:
     type: object

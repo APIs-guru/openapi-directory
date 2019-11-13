@@ -1309,6 +1309,10 @@ paths:
           description: InvalidJobStateException
           schema:
             $ref: '#/definitions/InvalidJobStateException'
+        '483':
+          description: OutputVariablesSizeExceededException
+          schema:
+            $ref: '#/definitions/OutputVariablesSizeExceededException'
       parameters:
         - name: body
           in: body
@@ -2349,7 +2353,11 @@ definitions:
       executionDetails:
         $ref: '#/definitions/ExecutionDetails'
         description: 'The execution details of the successful job, such as the actions taken by the job worker.'
+      outputVariables:
+        $ref: '#/definitions/OutputVariablesMap'
+        description: Key-value pairs produced as output by a job worker that can be made available to a downstream action configuration. <code>outputVariables</code> can be included only when there is no continuation token on the request.
     description: Represents the input of a <code>PutJobSuccessResult</code> action.
+  OutputVariablesSizeExceededException: {}
   PutThirdPartyJobFailureResultInput:
     type: object
     required:
@@ -2701,6 +2709,11 @@ definitions:
     type: string
     pattern: 'arn:aws(-[\w]+)*:iam::[0-9]{12}:role/.*'
     maxLength: 1024
+  ActionNamespace:
+    type: string
+    pattern: '[A-Za-z0-9@\-_]+'
+    minLength: 1
+    maxLength: 100
   ActionDeclaration:
     type: object
     required:
@@ -2731,6 +2744,9 @@ definitions:
       region:
         $ref: '#/definitions/AWSRegionName'
         description: 'The action declaration''s AWS Region, such as us-east-1.'
+      namespace:
+        $ref: '#/definitions/ActionNamespace'
+        description: The variable namespace associated with the action. All variables produced as output by this action fall under this namespace.
     description: Represents information about an action declaration.
   ActionExecutionStatus:
     type: string
@@ -2821,6 +2837,9 @@ definitions:
       configuration:
         $ref: '#/definitions/ActionConfigurationMap'
         description: Configuration data for an action execution.
+      resolvedConfiguration:
+        $ref: '#/definitions/ResolvedActionConfigurationMap'
+        description: Configuration data for an action execution with all variable references replaced with their real values for the execution.
       roleArn:
         $ref: '#/definitions/RoleArn'
         description: 'The ARN of the IAM service role that performs the declared action. This is assumed through the roleArn for the pipeline. '
@@ -2830,6 +2849,9 @@ definitions:
       inputArtifacts:
         $ref: '#/definitions/ArtifactDetailList'
         description: Details of input artifacts of the action that correspond to the action execution.
+      namespace:
+        $ref: '#/definitions/ActionNamespace'
+        description: The variable namespace associated with the action. All variables produced as output by this action fall under this namespace.
     description: Input information used for an action execution.
   ActionExecutionOutput:
     type: object
@@ -2840,6 +2862,9 @@ definitions:
       executionResult:
         $ref: '#/definitions/ActionExecutionResult'
         description: Execution result information listed in the output details for an action execution.
+      outputVariables:
+        $ref: '#/definitions/OutputVariablesMap'
+        description: The outputVariables field shows the key-value pairs that were output as part of that execution.
     description: 'Output details listed for an action execution, such as the action execution result.'
   ActionExecutionDetail:
     type: object
@@ -2886,6 +2911,10 @@ definitions:
         $ref: '#/definitions/PipelineExecutionId'
         description: The pipeline execution ID used to filter action execution history.
     description: Filter values for the action execution.
+  ResolvedActionConfigurationMap:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/String'
   ArtifactDetailList:
     type: array
     items:
@@ -2903,6 +2932,10 @@ definitions:
         $ref: '#/definitions/Url'
         description: 'The deepest external link to the external resource (for example, a repository URL or deployment endpoint) that is used when running the action.'
     description: 'Execution result information, such as the external execution ID.'
+  OutputVariablesMap:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/OutputVariablesValue'
   ExternalExecutionId:
     type: string
   ExternalExecutionSummary:
@@ -3643,6 +3676,11 @@ definitions:
         $ref: '#/definitions/ArtifactName'
         description: '<p>The name of the output of an artifact, such as "My App".</p> <p>The input artifact of an action must exactly match the output artifact declared in a preceding action, but the input artifact does not have to be the next action in strict sequence from the action that provided the output artifact. Actions in parallel can declare different output artifacts, which are in turn consumed by different following actions.</p> <p>Output artifact names must be unique within a pipeline.</p>'
     description: Represents information about the output of an action.
+  OutputVariablesKey:
+    type: string
+    pattern: '[A-Za-z0-9@\-_]+'
+  OutputVariablesValue:
+    type: string
   PipelineArn:
     type: string
     pattern: 'arn:aws(-[\w]+)*:codepipeline:.+:[0-9]{12}:.+'
@@ -3732,6 +3770,8 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ThirdPartyJob'
+  String:
+    type: string
   StageRetryMode:
     type: string
     enum:
