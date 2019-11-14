@@ -170,21 +170,18 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/BuildSuggestersResponse'
-        '409':
-          description: ResourceNotFoundException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: DomainName
           in: query
@@ -223,21 +220,18 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/BuildSuggestersResponse'
-        '409':
-          description: ResourceNotFoundException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: DomainName
           in: formData
@@ -269,21 +263,18 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/CreateDomainResponse'
-        '409':
-          description: LimitExceededException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/LimitExceededException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
       parameters:
         - name: DomainName
           in: query
@@ -322,21 +313,18 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/CreateDomainResponse'
-        '409':
-          description: LimitExceededException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/LimitExceededException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
       parameters:
         - name: DomainName
           in: formData
@@ -368,21 +356,26 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/DefineAnalysisSchemeResponse'
-        '409':
-          description: ResourceNotFoundException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: InvalidTypeException
+          schema:
+            $ref: '#/definitions/InvalidTypeException'
+        '484':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: DomainName
           in: query
@@ -436,21 +429,26 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/DefineAnalysisSchemeResponse'
-        '409':
-          description: ResourceNotFoundException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: InvalidTypeException
+          schema:
+            $ref: '#/definitions/InvalidTypeException'
+        '484':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: DomainName
           in: formData
@@ -497,21 +495,26 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/DefineExpressionResponse'
-        '409':
-          description: ResourceNotFoundException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: InvalidTypeException
+          schema:
+            $ref: '#/definitions/InvalidTypeException'
+        '484':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: DomainName
           in: query
@@ -560,21 +563,26 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/DefineExpressionResponse'
-        '409':
-          description: ResourceNotFoundException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: InvalidTypeException
+          schema:
+            $ref: '#/definitions/InvalidTypeException'
+        '484':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: DomainName
           in: formData
@@ -616,21 +624,26 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/DefineIndexFieldResponse'
-        '409':
-          description: ResourceNotFoundException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: InvalidTypeException
+          schema:
+            $ref: '#/definitions/InvalidTypeException'
+        '484':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: DomainName
           in: query
@@ -735,21 +748,26 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/DefineIndexFieldResponse'
-        '409':
-          description: ResourceNotFoundException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: InvalidTypeException
+          schema:
+            $ref: '#/definitions/InvalidTypeException'
+        '484':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: DomainName
           in: formData
@@ -847,21 +865,26 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/DefineSuggesterResponse'
-        '409':
-          description: ResourceNotFoundException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: InvalidTypeException
+          schema:
+            $ref: '#/definitions/InvalidTypeException'
+        '484':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: DomainName
           in: query
@@ -910,21 +933,26 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/DefineSuggesterResponse'
-        '409':
-          description: ResourceNotFoundException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: InvalidTypeException
+          schema:
+            $ref: '#/definitions/InvalidTypeException'
+        '484':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: DomainName
           in: formData
@@ -966,21 +994,22 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/DeleteAnalysisSchemeResponse'
-        '409':
-          description: ResourceNotFoundException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: InvalidTypeException
+          schema:
+            $ref: '#/definitions/InvalidTypeException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: DomainName
           in: query
@@ -1027,21 +1056,22 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/DeleteAnalysisSchemeResponse'
-        '409':
-          description: ResourceNotFoundException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: InvalidTypeException
+          schema:
+            $ref: '#/definitions/InvalidTypeException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: DomainName
           in: formData
@@ -1083,12 +1113,10 @@ paths:
             $ref: '#/definitions/DeleteDomainResponse'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
       parameters:
@@ -1131,12 +1159,10 @@ paths:
             $ref: '#/definitions/DeleteDomainResponse'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
       parameters:
@@ -1170,21 +1196,22 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/DeleteExpressionResponse'
-        '409':
-          description: ResourceNotFoundException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: InvalidTypeException
+          schema:
+            $ref: '#/definitions/InvalidTypeException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: DomainName
           in: query
@@ -1231,21 +1258,22 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/DeleteExpressionResponse'
-        '409':
-          description: ResourceNotFoundException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: InvalidTypeException
+          schema:
+            $ref: '#/definitions/InvalidTypeException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: DomainName
           in: formData
@@ -1285,21 +1313,22 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/DeleteIndexFieldResponse'
-        '409':
-          description: ResourceNotFoundException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: InvalidTypeException
+          schema:
+            $ref: '#/definitions/InvalidTypeException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: DomainName
           in: query
@@ -1346,21 +1375,22 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/DeleteIndexFieldResponse'
-        '409':
-          description: ResourceNotFoundException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: InvalidTypeException
+          schema:
+            $ref: '#/definitions/InvalidTypeException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: DomainName
           in: formData
@@ -1400,21 +1430,22 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/DeleteSuggesterResponse'
-        '409':
-          description: ResourceNotFoundException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: InvalidTypeException
+          schema:
+            $ref: '#/definitions/InvalidTypeException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: DomainName
           in: query
@@ -1461,21 +1492,22 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/DeleteSuggesterResponse'
-        '409':
-          description: ResourceNotFoundException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: InvalidTypeException
+          schema:
+            $ref: '#/definitions/InvalidTypeException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: DomainName
           in: formData
@@ -1515,21 +1547,18 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/DescribeAnalysisSchemesResponse'
-        '409':
-          description: ResourceNotFoundException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: DomainName
           in: query
@@ -1580,21 +1609,18 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/DescribeAnalysisSchemesResponse'
-        '409':
-          description: ResourceNotFoundException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: DomainName
           in: formData
@@ -1638,21 +1664,30 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/DescribeAvailabilityOptionsResponse'
-        '409':
-          description: DisabledOperationException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/DisabledOperationException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: InvalidTypeException
+          schema:
+            $ref: '#/definitions/InvalidTypeException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '484':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '485':
+          description: DisabledOperationException
+          schema:
+            $ref: '#/definitions/DisabledOperationException'
       parameters:
         - name: DomainName
           in: query
@@ -1696,21 +1731,30 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/DescribeAvailabilityOptionsResponse'
-        '409':
-          description: DisabledOperationException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/DisabledOperationException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: InvalidTypeException
+          schema:
+            $ref: '#/definitions/InvalidTypeException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '484':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '485':
+          description: DisabledOperationException
+          schema:
+            $ref: '#/definitions/DisabledOperationException'
       parameters:
         - name: DomainName
           in: formData
@@ -1737,6 +1781,125 @@ paths:
           type: string
           enum:
             - '2013-01-01'
+  '/#Action=DescribeDomainEndpointOptions':
+    get:
+      x-aws-operation-name: DescribeDomainEndpointOptions
+      operationId: GET DescribeDomainEndpointOptions
+      description: 'Returns the domain''s endpoint options, specifically whether all requests to the domain must arrive over HTTPS. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-domain-endpoint-options.html" target="_blank">Configuring Domain Endpoint Options</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeDomainEndpointOptionsResponse'
+        '480':
+          description: BaseException
+          schema:
+            $ref: '#/definitions/BaseException'
+        '481':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: DisabledOperationException
+          schema:
+            $ref: '#/definitions/DisabledOperationException'
+      parameters:
+        - name: DomainName
+          in: query
+          required: true
+          description: 'A string that represents the name of a domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+          type: string
+          pattern: '[a-z][a-z0-9\-]+'
+          minLength: 3
+          maxLength: 28
+        - name: Deployed
+          in: query
+          required: false
+          description: 'Whether to retrieve the latest configuration (which might be in a Processing state) or the current, active configuration. Defaults to <code>false</code>.'
+          type: boolean
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeDomainEndpointOptions
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-01-01'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DescribeDomainEndpointOptions
+      operationId: POST DescribeDomainEndpointOptions
+      description: 'Returns the domain''s endpoint options, specifically whether all requests to the domain must arrive over HTTPS. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-domain-endpoint-options.html" target="_blank">Configuring Domain Endpoint Options</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeDomainEndpointOptionsResponse'
+        '480':
+          description: BaseException
+          schema:
+            $ref: '#/definitions/BaseException'
+        '481':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: DisabledOperationException
+          schema:
+            $ref: '#/definitions/DisabledOperationException'
+      parameters:
+        - name: DomainName
+          in: formData
+          required: true
+          description: 'A string that represents the name of a domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+          type: string
+          pattern: '[a-z][a-z0-9\-]+'
+          minLength: 3
+          maxLength: 28
+        - name: Deployed
+          in: formData
+          required: false
+          description: 'Whether to retrieve the latest configuration (which might be in a Processing state) or the current, active configuration. Defaults to <code>false</code>.'
+          type: boolean
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeDomainEndpointOptions
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-01-01'
   '/#Action=DescribeDomains':
     get:
       x-aws-operation-name: DescribeDomains
@@ -1749,12 +1912,10 @@ paths:
             $ref: '#/definitions/DescribeDomainsResponse'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
       parameters:
@@ -1796,12 +1957,10 @@ paths:
             $ref: '#/definitions/DescribeDomainsResponse'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
       parameters:
@@ -1834,21 +1993,18 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/DescribeExpressionsResponse'
-        '409':
-          description: ResourceNotFoundException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: DomainName
           in: query
@@ -1899,21 +2055,18 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/DescribeExpressionsResponse'
-        '409':
-          description: ResourceNotFoundException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: DomainName
           in: formData
@@ -1957,21 +2110,18 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/DescribeIndexFieldsResponse'
-        '409':
-          description: ResourceNotFoundException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: DomainName
           in: query
@@ -2022,21 +2172,18 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/DescribeIndexFieldsResponse'
-        '409':
-          description: ResourceNotFoundException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: DomainName
           in: formData
@@ -2080,21 +2227,18 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/DescribeScalingParametersResponse'
-        '409':
-          description: ResourceNotFoundException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: DomainName
           in: query
@@ -2133,21 +2277,18 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/DescribeScalingParametersResponse'
-        '409':
-          description: ResourceNotFoundException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: DomainName
           in: formData
@@ -2179,21 +2320,18 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/DescribeServiceAccessPoliciesResponse'
-        '409':
-          description: ResourceNotFoundException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: DomainName
           in: query
@@ -2237,21 +2375,18 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/DescribeServiceAccessPoliciesResponse'
-        '409':
-          description: ResourceNotFoundException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: DomainName
           in: formData
@@ -2288,21 +2423,18 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/DescribeSuggestersResponse'
-        '409':
-          description: ResourceNotFoundException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: DomainName
           in: query
@@ -2353,21 +2485,18 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/DescribeSuggestersResponse'
-        '409':
-          description: ResourceNotFoundException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: DomainName
           in: formData
@@ -2411,21 +2540,18 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/IndexDocumentsResponse'
-        '409':
-          description: ResourceNotFoundException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: DomainName
           in: query
@@ -2464,21 +2590,18 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/IndexDocumentsResponse'
-        '409':
-          description: ResourceNotFoundException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: DomainName
           in: formData
@@ -2512,7 +2635,6 @@ paths:
             $ref: '#/definitions/ListDomainNamesResponse'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
       parameters:
@@ -2547,7 +2669,6 @@ paths:
             $ref: '#/definitions/ListDomainNamesResponse'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
       parameters:
@@ -2573,21 +2694,34 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/UpdateAvailabilityOptionsResponse'
-        '409':
-          description: DisabledOperationException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/DisabledOperationException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: InvalidTypeException
+          schema:
+            $ref: '#/definitions/InvalidTypeException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '484':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '485':
+          description: DisabledOperationException
+          schema:
+            $ref: '#/definitions/DisabledOperationException'
+        '486':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
       parameters:
         - name: DomainName
           in: query
@@ -2631,21 +2765,34 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/UpdateAvailabilityOptionsResponse'
-        '409':
-          description: DisabledOperationException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/DisabledOperationException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: InvalidTypeException
+          schema:
+            $ref: '#/definitions/InvalidTypeException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '484':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '485':
+          description: DisabledOperationException
+          schema:
+            $ref: '#/definitions/DisabledOperationException'
+        '486':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
       parameters:
         - name: DomainName
           in: formData
@@ -2672,6 +2819,155 @@ paths:
           type: string
           enum:
             - '2013-01-01'
+  '/#Action=UpdateDomainEndpointOptions':
+    get:
+      x-aws-operation-name: UpdateDomainEndpointOptions
+      operationId: GET UpdateDomainEndpointOptions
+      description: 'Updates the domain''s endpoint options, specifically whether all requests to the domain must arrive over HTTPS. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-domain-endpoint-options.html" target="_blank">Configuring Domain Endpoint Options</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateDomainEndpointOptionsResponse'
+        '480':
+          description: BaseException
+          schema:
+            $ref: '#/definitions/BaseException'
+        '481':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '482':
+          description: InvalidTypeException
+          schema:
+            $ref: '#/definitions/InvalidTypeException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '484':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '485':
+          description: DisabledOperationException
+          schema:
+            $ref: '#/definitions/DisabledOperationException'
+        '486':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+      parameters:
+        - name: DomainName
+          in: query
+          required: true
+          description: 'A string that represents the name of a domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+          type: string
+          pattern: '[a-z][a-z0-9\-]+'
+          minLength: 3
+          maxLength: 28
+        - name: DomainEndpointOptions.EnforceHTTPS
+          in: query
+          description: |-
+            The domain's endpoint options.
+            Whether the domain is HTTPS only enabled.
+          type: string
+        - name: DomainEndpointOptions.TLSSecurityPolicy
+          in: query
+          description: |-
+            The domain's endpoint options.
+            The minimum required TLS version
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - UpdateDomainEndpointOptions
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-01-01'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: UpdateDomainEndpointOptions
+      operationId: POST UpdateDomainEndpointOptions
+      description: 'Updates the domain''s endpoint options, specifically whether all requests to the domain must arrive over HTTPS. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-domain-endpoint-options.html" target="_blank">Configuring Domain Endpoint Options</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateDomainEndpointOptionsResponse'
+        '480':
+          description: BaseException
+          schema:
+            $ref: '#/definitions/BaseException'
+        '481':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '482':
+          description: InvalidTypeException
+          schema:
+            $ref: '#/definitions/InvalidTypeException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '484':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '485':
+          description: DisabledOperationException
+          schema:
+            $ref: '#/definitions/DisabledOperationException'
+        '486':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+      parameters:
+        - name: DomainName
+          in: formData
+          required: true
+          description: 'A string that represents the name of a domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+          type: string
+          pattern: '[a-z][a-z0-9\-]+'
+          minLength: 3
+          maxLength: 28
+        - name: DomainEndpointOptions.EnforceHTTPS
+          in: formData
+          description: |-
+            The domain's endpoint options.
+            Whether the domain is HTTPS only enabled.
+          type: string
+        - name: DomainEndpointOptions.TLSSecurityPolicy
+          in: formData
+          description: |-
+            The domain's endpoint options.
+            The minimum required TLS version
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - UpdateDomainEndpointOptions
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-01-01'
   '/#Action=UpdateScalingParameters':
     get:
       x-aws-operation-name: UpdateScalingParameters
@@ -2682,21 +2978,26 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/UpdateScalingParametersResponse'
-        '409':
-          description: InvalidTypeException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/InvalidTypeException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: InvalidTypeException
+          schema:
+            $ref: '#/definitions/InvalidTypeException'
       parameters:
         - name: DomainName
           in: query
@@ -2753,21 +3054,26 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/UpdateScalingParametersResponse'
-        '409':
-          description: InvalidTypeException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/InvalidTypeException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: InvalidTypeException
+          schema:
+            $ref: '#/definitions/InvalidTypeException'
       parameters:
         - name: DomainName
           in: formData
@@ -2817,21 +3123,26 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/UpdateServiceAccessPoliciesResponse'
-        '409':
-          description: InvalidTypeException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/InvalidTypeException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: InvalidTypeException
+          schema:
+            $ref: '#/definitions/InvalidTypeException'
       parameters:
         - name: DomainName
           in: query
@@ -2875,21 +3186,26 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/UpdateServiceAccessPoliciesResponse'
-        '409':
-          description: InvalidTypeException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/InvalidTypeException'
         '480':
           description: BaseException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
-        '500':
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: InvalidTypeException
+          schema:
+            $ref: '#/definitions/InvalidTypeException'
       parameters:
         - name: DomainName
           in: formData
@@ -2923,32 +3239,16 @@ definitions:
       FieldNames:
         $ref: '#/definitions/FieldNameList'
     description: The result of a <code>BuildSuggester</code> request. Contains a list of the fields used for suggestions.
-  BaseException:
-    type: object
-    properties:
-      Code:
-        $ref: '#/definitions/ErrorCode'
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: An error occurred while processing the request.
-  InternalException:
-    type: object
-    properties: {}
-    description: 'An internal error occurred while processing the request. If this problem persists, report an issue from the <a href="http://status.aws.amazon.com/" target="_blank">Service Health Dashboard</a>.'
-  ResourceNotFoundException:
-    type: object
-    properties: {}
-    description: The request was rejected because it attempted to reference a resource that does not exist.
+  BaseException: {}
+  InternalException: {}
+  ResourceNotFoundException: {}
   CreateDomainResponse:
     type: object
     properties:
       DomainStatus:
         $ref: '#/definitions/DomainStatus'
     description: The result of a <code>CreateDomainRequest</code>. Contains the status of a newly created domain.
-  LimitExceededException:
-    type: object
-    properties: {}
-    description: The request was rejected because a resource limit has already been met.
+  LimitExceededException: {}
   DefineAnalysisSchemeResponse:
     type: object
     required:
@@ -3030,10 +3330,7 @@ definitions:
       - minimal
       - light
       - full
-  InvalidTypeException:
-    type: object
-    properties: {}
-    description: The request was rejected because it specified an invalid type definition.
+  InvalidTypeException: {}
   DefineExpressionResponse:
     type: object
     required:
@@ -3409,10 +3706,14 @@ definitions:
         $ref: '#/definitions/AvailabilityOptionsStatus'
         description: 'The availability options configured for the domain. Indicates whether Multi-AZ is enabled for the domain. '
     description: 'The result of a <code>DescribeAvailabilityOptions</code> request. Indicates whether or not the Multi-AZ option is enabled for the domain specified in the request. '
-  DisabledOperationException:
+  DisabledOperationException: {}
+  DescribeDomainEndpointOptionsResponse:
     type: object
-    properties: {}
-    description: The request was rejected because it attempted an operation which is not enabled.
+    properties:
+      DomainEndpointOptions:
+        $ref: '#/definitions/DomainEndpointOptionsStatus'
+        description: The status and configuration of a search domain's endpoint options.
+    description: 'The result of a <code>DescribeDomainEndpointOptions</code> request. Contains the status and configuration of a search domain''s endpoint options. '
   DescribeDomainsResponse:
     type: object
     required:
@@ -3492,6 +3793,20 @@ definitions:
         $ref: '#/definitions/AvailabilityOptionsStatus'
         description: 'The newly-configured availability options. Indicates whether Multi-AZ is enabled for the domain. '
     description: 'The result of a <code>UpdateAvailabilityOptions</code> request. Contains the status of the domain''s availability options. '
+  ValidationException: {}
+  UpdateDomainEndpointOptionsResponse:
+    type: object
+    properties:
+      DomainEndpointOptions:
+        $ref: '#/definitions/DomainEndpointOptionsStatus'
+        description: The newly-configured domain endpoint options.
+    description: 'The result of a <code>UpdateDomainEndpointOptions</code> request. Contains the configuration and status of the domain''s endpoint options. '
+  TLSSecurityPolicy:
+    type: string
+    enum:
+      - Policy-Min-TLS-1-0-2019-07
+      - Policy-Min-TLS-1-2-2019-07
+    description: The minimum required TLS version.
   UpdateScalingParametersResponse:
     type: object
     required:
@@ -3551,7 +3866,7 @@ definitions:
         description: A unique integer that indicates when this option was last updated.
       State:
         $ref: '#/definitions/OptionState'
-        description: '<p>The state of processing a change to an option. Possible values:</p> <ul> <li> <code>RequiresIndexDocuments</code>: the option''s latest value will not be deployed until <a>IndexDocuments</a> has been called and indexing is complete.</li> <li> <code>Processing</code>: the option''s latest value is in the process of being activated. </li> <li> <code>Active</code>: the option''s latest value is completely deployed.</li> <li> <code>FailedToValidate</code>: the option value is not compatible with the domain''s data and cannot be used to index the data. You must either modify the option value or update or remove the incompatible documents.</li> </ul>'
+        description: '<p>The state of processing a change to an option. Possible values:</p><ul> <li><code>RequiresIndexDocuments</code>: the option''s latest value will not be deployed until <a>IndexDocuments</a> has been called and indexing is complete.</li> <li><code>Processing</code>: the option''s latest value is in the process of being activated. </li> <li><code>Active</code>: the option''s latest value is completely deployed.</li> <li><code>FailedToValidate</code>: the option value is not compatible with the domain''s data and cannot be used to index the data. You must either modify the option value or update or remove the incompatible documents.</li> </ul>'
       PendingDeletion:
         $ref: '#/definitions/Boolean'
         description: Indicates that the option will be deleted once processing is complete.
@@ -3610,12 +3925,6 @@ definitions:
       Status:
         $ref: '#/definitions/OptionStatus'
     description: The status and configuration of the domain's availability options.
-  ErrorCode:
-    type: string
-    description: A machine-parsable string error or warning code.
-  ErrorMessage:
-    type: string
-    description: A human-readable string error or warning message.
   BuildSuggestersRequest:
     type: object
     required:
@@ -3904,6 +4213,31 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: Whether to display the deployed configuration (<code>true</code>) or include any pending changes (<code>false</code>). Defaults to <code>false</code>.
     description: 'Container for the parameters to the <code><a>DescribeAvailabilityOptions</a></code> operation. Specifies the name of the domain you want to describe. To show the active configuration and exclude any pending changes, set the Deployed option to <code>true</code>.'
+  DescribeDomainEndpointOptionsRequest:
+    type: object
+    required:
+      - DomainName
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+        description: A string that represents the name of a domain.
+      Deployed:
+        $ref: '#/definitions/Boolean'
+        description: 'Whether to retrieve the latest configuration (which might be in a Processing state) or the current, active configuration. Defaults to <code>false</code>.'
+    description: 'Container for the parameters to the <code><a>DescribeDomainEndpointOptions</a></code> operation. Specify the name of the domain you want to describe. To show the active configuration and exclude any pending changes, set the Deployed option to <code>true</code>.'
+  DomainEndpointOptionsStatus:
+    type: object
+    required:
+      - Options
+      - Status
+    properties:
+      Options:
+        $ref: '#/definitions/DomainEndpointOptions'
+        description: The domain endpoint options configured for the domain.
+      Status:
+        $ref: '#/definitions/OptionStatus'
+        description: The status of the configured domain endpoint options.
+    description: The configuration and status of the domain's endpoint options.
   DomainNameList:
     type: array
     description: A list of domain names.
@@ -4016,6 +4350,16 @@ definitions:
     description: Contains the status of multiple suggesters.
     items:
       $ref: '#/definitions/SuggesterStatus'
+  DomainEndpointOptions:
+    type: object
+    properties:
+      EnforceHTTPS:
+        $ref: '#/definitions/Boolean'
+        description: Whether the domain is HTTPS only enabled.
+      TLSSecurityPolicy:
+        $ref: '#/definitions/TLSSecurityPolicy'
+        description: The minimum required TLS version
+    description: The domain's endpoint options.
   DomainId:
     type: string
     description: An internally generated unique identifier for a domain.
@@ -4105,6 +4449,19 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'You expand an existing search domain to a second Availability Zone by setting the Multi-AZ option to true. Similarly, you can turn off the Multi-AZ option to downgrade the domain to a single Availability Zone by setting the Multi-AZ option to <code>false</code>. '
     description: Container for the parameters to the <code><a>UpdateAvailabilityOptions</a></code> operation. Specifies the name of the domain you want to update and the Multi-AZ availability option.
+  UpdateDomainEndpointOptionsRequest:
+    type: object
+    required:
+      - DomainName
+      - DomainEndpointOptions
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+        description: A string that represents the name of a domain.
+      DomainEndpointOptions:
+        $ref: '#/definitions/DomainEndpointOptions'
+        description: 'Whether to require that all requests to the domain arrive over HTTPS. We recommend Policy-Min-TLS-1-2-2019-07 for TLSSecurityPolicy. For compatibility with older clients, the default is Policy-Min-TLS-1-0-2019-07. '
+    description: Container for the parameters to the <code><a>UpdateDomainEndpointOptions</a></code> operation. Specifies the name of the domain you want to update and the domain endpoint options.
   UpdateScalingParametersRequest:
     type: object
     required:

@@ -755,7 +755,7 @@ paths:
         - name: x-amzn-principal
           in: header
           required: true
-          description: 'The principal, such as a certificate or other credential.'
+          description: 'The principal, which can be a certificate ARN (as returned from the CreateCertificate operation) or an Amazon Cognito ID.'
           type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
@@ -3612,7 +3612,7 @@ paths:
   '/streams/{streamId}':
     post:
       operationId: CreateStream
-      description: 'Creates a stream for delivering one or more large files in chunks over MQTT. A stream transports data bytes in chunks or blocks packaged as MQTT messages from a source like S3. You can have one or more files associated with a stream. The total size of a file associated with the stream cannot exceed more than 2 MB. The stream will be created with version 0. If a stream is created with the same streamID as a stream that existed and was deleted within last 90 days, we will resurrect that old stream by incrementing the version by 1.'
+      description: Creates a stream for delivering one or more large files in chunks over MQTT. A stream transports data bytes in chunks or blocks packaged as MQTT messages from a source like S3. You can have one or more files associated with a stream.
       responses:
         '200':
           description: Success
@@ -5944,6 +5944,85 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /indices/cardinality:
+    post:
+      operationId: GetCardinality
+      description: 'Returns the number of things with distinct values for the aggregation field. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetCardinalityResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '485':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '486':
+          description: InvalidQueryException
+          schema:
+            $ref: '#/definitions/InvalidQueryException'
+        '487':
+          description: InvalidAggregationException
+          schema:
+            $ref: '#/definitions/InvalidAggregationException'
+        '488':
+          description: IndexNotReadyException
+          schema:
+            $ref: '#/definitions/IndexNotReadyException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - queryString
+            properties:
+              indexName:
+                description: The name of the index to search.
+                type: string
+                pattern: '[a-zA-Z0-9:_-]+'
+                minLength: 1
+                maxLength: 128
+              queryString:
+                description: The search query.
+                type: string
+                minLength: 1
+              aggregationField:
+                description: The field to aggregate.
+                type: string
+                minLength: 1
+              queryVersion:
+                description: The query version.
+                type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /effective-policies:
     post:
       operationId: GetEffectivePolicies
@@ -6096,6 +6175,12 @@ paths:
                   thingConnectivityIndexingMode:
                     $ref: '#/definitions/ThingConnectivityIndexingMode'
                     description: '<p>Thing connectivity indexing mode. Valid values are: </p> <ul> <li> <p>STATUS – Your thing index contains connectivity status. To enable thing connectivity indexing, thingIndexMode must not be set to OFF.</p> </li> <li> <p>OFF - Thing connectivity status indexing is disabled.</p> </li> </ul>'
+                  managedFields:
+                    $ref: '#/definitions/Fields'
+                    description: Contains fields that are indexed and whose types are already known by the Fleet Indexing service.
+                  customFields:
+                    $ref: '#/definitions/Fields'
+                    description: Contains custom field names and their data type.
               thingGroupIndexingConfiguration:
                 description: Thing group indexing configuration.
                 type: object
@@ -6103,6 +6188,12 @@ paths:
                   thingGroupIndexingMode:
                     $ref: '#/definitions/ThingGroupIndexingMode'
                     description: Thing group indexing mode.
+                  managedFields:
+                    $ref: '#/definitions/Fields'
+                    description: Contains fields that are indexed and whose types are already known by the Fleet Indexing service.
+                  customFields:
+                    $ref: '#/definitions/Fields'
+                    description: Contains custom field names and their data type.
   '/jobs/{jobId}/job-document':
     get:
       operationId: GetJobDocument
@@ -6212,10 +6303,94 @@ paths:
                   logLevel:
                     $ref: '#/definitions/LogLevel'
                     description: The log level.
+  /indices/percentiles:
+    post:
+      operationId: GetPercentiles
+      description: 'Returns the percentile values for the aggregation field. The results from GetPercentiles is an approximation. The default percentile groupings are: 1,5,25,50,75,95,99. You can specify custom percentile grouping using the percents argument to the GetPercentiles API.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetPercentilesResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '485':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '486':
+          description: InvalidQueryException
+          schema:
+            $ref: '#/definitions/InvalidQueryException'
+        '487':
+          description: InvalidAggregationException
+          schema:
+            $ref: '#/definitions/InvalidAggregationException'
+        '488':
+          description: IndexNotReadyException
+          schema:
+            $ref: '#/definitions/IndexNotReadyException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - queryString
+            properties:
+              indexName:
+                description: The name of the index to search.
+                type: string
+                pattern: '[a-zA-Z0-9:_-]+'
+                minLength: 1
+                maxLength: 128
+              queryString:
+                description: The query string.
+                type: string
+                minLength: 1
+              aggregationField:
+                description: The field to aggregate.
+                type: string
+                minLength: 1
+              queryVersion:
+                description: The query version.
+                type: string
+              percents:
+                description: The percentile groups returned.
+                type: array
+                items:
+                  $ref: '#/definitions/Percent'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /indices/statistics:
     post:
       operationId: GetStatistics
-      description: Gets statistics about things that match the specified query.
+      description: 'Gets statistics returns the count, average, sum, minimum, maximum, sumOfSquares, variance, and standard deviation for the specified aggregated field. If the aggregation field is of type String, only the count statistic is returned.'
       responses:
         '200':
           description: Success
@@ -6277,7 +6452,7 @@ paths:
                 type: string
                 minLength: 1
               aggregationField:
-                description: The aggregation field name. Currently not supported.
+                description: The aggregation field name.
                 type: string
                 minLength: 1
               queryVersion:
@@ -8604,7 +8779,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
       operationId: RegisterThing
-      description: Provisions a thing.
+      description: 'Provisions a thing in the device registry. RegisterThing calls other AWS IoT control plane APIs. These calls might exceed your account level <a href="https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_iot"> AWS IoT Throttling Limits</a> and cause throttle errors. Please contact <a href="https://console.aws.amazon.com/support/home">AWS Customer Support</a> to raise your throttling limits if necessary.'
       responses:
         '200':
           description: Success
@@ -11019,6 +11194,14 @@ definitions:
     type: object
     properties: {}
     description: The output from the DetachThingPrincipal operation.
+  GetCardinalityResponse:
+    type: object
+    properties:
+      cardinality:
+        $ref: '#/definitions/Count'
+        description: The number of things that match the query.
+  InvalidAggregationException: {}
+  IndexNotReadyException: {}
   GetEffectivePoliciesResponse:
     type: object
     properties:
@@ -11056,6 +11239,17 @@ definitions:
       otaUpdateInfo:
         $ref: '#/definitions/OTAUpdateInfo'
         description: The OTA update info.
+  GetPercentilesResponse:
+    type: object
+    properties:
+      percentiles:
+        $ref: '#/definitions/Percentiles'
+        description: The percentile values of the aggregated fields.
+  Percent:
+    type: number
+    format: double
+    minimum: 0
+    maximum: 100
   GetPolicyResponse:
     type: object
     properties:
@@ -11101,10 +11295,10 @@ definitions:
         description: Specifies whether the policy version is the default.
       creationDate:
         $ref: '#/definitions/DateType'
-        description: The date the policy version was created.
+        description: The date the policy was created.
       lastModifiedDate:
         $ref: '#/definitions/DateType'
-        description: The date the policy version was last modified.
+        description: The date the policy was last modified.
       generationId:
         $ref: '#/definitions/GenerationId'
         description: The generation ID of the policy version.
@@ -11122,8 +11316,6 @@ definitions:
       statistics:
         $ref: '#/definitions/Statistics'
         description: The statistics returned by the Fleet Indexing service based on the query and aggregation field.
-  InvalidAggregationException: {}
-  IndexNotReadyException: {}
   GetTopicRuleResponse:
     type: object
     properties:
@@ -11814,6 +12006,10 @@ definitions:
     enum:
       - 'OFF'
       - STATUS
+  Fields:
+    type: array
+    items:
+      $ref: '#/definitions/Field'
   ThingGroupIndexingMode:
     type: string
     enum:
@@ -12092,7 +12288,7 @@ definitions:
         description: The name of the MQTT topic.
       qos:
         $ref: '#/definitions/Qos'
-        description: The Quality of Service (QoS) level to use when republishing messages.
+        description: The Quality of Service (QoS) level to use when republishing messages. The default value is 0.
     description: Describes an action to republish to another topic.
   S3Action:
     type: object
@@ -12914,6 +13110,9 @@ definitions:
     enum:
       - ENABLE
       - DISABLE
+  Average:
+    type: number
+    format: double
   AwsIotJobArn:
     type: string
   AwsIotJobId:
@@ -14527,6 +14726,24 @@ definitions:
     type: integer
   FailedThings:
     type: integer
+  FieldName:
+    type: string
+  FieldType:
+    type: string
+    enum:
+      - Number
+      - String
+      - Boolean
+  Field:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/FieldName'
+        description: The name of the field.
+      type:
+        $ref: '#/definitions/FieldType'
+        description: The datatype of the field.
+    description: Describes the name and data type at a field.
   FileId:
     type: integer
     minimum: 0
@@ -14577,6 +14794,23 @@ definitions:
     type: integer
     minimum: 1
     maximum: 10000
+  GetCardinalityRequest:
+    type: object
+    required:
+      - queryString
+    properties:
+      indexName:
+        $ref: '#/definitions/IndexName'
+        description: The name of the index to search.
+      queryString:
+        $ref: '#/definitions/QueryString'
+        description: The search query.
+      aggregationField:
+        $ref: '#/definitions/AggregationField'
+        description: The field to aggregate.
+      queryVersion:
+        $ref: '#/definitions/QueryVersion'
+        description: The query version.
   GetEffectivePoliciesRequest:
     type: object
     properties:
@@ -14600,6 +14834,12 @@ definitions:
       thingConnectivityIndexingMode:
         $ref: '#/definitions/ThingConnectivityIndexingMode'
         description: '<p>Thing connectivity indexing mode. Valid values are: </p> <ul> <li> <p>STATUS – Your thing index contains connectivity status. To enable thing connectivity indexing, thingIndexMode must not be set to OFF.</p> </li> <li> <p>OFF - Thing connectivity status indexing is disabled.</p> </li> </ul>'
+      managedFields:
+        $ref: '#/definitions/Fields'
+        description: Contains fields that are indexed and whose types are already known by the Fleet Indexing service.
+      customFields:
+        $ref: '#/definitions/Fields'
+        description: Contains custom field names and their data type.
     description: 'The thing indexing configuration. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/managing-index.html">Managing Thing Indexing</a>.'
   ThingGroupIndexingConfiguration:
     type: object
@@ -14609,6 +14849,12 @@ definitions:
       thingGroupIndexingMode:
         $ref: '#/definitions/ThingGroupIndexingMode'
         description: Thing group indexing mode.
+      managedFields:
+        $ref: '#/definitions/Fields'
+        description: Contains fields that are indexed and whose types are already known by the Fleet Indexing service.
+      customFields:
+        $ref: '#/definitions/Fields'
+        description: Contains custom field names and their data type.
     description: Thing group indexing configuration.
   GetJobDocumentRequest:
     type: object
@@ -14666,6 +14912,34 @@ definitions:
         $ref: '#/definitions/AdditionalParameterMap'
         description: A collection of name/value pairs
     description: Information about an OTA update.
+  PercentList:
+    type: array
+    items:
+      $ref: '#/definitions/Percent'
+  GetPercentilesRequest:
+    type: object
+    required:
+      - queryString
+    properties:
+      indexName:
+        $ref: '#/definitions/IndexName'
+        description: The name of the index to search.
+      queryString:
+        $ref: '#/definitions/QueryString'
+        description: The query string.
+      aggregationField:
+        $ref: '#/definitions/AggregationField'
+        description: The field to aggregate.
+      queryVersion:
+        $ref: '#/definitions/QueryVersion'
+        description: The query version.
+      percents:
+        $ref: '#/definitions/PercentList'
+        description: The percentile groups returned.
+  Percentiles:
+    type: array
+    items:
+      $ref: '#/definitions/PercentPair'
   GetPolicyRequest:
     type: object
     properties: {}
@@ -14696,7 +14970,7 @@ definitions:
         description: The query used to search. You can specify "*" for the query string to get the count of all indexed things in your AWS account.
       aggregationField:
         $ref: '#/definitions/AggregationField'
-        description: The aggregation field name. Currently not supported.
+        description: The aggregation field name.
       queryVersion:
         $ref: '#/definitions/QueryVersion'
         description: The version of the query used to search.
@@ -14706,6 +14980,27 @@ definitions:
       count:
         $ref: '#/definitions/Count'
         description: The count of things that match the query.
+      average:
+        $ref: '#/definitions/Average'
+        description: The average of the aggregated field values.
+      sum:
+        $ref: '#/definitions/Sum'
+        description: The sum of the aggregated field values.
+      minimum:
+        $ref: '#/definitions/Minimum'
+        description: The minimum aggregated field value.
+      maximum:
+        $ref: '#/definitions/Maximum'
+        description: The maximum aggregated field value.
+      sumOfSquares:
+        $ref: '#/definitions/SumOfSquares'
+        description: The sum of the squares of the aggregated field values.
+      variance:
+        $ref: '#/definitions/Variance'
+        description: The variance of the aggregated field values.
+      stdDeviation:
+        $ref: '#/definitions/StdDeviation'
+        description: The standard deviation of the aggregated field valuesl
     description: 'A map of key-value pairs for all supported statistics. Currently, only count is supported.'
   GetTopicRuleRequest:
     type: object
@@ -15277,6 +15572,9 @@ definitions:
         $ref: '#/definitions/LogLevel'
         description: The log level.
     description: Describes the logging options payload.
+  Maximum:
+    type: number
+    format: double
   Message:
     type: string
     maxLength: 128
@@ -15292,6 +15590,9 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Port'
+  Minimum:
+    type: number
+    format: double
   MissingContextValue:
     type: string
   MitigationAction:
@@ -15384,6 +15685,19 @@ definitions:
     type: object
     additionalProperties:
       $ref: '#/definitions/Value'
+  PercentValue:
+    type: number
+    format: double
+  PercentPair:
+    type: object
+    properties:
+      percent:
+        $ref: '#/definitions/Percent'
+        description: The percentile.
+      value:
+        $ref: '#/definitions/PercentValue'
+        description: The value.
+    description: Describes the percentile and percentile value.
   Platform:
     type: string
   Policy:
@@ -15771,6 +16085,18 @@ definitions:
         description: The IAM role ARN that grants permission the input file.
   StateMachineName:
     type: string
+  Sum:
+    type: number
+    format: double
+  SumOfSquares:
+    type: number
+    format: double
+  Variance:
+    type: number
+    format: double
+  StdDeviation:
+    type: number
+    format: double
   StopThingRegistrationTaskRequest:
     type: object
     properties: {}

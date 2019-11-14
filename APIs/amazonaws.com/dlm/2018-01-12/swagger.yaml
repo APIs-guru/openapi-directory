@@ -109,6 +109,7 @@ x-servers:
           - cn-northwest-1
         default: cn-north-1
     description: The Amazon DLM endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 consumes:
   - application/json
 produces:
@@ -195,9 +196,13 @@ paths:
               ExecutionRoleArn:
                 description: The Amazon Resource Name (ARN) of the IAM role used to run the operations specified by the lifecycle policy.
                 type: string
+                pattern: 'arn:aws:iam::\d+:role/.*'
+                minLength: 0
+                maxLength: 2048
               Description:
                 description: 'A description of the lifecycle policy. The characters ^[0-9A-Za-z _-]+$ are supported.'
                 type: string
+                pattern: '[0-9A-Za-z _-]+'
                 minLength: 0
                 maxLength: 500
               State:
@@ -225,6 +230,13 @@ paths:
                   Parameters:
                     $ref: '#/definitions/Parameters'
                     description: 'A set of optional parameters that can be provided by the policy. '
+              Tags:
+                description: The tags to apply to the lifecycle policy during creation.
+                type: object
+                minProperties: 1
+                maxProperties: 200
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -322,6 +334,9 @@ paths:
           required: true
           description: The identifier of the lifecycle policy.
           type: string
+          pattern: 'policy-[A-Za-z0-9]+'
+          minLength: 0
+          maxLength: 64
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -356,6 +371,130 @@ paths:
           required: true
           description: The identifier of the lifecycle policy.
           type: string
+          pattern: 'policy-[A-Za-z0-9]+'
+          minLength: 0
+          maxLength: 64
+  '/tags/{resourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: Lists the tags for the specified resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForResourceResponse'
+        '480':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource.
+          type: string
+          pattern: '^arn:aws:dlm:[A-Za-z0-9_/.-]{0,63}:\d+:policy/[0-9A-Za-z_-]{1,128}$'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: Adds the specified tags to the specified resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TagResourceResponse'
+        '480':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource.
+          type: string
+          pattern: '^arn:aws:dlm:[A-Za-z0-9_/.-]{0,63}:\d+:policy/[0-9A-Za-z_-]{1,128}$'
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - Tags
+            properties:
+              Tags:
+                description: One or more tags.
+                type: object
+                minProperties: 1
+                maxProperties: 200
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
+  '/tags/{resourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Removes the specified tags from the specified resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UntagResourceResponse'
+        '480':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource.
+          type: string
+          pattern: '^arn:aws:dlm:[A-Za-z0-9_/.-]{0,63}:\d+:policy/[0-9A-Za-z_-]{1,128}$'
+        - name: tagKeys
+          in: query
+          required: true
+          description: The tag keys.
+          type: array
+          items:
+            type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/policies/{policyId}':
     patch:
       operationId: UpdateLifecyclePolicy
@@ -387,6 +526,9 @@ paths:
           required: true
           description: The identifier of the lifecycle policy.
           type: string
+          pattern: 'policy-[A-Za-z0-9]+'
+          minLength: 0
+          maxLength: 64
         - name: body
           in: body
           required: true
@@ -396,6 +538,9 @@ paths:
               ExecutionRoleArn:
                 description: The Amazon Resource Name (ARN) of the IAM role used to run the operations specified by the lifecycle policy.
                 type: string
+                pattern: 'arn:aws:iam::\d+:role/.*'
+                minLength: 0
+                maxLength: 2048
               State:
                 description: The desired activation state of the lifecycle policy after creation.
                 type: string
@@ -405,6 +550,7 @@ paths:
               Description:
                 description: A description of the lifecycle policy.
                 type: string
+                pattern: '[0-9A-Za-z _-]+'
                 minLength: 0
                 maxLength: 500
               PolicyDetails:
@@ -470,6 +616,9 @@ definitions:
         $ref: '#/definitions/ExcludeBootVolume'
         description: 'When executing an EBS Snapshot Management – Instance policy, execute all CreateSnapshots calls with the <code>excludeBootVolume</code> set to the supplied field. Defaults to false. Only valid for EBS Snapshot Management – Instance policies.'
     description: Optional parameters that can be added to the policy. The set of valid parameters depends on the combination of <code>policyType</code> and <code>resourceType</code> values.
+  TagValue:
+    type: string
+    maxLength: 256
   InvalidRequestException: {}
   LimitExceededException: {}
   InternalServerException: {}
@@ -485,6 +634,9 @@ definitions:
         description: Summary information about the lifecycle policies.
   PolicyId:
     type: string
+    pattern: 'policy-[A-Za-z0-9]+'
+    minLength: 0
+    maxLength: 64
   ResourceTypeValues:
     type: string
     enum:
@@ -492,12 +644,32 @@ definitions:
       - INSTANCE
   TagFilter:
     type: string
+    pattern: '[\p{all}]*'
+    minLength: 0
+    maxLength: 256
   GetLifecyclePolicyResponse:
     type: object
     properties:
       Policy:
         $ref: '#/definitions/LifecyclePolicy'
         description: Detailed information about the lifecycle policy.
+  ListTagsForResourceResponse:
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/TagMap'
+        description: Information about the tags.
+  TagResourceResponse:
+    type: object
+    properties: {}
+  UntagResourceResponse:
+    type: object
+    properties: {}
+  TagKey:
+    type: string
+    pattern: '^(?!aws:)[a-zA-Z+-=._:/]+$'
+    minLength: 1
+    maxLength: 128
   UpdateLifecyclePolicyResponse:
     type: object
     properties: {}
@@ -509,8 +681,12 @@ definitions:
     maximum: 1000
   ExecutionRoleArn:
     type: string
+    pattern: 'arn:aws:iam::\d+:role/.*'
+    minLength: 0
+    maxLength: 2048
   PolicyDescription:
     type: string
+    pattern: '[0-9A-Za-z _-]+'
     minLength: 0
     maxLength: 500
   SettablePolicyStateValues:
@@ -537,6 +713,12 @@ definitions:
         $ref: '#/definitions/Parameters'
         description: 'A set of optional parameters that can be provided by the policy. '
     description: Specifies the configuration of a lifecycle policy.
+  TagMap:
+    type: object
+    minProperties: 1
+    maxProperties: 200
+    additionalProperties:
+      $ref: '#/definitions/TagValue'
   CreateLifecyclePolicyRequest:
     type: object
     required:
@@ -556,7 +738,10 @@ definitions:
         description: The desired activation state of the lifecycle policy after creation.
       PolicyDetails:
         $ref: '#/definitions/PolicyDetails'
-        description: <p>The configuration details of the lifecycle policy.</p> <p>Target tags cannot be re-used across lifecycle policies.</p>
+        description: The configuration details of the lifecycle policy.
+      Tags:
+        $ref: '#/definitions/TagMap'
+        description: The tags to apply to the lifecycle policy during creation.
   Interval:
     type: integer
     minimum: 1
@@ -634,6 +819,9 @@ definitions:
       State:
         $ref: '#/definitions/GettablePolicyStateValues'
         description: The activation state of the lifecycle policy.
+      StatusMessage:
+        $ref: '#/definitions/StatusMessage'
+        description: The description of the status.
       ExecutionRoleArn:
         $ref: '#/definitions/ExecutionRoleArn'
         description: The Amazon Resource Name (ARN) of the IAM role used to run the operations specified by the lifecycle policy.
@@ -646,10 +834,24 @@ definitions:
       PolicyDetails:
         $ref: '#/definitions/PolicyDetails'
         description: The configuration of the lifecycle policy
+      Tags:
+        $ref: '#/definitions/TagMap'
+        description: The tags.
+      PolicyArn:
+        $ref: '#/definitions/PolicyArn'
+        description: The Amazon Resource Name (ARN) of the policy.
     description: Detailed information about a lifecycle policy.
+  StatusMessage:
+    type: string
+    pattern: '[\p{all}]*'
+    minLength: 0
+    maxLength: 500
   Timestamp:
     type: string
     format: date-time
+  PolicyArn:
+    type: string
+    pattern: '^arn:aws:dlm:[A-Za-z0-9_/.-]{0,63}:\d+:policy/[0-9A-Za-z_-]{1,128}$'
   LifecyclePolicySummary:
     type: object
     properties:
@@ -662,7 +864,13 @@ definitions:
       State:
         $ref: '#/definitions/GettablePolicyStateValues'
         description: The activation state of the lifecycle policy.
+      Tags:
+        $ref: '#/definitions/TagMap'
+        description: The tags.
     description: Summary information about a lifecycle policy.
+  ListTagsForResourceRequest:
+    type: object
+    properties: {}
   RetainRule:
     type: object
     required:
@@ -674,6 +882,7 @@ definitions:
     description: Specifies the number of snapshots to keep for each EBS volume.
   ScheduleName:
     type: string
+    pattern: '[\p{all}]*'
     minLength: 0
     maxLength: 500
   TagsToAddList:
@@ -712,6 +921,9 @@ definitions:
     description: Specifies a schedule.
   String:
     type: string
+    pattern: '[\p{all}]*'
+    minLength: 0
+    maxLength: 500
   Tag:
     type: object
     required:
@@ -725,9 +937,28 @@ definitions:
         $ref: '#/definitions/String'
         description: The tag value.
     description: Specifies a tag for a resource.
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+    minItems: 1
+    maxItems: 200
+  TagResourceRequest:
+    type: object
+    required:
+      - Tags
+    properties:
+      Tags:
+        $ref: '#/definitions/TagMap'
+        description: One or more tags.
   Time:
     type: string
-    pattern: '^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$'
+    pattern: '^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$'
+    minLength: 5
+    maxLength: 5
+  UntagResourceRequest:
+    type: object
+    properties: {}
   UpdateLifecyclePolicyRequest:
     type: object
     properties:
@@ -742,4 +973,4 @@ definitions:
         description: A description of the lifecycle policy.
       PolicyDetails:
         $ref: '#/definitions/PolicyDetails'
-        description: <p>The configuration of the lifecycle policy.</p> <p>Target tags cannot be re-used across policies.</p>
+        description: The configuration of the lifecycle policy. You cannot update the policy type or the resource type.
