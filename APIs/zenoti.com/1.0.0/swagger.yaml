@@ -7,14 +7,12 @@ info:
     email: support@zenoti.com
     x-twitter: ZenotiSoftware
   description: |+
-    Zenoti Open APIs now help you manage the powerful capabilities offered through a suite of Open APIs. 
+    Zenoti Open APIs now help you manage the powerful capabilities offered through a suite of Open APIs.
 
   title: Zenoti Open
   version: 1.0.0
   x-apisguru-categories:
     - customer_relation
-  x-logo:
-    url: 'https://twitter.com/ZenotiSoftware/profile_image?size=original'
   x-origin:
     - format: swagger
       url: 'https://zenotiopenapi.docs.apiary.io/api-description-document'
@@ -396,8 +394,8 @@ paths:
               Returns following Json fields.
 
 
-              | Field | Value Type | 
-              | -------- | -------- | 
+              | Field | Value Type |
+              | -------- | -------- |
               | IsConfirmed     | Bool     |
               | ConfirmationId     | GUID     |
               | ReservationId     | GUID     |
@@ -407,8 +405,8 @@ paths:
 
               Components of ConfirmedBookings:
 
-              | Field | Value Type | 
-              | -------- | -------- | 
+              | Field | Value Type |
+              | -------- | -------- |
               | GuestId     | GUID     |
               | AppointmentGroupId     | GUID     |
               | Services     | Array of `Service` Object     |
@@ -671,13 +669,13 @@ paths:
 
 
 
-              | Feedback Rating  | Enum  | 
+              | Feedback Rating  | Enum  |
               | -------- | -------- | -------- |
-              | Poor      | 1     | 
-              | Average      | 2     | 
-              | Good      | 3    | 
-              | Excellent      | 4     | 
-              | Outstanding      | 5    | 
+              | Poor      | 1     |
+              | Average      | 2     |
+              | Good      | 3    |
+              | Excellent      | 4     |
+              | Outstanding      | 5    |
 
             type: object
           x-examples:
@@ -763,7 +761,7 @@ paths:
               | AddOnAppointmentId     | String     |  AppointmentId of Add on service added    |
               | AppointmentId     | String     |  AppointmentId of Service to which Add on service is added    |
 
-               
+
             type: object
       summary: '/v1/Catalog/Appointments/{AppointmentId}/AddOnService'
       tags:
@@ -1004,9 +1002,9 @@ paths:
             description: |+
               Returns following Json Fields
 
-              | Field | Value Type | 
+              | Field | Value Type |
               | -------- | -------- |
-              | ReservationId     | String     | 
+              | ReservationId     | String     |
               | IsCancelled     | bool     |
 
             type: object
@@ -1304,13 +1302,13 @@ paths:
 
         Transaction Form
 
-        | Enum | Value | 
-        | -------- | -------- | 
+        | Enum | Value |
+        | -------- | -------- |
         | Web     | 1     |
         | WebStore     | 2     |
         | CheckWeb     | 4     |
         | Mobile     | 8     |
-        | MobilePOS     | 16     | 
+        | MobilePOS     | 16     |
       parameters:
         - in: query
           name: GuestId
@@ -2661,7 +2659,7 @@ paths:
 
         Fields marked with `*` are mandatory.
 
-        Exapmle request : 
+        Exapmle request :
 
         ```
         {
@@ -2896,7 +2894,7 @@ paths:
       description: |-
         Create OTP for a guest account verification
 
-        Example Request : 
+        Example Request :
 
         ```
         {
@@ -3983,7 +3981,7 @@ paths:
       description: |-
         Verify a guest account based on the generated OTP
 
-        Example Request : 
+        Example Request :
 
         ```
         {
@@ -4056,11 +4054,11 @@ paths:
             description: |+
               Input Json Fields
 
-              | Field | Value Type | 
-              | -------- | -------- | 
-              | Code     | string     |      
-              | InvoiceId     | GUID     | 
-              | CenterId     | GUID     | 
+              | Field | Value Type |
+              | -------- | -------- |
+              | Code     | string     |
+              | InvoiceId     | GUID     |
+              | CenterId     | GUID     |
 
             type: object
           x-examples:
@@ -5780,37 +5778,37 @@ paths:
 
         TransactionType - enum
 
-        | enum | value | 
-        | -------- | -------- | 
-        | All     | 0     | 
-        | Authorize     | 1     | 
-        | Refund     | 2     | 
-        | Reversal     | 3     | 
-        | Sale     | 4     | 
+        | enum | value |
+        | -------- | -------- |
+        | All     | 0     |
+        | Authorize     | 1     |
+        | Refund     | 2     |
+        | Reversal     | 3     |
+        | Sale     | 4     |
         | Voided |  5  |
 
         TransactionStatus - enum
 
-        | feild | value | 
+        | feild | value |
         | -------- | -------- |
-        | All     | 0     | 
-        | CCCompleteNotYetSubmitted     | 1     | 
-        | Error     | 2     | 
-        | Failed     | 3     | 
-        | Originated     | 4     | 
-        | Pending     | 5     | 
-        | Queued     | 6     | 
-        | Returned     | 7     | 
-        | Settled     | 8     | 
-        | Success     | 9     | 
-        | Voided     | 10     | 
+        | All     | 0     |
+        | CCCompleteNotYetSubmitted     | 1     |
+        | Error     | 2     |
+        | Failed     | 3     |
+        | Originated     | 4     |
+        | Pending     | 5     |
+        | Queued     | 6     |
+        | Returned     | 7     |
+        | Settled     | 8     |
+        | Success     | 9     |
+        | Voided     | 10     |
 
         View - enum
 
-        | feild | value | 
+        | feild | value |
         | -------- | -------- |
-        | Default     | 1     | 
-        | Deposit     | 2     | 
+        | Default     | 1     |
+        | Deposit     | 2     |
 
       parameters:
         - format: date-time
@@ -6868,12 +6866,12 @@ paths:
 
         | ItemType | value |
         | -------- | -------- |
-        | Service     | 0     | 
-        | Product     | 2     | 
-        | Membership     | 3     | 
-        | Package     | 4     | 
-        | Day Package     | 5     | 
-        | Pre-Paid/GiftCard     | 6     | 
+        | Service     | 0     |
+        | Product     | 2     |
+        | Membership     | 3     |
+        | Package     | 4     |
+        | Day Package     | 5     |
+        | Pre-Paid/GiftCard     | 6     |
       parameters:
         - format: date-time
           in: query
@@ -7182,7 +7180,7 @@ paths:
         - application/x-www-form-urlencoded
         - text/html
       description: |-
-        API is used to create a confirmed appointment. It is expected that following information is sent as the request body. 
+        API is used to create a confirmed appointment. It is expected that following information is sent as the request body.
 
         ```
         {"CenterId":"adb0c9cd-5357-440d-8ee4-4557c6241271","ReservationId":"ab2549c1-aea3-476e-b16b-d856f4363b03"}
@@ -7508,7 +7506,7 @@ paths:
     post:
       consumes: []
       description: |-
-        Example Request : 
+        Example Request :
         ```
         {
           "CenterId": "string",
@@ -8364,7 +8362,7 @@ paths:
     post:
       consumes: []
       description: |+
-        This API can be called to add an appointment. 
+        This API can be called to add an appointment.
 
         Parameters
 
@@ -8374,7 +8372,7 @@ paths:
         | AppointmentGroupId    | GUID     | Unique identifier for the appointment    ||
         | Comments    | String     | Comments for No Show    |
 
-        Security:  Permissions required to call this API. 
+        Security:  Permissions required to call this API.
 
 
 
@@ -10100,7 +10098,7 @@ paths:
     post:
       consumes: []
       description: |-
-        The API returns a list of available appointments. API expects that following information be passed in the Request body. 
+        The API returns a list of available appointments. API expects that following information be passed in the Request body.
 
         ```
         {"CenterId":"adb0c9cd-5357-440d-8ee4-4557c6241271","CenterDate":"2017-05-08","SlotBookings":[{"Services":[{"Service":{"Id":"8b15f00d-0594-4975-8d27-c88a3c64bfab"}}]}]}
@@ -12395,7 +12393,7 @@ paths:
     post:
       consumes: []
       description: |+
-        This API can be  called to cancel an existing appointment. 
+        This API can be  called to cancel an existing appointment.
 
         Parameters
 
@@ -12406,7 +12404,7 @@ paths:
         | ReasonId    | INT     |  Reason for cancellation of appointment    |
         | Comments    | String     | Comments for cancellation    |
 
-        Security:  Permissions required to call this API. 
+        Security:  Permissions required to call this API.
 
 
 
@@ -12440,7 +12438,7 @@ paths:
     post:
       consumes: []
       description: |+
-        This API can be  called to Mark No Show for an existing appointment. 
+        This API can be  called to Mark No Show for an existing appointment.
 
         Parameters
 
@@ -12450,7 +12448,7 @@ paths:
         | AppointmentGroupId    | GUID     | Unique identifier for the appointment    ||
         | Comments    | String     | Comments for No Show    |
 
-        Security:  Permissions required to call this API. 
+        Security:  Permissions required to call this API.
 
 
 
@@ -12496,7 +12494,7 @@ paths:
     post:
       consumes: []
       description: |+
-        This API can be  called to cancel an existing appointment. 
+        This API can be  called to cancel an existing appointment.
 
         Parameters
 
@@ -12507,7 +12505,7 @@ paths:
         | ReasonId    | INT     |  Reason for cancellation of appointment    |
         | Comments    | String     | Comments for cancellation    |
 
-        Security:  Permissions required to call this API. 
+        Security:  Permissions required to call this API.
 
 
 
@@ -14005,8 +14003,8 @@ paths:
       description: |+
         Below are the respective statuses for the value of the status tag in the input.
 
-        | status  | value  | 
-        | -------- | -------- | 
+        | status  | value  |
+        | -------- | -------- |
         | New | 0 |
         | Checkin     | 2     |
         | Undo Checkin     | 0     |
@@ -14064,7 +14062,7 @@ paths:
         - application/x-www-form-urlencoded
         - text/html
       description: |-
-        The API is used to reserve a temporary Appointment slot. API expects following information be sent in the Request body. 
+        The API is used to reserve a temporary Appointment slot. API expects following information be sent in the Request body.
 
         ```
         {"CenterId":"adb0c9cd-5357-440d-8ee4-4557c6241271","CenterTime":"2017-05-05 12:00:00","SlotBookings":[{"GuestId":"2e24d650-d7b4-473e-9bf3-b835c882cf35","Services":[{"Service":{"Id":"8b15f00d-0594-4975-8d27-c88a3c64bfab"}}],"StartTime":"2017-05-05 12:00:00"}]}
@@ -14786,7 +14784,7 @@ paths:
     post:
       consumes: []
       description: |+
-        This API can be  called to cancel an existing appointment. 
+        This API can be  called to cancel an existing appointment.
 
         Parameters
 
@@ -14797,7 +14795,7 @@ paths:
         | ReasonId    | INT     |  Reason for cancellation of appointment    |
         | Comments    | String     | Comments for cancellation    |
 
-        Security:  Permissions required to call this API. 
+        Security:  Permissions required to call this API.
 
 
 
@@ -16700,7 +16698,7 @@ paths:
       description: |+
         Below are the respective statuses for the value of the status tag in the input.
 
-        | status  | value  | 
+        | status  | value  |
         | New | 0 |
         | Checkin     | 1     |
         | Undo Checkin     | 2     |
@@ -17614,7 +17612,7 @@ paths:
   /v1/centers:
     get:
       description: |-
-        API returns a list of Centers that the user is authorized to view. 
+        API returns a list of Centers that the user is authorized to view.
 
         Security:
         `API requires a security token for a user with read permission on Centers.`
@@ -18241,7 +18239,7 @@ paths:
   '/v1/centers/{CenterId}':
     get:
       description: |-
-        API returns the details of a specific center. 
+        API returns the details of a specific center.
 
         Security:
         `API requires a security token for a user with read permission on Centers.`
@@ -18654,11 +18652,11 @@ paths:
   '/v1/giftcards/{giftcard_id}':
     get:
       description: |-
-        Get details of a giftcard. API accepts a giftcard_id to return the response. Giftcard_id refers to the unique identifier stored in Zenoti and is not the same as the giftcard number. 
+        Get details of a giftcard. API accepts a giftcard_id to return the response. Giftcard_id refers to the unique identifier stored in Zenoti and is not the same as the giftcard number.
 
         `Security:  A user who has read access to giftcards object can call this API to get giftcard details. User role must also have API Access permission.`
 
-        Note:  It is not secure to create a GET API that fetches giftcard details by passing giftcard number as either a path parameter or a query parameter, because this information may reside in browser history, and can be misused.  If we need an API that returns giftcard details by passing a giftcard number,  we will need to create a POST api that accepts giftcard number in the request body.  
+        Note:  It is not secure to create a GET API that fetches giftcard details by passing giftcard number as either a path parameter or a query parameter, because this information may reside in browser history, and can be misused.  If we need an API that returns giftcard details by passing a giftcard number,  we will need to create a POST api that accepts giftcard number in the request body.
       parameters: []
       responses:
         '200':
@@ -18823,7 +18821,7 @@ paths:
         - application/x-www-form-urlencoded
         - text/html
       description: |-
-        First name and Last name are always mandatory. Depending on the settings on your system, more fields will be mandatory - check the Add Guest page on your site (Loyalty→Manage Guests). One or more of the following may be set as mandatory: 
+        First name and Last name are always mandatory. Depending on the settings on your system, more fields will be mandatory - check the Add Guest page on your site (Loyalty→Manage Guests). One or more of the following may be set as mandatory:
         ```
         a. Mobile number
         b. Email
@@ -18835,14 +18833,14 @@ paths:
         h. Nationality
         i. Referral Source
         j. Gender
-        ``` 
-         Please note that the API user has to send one of the following values for Gender: 
+        ```
+         Please note that the API user has to send one of the following values for Gender:
 
-         -1 - NotSpecified 
+         -1 - NotSpecified
 
-         0 - Female 
+         0 - Female
 
-         1 - Male 
+         1 - Male
 
           Validate = true should be passed at all time so that input can be validated.
 
@@ -18884,7 +18882,7 @@ paths:
   '/v1/guests/{guest_id}':
     get:
       description: |-
-        API can be used to obtain details of a particular Guest user by passing a GuestId. 
+        API can be used to obtain details of a particular Guest user by passing a GuestId.
 
         Security:
         `API requires security  token of an admin with read permission on Guest, or that of a user who has permission to read information for a particular Guest.`
@@ -18931,7 +18929,7 @@ paths:
     put:
       consumes: []
       description: |-
-        API is used to perform update on the details of a guest. One or more values from below list can be updated. 
+        API is used to perform update on the details of a guest. One or more values from below list can be updated.
 
         | Parameter  | Data Type | Description |
         | -------- | -------- | -------- |
@@ -19091,12 +19089,12 @@ paths:
 
 
         | enum | value |
-        | -------- | -------- | 
-        | Generic     | 2     | 
+        | -------- | -------- |
+        | Generic     | 2     |
         |Checkin | 3   |
-        | Booking     | 4     | 
-        | Payment     |8    | 
-        | Profile     | 10     | 
+        | Booking     | 4     |
+        | Payment     |8    |
+        | Profile     | 10     |
 
         Security: `Requires read permission on guest and notes. Guest can view only her information.`
       parameters: []
@@ -19118,18 +19116,18 @@ paths:
     post:
       consumes: []
       description: |-
-        Create a note associated with the guest. 
+        Create a note associated with the guest.
 
         NoteType - enum
 
 
         | enum | value |
-        | -------- | -------- | 
-        | Generic     | 2     | 
+        | -------- | -------- |
+        | Generic     | 2     |
         |Checkin | 3   |
-        | Booking     | 4     | 
-        | Payment     |8    | 
-        | Profile     | 10     | 
+        | Booking     | 4     |
+        | Payment     |8    |
+        | Profile     | 10     |
 
 
 
@@ -19171,7 +19169,7 @@ paths:
   '/v1/guests/{guest_id}/notes/{note_id}':
     delete:
       description: |-
-        Delete a note associated with the guest. 
+        Delete a note associated with the guest.
 
         Security:`Write permission on notes object.`
       parameters: []
@@ -19195,7 +19193,7 @@ paths:
   '/v1/guests/{guest_id}/packages':
     get:
       description: |+
-        Returns packages bought by a guest. 
+        Returns packages bought by a guest.
 
         Security:  `Required read permission on the guest and packages object. Guest user can only view her information.`
 
@@ -19307,7 +19305,7 @@ paths:
     post:
       consumes: []
       description: |+
-        API is used to create an OTP associated with a provided email address or phone number.  Below are the samples. The user has to pass either email or phone number (but not both) in the  request body. 
+        API is used to create an OTP associated with a provided email address or phone number.  Below are the samples. The user has to pass either email or phone number (but not both) in the  request body.
 
         Case 1:  Generate OTP and send to email
         ```
@@ -19317,7 +19315,7 @@ paths:
         }
         ```
 
-        Case 2: Genetate OTP and send to phone number. 
+        Case 2: Genetate OTP and send to phone number.
         ```
         {
            "CenterId": "3ECC3E05-8AAF-4792-BA0A-EC3D822FA6C5",
@@ -19372,9 +19370,9 @@ paths:
     put:
       consumes: []
       description: |-
-        API can be used to check if the provided OTP matches with the issued OTP to a given email address or phone number.  
+        API can be used to check if the provided OTP matches with the issued OTP to a given email address or phone number.
 
-        PUT method has been used for security reasons. Following request has to be sent in the body. 
+        PUT method has been used for security reasons. Following request has to be sent in the body.
 
         ```
         {
@@ -19425,12 +19423,12 @@ paths:
   /v1/services:
     get:
       description: |-
-        API returns a list of services. Following filter options are supported. 
+        API returns a list of services. Following filter options are supported.
 
         ```
-        a. centerId - To return services in a particular center. 
-        b. categoryId - To return services in a specified category only. 
-        c. isCatalogEnabled - To return services that can be displayed in a webstore. 
+        a. centerId - To return services in a particular center.
+        b. categoryId - To return services in a specified category only.
+        c. isCatalogEnabled - To return services that can be displayed in a webstore.
         d. tag - To return services which are tagged by
         ```
 
@@ -19573,10 +19571,10 @@ paths:
   /v1/services/categories:
     get:
       description: |-
-        API returns a list of main categories for the services. The API exposes following two filters. 
+        API returns a list of main categories for the services. The API exposes following two filters.
 
         ```
-        a. centerId - To view the categories only for a particular center. 
+        a. centerId - To view the categories only for a particular center.
         b. parentCategoryId - To view child categories of a particular main category.
         ```
 
@@ -19709,14 +19707,14 @@ paths:
       consumes:
         - text/plain
       description: |-
-        This API is used to create a token for a valid user. The token can subsequenty be used as a Authorization token for other API calls. 
-        The request body should be a string in the below format. (grant_type should be passed as "password"). 
+        This API is used to create a token for a valid user. The token can subsequenty be used as a Authorization token for other API calls.
+        The request body should be a string in the below format. (grant_type should be passed as "password").
 
         ```
         username={{username}}&password={{password}}&clientid={{clientid}}&grant_type={{grant_type}}
         ```
 
-        Note:  OAuth2 token is not required to be passed in the header. Only API key is required. 
+        Note:  OAuth2 token is not required to be passed in the header. Only API key is required.
       parameters:
         - description: Issued API key
           in: header
@@ -20705,16 +20703,16 @@ paths:
         Status - Enum
 
         | Enum | Value |
-        | -------- | -------- | 
-        | NoShow     | -2     | 
-        | Cancelled     | -1     | 
-        | New     | 0     | 
+        | -------- | -------- |
+        | NoShow     | -2     |
+        | Cancelled     | -1     |
+        | New     | 0     |
         | Closed     | 1    |
-        | Checkin     | 2     | 
-        | Confirm     | 4     | 
-        | Break     | 10    | 
-        | NotSpecified     | 11     | 
-        | Available     | 20     | 
+        | Checkin     | 2     |
+        | Confirm     | 4     |
+        | Break     | 10    |
+        | NotSpecified     | 11     |
+        | Available     | 20     |
       parameters:
         - description: 'DataType: UniqueIdentifier(GUID)'
           in: query
@@ -20733,15 +20731,15 @@ paths:
           type: string
         - description: |-
             | Enum | Value |
-            | -------- | -------- | 
-            | NoShow     | -2     | 
-            | Cancelled     | -1     | 
-            | New     | 0     | 
+            | -------- | -------- |
+            | NoShow     | -2     |
+            | Cancelled     | -1     |
+            | New     | 0     |
             | Closed     | 1    |
-            | Checkin     | 2     | 
-            | Confirm     | 4     | 
-            | Break     | 10    | 
-            | NotSpecified     | 11     | 
+            | Checkin     | 2     |
+            | Confirm     | 4     |
+            | Break     | 10    |
+            | NotSpecified     | 11     |
             | Available     | 20     |
           in: query
           name: status
@@ -21084,7 +21082,7 @@ paths:
   '/v2/guests/{guestId}/memberships':
     get:
       description: |-
-        Returns membership information of a guest. 
+        Returns membership information of a guest.
 
         Security: `Read permission on guest and memberships.  Guest can only view her information.`
       parameters: []
@@ -21146,7 +21144,7 @@ paths:
   '/v2/guests/{guest_id}/customdata':
     get:
       description: |-
-        Returns custom data of a guest. 
+        Returns custom data of a guest.
 
         Security:`Write permission on the custom data.`
       parameters: []
@@ -33438,7 +33436,7 @@ definitions:
 
       | Name | Value |
       | -------- | -------- | -------- |
-      | Therapist     | 1     | 
+      | Therapist     | 1     |
       | Room | 2 |
 
     enum:
@@ -33554,9 +33552,9 @@ definitions:
       section: Models
   appointment_progress:
     description: |-
-      | Name | Value | 
+      | Name | Value |
       | -------- | -------- |
-      | Not started     | 0     | 
+      | Not started     | 0     |
       | Started | 1 |
       | Completed | 2|
     enum:
@@ -33969,11 +33967,11 @@ definitions:
       NoteType:
         description: |-
           | enum | value |
-          | -------- | -------- | 
-          | Generic     | 2     | 
+          | -------- | -------- |
+          | Generic     | 2     |
           |Checkin | 3   |
-          | Booking     | 4     | 
-          | Payment     |8    | 
+          | Booking     | 4     |
+          | Payment     |8    |
           | Profile     | 10     |
         enum:
           - 0
