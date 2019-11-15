@@ -160,6 +160,55 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
+  '/#X-Amz-Target=AmazonPersonalize.CreateBatchInferenceJob':
+    post:
+      operationId: CreateBatchInferenceJob
+      description: 'Creates a batch inference job. The operation can handle up to 50 million records and the input file must be in JSON format. For more information, see <a>recommendations-batch</a>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateBatchInferenceJobResponse'
+        '480':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '481':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateBatchInferenceJobRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonPersonalize.CreateBatchInferenceJob
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AmazonPersonalize.CreateCampaign':
     post:
       operationId: CreateCampaign
@@ -799,6 +848,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonPersonalize.DescribeBatchInferenceJob':
+    post:
+      operationId: DescribeBatchInferenceJob
+      description: 'Gets the properties of a batch inference job including name, Amazon Resource Name (ARN), status, input and output configurations, and the ARN of the solution version used to generate the recommendations.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeBatchInferenceJobResponse'
+        '480':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeBatchInferenceJobRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonPersonalize.DescribeBatchInferenceJob
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AmazonPersonalize.DescribeCampaign':
     post:
       operationId: DescribeCampaign
@@ -1202,6 +1288,53 @@ paths:
           type: string
           enum:
             - AmazonPersonalize.GetSolutionMetrics
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonPersonalize.ListBatchInferenceJobs':
+    post:
+      operationId: ListBatchInferenceJobs
+      description: Gets a list of the batch inference jobs that have been performed off of a solution version.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListBatchInferenceJobsResponse'
+        '480':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '481':
+          description: InvalidNextTokenException
+          schema:
+            $ref: '#/definitions/InvalidNextTokenException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListBatchInferenceJobsRequest'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonPersonalize.ListBatchInferenceJobs
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1667,6 +1800,44 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
+  CreateBatchInferenceJobResponse:
+    type: object
+    properties:
+      batchInferenceJobArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the batch inference job.
+  CreateBatchInferenceJobRequest:
+    type: object
+    required:
+      - jobName
+      - solutionVersionArn
+      - jobInput
+      - jobOutput
+      - roleArn
+    properties:
+      jobName:
+        $ref: '#/definitions/Name'
+        description: The name of the batch inference job to create.
+      solutionVersionArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the solution version that will be used to generate the batch inference recommendations.
+      numResults:
+        $ref: '#/definitions/NumBatchResults'
+        description: The number of recommendations to retreive.
+      jobInput:
+        $ref: '#/definitions/BatchInferenceJobInput'
+        description: The Amazon S3 path that leads to the input file to base your recommendations on. The input material must be in JSON format.
+      jobOutput:
+        $ref: '#/definitions/BatchInferenceJobOutput'
+        description: The path to the Amazon S3 bucket where the job's output will be stored.
+      roleArn:
+        $ref: '#/definitions/RoleArn'
+        description: The ARN of the Amazon Identity and Access Management role that has permissions to read and write to your input and out Amazon S3 buckets respectively.
+  InvalidInputException: {}
+  ResourceAlreadyExistsException: {}
+  LimitExceededException: {}
+  ResourceNotFoundException: {}
+  ResourceInUseException: {}
   CreateCampaignResponse:
     type: object
     properties:
@@ -1689,11 +1860,6 @@ definitions:
       minProvisionedTPS:
         $ref: '#/definitions/TransactionsPerSecond'
         description: Specifies the requested minimum provisioned transactions (recommendations) per second that Amazon Personalize will support.
-  InvalidInputException: {}
-  ResourceNotFoundException: {}
-  ResourceAlreadyExistsException: {}
-  LimitExceededException: {}
-  ResourceInUseException: {}
   CreateDatasetResponse:
     type: object
     properties:
@@ -1917,6 +2083,20 @@ definitions:
       algorithmArn:
         $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the algorithm to describe.
+  DescribeBatchInferenceJobResponse:
+    type: object
+    properties:
+      batchInferenceJob:
+        $ref: '#/definitions/BatchInferenceJob'
+        description: Information on the specified batch inference job.
+  DescribeBatchInferenceJobRequest:
+    type: object
+    required:
+      - batchInferenceJobArn
+    properties:
+      batchInferenceJobArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the batch inference job to describe.
   DescribeCampaignResponse:
     type: object
     properties:
@@ -2074,6 +2254,28 @@ definitions:
       solutionVersionArn:
         $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the solution version for which to get metrics.
+  ListBatchInferenceJobsResponse:
+    type: object
+    properties:
+      batchInferenceJobs:
+        $ref: '#/definitions/BatchInferenceJobs'
+        description: A list containing information on each job that is returned.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token to use to retreive the next page of results. The value is <code>null</code> when there are no more results to return.
+  ListBatchInferenceJobsRequest:
+    type: object
+    properties:
+      solutionVersionArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the solution version from which the batch inference jobs were created.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token to request the next page of results.
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of batch inference job results to return in each page. The default value is 100.
+  InvalidNextTokenException: {}
   ListCampaignsResponse:
     type: object
     properties:
@@ -2095,7 +2297,6 @@ definitions:
       maxResults:
         $ref: '#/definitions/MaxResults'
         description: The maximum number of campaigns to return.
-  InvalidNextTokenException: {}
   ListDatasetGroupsResponse:
     type: object
     properties:
@@ -2396,16 +2597,116 @@ definitions:
   AvroSchema:
     type: string
     maxLength: 10000
+  FailureReason:
+    type: string
+  NumBatchResults:
+    type: integer
+  BatchInferenceJobInput:
+    type: object
+    required:
+      - s3DataSource
+    properties:
+      s3DataSource:
+        $ref: '#/definitions/S3DataConfig'
+        description: The URI of the Amazon S3 location that contains your input data. The Amazon S3 bucket must be in the same region as the API endpoint you are calling.
+    description: The input configuration of a batch inference job.
+  BatchInferenceJobOutput:
+    type: object
+    required:
+      - s3DataDestination
+    properties:
+      s3DataDestination:
+        $ref: '#/definitions/S3DataConfig'
+        description: Information on the Amazon S3 bucket in which the batch inference job's output is stored.
+    description: The output configuration parameters of a batch inference job.
+  RoleArn:
+    type: string
+    pattern: 'arn:([a-z\d-]+):iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
+    maxLength: 256
+  Status:
+    type: string
+    maxLength: 256
+  BatchInferenceJob:
+    type: object
+    properties:
+      jobName:
+        $ref: '#/definitions/Name'
+        description: The name of the batch inference job.
+      batchInferenceJobArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the batch inference job.
+      failureReason:
+        $ref: '#/definitions/FailureReason'
+        description: 'If the batch inference job failed, the reason for the failure.'
+      solutionVersionArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the solution version from which the batch inference job was created.
+      numResults:
+        $ref: '#/definitions/NumBatchResults'
+        description: The number of recommendations generated by the batch inference job. This number includes the error messages generated for failed input records.
+      jobInput:
+        $ref: '#/definitions/BatchInferenceJobInput'
+        description: The Amazon S3 path that leads to the input data used to generate the batch inference job.
+      jobOutput:
+        $ref: '#/definitions/BatchInferenceJobOutput'
+        description: The Amazon S3 bucket that contains the output data generated by the batch inference job.
+      roleArn:
+        $ref: '#/definitions/RoleArn'
+        description: The ARN of the Amazon Identity and Access Management (IAM) role that requested the batch inference job.
+      status:
+        $ref: '#/definitions/Status'
+        description: '<p>The status of the batch inference job. The status is one of the following values:</p> <ul> <li> <p>PENDING</p> </li> <li> <p>IN PROGRESS</p> </li> <li> <p>ACTIVE</p> </li> <li> <p>CREATE FAILED</p> </li> </ul>'
+      creationDateTime:
+        $ref: '#/definitions/Date'
+        description: The time at which the batch inference job was created.
+      lastUpdatedDateTime:
+        $ref: '#/definitions/Date'
+        description: The time at which the batch inference job was last updated.
+    description: Contains information on a batch inference job.
+  S3DataConfig:
+    type: object
+    required:
+      - path
+    properties:
+      path:
+        $ref: '#/definitions/S3Location'
+        description: The file path of the Amazon S3 bucket.
+      kmsKeyArn:
+        $ref: '#/definitions/KmsKeyArn'
+        description: The Amazon Resource Name (ARN) of the Amazon Key Management Service (KMS) key that Amazon Personalize uses to encrypt or decrypt the input and output files of a batch inference job.
+    description: The configuration details of an Amazon S3 input or output bucket.
+  BatchInferenceJobSummary:
+    type: object
+    properties:
+      batchInferenceJobArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the batch inference job.
+      jobName:
+        $ref: '#/definitions/Name'
+        description: The name of the batch inference job.
+      status:
+        $ref: '#/definitions/Status'
+        description: '<p>The status of the batch inference job. The status is one of the following values:</p> <ul> <li> <p>PENDING</p> </li> <li> <p>IN PROGRESS</p> </li> <li> <p>ACTIVE</p> </li> <li> <p>CREATE FAILED</p> </li> </ul>'
+      creationDateTime:
+        $ref: '#/definitions/Date'
+        description: The time at which the batch inference job was created.
+      lastUpdatedDateTime:
+        $ref: '#/definitions/Date'
+        description: The time at which the batch inference job was last updated.
+      failureReason:
+        $ref: '#/definitions/FailureReason'
+        description: 'If the batch inference job failed, the reason for the failure.'
+    description: A truncated version of the <a>BatchInferenceJob</a> datatype. The <a>ListBatchInferenceJobs</a> operation returns a list of batch inference job summaries.
+  BatchInferenceJobs:
+    type: array
+    items:
+      $ref: '#/definitions/BatchInferenceJobSummary'
+    maxItems: 100
   Boolean:
     type: boolean
   TransactionsPerSecond:
     type: integer
     minimum: 1
-  Status:
-    type: string
-    maxLength: 256
-  FailureReason:
-    type: string
   CampaignUpdateSummary:
     type: object
     properties:
@@ -2537,10 +2838,6 @@ definitions:
     items:
       $ref: '#/definitions/ContinuousHyperParameterRange'
     maxItems: 100
-  RoleArn:
-    type: string
-    pattern: 'arn:([a-z\d-]+):iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
-    maxLength: 256
   KmsKeyArn:
     type: string
   DataSource:
@@ -2569,7 +2866,7 @@ definitions:
         description: Only events with a value greater than or equal to this threshold are used for training a model.
       hpoConfig:
         $ref: '#/definitions/HPOConfig'
-        description: Describes the properties for hyperparameter optimization (HPO). For use with the bring-your-own-recipe feature. Not used with Amazon Personalize predefined recipes.
+        description: Describes the properties for hyperparameter optimization (HPO).
       algorithmHyperParameters:
         $ref: '#/definitions/HyperParameters'
         description: Lists the hyperparameter names and ranges.

@@ -109,6 +109,7 @@ x-servers:
           - cn-northwest-1
         default: cn-north-1
     description: The Amazon Connect endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 consumes:
   - application/json
 produces:
@@ -270,6 +271,13 @@ paths:
               HierarchyGroupId:
                 description: The identifier of the hierarchy group for the user.
                 type: string
+              Tags:
+                description: One or more tags.
+                type: object
+                minProperties: 1
+                maxProperties: 50
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -328,7 +336,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: DescribeUser
-      description: Describes the specified user account.
+      description: 'Describes the specified user account. You can find the instance ID in the console (it’s the final part of the ARN). The console does not display the user IDs. Instead, list the users and note the IDs provided in the output.'
       responses:
         '200':
           description: Success
@@ -1181,6 +1189,96 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: Lists the tags for the specified resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForResourceResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource.
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: <p>Adds the specified tags to the specified resource.</p> <p>The supported resource type is users.</p>
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource.
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - tags
+            properties:
+              tags:
+                description: 'One or more tags. For example, { "tags": {"key1":"value1", "key2":"value2"} }.'
+                type: object
+                minProperties: 1
+                maxProperties: 50
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
   '/user-hierarchy-groups-summary/{InstanceId}':
     get:
       operationId: ListUserHierarchyGroups
@@ -1447,6 +1545,54 @@ paths:
                 type: string
                 minLength: 1
                 maxLength: 100
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Removes the specified tags from the specified resource.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource.
+          type: string
+        - name: tagKeys
+          in: query
+          required: true
+          description: The tag keys.
+          type: array
+          items:
+            type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1868,6 +2014,9 @@ definitions:
     type: string
   SecurityProfileId:
     type: string
+  TagValue:
+    type: string
+    maxLength: 256
   InvalidRequestException: {}
   InvalidParameterException: {}
   LimitExceededException: {}
@@ -2285,6 +2434,12 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'If there are additional results, this is the token for the next set of results.'
+  ListTagsForResourceResponse:
+    type: object
+    properties:
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: Information about the tags.
   ListUserHierarchyGroupsResponse:
     type: object
     properties:
@@ -2319,6 +2474,11 @@ definitions:
     type: object
     properties: {}
   ContactNotFoundException: {}
+  TagKey:
+    type: string
+    pattern: '^(?!aws:)[a-zA-Z+-=._:/]+$'
+    minLength: 1
+    maxLength: 128
   UpdateContactAttributesResponse:
     type: object
     properties: {}
@@ -2432,6 +2592,12 @@ definitions:
     type: string
     minLength: 1
     maxLength: 100
+  TagMap:
+    type: object
+    minProperties: 1
+    maxProperties: 50
+    additionalProperties:
+      $ref: '#/definitions/TagValue'
   CreateUserRequest:
     type: object
     required:
@@ -2464,6 +2630,9 @@ definitions:
       HierarchyGroupId:
         $ref: '#/definitions/HierarchyGroupId'
         description: The identifier of the hierarchy group for the user.
+      Tags:
+        $ref: '#/definitions/TagMap'
+        description: One or more tags.
   UserId:
     type: string
   SecurityToken:
@@ -2633,6 +2802,9 @@ definitions:
       HierarchyGroupId:
         $ref: '#/definitions/HierarchyGroupId'
         description: The identifier of the hierarchy group for the user.
+      Tags:
+        $ref: '#/definitions/TagMap'
+        description: The tags.
     description: Contains information about a user account for a Amazon Connect instance.
   QueueReference:
     type: object
@@ -2927,6 +3099,9 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/SecurityProfileSummary'
+  ListTagsForResourceRequest:
+    type: object
+    properties: {}
   ListUserHierarchyGroupsRequest:
     type: object
     properties: {}
@@ -3052,9 +3227,26 @@ definitions:
       InstanceId:
         $ref: '#/definitions/InstanceId'
         description: The identifier of the Amazon Connect instance.
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+    minItems: 1
+    maxItems: 50
+  TagResourceRequest:
+    type: object
+    required:
+      - tags
+    properties:
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: 'One or more tags. For example, { "tags": {"key1":"value1", "key2":"value2"} }.'
   ThresholdValue:
     type: number
     format: double
+  UntagResourceRequest:
+    type: object
+    properties: {}
   UpdateContactAttributesRequest:
     type: object
     required:
