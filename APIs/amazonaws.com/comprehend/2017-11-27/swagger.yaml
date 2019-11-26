@@ -401,6 +401,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=Comprehend_20171127.ClassifyDocument':
+    post:
+      operationId: ClassifyDocument
+      description: 'Creates a new document classification request to analyze a single document in real-time, using a previously created and trained custom model and an endpoint.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ClassifyDocumentResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceUnavailableException
+          schema:
+            $ref: '#/definitions/ResourceUnavailableException'
+        '482':
+          description: TextSizeLimitExceededException
+          schema:
+            $ref: '#/definitions/TextSizeLimitExceededException'
+        '483':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ClassifyDocumentRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Comprehend_20171127.ClassifyDocument
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=Comprehend_20171127.CreateDocumentClassifier':
     post:
       operationId: CreateDocumentClassifier
@@ -454,6 +499,67 @@ paths:
           type: string
           enum:
             - Comprehend_20171127.CreateDocumentClassifier
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=Comprehend_20171127.CreateEndpoint':
+    post:
+      operationId: CreateEndpoint
+      description: 'Creates a model-specific endpoint for synchronous inference for a previously trained custom model '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateEndpointResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '482':
+          description: ResourceLimitExceededException
+          schema:
+            $ref: '#/definitions/ResourceLimitExceededException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: ResourceUnavailableException
+          schema:
+            $ref: '#/definitions/ResourceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '486':
+          description: TooManyTagsException
+          schema:
+            $ref: '#/definitions/TooManyTagsException'
+        '487':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateEndpointRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Comprehend_20171127.CreateEndpoint
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -568,6 +674,55 @@ paths:
           type: string
           enum:
             - Comprehend_20171127.DeleteDocumentClassifier
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=Comprehend_20171127.DeleteEndpoint':
+    post:
+      operationId: DeleteEndpoint
+      description: Deletes a model-specific endpoint for a previously-trained custom model. All endpoints must be deleted in order for the model to be deleted.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteEndpointResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '484':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteEndpointRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Comprehend_20171127.DeleteEndpoint
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -756,6 +911,51 @@ paths:
           type: string
           enum:
             - Comprehend_20171127.DescribeDominantLanguageDetectionJob
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=Comprehend_20171127.DescribeEndpoint':
+    post:
+      operationId: DescribeEndpoint
+      description: Gets the properties associated with a specific endpoint. Use this operation to get the status of an endpoint.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeEndpointResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeEndpointRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Comprehend_20171127.DescribeEndpoint
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1367,6 +1567,47 @@ paths:
           type: string
           enum:
             - Comprehend_20171127.ListDominantLanguageDetectionJobs
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=Comprehend_20171127.ListEndpoints':
+    post:
+      operationId: ListEndpoints
+      description: Gets a list of all existing endpoints that you've created.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListEndpointsResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListEndpointsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Comprehend_20171127.ListEndpoints
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -2329,6 +2570,63 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=Comprehend_20171127.UpdateEndpoint':
+    post:
+      operationId: UpdateEndpoint
+      description: Updates information about the specified endpoint.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateEndpointResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '482':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '483':
+          description: ResourceLimitExceededException
+          schema:
+            $ref: '#/definitions/ResourceLimitExceededException'
+        '484':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '485':
+          description: ResourceUnavailableException
+          schema:
+            $ref: '#/definitions/ResourceUnavailableException'
+        '486':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateEndpointRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Comprehend_20171127.UpdateEndpoint
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   BatchDetectDominantLanguageResponse:
     type: object
@@ -2377,7 +2675,7 @@ definitions:
         description: 'A list containing the text of the input documents. The list can contain a maximum of 25 documents. Each document must contain fewer than 5,000 bytes of UTF-8 encoded characters.'
       LanguageCode:
         $ref: '#/definitions/LanguageCode'
-        description: 'The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.'
+        description: The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language.
   UnsupportedLanguageException: {}
   BatchDetectKeyPhrasesResponse:
     type: object
@@ -2402,7 +2700,7 @@ definitions:
         description: 'A list containing the text of the input documents. The list can contain a maximum of 25 documents. Each document must contain fewer that 5,000 bytes of UTF-8 encoded characters.'
       LanguageCode:
         $ref: '#/definitions/LanguageCode'
-        description: 'The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.'
+        description: The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language.
   BatchDetectSentimentResponse:
     type: object
     required:
@@ -2426,7 +2724,7 @@ definitions:
         description: 'A list containing the text of the input documents. The list can contain a maximum of 25 documents. Each document must contain fewer that 5,000 bytes of UTF-8 encoded characters.'
       LanguageCode:
         $ref: '#/definitions/LanguageCode'
-        description: 'The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.'
+        description: The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language.
   BatchDetectSyntaxResponse:
     type: object
     required:
@@ -2450,7 +2748,26 @@ definitions:
         description: 'A list containing the text of the input documents. The list can contain a maximum of 25 documents. Each document must contain fewer that 5,000 bytes of UTF-8 encoded characters.'
       LanguageCode:
         $ref: '#/definitions/SyntaxLanguageCode'
-        description: 'The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.'
+        description: 'The language of the input documents. You can specify any of the following languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.'
+  ClassifyDocumentResponse:
+    type: object
+    properties:
+      Classes:
+        $ref: '#/definitions/ListOfClasses'
+        description: 'The classes used by the document being analyzed. These are used for multi-class trained models. Individual classes are mutually exclusive and each document is expected to have only a single class assigned to it. For example, an animal can be a dog or a cat, but not both at the same time. '
+  ClassifyDocumentRequest:
+    type: object
+    required:
+      - Text
+      - EndpointArn
+    properties:
+      Text:
+        $ref: '#/definitions/String'
+        description: The document text to be analyzed.
+      EndpointArn:
+        $ref: '#/definitions/DocumentClassifierEndpointArn'
+        description: The Amazon Resource Number (ARN) of the endpoint.
+  ResourceUnavailableException: {}
   CreateDocumentClassifierResponse:
     type: object
     properties:
@@ -2485,7 +2802,7 @@ definitions:
         description: 'A unique identifier for the request. If you don''t set the client request token, Amazon Comprehend generates one.'
       LanguageCode:
         $ref: '#/definitions/LanguageCode'
-        description: 'The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.'
+        description: 'The language of the input documents. You can specify any of the following languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.'
       VolumeKmsKeyId:
         $ref: '#/definitions/KmsKeyId'
         description: '<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:</p> <ul> <li> <p>KMS Key ID: <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>Amazon Resource Name (ARN) of a KMS Key: <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> </ul>'
@@ -2497,6 +2814,35 @@ definitions:
   TooManyRequestsException: {}
   ResourceLimitExceededException: {}
   KmsKeyValidationException: {}
+  CreateEndpointResponse:
+    type: object
+    properties:
+      EndpointArn:
+        $ref: '#/definitions/ComprehendEndpointArn'
+        description: The Amazon Resource Number (ARN) of the endpoint being created.
+  CreateEndpointRequest:
+    type: object
+    required:
+      - EndpointName
+      - ModelArn
+      - DesiredInferenceUnits
+    properties:
+      EndpointName:
+        $ref: '#/definitions/ComprehendEndpointName'
+        description: 'This is the descriptive suffix that becomes part of the <code>EndpointArn</code> used for all subsequent requests to this resource. '
+      ModelArn:
+        $ref: '#/definitions/ComprehendModelArn'
+        description: The Amazon Resource Number (ARN) of the model to which the endpoint will be attached.
+      DesiredInferenceUnits:
+        $ref: '#/definitions/InferenceUnitsInteger'
+        description: ' The desired number of inference units to be used by the model using this endpoint. Each inference unit represents of a throughput of 100 characters per second.'
+      ClientRequestToken:
+        $ref: '#/definitions/ClientRequestTokenString'
+        description: 'An idempotency token provided by the customer. If this token matches a previous endpoint creation request, Amazon Comprehend will not return a <code>ResourceInUseException</code>. '
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: 'Tags associated with the endpoint being created. A tag is a key-value pair that adds metadata to the endpoint. For example, a tag with "Sales" as the key might be added to an endpoint to indicate its use by the sales department. '
+  ResourceNotFoundException: {}
   CreateEntityRecognizerResponse:
     type: object
     properties:
@@ -2546,8 +2892,17 @@ definitions:
       DocumentClassifierArn:
         $ref: '#/definitions/DocumentClassifierArn'
         description: 'The Amazon Resource Name (ARN) that identifies the document classifier. '
-  ResourceNotFoundException: {}
-  ResourceUnavailableException: {}
+  DeleteEndpointResponse:
+    type: object
+    properties: {}
+  DeleteEndpointRequest:
+    type: object
+    required:
+      - EndpointArn
+    properties:
+      EndpointArn:
+        $ref: '#/definitions/ComprehendEndpointArn'
+        description: The Amazon Resource Number (ARN) of the endpoint being deleted.
   DeleteEntityRecognizerResponse:
     type: object
     properties: {}
@@ -2602,6 +2957,20 @@ definitions:
       JobId:
         $ref: '#/definitions/JobId'
         description: The identifier that Amazon Comprehend generated for the job. The operation returns this identifier in its response.
+  DescribeEndpointResponse:
+    type: object
+    properties:
+      EndpointProperties:
+        $ref: '#/definitions/EndpointProperties'
+        description: Describes information associated with the specific endpoint.
+  DescribeEndpointRequest:
+    type: object
+    required:
+      - EndpointArn
+    properties:
+      EndpointArn:
+        $ref: '#/definitions/ComprehendEndpointArn'
+        description: The Amazon Resource Number (ARN) of the endpoint being described.
   DescribeEntitiesDetectionJobResponse:
     type: object
     properties:
@@ -2703,7 +3072,7 @@ definitions:
         description: 'A UTF-8 text string. Each string must contain fewer that 5,000 bytes of UTF-8 encoded characters.'
       LanguageCode:
         $ref: '#/definitions/LanguageCode'
-        description: 'The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.'
+        description: The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language.
   DetectKeyPhrasesResponse:
     type: object
     properties:
@@ -2721,7 +3090,7 @@ definitions:
         description: 'A UTF-8 text string. Each string must contain fewer that 5,000 bytes of UTF-8 encoded characters.'
       LanguageCode:
         $ref: '#/definitions/LanguageCode'
-        description: 'The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.'
+        description: The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language.
   DetectSentimentResponse:
     type: object
     properties:
@@ -2742,7 +3111,7 @@ definitions:
         description: 'A UTF-8 text string. Each string must contain fewer that 5,000 bytes of UTF-8 encoded characters.'
       LanguageCode:
         $ref: '#/definitions/LanguageCode'
-        description: 'The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.'
+        description: The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language.
   DetectSyntaxResponse:
     type: object
     properties:
@@ -2760,7 +3129,7 @@ definitions:
         description: 'A UTF-8 string. Each string must contain fewer that 5,000 bytes of UTF encoded characters.'
       LanguageCode:
         $ref: '#/definitions/SyntaxLanguageCode'
-        description: 'The language code of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt").'
+        description: 'The language code of the input documents. You can specify any of the following languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt").'
   ListDocumentClassificationJobsResponse:
     type: object
     properties:
@@ -2819,6 +3188,27 @@ definitions:
       Filter:
         $ref: '#/definitions/DominantLanguageDetectionJobFilter'
         description: 'Filters that jobs that are returned. You can filter jobs on their name, status, or the date and time that they were submitted. You can only set one filter at a time.'
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Identifies the next page of results to return.
+      MaxResults:
+        $ref: '#/definitions/MaxResultsInteger'
+        description: The maximum number of results to return in each page. The default is 100.
+  ListEndpointsResponse:
+    type: object
+    properties:
+      EndpointPropertiesList:
+        $ref: '#/definitions/EndpointPropertiesList'
+        description: Displays a list of endpoint properties being retrieved by the service in response to the request.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Identifies the next page of results to return.
+  ListEndpointsRequest:
+    type: object
+    properties:
+      Filter:
+        $ref: '#/definitions/EndpointFilter'
+        description: 'Filters the endpoints that are returned. You can filter endpoints on their name, model, status, or the date and time that they were created. You can only set one filter at a time. '
       NextToken:
         $ref: '#/definitions/String'
         description: Identifies the next page of results to return.
@@ -3059,7 +3449,7 @@ definitions:
         description: The Amazon Resource Name (ARN) that identifies the specific entity recognizer to be used by the <code>StartEntitiesDetectionJob</code>. This ARN is optional and is only used for a custom entity recognition job.
       LanguageCode:
         $ref: '#/definitions/LanguageCode'
-        description: 'The language of the input documents. All documents must be in the same language. You can specify any of the languages supported by Amazon Comprehend: English ("en"), Spanish ("es"), French ("fr"), German ("de"), Italian ("it"), or Portuguese ("pt"). If custom entities recognition is used, this parameter is ignored and the language used for training the model is used instead.'
+        description: 'The language of the input documents. All documents must be in the same language. You can specify any of the languages supported by Amazon Comprehend. If custom entities recognition is used, this parameter is ignored and the language used for training the model is used instead.'
       ClientRequestToken:
         $ref: '#/definitions/ClientRequestTokenString'
         description: 'A unique identifier for the request. If you don''t set the client request token, Amazon Comprehend generates one.'
@@ -3100,7 +3490,7 @@ definitions:
         description: The identifier of the job.
       LanguageCode:
         $ref: '#/definitions/LanguageCode'
-        description: 'The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.'
+        description: The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language.
       ClientRequestToken:
         $ref: '#/definitions/ClientRequestTokenString'
         description: 'A unique identifier for the request. If you don''t set the client request token, Amazon Comprehend generates one.'
@@ -3141,7 +3531,7 @@ definitions:
         description: The identifier of the job.
       LanguageCode:
         $ref: '#/definitions/LanguageCode'
-        description: 'The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.'
+        description: The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language.
       ClientRequestToken:
         $ref: '#/definitions/ClientRequestTokenString'
         description: 'A unique identifier for the request. If you don''t set the client request token, Amazon Comprehend generates one.'
@@ -3313,6 +3703,21 @@ definitions:
         $ref: '#/definitions/TagKeyList'
         description: 'The initial part of a key-value pair that forms a tag being removed from a given resource. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department. Keys must be unique and cannot be duplicated for a particular resource. '
   TooManyTagKeysException: {}
+  UpdateEndpointResponse:
+    type: object
+    properties: {}
+  UpdateEndpointRequest:
+    type: object
+    required:
+      - EndpointArn
+      - DesiredInferenceUnits
+    properties:
+      EndpointArn:
+        $ref: '#/definitions/ComprehendEndpointArn'
+        description: The Amazon Resource Number (ARN) of the endpoint being updated.
+      DesiredInferenceUnits:
+        $ref: '#/definitions/InferenceUnitsInteger'
+        description: ' The desired number of inference units to be used by the model using this endpoint. Each inference unit represents of a throughput of 100 characters per second.'
   AnyLengthString:
     type: string
   Integer:
@@ -3512,6 +3917,14 @@ definitions:
         $ref: '#/definitions/ClassifierEvaluationMetrics'
         description: ' Describes the result metrics for the test data associated with an documentation classifier.'
     description: Provides information about a document classifier.
+  DocumentClassifierEndpointArn:
+    type: string
+    pattern: 'arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:document-classifier-endpoint/[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+    maxLength: 256
+  ListOfClasses:
+    type: array
+    items:
+      $ref: '#/definitions/DocumentClass'
   ClientRequestTokenString:
     type: string
     pattern: '^[a-zA-Z0-9-]+$'
@@ -3525,6 +3938,18 @@ definitions:
     type: string
     pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*$'
     maxLength: 63
+  ComprehendEndpointArn:
+    type: string
+    pattern: 'arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:document-classifier-endpoint/[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+    maxLength: 256
+  ComprehendEndpointName:
+    type: string
+    pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*$'
+    maxLength: 40
+  ComprehendModelArn:
+    type: string
+    pattern: 'arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:document-classifier/[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+    maxLength: 256
   IamRoleArn:
     type: string
     pattern: 'arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+'
@@ -3573,6 +3998,9 @@ definitions:
     type: string
     pattern: 'arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:document-classifier/[a-zA-Z0-9](-*[a-zA-Z0-9])*'
     maxLength: 256
+  InferenceUnitsInteger:
+    type: integer
+    minimum: 1
   EntityRecognizerInputDataConfig:
     type: object
     required:
@@ -3724,6 +4152,34 @@ definitions:
         $ref: '#/definitions/VpcConfig'
         description: ' Configuration parameters for a private Virtual Private Cloud (VPC) containing the resources you are using for your dominant language detection job. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC</a>. '
     description: Provides information about a dominant language detection job.
+  EndpointProperties:
+    type: object
+    properties:
+      EndpointArn:
+        $ref: '#/definitions/ComprehendEndpointArn'
+        description: The Amazon Resource Number (ARN) of the endpoint.
+      Status:
+        $ref: '#/definitions/EndpointStatus'
+        description: 'Specifies the status of the endpoint. Because the endpoint updates and creation are asynchronous, so customers will need to wait for the endpoint to be <code>Ready</code> status before making inference requests.'
+      Message:
+        $ref: '#/definitions/AnyLengthString'
+        description: Specifies a reason for failure in cases of <code>Failed</code> status.
+      ModelArn:
+        $ref: '#/definitions/ComprehendModelArn'
+        description: The Amazon Resource Number (ARN) of the model to which the endpoint is attached.
+      DesiredInferenceUnits:
+        $ref: '#/definitions/InferenceUnitsInteger'
+        description: The desired number of inference units to be used by the model using this endpoint. Each inference unit represents of a throughput of 100 characters per second.
+      CurrentInferenceUnits:
+        $ref: '#/definitions/InferenceUnitsInteger'
+        description: The number of inference units currently used by the model using this endpoint.
+      CreationTime:
+        $ref: '#/definitions/Timestamp'
+        description: The creation date and time of the endpoint.
+      LastModifiedTime:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time that the endpoint was last modified.
+    description: Specifies information about the specified endpoint.
   EntitiesDetectionJobProperties:
     type: object
     properties:
@@ -3930,6 +4386,19 @@ definitions:
         $ref: '#/definitions/VpcConfig'
         description: 'Configuration parameters for a private Virtual Private Cloud (VPC) containing the resources you are using for your topic detection job. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC</a>. '
     description: Provides information about a topic detection job.
+  Float:
+    type: number
+    format: float
+  DocumentClass:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: The name of the class.
+      Score:
+        $ref: '#/definitions/Float'
+        description: The confidence score that Amazon Comprehend has this class correctly attributed.
+    description: Specifies the class that categorizes the document being analyzed
   JobName:
     type: string
     pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$'
@@ -4022,9 +4491,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/DocumentClassifierProperties'
-  Float:
-    type: number
-    format: float
   DominantLanguage:
     type: object
     properties:
@@ -4055,6 +4521,34 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/DominantLanguageDetectionJobProperties'
+  EndpointStatus:
+    type: string
+    enum:
+      - CREATING
+      - DELETING
+      - FAILED
+      - IN_SERVICE
+      - UPDATING
+  EndpointFilter:
+    type: object
+    properties:
+      ModelArn:
+        $ref: '#/definitions/ComprehendModelArn'
+        description: The Amazon Resource Number (ARN) of the model to which the endpoint is attached.
+      Status:
+        $ref: '#/definitions/EndpointStatus'
+        description: 'Specifies the status of the endpoint being returned. Possible values are: Creating, Ready, Updating, Deleting, Failed.'
+      CreationTimeBefore:
+        $ref: '#/definitions/Timestamp'
+        description: Specifies a date before which the returned endpoint or endpoints were created.
+      CreationTimeAfter:
+        $ref: '#/definitions/Timestamp'
+        description: Specifies a date after which the returned endpoint or endpoints were created.
+    description: 'The filter used to determine which endpoints are are returned. You can filter jobs on their name, model, status, or the date and time that they were created. You can only set one filter at a time. '
+  EndpointPropertiesList:
+    type: array
+    items:
+      $ref: '#/definitions/EndpointProperties'
   EntitiesDetectionJobFilter:
     type: object
     properties:

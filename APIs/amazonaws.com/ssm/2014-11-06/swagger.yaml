@@ -653,7 +653,7 @@ paths:
   '/#X-Amz-Target=AmazonSSM.CreateResourceDataSync':
     post:
       operationId: CreateResourceDataSync
-      description: '<p>Creates a resource data sync configuration to a single bucket in Amazon S3. This is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data to the Amazon S3 bucket. To check the status of the sync, use the <a>ListResourceDataSync</a>.</p> <p>By default, data is not encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-datasync.html">Configuring Resource Data Sync for Inventory</a> in the <i>AWS Systems Manager User Guide</i>.</p>'
+      description: '<p>A resource data sync helps you view data from multiple sources in a single location. Systems Manager offers two types of resource data sync: <code>SyncToDestination</code> and <code>SyncFromSource</code>.</p> <p>You can configure Systems Manager Inventory to use the <code>SyncToDestination</code> type to synchronize Inventory data from multiple AWS Regions to a single Amazon S3 bucket. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-datasync.html">Configuring Resource Data Sync for Inventory</a> in the <i>AWS Systems Manager User Guide</i>.</p> <p>You can configure Systems Manager Explorer to use the <code>SyncToDestination</code> type to synchronize operational work items (OpsItems) and operational data (OpsData) from multiple AWS Regions to a single Amazon S3 bucket. You can also configure Explorer to use the <code>SyncFromSource</code> type. This type synchronizes OpsItems and OpsData from multiple AWS accounts and Regions by using AWS Organizations. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resource-data-sync.html">Setting Up Explorer to Display Data from Multiple Accounts and Regions</a> in the <i>AWS Systems Manager User Guide</i>.</p> <p>A resource data sync is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data. To check the status of a sync, use the <a>ListResourceDataSync</a>.</p> <note> <p>By default, data is not encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy. </p> </note>'
       responses:
         '200':
           description: Success
@@ -1026,7 +1026,7 @@ paths:
   '/#X-Amz-Target=AmazonSSM.DeleteResourceDataSync':
     post:
       operationId: DeleteResourceDataSync
-      description: 'Deletes a Resource Data Sync configuration. After the configuration is deleted, changes to inventory data on managed instances are no longer synced with the target Amazon S3 bucket. Deleting a sync configuration does not delete data in the target Amazon S3 bucket.'
+      description: 'Deletes a Resource Data Sync configuration. After the configuration is deleted, changes to data on managed instances are no longer synced to or from the target. Deleting a sync configuration does not delete data.'
       responses:
         '200':
           description: Success
@@ -1040,6 +1040,10 @@ paths:
           description: ResourceDataSyncNotFoundException
           schema:
             $ref: '#/definitions/ResourceDataSyncNotFoundException'
+        '482':
+          description: ResourceDataSyncInvalidConfigurationException
+          schema:
+            $ref: '#/definitions/ResourceDataSyncInvalidConfigurationException'
       parameters:
         - name: body
           in: body
@@ -2277,7 +2281,7 @@ paths:
   '/#X-Amz-Target=AmazonSSM.DescribeParameters':
     post:
       operationId: DescribeParameters
-      description: '<p>Get information about a parameter.</p> <p>Request results are returned on a best-effort basis. If you specify <code>MaxResults</code> in the request, the response includes information up to the limit specified. The number of items returned, however, can be between zero and the value of <code>MaxResults</code>. If the service reaches an internal limit while processing the results, it stops the operation and returns the matching values up to that point and a <code>NextToken</code>. You can specify the <code>NextToken</code> in a subsequent call to get the next set of results.</p>'
+      description: '<p>Get information about a parameter.</p> <note> <p>Request results are returned on a best-effort basis. If you specify <code>MaxResults</code> in the request, the response includes information up to the limit specified. The number of items returned, however, can be between zero and the value of <code>MaxResults</code>. If the service reaches an internal limit while processing the results, it stops the operation and returns the matching values up to that point and a <code>NextToken</code>. You can specify the <code>NextToken</code> in a subsequent call to get the next set of results.</p> </note>'
       responses:
         '200':
           description: Success
@@ -3078,18 +3082,22 @@ paths:
           schema:
             $ref: '#/definitions/InternalServerError'
         '481':
+          description: ResourceDataSyncNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceDataSyncNotFoundException'
+        '482':
           description: InvalidFilter
           schema:
             $ref: '#/definitions/InvalidFilter'
-        '482':
+        '483':
           description: InvalidNextToken
           schema:
             $ref: '#/definitions/InvalidNextToken'
-        '483':
+        '484':
           description: InvalidTypeNameException
           schema:
             $ref: '#/definitions/InvalidTypeNameException'
-        '484':
+        '485':
           description: InvalidAggregatorException
           schema:
             $ref: '#/definitions/InvalidAggregatorException'
@@ -3253,7 +3261,7 @@ paths:
   '/#X-Amz-Target=AmazonSSM.GetParametersByPath':
     post:
       operationId: GetParametersByPath
-      description: '<p>Retrieve parameters in a specific hierarchy. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working.html">Working with Systems Manager Parameters</a> in the <i>AWS Systems Manager User Guide</i>. </p> <p>Request results are returned on a best-effort basis. If you specify <code>MaxResults</code> in the request, the response includes information up to the limit specified. The number of items returned, however, can be between zero and the value of <code>MaxResults</code>. If the service reaches an internal limit while processing the results, it stops the operation and returns the matching values up to that point and a <code>NextToken</code>. You can specify the <code>NextToken</code> in a subsequent call to get the next set of results.</p> <note> <p>This API action doesn''t support filtering by tags. </p> </note>'
+      description: '<p>Retrieve information about one or more parameters in a specific hierarchy. </p> <note> <p>Request results are returned on a best-effort basis. If you specify <code>MaxResults</code> in the request, the response includes information up to the limit specified. The number of items returned, however, can be between zero and the value of <code>MaxResults</code>. If the service reaches an internal limit while processing the results, it stops the operation and returns the matching values up to that point and a <code>NextToken</code>. You can specify the <code>NextToken</code> in a subsequent call to get the next set of results.</p> </note>'
       responses:
         '200':
           description: Success
@@ -3961,10 +3969,14 @@ paths:
           schema:
             $ref: '#/definitions/ListResourceDataSyncResult'
         '480':
+          description: ResourceDataSyncInvalidConfigurationException
+          schema:
+            $ref: '#/definitions/ResourceDataSyncInvalidConfigurationException'
+        '481':
           description: InternalServerError
           schema:
             $ref: '#/definitions/InternalServerError'
-        '481':
+        '482':
           description: InvalidNextToken
           schema:
             $ref: '#/definitions/InvalidNextToken'
@@ -5417,6 +5429,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonSSM.UpdateResourceDataSync':
+    post:
+      operationId: UpdateResourceDataSync
+      description: 'Update a resource data sync. After you create a resource data sync for a Region, you can''t change the account options for that sync. For example, if you create a sync in the us-east-2 (Ohio) Region and you choose the Include only the current account option, you can''t edit that sync later and choose the Include all accounts from my AWS Organizations configuration option. Instead, you must delete the first resource data sync, and create a new one.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateResourceDataSyncResult'
+        '480':
+          description: ResourceDataSyncNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceDataSyncNotFoundException'
+        '481':
+          description: ResourceDataSyncInvalidConfigurationException
+          schema:
+            $ref: '#/definitions/ResourceDataSyncInvalidConfigurationException'
+        '482':
+          description: ResourceDataSyncConflictException
+          schema:
+            $ref: '#/definitions/ResourceDataSyncConflictException'
+        '483':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateResourceDataSyncRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonSSM.UpdateResourceDataSync
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AmazonSSM.UpdateServiceSetting':
     post:
       operationId: UpdateServiceSetting
@@ -5637,6 +5694,9 @@ definitions:
       Content:
         $ref: '#/definitions/DocumentContent'
         description: A valid JSON or YAML string.
+      Requires:
+        $ref: '#/definitions/DocumentRequiresList'
+        description: 'A list of SSM documents required by a document. For example, an <code>ApplicationConfiguration</code> document requires an <code>ApplicationConfigurationSchema</code> document.'
       Attachments:
         $ref: '#/definitions/AttachmentsSourceList'
         description: A list of key and value pairs that describe attachments to a version of a document.
@@ -5750,6 +5810,12 @@ definitions:
       Tags:
         $ref: '#/definitions/TagList'
         description: '<p>Optional metadata that you assign to a resource. You can restrict access to OpsItems by using an inline IAM policy that specifies tags. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html#OpsCenter-getting-started-user-permissions">Getting Started with OpsCenter</a> in the <i>AWS Systems Manager User Guide</i>.</p> <p>Tags use a key-value pair. For example:</p> <p> <code>Key=Department,Value=Finance</code> </p> <note> <p>To add tags to an existing OpsItem, use the <a>AddTagsToResource</a> action.</p> </note>'
+      Category:
+        $ref: '#/definitions/OpsItemCategory'
+        description: 'Specify a category to assign to an OpsItem. '
+      Severity:
+        $ref: '#/definitions/OpsItemSeverity'
+        description: Specify a severity to assign to an OpsItem.
   OpsItemAlreadyExistsException: {}
   OpsItemLimitExceededException: {}
   OpsItemInvalidParameterException: {}
@@ -5810,7 +5876,6 @@ definitions:
     type: object
     required:
       - SyncName
-      - S3Destination
     properties:
       SyncName:
         $ref: '#/definitions/ResourceDataSyncName'
@@ -5818,6 +5883,12 @@ definitions:
       S3Destination:
         $ref: '#/definitions/ResourceDataSyncS3Destination'
         description: Amazon S3 configuration details for the sync.
+      SyncType:
+        $ref: '#/definitions/ResourceDataSyncType'
+        description: 'Specify <code>SyncToDestination</code> to create a resource data sync that synchronizes data from multiple AWS Regions to an Amazon S3 bucket. Specify <code>SyncFromSource</code> to synchronize data from multiple AWS accounts and Regions, as listed in AWS Organizations.'
+      SyncSource:
+        $ref: '#/definitions/ResourceDataSyncSource'
+        description: Specify information about the data sources to synchronize.
   ResourceDataSyncCountExceededException: {}
   ResourceDataSyncAlreadyExistsException: {}
   ResourceDataSyncInvalidConfigurationException: {}
@@ -5867,6 +5938,9 @@ definitions:
       VersionName:
         $ref: '#/definitions/DocumentVersionName'
         description: 'The version name of the document that you want to delete. If not provided, all versions of the document are deleted.'
+      Force:
+        $ref: '#/definitions/Boolean'
+        description: 'Some SSM document types require that you specify a <code>Force</code> flag before you can delete the document. For example, you must specify a <code>Force</code> flag to delete a document of type <code>ApplicationConfigurationSchema</code>. You can restrict access to the <code>Force</code> flag in an AWS Identity and Access Management (IAM) policy.'
   InvalidDocumentOperation: {}
   AssociatedInstances: {}
   DeleteInventoryResult:
@@ -5971,6 +6045,9 @@ definitions:
       SyncName:
         $ref: '#/definitions/ResourceDataSyncName'
         description: The name of the configuration to delete.
+      SyncType:
+        $ref: '#/definitions/ResourceDataSyncType'
+        description: Specify the type of resource data sync to delete.
   ResourceDataSyncNotFoundException: {}
   DeregisterManagedInstanceResult:
     type: object
@@ -6252,6 +6329,9 @@ definitions:
       AccountIds:
         $ref: '#/definitions/AccountIdList'
         description: The account IDs that have permission to use this document. The ID can be either an AWS account or <i>All</i>.
+      AccountSharingInfoList:
+        $ref: '#/definitions/AccountSharingInfoList'
+        description: A list of of AWS accounts where the current document is shared and the version shared with each account.
   DescribeDocumentPermissionRequest:
     type: object
     required:
@@ -6704,7 +6784,7 @@ definitions:
     properties:
       Filters:
         $ref: '#/definitions/ParametersFilterList'
-        description: One or more filters. Use a filter to return a more specific list of results.
+        description: 'This data type is deprecated. Instead, use <code>ParameterFilters</code>.'
       ParameterFilters:
         $ref: '#/definitions/ParameterStringFilterList'
         description: Filters to limit the request results.
@@ -6748,6 +6828,9 @@ definitions:
       InstancesWithInstalledOtherPatches:
         $ref: '#/definitions/Integer'
         description: The number of instances with patches installed that aren't defined in the patch baseline.
+      InstancesWithInstalledPendingRebootPatches:
+        $ref: '#/definitions/InstancesCount'
+        description: The number of instances with patches installed that have not been rebooted after the patch installation. The status of these instances is NON_COMPLIANT.
       InstancesWithInstalledRejectedPatches:
         $ref: '#/definitions/InstancesCount'
         description: '<p>The number of instances with patches installed that are specified in a RejectedPatches list. Patches with a status of <i>INSTALLED_REJECTED</i> were typically installed before they were added to a RejectedPatches list.</p> <note> <p>If ALLOW_AS_DEPENDENCY is the specified option for RejectedPatchesAction, the value of InstancesWithInstalledRejectedPatches will always be 0 (zero).</p> </note>'
@@ -7020,6 +7103,9 @@ definitions:
       DocumentFormat:
         $ref: '#/definitions/DocumentFormat'
         description: 'The document format, either JSON or YAML.'
+      Requires:
+        $ref: '#/definitions/DocumentRequiresList'
+        description: 'A list of SSM documents required by a document. For example, an <code>ApplicationConfiguration</code> document requires an <code>ApplicationConfigurationSchema</code> document.'
       AttachmentsContent:
         $ref: '#/definitions/AttachmentContentList'
         description: 'A description of the document attachments, including names, locations, sizes, etc.'
@@ -7371,15 +7457,19 @@ definitions:
         description: The token for the next set of items to return. Use this token to get the next set of results.
   GetOpsSummaryRequest:
     type: object
-    required:
-      - Aggregators
     properties:
+      SyncName:
+        $ref: '#/definitions/ResourceDataSyncName'
+        description: Specify the name of a resource data sync to get.
       Filters:
         $ref: '#/definitions/OpsFilterList'
         description: 'Optional filters used to scope down the returned OpsItems. '
       Aggregators:
         $ref: '#/definitions/OpsAggregatorList'
         description: Optional aggregators that return counts of OpsItems based on one or more expressions.
+      ResultAttributes:
+        $ref: '#/definitions/OpsResultAttributeList'
+        description: The OpsItem data type to return.
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'A token to start the list. Use this token to get the next set of results. '
@@ -7473,7 +7563,7 @@ definitions:
         description: '<p>Retrieve all parameters within a hierarchy.</p> <important> <p>If a user has access to a path, then the user can access all levels of that path. For example, if a user has permission to access path <code>/a</code>, then the user can also access <code>/a/b</code>. Even if a user has explicitly been denied access in IAM for parameter <code>/a/b</code>, they can still call the GetParametersByPath API action recursively for <code>/a</code> and view <code>/a/b</code>.</p> </important>'
       ParameterFilters:
         $ref: '#/definitions/ParameterStringFilterList'
-        description: <p>Filters to limit the request results.</p> <note> <p>You can't filter using the parameter name.</p> </note>
+        description: Filters to limit the request results.
       WithDecryption:
         $ref: '#/definitions/Boolean'
         description: Retrieve all parameters in a hierarchy with their value decrypted.
@@ -7768,8 +7858,8 @@ definitions:
       - Name
     properties:
       Name:
-        $ref: '#/definitions/DocumentName'
-        description: The name of the document about which you want version information.
+        $ref: '#/definitions/DocumentARN'
+        description: The name of the document. You can specify an Amazon Resource Name (ARN).
       MaxResults:
         $ref: '#/definitions/MaxResults'
         description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
@@ -7875,6 +7965,9 @@ definitions:
   ListResourceDataSyncRequest:
     type: object
     properties:
+      SyncType:
+        $ref: '#/definitions/ResourceDataSyncType'
+        description: 'View a list of resource data syncs according to the sync type. Specify <code>SyncToDestination</code> to view resource data syncs that synchronize data to an Amazon S3 buckets. Specify <code>SyncFromSource</code> to view resource data syncs from AWS Organizations or from multiple AWS Regions. '
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'A token to start the list. Use this token to get the next set of results. '
@@ -7920,6 +8013,9 @@ definitions:
       AccountIdsToRemove:
         $ref: '#/definitions/AccountIdList'
         description: 'The AWS user accounts that should no longer have access to the document. The AWS user account can either be a group of account IDs or <i>All</i>. This action has a higher priority than <i>AccountIdsToAdd</i>. If you specify an account ID to add and the same ID to remove, the system removes access to the document.'
+      SharedDocumentVersion:
+        $ref: '#/definitions/SharedDocumentVersion'
+        description: '(Optional) The version of the document to share. If it''s not specified, the system choose the <code>Default</code> version to share.'
   DocumentPermissionLimit: {}
   PutComplianceItemsResult:
     type: object
@@ -7997,7 +8093,7 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/PSParameterName'
-        description: '<p>The fully qualified name of the parameter that you want to add to the system. The fully qualified name includes the complete hierarchy of the parameter path and name. For example: <code>/Dev/DBServer/MySQL/db-string13</code> </p> <p>Naming Constraints:</p> <ul> <li> <p>Parameter names are case sensitive.</p> </li> <li> <p>A parameter name must be unique within an AWS Region</p> </li> <li> <p>A parameter name can''t be prefixed with "aws" or "ssm" (case-insensitive).</p> </li> <li> <p>Parameter names can include only the following symbols and letters: <code>a-zA-Z0-9_.-/</code> </p> </li> <li> <p>A parameter name can''t include spaces.</p> </li> <li> <p>Parameter hierarchies are limited to a maximum depth of fifteen levels.</p> </li> </ul> <p>For additional information about valid values for parameter names, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-parameter-name-constraints.html">Requirements and Constraints for Parameter Names</a> in the <i>AWS Systems Manager User Guide</i>.</p> <note> <p>The maximum length constraint listed below includes capacity for additional system attributes that are not part of the name. The maximum length for the fully qualified parameter name is 1011 characters. </p> </note>'
+        description: '<p>The fully qualified name of the parameter that you want to add to the system. The fully qualified name includes the complete hierarchy of the parameter path and name. For example: <code>/Dev/DBServer/MySQL/db-string13</code> </p> <p>Naming Constraints:</p> <ul> <li> <p>Parameter names are case sensitive.</p> </li> <li> <p>A parameter name must be unique within an AWS Region</p> </li> <li> <p>A parameter name can''t be prefixed with "aws" or "ssm" (case-insensitive).</p> </li> <li> <p>Parameter names can include only the following symbols and letters: <code>a-zA-Z0-9_.-/</code> </p> </li> <li> <p>A parameter name can''t include spaces.</p> </li> <li> <p>Parameter hierarchies are limited to a maximum depth of fifteen levels.</p> </li> </ul> <p>For additional information about valid values for parameter names, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-parameter-name-constraints.html">Requirements and Constraints for Parameter Names</a> in the <i>AWS Systems Manager User Guide</i>.</p> <note> <p>The maximum length constraint listed below includes capacity for additional system attributes that are not part of the name. The maximum length for the fully qualified parameter name is 1011 characters, including the full length of the parameter ARN. For example, the following fully qualified parameter name is 65 characters, not 20 characters:</p> <p> <code>arn:aws:ssm:us-east-2:111122223333:parameter/ExampleParameterName</code> </p> </note>'
       Description:
         $ref: '#/definitions/ParameterDescription'
         description: <p>Information about the parameter that you want to add to the system. Optional but recommended.</p> <important> <p>Do not enter personally identifiable information in this field.</p> </important>
@@ -8816,6 +8912,12 @@ definitions:
       Title:
         $ref: '#/definitions/OpsItemTitle'
         description: A short heading that describes the nature of the OpsItem and the impacted resource.
+      Category:
+        $ref: '#/definitions/OpsItemCategory'
+        description: Specify a new category for an OpsItem.
+      Severity:
+        $ref: '#/definitions/OpsItemSeverity'
+        description: Specify a new severity for an OpsItem.
   UpdatePatchBaselineResult:
     type: object
     properties:
@@ -8902,6 +9004,26 @@ definitions:
       Replace:
         $ref: '#/definitions/Boolean'
         description: 'If True, then all fields that are required by the CreatePatchBaseline action are also required for this API request. Optional fields that are not specified are set to null.'
+  UpdateResourceDataSyncResult:
+    type: object
+    properties: {}
+  UpdateResourceDataSyncRequest:
+    type: object
+    required:
+      - SyncName
+      - SyncType
+      - SyncSource
+    properties:
+      SyncName:
+        $ref: '#/definitions/ResourceDataSyncName'
+        description: The name of the resource data sync you want to update.
+      SyncType:
+        $ref: '#/definitions/ResourceDataSyncType'
+        description: 'The type of resource data sync. If <code>SyncType</code> is <code>SyncToDestination</code>, then the resource data sync synchronizes data to an Amazon S3 bucket. If the <code>SyncType</code> is <code>SyncFromSource</code> then the resource data sync synchronizes data from AWS Organizations or from multiple AWS Regions.'
+      SyncSource:
+        $ref: '#/definitions/ResourceDataSyncSource'
+        description: Specify information about the data sources to synchronize.
+  ResourceDataSyncConflictException: {}
   UpdateServiceSettingResult:
     type: object
     properties: {}
@@ -8929,6 +9051,26 @@ definitions:
     items:
       $ref: '#/definitions/AccountId'
     maxItems: 20
+  SharedDocumentVersion:
+    type: string
+    pattern: '([$]LATEST|[$]DEFAULT|[$]ALL)'
+    description: 'The document version shared with other accounts. You can share <code>Latest</code>, <code>Default</code> or <code>All versions</code>.'
+    maxLength: 8
+  AccountSharingInfo:
+    type: object
+    properties:
+      AccountId:
+        $ref: '#/definitions/AccountId'
+        description: The AWS account ID where the current document is shared.
+      SharedDocumentVersion:
+        $ref: '#/definitions/SharedDocumentVersion'
+        description: The version of the current document shared with the account.
+    description: Information includes the AWS account ID where the current document is shared and the version shared with that account.
+  AccountSharingInfoList:
+    type: array
+    description: A list of of AWS accounts where the current document is shared and the version shared with each account.
+    items:
+      $ref: '#/definitions/AccountSharingInfo'
   Accounts:
     type: array
     items:
@@ -10530,6 +10672,11 @@ definitions:
   DocumentContent:
     type: string
     minLength: 1
+  DocumentRequiresList:
+    type: array
+    items:
+      $ref: '#/definitions/DocumentRequires'
+    minItems: 1
   DocumentVersionName:
     type: string
     pattern: '^[a-zA-Z0-9_\-.]{1,128}$'
@@ -10541,6 +10688,9 @@ definitions:
       - Automation
       - Session
       - Package
+      - ApplicationConfiguration
+      - ApplicationConfigurationSchema
+      - DeploymentStrategy
   DocumentFormat:
     type: string
     enum:
@@ -10616,6 +10766,9 @@ definitions:
       AttachmentsInformation:
         $ref: '#/definitions/AttachmentInformationList'
         description: 'Details about the document attachments, including names, locations, sizes, etc.'
+      Requires:
+        $ref: '#/definitions/DocumentRequiresList'
+        description: 'A list of SSM documents required by a document. For example, an <code>ApplicationConfiguration</code> document requires an <code>ApplicationConfigurationSchema</code> document.'
     description: 'Describes a Systems Manager document. '
   MaintenanceWindowName:
     type: string
@@ -10678,6 +10831,14 @@ definitions:
     type: string
     minLength: 1
     maxLength: 1024
+  OpsItemCategory:
+    type: string
+    minLength: 1
+    maxLength: 64
+  OpsItemSeverity:
+    type: string
+    minLength: 1
+    maxLength: 64
   OperatingSystem:
     type: string
     enum:
@@ -10759,6 +10920,29 @@ definitions:
         $ref: '#/definitions/ResourceDataSyncAWSKMSKeyARN'
         description: The ARN of an encryption key for a destination in Amazon S3. Must belong to the same Region as the destination Amazon S3 bucket.
     description: Information about the target Amazon S3 bucket for the Resource Data Sync.
+  ResourceDataSyncType:
+    type: string
+    minLength: 1
+    maxLength: 64
+  ResourceDataSyncSource:
+    type: object
+    required:
+      - SourceType
+      - SourceRegions
+    properties:
+      SourceType:
+        $ref: '#/definitions/ResourceDataSyncSourceType'
+        description: The type of data source for the resource data sync. <code>SourceType</code> is either <code>AwsOrganizations</code> (if an organization is present in AWS Organizations) or <code>singleAccountMultiRegions</code>.
+      AwsOrganizationsSource:
+        $ref: '#/definitions/ResourceDataSyncAwsOrganizationsSource'
+        description: The field name in <code>SyncSource</code> for the <code>ResourceDataSyncAwsOrganizationsSource</code> type.
+      SourceRegions:
+        $ref: '#/definitions/ResourceDataSyncSourceRegionList'
+        description: The <code>SyncSource</code> AWS Regions included in the resource data sync.
+      IncludeFutureRegions:
+        $ref: '#/definitions/ResourceDataSyncIncludeFutureRegions'
+        description: Whether to automatically synchronize and aggregate data from new AWS Regions when those Regions come online.
+    description: Information about the source of the data included in the resource data sync.
   DefaultBaseline:
     type: boolean
   InventoryItemTypeName:
@@ -11170,6 +11354,9 @@ definitions:
       Tags:
         $ref: '#/definitions/TagList'
         description: 'The tags, or metadata, that have been applied to the document.'
+      Requires:
+        $ref: '#/definitions/DocumentRequiresList'
+        description: 'A list of SSM documents required by a document. For example, an <code>ApplicationConfiguration</code> document requires an <code>ApplicationConfigurationSchema</code> document.'
     description: Describes the name of a Systems Manager document.
   DocumentIdentifierList:
     type: array
@@ -11230,6 +11417,18 @@ definitions:
         $ref: '#/definitions/DocumentParameterDefaultValue'
         description: 'If specified, the default values for the parameters. Parameters without a default value are required. Parameters with a default value are optional.'
     description: 'Parameters specified in a System Manager document that run on the server when the command is run. '
+  DocumentRequires:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/DocumentARN'
+        description: The name of the required SSM document. The name can be an Amazon Resource Name (ARN).
+      Version:
+        $ref: '#/definitions/DocumentVersion'
+        description: The document version required by the current document.
+    description: An SSM document required by the current document.
   DocumentVersionInfo:
     type: object
     properties:
@@ -11567,6 +11766,12 @@ definitions:
       OperationalData:
         $ref: '#/definitions/OpsItemOperationalData'
         description: '<p>Operational data is custom data that provides useful reference details about the OpsItem. For example, you can specify log files, error strings, license keys, troubleshooting tips, or other relevant data. You enter operational data as key-value pairs. The key has a maximum length of 128 characters. The value has a maximum size of 20 KB.</p> <important> <p>Operational data keys <i>can''t</i> begin with the following: amazon, aws, amzn, ssm, /amazon, /aws, /amzn, /ssm.</p> </important> <p>You can choose to make the data searchable by other users in the account or you can restrict search access. Searchable data means that all users with access to the OpsItem Overview page (as provided by the <a>DescribeOpsItems</a> API action) can view and search on the specified data. Operational data that is not searchable is only viewable by users who have access to the OpsItem (as provided by the <a>GetOpsItem</a> API action).</p> <p>Use the <code>/aws/resources</code> key in OperationalData to specify a related resource in the request. Use the <code>/aws/automations</code> key in OperationalData to associate an Automation runbook with the OpsItem. To view AWS CLI example commands that use these keys, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems">Creating OpsItems Manually</a> in the <i>AWS Systems Manager User Guide</i>.</p>'
+      Category:
+        $ref: '#/definitions/OpsItemCategory'
+        description: 'An OpsItem category. Category options include: Availability, Cost, Performance, Recovery, Security.'
+      Severity:
+        $ref: '#/definitions/OpsItemSeverity'
+        description: The severity of the OpsItem. Severity options range from 1 to 4.
     description: 'Operations engineers and IT professionals use OpsCenter to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html">AWS Systems Manager OpsCenter</a> in the <i>AWS Systems Manager User Guide</i>. '
   OpsFilterList:
     type: array
@@ -11580,6 +11785,12 @@ definitions:
       $ref: '#/definitions/OpsAggregator'
     minItems: 1
     maxItems: 12
+  OpsResultAttributeList:
+    type: array
+    items:
+      $ref: '#/definitions/OpsResultAttribute'
+    minItems: 1
+    maxItems: 1
   OpsEntityList:
     type: array
     items:
@@ -11903,6 +12114,8 @@ definitions:
     type: integer
   PatchInstalledOtherCount:
     type: integer
+  PatchInstalledPendingRebootCount:
+    type: integer
   PatchInstalledRejectedCount:
     type: integer
   PatchMissingCount:
@@ -11918,6 +12131,11 @@ definitions:
     enum:
       - Scan
       - Install
+  RebootOption:
+    type: string
+    enum:
+      - RebootIfNeeded
+      - NoReboot
   InstancePatchState:
     type: object
     required:
@@ -11952,6 +12170,9 @@ definitions:
       InstalledOtherCount:
         $ref: '#/definitions/PatchInstalledOtherCount'
         description: The number of patches not specified in the patch baseline that are installed on the instance.
+      InstalledPendingRebootCount:
+        $ref: '#/definitions/PatchInstalledPendingRebootCount'
+        description: The number of patches installed since the last time the instance was rebooted.
       InstalledRejectedCount:
         $ref: '#/definitions/PatchInstalledRejectedCount'
         description: '<p>The number of instances with patches installed that are specified in a RejectedPatches list. Patches with a status of <i>InstalledRejected</i> were typically installed before they were added to a RejectedPatches list.</p> <note> <p>If ALLOW_AS_DEPENDENCY is the specified option for RejectedPatchesAction, the value of InstalledRejectedCount will always be 0 (zero).</p> </note>'
@@ -11976,6 +12197,12 @@ definitions:
       Operation:
         $ref: '#/definitions/PatchOperationType'
         description: 'The type of patching operation that was performed: SCAN (assess patch compliance state) or INSTALL (install missing patches).'
+      LastNoRebootInstallOperationTime:
+        $ref: '#/definitions/DateTime'
+        description: The time of the last attempt to patch the instance with <code>NoReboot</code> specified as the reboot option.
+      RebootOption:
+        $ref: '#/definitions/RebootOption'
+        description: '<p>Indicates the reboot option specified in the patch baseline.</p> <note> <p>Reboot options apply to <code>Install</code> operations only. Reboots are not attempted for Patch Manager <code>Scan</code> operations.</p> </note> <ul> <li> <p> <b>RebootIfNeeded</b>: Patch Manager tries to reboot the instance if it installed any patches, or if any patches are detected with a status of <code>InstalledPendingReboot</code>.</p> </li> <li> <p> <b>NoReboot</b>: Patch Manager attempts to install missing packages without trying to reboot the system. Patches installed with this option are assigned a status of <code>InstalledPendingReboot</code>. These patches might not be in effect until a reboot is performed.</p> </li> </ul>'
     description: 'Defines the high-level patch compliance state for a managed instance, providing information about the number of installed, missing, not applicable, and failed patches along with metadata about the operation when this information was gathered for the instance.'
   InstancePatchStateFilterKey:
     type: string
@@ -12700,7 +12927,7 @@ definitions:
       - Failed
   OpsAggregatorType:
     type: string
-    pattern: ^(range|count)
+    pattern: ^(range|count|sum)
     minLength: 1
     maxLength: 20
   OpsDataTypeName:
@@ -12741,7 +12968,7 @@ definitions:
   OpsAggregatorValue:
     type: string
     minLength: 0
-    maxLength: 512
+    maxLength: 2048
   OpsAggregatorValueKey:
     type: string
     minLength: 1
@@ -12762,6 +12989,9 @@ definitions:
         $ref: '#/definitions/OpsEntityItemMap'
         description: The data returned by the query.
     description: The result of the query.
+  OpsEntityItemCaptureTime:
+    type: string
+    pattern: '^(20)[0-9][0-9]-(0[1-9]|1[012])-([12][0-9]|3[01]|0[1-9])(T)(2[0-3]|[0-1][0-9])(:[0-5][0-9])(:[0-5][0-9])(Z)$'
   OpsEntityItemEntryList:
     type: array
     items:
@@ -12771,6 +13001,9 @@ definitions:
   OpsEntityItem:
     type: object
     properties:
+      CaptureTime:
+        $ref: '#/definitions/OpsEntityItemCaptureTime'
+        description: The time OpsItem data was captured.
       Content:
         $ref: '#/definitions/OpsEntityItemEntryList'
         description: The detailed data content for an OpsItem summaries result item.
@@ -12863,6 +13096,8 @@ definitions:
       - OperationalDataValue
       - ResourceId
       - AutomationId
+      - Category
+      - Severity
   OpsItemFilterValues:
     type: array
     items:
@@ -12937,7 +13172,22 @@ definitions:
       OperationalData:
         $ref: '#/definitions/OpsItemOperationalData'
         description: 'Operational data is custom data that provides useful reference details about the OpsItem. '
+      Category:
+        $ref: '#/definitions/OpsItemCategory'
+        description: A list of OpsItems by category.
+      Severity:
+        $ref: '#/definitions/OpsItemSeverity'
+        description: A list of OpsItems by severity.
     description: A count of OpsItems.
+  OpsResultAttribute:
+    type: object
+    required:
+      - TypeName
+    properties:
+      TypeName:
+        $ref: '#/definitions/OpsDataTypeName'
+        description: 'Name of the data type. Valid value: AWS:OpsItem, AWS:EC2InstanceInformation, AWS:OpsItemTrendline, or AWS:ComplianceSummary.'
+    description: The OpsItem data type to return.
   OutputSourceId:
     type: string
     minLength: 36
@@ -13097,11 +13347,11 @@ definitions:
         description: The name of the filter.
       Option:
         $ref: '#/definitions/ParameterStringQueryOption'
-        description: 'Valid options are Equals and BeginsWith. For Path filter, valid options are Recursive and OneLevel.'
+        description: '<p>For all filters used with <a>DescribeParameters</a>, valid options include <code>Equals</code> and <code>BeginsWith</code>. The <code>Name</code> filter additionally supports the <code>Contains</code> option. (Exception: For filters using the key <code>Path</code>, valid options include <code>Recursive</code> and <code>OneLevel</code>.)</p> <p>For filters used with <a>GetParametersByPath</a>, valid options include <code>Equals</code> and <code>BeginsWith</code>. (Exception: For filters using the key <code>Label</code>, the only valid option is <code>Equals</code>.)</p>'
       Values:
         $ref: '#/definitions/ParameterStringFilterValueList'
         description: The value you want to search for.
-    description: '<p>One or more filters. Use a filter to return a more specific list of results.</p> <note> <p>The <code>Name</code> and <code>Tier</code> filter keys can''t be used with the <a>GetParametersByPath</a> API action. Also, the <code>Label</code> filter key can''t be used with the <a>DescribeParameters</a> API action.</p> </note>'
+    description: '<p>One or more filters. Use a filter to return a more specific list of results.</p> <important> <p>The <code>ParameterStringFilter</code> object is used by the <a>DescribeParameters</a> and <a>GetParametersByPath</a> API actions. However, not all of the pattern values listed for <code>Key</code> can be used with both actions.</p> <p>For <code>DescribeActions</code>, all of the listed patterns are valid, with the exception of <code>Label</code>.</p> <p>For <code>GetParametersByPath</code>, the following patterns listed for <code>Key</code> are not valid: <code>Name</code>, <code>Path</code>, and <code>Tier</code>.</p> <p>For examples of CLI commands demonstrating valid parameter filter constructions, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-search.html">Searching for Systems Manager Parameters</a> in the <i>AWS Systems Manager User Guide</i>.</p> </important>'
   ParameterStringFilterValue:
     type: string
     minLength: 1
@@ -13193,6 +13443,7 @@ definitions:
     enum:
       - INSTALLED
       - INSTALLED_OTHER
+      - INSTALLED_PENDING_REBOOT
       - INSTALLED_REJECTED
       - MISSING
       - NOT_APPLICABLE
@@ -13426,7 +13677,53 @@ definitions:
     pattern: 'arn:.*'
     minLength: 1
     maxLength: 512
+  ResourceDataSyncOrganizationSourceType:
+    type: string
+    minLength: 1
+    maxLength: 64
+  ResourceDataSyncOrganizationalUnitList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceDataSyncOrganizationalUnit'
+    minItems: 1
+    maxItems: 1000
+  ResourceDataSyncAwsOrganizationsSource:
+    type: object
+    required:
+      - OrganizationSourceType
+    properties:
+      OrganizationSourceType:
+        $ref: '#/definitions/ResourceDataSyncOrganizationSourceType'
+        description: 'If an AWS Organization is present, this is either <code>OrganizationalUnits</code> or <code>EntireOrganization</code>. For <code>OrganizationalUnits</code>, the data is aggregated from a set of organization units. For <code>EntireOrganization</code>, the data is aggregated from the entire AWS Organization. '
+      OrganizationalUnits:
+        $ref: '#/definitions/ResourceDataSyncOrganizationalUnitList'
+        description: The AWS Organizations organization units included in the sync.
+    description: 'Information about the AwsOrganizationsSource resource data sync source. A sync source of this type can synchronize data from AWS Organizations or, if an AWS Organization is not present, from multiple AWS Regions.'
   ResourceDataSyncCreatedTime:
+    type: string
+    format: date-time
+  ResourceDataSyncIncludeFutureRegions:
+    type: boolean
+  ResourceDataSyncSourceWithState:
+    type: object
+    properties:
+      SourceType:
+        $ref: '#/definitions/ResourceDataSyncSourceType'
+        description: The type of data source for the resource data sync. <code>SourceType</code> is either <code>AwsOrganizations</code> (if an organization is present in AWS Organizations) or <code>singleAccountMultiRegions</code>.
+      AwsOrganizationsSource:
+        $ref: '#/definitions/ResourceDataSyncAwsOrganizationsSource'
+        description: The field name in <code>SyncSource</code> for the <code>ResourceDataSyncAwsOrganizationsSource</code> type.
+      SourceRegions:
+        $ref: '#/definitions/ResourceDataSyncSourceRegionList'
+        description: The <code>SyncSource</code> AWS Regions included in the resource data sync.
+      IncludeFutureRegions:
+        $ref: '#/definitions/ResourceDataSyncIncludeFutureRegions'
+        description: Whether to automatically synchronize and aggregate data from new AWS Regions when those Regions come online.
+      State:
+        $ref: '#/definitions/ResourceDataSyncState'
+        description: '<p>The data type name for including resource data sync state. There are four sync states:</p> <p> <code>OrganizationNotExists</code>: Your organization doesn''t exist.</p> <p> <code>NoPermissions</code>: The system can''t locate the service-linked role. This role is automatically created when a user creates a resource data sync in Explorer.</p> <p> <code>InvalidOrganizationalUnit</code>: You specified or selected an invalid unit in the resource data sync configuration.</p> <p> <code>TrustedAccessDisabled</code>: You disabled Systems Manager access in the organization in AWS Organizations.</p>'
+    description: '<p>The data type name for including resource data sync state. There are four sync states:</p> <p> <code>OrganizationNotExists</code> (Your organization doesn''t exist)</p> <p> <code>NoPermissions</code> (The system can''t locate the service-linked role. This role is automatically created when a user creates a resource data sync in Explorer.)</p> <p> <code>InvalidOrganizationalUnit</code> (You specified or selected an invalid unit in the resource data sync configuration.)</p> <p> <code>TrustedAccessDisabled</code> (You disabled Systems Manager access in the organization in AWS Organizations.)</p>'
+  ResourceDataSyncLastModifiedTime:
     type: string
     format: date-time
   ResourceDataSyncItem:
@@ -13435,6 +13732,12 @@ definitions:
       SyncName:
         $ref: '#/definitions/ResourceDataSyncName'
         description: The name of the Resource Data Sync.
+      SyncType:
+        $ref: '#/definitions/ResourceDataSyncType'
+        description: 'The type of resource data sync. If <code>SyncType</code> is <code>SyncToDestination</code>, then the resource data sync synchronizes data to an Amazon S3 bucket. If the <code>SyncType</code> is <code>SyncFromSource</code> then the resource data sync synchronizes data from AWS Organizations or from multiple AWS Regions.'
+      SyncSource:
+        $ref: '#/definitions/ResourceDataSyncSourceWithState'
+        description: 'Information about the source where the data was synchronized. '
       S3Destination:
         $ref: '#/definitions/ResourceDataSyncS3Destination'
         description: Configuration information for the target Amazon S3 bucket.
@@ -13444,6 +13747,9 @@ definitions:
       LastSuccessfulSyncTime:
         $ref: '#/definitions/LastSuccessfulResourceDataSyncTime'
         description: The last time the sync operations returned a status of <code>SUCCESSFUL</code> (UTC).
+      SyncLastModifiedTime:
+        $ref: '#/definitions/ResourceDataSyncLastModifiedTime'
+        description: 'The date and time the resource data sync was changed. '
       LastStatus:
         $ref: '#/definitions/LastResourceDataSyncStatus'
         description: The status reported by the last sync.
@@ -13454,6 +13760,18 @@ definitions:
         $ref: '#/definitions/LastResourceDataSyncMessage'
         description: The status message details reported by the last sync.
     description: 'Information about a Resource Data Sync configuration, including its current status and last successful sync.'
+  ResourceDataSyncOrganizationalUnitId:
+    type: string
+    pattern: '^ou-[0-9a-z]{4,32}-[a-z0-9]{8,32}$'
+    minLength: 1
+    maxLength: 128
+  ResourceDataSyncOrganizationalUnit:
+    type: object
+    properties:
+      OrganizationalUnitId:
+        $ref: '#/definitions/ResourceDataSyncOrganizationalUnitId'
+        description: The AWS Organization unit ID data source for the sync.
+    description: The AWS Organizations organizational unit data source for the sync.
   ResourceDataSyncS3BucketName:
     type: string
     minLength: 1
@@ -13467,6 +13785,22 @@ definitions:
     enum:
       - JsonSerDe
   ResourceDataSyncS3Region:
+    type: string
+    minLength: 1
+    maxLength: 64
+  ResourceDataSyncSourceType:
+    type: string
+    minLength: 1
+    maxLength: 64
+  ResourceDataSyncSourceRegionList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceDataSyncSourceRegion'
+  ResourceDataSyncSourceRegion:
+    type: string
+    minLength: 1
+    maxLength: 64
+  ResourceDataSyncState:
     type: string
     minLength: 1
     maxLength: 64

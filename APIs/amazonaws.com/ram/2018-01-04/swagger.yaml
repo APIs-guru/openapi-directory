@@ -321,6 +321,73 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /associateresourcesharepermission:
+    post:
+      operationId: AssociateResourceSharePermission
+      description: Associates a permission with a resource share.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AssociateResourceSharePermissionResponse'
+        '480':
+          description: MalformedArnException
+          schema:
+            $ref: '#/definitions/MalformedArnException'
+        '481':
+          description: UnknownResourceException
+          schema:
+            $ref: '#/definitions/UnknownResourceException'
+        '482':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '483':
+          description: InvalidClientTokenException
+          schema:
+            $ref: '#/definitions/InvalidClientTokenException'
+        '484':
+          description: ServerInternalException
+          schema:
+            $ref: '#/definitions/ServerInternalException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - resourceShareArn
+              - permissionArn
+            properties:
+              resourceShareArn:
+                description: The Amazon Resource Name (ARN) of the resource share.
+                type: string
+              permissionArn:
+                description: The ARN of the AWS RAM permission to associate with the resource share.
+                type: string
+              replace:
+                description: Indicates whether the permission should replace the permissions that are currently associated with the resource share. Use <code>true</code> to replace the current permissions. Use <code>false</code> to add the permission to the current permission.
+                type: boolean
+              clientToken:
+                description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /createresourceshare:
     post:
       operationId: CreateResourceShare
@@ -407,6 +474,11 @@ paths:
               clientToken:
                 description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
                 type: string
+              permissionArns:
+                description: 'The ARNs of the permissions to associate with the resource share. If you do not specify an ARN for the permission, AWS RAM automatically attaches the default version of the permission for each resource type.'
+                type: array
+                items:
+                  $ref: '#/definitions/String'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -541,7 +613,7 @@ paths:
                 description: The Amazon Resource Name (ARN) of the resource share.
                 type: string
               resourceArns:
-                description: The Amazon Resource Names (ARN) of the resources.
+                description: The Amazon Resource Names (ARNs) of the resources.
                 type: array
                 items:
                   $ref: '#/definitions/String'
@@ -550,6 +622,70 @@ paths:
                 type: array
                 items:
                   $ref: '#/definitions/String'
+              clientToken:
+                description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /disassociateresourcesharepermission:
+    post:
+      operationId: DisassociateResourceSharePermission
+      description: Disassociates an AWS RAM permission from a resource share.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DisassociateResourceSharePermissionResponse'
+        '480':
+          description: MalformedArnException
+          schema:
+            $ref: '#/definitions/MalformedArnException'
+        '481':
+          description: UnknownResourceException
+          schema:
+            $ref: '#/definitions/UnknownResourceException'
+        '482':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '483':
+          description: InvalidClientTokenException
+          schema:
+            $ref: '#/definitions/InvalidClientTokenException'
+        '484':
+          description: ServerInternalException
+          schema:
+            $ref: '#/definitions/ServerInternalException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - resourceShareArn
+              - permissionArn
+            properties:
+              resourceShareArn:
+                description: The Amazon Resource Name (ARN) of the resource share.
+                type: string
+              permissionArn:
+                description: The ARN of the permission to disassociate from the resource share.
+                type: string
               clientToken:
                 description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
                 type: string
@@ -583,6 +719,62 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters: []
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /getpermission:
+    post:
+      operationId: GetPermission
+      description: Gets the contents of an AWS RAM permission in JSON format.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetPermissionResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: MalformedArnException
+          schema:
+            $ref: '#/definitions/MalformedArnException'
+        '482':
+          description: UnknownResourceException
+          schema:
+            $ref: '#/definitions/UnknownResourceException'
+        '483':
+          description: ServerInternalException
+          schema:
+            $ref: '#/definitions/ServerInternalException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - permissionArn
+            properties:
+              permissionArn:
+                description: The ARN of the permission.
+                type: string
+              permissionVersion:
+                description: The identifier for the version of the permission.
+                type: integer
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -710,7 +902,7 @@ paths:
               - associationType
             properties:
               associationType:
-                description: The association type.
+                description: The association type. Specify <code>PRINCIPAL</code> to list the principals that are associated with the specified resource share. Specify <code>RESOURCE</code> to list the resources that are associated with the specified resource share.
                 type: string
                 enum:
                   - PRINCIPAL
@@ -1020,10 +1212,65 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /listpermissions:
+    post:
+      operationId: ListPermissions
+      description: Lists the AWS RAM permissions.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListPermissionsResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: InvalidNextTokenException
+          schema:
+            $ref: '#/definitions/InvalidNextTokenException'
+        '482':
+          description: ServerInternalException
+          schema:
+            $ref: '#/definitions/ServerInternalException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              resourceType:
+                description: 'Specifies the resource type for which to list permissions. For example, to list only permissions that apply to EC2 subnets, specify <code>ec2:Subnet</code>.'
+                type: string
+              nextToken:
+                description: The token for the next page of results.
+                type: string
+              maxResults:
+                description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+                type: integer
+                minimum: 1
+                maximum: 500
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /listprincipals:
     post:
       operationId: ListPrincipals
-      description: Lists the principals that you have shared resources with or the principals that have shared resources with you.
+      description: Lists the principals that you have shared resources with or that have shared resources with you.
       responses:
         '200':
           description: Success
@@ -1077,7 +1324,7 @@ paths:
                 items:
                   $ref: '#/definitions/String'
               resourceType:
-                description: '<p>The resource type.</p> <p>Valid values: <code>route53resolver:ResolverRule</code> | <code>ec2:TransitGateway</code> | <code>ec2:Subnet</code> | <code>license-manager:LicenseConfiguration</code> </p>'
+                description: '<p>The resource type.</p> <p>Valid values: <code>ec2:CapacityReservation</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>license-manager:LicenseConfiguration</code> | <code>rds:Cluster</code> | <code>route53resolver:ResolverRule</code> I <code>resource-groups:Group</code> </p>'
                 type: string
               resourceShareArns:
                 description: The Amazon Resource Names (ARN) of the resource shares.
@@ -1102,6 +1349,71 @@ paths:
           in: query
           description: Pagination token
           required: false
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /listresourcesharepermissions:
+    post:
+      operationId: ListResourceSharePermissions
+      description: Lists the AWS RAM permissions that are associated with a resource share.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListResourceSharePermissionsResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: MalformedArnException
+          schema:
+            $ref: '#/definitions/MalformedArnException'
+        '482':
+          description: UnknownResourceException
+          schema:
+            $ref: '#/definitions/UnknownResourceException'
+        '483':
+          description: InvalidNextTokenException
+          schema:
+            $ref: '#/definitions/InvalidNextTokenException'
+        '484':
+          description: ServerInternalException
+          schema:
+            $ref: '#/definitions/ServerInternalException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - resourceShareArn
+            properties:
+              resourceShareArn:
+                description: The Amazon Resource Name (ARN) of the resource share.
+                type: string
+              nextToken:
+                description: The token for the next page of results.
+                type: string
+              maxResults:
+                description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+                type: integer
+                minimum: 1
+                maximum: 500
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1166,7 +1478,7 @@ paths:
                 description: The principal.
                 type: string
               resourceType:
-                description: '<p>The resource type.</p> <p>Valid values: <code>route53resolver:ResolverRule</code> | <code>ec2:TransitGateway</code> | <code>ec2:Subnet</code> | <code>license-manager:LicenseConfiguration</code> </p>'
+                description: '<p>The resource type.</p> <p>Valid values: <code>ec2:CapacityReservation</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>license-manager:LicenseConfiguration</code> | <code>rds:Cluster</code> | <code>route53resolver:ResolverRule</code> | <code>resource-groups:Group</code> </p>'
                 type: string
               resourceArns:
                 description: The Amazon Resource Names (ARN) of the resources.
@@ -1196,6 +1508,53 @@ paths:
           in: query
           description: Pagination token
           required: false
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/promoteresourcesharecreatedfrompolicy#resourceShareArn':
+    post:
+      operationId: PromoteResourceShareCreatedFromPolicy
+      description: '<p>Resource shares that were created by attaching a policy to a resource are visible only to the resource share owner, and the resource share cannot be modified in AWS RAM.</p> <p>Use this API action to promote the resource share. When you promote the resource share, it becomes:</p> <ul> <li> <p>Visible to all principals that it is shared with.</p> </li> <li> <p>Modifiable in AWS RAM.</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PromoteResourceShareCreatedFromPolicyResponse'
+        '480':
+          description: MalformedArnException
+          schema:
+            $ref: '#/definitions/MalformedArnException'
+        '481':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+        '482':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '483':
+          description: MissingRequiredParameterException
+          schema:
+            $ref: '#/definitions/MissingRequiredParameterException'
+        '484':
+          description: ServerInternalException
+          schema:
+            $ref: '#/definitions/ServerInternalException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: resourceShareArn
+          in: query
+          required: true
+          description: The ARN of the resource share to promote.
+          type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1495,6 +1854,15 @@ definitions:
   InvalidStateTransitionException: {}
   ResourceShareLimitExceededException: {}
   InvalidParameterException: {}
+  AssociateResourceSharePermissionResponse:
+    type: object
+    properties:
+      returnValue:
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether the request succeeded.
+      clientToken:
+        $ref: '#/definitions/String'
+        description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   CreateResourceShareResponse:
     type: object
     properties:
@@ -1533,12 +1901,27 @@ definitions:
       clientToken:
         $ref: '#/definitions/String'
         description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+  DisassociateResourceSharePermissionResponse:
+    type: object
+    properties:
+      returnValue:
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether the request succeeded.
+      clientToken:
+        $ref: '#/definitions/String'
+        description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   EnableSharingWithAwsOrganizationResponse:
     type: object
     properties:
       returnValue:
         $ref: '#/definitions/Boolean'
         description: Indicates whether the request succeeded.
+  GetPermissionResponse:
+    type: object
+    properties:
+      permission:
+        $ref: '#/definitions/ResourceSharePermissionDetail'
+        description: Information about the permission.
   GetResourcePoliciesResponse:
     type: object
     properties:
@@ -1597,12 +1980,30 @@ definitions:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
   MissingRequiredParameterException: {}
+  ListPermissionsResponse:
+    type: object
+    properties:
+      permissions:
+        $ref: '#/definitions/ResourceSharePermissionList'
+        description: Information about the permissions.
+      nextToken:
+        $ref: '#/definitions/String'
+        description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
   ListPrincipalsResponse:
     type: object
     properties:
       principals:
         $ref: '#/definitions/PrincipalList'
         description: The principals.
+      nextToken:
+        $ref: '#/definitions/String'
+        description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+  ListResourceSharePermissionsResponse:
+    type: object
+    properties:
+      permissions:
+        $ref: '#/definitions/ResourceSharePermissionList'
+        description: The permissions associated with the resource share.
       nextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
@@ -1616,6 +2017,12 @@ definitions:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
   InvalidResourceTypeException: {}
+  PromoteResourceShareCreatedFromPolicyResponse:
+    type: object
+    properties:
+      returnValue:
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether the request succeeded.
   RejectResourceShareInvitationResponse:
     type: object
     properties:
@@ -1681,8 +2088,28 @@ definitions:
         description: The status of the invitation.
       resourceShareAssociations:
         $ref: '#/definitions/ResourceShareAssociationList'
-        description: 'To view the resources associated with a pending resource share invitation, use <a href="https://docs.aws.amazon.com/ram/latest/APIReference/API_ListPendingInvitationResources.html">ListPendingInvitationResources</a>.This member has been deprecated. Use ListPendingInvitationResources.'
+        description: 'To view the resources associated with a pending resource share invitation, use <a href="https://docs.aws.amazon.com/ram/latest/APIReference/API_ListPendingInvitationResources.html"> ListPendingInvitationResources</a>.This member has been deprecated. Use ListPendingInvitationResources.'
     description: Describes an invitation to join a resource share.
+  Boolean:
+    type: boolean
+  AssociateResourceSharePermissionRequest:
+    type: object
+    required:
+      - resourceShareArn
+      - permissionArn
+    properties:
+      resourceShareArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the resource share.
+      permissionArn:
+        $ref: '#/definitions/String'
+        description: The ARN of the AWS RAM permission to associate with the resource share.
+      replace:
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether the permission should replace the permissions that are currently associated with the resource share. Use <code>true</code> to replace the current permissions. Use <code>false</code> to add the permission to the current permission.
+      clientToken:
+        $ref: '#/definitions/String'
+        description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   ResourceArnList:
     type: array
     items:
@@ -1712,12 +2139,14 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ResourceShareAssociation'
-  Boolean:
-    type: boolean
   TagList:
     type: array
     items:
       $ref: '#/definitions/Tag'
+  PermissionArnList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
   CreateResourceShareRequest:
     type: object
     required:
@@ -1741,6 +2170,9 @@ definitions:
       clientToken:
         $ref: '#/definitions/String'
         description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+      permissionArns:
+        $ref: '#/definitions/PermissionArnList'
+        description: 'The ARNs of the permissions to associate with the resource share. If you do not specify an ARN for the permission, AWS RAM automatically attaches the default version of the permission for each resource type.'
   ResourceShare:
     type: object
     properties:
@@ -1771,6 +2203,9 @@ definitions:
       lastUpdatedTime:
         $ref: '#/definitions/DateTime'
         description: The time when the resource share was last updated.
+      featureSet:
+        $ref: '#/definitions/ResourceShareFeatureSet'
+        description: '<p>Indicates how the resource share was created. Possible values include:</p> <ul> <li> <p> <code>CREATED_FROM_POLICY</code> - Indicates that the resource share was created from an AWS Identity and Access Management (AWS IAM) policy attached to a resource. These resource shares are visible only to the AWS account that created it. They cannot be modified in AWS RAM.</p> </li> <li> <p> <code>PROMOTING_TO_STANDARD</code> - The resource share is in the process of being promoted. For more information, see <a>PromoteResourceShareCreatedFromPolicy</a>.</p> </li> <li> <p> <code>STANDARD</code> - Indicates that the resource share was created in AWS RAM using the console or APIs. These resource shares are visible to all principals. They can be modified in AWS RAM.</p> </li> </ul>'
     description: Describes a resource share.
   DateTime:
     type: string
@@ -1778,6 +2213,21 @@ definitions:
   DeleteResourceShareRequest:
     type: object
     properties: {}
+  DisassociateResourceSharePermissionRequest:
+    type: object
+    required:
+      - resourceShareArn
+      - permissionArn
+    properties:
+      resourceShareArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the resource share.
+      permissionArn:
+        $ref: '#/definitions/String'
+        description: The ARN of the permission to disassociate from the resource share.
+      clientToken:
+        $ref: '#/definitions/String'
+        description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   DisassociateResourceShareRequest:
     type: object
     required:
@@ -1788,7 +2238,7 @@ definitions:
         description: The Amazon Resource Name (ARN) of the resource share.
       resourceArns:
         $ref: '#/definitions/ResourceArnList'
-        description: The Amazon Resource Names (ARN) of the resources.
+        description: The Amazon Resource Names (ARNs) of the resources.
       principals:
         $ref: '#/definitions/PrincipalArnOrIdList'
         description: The principals.
@@ -1798,6 +2248,47 @@ definitions:
   EnableSharingWithAwsOrganizationRequest:
     type: object
     properties: {}
+  Integer:
+    type: integer
+  GetPermissionRequest:
+    type: object
+    required:
+      - permissionArn
+    properties:
+      permissionArn:
+        $ref: '#/definitions/String'
+        description: The ARN of the permission.
+      permissionVersion:
+        $ref: '#/definitions/Integer'
+        description: The identifier for the version of the permission.
+  ResourceSharePermissionDetail:
+    type: object
+    properties:
+      arn:
+        $ref: '#/definitions/String'
+        description: The ARN of the permission.
+      version:
+        $ref: '#/definitions/String'
+        description: The identifier for the version of the permission.
+      defaultVersion:
+        $ref: '#/definitions/Boolean'
+        description: The identifier for the version of the permission that is set as the default version.
+      name:
+        $ref: '#/definitions/String'
+        description: The name of the permission.
+      resourceType:
+        $ref: '#/definitions/String'
+        description: The resource type to which the permission applies.
+      permission:
+        $ref: '#/definitions/String'
+        description: The permission's effect and actions in JSON format. The <code>effect</code> indicates whether the actions are allowed or denied. The <code>actions</code> list the API actions to which the principal is granted or denied access.
+      creationTime:
+        $ref: '#/definitions/DateTime'
+        description: The date and time when the permission was created.
+      lastUpdatedTime:
+        $ref: '#/definitions/DateTime'
+        description: The date and time when the permission was last updated.
+    description: Information about an AWS RAM permission.
   MaxResults:
     type: integer
     minimum: 1
@@ -1847,7 +2338,7 @@ definitions:
     properties:
       associationType:
         $ref: '#/definitions/ResourceShareAssociationType'
-        description: The association type.
+        description: The association type. Specify <code>PRINCIPAL</code> to list the principals that are associated with the specified resource share. Specify <code>RESOURCE</code> to list the resources that are associated with the specified resource share.
       resourceShareArns:
         $ref: '#/definitions/ResourceShareArnList'
         description: The Amazon Resource Names (ARN) of the resource shares.
@@ -1954,6 +2445,22 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Resource'
+  ListPermissionsRequest:
+    type: object
+    properties:
+      resourceType:
+        $ref: '#/definitions/String'
+        description: 'Specifies the resource type for which to list permissions. For example, to list only permissions that apply to EC2 subnets, specify <code>ec2:Subnet</code>.'
+      nextToken:
+        $ref: '#/definitions/String'
+        description: The token for the next page of results.
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+  ResourceSharePermissionList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceSharePermissionSummary'
   ListPrincipalsRequest:
     type: object
     required:
@@ -1970,7 +2477,7 @@ definitions:
         description: The principals.
       resourceType:
         $ref: '#/definitions/String'
-        description: '<p>The resource type.</p> <p>Valid values: <code>route53resolver:ResolverRule</code> | <code>ec2:TransitGateway</code> | <code>ec2:Subnet</code> | <code>license-manager:LicenseConfiguration</code> </p>'
+        description: '<p>The resource type.</p> <p>Valid values: <code>ec2:CapacityReservation</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>license-manager:LicenseConfiguration</code> | <code>rds:Cluster</code> | <code>route53resolver:ResolverRule</code> I <code>resource-groups:Group</code> </p>'
       resourceShareArns:
         $ref: '#/definitions/ResourceShareArnList'
         description: The Amazon Resource Names (ARN) of the resource shares.
@@ -1984,6 +2491,20 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Principal'
+  ListResourceSharePermissionsRequest:
+    type: object
+    required:
+      - resourceShareArn
+    properties:
+      resourceShareArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the resource share.
+      nextToken:
+        $ref: '#/definitions/String'
+        description: The token for the next page of results.
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
   ListResourcesRequest:
     type: object
     required:
@@ -1997,7 +2518,7 @@ definitions:
         description: The principal.
       resourceType:
         $ref: '#/definitions/String'
-        description: '<p>The resource type.</p> <p>Valid values: <code>route53resolver:ResolverRule</code> | <code>ec2:TransitGateway</code> | <code>ec2:Subnet</code> | <code>license-manager:LicenseConfiguration</code> </p>'
+        description: '<p>The resource type.</p> <p>Valid values: <code>ec2:CapacityReservation</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>license-manager:LicenseConfiguration</code> | <code>rds:Cluster</code> | <code>route53resolver:ResolverRule</code> | <code>resource-groups:Group</code> </p>'
       resourceArns:
         $ref: '#/definitions/ResourceArnList'
         description: The Amazon Resource Names (ARN) of the resources.
@@ -2031,6 +2552,9 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: Indicates whether the principal belongs to the same AWS organization as the AWS account that owns the resource share.
     description: Describes a principal for use with AWS Resource Access Manager.
+  PromoteResourceShareCreatedFromPolicyRequest:
+    type: object
+    properties: {}
   RejectResourceShareInvitationRequest:
     type: object
     required:
@@ -2062,6 +2586,9 @@ definitions:
       resourceShareArn:
         $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) of the resource share.
+      resourceGroupArn:
+        $ref: '#/definitions/String'
+        description: The ARN of the resource group. This value is returned only if the resource is a resource group.
       status:
         $ref: '#/definitions/ResourceStatus'
         description: The status of the resource.
@@ -2075,6 +2602,12 @@ definitions:
         $ref: '#/definitions/DateTime'
         description: The time when the association was last updated.
     description: Describes a resource associated with a resource share.
+  ResourceShareFeatureSet:
+    type: string
+    enum:
+      - CREATED_FROM_POLICY
+      - PROMOTING_TO_STANDARD
+      - STANDARD
   ResourceShareAssociation:
     type: object
     properties:
@@ -2113,6 +2646,34 @@ definitions:
       - ACCEPTED
       - REJECTED
       - EXPIRED
+  ResourceSharePermissionSummary:
+    type: object
+    properties:
+      arn:
+        $ref: '#/definitions/String'
+        description: The ARN of the permission.
+      version:
+        $ref: '#/definitions/String'
+        description: The identifier for the version of the permission.
+      defaultVersion:
+        $ref: '#/definitions/Boolean'
+        description: The identifier for the version of the permission that is set as the default version.
+      name:
+        $ref: '#/definitions/String'
+        description: The name of the permission.
+      resourceType:
+        $ref: '#/definitions/String'
+        description: The type of resource to which the permission applies.
+      status:
+        $ref: '#/definitions/String'
+        description: The current status of the permission.
+      creationTime:
+        $ref: '#/definitions/DateTime'
+        description: The date and time when the permission was created.
+      lastUpdatedTime:
+        $ref: '#/definitions/DateTime'
+        description: The date and time when the permission was last updated.
+    description: Information about a permission that is associated with a resource share.
   TagValue:
     type: string
   TagValueList:

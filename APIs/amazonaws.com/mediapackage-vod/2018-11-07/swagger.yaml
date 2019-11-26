@@ -835,6 +835,9 @@ definitions:
       Arn:
         description: The ARN of the Asset.
         $ref: '#/definitions/__string'
+      CreatedAt:
+        description: The time the Asset was initially submitted for Ingest.
+        $ref: '#/definitions/__string'
       EgressEndpoints:
         description: The list of egress endpoints available for the Asset.
         $ref: '#/definitions/__listOfEgressEndpoint'
@@ -941,6 +944,9 @@ definitions:
       Arn:
         description: The ARN of the PackagingGroup.
         $ref: '#/definitions/__string'
+      DomainName:
+        description: The fully qualified domain name for Assets in the PackagingGroup.
+        $ref: '#/definitions/__string'
       Id:
         description: The ID of the PackagingGroup.
         $ref: '#/definitions/__string'
@@ -958,6 +964,9 @@ definitions:
     properties:
       Arn:
         description: The ARN of the Asset.
+        $ref: '#/definitions/__string'
+      CreatedAt:
+        description: The time the Asset was initially submitted for Ingest.
         $ref: '#/definitions/__string'
       EgressEndpoints:
         description: The list of egress endpoints available for the Asset.
@@ -1003,6 +1012,9 @@ definitions:
       Arn:
         description: The ARN of the PackagingGroup.
         $ref: '#/definitions/__string'
+      DomainName:
+        description: The fully qualified domain name for Assets in the PackagingGroup.
+        $ref: '#/definitions/__string'
       Id:
         description: The ID of the PackagingGroup.
         $ref: '#/definitions/__string'
@@ -1046,6 +1058,9 @@ definitions:
     properties:
       Arn:
         description: The ARN of the Asset.
+        $ref: '#/definitions/__string'
+      CreatedAt:
+        description: The time the Asset was initially submitted for Ingest.
         $ref: '#/definitions/__string'
       Id:
         description: The unique identifier for the Asset.
@@ -1367,6 +1382,9 @@ definitions:
     properties:
       Arn:
         description: The ARN of the PackagingGroup.
+        $ref: '#/definitions/__string'
+      DomainName:
+        description: The fully qualified domain name for Assets in the PackagingGroup.
         $ref: '#/definitions/__string'
       Id:
         description: The ID of the PackagingGroup.

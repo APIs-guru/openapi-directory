@@ -3,7 +3,7 @@ info:
   version: '2018-05-01'
   x-release: v4
   title: Amazon Chime
-  description: '<p>The Amazon Chime API (application programming interface) is designed for administrators to use to perform key tasks, such as creating and managing Amazon Chime accounts and users. This guide provides detailed information about the Amazon Chime API, including operations, types, inputs and outputs, and error codes.</p> <p>You can use an AWS SDK, the AWS Command Line Interface (AWS CLI), or the REST API to make API calls. We recommend using an AWS SDK or the AWS CLI. Each API operation includes links to information about using it with a language-specific AWS SDK or the AWS CLI.</p> <dl> <dt>Using an AWS SDK</dt> <dd> <p>You don''t need to write code to calculate a signature for request authentication. The SDK clients authenticate your requests by using access keys that you provide. For more information about AWS SDKs, see the <a href="http://aws.amazon.com/developer/">AWS Developer Center</a>.</p> </dd> <dt>Using the AWS CLI</dt> <dd> <p>Use your access keys with the AWS CLI to make API calls. For information about setting up the AWS CLI, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/installing.html">Installing the AWS Command Line Interface</a> in the <i>AWS Command Line Interface User Guide</i>. For a list of available Amazon Chime commands, see the <a href="https://docs.aws.amazon.com/cli/latest/reference/chime/index.html">Amazon Chime commands</a> in the <i>AWS CLI Command Reference</i>.</p> </dd> <dt>Using REST API</dt> <dd> <p>If you use REST to make API calls, you must authenticate your request by providing a signature. Amazon Chime supports signature version 4. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 Signing Process</a> in the <i>Amazon Web Services General Reference</i>.</p> <p>When making REST API calls, use the service name <code>chime</code> and REST endpoint <code>https://service.chime.aws.amazon.com</code>.</p> </dd> </dl> <p>Administrative permissions are controlled using AWS Identity and Access Management (IAM). For more information, see <a href="https://docs.aws.amazon.com/chime/latest/ag/control-access.html">Control Access to the Amazon Chime Console</a> in the <i>Amazon Chime Administration Guide</i>.</p>'
+  description: '<p>The Amazon Chime API (application programming interface) is designed for developers to perform key tasks, such as creating and managing Amazon Chime accounts, users, and Voice Connectors. This guide provides detailed information about the Amazon Chime API, including operations, types, inputs and outputs, and error codes. It also includes some server-side API actions to use with the Amazon Chime SDK. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.</p> <p>You can use an AWS SDK, the AWS Command Line Interface (AWS CLI), or the REST API to make API calls. We recommend using an AWS SDK or the AWS CLI. Each API operation includes links to information about using it with a language-specific AWS SDK or the AWS CLI.</p> <dl> <dt>Using an AWS SDK</dt> <dd> <p>You don''t need to write code to calculate a signature for request authentication. The SDK clients authenticate your requests by using access keys that you provide. For more information about AWS SDKs, see the <a href="http://aws.amazon.com/developer/">AWS Developer Center</a>.</p> </dd> <dt>Using the AWS CLI</dt> <dd> <p>Use your access keys with the AWS CLI to make API calls. For information about setting up the AWS CLI, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/installing.html">Installing the AWS Command Line Interface</a> in the <i>AWS Command Line Interface User Guide</i>. For a list of available Amazon Chime commands, see the <a href="https://docs.aws.amazon.com/cli/latest/reference/chime/index.html">Amazon Chime commands</a> in the <i>AWS CLI Command Reference</i>.</p> </dd> <dt>Using REST API</dt> <dd> <p>If you use REST to make API calls, you must authenticate your request by providing a signature. Amazon Chime supports signature version 4. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 Signing Process</a> in the <i>Amazon Web Services General Reference</i>.</p> <p>When making REST API calls, use the service name <code>chime</code> and REST endpoint <code>https://service.chime.aws.amazon.com</code>.</p> </dd> </dl> <p>Administrative permissions are controlled using AWS Identity and Access Management (IAM). For more information, see <a href="https://docs.aws.amazon.com/chime/latest/ag/security-iam.html">Identity and Access Management for Amazon Chime</a> in the <i>Amazon Chime Administration Guide</i>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -337,6 +337,155 @@ paths:
           type: string
           enum:
             - associate-phone-numbers
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/meetings/{meetingId}/attendees#operation=batch-create':
+    post:
+      operationId: BatchCreateAttendee
+      description: 'Creates up to 100 new attendees for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>. '
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/BatchCreateAttendeeResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: ResourceLimitExceededException
+          schema:
+            $ref: '#/definitions/ResourceLimitExceededException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '486':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: meetingId
+          in: path
+          required: true
+          description: The Amazon Chime SDK meeting ID.
+          type: string
+          pattern: '[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}'
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - Attendees
+            properties:
+              Attendees:
+                description: The request containing the attendees to create.
+                type: array
+                items:
+                  $ref: '#/definitions/CreateAttendeeRequestItem'
+        - name: operation
+          in: query
+          required: true
+          type: string
+          enum:
+            - batch-create
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/accounts/{accountId}/rooms/{roomId}/memberships#operation=batch-create':
+    post:
+      operationId: BatchCreateRoomMembership
+      description: Adds up to 50 members to a chat room. Members can be either users or bots. The member role designates whether the member is a chat room administrator or a general chat room member.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/BatchCreateRoomMembershipResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: The Amazon Chime account ID.
+          type: string
+          pattern: .*\S.*
+        - name: roomId
+          in: path
+          required: true
+          description: The room ID.
+          type: string
+          pattern: .*\S.*
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - MembershipItemList
+            properties:
+              MembershipItemList:
+                description: The list of membership items.
+                type: array
+                items:
+                  $ref: '#/definitions/MembershipItem'
+                maxItems: 50
+        - name: operation
+          in: query
+          required: true
+          type: string
+          enum:
+            - batch-create
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -892,6 +1041,141 @@ paths:
           in: query
           description: Pagination token
           required: false
+  '/meetings/{meetingId}/attendees':
+    post:
+      operationId: CreateAttendee
+      description: 'Creates a new attendee for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.'
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateAttendeeResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: ResourceLimitExceededException
+          schema:
+            $ref: '#/definitions/ResourceLimitExceededException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '486':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: meetingId
+          in: path
+          required: true
+          description: The Amazon Chime SDK meeting ID.
+          type: string
+          pattern: '[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}'
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - ExternalUserId
+            properties:
+              ExternalUserId:
+                description: The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.
+                type: string
+                minLength: 2
+                maxLength: 64
+                format: password
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListAttendees
+      description: 'Lists the attendees for the specified Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListAttendeesResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '484':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: meetingId
+          in: path
+          required: true
+          description: The Amazon Chime SDK meeting ID.
+          type: string
+          pattern: '[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}'
+        - name: next-token
+          in: query
+          required: false
+          description: The token to use to retrieve the next page of results.
+          type: string
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of results to return in a single call.
+          type: integer
+          minimum: 1
+          maximum: 99
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
   '/accounts/{accountId}/bots':
     post:
       operationId: CreateBot
@@ -1002,7 +1286,7 @@ paths:
         - name: max-results
           in: query
           required: false
-          description: The maximum number of results to return in a single call. Default is 10.
+          description: The maximum number of results to return in a single call. The default is 10.
           type: integer
           minimum: 1
           maximum: 99
@@ -1011,6 +1295,141 @@ paths:
           required: false
           description: The token to use to retrieve the next page of results.
           type: string
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+  /meetings:
+    post:
+      operationId: CreateMeeting
+      description: 'Creates a new Amazon Chime SDK meeting in the specified media Region with no initial attendees. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.'
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateMeetingResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '482':
+          description: ResourceLimitExceededException
+          schema:
+            $ref: '#/definitions/ResourceLimitExceededException'
+        '483':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '484':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - ClientRequestToken
+            properties:
+              ClientRequestToken:
+                description: The unique identifier for the client request. Use a different token for different meetings.
+                type: string
+                pattern: '[-_a-zA-Z0-9]*'
+                minLength: 2
+                maxLength: 64
+                format: password
+              MeetingHostId:
+                description: Reserved.
+                type: string
+                minLength: 2
+                maxLength: 64
+                format: password
+              MediaRegion:
+                description: 'The Region in which to create the meeting. Available values: <code>us-east-1</code>, <code>us-west-2</code>.'
+                type: string
+              NotificationsConfiguration:
+                description: The configuration for resource targets to receive notifications when Amazon Chime SDK meeting and attendee events occur.
+                type: object
+                properties:
+                  SnsTopicArn:
+                    $ref: '#/definitions/Arn'
+                    description: The SNS topic ARN.
+                  SqsQueueArn:
+                    $ref: '#/definitions/Arn'
+                    description: The SQS queue ARN.
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListMeetings
+      description: 'Lists up to 100 active Amazon Chime SDK meetings. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListMeetingsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '482':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '483':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: next-token
+          in: query
+          required: false
+          description: The token to use to retrieve the next page of results.
+          type: string
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of results to return in a single call.
+          type: integer
+          minimum: 1
+          maximum: 99
         - name: MaxResults
           type: string
           in: query
@@ -1136,6 +1555,290 @@ paths:
           type: integer
           minimum: 1
           maximum: 99
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+  '/accounts/{accountId}/rooms':
+    post:
+      operationId: CreateRoom
+      description: Creates a chat room for the specified Amazon Chime account.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateRoomResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '484':
+          description: ResourceLimitExceededException
+          schema:
+            $ref: '#/definitions/ResourceLimitExceededException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: The Amazon Chime account ID.
+          type: string
+          pattern: .*\S.*
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - Name
+            properties:
+              Name:
+                description: The room name.
+                type: string
+                format: password
+              ClientRequestToken:
+                description: The idempotency token for the request.
+                type: string
+                pattern: '[-_a-zA-Z0-9]*'
+                minLength: 2
+                maxLength: 64
+                format: password
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListRooms
+      description: 'Lists the room details for the specified Amazon Chime account. Optionally, filter the results by a member ID (user ID or bot ID) to see a list of rooms that the member belongs to.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListRoomsResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: The Amazon Chime account ID.
+          type: string
+          pattern: .*\S.*
+        - name: member-id
+          in: query
+          required: false
+          description: The member ID (user ID or bot ID).
+          type: string
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of results to return in a single call.
+          type: integer
+          minimum: 1
+          maximum: 99
+        - name: next-token
+          in: query
+          required: false
+          description: The token to use to retrieve the next page of results.
+          type: string
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+  '/accounts/{accountId}/rooms/{roomId}/memberships':
+    post:
+      operationId: CreateRoomMembership
+      description: Adds a member to a chat room. A member can be either a user or a bot. The member role designates whether the member is a chat room administrator or a general chat room member.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateRoomMembershipResponse'
+        '480':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '481':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '485':
+          description: ResourceLimitExceededException
+          schema:
+            $ref: '#/definitions/ResourceLimitExceededException'
+        '486':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: The Amazon Chime account ID.
+          type: string
+          pattern: .*\S.*
+        - name: roomId
+          in: path
+          required: true
+          description: The room ID.
+          type: string
+          pattern: .*\S.*
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - MemberId
+            properties:
+              MemberId:
+                description: The Amazon Chime member ID (user ID or bot ID).
+                type: string
+                pattern: .*\S.*
+              Role:
+                description: The role of the member.
+                type: string
+                enum:
+                  - Administrator
+                  - Member
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListRoomMemberships
+      description: 'Lists the membership details for the specified room, such as member IDs, member email addresses, and member names.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListRoomMembershipsResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: The Amazon Chime account ID.
+          type: string
+          pattern: .*\S.*
+        - name: roomId
+          in: path
+          required: true
+          description: The room ID.
+          type: string
+          pattern: .*\S.*
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of results to return in a single call.
+          type: integer
+          minimum: 1
+          maximum: 99
+        - name: next-token
+          in: query
+          required: false
+          description: The token to use to retrieve the next page of results.
+          type: string
         - name: MaxResults
           type: string
           in: query
@@ -1551,6 +2254,111 @@ paths:
                 pattern: .*\S.*
                 minLength: 1
                 maxLength: 100
+  '/meetings/{meetingId}/attendees/{attendeeId}':
+    delete:
+      operationId: DeleteAttendee
+      description: 'Deletes an attendee from the specified Amazon Chime SDK meeting and deletes their <code>JoinToken</code>. Attendees are automatically deleted when a Amazon Chime SDK meeting is deleted. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '482':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: meetingId
+          in: path
+          required: true
+          description: The Amazon Chime SDK meeting ID.
+          type: string
+          pattern: '[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}'
+        - name: attendeeId
+          in: path
+          required: true
+          description: The Amazon Chime SDK attendee ID.
+          type: string
+          pattern: '[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetAttendee
+      description: 'Gets the Amazon Chime SDK attendee details for a specified meeting ID and attendee ID. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetAttendeeResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '484':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: meetingId
+          in: path
+          required: true
+          description: The Amazon Chime SDK meeting ID.
+          type: string
+          pattern: '[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}'
+        - name: attendeeId
+          in: path
+          required: true
+          description: The Amazon Chime SDK attendee ID.
+          type: string
+          pattern: '[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}'
   '/accounts/{accountId}/bots/{botId}/events-configuration':
     delete:
       operationId: DeleteEventsConfiguration
@@ -1715,6 +2523,99 @@ paths:
                 description: Lambda function ARN that allows the bot to receive outgoing events.
                 type: string
                 format: password
+  '/meetings/{meetingId}':
+    delete:
+      operationId: DeleteMeeting
+      description: 'Deletes the specified Amazon Chime SDK meeting. When a meeting is deleted, its attendees are also deleted and clients can no longer join it. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '482':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: meetingId
+          in: path
+          required: true
+          description: The Amazon Chime SDK meeting ID.
+          type: string
+          pattern: '[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetMeeting
+      description: 'Gets the Amazon Chime SDK meeting details for the specified meeting ID. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetMeetingResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '484':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: meetingId
+          in: path
+          required: true
+          description: The Amazon Chime SDK meeting ID.
+          type: string
+          pattern: '[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}'
   '/phone-numbers/{phoneNumberId}':
     delete:
       operationId: DeletePhoneNumber
@@ -1865,6 +2766,279 @@ paths:
                 type: string
                 pattern: '^$|^[a-zA-Z0-9 ]{2,15}$'
                 format: password
+  '/accounts/{accountId}/rooms/{roomId}':
+    delete:
+      operationId: DeleteRoom
+      description: Deletes a chat room.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: The Amazon Chime account ID.
+          type: string
+          pattern: .*\S.*
+        - name: roomId
+          in: path
+          required: true
+          description: The chat room ID.
+          type: string
+          pattern: .*\S.*
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetRoom
+      description: 'Retrieves room details, such as name.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetRoomResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: The Amazon Chime account ID.
+          type: string
+          pattern: .*\S.*
+        - name: roomId
+          in: path
+          required: true
+          description: The room ID.
+          type: string
+          pattern: .*\S.*
+    post:
+      operationId: UpdateRoom
+      description: 'Updates room details, such as the room name.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateRoomResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: The Amazon Chime account ID.
+          type: string
+          pattern: .*\S.*
+        - name: roomId
+          in: path
+          required: true
+          description: The room ID.
+          type: string
+          pattern: .*\S.*
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              Name:
+                description: The room name.
+                type: string
+                format: password
+  '/accounts/{accountId}/rooms/{roomId}/memberships/{memberId}':
+    delete:
+      operationId: DeleteRoomMembership
+      description: Removes a member from a chat room.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: The Amazon Chime account ID.
+          type: string
+          pattern: .*\S.*
+        - name: roomId
+          in: path
+          required: true
+          description: The room ID.
+          type: string
+          pattern: .*\S.*
+        - name: memberId
+          in: path
+          required: true
+          description: The member ID (user ID or bot ID).
+          type: string
+          pattern: .*\S.*
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: UpdateRoomMembership
+      description: 'Updates room membership details, such as member role. The member role designates whether the member is a chat room administrator or a general chat room member. Member role can only be updated for user IDs.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateRoomMembershipResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: The Amazon Chime account ID.
+          type: string
+          pattern: .*\S.*
+        - name: roomId
+          in: path
+          required: true
+          description: The room ID.
+          type: string
+          pattern: .*\S.*
+        - name: memberId
+          in: path
+          required: true
+          description: The member ID.
+          type: string
+          pattern: .*\S.*
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              Role:
+                description: The role of the member.
+                type: string
+                enum:
+                  - Administrator
+                  - Member
   '/voice-connectors/{voiceConnectorId}':
     delete:
       operationId: DeleteVoiceConnector
@@ -2391,7 +3565,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetVoiceConnectorStreamingConfiguration
-      description: 'Retrieves the streaming configuration details for the specified Amazon Chime Voice Connector. Shows whether media streaming is enabled for sending to Amazon Kinesis, and shows the retention period for the Amazon Kinesis data, in hours.'
+      description: 'Retrieves the streaming configuration details for the specified Amazon Chime Voice Connector. Shows whether media streaming is enabled for sending to Amazon Kinesis. It also shows the retention period, in hours, for the Amazon Kinesis data.'
       responses:
         '200':
           description: Success
@@ -2434,7 +3608,7 @@ paths:
           pattern: .*\S.*
     put:
       operationId: PutVoiceConnectorStreamingConfiguration
-      description: 'Adds a streaming configuration for the specified Amazon Chime Voice Connector. The streaming configuration specifies whether media streaming is enabled for sending to Amazon Kinesis, and sets the retention period for the Amazon Kinesis data, in hours.'
+      description: 'Adds a streaming configuration for the specified Amazon Chime Voice Connector. The streaming configuration specifies whether media streaming is enabled for sending to Amazon Kinesis. It also sets the retention period, in hours, for the Amazon Kinesis data.'
       responses:
         '200':
           description: Success
@@ -2489,7 +3663,7 @@ paths:
                 properties:
                   DataRetentionInHours:
                     $ref: '#/definitions/DataRetentionInHours'
-                    description: 'The retention period for the Amazon Kinesis data, in hours.'
+                    description: 'The retention period, in hours, for the Amazon Kinesis data.'
                   Disabled:
                     $ref: '#/definitions/Boolean'
                     description: 'When true, media streaming to Amazon Kinesis is turned off.'
@@ -3342,7 +4516,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     put:
       operationId: UpdatePhoneNumberSettings
-      description: 'Updates the phone number settings for the administrator''s AWS account, such as the default outbound calling name. You can update the default outbound calling name once every seven days. Outbound calling names can take up to 72 hours to be updated.'
+      description: 'Updates the phone number settings for the administrator''s AWS account, such as the default outbound calling name. You can update the default outbound calling name once every seven days. Outbound calling names can take up to 72 hours to update.'
       responses:
         '204':
           description: Success
@@ -3786,7 +4960,7 @@ paths:
   '/accounts/{accountId}/users#operation=add':
     post:
       operationId: InviteUsers
-      description: 'Sends email invites to as many as 50 users, inviting them to the specified Amazon Chime <code>Team</code> account. Only <code>Team</code> account types are currently supported for this action. '
+      description: 'Sends email to a maximum of 50 users, inviting them to the specified Amazon Chime <code>Team</code> account. Only <code>Team</code> account types are currently supported for this action. '
       responses:
         '201':
           description: Success
@@ -3836,7 +5010,7 @@ paths:
               - UserEmailList
             properties:
               UserEmailList:
-                description: The user email addresses to which to send the invite.
+                description: The user email addresses to which to send the email invitation.
                 type: array
                 items:
                   $ref: '#/definitions/EmailAddress'
@@ -4445,6 +5619,41 @@ definitions:
       PhoneNumberErrors:
         $ref: '#/definitions/PhoneNumberErrorList'
         description: 'If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and error messages.'
+  BatchCreateAttendeeResponse:
+    type: object
+    properties:
+      Attendees:
+        $ref: '#/definitions/AttendeeList'
+        description: 'The attendee information, including attendees IDs and join tokens.'
+      Errors:
+        $ref: '#/definitions/BatchCreateAttendeeErrorList'
+        description: 'If the action fails for one or more of the attendees in the request, a list of the attendees is returned, along with error codes and error messages.'
+  CreateAttendeeRequestItem:
+    type: object
+    required:
+      - ExternalUserId
+    properties:
+      ExternalUserId:
+        $ref: '#/definitions/ExternalUserIdType'
+        description: The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.
+    description: 'The Amazon Chime SDK attendee fields to create, used with the BatchCreateAttendee action.'
+  ResourceLimitExceededException: {}
+  BatchCreateRoomMembershipResponse:
+    type: object
+    properties:
+      Errors:
+        $ref: '#/definitions/MemberErrorList'
+        description: 'If the action fails for one or more of the member IDs in the request, a list of the member IDs is returned, along with error codes and error messages.'
+  MembershipItem:
+    type: object
+    properties:
+      MemberId:
+        $ref: '#/definitions/NonEmptyString'
+        description: The member ID.
+      Role:
+        $ref: '#/definitions/RoomMembershipRole'
+        description: The member role.
+    description: 'Membership details, such as member ID and member role.'
   BatchDeletePhoneNumberResponse:
     type: object
     properties:
@@ -4513,19 +5722,49 @@ definitions:
       Account:
         $ref: '#/definitions/Account'
         description: The Amazon Chime account details.
+  CreateAttendeeResponse:
+    type: object
+    properties:
+      Attendee:
+        $ref: '#/definitions/Attendee'
+        description: 'The attendee information, including attendee ID and join token.'
   CreateBotResponse:
     type: object
     properties:
       Bot:
         $ref: '#/definitions/Bot'
         description: The bot details.
-  ResourceLimitExceededException: {}
+  CreateMeetingResponse:
+    type: object
+    properties:
+      Meeting:
+        $ref: '#/definitions/Meeting'
+        description: 'The meeting information, including the meeting ID and <code>MediaPlacement</code>.'
+  Arn:
+    type: string
+    pattern: '^arn[\/\:\-\_\.a-zA-Z0-9]+$'
+    minLength: 1
+    maxLength: 1024
+    format: password
   CreatePhoneNumberOrderResponse:
     type: object
     properties:
       PhoneNumberOrder:
         $ref: '#/definitions/PhoneNumberOrder'
         description: The phone number order details.
+  CreateRoomResponse:
+    type: object
+    properties:
+      Room:
+        $ref: '#/definitions/Room'
+        description: The room details.
+  CreateRoomMembershipResponse:
+    type: object
+    properties:
+      RoomMembership:
+        $ref: '#/definitions/RoomMembership'
+        description: The room membership details.
+  ConflictException: {}
   CreateVoiceConnectorResponse:
     type: object
     properties:
@@ -4555,7 +5794,6 @@ definitions:
     type: object
     properties: {}
   UnprocessableEntityException: {}
-  ConflictException: {}
   SensitiveString:
     type: string
     format: password
@@ -4586,6 +5824,12 @@ definitions:
       AccountSettings:
         $ref: '#/definitions/AccountSettings'
         description: The Amazon Chime account settings.
+  GetAttendeeResponse:
+    type: object
+    properties:
+      Attendee:
+        $ref: '#/definitions/Attendee'
+        description: The Amazon Chime SDK attendee information.
   GetBotResponse:
     type: object
     properties:
@@ -4607,6 +5851,12 @@ definitions:
       VoiceConnector:
         $ref: '#/definitions/VoiceConnectorSettings'
         description: The Amazon Chime Voice Connector settings.
+  GetMeetingResponse:
+    type: object
+    properties:
+      Meeting:
+        $ref: '#/definitions/Meeting'
+        description: The Amazon Chime SDK meeting information.
   GetPhoneNumberResponse:
     type: object
     properties:
@@ -4628,6 +5878,12 @@ definitions:
       CallingNameUpdatedTimestamp:
         $ref: '#/definitions/Iso8601Timestamp'
         description: 'The updated outbound calling name timestamp, in ISO 8601 format.'
+  GetRoomResponse:
+    type: object
+    properties:
+      Room:
+        $ref: '#/definitions/Room'
+        description: The room details.
   GetUserResponse:
     type: object
     properties:
@@ -4687,7 +5943,7 @@ definitions:
     properties:
       Invites:
         $ref: '#/definitions/InviteList'
-        description: The invite details.
+        description: The email invitation details.
   EmailAddress:
     type: string
     pattern: .+@.+\..+
@@ -4701,12 +5957,30 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results.
+  ListAttendeesResponse:
+    type: object
+    properties:
+      Attendees:
+        $ref: '#/definitions/AttendeeList'
+        description: The Amazon Chime SDK attendee information.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token to use to retrieve the next page of results.
   ListBotsResponse:
     type: object
     properties:
       Bots:
         $ref: '#/definitions/BotList'
         description: List of bots and bot details.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token to use to retrieve the next page of results.
+  ListMeetingsResponse:
+    type: object
+    properties:
+      Meetings:
+        $ref: '#/definitions/MeetingList'
+        description: The Amazon Chime SDK meeting information.
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results.
@@ -4725,6 +5999,24 @@ definitions:
       PhoneNumbers:
         $ref: '#/definitions/PhoneNumberList'
         description: The phone number details.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token to use to retrieve the next page of results.
+  ListRoomMembershipsResponse:
+    type: object
+    properties:
+      RoomMemberships:
+        $ref: '#/definitions/RoomMembershipList'
+        description: The room membership details.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token to use to retrieve the next page of results.
+  ListRoomsResponse:
+    type: object
+    properties:
+      Rooms:
+        $ref: '#/definitions/RoomList'
+        description: The room details.
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results.
@@ -4867,6 +6159,18 @@ definitions:
       PhoneNumber:
         $ref: '#/definitions/PhoneNumber'
         description: The updated phone number details.
+  UpdateRoomResponse:
+    type: object
+    properties:
+      Room:
+        $ref: '#/definitions/Room'
+        description: The room details.
+  UpdateRoomMembershipResponse:
+    type: object
+    properties:
+      RoomMembership:
+        $ref: '#/definitions/RoomMembership'
+        description: The room membership details.
   UpdateUserResponse:
     type: object
     properties:
@@ -5007,6 +6311,82 @@ definitions:
       ForceAssociate:
         $ref: '#/definitions/NullableBoolean'
         description: 'If true, associates the provided phone numbers with the provided Amazon Chime Voice Connector and removes any previously existing associations. If false, does not associate any phone numbers that have previously existing associations.'
+  ExternalUserIdType:
+    type: string
+    minLength: 2
+    maxLength: 64
+    format: password
+  GuidString:
+    type: string
+    pattern: '[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}'
+  JoinTokenString:
+    type: string
+    minLength: 2
+    maxLength: 2048
+    format: password
+  Attendee:
+    type: object
+    properties:
+      ExternalUserId:
+        $ref: '#/definitions/ExternalUserIdType'
+        description: The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.
+      AttendeeId:
+        $ref: '#/definitions/GuidString'
+        description: The Amazon Chime SDK attendee ID.
+      JoinToken:
+        $ref: '#/definitions/JoinTokenString'
+        description: The join token used by the Amazon Chime SDK attendee.
+    description: '<p>An Amazon Chime SDK meeting attendee. Includes a unique <code>AttendeeId</code> and <code>JoinToken</code>. The <code>JoinToken</code> allows a client to authenticate and join as the specified attendee. The <code>JoinToken</code> expires when the meeting ends or when <a>DeleteAttendee</a> is called. After that, the attendee is unable to join the meeting.</p> <p>We recommend securely transferring each <code>JoinToken</code> from your server application to the client so that no other client has access to the token except for the one authorized to represent the attendee.</p>'
+  AttendeeList:
+    type: array
+    items:
+      $ref: '#/definitions/Attendee'
+  CreateAttendeeError:
+    type: object
+    properties:
+      ExternalUserId:
+        $ref: '#/definitions/ExternalUserIdType'
+        description: The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.
+      ErrorCode:
+        $ref: '#/definitions/String'
+        description: The error code.
+      ErrorMessage:
+        $ref: '#/definitions/String'
+        description: The error message.
+    description: 'The list of errors returned when errors are encountered during the BatchCreateAttendee and CreateAttendee actions. This includes external user IDs, error codes, and error messages.'
+  BatchCreateAttendeeErrorList:
+    type: array
+    items:
+      $ref: '#/definitions/CreateAttendeeError'
+  CreateAttendeeRequestItemList:
+    type: array
+    items:
+      $ref: '#/definitions/CreateAttendeeRequestItem'
+  BatchCreateAttendeeRequest:
+    type: object
+    required:
+      - Attendees
+    properties:
+      Attendees:
+        $ref: '#/definitions/CreateAttendeeRequestItemList'
+        description: The request containing the attendees to create.
+  MembershipItemList:
+    type: array
+    items:
+      $ref: '#/definitions/MembershipItem'
+    maxItems: 50
+  BatchCreateRoomMembershipRequest:
+    type: object
+    required:
+      - MembershipItemList
+    properties:
+      MembershipItemList:
+        $ref: '#/definitions/MembershipItemList'
+        description: The list of membership items.
+  MemberErrorList:
+    type: array
+    items:
+      $ref: '#/definitions/MemberError'
   NonEmptyStringList:
     type: array
     items:
@@ -5129,6 +6509,12 @@ definitions:
       - UpdateFailed
   CallingRegion:
     type: string
+  ClientRequestToken:
+    type: string
+    pattern: '[-_a-zA-Z0-9]*'
+    minLength: 2
+    maxLength: 64
+    format: password
   CreateAccountRequest:
     type: object
     required:
@@ -5137,6 +6523,14 @@ definitions:
       Name:
         $ref: '#/definitions/AccountName'
         description: The name of the Amazon Chime account.
+  CreateAttendeeRequest:
+    type: object
+    required:
+      - ExternalUserId
+    properties:
+      ExternalUserId:
+        $ref: '#/definitions/ExternalUserIdType'
+        description: The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.
   CreateBotRequest:
     type: object
     required:
@@ -5148,6 +6542,46 @@ definitions:
       Domain:
         $ref: '#/definitions/NonEmptyString'
         description: The domain of the Amazon Chime Enterprise account.
+  MeetingNotificationConfiguration:
+    type: object
+    properties:
+      SnsTopicArn:
+        $ref: '#/definitions/Arn'
+        description: The SNS topic ARN.
+      SqsQueueArn:
+        $ref: '#/definitions/Arn'
+        description: The SQS queue ARN.
+    description: The configuration for resource targets to receive notifications when Amazon Chime SDK meeting and attendee events occur.
+  CreateMeetingRequest:
+    type: object
+    required:
+      - ClientRequestToken
+    properties:
+      ClientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: The unique identifier for the client request. Use a different token for different meetings.
+      MeetingHostId:
+        $ref: '#/definitions/ExternalUserIdType'
+        description: Reserved.
+      MediaRegion:
+        $ref: '#/definitions/String'
+        description: 'The Region in which to create the meeting. Available values: <code>us-east-1</code>, <code>us-west-2</code>.'
+      NotificationsConfiguration:
+        $ref: '#/definitions/MeetingNotificationConfiguration'
+        description: The configuration for resource targets to receive notifications when meeting and attendee events occur.
+  Meeting:
+    type: object
+    properties:
+      MeetingId:
+        $ref: '#/definitions/GuidString'
+        description: The Amazon Chime SDK meeting ID.
+      MediaPlacement:
+        $ref: '#/definitions/MediaPlacement'
+        description: The media placement for the meeting.
+      MediaRegion:
+        $ref: '#/definitions/String'
+        description: 'The Region in which to create the meeting. Available values: <code>us-east-1</code>, <code>us-west-2</code>.'
+    description: A meeting created using the Amazon Chime SDK.
   PhoneNumberProductType:
     type: string
     enum:
@@ -5187,6 +6621,73 @@ definitions:
         $ref: '#/definitions/Iso8601Timestamp'
         description: 'The updated phone number order timestamp, in ISO 8601 format.'
     description: The details of a phone number order created for Amazon Chime.
+  RoomMembershipRole:
+    type: string
+    enum:
+      - Administrator
+      - Member
+  CreateRoomMembershipRequest:
+    type: object
+    required:
+      - MemberId
+    properties:
+      MemberId:
+        $ref: '#/definitions/NonEmptyString'
+        description: The Amazon Chime member ID (user ID or bot ID).
+      Role:
+        $ref: '#/definitions/RoomMembershipRole'
+        description: The role of the member.
+  RoomMembership:
+    type: object
+    properties:
+      RoomId:
+        $ref: '#/definitions/NonEmptyString'
+        description: The room ID.
+      Member:
+        $ref: '#/definitions/Member'
+      Role:
+        $ref: '#/definitions/RoomMembershipRole'
+        description: The membership role.
+      InvitedBy:
+        $ref: '#/definitions/NonEmptyString'
+        description: The identifier of the user that invited the room member.
+      UpdatedTimestamp:
+        $ref: '#/definitions/Iso8601Timestamp'
+        description: 'The room membership update timestamp, in ISO 8601 format.'
+    description: The room membership details.
+  CreateRoomRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/SensitiveString'
+        description: The room name.
+      ClientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: The idempotency token for the request.
+  Room:
+    type: object
+    properties:
+      RoomId:
+        $ref: '#/definitions/NonEmptyString'
+        description: The room ID.
+      Name:
+        $ref: '#/definitions/SensitiveString'
+        description: The room name.
+      AccountId:
+        $ref: '#/definitions/NonEmptyString'
+        description: The Amazon Chime account ID.
+      CreatedBy:
+        $ref: '#/definitions/NonEmptyString'
+        description: The identifier of the room creator.
+      CreatedTimestamp:
+        $ref: '#/definitions/Iso8601Timestamp'
+        description: 'The room creation timestamp, in ISO 8601 format.'
+      UpdatedTimestamp:
+        $ref: '#/definitions/Iso8601Timestamp'
+        description: 'The room update timestamp, in ISO 8601 format.'
+    description: The Amazon Chime chat room details.
   VoiceConnectorGroupName:
     type: string
     minLength: 1
@@ -5281,10 +6782,22 @@ definitions:
   DeleteAccountRequest:
     type: object
     properties: {}
+  DeleteAttendeeRequest:
+    type: object
+    properties: {}
   DeleteEventsConfigurationRequest:
     type: object
     properties: {}
+  DeleteMeetingRequest:
+    type: object
+    properties: {}
   DeletePhoneNumberRequest:
+    type: object
+    properties: {}
+  DeleteRoomMembershipRequest:
+    type: object
+    properties: {}
+  DeleteRoomRequest:
     type: object
     properties: {}
   DeleteVoiceConnectorGroupRequest:
@@ -5369,6 +6882,9 @@ definitions:
   GetAccountSettingsRequest:
     type: object
     properties: {}
+  GetAttendeeRequest:
+    type: object
+    properties: {}
   GetBotRequest:
     type: object
     properties: {}
@@ -5382,9 +6898,9 @@ definitions:
         $ref: '#/definitions/String'
         description: The Amazon S3 bucket designated for call detail record storage.
     description: The Amazon Chime Voice Connector settings. Includes any Amazon S3 buckets designated for storing call detail records.
-  GuidString:
-    type: string
-    pattern: '[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}'
+  GetMeetingRequest:
+    type: object
+    properties: {}
   GetPhoneNumberOrderRequest:
     type: object
     properties: {}
@@ -5431,6 +6947,9 @@ definitions:
         $ref: '#/definitions/Iso8601Timestamp'
         description: 'The deleted phone number timestamp, in ISO 8601 format.'
     description: A phone number used for Amazon Chime Business Calling or an Amazon Chime Voice Connector.
+  GetRoomRequest:
+    type: object
+    properties: {}
   GetUserRequest:
     type: object
     properties: {}
@@ -5524,7 +7043,7 @@ definitions:
     properties:
       DataRetentionInHours:
         $ref: '#/definitions/DataRetentionInHours'
-        description: 'The retention period for the Amazon Kinesis data, in hours.'
+        description: 'The retention period, in hours, for the Amazon Kinesis data.'
       Disabled:
         $ref: '#/definitions/Boolean'
         description: 'When true, media streaming to Amazon Kinesis is turned off.'
@@ -5602,7 +7121,7 @@ definitions:
     properties:
       UserEmailList:
         $ref: '#/definitions/UserEmailList'
-        description: The user email addresses to which to send the invite.
+        description: The user email addresses to which to send the email invitation.
   ProfileServiceMaxResults:
     type: integer
     minimum: 1
@@ -5614,9 +7133,19 @@ definitions:
     type: integer
     minimum: 1
     maximum: 99
+  ListAttendeesRequest:
+    type: object
+    properties: {}
   ListBotsRequest:
     type: object
     properties: {}
+  ListMeetingsRequest:
+    type: object
+    properties: {}
+  MeetingList:
+    type: array
+    items:
+      $ref: '#/definitions/Meeting'
   ListPhoneNumberOrdersRequest:
     type: object
     properties: {}
@@ -5649,6 +7178,20 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/PhoneNumber'
+  ListRoomMembershipsRequest:
+    type: object
+    properties: {}
+  RoomMembershipList:
+    type: array
+    items:
+      $ref: '#/definitions/RoomMembership'
+  ListRoomsRequest:
+    type: object
+    properties: {}
+  RoomList:
+    type: array
+    items:
+      $ref: '#/definitions/Room'
   ListUsersRequest:
     type: object
     properties: {}
@@ -5676,6 +7219,69 @@ definitions:
   LogoutUserRequest:
     type: object
     properties: {}
+  UriType:
+    type: string
+    maxLength: 4096
+  MediaPlacement:
+    type: object
+    properties:
+      AudioHostUrl:
+        $ref: '#/definitions/UriType'
+        description: The audio host URL.
+      ScreenDataUrl:
+        $ref: '#/definitions/UriType'
+        description: The screen data URL.
+      ScreenSharingUrl:
+        $ref: '#/definitions/UriType'
+        description: The screen sharing URL.
+      ScreenViewingUrl:
+        $ref: '#/definitions/UriType'
+        description: The screen viewing URL.
+      SignalingUrl:
+        $ref: '#/definitions/UriType'
+        description: The signaling URL.
+      TurnControlUrl:
+        $ref: '#/definitions/UriType'
+        description: The turn control URL.
+    description: A set of endpoints used by clients to connect to the media service group for a Amazon Chime SDK meeting.
+  MemberType:
+    type: string
+    enum:
+      - User
+      - Bot
+      - Webhook
+  Member:
+    type: object
+    properties:
+      MemberId:
+        $ref: '#/definitions/NonEmptyString'
+        description: The member ID (user ID or bot ID).
+      MemberType:
+        $ref: '#/definitions/MemberType'
+        description: The member type.
+      Email:
+        $ref: '#/definitions/SensitiveString'
+        description: The member email address.
+      FullName:
+        $ref: '#/definitions/SensitiveString'
+        description: The member name.
+      AccountId:
+        $ref: '#/definitions/NonEmptyString'
+        description: The Amazon Chime account ID.
+    description: 'The member details, such as email address, name, member ID, and member type.'
+  MemberError:
+    type: object
+    properties:
+      MemberId:
+        $ref: '#/definitions/NonEmptyString'
+        description: The member ID.
+      ErrorCode:
+        $ref: '#/definitions/ErrorCode'
+        description: The error code.
+      ErrorMessage:
+        $ref: '#/definitions/String'
+        description: The error message.
+    description: The list of errors returned when a member action results in an error.
   OrderedPhoneNumberStatus:
     type: string
     enum:
@@ -5919,6 +7525,18 @@ definitions:
       CallingName:
         $ref: '#/definitions/CallingName'
         description: The default outbound calling name for the account.
+  UpdateRoomMembershipRequest:
+    type: object
+    properties:
+      Role:
+        $ref: '#/definitions/RoomMembershipRole'
+        description: The role of the member.
+  UpdateRoomRequest:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/SensitiveString'
+        description: The room name.
   UpdateUserRequest:
     type: object
     properties:

@@ -245,6 +245,13 @@ paths:
                 type: array
                 items:
                   $ref: '#/definitions/Tag'
+              SuppressionOptions:
+                description: An object that contains information about your account's suppression preferences.
+                type: object
+                properties:
+                  SuppressedReasons:
+                    $ref: '#/definitions/SuppressionListReasons'
+                    description: '<p>A list of reasons to suppress email addresses. The only valid reasons are:</p> <ul> <li> <p> <code>COMPLAINT</code> – Amazon SES will suppress an email address that receives a complaint.</p> </li> <li> <p> <code>BOUNCE</code> – Amazon SES will suppress an email address that hard bounces.</p> </li> </ul>'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -898,6 +905,67 @@ paths:
           required: true
           description: The email identity that you want to retrieve details for.
           type: string
+  '/v2/email/suppression/addresses/{EmailAddress}':
+    delete:
+      operationId: DeleteSuppressedDestination
+      description: Used to delete a suppressed email destination from your suppression list.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteSuppressedDestinationResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: EmailAddress
+          in: path
+          required: true
+          description: The suppressed email destination to delete.
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetSuppressedDestination
+      description: Used to fetch a single suppressed email destination from your suppression list.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetSuppressedDestinationResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+      parameters:
+        - name: EmailAddress
+          in: path
+          required: true
+          description: Email destination to fetch from the suppression list.
+          type: string
   /v2/email/account:
     get:
       operationId: GetAccount
@@ -1330,6 +1398,100 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /v2/email/suppression/addresses:
+    get:
+      operationId: ListSuppressedDestinations
+      description: Used to fetch a list suppressed email destinations from your suppression list.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListSuppressedDestinationsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '482':
+          description: InvalidNextTokenException
+          schema:
+            $ref: '#/definitions/InvalidNextTokenException'
+      parameters:
+        - name: Reason
+          in: query
+          required: false
+          description: Filters email destinations suppressed by the given reasons.
+          type: array
+          items:
+            type: string
+        - name: StartDate
+          in: query
+          required: false
+          description: Filters email destinations suppressed before the given time.
+          type: string
+          format: date-time
+        - name: EndDate
+          in: query
+          required: false
+          description: Filters email destinations suppressed after the given time.
+          type: string
+          format: date-time
+        - name: NextToken
+          in: query
+          required: false
+          description: A token returned from a previous call to <code>ListSuppressedDestinations</code> to indicate the position in the list of suppressed email destinations.
+          type: string
+        - name: PageSize
+          in: query
+          required: false
+          description: 'The number of results to show in a single call to <code>ListSuppressedDestinations</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.'
+          type: integer
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: PutSuppressedDestination
+      description: Puts (overwrites) an email destination in your suppression list.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutSuppressedDestinationResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - EmailAddress
+              - Reason
+            properties:
+              EmailAddress:
+                description: Email destination to be suppressed.
+                type: string
+              Reason:
+                description: '<p>A string representing the cause for suppression for an email destination. It can be one of the following:</p> <ul> <li> <p> <code>COMPLAINT</code> – Amazon SES will suppress an email address that receive a complaint.</p> </li> <li> <p> <code>BOUNCE</code> – Amazon SES will suppress an email address that hard bounces.</p> </li> </ul>'
+                type: string
+                enum:
+                  - BOUNCE
+                  - COMPLAINT
   '/v2/email/tags#ResourceArn':
     get:
       operationId: ListTagsForResource
@@ -1427,6 +1589,43 @@ paths:
               SendingEnabled:
                 description: '<p>Enables or disables your account''s ability to send email. Set to <code>true</code> to enable email sending, or set to <code>false</code> to disable email sending.</p> <note> <p>If AWS paused your account''s ability to send email, you can''t use this operation to resume your account''s ability to send email.</p> </note>'
                 type: boolean
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /v2/email/account/suppression:
+    put:
+      operationId: PutAccountSuppressionAttributes
+      description: Change your account's suppression preferences for your account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutAccountSuppressionAttributesResponse'
+        '480':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              SuppressedReasons:
+                description: '<p>A list of reasons to suppress email addresses. The only valid reasons are:</p> <ul> <li> <p> <code>COMPLAINT</code> – Amazon SES will suppress an email address that receives a complaint.</p> </li> <li> <p> <code>BOUNCE</code> – Amazon SES will suppress an email address that hard bounces.</p> </li> </ul>'
+                type: array
+                items:
+                  $ref: '#/definitions/SuppressionListReason'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1565,6 +1764,52 @@ paths:
               SendingEnabled:
                 description: 'If <code>true</code>, email sending is enabled for the configuration set. If <code>false</code>, email sending is disabled for the configuration set.'
                 type: boolean
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v2/email/configuration-sets/{ConfigurationSetName}/suppression-options':
+    put:
+      operationId: PutConfigurationSetSuppressionOptions
+      description: Specify your account's suppression preferences for a configuration set.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutConfigurationSetSuppressionOptionsResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: ConfigurationSetName
+          in: path
+          required: true
+          description: '<p>The name of a configuration set.</p> <p> <i>Configuration sets</i> are groups of rules that you can apply to the emails you send. You apply a configuration set to an email by including a reference to the configuration set in the headers of the email. When you apply a configuration set to an email, all of the rules in that configuration set are applied to the email.</p>'
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              SuppressedReasons:
+                description: '<p>A list of reasons to suppress email addresses. The only valid reasons are:</p> <ul> <li> <p> <code>COMPLAINT</code> – Amazon SES will suppress an email address that receives a complaint.</p> </li> <li> <p> <code>BOUNCE</code> – Amazon SES will suppress an email address that hard bounces.</p> </li> </ul>'
+                type: array
+                items:
+                  $ref: '#/definitions/SuppressionListReason'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -2084,6 +2329,10 @@ definitions:
         $ref: '#/definitions/TagValue'
         description: "The optional part of a key-value pair that defines a tag. The maximum length of a tag value is 256 characters. The minimum length is 0 characters. If you don't want a resource to have a specific tag value, don't specify a value for this\_parameter. If you don't specify a value, Amazon SES sets the value to an empty string."
     description: "<p>An object that defines the tags that are associated with a resource. A\_<i>tag</i>\_is a label that you optionally define and associate with a resource. Tags can help you categorize and manage resources in different ways, such as by purpose, owner, environment, or other criteria. A resource can have as many as 50 tags.</p> <p>Each tag consists of a required\_<i>tag key</i>\_and an associated\_<i>tag value</i>, both of which you define. A tag key is a general label that acts as a category for a more specific tag value. A tag value acts as a descriptor within a tag key. A tag key can contain as many as 128 characters. A tag value can contain as many as 256 characters. The characters can be Unicode letters, digits, white space, or one of the following symbols: _ . : / = + -. The following additional restrictions apply to tags:</p> <ul> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>For each associated resource, each tag key must be unique and it can have only one value.</p> </li> <li> <p>The\_<code>aws:</code>\_prefix is reserved for use by AWS; you can’t use it in any tag keys or values that you define. In addition, you can't edit or remove tag keys or values that use this prefix. Tags that use this prefix don’t count against the limit of 50 tags per resource.</p> </li> <li> <p>You can associate tags with public or shared resources, but the tags are available only for your AWS account, not any other accounts that share the resource. In addition, the tags are available only for resources that are located in the specified AWS Region for your AWS account.</p> </li> </ul>"
+  SuppressionListReasons:
+    type: array
+    items:
+      $ref: '#/definitions/SuppressionListReason'
   AlreadyExistsException: {}
   NotFoundException: {}
   TooManyRequestsException: {}
@@ -2218,15 +2467,13 @@ definitions:
     type: object
     properties: {}
     description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
+  DeleteSuppressedDestinationResponse:
+    type: object
+    properties: {}
+    description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
   GetAccountResponse:
     type: object
     properties:
-      SendQuota:
-        $ref: '#/definitions/SendQuota'
-        description: An object that contains information about the per-day and per-second sending limits for your Amazon SES account in the current AWS Region.
-      SendingEnabled:
-        $ref: '#/definitions/Enabled'
-        description: Indicates whether or not email sending is enabled for your Amazon SES account in the current AWS Region.
       DedicatedIpAutoWarmupEnabled:
         $ref: '#/definitions/Enabled'
         description: Indicates whether or not the automatic warm-up feature is enabled for dedicated IP addresses that are associated with your account.
@@ -2236,6 +2483,15 @@ definitions:
       ProductionAccessEnabled:
         $ref: '#/definitions/Enabled'
         description: '<p>Indicates whether or not your account has production access in the current AWS Region.</p> <p>If the value is <code>false</code>, then your account is in the <i>sandbox</i>. When your account is in the sandbox, you can only send email to verified identities. Additionally, the maximum number of emails you can send in a 24-hour period (your sending quota) is 200, and the maximum number of emails you can send per second (your maximum sending rate) is 1.</p> <p>If the value is <code>true</code>, then your account has production access. When your account has production access, you can send email to any address. The sending quota and maximum sending rate for your account vary based on your specific use case.</p>'
+      SendQuota:
+        $ref: '#/definitions/SendQuota'
+        description: An object that contains information about the per-day and per-second sending limits for your Amazon SES account in the current AWS Region.
+      SendingEnabled:
+        $ref: '#/definitions/Enabled'
+        description: Indicates whether or not email sending is enabled for your Amazon SES account in the current AWS Region.
+      SuppressionAttributes:
+        $ref: '#/definitions/SuppressionAttributes'
+        description: An object that contains information about your account's suppression preferences.
     description: A list of details about the email-sending capabilities of your Amazon SES account in the current AWS Region.
   GetBlacklistReportsResponse:
     type: object
@@ -2270,6 +2526,9 @@ definitions:
       Tags:
         $ref: '#/definitions/TagList'
         description: An array of objects that define the tags (keys and values) that are associated with the configuration set.
+      SuppressionOptions:
+        $ref: '#/definitions/SuppressionOptions'
+        description: An object that contains information about your account's suppression preferences.
     description: Information about a configuration set.
   GetConfigurationSetEventDestinationsResponse:
     type: object
@@ -2383,6 +2642,15 @@ definitions:
         $ref: '#/definitions/TagList'
         description: An array of objects that define the tags (keys and values) that are associated with the email identity.
     description: Details about an email identity.
+  GetSuppressedDestinationResponse:
+    type: object
+    required:
+      - SuppressedDestination
+    properties:
+      SuppressedDestination:
+        $ref: '#/definitions/SuppressedDestination'
+        description: An object containing information about the suppressed email destination.
+    description: Information about the suppressed email destination.
   ListConfigurationSetsResponse:
     type: object
     properties:
@@ -2437,6 +2705,23 @@ definitions:
         $ref: '#/definitions/NextToken'
         description: 'A token that indicates that there are additional configuration sets to list. To view additional configuration sets, issue another request to <code>ListEmailIdentities</code>, and pass this token in the <code>NextToken</code> parameter.'
     description: 'A list of all of the identities that you''ve attempted to verify, regardless of whether or not those identities were successfully verified.'
+  ListSuppressedDestinationsResponse:
+    type: object
+    properties:
+      SuppressedDestinationSummaries:
+        $ref: '#/definitions/SuppressedDestinationSummaries'
+        description: 'A list of summaries, each containing a summary for a suppressed email destination.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'A token that indicates that there are additional suppressed destinations to list. To view additional suppressed destinations, issue another request to <code>ListSuppressedDestinations</code>, and pass this token in the <code>NextToken</code> parameter.'
+    description: A list of suppressed email destinations.
+  SuppressionListReason:
+    type: string
+    enum:
+      - BOUNCE
+      - COMPLAINT
+    description: '<p>A string representing the cause for suppression for an email destination. It can be one of the following:</p> <ul> <li> <p> <code>COMPLAINT</code> – Amazon SES will suppress an email address that receive a complaint.</p> </li> <li> <p> <code>BOUNCE</code> – Amazon SES will suppress an email address that hard bounces.</p> </li> </ul>'
+  InvalidNextTokenException: {}
   ListTagsForResourceResponse:
     type: object
     required:
@@ -2453,6 +2738,10 @@ definitions:
     type: object
     properties: {}
     description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
+  PutAccountSuppressionAttributesResponse:
+    type: object
+    properties: {}
+    description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
   PutConfigurationSetDeliveryOptionsResponse:
     type: object
     properties: {}
@@ -2462,6 +2751,10 @@ definitions:
     properties: {}
     description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
   PutConfigurationSetSendingOptionsResponse:
+    type: object
+    properties: {}
+    description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
+  PutConfigurationSetSuppressionOptionsResponse:
     type: object
     properties: {}
     description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
@@ -2503,6 +2796,10 @@ definitions:
     properties: {}
     description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
   PutEmailIdentityMailFromAttributesResponse:
+    type: object
+    properties: {}
+    description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
+  PutSuppressedDestinationResponse:
     type: object
     properties: {}
     description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
@@ -2733,6 +3030,13 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Tag'
+  SuppressionOptions:
+    type: object
+    properties:
+      SuppressedReasons:
+        $ref: '#/definitions/SuppressionListReasons'
+        description: '<p>A list of reasons to suppress email addresses. The only valid reasons are:</p> <ul> <li> <p> <code>COMPLAINT</code> – Amazon SES will suppress an email address that receives a complaint.</p> </li> <li> <p> <code>BOUNCE</code> – Amazon SES will suppress an email address that hard bounces.</p> </li> </ul>'
+    description: An object that contains information about your account's suppression preferences.
   CreateConfigurationSetRequest:
     type: object
     required:
@@ -2756,6 +3060,8 @@ definitions:
       Tags:
         $ref: '#/definitions/TagList'
         description: An array of objects that define the tags (keys and values) that you want to associate with the configuration set.
+      SuppressionOptions:
+        $ref: '#/definitions/SuppressionOptions'
     description: A request to create a configuration set.
   CreateDedicatedIpPoolRequest:
     type: object
@@ -2936,6 +3242,10 @@ definitions:
     type: object
     properties: {}
     description: 'A request to delete an existing email identity. When you delete an identity, you lose the ability to send email from that identity. You can restore your ability to send email by completing the verification process for the identity again.'
+  DeleteSuppressedDestinationRequest:
+    type: object
+    properties: {}
+    description: A request to delete a suppressed email destination.
   DeliverabilityDashboardAccountStatus:
     type: string
     enum:
@@ -3155,6 +3465,8 @@ definitions:
       - CLICK
       - RENDERING_FAILURE
     description: 'An email sending event type. For example, email sends, opens, and bounces are all email events.'
+  FeedbackId:
+    type: string
   GeneralEnforcementStatus:
     type: string
   GetAccountRequest:
@@ -3174,6 +3486,13 @@ definitions:
         $ref: '#/definitions/SentLast24Hours'
         description: The number of emails sent from your Amazon SES account in the current AWS Region over the past 24 hours.
     description: An object that contains information about the per-day and per-second sending limits for your Amazon SES account in the current AWS Region.
+  SuppressionAttributes:
+    type: object
+    properties:
+      SuppressedReasons:
+        $ref: '#/definitions/SuppressionListReasons'
+        description: '<p>A list of reasons to suppress email addresses. The only valid reasons are:</p> <ul> <li> <p> <code>COMPLAINT</code> – Amazon SES will suppress an email address that receives a complaint.</p> </li> <li> <p> <code>BOUNCE</code> – Amazon SES will suppress an email address that hard bounces.</p> </li> </ul>'
+    description: An object that contains information about your account's suppression preferences.
   GetBlacklistReportsRequest:
     type: object
     properties: {}
@@ -3274,6 +3593,30 @@ definitions:
         $ref: '#/definitions/BehaviorOnMxFailure'
         description: '<p>The action that you want to take if the required MX record can''t be found when you send an email. When you set this value to <code>UseDefaultValue</code>, the mail is sent using <i>amazonses.com</i> as the MAIL FROM domain. When you set this value to <code>RejectMessage</code>, the Amazon SES API v2 returns a <code>MailFromDomainNotVerified</code> error, and doesn''t attempt to deliver the email.</p> <p>These behaviors are taken when the custom MAIL FROM domain configuration is in the <code>Pending</code>, <code>Failed</code>, and <code>TemporaryFailure</code> states.</p>'
     description: A list of attributes that are associated with a MAIL FROM domain.
+  GetSuppressedDestinationRequest:
+    type: object
+    properties: {}
+    description: A request to get a suppressed email destination.
+  SuppressedDestination:
+    type: object
+    required:
+      - EmailAddress
+      - Reason
+      - LastUpdateTime
+    properties:
+      EmailAddress:
+        $ref: '#/definitions/EmailAddress'
+        description: The suppressed email destination.
+      Reason:
+        $ref: '#/definitions/SuppressionListReason'
+        description: The reason for which the email destination is suppressed.
+      LastUpdateTime:
+        $ref: '#/definitions/Timestamp'
+        description: The last time the suppressed destination was updated.
+      Attributes:
+        $ref: '#/definitions/SuppressedDestinationAttributes'
+        description: ' <code>Optional</code> value with information about the sources of the suppression.'
+    description: An object containing information about the suppressed email destination.
   IdentityInfo:
     type: object
     properties:
@@ -3330,6 +3673,14 @@ definitions:
     type: object
     properties: {}
     description: 'A request to list all of the email identities associated with your AWS account. This list includes identities that you''ve already verified, identities that are unverified, and identities that were verified in the past, but are no longer verified.'
+  ListSuppressedDestinationsRequest:
+    type: object
+    properties: {}
+    description: A request to obtain a list of suppressed email destinations.
+  SuppressedDestinationSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/SuppressedDestinationSummary'
   ListTagsForResourceRequest:
     type: object
     properties: {}
@@ -3377,6 +3728,13 @@ definitions:
         $ref: '#/definitions/Enabled'
         description: '<p>Enables or disables your account''s ability to send email. Set to <code>true</code> to enable email sending, or set to <code>false</code> to disable email sending.</p> <note> <p>If AWS paused your account''s ability to send email, you can''t use this operation to resume your account''s ability to send email.</p> </note>'
     description: A request to change the ability of your account to send email.
+  PutAccountSuppressionAttributesRequest:
+    type: object
+    properties:
+      SuppressedReasons:
+        $ref: '#/definitions/SuppressionListReasons'
+        description: '<p>A list of reasons to suppress email addresses. The only valid reasons are:</p> <ul> <li> <p> <code>COMPLAINT</code> – Amazon SES will suppress an email address that receives a complaint.</p> </li> <li> <p> <code>BOUNCE</code> – Amazon SES will suppress an email address that hard bounces.</p> </li> </ul>'
+    description: A request to change your account's suppression preferences.
   SendingPoolName:
     type: string
     description: The name of the dedicated IP pool that you want to associate with the configuration set.
@@ -3404,6 +3762,13 @@ definitions:
         $ref: '#/definitions/Enabled'
         description: 'If <code>true</code>, email sending is enabled for the configuration set. If <code>false</code>, email sending is disabled for the configuration set.'
     description: A request to enable or disable the ability of Amazon SES to send emails that use a specific configuration set.
+  PutConfigurationSetSuppressionOptionsRequest:
+    type: object
+    properties:
+      SuppressedReasons:
+        $ref: '#/definitions/SuppressionListReasons'
+        description: '<p>A list of reasons to suppress email addresses. The only valid reasons are:</p> <ul> <li> <p> <code>COMPLAINT</code> – Amazon SES will suppress an email address that receives a complaint.</p> </li> <li> <p> <code>BOUNCE</code> – Amazon SES will suppress an email address that hard bounces.</p> </li> </ul>'
+    description: A request to change your account's suppression preferences for an specific configuration set.
   PutConfigurationSetTrackingOptionsRequest:
     type: object
     properties:
@@ -3465,6 +3830,19 @@ definitions:
         $ref: '#/definitions/BehaviorOnMxFailure'
         description: '<p>The action that you want to take if the required MX record isn''t found when you send an email. When you set this value to <code>UseDefaultValue</code>, the mail is sent using <i>amazonses.com</i> as the MAIL FROM domain. When you set this value to <code>RejectMessage</code>, the Amazon SES API v2 returns a <code>MailFromDomainNotVerified</code> error, and doesn''t attempt to deliver the email.</p> <p>These behaviors are taken when the custom MAIL FROM domain configuration is in the <code>Pending</code>, <code>Failed</code>, and <code>TemporaryFailure</code> states.</p>'
     description: A request to configure the custom MAIL FROM domain for a verified identity.
+  PutSuppressedDestinationRequest:
+    type: object
+    required:
+      - EmailAddress
+      - Reason
+    properties:
+      EmailAddress:
+        $ref: '#/definitions/EmailAddress'
+        description: Email destination to be suppressed.
+      Reason:
+        $ref: '#/definitions/SuppressionListReason'
+        description: Reason for which the email destination is suppressed.
+    description: A request to suppress an email destination.
   RawMessageData:
     type: string
     description: '<p>The raw email message. The message has to meet the following criteria:</p> <ul> <li> <p>The message has to contain a header and a body, separated by one blank line.</p> </li> <li> <p>All of the required header fields must be present in the message.</p> </li> <li> <p>Each part of a multipart MIME message must be formatted properly.</p> </li> <li> <p>Attachments must be in a file format that the Amazon SES API v2 supports. </p> </li> <li> <p>The entire message must be Base64 encoded.</p> </li> <li> <p>If any of the MIME parts in your message contain content that is outside of the 7-bit ASCII character range, you should encode that content to ensure that recipients'' email clients render the message properly.</p> </li> <li> <p>The length of any single line of text in the message can''t exceed 1,000 characters. This restriction is defined in <a href="https://tools.ietf.org/html/rfc5321">RFC 5321</a>.</p> </li> </ul>'
@@ -3499,6 +3877,33 @@ definitions:
   SentLast24Hours:
     type: number
     format: double
+  SuppressedDestinationAttributes:
+    type: object
+    properties:
+      MessageId:
+        $ref: '#/definitions/OutboundMessageId'
+        description: A unique identifier of the message that caused the suppression of the email destination.
+      FeedbackId:
+        $ref: '#/definitions/FeedbackId'
+        description: A unique identifier of the suppression cause.
+    description: An object containing additional attributes related to a suppressed destination.
+  SuppressedDestinationSummary:
+    type: object
+    required:
+      - EmailAddress
+      - Reason
+      - LastUpdateTime
+    properties:
+      EmailAddress:
+        $ref: '#/definitions/EmailAddress'
+        description: The suppressed email destination.
+      Reason:
+        $ref: '#/definitions/SuppressionListReason'
+        description: The reason for which the email destination is suppressed.
+      LastUpdateTime:
+        $ref: '#/definitions/Timestamp'
+        description: The last time the suppressed destination was updated.
+    description: A summary for the suppressed email destination.
   TagValue:
     type: string
   TagKeyList:

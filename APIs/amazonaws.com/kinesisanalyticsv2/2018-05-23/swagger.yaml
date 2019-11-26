@@ -413,6 +413,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=KinesisAnalytics_20180523.AddApplicationVpcConfiguration':
+    post:
+      operationId: AddApplicationVpcConfiguration
+      description: '<p>Adds a Virtual Private Cloud (VPC) configuration to the application. Applications can use VPCs to store and access resources securely.</p> <p>Note the following about VPC configurations for Kinesis Data Analytics applications:</p> <ul> <li> <p>VPC configurations are not supported for SQL applications.</p> </li> <li> <p>When a VPC is added to a Kinesis Data Analytics application, the application can no longer be accessed from the Internet directly. To enable Internet access to the application, add an Internet gateway to your VPC.</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AddApplicationVpcConfigurationResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '482':
+          description: InvalidArgumentException
+          schema:
+            $ref: '#/definitions/InvalidArgumentException'
+        '483':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AddApplicationVpcConfigurationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - KinesisAnalytics_20180523.AddApplicationVpcConfiguration
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=KinesisAnalytics_20180523.CreateApplication':
     post:
       operationId: CreateApplication
@@ -825,6 +870,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=KinesisAnalytics_20180523.DeleteApplicationVpcConfiguration':
+    post:
+      operationId: DeleteApplicationVpcConfiguration
+      description: Removes a VPC configuration from a Kinesis Data Analytics application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteApplicationVpcConfigurationResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '482':
+          description: InvalidArgumentException
+          schema:
+            $ref: '#/definitions/InvalidArgumentException'
+        '483':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteApplicationVpcConfigurationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - KinesisAnalytics_20180523.DeleteApplicationVpcConfiguration
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=KinesisAnalytics_20180523.DescribeApplication':
     post:
       operationId: DescribeApplication
@@ -1029,7 +1119,7 @@ paths:
   '/#X-Amz-Target=KinesisAnalytics_20180523.ListTagsForResource':
     post:
       operationId: ListTagsForResource
-      description: Retrieves the list of key-value tags assigned to the application.
+      description: 'Retrieves the list of key-value tags assigned to the application. For more information, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html">Using Tagging</a>.'
       responses:
         '200':
           description: Success
@@ -1168,7 +1258,7 @@ paths:
   '/#X-Amz-Target=KinesisAnalytics_20180523.TagResource':
     post:
       operationId: TagResource
-      description: Adds one or more key-value tags to a Kinesis Analytics application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50.
+      description: 'Adds one or more key-value tags to a Kinesis Analytics application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50. For more information, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html">Using Tagging</a>.'
       responses:
         '200':
           description: Success
@@ -1217,7 +1307,7 @@ paths:
   '/#X-Amz-Target=KinesisAnalytics_20180523.UntagResource':
     post:
       operationId: UntagResource
-      description: Removes one or more tags from a Kinesis Analytics application.
+      description: 'Removes one or more tags from a Kinesis Analytics application. For more information, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html">Using Tagging</a>.'
       responses:
         '200':
           description: Success
@@ -1475,6 +1565,34 @@ definitions:
       ReferenceDataSource:
         $ref: '#/definitions/ReferenceDataSource'
         description: 'The reference data source can be an object in your Amazon S3 bucket. Kinesis Data Analytics reads the object and copies the data into the in-application table that is created. You provide an S3 bucket, object key name, and the resulting in-application table that is created. '
+  AddApplicationVpcConfigurationResponse:
+    type: object
+    properties:
+      ApplicationARN:
+        $ref: '#/definitions/ResourceARN'
+        description: The ARN of the application.
+      ApplicationVersionId:
+        $ref: '#/definitions/ApplicationVersionId'
+        description: 'Provides the current application version. Kinesis Data Analytics updates the ApplicationVersionId each time you update the application. '
+      VpcConfigurationDescription:
+        $ref: '#/definitions/VpcConfigurationDescription'
+        description: The parameters of the new VPC configuration.
+  AddApplicationVpcConfigurationRequest:
+    type: object
+    required:
+      - ApplicationName
+      - CurrentApplicationVersionId
+      - VpcConfiguration
+    properties:
+      ApplicationName:
+        $ref: '#/definitions/ApplicationName'
+        description: The name of an existing application.
+      CurrentApplicationVersionId:
+        $ref: '#/definitions/ApplicationVersionId'
+        description: 'The version of the application to which you want to add the input processing configuration. You can use the <a>DescribeApplication</a> operation to get the current application version. If the version specified is not the current version, the <code>ConcurrentModificationException</code> is returned.'
+      VpcConfiguration:
+        $ref: '#/definitions/VpcConfiguration'
+        description: Description of the VPC to add to the application.
   CreateApplicationResponse:
     type: object
     required:
@@ -1510,7 +1628,7 @@ definitions:
         description: 'Use this parameter to configure an Amazon CloudWatch log stream to monitor application configuration errors. '
       Tags:
         $ref: '#/definitions/Tags'
-        description: 'A list of one or more tags to assign to the application. A tag is a key-value pair that identifies an application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management Guide</i>.'
+        description: 'A list of one or more tags to assign to the application. A tag is a key-value pair that identifies an application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50. For more information, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html">Using Tagging</a>.'
   LimitExceededException: {}
   TooManyTagsException: {}
   CreateApplicationSnapshotResponse:
@@ -1666,6 +1784,31 @@ definitions:
       SnapshotCreationTimestamp:
         $ref: '#/definitions/Timestamp'
         description: The creation timestamp of the application snapshot to delete. You can retrieve this value using or .
+  DeleteApplicationVpcConfigurationResponse:
+    type: object
+    properties:
+      ApplicationARN:
+        $ref: '#/definitions/ResourceARN'
+        description: The ARN of the Kinesis Data Analytics application.
+      ApplicationVersionId:
+        $ref: '#/definitions/ApplicationVersionId'
+        description: The updated version ID of the application.
+  DeleteApplicationVpcConfigurationRequest:
+    type: object
+    required:
+      - ApplicationName
+      - CurrentApplicationVersionId
+      - VpcConfigurationId
+    properties:
+      ApplicationName:
+        $ref: '#/definitions/ApplicationName'
+        description: The name of an existing application.
+      CurrentApplicationVersionId:
+        $ref: '#/definitions/ApplicationVersionId'
+        description: The current application version ID. You can retrieve the application version ID using <a>DescribeApplication</a>.
+      VpcConfigurationId:
+        $ref: '#/definitions/Id'
+        description: The ID of the VPC configuration to delete.
   DescribeApplicationResponse:
     type: object
     required:
@@ -2011,6 +2154,40 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ReferenceDataSourceDescription'
+  VpcConfiguration:
+    type: object
+    required:
+      - SubnetIds
+      - SecurityGroupIds
+    properties:
+      SubnetIds:
+        $ref: '#/definitions/SubnetIds'
+        description: 'The array of <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Subnet.html">Subnet</a> IDs used by the VPC configuration.'
+      SecurityGroupIds:
+        $ref: '#/definitions/SecurityGroupIds'
+        description: 'The array of <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SecurityGroup.html">SecurityGroup</a> IDs used by the VPC configuration.'
+    description: Describes the parameters of a VPC used by the application.
+  VpcConfigurationDescription:
+    type: object
+    required:
+      - VpcConfigurationId
+      - VpcId
+      - SubnetIds
+      - SecurityGroupIds
+    properties:
+      VpcConfigurationId:
+        $ref: '#/definitions/Id'
+        description: The ID of the VPC configuration.
+      VpcId:
+        $ref: '#/definitions/VpcId'
+        description: The ID of the associated VPC.
+      SubnetIds:
+        $ref: '#/definitions/SubnetIds'
+        description: 'The array of <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Subnet.html">Subnet</a> IDs used by the VPC configuration.'
+      SecurityGroupIds:
+        $ref: '#/definitions/SecurityGroupIds'
+        description: 'The array of <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SecurityGroup.html">SecurityGroup</a> IDs used by the VPC configuration.'
+    description: Describes the parameters of a VPC used by the application.
   CodeContent:
     type: object
     properties:
@@ -2136,6 +2313,10 @@ definitions:
         $ref: '#/definitions/BooleanObject'
         description: Describes whether snapshots are enabled for a Java-based Kinesis Data Analytics application.
     description: Describes whether snapshots are enabled for a Java-based Kinesis Data Analytics application.
+  VpcConfigurations:
+    type: array
+    items:
+      $ref: '#/definitions/VpcConfiguration'
   ApplicationConfiguration:
     type: object
     required:
@@ -2156,6 +2337,9 @@ definitions:
       ApplicationSnapshotConfiguration:
         $ref: '#/definitions/ApplicationSnapshotConfiguration'
         description: Describes whether snapshots are enabled for a Java-based Kinesis Data Analytics application.
+      VpcConfigurations:
+        $ref: '#/definitions/VpcConfigurations'
+        description: The array of descriptions of VPC configurations available to the application.
     description: Specifies the creation parameters for an Amazon Kinesis Data Analytics application.
   SqlApplicationConfigurationDescription:
     type: object
@@ -2209,6 +2393,10 @@ definitions:
         $ref: '#/definitions/BooleanObject'
         description: Describes whether snapshots are enabled for a Java-based Kinesis Data Analytics application.
     description: Describes whether snapshots are enabled for a Java-based Kinesis Data Analytics application.
+  VpcConfigurationDescriptions:
+    type: array
+    items:
+      $ref: '#/definitions/VpcConfigurationDescription'
   ApplicationConfigurationDescription:
     type: object
     properties:
@@ -2230,6 +2418,9 @@ definitions:
       ApplicationSnapshotConfigurationDescription:
         $ref: '#/definitions/ApplicationSnapshotConfigurationDescription'
         description: Describes whether snapshots are enabled for a Java-based Kinesis Data Analytics application.
+      VpcConfigurationDescriptions:
+        $ref: '#/definitions/VpcConfigurationDescriptions'
+        description: The array of descriptions of VPC configurations available to the application.
     description: Describes details about the application code and starting parameters for an Amazon Kinesis Data Analytics application.
   SqlApplicationConfigurationUpdate:
     type: object
@@ -2275,6 +2466,10 @@ definitions:
         $ref: '#/definitions/BooleanObject'
         description: Describes updates to whether snapshots are enabled for a Java-based Kinesis Data Analytics application.
     description: Describes updates to whether snapshots are enabled for a Java-based Kinesis Data Analytics application.
+  VpcConfigurationUpdates:
+    type: array
+    items:
+      $ref: '#/definitions/VpcConfigurationUpdate'
   ApplicationConfigurationUpdate:
     type: object
     properties:
@@ -2293,6 +2488,9 @@ definitions:
       ApplicationSnapshotConfigurationUpdate:
         $ref: '#/definitions/ApplicationSnapshotConfigurationUpdate'
         description: Describes whether snapshots are enabled for a Java-based Kinesis Data Analytics application.
+      VpcConfigurationUpdates:
+        $ref: '#/definitions/VpcConfigurationUpdates'
+        description: Updates to the array of descriptions of VPC configurations available to the application.
     description: Describes updates to an application's configuration.
   ApplicationDescription:
     type: string
@@ -2373,7 +2571,7 @@ definitions:
     type: string
     pattern: '[a-zA-Z0-9_.-]+'
     minLength: 1
-    maxLength: 128
+    maxLength: 256
   ApplicationRestoreConfiguration:
     type: object
     required:
@@ -2448,7 +2646,7 @@ definitions:
       - CUSTOM
   CheckpointInterval:
     type: integer
-    minimum: 0
+    minimum: 1
   MinPauseBetweenCheckpoints:
     type: integer
     minimum: 0
@@ -2459,48 +2657,48 @@ definitions:
     properties:
       ConfigurationType:
         $ref: '#/definitions/ConfigurationType'
-        description: 'Describes whether the application uses Amazon Kinesis Data Analytics'' default checkpointing behavior. '
+        description: '<p>Describes whether the application uses Amazon Kinesis Data Analytics'' default checkpointing behavior. You must set this property to <code>CUSTOM</code> in order to set the <code>CheckpointingEnabled</code>, <code>CheckpointInterval</code>, or <code>MinPauseBetweenCheckpoints</code> parameters.</p> <note> <p>If this value is set to <code>DEFAULT</code>, the application will use the following values, even if they are set to other values using APIs or application code:</p> <ul> <li> <p> <b>CheckpointingEnabled:</b> true</p> </li> <li> <p> <b>CheckpointInterval:</b> 60000</p> </li> <li> <p> <b>MinPauseBetweenCheckpoints:</b> 5000</p> </li> </ul> </note>'
       CheckpointingEnabled:
         $ref: '#/definitions/BooleanObject'
-        description: Describes whether checkpointing is enabled for a Java-based Kinesis Data Analytics application.
+        description: '<p>Describes whether checkpointing is enabled for a Java-based Kinesis Data Analytics application.</p> <note> <p>If <code>CheckpointConfiguration.ConfigurationType</code> is <code>DEFAULT</code>, the application will use a <code>CheckpointingEnabled</code> value of <code>true</code>, even if this value is set to another value using this API or in application code.</p> </note>'
       CheckpointInterval:
         $ref: '#/definitions/CheckpointInterval'
-        description: 'Describes the interval in milliseconds between checkpoint operations. '
+        description: '<p>Describes the interval in milliseconds between checkpoint operations. </p> <note> <p>If <code>CheckpointConfiguration.ConfigurationType</code> is <code>DEFAULT</code>, the application will use a <code>CheckpointInterval</code> vaue of 60000, even if this value is set to another value using this API or in application code.</p> </note>'
       MinPauseBetweenCheckpoints:
         $ref: '#/definitions/MinPauseBetweenCheckpoints'
-        description: 'Describes the minimum time in milliseconds after a checkpoint operation completes that a new checkpoint operation can start. If a checkpoint operation takes longer than the <code>CheckpointInterval</code>, the application otherwise performs continual checkpoint operations. For more information, see <a href="https://ci.apache.org/projects/flink/flink-docs-stable/ops/state/large_state_tuning.html#tuning-checkpointing"> Tuning Checkpointing</a> in the <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.6/">Apache Flink Documentation</a>.'
+        description: '<p>Describes the minimum time in milliseconds after a checkpoint operation completes that a new checkpoint operation can start. If a checkpoint operation takes longer than the <code>CheckpointInterval</code>, the application otherwise performs continual checkpoint operations. For more information, see <a href="https://ci.apache.org/projects/flink/flink-docs-stable/ops/state/large_state_tuning.html#tuning-checkpointing"> Tuning Checkpointing</a> in the <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.6/">Apache Flink Documentation</a>.</p> <note> <p>If <code>CheckpointConfiguration.ConfigurationType</code> is <code>DEFAULT</code>, the application will use a <code>MinPauseBetweenCheckpoints</code> value of 5000, even if this value is set using this API or in application code.</p> </note>'
     description: 'Describes an application''s checkpointing configuration. Checkpointing is the process of persisting application state for fault tolerance. For more information, see <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.6/concepts/programming-model.html#checkpoints-for-fault-tolerance"> Checkpoints for Fault Tolerance</a> in the <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.6/">Apache Flink Documentation</a>.'
   CheckpointConfigurationDescription:
     type: object
     properties:
       ConfigurationType:
         $ref: '#/definitions/ConfigurationType'
-        description: Describes whether the application uses the default checkpointing behavior in Kinesis Data Analytics.
+        description: '<p>Describes whether the application uses the default checkpointing behavior in Kinesis Data Analytics. </p> <note> <p>If this value is set to <code>DEFAULT</code>, the application will use the following values, even if they are set to other values using APIs or application code:</p> <ul> <li> <p> <b>CheckpointingEnabled:</b> true</p> </li> <li> <p> <b>CheckpointInterval:</b> 60000</p> </li> <li> <p> <b>MinPauseBetweenCheckpoints:</b> 5000</p> </li> </ul> </note>'
       CheckpointingEnabled:
         $ref: '#/definitions/BooleanObject'
-        description: Describes whether checkpointing is enabled for a Java-based Kinesis Data Analytics application.
+        description: '<p>Describes whether checkpointing is enabled for a Java-based Kinesis Data Analytics application.</p> <note> <p>If <code>CheckpointConfiguration.ConfigurationType</code> is <code>DEFAULT</code>, the application will use a <code>CheckpointingEnabled</code> value of <code>true</code>, even if this value is set to another value using this API or in application code.</p> </note>'
       CheckpointInterval:
         $ref: '#/definitions/CheckpointInterval'
-        description: Describes the interval in milliseconds between checkpoint operations.
+        description: '<p>Describes the interval in milliseconds between checkpoint operations. </p> <note> <p>If <code>CheckpointConfiguration.ConfigurationType</code> is <code>DEFAULT</code>, the application will use a <code>CheckpointInterval</code> vaue of 60000, even if this value is set to another value using this API or in application code.</p> </note>'
       MinPauseBetweenCheckpoints:
         $ref: '#/definitions/MinPauseBetweenCheckpoints'
-        description: Describes the minimum time in milliseconds after a checkpoint operation completes that a new checkpoint operation can start.
+        description: '<p>Describes the minimum time in milliseconds after a checkpoint operation completes that a new checkpoint operation can start. </p> <note> <p>If <code>CheckpointConfiguration.ConfigurationType</code> is <code>DEFAULT</code>, the application will use a <code>MinPauseBetweenCheckpoints</code> value of 5000, even if this value is set using this API or in application code.</p> </note>'
     description: Describes checkpointing parameters for a Java-based Amazon Kinesis Data Analytics application.
   CheckpointConfigurationUpdate:
     type: object
     properties:
       ConfigurationTypeUpdate:
         $ref: '#/definitions/ConfigurationType'
-        description: Describes updates to whether the application uses the default checkpointing behavior of Kinesis Data Analytics.
+        description: '<p>Describes updates to whether the application uses the default checkpointing behavior of Kinesis Data Analytics. You must set this property to <code>CUSTOM</code> in order to set the <code>CheckpointingEnabled</code>, <code>CheckpointInterval</code>, or <code>MinPauseBetweenCheckpoints</code> parameters. </p> <note> <p>If this value is set to <code>DEFAULT</code>, the application will use the following values, even if they are set to other values using APIs or application code:</p> <ul> <li> <p> <b>CheckpointingEnabled:</b> true</p> </li> <li> <p> <b>CheckpointInterval:</b> 60000</p> </li> <li> <p> <b>MinPauseBetweenCheckpoints:</b> 5000</p> </li> </ul> </note>'
       CheckpointingEnabledUpdate:
         $ref: '#/definitions/BooleanObject'
-        description: Describes updates to whether checkpointing is enabled for an application.
+        description: '<p>Describes updates to whether checkpointing is enabled for an application.</p> <note> <p>If <code>CheckpointConfiguration.ConfigurationType</code> is <code>DEFAULT</code>, the application will use a <code>CheckpointingEnabled</code> value of <code>true</code>, even if this value is set to another value using this API or in application code.</p> </note>'
       CheckpointIntervalUpdate:
         $ref: '#/definitions/CheckpointInterval'
-        description: Describes updates to the interval in milliseconds between checkpoint operations.
+        description: '<p>Describes updates to the interval in milliseconds between checkpoint operations.</p> <note> <p>If <code>CheckpointConfiguration.ConfigurationType</code> is <code>DEFAULT</code>, the application will use a <code>CheckpointInterval</code> vaue of 60000, even if this value is set to another value using this API or in application code.</p> </note>'
       MinPauseBetweenCheckpointsUpdate:
         $ref: '#/definitions/MinPauseBetweenCheckpoints'
-        description: Describes updates to the minimum time in milliseconds after a checkpoint operation completes that a new checkpoint operation can start.
+        description: '<p>Describes updates to the minimum time in milliseconds after a checkpoint operation completes that a new checkpoint operation can start.</p> <note> <p>If <code>CheckpointConfiguration.ConfigurationType</code> is <code>DEFAULT</code>, the application will use a <code>MinPauseBetweenCheckpoints</code> value of 5000, even if this value is set using this API or in application code.</p> </note>'
     description: Describes updates to the checkpointing parameters for a Java-based Amazon Kinesis Data Analytics application.
   LogStreamARN:
     type: string
@@ -2707,7 +2905,7 @@ definitions:
     properties:
       ConfigurationType:
         $ref: '#/definitions/ConfigurationType'
-        description: Describes whether to use the default CloudWatch logging configuration for an application.
+        description: Describes whether to use the default CloudWatch logging configuration for an application. You must set this property to <code>CUSTOM</code> in order to set the <code>LogLevel</code> or <code>MetricsLevel</code> parameters.
       MetricsLevel:
         $ref: '#/definitions/MetricsLevel'
         description: Describes the granularity of the CloudWatch Logs for an application.
@@ -2722,10 +2920,10 @@ definitions:
     properties:
       ConfigurationType:
         $ref: '#/definitions/ConfigurationType'
-        description: Describes whether the application uses the default parallelism for the Kinesis Data Analytics service.
+        description: 'Describes whether the application uses the default parallelism for the Kinesis Data Analytics service. You must set this property to <code>CUSTOM</code> in order to change your application''s <code>AutoScalingEnabled</code>, <code>Parallelism</code>, or <code>ParallelismPerKPU</code> properties.'
       Parallelism:
         $ref: '#/definitions/Parallelism'
-        description: Describes the initial number of parallel tasks that a Java-based Kinesis Data Analytics application can perform. The Kinesis Data Analytics service can increase this number automatically if <a>ParallelismConfiguration$AutoScalingEnabled</a> is set to <code>true</code>.
+        description: 'Describes the initial number of parallel tasks that a Java-based Kinesis Data Analytics application can perform. If <code>AutoScalingEnabled</code> is set to True, Kinesis Data Analytics increases the <code>CurrentParallelism</code> value in response to application load. The service can increase the <code>CurrentParallelism</code> value up to the maximum parallelism, which is <code>ParalellismPerKPU</code> times the maximum KPUs for the application. The maximum KPUs for an application is 32 by default, and can be increased by requesting a limit increase. If application load is reduced, the service can reduce the <code>CurrentParallelism</code> value down to the <code>Parallelism</code> setting.'
       ParallelismPerKPU:
         $ref: '#/definitions/ParallelismPerKPU'
         description: 'Describes the number of parallel tasks that a Java-based Kinesis Data Analytics application can perform per Kinesis Processing Unit (KPU) used by the application. For more information about KPUs, see <a href="http://aws.amazon.com/kinesis/data-analytics/pricing/">Amazon Kinesis Data Analytics Pricing</a>.'
@@ -2754,13 +2952,13 @@ definitions:
         description: 'Describes whether the application uses the default parallelism for the Kinesis Data Analytics service. '
       Parallelism:
         $ref: '#/definitions/Parallelism'
-        description: 'Describes the initial number of parallel tasks that a Java-based Kinesis Data Analytics application can perform. '
+        description: 'Describes the initial number of parallel tasks that a Java-based Kinesis Data Analytics application can perform. If <code>AutoScalingEnabled</code> is set to True, then Kinesis Data Analytics can increase the <code>CurrentParallelism</code> value in response to application load. The service can increase <code>CurrentParallelism</code> up to the maximum parallelism, which is <code>ParalellismPerKPU</code> times the maximum KPUs for the application. The maximum KPUs for an application is 32 by default, and can be increased by requesting a limit increase. If application load is reduced, the service can reduce the <code>CurrentParallelism</code> value down to the <code>Parallelism</code> setting.'
       ParallelismPerKPU:
         $ref: '#/definitions/ParallelismPerKPU'
         description: Describes the number of parallel tasks that a Java-based Kinesis Data Analytics application can perform per Kinesis Processing Unit (KPU) used by the application.
       CurrentParallelism:
         $ref: '#/definitions/Parallelism'
-        description: Describes the current number of parallel tasks that a Java-based Kinesis Data Analytics application can perform.
+        description: 'Describes the current number of parallel tasks that a Java-based Kinesis Data Analytics application can perform. If <code>AutoScalingEnabled</code> is set to True, Kinesis Data Analytics can increase this value in response to application load. The service can increase this value up to the maximum parallelism, which is <code>ParalellismPerKPU</code> times the maximum KPUs for the application. The maximum KPUs for an application is 32 by default, and can be increased by requesting a limit increase. If application load is reduced, the service can reduce the <code>CurrentParallelism</code> value down to the <code>Parallelism</code> setting.'
       AutoScalingEnabled:
         $ref: '#/definitions/BooleanObject'
         description: Describes whether the Kinesis Data Analytics service can increase the parallelism of the application in response to increased throughput.
@@ -2772,7 +2970,7 @@ definitions:
     properties:
       ConfigurationTypeUpdate:
         $ref: '#/definitions/ConfigurationType'
-        description: Describes updates to whether to use the default CloudWatch logging configuration for an application.
+        description: Describes updates to whether to use the default CloudWatch logging configuration for an application. You must set this property to <code>CUSTOM</code> in order to set the <code>LogLevel</code> or <code>MetricsLevel</code> parameters.
       MetricsLevelUpdate:
         $ref: '#/definitions/MetricsLevel'
         description: Describes updates to the granularity of the CloudWatch Logs for an application.
@@ -2785,10 +2983,10 @@ definitions:
     properties:
       ConfigurationTypeUpdate:
         $ref: '#/definitions/ConfigurationType'
-        description: 'Describes updates to whether the application uses the default parallelism for the Kinesis Data Analytics service, or if a custom parallelism is used.'
+        description: 'Describes updates to whether the application uses the default parallelism for the Kinesis Data Analytics service, or if a custom parallelism is used. You must set this property to <code>CUSTOM</code> in order to change your application''s <code>AutoScalingEnabled</code>, <code>Parallelism</code>, or <code>ParallelismPerKPU</code> properties.'
       ParallelismUpdate:
         $ref: '#/definitions/Parallelism'
-        description: Describes updates to the initial number of parallel tasks an application can perform.
+        description: 'Describes updates to the initial number of parallel tasks an application can perform. If <code>AutoScalingEnabled</code> is set to True, then Kinesis Data Analytics can increase the <code>CurrentParallelism</code> value in response to application load. The service can increase <code>CurrentParallelism</code> up to the maximum parallelism, which is <code>ParalellismPerKPU</code> times the maximum KPUs for the application. The maximum KPUs for an application is 32 by default, and can be increased by requesting a limit increase. If application load is reduced, the service will reduce <code>CurrentParallelism</code> down to the <code>Parallelism</code> setting.'
       ParallelismPerKPUUpdate:
         $ref: '#/definitions/ParallelismPerKPU'
         description: Describes updates to the number of parallel tasks an application can perform per Kinesis Processing Unit (KPU) used by the application.
@@ -2796,6 +2994,13 @@ definitions:
         $ref: '#/definitions/BooleanObject'
         description: Describes updates to whether the Kinesis Data Analytics service can increase the parallelism of the application in response to increased throughput.
     description: Describes updates to parameters for how a Java-based Kinesis Data Analytics application executes multiple tasks simultaneously.
+  FlinkRunConfiguration:
+    type: object
+    properties:
+      AllowNonRestoredState:
+        $ref: '#/definitions/BooleanObject'
+        description: 'When restoring from a savepoint, specifies whether the runtime is allowed to skip a state that cannot be mapped to the new program. This will happen if the program is updated between savepoints to remove stateful parameters, and state data in the savepoint no longer corresponds to valid application data. For more information, see <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/ops/state/savepoints.html#allowing-non-restored-state"> Allowing Non-Restored State</a> in the <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/">Apache Flink documentation</a>.'
+    description: Describes the starting parameters for an Apache Flink-based Kinesis Data Analytics application.
   InAppStreamName:
     type: string
     minLength: 1
@@ -3391,6 +3596,9 @@ definitions:
   RunConfiguration:
     type: object
     properties:
+      FlinkRunConfiguration:
+        $ref: '#/definitions/FlinkRunConfiguration'
+        description: Describes the starting parameters for an Apache Flink-based Kinesis Data Analytics application.
       SqlRunConfigurations:
         $ref: '#/definitions/SqlRunConfigurations'
         description: Describes the starting parameters for an SQL-based Kinesis Data Analytics application.
@@ -3401,10 +3609,21 @@ definitions:
   RunConfigurationUpdate:
     type: object
     properties:
+      FlinkRunConfiguration:
+        $ref: '#/definitions/FlinkRunConfiguration'
+        description: Describes the starting parameters for an Apache Flink-based Kinesis Data Analytics application.
       ApplicationRestoreConfiguration:
         $ref: '#/definitions/ApplicationRestoreConfiguration'
         description: Describes updates to the restore behavior of a restarting application.
     description: Describes the updates to the starting parameters for a Kinesis Data Analytics application.
+  SecurityGroupId:
+    type: string
+  SecurityGroupIds:
+    type: array
+    items:
+      $ref: '#/definitions/SecurityGroupId'
+    minItems: 1
+    maxItems: 5
   SnapshotStatus:
     type: string
     enum:
@@ -3425,6 +3644,14 @@ definitions:
         $ref: '#/definitions/InputStartingPositionConfiguration'
         description: 'The point at which you want the application to start processing records from the streaming source. '
     description: Describes the starting parameters for an SQL-based Kinesis Data Analytics application.
+  SubnetId:
+    type: string
+  SubnetIds:
+    type: array
+    items:
+      $ref: '#/definitions/SubnetId'
+    minItems: 1
+    maxItems: 16
   TagKey:
     type: string
     minLength: 1
@@ -3444,10 +3671,27 @@ definitions:
       Value:
         $ref: '#/definitions/TagValue'
         description: The value of the key-value tag. The value is optional.
-    description: 'A key-value pair (the value is optional) that you can define and assign to AWS resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management Guide</i>.'
+    description: 'A key-value pair (the value is optional) that you can define and assign to AWS resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50. For more information, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html">Using Tagging</a>.'
   TagKeys:
     type: array
     items:
       $ref: '#/definitions/TagKey'
     minItems: 1
     maxItems: 200
+  VpcId:
+    type: string
+  VpcConfigurationUpdate:
+    type: object
+    required:
+      - VpcConfigurationId
+    properties:
+      VpcConfigurationId:
+        $ref: '#/definitions/Id'
+        description: Describes an update to the ID of the VPC configuration.
+      SubnetIdUpdates:
+        $ref: '#/definitions/SubnetIds'
+        description: 'Describes updates to the array of <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Subnet.html">Subnet</a> IDs used by the VPC configuration.'
+      SecurityGroupIdUpdates:
+        $ref: '#/definitions/SecurityGroupIds'
+        description: 'Describes updates to the array of <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SecurityGroup.html">SecurityGroup</a> IDs used by the VPC configuration.'
+    description: Describes updates to the VPC configuration used by the application.

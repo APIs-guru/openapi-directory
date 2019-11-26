@@ -1973,7 +1973,7 @@ paths:
   '/#X-Amz-Target=AlexaForBusiness.ListBusinessReportSchedules':
     post:
       operationId: ListBusinessReportSchedules
-      description: Lists the details of the schedules that a user configured.
+      description: 'Lists the details of the schedules that a user configured. A download URL of the report associated with each schedule is returned every time this action is called. A new download URL is returned each time, and is valid for 24 hours.'
       responses:
         '200':
           description: Success
@@ -3928,7 +3928,7 @@ definitions:
         description: 'A wake word for Alexa, Echo, Amazon, or a computer.'
       Locale:
         $ref: '#/definitions/DeviceLocale'
-        description: The locale of the room profile.
+        description: The locale of the room profile. (This is currently only available to a limited preview audience.)
       ClientRequestToken:
         $ref: '#/definitions/ClientRequestToken'
         description: The user-specified token that is used during the creation of a profile.
@@ -3941,6 +3941,9 @@ definitions:
       PSTNEnabled:
         $ref: '#/definitions/Boolean'
         description: Whether PSTN calling is enabled.
+      MeetingRoomConfiguration:
+        $ref: '#/definitions/CreateMeetingRoomConfiguration'
+        description: The meeting room settings of a room profile.
   CreateRoomResponse:
     type: object
     properties:
@@ -4550,19 +4553,19 @@ definitions:
     properties:
       SkillGroupArn:
         $ref: '#/definitions/Arn'
-        description: The ARN of the skill group for which to list enabled skills. Required.
+        description: The ARN of the skill group for which to list enabled skills.
       EnablementType:
         $ref: '#/definitions/EnablementTypeFilter'
-        description: 'Whether the skill is enabled under the user''s account, or if it requires linking to be used.'
+        description: Whether the skill is enabled under the user's account.
       SkillType:
         $ref: '#/definitions/SkillTypeFilter'
         description: Whether the skill is publicly available or is a private skill.
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>. Required.'
+        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>.'
       MaxResults:
         $ref: '#/definitions/SkillListMaxResults'
-        description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved. Required.'
+        description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.'
   ListSkillsStoreCategoriesResponse:
     type: object
     properties:
@@ -5310,7 +5313,7 @@ definitions:
         description: The updated wake word for the room profile.
       Locale:
         $ref: '#/definitions/DeviceLocale'
-        description: The updated locale for the room profile.
+        description: The updated locale for the room profile. (This is currently only available to a limited preview audience.)
       SetupModeDisabled:
         $ref: '#/definitions/Boolean'
         description: Whether the setup mode of the profile is enabled.
@@ -5320,6 +5323,9 @@ definitions:
       PSTNEnabled:
         $ref: '#/definitions/Boolean'
         description: Whether the PSTN setting of the room profile is enabled.
+      MeetingRoomConfiguration:
+        $ref: '#/definitions/UpdateMeetingRoomConfiguration'
+        description: The updated meeting room settings of a room profile.
   UpdateRoomResponse:
     type: object
     properties: {}
@@ -5508,6 +5514,7 @@ definitions:
     enum:
       - ONE_DAY
       - ONE_WEEK
+      - THIRTY_DAYS
   BusinessReportContentRange:
     type: object
     properties:
@@ -5816,6 +5823,36 @@ definitions:
   CountryCode:
     type: string
     pattern: '\d{1,3}'
+  EndOfMeetingReminderMinutesList:
+    type: array
+    items:
+      $ref: '#/definitions/Minutes'
+    minItems: 1
+    maxItems: 1
+  EndOfMeetingReminderType:
+    type: string
+    enum:
+      - ANNOUNCEMENT_TIME_CHECK
+      - ANNOUNCEMENT_VARIABLE_TIME_LEFT
+      - CHIME
+      - KNOCK
+  CreateEndOfMeetingReminder:
+    type: object
+    required:
+      - ReminderAtMinutes
+      - ReminderType
+      - Enabled
+    properties:
+      ReminderAtMinutes:
+        $ref: '#/definitions/EndOfMeetingReminderMinutesList'
+        description: ' A range of 3 to 15 minutes that determines when the reminder begins.'
+      ReminderType:
+        $ref: '#/definitions/EndOfMeetingReminderType'
+        description: 'The type of sound that users hear during the end of meeting reminder. '
+      Enabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether an end of meeting reminder is enabled or not.
+    description: Creates settings for the end of meeting reminder feature that are applied to a room profile. The end of meeting reminder enables Alexa to remind users when a meeting is ending.
   GatewayGroupName:
     type: string
     pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
@@ -5825,6 +5862,49 @@ definitions:
     type: string
     minLength: 0
     maxLength: 200
+  Minutes:
+    type: integer
+  CreateInstantBooking:
+    type: object
+    required:
+      - DurationInMinutes
+      - Enabled
+    properties:
+      DurationInMinutes:
+        $ref: '#/definitions/Minutes'
+        description: Duration between 15 and 240 minutes at increments of 15 that determines how long to book an available room when a meeting is started with Alexa.
+      Enabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether instant booking is enabled or not.
+    description: 'Creates settings for the instant booking feature that are applied to a room profile. When users start their meeting with Alexa, Alexa automatically books the room for the configured duration if the room is available.'
+  CreateRequireCheckIn:
+    type: object
+    required:
+      - ReleaseAfterMinutes
+      - Enabled
+    properties:
+      ReleaseAfterMinutes:
+        $ref: '#/definitions/Minutes'
+        description: Duration between 5 and 20 minutes to determine when to release the room if it's not checked into.
+      Enabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether require check in is enabled or not.
+    description: 'Creates settings for the require check in feature that are applied to a room profile. Require check in allows a meeting room’s Alexa or AVS device to prompt the user to check in; otherwise, the room will be released.'
+  CreateMeetingRoomConfiguration:
+    type: object
+    properties:
+      RoomUtilizationMetricsEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether room utilization metrics are enabled or not.
+      EndOfMeetingReminder:
+        $ref: '#/definitions/CreateEndOfMeetingReminder'
+      InstantBooking:
+        $ref: '#/definitions/CreateInstantBooking'
+        description: Settings to automatically book a room for a configured duration if it's free when joining a meeting with Alexa.
+      RequireCheckIn:
+        $ref: '#/definitions/CreateRequireCheckIn'
+        description: 'Settings for requiring a check in when a room is reserved. Alexa can cancel a room reservation if it''s not checked into to make the room available for others. Users can check in by joining the meeting with Alexa or an AVS device, or by saying “Alexa, check in.”'
+    description: Creates meeting room settings of a room profile.
   NetworkProfileName:
     type: string
     pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
@@ -6191,6 +6271,19 @@ definitions:
     enum:
       - ENABLED
       - PENDING
+  EndOfMeetingReminder:
+    type: object
+    properties:
+      ReminderAtMinutes:
+        $ref: '#/definitions/EndOfMeetingReminderMinutesList'
+        description: A range of 3 to 15 minutes that determines when the reminder begins.
+      ReminderType:
+        $ref: '#/definitions/EndOfMeetingReminderType'
+        description: 'The type of sound that users hear during the end of meeting reminder. '
+      Enabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether an end of meeting reminder is enabled or not.
+    description: 'Settings for the end of meeting reminder feature that are applied to a room profile. The end of meeting reminder enables Alexa to remind users when a meeting is ending. '
   EndUserLicenseAgreement:
     type: string
   Endpoint:
@@ -6406,7 +6499,7 @@ definitions:
         description: The wake word of a room profile.
       Locale:
         $ref: '#/definitions/DeviceLocale'
-        description: The locale of a room profile.
+        description: The locale of a room profile. (This is currently available only to a limited preview audience.)
       SetupModeDisabled:
         $ref: '#/definitions/Boolean'
         description: The setup mode of a room profile.
@@ -6419,6 +6512,9 @@ definitions:
       AddressBookArn:
         $ref: '#/definitions/Arn'
         description: The ARN of the address book.
+      MeetingRoomConfiguration:
+        $ref: '#/definitions/MeetingRoomConfiguration'
+        description: Meeting room settings of a room profile.
     description: A room profile with attributes.
   Room:
     type: object
@@ -6467,6 +6563,16 @@ definitions:
     description: A skill group with attributes.
   IconUrl:
     type: string
+  InstantBooking:
+    type: object
+    properties:
+      DurationInMinutes:
+        $ref: '#/definitions/Minutes'
+        description: 'Duration between 15 and 240 minutes at increments of 15 that determines how long to book an available room when a meeting is started with Alexa. '
+      Enabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether instant booking is enabled or not.
+    description: 'Settings for the instant booking feature that are applied to a room profile. When users start their meeting with Alexa, Alexa automatically books the room for the configured duration if the room is available.'
   InvocationPhrase:
     type: string
   Key:
@@ -6502,6 +6608,32 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/SmartHomeAppliance'
+  RequireCheckIn:
+    type: object
+    properties:
+      ReleaseAfterMinutes:
+        $ref: '#/definitions/Minutes'
+        description: 'Duration between 5 and 20 minutes to determine when to release the room if it''s not checked into. '
+      Enabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether require check in is enabled or not.
+    description: 'Settings for the require check in feature that are applied to a room profile. Require check in allows a meeting room’s Alexa or AVS device to prompt the user to check in; otherwise, the room will be released. '
+  MeetingRoomConfiguration:
+    type: object
+    properties:
+      RoomUtilizationMetricsEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether room utilization metrics are enabled or not.
+      EndOfMeetingReminder:
+        $ref: '#/definitions/EndOfMeetingReminder'
+        description: 'Settings for the end of meeting reminder feature that are applied to a room profile. The end of meeting reminder enables Alexa to remind users when a meeting is ending. '
+      InstantBooking:
+        $ref: '#/definitions/InstantBooking'
+        description: 'Settings to automatically book the room if available for a configured duration when joining a meeting with Alexa. '
+      RequireCheckIn:
+        $ref: '#/definitions/RequireCheckIn'
+        description: 'Settings for requiring a check in when a room is reserved. Alexa can cancel a room reservation if it''s not checked into. This makes the room available for others. Users can check in by joining the meeting with Alexa or an AVS device, or by saying “Alexa, check in.” '
+    description: Meeting room settings of a room profile.
   RequirePin:
     type: string
     enum:
@@ -6594,7 +6726,7 @@ definitions:
         description: The address of a room profile.
       Timezone:
         $ref: '#/definitions/Timezone'
-        description: The timezone of a room profile.
+        description: The time zone of a room profile.
       DistanceUnit:
         $ref: '#/definitions/DistanceUnit'
         description: The distance unit of a room profile.
@@ -6606,7 +6738,7 @@ definitions:
         description: The wake word of a room profile.
       Locale:
         $ref: '#/definitions/DeviceLocale'
-        description: The locale of a room profile.
+        description: The locale of a room profile. (This is currently available only to a limited preview audience.)
     description: The data of a room profile.
   ProfileDataList:
     type: array
@@ -6900,7 +7032,7 @@ definitions:
         description: 'The key of a tag. Tag keys are case-sensitive. '
       Value:
         $ref: '#/definitions/TagValue'
-        description: The value of a tag. Tag values are case-sensitive and can be null.
+        description: The value of a tag. Tag values are case sensitive and can be null.
     description: 'A key-value pair that can be associated with a resource. '
   TagKeyList:
     type: array
@@ -6927,6 +7059,55 @@ definitions:
   TrustAnchor:
     type: string
     pattern: '-{5}BEGIN CERTIFICATE-{5}\u000D?\u000A([A-Za-z0-9/+]{64}\u000D?\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\u000D?\u000A-{5}END CERTIFICATE-{5}(\u000D?\u000A)?'
+  UpdateEndOfMeetingReminder:
+    type: object
+    properties:
+      ReminderAtMinutes:
+        $ref: '#/definitions/EndOfMeetingReminderMinutesList'
+        description: 'Updates settings for the end of meeting reminder feature that are applied to a room profile. The end of meeting reminder enables Alexa to remind users when a meeting is ending. '
+      ReminderType:
+        $ref: '#/definitions/EndOfMeetingReminderType'
+        description: 'The type of sound that users hear during the end of meeting reminder. '
+      Enabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether an end of meeting reminder is enabled or not.
+    description: 'Settings for the end of meeting reminder feature that are applied to a room profile. The end of meeting reminder enables Alexa to remind users when a meeting is ending. '
+  UpdateInstantBooking:
+    type: object
+    properties:
+      DurationInMinutes:
+        $ref: '#/definitions/Minutes'
+        description: Duration between 15 and 240 minutes at increments of 15 that determines how long to book an available room when a meeting is started with Alexa.
+      Enabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether instant booking is enabled or not.
+    description: 'Updates settings for the instant booking feature that are applied to a room profile. If instant booking is enabled, Alexa automatically reserves a room if it is free when a user joins a meeting with Alexa.'
+  UpdateRequireCheckIn:
+    type: object
+    properties:
+      ReleaseAfterMinutes:
+        $ref: '#/definitions/Minutes'
+        description: 'Duration between 5 and 20 minutes to determine when to release the room if it''s not checked into. '
+      Enabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether require check in is enabled or not.
+    description: 'Updates settings for the require check in feature that are applied to a room profile. Require check in allows a meeting room’s Alexa or AVS device to prompt the user to check in; otherwise, the room will be released. '
+  UpdateMeetingRoomConfiguration:
+    type: object
+    properties:
+      RoomUtilizationMetricsEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether room utilization metrics are enabled or not.
+      EndOfMeetingReminder:
+        $ref: '#/definitions/UpdateEndOfMeetingReminder'
+        description: 'Settings for the end of meeting reminder feature that are applied to a room profile. The end of meeting reminder enables Alexa to remind users when a meeting is ending. '
+      InstantBooking:
+        $ref: '#/definitions/UpdateInstantBooking'
+        description: Settings to automatically book an available room available for a configured duration when joining a meeting with Alexa.
+      RequireCheckIn:
+        $ref: '#/definitions/UpdateRequireCheckIn'
+        description: 'Settings for requiring a check in when a room is reserved. Alexa can cancel a room reservation if it''s not checked into to make the room available for others. Users can check in by joining the meeting with Alexa or an AVS device, or by saying “Alexa, check in.” '
+    description: Updates meeting room settings of a room profile.
   UserData:
     type: object
     properties:

@@ -832,6 +832,13 @@ definitions:
       - en-AB
       - en-WL
       - pt-PT
+      - te-IN
+      - tr-TR
+      - de-CH
+      - he-IL
+      - ms-MY
+      - ja-JP
+      - ar-AE
   Phrases:
     type: array
     items:
@@ -921,6 +928,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/VocabularyInfo'
+  MaxAlternatives:
+    type: integer
+    minimum: 2
+    maximum: 10
   MaxSpeakers:
     type: integer
     minimum: 2
@@ -972,6 +983,12 @@ definitions:
       ChannelIdentification:
         $ref: '#/definitions/Boolean'
         description: '<p>Instructs Amazon Transcribe to process each audio channel separately and then merge the transcription output of each channel into a single transcription. </p> <p>Amazon Transcribe also produces a transcription of each item detected on an audio channel, including the start time and end time of the item and alternative transcriptions of the item including the confidence that Amazon Transcribe has in the transcription.</p> <p>You can''t set both <code>ShowSpeakerLabels</code> and <code>ChannelIdentification</code> in the same request. If you set both, your request returns a <code>BadRequestException</code>.</p>'
+      ShowAlternatives:
+        $ref: '#/definitions/Boolean'
+        description: 'Determines whether the transcription contains alternative transcriptions. If you set the <code>ShowAlternatives</code> field to true, you must also set the maximum number of alternatives to return in the <code>MaxAlternatives</code> field.'
+      MaxAlternatives:
+        $ref: '#/definitions/MaxAlternatives'
+        description: 'The number of alternative transcriptions that the service should return. If you specify the <code>MaxAlternatives</code> field, you must set the <code>ShowAlternatives</code> field to true.'
     description: Provides optional settings for the <code>StartTranscriptionJob</code> operation.
   Transcript:
     type: object

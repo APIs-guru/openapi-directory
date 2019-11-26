@@ -343,6 +343,126 @@ paths:
           type: integer
           minimum: 1
           maximum: 100
+  '/apps/{appId}/backendenvironments':
+    post:
+      operationId: CreateBackendEnvironment
+      description: ' Creates a new backend environment for an Amplify App. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateBackendEnvironmentResult'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '484':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: appId
+          in: path
+          required: true
+          description: ' Unique Id for an Amplify App. '
+          type: string
+          minLength: 1
+          maxLength: 255
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - environmentName
+            properties:
+              environmentName:
+                description: ' Name for the backend environment. '
+                type: string
+                minLength: 1
+                maxLength: 255
+              stackName:
+                description: ' CloudFormation stack name of backend environment. '
+                type: string
+                minLength: 1
+                maxLength: 255
+              deploymentArtifacts:
+                description: ' Name of deployment artifacts. '
+                type: string
+                minLength: 1
+                maxLength: 1000
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListBackendEnvironments
+      description: ' Lists backend environments for an Amplify App. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListBackendEnvironmentsResult'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: appId
+          in: path
+          required: true
+          description: ' Unique Id for an amplify App. '
+          type: string
+          minLength: 1
+          maxLength: 255
+        - name: nextToken
+          in: query
+          required: false
+          description: ' Pagination token. Set to null to start listing backen environments from start. If a non-null pagination token is returned in a result, then pass its value in here to list more backend environments. '
+          type: string
+          maxLength: 2000
+        - name: maxResults
+          in: query
+          required: false
+          description: ' Maximum number of records to list in a single response. '
+          type: integer
+          minimum: 1
+          maximum: 100
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              environmentName:
+                description: ' Name of the backend environment '
+                type: string
+                minLength: 1
+                maxLength: 255
   '/apps/{appId}/branches':
     post:
       operationId: CreateBranch
@@ -1005,6 +1125,97 @@ paths:
                 type: string
                 minLength: 1
                 maxLength: 255
+  '/apps/{appId}/backendenvironments/{environmentName}':
+    delete:
+      operationId: DeleteBackendEnvironment
+      description: ' Delete backend environment for an Amplify App. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteBackendEnvironmentResult'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '484':
+          description: DependentServiceFailureException
+          schema:
+            $ref: '#/definitions/DependentServiceFailureException'
+      parameters:
+        - name: appId
+          in: path
+          required: true
+          description: ' Unique Id of an Amplify App. '
+          type: string
+          minLength: 1
+          maxLength: 255
+        - name: environmentName
+          in: path
+          required: true
+          description: ' Name of a backend environment of an Amplify App. '
+          type: string
+          minLength: 1
+          maxLength: 255
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetBackendEnvironment
+      description: ' Retrieves a backend environment for an Amplify App. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetBackendEnvironmentResult'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: appId
+          in: path
+          required: true
+          description: ' Unique Id for an Amplify App. '
+          type: string
+          minLength: 1
+          maxLength: 255
+        - name: environmentName
+          in: path
+          required: true
+          description: ' Name for the backend environment. '
+          type: string
+          minLength: 1
+          maxLength: 255
   '/apps/{appId}/branches/{branchName}':
     delete:
       operationId: DeleteBranch
@@ -2220,6 +2431,16 @@ definitions:
   InternalFailureException: {}
   LimitExceededException: {}
   DependentServiceFailureException: {}
+  CreateBackendEnvironmentResult:
+    type: object
+    required:
+      - backendEnvironment
+    properties:
+      backendEnvironment:
+        $ref: '#/definitions/BackendEnvironment'
+        description: ' Backend environment structure for an amplify App. '
+    description: ' Result structure for create backend environment. '
+  NotFoundException: {}
   CreateBranchResult:
     type: object
     required:
@@ -2229,7 +2450,6 @@ definitions:
         $ref: '#/definitions/Branch'
         description: ' Branch structure for an Amplify App. '
     description: ' Result structure for create branch request. '
-  NotFoundException: {}
   CreateDeploymentResult:
     type: object
     required:
@@ -2288,6 +2508,15 @@ definitions:
       app:
         $ref: '#/definitions/App'
     description: ' Result structure for an Amplify App delete request. '
+  DeleteBackendEnvironmentResult:
+    type: object
+    required:
+      - backendEnvironment
+    properties:
+      backendEnvironment:
+        $ref: '#/definitions/BackendEnvironment'
+        description: ' Backend environment structure for an Amplify App. '
+    description: ' Result structure of a delete backend environment result. '
   DeleteBranchResult:
     type: object
     required:
@@ -2348,6 +2577,15 @@ definitions:
         $ref: '#/definitions/ArtifactUrl'
         description: ' Presigned url for the artifact. '
     description: ' Result structure for the get artifact request. '
+  GetBackendEnvironmentResult:
+    type: object
+    required:
+      - backendEnvironment
+    properties:
+      backendEnvironment:
+        $ref: '#/definitions/BackendEnvironment'
+        description: ' Backend environment structure for an an Amplify App. '
+    description: ' Result structure for get backend environment result. '
   GetBranchResult:
     type: object
     required:
@@ -2404,6 +2642,18 @@ definitions:
         $ref: '#/definitions/NextToken'
         description: ' Pagination token. If non-null pagination token is returned in a result, then pass its value in another request to fetch more entries. '
     description: ' Result structure for the list artifacts request. '
+  ListBackendEnvironmentsResult:
+    type: object
+    required:
+      - backendEnvironments
+    properties:
+      backendEnvironments:
+        $ref: '#/definitions/BackendEnvironments'
+        description: ' List of backend environments for an Amplify App. '
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: ' Pagination token. If non-null pagination token is returned in a result, then pass its value in another request to fetch more entries. '
+    description: ' Result structure for list backend environments result. '
   ListBranchesResult:
     type: object
     required:
@@ -2768,6 +3018,49 @@ definitions:
     type: string
     minLength: 1
     maxLength: 1000
+  EnvironmentName:
+    type: string
+    minLength: 1
+    maxLength: 255
+  StackName:
+    type: string
+    minLength: 1
+    maxLength: 255
+  DeploymentArtifacts:
+    type: string
+    minLength: 1
+    maxLength: 1000
+  BackendEnvironment:
+    type: object
+    required:
+      - backendEnvironmentArn
+      - environmentName
+      - createTime
+      - updateTime
+    properties:
+      backendEnvironmentArn:
+        $ref: '#/definitions/BackendEnvironmentArn'
+        description: ' Arn for a backend environment, part of an Amplify App. '
+      environmentName:
+        $ref: '#/definitions/EnvironmentName'
+        description: ' Name for a backend environment, part of an Amplify App. '
+      stackName:
+        $ref: '#/definitions/StackName'
+        description: ' CloudFormation stack name of backend environment. '
+      deploymentArtifacts:
+        $ref: '#/definitions/DeploymentArtifacts'
+        description: ' Name of deployment artifacts. '
+      createTime:
+        $ref: '#/definitions/CreateTime'
+        description: ' Creation date and time for a backend environment, part of an Amplify App. '
+      updateTime:
+        $ref: '#/definitions/UpdateTime'
+        description: ' Last updated date and time for a backend environment, part of an Amplify App. '
+    description: ' Backend environment for an Amplify App. '
+  BackendEnvironments:
+    type: array
+    items:
+      $ref: '#/definitions/BackendEnvironment'
   BranchArn:
     type: string
     maxLength: 1000
@@ -2978,6 +3271,21 @@ definitions:
         $ref: '#/definitions/AutoBranchCreationConfig'
         description: ' Automated branch creation config for the Amplify App. '
     description: ' Request structure used to create Apps in Amplify. '
+  CreateBackendEnvironmentRequest:
+    type: object
+    required:
+      - environmentName
+    properties:
+      environmentName:
+        $ref: '#/definitions/EnvironmentName'
+        description: ' Name for the backend environment. '
+      stackName:
+        $ref: '#/definitions/StackName'
+        description: ' CloudFormation stack name of backend environment. '
+      deploymentArtifacts:
+        $ref: '#/definitions/DeploymentArtifacts'
+        description: ' Name of deployment artifacts. '
+    description: ' Request structure for a backend environment create request. '
   CreateBranchRequest:
     type: object
     required:
@@ -3178,6 +3486,10 @@ definitions:
     type: object
     properties: {}
     description: ' Request structure for an Amplify App delete request. '
+  DeleteBackendEnvironmentRequest:
+    type: object
+    properties: {}
+    description: ' Request structure for delete backend environment request. '
   DeleteBranchRequest:
     type: object
     properties: {}
@@ -3305,6 +3617,10 @@ definitions:
     type: object
     properties: {}
     description: ' Request structure for the get artifact request. '
+  GetBackendEnvironmentRequest:
+    type: object
+    properties: {}
+    description: ' Request structure for get backend environment request. '
   GetBranchRequest:
     type: object
     properties: {}
@@ -3384,6 +3700,13 @@ definitions:
     type: object
     properties: {}
     description: ' Request structure for the list artifacts request. '
+  ListBackendEnvironmentsRequest:
+    type: object
+    properties:
+      environmentName:
+        $ref: '#/definitions/EnvironmentName'
+        description: ' Name of the backend environment '
+    description: ' Request structure for list backend environments request. '
   ListBranchesRequest:
     type: object
     properties: {}

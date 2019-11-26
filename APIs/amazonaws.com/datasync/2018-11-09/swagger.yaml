@@ -348,7 +348,7 @@ paths:
   '/#X-Amz-Target=FmrsService.CreateLocationSmb':
     post:
       operationId: CreateLocationSmb
-      description: Defines a file system on an Server Message Block (SMB) server that can be read from or written to
+      description: Defines a file system on an Server Message Block (SMB) server that can be read from or written to.
       responses:
         '200':
           description: Success
@@ -1270,7 +1270,7 @@ definitions:
     properties:
       Subdirectory:
         $ref: '#/definitions/Subdirectory'
-        description: 'A subdirectory in the location’s path. This subdirectory in the EFS file system is used to read data from the EFS source location or write data to the EFS destination. By default, AWS DataSync uses the root directory.'
+        description: '<p>A subdirectory in the location’s path. This subdirectory in the EFS file system is used to read data from the EFS source location or write data to the EFS destination. By default, AWS DataSync uses the root directory.</p> <note> <p> <code>Subdirectory</code> must be specified with forward slashes. For example <code>/path/to/folder</code>.</p> </note>'
       EfsFilesystemArn:
         $ref: '#/definitions/EfsFilesystemArn'
         description: The Amazon Resource Name (ARN) for the Amazon EFS file system.
@@ -1357,7 +1357,7 @@ definitions:
     properties:
       Subdirectory:
         $ref: '#/definitions/NonEmptySubdirectory'
-        description: '<p>The subdirectory in the SMB file system that is used to read data from the SMB source location or write data to the SMB destination. The SMB path should be a path that''s exported by the SMB server, or a subdirectory of that path. The path should be such that it can be mounted by other SMB clients in your network.</p> <p>To transfer all the data in the folder you specified, DataSync needs to have permissions to mount the SMB share, as well as to access all the data in that share. To ensure this, either ensure that the user/password specified belongs to the user who can mount the share, and who has the appropriate permissions for all of the files and directories that you want DataSync to access, or use credentials of a member of the Backup Operators group to mount the share. Doing either enables the agent to access the data. For the agent to access directories, you must additionally enable all execute access.</p>'
+        description: '<p>The subdirectory in the SMB file system that is used to read data from the SMB source location or write data to the SMB destination. The SMB path should be a path that''s exported by the SMB server, or a subdirectory of that path. The path should be such that it can be mounted by other SMB clients in your network.</p> <note> <p> <code>Subdirectory</code> must be specified with forward slashes. For example <code>/path/to/folder</code>.</p> </note> <p>To transfer all the data in the folder you specified, DataSync needs to have permissions to mount the SMB share, as well as to access all the data in that share. To ensure this, either ensure that the user/password specified belongs to the user who can mount the share, and who has the appropriate permissions for all of the files and directories that you want DataSync to access, or use credentials of a member of the Backup Operators group to mount the share. Doing either enables the agent to access the data. For the agent to access directories, you must additionally enable all execute access.</p>'
       ServerHostname:
         $ref: '#/definitions/ServerHostname'
         description: <p>The name of the SMB server. This value is the IP address or Domain Name Service (DNS) name of the SMB server. An agent that is installed on-premises uses this hostname to mount the SMB server in a network.</p> <note> <p>This name must either be DNS-compliant or must be an IP version 4 (IPv4) address.</p> </note>
@@ -1411,6 +1411,9 @@ definitions:
       Excludes:
         $ref: '#/definitions/FilterList'
         description: '<p>A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example, <code>"/folder1|/folder2"</code> </p> <p> </p>'
+      Schedule:
+        $ref: '#/definitions/TaskSchedule'
+        description: 'Specifies a schedule used to periodically transfer files from a source to a destination location. The schedule should be specified in UTC time. For more information, see <a>task-scheduling</a>.'
       Tags:
         $ref: '#/definitions/TagList'
         description: 'The key-value pair that represents the tag that you want to add to the resource. The value can be an empty string. '
@@ -1633,6 +1636,9 @@ definitions:
       Excludes:
         $ref: '#/definitions/FilterList'
         description: '<p>A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example: <code>"/folder1|/folder2"</code> </p> <p> </p>'
+      Schedule:
+        $ref: '#/definitions/TaskSchedule'
+        description: The schedule used to periodically transfer files from a source to a destination location.
       ErrorCode:
         $ref: '#/definitions/string'
         description: Errors that AWS DataSync encountered during execution of the task. You can use this error code to help troubleshoot issues.
@@ -1892,6 +1898,9 @@ definitions:
       Excludes:
         $ref: '#/definitions/FilterList'
         description: '<p>A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example: <code>"/folder1|/folder2"</code> </p> <p> </p>'
+      Schedule:
+        $ref: '#/definitions/TaskSchedule'
+        description: 'Specifies a schedule used to periodically transfer files from a source to a destination location. You can configure your task to execute hourly, daily, weekly or on specific days of the week. You control when in the day or hour you want the task to execute. The time you specify is UTC time. For more information, see <a>task-scheduling</a>.'
       Name:
         $ref: '#/definitions/TagValue'
         description: The name of the task to update.
@@ -1975,7 +1984,7 @@ definitions:
     maxItems: 1
   Subdirectory:
     type: string
-    pattern: '^[a-zA-Z0-9_\-\./]*$'
+    pattern: '^[a-zA-Z0-9_\-\+\./\(\)\p{Zs}]*$'
     maxLength: 4096
   EfsFilesystemArn:
     type: string
@@ -2000,7 +2009,7 @@ definitions:
     maxLength: 128
   NonEmptySubdirectory:
     type: string
-    pattern: '^[a-zA-Z0-9_\-\./]+$'
+    pattern: '^[a-zA-Z0-9_\-\+\./\(\)\p{Zs}]+$'
     maxLength: 4096
   ServerHostname:
     type: string
@@ -2046,7 +2055,7 @@ definitions:
     description: '<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that is used to access an Amazon S3 bucket.</p> <p>For detailed information about using such a role, see Creating a Location for Amazon S3 in the <i>AWS DataSync User Guide</i>.</p>'
   SmbUser:
     type: string
-    pattern: '^[^\\x5B\\x5D\\/:;|=,+*?]{1,104}$'
+    pattern: '^[^\x5B\x5D\\/:;|=,+*?]{1,104}$'
     maxLength: 104
   SmbDomain:
     type: string
@@ -2056,6 +2065,7 @@ definitions:
     type: string
     pattern: '^.{0,104}$'
     maxLength: 104
+    format: password
   SmbMountOptions:
     type: object
     properties:
@@ -2102,7 +2112,7 @@ definitions:
         description: 'A value that limits the bandwidth used by AWS DataSync. For example, if you want AWS DataSync to use a maximum of 1 MB, set this value to <code>1048576</code> (<code>=1024*1024</code>).'
       TaskQueueing:
         $ref: '#/definitions/TaskQueueing'
-        description: '<p>A value that determines whether tasks should be queued before executing the tasks. If set to <code>Enabled</code>, the tasks will queued. The default is <code>Enabled</code>.</p> <p>If you use the same agent to run multiple tasks you can enable the tasks to run in series. For more information see <a>task-queue</a>.</p>'
+        description: '<p>A value that determines whether tasks should be queued before executing the tasks. If set to <code>ENABLED</code>, the tasks will be queued. The default is <code>ENABLED</code>.</p> <p>If you use the same agent to run multiple tasks you can enable the tasks to run in series. For more information see <a>queue-task-execution</a>.</p>'
     description: '<p>Represents the options that are available to control the behavior of a <a>StartTaskExecution</a> operation. Behavior includes preserving metadata such as user ID (UID), group ID (GID), and file permissions, and also overwriting files in the destination, data integrity verification, and so on.</p> <p>A task has a set of default options associated with it. If you don''t specify an option in <a>StartTaskExecution</a>, the default value is used. You can override the defaults options on each task execution by specifying an overriding <code>Options</code> value to <a>StartTaskExecution</a>.</p>'
   FilterList:
     type: array
@@ -2110,6 +2120,15 @@ definitions:
       $ref: '#/definitions/FilterRule'
     minItems: 0
     maxItems: 1
+  TaskSchedule:
+    type: object
+    required:
+      - ScheduleExpression
+    properties:
+      ScheduleExpression:
+        $ref: '#/definitions/ScheduleExpressionCron'
+        description: 'A cron expression that specifies when AWS DataSync initiates a scheduled transfer from a source to a destination location. '
+    description: 'Specifies the schedule you want your task to use for repeated executions. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html">Schedule Expressions for Rules</a>.'
   TaskArn:
     type: string
     pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]*:[0-9]{12}:task/task-[0-9a-f]{17}$'
@@ -2122,6 +2141,7 @@ definitions:
     enum:
       - PUBLIC
       - PRIVATE_LINK
+      - FIPS
   PrivateLinkConfig:
     type: object
     properties:
@@ -2163,6 +2183,9 @@ definitions:
       PrepareStatus:
         $ref: '#/definitions/PhaseStatus'
         description: The status of the PREPARING phase.
+      TotalDuration:
+        $ref: '#/definitions/Duration'
+        description: The total time in milliseconds that AWS DataSync took to transfer the file from the source to the destination location.
       TransferDuration:
         $ref: '#/definitions/Duration'
         description: The total time in milliseconds that AWS DataSync spent in the TRANSFERRING phase.
@@ -2335,7 +2358,6 @@ definitions:
     type: string
     enum:
       - NONE
-      - BEST_EFFORT
       - PRESERVE
   TaskQueueing:
     type: string
@@ -2348,6 +2370,10 @@ definitions:
       - PENDING
       - SUCCESS
       - ERROR
+  ScheduleExpressionCron:
+    type: string
+    pattern: '^[a-zA-Z0-9\ \_\*\?\,\|\^\-\/\#\s\(\)\+]*$'
+    maxLength: 256
   SmbVersion:
     type: string
     enum:

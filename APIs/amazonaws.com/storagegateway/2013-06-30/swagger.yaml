@@ -800,7 +800,7 @@ paths:
   '/#X-Amz-Target=StorageGateway_20130630.DeleteBandwidthRateLimit':
     post:
       operationId: DeleteBandwidthRateLimit
-      description: 'Deletes the bandwidth rate limits of a gateway. You can delete either the upload and download bandwidth rate limit, or you can delete both. If you delete only one of the limits, the other limit remains unchanged. To specify which gateway to work with, use the Amazon Resource Name (ARN) of the gateway in your request.'
+      description: 'Deletes the bandwidth rate limits of a gateway. You can delete either the upload and download bandwidth rate limit, or you can delete both. If you delete only one of the limits, the other limit remains unchanged. To specify which gateway to work with, use the Amazon Resource Name (ARN) of the gateway in your request. This operation is supported for the stored volume, cached volume and tape gateway types.'
       responses:
         '200':
           description: Success
@@ -837,7 +837,7 @@ paths:
   '/#X-Amz-Target=StorageGateway_20130630.DeleteChapCredentials':
     post:
       operationId: DeleteChapCredentials
-      description: Deletes Challenge-Handshake Authentication Protocol (CHAP) credentials for a specified iSCSI target and initiator pair.
+      description: Deletes Challenge-Handshake Authentication Protocol (CHAP) credentials for a specified iSCSI target and initiator pair. This operation is supported in volume and tape gateway types.
       responses:
         '200':
           description: Success
@@ -1093,10 +1093,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=StorageGateway_20130630.DescribeAvailabilityMonitorTest':
+    post:
+      operationId: DescribeAvailabilityMonitorTest
+      description: 'Returns information about the most recent High Availability monitoring test that was performed on the host in a cluster. If a test isn''t performed, the status and start time in the response would be null.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeAvailabilityMonitorTestOutput'
+        '480':
+          description: InvalidGatewayRequestException
+          schema:
+            $ref: '#/definitions/InvalidGatewayRequestException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeAvailabilityMonitorTestInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - StorageGateway_20130630.DescribeAvailabilityMonitorTest
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=StorageGateway_20130630.DescribeBandwidthRateLimit':
     post:
       operationId: DescribeBandwidthRateLimit
-      description: '<p>Returns the bandwidth rate limits of a gateway. By default, these limits are not set, which means no bandwidth rate limiting is in effect.</p> <p>This operation only returns a value for a bandwidth rate limit only if the limit is set. If no limits are set for the gateway, then this operation returns only the gateway ARN in the response body. To specify which gateway to describe, use the Amazon Resource Name (ARN) of the gateway in your request.</p>'
+      description: '<p>Returns the bandwidth rate limits of a gateway. By default, these limits are not set, which means no bandwidth rate limiting is in effect. This operation is supported for the stored volume, cached volume and tape gateway types.''</p> <p>This operation only returns a value for a bandwidth rate limit only if the limit is set. If no limits are set for the gateway, then this operation returns only the gateway ARN in the response body. To specify which gateway to describe, use the Amazon Resource Name (ARN) of the gateway in your request.</p>'
       responses:
         '200':
           description: Success
@@ -1207,7 +1244,7 @@ paths:
   '/#X-Amz-Target=StorageGateway_20130630.DescribeChapCredentials':
     post:
       operationId: DescribeChapCredentials
-      description: 'Returns an array of Challenge-Handshake Authentication Protocol (CHAP) credentials information for a specified iSCSI target, one for each target-initiator pair.'
+      description: 'Returns an array of Challenge-Handshake Authentication Protocol (CHAP) credentials information for a specified iSCSI target, one for each target-initiator pair. This operation is supported in the volume and tape gateway types.'
       responses:
         '200':
           description: Success
@@ -1765,7 +1802,7 @@ paths:
   '/#X-Amz-Target=StorageGateway_20130630.DetachVolume':
     post:
       operationId: DetachVolume
-      description: Disconnects a volume from an iSCSI connection and then detaches the volume from the specified gateway. Detaching and attaching a volume enables you to recover your data from one gateway to a different gateway without creating a snapshot. It also makes it easier to move your volumes from an on-premises gateway to a gateway hosted on an Amazon EC2 instance.
+      description: Disconnects a volume from an iSCSI connection and then detaches the volume from the specified gateway. Detaching and attaching a volume enables you to recover your data from one gateway to a different gateway without creating a snapshot. It also makes it easier to move your volumes from an on-premises gateway to a gateway hosted on an Amazon EC2 instance. This operation is only supported in the volume gateway type.
       responses:
         '200':
           description: Success
@@ -2007,7 +2044,7 @@ paths:
   '/#X-Amz-Target=StorageGateway_20130630.ListTagsForResource':
     post:
       operationId: ListTagsForResource
-      description: 'Lists the tags that have been added to the specified resource. This operation is only supported in the cached volume, stored volume and tape gateway type.'
+      description: Lists the tags that have been added to the specified resource. This operation is supported in storage gateways of all types.
       responses:
         '200':
           description: Success
@@ -2259,7 +2296,7 @@ paths:
   '/#X-Amz-Target=StorageGateway_20130630.RefreshCache':
     post:
       operationId: RefreshCache
-      description: '<p>Refreshes the cache for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed or replaced since the gateway last listed the bucket''s contents and cached the results. This operation is only supported in the file gateway type. You can subscribe to be notified through an Amazon CloudWatch event when your RefreshCache operation completes. For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification">Getting Notified About File Operations</a>.</p> <p>When this API is called, it only initiates the refresh operation. When the API call completes and returns a success code, it doesn''t necessarily mean that the file refresh has completed. You should use the refresh-complete notification to determine that the operation has completed before you check for new files on the gateway file share. You can subscribe to be notified through an CloudWatch event when your <code>RefreshCache</code> operation completes. </p>'
+      description: '<p>Refreshes the cache for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed or replaced since the gateway last listed the bucket''s contents and cached the results. This operation is only supported in the file gateway type. You can subscribe to be notified through an Amazon CloudWatch event when your RefreshCache operation completes. For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification">Getting Notified About File Operations</a>.</p> <p>When this API is called, it only initiates the refresh operation. When the API call completes and returns a success code, it doesn''t necessarily mean that the file refresh has completed. You should use the refresh-complete notification to determine that the operation has completed before you check for new files on the gateway file share. You can subscribe to be notified through an CloudWatch event when your <code>RefreshCache</code> operation completes. </p> <p>Throttle limit: This API is asynchronous so the gateway will accept no more than two refreshes at any time. We recommend using the refresh-complete CloudWatch event notification before issuing additional requests. For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification">Getting Notified About File Operations</a>.</p> <p>If you invoke the RefreshCache API when two requests are already being processed, any new request will cause an <code>InvalidGatewayRequestException</code> error because too many requests were sent to the server.</p> <p>For more information, see "https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification".</p>'
       responses:
         '200':
           description: Success
@@ -2296,7 +2333,7 @@ paths:
   '/#X-Amz-Target=StorageGateway_20130630.RemoveTagsFromResource':
     post:
       operationId: RemoveTagsFromResource
-      description: 'Removes one or more tags from the specified resource. This operation is only supported in the cached volume, stored volume and tape gateway types.'
+      description: Removes one or more tags from the specified resource. This operation is supported in storage gateways of all types.
       responses:
         '200':
           description: Success
@@ -2552,6 +2589,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=StorageGateway_20130630.StartAvailabilityMonitorTest':
+    post:
+      operationId: StartAvailabilityMonitorTest
+      description: '<p>Start a test that verifies that the specified gateway is configured for High Availability monitoring in your host environment. This request only initiates the test and that a successful response only indicates that the test was started. It doesn''t indicate that the test passed. For the status of the test, invoke the <code>DescribeAvailabilityMonitorTest</code> API. </p> <note> <p>Starting this test will cause your gateway to go offline for a brief period.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartAvailabilityMonitorTestOutput'
+        '480':
+          description: InvalidGatewayRequestException
+          schema:
+            $ref: '#/definitions/InvalidGatewayRequestException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StartAvailabilityMonitorTestInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - StorageGateway_20130630.StartAvailabilityMonitorTest
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=StorageGateway_20130630.StartGateway':
     post:
       operationId: StartGateway
@@ -2592,7 +2666,7 @@ paths:
   '/#X-Amz-Target=StorageGateway_20130630.UpdateBandwidthRateLimit':
     post:
       operationId: UpdateBandwidthRateLimit
-      description: '<p>Updates the bandwidth rate limits of a gateway. You can update both the upload and download bandwidth rate limit or specify only one of the two. If you don''t set a bandwidth rate limit, the existing rate limit remains.</p> <p>By default, a gateway''s bandwidth rate limits are not set. If you don''t set any limit, the gateway does not have any limitations on its bandwidth usage and could potentially use the maximum available bandwidth.</p> <p>To specify which gateway to update, use the Amazon Resource Name (ARN) of the gateway in your request.</p>'
+      description: '<p>Updates the bandwidth rate limits of a gateway. You can update both the upload and download bandwidth rate limit or specify only one of the two. If you don''t set a bandwidth rate limit, the existing rate limit remains. This operation is supported for the stored volume, cached volume and tape gateway types.''</p> <p>By default, a gateway''s bandwidth rate limits are not set. If you don''t set any limit, the gateway does not have any limitations on its bandwidth usage and could potentially use the maximum available bandwidth.</p> <p>To specify which gateway to update, use the Amazon Resource Name (ARN) of the gateway in your request.</p>'
       responses:
         '200':
           description: Success
@@ -2629,7 +2703,7 @@ paths:
   '/#X-Amz-Target=StorageGateway_20130630.UpdateChapCredentials':
     post:
       operationId: UpdateChapCredentials
-      description: '<p>Updates the Challenge-Handshake Authentication Protocol (CHAP) credentials for a specified iSCSI target. By default, a gateway does not have CHAP enabled; however, for added security, you might use it.</p> <important> <p>When you update CHAP credentials, all existing connections on the target are closed and initiators must reconnect with the new credentials.</p> </important>'
+      description: '<p>Updates the Challenge-Handshake Authentication Protocol (CHAP) credentials for a specified iSCSI target. By default, a gateway does not have CHAP enabled; however, for added security, you might use it. This operation is supported in the volume and tape gateway types.</p> <important> <p>When you update CHAP credentials, all existing connections on the target are closed and initiators must reconnect with the new credentials.</p> </important>'
       responses:
         '200':
           description: Success
@@ -3708,6 +3782,24 @@ definitions:
         $ref: '#/definitions/VolumeARN'
         description: The Amazon Resource Name (ARN) of the volume. Use the <a>ListVolumes</a> operation to return a list of gateway volumes.
     description: A JSON object containing the <a>DeleteVolumeInput$VolumeARN</a> to delete.
+  DescribeAvailabilityMonitorTestOutput:
+    type: object
+    properties:
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
+      Status:
+        $ref: '#/definitions/AvailabilityMonitorTestStatus'
+        description: 'The status of the High Availability monitoring test. If a test hasn''t been performed, the value of this field is null.'
+      StartTime:
+        $ref: '#/definitions/Time'
+        description: 'The time the High Availability monitoring test was started. If a test hasn''t been performed, the value of this field is null.'
+  DescribeAvailabilityMonitorTestInput:
+    type: object
+    required:
+      - GatewayARN
+    properties:
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
   DescribeBandwidthRateLimitOutput:
     type: object
     example:
@@ -3876,7 +3968,10 @@ definitions:
         description: 'The configuration settings for the virtual private cloud (VPC) endpoint for your gateway. '
       CloudWatchLogGroupARN:
         $ref: '#/definitions/CloudWatchLogGroupARN'
-        description: The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that was used to monitor and log events in the gateway.
+        description: The Amazon Resource Name (ARN) of the Amazon CloudWatch Log Group that is used to monitor events in the gateway.
+      HostEnvironment:
+        $ref: '#/definitions/HostEnvironment'
+        description: The type of hypervisor environment used by the host.
     description: 'A JSON object containing the following fields:'
   DescribeGatewayInformationInput:
     type: object
@@ -3961,6 +4056,9 @@ definitions:
       DomainName:
         $ref: '#/definitions/DomainName'
         description: The name of the domain that the gateway is joined to.
+      ActiveDirectoryStatus:
+        $ref: '#/definitions/ActiveDirectoryStatus'
+        description: '<p>Indicates the status of a gateway that is a member of the Active Directory domain.</p> <ul> <li> <p>ACCESS_DENIED: Indicates that the <code>JoinDomain</code> operation failed due to an authentication error.</p> </li> <li> <p>DETACHED: Indicates that gateway is not joined to a domain.</p> </li> <li> <p>JOINED: Indicates that the gateway has successfully joined a domain.</p> </li> <li> <p>JOINING: Indicates that a <code>JoinDomain</code> operation is in progress.</p> </li> <li> <p>NETWORK_ERROR: Indicates that <code>JoinDomain</code> operation failed due to a network or connectivity error.</p> </li> <li> <p>TIMEOUT: Indicates that the <code>JoinDomain</code> operation failed because the operation didn''t complete within the allotted time.</p> </li> <li> <p>UNKNOWN_ERROR: Indicates that the <code>JoinDomain</code> operation failed due to another type of error.</p> </li> </ul>'
       SMBGuestPasswordSet:
         $ref: '#/definitions/Boolean'
         description: 'This value is true if a password for the guest user “smbguest” is set, and otherwise false.'
@@ -4307,6 +4405,9 @@ definitions:
       GatewayARN:
         $ref: '#/definitions/GatewayARN'
         description: The unique Amazon Resource Name (ARN) of the gateway that joined the domain.
+      ActiveDirectoryStatus:
+        $ref: '#/definitions/ActiveDirectoryStatus'
+        description: '<p>Indicates the status of the gateway as a member of the Active Directory domain.</p> <ul> <li> <p>ACCESS_DENIED: Indicates that the <code>JoinDomain</code> operation failed due to an authentication error.</p> </li> <li> <p>DETACHED: Indicates that gateway is not joined to a domain.</p> </li> <li> <p>JOINED: Indicates that the gateway has successfully joined a domain.</p> </li> <li> <p>JOINING: Indicates that a <code>JoinDomain</code> operation is in progress.</p> </li> <li> <p>NETWORK_ERROR: Indicates that <code>JoinDomain</code> operation failed due to a network or connectivity error.</p> </li> <li> <p>TIMEOUT: Indicates that the <code>JoinDomain</code> operation failed because the operation didn''t complete within the allotted time.</p> </li> <li> <p>UNKNOWN_ERROR: Indicates that the <code>JoinDomain</code> operation failed due to another type of error.</p> </li> </ul>'
     description: JoinDomainOutput
   JoinDomainInput:
     type: object
@@ -4328,9 +4429,12 @@ definitions:
       DomainControllers:
         $ref: '#/definitions/Hosts'
         description: 'List of IPv4 addresses, NetBIOS names, or host names of your domain server. If you need to specify the port number include it after the colon (“:”). For example, <code>mydc.mydomain.com:389</code>.'
+      TimeoutInSeconds:
+        $ref: '#/definitions/TimeoutInSeconds'
+        description: 'Specifies the time in seconds, in which the <code>JoinDomain</code> operation must complete. The default is 20 seconds.'
       UserName:
         $ref: '#/definitions/DomainUserName'
-        description: Sets the user name of user who has permission to add the gateway to the Active Directory domain.
+        description: 'Sets the user name of user who has permission to add the gateway to the Active Directory domain. The domain user account should be enabled to join computers to the domain. For example, you can use the domain administrator account or an account with delegated permissions to join computers to the domain.'
       Password:
         $ref: '#/definitions/DomainUserPassword'
         description: Sets the password of the user who has permission to add the gateway to the Active Directory domain.
@@ -4718,6 +4822,18 @@ definitions:
       GatewayARN:
         $ref: '#/definitions/GatewayARN'
     description: A JSON object containing the of the gateway to shut down.
+  StartAvailabilityMonitorTestOutput:
+    type: object
+    properties:
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
+  StartAvailabilityMonitorTestInput:
+    type: object
+    required:
+      - GatewayARN
+    properties:
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
   StartGatewayOutput:
     type: object
     example:
@@ -5065,6 +5181,16 @@ definitions:
     description: The Amazon Resource Name (ARN) of the gateway. Use the <a>ListGateways</a> operation to return a list of gateways for your account and AWS Region.
     minLength: 50
     maxLength: 500
+  ActiveDirectoryStatus:
+    type: string
+    enum:
+      - ACCESS_DENIED
+      - DETACHED
+      - JOINED
+      - JOINING
+      - NETWORK_ERROR
+      - TIMEOUT
+      - UNKNOWN_ERROR
   DiskIds:
     type: array
     items:
@@ -5107,6 +5233,12 @@ definitions:
     description: <p>The authentication method of the file share.</p> <p>Valid values are <code>ActiveDirectory</code> or <code>GuestAccess</code>. The default is <code>ActiveDirectory</code>.</p>
     minLength: 5
     maxLength: 15
+  AvailabilityMonitorTestStatus:
+    type: string
+    enum:
+      - COMPLETE
+      - FAILED
+      - PENDING
   BandwidthDownloadRateLimit:
     type: integer
     minimum: 102400
@@ -5357,6 +5489,9 @@ definitions:
     type: integer
     minimum: 0
     maximum: 6
+  Time:
+    type: string
+    format: date-time
   double:
     type: number
     format: double
@@ -5388,6 +5523,13 @@ definitions:
     type: string
   Ec2InstanceRegion:
     type: string
+  HostEnvironment:
+    type: string
+    enum:
+      - VMWARE
+      - HYPER-V
+      - EC2
+      - OTHER
   HourOfDay:
     type: integer
     minimum: 0
@@ -5655,6 +5797,10 @@ definitions:
     type: string
     minLength: 1
     maxLength: 1024
+  TimeoutInSeconds:
+    type: integer
+    minimum: 0
+    maximum: 3600
   TapeInfos:
     type: array
     description: 'An array of <a>TapeInfo</a> objects, where each object describes an a single tape. If there not tapes in the tape library or VTS, then the <code>TapeInfos</code> is an empty array.'
@@ -5871,9 +6017,6 @@ definitions:
         $ref: '#/definitions/TagValue'
         description: Value of the tag key.
     description: 'A key-value pair that helps you manage, filter, and search for your resource. Allowed characters: letters, white space, and numbers, representable in UTF-8, and the following characters: + - = . _ : /'
-  Time:
-    type: string
-    format: date-time
   TapeStatus:
     type: string
   VTLDeviceARN:

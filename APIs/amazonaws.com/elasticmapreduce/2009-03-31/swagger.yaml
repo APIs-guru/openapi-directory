@@ -854,7 +854,7 @@ paths:
   '/#X-Amz-Target=ElasticMapReduce.ListSteps':
     post:
       operationId: ListSteps
-      description: Provides a list of steps for the cluster in reverse order unless you specify stepIds with the request.
+      description: Provides a list of steps for the cluster in reverse order unless you specify <code>stepIds</code> with the request of filter by <code>StepStates</code>. You can specify a maximum of ten <code>stepIDs</code>.
       responses:
         '200':
           description: Success
@@ -885,6 +885,43 @@ paths:
           type: string
           enum:
             - ElasticMapReduce.ListSteps
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=ElasticMapReduce.ModifyCluster':
+    post:
+      operationId: ModifyCluster
+      description: Modifies the number of steps that can be executed concurrently for the cluster specified using ClusterID.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModifyClusterOutput'
+        '480':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ModifyClusterInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - ElasticMapReduce.ModifyCluster
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1158,7 +1195,7 @@ paths:
   '/#X-Amz-Target=ElasticMapReduce.SetVisibleToAllUsers':
     post:
       operationId: SetVisibleToAllUsers
-      description: <p> <i>This member will be deprecated.</i> </p> <p>Sets whether all AWS Identity and Access Management (IAM) users under your account can access the specified clusters (job flows). This action works on running clusters. You can also set the visibility of a cluster when you launch it using the <code>VisibleToAllUsers</code> parameter of <a>RunJobFlow</a>. The SetVisibleToAllUsers action can be called only by an IAM user who created the cluster or the AWS account that owns the cluster.</p>
+      description: 'Sets the <a>Cluster$VisibleToAllUsers</a> value, which determines whether the cluster is visible to all IAM users of the AWS account associated with the cluster. Only the IAM user who created the cluster or the AWS account root user can call this action. The default value, <code>true</code>, indicates that all IAM users in the AWS account can perform cluster actions if they have the proper IAM policy permissions. If set to <code>false</code>, only the IAM user that created the cluster can perform actions. This action works on running clusters. You can override the default <code>true</code> setting when you create a cluster by using the <code>VisibleToAllUsers</code> parameter with <code>RunJobFlow</code>.'
       responses:
         '200':
           description: Success
@@ -1227,6 +1264,9 @@ definitions:
       InstanceFleetId:
         $ref: '#/definitions/InstanceFleetId'
         description: The unique identifier of the instance fleet.
+      ClusterArn:
+        $ref: '#/definitions/ArnType'
+        description: The Amazon Resource Name of the cluster.
   AddInstanceFleetInput:
     type: object
     required:
@@ -1250,6 +1290,9 @@ definitions:
       InstanceGroupIds:
         $ref: '#/definitions/InstanceGroupIdsList'
         description: Instance group IDs of the newly created instance groups.
+      ClusterArn:
+        $ref: '#/definitions/ArnType'
+        description: The Amazon Resource Name of the cluster.
     description: Output from an AddInstanceGroups call.
   AddInstanceGroupsInput:
     type: object
@@ -1311,6 +1354,9 @@ definitions:
     description: ' The output for the <a>CancelSteps</a> operation. '
   CancelStepsInput:
     type: object
+    required:
+      - ClusterId
+      - StepIds
     properties:
       ClusterId:
         $ref: '#/definitions/XmlStringMaxLen256'
@@ -1318,6 +1364,9 @@ definitions:
       StepIds:
         $ref: '#/definitions/StepIdsList'
         description: The list of <code>StepIDs</code> to cancel. Use <a>ListSteps</a> to get steps and their states for the specified cluster.
+      StepCancellationOption:
+        $ref: '#/definitions/StepCancellationOption'
+        description: 'The option to choose for cancelling <code>RUNNING</code> steps. By default, the value is <code>SEND_INTERRUPT</code>.'
     description: The input argument to the <a>CancelSteps</a> operation.
   CreateSecurityConfigurationOutput:
     type: object
@@ -1613,11 +1662,28 @@ definitions:
         description: The filter to limit the step list based on certain states.
       StepIds:
         $ref: '#/definitions/XmlStringList'
-        description: The filter to limit the step list based on the identifier of the steps.
+        description: The filter to limit the step list based on the identifier of the steps. You can specify a maximum of ten Step IDs. The character constraint applies to the overall length of the array.
       Marker:
         $ref: '#/definitions/Marker'
         description: The pagination token that indicates the next set of results to retrieve.
     description: This input determines which steps to list.
+  ModifyClusterOutput:
+    type: object
+    properties:
+      StepConcurrencyLevel:
+        $ref: '#/definitions/Integer'
+        description: The number of steps that can be executed concurrently.
+  ModifyClusterInput:
+    type: object
+    required:
+      - ClusterId
+    properties:
+      ClusterId:
+        $ref: '#/definitions/String'
+        description: The unique identifier of the cluster.
+      StepConcurrencyLevel:
+        $ref: '#/definitions/Integer'
+        description: 'The number of steps that can be executed concurrently. You can specify a maximum of 256 steps. '
   ModifyInstanceFleetInput:
     type: object
     required:
@@ -1652,6 +1718,9 @@ definitions:
       AutoScalingPolicy:
         $ref: '#/definitions/AutoScalingPolicyDescription'
         description: The automatic scaling policy definition.
+      ClusterArn:
+        $ref: '#/definitions/ArnType'
+        description: The Amazon Resource Name of the cluster.
   PutAutoScalingPolicyInput:
     type: object
     required:
@@ -1717,6 +1786,9 @@ definitions:
       JobFlowId:
         $ref: '#/definitions/XmlStringMaxLen256'
         description: An unique identifier for the job flow.
+      ClusterArn:
+        $ref: '#/definitions/ArnType'
+        description: The Amazon Resource Name of the cluster.
     description: ' The result of the <a>RunJobFlow</a> operation. '
   RunJobFlowInput:
     type: object
@@ -1762,7 +1834,7 @@ definitions:
         description: For Amazon EMR releases 4.0 and later. The list of configurations supplied for the EMR cluster you are creating.
       VisibleToAllUsers:
         $ref: '#/definitions/Boolean'
-        description: '<p> <i>This member will be deprecated.</i> </p> <p>Whether the cluster is visible to all IAM users of the AWS account associated with the cluster. If this value is set to <code>true</code>, all IAM users of that AWS account can view and (if they have the proper policy permissions set) manage the cluster. If it is set to <code>false</code>, only the IAM user that created the cluster can view and manage it.</p>'
+        description: A value of <code>true</code> indicates that all IAM users in the AWS account can perform cluster actions if they have the proper IAM policy permissions. This is the default. A value of <code>false</code> indicates that only the IAM user who created the cluster can perform actions.
       JobFlowRole:
         $ref: '#/definitions/XmlString'
         description: 'Also called instance profile and EC2 role. An IAM role for an EMR cluster. The EC2 instances of the cluster assume this role. The default role is <code>EMR_EC2_DefaultRole</code>. In order to use the default role, you must have already created it using the CLI or console.'
@@ -1793,6 +1865,9 @@ definitions:
       KerberosAttributes:
         $ref: '#/definitions/KerberosAttributes'
         description: 'Attributes for Kerberos configuration when Kerberos authentication is enabled using a security configuration. For more information see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html">Use Kerberos Authentication</a> in the <i>EMR Management Guide</i>.'
+      StepConcurrencyLevel:
+        $ref: '#/definitions/Integer'
+        description: Specifies the number of steps that can be executed concurrently. The default value is <code>1</code>. The maximum value is <code>256</code>.
     description: ' Input to the <a>RunJobFlow</a> operation. '
   SetTerminationProtectionInput:
     type: object
@@ -1815,11 +1890,11 @@ definitions:
     properties:
       JobFlowIds:
         $ref: '#/definitions/XmlStringList'
-        description: Identifiers of the job flows to receive the new visibility setting.
+        description: The unique identifier of the job flow (cluster).
       VisibleToAllUsers:
         $ref: '#/definitions/Boolean'
-        description: '<p> <i>This member will be deprecated.</i> </p> <p>Whether the specified clusters are visible to all IAM users of the AWS account associated with the cluster. If this value is set to True, all IAM users of that AWS account can view and, if they have the proper IAM policy permissions set, manage the clusters. If it is set to False, only the IAM user that created a cluster can view and manage it.</p>'
-    description: <p> <i>This member will be deprecated.</i> </p> <p>The input to the SetVisibleToAllUsers action.</p>
+        description: A value of <code>true</code> indicates that all IAM users in the AWS account can perform cluster actions if they have the proper IAM policy permissions. This is the default. A value of <code>false</code> indicates that only the IAM user who created the cluster can perform actions.
+    description: The input to the SetVisibleToAllUsers action.
   TerminateJobFlowsInput:
     type: object
     required:
@@ -1867,6 +1942,10 @@ definitions:
     description: '<p>The configuration that defines an instance fleet.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
   InstanceFleetId:
     type: string
+  ArnType:
+    type: string
+    minLength: 20
+    maxLength: 2048
   InstanceGroupConfigList:
     type: array
     items:
@@ -1925,10 +2004,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Application'
-  ArnType:
-    type: string
-    minLength: 20
-    maxLength: 2048
   ScalingConstraints:
     type: object
     required:
@@ -2107,6 +2182,11 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/CancelStepsInfo'
+  StepCancellationOption:
+    type: string
+    enum:
+      - SEND_INTERRUPT
+      - TERMINATE_PROCESS
   ComparisonOperator:
     type: string
     enum:
@@ -2175,7 +2255,7 @@ definitions:
         description: Determines how the metric specified by <code>MetricName</code> is compared to the value specified by <code>Threshold</code>.
       EvaluationPeriods:
         $ref: '#/definitions/Integer'
-        description: 'The number of periods, expressed in seconds using <code>Period</code>, during which the alarm condition must exist before the alarm triggers automatic scaling activity. The default value is <code>1</code>.'
+        description: 'The number of periods, in five-minute increments, during which the alarm condition must exist before the alarm triggers automatic scaling activity. The default value is <code>1</code>.'
       MetricName:
         $ref: '#/definitions/String'
         description: The name of the CloudWatch metric that is watched to determine an alarm condition.
@@ -2296,6 +2376,10 @@ definitions:
         $ref: '#/definitions/XmlStringMaxLen256'
         description: The Active Directory password for <code>ADDomainJoinUser</code>.
     description: 'Attributes for Kerberos configuration when Kerberos authentication is enabled using a security configuration. For more information see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html">Use Kerberos Authentication</a> in the <i>EMR Management Guide</i>.'
+  OptionalArnType:
+    type: string
+    minLength: 0
+    maxLength: 2048
   Cluster:
     type: object
     properties:
@@ -2334,7 +2418,7 @@ definitions:
         description: 'Indicates whether Amazon EMR will lock the cluster to prevent the EC2 instances from being terminated by an API call or user intervention, or in the event of a cluster error.'
       VisibleToAllUsers:
         $ref: '#/definitions/Boolean'
-        description: '<p> <i>This member will be deprecated.</i> </p> <p>Indicates whether the cluster is visible to all IAM users of the AWS account associated with the cluster. If this value is set to <code>true</code>, all IAM users of that AWS account can view and manage the cluster if they have the proper policy permissions set. If this value is <code>false</code>, only the IAM user that created the cluster can view and manage it. This value can be changed using the <a>SetVisibleToAllUsers</a> action.</p>'
+        description: 'Indicates whether the cluster is visible to all IAM users of the AWS account associated with the cluster. The default value, <code>true</code>, indicates that all IAM users in the AWS account can perform cluster actions if they have the proper IAM policy permissions. If this value is <code>false</code>, only the IAM user that created the cluster can perform actions. This value can be changed on a running cluster by using the <a>SetVisibleToAllUsers</a> action. You can override the default value of <code>true</code> when you create a cluster by using the <code>VisibleToAllUsers</code> parameter of the <code>RunJobFlow</code> action.'
       Applications:
         $ref: '#/definitions/ApplicationList'
         description: The applications installed on this cluster.
@@ -2374,6 +2458,15 @@ definitions:
       KerberosAttributes:
         $ref: '#/definitions/KerberosAttributes'
         description: 'Attributes for Kerberos configuration when Kerberos authentication is enabled using a security configuration. For more information see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html">Use Kerberos Authentication</a> in the <i>EMR Management Guide</i>.'
+      ClusterArn:
+        $ref: '#/definitions/ArnType'
+        description: The Amazon Resource Name of the cluster.
+      StepConcurrencyLevel:
+        $ref: '#/definitions/Integer'
+        description: Specifies the number of steps that can be executed concurrently.
+      OutpostArn:
+        $ref: '#/definitions/OptionalArnType'
+        description: ' The Amazon Resource Name (ARN) of the Outpost where the cluster is launched. '
     description: The detailed description of the cluster.
   ClusterState:
     type: string
@@ -2438,6 +2531,12 @@ definitions:
       NormalizedInstanceHours:
         $ref: '#/definitions/Integer'
         description: 'An approximation of the cost of the cluster, represented in m1.small/hours. This value is incremented one time for every hour an m1.small instance runs. Larger instances are weighted more, so an EC2 instance that is roughly four times more expensive would result in the normalized instance hours being incremented by four. This result is only an approximation and does not reflect the actual billing rate.'
+      ClusterArn:
+        $ref: '#/definitions/ArnType'
+        description: The Amazon Resource Name of the cluster.
+      OutpostArn:
+        $ref: '#/definitions/OptionalArnType'
+        description: ' The Amazon Resource Name (ARN) of the Outpost where the cluster is launched. '
     description: The summary description of the cluster.
   ClusterSummaryList:
     type: array
@@ -2904,7 +3003,7 @@ definitions:
         description: 'The type of the instance group. Valid values are MASTER, CORE or TASK.'
       BidPrice:
         $ref: '#/definitions/String'
-        description: '<p>The maximum Spot price your are willing to pay for EC2 instances.</p> <p>An optional, nullable field that applies if the <code>MarketType</code> for the instance group is specified as <code>SPOT</code>. Specify the maximum spot price in USD. If the value is NULL and <code>SPOT</code> is specified, the maximum Spot price is set equal to the On-Demand price.</p>'
+        description: 'The bid price for each EC2 Spot instance type as defined by <code>InstanceType</code>. Expressed in USD. If neither <code>BidPrice</code> nor <code>BidPriceAsPercentageOfOnDemandPrice</code> is provided, <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%.'
       InstanceType:
         $ref: '#/definitions/InstanceType'
         description: The EC2 instance type for all instances in the instance group.
@@ -2966,7 +3065,7 @@ definitions:
         description: The role of the instance group in the cluster.
       BidPrice:
         $ref: '#/definitions/XmlStringMaxLen256'
-        description: '<p>The maximum Spot price your are willing to pay for EC2 instances.</p> <p>An optional, nullable field that applies if the <code>MarketType</code> for the instance group is specified as <code>SPOT</code>. Specify the maximum spot price in USD. If the value is NULL and <code>SPOT</code> is specified, the maximum Spot price is set equal to the On-Demand price.</p>'
+        description: 'The bid price for each EC2 Spot instance type as defined by <code>InstanceType</code>. Expressed in USD. If neither <code>BidPrice</code> nor <code>BidPriceAsPercentageOfOnDemandPrice</code> is provided, <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%.'
       InstanceType:
         $ref: '#/definitions/InstanceType'
         description: The EC2 instance type for all instances in the instance group.
@@ -3022,7 +3121,7 @@ definitions:
         description: Instance group role in the cluster
       BidPrice:
         $ref: '#/definitions/XmlStringMaxLen256'
-        description: '<p>The maximum Spot price your are willing to pay for EC2 instances.</p> <p>An optional, nullable field that applies if the <code>MarketType</code> for the instance group is specified as <code>SPOT</code>. Specified in USD. If the value is NULL and <code>SPOT</code> is specified, the maximum Spot price is set equal to the On-Demand price.</p>'
+        description: 'The bid price for each EC2 Spot instance type as defined by <code>InstanceType</code>. Expressed in USD. If neither <code>BidPrice</code> nor <code>BidPriceAsPercentageOfOnDemandPrice</code> is provided, <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%.'
       InstanceType:
         $ref: '#/definitions/InstanceType'
         description: EC2 instance type.
@@ -3344,7 +3443,7 @@ definitions:
         description: A list of strings set by third party software when the job flow is launched. If you are not using third party software to manage the job flow this value is empty.
       VisibleToAllUsers:
         $ref: '#/definitions/Boolean'
-        description: '<p> <i>This member will be deprecated.</i> </p> <p>Specifies whether the cluster is visible to all IAM users of the AWS account associated with the cluster. If this value is set to <code>true</code>, all IAM users of that AWS account can view and (if they have the proper policy permissions set) manage the cluster. If it is set to <code>false</code>, only the IAM user that created the cluster can view and manage it. This value can be changed using the <a>SetVisibleToAllUsers</a> action.</p>'
+        description: 'Indicates whether the cluster is visible to all IAM users of the AWS account associated with the cluster. The default value, <code>true</code>, indicates that all IAM users in the AWS account can perform cluster actions if they have the proper IAM policy permissions. If this value is <code>false</code>, only the IAM user that created the cluster can perform actions. This value can be changed on a running cluster by using the <a>SetVisibleToAllUsers</a> action. You can override the default value of <code>true</code> when you create a cluster by using the <code>VisibleToAllUsers</code> parameter of the <code>RunJobFlow</code> action.'
       JobFlowRole:
         $ref: '#/definitions/XmlString'
         description: The IAM role that was specified when the job flow was launched. The EC2 instances of the job flow assume this role.

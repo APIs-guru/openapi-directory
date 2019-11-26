@@ -315,7 +315,7 @@ paths:
   '/#X-Amz-Target=DynamoDB_20120810.CreateGlobalTable':
     post:
       operationId: CreateGlobalTable
-      description: '<p>Creates a global table from an existing table. A global table creates a replication relationship between two or more DynamoDB tables with the same table name in the provided Regions. </p> <p>If you want to add a new replica table to a global table, each of the following conditions must be true:</p> <ul> <li> <p>The table must have the same primary key as all of the other replicas.</p> </li> <li> <p>The table must have the same name as all of the other replicas.</p> </li> <li> <p>The table must have DynamoDB Streams enabled, with the stream containing both the new and the old images of the item.</p> </li> <li> <p>None of the replica tables in the global table can contain any data.</p> </li> </ul> <p> If global secondary indexes are specified, then the following conditions must also be met: </p> <ul> <li> <p> The global secondary indexes must have the same name. </p> </li> <li> <p> The global secondary indexes must have the same hash key and sort key (if present). </p> </li> </ul> <important> <p> Write capacity settings should be set consistently across your replica tables and secondary indexes. DynamoDB strongly recommends enabling auto scaling to manage the write capacity settings for all of your global tables replicas and indexes. </p> <p> If you prefer to manage write capacity settings manually, you should provision equal replicated write capacity units to your replica tables. You should also provision equal replicated write capacity units to matching secondary indexes across your global table. </p> </important>'
+      description: '<p>Creates a global table from an existing table. A global table creates a replication relationship between two or more DynamoDB tables with the same table name in the provided Regions. </p> <note> <p>This method only applies to <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html">Version 2017.11.29</a> of global tables.</p> </note> <p>If you want to add a new replica table to a global table, each of the following conditions must be true:</p> <ul> <li> <p>The table must have the same primary key as all of the other replicas.</p> </li> <li> <p>The table must have the same name as all of the other replicas.</p> </li> <li> <p>The table must have DynamoDB Streams enabled, with the stream containing both the new and the old images of the item.</p> </li> <li> <p>None of the replica tables in the global table can contain any data.</p> </li> </ul> <p> If global secondary indexes are specified, then the following conditions must also be met: </p> <ul> <li> <p> The global secondary indexes must have the same name. </p> </li> <li> <p> The global secondary indexes must have the same hash key and sort key (if present). </p> </li> </ul> <important> <p> Write capacity settings should be set consistently across your replica tables and secondary indexes. DynamoDB strongly recommends enabling auto scaling to manage the write capacity settings for all of your global tables replicas and indexes. </p> <p> If you prefer to manage write capacity settings manually, you should provision equal replicated write capacity units to your replica tables. You should also provision equal replicated write capacity units to matching secondary indexes across your global table. </p> </important>'
       responses:
         '200':
           description: Success
@@ -651,7 +651,7 @@ paths:
   '/#X-Amz-Target=DynamoDB_20120810.DescribeGlobalTable':
     post:
       operationId: DescribeGlobalTable
-      description: Returns information about the specified global table.
+      description: '<p>Returns information about the specified global table.</p> <note> <p>This method only applies to <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html">Version 2017.11.29</a> of global tables.</p> </note>'
       responses:
         '200':
           description: Success
@@ -688,7 +688,7 @@ paths:
   '/#X-Amz-Target=DynamoDB_20120810.DescribeGlobalTableSettings':
     post:
       operationId: DescribeGlobalTableSettings
-      description: Describes Region-specific settings for a global table.
+      description: '<p>Describes Region-specific settings for a global table.</p> <note> <p>This method only applies to <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html">Version 2017.11.29</a> of global tables.</p> </note>'
       responses:
         '200':
           description: Success
@@ -784,6 +784,43 @@ paths:
           type: string
           enum:
             - DynamoDB_20120810.DescribeTable
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=DynamoDB_20120810.DescribeTableReplicaAutoScaling':
+    post:
+      operationId: DescribeTableReplicaAutoScaling
+      description: '<p>Describes auto scaling settings across replicas of the global table at once.</p> <note> <p>This method only applies to <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html">Version 2019.11.21</a> of global tables.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeTableReplicaAutoScalingOutput'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeTableReplicaAutoScalingInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DynamoDB_20120810.DescribeTableReplicaAutoScaling
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -910,7 +947,7 @@ paths:
   '/#X-Amz-Target=DynamoDB_20120810.ListGlobalTables':
     post:
       operationId: ListGlobalTables
-      description: Lists all global tables that have a replica in the specified Region.
+      description: '<p>Lists all global tables that have a replica in the specified Region.</p> <note> <p>This method only applies to <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html">Version 2017.11.29</a> of global tables.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1734,6 +1771,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=DynamoDB_20120810.UpdateTableReplicaAutoScaling':
+    post:
+      operationId: UpdateTableReplicaAutoScaling
+      description: '<p>Updates auto scaling settings on your global tables at once.</p> <note> <p>This method only applies to <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html">Version 2019.11.21</a> of global tables.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateTableReplicaAutoScalingOutput'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateTableReplicaAutoScalingInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DynamoDB_20120810.UpdateTableReplicaAutoScaling
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=DynamoDB_20120810.UpdateTimeToLive':
     post:
       operationId: UpdateTimeToLive
@@ -2183,6 +2265,20 @@ definitions:
         $ref: '#/definitions/TableName'
         description: The name of the table to describe.
     description: Represents the input of a <code>DescribeTable</code> operation.
+  DescribeTableReplicaAutoScalingOutput:
+    type: object
+    properties:
+      TableAutoScalingDescription:
+        $ref: '#/definitions/TableAutoScalingDescription'
+        description: Represents the auto scaling properties of the table.
+  DescribeTableReplicaAutoScalingInput:
+    type: object
+    required:
+      - TableName
+    properties:
+      TableName:
+        $ref: '#/definitions/TableName'
+        description: The name of the table.
   DescribeTimeToLiveOutput:
     type: object
     properties:
@@ -2891,7 +2987,32 @@ definitions:
       SSESpecification:
         $ref: '#/definitions/SSESpecification'
         description: The new server-side encryption settings for the specified table.
+      ReplicaUpdates:
+        $ref: '#/definitions/ReplicationGroupUpdateList'
+        description: '<p>A list of replica update actions (create, delete, or update) for the table.</p> <note> <p>This property only applies to <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html">Version 2019.11.21</a> of global tables.</p> </note>'
     description: Represents the input of an <code>UpdateTable</code> operation.
+  UpdateTableReplicaAutoScalingOutput:
+    type: object
+    properties:
+      TableAutoScalingDescription:
+        $ref: '#/definitions/TableAutoScalingDescription'
+        description: Returns information about the auto scaling settings of a table with replicas.
+  UpdateTableReplicaAutoScalingInput:
+    type: object
+    required:
+      - TableName
+    properties:
+      GlobalSecondaryIndexUpdates:
+        $ref: '#/definitions/GlobalSecondaryIndexAutoScalingUpdateList'
+        description: Represents the auto scaling settings of the global secondary indexes of the replica to be updated.
+      TableName:
+        $ref: '#/definitions/TableName'
+        description: The name of the global table to be updated.
+      ProvisionedWriteCapacityAutoScalingUpdate:
+        $ref: '#/definitions/AutoScalingSettingsUpdate'
+      ReplicaUpdates:
+        $ref: '#/definitions/ReplicaAutoScalingUpdateList'
+        description: Represents the auto scaling settings of replicas of the table that will be modified.
   UpdateTimeToLiveOutput:
     type: object
     properties:
@@ -3680,6 +3801,38 @@ definitions:
         $ref: '#/definitions/RegionName'
         description: The Region of the replica to be added.
     description: Represents a replica to be added.
+  KMSMasterKeyId:
+    type: string
+  ProvisionedThroughputOverride:
+    type: object
+    properties:
+      ReadCapacityUnits:
+        $ref: '#/definitions/PositiveLongObject'
+        description: 'Replica-specific read capacity units. If not specified, uses the source table''s read capacity settings.'
+    description: 'Replica-specific provisioned throughput settings. If not specified, uses the source table''s provisioned throughput settings.'
+  ReplicaGlobalSecondaryIndexList:
+    type: array
+    items:
+      $ref: '#/definitions/ReplicaGlobalSecondaryIndex'
+    minItems: 1
+  CreateReplicationGroupMemberAction:
+    type: object
+    required:
+      - RegionName
+    properties:
+      RegionName:
+        $ref: '#/definitions/RegionName'
+        description: The Region where the new replica will be created.
+      KMSMasterKeyId:
+        $ref: '#/definitions/KMSMasterKeyId'
+        description: 'The AWS KMS customer master key (CMK) that should be used for AWS KMS encryption in the new replica. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note that you should only provide this parameter if the key is different from the default DynamoDB KMS master key alias/aws/dynamodb.'
+      ProvisionedThroughputOverride:
+        $ref: '#/definitions/ProvisionedThroughputOverride'
+        description: 'Replica-specific provisioned throughput. If not specified, uses the source table''s provisioned throughput settings.'
+      GlobalSecondaryIndexes:
+        $ref: '#/definitions/ReplicaGlobalSecondaryIndexList'
+        description: Replica-specific global secondary index settings.
+    description: Represents a replica to be created.
   LocalSecondaryIndexList:
     type: array
     items:
@@ -3690,6 +3843,8 @@ definitions:
       $ref: '#/definitions/GlobalSecondaryIndex'
   StreamSpecification:
     type: object
+    required:
+      - StreamEnabled
     properties:
       StreamEnabled:
         $ref: '#/definitions/StreamEnabled'
@@ -3709,7 +3864,7 @@ definitions:
         description: '<p>Server-side encryption type. The only supported value is:</p> <ul> <li> <p> <code>KMS</code> - Server-side encryption that uses AWS Key Management Service. The key is stored in your account and is managed by AWS KMS (AWS KMS charges apply).</p> </li> </ul>'
       KMSMasterKeyId:
         $ref: '#/definitions/KMSMasterKeyId'
-        description: 'The KMS customer master key (CMK) that should be used for the AWS KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note that you should only provide this parameter if the key is different from the default DynamoDB customer master key alias/aws/dynamodb.'
+        description: 'The AWS KMS customer master key (CMK) that should be used for the AWS KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note that you should only provide this parameter if the key is different from the default DynamoDB customer master key alias/aws/dynamodb.'
     description: Represents the settings used to enable server-side encryption.
   TagList:
     type: array
@@ -3766,6 +3921,12 @@ definitions:
       LatestStreamArn:
         $ref: '#/definitions/StreamArn'
         description: The Amazon Resource Name (ARN) that uniquely identifies the latest stream for this table.
+      GlobalTableVersion:
+        $ref: '#/definitions/String'
+        description: 'Represents the version of <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalTables.html">global tables</a> in use, if the table is replicated across AWS Regions.'
+      Replicas:
+        $ref: '#/definitions/ReplicaDescriptionList'
+        description: Represents replicas of the table.
       RestoreSummary:
         $ref: '#/definitions/RestoreSummary'
         description: Contains details for the restore.
@@ -3838,6 +3999,15 @@ definitions:
         $ref: '#/definitions/RegionName'
         description: The Region of the replica to be removed.
     description: Represents a replica to be removed.
+  DeleteReplicationGroupMemberAction:
+    type: object
+    required:
+      - RegionName
+    properties:
+      RegionName:
+        $ref: '#/definitions/RegionName'
+        description: The Region where the replica exists.
+    description: Represents a replica to be deleted.
   DeleteRequest:
     type: object
     required:
@@ -3855,6 +4025,19 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ReplicaSettingsDescription'
+  TableAutoScalingDescription:
+    type: object
+    properties:
+      TableName:
+        $ref: '#/definitions/TableName'
+        description: The name of the table.
+      TableStatus:
+        $ref: '#/definitions/TableStatus'
+        description: '<p>The current state of the table:</p> <ul> <li> <p> <code>CREATING</code> - The table is being created.</p> </li> <li> <p> <code>UPDATING</code> - The table is being updated.</p> </li> <li> <p> <code>DELETING</code> - The table is being deleted.</p> </li> <li> <p> <code>ACTIVE</code> - The table is ready for use.</p> </li> </ul>'
+      Replicas:
+        $ref: '#/definitions/ReplicaAutoScalingDescriptionList'
+        description: Represents replicas of the global table.
+    description: Represents the auto scaling configuration for a global table.
   TimeToLiveDescription:
     type: object
     properties:
@@ -3945,6 +4128,20 @@ definitions:
         $ref: '#/definitions/ProvisionedThroughput'
         description: '<p>Represents the provisioned throughput settings for the specified global secondary index.</p> <p>For current minimum and maximum provisioned throughput values, see <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html">Limits</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>'
     description: Represents the properties of a global secondary index.
+  GlobalSecondaryIndexAutoScalingUpdate:
+    type: object
+    properties:
+      IndexName:
+        $ref: '#/definitions/IndexName'
+        description: The name of the global secondary index.
+      ProvisionedWriteCapacityAutoScalingUpdate:
+        $ref: '#/definitions/AutoScalingSettingsUpdate'
+    description: Represents the auto scaling settings of a global secondary index for a global table that will be modified.
+  GlobalSecondaryIndexAutoScalingUpdateList:
+    type: array
+    items:
+      $ref: '#/definitions/GlobalSecondaryIndexAutoScalingUpdate'
+    minItems: 1
   IndexStatus:
     type: string
     enum:
@@ -4138,8 +4335,6 @@ definitions:
     minItems: 1
     maxItems: 25
   KMSMasterKeyArn:
-    type: string
-  KMSMasterKeyId:
     type: string
   KeyConditions:
     type: object
@@ -4339,13 +4534,140 @@ definitions:
         $ref: '#/definitions/RegionName'
         description: The Region where the replica needs to be created.
     description: Represents the properties of a replica.
+  ReplicaGlobalSecondaryIndexAutoScalingDescriptionList:
+    type: array
+    items:
+      $ref: '#/definitions/ReplicaGlobalSecondaryIndexAutoScalingDescription'
+  ReplicaStatus:
+    type: string
+    enum:
+      - CREATING
+      - CREATION_FAILED
+      - UPDATING
+      - DELETING
+      - ACTIVE
+  ReplicaAutoScalingDescription:
+    type: object
+    properties:
+      RegionName:
+        $ref: '#/definitions/RegionName'
+        description: The Region where the replica exists.
+      GlobalSecondaryIndexes:
+        $ref: '#/definitions/ReplicaGlobalSecondaryIndexAutoScalingDescriptionList'
+        description: Replica-specific global secondary index auto scaling settings.
+      ReplicaProvisionedReadCapacityAutoScalingSettings:
+        $ref: '#/definitions/AutoScalingSettingsDescription'
+      ReplicaProvisionedWriteCapacityAutoScalingSettings:
+        $ref: '#/definitions/AutoScalingSettingsDescription'
+      ReplicaStatus:
+        $ref: '#/definitions/ReplicaStatus'
+        description: '<p>The current state of the replica:</p> <ul> <li> <p> <code>CREATING</code> - The replica is being created.</p> </li> <li> <p> <code>UPDATING</code> - The replica is being updated.</p> </li> <li> <p> <code>DELETING</code> - The replica is being deleted.</p> </li> <li> <p> <code>ACTIVE</code> - The replica is ready for use.</p> </li> </ul>'
+    description: Represents the auto scaling settings of the replica.
+  ReplicaAutoScalingDescriptionList:
+    type: array
+    items:
+      $ref: '#/definitions/ReplicaAutoScalingDescription'
+  ReplicaGlobalSecondaryIndexAutoScalingUpdateList:
+    type: array
+    items:
+      $ref: '#/definitions/ReplicaGlobalSecondaryIndexAutoScalingUpdate'
+  ReplicaAutoScalingUpdate:
+    type: object
+    required:
+      - RegionName
+    properties:
+      RegionName:
+        $ref: '#/definitions/RegionName'
+        description: The Region where the replica exists.
+      ReplicaGlobalSecondaryIndexUpdates:
+        $ref: '#/definitions/ReplicaGlobalSecondaryIndexAutoScalingUpdateList'
+        description: Represents the auto scaling settings of global secondary indexes that will be modified.
+      ReplicaProvisionedReadCapacityAutoScalingUpdate:
+        $ref: '#/definitions/AutoScalingSettingsUpdate'
+    description: Represents the auto scaling settings of a replica that will be modified.
+  ReplicaAutoScalingUpdateList:
+    type: array
+    items:
+      $ref: '#/definitions/ReplicaAutoScalingUpdate'
+    minItems: 1
+  ReplicaStatusDescription:
+    type: string
+  ReplicaStatusPercentProgress:
+    type: string
+  ReplicaGlobalSecondaryIndexDescriptionList:
+    type: array
+    items:
+      $ref: '#/definitions/ReplicaGlobalSecondaryIndexDescription'
   ReplicaDescription:
     type: object
     properties:
       RegionName:
         $ref: '#/definitions/RegionName'
         description: The name of the Region.
+      ReplicaStatus:
+        $ref: '#/definitions/ReplicaStatus'
+        description: '<p>The current state of the replica:</p> <ul> <li> <p> <code>CREATING</code> - The replica is being created.</p> </li> <li> <p> <code>UPDATING</code> - The replica is being updated.</p> </li> <li> <p> <code>DELETING</code> - The replica is being deleted.</p> </li> <li> <p> <code>ACTIVE</code> - The replica is ready for use.</p> </li> </ul>'
+      ReplicaStatusDescription:
+        $ref: '#/definitions/ReplicaStatusDescription'
+        description: Detailed information about the replica status.
+      ReplicaStatusPercentProgress:
+        $ref: '#/definitions/ReplicaStatusPercentProgress'
+        description: 'Specifies the progress of a Create, Update, or Delete action on the replica as a percentage.'
+      KMSMasterKeyId:
+        $ref: '#/definitions/KMSMasterKeyId'
+        description: The AWS KMS customer master key (CMK) of the replica that will be used for AWS KMS encryption.
+      ProvisionedThroughputOverride:
+        $ref: '#/definitions/ProvisionedThroughputOverride'
+        description: 'Replica-specific provisioned throughput. If not described, uses the source table''s provisioned throughput settings.'
+      GlobalSecondaryIndexes:
+        $ref: '#/definitions/ReplicaGlobalSecondaryIndexDescriptionList'
+        description: Replica-specific global secondary index settings.
     description: Contains the details of the replica.
+  ReplicaGlobalSecondaryIndex:
+    type: object
+    required:
+      - IndexName
+    properties:
+      IndexName:
+        $ref: '#/definitions/IndexName'
+        description: The name of the global secondary index.
+      ProvisionedThroughputOverride:
+        $ref: '#/definitions/ProvisionedThroughputOverride'
+        description: 'Replica table GSI-specific provisioned throughput. If not specified, uses the source table GSI''s read capacity settings.'
+    description: Represents the properties of a replica global secondary index.
+  ReplicaGlobalSecondaryIndexAutoScalingDescription:
+    type: object
+    properties:
+      IndexName:
+        $ref: '#/definitions/IndexName'
+        description: The name of the global secondary index.
+      IndexStatus:
+        $ref: '#/definitions/IndexStatus'
+        description: '<p>The current state of the replica global secondary index:</p> <ul> <li> <p> <code>CREATING</code> - The index is being created.</p> </li> <li> <p> <code>UPDATING</code> - The index is being updated.</p> </li> <li> <p> <code>DELETING</code> - The index is being deleted.</p> </li> <li> <p> <code>ACTIVE</code> - The index is ready for use.</p> </li> </ul>'
+      ProvisionedReadCapacityAutoScalingSettings:
+        $ref: '#/definitions/AutoScalingSettingsDescription'
+      ProvisionedWriteCapacityAutoScalingSettings:
+        $ref: '#/definitions/AutoScalingSettingsDescription'
+    description: Represents the auto scaling configuration for a replica global secondary index.
+  ReplicaGlobalSecondaryIndexAutoScalingUpdate:
+    type: object
+    properties:
+      IndexName:
+        $ref: '#/definitions/IndexName'
+        description: The name of the global secondary index.
+      ProvisionedReadCapacityAutoScalingUpdate:
+        $ref: '#/definitions/AutoScalingSettingsUpdate'
+    description: Represents the auto scaling settings of a global secondary index for a replica that will be modified.
+  ReplicaGlobalSecondaryIndexDescription:
+    type: object
+    properties:
+      IndexName:
+        $ref: '#/definitions/IndexName'
+        description: The name of the global secondary index.
+      ProvisionedThroughputOverride:
+        $ref: '#/definitions/ProvisionedThroughputOverride'
+        description: 'If not described, uses the source table GSI''s read capacity settings.'
+    description: Represents the properties of a replica global secondary index.
   ReplicaGlobalSecondaryIndexSettingsDescription:
     type: object
     required:
@@ -4395,13 +4717,6 @@ definitions:
       $ref: '#/definitions/ReplicaGlobalSecondaryIndexSettingsUpdate'
     minItems: 1
     maxItems: 20
-  ReplicaStatus:
-    type: string
-    enum:
-      - CREATING
-      - UPDATING
-      - DELETING
-      - ACTIVE
   ReplicaSettingsDescription:
     type: object
     required:
@@ -4470,6 +4785,42 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ReplicaUpdate'
+  UpdateReplicationGroupMemberAction:
+    type: object
+    required:
+      - RegionName
+    properties:
+      RegionName:
+        $ref: '#/definitions/RegionName'
+        description: The Region where the replica exists.
+      KMSMasterKeyId:
+        $ref: '#/definitions/KMSMasterKeyId'
+        description: 'The AWS KMS customer master key (CMK) of the replica that should be used for AWS KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note that you should only provide this parameter if the key is different from the default DynamoDB KMS master key alias/aws/dynamodb.'
+      ProvisionedThroughputOverride:
+        $ref: '#/definitions/ProvisionedThroughputOverride'
+        description: 'Replica-specific provisioned throughput. If not specified, uses the source table''s provisioned throughput settings.'
+      GlobalSecondaryIndexes:
+        $ref: '#/definitions/ReplicaGlobalSecondaryIndexList'
+        description: Replica-specific global secondary index settings.
+    description: Represents a replica to be modified.
+  ReplicationGroupUpdate:
+    type: object
+    properties:
+      Create:
+        $ref: '#/definitions/CreateReplicationGroupMemberAction'
+        description: The parameters required for creating a replica for the table.
+      Update:
+        $ref: '#/definitions/UpdateReplicationGroupMemberAction'
+        description: The parameters required for updating a replica for the table.
+      Delete:
+        $ref: '#/definitions/DeleteReplicationGroupMemberAction'
+        description: The parameters required for deleting a replica for the table.
+    description: '<p>Represents one of the following:</p> <ul> <li> <p>A new replica to be added to an existing regional table or global table. This request invokes the <code>CreateTableReplica</code> action in the destination Region.</p> </li> <li> <p>New parameters for an existing replica. This request invokes the <code>UpdateTable</code> action in the destination Region.</p> </li> <li> <p>An existing replica to be deleted. The request invokes the <code>DeleteTableReplica</code> action in the destination Region, deleting the replica and all if its items in the destination Region.</p> </li> </ul>'
+  ReplicationGroupUpdateList:
+    type: array
+    items:
+      $ref: '#/definitions/ReplicationGroupUpdate'
+    minItems: 1
   RestoreInProgress:
     type: boolean
   RestoreSummary:
@@ -4515,7 +4866,7 @@ definitions:
         description: '<p>Server-side encryption type. The only supported value is:</p> <ul> <li> <p> <code>KMS</code> - Server-side encryption that uses AWS Key Management Service. The key is stored in your account and is managed by AWS KMS (AWS KMS charges apply).</p> </li> </ul>'
       KMSMasterKeyArn:
         $ref: '#/definitions/KMSMasterKeyArn'
-        description: The KMS customer master key (CMK) ARN used for the AWS KMS encryption.
+        description: The AWS KMS customer master key (CMK) ARN used for the AWS KMS encryption.
     description: The description of the server-side encryption status on the specified table.
   SSEEnabled:
     type: boolean

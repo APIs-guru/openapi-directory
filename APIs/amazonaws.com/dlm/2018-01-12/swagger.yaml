@@ -673,6 +673,17 @@ definitions:
   UpdateLifecyclePolicyResponse:
     type: object
     properties: {}
+  AvailabilityZone:
+    type: string
+    pattern: '([a-z]+-){2,3}\d[a-z]'
+    minLength: 0
+    maxLength: 16
+  AvailabilityZoneList:
+    type: array
+    items:
+      $ref: '#/definitions/AvailabilityZone'
+    minItems: 1
+    maxItems: 10
   CopyTags:
     type: boolean
   Count:
@@ -775,6 +786,31 @@ definitions:
     properties: {}
   ExcludeBootVolume:
     type: boolean
+  RetentionIntervalUnitValues:
+    type: string
+    enum:
+      - DAYS
+      - WEEKS
+      - MONTHS
+      - YEARS
+  FastRestoreRule:
+    type: object
+    required:
+      - AvailabilityZones
+    properties:
+      Count:
+        $ref: '#/definitions/Count'
+        description: The number of snapshots to be enabled with fast snapshot restore.
+      Interval:
+        $ref: '#/definitions/Interval'
+        description: 'The amount of time to enable fast snapshot restore. The maximum is 100 years. This is equivalent to 1200 months, 5200 weeks, or 36500 days.'
+      IntervalUnit:
+        $ref: '#/definitions/RetentionIntervalUnitValues'
+        description: The unit of time for enabling fast snapshot restore.
+      AvailabilityZones:
+        $ref: '#/definitions/AvailabilityZoneList'
+        description: The Availability Zones in which to enable fast snapshot restore.
+    description: Specifies a rule for enabling fast snapshot restore. You can enable fast snapshot restore based on either a count or a time interval.
   PolicyIdList:
     type: array
     items:
@@ -873,13 +909,17 @@ definitions:
     properties: {}
   RetainRule:
     type: object
-    required:
-      - Count
     properties:
       Count:
         $ref: '#/definitions/Count'
-        description: 'The number of snapshots to keep for each volume, up to a maximum of 1000.'
-    description: Specifies the number of snapshots to keep for each EBS volume.
+        description: 'The number of snapshots to retain for each volume, up to a maximum of 1000.'
+      Interval:
+        $ref: '#/definitions/Interval'
+        description: 'The amount of time to retain each snapshot. The maximum is 100 years. This is equivalent to 1200 months, 5200 weeks, or 36500 days.'
+      IntervalUnit:
+        $ref: '#/definitions/RetentionIntervalUnitValues'
+        description: The unit of time for time-based retention.
+    description: Specifies the retention rule for a lifecycle policy. You can retain snapshots based on either a count or a time interval.
   ScheduleName:
     type: string
     pattern: '[\p{all}]*'
@@ -917,7 +957,10 @@ definitions:
         description: The create rule.
       RetainRule:
         $ref: '#/definitions/RetainRule'
-        description: The retain rule.
+        description: The retention rule.
+      FastRestoreRule:
+        $ref: '#/definitions/FastRestoreRule'
+        description: Enable fast snapshot restore.
     description: Specifies a schedule.
   String:
     type: string

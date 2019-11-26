@@ -569,10 +569,59 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.DeregisterWorkspaceDirectory':
+    post:
+      operationId: DeregisterWorkspaceDirectory
+      description: 'Deregisters the specified directory. This operation is asynchronous and returns before the WorkSpace directory is deregistered. If any WorkSpaces are registered to this directory, you must remove them before you can deregister the directory.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeregisterWorkspaceDirectoryResult'
+        '480':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '481':
+          description: InvalidParameterValuesException
+          schema:
+            $ref: '#/definitions/InvalidParameterValuesException'
+        '482':
+          description: OperationNotSupportedException
+          schema:
+            $ref: '#/definitions/OperationNotSupportedException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: InvalidResourceStateException
+          schema:
+            $ref: '#/definitions/InvalidResourceStateException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeregisterWorkspaceDirectoryRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkspacesService.DeregisterWorkspaceDirectory
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=WorkspacesService.DescribeAccount':
     post:
       operationId: DescribeAccount
-      description: Retrieves a list that describes the configuration of bring your own license (BYOL) for the specified account.
+      description: Retrieves a list that describes the configuration of Bring Your Own License (BYOL) for the specified account.
       responses:
         '200':
           description: Success
@@ -605,7 +654,7 @@ paths:
   '/#X-Amz-Target=WorkspacesService.DescribeAccountModifications':
     post:
       operationId: DescribeAccountModifications
-      description: Retrieves a list that describes modifications to the configuration of bring your own license (BYOL) for the specified account.
+      description: Retrieves a list that describes modifications to the configuration of Bring Your Own License (BYOL) for the specified account.
       responses:
         '200':
           description: Success
@@ -787,7 +836,7 @@ paths:
   '/#X-Amz-Target=WorkspacesService.DescribeWorkspaceDirectories':
     post:
       operationId: DescribeWorkspaceDirectories
-      description: Describes the available AWS Directory Service directories that are registered with Amazon WorkSpaces.
+      description: Describes the available directories that are registered with Amazon WorkSpaces.
       responses:
         '200':
           description: Success
@@ -1024,7 +1073,7 @@ paths:
   '/#X-Amz-Target=WorkspacesService.ImportWorkspaceImage':
     post:
       operationId: ImportWorkspaceImage
-      description: 'Imports the specified Windows 7 or Windows 10 bring your own license (BYOL) image into Amazon WorkSpaces. The image must be an already licensed EC2 image that is in your AWS account, and you must own the image. '
+      description: 'Imports the specified Windows 7 or Windows 10 Bring Your Own License (BYOL) image into Amazon WorkSpaces. The image must be an already licensed EC2 image that is in your AWS account, and you must own the image. '
       responses:
         '200':
           description: Success
@@ -1077,7 +1126,7 @@ paths:
   '/#X-Amz-Target=WorkspacesService.ListAvailableManagementCidrRanges':
     post:
       operationId: ListAvailableManagementCidrRanges
-      description: '<p>Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks, that you can use for the network management interface when you enable bring your own license (BYOL). </p> <p>The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.</p>'
+      description: '<p>Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks, that you can use for the network management interface when you enable Bring Your Own License (BYOL). </p> <p>The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.</p>'
       responses:
         '200':
           description: Success
@@ -1114,7 +1163,7 @@ paths:
   '/#X-Amz-Target=WorkspacesService.ModifyAccount':
     post:
       operationId: ModifyAccount
-      description: Modifies the configuration of bring your own license (BYOL) for the specified account.
+      description: Modifies the configuration of Bring Your Own License (BYOL) for the specified account.
       responses:
         '200':
           description: Success
@@ -1193,6 +1242,125 @@ paths:
           type: string
           enum:
             - WorkspacesService.ModifyClientProperties
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.ModifySelfservicePermissions':
+    post:
+      operationId: ModifySelfservicePermissions
+      description: 'Modifies the self-service WorkSpace management capabilities for your users. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/enable-user-self-service-workspace-management.html">Enable Self-Service WorkSpace Management Capabilities for Your Users</a>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModifySelfservicePermissionsResult'
+        '480':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '481':
+          description: InvalidParameterValuesException
+          schema:
+            $ref: '#/definitions/InvalidParameterValuesException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ModifySelfservicePermissionsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkspacesService.ModifySelfservicePermissions
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.ModifyWorkspaceAccessProperties':
+    post:
+      operationId: ModifyWorkspaceAccessProperties
+      description: 'Specifies which devices and operating systems users can use to access their Workspaces. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/update-directory-details.html#control-device-access"> Control Device Access</a>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModifyWorkspaceAccessPropertiesResult'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ModifyWorkspaceAccessPropertiesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkspacesService.ModifyWorkspaceAccessProperties
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.ModifyWorkspaceCreationProperties':
+    post:
+      operationId: ModifyWorkspaceCreationProperties
+      description: Modify the default properties used to create WorkSpaces.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModifyWorkspaceCreationPropertiesResult'
+        '480':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '481':
+          description: InvalidParameterValuesException
+          schema:
+            $ref: '#/definitions/InvalidParameterValuesException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ModifyWorkspaceCreationPropertiesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkspacesService.ModifyWorkspaceCreationProperties
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1349,6 +1517,67 @@ paths:
           type: string
           enum:
             - WorkspacesService.RebuildWorkspaces
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.RegisterWorkspaceDirectory':
+    post:
+      operationId: RegisterWorkspaceDirectory
+      description: 'Registers the specified directory. This operation is asynchronous and returns before the WorkSpace directory is registered. If this is the first time you are registering a directory, you will need to create the workspaces_DefaultRole role before you can register a directory. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/workspaces-access-control.html#create-default-role"> Creating the workspaces_DefaultRole Role</a>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RegisterWorkspaceDirectoryResult'
+        '480':
+          description: InvalidParameterValuesException
+          schema:
+            $ref: '#/definitions/InvalidParameterValuesException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ResourceLimitExceededException
+          schema:
+            $ref: '#/definitions/ResourceLimitExceededException'
+        '483':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '484':
+          description: WorkspacesDefaultRoleNotFoundException
+          schema:
+            $ref: '#/definitions/WorkspacesDefaultRoleNotFoundException'
+        '485':
+          description: InvalidResourceStateException
+          schema:
+            $ref: '#/definitions/InvalidResourceStateException'
+        '486':
+          description: UnsupportedNetworkConfigurationException
+          schema:
+            $ref: '#/definitions/UnsupportedNetworkConfigurationException'
+        '487':
+          description: OperationNotSupportedException
+          schema:
+            $ref: '#/definitions/OperationNotSupportedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RegisterWorkspaceDirectoryRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkspacesService.RegisterWorkspaceDirectory
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1740,6 +1969,17 @@ definitions:
       ImageId:
         $ref: '#/definitions/WorkspaceImageId'
         description: The identifier of the image.
+  DeregisterWorkspaceDirectoryResult:
+    type: object
+    properties: {}
+  DeregisterWorkspaceDirectoryRequest:
+    type: object
+    required:
+      - DirectoryId
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: 'The identifier of the directory. If any WorkSpaces are registered to this directory, you must remove them before you deregister the directory, or you will receive an OperationNotSupportedException error.'
   DescribeAccountResult:
     type: object
     properties:
@@ -1852,6 +2092,9 @@ definitions:
       DirectoryIds:
         $ref: '#/definitions/DirectoryIdList'
         description: 'The identifiers of the directories. If the value is null, all directories are retrieved.'
+      Limit:
+        $ref: '#/definitions/Limit'
+        description: The maximum number of directories to return.
       NextToken:
         $ref: '#/definitions/PaginationToken'
         description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
@@ -2035,6 +2278,51 @@ definitions:
       ClientProperties:
         $ref: '#/definitions/ClientProperties'
         description: Information about the Amazon WorkSpaces client.
+  ModifySelfservicePermissionsResult:
+    type: object
+    properties: {}
+  ModifySelfservicePermissionsRequest:
+    type: object
+    required:
+      - ResourceId
+      - SelfservicePermissions
+    properties:
+      ResourceId:
+        $ref: '#/definitions/DirectoryId'
+        description: The identifier of the directory.
+      SelfservicePermissions:
+        $ref: '#/definitions/SelfservicePermissions'
+        description: The permissions to enable or disable self-service capabilities.
+  ModifyWorkspaceAccessPropertiesResult:
+    type: object
+    properties: {}
+  ModifyWorkspaceAccessPropertiesRequest:
+    type: object
+    required:
+      - ResourceId
+      - WorkspaceAccessProperties
+    properties:
+      ResourceId:
+        $ref: '#/definitions/DirectoryId'
+        description: The identifier of the directory.
+      WorkspaceAccessProperties:
+        $ref: '#/definitions/WorkspaceAccessProperties'
+        description: The device types and operating systems to enable or disable for access.
+  ModifyWorkspaceCreationPropertiesResult:
+    type: object
+    properties: {}
+  ModifyWorkspaceCreationPropertiesRequest:
+    type: object
+    required:
+      - ResourceId
+      - WorkspaceCreationProperties
+    properties:
+      ResourceId:
+        $ref: '#/definitions/DirectoryId'
+        description: The identifier of the directory.
+      WorkspaceCreationProperties:
+        $ref: '#/definitions/WorkspaceCreationProperties'
+        description: The default properties for creating WorkSpaces.
   ModifyWorkspacePropertiesResult:
     type: object
     properties: {}
@@ -2095,6 +2383,35 @@ definitions:
       RebuildWorkspaceRequests:
         $ref: '#/definitions/RebuildWorkspaceRequests'
         description: The WorkSpace to rebuild. You can specify a single WorkSpace.
+  RegisterWorkspaceDirectoryResult:
+    type: object
+    properties: {}
+  RegisterWorkspaceDirectoryRequest:
+    type: object
+    required:
+      - DirectoryId
+      - EnableWorkDocs
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: 'The identifier of the directory. You cannot register a directory if it does not have a status of Active. If the directory does not have a status of Active, you will receive an InvalidResourceStateException error. If you have already registered the maximum number of directories that you can register with Amazon WorkSpaces, you will receive a ResourceLimitExceededException error. Deregister directories that you are not using for WorkSpaces, and try again.'
+      SubnetIds:
+        $ref: '#/definitions/SubnetIds'
+        description: 'The identifiers of the subnets for your virtual private cloud (VPC). Make sure that the subnets are in supported Availability Zones. The subnets must also be in separate Availability Zones. If these conditions are not met, you will receive an OperationNotSupportedException error.'
+      EnableWorkDocs:
+        $ref: '#/definitions/BooleanObject'
+        description: 'Indicates whether Amazon WorkDocs is enabled or disabled. If you have enabled this parameter and WorkDocs is not available in the Region, you will receive an OperationNotSupportedException error. Set <code>EnableWorkDocs</code> to disabled, and try again.'
+      EnableSelfService:
+        $ref: '#/definitions/BooleanObject'
+        description: Indicates whether self-service capabilities are enabled or disabled.
+      Tenancy:
+        $ref: '#/definitions/Tenancy'
+        description: 'Indicates whether your WorkSpace directory is dedicated or shared. To use Bring Your Own License (BYOL) images, this value must be set to <code>DEDICATED</code> and your AWS account must be enabled for BYOL. If your account has not been enabled for BYOL, you will receive an InvalidParameterValuesException error. For more information about BYOL images, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html">Bring Your Own Windows Desktop Images</a>.'
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags associated with the directory.
+  WorkspacesDefaultRoleNotFoundException: {}
+  UnsupportedNetworkConfigurationException: {}
   RestoreWorkspaceResult:
     type: object
     properties: {}
@@ -2181,6 +2498,11 @@ definitions:
   ARN:
     type: string
     pattern: '^arn:aws:[A-Za-z0-9][A-za-z0-9_/.-]{0,62}:[A-za-z0-9_/.-]{0,63}:[A-za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-za-z0-9_/.-]{0,127}$'
+  AccessPropertyValue:
+    type: string
+    enum:
+      - ALLOW
+      - DENY
   DedicatedTenancyModificationStateEnum:
     type: string
     enum:
@@ -2223,7 +2545,7 @@ definitions:
       ErrorMessage:
         $ref: '#/definitions/Description'
         description: The text of the error message that is returned if the configuration of BYOL cannot be modified.
-    description: 'Describes a modification to the configuration of bring your own license (BYOL) for the specified account. '
+    description: 'Describes a modification to the configuration of Bring Your Own License (BYOL) for the specified account. '
   AccountModificationList:
     type: array
     items:
@@ -2233,6 +2555,8 @@ definitions:
   DirectoryId:
     type: string
     pattern: '^d-[0-9a-f]{8,63}$'
+    minLength: 10
+    maxLength: 65
   IpGroupIdList:
     type: array
     items:
@@ -2392,7 +2716,9 @@ definitions:
     type: string
   SecurityGroupId:
     type: string
-    pattern: '^(sg-[0-9a-f]{8})$'
+    pattern: '^(sg-([0-9a-f]{8}|[0-9a-f]{17}))$'
+    minLength: 11
+    maxLength: 20
   DefaultWorkspaceCreationProperties:
     type: object
     properties:
@@ -2410,8 +2736,11 @@ definitions:
         description: The identifier of any security groups to apply to WorkSpaces when they are created.
       UserEnabledAsLocalAdministrator:
         $ref: '#/definitions/BooleanObject'
-        description: Specifies whether the WorkSpace user is an administrator on the WorkSpace.
-    description: Describes the default values used to create a WorkSpace.
+        description: Specifies whether WorkSpace users are local administrators on their WorkSpaces.
+      EnableMaintenanceMode:
+        $ref: '#/definitions/BooleanObject'
+        description: 'Specifies whether maintenance mode is enabled for WorkSpaces. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/workspace-maintenance.html">WorkSpace Maintenance</a>.'
+    description: 'Describes the default values that are used to create WorkSpaces. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/update-directory-details.html">Update Directory Details for Your WorkSpaces</a>.'
   TagKeyList:
     type: array
     items:
@@ -2510,14 +2839,23 @@ definitions:
         description: The identifier of the security group that is assigned to new WorkSpaces.
       State:
         $ref: '#/definitions/WorkspaceDirectoryState'
-        description: The state of the directory's registration with Amazon WorkSpaces
+        description: The state of the directory's registration with Amazon WorkSpaces.
       WorkspaceCreationProperties:
         $ref: '#/definitions/DefaultWorkspaceCreationProperties'
         description: The default creation properties for all WorkSpaces in the directory.
       ipGroupIds:
         $ref: '#/definitions/IpGroupIdList'
         description: The identifiers of the IP access control groups associated with the directory.
-    description: Describes an AWS Directory Service directory that is used with Amazon WorkSpaces.
+      WorkspaceAccessProperties:
+        $ref: '#/definitions/WorkspaceAccessProperties'
+        description: The devices and operating systems that users can use to access Workspaces.
+      Tenancy:
+        $ref: '#/definitions/Tenancy'
+        description: 'Specifies whether the directory is dedicated or shared. To use Bring Your Own License (BYOL), this value must be set to <code>DEDICATED</code>. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html">Bring Your Own Windows Desktop Images</a>.'
+      SelfservicePermissions:
+        $ref: '#/definitions/SelfservicePermissions'
+        description: The default self-service permissions for WorkSpaces in the directory.
+    description: Describes a directory that is used with Amazon WorkSpaces.
   DirectoryName:
     type: string
   IpAddress:
@@ -2543,7 +2881,7 @@ definitions:
         description: The identifier of the AWS Directory Service directory for the WorkSpace. You can use <a>DescribeWorkspaceDirectories</a> to list the available directories.
       UserName:
         $ref: '#/definitions/UserName'
-        description: The username of the user for the WorkSpace. This username must exist in the AWS Directory Service directory for the WorkSpace.
+        description: The user name of the user for the WorkSpace. This user name must exist in the AWS Directory Service directory for the WorkSpace.
       BundleId:
         $ref: '#/definitions/BundleId'
         description: The identifier of the bundle for the WorkSpace. You can use <a>DescribeWorkspaceBundles</a> to list the available bundles.
@@ -2665,6 +3003,69 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ModificationState'
+  SelfservicePermissions:
+    type: object
+    properties:
+      RestartWorkspace:
+        $ref: '#/definitions/ReconnectEnum'
+        description: Specifies whether users can restart their WorkSpace.
+      IncreaseVolumeSize:
+        $ref: '#/definitions/ReconnectEnum'
+        description: Specifies whether users can increase the volume size of the drives on their WorkSpace.
+      ChangeComputeType:
+        $ref: '#/definitions/ReconnectEnum'
+        description: Specifies whether users can change the compute type (bundle) for their WorkSpace.
+      SwitchRunningMode:
+        $ref: '#/definitions/ReconnectEnum'
+        description: Specifies whether users can switch the running mode of their WorkSpace.
+      RebuildWorkspace:
+        $ref: '#/definitions/ReconnectEnum'
+        description: Specifies whether users can rebuild the operating system of a WorkSpace to its original state.
+    description: 'Describes the self-service permissions for a directory. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/enable-user-self-service-workspace-management.html">Enable Self-Service WorkSpace Management Capabilities for Your Users</a>.'
+  WorkspaceAccessProperties:
+    type: object
+    properties:
+      DeviceTypeWindows:
+        $ref: '#/definitions/AccessPropertyValue'
+        description: 'Indicates whether users can use Windows clients to access their WorkSpaces. To restrict WorkSpaces access to trusted devices (also known as managed devices) with valid certificates, specify a value of <code>TRUST</code>. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/trusted-devices.html">Restrict WorkSpaces Access to Trusted Devices</a>. '
+      DeviceTypeOsx:
+        $ref: '#/definitions/AccessPropertyValue'
+        description: 'Indicates whether users can use macOS clients to access their WorkSpaces. To restrict WorkSpaces access to trusted devices (also known as managed devices) with valid certificates, specify a value of <code>TRUST</code>. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/trusted-devices.html">Restrict WorkSpaces Access to Trusted Devices</a>. '
+      DeviceTypeWeb:
+        $ref: '#/definitions/AccessPropertyValue'
+        description: Indicates whether users can access their WorkSpaces through a web browser.
+      DeviceTypeIos:
+        $ref: '#/definitions/AccessPropertyValue'
+        description: Indicates whether users can use iOS devices to access their WorkSpaces.
+      DeviceTypeAndroid:
+        $ref: '#/definitions/AccessPropertyValue'
+        description: Indicates whether users can use Android devices to access their WorkSpaces.
+      DeviceTypeChromeOs:
+        $ref: '#/definitions/AccessPropertyValue'
+        description: Indicates whether users can use Chromebooks to access their WorkSpaces.
+      DeviceTypeZeroClient:
+        $ref: '#/definitions/AccessPropertyValue'
+        description: Indicates whether users can use zero client devices to access their WorkSpaces.
+    description: 'The device types and operating systems that can be used to access a WorkSpace. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/workspaces-network-requirements.html">Amazon WorkSpaces Client Network Requirements</a>.'
+  WorkspaceCreationProperties:
+    type: object
+    properties:
+      EnableInternetAccess:
+        $ref: '#/definitions/BooleanObject'
+        description: Indicates whether internet access is enabled for your WorkSpaces.
+      DefaultOu:
+        $ref: '#/definitions/DefaultOu'
+        description: The default organizational unit (OU) for your WorkSpace directories.
+      CustomSecurityGroupId:
+        $ref: '#/definitions/SecurityGroupId'
+        description: The identifier of your custom security group.
+      UserEnabledAsLocalAdministrator:
+        $ref: '#/definitions/BooleanObject'
+        description: Indicates whether users are local administrators of their WorkSpaces.
+      EnableMaintenanceMode:
+        $ref: '#/definitions/BooleanObject'
+        description: 'Indicates whether maintenance mode is enabled for your WorkSpaces. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/workspace-maintenance.html">WorkSpace Maintenance</a>. '
+    description: 'Describes the default properties that are used for creating WorkSpaces. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/update-directory-details.html">Update Directory Details for Your WorkSpaces</a>. '
   WorkspaceProperties:
     type: object
     properties:
@@ -2731,6 +3132,16 @@ definitions:
       $ref: '#/definitions/RebuildRequest'
     minItems: 1
     maxItems: 1
+  SubnetIds:
+    type: array
+    items:
+      $ref: '#/definitions/SubnetId'
+    maxItems: 2
+  Tenancy:
+    type: string
+    enum:
+      - DEDICATED
+      - SHARED
   RegistrationCode:
     type: string
     minLength: 1
@@ -2786,11 +3197,9 @@ definitions:
     maxItems: 25
   SubnetId:
     type: string
-    pattern: '^(subnet-[0-9a-f]{8})$'
-  SubnetIds:
-    type: array
-    items:
-      $ref: '#/definitions/SubnetId'
+    pattern: '^(subnet-([0-9a-f]{8}|[0-9a-f]{17}))$'
+    minLength: 15
+    maxLength: 24
   TagKey:
     type: string
     minLength: 1
@@ -2967,7 +3376,7 @@ definitions:
         description: The status of the image.
       RequiredTenancy:
         $ref: '#/definitions/WorkspaceImageRequiredTenancy'
-        description: 'Specifies whether the image is running on dedicated hardware. When bring your own license (BYOL) is enabled, this value is set to DEDICATED. '
+        description: 'Specifies whether the image is running on dedicated hardware. When Bring Your Own License (BYOL) is enabled, this value is set to <code>DEDICATED</code>. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html">Bring Your Own Windows Desktop Images</a>.'
       ErrorCode:
         $ref: '#/definitions/WorkspaceImageErrorCode'
         description: The error code that is returned for the image.

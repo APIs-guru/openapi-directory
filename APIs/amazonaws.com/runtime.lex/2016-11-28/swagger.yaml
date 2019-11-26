@@ -652,6 +652,9 @@ definitions:
       message:
         $ref: '#/definitions/Text'
         description: '<p>The message to convey to the user. The message can come from the bot''s configuration or from a Lambda function.</p> <p>If the intent is not configured with a Lambda function, or if the Lambda function returned <code>Delegate</code> as the <code>dialogAction.type</code> its response, Amazon Lex decides on the next course of action and selects an appropriate message from the bot''s configuration based on the current interaction context. For example, if Amazon Lex isn''t able to understand user input, it uses a clarification prompt message.</p> <p>When you create an intent you can assign messages to groups. When messages are assigned to groups Amazon Lex returns one message from each group in the response. The message field is an escaped JSON string containing the messages. For more information about the structure of the JSON string returned, see <a>msg-prompts-formats</a>.</p> <p>If the Lambda function returns a message, Amazon Lex passes it to the client in its response.</p>'
+      sentimentResponse:
+        $ref: '#/definitions/SentimentResponse'
+        description: '<p>The sentiment expressed in and utterance.</p> <p>When the bot is configured to send utterances to Amazon Comprehend for sentiment analysis, this field contains the result of the analysis.</p>'
       messageFormat:
         $ref: '#/definitions/MessageFormatType'
         description: '<p>The format of the response message. One of the following values:</p> <ul> <li> <p> <code>PlainText</code> - The message contains plain UTF-8 text.</p> </li> <li> <p> <code>CustomPayload</code> - The message is a custom format defined by the Lambda function.</p> </li> <li> <p> <code>SSML</code> - The message contains text formatted for voice output.</p> </li> <li> <p> <code>Composite</code> - The message contains an escaped JSON object containing one or more messages from the groups that messages were assigned to when the intent was created.</p> </li> </ul>'
@@ -664,6 +667,9 @@ definitions:
       responseCard:
         $ref: '#/definitions/ResponseCard'
         description: 'Represents the options that the user has to respond to the current prompt. Response Card can come from the bot configuration (in the Amazon Lex console, choose the settings button next to a slot) or from a code hook (Lambda function). '
+      sessionId:
+        $ref: '#/definitions/String'
+        description: A unique identifier for the session.
   String:
     type: string
   PutSessionResponse:
@@ -888,6 +894,16 @@ definitions:
       inputText:
         $ref: '#/definitions/Text'
         description: The text that the user entered (Amazon Lex interprets this text).
+  SentimentResponse:
+    type: object
+    properties:
+      sentimentLabel:
+        $ref: '#/definitions/SentimentLabel'
+        description: The inferred sentiment that Amazon Comprehend has the highest confidence in.
+      sentimentScore:
+        $ref: '#/definitions/SentimentScore'
+        description: The likelihood that the sentiment was correctly inferred.
+    description: '<p>The sentiment expressed in an utterance.</p> <p>When the bot is configured to send utterances to Amazon Comprehend for sentiment analysis, this field structure contains the result of the analysis.</p>'
   ResponseCard:
     type: object
     properties:
@@ -919,3 +935,7 @@ definitions:
       $ref: '#/definitions/GenericAttachment'
     minItems: 0
     maxItems: 10
+  SentimentLabel:
+    type: string
+  SentimentScore:
+    type: string

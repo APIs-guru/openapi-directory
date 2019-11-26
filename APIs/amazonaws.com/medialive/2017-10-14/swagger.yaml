@@ -426,6 +426,9 @@ paths:
                   GlobalConfiguration:
                     $ref: '#/definitions/GlobalConfiguration'
                     description: Configuration settings that apply to the event as a whole.
+                  NielsenConfiguration:
+                    $ref: '#/definitions/NielsenConfiguration'
+                    description: Nielsen configuration settings.
                   OutputGroups:
                     $ref: '#/definitions/__listOfOutputGroup'
                   TimecodeConfig:
@@ -821,6 +824,302 @@ paths:
           in: query
           description: Pagination token
           required: false
+  /prod/multiplexes:
+    post:
+      operationId: CreateMultiplex
+      description: Create a new multiplex.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateMultiplexResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnprocessableEntityException
+          schema:
+            $ref: '#/definitions/UnprocessableEntityException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '484':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '485':
+          description: GatewayTimeoutException
+          schema:
+            $ref: '#/definitions/GatewayTimeoutException'
+        '486':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '487':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - availabilityZones
+              - multiplexSettings
+              - name
+              - requestId
+            properties:
+              availabilityZones:
+                description: Placeholder documentation for __listOf__string
+                type: array
+                items:
+                  $ref: '#/definitions/__string'
+              multiplexSettings:
+                description: Contains configuration for a Multiplex event
+                type: object
+                properties:
+                  MaximumVideoBufferDelayMilliseconds:
+                    $ref: '#/definitions/__integerMin1000Max3000'
+                    description: Maximum video buffer delay in milliseconds.
+                  TransportStreamBitrate:
+                    $ref: '#/definitions/__integerMin1000000Max100000000'
+                    description: Transport stream bit rate.
+                  TransportStreamId:
+                    $ref: '#/definitions/__integerMin0Max65535'
+                    description: Transport stream ID.
+                  TransportStreamReservedBitrate:
+                    $ref: '#/definitions/__integerMin0Max100000000'
+                    description: Transport stream reserved bit rate.
+              name:
+                description: Placeholder documentation for __string
+                type: string
+              requestId:
+                description: Placeholder documentation for __string
+                type: string
+              tags:
+                description: Placeholder documentation for Tags
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/__string'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListMultiplexes
+      description: Retrieve a list of the existing multiplexes.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListMultiplexesResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '484':
+          description: GatewayTimeoutException
+          schema:
+            $ref: '#/definitions/GatewayTimeoutException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: Placeholder documentation for MaxResults
+          type: integer
+          minimum: 1
+          maximum: 1000
+        - name: nextToken
+          in: query
+          required: false
+          description: Placeholder documentation for __string
+          type: string
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+  '/prod/multiplexes/{multiplexId}/programs':
+    post:
+      operationId: CreateMultiplexProgram
+      description: Create a new program in the multiplex.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateMultiplexProgramResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnprocessableEntityException
+          schema:
+            $ref: '#/definitions/UnprocessableEntityException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '484':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '485':
+          description: GatewayTimeoutException
+          schema:
+            $ref: '#/definitions/GatewayTimeoutException'
+        '486':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '487':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: multiplexId
+          in: path
+          required: true
+          description: Placeholder documentation for __string
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - multiplexProgramSettings
+              - programName
+              - requestId
+            properties:
+              multiplexProgramSettings:
+                description: Multiplex Program settings configuration.
+                type: object
+                properties:
+                  ProgramNumber:
+                    $ref: '#/definitions/__integerMin0Max65535'
+                    description: Unique program number.
+                  ServiceDescriptor:
+                    $ref: '#/definitions/MultiplexProgramServiceDescriptor'
+                    description: Transport stream service descriptor configuration for the Multiplex program.
+                  VideoSettings:
+                    $ref: '#/definitions/MultiplexVideoSettings'
+                    description: Program video settings configuration.
+              programName:
+                description: Placeholder documentation for __string
+                type: string
+              requestId:
+                description: Placeholder documentation for __string
+                type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListMultiplexPrograms
+      description: List the programs that currently exist for a specific multiplex.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListMultiplexProgramsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: GatewayTimeoutException
+          schema:
+            $ref: '#/definitions/GatewayTimeoutException'
+        '486':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: Placeholder documentation for MaxResults
+          type: integer
+          minimum: 1
+          maximum: 1000
+        - name: multiplexId
+          in: path
+          required: true
+          description: Placeholder documentation for __string
+          type: string
+        - name: nextToken
+          in: query
+          required: false
+          description: Placeholder documentation for __string
+          type: string
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
   '/prod/tags/{resource-arn}':
     post:
       operationId: CreateTags
@@ -1072,6 +1371,9 @@ paths:
                   GlobalConfiguration:
                     $ref: '#/definitions/GlobalConfiguration'
                     description: Configuration settings that apply to the event as a whole.
+                  NielsenConfiguration:
+                    $ref: '#/definitions/NielsenConfiguration'
+                    description: Nielsen configuration settings.
                   OutputGroups:
                     $ref: '#/definitions/__listOfOutputGroup'
                   TimecodeConfig:
@@ -1434,6 +1736,355 @@ paths:
                 type: array
                 items:
                   $ref: '#/definitions/InputWhitelistRuleCidr'
+  '/prod/multiplexes/{multiplexId}':
+    delete:
+      operationId: DeleteMultiplex
+      description: Delete a multiplex. The multiplex must be idle.
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteMultiplexResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: GatewayTimeoutException
+          schema:
+            $ref: '#/definitions/GatewayTimeoutException'
+        '486':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '487':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: multiplexId
+          in: path
+          required: true
+          description: Placeholder documentation for __string
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeMultiplex
+      description: Gets details about a multiplex.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeMultiplexResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: GatewayTimeoutException
+          schema:
+            $ref: '#/definitions/GatewayTimeoutException'
+        '486':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: multiplexId
+          in: path
+          required: true
+          description: Placeholder documentation for __string
+          type: string
+    put:
+      operationId: UpdateMultiplex
+      description: Updates a multiplex.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateMultiplexResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnprocessableEntityException
+          schema:
+            $ref: '#/definitions/UnprocessableEntityException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '484':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '485':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '486':
+          description: GatewayTimeoutException
+          schema:
+            $ref: '#/definitions/GatewayTimeoutException'
+        '487':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: multiplexId
+          in: path
+          required: true
+          description: Placeholder documentation for __string
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - multiplexSettings
+            properties:
+              multiplexSettings:
+                description: Contains configuration for a Multiplex event
+                type: object
+                properties:
+                  MaximumVideoBufferDelayMilliseconds:
+                    $ref: '#/definitions/__integerMin1000Max3000'
+                    description: Maximum video buffer delay in milliseconds.
+                  TransportStreamBitrate:
+                    $ref: '#/definitions/__integerMin1000000Max100000000'
+                    description: Transport stream bit rate.
+                  TransportStreamId:
+                    $ref: '#/definitions/__integerMin0Max65535'
+                    description: Transport stream ID.
+                  TransportStreamReservedBitrate:
+                    $ref: '#/definitions/__integerMin0Max100000000'
+                    description: Transport stream reserved bit rate.
+              name:
+                description: Placeholder documentation for __string
+                type: string
+  '/prod/multiplexes/{multiplexId}/programs/{programName}':
+    delete:
+      operationId: DeleteMultiplexProgram
+      description: Delete a program from a multiplex.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteMultiplexProgramResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: GatewayTimeoutException
+          schema:
+            $ref: '#/definitions/GatewayTimeoutException'
+        '486':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '487':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: multiplexId
+          in: path
+          required: true
+          description: Placeholder documentation for __string
+          type: string
+        - name: programName
+          in: path
+          required: true
+          description: Placeholder documentation for __string
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeMultiplexProgram
+      description: Get the details for a program in a multiplex.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeMultiplexProgramResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: GatewayTimeoutException
+          schema:
+            $ref: '#/definitions/GatewayTimeoutException'
+        '486':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: multiplexId
+          in: path
+          required: true
+          description: Placeholder documentation for __string
+          type: string
+        - name: programName
+          in: path
+          required: true
+          description: Placeholder documentation for __string
+          type: string
+    put:
+      operationId: UpdateMultiplexProgram
+      description: Update a program in a multiplex.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateMultiplexProgramResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnprocessableEntityException
+          schema:
+            $ref: '#/definitions/UnprocessableEntityException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '484':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '485':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '486':
+          description: GatewayTimeoutException
+          schema:
+            $ref: '#/definitions/GatewayTimeoutException'
+        '487':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: multiplexId
+          in: path
+          required: true
+          description: Placeholder documentation for __string
+          type: string
+        - name: programName
+          in: path
+          required: true
+          description: Placeholder documentation for __string
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - multiplexProgramSettings
+            properties:
+              multiplexProgramSettings:
+                description: Multiplex Program settings configuration.
+                type: object
+                properties:
+                  ProgramNumber:
+                    $ref: '#/definitions/__integerMin0Max65535'
+                    description: Unique program number.
+                  ServiceDescriptor:
+                    $ref: '#/definitions/MultiplexProgramServiceDescriptor'
+                    description: Transport stream service descriptor configuration for the Multiplex program.
+                  VideoSettings:
+                    $ref: '#/definitions/MultiplexVideoSettings'
+                    description: Program video settings configuration.
   '/prod/reservations/{reservationId}':
     delete:
       operationId: DeleteReservation
@@ -1726,6 +2377,11 @@ paths:
           description: Placeholder documentation for __string
           type: string
         - name: codec
+          in: query
+          required: false
+          description: Placeholder documentation for __string
+          type: string
+        - name: duration
           in: query
           required: false
           description: Placeholder documentation for __string
@@ -2030,6 +2686,61 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/prod/multiplexes/{multiplexId}/start':
+    post:
+      operationId: StartMultiplex
+      description: Start (run) the multiplex. Starting the multiplex does not start the channels. You must explicitly start each channel.
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartMultiplexResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: GatewayTimeoutException
+          schema:
+            $ref: '#/definitions/GatewayTimeoutException'
+        '486':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '487':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: multiplexId
+          in: path
+          required: true
+          description: Placeholder documentation for __string
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/prod/channels/{channelId}/stop':
     post:
       operationId: StopChannel
@@ -2073,6 +2784,61 @@ paths:
             $ref: '#/definitions/ConflictException'
       parameters:
         - name: channelId
+          in: path
+          required: true
+          description: Placeholder documentation for __string
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/prod/multiplexes/{multiplexId}/stop':
+    post:
+      operationId: StopMultiplex
+      description: 'Stops a running multiplex. If the multiplex isn''t running, this action has no effect.'
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/StopMultiplexResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: GatewayTimeoutException
+          schema:
+            $ref: '#/definitions/GatewayTimeoutException'
+        '486':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '487':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: multiplexId
           in: path
           required: true
           description: Placeholder documentation for __string
@@ -2207,6 +2973,9 @@ definitions:
       MediaPackageSettings:
         $ref: '#/definitions/__listOfMediaPackageOutputDestinationSettings'
         description: Destination settings for a MediaPackage output; one destination for both encoders.
+      MultiplexSettings:
+        $ref: '#/definitions/MultiplexProgramChannelDestinationSettings'
+        description: Destination settings for a Multiplex output; one destination for both encoders.
       Settings:
         $ref: '#/definitions/__listOfOutputDestinationSettings'
         description: Destination settings for a standard output; one destination for each redundant encoder.
@@ -2283,6 +3052,16 @@ definitions:
         $ref: '#/definitions/GlobalConfigurationLowFramerateInputs'
         description: Adjusts video input buffer for streams with very low video framerates. This is commonly set to enabled for music channels with less than one video frame per second.
     description: Global Configuration
+  NielsenConfiguration:
+    type: object
+    properties:
+      DistributorId:
+        $ref: '#/definitions/__string'
+        description: Enter the Distributor ID assigned to your organization by Nielsen.
+      NielsenPcmToId3Tagging:
+        $ref: '#/definitions/NielsenPcmToId3TaggingState'
+        description: Enables Nielsen PCM to ID3 tagging
+    description: Nielsen Configuration
   __listOfOutputGroup:
     type: array
     description: Placeholder documentation for __listOfOutputGroup
@@ -2398,6 +3177,67 @@ definitions:
         $ref: '#/definitions/__string'
         description: The IPv4 CIDR to whitelist.
     description: An IPv4 CIDR to whitelist.
+  CreateMultiplexResponse:
+    type: object
+    properties:
+      Multiplex:
+        $ref: '#/definitions/Multiplex'
+        description: The newly created multiplex.
+    description: Placeholder documentation for CreateMultiplexResponse
+  __integerMin1000Max3000:
+    type: integer
+    description: Placeholder documentation for __integerMin1000Max3000
+    minimum: 1000
+    maximum: 3000
+  __integerMin1000000Max100000000:
+    type: integer
+    description: Placeholder documentation for __integerMin1000000Max100000000
+    minimum: 1000000
+    maximum: 100000000
+  __integerMin0Max65535:
+    type: integer
+    description: Placeholder documentation for __integerMin0Max65535
+    minimum: 0
+    maximum: 65535
+  __integerMin0Max100000000:
+    type: integer
+    description: Placeholder documentation for __integerMin0Max100000000
+    minimum: 0
+    maximum: 100000000
+  CreateMultiplexProgramResponse:
+    type: object
+    properties:
+      MultiplexProgram:
+        $ref: '#/definitions/MultiplexProgram'
+        description: The newly created multiplex program.
+    description: Placeholder documentation for CreateMultiplexProgramResponse
+  MultiplexProgramServiceDescriptor:
+    type: object
+    required:
+      - ProviderName
+      - ServiceName
+    properties:
+      ProviderName:
+        $ref: '#/definitions/__stringMax256'
+        description: Name of the provider.
+      ServiceName:
+        $ref: '#/definitions/__stringMax256'
+        description: Name of the service.
+    description: Transport stream service descriptor configuration for the Multiplex program.
+  MultiplexVideoSettings:
+    type: object
+    properties:
+      ConstantBitrate:
+        $ref: '#/definitions/__integerMin100000Max100000000'
+        description: |-
+          The constant bitrate configuration for the video encode.
+          When this field is defined, StatmuxSettings must be undefined.
+      StatmuxSettings:
+        $ref: '#/definitions/MultiplexStatmuxVideoSettings'
+        description: |-
+          Statmux rate control settings.
+          When this field is defined, ConstantBitrate must be undefined.
+    description: The video configuration for each program in a multiplex.
   DeleteChannelResponse:
     type: object
     properties:
@@ -2455,6 +3295,56 @@ definitions:
     type: object
     properties: {}
     description: Placeholder documentation for DeleteInputSecurityGroupResponse
+  DeleteMultiplexResponse:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: The unique arn of the multiplex.
+      AvailabilityZones:
+        $ref: '#/definitions/__listOf__string'
+        description: A list of availability zones for the multiplex.
+      Destinations:
+        $ref: '#/definitions/__listOfMultiplexOutputDestination'
+        description: A list of the multiplex output destinations.
+      Id:
+        $ref: '#/definitions/__string'
+        description: The unique id of the multiplex.
+      MultiplexSettings:
+        $ref: '#/definitions/MultiplexSettings'
+        description: Configuration for a multiplex event.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the multiplex.
+      PipelinesRunningCount:
+        $ref: '#/definitions/__integer'
+        description: The number of currently healthy pipelines.
+      ProgramCount:
+        $ref: '#/definitions/__integer'
+        description: The number of programs in the multiplex.
+      State:
+        $ref: '#/definitions/MultiplexState'
+        description: The current state of the multiplex.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: A collection of key-value pairs.
+    description: Placeholder documentation for DeleteMultiplexResponse
+  DeleteMultiplexProgramResponse:
+    type: object
+    properties:
+      ChannelId:
+        $ref: '#/definitions/__string'
+        description: The MediaLive channel associated with the program.
+      MultiplexProgramSettings:
+        $ref: '#/definitions/MultiplexProgramSettings'
+        description: The settings for this multiplex program.
+      PacketIdentifiersMap:
+        $ref: '#/definitions/MultiplexProgramPacketIdentifiersMap'
+        description: The packet identifier map for this multiplex program.
+      ProgramName:
+        $ref: '#/definitions/__string'
+        description: The name of the multiplex program.
+    description: Placeholder documentation for DeleteMultiplexProgramResponse
   DeleteReservationResponse:
     type: object
     properties:
@@ -2636,6 +3526,56 @@ definitions:
         $ref: '#/definitions/__listOfInputWhitelistRule'
         description: Whitelist rules and their sync status
     description: Placeholder documentation for DescribeInputSecurityGroupResponse
+  DescribeMultiplexResponse:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: The unique arn of the multiplex.
+      AvailabilityZones:
+        $ref: '#/definitions/__listOf__string'
+        description: A list of availability zones for the multiplex.
+      Destinations:
+        $ref: '#/definitions/__listOfMultiplexOutputDestination'
+        description: A list of the multiplex output destinations.
+      Id:
+        $ref: '#/definitions/__string'
+        description: The unique id of the multiplex.
+      MultiplexSettings:
+        $ref: '#/definitions/MultiplexSettings'
+        description: Configuration for a multiplex event.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the multiplex.
+      PipelinesRunningCount:
+        $ref: '#/definitions/__integer'
+        description: The number of currently healthy pipelines.
+      ProgramCount:
+        $ref: '#/definitions/__integer'
+        description: The number of programs in the multiplex.
+      State:
+        $ref: '#/definitions/MultiplexState'
+        description: The current state of the multiplex.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: A collection of key-value pairs.
+    description: Placeholder documentation for DescribeMultiplexResponse
+  DescribeMultiplexProgramResponse:
+    type: object
+    properties:
+      ChannelId:
+        $ref: '#/definitions/__string'
+        description: The MediaLive channel associated with the program.
+      MultiplexProgramSettings:
+        $ref: '#/definitions/MultiplexProgramSettings'
+        description: The settings for this multiplex program.
+      PacketIdentifiersMap:
+        $ref: '#/definitions/MultiplexProgramPacketIdentifiersMap'
+        description: The packet identifier map for this multiplex program.
+      ProgramName:
+        $ref: '#/definitions/__string'
+        description: The name of the multiplex program.
+    description: Placeholder documentation for DescribeMultiplexProgramResponse
   DescribeOfferingResponse:
     type: object
     properties:
@@ -2766,6 +3706,26 @@ definitions:
       NextToken:
         $ref: '#/definitions/__string'
     description: Placeholder documentation for ListInputsResponse
+  ListMultiplexProgramsResponse:
+    type: object
+    properties:
+      MultiplexPrograms:
+        $ref: '#/definitions/__listOfMultiplexProgramSummary'
+        description: List of multiplex programs.
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: Token for the next ListMultiplexProgram request.
+    description: Placeholder documentation for ListMultiplexProgramsResponse
+  ListMultiplexesResponse:
+    type: object
+    properties:
+      Multiplexes:
+        $ref: '#/definitions/__listOfMultiplexSummary'
+        description: List of multiplexes.
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: Token for the next ListMultiplexes request.
+    description: Placeholder documentation for ListMultiplexesResponse
   ListOfferingsResponse:
     type: object
     properties:
@@ -2847,6 +3807,40 @@ definitions:
         $ref: '#/definitions/Tags'
         description: A collection of key-value pairs.
     description: Placeholder documentation for StartChannelResponse
+  StartMultiplexResponse:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: The unique arn of the multiplex.
+      AvailabilityZones:
+        $ref: '#/definitions/__listOf__string'
+        description: A list of availability zones for the multiplex.
+      Destinations:
+        $ref: '#/definitions/__listOfMultiplexOutputDestination'
+        description: A list of the multiplex output destinations.
+      Id:
+        $ref: '#/definitions/__string'
+        description: The unique id of the multiplex.
+      MultiplexSettings:
+        $ref: '#/definitions/MultiplexSettings'
+        description: Configuration for a multiplex event.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the multiplex.
+      PipelinesRunningCount:
+        $ref: '#/definitions/__integer'
+        description: The number of currently healthy pipelines.
+      ProgramCount:
+        $ref: '#/definitions/__integer'
+        description: The number of programs in the multiplex.
+      State:
+        $ref: '#/definitions/MultiplexState'
+        description: The current state of the multiplex.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: A collection of key-value pairs.
+    description: Placeholder documentation for StartMultiplexResponse
   StopChannelResponse:
     type: object
     properties:
@@ -2896,6 +3890,40 @@ definitions:
         $ref: '#/definitions/Tags'
         description: A collection of key-value pairs.
     description: Placeholder documentation for StopChannelResponse
+  StopMultiplexResponse:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: The unique arn of the multiplex.
+      AvailabilityZones:
+        $ref: '#/definitions/__listOf__string'
+        description: A list of availability zones for the multiplex.
+      Destinations:
+        $ref: '#/definitions/__listOfMultiplexOutputDestination'
+        description: A list of the multiplex output destinations.
+      Id:
+        $ref: '#/definitions/__string'
+        description: The unique id of the multiplex.
+      MultiplexSettings:
+        $ref: '#/definitions/MultiplexSettings'
+        description: Configuration for a multiplex event.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the multiplex.
+      PipelinesRunningCount:
+        $ref: '#/definitions/__integer'
+        description: The number of currently healthy pipelines.
+      ProgramCount:
+        $ref: '#/definitions/__integer'
+        description: The number of programs in the multiplex.
+      State:
+        $ref: '#/definitions/MultiplexState'
+        description: The current state of the multiplex.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: A collection of key-value pairs.
+    description: Placeholder documentation for StopMultiplexResponse
   UpdateChannelResponse:
     type: object
     properties:
@@ -2920,6 +3948,20 @@ definitions:
       SecurityGroup:
         $ref: '#/definitions/InputSecurityGroup'
     description: Placeholder documentation for UpdateInputSecurityGroupResponse
+  UpdateMultiplexResponse:
+    type: object
+    properties:
+      Multiplex:
+        $ref: '#/definitions/Multiplex'
+        description: The updated multiplex.
+    description: Placeholder documentation for UpdateMultiplexResponse
+  UpdateMultiplexProgramResponse:
+    type: object
+    properties:
+      MultiplexProgram:
+        $ref: '#/definitions/MultiplexProgram'
+        description: The updated multiplex program.
+    description: Placeholder documentation for UpdateMultiplexProgramResponse
   UpdateReservationResponse:
     type: object
     properties:
@@ -3171,6 +4213,9 @@ definitions:
       KlvDataPids:
         $ref: '#/definitions/__string'
         description: 'Packet Identifier (PID) for input source KLV data to this output. Multiple values are accepted, and can be entered in ranges and/or by comma separation. Can be entered as decimal or hexadecimal values.  Each PID specified must be in the range of 32 (or 0x20)..8182 (or 0x1ff6).'
+      NielsenId3Behavior:
+        $ref: '#/definitions/M2tsNielsenId3Behavior'
+        description: 'If set to passthrough, Nielsen inaudible tones for media tracking will be detected in the input audio and an equivalent ID3 tag will be inserted in the output.'
       NullPacketBitrate:
         $ref: '#/definitions/__doubleMin0'
         description: Value in bits per second of extra null packets to insert into the transport stream. This can be used if a downstream encryption system requires periodic null packets.
@@ -3904,7 +4949,7 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: Name of the caption description.  Used to associate a caption description with an output.  Names must be unique within an event.
-    description: Output groups for this Live Event. Output groups contain information about where streams should be distributed.
+    description: Caption Description
   DvbSubDestinationSettings:
     type: object
     properties:
@@ -4145,6 +5190,9 @@ definitions:
       GlobalConfiguration:
         $ref: '#/definitions/GlobalConfiguration'
         description: Configuration settings that apply to the event as a whole.
+      NielsenConfiguration:
+        $ref: '#/definitions/NielsenConfiguration'
+        description: Nielsen configuration settings.
       OutputGroups:
         $ref: '#/definitions/__listOfOutputGroup'
       TimecodeConfig:
@@ -4517,6 +5565,135 @@ definitions:
         $ref: '#/definitions/__listOfInputWhitelistRule'
         description: Whitelist rules and their sync status
     description: An Input Security Group
+  MultiplexProgramSettings:
+    type: object
+    required:
+      - ProgramNumber
+    properties:
+      ProgramNumber:
+        $ref: '#/definitions/__integerMin0Max65535'
+        description: Unique program number.
+      ServiceDescriptor:
+        $ref: '#/definitions/MultiplexProgramServiceDescriptor'
+        description: Transport stream service descriptor configuration for the Multiplex program.
+      VideoSettings:
+        $ref: '#/definitions/MultiplexVideoSettings'
+        description: Program video settings configuration.
+    description: Multiplex Program settings configuration.
+  CreateMultiplexProgramRequest:
+    type: object
+    required:
+      - RequestId
+      - MultiplexProgramSettings
+      - ProgramName
+    properties:
+      MultiplexProgramSettings:
+        $ref: '#/definitions/MultiplexProgramSettings'
+        description: The settings for this multiplex program.
+      ProgramName:
+        $ref: '#/definitions/__string'
+        description: Name of multiplex program.
+      RequestId:
+        $ref: '#/definitions/__string'
+        description: |
+          Unique request ID. This prevents retries from creating multiple
+          resources.
+    description: A request to create a program in a multiplex.
+  MultiplexProgram:
+    type: object
+    properties:
+      ChannelId:
+        $ref: '#/definitions/__string'
+        description: The MediaLive channel associated with the program.
+      MultiplexProgramSettings:
+        $ref: '#/definitions/MultiplexProgramSettings'
+        description: The settings for this multiplex program.
+      PacketIdentifiersMap:
+        $ref: '#/definitions/MultiplexProgramPacketIdentifiersMap'
+        description: The packet identifier map for this multiplex program.
+      ProgramName:
+        $ref: '#/definitions/__string'
+        description: The name of the multiplex program.
+    description: The multiplex program object.
+  MultiplexSettings:
+    type: object
+    required:
+      - TransportStreamBitrate
+      - TransportStreamId
+    properties:
+      MaximumVideoBufferDelayMilliseconds:
+        $ref: '#/definitions/__integerMin1000Max3000'
+        description: Maximum video buffer delay in milliseconds.
+      TransportStreamBitrate:
+        $ref: '#/definitions/__integerMin1000000Max100000000'
+        description: Transport stream bit rate.
+      TransportStreamId:
+        $ref: '#/definitions/__integerMin0Max65535'
+        description: Transport stream ID.
+      TransportStreamReservedBitrate:
+        $ref: '#/definitions/__integerMin0Max100000000'
+        description: Transport stream reserved bit rate.
+    description: Contains configuration for a Multiplex event
+  CreateMultiplexRequest:
+    type: object
+    required:
+      - RequestId
+      - MultiplexSettings
+      - AvailabilityZones
+      - Name
+    properties:
+      AvailabilityZones:
+        $ref: '#/definitions/__listOf__string'
+        description: A list of availability zones for the multiplex. You must specify exactly two.
+      MultiplexSettings:
+        $ref: '#/definitions/MultiplexSettings'
+        description: Configuration for a multiplex event.
+      Name:
+        $ref: '#/definitions/__string'
+        description: Name of multiplex.
+      RequestId:
+        $ref: '#/definitions/__string'
+        description: |
+          Unique request ID. This prevents retries from creating multiple
+          resources.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: A collection of key-value pairs.
+    description: A request to create a multiplex.
+  Multiplex:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: The unique arn of the multiplex.
+      AvailabilityZones:
+        $ref: '#/definitions/__listOf__string'
+        description: A list of availability zones for the multiplex.
+      Destinations:
+        $ref: '#/definitions/__listOfMultiplexOutputDestination'
+        description: A list of the multiplex output destinations.
+      Id:
+        $ref: '#/definitions/__string'
+        description: The unique id of the multiplex.
+      MultiplexSettings:
+        $ref: '#/definitions/MultiplexSettings'
+        description: Configuration for a multiplex event.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the multiplex.
+      PipelinesRunningCount:
+        $ref: '#/definitions/__integer'
+        description: The number of currently healthy pipelines.
+      ProgramCount:
+        $ref: '#/definitions/__integer'
+        description: The number of programs in the multiplex.
+      State:
+        $ref: '#/definitions/MultiplexState'
+        description: The current state of the multiplex.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: A collection of key-value pairs.
+    description: The multiplex object.
   CreateTagsRequest:
     type: object
     properties:
@@ -4535,6 +5712,62 @@ definitions:
     type: object
     properties: {}
     description: Placeholder documentation for DeleteInputSecurityGroupRequest
+  DeleteMultiplexProgramRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for DeleteMultiplexProgramRequest
+  MultiplexProgramPacketIdentifiersMap:
+    type: object
+    properties:
+      AudioPids:
+        $ref: '#/definitions/__listOf__integer'
+      DvbSubPids:
+        $ref: '#/definitions/__listOf__integer'
+      DvbTeletextPid:
+        $ref: '#/definitions/__integer'
+      EtvPlatformPid:
+        $ref: '#/definitions/__integer'
+      EtvSignalPid:
+        $ref: '#/definitions/__integer'
+      KlvDataPids:
+        $ref: '#/definitions/__listOf__integer'
+      PcrPid:
+        $ref: '#/definitions/__integer'
+      PmtPid:
+        $ref: '#/definitions/__integer'
+      PrivateMetadataPid:
+        $ref: '#/definitions/__integer'
+      Scte27Pids:
+        $ref: '#/definitions/__listOf__integer'
+      Scte35Pid:
+        $ref: '#/definitions/__integer'
+      TimedMetadataPid:
+        $ref: '#/definitions/__integer'
+      VideoPid:
+        $ref: '#/definitions/__integer'
+    description: Packet identifiers map for a given Multiplex program.
+  DeleteMultiplexRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for DeleteMultiplexRequest
+  __listOfMultiplexOutputDestination:
+    type: array
+    description: Placeholder documentation for __listOfMultiplexOutputDestination
+    items:
+      $ref: '#/definitions/MultiplexOutputDestination'
+  MultiplexState:
+    type: string
+    enum:
+      - CREATING
+      - CREATE_FAILED
+      - IDLE
+      - STARTING
+      - RUNNING
+      - RECOVERING
+      - STOPPING
+      - DELETING
+      - DELETED
+    description: The current state of the multiplex.
   DeleteReservationRequest:
     type: object
     properties: {}
@@ -4569,7 +5802,7 @@ definitions:
         description: 'Resolution, e.g. ''HD'''
       ResourceType:
         $ref: '#/definitions/ReservationResourceType'
-        description: 'Resource type, ''INPUT'', ''OUTPUT'', or ''CHANNEL'''
+        description: 'Resource type, ''INPUT'', ''OUTPUT'', ''MULTIPLEX'', or ''CHANNEL'''
       SpecialFeature:
         $ref: '#/definitions/ReservationSpecialFeature'
         description: 'Special feature, e.g. ''AUDIO_NORMALIZATION'' (Channels only)'
@@ -4657,6 +5890,14 @@ definitions:
     description: Placeholder documentation for __listOfInputWhitelistRule
     items:
       $ref: '#/definitions/InputWhitelistRule'
+  DescribeMultiplexProgramRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for DescribeMultiplexProgramRequest
+  DescribeMultiplexRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for DescribeMultiplexRequest
   DescribeOfferingRequest:
     type: object
     properties: {}
@@ -4998,19 +6239,19 @@ definitions:
         $ref: '#/definitions/__string'
         description: Required if the output group contains more than one output. This modifier forms part of the output file name.
     description: Frame Capture Output Settings
-  __integerMin1Max3600:
+  __integerMin1Max3600000:
     type: integer
-    description: Placeholder documentation for __integerMin1Max3600
+    description: Placeholder documentation for __integerMin1Max3600000
     minimum: 1
-    maximum: 3600
+    maximum: 3600000
   FrameCaptureSettings:
     type: object
     required:
       - CaptureInterval
     properties:
       CaptureInterval:
-        $ref: '#/definitions/__integerMin1Max3600'
-        description: 'The frequency, in seconds, for capturing frames for inclusion in the output.  For example, "10" means capture a frame every 10 seconds.'
+        $ref: '#/definitions/__integerMin1Max3600000'
+        description: 'The frequency at which to capture frames for inclusion in the output. May be specified in either seconds or milliseconds, as specified by captureIntervalUnits.'
     description: Frame Capture Settings
   __integerMinNegative60Max60:
     type: integer
@@ -5197,10 +6438,6 @@ definitions:
     description: Placeholder documentation for __integerMin0Max100
     minimum: 0
     maximum: 100
-  __doubleMin1:
-    type: number
-    description: Placeholder documentation for __doubleMin1
-    format: double
   __integerMin0Max30:
     type: integer
     description: Placeholder documentation for __integerMin0Max30
@@ -5308,8 +6545,11 @@ definitions:
         $ref: '#/definitions/__integerMin0Max7'
         description: Number of B-frames between reference frames.
       GopSize:
-        $ref: '#/definitions/__doubleMin1'
-        description: GOP size (keyframe interval) in units of either frames or seconds per gopSizeUnits. Must be greater than zero.
+        $ref: '#/definitions/__double'
+        description: |-
+          GOP size (keyframe interval) in units of either frames or seconds per gopSizeUnits.
+          If gopSizeUnits is frames, gopSize must be an integer and must be greater than or equal to 1.
+          If gopSizeUnits is seconds, gopSize must be greater than 0, but need not be an integer.
       GopSizeUnits:
         $ref: '#/definitions/H264GopSizeUnits'
         description: Indicates if the gopSize is specified in frames or seconds. If seconds the system will convert the gopSize into a frame count at run time.
@@ -5327,7 +6567,7 @@ definitions:
           For VBR: Set the maximum bitrate in order to accommodate expected spikes in the complexity of the video.
       MinIInterval:
         $ref: '#/definitions/__integerMin0Max30'
-        description: 'Only meaningful if sceneChangeDetect is set to enabled.  Enforces separation between repeated (cadence) I-frames and I-frames inserted by Scene Change Detection. If a scene change I-frame is within I-interval frames of a cadence I-frame, the GOP is shrunk and/or stretched to the scene change I-frame. GOP stretch requires enabling lookahead as well as setting I-interval. The normal cadence resumes for the next GOP. Note: Maximum GOP stretch = GOP size + Min-I-interval - 1'
+        description: 'Only meaningful if sceneChangeDetect is set to enabled.  Defaults to 5 if multiplex rate control is used.  Enforces separation between repeated (cadence) I-frames and I-frames inserted by Scene Change Detection. If a scene change I-frame is within I-interval frames of a cadence I-frame, the GOP is shrunk and/or stretched to the scene change I-frame. GOP stretch requires enabling lookahead as well as setting I-interval. The normal cadence resumes for the next GOP. Note: Maximum GOP stretch = GOP size + Min-I-interval - 1'
       NumRefFrames:
         $ref: '#/definitions/__integerMin1Max6'
         description: Number of reference frames to use. The encoder may use more than requested if using B-frames and/or interlaced encoding.
@@ -5497,6 +6737,7 @@ definitions:
     type: string
     enum:
       - CBR
+      - MULTIPLEX
       - QVBR
     description: H265 Rate Control Mode
   H265ScanType:
@@ -5585,8 +6826,11 @@ definitions:
         $ref: '#/definitions/__integerMin0'
         description: 'Frequency of closed GOPs. In streaming applications, it is recommended that this be set to 1 so a decoder joining mid-stream will receive an IDR frame as quickly as possible. Setting this value to 0 will break output segmenting.'
       GopSize:
-        $ref: '#/definitions/__doubleMin1'
-        description: GOP size (keyframe interval) in units of either frames or seconds per gopSizeUnits. Must be greater than zero.
+        $ref: '#/definitions/__double'
+        description: |-
+          GOP size (keyframe interval) in units of either frames or seconds per gopSizeUnits.
+          If gopSizeUnits is frames, gopSize must be an integer and must be greater than or equal to 1.
+          If gopSizeUnits is seconds, gopSize must be greater than 0, but need not be an integer.
       GopSizeUnits:
         $ref: '#/definitions/H265GopSizeUnits'
         description: Indicates if the gopSize is specified in frames or seconds. If seconds the system will convert the gopSize into a frame count at run time.
@@ -5601,7 +6845,7 @@ definitions:
         description: 'For QVBR: See the tooltip for Quality level'
       MinIInterval:
         $ref: '#/definitions/__integerMin0Max30'
-        description: 'Only meaningful if sceneChangeDetect is set to enabled.  Enforces separation between repeated (cadence) I-frames and I-frames inserted by Scene Change Detection. If a scene change I-frame is within I-interval frames of a cadence I-frame, the GOP is shrunk and/or stretched to the scene change I-frame. GOP stretch requires enabling lookahead as well as setting I-interval. The normal cadence resumes for the next GOP. Note: Maximum GOP stretch = GOP size + Min-I-interval - 1'
+        description: 'Only meaningful if sceneChangeDetect is set to enabled.  Defaults to 5 if multiplex rate control is used.  Enforces separation between repeated (cadence) I-frames and I-frames inserted by Scene Change Detection. If a scene change I-frame is within I-interval frames of a cadence I-frame, the GOP is shrunk and/or stretched to the scene change I-frame. GOP stretch requires enabling lookahead as well as setting I-interval. The normal cadence resumes for the next GOP. Note: Maximum GOP stretch = GOP size + Min-I-interval - 1'
       ParDenominator:
         $ref: '#/definitions/__integerMin1'
         description: Pixel Aspect Ratio denominator.
@@ -6423,6 +7667,24 @@ definitions:
     description: Placeholder documentation for __listOfInput
     items:
       $ref: '#/definitions/Input'
+  ListMultiplexProgramsRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for ListMultiplexProgramsRequest
+  __listOfMultiplexProgramSummary:
+    type: array
+    description: Placeholder documentation for __listOfMultiplexProgramSummary
+    items:
+      $ref: '#/definitions/MultiplexProgramSummary'
+  ListMultiplexesRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for ListMultiplexesRequest
+  __listOfMultiplexSummary:
+    type: array
+    description: Placeholder documentation for __listOfMultiplexSummary
+    items:
+      $ref: '#/definitions/MultiplexSummary'
   ListOfferingsRequest:
     type: object
     properties: {}
@@ -6517,6 +7779,12 @@ definitions:
       - NONE
       - PASSTHROUGH
     description: M2ts Klv
+  M2tsNielsenId3Behavior:
+    type: string
+    enum:
+      - NO_PASSTHROUGH
+      - PASSTHROUGH
+    description: M2ts Nielsen Id3 Behavior
   M2tsPcrControl:
     type: string
     enum:
@@ -6570,17 +7838,22 @@ definitions:
     description: Placeholder documentation for __integerMin0Max500
     minimum: 0
     maximum: 500
-  __integerMin0Max65535:
-    type: integer
-    description: Placeholder documentation for __integerMin0Max65535
-    minimum: 0
-    maximum: 65535
+  __doubleMin1:
+    type: number
+    description: Placeholder documentation for __doubleMin1
+    format: double
   M2tsTimedMetadataBehavior:
     type: string
     enum:
       - NO_PASSTHROUGH
       - PASSTHROUGH
     description: M2ts Timed Metadata Behavior
+  M3u8NielsenId3Behavior:
+    type: string
+    enum:
+      - NO_PASSTHROUGH
+      - PASSTHROUGH
+    description: M3u8 Nielsen Id3 Behavior
   M3u8PcrControl:
     type: string
     enum:
@@ -6611,6 +7884,9 @@ definitions:
       EcmPid:
         $ref: '#/definitions/__string'
         description: This parameter is unused and deprecated.
+      NielsenId3Behavior:
+        $ref: '#/definitions/M3u8NielsenId3Behavior'
+        description: 'If set to passthrough, Nielsen inaudible tones for media tracking will be detected in the input audio and an equivalent ID3 tag will be inserted in the output.'
       PatInterval:
         $ref: '#/definitions/__integerMin0Max1000'
         description: The number of milliseconds between instances of this table in the output transport stream. A value of \"0\" writes out the PMT once per segment file.
@@ -6826,12 +8102,129 @@ definitions:
         $ref: '#/definitions/__string'
         description: String concatenated to the end of the destination filename.  Required for multiple outputs of the same type.
     description: Ms Smooth Output Settings
+  MultiplexGroupSettings:
+    type: object
+    properties: {}
+    description: Multiplex Group Settings
+  MultiplexMediaConnectOutputDestinationSettings:
+    type: object
+    properties:
+      EntitlementArn:
+        $ref: '#/definitions/__stringMin1'
+        description: The MediaConnect entitlement ARN available as a Flow source.
+    description: Multiplex MediaConnect output destination settings.
+  MultiplexOutputDestination:
+    type: object
+    properties:
+      MediaConnectSettings:
+        $ref: '#/definitions/MultiplexMediaConnectOutputDestinationSettings'
+        description: Multiplex MediaConnect output destination settings.
+    description: Multiplex output destination settings
+  MultiplexOutputSettings:
+    type: object
+    required:
+      - Destination
+    properties:
+      Destination:
+        $ref: '#/definitions/OutputLocationRef'
+        description: Destination is a Multiplex.
+    description: Multiplex Output Settings
+  MultiplexProgramChannelDestinationSettings:
+    type: object
+    properties:
+      MultiplexId:
+        $ref: '#/definitions/__stringMin1'
+        description: |-
+          The ID of the Multiplex that the encoder is providing output to. You do not need to specify the individual inputs to the Multiplex; MediaLive will handle the connection of the two MediaLive pipelines to the two Multiplex instances.
+          The Multiplex must be in the same region as the Channel.
+      ProgramName:
+        $ref: '#/definitions/__stringMin1'
+        description: The program name of the Multiplex program that the encoder is providing output to.
+    description: Multiplex Program Input Destination Settings for outputting a Channel to a Multiplex
+  __listOf__integer:
+    type: array
+    description: Placeholder documentation for __listOf__integer
+    items:
+      $ref: '#/definitions/__integer'
+  __stringMax256:
+    type: string
+    description: Placeholder documentation for __stringMax256
+    maxLength: 256
+  MultiplexProgramSummary:
+    type: object
+    properties:
+      ChannelId:
+        $ref: '#/definitions/__string'
+        description: The MediaLive Channel associated with the program.
+      ProgramName:
+        $ref: '#/definitions/__string'
+        description: The name of the multiplex program.
+    description: Placeholder documentation for MultiplexProgramSummary
+  MultiplexSettingsSummary:
+    type: object
+    properties:
+      TransportStreamBitrate:
+        $ref: '#/definitions/__integerMin1000000Max100000000'
+        description: Transport stream bit rate.
+    description: Contains summary configuration for a Multiplex event.
+  __integerMin100000Max100000000:
+    type: integer
+    description: Placeholder documentation for __integerMin100000Max100000000
+    minimum: 100000
+    maximum: 100000000
+  MultiplexStatmuxVideoSettings:
+    type: object
+    properties:
+      MaximumBitrate:
+        $ref: '#/definitions/__integerMin100000Max100000000'
+        description: Maximum statmux bitrate.
+      MinimumBitrate:
+        $ref: '#/definitions/__integerMin100000Max100000000'
+        description: Minimum statmux bitrate.
+    description: Statmux rate control settings
+  MultiplexSummary:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: The unique arn of the multiplex.
+      AvailabilityZones:
+        $ref: '#/definitions/__listOf__string'
+        description: A list of availability zones for the multiplex.
+      Id:
+        $ref: '#/definitions/__string'
+        description: The unique id of the multiplex.
+      MultiplexSettings:
+        $ref: '#/definitions/MultiplexSettingsSummary'
+        description: Configuration for a multiplex event.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the multiplex.
+      PipelinesRunningCount:
+        $ref: '#/definitions/__integer'
+        description: The number of currently healthy pipelines.
+      ProgramCount:
+        $ref: '#/definitions/__integer'
+        description: The number of programs in the multiplex.
+      State:
+        $ref: '#/definitions/MultiplexState'
+        description: The current state of the multiplex.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: A collection of key-value pairs.
+    description: Placeholder documentation for MultiplexSummary
   NetworkInputServerValidation:
     type: string
     enum:
       - CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME
       - CHECK_CRYPTOGRAPHY_ONLY
     description: Network Input Server Validation
+  NielsenPcmToId3TaggingState:
+    type: string
+    enum:
+      - DISABLED
+      - ENABLED
+    description: State of Nielsen PCM to ID3 tagging
   Offering:
     type: object
     properties:
@@ -6887,6 +8280,8 @@ definitions:
         $ref: '#/definitions/MediaPackageOutputSettings'
       MsSmoothOutputSettings:
         $ref: '#/definitions/MsSmoothOutputSettings'
+      MultiplexOutputSettings:
+        $ref: '#/definitions/MultiplexOutputSettings'
       RtmpOutputSettings:
         $ref: '#/definitions/RtmpOutputSettings'
       UdpOutputSettings:
@@ -6956,6 +8351,8 @@ definitions:
         $ref: '#/definitions/MediaPackageGroupSettings'
       MsSmoothGroupSettings:
         $ref: '#/definitions/MsSmoothGroupSettings'
+      MultiplexGroupSettings:
+        $ref: '#/definitions/MultiplexGroupSettings'
       RtmpGroupSettings:
         $ref: '#/definitions/RtmpGroupSettings'
       UdpGroupSettings:
@@ -7210,16 +8607,18 @@ definitions:
     enum:
       - SD
       - HD
+      - FHD
       - UHD
     description: |
-      Resolution based on lines of vertical resolution; SD is less than 720 lines, HD is 720 to 1080 lines, UHD is greater than 1080 lines
+      Resolution based on lines of vertical resolution; SD is less than 720 lines, HD is 720 to 1080 lines, FHD is 1080 lines, UHD is greater than 1080 lines
   ReservationResourceType:
     type: string
     enum:
       - INPUT
       - OUTPUT
+      - MULTIPLEX
       - CHANNEL
-    description: 'Resource type, ''INPUT'', ''OUTPUT'', or ''CHANNEL'''
+    description: 'Resource type, ''INPUT'', ''OUTPUT'', ''MULTIPLEX'', or ''CHANNEL'''
   ReservationSpecialFeature:
     type: string
     enum:
@@ -7560,10 +8959,18 @@ definitions:
     type: object
     properties: {}
     description: Placeholder documentation for StartChannelRequest
+  StartMultiplexRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for StartMultiplexRequest
   StopChannelRequest:
     type: object
     properties: {}
     description: Placeholder documentation for StopChannelRequest
+  StopMultiplexRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for StopMultiplexRequest
   TimecodeConfigSource:
     type: string
     enum:
@@ -7669,6 +9076,23 @@ definitions:
         $ref: '#/definitions/__listOfInputWhitelistRuleCidr'
         description: List of IPv4 CIDR addresses to whitelist
     description: The request to update some combination of the Input Security Group name and the IPv4 CIDRs the Input Security Group should allow.
+  UpdateMultiplexProgramRequest:
+    type: object
+    properties:
+      MultiplexProgramSettings:
+        $ref: '#/definitions/MultiplexProgramSettings'
+        description: The new settings for a multiplex program.
+    description: A request to update a program in a multiplex.
+  UpdateMultiplexRequest:
+    type: object
+    properties:
+      MultiplexSettings:
+        $ref: '#/definitions/MultiplexSettings'
+        description: The new settings for a multiplex.
+      Name:
+        $ref: '#/definitions/__string'
+        description: Name of the multiplex.
+    description: A request to update a multiplex.
   UpdateReservationRequest:
     type: object
     properties:

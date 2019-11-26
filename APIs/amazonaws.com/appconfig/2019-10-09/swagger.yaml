@@ -1,0 +1,2255 @@
+swagger: '2.0'
+info:
+  version: '2019-10-09'
+  x-release: v4
+  title: Amazon AppConfig
+  description: '<fullname>AWS AppConfig</fullname> <p>Use AWS AppConfig, a capability of AWS Systems Manager, to create, manage, and quickly deploy application configurations. AppConfig supports controlled deployments to applications of any size and includes built-in validation checks and monitoring. You can use AppConfig with applications hosted on Amazon EC2 instances, AWS Lambda, containers, mobile applications, or IoT devices.</p> <p>To prevent errors when deploying application configurations, especially for production systems where a simple typo could cause an unexpected outage, AppConfig includes validators. A validator provides a syntactic or semantic check to ensure that the configuration you want to deploy works as intended. To validate your application configuration data, you provide a schema or a Lambda function that runs against the configuration. The configuration deployment or update can only proceed when the configuration data is valid.</p> <p>During a configuration deployment, AppConfig monitors the application to ensure that the deployment is successful. If the system encounters an error, AppConfig rolls back the change to minimize impact for your application users. You can configure a deployment strategy for each application or environment that includes deployment criteria, including velocity, bake time, and alarms to monitor. Similar to error monitoring, if a deployment triggers an alarm, AppConfig automatically rolls back to the previous version. </p> <p>AppConfig supports multiple use cases. Here are some examples.</p> <ul> <li> <p> <b>Application tuning</b>: Use AppConfig to carefully introduce changes to your application that can only be tested with production traffic.</p> </li> <li> <p> <b>Feature toggle</b>: Use AppConfig to turn on new features that require a timely deployment, such as a product launch or announcement. </p> </li> <li> <p> <b>User membership</b>: Use AppConfig to allow premium subscribers to access paid content. </p> </li> <li> <p> <b>Operational issues</b>: Use AppConfig to reduce stress on your application when a dependency or other external factor impacts the system.</p> </li> </ul> <p>This reference is intended to be used with the <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/appconfig.html">AWS AppConfig User Guide</a>.</p>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: appconfig
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/appconfig-2019-10-09.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/appconfig/'
+host: appconfig.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+x-servers:
+  - url: 'http://appconfig.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The AppConfig multi-region endpoint
+  - url: 'https://appconfig.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The AppConfig multi-region endpoint
+  - url: 'http://appconfig.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AppConfig endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://appconfig.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AppConfig endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  /applications:
+    post:
+      operationId: CreateApplication
+      description: 'An application in AppConfig is a logical unit of code that provides capabilities for your customers. For example, an application can be a microservice that runs on Amazon EC2 instances, a mobile application installed by your users, a serverless application using Amazon API Gateway and AWS Lambda, or any system you run on behalf of others.'
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/Application'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - Name
+            properties:
+              Name:
+                description: A name for the application.
+                type: string
+                minLength: 1
+                maxLength: 64
+              Description:
+                description: A description of the application.
+                type: string
+                minLength: 0
+                maxLength: 1024
+              Tags:
+                description: 'Metadata to assign to the application. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define.'
+                type: object
+                minProperties: 0
+                maxProperties: 50
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListApplications
+      description: List all applications in your AWS account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Applications'
+        '480':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: max_results
+          in: query
+          required: false
+          description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+          type: integer
+          minimum: 1
+          maximum: 50
+        - name: next_token
+          in: query
+          required: false
+          description: A token to start the list. Use this token to get the next set of results.
+          type: string
+          minLength: 1
+          maxLength: 2048
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+  '/applications/{ApplicationId}/configurationprofiles':
+    post:
+      operationId: CreateConfigurationProfile
+      description: <p>Information that enables AppConfig to access the configuration source. Valid configuration sources include Systems Manager (SSM) documents and SSM Parameter Store parameters. A configuration profile includes the following information.</p> <ul> <li> <p>The Uri location of the configuration data.</p> </li> <li> <p>The AWS Identity and Access Management (IAM) role that provides access to the configuration data.</p> </li> <li> <p>A validator for the configuration data. Available validators include either a JSON Schema or an AWS Lambda function.</p> </li> </ul>
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/ConfigurationProfile'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: ApplicationId
+          in: path
+          required: true
+          description: The application ID.
+          type: string
+          pattern: '[a-z0-9]{4,7}'
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - Name
+              - LocationUri
+              - RetrievalRoleArn
+            properties:
+              Name:
+                description: A name for the configuration profile.
+                type: string
+                minLength: 1
+                maxLength: 64
+              Description:
+                description: A description of the configuration profile.
+                type: string
+                minLength: 0
+                maxLength: 1024
+              LocationUri:
+                description: 'A URI to locate the configuration. You can specify either a Systems Manager (SSM) document or an SSM Parameter Store parameter. For an SSM document, specify either the document name in the format <code>ssm-document://&lt;Document name&gt;</code> or the Amazon Resource Name (ARN). For a parameter, specify either the parameter name in the format <code>ssm-parameter://&lt;Parameter name&gt;</code> or the ARN.'
+                type: string
+                minLength: 1
+                maxLength: 2048
+              RetrievalRoleArn:
+                description: The ARN of an IAM role with permission to access the configuration at the specified LocationUri.
+                type: string
+                pattern: 'arn:(aws[a-zA-Z-]*)?:[a-z]+:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1})?:(\d{12})?:[a-zA-Z0-9-_/:.]+'
+                minLength: 20
+                maxLength: 2048
+              Validators:
+                description: A list of methods for validating the configuration.
+                type: array
+                items:
+                  $ref: '#/definitions/Validator'
+                minItems: 0
+                maxItems: 2
+              Tags:
+                description: 'Metadata to assign to the configuration profile. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define.'
+                type: object
+                minProperties: 0
+                maxProperties: 50
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListConfigurationProfiles
+      description: Lists the configuration profiles for an application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ConfigurationProfiles'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: ApplicationId
+          in: path
+          required: true
+          description: The application ID.
+          type: string
+          pattern: '[a-z0-9]{4,7}'
+        - name: max_results
+          in: query
+          required: false
+          description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+          type: integer
+          minimum: 1
+          maximum: 50
+        - name: next_token
+          in: query
+          required: false
+          description: A token to start the list. Use this token to get the next set of results.
+          type: string
+          minLength: 1
+          maxLength: 2048
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+  /deploymentstrategies:
+    post:
+      operationId: CreateDeploymentStrategy
+      description: 'A deployment strategy defines important criteria for rolling out your configuration to the designated targets. A deployment strategy includes: the overall duration required, a percentage of targets to receive the deployment during each interval, an algorithm that defines how percentage grows, and bake time.'
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeploymentStrategy'
+        '480':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - Name
+              - DeploymentDurationInMinutes
+              - GrowthFactor
+              - ReplicateTo
+            properties:
+              Name:
+                description: A name for the deployment strategy.
+                type: string
+                minLength: 1
+                maxLength: 64
+              Description:
+                description: A description of the deployment strategy.
+                type: string
+                minLength: 0
+                maxLength: 1024
+              DeploymentDurationInMinutes:
+                description: Total amount of time for a deployment to last.
+                type: integer
+                minimum: 0
+                maximum: 1440
+              FinalBakeTimeInMinutes:
+                description: The amount of time AppConfig monitors for alarms before considering the deployment to be complete and no longer eligible for automatic roll back.
+                type: integer
+                minimum: 0
+                maximum: 1440
+              GrowthFactor:
+                description: The percentage of targets to receive a deployed configuration during each interval.
+                type: number
+                format: float
+                minimum: 1
+                maximum: 100
+              GrowthType:
+                description: The algorithm used to define how percentage grows over time.
+                type: string
+                enum:
+                  - LINEAR
+              ReplicateTo:
+                description: Save the deployment strategy to a Systems Manager (SSM) document.
+                type: string
+                enum:
+                  - NONE
+                  - SSM_DOCUMENT
+              Tags:
+                description: 'Metadata to assign to the deployment strategy. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define.'
+                type: object
+                minProperties: 0
+                maxProperties: 50
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListDeploymentStrategies
+      description: List deployment strategies.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeploymentStrategies'
+        '480':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: max_results
+          in: query
+          required: false
+          description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+          type: integer
+          minimum: 1
+          maximum: 50
+        - name: next_token
+          in: query
+          required: false
+          description: A token to start the list. Use this token to get the next set of results.
+          type: string
+          minLength: 1
+          maxLength: 2048
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+  '/applications/{ApplicationId}/environments':
+    post:
+      operationId: CreateEnvironment
+      description: 'For each application, you define one or more environments. An environment is a logical deployment group of AppConfig targets, such as applications in a <code>Beta</code> or <code>Production</code> environment. You can also define environments for application subcomponents such as the <code>Web</code>, <code>Mobile</code> and <code>Back-end</code> components for your application. You can configure Amazon CloudWatch alarms for each environment. The system monitors alarms during a configuration deployment. If an alarm is triggered, the system rolls back the configuration.'
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/Environment'
+        '480':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: ApplicationId
+          in: path
+          required: true
+          description: The application ID.
+          type: string
+          pattern: '[a-z0-9]{4,7}'
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - Name
+            properties:
+              Name:
+                description: A name for the environment.
+                type: string
+                minLength: 1
+                maxLength: 64
+              Description:
+                description: A description of the environment.
+                type: string
+                minLength: 0
+                maxLength: 1024
+              Monitors:
+                description: Amazon CloudWatch alarms to monitor during the deployment process.
+                type: array
+                items:
+                  $ref: '#/definitions/Monitor'
+                minItems: 0
+                maxItems: 5
+              Tags:
+                description: 'Metadata to assign to the environment. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define.'
+                type: object
+                minProperties: 0
+                maxProperties: 50
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListEnvironments
+      description: List the environments for an application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Environments'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: ApplicationId
+          in: path
+          required: true
+          description: The application ID.
+          type: string
+          pattern: '[a-z0-9]{4,7}'
+        - name: max_results
+          in: query
+          required: false
+          description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+          type: integer
+          minimum: 1
+          maximum: 50
+        - name: next_token
+          in: query
+          required: false
+          description: A token to start the list. Use this token to get the next set of results.
+          type: string
+          minLength: 1
+          maxLength: 2048
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+  '/applications/{ApplicationId}':
+    delete:
+      operationId: DeleteApplication
+      description: Delete an application. Deleting an application does not delete a configuration from a host.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: ApplicationId
+          in: path
+          required: true
+          description: The ID of the application to delete.
+          type: string
+          pattern: '[a-z0-9]{4,7}'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetApplication
+      description: Retrieve information about an application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Application'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: ApplicationId
+          in: path
+          required: true
+          description: The ID of the application you want to get.
+          type: string
+          pattern: '[a-z0-9]{4,7}'
+    patch:
+      operationId: UpdateApplication
+      description: Updates an application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Application'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: ApplicationId
+          in: path
+          required: true
+          description: The application ID.
+          type: string
+          pattern: '[a-z0-9]{4,7}'
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              Name:
+                description: The name of the application.
+                type: string
+                minLength: 1
+                maxLength: 64
+              Description:
+                description: A description of the application.
+                type: string
+                minLength: 0
+                maxLength: 1024
+  '/applications/{ApplicationId}/configurationprofiles/{ConfigurationProfileId}':
+    delete:
+      operationId: DeleteConfigurationProfile
+      description: Delete a configuration profile. Deleting a configuration profile does not delete a configuration from a host.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: ApplicationId
+          in: path
+          required: true
+          description: The application ID that includes the configuration profile you want to delete.
+          type: string
+          pattern: '[a-z0-9]{4,7}'
+        - name: ConfigurationProfileId
+          in: path
+          required: true
+          description: The ID of the configuration profile you want to delete.
+          type: string
+          pattern: '[a-z0-9]{4,7}'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetConfigurationProfile
+      description: Retrieve information about a configuration profile.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ConfigurationProfile'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: ApplicationId
+          in: path
+          required: true
+          description: The ID of the application that includes the configuration profile you want to get.
+          type: string
+          pattern: '[a-z0-9]{4,7}'
+        - name: ConfigurationProfileId
+          in: path
+          required: true
+          description: The ID of the configuration profile you want to get.
+          type: string
+          pattern: '[a-z0-9]{4,7}'
+    patch:
+      operationId: UpdateConfigurationProfile
+      description: Updates a configuration profile.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ConfigurationProfile'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: ApplicationId
+          in: path
+          required: true
+          description: The application ID.
+          type: string
+          pattern: '[a-z0-9]{4,7}'
+        - name: ConfigurationProfileId
+          in: path
+          required: true
+          description: The ID of the configuration profile.
+          type: string
+          pattern: '[a-z0-9]{4,7}'
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              Name:
+                description: The name of the configuration profile.
+                type: string
+                minLength: 1
+                maxLength: 64
+              Description:
+                description: A description of the configuration profile.
+                type: string
+                minLength: 0
+                maxLength: 1024
+              RetrievalRoleArn:
+                description: The ARN of an IAM role with permission to access the configuration at the specified LocationUri.
+                type: string
+                pattern: 'arn:(aws[a-zA-Z-]*)?:[a-z]+:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1})?:(\d{12})?:[a-zA-Z0-9-_/:.]+'
+                minLength: 20
+                maxLength: 2048
+              Validators:
+                description: A list of methods for validating the configuration.
+                type: array
+                items:
+                  $ref: '#/definitions/Validator'
+                minItems: 0
+                maxItems: 2
+  '/deployementstrategies/{DeploymentStrategyId}':
+    delete:
+      operationId: DeleteDeploymentStrategy
+      description: Delete a deployment strategy. Deleting a deployment strategy does not delete a configuration from a host.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: DeploymentStrategyId
+          in: path
+          required: true
+          description: The ID of the deployment strategy you want to delete.
+          type: string
+          pattern: '([a-z0-9]{4,7}|arn:aws.*)'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/applications/{ApplicationId}/environments/{EnvironmentId}':
+    delete:
+      operationId: DeleteEnvironment
+      description: Delete an environment. Deleting an environment does not delete a configuration from a host.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: ApplicationId
+          in: path
+          required: true
+          description: The application ID that includes the environment you want to delete.
+          type: string
+          pattern: '[a-z0-9]{4,7}'
+        - name: EnvironmentId
+          in: path
+          required: true
+          description: The ID of the environment you want to delete.
+          type: string
+          pattern: '[a-z0-9]{4,7}'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetEnvironment
+      description: 'Retrieve information about an environment. An environment is a logical deployment group of AppConfig applications, such as applications in a <code>Production</code> environment or in an <code>EU_Region</code> environment. Each configuration deployment targets an environment. You can enable one or more Amazon CloudWatch alarms for an environment. If an alarm is triggered during a deployment, AppConfig roles back the configuration.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Environment'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: ApplicationId
+          in: path
+          required: true
+          description: The ID of the application that includes the environment you want to get.
+          type: string
+          pattern: '[a-z0-9]{4,7}'
+        - name: EnvironmentId
+          in: path
+          required: true
+          description: The ID of the environment you wnat to get.
+          type: string
+          pattern: '[a-z0-9]{4,7}'
+    patch:
+      operationId: UpdateEnvironment
+      description: Updates an environment.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Environment'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: ApplicationId
+          in: path
+          required: true
+          description: The application ID.
+          type: string
+          pattern: '[a-z0-9]{4,7}'
+        - name: EnvironmentId
+          in: path
+          required: true
+          description: The environment ID.
+          type: string
+          pattern: '[a-z0-9]{4,7}'
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              Name:
+                description: The name of the environment.
+                type: string
+                minLength: 1
+                maxLength: 64
+              Description:
+                description: A description of the environment.
+                type: string
+                minLength: 0
+                maxLength: 1024
+              Monitors:
+                description: Amazon CloudWatch alarms to monitor during the deployment process.
+                type: array
+                items:
+                  $ref: '#/definitions/Monitor'
+                minItems: 0
+                maxItems: 5
+  '/applications/{Application}/environments/{Environment}/configurations/{Configuration}#client_id':
+    get:
+      operationId: GetConfiguration
+      description: Retrieve information about a configuration.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Configuration'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: Application
+          in: path
+          required: true
+          description: The application to get.
+          type: string
+          minLength: 1
+          maxLength: 64
+        - name: Environment
+          in: path
+          required: true
+          description: The environment to get.
+          type: string
+          minLength: 1
+          maxLength: 64
+        - name: Configuration
+          in: path
+          required: true
+          description: The configuration to get.
+          type: string
+          minLength: 1
+          maxLength: 64
+        - name: client_id
+          in: query
+          required: true
+          description: 'A unique ID to identify the client for the configuration. This ID enables AppConfig to deploy the configuration in intervals, as defined in the deployment strategy.'
+          type: string
+          minLength: 1
+          maxLength: 64
+        - name: client_configuration_version
+          in: query
+          required: false
+          description: The configuration version returned in the most recent GetConfiguration response.
+          type: string
+          minLength: 1
+          maxLength: 128
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/applications/{ApplicationId}/environments/{EnvironmentId}/deployments/{DeploymentNumber}':
+    get:
+      operationId: GetDeployment
+      description: Retrieve information about a configuration deployment.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Deployment'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: ApplicationId
+          in: path
+          required: true
+          description: 'The ID of the application that includes the deployment you want to get. '
+          type: string
+          pattern: '[a-z0-9]{4,7}'
+        - name: EnvironmentId
+          in: path
+          required: true
+          description: 'The ID of the environment that includes the deployment you want to get. '
+          type: string
+          pattern: '[a-z0-9]{4,7}'
+        - name: DeploymentNumber
+          in: path
+          required: true
+          description: The sequence number of the deployment.
+          type: integer
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: StopDeployment
+      description: Stops a deployment. This API action works only on deployments that have a status of <code>DEPLOYING</code>. This action moves the deployment to a status of <code>ROLLED_BACK</code>.
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/Deployment'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: ApplicationId
+          in: path
+          required: true
+          description: The application ID.
+          type: string
+          pattern: '[a-z0-9]{4,7}'
+        - name: EnvironmentId
+          in: path
+          required: true
+          description: The environment ID.
+          type: string
+          pattern: '[a-z0-9]{4,7}'
+        - name: DeploymentNumber
+          in: path
+          required: true
+          description: The sequence number of the deployment.
+          type: integer
+  '/deploymentstrategies/{DeploymentStrategyId}':
+    get:
+      operationId: GetDeploymentStrategy
+      description: 'Retrieve information about a deployment strategy. A deployment strategy defines important criteria for rolling out your configuration to the designated targets. A deployment strategy includes: the overall duration required, a percentage of targets to receive the deployment during each interval, an algorithm that defines how percentage grows, and bake time.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeploymentStrategy'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: DeploymentStrategyId
+          in: path
+          required: true
+          description: The ID of the deployment strategy to get.
+          type: string
+          pattern: '([a-z0-9]{4,7}|arn:aws.*)'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    patch:
+      operationId: UpdateDeploymentStrategy
+      description: Updates a deployment strategy.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeploymentStrategy'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: DeploymentStrategyId
+          in: path
+          required: true
+          description: The deployment strategy ID.
+          type: string
+          pattern: '([a-z0-9]{4,7}|arn:aws.*)'
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              Description:
+                description: A description of the deployment strategy.
+                type: string
+                minLength: 0
+                maxLength: 1024
+              DeploymentDurationInMinutes:
+                description: Total amount of time for a deployment to last.
+                type: integer
+                minimum: 0
+                maximum: 1440
+              FinalBakeTimeInMinutes:
+                description: The amount of time AppConfig monitors for alarms before considering the deployment to be complete and no longer eligible for automatic roll back.
+                type: integer
+                minimum: 0
+                maximum: 1440
+              GrowthFactor:
+                description: The percentage of targets to receive a deployed configuration during each interval.
+                type: number
+                format: float
+                minimum: 1
+                maximum: 100
+              GrowthType:
+                description: The algorithm used to define how percentage grows over time.
+                type: string
+                enum:
+                  - LINEAR
+  '/applications/{ApplicationId}/environments/{EnvironmentId}/deployments':
+    get:
+      operationId: ListDeployments
+      description: Lists the deployments for an environment.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Deployments'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: ApplicationId
+          in: path
+          required: true
+          description: The application ID.
+          type: string
+          pattern: '[a-z0-9]{4,7}'
+        - name: EnvironmentId
+          in: path
+          required: true
+          description: The environment ID.
+          type: string
+          pattern: '[a-z0-9]{4,7}'
+        - name: max_results
+          in: query
+          required: false
+          description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+          type: integer
+          minimum: 1
+          maximum: 50
+        - name: next_token
+          in: query
+          required: false
+          description: A token to start the list. Use this token to get the next set of results.
+          type: string
+          minLength: 1
+          maxLength: 2048
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: StartDeployment
+      description: Starts a deployment.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/Deployment'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '483':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: ApplicationId
+          in: path
+          required: true
+          description: The application ID.
+          type: string
+          pattern: '[a-z0-9]{4,7}'
+        - name: EnvironmentId
+          in: path
+          required: true
+          description: The environment ID.
+          type: string
+          pattern: '[a-z0-9]{4,7}'
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - DeploymentStrategyId
+              - ConfigurationProfileId
+              - ConfigurationVersion
+            properties:
+              DeploymentStrategyId:
+                description: The deployment strategy ID.
+                type: string
+                pattern: '([a-z0-9]{4,7}|arn:aws.*)'
+              ConfigurationProfileId:
+                description: The configuration profile ID.
+                type: string
+                pattern: '[a-z0-9]{4,7}'
+              ConfigurationVersion:
+                description: The configuration version to deploy.
+                type: string
+                minLength: 1
+                maxLength: 128
+              Description:
+                description: A description of the deployment.
+                type: string
+                minLength: 0
+                maxLength: 1024
+              Tags:
+                description: 'Metadata to assign to the deployment. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define.'
+                type: object
+                minProperties: 0
+                maxProperties: 50
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
+  '/tags/{ResourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: Retrieves the list of key-value tags assigned to the resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ResourceTags'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: ResourceArn
+          in: path
+          required: true
+          description: The resource ARN.
+          type: string
+          pattern: 'arn:(aws[a-zA-Z-]*)?:[a-z]+:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1})?:(\d{12})?:[a-zA-Z0-9-_/:.]+'
+          minLength: 20
+          maxLength: 2048
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: 'Metadata to assign to an AppConfig resource. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define. You can specify a maximum of 50 tags for a resource.'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: ResourceArn
+          in: path
+          required: true
+          description: The ARN of the resource for which to retrieve tags.
+          type: string
+          pattern: 'arn:(aws[a-zA-Z-]*)?:[a-z]+:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1})?:(\d{12})?:[a-zA-Z0-9-_/:.]+'
+          minLength: 20
+          maxLength: 2048
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - Tags
+            properties:
+              Tags:
+                description: 'The key-value string map. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with <code>aws:</code>. The tag value can be up to 256 characters.'
+                type: object
+                minProperties: 0
+                maxProperties: 50
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
+  '/tags/{ResourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Deletes a tag key and value from an AppConfig resource.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: ResourceArn
+          in: path
+          required: true
+          description: The ARN of the resource for which to remove tags.
+          type: string
+          pattern: 'arn:(aws[a-zA-Z-]*)?:[a-z]+:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1})?:(\d{12})?:[a-zA-Z0-9-_/:.]+'
+          minLength: 20
+          maxLength: 2048
+        - name: tagKeys
+          in: query
+          required: true
+          description: The tag keys to delete.
+          type: array
+          items:
+            type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/applications/{ApplicationId}/configurationprofiles/{ConfigurationProfileId}/validators#configuration_version':
+    post:
+      operationId: ValidateConfiguration
+      description: Uses the validators in a configuration profile to validate a configuration.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: ApplicationId
+          in: path
+          required: true
+          description: The application ID.
+          type: string
+          pattern: '[a-z0-9]{4,7}'
+        - name: ConfigurationProfileId
+          in: path
+          required: true
+          description: The configuration profile ID.
+          type: string
+          pattern: '[a-z0-9]{4,7}'
+        - name: configuration_version
+          in: query
+          required: true
+          description: The version of the configuration to validate.
+          type: string
+          minLength: 1
+          maxLength: 128
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  Application:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/Id'
+        description: The application ID.
+      Name:
+        $ref: '#/definitions/Name'
+        description: The application name.
+      Description:
+        $ref: '#/definitions/Description'
+        description: The description of the application.
+  TagValue:
+    type: string
+    maxLength: 256
+  BadRequestException: {}
+  InternalServerException: {}
+  ConfigurationProfile:
+    type: object
+    properties:
+      ApplicationId:
+        $ref: '#/definitions/Id'
+        description: The application ID.
+      Id:
+        $ref: '#/definitions/Id'
+        description: The configuration profile ID.
+      Name:
+        $ref: '#/definitions/Name'
+        description: The name of the configuration profile.
+      Description:
+        $ref: '#/definitions/Description'
+        description: The configuration profile description.
+      LocationUri:
+        $ref: '#/definitions/Uri'
+        description: The URI location of the configuration.
+      RetrievalRoleArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of an IAM role with permission to access the configuration at the specified LocationUri.
+      Validators:
+        $ref: '#/definitions/ValidatorList'
+        description: A list of methods for validating the configuration.
+  Validator:
+    type: object
+    required:
+      - Type
+      - Content
+    properties:
+      Type:
+        $ref: '#/definitions/ValidatorType'
+        description: 'AppConfig supports validators of type <code>JSON_SCHEMA</code> and <code>LAMBDA</code> '
+      Content:
+        $ref: '#/definitions/StringWithLengthBetween0And32768'
+        description: Either the JSON Schema content or an AWS Lambda function name.
+    description: 'A validator provides a syntactic or semantic check to ensure the configuration you want to deploy functions as intended. To validate your application configuration data, you provide a schema or a Lambda function that runs against the configuration. The configuration deployment or update can only proceed when the configuration data is valid.'
+  ResourceNotFoundException: {}
+  DeploymentStrategy:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/Id'
+        description: The deployment strategy ID.
+      Name:
+        $ref: '#/definitions/Name'
+        description: The name of the deployment strategy.
+      Description:
+        $ref: '#/definitions/Description'
+        description: The description of the deployment strategy.
+      DeploymentDurationInMinutes:
+        $ref: '#/definitions/MinutesBetween0And24Hours'
+        description: Total amount of time the deployment lasted.
+      GrowthType:
+        $ref: '#/definitions/GrowthType'
+        description: The algorithm used to define how percentage grew over time.
+      GrowthFactor:
+        $ref: '#/definitions/Percentage'
+        description: The percentage of targets that received a deployed configuration during each interval.
+      FinalBakeTimeInMinutes:
+        $ref: '#/definitions/MinutesBetween0And24Hours'
+        description: The amount of time AppConfig monitored for alarms before considering the deployment to be complete and no longer eligible for automatic roll back.
+      ReplicateTo:
+        $ref: '#/definitions/ReplicateTo'
+        description: Save the deployment strategy to a Systems Manager (SSM) document.
+  Environment:
+    type: object
+    properties:
+      ApplicationId:
+        $ref: '#/definitions/Id'
+        description: The application ID.
+      Id:
+        $ref: '#/definitions/Id'
+        description: The environment ID.
+      Name:
+        $ref: '#/definitions/Name'
+        description: The name of the environment.
+      Description:
+        $ref: '#/definitions/Description'
+        description: The description of the environment.
+      State:
+        $ref: '#/definitions/EnvironmentState'
+        description: 'The state of the environment. An environment can be in one of the following states: <code>READY_FOR_DEPLOYMENT</code>, <code>DEPLOYING</code>, <code>ROLLING_BACK</code>, or <code>ROLLED_BACK</code> '
+      Monitors:
+        $ref: '#/definitions/MonitorList'
+        description: Amazon CloudWatch alarms monitored during the deployment.
+  Monitor:
+    type: object
+    properties:
+      AlarmArn:
+        $ref: '#/definitions/Arn'
+        description: ARN of the Amazon CloudWatch alarm.
+      AlarmRoleArn:
+        $ref: '#/definitions/Arn'
+        description: ARN of an IAM role for AppConfig to monitor <code>AlarmArn</code>.
+    description: Amazon CloudWatch alarms to monitor during the deployment process.
+  ConflictException: {}
+  Configuration:
+    type: object
+    properties:
+      Content:
+        $ref: '#/definitions/Blob'
+        description: The content of the configuration or the configuration data.
+  Deployment:
+    type: object
+    properties:
+      ApplicationId:
+        $ref: '#/definitions/Id'
+        description: The ID of the application that was deployed.
+      EnvironmentId:
+        $ref: '#/definitions/Id'
+        description: The ID of the environment that was deployed.
+      DeploymentStrategyId:
+        $ref: '#/definitions/Id'
+        description: The ID of the deployment strategy that was deployed.
+      ConfigurationProfileId:
+        $ref: '#/definitions/Id'
+        description: The ID of the configuration profile that was deployed.
+      DeploymentNumber:
+        $ref: '#/definitions/Integer'
+        description: The sequence number of the deployment.
+      ConfigurationName:
+        $ref: '#/definitions/Name'
+        description: The name of the configuration.
+      ConfigurationLocationUri:
+        $ref: '#/definitions/Uri'
+        description: Information about the source location of the configuration.
+      ConfigurationVersion:
+        $ref: '#/definitions/Version'
+        description: The configuration version that was deployed.
+      Description:
+        $ref: '#/definitions/Description'
+        description: The description of the deployment.
+      DeploymentDurationInMinutes:
+        $ref: '#/definitions/MinutesBetween0And24Hours'
+        description: Total amount of time the deployment lasted.
+      GrowthType:
+        $ref: '#/definitions/GrowthType'
+        description: The algorithm used to define how percentage grew over time.
+      GrowthFactor:
+        $ref: '#/definitions/Percentage'
+        description: The percentage of targets to receive a deployed configuration during each interval.
+      FinalBakeTimeInMinutes:
+        $ref: '#/definitions/MinutesBetween0And24Hours'
+        description: The amount of time AppConfig monitored for alarms before considering the deployment to be complete and no longer eligible for automatic roll back.
+      State:
+        $ref: '#/definitions/DeploymentState'
+        description: The state of the deployment.
+      PercentageComplete:
+        $ref: '#/definitions/Percentage'
+        description: The percentage of targets for which the deployment is available.
+      StartedAt:
+        $ref: '#/definitions/Iso8601DateTime'
+        description: The time the deployment started.
+      CompletedAt:
+        $ref: '#/definitions/Iso8601DateTime'
+        description: 'The time the deployment completed. '
+  Applications:
+    type: object
+    properties:
+      Items:
+        $ref: '#/definitions/ApplicationList'
+        description: The elements from this collection.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next set of items to return. Use this token to get the next set of results.
+  ConfigurationProfiles:
+    type: object
+    properties:
+      Items:
+        $ref: '#/definitions/ConfigurationProfileSummaryList'
+        description: The elements from this collection.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next set of items to return. Use this token to get the next set of results.
+  DeploymentStrategies:
+    type: object
+    properties:
+      Items:
+        $ref: '#/definitions/DeploymentStrategyList'
+        description: The elements from this collection.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next set of items to return. Use this token to get the next set of results.
+  Deployments:
+    type: object
+    properties:
+      Items:
+        $ref: '#/definitions/DeploymentList'
+        description: The elements from this collection.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next set of items to return. Use this token to get the next set of results.
+  Environments:
+    type: object
+    properties:
+      Items:
+        $ref: '#/definitions/EnvironmentList'
+        description: The elements from this collection.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next set of items to return. Use this token to get the next set of results.
+  ResourceTags:
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/TagMap'
+        description: 'Metadata to assign to AppConfig resources. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define.'
+  TagKey:
+    type: string
+    minLength: 1
+    maxLength: 128
+  Id:
+    type: string
+    pattern: '[a-z0-9]{4,7}'
+  Name:
+    type: string
+    minLength: 1
+    maxLength: 64
+  Description:
+    type: string
+    minLength: 0
+    maxLength: 1024
+  ApplicationList:
+    type: array
+    items:
+      $ref: '#/definitions/Application'
+  NextToken:
+    type: string
+    minLength: 1
+    maxLength: 2048
+  Arn:
+    type: string
+    pattern: 'arn:(aws[a-zA-Z-]*)?:[a-z]+:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1})?:(\d{12})?:[a-zA-Z0-9-_/:.]+'
+    minLength: 20
+    maxLength: 2048
+  Blob:
+    type: string
+  Version:
+    type: string
+    minLength: 1
+    maxLength: 128
+  String:
+    type: string
+  Uri:
+    type: string
+    minLength: 1
+    maxLength: 2048
+  ValidatorList:
+    type: array
+    items:
+      $ref: '#/definitions/Validator'
+    minItems: 0
+    maxItems: 2
+  ValidatorTypeList:
+    type: array
+    items:
+      $ref: '#/definitions/ValidatorType'
+    minItems: 0
+    maxItems: 2
+  ConfigurationProfileSummary:
+    type: object
+    properties:
+      ApplicationId:
+        $ref: '#/definitions/Id'
+        description: The application ID.
+      Id:
+        $ref: '#/definitions/Id'
+        description: The ID of the configuration profile.
+      Name:
+        $ref: '#/definitions/Name'
+        description: The name of the configuration profile.
+      LocationUri:
+        $ref: '#/definitions/Uri'
+        description: The URI location of the configuration.
+      ValidatorTypes:
+        $ref: '#/definitions/ValidatorTypeList'
+        description: The types of validators in the configuration profile.
+    description: A summary of a configuration profile.
+  ConfigurationProfileSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/ConfigurationProfileSummary'
+  TagMap:
+    type: object
+    minProperties: 0
+    maxProperties: 50
+    additionalProperties:
+      $ref: '#/definitions/TagValue'
+  CreateApplicationRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/Name'
+        description: A name for the application.
+      Description:
+        $ref: '#/definitions/Description'
+        description: A description of the application.
+      Tags:
+        $ref: '#/definitions/TagMap'
+        description: 'Metadata to assign to the application. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define.'
+  CreateConfigurationProfileRequest:
+    type: object
+    required:
+      - Name
+      - LocationUri
+      - RetrievalRoleArn
+    properties:
+      Name:
+        $ref: '#/definitions/Name'
+        description: A name for the configuration profile.
+      Description:
+        $ref: '#/definitions/Description'
+        description: A description of the configuration profile.
+      LocationUri:
+        $ref: '#/definitions/Uri'
+        description: 'A URI to locate the configuration. You can specify either a Systems Manager (SSM) document or an SSM Parameter Store parameter. For an SSM document, specify either the document name in the format <code>ssm-document://&lt;Document name&gt;</code> or the Amazon Resource Name (ARN). For a parameter, specify either the parameter name in the format <code>ssm-parameter://&lt;Parameter name&gt;</code> or the ARN.'
+      RetrievalRoleArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of an IAM role with permission to access the configuration at the specified LocationUri.
+      Validators:
+        $ref: '#/definitions/ValidatorList'
+        description: A list of methods for validating the configuration.
+      Tags:
+        $ref: '#/definitions/TagMap'
+        description: 'Metadata to assign to the configuration profile. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define.'
+  MinutesBetween0And24Hours:
+    type: integer
+    minimum: 0
+    maximum: 1440
+  GrowthFactor:
+    type: number
+    format: float
+    minimum: 1
+    maximum: 100
+  GrowthType:
+    type: string
+    enum:
+      - LINEAR
+  ReplicateTo:
+    type: string
+    enum:
+      - NONE
+      - SSM_DOCUMENT
+  CreateDeploymentStrategyRequest:
+    type: object
+    required:
+      - Name
+      - DeploymentDurationInMinutes
+      - GrowthFactor
+      - ReplicateTo
+    properties:
+      Name:
+        $ref: '#/definitions/Name'
+        description: A name for the deployment strategy.
+      Description:
+        $ref: '#/definitions/Description'
+        description: A description of the deployment strategy.
+      DeploymentDurationInMinutes:
+        $ref: '#/definitions/MinutesBetween0And24Hours'
+        description: Total amount of time for a deployment to last.
+      FinalBakeTimeInMinutes:
+        $ref: '#/definitions/MinutesBetween0And24Hours'
+        description: The amount of time AppConfig monitors for alarms before considering the deployment to be complete and no longer eligible for automatic roll back.
+      GrowthFactor:
+        $ref: '#/definitions/GrowthFactor'
+        description: The percentage of targets to receive a deployed configuration during each interval.
+      GrowthType:
+        $ref: '#/definitions/GrowthType'
+        description: The algorithm used to define how percentage grows over time.
+      ReplicateTo:
+        $ref: '#/definitions/ReplicateTo'
+        description: Save the deployment strategy to a Systems Manager (SSM) document.
+      Tags:
+        $ref: '#/definitions/TagMap'
+        description: 'Metadata to assign to the deployment strategy. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define.'
+  MonitorList:
+    type: array
+    items:
+      $ref: '#/definitions/Monitor'
+    minItems: 0
+    maxItems: 5
+  CreateEnvironmentRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/Name'
+        description: A name for the environment.
+      Description:
+        $ref: '#/definitions/Description'
+        description: A description of the environment.
+      Monitors:
+        $ref: '#/definitions/MonitorList'
+        description: Amazon CloudWatch alarms to monitor during the deployment process.
+      Tags:
+        $ref: '#/definitions/TagMap'
+        description: 'Metadata to assign to the environment. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define.'
+  DeleteApplicationRequest:
+    type: object
+    properties: {}
+  DeleteConfigurationProfileRequest:
+    type: object
+    properties: {}
+  DeploymentStrategyId:
+    type: string
+    pattern: '([a-z0-9]{4,7}|arn:aws.*)'
+  DeleteDeploymentStrategyRequest:
+    type: object
+    properties: {}
+  DeleteEnvironmentRequest:
+    type: object
+    properties: {}
+  Integer:
+    type: integer
+  Percentage:
+    type: number
+    format: float
+    minimum: 1
+    maximum: 100
+  DeploymentState:
+    type: string
+    enum:
+      - BAKING
+      - VALIDATING
+      - DEPLOYING
+      - COMPLETE
+      - ROLLING_BACK
+      - ROLLED_BACK
+  Iso8601DateTime:
+    type: string
+    format: date-time
+  DeploymentSummary:
+    type: object
+    properties:
+      DeploymentNumber:
+        $ref: '#/definitions/Integer'
+        description: The sequence number of the deployment.
+      ConfigurationName:
+        $ref: '#/definitions/Name'
+        description: The name of the configuration.
+      ConfigurationVersion:
+        $ref: '#/definitions/Version'
+        description: The version of the configuration.
+      DeploymentDurationInMinutes:
+        $ref: '#/definitions/MinutesBetween0And24Hours'
+        description: Total amount of time the deployment lasted.
+      GrowthType:
+        $ref: '#/definitions/GrowthType'
+        description: The algorithm used to define how percentage grows over time.
+      GrowthFactor:
+        $ref: '#/definitions/Percentage'
+        description: The percentage of targets to receive a deployed configuration during each interval.
+      FinalBakeTimeInMinutes:
+        $ref: '#/definitions/MinutesBetween0And24Hours'
+        description: The amount of time AppConfig monitors for alarms before considering the deployment to be complete and no longer eligible for automatic roll back.
+      State:
+        $ref: '#/definitions/DeploymentState'
+        description: The state of the deployment.
+      PercentageComplete:
+        $ref: '#/definitions/Percentage'
+        description: The percentage of targets for which the deployment is available.
+      StartedAt:
+        $ref: '#/definitions/Iso8601DateTime'
+        description: Time the deployment started.
+      CompletedAt:
+        $ref: '#/definitions/Iso8601DateTime'
+        description: Time the deployment completed.
+    description: Information about the deployment.
+  DeploymentList:
+    type: array
+    items:
+      $ref: '#/definitions/DeploymentSummary'
+  DeploymentStrategyList:
+    type: array
+    items:
+      $ref: '#/definitions/DeploymentStrategy'
+  EnvironmentState:
+    type: string
+    enum:
+      - READY_FOR_DEPLOYMENT
+      - DEPLOYING
+      - ROLLING_BACK
+      - ROLLED_BACK
+  EnvironmentList:
+    type: array
+    items:
+      $ref: '#/definitions/Environment'
+  GetApplicationRequest:
+    type: object
+    properties: {}
+  GetConfigurationProfileRequest:
+    type: object
+    properties: {}
+  StringWithLengthBetween1And64:
+    type: string
+    minLength: 1
+    maxLength: 64
+  GetConfigurationRequest:
+    type: object
+    properties: {}
+  GetDeploymentRequest:
+    type: object
+    properties: {}
+  GetDeploymentStrategyRequest:
+    type: object
+    properties: {}
+  GetEnvironmentRequest:
+    type: object
+    properties: {}
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 50
+  ListApplicationsRequest:
+    type: object
+    properties: {}
+  ListConfigurationProfilesRequest:
+    type: object
+    properties: {}
+  ListDeploymentStrategiesRequest:
+    type: object
+    properties: {}
+  ListDeploymentsRequest:
+    type: object
+    properties: {}
+  ListEnvironmentsRequest:
+    type: object
+    properties: {}
+  ListTagsForResourceRequest:
+    type: object
+    properties: {}
+  StartDeploymentRequest:
+    type: object
+    required:
+      - DeploymentStrategyId
+      - ConfigurationProfileId
+      - ConfigurationVersion
+    properties:
+      DeploymentStrategyId:
+        $ref: '#/definitions/DeploymentStrategyId'
+        description: The deployment strategy ID.
+      ConfigurationProfileId:
+        $ref: '#/definitions/Id'
+        description: The configuration profile ID.
+      ConfigurationVersion:
+        $ref: '#/definitions/Version'
+        description: The configuration version to deploy.
+      Description:
+        $ref: '#/definitions/Description'
+        description: A description of the deployment.
+      Tags:
+        $ref: '#/definitions/TagMap'
+        description: 'Metadata to assign to the deployment. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define.'
+  StopDeploymentRequest:
+    type: object
+    properties: {}
+  StringWithLengthBetween0And32768:
+    type: string
+    minLength: 0
+    maxLength: 32768
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+    minItems: 0
+    maxItems: 50
+  TagResourceRequest:
+    type: object
+    required:
+      - Tags
+    properties:
+      Tags:
+        $ref: '#/definitions/TagMap'
+        description: 'The key-value string map. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with <code>aws:</code>. The tag value can be up to 256 characters.'
+  UntagResourceRequest:
+    type: object
+    properties: {}
+  UpdateApplicationRequest:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/Name'
+        description: The name of the application.
+      Description:
+        $ref: '#/definitions/Description'
+        description: A description of the application.
+  UpdateConfigurationProfileRequest:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/Name'
+        description: The name of the configuration profile.
+      Description:
+        $ref: '#/definitions/Description'
+        description: A description of the configuration profile.
+      RetrievalRoleArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of an IAM role with permission to access the configuration at the specified LocationUri.
+      Validators:
+        $ref: '#/definitions/ValidatorList'
+        description: A list of methods for validating the configuration.
+  UpdateDeploymentStrategyRequest:
+    type: object
+    properties:
+      Description:
+        $ref: '#/definitions/Description'
+        description: A description of the deployment strategy.
+      DeploymentDurationInMinutes:
+        $ref: '#/definitions/MinutesBetween0And24Hours'
+        description: Total amount of time for a deployment to last.
+      FinalBakeTimeInMinutes:
+        $ref: '#/definitions/MinutesBetween0And24Hours'
+        description: The amount of time AppConfig monitors for alarms before considering the deployment to be complete and no longer eligible for automatic roll back.
+      GrowthFactor:
+        $ref: '#/definitions/GrowthFactor'
+        description: The percentage of targets to receive a deployed configuration during each interval.
+      GrowthType:
+        $ref: '#/definitions/GrowthType'
+        description: The algorithm used to define how percentage grows over time.
+  UpdateEnvironmentRequest:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/Name'
+        description: The name of the environment.
+      Description:
+        $ref: '#/definitions/Description'
+        description: A description of the environment.
+      Monitors:
+        $ref: '#/definitions/MonitorList'
+        description: Amazon CloudWatch alarms to monitor during the deployment process.
+  ValidateConfigurationRequest:
+    type: object
+    properties: {}
+  ValidatorType:
+    type: string
+    enum:
+      - JSON_SCHEMA
+      - LAMBDA

@@ -1527,7 +1527,6 @@ paths:
                   - armv7l
                   - x86_64
                   - aarch64
-                  - openwrt
               UpdateTargetsOperatingSystem:
                 description: The operating system of the cores which are the targets of an update.
                 type: string
@@ -1535,6 +1534,7 @@ paths:
                   - ubuntu
                   - raspbian
                   - amazon_linux
+                  - openwrt
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -3076,10 +3076,10 @@ definitions:
         description: 'The time, in milliseconds since the epoch, when the version was created.'
       Id:
         $ref: '#/definitions/__string'
-        description: The ID of the version.
+        description: The ID of the parent definition that the version is associated with.
       Version:
         $ref: '#/definitions/__string'
-        description: The unique ID of the version.
+        description: The ID of the version.
   Connector:
     type: object
     required:
@@ -3135,10 +3135,10 @@ definitions:
         description: 'The time, in milliseconds since the epoch, when the version was created.'
       Id:
         $ref: '#/definitions/__string'
-        description: The ID of the version.
+        description: The ID of the parent definition that the version is associated with.
       Version:
         $ref: '#/definitions/__string'
-        description: The unique ID of the version.
+        description: The ID of the version.
   Core:
     type: object
     required:
@@ -3207,10 +3207,10 @@ definitions:
         description: 'The time, in milliseconds since the epoch, when the version was created.'
       Id:
         $ref: '#/definitions/__string'
-        description: The ID of the version.
+        description: The ID of the parent definition that the version is associated with.
       Version:
         $ref: '#/definitions/__string'
-        description: The unique ID of the version.
+        description: The ID of the version.
   Device:
     type: object
     required:
@@ -3276,10 +3276,10 @@ definitions:
         description: 'The time, in milliseconds since the epoch, when the version was created.'
       Id:
         $ref: '#/definitions/__string'
-        description: The ID of the version.
+        description: The ID of the parent definition that the version is associated with.
       Version:
         $ref: '#/definitions/__string'
-        description: The unique ID of the version.
+        description: The ID of the version.
   FunctionDefaultExecutionConfig:
     type: object
     properties:
@@ -3344,10 +3344,10 @@ definitions:
         description: 'The time, in milliseconds since the epoch, when the version was created.'
       Id:
         $ref: '#/definitions/__string'
-        description: The ID of the version.
+        description: The ID of the parent definition that the version is associated with.
       Version:
         $ref: '#/definitions/__string'
-        description: The unique ID of the version.
+        description: The ID of the version.
   CreateLoggerDefinitionResponse:
     type: object
     properties:
@@ -3387,10 +3387,10 @@ definitions:
         description: 'The time, in milliseconds since the epoch, when the version was created.'
       Id:
         $ref: '#/definitions/__string'
-        description: The ID of the version.
+        description: The ID of the parent definition that the version is associated with.
       Version:
         $ref: '#/definitions/__string'
-        description: The unique ID of the version.
+        description: The ID of the version.
   Logger:
     type: object
     required:
@@ -3454,10 +3454,10 @@ definitions:
         description: 'The time, in milliseconds since the epoch, when the version was created.'
       Id:
         $ref: '#/definitions/__string'
-        description: The ID of the version.
+        description: The ID of the parent definition that the version is associated with.
       Version:
         $ref: '#/definitions/__string'
-        description: The unique ID of the version.
+        description: The ID of the version.
   Resource:
     type: object
     required:
@@ -3526,10 +3526,10 @@ definitions:
         description: 'The time, in milliseconds since the epoch, when the version was created.'
       Id:
         $ref: '#/definitions/__string'
-        description: The ID of the version.
+        description: The ID of the parent definition that the version is associated with.
       Version:
         $ref: '#/definitions/__string'
-        description: The unique ID of the version.
+        description: The ID of the version.
   Subscription:
     type: object
     required:
@@ -4699,7 +4699,6 @@ definitions:
       - armv7l
       - x86_64
       - aarch64
-      - openwrt
     description: The architecture of the cores which are the targets of an update.
   UpdateTargetsOperatingSystem:
     type: string
@@ -4707,6 +4706,7 @@ definitions:
       - ubuntu
       - raspbian
       - amazon_linux
+      - openwrt
     description: The operating system of the cores which are the targets of an update.
   CreateSoftwareUpdateJobRequest:
     type: object
@@ -5207,6 +5207,8 @@ definitions:
       DestinationPath:
         $ref: '#/definitions/__string'
         description: The absolute local path of the resource inside the Lambda environment.
+      OwnerSetting:
+        $ref: '#/definitions/ResourceDownloadOwnerSetting'
       S3Uri:
         $ref: '#/definitions/__string'
         description: The URI of the source model in an S3 bucket. The model package must be in tar.gz or .zip format.
@@ -5217,6 +5219,8 @@ definitions:
       DestinationPath:
         $ref: '#/definitions/__string'
         description: The absolute local path of the resource inside the Lambda environment.
+      OwnerSetting:
+        $ref: '#/definitions/ResourceDownloadOwnerSetting'
       SageMakerJobArn:
         $ref: '#/definitions/__string'
         description: The ARN of the Amazon SageMaker training job that represents the source model.
@@ -5231,6 +5235,19 @@ definitions:
         $ref: '#/definitions/__listOf__string'
         description: 'Optional. The staging labels whose values you want to make available on the core, in addition to ''''AWSCURRENT''''.'
     description: 'Attributes that define a secret resource, which references a secret from AWS Secrets Manager. AWS IoT Greengrass stores a local, encrypted copy of the secret on the Greengrass core, where it can be securely accessed by connectors and Lambda functions.'
+  ResourceDownloadOwnerSetting:
+    type: object
+    required:
+      - GroupOwner
+      - GroupPermission
+    properties:
+      GroupOwner:
+        $ref: '#/definitions/__string'
+        description: The group owner of the resource. This is the name of an existing Linux OS group on the system or a GID. The group's permissions are added to the Lambda process.
+      GroupPermission:
+        $ref: '#/definitions/Permission'
+        description: The permissions that the group owner has to the resource. Valid values are ''rw'' (read/write) or ''ro'' (read-only).
+    description: The owner setting for downloaded machine learning resources.
   __listOf__string:
     type: array
     items:

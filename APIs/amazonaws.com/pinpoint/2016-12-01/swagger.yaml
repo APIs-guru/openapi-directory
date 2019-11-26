@@ -319,7 +319,7 @@ paths:
                     description: 'An array of requests that defines additional treatments for the campaign, in addition to the default treatment for the campaign.'
                   Description:
                     $ref: '#/definitions/__string'
-                    description: The custom description of the campaign.
+                    description: A custom description of the campaign.
                   HoldoutPercent:
                     $ref: '#/definitions/__integer'
                     description: The allocated percentage of users (segment members) who shouldn't receive messages from the campaign.
@@ -355,7 +355,7 @@ paths:
                     description: The message template to use for the campaign.
                   TreatmentDescription:
                     $ref: '#/definitions/__string'
-                    description: The custom description of a variation of the campaign to use for A/B testing.
+                    description: A custom description of a variation of the campaign to use for A/B testing.
                   TreatmentName:
                     $ref: '#/definitions/__string'
                     description: The custom name of a variation of the campaign to use for A/B testing.
@@ -462,18 +462,24 @@ paths:
                 description: Specifies the content and settings for a message template that can be used in messages that are sent through the email channel.
                 type: object
                 properties:
+                  DefaultSubstitutions:
+                    $ref: '#/definitions/__string'
+                    description: 'A JSON object that specifies the default values to use for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable. When you create a message that''s based on the template, you can override these defaults with message-specific and address-specific variables and values.'
                   HtmlPart:
                     $ref: '#/definitions/__string'
-                    description: 'The message body, in HTML format, to use in email messages that are based on the message template. We recommend using HTML format for email clients that support HTML. You can include links, formatted text, and more in an HTML message.'
+                    description: 'The message body, in HTML format, to use in email messages that are based on the message template. We recommend using HTML format for email clients that render HTML content. You can include links, formatted text, and more in an HTML message.'
                   Subject:
                     $ref: '#/definitions/__string'
                     description: 'The subject line, or title, to use in email messages that are based on the message template.'
                   tags:
                     $ref: '#/definitions/MapOf__string'
                     description: A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+                  TemplateDescription:
+                    $ref: '#/definitions/__string'
+                    description: A custom description of the message template.
                   TextPart:
                     $ref: '#/definitions/__string'
-                    description: 'The message body, in text format, to use in email messages that are based on the message template. We recommend using text format for email clients that don''t support HTML and clients that are connected to high-latency networks, such as mobile devices.'
+                    description: 'The message body, in plain text format, to use in email messages that are based on the message template. We recommend using plain text format for email clients that don''t render HTML content and clients that are connected to high-latency networks, such as mobile devices.'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -608,18 +614,24 @@ paths:
                 description: Specifies the content and settings for a message template that can be used in messages that are sent through the email channel.
                 type: object
                 properties:
+                  DefaultSubstitutions:
+                    $ref: '#/definitions/__string'
+                    description: 'A JSON object that specifies the default values to use for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable. When you create a message that''s based on the template, you can override these defaults with message-specific and address-specific variables and values.'
                   HtmlPart:
                     $ref: '#/definitions/__string'
-                    description: 'The message body, in HTML format, to use in email messages that are based on the message template. We recommend using HTML format for email clients that support HTML. You can include links, formatted text, and more in an HTML message.'
+                    description: 'The message body, in HTML format, to use in email messages that are based on the message template. We recommend using HTML format for email clients that render HTML content. You can include links, formatted text, and more in an HTML message.'
                   Subject:
                     $ref: '#/definitions/__string'
                     description: 'The subject line, or title, to use in email messages that are based on the message template.'
                   tags:
                     $ref: '#/definitions/MapOf__string'
                     description: A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+                  TemplateDescription:
+                    $ref: '#/definitions/__string'
+                    description: A custom description of the message template.
                   TextPart:
                     $ref: '#/definitions/__string'
-                    description: 'The message body, in text format, to use in email messages that are based on the message template. We recommend using text format for email clients that don''t support HTML and clients that are connected to high-latency networks, such as mobile devices.'
+                    description: 'The message body, in plain text format, to use in email messages that are based on the message template. We recommend using plain text format for email clients that don''t render HTML content and clients that are connected to high-latency networks, such as mobile devices.'
   '/v1/apps/{application-id}/jobs/export':
     post:
       operationId: CreateExportJob
@@ -1072,12 +1084,18 @@ paths:
                   Default:
                     $ref: '#/definitions/DefaultPushNotificationTemplate'
                     description: The default message template to use for push notification channels.
+                  DefaultSubstitutions:
+                    $ref: '#/definitions/__string'
+                    description: 'A JSON object that specifies the default values to use for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable. When you create a message that''s based on the template, you can override these defaults with message-specific and address-specific variables and values.'
                   GCM:
                     $ref: '#/definitions/AndroidPushNotificationTemplate'
                     description: 'The message template to use for the GCM channel, which is used to send notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).'
                   tags:
                     $ref: '#/definitions/MapOf__string'
                     description: A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+                  TemplateDescription:
+                    $ref: '#/definitions/__string'
+                    description: A custom description of the message template.
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1224,12 +1242,18 @@ paths:
                   Default:
                     $ref: '#/definitions/DefaultPushNotificationTemplate'
                     description: The default message template to use for push notification channels.
+                  DefaultSubstitutions:
+                    $ref: '#/definitions/__string'
+                    description: 'A JSON object that specifies the default values to use for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable. When you create a message that''s based on the template, you can override these defaults with message-specific and address-specific variables and values.'
                   GCM:
                     $ref: '#/definitions/AndroidPushNotificationTemplate'
                     description: 'The message template to use for the GCM channel, which is used to send notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).'
                   tags:
                     $ref: '#/definitions/MapOf__string'
                     description: A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+                  TemplateDescription:
+                    $ref: '#/definitions/__string'
+                    description: A custom description of the message template.
   '/v1/apps/{application-id}/segments':
     post:
       operationId: CreateSegment
@@ -1399,9 +1423,15 @@ paths:
                   Body:
                     $ref: '#/definitions/__string'
                     description: The message body to use in text messages that are based on the message template.
+                  DefaultSubstitutions:
+                    $ref: '#/definitions/__string'
+                    description: 'A JSON object that specifies the default values to use for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable. When you create a message that''s based on the template, you can override these defaults with message-specific and address-specific variables and values.'
                   tags:
                     $ref: '#/definitions/MapOf__string'
                     description: A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+                  TemplateDescription:
+                    $ref: '#/definitions/__string'
+                    description: A custom description of the message template.
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1539,9 +1569,232 @@ paths:
                   Body:
                     $ref: '#/definitions/__string'
                     description: The message body to use in text messages that are based on the message template.
+                  DefaultSubstitutions:
+                    $ref: '#/definitions/__string'
+                    description: 'A JSON object that specifies the default values to use for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable. When you create a message that''s based on the template, you can override these defaults with message-specific and address-specific variables and values.'
                   tags:
                     $ref: '#/definitions/MapOf__string'
                     description: A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+                  TemplateDescription:
+                    $ref: '#/definitions/__string'
+                    description: A custom description of the message template.
+  '/v1/templates/{template-name}/voice':
+    post:
+      operationId: CreateVoiceTemplate
+      description: Creates a message template that you can use in messages that are sent through the voice channel.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateVoiceTemplateResponse'
+        '480':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '481':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '483':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '484':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: template-name
+          in: path
+          required: true
+          description: 'The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.'
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - VoiceTemplateRequest
+            properties:
+              VoiceTemplateRequest:
+                description: Specifies the content and settings for a message template that can be used in messages that are sent through the voice channel.
+                type: object
+                properties:
+                  Body:
+                    $ref: '#/definitions/__string'
+                    description: 'The text of the script to use in messages that are based on the message template, in plain text format.'
+                  DefaultSubstitutions:
+                    $ref: '#/definitions/__string'
+                    description: 'A JSON object that specifies the default values to use for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable. When you create a message that''s based on the template, you can override these defaults with message-specific and address-specific variables and values.'
+                  LanguageCode:
+                    $ref: '#/definitions/__string'
+                    description: 'The code for the language to use when synthesizing the text of the script in messages that are based on the message template. For a list of supported languages and the code for each one, see the <a href="https://docs.aws.amazon.com/polly/latest/dg/what-is.html">Amazon Polly Developer Guide</a>.'
+                  tags:
+                    $ref: '#/definitions/MapOf__string'
+                    description: A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+                  TemplateDescription:
+                    $ref: '#/definitions/__string'
+                    description: A custom description of the message template.
+                  VoiceId:
+                    $ref: '#/definitions/__string'
+                    description: 'The name of the voice to use when delivering messages that are based on the message template. For a list of supported voices, see the <a href="https://docs.aws.amazon.com/polly/latest/dg/what-is.html">Amazon Polly Developer Guide</a>.'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteVoiceTemplate
+      description: Deletes a message template that was designed for use in messages that were sent through the voice channel.
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteVoiceTemplateResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: template-name
+          in: path
+          required: true
+          description: 'The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.'
+          type: string
+    get:
+      operationId: GetVoiceTemplate
+      description: Retrieves the content and settings for a message template that you can use in messages that are sent through the voice channel.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetVoiceTemplateResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: template-name
+          in: path
+          required: true
+          description: 'The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.'
+          type: string
+    put:
+      operationId: UpdateVoiceTemplate
+      description: Updates an existing message template that you can use in messages that are sent through the voice channel.
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateVoiceTemplateResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: template-name
+          in: path
+          required: true
+          description: 'The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.'
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - VoiceTemplateRequest
+            properties:
+              VoiceTemplateRequest:
+                description: Specifies the content and settings for a message template that can be used in messages that are sent through the voice channel.
+                type: object
+                properties:
+                  Body:
+                    $ref: '#/definitions/__string'
+                    description: 'The text of the script to use in messages that are based on the message template, in plain text format.'
+                  DefaultSubstitutions:
+                    $ref: '#/definitions/__string'
+                    description: 'A JSON object that specifies the default values to use for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable. When you create a message that''s based on the template, you can override these defaults with message-specific and address-specific variables and values.'
+                  LanguageCode:
+                    $ref: '#/definitions/__string'
+                    description: 'The code for the language to use when synthesizing the text of the script in messages that are based on the message template. For a list of supported languages and the code for each one, see the <a href="https://docs.aws.amazon.com/polly/latest/dg/what-is.html">Amazon Polly Developer Guide</a>.'
+                  tags:
+                    $ref: '#/definitions/MapOf__string'
+                    description: A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+                  TemplateDescription:
+                    $ref: '#/definitions/__string'
+                    description: A custom description of the message template.
+                  VoiceId:
+                    $ref: '#/definitions/__string'
+                    description: 'The name of the voice to use when delivering messages that are based on the message template. For a list of supported voices, see the <a href="https://docs.aws.amazon.com/polly/latest/dg/what-is.html">Amazon Polly Developer Guide</a>.'
   '/v1/apps/{application-id}/channels/adm':
     delete:
       operationId: DeleteAdmChannel
@@ -2706,7 +2959,7 @@ paths:
                     description: 'An array of requests that defines additional treatments for the campaign, in addition to the default treatment for the campaign.'
                   Description:
                     $ref: '#/definitions/__string'
-                    description: The custom description of the campaign.
+                    description: A custom description of the campaign.
                   HoldoutPercent:
                     $ref: '#/definitions/__integer'
                     description: The allocated percentage of users (segment members) who shouldn't receive messages from the campaign.
@@ -2742,7 +2995,7 @@ paths:
                     description: The message template to use for the campaign.
                   TreatmentDescription:
                     $ref: '#/definitions/__string'
-                    description: The custom description of a variation of the campaign to use for A/B testing.
+                    description: A custom description of a variation of the campaign to use for A/B testing.
                   TreatmentName:
                     $ref: '#/definitions/__string'
                     description: The custom name of a variation of the campaign to use for A/B testing.
@@ -5232,7 +5485,7 @@ paths:
         - name: template-type
           in: query
           required: false
-          description: 'The type of message template to include in the results. Valid values are: EMAIL, SMS, and PUSH. To include all types of templates in the results, don''t include this parameter in your request.'
+          description: 'The type of message template to include in the results. Valid values are: EMAIL, SMS, PUSH, and VOICE. To include all types of templates in the results, don''t include this parameter in your request.'
           type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
@@ -5479,7 +5732,7 @@ paths:
               - MessageRequest
             properties:
               MessageRequest:
-                description: Specifies the objects that define configuration and other settings for a message.
+                description: Specifies the configuration and other settings for a message.
                 type: object
                 properties:
                   Addresses:
@@ -5493,7 +5746,7 @@ paths:
                     description: 'A map of key-value pairs, where each key is an endpoint ID and each value is an EndpointSendConfiguration object. You can use an EndpointSendConfiguration object to tailor the message for an endpoint by specifying settings such as content overrides and message variables.'
                   MessageConfiguration:
                     $ref: '#/definitions/DirectMessageConfiguration'
-                    description: The set of properties that defines the configuration settings for the message.
+                    description: The settings and content for the default message and any default messages that you defined for specific channels.
                   TemplateConfiguration:
                     $ref: '#/definitions/TemplateConfiguration'
                     description: The message template to use for the message.
@@ -5564,7 +5817,7 @@ paths:
                     description: 'A map of custom attribute-value pairs. For a push notification, Amazon Pinpoint adds these attributes to the data.pinpoint object in the body of the notification payload. Amazon Pinpoint also provides these attributes in the events that it generates for users-messages deliveries.'
                   MessageConfiguration:
                     $ref: '#/definitions/DirectMessageConfiguration'
-                    description: The message definitions for the default message and any default messages that you defined for specific channels.
+                    description: The settings and content for the default message and any default messages that you defined for specific channels.
                   TemplateConfiguration:
                     $ref: '#/definitions/TemplateConfiguration'
                     description: The message template to use for the message.
@@ -5871,7 +6124,10 @@ definitions:
       SMSTemplate:
         $ref: '#/definitions/Template'
         description: The SMS template to use for the message.
-    description: Specifies the message template for each type of channel.
+      VoiceTemplate:
+        $ref: '#/definitions/Template'
+        description: The voice template to use for the message.
+    description: 'Specifies the message template to use for the message, for each type of channel.'
   CreateEmailTemplateResponse:
     type: object
     required:
@@ -5991,6 +6247,9 @@ definitions:
       ImageUrl:
         $ref: '#/definitions/__string'
         description: The URL of an image to display in a push notification that's based on the message template.
+      RawContent:
+        $ref: '#/definitions/__string'
+        description: 'The raw, JSON-formatted string to use as the payload for a push notification that''s based on the message template. If specified, this value overrides all other content for the message template.'
       SmallImageIconUrl:
         $ref: '#/definitions/__string'
         description: The URL of the small icon image to display in the status bar and the content view of a push notification that's based on the message template.
@@ -6016,6 +6275,9 @@ definitions:
       MediaUrl:
         $ref: '#/definitions/__string'
         description: The URL of an image or video to display in push notifications that are based on the message template.
+      RawContent:
+        $ref: '#/definitions/__string'
+        description: 'The raw, JSON-formatted string to use as the payload for push notifications that are based on the message template. If specified, this value overrides all other content for the message template.'
       Sound:
         $ref: '#/definitions/__string'
         description: 'The key for the sound to play when the recipient receives a push notification that''s based on the message template. The value for this key is the name of a sound file in your app''s main bundle or the Library/Sounds folder in your app''s data container. If the sound file can''t be found or you specify default for the value, the system plays the default alert sound.'
@@ -6085,6 +6347,13 @@ definitions:
         description: 'Specifies how to handle multiple segment groups for the segment. For example, if the segment includes three segment groups, whether the resulting segment includes endpoints that match all, any, or none of the segment groups.'
     description: Specifies the settings that define the relationships between segment groups for a segment.
   CreateSmsTemplateResponse:
+    type: object
+    required:
+      - CreateTemplateMessageBody
+    properties:
+      CreateTemplateMessageBody:
+        $ref: '#/definitions/CreateTemplateMessageBody'
+  CreateVoiceTemplateResponse:
     type: object
     required:
       - CreateTemplateMessageBody
@@ -6231,6 +6500,13 @@ definitions:
     properties:
       VoiceChannelResponse:
         $ref: '#/definitions/VoiceChannelResponse'
+  DeleteVoiceTemplateResponse:
+    type: object
+    required:
+      - MessageBody
+    properties:
+      MessageBody:
+        $ref: '#/definitions/MessageBody'
   GetAdmChannelResponse:
     type: object
     required:
@@ -6518,6 +6794,13 @@ definitions:
     properties:
       VoiceChannelResponse:
         $ref: '#/definitions/VoiceChannelResponse'
+  GetVoiceTemplateResponse:
+    type: object
+    required:
+      - VoiceTemplateResponse
+    properties:
+      VoiceTemplateResponse:
+        $ref: '#/definitions/VoiceTemplateResponse'
   ListJourneysResponse:
     type: object
     required:
@@ -6604,7 +6887,7 @@ definitions:
         description: The default push notification message for the Baidu (Baidu Cloud Push) channel. This message overrides the default push notification message (DefaultPushNotificationMessage).
       DefaultMessage:
         $ref: '#/definitions/DefaultMessage'
-        description: The default message body for all channels.
+        description: The default message for all channels.
       DefaultPushNotificationMessage:
         $ref: '#/definitions/DefaultPushNotificationMessage'
         description: The default push notification message for all push notification channels.
@@ -6854,6 +7137,13 @@ definitions:
     properties:
       VoiceChannelResponse:
         $ref: '#/definitions/VoiceChannelResponse'
+  UpdateVoiceTemplateResponse:
+    type: object
+    required:
+      - MessageBody
+    properties:
+      MessageBody:
+        $ref: '#/definitions/MessageBody'
   ADMChannelRequest:
     type: object
     required:
@@ -6944,7 +7234,7 @@ definitions:
         description: 'The base64-encoded, MD5 checksum of the value specified by the Data property. ADM uses the MD5 value to verify the integrity of the data.'
       RawContent:
         $ref: '#/definitions/__string'
-        description: 'The raw, JSON-formatted string to use as the payload for the notification message. This value overrides the message.'
+        description: 'The raw, JSON-formatted string to use as the payload for the notification message. If specified, this value overrides all other content for the message.'
       SilentPush:
         $ref: '#/definitions/__boolean'
         description: 'Specifies whether the notification is a silent push notification, which is a push notification that doesn''t display on a recipient''s device. Silent push notifications can be used for cases such as updating an app''s configuration or supporting phone home functionality.'
@@ -7069,7 +7359,7 @@ definitions:
         description: '<p>para>5 - Low priority, the notification might be delayed, delivered as part of a group, or throttled.</p>/listitem> <li><p>10 - High priority, the notification is sent immediately. This is the default value. A high priority notification should trigger an alert, play a sound, or badge your app''s icon on the recipient''s device.</p></li>/para> <p>Amazon Pinpoint specifies this value in the apns-priority request header when it sends the notification message to APNs.</p> <p>The equivalent values for Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), are normal, for 5, and high, for 10. If you specify an FCM value for this property, Amazon Pinpoint accepts and converts the value to the corresponding APNs value.</p>'
       RawContent:
         $ref: '#/definitions/__string'
-        description: '<p>The raw, JSON-formatted string to use as the payload for the notification message. This value overrides all other content for the message.</p> <note><p>If you specify the raw content of an APNs push notification, the message payload has to include the content-available key. The value of the content-available key has to be an integer, and can only be 0 or 1. If you''re sending a standard notification, set the value of content-available to 0. If you''re sending a silent (background) notification, set the value of content-available to 1. Additionally, silent notification payloads can''t include the alert, badge, or sound keys. For more information, see <a href="https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification">Generating a Remote Notification</a> and <a href="https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/pushing_background_updates_to_your_app">Pushing Background Updates to Your App</a> on the Apple Developer website.</p></note>'
+        description: '<p>The raw, JSON-formatted string to use as the payload for the notification message. If specified, this value overrides all other content for the message.</p> <note><p>If you specify the raw content of an APNs push notification, the message payload has to include the content-available key. The value of the content-available key has to be an integer, and can only be 0 or 1. If you''re sending a standard notification, set the value of content-available to 0. If you''re sending a silent (background) notification, set the value of content-available to 1. Additionally, silent notification payloads can''t include the alert, badge, or sound keys. For more information, see <a href="https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification">Generating a Remote Notification</a> and <a href="https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/pushing_background_updates_to_your_app">Pushing Background Updates to Your App</a> on the Apple Developer website.</p></note>'
       SilentPush:
         $ref: '#/definitions/__boolean'
         description: '<p>Specifies whether the notification is a silent push notification. A silent (or background) push notification isn''t displayed on recipients'' devices. You can use silent push notifications to make small updates to your app, or to display messages in an in-app message center.</p> <p>Amazon Pinpoint uses this property to determine the correct value for the apns-push-type request header when it sends the notification message to APNs. If you specify a value of true for this property, Amazon Pinpoint sets the value for the apns-push-type header field to background.</p> <note><p>If you specify the raw content of an APNs push notification, the message payload has to include the content-available key. For silent (background) notifications, set the value of content-available to 1. Additionally, the message payload for a silent notification can''t include the alert, badge, or sound keys. For more information, see <a href="https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification">Generating a Remote Notification</a> and <a href="https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/pushing_background_updates_to_your_app">Pushing Background Updates to Your App</a> on the Apple Developer website.</p> <p>Apple has indicated that they will throttle "excessive" background notifications based on current traffic volumes. To prevent your notifications being throttled, Apple recommends that you send no more than 3 silent push notifications to each recipient per hour.</p></note>'
@@ -7475,10 +7765,10 @@ definitions:
         description: 'An object that maps custom attributes to attributes for the address and is attached to the message. For a push notification, this payload is added to the data.pinpoint object. For an email or text message, this payload is added to email/SMS delivery receipt event attributes.'
       RawContent:
         $ref: '#/definitions/__string'
-        description: 'The raw, JSON-formatted string to use as the payload for the notification message. This value overrides the message.'
+        description: 'The raw, JSON-formatted string to use as the payload for the message. If specified, this value overrides all other values for the message.'
       Substitutions:
         $ref: '#/definitions/MapOfListOf__string'
-        description: An object that maps variable values for the message. Amazon Pinpoint merges these values with the variable values specified by properties of the DefaultMessage object. The substitutions in this map take precedence over all other substitutions.
+        description: A map of the message variables to merge with the variables specified by properties of the DefaultMessage object. The variables specified in this map take precedence over all other variables.
       TitleOverride:
         $ref: '#/definitions/__string'
         description: The message title to use instead of the default message title. This value overrides the default message title.
@@ -7690,7 +7980,7 @@ definitions:
         description: The URL of an image to display in the push notification.
       RawContent:
         $ref: '#/definitions/__string'
-        description: 'The raw, JSON-formatted string to use as the payload for the notification message. This value overrides the message.'
+        description: 'The raw, JSON-formatted string to use as the payload for the notification message. If specified, this value overrides all other content for the message.'
       SilentPush:
         $ref: '#/definitions/__boolean'
         description: 'Specifies whether the notification is a silent push notification, which is a push notification that doesn''t display on a recipient''s device. Silent push notifications can be used for cases such as updating an app''s configuration or supporting phone home functionality.'
@@ -7756,13 +8046,13 @@ definitions:
     properties:
       Body:
         $ref: '#/definitions/__string'
-        description: The body of the email for recipients whose email clients don't support HTML content.
+        description: The body of the email for recipients whose email clients don't render HTML content.
       FromAddress:
         $ref: '#/definitions/__string'
         description: The verified email address to send the email from. The default address is the FromAddress specified for the email channel for the application.
       HtmlBody:
         $ref: '#/definitions/__string'
-        description: 'The body of the email, in HTML format, for recipients whose email clients support HTML content.'
+        description: 'The body of the email, in HTML format, for recipients whose email clients render HTML content.'
       Title:
         $ref: '#/definitions/__string'
         description: 'The subject line, or title, of the email.'
@@ -8006,7 +8296,7 @@ definitions:
     properties:
       WaitFor:
         $ref: '#/definitions/__string'
-        description: 'The amount of time, as a duration in ISO 8601 format, to wait before determining whether the activity''s conditions have been met or moving participants to the next activity in the journey.'
+        description: 'The amount of time to wait, as a duration in ISO 8601 format, before determining whether the activity''s conditions have been met or moving participants to the next activity in the journey.'
       WaitUntil:
         $ref: '#/definitions/__string'
         description: 'The date and time, in ISO 8601 format, when Amazon Pinpoint determines whether the activity''s conditions have been met or the activity moves participants to the next activity in the journey.'
@@ -8038,7 +8328,7 @@ definitions:
         description: 'An array of requests that defines additional treatments for the campaign, in addition to the default treatment for the campaign.'
       Description:
         $ref: '#/definitions/__string'
-        description: The custom description of the campaign.
+        description: A custom description of the campaign.
       HoldoutPercent:
         $ref: '#/definitions/__integer'
         description: The allocated percentage of users (segment members) who shouldn't receive messages from the campaign.
@@ -8074,7 +8364,7 @@ definitions:
         description: The message template to use for the campaign.
       TreatmentDescription:
         $ref: '#/definitions/__string'
-        description: The custom description of a variation of the campaign to use for A/B testing.
+        description: A custom description of a variation of the campaign to use for A/B testing.
       TreatmentName:
         $ref: '#/definitions/__string'
         description: The custom name of a variation of the campaign to use for A/B testing.
@@ -8089,18 +8379,24 @@ definitions:
   EmailTemplateRequest:
     type: object
     properties:
+      DefaultSubstitutions:
+        $ref: '#/definitions/__string'
+        description: 'A JSON object that specifies the default values to use for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable. When you create a message that''s based on the template, you can override these defaults with message-specific and address-specific variables and values.'
       HtmlPart:
         $ref: '#/definitions/__string'
-        description: 'The message body, in HTML format, to use in email messages that are based on the message template. We recommend using HTML format for email clients that support HTML. You can include links, formatted text, and more in an HTML message.'
+        description: 'The message body, in HTML format, to use in email messages that are based on the message template. We recommend using HTML format for email clients that render HTML content. You can include links, formatted text, and more in an HTML message.'
       Subject:
         $ref: '#/definitions/__string'
         description: 'The subject line, or title, to use in email messages that are based on the message template.'
       tags:
         $ref: '#/definitions/MapOf__string'
         description: A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+      TemplateDescription:
+        $ref: '#/definitions/__string'
+        description: A custom description of the message template.
       TextPart:
         $ref: '#/definitions/__string'
-        description: 'The message body, in text format, to use in email messages that are based on the message template. We recommend using text format for email clients that don''t support HTML and clients that are connected to high-latency networks, such as mobile devices.'
+        description: 'The message body, in plain text format, to use in email messages that are based on the message template. We recommend using plain text format for email clients that don''t render HTML content and clients that are connected to high-latency networks, such as mobile devices.'
     description: Specifies the content and settings for a message template that can be used in messages that are sent through the email channel.
   CreateEmailTemplateRequest:
     type: object
@@ -8405,12 +8701,18 @@ definitions:
       Default:
         $ref: '#/definitions/DefaultPushNotificationTemplate'
         description: The default message template to use for push notification channels.
+      DefaultSubstitutions:
+        $ref: '#/definitions/__string'
+        description: 'A JSON object that specifies the default values to use for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable. When you create a message that''s based on the template, you can override these defaults with message-specific and address-specific variables and values.'
       GCM:
         $ref: '#/definitions/AndroidPushNotificationTemplate'
         description: 'The message template to use for the GCM channel, which is used to send notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).'
       tags:
         $ref: '#/definitions/MapOf__string'
         description: A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+      TemplateDescription:
+        $ref: '#/definitions/__string'
+        description: A custom description of the message template.
     description: Specifies the content and settings for a message template that can be used in messages that are sent through a push notification channel.
   CreatePushTemplateRequest:
     type: object
@@ -8495,9 +8797,15 @@ definitions:
       Body:
         $ref: '#/definitions/__string'
         description: The message body to use in text messages that are based on the message template.
+      DefaultSubstitutions:
+        $ref: '#/definitions/__string'
+        description: 'A JSON object that specifies the default values to use for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable. When you create a message that''s based on the template, you can override these defaults with message-specific and address-specific variables and values.'
       tags:
         $ref: '#/definitions/MapOf__string'
         description: A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+      TemplateDescription:
+        $ref: '#/definitions/__string'
+        description: A custom description of the message template.
     description: Specifies the content and settings for a message template that can be used in text messages that are sent through the SMS channel.
   CreateSmsTemplateRequest:
     type: object
@@ -8507,16 +8815,45 @@ definitions:
       SMSTemplateRequest:
         $ref: '#/definitions/SMSTemplateRequest'
         description: Creates a message template that you can use in messages that are sent through the SMS channel.
+  VoiceTemplateRequest:
+    type: object
+    properties:
+      Body:
+        $ref: '#/definitions/__string'
+        description: 'The text of the script to use in messages that are based on the message template, in plain text format.'
+      DefaultSubstitutions:
+        $ref: '#/definitions/__string'
+        description: 'A JSON object that specifies the default values to use for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable. When you create a message that''s based on the template, you can override these defaults with message-specific and address-specific variables and values.'
+      LanguageCode:
+        $ref: '#/definitions/__string'
+        description: 'The code for the language to use when synthesizing the text of the script in messages that are based on the message template. For a list of supported languages and the code for each one, see the <a href="https://docs.aws.amazon.com/polly/latest/dg/what-is.html">Amazon Polly Developer Guide</a>.'
+      tags:
+        $ref: '#/definitions/MapOf__string'
+        description: A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+      TemplateDescription:
+        $ref: '#/definitions/__string'
+        description: A custom description of the message template.
+      VoiceId:
+        $ref: '#/definitions/__string'
+        description: 'The name of the voice to use when delivering messages that are based on the message template. For a list of supported voices, see the <a href="https://docs.aws.amazon.com/polly/latest/dg/what-is.html">Amazon Polly Developer Guide</a>.'
+    description: Specifies the content and settings for a message template that can be used in messages that are sent through the voice channel.
+  CreateVoiceTemplateRequest:
+    type: object
+    required:
+      - VoiceTemplateRequest
+    properties:
+      VoiceTemplateRequest:
+        $ref: '#/definitions/VoiceTemplateRequest'
   DefaultMessage:
     type: object
     properties:
       Body:
         $ref: '#/definitions/__string'
-        description: 'The default message body of the push notification, email, or SMS message.'
+        description: The default body of the message.
       Substitutions:
         $ref: '#/definitions/MapOfListOf__string'
-        description: 'The default message variables to use in the push notification, email, or SMS message. You can override these default variables with individual address variables.'
-    description: Specifies the default message to use for all channels.
+        description: The default message variables to use in the message. You can override these default variables with individual address variables.
+    description: Specifies the default message for all channels.
   DefaultPushNotificationMessage:
     type: object
     properties:
@@ -8874,6 +9211,9 @@ definitions:
         $ref: '#/definitions/__integer'
         description: The current version of the voice channel.
     description: Provides information about the status and settings of the voice channel for an application.
+  DeleteVoiceTemplateRequest:
+    type: object
+    properties: {}
   DeliveryStatus:
     type: string
     enum:
@@ -8943,7 +9283,7 @@ definitions:
         description: '<p>para>normal - The notification might be delayed. Delivery is optimized for battery usage on the recipient''s device. Use this value unless immediate delivery is required.</p>/listitem> <li><p>high - The notification is sent immediately and might wake a sleeping device.</p></li>/para> <p>Amazon Pinpoint specifies this value in the FCM priority parameter when it sends the notification message to FCM.</p> <p>The equivalent values for Apple Push Notification service (APNs) are 5, for normal, and 10, for high. If you specify an APNs value for this property, Amazon Pinpoint accepts and converts the value to the corresponding FCM value.</p>'
       RawContent:
         $ref: '#/definitions/__string'
-        description: 'The raw, JSON-formatted string to use as the payload for the notification message. This value overrides the message.'
+        description: 'The raw, JSON-formatted string to use as the payload for the notification message. If specified, this value overrides all other content for the message.'
       RestrictedPackageName:
         $ref: '#/definitions/__string'
         description: The package name of the application where registration tokens must match in order for the recipient to receive the message.
@@ -8996,10 +9336,10 @@ definitions:
     properties:
       Body:
         $ref: '#/definitions/__string'
-        description: The text script for the voice message.
+        description: The text of the script to use for the voice message.
       LanguageCode:
         $ref: '#/definitions/__string'
-        description: 'The language to use when delivering the message. For a list of supported languages, see the <a href="AmazonPollyDG.html">Amazon Polly Developer Guide</a>.'
+        description: 'The code for the language to use when synthesizing the text of the message script. For a list of supported languages and the code for each one, see the <a href="https://docs.aws.amazon.com/polly/latest/dg/what-is.html">Amazon Polly Developer Guide</a>.'
       OriginationNumber:
         $ref: '#/definitions/__string'
         description: 'The long code to send the voice message from. This value should be one of the dedicated long codes that''s assigned to your AWS account. Although it isn''t required, we recommend that you specify the long code in E.164 format, for example +12065550100, to ensure prompt and accurate delivery of the message.'
@@ -9008,7 +9348,7 @@ definitions:
         description: The default message variables to use in the voice message. You can override the default variables with individual address variables.
       VoiceId:
         $ref: '#/definitions/__string'
-        description: 'The name of the voice to use when delivering the message. For a list of supported voices, see the <a href="AmazonPollyDG.html">Amazon Polly Developer Guide</a>.'
+        description: 'The name of the voice to use when delivering the message. For a list of supported voices, see the <a href="https://docs.aws.amazon.com/polly/latest/dg/what-is.html">Amazon Polly Developer Guide</a>.'
     description: Specifies the settings for a one-time voice message that's sent directly to an endpoint through the voice channel.
   Duration:
     type: string
@@ -9051,13 +9391,13 @@ definitions:
     properties:
       HtmlPart:
         $ref: '#/definitions/SimpleEmailPart'
-        description: 'The body of the email message, in HTML format. We recommend using an HTML part for email clients that support HTML. You can include links, formatted text, and more in an HTML message.'
+        description: 'The body of the email message, in HTML format. We recommend using HTML format for email clients that render HTML content. You can include links, formatted text, and more in an HTML message.'
       Subject:
         $ref: '#/definitions/SimpleEmailPart'
         description: 'The subject line, or title, of the email.'
       TextPart:
         $ref: '#/definitions/SimpleEmailPart'
-        description: 'The body of the email message, in text format. We recommend using a text part for email clients that don''t support HTML and clients that are connected to high-latency networks, such as mobile devices.'
+        description: 'The body of the email message, in plain text format. We recommend using plain text format for email clients that don''t render HTML content and clients that are connected to high-latency networks, such as mobile devices.'
     description: 'Specifies the contents of an email message, composed of a subject, a text part, and an HTML part.'
   JourneyEmailMessage:
     type: object
@@ -9087,6 +9427,9 @@ definitions:
       CreationDate:
         $ref: '#/definitions/__string'
         description: The date when the message template was created.
+      DefaultSubstitutions:
+        $ref: '#/definitions/__string'
+        description: The JSON object that specifies the default values that are used for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable.
       HtmlPart:
         $ref: '#/definitions/__string'
         description: 'The message body, in HTML format, that''s used in email messages that are based on the message template.'
@@ -9099,6 +9442,9 @@ definitions:
       tags:
         $ref: '#/definitions/MapOf__string'
         description: A string-to-string map of key-value pairs that identifies the tags that are associated with the message template. Each tag consists of a required tag key and an associated tag value.
+      TemplateDescription:
+        $ref: '#/definitions/__string'
+        description: The custom description of the message template.
       TemplateName:
         $ref: '#/definitions/__string'
         description: The name of the message template.
@@ -9107,7 +9453,7 @@ definitions:
         description: 'The type of channel that the message template is designed for. For an email template, this value is EMAIL.'
       TextPart:
         $ref: '#/definitions/__string'
-        description: 'The message body, in text format, that''s used in email messages that are based on the message template.'
+        description: 'The message body, in plain text format, that''s used in email messages that are based on the message template.'
     description: Provides information about the content and settings for a message template that can be used in messages that are sent through the email channel.
   EndpointBatchItem:
     type: object
@@ -9244,7 +9590,7 @@ definitions:
         description: 'A map of custom attributes to attach to the message for the address. For a push notification, this payload is added to the data.pinpoint object. For an email or text message, this payload is added to email/SMS delivery receipt event attributes.'
       RawContent:
         $ref: '#/definitions/__string'
-        description: 'The raw, JSON-formatted string to use as the payload for the message. If specified, this value overrides the message.'
+        description: 'The raw, JSON-formatted string to use as the payload for the message. If specified, this value overrides all other values for the message.'
       Substitutions:
         $ref: '#/definitions/MapOfListOf__string'
         description: A map of the message variables to merge with the variables specified for the default message (DefaultMessage.Substitutions). The variables specified in this map take precedence over all other variables.
@@ -9701,7 +10047,7 @@ definitions:
       Metrics:
         $ref: '#/definitions/MapOf__string'
         description: 'A JSON object that contains the results of the query. For information about the structure and contents of the results, see the <a href="https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html">Amazon Pinpoint Developer Guide</a>.'
-    description: Provides the results of a query that retrieved the data for a standard execution metric that applies to a journey.
+    description: 'Provides the results of a query that retrieved the data for a standard execution metric that applies to a journey, and provides information about that query.'
   GetJourneyRequest:
     type: object
     properties: {}
@@ -9734,6 +10080,9 @@ definitions:
       Default:
         $ref: '#/definitions/DefaultPushNotificationTemplate'
         description: The default message template that's used for push notification channels.
+      DefaultSubstitutions:
+        $ref: '#/definitions/__string'
+        description: The JSON object that specifies the default values that are used for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable.
       GCM:
         $ref: '#/definitions/AndroidPushNotificationTemplate'
         description: 'The message template that''s used for the GCM channel, which is used to send notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).'
@@ -9743,6 +10092,9 @@ definitions:
       tags:
         $ref: '#/definitions/MapOf__string'
         description: A string-to-string map of key-value pairs that identifies the tags that are associated with the message template. Each tag consists of a required tag key and an associated tag value.
+      TemplateDescription:
+        $ref: '#/definitions/__string'
+        description: The custom description of the message template.
       TemplateName:
         $ref: '#/definitions/__string'
         description: The name of the message template.
@@ -9803,12 +10155,18 @@ definitions:
       CreationDate:
         $ref: '#/definitions/__string'
         description: The date when the message template was created.
+      DefaultSubstitutions:
+        $ref: '#/definitions/__string'
+        description: The JSON object that specifies the default values that are used for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable.
       LastModifiedDate:
         $ref: '#/definitions/__string'
         description: The date when the message template was last modified.
       tags:
         $ref: '#/definitions/MapOf__string'
         description: A string-to-string map of key-value pairs that identifies the tags that are associated with the message template. Each tag consists of a required tag key and an associated tag value.
+      TemplateDescription:
+        $ref: '#/definitions/__string'
+        description: The custom description of the message template.
       TemplateName:
         $ref: '#/definitions/__string'
         description: The name of the message template.
@@ -9822,6 +10180,51 @@ definitions:
   GetVoiceChannelRequest:
     type: object
     properties: {}
+  GetVoiceTemplateRequest:
+    type: object
+    properties: {}
+  VoiceTemplateResponse:
+    type: object
+    required:
+      - LastModifiedDate
+      - CreationDate
+      - TemplateName
+      - TemplateType
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: The Amazon Resource Name (ARN) of the message template.
+      Body:
+        $ref: '#/definitions/__string'
+        description: 'The text of the script that''s used in messages that are based on the message template, in plain text format.'
+      CreationDate:
+        $ref: '#/definitions/__string'
+        description: The date when the message template was created.
+      DefaultSubstitutions:
+        $ref: '#/definitions/__string'
+        description: The JSON object that specifies the default values that are used for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable.
+      LanguageCode:
+        $ref: '#/definitions/__string'
+        description: 'The code for the language that''s used when synthesizing the text of the script in messages that are based on the message template. For a list of supported languages and the code for each one, see the <a href="https://docs.aws.amazon.com/polly/latest/dg/what-is.html">Amazon Polly Developer Guide</a>.'
+      LastModifiedDate:
+        $ref: '#/definitions/__string'
+        description: The date when the message template was last modified.
+      tags:
+        $ref: '#/definitions/MapOf__string'
+        description: A string-to-string map of key-value pairs that identifies the tags that are associated with the message template. Each tag consists of a required tag key and an associated tag value.
+      TemplateDescription:
+        $ref: '#/definitions/__string'
+        description: The custom description of the message template.
+      TemplateName:
+        $ref: '#/definitions/__string'
+        description: The name of the message template.
+      TemplateType:
+        $ref: '#/definitions/TemplateType'
+        description: 'The type of channel that the message template is designed for. For a voice template, this value is VOICE.'
+      VoiceId:
+        $ref: '#/definitions/__string'
+        description: 'The name of the voice that''s used when delivering messages that are based on the message template. For a list of supported voices, see the <a href="https://docs.aws.amazon.com/polly/latest/dg/what-is.html">Amazon Polly Developer Guide</a>.'
+    description: Provides information about the content and settings for a message template that can be used in messages that are sent through the voice channel.
   ImportJobResource:
     type: object
     required:
@@ -9957,7 +10360,7 @@ definitions:
         description: The URL of the image or video to display in the push notification.
       RawContent:
         $ref: '#/definitions/__string'
-        description: 'The raw, JSON-formatted string to use as the payload for the notification message. This value overrides other values for the message.'
+        description: 'The raw, JSON-formatted string to use as the payload for the notification message. If specified, this value overrides all other content for the message.'
       SilentPush:
         $ref: '#/definitions/__boolean'
         description: 'Specifies whether the notification is a silent push notification, which is a push notification that doesn''t display on a recipient''s device. Silent push notifications can be used for cases such as updating an app''s configuration, displaying messages in an in-app message center, or supporting phone home functionality.'
@@ -9987,14 +10390,14 @@ definitions:
         description: 'A map of key-value pairs, where each key is an endpoint ID and each value is an EndpointSendConfiguration object. You can use an EndpointSendConfiguration object to tailor the message for an endpoint by specifying settings such as content overrides and message variables.'
       MessageConfiguration:
         $ref: '#/definitions/DirectMessageConfiguration'
-        description: The set of properties that defines the configuration settings for the message.
+        description: The settings and content for the default message and any default messages that you defined for specific channels.
       TemplateConfiguration:
         $ref: '#/definitions/TemplateConfiguration'
         description: The message template to use for the message.
       TraceId:
         $ref: '#/definitions/__string'
         description: The unique identifier for tracing the message. This identifier is visible to message recipients.
-    description: Specifies the objects that define configuration and other settings for a message.
+    description: Specifies the configuration and other settings for a message.
   MapOfEndpointMessageResult:
     type: object
     additionalProperties:
@@ -10432,7 +10835,7 @@ definitions:
         description: 'A map of custom attribute-value pairs. For a push notification, Amazon Pinpoint adds these attributes to the data.pinpoint object in the body of the notification payload. Amazon Pinpoint also provides these attributes in the events that it generates for users-messages deliveries.'
       MessageConfiguration:
         $ref: '#/definitions/DirectMessageConfiguration'
-        description: The message definitions for the default message and any default messages that you defined for specific channels.
+        description: The settings and content for the default message and any default messages that you defined for specific channels.
       TemplateConfiguration:
         $ref: '#/definitions/TemplateConfiguration'
         description: The message template to use for the message.
@@ -10507,12 +10910,18 @@ definitions:
       CreationDate:
         $ref: '#/definitions/__string'
         description: The date when the message template was created.
+      DefaultSubstitutions:
+        $ref: '#/definitions/__string'
+        description: The JSON object that specifies the default values that are used for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable.
       LastModifiedDate:
         $ref: '#/definitions/__string'
         description: The date when the message template was last modified.
       tags:
         $ref: '#/definitions/MapOf__string'
         description: A string-to-string map of key-value pairs that identifies the tags that are associated with the message template. Each tag consists of a required tag key and an associated tag value.
+      TemplateDescription:
+        $ref: '#/definitions/__string'
+        description: The custom description of the message template.
       TemplateName:
         $ref: '#/definitions/__string'
         description: The name of the message template.
@@ -10722,6 +11131,13 @@ definitions:
     properties:
       VoiceChannelRequest:
         $ref: '#/definitions/VoiceChannelRequest'
+  UpdateVoiceTemplateRequest:
+    type: object
+    required:
+      - VoiceTemplateRequest
+    properties:
+      VoiceTemplateRequest:
+        $ref: '#/definitions/VoiceTemplateRequest'
   WriteTreatmentResource:
     type: object
     required:
@@ -10741,7 +11157,7 @@ definitions:
         description: The message template to use for the treatment.
       TreatmentDescription:
         $ref: '#/definitions/__string'
-        description: The custom description of the treatment.
+        description: A custom description of the treatment.
       TreatmentName:
         $ref: '#/definitions/__string'
         description: The custom name of the treatment. A treatment is a variation of a campaign that's used for A/B testing of a campaign.

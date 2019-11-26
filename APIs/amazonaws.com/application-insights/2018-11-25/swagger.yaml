@@ -185,6 +185,10 @@ paths:
           description: InternalServerException
           schema:
             $ref: '#/definitions/InternalServerException'
+        '484':
+          description: TagsAlreadyExistException
+          schema:
+            $ref: '#/definitions/TagsAlreadyExistException'
       parameters:
         - name: body
           in: body
@@ -242,6 +246,51 @@ paths:
           type: string
           enum:
             - EC2WindowsBarleyService.CreateComponent
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=EC2WindowsBarleyService.CreateLogPattern':
+    post:
+      operationId: CreateLogPattern
+      description: Adds an log pattern to a <code>LogPatternSet</code>.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateLogPatternResponse'
+        '480':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '483':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateLogPatternRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - EC2WindowsBarleyService.CreateLogPattern
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -328,6 +377,51 @@ paths:
           type: string
           enum:
             - EC2WindowsBarleyService.DeleteComponent
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=EC2WindowsBarleyService.DeleteLogPattern':
+    post:
+      operationId: DeleteLogPattern
+      description: Removes the specified log pattern from a <code>LogPatternSet</code>.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteLogPatternResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '483':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteLogPatternRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - EC2WindowsBarleyService.DeleteLogPattern
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -492,6 +586,47 @@ paths:
           type: string
           enum:
             - EC2WindowsBarleyService.DescribeComponentConfigurationRecommendation
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=EC2WindowsBarleyService.DescribeLogPattern':
+    post:
+      operationId: DescribeLogPattern
+      description: Describe a specific log pattern from a <code>LogPatternSet</code>.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeLogPatternResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeLogPatternRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - EC2WindowsBarleyService.DescribeLogPattern
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -721,6 +856,108 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=EC2WindowsBarleyService.ListLogPatternSets':
+    post:
+      operationId: ListLogPatternSets
+      description: Lists the log pattern sets in the specific application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListLogPatternSetsResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListLogPatternSetsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - EC2WindowsBarleyService.ListLogPatternSets
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=EC2WindowsBarleyService.ListLogPatterns':
+    post:
+      operationId: ListLogPatterns
+      description: Lists the log patterns in the specific log <code>LogPatternSet</code>.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListLogPatternsResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListLogPatternsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - EC2WindowsBarleyService.ListLogPatterns
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=EC2WindowsBarleyService.ListProblems':
     post:
       operationId: ListProblems
@@ -764,6 +1001,121 @@ paths:
           type: string
           enum:
             - EC2WindowsBarleyService.ListProblems
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=EC2WindowsBarleyService.ListTagsForResource':
+    post:
+      operationId: ListTagsForResource
+      description: Retrieve a list of the tags (keys and values) that are associated with a specified application. A <i>tag</i> is a label that you optionally define and associate with an application. Each tag consists of a required <i>tag key</i> and an optional associated <i>tag value</i>. A tag key is a general label that acts as a category for more specific tag values. A tag value acts as a descriptor within a tag key.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTagsForResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - EC2WindowsBarleyService.ListTagsForResource
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=EC2WindowsBarleyService.TagResource':
+    post:
+      operationId: TagResource
+      description: '<p>Add one or more tags (keys and values) to a specified application. A <i>tag</i> is a label that you optionally define and associate with an application. Tags can help you categorize and manage application in different ways, such as by purpose, owner, environment, or other criteria. </p> <p>Each tag consists of a required <i>tag key</i> and an associated <i>tag value</i>, both of which you define. A tag key is a general label that acts as a category for more specific tag values. A tag value acts as a descriptor within a tag key.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TagResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: TooManyTagsException
+          schema:
+            $ref: '#/definitions/TooManyTagsException'
+        '482':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TagResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - EC2WindowsBarleyService.TagResource
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=EC2WindowsBarleyService.UntagResource':
+    post:
+      operationId: UntagResource
+      description: Remove one or more tags (keys and values) from a specified application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UntagResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UntagResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - EC2WindowsBarleyService.UntagResource
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -861,7 +1213,7 @@ paths:
   '/#X-Amz-Target=EC2WindowsBarleyService.UpdateComponentConfiguration':
     post:
       operationId: UpdateComponentConfiguration
-      description: Updates the monitoring configurations for the component. The configuration input parameter is an escaped JSON of the configuration and should match the schema of what is returned by <code>DescribeComponentConfigurationRecommendation</code>.
+      description: 'Updates the monitoring configurations for the component. The configuration input parameter is an escaped JSON of the configuration and should match the schema of what is returned by <code>DescribeComponentConfigurationRecommendation</code>. '
       responses:
         '200':
           description: Success
@@ -899,6 +1251,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=EC2WindowsBarleyService.UpdateLogPattern':
+    post:
+      operationId: UpdateLogPattern
+      description: Adds a log pattern to a <code>LogPatternSet</code>.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateLogPatternResponse'
+        '480':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '483':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateLogPatternRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - EC2WindowsBarleyService.UpdateLogPattern
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   CreateApplicationResponse:
     type: object
@@ -920,10 +1317,14 @@ definitions:
       OpsItemSNSTopicArn:
         $ref: '#/definitions/OpsItemSNSTopicArn'
         description: ' The SNS topic provided to Application Insights that is associated to the created opsItem. Allows you to receive notifications for updates to the opsItem. '
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: List of tags to add to the application. tag key (<code>Key</code>) and an associated tag value (<code>Value</code>). The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.
   ResourceInUseException: {}
   ResourceNotFoundException: {}
   ValidationException: {}
   InternalServerException: {}
+  TagsAlreadyExistException: {}
   CreateComponentResponse:
     type: object
     properties: {}
@@ -943,6 +1344,39 @@ definitions:
       ResourceList:
         $ref: '#/definitions/ResourceList'
         description: The list of resource ARNs that belong to the component.
+  CreateLogPatternResponse:
+    type: object
+    properties:
+      LogPattern:
+        $ref: '#/definitions/LogPattern'
+        description: The successfully created log pattern.
+      ResourceGroupName:
+        $ref: '#/definitions/ResourceGroupName'
+        description: The name of the resource group.
+  CreateLogPatternRequest:
+    type: object
+    required:
+      - ResourceGroupName
+      - PatternSetName
+      - PatternName
+      - Pattern
+      - Rank
+    properties:
+      ResourceGroupName:
+        $ref: '#/definitions/ResourceGroupName'
+        description: The name of the resource group.
+      PatternSetName:
+        $ref: '#/definitions/LogPatternSetName'
+        description: The name of the log pattern set.
+      PatternName:
+        $ref: '#/definitions/LogPatternName'
+        description: The name of the log pattern.
+      Pattern:
+        $ref: '#/definitions/LogPatternRegex'
+        description: The log pattern.
+      Rank:
+        $ref: '#/definitions/LogPatternRank'
+        description: Rank of the log pattern.
   DeleteApplicationResponse:
     type: object
     properties: {}
@@ -970,6 +1404,25 @@ definitions:
       ComponentName:
         $ref: '#/definitions/ComponentName'
         description: The name of the component.
+  DeleteLogPatternResponse:
+    type: object
+    properties: {}
+  DeleteLogPatternRequest:
+    type: object
+    required:
+      - ResourceGroupName
+      - PatternSetName
+      - PatternName
+    properties:
+      ResourceGroupName:
+        $ref: '#/definitions/ResourceGroupName'
+        description: The name of the resource group.
+      PatternSetName:
+        $ref: '#/definitions/LogPatternSetName'
+        description: The name of the log pattern set.
+      PatternName:
+        $ref: '#/definitions/LogPatternName'
+        description: The name of the log pattern.
   DescribeApplicationResponse:
     type: object
     properties:
@@ -1012,7 +1465,7 @@ definitions:
         description: Indicates whether the application component is monitored.
       Tier:
         $ref: '#/definitions/Tier'
-        description: 'The tier of the application component. Supported tiers include <code>DOT_NET_WORKER</code>, <code>DOT_NET_WEB</code>, <code>SQL_SERVER</code>, and <code>DEFAULT</code> '
+        description: 'The tier of the application component. Supported tiers include <code>DOT_NET_CORE</code>, <code>DOT_NET_WORKER</code>, <code>DOT_NET_WEB</code>, <code>SQL_SERVER</code>, and <code>DEFAULT</code> '
       ComponentConfiguration:
         $ref: '#/definitions/ComponentConfiguration'
         description: The configuration settings of the component. The value is the escaped JSON of the configuration.
@@ -1049,7 +1502,32 @@ definitions:
         description: The name of the component.
       Tier:
         $ref: '#/definitions/Tier'
-        description: 'The tier of the application component. Supported tiers include <code>DOT_NET_WORKER</code>, <code>DOT_NET_WEB</code>, <code>SQL_SERVER</code>, and <code>DEFAULT</code>.'
+        description: 'The tier of the application component. Supported tiers include <code>DOT_NET_CORE</code>, <code>DOT_NET_WORKER</code>, <code>DOT_NET_WEB</code>, <code>SQL_SERVER</code>, and <code>DEFAULT</code>.'
+  DescribeLogPatternResponse:
+    type: object
+    properties:
+      ResourceGroupName:
+        $ref: '#/definitions/ResourceGroupName'
+        description: The name of the resource group.
+      LogPattern:
+        $ref: '#/definitions/LogPattern'
+        description: The successfully created log pattern.
+  DescribeLogPatternRequest:
+    type: object
+    required:
+      - ResourceGroupName
+      - PatternSetName
+      - PatternName
+    properties:
+      ResourceGroupName:
+        $ref: '#/definitions/ResourceGroupName'
+        description: The name of the resource group.
+      PatternSetName:
+        $ref: '#/definitions/LogPatternSetName'
+        description: The name of the log pattern set.
+      PatternName:
+        $ref: '#/definitions/LogPatternName'
+        description: The name of the log pattern.
   DescribeObservationResponse:
     type: object
     properties:
@@ -1133,6 +1611,61 @@ definitions:
       NextToken:
         $ref: '#/definitions/PaginationToken'
         description: The token to request the next page of results.
+  ListLogPatternSetsResponse:
+    type: object
+    properties:
+      ResourceGroupName:
+        $ref: '#/definitions/ResourceGroupName'
+        description: The name of the resource group.
+      LogPatternSets:
+        $ref: '#/definitions/LogPatternSetList'
+        description: The list of log pattern sets.
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'The token used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
+  ListLogPatternSetsRequest:
+    type: object
+    required:
+      - ResourceGroupName
+    properties:
+      ResourceGroupName:
+        $ref: '#/definitions/ResourceGroupName'
+        description: The name of the resource group.
+      MaxResults:
+        $ref: '#/definitions/MaxEntities'
+        description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: The token to request the next page of results.
+  ListLogPatternsResponse:
+    type: object
+    properties:
+      ResourceGroupName:
+        $ref: '#/definitions/ResourceGroupName'
+        description: The name of the resource group.
+      LogPatterns:
+        $ref: '#/definitions/LogPatternList'
+        description: The list of log patterns.
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'The token used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
+  ListLogPatternsRequest:
+    type: object
+    required:
+      - ResourceGroupName
+    properties:
+      ResourceGroupName:
+        $ref: '#/definitions/ResourceGroupName'
+        description: The name of the resource group.
+      PatternSetName:
+        $ref: '#/definitions/LogPatternSetName'
+        description: The name of the log pattern set.
+      MaxResults:
+        $ref: '#/definitions/MaxEntities'
+        description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: The token to request the next page of results.
   ListProblemsResponse:
     type: object
     properties:
@@ -1160,6 +1693,51 @@ definitions:
       NextToken:
         $ref: '#/definitions/PaginationToken'
         description: The token to request the next page of results.
+  ListTagsForResourceResponse:
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: An array that lists all the tags that are associated with the application. Each tag consists of a required tag key (<code>Key</code>) and an associated tag value (<code>Value</code>).
+  ListTagsForResourceRequest:
+    type: object
+    required:
+      - ResourceARN
+    properties:
+      ResourceARN:
+        $ref: '#/definitions/AmazonResourceName'
+        description: The Amazon Resource Name (ARN) of the application that you want to retrieve tag information for.
+  TagResourceResponse:
+    type: object
+    properties: {}
+  TagResourceRequest:
+    type: object
+    required:
+      - ResourceARN
+      - Tags
+    properties:
+      ResourceARN:
+        $ref: '#/definitions/AmazonResourceName'
+        description: The Amazon Resource Name (ARN) of the application that you want to add one or more tags to.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: A list of tags that to add to the application. A tag consists of a required tag key (<code>Key</code>) and an associated tag value (<code>Value</code>). The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.
+  TooManyTagsException: {}
+  UntagResourceResponse:
+    type: object
+    properties: {}
+  UntagResourceRequest:
+    type: object
+    required:
+      - ResourceARN
+      - TagKeys
+    properties:
+      ResourceARN:
+        $ref: '#/definitions/AmazonResourceName'
+        description: The Amazon Resource Name (ARN) of the application that you want to remove one or more tags from.
+      TagKeys:
+        $ref: '#/definitions/TagKeyList'
+        description: '<p>The tags (tag keys) that you want to remove from the resource. When you specify a tag key, the action removes both that key and its associated tag value.</p> <p>To remove more than one tag from the application, append the <code>TagKeys</code> parameter and argument for each additional tag to remove, separated by an ampersand. </p>'
   UpdateApplicationResponse:
     type: object
     properties:
@@ -1224,18 +1802,61 @@ definitions:
         description: Indicates whether the application component is monitored.
       Tier:
         $ref: '#/definitions/Tier'
-        description: 'The tier of the application component. Supported tiers include <code>DOT_NET_WORKER</code>, <code>DOT_NET_WEB</code>, <code>SQL_SERVER</code>, and <code>DEFAULT</code>.'
+        description: 'The tier of the application component. Supported tiers include <code>DOT_NET_WORKER</code>, <code>DOT_NET_WEB</code>, <code>DOT_NET_CORE</code>, <code>SQL_SERVER</code>, and <code>DEFAULT</code>.'
       ComponentConfiguration:
         $ref: '#/definitions/ComponentConfiguration'
-        description: 'The configuration settings of the component. The value is the escaped JSON of the configuration. For more information about the JSON format, see <a href="https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/working-with-json.html">Working with JSON</a>. You can send a request to <code>DescribeComponentConfigurationRecommendation</code> to see the recommended configuration for a component.'
+        description: 'The configuration settings of the component. The value is the escaped JSON of the configuration. For more information about the JSON format, see <a href="https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/working-with-json.html">Working with JSON</a>. You can send a request to <code>DescribeComponentConfigurationRecommendation</code> to see the recommended configuration for a component. For the complete format of the component configuration file, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/component-config.html">Component Configuration</a>.'
+  UpdateLogPatternResponse:
+    type: object
+    properties:
+      ResourceGroupName:
+        $ref: '#/definitions/ResourceGroupName'
+        description: The name of the resource group.
+      LogPattern:
+        $ref: '#/definitions/LogPattern'
+        description: The successfully created log pattern.
+  UpdateLogPatternRequest:
+    type: object
+    required:
+      - ResourceGroupName
+      - PatternSetName
+      - PatternName
+    properties:
+      ResourceGroupName:
+        $ref: '#/definitions/ResourceGroupName'
+        description: The name of the resource group.
+      PatternSetName:
+        $ref: '#/definitions/LogPatternSetName'
+        description: The name of the log pattern set.
+      PatternName:
+        $ref: '#/definitions/LogPatternName'
+        description: The name of the log pattern.
+      Pattern:
+        $ref: '#/definitions/LogPatternRegex'
+        description: The log pattern.
+      Rank:
+        $ref: '#/definitions/LogPatternRank'
+        description: Rank of the log pattern.
   AffectedResource:
     type: string
+  AmazonResourceName:
+    type: string
+    minLength: 1
+    maxLength: 1011
   ComponentName:
     type: string
   ResourceType:
     type: string
   Tier:
     type: string
+    enum:
+      - DEFAULT
+      - DOT_NET_CORE
+      - DOT_NET_WORKER
+      - DOT_NET_WEB
+      - SQL_SERVER
+    minLength: 1
+    maxLength: 50
   Monitor:
     type: boolean
   ApplicationComponent:
@@ -1260,10 +1881,15 @@ definitions:
       $ref: '#/definitions/ApplicationComponent'
   ResourceGroupName:
     type: string
+    pattern: '[a-zA-Z0-9\.\-_]*'
+    minLength: 1
+    maxLength: 256
   LifeCycle:
     type: string
   OpsItemSNSTopicArn:
     type: string
+    minLength: 20
+    maxLength: 300
   OpsCenterEnabled:
     type: boolean
   Remarks:
@@ -1293,12 +1919,55 @@ definitions:
       $ref: '#/definitions/ApplicationInfo'
   ComponentConfiguration:
     type: string
+    minLength: 1
+    maxLength: 10000
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    minItems: 0
+    maxItems: 200
   ResourceList:
     type: array
     items:
       $ref: '#/definitions/ResourceARN'
+  LogPatternSetName:
+    type: string
+    pattern: '[a-zA-Z0-9\.\-_]*'
+    minLength: 1
+    maxLength: 30
+  LogPatternName:
+    type: string
+    pattern: '[a-zA-Z0-9\.\-_]*'
+    minLength: 1
+    maxLength: 50
+  LogPatternRegex:
+    type: string
+    minLength: 1
+    maxLength: 50
+  LogPatternRank:
+    type: integer
+  LogPattern:
+    type: object
+    properties:
+      PatternSetName:
+        $ref: '#/definitions/LogPatternSetName'
+        description: 'The name of the log pattern. A log pattern name can contains at many as 30 characters, and it cannot be empty. The characters can be Unicode letters, digits or one of the following symbols: period, dash, underscore.'
+      PatternName:
+        $ref: '#/definitions/LogPatternName'
+        description: 'The name of the log pattern. A log pattern name can contains at many as 50 characters, and it cannot be empty. The characters can be Unicode letters, digits or one of the following symbols: period, dash, underscore.'
+      Pattern:
+        $ref: '#/definitions/LogPatternRegex'
+        description: 'A regular expression that defines the log pattern. A log pattern can contains at many as 50 characters, and it cannot be empty.'
+      Rank:
+        $ref: '#/definitions/LogPatternRank'
+        description: Rank of the log pattern.
+    description: An object that defines the log patterns that belongs to a <code>LogPatternSet</code>.
   ObservationId:
     type: string
+    pattern: 'o-[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}'
+    minLength: 38
+    maxLength: 38
   Observation:
     type: object
     properties:
@@ -1344,6 +2013,9 @@ definitions:
     description: Describes an anomaly or error with the application.
   ProblemId:
     type: string
+    pattern: 'p-[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}'
+    minLength: 38
+    maxLength: 38
   RelatedObservations:
     type: object
     properties:
@@ -1414,6 +2086,14 @@ definitions:
     maximum: 40
   PaginationToken:
     type: string
+  LogPatternSetList:
+    type: array
+    items:
+      $ref: '#/definitions/LogPatternSetName'
+  LogPatternList:
+    type: array
+    items:
+      $ref: '#/definitions/LogPattern'
   StartTime:
     type: string
     format: date-time
@@ -1461,10 +2141,39 @@ definitions:
   SeverityLevel:
     type: string
     enum:
-      - LOW
-      - MEDIUM
-      - HIGH
+      - Low
+      - Medium
+      - High
   RemoveSNSTopic:
     type: boolean
   ResourceARN:
     type: string
+    minLength: 1
+    maxLength: 1011
+  TagKey:
+    type: string
+    minLength: 1
+    maxLength: 128
+  TagValue:
+    type: string
+    minLength: 0
+    maxLength: 256
+  Tag:
+    type: object
+    required:
+      - Key
+      - Value
+    properties:
+      Key:
+        $ref: '#/definitions/TagKey'
+        description: One part of a key-value pair that defines a tag. The maximum length of a tag key is 128 characters. The minimum length is 1 character.
+      Value:
+        $ref: '#/definitions/TagValue'
+        description: 'The optional part of a key-value pair that defines a tag. The maximum length of a tag value is 256 characters. The minimum length is 0 characters. If you don''t want an application to have a specific tag value, don''t specify a value for this parameter.'
+    description: '<p>An object that defines the tags associated with an application. A <i>tag</i> is a label that you optionally define and associate with an application. Tags can help you categorize and manage resources in different ways, such as by purpose, owner, environment, or other criteria.</p> <p>Each tag consists of a required <i>tag key</i> and an associated <i>tag value</i>, both of which you define. A tag key is a general label that acts as a category for a more specific tag value. A tag value acts as a descriptor within a tag key. A tag key can contain as many as 128 characters. A tag value can contain as many as 256 characters. The characters can be Unicode letters, digits, white space, or one of the following symbols: _ . : / = + -. The following additional restrictions apply to tags:</p> <ul> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>For each associated resource, each tag key must be unique and it can have only one value.</p> </li> <li> <p>The <code>aws:</code> prefix is reserved for use by AWS; you can’t use it in any tag keys or values that you define. In addition, you can''t edit or remove tag keys or values that use this prefix. </p> </li> </ul>'
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+    minItems: 0
+    maxItems: 200

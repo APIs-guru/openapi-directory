@@ -162,7 +162,7 @@ paths:
   '/endpoints/{EndpointName}/invocations':
     post:
       operationId: InvokeEndpoint
-      description: '<p>After you deploy a model into production using Amazon SageMaker hosting services, your client applications use this API to get inferences from the model hosted at the specified endpoint. </p> <p>For an overview of Amazon SageMaker, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html">How It Works</a>. </p> <p>Amazon SageMaker strips all POST headers except those supported by the API. Amazon SageMaker might add additional headers. You should not rely on the behavior of headers outside those enumerated in the request syntax. </p> <p>Cals to <code>InvokeEndpoint</code> are authenticated by using AWS Signature Version 4. For information, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html">Authenticating Requests (AWS Signature Version 4)</a> in the <i>Amazon S3 API Reference</i>.</p> <note> <p>Endpoints are scoped to an individual account, and are not public. The URL does not contain the account ID, but Amazon SageMaker determines the account ID from the authentication token that is supplied by the caller.</p> </note>'
+      description: '<p>After you deploy a model into production using Amazon SageMaker hosting services, your client applications use this API to get inferences from the model hosted at the specified endpoint. </p> <p>For an overview of Amazon SageMaker, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html">How It Works</a>. </p> <p>Amazon SageMaker strips all POST headers except those supported by the API. Amazon SageMaker might add additional headers. You should not rely on the behavior of headers outside those enumerated in the request syntax. </p> <p>Calls to <code>InvokeEndpoint</code> are authenticated by using AWS Signature Version 4. For information, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html">Authenticating Requests (AWS Signature Version 4)</a> in the <i>Amazon S3 API Reference</i>.</p> <p>A customer''s model containers must respond to requests within 60 seconds. The model itself can have a maximum processing time of 60 seconds before responding to the /invocations. If your model is going to take 50-60 seconds of processing time, the SDK socket timeout should be set to be 70 seconds.</p> <note> <p>Endpoints are scoped to an individual account, and are not public. The URL does not contain the account ID, but Amazon SageMaker determines the account ID from the authentication token that is supplied by the caller.</p> </note>'
       responses:
         '200':
           description: Success
@@ -188,7 +188,7 @@ paths:
         - name: EndpointName
           in: path
           required: true
-          description: 'The name of the endpoint that you specified when you created the endpoint using the <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html">CreateEndpoint</a> API. '
+          description: 'The name of the endpoint that you specified when you created the endpoint using the <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html">CreateEndpoint</a> API. '
           type: string
           pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
           maxLength: 63
@@ -197,20 +197,31 @@ paths:
           required: false
           description: The MIME type of the input data in the request body.
           type: string
+          pattern: '\p{ASCII}*'
           maxLength: 1024
         - name: Accept
           in: header
           required: false
           description: The desired MIME type of the inference in the response.
           type: string
+          pattern: '\p{ASCII}*'
           maxLength: 1024
         - name: X-Amzn-SageMaker-Custom-Attributes
           in: header
           required: false
-          description: <p/>
+          description: 'Provides additional information about a request for an inference submitted to a model hosted at an Amazon SageMaker endpoint. The information is an opaque value that is forwarded verbatim. You could use this value, for example, to provide an ID that you can use to track a request or to provide other metadata that a service endpoint was programmed to process. The value must consist of no more than 1024 visible US-ASCII characters as specified in <a href="https://tools.ietf.org/html/rfc7230#section-3.2.6">Section 3.3.6. Field Value Components</a> of the Hypertext Transfer Protocol (HTTP/1.1). This feature is currently supported in the AWS SDKs but not in the Amazon SageMaker Python SDK.'
           type: string
+          pattern: '\p{ASCII}*'
           maxLength: 1024
           format: password
+        - name: X-Amzn-SageMaker-Target-Model
+          in: header
+          required: false
+          description: 'Specifies the model to be requested for an inference when invoking a multi-model endpoint. '
+          type: string
+          pattern: '\A\S[\p{Print}]*\z'
+          minLength: 1
+          maxLength: 1024
         - name: body
           in: body
           required: true
@@ -220,7 +231,7 @@ paths:
               - Body
             properties:
               Body:
-                description: '<p>Provides input data, in the format specified in the <code>ContentType</code> request header. Amazon SageMaker passes all of the data in the body to the model. </p> <p>For information about the format of the request body, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html">Common Data Formats—Inference</a>.</p>'
+                description: '<p>Provides input data, in the format specified in the <code>ContentType</code> request header. Amazon SageMaker passes all of the data in the body to the model. </p> <p>For information about the format of the request body, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html">Common Data Formats—Inference</a>.</p>'
                 type: string
                 maxLength: 5242880
                 format: password
@@ -240,7 +251,7 @@ definitions:
     properties:
       Body:
         $ref: '#/definitions/BodyBlob'
-        description: '<p>Includes the inference provided by the model.</p> <p>For information about the format of the response body, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html">Common Data Formats—Inference</a>.</p>'
+        description: '<p>Includes the inference provided by the model.</p> <p>For information about the format of the response body, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html">Common Data Formats—Inference</a>.</p>'
   InternalFailure: {}
   ServiceUnavailable: {}
   ValidationError: {}
@@ -251,6 +262,7 @@ definitions:
     format: password
   CustomAttributesHeader:
     type: string
+    pattern: '\p{ASCII}*'
     maxLength: 1024
     format: password
   EndpointName:
@@ -259,6 +271,12 @@ definitions:
     maxLength: 63
   Header:
     type: string
+    pattern: '\p{ASCII}*'
+    maxLength: 1024
+  TargetModelHeader:
+    type: string
+    pattern: '\A\S[\p{Print}]*\z'
+    minLength: 1
     maxLength: 1024
   InvokeEndpointInput:
     type: object
@@ -267,4 +285,4 @@ definitions:
     properties:
       Body:
         $ref: '#/definitions/BodyBlob'
-        description: '<p>Provides input data, in the format specified in the <code>ContentType</code> request header. Amazon SageMaker passes all of the data in the body to the model. </p> <p>For information about the format of the request body, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html">Common Data Formats—Inference</a>.</p>'
+        description: '<p>Provides input data, in the format specified in the <code>ContentType</code> request header. Amazon SageMaker passes all of the data in the body to the model. </p> <p>For information about the format of the request body, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html">Common Data Formats—Inference</a>.</p>'

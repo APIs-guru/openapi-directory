@@ -2563,6 +2563,193 @@ paths:
           type: string
           enum:
             - '2012-12-01'
+  '/#Action=CreateScheduledAction':
+    get:
+      x-aws-operation-name: CreateScheduledAction
+      operationId: GET CreateScheduledAction
+      description: 'Creates a scheduled action. A scheduled action contains a schedule and an Amazon Redshift API action. For example, you can create a schedule of when to run the <code>ResizeCluster</code> API operation. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ScheduledAction'
+        '480':
+          description: ScheduledActionAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/ScheduledActionAlreadyExistsFault'
+        '481':
+          description: ScheduledActionQuotaExceededFault
+          schema:
+            $ref: '#/definitions/ScheduledActionQuotaExceededFault'
+        '482':
+          description: ScheduledActionTypeUnsupportedFault
+          schema:
+            $ref: '#/definitions/ScheduledActionTypeUnsupportedFault'
+        '483':
+          description: InvalidScheduleFault
+          schema:
+            $ref: '#/definitions/InvalidScheduleFault'
+        '484':
+          description: InvalidScheduledActionFault
+          schema:
+            $ref: '#/definitions/InvalidScheduledActionFault'
+        '485':
+          description: UnauthorizedOperation
+          schema:
+            $ref: '#/definitions/UnauthorizedOperation'
+      parameters:
+        - name: ScheduledActionName
+          in: query
+          required: true
+          description: 'The name of the scheduled action. The name must be unique within an account. For more information about this parameter, see <a>ScheduledAction</a>. '
+          type: string
+        - name: TargetAction.ResizeCluster
+          in: query
+          description: |-
+            The action type that specifies an Amazon Redshift API operation that is supported by the Amazon Redshift scheduler. 
+            An action that runs a <code>ResizeCluster</code> API operation. 
+          type: string
+        - name: Schedule
+          in: query
+          required: true
+          description: 'The schedule in <code>at( )</code> or <code>cron( )</code> format. For more information about this parameter, see <a>ScheduledAction</a>.'
+          type: string
+        - name: IamRole
+          in: query
+          required: true
+          description: 'The IAM role to assume to run the target action. For more information about this parameter, see <a>ScheduledAction</a>. '
+          type: string
+        - name: ScheduledActionDescription
+          in: query
+          required: false
+          description: 'The description of the scheduled action. '
+          type: string
+        - name: StartTime
+          in: query
+          required: false
+          description: 'The start time in UTC of the scheduled action. Before this time, the scheduled action does not trigger. For more information about this parameter, see <a>ScheduledAction</a>.'
+          type: string
+          format: date-time
+        - name: EndTime
+          in: query
+          required: false
+          description: 'The end time in UTC of the scheduled action. After this time, the scheduled action does not trigger. For more information about this parameter, see <a>ScheduledAction</a>. '
+          type: string
+          format: date-time
+        - name: Enable
+          in: query
+          required: false
+          description: 'If true, the schedule is enabled. If false, the scheduled action does not trigger. For more information about <code>state</code> of the scheduled action, see <a>ScheduledAction</a>. '
+          type: boolean
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - CreateScheduledAction
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: CreateScheduledAction
+      operationId: POST CreateScheduledAction
+      description: 'Creates a scheduled action. A scheduled action contains a schedule and an Amazon Redshift API action. For example, you can create a schedule of when to run the <code>ResizeCluster</code> API operation. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ScheduledAction'
+        '480':
+          description: ScheduledActionAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/ScheduledActionAlreadyExistsFault'
+        '481':
+          description: ScheduledActionQuotaExceededFault
+          schema:
+            $ref: '#/definitions/ScheduledActionQuotaExceededFault'
+        '482':
+          description: ScheduledActionTypeUnsupportedFault
+          schema:
+            $ref: '#/definitions/ScheduledActionTypeUnsupportedFault'
+        '483':
+          description: InvalidScheduleFault
+          schema:
+            $ref: '#/definitions/InvalidScheduleFault'
+        '484':
+          description: InvalidScheduledActionFault
+          schema:
+            $ref: '#/definitions/InvalidScheduledActionFault'
+        '485':
+          description: UnauthorizedOperation
+          schema:
+            $ref: '#/definitions/UnauthorizedOperation'
+      parameters:
+        - name: ScheduledActionName
+          in: formData
+          required: true
+          description: 'The name of the scheduled action. The name must be unique within an account. For more information about this parameter, see <a>ScheduledAction</a>. '
+          type: string
+        - name: TargetAction.ResizeCluster
+          in: formData
+          description: |-
+            The action type that specifies an Amazon Redshift API operation that is supported by the Amazon Redshift scheduler. 
+            An action that runs a <code>ResizeCluster</code> API operation. 
+          type: string
+        - name: Schedule
+          in: formData
+          required: true
+          description: 'The schedule in <code>at( )</code> or <code>cron( )</code> format. For more information about this parameter, see <a>ScheduledAction</a>.'
+          type: string
+        - name: IamRole
+          in: formData
+          required: true
+          description: 'The IAM role to assume to run the target action. For more information about this parameter, see <a>ScheduledAction</a>. '
+          type: string
+        - name: ScheduledActionDescription
+          in: formData
+          required: false
+          description: 'The description of the scheduled action. '
+          type: string
+        - name: StartTime
+          in: formData
+          required: false
+          description: 'The start time in UTC of the scheduled action. Before this time, the scheduled action does not trigger. For more information about this parameter, see <a>ScheduledAction</a>.'
+          type: string
+          format: date-time
+        - name: EndTime
+          in: formData
+          required: false
+          description: 'The end time in UTC of the scheduled action. After this time, the scheduled action does not trigger. For more information about this parameter, see <a>ScheduledAction</a>. '
+          type: string
+          format: date-time
+        - name: Enable
+          in: formData
+          required: false
+          description: 'If true, the schedule is enabled. If false, the scheduled action does not trigger. For more information about <code>state</code> of the scheduled action, see <a>ScheduledAction</a>. '
+          type: boolean
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - CreateScheduledAction
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
   '/#Action=CreateSnapshotCopyGrant':
     get:
       x-aws-operation-name: CreateSnapshotCopyGrant
@@ -3630,6 +3817,81 @@ paths:
           type: string
           enum:
             - DeleteHsmConfiguration
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
+  '/#Action=DeleteScheduledAction':
+    get:
+      x-aws-operation-name: DeleteScheduledAction
+      operationId: GET DeleteScheduledAction
+      description: 'Deletes a scheduled action. '
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ScheduledActionNotFoundFault
+          schema:
+            $ref: '#/definitions/ScheduledActionNotFoundFault'
+        '481':
+          description: UnauthorizedOperation
+          schema:
+            $ref: '#/definitions/UnauthorizedOperation'
+      parameters:
+        - name: ScheduledActionName
+          in: query
+          required: true
+          description: 'The name of the scheduled action to delete. '
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteScheduledAction
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DeleteScheduledAction
+      operationId: POST DeleteScheduledAction
+      description: 'Deletes a scheduled action. '
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ScheduledActionNotFoundFault
+          schema:
+            $ref: '#/definitions/ScheduledActionNotFoundFault'
+        '481':
+          description: UnauthorizedOperation
+          schema:
+            $ref: '#/definitions/UnauthorizedOperation'
+      parameters:
+        - name: ScheduledActionName
+          in: formData
+          required: true
+          description: 'The name of the scheduled action to delete. '
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteScheduledAction
         - name: Version
           in: query
           required: true
@@ -5354,6 +5616,7 @@ paths:
             - cluster-parameter-group
             - cluster-security-group
             - cluster-snapshot
+            - scheduled-action
         - name: StartTime
           in: query
           required: false
@@ -5426,6 +5689,7 @@ paths:
             - cluster-parameter-group
             - cluster-security-group
             - cluster-snapshot
+            - scheduled-action
         - name: StartTime
           in: formData
           required: false
@@ -5808,14 +6072,28 @@ paths:
           description: InvalidClusterSnapshotStateFault
           schema:
             $ref: '#/definitions/InvalidClusterSnapshotStateFault'
+        '482':
+          description: ClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/ClusterNotFoundFault'
+        '483':
+          description: AccessToSnapshotDeniedFault
+          schema:
+            $ref: '#/definitions/AccessToSnapshotDeniedFault'
       parameters:
         - name: ActionType
           in: query
           required: true
-          description: 'The action type to evaluate for possible node configurations. Currently, it must be "restore-cluster".'
+          description: 'The action type to evaluate for possible node configurations. Specify "restore-cluster" to get configuration combinations based on an existing snapshot. Specify "recommend-node-config" to get configuration recommendations based on an existing cluster or snapshot. '
           type: string
           enum:
             - restore-cluster
+            - recommend-node-config
+        - name: ClusterIdentifier
+          in: query
+          required: false
+          description: The identifier of the cluster to evaluate for possible node configurations.
+          type: string
         - name: SnapshotIdentifier
           in: query
           required: false
@@ -5880,14 +6158,28 @@ paths:
           description: InvalidClusterSnapshotStateFault
           schema:
             $ref: '#/definitions/InvalidClusterSnapshotStateFault'
+        '482':
+          description: ClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/ClusterNotFoundFault'
+        '483':
+          description: AccessToSnapshotDeniedFault
+          schema:
+            $ref: '#/definitions/AccessToSnapshotDeniedFault'
       parameters:
         - name: ActionType
           in: formData
           required: true
-          description: 'The action type to evaluate for possible node configurations. Currently, it must be "restore-cluster".'
+          description: 'The action type to evaluate for possible node configurations. Specify "restore-cluster" to get configuration combinations based on an existing snapshot. Specify "recommend-node-config" to get configuration recommendations based on an existing cluster or snapshot. '
           type: string
           enum:
             - restore-cluster
+            - recommend-node-config
+        - name: ClusterIdentifier
+          in: formData
+          required: false
+          description: The identifier of the cluster to evaluate for possible node configurations.
+          type: string
         - name: SnapshotIdentifier
           in: formData
           required: false
@@ -6299,6 +6591,167 @@ paths:
           type: string
           enum:
             - DescribeResize
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
+  '/#Action=DescribeScheduledActions':
+    get:
+      x-aws-operation-name: DescribeScheduledActions
+      operationId: GET DescribeScheduledActions
+      description: 'Describes properties of scheduled actions. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ScheduledActionsMessage'
+        '480':
+          description: ScheduledActionNotFoundFault
+          schema:
+            $ref: '#/definitions/ScheduledActionNotFoundFault'
+        '481':
+          description: UnauthorizedOperation
+          schema:
+            $ref: '#/definitions/UnauthorizedOperation'
+      parameters:
+        - name: ScheduledActionName
+          in: query
+          required: false
+          description: 'The name of the scheduled action to retrieve. '
+          type: string
+        - name: TargetActionType
+          in: query
+          required: false
+          description: 'The type of the scheduled actions to retrieve. '
+          type: string
+          enum:
+            - ResizeCluster
+        - name: StartTime
+          in: query
+          required: false
+          description: The start time in UTC of the scheduled actions to retrieve. Only active scheduled actions that have invocations after this time are retrieved.
+          type: string
+          format: date-time
+        - name: EndTime
+          in: query
+          required: false
+          description: The end time in UTC of the scheduled action to retrieve. Only active scheduled actions that have invocations before this time are retrieved.
+          type: string
+          format: date-time
+        - name: Active
+          in: query
+          required: false
+          description: 'If true, retrieve only active scheduled actions. If false, retrieve only disabled scheduled actions. '
+          type: boolean
+        - name: Filters
+          in: query
+          required: false
+          description: 'List of scheduled action filters. '
+          type: array
+          items:
+            type: string
+        - name: Marker
+          in: query
+          required: false
+          description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeScheduledActions</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
+          type: string
+        - name: MaxRecords
+          in: query
+          required: false
+          description: '<p>The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, a value is returned in a <code>marker</code> field of the response. You can retrieve the next set of records by retrying the command with the returned marker value. </p> <p>Default: <code>100</code> </p> <p>Constraints: minimum 20, maximum 100.</p>'
+          type: integer
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeScheduledActions
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DescribeScheduledActions
+      operationId: POST DescribeScheduledActions
+      description: 'Describes properties of scheduled actions. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ScheduledActionsMessage'
+        '480':
+          description: ScheduledActionNotFoundFault
+          schema:
+            $ref: '#/definitions/ScheduledActionNotFoundFault'
+        '481':
+          description: UnauthorizedOperation
+          schema:
+            $ref: '#/definitions/UnauthorizedOperation'
+      parameters:
+        - name: ScheduledActionName
+          in: formData
+          required: false
+          description: 'The name of the scheduled action to retrieve. '
+          type: string
+        - name: TargetActionType
+          in: formData
+          required: false
+          description: 'The type of the scheduled actions to retrieve. '
+          type: string
+          enum:
+            - ResizeCluster
+        - name: StartTime
+          in: formData
+          required: false
+          description: The start time in UTC of the scheduled actions to retrieve. Only active scheduled actions that have invocations after this time are retrieved.
+          type: string
+          format: date-time
+        - name: EndTime
+          in: formData
+          required: false
+          description: The end time in UTC of the scheduled action to retrieve. Only active scheduled actions that have invocations before this time are retrieved.
+          type: string
+          format: date-time
+        - name: Active
+          in: formData
+          required: false
+          description: 'If true, retrieve only active scheduled actions. If false, retrieve only disabled scheduled actions. '
+          type: boolean
+        - name: Filters
+          in: formData
+          required: false
+          description: 'List of scheduled action filters. '
+          type: array
+          items:
+            type: string
+        - name: Marker
+          in: formData
+          required: false
+          description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeScheduledActions</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
+          type: string
+        - name: MaxRecords
+          in: formData
+          required: false
+          description: '<p>The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, a value is returned in a <code>marker</code> field of the response. You can retrieve the next set of records by retrying the command with the returned marker value. </p> <p>Default: <code>100</code> </p> <p>Constraints: minimum 20, maximum 100.</p>'
+          type: integer
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeScheduledActions
         - name: Version
           in: query
           required: true
@@ -8999,6 +9452,185 @@ paths:
           type: string
           enum:
             - '2012-12-01'
+  '/#Action=ModifyScheduledAction':
+    get:
+      x-aws-operation-name: ModifyScheduledAction
+      operationId: GET ModifyScheduledAction
+      description: 'Modify a scheduled action. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ScheduledAction'
+        '480':
+          description: ScheduledActionNotFoundFault
+          schema:
+            $ref: '#/definitions/ScheduledActionNotFoundFault'
+        '481':
+          description: ScheduledActionTypeUnsupportedFault
+          schema:
+            $ref: '#/definitions/ScheduledActionTypeUnsupportedFault'
+        '482':
+          description: InvalidScheduleFault
+          schema:
+            $ref: '#/definitions/InvalidScheduleFault'
+        '483':
+          description: InvalidScheduledActionFault
+          schema:
+            $ref: '#/definitions/InvalidScheduledActionFault'
+        '484':
+          description: UnauthorizedOperation
+          schema:
+            $ref: '#/definitions/UnauthorizedOperation'
+      parameters:
+        - name: ScheduledActionName
+          in: query
+          required: true
+          description: 'The name of the scheduled action to modify. '
+          type: string
+        - name: TargetAction.ResizeCluster
+          in: query
+          description: |-
+            The action type that specifies an Amazon Redshift API operation that is supported by the Amazon Redshift scheduler. 
+            An action that runs a <code>ResizeCluster</code> API operation. 
+          type: string
+        - name: Schedule
+          in: query
+          required: false
+          description: 'A modified schedule in either <code>at( )</code> or <code>cron( )</code> format. For more information about this parameter, see <a>ScheduledAction</a>.'
+          type: string
+        - name: IamRole
+          in: query
+          required: false
+          description: 'A different IAM role to assume to run the target action. For more information about this parameter, see <a>ScheduledAction</a>.'
+          type: string
+        - name: ScheduledActionDescription
+          in: query
+          required: false
+          description: 'A modified description of the scheduled action. '
+          type: string
+        - name: StartTime
+          in: query
+          required: false
+          description: 'A modified start time of the scheduled action. For more information about this parameter, see <a>ScheduledAction</a>. '
+          type: string
+          format: date-time
+        - name: EndTime
+          in: query
+          required: false
+          description: 'A modified end time of the scheduled action. For more information about this parameter, see <a>ScheduledAction</a>. '
+          type: string
+          format: date-time
+        - name: Enable
+          in: query
+          required: false
+          description: 'A modified enable flag of the scheduled action. If true, the scheduled action is active. If false, the scheduled action is disabled. '
+          type: boolean
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ModifyScheduledAction
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: ModifyScheduledAction
+      operationId: POST ModifyScheduledAction
+      description: 'Modify a scheduled action. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ScheduledAction'
+        '480':
+          description: ScheduledActionNotFoundFault
+          schema:
+            $ref: '#/definitions/ScheduledActionNotFoundFault'
+        '481':
+          description: ScheduledActionTypeUnsupportedFault
+          schema:
+            $ref: '#/definitions/ScheduledActionTypeUnsupportedFault'
+        '482':
+          description: InvalidScheduleFault
+          schema:
+            $ref: '#/definitions/InvalidScheduleFault'
+        '483':
+          description: InvalidScheduledActionFault
+          schema:
+            $ref: '#/definitions/InvalidScheduledActionFault'
+        '484':
+          description: UnauthorizedOperation
+          schema:
+            $ref: '#/definitions/UnauthorizedOperation'
+      parameters:
+        - name: ScheduledActionName
+          in: formData
+          required: true
+          description: 'The name of the scheduled action to modify. '
+          type: string
+        - name: TargetAction.ResizeCluster
+          in: formData
+          description: |-
+            The action type that specifies an Amazon Redshift API operation that is supported by the Amazon Redshift scheduler. 
+            An action that runs a <code>ResizeCluster</code> API operation. 
+          type: string
+        - name: Schedule
+          in: formData
+          required: false
+          description: 'A modified schedule in either <code>at( )</code> or <code>cron( )</code> format. For more information about this parameter, see <a>ScheduledAction</a>.'
+          type: string
+        - name: IamRole
+          in: formData
+          required: false
+          description: 'A different IAM role to assume to run the target action. For more information about this parameter, see <a>ScheduledAction</a>.'
+          type: string
+        - name: ScheduledActionDescription
+          in: formData
+          required: false
+          description: 'A modified description of the scheduled action. '
+          type: string
+        - name: StartTime
+          in: formData
+          required: false
+          description: 'A modified start time of the scheduled action. For more information about this parameter, see <a>ScheduledAction</a>. '
+          type: string
+          format: date-time
+        - name: EndTime
+          in: formData
+          required: false
+          description: 'A modified end time of the scheduled action. For more information about this parameter, see <a>ScheduledAction</a>. '
+          type: string
+          format: date-time
+        - name: Enable
+          in: formData
+          required: false
+          description: 'A modified enable flag of the scheduled action. If true, the scheduled action is active. If false, the scheduled action is disabled. '
+          type: boolean
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ModifyScheduledAction
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
   '/#Action=ModifySnapshotCopyRetentionPeriod':
     get:
       x-aws-operation-name: ModifySnapshotCopyRetentionPeriod
@@ -10927,6 +11559,67 @@ definitions:
         $ref: '#/definitions/HsmConfiguration'
   HsmConfigurationAlreadyExistsFault: {}
   HsmConfigurationQuotaExceededFault: {}
+  ScheduledAction:
+    type: object
+    properties:
+      ScheduledActionName:
+        $ref: '#/definitions/String'
+        description: 'The name of the scheduled action. '
+      TargetAction:
+        $ref: '#/definitions/ScheduledActionType'
+        description: '<p>A JSON format string of the Amazon Redshift API operation with input parameters. </p> <p>"<code>{\"ResizeCluster\":{\"NodeType\":\"ds2.8xlarge\",\"ClusterIdentifier\":\"my-test-cluster\",\"NumberOfNodes\":3}}</code>". </p>'
+      Schedule:
+        $ref: '#/definitions/String'
+        description: '<p>The schedule for a one-time (at format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour.</p> <p>Format of at expressions is "<code>at(yyyy-mm-ddThh:mm:ss)</code>". For example, "<code>at(2016-03-04T17:27:00)</code>".</p> <p>Format of cron expressions is "<code>cron(Minutes Hours Day-of-month Month Day-of-week Year)</code>". For example, "<code>cron(0, 10, *, *, MON, *)</code>". For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p>'
+      IamRole:
+        $ref: '#/definitions/String'
+        description: 'The IAM role to assume to run the scheduled action. This IAM role must have permission to run the Amazon Redshift API operation in the scheduled action. This IAM role must allow the Amazon Redshift scheduler (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf. For more information about the IAM role to use with the Amazon Redshift scheduler, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html">Using Identity-Based Policies for Amazon Redshift</a> in the <i>Amazon Redshift Cluster Management Guide</i>. '
+      ScheduledActionDescription:
+        $ref: '#/definitions/String'
+        description: 'The description of the scheduled action. '
+      State:
+        $ref: '#/definitions/ScheduledActionState'
+        description: 'The state of the scheduled action. For example, <code>DISABLED</code>. '
+      NextInvocations:
+        $ref: '#/definitions/ScheduledActionTimeList'
+        description: 'List of times when the scheduled action will run. '
+      StartTime:
+        $ref: '#/definitions/TStamp'
+        description: 'The start time in UTC when the schedule is active. Before this time, the scheduled action does not trigger. '
+      EndTime:
+        $ref: '#/definitions/TStamp'
+        description: 'The end time in UTC when the schedule is no longer active. After this time, the scheduled action does not trigger. '
+    description: 'Describes a scheduled action. You can use a scheduled action to trigger some Amazon Redshift API operations on a schedule. For information about which API operations can be scheduled, see <a>ScheduledActionType</a>. '
+  ResizeClusterMessage:
+    type: object
+    required:
+      - ClusterIdentifier
+      - NumberOfNodes
+    properties:
+      ClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: The unique identifier for the cluster to resize.
+      ClusterType:
+        $ref: '#/definitions/String'
+        description: The new cluster type for the specified cluster.
+      NodeType:
+        $ref: '#/definitions/String'
+        description: 'The new node type for the nodes you are adding. If not specified, the cluster''s current node type is used.'
+      NumberOfNodes:
+        $ref: '#/definitions/Integer'
+        description: The new number of nodes for the cluster.
+      Classic:
+        $ref: '#/definitions/BooleanOptional'
+        description: 'A boolean value indicating whether the resize operation is using the classic resize process. If you don''t provide this parameter or set the value to <code>false</code>, the resize type is elastic. '
+  Integer:
+    type: integer
+  BooleanOptional:
+    type: boolean
+  ScheduledActionAlreadyExistsFault: {}
+  ScheduledActionQuotaExceededFault: {}
+  ScheduledActionTypeUnsupportedFault: {}
+  InvalidScheduleFault: {}
+  InvalidScheduledActionFault: {}
   CreateSnapshotCopyGrantResult:
     type: object
     properties:
@@ -10960,7 +11653,6 @@ definitions:
         description: A list of clusters associated with the schedule. A maximum of 100 clusters is returned.
     description: 'Describes a snapshot schedule. You can set a regular interval for creating snapshots of a cluster. You can also schedule snapshots for specific dates. '
   SnapshotScheduleAlreadyExistsFault: {}
-  InvalidScheduleFault: {}
   SnapshotScheduleQuotaExceededFault: {}
   ScheduleDefinitionTypeUnsupportedFault: {}
   ResourceNotFoundFault: {}
@@ -10980,6 +11672,7 @@ definitions:
   InvalidSubscriptionStateFault: {}
   InvalidHsmClientCertificateStateFault: {}
   InvalidHsmConfigurationStateFault: {}
+  ScheduledActionNotFoundFault: {}
   InvalidSnapshotCopyGrantStateFault: {}
   SnapshotCopyGrantNotFoundFault: {}
   InvalidClusterSnapshotScheduleStateFault: {}
@@ -11185,6 +11878,7 @@ definitions:
         $ref: '#/definitions/ValueStringList'
         description: 'List of values. Compare Name using Operator to Values. If filter Name is NumberOfNodes, then values can range from 0 to 200. If filter Name is EstimatedDiskUtilizationPercent, then values can range from 0 to 100. For example, filter NumberOfNodes (name) GT (operator) 3 (values).'
     description: A set of elements to filter the returned node configurations.
+  AccessToSnapshotDeniedFault: {}
   OrderableClusterOptionsMessage:
     type: object
     properties:
@@ -11215,6 +11909,28 @@ definitions:
         $ref: '#/definitions/ReservedNodeList'
         description: The list of <code>ReservedNode</code> objects.
     description: <p/>
+  ScheduledActionsMessage:
+    type: object
+    properties:
+      Marker:
+        $ref: '#/definitions/String'
+        description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeScheduledActions</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
+      ScheduledActions:
+        $ref: '#/definitions/ScheduledActionList'
+        description: 'List of retrieved scheduled actions. '
+  ScheduledActionFilter:
+    type: object
+    required:
+      - Name
+      - Values
+    properties:
+      Name:
+        $ref: '#/definitions/ScheduledActionFilterName'
+        description: 'The type of element to filter. '
+      Values:
+        $ref: '#/definitions/ValueStringList'
+        description: 'List of values. Compare if the value (of type defined by <code>Name</code>) equals an item in the list of scheduled actions. '
+    description: 'A set of elements to filter the returned scheduled actions. '
   SnapshotCopyGrantMessage:
     type: object
     properties:
@@ -11413,7 +12129,6 @@ definitions:
     properties:
       Cluster:
         $ref: '#/definitions/Cluster'
-  AccessToSnapshotDeniedFault: {}
   InvalidRestoreFault: {}
   RestoreTableFromClusterSnapshotResult:
     type: object
@@ -11529,6 +12244,7 @@ definitions:
     type: string
     enum:
       - restore-cluster
+      - recommend-node-config
   ClusterAssociatedToSchedule:
     type: object
     properties:
@@ -11786,8 +12502,6 @@ definitions:
         $ref: '#/definitions/String'
         description: The text message describing the error.
     description: Describes the errors returned by a snapshot.
-  BooleanOptional:
-    type: boolean
   CancelResizeMessage:
     type: object
     required:
@@ -11809,8 +12523,6 @@ definitions:
   TStamp:
     type: string
     format: date-time
-  Integer:
-    type: integer
   ClusterSecurityGroupMembershipList:
     type: array
     items:
@@ -11868,19 +12580,19 @@ definitions:
         description: 'The status of the restore action. Returns starting, restoring, completed, or failed.'
       CurrentRestoreRateInMegaBytesPerSecond:
         $ref: '#/definitions/Double'
-        description: The number of megabytes per second being transferred from the backup storage. Returns the average rate for a completed backup.
+        description: 'The number of megabytes per second being transferred from the backup storage. Returns the average rate for a completed backup. This field is only updated when you restore to DC2 and DS2 node types. '
       SnapshotSizeInMegaBytes:
         $ref: '#/definitions/Long'
-        description: The size of the set of snapshot data used to restore the cluster.
+        description: 'The size of the set of snapshot data used to restore the cluster. This field is only updated when you restore to DC2 and DS2 node types. '
       ProgressInMegaBytes:
         $ref: '#/definitions/Long'
-        description: The number of megabytes that have been transferred from snapshot storage.
+        description: 'The number of megabytes that have been transferred from snapshot storage. This field is only updated when you restore to DC2 and DS2 node types. '
       ElapsedTimeInSeconds:
         $ref: '#/definitions/Long'
-        description: 'The amount of time an in-progress restore has been running, or the amount of time it took a completed restore to finish.'
+        description: 'The amount of time an in-progress restore has been running, or the amount of time it took a completed restore to finish. This field is only updated when you restore to DC2 and DS2 node types. '
       EstimatedTimeToCompletionInSeconds:
         $ref: '#/definitions/Long'
-        description: The estimate of the time remaining before the restore will complete. Returns 0 for a completed restore.
+        description: 'The estimate of the time remaining before the restore will complete. Returns 0 for a completed restore. This field is only updated when you restore to DC2 and DS2 node types. '
     description: Describes the status of a cluster restore action. Returns null if the cluster was not created by restoring a snapshot.
   DataTransferProgress:
     type: object
@@ -12661,6 +13373,45 @@ definitions:
         $ref: '#/definitions/TagList'
         description: The list of tags for the HSM configuration.
     description: 'Returns information about an HSM configuration, which is an object that describes to Amazon Redshift clusters the information they require to connect to an HSM where they can store database encryption keys.'
+  ScheduledActionType:
+    type: object
+    properties:
+      ResizeCluster:
+        $ref: '#/definitions/ResizeClusterMessage'
+        description: 'An action that runs a <code>ResizeCluster</code> API operation. '
+    description: 'The action type that specifies an Amazon Redshift API operation that is supported by the Amazon Redshift scheduler. '
+  CreateScheduledActionMessage:
+    type: object
+    required:
+      - ScheduledActionName
+      - TargetAction
+      - Schedule
+      - IamRole
+    properties:
+      ScheduledActionName:
+        $ref: '#/definitions/String'
+        description: 'The name of the scheduled action. The name must be unique within an account. For more information about this parameter, see <a>ScheduledAction</a>. '
+      TargetAction:
+        $ref: '#/definitions/ScheduledActionType'
+        description: 'A JSON format string of the Amazon Redshift API operation with input parameters. For more information about this parameter, see <a>ScheduledAction</a>. '
+      Schedule:
+        $ref: '#/definitions/String'
+        description: 'The schedule in <code>at( )</code> or <code>cron( )</code> format. For more information about this parameter, see <a>ScheduledAction</a>.'
+      IamRole:
+        $ref: '#/definitions/String'
+        description: 'The IAM role to assume to run the target action. For more information about this parameter, see <a>ScheduledAction</a>. '
+      ScheduledActionDescription:
+        $ref: '#/definitions/String'
+        description: 'The description of the scheduled action. '
+      StartTime:
+        $ref: '#/definitions/TStamp'
+        description: 'The start time in UTC of the scheduled action. Before this time, the scheduled action does not trigger. For more information about this parameter, see <a>ScheduledAction</a>.'
+      EndTime:
+        $ref: '#/definitions/TStamp'
+        description: 'The end time in UTC of the scheduled action. After this time, the scheduled action does not trigger. For more information about this parameter, see <a>ScheduledAction</a>. '
+      Enable:
+        $ref: '#/definitions/BooleanOptional'
+        description: 'If true, the schedule is enabled. If false, the scheduled action does not trigger. For more information about <code>state</code> of the scheduled action, see <a>ScheduledAction</a>. '
   CreateSnapshotCopyGrantMessage:
     type: object
     required:
@@ -12837,6 +13588,14 @@ definitions:
         $ref: '#/definitions/String'
         description: The identifier of the Amazon Redshift HSM configuration to be deleted.
     description: <p/>
+  DeleteScheduledActionMessage:
+    type: object
+    required:
+      - ScheduledActionName
+    properties:
+      ScheduledActionName:
+        $ref: '#/definitions/String'
+        description: 'The name of the scheduled action to delete. '
   DeleteSnapshotCopyGrantMessage:
     type: object
     required:
@@ -13107,6 +13866,7 @@ definitions:
       - cluster-parameter-group
       - cluster-security-group
       - cluster-snapshot
+      - scheduled-action
   DescribeEventsMessage:
     type: object
     properties:
@@ -13190,7 +13950,10 @@ definitions:
     properties:
       ActionType:
         $ref: '#/definitions/ActionType'
-        description: 'The action type to evaluate for possible node configurations. Currently, it must be "restore-cluster".'
+        description: 'The action type to evaluate for possible node configurations. Specify "restore-cluster" to get configuration combinations based on an existing snapshot. Specify "recommend-node-config" to get configuration recommendations based on an existing cluster or snapshot. '
+      ClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: The identifier of the cluster to evaluate for possible node configurations.
       SnapshotIdentifier:
         $ref: '#/definitions/String'
         description: The identifier of the snapshot to evaluate for possible node configurations.
@@ -13257,6 +14020,41 @@ definitions:
         $ref: '#/definitions/String'
         description: '<p>The unique identifier of a cluster whose resize progress you are requesting. This parameter is case-sensitive.</p> <p>By default, resize operations for all clusters defined for an AWS account are returned.</p>'
     description: <p/>
+  ScheduledActionTypeValues:
+    type: string
+    enum:
+      - ResizeCluster
+  ScheduledActionFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/ScheduledActionFilter'
+  DescribeScheduledActionsMessage:
+    type: object
+    properties:
+      ScheduledActionName:
+        $ref: '#/definitions/String'
+        description: 'The name of the scheduled action to retrieve. '
+      TargetActionType:
+        $ref: '#/definitions/ScheduledActionTypeValues'
+        description: 'The type of the scheduled actions to retrieve. '
+      StartTime:
+        $ref: '#/definitions/TStamp'
+        description: The start time in UTC of the scheduled actions to retrieve. Only active scheduled actions that have invocations after this time are retrieved.
+      EndTime:
+        $ref: '#/definitions/TStamp'
+        description: The end time in UTC of the scheduled action to retrieve. Only active scheduled actions that have invocations before this time are retrieved.
+      Active:
+        $ref: '#/definitions/BooleanOptional'
+        description: 'If true, retrieve only active scheduled actions. If false, retrieve only disabled scheduled actions. '
+      Filters:
+        $ref: '#/definitions/ScheduledActionFilterList'
+        description: 'List of scheduled action filters. '
+      Marker:
+        $ref: '#/definitions/String'
+        description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeScheduledActions</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
+      MaxRecords:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p>The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, a value is returned in a <code>marker</code> field of the response. You can retrieve the next set of records by retrying the command with the returned marker value. </p> <p>Default: <code>100</code> </p> <p>Constraints: minimum 20, maximum 100.</p>'
   DescribeSnapshotCopyGrantsMessage:
     type: object
     properties:
@@ -13585,6 +14383,11 @@ definitions:
         $ref: '#/definitions/EligibleTracksToUpdateList'
         description: 'An array of <a>UpdateTarget</a> objects to update with the maintenance track. '
     description: 'Defines a maintenance track that determines which Amazon Redshift version to apply during a maintenance window. If the value for <code>MaintenanceTrack</code> is <code>current</code>, the cluster is updated to the most recently certified maintenance release. If the value is <code>trailing</code>, the cluster is updated to the previously certified maintenance release. '
+  Mode:
+    type: string
+    enum:
+      - standard
+      - high-performance
   ModifyClusterDbRevisionMessage:
     type: object
     required:
@@ -13791,6 +14594,35 @@ definitions:
         $ref: '#/definitions/BooleanOptional'
         description: 'A Boolean value indicating if the subscription is enabled. <code>true</code> indicates the subscription is enabled '
     description: <p/>
+  ModifyScheduledActionMessage:
+    type: object
+    required:
+      - ScheduledActionName
+    properties:
+      ScheduledActionName:
+        $ref: '#/definitions/String'
+        description: 'The name of the scheduled action to modify. '
+      TargetAction:
+        $ref: '#/definitions/ScheduledActionType'
+        description: 'A modified JSON format of the scheduled action. For more information about this parameter, see <a>ScheduledAction</a>. '
+      Schedule:
+        $ref: '#/definitions/String'
+        description: 'A modified schedule in either <code>at( )</code> or <code>cron( )</code> format. For more information about this parameter, see <a>ScheduledAction</a>.'
+      IamRole:
+        $ref: '#/definitions/String'
+        description: 'A different IAM role to assume to run the target action. For more information about this parameter, see <a>ScheduledAction</a>.'
+      ScheduledActionDescription:
+        $ref: '#/definitions/String'
+        description: 'A modified description of the scheduled action. '
+      StartTime:
+        $ref: '#/definitions/TStamp'
+        description: 'A modified start time of the scheduled action. For more information about this parameter, see <a>ScheduledAction</a>. '
+      EndTime:
+        $ref: '#/definitions/TStamp'
+        description: 'A modified end time of the scheduled action. For more information about this parameter, see <a>ScheduledAction</a>. '
+      Enable:
+        $ref: '#/definitions/BooleanOptional'
+        description: 'A modified enable flag of the scheduled action. If true, the scheduled action is active. If false, the scheduled action is disabled. '
   ModifySnapshotCopyRetentionPeriodMessage:
     type: object
     required:
@@ -13831,6 +14663,9 @@ definitions:
       EstimatedDiskUtilizationPercent:
         $ref: '#/definitions/DoubleOptional'
         description: The estimated disk utilizaton percentage.
+      Mode:
+        $ref: '#/definitions/Mode'
+        description: The category of the node configuration recommendation.
     description: A list of node configurations.
   NodeConfigurationOptionList:
     type: array
@@ -13842,6 +14677,7 @@ definitions:
       - NodeType
       - NumberOfNodes
       - EstimatedDiskUtilizationPercent
+      - Mode
   OperatorType:
     type: string
     enum:
@@ -13971,27 +14807,6 @@ definitions:
         $ref: '#/definitions/ParametersList'
         description: '<p>An array of names of parameters to be reset. If <i>ResetAllParameters</i> option is not used, then at least one parameter name must be supplied. </p> <p>Constraints: A maximum of 20 parameters can be reset in a single request.</p>'
     description: <p/>
-  ResizeClusterMessage:
-    type: object
-    required:
-      - ClusterIdentifier
-      - NumberOfNodes
-    properties:
-      ClusterIdentifier:
-        $ref: '#/definitions/String'
-        description: The unique identifier for the cluster to resize.
-      ClusterType:
-        $ref: '#/definitions/String'
-        description: The new cluster type for the specified cluster.
-      NodeType:
-        $ref: '#/definitions/String'
-        description: 'The new node type for the nodes you are adding. If not specified, the cluster''s current node type is used.'
-      NumberOfNodes:
-        $ref: '#/definitions/Integer'
-        description: The new number of nodes for the cluster.
-      Classic:
-        $ref: '#/definitions/BooleanOptional'
-        description: 'A boolean value indicating whether the resize operation is using the classic resize process. If you don''t provide this parameter or set the value to <code>false</code>, the resize type is elastic. '
   RestorableNodeTypeList:
     type: array
     items:
@@ -14217,6 +15032,24 @@ definitions:
         $ref: '#/definitions/String'
         description: '<p>The unique identifier of the cluster that you want to rotate the encryption keys for.</p> <p>Constraints: Must be the name of valid cluster that has encryption enabled.</p>'
     description: <p/>
+  ScheduledActionState:
+    type: string
+    enum:
+      - ACTIVE
+      - DISABLED
+  ScheduledActionTimeList:
+    type: array
+    items:
+      $ref: '#/definitions/TStamp'
+  ScheduledActionFilterName:
+    type: string
+    enum:
+      - cluster-identifier
+      - iam-role
+  ScheduledActionList:
+    type: array
+    items:
+      $ref: '#/definitions/ScheduledAction'
   ScheduledSnapshotTimeList:
     type: array
     items:

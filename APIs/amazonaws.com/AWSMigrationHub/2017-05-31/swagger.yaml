@@ -3,7 +3,7 @@ info:
   version: '2017-05-31'
   x-release: v4
   title: AWS Migration Hub
-  description: 'The AWS Migration Hub API methods help to obtain server and application migration status and integrate your resource-specific migration tool by providing a programmatic interface to Migration Hub. '
+  description: '<p>The AWS Migration Hub API methods help to obtain server and application migration status and integrate your resource-specific migration tool by providing a programmatic interface to Migration Hub.</p> <p>Remember that you must set your AWS Migration Hub home region before you call any of these APIs, or a <code>HomeRegionNotSetException</code> error will be returned. Also, you must make the API calls while in your home region.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -197,6 +197,10 @@ paths:
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
+        '487':
+          description: HomeRegionNotSetException
+          schema:
+            $ref: '#/definitions/HomeRegionNotSetException'
       parameters:
         - name: body
           in: body
@@ -220,7 +224,7 @@ paths:
   '/#X-Amz-Target=AWSMigrationHub.AssociateDiscoveredResource':
     post:
       operationId: AssociateDiscoveredResource
-      description: Associates a discovered resource ID from Application Discovery Service (ADS) with a migration task.
+      description: Associates a discovered resource ID from Application Discovery Service with a migration task.
       responses:
         '200':
           description: Success
@@ -258,6 +262,10 @@ paths:
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
+        '488':
+          description: HomeRegionNotSetException
+          schema:
+            $ref: '#/definitions/HomeRegionNotSetException'
       parameters:
         - name: body
           in: body
@@ -311,6 +319,10 @@ paths:
           description: InvalidInputException
           schema:
             $ref: '#/definitions/InvalidInputException'
+        '486':
+          description: HomeRegionNotSetException
+          schema:
+            $ref: '#/definitions/HomeRegionNotSetException'
       parameters:
         - name: body
           in: body
@@ -334,7 +346,7 @@ paths:
   '/#X-Amz-Target=AWSMigrationHub.DeleteProgressUpdateStream':
     post:
       operationId: DeleteProgressUpdateStream
-      description: '<p>Deletes a progress update stream, including all of its tasks, which was previously created as an AWS resource used for access control. This API has the following traits:</p> <ul> <li> <p>The only parameter needed for <code>DeleteProgressUpdateStream</code> is the stream name (same as a <code>CreateProgressUpdateStream</code> call).</p> </li> <li> <p>The call will return, and a background process will asynchronously delete the stream and all of its resources (tasks, associated resources, resource attributes, created artifacts).</p> </li> <li> <p>If the stream takes time to be deleted, it might still show up on a <code>ListProgressUpdateStreams</code> call.</p> </li> <li> <p> <code>CreateProgressUpdateStream</code>, <code>ImportMigrationTask</code>, <code>NotifyMigrationTaskState</code>, and all Associate[*] APIs realted to the tasks belonging to the stream will throw "InvalidInputException" if the stream of the same name is in the process of being deleted.</p> </li> <li> <p>Once the stream and all of its resources are deleted, <code>CreateProgressUpdateStream</code> for a stream of the same name will succeed, and that stream will be an entirely new logical resource (without any resources associated with the old stream).</p> </li> </ul>'
+      description: '<p>Deletes a progress update stream, including all of its tasks, which was previously created as an AWS resource used for access control. This API has the following traits:</p> <ul> <li> <p>The only parameter needed for <code>DeleteProgressUpdateStream</code> is the stream name (same as a <code>CreateProgressUpdateStream</code> call).</p> </li> <li> <p>The call will return, and a background process will asynchronously delete the stream and all of its resources (tasks, associated resources, resource attributes, created artifacts).</p> </li> <li> <p>If the stream takes time to be deleted, it might still show up on a <code>ListProgressUpdateStreams</code> call.</p> </li> <li> <p> <code>CreateProgressUpdateStream</code>, <code>ImportMigrationTask</code>, <code>NotifyMigrationTaskState</code>, and all Associate[*] APIs related to the tasks belonging to the stream will throw "InvalidInputException" if the stream of the same name is in the process of being deleted.</p> </li> <li> <p>Once the stream and all of its resources are deleted, <code>CreateProgressUpdateStream</code> for a stream of the same name will succeed, and that stream will be an entirely new logical resource (without any resources associated with the old stream).</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -368,6 +380,10 @@ paths:
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
+        '487':
+          description: HomeRegionNotSetException
+          schema:
+            $ref: '#/definitions/HomeRegionNotSetException'
       parameters:
         - name: body
           in: body
@@ -421,6 +437,10 @@ paths:
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
+        '486':
+          description: HomeRegionNotSetException
+          schema:
+            $ref: '#/definitions/HomeRegionNotSetException'
       parameters:
         - name: body
           in: body
@@ -470,6 +490,10 @@ paths:
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
+        '485':
+          description: HomeRegionNotSetException
+          schema:
+            $ref: '#/definitions/HomeRegionNotSetException'
       parameters:
         - name: body
           in: body
@@ -527,6 +551,10 @@ paths:
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
+        '487':
+          description: HomeRegionNotSetException
+          schema:
+            $ref: '#/definitions/HomeRegionNotSetException'
       parameters:
         - name: body
           in: body
@@ -550,7 +578,7 @@ paths:
   '/#X-Amz-Target=AWSMigrationHub.DisassociateDiscoveredResource':
     post:
       operationId: DisassociateDiscoveredResource
-      description: Disassociate an Application Discovery Service (ADS) discovered resource from a migration task.
+      description: Disassociate an Application Discovery Service discovered resource from a migration task.
       responses:
         '200':
           description: Success
@@ -584,6 +612,10 @@ paths:
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
+        '487':
+          description: HomeRegionNotSetException
+          schema:
+            $ref: '#/definitions/HomeRegionNotSetException'
       parameters:
         - name: body
           in: body
@@ -641,6 +673,10 @@ paths:
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
+        '487':
+          description: HomeRegionNotSetException
+          schema:
+            $ref: '#/definitions/HomeRegionNotSetException'
       parameters:
         - name: body
           in: body
@@ -690,12 +726,26 @@ paths:
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
+        '485':
+          description: HomeRegionNotSetException
+          schema:
+            $ref: '#/definitions/HomeRegionNotSetException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
             $ref: '#/definitions/ListCreatedArtifactsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -739,12 +789,26 @@ paths:
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
+        '485':
+          description: HomeRegionNotSetException
+          schema:
+            $ref: '#/definitions/HomeRegionNotSetException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
             $ref: '#/definitions/ListDiscoveredResourcesRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -792,12 +856,26 @@ paths:
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
+        '486':
+          description: HomeRegionNotSetException
+          schema:
+            $ref: '#/definitions/HomeRegionNotSetException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
             $ref: '#/definitions/ListMigrationTasksRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -837,12 +915,26 @@ paths:
           description: InvalidInputException
           schema:
             $ref: '#/definitions/InvalidInputException'
+        '484':
+          description: HomeRegionNotSetException
+          schema:
+            $ref: '#/definitions/HomeRegionNotSetException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
             $ref: '#/definitions/ListProgressUpdateStreamsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -898,6 +990,10 @@ paths:
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
+        '488':
+          description: HomeRegionNotSetException
+          schema:
+            $ref: '#/definitions/HomeRegionNotSetException'
       parameters:
         - name: body
           in: body
@@ -955,6 +1051,10 @@ paths:
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
+        '487':
+          description: HomeRegionNotSetException
+          schema:
+            $ref: '#/definitions/HomeRegionNotSetException'
       parameters:
         - name: body
           in: body
@@ -978,7 +1078,7 @@ paths:
   '/#X-Amz-Target=AWSMigrationHub.PutResourceAttributes':
     post:
       operationId: PutResourceAttributes
-      description: '<p>Provides identifying details of the resource being migrated so that it can be associated in the Application Discovery Service (ADS)''s repository. This association occurs asynchronously after <code>PutResourceAttributes</code> returns.</p> <important> <ul> <li> <p>Keep in mind that subsequent calls to PutResourceAttributes will override previously stored attributes. For example, if it is first called with a MAC address, but later, it is desired to <i>add</i> an IP address, it will then be required to call it with <i>both</i> the IP and MAC addresses to prevent overiding the MAC address.</p> </li> <li> <p>Note the instructions regarding the special use case of the <a href="https://docs.aws.amazon.com/migrationhub/latest/ug/API_PutResourceAttributes.html#migrationhub-PutResourceAttributes-request-ResourceAttributeList"> <code>ResourceAttributeList</code> </a> parameter when specifying any "VM" related value. </p> </li> </ul> </important> <note> <p>Because this is an asynchronous call, it will always return 200, whether an association occurs or not. To confirm if an association was found based on the provided details, call <code>ListDiscoveredResources</code>.</p> </note>'
+      description: '<p>Provides identifying details of the resource being migrated so that it can be associated in the Application Discovery Service repository. This association occurs asynchronously after <code>PutResourceAttributes</code> returns.</p> <important> <ul> <li> <p>Keep in mind that subsequent calls to PutResourceAttributes will override previously stored attributes. For example, if it is first called with a MAC address, but later, it is desired to <i>add</i> an IP address, it will then be required to call it with <i>both</i> the IP and MAC addresses to prevent overriding the MAC address.</p> </li> <li> <p>Note the instructions regarding the special use case of the <a href="https://docs.aws.amazon.com/migrationhub/latest/ug/API_PutResourceAttributes.html#migrationhub-PutResourceAttributes-request-ResourceAttributeList"> <code>ResourceAttributeList</code> </a> parameter when specifying any "VM" related value.</p> </li> </ul> </important> <note> <p>Because this is an asynchronous call, it will always return 200, whether an association occurs or not. To confirm if an association was found based on the provided details, call <code>ListDiscoveredResources</code>.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1012,6 +1112,10 @@ paths:
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
+        '487':
+          description: HomeRegionNotSetException
+          schema:
+            $ref: '#/definitions/HomeRegionNotSetException'
       parameters:
         - name: body
           in: body
@@ -1048,55 +1152,21 @@ definitions:
         description: 'The name of the ProgressUpdateStream. '
       MigrationTaskName:
         $ref: '#/definitions/MigrationTaskName'
-        description: Unique identifier that references the migration task.
+        description: 'Unique identifier that references the migration task. <i>Do not store personal data in this field.</i> '
       CreatedArtifact:
         $ref: '#/definitions/CreatedArtifact'
         description: 'An ARN of the AWS resource related to the migration (e.g., AMI, EC2 instance, RDS instance, etc.) '
       DryRun:
         $ref: '#/definitions/DryRun'
         description: Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.
-  AccessDeniedException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: You do not have sufficient access to perform this action.
-  InternalServerError:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'Exception raised when there is an internal, configuration, or dependency error encountered.'
-  ServiceUnavailableException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'Exception raised when there is an internal, configuration, or dependency error encountered.'
-  DryRunOperation:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: Exception raised to indicate a successfully authorized action when the <code>DryRun</code> flag is set to "true".
-  UnauthorizedOperation:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: Exception raised to indicate a request was not authorized when the <code>DryRun</code> flag is set to "true".
-  InvalidInputException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: Exception raised when the provided input violates a policy constraint or is entered in the wrong format or data type.
-  ResourceNotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'Exception raised when the request references a resource (ADS configuration, update stream, migration task, etc.) that does not exist in ADS (Application Discovery Service) or in Migration Hub''s repository.'
+  AccessDeniedException: {}
+  InternalServerError: {}
+  ServiceUnavailableException: {}
+  DryRunOperation: {}
+  UnauthorizedOperation: {}
+  InvalidInputException: {}
+  ResourceNotFoundException: {}
+  HomeRegionNotSetException: {}
   AssociateDiscoveredResourceResult:
     type: object
     properties: {}
@@ -1112,19 +1182,14 @@ definitions:
         description: The name of the ProgressUpdateStream.
       MigrationTaskName:
         $ref: '#/definitions/MigrationTaskName'
-        description: The identifier given to the MigrationTask.
+        description: 'The identifier given to the MigrationTask. <i>Do not store personal data in this field.</i> '
       DiscoveredResource:
         $ref: '#/definitions/DiscoveredResource'
         description: Object representing a Resource.
       DryRun:
         $ref: '#/definitions/DryRun'
         description: Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.
-  PolicyErrorException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: Exception raised when there are problems accessing ADS (Application Discovery Service); most likely due to a misconfigured policy or the <code>migrationhub-discovery</code> role is missing or not configured correctly.
+  PolicyErrorException: {}
   CreateProgressUpdateStreamResult:
     type: object
     properties: {}
@@ -1135,7 +1200,7 @@ definitions:
     properties:
       ProgressUpdateStreamName:
         $ref: '#/definitions/ProgressUpdateStream'
-        description: 'The name of the ProgressUpdateStream. '
+        description: 'The name of the ProgressUpdateStream. <i>Do not store personal data in this field.</i> '
       DryRun:
         $ref: '#/definitions/DryRun'
         description: Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.
@@ -1149,7 +1214,7 @@ definitions:
     properties:
       ProgressUpdateStreamName:
         $ref: '#/definitions/ProgressUpdateStream'
-        description: 'The name of the ProgressUpdateStream. '
+        description: 'The name of the ProgressUpdateStream. <i>Do not store personal data in this field.</i> '
       DryRun:
         $ref: '#/definitions/DryRun'
         description: Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.
@@ -1169,7 +1234,7 @@ definitions:
     properties:
       ApplicationId:
         $ref: '#/definitions/ApplicationId'
-        description: The configurationId in ADS that uniquely identifies the grouped application.
+        description: The configurationId in Application Discovery Service that uniquely identifies the grouped application.
   DescribeMigrationTaskResult:
     type: object
     properties:
@@ -1187,7 +1252,7 @@ definitions:
         description: 'The name of the ProgressUpdateStream. '
       MigrationTaskName:
         $ref: '#/definitions/MigrationTaskName'
-        description: The identifier given to the MigrationTask.
+        description: 'The identifier given to the MigrationTask. <i>Do not store personal data in this field.</i> '
   DisassociateCreatedArtifactResult:
     type: object
     properties: {}
@@ -1203,7 +1268,7 @@ definitions:
         description: 'The name of the ProgressUpdateStream. '
       MigrationTaskName:
         $ref: '#/definitions/MigrationTaskName'
-        description: Unique identifier that references the migration task to be disassociated with the artifact.
+        description: 'Unique identifier that references the migration task to be disassociated with the artifact. <i>Do not store personal data in this field.</i> '
       CreatedArtifactName:
         $ref: '#/definitions/CreatedArtifactName'
         description: 'An ARN of the AWS resource related to the migration (e.g., AMI, EC2 instance, RDS instance, etc.)'
@@ -1225,10 +1290,10 @@ definitions:
         description: The name of the ProgressUpdateStream.
       MigrationTaskName:
         $ref: '#/definitions/MigrationTaskName'
-        description: The identifier given to the MigrationTask.
+        description: 'The identifier given to the MigrationTask. <i>Do not store personal data in this field.</i> '
       ConfigurationId:
         $ref: '#/definitions/ConfigurationId'
-        description: ConfigurationId of the ADS resource to be disassociated.
+        description: ConfigurationId of the Application Discovery Service resource to be disassociated.
       DryRun:
         $ref: '#/definitions/DryRun'
         description: Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.
@@ -1243,10 +1308,10 @@ definitions:
     properties:
       ProgressUpdateStream:
         $ref: '#/definitions/ProgressUpdateStream'
-        description: 'The name of the ProgressUpdateStream. '
+        description: The name of the ProgressUpdateStream. &gt;
       MigrationTaskName:
         $ref: '#/definitions/MigrationTaskName'
-        description: Unique identifier that references the migration task.
+        description: 'Unique identifier that references the migration task. <i>Do not store personal data in this field.</i> '
       DryRun:
         $ref: '#/definitions/DryRun'
         description: Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.
@@ -1270,7 +1335,7 @@ definitions:
         description: 'The name of the ProgressUpdateStream. '
       MigrationTaskName:
         $ref: '#/definitions/MigrationTaskName'
-        description: Unique identifier that references the migration task.
+        description: 'Unique identifier that references the migration task. <i>Do not store personal data in this field.</i> '
       NextToken:
         $ref: '#/definitions/Token'
         description: 'If a <code>NextToken</code> was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>NextToken</code>.'
@@ -1297,7 +1362,7 @@ definitions:
         description: The name of the ProgressUpdateStream.
       MigrationTaskName:
         $ref: '#/definitions/MigrationTaskName'
-        description: The name of the MigrationTask.
+        description: 'The name of the MigrationTask. <i>Do not store personal data in this field.</i> '
       NextToken:
         $ref: '#/definitions/Token'
         description: 'If a <code>NextToken</code> was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>NextToken</code>.'
@@ -1354,10 +1419,13 @@ definitions:
     properties:
       ApplicationId:
         $ref: '#/definitions/ApplicationId'
-        description: The configurationId in ADS that uniquely identifies the grouped application.
+        description: The configurationId in Application Discovery Service that uniquely identifies the grouped application.
       Status:
         $ref: '#/definitions/ApplicationStatus'
         description: 'Status of the application - Not Started, In-Progress, Complete.'
+      UpdateDateTime:
+        $ref: '#/definitions/UpdateDateTime'
+        description: The timestamp when the application state changed.
       DryRun:
         $ref: '#/definitions/DryRun'
         description: Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.
@@ -1378,7 +1446,7 @@ definitions:
         description: 'The name of the ProgressUpdateStream. '
       MigrationTaskName:
         $ref: '#/definitions/MigrationTaskName'
-        description: Unique identifier that references the migration task.
+        description: 'Unique identifier that references the migration task. <i>Do not store personal data in this field.</i> '
       Task:
         $ref: '#/definitions/Task'
         description: Information about the task's progress and status.
@@ -1406,15 +1474,13 @@ definitions:
         description: 'The name of the ProgressUpdateStream. '
       MigrationTaskName:
         $ref: '#/definitions/MigrationTaskName'
-        description: Unique identifier that references the migration task.
+        description: 'Unique identifier that references the migration task. <i>Do not store personal data in this field.</i> '
       ResourceAttributeList:
         $ref: '#/definitions/ResourceAttributeList'
-        description: '<p>Information about the resource that is being migrated. This data will be used to map the task to a resource in the Application Discovery Service (ADS)''s repository.</p> <note> <p>Takes the object array of <code>ResourceAttribute</code> where the <code>Type</code> field is reserved for the following values: <code>IPV4_ADDRESS | IPV6_ADDRESS | MAC_ADDRESS | FQDN | VM_MANAGER_ID | VM_MANAGED_OBJECT_REFERENCE | VM_NAME | VM_PATH | BIOS_ID | MOTHERBOARD_SERIAL_NUMBER</code> where the identifying value can be a string up to 256 characters.</p> </note> <important> <ul> <li> <p>If any "VM" related value is set for a <code>ResourceAttribute</code> object, it is required that <code>VM_MANAGER_ID</code>, as a minimum, is always set. If <code>VM_MANAGER_ID</code> is not set, then all "VM" fields will be discarded and "VM" fields will not be used for matching the migration task to a server in Application Discovery Service (ADS)''s repository. See the <a href="https://docs.aws.amazon.com/migrationhub/latest/ug/API_PutResourceAttributes.html#API_PutResourceAttributes_Examples">Example</a> section below for a use case of specifying "VM" related values.</p> </li> <li> <p> If a server you are trying to match has multiple IP or MAC addresses, you should provide as many as you know in separate type/value pairs passed to the <code>ResourceAttributeList</code> parameter to maximize the chances of matching.</p> </li> </ul> </important>'
+        description: '<p>Information about the resource that is being migrated. This data will be used to map the task to a resource in the Application Discovery Service repository.</p> <note> <p>Takes the object array of <code>ResourceAttribute</code> where the <code>Type</code> field is reserved for the following values: <code>IPV4_ADDRESS | IPV6_ADDRESS | MAC_ADDRESS | FQDN | VM_MANAGER_ID | VM_MANAGED_OBJECT_REFERENCE | VM_NAME | VM_PATH | BIOS_ID | MOTHERBOARD_SERIAL_NUMBER</code> where the identifying value can be a string up to 256 characters.</p> </note> <important> <ul> <li> <p>If any "VM" related value is set for a <code>ResourceAttribute</code> object, it is required that <code>VM_MANAGER_ID</code>, as a minimum, is always set. If <code>VM_MANAGER_ID</code> is not set, then all "VM" fields will be discarded and "VM" fields will not be used for matching the migration task to a server in Application Discovery Service repository. See the <a href="https://docs.aws.amazon.com/migrationhub/latest/ug/API_PutResourceAttributes.html#API_PutResourceAttributes_Examples">Example</a> section below for a use case of specifying "VM" related values.</p> </li> <li> <p> If a server you are trying to match has multiple IP or MAC addresses, you should provide as many as you know in separate type/value pairs passed to the <code>ResourceAttributeList</code> parameter to maximize the chances of matching.</p> </li> </ul> </important>'
       DryRun:
         $ref: '#/definitions/DryRun'
         description: Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.
-  ErrorMessage:
-    type: string
   ApplicationId:
     type: string
     minLength: 1
@@ -1456,7 +1522,7 @@ definitions:
     properties:
       ConfigurationId:
         $ref: '#/definitions/ConfigurationId'
-        description: The configurationId in ADS that uniquely identifies the on-premise resource.
+        description: The configurationId in Application Discovery Service that uniquely identifies the on-premise resource.
       Description:
         $ref: '#/definitions/DiscoveredResourceDescription'
         description: A description that can be free-form text to record additional detail about the discovered resource for clarity or later reference.
@@ -1488,7 +1554,7 @@ definitions:
         description: A name that identifies the vendor of the migration tool being used.
       MigrationTaskName:
         $ref: '#/definitions/MigrationTaskName'
-        description: Unique identifier that references the migration task.
+        description: 'Unique identifier that references the migration task. <i>Do not store personal data in this field.</i> '
       Task:
         $ref: '#/definitions/Task'
         description: Task object encapsulating task information.
@@ -1497,7 +1563,7 @@ definitions:
         description: The timestamp when the task was gathered.
       ResourceAttributeList:
         $ref: '#/definitions/LatestResourceAttributeList'
-        description: <p/>
+        description: Information about the resource that is being migrated. This data will be used to map the task to a resource in the Application Discovery Service repository.
     description: Represents a migration task in a migration tool.
   DiscoveredResourceDescription:
     type: string
@@ -1590,13 +1656,13 @@ definitions:
         description: An AWS resource used for access control. It should uniquely identify the migration tool as it is used for all updates made by the tool.
       MigrationTaskName:
         $ref: '#/definitions/MigrationTaskName'
-        description: Unique identifier that references the migration task.
+        description: 'Unique identifier that references the migration task. <i>Do not store personal data in this field.</i> '
       Status:
         $ref: '#/definitions/Status'
         description: Status of the task.
       ProgressPercent:
         $ref: '#/definitions/ProgressPercent'
-        description: <p/>
+        description: Indication of the percentage completion of the task.
       StatusDetail:
         $ref: '#/definitions/StatusDetail'
         description: Detail information of what is being done within the overall status state.
@@ -1612,7 +1678,7 @@ definitions:
     properties:
       ProgressUpdateStreamName:
         $ref: '#/definitions/ProgressUpdateStream'
-        description: 'The name of the ProgressUpdateStream. '
+        description: 'The name of the ProgressUpdateStream. <i>Do not store personal data in this field.</i> '
     description: Summary of the AWS resource used for access control that is implicitly linked to your AWS account.
   ResourceAttributeList:
     type: array

@@ -160,6 +160,153 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
+  '/v1/apis/{apiId}/ApiCaches':
+    post:
+      operationId: CreateApiCache
+      description: Creates a cache for the GraphQL API.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateApiCacheResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: apiId
+          in: path
+          required: true
+          description: The GraphQL API Id.
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - ttl
+              - apiCachingBehavior
+              - type
+            properties:
+              ttl:
+                description: <p>TTL in seconds for cache entries.</p> <p>Valid values are between 1 and 3600 seconds.</p>
+                type: integer
+              transitEncryptionEnabled:
+                description: Transit encryption flag when connecting to cache. This setting cannot be updated after creation.
+                type: boolean
+              atRestEncryptionEnabled:
+                description: At rest encryption flag for cache. This setting cannot be updated after creation.
+                type: boolean
+              apiCachingBehavior:
+                description: '<p>Caching behavior.</p> <ul> <li> <p> <b>FULL_REQUEST_CACHING</b>: All requests are fully cached.</p> </li> <li> <p> <b>PER_RESOLVER_CACHING</b>: Individual resovlers that you specify are cached.</p> </li> </ul>'
+                type: string
+                enum:
+                  - FULL_REQUEST_CACHING
+                  - PER_RESOLVER_CACHING
+              type:
+                description: '<p>The cache instance type.</p> <ul> <li> <p> <b>T2_SMALL</b>: A t2.small instance type.</p> </li> <li> <p> <b>T2_MEDIUM</b>: A t2.medium instance type.</p> </li> <li> <p> <b>R4_LARGE</b>: A r4.large instance type.</p> </li> <li> <p> <b>R4_XLARGE</b>: A r4.xlarge instance type.</p> </li> <li> <p> <b>R4_2XLARGE</b>: A r4.2xlarge instance type.</p> </li> <li> <p> <b>R4_4XLARGE</b>: A r4.4xlarge instance type.</p> </li> <li> <p> <b>R4_8XLARGE</b>: A r4.8xlarge instance type.</p> </li> </ul>'
+                type: string
+                enum:
+                  - T2_SMALL
+                  - T2_MEDIUM
+                  - R4_LARGE
+                  - R4_XLARGE
+                  - R4_2XLARGE
+                  - R4_4XLARGE
+                  - R4_8XLARGE
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteApiCache
+      description: Deletes an <code>ApiCache</code> object.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteApiCacheResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: apiId
+          in: path
+          required: true
+          description: The API ID.
+          type: string
+    get:
+      operationId: GetApiCache
+      description: Retrieves an <code>ApiCache</code> object.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetApiCacheResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: apiId
+          in: path
+          required: true
+          description: The API ID.
+          type: string
   '/v1/apis/{apiId}/apikeys':
     post:
       operationId: CreateApiKey
@@ -263,6 +410,8 @@ paths:
           description: 'An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.'
           type: string
           pattern: '[\\S]+'
+          minLength: 1
+          maxLength: 65536
         - name: maxResults
           in: query
           required: false
@@ -321,6 +470,8 @@ paths:
                 description: A user-supplied name for the <code>DataSource</code>.
                 type: string
                 pattern: '[_A-Za-z][_0-9A-Za-z]*'
+                minLength: 1
+                maxLength: 65536
               description:
                 description: A description of the <code>DataSource</code>.
                 type: string
@@ -350,6 +501,12 @@ paths:
                   useCallerCredentials:
                     $ref: '#/definitions/Boolean'
                     description: Set to TRUE to use Amazon Cognito credentials with this data source.
+                  deltaSyncConfig:
+                    $ref: '#/definitions/DeltaSyncConfig'
+                    description: The <code>DeltaSyncConfig</code> for a versioned datasource.
+                  versioned:
+                    $ref: '#/definitions/Boolean'
+                    description: Set to TRUE to use Conflict Detection and Resolution with this data source.
               lambdaConfig:
                 description: Describes an AWS Lambda data source configuration.
                 type: object
@@ -431,6 +588,8 @@ paths:
           description: 'An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list. '
           type: string
           pattern: '[\\S]+'
+          minLength: 1
+          maxLength: 65536
         - name: maxResults
           in: query
           required: false
@@ -484,6 +643,8 @@ paths:
                 description: The <code>Function</code> name. The function name does not have to be unique.
                 type: string
                 pattern: '[_A-Za-z][_0-9A-Za-z]*'
+                minLength: 1
+                maxLength: 65536
               description:
                 description: The <code>Function</code> description.
                 type: string
@@ -491,6 +652,8 @@ paths:
                 description: The <code>Function</code> <code>DataSource</code> name.
                 type: string
                 pattern: '[_A-Za-z][_0-9A-Za-z]*'
+                minLength: 1
+                maxLength: 65536
               requestMappingTemplate:
                 description: The <code>Function</code> request mapping template. Functions support only the 2018-05-29 version of the request mapping template.
                 type: string
@@ -548,6 +711,8 @@ paths:
           description: 'An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.'
           type: string
           pattern: '[\\S]+'
+          minLength: 1
+          maxLength: 65536
         - name: maxResults
           in: query
           required: false
@@ -704,6 +869,8 @@ paths:
           description: 'An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list. '
           type: string
           pattern: '[\\S]+'
+          minLength: 1
+          maxLength: 65536
         - name: maxResults
           in: query
           required: false
@@ -748,6 +915,8 @@ paths:
           description: The name of the <code>Type</code>.
           type: string
           pattern: '[_A-Za-z][_0-9A-Za-z]*'
+          minLength: 1
+          maxLength: 65536
         - name: body
           in: body
           required: true
@@ -761,10 +930,14 @@ paths:
                 description: The name of the field to attach the resolver to.
                 type: string
                 pattern: '[_A-Za-z][_0-9A-Za-z]*'
+                minLength: 1
+                maxLength: 65536
               dataSourceName:
                 description: The name of the data source for which the resolver is being created.
                 type: string
                 pattern: '[_A-Za-z][_0-9A-Za-z]*'
+                minLength: 1
+                maxLength: 65536
               requestMappingTemplate:
                 description: <p>The mapping template to be used for requests.</p> <p>A resolver uses a request mapping template to convert a GraphQL expression into a format that a data source can understand. Mapping templates are written in Apache Velocity Template Language (VTL).</p>
                 type: string
@@ -788,6 +961,29 @@ paths:
                   functions:
                     $ref: '#/definitions/FunctionsIds'
                     description: A list of <code>Function</code> objects.
+              syncConfig:
+                description: <p>Describes a Sync configuration for a resolver.</p> <p>Contains information on which Conflict Detection as well as Resolution strategy should be performed when the resolver is invoked.</p>
+                type: object
+                properties:
+                  conflictHandler:
+                    $ref: '#/definitions/ConflictHandlerType'
+                    description: '<p>The Conflict Resolution strategy to perform in the event of a conflict.</p> <ul> <li> <p> <b>OPTIMISTIC_CONCURRENCY</b>: Resolve conflicts by rejecting mutations when versions do not match the latest version at the server.</p> </li> <li> <p> <b>AUTOMERGE</b>: Resolve conflicts with the Automerge conflict resolution strategy.</p> </li> <li> <p> <b>LAMBDA</b>: Resolve conflicts with a Lambda function supplied in the LambdaConflictHandlerConfig.</p> </li> </ul>'
+                  conflictDetection:
+                    $ref: '#/definitions/ConflictDetectionType'
+                    description: '<p>The Conflict Detection strategy to use.</p> <ul> <li> <p> <b>VERSION</b>: Detect conflicts based on object versions for this resolver.</p> </li> <li> <p> <b>NONE</b>: Do not detect conflicts when executing this resolver.</p> </li> </ul>'
+                  lambdaConflictHandlerConfig:
+                    $ref: '#/definitions/LambdaConflictHandlerConfig'
+                    description: The <code>LambdaConflictHandlerConfig</code> when configuring LAMBDA as the Conflict Handler.
+              cachingConfig:
+                description: The caching configuration for a resolver that has caching enabled.
+                type: object
+                properties:
+                  ttl:
+                    $ref: '#/definitions/Long'
+                    description: <p>The TTL in seconds for a resolver that has caching enabled.</p> <p>Valid values are between 1 and 3600 seconds.</p>
+                  cachingKeys:
+                    $ref: '#/definitions/CachingKeys'
+                    description: <p>The caching keys for a resolver that has caching enabled.</p> <p>Valid values are entries from the <code>$context.identity</code> and <code>$context.arguments</code> maps.</p>
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -837,6 +1033,8 @@ paths:
           description: 'An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list. '
           type: string
           pattern: '[\\S]+'
+          minLength: 1
+          maxLength: 65536
         - name: maxResults
           in: query
           required: false
@@ -1045,6 +1243,8 @@ paths:
           description: The name of the data source.
           type: string
           pattern: '[_A-Za-z][_0-9A-Za-z]*'
+          minLength: 1
+          maxLength: 65536
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1093,6 +1293,8 @@ paths:
           description: The name of the data source.
           type: string
           pattern: '[_A-Za-z][_0-9A-Za-z]*'
+          minLength: 1
+          maxLength: 65536
     post:
       operationId: UpdateDataSource
       description: Updates a <code>DataSource</code> object.
@@ -1133,6 +1335,8 @@ paths:
           description: The new name for the data source.
           type: string
           pattern: '[_A-Za-z][_0-9A-Za-z]*'
+          minLength: 1
+          maxLength: 65536
         - name: body
           in: body
           required: true
@@ -1173,6 +1377,12 @@ paths:
                   useCallerCredentials:
                     $ref: '#/definitions/Boolean'
                     description: Set to TRUE to use Amazon Cognito credentials with this data source.
+                  deltaSyncConfig:
+                    $ref: '#/definitions/DeltaSyncConfig'
+                    description: The <code>DeltaSyncConfig</code> for a versioned datasource.
+                  versioned:
+                    $ref: '#/definitions/Boolean'
+                    description: Set to TRUE to use Conflict Detection and Resolution with this data source.
               lambdaConfig:
                 description: Describes an AWS Lambda data source configuration.
                 type: object
@@ -1247,6 +1457,8 @@ paths:
           description: The <code>Function</code> ID.
           type: string
           pattern: '[_A-Za-z][_0-9A-Za-z]*'
+          minLength: 1
+          maxLength: 65536
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1287,6 +1499,8 @@ paths:
           description: The <code>Function</code> ID.
           type: string
           pattern: '[_A-Za-z][_0-9A-Za-z]*'
+          minLength: 1
+          maxLength: 65536
     post:
       operationId: UpdateFunction
       description: Updates a <code>Function</code> object.
@@ -1323,6 +1537,8 @@ paths:
           description: The function ID.
           type: string
           pattern: '[_A-Za-z][_0-9A-Za-z]*'
+          minLength: 1
+          maxLength: 65536
         - name: body
           in: body
           required: true
@@ -1338,6 +1554,8 @@ paths:
                 description: The <code>Function</code> name.
                 type: string
                 pattern: '[_A-Za-z][_0-9A-Za-z]*'
+                minLength: 1
+                maxLength: 65536
               description:
                 description: The <code>Function</code> description.
                 type: string
@@ -1345,6 +1563,8 @@ paths:
                 description: The <code>Function</code> <code>DataSource</code> name.
                 type: string
                 pattern: '[_A-Za-z][_0-9A-Za-z]*'
+                minLength: 1
+                maxLength: 65536
               requestMappingTemplate:
                 description: The <code>Function</code> request mapping template. Functions support only the 2018-05-29 version of the request mapping template.
                 type: string
@@ -1586,12 +1806,16 @@ paths:
           description: The name of the resolver type.
           type: string
           pattern: '[_A-Za-z][_0-9A-Za-z]*'
+          minLength: 1
+          maxLength: 65536
         - name: fieldName
           in: path
           required: true
           description: The resolver field name.
           type: string
           pattern: '[_A-Za-z][_0-9A-Za-z]*'
+          minLength: 1
+          maxLength: 65536
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1632,12 +1856,16 @@ paths:
           description: The resolver type name.
           type: string
           pattern: '[_A-Za-z][_0-9A-Za-z]*'
+          minLength: 1
+          maxLength: 65536
         - name: fieldName
           in: path
           required: true
           description: The resolver field name.
           type: string
           pattern: '[_A-Za-z][_0-9A-Za-z]*'
+          minLength: 1
+          maxLength: 65536
     post:
       operationId: UpdateResolver
       description: Updates a <code>Resolver</code> object.
@@ -1674,12 +1902,16 @@ paths:
           description: The new type name.
           type: string
           pattern: '[_A-Za-z][_0-9A-Za-z]*'
+          minLength: 1
+          maxLength: 65536
         - name: fieldName
           in: path
           required: true
           description: The new field name.
           type: string
           pattern: '[_A-Za-z][_0-9A-Za-z]*'
+          minLength: 1
+          maxLength: 65536
         - name: body
           in: body
           required: true
@@ -1692,6 +1924,8 @@ paths:
                 description: The new data source name.
                 type: string
                 pattern: '[_A-Za-z][_0-9A-Za-z]*'
+                minLength: 1
+                maxLength: 65536
               requestMappingTemplate:
                 description: The new request mapping template.
                 type: string
@@ -1715,6 +1949,29 @@ paths:
                   functions:
                     $ref: '#/definitions/FunctionsIds'
                     description: A list of <code>Function</code> objects.
+              syncConfig:
+                description: <p>Describes a Sync configuration for a resolver.</p> <p>Contains information on which Conflict Detection as well as Resolution strategy should be performed when the resolver is invoked.</p>
+                type: object
+                properties:
+                  conflictHandler:
+                    $ref: '#/definitions/ConflictHandlerType'
+                    description: '<p>The Conflict Resolution strategy to perform in the event of a conflict.</p> <ul> <li> <p> <b>OPTIMISTIC_CONCURRENCY</b>: Resolve conflicts by rejecting mutations when versions do not match the latest version at the server.</p> </li> <li> <p> <b>AUTOMERGE</b>: Resolve conflicts with the Automerge conflict resolution strategy.</p> </li> <li> <p> <b>LAMBDA</b>: Resolve conflicts with a Lambda function supplied in the LambdaConflictHandlerConfig.</p> </li> </ul>'
+                  conflictDetection:
+                    $ref: '#/definitions/ConflictDetectionType'
+                    description: '<p>The Conflict Detection strategy to use.</p> <ul> <li> <p> <b>VERSION</b>: Detect conflicts based on object versions for this resolver.</p> </li> <li> <p> <b>NONE</b>: Do not detect conflicts when executing this resolver.</p> </li> </ul>'
+                  lambdaConflictHandlerConfig:
+                    $ref: '#/definitions/LambdaConflictHandlerConfig'
+                    description: The <code>LambdaConflictHandlerConfig</code> when configuring LAMBDA as the Conflict Handler.
+              cachingConfig:
+                description: The caching configuration for a resolver that has caching enabled.
+                type: object
+                properties:
+                  ttl:
+                    $ref: '#/definitions/Long'
+                    description: <p>The TTL in seconds for a resolver that has caching enabled.</p> <p>Valid values are between 1 and 3600 seconds.</p>
+                  cachingKeys:
+                    $ref: '#/definitions/CachingKeys'
+                    description: <p>The caching keys for a resolver that has caching enabled.</p> <p>Valid values are entries from the <code>$context.identity</code> and <code>$context.arguments</code> maps.</p>
   '/v1/apis/{apiId}/types/{typeName}':
     delete:
       operationId: DeleteType
@@ -1756,6 +2013,8 @@ paths:
           description: The type name.
           type: string
           pattern: '[_A-Za-z][_0-9A-Za-z]*'
+          minLength: 1
+          maxLength: 65536
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1804,6 +2063,8 @@ paths:
           description: The new type name.
           type: string
           pattern: '[_A-Za-z][_0-9A-Za-z]*'
+          minLength: 1
+          maxLength: 65536
         - name: body
           in: body
           required: true
@@ -1821,6 +2082,49 @@ paths:
                 enum:
                   - SDL
                   - JSON
+  '/v1/apis/{apiId}/FlushCache':
+    delete:
+      operationId: FlushApiCache
+      description: Flushes an <code>ApiCache</code> object.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/FlushApiCacheResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: apiId
+          in: path
+          required: true
+          description: The API ID.
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/v1/apis/{apiId}/schema#format':
     get:
       operationId: GetIntrospectionSchema
@@ -1998,6 +2302,8 @@ paths:
           description: The type name.
           type: string
           pattern: '[_A-Za-z][_0-9A-Za-z]*'
+          minLength: 1
+          maxLength: 65536
         - name: format
           in: query
           required: true
@@ -2056,6 +2362,8 @@ paths:
           description: 'An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.'
           type: string
           pattern: '[\\S]+'
+          minLength: 1
+          maxLength: 65536
         - name: maxResults
           in: query
           required: false
@@ -2226,6 +2534,8 @@ paths:
           description: 'An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list. '
           type: string
           pattern: '[\\S]+'
+          minLength: 1
+          maxLength: 65536
         - name: maxResults
           in: query
           required: false
@@ -2298,18 +2608,99 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/apis/{apiId}/ApiCaches/update':
+    post:
+      operationId: UpdateApiCache
+      description: Updates the cache for the GraphQL API.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateApiCacheResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: apiId
+          in: path
+          required: true
+          description: The GraphQL API Id.
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - ttl
+              - apiCachingBehavior
+              - type
+            properties:
+              ttl:
+                description: <p>TTL in seconds for cache entries.</p> <p>Valid values are between 1 and 3600 seconds.</p>
+                type: integer
+              apiCachingBehavior:
+                description: '<p>Caching behavior.</p> <ul> <li> <p> <b>FULL_REQUEST_CACHING</b>: All requests are fully cached.</p> </li> <li> <p> <b>PER_RESOLVER_CACHING</b>: Individual resovlers that you specify are cached.</p> </li> </ul>'
+                type: string
+                enum:
+                  - FULL_REQUEST_CACHING
+                  - PER_RESOLVER_CACHING
+              type:
+                description: '<p>The cache instance type.</p> <ul> <li> <p> <b>T2_SMALL</b>: A t2.small instance type.</p> </li> <li> <p> <b>T2_MEDIUM</b>: A t2.medium instance type.</p> </li> <li> <p> <b>R4_LARGE</b>: A r4.large instance type.</p> </li> <li> <p> <b>R4_XLARGE</b>: A r4.xlarge instance type.</p> </li> <li> <p> <b>R4_2XLARGE</b>: A r4.2xlarge instance type.</p> </li> <li> <p> <b>R4_4XLARGE</b>: A r4.4xlarge instance type.</p> </li> <li> <p> <b>R4_8XLARGE</b>: A r4.8xlarge instance type.</p> </li> </ul>'
+                type: string
+                enum:
+                  - T2_SMALL
+                  - T2_MEDIUM
+                  - R4_LARGE
+                  - R4_XLARGE
+                  - R4_2XLARGE
+                  - R4_4XLARGE
+                  - R4_8XLARGE
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
+  CreateApiCacheResponse:
+    type: object
+    properties:
+      apiCache:
+        $ref: '#/definitions/ApiCache'
+        description: The <code>ApiCache</code> object.
+    description: Represents the output of a <code>CreateApiCache</code> operation.
+  BadRequestException: {}
+  ConcurrentModificationException: {}
+  NotFoundException: {}
+  UnauthorizedException: {}
+  InternalFailureException: {}
   CreateApiKeyResponse:
     type: object
     properties:
       apiKey:
         $ref: '#/definitions/ApiKey'
         description: The API key.
-  BadRequestException: {}
-  NotFoundException: {}
   LimitExceededException: {}
-  UnauthorizedException: {}
-  InternalFailureException: {}
   ApiKeyLimitExceededException: {}
   ApiKeyValidityOutOfBoundsException: {}
   CreateDataSourceResponse:
@@ -2322,6 +2713,19 @@ definitions:
     type: string
   Boolean:
     type: boolean
+  DeltaSyncConfig:
+    type: object
+    properties:
+      baseTableTTL:
+        $ref: '#/definitions/Long'
+        description: The number of minutes an Item is stored in the datasource.
+      deltaSyncTableName:
+        $ref: '#/definitions/String'
+        description: The Delta Sync table name.
+      deltaSyncTableTTL:
+        $ref: '#/definitions/Long'
+        description: The number of minutes a Delta Sync log entry is stored in the Delta Sync table.
+    description: Describes a Delta Sync configuration.
   AuthorizationConfig:
     type: object
     required:
@@ -2357,7 +2761,6 @@ definitions:
         $ref: '#/definitions/String'
         description: AWS secret store ARN for database credentials.
     description: The Amazon RDS HTTP endpoint configuration.
-  ConcurrentModificationException: {}
   CreateFunctionResponse:
     type: object
     properties:
@@ -2411,12 +2814,38 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/String'
+  ConflictHandlerType:
+    type: string
+    enum:
+      - OPTIMISTIC_CONCURRENCY
+      - LAMBDA
+      - AUTOMERGE
+      - NONE
+  ConflictDetectionType:
+    type: string
+    enum:
+      - VERSION
+      - NONE
+  LambdaConflictHandlerConfig:
+    type: object
+    properties:
+      lambdaConflictHandlerArn:
+        $ref: '#/definitions/String'
+        description: The Arn for the Lambda function to use as the Conflict Handler.
+  CachingKeys:
+    type: array
+    items:
+      $ref: '#/definitions/String'
   CreateTypeResponse:
     type: object
     properties:
       type:
         $ref: '#/definitions/Type'
         description: The <code>Type</code> object.
+  DeleteApiCacheResponse:
+    type: object
+    properties: {}
+    description: Represents the output of a <code>DeleteApiCache</code> operation.
   DeleteApiKeyResponse:
     type: object
     properties: {}
@@ -2436,6 +2865,16 @@ definitions:
   DeleteTypeResponse:
     type: object
     properties: {}
+  FlushApiCacheResponse:
+    type: object
+    properties: {}
+    description: Represents the output of a <code>FlushApiCache</code> operation.
+  GetApiCacheResponse:
+    type: object
+    properties:
+      apiCache:
+        $ref: '#/definitions/ApiCache'
+    description: Represents the output of a <code>GetApiCache</code> operation.
   GetDataSourceResponse:
     type: object
     properties:
@@ -2569,6 +3008,13 @@ definitions:
     description: The key for the tag.
     minLength: 1
     maxLength: 128
+  UpdateApiCacheResponse:
+    type: object
+    properties:
+      apiCache:
+        $ref: '#/definitions/ApiCache'
+        description: The <code>ApiCache</code> object.
+    description: Represents the output of a <code>UpdateApiCache</code> operation.
   UpdateApiKeyResponse:
     type: object
     properties:
@@ -2650,6 +3096,50 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AdditionalAuthenticationProvider'
+  ApiCachingBehavior:
+    type: string
+    enum:
+      - FULL_REQUEST_CACHING
+      - PER_RESOLVER_CACHING
+  ApiCacheType:
+    type: string
+    enum:
+      - T2_SMALL
+      - T2_MEDIUM
+      - R4_LARGE
+      - R4_XLARGE
+      - R4_2XLARGE
+      - R4_4XLARGE
+      - R4_8XLARGE
+  ApiCacheStatus:
+    type: string
+    enum:
+      - AVAILABLE
+      - CREATING
+      - DELETING
+      - MODIFYING
+      - FAILED
+  ApiCache:
+    type: object
+    properties:
+      ttl:
+        $ref: '#/definitions/Long'
+        description: <p>TTL in seconds for cache entries.</p> <p>Valid values are between 1 and 3600 seconds.</p>
+      apiCachingBehavior:
+        $ref: '#/definitions/ApiCachingBehavior'
+        description: '<p>Caching behavior.</p> <ul> <li> <p> <b>FULL_REQUEST_CACHING</b>: All requests are fully cached.</p> </li> <li> <p> <b>PER_RESOLVER_CACHING</b>: Individual resovlers that you specify are cached.</p> </li> </ul>'
+      transitEncryptionEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Transit encryption flag when connecting to cache. This setting cannot be updated after creation.
+      atRestEncryptionEnabled:
+        $ref: '#/definitions/Boolean'
+        description: At rest encryption flag for cache. This setting cannot be updated after creation.
+      type:
+        $ref: '#/definitions/ApiCacheType'
+        description: '<p>The cache instance type.</p> <ul> <li> <p> <b>T2_SMALL</b>: A t2.small instance type.</p> </li> <li> <p> <b>T2_MEDIUM</b>: A t2.medium instance type.</p> </li> <li> <p> <b>R4_LARGE</b>: A r4.large instance type.</p> </li> <li> <p> <b>R4_XLARGE</b>: A r4.xlarge instance type.</p> </li> <li> <p> <b>R4_2XLARGE</b>: A r4.2xlarge instance type.</p> </li> <li> <p> <b>R4_4XLARGE</b>: A r4.4xlarge instance type.</p> </li> <li> <p> <b>R4_8XLARGE</b>: A r4.8xlarge instance type.</p> </li> </ul>'
+      status:
+        $ref: '#/definitions/ApiCacheStatus'
+        description: '<p>The cache instance status.</p> <ul> <li> <p> <b>AVAILABLE</b>: The instance is available for use.</p> </li> <li> <p> <b>CREATING</b>: The instance is currently creating.</p> </li> <li> <p> <b>DELETING</b>: The instance is currently deleting.</p> </li> <li> <p> <b>MODIFYING</b>: The instance is currently modifying.</p> </li> <li> <p> <b>FAILED</b>: The instance has failed creation.</p> </li> </ul>'
   ApiKey:
     type: object
     properties:
@@ -2685,6 +3175,39 @@ definitions:
     type: string
   BooleanValue:
     type: boolean
+  CachingConfig:
+    type: object
+    properties:
+      ttl:
+        $ref: '#/definitions/Long'
+        description: <p>The TTL in seconds for a resolver that has caching enabled.</p> <p>Valid values are between 1 and 3600 seconds.</p>
+      cachingKeys:
+        $ref: '#/definitions/CachingKeys'
+        description: <p>The caching keys for a resolver that has caching enabled.</p> <p>Valid values are entries from the <code>$context.identity</code> and <code>$context.arguments</code> maps.</p>
+    description: The caching configuration for a resolver that has caching enabled.
+  CreateApiCacheRequest:
+    type: object
+    required:
+      - ttl
+      - apiCachingBehavior
+      - type
+    properties:
+      ttl:
+        $ref: '#/definitions/Long'
+        description: <p>TTL in seconds for cache entries.</p> <p>Valid values are between 1 and 3600 seconds.</p>
+      transitEncryptionEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Transit encryption flag when connecting to cache. This setting cannot be updated after creation.
+      atRestEncryptionEnabled:
+        $ref: '#/definitions/Boolean'
+        description: At rest encryption flag for cache. This setting cannot be updated after creation.
+      apiCachingBehavior:
+        $ref: '#/definitions/ApiCachingBehavior'
+        description: '<p>Caching behavior.</p> <ul> <li> <p> <b>FULL_REQUEST_CACHING</b>: All requests are fully cached.</p> </li> <li> <p> <b>PER_RESOLVER_CACHING</b>: Individual resovlers that you specify are cached.</p> </li> </ul>'
+      type:
+        $ref: '#/definitions/ApiCacheType'
+        description: '<p>The cache instance type.</p> <ul> <li> <p> <b>T2_SMALL</b>: A t2.small instance type.</p> </li> <li> <p> <b>T2_MEDIUM</b>: A t2.medium instance type.</p> </li> <li> <p> <b>R4_LARGE</b>: A r4.large instance type.</p> </li> <li> <p> <b>R4_XLARGE</b>: A r4.xlarge instance type.</p> </li> <li> <p> <b>R4_2XLARGE</b>: A r4.2xlarge instance type.</p> </li> <li> <p> <b>R4_4XLARGE</b>: A r4.4xlarge instance type.</p> </li> <li> <p> <b>R4_8XLARGE</b>: A r4.8xlarge instance type.</p> </li> </ul>'
+    description: Represents the input of a <code>CreateApiCache</code> operation.
   CreateApiKeyRequest:
     type: object
     properties:
@@ -2697,6 +3220,8 @@ definitions:
   ResourceName:
     type: string
     pattern: '[_A-Za-z][_0-9A-Za-z]*'
+    minLength: 1
+    maxLength: 65536
   DataSourceType:
     type: string
     enum:
@@ -2721,6 +3246,12 @@ definitions:
       useCallerCredentials:
         $ref: '#/definitions/Boolean'
         description: Set to TRUE to use Amazon Cognito credentials with this data source.
+      deltaSyncConfig:
+        $ref: '#/definitions/DeltaSyncConfig'
+        description: The <code>DeltaSyncConfig</code> for a versioned datasource.
+      versioned:
+        $ref: '#/definitions/Boolean'
+        description: Set to TRUE to use Conflict Detection and Resolution with this data source.
     description: Describes an Amazon DynamoDB data source configuration.
   LambdaDataSourceConfig:
     type: object
@@ -3005,6 +3536,19 @@ definitions:
         $ref: '#/definitions/FunctionsIds'
         description: A list of <code>Function</code> objects.
     description: The pipeline configuration for a resolver of kind <code>PIPELINE</code>.
+  SyncConfig:
+    type: object
+    properties:
+      conflictHandler:
+        $ref: '#/definitions/ConflictHandlerType'
+        description: '<p>The Conflict Resolution strategy to perform in the event of a conflict.</p> <ul> <li> <p> <b>OPTIMISTIC_CONCURRENCY</b>: Resolve conflicts by rejecting mutations when versions do not match the latest version at the server.</p> </li> <li> <p> <b>AUTOMERGE</b>: Resolve conflicts with the Automerge conflict resolution strategy.</p> </li> <li> <p> <b>LAMBDA</b>: Resolve conflicts with a Lambda function supplied in the LambdaConflictHandlerConfig.</p> </li> </ul>'
+      conflictDetection:
+        $ref: '#/definitions/ConflictDetectionType'
+        description: '<p>The Conflict Detection strategy to use.</p> <ul> <li> <p> <b>VERSION</b>: Detect conflicts based on object versions for this resolver.</p> </li> <li> <p> <b>NONE</b>: Do not detect conflicts when executing this resolver.</p> </li> </ul>'
+      lambdaConflictHandlerConfig:
+        $ref: '#/definitions/LambdaConflictHandlerConfig'
+        description: The <code>LambdaConflictHandlerConfig</code> when configuring LAMBDA as the Conflict Handler.
+    description: <p>Describes a Sync configuration for a resolver.</p> <p>Contains information on which Conflict Detection as well as Resolution strategy should be performed when the resolver is invoked.</p>
   CreateResolverRequest:
     type: object
     required:
@@ -3029,6 +3573,12 @@ definitions:
       pipelineConfig:
         $ref: '#/definitions/PipelineConfig'
         description: The <code>PipelineConfig</code>.
+      syncConfig:
+        $ref: '#/definitions/SyncConfig'
+        description: The <code>SyncConfig</code> for a resolver attached to a versioned datasource.
+      cachingConfig:
+        $ref: '#/definitions/CachingConfig'
+        description: The caching configuration for the resolver.
   Resolver:
     type: object
     properties:
@@ -3056,6 +3606,12 @@ definitions:
       pipelineConfig:
         $ref: '#/definitions/PipelineConfig'
         description: The <code>PipelineConfig</code>.
+      syncConfig:
+        $ref: '#/definitions/SyncConfig'
+        description: The <code>SyncConfig</code> for a resolver attached to a versioned datasource.
+      cachingConfig:
+        $ref: '#/definitions/CachingConfig'
+        description: The caching configuration for the resolver.
     description: Describes a resolver.
   TypeDefinitionFormat:
     type: string
@@ -3097,6 +3653,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/DataSource'
+  DeleteApiCacheRequest:
+    type: object
+    properties: {}
+    description: Represents the input of a <code>DeleteApiCache</code> operation.
   DeleteApiKeyRequest:
     type: object
     properties: {}
@@ -3115,10 +3675,18 @@ definitions:
   DeleteTypeRequest:
     type: object
     properties: {}
+  FlushApiCacheRequest:
+    type: object
+    properties: {}
+    description: Represents the input of a <code>FlushApiCache</code> operation.
   Functions:
     type: array
     items:
       $ref: '#/definitions/FunctionConfiguration'
+  GetApiCacheRequest:
+    type: object
+    properties: {}
+    description: Represents the input of a <code>GetApiCache</code> operation.
   GetDataSourceRequest:
     type: object
     properties: {}
@@ -3165,6 +3733,8 @@ definitions:
   PaginationToken:
     type: string
     pattern: '[\\S]+'
+    minLength: 1
+    maxLength: 65536
   MaxResults:
     type: integer
     minimum: 0
@@ -3231,6 +3801,23 @@ definitions:
   UntagResourceRequest:
     type: object
     properties: {}
+  UpdateApiCacheRequest:
+    type: object
+    required:
+      - ttl
+      - apiCachingBehavior
+      - type
+    properties:
+      ttl:
+        $ref: '#/definitions/Long'
+        description: <p>TTL in seconds for cache entries.</p> <p>Valid values are between 1 and 3600 seconds.</p>
+      apiCachingBehavior:
+        $ref: '#/definitions/ApiCachingBehavior'
+        description: '<p>Caching behavior.</p> <ul> <li> <p> <b>FULL_REQUEST_CACHING</b>: All requests are fully cached.</p> </li> <li> <p> <b>PER_RESOLVER_CACHING</b>: Individual resovlers that you specify are cached.</p> </li> </ul>'
+      type:
+        $ref: '#/definitions/ApiCacheType'
+        description: '<p>The cache instance type.</p> <ul> <li> <p> <b>T2_SMALL</b>: A t2.small instance type.</p> </li> <li> <p> <b>T2_MEDIUM</b>: A t2.medium instance type.</p> </li> <li> <p> <b>R4_LARGE</b>: A r4.large instance type.</p> </li> <li> <p> <b>R4_XLARGE</b>: A r4.xlarge instance type.</p> </li> <li> <p> <b>R4_2XLARGE</b>: A r4.2xlarge instance type.</p> </li> <li> <p> <b>R4_4XLARGE</b>: A r4.4xlarge instance type.</p> </li> <li> <p> <b>R4_8XLARGE</b>: A r4.8xlarge instance type.</p> </li> </ul>'
+    description: Represents the input of a <code>UpdateApiCache</code> operation.
   UpdateApiKeyRequest:
     type: object
     properties:
@@ -3338,6 +3925,12 @@ definitions:
       pipelineConfig:
         $ref: '#/definitions/PipelineConfig'
         description: The <code>PipelineConfig</code>.
+      syncConfig:
+        $ref: '#/definitions/SyncConfig'
+        description: The <code>SyncConfig</code> for a resolver attached to a versioned datasource.
+      cachingConfig:
+        $ref: '#/definitions/CachingConfig'
+        description: The caching configuration for the resolver.
   UpdateTypeRequest:
     type: object
     required:

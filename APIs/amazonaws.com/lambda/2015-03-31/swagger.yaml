@@ -293,7 +293,7 @@ paths:
   '/2015-03-31/functions/{FunctionName}/policy':
     post:
       operationId: AddPermission
-      description: '<p>Grants an AWS service or another account permission to use a function. You can apply the policy at the function level, or specify a qualifier to restrict access to a single version or alias. If you use a qualifier, the invoker must use the full Amazon Resource Name (ARN) of that version or alias to invoke the function.</p> <p>To grant permission to another account, specify the account ID as the <code>Principal</code>. For AWS services, the principal is a domain-style identifier defined by the service, like <code>s3.amazonaws.com</code> or <code>sns.amazonaws.com</code>. For AWS services, you can also specify the ARN or owning account of the associated resource as the <code>SourceArn</code> or <code>SourceAccount</code>. If you grant permission to a service principal without specifying the source, other accounts could potentially configure resources in their account to invoke your Lambda function.</p> <p>This action adds a statement to a resource-based permission policy for the function. For more information about function policies, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html">Lambda Function Policies</a>. </p>'
+      description: '<p>Grants an AWS service or another account permission to use a function. You can apply the policy at the function level, or specify a qualifier to restrict access to a single version or alias. If you use a qualifier, the invoker must use the full Amazon Resource Name (ARN) of that version or alias to invoke the function.</p> <p>To grant permission to another account, specify the account ID as the <code>Principal</code>. For AWS services, the principal is a domain-style identifier defined by the service, like <code>s3.amazonaws.com</code> or <code>sns.amazonaws.com</code>. For AWS services, you can also specify the ARN or owning account of the associated resource as the <code>SourceArn</code> or <code>SourceAccount</code>. If you grant permission to a service principal without specifying the source, other accounts could potentially configure resources in their account to invoke your Lambda function.</p> <p>This action adds a statement to a resource-based permissions policy for the function. For more information about function policies, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html">Lambda Function Policies</a>. </p>'
       responses:
         '201':
           description: Success
@@ -569,7 +569,7 @@ paths:
   /2015-03-31/event-source-mappings/:
     post:
       operationId: CreateEventSourceMapping
-      description: '<p>Creates a mapping between an event source and an AWS Lambda function. Lambda reads items from the event source and triggers the function.</p> <p>For details about each event source type, see the following topics.</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html">Using AWS Lambda with Amazon Kinesis</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html">Using AWS Lambda with Amazon SQS</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html">Using AWS Lambda with Amazon DynamoDB</a> </p> </li> </ul>'
+      description: '<p>Creates a mapping between an event source and an AWS Lambda function. Lambda reads items from the event source and triggers the function.</p> <p>For details about each event source type, see the following topics.</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html">Using AWS Lambda with Amazon DynamoDB</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html">Using AWS Lambda with Amazon Kinesis</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html">Using AWS Lambda with Amazon SQS</a> </p> </li> </ul> <p>The following error handling options are only available for stream sources (DynamoDB and Kinesis):</p> <ul> <li> <p> <code>BisectBatchOnFunctionError</code> - If the function returns an error, split the batch in two and retry.</p> </li> <li> <p> <code>DestinationConfig</code> - Send discarded records to an Amazon SQS queue or Amazon SNS topic.</p> </li> <li> <p> <code>MaximumRecordAgeInSeconds</code> - Discard records older than the specified age.</p> </li> <li> <p> <code>MaximumRetryAttempts</code> - Discard records after the specified number of retries.</p> </li> </ul>'
       responses:
         '202':
           description: Success
@@ -624,10 +624,15 @@ paths:
                 minimum: 1
                 maximum: 10000
               MaximumBatchingWindowInSeconds:
-                description: ''
+                description: 'The maximum amount of time to gather records before invoking the function, in seconds.'
                 type: integer
                 minimum: 0
                 maximum: 300
+              ParallelizationFactor:
+                description: (Streams) The number of batches to process from each shard concurrently.
+                type: integer
+                minimum: 1
+                maximum: 10
               StartingPosition:
                 description: The position in a stream from which to start reading. Required for Amazon Kinesis and Amazon DynamoDB Streams sources. <code>AT_TIMESTAMP</code> is only supported for Amazon Kinesis streams.
                 type: string
@@ -639,6 +644,29 @@ paths:
                 description: 'With <code>StartingPosition</code> set to <code>AT_TIMESTAMP</code>, the time from which to start reading.'
                 type: string
                 format: date-time
+              DestinationConfig:
+                description: A configuration object that specifies the destination of an event after Lambda processes it.
+                type: object
+                properties:
+                  OnSuccess:
+                    $ref: '#/definitions/OnSuccess'
+                    description: The destination configuration for successful invocations.
+                  OnFailure:
+                    $ref: '#/definitions/OnFailure'
+                    description: The destination configuration for failed invocations.
+              MaximumRecordAgeInSeconds:
+                description: (Streams) The maximum age of a record that Lambda sends to a function for processing.
+                type: integer
+                minimum: 60
+                maximum: 604800
+              BisectBatchOnFunctionError:
+                description: '(Streams) If the function returns an error, split the batch in two and retry.'
+                type: boolean
+              MaximumRetryAttempts:
+                description: (Streams) The maximum number of times to retry when the function returns an error.
+                type: integer
+                minimum: 0
+                maximum: 10000
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -701,7 +729,7 @@ paths:
   /2015-03-31/functions:
     post:
       operationId: CreateFunction
-      description: '<p>Creates a Lambda function. To create a function, you need a <a href="https://docs.aws.amazon.com/lambda/latest/dg/deployment-package-v2.html">deployment package</a> and an <a href="https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role">execution role</a>. The deployment package contains your function code. The execution role grants the function permission to use AWS services, such as Amazon CloudWatch Logs for log streaming and AWS X-Ray for request tracing.</p> <p>A function has an unpublished version, and can have published versions and aliases. The unpublished version changes when you update your function''s code and configuration. A published version is a snapshot of your function code and configuration that can''t be changed. An alias is a named resource that maps to a version, and can be changed to map to a different version. Use the <code>Publish</code> parameter to create version <code>1</code> of your function from its initial configuration.</p> <p>The other parameters let you configure version-specific and function-level settings. You can modify version-specific settings later with <a>UpdateFunctionConfiguration</a>. Function-level settings apply to both the unpublished and published versions of the function, and include tags (<a>TagResource</a>) and per-function concurrency limits (<a>PutFunctionConcurrency</a>).</p> <p>If another account or an AWS service invokes your function, use <a>AddPermission</a> to grant permission by creating a resource-based IAM policy. You can grant permissions at the function level, on a version, or on an alias.</p> <p>To invoke your function directly, use <a>Invoke</a>. To invoke your function in response to events in other AWS services, create an event source mapping (<a>CreateEventSourceMapping</a>), or configure a function trigger in the other service. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/invoking-lambda-functions.html">Invoking Functions</a>.</p>'
+      description: '<p>Creates a Lambda function. To create a function, you need a <a href="https://docs.aws.amazon.com/lambda/latest/dg/deployment-package-v2.html">deployment package</a> and an <a href="https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role">execution role</a>. The deployment package contains your function code. The execution role grants the function permission to use AWS services, such as Amazon CloudWatch Logs for log streaming and AWS X-Ray for request tracing.</p> <p>When you create a function, Lambda provisions an instance of the function and its supporting resources. If your function connects to a VPC, this process can take a minute or so. During this time, you can''t invoke or modify the function. The <code>State</code>, <code>StateReason</code>, and <code>StateReasonCode</code> fields in the response from <a>GetFunctionConfiguration</a> indicate when the function is ready to invoke. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html">Function States</a>.</p> <p>A function has an unpublished version, and can have published versions and aliases. The unpublished version changes when you update your function''s code and configuration. A published version is a snapshot of your function code and configuration that can''t be changed. An alias is a named resource that maps to a version, and can be changed to map to a different version. Use the <code>Publish</code> parameter to create version <code>1</code> of your function from its initial configuration.</p> <p>The other parameters let you configure version-specific and function-level settings. You can modify version-specific settings later with <a>UpdateFunctionConfiguration</a>. Function-level settings apply to both the unpublished and published versions of the function, and include tags (<a>TagResource</a>) and per-function concurrency limits (<a>PutFunctionConcurrency</a>).</p> <p>If another account or an AWS service invokes your function, use <a>AddPermission</a> to grant permission by creating a resource-based IAM policy. You can grant permissions at the function level, on a version, or on an alias.</p> <p>To invoke your function directly, use <a>Invoke</a>. To invoke your function in response to events in other AWS services, create an event source mapping (<a>CreateEventSourceMapping</a>), or configure a function trigger in the other service. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-invocation.html">Invoking Functions</a>.</p>'
       responses:
         '201':
           description: Success
@@ -759,10 +787,13 @@ paths:
                   - nodejs6.10
                   - nodejs8.10
                   - nodejs10.x
+                  - nodejs12.x
                   - java8
+                  - java11
                   - python2.7
                   - python3.6
                   - python3.7
+                  - python3.8
                   - dotnetcore1.0
                   - dotnetcore2.0
                   - dotnetcore2.1
@@ -813,7 +844,7 @@ paths:
                 description: Set to true to publish the first version of the function during creation.
                 type: boolean
               VpcConfig:
-                description: The VPC security groups and subnets that are attached to a Lambda function.
+                description: 'The VPC security groups and subnets that are attached to a Lambda function. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html">VPC Settings</a>.'
                 type: object
                 properties:
                   SubnetIds:
@@ -823,7 +854,7 @@ paths:
                     $ref: '#/definitions/SecurityGroupIds'
                     description: A list of VPC security groups IDs.
               DeadLetterConfig:
-                description: 'The <a href="https://docs.aws.amazon.com/lambda/latest/dg/dlq.html">dead letter queue</a> for failed asynchronous invocations.'
+                description: 'The <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq">dead-letter queue</a> for failed asynchronous invocations.'
                 type: object
                 properties:
                   TargetArn:
@@ -978,6 +1009,10 @@ paths:
           description: PreconditionFailedException
           schema:
             $ref: '#/definitions/PreconditionFailedException'
+        '485':
+          description: ResourceConflictException
+          schema:
+            $ref: '#/definitions/ResourceConflictException'
       parameters:
         - name: FunctionName
           in: path
@@ -1025,7 +1060,7 @@ paths:
   '/2015-03-31/event-source-mappings/{UUID}':
     delete:
       operationId: DeleteEventSourceMapping
-      description: 'Deletes an <a href="https://docs.aws.amazon.com/lambda/latest/dg/intro-invocation-modes.html">event source mapping</a>. You can get the identifier of a mapping from the output of <a>ListEventSourceMappings</a>.'
+      description: '<p>Deletes an <a href="https://docs.aws.amazon.com/lambda/latest/dg/intro-invocation-modes.html">event source mapping</a>. You can get the identifier of a mapping from the output of <a>ListEventSourceMappings</a>.</p> <p>When you delete an event source mapping, it enters a <code>Deleting</code> state and might not be completely deleted for several seconds.</p>'
       responses:
         '202':
           description: Success
@@ -1097,7 +1132,7 @@ paths:
           type: string
     put:
       operationId: UpdateEventSourceMapping
-      description: 'Updates an event source mapping. You can change the function that AWS Lambda invokes, or pause invocation and resume later from the same location.'
+      description: '<p>Updates an event source mapping. You can change the function that AWS Lambda invokes, or pause invocation and resume later from the same location.</p> <p>The following error handling options are only available for stream sources (DynamoDB and Kinesis):</p> <ul> <li> <p> <code>BisectBatchOnFunctionError</code> - If the function returns an error, split the batch in two and retry.</p> </li> <li> <p> <code>DestinationConfig</code> - Send discarded records to an Amazon SQS queue or Amazon SNS topic.</p> </li> <li> <p> <code>MaximumRecordAgeInSeconds</code> - Discard records older than the specified age.</p> </li> <li> <p> <code>MaximumRetryAttempts</code> - Discard records after the specified number of retries.</p> </li> </ul>'
       responses:
         '202':
           description: Success
@@ -1154,10 +1189,38 @@ paths:
                 minimum: 1
                 maximum: 10000
               MaximumBatchingWindowInSeconds:
-                description: ''
+                description: 'The maximum amount of time to gather records before invoking the function, in seconds.'
                 type: integer
                 minimum: 0
                 maximum: 300
+              DestinationConfig:
+                description: A configuration object that specifies the destination of an event after Lambda processes it.
+                type: object
+                properties:
+                  OnSuccess:
+                    $ref: '#/definitions/OnSuccess'
+                    description: The destination configuration for successful invocations.
+                  OnFailure:
+                    $ref: '#/definitions/OnFailure'
+                    description: The destination configuration for failed invocations.
+              MaximumRecordAgeInSeconds:
+                description: (Streams) The maximum age of a record that Lambda sends to a function for processing.
+                type: integer
+                minimum: 60
+                maximum: 604800
+              BisectBatchOnFunctionError:
+                description: '(Streams) If the function returns an error, split the batch in two and retry.'
+                type: boolean
+              MaximumRetryAttempts:
+                description: (Streams) The maximum number of times to retry when the function returns an error.
+                type: integer
+                minimum: 0
+                maximum: 10000
+              ParallelizationFactor:
+                description: (Streams) The number of batches to process from each shard concurrently.
+                type: integer
+                minimum: 1
+                maximum: 10
   '/2015-03-31/functions/{FunctionName}':
     delete:
       operationId: DeleteFunction
@@ -1274,6 +1337,10 @@ paths:
           description: InvalidParameterValueException
           schema:
             $ref: '#/definitions/InvalidParameterValueException'
+        '484':
+          description: ResourceConflictException
+          schema:
+            $ref: '#/definitions/ResourceConflictException'
       parameters:
         - name: FunctionName
           in: path
@@ -1315,6 +1382,10 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
+        '484':
+          description: ResourceConflictException
+          schema:
+            $ref: '#/definitions/ResourceConflictException'
       parameters:
         - name: FunctionName
           in: path
@@ -1336,6 +1407,229 @@ paths:
                 description: The number of simultaneous executions to reserve for the function.
                 type: integer
                 minimum: 0
+  '/2019-09-25/functions/{FunctionName}/event-invoke-config':
+    delete:
+      operationId: DeleteFunctionEventInvokeConfig
+      description: '<p>Deletes the configuration for asynchronous invocation for a function, version, or alias.</p> <p>To configure options for asynchronous invocation, use <a>PutFunctionEventInvokeConfig</a>.</p>'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: FunctionName
+          in: path
+          required: true
+          description: '<p>The name of the Lambda function, version, or alias.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>my-function</code> (name-only), <code>my-function:v1</code> (with alias).</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>You can append a version number or alias to any of the formats. The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+          type: string
+          pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+          minLength: 1
+          maxLength: 140
+        - name: Qualifier
+          in: query
+          required: false
+          description: A version number or alias name.
+          type: string
+          pattern: '(|[a-zA-Z0-9$_-]+)'
+          minLength: 1
+          maxLength: 128
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetFunctionEventInvokeConfig
+      description: '<p>Retrieves the configuration for asynchronous invocation for a function, version, or alias.</p> <p>To configure options for asynchronous invocation, use <a>PutFunctionEventInvokeConfig</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/FunctionEventInvokeConfig'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: FunctionName
+          in: path
+          required: true
+          description: '<p>The name of the Lambda function, version, or alias.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>my-function</code> (name-only), <code>my-function:v1</code> (with alias).</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>You can append a version number or alias to any of the formats. The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+          type: string
+          pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+          minLength: 1
+          maxLength: 140
+        - name: Qualifier
+          in: query
+          required: false
+          description: A version number or alias name.
+          type: string
+          pattern: '(|[a-zA-Z0-9$_-]+)'
+          minLength: 1
+          maxLength: 128
+    put:
+      operationId: PutFunctionEventInvokeConfig
+      description: '<p>Configures options for <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html">asynchronous invocation</a> on a function, version, or alias.</p> <p>By default, Lambda retries an asynchronous invocation twice if the function returns an error. It retains events in a queue for up to six hours. When an event fails all processing attempts or stays in the asynchronous invocation queue for too long, Lambda discards it. To retain discarded events, configure a dead-letter queue with <a>UpdateFunctionConfiguration</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/FunctionEventInvokeConfig'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: FunctionName
+          in: path
+          required: true
+          description: '<p>The name of the Lambda function, version, or alias.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>my-function</code> (name-only), <code>my-function:v1</code> (with alias).</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>You can append a version number or alias to any of the formats. The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+          type: string
+          pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+          minLength: 1
+          maxLength: 140
+        - name: Qualifier
+          in: query
+          required: false
+          description: A version number or alias name.
+          type: string
+          pattern: '(|[a-zA-Z0-9$_-]+)'
+          minLength: 1
+          maxLength: 128
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              MaximumRetryAttempts:
+                description: The maximum number of times to retry when the function returns an error.
+                type: integer
+                minimum: 0
+                maximum: 2
+              MaximumEventAgeInSeconds:
+                description: The maximum age of a request that Lambda sends to a function for processing.
+                type: integer
+                minimum: 60
+                maximum: 21600
+              DestinationConfig:
+                description: A configuration object that specifies the destination of an event after Lambda processes it.
+                type: object
+                properties:
+                  OnSuccess:
+                    $ref: '#/definitions/OnSuccess'
+                    description: The destination configuration for successful invocations.
+                  OnFailure:
+                    $ref: '#/definitions/OnFailure'
+                    description: The destination configuration for failed invocations.
+    post:
+      operationId: UpdateFunctionEventInvokeConfig
+      description: '<p>Updates the configuration for asynchronous invocation for a function, version, or alias.</p> <p>To configure options for asynchronous invocation, use <a>PutFunctionEventInvokeConfig</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/FunctionEventInvokeConfig'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: FunctionName
+          in: path
+          required: true
+          description: '<p>The name of the Lambda function, version, or alias.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>my-function</code> (name-only), <code>my-function:v1</code> (with alias).</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>You can append a version number or alias to any of the formats. The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+          type: string
+          pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+          minLength: 1
+          maxLength: 140
+        - name: Qualifier
+          in: query
+          required: false
+          description: A version number or alias name.
+          type: string
+          pattern: '(|[a-zA-Z0-9$_-]+)'
+          minLength: 1
+          maxLength: 128
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              MaximumRetryAttempts:
+                description: The maximum number of times to retry when the function returns an error.
+                type: integer
+                minimum: 0
+                maximum: 2
+              MaximumEventAgeInSeconds:
+                description: The maximum age of a request that Lambda sends to a function for processing.
+                type: integer
+                minimum: 60
+                maximum: 21600
+              DestinationConfig:
+                description: A configuration object that specifies the destination of an event after Lambda processes it.
+                type: object
+                properties:
+                  OnSuccess:
+                    $ref: '#/definitions/OnSuccess'
+                    description: The destination configuration for successful invocations.
+                  OnFailure:
+                    $ref: '#/definitions/OnFailure'
+                    description: The destination configuration for failed invocations.
   '/2018-10-31/layers/{LayerName}/versions/{VersionNumber}':
     delete:
       operationId: DeleteLayerVersion
@@ -1489,7 +1783,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     put:
       operationId: UpdateFunctionConfiguration
-      description: '<p>Modify the version-specific settings of a Lambda function.</p> <p>These settings can vary between versions of a function and are locked when you publish a version. You can''t modify the configuration of a published version, only the unpublished version.</p> <p>To configure function concurrency, use <a>PutFunctionConcurrency</a>. To grant invoke permissions to an account or AWS service, use <a>AddPermission</a>.</p>'
+      description: '<p>Modify the version-specific settings of a Lambda function.</p> <p>When you update a function, Lambda provisions an instance of the function and its supporting resources. If your function connects to a VPC, this process can take a minute. During this time, you can''t modify the function, but you can still invoke it. The <code>LastUpdateStatus</code>, <code>LastUpdateStatusReason</code>, and <code>LastUpdateStatusReasonCode</code> fields in the response from <a>GetFunctionConfiguration</a> indicate when the update is complete and the function is processing events with the new configuration. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html">Function States</a>.</p> <p>These settings can vary between versions of a function and are locked when you publish a version. You can''t modify the configuration of a published version, only the unpublished version.</p> <p>To configure function concurrency, use <a>PutFunctionConcurrency</a>. To grant invoke permissions to an account or AWS service, use <a>AddPermission</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1558,7 +1852,7 @@ paths:
                 minimum: 128
                 maximum: 3008
               VpcConfig:
-                description: The VPC security groups and subnets that are attached to a Lambda function.
+                description: 'The VPC security groups and subnets that are attached to a Lambda function. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html">VPC Settings</a>.'
                 type: object
                 properties:
                   SubnetIds:
@@ -1583,10 +1877,13 @@ paths:
                   - nodejs6.10
                   - nodejs8.10
                   - nodejs10.x
+                  - nodejs12.x
                   - java8
+                  - java11
                   - python2.7
                   - python3.6
                   - python3.7
+                  - python3.8
                   - dotnetcore1.0
                   - dotnetcore2.0
                   - dotnetcore2.1
@@ -1595,7 +1892,7 @@ paths:
                   - ruby2.5
                   - provided
               DeadLetterConfig:
-                description: 'The <a href="https://docs.aws.amazon.com/lambda/latest/dg/dlq.html">dead letter queue</a> for failed asynchronous invocations.'
+                description: 'The <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq">dead-letter queue</a> for failed asynchronous invocations.'
                 type: object
                 properties:
                   TargetArn:
@@ -1671,7 +1968,7 @@ paths:
   '/2015-03-31/functions/{FunctionName}/invocations':
     post:
       operationId: Invoke
-      description: '<p>Invokes a Lambda function. You can invoke a function synchronously (and wait for the response), or asynchronously. To invoke a function asynchronously, set <code>InvocationType</code> to <code>Event</code>.</p> <p>For synchronous invocation, details about the function response, including errors, are included in the response body and headers. For either invocation type, you can find more information in the <a href="https://docs.aws.amazon.com/lambda/latest/dg/monitoring-functions.html">execution log</a> and <a href="https://docs.aws.amazon.com/lambda/latest/dg/dlq.html">trace</a>. To record function errors for asynchronous invocations, configure your function with a <a href="https://docs.aws.amazon.com/lambda/latest/dg/dlq.html">dead letter queue</a>.</p> <p>When an error occurs, your function may be invoked multiple times. Retry behavior varies by error type, client, event source, and invocation type. For example, if you invoke a function asynchronously and it returns an error, Lambda executes the function up to two more times. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/retries-on-errors.html">Retry Behavior</a>.</p> <p>The status code in the API response doesn''t reflect function errors. Error codes are reserved for errors that prevent your function from executing, such as permissions errors, <a href="https://docs.aws.amazon.com/lambda/latest/dg/limits.html">limit errors</a>, or issues with your function''s code and configuration. For example, Lambda returns <code>TooManyRequestsException</code> if executing the function would cause you to exceed a concurrency limit at either the account level (<code>ConcurrentInvocationLimitExceeded</code>) or function level (<code>ReservedFunctionConcurrentInvocationLimitExceeded</code>).</p> <p>For functions with a long timeout, your client might be disconnected during synchronous invocation while it waits for a response. Configure your HTTP client, SDK, firewall, proxy, or operating system to allow for long connections with timeout or keep-alive settings.</p> <p>This operation requires permission for the <code>lambda:InvokeFunction</code> action.</p>'
+      description: '<p>Invokes a Lambda function. You can invoke a function synchronously (and wait for the response), or asynchronously. To invoke a function asynchronously, set <code>InvocationType</code> to <code>Event</code>.</p> <p>For <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-sync.html">synchronous invocation</a>, details about the function response, including errors, are included in the response body and headers. For either invocation type, you can find more information in the <a href="https://docs.aws.amazon.com/lambda/latest/dg/monitoring-functions.html">execution log</a> and <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-x-ray.html">trace</a>.</p> <p>When an error occurs, your function may be invoked multiple times. Retry behavior varies by error type, client, event source, and invocation type. For example, if you invoke a function asynchronously and it returns an error, Lambda executes the function up to two more times. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/retries-on-errors.html">Retry Behavior</a>.</p> <p>For <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html">asynchronous invocation</a>, Lambda adds events to a queue before sending them to your function. If your function does not have enough capacity to keep up with the queue, events may be lost. Occasionally, your function may receive the same event multiple times, even if no error occurs. To retain events that were not processed, configure your function with a <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq">dead-letter queue</a>.</p> <p>The status code in the API response doesn''t reflect function errors. Error codes are reserved for errors that prevent your function from executing, such as permissions errors, <a href="https://docs.aws.amazon.com/lambda/latest/dg/limits.html">limit errors</a>, or issues with your function''s code and configuration. For example, Lambda returns <code>TooManyRequestsException</code> if executing the function would cause you to exceed a concurrency limit at either the account level (<code>ConcurrentInvocationLimitExceeded</code>) or function level (<code>ReservedFunctionConcurrentInvocationLimitExceeded</code>).</p> <p>For functions with a long timeout, your client might be disconnected during synchronous invocation while it waits for a response. Configure your HTTP client, SDK, firewall, proxy, or operating system to allow for long connections with timeout or keep-alive settings.</p> <p>This operation requires permission for the <code>lambda:InvokeFunction</code> action.</p>'
       responses:
         '200':
           description: Success
@@ -1757,6 +2054,14 @@ paths:
           description: InvalidRuntimeException
           schema:
             $ref: '#/definitions/InvalidRuntimeException'
+        '500':
+          description: ResourceConflictException
+          schema:
+            $ref: '#/definitions/ResourceConflictException'
+        '501':
+          description: ResourceNotReadyException
+          schema:
+            $ref: '#/definitions/ResourceNotReadyException'
       parameters:
         - name: FunctionName
           in: path
@@ -1840,6 +2145,10 @@ paths:
           description: InvalidRuntimeException
           schema:
             $ref: '#/definitions/InvalidRuntimeException'
+        '484':
+          description: ResourceConflictException
+          schema:
+            $ref: '#/definitions/ResourceConflictException'
       parameters:
         - name: FunctionName
           in: path
@@ -1860,6 +2169,60 @@ paths:
               InvokeArgs:
                 description: The JSON that you want to provide to your Lambda function as input.
                 type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/2019-09-25/functions/{FunctionName}/event-invoke-config/list':
+    get:
+      operationId: ListFunctionEventInvokeConfigs
+      description: '<p>Retrieves a list of configurations for asynchronous invocation for a function.</p> <p>To configure options for asynchronous invocation, use <a>PutFunctionEventInvokeConfig</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListFunctionEventInvokeConfigsResponse'
+        '480':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '483':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+      parameters:
+        - name: FunctionName
+          in: path
+          required: true
+          description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>my-function</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+          type: string
+          pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+          minLength: 1
+          maxLength: 140
+        - name: Marker
+          in: query
+          required: false
+          description: Specify the pagination token that's returned by a previous request to retrieve the next page of results.
+          type: string
+        - name: MaxItems
+          in: query
+          required: false
+          description: The maximum number of configurations to return.
+          type: integer
+          minimum: 1
+          maximum: 50
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1960,10 +2323,13 @@ paths:
             - nodejs6.10
             - nodejs8.10
             - nodejs10.x
+            - nodejs12.x
             - java8
+            - java11
             - python2.7
             - python3.6
             - python3.7
+            - python3.8
             - dotnetcore1.0
             - dotnetcore2.0
             - dotnetcore2.1
@@ -2001,7 +2367,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
       operationId: PublishLayerVersion
-      description: '<p>Creates an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">AWS Lambda layer</a> from a ZIP archive. Each time you call <code>PublishLayerVersion</code> with the same version name, a new version is created.</p> <p>Add layers to your function with <a>CreateFunction</a> or <a>UpdateFunctionConfiguration</a>.</p>'
+      description: '<p>Creates an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">AWS Lambda layer</a> from a ZIP archive. Each time you call <code>PublishLayerVersion</code> with the same layer name, a new version is created.</p> <p>Add layers to your function with <a>CreateFunction</a> or <a>UpdateFunctionConfiguration</a>.</p>'
       responses:
         '201':
           description: Success
@@ -2108,10 +2474,13 @@ paths:
             - nodejs6.10
             - nodejs8.10
             - nodejs10.x
+            - nodejs12.x
             - java8
+            - java11
             - python2.7
             - python3.6
             - python3.7
+            - python3.8
             - dotnetcore1.0
             - dotnetcore2.0
             - dotnetcore2.1
@@ -2307,6 +2676,10 @@ paths:
           description: PreconditionFailedException
           schema:
             $ref: '#/definitions/PreconditionFailedException'
+        '486':
+          description: ResourceConflictException
+          schema:
+            $ref: '#/definitions/ResourceConflictException'
       parameters:
         - name: FunctionName
           in: path
@@ -2538,6 +2911,10 @@ paths:
           description: PreconditionFailedException
           schema:
             $ref: '#/definitions/PreconditionFailedException'
+        '486':
+          description: ResourceConflictException
+          schema:
+            $ref: '#/definitions/ResourceConflictException'
       parameters:
         - name: FunctionName
           in: path
@@ -2666,6 +3043,10 @@ definitions:
         description: The maximum number of items to retrieve in a single batch.
       MaximumBatchingWindowInSeconds:
         $ref: '#/definitions/MaximumBatchingWindowInSeconds'
+        description: 'The maximum amount of time to gather records before invoking the function, in seconds.'
+      ParallelizationFactor:
+        $ref: '#/definitions/ParallelizationFactor'
+        description: (Streams) The number of batches to process from each shard concurrently.
       EventSourceArn:
         $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the event source.
@@ -2674,7 +3055,7 @@ definitions:
         description: The ARN of the Lambda function.
       LastModified:
         $ref: '#/definitions/Date'
-        description: The date that the event source mapping was last updated.
+        description: 'The date that the event source mapping was last updated, or its state changed.'
       LastProcessingResult:
         $ref: '#/definitions/String'
         description: The result of the last AWS Lambda invocation of your Lambda function.
@@ -2683,8 +3064,34 @@ definitions:
         description: 'The state of the event source mapping. It can be one of the following: <code>Creating</code>, <code>Enabling</code>, <code>Enabled</code>, <code>Disabling</code>, <code>Disabled</code>, <code>Updating</code>, or <code>Deleting</code>.'
       StateTransitionReason:
         $ref: '#/definitions/String'
-        description: 'The cause of the last state change, either <code>User initiated</code> or <code>Lambda initiated</code>.'
+        description: 'Indicates whether the last change to the event source mapping was made by a user, or by the Lambda service.'
+      DestinationConfig:
+        $ref: '#/definitions/DestinationConfig'
+        description: (Streams) An Amazon SQS queue or Amazon SNS topic destination for discarded records.
+      MaximumRecordAgeInSeconds:
+        $ref: '#/definitions/MaximumRecordAgeInSeconds'
+        description: (Streams) The maximum age of a record that Lambda sends to a function for processing.
+      BisectBatchOnFunctionError:
+        $ref: '#/definitions/BisectBatchOnFunctionError'
+        description: '(Streams) If the function returns an error, split the batch in two and retry.'
+      MaximumRetryAttempts:
+        $ref: '#/definitions/MaximumRetryAttemptsEventSourceMapping'
+        description: (Streams) The maximum number of times to retry when the function returns an error.
     description: A mapping between an AWS resource and an AWS Lambda function. See <a>CreateEventSourceMapping</a> for details.
+  OnSuccess:
+    type: object
+    properties:
+      Destination:
+        $ref: '#/definitions/DestinationArn'
+        description: The Amazon Resource Name (ARN) of the destination resource.
+    description: A destination for events that were processed successfully.
+  OnFailure:
+    type: object
+    properties:
+      Destination:
+        $ref: '#/definitions/DestinationArn'
+        description: The Amazon Resource Name (ARN) of the destination resource.
+    description: A destination for events that failed processing.
   FunctionConfiguration:
     type: object
     example:
@@ -2749,7 +3156,7 @@ definitions:
         description: The function's environment variables.
       KMSKeyArn:
         $ref: '#/definitions/KMSKeyArn'
-        description: The KMS key that's used to encrypt the function's environment variables. This key is only returned if you've configured a customer-managed CMK.
+        description: The KMS key that's used to encrypt the function's environment variables. This key is only returned if you've configured a customer managed CMK.
       TracingConfig:
         $ref: '#/definitions/TracingConfigResponse'
         description: The function's AWS X-Ray tracing configuration.
@@ -2762,6 +3169,24 @@ definitions:
       Layers:
         $ref: '#/definitions/LayersReferenceList'
         description: 'The function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html"> layers</a>.'
+      State:
+        $ref: '#/definitions/State'
+        description: 'The current state of the function. When the state is <code>Inactive</code>, you can reactivate the function by invoking it.'
+      StateReason:
+        $ref: '#/definitions/StateReason'
+        description: The reason for the function's current state.
+      StateReasonCode:
+        $ref: '#/definitions/StateReasonCode'
+        description: 'The reason code for the function''s current state. When the code is <code>Creating</code>, you can''t invoke or modify the function.'
+      LastUpdateStatus:
+        $ref: '#/definitions/LastUpdateStatus'
+        description: The status of the last update that was performed on the function.
+      LastUpdateStatusReason:
+        $ref: '#/definitions/LastUpdateStatusReason'
+        description: The reason for the last update that was performed on the function.
+      LastUpdateStatusReasonCode:
+        $ref: '#/definitions/LastUpdateStatusReasonCode'
+        description: The reason code for the last update that was performed on the function.
     description: Details about a function's configuration.
   Blob:
     type: string
@@ -2860,6 +3285,24 @@ definitions:
       Concurrency:
         $ref: '#/definitions/Concurrency'
         description: 'The function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html">reserved concurrency</a>.'
+  FunctionEventInvokeConfig:
+    type: object
+    properties:
+      LastModified:
+        $ref: '#/definitions/Date'
+        description: The date and time that the configuration was last updated.
+      FunctionArn:
+        $ref: '#/definitions/FunctionArn'
+        description: The Amazon Resource Name (ARN) of the function.
+      MaximumRetryAttempts:
+        $ref: '#/definitions/MaximumRetryAttempts'
+        description: The maximum number of times to retry when the function returns an error.
+      MaximumEventAgeInSeconds:
+        $ref: '#/definitions/MaximumEventAgeInSeconds'
+        description: The maximum age of a request that Lambda sends to a function for processing.
+      DestinationConfig:
+        $ref: '#/definitions/DestinationConfig'
+        description: <p>A destination for events after they have been sent to a function for processing.</p> <p class="title"> <b>Destinations</b> </p> <ul> <li> <p> <b>Function</b> - The Amazon Resource Name (ARN) of a Lambda function.</p> </li> <li> <p> <b>Queue</b> - The ARN of an SQS queue.</p> </li> <li> <p> <b>Topic</b> - The ARN of an SNS topic.</p> </li> <li> <p> <b>Event Bus</b> - The ARN of an Amazon EventBridge event bus.</p> </li> </ul>
   GetLayerVersionResponse:
     type: object
     properties:
@@ -2937,6 +3380,7 @@ definitions:
   KMSAccessDeniedException: {}
   KMSNotFoundException: {}
   InvalidRuntimeException: {}
+  ResourceNotReadyException: {}
   InvokeAsyncResponse:
     type: object
     example:
@@ -2967,6 +3411,15 @@ definitions:
       EventSourceMappings:
         $ref: '#/definitions/EventSourceMappingsList'
         description: A list of event source mappings.
+  ListFunctionEventInvokeConfigsResponse:
+    type: object
+    properties:
+      FunctionEventInvokeConfigs:
+        $ref: '#/definitions/FunctionEventInvokeConfigList'
+        description: A list of configurations.
+      NextMarker:
+        $ref: '#/definitions/String'
+        description: The pagination token that's included if more results are available.
   ListFunctionsResponse:
     type: object
     example:
@@ -3051,10 +3504,13 @@ definitions:
       - nodejs6.10
       - nodejs8.10
       - nodejs10.x
+      - nodejs12.x
       - java8
+      - java11
       - python2.7
       - python3.6
       - python3.7
+      - python3.8
       - dotnetcore1.0
       - dotnetcore2.0
       - dotnetcore2.1
@@ -3085,7 +3541,7 @@ definitions:
         description: The amount of storage space that you can use for all deployment packages and layer archives.
       CodeSizeUnzipped:
         $ref: '#/definitions/Long'
-        description: The maximum size of your function's code and layers when they're extracted.
+        description: The maximum size of a function's deployment package and layers when they're extracted.
       CodeSizeZipped:
         $ref: '#/definitions/Long'
         description: The maximum size of a deployment package when it's uploaded directly to AWS Lambda. Use Amazon S3 for larger files.
@@ -3095,7 +3551,7 @@ definitions:
       UnreservedConcurrentExecutions:
         $ref: '#/definitions/UnreservedConcurrentExecutions'
         description: 'The maximum number of simultaneous function executions, minus the capacity that''s reserved for individual functions with <a>PutFunctionConcurrency</a>.'
-    description: Limits that are related to concurrency and code storage. All file and storage sizes are in bytes.
+    description: Limits that are related to concurrency and storage. All file and storage sizes are in bytes.
   AccountUsage:
     type: object
     properties:
@@ -3245,6 +3701,8 @@ definitions:
     type: integer
     minimum: 1
     maximum: 10000
+  BisectBatchOnFunctionError:
+    type: boolean
   BlobStream:
     type: string
   Boolean:
@@ -3281,6 +3739,10 @@ definitions:
     type: integer
     minimum: 0
     maximum: 300
+  ParallelizationFactor:
+    type: integer
+    minimum: 1
+    maximum: 10
   EventSourcePosition:
     type: string
     enum:
@@ -3290,6 +3752,24 @@ definitions:
   Date:
     type: string
     format: date-time
+  DestinationConfig:
+    type: object
+    properties:
+      OnSuccess:
+        $ref: '#/definitions/OnSuccess'
+        description: The destination configuration for successful invocations.
+      OnFailure:
+        $ref: '#/definitions/OnFailure'
+        description: The destination configuration for failed invocations.
+    description: A configuration object that specifies the destination of an event after Lambda processes it.
+  MaximumRecordAgeInSeconds:
+    type: integer
+    minimum: 60
+    maximum: 604800
+  MaximumRetryAttemptsEventSourceMapping:
+    type: integer
+    minimum: 0
+    maximum: 10000
   CreateEventSourceMappingRequest:
     type: object
     required:
@@ -3310,12 +3790,28 @@ definitions:
         description: '<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. Max 10.</p> </li> </ul>'
       MaximumBatchingWindowInSeconds:
         $ref: '#/definitions/MaximumBatchingWindowInSeconds'
+        description: 'The maximum amount of time to gather records before invoking the function, in seconds.'
+      ParallelizationFactor:
+        $ref: '#/definitions/ParallelizationFactor'
+        description: (Streams) The number of batches to process from each shard concurrently.
       StartingPosition:
         $ref: '#/definitions/EventSourcePosition'
         description: The position in a stream from which to start reading. Required for Amazon Kinesis and Amazon DynamoDB Streams sources. <code>AT_TIMESTAMP</code> is only supported for Amazon Kinesis streams.
       StartingPositionTimestamp:
         $ref: '#/definitions/Date'
         description: 'With <code>StartingPosition</code> set to <code>AT_TIMESTAMP</code>, the time from which to start reading.'
+      DestinationConfig:
+        $ref: '#/definitions/DestinationConfig'
+        description: (Streams) An Amazon SQS queue or Amazon SNS topic destination for discarded records.
+      MaximumRecordAgeInSeconds:
+        $ref: '#/definitions/MaximumRecordAgeInSeconds'
+        description: (Streams) The maximum age of a record that Lambda sends to a function for processing.
+      BisectBatchOnFunctionError:
+        $ref: '#/definitions/BisectBatchOnFunctionError'
+        description: '(Streams) If the function returns an error, split the batch in two and retry.'
+      MaximumRetryAttempts:
+        $ref: '#/definitions/MaximumRetryAttemptsEventSourceMapping'
+        description: (Streams) The maximum number of times to retry when the function returns an error.
   RoleArn:
     type: string
     pattern: 'arn:(aws[a-zA-Z-]*)?:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
@@ -3355,14 +3851,14 @@ definitions:
       SecurityGroupIds:
         $ref: '#/definitions/SecurityGroupIds'
         description: A list of VPC security groups IDs.
-    description: The VPC security groups and subnets that are attached to a Lambda function.
+    description: 'The VPC security groups and subnets that are attached to a Lambda function. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html">VPC Settings</a>.'
   DeadLetterConfig:
     type: object
     properties:
       TargetArn:
         $ref: '#/definitions/ResourceArn'
         description: The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.
-    description: 'The <a href="https://docs.aws.amazon.com/lambda/latest/dg/dlq.html">dead letter queue</a> for failed asynchronous invocations.'
+    description: 'The <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq">dead-letter queue</a> for failed asynchronous invocations.'
   Environment:
     type: object
     properties:
@@ -3426,10 +3922,10 @@ definitions:
         description: Set to true to publish the first version of the function during creation.
       VpcConfig:
         $ref: '#/definitions/VpcConfig'
-        description: 'For network connectivity to AWS resources in a VPC, specify a list of security groups and subnets in the VPC. When you connect a function to a VPC, it can only access resources and the internet through that VPC. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/vpc.html">VPC Settings</a>.'
+        description: 'For network connectivity to AWS resources in a VPC, specify a list of security groups and subnets in the VPC. When you connect a function to a VPC, it can only access resources and the internet through that VPC. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html">VPC Settings</a>.'
       DeadLetterConfig:
         $ref: '#/definitions/DeadLetterConfig'
-        description: 'A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/dlq.html">Dead Letter Queues</a>.'
+        description: 'A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq">Dead Letter Queues</a>.'
       Environment:
         $ref: '#/definitions/Environment'
         description: Environment variables that are accessible from function code during execution.
@@ -3454,12 +3950,20 @@ definitions:
   DeleteFunctionConcurrencyRequest:
     type: object
     properties: {}
+  DeleteFunctionEventInvokeConfigRequest:
+    type: object
+    properties: {}
   DeleteFunctionRequest:
     type: object
     properties: {}
   DeleteLayerVersionRequest:
     type: object
     properties: {}
+  DestinationArn:
+    type: string
+    pattern: '^$|arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)'
+    minLength: 0
+    maxLength: 350
   SensitiveString:
     type: string
     format: password
@@ -3482,7 +3986,7 @@ definitions:
       Error:
         $ref: '#/definitions/EnvironmentError'
         description: Error messages for environment variables that couldn't be applied.
-    description: The results of a configuration update that applied environment variables.
+    description: 'The results of an operation to update or read environment variables. If the operation is successful, the response contains the environment variables. If it failed, the response contains details about the error.'
   EnvironmentVariableName:
     type: string
     pattern: '[a-zA-Z]([a-zA-Z0-9_])+'
@@ -3538,6 +4042,53 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Layer'
+  State:
+    type: string
+    enum:
+      - Pending
+      - Active
+      - Inactive
+      - Failed
+  StateReason:
+    type: string
+  StateReasonCode:
+    type: string
+    enum:
+      - Idle
+      - Creating
+      - Restoring
+      - EniLimitExceeded
+      - InsufficientRolePermissions
+      - InvalidConfiguration
+      - InternalError
+      - SubnetOutOfIPAddresses
+  LastUpdateStatus:
+    type: string
+    enum:
+      - Successful
+      - Failed
+      - InProgress
+  LastUpdateStatusReason:
+    type: string
+  LastUpdateStatusReasonCode:
+    type: string
+    enum:
+      - EniLimitExceeded
+      - InsufficientRolePermissions
+      - InvalidConfiguration
+      - InternalError
+  MaximumRetryAttempts:
+    type: integer
+    minimum: 0
+    maximum: 2
+  MaximumEventAgeInSeconds:
+    type: integer
+    minimum: 60
+    maximum: 21600
+  FunctionEventInvokeConfigList:
+    type: array
+    items:
+      $ref: '#/definitions/FunctionEventInvokeConfig'
   FunctionList:
     type: array
     items:
@@ -3556,6 +4107,9 @@ definitions:
     type: object
     properties: {}
   GetFunctionConfigurationRequest:
+    type: object
+    properties: {}
+  GetFunctionEventInvokeConfigRequest:
     type: object
     properties: {}
   GetFunctionRequest:
@@ -3700,6 +4254,13 @@ definitions:
   ListEventSourceMappingsRequest:
     type: object
     properties: {}
+  MaxFunctionEventInvokeConfigListItems:
+    type: integer
+    minimum: 1
+    maximum: 50
+  ListFunctionEventInvokeConfigsRequest:
+    type: object
+    properties: {}
   MasterRegion:
     type: string
     pattern: 'ALL|[a-z]{2}(-gov)?-[a-z]+-\d{1}'
@@ -3764,6 +4325,18 @@ definitions:
       ReservedConcurrentExecutions:
         $ref: '#/definitions/ReservedConcurrentExecutions'
         description: The number of simultaneous executions to reserve for the function.
+  PutFunctionEventInvokeConfigRequest:
+    type: object
+    properties:
+      MaximumRetryAttempts:
+        $ref: '#/definitions/MaximumRetryAttempts'
+        description: The maximum number of times to retry when the function returns an error.
+      MaximumEventAgeInSeconds:
+        $ref: '#/definitions/MaximumEventAgeInSeconds'
+        description: The maximum age of a request that Lambda sends to a function for processing.
+      DestinationConfig:
+        $ref: '#/definitions/DestinationConfig'
+        description: <p>A destination for events after they have been sent to a function for processing.</p> <p class="title"> <b>Destinations</b> </p> <ul> <li> <p> <b>Function</b> - The Amazon Resource Name (ARN) of a Lambda function.</p> </li> <li> <p> <b>Queue</b> - The ARN of an SQS queue.</p> </li> <li> <p> <b>Topic</b> - The ARN of an SNS topic.</p> </li> <li> <p> <b>Event Bus</b> - The ARN of an Amazon EventBridge event bus.</p> </li> </ul>
   RemoveLayerVersionPermissionRequest:
     type: object
     properties: {}
@@ -3818,6 +4391,22 @@ definitions:
         description: '<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. Max 10.</p> </li> </ul>'
       MaximumBatchingWindowInSeconds:
         $ref: '#/definitions/MaximumBatchingWindowInSeconds'
+        description: 'The maximum amount of time to gather records before invoking the function, in seconds.'
+      DestinationConfig:
+        $ref: '#/definitions/DestinationConfig'
+        description: (Streams) An Amazon SQS queue or Amazon SNS topic destination for discarded records.
+      MaximumRecordAgeInSeconds:
+        $ref: '#/definitions/MaximumRecordAgeInSeconds'
+        description: (Streams) The maximum age of a record that Lambda sends to a function for processing.
+      BisectBatchOnFunctionError:
+        $ref: '#/definitions/BisectBatchOnFunctionError'
+        description: '(Streams) If the function returns an error, split the batch in two and retry.'
+      MaximumRetryAttempts:
+        $ref: '#/definitions/MaximumRetryAttemptsEventSourceMapping'
+        description: (Streams) The maximum number of times to retry when the function returns an error.
+      ParallelizationFactor:
+        $ref: '#/definitions/ParallelizationFactor'
+        description: (Streams) The number of batches to process from each shard concurrently.
   UpdateFunctionCodeRequest:
     type: object
     properties:
@@ -3862,7 +4451,7 @@ definitions:
         description: The amount of memory that your function has access to. Increasing the function's memory also increases its CPU allocation. The default value is 128 MB. The value must be a multiple of 64 MB.
       VpcConfig:
         $ref: '#/definitions/VpcConfig'
-        description: 'For network connectivity to AWS resources in a VPC, specify a list of security groups and subnets in the VPC. When you connect a function to a VPC, it can only access resources and the internet through that VPC. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/vpc.html">VPC Settings</a>.'
+        description: 'For network connectivity to AWS resources in a VPC, specify a list of security groups and subnets in the VPC. When you connect a function to a VPC, it can only access resources and the internet through that VPC. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html">VPC Settings</a>.'
       Environment:
         $ref: '#/definitions/Environment'
         description: Environment variables that are accessible from function code during execution.
@@ -3871,7 +4460,7 @@ definitions:
         description: 'The identifier of the function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">runtime</a>.'
       DeadLetterConfig:
         $ref: '#/definitions/DeadLetterConfig'
-        description: 'A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/dlq.html">Dead Letter Queues</a>.'
+        description: 'A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq">Dead Letter Queues</a>.'
       KMSKeyArn:
         $ref: '#/definitions/KMSKeyArn'
         description: 'The ARN of the AWS Key Management Service (AWS KMS) key that''s used to encrypt your function''s environment variables. If it''s not provided, AWS Lambda uses a default service key.'
@@ -3884,5 +4473,17 @@ definitions:
       Layers:
         $ref: '#/definitions/LayerList'
         description: 'A list of <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">function layers</a> to add to the function''s execution environment. Specify each layer by its ARN, including the version.'
+  UpdateFunctionEventInvokeConfigRequest:
+    type: object
+    properties:
+      MaximumRetryAttempts:
+        $ref: '#/definitions/MaximumRetryAttempts'
+        description: The maximum number of times to retry when the function returns an error.
+      MaximumEventAgeInSeconds:
+        $ref: '#/definitions/MaximumEventAgeInSeconds'
+        description: The maximum age of a request that Lambda sends to a function for processing.
+      DestinationConfig:
+        $ref: '#/definitions/DestinationConfig'
+        description: <p>A destination for events after they have been sent to a function for processing.</p> <p class="title"> <b>Destinations</b> </p> <ul> <li> <p> <b>Function</b> - The Amazon Resource Name (ARN) of a Lambda function.</p> </li> <li> <p> <b>Queue</b> - The ARN of an SQS queue.</p> </li> <li> <p> <b>Topic</b> - The ARN of an SNS topic.</p> </li> <li> <p> <b>Event Bus</b> - The ARN of an Amazon EventBridge event bus.</p> </li> </ul>
   VpcId:
     type: string

@@ -160,6 +160,117 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
+  '/#X-Amz-Target=AWSInsightsIndexService.CreateCostCategoryDefinition':
+    post:
+      operationId: CreateCostCategoryDefinition
+      description: '<important> <p> <i> <b>Cost Category is in preview release for AWS Billing and Cost Management and is subject to change. Your use of Cost Categories is subject to the Beta Service Participation terms of the <a href="https://aws.amazon.com/service-terms/">AWS Service Terms</a> (Section 1.10).</b> </i> </p> </important> <p>Creates a new Cost Category with the requested name and rules.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateCostCategoryDefinitionResponse'
+        '480':
+          description: ServiceQuotaExceededException
+          schema:
+            $ref: '#/definitions/ServiceQuotaExceededException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateCostCategoryDefinitionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSInsightsIndexService.CreateCostCategoryDefinition
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSInsightsIndexService.DeleteCostCategoryDefinition':
+    post:
+      operationId: DeleteCostCategoryDefinition
+      description: '<important> <p> <i> <b>Cost Category is in preview release for AWS Billing and Cost Management and is subject to change. Your use of Cost Categories is subject to the Beta Service Participation terms of the <a href="https://aws.amazon.com/service-terms/">AWS Service Terms</a> (Section 1.10).</b> </i> </p> </important> <p>Deletes a Cost Category. Expenses from this month going forward will no longer be categorized with this Cost Category.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteCostCategoryDefinitionResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteCostCategoryDefinitionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSInsightsIndexService.DeleteCostCategoryDefinition
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSInsightsIndexService.DescribeCostCategoryDefinition':
+    post:
+      operationId: DescribeCostCategoryDefinition
+      description: '<important> <p> <i> <b>Cost Category is in preview release for AWS Billing and Cost Management and is subject to change. Your use of Cost Categories is subject to the Beta Service Participation terms of the <a href="https://aws.amazon.com/service-terms/">AWS Service Terms</a> (Section 1.10).</b> </i> </p> </important> <p>Returns the name, ARN, rules, definition, and effective dates of a Cost Category that''s defined in the account.</p> <p>You have the option to use <code>EffectiveOn</code> to return a Cost Category that is active on a specific date. If there is no <code>EffectiveOn</code> specified, you’ll see a Cost Category that is effective on the current date. If Cost Category is still effective, <code>EffectiveEnd</code> is omitted in the response. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeCostCategoryDefinitionResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeCostCategoryDefinitionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSInsightsIndexService.DescribeCostCategoryDefinition
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AWSInsightsIndexService.GetCostAndUsage':
     post:
       operationId: GetCostAndUsage
@@ -770,7 +881,140 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSInsightsIndexService.ListCostCategoryDefinitions':
+    post:
+      operationId: ListCostCategoryDefinitions
+      description: '<important> <p> <i> <b>Cost Category is in preview release for AWS Billing and Cost Management and is subject to change. Your use of Cost Categories is subject to the Beta Service Participation terms of the <a href="https://aws.amazon.com/service-terms/">AWS Service Terms</a> (Section 1.10).</b> </i> </p> </important> <p>Returns the name, ARN and effective dates of all Cost Categories defined in the account. You have the option to use <code>EffectiveOn</code> to return a list of Cost Categories that were active on a specific date. If there is no <code>EffectiveOn</code> specified, you’ll see Cost Categories that are effective on the current date. If Cost Category is still effective, <code>EffectiveEnd</code> is omitted in the response. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListCostCategoryDefinitionsResponse'
+        '480':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListCostCategoryDefinitionsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSInsightsIndexService.ListCostCategoryDefinitions
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSInsightsIndexService.UpdateCostCategoryDefinition':
+    post:
+      operationId: UpdateCostCategoryDefinition
+      description: '<important> <p> <i> <b>Cost Category is in preview release for AWS Billing and Cost Management and is subject to change. Your use of Cost Categories is subject to the Beta Service Participation terms of the <a href="https://aws.amazon.com/service-terms/">AWS Service Terms</a> (Section 1.10).</b> </i> </p> </important> <p>Updates an existing Cost Category. Changes made to the Cost Category rules will be used to categorize the current month’s expenses and future expenses. This won’t change categorization for the previous months.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateCostCategoryDefinitionResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ServiceQuotaExceededException
+          schema:
+            $ref: '#/definitions/ServiceQuotaExceededException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateCostCategoryDefinitionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSInsightsIndexService.UpdateCostCategoryDefinition
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
+  CreateCostCategoryDefinitionResponse:
+    type: object
+    properties:
+      CostCategoryArn:
+        $ref: '#/definitions/Arn'
+        description: ' The unique identifier for your newly created Cost Category. '
+      EffectiveStart:
+        $ref: '#/definitions/ZonedDateTime'
+        description: ' The Cost Category''s effective start date. '
+  CreateCostCategoryDefinitionRequest:
+    type: object
+    required:
+      - Name
+      - RuleVersion
+      - Rules
+    properties:
+      Name:
+        $ref: '#/definitions/CostCategoryName'
+      RuleVersion:
+        $ref: '#/definitions/CostCategoryRuleVersion'
+      Rules:
+        $ref: '#/definitions/CostCategoryRulesList'
+        description: ' Rules are processed in order. If there are multiple rules that match the line item, then the first rule to match is used to determine that Cost Category value. '
+  ServiceQuotaExceededException: {}
+  LimitExceededException: {}
+  DeleteCostCategoryDefinitionResponse:
+    type: object
+    properties:
+      CostCategoryArn:
+        $ref: '#/definitions/Arn'
+        description: ' The unique identifier for your Cost Category. '
+      EffectiveEnd:
+        $ref: '#/definitions/ZonedDateTime'
+        description: ' The effective end date of the Cost Category as a result of deleting it. No costs after this date will be categorized by the deleted Cost Category. '
+  DeleteCostCategoryDefinitionRequest:
+    type: object
+    required:
+      - CostCategoryArn
+    properties:
+      CostCategoryArn:
+        $ref: '#/definitions/Arn'
+        description: ' The unique identifier for your Cost Category. '
+  ResourceNotFoundException: {}
+  DescribeCostCategoryDefinitionResponse:
+    type: object
+    properties:
+      CostCategory:
+        $ref: '#/definitions/CostCategory'
+  DescribeCostCategoryDefinitionRequest:
+    type: object
+    required:
+      - CostCategoryArn
+    properties:
+      CostCategoryArn:
+        $ref: '#/definitions/Arn'
+        description: ' The unique identifier for your Cost Category. '
+      EffectiveOn:
+        $ref: '#/definitions/ZonedDateTime'
+        description: ' The date when the Cost Category was effective. '
   GetCostAndUsageResponse:
     type: object
     properties:
@@ -793,7 +1037,7 @@ definitions:
         description: 'Sets the start and end dates for retrieving AWS costs. The start date is inclusive, but the end date is exclusive. For example, if <code>start</code> is <code>2017-01-01</code> and <code>end</code> is <code>2017-05-01</code>, then the cost and usage data is retrieved from <code>2017-01-01</code> up to and including <code>2017-04-30</code> but not including <code>2017-05-01</code>.'
       Granularity:
         $ref: '#/definitions/Granularity'
-        description: '<p>Sets the AWS cost granularity to <code>MONTHLY</code> or <code>DAILY</code>, or <code>HOURLY</code>. If <code>Granularity</code> isn''t set, the response object doesn''t include the <code>Granularity</code>, either <code>MONTHLY</code> or <code>DAILY</code>, or <code>HOURLY</code>. </p> <p>The <code>GetCostAndUsageRequest</code> operation supports only <code>DAILY</code> and <code>MONTHLY</code> granularities.</p>'
+        description: 'Sets the AWS cost granularity to <code>MONTHLY</code> or <code>DAILY</code>, or <code>HOURLY</code>. If <code>Granularity</code> isn''t set, the response object doesn''t include the <code>Granularity</code>, either <code>MONTHLY</code> or <code>DAILY</code>, or <code>HOURLY</code>. '
       Filter:
         $ref: '#/definitions/Expression'
         description: 'Filters AWS costs by different dimensions. For example, you can specify <code>SERVICE</code> and <code>LINKED_ACCOUNT</code> and get the costs that are associated with that account''s usage of that service. You can nest <code>Expression</code> objects to define any combination of dimension filters. For more information, see <a href="http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a>. '
@@ -802,11 +1046,10 @@ definitions:
         description: '<p>Which metrics are returned in the query. For more information about blended and unblended rates, see <a href="https://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/">Why does the "blended" annotation appear on some line items in my bill?</a>. </p> <p>Valid values are <code>AmortizedCost</code>, <code>BlendedCost</code>, <code>NetAmortizedCost</code>, <code>NetUnblendedCost</code>, <code>NormalizedUsageAmount</code>, <code>UnblendedCost</code>, and <code>UsageQuantity</code>. </p> <note> <p>If you return the <code>UsageQuantity</code> metric, the service aggregates all usage numbers without taking into account the units. For example, if you aggregate <code>usageQuantity</code> across all of Amazon EC2, the results aren''t meaningful because Amazon EC2 compute hours and data transfer are measured in different units (for example, hours vs. GB). To get more meaningful <code>UsageQuantity</code> metrics, filter by <code>UsageType</code> or <code>UsageTypeGroups</code>. </p> </note> <p> <code>Metrics</code> is required for <code>GetCostAndUsage</code> requests.</p>'
       GroupBy:
         $ref: '#/definitions/GroupDefinitions'
-        description: '<p>You can group AWS costs using up to two different groups, either dimensions, tag keys, or both.</p> <p>When you group by tag key, you get all tag values, including empty strings.</p> <p>Valid values are <code>AZ</code>, <code>INSTANCE_TYPE</code>, <code>LEGAL_ENTITY_NAME</code>, <code>LINKED_ACCOUNT</code>, <code>OPERATION</code>, <code>PLATFORM</code>, <code>PURCHASE_TYPE</code>, <code>SERVICE</code>, <code>TAGS</code>, <code>TENANCY</code>, and <code>USAGE_TYPE</code>.</p>'
+        description: '<p>You can group AWS costs using up to two different groups, either dimensions, tag keys, or both.</p> <p>When you group by tag key, you get all tag values, including empty strings.</p> <p>Valid values are <code>AZ</code>, <code>INSTANCE_TYPE</code>, <code>LEGAL_ENTITY_NAME</code>, <code>LINKED_ACCOUNT</code>, <code>OPERATION</code>, <code>PLATFORM</code>, <code>PURCHASE_TYPE</code>, <code>SERVICE</code>, <code>TAGS</code>, <code>TENANCY</code>, <code>RECORD_TYPE</code>, and <code>USAGE_TYPE</code>.</p>'
       NextPageToken:
         $ref: '#/definitions/NextPageToken'
         description: The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.
-  LimitExceededException: {}
   BillExpirationException: {}
   DataUnavailableException: {}
   InvalidNextTokenException: {}
@@ -1266,6 +1509,48 @@ definitions:
         $ref: '#/definitions/PredictionIntervalLevel'
         description: 'Cost Explorer always returns the mean forecast as a single point. You can request a prediction interval around the mean by specifying a confidence level. The higher the confidence level, the more confident Cost Explorer is about the actual value falling in the prediction interval. Higher confidence levels result in wider prediction intervals.'
   UnresolvableUsageUnitException: {}
+  ListCostCategoryDefinitionsResponse:
+    type: object
+    properties:
+      CostCategoryReferences:
+        $ref: '#/definitions/CostCategoryReferencesList'
+        description: ' A reference to a Cost Category containing enough information to identify the Cost Category. '
+      NextToken:
+        $ref: '#/definitions/NextPageToken'
+        description: ' The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size. '
+  ListCostCategoryDefinitionsRequest:
+    type: object
+    properties:
+      EffectiveOn:
+        $ref: '#/definitions/ZonedDateTime'
+        description: ' The date when the Cost Category was effective. '
+      NextToken:
+        $ref: '#/definitions/NextPageToken'
+        description: <p> The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size. </p> <p>You can use this information to retrieve the full Cost Category information using <code>DescribeCostCategory</code>.</p>
+  UpdateCostCategoryDefinitionResponse:
+    type: object
+    properties:
+      CostCategoryArn:
+        $ref: '#/definitions/Arn'
+        description: ' The unique identifier for your Cost Category. '
+      EffectiveStart:
+        $ref: '#/definitions/ZonedDateTime'
+        description: ' The Cost Category''s effective start date. '
+  UpdateCostCategoryDefinitionRequest:
+    type: object
+    required:
+      - CostCategoryArn
+      - RuleVersion
+      - Rules
+    properties:
+      CostCategoryArn:
+        $ref: '#/definitions/Arn'
+        description: The unique identifier for your Cost Category.
+      RuleVersion:
+        $ref: '#/definitions/CostCategoryRuleVersion'
+      Rules:
+        $ref: '#/definitions/CostCategoryRulesList'
+        description: ' Rules are processed in order. If there are multiple rules that match the line item, then the first rule to match is used to determine that Cost Category value. '
   AccountScope:
     type: string
     enum:
@@ -1275,6 +1560,11 @@ definitions:
     type: string
   AmortizedUpfrontFee:
     type: string
+  Arn:
+    type: string
+    pattern: 'arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+'
+    minLength: 20
+    maxLength: 2048
   AttributeType:
     type: string
   AttributeValue:
@@ -1289,6 +1579,127 @@ definitions:
       - COST_AND_USAGE
       - RESERVATIONS
       - SAVINGS_PLANS
+  ZonedDateTime:
+    type: string
+    pattern: '^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(([+-]\d\d:\d\d)|Z)$'
+    description: The time period that you want the usage and costs for.
+    minLength: 20
+    maxLength: 25
+  CostCategoryName:
+    type: string
+    description: The unique name of the Cost Category.
+    minLength: 1
+    maxLength: 255
+    x-pattern: '^\(\?! \)[\p\{L\}\p\{N\}\p\{Z\}-_]*$'
+  CostCategoryRuleVersion:
+    type: string
+    enum:
+      - CostCategoryExpression.v1
+    description: The rule schema version in this particular Cost Category.
+  CostCategoryRulesList:
+    type: array
+    items:
+      $ref: '#/definitions/CostCategoryRule'
+    minItems: 1
+    maxItems: 500
+  CostCategory:
+    type: object
+    required:
+      - CostCategoryArn
+      - EffectiveStart
+      - Name
+      - RuleVersion
+      - Rules
+    properties:
+      CostCategoryArn:
+        $ref: '#/definitions/Arn'
+        description: ' The unique identifier for your Cost Category. '
+      EffectiveStart:
+        $ref: '#/definitions/ZonedDateTime'
+        description: ' The Cost Category''s effective start date.'
+      EffectiveEnd:
+        $ref: '#/definitions/ZonedDateTime'
+        description: ' The Cost Category''s effective end date.'
+      Name:
+        $ref: '#/definitions/CostCategoryName'
+      RuleVersion:
+        $ref: '#/definitions/CostCategoryRuleVersion'
+      Rules:
+        $ref: '#/definitions/CostCategoryRulesList'
+        description: ' Rules are processed in order. If there are multiple rules that match the line item, then the first rule to match is used to determine that Cost Category value. '
+    description: '<important> <p> <i> <b>Cost Category is in preview release for AWS Billing and Cost Management and is subject to change. Your use of Cost Categories is subject to the Beta Service Participation terms of the <a href="https://aws.amazon.com/service-terms/">AWS Service Terms</a> (Section 1.10).</b> </i> </p> </important> <p>The structure of Cost Categories. This includes detailed metadata and the set of rules for the <code>CostCategory</code> object.</p>'
+  CostCategoryReference:
+    type: object
+    properties:
+      CostCategoryArn:
+        $ref: '#/definitions/Arn'
+        description: ' The unique identifier for your Cost Category Reference. '
+      Name:
+        $ref: '#/definitions/CostCategoryName'
+      EffectiveStart:
+        $ref: '#/definitions/ZonedDateTime'
+        description: ' The Cost Category''s effective start date.'
+      EffectiveEnd:
+        $ref: '#/definitions/ZonedDateTime'
+        description: ' The Cost Category''s effective end date.'
+    description: '<important> <p> <i> <b>Cost Category is in preview release for AWS Billing and Cost Management and is subject to change. Your use of Cost Categories is subject to the Beta Service Participation terms of the <a href="https://aws.amazon.com/service-terms/">AWS Service Terms</a> (Section 1.10).</b> </i> </p> </important> <p>A reference to a Cost Category containing only enough information to identify the Cost Category.</p> <p>You can use this information to retrieve the full Cost Category information using <code>DescribeCostCategory</code>.</p>'
+  CostCategoryReferencesList:
+    type: array
+    items:
+      $ref: '#/definitions/CostCategoryReference'
+  CostCategoryValue:
+    type: string
+    description: 'The value a line item will be categorized as, if it matches the rule.'
+    minLength: 1
+    maxLength: 255
+    x-pattern: '^\(\?! \)[\p\{L\}\p\{N\}\p\{Z\}-_]*$'
+  Expression:
+    type: object
+    properties:
+      Or:
+        $ref: '#/definitions/Expressions'
+        description: Return results that match either <code>Dimension</code> object.
+      And:
+        $ref: '#/definitions/Expressions'
+        description: Return results that match both <code>Dimension</code> objects.
+      Not:
+        $ref: '#/definitions/Expression'
+        description: Return results that don't match a <code>Dimension</code> object.
+      Dimensions:
+        $ref: '#/definitions/DimensionValues'
+        description: The specific <code>Dimension</code> to use for <code>Expression</code>.
+      Tags:
+        $ref: '#/definitions/TagValues'
+        description: The specific <code>Tag</code> to use for <code>Expression</code>.
+      CostCategories:
+        $ref: '#/definitions/CostCategoryValues'
+        description: '<p> <i> <b>Cost Category is in preview release for AWS Billing and Cost Management and is subject to change. Your use of Cost Categories is subject to the Beta Service Participation terms of the <a href="https://aws.amazon.com/service-terms/">AWS Service Terms</a> (Section 1.10).</b> </i> </p> <p>The specific <code>CostCategory</code> used for <code>Expression</code>.</p>'
+    description: '<p>Use <code>Expression</code> to filter by cost or by usage. There are two patterns: </p> <ul> <li> <p>Simple dimension values - You can set the dimension name and values for the filters that you plan to use. For example, you can filter for <code>REGION==us-east-1 OR REGION==us-west-1</code>. The <code>Expression</code> for that looks like this:</p> <p> <code>{ "Dimensions": { "Key": "REGION", "Values": [ "us-east-1", “us-west-1” ] } }</code> </p> <p>The list of dimension values are OR''d together to retrieve cost or usage data. You can create <code>Expression</code> and <code>DimensionValues</code> objects using either <code>with*</code> methods or <code>set*</code> methods in multiple lines. </p> </li> <li> <p>Compound dimension values with logical operations - You can use multiple <code>Expression</code> types and the logical operators <code>AND/OR/NOT</code> to create a list of one or more <code>Expression</code> objects. This allows you to filter on more advanced options. For example, you can filter on <code>((REGION == us-east-1 OR REGION == us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE != DataTransfer)</code>. The <code>Expression</code> for that looks like this:</p> <p> <code>{ "And": [ {"Or": [ {"Dimensions": { "Key": "REGION", "Values": [ "us-east-1", "us-west-1" ] }}, {"Tags": { "Key": "TagName", "Values": ["Value1"] } } ]}, {"Not": {"Dimensions": { "Key": "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] } </code> </p> <note> <p>Because each <code>Expression</code> can have only one operator, the service returns an error if more than one is specified. The following example shows an <code>Expression</code> object that creates an error.</p> </note> <p> <code> { "And": [ ... ], "DimensionValues": { "Dimension": "USAGE_TYPE", "Values": [ "DataTransfer" ] } } </code> </p> </li> </ul> <note> <p>For <code>GetRightsizingRecommendation</code> action, a combination of OR and NOT is not supported. OR is not supported between different dimensions, or dimensions and tags. NOT operators aren''t supported. Dimensions are also limited to <code>LINKED_ACCOUNT</code>, <code>REGION</code>, or <code>RIGHTSIZING_TYPE</code>.</p> </note>'
+  CostCategoryRule:
+    type: object
+    required:
+      - Value
+      - Rule
+    properties:
+      Value:
+        $ref: '#/definitions/CostCategoryValue'
+      Rule:
+        $ref: '#/definitions/Expression'
+        description: '<p>An <a href="http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a> object used to categorize costs. This supports dimensions, Tags, and nested expressions. Currently the only dimensions supported is <code>LINKED_ACCOUNT</code>.</p> <p>Root level <code>OR</code> is not supported. We recommend you create a separate rule instead.</p>'
+    description: '<important> <p> <i> <b>Cost Category is in preview release for AWS Billing and Cost Management and is subject to change. Your use of Cost Categories is subject to the Beta Service Participation terms of the <a href="https://aws.amazon.com/service-terms/">AWS Service Terms</a> (Section 1.10).</b> </i> </p> </important> <p>Rules are processed in order. If there are multiple rules that match the line item, then the first rule to match is used to determine that Cost Category value.</p>'
+  Values:
+    type: array
+    items:
+      $ref: '#/definitions/Value'
+  CostCategoryValues:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/CostCategoryName'
+      Values:
+        $ref: '#/definitions/Values'
+        description: The specific value of the Cost Category.
+    description: '<important> <p> <i> <b>Cost Category is in preview release for AWS Billing and Cost Management and is subject to change. Your use of Cost Categories is subject to the Beta Service Participation terms of the <a href="https://aws.amazon.com/service-terms/">AWS Service Terms</a> (Section 1.10).</b> </i> </p> </important> <p>The values that are available for Cost Categories.</p>'
   CoverageHours:
     type: object
     properties:
@@ -1480,10 +1891,6 @@ definitions:
       - SAVINGS_PLANS_TYPE
       - SAVINGS_PLAN_ARN
       - PAYMENT_OPTION
-  Values:
-    type: array
-    items:
-      $ref: '#/definitions/Value'
   DimensionValues:
     type: object
     properties:
@@ -1645,25 +2052,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Expression'
-  Expression:
-    type: object
-    properties:
-      Or:
-        $ref: '#/definitions/Expressions'
-        description: Return results that match either <code>Dimension</code> object.
-      And:
-        $ref: '#/definitions/Expressions'
-        description: Return results that match both <code>Dimension</code> objects.
-      Not:
-        $ref: '#/definitions/Expression'
-        description: Return results that don't match a <code>Dimension</code> object.
-      Dimensions:
-        $ref: '#/definitions/DimensionValues'
-        description: The specific <code>Dimension</code> to use for <code>Expression</code>.
-      Tags:
-        $ref: '#/definitions/TagValues'
-        description: The specific <code>Tag</code> to use for <code>Expression</code>.
-    description: '<p>Use <code>Expression</code> to filter by cost or by usage. There are two patterns: </p> <ul> <li> <p>Simple dimension values - You can set the dimension name and values for the filters that you plan to use. For example, you can filter for <code>REGION==us-east-1 OR REGION==us-west-1</code>. The <code>Expression</code> for that looks like this:</p> <p> <code>{ "Dimensions": { "Key": "REGION", "Values": [ "us-east-1", “us-west-1” ] } }</code> </p> <p>The list of dimension values are OR''d together to retrieve cost or usage data. You can create <code>Expression</code> and <code>DimensionValues</code> objects using either <code>with*</code> methods or <code>set*</code> methods in multiple lines. </p> </li> <li> <p>Compound dimension values with logical operations - You can use multiple <code>Expression</code> types and the logical operators <code>AND/OR/NOT</code> to create a list of one or more <code>Expression</code> objects. This allows you to filter on more advanced options. For example, you can filter on <code>((REGION == us-east-1 OR REGION == us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE != DataTransfer)</code>. The <code>Expression</code> for that looks like this:</p> <p> <code>{ "And": [ {"Or": [ {"Dimensions": { "Key": "REGION", "Values": [ "us-east-1", "us-west-1" ] }}, {"Tags": { "Key": "TagName", "Values": ["Value1"] } } ]}, {"Not": {"Dimensions": { "Key": "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] } </code> </p> <note> <p>Because each <code>Expression</code> can have only one operator, the service returns an error if more than one is specified. The following example shows an <code>Expression</code> object that creates an error.</p> </note> <p> <code> { "And": [ ... ], "DimensionValues": { "Dimension": "USAGE_TYPE", "Values": [ "DataTransfer" ] } } </code> </p> </li> </ul> <note> <p>For <code>GetRightsizingRecommendation</code> action, a combination of OR and NOT is not supported. OR is not supported between different dimensions, or dimensions and tags. NOT operators aren''t supported. Dimensions are also limited to <code>LINKED_ACCOUNT</code>, <code>REGION</code>, or <code>RIGHTSIZING_TYPE</code>.</p> </note>'
   TagValues:
     type: object
     properties:
@@ -1965,6 +2353,7 @@ definitions:
     enum:
       - DIMENSION
       - TAG
+      - COST_CATEGORY
   GroupDefinitionKey:
     type: string
   GroupDefinition:
@@ -2067,7 +2456,7 @@ definitions:
     properties:
       TargetInstances:
         $ref: '#/definitions/TargetInstancesList'
-        description: ' Identifies whether this instance type is the Amazon Web Services default recommendation.'
+        description: Identifies whether this instance type is the Amazon Web Services default recommendation.
     description: ' Details on the modification recommendation.'
   NetRISavings:
     type: string
@@ -2373,6 +2762,9 @@ definitions:
       EstimatedMonthlySavingsAmount:
         $ref: '#/definitions/GenericString'
         description: 'The estimated monthly savings amount, based on the recommended Savings Plans purchase.'
+      EstimatedOnDemandCostWithCurrentCommitment:
+        $ref: '#/definitions/GenericString'
+        description: ' The estimated On-Demand costs you would expect with no additional commitment, based on your usage of the selected time period and the Savings Plans you own. '
     description: Summary metrics for your Savings Plans Purchase Recommendations.
   SavingsPlansPurchaseRecommendationDetail:
     type: object
@@ -2398,6 +2790,9 @@ definitions:
       EstimatedOnDemandCost:
         $ref: '#/definitions/GenericString'
         description: 'The remaining On-Demand cost estimated to not be covered by the recommended Savings Plans, over the length of the lookback period.'
+      EstimatedOnDemandCostWithCurrentCommitment:
+        $ref: '#/definitions/GenericString'
+        description: ' The estimated On-Demand costs you would expect with no additional commitment, based on your usage of the selected time period and the Savings Plans you own. '
       EstimatedSavingsAmount:
         $ref: '#/definitions/GenericString'
         description: The estimated savings amount based on the recommended Savings Plans over the length of the lookback period.

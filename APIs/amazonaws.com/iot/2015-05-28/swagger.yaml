@@ -1211,6 +1211,51 @@ paths:
                 pattern: '[\w=,@-]+'
                 minLength: 1
                 maxLength: 128
+  '/confirmdestination/{confirmationToken}':
+    get:
+      operationId: ConfirmTopicRuleDestination
+      description: 'Confirms a topic rule destination. When you create a rule requiring a destination, AWS IoT sends a confirmation message to the endpoint or base address you specify. The message includes a token which you pass back when calling <code>ConfirmTopicRuleDestination</code> to confirm that you own or have access to the endpoint.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ConfirmTopicRuleDestinationResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
+          description: ConflictingResourceUpdateException
+          schema:
+            $ref: '#/definitions/ConflictingResourceUpdateException'
+      parameters:
+        - name: confirmationToken
+          in: path
+          required: true
+          description: The token used to confirm ownership or access to the topic rule confirmation URL.
+          type: string
+          minLength: 1
+          maxLength: 2048
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/authorizer/{authorizerName}':
     post:
       operationId: CreateAuthorizer
@@ -1264,8 +1309,6 @@ paths:
             type: object
             required:
               - authorizerFunctionArn
-              - tokenKeyName
-              - tokenSigningPublicKeys
             properties:
               authorizerFunctionArn:
                 description: The ARN of the authorizer's Lambda function.
@@ -1287,6 +1330,9 @@ paths:
                 enum:
                   - ACTIVE
                   - INACTIVE
+              signingDisabled:
+                description: Specifies whether AWS IoT validates the token signature in an authorization request.
+                type: boolean
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1740,6 +1786,253 @@ paths:
           required: false
           description: 'Specifies the order for results. If True, the results are returned in ascending order, based on the creation date.'
           type: boolean
+  '/domainConfigurations/{domainConfigurationName}':
+    post:
+      operationId: CreateDomainConfiguration
+      description: <p>Creates a domain configuration.</p> <note> <p>The domain configuration feature is in public preview and is subject to change.</p> </note>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateDomainConfigurationResponse'
+        '480':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '481':
+          description: CertificateValidationException
+          schema:
+            $ref: '#/definitions/CertificateValidationException'
+        '482':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '485':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '486':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '487':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: domainConfigurationName
+          in: path
+          required: true
+          description: The name of the domain configuration. This value must be unique to a region.
+          type: string
+          pattern: '[\w.-]+'
+          minLength: 1
+          maxLength: 128
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              domainName:
+                description: The name of the domain.
+                type: string
+                minLength: 1
+                maxLength: 253
+              serverCertificateArns:
+                description: The ARNs of the certificates that AWS IoT passes to the device during the TLS handshake. Currently you can specify only one certificate ARN. This value is not required for AWS-managed domains.
+                type: array
+                items:
+                  $ref: '#/definitions/AcmCertificateArn'
+                minItems: 0
+                maxItems: 1
+              validationCertificateArn:
+                description: The certificate used to validate the server certificate and prove domain name ownership. This certificate must be signed by a public certificate authority. This value is not required for AWS-managed domains.
+                type: string
+                pattern: 'arn:aws:acm:[a-z]{2}-(gov-)?[a-z]{4,9}-\d{1}:\d{12}:certificate/?[a-zA-Z0-9/-]+'
+                minLength: 1
+                maxLength: 2048
+              authorizerConfig:
+                description: An object that specifies the authorization service for a domain.
+                type: object
+                properties:
+                  defaultAuthorizerName:
+                    $ref: '#/definitions/AuthorizerName'
+                    description: The name of the authorization service for a domain configuration.
+                  allowAuthorizerOverride:
+                    $ref: '#/definitions/AllowAuthorizerOverride'
+                    description: A Boolean that specifies whether the domain configuration's authorization service can be overridden.
+              serviceType:
+                description: The type of service delivered by the endpoint.
+                type: string
+                enum:
+                  - DATA
+                  - CREDENTIAL_PROVIDER
+                  - JOBS
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteDomainConfiguration
+      description: <p>Deletes the specified domain configuration.</p> <note> <p>The domain configuration feature is in public preview and is subject to change.</p> </note>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteDomainConfigurationResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '485':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+      parameters:
+        - name: domainConfigurationName
+          in: path
+          required: true
+          description: The name of the domain configuration to be deleted.
+          type: string
+          pattern: '[\w.-]+'
+          minLength: 1
+          maxLength: 128
+    get:
+      operationId: DescribeDomainConfiguration
+      description: <p>Gets summary information about a domain configuration.</p> <note> <p>The domain configuration feature is in public preview and is subject to change.</p> </note>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeDomainConfigurationResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: domainConfigurationName
+          in: path
+          required: true
+          description: The name of the domain configuration.
+          type: string
+          pattern: '[\w.:-]+'
+          minLength: 1
+          maxLength: 128
+    put:
+      operationId: UpdateDomainConfiguration
+      description: <p>Updates values stored in the domain configuration. Domain configurations for default endpoints can't be updated.</p> <note> <p>The domain configuration feature is in public preview and is subject to change.</p> </note>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateDomainConfigurationResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: CertificateValidationException
+          schema:
+            $ref: '#/definitions/CertificateValidationException'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: domainConfigurationName
+          in: path
+          required: true
+          description: The name of the domain configuration to be updated.
+          type: string
+          pattern: '[\w.:-]+'
+          minLength: 1
+          maxLength: 128
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              authorizerConfig:
+                description: An object that specifies the authorization service for a domain.
+                type: object
+                properties:
+                  defaultAuthorizerName:
+                    $ref: '#/definitions/AuthorizerName'
+                    description: The name of the authorization service for a domain configuration.
+                  allowAuthorizerOverride:
+                    $ref: '#/definitions/AllowAuthorizerOverride'
+                    description: A Boolean that specifies whether the domain configuration's authorization service can be overridden.
+              domainConfigurationStatus:
+                description: The status to which the domain configuration should be updated.
+                type: string
+                enum:
+                  - ENABLED
+                  - DISABLED
+              removeAuthorizerConfig:
+                description: Removes the authorization configuration from a domain.
+                type: boolean
   '/dynamic-thing-groups/{thingGroupName}':
     post:
       operationId: CreateDynamicThingGroup
@@ -2225,7 +2518,7 @@ paths:
   /keys-and-certificate:
     post:
       operationId: CreateKeysAndCertificate
-      description: '<p>Creates a 2048-bit RSA key pair and issues an X.509 certificate using the issued public key.</p> <p> <b>Note</b> This is the only time AWS IoT issues the private key for this certificate, so it is important to keep it in a secure location.</p>'
+      description: '<p>Creates a 2048-bit RSA key pair and issues an X.509 certificate using the issued public key. You can also call <code>CreateKeysAndCertificate</code> over MQTT from a device, for more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/provision-wo-cert.html#provision-mqtt-api">Provisioning MQTT API</a>.</p> <p> <b>Note</b> This is the only time AWS IoT issues the private key for this certificate, so it is important to keep it in a secure location.</p>'
       responses:
         '200':
           description: Success
@@ -2950,6 +3243,292 @@ paths:
           pattern: '[\w+=,.@-]+'
           minLength: 1
           maxLength: 128
+  '/provisioning-templates/{templateName}/provisioning-claim':
+    post:
+      operationId: CreateProvisioningClaim
+      description: Creates a provisioning claim.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateProvisioningClaimResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: templateName
+          in: path
+          required: true
+          description: The name of the provisioning template to use.
+          type: string
+          pattern: '^[0-9A-Za-z_-]+$'
+          minLength: 1
+          maxLength: 36
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /provisioning-templates:
+    post:
+      operationId: CreateProvisioningTemplate
+      description: Creates a fleet provisioning template.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateProvisioningTemplateResponse'
+        '480':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '485':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - templateName
+              - templateBody
+              - provisioningRoleArn
+            properties:
+              templateName:
+                description: The name of the fleet provisioning template.
+                type: string
+                pattern: '^[0-9A-Za-z_-]+$'
+                minLength: 1
+                maxLength: 36
+              description:
+                description: The description of the fleet provisioning template.
+                type: string
+                pattern: '[^\p{C}]*'
+                minLength: 0
+                maxLength: 500
+              templateBody:
+                description: The JSON formatted contents of the fleet provisioning template.
+                type: string
+              enabled:
+                description: 'True to enable the fleet provisioning template, otherwise false.'
+                type: boolean
+              provisioningRoleArn:
+                description: The role ARN for the role associated with the fleet provisioning template. This IoT role grants permission to provision a device.
+                type: string
+                minLength: 20
+                maxLength: 2048
+              tags:
+                description: '<p>Metadata which can be used to manage the fleet provisioning template.</p> <note> <p>For URI Request parameters use format: ...key1=value1&amp;key2=value2...</p> <p>For the CLI command-line parameter use format: &amp;&amp;tags "key1=value1&amp;key2=value2..."</p> <p>For the cli-input-json file use format: "tags": "key1=value1&amp;key2=value2..."</p> </note>'
+                type: array
+                items:
+                  $ref: '#/definitions/Tag'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListProvisioningTemplates
+      description: Lists the fleet provisioning templates in your AWS account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListProvisioningTemplatesResponse'
+        '480':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to return at one time.
+          type: integer
+          minimum: 1
+          maximum: 250
+        - name: nextToken
+          in: query
+          required: false
+          description: A token to retrieve the next set of results.
+          type: string
+  '/provisioning-templates/{templateName}/versions':
+    post:
+      operationId: CreateProvisioningTemplateVersion
+      description: Creates a new version of a fleet provisioning template.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateProvisioningTemplateVersionResponse'
+        '480':
+          description: VersionsLimitExceededException
+          schema:
+            $ref: '#/definitions/VersionsLimitExceededException'
+        '481':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '485':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '486':
+          description: ConflictingResourceUpdateException
+          schema:
+            $ref: '#/definitions/ConflictingResourceUpdateException'
+      parameters:
+        - name: templateName
+          in: path
+          required: true
+          description: The name of the fleet provisioning template.
+          type: string
+          pattern: '^[0-9A-Za-z_-]+$'
+          minLength: 1
+          maxLength: 36
+        - name: setAsDefault
+          in: query
+          required: false
+          description: Sets a fleet provision template version as the default version.
+          type: boolean
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - templateBody
+            properties:
+              templateBody:
+                description: The JSON formatted contents of the fleet provisioning template.
+                type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListProvisioningTemplateVersions
+      description: A list of fleet provisioning template versions.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListProvisioningTemplateVersionsResponse'
+        '480':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+      parameters:
+        - name: templateName
+          in: path
+          required: true
+          description: The name of the fleet provisioning template.
+          type: string
+          pattern: '^[0-9A-Za-z_-]+$'
+          minLength: 1
+          maxLength: 36
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to return at one time.
+          type: integer
+          minimum: 1
+          maximum: 250
+        - name: nextToken
+          in: query
+          required: false
+          description: A token to retrieve the next set of results.
+          type: string
   '/role-aliases/{roleAlias}':
     post:
       operationId: CreateRoleAlias
@@ -4665,6 +5244,145 @@ paths:
                   errorAction:
                     $ref: '#/definitions/Action'
                     description: The action to take when an error occurs.
+  /destinations:
+    post:
+      operationId: CreateTopicRuleDestination
+      description: Creates a topic rule destination. The destination must be confirmed prior to use.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateTopicRuleDestinationResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: ConflictingResourceUpdateException
+          schema:
+            $ref: '#/definitions/ConflictingResourceUpdateException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - destinationConfiguration
+            properties:
+              destinationConfiguration:
+                description: Configuration of the topic rule destination.
+                type: object
+                properties:
+                  httpUrlConfiguration:
+                    $ref: '#/definitions/HttpUrlDestinationConfiguration'
+                    description: Configuration of the HTTP URL.
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListTopicRuleDestinations
+      description: Lists all the topic rule destinations in your AWS account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTopicRuleDestinationsResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to return at one time.
+          type: integer
+          minimum: 1
+          maximum: 1000
+        - name: nextToken
+          in: query
+          required: false
+          description: The token to retrieve the next set of results.
+          type: string
+    patch:
+      operationId: UpdateTopicRuleDestination
+      description: 'Updates a topic rule destination. You use this to change the status, endpoint URL, or confirmation URL of the destination.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateTopicRuleDestinationResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
+          description: ConflictingResourceUpdateException
+          schema:
+            $ref: '#/definitions/ConflictingResourceUpdateException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - arn
+              - status
+            properties:
+              arn:
+                description: The ARN of the topic rule destination.
+                type: string
+              status:
+                description: '<p>The status of the topic rule destination. Valid values are:</p> <dl> <dt>IN_PROGRESS</dt> <dd> <p>A topic rule destination was created but has not been confirmed. You can set <code>status</code> to <code>IN_PROGRESS</code> by calling <code>UpdateTopicRuleDestination</code>. Calling <code>UpdateTopicRuleDestination</code> causes a new confirmation challenge to be sent to your confirmation endpoint.</p> </dd> <dt>ENABLED</dt> <dd> <p>Confirmation was completed, and traffic to this destination is allowed. You can set <code>status</code> to <code>DISABLED</code> by calling <code>UpdateTopicRuleDestination</code>.</p> </dd> <dt>DISABLED</dt> <dd> <p>Confirmation was completed, and traffic to this destination is not allowed. You can set <code>status</code> to <code>ENABLED</code> by calling <code>UpdateTopicRuleDestination</code>.</p> </dd> <dt>ERROR</dt> <dd> <p>Confirmation could not be completed, for example if the confirmation timed out. You can call <code>GetTopicRuleDestination</code> for details about the error. You can set <code>status</code> to <code>IN_PROGRESS</code> by calling <code>UpdateTopicRuleDestination</code>. Calling <code>UpdateTopicRuleDestination</code> causes a new confirmation challenge to be sent to your confirmation endpoint.</p> </dd> </dl>'
+                type: string
+                enum:
+                  - ENABLED
+                  - IN_PROGRESS
+                  - DISABLED
+                  - ERROR
   /audit/configuration:
     delete:
       operationId: DeleteAccountAuditConfiguration
@@ -5246,6 +5964,250 @@ paths:
           description: The policy version ID.
           type: string
           pattern: '[0-9]+'
+  '/provisioning-templates/{templateName}':
+    delete:
+      operationId: DeleteProvisioningTemplate
+      description: Deletes a fleet provisioning template.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteProvisioningTemplateResponse'
+        '480':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: DeleteConflictException
+          schema:
+            $ref: '#/definitions/DeleteConflictException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '485':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+      parameters:
+        - name: templateName
+          in: path
+          required: true
+          description: The name of the fleet provision template to delete.
+          type: string
+          pattern: '^[0-9A-Za-z_-]+$'
+          minLength: 1
+          maxLength: 36
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeProvisioningTemplate
+      description: Returns information about a fleet provisioning template.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeProvisioningTemplateResponse'
+        '480':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+      parameters:
+        - name: templateName
+          in: path
+          required: true
+          description: The name of the fleet provisioning template.
+          type: string
+          pattern: '^[0-9A-Za-z_-]+$'
+          minLength: 1
+          maxLength: 36
+    patch:
+      operationId: UpdateProvisioningTemplate
+      description: Updates a fleet provisioning template.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateProvisioningTemplateResponse'
+        '480':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
+          description: ConflictingResourceUpdateException
+          schema:
+            $ref: '#/definitions/ConflictingResourceUpdateException'
+      parameters:
+        - name: templateName
+          in: path
+          required: true
+          description: The name of the fleet provisioning template.
+          type: string
+          pattern: '^[0-9A-Za-z_-]+$'
+          minLength: 1
+          maxLength: 36
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              description:
+                description: The description of the fleet provisioning template.
+                type: string
+                pattern: '[^\p{C}]*'
+                minLength: 0
+                maxLength: 500
+              enabled:
+                description: 'True to enable the fleet provisioning template, otherwise false.'
+                type: boolean
+              defaultVersionId:
+                description: The ID of the default provisioning template version.
+                type: integer
+              provisioningRoleArn:
+                description: The ARN of the role associated with the provisioning template. This IoT role grants permission to provision a device.
+                type: string
+                minLength: 20
+                maxLength: 2048
+  '/provisioning-templates/{templateName}/versions/{versionId}':
+    delete:
+      operationId: DeleteProvisioningTemplateVersion
+      description: Deletes a fleet provisioning template version.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteProvisioningTemplateVersionResponse'
+        '480':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '485':
+          description: DeleteConflictException
+          schema:
+            $ref: '#/definitions/DeleteConflictException'
+      parameters:
+        - name: templateName
+          in: path
+          required: true
+          description: The name of the fleet provisioning template version to delete.
+          type: string
+          pattern: '^[0-9A-Za-z_-]+$'
+          minLength: 1
+          maxLength: 36
+        - name: versionId
+          in: path
+          required: true
+          description: The fleet provisioning template version ID to delete.
+          type: integer
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeProvisioningTemplateVersion
+      description: Returns information about a fleet provisioning template version.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeProvisioningTemplateVersionResponse'
+        '480':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+      parameters:
+        - name: templateName
+          in: path
+          required: true
+          description: The template name.
+          type: string
+          pattern: '^[0-9A-Za-z_-]+$'
+          minLength: 1
+          maxLength: 36
+        - name: versionId
+          in: path
+          required: true
+          description: The fleet provisioning template version ID.
+          type: integer
   /registrationcode:
     delete:
       operationId: DeleteRegistrationCode
@@ -5313,6 +6275,79 @@ paths:
           schema:
             $ref: '#/definitions/InvalidRequestException'
       parameters: []
+  '/destinations/{arn}':
+    delete:
+      operationId: DeleteTopicRuleDestination
+      description: Deletes a topic rule destination.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteTopicRuleDestinationResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
+          description: ConflictingResourceUpdateException
+          schema:
+            $ref: '#/definitions/ConflictingResourceUpdateException'
+      parameters:
+        - name: arn
+          in: path
+          required: true
+          description: The ARN of the topic rule destination to delete.
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetTopicRuleDestination
+      description: Gets information about a topic rule destination.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetTopicRuleDestinationResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+      parameters:
+        - name: arn
+          in: path
+          required: true
+          description: The ARN of the topic rule destination.
+          type: string
   '/v2LoggingLevel#targetType&targetName':
     delete:
       operationId: DeleteV2LoggingLevel
@@ -5641,6 +6676,7 @@ paths:
           required: false
           description: '<p>The endpoint type. Valid endpoint types include:</p> <ul> <li> <p> <code>iot:Data</code> - Returns a VeriSign signed data endpoint.</p> </li> </ul> <ul> <li> <p> <code>iot:Data-ATS</code> - Returns an ATS signed data endpoint.</p> </li> </ul> <ul> <li> <p> <code>iot:CredentialProvider</code> - Returns an AWS IoT credentials provider API endpoint.</p> </li> </ul> <ul> <li> <p> <code>iot:Jobs</code> - Returns an AWS IoT device management Jobs API endpoint.</p> </li> </ul>'
           type: string
+          maxLength: 128
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -5947,7 +6983,7 @@ paths:
   /indices/cardinality:
     post:
       operationId: GetCardinality
-      description: 'Returns the number of things with distinct values for the aggregation field. '
+      description: Returns the approximate count of unique values that match the query.
       responses:
         '200':
           description: Success
@@ -6092,7 +7128,7 @@ paths:
   /indexing/config:
     get:
       operationId: GetIndexingConfiguration
-      description: Gets the search configuration.
+      description: Gets the indexing configuration.
       responses:
         '200':
           description: Success
@@ -6193,7 +7229,7 @@ paths:
                     description: Contains fields that are indexed and whose types are already known by the Fleet Indexing service.
                   customFields:
                     $ref: '#/definitions/Fields'
-                    description: Contains custom field names and their data type.
+                    description: <p>A list of thing group fields to index. This list cannot contain any managed fields. Use the GetIndexingConfiguration API to get a list of managed fields.</p> <p>Contains custom field names and their data type.</p>
   '/jobs/{jobId}/job-document':
     get:
       operationId: GetJobDocument
@@ -6306,7 +7342,7 @@ paths:
   /indices/percentiles:
     post:
       operationId: GetPercentiles
-      description: 'Returns the percentile values for the aggregation field. The results from GetPercentiles is an approximation. The default percentile groupings are: 1,5,25,50,75,95,99. You can specify custom percentile grouping using the percents argument to the GetPercentiles API.'
+      description: 'Groups the aggregated values that match the query into percentile groupings. The default percentile groupings are: 1,5,25,50,75,95,99, although you can specify your own when you call <code>GetPercentiles</code>. This function returns a value for each percentile group specified (or the default percentile groupings). The percentile group "1" contains the aggregated field value that occurs in approximately one percent of the values that match the query. The percentile group "5" contains the aggregated field value that occurs in approximately five percent of the values that match the query, and so on. The result is an approximation, the more values that match the query, the more accurate the percentile values.'
       responses:
         '200':
           description: Success
@@ -6390,7 +7426,7 @@ paths:
   /indices/statistics:
     post:
       operationId: GetStatistics
-      description: 'Gets statistics returns the count, average, sum, minimum, maximum, sumOfSquares, variance, and standard deviation for the specified aggregated field. If the aggregation field is of type String, only the count statistic is returned.'
+      description: 'Returns the count, average, sum, minimum, maximum, sum of squares, variance, and standard deviation for the specified aggregated field. If the aggregation field is of type <code>String</code>, only the count statistic is returned.'
       responses:
         '200':
           description: Success
@@ -6725,6 +7761,12 @@ paths:
                   account:
                     $ref: '#/definitions/AwsAccountId'
                     description: The account with which the resource is associated.
+                  iamRoleArn:
+                    $ref: '#/definitions/RoleArn'
+                    description: The ARN of the IAM role that has overly permissive actions.
+                  roleAliasArn:
+                    $ref: '#/definitions/RoleAliasArn'
+                    description: The ARN of the role alias that has overly permissive actions.
               maxResults:
                 description: The maximum number of results to return at one time. The default is 25.
                 type: integer
@@ -7209,6 +8251,66 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /domainConfigurations:
+    get:
+      operationId: ListDomainConfigurations
+      description: <p>Gets a list of domain configurations for the user. This list is sorted alphabetically by domain configuration name.</p> <note> <p>The domain configuration feature is in public preview and is subject to change.</p> </note>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListDomainConfigurationsResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: marker
+          in: query
+          required: false
+          description: The marker for the next set of results.
+          type: string
+          pattern: '[A-Za-z0-9+/]+={0,2}'
+        - name: pageSize
+          in: query
+          required: false
+          description: The result page size.
+          type: integer
+          minimum: 1
+          maximum: 250
+        - name: serviceType
+          in: query
+          required: false
+          description: The type of service delivered by the endpoint.
+          type: string
+          enum:
+            - DATA
+            - CREDENTIAL_PROVIDER
+            - JOBS
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /indices:
     get:
       operationId: ListIndices
@@ -7242,7 +8344,7 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: 'The token used to get the next set of results, or null if there are no additional results.'
+          description: 'The token used to get the next set of results, or <code>null</code> if there are no additional results.'
           type: string
         - name: maxResults
           in: query
@@ -9584,7 +10686,7 @@ paths:
                 type: string
                 minLength: 1
               nextToken:
-                description: 'The token used to get the next set of results, or null if there are no additional results.'
+                description: 'The token used to get the next set of results, or <code>null</code> if there are no additional results.'
                 type: string
               maxResults:
                 description: The maximum number of results to return at one time.
@@ -9881,9 +10983,6 @@ paths:
           required: true
           schema:
             type: object
-            required:
-              - token
-              - tokenSignature
             properties:
               token:
                 description: The token returned by your custom authentication service.
@@ -9896,6 +10995,36 @@ paths:
                 pattern: '[A-Za-z0-9+/]+={0,2}'
                 minLength: 1
                 maxLength: 2560
+              httpContext:
+                description: Specifies the HTTP context to use for the test authorizer request.
+                type: object
+                properties:
+                  headers:
+                    $ref: '#/definitions/HttpHeaders'
+                    description: The header keys and values in an HTTP authorization request.
+                  queryString:
+                    $ref: '#/definitions/HttpQueryString'
+                    description: The query string keys and values in an HTTP authorization request.
+              mqttContext:
+                description: Specifies the MQTT context to use for the test authorizer request
+                type: object
+                properties:
+                  username:
+                    $ref: '#/definitions/MqttUsername'
+                    description: The value of the <code>username</code> key in an MQTT authorization request.
+                  password:
+                    $ref: '#/definitions/MqttPassword'
+                    description: The value of the <code>password</code> key in an MQTT authorization request.
+                  clientId:
+                    $ref: '#/definitions/MqttClientId'
+                    description: The value of the <code>clientId</code> key in an MQTT authorization request.
+              tlsContext:
+                description: Specifies the TLS context to use for the test authorizer request.
+                type: object
+                properties:
+                  serverName:
+                    $ref: '#/definitions/ServerName'
+                    description: The value of the <code>serverName</code> key in a TLS authorization request.
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -10262,6 +11391,11 @@ definitions:
   ClearDefaultAuthorizerResponse:
     type: object
     properties: {}
+  ConfirmTopicRuleDestinationResponse:
+    type: object
+    properties: {}
+  InternalException: {}
+  ConflictingResourceUpdateException: {}
   CreateAuthorizerResponse:
     type: object
     properties:
@@ -10314,6 +11448,28 @@ definitions:
         $ref: '#/definitions/CertificatePem'
         description: 'The certificate data, in PEM format.'
     description: The output from the CreateCertificateFromCsr operation.
+  CreateDomainConfigurationResponse:
+    type: object
+    properties:
+      domainConfigurationName:
+        $ref: '#/definitions/DomainConfigurationName'
+        description: The name of the domain configuration.
+      domainConfigurationArn:
+        $ref: '#/definitions/DomainConfigurationArn'
+        description: The ARN of the domain configuration.
+  AcmCertificateArn:
+    type: string
+    pattern: 'arn:aws:acm:[a-z]{2}-(gov-)?[a-z]{4,9}-\d{1}:\d{12}:certificate/?[a-zA-Z0-9/-]+'
+    minLength: 1
+    maxLength: 2048
+  AuthorizerName:
+    type: string
+    pattern: '[\w=,@-]+'
+    minLength: 1
+    maxLength: 128
+  AllowAuthorizerOverride:
+    type: boolean
+  CertificateValidationException: {}
   CreateDynamicThingGroupResponse:
     type: object
     properties:
@@ -10562,6 +11718,48 @@ definitions:
         description: Specifies whether the policy version is the default.
     description: The output of the CreatePolicyVersion operation.
   VersionsLimitExceededException: {}
+  CreateProvisioningClaimResponse:
+    type: object
+    properties:
+      certificateId:
+        $ref: '#/definitions/CertificateId'
+        description: The ID of the certificate.
+      certificatePem:
+        $ref: '#/definitions/CertificatePem'
+        description: The provisioning claim certificate.
+      keyPair:
+        $ref: '#/definitions/KeyPair'
+        description: The provisioning claim key pair.
+      expiration:
+        $ref: '#/definitions/DateType'
+        description: The provisioning claim expiration time.
+  CreateProvisioningTemplateResponse:
+    type: object
+    properties:
+      templateArn:
+        $ref: '#/definitions/TemplateArn'
+        description: The ARN that identifies the provisioning template.
+      templateName:
+        $ref: '#/definitions/TemplateName'
+        description: The name of the fleet provisioning template.
+      defaultVersionId:
+        $ref: '#/definitions/TemplateVersionId'
+        description: The default version of the fleet provisioning template.
+  CreateProvisioningTemplateVersionResponse:
+    type: object
+    properties:
+      templateArn:
+        $ref: '#/definitions/TemplateArn'
+        description: The ARN that identifies the provisioning template.
+      templateName:
+        $ref: '#/definitions/TemplateName'
+        description: The name of the fleet provisioning template.
+      versionId:
+        $ref: '#/definitions/TemplateVersionId'
+        description: The version of the fleet provisioning template.
+      isDefaultVersion:
+        $ref: '#/definitions/IsDefaultVersion'
+        description: 'True if the fleet provisioning template version is the default version, otherwise false.'
   CreateRoleAliasResponse:
     type: object
     properties:
@@ -10758,13 +11956,32 @@ definitions:
       iotEvents:
         $ref: '#/definitions/IotEventsAction'
         description: Sends an input to an AWS IoT Events detector.
+      iotSiteWise:
+        $ref: '#/definitions/IotSiteWiseAction'
+        description: Sends data from the MQTT message that triggered the rule to AWS IoT SiteWise asset properties.
       stepFunctions:
         $ref: '#/definitions/StepFunctionsAction'
         description: Starts execution of a Step Functions state machine.
+      http:
+        $ref: '#/definitions/HttpAction'
+        description: Send data to an HTTPS endpoint.
     description: Describes the actions associated with a rule.
   SqlParseException: {}
-  InternalException: {}
-  ConflictingResourceUpdateException: {}
+  CreateTopicRuleDestinationResponse:
+    type: object
+    properties:
+      topicRuleDestination:
+        $ref: '#/definitions/TopicRuleDestination'
+        description: The topic rule destination.
+  HttpUrlDestinationConfiguration:
+    type: object
+    required:
+      - confirmationUrl
+    properties:
+      confirmationUrl:
+        $ref: '#/definitions/Url'
+        description: The URL AWS IoT uses to confirm ownership of or access to the topic rule destination URL.
+    description: HTTP URL destination configuration used by the topic rule's HTTP action.
   DeleteAccountAuditConfigurationResponse:
     type: object
     properties: {}
@@ -10780,6 +11997,9 @@ definitions:
     properties: {}
     description: The output for the DeleteCACertificate operation.
   CertificateStateException: {}
+  DeleteDomainConfigurationResponse:
+    type: object
+    properties: {}
   DeleteDynamicThingGroupResponse:
     type: object
     properties: {}
@@ -10787,6 +12007,12 @@ definitions:
     type: object
     properties: {}
   DeleteOTAUpdateResponse:
+    type: object
+    properties: {}
+  DeleteProvisioningTemplateResponse:
+    type: object
+    properties: {}
+  DeleteProvisioningTemplateVersionResponse:
     type: object
     properties: {}
   DeleteRegistrationCodeResponse:
@@ -10816,6 +12042,9 @@ definitions:
     type: object
     properties: {}
     description: The output for the DeleteThingType operation.
+  DeleteTopicRuleDestinationResponse:
+    type: object
+    properties: {}
   DeprecateThingTypeResponse:
     type: object
     properties: {}
@@ -10932,6 +12161,33 @@ definitions:
       authorizerDescription:
         $ref: '#/definitions/AuthorizerDescription'
         description: The default authorizer's description.
+  DescribeDomainConfigurationResponse:
+    type: object
+    properties:
+      domainConfigurationName:
+        $ref: '#/definitions/ReservedDomainConfigurationName'
+        description: The name of the domain configuration.
+      domainConfigurationArn:
+        $ref: '#/definitions/DomainConfigurationArn'
+        description: The ARN of the domain configuration.
+      domainName:
+        $ref: '#/definitions/DomainName'
+        description: The name of the domain.
+      serverCertificates:
+        $ref: '#/definitions/ServerCertificates'
+        description: A list containing summary information about the server certificate included in the domain configuration.
+      authorizerConfig:
+        $ref: '#/definitions/AuthorizerConfig'
+        description: An object that specifies the authorization service for a domain.
+      domainConfigurationStatus:
+        $ref: '#/definitions/DomainConfigurationStatus'
+        description: A Boolean value that specifies the current state of the domain configuration.
+      serviceType:
+        $ref: '#/definitions/ServiceType'
+        description: The type of service delivered by the endpoint.
+      domainType:
+        $ref: '#/definitions/DomainType'
+        description: The type of the domain.
   DescribeEndpointResponse:
     type: object
     properties:
@@ -11005,6 +12261,51 @@ definitions:
       lastModifiedDate:
         $ref: '#/definitions/Timestamp'
         description: The date and time when the mitigation action was last changed.
+  DescribeProvisioningTemplateResponse:
+    type: object
+    properties:
+      templateArn:
+        $ref: '#/definitions/TemplateArn'
+        description: The ARN of the fleet provisioning template.
+      templateName:
+        $ref: '#/definitions/TemplateName'
+        description: The name of the fleet provisioning template.
+      description:
+        $ref: '#/definitions/TemplateDescription'
+        description: The description of the fleet provisioning template.
+      creationDate:
+        $ref: '#/definitions/DateType'
+        description: The date when the fleet provisioning template was created.
+      lastModifiedDate:
+        $ref: '#/definitions/DateType'
+        description: The date when the fleet provisioning template was last modified.
+      defaultVersionId:
+        $ref: '#/definitions/TemplateVersionId'
+        description: The default fleet template version ID.
+      templateBody:
+        $ref: '#/definitions/TemplateBody'
+        description: The JSON formatted contents of the fleet provisioning template.
+      enabled:
+        $ref: '#/definitions/Enabled'
+        description: 'True if the fleet provisioning template is enabled, otherwise false.'
+      provisioningRoleArn:
+        $ref: '#/definitions/RoleArn'
+        description: The ARN of the role associated with the provisioning template. This IoT role grants permission to provision a device.
+  DescribeProvisioningTemplateVersionResponse:
+    type: object
+    properties:
+      versionId:
+        $ref: '#/definitions/TemplateVersionId'
+        description: The fleet provisioning template version ID.
+      creationDate:
+        $ref: '#/definitions/DateType'
+        description: The date when the fleet provisioning template version was created.
+      templateBody:
+        $ref: '#/definitions/TemplateBody'
+        description: The JSON formatted contents of the fleet provisioning template version.
+      isDefaultVersion:
+        $ref: '#/definitions/IsDefaultVersion'
+        description: True if the fleet provisioning template version is the default version.
   DescribeRoleAliasResponse:
     type: object
     properties:
@@ -11199,7 +12500,7 @@ definitions:
     properties:
       cardinality:
         $ref: '#/definitions/Count'
-        description: The number of things that match the query.
+        description: The approximate count of unique values that match the query.
   InvalidAggregationException: {}
   IndexNotReadyException: {}
   GetEffectivePoliciesResponse:
@@ -11326,6 +12627,12 @@ definitions:
         $ref: '#/definitions/TopicRule'
         description: The rule.
     description: The output from the GetTopicRule operation.
+  GetTopicRuleDestinationResponse:
+    type: object
+    properties:
+      topicRuleDestination:
+        $ref: '#/definitions/TopicRuleDestination'
+        description: The topic rule destination.
   GetV2LoggingOptionsResponse:
     type: object
     properties:
@@ -11390,6 +12697,10 @@ definitions:
     pattern: '[0-9]+'
     minLength: 12
     maxLength: 12
+  RoleAliasArn:
+    type: string
+    minLength: 1
+    maxLength: 2048
   ListAuditMitigationActionsExecutionsResponse:
     type: object
     properties:
@@ -11465,6 +12776,15 @@ definitions:
         $ref: '#/definitions/Marker'
         description: 'The marker for the next set of results, or null if there are no additional results.'
     description: The output of the ListCertificatesByCA operation.
+  ListDomainConfigurationsResponse:
+    type: object
+    properties:
+      domainConfigurations:
+        $ref: '#/definitions/DomainConfigurations'
+        description: A list of objects that contain summary information about the user's domain configurations.
+      nextMarker:
+        $ref: '#/definitions/Marker'
+        description: The marker for the next set of results.
   ListIndicesResponse:
     type: object
     properties:
@@ -11473,7 +12793,7 @@ definitions:
         description: The index names.
       nextToken:
         $ref: '#/definitions/NextToken'
-        description: 'The token used to get the next set of results, or null if there are no additional results.'
+        description: 'The token used to get the next set of results, or <code>null</code> if there are no additional results.'
   ListJobExecutionsForJobResponse:
     type: object
     properties:
@@ -11576,6 +12896,24 @@ definitions:
         $ref: '#/definitions/NextToken'
         description: 'The token used to get the next set of results, or <b>null</b> if there are no additional results.'
     description: The output from the ListPrincipalThings operation.
+  ListProvisioningTemplateVersionsResponse:
+    type: object
+    properties:
+      versions:
+        $ref: '#/definitions/ProvisioningTemplateVersionListing'
+        description: The list of fleet provisioning template versions.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: A token to retrieve the next set of results.
+  ListProvisioningTemplatesResponse:
+    type: object
+    properties:
+      templates:
+        $ref: '#/definitions/ProvisioningTemplateListing'
+        description: A list of fleet provisioning templates
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: A token to retrieve the next set of results.
   ListRoleAliasesResponse:
     type: object
     properties:
@@ -11732,6 +13070,15 @@ definitions:
       nextToken:
         $ref: '#/definitions/NextToken'
         description: 'The token used to get the next set of results, or <b>null</b> if there are no additional results.'
+  ListTopicRuleDestinationsResponse:
+    type: object
+    properties:
+      destinationSummaries:
+        $ref: '#/definitions/TopicRuleDestinationSummaries'
+        description: Information about a topic rule destination.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token to retrieve the next set of results.
   ListTopicRulesResponse:
     type: object
     properties:
@@ -11773,7 +13120,6 @@ definitions:
   TemplateBody:
     type: string
   RegistrationCodeValidationException: {}
-  CertificateValidationException: {}
   RegisterCertificateResponse:
     type: object
     properties:
@@ -11806,7 +13152,7 @@ definitions:
     properties:
       nextToken:
         $ref: '#/definitions/NextToken'
-        description: 'The token used to get the next set of results, or null if there are no additional results.'
+        description: 'The token used to get the next set of results, or <code>null</code> if there are no additional results.'
       things:
         $ref: '#/definitions/ThingDocumentList'
         description: The things that match the search query.
@@ -11924,6 +13270,30 @@ definitions:
       disconnectAfterInSeconds:
         $ref: '#/definitions/Seconds'
         description: The number of seconds after which the connection is terminated.
+  HttpHeaders:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/HttpHeaderValue'
+  HttpQueryString:
+    type: string
+    minLength: 1
+    maxLength: 4096
+  MqttUsername:
+    type: string
+    minLength: 1
+    maxLength: 65535
+  MqttPassword:
+    type: string
+    minLength: 1
+    maxLength: 65535
+  MqttClientId:
+    type: string
+    minLength: 1
+    maxLength: 65535
+  ServerName:
+    type: string
+    minLength: 1
+    maxLength: 253
   InvalidResponseException: {}
   TransferCertificateResponse:
     type: object
@@ -11976,6 +13346,15 @@ definitions:
       version:
         $ref: '#/definitions/Version'
         description: The latest version of the billing group.
+  UpdateDomainConfigurationResponse:
+    type: object
+    properties:
+      domainConfigurationName:
+        $ref: '#/definitions/ReservedDomainConfigurationName'
+        description: The name of the domain configuration that was updated.
+      domainConfigurationArn:
+        $ref: '#/definitions/DomainConfigurationArn'
+        description: The ARN of the domain configuration that was updated.
   UpdateDynamicThingGroupResponse:
     type: object
     properties:
@@ -12024,6 +13403,9 @@ definitions:
       actionId:
         $ref: '#/definitions/MitigationActionId'
         description: A unique identifier for the mitigation action.
+  UpdateProvisioningTemplateResponse:
+    type: object
+    properties: {}
   UpdateRoleAliasResponse:
     type: object
     properties:
@@ -12102,6 +13484,9 @@ definitions:
     pattern: '[a-zA-Z0-9:_-]+'
     minLength: 1
     maxLength: 128
+  UpdateTopicRuleDestinationResponse:
+    type: object
+    properties: {}
   ValidateSecurityProfileBehaviorsResponse:
     type: object
     properties:
@@ -12442,6 +13827,19 @@ definitions:
         $ref: '#/definitions/AwsArn'
         description: 'The ARN of the role that grants AWS IoT permission to send an input to an AWS IoT Events detector. ("Action":"iotevents:BatchPutMessage").'
     description: Sends an input to an AWS IoT Events detector.
+  IotSiteWiseAction:
+    type: object
+    required:
+      - putAssetPropertyValueEntries
+      - roleArn
+    properties:
+      putAssetPropertyValueEntries:
+        $ref: '#/definitions/PutAssetPropertyValueEntryList'
+        description: A list of asset property value entries.
+      roleArn:
+        $ref: '#/definitions/AwsArn'
+        description: 'The ARN of the role that grants AWS IoT permission to send an asset property value to AWS IoTSiteWise. (<code>"Action": "iotsitewise:BatchPutAssetPropertyValue"</code>). The trust policy can restrict access to specific asset hierarchy paths.'
+    description: Describes an action to send data from an MQTT message that triggered the rule to AWS IoT SiteWise asset properties.
   StepFunctionsAction:
     type: object
     required:
@@ -12458,6 +13856,24 @@ definitions:
         $ref: '#/definitions/AwsArn'
         description: 'The ARN of the role that grants IoT permission to start execution of a state machine ("Action":"states:StartExecution").'
     description: Starts execution of a Step Functions state machine.
+  HttpAction:
+    type: object
+    required:
+      - url
+    properties:
+      url:
+        $ref: '#/definitions/Url'
+        description: 'The endpoint URL. If substitution templates are used in the URL, you must also specify a <code>confirmationUrl</code>. If this is a new destination, a new <code>TopicRuleDestination</code> is created if possible.'
+      confirmationUrl:
+        $ref: '#/definitions/Url'
+        description: 'The URL to which AWS IoT sends a confirmation message. The value of the confirmation URL must be a prefix of the endpoint URL. If you do not specify a confirmation URL AWS IoT uses the endpoint URL as the confirmation URL. If you use substitution templates in the confirmationUrl, you must create and enable topic rule destinations that match each possible value of the substituion template before traffic is allowed to your endpoint URL.'
+      headers:
+        $ref: '#/definitions/HeaderList'
+        description: The HTTP headers to send with the message data.
+      auth:
+        $ref: '#/definitions/HttpAuthorization'
+        description: The authentication method to use when sending data to an HTTPS endpoint.
+    description: Send data to an HTTPS endpoint.
   ActionType:
     type: string
     enum:
@@ -12622,6 +14038,81 @@ definitions:
     type: integer
   AscendingOrder:
     type: boolean
+  AssetId:
+    type: string
+  AssetPropertyAlias:
+    type: string
+    minLength: 1
+    maxLength: 2048
+  AssetPropertyBooleanValue:
+    type: string
+  AssetPropertyDoubleValue:
+    type: string
+  AssetPropertyEntryId:
+    type: string
+  AssetPropertyId:
+    type: string
+  AssetPropertyIntegerValue:
+    type: string
+  AssetPropertyOffsetInNanos:
+    type: string
+  AssetPropertyQuality:
+    type: string
+  AssetPropertyStringValue:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  AssetPropertyTimeInSeconds:
+    type: string
+  AssetPropertyTimestamp:
+    type: object
+    required:
+      - timeInSeconds
+    properties:
+      timeInSeconds:
+        $ref: '#/definitions/AssetPropertyTimeInSeconds'
+        description: A string that contains the time in seconds since epoch. Accepts substitution templates.
+      offsetInNanos:
+        $ref: '#/definitions/AssetPropertyOffsetInNanos'
+        description: Optional. A string that contains the nanosecond time offset. Accepts substitution templates.
+    description: An asset property timestamp entry containing the following information.
+  AssetPropertyVariant:
+    type: object
+    properties:
+      stringValue:
+        $ref: '#/definitions/AssetPropertyStringValue'
+        description: Optional. The string value of the value entry. Accepts substitution templates.
+      integerValue:
+        $ref: '#/definitions/AssetPropertyIntegerValue'
+        description: Optional. A string that contains the integer value of the value entry. Accepts substitution templates.
+      doubleValue:
+        $ref: '#/definitions/AssetPropertyDoubleValue'
+        description: Optional. A string that contains the double value of the value entry. Accepts substitution templates.
+      booleanValue:
+        $ref: '#/definitions/AssetPropertyBooleanValue'
+        description: Optional. A string that contains the boolean value (<code>true</code> or <code>false</code>) of the value entry. Accepts substitution templates.
+    description: Contains an asset property value (of a single type).
+  AssetPropertyValue:
+    type: object
+    required:
+      - value
+      - timestamp
+    properties:
+      value:
+        $ref: '#/definitions/AssetPropertyVariant'
+        description: The value of the asset property.
+      timestamp:
+        $ref: '#/definitions/AssetPropertyTimestamp'
+        description: The asset property value timestamp.
+      quality:
+        $ref: '#/definitions/AssetPropertyQuality'
+        description: 'Optional. A string that describes the quality of the value. Accepts substitution templates. Must be <code>GOOD</code>, <code>BAD</code>, or <code>UNCERTAIN</code>.'
+    description: An asset property value entry containing the following information.
+  AssetPropertyValueList:
+    type: array
+    items:
+      $ref: '#/definitions/AssetPropertyValue'
+    minItems: 1
   JobTargets:
     type: array
     items:
@@ -13039,11 +14530,16 @@ definitions:
       $ref: '#/definitions/AuthResult'
   AuthorizerArn:
     type: string
-  AuthorizerName:
-    type: string
-    pattern: '[\w=,@-]+'
-    minLength: 1
-    maxLength: 128
+  AuthorizerConfig:
+    type: object
+    properties:
+      defaultAuthorizerName:
+        $ref: '#/definitions/AuthorizerName'
+        description: The name of the authorization service for a domain configuration.
+      allowAuthorizerOverride:
+        $ref: '#/definitions/AllowAuthorizerOverride'
+        description: A Boolean that specifies whether the domain configuration's authorization service can be overridden.
+    description: An object that specifies the authorization service for a domain.
   AuthorizerFunctionArn:
     type: string
   TokenKeyName:
@@ -13063,6 +14559,8 @@ definitions:
   DateType:
     type: string
     format: date-time
+  BooleanKey:
+    type: boolean
   AuthorizerDescription:
     type: object
     properties:
@@ -13090,6 +14588,9 @@ definitions:
       lastModifiedDate:
         $ref: '#/definitions/DateType'
         description: The UNIX timestamp of when the authorizer was last updated.
+      signingDisabled:
+        $ref: '#/definitions/BooleanKey'
+        description: Specifies whether AWS IoT validates the token signature in an authorization request.
     description: The authorizer description.
   AuthorizerSummary:
     type: object
@@ -13561,6 +15062,13 @@ definitions:
     description: Describes the signature for a file.
   CompliantChecksCount:
     type: integer
+  ConfirmationToken:
+    type: string
+    minLength: 1
+    maxLength: 2048
+  ConfirmTopicRuleDestinationRequest:
+    type: object
+    properties: {}
   ConnectivityTimestamp:
     type: integer
   Count:
@@ -13569,8 +15077,6 @@ definitions:
     type: object
     required:
       - authorizerFunctionArn
-      - tokenKeyName
-      - tokenSigningPublicKeys
     properties:
       authorizerFunctionArn:
         $ref: '#/definitions/AuthorizerFunctionArn'
@@ -13584,6 +15090,9 @@ definitions:
       status:
         $ref: '#/definitions/AuthorizerStatus'
         description: The status of the create authorizer request.
+      signingDisabled:
+        $ref: '#/definitions/BooleanKey'
+        description: Specifies whether AWS IoT validates the token signature in an authorization request.
   TagList:
     type: array
     items:
@@ -13606,6 +15115,47 @@ definitions:
         $ref: '#/definitions/CertificateSigningRequest'
         description: The certificate signing request (CSR).
     description: The input for the CreateCertificateFromCsr operation.
+  DomainConfigurationName:
+    type: string
+    pattern: '[\w.-]+'
+    minLength: 1
+    maxLength: 128
+  DomainName:
+    type: string
+    minLength: 1
+    maxLength: 253
+  ServerCertificateArns:
+    type: array
+    items:
+      $ref: '#/definitions/AcmCertificateArn'
+    minItems: 0
+    maxItems: 1
+  ServiceType:
+    type: string
+    enum:
+      - DATA
+      - CREDENTIAL_PROVIDER
+      - JOBS
+  CreateDomainConfigurationRequest:
+    type: object
+    properties:
+      domainName:
+        $ref: '#/definitions/DomainName'
+        description: The name of the domain.
+      serverCertificateArns:
+        $ref: '#/definitions/ServerCertificateArns'
+        description: The ARNs of the certificates that AWS IoT passes to the device during the TLS handshake. Currently you can specify only one certificate ARN. This value is not required for AWS-managed domains.
+      validationCertificateArn:
+        $ref: '#/definitions/AcmCertificateArn'
+        description: The certificate used to validate the server certificate and prove domain name ownership. This certificate must be signed by a public certificate authority. This value is not required for AWS-managed domains.
+      authorizerConfig:
+        $ref: '#/definitions/AuthorizerConfig'
+        description: An object that specifies the authorization service for a domain.
+      serviceType:
+        $ref: '#/definitions/ServiceType'
+        description: The type of service delivered by the endpoint.
+  DomainConfigurationArn:
+    type: string
   ThingGroupProperties:
     type: object
     properties:
@@ -13867,6 +15417,56 @@ definitions:
     description: The input for the CreatePolicyVersion operation.
   IsDefaultVersion:
     type: boolean
+  TemplateName:
+    type: string
+    pattern: '^[0-9A-Za-z_-]+$'
+    minLength: 1
+    maxLength: 36
+  CreateProvisioningClaimRequest:
+    type: object
+    properties: {}
+  TemplateDescription:
+    type: string
+    pattern: '[^\p{C}]*'
+    minLength: 0
+    maxLength: 500
+  CreateProvisioningTemplateRequest:
+    type: object
+    required:
+      - templateName
+      - templateBody
+      - provisioningRoleArn
+    properties:
+      templateName:
+        $ref: '#/definitions/TemplateName'
+        description: The name of the fleet provisioning template.
+      description:
+        $ref: '#/definitions/TemplateDescription'
+        description: The description of the fleet provisioning template.
+      templateBody:
+        $ref: '#/definitions/TemplateBody'
+        description: The JSON formatted contents of the fleet provisioning template.
+      enabled:
+        $ref: '#/definitions/Enabled'
+        description: 'True to enable the fleet provisioning template, otherwise false.'
+      provisioningRoleArn:
+        $ref: '#/definitions/RoleArn'
+        description: The role ARN for the role associated with the fleet provisioning template. This IoT role grants permission to provision a device.
+      tags:
+        $ref: '#/definitions/TagList'
+        description: '<p>Metadata which can be used to manage the fleet provisioning template.</p> <note> <p>For URI Request parameters use format: ...key1=value1&amp;key2=value2...</p> <p>For the CLI command-line parameter use format: &amp;&amp;tags "key1=value1&amp;key2=value2..."</p> <p>For the cli-input-json file use format: "tags": "key1=value1&amp;key2=value2..."</p> </note>'
+  TemplateArn:
+    type: string
+  TemplateVersionId:
+    type: integer
+  CreateProvisioningTemplateVersionRequest:
+    type: object
+    required:
+      - templateBody
+    properties:
+      templateBody:
+        $ref: '#/definitions/TemplateBody'
+        description: The JSON formatted contents of the fleet provisioning template.
   RoleAlias:
     type: string
     pattern: '[\w=,@-]+'
@@ -13887,8 +15487,6 @@ definitions:
       credentialDurationSeconds:
         $ref: '#/definitions/CredentialDurationSeconds'
         description: How long (in seconds) the credentials will be valid.
-  RoleAliasArn:
-    type: string
   DayOfMonth:
     type: string
     pattern: '^([1-9]|[12][0-9]|3[01])$|^LAST$'
@@ -14053,6 +15651,37 @@ definitions:
     type: string
   ThingTypeId:
     type: string
+  TopicRuleDestinationConfiguration:
+    type: object
+    properties:
+      httpUrlConfiguration:
+        $ref: '#/definitions/HttpUrlDestinationConfiguration'
+        description: Configuration of the HTTP URL.
+    description: Configuration of the topic rule destination.
+  CreateTopicRuleDestinationRequest:
+    type: object
+    required:
+      - destinationConfiguration
+    properties:
+      destinationConfiguration:
+        $ref: '#/definitions/TopicRuleDestinationConfiguration'
+        description: The topic rule destination configuration.
+  TopicRuleDestination:
+    type: object
+    properties:
+      arn:
+        $ref: '#/definitions/AwsArn'
+        description: The topic rule destination URL.
+      status:
+        $ref: '#/definitions/TopicRuleDestinationStatus'
+        description: '<p>The status of the topic rule destination. Valid values are:</p> <dl> <dt>IN_PROGRESS</dt> <dd> <p>A topic rule destination was created but has not been confirmed. You can set <code>status</code> to <code>IN_PROGRESS</code> by calling <code>UpdateTopicRuleDestination</code>. Calling <code>UpdateTopicRuleDestination</code> causes a new confirmation challenge to be sent to your confirmation endpoint.</p> </dd> <dt>ENABLED</dt> <dd> <p>Confirmation was completed, and traffic to this destination is allowed. You can set <code>status</code> to <code>DISABLED</code> by calling <code>UpdateTopicRuleDestination</code>.</p> </dd> <dt>DISABLED</dt> <dd> <p>Confirmation was completed, and traffic to this destination is not allowed. You can set <code>status</code> to <code>ENABLED</code> by calling <code>UpdateTopicRuleDestination</code>.</p> </dd> <dt>ERROR</dt> <dd> <p>Confirmation could not be completed, for example if the confirmation timed out. You can call <code>GetTopicRuleDestination</code> for details about the error. You can set <code>status</code> to <code>IN_PROGRESS</code> by calling <code>UpdateTopicRuleDestination</code>. Calling <code>UpdateTopicRuleDestination</code> causes a new confirmation challenge to be sent to your confirmation endpoint.</p> </dd> </dl>'
+      statusReason:
+        $ref: '#/definitions/String'
+        description: Additional details or reason why the topic rule destination is in the current status.
+      httpUrlProperties:
+        $ref: '#/definitions/HttpUrlDestinationProperties'
+        description: Properties of the HTTP URL.
+    description: A topic rule destination.
   RuleName:
     type: string
     pattern: '^[a-zA-Z0-9_]+$'
@@ -14128,6 +15757,9 @@ definitions:
     type: object
     properties: {}
     description: The input for the DeleteCertificate operation.
+  DeleteDomainConfigurationRequest:
+    type: object
+    properties: {}
   DeleteDynamicThingGroupRequest:
     type: object
     properties: {}
@@ -14157,6 +15789,12 @@ definitions:
     type: object
     properties: {}
     description: The input for the DeletePolicyVersion operation.
+  DeleteProvisioningTemplateRequest:
+    type: object
+    properties: {}
+  DeleteProvisioningTemplateVersionRequest:
+    type: object
+    properties: {}
   DeleteRegistrationCodeRequest:
     type: object
     properties: {}
@@ -14184,6 +15822,9 @@ definitions:
     type: object
     properties: {}
     description: The input for the DeleteThingType operation.
+  DeleteTopicRuleDestinationRequest:
+    type: object
+    properties: {}
   DeleteTopicRuleRequest:
     type: object
     properties: {}
@@ -14289,8 +15930,32 @@ definitions:
   DescribeDefaultAuthorizerRequest:
     type: object
     properties: {}
+  ReservedDomainConfigurationName:
+    type: string
+    pattern: '[\w.:-]+'
+    minLength: 1
+    maxLength: 128
+  DescribeDomainConfigurationRequest:
+    type: object
+    properties: {}
+  ServerCertificates:
+    type: array
+    items:
+      $ref: '#/definitions/ServerCertificateSummary'
+  DomainConfigurationStatus:
+    type: string
+    enum:
+      - ENABLED
+      - DISABLED
+  DomainType:
+    type: string
+    enum:
+      - ENDPOINT
+      - AWS_MANAGED
+      - CUSTOMER_MANAGED
   EndpointType:
     type: string
+    maxLength: 128
   DescribeEndpointRequest:
     type: object
     properties: {}
@@ -14428,6 +16093,12 @@ definitions:
       - REPLACE_DEFAULT_POLICY_VERSION
       - ENABLE_IOT_LOGGING
       - PUBLISH_FINDING_TO_SNS
+  DescribeProvisioningTemplateRequest:
+    type: object
+    properties: {}
+  DescribeProvisioningTemplateVersionRequest:
+    type: object
+    properties: {}
   DescribeRoleAliasRequest:
     type: object
     properties: {}
@@ -14612,6 +16283,23 @@ definitions:
     type: object
     properties: {}
     description: The input for the DisableTopicRuleRequest operation.
+  DomainConfigurationSummary:
+    type: object
+    properties:
+      domainConfigurationName:
+        $ref: '#/definitions/ReservedDomainConfigurationName'
+        description: The name of the domain configuration. This value must be unique to a region.
+      domainConfigurationArn:
+        $ref: '#/definitions/DomainConfigurationArn'
+        description: The ARN of the domain configuration.
+      serviceType:
+        $ref: '#/definitions/ServiceType'
+        description: The type of service delivered by the endpoint.
+    description: '<p>The summary of a domain configuration. A domain configuration specifies custom IoT-specific information about a domain. A domain configuration can be associated with an AWS-managed domain (for example, dbc123defghijk.iot.us-west-2.amazonaws.com), a customer managed domain, or a default endpoint.</p> <ul> <li> <p>Data</p> </li> <li> <p>Jobs</p> </li> <li> <p>CredentialProvider</p> </li> </ul> <note> <p>The domain configuration feature is in public preview and is subject to change.</p> </note>'
+  DomainConfigurations:
+    type: array
+    items:
+      $ref: '#/definitions/DomainConfigurationSummary'
   TableName:
     type: string
   DynamoOperation:
@@ -14790,10 +16478,6 @@ definitions:
     type: boolean
   FunctionArn:
     type: string
-  GEMaxResults:
-    type: integer
-    minimum: 1
-    maximum: 10000
   GetCardinalityRequest:
     type: object
     required:
@@ -14854,7 +16538,7 @@ definitions:
         description: Contains fields that are indexed and whose types are already known by the Fleet Indexing service.
       customFields:
         $ref: '#/definitions/Fields'
-        description: Contains custom field names and their data type.
+        description: <p>A list of thing group fields to index. This list cannot contain any managed fields. Use the GetIndexingConfiguration API to get a list of managed fields.</p> <p>Contains custom field names and their data type.</p>
     description: Thing group indexing configuration.
   GetJobDocumentRequest:
     type: object
@@ -15000,8 +16684,11 @@ definitions:
         description: The variance of the aggregated field values.
       stdDeviation:
         $ref: '#/definitions/StdDeviation'
-        description: The standard deviation of the aggregated field valuesl
+        description: The standard deviation of the aggregated field values.
     description: 'A map of key-value pairs for all supported statistics. Currently, only count is supported.'
+  GetTopicRuleDestinationRequest:
+    type: object
+    properties: {}
   GetTopicRuleRequest:
     type: object
     properties: {}
@@ -15039,6 +16726,90 @@ definitions:
   GetV2LoggingOptionsRequest:
     type: object
     properties: {}
+  HeaderKey:
+    type: string
+    minLength: 1
+    maxLength: 256
+  HttpActionHeader:
+    type: object
+    required:
+      - key
+      - value
+    properties:
+      key:
+        $ref: '#/definitions/HeaderKey'
+        description: The HTTP header key.
+      value:
+        $ref: '#/definitions/HeaderValue'
+        description: The HTTP header value. Substitution templates are supported.
+    description: The HTTP action header.
+  HeaderList:
+    type: array
+    items:
+      $ref: '#/definitions/HttpActionHeader'
+    minItems: 0
+    maxItems: 100
+  HeaderValue:
+    type: string
+  Url:
+    type: string
+    maxLength: 2000
+  HttpAuthorization:
+    type: object
+    properties:
+      sigv4:
+        $ref: '#/definitions/SigV4Authorization'
+        description: 'Use Sig V4 authorization. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 Signing Process</a>.'
+    description: The authorization method used to send messages.
+  SigV4Authorization:
+    type: object
+    required:
+      - signingRegion
+      - serviceName
+      - roleArn
+    properties:
+      signingRegion:
+        $ref: '#/definitions/SigningRegion'
+        description: The signing region.
+      serviceName:
+        $ref: '#/definitions/ServiceName'
+        description: The service name to use while signing with Sig V4.
+      roleArn:
+        $ref: '#/definitions/AwsArn'
+        description: The ARN of the signing role.
+    description: Use Sig V4 authorization.
+  HttpContext:
+    type: object
+    properties:
+      headers:
+        $ref: '#/definitions/HttpHeaders'
+        description: The header keys and values in an HTTP authorization request.
+      queryString:
+        $ref: '#/definitions/HttpQueryString'
+        description: The query string keys and values in an HTTP authorization request.
+    description: Specifies the HTTP context to use for the test authorizer request.
+  HttpHeaderName:
+    type: string
+    minLength: 1
+    maxLength: 8192
+  HttpHeaderValue:
+    type: string
+    minLength: 1
+    maxLength: 8192
+  HttpUrlDestinationProperties:
+    type: object
+    properties:
+      confirmationUrl:
+        $ref: '#/definitions/Url'
+        description: The URL used to confirm the HTTP topic rule destination URL.
+    description: HTTP URL destination properties.
+  HttpUrlDestinationSummary:
+    type: object
+    properties:
+      confirmationUrl:
+        $ref: '#/definitions/Url'
+        description: The URL used to confirm ownership of or access to the HTTP topic rule destination URL.
+    description: Information about an HTTP URL destination.
   InProgressChecksCount:
     type: integer
   InProgressThings:
@@ -15054,6 +16825,11 @@ definitions:
   MessageId:
     type: string
     maxLength: 128
+  PutAssetPropertyValueEntryList:
+    type: array
+    items:
+      $ref: '#/definitions/PutAssetPropertyValueEntry'
+    minItems: 1
   IsAuthenticated:
     type: boolean
   JobStatus:
@@ -15273,6 +17049,12 @@ definitions:
       account:
         $ref: '#/definitions/AwsAccountId'
         description: The account with which the resource is associated.
+      iamRoleArn:
+        $ref: '#/definitions/RoleArn'
+        description: The ARN of the IAM role that has overly permissive actions.
+      roleAliasArn:
+        $ref: '#/definitions/RoleAliasArn'
+        description: The ARN of the role alias that has overly permissive actions.
     description: Information that identifies the noncompliant resource.
   ListAuditFindingsRequest:
     type: object
@@ -15329,6 +17111,9 @@ definitions:
     type: object
     properties: {}
     description: The input for the ListCertificates operation.
+  ListDomainConfigurationsRequest:
+    type: object
+    properties: {}
   QueryMaxResults:
     type: integer
     minimum: 1
@@ -15399,6 +17184,20 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ThingName'
+  ListProvisioningTemplateVersionsRequest:
+    type: object
+    properties: {}
+  ProvisioningTemplateVersionListing:
+    type: array
+    items:
+      $ref: '#/definitions/ProvisioningTemplateVersionSummary'
+  ListProvisioningTemplatesRequest:
+    type: object
+    properties: {}
+  ProvisioningTemplateListing:
+    type: array
+    items:
+      $ref: '#/definitions/ProvisioningTemplateSummary'
   ListRoleAliasesRequest:
     type: object
     properties: {}
@@ -15510,8 +17309,23 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ThingAttribute'
+  TopicRuleDestinationMaxResults:
+    type: integer
+    minimum: 1
+    maximum: 1000
+  ListTopicRuleDestinationsRequest:
+    type: object
+    properties: {}
+  TopicRuleDestinationSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/TopicRuleDestinationSummary'
   Topic:
     type: string
+  TopicRuleMaxResults:
+    type: integer
+    minimum: 1
+    maximum: 10000
   ListTopicRulesRequest:
     type: object
     properties: {}
@@ -15624,6 +17438,19 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: The date when this mitigation action was created.
     description: Information that identifies a mitigation action. This information is returned by ListMitigationActions.
+  MqttContext:
+    type: object
+    properties:
+      username:
+        $ref: '#/definitions/MqttUsername'
+        description: The value of the <code>username</code> key in an MQTT authorization request.
+      password:
+        $ref: '#/definitions/MqttPassword'
+        description: The value of the <code>password</code> key in an MQTT authorization request.
+      clientId:
+        $ref: '#/definitions/MqttClientId'
+        description: The value of the <code>clientId</code> key in an MQTT authorization request.
+    description: Specifies the MQTT context to use for the test authorizer request
   NonCompliantChecksCount:
     type: integer
   ResourceType:
@@ -15635,6 +17462,8 @@ definitions:
       - COGNITO_IDENTITY_POOL
       - CLIENT_ID
       - ACCOUNT_SETTINGS
+      - ROLE_ALIAS
+      - IAM_ROLE
   StringMap:
     type: object
     additionalProperties:
@@ -15696,7 +17525,7 @@ definitions:
         description: The percentile.
       value:
         $ref: '#/definitions/PercentValue'
-        description: The value.
+        description: The value of the percentile.
     description: Describes the percentile and percentile value.
   Platform:
     type: string
@@ -15750,9 +17579,65 @@ definitions:
     maxLength: 128
   ProcessingTargetName:
     type: string
+  ProvisioningTemplateSummary:
+    type: object
+    properties:
+      templateArn:
+        $ref: '#/definitions/TemplateArn'
+        description: The ARN of the fleet provisioning template.
+      templateName:
+        $ref: '#/definitions/TemplateName'
+        description: The name of the fleet provisioning template.
+      description:
+        $ref: '#/definitions/TemplateDescription'
+        description: The description of the fleet provisioning template.
+      creationDate:
+        $ref: '#/definitions/DateType'
+        description: The date when the fleet provisioning template summary was created.
+      lastModifiedDate:
+        $ref: '#/definitions/DateType'
+        description: The date when the fleet provisioning template summary was last modified.
+      enabled:
+        $ref: '#/definitions/Enabled'
+        description: 'True if the fleet provision template is enabled, otherwise false.'
+    description: A summary of information about a fleet provisioning template.
+  ProvisioningTemplateVersionSummary:
+    type: object
+    properties:
+      versionId:
+        $ref: '#/definitions/TemplateVersionId'
+        description: The ID of the fleet privisioning template version.
+      creationDate:
+        $ref: '#/definitions/DateType'
+        description: The date when the fleet provisioning template version was created
+      isDefaultVersion:
+        $ref: '#/definitions/IsDefaultVersion'
+        description: 'True if the fleet provisioning template version is the default version, otherwise false.'
+    description: A summary of information about a fleet provision template version.
   SnsTopicArn:
     type: string
     maxLength: 350
+  PutAssetPropertyValueEntry:
+    type: object
+    required:
+      - propertyValues
+    properties:
+      entryId:
+        $ref: '#/definitions/AssetPropertyEntryId'
+        description: Optional. A unique identifier for this entry that you can define to better track which message caused an error in case of failure. Accepts substitution templates. Defaults to a new UUID.
+      assetId:
+        $ref: '#/definitions/AssetId'
+        description: The ID of the AWS IoT SiteWise asset. You must specify either a <code>propertyAlias</code> or both an <code>analiasId</code> and a <code>propertyId</code>. Accepts substitution templates.
+      propertyId:
+        $ref: '#/definitions/AssetPropertyId'
+        description: The ID of the asset's property. You must specify either a <code>propertyAlias</code> or both an <code>analiasId</code> and a <code>propertyId</code>. Accepts substitution templates.
+      propertyAlias:
+        $ref: '#/definitions/AssetPropertyAlias'
+        description: The name of the property alias associated with your asset property. You must specify either a <code>propertyAlias</code> or both an <code>aliasId</code> and a <code>propertyId</code>. Accepts substitution templates.
+      propertyValues:
+        $ref: '#/definitions/AssetPropertyValueList'
+        description: 'A list of property values to insert that each contain timestamp, quality, and value (TQV) information.'
+    description: An asset property value entry containing the following information.
   Qos:
     type: integer
     minimum: 0
@@ -15827,6 +17712,8 @@ definitions:
         $ref: '#/definitions/StringMap'
         description: Other information about the resource.
     description: Information about a related resource.
+  RemoveAuthorizerConfig:
+    type: boolean
   RemoveAutoRegistration:
     type: boolean
   RemoveThingFromBillingGroupRequest:
@@ -15926,7 +17813,7 @@ definitions:
         description: The search query string.
       nextToken:
         $ref: '#/definitions/NextToken'
-        description: 'The token used to get the next set of results, or null if there are no additional results.'
+        description: 'The token used to get the next set of results, or <code>null</code> if there are no additional results.'
       maxResults:
         $ref: '#/definitions/QueryMaxResults'
         description: The maximum number of results to return at one time.
@@ -15975,6 +17862,28 @@ definitions:
         $ref: '#/definitions/SecurityProfileTarget'
         description: Information about the target (thing group) associated with the security profile.
     description: Information about a security profile and the target associated with it.
+  ServerCertificateStatus:
+    type: string
+    enum:
+      - INVALID
+      - VALID
+  ServerCertificateStatusDetail:
+    type: string
+  ServerCertificateSummary:
+    type: object
+    properties:
+      serverCertificateArn:
+        $ref: '#/definitions/AcmCertificateArn'
+        description: The ARN of the server certificate.
+      serverCertificateStatus:
+        $ref: '#/definitions/ServerCertificateStatus'
+        description: The status of the server certificate.
+      serverCertificateStatusDetail:
+        $ref: '#/definitions/ServerCertificateStatusDetail'
+        description: Details that explain the status of the server certificate.
+    description: An object that contains information about a server certificate.
+  ServiceName:
+    type: string
   SetDefaultAuthorizerRequest:
     type: object
     required:
@@ -16020,6 +17929,8 @@ definitions:
       disableAllLogs:
         $ref: '#/definitions/DisableAllLogs'
         description: If true all logs are disabled. The default is false.
+  SigningRegion:
+    type: string
   SigningProfileName:
     type: string
   SigningProfileParameter:
@@ -16171,11 +18082,15 @@ definitions:
     pattern: '[A-Za-z0-9+/]+={0,2}'
     minLength: 1
     maxLength: 2560
+  TlsContext:
+    type: object
+    properties:
+      serverName:
+        $ref: '#/definitions/ServerName'
+        description: The value of the <code>serverName</code> key in a TLS authorization request.
+    description: Specifies the TLS context to use for the test authorizer request.
   TestInvokeAuthorizerRequest:
     type: object
-    required:
-      - token
-      - tokenSignature
     properties:
       token:
         $ref: '#/definitions/Token'
@@ -16183,6 +18098,15 @@ definitions:
       tokenSignature:
         $ref: '#/definitions/TokenSignature'
         description: The signature made with the token and your custom authentication service's private key.
+      httpContext:
+        $ref: '#/definitions/HttpContext'
+        description: Specifies a test HTTP authorization request.
+      mqttContext:
+        $ref: '#/definitions/MqttContext'
+        description: Specifies a test MQTT authorization request.&gt;
+      tlsContext:
+        $ref: '#/definitions/TlsContext'
+        description: Specifies a test TLS authorization request.
   ThingAttribute:
     type: object
     properties:
@@ -16280,6 +18204,29 @@ definitions:
         $ref: '#/definitions/ThingTypeMetadata'
         description: 'The ThingTypeMetadata contains additional information about the thing type including: creation date and time, a value indicating whether the thing type is deprecated, and a date and time when it was deprecated.'
     description: 'The definition of the thing type, including thing type name and description.'
+  TopicRuleDestinationStatus:
+    type: string
+    enum:
+      - ENABLED
+      - IN_PROGRESS
+      - DISABLED
+      - ERROR
+  TopicRuleDestinationSummary:
+    type: object
+    properties:
+      arn:
+        $ref: '#/definitions/AwsArn'
+        description: The topic rule destination ARN.
+      status:
+        $ref: '#/definitions/TopicRuleDestinationStatus'
+        description: '<p>The status of the topic rule destination. Valid values are:</p> <dl> <dt>IN_PROGRESS</dt> <dd> <p>A topic rule destination was created but has not been confirmed. You can set <code>status</code> to <code>IN_PROGRESS</code> by calling <code>UpdateTopicRuleDestination</code>. Calling <code>UpdateTopicRuleDestination</code> causes a new confirmation challenge to be sent to your confirmation endpoint.</p> </dd> <dt>ENABLED</dt> <dd> <p>Confirmation was completed, and traffic to this destination is allowed. You can set <code>status</code> to <code>DISABLED</code> by calling <code>UpdateTopicRuleDestination</code>.</p> </dd> <dt>DISABLED</dt> <dd> <p>Confirmation was completed, and traffic to this destination is not allowed. You can set <code>status</code> to <code>ENABLED</code> by calling <code>UpdateTopicRuleDestination</code>.</p> </dd> <dt>ERROR</dt> <dd> <p>Confirmation could not be completed, for example if the confirmation timed out. You can call <code>GetTopicRuleDestination</code> for details about the error. You can set <code>status</code> to <code>IN_PROGRESS</code> by calling <code>UpdateTopicRuleDestination</code>. Calling <code>UpdateTopicRuleDestination</code> causes a new confirmation challenge to be sent to your confirmation endpoint.</p> </dd> </dl>'
+      statusReason:
+        $ref: '#/definitions/String'
+        description: The reason the topic rule destination is in the current status.
+      httpUrlSummary:
+        $ref: '#/definitions/HttpUrlDestinationSummary'
+        description: Information about the HTTP URL.
+    description: Information about the topic rule destination.
   TopicRuleListItem:
     type: object
     properties:
@@ -16370,6 +18317,18 @@ definitions:
     type: object
     properties: {}
     description: The input for the UpdateCertificate operation.
+  UpdateDomainConfigurationRequest:
+    type: object
+    properties:
+      authorizerConfig:
+        $ref: '#/definitions/AuthorizerConfig'
+        description: An object that specifies the authorization service for a domain.
+      domainConfigurationStatus:
+        $ref: '#/definitions/DomainConfigurationStatus'
+        description: The status to which the domain configuration should be updated.
+      removeAuthorizerConfig:
+        $ref: '#/definitions/RemoveAuthorizerConfig'
+        description: Removes the authorization configuration from a domain.
   UpdateDynamicThingGroupRequest:
     type: object
     required:
@@ -16432,6 +18391,21 @@ definitions:
       actionParams:
         $ref: '#/definitions/MitigationActionParams'
         description: Defines the type of action and the parameters for that action.
+  UpdateProvisioningTemplateRequest:
+    type: object
+    properties:
+      description:
+        $ref: '#/definitions/TemplateDescription'
+        description: The description of the fleet provisioning template.
+      enabled:
+        $ref: '#/definitions/Enabled'
+        description: 'True to enable the fleet provisioning template, otherwise false.'
+      defaultVersionId:
+        $ref: '#/definitions/TemplateVersionId'
+        description: The ID of the default provisioning template version.
+      provisioningRoleArn:
+        $ref: '#/definitions/RoleArn'
+        description: The ARN of the role associated with the provisioning template. This IoT role grants permission to provision a device.
   UpdateRoleAliasRequest:
     type: object
     properties:
@@ -16534,6 +18508,18 @@ definitions:
         $ref: '#/definitions/RemoveThingType'
         description: 'Remove a thing type association. If <b>true</b>, the association is removed.'
     description: The input for the UpdateThing operation.
+  UpdateTopicRuleDestinationRequest:
+    type: object
+    required:
+      - arn
+      - status
+    properties:
+      arn:
+        $ref: '#/definitions/AwsArn'
+        description: The ARN of the topic rule destination.
+      status:
+        $ref: '#/definitions/TopicRuleDestinationStatus'
+        description: '<p>The status of the topic rule destination. Valid values are:</p> <dl> <dt>IN_PROGRESS</dt> <dd> <p>A topic rule destination was created but has not been confirmed. You can set <code>status</code> to <code>IN_PROGRESS</code> by calling <code>UpdateTopicRuleDestination</code>. Calling <code>UpdateTopicRuleDestination</code> causes a new confirmation challenge to be sent to your confirmation endpoint.</p> </dd> <dt>ENABLED</dt> <dd> <p>Confirmation was completed, and traffic to this destination is allowed. You can set <code>status</code> to <code>DISABLED</code> by calling <code>UpdateTopicRuleDestination</code>.</p> </dd> <dt>DISABLED</dt> <dd> <p>Confirmation was completed, and traffic to this destination is not allowed. You can set <code>status</code> to <code>ENABLED</code> by calling <code>UpdateTopicRuleDestination</code>.</p> </dd> <dt>ERROR</dt> <dd> <p>Confirmation could not be completed, for example if the confirmation timed out. You can call <code>GetTopicRuleDestination</code> for details about the error. You can set <code>status</code> to <code>IN_PROGRESS</code> by calling <code>UpdateTopicRuleDestination</code>. Calling <code>UpdateTopicRuleDestination</code> causes a new confirmation challenge to be sent to your confirmation endpoint.</p> </dd> </dl>'
   Valid:
     type: boolean
   ValidateSecurityProfileBehaviorsRequest:

@@ -163,7 +163,7 @@ paths:
   '/#X-Amz-Target=AmazonForecast.CreateDataset':
     post:
       operationId: CreateDataset
-      description: '<p>Creates an Amazon Forecast dataset. The information about the dataset that you provide helps Forecast understand how to consume the data for model training. This includes the following:</p> <ul> <li> <p> <i> <code>DataFrequency</code> </i> - How frequently your historical time-series data is collected. Amazon Forecast uses this information when training the model and generating a forecast.</p> </li> <li> <p> <i> <code>Domain</code> </i> and <i> <code>DatasetType</code> </i> - Each dataset has an associated dataset domain and a type within the domain. Amazon Forecast provides a list of predefined domains and types within each domain. For each unique dataset domain and type within the domain, Amazon Forecast requires your data to include a minimum set of predefined fields.</p> </li> <li> <p> <i> <code>Schema</code> </i> - A schema specifies the fields of the dataset, including the field name and data type.</p> </li> </ul> <p>After creating a dataset, you import your training data into the dataset and add the dataset to a dataset group. You then use the dataset group to create a predictor. For more information, see <a>howitworks-datasets-groups</a>.</p> <p>To get a list of all your datasets, use the <a>ListDatasets</a> operation.</p> <note> <p>The <code>Status</code> of a dataset must be <code>ACTIVE</code> before you can import training data. Use the <a>DescribeDataset</a> operation to get the status.</p> </note>'
+      description: '<p>Creates an Amazon Forecast dataset. The information about the dataset that you provide helps Forecast understand how to consume the data for model training. This includes the following:</p> <ul> <li> <p> <i> <code>DataFrequency</code> </i> - How frequently your historical time-series data is collected.</p> </li> <li> <p> <i> <code>Domain</code> </i> and <i> <code>DatasetType</code> </i> - Each dataset has an associated dataset domain and a type within the domain. Amazon Forecast provides a list of predefined domains and types within each domain. For each unique dataset domain and type within the domain, Amazon Forecast requires your data to include a minimum set of predefined fields.</p> </li> <li> <p> <i> <code>Schema</code> </i> - A schema specifies the fields in the dataset, including the field name and data type.</p> </li> </ul> <p>After creating a dataset, you import your training data into it and add the dataset to a dataset group. You use the dataset group to create a predictor. For more information, see <a>howitworks-datasets-groups</a>.</p> <p>To get a list of all your datasets, use the <a>ListDatasets</a> operation.</p> <p>For example Forecast datasets, see the <a href="https://github.com/aws-samples/amazon-forecast-samples/tree/master/data">Amazon Forecast Sample GitHub repository</a>.</p> <note> <p>The <code>Status</code> of a dataset must be <code>ACTIVE</code> before you can import training data. Use the <a>DescribeDataset</a> operation to get the status.</p> </note>'
       responses:
         '200':
           description: Success
@@ -204,7 +204,7 @@ paths:
   '/#X-Amz-Target=AmazonForecast.CreateDatasetGroup':
     post:
       operationId: CreateDatasetGroup
-      description: '<p>Creates an Amazon Forecast dataset group, which holds a collection of related datasets. You can add datasets to the dataset group when you create the dataset group, or you can add datasets later with the <a>UpdateDatasetGroup</a> operation.</p> <p>After creating a dataset group and adding datasets, you use the dataset group when you create a predictor. For more information, see <a>howitworks-datasets-groups</a>.</p> <p>To get a list of all your datasets groups, use the <a>ListDatasetGroups</a> operation.</p> <note> <p>The <code>Status</code> of a dataset group must be <code>ACTIVE</code> before you can create a predictor using the dataset group. Use the <a>DescribeDatasetGroup</a> operation to get the status.</p> </note>'
+      description: '<p>Creates a dataset group, which holds a collection of related datasets. You can add datasets to the dataset group when you create the dataset group, or later by using the <a>UpdateDatasetGroup</a> operation.</p> <p>After creating a dataset group and adding datasets, you use the dataset group when you create a predictor. For more information, see <a>howitworks-datasets-groups</a>.</p> <p>To get a list of all your datasets groups, use the <a>ListDatasetGroups</a> operation.</p> <note> <p>The <code>Status</code> of a dataset group must be <code>ACTIVE</code> before you can create use the dataset group to create a predictor. To get the status, use the <a>DescribeDatasetGroup</a> operation.</p> </note>'
       responses:
         '200':
           description: Success
@@ -253,7 +253,7 @@ paths:
   '/#X-Amz-Target=AmazonForecast.CreateDatasetImportJob':
     post:
       operationId: CreateDatasetImportJob
-      description: '<p>Imports your training data to an Amazon Forecast dataset. You provide the location of your training data in an Amazon Simple Storage Service (Amazon S3) bucket and the Amazon Resource Name (ARN) of the dataset that you want to import the data to.</p> <p>You must specify a <a>DataSource</a> object that includes an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the data. For more information, see <a>aws-forecast-iam-roles</a>.</p> <p>Two properties of the training data are optionally specified:</p> <ul> <li> <p>The delimiter that separates the data fields.</p> <p>The default delimiter is a comma (,), which is the only supported delimiter in this release.</p> </li> <li> <p>The format of timestamps.</p> <p>If the format is not specified, Amazon Forecast expects the format to be "yyyy-MM-dd HH:mm:ss".</p> </li> </ul> <p>When Amazon Forecast uploads your training data, it verifies that the data was collected at the <code>DataFrequency</code> specified when the target dataset was created. For more information, see <a>CreateDataset</a> and <a>howitworks-datasets-groups</a>. Amazon Forecast also verifies the delimiter and timestamp format.</p> <p>You can use the <a>ListDatasetImportJobs</a> operation to get a list of all your dataset import jobs, filtered by specified criteria.</p> <p>To get a list of all your dataset import jobs, filtered by the specified criteria, use the <a>ListDatasetGroups</a> operation.</p>'
+      description: '<p>Imports your training data to an Amazon Forecast dataset. You provide the location of your training data in an Amazon Simple Storage Service (Amazon S3) bucket and the Amazon Resource Name (ARN) of the dataset that you want to import the data to.</p> <p>You must specify a <a>DataSource</a> object that includes an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the data. For more information, see <a>aws-forecast-iam-roles</a>.</p> <p>The training data must be in CSV format. The delimiter must be a comma (,).</p> <p>You can specify the path to a specific CSV file, the S3 bucket, or to a folder in the S3 bucket. For the latter two cases, Amazon Forecast imports all files up to the limit of 10,000 files.</p> <p>To get a list of all your dataset import jobs, filtered by specified criteria, use the <a>ListDatasetImportJobs</a> operation.</p>'
       responses:
         '200':
           description: Success
@@ -302,7 +302,7 @@ paths:
   '/#X-Amz-Target=AmazonForecast.CreateForecast':
     post:
       operationId: CreateForecast
-      description: '<p>Creates a forecast for each item in the <code>TARGET_TIME_SERIES</code> dataset that was used to train the predictor. This is known as inference. To retrieve the forecast for a single item at low latency, use the operation. To export the complete forecast into your Amazon Simple Storage Service (Amazon S3), use the <a>CreateForecastExportJob</a> operation.</p> <p>The range of the forecast is determined by the <code>ForecastHorizon</code>, specified in the <a>CreatePredictor</a> request, multiplied by the <code>DataFrequency</code>, specified in the <a>CreateDataset</a> request. When you query a forecast, you can request a specific date range within the complete forecast.</p> <p>To get a list of all your forecasts, use the <a>ListForecasts</a> operation.</p> <note> <p>The forecasts generated by Amazon Forecast are in the same timezone as the dataset that was used to create the predictor.</p> </note> <p>For more information, see <a>howitworks-forecast</a>.</p> <note> <p>The <code>Status</code> of the forecast must be <code>ACTIVE</code> before you can query or export the forecast. Use the <a>DescribeForecast</a> operation to get the status.</p> </note>'
+      description: '<p>Creates a forecast for each item in the <code>TARGET_TIME_SERIES</code> dataset that was used to train the predictor. This is known as inference. To retrieve the forecast for a single item at low latency, use the operation. To export the complete forecast into your Amazon Simple Storage Service (Amazon S3) bucket, use the <a>CreateForecastExportJob</a> operation.</p> <p>The range of the forecast is determined by the <code>ForecastHorizon</code> value, which you specify in the <a>CreatePredictor</a> request, multiplied by the <code>DataFrequency</code> value, which you specify in the <a>CreateDataset</a> request. When you query a forecast, you can request a specific date range within the forecast.</p> <p>To get a list of all your forecasts, use the <a>ListForecasts</a> operation.</p> <note> <p>The forecasts generated by Amazon Forecast are in the same time zone as the dataset that was used to create the predictor.</p> </note> <p>For more information, see <a>howitworks-forecast</a>.</p> <note> <p>The <code>Status</code> of the forecast must be <code>ACTIVE</code> before you can query or export the forecast. Use the <a>DescribeForecast</a> operation to get the status.</p> </note>'
       responses:
         '200':
           description: Success
@@ -351,7 +351,7 @@ paths:
   '/#X-Amz-Target=AmazonForecast.CreateForecastExportJob':
     post:
       operationId: CreateForecastExportJob
-      description: '<p>Exports a forecast created by the <a>CreateForecast</a> operation to your Amazon Simple Storage Service (Amazon S3) bucket.</p> <p>You must specify a <a>DataDestination</a> object that includes an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the Amazon S3 bucket. For more information, see <a>aws-forecast-iam-roles</a>.</p> <p>For more information, see <a>howitworks-forecast</a>.</p> <p>To get a list of all your forecast export jobs, use the <a>ListForecastExportJobs</a> operation.</p> <note> <p>The <code>Status</code> of the forecast export job must be <code>ACTIVE</code> before you can access the forecast in your Amazon S3 bucket. Use the <a>DescribeForecastExportJob</a> operation to get the status.</p> </note>'
+      description: '<p>Exports a forecast created by the <a>CreateForecast</a> operation to your Amazon Simple Storage Service (Amazon S3) bucket. The forecast file name will match the following conventions:</p> <p>&lt;ForecastExportJobName&gt;_&lt;ExportTimestamp&gt;_&lt;PageNumber&gt;</p> <p>where the &lt;ExportTimestamp&gt; component is in Java SimpleDateFormat (yyyy-MM-ddTHH-mm-ssZ).</p> <p>You must specify a <a>DataDestination</a> object that includes an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the Amazon S3 bucket. For more information, see <a>aws-forecast-iam-roles</a>.</p> <p>For more information, see <a>howitworks-forecast</a>.</p> <p>To get a list of all your forecast export jobs, use the <a>ListForecastExportJobs</a> operation.</p> <note> <p>The <code>Status</code> of the forecast export job must be <code>ACTIVE</code> before you can access the forecast in your Amazon S3 bucket. To get the status, use the <a>DescribeForecastExportJob</a> operation.</p> </note>'
       responses:
         '200':
           description: Success
@@ -400,7 +400,7 @@ paths:
   '/#X-Amz-Target=AmazonForecast.CreatePredictor':
     post:
       operationId: CreatePredictor
-      description: '<p>Creates an Amazon Forecast predictor.</p> <p>In the request, you provide a dataset group and either specify an algorithm or let Amazon Forecast choose the algorithm for you using AutoML. If you specify an algorithm, you also can override algorithm-specific hyperparameters.</p> <p>Amazon Forecast uses the chosen algorithm to train a model using the latest version of the datasets in the specified dataset group. The result is called a predictor. You then generate a forecast using the <a>CreateForecast</a> operation.</p> <p>After training a model, the <code>CreatePredictor</code> operation also evaluates it. To see the evaluation metrics, use the <a>GetAccuracyMetrics</a> operation. Always review the evaluation metrics before deciding to use the predictor to generate a forecast.</p> <p>Optionally, you can specify a featurization configuration to fill and aggragate the data fields in the <code>TARGET_TIME_SERIES</code> dataset to improve model training. For more information, see <a>FeaturizationConfig</a>.</p> <p> <b>AutoML</b> </p> <p>If you set <code>PerformAutoML</code> to <code>true</code>, Amazon Forecast evaluates each algorithm and chooses the one that minimizes the <code>objective function</code>. The <code>objective function</code> is defined as the mean of the weighted p10, p50, and p90 quantile losses. For more information, see <a>EvaluationResult</a>.</p> <p>When AutoML is enabled, the following properties are disallowed:</p> <ul> <li> <p> <code>AlgorithmArn</code> </p> </li> <li> <p> <code>HPOConfig</code> </p> </li> <li> <p> <code>PerformHPO</code> </p> </li> <li> <p> <code>TrainingParameters</code> </p> </li> </ul> <p>To get a list of all your predictors, use the <a>ListPredictors</a> operation.</p> <note> <p>The <code>Status</code> of the predictor must be <code>ACTIVE</code>, signifying that training has completed, before you can use the predictor to create a forecast. Use the <a>DescribePredictor</a> operation to get the status.</p> </note>'
+      description: '<p>Creates an Amazon Forecast predictor.</p> <p>In the request, you provide a dataset group and either specify an algorithm or let Amazon Forecast choose the algorithm for you using AutoML. If you specify an algorithm, you also can override algorithm-specific hyperparameters.</p> <p>Amazon Forecast uses the chosen algorithm to train a model using the latest version of the datasets in the specified dataset group. The result is called a predictor. You then generate a forecast using the <a>CreateForecast</a> operation.</p> <p>After training a model, the <code>CreatePredictor</code> operation also evaluates it. To see the evaluation metrics, use the <a>GetAccuracyMetrics</a> operation. Always review the evaluation metrics before deciding to use the predictor to generate a forecast.</p> <p>Optionally, you can specify a featurization configuration to fill and aggregate the data fields in the <code>TARGET_TIME_SERIES</code> dataset to improve model training. For more information, see <a>FeaturizationConfig</a>.</p> <p>For RELATED_TIME_SERIES datasets, <code>CreatePredictor</code> verifies that the <code>DataFrequency</code> specified when the dataset was created matches the <code>ForecastFrequency</code>. TARGET_TIME_SERIES datasets don''t have this restriction. Amazon Forecast also verifies the delimiter and timestamp format. For more information, see <a>howitworks-datasets-groups</a>.</p> <p> <b>AutoML</b> </p> <p>If you want Amazon Forecast to evaluate each algorithm and choose the one that minimizes the <code>objective function</code>, set <code>PerformAutoML</code> to <code>true</code>. The <code>objective function</code> is defined as the mean of the weighted p10, p50, and p90 quantile losses. For more information, see <a>EvaluationResult</a>.</p> <p>When AutoML is enabled, the following properties are disallowed:</p> <ul> <li> <p> <code>AlgorithmArn</code> </p> </li> <li> <p> <code>HPOConfig</code> </p> </li> <li> <p> <code>PerformHPO</code> </p> </li> <li> <p> <code>TrainingParameters</code> </p> </li> </ul> <p>To get a list of all of your predictors, use the <a>ListPredictors</a> operation.</p> <note> <p>Before you can use the predictor to create a forecast, the <code>Status</code> of the predictor must be <code>ACTIVE</code>, signifying that training has completed. To get the status, use the <a>DescribePredictor</a> operation.</p> </note>'
       responses:
         '200':
           description: Success
@@ -449,7 +449,7 @@ paths:
   '/#X-Amz-Target=AmazonForecast.DeleteDataset':
     post:
       operationId: DeleteDataset
-      description: 'Deletes an Amazon Forecast dataset created using the <a>CreateDataset</a> operation. To be deleted, the dataset must have a status of <code>ACTIVE</code> or <code>CREATE_FAILED</code>. Use the <a>DescribeDataset</a> operation to get the status.'
+      description: Deletes an Amazon Forecast dataset that was created using the <a>CreateDataset</a> operation. You can only delete datasets that have a status of <code>ACTIVE</code> or <code>CREATE_FAILED</code>. To get the status use the <a>DescribeDataset</a> operation.
       responses:
         '200':
           description: Success
@@ -488,7 +488,7 @@ paths:
   '/#X-Amz-Target=AmazonForecast.DeleteDatasetGroup':
     post:
       operationId: DeleteDatasetGroup
-      description: '<p>Deletes a dataset group created using the <a>CreateDatasetGroup</a> operation. To be deleted, the dataset group must have a status of <code>ACTIVE</code>, <code>CREATE_FAILED</code>, or <code>UPDATE_FAILED</code>. Use the <a>DescribeDatasetGroup</a> operation to get the status.</p> <p>The operation deletes only the dataset group, not the datasets in the group.</p>'
+      description: '<p>Deletes a dataset group created using the <a>CreateDatasetGroup</a> operation. You can only delete dataset groups that have a status of <code>ACTIVE</code>, <code>CREATE_FAILED</code>, or <code>UPDATE_FAILED</code>. To get the status, use the <a>DescribeDatasetGroup</a> operation.</p> <p>This operation deletes only the dataset group, not the datasets in the group.</p>'
       responses:
         '200':
           description: Success
@@ -527,7 +527,7 @@ paths:
   '/#X-Amz-Target=AmazonForecast.DeleteDatasetImportJob':
     post:
       operationId: DeleteDatasetImportJob
-      description: 'Deletes a dataset import job created using the <a>CreateDatasetImportJob</a> operation. To be deleted, the import job must have a status of <code>ACTIVE</code> or <code>CREATE_FAILED</code>. Use the <a>DescribeDatasetImportJob</a> operation to get the status.'
+      description: 'Deletes a dataset import job created using the <a>CreateDatasetImportJob</a> operation. You can delete only dataset import jobs that have a status of <code>ACTIVE</code> or <code>CREATE_FAILED</code>. To get the status, use the <a>DescribeDatasetImportJob</a> operation.'
       responses:
         '200':
           description: Success
@@ -566,7 +566,7 @@ paths:
   '/#X-Amz-Target=AmazonForecast.DeleteForecast':
     post:
       operationId: DeleteForecast
-      description: '<p>Deletes a forecast created using the <a>CreateForecast</a> operation. To be deleted, the forecast must have a status of <code>ACTIVE</code> or <code>CREATE_FAILED</code>. Use the <a>DescribeForecast</a> operation to get the status.</p> <p>You can''t delete a forecast while it is being exported.</p>'
+      description: '<p>Deletes a forecast created using the <a>CreateForecast</a> operation. You can delete only forecasts that have a status of <code>ACTIVE</code> or <code>CREATE_FAILED</code>. To get the status, use the <a>DescribeForecast</a> operation.</p> <p>You can''t delete a forecast while it is being exported. After a forecast is deleted, you can no longer query the forecast.</p>'
       responses:
         '200':
           description: Success
@@ -605,7 +605,7 @@ paths:
   '/#X-Amz-Target=AmazonForecast.DeleteForecastExportJob':
     post:
       operationId: DeleteForecastExportJob
-      description: 'Deletes a forecast export job created using the <a>CreateForecastExportJob</a> operation. To be deleted, the export job must have a status of <code>ACTIVE</code> or <code>CREATE_FAILED</code>. Use the <a>DescribeForecastExportJob</a> operation to get the status.'
+      description: 'Deletes a forecast export job created using the <a>CreateForecastExportJob</a> operation. You can delete only export jobs that have a status of <code>ACTIVE</code> or <code>CREATE_FAILED</code>. To get the status, use the <a>DescribeForecastExportJob</a> operation.'
       responses:
         '200':
           description: Success
@@ -644,7 +644,7 @@ paths:
   '/#X-Amz-Target=AmazonForecast.DeletePredictor':
     post:
       operationId: DeletePredictor
-      description: '<p>Deletes a predictor created using the <a>CreatePredictor</a> operation. To be deleted, the predictor must have a status of <code>ACTIVE</code> or <code>CREATE_FAILED</code>. Use the <a>DescribePredictor</a> operation to get the status.</p> <p>Any forecasts generated by the predictor will no longer be available.</p>'
+      description: 'Deletes a predictor created using the <a>CreatePredictor</a> operation. You can delete only predictor that have a status of <code>ACTIVE</code> or <code>CREATE_FAILED</code>. To get the status, use the <a>DescribePredictor</a> operation.'
       responses:
         '200':
           description: Success
@@ -683,7 +683,7 @@ paths:
   '/#X-Amz-Target=AmazonForecast.DescribeDataset':
     post:
       operationId: DescribeDataset
-      description: '<p>Describes an Amazon Forecast dataset created using the <a>CreateDataset</a> operation.</p> <p>In addition to listing the properties provided by the user in the <code>CreateDataset</code> request, this operation includes the following properties:</p> <ul> <li> <p> <code>CreationTime</code> </p> </li> <li> <p> <code>LastModificationTime</code> </p> </li> <li> <p> <code>Status</code> </p> </li> </ul>'
+      description: '<p>Describes an Amazon Forecast dataset created using the <a>CreateDataset</a> operation.</p> <p>In addition to listing the parameters specified in the <code>CreateDataset</code> request, this operation includes the following dataset properties:</p> <ul> <li> <p> <code>CreationTime</code> </p> </li> <li> <p> <code>LastModificationTime</code> </p> </li> <li> <p> <code>Status</code> </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -720,7 +720,7 @@ paths:
   '/#X-Amz-Target=AmazonForecast.DescribeDatasetGroup':
     post:
       operationId: DescribeDatasetGroup
-      description: '<p>Describes a dataset group created using the <a>CreateDatasetGroup</a> operation.</p> <p>In addition to listing the properties provided by the user in the <code>CreateDatasetGroup</code> request, this operation includes the following properties:</p> <ul> <li> <p> <code>DatasetArns</code> - The datasets belonging to the group.</p> </li> <li> <p> <code>CreationTime</code> </p> </li> <li> <p> <code>LastModificationTime</code> </p> </li> <li> <p> <code>Status</code> </p> </li> </ul>'
+      description: '<p>Describes a dataset group created using the <a>CreateDatasetGroup</a> operation.</p> <p>In addition to listing the parameters provided in the <code>CreateDatasetGroup</code> request, this operation includes the following properties:</p> <ul> <li> <p> <code>DatasetArns</code> - The datasets belonging to the group.</p> </li> <li> <p> <code>CreationTime</code> </p> </li> <li> <p> <code>LastModificationTime</code> </p> </li> <li> <p> <code>Status</code> </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -757,7 +757,7 @@ paths:
   '/#X-Amz-Target=AmazonForecast.DescribeDatasetImportJob':
     post:
       operationId: DescribeDatasetImportJob
-      description: '<p>Describes a dataset import job created using the <a>CreateDatasetImportJob</a> operation.</p> <p>In addition to listing the properties provided by the user in the <code>CreateDatasetImportJob</code> request, this operation includes the following properties:</p> <ul> <li> <p> <code>CreationTime</code> </p> </li> <li> <p> <code>LastModificationTime</code> </p> </li> <li> <p> <code>DataSize</code> </p> </li> <li> <p> <code>FieldStatistics</code> </p> </li> <li> <p> <code>Status</code> </p> </li> <li> <p> <code>Message</code> - If an error occurred, information about the error.</p> </li> </ul>'
+      description: '<p>Describes a dataset import job created using the <a>CreateDatasetImportJob</a> operation.</p> <p>In addition to listing the parameters provided in the <code>CreateDatasetImportJob</code> request, this operation includes the following properties:</p> <ul> <li> <p> <code>CreationTime</code> </p> </li> <li> <p> <code>LastModificationTime</code> </p> </li> <li> <p> <code>DataSize</code> </p> </li> <li> <p> <code>FieldStatistics</code> </p> </li> <li> <p> <code>Status</code> </p> </li> <li> <p> <code>Message</code> - If an error occurred, information about the error.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -794,7 +794,7 @@ paths:
   '/#X-Amz-Target=AmazonForecast.DescribeForecast':
     post:
       operationId: DescribeForecast
-      description: '<p>Describes a forecast created using the <a>CreateForecast</a> operation.</p> <p>In addition to listing the properties provided by the user in the <code>CreateForecast</code> request, this operation includes the following properties:</p> <ul> <li> <p> <code>DatasetGroupArn</code> - The dataset group that provided the training data.</p> </li> <li> <p> <code>CreationTime</code> </p> </li> <li> <p> <code>LastModificationTime</code> </p> </li> <li> <p> <code>Status</code> </p> </li> <li> <p> <code>Message</code> - If an error occurred, information about the error.</p> </li> </ul>'
+      description: '<p>Describes a forecast created using the <a>CreateForecast</a> operation.</p> <p>In addition to listing the properties provided in the <code>CreateForecast</code> request, this operation lists the following properties:</p> <ul> <li> <p> <code>DatasetGroupArn</code> - The dataset group that provided the training data.</p> </li> <li> <p> <code>CreationTime</code> </p> </li> <li> <p> <code>LastModificationTime</code> </p> </li> <li> <p> <code>Status</code> </p> </li> <li> <p> <code>Message</code> - If an error occurred, information about the error.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -831,7 +831,7 @@ paths:
   '/#X-Amz-Target=AmazonForecast.DescribeForecastExportJob':
     post:
       operationId: DescribeForecastExportJob
-      description: '<p>Describes a forecast export job created using the <a>CreateForecastExportJob</a> operation.</p> <p>In addition to listing the properties provided by the user in the <code>CreateForecastExportJob</code> request, this operation includes the following properties:</p> <ul> <li> <p> <code>CreationTime</code> </p> </li> <li> <p> <code>LastModificationTime</code> </p> </li> <li> <p> <code>Status</code> </p> </li> <li> <p> <code>Message</code> - If an error occurred, information about the error.</p> </li> </ul>'
+      description: '<p>Describes a forecast export job created using the <a>CreateForecastExportJob</a> operation.</p> <p>In addition to listing the properties provided by the user in the <code>CreateForecastExportJob</code> request, this operation lists the following properties:</p> <ul> <li> <p> <code>CreationTime</code> </p> </li> <li> <p> <code>LastModificationTime</code> </p> </li> <li> <p> <code>Status</code> </p> </li> <li> <p> <code>Message</code> - If an error occurred, information about the error.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -868,7 +868,7 @@ paths:
   '/#X-Amz-Target=AmazonForecast.DescribePredictor':
     post:
       operationId: DescribePredictor
-      description: '<p>Describes a predictor created using the <a>CreatePredictor</a> operation.</p> <p>In addition to listing the properties provided by the user in the <code>CreatePredictor</code> request, this operation includes the following properties:</p> <ul> <li> <p> <code>DatasetImportJobArns</code> - The dataset import jobs used to import training data.</p> </li> <li> <p> <code>AutoMLAlgorithmArns</code> - If AutoML is performed, the algorithms evaluated.</p> </li> <li> <p> <code>CreationTime</code> </p> </li> <li> <p> <code>LastModificationTime</code> </p> </li> <li> <p> <code>Status</code> </p> </li> <li> <p> <code>Message</code> - If an error occurred, information about the error.</p> </li> </ul>'
+      description: '<p>Describes a predictor created using the <a>CreatePredictor</a> operation.</p> <p>In addition to listing the properties provided in the <code>CreatePredictor</code> request, this operation lists the following properties:</p> <ul> <li> <p> <code>DatasetImportJobArns</code> - The dataset import jobs used to import training data.</p> </li> <li> <p> <code>AutoMLAlgorithmArns</code> - If AutoML is performed, the algorithms that were evaluated.</p> </li> <li> <p> <code>CreationTime</code> </p> </li> <li> <p> <code>LastModificationTime</code> </p> </li> <li> <p> <code>Status</code> </p> </li> <li> <p> <code>Message</code> - If an error occurred, information about the error.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -905,7 +905,7 @@ paths:
   '/#X-Amz-Target=AmazonForecast.GetAccuracyMetrics':
     post:
       operationId: GetAccuracyMetrics
-      description: '<p>Provides metrics on the accuracy of the models that were trained by the <a>CreatePredictor</a> operation. Use metrics to see how well the model performed and to decide whether to use the predictor to generate a forecast.</p> <p>Metrics are generated for each backtest window evaluated. For more information, see <a>EvaluationParameters</a>.</p> <p>The parameters of the <code>filling</code> method determine which items contribute to the metrics. If <code>zero</code> is specified, all items contribute. If <code>nan</code> is specified, only those items that have complete data in the range being evaluated contribute. For more information, see <a>FeaturizationMethod</a>.</p> <p>For an example of how to train a model and review metrics, see <a>getting-started</a>.</p>'
+      description: '<p>Provides metrics on the accuracy of the models that were trained by the <a>CreatePredictor</a> operation. Use metrics to see how well the model performed and to decide whether to use the predictor to generate a forecast. For more information, see <a>metrics</a>.</p> <p>This operation generates metrics for each backtest window that was evaluated. The number of backtest windows (<code>NumberOfBacktestWindows</code>) is specified using the <a>EvaluationParameters</a> object, which is optionally included in the <code>CreatePredictor</code> request. If <code>NumberOfBacktestWindows</code> isn''t specified, the number defaults to one.</p> <p>The parameters of the <code>filling</code> method determine which items contribute to the metrics. If you want all items to contribute, specify <code>zero</code>. If you want only those items that have complete data in the range being evaluated to contribute, specify <code>nan</code>. For more information, see <a>FeaturizationMethod</a>.</p> <note> <p>Before you can get accuracy metrics, the <code>Status</code> of the predictor must be <code>ACTIVE</code>, signifying that training has completed. To get the status, use the <a>DescribePredictor</a> operation.</p> </note>'
       responses:
         '200':
           description: Success
@@ -946,7 +946,7 @@ paths:
   '/#X-Amz-Target=AmazonForecast.ListDatasetGroups':
     post:
       operationId: ListDatasetGroups
-      description: 'Returns a list of dataset groups created using the <a>CreateDatasetGroup</a> operation. For each dataset group, a summary of its properties, including its Amazon Resource Name (ARN), is returned. You can retrieve the complete set of properties by using the ARN with the <a>DescribeDatasetGroup</a> operation.'
+      description: 'Returns a list of dataset groups created using the <a>CreateDatasetGroup</a> operation. For each dataset group, this operation returns a summary of its properties, including its Amazon Resource Name (ARN). You can retrieve the complete set of properties by using the dataset group ARN with the <a>DescribeDatasetGroup</a> operation.'
       responses:
         '200':
           description: Success
@@ -989,7 +989,7 @@ paths:
   '/#X-Amz-Target=AmazonForecast.ListDatasetImportJobs':
     post:
       operationId: ListDatasetImportJobs
-      description: 'Returns a list of dataset import jobs created using the <a>CreateDatasetImportJob</a> operation. For each import job, a summary of its properties, including its Amazon Resource Name (ARN), is returned. You can retrieve the complete set of properties by using the ARN with the <a>DescribeDatasetImportJob</a> operation. You can filter the list by providing an array of <a>Filter</a> objects.'
+      description: 'Returns a list of dataset import jobs created using the <a>CreateDatasetImportJob</a> operation. For each import job, this operation returns a summary of its properties, including its Amazon Resource Name (ARN). You can retrieve the complete set of properties by using the ARN with the <a>DescribeDatasetImportJob</a> operation. You can filter the list by providing an array of <a>Filter</a> objects.'
       responses:
         '200':
           description: Success
@@ -1036,7 +1036,7 @@ paths:
   '/#X-Amz-Target=AmazonForecast.ListDatasets':
     post:
       operationId: ListDatasets
-      description: 'Returns a list of datasets created using the <a>CreateDataset</a> operation. For each dataset, a summary of its properties, including its Amazon Resource Name (ARN), is returned. You can retrieve the complete set of properties by using the ARN with the <a>DescribeDataset</a> operation.'
+      description: 'Returns a list of datasets created using the <a>CreateDataset</a> operation. For each dataset, a summary of its properties, including its Amazon Resource Name (ARN), is returned. To retrieve the complete set of properties, use the ARN with the <a>DescribeDataset</a> operation.'
       responses:
         '200':
           description: Success
@@ -1079,7 +1079,7 @@ paths:
   '/#X-Amz-Target=AmazonForecast.ListForecastExportJobs':
     post:
       operationId: ListForecastExportJobs
-      description: 'Returns a list of forecast export jobs created using the <a>CreateForecastExportJob</a> operation. For each forecast export job, a summary of its properties, including its Amazon Resource Name (ARN), is returned. You can retrieve the complete set of properties by using the ARN with the <a>DescribeForecastExportJob</a> operation. The list can be filtered using an array of <a>Filter</a> objects.'
+      description: 'Returns a list of forecast export jobs created using the <a>CreateForecastExportJob</a> operation. For each forecast export job, this operation returns a summary of its properties, including its Amazon Resource Name (ARN). To retrieve the complete set of properties, use the ARN with the <a>DescribeForecastExportJob</a> operation. You can filter the list using an array of <a>Filter</a> objects.'
       responses:
         '200':
           description: Success
@@ -1126,7 +1126,7 @@ paths:
   '/#X-Amz-Target=AmazonForecast.ListForecasts':
     post:
       operationId: ListForecasts
-      description: 'Returns a list of forecasts created using the <a>CreateForecast</a> operation. For each forecast, a summary of its properties, including its Amazon Resource Name (ARN), is returned. You can retrieve the complete set of properties by using the ARN with the <a>DescribeForecast</a> operation. The list can be filtered using an array of <a>Filter</a> objects.'
+      description: 'Returns a list of forecasts created using the <a>CreateForecast</a> operation. For each forecast, this operation returns a summary of its properties, including its Amazon Resource Name (ARN). To retrieve the complete set of properties, specify the ARN with the <a>DescribeForecast</a> operation. You can filter the list using an array of <a>Filter</a> objects.'
       responses:
         '200':
           description: Success
@@ -1173,7 +1173,7 @@ paths:
   '/#X-Amz-Target=AmazonForecast.ListPredictors':
     post:
       operationId: ListPredictors
-      description: 'Returns a list of predictors created using the <a>CreatePredictor</a> operation. For each predictor, a summary of its properties, including its Amazon Resource Name (ARN), is returned. You can retrieve the complete set of properties by using the ARN with the <a>DescribePredictor</a> operation. The list can be filtered using an array of <a>Filter</a> objects.'
+      description: 'Returns a list of predictors created using the <a>CreatePredictor</a> operation. For each predictor, this operation returns a summary of its properties, including its Amazon Resource Name (ARN). You can retrieve the complete set of properties by using the ARN with the <a>DescribePredictor</a> operation. You can filter the list using an array of <a>Filter</a> objects.'
       responses:
         '200':
           description: Success
@@ -1220,7 +1220,7 @@ paths:
   '/#X-Amz-Target=AmazonForecast.UpdateDatasetGroup':
     post:
       operationId: UpdateDatasetGroup
-      description: <p>Replaces any existing datasets in the dataset group with the specified datasets.</p> <note> <p>The <code>Status</code> of the dataset group must be <code>ACTIVE</code> before creating a predictor using the dataset group. Use the <a>DescribeDatasetGroup</a> operation to get the status.</p> </note>
+      description: <p>Replaces the datasets in a dataset group with the specified datasets.</p> <note> <p>The <code>Status</code> of the dataset group must be <code>ACTIVE</code> before you can use the dataset group to create a predictor. Use the <a>DescribeDatasetGroup</a> operation to get the status.</p> </note>
       responses:
         '200':
           description: Success
@@ -1278,13 +1278,13 @@ definitions:
         description: A name for the dataset.
       Domain:
         $ref: '#/definitions/Domain'
-        description: 'The domain associated with the dataset. The <code>Domain</code> and <code>DatasetType</code> that you choose determine the fields that must be present in the training data that you import to the dataset. For example, if you choose the <code>RETAIL</code> domain and <code>TARGET_TIME_SERIES</code> as the <code>DatasetType</code>, Amazon Forecast requires <code>item_id</code>, <code>timestamp</code>, and <code>demand</code> fields to be present in your data. For more information, see <a>howitworks-datasets-groups</a>.'
+        description: '<p>The domain associated with the dataset. When you add a dataset to a dataset group, this value and the value specified for the <code>Domain</code> parameter of the <a>CreateDatasetGroup</a> operation must match.</p> <p>The <code>Domain</code> and <code>DatasetType</code> that you choose determine the fields that must be present in the training data that you import to the dataset. For example, if you choose the <code>RETAIL</code> domain and <code>TARGET_TIME_SERIES</code> as the <code>DatasetType</code>, Amazon Forecast requires <code>item_id</code>, <code>timestamp</code>, and <code>demand</code> fields to be present in your data. For more information, see <a>howitworks-datasets-groups</a>.</p>'
       DatasetType:
         $ref: '#/definitions/DatasetType'
         description: The dataset type. Valid values depend on the chosen <code>Domain</code>.
       DataFrequency:
         $ref: '#/definitions/Frequency'
-        description: '<p>The frequency of data collection.</p> <p>Valid intervals are Y (Year), M (Month), W (Week), D (Day), H (Hour), 30min (30 minutes), 15min (15 minutes), 10min (10 minutes), 5min (5 minutes), and 1min (1 minute). For example, "D" indicates every day and "15min" indicates every 15 minutes.</p>'
+        description: '<p>The frequency of data collection. This parameter is required for RELATED_TIME_SERIES datasets.</p> <p>Valid intervals are Y (Year), M (Month), W (Week), D (Day), H (Hour), 30min (30 minutes), 15min (15 minutes), 10min (10 minutes), 5min (5 minutes), and 1min (1 minute). For example, "D" indicates every day and "15min" indicates every 15 minutes.</p>'
       Schema:
         $ref: '#/definitions/Schema'
         description: 'The schema for the dataset. The schema attributes and their order must match the fields in your data. The dataset <code>Domain</code> and <code>DatasetType</code> that you choose determine the minimum required fields in your training data. For information about the required fields for a specific dataset domain and type, see <a>howitworks-domains-ds-types</a>.'
@@ -1311,7 +1311,7 @@ definitions:
         description: A name for the dataset group.
       Domain:
         $ref: '#/definitions/Domain'
-        description: 'The domain associated with the dataset group. The <code>Domain</code> and <code>DatasetType</code> that you choose determine the fields that must be present in the training data that you import to the dataset. For example, if you choose the <code>RETAIL</code> domain and <code>TARGET_TIME_SERIES</code> as the <code>DatasetType</code>, Amazon Forecast requires <code>item_id</code>, <code>timestamp</code>, and <code>demand</code> fields to be present in your data. For more information, see <a>howitworks-datasets-groups</a>.'
+        description: '<p>The domain associated with the dataset group. When you add a dataset to a dataset group, this value and the value specified for the <code>Domain</code> parameter of the <a>CreateDataset</a> operation must match.</p> <p>The <code>Domain</code> and <code>DatasetType</code> that you choose determine the fields that must be present in training data that you import to a dataset. For example, if you choose the <code>RETAIL</code> domain and <code>TARGET_TIME_SERIES</code> as the <code>DatasetType</code>, Amazon Forecast requires that <code>item_id</code>, <code>timestamp</code>, and <code>demand</code> fields are present in your data. For more information, see <a>howitworks-datasets-groups</a>.</p>'
       DatasetArns:
         $ref: '#/definitions/ArnList'
         description: An array of Amazon Resource Names (ARNs) of the datasets that you want to include in the dataset group.
@@ -1332,16 +1332,16 @@ definitions:
     properties:
       DatasetImportJobName:
         $ref: '#/definitions/Name'
-        description: 'The name for the dataset import job. It is recommended to include the current timestamp in the name to guard against getting a <code>ResourceAlreadyExistsException</code> exception, for example, <code>20190721DatasetImport</code>.'
+        description: 'The name for the dataset import job. We recommend including the current timestamp in the name, for example, <code>20190721DatasetImport</code>. This can help you avoid getting a <code>ResourceAlreadyExistsException</code> exception.'
       DatasetArn:
         $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the Amazon Forecast dataset that you want to import data to.
       DataSource:
         $ref: '#/definitions/DataSource'
-        description: The location of the training data to import and an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the data.
+        description: '<p>The location of the training data to import and an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the data. The training data must be stored in an Amazon S3 bucket.</p> <p>If encryption is used, <code>DataSource</code> must include an AWS Key Management Service (KMS) key and the IAM role must allow Amazon Forecast permission to access the key. The KMS key and IAM role must match those specified in the <code>EncryptionConfig</code> parameter of the <a>CreateDataset</a> operation.</p>'
       TimestampFormat:
         $ref: '#/definitions/TimestampFormat'
-        description: '<p>The format of timestamps in the dataset. Two formats are supported, dependent on the <code>DataFrequency</code> specified when the dataset was created.</p> <ul> <li> <p>"yyyy-MM-dd"</p> <p>For data frequencies: Y, M, W, and D</p> </li> <li> <p>"yyyy-MM-dd HH:mm:ss"</p> <p>For data frequencies: H, 30min, 15min, and 1min; and optionally, for: Y, M, W, and D</p> </li> </ul>'
+        description: '<p>The format of timestamps in the dataset. The format that you specify depends on the <code>DataFrequency</code> specified when the dataset was created. The following formats are supported</p> <ul> <li> <p>"yyyy-MM-dd"</p> <p>For the following data frequencies: Y, M, W, and D</p> </li> <li> <p>"yyyy-MM-dd HH:mm:ss"</p> <p>For the following data frequencies: H, 30min, 15min, and 1min; and optionally, for: Y, M, W, and D</p> </li> </ul> <p>If the format isn''t specified, Amazon Forecast expects the format to be "yyyy-MM-dd HH:mm:ss".</p>'
   CreateForecastResponse:
     type: object
     properties:
@@ -1356,10 +1356,13 @@ definitions:
     properties:
       ForecastName:
         $ref: '#/definitions/Name'
-        description: The name for the forecast.
+        description: A name for the forecast.
       PredictorArn:
         $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the predictor to use to generate the forecast.
+      ForecastTypes:
+        $ref: '#/definitions/ForecastTypes'
+        description: 'The quantiles at which probabilistic forecasts are generated. You can specify up to 5 quantiles per forecast. Accepted values include <code>0.01 to 0.99</code> (increments of .01 only) and <code>mean</code>. The mean forecast is different from the median (0.50) when the distribution is not symmetric (e.g. Beta, Negative Binomial). The default value is <code>["0.1", "0.5", "0.9"]</code>.'
   CreateForecastExportJobResponse:
     type: object
     properties:
@@ -1381,7 +1384,7 @@ definitions:
         description: The Amazon Resource Name (ARN) of the forecast that you want to export.
       Destination:
         $ref: '#/definitions/DataDestination'
-        description: The path to the Amazon S3 bucket where you want to save the forecast and an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the bucket.
+        description: '<p>The location where you want to save the forecast and an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the location. The forecast must be exported to an Amazon S3 bucket.</p> <p>If encryption is used, <code>Destination</code> must include an AWS Key Management Service (KMS) key. The IAM role must allow Amazon Forecast permission to access the key.</p>'
   CreatePredictorResponse:
     type: object
     properties:
@@ -1401,25 +1404,25 @@ definitions:
         description: A name for the predictor.
       AlgorithmArn:
         $ref: '#/definitions/Arn'
-        description: '<p>The Amazon Resource Name (ARN) of the algorithm to use for model training. Required if <code>PerformAutoML</code> is not set to <code>true</code>.</p> <p class="title"> <b>Supported algorithms</b> </p> <ul> <li> <p> <code>arn:aws:forecast:::algorithm/ARIMA</code> </p> </li> <li> <p> <code>arn:aws:forecast:::algorithm/Deep_AR_Plus</code> </p> <p> <code>- supports hyperparameter optimization (HPO)</code> </p> </li> <li> <p> <code>arn:aws:forecast:::algorithm/ETS</code> </p> </li> <li> <p> <code>arn:aws:forecast:::algorithm/NPTS</code> </p> </li> <li> <p> <code>arn:aws:forecast:::algorithm/Prophet</code> </p> </li> </ul>'
+        description: '<p>The Amazon Resource Name (ARN) of the algorithm to use for model training. Required if <code>PerformAutoML</code> is not set to <code>true</code>.</p> <p class="title"> <b>Supported algorithms:</b> </p> <ul> <li> <p> <code>arn:aws:forecast:::algorithm/ARIMA</code> </p> </li> <li> <p> <code>arn:aws:forecast:::algorithm/Deep_AR_Plus</code> </p> <p>Supports hyperparameter optimization (HPO)</p> </li> <li> <p> <code>arn:aws:forecast:::algorithm/ETS</code> </p> </li> <li> <p> <code>arn:aws:forecast:::algorithm/NPTS</code> </p> </li> <li> <p> <code>arn:aws:forecast:::algorithm/Prophet</code> </p> </li> </ul>'
       ForecastHorizon:
         $ref: '#/definitions/Integer'
-        description: '<p>Specifies the number of time-steps that the model is trained to predict. The forecast horizon is also called the prediction length.</p> <p>For example, if you configure a dataset for daily data collection (using the <code>DataFrequency</code> parameter of the <a>CreateDataset</a> operation) and set the forecast horizon to 10, the model returns predictions for 10 days.</p>'
+        description: '<p>Specifies the number of time-steps that the model is trained to predict. The forecast horizon is also called the prediction length.</p> <p>For example, if you configure a dataset for daily data collection (using the <code>DataFrequency</code> parameter of the <a>CreateDataset</a> operation) and set the forecast horizon to 10, the model returns predictions for 10 days.</p> <p>The maximum forecast horizon is the lesser of 500 time-steps or 1/3 of the TARGET_TIME_SERIES dataset length.</p>'
       PerformAutoML:
         $ref: '#/definitions/Boolean'
-        description: '<p>Whether to perform AutoML. The default value is <code>false</code>. In this case, you are required to specify an algorithm.</p> <p>If you want Amazon Forecast to evaluate the algorithms it provides and choose the best algorithm and configuration for your training dataset, set <code>PerformAutoML</code> to <code>true</code>. This is a good option if you aren''t sure which algorithm is suitable for your application.</p>'
+        description: '<p>Whether to perform AutoML. When Amazon Forecast performs AutoML, it evaluates the algorithms it provides and chooses the best algorithm and configuration for your training dataset.</p> <p>The default value is <code>false</code>. In this case, you are required to specify an algorithm.</p> <p>Set <code>PerformAutoML</code> to <code>true</code> to have Amazon Forecast perform AutoML. This is a good option if you aren''t sure which algorithm is suitable for your training data. In this case, <code>PerformHPO</code> must be false.</p>'
       PerformHPO:
         $ref: '#/definitions/Boolean'
-        description: '<p>Whether to perform hyperparameter optimization (HPO). HPO finds optimal hyperparameter values for your training data. The process of performing HPO is known as a hyperparameter tuning job.</p> <p>The default value is <code>false</code>. In this case, Amazon Forecast uses default hyperparameter values from the chosen algorithm.</p> <p>To override the default values, set <code>PerformHPO</code> to <code>true</code> and supply the <a>HyperParameterTuningJobConfig</a> object. The tuning job specifies an objective metric, the hyperparameters to optimize, and the valid range for each hyperparameter.</p> <p>The following algorithms support HPO:</p> <ul> <li> <p>DeepAR+</p> </li> </ul>'
+        description: '<p>Whether to perform hyperparameter optimization (HPO). HPO finds optimal hyperparameter values for your training data. The process of performing HPO is known as running a hyperparameter tuning job.</p> <p>The default value is <code>false</code>. In this case, Amazon Forecast uses default hyperparameter values from the chosen algorithm.</p> <p>To override the default values, set <code>PerformHPO</code> to <code>true</code> and, optionally, supply the <a>HyperParameterTuningJobConfig</a> object. The tuning job specifies a metric to optimize, which hyperparameters participate in tuning, and the valid range for each tunable hyperparameter. In this case, you are required to specify an algorithm and <code>PerformAutoML</code> must be false.</p> <p>The following algorithm supports HPO:</p> <ul> <li> <p>DeepAR+</p> </li> </ul>'
       TrainingParameters:
         $ref: '#/definitions/TrainingParameters'
-        description: The training parameters to override for model training. The parameters that you can override are listed in the individual algorithms in <a>aws-forecast-choosing-recipes</a>.
+        description: 'The hyperparameters to override for model training. The hyperparameters that you can override are listed in the individual algorithms. For the list of supported algorithms, see <a>aws-forecast-choosing-recipes</a>.'
       EvaluationParameters:
         $ref: '#/definitions/EvaluationParameters'
         description: Used to override the default evaluation parameters of the specified algorithm. Amazon Forecast evaluates a predictor by splitting a dataset into training data and testing data. The evaluation parameters define how to perform the split and the number of iterations.
       HPOConfig:
         $ref: '#/definitions/HyperParameterTuningJobConfig'
-        description: 'Provides hyperparameter override values for the algorithm. If you don''t provide this parameter, Amazon Forecast uses default values. The individual algorithms specify which hyperparameters support hyperparameter optimization (HPO). For more information, see <a>aws-forecast-choosing-recipes</a>.'
+        description: '<p>Provides hyperparameter override values for the algorithm. If you don''t provide this parameter, Amazon Forecast uses default values. The individual algorithms specify which hyperparameters support hyperparameter optimization (HPO). For more information, see <a>aws-forecast-choosing-recipes</a>.</p> <p>If you included the <code>HPOConfig</code> object, you must set <code>PerformHPO</code> to true.</p>'
       InputDataConfig:
         $ref: '#/definitions/InputDataConfig'
         description: Describes the dataset group that contains the data to use to train the predictor.
@@ -1488,7 +1491,7 @@ definitions:
         description: The name of the dataset.
       Domain:
         $ref: '#/definitions/Domain'
-        description: The dataset domain.
+        description: The domain associated with the dataset.
       DatasetType:
         $ref: '#/definitions/DatasetType'
         description: The dataset type.
@@ -1500,16 +1503,16 @@ definitions:
         description: An array of <code>SchemaAttribute</code> objects that specify the dataset fields. Each <code>SchemaAttribute</code> specifies the name and data type of a field.
       EncryptionConfig:
         $ref: '#/definitions/EncryptionConfig'
-        description: An AWS Key Management Service (KMS) key and the AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the key.
+        description: The AWS Key Management Service (KMS) key and the AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the key.
       Status:
         $ref: '#/definitions/Status'
-        description: '<p>The status of the dataset. States include:</p> <ul> <li> <p> <code>ACTIVE</code> </p> </li> <li> <p> <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>, <code>CREATE_FAILED</code> </p> </li> <li> <p> <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>, <code>DELETE_FAILED</code> </p> </li> <li> <p> <code>UPDATE_PENDING</code>, <code>UPDATE_IN_PROGRESS</code>, <code>UPDATE_FAILED</code> </p> </li> </ul> <p>The <code>UPDATE</code> states apply while data is imported to the dataset from a call to the <a>CreateDatasetImportJob</a> operation. During this time, the status reflects the status of the dataset import job. For example, when the import job status is <code>CREATE_IN_PROGRESS</code>, the status of the dataset is <code>UPDATE_IN_PROGRESS</code>.</p> <note> <p>The <code>Status</code> of the dataset must be <code>ACTIVE</code> before you can import training data.</p> </note>'
+        description: '<p>The status of the dataset. States include:</p> <ul> <li> <p> <code>ACTIVE</code> </p> </li> <li> <p> <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>, <code>CREATE_FAILED</code> </p> </li> <li> <p> <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>, <code>DELETE_FAILED</code> </p> </li> <li> <p> <code>UPDATE_PENDING</code>, <code>UPDATE_IN_PROGRESS</code>, <code>UPDATE_FAILED</code> </p> </li> </ul> <p>The <code>UPDATE</code> states apply while data is imported to the dataset from a call to the <a>CreateDatasetImportJob</a> operation and reflect the status of the dataset import job. For example, when the import job status is <code>CREATE_IN_PROGRESS</code>, the status of the dataset is <code>UPDATE_IN_PROGRESS</code>.</p> <note> <p>The <code>Status</code> of the dataset must be <code>ACTIVE</code> before you can import training data.</p> </note>'
       CreationTime:
         $ref: '#/definitions/Timestamp'
         description: When the dataset was created.
       LastModificationTime:
         $ref: '#/definitions/Timestamp'
-        description: 'When the dataset is created, <code>LastModificationTime</code> is the same as <code>CreationTime</code>. After a <a>CreateDatasetImportJob</a> operation is called, <code>LastModificationTime</code> is when the import job finished or failed. While data is being imported to the dataset, <code>LastModificationTime</code> is the current query time.'
+        description: 'When you create a dataset, <code>LastModificationTime</code> is the same as <code>CreationTime</code>. While data is being imported to the dataset, <code>LastModificationTime</code> is the current time of the <code>DescribeDataset</code> call. After a <a>CreateDatasetImportJob</a> operation has finished, <code>LastModificationTime</code> is when the import job completed or failed.'
   DescribeDatasetRequest:
     type: object
     required:
@@ -1532,16 +1535,16 @@ definitions:
         description: An array of Amazon Resource Names (ARNs) of the datasets contained in the dataset group.
       Domain:
         $ref: '#/definitions/Domain'
-        description: 'The domain associated with the dataset group. The <code>Domain</code> and <code>DatasetType</code> that you choose determine the fields that must be present in the training data that you import to the dataset. For example, if you choose the <code>RETAIL</code> domain and <code>TARGET_TIME_SERIES</code> as the <code>DatasetType</code>, Amazon Forecast requires <code>item_id</code>, <code>timestamp</code>, and <code>demand</code> fields to be present in your data. For more information, see <a>howitworks-datasets-groups</a>.'
+        description: The domain associated with the dataset group.
       Status:
         $ref: '#/definitions/Status'
-        description: '<p>The status of the dataset group. States include:</p> <ul> <li> <p> <code>ACTIVE</code> </p> </li> <li> <p> <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>, <code>CREATE_FAILED</code> </p> </li> <li> <p> <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>, <code>DELETE_FAILED</code> </p> </li> <li> <p> <code>UPDATE_PENDING</code>, <code>UPDATE_IN_PROGRESS</code>, <code>UPDATE_FAILED</code> </p> </li> </ul> <p>The <code>UPDATE</code> states apply when the <a>UpdateDatasetGroup</a> operation is called.</p> <note> <p>The <code>Status</code> of the dataset group must be <code>ACTIVE</code> before creating a predictor using the dataset group.</p> </note>'
+        description: '<p>The status of the dataset group. States include:</p> <ul> <li> <p> <code>ACTIVE</code> </p> </li> <li> <p> <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>, <code>CREATE_FAILED</code> </p> </li> <li> <p> <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>, <code>DELETE_FAILED</code> </p> </li> <li> <p> <code>UPDATE_PENDING</code>, <code>UPDATE_IN_PROGRESS</code>, <code>UPDATE_FAILED</code> </p> </li> </ul> <p>The <code>UPDATE</code> states apply when you call the <a>UpdateDatasetGroup</a> operation.</p> <note> <p>The <code>Status</code> of the dataset group must be <code>ACTIVE</code> before you can use the dataset group to create a predictor.</p> </note>'
       CreationTime:
         $ref: '#/definitions/Timestamp'
         description: When the dataset group was created.
       LastModificationTime:
         $ref: '#/definitions/Timestamp'
-        description: 'When the dataset group was created or last updated from a call to the <a>UpdateDatasetGroup</a> operation. While the dataset group is being updated, <code>LastModificationTime</code> is the current query time.'
+        description: 'When the dataset group was created or last updated from a call to the <a>UpdateDatasetGroup</a> operation. While the dataset group is being updated, <code>LastModificationTime</code> is the current time of the <code>DescribeDatasetGroup</code> call.'
   DescribeDatasetGroupRequest:
     type: object
     required:
@@ -1564,16 +1567,16 @@ definitions:
         description: The Amazon Resource Name (ARN) of the dataset that the training data was imported to.
       TimestampFormat:
         $ref: '#/definitions/TimestampFormat'
-        description: '<p>The format of timestamps in the dataset. Two formats are supported dependent on the <code>DataFrequency</code> specified when the dataset was created.</p> <ul> <li> <p>"yyyy-MM-dd"</p> <p>For data frequencies: Y, M, W, and D</p> </li> <li> <p>"yyyy-MM-dd HH:mm:ss"</p> <p>For data frequencies: H, 30min, 15min, and 1min; and optionally, for: Y, M, W, and D</p> </li> </ul>'
+        description: '<p>The format of timestamps in the dataset. The format that you specify depends on the <code>DataFrequency</code> specified when the dataset was created. The following formats are supported</p> <ul> <li> <p>"yyyy-MM-dd"</p> <p>For the following data frequencies: Y, M, W, and D</p> </li> <li> <p>"yyyy-MM-dd HH:mm:ss"</p> <p>For the following data frequencies: H, 30min, 15min, and 1min; and optionally, for: Y, M, W, and D</p> </li> </ul>'
       DataSource:
         $ref: '#/definitions/DataSource'
-        description: The location of the training data to import. The training data must be stored in an Amazon S3 bucket.
+        description: '<p>The location of the training data to import and an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the data.</p> <p>If encryption is used, <code>DataSource</code> includes an AWS Key Management Service (KMS) key.</p>'
       FieldStatistics:
         $ref: '#/definitions/FieldStatistics'
         description: Statistical information about each field in the input data.
       DataSize:
         $ref: '#/definitions/Double'
-        description: The size of the dataset in gigabytes (GB) after completion of the import job.
+        description: The size of the dataset in gigabytes (GB) after the import job has finished.
       Status:
         $ref: '#/definitions/Status'
         description: '<p>The status of the dataset import job. The status is reflected in the status of the dataset. For example, when the import job status is <code>CREATE_IN_PROGRESS</code>, the status of the dataset is <code>UPDATE_IN_PROGRESS</code>. States include:</p> <ul> <li> <p> <code>ACTIVE</code> </p> </li> <li> <p> <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>, <code>CREATE_FAILED</code> </p> </li> <li> <p> <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>, <code>DELETE_FAILED</code> </p> </li> </ul>'
@@ -1585,7 +1588,7 @@ definitions:
         description: When the dataset import job was created.
       LastModificationTime:
         $ref: '#/definitions/Timestamp'
-        description: '<p>Dependent on the status as follows:</p> <ul> <li> <p> <code>CREATE_PENDING</code> - same as <code>CreationTime</code> </p> </li> <li> <p> <code>CREATE_IN_PROGRESS</code> - the current timestamp</p> </li> <li> <p> <code>ACTIVE</code> or <code>CREATE_FAILED</code> - when the job finished or failed</p> </li> </ul>'
+        description: '<p>The last time that the dataset was modified. The time depends on the status of the job, as follows:</p> <ul> <li> <p> <code>CREATE_PENDING</code> - The same time as <code>CreationTime</code>.</p> </li> <li> <p> <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p> </li> <li> <p> <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or failed.</p> </li> </ul>'
   DescribeDatasetImportJobRequest:
     type: object
     required:
@@ -1599,10 +1602,13 @@ definitions:
     properties:
       ForecastArn:
         $ref: '#/definitions/Arn'
-        description: The same forecast ARN as given in the request.
+        description: The forecast ARN as specified in the request.
       ForecastName:
         $ref: '#/definitions/Name'
         description: The name of the forecast.
+      ForecastTypes:
+        $ref: '#/definitions/ForecastTypes'
+        description: The quantiles at which proababilistic forecasts were generated.
       PredictorArn:
         $ref: '#/definitions/Arn'
         description: The ARN of the predictor used to generate the forecast.
@@ -1643,13 +1649,13 @@ definitions:
         description: The Amazon Resource Name (ARN) of the exported forecast.
       Destination:
         $ref: '#/definitions/DataDestination'
-        description: The path to the AWS S3 bucket where the forecast is exported.
+        description: The path to the Amazon Simple Storage Service (Amazon S3) bucket where the forecast is exported.
       Message:
         $ref: '#/definitions/Message'
         description: 'If an error occurred, an informational message about the error.'
       Status:
         $ref: '#/definitions/Status'
-        description: '<p>The status of the forecast export job. One of the following states:</p> <ul> <li> <p> <code>ACTIVE</code> </p> </li> <li> <p> <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>, <code>CREATE_FAILED</code> </p> </li> <li> <p> <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>, <code>DELETE_FAILED</code> </p> </li> </ul> <note> <p>The <code>Status</code> of the forecast export job must be <code>ACTIVE</code> before you can access the forecast in your Amazon S3 bucket.</p> </note>'
+        description: '<p>The status of the forecast export job. States include:</p> <ul> <li> <p> <code>ACTIVE</code> </p> </li> <li> <p> <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>, <code>CREATE_FAILED</code> </p> </li> <li> <p> <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>, <code>DELETE_FAILED</code> </p> </li> </ul> <note> <p>The <code>Status</code> of the forecast export job must be <code>ACTIVE</code> before you can access the forecast in your S3 bucket.</p> </note>'
       CreationTime:
         $ref: '#/definitions/Timestamp'
         description: When the forecast export job was created.
@@ -1684,10 +1690,10 @@ definitions:
         description: Whether the predictor is set to perform AutoML.
       PerformHPO:
         $ref: '#/definitions/Boolean'
-        description: Whether the predictor is set to perform HPO.
+        description: Whether the predictor is set to perform hyperparameter optimization (HPO).
       TrainingParameters:
         $ref: '#/definitions/TrainingParameters'
-        description: The training parameters to override for model training. The parameters that you can override are listed in the individual algorithms in <a>aws-forecast-choosing-recipes</a>.
+        description: 'The default training parameters or overrides selected during model training. If using the AutoML algorithm or if HPO is turned on while using the DeepAR+ algorithms, the optimized values for the chosen hyperparameters are returned. For more information, see <a>aws-forecast-choosing-recipes</a>.'
       EvaluationParameters:
         $ref: '#/definitions/EvaluationParameters'
         description: Used to override the default evaluation parameters of the specified algorithm. Amazon Forecast evaluates a predictor by splitting a dataset into training data and testing data. The evaluation parameters define how to perform the split and the number of iterations.
@@ -1703,15 +1709,18 @@ definitions:
       EncryptionConfig:
         $ref: '#/definitions/EncryptionConfig'
         description: An AWS Key Management Service (KMS) key and the AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the key.
+      PredictorExecutionDetails:
+        $ref: '#/definitions/PredictorExecutionDetails'
+        description: Details on the the status and results of the backtests performed to evaluate the accuracy of the predictor. You specify the number of backtests to perform when you call the operation.
       DatasetImportJobArns:
         $ref: '#/definitions/ArnList'
-        description: An array of ARNs of the dataset import jobs used to import training data for the predictor.
+        description: An array of the ARNs of the dataset import jobs used to import training data for the predictor.
       AutoMLAlgorithmArns:
         $ref: '#/definitions/ArnList'
         description: 'When <code>PerformAutoML</code> is specified, the ARN of the chosen algorithm.'
       Status:
         $ref: '#/definitions/Status'
-        description: '<p>The status of the predictor. States include:</p> <ul> <li> <p> <code>ACTIVE</code> </p> </li> <li> <p> <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>, <code>CREATE_FAILED</code> </p> </li> <li> <p> <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>, <code>DELETE_FAILED</code> </p> </li> <li> <p> <code>UPDATE_PENDING</code>, <code>UPDATE_IN_PROGRESS</code>, <code>UPDATE_FAILED</code> </p> </li> </ul> <note> <p>The <code>Status</code> of the predictor must be <code>ACTIVE</code> before using the predictor to create a forecast.</p> </note>'
+        description: '<p>The status of the predictor. States include:</p> <ul> <li> <p> <code>ACTIVE</code> </p> </li> <li> <p> <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>, <code>CREATE_FAILED</code> </p> </li> <li> <p> <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>, <code>DELETE_FAILED</code> </p> </li> <li> <p> <code>UPDATE_PENDING</code>, <code>UPDATE_IN_PROGRESS</code>, <code>UPDATE_FAILED</code> </p> </li> </ul> <note> <p>The <code>Status</code> of the predictor must be <code>ACTIVE</code> before you can use the predictor to create a forecast.</p> </note>'
       Message:
         $ref: '#/definitions/Message'
         description: 'If an error occurred, an informational message about the error.'
@@ -1720,7 +1729,7 @@ definitions:
         description: When the model training task was created.
       LastModificationTime:
         $ref: '#/definitions/Timestamp'
-        description: 'Initially, the same as <code>CreationTime</code> (status is <code>CREATE_PENDING</code>). Updated when training starts (status changed to <code>CREATE_IN_PROGRESS</code>), and when training is complete (status changed to <code>ACTIVE</code>) or fails (status changed to <code>CREATE_FAILED</code>).'
+        description: 'Initially, the same as <code>CreationTime</code> (when the status is <code>CREATE_PENDING</code>). This value is updated when training starts (when the status changes to <code>CREATE_IN_PROGRESS</code>), and when training has completed (when the status changes to <code>ACTIVE</code>) or fails (when the status changes to <code>CREATE_FAILED</code>).'
   DescribePredictorRequest:
     type: object
     required:
@@ -1782,7 +1791,7 @@ definitions:
         description: The number of items to return in the response.
       Filters:
         $ref: '#/definitions/Filters'
-        description: '<p>An array of filters. For each filter, you provide a condition and a match statement. The condition is either <code>IS</code> or <code>IS_NOT</code>, which specifies whether to include or exclude, respectively, from the list, the predictors that match the statement. The match statement consists of a key and a value. In this release, <code>Name</code> is the only valid key, which filters on the <code>DatasetImportJobName</code> property.</p> <ul> <li> <p> <code>Condition</code> - <code>IS</code> or <code>IS_NOT</code> </p> </li> <li> <p> <code>Key</code> - <code>Name</code> </p> </li> <li> <p> <code>Value</code> - the value to match</p> </li> </ul> <p>For example, to list all dataset import jobs named <i>my_dataset_import_job</i>, you would specify:</p> <p> <code>"Filters": [ { "Condition": "IS", "Key": "Name", "Value": "my_dataset_import_job" } ]</code> </p>'
+        description: '<p>An array of filters. For each filter, you provide a condition and a match statement. The condition is either <code>IS</code> or <code>IS_NOT</code>, which specifies whether to include or exclude the datasets that match the statement from the list, respectively. The match statement consists of a key and a value.</p> <p> <b>Filter properties</b> </p> <ul> <li> <p> <code>Condition</code> - The condition to apply. Valid values are <code>IS</code> and <code>IS_NOT</code>. To include the datasets that match the statement, specify <code>IS</code>. To exclude matching datasets, specify <code>IS_NOT</code>.</p> </li> <li> <p> <code>Key</code> - The name of the parameter to filter on. Valid values are <code>DatasetArn</code> and <code>Status</code>.</p> </li> <li> <p> <code>Value</code> - The value to match.</p> </li> </ul> <p>For example, to list all dataset import jobs whose status is ACTIVE, you specify the following filter:</p> <p> <code>"Filters": [ { "Condition": "IS", "Key": "Status", "Value": "ACTIVE" } ]</code> </p>'
   ListDatasetsResponse:
     type: object
     properties:
@@ -1821,7 +1830,7 @@ definitions:
         description: The number of items to return in the response.
       Filters:
         $ref: '#/definitions/Filters'
-        description: '<p>An array of filters. For each filter, you provide a condition and a match statement. The condition is either <code>IS</code> or <code>IS_NOT</code>, which specifies whether to include or exclude, respectively, from the list, the predictors that match the statement. The match statement consists of a key and a value. In this release, <code>Name</code> is the only valid key, which filters on the <code>ForecastExportJobName</code> property.</p> <ul> <li> <p> <code>Condition</code> - <code>IS</code> or <code>IS_NOT</code> </p> </li> <li> <p> <code>Key</code> - <code>Name</code> </p> </li> <li> <p> <code>Value</code> - the value to match</p> </li> </ul> <p>For example, to list all forecast export jobs named <i>my_forecast_export_job</i>, you would specify:</p> <p> <code>"Filters": [ { "Condition": "IS", "Key": "Name", "Value": "my_forecast_export_job" } ]</code> </p>'
+        description: '<p>An array of filters. For each filter, you provide a condition and a match statement. The condition is either <code>IS</code> or <code>IS_NOT</code>, which specifies whether to include or exclude the forecast export jobs that match the statement from the list, respectively. The match statement consists of a key and a value.</p> <p> <b>Filter properties</b> </p> <ul> <li> <p> <code>Condition</code> - The condition to apply. Valid values are <code>IS</code> and <code>IS_NOT</code>. To include the forecast export jobs that match the statement, specify <code>IS</code>. To exclude matching forecast export jobs, specify <code>IS_NOT</code>.</p> </li> <li> <p> <code>Key</code> - The name of the parameter to filter on. Valid values are <code>ForecastArn</code> and <code>Status</code>.</p> </li> <li> <p> <code>Value</code> - The value to match.</p> </li> </ul> <p>For example, to list all jobs that export a forecast named <i>electricityforecast</i>, specify the following filter:</p> <p> <code>"Filters": [ { "Condition": "IS", "Key": "ForecastArn", "Value": "arn:aws:forecast:us-west-2:&lt;acct-id&gt;:forecast/electricityforecast" } ]</code> </p>'
   ListForecastsResponse:
     type: object
     properties:
@@ -1842,7 +1851,7 @@ definitions:
         description: The number of items to return in the response.
       Filters:
         $ref: '#/definitions/Filters'
-        description: '<p>An array of filters. For each filter, you provide a condition and a match statement. The condition is either <code>IS</code> or <code>IS_NOT</code>, which specifies whether to include or exclude, respectively, from the list, the predictors that match the statement. The match statement consists of a key and a value. In this release, <code>Name</code> is the only valid key, which filters on the <code>ForecastName</code> property.</p> <ul> <li> <p> <code>Condition</code> - <code>IS</code> or <code>IS_NOT</code> </p> </li> <li> <p> <code>Key</code> - <code>Name</code> </p> </li> <li> <p> <code>Value</code> - the value to match</p> </li> </ul> <p>For example, to list all forecasts named <i>my_forecast</i>, you would specify:</p> <p> <code>"Filters": [ { "Condition": "IS", "Key": "Name", "Value": "my_forecast" } ]</code> </p>'
+        description: '<p>An array of filters. For each filter, you provide a condition and a match statement. The condition is either <code>IS</code> or <code>IS_NOT</code>, which specifies whether to include or exclude the forecasts that match the statement from the list, respectively. The match statement consists of a key and a value.</p> <p> <b>Filter properties</b> </p> <ul> <li> <p> <code>Condition</code> - The condition to apply. Valid values are <code>IS</code> and <code>IS_NOT</code>. To include the forecasts that match the statement, specify <code>IS</code>. To exclude matching forecasts, specify <code>IS_NOT</code>.</p> </li> <li> <p> <code>Key</code> - The name of the parameter to filter on. Valid values are <code>DatasetGroupArn</code>, <code>PredictorArn</code>, and <code>Status</code>.</p> </li> <li> <p> <code>Value</code> - The value to match.</p> </li> </ul> <p>For example, to list all forecasts whose status is not ACTIVE, you would specify:</p> <p> <code>"Filters": [ { "Condition": "IS_NOT", "Key": "Status", "Value": "ACTIVE" } ]</code> </p>'
   ListPredictorsResponse:
     type: object
     properties:
@@ -1863,7 +1872,7 @@ definitions:
         description: The number of items to return in the response.
       Filters:
         $ref: '#/definitions/Filters'
-        description: '<p>An array of filters. For each filter, you provide a condition and a match statement. The condition is either <code>IS</code> or <code>IS_NOT</code>, which specifies whether to include or exclude, respectively, from the list, the predictors that match the statement. The match statement consists of a key and a value. In this release, <code>Name</code> is the only valid key, which filters on the <code>PredictorName</code> property.</p> <ul> <li> <p> <code>Condition</code> - <code>IS</code> or <code>IS_NOT</code> </p> </li> <li> <p> <code>Key</code> - <code>Name</code> </p> </li> <li> <p> <code>Value</code> - the value to match</p> </li> </ul> <p>For example, to list all predictors named <i>my_predictor</i>, you would specify:</p> <p> <code>"Filters": [ { "Condition": "IS", "Key": "Name", "Value": "my_predictor" } ]</code> </p>'
+        description: '<p>An array of filters. For each filter, you provide a condition and a match statement. The condition is either <code>IS</code> or <code>IS_NOT</code>, which specifies whether to include or exclude the predictors that match the statement from the list, respectively. The match statement consists of a key and a value.</p> <p> <b>Filter properties</b> </p> <ul> <li> <p> <code>Condition</code> - The condition to apply. Valid values are <code>IS</code> and <code>IS_NOT</code>. To include the predictors that match the statement, specify <code>IS</code>. To exclude matching predictors, specify <code>IS_NOT</code>.</p> </li> <li> <p> <code>Key</code> - The name of the parameter to filter on. Valid values are <code>DatasetGroupArn</code> and <code>Status</code>.</p> </li> <li> <p> <code>Value</code> - The value to match.</p> </li> </ul> <p>For example, to list all predictors whose status is ACTIVE, you would specify:</p> <p> <code>"Filters": [ { "Condition": "IS", "Key": "Status", "Value": "ACTIVE" } ]</code> </p>'
   UpdateDatasetGroupResponse:
     type: object
     properties: {}
@@ -1878,7 +1887,7 @@ definitions:
         description: The ARN of the dataset group.
       DatasetArns:
         $ref: '#/definitions/ArnList'
-        description: An array of Amazon Resource Names (ARNs) of the datasets to add to the dataset group.
+        description: An array of the Amazon Resource Names (ARNs) of the datasets to add to the dataset group.
   Arn:
     type: string
     pattern: '^[a-zA-Z0-9\-\_\.\/\:]+$'
@@ -1898,7 +1907,7 @@ definitions:
     type: boolean
   Name:
     type: string
-    pattern: '^[a-zA-Z0-9][a-zA-Z0-9_]*'
+    pattern: '^[a-zA-Z][a-zA-Z0-9_]*'
     minLength: 1
     maxLength: 63
   Values:
@@ -1954,7 +1963,7 @@ definitions:
         description: The minimum tunable value of the hyperparameter.
       ScalingType:
         $ref: '#/definitions/ScalingType'
-        description: '<p>The scale that hyperparameter tuning uses to search the hyperparameter range. For information about choosing a hyperparameter scale, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type">Hyperparameter Scaling</a>. One of the following values:</p> <dl> <dt>Auto</dt> <dd> <p>Amazon Forecast hyperparameter tuning chooses the best scale for the hyperparameter.</p> </dd> <dt>Linear</dt> <dd> <p>Hyperparameter tuning searches the values in the hyperparameter range by using a linear scale.</p> </dd> <dt>Logarithmic</dt> <dd> <p>Hyperparameter tuning searches the values in the hyperparameter range by using a logarithmic scale.</p> <p>Logarithmic scaling works only for ranges that have only values greater than 0.</p> </dd> <dt>ReverseLogarithmic</dt> <dd> <p>Hyperparemeter tuning searches the values in the hyperparameter range by using a reverse logarithmic scale.</p> <p>Reverse logarithmic scaling works only for ranges that are entirely within the range 0 &lt;= x &lt; 1.0.</p> </dd> </dl>'
+        description: '<p>The scale that hyperparameter tuning uses to search the hyperparameter range. Valid values:</p> <dl> <dt>Auto</dt> <dd> <p>Amazon Forecast hyperparameter tuning chooses the best scale for the hyperparameter.</p> </dd> <dt>Linear</dt> <dd> <p>Hyperparameter tuning searches the values in the hyperparameter range by using a linear scale.</p> </dd> <dt>Logarithmic</dt> <dd> <p>Hyperparameter tuning searches the values in the hyperparameter range by using a logarithmic scale.</p> <p>Logarithmic scaling works only for ranges that have values greater than 0.</p> </dd> <dt>ReverseLogarithmic</dt> <dd> <p>hyperparameter tuning searches the values in the hyperparameter range by using a reverse logarithmic scale.</p> <p>Reverse logarithmic scaling works only for ranges that are entirely within the range 0 &lt;= x &lt; 1.0.</p> </dd> </dl> <p>For information about choosing a hyperparameter scale, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type">Hyperparameter Scaling</a>. One of the following values:</p>'
     description: Specifies a continuous hyperparameter and it's range of tunable values. This object is part of the <a>ParameterRanges</a> object.
   ContinuousParameterRanges:
     type: array
@@ -1980,7 +1989,7 @@ definitions:
       S3Config:
         $ref: '#/definitions/S3Config'
         description: The path to the training data stored in an Amazon Simple Storage Service (Amazon S3) bucket along with the credentials to access the data.
-    description: The source of your training data and credentials to access the data. This object is submitted in the <a>CreateDatasetImportJob</a> request.
+    description: 'The source of your training data, an AWS Identity and Access Management (IAM) role that allows Amazon Forecast to access the data and, optionally, an AWS Key Management Service (KMS) key. This object is submitted in the <a>CreateDatasetImportJob</a> request.'
   TimestampFormat:
     type: string
     pattern: '^[a-zA-Z0-9\-\:\.\,\''\s]+$'
@@ -2000,7 +2009,7 @@ definitions:
       Attributes:
         $ref: '#/definitions/SchemaAttributes'
         description: An array of attributes specifying the name and type of each field in a dataset.
-    description: Defines the fields of a dataset. This object is specified in the <a>CreateDataset</a> request.
+    description: Defines the fields of a dataset. You specify this object in the <a>CreateDataset</a> request.
   EncryptionConfig:
     type: object
     required:
@@ -2009,11 +2018,11 @@ definitions:
     properties:
       RoleArn:
         $ref: '#/definitions/Arn'
-        description: '<p>The ARN of the AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the AWS KMS key.</p> <p>Cross-account pass role is not allowed. If you pass a role that doesn''t belong to your account, an <code>InvalidInputException</code> is thrown.</p>'
+        description: '<p>The ARN of the IAM role that Amazon Forecast can assume to access the AWS KMS key.</p> <p>Passing a role across AWS accounts is not allowed. If you pass a role that isn''t in your account, you get an <code>InvalidInputException</code> error.</p>'
       KMSKeyArn:
         $ref: '#/definitions/KMSKeyArn'
-        description: The Amazon Resource Name (ARN) of an AWS Key Management Service (KMS) key.
-    description: An AWS Key Management Service (KMS) key and an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the key. This object is optionally submitted in the <a>CreateDataset</a> and <a>CreatePredictor</a> requests.
+        description: The Amazon Resource Name (ARN) of the KMS key.
+    description: An AWS Key Management Service (KMS) key and an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the key. You can specify this optional object in the <a>CreateDataset</a> and <a>CreatePredictor</a> requests.
   DataDestination:
     type: object
     required:
@@ -2022,7 +2031,13 @@ definitions:
       S3Config:
         $ref: '#/definitions/S3Config'
         description: The path to an Amazon Simple Storage Service (Amazon S3) bucket along with the credentials to access the bucket.
-    description: The destination of an exported forecast and credentials to access the location. This object is submitted in the <a>CreateForecastExportJob</a> request.
+    description: 'The destination for an exported forecast, an AWS Identity and Access Management (IAM) role that allows Amazon Forecast to access the location and, optionally, an AWS Key Management Service (KMS) key. This object is submitted in the <a>CreateForecastExportJob</a> request.'
+  ForecastTypes:
+    type: array
+    items:
+      $ref: '#/definitions/ForecastType'
+    minItems: 1
+    maxItems: 20
   Integer:
     type: integer
   TrainingParameters:
@@ -2036,18 +2051,18 @@ definitions:
     properties:
       NumberOfBacktestWindows:
         $ref: '#/definitions/Integer'
-        description: The number of times to split the input data. The default is 1. The range is 1 through 5.
+        description: The number of times to split the input data. The default is 1. Valid values are 1 through 5.
       BackTestWindowOffset:
         $ref: '#/definitions/Integer'
-        description: The point from the end of the dataset where you want to split the data for model training and evaluation. The value is specified as the number of data points.
-    description: '<p>Parameters that define how to split a dataset into training data and testing data, and the number of iterations to perform. These parameters are specified in the predefined algorithms and can be overridden in the <a>CreatePredictor</a> request.</p> <p>For example, suppose that you have a dataset with data collection frequency set to every day and you have 200 days worth of data (that is, 200 data points). Now suppose that you set the <code>NumberOfBacktestWindows</code> to 2 and the <code>BackTestWindowOffset</code> parameter to 20. The algorithm splits the data twice. The first time, the algorithm trains the model using the first 180 data points and uses the last 20 data points for evaluation. The second time, the algorithm trains the model using the first 160 data points and uses the last 40 data points for evaluation.</p>'
+        description: <p>The point from the end of the dataset where you want to split the data for model training and testing (evaluation). Specify the value as the number of data points. The default is the value of the forecast horizon. <code>BackTestWindowOffset</code> can be used to mimic a past virtual forecast start date. This value must be greater than or equal to the forecast horizon and less than half of the TARGET_TIME_SERIES dataset length.</p> <p> <code>ForecastHorizon</code> &lt;= <code>BackTestWindowOffset</code> &lt; 1/2 * TARGET_TIME_SERIES dataset length</p>
+    description: 'Parameters that define how to split a dataset into training data and testing data, and the number of iterations to perform. These parameters are specified in the predefined algorithms but you can override them in the <a>CreatePredictor</a> request.'
   HyperParameterTuningJobConfig:
     type: object
     properties:
       ParameterRanges:
         $ref: '#/definitions/ParameterRanges'
         description: Specifies the ranges of valid values for the hyperparameters.
-    description: '<p>Configuration information for a hyperparameter tuning job. This object is specified in the <a>CreatePredictor</a> request.</p> <p>A hyperparameter is a parameter that governs the model training process and is set before training starts. This is as opposed to a model parameter that is determined during training. The values of the hyperparameters have an effect on the chosen model parameters.</p> <p>A hyperparameter tuning job is the process of choosing the optimum set of hyperparameter values that optimize a specified metric. This is accomplished by running many training jobs over a range of hyperparameter values. The optimum set of values is dependent on the algorithm, the training data, and the given metric objective.</p>'
+    description: '<p>Configuration information for a hyperparameter tuning job. You specify this object in the <a>CreatePredictor</a> request.</p> <p>A <i>hyperparameter</i> is a parameter that governs the model training process. You set hyperparameters before training starts, unlike model parameters, which are determined during training. The values of the hyperparameters effect which values are chosen for the model parameters.</p> <p>In a <i>hyperparameter tuning job</i>, Amazon Forecast chooses the set of hyperparameter values that optimize a specified metric. Forecast accomplishes this by running many training jobs over a range of hyperparameter values. The optimum set of values depends on the algorithm, the training data, and the specified metric objective.</p>'
   InputDataConfig:
     type: object
     required:
@@ -2058,8 +2073,8 @@ definitions:
         description: The Amazon Resource Name (ARN) of the dataset group.
       SupplementaryFeatures:
         $ref: '#/definitions/SupplementaryFeatures'
-        description: 'An array of supplementary features. For this release, the only supported feature is a holiday calendar.'
-    description: The data used to train a predictor. The data includes a dataset group and any supplementary features. This object is specified in the <a>CreatePredictor</a> request.
+        description: An array of supplementary features. The only supported feature is a holiday calendar.
+    description: The data used to train a predictor. The data includes a dataset group and any supplementary features. You specify this object in the <a>CreatePredictor</a> request.
   FeaturizationConfig:
     type: object
     required:
@@ -2067,14 +2082,14 @@ definitions:
     properties:
       ForecastFrequency:
         $ref: '#/definitions/Frequency'
-        description: '<p>The frequency of predictions in a forecast.</p> <p>Valid intervals are Y (Year), M (Month), W (Week), D (Day), H (Hour), 30min (30 minutes), 15min (15 minutes), 10min (10 minutes), 5min (5 minutes), and 1min (1 minute). For example, "Y" indicates every year and "5min" indicates every five minutes.</p>'
+        description: '<p>The frequency of predictions in a forecast.</p> <p>Valid intervals are Y (Year), M (Month), W (Week), D (Day), H (Hour), 30min (30 minutes), 15min (15 minutes), 10min (10 minutes), 5min (5 minutes), and 1min (1 minute). For example, "Y" indicates every year and "5min" indicates every five minutes.</p> <p>The frequency must be greater than or equal to the TARGET_TIME_SERIES dataset frequency.</p> <p>When a RELATED_TIME_SERIES dataset is provided, the frequency must be equal to the RELATED_TIME_SERIES dataset frequency.</p>'
       ForecastDimensions:
         $ref: '#/definitions/ForecastDimensions'
-        description: '<p>An array of dimension (field) names that specify how to group the generated forecast.</p> <p>For example, suppose that you are generating a forecast for item sales across all of your stores, and your dataset contains a <code>store_id</code> field. If you want the sales forecast for each item by store, you would specify <code>store_id</code> as the dimension.</p>'
+        description: '<p>An array of dimension (field) names that specify how to group the generated forecast.</p> <p>For example, suppose that you are generating a forecast for item sales across all of your stores, and your dataset contains a <code>store_id</code> field. If you want the sales forecast for each item by store, you would specify <code>store_id</code> as the dimension.</p> <p>All forecast dimensions specified in the <code>TARGET_TIME_SERIES</code> dataset don''t need to be specified in the <code>CreatePredictor</code> request. All forecast dimensions specified in the <code>RELATED_TIME_SERIES</code> dataset must be specified in the <code>CreatePredictor</code> request.</p>'
       Featurizations:
         $ref: '#/definitions/Featurizations'
-        description: 'An array of featurization (transformation) information for the fields of a dataset. In this release, only a single featurization is supported.'
-    description: '<p>In a <a>CreatePredictor</a> operation, the specified algorithm trains a model using the specified dataset group. You can optionally tell the operation to modify data fields prior to training a model. These modifications are referred to as <i>featurization</i>.</p> <p>You define featurization using the <code>FeaturizationConfig</code> object. You specify an array of transformations, one for each field that you want to featurize. You then include the <code>FeaturizationConfig</code> in your <code>CreatePredictor</code> request. Amazon Forecast applies the featurization to the <code>TARGET_TIME_SERIES</code> dataset before model training.</p> <p>You can create multiple featurization configurations. For example, you might call the <code>CreatePredictor</code> operation twice by specifying different featurization configurations.</p>'
+        description: An array of featurization (transformation) information for the fields of a dataset. Only a single featurization is supported.
+    description: '<p>In a <a>CreatePredictor</a> operation, the specified algorithm trains a model using the specified dataset group. You can optionally tell the operation to modify data fields prior to training a model. These modifications are referred to as <i>featurization</i>.</p> <p>You define featurization using the <code>FeaturizationConfig</code> object. You specify an array of transformations, one for each field that you want to featurize. You then include the <code>FeaturizationConfig</code> object in your <code>CreatePredictor</code> request. Amazon Forecast applies the featurization to the <code>TARGET_TIME_SERIES</code> dataset before model training.</p> <p>You can create multiple featurization configurations. For example, you might call the <code>CreatePredictor</code> operation twice by specifying different featurization configurations.</p>'
   S3Config:
     type: object
     required:
@@ -2086,11 +2101,11 @@ definitions:
         description: The path to an Amazon Simple Storage Service (Amazon S3) bucket or file(s) in an Amazon S3 bucket.
       RoleArn:
         $ref: '#/definitions/Arn'
-        description: '<p>The ARN of the AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the Amazon S3 bucket or file(s).</p> <p>Cross-account pass role is not allowed. If you pass a role that doesn''t belong to your account, an <code>InvalidInputException</code> is thrown.</p>'
+        description: '<p>The ARN of the AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the Amazon S3 bucket or files. If you provide a value for the <code>KMSKeyArn</code> key, the role must allow access to the key.</p> <p>Passing a role across AWS accounts is not allowed. If you pass a role that isn''t in your account, you get an <code>InvalidInputException</code> error.</p>'
       KMSKeyArn:
         $ref: '#/definitions/KMSKeyArn'
         description: The Amazon Resource Name (ARN) of an AWS Key Management Service (KMS) key.
-    description: 'The path to the file(s) in an Amazon Simple Storage Service (Amazon S3) bucket, and an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the file(s). Optionally, includes an AWS Key Management Service (KMS) key. This object is submitted in the <a>CreateDatasetImportJob</a> and <a>CreateForecastExportJob</a> requests.'
+    description: 'The path to the file(s) in an Amazon Simple Storage Service (Amazon S3) bucket, and an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the file(s). Optionally, includes an AWS Key Management Service (KMS) key. This object is part of the <a>DataSource</a> object that is submitted in the <a>CreateDatasetImportJob</a> request, and part of the <a>DataDestination</a> object that is submitted in the <a>CreateForecastExportJob</a> request.'
   Timestamp:
     type: string
     format: date-time
@@ -2105,11 +2120,11 @@ definitions:
         description: The name of the dataset group.
       CreationTime:
         $ref: '#/definitions/Timestamp'
-        description: When the datase group was created.
+        description: When the dataset group was created.
       LastModificationTime:
         $ref: '#/definitions/Timestamp'
-        description: 'When the dataset group was created or last updated from a call to the <a>UpdateDatasetGroup</a> operation. While the dataset group is being updated, <code>LastModificationTime</code> is the current query time.'
-    description: 'Provides a summary of the dataset group properties used in the <a>ListDatasetGroups</a> operation. To get the complete set of properties, call the <a>DescribeDatasetGroup</a> operation, and provide the listed <code>DatasetGroupArn</code>.'
+        description: 'When the dataset group was created or last updated from a call to the <a>UpdateDatasetGroup</a> operation. While the dataset group is being updated, <code>LastModificationTime</code> is the current time of the <code>ListDatasetGroups</code> call.'
+    description: 'Provides a summary of the dataset group properties used in the <a>ListDatasetGroups</a> operation. To get the complete set of properties, call the <a>DescribeDatasetGroup</a> operation, and provide the <code>DatasetGroupArn</code>.'
   DatasetGroups:
     type: array
     items:
@@ -2130,7 +2145,7 @@ definitions:
         description: The name of the dataset import job.
       DataSource:
         $ref: '#/definitions/DataSource'
-        description: The location of the Amazon S3 bucket that contains the training data.
+        description: '<p>The location of the training data to import and an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the data. The training data must be stored in an Amazon S3 bucket.</p> <p>If encryption is used, <code>DataSource</code> includes an AWS Key Management Service (KMS) key.</p>'
       Status:
         $ref: '#/definitions/Status'
         description: '<p>The status of the dataset import job. The status is reflected in the status of the dataset. For example, when the import job status is <code>CREATE_IN_PROGRESS</code>, the status of the dataset is <code>UPDATE_IN_PROGRESS</code>. States include:</p> <ul> <li> <p> <code>ACTIVE</code> </p> </li> <li> <p> <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>, <code>CREATE_FAILED</code> </p> </li> <li> <p> <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>, <code>DELETE_FAILED</code> </p> </li> </ul>'
@@ -2142,8 +2157,8 @@ definitions:
         description: When the dataset import job was created.
       LastModificationTime:
         $ref: '#/definitions/Timestamp'
-        description: '<p>Dependent on the status as follows:</p> <ul> <li> <p> <code>CREATE_PENDING</code> - same as <code>CreationTime</code> </p> </li> <li> <p> <code>CREATE_IN_PROGRESS</code> - the current timestamp</p> </li> <li> <p> <code>ACTIVE</code> or <code>CREATE_FAILED</code> - when the job finished or failed</p> </li> </ul>'
-    description: 'Provides a summary of the dataset import job properties used in the <a>ListDatasetImportJobs</a> operation. To get the complete set of properties, call the <a>DescribeDatasetImportJob</a> operation, and provide the listed <code>DatasetImportJobArn</code>.'
+        description: '<p>The last time that the dataset was modified. The time depends on the status of the job, as follows:</p> <ul> <li> <p> <code>CREATE_PENDING</code> - The same time as <code>CreationTime</code>.</p> </li> <li> <p> <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p> </li> <li> <p> <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or failed.</p> </li> </ul>'
+    description: 'Provides a summary of the dataset import job properties used in the <a>ListDatasetImportJobs</a> operation. To get the complete set of properties, call the <a>DescribeDatasetImportJob</a> operation, and provide the <code>DatasetImportJobArn</code>.'
   DatasetImportJobs:
     type: array
     items:
@@ -2168,8 +2183,8 @@ definitions:
         description: When the dataset was created.
       LastModificationTime:
         $ref: '#/definitions/Timestamp'
-        description: 'When the dataset is created, <code>LastModificationTime</code> is the same as <code>CreationTime</code>. After a <a>CreateDatasetImportJob</a> operation is called, <code>LastModificationTime</code> is when the import job finished or failed. While data is being imported to the dataset, <code>LastModificationTime</code> is the current query time.'
-    description: 'Provides a summary of the dataset properties used in the <a>ListDatasets</a> operation. To get the complete set of properties, call the <a>DescribeDataset</a> operation, and provide the listed <code>DatasetArn</code>.'
+        description: 'When you create a dataset, <code>LastModificationTime</code> is the same as <code>CreationTime</code>. While data is being imported to the dataset, <code>LastModificationTime</code> is the current time of the <code>ListDatasets</code> call. After a <a>CreateDatasetImportJob</a> operation has finished, <code>LastModificationTime</code> is when the import job completed or failed.'
+    description: 'Provides a summary of the dataset properties used in the <a>ListDatasets</a> operation. To get the complete set of properties, call the <a>DescribeDataset</a> operation, and provide the <code>DatasetArn</code>.'
   Datasets:
     type: array
     items:
@@ -2184,6 +2199,13 @@ definitions:
     type: string
     pattern: '^[a-zA-Z0-9\_]+$'
     maxLength: 256
+  PredictorExecutionDetails:
+    type: object
+    properties:
+      PredictorExecutions:
+        $ref: '#/definitions/PredictorExecutions'
+        description: An array of the backtests performed to evaluate the accuracy of the predictor against a particular algorithm. The <code>NumberOfBacktestWindows</code> from the object determines the number of windows in the array.
+    description: 'Contains details on the backtests performed to evaluate the accuracy of the predictor. The tests are returned in descending order of accuracy, with the most accurate backtest appearing first. You specify the number of backtests to perform when you call the operation.'
   KMSKeyArn:
     type: string
     pattern: 'arn:aws:kms:.*:key/.*'
@@ -2220,10 +2242,10 @@ definitions:
     properties:
       AttributeName:
         $ref: '#/definitions/Name'
-        description: 'The name of the schema attribute specifying the data field to be featurized. In this release, only the <code>target</code> field of the <code>TARGET_TIME_SERIES</code> dataset type is supported. For example, for the <code>RETAIL</code> domain, the target is <code>demand</code>, and for the <code>CUSTOM</code> domain, the target is <code>target_value</code>.'
+        description: 'The name of the schema attribute that specifies the data field to be featurized. Only the <code>target</code> field of the <code>TARGET_TIME_SERIES</code> dataset type is supported. For example, for the <code>RETAIL</code> domain, the target is <code>demand</code>, and for the <code>CUSTOM</code> domain, the target is <code>target_value</code>.'
       FeaturizationPipeline:
         $ref: '#/definitions/FeaturizationPipeline'
-        description: 'An array <code>FeaturizationMethod</code> objects that specifies the feature transformation methods. For this release, the number of methods is limited to one.'
+        description: An array of one <code>FeaturizationMethod</code> object that specifies the feature transformation method.
     description: '<p>Provides featurization (transformation) information for a dataset field. This object is part of the <a>FeaturizationConfig</a> object.</p> <p>For example:</p> <p> <code>{</code> </p> <p> <code>"AttributeName": "demand",</code> </p> <p> <code>FeaturizationPipeline [ {</code> </p> <p> <code>"FeaturizationMethodName": "filling",</code> </p> <p> <code>"FeaturizationMethodParameters": {"aggregation": "avg", "backfill": "nan"}</code> </p> <p> <code>} ]</code> </p> <p> <code>}</code> </p>'
   ForecastDimensions:
     type: array
@@ -2254,11 +2276,11 @@ definitions:
     properties:
       FeaturizationMethodName:
         $ref: '#/definitions/FeaturizationMethodName'
-        description: 'The name of the method. In this release, "filling" is the only supported method.'
+        description: The name of the method. The "filling" method is the only supported method.
       FeaturizationMethodParameters:
         $ref: '#/definitions/FeaturizationMethodParameters'
-        description: '<p>The method parameters (key-value pairs). Specify these to override the default values. The following list shows the parameters and their valid values. Bold signifies the default value.</p> <ul> <li> <p> <code>aggregation</code>: <b>sum</b>, <code>avg</code>, <code>first</code>, <code>min</code>, <code>max</code> </p> </li> <li> <p> <code>frontfill</code>: <b>none</b> </p> </li> <li> <p> <code>middlefill</code>: <b>zero</b>, <code>nan</code> (not a number)</p> </li> <li> <p> <code>backfill</code>: <b>zero</b>, <code>nan</code> </p> </li> </ul>'
-    description: '<p>Provides information about a method that featurizes (transforms) a dataset field. The method is part of the <code>FeaturizationPipeline</code> of the <a>Featurization</a> object. If <code>FeaturizationMethodParameters</code> isn''t specified, Amazon Forecast uses default parameters.</p> <p>For example:</p> <p> <code>{</code> </p> <p> <code>"FeaturizationMethodName": "filling",</code> </p> <p> <code>"FeaturizationMethodParameters": {"aggregation": "avg", "backfill": "nan"}</code> </p> <p> <code>}</code> </p>'
+        description: '<p>The method parameters (key-value pairs). Specify these parameters to override the default values. The following list shows the parameters and their valid values. Bold signifies the default value.</p> <ul> <li> <p> <code>aggregation</code>: <b>sum</b>, <code>avg</code>, <code>first</code>, <code>min</code>, <code>max</code> </p> </li> <li> <p> <code>frontfill</code>: <b>none</b> </p> </li> <li> <p> <code>middlefill</code>: <b>zero</b>, <code>nan</code> (not a number)</p> </li> <li> <p> <code>backfill</code>: <b>zero</b>, <code>nan</code> </p> </li> </ul>'
+    description: '<p>Provides information about the method that featurizes (transforms) a dataset field. The method is part of the <code>FeaturizationPipeline</code> of the <a>Featurization</a> object. If you don''t specify <code>FeaturizationMethodParameters</code>, Amazon Forecast uses default parameters.</p> <p>The following is an example of how you specify a <code>FeaturizationMethod</code> object.</p> <p> <code>{</code> </p> <p> <code>"FeaturizationMethodName": "filling",</code> </p> <p> <code>"FeaturizationMethodParameters": {"aggregation": "avg", "backfill": "nan"}</code> </p> <p> <code>}</code> </p>'
   ParameterValue:
     type: string
     pattern: '^[a-zA-Z0-9\-\_\.\/\[\]\,\"\\\s]+$'
@@ -2290,7 +2312,7 @@ definitions:
       Stddev:
         $ref: '#/definitions/Double'
         description: 'For a numeric field, the standard deviation.'
-    description: Provides statistics for each data field imported to an Amazon Forecast dataset with the <a>CreateDatasetImportJob</a> operation.
+    description: Provides statistics for each data field imported into to an Amazon Forecast dataset with the <a>CreateDatasetImportJob</a> operation.
   FilterConditionString:
     type: string
     enum:
@@ -2308,11 +2330,11 @@ definitions:
         description: The name of the parameter to filter on.
       Value:
         $ref: '#/definitions/Arn'
-        description: A valid value for <code>Key</code>.
+        description: The value to match.
       Condition:
         $ref: '#/definitions/FilterConditionString'
-        description: The condition to apply.
-    description: 'Describes a filter for choosing a subset of objects. Each filter consists of a condition and a match statement. The condition is either <code>IS</code> or <code>IS_NOT</code>, which specifies whether to include or exclude, respectively, the objects that match the statement. The match statement consists of a key and a value.'
+        description: 'The condition to apply. To include the objects that match the statement, specify <code>IS</code>. To exclude matching objects, specify <code>IS_NOT</code>.'
+    description: 'Describes a filter for choosing a subset of objects. Each filter consists of a condition and a match statement. The condition is either <code>IS</code> or <code>IS_NOT</code>, which specifies whether to include or exclude the objects that match the statement, respectively. The match statement consists of a key and a value.'
   Filters:
     type: array
     items:
@@ -2328,10 +2350,10 @@ definitions:
         description: The name of the forecast export job.
       Destination:
         $ref: '#/definitions/DataDestination'
-        description: The path to the S3 bucket where the forecast is stored.
+        description: The path to the Amazon Simple Storage Service (Amazon S3) bucket where the forecast is exported.
       Status:
         $ref: '#/definitions/Status'
-        description: '<p>The status of the forecast export job. One of the following states:</p> <ul> <li> <p> <code>ACTIVE</code> </p> </li> <li> <p> <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>, <code>CREATE_FAILED</code> </p> </li> <li> <p> <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>, <code>DELETE_FAILED</code> </p> </li> </ul> <note> <p>The <code>Status</code> of the forecast export job must be <code>ACTIVE</code> before you can access the forecast in your Amazon S3 bucket.</p> </note>'
+        description: '<p>The status of the forecast export job. States include:</p> <ul> <li> <p> <code>ACTIVE</code> </p> </li> <li> <p> <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>, <code>CREATE_FAILED</code> </p> </li> <li> <p> <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>, <code>DELETE_FAILED</code> </p> </li> </ul> <note> <p>The <code>Status</code> of the forecast export job must be <code>ACTIVE</code> before you can access the forecast in your S3 bucket.</p> </note>'
       Message:
         $ref: '#/definitions/ErrorMessage'
         description: 'If an error occurred, an informational message about the error.'
@@ -2373,7 +2395,10 @@ definitions:
       LastModificationTime:
         $ref: '#/definitions/Timestamp'
         description: 'Initially, the same as <code>CreationTime</code> (status is <code>CREATE_PENDING</code>). Updated when inference (creating the forecast) starts (status changed to <code>CREATE_IN_PROGRESS</code>), and when inference is complete (status changed to <code>ACTIVE</code>) or fails (status changed to <code>CREATE_FAILED</code>).'
-    description: 'Provides a summary of the forecast properties used in the <a>ListForecasts</a> operation. To get the complete set of properties, call the <a>DescribeForecast</a> operation, and provide the listed <code>ForecastArn</code>.'
+    description: 'Provides a summary of the forecast properties used in the <a>ListForecasts</a> operation. To get the complete set of properties, call the <a>DescribeForecast</a> operation, and provide the <code>ForecastArn</code> that is listed in the summary.'
+  ForecastType:
+    type: string
+    pattern: (^0?\.\d\d?$|^mean$)
   Forecasts:
     type: array
     items:
@@ -2419,7 +2444,7 @@ definitions:
         description: The minimum tunable value of the hyperparameter.
       ScalingType:
         $ref: '#/definitions/ScalingType'
-        description: '<p>The scale that hyperparameter tuning uses to search the hyperparameter range. For information about choosing a hyperparameter scale, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type">Hyperparameter Scaling</a>. One of the following values:</p> <dl> <dt>Auto</dt> <dd> <p>Amazon Forecast hyperparameter tuning chooses the best scale for the hyperparameter.</p> </dd> <dt>Linear</dt> <dd> <p>Hyperparameter tuning searches the values in the hyperparameter range by using a linear scale.</p> </dd> <dt>Logarithmic</dt> <dd> <p>Hyperparameter tuning searches the values in the hyperparameter range by using a logarithmic scale.</p> <p>Logarithmic scaling works only for ranges that have only values greater than 0.</p> </dd> <dt>ReverseLogarithmic</dt> <dd> <p>Not supported for <code>IntegerParameterRange</code>.</p> <p>Reverse logarithmic scaling works only for ranges that are entirely within the range 0 &lt;= x &lt; 1.0.</p> </dd> </dl>'
+        description: '<p>The scale that hyperparameter tuning uses to search the hyperparameter range. Valid values:</p> <dl> <dt>Auto</dt> <dd> <p>Amazon Forecast hyperparameter tuning chooses the best scale for the hyperparameter.</p> </dd> <dt>Linear</dt> <dd> <p>Hyperparameter tuning searches the values in the hyperparameter range by using a linear scale.</p> </dd> <dt>Logarithmic</dt> <dd> <p>Hyperparameter tuning searches the values in the hyperparameter range by using a logarithmic scale.</p> <p>Logarithmic scaling works only for ranges that have values greater than 0.</p> </dd> <dt>ReverseLogarithmic</dt> <dd> <p>Not supported for <code>IntegerParameterRange</code>.</p> <p>Reverse logarithmic scaling works only for ranges that are entirely within the range 0 &lt;= x &lt; 1.0.</p> </dd> </dl> <p>For information about choosing a hyperparameter scale, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type">Hyperparameter Scaling</a>. One of the following values:</p>'
     description: Specifies an integer hyperparameter and it's range of tunable values. This object is part of the <a>ParameterRanges</a> object.
   IntegerParameterRanges:
     type: array
@@ -2452,11 +2477,31 @@ definitions:
       WeightedQuantileLosses:
         $ref: '#/definitions/WeightedQuantileLosses'
         description: An array of weighted quantile losses. Quantiles divide a probability distribution into regions of equal probability. The distribution in this case is the loss function.
-    description: Provides metrics used to evaluate the performance of a predictor. This object is part of the <a>WindowSummary</a> object.
+    description: Provides metrics that are used to evaluate the performance of a predictor. This object is part of the <a>WindowSummary</a> object.
   ParameterKey:
     type: string
     pattern: '^[a-zA-Z0-9\-\_\.\/\[\]\,\\]+$'
     maxLength: 256
+  TestWindowDetails:
+    type: array
+    items:
+      $ref: '#/definitions/TestWindowSummary'
+  PredictorExecution:
+    type: object
+    properties:
+      AlgorithmArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the algorithm used to test the predictor.
+      TestWindows:
+        $ref: '#/definitions/TestWindowDetails'
+        description: An array of test windows used to evaluate the algorithm. The <code>NumberOfBacktestWindows</code> from the object determines the number of windows in the array.
+    description: The algorithm used to perform a backtest and the status of those tests.
+  PredictorExecutions:
+    type: array
+    items:
+      $ref: '#/definitions/PredictorExecution'
+    minItems: 1
+    maxItems: 5
   PredictorSummary:
     type: object
     properties:
@@ -2471,7 +2516,7 @@ definitions:
         description: The Amazon Resource Name (ARN) of the dataset group that contains the data used to train the predictor.
       Status:
         $ref: '#/definitions/Status'
-        description: '<p>The status of the predictor. States include:</p> <ul> <li> <p> <code>ACTIVE</code> </p> </li> <li> <p> <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>, <code>CREATE_FAILED</code> </p> </li> <li> <p> <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>, <code>DELETE_FAILED</code> </p> </li> <li> <p> <code>UPDATE_PENDING</code>, <code>UPDATE_IN_PROGRESS</code>, <code>UPDATE_FAILED</code> </p> </li> </ul> <note> <p>The <code>Status</code> of the predictor must be <code>ACTIVE</code> before using the predictor to create a forecast.</p> </note>'
+        description: '<p>The status of the predictor. States include:</p> <ul> <li> <p> <code>ACTIVE</code> </p> </li> <li> <p> <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>, <code>CREATE_FAILED</code> </p> </li> <li> <p> <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>, <code>DELETE_FAILED</code> </p> </li> <li> <p> <code>UPDATE_PENDING</code>, <code>UPDATE_IN_PROGRESS</code>, <code>UPDATE_FAILED</code> </p> </li> </ul> <note> <p>The <code>Status</code> of the predictor must be <code>ACTIVE</code> before you can use the predictor to create a forecast.</p> </note>'
       Message:
         $ref: '#/definitions/ErrorMessage'
         description: 'If an error occurred, an informational message about the error.'
@@ -2481,10 +2526,10 @@ definitions:
       LastModificationTime:
         $ref: '#/definitions/Timestamp'
         description: 'Initially, the same as <code>CreationTime</code> (status is <code>CREATE_PENDING</code>). Updated when training starts (status changed to <code>CREATE_IN_PROGRESS</code>), and when training is complete (status changed to <code>ACTIVE</code>) or fails (status changed to <code>CREATE_FAILED</code>).'
-    description: 'Provides a summary of the predictor properties used in the <a>ListPredictors</a> operation. To get the complete set of properties, call the <a>DescribePredictor</a> operation, and provide the listed <code>PredictorArn</code>.'
+    description: 'Provides a summary of the predictor properties that are used in the <a>ListPredictors</a> operation. To get the complete set of properties, call the <a>DescribePredictor</a> operation, and provide the listed <code>PredictorArn</code>.'
   S3Path:
     type: string
-    pattern: '^s3://.+$'
+    pattern: '^s3://[a-z0-9].+$'
   SchemaAttributes:
     type: array
     items:
@@ -2498,7 +2543,7 @@ definitions:
       AttributeType:
         $ref: '#/definitions/AttributeType'
         description: The data type of the field.
-    description: 'An attribute of a schema, which defines a field of a dataset. A schema attribute is required for every field in a dataset. The <a>Schema</a> object contains an array of <code>SchemaAttribute</code> objects.'
+    description: 'An attribute of a schema, which defines a dataset field. A schema attribute is required for every field in a dataset. The <a>Schema</a> object contains an array of <code>SchemaAttribute</code> objects.'
   Value:
     type: string
     pattern: '^[a-zA-Z0-9\_\-]+$'
@@ -2515,7 +2560,23 @@ definitions:
       Value:
         $ref: '#/definitions/Value'
         description: '<p>One of the following 2 letter country codes:</p> <ul> <li> <p>"AU" - AUSTRALIA</p> </li> <li> <p>"DE" - GERMANY</p> </li> <li> <p>"JP" - JAPAN</p> </li> <li> <p>"US" - UNITED_STATES</p> </li> <li> <p>"UK" - UNITED_KINGDOM</p> </li> </ul>'
-    description: '<p>Describes a supplementary feature of a dataset group. This object is part of the <a>InputDataConfig</a> object.</p> <p>For this release, the only supported feature is a holiday calendar. If the calendar is used, all data should belong to the same country as the calendar. For the calendar data, see <a href="http://jollyday.sourceforge.net/data.html">http://jollyday.sourceforge.net/data.html</a>.</p>'
+    description: '<p>Describes a supplementary feature of a dataset group. This object is part of the <a>InputDataConfig</a> object.</p> <p>The only supported feature is a holiday calendar. If you use the calendar, all data in the datasets should belong to the same country as the calendar. For the holiday calendar data, see the <a href="http://jollyday.sourceforge.net/data.html">Jollyday</a> web site.</p>'
+  TestWindowSummary:
+    type: object
+    properties:
+      TestWindowStart:
+        $ref: '#/definitions/Timestamp'
+        description: The time at which the test began.
+      TestWindowEnd:
+        $ref: '#/definitions/Timestamp'
+        description: The time at which the test ended.
+      Status:
+        $ref: '#/definitions/Status'
+        description: '<p>The status of the test. Possible status values are:</p> <ul> <li> <p> <code>ACTIVE</code> </p> </li> <li> <p> <code>CREATE_IN_PROGRESS</code> </p> </li> <li> <p> <code>CREATE_FAILED</code> </p> </li> </ul>'
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+        description: 'If the test failed, the reason why it failed.'
+    description: 'The status, start time, and end time of a backtest, as well as a failure reason if applicable.'
   WindowSummary:
     type: object
     properties:
@@ -2533,6 +2594,7 @@ definitions:
         description: <p>The type of evaluation.</p> <ul> <li> <p> <code>SUMMARY</code> - The average metrics across all windows.</p> </li> <li> <p> <code>COMPUTED</code> - The metrics for the specified window.</p> </li> </ul>
       Metrics:
         $ref: '#/definitions/Metrics'
+        description: Provides metrics used to evaluate the performance of a predictor.
     description: <p>The metrics for a time range within the evaluation portion of a dataset. This object is part of the <a>EvaluationResult</a> object.</p> <p>The <code>TestWindowStart</code> and <code>TestWindowEnd</code> parameters are determined by the <code>BackTestWindowOffset</code> parameter of the <a>EvaluationParameters</a> object.</p>
   WeightedQuantileLoss:
     type: object
@@ -2542,5 +2604,5 @@ definitions:
         description: 'The quantile. Quantiles divide a probability distribution into regions of equal probability. For example, if the distribution was divided into 5 regions of equal probability, the quantiles would be 0.2, 0.4, 0.6, and 0.8.'
       LossValue:
         $ref: '#/definitions/Double'
-        description: 'The difference between the predicted value and actual value over the quantile, weighted (normalized) by dividing by the sum over all quantiles.'
+        description: 'The difference between the predicted value and the actual value over the quantile, weighted (normalized) by dividing by the sum over all quantiles.'
     description: The weighted loss value for a quantile. This object is part of the <a>Metrics</a> object.

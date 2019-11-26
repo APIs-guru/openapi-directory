@@ -845,10 +845,10 @@ definitions:
         description: The type of Amazon FSx file system to create.
       StorageCapacity:
         $ref: '#/definitions/StorageCapacity'
-        description: '<p>The storage capacity of the file system being created.</p> <p>For Windows file systems, the storage capacity has a minimum of 300 GiB, and a maximum of 65,536 GiB.</p> <p>For Lustre file systems, the storage capacity has a minimum of 3,600 GiB. Storage capacity is provisioned in increments of 3,600 GiB.</p>'
+        description: '<p>The storage capacity of the file system being created.</p> <p>For Windows file systems, valid values are 32 GiB - 65,536 GiB.</p> <p>For Lustre file systems, valid values are 1,200, 2,400, 3,600, then continuing in increments of 3600 GiB.</p>'
       SubnetIds:
         $ref: '#/definitions/SubnetIds'
-        description: The IDs of the subnets that the file system will be accessible from. File systems support only one subnet. The file server is also launched in that subnet's Availability Zone.
+        description: '<p>Specifies the IDs of the subnets that the file system will be accessible from. For Windows <code>MULTI_AZ_1</code> file system deployment types, provide exactly two subnet IDs, one for the preferred file server and one for the standy file server. You specify one of these subnets as the preferred subnet using the <code>WindowsConfiguration &gt; PreferredSubnetID</code> property.</p> <p>For Windows <code>SINGLE_AZ_1</code> file system deployment types and Lustre file systems, provide exactly one subnet ID. The file server is launched in that subnet''s Availability Zone.</p>'
       SecurityGroupIds:
         $ref: '#/definitions/SecurityGroupIds'
         description: A list of IDs specifying the security groups to apply to all network interfaces created for file system access. This list isn't returned in later requests to describe the file system.
@@ -1283,7 +1283,7 @@ definitions:
         description: 'The type of Amazon FSx file system, either <code>LUSTRE</code> or <code>WINDOWS</code>.'
       Lifecycle:
         $ref: '#/definitions/FileSystemLifecycle'
-        description: '<p>The lifecycle status of the file system:</p> <ul> <li> <p> <code>AVAILABLE</code> indicates that the file system is reachable and available for use.</p> </li> <li> <p> <code>CREATING</code> indicates that Amazon FSx is in the process of creating the new file system.</p> </li> <li> <p> <code>DELETING</code> indicates that Amazon FSx is in the process of deleting the file system.</p> </li> <li> <p> <code>FAILED</code> indicates that Amazon FSx was not able to create the file system.</p> </li> <li> <p> <code>MISCONFIGURED</code> indicates that the file system is in a failed but recoverable state.</p> </li> <li> <p> <code>UPDATING</code> indicates that the file system is undergoing a customer initiated update.</p> </li> </ul>'
+        description: '<p>The lifecycle status of the file system, following are the possible values and what they mean:</p> <ul> <li> <p> <code>AVAILABLE</code> - The file system is in a healthy state, and is reachable and available for use.</p> </li> <li> <p> <code>CREATING</code> - Amazon FSx is creating the new file system.</p> </li> <li> <p> <code>DELETING</code> - Amazon FSx is deleting an existing file system.</p> </li> <li> <p> <code>FAILED</code> - An existing file system has experienced an unrecoverable failure. When creating a new file system, Amazon FSx was unable to create the file system.</p> </li> <li> <p> <code>MISCONFIGURED</code> indicates that the file system is in a failed but recoverable state.</p> </li> <li> <p> <code>UPDATING</code> indicates that the file system is undergoing a customer initiated update.</p> </li> </ul>'
       FailureDetails:
         $ref: '#/definitions/FileSystemFailureDetails'
       StorageCapacity:
@@ -1409,6 +1409,12 @@ definitions:
         description: The ID for an existing AWS Managed Microsoft Active Directory (AD) instance that the file system should join when it's created.
       SelfManagedActiveDirectoryConfiguration:
         $ref: '#/definitions/SelfManagedActiveDirectoryConfiguration'
+      DeploymentType:
+        $ref: '#/definitions/WindowsDeploymentType'
+        description: '<p>Specifies the file system deployment type, valid values are the following:</p> <ul> <li> <p>MULTI_AZ_1 - Deploys a high availability file system that is configured for Multi-AZ redundancy to tolerate temporary Availability Zone (AZ) unavailability. You can only deploy a Multi-AZ file system in AWS Regions that have a minimum of three Availability Zones.</p> </li> <li> <p>SINGLE_AZ_1 - (Default) Choose to deploy a file system that is configured for single AZ redundancy.</p> </li> </ul> <p>To learn more about high availability Multi-AZ file systems, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html"> High Availability for Amazon FSx for Windows File Server</a>.</p>'
+      PreferredSubnetId:
+        $ref: '#/definitions/SubnetId'
+        description: 'Required when <code>DeploymentType</code> is set to <code>MULTI_AZ_1</code>. This specifies the subnet in which you want the preferred file server to be located. For in-AWS applications, we recommend that you launch your clients in the same Availability Zone (AZ) as your preferred file server to reduce cross-AZ data transfer costs and minimize latency. '
       ThroughputCapacity:
         $ref: '#/definitions/MegabytesPerSecond'
         description: 'The throughput of an Amazon FSx file system, measured in megabytes per second, in 2 to the <i>n</i>th increments, between 2^3 (8) and 2^11 (2048).'
@@ -1477,7 +1483,7 @@ definitions:
         description: '<p>(Optional) The fully qualified distinguished name of the organizational unit within your self-managed AD directory that the Windows File Server instance will join. Amazon FSx only accepts OU as the direct parent of the file system. An example is <code>OU=FSx,DC=yourdomain,DC=corp,DC=com</code>. To learn more, see <a href="https://tools.ietf.org/html/rfc2253">RFC 2253</a>. If none is provided, the FSx file system is created in the default location of your self-managed AD directory. </p> <important> <p>Only Organizational Unit (OU) objects can be the direct parent of the file system that you''re creating.</p> </important>'
       FileSystemAdministratorsGroup:
         $ref: '#/definitions/FileSystemAdministratorsGroupName'
-        description: '(Optional) The name of the domain group whose members are granted administrative privileges for the file system. Administrative privileges include taking ownership of files and folders, and setting audit controls (audit ACLs) on files and folders. The group that you specify must already exist in your domain. If you don''t provide one, your AD domain''s Domain Admins group is used.'
+        description: '(Optional) The name of the domain group whose members are granted administrative privileges for the file system. Administrative privileges include taking ownership of files and folders, setting audit controls (audit ACLs) on files and folders, and administering the file system remotely by using the FSx Remote PowerShell. The group that you specify must already exist in your domain. If you don''t provide one, your AD domain''s Domain Admins group is used.'
       UserName:
         $ref: '#/definitions/DirectoryUserName'
         description: 'The user name for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. This account must have the permission to join computers to the domain in the organizational unit provided in <code>OrganizationalUnitDistinguishedName</code>, or in the default location of your AD domain.'
@@ -1488,6 +1494,17 @@ definitions:
         $ref: '#/definitions/DnsIps'
         description: '<p>A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory. The IP addresses need to be either in the same VPC CIDR range as the one in which your Amazon FSx file system is being created, or in the private IP version 4 (Iv4) address ranges, as specified in <a href="http://www.faqs.org/rfcs/rfc1918.html">RFC 1918</a>:</p> <ul> <li> <p>10.0.0.0 - 10.255.255.255 (10/8 prefix)</p> </li> <li> <p>172.16.0.0 - 172.31.255.255 (172.16/12 prefix)</p> </li> <li> <p>192.168.0.0 - 192.168.255.255 (192.168/16 prefix)</p> </li> </ul>'
     description: The configuration that Amazon FSx uses to join the Windows File Server instance to your self-managed (including on-premises) Microsoft Active Directory (AD) directory.
+  WindowsDeploymentType:
+    type: string
+    enum:
+      - MULTI_AZ_1
+      - SINGLE_AZ_1
+  SubnetId:
+    type: string
+    pattern: '^(subnet-[0-9a-f]{8,})$'
+    description: 'The ID for a subnet. A <i>subnet</i> is a range of IP addresses in your virtual private cloud (VPC). For more information, see <a href="https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html">VPC and Subnets</a> in the <i>Amazon VPC User Guide.</i> '
+    minLength: 15
+    maxLength: 24
   MegabytesPerSecond:
     type: integer
     description: Sustained throughput of an Amazon FSx file system in MBps.
@@ -1623,6 +1640,18 @@ definitions:
         description: The ID for an existing Microsoft Active Directory instance that the file system should join when it's created.
       SelfManagedActiveDirectoryConfiguration:
         $ref: '#/definitions/SelfManagedActiveDirectoryAttributes'
+      DeploymentType:
+        $ref: '#/definitions/WindowsDeploymentType'
+        description: '<p>Specifies the file system deployment type, valid values are the following:</p> <ul> <li> <p> <code>MULTI_AZ_1</code> - Specifies a high availability file system that is configured for Multi-AZ redundancy to tolerate temporary Availability Zone (AZ) unavailability.</p> </li> <li> <p> <code>SINGLE_AZ_1</code> - (Default) Specifies a file system that is configured for single AZ redundancy.</p> </li> </ul>'
+      RemoteAdministrationEndpoint:
+        $ref: '#/definitions/DNSName'
+        description: '<p>For <code>MULTI_AZ_1</code> deployment types, use this endpoint when performing administrative tasks on the file system using Amazon FSx Remote PowerShell.</p> <p>For <code>SINGLE_AZ_1</code> deployment types, this is the DNS name of the file system.</p> <p>This endpoint is temporarily unavailable when the file system is undergoing maintenance.</p>'
+      PreferredSubnetId:
+        $ref: '#/definitions/SubnetId'
+        description: '<p>For <code>MULTI_AZ_1</code> deployment types, it specifies the ID of the subnet where the preferred file server is located. Must be one of the two subnet IDs specified in <code>SubnetIds</code> property. Amazon FSx serves traffic from this subnet except in the event of a failover to the secondary file server.</p> <p>For <code>SINGLE_AZ_1</code> deployment types, this value is the same as that for <code>SubnetIDs</code>.</p>'
+      PreferredFileServerIp:
+        $ref: '#/definitions/IpAddress'
+        description: '<p>For <code>MULTI_AZ_1</code> deployment types, the IP address of the primary, or preferred, file server.</p> <p>Use this IP address when mounting the file system on Linux SMB clients or Windows SMB clients that are not joined to a Microsoft Active Directory. Applicable for both <code>SINGLE_AZ_1</code> and <code>MULTI_AZ_1</code> deployment types. This IP address is temporarily unavailable when the file system is undergoing maintenance. For Linux and Windows SMB clients that are joined to an Active Directory, use the file system''s DNSName instead. For more information and instruction on mapping and mounting file shares, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/accessing-file-shares.html">https://docs.aws.amazon.com/fsx/latest/WindowsGuide/accessing-file-shares.html</a>.</p>'
       ThroughputCapacity:
         $ref: '#/definitions/MegabytesPerSecond'
         description: 'The throughput of an Amazon FSx file system, measured in megabytes per second.'
@@ -1743,12 +1772,6 @@ definitions:
         $ref: '#/definitions/DnsIps'
         description: A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory.
     description: The configuration that Amazon FSx uses to join the Windows File Server instance to the self-managed Microsoft Active Directory (AD) directory.
-  SubnetId:
-    type: string
-    pattern: '^(subnet-[0-9a-f]{8,})$'
-    description: 'The ID for a subnet. A <i>subnet</i> is a range of IP addresses in your virtual private cloud (VPC). For more information, see <a href="https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html">VPC and Subnets</a> in the <i>Amazon VPC User Guide.</i> '
-    minLength: 15
-    maxLength: 24
   TagKey:
     type: string
     description: A string of 1 to 128 characters that specifies the key for a tag. Tag keys must be unique for the resource to which they are attached.

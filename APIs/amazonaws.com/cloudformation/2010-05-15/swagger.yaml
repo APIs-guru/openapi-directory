@@ -1954,6 +1954,135 @@ paths:
           type: string
           enum:
             - '2010-05-15'
+  '/#Action=DeregisterType':
+    get:
+      x-aws-operation-name: DeregisterType
+      operationId: GET DeregisterType
+      description: '<p>Removes a type or type version from active use in the CloudFormation registry. If a type or type version is deregistered, it cannot be used in CloudFormation operations.</p> <p>To deregister a type, you must individually deregister all registered versions of that type. If a type has only a single registered version, deregistering that version results in the type itself being deregistered. </p> <p>You cannot deregister the default version of a type, unless it is the only registered version of that type, in which case the type itself is deregistered as well. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeregisterTypeOutput'
+        '480':
+          description: CFNRegistryException
+          schema:
+            $ref: '#/definitions/CFNRegistryException'
+        '481':
+          description: TypeNotFoundException
+          schema:
+            $ref: '#/definitions/TypeNotFoundException'
+      parameters:
+        - name: Arn
+          in: query
+          required: false
+          description: '<p>The Amazon Resource Name (ARN) of the type.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>'
+          type: string
+          pattern: 'arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:[0-9]{12}:type/.+'
+          maxLength: 1024
+        - name: Type
+          in: query
+          required: false
+          description: <p>The kind of type.</p> <p>Currently the only valid value is <code>RESOURCE</code>.</p>
+          type: string
+          enum:
+            - RESOURCE
+        - name: TypeName
+          in: query
+          required: false
+          description: '<p>The name of the type.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>'
+          type: string
+          pattern: '[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}'
+          minLength: 10
+          maxLength: 196
+        - name: VersionId
+          in: query
+          required: false
+          description: The ID of a specific version of the type. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the type version when it is registered.
+          type: string
+          pattern: '[A-Za-z0-9-]+'
+          minLength: 1
+          maxLength: 128
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeregisterType
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-15'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DeregisterType
+      operationId: POST DeregisterType
+      description: '<p>Removes a type or type version from active use in the CloudFormation registry. If a type or type version is deregistered, it cannot be used in CloudFormation operations.</p> <p>To deregister a type, you must individually deregister all registered versions of that type. If a type has only a single registered version, deregistering that version results in the type itself being deregistered. </p> <p>You cannot deregister the default version of a type, unless it is the only registered version of that type, in which case the type itself is deregistered as well. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeregisterTypeOutput'
+        '480':
+          description: CFNRegistryException
+          schema:
+            $ref: '#/definitions/CFNRegistryException'
+        '481':
+          description: TypeNotFoundException
+          schema:
+            $ref: '#/definitions/TypeNotFoundException'
+      parameters:
+        - name: Arn
+          in: formData
+          required: false
+          description: '<p>The Amazon Resource Name (ARN) of the type.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>'
+          type: string
+          pattern: 'arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:[0-9]{12}:type/.+'
+          maxLength: 1024
+        - name: Type
+          in: formData
+          required: false
+          description: <p>The kind of type.</p> <p>Currently the only valid value is <code>RESOURCE</code>.</p>
+          type: string
+          enum:
+            - RESOURCE
+        - name: TypeName
+          in: formData
+          required: false
+          description: '<p>The name of the type.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>'
+          type: string
+          pattern: '[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}'
+          minLength: 10
+          maxLength: 196
+        - name: VersionId
+          in: formData
+          required: false
+          description: The ID of a specific version of the type. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the type version when it is registered.
+          type: string
+          pattern: '[A-Za-z0-9-]+'
+          minLength: 1
+          maxLength: 128
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeregisterType
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-15'
   '/#Action=DescribeAccountLimits':
     get:
       x-aws-operation-name: DescribeAccountLimits
@@ -2879,6 +3008,212 @@ paths:
           type: string
           enum:
             - '2010-05-15'
+  '/#Action=DescribeType':
+    get:
+      x-aws-operation-name: DescribeType
+      operationId: GET DescribeType
+      description: '<p>Returns detailed information about a type that has been registered.</p> <p>If you specify a <code>VersionId</code>, <code>DescribeType</code> returns information about that specific type version. Otherwise, it returns information about the default type version.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeTypeOutput'
+        '480':
+          description: CFNRegistryException
+          schema:
+            $ref: '#/definitions/CFNRegistryException'
+        '481':
+          description: TypeNotFoundException
+          schema:
+            $ref: '#/definitions/TypeNotFoundException'
+      parameters:
+        - name: Type
+          in: query
+          required: false
+          description: <p>The kind of type. </p> <p>Currently the only valid value is <code>RESOURCE</code>.</p>
+          type: string
+          enum:
+            - RESOURCE
+        - name: TypeName
+          in: query
+          required: false
+          description: '<p>The name of the type.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>'
+          type: string
+          pattern: '[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}'
+          minLength: 10
+          maxLength: 196
+        - name: Arn
+          in: query
+          required: false
+          description: '<p>The Amazon Resource Name (ARN) of the type.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>'
+          type: string
+          pattern: 'arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/.+'
+          maxLength: 1024
+        - name: VersionId
+          in: query
+          required: false
+          description: '<p>The ID of a specific version of the type. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the type version when it is registered.</p> <p>If you specify a <code>VersionId</code>, <code>DescribeType</code> returns information about that specific type version. Otherwise, it returns information about the default type version.</p>'
+          type: string
+          pattern: '[A-Za-z0-9-]+'
+          minLength: 1
+          maxLength: 128
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeType
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-15'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DescribeType
+      operationId: POST DescribeType
+      description: '<p>Returns detailed information about a type that has been registered.</p> <p>If you specify a <code>VersionId</code>, <code>DescribeType</code> returns information about that specific type version. Otherwise, it returns information about the default type version.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeTypeOutput'
+        '480':
+          description: CFNRegistryException
+          schema:
+            $ref: '#/definitions/CFNRegistryException'
+        '481':
+          description: TypeNotFoundException
+          schema:
+            $ref: '#/definitions/TypeNotFoundException'
+      parameters:
+        - name: Type
+          in: formData
+          required: false
+          description: <p>The kind of type. </p> <p>Currently the only valid value is <code>RESOURCE</code>.</p>
+          type: string
+          enum:
+            - RESOURCE
+        - name: TypeName
+          in: formData
+          required: false
+          description: '<p>The name of the type.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>'
+          type: string
+          pattern: '[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}'
+          minLength: 10
+          maxLength: 196
+        - name: Arn
+          in: formData
+          required: false
+          description: '<p>The Amazon Resource Name (ARN) of the type.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>'
+          type: string
+          pattern: 'arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/.+'
+          maxLength: 1024
+        - name: VersionId
+          in: formData
+          required: false
+          description: '<p>The ID of a specific version of the type. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the type version when it is registered.</p> <p>If you specify a <code>VersionId</code>, <code>DescribeType</code> returns information about that specific type version. Otherwise, it returns information about the default type version.</p>'
+          type: string
+          pattern: '[A-Za-z0-9-]+'
+          minLength: 1
+          maxLength: 128
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeType
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-15'
+  '/#Action=DescribeTypeRegistration':
+    get:
+      x-aws-operation-name: DescribeTypeRegistration
+      operationId: GET DescribeTypeRegistration
+      description: '<p>Returns information about a type''s registration, including its current status and type and version identifiers.</p> <p>When you initiate a registration request using <code> <a>RegisterType</a> </code>, you can then use <code> <a>DescribeTypeRegistration</a> </code> to monitor the progress of that registration request.</p> <p>Once the registration request has completed, use <code> <a>DescribeType</a> </code> to return detailed informaiton about a type.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeTypeRegistrationOutput'
+        '480':
+          description: CFNRegistryException
+          schema:
+            $ref: '#/definitions/CFNRegistryException'
+      parameters:
+        - name: RegistrationToken
+          in: query
+          required: true
+          description: <p>The identifier for this registration request.</p> <p>This registration token is generated by CloudFormation when you initiate a registration request using <code> <a>RegisterType</a> </code>.</p>
+          type: string
+          pattern: '[a-zA-Z0-9][-a-zA-Z0-9]*'
+          minLength: 1
+          maxLength: 128
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeTypeRegistration
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-15'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DescribeTypeRegistration
+      operationId: POST DescribeTypeRegistration
+      description: '<p>Returns information about a type''s registration, including its current status and type and version identifiers.</p> <p>When you initiate a registration request using <code> <a>RegisterType</a> </code>, you can then use <code> <a>DescribeTypeRegistration</a> </code> to monitor the progress of that registration request.</p> <p>Once the registration request has completed, use <code> <a>DescribeType</a> </code> to return detailed informaiton about a type.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeTypeRegistrationOutput'
+        '480':
+          description: CFNRegistryException
+          schema:
+            $ref: '#/definitions/CFNRegistryException'
+      parameters:
+        - name: RegistrationToken
+          in: formData
+          required: true
+          description: <p>The identifier for this registration request.</p> <p>This registration token is generated by CloudFormation when you initiate a registration request using <code> <a>RegisterType</a> </code>.</p>
+          type: string
+          pattern: '[a-zA-Z0-9][-a-zA-Z0-9]*'
+          minLength: 1
+          maxLength: 128
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeTypeRegistration
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-15'
   '/#Action=DetectStackDrift':
     get:
       x-aws-operation-name: DetectStackDrift
@@ -3031,6 +3366,175 @@ paths:
           type: string
           enum:
             - DetectStackResourceDrift
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-15'
+  '/#Action=DetectStackSetDrift':
+    get:
+      x-aws-operation-name: DetectStackSetDrift
+      operationId: GET DetectStackSetDrift
+      description: '<p>Detect drift on a stack set. When CloudFormation performs drift detection on a stack set, it performs drift detection on the stack associated with each stack instance in the stack set. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html">How CloudFormation Performs Drift Detection on a Stack Set</a>.</p> <p> <code>DetectStackSetDrift</code> returns the <code>OperationId</code> of the stack set drift detection operation. Use this operation id with <code> <a>DescribeStackSetOperation</a> </code> to monitor the progress of the drift detection operation. The drift detection operation may take some time, depending on the number of stack instances included in the stack set, as well as the number of resources included in each stack.</p> <p>Once the operation has completed, use the following actions to return drift information:</p> <ul> <li> <p>Use <code> <a>DescribeStackSet</a> </code> to return detailed informaiton about the stack set, including detailed information about the last <i>completed</i> drift operation performed on the stack set. (Information about drift operations that are in progress is not included.)</p> </li> <li> <p>Use <code> <a>ListStackInstances</a> </code> to return a list of stack instances belonging to the stack set, including the drift status and last drift time checked of each instance.</p> </li> <li> <p>Use <code> <a>DescribeStackInstance</a> </code> to return detailed information about a specific stack instance, including its drift status and last drift time checked.</p> </li> </ul> <p>For more information on performing a drift detection operation on a stack set, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html">Detecting Unmanaged Changes in Stack Sets</a>. </p> <p>You can only run a single drift detection operation on a given stack set at one time. </p> <p>To stop a drift detection stack set operation, use <code> <a>StopStackSetOperation</a> </code>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DetectStackSetDriftOutput'
+        '480':
+          description: InvalidOperationException
+          schema:
+            $ref: '#/definitions/InvalidOperationException'
+        '481':
+          description: OperationInProgressException
+          schema:
+            $ref: '#/definitions/OperationInProgressException'
+        '482':
+          description: StackSetNotFoundException
+          schema:
+            $ref: '#/definitions/StackSetNotFoundException'
+      parameters:
+        - name: StackSetName
+          in: query
+          required: true
+          description: The name of the stack set on which to perform the drift detection operation.
+          type: string
+          pattern: '[a-zA-Z][-a-zA-Z0-9]*(?::[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12})?'
+        - name: OperationPreferences.RegionOrder
+          in: query
+          description: |-
+            <p>The user-specified preferences for how AWS CloudFormation performs a stack set operation. </p> <p>For more information on maximum concurrent accounts and failure tolerance, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options">Stack set operation options</a>.</p>
+            The order of the regions in where you want to perform the stack operation.
+          type: array
+          items:
+            type: string
+        - name: OperationPreferences.FailureToleranceCount
+          in: query
+          description: |-
+            <p>The user-specified preferences for how AWS CloudFormation performs a stack set operation. </p> <p>For more information on maximum concurrent accounts and failure tolerance, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options">Stack set operation options</a>.</p>
+            <p>The number of accounts, per region, for which this operation can fail before AWS CloudFormation stops the operation in that region. If the operation is stopped in a region, AWS CloudFormation doesn't attempt the operation in any subsequent regions.</p> <p>Conditional: You must specify either <code>FailureToleranceCount</code> or <code>FailureTolerancePercentage</code> (but not both).</p>
+          type: string
+        - name: OperationPreferences.FailureTolerancePercentage
+          in: query
+          description: |-
+            <p>The user-specified preferences for how AWS CloudFormation performs a stack set operation. </p> <p>For more information on maximum concurrent accounts and failure tolerance, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options">Stack set operation options</a>.</p>
+            <p>The percentage of accounts, per region, for which this stack operation can fail before AWS CloudFormation stops the operation in that region. If the operation is stopped in a region, AWS CloudFormation doesn't attempt the operation in any subsequent regions.</p> <p>When calculating the number of accounts based on the specified percentage, AWS CloudFormation rounds <i>down</i> to the next whole number.</p> <p>Conditional: You must specify either <code>FailureToleranceCount</code> or <code>FailureTolerancePercentage</code>, but not both.</p>
+          type: string
+        - name: OperationPreferences.MaxConcurrentCount
+          in: query
+          description: |-
+            <p>The user-specified preferences for how AWS CloudFormation performs a stack set operation. </p> <p>For more information on maximum concurrent accounts and failure tolerance, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options">Stack set operation options</a>.</p>
+            <p>The maximum number of accounts in which to perform this operation at one time. This is dependent on the value of <code>FailureToleranceCount</code>—<code>MaxConcurrentCount</code> is at most one more than the <code>FailureToleranceCount</code> .</p> <p>Note that this setting lets you specify the <i>maximum</i> for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling.</p> <p>Conditional: You must specify either <code>MaxConcurrentCount</code> or <code>MaxConcurrentPercentage</code>, but not both.</p>
+          type: string
+        - name: OperationPreferences.MaxConcurrentPercentage
+          in: query
+          description: |-
+            <p>The user-specified preferences for how AWS CloudFormation performs a stack set operation. </p> <p>For more information on maximum concurrent accounts and failure tolerance, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options">Stack set operation options</a>.</p>
+            <p>The maximum percentage of accounts in which to perform this operation at one time.</p> <p>When calculating the number of accounts based on the specified percentage, AWS CloudFormation rounds down to the next whole number. This is true except in cases where rounding down would result is zero. In this case, CloudFormation sets the number as one instead.</p> <p>Note that this setting lets you specify the <i>maximum</i> for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling.</p> <p>Conditional: You must specify either <code>MaxConcurrentCount</code> or <code>MaxConcurrentPercentage</code>, but not both.</p>
+          type: string
+        - name: OperationId
+          in: query
+          required: false
+          description: ' <i>The ID of the stack set operation.</i> '
+          type: string
+          pattern: '[a-zA-Z0-9][-a-zA-Z0-9]*'
+          minLength: 1
+          maxLength: 128
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DetectStackSetDrift
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-15'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DetectStackSetDrift
+      operationId: POST DetectStackSetDrift
+      description: '<p>Detect drift on a stack set. When CloudFormation performs drift detection on a stack set, it performs drift detection on the stack associated with each stack instance in the stack set. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html">How CloudFormation Performs Drift Detection on a Stack Set</a>.</p> <p> <code>DetectStackSetDrift</code> returns the <code>OperationId</code> of the stack set drift detection operation. Use this operation id with <code> <a>DescribeStackSetOperation</a> </code> to monitor the progress of the drift detection operation. The drift detection operation may take some time, depending on the number of stack instances included in the stack set, as well as the number of resources included in each stack.</p> <p>Once the operation has completed, use the following actions to return drift information:</p> <ul> <li> <p>Use <code> <a>DescribeStackSet</a> </code> to return detailed informaiton about the stack set, including detailed information about the last <i>completed</i> drift operation performed on the stack set. (Information about drift operations that are in progress is not included.)</p> </li> <li> <p>Use <code> <a>ListStackInstances</a> </code> to return a list of stack instances belonging to the stack set, including the drift status and last drift time checked of each instance.</p> </li> <li> <p>Use <code> <a>DescribeStackInstance</a> </code> to return detailed information about a specific stack instance, including its drift status and last drift time checked.</p> </li> </ul> <p>For more information on performing a drift detection operation on a stack set, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html">Detecting Unmanaged Changes in Stack Sets</a>. </p> <p>You can only run a single drift detection operation on a given stack set at one time. </p> <p>To stop a drift detection stack set operation, use <code> <a>StopStackSetOperation</a> </code>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DetectStackSetDriftOutput'
+        '480':
+          description: InvalidOperationException
+          schema:
+            $ref: '#/definitions/InvalidOperationException'
+        '481':
+          description: OperationInProgressException
+          schema:
+            $ref: '#/definitions/OperationInProgressException'
+        '482':
+          description: StackSetNotFoundException
+          schema:
+            $ref: '#/definitions/StackSetNotFoundException'
+      parameters:
+        - name: StackSetName
+          in: formData
+          required: true
+          description: The name of the stack set on which to perform the drift detection operation.
+          type: string
+          pattern: '[a-zA-Z][-a-zA-Z0-9]*(?::[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12})?'
+        - name: OperationPreferences.RegionOrder
+          in: formData
+          description: |-
+            <p>The user-specified preferences for how AWS CloudFormation performs a stack set operation. </p> <p>For more information on maximum concurrent accounts and failure tolerance, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options">Stack set operation options</a>.</p>
+            The order of the regions in where you want to perform the stack operation.
+          type: array
+          items:
+            type: string
+        - name: OperationPreferences.FailureToleranceCount
+          in: formData
+          description: |-
+            <p>The user-specified preferences for how AWS CloudFormation performs a stack set operation. </p> <p>For more information on maximum concurrent accounts and failure tolerance, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options">Stack set operation options</a>.</p>
+            <p>The number of accounts, per region, for which this operation can fail before AWS CloudFormation stops the operation in that region. If the operation is stopped in a region, AWS CloudFormation doesn't attempt the operation in any subsequent regions.</p> <p>Conditional: You must specify either <code>FailureToleranceCount</code> or <code>FailureTolerancePercentage</code> (but not both).</p>
+          type: string
+        - name: OperationPreferences.FailureTolerancePercentage
+          in: formData
+          description: |-
+            <p>The user-specified preferences for how AWS CloudFormation performs a stack set operation. </p> <p>For more information on maximum concurrent accounts and failure tolerance, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options">Stack set operation options</a>.</p>
+            <p>The percentage of accounts, per region, for which this stack operation can fail before AWS CloudFormation stops the operation in that region. If the operation is stopped in a region, AWS CloudFormation doesn't attempt the operation in any subsequent regions.</p> <p>When calculating the number of accounts based on the specified percentage, AWS CloudFormation rounds <i>down</i> to the next whole number.</p> <p>Conditional: You must specify either <code>FailureToleranceCount</code> or <code>FailureTolerancePercentage</code>, but not both.</p>
+          type: string
+        - name: OperationPreferences.MaxConcurrentCount
+          in: formData
+          description: |-
+            <p>The user-specified preferences for how AWS CloudFormation performs a stack set operation. </p> <p>For more information on maximum concurrent accounts and failure tolerance, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options">Stack set operation options</a>.</p>
+            <p>The maximum number of accounts in which to perform this operation at one time. This is dependent on the value of <code>FailureToleranceCount</code>—<code>MaxConcurrentCount</code> is at most one more than the <code>FailureToleranceCount</code> .</p> <p>Note that this setting lets you specify the <i>maximum</i> for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling.</p> <p>Conditional: You must specify either <code>MaxConcurrentCount</code> or <code>MaxConcurrentPercentage</code>, but not both.</p>
+          type: string
+        - name: OperationPreferences.MaxConcurrentPercentage
+          in: formData
+          description: |-
+            <p>The user-specified preferences for how AWS CloudFormation performs a stack set operation. </p> <p>For more information on maximum concurrent accounts and failure tolerance, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options">Stack set operation options</a>.</p>
+            <p>The maximum percentage of accounts in which to perform this operation at one time.</p> <p>When calculating the number of accounts based on the specified percentage, AWS CloudFormation rounds down to the next whole number. This is true except in cases where rounding down would result is zero. In this case, CloudFormation sets the number as one instead.</p> <p>Note that this setting lets you specify the <i>maximum</i> for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling.</p> <p>Conditional: You must specify either <code>MaxConcurrentCount</code> or <code>MaxConcurrentPercentage</code>, but not both.</p>
+          type: string
+        - name: OperationId
+          in: formData
+          required: false
+          description: ' <i>The ID of the stack set operation.</i> '
+          type: string
+          pattern: '[a-zA-Z0-9][-a-zA-Z0-9]*'
+          minLength: 1
+          maxLength: 128
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DetectStackSetDrift
         - name: Version
           in: query
           required: true
@@ -4363,6 +4867,811 @@ paths:
           type: string
           enum:
             - '2010-05-15'
+  '/#Action=ListTypeRegistrations':
+    get:
+      x-aws-operation-name: ListTypeRegistrations
+      operationId: GET ListTypeRegistrations
+      description: Returns a list of registration tokens for the specified type.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTypeRegistrationsOutput'
+        '480':
+          description: CFNRegistryException
+          schema:
+            $ref: '#/definitions/CFNRegistryException'
+      parameters:
+        - name: Type
+          in: query
+          required: false
+          description: <p>The kind of type.</p> <p>Currently the only valid value is <code>RESOURCE</code>.</p>
+          type: string
+          enum:
+            - RESOURCE
+        - name: TypeName
+          in: query
+          required: false
+          description: '<p>The name of the type.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>'
+          type: string
+          pattern: '[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}'
+          minLength: 10
+          maxLength: 196
+        - name: TypeArn
+          in: query
+          required: false
+          description: '<p>The Amazon Resource Name (ARN) of the type.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>'
+          type: string
+          pattern: 'arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/.+'
+          maxLength: 1024
+        - name: RegistrationStatusFilter
+          in: query
+          required: false
+          description: The current status of the type registration request.
+          type: string
+          enum:
+            - COMPLETE
+            - IN_PROGRESS
+            - FAILED
+        - name: MaxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a <code>NextToken</code> value that you can assign to the <code>NextToken</code> request parameter to get the next set of results.'
+          type: integer
+          minimum: 1
+          maximum: 100
+        - name: NextToken
+          in: query
+          required: false
+          description: 'If the previous paginated request didn''t return all of the remaining results, the response object''s <code>NextToken</code> parameter value is set to a token. To retrieve the next set of results, call this action again and assign that token to the request object''s <code>NextToken</code> parameter. If there are no remaining results, the previous response object''s <code>NextToken</code> parameter is set to <code>null</code>.'
+          type: string
+          minLength: 1
+          maxLength: 1024
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ListTypeRegistrations
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-15'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: ListTypeRegistrations
+      operationId: POST ListTypeRegistrations
+      description: Returns a list of registration tokens for the specified type.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTypeRegistrationsOutput'
+        '480':
+          description: CFNRegistryException
+          schema:
+            $ref: '#/definitions/CFNRegistryException'
+      parameters:
+        - name: Type
+          in: formData
+          required: false
+          description: <p>The kind of type.</p> <p>Currently the only valid value is <code>RESOURCE</code>.</p>
+          type: string
+          enum:
+            - RESOURCE
+        - name: TypeName
+          in: formData
+          required: false
+          description: '<p>The name of the type.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>'
+          type: string
+          pattern: '[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}'
+          minLength: 10
+          maxLength: 196
+        - name: TypeArn
+          in: formData
+          required: false
+          description: '<p>The Amazon Resource Name (ARN) of the type.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>'
+          type: string
+          pattern: 'arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/.+'
+          maxLength: 1024
+        - name: RegistrationStatusFilter
+          in: formData
+          required: false
+          description: The current status of the type registration request.
+          type: string
+          enum:
+            - COMPLETE
+            - IN_PROGRESS
+            - FAILED
+        - name: MaxResults
+          in: formData
+          required: false
+          description: 'The maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a <code>NextToken</code> value that you can assign to the <code>NextToken</code> request parameter to get the next set of results.'
+          type: integer
+          minimum: 1
+          maximum: 100
+        - name: NextToken
+          in: formData
+          required: false
+          description: 'If the previous paginated request didn''t return all of the remaining results, the response object''s <code>NextToken</code> parameter value is set to a token. To retrieve the next set of results, call this action again and assign that token to the request object''s <code>NextToken</code> parameter. If there are no remaining results, the previous response object''s <code>NextToken</code> parameter is set to <code>null</code>.'
+          type: string
+          minLength: 1
+          maxLength: 1024
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ListTypeRegistrations
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-15'
+  '/#Action=ListTypeVersions':
+    get:
+      x-aws-operation-name: ListTypeVersions
+      operationId: GET ListTypeVersions
+      description: Returns summary information about the versions of a type.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTypeVersionsOutput'
+        '480':
+          description: CFNRegistryException
+          schema:
+            $ref: '#/definitions/CFNRegistryException'
+      parameters:
+        - name: Type
+          in: query
+          required: false
+          description: <p>The kind of the type.</p> <p>Currently the only valid value is <code>RESOURCE</code>.</p>
+          type: string
+          enum:
+            - RESOURCE
+        - name: TypeName
+          in: query
+          required: false
+          description: '<p>The name of the type for which you want version summary information.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>'
+          type: string
+          pattern: '[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}'
+          minLength: 10
+          maxLength: 196
+        - name: Arn
+          in: query
+          required: false
+          description: '<p>The Amazon Resource Name (ARN) of the type for which you want version summary information.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>'
+          type: string
+          pattern: 'arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:[0-9]{12}:type/.+'
+          maxLength: 1024
+        - name: MaxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a <code>NextToken</code> value that you can assign to the <code>NextToken</code> request parameter to get the next set of results.'
+          type: integer
+          minimum: 1
+          maximum: 100
+        - name: NextToken
+          in: query
+          required: false
+          description: 'If the previous paginated request didn''t return all of the remaining results, the response object''s <code>NextToken</code> parameter value is set to a token. To retrieve the next set of results, call this action again and assign that token to the request object''s <code>NextToken</code> parameter. If there are no remaining results, the previous response object''s <code>NextToken</code> parameter is set to <code>null</code>.'
+          type: string
+          minLength: 1
+          maxLength: 1024
+        - name: DeprecatedStatus
+          in: query
+          required: false
+          description: '<p>The deprecation status of the type versions that you want to get summary information about.</p> <p>Valid values include:</p> <ul> <li> <p> <code>LIVE</code>: The type version is registered and can be used in CloudFormation operations, dependent on its provisioning behavior and visibility scope.</p> </li> <li> <p> <code>DEPRECATED</code>: The type version has been deregistered and can no longer be used in CloudFormation operations. </p> </li> </ul>'
+          type: string
+          enum:
+            - LIVE
+            - DEPRECATED
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ListTypeVersions
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-15'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: ListTypeVersions
+      operationId: POST ListTypeVersions
+      description: Returns summary information about the versions of a type.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTypeVersionsOutput'
+        '480':
+          description: CFNRegistryException
+          schema:
+            $ref: '#/definitions/CFNRegistryException'
+      parameters:
+        - name: Type
+          in: formData
+          required: false
+          description: <p>The kind of the type.</p> <p>Currently the only valid value is <code>RESOURCE</code>.</p>
+          type: string
+          enum:
+            - RESOURCE
+        - name: TypeName
+          in: formData
+          required: false
+          description: '<p>The name of the type for which you want version summary information.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>'
+          type: string
+          pattern: '[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}'
+          minLength: 10
+          maxLength: 196
+        - name: Arn
+          in: formData
+          required: false
+          description: '<p>The Amazon Resource Name (ARN) of the type for which you want version summary information.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>'
+          type: string
+          pattern: 'arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:[0-9]{12}:type/.+'
+          maxLength: 1024
+        - name: MaxResults
+          in: formData
+          required: false
+          description: 'The maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a <code>NextToken</code> value that you can assign to the <code>NextToken</code> request parameter to get the next set of results.'
+          type: integer
+          minimum: 1
+          maximum: 100
+        - name: NextToken
+          in: formData
+          required: false
+          description: 'If the previous paginated request didn''t return all of the remaining results, the response object''s <code>NextToken</code> parameter value is set to a token. To retrieve the next set of results, call this action again and assign that token to the request object''s <code>NextToken</code> parameter. If there are no remaining results, the previous response object''s <code>NextToken</code> parameter is set to <code>null</code>.'
+          type: string
+          minLength: 1
+          maxLength: 1024
+        - name: DeprecatedStatus
+          in: formData
+          required: false
+          description: '<p>The deprecation status of the type versions that you want to get summary information about.</p> <p>Valid values include:</p> <ul> <li> <p> <code>LIVE</code>: The type version is registered and can be used in CloudFormation operations, dependent on its provisioning behavior and visibility scope.</p> </li> <li> <p> <code>DEPRECATED</code>: The type version has been deregistered and can no longer be used in CloudFormation operations. </p> </li> </ul>'
+          type: string
+          enum:
+            - LIVE
+            - DEPRECATED
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ListTypeVersions
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-15'
+  '/#Action=ListTypes':
+    get:
+      x-aws-operation-name: ListTypes
+      operationId: GET ListTypes
+      description: Returns summary information about types that have been registered with CloudFormation.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTypesOutput'
+        '480':
+          description: CFNRegistryException
+          schema:
+            $ref: '#/definitions/CFNRegistryException'
+      parameters:
+        - name: Visibility
+          in: query
+          required: false
+          description: '<p>The scope at which the type is visible and usable in CloudFormation operations.</p> <p>Valid values include:</p> <ul> <li> <p> <code>PRIVATE</code>: The type is only visible and usable within the account in which it is registered. Currently, AWS CloudFormation marks any types you create as <code>PRIVATE</code>.</p> </li> <li> <p> <code>PUBLIC</code>: The type is publically visible and usable within any Amazon account.</p> </li> </ul>'
+          type: string
+          enum:
+            - PUBLIC
+            - PRIVATE
+        - name: ProvisioningType
+          in: query
+          required: false
+          description: '<p>The provisioning behavior of the type. AWS CloudFormation determines the provisioning type during registration, based on the types of handlers in the schema handler package submitted.</p> <p>Valid values include:</p> <ul> <li> <p> <code>FULLY_MUTABLE</code>: The type includes an update handler to process updates to the type during stack update operations.</p> </li> <li> <p> <code>IMMUTABLE</code>: The type does not include an update handler, so the type cannot be updated and must instead be replaced during stack update operations.</p> </li> <li> <p> <code>NON_PROVISIONABLE</code>: The type does not include create, read, and delete handlers, and therefore cannot actually be provisioned.</p> </li> </ul>'
+          type: string
+          enum:
+            - NON_PROVISIONABLE
+            - IMMUTABLE
+            - FULLY_MUTABLE
+        - name: DeprecatedStatus
+          in: query
+          required: false
+          description: '<p>The deprecation status of the types that you want to get summary information about.</p> <p>Valid values include:</p> <ul> <li> <p> <code>LIVE</code>: The type is registered for use in CloudFormation operations.</p> </li> <li> <p> <code>DEPRECATED</code>: The type has been deregistered and can no longer be used in CloudFormation operations. </p> </li> </ul>'
+          type: string
+          enum:
+            - LIVE
+            - DEPRECATED
+        - name: MaxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a <code>NextToken</code> value that you can assign to the <code>NextToken</code> request parameter to get the next set of results.'
+          type: integer
+          minimum: 1
+          maximum: 100
+        - name: NextToken
+          in: query
+          required: false
+          description: 'If the previous paginated request didn''t return all of the remaining results, the response object''s <code>NextToken</code> parameter value is set to a token. To retrieve the next set of results, call this action again and assign that token to the request object''s <code>NextToken</code> parameter. If there are no remaining results, the previous response object''s <code>NextToken</code> parameter is set to <code>null</code>.'
+          type: string
+          minLength: 1
+          maxLength: 1024
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ListTypes
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-15'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: ListTypes
+      operationId: POST ListTypes
+      description: Returns summary information about types that have been registered with CloudFormation.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTypesOutput'
+        '480':
+          description: CFNRegistryException
+          schema:
+            $ref: '#/definitions/CFNRegistryException'
+      parameters:
+        - name: Visibility
+          in: formData
+          required: false
+          description: '<p>The scope at which the type is visible and usable in CloudFormation operations.</p> <p>Valid values include:</p> <ul> <li> <p> <code>PRIVATE</code>: The type is only visible and usable within the account in which it is registered. Currently, AWS CloudFormation marks any types you create as <code>PRIVATE</code>.</p> </li> <li> <p> <code>PUBLIC</code>: The type is publically visible and usable within any Amazon account.</p> </li> </ul>'
+          type: string
+          enum:
+            - PUBLIC
+            - PRIVATE
+        - name: ProvisioningType
+          in: formData
+          required: false
+          description: '<p>The provisioning behavior of the type. AWS CloudFormation determines the provisioning type during registration, based on the types of handlers in the schema handler package submitted.</p> <p>Valid values include:</p> <ul> <li> <p> <code>FULLY_MUTABLE</code>: The type includes an update handler to process updates to the type during stack update operations.</p> </li> <li> <p> <code>IMMUTABLE</code>: The type does not include an update handler, so the type cannot be updated and must instead be replaced during stack update operations.</p> </li> <li> <p> <code>NON_PROVISIONABLE</code>: The type does not include create, read, and delete handlers, and therefore cannot actually be provisioned.</p> </li> </ul>'
+          type: string
+          enum:
+            - NON_PROVISIONABLE
+            - IMMUTABLE
+            - FULLY_MUTABLE
+        - name: DeprecatedStatus
+          in: formData
+          required: false
+          description: '<p>The deprecation status of the types that you want to get summary information about.</p> <p>Valid values include:</p> <ul> <li> <p> <code>LIVE</code>: The type is registered for use in CloudFormation operations.</p> </li> <li> <p> <code>DEPRECATED</code>: The type has been deregistered and can no longer be used in CloudFormation operations. </p> </li> </ul>'
+          type: string
+          enum:
+            - LIVE
+            - DEPRECATED
+        - name: MaxResults
+          in: formData
+          required: false
+          description: 'The maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a <code>NextToken</code> value that you can assign to the <code>NextToken</code> request parameter to get the next set of results.'
+          type: integer
+          minimum: 1
+          maximum: 100
+        - name: NextToken
+          in: formData
+          required: false
+          description: 'If the previous paginated request didn''t return all of the remaining results, the response object''s <code>NextToken</code> parameter value is set to a token. To retrieve the next set of results, call this action again and assign that token to the request object''s <code>NextToken</code> parameter. If there are no remaining results, the previous response object''s <code>NextToken</code> parameter is set to <code>null</code>.'
+          type: string
+          minLength: 1
+          maxLength: 1024
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ListTypes
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-15'
+  '/#Action=RecordHandlerProgress':
+    get:
+      x-aws-operation-name: RecordHandlerProgress
+      operationId: GET RecordHandlerProgress
+      description: '<p>Reports progress of a resource handler to CloudFormation.</p> <p>Reserved for use by the <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html">CloudFormation CLI</a>. Do not use this API in your code.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RecordHandlerProgressOutput'
+        '480':
+          description: InvalidStateTransitionException
+          schema:
+            $ref: '#/definitions/InvalidStateTransitionException'
+        '481':
+          description: OperationStatusCheckFailedException
+          schema:
+            $ref: '#/definitions/OperationStatusCheckFailedException'
+      parameters:
+        - name: BearerToken
+          in: query
+          required: true
+          description: 'Reserved for use by the <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html">CloudFormation CLI</a>.'
+          type: string
+          minLength: 1
+          maxLength: 128
+        - name: OperationStatus
+          in: query
+          required: true
+          description: 'Reserved for use by the <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html">CloudFormation CLI</a>.'
+          type: string
+          enum:
+            - PENDING
+            - IN_PROGRESS
+            - SUCCESS
+            - FAILED
+        - name: CurrentOperationStatus
+          in: query
+          required: false
+          description: 'Reserved for use by the <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html">CloudFormation CLI</a>.'
+          type: string
+          enum:
+            - PENDING
+            - IN_PROGRESS
+            - SUCCESS
+            - FAILED
+        - name: StatusMessage
+          in: query
+          required: false
+          description: 'Reserved for use by the <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html">CloudFormation CLI</a>.'
+          type: string
+          maxLength: 1024
+        - name: ErrorCode
+          in: query
+          required: false
+          description: 'Reserved for use by the <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html">CloudFormation CLI</a>.'
+          type: string
+          enum:
+            - NotUpdatable
+            - InvalidRequest
+            - AccessDenied
+            - InvalidCredentials
+            - AlreadyExists
+            - NotFound
+            - ResourceConflict
+            - Throttling
+            - ServiceLimitExceeded
+            - NotStabilized
+            - GeneralServiceException
+            - ServiceInternalError
+            - NetworkFailure
+            - InternalFailure
+        - name: ResourceModel
+          in: query
+          required: false
+          description: 'Reserved for use by the <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html">CloudFormation CLI</a>.'
+          type: string
+          minLength: 1
+          maxLength: 16384
+        - name: ClientRequestToken
+          in: query
+          required: false
+          description: 'Reserved for use by the <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html">CloudFormation CLI</a>.'
+          type: string
+          pattern: '[a-zA-Z0-9][-a-zA-Z0-9]*'
+          minLength: 1
+          maxLength: 128
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - RecordHandlerProgress
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-15'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: RecordHandlerProgress
+      operationId: POST RecordHandlerProgress
+      description: '<p>Reports progress of a resource handler to CloudFormation.</p> <p>Reserved for use by the <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html">CloudFormation CLI</a>. Do not use this API in your code.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RecordHandlerProgressOutput'
+        '480':
+          description: InvalidStateTransitionException
+          schema:
+            $ref: '#/definitions/InvalidStateTransitionException'
+        '481':
+          description: OperationStatusCheckFailedException
+          schema:
+            $ref: '#/definitions/OperationStatusCheckFailedException'
+      parameters:
+        - name: BearerToken
+          in: formData
+          required: true
+          description: 'Reserved for use by the <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html">CloudFormation CLI</a>.'
+          type: string
+          minLength: 1
+          maxLength: 128
+        - name: OperationStatus
+          in: formData
+          required: true
+          description: 'Reserved for use by the <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html">CloudFormation CLI</a>.'
+          type: string
+          enum:
+            - PENDING
+            - IN_PROGRESS
+            - SUCCESS
+            - FAILED
+        - name: CurrentOperationStatus
+          in: formData
+          required: false
+          description: 'Reserved for use by the <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html">CloudFormation CLI</a>.'
+          type: string
+          enum:
+            - PENDING
+            - IN_PROGRESS
+            - SUCCESS
+            - FAILED
+        - name: StatusMessage
+          in: formData
+          required: false
+          description: 'Reserved for use by the <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html">CloudFormation CLI</a>.'
+          type: string
+          maxLength: 1024
+        - name: ErrorCode
+          in: formData
+          required: false
+          description: 'Reserved for use by the <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html">CloudFormation CLI</a>.'
+          type: string
+          enum:
+            - NotUpdatable
+            - InvalidRequest
+            - AccessDenied
+            - InvalidCredentials
+            - AlreadyExists
+            - NotFound
+            - ResourceConflict
+            - Throttling
+            - ServiceLimitExceeded
+            - NotStabilized
+            - GeneralServiceException
+            - ServiceInternalError
+            - NetworkFailure
+            - InternalFailure
+        - name: ResourceModel
+          in: formData
+          required: false
+          description: 'Reserved for use by the <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html">CloudFormation CLI</a>.'
+          type: string
+          minLength: 1
+          maxLength: 16384
+        - name: ClientRequestToken
+          in: formData
+          required: false
+          description: 'Reserved for use by the <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html">CloudFormation CLI</a>.'
+          type: string
+          pattern: '[a-zA-Z0-9][-a-zA-Z0-9]*'
+          minLength: 1
+          maxLength: 128
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - RecordHandlerProgress
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-15'
+  '/#Action=RegisterType':
+    get:
+      x-aws-operation-name: RegisterType
+      operationId: GET RegisterType
+      description: '<p>Registers a type with the CloudFormation service. Registering a type makes it available for use in CloudFormation templates in your AWS account, and includes:</p> <ul> <li> <p>Validating the resource schema</p> </li> <li> <p>Determining which handlers have been specified for the resource</p> </li> <li> <p>Making the resource type available for use in your account</p> </li> </ul> <p>For more information on how to develop types and ready them for registeration, see <a href="cloudformation-cli/latest/userguide/resource-types.html">Creating Resource Providers</a> in the <i>CloudFormation CLI User Guide</i>.</p> <p>Once you have initiated a registration request using <code> <a>RegisterType</a> </code>, you can use <code> <a>DescribeTypeRegistration</a> </code> to monitor the progress of the registration request.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RegisterTypeOutput'
+        '480':
+          description: CFNRegistryException
+          schema:
+            $ref: '#/definitions/CFNRegistryException'
+      parameters:
+        - name: Type
+          in: query
+          required: false
+          description: '<p>The kind of type.</p> <p>Currently, the only valid value is <code>RESOURCE</code>.</p>'
+          type: string
+          enum:
+            - RESOURCE
+        - name: TypeName
+          in: query
+          required: true
+          description: '<p>The name of the type being registered.</p> <p>We recommend that type names adhere to the following pattern: <i>company_or_organization</i>::<i>service</i>::<i>type</i>.</p> <note> <p>The following organization namespaces are reserved and cannot be used in your resource type names:</p> <ul> <li> <p> <code>Alexa</code> </p> </li> <li> <p> <code>AMZN</code> </p> </li> <li> <p> <code>Amazon</code> </p> </li> <li> <p> <code>AWS</code> </p> </li> <li> <p> <code>Custom</code> </p> </li> <li> <p> <code>Dev</code> </p> </li> </ul> </note>'
+          type: string
+          pattern: '[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}'
+          minLength: 10
+          maxLength: 196
+        - name: SchemaHandlerPackage
+          in: query
+          required: true
+          description: '<p>A url to the S3 bucket containing the schema handler package that contains the schema, event handlers, and associated files for the type you want to register.</p> <p>For information on generating a schema handler package for the type you want to register, see <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-cli-submit.html">submit</a> in the <i>CloudFormation CLI User Guide</i>.</p>'
+          type: string
+          minLength: 1
+          maxLength: 4096
+        - name: LoggingConfig.LogRoleArn
+          in: query
+          description: |-
+            Contains logging configuration information for a type.
+            The ARN of the role that CloudFormation should assume when sending log entries to CloudWatch logs.
+          type: string
+        - name: LoggingConfig.LogGroupName
+          in: query
+          description: |-
+            Contains logging configuration information for a type.
+            The Amazon CloudWatch log group to which CloudFormation sends error logging information when invoking the type's handlers.
+          type: string
+        - name: ExecutionRoleArn
+          in: query
+          required: false
+          description: 'The Amazon Resource Name (ARN) of the IAM execution role to use to register the type. If your resource type calls AWS APIs in any of its handlers, you must create an <i> <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html">IAM execution role</a> </i> that includes the necessary permissions to call those AWS APIs, and provision that execution role in your account. CloudFormation then assumes that execution role to provide your resource type with the appropriate credentials.'
+          type: string
+          pattern: 'arn:.+:iam::[0-9]{12}:role/.+'
+          minLength: 1
+          maxLength: 256
+        - name: ClientRequestToken
+          in: query
+          required: false
+          description: 'A unique identifier that acts as an idempotency key for this registration request. Specifying a client request token prevents CloudFormation from generating more than one version of a type from the same registeration request, even if the request is submitted multiple times. '
+          type: string
+          pattern: '[a-zA-Z0-9][-a-zA-Z0-9]*'
+          minLength: 1
+          maxLength: 128
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - RegisterType
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-15'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: RegisterType
+      operationId: POST RegisterType
+      description: '<p>Registers a type with the CloudFormation service. Registering a type makes it available for use in CloudFormation templates in your AWS account, and includes:</p> <ul> <li> <p>Validating the resource schema</p> </li> <li> <p>Determining which handlers have been specified for the resource</p> </li> <li> <p>Making the resource type available for use in your account</p> </li> </ul> <p>For more information on how to develop types and ready them for registeration, see <a href="cloudformation-cli/latest/userguide/resource-types.html">Creating Resource Providers</a> in the <i>CloudFormation CLI User Guide</i>.</p> <p>Once you have initiated a registration request using <code> <a>RegisterType</a> </code>, you can use <code> <a>DescribeTypeRegistration</a> </code> to monitor the progress of the registration request.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RegisterTypeOutput'
+        '480':
+          description: CFNRegistryException
+          schema:
+            $ref: '#/definitions/CFNRegistryException'
+      parameters:
+        - name: Type
+          in: formData
+          required: false
+          description: '<p>The kind of type.</p> <p>Currently, the only valid value is <code>RESOURCE</code>.</p>'
+          type: string
+          enum:
+            - RESOURCE
+        - name: TypeName
+          in: formData
+          required: true
+          description: '<p>The name of the type being registered.</p> <p>We recommend that type names adhere to the following pattern: <i>company_or_organization</i>::<i>service</i>::<i>type</i>.</p> <note> <p>The following organization namespaces are reserved and cannot be used in your resource type names:</p> <ul> <li> <p> <code>Alexa</code> </p> </li> <li> <p> <code>AMZN</code> </p> </li> <li> <p> <code>Amazon</code> </p> </li> <li> <p> <code>AWS</code> </p> </li> <li> <p> <code>Custom</code> </p> </li> <li> <p> <code>Dev</code> </p> </li> </ul> </note>'
+          type: string
+          pattern: '[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}'
+          minLength: 10
+          maxLength: 196
+        - name: SchemaHandlerPackage
+          in: formData
+          required: true
+          description: '<p>A url to the S3 bucket containing the schema handler package that contains the schema, event handlers, and associated files for the type you want to register.</p> <p>For information on generating a schema handler package for the type you want to register, see <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-cli-submit.html">submit</a> in the <i>CloudFormation CLI User Guide</i>.</p>'
+          type: string
+          minLength: 1
+          maxLength: 4096
+        - name: LoggingConfig.LogRoleArn
+          in: formData
+          description: |-
+            Contains logging configuration information for a type.
+            The ARN of the role that CloudFormation should assume when sending log entries to CloudWatch logs.
+          type: string
+        - name: LoggingConfig.LogGroupName
+          in: formData
+          description: |-
+            Contains logging configuration information for a type.
+            The Amazon CloudWatch log group to which CloudFormation sends error logging information when invoking the type's handlers.
+          type: string
+        - name: ExecutionRoleArn
+          in: formData
+          required: false
+          description: 'The Amazon Resource Name (ARN) of the IAM execution role to use to register the type. If your resource type calls AWS APIs in any of its handlers, you must create an <i> <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html">IAM execution role</a> </i> that includes the necessary permissions to call those AWS APIs, and provision that execution role in your account. CloudFormation then assumes that execution role to provide your resource type with the appropriate credentials.'
+          type: string
+          pattern: 'arn:.+:iam::[0-9]{12}:role/.+'
+          minLength: 1
+          maxLength: 256
+        - name: ClientRequestToken
+          in: formData
+          required: false
+          description: 'A unique identifier that acts as an idempotency key for this registration request. Specifying a client request token prevents CloudFormation from generating more than one version of a type from the same registeration request, even if the request is submitted multiple times. '
+          type: string
+          pattern: '[a-zA-Z0-9][-a-zA-Z0-9]*'
+          minLength: 1
+          maxLength: 128
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - RegisterType
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-15'
   '/#Action=SetStackPolicy':
     get:
       x-aws-operation-name: SetStackPolicy
@@ -4444,6 +5753,135 @@ paths:
           type: string
           enum:
             - SetStackPolicy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-15'
+  '/#Action=SetTypeDefaultVersion':
+    get:
+      x-aws-operation-name: SetTypeDefaultVersion
+      operationId: GET SetTypeDefaultVersion
+      description: Specify the default version of a type. The default version of a type will be used in CloudFormation operations.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SetTypeDefaultVersionOutput'
+        '480':
+          description: CFNRegistryException
+          schema:
+            $ref: '#/definitions/CFNRegistryException'
+        '481':
+          description: TypeNotFoundException
+          schema:
+            $ref: '#/definitions/TypeNotFoundException'
+      parameters:
+        - name: Arn
+          in: query
+          required: false
+          description: '<p>The Amazon Resource Name (ARN) of the type for which you want version summary information.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>'
+          type: string
+          pattern: 'arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:[0-9]{12}:type/.+'
+          maxLength: 1024
+        - name: Type
+          in: query
+          required: false
+          description: The kind of type.
+          type: string
+          enum:
+            - RESOURCE
+        - name: TypeName
+          in: query
+          required: false
+          description: '<p>The name of the type.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>'
+          type: string
+          pattern: '[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}'
+          minLength: 10
+          maxLength: 196
+        - name: VersionId
+          in: query
+          required: false
+          description: The ID of a specific version of the type. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the type version when it is registered.
+          type: string
+          pattern: '[A-Za-z0-9-]+'
+          minLength: 1
+          maxLength: 128
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - SetTypeDefaultVersion
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-15'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: SetTypeDefaultVersion
+      operationId: POST SetTypeDefaultVersion
+      description: Specify the default version of a type. The default version of a type will be used in CloudFormation operations.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SetTypeDefaultVersionOutput'
+        '480':
+          description: CFNRegistryException
+          schema:
+            $ref: '#/definitions/CFNRegistryException'
+        '481':
+          description: TypeNotFoundException
+          schema:
+            $ref: '#/definitions/TypeNotFoundException'
+      parameters:
+        - name: Arn
+          in: formData
+          required: false
+          description: '<p>The Amazon Resource Name (ARN) of the type for which you want version summary information.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>'
+          type: string
+          pattern: 'arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:[0-9]{12}:type/.+'
+          maxLength: 1024
+        - name: Type
+          in: formData
+          required: false
+          description: The kind of type.
+          type: string
+          enum:
+            - RESOURCE
+        - name: TypeName
+          in: formData
+          required: false
+          description: '<p>The name of the type.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>'
+          type: string
+          pattern: '[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}'
+          minLength: 10
+          maxLength: 196
+        - name: VersionId
+          in: formData
+          required: false
+          description: The ID of a specific version of the type. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the type version when it is registered.
+          type: string
+          pattern: '[A-Za-z0-9-]+'
+          minLength: 1
+          maxLength: 128
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - SetTypeDefaultVersion
         - name: Version
           in: query
           required: true
@@ -5855,6 +7293,11 @@ definitions:
     type: object
     properties: {}
   StackSetNotEmptyException: {}
+  DeregisterTypeOutput:
+    type: object
+    properties: {}
+  CFNRegistryException: {}
+  TypeNotFoundException: {}
   DescribeAccountLimitsOutput:
     type: object
     properties:
@@ -6019,6 +7462,69 @@ definitions:
         $ref: '#/definitions/NextToken'
         description: 'If the output exceeds 1 MB in size, a string that identifies the next page of stacks. If no additional page exists, this value is null.'
     description: The output for a <a>DescribeStacks</a> action.
+  DescribeTypeOutput:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/TypeArn'
+        description: The Amazon Resource Name (ARN) of the type.
+      Type:
+        $ref: '#/definitions/RegistryType'
+        description: <p>The kind of type. </p> <p>Currently the only valid value is <code>RESOURCE</code>.</p>
+      TypeName:
+        $ref: '#/definitions/TypeName'
+        description: The name of the registered type.
+      DefaultVersionId:
+        $ref: '#/definitions/TypeVersionId'
+        description: '<p>The ID of the default version of the type. The default version is used when the type version is not specified.</p> <p>To set the default version of a type, use <code> <a>SetTypeDefaultVersion</a> </code>. </p>'
+      Description:
+        $ref: '#/definitions/Description'
+        description: The description of the registered type.
+      Schema:
+        $ref: '#/definitions/TypeSchema'
+        description: '<p>The schema that defines the type.</p> <p>For more information on type schemas, see <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html">Resource Provider Schema</a> in the <i>CloudFormation CLI User Guide</i>.</p>'
+      ProvisioningType:
+        $ref: '#/definitions/ProvisioningType'
+        description: '<p>The provisioning behavior of the type. AWS CloudFormation determines the provisioning type during registration, based on the types of handlers in the schema handler package submitted.</p> <p>Valid values include:</p> <ul> <li> <p> <code>FULLY_MUTABLE</code>: The type includes an update handler to process updates to the type during stack update operations.</p> </li> <li> <p> <code>IMMUTABLE</code>: The type does not include an update handler, so the type cannot be updated and must instead be replaced during stack update operations.</p> </li> <li> <p> <code>NON_PROVISIONABLE</code>: The type does not include all of the following handlers, and therefore cannot actually be provisioned.</p> <ul> <li> <p>create</p> </li> <li> <p>read</p> </li> <li> <p>delete</p> </li> </ul> </li> </ul>'
+      DeprecatedStatus:
+        $ref: '#/definitions/DeprecatedStatus'
+        description: '<p>The deprecation status of the type.</p> <p>Valid values include:</p> <ul> <li> <p> <code>LIVE</code>: The type is registered and can be used in CloudFormation operations, dependent on its provisioning behavior and visibility scope.</p> </li> <li> <p> <code>DEPRECATED</code>: The type has been deregistered and can no longer be used in CloudFormation operations. </p> </li> </ul>'
+      LoggingConfig:
+        $ref: '#/definitions/LoggingConfig'
+        description: Contains logging configuration information for a type.
+      ExecutionRoleArn:
+        $ref: '#/definitions/RoleArn'
+        description: 'The Amazon Resource Name (ARN) of the IAM execution role used to register the type. If your resource type calls AWS APIs in any of its handlers, you must create an <i> <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html">IAM execution role</a> </i> that includes the necessary permissions to call those AWS APIs, and provision that execution role in your account. CloudFormation then assumes that execution role to provide your resource type with the appropriate credentials.'
+      Visibility:
+        $ref: '#/definitions/Visibility'
+        description: '<p>The scope at which the type is visible and usable in CloudFormation operations.</p> <p>Valid values include:</p> <ul> <li> <p> <code>PRIVATE</code>: The type is only visible and usable within the account in which it is registered. Currently, AWS CloudFormation marks any types you register as <code>PRIVATE</code>.</p> </li> <li> <p> <code>PUBLIC</code>: The type is publically visible and usable within any Amazon account.</p> </li> </ul>'
+      SourceUrl:
+        $ref: '#/definitions/OptionalSecureUrl'
+        description: The URL of the source code for the type.
+      DocumentationUrl:
+        $ref: '#/definitions/OptionalSecureUrl'
+        description: The URL of a page providing detailed documentation for this type.
+      LastUpdated:
+        $ref: '#/definitions/Timestamp'
+        description: When the specified type version was registered.
+      TimeCreated:
+        $ref: '#/definitions/Timestamp'
+        description: When the specified type version was registered.
+  DescribeTypeRegistrationOutput:
+    type: object
+    properties:
+      ProgressStatus:
+        $ref: '#/definitions/RegistrationStatus'
+        description: The current status of the type registration request.
+      Description:
+        $ref: '#/definitions/Description'
+        description: The description of the type registration request.
+      TypeArn:
+        $ref: '#/definitions/TypeArn'
+        description: '<p>The Amazon Resource Name (ARN) of the type being registered.</p> <p>For registration requests with a <code>ProgressStatus</code> of other than <code>COMPLETE</code>, this will be <code>null</code>.</p>'
+      TypeVersionArn:
+        $ref: '#/definitions/TypeArn'
+        description: '<p>The Amazon Resource Name (ARN) of this specific version of the type being registered.</p> <p>For registration requests with a <code>ProgressStatus</code> of other than <code>COMPLETE</code>, this will be <code>null</code>.</p>'
   DetectStackDriftOutput:
     type: object
     required:
@@ -6035,6 +7541,12 @@ definitions:
       StackResourceDrift:
         $ref: '#/definitions/StackResourceDrift'
         description: 'Information about whether the resource''s actual configuration has drifted from its expected template configuration, including actual and expected property values and any differences detected.'
+  DetectStackSetDriftOutput:
+    type: object
+    properties:
+      OperationId:
+        $ref: '#/definitions/ClientRequestToken'
+        description: <p>The ID of the drift detection stack set operation. </p> <p>you can use this operation id with <code> <a>DescribeStackSetOperation</a> </code> to monitor the progress of the drift detection operation. </p>
   EstimateTemplateCostOutput:
     type: object
     properties:
@@ -6203,6 +7715,57 @@ definitions:
       - IMPORT_ROLLBACK_IN_PROGRESS
       - IMPORT_ROLLBACK_FAILED
       - IMPORT_ROLLBACK_COMPLETE
+  ListTypeRegistrationsOutput:
+    type: object
+    properties:
+      RegistrationTokenList:
+        $ref: '#/definitions/RegistrationTokenList'
+        description: <p> A list of type registration tokens.</p> <p>Use <code> <a>DescribeTypeRegistration</a> </code> to return detailed information about a type registration request.</p>
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If the request doesn''t return all of the remaining results, <code>NextToken</code> is set to a token. To retrieve the next set of results, call this action again and assign that token to the request object''s <code>NextToken</code> parameter. If the request returns all results, <code>NextToken</code> is set to <code>null</code>.'
+  ListTypeVersionsOutput:
+    type: object
+    properties:
+      TypeVersionSummaries:
+        $ref: '#/definitions/TypeVersionSummaries'
+        description: A list of <code>TypeVersionSummary</code> structures that contain information about the specified type's versions.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If the request doesn''t return all of the remaining results, <code>NextToken</code> is set to a token. To retrieve the next set of results, call this action again and assign that token to the request object''s <code>NextToken</code> parameter. If the request returns all results, <code>NextToken</code> is set to <code>null</code>.'
+  ListTypesOutput:
+    type: object
+    properties:
+      TypeSummaries:
+        $ref: '#/definitions/TypeSummaries'
+        description: A list of <code>TypeSummary</code> structures that contain information about the specified types.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If the request doesn''t return all of the remaining results, <code>NextToken</code> is set to a token. To retrieve the next set of results, call this action again and assign that token to the request object''s <code>NextToken</code> parameter. If the request returns all results, <code>NextToken</code> is set to <code>null</code>.'
+  RecordHandlerProgressOutput:
+    type: object
+    properties: {}
+  InvalidStateTransitionException: {}
+  OperationStatusCheckFailedException: {}
+  RegisterTypeOutput:
+    type: object
+    properties:
+      RegistrationToken:
+        $ref: '#/definitions/RegistrationToken'
+        description: '<p>The identifier for this registration request.</p> <p>Use this registration token when calling <code> <a>DescribeTypeRegistration</a> </code>, which returns information about the status and IDs of the type registration. </p>'
+  RoleArn:
+    type: string
+    pattern: 'arn:.+:iam::[0-9]{12}:role/.+'
+    minLength: 1
+    maxLength: 256
+  LogGroupName:
+    type: string
+    pattern: '[\.\-_/#A-Za-z0-9]+'
+    minLength: 1
+    maxLength: 512
+  SetTypeDefaultVersionOutput:
+    type: object
+    properties: {}
   StopStackSetOperationOutput:
     type: object
     properties: {}
@@ -6842,6 +8405,44 @@ definitions:
   DeletionTime:
     type: string
     format: date-time
+  DeprecatedStatus:
+    type: string
+    enum:
+      - LIVE
+      - DEPRECATED
+  PrivateTypeArn:
+    type: string
+    pattern: 'arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:[0-9]{12}:type/.+'
+    maxLength: 1024
+  RegistryType:
+    type: string
+    enum:
+      - RESOURCE
+  TypeName:
+    type: string
+    pattern: '[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}'
+    minLength: 10
+    maxLength: 196
+  TypeVersionId:
+    type: string
+    pattern: '[A-Za-z0-9-]+'
+    minLength: 1
+    maxLength: 128
+  DeregisterTypeInput:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/PrivateTypeArn'
+        description: '<p>The Amazon Resource Name (ARN) of the type.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>'
+      Type:
+        $ref: '#/definitions/RegistryType'
+        description: <p>The kind of type.</p> <p>Currently the only valid value is <code>RESOURCE</code>.</p>
+      TypeName:
+        $ref: '#/definitions/TypeName'
+        description: '<p>The name of the type.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>'
+      VersionId:
+        $ref: '#/definitions/TypeVersionId'
+        description: The ID of a specific version of the type. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the type version when it is registered.
   NextToken:
     type: string
     minLength: 1
@@ -6952,6 +8553,12 @@ definitions:
       StatusReason:
         $ref: '#/definitions/Reason'
         description: The explanation for the specific status code that is assigned to this stack instance.
+      DriftStatus:
+        $ref: '#/definitions/StackDriftStatus'
+        description: '<p>Status of the stack instance''s actual configuration compared to the expected template and parameter configuration of the stack set to which it belongs. </p> <ul> <li> <p> <code>DRIFTED</code>: The stack differs from the expected template and parameter configuration of the stack set to which it belongs. A stack instance is considered to have drifted if one or more of the resources in the associated stack have drifted.</p> </li> <li> <p> <code>NOT_CHECKED</code>: AWS CloudFormation has not checked if the stack instance differs from its expected stack set configuration.</p> </li> <li> <p> <code>IN_SYNC</code>: The stack instance''s actual configuration matches its expected stack set configuration.</p> </li> <li> <p> <code>UNKNOWN</code>: This value is reserved for future use.</p> </li> </ul>'
+      LastDriftCheckTimestamp:
+        $ref: '#/definitions/Timestamp'
+        description: Most recent time when CloudFormation performed a drift detection operation on the stack instance. This value will be <code>NULL</code> for any stack instance on which drift detection has not yet been performed.
     description: 'An AWS CloudFormation stack, in a specific account and region, that''s part of a stack set operation. A stack instance is a reference to an attempted or actual stack in a given account within a given region. A stack instance can exist without a stack—for example, if the stack couldn''t be created for some reason. A stack instance is associated with only one stack set. Each stack instance contains the ID of its associated stack set, as well as the ID of the actual stack and the stack status.'
   StackResourceDriftStatusFilters:
     type: array
@@ -7107,6 +8714,9 @@ definitions:
       EndTimestamp:
         $ref: '#/definitions/Timestamp'
         description: 'The time at which the stack set operation ended, across all accounts and regions specified. Note that this doesn''t necessarily mean that the stack set operation was successful, or even attempted, in each account or region.'
+      StackSetDriftDetectionDetails:
+        $ref: '#/definitions/StackSetDriftDetectionDetails'
+        description: '<p>Detailed information about the drift status of the stack set. This includes information about drift operations currently being performed on the stack set.</p> <p>this information will only be present for stack set operations whose <code>Action</code> type is <code>DETECT_DRIFT</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html">Detecting Unmanaged Changes in Stack Sets</a> in the AWS CloudFormation User Guide.</p>'
     description: 'The structure that contains information about a stack set operation. '
   StackSet:
     type: object
@@ -7144,6 +8754,9 @@ definitions:
       ExecutionRoleName:
         $ref: '#/definitions/ExecutionRoleName'
         description: <p>The name of the IAM execution role used to create or update the stack set. </p> <p>Use customized execution roles to control which stack resources users and groups can include in their stack sets. </p>
+      StackSetDriftDetectionDetails:
+        $ref: '#/definitions/StackSetDriftDetectionDetails'
+        description: '<p>Detailed information about the drift status of the stack set.</p> <p>For stack sets, contains information about the last <i>completed</i> drift operation performed on the stack set. Information about drift operations currently in progress is not included.</p>'
     description: 'A structure that contains information about a stack set. A stack set enables you to provision stacks into AWS accounts and across regions by using a single CloudFormation template. In the stack set, you specify the template to use, as well as any parameters and capabilities that the template requires. '
   DescribeStacksInput:
     type: object
@@ -7159,6 +8772,75 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Stack'
+  TypeArn:
+    type: string
+    pattern: 'arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/.+'
+    maxLength: 1024
+  DescribeTypeInput:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/RegistryType'
+        description: <p>The kind of type. </p> <p>Currently the only valid value is <code>RESOURCE</code>.</p>
+      TypeName:
+        $ref: '#/definitions/TypeName'
+        description: '<p>The name of the type.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>'
+      Arn:
+        $ref: '#/definitions/TypeArn'
+        description: '<p>The Amazon Resource Name (ARN) of the type.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>'
+      VersionId:
+        $ref: '#/definitions/TypeVersionId'
+        description: '<p>The ID of a specific version of the type. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the type version when it is registered.</p> <p>If you specify a <code>VersionId</code>, <code>DescribeType</code> returns information about that specific type version. Otherwise, it returns information about the default type version.</p>'
+  TypeSchema:
+    type: string
+    minLength: 1
+    maxLength: 16777216
+  ProvisioningType:
+    type: string
+    enum:
+      - NON_PROVISIONABLE
+      - IMMUTABLE
+      - FULLY_MUTABLE
+  LoggingConfig:
+    type: object
+    required:
+      - LogRoleArn
+      - LogGroupName
+    properties:
+      LogRoleArn:
+        $ref: '#/definitions/RoleArn'
+        description: The ARN of the role that CloudFormation should assume when sending log entries to CloudWatch logs.
+      LogGroupName:
+        $ref: '#/definitions/LogGroupName'
+        description: The Amazon CloudWatch log group to which CloudFormation sends error logging information when invoking the type's handlers.
+    description: Contains logging configuration information for a type.
+  Visibility:
+    type: string
+    enum:
+      - PUBLIC
+      - PRIVATE
+  OptionalSecureUrl:
+    type: string
+    maxLength: 4096
+  RegistrationToken:
+    type: string
+    pattern: '[a-zA-Z0-9][-a-zA-Z0-9]*'
+    minLength: 1
+    maxLength: 128
+  DescribeTypeRegistrationInput:
+    type: object
+    required:
+      - RegistrationToken
+    properties:
+      RegistrationToken:
+        $ref: '#/definitions/RegistrationToken'
+        description: <p>The identifier for this registration request.</p> <p>This registration token is generated by CloudFormation when you initiate a registration request using <code> <a>RegisterType</a> </code>.</p>
+  RegistrationStatus:
+    type: string
+    enum:
+      - COMPLETE
+      - IN_PROGRESS
+      - FAILED
   LogicalResourceIds:
     type: array
     items:
@@ -7228,12 +8910,31 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: Time at which AWS CloudFormation performed drift detection on the stack resource.
     description: '<p>Contains the drift information for a resource that has been checked for drift. This includes actual and expected property values for resources in which AWS CloudFormation has detected drift. Only resource properties explicitly defined in the stack template are checked for drift. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html">Detecting Unregulated Configuration Changes to Stacks and Resources</a>.</p> <p>Resources that do not currently support drift detection cannot be checked. For a list of resources that support drift detection, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html">Resources that Support Drift Detection</a>.</p> <p>Use <a>DetectStackResourceDrift</a> to detect drift on individual resources, or <a>DetectStackDrift</a> to detect drift on all resources in a given stack that support drift detection.</p>'
+  StackSetNameOrId:
+    type: string
+    pattern: '[a-zA-Z][-a-zA-Z0-9]*(?::[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12})?'
+  DetectStackSetDriftInput:
+    type: object
+    required:
+      - StackSetName
+    properties:
+      StackSetName:
+        $ref: '#/definitions/StackSetNameOrId'
+        description: The name of the stack set on which to perform the drift detection operation.
+      OperationPreferences:
+        $ref: '#/definitions/StackSetOperationPreferences'
+      OperationId:
+        $ref: '#/definitions/ClientRequestToken'
+        description: ' <i>The ID of the stack set operation.</i> '
   DifferenceType:
     type: string
     enum:
       - ADD
       - REMOVE
       - NOT_EQUAL
+  DriftedStackInstancesCount:
+    type: integer
+    minimum: 0
   EstimateTemplateCostInput:
     type: object
     properties:
@@ -7292,6 +8993,9 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Export'
+  FailedStackInstancesCount:
+    type: integer
+    minimum: 0
   GetStackPolicyInput:
     type: object
     required:
@@ -7323,9 +9027,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/TemplateStage'
-  StackSetNameOrId:
-    type: string
-    pattern: '[a-zA-Z][-a-zA-Z0-9]*(?::[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12})?'
   GetTemplateSummaryInput:
     type: object
     properties:
@@ -7358,10 +9059,33 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ResourceIdentifierSummary'
+  HandlerErrorCode:
+    type: string
+    enum:
+      - NotUpdatable
+      - InvalidRequest
+      - AccessDenied
+      - InvalidCredentials
+      - AlreadyExists
+      - NotFound
+      - ResourceConflict
+      - Throttling
+      - ServiceLimitExceeded
+      - NotStabilized
+      - GeneralServiceException
+      - ServiceInternalError
+      - NetworkFailure
+      - InternalFailure
   Imports:
     type: array
     items:
       $ref: '#/definitions/StackName'
+  InProgressStackInstancesCount:
+    type: integer
+    minimum: 0
+  InSyncStackInstancesCount:
+    type: integer
+    minimum: 0
   Key:
     type: string
   LastUpdatedTime:
@@ -7519,8 +9243,87 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/StackSummary'
+  ListTypeRegistrationsInput:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/RegistryType'
+        description: <p>The kind of type.</p> <p>Currently the only valid value is <code>RESOURCE</code>.</p>
+      TypeName:
+        $ref: '#/definitions/TypeName'
+        description: '<p>The name of the type.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>'
+      TypeArn:
+        $ref: '#/definitions/TypeArn'
+        description: '<p>The Amazon Resource Name (ARN) of the type.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>'
+      RegistrationStatusFilter:
+        $ref: '#/definitions/RegistrationStatus'
+        description: The current status of the type registration request.
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a <code>NextToken</code> value that you can assign to the <code>NextToken</code> request parameter to get the next set of results.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If the previous paginated request didn''t return all of the remaining results, the response object''s <code>NextToken</code> parameter value is set to a token. To retrieve the next set of results, call this action again and assign that token to the request object''s <code>NextToken</code> parameter. If there are no remaining results, the previous response object''s <code>NextToken</code> parameter is set to <code>null</code>.'
+  RegistrationTokenList:
+    type: array
+    items:
+      $ref: '#/definitions/RegistrationToken'
+  ListTypeVersionsInput:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/RegistryType'
+        description: <p>The kind of the type.</p> <p>Currently the only valid value is <code>RESOURCE</code>.</p>
+      TypeName:
+        $ref: '#/definitions/TypeName'
+        description: '<p>The name of the type for which you want version summary information.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>'
+      Arn:
+        $ref: '#/definitions/PrivateTypeArn'
+        description: '<p>The Amazon Resource Name (ARN) of the type for which you want version summary information.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a <code>NextToken</code> value that you can assign to the <code>NextToken</code> request parameter to get the next set of results.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If the previous paginated request didn''t return all of the remaining results, the response object''s <code>NextToken</code> parameter value is set to a token. To retrieve the next set of results, call this action again and assign that token to the request object''s <code>NextToken</code> parameter. If there are no remaining results, the previous response object''s <code>NextToken</code> parameter is set to <code>null</code>.'
+      DeprecatedStatus:
+        $ref: '#/definitions/DeprecatedStatus'
+        description: '<p>The deprecation status of the type versions that you want to get summary information about.</p> <p>Valid values include:</p> <ul> <li> <p> <code>LIVE</code>: The type version is registered and can be used in CloudFormation operations, dependent on its provisioning behavior and visibility scope.</p> </li> <li> <p> <code>DEPRECATED</code>: The type version has been deregistered and can no longer be used in CloudFormation operations. </p> </li> </ul>'
+  TypeVersionSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/TypeVersionSummary'
+  ListTypesInput:
+    type: object
+    properties:
+      Visibility:
+        $ref: '#/definitions/Visibility'
+        description: '<p>The scope at which the type is visible and usable in CloudFormation operations.</p> <p>Valid values include:</p> <ul> <li> <p> <code>PRIVATE</code>: The type is only visible and usable within the account in which it is registered. Currently, AWS CloudFormation marks any types you create as <code>PRIVATE</code>.</p> </li> <li> <p> <code>PUBLIC</code>: The type is publically visible and usable within any Amazon account.</p> </li> </ul>'
+      ProvisioningType:
+        $ref: '#/definitions/ProvisioningType'
+        description: '<p>The provisioning behavior of the type. AWS CloudFormation determines the provisioning type during registration, based on the types of handlers in the schema handler package submitted.</p> <p>Valid values include:</p> <ul> <li> <p> <code>FULLY_MUTABLE</code>: The type includes an update handler to process updates to the type during stack update operations.</p> </li> <li> <p> <code>IMMUTABLE</code>: The type does not include an update handler, so the type cannot be updated and must instead be replaced during stack update operations.</p> </li> <li> <p> <code>NON_PROVISIONABLE</code>: The type does not include create, read, and delete handlers, and therefore cannot actually be provisioned.</p> </li> </ul>'
+      DeprecatedStatus:
+        $ref: '#/definitions/DeprecatedStatus'
+        description: '<p>The deprecation status of the types that you want to get summary information about.</p> <p>Valid values include:</p> <ul> <li> <p> <code>LIVE</code>: The type is registered for use in CloudFormation operations.</p> </li> <li> <p> <code>DEPRECATED</code>: The type has been deregistered and can no longer be used in CloudFormation operations. </p> </li> </ul>'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a <code>NextToken</code> value that you can assign to the <code>NextToken</code> request parameter to get the next set of results.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If the previous paginated request didn''t return all of the remaining results, the response object''s <code>NextToken</code> parameter value is set to a token. To retrieve the next set of results, call this action again and assign that token to the request object''s <code>NextToken</code> parameter. If there are no remaining results, the previous response object''s <code>NextToken</code> parameter is set to <code>null</code>.'
+  TypeSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/TypeSummary'
   NoEcho:
     type: boolean
+  OperationStatus:
+    type: string
+    enum:
+      - PENDING
+      - IN_PROGRESS
+      - SUCCESS
+      - FAILED
   OutputKey:
     type: string
   OutputValue:
@@ -7637,6 +9440,73 @@ definitions:
     type: string
   Reason:
     type: string
+  StatusMessage:
+    type: string
+    maxLength: 1024
+  ResourceModel:
+    type: string
+    minLength: 1
+    maxLength: 16384
+  RecordHandlerProgressInput:
+    type: object
+    required:
+      - BearerToken
+      - OperationStatus
+    properties:
+      BearerToken:
+        $ref: '#/definitions/ClientToken'
+        description: 'Reserved for use by the <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html">CloudFormation CLI</a>.'
+      OperationStatus:
+        $ref: '#/definitions/OperationStatus'
+        description: 'Reserved for use by the <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html">CloudFormation CLI</a>.'
+      CurrentOperationStatus:
+        $ref: '#/definitions/OperationStatus'
+        description: 'Reserved for use by the <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html">CloudFormation CLI</a>.'
+      StatusMessage:
+        $ref: '#/definitions/StatusMessage'
+        description: 'Reserved for use by the <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html">CloudFormation CLI</a>.'
+      ErrorCode:
+        $ref: '#/definitions/HandlerErrorCode'
+        description: 'Reserved for use by the <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html">CloudFormation CLI</a>.'
+      ResourceModel:
+        $ref: '#/definitions/ResourceModel'
+        description: 'Reserved for use by the <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html">CloudFormation CLI</a>.'
+      ClientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: 'Reserved for use by the <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html">CloudFormation CLI</a>.'
+  S3Url:
+    type: string
+    minLength: 1
+    maxLength: 4096
+  RequestToken:
+    type: string
+    pattern: '[a-zA-Z0-9][-a-zA-Z0-9]*'
+    minLength: 1
+    maxLength: 128
+  RegisterTypeInput:
+    type: object
+    required:
+      - TypeName
+      - SchemaHandlerPackage
+    properties:
+      Type:
+        $ref: '#/definitions/RegistryType'
+        description: '<p>The kind of type.</p> <p>Currently, the only valid value is <code>RESOURCE</code>.</p>'
+      TypeName:
+        $ref: '#/definitions/TypeName'
+        description: '<p>The name of the type being registered.</p> <p>We recommend that type names adhere to the following pattern: <i>company_or_organization</i>::<i>service</i>::<i>type</i>.</p> <note> <p>The following organization namespaces are reserved and cannot be used in your resource type names:</p> <ul> <li> <p> <code>Alexa</code> </p> </li> <li> <p> <code>AMZN</code> </p> </li> <li> <p> <code>Amazon</code> </p> </li> <li> <p> <code>AWS</code> </p> </li> <li> <p> <code>Custom</code> </p> </li> <li> <p> <code>Dev</code> </p> </li> </ul> </note>'
+      SchemaHandlerPackage:
+        $ref: '#/definitions/S3Url'
+        description: '<p>A url to the S3 bucket containing the schema handler package that contains the schema, event handlers, and associated files for the type you want to register.</p> <p>For information on generating a schema handler package for the type you want to register, see <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-cli-submit.html">submit</a> in the <i>CloudFormation CLI User Guide</i>.</p>'
+      LoggingConfig:
+        $ref: '#/definitions/LoggingConfig'
+        description: Specifies logging configuration information for a type.
+      ExecutionRoleArn:
+        $ref: '#/definitions/RoleArn'
+        description: 'The Amazon Resource Name (ARN) of the IAM execution role to use to register the type. If your resource type calls AWS APIs in any of its handlers, you must create an <i> <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html">IAM execution role</a> </i> that includes the necessary permissions to call those AWS APIs, and provision that execution role in your account. CloudFormation then assumes that execution role to provide your resource type with the appropriate credentials.'
+      ClientRequestToken:
+        $ref: '#/definitions/RequestToken'
+        description: 'A unique identifier that acts as an idempotency key for this registration request. Specifying a client request token prevents CloudFormation from generating more than one version of a type from the same registeration request, even if the request is submitted multiple times. '
   Replacement:
     type: string
     enum:
@@ -7777,6 +9647,21 @@ definitions:
         $ref: '#/definitions/StackPolicyURL'
         description: 'Location of a file containing the stack policy. The URL must point to a policy (maximum size: 16 KB) located in an S3 bucket in the same region as the stack. You can specify either the <code>StackPolicyBody</code> or the <code>StackPolicyURL</code> parameter, but not both.'
     description: The input for the <a>SetStackPolicy</a> action.
+  SetTypeDefaultVersionInput:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/PrivateTypeArn'
+        description: '<p>The Amazon Resource Name (ARN) of the type for which you want version summary information.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>'
+      Type:
+        $ref: '#/definitions/RegistryType'
+        description: The kind of type.
+      TypeName:
+        $ref: '#/definitions/TypeName'
+        description: '<p>The name of the type.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>'
+      VersionId:
+        $ref: '#/definitions/TypeVersionId'
+        description: The ID of a specific version of the type. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the type version when it is registered.
   SignalResourceInput:
     type: object
     required:
@@ -7967,6 +9852,12 @@ definitions:
       StatusReason:
         $ref: '#/definitions/Reason'
         description: The explanation for the specific status code assigned to this stack instance.
+      DriftStatus:
+        $ref: '#/definitions/StackDriftStatus'
+        description: '<p>Status of the stack instance''s actual configuration compared to the expected template and parameter configuration of the stack set to which it belongs. </p> <ul> <li> <p> <code>DRIFTED</code>: The stack differs from the expected template and parameter configuration of the stack set to which it belongs. A stack instance is considered to have drifted if one or more of the resources in the associated stack have drifted.</p> </li> <li> <p> <code>NOT_CHECKED</code>: AWS CloudFormation has not checked if the stack instance differs from its expected stack set configuration.</p> </li> <li> <p> <code>IN_SYNC</code>: The stack instance''s actual configuration matches its expected stack set configuration.</p> </li> <li> <p> <code>UNKNOWN</code>: This value is reserved for future use.</p> </li> </ul>'
+      LastDriftCheckTimestamp:
+        $ref: '#/definitions/Timestamp'
+        description: Most recent time when CloudFormation performed a drift detection operation on the stack instance. This value will be <code>NULL</code> for any stack instance on which drift detection has not yet been performed.
     description: The structure that contains summary information about a stack instance.
   StackPolicyDuringUpdateBody:
     type: string
@@ -8071,12 +9962,58 @@ definitions:
     description: Contains high-level information about the specified stack resource.
   StackSetARN:
     type: string
+  StackSetDriftDetectionDetails:
+    type: object
+    properties:
+      DriftStatus:
+        $ref: '#/definitions/StackSetDriftStatus'
+        description: '<p>Status of the stack set''s actual configuration compared to its expected template and parameter configuration. A stack set is considered to have drifted if one or more of its stack instances have drifted from their expected template and parameter configuration.</p> <ul> <li> <p> <code>DRIFTED</code>: One or more of the stack instances belonging to the stack set stack differs from the expected template and parameter configuration. A stack instance is considered to have drifted if one or more of the resources in the associated stack have drifted.</p> </li> <li> <p> <code>NOT_CHECKED</code>: AWS CloudFormation has not checked the stack set for drift.</p> </li> <li> <p> <code>IN_SYNC</code>: All of the stack instances belonging to the stack set stack match from the expected template and parameter configuration.</p> </li> </ul>'
+      DriftDetectionStatus:
+        $ref: '#/definitions/StackSetDriftDetectionStatus'
+        description: '<p>The status of the stack set drift detection operation.</p> <ul> <li> <p> <code>COMPLETED</code>: The drift detection operation completed without failing on any stack instances.</p> </li> <li> <p> <code>FAILED</code>: The drift detection operation exceeded the specified failure tolerance. </p> </li> <li> <p> <code>PARTIAL_SUCCESS</code>: The drift detection operation completed without exceeding the failure tolerance for the operation.</p> </li> <li> <p> <code>IN_PROGRESS</code>: The drift detection operation is currently being performed.</p> </li> <li> <p> <code>STOPPED</code>: The user has cancelled the drift detection operation.</p> </li> </ul>'
+      LastDriftCheckTimestamp:
+        $ref: '#/definitions/Timestamp'
+        description: Most recent time when CloudFormation performed a drift detection operation on the stack set. This value will be <code>NULL</code> for any stack set on which drift detection has not yet been performed.
+      TotalStackInstancesCount:
+        $ref: '#/definitions/TotalStackInstancesCount'
+        description: '<p>The total number of stack instances belonging to this stack set. </p> <p>The total number of stack instances is equal to the total of:</p> <ul> <li> <p>Stack instances that match the stack set configuration. </p> </li> <li> <p>Stack instances that have drifted from the stack set configuration. </p> </li> <li> <p>Stack instances where the drift detection operation has failed.</p> </li> <li> <p>Stack instances currently being checked for drift.</p> </li> </ul>'
+      DriftedStackInstancesCount:
+        $ref: '#/definitions/DriftedStackInstancesCount'
+        description: The number of stack instances that have drifted from the expected template and parameter configuration of the stack set. A stack instance is considered to have drifted if one or more of the resources in the associated stack do not match their expected configuration.
+      InSyncStackInstancesCount:
+        $ref: '#/definitions/InSyncStackInstancesCount'
+        description: The number of stack instances which match the expected template and parameter configuration of the stack set.
+      InProgressStackInstancesCount:
+        $ref: '#/definitions/InProgressStackInstancesCount'
+        description: The number of stack instances that are currently being checked for drift.
+      FailedStackInstancesCount:
+        $ref: '#/definitions/FailedStackInstancesCount'
+        description: The number of stack instances for which the drift detection operation failed.
+    description: '<p>Detailed information about the drift status of the stack set.</p> <p>For stack sets, contains information about the last <i>completed</i> drift operation performed on the stack set. Information about drift operations in-progress is not included. </p> <p>For stack set operations, includes information about drift operations currently being performed on the stack set.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html">Detecting Unmanaged Changes in Stack Sets</a> in the <i>AWS CloudFormation User Guide</i>.</p>'
+  StackSetDriftStatus:
+    type: string
+    enum:
+      - DRIFTED
+      - IN_SYNC
+      - NOT_CHECKED
+  StackSetDriftDetectionStatus:
+    type: string
+    enum:
+      - COMPLETED
+      - FAILED
+      - PARTIAL_SUCCESS
+      - IN_PROGRESS
+      - STOPPED
+  TotalStackInstancesCount:
+    type: integer
+    minimum: 0
   StackSetOperationAction:
     type: string
     enum:
       - CREATE
       - UPDATE
       - DELETE
+      - DETECT_DRIFT
   StackSetOperationStatus:
     type: string
     enum:
@@ -8146,6 +10083,12 @@ definitions:
       Status:
         $ref: '#/definitions/StackSetStatus'
         description: The status of the stack set.
+      DriftStatus:
+        $ref: '#/definitions/StackDriftStatus'
+        description: '<p>Status of the stack set''s actual configuration compared to its expected template and parameter configuration. A stack set is considered to have drifted if one or more of its stack instances have drifted from their expected template and parameter configuration.</p> <ul> <li> <p> <code>DRIFTED</code>: One or more of the stack instances belonging to the stack set stack differs from the expected template and parameter configuration. A stack instance is considered to have drifted if one or more of the resources in the associated stack have drifted.</p> </li> <li> <p> <code>NOT_CHECKED</code>: AWS CloudFormation has not checked the stack set for drift.</p> </li> <li> <p> <code>IN_SYNC</code>: All of the stack instances belonging to the stack set stack match from the expected template and parameter configuration.</p> </li> <li> <p> <code>UNKNOWN</code>: This value is reserved for future use.</p> </li> </ul>'
+      LastDriftCheckTimestamp:
+        $ref: '#/definitions/Timestamp'
+        description: Most recent time when CloudFormation performed a drift detection operation on the stack set. This value will be <code>NULL</code> for any stack set on which drift detection has not yet been performed.
     description: The structures that contain summary information about the specified stack set.
   StackSummary:
     type: object
@@ -8232,6 +10175,50 @@ definitions:
       $ref: '#/definitions/TemplateParameter'
   TransformName:
     type: string
+  TypeSummary:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/RegistryType'
+        description: The kind of type.
+      TypeName:
+        $ref: '#/definitions/TypeName'
+        description: The name of the type.
+      DefaultVersionId:
+        $ref: '#/definitions/TypeVersionId'
+        description: '<p>The ID of the default version of the type. The default version is used when the type version is not specified.</p> <p>To set the default version of a type, use <code> <a>SetTypeDefaultVersion</a> </code>. </p>'
+      TypeArn:
+        $ref: '#/definitions/TypeArn'
+        description: The Amazon Resource Name (ARN) of the type.
+      LastUpdated:
+        $ref: '#/definitions/Timestamp'
+        description: When the current default version of the type was registered.
+      Description:
+        $ref: '#/definitions/Description'
+        description: The description of the type.
+    description: Contains summary information about the specified CloudFormation type.
+  TypeVersionSummary:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/RegistryType'
+        description: The kind of type.
+      TypeName:
+        $ref: '#/definitions/TypeName'
+        description: The name of the type.
+      VersionId:
+        $ref: '#/definitions/TypeVersionId'
+        description: The ID of a specific version of the type. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the type version when it is registered.
+      Arn:
+        $ref: '#/definitions/TypeArn'
+        description: The Amazon Resource Name (ARN) of the type version.
+      TimeCreated:
+        $ref: '#/definitions/Timestamp'
+        description: When the version was registered.
+      Description:
+        $ref: '#/definitions/Description'
+        description: The description of the type version.
+    description: Contains summary information about a specific version of a CloudFormation type.
   UpdateStackInput:
     type: object
     required:
