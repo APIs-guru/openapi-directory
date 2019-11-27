@@ -205,7 +205,7 @@ paths:
                 minLength: 0
                 maxLength: 64
               parameterSets:
-                description: The parameter set for the batch operation.
+                description: '<p>The parameter set for the batch operation.</p> <p>The maximum number of parameters in a parameter set is 1,000.</p>'
                 type: array
                 items:
                   $ref: '#/definitions/SqlParametersList'
@@ -323,18 +323,22 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
         '481':
+          description: StatementTimeoutException
+          schema:
+            $ref: '#/definitions/StatementTimeoutException'
+        '482':
           description: InternalServerErrorException
           schema:
             $ref: '#/definitions/InternalServerErrorException'
-        '482':
+        '483':
           description: ForbiddenException
           schema:
             $ref: '#/definitions/ForbiddenException'
-        '483':
+        '484':
           description: ServiceUnavailableError
           schema:
             $ref: '#/definitions/ServiceUnavailableError'
-        '484':
+        '485':
           description: NotFoundException
           schema:
             $ref: '#/definitions/NotFoundException'
@@ -552,18 +556,22 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
         '481':
+          description: StatementTimeoutException
+          schema:
+            $ref: '#/definitions/StatementTimeoutException'
+        '482':
           description: InternalServerErrorException
           schema:
             $ref: '#/definitions/InternalServerErrorException'
-        '482':
+        '483':
           description: ForbiddenException
           schema:
             $ref: '#/definitions/ForbiddenException'
-        '483':
+        '484':
           description: ServiceUnavailableError
           schema:
             $ref: '#/definitions/ServiceUnavailableError'
-        '484':
+        '485':
           description: NotFoundException
           schema:
             $ref: '#/definitions/NotFoundException'
@@ -662,6 +670,9 @@ definitions:
       name:
         $ref: '#/definitions/ParameterName'
         description: The name of the parameter.
+      typeHint:
+        $ref: '#/definitions/TypeHint'
+        description: '<p>A hint that specifies the correct object type for data type mapping.</p> <p> <b>Values:</b> </p> <ul> <li> <p> <code>DECIMAL</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>DECIMAL</code> type to the database.</p> </li> <li> <p> <code>TIMESTAMP</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>TIMESTAMP</code> type to the database. The accepted format is <code>YYYY-MM-DD HH:MM:SS[.FFF]</code>.</p> </li> <li> <p> <code>TIME</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>TIME</code> type to the database. The accepted format is <code>HH:MM:SS[.FFF]</code>.</p> </li> <li> <p> <code>DATE</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>DATE</code> type to the database. The accepted format is <code>YYYY-MM-DD</code>.</p> </li> </ul>'
       value:
         $ref: '#/definitions/Field'
         description: The value of the parameter.
@@ -792,7 +803,7 @@ definitions:
         description: The name of the database.
       parameterSets:
         $ref: '#/definitions/SqlParameterSets'
-        description: The parameter set for the batch operation.
+        description: '<p>The parameter set for the batch operation.</p> <p>The maximum number of parameters in a parameter set is 1,000.</p>'
       resourceArn:
         $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
@@ -1086,6 +1097,13 @@ definitions:
         $ref: '#/definitions/Id'
         description: The identifier of the transaction to roll back.
     description: The request parameters represent the input of a request to perform a rollback of a transaction.
+  TypeHint:
+    type: string
+    enum:
+      - DATE
+      - DECIMAL
+      - TIME
+      - TIMESTAMP
   SqlStatementResult:
     type: object
     properties:

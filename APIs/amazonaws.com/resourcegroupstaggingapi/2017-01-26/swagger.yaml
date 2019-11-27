@@ -3,7 +3,7 @@ info:
   version: '2017-01-26'
   x-release: v4
   title: AWS Resource Groups Tagging API
-  description: '<fullname>Resource Groups Tagging API</fullname> <p>This guide describes the API operations for the resource groups tagging.</p> <p>A tag is a label that you assign to an AWS resource. A tag consists of a key and a value, both of which you define. For example, if you have two Amazon EC2 instances, you might assign both a tag key of "Stack." But the value of "Stack" might be "Testing" for one and "Production" for the other.</p> <p>Tagging can help you organize your resources and enables you to simplify resource management, access management and cost allocation. </p> <p>You can use the resource groups tagging API operations to complete the following tasks:</p> <ul> <li> <p>Tag and untag supported resources located in the specified region for the AWS account</p> </li> <li> <p>Use tag-based filters to search for resources located in the specified region for the AWS account</p> </li> <li> <p>List all existing tag keys in the specified region for the AWS account</p> </li> <li> <p>List all existing values for the specified key in the specified region for the AWS account</p> </li> </ul> <p/> <p>To use resource groups tagging API operations, you must add the following permissions to your IAM policy:</p> <ul> <li> <p> <code>tag:GetResources</code> </p> </li> <li> <p> <code>tag:TagResources</code> </p> </li> <li> <p> <code>tag:UntagResources</code> </p> </li> <li> <p> <code>tag:GetTagKeys</code> </p> </li> <li> <p> <code>tag:GetTagValues</code> </p> </li> </ul> <p>You''ll also need permissions to access the resources of individual services so that you can tag and untag those resources.</p> <p>For more information on IAM policies, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html">Managing IAM Policies</a> in the <i>IAM User Guide</i>.</p> <p>You can use the Resource Groups Tagging API to tag resources for the following AWS services.</p> <ul> <li> <p>Alexa for Business (a4b)</p> </li> <li> <p>API Gateway</p> </li> <li> <p>AWS AppStream</p> </li> <li> <p>AWS AppSync</p> </li> <li> <p>AWS App Mesh</p> </li> <li> <p>Amazon Athena</p> </li> <li> <p>Amazon Aurora</p> </li> <li> <p>AWS Backup</p> </li> <li> <p>AWS Certificate Manager</p> </li> <li> <p>AWS Certificate Manager Private CA</p> </li> <li> <p>Amazon Cloud Directory</p> </li> <li> <p>AWS CloudFormation</p> </li> <li> <p>Amazon CloudFront</p> </li> <li> <p>AWS CloudHSM</p> </li> <li> <p>AWS CloudTrail</p> </li> <li> <p>Amazon CloudWatch (alarms only)</p> </li> <li> <p>Amazon CloudWatch Events</p> </li> <li> <p>Amazon CloudWatch Logs</p> </li> <li> <p>AWS CodeBuild</p> </li> <li> <p>AWS CodeCommit</p> </li> <li> <p>AWS CodePipeline</p> </li> <li> <p>AWS CodeStar</p> </li> <li> <p>Amazon Cognito Identity</p> </li> <li> <p>Amazon Cognito User Pools</p> </li> <li> <p>Amazon Comprehend</p> </li> <li> <p>AWS Config</p> </li> <li> <p>AWS Data Pipeline</p> </li> <li> <p>AWS Database Migration Service</p> </li> <li> <p>AWS Datasync</p> </li> <li> <p>AWS Direct Connect</p> </li> <li> <p>AWS Directory Service</p> </li> <li> <p>Amazon DynamoDB</p> </li> <li> <p>Amazon EBS</p> </li> <li> <p>Amazon EC2</p> </li> <li> <p>Amazon ECR</p> </li> <li> <p>Amazon ECS</p> </li> <li> <p>AWS Elastic Beanstalk</p> </li> <li> <p>Amazon Elastic File System</p> </li> <li> <p>Elastic Load Balancing</p> </li> <li> <p>Amazon ElastiCache</p> </li> <li> <p>Amazon Elasticsearch Service</p> </li> <li> <p>AWS Elemental MediaLive</p> </li> <li> <p>AWS Elemental MediaPackage</p> </li> <li> <p>AWS Elemental MediaTailor</p> </li> <li> <p>Amazon EMR</p> </li> <li> <p>Amazon FSx</p> </li> <li> <p>Amazon Glacier</p> </li> <li> <p>AWS Glue</p> </li> <li> <p>Amazon Inspector</p> </li> <li> <p>AWS IoT Analytics</p> </li> <li> <p>AWS IoT Core</p> </li> <li> <p>AWS IoT Device Defender</p> </li> <li> <p>AWS IoT Device Management</p> </li> <li> <p>AWS IoT Greengrass</p> </li> <li> <p>AWS Key Management Service</p> </li> <li> <p>Amazon Kinesis</p> </li> <li> <p>Amazon Kinesis Data Analytics</p> </li> <li> <p>Amazon Kinesis Data Firehose</p> </li> <li> <p>AWS Lambda</p> </li> <li> <p>AWS License Manager</p> </li> <li> <p>Amazon Machine Learning</p> </li> <li> <p>Amazon MQ</p> </li> <li> <p>Amazon MSK</p> </li> <li> <p>Amazon Neptune</p> </li> <li> <p>AWS OpsWorks</p> </li> <li> <p>Amazon RDS</p> </li> <li> <p>Amazon Redshift</p> </li> <li> <p>AWS Resource Access Manager</p> </li> <li> <p>AWS Resource Groups</p> </li> <li> <p>AWS RoboMaker</p> </li> <li> <p>Amazon Route 53</p> </li> <li> <p>Amazon Route 53 Resolver</p> </li> <li> <p>Amazon S3 (buckets only)</p> </li> <li> <p>Amazon SageMaker</p> </li> <li> <p>AWS Secrets Manager</p> </li> <li> <p>AWS Service Catalog</p> </li> <li> <p>Amazon Simple Notification Service (SNS)</p> </li> <li> <p>Amazon Simple Queue Service (SQS)</p> </li> <li> <p>AWS Simple System Manager (SSM)</p> </li> <li> <p>AWS Step Functions</p> </li> <li> <p>AWS Storage Gateway</p> </li> <li> <p>AWS Transfer for SFTP</p> </li> <li> <p>Amazon VPC</p> </li> <li> <p>Amazon WorkSpaces</p> </li> </ul>'
+  description: '<fullname>Resource Groups Tagging API</fullname> <p>This guide describes the API operations for the resource groups tagging.</p> <p>A tag is a label that you assign to an AWS resource. A tag consists of a key and a value, both of which you define. For example, if you have two Amazon EC2 instances, you might assign both a tag key of "Stack." But the value of "Stack" might be "Testing" for one and "Production" for the other.</p> <p>Tagging can help you organize your resources and enables you to simplify resource management, access management and cost allocation. </p> <p>You can use the resource groups tagging API operations to complete the following tasks:</p> <ul> <li> <p>Tag and untag supported resources located in the specified Region for the AWS account.</p> </li> <li> <p>Use tag-based filters to search for resources located in the specified Region for the AWS account.</p> </li> <li> <p>List all existing tag keys in the specified Region for the AWS account.</p> </li> <li> <p>List all existing values for the specified key in the specified Region for the AWS account.</p> </li> </ul> <p>To use resource groups tagging API operations, you must add the following permissions to your IAM policy:</p> <ul> <li> <p> <code>tag:GetResources</code> </p> </li> <li> <p> <code>tag:TagResources</code> </p> </li> <li> <p> <code>tag:UntagResources</code> </p> </li> <li> <p> <code>tag:GetTagKeys</code> </p> </li> <li> <p> <code>tag:GetTagValues</code> </p> </li> </ul> <p>You''ll also need permissions to access the resources of individual services so that you can tag and untag those resources.</p> <p>For more information on IAM policies, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html">Managing IAM Policies</a> in the <i>IAM User Guide</i>.</p> <p>You can use the Resource Groups Tagging API to tag resources for the following AWS services.</p> <ul> <li> <p>Alexa for Business (a4b)</p> </li> <li> <p>API Gateway</p> </li> <li> <p>Amazon AppStream</p> </li> <li> <p>AWS AppSync</p> </li> <li> <p>AWS App Mesh</p> </li> <li> <p>Amazon Athena</p> </li> <li> <p>Amazon Aurora</p> </li> <li> <p>AWS Backup</p> </li> <li> <p>AWS Certificate Manager</p> </li> <li> <p>AWS Certificate Manager Private CA</p> </li> <li> <p>Amazon Cloud Directory</p> </li> <li> <p>AWS CloudFormation</p> </li> <li> <p>Amazon CloudFront</p> </li> <li> <p>AWS CloudHSM</p> </li> <li> <p>AWS CloudTrail</p> </li> <li> <p>Amazon CloudWatch (alarms only)</p> </li> <li> <p>Amazon CloudWatch Events</p> </li> <li> <p>Amazon CloudWatch Logs</p> </li> <li> <p>AWS CodeBuild</p> </li> <li> <p>AWS CodeCommit</p> </li> <li> <p>AWS CodePipeline</p> </li> <li> <p>AWS CodeStar</p> </li> <li> <p>Amazon Cognito Identity</p> </li> <li> <p>Amazon Cognito User Pools</p> </li> <li> <p>Amazon Comprehend</p> </li> <li> <p>AWS Config</p> </li> <li> <p>AWS Data Pipeline</p> </li> <li> <p>AWS Database Migration Service</p> </li> <li> <p>AWS DataSync</p> </li> <li> <p>AWS Direct Connect</p> </li> <li> <p>AWS Directory Service</p> </li> <li> <p>Amazon DynamoDB</p> </li> <li> <p>Amazon EBS</p> </li> <li> <p>Amazon EC2</p> </li> <li> <p>Amazon ECR</p> </li> <li> <p>Amazon ECS</p> </li> <li> <p>AWS Elastic Beanstalk</p> </li> <li> <p>Amazon Elastic File System</p> </li> <li> <p>Elastic Load Balancing</p> </li> <li> <p>Amazon ElastiCache</p> </li> <li> <p>Amazon Elasticsearch Service</p> </li> <li> <p>AWS Elemental MediaLive</p> </li> <li> <p>AWS Elemental MediaPackage</p> </li> <li> <p>AWS Elemental MediaTailor</p> </li> <li> <p>Amazon EMR</p> </li> <li> <p>Amazon FSx</p> </li> <li> <p>Amazon S3 Glacier</p> </li> <li> <p>AWS Glue</p> </li> <li> <p>Amazon GuardDuty</p> </li> <li> <p>Amazon Inspector</p> </li> <li> <p>AWS IoT Analytics</p> </li> <li> <p>AWS IoT Core</p> </li> <li> <p>AWS IoT Device Defender</p> </li> <li> <p>AWS IoT Device Management</p> </li> <li> <p>AWS IoT Events</p> </li> <li> <p>AWS IoT Greengrass</p> </li> <li> <p>AWS Key Management Service</p> </li> <li> <p>Amazon Kinesis</p> </li> <li> <p>Amazon Kinesis Data Analytics</p> </li> <li> <p>Amazon Kinesis Data Firehose</p> </li> <li> <p>AWS Lambda</p> </li> <li> <p>AWS License Manager</p> </li> <li> <p>Amazon Machine Learning</p> </li> <li> <p>Amazon MQ</p> </li> <li> <p>Amazon MSK</p> </li> <li> <p>Amazon Neptune</p> </li> <li> <p>AWS OpsWorks</p> </li> <li> <p>AWS Organizations</p> </li> <li> <p>Amazon Quantum Ledger Database (QLDB)</p> </li> <li> <p>Amazon RDS</p> </li> <li> <p>Amazon Redshift</p> </li> <li> <p>AWS Resource Access Manager</p> </li> <li> <p>AWS Resource Groups</p> </li> <li> <p>AWS RoboMaker</p> </li> <li> <p>Amazon Route 53</p> </li> <li> <p>Amazon Route 53 Resolver</p> </li> <li> <p>Amazon S3 (buckets only)</p> </li> <li> <p>Amazon SageMaker</p> </li> <li> <p>AWS Secrets Manager</p> </li> <li> <p>AWS Security Hub</p> </li> <li> <p>AWS Service Catalog</p> </li> <li> <p>Amazon Simple Notification Service (SNS)</p> </li> <li> <p>Amazon Simple Queue Service (SQS)</p> </li> <li> <p>AWS Step Functions</p> </li> <li> <p>AWS Storage Gateway</p> </li> <li> <p>AWS Systems Manager</p> </li> <li> <p>AWS Transfer for SFTP</p> </li> <li> <p>Amazon VPC</p> </li> <li> <p>Amazon WorkSpaces</p> </li> </ul>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -160,10 +160,110 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
+  '/#X-Amz-Target=ResourceGroupsTaggingAPI_20170126.DescribeReportCreation':
+    post:
+      operationId: DescribeReportCreation
+      description: <p>Describes the status of the <code>StartReportCreation</code> operation. </p> <p>You can call this operation only from the organization's master account and from the us-east-1 Region.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeReportCreationOutput'
+        '480':
+          description: ConstraintViolationException
+          schema:
+            $ref: '#/definitions/ConstraintViolationException'
+        '481':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+        '482':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '483':
+          description: ThrottledException
+          schema:
+            $ref: '#/definitions/ThrottledException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeReportCreationInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - ResourceGroupsTaggingAPI_20170126.DescribeReportCreation
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=ResourceGroupsTaggingAPI_20170126.GetComplianceSummary':
+    post:
+      operationId: GetComplianceSummary
+      description: '<p>Returns a table that shows counts of resources that are noncompliant with their tag policies.</p> <p>For more information on tag policies, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html">Tag Policies</a> in the <i>AWS Organizations User Guide.</i> </p> <p>You can call this operation only from the organization''s master account and from the us-east-1 Region.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetComplianceSummaryOutput'
+        '480':
+          description: ConstraintViolationException
+          schema:
+            $ref: '#/definitions/ConstraintViolationException'
+        '481':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+        '482':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '483':
+          description: ThrottledException
+          schema:
+            $ref: '#/definitions/ThrottledException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetComplianceSummaryInput'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: PaginationToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - ResourceGroupsTaggingAPI_20170126.GetComplianceSummary
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=ResourceGroupsTaggingAPI_20170126.GetResources':
     post:
       operationId: GetResources
-      description: '<p>Returns all the tagged or previously tagged resources that are located in the specified region for the AWS account. You can optionally specify <i>filters</i> (tags and resource types) in your request, depending on what information you want returned. The response includes all tags that are associated with the requested resources.</p> <note> <p>You can check the <code>PaginationToken</code> response parameter to determine if a query completed. Queries can occasionally return fewer results on a page than allowed. The <code>PaginationToken</code> response parameter value is <code>null</code> <i>only</i> when there are no more results to display. </p> </note>'
+      description: '<p>Returns all the tagged or previously tagged resources that are located in the specified Region for the AWS account.</p> <p>Depending on what information you want returned, you can also specify the following:</p> <ul> <li> <p> <i>Filters</i> that specify what tags and resource types you want returned. The response includes all tags that are associated with the requested resources.</p> </li> <li> <p>Information about compliance with the account''s effective tag policy. For more information on tag policies, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html">Tag Policies</a> in the <i>AWS Organizations User Guide.</i> </p> </li> </ul> <note> <p>You can check the <code>PaginationToken</code> response parameter to determine if a query is complete. Queries occasionally return fewer results on a page than allowed. The <code>PaginationToken</code> response parameter value is <code>null</code> <i>only</i> when there are no more results to display. </p> </note>'
       responses:
         '200':
           description: Success
@@ -218,7 +318,7 @@ paths:
   '/#X-Amz-Target=ResourceGroupsTaggingAPI_20170126.GetTagKeys':
     post:
       operationId: GetTagKeys
-      description: Returns all tag keys in the specified region for the AWS account.
+      description: Returns all tag keys in the specified Region for the AWS account.
       responses:
         '200':
           description: Success
@@ -268,7 +368,7 @@ paths:
   '/#X-Amz-Target=ResourceGroupsTaggingAPI_20170126.GetTagValues':
     post:
       operationId: GetTagValues
-      description: Returns all tag values for the specified key in the specified region for the AWS account.
+      description: Returns all tag values for the specified key in the specified Region for the AWS account.
       responses:
         '200':
           description: Success
@@ -315,10 +415,59 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=ResourceGroupsTaggingAPI_20170126.StartReportCreation':
+    post:
+      operationId: StartReportCreation
+      description: '<p>Generates a report that lists all tagged resources in accounts across your organization and tells whether each resource is compliant with the effective tag policy. Compliance data is refreshed daily. </p> <p>The generated report is saved to the following location:</p> <p> <code>s3://example-bucket/AwsTagPolicies/o-exampleorgid/YYYY-MM-ddTHH:mm:ssZ/report.csv</code> </p> <p>You can call this operation only from the organization''s master account and from the us-east-1 Region.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartReportCreationOutput'
+        '480':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '481':
+          description: ConstraintViolationException
+          schema:
+            $ref: '#/definitions/ConstraintViolationException'
+        '482':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+        '483':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '484':
+          description: ThrottledException
+          schema:
+            $ref: '#/definitions/ThrottledException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StartReportCreationInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - ResourceGroupsTaggingAPI_20170126.StartReportCreation
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=ResourceGroupsTaggingAPI_20170126.TagResources':
     post:
       operationId: TagResources
-      description: '<p>Applies one or more tags to the specified resources. Note the following:</p> <ul> <li> <p>Not all resources can have tags. For a list of resources that support tagging, see <a href="http://docs.aws.amazon.com/ARG/latest/userguide/supported-resources.html">Supported Resources</a> in the <i>AWS Resource Groups User Guide</i>.</p> </li> <li> <p>Each resource can have up to 50 tags. For other limits, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-restrictions">Tag Restrictions</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p> </li> <li> <p>You can only tag resources that are located in the specified region for the AWS account.</p> </li> <li> <p>To add tags to a resource, you need the necessary permissions for the service that the resource belongs to as well as permissions for adding tags. For more information, see <a href="http://docs.aws.amazon.com/ARG/latest/userguide/obtaining-permissions-for-tagging.html">Obtaining Permissions for Tagging</a> in the <i>AWS Resource Groups User Guide</i>.</p> </li> </ul>'
+      description: '<p>Applies one or more tags to the specified resources. Note the following:</p> <ul> <li> <p>Not all resources can have tags. For a list of services that support tagging, see <a href="http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/Welcome.html">this list</a>.</p> </li> <li> <p>Each resource can have up to 50 tags. For other limits, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws_tagging.html#tag-conventions">Tag Naming and Usage Conventions</a> in the <i>AWS General Reference.</i> </p> </li> <li> <p>You can only tag resources that are located in the specified Region for the AWS account.</p> </li> <li> <p>To add tags to a resource, you need the necessary permissions for the service that the resource belongs to as well as permissions for adding tags. For more information, see <a href="http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/Welcome.html">this list</a>.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -359,7 +508,7 @@ paths:
   '/#X-Amz-Target=ResourceGroupsTaggingAPI_20170126.UntagResources':
     post:
       operationId: UntagResources
-      description: '<p>Removes the specified tags from the specified resources. When you specify a tag key, the action removes both that key and its associated value. The operation succeeds even if you attempt to remove tags from a resource that were already removed. Note the following:</p> <ul> <li> <p>To remove tags from a resource, you need the necessary permissions for the service that the resource belongs to as well as permissions for removing tags. For more information, see <a href="http://docs.aws.amazon.com/ARG/latest/userguide/obtaining-permissions-for-tagging.html">Obtaining Permissions for Tagging</a> in the <i>AWS Resource Groups User Guide</i>.</p> </li> <li> <p>You can only tag resources that are located in the specified region for the AWS account.</p> </li> </ul>'
+      description: '<p>Removes the specified tags from the specified resources. When you specify a tag key, the action removes both that key and its associated value. The operation succeeds even if you attempt to remove tags from a resource that were already removed. Note the following:</p> <ul> <li> <p>To remove tags from a resource, you need the necessary permissions for the service that the resource belongs to as well as permissions for removing tags. For more information, see <a href="http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/Welcome.html">this list</a>.</p> </li> <li> <p>You can only tag resources that are located in the specified Region for the AWS account.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -398,6 +547,58 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
+  DescribeReportCreationOutput:
+    type: object
+    properties:
+      Status:
+        $ref: '#/definitions/Status'
+        description: '<p>Reports the status of the operation.</p> <p>The operation status can be one of the following:</p> <ul> <li> <p> <code>RUNNING</code> - Report creation is in progress.</p> </li> <li> <p> <code>SUCCEEDED</code> - Report creation is complete. You can open the report from the Amazon S3 bucket that you specified when you ran <code>StartReportCreation</code>.</p> </li> <li> <p> <code>FAILED</code> - Report creation timed out or the Amazon S3 bucket is not accessible. </p> </li> <li> <p> <code>NO REPORT</code> - No report was generated in the last 90 days.</p> </li> </ul>'
+      S3Location:
+        $ref: '#/definitions/S3Location'
+        description: The path to the Amazon S3 bucket where the report was stored on creation.
+      ErrorMessage:
+        $ref: '#/definitions/ErrorMessage'
+        description: Details of the common errors that all operations return.
+  DescribeReportCreationInput:
+    type: object
+    properties: {}
+  ConstraintViolationException: {}
+  InternalServiceException: {}
+  InvalidParameterException: {}
+  ThrottledException: {}
+  GetComplianceSummaryOutput:
+    type: object
+    properties:
+      SummaryList:
+        $ref: '#/definitions/SummaryList'
+        description: A table that shows counts of noncompliant resources.
+      PaginationToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'A string that indicates that the response contains more data than can be returned in a single response. To receive additional data, specify this string for the <code>PaginationToken</code> value in a subsequent request.'
+  GetComplianceSummaryInput:
+    type: object
+    properties:
+      TargetIdFilters:
+        $ref: '#/definitions/TargetIdFilterList'
+        description: 'The target identifiers (usually, specific account IDs) to limit the output by. If you use this parameter, the count of returned noncompliant resources includes only resources with the specified target IDs.'
+      RegionFilters:
+        $ref: '#/definitions/RegionFilterList'
+        description: 'A list of Regions to limit the output by. If you use this parameter, the count of returned noncompliant resources includes only resources in the specified Regions.'
+      ResourceTypeFilters:
+        $ref: '#/definitions/ResourceTypeFilterList'
+        description: '<p>The constraints on the resources that you want returned. The format of each resource type is <code>service[:resourceType]</code>. For example, specifying a resource type of <code>ec2</code> returns all Amazon EC2 resources (which includes EC2 instances). Specifying a resource type of <code>ec2:instance</code> returns only EC2 instances. </p> <p>The string for each service name and resource type is the same as that embedded in a resource''s Amazon Resource Name (ARN). Consult the <i>AWS General Reference</i> for the following:</p> <ul> <li> <p>For a list of service name strings, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces">AWS Service Namespaces</a>.</p> </li> <li> <p>For resource type strings, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arns-syntax">Example ARNs</a>.</p> </li> <li> <p>For more information about ARNs, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p> </li> </ul> <p>You can specify multiple resource types by using an array. The array can include up to 100 items. Note that the length constraint requirement applies to each resource type filter. </p>'
+      TagKeyFilters:
+        $ref: '#/definitions/TagKeyFilterList'
+        description: 'A list of tag keys to limit the output by. If you use this parameter, the count of returned noncompliant resources includes only resources that have the specified tag keys.'
+      GroupBy:
+        $ref: '#/definitions/GroupBy'
+        description: 'A list of attributes to group the counts of noncompliant resources by. If supplied, the counts are sorted by those attributes.'
+      MaxResults:
+        $ref: '#/definitions/MaxResultsGetComplianceSummary'
+        description: A limit that restricts the number of results that are returned per page.
+      PaginationToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'A string that indicates that additional data is available. Leave this value empty for your initial request. If the response includes a <code>PaginationToken</code>, use that string for this value to request an additional page of data.'
   GetResourcesOutput:
     type: object
     properties:
@@ -421,13 +622,16 @@ definitions:
         description: 'A limit that restricts the number of resources returned by GetResources in paginated output. You can set ResourcesPerPage to a minimum of 1 item and the maximum of 100 items. '
       TagsPerPage:
         $ref: '#/definitions/TagsPerPage'
-        description: '<p>A limit that restricts the number of tags (key and value pairs) returned by GetResources in paginated output. A resource with no tags is counted as having one tag (one key and value pair).</p> <p> <code>GetResources</code> does not split a resource and its associated tags across pages. If the specified <code>TagsPerPage</code> would cause such a break, a <code>PaginationToken</code> is returned in place of the affected resource and its tags. Use that token in another request to get the remaining data. For example, if you specify a <code>TagsPerPage</code> of <code>100</code> and the account has 22 resources with 10 tags each (meaning that each resource has 10 key and value pairs), the output will consist of 3 pages, with the first page displaying the first 10 resources, each with its 10 tags, the second page displaying the next 10 resources each with its 10 tags, and the third page displaying the remaining 2 resources, each with its 10 tags.</p> <p>You can set <code>TagsPerPage</code> to a minimum of 100 items and the maximum of 500 items.</p>'
+        description: '<p>AWS recommends using <code>ResourcesPerPage</code> instead of this parameter.</p> <p>A limit that restricts the number of tags (key and value pairs) returned by GetResources in paginated output. A resource with no tags is counted as having one tag (one key and value pair).</p> <p> <code>GetResources</code> does not split a resource and its associated tags across pages. If the specified <code>TagsPerPage</code> would cause such a break, a <code>PaginationToken</code> is returned in place of the affected resource and its tags. Use that token in another request to get the remaining data. For example, if you specify a <code>TagsPerPage</code> of <code>100</code> and the account has 22 resources with 10 tags each (meaning that each resource has 10 key and value pairs), the output will consist of three pages. The first page displays the first 10 resources, each with its 10 tags. The second page displays the next 10 resources, each with its 10 tags. The third page displays the remaining 2 resources, each with its 10 tags.</p> <p>You can set <code>TagsPerPage</code> to a minimum of 100 items and the maximum of 500 items.</p>'
       ResourceTypeFilters:
         $ref: '#/definitions/ResourceTypeFilterList'
         description: '<p>The constraints on the resources that you want returned. The format of each resource type is <code>service[:resourceType]</code>. For example, specifying a resource type of <code>ec2</code> returns all Amazon EC2 resources (which includes EC2 instances). Specifying a resource type of <code>ec2:instance</code> returns only EC2 instances. </p> <p>The string for each service name and resource type is the same as that embedded in a resource''s Amazon Resource Name (ARN). Consult the <i>AWS General Reference</i> for the following:</p> <ul> <li> <p>For a list of service name strings, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces">AWS Service Namespaces</a>.</p> </li> <li> <p>For resource type strings, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arns-syntax">Example ARNs</a>.</p> </li> <li> <p>For more information about ARNs, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p> </li> </ul> <p>You can specify multiple resource types by using an array. The array can include up to 100 items. Note that the length constraint requirement applies to each resource type filter. </p>'
-  InvalidParameterException: {}
-  ThrottledException: {}
-  InternalServiceException: {}
+      IncludeComplianceDetails:
+        $ref: '#/definitions/IncludeComplianceDetails'
+        description: Specifies whether to include details regarding the compliance with the effective tag policy. Set this to <code>true</code> to determine whether resources are compliant with the tag policy and to get details.
+      ExcludeCompliantResources:
+        $ref: '#/definitions/ExcludeCompliantResources'
+        description: <p>Specifies whether to exclude resources that are compliant with the tag policy. Set this to <code>true</code> if you are interested in retrieving information on noncompliant resources only.</p> <p>You can use this parameter only if the <code>IncludeComplianceDetails</code> parameter is also set to <code>true</code>.</p>
   PaginationTokenExpiredException: {}
   GetTagKeysOutput:
     type: object
@@ -443,7 +647,7 @@ definitions:
     properties:
       PaginationToken:
         $ref: '#/definitions/PaginationToken'
-        description: 'A string that indicates that additional data is available. Leave this value empty for your initial request. If the response includes a PaginationToken, use that string for this value to request an additional page of data.'
+        description: 'A string that indicates that additional data is available. Leave this value empty for your initial request. If the response includes a <code>PaginationToken</code>, use that string for this value to request an additional page of data.'
   GetTagValuesOutput:
     type: object
     properties:
@@ -460,10 +664,22 @@ definitions:
     properties:
       PaginationToken:
         $ref: '#/definitions/PaginationToken'
-        description: 'A string that indicates that additional data is available. Leave this value empty for your initial request. If the response includes a PaginationToken, use that string for this value to request an additional page of data.'
+        description: 'A string that indicates that additional data is available. Leave this value empty for your initial request. If the response includes a <code>PaginationToken</code>, use that string for this value to request an additional page of data.'
       Key:
         $ref: '#/definitions/TagKey'
-        description: The key for which you want to list all existing values in the specified region for the AWS account.
+        description: The key for which you want to list all existing values in the specified Region for the AWS account.
+  StartReportCreationOutput:
+    type: object
+    properties: {}
+  StartReportCreationInput:
+    type: object
+    required:
+      - S3Bucket
+    properties:
+      S3Bucket:
+        $ref: '#/definitions/S3Bucket'
+        description: '<p>The name of the Amazon S3 bucket where the report will be stored; for example:</p> <p> <code>awsexamplebucket</code> </p> <p>For more information on S3 bucket requirements, including an example bucket policy, see the example S3 bucket policy on this page.</p>'
+  ConcurrentModificationException: {}
   TagResourcesOutput:
     type: object
     properties:
@@ -487,7 +703,7 @@ definitions:
     properties:
       FailedResourcesMap:
         $ref: '#/definitions/FailedResourcesMap'
-        description: 'Details of resources that could not be untagged. An error code, status code, and error message are returned for each failed item.'
+        description: 'Details of resources that could not be untagged. An error code, status code, and error message are returned for each failed item. '
   UntagResourcesInput:
     type: object
     required:
@@ -502,15 +718,41 @@ definitions:
         description: A list of the tag keys that you want to remove from the specified resources.
   AmazonResourceType:
     type: string
+    pattern: '[\s\S]*'
     minLength: 0
     maxLength: 256
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+  ComplianceStatus:
+    type: boolean
+  ComplianceDetails:
+    type: object
+    properties:
+      NoncompliantKeys:
+        $ref: '#/definitions/TagKeyList'
+        description: The tag key is noncompliant with the effective tag policy.
+      KeysWithNoncompliantValues:
+        $ref: '#/definitions/TagKeyList'
+        description: The tag value is noncompliant with the effective tag policy.
+      ComplianceStatus:
+        $ref: '#/definitions/ComplianceStatus'
+        description: Whether a resource is compliant with the effective tag policy.
+    description: 'Information that shows whether a resource is compliant with the effective tag policy, including details on any noncompliant tag keys.'
+  Status:
+    type: string
+  S3Location:
+    type: string
+  ErrorMessage:
+    type: string
   ErrorCode:
     type: string
     enum:
       - InternalServiceException
       - InvalidParameterException
-  ErrorMessage:
-    type: string
+  ExcludeCompliantResources:
+    type: boolean
   FailureInfo:
     type: object
     properties:
@@ -530,10 +772,45 @@ definitions:
       $ref: '#/definitions/FailureInfo'
   StatusCode:
     type: integer
+  TargetIdFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/TargetId'
+    minItems: 1
+    maxItems: 100
+  RegionFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/Region'
+    minItems: 1
+    maxItems: 100
+  ResourceTypeFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/AmazonResourceType'
+  TagKeyFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+    minItems: 1
+    maxItems: 50
+  GroupBy:
+    type: array
+    items:
+      $ref: '#/definitions/GroupByAttribute'
+  MaxResultsGetComplianceSummary:
+    type: integer
+    minimum: 1
+    maximum: 1000
   PaginationToken:
     type: string
+    pattern: '[\s\S]*'
     minLength: 0
     maxLength: 2048
+  SummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/Summary'
   TagFilterList:
     type: array
     items:
@@ -544,30 +821,41 @@ definitions:
     type: integer
   TagsPerPage:
     type: integer
-  ResourceTypeFilterList:
-    type: array
-    items:
-      $ref: '#/definitions/AmazonResourceType'
+  IncludeComplianceDetails:
+    type: boolean
   ResourceTagMappingList:
     type: array
     items:
       $ref: '#/definitions/ResourceTagMapping'
-  TagKeyList:
-    type: array
-    items:
-      $ref: '#/definitions/TagKey'
   TagKey:
     type: string
+    pattern: '[\s\S]*'
     minLength: 1
     maxLength: 128
   TagValuesOutputList:
     type: array
     items:
       $ref: '#/definitions/TagValue'
+  GroupByAttribute:
+    type: string
+    enum:
+      - TARGET_ID
+      - REGION
+      - RESOURCE_TYPE
+  LastUpdated:
+    type: string
+  NonCompliantResources:
+    type: integer
+  Region:
+    type: string
+    pattern: '[\s\S]*'
+    minLength: 1
+    maxLength: 256
   ResourceARN:
     type: string
+    pattern: '[\s\S]*'
     minLength: 1
-    maxLength: 1600
+    maxLength: 1011
   ResourceARNList:
     type: array
     items:
@@ -587,9 +875,51 @@ definitions:
       Tags:
         $ref: '#/definitions/TagList'
         description: The tags that have been applied to one or more AWS resources.
+      ComplianceDetails:
+        $ref: '#/definitions/ComplianceDetails'
+        description: 'Information that shows whether a resource is compliant with the effective tag policy, including details on any noncompliant tag keys.'
     description: A list of resource ARNs and the tags (keys and values) that are associated with each.
+  S3Bucket:
+    type: string
+    pattern: '[\s\S]*'
+    minLength: 3
+    maxLength: 63
+  TargetId:
+    type: string
+    pattern: '[\s\S]*'
+    minLength: 6
+    maxLength: 68
+  TargetIdType:
+    type: string
+    enum:
+      - ACCOUNT
+      - OU
+      - ROOT
+  Summary:
+    type: object
+    properties:
+      LastUpdated:
+        $ref: '#/definitions/LastUpdated'
+        description: 'The timestamp that shows when this summary was generated in this Region. '
+      TargetId:
+        $ref: '#/definitions/TargetId'
+        description: 'The account identifier or the root identifier of the organization. If you don''t know the root ID, you can call the AWS Organizations <a href="http://docs.aws.amazon.com/organizations/latest/APIReference/API_ListRoots.html">ListRoots</a> API.'
+      TargetIdType:
+        $ref: '#/definitions/TargetIdType'
+        description: 'Whether the target is an account, an OU, or the organization root.'
+      Region:
+        $ref: '#/definitions/Region'
+        description: The AWS Region that the summary applies to.
+      ResourceType:
+        $ref: '#/definitions/AmazonResourceType'
+        description: The AWS resource type.
+      NonCompliantResources:
+        $ref: '#/definitions/NonCompliantResources'
+        description: The count of noncompliant resources.
+    description: A count of noncompliant resources.
   TagValue:
     type: string
+    pattern: '[\s\S]*'
     minLength: 0
     maxLength: 256
   Tag:
@@ -600,11 +930,11 @@ definitions:
     properties:
       Key:
         $ref: '#/definitions/TagKey'
-        description: One part of a key-value pair that make up a tag. A key is a general label that acts like a category for more specific tag values.
+        description: One part of a key-value pair that makes up a tag. A key is a general label that acts like a category for more specific tag values.
       Value:
         $ref: '#/definitions/TagValue'
         description: The optional part of a key-value pair that make up a tag. A value acts as a descriptor within a tag category (key).
-    description: 'The metadata that you apply to AWS resources to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-basics">Tag Basics</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.'
+    description: 'The metadata that you apply to AWS resources to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. For more information, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS Resources</a> in the <i>AWS General Reference</i>.'
   TagValueList:
     type: array
     items:
@@ -616,7 +946,7 @@ definitions:
     properties:
       Key:
         $ref: '#/definitions/TagKey'
-        description: One part of a key-value pair that make up a tag. A key is a general label that acts like a category for more specific tag values.
+        description: One part of a key-value pair that makes up a tag. A key is a general label that acts like a category for more specific tag values.
       Values:
         $ref: '#/definitions/TagValueList'
         description: The optional part of a key-value pair that make up a tag. A value acts as a descriptor within a tag category (key).

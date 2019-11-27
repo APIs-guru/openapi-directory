@@ -571,7 +571,7 @@ paths:
   '/#X-Amz-Target=DirectoryService_20150416.CreateDirectory':
     post:
       operationId: CreateDirectory
-      description: '<p>Creates a Simple AD directory.</p> <p>Before you call <code>CreateDirectory</code>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <code>CreateDirectory</code> operation, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>'
+      description: '<p>Creates a Simple AD directory. For more information, see <a href="https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_simple_ad.html">Simple Active Directory</a> in the <i>AWS Directory Service Admin Guide</i>.</p> <p>Before you call <code>CreateDirectory</code>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <code>CreateDirectory</code> operation, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>'
       responses:
         '200':
           description: Success
@@ -616,7 +616,7 @@ paths:
   '/#X-Amz-Target=DirectoryService_20150416.CreateLogSubscription':
     post:
       operationId: CreateLogSubscription
-      description: Creates a subscription to forward real time Directory Service domain controller security logs to the specified CloudWatch log group in your AWS account.
+      description: Creates a subscription to forward real-time Directory Service domain controller security logs to the specified Amazon CloudWatch log group in your AWS account.
       responses:
         '200':
           description: Success
@@ -669,7 +669,7 @@ paths:
   '/#X-Amz-Target=DirectoryService_20150416.CreateMicrosoftAD':
     post:
       operationId: CreateMicrosoftAD
-      description: '<p>Creates an AWS Managed Microsoft AD directory.</p> <p>Before you call <i>CreateMicrosoftAD</i>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <i>CreateMicrosoftAD</i> operation, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>'
+      description: '<p>Creates a Microsoft AD directory in the AWS Cloud. For more information, see <a href="https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_microsoft_ad.html">AWS Managed Microsoft AD</a> in the <i>AWS Directory Service Admin Guide</i>.</p> <p>Before you call <i>CreateMicrosoftAD</i>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <i>CreateMicrosoftAD</i> operation, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1050,6 +1050,67 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=DirectoryService_20150416.DeregisterCertificate':
+    post:
+      operationId: DeregisterCertificate
+      description: Deletes from the system the certificate that was registered for a secured LDAP connection.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeregisterCertificateResult'
+        '480':
+          description: DirectoryUnavailableException
+          schema:
+            $ref: '#/definitions/DirectoryUnavailableException'
+        '481':
+          description: DirectoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/DirectoryDoesNotExistException'
+        '482':
+          description: CertificateDoesNotExistException
+          schema:
+            $ref: '#/definitions/CertificateDoesNotExistException'
+        '483':
+          description: CertificateInUseException
+          schema:
+            $ref: '#/definitions/CertificateInUseException'
+        '484':
+          description: UnsupportedOperationException
+          schema:
+            $ref: '#/definitions/UnsupportedOperationException'
+        '485':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '486':
+          description: ClientException
+          schema:
+            $ref: '#/definitions/ClientException'
+        '487':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeregisterCertificateRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.DeregisterCertificate
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=DirectoryService_20150416.DeregisterEventTopic':
     post:
       operationId: DeregisterEventTopic
@@ -1087,6 +1148,59 @@ paths:
           type: string
           enum:
             - DirectoryService_20150416.DeregisterEventTopic
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=DirectoryService_20150416.DescribeCertificate':
+    post:
+      operationId: DescribeCertificate
+      description: Displays information about the certificate registered for a secured LDAP connection.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeCertificateResult'
+        '480':
+          description: DirectoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/DirectoryDoesNotExistException'
+        '481':
+          description: UnsupportedOperationException
+          schema:
+            $ref: '#/definitions/UnsupportedOperationException'
+        '482':
+          description: CertificateDoesNotExistException
+          schema:
+            $ref: '#/definitions/CertificateDoesNotExistException'
+        '483':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '484':
+          description: ClientException
+          schema:
+            $ref: '#/definitions/ClientException'
+        '485':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeCertificateRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.DescribeCertificate
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1305,6 +1419,59 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=DirectoryService_20150416.DescribeLDAPSSettings':
+    post:
+      operationId: DescribeLDAPSSettings
+      description: Describes the status of LDAP security for the specified directory.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeLDAPSSettingsResult'
+        '480':
+          description: DirectoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/DirectoryDoesNotExistException'
+        '481':
+          description: UnsupportedOperationException
+          schema:
+            $ref: '#/definitions/UnsupportedOperationException'
+        '482':
+          description: InvalidNextTokenException
+          schema:
+            $ref: '#/definitions/InvalidNextTokenException'
+        '483':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '484':
+          description: ClientException
+          schema:
+            $ref: '#/definitions/ClientException'
+        '485':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeLDAPSSettingsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.DescribeLDAPSSettings
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=DirectoryService_20150416.DescribeSharedDirectories':
     post:
       operationId: DescribeSharedDirectories
@@ -1460,6 +1627,63 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=DirectoryService_20150416.DisableLDAPS':
+    post:
+      operationId: DisableLDAPS
+      description: Deactivates LDAP secure calls for the specified directory.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DisableLDAPSResult'
+        '480':
+          description: DirectoryUnavailableException
+          schema:
+            $ref: '#/definitions/DirectoryUnavailableException'
+        '481':
+          description: DirectoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/DirectoryDoesNotExistException'
+        '482':
+          description: InvalidLDAPSStatusException
+          schema:
+            $ref: '#/definitions/InvalidLDAPSStatusException'
+        '483':
+          description: UnsupportedOperationException
+          schema:
+            $ref: '#/definitions/UnsupportedOperationException'
+        '484':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '485':
+          description: ClientException
+          schema:
+            $ref: '#/definitions/ClientException'
+        '486':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DisableLDAPSRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.DisableLDAPS
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=DirectoryService_20150416.DisableRadius':
     post:
       operationId: DisableRadius
@@ -1550,6 +1774,67 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=DirectoryService_20150416.EnableLDAPS':
+    post:
+      operationId: EnableLDAPS
+      description: Activates the switch for the specific directory to always use LDAP secure calls.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/EnableLDAPSResult'
+        '480':
+          description: DirectoryUnavailableException
+          schema:
+            $ref: '#/definitions/DirectoryUnavailableException'
+        '481':
+          description: DirectoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/DirectoryDoesNotExistException'
+        '482':
+          description: NoAvailableCertificateException
+          schema:
+            $ref: '#/definitions/NoAvailableCertificateException'
+        '483':
+          description: InvalidLDAPSStatusException
+          schema:
+            $ref: '#/definitions/InvalidLDAPSStatusException'
+        '484':
+          description: UnsupportedOperationException
+          schema:
+            $ref: '#/definitions/UnsupportedOperationException'
+        '485':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '486':
+          description: ClientException
+          schema:
+            $ref: '#/definitions/ClientException'
+        '487':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/EnableLDAPSRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.EnableLDAPS
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=DirectoryService_20150416.EnableRadius':
     post:
       operationId: EnableRadius
@@ -1602,7 +1887,7 @@ paths:
   '/#X-Amz-Target=DirectoryService_20150416.EnableSso':
     post:
       operationId: EnableSso
-      description: Enables single sign-on for a directory.
+      description: Enables single sign-on for a directory. Single sign-on allows users in your directory to access certain AWS services from a computer joined to the directory without having to enter their credentials separately.
       responses:
         '200':
           description: Success
@@ -1651,7 +1936,7 @@ paths:
   '/#X-Amz-Target=DirectoryService_20150416.GetDirectoryLimits':
     post:
       operationId: GetDirectoryLimits
-      description: Obtains directory limit information for the current region.
+      description: Obtains directory limit information for the current Region.
       responses:
         '200':
           description: Success
@@ -1722,6 +2007,59 @@ paths:
           type: string
           enum:
             - DirectoryService_20150416.GetSnapshotLimits
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=DirectoryService_20150416.ListCertificates':
+    post:
+      operationId: ListCertificates
+      description: 'For the specified directory, lists all the certificates registered for a secured LDAP connection.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListCertificatesResult'
+        '480':
+          description: DirectoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/DirectoryDoesNotExistException'
+        '481':
+          description: UnsupportedOperationException
+          schema:
+            $ref: '#/definitions/UnsupportedOperationException'
+        '482':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '483':
+          description: InvalidNextTokenException
+          schema:
+            $ref: '#/definitions/InvalidNextTokenException'
+        '484':
+          description: ClientException
+          schema:
+            $ref: '#/definitions/ClientException'
+        '485':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListCertificatesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.ListCertificates
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1910,6 +2248,71 @@ paths:
           type: string
           enum:
             - DirectoryService_20150416.ListTagsForResource
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=DirectoryService_20150416.RegisterCertificate':
+    post:
+      operationId: RegisterCertificate
+      description: Registers a certificate for secured LDAP connection.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RegisterCertificateResult'
+        '480':
+          description: DirectoryUnavailableException
+          schema:
+            $ref: '#/definitions/DirectoryUnavailableException'
+        '481':
+          description: DirectoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/DirectoryDoesNotExistException'
+        '482':
+          description: InvalidCertificateException
+          schema:
+            $ref: '#/definitions/InvalidCertificateException'
+        '483':
+          description: CertificateLimitExceededException
+          schema:
+            $ref: '#/definitions/CertificateLimitExceededException'
+        '484':
+          description: CertificateAlreadyExistsException
+          schema:
+            $ref: '#/definitions/CertificateAlreadyExistsException'
+        '485':
+          description: UnsupportedOperationException
+          schema:
+            $ref: '#/definitions/UnsupportedOperationException'
+        '486':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '487':
+          description: ClientException
+          schema:
+            $ref: '#/definitions/ClientException'
+        '488':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RegisterCertificateRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.RegisterCertificate
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -2109,7 +2512,7 @@ paths:
   '/#X-Amz-Target=DirectoryService_20150416.ResetUserPassword':
     post:
       operationId: ResetUserPassword
-      description: Resets the password for any user in your AWS Managed Microsoft AD or Simple AD directory.
+      description: '<p>Resets the password for any user in your AWS Managed Microsoft AD or Simple AD directory.</p> <p>You can reset the password for any user in your directory with the following exceptions:</p> <ul> <li> <p>For Simple AD, you cannot reset the password for any user that is a member of either the <b>Domain Admins</b> or <b>Enterprise Admins</b> group except for the administrator user.</p> </li> <li> <p>For AWS Managed Microsoft AD, you can only reset the password for a user that is in an OU based off of the NetBIOS name that you typed when you created your directory. For example, you cannot reset the password for a user in the <b>AWS Reserved</b> OU. For more information about the OU structure for an AWS Managed Microsoft AD directory, see <a href="https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_getting_started_what_gets_created.html">What Gets Created</a> in the <i>AWS Directory Service Administration Guide</i>.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -2726,7 +3129,7 @@ definitions:
         description: The password for the on-premises user account.
       Description:
         $ref: '#/definitions/Description'
-        description: A textual description for the directory.
+        description: A description for the directory.
       Size:
         $ref: '#/definitions/DirectorySize'
         description: The size of the directory.
@@ -2833,13 +3236,13 @@ definitions:
         description: 'The fully qualified name for the directory, such as <code>corp.example.com</code>.'
       ShortName:
         $ref: '#/definitions/DirectoryShortName'
-        description: 'The short name of the directory, such as <code>CORP</code>.'
+        description: 'The NetBIOS name of the directory, such as <code>CORP</code>.'
       Password:
         $ref: '#/definitions/Password'
-        description: The password for the directory administrator. The directory creation process creates a directory administrator account with the user name <code>Administrator</code> and this password.
+        description: '<p>The password for the directory administrator. The directory creation process creates a directory administrator account with the user name <code>Administrator</code> and this password.</p> <p>If you need to change the password for the administrator account, you can use the <a>ResetUserPassword</a> API call.</p>'
       Description:
         $ref: '#/definitions/Description'
-        description: A textual description for the directory.
+        description: A description for the directory.
       Size:
         $ref: '#/definitions/DirectorySize'
         description: The size of the directory.
@@ -2861,7 +3264,7 @@ definitions:
     properties:
       DirectoryId:
         $ref: '#/definitions/DirectoryId'
-        description: Identifier (ID) of the directory to which you want to subscribe and receive real-time logs to your specified CloudWatch log group.
+        description: Identifier of the directory to which you want to subscribe and receive real-time logs to your specified CloudWatch log group.
       LogGroupName:
         $ref: '#/definitions/LogGroupName'
         description: The name of the CloudWatch log group where the real-time domain controller logs are forwarded.
@@ -2882,22 +3285,22 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/DirectoryName'
-        description: 'The fully qualified domain name for the directory, such as <code>corp.example.com</code>. This name will resolve inside your VPC only. It does not need to be publicly resolvable.'
+        description: 'The fully qualified domain name for the AWS Managed Microsoft AD directory, such as <code>corp.example.com</code>. This name will resolve inside your VPC only. It does not need to be publicly resolvable.'
       ShortName:
         $ref: '#/definitions/DirectoryShortName'
-        description: 'The NetBIOS name for your domain. A short identifier for your domain, such as <code>CORP</code>. If you don''t specify a NetBIOS name, it will default to the first part of your directory DNS. For example, <code>CORP</code> for the directory DNS <code>corp.example.com</code>. '
+        description: 'The NetBIOS name for your domain, such as <code>CORP</code>. If you don''t specify a NetBIOS name, it will default to the first part of your directory DNS. For example, <code>CORP</code> for the directory DNS <code>corp.example.com</code>. '
       Password:
         $ref: '#/definitions/Password'
-        description: The password for the default administrative user named <code>Admin</code>.
+        description: '<p>The password for the default administrative user named <code>Admin</code>.</p> <p>If you need to change the password for the administrator account, you can use the <a>ResetUserPassword</a> API call.</p>'
       Description:
         $ref: '#/definitions/Description'
-        description: A textual description for the directory. This label will appear on the AWS console <code>Directory Details</code> page after the directory is created.
+        description: A description for the directory. This label will appear on the AWS console <code>Directory Details</code> page after the directory is created.
       VpcSettings:
         $ref: '#/definitions/DirectoryVpcSettings'
         description: Contains VPC information for the <a>CreateDirectory</a> or <a>CreateMicrosoftAD</a> operation.
       Edition:
         $ref: '#/definitions/DirectoryEdition'
-        description: 'AWS Managed Microsoft AD is available in two editions: Standard and Enterprise. Enterprise is the default.'
+        description: 'AWS Managed Microsoft AD is available in two editions: <code>Standard</code> and <code>Enterprise</code>. <code>Enterprise</code> is the default.'
       Tags:
         $ref: '#/definitions/Tags'
         description: The tags to be assigned to the AWS Managed Microsoft AD directory.
@@ -3002,7 +3405,7 @@ definitions:
     properties:
       DirectoryId:
         $ref: '#/definitions/DirectoryId'
-        description: Identifier (ID) of the directory whose log subscription you want to delete.
+        description: Identifier of the directory whose log subscription you want to delete.
   DeleteSnapshotResult:
     type: object
     properties:
@@ -3038,6 +3441,24 @@ definitions:
         $ref: '#/definitions/DeleteAssociatedConditionalForwarder'
         description: Delete a conditional forwarder as part of a DeleteTrustRequest.
     description: Deletes the local side of an existing trust relationship between the AWS Managed Microsoft AD directory and the external domain.
+  DeregisterCertificateResult:
+    type: object
+    properties: {}
+  DeregisterCertificateRequest:
+    type: object
+    required:
+      - DirectoryId
+      - CertificateId
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: The identifier of the directory.
+      CertificateId:
+        $ref: '#/definitions/CertificateId'
+        description: The identifier of the certificate.
+  DirectoryDoesNotExistException: {}
+  CertificateDoesNotExistException: {}
+  CertificateInUseException: {}
   DeregisterEventTopicResult:
     type: object
     properties: {}
@@ -3055,6 +3476,24 @@ definitions:
         $ref: '#/definitions/TopicName'
         description: The name of the SNS topic from which to remove the directory as a publisher.
     description: Removes the specified directory as a publisher to the specified SNS topic.
+  DescribeCertificateResult:
+    type: object
+    properties:
+      Certificate:
+        $ref: '#/definitions/Certificate'
+        description: 'Information about the certificate, including registered date time, certificate state, the reason for the state, expiration date time, and certificate common name.'
+  DescribeCertificateRequest:
+    type: object
+    required:
+      - DirectoryId
+      - CertificateId
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: The identifier of the directory.
+      CertificateId:
+        $ref: '#/definitions/CertificateId'
+        description: The identifier of the certificate.
   DescribeConditionalForwardersResult:
     type: object
     properties:
@@ -3141,6 +3580,32 @@ definitions:
         $ref: '#/definitions/TopicNames'
         description: '<p>A list of SNS topic names for which to obtain the information. If this member is null, all associations for the specified Directory ID are returned.</p> <p>An empty list results in an <code>InvalidParameterException</code> being thrown.</p>'
     description: Describes event topics.
+  DescribeLDAPSSettingsResult:
+    type: object
+    properties:
+      LDAPSSettingsInfo:
+        $ref: '#/definitions/LDAPSSettingsInfo'
+        description: 'Information about LDAP security for the specified directory, including status of enablement, state last updated date time, and the reason for the state.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The next token used to retrieve the LDAPS settings if the number of setting types exceeds page limit and there is another page.
+  DescribeLDAPSSettingsRequest:
+    type: object
+    required:
+      - DirectoryId
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: The identifier of the directory.
+      Type:
+        $ref: '#/definitions/LDAPSType'
+        description: 'The type of LDAP security the customer wants to enable, either server or client. Currently supports only <code>Client</code>, (the default).'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The type of next token used for pagination.
+      Limit:
+        $ref: '#/definitions/PageLimit'
+        description: Specifies the number of items that should be displayed on one page.
   DescribeSharedDirectoriesResult:
     type: object
     properties:
@@ -3219,6 +3684,21 @@ definitions:
         $ref: '#/definitions/Limit'
         description: The maximum number of objects to return.
     description: 'Describes the trust relationships for a particular AWS Managed Microsoft AD directory. If no input parameters are are provided, such as directory ID or trust ID, this request describes all the trust relationships.'
+  DisableLDAPSResult:
+    type: object
+    properties: {}
+  DisableLDAPSRequest:
+    type: object
+    required:
+      - DirectoryId
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: The identifier of the directory.
+      Type:
+        $ref: '#/definitions/LDAPSType'
+        description: 'The type of LDAP security that the customer wants to enable. The security can be either server or client, but currently only the default <code>Client</code> is supported.'
+  InvalidLDAPSStatusException: {}
   DisableRadiusResult:
     type: object
     properties: {}
@@ -3251,6 +3731,21 @@ definitions:
         $ref: '#/definitions/ConnectPassword'
         description: 'The password of an alternate account to use to disable single-sign on. This is only used for AD Connector directories. For more information, see the <i>UserName</i> parameter.'
     description: Contains the inputs for the <a>DisableSso</a> operation.
+  EnableLDAPSResult:
+    type: object
+    properties: {}
+  EnableLDAPSRequest:
+    type: object
+    required:
+      - DirectoryId
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: The identifier of the directory.
+      Type:
+        $ref: '#/definitions/LDAPSType'
+        description: 'The type of LDAP security the customer wants to enable. The security can be either server or client, but currently only the default <code>Client</code> is supported.'
+  NoAvailableCertificateException: {}
   EnableRadiusResult:
     type: object
     properties: {}
@@ -3292,7 +3787,7 @@ definitions:
     properties:
       DirectoryLimits:
         $ref: '#/definitions/DirectoryLimits'
-        description: A <a>DirectoryLimits</a> object that contains the directory limits for the current region.
+        description: A <a>DirectoryLimits</a> object that contains the directory limits for the current rRegion.
     description: Contains the results of the <a>GetDirectoryLimits</a> operation.
   GetDirectoryLimitsRequest:
     type: object
@@ -3314,6 +3809,29 @@ definitions:
         $ref: '#/definitions/DirectoryId'
         description: Contains the identifier of the directory to obtain the limits for.
     description: Contains the inputs for the <a>GetSnapshotLimits</a> operation.
+  ListCertificatesResult:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: Indicates whether another page of certificates is available when the number of available certificates exceeds the page limit.
+      CertificatesInfo:
+        $ref: '#/definitions/CertificatesInfo'
+        description: 'A list of certificates with basic details including certificate ID, certificate common name, certificate state.'
+  ListCertificatesRequest:
+    type: object
+    required:
+      - DirectoryId
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: The identifier of the directory.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: A token for requesting another page of certificates if the <code>NextToken</code> response element indicates that more certificates are available. Use the value of the returned <code>NextToken</code> element in your request until the token comes back as <code>null</code>. Pass <code>null</code> if this is the first call.
+      Limit:
+        $ref: '#/definitions/PageLimit'
+        description: The number of items that should show up on one page
   ListIpRoutesResult:
     type: object
     properties:
@@ -3404,6 +3922,27 @@ definitions:
       Limit:
         $ref: '#/definitions/Limit'
         description: Reserved for future use.
+  RegisterCertificateResult:
+    type: object
+    properties:
+      CertificateId:
+        $ref: '#/definitions/CertificateId'
+        description: The identifier of the certificate.
+  RegisterCertificateRequest:
+    type: object
+    required:
+      - DirectoryId
+      - CertificateData
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: The identifier of the directory.
+      CertificateData:
+        $ref: '#/definitions/CertificateData'
+        description: The certificate PEM string that needs to be registered.
+  InvalidCertificateException: {}
+  CertificateLimitExceededException: {}
+  CertificateAlreadyExistsException: {}
   RegisterEventTopicResult:
     type: object
     properties: {}
@@ -3749,6 +4288,71 @@ definitions:
   SchemaExtensionId:
     type: string
     pattern: '^e-[0-9a-f]{10}$'
+  CertificateId:
+    type: string
+    pattern: '^c-[0-9a-f]{10}$'
+  CertificateState:
+    type: string
+    enum:
+      - Registering
+      - Registered
+      - RegisterFailed
+      - Deregistering
+      - Deregistered
+      - DeregisterFailed
+  CertificateStateReason:
+    type: string
+  CertificateCN:
+    type: string
+  CertificateRegisteredDateTime:
+    type: string
+    format: date-time
+  CertificateExpiryDateTime:
+    type: string
+    format: date-time
+  Certificate:
+    type: object
+    properties:
+      CertificateId:
+        $ref: '#/definitions/CertificateId'
+        description: The identifier of the certificate.
+      State:
+        $ref: '#/definitions/CertificateState'
+        description: The state of the certificate.
+      StateReason:
+        $ref: '#/definitions/CertificateStateReason'
+        description: Describes a state change for the certificate.
+      CommonName:
+        $ref: '#/definitions/CertificateCN'
+        description: The common name for the certificate.
+      RegisteredDateTime:
+        $ref: '#/definitions/CertificateRegisteredDateTime'
+        description: The date and time that the certificate was registered.
+      ExpiryDateTime:
+        $ref: '#/definitions/CertificateExpiryDateTime'
+        description: The date and time when the certificate will expire.
+    description: Information about the certificate.
+  CertificateData:
+    type: string
+    minLength: 1
+    maxLength: 8192
+  CertificateInfo:
+    type: object
+    properties:
+      CertificateId:
+        $ref: '#/definitions/CertificateId'
+        description: The identifier of the certificate.
+      CommonName:
+        $ref: '#/definitions/CertificateCN'
+        description: The common name for the certificate.
+      State:
+        $ref: '#/definitions/CertificateState'
+        description: The state of the certificate.
+    description: Contains general information about a certificate.
+  CertificatesInfo:
+    type: array
+    items:
+      $ref: '#/definitions/CertificateInfo'
   CidrIp:
     type: string
     pattern: '^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/([1-9]|[1-2][0-9]|3[0-2]))$'
@@ -3977,6 +4581,18 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/EventTopic'
+  LDAPSType:
+    type: string
+    enum:
+      - Client
+  PageLimit:
+    type: integer
+    minimum: 1
+    maximum: 50
+  LDAPSSettingsInfo:
+    type: array
+    items:
+      $ref: '#/definitions/LDAPSSettingInfo'
   SharedDirectories:
     type: array
     items:
@@ -4028,7 +4644,7 @@ definitions:
         description: The identifier of the VPC that the AD Connector is in.
       SubnetIds:
         $ref: '#/definitions/SubnetIds'
-        description: A list of subnet identifiers in the VPC that the AD connector is in.
+        description: A list of subnet identifiers in the VPC that the AD Connector is in.
       CustomerUserName:
         $ref: '#/definitions/UserName'
         description: The user name of the service account in the on-premises directory.
@@ -4192,7 +4808,7 @@ definitions:
         description: 'The access URL for the directory, such as <code>http://&lt;alias&gt;.awsapps.com</code>. If no alias has been created for the directory, <code>&lt;alias&gt;</code> is the directory identifier, such as <code>d-XXXXXXXXXX</code>.'
       Description:
         $ref: '#/definitions/Description'
-        description: The textual description for the directory.
+        description: The description for the directory.
       DnsIpAddrs:
         $ref: '#/definitions/DnsIpAddrs'
         description: 'The IP addresses of the DNS servers for the directory. For a Simple AD or Microsoft AD directory, these are the IP addresses of the Simple AD or Microsoft AD directory servers. For an AD Connector directory, these are the IP addresses of the DNS servers or domain controllers in the on-premises directory to which the AD Connector is connected.'
@@ -4247,10 +4863,10 @@ definitions:
     properties:
       CloudOnlyDirectoriesLimit:
         $ref: '#/definitions/Limit'
-        description: The maximum number of cloud directories allowed in the region.
+        description: The maximum number of cloud directories allowed in the Region.
       CloudOnlyDirectoriesCurrentCount:
         $ref: '#/definitions/Limit'
-        description: The current number of cloud directories in the region.
+        description: The current number of cloud directories in the Region.
       CloudOnlyDirectoriesLimitReached:
         $ref: '#/definitions/CloudOnlyDirectoriesLimitReached'
         description: Indicates if the cloud directory limit has been reached.
@@ -4265,14 +4881,14 @@ definitions:
         description: Indicates if the AWS Managed Microsoft AD directory limit has been reached.
       ConnectedDirectoriesLimit:
         $ref: '#/definitions/Limit'
-        description: The maximum number of connected directories allowed in the region.
+        description: The maximum number of connected directories allowed in the Region.
       ConnectedDirectoriesCurrentCount:
         $ref: '#/definitions/Limit'
-        description: The current number of connected directories in the region.
+        description: The current number of connected directories in the Region.
       ConnectedDirectoriesLimitReached:
         $ref: '#/definitions/ConnectedDirectoriesLimitReached'
         description: Indicates if the connected directory limit has been reached.
-    description: Contains directory limit information for a region.
+    description: Contains directory limit information for a Region.
   IpAddr:
     type: string
     pattern: '^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
@@ -4419,6 +5035,28 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/IpRouteInfo'
+  LDAPSStatus:
+    type: string
+    enum:
+      - Enabling
+      - Enabled
+      - EnableFailed
+      - Disabled
+  LDAPSStatusReason:
+    type: string
+  LDAPSSettingInfo:
+    type: object
+    properties:
+      LDAPSStatus:
+        $ref: '#/definitions/LDAPSStatus'
+        description: The state of the LDAPS settings.
+      LDAPSStatusReason:
+        $ref: '#/definitions/LDAPSStatusReason'
+        description: Describes a state change for LDAPS.
+      LastUpdatedDateTime:
+        $ref: '#/definitions/LastUpdatedDateTime'
+        description: The date and time when the LDAPS settings were last updated.
+    description: Contains general information about the LDAPS settings.
   LdifContent:
     type: string
     minLength: 1

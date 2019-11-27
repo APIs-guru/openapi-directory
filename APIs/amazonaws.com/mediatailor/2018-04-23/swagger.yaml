@@ -328,6 +328,16 @@ paths:
                   OriginManifestType:
                     description: 'The setting that controls whether MediaTailor handles manifests from the origin server as multi-period manifests or single-period manifests. If your origin server produces single-period manifests, set this to SINGLE_PERIOD. The default setting is MULTI_PERIOD. For multi-period manifests, omit this setting or set it to MULTI_PERIOD. '
                     $ref: '#/definitions/OriginManifestType'
+              LivePreRollConfiguration:
+                description: The configuration for pre-roll ad insertion.
+                type: object
+                properties:
+                  AdDecisionServerUrl:
+                    $ref: '#/definitions/__string'
+                    description: 'The URL for the ad decision server (ADS) for pre-roll ads. This includes the specification of static parameters and placeholders for dynamic parameters. AWS Elemental MediaTailor substitutes player-specific and session-specific parameters as needed when calling the ADS. Alternately, for testing, you can provide a static VAST URL. The maximum length is 25,000 characters.'
+                  MaxDurationSeconds:
+                    $ref: '#/definitions/__integer'
+                    description: 'The maximum allowed duration for the pre-roll ad avail. AWS Elemental MediaTailor won''t play pre-roll ads to exceed this duration, regardless of the total duration of ads that the ADS returns.'
               Name:
                 description: The identifier for the playback configuration.
                 type: string
@@ -404,6 +414,9 @@ definitions:
       HlsConfiguration:
         description: 'The configuration for HLS content. '
         $ref: '#/definitions/HlsConfiguration'
+      LivePreRollConfiguration:
+        $ref: '#/definitions/LivePreRollConfiguration'
+        description: The configuration for pre-roll ad insertion.
       Name:
         description: The identifier for the playback configuration.
         $ref: '#/definitions/__string'
@@ -465,6 +478,9 @@ definitions:
       HlsConfiguration:
         description: 'The configuration for HLS content. '
         $ref: '#/definitions/HlsConfiguration'
+      LivePreRollConfiguration:
+        $ref: '#/definitions/LivePreRollConfiguration'
+        description: The configuration for pre-roll ad insertion.
       Name:
         description: The identifier for the playback configuration.
         $ref: '#/definitions/__string'
@@ -496,6 +512,8 @@ definitions:
       - SINGLE_PERIOD
       - MULTI_PERIOD
     type: string
+  __integer:
+    type: integer
   CdnConfiguration:
     type: object
     properties:
@@ -542,6 +560,16 @@ definitions:
         description: The URL that is used to initiate a playback session for devices that support Apple HLS. The session uses server-side reporting.
         $ref: '#/definitions/__string'
     description: 'The configuration for HLS content. '
+  LivePreRollConfiguration:
+    type: object
+    properties:
+      AdDecisionServerUrl:
+        $ref: '#/definitions/__string'
+        description: 'The URL for the ad decision server (ADS) for pre-roll ads. This includes the specification of static parameters and placeholders for dynamic parameters. AWS Elemental MediaTailor substitutes player-specific and session-specific parameters as needed when calling the ADS. Alternately, for testing, you can provide a static VAST URL. The maximum length is 25,000 characters.'
+      MaxDurationSeconds:
+        $ref: '#/definitions/__integer'
+        description: 'The maximum allowed duration for the pre-roll ad avail. AWS Elemental MediaTailor won''t play pre-roll ads to exceed this duration, regardless of the total duration of ads that the ADS returns.'
+    description: The configuration for pre-roll ad insertion.
   __mapOf__string:
     type: object
     additionalProperties:
@@ -612,6 +640,9 @@ definitions:
       DashConfiguration:
         description: 'The configuration for DASH content. '
         $ref: '#/definitions/DashConfigurationForPut'
+      LivePreRollConfiguration:
+        $ref: '#/definitions/LivePreRollConfiguration'
+        description: The configuration for pre-roll ad insertion.
       Name:
         description: The identifier for the playback configuration.
         $ref: '#/definitions/__string'

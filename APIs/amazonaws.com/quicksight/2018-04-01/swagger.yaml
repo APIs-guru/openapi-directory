@@ -3,7 +3,7 @@ info:
   version: '2018-04-01'
   x-release: v4
   title: Amazon QuickSight
-  description: '<fullname>Amazon QuickSight API Reference</fullname> <p>Amazon QuickSight is a fully managed, serverless, cloud business intelligence service that makes it easy to extend data and insights to every user in your organization. This API interface reference contains documentation for a programming interface that you can use to manage Amazon QuickSight. </p>'
+  description: '<fullname>Amazon QuickSight API Reference</fullname> <p>Amazon QuickSight is a fully managed, serverless business intelligence service for the AWS Cloud that makes it easy to extend data and insights to every user in your organization. This API reference contains documentation for a programming interface that you can use to manage Amazon QuickSight. </p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -163,7 +163,7 @@ paths:
   '/accounts/{AwsAccountId}/data-sets/{DataSetId}/ingestions/{IngestionId}':
     delete:
       operationId: CancelIngestion
-      description: Cancels an on-going ingestion of data into SPICE.
+      description: Cancels an ongoing ingestion of data into SPICE.
       responses:
         '200':
           description: Success
@@ -225,7 +225,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     put:
       operationId: CreateIngestion
-      description: '<p>Creates and starts a new SPICE ingestion on a dataset</p> <p>Any ingestions operating on tagged datasets inherit the same tags automatically for use in access-control. For an example, see <a href="https://aws.example.com/premiumsupport/knowledge-center/iam-ec2-resource-tags/">How do I create an IAM policy to control access to Amazon EC2 resources using tags?</a>. Tags will be visible on the tagged dataset, but not on the ingestion resource.</p>'
+      description: '<p>Creates and starts a new SPICE ingestion on a dataset</p> <p>Any ingestions operating on tagged datasets inherit the same tags automatically for use in access control. For an example, see <a href="https://aws.example.com/premiumsupport/knowledge-center/iam-ec2-resource-tags/">How do I create an IAM policy to control access to Amazon EC2 resources using tags?</a> in the AWS Knowledge Center. Tags are visible on the tagged dataset, but not on the ingestion resource.</p>'
       responses:
         '200':
           description: Success
@@ -338,7 +338,7 @@ paths:
   '/accounts/{AwsAccountId}/dashboards/{DashboardId}':
     post:
       operationId: CreateDashboard
-      description: '<p>Creates a dashboard from a template. To first create a template, see the CreateTemplate API.</p> <p>A dashboard is an entity in QuickSight which identifies Quicksight reports, created from analyses. QuickSight dashboards are sharable. With the right permissions, you can create scheduled email reports from them. The <code>CreateDashboard</code>, <code>DescribeDashboard</code> and <code>ListDashboardsByUser</code> APIs act on the dashboard entity. If you have the correct permissions, you can create a dashboard from a template that exists in a different AWS account.</p> <p>CLI syntax:</p> <p> <code>aws quicksight create-dashboard --cli-input-json file://create-dashboard.json</code> </p>'
+      description: '<p>Creates a dashboard from a template. To first create a template, see the CreateTemplate API.</p> <p>A dashboard is an entity in QuickSight which identifies Quicksight reports, created from analyses. QuickSight dashboards are sharable. With the right permissions, you can create scheduled email reports from them. The <code>CreateDashboard</code>, <code>DescribeDashboard</code> and <code>ListDashboardsByUser</code> APIs act on the dashboard entity. If you have the correct permissions, you can create a dashboard from a template that exists in a different AWS account.</p>'
       responses:
         '200':
           description: Success
@@ -469,7 +469,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     delete:
       operationId: DeleteDashboard
-      description: '<p>Deletes a dashboard.</p> <p>CLI syntax:</p> <p> <code>aws quicksight delete-dashboard --aws-account-id 111122223333 —dashboard-id 123123123</code> </p> <p> <code>aws quicksight delete-dashboard --aws-account-id 111122223333 —dashboard-id 123123123 —version-number 3</code> </p>'
+      description: Deletes a dashboard.
       responses:
         '200':
           description: Success
@@ -524,7 +524,7 @@ paths:
           minimum: 1
     get:
       operationId: DescribeDashboard
-      description: '<p>Provides a summary for a dashboard.</p> <p>CLI syntax:</p> <ul> <li> <p> <code>aws quicksight describe-dashboard --aws-account-id 111122223333 —dashboard-id reports_test_report -version-number 2</code> </p> </li> <li> <p> <code> aws quicksight describe-dashboard --aws-account-id 111122223333 —dashboard-id reports_test_report -alias-name ‘$PUBLISHED’ </code> </p> </li> </ul> <p/>'
+      description: Provides a summary for a dashboard.
       responses:
         '200':
           description: Success
@@ -587,7 +587,7 @@ paths:
           maxLength: 2048
     put:
       operationId: UpdateDashboard
-      description: '<p>Updates a dashboard in the AWS account.</p> <p>CLI syntax:</p> <p> <code>aws quicksight update-dashboard --aws-account-id 111122223333 --dashboard-id 123123123 --dashboard-name "test-update102" --source-entity SourceTemplate={Arn=arn:aws:quicksight:us-west-2:111122223333:template/sales-report-template2} --data-set-references DataSetPlaceholder=SalesDataSet,DataSetArn=arn:aws:quicksight:us-west-2:111122223333:dataset/0e251aef-9ebf-46e1-b852-eb4fa33c1d3a</code> </p> <p> <code>aws quicksight update-dashboard --cli-input-json file://update-dashboard.json </code> </p>'
+      description: Updates a dashboard in the AWS account.
       responses:
         '200':
           description: Success
@@ -697,7 +697,7 @@ paths:
   '/accounts/{AwsAccountId}/data-sets':
     post:
       operationId: CreateDataSet
-      description: '<p>Creates a dataset.</p> <p>CLI syntax:</p> <p> <code>aws quicksight create-data-set \</code> </p> <p> <code>--aws-account-id=111122223333 \</code> </p> <p> <code>--data-set-id=unique-data-set-id \</code> </p> <p> <code>--name=''My dataset'' \</code> </p> <p> <code>--import-mode=SPICE \</code> </p> <p> <code>--physical-table-map=''{</code> </p> <p> <code> "physical-table-id": {</code> </p> <p> <code> "RelationalTable": {</code> </p> <p> <code> "DataSourceArn": "arn:aws:quicksight:us-west-2:111111111111:datasource/data-source-id",</code> </p> <p> <code> "Name": "table1",</code> </p> <p> <code> "InputColumns": [</code> </p> <p> <code> {</code> </p> <p> <code> "Name": "column1",</code> </p> <p> <code> "Type": "STRING"</code> </p> <p> <code> }</code> </p> <p> <code> ]</code> </p> <p> <code> }</code> </p> <p> <code> }''</code> </p>'
+      description: Creates a dataset.
       responses:
         '200':
           description: Success
@@ -761,7 +761,7 @@ paths:
               - RowLevelPermissionDataSet
             properties:
               DataSetId:
-                description: An ID for the dataset you want to create. This is unique per region per AWS account.
+                description: An ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.
                 type: string
               Name:
                 description: The display name for the dataset.
@@ -789,7 +789,7 @@ paths:
                   - SPICE
                   - DIRECT_QUERY
               ColumnGroups:
-                description: Groupings of columns that work together in certain QuickSight features. Currently only geospatial hierarchy is supported.
+                description: 'Groupings of columns that work together in certain QuickSight features. Currently, only geospatial hierarchy is supported.'
                 type: array
                 items:
                   $ref: '#/definitions/ColumnGroup'
@@ -829,7 +829,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListDataSets
-      description: '<p>Lists all of the datasets belonging to this account in an AWS region.</p> <p>The permissions resource is <code>arn:aws:quicksight:region:aws-account-id:dataset/*</code> </p> <p>CLI syntax: <code>aws quicksight list-data-sets --aws-account-id=111111111111</code> </p>'
+      description: '<p>Lists all of the datasets belonging to this account in an AWS region.</p> <p>The permissions resource is <code>arn:aws:quicksight:region:aws-account-id:dataset/*</code>.</p>'
       responses:
         '200':
           description: Success
@@ -889,7 +889,7 @@ paths:
   '/accounts/{AwsAccountId}/data-sources':
     post:
       operationId: CreateDataSource
-      description: '<p>Creates a data source.</p> <p>The permissions resource is <code>arn:aws:quicksight:region:aws-account-id:datasource/data-source-id</code> </p> <p>CLI syntax:</p> <p> <code>aws quicksight create-data-source \</code> </p> <p> <code>--aws-account-id=111122223333 \</code> </p> <p> <code>--data-source-id=unique-data-source-id \</code> </p> <p> <code>--name=''My Data Source'' \</code> </p> <p> <code>--type=POSTGRESQL \</code> </p> <p> <code>--data-source-parameters=''{ "PostgreSqlParameters": {</code> </p> <p> <code> "Host": "my-db-host.example.com",</code> </p> <p> <code> "Port": 1234,</code> </p> <p> <code> "Database": "my-db" } }'' \</code> </p> <p> <code>--credentials=''{ "CredentialPair": {</code> </p> <p> <code> "Username": "username",</code> </p> <p> <code> "Password": "password" } }''</code> </p>'
+      description: Creates a data source.
       responses:
         '200':
           description: Success
@@ -948,7 +948,7 @@ paths:
               - VpcConnectionProperties
             properties:
               DataSourceId:
-                description: 'An ID for the data source. This is unique per AWS Region per AWS account. '
+                description: 'An ID for the data source. This ID is unique per AWS Region for each AWS account. '
                 type: string
               Name:
                 description: A display name for the data source.
@@ -956,7 +956,7 @@ paths:
                 minLength: 1
                 maxLength: 128
               Type:
-                description: 'The type of the data source. Currently the supported types for this operation are: <code>ATHENA, AURORA, AURORA_POSTGRESQL, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT, S3, SNOWFLAKE, SPARK, SQLSERVER, TERADATA</code>. Use <code>ListDataSources</code> to return a list of all data sources.'
+                description: 'The type of the data source. Currently, the supported types for this operation are: <code>ATHENA, AURORA, AURORA_POSTGRESQL, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT, S3, SNOWFLAKE, SPARK, SQLSERVER, TERADATA</code>. Use <code>ListDataSources</code> to return a list of all data sources.'
                 type: string
                 enum:
                   - ADOBE_ANALYTICS
@@ -981,7 +981,7 @@ paths:
                   - TERADATA
                   - TWITTER
               DataSourceParameters:
-                description: The parameters QuickSight uses to connect to your underlying source. This is a variant type structure. At most one of the attributes should be non-null for this structure to be valid.
+                description: The parameters that QuickSight uses to connect to your underlying source. This is a variant type structure. At most one of the attributes should be non-null for this structure to be valid.
                 type: object
                 properties:
                   AmazonElasticsearchParameters:
@@ -1061,9 +1061,9 @@ paths:
                 properties:
                   VpcConnectionArn:
                     $ref: '#/definitions/Arn'
-                    description: VPC connection ARN.
+                    description: The Amazon Resource Name (ARN) for the VPC connection.
               SslProperties:
-                description: SSL properties that apply when QuickSight connects to your underlying data source.
+                description: Secure Socket Layer (SSL) properties that apply when QuickSight connects to your underlying data source.
                 type: object
                 properties:
                   DisableSsl:
@@ -1086,7 +1086,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListDataSources
-      description: '<p>Lists data sources in current AWS region that belong to this AWS account.</p> <p>The permissions resource is: <code>arn:aws:quicksight:region:aws-account-id:datasource/*</code> </p> <p>CLI syntax: <code>aws quicksight list-data-sources --aws-account-id=111122223333</code> </p>'
+      description: Lists data sources in current AWS Region that belong to this AWS account.
       responses:
         '200':
           description: Success
@@ -1146,7 +1146,7 @@ paths:
   '/accounts/{AwsAccountId}/namespaces/{Namespace}/groups':
     post:
       operationId: CreateGroup
-      description: '<p>Creates an Amazon QuickSight group.</p> <p>The permissions resource is <code>arn:aws:quicksight:us-east-1:<i>&lt;relevant-aws-account-id&gt;</i>:group/default/<i>&lt;group-name&gt;</i> </code>.</p> <p>The response is a group object.</p> <p> <b>CLI Sample:</b> </p> <p> <code>aws quicksight create-group --aws-account-id=111122223333 --namespace=default --group-name="Sales-Management" --description="Sales Management - Forecasting" </code> </p>'
+      description: '<p>Creates an Amazon QuickSight group.</p> <p>The permissions resource is <code>arn:aws:quicksight:us-east-1:<i>&lt;relevant-aws-account-id&gt;</i>:group/default/<i>&lt;group-name&gt;</i> </code>.</p> <p>The response is a group object.</p>'
       responses:
         '200':
           description: Success
@@ -1232,7 +1232,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListGroups
-      description: '<p>Lists all user groups in Amazon QuickSight. </p> <p>The permissions resource is <code>arn:aws:quicksight:us-east-1:<i>&lt;aws-account-id&gt;</i>:group/default/*</code>.</p> <p>The response is a list of group objects. </p> <p> <b>CLI Sample:</b> </p> <p> <code>aws quicksight list-groups -\-aws-account-id=111122223333 -\-namespace=default </code> </p>'
+      description: 'Lists all user groups in Amazon QuickSight. '
       responses:
         '200':
           description: Success
@@ -1301,7 +1301,7 @@ paths:
   '/accounts/{AwsAccountId}/namespaces/{Namespace}/groups/{GroupName}/members/{MemberName}':
     put:
       operationId: CreateGroupMembership
-      description: '<p>Adds an Amazon QuickSight user to an Amazon QuickSight group. </p> <p>The permissions resource is <code>arn:aws:quicksight:us-east-1:<i>&lt;aws-account-id&gt;</i>:group/default/<i>&lt;group-name&gt;</i> </code>.</p> <p>The condition resource is the user name.</p> <p>The condition key is <code>quicksight:UserName</code>.</p> <p>The response is the group member object.</p> <p> <b>CLI Sample:</b> </p> <p> <code>aws quicksight create-group-membership --aws-account-id=111122223333 --namespace=default --group-name=Sales --member-name=Pat </code> </p>'
+      description: 'Adds an Amazon QuickSight user to an Amazon QuickSight group. '
       responses:
         '200':
           description: Success
@@ -1376,7 +1376,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     delete:
       operationId: DeleteGroupMembership
-      description: '<p>Removes a user from a group so that the user is no longer a member of the group.</p> <p>The permissions resource is <code>arn:aws:quicksight:us-east-1:<i>&lt;aws-account-id&gt;</i>:group/default/<i>&lt;group-name&gt;</i> </code>.</p> <p>The condition resource is the user name.</p> <p>The condition key is <code>quicksight:UserName</code>.</p> <p> <b>CLI Sample:</b> </p> <p> <code>aws quicksight delete-group-membership --aws-account-id=111122223333 --namespace=default --group-name=Sales-Management --member-name=Charlie </code> </p>'
+      description: Removes a user from a group so that the user is no longer a member of the group.
       responses:
         '200':
           description: Success
@@ -1444,7 +1444,7 @@ paths:
   '/accounts/{AwsAccountId}/namespaces/{Namespace}/iam-policy-assignments/':
     post:
       operationId: CreateIAMPolicyAssignment
-      description: '<p>Creates an assignment with one specified IAM policy ARN and will assigned to specified groups or users of QuickSight. Users and groups need to be in the same namespace. </p> <p>CLI syntax:</p> <p> <code>aws quicksight create-iam-policy-assignment --aws-account-id=111122223333 --assignment-name=helpAssignment --policy-arn=arn:aws:iam::aws:policy/AdministratorAccess --identities="user=user5,engineer123,group=QS-Admin" --namespace=default --region=us-west-2</code> </p>'
+      description: 'Creates an assignment with one specified IAM policy Amazon Resource Name (ARN) and will assigned to specified groups or users of QuickSight. Users and groups need to be in the same namespace. '
       responses:
         '200':
           description: Success
@@ -1516,7 +1516,7 @@ paths:
                   - DRAFT
                   - DISABLED
               PolicyArn:
-                description: An IAM policy ARN that you want to apply to the QuickSight users and groups specified in this assignment.
+                description: An IAM policy Amazon Resource Name (ARN) that you want to apply to the QuickSight users and groups specified in this assignment.
                 type: string
               Identities:
                 description: QuickSight users and/or groups that you want to assign the policy to.
@@ -1534,7 +1534,7 @@ paths:
   '/accounts/{AwsAccountId}/templates/{TemplateId}':
     post:
       operationId: CreateTemplate
-      description: '<p>Creates a template from an existing QuickSight analysis or template. The resulting template can be used to create a dashboard.</p> <p>A template is an entity in QuickSight which encapsulates the metadata required to create an analysis that can be used to create dashboard. It adds a layer of abstraction by use placeholders to replace the dataset associated with the analysis. You can use templates to create dashboards by replacing dataset placeholders with datasets which follow the same schema that was used to create the source analysis and template.</p> <p>To create a template from an existing analysis, use the analysis''s ARN, <code>aws-account-id</code>, <code>template-id</code>, <code>source-entity</code>, and <code>data-set-references</code>.</p> <p>CLI syntax to create a template: </p> <p> <code>aws quicksight create-template —cli-input-json file://create-template.json</code> </p> <p>CLI syntax to create a template from another template in the same AWS account:</p> <p> <code>aws quicksight create-template --aws-account-id 111122223333 --template-id reports_test_template --data-set-references DataSetPlaceholder=reports,DataSetArn=arn:aws:quicksight:us-west-2:111122223333:dataset/0dfc789c-81f6-4f4f-b9ac-7db2453eefc8 DataSetPlaceholder=Elblogs,DataSetArn=arn:aws:quicksight:us-west-2:111122223333:dataset/f60da323-af68-45db-9016-08e0d1d7ded5 --source-entity SourceAnalysis=''{Arn=arn:aws:quicksight:us-west-2:111122223333:analysis/7fb74527-c36d-4be8-8139-ac1be4c97365}''</code> </p> <p>To create template from another account’s template, you need to grant cross account resource permission for DescribeTemplate the account that contains the template.</p> <p>You can use a file to pass JSON to the function if you prefer. </p>'
+      description: <p>Creates a template from an existing QuickSight analysis or template. The resulting template can be used to create a dashboard.</p> <p>A template is an entity in QuickSight which encapsulates the metadata required to create an analysis that can be used to create dashboard. It adds a layer of abstraction by use placeholders to replace the dataset associated with the analysis. You can use templates to create dashboards by replacing dataset placeholders with datasets which follow the same schema that was used to create the source analysis and template.</p>
       responses:
         '200':
           description: Success
@@ -1604,7 +1604,7 @@ paths:
                 minLength: 1
                 maxLength: 2048
               Permissions:
-                description: 'A list of resource permissions to be set on the template. The shorthand syntax should look similar to this: <code>Shorthand Syntax: Principal=string,Actions=string,string ... </code> '
+                description: 'A list of resource permissions to be set on the template. '
                 type: array
                 items:
                   $ref: '#/definitions/ResourcePermission'
@@ -1642,7 +1642,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     delete:
       operationId: DeleteTemplate
-      description: '<p>Deletes a template.</p> <p>CLI syntax:</p> <ul> <li> <p> <code>aws quicksight delete-template --aws-account-id 111122223333 —-template-id reports_test_template --version-number 2 </code> </p> </li> <li> <p> <code>aws quicksight delete-template —aws-account-id 111122223333 —template-id reports_test_template —alias-name STAGING </code> </p> </li> <li> <p> <code>aws quicksight delete-template —aws-account-id 111122223333 —template-id reports_test_template —alias-name ‘\$LATEST’ </code> </p> </li> <li> <p> <code>aws quicksight delete-template --aws-account-id 111122223333 —-template-id reports_test_template</code> </p> </li> </ul> <p>If version number which is an optional field is not passed the template (including all the versions) is deleted by the API, if version number is provided, the specific template version is deleted by the API.</p> <p>Users can explicitly describe the latest version of the template by passing <code>$LATEST</code> to the <code>alias-name</code> parameter. <code>$LATEST</code> is an internally supported alias, which points to the latest version of the template. </p>'
+      description: Deletes a template.
       responses:
         '200':
           description: Success
@@ -1696,12 +1696,12 @@ paths:
         - name: version-number
           in: query
           required: false
-          description: The version number
+          description: 'Specifies the version of the template that you want to delete. If you don''t provide a version number, <code>DeleteTemplate</code> deletes all versions of the template. '
           type: integer
           minimum: 1
     get:
       operationId: DescribeTemplate
-      description: '<p>Describes a template''s metadata.</p> <p>CLI syntax:</p> <p> <code>aws quicksight describe-template --aws-account-id 111122223333 --template-id reports_test_template </code> </p> <p> <code>aws quicksight describe-template --aws-account-id 111122223333 --template-id reports_test_template --version-number-2</code> </p> <p> <code>aws quicksight describe-template --aws-account-id 111122223333 --template-id reports_test_template --alias-name ''\$LATEST'' </code> </p> <p>Users can explicitly describe the latest version of the dashboard by passing <code>$LATEST</code> to the <code>alias-name</code> parameter. <code>$LATEST</code> is an internally supported alias, which points to the latest version of the dashboard. </p>'
+      description: Describes a template's metadata.
       responses:
         '200':
           description: Success
@@ -1765,14 +1765,14 @@ paths:
         - name: alias-name
           in: query
           required: false
-          description: 'This is an optional field, when an alias name is provided, the version referenced by the alias is described. Refer to <code>CreateTemplateAlias</code> to create a template alias. <code>$PUBLISHED</code> is not supported for template.'
+          description: 'The alias of the template that you want to describe. If you provide a specific alias, you describe the version that the alias points to. You can specify the latest version of the template by providing the keyword <code>$LATEST</code> in the <code>AliasName</code> parameter. The keyword <code>$PUBLISHED</code> doesn''t apply to templates.'
           type: string
           pattern: '[\w\-]+|(\$LATEST)|(\$PUBLISHED)'
           minLength: 1
           maxLength: 2048
     put:
       operationId: UpdateTemplate
-      description: '<p>Updates a template from an existing QuickSight analysis.</p> <p>CLI syntax:</p> <p> <code>aws quicksight update-template --aws-account-id 111122223333 --template-id reports_test_template --data-set-references DataSetPlaceholder=reports,DataSetArn=arn:aws:quicksight:us-west-2:111122223333:dataset/c684a204-d134-4c53-a63c-451f72c60c28 DataSetPlaceholder=Elblogs,DataSetArn=arn:aws:quicksight:us-west-2:111122223333:dataset/15840b7d-b542-4491-937b-602416b367b3 —source-entity SourceAnalysis=’{Arn=arn:aws:quicksight:us-west-2:111122223333:analysis/c5731fe9-4708-4598-8f6d-cf2a70875b6d}</code> </p> <p>You can also pass in a json file: <code>aws quicksight update-template —cli-input-json file://create-template.json</code> </p>'
+      description: Updates a template from an existing QuickSight analysis.
       responses:
         '200':
           description: Success
@@ -1846,7 +1846,7 @@ paths:
                     $ref: '#/definitions/TemplateSourceTemplate'
                     description: 'The source template, if it is based on an template.'
               VersionDescription:
-                description: A description of the current template version being created. This API created the first version of the template. Every time UpdateTemplate is called a new version is created. Each version of the template maintains a description of the version in the VersionDescription field.
+                description: A description of the current template version being updated. Every time you cal <code>UpdateTemplate</code> you create a new version. Each version of the template maintains a description of the version in the <code>VersionDescription</code> field.
                 type: string
                 minLength: 1
                 maxLength: 512
@@ -1859,7 +1859,7 @@ paths:
   '/accounts/{AwsAccountId}/templates/{TemplateId}/aliases/{AliasName}':
     post:
       operationId: CreateTemplateAlias
-      description: '<p>Creates a template alias for a template.</p> <p>CLI syntax:</p> <p> <code>aws quicksight create-template-alias --aws-account-id 111122223333 --template-id ''reports_test_template'' --alias-name PROD —version-number 1</code> </p>'
+      description: Creates a template alias for a template.
       responses:
         '200':
           description: Success
@@ -1913,7 +1913,7 @@ paths:
         - name: AliasName
           in: path
           required: true
-          description: 'The name you want to give the template''s alias. Alias names can''t begin with a <code>$</code>, which is reserved by QuickSight. Alias names that start with ‘$’ sign are QuickSight reserved naming and can''t be deleted. '
+          description: 'The name that you want to give to the template alias that you''re creating. Aliases that start with <code>$</code> are reserved by QuickSight. '
           type: string
           pattern: '[\w\-]+|(\$LATEST)|(\$PUBLISHED)'
           minLength: 1
@@ -1940,7 +1940,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     delete:
       operationId: DeleteTemplateAlias
-      description: '<p>Update template alias of given template.</p> <p>CLI syntax:</p> <p> <code>aws quicksight delete-template-alias --aws-account-id 111122223333 --template-id ''reports_test_template'' --alias-name ''STAGING''</code> </p>'
+      description: Update template alias of given template.
       responses:
         '200':
           description: Success
@@ -1982,14 +1982,14 @@ paths:
         - name: AliasName
           in: path
           required: true
-          description: 'The alias of the template. If alias-name is provided, the version that the alias-name points to is deleted. Alias names that start with <code>$</code> are reserved by QuickSight and can''t be deleted.”'
+          description: 'The alias of the template that you want to delete. If you provide a specific alias, you delete the version that the alias points to. You can specify the latest version of the template by providing the keyword <code>$LATEST</code> in the <code>AliasName</code> parameter. '
           type: string
           pattern: '[\w\-]+|(\$LATEST)|(\$PUBLISHED)'
           minLength: 1
           maxLength: 2048
     get:
       operationId: DescribeTemplateAlias
-      description: '<p>Describes the template aliases of a template.</p> <p>CLI syntax:</p> <p> <code>aws quicksight describe-template-alias --aws-account-id 111122223333 --template-id ''reports_test_template'' --alias-name ''STAGING''</code> </p>'
+      description: Describes the template aliases of a template.
       responses:
         '200':
           description: Success
@@ -2031,14 +2031,14 @@ paths:
         - name: AliasName
           in: path
           required: true
-          description: The alias name. <code>$PUBLISHED</code> is not supported for template.
+          description: 'The alias of the template that you want to describe. If you provide a specific alias, you describe the version that the alias points to. You can specify the latest version of the template by providing the keyword <code>$LATEST</code> in the <code>AliasName</code> parameter. The keyword <code>$PUBLISHED</code> doesn''t apply to templates.'
           type: string
           pattern: '[\w\-]+|(\$LATEST)|(\$PUBLISHED)'
           minLength: 1
           maxLength: 2048
     put:
       operationId: UpdateTemplateAlias
-      description: '<p>Updates the template alias of a template.</p> <p>CLI syntax:</p> <p> <code>aws quicksight update-template-alias --aws-account-id 111122223333 --template-id ''reports_test_template'' --alias-name STAGING —template-version-number 2 </code> </p>'
+      description: Updates the template alias of a template.
       responses:
         '200':
           description: Success
@@ -2084,7 +2084,7 @@ paths:
         - name: AliasName
           in: path
           required: true
-          description: The alias name.
+          description: 'The alias of the template that you want to update. If you provide a specific alias, you update the version that the alias points to. You can specify the latest version of the template by providing the keyword <code>$LATEST</code> in the <code>AliasName</code> parameter. The keyword <code>$PUBLISHED</code> doesn''t apply to templates.'
           type: string
           pattern: '[\w\-]+|(\$LATEST)|(\$PUBLISHED)'
           minLength: 1
@@ -2104,7 +2104,7 @@ paths:
   '/accounts/{AwsAccountId}/data-sets/{DataSetId}':
     delete:
       operationId: DeleteDataSet
-      description: '<p>Deletes a dataset.</p> <p>CLI syntax:</p> <p> <code>aws quicksight delete-data-set \</code> </p> <p> <code>--aws-account-id=111111111111 \</code> </p> <p> <code>--data-set-id=unique-data-set-id</code> </p>'
+      description: Deletes a dataset.
       responses:
         '200':
           description: Success
@@ -2134,7 +2134,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: The AWS Account ID.
+          description: The AWS account ID.
           type: string
           pattern: '^[0-9]{12}$'
           minLength: 12
@@ -2142,7 +2142,7 @@ paths:
         - name: DataSetId
           in: path
           required: true
-          description: The ID for the dataset you want to create. This is unique per region per AWS account.
+          description: The ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.
           type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
@@ -2154,7 +2154,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: DescribeDataSet
-      description: '<p>Describes a dataset. </p> <p>CLI syntax:</p> <p> <code>aws quicksight describe-data-set \</code> </p> <p> <code>--aws-account-id=111111111111 \</code> </p> <p> <code>--data-set-id=unique-data-set-id</code> </p>'
+      description: 'Describes a dataset. '
       responses:
         '200':
           description: Success
@@ -2192,11 +2192,11 @@ paths:
         - name: DataSetId
           in: path
           required: true
-          description: The ID for the dataset you want to create. This is unique per region per AWS account.
+          description: The ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.
           type: string
     put:
       operationId: UpdateDataSet
-      description: '<p>Updates a dataset.</p> <p>CLI syntax:</p> <p> <code>aws quicksight update-data-set \</code> </p> <p> <code>--aws-account-id=111122223333 \</code> </p> <p> <code>--data-set-id=unique-data-set-id \</code> </p> <p> <code>--name=''My dataset'' \</code> </p> <p> <code>--import-mode=SPICE \</code> </p> <p> <code>--physical-table-map=''{</code> </p> <p> <code> "physical-table-id": {</code> </p> <p> <code> "RelationalTable": {</code> </p> <p> <code> "DataSourceArn": "arn:aws:quicksight:us-west-2:111111111111:datasource/data-source-id",</code> </p> <p> <code> "Name": "table1",</code> </p> <p> <code> "InputColumns": [</code> </p> <p> <code> {</code> </p> <p> <code> "Name": "column1",</code> </p> <p> <code> "Type": "STRING"</code> </p> <p> <code> }</code> </p> <p> <code> ]</code> </p> <p> <code> }</code> </p> <p> <code> }''</code> </p>'
+      description: Updates a dataset.
       responses:
         '200':
           description: Success
@@ -2246,7 +2246,7 @@ paths:
         - name: DataSetId
           in: path
           required: true
-          description: The ID for the dataset you want to create. This is unique per region per AWS account.
+          description: The ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.
           type: string
         - name: body
           in: body
@@ -2285,7 +2285,7 @@ paths:
                   - SPICE
                   - DIRECT_QUERY
               ColumnGroups:
-                description: Groupings of columns that work together in certain QuickSight features. Currently only geospatial hierarchy is supported.
+                description: 'Groupings of columns that work together in certain QuickSight features. Currently, only geospatial hierarchy is supported.'
                 type: array
                 items:
                   $ref: '#/definitions/ColumnGroup'
@@ -2304,7 +2304,7 @@ paths:
   '/accounts/{AwsAccountId}/data-sources/{DataSourceId}':
     delete:
       operationId: DeleteDataSource
-      description: '<p>Deletes the data source permanently. This action breaks all the datasets that reference the deleted data source.</p> <p>CLI syntax:</p> <p> <code>aws quicksight delete-data-source \</code> </p> <p> <code>--aws-account-id=111122223333 \</code> </p> <p> <code>--data-source-id=unique-data-source-id </code> </p>'
+      description: Deletes the data source permanently. This action breaks all the datasets that reference the deleted data source.
       responses:
         '200':
           description: Success
@@ -2342,7 +2342,7 @@ paths:
         - name: DataSourceId
           in: path
           required: true
-          description: The ID of the data source. This is unique per AWS Region per AWS account.
+          description: The ID of the data source. This ID is unique per AWS Region for each AWS account.
           type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
@@ -2354,7 +2354,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: DescribeDataSource
-      description: '<p>Describes a data source.</p> <p>The permissions resource is <code>arn:aws:quicksight:region:aws-account-id:datasource/data-source-id</code> </p>'
+      description: Describes a data source.
       responses:
         '200':
           description: Success
@@ -2392,11 +2392,11 @@ paths:
         - name: DataSourceId
           in: path
           required: true
-          description: The ID of the data source. This is unique per AWS Region per AWS account.
+          description: The ID of the data source. This ID is unique per AWS Region for each AWS account.
           type: string
     put:
       operationId: UpdateDataSource
-      description: '<p>Updates a data source.</p> <p>The permissions resource is <code>arn:aws:quicksight:region:aws-account-id:datasource/data-source-id</code> </p> <p>CLI syntax:</p> <p> <code>aws quicksight update-data-source \</code> </p> <p> <code>--aws-account-id=111122223333 \</code> </p> <p> <code>--data-source-id=unique-data-source-id \</code> </p> <p> <code>--name=''My Data Source'' \</code> </p> <p> <code>--data-source-parameters=''{"PostgreSqlParameters":{"Host":"my-db-host.example.com","Port":1234,"Database":"my-db"}}'' \</code> </p> <p> <code>--credentials=''{"CredentialPair":{"Username":"username","Password":"password"}}</code> </p>'
+      description: Updates a data source.
       responses:
         '200':
           description: Success
@@ -2438,7 +2438,7 @@ paths:
         - name: DataSourceId
           in: path
           required: true
-          description: 'The ID of the data source. This is unique per AWS Region per AWS account. '
+          description: 'The ID of the data source. This ID is unique per AWS Region for each AWS account. '
           type: string
         - name: body
           in: body
@@ -2455,7 +2455,7 @@ paths:
                 minLength: 1
                 maxLength: 128
               DataSourceParameters:
-                description: The parameters QuickSight uses to connect to your underlying source. This is a variant type structure. At most one of the attributes should be non-null for this structure to be valid.
+                description: The parameters that QuickSight uses to connect to your underlying source. This is a variant type structure. At most one of the attributes should be non-null for this structure to be valid.
                 type: object
                 properties:
                   AmazonElasticsearchParameters:
@@ -2528,9 +2528,9 @@ paths:
                 properties:
                   VpcConnectionArn:
                     $ref: '#/definitions/Arn'
-                    description: VPC connection ARN.
+                    description: The Amazon Resource Name (ARN) for the VPC connection.
               SslProperties:
-                description: SSL properties that apply when QuickSight connects to your underlying data source.
+                description: Secure Socket Layer (SSL) properties that apply when QuickSight connects to your underlying data source.
                 type: object
                 properties:
                   DisableSsl:
@@ -2539,7 +2539,7 @@ paths:
   '/accounts/{AwsAccountId}/namespaces/{Namespace}/groups/{GroupName}':
     delete:
       operationId: DeleteGroup
-      description: '<p>Removes a user group from Amazon QuickSight. </p> <p>The permissions resource is <code>arn:aws:quicksight:us-east-1:<i>&lt;aws-account-id&gt;</i>:group/default/<i>&lt;group-name&gt;</i> </code>.</p> <p> <b>CLI Sample:</b> </p> <p> <code>aws quicksight delete-group -\-aws-account-id=111122223333 -\-namespace=default -\-group-name=Sales-Management </code> </p>'
+      description: 'Removes a user group from Amazon QuickSight. '
       responses:
         '200':
           description: Success
@@ -2606,7 +2606,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: DescribeGroup
-      description: '<p>Returns an Amazon QuickSight group''s description and Amazon Resource Name (ARN). </p> <p>The permissions resource is <code>arn:aws:quicksight:us-east-1:<i>&lt;relevant-aws-account-id&gt;</i>:group/default/<i>&lt;group-name&gt;</i> </code>.</p> <p>The response is the group object. </p> <p> <b>CLI Sample:</b> </p> <p> <code>aws quicksight describe-group -\-aws-account-id=11112222333 -\-namespace=default -\-group-name=Sales </code> </p>'
+      description: 'Returns an Amazon QuickSight group''s description and Amazon Resource Name (ARN). '
       responses:
         '200':
           description: Success
@@ -2665,7 +2665,7 @@ paths:
           maxLength: 64
     put:
       operationId: UpdateGroup
-      description: '<p>Changes a group description. </p> <p>The permissions resource is <code>arn:aws:quicksight:us-east-1:<i>&lt;aws-account-id&gt;</i>:group/default/<i>&lt;group-name&gt;</i> </code>.</p> <p>The response is a group object.</p> <p> <b>CLI Sample:</b> </p> <p> <code>aws quicksight update-group --aws-account-id=111122223333 --namespace=default --group-name=Sales --description="Sales BI Dashboards" </code> </p>'
+      description: 'Changes a group description. '
       responses:
         '200':
           description: Success
@@ -2736,7 +2736,7 @@ paths:
   '/accounts/{AwsAccountId}/namespace/{Namespace}/iam-policy-assignments/{AssignmentName}':
     delete:
       operationId: DeleteIAMPolicyAssignment
-      description: '<p>Deletes an existing assignment.</p> <p>CLI syntax:</p> <p> <code>aws quicksight delete-iam-policy-assignment --aws-account-id=111122223333 --assignment-name=testtest --region=us-east-1 --namespace=default</code> </p>'
+      description: Deletes an existing assignment.
       responses:
         '200':
           description: Success
@@ -2804,7 +2804,7 @@ paths:
   '/accounts/{AwsAccountId}/namespaces/{Namespace}/users/{UserName}':
     delete:
       operationId: DeleteUser
-      description: '<p>Deletes the Amazon QuickSight user that is associated with the identity of the AWS Identity and Access Management (IAM) user or role that''s making the call. The IAM user isn''t deleted as a result of this call. </p> <p> <b>CLI Sample:</b> </p> <p> <code>aws quicksight delete-user --aws-account-id=111122223333 --namespace=default --user-name=Pat </code> </p>'
+      description: 'Deletes the Amazon QuickSight user that is associated with the identity of the AWS Identity and Access Management (IAM) user or role that''s making the call. The IAM user isn''t deleted as a result of this call. '
       responses:
         '200':
           description: Success
@@ -2867,7 +2867,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: DescribeUser
-      description: '<p>Returns information about a user, given the user name. </p> <p>The response is a user object that contains the user''s Amazon Resource Name (ARN), AWS Identity and Access Management (IAM) role, and email address. </p> <p> <b>CLI Sample:</b> </p> <p> <code>aws quicksight describe-user --aws-account-id=111122223333 --namespace=default --user-name=Pat </code> </p>'
+      description: 'Returns information about a user, given the user name. '
       responses:
         '200':
           description: Success
@@ -2922,7 +2922,7 @@ paths:
           maxLength: 64
     put:
       operationId: UpdateUser
-      description: '<p>Updates an Amazon QuickSight user.</p> <p>The response is a user object that contains the user''s Amazon QuickSight user name, email address, active or inactive status in Amazon QuickSight, Amazon QuickSight role, and Amazon Resource Name (ARN). </p> <p> <b>CLI Sample:</b> </p> <p> <code>aws quicksight update-user --user-name=Pat --role=ADMIN --email=new_address@example.com --aws-account-id=111122223333 --namespace=default --region=us-east-1 </code> </p>'
+      description: Updates an Amazon QuickSight user.
       responses:
         '200':
           description: Success
@@ -2999,7 +2999,7 @@ paths:
   '/accounts/{AwsAccountId}/namespaces/{Namespace}/user-principals/{PrincipalId}':
     delete:
       operationId: DeleteUserByPrincipalId
-      description: '<p>Deletes a user identified by its principal ID. </p> <p> <b>CLI Sample:</b> </p> <p> <code>aws quicksight delete-user-by-principal-id --aws-account-id=111122223333 --namespace=default --principal-id=ABCDEFJA26JLI7EUUOEHS </code> </p>'
+      description: 'Deletes a user identified by its principal ID. '
       responses:
         '200':
           description: Success
@@ -3061,7 +3061,7 @@ paths:
   '/accounts/{AwsAccountId}/dashboards/{DashboardId}/permissions':
     get:
       operationId: DescribeDashboardPermissions
-      description: '<p>Describes read and write permissions on a dashboard.</p> <p>CLI syntax:</p> <p> <code>aws quicksight describe-dashboard-permissions --aws-account-id 735340738645 —dashboard-id reports_test_bob_report</code> </p>'
+      description: Describes read and write permissions on a dashboard.
       responses:
         '200':
           description: Success
@@ -3114,7 +3114,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     put:
       operationId: UpdateDashboardPermissions
-      description: '<p>Updates read and write permissions on a dashboard.</p> <p>CLI syntax:</p> <p> <code>aws quicksight update-dashboard-permissions —cli-input-json file://update-permission.json</code> </p> <p>A sample update-permissions.json for granting read only permissions:</p> <p> <code>{ "AwsAccountId": "111122223333", "DashboardId": "reports_test_report", "GrantPermissions": [ { "Principal": "arn:aws:quicksight:us-east-1:111122223333:user/default/user2", "Actions": [ "quicksight:DescribeDashboard", "quicksight:ListDashboardVersions", "quicksight:DescribeDashboardVersion", "quicksight:QueryDashboard" ] } ] }</code> </p> <p>A sample update-permissions.json for granting read and write permissions:</p> <p> <code>{ "AwsAccountId": "111122223333", "DashboardId": "reports_test_report", "GrantPermissions": [ { "Principal": "arn:aws:quicksight:us-east-1:111122223333:user/default/user2", "Actions": [ "quicksight:DescribeDashboard", "quicksight:ListDashboardVersions", "quicksight:DescribeDashboardVersion", "quicksight:QueryDashboard", "quicksight:DescribeDashboardPermissions", "quicksight:UpdateDashboardPermissions", "quicksight:DeleteDashboardVersion", "quicksight:DeleteDashboard", "quicksight:UpdateDashboard", "quicksight:UpdateDashboardPublishedVersion", ] } ] }</code> </p> <p>A sample update-permissions.json for revoking write permissions:</p> <p> <code>{ "AwsAccountId": "111122223333", "DashboardId": "reports_test_report", "RevokePermissions": [ { "Principal": "arn:aws:quicksight:us-east-1:111122223333:user/default/user2", "Actions": [ "quicksight:DescribeDashboardPermissions", "quicksight:UpdateDashboardPermissions", "quicksight:DeleteDashboardVersion", "quicksight:DeleteDashboard", "quicksight:UpdateDashboard", "quicksight:UpdateDashboardPublishedVersion", ] } ] }</code> </p> <p>A sample update-permissions.json for revoking read and write permissions:</p> <p> <code>{ "AwsAccountId": "111122223333", "DashboardId": "reports_test_report", "RevokePermissions": [ { "Principal": "arn:aws:quicksight:us-east-1:111122223333:user/default/user2", "Actions": [ "quicksight:DescribeDashboard", "quicksight:ListDashboardVersions", "quicksight:DescribeDashboardVersion", "quicksight:QueryDashboard", "quicksight:DescribeDashboardPermissions", "quicksight:UpdateDashboardPermissions", "quicksight:DeleteDashboardVersion", "quicksight:DeleteDashboard", "quicksight:UpdateDashboard", "quicksight:UpdateDashboardPublishedVersion", ] } ] }</code> </p> <p>To obtain the principal name of a QuickSight user or group, you can use describe-group or describe-user. For example:</p> <p> <code>aws quicksight describe-user --aws-account-id 111122223333 --namespace default --user-name user2 --region us-east-1 { "User": { "Arn": "arn:aws:quicksight:us-east-1:111122223333:user/default/user2", "Active": true, "Email": "user2@example.com", "Role": "ADMIN", "UserName": "user2", "PrincipalId": "federated/iam/abcd2abcdabcdeabc5ab5" }, "RequestId": "8f74bb31-6291-448a-a71c-a765a44bae31", "Status": 200 }</code> </p>'
+      description: Updates read and write permissions on a dashboard.
       responses:
         '200':
           description: Success
@@ -3184,7 +3184,7 @@ paths:
   '/accounts/{AwsAccountId}/data-sets/{DataSetId}/permissions':
     get:
       operationId: DescribeDataSetPermissions
-      description: '<p>Describes the permissions on a dataset.</p> <p>The permissions resource is <code>arn:aws:quicksight:region:aws-account-id:dataset/data-set-id</code> </p> <p>CLI syntax: </p> <p> <code>aws quicksight describe-data-set-permissions \</code> </p> <p> <code>--aws-account-id=111122223333 \</code> </p> <p> <code>--data-set-id=unique-data-set-id \</code> </p>'
+      description: '<p>Describes the permissions on a dataset.</p> <p>The permissions resource is <code>arn:aws:quicksight:region:aws-account-id:dataset/data-set-id</code>.</p>'
       responses:
         '200':
           description: Success
@@ -3222,7 +3222,7 @@ paths:
         - name: DataSetId
           in: path
           required: true
-          description: The ID for the dataset you want to create. This is unique per region per AWS account.
+          description: The ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.
           type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
@@ -3234,7 +3234,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
       operationId: UpdateDataSetPermissions
-      description: '<p>Updates the permissions on a dataset.</p> <p>The permissions resource is <code>arn:aws:quicksight:region:aws-account-id:dataset/data-set-id</code> </p> <p>CLI syntax: </p> <p> <code>aws quicksight update-data-set-permissions \</code> </p> <p> <code>--aws-account-id=111122223333 \</code> </p> <p> <code>--data-set-id=unique-data-set-id \</code> </p> <p> <code>--grant-permissions=''[{"Principal":"arn:aws:quicksight:us-east-1:111122223333:user/default/user1","Actions":["quicksight:DescribeDataSet","quicksight:DescribeDataSetPermissions","quicksight:PassDataSet","quicksight:ListIngestions","quicksight:DescribeIngestion"]}]'' \</code> </p> <p> <code>--revoke-permissions=''[{"Principal":"arn:aws:quicksight:us-east-1:111122223333:user/default/user2","Actions":["quicksight:UpdateDataSet","quicksight:DeleteDataSet","quicksight:UpdateDataSetPermissions","quicksight:CreateIngestion","quicksight:CancelIngestion"]}]''</code> </p>'
+      description: '<p>Updates the permissions on a dataset.</p> <p>The permissions resource is <code>arn:aws:quicksight:region:aws-account-id:dataset/data-set-id</code>.</p>'
       responses:
         '200':
           description: Success
@@ -3276,7 +3276,7 @@ paths:
         - name: DataSetId
           in: path
           required: true
-          description: The ID for the dataset you want to create. This is unique per region per AWS account.
+          description: The ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.
           type: string
         - name: body
           in: body
@@ -3301,7 +3301,7 @@ paths:
   '/accounts/{AwsAccountId}/data-sources/{DataSourceId}/permissions':
     get:
       operationId: DescribeDataSourcePermissions
-      description: '<p>Describes the resource permissions for a data source.</p> <p>The permissions resource is <code>aws:quicksight:region:aws-account-id:datasource/data-source-id</code> </p>'
+      description: Describes the resource permissions for a data source.
       responses:
         '200':
           description: Success
@@ -3339,7 +3339,7 @@ paths:
         - name: DataSourceId
           in: path
           required: true
-          description: The ID of the data source. This is unique per AWS Region per AWS account.
+          description: The ID of the data source. This ID is unique per AWS Region for each AWS account.
           type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
@@ -3351,7 +3351,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
       operationId: UpdateDataSourcePermissions
-      description: '<p>Updates the permissions to a data source.</p> <p>The permissions resource is <code>arn:aws:quicksight:region:aws-account-id:datasource/data-source-id</code> </p> <p>CLI syntax:</p> <p> <code>aws quicksight update-data-source-permissions \</code> </p> <p> <code>--aws-account-id=111122223333 \</code> </p> <p> <code>--data-source-id=unique-data-source-id \</code> </p> <p> <code>--name=''My Data Source'' \</code> </p> <p> <code>--grant-permissions=''[{"Principal":"arn:aws:quicksight:us-east-1:111122223333:user/default/user1","Actions":["quicksight:DescribeDataSource","quicksight:DescribeDataSourcePermissions","quicksight:PassDataSource"]}]'' \</code> </p> <p> <code>--revoke-permissions=''[{"Principal":"arn:aws:quicksight:us-east-1:111122223333:user/default/user2","Actions":["quicksight:UpdateDataSource","quicksight:DeleteDataSource","quicksight:UpdateDataSourcePermissions"]}]''</code> </p>'
+      description: Updates the permissions to a data source.
       responses:
         '200':
           description: Success
@@ -3393,7 +3393,7 @@ paths:
         - name: DataSourceId
           in: path
           required: true
-          description: 'The ID of the data source. This is unique per AWS Region per AWS account. '
+          description: 'The ID of the data source. This ID is unique per AWS Region for each AWS account. '
           type: string
         - name: body
           in: body
@@ -3418,7 +3418,7 @@ paths:
   '/accounts/{AwsAccountId}/namespaces/{Namespace}/iam-policy-assignments/{AssignmentName}':
     get:
       operationId: DescribeIAMPolicyAssignment
-      description: '<p>Describes an existing IAMPolicy Assignment by specified assignment name.</p> <p>CLI syntax:</p> <p> <code>aws quicksight describe-iam-policy-assignment --aws-account-id=111122223333 --assignment-name=testtest --namespace=default --region=us-east-1 </code> </p>'
+      description: Describes an existing IAMPolicy Assignment by specified assignment name.
       responses:
         '200':
           description: Success
@@ -3481,7 +3481,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     put:
       operationId: UpdateIAMPolicyAssignment
-      description: '<p>Updates an existing assignment. This operation updates only the optional parameter or parameters that are specified in the request.</p> <p>CLI syntax:</p> <p> <code/>aws quicksight update-iam-policy-assignment --aws-account-id=111122223333 --assignment-name=FullAccessAssignment --assignment-status=DRAFT --policy-arns=arn:aws:iam::aws:policy/AdministratorAccess --identities="user=user-1,user-2,group=admin" --namespace=default --region=us-east-1</p>'
+      description: Updates an existing assignment. This operation updates only the optional parameter or parameters that are specified in the request.
       responses:
         '200':
           description: Success
@@ -3552,7 +3552,7 @@ paths:
                   - DRAFT
                   - DISABLED
               PolicyArn:
-                description: An IAM policy ARN that will be applied to specified QuickSight users and groups in this assignment.
+                description: An IAM policy Amazon Resource Name (ARN) that will be applied to specified QuickSight users and groups in this assignment.
                 type: string
               Identities:
                 description: QuickSight users and/or groups that you want to assign to the specified IAM policy.
@@ -3562,7 +3562,7 @@ paths:
   '/accounts/{AwsAccountId}/templates/{TemplateId}/permissions':
     get:
       operationId: DescribeTemplatePermissions
-      description: '<p>Describes read and write permissions on a template.</p> <p>CLI syntax:</p> <p> <code>aws quicksight describe-template-permissions —aws-account-id 735340738645 —template-id reports_test_template</code> </p>'
+      description: Describes read and write permissions on a template.
       responses:
         '200':
           description: Success
@@ -3619,7 +3619,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     put:
       operationId: UpdateTemplatePermissions
-      description: '<p>Updates the permissions on a template.</p> <p>CLI syntax:</p> <ul> <li> <p> <code>aws quicksight describe-template-permissions —aws-account-id 111122223333 —template-id reports_test_template</code> </p> </li> <li> <p> <code>aws quicksight update-template-permissions —cli-input-json file://update-permission.json </code> </p> </li> <li> <p>The structure of <code>update-permissions.json</code> to add permissions:</p> <p> <code>{ "AwsAccountId": "111122223333",</code> </p> <p> <code> "DashboardId": "reports_test_template",</code> </p> <p> <code> "GrantPermissions": [</code> </p> <p> <code> { "Principal": "arn:aws:quicksight:us-east-1:196359894473:user/default/user3",</code> </p> <p> <code> "Actions": [</code> </p> <p> <code> "quicksight:DescribeTemplate",</code> </p> <p> <code> "quicksight:ListTemplateVersions"</code> </p> <p> <code> ] } ] }</code> </p> <p>The structure of <code>update-permissions.json</code> to add permissions:</p> <p> <code>{ "AwsAccountId": "111122223333",</code> </p> <p> <code> "DashboardId": "reports_test_template",</code> </p> <p> <code> "RevokePermissions": [</code> </p> <p> <code> { "Principal": "arn:aws:quicksight:us-east-1:196359894473:user/default/user3",</code> </p> <p> <code> "Actions": [</code> </p> <p> <code> "quicksight:DescribeTemplate",</code> </p> <p> <code> "quicksight:ListTemplateVersions"</code> </p> <p> <code> ] } ] }</code> </p> <p>To obtain the principal name of a QuickSight group or user, use user describe-group or describe-user. For example:</p> <p> <code>aws quicksight describe-user </code> </p> <p> <code>--aws-account-id 111122223333</code> </p> <p> <code>--namespace default</code> </p> <p> <code>--user-name user2 </code> </p> <p> <code>--region us-east-1</code> </p> <p> <code>{</code> </p> <p> <code> "User": {</code> </p> <p> <code> "Arn": "arn:aws:quicksight:us-east-1:111122223333:user/default/user2",</code> </p> <p> <code> "Active": true,</code> </p> <p> <code> "Email": "user2@example.com",</code> </p> <p> <code> "Role": "ADMIN",</code> </p> <p> <code> "UserName": "user2",</code> </p> <p> <code> "PrincipalId": "federated/iam/abcd2abcdabcdeabc5ab5"</code> </p> <p> <code> },</code> </p> <p> <code> "RequestId": "8f74bb31-6291-448a-a71c-a765a44bae31",</code> </p> <p> <code> "Status": 200</code> </p> <p> <code>}</code> </p> </li> </ul>'
+      description: Updates the permissions on a template.
       responses:
         '200':
           description: Success
@@ -3673,14 +3673,14 @@ paths:
             type: object
             properties:
               GrantPermissions:
-                description: '<p>A list of resource permissions to be granted on the template. The following example shows the shorthand syntax: </p> <p> <code>Shorthand Syntax: Principal=string,Actions=string,string ... </code> </p>'
+                description: 'A list of resource permissions to be granted on the template. '
                 type: array
                 items:
                   $ref: '#/definitions/ResourcePermission'
                 minItems: 1
                 maxItems: 100
               RevokePermissions:
-                description: 'A list of resource permissions to be revoked from the template. Shorthand syntax: <code>Shorthand Syntax: Principal=string,Actions=string,string ... </code> '
+                description: 'A list of resource permissions to be revoked from the template. '
                 type: array
                 items:
                   $ref: '#/definitions/ResourcePermission'
@@ -3689,7 +3689,7 @@ paths:
   '/accounts/{AwsAccountId}/dashboards/{DashboardId}/embed-url#creds-type':
     get:
       operationId: GetDashboardEmbedUrl
-      description: '<p>Generates a server-side embeddable URL and authorization code. Before this can work properly, first you need to configure the dashboards and user permissions. For more information, see <a href="https://docs.aws.example.com/en_us/quicksight/latest/user/embedding.html"> Embedding Amazon QuickSight Dashboards</a>.</p> <p>Currently, you can use <code>GetDashboardEmbedURL</code> only from the server, not from the user’s browser.</p> <p> <b>CLI Sample:</b> </p> <p>Assume the role with permissions enabled for actions: <code>quickSight:RegisterUser</code> and <code>quicksight:GetDashboardEmbedURL</code>. You can use assume-role, assume-role-with-web-identity, or assume-role-with-saml. </p> <p> <code>aws sts assume-role --role-arn "arn:aws:iam::111122223333:role/embedding_quicksight_dashboard_role" --role-session-name embeddingsession</code> </p> <p>If the user does not exist in QuickSight, register the user:</p> <p> <code>aws quicksight register-user --aws-account-id 111122223333 --namespace default --identity-type IAM --iam-arn "arn:aws:iam::111122223333:role/embedding_quicksight_dashboard_role" --user-role READER --session-name "embeddingsession" --email user123@example.com --region us-east-1</code> </p> <p>Get the URL for the embedded dashboard (<code>IAM</code> identity authentication):</p> <p> <code>aws quicksight get-dashboard-embed-url --aws-account-id 111122223333 --dashboard-id 1a1ac2b2-3fc3-4b44-5e5d-c6db6778df89 --identity-type IAM</code> </p> <p>Get the URL for the embedded dashboard (<code>QUICKSIGHT</code> identity authentication):</p> <p> <code>aws quicksight get-dashboard-embed-url --aws-account-id 111122223333 --dashboard-id 1a1ac2b2-3fc3-4b44-5e5d-c6db6778df89 --identity-type QUICKSIGHT --user-arn arn:aws:quicksight:us-east-1:111122223333:user/default/embedding_quicksight_dashboard_role/embeddingsession</code> </p>'
+      description: '<p>Generates a server-side embeddable URL and authorization code. Before this can work properly, first you need to configure the dashboards and user permissions. For more information, see the Amazon QuickSight User Guide section on <a href="https://docs.aws.amazon.com/quicksight/latest/user/embedding-dashboards.html">Embedding Amazon QuickSight Dashboards</a> or see the Amazon QuickSight API Reference section on <a href="https://docs.aws.amazon.com/quicksight/latest/APIReference/qs-dev-embedded-dashboards.html">Embedding Amazon QuickSight Dashboards</a> .</p> <p>Currently, you can use <code>GetDashboardEmbedURL</code> only from the server, not from the user’s browser.</p>'
       responses:
         '200':
           description: Success
@@ -3759,7 +3759,7 @@ paths:
         - name: creds-type
           in: query
           required: true
-          description: The authentication method the user uses to sign in (IAM only).
+          description: The authentication method the user uses to sign in.
           type: string
           enum:
             - IAM
@@ -3784,7 +3784,7 @@ paths:
         - name: user-arn
           in: query
           required: false
-          description: '<p>The Amazon QuickSight user''s ARN, for use with <code>QUICKSIGHT</code> identity type. You can use this for any Amazon QuickSight users in your account (readers, authors, or admins) authenticated as one of the following:</p> <ul> <li> <p>Active Directory (AD) users or group members</p> </li> <li> <p>Invited non-federated users</p> </li> <li> <p>IAM users and IAM role-based sessions authenticated through Federated Single Sign-On using SAML, OpenID Connect, or IAM Federation</p> </li> </ul>'
+          description: '<p>The Amazon QuickSight user''s Amazon Resource Name (ARN), for use with <code>QUICKSIGHT</code> identity type. You can use this for any Amazon QuickSight users in your account (readers, authors, or admins) authenticated as one of the following:</p> <ul> <li> <p>Active Directory (AD) users or group members</p> </li> <li> <p>Invited non-federated users</p> </li> <li> <p>IAM users and IAM role-based sessions authenticated through Federated Single Sign-On using SAML, OpenID Connect, or IAM Federation</p> </li> </ul>'
           type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
@@ -3797,7 +3797,7 @@ paths:
   '/accounts/{AwsAccountId}/dashboards/{DashboardId}/versions':
     get:
       operationId: ListDashboardVersions
-      description: '<p>Lists all the versions of the dashboards in the Quicksight subscription.</p> <p>CLI syntax:</p> <p>aws quicksight list-template-versions —aws-account-id 111122223333 —template-id reports-test-template</p>'
+      description: Lists all the versions of the dashboards in the Quicksight subscription.
       responses:
         '200':
           description: Success
@@ -3877,7 +3877,7 @@ paths:
   '/accounts/{AwsAccountId}/dashboards':
     get:
       operationId: ListDashboards
-      description: '<p>Lists dashboards in the AWS account.</p> <p>CLI syntax:</p> <p> <code>aws quicksight list-dashboards --aws-account-id 111122223333 --max-results 5 —next-token ''next-10''</code> </p>'
+      description: Lists dashboards in the AWS account.
       responses:
         '200':
           description: Success
@@ -3941,7 +3941,7 @@ paths:
   '/accounts/{AwsAccountId}/namespaces/{Namespace}/groups/{GroupName}/members':
     get:
       operationId: ListGroupMemberships
-      description: '<p>Lists member users in a group.</p> <p>The permissions resource is <code>arn:aws:quicksight:us-east-1:<i>&lt;aws-account-id&gt;</i>:group/default/<i>&lt;group-name&gt;</i> </code>.</p> <p>The response is a list of group member objects.</p> <p> <b>CLI Sample:</b> </p> <p> <code>aws quicksight list-group-memberships -\-aws-account-id=111122223333 -\-namespace=default </code> </p>'
+      description: Lists member users in a group.
       responses:
         '200':
           description: Success
@@ -4025,7 +4025,7 @@ paths:
   '/accounts/{AwsAccountId}/namespaces/{Namespace}/iam-policy-assignments':
     get:
       operationId: ListIAMPolicyAssignments
-      description: '<p>Lists assignments in current QuickSight account.</p> <p>CLI syntax:</p> <p> <code>aws quicksight list-iam-policy-assignments --aws-account-id=111122223333 --max-result=5 --assignment-status=ENABLED --namespace=default --region=us-east-1 --next-token=3 </code> </p>'
+      description: Lists assignments in current QuickSight account.
       responses:
         '200':
           description: Success
@@ -4107,7 +4107,7 @@ paths:
   '/accounts/{AwsAccountId}/namespaces/{Namespace}/users/{UserName}/iam-policy-assignments':
     get:
       operationId: ListIAMPolicyAssignmentsForUser
-      description: '<p>Lists all the assignments and the ARNs for the associated IAM policies assigned to the specified user and the group or groups that the user belongs to.</p> <p>CLI syntax:</p> <p> <code>aws quicksight list-iam-policy-assignments-for-user --aws-account-id=111122223333 --user-name=user5 --namespace=default --max-result=6 --region=us-east-1 </code> </p>'
+      description: Lists all the assignments and the Amazon Resource Names (ARNs) for the associated IAM policies assigned to the specified user and the group or groups that the user belongs to.
       responses:
         '200':
           description: Success
@@ -4268,7 +4268,7 @@ paths:
   '/resources/{ResourceArn}/tags':
     get:
       operationId: ListTagsForResource
-      description: '<p>Lists the tags assigned to a resource.</p> <p>CLI syntax:</p> <ul> <li> <p> <code>aws quicksight list-tags-for-resource --resource-arn arn:aws:quicksight:us-east-1:111111111111:dataset/dataset1 --region us-east-1</code> </p> </li> </ul>'
+      description: Lists the tags assigned to a resource.
       responses:
         '200':
           description: Success
@@ -4298,7 +4298,7 @@ paths:
         - name: ResourceArn
           in: path
           required: true
-          description: The ARN of the resource you want a list of tags for.
+          description: The Amazon Resource Name (ARN) of the resource that you want a list of tags for.
           type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
@@ -4310,7 +4310,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
       operationId: TagResource
-      description: '<p>Assigns a tag or tags to a resource.</p> <p>Assigns one or more tags (key-value pairs) to the specified QuickSight resource. Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. You can use the TagResource action with a resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag.</p> <p>You can associate as many as 50 tags with a resource. QuickSight supports tagging on data-set, data-source, dashboard, template. </p> <p>Tagging for QuickSight works in a similar was to tagging for other AWS services, except for the following:</p> <ul> <li> <p>You can''t use tags to track AWS costs for QuickSight, because QuickSight costs are based on users and SPICE capacity, which aren''t taggable resources.</p> </li> <li> <p>QuickSight doesn''t currently support the Tag Editor for AWS Resource Groups.</p> </li> </ul> <p>CLI syntax to tag a resource:</p> <ul> <li> <p> <code>aws quicksight tag-resource --resource-arn arn:aws:quicksight:us-east-1:111111111111:dataset/dataset1 --tags Key=K1,Value=V1 Key=K2,Value=V2 --region us-east-1</code> </p> </li> </ul>'
+      description: '<p>Assigns one or more tags (key-value pairs) to the specified QuickSight resource. </p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. You can use the <code>TagResource</code> operation with a resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag.</p> <p>You can associate as many as 50 tags with a resource. QuickSight supports tagging on data set, data source, dashboard, and template. </p> <p>Tagging for QuickSight works in a similar way to tagging for other AWS services, except for the following:</p> <ul> <li> <p>You can''t use tags to track AWS costs for QuickSight. This restriction is because QuickSight costs are based on users and SPICE capacity, which aren''t taggable resources.</p> </li> <li> <p>QuickSight doesn''t currently support the Tag Editor for AWS Resource Groups.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -4344,7 +4344,7 @@ paths:
         - name: ResourceArn
           in: path
           required: true
-          description: The ARN of the resource you want to tag.
+          description: The Amazon Resource Name (ARN) of the resource that you want to tag.
           type: string
         - name: body
           in: body
@@ -4364,7 +4364,7 @@ paths:
   '/accounts/{AwsAccountId}/templates/{TemplateId}/aliases':
     get:
       operationId: ListTemplateAliases
-      description: '<p>Lists all the aliases of a template.</p> <p>CLI syntax:</p> <p> <code>aws quicksight list-template-aliases --aws-account-id 111122223333 —template-id ''reports_test_template''</code> </p>'
+      description: Lists all the aliases of a template.
       responses:
         '200':
           description: Success
@@ -4436,7 +4436,7 @@ paths:
   '/accounts/{AwsAccountId}/templates/{TemplateId}/versions':
     get:
       operationId: ListTemplateVersions
-      description: '<p>Lists all the versions of the templates in the Quicksight account.</p> <p>CLI syntax:</p> <p>aws quicksight list-template-versions --aws-account-id 111122223333 --aws-account-id 196359894473 --template-id reports-test-template</p>'
+      description: Lists all the versions of the templates in the Quicksight account.
       responses:
         '200':
           description: Success
@@ -4516,7 +4516,7 @@ paths:
   '/accounts/{AwsAccountId}/templates':
     get:
       operationId: ListTemplates
-      description: '<p>Lists all the templates in the QuickSight account.</p> <p>CLI syntax:</p> <p> <code>aws quicksight list-templates --aws-account-id 111122223333 --max-results 1 —next-token AYADeJuxwOypAndSoOn</code> </p>'
+      description: Lists all the templates in the QuickSight account.
       responses:
         '200':
           description: Success
@@ -4588,7 +4588,7 @@ paths:
   '/accounts/{AwsAccountId}/namespaces/{Namespace}/users/{UserName}/groups':
     get:
       operationId: ListUserGroups
-      description: '<p>Lists the Amazon QuickSight groups that an Amazon QuickSight user is a member of.</p> <p>The response is a one or more group objects. </p> <p> <b>CLI Sample:</b> </p> <p> <code>aws quicksight list-user-groups -\-user-name=Pat -\-aws-account-id=111122223333 -\-namespace=default -\-region=us-east-1 </code> </p>'
+      description: Lists the Amazon QuickSight groups that an Amazon QuickSight user is a member of.
       responses:
         '200':
           description: Success
@@ -4664,7 +4664,7 @@ paths:
   '/accounts/{AwsAccountId}/namespaces/{Namespace}/users':
     get:
       operationId: ListUsers
-      description: '<p>Returns a list of all of the Amazon QuickSight users belonging to this account. </p> <p>The response is a list of user objects, containing each user''s Amazon Resource Name (ARN), AWS Identity and Access Management (IAM) role, and email address. </p> <p> <b>CLI Sample:</b> </p> <p> <code>aws quicksight list-users --aws-account-id=111122223333 --namespace=default </code> </p>'
+      description: 'Returns a list of all of the Amazon QuickSight users belonging to this account. '
       responses:
         '200':
           description: Success
@@ -4736,7 +4736,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
       operationId: RegisterUser
-      description: '<p>Creates an Amazon QuickSight user, whose identity is associated with the AWS Identity and Access Management (IAM) identity or role specified in the request. </p> <p> <b>CLI Sample:</b> </p> <p> <code>aws quicksight register-user -\-aws-account-id=111122223333 -\-namespace=default -\-email=pat@example.com -\-identity-type=IAM -\-user-role=AUTHOR -\-iam-arn=arn:aws:iam::111122223333:user/Pat </code> </p>'
+      description: 'Creates an Amazon QuickSight user, whose identity is associated with the AWS Identity and Access Management (IAM) identity or role specified in the request. '
       responses:
         '200':
           description: Success
@@ -4839,7 +4839,7 @@ paths:
   '/resources/{ResourceArn}/tags#keys':
     delete:
       operationId: UntagResource
-      description: '<p>Removes a tag or tags from a resource.</p> <p>CLI syntax:</p> <ul> <li> <p> <code>aws quicksight untag-resource --resource-arn arn:aws:quicksight:us-east-1:111111111111:dataset/dataset1 --tag-keys K1 K2 --region us-east-1</code> </p> </li> </ul>'
+      description: Removes a tag or tags from a resource.
       responses:
         '200':
           description: Success
@@ -4869,7 +4869,7 @@ paths:
         - name: ResourceArn
           in: path
           required: true
-          description: The ARN of the resource you to untag.
+          description: The Amazon Resource Name (ARN) of the resource that you want to untag.
           type: string
         - name: keys
           in: query
@@ -4889,7 +4889,7 @@ paths:
   '/accounts/{AwsAccountId}/dashboards/{DashboardId}/versions/{VersionNumber}':
     put:
       operationId: UpdateDashboardPublishedVersion
-      description: '<p>Updates the published version of a dashboard.</p> <p>CLI syntax:</p> <p> <code>aws quicksight update-dashboard-published-version --aws-account-id 111122223333 --dashboard-id dashboard-w1 ---version-number 2</code> </p>'
+      description: Updates the published version of a dashboard.
       responses:
         '200':
           description: Success
@@ -4965,7 +4965,7 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   AccessDeniedException: {}
   InvalidParameterValueException: {}
   ResourceNotFoundException: {}
@@ -4977,7 +4977,7 @@ definitions:
     properties:
       Arn:
         $ref: '#/definitions/Arn'
-        description: The ARN of the dashboard.
+        description: The Amazon Resource Name (ARN) of the dashboard.
       VersionArn:
         $ref: '#/definitions/Arn'
         description: 'The ARN of the dashboard, including the version number of the first version that is created.'
@@ -4989,7 +4989,7 @@ definitions:
         description: The creation status of the dashboard create request.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
       RequestId:
         $ref: '#/definitions/String'
         description: The AWS request ID for this operation.
@@ -5021,7 +5021,7 @@ definitions:
     properties:
       Principal:
         $ref: '#/definitions/Principal'
-        description: 'The ARN of a QuickSight user or group, or an IAM ARN. If you are using cross-account resource sharing, this is the IAM ARN of an account root. Otherwise, it is the ARN of a QuickSight user or group. .'
+        description: 'The Amazon Resource Name (ARN) of a QuickSight user or group, or an IAM ARN. If you are using cross-account resource sharing, this is the IAM ARN of an account root. Otherwise, it is the ARN of a QuickSight user or group. .'
       Actions:
         $ref: '#/definitions/ActionList'
         description: 'The action to grant or revoke permissions on. For example, "quicksight:DescribeDashboard".'
@@ -5058,7 +5058,7 @@ definitions:
       AvailabilityStatus:
         $ref: '#/definitions/DashboardBehavior'
         description: Availability status.
-    description: Ad hoc filtering option.
+    description: Ad hoc (one-time) filtering option.
   ExportToCSVOption:
     type: object
     properties:
@@ -5080,13 +5080,13 @@ definitions:
     properties:
       Arn:
         $ref: '#/definitions/Arn'
-        description: The ARN of the dataset.
+        description: The Amazon Resource Name (ARN) of the dataset.
       DataSetId:
         $ref: '#/definitions/ResourceId'
-        description: The ID for the dataset you want to create. This is unique per region per AWS account.
+        description: The ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.
       IngestionArn:
         $ref: '#/definitions/Arn'
-        description: 'The Amazon Resource Name (ARN) for the ingestion, which is triggered as a result of dataset creation if the import mode is SPICE'
+        description: 'The ARN for the ingestion, which is triggered as a result of dataset creation if the import mode is SPICE'
       IngestionId:
         $ref: '#/definitions/ResourceId'
         description: 'The ID of the ingestion, which is triggered as a result of dataset creation if the import mode is SPICE'
@@ -5095,7 +5095,7 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   PhysicalTable:
     type: object
     properties:
@@ -5145,10 +5145,10 @@ definitions:
     properties:
       Arn:
         $ref: '#/definitions/Arn'
-        description: The ARN of the data source.
+        description: The Amazon Resource Name (ARN) of the data source.
       DataSourceId:
         $ref: '#/definitions/ResourceId'
-        description: The ID of the data source. This is unique per AWS Region per AWS account.
+        description: The ID of the data source. This ID is unique per AWS Region for each AWS account.
       CreationStatus:
         $ref: '#/definitions/ResourceStatus'
         description: The status of creating the data source.
@@ -5157,7 +5157,7 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   AmazonElasticsearchParameters:
     type: object
     required:
@@ -5165,15 +5165,15 @@ definitions:
     properties:
       Domain:
         $ref: '#/definitions/Domain'
-        description: The Amazon Elasticsearch domain.
-    description: Amazon Elasticsearch parameters.
+        description: The Amazon Elasticsearch Service domain.
+    description: Amazon Elasticsearch Service parameters.
   AthenaParameters:
     type: object
     properties:
       WorkGroup:
         $ref: '#/definitions/WorkGroup'
-        description: The workgroup that Athena uses.
-    description: Athena parameters.
+        description: The workgroup that Amazon Athena uses.
+    description: Amazon Athena parameters.
   AuroraParameters:
     type: object
     required:
@@ -5190,7 +5190,7 @@ definitions:
       Database:
         $ref: '#/definitions/Database'
         description: Database.
-    description: Aurora parameters.
+    description: Amazon Aurora parameters.
   AuroraPostgreSqlParameters:
     type: object
     required:
@@ -5207,7 +5207,7 @@ definitions:
       Database:
         $ref: '#/definitions/Database'
         description: Database.
-    description: Aurora PostgreSQL parameters.
+    description: Amazon Aurora with PostgreSQL compatibility parameters.
   AwsIotAnalyticsParameters:
     type: object
     required:
@@ -5446,7 +5446,7 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
     description: The response object for this operation.
   PreconditionNotMetException: {}
   ResourceUnavailableException: {}
@@ -5461,7 +5461,7 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   CreateIAMPolicyAssignmentResponse:
     type: object
     properties:
@@ -5476,7 +5476,7 @@ definitions:
         description: '<p>The status of an assignment:</p> <ul> <li> <p>ENABLED - Anything specified in this assignment is used while creating the data source.</p> </li> <li> <p>DISABLED - This assignment isn''t used while creating the data source.</p> </li> <li> <p>DRAFT - Assignment is an unfinished draft and isn''t used while creating the data source.</p> </li> </ul>'
       PolicyArn:
         $ref: '#/definitions/Arn'
-        description: An IAM policy ARN that is applied to the QuickSight users and groups specified in this assignment.
+        description: An IAM policy Amazon Resource Name (ARN) that is applied to the QuickSight users and groups specified in this assignment.
       Identities:
         $ref: '#/definitions/IdentityMap'
         description: QuickSight users and/or groups that are assigned to the IAM policy.
@@ -5485,7 +5485,7 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   IdentityNameList:
     type: array
     items:
@@ -5508,7 +5508,7 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   CreateTemplateResponse:
     type: object
     properties:
@@ -5517,7 +5517,7 @@ definitions:
         description: The Amazon Resource Name (ARN) for the template.
       VersionArn:
         $ref: '#/definitions/Arn'
-        description: 'The Amazon Resource Name (ARN) for the template, including the version information of the first version.'
+        description: 'The ARN for the template, including the version information of the first version.'
       TemplateId:
         $ref: '#/definitions/RestrictiveResourceId'
         description: The ID of the template.
@@ -5526,7 +5526,7 @@ definitions:
         description: The template creation status.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
       RequestId:
         $ref: '#/definitions/String'
         description: The AWS request ID for this operation.
@@ -5560,7 +5560,7 @@ definitions:
         description: Information on the template alias.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
       RequestId:
         $ref: '#/definitions/String'
         description: The AWS request ID for this operation.
@@ -5569,10 +5569,10 @@ definitions:
     properties:
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
       Arn:
         $ref: '#/definitions/Arn'
-        description: The ARN of the resource.
+        description: The Secure Socket Layer (SSL) properties that apply. of the resource.
       DashboardId:
         $ref: '#/definitions/RestrictiveResourceId'
         description: The ID of the dashboard.
@@ -5584,31 +5584,31 @@ definitions:
     properties:
       Arn:
         $ref: '#/definitions/Arn'
-        description: The ARN of the dataset.
+        description: The Amazon Resource Name (ARN) of the dataset.
       DataSetId:
         $ref: '#/definitions/ResourceId'
-        description: The ID for the dataset you want to create. This is unique per region per AWS account.
+        description: The ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.
       RequestId:
         $ref: '#/definitions/String'
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   DeleteDataSourceResponse:
     type: object
     properties:
       Arn:
         $ref: '#/definitions/Arn'
-        description: The ARN of the data source you deleted.
+        description: The Amazon Resource Name (ARN) of the data source that you deleted.
       DataSourceId:
         $ref: '#/definitions/ResourceId'
-        description: The ID of the data source. This is unique per AWS Region per AWS account.
+        description: The ID of the data source. This ID is unique per AWS Region for each AWS account.
       RequestId:
         $ref: '#/definitions/String'
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   DeleteGroupResponse:
     type: object
     properties:
@@ -5617,7 +5617,7 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   DeleteGroupMembershipResponse:
     type: object
     properties:
@@ -5626,7 +5626,7 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   DeleteIAMPolicyAssignmentResponse:
     type: object
     properties:
@@ -5638,7 +5638,7 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   DeleteTemplateResponse:
     type: object
     properties:
@@ -5647,19 +5647,19 @@ definitions:
         description: The AWS request ID for this operation.
       Arn:
         $ref: '#/definitions/Arn'
-        description: The ARN of the resource.
+        description: The Amazon Resource Name (ARN) of the resource.
       TemplateId:
         $ref: '#/definitions/RestrictiveResourceId'
         description: An ID for the template.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   DeleteTemplateAliasResponse:
     type: object
     properties:
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
       TemplateId:
         $ref: '#/definitions/RestrictiveResourceId'
         description: An ID for the template.
@@ -5668,7 +5668,7 @@ definitions:
         description: The name of the alias.
       Arn:
         $ref: '#/definitions/Arn'
-        description: The ARN of the resource.
+        description: The Amazon Resource Name (ARN) of the resource.
       RequestId:
         $ref: '#/definitions/String'
         description: The AWS request ID for this operation.
@@ -5680,7 +5680,7 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   DeleteUserByPrincipalIdResponse:
     type: object
     properties:
@@ -5689,7 +5689,7 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   DescribeDashboardResponse:
     type: object
     properties:
@@ -5710,13 +5710,13 @@ definitions:
         description: The ID for the dashboard.
       DashboardArn:
         $ref: '#/definitions/Arn'
-        description: The ARN of the dashboard.
+        description: The Amazon Resource Name (ARN) of the dashboard.
       Permissions:
         $ref: '#/definitions/ResourcePermissionList'
         description: A structure that contains the permissions of the dashboard.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
       RequestId:
         $ref: '#/definitions/String'
         description: The AWS request ID for this operation.
@@ -5731,16 +5731,16 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   DescribeDataSetPermissionsResponse:
     type: object
     properties:
       DataSetArn:
         $ref: '#/definitions/Arn'
-        description: The ARN of the dataset.
+        description: The Amazon Resource Name (ARN) of the dataset.
       DataSetId:
         $ref: '#/definitions/ResourceId'
-        description: The ID for the dataset you want to create. This is unique per region per AWS account.
+        description: The ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.
       Permissions:
         $ref: '#/definitions/ResourcePermissionList'
         description: A list of resource permissions on the dataset.
@@ -5749,7 +5749,7 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   DescribeDataSourceResponse:
     type: object
     properties:
@@ -5761,16 +5761,16 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   DescribeDataSourcePermissionsResponse:
     type: object
     properties:
       DataSourceArn:
         $ref: '#/definitions/Arn'
-        description: The ARN of the data source.
+        description: The Amazon Resource Name (ARN) of the data source.
       DataSourceId:
         $ref: '#/definitions/ResourceId'
-        description: The ID of the data source. This is unique per AWS Region per AWS account.
+        description: The ID of the data source. This ID is unique per AWS Region for each AWS account.
       Permissions:
         $ref: '#/definitions/ResourcePermissionList'
         description: A list of resource permissions on the data source.
@@ -5779,7 +5779,7 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   DescribeGroupResponse:
     type: object
     properties:
@@ -5791,7 +5791,7 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   DescribeIAMPolicyAssignmentResponse:
     type: object
     properties:
@@ -5803,7 +5803,7 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   InvalidNextTokenException: {}
   DescribeIngestionResponse:
     type: object
@@ -5816,7 +5816,7 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   DescribeTemplateResponse:
     type: object
     properties:
@@ -5825,7 +5825,7 @@ definitions:
         description: The template structure of the object you want to describe.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   DescribeTemplateAliasResponse:
     type: object
     properties:
@@ -5834,7 +5834,7 @@ definitions:
         description: Information about the template alias.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
       RequestId:
         $ref: '#/definitions/String'
         description: The AWS request ID for this operation.
@@ -5846,7 +5846,7 @@ definitions:
         description: The ID for the template.
       TemplateArn:
         $ref: '#/definitions/Arn'
-        description: The ARN of the template.
+        description: The Amazon Resource Name (ARN) of the template.
       Permissions:
         $ref: '#/definitions/ResourcePermissionList'
         description: 'A list of resource permissions to be set on the template. '
@@ -5855,7 +5855,7 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   DescribeUserResponse:
     type: object
     properties:
@@ -5867,7 +5867,7 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   GetDashboardEmbedUrlResponse:
     type: object
     properties:
@@ -5876,7 +5876,7 @@ definitions:
         description: 'URL that you can put into your server-side webpage to embed your dashboard. This URL is valid for 5 minutes, and the resulting session is valid for 10 hours. The API provides the URL with an auth_code that enables a single-signon session. '
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
       RequestId:
         $ref: '#/definitions/String'
         description: The AWS request ID for this operation.
@@ -5895,7 +5895,7 @@ definitions:
         description: 'The token for the next set of results, or null if there are no more results.'
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
       RequestId:
         $ref: '#/definitions/String'
         description: The AWS request ID for this operation.
@@ -5910,7 +5910,7 @@ definitions:
         description: 'The token for the next set of results, or null if there are no more results.'
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
       RequestId:
         $ref: '#/definitions/String'
         description: The AWS request ID for this operation.
@@ -5928,7 +5928,7 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   ListDataSourcesResponse:
     type: object
     properties:
@@ -5943,7 +5943,7 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   ListGroupMembershipsResponse:
     type: object
     properties:
@@ -5958,7 +5958,7 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   ListGroupsResponse:
     type: object
     properties:
@@ -5973,7 +5973,7 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   ListIAMPolicyAssignmentsResponse:
     type: object
     properties:
@@ -5988,7 +5988,7 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   ListIAMPolicyAssignmentsForUserResponse:
     type: object
     properties:
@@ -6003,7 +6003,7 @@ definitions:
         description: 'The token for the next set of results, or null if there are no more results.'
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   ListIngestionsResponse:
     type: object
     properties:
@@ -6018,7 +6018,7 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   ListTagsForResourceResponse:
     type: object
     properties:
@@ -6030,16 +6030,16 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   ListTemplateAliasesResponse:
     type: object
     properties:
       TemplateAliasList:
         $ref: '#/definitions/TemplateAliasList'
-        description: A structure containing the list of template aliases.
+        description: A structure containing the list of the template's aliases.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
       RequestId:
         $ref: '#/definitions/String'
         description: The AWS request ID for this operation.
@@ -6057,7 +6057,7 @@ definitions:
         description: 'The token for the next set of results, or null if there are no more results.'
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
       RequestId:
         $ref: '#/definitions/String'
         description: The AWS request ID for this operation.
@@ -6072,7 +6072,7 @@ definitions:
         description: 'The token for the next set of results, or null if there are no more results.'
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
       RequestId:
         $ref: '#/definitions/String'
         description: The AWS request ID for this operation.
@@ -6105,7 +6105,7 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   RegisterUserResponse:
     type: object
     properties:
@@ -6120,7 +6120,7 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   TagResourceResponse:
     type: object
     properties:
@@ -6129,7 +6129,7 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   UntagResourceResponse:
     type: object
     properties:
@@ -6138,7 +6138,7 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   TagKey:
     type: string
     minLength: 1
@@ -6148,7 +6148,7 @@ definitions:
     properties:
       Arn:
         $ref: '#/definitions/Arn'
-        description: The ARN of the resource.
+        description: The Amazon Resource Name (ARN) of the resource.
       VersionArn:
         $ref: '#/definitions/Arn'
         description: 'The ARN of the dashboard, including the version number.'
@@ -6160,7 +6160,7 @@ definitions:
         description: The creation status of the request.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
       RequestId:
         $ref: '#/definitions/String'
         description: The AWS request ID for this operation.
@@ -6169,7 +6169,7 @@ definitions:
     properties:
       DashboardArn:
         $ref: '#/definitions/Arn'
-        description: The ARN of the dashboard.
+        description: The Amazon Resource Name (ARN) of the dashboard.
       DashboardId:
         $ref: '#/definitions/RestrictiveResourceId'
         description: The ID for the dashboard.
@@ -6181,7 +6181,7 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   UpdateDashboardPublishedVersionResponse:
     type: object
     properties:
@@ -6190,10 +6190,10 @@ definitions:
         description: The ID for the dashboard.
       DashboardArn:
         $ref: '#/definitions/Arn'
-        description: The ARN of the dashboard.
+        description: The Amazon Resource Name (ARN) of the dashboard.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
       RequestId:
         $ref: '#/definitions/String'
         description: The AWS request ID for this operation.
@@ -6202,13 +6202,13 @@ definitions:
     properties:
       Arn:
         $ref: '#/definitions/Arn'
-        description: The ARN of the dataset.
+        description: The Amazon Resource Name (ARN) of the dataset.
       DataSetId:
         $ref: '#/definitions/ResourceId'
-        description: The ID for the dataset you want to create. This is unique per region per AWS account.
+        description: The ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.
       IngestionArn:
         $ref: '#/definitions/Arn'
-        description: 'The Amazon Resource Name (ARN) for the ingestion, which is triggered as a result of dataset creation if the import mode is SPICE'
+        description: 'The ARN for the ingestion, which is triggered as a result of dataset creation if the import mode is SPICE'
       IngestionId:
         $ref: '#/definitions/ResourceId'
         description: 'The ID of the ingestion, which is triggered as a result of dataset creation if the import mode is SPICE'
@@ -6217,31 +6217,31 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   UpdateDataSetPermissionsResponse:
     type: object
     properties:
       DataSetArn:
         $ref: '#/definitions/Arn'
-        description: The ARN of the dataset.
+        description: The Amazon Resource Name (ARN) of the dataset.
       DataSetId:
         $ref: '#/definitions/ResourceId'
-        description: The ID for the dataset you want to create. This is unique per region per AWS account.
+        description: The ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.
       RequestId:
         $ref: '#/definitions/String'
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   UpdateDataSourceResponse:
     type: object
     properties:
       Arn:
         $ref: '#/definitions/Arn'
-        description: The ARN of the data source.
+        description: The Amazon Resource Name (ARN) of the data source.
       DataSourceId:
         $ref: '#/definitions/ResourceId'
-        description: The ID of the data source. This is unique per AWS Region per AWS account.
+        description: The ID of the data source. This ID is unique per AWS Region for each AWS account.
       UpdateStatus:
         $ref: '#/definitions/ResourceStatus'
         description: The update status of the data source's last update.
@@ -6250,22 +6250,22 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   UpdateDataSourcePermissionsResponse:
     type: object
     properties:
       DataSourceArn:
         $ref: '#/definitions/Arn'
-        description: The ARN of the data source.
+        description: The Amazon Resource Name (ARN) of the data source.
       DataSourceId:
         $ref: '#/definitions/ResourceId'
-        description: The ID of the data source. This is unique per AWS Region per AWS account.
+        description: The ID of the data source. This ID is unique per AWS Region for each AWS account.
       RequestId:
         $ref: '#/definitions/String'
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   UpdateGroupResponse:
     type: object
     properties:
@@ -6277,7 +6277,7 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   UpdateIAMPolicyAssignmentResponse:
     type: object
     properties:
@@ -6301,7 +6301,7 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   UpdateTemplateResponse:
     type: object
     properties:
@@ -6319,7 +6319,7 @@ definitions:
         description: The creation status of the template.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
       RequestId:
         $ref: '#/definitions/String'
         description: The AWS request ID for this operation.
@@ -6331,7 +6331,7 @@ definitions:
         description: The template alias.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
       RequestId:
         $ref: '#/definitions/String'
         description: The AWS request ID for this operation.
@@ -6343,7 +6343,7 @@ definitions:
         description: The ID for the template.
       TemplateArn:
         $ref: '#/definitions/Arn'
-        description: The ARN of the template.
+        description: The Amazon Resource Name (ARN) of the template.
       Permissions:
         $ref: '#/definitions/ResourcePermissionList'
         description: A list of resource permissions to be set on the template.
@@ -6352,7 +6352,7 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   UpdateUserResponse:
     type: object
     properties:
@@ -6364,7 +6364,7 @@ definitions:
         description: The AWS request ID for this operation.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of the request.
+        description: The HTTP status of the request.
   String:
     type: string
   ActionList:
@@ -6385,8 +6385,8 @@ definitions:
         description: A name for the IAM policy assignment.
       PolicyArn:
         $ref: '#/definitions/Arn'
-        description: The ARN of the resource.
-    description: The active IAM policy assignment.
+        description: The Amazon Resource Name (ARN) of the resource.
+    description: The active AWS Identity and Access Management (IAM) policy assignment.
   ActiveIAMPolicyAssignmentList:
     type: array
     items:
@@ -6705,7 +6705,7 @@ definitions:
         description: A structure that contains the permissions of the dashboard. You can use this for granting permissions with principal and action information.
       SourceEntity:
         $ref: '#/definitions/DashboardSourceEntity'
-        description: '<p>Source entity from which the dashboard is created. The souce entity accepts the ARN of the source template or analysis and also references the replacement datasets for the placeholders set when creating the template. The replacement datasets need to follow the same schema as the datasets for which placeholders were created when creating the template. </p> <p>If you are creating a dashboard from a source entity in a different AWS account, use the ARN of the source template.</p>'
+        description: '<p>Source entity from which the dashboard is created. The souce entity accepts the Amazon Resource Name (ARN) of the source template or analysis and also references the replacement datasets for the placeholders set when creating the template. The replacement datasets need to follow the same schema as the datasets for which placeholders were created when creating the template. </p> <p>If you are creating a dashboard from a source entity in a different AWS account, use the ARN of the source template.</p>'
       Tags:
         $ref: '#/definitions/TagList'
         description: Contains a map of the key-value pairs for the resource tag or tags assigned to the dashboard.
@@ -6714,7 +6714,7 @@ definitions:
         description: A description for the first version of the dashboard being created.
       DashboardPublishOptions:
         $ref: '#/definitions/DashboardPublishOptions'
-        description: '<p>Publishing options when creating dashboard.</p> <ul> <li> <p>AvailabilityStatus for AdHocFilteringOption - This can be either <code>ENABLED</code> or <code>DISABLED</code>. When This is set to set to <code>DISABLED</code>, QuickSight disables the left filter pane on the published dashboard, which can be used for AdHoc filtering. Enabled by default. </p> </li> <li> <p>AvailabilityStatus for ExportToCSVOption - This can be either <code>ENABLED</code> or <code>DISABLED</code>. The visual option to export data to CSV is disabled when this is set to <code>DISABLED</code>. Enabled by default. </p> </li> <li> <p>VisibilityState for SheetControlsOption - This can be either <code>COLLAPSED</code> or <code>EXPANDED</code>. The sheet controls pane is collapsed by default when set to true. Collapsed by default. </p> </li> </ul> <p>Shorthand Syntax:</p> <p> <code>AdHocFilteringDisabled=boolean,ExportToCSVDisabled=boolean,SheetControlsCollapsed=boolean</code> </p>'
+        description: '<p>Publishing options when creating dashboard.</p> <ul> <li> <p>AvailabilityStatus for AdHocFilteringOption - This can be either <code>ENABLED</code> or <code>DISABLED</code>. When This is set to set to <code>DISABLED</code>, QuickSight disables the left filter pane on the published dashboard, which can be used for AdHoc filtering. Enabled by default. </p> </li> <li> <p>AvailabilityStatus for ExportToCSVOption - This can be either <code>ENABLED</code> or <code>DISABLED</code>. The visual option to export data to CSV is disabled when this is set to <code>DISABLED</code>. Enabled by default. </p> </li> <li> <p>VisibilityState for SheetControlsOption - This can be either <code>COLLAPSED</code> or <code>EXPANDED</code>. The sheet controls pane is collapsed by default when set to true. Collapsed by default. </p> </li> </ul>'
   ResourceStatus:
     type: string
     enum:
@@ -6770,7 +6770,7 @@ definitions:
     properties:
       DataSetId:
         $ref: '#/definitions/ResourceId'
-        description: An ID for the dataset you want to create. This is unique per region per AWS account.
+        description: An ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.
       Name:
         $ref: '#/definitions/ResourceName'
         description: The display name for the dataset.
@@ -6785,7 +6785,7 @@ definitions:
         description: Indicates whether or not you want to import the data into SPICE.
       ColumnGroups:
         $ref: '#/definitions/ColumnGroupList'
-        description: Groupings of columns that work together in certain QuickSight features. Currently only geospatial hierarchy is supported.
+        description: 'Groupings of columns that work together in certain QuickSight features. Currently, only geospatial hierarchy is supported.'
       Permissions:
         $ref: '#/definitions/ResourcePermissionList'
         description: A list of resource permissions on the dataset.
@@ -6879,7 +6879,7 @@ definitions:
       TwitterParameters:
         $ref: '#/definitions/TwitterParameters'
         description: Twitter parameters.
-    description: The parameters QuickSight uses to connect to your underlying source. This is a variant type structure. At most one of the attributes should be non-null for this structure to be valid.
+    description: The parameters that QuickSight uses to connect to your underlying source. This is a variant type structure. At most one of the attributes should be non-null for this structure to be valid.
   DataSourceCredentials:
     type: object
     properties:
@@ -6894,7 +6894,7 @@ definitions:
     properties:
       VpcConnectionArn:
         $ref: '#/definitions/Arn'
-        description: VPC connection ARN.
+        description: The Amazon Resource Name (ARN) for the VPC connection.
     description: VPC connection properties.
   SslProperties:
     type: object
@@ -6902,7 +6902,7 @@ definitions:
       DisableSsl:
         $ref: '#/definitions/Boolean'
         description: A boolean flag to control whether SSL should be disabled.
-    description: SSL properties that apply when QuickSight connects to your underlying data source.
+    description: Secure Socket Layer (SSL) properties that apply when QuickSight connects to your underlying data source.
   CreateDataSourceRequest:
     type: object
     required:
@@ -6912,28 +6912,28 @@ definitions:
     properties:
       DataSourceId:
         $ref: '#/definitions/ResourceId'
-        description: 'An ID for the data source. This is unique per AWS Region per AWS account. '
+        description: 'An ID for the data source. This ID is unique per AWS Region for each AWS account. '
       Name:
         $ref: '#/definitions/ResourceName'
         description: A display name for the data source.
       Type:
         $ref: '#/definitions/DataSourceType'
-        description: 'The type of the data source. Currently the supported types for this operation are: <code>ATHENA, AURORA, AURORA_POSTGRESQL, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT, S3, SNOWFLAKE, SPARK, SQLSERVER, TERADATA</code>. Use <code>ListDataSources</code> to return a list of all data sources.'
+        description: 'The type of the data source. Currently, the supported types for this operation are: <code>ATHENA, AURORA, AURORA_POSTGRESQL, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT, S3, SNOWFLAKE, SPARK, SQLSERVER, TERADATA</code>. Use <code>ListDataSources</code> to return a list of all data sources.'
       DataSourceParameters:
         $ref: '#/definitions/DataSourceParameters'
-        description: The parameters QuickSight uses to connect to your underlying source.
+        description: The parameters that QuickSight uses to connect to your underlying source.
       Credentials:
         $ref: '#/definitions/DataSourceCredentials'
-        description: The credentials QuickSight uses to connect to your underlying source. Currently only username/password based credentials are supported.
+        description: 'The credentials QuickSight that uses to connect to your underlying source. Currently, only credentials based on user name and password are supported.'
       Permissions:
         $ref: '#/definitions/ResourcePermissionList'
         description: A list of resource permissions on the data source.
       VpcConnectionProperties:
         $ref: '#/definitions/VpcConnectionProperties'
-        description: You need to use this parameter only when you want QuickSight to use a VPC connection when connecting to your underlying source.
+        description: Use this parameter only when you want QuickSight to use a VPC connection when connecting to your underlying source.
       SslProperties:
         $ref: '#/definitions/SslProperties'
-        description: SSL properties that apply when QuickSight connects to your underlying source.
+        description: Secure Socket Layer (SSL) properties that apply when QuickSight connects to your underlying source.
       Tags:
         $ref: '#/definitions/TagList'
         description: Contains a map of the key-value pairs for the resource tag or tags assigned to the data source.
@@ -7013,7 +7013,7 @@ definitions:
         description: '<p>The status of an assignment:</p> <ul> <li> <p>ENABLED - Anything specified in this assignment is used while creating the data source.</p> </li> <li> <p>DISABLED - This assignment isn''t used while creating the data source.</p> </li> <li> <p>DRAFT - Assignment is an unfinished draft and isn''t used while creating the data source.</p> </li> </ul>'
       PolicyArn:
         $ref: '#/definitions/Arn'
-        description: An IAM policy ARN that you want to apply to the QuickSight users and groups specified in this assignment.
+        description: An IAM policy Amazon Resource Name (ARN) that you want to apply to the QuickSight users and groups specified in this assignment.
       Identities:
         $ref: '#/definitions/IdentityMap'
         description: QuickSight users and/or groups that you want to assign the policy to.
@@ -7078,10 +7078,10 @@ definitions:
         description: A display name for the template.
       Permissions:
         $ref: '#/definitions/ResourcePermissionList'
-        description: 'A list of resource permissions to be set on the template. The shorthand syntax should look similar to this: <code>Shorthand Syntax: Principal=string,Actions=string,string ... </code> '
+        description: 'A list of resource permissions to be set on the template. '
       SourceEntity:
         $ref: '#/definitions/TemplateSourceEntity'
-        description: 'The ARN of the source entity from which this template is being created. Templates can be currently created from an analysis or another template. If the ARN is for an analysis, you must include its dataset references. '
+        description: 'The Amazon Resource Name (ARN) of the source entity from which this template is being created. Templates can be currently created from an analysis or another template. If the ARN is for an analysis, you must include its dataset references. '
       Tags:
         $ref: '#/definitions/TagList'
         description: Contains a map of the key-value pairs for the resource tag or tags assigned to the resource.
@@ -7119,7 +7119,7 @@ definitions:
     properties:
       DataSourceArn:
         $ref: '#/definitions/Arn'
-        description: The ARN of the data source.
+        description: The Amazon Resource Name (ARN) of the data source.
       Name:
         $ref: '#/definitions/CustomSqlName'
         description: A display name for the SQL query result.
@@ -7144,7 +7144,7 @@ definitions:
         description: Version number.
       Status:
         $ref: '#/definitions/ResourceStatus'
-        description: The http status of the request.
+        description: The HTTP status of the request.
       Arn:
         $ref: '#/definitions/Arn'
         description: The Amazon Resource name (ARN) of the resource.
@@ -7266,7 +7266,7 @@ definitions:
         description: Version number.
       Status:
         $ref: '#/definitions/ResourceStatus'
-        description: The http status of the request.
+        description: The HTTP status of the request.
       SourceEntityArn:
         $ref: '#/definitions/Arn'
         description: Source entity ARN.
@@ -7320,7 +7320,7 @@ definitions:
         description: The amount of SPICE capacity used by this dataset. This is 0 if the dataset isn't imported into SPICE.
       ColumnGroups:
         $ref: '#/definitions/ColumnGroupList'
-        description: Groupings of columns that work together in certain QuickSight features. Currently only geospatial hierarchy is supported.
+        description: 'Groupings of columns that work together in certain QuickSight features. Currently, only geospatial hierarchy is supported.'
       RowLevelPermissionDataSet:
         $ref: '#/definitions/RowLevelPermissionDataSet'
         description: Row-level security configuration on the dataset.
@@ -7410,7 +7410,7 @@ definitions:
         description: The Amazon Resource name (ARN) of the data source.
       DataSourceId:
         $ref: '#/definitions/ResourceId'
-        description: The ID of the data source. This is unique per AWS Region per AWS account.
+        description: The ID of the data source. This ID is unique per AWS Region for each AWS account.
       Name:
         $ref: '#/definitions/ResourceName'
         description: A display name for the data source.
@@ -7419,7 +7419,7 @@ definitions:
         description: The type of the data source. This indicates which database engine the data source connects to.
       Status:
         $ref: '#/definitions/ResourceStatus'
-        description: The http status of the request.
+        description: The HTTP status of the request.
       CreatedTime:
         $ref: '#/definitions/Timestamp'
         description: The time this was created.
@@ -7428,13 +7428,13 @@ definitions:
         description: The last time this was updated.
       DataSourceParameters:
         $ref: '#/definitions/DataSourceParameters'
-        description: The parameters QuickSight uses to connect to your underlying source. This is a variant type structure. At most one of the attributes should be non-null for this structure to be valid.
+        description: The parameters that QuickSight uses to connect to your underlying source. This is a variant type structure. At most one of the attributes should be non-null for this structure to be valid.
       VpcConnectionProperties:
         $ref: '#/definitions/VpcConnectionProperties'
         description: The VPC connection information. You need to use this parameter only when you want QuickSight to use a VPC connection when connecting to your underlying source.
       SslProperties:
         $ref: '#/definitions/SslProperties'
-        description: SSL properties that apply when QuickSight connects to your underlying source.
+        description: Secure Socket Layer (SSL) properties that apply when QuickSight connects to your underlying source.
       ErrorInfo:
         $ref: '#/definitions/DataSourceErrorInfo'
         description: Error information from the last update or the creation of the data source.
@@ -7563,7 +7563,7 @@ definitions:
         description: Assignment name.
       PolicyArn:
         $ref: '#/definitions/Arn'
-        description: Policy ARN.
+        description: Policy Amazon Resource Name (ARN).
       Identities:
         $ref: '#/definitions/IdentityMap'
         description: Identities.
@@ -7627,7 +7627,7 @@ definitions:
     properties:
       Arn:
         $ref: '#/definitions/Arn'
-        description: The ARN of the template.
+        description: The Amazon Resource Name (ARN) of the template.
       Name:
         $ref: '#/definitions/TemplateName'
         description: The display name of the template.
@@ -7636,7 +7636,7 @@ definitions:
         description: A structure describing the versions of the template.
       TemplateId:
         $ref: '#/definitions/RestrictiveResourceId'
-        description: The ID for the template. This is unique per region per AWS account.
+        description: The ID for the template. This is unique per AWS Region for each AWS account.
       LastUpdatedTime:
         $ref: '#/definitions/Timestamp'
         description: Time when this was last updated.
@@ -8066,7 +8066,7 @@ definitions:
     properties:
       DataSourceArn:
         $ref: '#/definitions/Arn'
-        description: Data source ARN.
+        description: The Amazon Resource Name (ARN) for the data source.
       Schema:
         $ref: '#/definitions/RelationalTableSchema'
         description: The schema name. Applies to certain relational database engines.
@@ -8261,7 +8261,7 @@ definitions:
         description: The version number of the template.
       Status:
         $ref: '#/definitions/ResourceStatus'
-        description: The http status of the request.
+        description: The HTTP status of the request.
       DataSetConfigurations:
         $ref: '#/definitions/DataSetConfigurationList'
         description: Schema of the dataset identified by the placeholder. The idea is that any dashboard created from the template should be bound to new datasets matching the same schema described through this API. .
@@ -8270,7 +8270,7 @@ definitions:
         description: The description of the template.
       SourceEntityArn:
         $ref: '#/definitions/Arn'
-        description: The ARN of the analysis or template which was used to create this template.
+        description: The Amazon Resource Name (ARN) of the analysis or template which was used to create this template.
     description: A version of a template.
   TemplateErrorType:
     type: string
@@ -8300,7 +8300,7 @@ definitions:
         description: A summary of a template.
       TemplateId:
         $ref: '#/definitions/RestrictiveResourceId'
-        description: The ID of the template. This is unique per region per AWS account.
+        description: The ID of the template. This is unique per AWS Region for each AWS account.
       Name:
         $ref: '#/definitions/TemplateName'
         description: A display name for the template.
@@ -8432,7 +8432,7 @@ definitions:
         description: Indicates whether or not you want to import the data into SPICE.
       ColumnGroups:
         $ref: '#/definitions/ColumnGroupList'
-        description: Groupings of columns that work together in certain QuickSight features. Currently only geospatial hierarchy is supported.
+        description: 'Groupings of columns that work together in certain QuickSight features. Currently, only geospatial hierarchy is supported.'
       RowLevelPermissionDataSet:
         $ref: '#/definitions/RowLevelPermissionDataSet'
         description: Row-level security configuration on the data you want to create.
@@ -8455,16 +8455,16 @@ definitions:
         description: A display name for the data source.
       DataSourceParameters:
         $ref: '#/definitions/DataSourceParameters'
-        description: The parameters QuickSight uses to connect to your underlying source.
+        description: The parameters that QuickSight uses to connect to your underlying source.
       Credentials:
         $ref: '#/definitions/DataSourceCredentials'
-        description: The credentials QuickSight uses to connect to your underlying source. Currently only username/password based credentials are supported.
+        description: 'The credentials that QuickSight that uses to connect to your underlying source. Currently, only credentials based on user name and password are supported.'
       VpcConnectionProperties:
         $ref: '#/definitions/VpcConnectionProperties'
-        description: You need to use this parameter only when you want QuickSight to use a VPC connection when connecting to your underlying source.
+        description: Use this parameter only when you want QuickSight to use a VPC connection when connecting to your underlying source.
       SslProperties:
         $ref: '#/definitions/SslProperties'
-        description: SSL properties that apply when QuickSight connects to your underlying source.
+        description: Secure Socket Layer (SSL) properties that apply when QuickSight connects to your underlying source.
   UpdateGroupRequest:
     type: object
     properties:
@@ -8479,7 +8479,7 @@ definitions:
         description: '<p>The status of an assignment:</p> <ul> <li> <p>ENABLED - Anything specified in this assignment is used while creating the data source.</p> </li> <li> <p>DISABLED - This assignment isn''t used while creating the data source.</p> </li> <li> <p>DRAFT - Assignment is an unfinished draft and isn''t used while creating the data source.</p> </li> </ul>'
       PolicyArn:
         $ref: '#/definitions/Arn'
-        description: An IAM policy ARN that will be applied to specified QuickSight users and groups in this assignment.
+        description: An IAM policy Amazon Resource Name (ARN) that will be applied to specified QuickSight users and groups in this assignment.
       Identities:
         $ref: '#/definitions/IdentityMap'
         description: QuickSight users and/or groups that you want to assign to the specified IAM policy.
@@ -8496,10 +8496,10 @@ definitions:
     properties:
       GrantPermissions:
         $ref: '#/definitions/UpdateResourcePermissionList'
-        description: '<p>A list of resource permissions to be granted on the template. The following example shows the shorthand syntax: </p> <p> <code>Shorthand Syntax: Principal=string,Actions=string,string ... </code> </p>'
+        description: 'A list of resource permissions to be granted on the template. '
       RevokePermissions:
         $ref: '#/definitions/UpdateResourcePermissionList'
-        description: 'A list of resource permissions to be revoked from the template. Shorthand syntax: <code>Shorthand Syntax: Principal=string,Actions=string,string ... </code> '
+        description: 'A list of resource permissions to be revoked from the template. '
   UpdateTemplateRequest:
     type: object
     required:
@@ -8510,7 +8510,7 @@ definitions:
         description: The source QuickSight entity from which this template is being created. Templates can be currently created from an Analysis or another template.
       VersionDescription:
         $ref: '#/definitions/VersionDescription'
-        description: A description of the current template version being created. This API created the first version of the template. Every time UpdateTemplate is called a new version is created. Each version of the template maintains a description of the version in the VersionDescription field.
+        description: A description of the current template version being updated. Every time you cal <code>UpdateTemplate</code> you create a new version. Each version of the template maintains a description of the version in the <code>VersionDescription</code> field.
       Name:
         $ref: '#/definitions/TemplateName'
         description: The name for the template.

@@ -1,0 +1,339 @@
+swagger: '2.0'
+info:
+  version: '2017-07-25'
+  x-release: v4
+  title: Amazon Elastic  Inference
+  description: Elastic Inference public APIs.
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: elastic-inference
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/elastic-inference-2017-07-25.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/elastic-inference/'
+host: api.elastic-inference.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+x-servers:
+  - url: 'http://api.elastic-inference.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Amazon Elastic Inference multi-region endpoint
+  - url: 'https://api.elastic-inference.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Amazon Elastic Inference multi-region endpoint
+  - url: 'http://api.elastic-inference.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon Elastic Inference endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://api.elastic-inference.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon Elastic Inference endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  '/tags/{resourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: Returns all tags of an Elastic Inference Accelerator.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForResourceResult'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The ARN of the Elastic Inference Accelerator to list the tags for.
+          type: string
+          minLength: 1
+          maxLength: 1011
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: Adds the specified tag(s) to an Elastic Inference Accelerator.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TagResourceResult'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The ARN of the Elastic Inference Accelerator to tag.
+          type: string
+          minLength: 1
+          maxLength: 1011
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - tags
+            properties:
+              tags:
+                description: The tags to add to the Elastic Inference Accelerator.
+                type: object
+                minProperties: 1
+                maxProperties: 50
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
+  '/tags/{resourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Removes the specified tag(s) from an Elastic Inference Accelerator.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UntagResourceResult'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The ARN of the Elastic Inference Accelerator to untag.
+          type: string
+          minLength: 1
+          maxLength: 1011
+        - name: tagKeys
+          in: query
+          required: true
+          description: The list of tags to remove from the Elastic Inference Accelerator.
+          type: array
+          items:
+            type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  ListTagsForResourceResult:
+    type: object
+    properties:
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: The tags of the Elastic Inference Accelerator.
+  BadRequestException: {}
+  ResourceNotFoundException: {}
+  InternalServerException: {}
+  TagResourceResult:
+    type: object
+    properties: {}
+  TagValue:
+    type: string
+    maxLength: 256
+  UntagResourceResult:
+    type: object
+    properties: {}
+  TagKey:
+    type: string
+    minLength: 1
+    maxLength: 128
+  ResourceARN:
+    type: string
+    minLength: 1
+    maxLength: 1011
+  ListTagsForResourceRequest:
+    type: object
+    properties: {}
+  TagMap:
+    type: object
+    minProperties: 1
+    maxProperties: 50
+    additionalProperties:
+      $ref: '#/definitions/TagValue'
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+    minItems: 1
+    maxItems: 50
+  TagResourceRequest:
+    type: object
+    required:
+      - tags
+    properties:
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: The tags to add to the Elastic Inference Accelerator.
+  UntagResourceRequest:
+    type: object
+    properties: {}

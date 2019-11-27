@@ -1041,6 +1041,9 @@ definitions:
       HomePageUrl:
         $ref: '#/definitions/__string'
         description: 'A URL with more information about the application, for example the location of your GitHub repository for the application.'
+      IsVerifiedAuthor:
+        $ref: '#/definitions/__boolean'
+        description: 'Whether the author of this application has been verified. This means means that AWS has made a good faith review, as a reasonable and prudent service provider, of the information provided by the requester and has confirmed that the requester''s identity is as claimed.'
       Labels:
         $ref: '#/definitions/__listOf__string'
         description: '<p>Labels to improve discovery of apps in search results.</p><p>Minimum length=1. Maximum length=127. Maximum number of labels: 10</p><p>Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";</p>'
@@ -1056,6 +1059,9 @@ definitions:
       SpdxLicenseId:
         $ref: '#/definitions/__string'
         description: 'A valid identifier from https://spdx.org/licenses/.'
+      VerifiedAuthorUrl:
+        $ref: '#/definitions/__string'
+        description: The URL to the public profile of a verified author. This URL is submitted by the author.
       Version:
         $ref: '#/definitions/Version'
         description: Version information about the application.
@@ -1236,6 +1242,9 @@ definitions:
       HomePageUrl:
         $ref: '#/definitions/__string'
         description: 'A URL with more information about the application, for example the location of your GitHub repository for the application.'
+      IsVerifiedAuthor:
+        $ref: '#/definitions/__boolean'
+        description: 'Whether the author of this application has been verified. This means means that AWS has made a good faith review, as a reasonable and prudent service provider, of the information provided by the requester and has confirmed that the requester''s identity is as claimed.'
       Labels:
         $ref: '#/definitions/__listOf__string'
         description: '<p>Labels to improve discovery of apps in search results.</p><p>Minimum length=1. Maximum length=127. Maximum number of labels: 10</p><p>Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";</p>'
@@ -1251,6 +1260,9 @@ definitions:
       SpdxLicenseId:
         $ref: '#/definitions/__string'
         description: 'A valid identifier from https://spdx.org/licenses/.'
+      VerifiedAuthorUrl:
+        $ref: '#/definitions/__string'
+        description: The URL to the public profile of a verified author. This URL is submitted by the author.
       Version:
         $ref: '#/definitions/Version'
         description: Version information about the application.
@@ -1362,6 +1374,9 @@ definitions:
       HomePageUrl:
         $ref: '#/definitions/__string'
         description: 'A URL with more information about the application, for example the location of your GitHub repository for the application.'
+      IsVerifiedAuthor:
+        $ref: '#/definitions/__boolean'
+        description: 'Whether the author of this application has been verified. This means means that AWS has made a good faith review, as a reasonable and prudent service provider, of the information provided by the requester and has confirmed that the requester''s identity is as claimed.'
       Labels:
         $ref: '#/definitions/__listOf__string'
         description: '<p>Labels to improve discovery of apps in search results.</p><p>Minimum length=1. Maximum length=127. Maximum number of labels: 10</p><p>Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";</p>'
@@ -1377,6 +1392,9 @@ definitions:
       SpdxLicenseId:
         $ref: '#/definitions/__string'
         description: 'A valid identifier from https://spdx.org/licenses/.'
+      VerifiedAuthorUrl:
+        $ref: '#/definitions/__string'
+        description: The URL to the public profile of a verified author. This URL is submitted by the author.
       Version:
         $ref: '#/definitions/Version'
         description: Version information about the application.
@@ -1499,6 +1517,8 @@ definitions:
       TemplateUrl:
         $ref: '#/definitions/__string'
         description: <p>A link to the S3 object containing the packaged AWS SAM template of your application.</p><p>You can specify only one of templateBody and templateUrl; otherwise an error results.</p>
+  __boolean:
+    type: boolean
   Version:
     type: object
     required:
@@ -1589,8 +1609,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Capability'
-  __boolean:
-    type: boolean
   __listOfParameterValue:
     type: array
     items:
