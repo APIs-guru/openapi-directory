@@ -1,0 +1,573 @@
+swagger: '2.0'
+info:
+  version: '2019-09-19'
+  x-release: v4
+  title: Amazon CodeGuru Reviewer
+  description: This section provides documentation for the Amazon CodeGuru Reviewer API operations.
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: codeguru-reviewer
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/codeguru-reviewer-2019-09-19.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/codeguru-reviewer/'
+host: codeguru-reviewer.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+x-servers:
+  - url: 'http://codeguru-reviewer.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The CodeGuruReviewer multi-region endpoint
+  - url: 'https://codeguru-reviewer.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The CodeGuruReviewer multi-region endpoint
+  - url: 'http://codeguru-reviewer.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The CodeGuruReviewer endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://codeguru-reviewer.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The CodeGuruReviewer endpoint for China (Beijing) and China (Ningxia)
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  /associations:
+    post:
+      operationId: AssociateRepository
+      description: '<p>Associates an AWS CodeCommit repository with Amazon CodeGuru Reviewer. When you associate an AWS CodeCommit repository with Amazon CodeGuru Reviewer, Amazon CodeGuru Reviewer will provide recommendations for each pull request. You can view recommendations in the AWS CodeCommit repository.</p> <p>You can associate a GitHub repository using the Amazon CodeGuru Reviewer console.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AssociateRepositoryResponse'
+        '480':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '481':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '482':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '483':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - Repository
+            properties:
+              Repository:
+                description: Information about a repository.
+                type: object
+                properties:
+                  CodeCommit:
+                    $ref: '#/definitions/CodeCommitRepository'
+                    description: Information about an AWS CodeCommit repository.
+              ClientRequestToken:
+                description: '<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p> <p>If you want to add a new repository association, this parameter specifies a unique identifier for the new repository association that helps ensure idempotency.</p> <p>If you use the AWS CLI or one of the AWS SDK to call this operation, then you can leave this parameter empty. The CLI or SDK generates a random UUID for you and includes that in the request. If you don''t use the SDK and instead generate a raw HTTP request to the Secrets Manager service endpoint, then you must generate a ClientRequestToken yourself for new versions and include that value in the request.</p> <p>You typically only need to interact with this value if you implement your own retry logic and want to ensure that a given repository association is not created twice. We recommend that you generate a UUID-type value to ensure uniqueness within the specified repository association.</p> <p>Amazon CodeGuru Reviewer uses this value to prevent the accidental creation of duplicate repository associations if there are failures and retries. </p>'
+                type: string
+                pattern: '^[\w-]+$'
+                minLength: 1
+                maxLength: 64
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListRepositoryAssociations
+      description: 'Lists repository associations. You can optionally filter on one or more of the following recommendation properties: provider types, states, names, and owners.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListRepositoryAssociationsResponse'
+        '480':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '481':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: ProviderType
+          in: query
+          required: false
+          description: List of provider types to use as a filter.
+          type: array
+          items:
+            type: string
+        - name: State
+          in: query
+          required: false
+          description: List of states to use as a filter.
+          type: array
+          items:
+            type: string
+        - name: Name
+          in: query
+          required: false
+          description: List of names to use as a filter.
+          type: array
+          items:
+            type: string
+        - name: Owner
+          in: query
+          required: false
+          description: 'List of owners to use as a filter. For AWS CodeCommit, the owner is the AWS account id. For GitHub, it is the GitHub account name.'
+          type: array
+          items:
+            type: string
+        - name: MaxResults
+          in: query
+          required: false
+          description: 'The maximum number of repository association results returned by <code>ListRepositoryAssociations</code> in paginated output. When this parameter is used, <code>ListRepositoryAssociations</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListRepositoryAssociations</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListRepositoryAssociations</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+          type: integer
+          minimum: 1
+          maximum: 100
+        - name: NextToken
+          in: query
+          required: false
+          description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListRepositoryAssociations</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+          type: string
+          minLength: 1
+          maxLength: 2048
+  '/associations/{AssociationArn}':
+    get:
+      operationId: DescribeRepositoryAssociation
+      description: Describes a repository association.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeRepositoryAssociationResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '482':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '483':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: AssociationArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) identifying the association.
+          type: string
+          pattern: '^arn:aws[^:\s]*:codeguru-reviewer:[^:\s]+:[\d]{12}:[a-z]+:[\w-]+$'
+          minLength: 1
+          maxLength: 1600
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DisassociateRepository
+      description: Removes the association between Amazon CodeGuru Reviewer and a repository.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DisassociateRepositoryResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '482':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '483':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '484':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '485':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: AssociationArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) identifying the association.
+          type: string
+          pattern: '^arn:aws[^:\s]*:codeguru-reviewer:[^:\s]+:[\d]{12}:[a-z]+:[\w-]+$'
+          minLength: 1
+          maxLength: 1600
+definitions:
+  AssociateRepositoryResponse:
+    type: object
+    properties:
+      RepositoryAssociation:
+        $ref: '#/definitions/RepositoryAssociation'
+        description: Information about the repository association.
+  CodeCommitRepository:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/Name'
+        description: The name of the AWS CodeCommit repository.
+    description: Information about an AWS CodeCommit repository.
+  InternalServerException: {}
+  ValidationException: {}
+  AccessDeniedException: {}
+  ConflictException: {}
+  ThrottlingException: {}
+  DescribeRepositoryAssociationResponse:
+    type: object
+    properties:
+      RepositoryAssociation:
+        $ref: '#/definitions/RepositoryAssociation'
+        description: Information about the repository association.
+  NotFoundException: {}
+  DisassociateRepositoryResponse:
+    type: object
+    properties:
+      RepositoryAssociation:
+        $ref: '#/definitions/RepositoryAssociation'
+        description: Information about the disassociated repository.
+  ListRepositoryAssociationsResponse:
+    type: object
+    properties:
+      RepositoryAssociationSummaries:
+        $ref: '#/definitions/RepositoryAssociationSummaries'
+        description: A list of repository associations that meet the criteria of the request.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The <code>nextToken</code> value to include in a future <code>ListRecommendations</code> request. When the results of a <code>ListRecommendations</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
+  ProviderType:
+    type: string
+    enum:
+      - CodeCommit
+      - GitHub
+  RepositoryAssociationState:
+    type: string
+    enum:
+      - Associated
+      - Associating
+      - Failed
+      - Disassociating
+  Name:
+    type: string
+    minLength: 1
+    maxLength: 100
+  Owner:
+    type: string
+    minLength: 1
+    maxLength: 100
+  Arn:
+    type: string
+    pattern: '^arn:aws[^:\s]*:codeguru-reviewer:[^:\s]+:[\d]{12}:[a-z]+:[\w-]+$'
+    minLength: 1
+    maxLength: 1600
+  Repository:
+    type: object
+    properties:
+      CodeCommit:
+        $ref: '#/definitions/CodeCommitRepository'
+        description: Information about an AWS CodeCommit repository.
+    description: Information about a repository.
+  ClientRequestToken:
+    type: string
+    pattern: '^[\w-]+$'
+    minLength: 1
+    maxLength: 64
+  AssociateRepositoryRequest:
+    type: object
+    required:
+      - Repository
+    properties:
+      Repository:
+        $ref: '#/definitions/Repository'
+        description: The repository to associate.
+      ClientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: '<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p> <p>If you want to add a new repository association, this parameter specifies a unique identifier for the new repository association that helps ensure idempotency.</p> <p>If you use the AWS CLI or one of the AWS SDK to call this operation, then you can leave this parameter empty. The CLI or SDK generates a random UUID for you and includes that in the request. If you don''t use the SDK and instead generate a raw HTTP request to the Secrets Manager service endpoint, then you must generate a ClientRequestToken yourself for new versions and include that value in the request.</p> <p>You typically only need to interact with this value if you implement your own retry logic and want to ensure that a given repository association is not created twice. We recommend that you generate a UUID-type value to ensure uniqueness within the specified repository association.</p> <p>Amazon CodeGuru Reviewer uses this value to prevent the accidental creation of duplicate repository associations if there are failures and retries. </p>'
+  RepositoryAssociation:
+    type: object
+    properties:
+      AssociationId:
+        $ref: '#/definitions/AssociationId'
+        description: The id of the repository association.
+      AssociationArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) identifying the repository association.
+      Name:
+        $ref: '#/definitions/Name'
+        description: The name of the repository.
+      Owner:
+        $ref: '#/definitions/Owner'
+        description: The owner of the repository.
+      ProviderType:
+        $ref: '#/definitions/ProviderType'
+        description: The provider type of the repository association.
+      State:
+        $ref: '#/definitions/RepositoryAssociationState'
+        description: The state of the repository association.
+      StateReason:
+        $ref: '#/definitions/StateReason'
+        description: A description of why the repository association is in the current state.
+      LastUpdatedTimeStamp:
+        $ref: '#/definitions/TimeStamp'
+        description: 'The time, in milliseconds since the epoch, when the repository association was last updated.'
+      CreatedTimeStamp:
+        $ref: '#/definitions/TimeStamp'
+        description: 'The time, in milliseconds since the epoch, when the repository association was created.'
+    description: Information about a repository association.
+  AssociationId:
+    type: string
+    minLength: 1
+    maxLength: 64
+  DescribeRepositoryAssociationRequest:
+    type: object
+    properties: {}
+  DisassociateRepositoryRequest:
+    type: object
+    properties: {}
+  ProviderTypes:
+    type: array
+    items:
+      $ref: '#/definitions/ProviderType'
+    minItems: 1
+    maxItems: 3
+  RepositoryAssociationStates:
+    type: array
+    items:
+      $ref: '#/definitions/RepositoryAssociationState'
+    minItems: 1
+    maxItems: 3
+  Names:
+    type: array
+    items:
+      $ref: '#/definitions/Name'
+    minItems: 1
+    maxItems: 3
+  Owners:
+    type: array
+    items:
+      $ref: '#/definitions/Owner'
+    minItems: 1
+    maxItems: 3
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 100
+  NextToken:
+    type: string
+    minLength: 1
+    maxLength: 2048
+  ListRepositoryAssociationsRequest:
+    type: object
+    properties: {}
+  RepositoryAssociationSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/RepositoryAssociationSummary'
+  StateReason:
+    type: string
+    minLength: 0
+    maxLength: 256
+  TimeStamp:
+    type: string
+    format: date-time
+  RepositoryAssociationSummary:
+    type: object
+    properties:
+      AssociationArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) identifying the repository association.
+      LastUpdatedTimeStamp:
+        $ref: '#/definitions/TimeStamp'
+        description: 'The time, in milliseconds since the epoch, since the repository association was last updated. '
+      AssociationId:
+        $ref: '#/definitions/AssociationId'
+        description: The repository association ID.
+      Name:
+        $ref: '#/definitions/Name'
+        description: The name of the repository association.
+      Owner:
+        $ref: '#/definitions/Owner'
+        description: The owner of the repository association.
+      ProviderType:
+        $ref: '#/definitions/ProviderType'
+        description: The provider type of the repository association.
+      State:
+        $ref: '#/definitions/RepositoryAssociationState'
+        description: '<p>The state of the repository association.</p> <dl> <dt>Associated</dt> <dd> <p>Amazon CodeGuru Reviewer is associated with the repository. </p> </dd> <dt>Associating</dt> <dd> <p>The association is in progress. </p> </dd> <dt>Failed</dt> <dd> <p>The association failed. For more information about troubleshooting (or why it failed), see [troubleshooting topic]. </p> </dd> <dt>Disassociating</dt> <dd> <p>Amazon CodeGuru Reviewer is in the process of disassociating with the repository. </p> </dd> </dl>'
+    description: Information about a repository association.

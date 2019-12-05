@@ -317,7 +317,7 @@ paths:
                 properties:
                   InstanceType:
                     $ref: '#/definitions/ESPartitionInstanceType'
-                    description: The instance type for an Elasticsearch cluster.
+                    description: The instance type for an Elasticsearch cluster. UltraWarm instance types are not supported for data instances.
                   InstanceCount:
                     $ref: '#/definitions/IntegerClass'
                     description: The number of instances in the specified domain cluster.
@@ -336,6 +336,15 @@ paths:
                   DedicatedMasterCount:
                     $ref: '#/definitions/IntegerClass'
                     description: 'Total number of dedicated master nodes, active and on standby, for the cluster.'
+                  WarmEnabled:
+                    $ref: '#/definitions/Boolean'
+                    description: True to enable warm storage.
+                  WarmType:
+                    $ref: '#/definitions/ESWarmPartitionInstanceType'
+                    description: The instance type for the Elasticsearch cluster's warm nodes.
+                  WarmCount:
+                    $ref: '#/definitions/IntegerClass'
+                    description: The number of warm nodes in the cluster.
               EBSOptions:
                 description: 'Options to enable, disable, and specify the properties of EBS storage volumes. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs" target="_blank"> Configuring EBS-based Storage</a>.'
                 type: object
@@ -630,7 +639,7 @@ paths:
                 properties:
                   InstanceType:
                     $ref: '#/definitions/ESPartitionInstanceType'
-                    description: The instance type for an Elasticsearch cluster.
+                    description: The instance type for an Elasticsearch cluster. UltraWarm instance types are not supported for data instances.
                   InstanceCount:
                     $ref: '#/definitions/IntegerClass'
                     description: The number of instances in the specified domain cluster.
@@ -649,6 +658,15 @@ paths:
                   DedicatedMasterCount:
                     $ref: '#/definitions/IntegerClass'
                     description: 'Total number of dedicated master nodes, active and on standby, for the cluster.'
+                  WarmEnabled:
+                    $ref: '#/definitions/Boolean'
+                    description: True to enable warm storage.
+                  WarmType:
+                    $ref: '#/definitions/ESWarmPartitionInstanceType'
+                    description: The instance type for the Elasticsearch cluster's warm nodes.
+                  WarmCount:
+                    $ref: '#/definitions/IntegerClass'
+                    description: The number of warm nodes in the cluster.
               EBSOptions:
                 description: 'Options to enable, disable, and specify the properties of EBS storage volumes. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs" target="_blank"> Configuring EBS-based Storage</a>.'
                 type: object
@@ -837,6 +855,8 @@ paths:
             - c5.4xlarge.elasticsearch
             - c5.9xlarge.elasticsearch
             - c5.18xlarge.elasticsearch
+            - ultrawarm1.medium.elasticsearch
+            - ultrawarm1.large.elasticsearch
             - t2.micro.elasticsearch
             - t2.small.elasticsearch
             - t2.medium.elasticsearch
@@ -1630,6 +1650,8 @@ definitions:
       - c5.4xlarge.elasticsearch
       - c5.9xlarge.elasticsearch
       - c5.18xlarge.elasticsearch
+      - ultrawarm1.medium.elasticsearch
+      - ultrawarm1.large.elasticsearch
       - t2.micro.elasticsearch
       - t2.small.elasticsearch
       - t2.medium.elasticsearch
@@ -1672,6 +1694,11 @@ definitions:
         $ref: '#/definitions/IntegerClass'
         description: An integer value to indicate the number of availability zones for a domain when zone awareness is enabled. This should be equal to number of subnets if VPC endpoints is enabled
     description: 'Specifies the zone awareness configuration for the domain cluster, such as the number of availability zones.'
+  ESWarmPartitionInstanceType:
+    type: string
+    enum:
+      - ultrawarm1.medium.elasticsearch
+      - ultrawarm1.large.elasticsearch
   VolumeType:
     type: string
     enum:
@@ -2075,7 +2102,7 @@ definitions:
     properties:
       InstanceType:
         $ref: '#/definitions/ESPartitionInstanceType'
-        description: The instance type for an Elasticsearch cluster.
+        description: The instance type for an Elasticsearch cluster. UltraWarm instance types are not supported for data instances.
       InstanceCount:
         $ref: '#/definitions/IntegerClass'
         description: The number of instances in the specified domain cluster.
@@ -2094,6 +2121,15 @@ definitions:
       DedicatedMasterCount:
         $ref: '#/definitions/IntegerClass'
         description: 'Total number of dedicated master nodes, active and on standby, for the cluster.'
+      WarmEnabled:
+        $ref: '#/definitions/Boolean'
+        description: True to enable warm storage.
+      WarmType:
+        $ref: '#/definitions/ESWarmPartitionInstanceType'
+        description: The instance type for the Elasticsearch cluster's warm nodes.
+      WarmCount:
+        $ref: '#/definitions/IntegerClass'
+        description: The number of warm nodes in the cluster.
     description: 'Specifies the configuration for the domain cluster, such as the type and number of instances.'
   EBSOptions:
     type: object
@@ -2365,7 +2401,7 @@ definitions:
     description: ' Container for the parameters to <code> <a>DescribeElasticsearchInstanceTypeLimits</a> </code> operation. '
   LimitsByRole:
     type: object
-    description: ' Map of Role of the Instance and Limits that are applicable. Role performed by given Instance in Elasticsearch can be one of the following: <ul> <li>Data: If the given InstanceType is used as Data node</li> <li>Master: If the given InstanceType is used as Master node</li> </ul> '
+    description: ' Map of Role of the Instance and Limits that are applicable. Role performed by given Instance in Elasticsearch can be one of the following: <ul> <li>data: If the given InstanceType is used as data node</li> <li>master: If the given InstanceType is used as master node</li> <li>ultra_warm: If the given InstanceType is used as warm node</li> </ul> '
     additionalProperties:
       $ref: '#/definitions/Limits'
   GUID:

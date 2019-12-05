@@ -159,6 +159,114 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
+  '/v20180820/accesspoint/{name}#x-amz-account-id':
+    put:
+      operationId: CreateAccessPoint
+      description: Creates an access point and associates it with the specified bucket.
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: x-amz-account-id
+          in: header
+          required: true
+          description: The AWS account ID for the owner of the bucket for which you want to create an access point.
+          type: string
+          maxLength: 64
+        - name: name
+          in: path
+          required: true
+          description: The name you want to assign to this access point.
+          type: string
+          minLength: 3
+          maxLength: 50
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - Bucket
+              - VpcConfiguration
+            properties:
+              Bucket:
+                description: The name of the bucket that you want to associate this access point with.
+                type: string
+                minLength: 3
+                maxLength: 255
+              VpcConfiguration:
+                description: The Virtual Private Cloud (VPC) configuration for an access point.
+                type: object
+                properties:
+                  VpcId:
+                    $ref: '#/definitions/VpcId'
+                    description: 'If this field is specified, this access point will only allow connections from the specified VPC ID.'
+              PublicAccessBlockConfiguration:
+                description: 'The <code>PublicAccessBlock</code> configuration that you want to apply to this Amazon S3 bucket. You can enable the configuration options in any combination. For more information about when Amazon S3 considers a bucket or object public, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status">The Meaning of "Public"</a> in the Amazon Simple Storage Service Developer Guide.'
+                type: object
+                properties:
+                  BlockPublicAcls:
+                    $ref: '#/definitions/Setting'
+                    description: '<p>Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets in this account. Setting this element to <code>TRUE</code> causes the following behavior:</p> <ul> <li> <p>PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.</p> </li> <li> <p>PUT Object calls fail if the request includes a public ACL.</p> </li> <li> <p>PUT Bucket calls fail if the request includes a public ACL.</p> </li> </ul> <p>Enabling this setting doesn''t affect existing policies or ACLs.</p>'
+                  IgnorePublicAcls:
+                    $ref: '#/definitions/Setting'
+                    description: <p>Specifies whether Amazon S3 should ignore public ACLs for buckets in this account. Setting this element to <code>TRUE</code> causes Amazon S3 to ignore all public ACLs on buckets in this account and any objects that they contain. </p> <p>Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.</p>
+                  BlockPublicPolicy:
+                    $ref: '#/definitions/Setting'
+                    description: <p>Specifies whether Amazon S3 should block public bucket policies for buckets in this account. Setting this element to <code>TRUE</code> causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access. </p> <p>Enabling this setting doesn't affect existing bucket policies.</p>
+                  RestrictPublicBuckets:
+                    $ref: '#/definitions/Setting'
+                    description: '<p>Specifies whether Amazon S3 should restrict public bucket policies for buckets in this account. Setting this element to <code>TRUE</code> restricts access to buckets with public policies to only AWS services and authorized users within this account.</p> <p>Enabling this setting doesn''t affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.</p>'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteAccessPoint
+      description: Deletes the specified access point.
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: x-amz-account-id
+          in: header
+          required: true
+          description: The account ID for the account that owns the specified access point.
+          type: string
+          maxLength: 64
+        - name: name
+          in: path
+          required: true
+          description: The name of the access point you want to delete.
+          type: string
+          minLength: 3
+          maxLength: 50
+    get:
+      operationId: GetAccessPoint
+      description: Returns configuration information about the specified access point.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetAccessPointResult'
+      parameters:
+        - name: x-amz-account-id
+          in: header
+          required: true
+          description: The account ID for the account that owns the specified access point.
+          type: string
+          maxLength: 64
+        - name: name
+          in: path
+          required: true
+          description: The name of the access point whose configuration information you want to retrieve.
+          type: string
+          minLength: 3
+          maxLength: 50
   '/v20180820/jobs#x-amz-account-id':
     post:
       operationId: CreateJob
@@ -232,7 +340,7 @@ paths:
                 properties:
                   Bucket:
                     $ref: '#/definitions/S3BucketArnString'
-                    description: The bucket where specified job-completion report will be stored.
+                    description: The Amazon Resource Name (ARN) for the bucket where specified job-completion report will be stored.
                   Format:
                     $ref: '#/definitions/JobReportFormat'
                     description: The format of the specified job-completion report.
@@ -341,10 +449,10 @@ paths:
           in: query
           description: Pagination token
           required: false
-  '/v20180820/configuration/publicAccessBlock#x-amz-account-id':
+  '/v20180820/accesspoint/{name}/policy#x-amz-account-id':
     delete:
-      operationId: DeletePublicAccessBlock
-      description: Deletes the block public access configuration for the specified account.
+      operationId: DeleteAccessPointPolicy
+      description: Deletes the access point policy for the specified access point.
       responses:
         '200':
           description: Success
@@ -352,7 +460,89 @@ paths:
         - name: x-amz-account-id
           in: header
           required: true
-          description: The account ID for the AWS account whose block public access configuration you want to delete.
+          description: The account ID for the account that owns the specified access point.
+          type: string
+          maxLength: 64
+        - name: name
+          in: path
+          required: true
+          description: The name of the access point whose policy you want to delete.
+          type: string
+          minLength: 3
+          maxLength: 50
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetAccessPointPolicy
+      description: Returns the access point policy associated with the specified access point.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetAccessPointPolicyResult'
+      parameters:
+        - name: x-amz-account-id
+          in: header
+          required: true
+          description: The account ID for the account that owns the specified access point.
+          type: string
+          maxLength: 64
+        - name: name
+          in: path
+          required: true
+          description: The name of the access point whose policy you want to retrieve.
+          type: string
+          minLength: 3
+          maxLength: 50
+    put:
+      operationId: PutAccessPointPolicy
+      description: 'Associates an access policy with the specified access point. Each access point can have only one policy, so a request made to this API replaces any existing policy associated with the specified access point.'
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: x-amz-account-id
+          in: header
+          required: true
+          description: The AWS account ID for owner of the bucket associated with the specified access point.
+          type: string
+          maxLength: 64
+        - name: name
+          in: path
+          required: true
+          description: The name of the access point that you want to associate with the specified policy.
+          type: string
+          minLength: 3
+          maxLength: 50
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - Policy
+            properties:
+              Policy:
+                description: 'The policy that you want to apply to the specified access point. For more information about access point policies, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html">Managing Data Access with Amazon S3 Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.'
+                type: string
+  '/v20180820/configuration/publicAccessBlock#x-amz-account-id':
+    delete:
+      operationId: DeletePublicAccessBlock
+      description: Removes the <code>PublicAccessBlock</code> configuration for an Amazon Web Services account.
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: x-amz-account-id
+          in: header
+          required: true
+          description: The account ID for the Amazon Web Services account whose <code>PublicAccessBlock</code> configuration you want to remove.
           type: string
           maxLength: 64
     parameters:
@@ -365,7 +555,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetPublicAccessBlock
-      description: <p/>
+      description: Retrieves the <code>PublicAccessBlock</code> configuration for an Amazon Web Services account.
       responses:
         '200':
           description: Success
@@ -379,12 +569,12 @@ paths:
         - name: x-amz-account-id
           in: header
           required: true
-          description: <p/>
+          description: The account ID for the Amazon Web Services account whose <code>PublicAccessBlock</code> configuration you want to retrieve.
           type: string
           maxLength: 64
     put:
       operationId: PutPublicAccessBlock
-      description: <p/>
+      description: Creates or modifies the <code>PublicAccessBlock</code> configuration for an Amazon Web Services account.
       responses:
         '200':
           description: Success
@@ -392,7 +582,7 @@ paths:
         - name: x-amz-account-id
           in: header
           required: true
-          description: <p/>
+          description: The account ID for the Amazon Web Services account whose <code>PublicAccessBlock</code> configuration you want to set.
           type: string
           maxLength: 64
         - name: body
@@ -404,21 +594,21 @@ paths:
               - PublicAccessBlockConfiguration
             properties:
               PublicAccessBlockConfiguration:
-                description: <p/>
+                description: 'The <code>PublicAccessBlock</code> configuration that you want to apply to this Amazon S3 bucket. You can enable the configuration options in any combination. For more information about when Amazon S3 considers a bucket or object public, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status">The Meaning of "Public"</a> in the Amazon Simple Storage Service Developer Guide.'
                 type: object
                 properties:
                   BlockPublicAcls:
                     $ref: '#/definitions/Setting'
-                    description: <p/>
+                    description: '<p>Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets in this account. Setting this element to <code>TRUE</code> causes the following behavior:</p> <ul> <li> <p>PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.</p> </li> <li> <p>PUT Object calls fail if the request includes a public ACL.</p> </li> <li> <p>PUT Bucket calls fail if the request includes a public ACL.</p> </li> </ul> <p>Enabling this setting doesn''t affect existing policies or ACLs.</p>'
                   IgnorePublicAcls:
                     $ref: '#/definitions/Setting'
-                    description: <p/>
+                    description: <p>Specifies whether Amazon S3 should ignore public ACLs for buckets in this account. Setting this element to <code>TRUE</code> causes Amazon S3 to ignore all public ACLs on buckets in this account and any objects that they contain. </p> <p>Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.</p>
                   BlockPublicPolicy:
                     $ref: '#/definitions/Setting'
-                    description: <p/>
+                    description: <p>Specifies whether Amazon S3 should block public bucket policies for buckets in this account. Setting this element to <code>TRUE</code> causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access. </p> <p>Enabling this setting doesn't affect existing bucket policies.</p>
                   RestrictPublicBuckets:
                     $ref: '#/definitions/Setting'
-                    description: <p/>
+                    description: '<p>Specifies whether Amazon S3 should restrict public bucket policies for buckets in this account. Setting this element to <code>TRUE</code> restricts access to buckets with public policies to only AWS services and authorized users within this account.</p> <p>Enabling this setting doesn''t affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.</p>'
   '/v20180820/jobs/{id}#x-amz-account-id':
     get:
       operationId: DescribeJob
@@ -458,6 +648,92 @@ paths:
           type: string
           minLength: 5
           maxLength: 36
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v20180820/accesspoint/{name}/policyStatus#x-amz-account-id':
+    get:
+      operationId: GetAccessPointPolicyStatus
+      description: 'Indicates whether the specified access point currently has a policy that allows public access. For more information about public access through access points, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html">Managing Data Access with Amazon S3 Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetAccessPointPolicyStatusResult'
+      parameters:
+        - name: x-amz-account-id
+          in: header
+          required: true
+          description: The account ID for the account that owns the specified access point.
+          type: string
+          maxLength: 64
+        - name: name
+          in: path
+          required: true
+          description: The name of the access point whose policy status you want to retrieve.
+          type: string
+          minLength: 3
+          maxLength: 50
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v20180820/accesspoint#x-amz-account-id':
+    get:
+      operationId: ListAccessPoints
+      description: 'Returns a list of the access points currently associated with the specified bucket. You can retrieve up to 1000 access points per call. If the specified bucket has more than 1000 access points (or the number specified in <code>maxResults</code>, whichever is less), then the response will include a continuation token that you can use to list the additional access points.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListAccessPointsResult'
+      parameters:
+        - name: x-amz-account-id
+          in: header
+          required: true
+          description: The AWS account ID for owner of the bucket whose access points you want to list.
+          type: string
+          maxLength: 64
+        - name: bucket
+          in: query
+          required: false
+          description: The name of the bucket whose associated access points you want to list.
+          type: string
+          minLength: 3
+          maxLength: 255
+        - name: nextToken
+          in: query
+          required: false
+          description: 'A continuation token. If a previous call to <code>ListAccessPoints</code> returned a continuation token in the <code>NextToken</code> field, then providing that value here causes Amazon S3 to retrieve the next page of results.'
+          type: string
+          minLength: 1
+          maxLength: 1024
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The maximum number of access points that you want to include in the list. If the specified bucket has more than this number of access points, then the response will include a continuation token in the <code>NextToken</code> field that you can use to retrieve the next page of access points.'
+          type: integer
+          minimum: 1
+          maximum: 1000
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -587,6 +863,12 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
+  VpcId:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  Setting:
+    type: boolean
   CreateJobResult:
     type: object
     properties:
@@ -641,12 +923,16 @@ definitions:
         description: <p/>
       TargetKeyPrefix:
         $ref: '#/definitions/NonEmptyMaxLength1024String'
+        description: <p/>
       ObjectLockLegalHoldStatus:
         $ref: '#/definitions/S3ObjectLockLegalHoldStatus'
+        description: <p/>
       ObjectLockMode:
         $ref: '#/definitions/S3ObjectLockMode'
+        description: <p/>
       ObjectLockRetainUntilDate:
         $ref: '#/definitions/TimeStamp'
+        description: <p/>
     description: 'Contains the configuration parameters for a PUT Copy object operation. Amazon S3 batch operations passes each value through to the underlying PUT Copy object API. For more information about the parameters for this operation, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html">PUT Object - Copy</a>.'
   S3SetObjectAclOperation:
     type: object
@@ -730,13 +1016,54 @@ definitions:
         $ref: '#/definitions/JobDescriptor'
         description: Contains the configuration parameters and status for the job specified in the <code>Describe Job</code> request.
   NotFoundException: {}
+  GetAccessPointResult:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/AccessPointName'
+        description: The name of the specified access point.
+      Bucket:
+        $ref: '#/definitions/BucketName'
+        description: The name of the bucket associated with the specified access point.
+      NetworkOrigin:
+        $ref: '#/definitions/NetworkOrigin'
+        description: 'Indicates whether this access point allows access from the public Internet. If <code>VpcConfiguration</code> is specified for this access point, then <code>NetworkOrigin</code> is <code>VPC</code>, and the access point doesn''t allow access from the public Internet. Otherwise, <code>NetworkOrigin</code> is <code>Internet</code>, and the access point allows access from the public Internet, subject to the access point and bucket access policies.'
+      VpcConfiguration:
+        $ref: '#/definitions/VpcConfiguration'
+        description: Contains the Virtual Private Cloud (VPC) configuration for the specified access point.
+      PublicAccessBlockConfiguration:
+        $ref: '#/definitions/PublicAccessBlockConfiguration'
+      CreationDate:
+        $ref: '#/definitions/CreationDate'
+        description: The date and time when the specified access point was created.
+  GetAccessPointPolicyResult:
+    type: object
+    properties:
+      Policy:
+        $ref: '#/definitions/Policy'
+        description: The access point policy associated with the specified access point.
+  GetAccessPointPolicyStatusResult:
+    type: object
+    properties:
+      PolicyStatus:
+        $ref: '#/definitions/PolicyStatus'
+        description: Indicates the current policy status of the specified access point.
   GetPublicAccessBlockOutput:
     type: object
     properties:
       PublicAccessBlockConfiguration:
         $ref: '#/definitions/PublicAccessBlockConfiguration'
-        description: <p/>
+        description: The <code>PublicAccessBlock</code> configuration currently in effect for this Amazon Web Services account.
   NoSuchPublicAccessBlockConfiguration: {}
+  ListAccessPointsResult:
+    type: object
+    properties:
+      AccessPointList:
+        $ref: '#/definitions/AccessPointList'
+        description: Contains identification and configuration information for one or more access points associated with the specified bucket.
+      NextToken:
+        $ref: '#/definitions/NonEmptyMaxLength1024String'
+        description: 'If the specified bucket has more access points than can be returned in one call to this API, then this field contains a continuation token that you can provide in subsequent calls to this API to retrieve additional access points.'
   ListJobsResult:
     type: object
     properties:
@@ -764,8 +1091,6 @@ definitions:
       - Suspended
   InvalidRequestException: {}
   InvalidNextTokenException: {}
-  Setting:
-    type: boolean
   UpdateJobPriorityResult:
     type: object
     required:
@@ -791,11 +1116,86 @@ definitions:
         $ref: '#/definitions/JobStatusUpdateReason'
         description: The reason that the specified job's status was updated.
   JobStatusException: {}
+  AccessPointName:
+    type: string
+    minLength: 3
+    maxLength: 50
+  NetworkOrigin:
+    type: string
+    enum:
+      - Internet
+      - VPC
+  VpcConfiguration:
+    type: object
+    required:
+      - VpcId
+    properties:
+      VpcId:
+        $ref: '#/definitions/VpcId'
+        description: 'If this field is specified, this access point will only allow connections from the specified VPC ID.'
+    description: The Virtual Private Cloud (VPC) configuration for an access point.
+  BucketName:
+    type: string
+    minLength: 3
+    maxLength: 255
+  AccessPoint:
+    type: object
+    required:
+      - Name
+      - NetworkOrigin
+      - Bucket
+    properties:
+      Name:
+        $ref: '#/definitions/AccessPointName'
+        description: The name of this access point.
+      NetworkOrigin:
+        $ref: '#/definitions/NetworkOrigin'
+        description: 'Indicates whether this access point allows access from the public Internet. If <code>VpcConfiguration</code> is specified for this access point, then <code>NetworkOrigin</code> is <code>VPC</code>, and the access point doesn''t allow access from the public Internet. Otherwise, <code>NetworkOrigin</code> is <code>Internet</code>, and the access point allows access from the public Internet, subject to the access point and bucket access policies.'
+      VpcConfiguration:
+        $ref: '#/definitions/VpcConfiguration'
+        description: 'The Virtual Private Cloud (VPC) configuration for this access point, if one exists.'
+      Bucket:
+        $ref: '#/definitions/BucketName'
+        description: The name of the bucket associated with this access point.
+    description: An access point used to access a bucket.
+  AccessPointList:
+    type: array
+    items:
+      $ref: '#/definitions/AccessPoint'
   AccountId:
     type: string
     maxLength: 64
   ConfirmationRequired:
     type: boolean
+  PublicAccessBlockConfiguration:
+    type: object
+    properties:
+      BlockPublicAcls:
+        $ref: '#/definitions/Setting'
+        description: '<p>Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets in this account. Setting this element to <code>TRUE</code> causes the following behavior:</p> <ul> <li> <p>PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.</p> </li> <li> <p>PUT Object calls fail if the request includes a public ACL.</p> </li> <li> <p>PUT Bucket calls fail if the request includes a public ACL.</p> </li> </ul> <p>Enabling this setting doesn''t affect existing policies or ACLs.</p>'
+      IgnorePublicAcls:
+        $ref: '#/definitions/Setting'
+        description: <p>Specifies whether Amazon S3 should ignore public ACLs for buckets in this account. Setting this element to <code>TRUE</code> causes Amazon S3 to ignore all public ACLs on buckets in this account and any objects that they contain. </p> <p>Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.</p>
+      BlockPublicPolicy:
+        $ref: '#/definitions/Setting'
+        description: <p>Specifies whether Amazon S3 should block public bucket policies for buckets in this account. Setting this element to <code>TRUE</code> causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access. </p> <p>Enabling this setting doesn't affect existing bucket policies.</p>
+      RestrictPublicBuckets:
+        $ref: '#/definitions/Setting'
+        description: '<p>Specifies whether Amazon S3 should restrict public bucket policies for buckets in this account. Setting this element to <code>TRUE</code> restricts access to buckets with public policies to only AWS services and authorized users within this account.</p> <p>Enabling this setting doesn''t affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.</p>'
+    description: 'The <code>PublicAccessBlock</code> configuration that you want to apply to this Amazon S3 bucket. You can enable the configuration options in any combination. For more information about when Amazon S3 considers a bucket or object public, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status">The Meaning of "Public"</a> in the Amazon Simple Storage Service Developer Guide.'
+  CreateAccessPointRequest:
+    type: object
+    required:
+      - Bucket
+    properties:
+      Bucket:
+        $ref: '#/definitions/BucketName'
+        description: The name of the bucket that you want to associate this access point with.
+      VpcConfiguration:
+        $ref: '#/definitions/VpcConfiguration'
+        description: 'If you include this field, Amazon S3 restricts access to this access point to requests from the specified Virtual Private Cloud (VPC).'
+      PublicAccessBlockConfiguration:
+        $ref: '#/definitions/PublicAccessBlockConfiguration'
   JobOperation:
     type: object
     properties:
@@ -822,7 +1222,7 @@ definitions:
     properties:
       Bucket:
         $ref: '#/definitions/S3BucketArnString'
-        description: The bucket where specified job-completion report will be stored.
+        description: The Amazon Resource Name (ARN) for the bucket where specified job-completion report will be stored.
       Format:
         $ref: '#/definitions/JobReportFormat'
         description: The format of the specified job-completion report.
@@ -903,6 +1303,15 @@ definitions:
     type: string
     minLength: 5
     maxLength: 36
+  CreationDate:
+    type: string
+    format: date-time
+  DeleteAccessPointPolicyRequest:
+    type: object
+    properties: {}
+  DeleteAccessPointRequest:
+    type: object
+    properties: {}
   DeletePublicAccessBlockRequest:
     type: object
     properties: {}
@@ -964,25 +1373,29 @@ definitions:
         $ref: '#/definitions/SuspendedCause'
         description: 'The reason why the specified job was suspended. A job is only suspended if you create it through the Amazon S3 console. When you create the job, it enters the <code>Suspended</code> state to await confirmation before running. After you confirm the job, it automatically exits the <code>Suspended</code> state.'
     description: A container element for the job configuration and status information returned by a <code>Describe Job</code> request.
-  PublicAccessBlockConfiguration:
+  GetAccessPointPolicyRequest:
+    type: object
+    properties: {}
+  Policy:
+    type: string
+  GetAccessPointPolicyStatusRequest:
+    type: object
+    properties: {}
+  PolicyStatus:
     type: object
     properties:
-      BlockPublicAcls:
-        $ref: '#/definitions/Setting'
+      IsPublic:
+        $ref: '#/definitions/IsPublic'
         description: <p/>
-      IgnorePublicAcls:
-        $ref: '#/definitions/Setting'
-        description: <p/>
-      BlockPublicPolicy:
-        $ref: '#/definitions/Setting'
-        description: <p/>
-      RestrictPublicBuckets:
-        $ref: '#/definitions/Setting'
-        description: <p/>
-    description: <p/>
+    description: 'Indicates whether this access point policy is public. For more information about how Amazon S3 evaluates policies to determine whether they are public, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status">The Meaning of "Public"</a> in the <i>Amazon Simple Storage Service Developer Guide</i>. '
+  GetAccessPointRequest:
+    type: object
+    properties: {}
   GetPublicAccessBlockRequest:
     type: object
     properties: {}
+  IsPublic:
+    type: boolean
   JobArn:
     type: string
     minLength: 1
@@ -1128,6 +1541,9 @@ definitions:
     type: integer
     minimum: 1
     maximum: 1000
+  ListAccessPointsRequest:
+    type: object
+    properties: {}
   ListJobsRequest:
     type: object
     properties: {}
@@ -1138,6 +1554,14 @@ definitions:
     type: string
     minLength: 1
     maxLength: 2048
+  PutAccessPointPolicyRequest:
+    type: object
+    required:
+      - Policy
+    properties:
+      Policy:
+        $ref: '#/definitions/Policy'
+        description: 'The policy that you want to apply to the specified access point. For more information about access point policies, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html">Managing Data Access with Amazon S3 Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.'
   PutPublicAccessBlockRequest:
     type: object
     required:
@@ -1145,7 +1569,7 @@ definitions:
     properties:
       PublicAccessBlockConfiguration:
         $ref: '#/definitions/PublicAccessBlockConfiguration'
-        description: <p/>
+        description: The <code>PublicAccessBlock</code> configuration that you want to apply to the specified Amazon Web Services account.
     xml:
       namespace: 'http://awss3control.amazonaws.com/doc/2018-08-20/'
   RequestedJobStatus:

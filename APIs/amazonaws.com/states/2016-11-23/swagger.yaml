@@ -223,18 +223,26 @@ paths:
           schema:
             $ref: '#/definitions/InvalidName'
         '483':
+          description: InvalidLoggingConfiguration
+          schema:
+            $ref: '#/definitions/InvalidLoggingConfiguration'
+        '484':
           description: StateMachineAlreadyExists
           schema:
             $ref: '#/definitions/StateMachineAlreadyExists'
-        '484':
+        '485':
           description: StateMachineDeleting
           schema:
             $ref: '#/definitions/StateMachineDeleting'
-        '485':
+        '486':
           description: StateMachineLimitExceeded
           schema:
             $ref: '#/definitions/StateMachineLimitExceeded'
-        '486':
+        '487':
+          description: StateMachineTypeNotSupported
+          schema:
+            $ref: '#/definitions/StateMachineTypeNotSupported'
+        '488':
           description: TooManyTags
           schema:
             $ref: '#/definitions/TooManyTags'
@@ -628,6 +636,10 @@ paths:
           description: StateMachineDoesNotExist
           schema:
             $ref: '#/definitions/StateMachineDoesNotExist'
+        '483':
+          description: StateMachineTypeNotSupported
+          schema:
+            $ref: '#/definitions/StateMachineTypeNotSupported'
       parameters:
         - name: body
           in: body
@@ -1055,14 +1067,18 @@ paths:
           schema:
             $ref: '#/definitions/InvalidDefinition'
         '482':
+          description: InvalidLoggingConfiguration
+          schema:
+            $ref: '#/definitions/InvalidLoggingConfiguration'
+        '483':
           description: MissingRequiredParameter
           schema:
             $ref: '#/definitions/MissingRequiredParameter'
-        '483':
+        '484':
           description: StateMachineDeleting
           schema:
             $ref: '#/definitions/StateMachineDeleting'
-        '484':
+        '485':
           description: StateMachineDoesNotExist
           schema:
             $ref: '#/definitions/StateMachineDoesNotExist'
@@ -1141,14 +1157,22 @@ definitions:
       roleArn:
         $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the IAM role to use for this state machine.
+      type:
+        $ref: '#/definitions/StateMachineType'
+        description: 'Determines whether a Standard or Express state machine is created. If not set, Standard is created.'
+      loggingConfiguration:
+        $ref: '#/definitions/LoggingConfiguration'
+        description: Defines what execution history events are logged and where they are logged.
       tags:
         $ref: '#/definitions/TagList'
         description: '<p>Tags to be added when creating a state machine.</p> <p>An array of key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>, and <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html">Controlling Access Using IAM Tags</a>.</p> <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>'
   InvalidArn: {}
   InvalidDefinition: {}
+  InvalidLoggingConfiguration: {}
   StateMachineAlreadyExists: {}
   StateMachineDeleting: {}
   StateMachineLimitExceeded: {}
+  StateMachineTypeNotSupported: {}
   DeleteActivityOutput:
     type: object
     properties: {}
@@ -1245,6 +1269,7 @@ definitions:
       - name
       - definition
       - roleArn
+      - type
       - creationDate
     properties:
       stateMachineArn:
@@ -1262,9 +1287,15 @@ definitions:
       roleArn:
         $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the IAM role used when creating this state machine. (The IAM role maintains security by granting Step Functions access to AWS resources.)
+      type:
+        $ref: '#/definitions/StateMachineType'
+        description: <p/>
       creationDate:
         $ref: '#/definitions/Timestamp'
         description: The date the state machine is created.
+      loggingConfiguration:
+        $ref: '#/definitions/LoggingConfiguration'
+        description: <p/>
   DescribeStateMachineInput:
     type: object
     required:
@@ -1587,6 +1618,9 @@ definitions:
       roleArn:
         $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the IAM role of the state machine.
+      loggingConfiguration:
+        $ref: '#/definitions/LoggingConfiguration'
+        description: <p/>
   MissingRequiredParameter: {}
   SensitiveError:
     type: string
@@ -1701,6 +1735,13 @@ definitions:
         $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the timeout.
     description: Contains details about an activity timeout that occurred during an execution.
+  CloudWatchLogsLogGroup:
+    type: object
+    properties:
+      logGroupArn:
+        $ref: '#/definitions/Arn'
+        description: 'The ARN of the the CloudWatch log group to which you want your logs emitted to. The ARN must end with <code>:*</code> '
+    description: <p/>
   ConnectorParameters:
     type: string
     minLength: 0
@@ -1715,6 +1756,24 @@ definitions:
     minLength: 1
     maxLength: 1048576
     format: password
+  StateMachineType:
+    type: string
+    enum:
+      - STANDARD
+      - EXPRESS
+  LoggingConfiguration:
+    type: object
+    properties:
+      level:
+        $ref: '#/definitions/LogLevel'
+        description: Defines which category of execution history events are logged.
+      includeExecutionData:
+        $ref: '#/definitions/IncludeExecutionData'
+        description: 'Determines whether execution history data is included in your log. When set to <code>FALSE</code>, data is excluded.'
+      destinations:
+        $ref: '#/definitions/LogDestinationList'
+        description: 'An object that describes where your execution history events will be logged. Limited to size 1. Required, if your log level is not set to <code>OFF</code>.'
+    description: <p/>
   ExecutionStatus:
     type: string
     enum:
@@ -2238,6 +2297,8 @@ definitions:
       stateExitedEventDetails:
         $ref: '#/definitions/StateExitedEventDetails'
     description: Contains details about the events of an execution.
+  IncludeExecutionData:
+    type: boolean
   ListExecutionsPageToken:
     type: string
     minLength: 1
@@ -2246,6 +2307,24 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/StateMachineListItem'
+  LogDestination:
+    type: object
+    properties:
+      cloudWatchLogsLogGroup:
+        $ref: '#/definitions/CloudWatchLogsLogGroup'
+        description: 'An object describing a CloudWatch log group. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html">AWS::Logs::LogGroup</a> in the AWS CloudFormation User Guide.'
+    description: <p/>
+  LogDestinationList:
+    type: array
+    items:
+      $ref: '#/definitions/LogDestination'
+  LogLevel:
+    type: string
+    enum:
+      - ALL
+      - ERROR
+      - FATAL
+      - 'OFF'
   UnsignedInteger:
     type: integer
     minimum: 0
@@ -2254,6 +2333,7 @@ definitions:
     required:
       - stateMachineArn
       - name
+      - type
       - creationDate
     properties:
       stateMachineArn:
@@ -2262,6 +2342,9 @@ definitions:
       name:
         $ref: '#/definitions/Name'
         description: '<p>The name of the state machine.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
+      type:
+        $ref: '#/definitions/StateMachineType'
+        description: <p/>
       creationDate:
         $ref: '#/definitions/Timestamp'
         description: The date the state machine is created.

@@ -163,7 +163,7 @@ paths:
   '/#X-Amz-Target=RekognitionService.CompareFaces':
     post:
       operationId: CompareFaces
-      description: '<p>Compares a face in the <i>source</i> input image with each of the 100 largest faces detected in the <i>target</i> input image. </p> <note> <p> If the source image contains multiple faces, the service detects the largest face and compares it with each face detected in the target image. </p> </note> <p>You pass the input and target images either as base64-encoded image bytes or as references to images in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes isn''t supported. The image must be formatted as a PNG or JPEG file. </p> <p>In response, the operation returns an array of face matches ordered by similarity score in descending order. For each face match, the response provides a bounding box of the face, facial landmarks, pose details (pitch, role, and yaw), quality (brightness and sharpness), and confidence value (indicating the level of confidence that the bounding box contains a face). The response also provides a similarity score, which indicates how closely the faces match. </p> <note> <p>By default, only faces with a similarity score of greater than or equal to 80% are returned in the response. You can change this value by specifying the <code>SimilarityThreshold</code> parameter.</p> </note> <p> <code>CompareFaces</code> also returns an array of faces that don''t match the source image. For each face, it returns a bounding box, confidence value, landmarks, pose details, and quality. The response also returns information about the face in the source image, including the bounding box of the face and confidence value.</p> <p>The <code>QualityFilter</code> input parameter allows you to filter out detected faces that don’t meet a required quality bar. The quality bar is based on a variety of common use cases. By default, <code>CompareFaces</code> chooses the quality bar that''s used to filter faces. You can also explicitly choose the quality bar. Use <code>QualityFilter</code>, to set the quality bar by specifying <code>LOW</code>, <code>MEDIUM</code>, or <code>HIGH</code>. If you do not want to filter detected faces, specify <code>NONE</code>. </p> <note> <p>To use quality filtering, you need a collection associated with version 3 of the face model or higher. To get the version of the face model associated with a collection, call <a>DescribeCollection</a>. </p> </note> <p>If the image doesn''t contain Exif metadata, <code>CompareFaces</code> returns orientation information for the source and target images. Use these values to display the images with the correct image orientation.</p> <p>If no faces are detected in the source or target images, <code>CompareFaces</code> returns an <code>InvalidParameterException</code> error. </p> <note> <p> This is a stateless API operation. That is, data returned by this operation doesn''t persist.</p> </note> <p>For an example, see Comparing Faces in Images in the Amazon Rekognition Developer Guide.</p> <p>This operation requires permissions to perform the <code>rekognition:CompareFaces</code> action.</p>'
+      description: '<p>Compares a face in the <i>source</i> input image with each of the 100 largest faces detected in the <i>target</i> input image. </p> <note> <p> If the source image contains multiple faces, the service detects the largest face and compares it with each face detected in the target image. </p> </note> <p>You pass the input and target images either as base64-encoded image bytes or as references to images in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes isn''t supported. The image must be formatted as a PNG or JPEG file. </p> <p>In response, the operation returns an array of face matches ordered by similarity score in descending order. For each face match, the response provides a bounding box of the face, facial landmarks, pose details (pitch, role, and yaw), quality (brightness and sharpness), and confidence value (indicating the level of confidence that the bounding box contains a face). The response also provides a similarity score, which indicates how closely the faces match. </p> <note> <p>By default, only faces with a similarity score of greater than or equal to 80% are returned in the response. You can change this value by specifying the <code>SimilarityThreshold</code> parameter.</p> </note> <p> <code>CompareFaces</code> also returns an array of faces that don''t match the source image. For each face, it returns a bounding box, confidence value, landmarks, pose details, and quality. The response also returns information about the face in the source image, including the bounding box of the face and confidence value.</p> <p>The <code>QualityFilter</code> input parameter allows you to filter out detected faces that don’t meet a required quality bar. The quality bar is based on a variety of common use cases. Use <code>QualityFilter</code> to set the quality bar by specifying <code>LOW</code>, <code>MEDIUM</code>, or <code>HIGH</code>. If you do not want to filter detected faces, specify <code>NONE</code>. The default value is <code>NONE</code>. </p> <note> <p>To use quality filtering, you need a collection associated with version 3 of the face model or higher. To get the version of the face model associated with a collection, call <a>DescribeCollection</a>. </p> </note> <p>If the image doesn''t contain Exif metadata, <code>CompareFaces</code> returns orientation information for the source and target images. Use these values to display the images with the correct image orientation.</p> <p>If no faces are detected in the source or target images, <code>CompareFaces</code> returns an <code>InvalidParameterException</code> error. </p> <note> <p> This is a stateless API operation. That is, data returned by this operation doesn''t persist.</p> </note> <p>For an example, see Comparing Faces in Images in the Amazon Rekognition Developer Guide.</p> <p>This operation requires permissions to perform the <code>rekognition:CompareFaces</code> action.</p>'
       responses:
         '200':
           description: Success
@@ -266,6 +266,124 @@ paths:
           type: string
           enum:
             - RekognitionService.CreateCollection
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=RekognitionService.CreateProject':
+    post:
+      operationId: CreateProject
+      description: '<p>Creates a new Amazon Rekognition Custom Labels project. A project is a logical grouping of resources (images, Labels, models) and operations (training, evaluation and detection). </p> <p>This operation requires permissions to perform the <code>rekognition:CreateProject</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateProjectResponse'
+        '480':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '482':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '483':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '484':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '485':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '486':
+          description: ProvisionedThroughputExceededException
+          schema:
+            $ref: '#/definitions/ProvisionedThroughputExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateProjectRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - RekognitionService.CreateProject
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=RekognitionService.CreateProjectVersion':
+    post:
+      operationId: CreateProjectVersion
+      description: '<p>Creates a new version of a model and begins training. Models are managed as part of an Amazon Rekognition Custom Labels project. You can specify one training dataset and one testing dataset. The response from <code>CreateProjectVersion</code> is an Amazon Resource Name (ARN) for the version of the model. </p> <p>Training takes a while to complete. You can get the current status by calling <a>DescribeProjectVersions</a>.</p> <p>Once training has successfully completed, call <a>DescribeProjectVersions</a> to get the training results and evaluate the model. </p> <p>After evaluating the model, you start the model by calling <a>StartProjectVersion</a>.</p> <p>This operation requires permissions to perform the <code>rekognition:CreateProjectVersion</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateProjectVersionResponse'
+        '480':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '486':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '487':
+          description: ProvisionedThroughputExceededException
+          schema:
+            $ref: '#/definitions/ProvisionedThroughputExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateProjectVersionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - RekognitionService.CreateProjectVersion
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -547,6 +665,136 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=RekognitionService.DescribeProjectVersions':
+    post:
+      operationId: DescribeProjectVersions
+      description: '<p>Lists and describes the models in an Amazon Rekognition Custom Labels project. You can specify up to 10 model versions in <code>ProjectVersionArns</code>. If you don''t specify a value, descriptions for all models are returned.</p> <p>This operation requires permissions to perform the <code>rekognition:DescribeProjectVersions</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeProjectVersionsResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidPaginationTokenException
+          schema:
+            $ref: '#/definitions/InvalidPaginationTokenException'
+        '482':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '483':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '484':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '485':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '486':
+          description: ProvisionedThroughputExceededException
+          schema:
+            $ref: '#/definitions/ProvisionedThroughputExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeProjectVersionsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - RekognitionService.DescribeProjectVersions
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=RekognitionService.DescribeProjects':
+    post:
+      operationId: DescribeProjects
+      description: '<p>Lists and gets information about your Amazon Rekognition Custom Labels projects.</p> <p>This operation requires permissions to perform the <code>rekognition:DescribeProjects</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeProjectsResponse'
+        '480':
+          description: InvalidPaginationTokenException
+          schema:
+            $ref: '#/definitions/InvalidPaginationTokenException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '483':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '485':
+          description: ProvisionedThroughputExceededException
+          schema:
+            $ref: '#/definitions/ProvisionedThroughputExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeProjectsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - RekognitionService.DescribeProjects
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=RekognitionService.DescribeStreamProcessor':
     post:
       operationId: DescribeStreamProcessor
@@ -592,6 +840,79 @@ paths:
           type: string
           enum:
             - RekognitionService.DescribeStreamProcessor
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=RekognitionService.DetectCustomLabels':
+    post:
+      operationId: DetectCustomLabels
+      description: '<p>Detects custom labels in a supplied image by using an Amazon Rekognition Custom Labels model. </p> <p>You specify which version of a model version to use by using the <code>ProjectVersionArn</code> input parameter. </p> <p>You pass the input image as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file. </p> <p> For each object that the model version detects on an image, the API returns a (<code>CustomLabel</code>) object in an array (<code>CustomLabels</code>). Each <code>CustomLabel</code> object provides the label name (<code>Name</code>), the level of confidence that the image contains the object (<code>Confidence</code>), and object location information, if it exists, for the label on the image (<code>Geometry</code>). </p> <p>During training model calculates a threshold value that determines if a prediction for a label is true. By default, <code>DetectCustomLabels</code> doesn''t return labels whose confidence value is below the model''s calculated threshold value. To filter labels that are returned, specify a value for <code>MinConfidence</code> that is higher than the model''s calculated threshold. You can get the model''s calculated threshold from the model''s training results shown in the Amazon Rekognition Custom Labels console. To get all labels, regardless of confidence, specify a <code>MinConfidence</code> value of 0. </p> <p>You can also add the <code>MaxResults</code> parameter to limit the number of labels returned. </p> <p>This is a stateless API operation. That is, the operation does not persist any data.</p> <p>This operation requires permissions to perform the <code>rekognition:DetectCustomLabels</code> action. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DetectCustomLabelsResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ResourceNotReadyException
+          schema:
+            $ref: '#/definitions/ResourceNotReadyException'
+        '482':
+          description: InvalidS3ObjectException
+          schema:
+            $ref: '#/definitions/InvalidS3ObjectException'
+        '483':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '484':
+          description: ImageTooLargeException
+          schema:
+            $ref: '#/definitions/ImageTooLargeException'
+        '485':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '486':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '487':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '488':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '489':
+          description: ProvisionedThroughputExceededException
+          schema:
+            $ref: '#/definitions/ProvisionedThroughputExceededException'
+        '490':
+          description: InvalidImageFormatException
+          schema:
+            $ref: '#/definitions/InvalidImageFormatException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DetectCustomLabelsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - RekognitionService.DetectCustomLabels
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -763,6 +1084,10 @@ paths:
           description: InvalidImageFormatException
           schema:
             $ref: '#/definitions/InvalidImageFormatException'
+        '488':
+          description: HumanLoopQuotaExceededException
+          schema:
+            $ref: '#/definitions/HumanLoopQuotaExceededException'
       parameters:
         - name: body
           in: body
@@ -1682,7 +2007,7 @@ paths:
   '/#X-Amz-Target=RekognitionService.SearchFacesByImage':
     post:
       operationId: SearchFacesByImage
-      description: '<p>For a given input image, first detects the largest face in the image, and then searches the specified collection for matching faces. The operation compares the features of the input face with faces in the specified collection. </p> <note> <p>To search for all faces in an input image, you might first call the <a>IndexFaces</a> operation, and then use the face IDs returned in subsequent calls to the <a>SearchFaces</a> operation. </p> <p> You can also call the <code>DetectFaces</code> operation and use the bounding boxes in the response to make face crops, which then you can pass in to the <code>SearchFacesByImage</code> operation. </p> </note> <p>You pass the input image either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file. </p> <p> The response returns an array of faces that match, ordered by similarity score with the highest similarity first. More specifically, it is an array of metadata for each face match found. Along with the metadata, the response also includes a <code>similarity</code> indicating how similar the face is to the input face. In the response, the operation also returns the bounding box (and a confidence level that the bounding box contains a face) of the face that Amazon Rekognition used for the input image. </p> <p>For an example, Searching for a Face Using an Image in the Amazon Rekognition Developer Guide.</p> <p>The <code>QualityFilter</code> input parameter allows you to filter out detected faces that don’t meet a required quality bar. The quality bar is based on a variety of common use cases. By default, Amazon Rekognition chooses the quality bar that''s used to filter faces. You can also explicitly choose the quality bar. Use <code>QualityFilter</code>, to set the quality bar for filtering by specifying <code>LOW</code>, <code>MEDIUM</code>, or <code>HIGH</code>. If you do not want to filter detected faces, specify <code>NONE</code>. </p> <note> <p>To use quality filtering, you need a collection associated with version 3 of the face model or higher. To get the version of the face model associated with a collection, call <a>DescribeCollection</a>. </p> </note> <p>This operation requires permissions to perform the <code>rekognition:SearchFacesByImage</code> action.</p>'
+      description: '<p>For a given input image, first detects the largest face in the image, and then searches the specified collection for matching faces. The operation compares the features of the input face with faces in the specified collection. </p> <note> <p>To search for all faces in an input image, you might first call the <a>IndexFaces</a> operation, and then use the face IDs returned in subsequent calls to the <a>SearchFaces</a> operation. </p> <p> You can also call the <code>DetectFaces</code> operation and use the bounding boxes in the response to make face crops, which then you can pass in to the <code>SearchFacesByImage</code> operation. </p> </note> <p>You pass the input image either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file. </p> <p> The response returns an array of faces that match, ordered by similarity score with the highest similarity first. More specifically, it is an array of metadata for each face match found. Along with the metadata, the response also includes a <code>similarity</code> indicating how similar the face is to the input face. In the response, the operation also returns the bounding box (and a confidence level that the bounding box contains a face) of the face that Amazon Rekognition used for the input image. </p> <p>For an example, Searching for a Face Using an Image in the Amazon Rekognition Developer Guide.</p> <p>The <code>QualityFilter</code> input parameter allows you to filter out detected faces that don’t meet a required quality bar. The quality bar is based on a variety of common use cases. Use <code>QualityFilter</code> to set the quality bar for filtering by specifying <code>LOW</code>, <code>MEDIUM</code>, or <code>HIGH</code>. If you do not want to filter detected faces, specify <code>NONE</code>. The default value is <code>NONE</code>.</p> <note> <p>To use quality filtering, you need a collection associated with version 3 of the face model or higher. To get the version of the face model associated with a collection, call <a>DescribeCollection</a>. </p> </note> <p>This operation requires permissions to perform the <code>rekognition:SearchFacesByImage</code> action.</p>'
       responses:
         '200':
           description: Success
@@ -2138,6 +2463,67 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=RekognitionService.StartProjectVersion':
+    post:
+      operationId: StartProjectVersion
+      description: '<p>Starts the running of the version of a model. Starting a model takes a while to complete. To check the current state of the model, use <a>DescribeProjectVersions</a>.</p> <p>Once the model is running, you can detect custom labels in new images by calling <a>DetectCustomLabels</a>.</p> <note> <p>You are charged for the amount of time that the model is running. To stop a running model, call <a>StopProjectVersion</a>.</p> </note> <p>This operation requires permissions to perform the <code>rekognition:StartProjectVersion</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartProjectVersionResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '486':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '487':
+          description: ProvisionedThroughputExceededException
+          schema:
+            $ref: '#/definitions/ProvisionedThroughputExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StartProjectVersionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - RekognitionService.StartProjectVersion
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=RekognitionService.StartStreamProcessor':
     post:
       operationId: StartStreamProcessor
@@ -2187,6 +2573,63 @@ paths:
           type: string
           enum:
             - RekognitionService.StartStreamProcessor
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=RekognitionService.StopProjectVersion':
+    post:
+      operationId: StopProjectVersion
+      description: 'Stops a running model. The operation might take a while to complete. To check the current status, call <a>DescribeProjectVersions</a>. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StopProjectVersionResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '482':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '483':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '484':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '485':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '486':
+          description: ProvisionedThroughputExceededException
+          schema:
+            $ref: '#/definitions/ProvisionedThroughputExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StopProjectVersionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - RekognitionService.StopProjectVersion
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -2305,7 +2748,7 @@ definitions:
         description: The minimum level of confidence in the face matches that a match must meet to be included in the <code>FaceMatches</code> array.
       QualityFilter:
         $ref: '#/definitions/QualityFilter'
-        description: '<p>A filter that specifies a quality bar for how much filtering is done to identify faces. Filtered faces aren''t compared. If you specify <code>AUTO</code>, Amazon Rekognition chooses the quality bar. If you specify <code>LOW</code>, <code>MEDIUM</code>, or <code>HIGH</code>, filtering removes all faces that don’t meet the chosen quality bar. The default value is <code>AUTO</code>. The quality bar is based on a variety of common use cases. Low-quality detections can occur for a number of reasons. Some examples are an object that''s misidentified as a face, a face that''s too blurry, or a face with a pose that''s too extreme to use. If you specify <code>NONE</code>, no filtering is performed. </p> <p>To use quality filtering, the collection you are using must be associated with version 3 of the face model or higher.</p>'
+        description: '<p>A filter that specifies a quality bar for how much filtering is done to identify faces. Filtered faces aren''t compared. If you specify <code>AUTO</code>, Amazon Rekognition chooses the quality bar. If you specify <code>LOW</code>, <code>MEDIUM</code>, or <code>HIGH</code>, filtering removes all faces that don’t meet the chosen quality bar. The quality bar is based on a variety of common use cases. Low-quality detections can occur for a number of reasons. Some examples are an object that''s misidentified as a face, a face that''s too blurry, or a face with a pose that''s too extreme to use. If you specify <code>NONE</code>, no filtering is performed. The default value is <code>NONE</code>. </p> <p>To use quality filtering, the collection you are using must be associated with version 3 of the face model or higher.</p>'
   InvalidParameterException: {}
   InvalidS3ObjectException: {}
   ImageTooLargeException: {}
@@ -2338,6 +2781,53 @@ definitions:
         $ref: '#/definitions/CollectionId'
         description: ID for the collection that you are creating.
   ResourceAlreadyExistsException: {}
+  CreateProjectResponse:
+    type: object
+    properties:
+      ProjectArn:
+        $ref: '#/definitions/ProjectArn'
+        description: 'The Amazon Resource Name (ARN) of the new project. You can use the ARN to configure IAM access to the project. '
+  CreateProjectRequest:
+    type: object
+    required:
+      - ProjectName
+    properties:
+      ProjectName:
+        $ref: '#/definitions/ProjectName'
+        description: The name of the project to create.
+  ResourceInUseException: {}
+  LimitExceededException: {}
+  CreateProjectVersionResponse:
+    type: object
+    properties:
+      ProjectVersionArn:
+        $ref: '#/definitions/ProjectVersionArn'
+        description: The ARN of the model version that was created. Use <code>DescribeProjectVersion</code> to get the current status of the training operation.
+  CreateProjectVersionRequest:
+    type: object
+    required:
+      - ProjectArn
+      - VersionName
+      - OutputConfig
+      - TrainingData
+      - TestingData
+    properties:
+      ProjectArn:
+        $ref: '#/definitions/ProjectArn'
+        description: The ARN of the Amazon Rekognition Custom Labels project that manages the model that you want to train.
+      VersionName:
+        $ref: '#/definitions/VersionName'
+        description: A name for the version of the model. This value must be unique.
+      OutputConfig:
+        $ref: '#/definitions/OutputConfig'
+        description: The Amazon S3 location to store the results of training.
+      TrainingData:
+        $ref: '#/definitions/TrainingData'
+        description: 'The dataset to use for training. '
+      TestingData:
+        $ref: '#/definitions/TestingData'
+        description: The dataset to use for testing.
+  ResourceNotFoundException: {}
   CreateStreamProcessorResponse:
     type: object
     properties:
@@ -2368,8 +2858,6 @@ definitions:
       RoleArn:
         $ref: '#/definitions/RoleArn'
         description: ARN of the IAM role that allows access to the stream processor.
-  LimitExceededException: {}
-  ResourceInUseException: {}
   DeleteCollectionResponse:
     type: object
     example:
@@ -2386,7 +2874,6 @@ definitions:
       CollectionId:
         $ref: '#/definitions/CollectionId'
         description: ID of the collection to delete.
-  ResourceNotFoundException: {}
   DeleteFacesResponse:
     type: object
     example:
@@ -2442,6 +2929,51 @@ definitions:
       CollectionId:
         $ref: '#/definitions/CollectionId'
         description: The ID of the collection to describe.
+  DescribeProjectVersionsResponse:
+    type: object
+    properties:
+      ProjectVersionDescriptions:
+        $ref: '#/definitions/ProjectVersionDescriptions'
+        description: 'A list of model descriptions. The list is sorted by the creation date and time of the model versions, latest to earliest.'
+      NextToken:
+        $ref: '#/definitions/ExtendedPaginationToken'
+        description: 'If the previous response was incomplete (because there is more results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. You can use this pagination token to retrieve the next set of results. '
+  DescribeProjectVersionsRequest:
+    type: object
+    required:
+      - ProjectArn
+    properties:
+      ProjectArn:
+        $ref: '#/definitions/ProjectArn'
+        description: The Amazon Resource Name (ARN) of the project that contains the models you want to describe.
+      VersionNames:
+        $ref: '#/definitions/VersionNames'
+        description: 'A list of model version names that you want to describe. You can add up to 10 model version names to the list. If you don''t specify a value, all model descriptions are returned.'
+      NextToken:
+        $ref: '#/definitions/ExtendedPaginationToken'
+        description: 'If the previous response was incomplete (because there is more results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. You can use this pagination token to retrieve the next set of results. '
+      MaxResults:
+        $ref: '#/definitions/ProjectVersionsPageSize'
+        description: 'The maximum number of results to return per paginated call. The largest value you can specify is 100. If you specify a value greater than 100, a ValidationException error occurs. The default value is 100. '
+  InvalidPaginationTokenException: {}
+  DescribeProjectsResponse:
+    type: object
+    properties:
+      ProjectDescriptions:
+        $ref: '#/definitions/ProjectDescriptions'
+        description: A list of project descriptions. The list is sorted by the date and time the projects are created.
+      NextToken:
+        $ref: '#/definitions/ExtendedPaginationToken'
+        description: 'If the previous response was incomplete (because there is more results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. You can use this pagination token to retrieve the next set of results. '
+  DescribeProjectsRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/ExtendedPaginationToken'
+        description: 'If the previous response was incomplete (because there is more results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. You can use this pagination token to retrieve the next set of results. '
+      MaxResults:
+        $ref: '#/definitions/ProjectsPageSize'
+        description: 'The maximum number of results to return per paginated call. The largest value you can specify is 100. If you specify a value greater than 100, a ValidationException error occurs. The default value is 100. '
   DescribeStreamProcessorResponse:
     type: object
     properties:
@@ -2483,6 +3015,30 @@ definitions:
       Name:
         $ref: '#/definitions/StreamProcessorName'
         description: Name of the stream processor for which you want information.
+  DetectCustomLabelsResponse:
+    type: object
+    properties:
+      CustomLabels:
+        $ref: '#/definitions/CustomLabels'
+        description: An array of custom labels detected in the input image.
+  DetectCustomLabelsRequest:
+    type: object
+    required:
+      - ProjectVersionArn
+      - Image
+    properties:
+      ProjectVersionArn:
+        $ref: '#/definitions/ProjectVersionArn'
+        description: The ARN of the model version that you want to use.
+      Image:
+        $ref: '#/definitions/Image'
+      MaxResults:
+        $ref: '#/definitions/UInteger'
+        description: Maximum number of results you want the service to return in the response. The service returns the specified number of highest confidence labels ranked from highest confidence to lowest.
+      MinConfidence:
+        $ref: '#/definitions/Percent'
+        description: 'Specifies the minimum confidence level for the labels to return. Amazon Rekognition doesn''t return any labels with a confidence lower than this specified value. If you specify a value of 0, all labels are return, regardless of the default thresholds that the model version applies.'
+  ResourceNotReadyException: {}
   DetectFacesResponse:
     type: object
     example:
@@ -2576,6 +3132,9 @@ definitions:
       ModerationModelVersion:
         $ref: '#/definitions/String'
         description: Version number of the moderation detection model that was used to detect unsafe content.
+      HumanLoopActivationOutput:
+        $ref: '#/definitions/HumanLoopActivationOutput'
+        description: Shows the results of the human in the loop evaluation.
   DetectModerationLabelsRequest:
     type: object
     required:
@@ -2587,6 +3146,10 @@ definitions:
       MinConfidence:
         $ref: '#/definitions/Percent'
         description: '<p>Specifies the minimum confidence level for the labels to return. Amazon Rekognition doesn''t return any labels with a confidence level lower than this specified value.</p> <p>If you don''t specify <code>MinConfidence</code>, the operation returns labels with confidence values greater than or equal to 50 percent.</p>'
+      HumanLoopConfig:
+        $ref: '#/definitions/HumanLoopConfig'
+        description: 'Sets up the configuration for human evaluation, including the FlowDefinition the image will be sent to.'
+  HumanLoopQuotaExceededException: {}
   DetectTextResponse:
     type: object
     properties:
@@ -2653,7 +3216,6 @@ definitions:
       SortBy:
         $ref: '#/definitions/CelebrityRecognitionSortBy'
         description: 'Sort to use for celebrities returned in <code>Celebrities</code> field. Specify <code>ID</code> to sort by the celebrity identifier, specify <code>TIMESTAMP</code> to sort by the time the celebrity was recognized.'
-  InvalidPaginationTokenException: {}
   GetContentModerationResponse:
     type: object
     properties:
@@ -3246,7 +3808,7 @@ definitions:
         description: '(Optional) Specifies the minimum confidence in the face match to return. For example, don''t return any matches where confidence in matches is less than 70%. The default value is 80%.'
       QualityFilter:
         $ref: '#/definitions/QualityFilter'
-        description: '<p>A filter that specifies a quality bar for how much filtering is done to identify faces. Filtered faces aren''t searched for in the collection. If you specify <code>AUTO</code>, Amazon Rekognition chooses the quality bar. If you specify <code>LOW</code>, <code>MEDIUM</code>, or <code>HIGH</code>, filtering removes all faces that don’t meet the chosen quality bar. The default value is <code>AUTO</code>. The quality bar is based on a variety of common use cases. Low-quality detections can occur for a number of reasons. Some examples are an object that''s misidentified as a face, a face that''s too blurry, or a face with a pose that''s too extreme to use. If you specify <code>NONE</code>, no filtering is performed. </p> <p>To use quality filtering, the collection you are using must be associated with version 3 of the face model or higher.</p>'
+        description: '<p>A filter that specifies a quality bar for how much filtering is done to identify faces. Filtered faces aren''t searched for in the collection. If you specify <code>AUTO</code>, Amazon Rekognition chooses the quality bar. If you specify <code>LOW</code>, <code>MEDIUM</code>, or <code>HIGH</code>, filtering removes all faces that don’t meet the chosen quality bar. The quality bar is based on a variety of common use cases. Low-quality detections can occur for a number of reasons. Some examples are an object that''s misidentified as a face, a face that''s too blurry, or a face with a pose that''s too extreme to use. If you specify <code>NONE</code>, no filtering is performed. The default value is <code>NONE</code>. </p> <p>To use quality filtering, the collection you are using must be associated with version 3 of the face model or higher.</p>'
   StartCelebrityRecognitionResponse:
     type: object
     properties:
@@ -3403,6 +3965,24 @@ definitions:
       JobTag:
         $ref: '#/definitions/JobTag'
         description: 'An identifier you specify that''s returned in the completion notification that''s published to your Amazon Simple Notification Service topic. For example, you can use <code>JobTag</code> to group related jobs and identify them in the completion notification.'
+  StartProjectVersionResponse:
+    type: object
+    properties:
+      Status:
+        $ref: '#/definitions/ProjectVersionStatus'
+        description: 'The current running status of the model. '
+  StartProjectVersionRequest:
+    type: object
+    required:
+      - ProjectVersionArn
+      - MinInferenceUnits
+    properties:
+      ProjectVersionArn:
+        $ref: '#/definitions/ProjectVersionArn'
+        description: The Amazon Resource Name(ARN) of the model version that you want to start.
+      MinInferenceUnits:
+        $ref: '#/definitions/InferenceUnits'
+        description: 'The minimum number of inference units to use. A single inference unit represents 1 hour of processing and can support up to 5 Transaction Pers Second (TPS). Use a higher number to increase the TPS throughput of your model. You are charged for the number of inference units that you use. '
   StartStreamProcessorResponse:
     type: object
     properties: {}
@@ -3414,6 +3994,20 @@ definitions:
       Name:
         $ref: '#/definitions/StreamProcessorName'
         description: The name of the stream processor to start processing.
+  StopProjectVersionResponse:
+    type: object
+    properties:
+      Status:
+        $ref: '#/definitions/ProjectVersionStatus'
+        description: 'The current status of the stop operation. '
+  StopProjectVersionRequest:
+    type: object
+    required:
+      - ProjectVersionArn
+    properties:
+      ProjectVersionArn:
+        $ref: '#/definitions/ProjectVersionArn'
+        description: '<p>The Amazon Resource Name (ARN) of the model version that you want to delete.</p> <p>This operation requires permissions to perform the <code>rekognition:StopProjectVersion</code> action.</p>'
   StopStreamProcessorResponse:
     type: object
     properties: {}
@@ -3438,6 +4032,22 @@ definitions:
         $ref: '#/definitions/UInteger'
         description: The highest estimated age.
     description: '<p>Structure containing the estimated age range, in years, for a face.</p> <p>Amazon Rekognition estimates an age range for faces detected in the input image. Estimated age ranges can overlap. A face of a 5-year-old might have an estimated range of 4-6, while the face of a 6-year-old might have an estimated range of 4-8.</p>'
+  GroundTruthManifest:
+    type: object
+    properties:
+      S3Object:
+        $ref: '#/definitions/S3Object'
+    description: The S3 bucket that contains the Ground Truth manifest file.
+  Asset:
+    type: object
+    properties:
+      GroundTruthManifest:
+        $ref: '#/definitions/GroundTruthManifest'
+    description: 'Assets are the images that you use to train and evaluate a model version. Assets are referenced by Sagemaker GroundTruth manifest files. '
+  Assets:
+    type: array
+    items:
+      $ref: '#/definitions/Asset'
   Attribute:
     type: string
     enum:
@@ -3724,6 +4334,16 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ComparedFace'
+  ContentClassifier:
+    type: string
+    enum:
+      - FreeOfPersonallyIdentifiableInformation
+      - FreeOfAdultContent
+  ContentClassifiers:
+    type: array
+    items:
+      $ref: '#/definitions/ContentClassifier'
+    maxItems: 256
   ModerationLabel:
     type: object
     properties:
@@ -3756,6 +4376,53 @@ definitions:
     enum:
       - NAME
       - TIMESTAMP
+  ProjectName:
+    type: string
+    pattern: '[a-zA-Z0-9_.\-]+'
+    minLength: 1
+    maxLength: 255
+  ProjectArn:
+    type: string
+    pattern: '(^arn:[a-z\d-]+:rekognition:[a-z\d-]+:\d{12}:project\/[a-zA-Z0-9_.\-]{1,255}\/[0-9]+$)'
+    minLength: 20
+    maxLength: 2048
+  VersionName:
+    type: string
+    pattern: '[a-zA-Z0-9_.\-]+'
+    minLength: 1
+    maxLength: 255
+  OutputConfig:
+    type: object
+    properties:
+      S3Bucket:
+        $ref: '#/definitions/S3Bucket'
+        description: The S3 bucket where training output is placed.
+      S3KeyPrefix:
+        $ref: '#/definitions/S3KeyPrefix'
+        description: 'The prefix applied to the training output files. '
+    description: The S3 bucket and folder location where training output is placed.
+  TrainingData:
+    type: object
+    properties:
+      Assets:
+        $ref: '#/definitions/Assets'
+        description: A Sagemaker GroundTruth manifest file that contains the training images (assets).
+    description: The dataset used for training.
+  TestingData:
+    type: object
+    properties:
+      Assets:
+        $ref: '#/definitions/Assets'
+        description: The assets used for testing.
+      AutoCreate:
+        $ref: '#/definitions/Boolean'
+        description: 'If specified, Amazon Rekognition Custom Labels creates a testing dataset with an 80/20 split of the training dataset.'
+    description: 'The dataset used for testing. Optionally, if <code>AutoCreate</code> is set, Amazon Rekognition Custom Labels creates a testing dataset using an 80/20 split of the training dataset.'
+  ProjectVersionArn:
+    type: string
+    pattern: '(^arn:[a-z\d-]+:rekognition:[a-z\d-]+:\d{12}:project\/[a-zA-Z0-9_.\-]{1,255}\/version\/[a-zA-Z0-9_.\-]{1,255}\/[0-9]+$)'
+    minLength: 20
+    maxLength: 2048
   StreamProcessorInput:
     type: object
     properties:
@@ -3788,6 +4455,33 @@ definitions:
   StreamProcessorArn:
     type: string
     pattern: '(^arn:[a-z\d-]+:rekognition:[a-z\d-]+:\d{12}:streamprocessor\/.+$)'
+  Geometry:
+    type: object
+    properties:
+      BoundingBox:
+        $ref: '#/definitions/BoundingBox'
+        description: An axis-aligned coarse representation of the detected item's location on the image.
+      Polygon:
+        $ref: '#/definitions/Polygon'
+        description: 'Within the bounding box, a fine-grained polygon around the detected item.'
+    description: Information about where an object (<a>DetectCustomLabels</a>) or text (<a>DetectText</a>) is located on an image.
+  CustomLabel:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: The name of the custom label.
+      Confidence:
+        $ref: '#/definitions/Percent'
+        description: The confidence that the model has in the detection of the custom label. The range is 0-100. A higher value indicates a higher confidence.
+      Geometry:
+        $ref: '#/definitions/Geometry'
+        description: The location of the detected object on the image that corresponds to the custom label. Includes an axis aligned coarse bounding box surrounding the object and a finer grain polygon for more accurate spatial information.
+    description: A custom label detected in an image by a call to <a>DetectCustomLabels</a>.
+  CustomLabels:
+    type: array
+    items:
+      $ref: '#/definitions/CustomLabel'
   DateTime:
     type: string
     format: date-time
@@ -3805,6 +4499,31 @@ definitions:
   ULong:
     type: integer
     minimum: 0
+  VersionNames:
+    type: array
+    items:
+      $ref: '#/definitions/VersionName'
+    minItems: 1
+    maxItems: 10
+  ExtendedPaginationToken:
+    type: string
+    maxLength: 1024
+  ProjectVersionsPageSize:
+    type: integer
+    minimum: 1
+    maximum: 100
+  ProjectVersionDescriptions:
+    type: array
+    items:
+      $ref: '#/definitions/ProjectVersionDescription'
+  ProjectsPageSize:
+    type: integer
+    minimum: 1
+    maximum: 100
+  ProjectDescriptions:
+    type: array
+    items:
+      $ref: '#/definitions/ProjectDescription'
   StreamProcessorStatus:
     type: string
     enum:
@@ -3821,10 +4540,39 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Label'
+  HumanLoopConfig:
+    type: object
+    required:
+      - HumanLoopName
+      - FlowDefinitionArn
+    properties:
+      HumanLoopName:
+        $ref: '#/definitions/HumanLoopName'
+        description: The name of the human review used for this image. This should be kept unique within a region.
+      FlowDefinitionArn:
+        $ref: '#/definitions/FlowDefinitionArn'
+        description: The Amazon Resource Name (ARN) of the flow definition.
+      DataAttributes:
+        $ref: '#/definitions/HumanLoopDataAttributes'
+        description: Sets attributes of the input data.
+    description: Sets up the flow definition the image will be sent to if one of the conditions is met. You can also set certain attributes of the image before review.
   ModerationLabels:
     type: array
     items:
       $ref: '#/definitions/ModerationLabel'
+  HumanLoopActivationOutput:
+    type: object
+    properties:
+      HumanLoopArn:
+        $ref: '#/definitions/HumanLoopArn'
+        description: The Amazon Resource Name (ARN) of the HumanLoop created.
+      HumanLoopActivationReasons:
+        $ref: '#/definitions/HumanLoopActivationReasons'
+        description: Shows if and why human review was needed.
+      HumanLoopActivationConditionsEvaluationResults:
+        $ref: '#/definitions/HumanLoopActivationConditionsEvaluationResults'
+        description: 'Shows the result of condition evaluations, including those conditions which activated a human review.'
+    description: 'Shows the results of the human in the loop evaluation. If there is no HumanLoopArn, the input did not trigger human review.'
   TextDetectionList:
     type: array
     items:
@@ -3855,6 +4603,22 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Emotion'
+  Summary:
+    type: object
+    properties:
+      S3Object:
+        $ref: '#/definitions/S3Object'
+    description: <p>The S3 bucket that contains the training summary. The training summary includes aggregated evaluation metrics for the entire testing dataset and metrics for each individual label. </p> <p>You get the training summary S3 bucket location by calling <a>DescribeProjectVersions</a>. </p>
+  EvaluationResult:
+    type: object
+    properties:
+      F1Score:
+        $ref: '#/definitions/Float'
+        description: 'The F1 score for the evaluation of all labels. The F1 score metric evaluates the overall precision and recall performance of the model as a single value. A higher value indicates better precision and recall performance. A lower score indicates that precision, recall, or both are performing poorly. '
+      Summary:
+        $ref: '#/definitions/Summary'
+        description: The S3 bucket that contains the training summary.
+    description: The evaluation results for the training of a model.
   ExternalImageId:
     type: string
     pattern: '[a-zA-Z0-9_.\-:]+'
@@ -4025,6 +4789,9 @@ definitions:
     enum:
       - INDEX
       - TIMESTAMP
+  FlowDefinitionArn:
+    type: string
+    maxLength: 256
   GenderType:
     type: string
     enum:
@@ -4034,16 +4801,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Point'
-  Geometry:
-    type: object
-    properties:
-      BoundingBox:
-        $ref: '#/definitions/BoundingBox'
-        description: An axis-aligned coarse representation of the detected text's location on the image.
-      Polygon:
-        $ref: '#/definitions/Polygon'
-        description: 'Within the bounding box, a fine-grained polygon around the detected text.'
-    description: Information about where the text detected by <a>DetectText</a> is located on an image.
   JobId:
     type: string
     pattern: '^[a-zA-Z0-9-_]+$'
@@ -4107,10 +4864,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/PersonDetection'
-  ImageBlob:
-    type: string
-    minLength: 1
-    maxLength: 5242880
   S3Object:
     type: object
     properties:
@@ -4124,6 +4877,35 @@ definitions:
         $ref: '#/definitions/S3ObjectVersion'
         description: 'If the bucket is versioning enabled, you can specify the object version. '
     description: '<p>Provides the S3 bucket name and object name.</p> <p>The region for the S3 bucket containing the S3 object must match the region you use for Amazon Rekognition operations.</p> <p>For Amazon Rekognition to process an S3 object, the user must have permission to access the S3 object. For more information, see Resource-Based Policies in the Amazon Rekognition Developer Guide. </p>'
+  HumanLoopActivationConditionsEvaluationResults:
+    type: string
+    maxLength: 10240
+  HumanLoopArn:
+    type: string
+    maxLength: 256
+  HumanLoopActivationReasons:
+    type: array
+    items:
+      $ref: '#/definitions/HumanLoopActivationReason'
+    minItems: 1
+  HumanLoopActivationReason:
+    type: string
+  HumanLoopName:
+    type: string
+    pattern: '^[a-z0-9](-*[a-z0-9])*'
+    minLength: 1
+    maxLength: 63
+  HumanLoopDataAttributes:
+    type: object
+    properties:
+      ContentClassifiers:
+        $ref: '#/definitions/ContentClassifiers'
+        description: Sets whether the input image is free of personally identifiable information.
+    description: 'Allows you to set attributes of the image. Currently, you can declare an image as free of personally identifiable information.'
+  ImageBlob:
+    type: string
+    minLength: 1
+    maxLength: 5242880
   MaxFacesToIndex:
     type: integer
     minimum: 1
@@ -4131,6 +4913,9 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/UnindexedFace'
+  InferenceUnits:
+    type: integer
+    minimum: 1
   Instance:
     type: object
     properties:
@@ -4274,6 +5059,14 @@ definitions:
         $ref: '#/definitions/RoleArn'
         description: 'The ARN of an IAM role that gives Amazon Rekognition publishing permissions to the Amazon SNS topic. '
     description: 'The Amazon Simple Notification Service topic to which Amazon Rekognition publishes the completion status of a video analysis operation. For more information, see <a>api-video</a>.'
+  S3Bucket:
+    type: string
+    pattern: '[0-9A-Za-z\.\-_]*'
+    minLength: 3
+    maxLength: 255
+  S3KeyPrefix:
+    type: string
+    maxLength: 1024
   Parent:
     type: object
     properties:
@@ -4328,7 +5121,95 @@ definitions:
       'Y':
         $ref: '#/definitions/Float'
         description: The value of the Y coordinate for a point on a <code>Polygon</code>.
-    description: '<p>The X and Y coordinates of a point on an image. The X and Y values returned are ratios of the overall image size. For example, if the input image is 700x200 and the operation returns X=0.5 and Y=0.25, then the point is at the (350,50) pixel coordinate on the image.</p> <p>An array of <code>Point</code> objects, <code>Polygon</code>, is returned by <a>DetectText</a>. <code>Polygon</code> represents a fine-grained polygon around detected text. For more information, see Geometry in the Amazon Rekognition Developer Guide. </p>'
+    description: '<p>The X and Y coordinates of a point on an image. The X and Y values returned are ratios of the overall image size. For example, if the input image is 700x200 and the operation returns X=0.5 and Y=0.25, then the point is at the (350,50) pixel coordinate on the image.</p> <p>An array of <code>Point</code> objects, <code>Polygon</code>, is returned by <a>DetectText</a> and by <a>DetectCustomLabels</a>. <code>Polygon</code> represents a fine-grained polygon around a detected item. For more information, see Geometry in the Amazon Rekognition Developer Guide. </p>'
+  ProjectStatus:
+    type: string
+    enum:
+      - CREATING
+      - CREATED
+      - DELETING
+  ProjectDescription:
+    type: object
+    properties:
+      ProjectArn:
+        $ref: '#/definitions/ProjectArn'
+        description: The Amazon Resource Name (ARN) of the project.
+      CreationTimestamp:
+        $ref: '#/definitions/DateTime'
+        description: The Unix timestamp for the date and time that the project was created.
+      Status:
+        $ref: '#/definitions/ProjectStatus'
+        description: The current status of the project.
+    description: A description of a Amazon Rekognition Custom Labels project.
+  ProjectVersionStatus:
+    type: string
+    enum:
+      - TRAINING_IN_PROGRESS
+      - TRAINING_COMPLETED
+      - TRAINING_FAILED
+      - STARTING
+      - RUNNING
+      - FAILED
+      - STOPPING
+      - STOPPED
+      - DELETING
+  TrainingDataResult:
+    type: object
+    properties:
+      Input:
+        $ref: '#/definitions/TrainingData'
+        description: The training assets that you supplied for training.
+      Output:
+        $ref: '#/definitions/TrainingData'
+        description: 'The images (assets) that were actually trained by Amazon Rekognition Custom Labels. '
+    description: A Sagemaker Groundtruth format manifest file that represents the dataset used for training.
+  TestingDataResult:
+    type: object
+    properties:
+      Input:
+        $ref: '#/definitions/TestingData'
+        description: The testing dataset that was supplied for training.
+      Output:
+        $ref: '#/definitions/TestingData'
+        description: 'The subset of the dataset that was actually tested. Some images (assets) might not be tested due to file formatting and other issues. '
+    description: A Sagemaker Groundtruth format manifest file representing the dataset used for testing.
+  ProjectVersionDescription:
+    type: object
+    properties:
+      ProjectVersionArn:
+        $ref: '#/definitions/ProjectVersionArn'
+        description: 'The Amazon Resource Name (ARN) of the model version. '
+      CreationTimestamp:
+        $ref: '#/definitions/DateTime'
+        description: The Unix datetime for the date and time that training started.
+      MinInferenceUnits:
+        $ref: '#/definitions/InferenceUnits'
+        description: 'The minimum number of inference units used by the model. For more information, see <a>StartProjectVersion</a>.'
+      Status:
+        $ref: '#/definitions/ProjectVersionStatus'
+        description: The current status of the model version.
+      StatusMessage:
+        $ref: '#/definitions/StatusMessage'
+        description: A descriptive message for an error or warning that occurred.
+      BillableTrainingTimeInSeconds:
+        $ref: '#/definitions/ULong'
+        description: 'The duration, in seconds, that the model version has been billed for training. This value is only returned if the model version has been successfully trained.'
+      TrainingEndTimestamp:
+        $ref: '#/definitions/DateTime'
+        description: The Unix date and time that training of the model ended.
+      OutputConfig:
+        $ref: '#/definitions/OutputConfig'
+        description: The location where training results are saved.
+      TrainingDataResult:
+        $ref: '#/definitions/TrainingDataResult'
+        description: The manifest file that represents the training results.
+      TestingDataResult:
+        $ref: '#/definitions/TestingDataResult'
+        description: The manifest file that represents the testing results.
+      EvaluationResult:
+        $ref: '#/definitions/EvaluationResult'
+        description: The training results. <code>EvaluationResult</code> is only returned if training is successful.
+    description: The description of a version of a model.
   Reason:
     type: string
     enum:
@@ -4343,11 +5224,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Reason'
-  S3Bucket:
-    type: string
-    pattern: '[0-9A-Za-z\.\-_]*'
-    minLength: 3
-    maxLength: 255
   S3ObjectName:
     type: string
     minLength: 1

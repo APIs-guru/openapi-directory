@@ -1,0 +1,2647 @@
+swagger: '2.0'
+info:
+  version: '2019-07-05'
+  x-release: v4
+  title: AWS Network Manager
+  description: 'Transit Gateway Network Manager (Network Manager) enables you to create a global network, in which you can monitor your AWS and on-premises networks that are built around transit gateways.'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: networkmanager
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/networkmanager-2019-07-05.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/networkmanager/'
+host: networkmanager.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+x-servers:
+  - url: 'http://networkmanager.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The NetworkManager multi-region endpoint
+  - url: 'https://networkmanager.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The NetworkManager multi-region endpoint
+  - url: 'http://networkmanager.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The NetworkManager endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://networkmanager.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The NetworkManager endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  '/global-networks/{globalNetworkId}/customer-gateway-associations':
+    post:
+      operationId: AssociateCustomerGateway
+      description: '<p>Associates a customer gateway with a device and optionally, with a link. If you specify a link, it must be associated with the specified device. </p> <p>You can only associate customer gateways that are connected to a VPN attachment on a transit gateway. The transit gateway must be registered in your global network. When you register a transit gateway, customer gateways that are connected to the transit gateway are automatically included in the global network. To list customer gateways that are connected to a transit gateway, use the <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpnConnections.html">DescribeVpnConnections</a> EC2 API and filter by <code>transit-gateway-id</code>.</p> <p>You cannot associate a customer gateway with more than one device and link. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AssociateCustomerGatewayResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: ServiceQuotaExceededException
+          schema:
+            $ref: '#/definitions/ServiceQuotaExceededException'
+        '482':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '485':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '486':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: globalNetworkId
+          in: path
+          required: true
+          description: The ID of the global network.
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - CustomerGatewayArn
+              - DeviceId
+            properties:
+              CustomerGatewayArn:
+                description: 'The Amazon Resource Name (ARN) of the customer gateway. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonec2.html#amazonec2-resources-for-iam-policies">Resources Defined by Amazon EC2</a>.'
+                type: string
+              DeviceId:
+                description: The ID of the device.
+                type: string
+              LinkId:
+                description: The ID of the link.
+                type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetCustomerGatewayAssociations
+      description: Gets the association information for customer gateways that are associated with devices and links in your global network.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetCustomerGatewayAssociationsResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '485':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: globalNetworkId
+          in: path
+          required: true
+          description: The ID of the global network.
+          type: string
+        - name: customerGatewayArns
+          in: query
+          required: false
+          description: 'One or more customer gateway Amazon Resource Names (ARNs). For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonec2.html#amazonec2-resources-for-iam-policies">Resources Defined by Amazon EC2</a>. The maximum is 10.'
+          type: array
+          items:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to return.
+          type: integer
+          minimum: 1
+          maximum: 500
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next page of results.
+          type: string
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+  '/global-networks/{globalNetworkId}/link-associations':
+    post:
+      operationId: AssociateLink
+      description: Associates a link to a device. A device can be associated to multiple links and a link can be associated to multiple devices. The device and link must be in the same global network and the same site.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AssociateLinkResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: ServiceQuotaExceededException
+          schema:
+            $ref: '#/definitions/ServiceQuotaExceededException'
+        '482':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '485':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '486':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: globalNetworkId
+          in: path
+          required: true
+          description: The ID of the global network.
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - DeviceId
+              - LinkId
+            properties:
+              DeviceId:
+                description: The ID of the device.
+                type: string
+              LinkId:
+                description: The ID of the link.
+                type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetLinkAssociations
+      description: Gets the link associations for a device or a link. Either the device ID or the link ID must be specified.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetLinkAssociationsResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: globalNetworkId
+          in: path
+          required: true
+          description: The ID of the global network.
+          type: string
+        - name: deviceId
+          in: query
+          required: false
+          description: The ID of the device.
+          type: string
+        - name: linkId
+          in: query
+          required: false
+          description: The ID of the link.
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to return.
+          type: integer
+          minimum: 1
+          maximum: 500
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next page of results.
+          type: string
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+  '/global-networks/{globalNetworkId}/devices':
+    post:
+      operationId: CreateDevice
+      description: 'Creates a new device in a global network. If you specify both a site ID and a location, the location of the site is used for visualization in the Network Manager console.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateDeviceResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: ServiceQuotaExceededException
+          schema:
+            $ref: '#/definitions/ServiceQuotaExceededException'
+        '482':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '485':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '486':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: globalNetworkId
+          in: path
+          required: true
+          description: The ID of the global network.
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              Description:
+                description: '<p>A description of the device.</p> <p>Length Constraints: Maximum length of 256 characters.</p>'
+                type: string
+              Type:
+                description: The type of the device.
+                type: string
+              Vendor:
+                description: '<p>The vendor of the device.</p> <p>Length Constraints: Maximum length of 128 characters.</p>'
+                type: string
+              Model:
+                description: '<p>The model of the device.</p> <p>Length Constraints: Maximum length of 128 characters.</p>'
+                type: string
+              SerialNumber:
+                description: '<p>The serial number of the device.</p> <p>Length Constraints: Maximum length of 128 characters.</p>'
+                type: string
+              Location:
+                description: Describes a location.
+                type: object
+                properties:
+                  Address:
+                    $ref: '#/definitions/String'
+                    description: The physical address.
+                  Latitude:
+                    $ref: '#/definitions/String'
+                    description: The latitude.
+                  Longitude:
+                    $ref: '#/definitions/String'
+                    description: The longitude.
+              SiteId:
+                description: The ID of the site.
+                type: string
+              Tags:
+                description: The tags to apply to the resource during creation.
+                type: array
+                items:
+                  $ref: '#/definitions/Tag'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetDevices
+      description: Gets information about one or more of your devices in a global network.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetDevicesResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: globalNetworkId
+          in: path
+          required: true
+          description: The ID of the global network.
+          type: string
+        - name: deviceIds
+          in: query
+          required: false
+          description: One or more device IDs. The maximum is 10.
+          type: array
+          items:
+            type: string
+        - name: siteId
+          in: query
+          required: false
+          description: The ID of the site.
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to return.
+          type: integer
+          minimum: 1
+          maximum: 500
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next page of results.
+          type: string
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+  /global-networks:
+    post:
+      operationId: CreateGlobalNetwork
+      description: 'Creates a new, empty global network.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateGlobalNetworkResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: ServiceQuotaExceededException
+          schema:
+            $ref: '#/definitions/ServiceQuotaExceededException'
+        '482':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '483':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '485':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              Description:
+                description: '<p>A description of the global network.</p> <p>Length Constraints: Maximum length of 256 characters.</p>'
+                type: string
+              Tags:
+                description: The tags to apply to the resource during creation.
+                type: array
+                items:
+                  $ref: '#/definitions/Tag'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeGlobalNetworks
+      description: 'Describes one or more global networks. By default, all global networks are described. To describe the objects in your global network, you must use the appropriate <code>Get*</code> action. For example, to list the transit gateways in your global network, use <a>GetTransitGatewayRegistrations</a>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeGlobalNetworksResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: globalNetworkIds
+          in: query
+          required: false
+          description: The IDs of one or more global networks. The maximum is 10.
+          type: array
+          items:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to return.
+          type: integer
+          minimum: 1
+          maximum: 500
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next page of results.
+          type: string
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+  '/global-networks/{globalNetworkId}/links':
+    post:
+      operationId: CreateLink
+      description: Creates a new link for a specified site.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateLinkResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: ServiceQuotaExceededException
+          schema:
+            $ref: '#/definitions/ServiceQuotaExceededException'
+        '482':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '485':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '486':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: globalNetworkId
+          in: path
+          required: true
+          description: The ID of the global network.
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - Bandwidth
+              - SiteId
+            properties:
+              Description:
+                description: '<p>A description of the link.</p> <p>Length Constraints: Maximum length of 256 characters.</p>'
+                type: string
+              Type:
+                description: '<p>The type of the link.</p> <p>Constraints: Cannot include the following characters: | \ ^</p> <p>Length Constraints: Maximum length of 128 characters.</p>'
+                type: string
+              Bandwidth:
+                description: Describes bandwidth information.
+                type: object
+                properties:
+                  UploadSpeed:
+                    $ref: '#/definitions/Integer'
+                    description: Upload speed in Mbps.
+                  DownloadSpeed:
+                    $ref: '#/definitions/Integer'
+                    description: Download speed in Mbps.
+              Provider:
+                description: '<p>The provider of the link.</p> <p>Constraints: Cannot include the following characters: | \ ^</p> <p>Length Constraints: Maximum length of 128 characters.</p>'
+                type: string
+              SiteId:
+                description: The ID of the site.
+                type: string
+              Tags:
+                description: The tags to apply to the resource during creation.
+                type: array
+                items:
+                  $ref: '#/definitions/Tag'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetLinks
+      description: '<p>Gets information about one or more links in a specified global network.</p> <p>If you specify the site ID, you cannot specify the type or provider in the same request. You can specify the type and provider in the same request.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetLinksResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: globalNetworkId
+          in: path
+          required: true
+          description: The ID of the global network.
+          type: string
+        - name: linkIds
+          in: query
+          required: false
+          description: One or more link IDs. The maximum is 10.
+          type: array
+          items:
+            type: string
+        - name: siteId
+          in: query
+          required: false
+          description: The ID of the site.
+          type: string
+        - name: type
+          in: query
+          required: false
+          description: The link type.
+          type: string
+        - name: provider
+          in: query
+          required: false
+          description: The link provider.
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to return.
+          type: integer
+          minimum: 1
+          maximum: 500
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next page of results.
+          type: string
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+  '/global-networks/{globalNetworkId}/sites':
+    post:
+      operationId: CreateSite
+      description: Creates a new site in a global network.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateSiteResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: ServiceQuotaExceededException
+          schema:
+            $ref: '#/definitions/ServiceQuotaExceededException'
+        '482':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '485':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '486':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: globalNetworkId
+          in: path
+          required: true
+          description: The ID of the global network.
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              Description:
+                description: '<p>A description of your site.</p> <p>Length Constraints: Maximum length of 256 characters.</p>'
+                type: string
+              Location:
+                description: Describes a location.
+                type: object
+                properties:
+                  Address:
+                    $ref: '#/definitions/String'
+                    description: The physical address.
+                  Latitude:
+                    $ref: '#/definitions/String'
+                    description: The latitude.
+                  Longitude:
+                    $ref: '#/definitions/String'
+                    description: The longitude.
+              Tags:
+                description: The tags to apply to the resource during creation.
+                type: array
+                items:
+                  $ref: '#/definitions/Tag'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetSites
+      description: Gets information about one or more of your sites in a global network.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetSitesResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: globalNetworkId
+          in: path
+          required: true
+          description: The ID of the global network.
+          type: string
+        - name: siteIds
+          in: query
+          required: false
+          description: One or more site IDs. The maximum is 10.
+          type: array
+          items:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to return.
+          type: integer
+          minimum: 1
+          maximum: 500
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next page of results.
+          type: string
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+  '/global-networks/{globalNetworkId}/devices/{deviceId}':
+    delete:
+      operationId: DeleteDevice
+      description: Deletes an existing device. You must first disassociate the device from any links and customer gateways.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteDeviceResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '485':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: globalNetworkId
+          in: path
+          required: true
+          description: The ID of the global network.
+          type: string
+        - name: deviceId
+          in: path
+          required: true
+          description: The ID of the device.
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    patch:
+      operationId: UpdateDevice
+      description: 'Updates the details for an existing device. To remove information for any of the parameters, specify an empty string.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateDeviceResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '485':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: globalNetworkId
+          in: path
+          required: true
+          description: The ID of the global network.
+          type: string
+        - name: deviceId
+          in: path
+          required: true
+          description: The ID of the device.
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              Description:
+                description: '<p>A description of the device.</p> <p>Length Constraints: Maximum length of 256 characters.</p>'
+                type: string
+              Type:
+                description: The type of the device.
+                type: string
+              Vendor:
+                description: '<p>The vendor of the device.</p> <p>Length Constraints: Maximum length of 128 characters.</p>'
+                type: string
+              Model:
+                description: '<p>The model of the device.</p> <p>Length Constraints: Maximum length of 128 characters.</p>'
+                type: string
+              SerialNumber:
+                description: '<p>The serial number of the device.</p> <p>Length Constraints: Maximum length of 128 characters.</p>'
+                type: string
+              Location:
+                description: Describes a location.
+                type: object
+                properties:
+                  Address:
+                    $ref: '#/definitions/String'
+                    description: The physical address.
+                  Latitude:
+                    $ref: '#/definitions/String'
+                    description: The latitude.
+                  Longitude:
+                    $ref: '#/definitions/String'
+                    description: The longitude.
+              SiteId:
+                description: The ID of the site.
+                type: string
+  '/global-networks/{globalNetworkId}':
+    delete:
+      operationId: DeleteGlobalNetwork
+      description: 'Deletes an existing global network. You must first delete all global network objects (devices, links, and sites) and deregister all transit gateways.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteGlobalNetworkResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '485':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: globalNetworkId
+          in: path
+          required: true
+          description: The ID of the global network.
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    patch:
+      operationId: UpdateGlobalNetwork
+      description: 'Updates an existing global network. To remove information for any of the parameters, specify an empty string.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateGlobalNetworkResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '485':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: globalNetworkId
+          in: path
+          required: true
+          description: The ID of your global network.
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              Description:
+                description: '<p>A description of the global network.</p> <p>Length Constraints: Maximum length of 256 characters.</p>'
+                type: string
+  '/global-networks/{globalNetworkId}/links/{linkId}':
+    delete:
+      operationId: DeleteLink
+      description: Deletes an existing link. You must first disassociate the link from any devices and customer gateways.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteLinkResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '485':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: globalNetworkId
+          in: path
+          required: true
+          description: The ID of the global network.
+          type: string
+        - name: linkId
+          in: path
+          required: true
+          description: The ID of the link.
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    patch:
+      operationId: UpdateLink
+      description: 'Updates the details for an existing link. To remove information for any of the parameters, specify an empty string.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateLinkResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: ServiceQuotaExceededException
+          schema:
+            $ref: '#/definitions/ServiceQuotaExceededException'
+        '482':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '485':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '486':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: globalNetworkId
+          in: path
+          required: true
+          description: The ID of the global network.
+          type: string
+        - name: linkId
+          in: path
+          required: true
+          description: The ID of the link.
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              Description:
+                description: '<p>A description of the link.</p> <p>Length Constraints: Maximum length of 256 characters.</p>'
+                type: string
+              Type:
+                description: '<p>The type of the link.</p> <p>Length Constraints: Maximum length of 128 characters.</p>'
+                type: string
+              Bandwidth:
+                description: Describes bandwidth information.
+                type: object
+                properties:
+                  UploadSpeed:
+                    $ref: '#/definitions/Integer'
+                    description: Upload speed in Mbps.
+                  DownloadSpeed:
+                    $ref: '#/definitions/Integer'
+                    description: Download speed in Mbps.
+              Provider:
+                description: '<p>The provider of the link.</p> <p>Length Constraints: Maximum length of 128 characters.</p>'
+                type: string
+  '/global-networks/{globalNetworkId}/sites/{siteId}':
+    delete:
+      operationId: DeleteSite
+      description: Deletes an existing site. The site cannot be associated with any device or link.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteSiteResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '485':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: globalNetworkId
+          in: path
+          required: true
+          description: The ID of the global network.
+          type: string
+        - name: siteId
+          in: path
+          required: true
+          description: The ID of the site.
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    patch:
+      operationId: UpdateSite
+      description: 'Updates the information for an existing site. To remove information for any of the parameters, specify an empty string.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateSiteResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '485':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: globalNetworkId
+          in: path
+          required: true
+          description: The ID of the global network.
+          type: string
+        - name: siteId
+          in: path
+          required: true
+          description: The ID of your site.
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              Description:
+                description: '<p>A description of your site.</p> <p>Length Constraints: Maximum length of 256 characters.</p>'
+                type: string
+              Location:
+                description: Describes a location.
+                type: object
+                properties:
+                  Address:
+                    $ref: '#/definitions/String'
+                    description: The physical address.
+                  Latitude:
+                    $ref: '#/definitions/String'
+                    description: The latitude.
+                  Longitude:
+                    $ref: '#/definitions/String'
+                    description: The longitude.
+  '/global-networks/{globalNetworkId}/transit-gateway-registrations/{transitGatewayArn}':
+    delete:
+      operationId: DeregisterTransitGateway
+      description: 'Deregisters a transit gateway from your global network. This action does not delete your transit gateway, or modify any of its attachments. This action removes any customer gateway associations.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeregisterTransitGatewayResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '485':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: globalNetworkId
+          in: path
+          required: true
+          description: The ID of the global network.
+          type: string
+        - name: transitGatewayArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the transit gateway.
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/global-networks/{globalNetworkId}/customer-gateway-associations/{customerGatewayArn}':
+    delete:
+      operationId: DisassociateCustomerGateway
+      description: Disassociates a customer gateway from a device and a link.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DisassociateCustomerGatewayResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '485':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: globalNetworkId
+          in: path
+          required: true
+          description: The ID of the global network.
+          type: string
+        - name: customerGatewayArn
+          in: path
+          required: true
+          description: 'The Amazon Resource Name (ARN) of the customer gateway. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonec2.html#amazonec2-resources-for-iam-policies">Resources Defined by Amazon EC2</a>.'
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/global-networks/{globalNetworkId}/link-associations#deviceId&linkId':
+    delete:
+      operationId: DisassociateLink
+      description: Disassociates an existing device from a link. You must first disassociate any customer gateways that are associated with the link.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DisassociateLinkResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '485':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: globalNetworkId
+          in: path
+          required: true
+          description: The ID of the global network.
+          type: string
+        - name: deviceId
+          in: query
+          required: true
+          description: The ID of the device.
+          type: string
+        - name: linkId
+          in: query
+          required: true
+          description: The ID of the link.
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/global-networks/{globalNetworkId}/transit-gateway-registrations':
+    get:
+      operationId: GetTransitGatewayRegistrations
+      description: Gets information about the transit gateway registrations in a specified global network.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetTransitGatewayRegistrationsResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: globalNetworkId
+          in: path
+          required: true
+          description: The ID of the global network.
+          type: string
+        - name: transitGatewayArns
+          in: query
+          required: false
+          description: The Amazon Resource Names (ARNs) of one or more transit gateways. The maximum is 10.
+          type: array
+          items:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to return.
+          type: integer
+          minimum: 1
+          maximum: 500
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next page of results.
+          type: string
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: RegisterTransitGateway
+      description: 'Registers a transit gateway in your global network. The transit gateway can be in any AWS Region, but it must be owned by the same AWS account that owns the global network. You cannot register a transit gateway in more than one global network.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RegisterTransitGatewayResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '485':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: globalNetworkId
+          in: path
+          required: true
+          description: The ID of the global network.
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - TransitGatewayArn
+            properties:
+              TransitGatewayArn:
+                description: 'The Amazon Resource Name (ARN) of the transit gateway. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonec2.html#amazonec2-resources-for-iam-policies">Resources Defined by Amazon EC2</a>.'
+                type: string
+  '/tags/{resourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: Lists the tags for a specified resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForResourceResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource.
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: Tags a specified resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TagResourceResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: ServiceQuotaExceededException
+          schema:
+            $ref: '#/definitions/ServiceQuotaExceededException'
+        '482':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '485':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '486':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource.
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - Tags
+            properties:
+              Tags:
+                description: The tags to apply to the specified resource.
+                type: array
+                items:
+                  $ref: '#/definitions/Tag'
+  '/tags/{resourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Removes tags from a specified resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UntagResourceResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '485':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource.
+          type: string
+        - name: tagKeys
+          in: query
+          required: true
+          description: The tag keys to remove from the specified resource.
+          type: array
+          items:
+            type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  AssociateCustomerGatewayResponse:
+    type: object
+    properties:
+      CustomerGatewayAssociation:
+        $ref: '#/definitions/CustomerGatewayAssociation'
+        description: The customer gateway association.
+  ValidationException: {}
+  ServiceQuotaExceededException: {}
+  AccessDeniedException: {}
+  ResourceNotFoundException: {}
+  ConflictException: {}
+  ThrottlingException: {}
+  InternalServerException: {}
+  AssociateLinkResponse:
+    type: object
+    properties:
+      LinkAssociation:
+        $ref: '#/definitions/LinkAssociation'
+        description: The link association.
+  CreateDeviceResponse:
+    type: object
+    properties:
+      Device:
+        $ref: '#/definitions/Device'
+        description: Information about the device.
+  String:
+    type: string
+  Tag:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/TagKey'
+        description: '<p>The tag key.</p> <p>Length Constraints: Maximum length of 128 characters.</p>'
+      Value:
+        $ref: '#/definitions/TagValue'
+        description: '<p>The tag value.</p> <p>Length Constraints: Maximum length of 256 characters.</p>'
+    description: Describes a tag.
+  CreateGlobalNetworkResponse:
+    type: object
+    properties:
+      GlobalNetwork:
+        $ref: '#/definitions/GlobalNetwork'
+        description: Information about the global network object.
+  CreateLinkResponse:
+    type: object
+    properties:
+      Link:
+        $ref: '#/definitions/Link'
+        description: Information about the link.
+  Integer:
+    type: integer
+  CreateSiteResponse:
+    type: object
+    properties:
+      Site:
+        $ref: '#/definitions/Site'
+        description: Information about the site.
+  DeleteDeviceResponse:
+    type: object
+    properties:
+      Device:
+        $ref: '#/definitions/Device'
+        description: Information about the device.
+  DeleteGlobalNetworkResponse:
+    type: object
+    properties:
+      GlobalNetwork:
+        $ref: '#/definitions/GlobalNetwork'
+        description: Information about the global network.
+  DeleteLinkResponse:
+    type: object
+    properties:
+      Link:
+        $ref: '#/definitions/Link'
+        description: Information about the link.
+  DeleteSiteResponse:
+    type: object
+    properties:
+      Site:
+        $ref: '#/definitions/Site'
+        description: Information about the site.
+  DeregisterTransitGatewayResponse:
+    type: object
+    properties:
+      TransitGatewayRegistration:
+        $ref: '#/definitions/TransitGatewayRegistration'
+        description: The transit gateway registration information.
+  DescribeGlobalNetworksResponse:
+    type: object
+    properties:
+      GlobalNetworks:
+        $ref: '#/definitions/GlobalNetworkList'
+        description: Information about the global networks.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token for the next page of results.
+  DisassociateCustomerGatewayResponse:
+    type: object
+    properties:
+      CustomerGatewayAssociation:
+        $ref: '#/definitions/CustomerGatewayAssociation'
+        description: Information about the customer gateway association.
+  DisassociateLinkResponse:
+    type: object
+    properties:
+      LinkAssociation:
+        $ref: '#/definitions/LinkAssociation'
+        description: Information about the link association.
+  GetCustomerGatewayAssociationsResponse:
+    type: object
+    properties:
+      CustomerGatewayAssociations:
+        $ref: '#/definitions/CustomerGatewayAssociationList'
+        description: The customer gateway associations.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token for the next page of results.
+  GetDevicesResponse:
+    type: object
+    properties:
+      Devices:
+        $ref: '#/definitions/DeviceList'
+        description: The devices.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token for the next page of results.
+  GetLinkAssociationsResponse:
+    type: object
+    properties:
+      LinkAssociations:
+        $ref: '#/definitions/LinkAssociationList'
+        description: The link associations.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token for the next page of results.
+  GetLinksResponse:
+    type: object
+    properties:
+      Links:
+        $ref: '#/definitions/LinkList'
+        description: The links.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token for the next page of results.
+  GetSitesResponse:
+    type: object
+    properties:
+      Sites:
+        $ref: '#/definitions/SiteList'
+        description: The sites.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token for the next page of results.
+  GetTransitGatewayRegistrationsResponse:
+    type: object
+    properties:
+      TransitGatewayRegistrations:
+        $ref: '#/definitions/TransitGatewayRegistrationList'
+        description: The transit gateway registrations.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token for the next page of results.
+  ListTagsForResourceResponse:
+    type: object
+    properties:
+      TagList:
+        $ref: '#/definitions/TagList'
+        description: The list of tags.
+  RegisterTransitGatewayResponse:
+    type: object
+    properties:
+      TransitGatewayRegistration:
+        $ref: '#/definitions/TransitGatewayRegistration'
+        description: Information about the transit gateway registration.
+  TagResourceResponse:
+    type: object
+    properties: {}
+  UntagResourceResponse:
+    type: object
+    properties: {}
+  TagKey:
+    type: string
+  UpdateDeviceResponse:
+    type: object
+    properties:
+      Device:
+        $ref: '#/definitions/Device'
+        description: Information about the device.
+  UpdateGlobalNetworkResponse:
+    type: object
+    properties:
+      GlobalNetwork:
+        $ref: '#/definitions/GlobalNetwork'
+        description: Information about the global network object.
+  UpdateLinkResponse:
+    type: object
+    properties:
+      Link:
+        $ref: '#/definitions/Link'
+        description: Information about the link.
+  UpdateSiteResponse:
+    type: object
+    properties:
+      Site:
+        $ref: '#/definitions/Site'
+        description: Information about the site.
+  AssociateCustomerGatewayRequest:
+    type: object
+    required:
+      - CustomerGatewayArn
+      - DeviceId
+    properties:
+      CustomerGatewayArn:
+        $ref: '#/definitions/String'
+        description: 'The Amazon Resource Name (ARN) of the customer gateway. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonec2.html#amazonec2-resources-for-iam-policies">Resources Defined by Amazon EC2</a>.'
+      DeviceId:
+        $ref: '#/definitions/String'
+        description: The ID of the device.
+      LinkId:
+        $ref: '#/definitions/String'
+        description: The ID of the link.
+  CustomerGatewayAssociation:
+    type: object
+    properties:
+      CustomerGatewayArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the customer gateway.
+      GlobalNetworkId:
+        $ref: '#/definitions/String'
+        description: The ID of the global network.
+      DeviceId:
+        $ref: '#/definitions/String'
+        description: The ID of the device.
+      LinkId:
+        $ref: '#/definitions/String'
+        description: The ID of the link.
+      State:
+        $ref: '#/definitions/CustomerGatewayAssociationState'
+        description: The association state.
+    description: 'Describes the association between a customer gateway, a device, and a link.'
+  AssociateLinkRequest:
+    type: object
+    required:
+      - DeviceId
+      - LinkId
+    properties:
+      DeviceId:
+        $ref: '#/definitions/String'
+        description: The ID of the device.
+      LinkId:
+        $ref: '#/definitions/String'
+        description: The ID of the link.
+  LinkAssociation:
+    type: object
+    properties:
+      GlobalNetworkId:
+        $ref: '#/definitions/String'
+        description: The ID of the global network.
+      DeviceId:
+        $ref: '#/definitions/String'
+        description: The device ID for the link association.
+      LinkId:
+        $ref: '#/definitions/String'
+        description: The ID of the link.
+      LinkAssociationState:
+        $ref: '#/definitions/LinkAssociationState'
+        description: The state of the association.
+    description: Describes the association between a device and a link.
+  Bandwidth:
+    type: object
+    properties:
+      UploadSpeed:
+        $ref: '#/definitions/Integer'
+        description: Upload speed in Mbps.
+      DownloadSpeed:
+        $ref: '#/definitions/Integer'
+        description: Download speed in Mbps.
+    description: Describes bandwidth information.
+  Location:
+    type: object
+    properties:
+      Address:
+        $ref: '#/definitions/String'
+        description: The physical address.
+      Latitude:
+        $ref: '#/definitions/String'
+        description: The latitude.
+      Longitude:
+        $ref: '#/definitions/String'
+        description: The longitude.
+    description: Describes a location.
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+  CreateDeviceRequest:
+    type: object
+    properties:
+      Description:
+        $ref: '#/definitions/String'
+        description: '<p>A description of the device.</p> <p>Length Constraints: Maximum length of 256 characters.</p>'
+      Type:
+        $ref: '#/definitions/String'
+        description: The type of the device.
+      Vendor:
+        $ref: '#/definitions/String'
+        description: '<p>The vendor of the device.</p> <p>Length Constraints: Maximum length of 128 characters.</p>'
+      Model:
+        $ref: '#/definitions/String'
+        description: '<p>The model of the device.</p> <p>Length Constraints: Maximum length of 128 characters.</p>'
+      SerialNumber:
+        $ref: '#/definitions/String'
+        description: '<p>The serial number of the device.</p> <p>Length Constraints: Maximum length of 128 characters.</p>'
+      Location:
+        $ref: '#/definitions/Location'
+        description: The location of the device.
+      SiteId:
+        $ref: '#/definitions/String'
+        description: The ID of the site.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags to apply to the resource during creation.
+  Device:
+    type: object
+    properties:
+      DeviceId:
+        $ref: '#/definitions/String'
+        description: The ID of the device.
+      DeviceArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the device.
+      GlobalNetworkId:
+        $ref: '#/definitions/String'
+        description: The ID of the global network.
+      Description:
+        $ref: '#/definitions/String'
+        description: The description of the device.
+      Type:
+        $ref: '#/definitions/String'
+        description: The device type.
+      Vendor:
+        $ref: '#/definitions/String'
+        description: The device vendor.
+      Model:
+        $ref: '#/definitions/String'
+        description: The device model.
+      SerialNumber:
+        $ref: '#/definitions/String'
+        description: The device serial number.
+      Location:
+        $ref: '#/definitions/Location'
+        description: The site location.
+      SiteId:
+        $ref: '#/definitions/String'
+        description: The site ID.
+      CreatedAt:
+        $ref: '#/definitions/DateTime'
+        description: The date and time that the site was created.
+      State:
+        $ref: '#/definitions/DeviceState'
+        description: The device state.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags for the device.
+    description: Describes a device.
+  CreateGlobalNetworkRequest:
+    type: object
+    properties:
+      Description:
+        $ref: '#/definitions/String'
+        description: '<p>A description of the global network.</p> <p>Length Constraints: Maximum length of 256 characters.</p>'
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags to apply to the resource during creation.
+  GlobalNetwork:
+    type: object
+    properties:
+      GlobalNetworkId:
+        $ref: '#/definitions/String'
+        description: The ID of the global network.
+      GlobalNetworkArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the global network.
+      Description:
+        $ref: '#/definitions/String'
+        description: The description of the global network.
+      CreatedAt:
+        $ref: '#/definitions/DateTime'
+        description: The date and time that the global network was created.
+      State:
+        $ref: '#/definitions/GlobalNetworkState'
+        description: The state of the global network.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags for the global network.
+    description: Describes a global network.
+  CreateLinkRequest:
+    type: object
+    required:
+      - Bandwidth
+      - SiteId
+    properties:
+      Description:
+        $ref: '#/definitions/String'
+        description: '<p>A description of the link.</p> <p>Length Constraints: Maximum length of 256 characters.</p>'
+      Type:
+        $ref: '#/definitions/String'
+        description: '<p>The type of the link.</p> <p>Constraints: Cannot include the following characters: | \ ^</p> <p>Length Constraints: Maximum length of 128 characters.</p>'
+      Bandwidth:
+        $ref: '#/definitions/Bandwidth'
+        description: ' The upload speed and download speed in Mbps. '
+      Provider:
+        $ref: '#/definitions/String'
+        description: '<p>The provider of the link.</p> <p>Constraints: Cannot include the following characters: | \ ^</p> <p>Length Constraints: Maximum length of 128 characters.</p>'
+      SiteId:
+        $ref: '#/definitions/String'
+        description: The ID of the site.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags to apply to the resource during creation.
+  Link:
+    type: object
+    properties:
+      LinkId:
+        $ref: '#/definitions/String'
+        description: The ID of the link.
+      LinkArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the link.
+      GlobalNetworkId:
+        $ref: '#/definitions/String'
+        description: The ID of the global network.
+      SiteId:
+        $ref: '#/definitions/String'
+        description: The ID of the site.
+      Description:
+        $ref: '#/definitions/String'
+        description: The description of the link.
+      Type:
+        $ref: '#/definitions/String'
+        description: The type of the link.
+      Bandwidth:
+        $ref: '#/definitions/Bandwidth'
+        description: The bandwidth for the link.
+      Provider:
+        $ref: '#/definitions/String'
+        description: The provider of the link.
+      CreatedAt:
+        $ref: '#/definitions/DateTime'
+        description: The date and time that the link was created.
+      State:
+        $ref: '#/definitions/LinkState'
+        description: The state of the link.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags for the link.
+    description: Describes a link.
+  CreateSiteRequest:
+    type: object
+    properties:
+      Description:
+        $ref: '#/definitions/String'
+        description: '<p>A description of your site.</p> <p>Length Constraints: Maximum length of 256 characters.</p>'
+      Location:
+        $ref: '#/definitions/Location'
+        description: '<p>The site location. This information is used for visualization in the Network Manager console. If you specify the address, the latitude and longitude are automatically calculated.</p> <ul> <li> <p> <code>Address</code>: The physical address of the site.</p> </li> <li> <p> <code>Latitude</code>: The latitude of the site. </p> </li> <li> <p> <code>Longitude</code>: The longitude of the site.</p> </li> </ul>'
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags to apply to the resource during creation.
+  Site:
+    type: object
+    properties:
+      SiteId:
+        $ref: '#/definitions/String'
+        description: The ID of the site.
+      SiteArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the site.
+      GlobalNetworkId:
+        $ref: '#/definitions/String'
+        description: The ID of the global network.
+      Description:
+        $ref: '#/definitions/String'
+        description: The description of the site.
+      Location:
+        $ref: '#/definitions/Location'
+        description: The location of the site.
+      CreatedAt:
+        $ref: '#/definitions/DateTime'
+        description: The date and time that the site was created.
+      State:
+        $ref: '#/definitions/SiteState'
+        description: The state of the site.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags for the site.
+    description: Describes a site.
+  CustomerGatewayAssociationState:
+    type: string
+    enum:
+      - PENDING
+      - AVAILABLE
+      - DELETING
+      - DELETED
+  CustomerGatewayAssociationList:
+    type: array
+    items:
+      $ref: '#/definitions/CustomerGatewayAssociation'
+  DateTime:
+    type: string
+    format: date-time
+  DeleteDeviceRequest:
+    type: object
+    properties: {}
+  DeleteGlobalNetworkRequest:
+    type: object
+    properties: {}
+  DeleteLinkRequest:
+    type: object
+    properties: {}
+  DeleteSiteRequest:
+    type: object
+    properties: {}
+  DeregisterTransitGatewayRequest:
+    type: object
+    properties: {}
+  TransitGatewayRegistration:
+    type: object
+    properties:
+      GlobalNetworkId:
+        $ref: '#/definitions/String'
+        description: The ID of the global network.
+      TransitGatewayArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the transit gateway.
+      State:
+        $ref: '#/definitions/TransitGatewayRegistrationStateReason'
+        description: The state of the transit gateway registration.
+    description: Describes the registration of a transit gateway to a global network.
+  StringList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 500
+  DescribeGlobalNetworksRequest:
+    type: object
+    properties: {}
+  GlobalNetworkList:
+    type: array
+    items:
+      $ref: '#/definitions/GlobalNetwork'
+  DeviceState:
+    type: string
+    enum:
+      - PENDING
+      - AVAILABLE
+      - DELETING
+      - UPDATING
+  DeviceList:
+    type: array
+    items:
+      $ref: '#/definitions/Device'
+  DisassociateCustomerGatewayRequest:
+    type: object
+    properties: {}
+  DisassociateLinkRequest:
+    type: object
+    properties: {}
+  GetCustomerGatewayAssociationsRequest:
+    type: object
+    properties: {}
+  GetDevicesRequest:
+    type: object
+    properties: {}
+  GetLinkAssociationsRequest:
+    type: object
+    properties: {}
+  LinkAssociationList:
+    type: array
+    items:
+      $ref: '#/definitions/LinkAssociation'
+  GetLinksRequest:
+    type: object
+    properties: {}
+  LinkList:
+    type: array
+    items:
+      $ref: '#/definitions/Link'
+  GetSitesRequest:
+    type: object
+    properties: {}
+  SiteList:
+    type: array
+    items:
+      $ref: '#/definitions/Site'
+  GetTransitGatewayRegistrationsRequest:
+    type: object
+    properties: {}
+  TransitGatewayRegistrationList:
+    type: array
+    items:
+      $ref: '#/definitions/TransitGatewayRegistration'
+  GlobalNetworkState:
+    type: string
+    enum:
+      - PENDING
+      - AVAILABLE
+      - DELETING
+      - UPDATING
+  LinkState:
+    type: string
+    enum:
+      - PENDING
+      - AVAILABLE
+      - DELETING
+      - UPDATING
+  LinkAssociationState:
+    type: string
+    enum:
+      - PENDING
+      - AVAILABLE
+      - DELETING
+      - DELETED
+  ResourceARN:
+    type: string
+  ListTagsForResourceRequest:
+    type: object
+    properties: {}
+  RegisterTransitGatewayRequest:
+    type: object
+    required:
+      - TransitGatewayArn
+    properties:
+      TransitGatewayArn:
+        $ref: '#/definitions/String'
+        description: 'The Amazon Resource Name (ARN) of the transit gateway. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonec2.html#amazonec2-resources-for-iam-policies">Resources Defined by Amazon EC2</a>.'
+  SiteState:
+    type: string
+    enum:
+      - PENDING
+      - AVAILABLE
+      - DELETING
+      - UPDATING
+  TagValue:
+    type: string
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+  TagResourceRequest:
+    type: object
+    required:
+      - Tags
+    properties:
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags to apply to the specified resource.
+  TransitGatewayRegistrationStateReason:
+    type: object
+    properties:
+      Code:
+        $ref: '#/definitions/TransitGatewayRegistrationState'
+        description: The code for the state reason.
+      Message:
+        $ref: '#/definitions/String'
+        description: The message for the state reason.
+    description: Describes the status of a transit gateway registration.
+  TransitGatewayRegistrationState:
+    type: string
+    enum:
+      - PENDING
+      - AVAILABLE
+      - DELETING
+      - DELETED
+      - FAILED
+  UntagResourceRequest:
+    type: object
+    properties: {}
+  UpdateDeviceRequest:
+    type: object
+    properties:
+      Description:
+        $ref: '#/definitions/String'
+        description: '<p>A description of the device.</p> <p>Length Constraints: Maximum length of 256 characters.</p>'
+      Type:
+        $ref: '#/definitions/String'
+        description: The type of the device.
+      Vendor:
+        $ref: '#/definitions/String'
+        description: '<p>The vendor of the device.</p> <p>Length Constraints: Maximum length of 128 characters.</p>'
+      Model:
+        $ref: '#/definitions/String'
+        description: '<p>The model of the device.</p> <p>Length Constraints: Maximum length of 128 characters.</p>'
+      SerialNumber:
+        $ref: '#/definitions/String'
+        description: '<p>The serial number of the device.</p> <p>Length Constraints: Maximum length of 128 characters.</p>'
+      Location:
+        $ref: '#/definitions/Location'
+      SiteId:
+        $ref: '#/definitions/String'
+        description: The ID of the site.
+  UpdateGlobalNetworkRequest:
+    type: object
+    properties:
+      Description:
+        $ref: '#/definitions/String'
+        description: '<p>A description of the global network.</p> <p>Length Constraints: Maximum length of 256 characters.</p>'
+  UpdateLinkRequest:
+    type: object
+    properties:
+      Description:
+        $ref: '#/definitions/String'
+        description: '<p>A description of the link.</p> <p>Length Constraints: Maximum length of 256 characters.</p>'
+      Type:
+        $ref: '#/definitions/String'
+        description: '<p>The type of the link.</p> <p>Length Constraints: Maximum length of 128 characters.</p>'
+      Bandwidth:
+        $ref: '#/definitions/Bandwidth'
+        description: 'The upload and download speed in Mbps. '
+      Provider:
+        $ref: '#/definitions/String'
+        description: '<p>The provider of the link.</p> <p>Length Constraints: Maximum length of 128 characters.</p>'
+  UpdateSiteRequest:
+    type: object
+    properties:
+      Description:
+        $ref: '#/definitions/String'
+        description: '<p>A description of your site.</p> <p>Length Constraints: Maximum length of 256 characters.</p>'
+      Location:
+        $ref: '#/definitions/Location'
+        description: '<p>The site location:</p> <ul> <li> <p> <code>Address</code>: The physical address of the site.</p> </li> <li> <p> <code>Latitude</code>: The latitude of the site. </p> </li> <li> <p> <code>Longitude</code>: The longitude of the site.</p> </li> </ul>'

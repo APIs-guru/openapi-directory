@@ -912,6 +912,10 @@ paths:
           schema:
             $ref: '#/definitions/InvalidParameterValueException'
         '482':
+          description: ResourceConflictException
+          schema:
+            $ref: '#/definitions/ResourceConflictException'
+        '483':
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
@@ -1360,7 +1364,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     put:
       operationId: PutFunctionConcurrency
-      description: '<p>Sets the maximum number of simultaneous executions for a function, and reserves capacity for that concurrency level.</p> <p>Concurrency settings apply to the function as a whole, including all published versions and the unpublished version. Reserving concurrency both ensures that your function has capacity to process the specified number of events simultaneously, and prevents it from scaling beyond that level. Use <a>GetFunction</a> to see the current setting for a function.</p> <p>Use <a>GetAccountSettings</a> to see your regional concurrency limit. You can reserve concurrency for as many functions as you like, as long as you leave at least 100 simultaneous executions unreserved for functions that aren''t configured with a per-function limit. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html">Managing Concurrency</a>.</p>'
+      description: '<p>Sets the maximum number of simultaneous executions for a function, and reserves capacity for that concurrency level.</p> <p>Concurrency settings apply to the function as a whole, including all published versions and the unpublished version. Reserving concurrency both ensures that your function has capacity to process the specified number of events simultaneously, and prevents it from scaling beyond that level. Use <a>GetFunction</a> to see the current setting for a function.</p> <p>Use <a>GetAccountSettings</a> to see your Regional concurrency limit. You can reserve concurrency for as many functions as you like, as long as you leave at least 100 simultaneous executions unreserved for functions that aren''t configured with a per-function limit. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html">Managing Concurrency</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1705,6 +1709,160 @@ paths:
           required: true
           description: The version number.
           type: integer
+  '/2019-09-30/functions/{FunctionName}/provisioned-concurrency#Qualifier':
+    delete:
+      operationId: DeleteProvisionedConcurrencyConfig
+      description: Deletes the provisioned concurrency configuration for a function.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '481':
+          description: ResourceConflictException
+          schema:
+            $ref: '#/definitions/ResourceConflictException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '484':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+      parameters:
+        - name: FunctionName
+          in: path
+          required: true
+          description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>my-function</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+          type: string
+          pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+          minLength: 1
+          maxLength: 140
+        - name: Qualifier
+          in: query
+          required: true
+          description: The version number or alias name.
+          type: string
+          pattern: '(|[a-zA-Z0-9$_-]+)'
+          minLength: 1
+          maxLength: 128
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetProvisionedConcurrencyConfig
+      description: Retrieves the provisioned concurrency configuration for a function's alias or version.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetProvisionedConcurrencyConfigResponse'
+        '480':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '483':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '484':
+          description: ProvisionedConcurrencyConfigNotFoundException
+          schema:
+            $ref: '#/definitions/ProvisionedConcurrencyConfigNotFoundException'
+      parameters:
+        - name: FunctionName
+          in: path
+          required: true
+          description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>my-function</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+          type: string
+          pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+          minLength: 1
+          maxLength: 140
+        - name: Qualifier
+          in: query
+          required: true
+          description: The version number or alias name.
+          type: string
+          pattern: '(|[a-zA-Z0-9$_-]+)'
+          minLength: 1
+          maxLength: 128
+    put:
+      operationId: PutProvisionedConcurrencyConfig
+      description: Adds a provisioned concurrency configuration to a function's alias or version.
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutProvisionedConcurrencyConfigResponse'
+        '480':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ResourceConflictException
+          schema:
+            $ref: '#/definitions/ResourceConflictException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '484':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+      parameters:
+        - name: FunctionName
+          in: path
+          required: true
+          description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>my-function</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+          type: string
+          pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+          minLength: 1
+          maxLength: 140
+        - name: Qualifier
+          in: query
+          required: true
+          description: The version number or alias name.
+          type: string
+          pattern: '(|[a-zA-Z0-9$_-]+)'
+          minLength: 1
+          maxLength: 128
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - ProvisionedConcurrentExecutions
+            properties:
+              ProvisionedConcurrentExecutions:
+                description: The amount of provisioned concurrency to allocate for the version or alias.
+                type: integer
+                minimum: 1
   /2016-08-19/account-settings/:
     get:
       operationId: GetAccountSettings
@@ -1723,6 +1881,48 @@ paths:
           schema:
             $ref: '#/definitions/ServiceException'
       parameters: []
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/2019-09-30/functions/{FunctionName}/concurrency':
+    get:
+      operationId: GetFunctionConcurrency
+      description: 'Returns details about the concurrency configuration for a function. To set a concurrency limit for a function, use <a>PutFunctionConcurrency</a>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetFunctionConcurrencyResponse'
+        '480':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '483':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+      parameters:
+        - name: FunctionName
+          in: path
+          required: true
+          description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>my-function</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+          type: string
+          pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+          minLength: 1
+          maxLength: 140
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -2508,6 +2708,66 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/2019-09-30/functions/{FunctionName}/provisioned-concurrency#List=ALL':
+    get:
+      operationId: ListProvisionedConcurrencyConfigs
+      description: Retrieves a list of provisioned concurrency configurations for a function.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListProvisionedConcurrencyConfigsResponse'
+        '480':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '483':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+      parameters:
+        - name: FunctionName
+          in: path
+          required: true
+          description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>my-function</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+          type: string
+          pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+          minLength: 1
+          maxLength: 140
+        - name: Marker
+          in: query
+          required: false
+          description: Specify the pagination token that's returned by a previous request to retrieve the next page of results.
+          type: string
+        - name: MaxItems
+          in: query
+          required: false
+          description: Specify a number to limit the number of configurations returned.
+          type: integer
+          minimum: 1
+          maximum: 50
+        - name: List
+          in: query
+          required: true
+          type: string
+          enum:
+            - ALL
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/2017-03-31/tags/{ARN}':
     get:
       operationId: ListTags
@@ -3285,6 +3545,12 @@ definitions:
       Concurrency:
         $ref: '#/definitions/Concurrency'
         description: 'The function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html">reserved concurrency</a>.'
+  GetFunctionConcurrencyResponse:
+    type: object
+    properties:
+      ReservedConcurrentExecutions:
+        $ref: '#/definitions/ReservedConcurrentExecutions'
+        description: The number of simultaneous executions that are reserved for the function.
   FunctionEventInvokeConfig:
     type: object
     properties:
@@ -3350,6 +3616,28 @@ definitions:
       RevisionId:
         $ref: '#/definitions/String'
         description: A unique identifier for the current revision of the policy.
+  GetProvisionedConcurrencyConfigResponse:
+    type: object
+    properties:
+      RequestedProvisionedConcurrentExecutions:
+        $ref: '#/definitions/PositiveInteger'
+        description: The amount of provisioned concurrency requested.
+      AvailableProvisionedConcurrentExecutions:
+        $ref: '#/definitions/NonNegativeInteger'
+        description: The amount of provisioned concurrency available.
+      AllocatedProvisionedConcurrentExecutions:
+        $ref: '#/definitions/NonNegativeInteger'
+        description: The amount of provisioned concurrency allocated.
+      Status:
+        $ref: '#/definitions/ProvisionedConcurrencyStatusEnum'
+        description: The status of the allocation process.
+      StatusReason:
+        $ref: '#/definitions/String'
+        description: 'For failed allocations, the reason that provisioned concurrency could not be allocated.'
+      LastModified:
+        $ref: '#/definitions/Timestamp'
+        description: 'The date and time that a user last updated the configuration, in <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601 format</a>.'
+  ProvisionedConcurrencyConfigNotFoundException: {}
   InvocationResponse:
     type: object
     example:
@@ -3451,6 +3739,15 @@ definitions:
       Layers:
         $ref: '#/definitions/LayersList'
         description: A list of function layers.
+  ListProvisionedConcurrencyConfigsResponse:
+    type: object
+    properties:
+      ProvisionedConcurrencyConfigs:
+        $ref: '#/definitions/ProvisionedConcurrencyConfigList'
+        description: A list of provisioned concurrency configurations.
+      NextMarker:
+        $ref: '#/definitions/String'
+        description: The pagination token that's included if more results are available.
   ListTagsResponse:
     type: object
     properties:
@@ -3524,6 +3821,27 @@ definitions:
       ReservedConcurrentExecutions:
         $ref: '#/definitions/ReservedConcurrentExecutions'
         description: 'The number of concurrent executions that are reserved for this function. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html">Managing Concurrency</a>.'
+  PutProvisionedConcurrencyConfigResponse:
+    type: object
+    properties:
+      RequestedProvisionedConcurrentExecutions:
+        $ref: '#/definitions/PositiveInteger'
+        description: The amount of provisioned concurrency requested.
+      AvailableProvisionedConcurrentExecutions:
+        $ref: '#/definitions/NonNegativeInteger'
+        description: The amount of provisioned concurrency available.
+      AllocatedProvisionedConcurrentExecutions:
+        $ref: '#/definitions/NonNegativeInteger'
+        description: The amount of provisioned concurrency allocated.
+      Status:
+        $ref: '#/definitions/ProvisionedConcurrencyStatusEnum'
+        description: The status of the allocation process.
+      StatusReason:
+        $ref: '#/definitions/String'
+        description: 'For failed allocations, the reason that provisioned concurrency could not be allocated.'
+      LastModified:
+        $ref: '#/definitions/Timestamp'
+        description: 'The date and time that a user last updated the configuration, in <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601 format</a>.'
   TagKey:
     type: string
   Long:
@@ -3959,6 +4277,9 @@ definitions:
   DeleteLayerVersionRequest:
     type: object
     properties: {}
+  DeleteProvisionedConcurrencyConfigRequest:
+    type: object
+    properties: {}
   DestinationArn:
     type: string
     pattern: '^$|arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)'
@@ -4106,6 +4427,9 @@ definitions:
   GetEventSourceMappingRequest:
     type: object
     properties: {}
+  GetFunctionConcurrencyRequest:
+    type: object
+    properties: {}
   GetFunctionConfigurationRequest:
     type: object
     properties: {}
@@ -4148,6 +4472,21 @@ definitions:
   GetPolicyRequest:
     type: object
     properties: {}
+  GetProvisionedConcurrencyConfigRequest:
+    type: object
+    properties: {}
+  PositiveInteger:
+    type: integer
+    minimum: 1
+  NonNegativeInteger:
+    type: integer
+    minimum: 0
+  ProvisionedConcurrencyStatusEnum:
+    type: string
+    enum:
+      - IN_PROGRESS
+      - READY
+      - FAILED
   HttpStatus:
     type: integer
   InvocationType:
@@ -4277,6 +4616,17 @@ definitions:
   ListLayersRequest:
     type: object
     properties: {}
+  MaxProvisionedConcurrencyConfigListItems:
+    type: integer
+    minimum: 1
+    maximum: 50
+  ListProvisionedConcurrencyConfigsRequest:
+    type: object
+    properties: {}
+  ProvisionedConcurrencyConfigList:
+    type: array
+    items:
+      $ref: '#/definitions/ProvisionedConcurrencyConfigListItem'
   ListTagsRequest:
     type: object
     properties: {}
@@ -4288,6 +4638,31 @@ definitions:
     pattern: '([a-zA-Z0-9-_.]+)'
     minLength: 1
     maxLength: 100
+  ProvisionedConcurrencyConfigListItem:
+    type: object
+    properties:
+      FunctionArn:
+        $ref: '#/definitions/FunctionArn'
+        description: The Amazon Resource Name (ARN) of the alias or version.
+      RequestedProvisionedConcurrentExecutions:
+        $ref: '#/definitions/PositiveInteger'
+        description: The amount of provisioned concurrency requested.
+      AvailableProvisionedConcurrentExecutions:
+        $ref: '#/definitions/NonNegativeInteger'
+        description: The amount of provisioned concurrency available.
+      AllocatedProvisionedConcurrentExecutions:
+        $ref: '#/definitions/NonNegativeInteger'
+        description: The amount of provisioned concurrency allocated.
+      Status:
+        $ref: '#/definitions/ProvisionedConcurrencyStatusEnum'
+        description: The status of the allocation process.
+      StatusReason:
+        $ref: '#/definitions/String'
+        description: 'For failed allocations, the reason that provisioned concurrency could not be allocated.'
+      LastModified:
+        $ref: '#/definitions/Timestamp'
+        description: 'The date and time that a user last updated the configuration, in <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601 format</a>.'
+    description: Details about the provisioned concurrency configuration for a function alias or version.
   PublishLayerVersionRequest:
     type: object
     required:
@@ -4337,6 +4712,14 @@ definitions:
       DestinationConfig:
         $ref: '#/definitions/DestinationConfig'
         description: <p>A destination for events after they have been sent to a function for processing.</p> <p class="title"> <b>Destinations</b> </p> <ul> <li> <p> <b>Function</b> - The Amazon Resource Name (ARN) of a Lambda function.</p> </li> <li> <p> <b>Queue</b> - The ARN of an SQS queue.</p> </li> <li> <p> <b>Topic</b> - The ARN of an SNS topic.</p> </li> <li> <p> <b>Event Bus</b> - The ARN of an Amazon EventBridge event bus.</p> </li> </ul>
+  PutProvisionedConcurrencyConfigRequest:
+    type: object
+    required:
+      - ProvisionedConcurrentExecutions
+    properties:
+      ProvisionedConcurrentExecutions:
+        $ref: '#/definitions/PositiveInteger'
+        description: The amount of provisioned concurrency to allocate for the version or alias.
   RemoveLayerVersionPermissionRequest:
     type: object
     properties: {}

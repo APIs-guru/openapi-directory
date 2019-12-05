@@ -1,0 +1,2386 @@
+swagger: '2.0'
+info:
+  version: '2019-12-02'
+  x-release: v4
+  title: Schemas
+  description: AWS EventBridge Schemas
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: schemas
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/schemas-2019-12-02.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/schemas/'
+host: schemas.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+x-servers:
+  - url: 'http://schemas.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Schemas multi-region endpoint
+  - url: 'https://schemas.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Schemas multi-region endpoint
+  - url: 'http://schemas.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Schemas endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://schemas.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Schemas endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  /v1/discoverers:
+    post:
+      operationId: CreateDiscoverer
+      description: Creates a discoverer.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateDiscovererResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - SourceArn
+            properties:
+              Description:
+                description: A description for the discoverer.
+                type: string
+                minLength: 0
+                maxLength: 256
+              SourceArn:
+                description: The ARN of the event bus.
+                type: string
+                minLength: 20
+                maxLength: 1600
+              tags:
+                description: Key-value pairs associated with a resource.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/__string'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListDiscoverers
+      description: List the discoverers.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListDiscoverersResponse'
+        '480':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '484':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: discovererIdPrefix
+          in: query
+          required: false
+          description: ''
+          type: string
+        - name: limit
+          in: query
+          required: false
+          description: ''
+          type: integer
+        - name: nextToken
+          in: query
+          required: false
+          description: ''
+          type: string
+        - name: sourceArnPrefix
+          in: query
+          required: false
+          description: ''
+          type: string
+        - name: Limit
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+  '/v1/registries/name/{registryName}':
+    post:
+      operationId: CreateRegistry
+      description: Creates a registry.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateRegistryResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: registryName
+          in: path
+          required: true
+          description: ''
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              Description:
+                description: A description of the registry to be created.
+                type: string
+                minLength: 0
+                maxLength: 256
+              tags:
+                description: Key-value pairs associated with a resource.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/__string'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteRegistry
+      description: Deletes a Registry.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: registryName
+          in: path
+          required: true
+          description: ''
+          type: string
+    get:
+      operationId: DescribeRegistry
+      description: Describes the registry.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeRegistryResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: registryName
+          in: path
+          required: true
+          description: ''
+          type: string
+    put:
+      operationId: UpdateRegistry
+      description: Updates a registry.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateRegistryResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: registryName
+          in: path
+          required: true
+          description: ''
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              Description:
+                description: The description of the registry to update.
+                type: string
+                minLength: 0
+                maxLength: 256
+  '/v1/registries/name/{registryName}/schemas/name/{schemaName}':
+    post:
+      operationId: CreateSchema
+      description: Creates a schema definition.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateSchemaResponse'
+        '480':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: registryName
+          in: path
+          required: true
+          description: ''
+          type: string
+        - name: schemaName
+          in: path
+          required: true
+          description: ''
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - Content
+              - Type
+            properties:
+              Content:
+                description: ''
+                type: string
+                minLength: 1
+                maxLength: 100000
+              Description:
+                description: A description of the schema.
+                type: string
+                minLength: 0
+                maxLength: 256
+              tags:
+                description: Key-value pairs associated with a resource.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/__string'
+              Type:
+                description: ''
+                type: string
+                enum:
+                  - OpenApi3
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteSchema
+      description: Delete a schema definition.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: registryName
+          in: path
+          required: true
+          description: ''
+          type: string
+        - name: schemaName
+          in: path
+          required: true
+          description: ''
+          type: string
+    get:
+      operationId: DescribeSchema
+      description: Retrieve the schema definition.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeSchemaResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: registryName
+          in: path
+          required: true
+          description: ''
+          type: string
+        - name: schemaName
+          in: path
+          required: true
+          description: ''
+          type: string
+        - name: schemaVersion
+          in: query
+          required: false
+          description: ''
+          type: string
+    put:
+      operationId: UpdateSchema
+      description: Updates the schema definition
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateSchemaResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: registryName
+          in: path
+          required: true
+          description: ''
+          type: string
+        - name: schemaName
+          in: path
+          required: true
+          description: ''
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              ClientTokenId:
+                description: The ID of the client token.
+                type: string
+                minLength: 0
+                maxLength: 36
+              Content:
+                description: The source of the schema definition.
+                type: string
+                minLength: 1
+                maxLength: 100000
+              Description:
+                description: The description of the schema.
+                type: string
+                minLength: 0
+                maxLength: 256
+              Type:
+                description: The schema type for the events schema.
+                type: string
+                enum:
+                  - OpenApi3
+  '/v1/discoverers/id/{discovererId}':
+    delete:
+      operationId: DeleteDiscoverer
+      description: Deletes a discoverer.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: discovererId
+          in: path
+          required: true
+          description: ''
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeDiscoverer
+      description: Describes the discoverer.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeDiscovererResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: discovererId
+          in: path
+          required: true
+          description: ''
+          type: string
+    put:
+      operationId: UpdateDiscoverer
+      description: Updates the discoverer
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateDiscovererResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: discovererId
+          in: path
+          required: true
+          description: ''
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              Description:
+                description: The description of the discoverer to update.
+                type: string
+                minLength: 0
+                maxLength: 256
+  '/v1/registries/name/{registryName}/schemas/name/{schemaName}/version/{schemaVersion}':
+    delete:
+      operationId: DeleteSchemaVersion
+      description: Delete the schema version definition
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: registryName
+          in: path
+          required: true
+          description: ''
+          type: string
+        - name: schemaName
+          in: path
+          required: true
+          description: ''
+          type: string
+        - name: schemaVersion
+          in: path
+          required: true
+          description: ''
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/registries/name/{registryName}/schemas/name/{schemaName}/language/{language}':
+    get:
+      operationId: DescribeCodeBinding
+      description: Describe the code binding URI.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeCodeBindingResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: language
+          in: path
+          required: true
+          description: ''
+          type: string
+        - name: registryName
+          in: path
+          required: true
+          description: ''
+          type: string
+        - name: schemaName
+          in: path
+          required: true
+          description: ''
+          type: string
+        - name: schemaVersion
+          in: query
+          required: false
+          description: ''
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: PutCodeBinding
+      description: Put code binding URI
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutCodeBindingResponse'
+        '480':
+          description: GoneException
+          schema:
+            $ref: '#/definitions/GoneException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '484':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '485':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '486':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: language
+          in: path
+          required: true
+          description: ''
+          type: string
+        - name: registryName
+          in: path
+          required: true
+          description: ''
+          type: string
+        - name: schemaName
+          in: path
+          required: true
+          description: ''
+          type: string
+        - name: schemaVersion
+          in: query
+          required: false
+          description: ''
+          type: string
+  '/v1/registries/name/{registryName}/schemas/name/{schemaName}/language/{language}/source':
+    get:
+      operationId: GetCodeBindingSource
+      description: Get the code binding source URI.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetCodeBindingSourceResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: language
+          in: path
+          required: true
+          description: ''
+          type: string
+        - name: registryName
+          in: path
+          required: true
+          description: ''
+          type: string
+        - name: schemaName
+          in: path
+          required: true
+          description: ''
+          type: string
+        - name: schemaVersion
+          in: query
+          required: false
+          description: ''
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /v1/discover:
+    post:
+      operationId: GetDiscoveredSchema
+      description: Get the discovered schema that was generated based on sampled events.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetDiscoveredSchemaResponse'
+        '480':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '484':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - Events
+              - Type
+            properties:
+              Events:
+                description: An array of strings that
+                type: array
+                items:
+                  $ref: '#/definitions/GetDiscoveredSchemaVersionItemInput'
+                minItems: 1
+                maxItems: 10
+              Type:
+                description: The type of event.
+                type: string
+                enum:
+                  - OpenApi3
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /v1/registries:
+    get:
+      operationId: ListRegistries
+      description: List the registries.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListRegistriesResponse'
+        '480':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '484':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          description: ''
+          type: integer
+        - name: nextToken
+          in: query
+          required: false
+          description: ''
+          type: string
+        - name: registryNamePrefix
+          in: query
+          required: false
+          description: ''
+          type: string
+        - name: scope
+          in: query
+          required: false
+          description: ''
+          type: string
+        - name: Limit
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/registries/name/{registryName}/schemas/name/{schemaName}/versions':
+    get:
+      operationId: ListSchemaVersions
+      description: Provides a list of the schema versions and related information.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListSchemaVersionsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          description: ''
+          type: integer
+        - name: nextToken
+          in: query
+          required: false
+          description: ''
+          type: string
+        - name: registryName
+          in: path
+          required: true
+          description: ''
+          type: string
+        - name: schemaName
+          in: path
+          required: true
+          description: ''
+          type: string
+        - name: Limit
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/registries/name/{registryName}/schemas':
+    get:
+      operationId: ListSchemas
+      description: List the schemas.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListSchemasResponse'
+        '480':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '484':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          description: ''
+          type: integer
+        - name: nextToken
+          in: query
+          required: false
+          description: ''
+          type: string
+        - name: registryName
+          in: path
+          required: true
+          description: ''
+          type: string
+        - name: schemaNamePrefix
+          in: query
+          required: false
+          description: ''
+          type: string
+        - name: Limit
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/tags/{resource-arn}':
+    get:
+      operationId: ListTagsForResource
+      description: Get tags for resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForResourceResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: resource-arn
+          in: path
+          required: true
+          description: ''
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: Add tags to a resource.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: resource-arn
+          in: path
+          required: true
+          description: ''
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - tags
+            properties:
+              tags:
+                description: Key-value pairs associated with a resource.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/__string'
+  /slr-deletion/lock:
+    post:
+      operationId: LockServiceLinkedRole
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/LockServiceLinkedRoleResponse'
+        '480':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '484':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - RoleArn
+              - Timeout
+            properties:
+              RoleArn:
+                description: ''
+                type: string
+                minLength: 1
+                maxLength: 1600
+              Timeout:
+                description: ''
+                type: integer
+                minimum: 1
+                maximum: 29000
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/registries/name/{registryName}/schemas/search#keywords':
+    get:
+      operationId: SearchSchemas
+      description: Search the schemas
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SearchSchemasResponse'
+        '480':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '484':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: keywords
+          in: query
+          required: true
+          description: ''
+          type: string
+        - name: limit
+          in: query
+          required: false
+          description: ''
+          type: integer
+        - name: nextToken
+          in: query
+          required: false
+          description: ''
+          type: string
+        - name: registryName
+          in: path
+          required: true
+          description: ''
+          type: string
+        - name: Limit
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/discoverers/id/{discovererId}/start':
+    post:
+      operationId: StartDiscoverer
+      description: Starts the discoverer
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartDiscovererResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: discovererId
+          in: path
+          required: true
+          description: ''
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/discoverers/id/{discovererId}/stop':
+    post:
+      operationId: StopDiscoverer
+      description: Stops the discoverer
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StopDiscovererResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: discovererId
+          in: path
+          required: true
+          description: ''
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /slr-deletion/unlock:
+    post:
+      operationId: UnlockServiceLinkedRole
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UnlockServiceLinkedRoleResponse'
+        '480':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '484':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - RoleArn
+            properties:
+              RoleArn:
+                description: ''
+                type: string
+                minLength: 1
+                maxLength: 1600
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/tags/{resource-arn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Removes tags from a resource.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: resource-arn
+          in: path
+          required: true
+          description: ''
+          type: string
+        - name: tagKeys
+          in: query
+          required: true
+          description: ''
+          type: array
+          items:
+            type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  CreateDiscovererResponse:
+    type: object
+    properties:
+      Description:
+        $ref: '#/definitions/__string'
+        description: The description of the discoverer.
+      DiscovererArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the discoverer.
+      DiscovererId:
+        $ref: '#/definitions/__string'
+        description: The ID of the discoverer.
+      SourceArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the event bus.
+      State:
+        $ref: '#/definitions/DiscovererState'
+        description: The state of the discoverer.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: Tags associated with the resource.
+  __string:
+    type: string
+  BadRequestException: {}
+  InternalServerErrorException: {}
+  UnauthorizedException: {}
+  ForbiddenException: {}
+  ServiceUnavailableException: {}
+  ConflictException: {}
+  CreateRegistryResponse:
+    type: object
+    properties:
+      Description:
+        $ref: '#/definitions/__string'
+        description: The description of the registry.
+      RegistryArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the registry.
+      RegistryName:
+        $ref: '#/definitions/__string'
+        description: The name of the registry.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: Tags associated with the registry.
+  CreateSchemaResponse:
+    type: object
+    properties:
+      Description:
+        $ref: '#/definitions/__string'
+        description: The description of the schema.
+      LastModified:
+        $ref: '#/definitions/__timestampIso8601'
+        description: The date and time that schema was modified.
+      SchemaArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the schema.
+      SchemaName:
+        $ref: '#/definitions/__string'
+        description: The name of the schema.
+      SchemaVersion:
+        $ref: '#/definitions/__string'
+        description: The version number of the schema
+      Tags:
+        $ref: '#/definitions/Tags'
+      Type:
+        $ref: '#/definitions/__string'
+        description: The type of the schema.
+      VersionCreatedDate:
+        $ref: '#/definitions/__timestampIso8601'
+        description: The date the schema version was created.
+  NotFoundException: {}
+  DescribeCodeBindingResponse:
+    type: object
+    properties:
+      CreationDate:
+        $ref: '#/definitions/__timestampIso8601'
+        description: The time and date that the code binding was created.
+      LastModified:
+        $ref: '#/definitions/__timestampIso8601'
+        description: The date and time that code bindings were modified.
+      SchemaVersion:
+        $ref: '#/definitions/__string'
+        description: The version number of the schema.
+      Status:
+        $ref: '#/definitions/CodeGenerationStatus'
+        description: The current status of code binding generation.
+  TooManyRequestsException: {}
+  DescribeDiscovererResponse:
+    type: object
+    properties:
+      Description:
+        $ref: '#/definitions/__string'
+        description: The description of the discoverer.
+      DiscovererArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the discoverer.
+      DiscovererId:
+        $ref: '#/definitions/__string'
+        description: The ID of the discoverer.
+      SourceArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the event bus.
+      State:
+        $ref: '#/definitions/DiscovererState'
+        description: The state of the discoverer.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: Tags associated with the resource.
+  DescribeRegistryResponse:
+    type: object
+    properties:
+      Description:
+        $ref: '#/definitions/__string'
+        description: The description of the registry.
+      RegistryArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the registry.
+      RegistryName:
+        $ref: '#/definitions/__string'
+        description: The name of the registry.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: Tags associated with the registry.
+  DescribeSchemaResponse:
+    type: object
+    properties:
+      Content:
+        $ref: '#/definitions/__string'
+      Description:
+        $ref: '#/definitions/__string'
+        description: The description of the schema.
+      LastModified:
+        $ref: '#/definitions/__timestampIso8601'
+        description: The date and time that schema was modified.
+      SchemaArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the schema.
+      SchemaName:
+        $ref: '#/definitions/__string'
+        description: The name of the schema.
+      SchemaVersion:
+        $ref: '#/definitions/__string'
+        description: The version number of the schema
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: Tags associated with the resource.
+      Type:
+        $ref: '#/definitions/__string'
+        description: The type of the schema.
+      VersionCreatedDate:
+        $ref: '#/definitions/__timestampIso8601'
+        description: The date the schema version was created.
+  GetCodeBindingSourceResponse:
+    type: object
+    properties:
+      Body:
+        $ref: '#/definitions/Body'
+  GetDiscoveredSchemaResponse:
+    type: object
+    properties:
+      Content:
+        $ref: '#/definitions/__string'
+  GetDiscoveredSchemaVersionItemInput:
+    type: string
+    minLength: 1
+    maxLength: 100000
+  ListDiscoverersResponse:
+    type: object
+    properties:
+      Discoverers:
+        $ref: '#/definitions/__listOfDiscovererSummary'
+        description: An array of DiscovererSummary information.
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: 'The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.'
+  ListRegistriesResponse:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: 'The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.'
+      Registries:
+        $ref: '#/definitions/__listOfRegistrySummary'
+        description: An array of registry summaries.
+  ListSchemaVersionsResponse:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: 'The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.'
+      SchemaVersions:
+        $ref: '#/definitions/__listOfSchemaVersionSummary'
+        description: An array of schema version summaries.
+  ListSchemasResponse:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: 'The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.'
+      Schemas:
+        $ref: '#/definitions/__listOfSchemaSummary'
+        description: An array of schema summaries.
+  ListTagsForResourceResponse:
+    type: object
+    required:
+      - Tags
+    properties:
+      Tags:
+        $ref: '#/definitions/Tags'
+  LockServiceLinkedRoleResponse:
+    type: object
+    properties:
+      CanBeDeleted:
+        $ref: '#/definitions/__boolean'
+      ReasonOfFailure:
+        $ref: '#/definitions/__stringMin1Max1600'
+      RelatedResources:
+        $ref: '#/definitions/__listOfDiscovererSummary'
+  PutCodeBindingResponse:
+    type: object
+    properties:
+      CreationDate:
+        $ref: '#/definitions/__timestampIso8601'
+        description: The time and date that the code binding was created.
+      LastModified:
+        $ref: '#/definitions/__timestampIso8601'
+        description: The date and time that code bindings were modified.
+      SchemaVersion:
+        $ref: '#/definitions/__string'
+        description: The version number of the schema.
+      Status:
+        $ref: '#/definitions/CodeGenerationStatus'
+        description: The current status of code binding generation.
+  GoneException: {}
+  SearchSchemasResponse:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: 'The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.'
+      Schemas:
+        $ref: '#/definitions/__listOfSearchSchemaSummary'
+        description: An array of SearchSchemaSummary information.
+  StartDiscovererResponse:
+    type: object
+    properties:
+      DiscovererId:
+        $ref: '#/definitions/__string'
+        description: The ID of the discoverer.
+      State:
+        $ref: '#/definitions/DiscovererState'
+        description: The state of the discoverer.
+  StopDiscovererResponse:
+    type: object
+    properties:
+      DiscovererId:
+        $ref: '#/definitions/__string'
+        description: The ID of the discoverer.
+      State:
+        $ref: '#/definitions/DiscovererState'
+        description: The state of the discoverer.
+  UnlockServiceLinkedRoleResponse:
+    type: object
+    properties: {}
+  UpdateDiscovererResponse:
+    type: object
+    properties:
+      Description:
+        $ref: '#/definitions/__string'
+        description: The description of the discoverer.
+      DiscovererArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the discoverer.
+      DiscovererId:
+        $ref: '#/definitions/__string'
+        description: The ID of the discoverer.
+      SourceArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the event bus.
+      State:
+        $ref: '#/definitions/DiscovererState'
+        description: The state of the discoverer.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: Tags associated with the resource.
+  UpdateRegistryResponse:
+    type: object
+    properties:
+      Description:
+        $ref: '#/definitions/__string'
+        description: The description of the registry.
+      RegistryArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the registry.
+      RegistryName:
+        $ref: '#/definitions/__string'
+        description: The name of the registry.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: Tags associated with the registry.
+  UpdateSchemaResponse:
+    type: object
+    properties:
+      Description:
+        $ref: '#/definitions/__string'
+        description: The description of the schema.
+      LastModified:
+        $ref: '#/definitions/__timestampIso8601'
+        description: The date and time that schema was modified.
+      SchemaArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the schema.
+      SchemaName:
+        $ref: '#/definitions/__string'
+        description: The name of the schema.
+      SchemaVersion:
+        $ref: '#/definitions/__string'
+        description: The version number of the schema
+      Tags:
+        $ref: '#/definitions/Tags'
+      Type:
+        $ref: '#/definitions/__string'
+        description: The type of the schema.
+      VersionCreatedDate:
+        $ref: '#/definitions/__timestampIso8601'
+        description: The date the schema version was created.
+  CodeGenerationStatus:
+    type: string
+    enum:
+      - CREATE_IN_PROGRESS
+      - CREATE_COMPLETE
+      - CREATE_FAILED
+  __stringMin0Max256:
+    type: string
+    minLength: 0
+    maxLength: 256
+  __stringMin20Max1600:
+    type: string
+    minLength: 20
+    maxLength: 1600
+  Tags:
+    type: object
+    description: Key-value pairs associated with a resource.
+    additionalProperties:
+      $ref: '#/definitions/__string'
+  CreateDiscovererRequest:
+    type: object
+    required:
+      - SourceArn
+    properties:
+      Description:
+        $ref: '#/definitions/__stringMin0Max256'
+        description: A description for the discoverer.
+      SourceArn:
+        $ref: '#/definitions/__stringMin20Max1600'
+        description: The ARN of the event bus.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: Tags associated with the resource.
+  DiscovererState:
+    type: string
+    enum:
+      - STARTED
+      - STOPPED
+  CreateRegistryRequest:
+    type: object
+    properties:
+      Description:
+        $ref: '#/definitions/__stringMin0Max256'
+        description: A description of the registry to be created.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: Tags to associate with the registry.
+  __stringMin1Max100000:
+    type: string
+    minLength: 1
+    maxLength: 100000
+  Type:
+    type: string
+    enum:
+      - OpenApi3
+  CreateSchemaRequest:
+    type: object
+    required:
+      - Type
+      - Content
+    properties:
+      Content:
+        $ref: '#/definitions/__stringMin1Max100000'
+      Description:
+        $ref: '#/definitions/__stringMin0Max256'
+        description: A description of the schema.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: Tags associated with the schema.
+      Type:
+        $ref: '#/definitions/Type'
+  __timestampIso8601:
+    type: string
+    format: date-time
+  DeleteDiscovererRequest:
+    type: object
+    properties: {}
+  DeleteRegistryRequest:
+    type: object
+    properties: {}
+  DeleteSchemaRequest:
+    type: object
+    properties: {}
+  DeleteSchemaVersionRequest:
+    type: object
+    properties: {}
+  DescribeCodeBindingRequest:
+    type: object
+    properties: {}
+  DescribeDiscovererRequest:
+    type: object
+    properties: {}
+  DescribeRegistryRequest:
+    type: object
+    properties: {}
+  DescribeSchemaRequest:
+    type: object
+    properties: {}
+  DiscovererSummary:
+    type: object
+    properties:
+      DiscovererArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the discoverer.
+      DiscovererId:
+        $ref: '#/definitions/__string'
+        description: The ID of the discoverer.
+      SourceArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the event bus.
+      State:
+        $ref: '#/definitions/DiscovererState'
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: Tags associated with the resource.
+  GetCodeBindingSourceRequest:
+    type: object
+    properties: {}
+  Body:
+    type: string
+  __listOfGetDiscoveredSchemaVersionItemInput:
+    type: array
+    items:
+      $ref: '#/definitions/GetDiscoveredSchemaVersionItemInput'
+    minItems: 1
+    maxItems: 10
+  GetDiscoveredSchemaRequest:
+    type: object
+    required:
+      - Type
+      - Events
+    properties:
+      Events:
+        $ref: '#/definitions/__listOfGetDiscoveredSchemaVersionItemInput'
+        description: An array of strings that
+      Type:
+        $ref: '#/definitions/Type'
+        description: The type of event.
+  __integer:
+    type: integer
+  ListDiscoverersRequest:
+    type: object
+    properties: {}
+  __listOfDiscovererSummary:
+    type: array
+    items:
+      $ref: '#/definitions/DiscovererSummary'
+  ListRegistriesRequest:
+    type: object
+    properties: {}
+  __listOfRegistrySummary:
+    type: array
+    items:
+      $ref: '#/definitions/RegistrySummary'
+  ListSchemaVersionsRequest:
+    type: object
+    properties: {}
+  __listOfSchemaVersionSummary:
+    type: array
+    items:
+      $ref: '#/definitions/SchemaVersionSummary'
+  ListSchemasRequest:
+    type: object
+    properties: {}
+  __listOfSchemaSummary:
+    type: array
+    items:
+      $ref: '#/definitions/SchemaSummary'
+  ListTagsForResourceRequest:
+    type: object
+    properties: {}
+  __stringMin1Max1600:
+    type: string
+    minLength: 1
+    maxLength: 1600
+  __integerMin1Max29000:
+    type: integer
+    minimum: 1
+    maximum: 29000
+  LockServiceLinkedRoleRequest:
+    type: object
+    required:
+      - Timeout
+      - RoleArn
+    properties:
+      RoleArn:
+        $ref: '#/definitions/__stringMin1Max1600'
+      Timeout:
+        $ref: '#/definitions/__integerMin1Max29000'
+  __boolean:
+    type: boolean
+  PutCodeBindingRequest:
+    type: object
+    properties: {}
+  RegistrySummary:
+    type: object
+    properties:
+      RegistryArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the registry.
+      RegistryName:
+        $ref: '#/definitions/__string'
+        description: The name of the registry.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: Tags associated with the registry.
+  __long:
+    type: integer
+  SchemaSummary:
+    type: object
+    properties:
+      LastModified:
+        $ref: '#/definitions/__timestampIso8601'
+        description: The date and time that schema was modified.
+      SchemaArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the schema.
+      SchemaName:
+        $ref: '#/definitions/__string'
+        description: The name of the schema.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: Tags associated with the schema.
+      VersionCount:
+        $ref: '#/definitions/__long'
+        description: The number of versions available for the schema.
+    description: A summary of schema details.
+  SchemaVersionSummary:
+    type: object
+    properties:
+      SchemaArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the schema version.
+      SchemaName:
+        $ref: '#/definitions/__string'
+        description: The name of the schema.
+      SchemaVersion:
+        $ref: '#/definitions/__string'
+        description: The version number of the schema.
+  __listOfSearchSchemaVersionSummary:
+    type: array
+    items:
+      $ref: '#/definitions/SearchSchemaVersionSummary'
+  SearchSchemaSummary:
+    type: object
+    properties:
+      RegistryName:
+        $ref: '#/definitions/__string'
+        description: The name of the registry.
+      SchemaArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the schema.
+      SchemaName:
+        $ref: '#/definitions/__string'
+        description: The name of the schema.
+      SchemaVersions:
+        $ref: '#/definitions/__listOfSearchSchemaVersionSummary'
+        description: An array of schema version summaries.
+  SearchSchemaVersionSummary:
+    type: object
+    properties:
+      CreatedDate:
+        $ref: '#/definitions/__timestampIso8601'
+      SchemaVersion:
+        $ref: '#/definitions/__string'
+        description: The version number of the schema
+  SearchSchemasRequest:
+    type: object
+    properties: {}
+  __listOfSearchSchemaSummary:
+    type: array
+    items:
+      $ref: '#/definitions/SearchSchemaSummary'
+  StartDiscovererRequest:
+    type: object
+    properties: {}
+  StopDiscovererRequest:
+    type: object
+    properties: {}
+  TagResourceRequest:
+    type: object
+    required:
+      - Tags
+    properties:
+      Tags:
+        $ref: '#/definitions/Tags'
+  UnlockServiceLinkedRoleRequest:
+    type: object
+    required:
+      - RoleArn
+    properties:
+      RoleArn:
+        $ref: '#/definitions/__stringMin1Max1600'
+  __listOf__string:
+    type: array
+    items:
+      $ref: '#/definitions/__string'
+  UntagResourceRequest:
+    type: object
+    properties: {}
+  UpdateDiscovererRequest:
+    type: object
+    properties:
+      Description:
+        $ref: '#/definitions/__stringMin0Max256'
+        description: The description of the discoverer to update.
+  UpdateRegistryRequest:
+    type: object
+    properties:
+      Description:
+        $ref: '#/definitions/__stringMin0Max256'
+        description: The description of the registry to update.
+  __stringMin0Max36:
+    type: string
+    minLength: 0
+    maxLength: 36
+  UpdateSchemaRequest:
+    type: object
+    properties:
+      ClientTokenId:
+        $ref: '#/definitions/__stringMin0Max36'
+        description: The ID of the client token.
+      Content:
+        $ref: '#/definitions/__stringMin1Max100000'
+        description: The source of the schema definition.
+      Description:
+        $ref: '#/definitions/__stringMin0Max256'
+        description: The description of the schema.
+      Type:
+        $ref: '#/definitions/Type'
+        description: The schema type for the events schema.

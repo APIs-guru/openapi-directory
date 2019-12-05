@@ -298,6 +298,130 @@ paths:
           required: false
           description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListClusters</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value.</p> <note> <p>This token should be treated as an opaque identifier that is used only to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
           type: string
+  '/clusters/{name}/fargate-profiles':
+    post:
+      operationId: CreateFargateProfile
+      description: '<p>Creates an AWS Fargate profile for your Amazon EKS cluster. You must have at least one Fargate profile in a cluster to be able to schedule pods on Fargate infrastructure.</p> <p>The Fargate profile allows an administrator to declare which pods run on Fargate infrastructure and specify which pods run on which Fargate profile. This declaration is done through the profile’s selectors. Each profile can have up to five selectors that contain a namespace and labels. A namespace is required for every selector. The label field consists of multiple optional key-value pairs. Pods that match the selectors are scheduled on Fargate infrastructure. If a to-be-scheduled pod matches any of the selectors in the Fargate profile, then that pod is scheduled on Fargate infrastructure.</p> <p>When you create a Fargate profile, you must specify a pod execution role to use with the pods that are scheduled with the profile. This role is added to the cluster''s Kubernetes <a href="https://kubernetes.io/docs/admin/authorization/rbac/">Role Based Access Control</a> (RBAC) for authorization so that the <code>kubelet</code> that is running on the Fargate infrastructure can register with your Amazon EKS cluster. This role is what allows Fargate infrastructure to appear in your cluster as nodes. The pod execution role also provides IAM permissions to the Fargate infrastructure to allow read access to Amazon ECR image repositories. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html">Pod Execution Role</a> in the <i>Amazon EKS User Guide</i>.</p> <p>Fargate profiles are immutable. However, you can create a new updated profile to replace an existing profile and then delete the original after the updated profile has finished creating.</p> <p>If any Fargate profiles in a cluster are in the <code>DELETING</code> status, you must wait for that Fargate profile to finish deleting before you can create any other profiles in that cluster.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/fargate-profile.html">AWS Fargate Profile</a> in the <i>Amazon EKS User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateFargateProfileResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: ClientException
+          schema:
+            $ref: '#/definitions/ClientException'
+        '483':
+          description: ServerException
+          schema:
+            $ref: '#/definitions/ServerException'
+        '484':
+          description: ResourceLimitExceededException
+          schema:
+            $ref: '#/definitions/ResourceLimitExceededException'
+        '485':
+          description: UnsupportedAvailabilityZoneException
+          schema:
+            $ref: '#/definitions/UnsupportedAvailabilityZoneException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the Amazon EKS cluster to apply the Fargate profile to.
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - fargateProfileName
+              - podExecutionRoleArn
+            properties:
+              fargateProfileName:
+                description: The name of the Fargate profile.
+                type: string
+              podExecutionRoleArn:
+                description: 'The Amazon Resource Name (ARN) of the pod execution role to use for pods that match the selectors in the Fargate profile. The pod execution role allows Fargate infrastructure to register with your cluster as a node, and it provides read access to Amazon ECR image repositories. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html">Pod Execution Role</a> in the <i>Amazon EKS User Guide</i>.'
+                type: string
+              subnets:
+                description: 'The IDs of subnets to launch Fargate pods into. At this time, Fargate pods are not assigned public IP addresses, so only private subnets (with no direct route to an Internet Gateway) are accepted for this parameter.'
+                type: array
+                items:
+                  $ref: '#/definitions/String'
+              selectors:
+                description: 'The selectors to match for pods to use this Fargate profile. Each selector must have an associated namespace. Optionally, you can also specify labels for a namespace. You may specify up to five selectors in a Fargate profile.'
+                type: array
+                items:
+                  $ref: '#/definitions/FargateProfileSelector'
+              clientRequestToken:
+                description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                type: string
+              tags:
+                description: 'The metadata to apply to the Fargate profile to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Fargate profile tags do not propagate to any other resources associated with the Fargate profile, such as the pods that are scheduled with it.'
+                type: object
+                minProperties: 1
+                maxProperties: 50
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListFargateProfiles
+      description: Lists the AWS Fargate profiles associated with the specified cluster in your AWS account in the specified Region.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListFargateProfilesResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ClientException
+          schema:
+            $ref: '#/definitions/ClientException'
+        '483':
+          description: ServerException
+          schema:
+            $ref: '#/definitions/ServerException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the Amazon EKS cluster that you would like to listFargate profiles in.
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The maximum number of Fargate profile results returned by <code>ListFargateProfiles</code> in paginated output. When you use this parameter, <code>ListFargateProfiles</code> returns only <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. You can see the remaining results of the initial request by sending another <code>ListFargateProfiles</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If you don''t use this parameter, <code>ListFargateProfiles</code> returns up to 100 results and a <code>nextToken</code> value if applicable.'
+          type: integer
+          minimum: 1
+          maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: The <code>nextToken</code> value returned from a previous paginated <code>ListFargateProfiles</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value.
+          type: string
   '/clusters/{name}/node-groups':
     post:
       operationId: CreateNodegroup
@@ -355,7 +479,7 @@ paths:
                 description: The unique name to give your node group.
                 type: string
               scalingConfig:
-                description: An object representing the scaling configuration details for the AutoScaling group that is associated with your node group.
+                description: An object representing the scaling configuration details for the Auto Scaling group that is associated with your node group.
                 type: object
                 properties:
                   minSize:
@@ -371,7 +495,7 @@ paths:
                 description: The root device disk size (in GiB) for your node group instances. The default disk size is 20 GiB.
                 type: integer
               subnets:
-                description: 'The subnets to use for the AutoScaling group that is created for your node group. These subnets must have the tag key <code>kubernetes.io/cluster/CLUSTER_NAME</code> with a value of <code>shared</code>, where <code>CLUSTER_NAME</code> is replaced with the name of your cluster.'
+                description: 'The subnets to use for the Auto Scaling group that is created for your node group. These subnets must have the tag key <code>kubernetes.io/cluster/CLUSTER_NAME</code> with a value of <code>shared</code>, where <code>CLUSTER_NAME</code> is replaced with the name of your cluster.'
                 type: array
                 items:
                   $ref: '#/definitions/String'
@@ -381,7 +505,7 @@ paths:
                 items:
                   $ref: '#/definitions/String'
               amiType:
-                description: 'The AMI type for your node group. GPU instance types should use the <code>AL2_x86_64_GPU</code> AMI type, which uses the Amazon EKS-optimized Linux AMI with GPU support; non-GPU instances should use the <code>AL2_x86_64</code> AMI type, which uses the Amazon EKS-optimized Linux AMI.'
+                description: 'The AMI type for your node group. GPU instance types should use the <code>AL2_x86_64_GPU</code> AMI type, which uses the Amazon EKS-optimized Linux AMI with GPU support. Non-GPU instances should use the <code>AL2_x86_64</code> AMI type, which uses the Amazon EKS-optimized Linux AMI.'
                 type: string
                 enum:
                   - AL2_x86_64
@@ -395,7 +519,7 @@ paths:
                     description: 'The Amazon EC2 SSH key that provides access for SSH communication with the worker nodes in the managed node group. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html">Amazon EC2 Key Pairs</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux Instances</i>.'
                   sourceSecurityGroups:
                     $ref: '#/definitions/StringList'
-                    description: 'The security groups to allow SSH access (port 22) from on the worker nodes. If you specify an Amazon EC2 SSH key, but you do not specify a source security group when you create a managed node group, port 22 on the worker nodes is opened to the internet (0.0.0.0/0). For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html">Security Groups for Your VPC</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.'
+                    description: 'The security groups that are allowed SSH access (port 22) to the worker nodes. If you specify an Amazon EC2 SSH key but do not specify a source security group when you create a managed node group, then port 22 on the worker nodes is opened to the internet (0.0.0.0/0). For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html">Security Groups for Your VPC</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.'
               nodeRole:
                 description: 'The IAM role associated with your node group. The Amazon EKS worker node <code>kubelet</code> daemon makes calls to AWS APIs on your behalf. Worker nodes receive permissions for these API calls through an IAM instance profile and associated policies. Before you can launch worker nodes and register them into a cluster, you must create an IAM role for those worker nodes to use when they are launched. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html">Amazon EKS Worker Node IAM Role</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
                 type: string
@@ -477,7 +601,7 @@ paths:
   '/clusters/{name}':
     delete:
       operationId: DeleteCluster
-      description: '<p>Deletes the Amazon EKS cluster control plane.</p> <p>If you have active services in your cluster that are associated with a load balancer, you must delete those services before deleting the cluster so that the load balancers are deleted properly. Otherwise, you can have orphaned resources in your VPC that prevent you from being able to delete the VPC. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/delete-cluster.html">Deleting a Cluster</a> in the <i>Amazon EKS User Guide</i>.</p> <p>If you have managed node groups attached to the cluster, you must delete them first. For more information, see <a>DeleteNodegroup</a>.</p>'
+      description: '<p>Deletes the Amazon EKS cluster control plane.</p> <p>If you have active services in your cluster that are associated with a load balancer, you must delete those services before deleting the cluster so that the load balancers are deleted properly. Otherwise, you can have orphaned resources in your VPC that prevent you from being able to delete the VPC. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/delete-cluster.html">Deleting a Cluster</a> in the <i>Amazon EKS User Guide</i>.</p> <p>If you have managed node groups or Fargate profiles attached to the cluster, you must delete them first. For more information, see <a>DeleteNodegroup</a> and<a>DeleteFargateProfile</a>.</p>'
       responses:
         '200':
           description: Success
@@ -546,6 +670,85 @@ paths:
           in: path
           required: true
           description: The name of the cluster to describe.
+          type: string
+  '/clusters/{name}/fargate-profiles/{fargateProfileName}':
+    delete:
+      operationId: DeleteFargateProfile
+      description: '<p>Deletes an AWS Fargate profile.</p> <p>When you delete a Fargate profile, any pods that were scheduled onto Fargate infrastructure with the profile are deleted. If those pods match another Fargate profile, then they are scheduled on Fargate infrastructure with that profile. If they no longer match any Fargate profiles, then they are not scheduled on Fargate infrastructure.</p> <p>Only one Fargate profile in a cluster can be in the <code>DELETING</code> status at a time. You must wait for a Fargate profile to finish deleting before you can delete any other profiles in that cluster.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteFargateProfileResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ClientException
+          schema:
+            $ref: '#/definitions/ClientException'
+        '482':
+          description: ServerException
+          schema:
+            $ref: '#/definitions/ServerException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the Amazon EKS cluster associated with the Fargate profile to delete.
+          type: string
+        - name: fargateProfileName
+          in: path
+          required: true
+          description: The name of the Fargate profile to delete.
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeFargateProfile
+      description: Returns descriptive information about an AWS Fargate profile.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeFargateProfileResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ClientException
+          schema:
+            $ref: '#/definitions/ClientException'
+        '482':
+          description: ServerException
+          schema:
+            $ref: '#/definitions/ServerException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the Amazon EKS cluster associated with the Fargate profile.
+          type: string
+        - name: fargateProfileName
+          in: path
+          required: true
+          description: The name of the Fargate profile to describe.
           type: string
   '/clusters/{name}/node-groups/{nodegroupName}':
     delete:
@@ -1041,7 +1244,7 @@ paths:
                     $ref: '#/definitions/labelsKeyList'
                     description: Kubernetes labels to be removed.
               scalingConfig:
-                description: An object representing the scaling configuration details for the AutoScaling group that is associated with your node group.
+                description: An object representing the scaling configuration details for the Auto Scaling group that is associated with your node group.
                 type: object
                 properties:
                   minSize:
@@ -1121,7 +1324,7 @@ paths:
                 description: 'The AMI version of the Amazon EKS-optimized AMI to use for the update. By default, the latest available AMI version for the node group''s Kubernetes version is used. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html">Amazon EKS-Optimized Linux AMI Versions </a> in the <i>Amazon EKS User Guide</i>.'
                 type: string
               force:
-                description: 'Force the update if the existing node group''s pods are unable to be drained due to a pod disruption budget issue. If a previous update fails because pods could not be drained, you can force the update after it fails to terminate the old node regardless of whether or not any pods are running on the node.'
+                description: 'Force the update if the existing node group''s pods are unable to be drained due to a pod disruption budget issue. If an update fails because pods could not be drained, you can force the update after it fails to terminate the old node whether or not any pods are running on the node.'
                 type: boolean
               clientRequestToken:
                 description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
@@ -1162,6 +1365,25 @@ definitions:
   ServerException: {}
   ServiceUnavailableException: {}
   UnsupportedAvailabilityZoneException: {}
+  CreateFargateProfileResponse:
+    type: object
+    properties:
+      fargateProfile:
+        $ref: '#/definitions/FargateProfile'
+        description: The full description of your new Fargate profile.
+  String:
+    type: string
+  FargateProfileSelector:
+    type: object
+    properties:
+      namespace:
+        $ref: '#/definitions/String'
+        description: The Kubernetes namespace that the selector should match.
+      labels:
+        $ref: '#/definitions/FargateProfileLabel'
+        description: The Kubernetes labels that the selector should match. A pod must contain all of the labels that are specified in the selector for it to be considered a match.
+    description: An object representing an AWS Fargate profile selector.
+  InvalidRequestException: {}
   CreateNodegroupResponse:
     type: object
     properties:
@@ -1171,13 +1393,10 @@ definitions:
   Capacity:
     type: integer
     minimum: 1
-  String:
-    type: string
   labelValue:
     type: string
     minLength: 1
     maxLength: 253
-  InvalidRequestException: {}
   DeleteClusterResponse:
     type: object
     example: {}
@@ -1186,6 +1405,12 @@ definitions:
         $ref: '#/definitions/Cluster'
         description: The full description of the cluster to delete.
   ResourceNotFoundException: {}
+  DeleteFargateProfileResponse:
+    type: object
+    properties:
+      fargateProfile:
+        $ref: '#/definitions/FargateProfile'
+        description: The deleted Fargate profile.
   DeleteNodegroupResponse:
     type: object
     properties:
@@ -1216,6 +1441,12 @@ definitions:
       cluster:
         $ref: '#/definitions/Cluster'
         description: The full description of your specified cluster.
+  DescribeFargateProfileResponse:
+    type: object
+    properties:
+      fargateProfile:
+        $ref: '#/definitions/FargateProfile'
+        description: The full description of your Fargate profile.
   DescribeNodegroupResponse:
     type: object
     properties:
@@ -1241,6 +1472,15 @@ definitions:
       nextToken:
         $ref: '#/definitions/String'
         description: 'The <code>nextToken</code> value to include in a future <code>ListClusters</code> request. When the results of a <code>ListClusters</code> request exceed <code>maxResults</code>, you can use this value to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
+  ListFargateProfilesResponse:
+    type: object
+    properties:
+      fargateProfileNames:
+        $ref: '#/definitions/StringList'
+        description: A list of all of the Fargate profiles associated with the specified cluster.
+      nextToken:
+        $ref: '#/definitions/String'
+        description: 'The <code>nextToken</code> value to include in a future <code>ListFargateProfiles</code> request. When the results of a <code>ListFargateProfiles</code> request exceed <code>maxResults</code>, you can use this value to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
   ListNodegroupsResponse:
     type: object
     properties:
@@ -1319,8 +1559,8 @@ definitions:
     properties:
       name:
         $ref: '#/definitions/String'
-        description: The name of the AutoScaling group associated with an Amazon EKS managed node group.
-    description: An AutoScaling group that is associated with an Amazon EKS managed node group.
+        description: The name of the Auto Scaling group associated with an Amazon EKS managed node group.
+    description: An Auto Scaling group that is associated with an Amazon EKS managed node group.
   AutoScalingGroupList:
     type: array
     items:
@@ -1350,7 +1590,7 @@ definitions:
         description: The security groups associated with the cross-account elastic network interfaces that are used to allow communication between your worker nodes and the Kubernetes control plane.
       clusterSecurityGroupId:
         $ref: '#/definitions/String'
-        description: The cluster security group that was created by Amazon EKS for the cluster. Managed node groups use this security group for control plane to data plane communication.
+        description: The cluster security group that was created by Amazon EKS for the cluster. Managed node groups use this security group for control-plane-to-data-plane communication.
       vpcId:
         $ref: '#/definitions/String'
         description: The VPC associated with your cluster.
@@ -1484,6 +1724,65 @@ definitions:
       tags:
         $ref: '#/definitions/TagMap'
         description: 'The metadata to apply to the cluster to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define.'
+  FargateProfileSelectors:
+    type: array
+    items:
+      $ref: '#/definitions/FargateProfileSelector'
+  CreateFargateProfileRequest:
+    type: object
+    required:
+      - fargateProfileName
+      - podExecutionRoleArn
+    properties:
+      fargateProfileName:
+        $ref: '#/definitions/String'
+        description: The name of the Fargate profile.
+      podExecutionRoleArn:
+        $ref: '#/definitions/String'
+        description: 'The Amazon Resource Name (ARN) of the pod execution role to use for pods that match the selectors in the Fargate profile. The pod execution role allows Fargate infrastructure to register with your cluster as a node, and it provides read access to Amazon ECR image repositories. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html">Pod Execution Role</a> in the <i>Amazon EKS User Guide</i>.'
+      subnets:
+        $ref: '#/definitions/StringList'
+        description: 'The IDs of subnets to launch Fargate pods into. At this time, Fargate pods are not assigned public IP addresses, so only private subnets (with no direct route to an Internet Gateway) are accepted for this parameter.'
+      selectors:
+        $ref: '#/definitions/FargateProfileSelectors'
+        description: 'The selectors to match for pods to use this Fargate profile. Each selector must have an associated namespace. Optionally, you can also specify labels for a namespace. You may specify up to five selectors in a Fargate profile.'
+      clientRequestToken:
+        $ref: '#/definitions/String'
+        description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: 'The metadata to apply to the Fargate profile to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Fargate profile tags do not propagate to any other resources associated with the Fargate profile, such as the pods that are scheduled with it.'
+  FargateProfile:
+    type: object
+    properties:
+      fargateProfileName:
+        $ref: '#/definitions/String'
+        description: The name of the Fargate profile.
+      fargateProfileArn:
+        $ref: '#/definitions/String'
+        description: The full Amazon Resource Name (ARN) of the Fargate profile.
+      clusterName:
+        $ref: '#/definitions/String'
+        description: The name of the Amazon EKS cluster that the Fargate profile belongs to.
+      createdAt:
+        $ref: '#/definitions/Timestamp'
+        description: The Unix epoch timestamp in seconds for when the Fargate profile was created.
+      podExecutionRoleArn:
+        $ref: '#/definitions/String'
+        description: 'The Amazon Resource Name (ARN) of the pod execution role to use for pods that match the selectors in the Fargate profile. For more information, see <a href="eks/latest/userguide/pod-execution-role.html">Pod Execution Role</a> in the <i>Amazon EKS User Guide</i>.'
+      subnets:
+        $ref: '#/definitions/StringList'
+        description: The IDs of subnets to launch Fargate pods into.
+      selectors:
+        $ref: '#/definitions/FargateProfileSelectors'
+        description: The selectors to match for pods to use this Fargate profile.
+      status:
+        $ref: '#/definitions/FargateProfileStatus'
+        description: The current status of the Fargate profile.
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: 'The metadata applied to the Fargate profile to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Fargate profile tags do not propagate to any other resources associated with the Fargate profile, such as the pods that are scheduled with it.'
+    description: An object representing an AWS Fargate profile.
   NodegroupScalingConfig:
     type: object
     properties:
@@ -1496,7 +1795,7 @@ definitions:
       desiredSize:
         $ref: '#/definitions/Capacity'
         description: The current number of worker nodes that the managed node group should maintain.
-    description: An object representing the scaling configuration details for the AutoScaling group that is associated with your node group.
+    description: An object representing the scaling configuration details for the Auto Scaling group that is associated with your node group.
   RemoteAccessConfig:
     type: object
     properties:
@@ -1505,7 +1804,7 @@ definitions:
         description: 'The Amazon EC2 SSH key that provides access for SSH communication with the worker nodes in the managed node group. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html">Amazon EC2 Key Pairs</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux Instances</i>.'
       sourceSecurityGroups:
         $ref: '#/definitions/StringList'
-        description: 'The security groups to allow SSH access (port 22) from on the worker nodes. If you specify an Amazon EC2 SSH key, but you do not specify a source security group when you create a managed node group, port 22 on the worker nodes is opened to the internet (0.0.0.0/0). For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html">Security Groups for Your VPC</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.'
+        description: 'The security groups that are allowed SSH access (port 22) to the worker nodes. If you specify an Amazon EC2 SSH key but do not specify a source security group when you create a managed node group, then port 22 on the worker nodes is opened to the internet (0.0.0.0/0). For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html">Security Groups for Your VPC</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.'
     description: An object representing the remote access configuration for the managed node group.
   CreateNodegroupRequest:
     type: object
@@ -1519,19 +1818,19 @@ definitions:
         description: The unique name to give your node group.
       scalingConfig:
         $ref: '#/definitions/NodegroupScalingConfig'
-        description: The scaling configuration details for the AutoScaling group that is created for your node group.
+        description: The scaling configuration details for the Auto Scaling group that is created for your node group.
       diskSize:
         $ref: '#/definitions/BoxedInteger'
         description: The root device disk size (in GiB) for your node group instances. The default disk size is 20 GiB.
       subnets:
         $ref: '#/definitions/StringList'
-        description: 'The subnets to use for the AutoScaling group that is created for your node group. These subnets must have the tag key <code>kubernetes.io/cluster/CLUSTER_NAME</code> with a value of <code>shared</code>, where <code>CLUSTER_NAME</code> is replaced with the name of your cluster.'
+        description: 'The subnets to use for the Auto Scaling group that is created for your node group. These subnets must have the tag key <code>kubernetes.io/cluster/CLUSTER_NAME</code> with a value of <code>shared</code>, where <code>CLUSTER_NAME</code> is replaced with the name of your cluster.'
       instanceTypes:
         $ref: '#/definitions/StringList'
         description: 'The instance type to use for your node group. Currently, you can specify a single instance type for a node group. The default value for this parameter is <code>t3.medium</code>. If you choose a GPU instance type, be sure to specify the <code>AL2_x86_64_GPU</code> with the <code>amiType</code> parameter.'
       amiType:
         $ref: '#/definitions/AMITypes'
-        description: 'The AMI type for your node group. GPU instance types should use the <code>AL2_x86_64_GPU</code> AMI type, which uses the Amazon EKS-optimized Linux AMI with GPU support; non-GPU instances should use the <code>AL2_x86_64</code> AMI type, which uses the Amazon EKS-optimized Linux AMI.'
+        description: 'The AMI type for your node group. GPU instance types should use the <code>AL2_x86_64_GPU</code> AMI type, which uses the Amazon EKS-optimized Linux AMI with GPU support. Non-GPU instances should use the <code>AL2_x86_64</code> AMI type, which uses the Amazon EKS-optimized Linux AMI.'
       remoteAccess:
         $ref: '#/definitions/RemoteAccessConfig'
         description: The remote access (SSH) configuration to use with your node group.
@@ -1582,19 +1881,19 @@ definitions:
         description: The current status of the managed node group.
       scalingConfig:
         $ref: '#/definitions/NodegroupScalingConfig'
-        description: The scaling configuration details for the AutoScaling group that is associated with your node group.
+        description: The scaling configuration details for the Auto Scaling group that is associated with your node group.
       instanceTypes:
         $ref: '#/definitions/StringList'
         description: The instance types associated with your node group.
       subnets:
         $ref: '#/definitions/StringList'
-        description: 'The subnets allowed for the AutoScaling group that is associated with your node group. These subnets must have the following tag: <code>kubernetes.io/cluster/CLUSTER_NAME</code>, where <code>CLUSTER_NAME</code> is replaced with the name of your cluster.'
+        description: 'The subnets allowed for the Auto Scaling group that is associated with your node group. These subnets must have the following tag: <code>kubernetes.io/cluster/CLUSTER_NAME</code>, where <code>CLUSTER_NAME</code> is replaced with the name of your cluster.'
       remoteAccess:
         $ref: '#/definitions/RemoteAccessConfig'
         description: The remote access (SSH) configuration that is associated with the node group.
       amiType:
         $ref: '#/definitions/AMITypes'
-        description: 'The AMI type associated with your node group. GPU instance types should use the <code>AL2_x86_64_GPU</code> AMI type, which uses the Amazon EKS-optimized Linux AMI with GPU support; non-GPU instances should use the <code>AL2_x86_64</code> AMI type, which uses the Amazon EKS-optimized Linux AMI.'
+        description: 'The AMI type associated with your node group. GPU instance types should use the <code>AL2_x86_64_GPU</code> AMI type, which uses the Amazon EKS-optimized Linux AMI with GPU support. Non-GPU instances should use the <code>AL2_x86_64</code> AMI type, which uses the Amazon EKS-optimized Linux AMI.'
       nodeRole:
         $ref: '#/definitions/String'
         description: 'The IAM role associated with your node group. The Amazon EKS worker node <code>kubelet</code> daemon makes calls to AWS APIs on your behalf. Worker nodes receive permissions for these API calls through an IAM instance profile and associated policies. Before you can launch worker nodes and register them into a cluster, you must create an IAM role for those worker nodes to use when they are launched. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html">Amazon EKS Worker Node IAM Role</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
@@ -1603,7 +1902,7 @@ definitions:
         description: <p>The Kubernetes labels applied to the nodes in the node group.</p> <note> <p>Only labels that are applied with the Amazon EKS API are shown here. There may be other Kubernetes labels applied to the nodes in this group.</p> </note>
       resources:
         $ref: '#/definitions/NodegroupResources'
-        description: 'The resources associated with the nodegroup, such as AutoScaling groups and security groups for remote access.'
+        description: 'The resources associated with the node group, such as Auto Scaling groups and security groups for remote access.'
       diskSize:
         $ref: '#/definitions/BoxedInteger'
         description: The root device disk size (in GiB) for your node group instances. The default disk size is 20 GiB.
@@ -1612,15 +1911,21 @@ definitions:
         description: 'The health status of the node group. If there are issues with your node group''s health, they are listed here.'
       tags:
         $ref: '#/definitions/TagMap'
-        description: 'The metadata applied the node group to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Node group tags do not propagate to any other resources associated with the node group, such as the Amazon EC2 instances or subnets. '
+        description: 'The metadata applied to the node group to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Node group tags do not propagate to any other resources associated with the node group, such as the Amazon EC2 instances or subnets. '
     description: An object representing an Amazon EKS managed node group.
   DeleteClusterRequest:
+    type: object
+    properties: {}
+  DeleteFargateProfileRequest:
     type: object
     properties: {}
   DeleteNodegroupRequest:
     type: object
     properties: {}
   DescribeClusterRequest:
+    type: object
+    properties: {}
+  DescribeFargateProfileRequest:
     type: object
     properties: {}
   DescribeNodegroupRequest:
@@ -1682,6 +1987,22 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ErrorDetail'
+  FargateProfileStatus:
+    type: string
+    enum:
+      - CREATING
+      - ACTIVE
+      - DELETING
+      - CREATE_FAILED
+      - DELETE_FAILED
+  FargateProfileLabel:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/String'
+  FargateProfilesRequestMaxResults:
+    type: integer
+    minimum: 1
+    maximum: 100
   OIDC:
     type: object
     properties:
@@ -1709,7 +2030,7 @@ definitions:
     properties:
       code:
         $ref: '#/definitions/NodegroupIssueCode'
-        description: '<p>A brief description of the error.</p> <ul> <li> <p> <b>AutoScalingGroupNotFound</b>: We couldn''t find the Auto Scaling group associated with the managed node group. You may be able to recreate an Auto Scaling group with the same settings to recover.</p> </li> <li> <p> <b>Ec2SecurityGroupNotFound</b>: We couldn''t find the cluster security group for the cluster. You must recreate your cluster.</p> </li> <li> <p> <b>Ec2SecurityGroupDeletionFailure</b>: We could not delete the remote access security group for your managed node group. Remove any dependencies from the security group.</p> </li> <li> <p> <b>Ec2LaunchTemplateNotFound</b>: We couldn''t find the Amazon EC2 launch template for your managed node group. You may be able to recreate a launch template with the same settings to recover.</p> </li> <li> <p> <b>Ec2LaunchTemplateVersionMismatch</b>: The Amazon EC2 launch template version for your managed node group does not match the version that Amazon EKS created. You may be able to revert to the Amazon EKS-created version to recover.</p> </li> <li> <p> <b>IamInstanceProfileNotFound</b>: We couldn''t find the IAM instance profile for your managed node group. You may be able to recreate an instance profile with the same settings to recover.</p> </li> <li> <p> <b>IamNodeRoleNotFound</b>: We couldn''t find the IAM role for your managed node group. You may be able to recreate an IAM role with the same settings to recover.</p> </li> <li> <p> <b>AsgInstanceLaunchFailures</b>: Your Auto Scaling group is experiencing failures while attempting to launch instances.</p> </li> <li> <p> <b>InstanceLimitExceeded</b>: Your AWS account is unable to launch any more instances of the specified instance type. You may be able to request an Amazon EC2 instance limit increase to recover.</p> </li> <li> <p> <b>InsufficientFreeAddresses</b>: One or more of the subnets associated with your managed node group does not have enough available IP addresses for new nodes.</p> </li> <li> <p> <b>AccessDenied</b>: Amazon EKS and or one or more of your managed nodes is unable to communicate with your cluster API server.</p> </li> <li> <p> <b>InternalFailure</b>: These errors are usually caused by an Amazon EKS server-side issue.</p> </li> </ul>'
+        description: '<p>A brief description of the error.</p> <ul> <li> <p> <b>AutoScalingGroupNotFound</b>: We couldn''t find the Auto Scaling group associated with the managed node group. You may be able to recreate an Auto Scaling group with the same settings to recover.</p> </li> <li> <p> <b>Ec2SecurityGroupNotFound</b>: We couldn''t find the cluster security group for the cluster. You must recreate your cluster.</p> </li> <li> <p> <b>Ec2SecurityGroupDeletionFailure</b>: We could not delete the remote access security group for your managed node group. Remove any dependencies from the security group.</p> </li> <li> <p> <b>Ec2LaunchTemplateNotFound</b>: We couldn''t find the Amazon EC2 launch template for your managed node group. You may be able to recreate a launch template with the same settings to recover.</p> </li> <li> <p> <b>Ec2LaunchTemplateVersionMismatch</b>: The Amazon EC2 launch template version for your managed node group does not match the version that Amazon EKS created. You may be able to revert to the version that Amazon EKS created to recover.</p> </li> <li> <p> <b>IamInstanceProfileNotFound</b>: We couldn''t find the IAM instance profile for your managed node group. You may be able to recreate an instance profile with the same settings to recover.</p> </li> <li> <p> <b>IamNodeRoleNotFound</b>: We couldn''t find the IAM role for your managed node group. You may be able to recreate an IAM role with the same settings to recover.</p> </li> <li> <p> <b>AsgInstanceLaunchFailures</b>: Your Auto Scaling group is experiencing failures while attempting to launch instances.</p> </li> <li> <p> <b>NodeCreationFailure</b>: Your launched instances are unable to register with your Amazon EKS cluster. Common causes of this failure are insufficient <a href="https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html">worker node IAM role</a> permissions or lack of outbound internet access for the nodes. </p> </li> <li> <p> <b>InstanceLimitExceeded</b>: Your AWS account is unable to launch any more instances of the specified instance type. You may be able to request an Amazon EC2 instance limit increase to recover.</p> </li> <li> <p> <b>InsufficientFreeAddresses</b>: One or more of the subnets associated with your managed node group does not have enough available IP addresses for new nodes.</p> </li> <li> <p> <b>AccessDenied</b>: Amazon EKS or one or more of your managed nodes is unable to communicate with your cluster API server.</p> </li> <li> <p> <b>InternalFailure</b>: These errors are usually caused by an Amazon EKS server-side issue.</p> </li> </ul>'
       message:
         $ref: '#/definitions/String'
         description: The error message associated with the issue.
@@ -1726,6 +2047,9 @@ definitions:
     minimum: 1
     maximum: 100
   ListClustersRequest:
+    type: object
+    properties: {}
+  ListFargateProfilesRequest:
     type: object
     properties: {}
   ListNodegroupsRequestMaxResults:
@@ -1782,11 +2106,11 @@ definitions:
     properties:
       autoScalingGroups:
         $ref: '#/definitions/AutoScalingGroupList'
-        description: The autoscaling groups associated with the node group.
+        description: The Auto Scaling groups associated with the node group.
       remoteAccessSecurityGroup:
         $ref: '#/definitions/String'
         description: The remote access security group associated with the node group. This security group controls SSH access to the worker nodes.
-    description: 'An object representing the resources associated with the nodegroup, such as AutoScaling groups and security groups for remote access.'
+    description: 'An object representing the resources associated with the node group, such as Auto Scaling groups and security groups for remote access.'
   NodegroupHealth:
     type: object
     properties:
@@ -1869,7 +2193,7 @@ definitions:
         description: The Kubernetes labels to be applied to the nodes in the node group after the update.
       scalingConfig:
         $ref: '#/definitions/NodegroupScalingConfig'
-        description: The scaling configuration details for the AutoScaling group after the update.
+        description: The scaling configuration details for the Auto Scaling group after the update.
       clientRequestToken:
         $ref: '#/definitions/String'
         description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
@@ -1884,7 +2208,7 @@ definitions:
         description: 'The AMI version of the Amazon EKS-optimized AMI to use for the update. By default, the latest available AMI version for the node group''s Kubernetes version is used. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html">Amazon EKS-Optimized Linux AMI Versions </a> in the <i>Amazon EKS User Guide</i>.'
       force:
         $ref: '#/definitions/Boolean'
-        description: 'Force the update if the existing node group''s pods are unable to be drained due to a pod disruption budget issue. If a previous update fails because pods could not be drained, you can force the update after it fails to terminate the old node regardless of whether or not any pods are running on the node.'
+        description: 'Force the update if the existing node group''s pods are unable to be drained due to a pod disruption budget issue. If an update fails because pods could not be drained, you can force the update after it fails to terminate the old node whether or not any pods are running on the node.'
       clientRequestToken:
         $ref: '#/definitions/String'
         description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'

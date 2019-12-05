@@ -159,6 +159,81 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
+  /createSignalingChannel:
+    post:
+      operationId: CreateSignalingChannel
+      description: <p>Creates a signaling channel. </p> <p> <code>CreateSignalingChannel</code> is an asynchronous operation.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateSignalingChannelOutput'
+        '480':
+          description: InvalidArgumentException
+          schema:
+            $ref: '#/definitions/InvalidArgumentException'
+        '481':
+          description: ClientLimitExceededException
+          schema:
+            $ref: '#/definitions/ClientLimitExceededException'
+        '482':
+          description: AccountChannelLimitExceededException
+          schema:
+            $ref: '#/definitions/AccountChannelLimitExceededException'
+        '483':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: TagsPerResourceExceededLimitException
+          schema:
+            $ref: '#/definitions/TagsPerResourceExceededLimitException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - ChannelName
+            properties:
+              ChannelName:
+                description: A name for the signaling channel that you are creating. It must be unique for each account and region.
+                type: string
+                pattern: '[a-zA-Z0-9_.-]+'
+                minLength: 1
+                maxLength: 256
+              ChannelType:
+                description: 'A type of the signaling channel that you are creating. Currently, <code>SINGLE_MASTER</code> is the only supported channel type. '
+                type: string
+                enum:
+                  - SINGLE_MASTER
+              SingleMasterConfiguration:
+                description: A structure that contains the configuration for the <code>SINGLE_MASTER</code> channel type.
+                type: object
+                properties:
+                  MessageTtlSeconds:
+                    $ref: '#/definitions/MessageTtlSeconds'
+                    description: The period of time a signaling channel retains underlivered messages before they are discarded.
+              Tags:
+                description: A set of tags (key/value pairs) that you want to associate with this channel.
+                type: array
+                items:
+                  $ref: '#/definitions/Tag'
+                minItems: 0
+                maxItems: 50
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /createStream:
     post:
       operationId: CreateStream
@@ -218,7 +293,7 @@ paths:
                 minLength: 1
                 maxLength: 256
               MediaType:
-                description: '<p>The media type of the stream. Consumers of the stream can use this information when processing the stream. For more information about media types, see <a href="http://www.iana.org/assignments/media-types/media-types.xhtml">Media Types</a>. If you choose to specify the <code>MediaType</code>, see <a href="https://tools.ietf.org/html/rfc6838#section-4.2">Naming Requirements</a> for guidelines.</p> <p>This parameter is optional; the default value is <code>null</code> (or empty in JSON).</p>'
+                description: '<p>The media type of the stream. Consumers of the stream can use this information when processing the stream. For more information about media types, see <a href="http://www.iana.org/assignments/media-types/media-types.xhtml">Media Types</a>. If you choose to specify the <code>MediaType</code>, see <a href="https://tools.ietf.org/html/rfc6838#section-4.2">Naming Requirements</a> for guidelines.</p> <p>Example valid values include "video/h264" and "video/h264,audio/aac".</p> <p>This parameter is optional; the default value is <code>null</code> (or empty in JSON).</p>'
                 type: string
                 pattern: '[\w\-\.\+]+/[\w\-\.\+]+(,[\w\-\.\+]+/[\w\-\.\+]+)*'
                 minLength: 1
@@ -239,6 +314,64 @@ paths:
                 maxProperties: 50
                 additionalProperties:
                   $ref: '#/definitions/TagValue'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /deleteSignalingChannel:
+    post:
+      operationId: DeleteSignalingChannel
+      description: 'Deletes a specified signaling channel. <code>DeleteSignalingChannel</code> is an asynchronous operation. If you don''t specify the channel''s current version, the most recent version is deleted.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteSignalingChannelOutput'
+        '480':
+          description: InvalidArgumentException
+          schema:
+            $ref: '#/definitions/InvalidArgumentException'
+        '481':
+          description: ClientLimitExceededException
+          schema:
+            $ref: '#/definitions/ClientLimitExceededException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '484':
+          description: VersionMismatchException
+          schema:
+            $ref: '#/definitions/VersionMismatchException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - ChannelARN
+            properties:
+              ChannelARN:
+                description: The ARN of the signaling channel that you want to delete.
+                type: string
+                pattern: 'arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
+                minLength: 1
+                maxLength: 1024
+              CurrentVersion:
+                description: The current version of the signaling channel that you want to delete. You can obtain the current version by invoking the <code>DescribeSignalingChannel</code> or <code>ListSignalingChannels</code> APIs.
+                type: string
+                pattern: '[a-zA-Z0-9]+'
+                minLength: 1
+                maxLength: 64
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -297,6 +430,58 @@ paths:
                 pattern: '[a-zA-Z0-9]+'
                 minLength: 1
                 maxLength: 64
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /describeSignalingChannel:
+    post:
+      operationId: DescribeSignalingChannel
+      description: Returns the most current information about the signaling channel. You must specify either the name or the ARN of the channel that you want to describe.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeSignalingChannelOutput'
+        '480':
+          description: InvalidArgumentException
+          schema:
+            $ref: '#/definitions/InvalidArgumentException'
+        '481':
+          description: ClientLimitExceededException
+          schema:
+            $ref: '#/definitions/ClientLimitExceededException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              ChannelName:
+                description: The name of the signaling channel that you want to describe.
+                type: string
+                pattern: '[a-zA-Z0-9_.-]+'
+                minLength: 1
+                maxLength: 256
+              ChannelARN:
+                description: The ARN of the signaling channel that you want to describe.
+                type: string
+                pattern: 'arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
+                minLength: 1
+                maxLength: 1024
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -421,6 +606,135 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /getSignalingChannelEndpoint:
+    post:
+      operationId: GetSignalingChannelEndpoint
+      description: '<p>Provides an endpoint for the specified signaling channel to send and receive messages. This API uses the <code>SingleMasterChannelEndpointConfiguration</code> input parameter, which consists of the <code>Protocols</code> and <code>Role</code> properties.</p> <p> <code>Protocols</code> is used to determine the communication mechanism. For example, specifying <code>WSS</code> as the protocol, results in this API producing a secure websocket endpoint, and specifying <code>HTTPS</code> as the protocol, results in this API generating an HTTPS endpoint. </p> <p> <code>Role</code> determines the messaging permissions. A <code>MASTER</code> role results in this API generating an endpoint that a client can use to communicate with any of the viewers on the channel. A <code>VIEWER</code> role results in this API generating an endpoint that a client can use to communicate only with a <code>MASTER</code>. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetSignalingChannelEndpointOutput'
+        '480':
+          description: InvalidArgumentException
+          schema:
+            $ref: '#/definitions/InvalidArgumentException'
+        '481':
+          description: ClientLimitExceededException
+          schema:
+            $ref: '#/definitions/ClientLimitExceededException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - ChannelARN
+            properties:
+              ChannelARN:
+                description: The ARN of the signalling channel for which you want to get an endpoint.
+                type: string
+                pattern: 'arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
+                minLength: 1
+                maxLength: 1024
+              SingleMasterChannelEndpointConfiguration:
+                description: 'An object that contains the endpoint configuration for the <code>SINGLE_MASTER</code> channel type. '
+                type: object
+                properties:
+                  Protocols:
+                    $ref: '#/definitions/ListOfProtocols'
+                    description: 'This property is used to determine the nature of communication over this <code>SINGLE_MASTER</code> signaling channel. If <code>WSS</code> is specified, this API returns a websocket endpoint. If <code>HTTPS</code> is specified, this API returns an <code>HTTPS</code> endpoint.'
+                  Role:
+                    $ref: '#/definitions/ChannelRole'
+                    description: 'This property is used to determine messaging permissions in this <code>SINGLE_MASTER</code> signaling channel. If <code>MASTER</code> is specified, this API returns an endpoint that a client can use to receive offers from and send answers to any of the viewers on this signaling channel. If <code>VIEWER</code> is specified, this API returns an endpoint that a client can use only to send offers to another <code>MASTER</code> client on this signaling channel. '
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /listSignalingChannels:
+    post:
+      operationId: ListSignalingChannels
+      description: 'Returns an array of <code>ChannelInfo</code> objects. Each object describes a signaling channel. To retrieve only those channels that satisfy a specific condition, you can specify a <code>ChannelNameCondition</code>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListSignalingChannelsOutput'
+        '480':
+          description: InvalidArgumentException
+          schema:
+            $ref: '#/definitions/InvalidArgumentException'
+        '481':
+          description: ClientLimitExceededException
+          schema:
+            $ref: '#/definitions/ClientLimitExceededException'
+        '482':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              MaxResults:
+                description: The maximum number of channels to return in the response. The default is 500.
+                type: integer
+                minimum: 1
+                maximum: 10000
+              NextToken:
+                description: 'If you specify this parameter, when the result of a <code>ListSignalingChannels</code> operation is truncated, the call returns the <code>NextToken</code> in the response. To get another batch of channels, provide this token in your next request.'
+                type: string
+                pattern: '[a-zA-Z0-9+/=]*'
+                minLength: 0
+                maxLength: 512
+              ChannelNameCondition:
+                description: 'An optional input parameter for the <code>ListSignalingChannels</code> API. When this parameter is specified while invoking <code>ListSignalingChannels</code>, the API returns only the channels that satisfy a condition specified in <code>ChannelNameCondition</code>.'
+                type: object
+                properties:
+                  ComparisonOperator:
+                    $ref: '#/definitions/ComparisonOperator'
+                    description: 'A comparison operator. Currently, you can only specify the <code>BEGINS_WITH</code> operator, which finds signaling channels whose names begin with a given prefix.'
+                  ComparisonValue:
+                    $ref: '#/definitions/ChannelName'
+                    description: A value to compare.
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /listStreams:
     post:
       operationId: ListStreams
@@ -453,6 +767,7 @@ paths:
               NextToken:
                 description: 'If you specify this parameter, when the result of a <code>ListStreams</code> operation is truncated, the call returns the <code>NextToken</code> in the response. To get another batch of streams, provide this token in your next request.'
                 type: string
+                pattern: '[a-zA-Z0-9+/=]*'
                 minLength: 0
                 maxLength: 512
               StreamNameCondition:
@@ -475,6 +790,60 @@ paths:
           in: query
           description: Pagination token
           required: false
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /ListTagsForResource:
+    post:
+      operationId: ListTagsForResource
+      description: Returns a list of tags associated with the specified signaling channel.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForResourceOutput'
+        '480':
+          description: InvalidArgumentException
+          schema:
+            $ref: '#/definitions/InvalidArgumentException'
+        '481':
+          description: ClientLimitExceededException
+          schema:
+            $ref: '#/definitions/ClientLimitExceededException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - ResourceARN
+            properties:
+              NextToken:
+                description: 'If you specify this parameter and the result of a ListTagsForResource call is truncated, the response includes a token that you can use in the next request to fetch the next batch of tags. '
+                type: string
+                pattern: '[a-zA-Z0-9+/=]*'
+                minLength: 0
+                maxLength: 512
+              ResourceARN:
+                description: The ARN of the signaling channel for which you want to list tags.
+                type: string
+                pattern: 'arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
+                minLength: 1
+                maxLength: 1024
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -522,6 +891,7 @@ paths:
               NextToken:
                 description: 'If you specify this parameter and the result of a <code>ListTagsForStream</code> call is truncated, the response includes a token that you can use in the next request to fetch the next batch of tags.'
                 type: string
+                pattern: '[a-zA-Z0-9+/=]*'
                 minLength: 0
                 maxLength: 512
               StreamARN:
@@ -536,6 +906,66 @@ paths:
                 pattern: '[a-zA-Z0-9_.-]+'
                 minLength: 1
                 maxLength: 256
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /TagResource:
+    post:
+      operationId: TagResource
+      description: 'Adds one or more tags to a signaling channel. A <i>tag</i> is a key-value pair (the value is optional) that you can define and assign to AWS resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TagResourceOutput'
+        '480':
+          description: InvalidArgumentException
+          schema:
+            $ref: '#/definitions/InvalidArgumentException'
+        '481':
+          description: ClientLimitExceededException
+          schema:
+            $ref: '#/definitions/ClientLimitExceededException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '484':
+          description: TagsPerResourceExceededLimitException
+          schema:
+            $ref: '#/definitions/TagsPerResourceExceededLimitException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - ResourceARN
+              - Tags
+            properties:
+              ResourceARN:
+                description: The ARN of the signaling channel to which you want to add tags.
+                type: string
+                pattern: 'arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
+                minLength: 1
+                maxLength: 1024
+              Tags:
+                description: A list of tags to associate with the specified signaling channel. Each tag is a key-value pair.
+                type: array
+                items:
+                  $ref: '#/definitions/Tag'
+                minItems: 1
+                maxItems: 50
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -605,6 +1035,62 @@ paths:
                 maxProperties: 50
                 additionalProperties:
                   $ref: '#/definitions/TagValue'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /UntagResource:
+    post:
+      operationId: UntagResource
+      description: 'Removes one or more tags from a signaling channel. In the request, specify only a tag key or keys; don''t specify the value. If you specify a tag key that does not exist, it''s ignored.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UntagResourceOutput'
+        '480':
+          description: InvalidArgumentException
+          schema:
+            $ref: '#/definitions/InvalidArgumentException'
+        '481':
+          description: ClientLimitExceededException
+          schema:
+            $ref: '#/definitions/ClientLimitExceededException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - ResourceARN
+              - TagKeyList
+            properties:
+              ResourceARN:
+                description: The ARN of the signaling channel from which you want to remove tags.
+                type: string
+                pattern: 'arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
+                minLength: 1
+                maxLength: 1024
+              TagKeyList:
+                description: A list of the keys of the tags that you want to remove.
+                type: array
+                items:
+                  $ref: '#/definitions/TagKey'
+                minItems: 1
+                maxItems: 50
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -758,6 +1244,76 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /updateSignalingChannel:
+    post:
+      operationId: UpdateSignalingChannel
+      description: '<p>Updates the existing signaling channel. This is an asynchronous operation and takes time to complete. </p> <p>If the <code>MessageTtlSeconds</code> value is updated (either increased or reduced), then it only applies to new messages sent via this channel after it''s been updated. Existing messages are still expire as per the previous <code>MessageTtlSeconds</code> value.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateSignalingChannelOutput'
+        '480':
+          description: InvalidArgumentException
+          schema:
+            $ref: '#/definitions/InvalidArgumentException'
+        '481':
+          description: ClientLimitExceededException
+          schema:
+            $ref: '#/definitions/ClientLimitExceededException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: VersionMismatchException
+          schema:
+            $ref: '#/definitions/VersionMismatchException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - ChannelARN
+              - CurrentVersion
+            properties:
+              ChannelARN:
+                description: The ARN of the signaling channel that you want to update.
+                type: string
+                pattern: 'arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
+                minLength: 1
+                maxLength: 1024
+              CurrentVersion:
+                description: The current version of the signaling channel that you want to update.
+                type: string
+                pattern: '[a-zA-Z0-9]+'
+                minLength: 1
+                maxLength: 64
+              SingleMasterConfiguration:
+                description: A structure that contains the configuration for the <code>SINGLE_MASTER</code> channel type.
+                type: object
+                properties:
+                  MessageTtlSeconds:
+                    $ref: '#/definitions/MessageTtlSeconds'
+                    description: The period of time a signaling channel retains underlivered messages before they are discarded.
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /updateStream:
     post:
       operationId: UpdateStream
@@ -839,6 +1395,35 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
+  CreateSignalingChannelOutput:
+    type: object
+    properties:
+      ChannelARN:
+        $ref: '#/definitions/ResourceARN'
+        description: The ARN of the created channel.
+  MessageTtlSeconds:
+    type: integer
+    minimum: 5
+    maximum: 120
+  Tag:
+    type: object
+    required:
+      - Key
+      - Value
+    properties:
+      Key:
+        $ref: '#/definitions/TagKey'
+        description: The key of the tag that is associated with the specified signaling channel.
+      Value:
+        $ref: '#/definitions/TagValue'
+        description: The value of the tag that is associated with the specified signaling channel.
+    description: A key and value pair that is associated with the specified signaling channel.
+  InvalidArgumentException: {}
+  ClientLimitExceededException: {}
+  AccountChannelLimitExceededException: {}
+  ResourceInUseException: {}
+  AccessDeniedException: {}
+  TagsPerResourceExceededLimitException: {}
   CreateStreamOutput:
     type: object
     properties:
@@ -847,21 +1432,27 @@ definitions:
         description: The Amazon Resource Name (ARN) of the stream.
   TagValue:
     type: string
+    pattern: '[\p{L}\p{Z}\p{N}_.:/=+\-@]*'
     minLength: 0
     maxLength: 256
   AccountStreamLimitExceededException: {}
   DeviceStreamLimitExceededException: {}
-  ResourceInUseException: {}
   InvalidDeviceException: {}
-  InvalidArgumentException: {}
-  ClientLimitExceededException: {}
-  TagsPerResourceExceededLimitException: {}
-  DeleteStreamOutput:
+  DeleteSignalingChannelOutput:
     type: object
     properties: {}
   ResourceNotFoundException: {}
-  NotAuthorizedException: {}
   VersionMismatchException: {}
+  DeleteStreamOutput:
+    type: object
+    properties: {}
+  NotAuthorizedException: {}
+  DescribeSignalingChannelOutput:
+    type: object
+    properties:
+      ChannelInfo:
+        $ref: '#/definitions/ChannelInfo'
+        description: A structure that encapsulates the specified signaling channel's metadata and properties.
   DescribeStreamOutput:
     type: object
     properties:
@@ -874,6 +1465,41 @@ definitions:
       DataEndpoint:
         $ref: '#/definitions/DataEndpoint'
         description: 'The endpoint value. To read data from the stream or to write data to it, specify this endpoint in your application.'
+  GetSignalingChannelEndpointOutput:
+    type: object
+    properties:
+      ResourceEndpointList:
+        $ref: '#/definitions/ResourceEndpointList'
+        description: A list of endpoints for the specified signaling channel.
+  ListOfProtocols:
+    type: array
+    items:
+      $ref: '#/definitions/ChannelProtocol'
+    minItems: 1
+    maxItems: 5
+  ChannelRole:
+    type: string
+    enum:
+      - MASTER
+      - VIEWER
+  ListSignalingChannelsOutput:
+    type: object
+    properties:
+      ChannelInfoList:
+        $ref: '#/definitions/ChannelInfoList'
+        description: An array of <code>ChannelInfo</code> objects.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If the response is truncated, the call returns this element with a token. To get the next batch of streams, use this token in your next request.'
+  ComparisonOperator:
+    type: string
+    enum:
+      - BEGINS_WITH
+  ChannelName:
+    type: string
+    pattern: '[a-zA-Z0-9_.-]+'
+    minLength: 1
+    maxLength: 256
   ListStreamsOutput:
     type: object
     properties:
@@ -883,15 +1509,20 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'If the response is truncated, the call returns this element with a token. To get the next batch of streams, use this token in your next request. '
-  ComparisonOperator:
-    type: string
-    enum:
-      - BEGINS_WITH
   StreamName:
     type: string
     pattern: '[a-zA-Z0-9_.-]+'
     minLength: 1
     maxLength: 256
+  ListTagsForResourceOutput:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If you specify this parameter and the result of a ListTagsForResource call is truncated, the response includes a token that you can use in the next request to fetch the next set of tags. '
+      Tags:
+        $ref: '#/definitions/ResourceTags'
+        description: A map of tag keys and values associated with the specified signaling channel.
   ListTagsForStreamOutput:
     type: object
     properties:
@@ -902,17 +1533,27 @@ definitions:
         $ref: '#/definitions/ResourceTags'
         description: A map of tag keys and values associated with the specified stream.
   InvalidResourceFormatException: {}
+  TagResourceOutput:
+    type: object
+    properties: {}
   TagStreamOutput:
     type: object
     properties: {}
-  UntagStreamOutput:
+  UntagResourceOutput:
     type: object
     properties: {}
   TagKey:
     type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
     minLength: 1
     maxLength: 128
+  UntagStreamOutput:
+    type: object
+    properties: {}
   UpdateDataRetentionOutput:
+    type: object
+    properties: {}
+  UpdateSignalingChannelOutput:
     type: object
     properties: {}
   UpdateStreamOutput:
@@ -927,6 +1568,104 @@ definitions:
       - GET_MEDIA_FOR_FRAGMENT_LIST
       - GET_HLS_STREAMING_SESSION_URL
       - GET_DASH_STREAMING_SESSION_URL
+  ResourceARN:
+    type: string
+    pattern: 'arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
+    minLength: 1
+    maxLength: 1024
+  ChannelType:
+    type: string
+    enum:
+      - SINGLE_MASTER
+  Status:
+    type: string
+    enum:
+      - CREATING
+      - ACTIVE
+      - UPDATING
+      - DELETING
+  Timestamp:
+    type: string
+    format: date-time
+  SingleMasterConfiguration:
+    type: object
+    properties:
+      MessageTtlSeconds:
+        $ref: '#/definitions/MessageTtlSeconds'
+        description: The period of time a signaling channel retains underlivered messages before they are discarded.
+    description: A structure that contains the configuration for the <code>SINGLE_MASTER</code> channel type.
+  Version:
+    type: string
+    pattern: '[a-zA-Z0-9]+'
+    minLength: 1
+    maxLength: 64
+  ChannelInfo:
+    type: object
+    properties:
+      ChannelName:
+        $ref: '#/definitions/ChannelName'
+        description: The name of the signaling channel.
+      ChannelARN:
+        $ref: '#/definitions/ResourceARN'
+        description: The ARN of the signaling channel.
+      ChannelType:
+        $ref: '#/definitions/ChannelType'
+        description: The type of the signaling channel.
+      ChannelStatus:
+        $ref: '#/definitions/Status'
+        description: Current status of the signaling channel.
+      CreationTime:
+        $ref: '#/definitions/Timestamp'
+        description: The time at which the signaling channel was created.
+      SingleMasterConfiguration:
+        $ref: '#/definitions/SingleMasterConfiguration'
+        description: A structure that contains the configuration for the <code>SINGLE_MASTER</code> channel type.
+      Version:
+        $ref: '#/definitions/Version'
+        description: The current version of the signaling channel.
+    description: A structure that encapsulates a signaling channel's metadata and properties.
+  ChannelInfoList:
+    type: array
+    items:
+      $ref: '#/definitions/ChannelInfo'
+  ChannelNameCondition:
+    type: object
+    properties:
+      ComparisonOperator:
+        $ref: '#/definitions/ComparisonOperator'
+        description: 'A comparison operator. Currently, you can only specify the <code>BEGINS_WITH</code> operator, which finds signaling channels whose names begin with a given prefix.'
+      ComparisonValue:
+        $ref: '#/definitions/ChannelName'
+        description: A value to compare.
+    description: 'An optional input parameter for the <code>ListSignalingChannels</code> API. When this parameter is specified while invoking <code>ListSignalingChannels</code>, the API returns only the channels that satisfy a condition specified in <code>ChannelNameCondition</code>.'
+  ChannelProtocol:
+    type: string
+    enum:
+      - WSS
+      - HTTPS
+  TagOnCreateList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    minItems: 0
+    maxItems: 50
+  CreateSignalingChannelInput:
+    type: object
+    required:
+      - ChannelName
+    properties:
+      ChannelName:
+        $ref: '#/definitions/ChannelName'
+        description: A name for the signaling channel that you are creating. It must be unique for each account and region.
+      ChannelType:
+        $ref: '#/definitions/ChannelType'
+        description: 'A type of the signaling channel that you are creating. Currently, <code>SINGLE_MASTER</code> is the only supported channel type. '
+      SingleMasterConfiguration:
+        $ref: '#/definitions/SingleMasterConfiguration'
+        description: 'A structure containing the configuration for the <code>SINGLE_MASTER</code> channel type. '
+      Tags:
+        $ref: '#/definitions/TagOnCreateList'
+        description: A set of tags (key/value pairs) that you want to associate with this channel.
   DeviceName:
     type: string
     pattern: '[a-zA-Z0-9_.-]+'
@@ -963,7 +1702,7 @@ definitions:
         description: '<p>A name for the stream that you are creating.</p> <p>The stream name is an identifier for the stream, and must be unique for each account and region.</p>'
       MediaType:
         $ref: '#/definitions/MediaType'
-        description: '<p>The media type of the stream. Consumers of the stream can use this information when processing the stream. For more information about media types, see <a href="http://www.iana.org/assignments/media-types/media-types.xhtml">Media Types</a>. If you choose to specify the <code>MediaType</code>, see <a href="https://tools.ietf.org/html/rfc6838#section-4.2">Naming Requirements</a> for guidelines.</p> <p>This parameter is optional; the default value is <code>null</code> (or empty in JSON).</p>'
+        description: '<p>The media type of the stream. Consumers of the stream can use this information when processing the stream. For more information about media types, see <a href="http://www.iana.org/assignments/media-types/media-types.xhtml">Media Types</a>. If you choose to specify the <code>MediaType</code>, see <a href="https://tools.ietf.org/html/rfc6838#section-4.2">Naming Requirements</a> for guidelines.</p> <p>Example valid values include "video/h264" and "video/h264,audio/aac".</p> <p>This parameter is optional; the default value is <code>null</code> (or empty in JSON).</p>'
       KmsKeyId:
         $ref: '#/definitions/KmsKeyId'
         description: '<p>The ID of the AWS Key Management Service (AWS KMS) key that you want Kinesis Video Streams to use to encrypt stream data.</p> <p>If no key ID is specified, the default, Kinesis Video-managed key (<code>aws/kinesisvideo</code>) is used.</p> <p> For more information, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters">DescribeKey</a>. </p>'
@@ -973,21 +1712,22 @@ definitions:
       Tags:
         $ref: '#/definitions/ResourceTags'
         description: A list of tags to associate with the specified stream. Each tag is a key-value pair (the value is optional).
-  ResourceARN:
-    type: string
-    pattern: 'arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
-    minLength: 1
-    maxLength: 1024
   DataEndpoint:
     type: string
   DataRetentionChangeInHours:
     type: integer
     minimum: 1
-  Version:
-    type: string
-    pattern: '[a-zA-Z0-9]+'
-    minLength: 1
-    maxLength: 64
+  DeleteSignalingChannelInput:
+    type: object
+    required:
+      - ChannelARN
+    properties:
+      ChannelARN:
+        $ref: '#/definitions/ResourceARN'
+        description: The ARN of the signaling channel that you want to delete.
+      CurrentVersion:
+        $ref: '#/definitions/Version'
+        description: The current version of the signaling channel that you want to delete. You can obtain the current version by invoking the <code>DescribeSignalingChannel</code> or <code>ListSignalingChannels</code> APIs.
   DeleteStreamInput:
     type: object
     required:
@@ -999,6 +1739,15 @@ definitions:
       CurrentVersion:
         $ref: '#/definitions/Version'
         description: '<p>Optional: The version of the stream that you want to delete. </p> <p>Specify the version as a safeguard to ensure that your are deleting the correct stream. To get the stream version, use the <code>DescribeStream</code> API.</p> <p>If not specified, only the <code>CreationTime</code> is checked before deleting the stream.</p>'
+  DescribeSignalingChannelInput:
+    type: object
+    properties:
+      ChannelName:
+        $ref: '#/definitions/ChannelName'
+        description: The name of the signaling channel that you want to describe.
+      ChannelARN:
+        $ref: '#/definitions/ResourceARN'
+        description: The ARN of the signaling channel that you want to describe.
   DescribeStreamInput:
     type: object
     properties:
@@ -1053,14 +1802,52 @@ definitions:
       APIName:
         $ref: '#/definitions/APIName'
         description: The name of the API action for which to get an endpoint.
+  SingleMasterChannelEndpointConfiguration:
+    type: object
+    properties:
+      Protocols:
+        $ref: '#/definitions/ListOfProtocols'
+        description: 'This property is used to determine the nature of communication over this <code>SINGLE_MASTER</code> signaling channel. If <code>WSS</code> is specified, this API returns a websocket endpoint. If <code>HTTPS</code> is specified, this API returns an <code>HTTPS</code> endpoint.'
+      Role:
+        $ref: '#/definitions/ChannelRole'
+        description: 'This property is used to determine messaging permissions in this <code>SINGLE_MASTER</code> signaling channel. If <code>MASTER</code> is specified, this API returns an endpoint that a client can use to receive offers from and send answers to any of the viewers on this signaling channel. If <code>VIEWER</code> is specified, this API returns an endpoint that a client can use only to send offers to another <code>MASTER</code> client on this signaling channel. '
+    description: 'An object that contains the endpoint configuration for the <code>SINGLE_MASTER</code> channel type. '
+  GetSignalingChannelEndpointInput:
+    type: object
+    required:
+      - ChannelARN
+    properties:
+      ChannelARN:
+        $ref: '#/definitions/ResourceARN'
+        description: The ARN of the signalling channel for which you want to get an endpoint.
+      SingleMasterChannelEndpointConfiguration:
+        $ref: '#/definitions/SingleMasterChannelEndpointConfiguration'
+        description: A structure containing the endpoint configuration for the <code>SINGLE_MASTER</code> channel type.
+  ResourceEndpointList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceEndpointListItem'
   ListStreamsInputLimit:
     type: integer
     minimum: 1
     maximum: 10000
   NextToken:
     type: string
+    pattern: '[a-zA-Z0-9+/=]*'
     minLength: 0
     maxLength: 512
+  ListSignalingChannelsInput:
+    type: object
+    properties:
+      MaxResults:
+        $ref: '#/definitions/ListStreamsInputLimit'
+        description: The maximum number of channels to return in the response. The default is 500.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If you specify this parameter, when the result of a <code>ListSignalingChannels</code> operation is truncated, the call returns the <code>NextToken</code> in the response. To get another batch of channels, provide this token in your next request.'
+      ChannelNameCondition:
+        $ref: '#/definitions/ChannelNameCondition'
+        description: 'Optional: Returns only the channels that satisfy a specific condition.'
   StreamNameCondition:
     type: object
     properties:
@@ -1087,6 +1874,17 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/StreamInfo'
+  ListTagsForResourceInput:
+    type: object
+    required:
+      - ResourceARN
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If you specify this parameter and the result of a ListTagsForResource call is truncated, the response includes a token that you can use in the next request to fetch the next batch of tags. '
+      ResourceARN:
+        $ref: '#/definitions/ResourceARN'
+        description: The ARN of the signaling channel for which you want to list tags.
   ListTagsForStreamInput:
     type: object
     properties:
@@ -1099,22 +1897,42 @@ definitions:
       StreamName:
         $ref: '#/definitions/StreamName'
         description: The name of the stream that you want to list tags for.
-  Status:
+  ResourceEndpoint:
     type: string
-    enum:
-      - CREATING
-      - ACTIVE
-      - UPDATING
-      - DELETING
-  Timestamp:
-    type: string
-    format: date-time
+  ResourceEndpointListItem:
+    type: object
+    properties:
+      Protocol:
+        $ref: '#/definitions/ChannelProtocol'
+        description: The protocol of the signaling channel returned by the <code>GetSignalingChannelEndpoint</code> API.
+      ResourceEndpoint:
+        $ref: '#/definitions/ResourceEndpoint'
+        description: The endpoint of the signaling channel returned by the <code>GetSignalingChannelEndpoint</code> API.
+    description: An object that describes the endpoint of the signaling channel returned by the <code>GetSignalingChannelEndpoint</code> API.
   TagKeyList:
     type: array
     items:
       $ref: '#/definitions/TagKey'
     minItems: 1
     maxItems: 50
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    minItems: 1
+    maxItems: 50
+  TagResourceInput:
+    type: object
+    required:
+      - ResourceARN
+      - Tags
+    properties:
+      ResourceARN:
+        $ref: '#/definitions/ResourceARN'
+        description: The ARN of the signaling channel to which you want to add tags.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: A list of tags to associate with the specified signaling channel. Each tag is a key-value pair.
   TagStreamInput:
     type: object
     required:
@@ -1129,6 +1947,18 @@ definitions:
       Tags:
         $ref: '#/definitions/ResourceTags'
         description: A list of tags to associate with the specified stream. Each tag is a key-value pair (the value is optional).
+  UntagResourceInput:
+    type: object
+    required:
+      - ResourceARN
+      - TagKeyList
+    properties:
+      ResourceARN:
+        $ref: '#/definitions/ResourceARN'
+        description: The ARN of the signaling channel from which you want to remove tags.
+      TagKeyList:
+        $ref: '#/definitions/TagKeyList'
+        description: A list of the keys of the tags that you want to remove.
   UntagStreamInput:
     type: object
     required:
@@ -1170,6 +2000,21 @@ definitions:
       DataRetentionChangeInHours:
         $ref: '#/definitions/DataRetentionChangeInHours'
         description: 'The retention period, in hours. The value you specify replaces the current value. The maximum value for this parameter is 87600 (ten years).'
+  UpdateSignalingChannelInput:
+    type: object
+    required:
+      - ChannelARN
+      - CurrentVersion
+    properties:
+      ChannelARN:
+        $ref: '#/definitions/ResourceARN'
+        description: The ARN of the signaling channel that you want to update.
+      CurrentVersion:
+        $ref: '#/definitions/Version'
+        description: The current version of the signaling channel that you want to update.
+      SingleMasterConfiguration:
+        $ref: '#/definitions/SingleMasterConfiguration'
+        description: 'The structure containing the configuration for the <code>SINGLE_MASTER</code> type of the signaling channel that you want to update. '
   UpdateStreamInput:
     type: object
     required:
