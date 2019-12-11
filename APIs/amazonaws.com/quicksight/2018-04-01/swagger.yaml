@@ -338,7 +338,7 @@ paths:
   '/accounts/{AwsAccountId}/dashboards/{DashboardId}':
     post:
       operationId: CreateDashboard
-      description: '<p>Creates a dashboard from a template. To first create a template, see the CreateTemplate API.</p> <p>A dashboard is an entity in QuickSight which identifies Quicksight reports, created from analyses. QuickSight dashboards are sharable. With the right permissions, you can create scheduled email reports from them. The <code>CreateDashboard</code>, <code>DescribeDashboard</code> and <code>ListDashboardsByUser</code> APIs act on the dashboard entity. If you have the correct permissions, you can create a dashboard from a template that exists in a different AWS account.</p>'
+      description: '<p>Creates a dashboard from a template. To first create a template, see the CreateTemplate API operation.</p> <p>A dashboard is an entity in QuickSight that identifies QuickSight reports, created from analyses. You can share QuickSight dashboards. With the right permissions, you can create scheduled email reports from them. The <code>CreateDashboard</code>, <code>DescribeDashboard</code>, and <code>ListDashboardsByUser</code> API operations act on the dashboard entity. If you have the correct permissions, you can create a dashboard from a template that exists in a different AWS account.</p>'
       responses:
         '200':
           description: Success
@@ -376,7 +376,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: AWS account ID where you want to create the dashboard.
+          description: The ID of the AWS account where you want to create the dashboard.
           type: string
           pattern: '^[0-9]{12}$'
           minLength: 12
@@ -384,7 +384,7 @@ paths:
         - name: DashboardId
           in: path
           required: true
-          description: 'The ID for the dashboard, also added to IAM policy.'
+          description: 'The ID for the dashboard, also added to the IAM policy.'
           type: string
           pattern: '[\w\-]+'
           minLength: 1
@@ -421,7 +421,7 @@ paths:
                     $ref: '#/definitions/DateTimeParameterList'
                     description: DateTime parameters.
               Permissions:
-                description: A structure that contains the permissions of the dashboard. You can use this for granting permissions with principal and action information.
+                description: A structure that contains the permissions of the dashboard. You can use this structure for granting permissions with principal and action information.
                 type: array
                 items:
                   $ref: '#/definitions/ResourcePermission'
@@ -452,10 +452,10 @@ paths:
                 properties:
                   AdHocFilteringOption:
                     $ref: '#/definitions/AdHocFilteringOption'
-                    description: Ad hoc filtering option.
+                    description: Ad hoc (one-time) filtering option.
                   ExportToCSVOption:
                     $ref: '#/definitions/ExportToCSVOption'
-                    description: Export to CSV option.
+                    description: Export to .csv option.
                   SheetControlsOption:
                     $ref: '#/definitions/SheetControlsOption'
                     description: Sheet controls option.
@@ -503,7 +503,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: AWS account ID that contains the dashboard you are deleting.
+          description: The ID of the AWS account that contains the dashboard that you're deleting.
           type: string
           pattern: '^[0-9]{12}$'
           minLength: 12
@@ -519,7 +519,7 @@ paths:
         - name: version-number
           in: query
           required: false
-          description: 'The version number of the dashboard. If version number property is provided, only the specified version of the dashboard is deleted.'
+          description: 'The version number of the dashboard. If the version number property is provided, only the specified version of the dashboard is deleted.'
           type: integer
           minimum: 1
     get:
@@ -558,7 +558,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: AWS account ID that contains the dashboard you are describing.
+          description: The ID of the AWS account that contains the dashboard that you're describing.
           type: string
           pattern: '^[0-9]{12}$'
           minLength: 12
@@ -574,7 +574,7 @@ paths:
         - name: version-number
           in: query
           required: false
-          description: 'The version number for the dashboard. If version number isn’t passed the latest published dashboard version is described. '
+          description: 'The version number for the dashboard. If a version number isn''t passed, the latest published dashboard version is described. '
           type: integer
           minimum: 1
         - name: alias-name
@@ -587,7 +587,7 @@ paths:
           maxLength: 2048
     put:
       operationId: UpdateDashboard
-      description: Updates a dashboard in the AWS account.
+      description: Updates a dashboard in an AWS account.
       responses:
         '200':
           description: Success
@@ -625,7 +625,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: AWS account ID that contains the dashboard you are updating.
+          description: The ID of the AWS account that contains the dashboard that you're updating.
           type: string
           pattern: '^[0-9]{12}$'
           minLength: 12
@@ -687,10 +687,10 @@ paths:
                 properties:
                   AdHocFilteringOption:
                     $ref: '#/definitions/AdHocFilteringOption'
-                    description: Ad hoc filtering option.
+                    description: Ad hoc (one-time) filtering option.
                   ExportToCSVOption:
                     $ref: '#/definitions/ExportToCSVOption'
-                    description: Export to CSV option.
+                    description: Export to .csv option.
                   SheetControlsOption:
                     $ref: '#/definitions/SheetControlsOption'
                     description: Sheet controls option.
@@ -743,7 +743,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: The AWS Account ID.
+          description: The AWS account ID.
           type: string
           pattern: '^[0-9]{12}$'
           minLength: 12
@@ -783,7 +783,7 @@ paths:
                 additionalProperties:
                   $ref: '#/definitions/LogicalTable'
               ImportMode:
-                description: Indicates whether or not you want to import the data into SPICE.
+                description: Indicates whether you want to import the data into SPICE.
                 type: string
                 enum:
                   - SPICE
@@ -803,12 +803,12 @@ paths:
                 minItems: 1
                 maxItems: 64
               RowLevelPermissionDataSet:
-                description: Row-level security configuration on the dataset.
+                description: The row-level security configuration for the dataset.
                 type: object
                 properties:
                   Arn:
                     $ref: '#/definitions/Arn'
-                    description: The Amazon Resource name (ARN) of the permission dataset.
+                    description: The Amazon Resource Name (ARN) of the permission dataset.
                   PermissionPolicy:
                     $ref: '#/definitions/RowLevelPermissionPolicy'
                     description: Permission policy.
@@ -829,7 +829,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListDataSets
-      description: '<p>Lists all of the datasets belonging to this account in an AWS region.</p> <p>The permissions resource is <code>arn:aws:quicksight:region:aws-account-id:dataset/*</code>.</p>'
+      description: '<p>Lists all of the datasets belonging to the current AWS account in an AWS Region.</p> <p>The permissions resource is <code>arn:aws:quicksight:region:aws-account-id:dataset/*</code>.</p>'
       responses:
         '200':
           description: Success
@@ -859,7 +859,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: The AWS Account ID.
+          description: The AWS account ID.
           type: string
           pattern: '^[0-9]{12}$'
           minLength: 12
@@ -981,18 +981,18 @@ paths:
                   - TERADATA
                   - TWITTER
               DataSourceParameters:
-                description: The parameters that QuickSight uses to connect to your underlying source. This is a variant type structure. At most one of the attributes should be non-null for this structure to be valid.
+                description: 'The parameters that Amazon QuickSight uses to connect to your underlying data source. This is a variant type structure. For this structure to be valid, only one of the attributes can be non-null.'
                 type: object
                 properties:
                   AmazonElasticsearchParameters:
                     $ref: '#/definitions/AmazonElasticsearchParameters'
-                    description: Amazon Elasticsearch parameters.
+                    description: Amazon Elasticsearch Service parameters.
                   AthenaParameters:
                     $ref: '#/definitions/AthenaParameters'
-                    description: Athena parameters.
+                    description: Amazon Athena parameters.
                   AuroraParameters:
                     $ref: '#/definitions/AuroraParameters'
-                    description: Aurora MySQL parameters.
+                    description: Amazon Aurora MySQL parameters.
                   AuroraPostgreSqlParameters:
                     $ref: '#/definitions/AuroraPostgreSqlParameters'
                     description: Aurora PostgreSQL parameters.
@@ -1016,10 +1016,10 @@ paths:
                     description: Presto parameters.
                   RdsParameters:
                     $ref: '#/definitions/RdsParameters'
-                    description: RDS parameters.
+                    description: Amazon RDS parameters.
                   RedshiftParameters:
                     $ref: '#/definitions/RedshiftParameters'
-                    description: Redshift parameters.
+                    description: Amazon Redshift parameters.
                   S3Parameters:
                     $ref: '#/definitions/S3Parameters'
                     description: S3 parameters.
@@ -1068,7 +1068,7 @@ paths:
                 properties:
                   DisableSsl:
                     $ref: '#/definitions/Boolean'
-                    description: A boolean flag to control whether SSL should be disabled.
+                    description: A Boolean option to control whether SSL should be disabled.
               Tags:
                 description: Contains a map of the key-value pairs for the resource tag or tags assigned to the data source.
                 type: array
@@ -1444,7 +1444,7 @@ paths:
   '/accounts/{AwsAccountId}/namespaces/{Namespace}/iam-policy-assignments/':
     post:
       operationId: CreateIAMPolicyAssignment
-      description: 'Creates an assignment with one specified IAM policy Amazon Resource Name (ARN) and will assigned to specified groups or users of QuickSight. Users and groups need to be in the same namespace. '
+      description: 'Creates an assignment with one specified IAM policy, identified by its Amazon Resource Name (ARN). This policy will be assigned to specified groups or users of Amazon QuickSight. The users and groups need to be in the same namespace. '
       responses:
         '200':
           description: Success
@@ -1482,7 +1482,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: The AWS Account ID where you want to assign QuickSight users or groups to an IAM policy.
+          description: The ID of the AWS account where you want to assign an IAM policy to QuickSight users or groups.
           type: string
           pattern: '^[0-9]{12}$'
           minLength: 12
@@ -1509,17 +1509,17 @@ paths:
                 pattern: '(?=^.{2,256}$)(?!.*\s)[0-9a-zA-Z-_.:=+@]*$'
                 minLength: 1
               AssignmentStatus:
-                description: '<p>The status of an assignment:</p> <ul> <li> <p>ENABLED - Anything specified in this assignment is used while creating the data source.</p> </li> <li> <p>DISABLED - This assignment isn''t used while creating the data source.</p> </li> <li> <p>DRAFT - Assignment is an unfinished draft and isn''t used while creating the data source.</p> </li> </ul>'
+                description: '<p>The status of the assignment. Possible values are as follows:</p> <ul> <li> <p> <code>ENABLED</code> - Anything specified in this assignment is used when creating the data source.</p> </li> <li> <p> <code>DISABLED</code> - This assignment isn''t used when creating the data source.</p> </li> <li> <p> <code>DRAFT</code> - This assignment is an unfinished draft and isn''t used when creating the data source.</p> </li> </ul>'
                 type: string
                 enum:
                   - ENABLED
                   - DRAFT
                   - DISABLED
               PolicyArn:
-                description: An IAM policy Amazon Resource Name (ARN) that you want to apply to the QuickSight users and groups specified in this assignment.
+                description: The ARN for the IAM policy to apply to the QuickSight users and groups specified in this assignment.
                 type: string
               Identities:
-                description: QuickSight users and/or groups that you want to assign the policy to.
+                description: 'The QuickSight users, groups, or both that you want to assign the policy to.'
                 type: object
                 additionalProperties:
                   $ref: '#/definitions/IdentityNameList'
@@ -1534,7 +1534,7 @@ paths:
   '/accounts/{AwsAccountId}/templates/{TemplateId}':
     post:
       operationId: CreateTemplate
-      description: <p>Creates a template from an existing QuickSight analysis or template. The resulting template can be used to create a dashboard.</p> <p>A template is an entity in QuickSight which encapsulates the metadata required to create an analysis that can be used to create dashboard. It adds a layer of abstraction by use placeholders to replace the dataset associated with the analysis. You can use templates to create dashboards by replacing dataset placeholders with datasets which follow the same schema that was used to create the source analysis and template.</p>
+      description: <p>Creates a template from an existing QuickSight analysis or template. You can use the resulting template to create a dashboard.</p> <p>A <i>template</i> is an entity in QuickSight that encapsulates the metadata required to create an analysis and that you can use to create s dashboard. A template adds a layer of abstraction by using placeholders to replace the dataset associated with the analysis. You can use templates to create dashboards by replacing dataset placeholders with datasets that follow the same schema that was used to create the source analysis and template.</p>
       responses:
         '200':
           description: Success
@@ -1584,7 +1584,7 @@ paths:
         - name: TemplateId
           in: path
           required: true
-          description: An ID for the template you want to create. This is unique per AWS region per AWS account.
+          description: An ID for the template that you want to create. This template is unique per AWS Region in each AWS account.
           type: string
           pattern: '[\w\-]+'
           minLength: 1
@@ -1628,7 +1628,7 @@ paths:
                 minItems: 1
                 maxItems: 200
               VersionDescription:
-                description: A description of the current template version being created. This API created the first version of the template. Every time UpdateTemplate is called a new version is created. Each version of the template maintains a description of the version in the VersionDescription field.
+                description: 'A description of the current template version being created. This API operation creates the first version of the template. Every time <code>UpdateTemplate</code> is called, a new version is created. Each version of the template maintains a description of the version in the <code>VersionDescription</code> field.'
                 type: string
                 minLength: 1
                 maxLength: 512
@@ -1680,7 +1680,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: AWS account ID that contains the template you are deleting.
+          description: The ID of the AWS account that contains the template that you're deleting.
           type: string
           pattern: '^[0-9]{12}$'
           minLength: 12
@@ -1743,7 +1743,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: AWS account ID that contains the template you are describing.
+          description: The ID of the AWS account that contains the template that you're describing.
           type: string
           pattern: '^[0-9]{12}$'
           minLength: 12
@@ -1751,7 +1751,7 @@ paths:
         - name: TemplateId
           in: path
           required: true
-          description: An ID for the template.
+          description: The ID for the template.
           type: string
           pattern: '[\w\-]+'
           minLength: 1
@@ -1759,20 +1759,20 @@ paths:
         - name: version-number
           in: query
           required: false
-          description: 'This is an optional field, when a version number is provided the corresponding version is describe, if it''s not provided the latest version of the template is described.'
+          description: '(Optional) The number for the version to describe. If a <code>VersionNumber</code> parameter value isn''t provided, the latest version of the template is described.'
           type: integer
           minimum: 1
         - name: alias-name
           in: query
           required: false
-          description: 'The alias of the template that you want to describe. If you provide a specific alias, you describe the version that the alias points to. You can specify the latest version of the template by providing the keyword <code>$LATEST</code> in the <code>AliasName</code> parameter. The keyword <code>$PUBLISHED</code> doesn''t apply to templates.'
+          description: 'The alias of the template that you want to describe. If you name a specific alias, you describe the version that the alias points to. You can specify the latest version of the template by providing the keyword <code>$LATEST</code> in the <code>AliasName</code> parameter. The keyword <code>$PUBLISHED</code> doesn''t apply to templates.'
           type: string
           pattern: '[\w\-]+|(\$LATEST)|(\$PUBLISHED)'
           minLength: 1
           maxLength: 2048
     put:
       operationId: UpdateTemplate
-      description: Updates a template from an existing QuickSight analysis.
+      description: Updates a template from an existing Amazon QuickSight analysis or another template.
       responses:
         '200':
           description: Success
@@ -1814,7 +1814,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: AWS account ID that contains the template you are updating.
+          description: The ID of the AWS account that contains the template that you're updating.
           type: string
           pattern: '^[0-9]{12}$'
           minLength: 12
@@ -1846,7 +1846,7 @@ paths:
                     $ref: '#/definitions/TemplateSourceTemplate'
                     description: 'The source template, if it is based on an template.'
               VersionDescription:
-                description: A description of the current template version being updated. Every time you cal <code>UpdateTemplate</code> you create a new version. Each version of the template maintains a description of the version in the <code>VersionDescription</code> field.
+                description: 'A description of the current template version that is being updated. Every time you call <code>UpdateTemplate</code>, you create a new version of the template. Each version of the template maintains a description of the version in the <code>VersionDescription</code> field.'
                 type: string
                 minLength: 1
                 maxLength: 512
@@ -1897,7 +1897,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: AWS account ID that contains the template you are aliasing.
+          description: The ID of the AWS account that contains the template that you creating an alias for.
           type: string
           pattern: '^[0-9]{12}$'
           minLength: 12
@@ -1913,7 +1913,7 @@ paths:
         - name: AliasName
           in: path
           required: true
-          description: 'The name that you want to give to the template alias that you''re creating. Aliases that start with <code>$</code> are reserved by QuickSight. '
+          description: 'The name that you want to give to the template alias that you''re creating. Don''t start the alias name with the <code>$</code> character. Alias names that start with <code>$</code> are reserved by QuickSight. '
           type: string
           pattern: '[\w\-]+|(\$LATEST)|(\$PUBLISHED)'
           minLength: 1
@@ -1940,7 +1940,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     delete:
       operationId: DeleteTemplateAlias
-      description: Update template alias of given template.
+      description: 'Deletes the item that the specified template alias points to. If you provide a specific alias, you delete the version of the template that the alias points to.'
       responses:
         '200':
           description: Success
@@ -1966,7 +1966,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: AWS account ID that contains the template alias you are deleting.
+          description: The ID of the AWS account that contains the item to delete.
           type: string
           pattern: '^[0-9]{12}$'
           minLength: 12
@@ -1974,7 +1974,7 @@ paths:
         - name: TemplateId
           in: path
           required: true
-          description: An ID for the template.
+          description: The ID for the template that the specified alias is for.
           type: string
           pattern: '[\w\-]+'
           minLength: 1
@@ -1982,14 +1982,14 @@ paths:
         - name: AliasName
           in: path
           required: true
-          description: 'The alias of the template that you want to delete. If you provide a specific alias, you delete the version that the alias points to. You can specify the latest version of the template by providing the keyword <code>$LATEST</code> in the <code>AliasName</code> parameter. '
+          description: 'The name for the template alias. If you name a specific alias, you delete the version that the alias points to. You can specify the latest version of the template by providing the keyword <code>$LATEST</code> in the <code>AliasName</code> parameter. '
           type: string
           pattern: '[\w\-]+|(\$LATEST)|(\$PUBLISHED)'
           minLength: 1
           maxLength: 2048
     get:
       operationId: DescribeTemplateAlias
-      description: Describes the template aliases of a template.
+      description: Describes the template alias for a template.
       responses:
         '200':
           description: Success
@@ -2015,7 +2015,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: AWS account ID that contains the template alias you are describing.
+          description: The ID of the AWS account that contains the template alias that you're describing.
           type: string
           pattern: '^[0-9]{12}$'
           minLength: 12
@@ -2023,7 +2023,7 @@ paths:
         - name: TemplateId
           in: path
           required: true
-          description: An ID for the template.
+          description: The ID for the template.
           type: string
           pattern: '[\w\-]+'
           minLength: 1
@@ -2031,7 +2031,7 @@ paths:
         - name: AliasName
           in: path
           required: true
-          description: 'The alias of the template that you want to describe. If you provide a specific alias, you describe the version that the alias points to. You can specify the latest version of the template by providing the keyword <code>$LATEST</code> in the <code>AliasName</code> parameter. The keyword <code>$PUBLISHED</code> doesn''t apply to templates.'
+          description: 'The name of the template alias that you want to describe. If you name a specific alias, you describe the version that the alias points to. You can specify the latest version of the template by providing the keyword <code>$LATEST</code> in the <code>AliasName</code> parameter. The keyword <code>$PUBLISHED</code> doesn''t apply to templates.'
           type: string
           pattern: '[\w\-]+|(\$LATEST)|(\$PUBLISHED)'
           minLength: 1
@@ -2068,7 +2068,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: AWS account ID that contains the template aliases you are updating.
+          description: The ID of the AWS account that contains the template alias that you're updating.
           type: string
           pattern: '^[0-9]{12}$'
           minLength: 12
@@ -2084,7 +2084,7 @@ paths:
         - name: AliasName
           in: path
           required: true
-          description: 'The alias of the template that you want to update. If you provide a specific alias, you update the version that the alias points to. You can specify the latest version of the template by providing the keyword <code>$LATEST</code> in the <code>AliasName</code> parameter. The keyword <code>$PUBLISHED</code> doesn''t apply to templates.'
+          description: 'The alias of the template that you want to update. If you name a specific alias, you update the version that the alias points to. You can specify the latest version of the template by providing the keyword <code>$LATEST</code> in the <code>AliasName</code> parameter. The keyword <code>$PUBLISHED</code> doesn''t apply to templates.'
           type: string
           pattern: '[\w\-]+|(\$LATEST)|(\$PUBLISHED)'
           minLength: 1
@@ -2184,7 +2184,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: The AWS Account ID.
+          description: The AWS account ID.
           type: string
           pattern: '^[0-9]{12}$'
           minLength: 12
@@ -2238,7 +2238,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: The AWS Account ID.
+          description: The AWS account ID.
           type: string
           pattern: '^[0-9]{12}$'
           minLength: 12
@@ -2246,7 +2246,7 @@ paths:
         - name: DataSetId
           in: path
           required: true
-          description: The ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.
+          description: The ID for the dataset that you want to update. This ID is unique per AWS Region for each AWS account.
           type: string
         - name: body
           in: body
@@ -2279,7 +2279,7 @@ paths:
                 additionalProperties:
                   $ref: '#/definitions/LogicalTable'
               ImportMode:
-                description: Indicates whether or not you want to import the data into SPICE.
+                description: Indicates whether you want to import the data into SPICE.
                 type: string
                 enum:
                   - SPICE
@@ -2292,12 +2292,12 @@ paths:
                 minItems: 1
                 maxItems: 8
               RowLevelPermissionDataSet:
-                description: Row-level security configuration on the dataset.
+                description: The row-level security configuration for the dataset.
                 type: object
                 properties:
                   Arn:
                     $ref: '#/definitions/Arn'
-                    description: The Amazon Resource name (ARN) of the permission dataset.
+                    description: The Amazon Resource Name (ARN) of the permission dataset.
                   PermissionPolicy:
                     $ref: '#/definitions/RowLevelPermissionPolicy'
                     description: Permission policy.
@@ -2455,18 +2455,18 @@ paths:
                 minLength: 1
                 maxLength: 128
               DataSourceParameters:
-                description: The parameters that QuickSight uses to connect to your underlying source. This is a variant type structure. At most one of the attributes should be non-null for this structure to be valid.
+                description: 'The parameters that Amazon QuickSight uses to connect to your underlying data source. This is a variant type structure. For this structure to be valid, only one of the attributes can be non-null.'
                 type: object
                 properties:
                   AmazonElasticsearchParameters:
                     $ref: '#/definitions/AmazonElasticsearchParameters'
-                    description: Amazon Elasticsearch parameters.
+                    description: Amazon Elasticsearch Service parameters.
                   AthenaParameters:
                     $ref: '#/definitions/AthenaParameters'
-                    description: Athena parameters.
+                    description: Amazon Athena parameters.
                   AuroraParameters:
                     $ref: '#/definitions/AuroraParameters'
-                    description: Aurora MySQL parameters.
+                    description: Amazon Aurora MySQL parameters.
                   AuroraPostgreSqlParameters:
                     $ref: '#/definitions/AuroraPostgreSqlParameters'
                     description: Aurora PostgreSQL parameters.
@@ -2490,10 +2490,10 @@ paths:
                     description: Presto parameters.
                   RdsParameters:
                     $ref: '#/definitions/RdsParameters'
-                    description: RDS parameters.
+                    description: Amazon RDS parameters.
                   RedshiftParameters:
                     $ref: '#/definitions/RedshiftParameters'
-                    description: Redshift parameters.
+                    description: Amazon Redshift parameters.
                   S3Parameters:
                     $ref: '#/definitions/S3Parameters'
                     description: S3 parameters.
@@ -2535,7 +2535,7 @@ paths:
                 properties:
                   DisableSsl:
                     $ref: '#/definitions/Boolean'
-                    description: A boolean flag to control whether SSL should be disabled.
+                    description: A Boolean option to control whether SSL should be disabled.
   '/accounts/{AwsAccountId}/namespaces/{Namespace}/groups/{GroupName}':
     delete:
       operationId: DeleteGroup
@@ -2736,7 +2736,7 @@ paths:
   '/accounts/{AwsAccountId}/namespace/{Namespace}/iam-policy-assignments/{AssignmentName}':
     delete:
       operationId: DeleteIAMPolicyAssignment
-      description: Deletes an existing assignment.
+      description: Deletes an existing IAM policy assignment.
       responses:
         '200':
           description: Success
@@ -2774,7 +2774,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: The AWS account ID where you want to delete an IAM policy assignment.
+          description: The AWS account ID where you want to delete the IAM policy assignment.
           type: string
           pattern: '^[0-9]{12}$'
           minLength: 12
@@ -3061,7 +3061,7 @@ paths:
   '/accounts/{AwsAccountId}/dashboards/{DashboardId}/permissions':
     get:
       operationId: DescribeDashboardPermissions
-      description: Describes read and write permissions on a dashboard.
+      description: Describes read and write permissions for a dashboard.
       responses:
         '200':
           description: Success
@@ -3091,7 +3091,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: AWS account ID that contains the dashboard you are describing permissions of.
+          description: The ID of the AWS account that contains the dashboard that you're describing permissions for.
           type: string
           pattern: '^[0-9]{12}$'
           minLength: 12
@@ -3099,7 +3099,7 @@ paths:
         - name: DashboardId
           in: path
           required: true
-          description: 'The ID for the dashboard, also added to IAM policy.'
+          description: 'The ID for the dashboard, also added to the IAM policy.'
           type: string
           pattern: '[\w\-]+'
           minLength: 1
@@ -3148,7 +3148,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: AWS account ID that contains the dashboard you are updating.
+          description: The ID of the AWS account that contains the dashboard whose permissions you're updating.
           type: string
           pattern: '^[0-9]{12}$'
           minLength: 12
@@ -3214,7 +3214,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: The AWS Account ID.
+          description: The AWS account ID.
           type: string
           pattern: '^[0-9]{12}$'
           minLength: 12
@@ -3268,7 +3268,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: The AWS Account ID.
+          description: The AWS account ID.
           type: string
           pattern: '^[0-9]{12}$'
           minLength: 12
@@ -3276,7 +3276,7 @@ paths:
         - name: DataSetId
           in: path
           required: true
-          description: The ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.
+          description: The ID for the dataset whose permissions you want to update. This ID is unique per AWS Region for each AWS account.
           type: string
         - name: body
           in: body
@@ -3418,7 +3418,7 @@ paths:
   '/accounts/{AwsAccountId}/namespaces/{Namespace}/iam-policy-assignments/{AssignmentName}':
     get:
       operationId: DescribeIAMPolicyAssignment
-      description: Describes an existing IAMPolicy Assignment by specified assignment name.
+      description: 'Describes an existing IAM policy assignment, as specified by the assignment name.'
       responses:
         '200':
           description: Success
@@ -3452,7 +3452,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: The AWS account ID that contains the assignment you want to describe.
+          description: The ID of the AWS account that contains the assignment that you want to describe.
           type: string
           pattern: '^[0-9]{12}$'
           minLength: 12
@@ -3481,7 +3481,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     put:
       operationId: UpdateIAMPolicyAssignment
-      description: Updates an existing assignment. This operation updates only the optional parameter or parameters that are specified in the request.
+      description: Updates an existing IAM policy assignment. This operation updates only the optional parameter or parameters that are specified in the request.
       responses:
         '200':
           description: Success
@@ -3519,7 +3519,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: The AWS account ID that contains the IAM policy assignment.
+          description: The ID of the AWS account that contains the IAM policy assignment.
           type: string
           pattern: '^[0-9]{12}$'
           minLength: 12
@@ -3527,7 +3527,7 @@ paths:
         - name: AssignmentName
           in: path
           required: true
-          description: The name of the assignment. It must be unique within an AWS account.
+          description: The name of the assignment. This name must be unique within an AWS account.
           type: string
           pattern: '(?=^.{2,256}$)(?!.*\s)[0-9a-zA-Z-_.:=+@]*$'
           minLength: 1
@@ -3545,17 +3545,17 @@ paths:
             type: object
             properties:
               AssignmentStatus:
-                description: '<p>The status of an assignment:</p> <ul> <li> <p>ENABLED - Anything specified in this assignment is used while creating the data source.</p> </li> <li> <p>DISABLED - This assignment isn''t used while creating the data source.</p> </li> <li> <p>DRAFT - Assignment is an unfinished draft and isn''t used while creating the data source.</p> </li> </ul>'
+                description: '<p>The status of the assignment. Possible values are as follows:</p> <ul> <li> <p> <code>ENABLED</code> - Anything specified in this assignment is used when creating the data source.</p> </li> <li> <p> <code>DISABLED</code> - This assignment isn''t used when creating the data source.</p> </li> <li> <p> <code>DRAFT</code> - This assignment is an unfinished draft and isn''t used when creating the data source.</p> </li> </ul>'
                 type: string
                 enum:
                   - ENABLED
                   - DRAFT
                   - DISABLED
               PolicyArn:
-                description: An IAM policy Amazon Resource Name (ARN) that will be applied to specified QuickSight users and groups in this assignment.
+                description: The ARN for the IAM policy to apply to the QuickSight users and groups specified in this assignment.
                 type: string
               Identities:
-                description: QuickSight users and/or groups that you want to assign to the specified IAM policy.
+                description: 'The QuickSight users, groups, or both that you want to assign the policy to.'
                 type: object
                 additionalProperties:
                   $ref: '#/definitions/IdentityNameList'
@@ -3596,7 +3596,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: AWS account ID that contains the template you are describing.
+          description: The ID of the AWS account that contains the template that you're describing.
           type: string
           pattern: '^[0-9]{12}$'
           minLength: 12
@@ -3619,7 +3619,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     put:
       operationId: UpdateTemplatePermissions
-      description: Updates the permissions on a template.
+      description: Updates the resource permissions for a template.
       responses:
         '200':
           description: Success
@@ -3653,7 +3653,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: AWS account ID that contains the template.
+          description: The ID of the AWS account that contains the template.
           type: string
           pattern: '^[0-9]{12}$'
           minLength: 12
@@ -3689,7 +3689,7 @@ paths:
   '/accounts/{AwsAccountId}/dashboards/{DashboardId}/embed-url#creds-type':
     get:
       operationId: GetDashboardEmbedUrl
-      description: '<p>Generates a server-side embeddable URL and authorization code. Before this can work properly, first you need to configure the dashboards and user permissions. For more information, see the Amazon QuickSight User Guide section on <a href="https://docs.aws.amazon.com/quicksight/latest/user/embedding-dashboards.html">Embedding Amazon QuickSight Dashboards</a> or see the Amazon QuickSight API Reference section on <a href="https://docs.aws.amazon.com/quicksight/latest/APIReference/qs-dev-embedded-dashboards.html">Embedding Amazon QuickSight Dashboards</a> .</p> <p>Currently, you can use <code>GetDashboardEmbedURL</code> only from the server, not from the user’s browser.</p>'
+      description: '<p>Generates a server-side embeddable URL and authorization code. For this process to work properly, first configure the dashboards and user permissions. For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/embedding-dashboards.html">Embedding Amazon QuickSight Dashboards</a> in the <i>Amazon QuickSight User Guide</i> or <a href="https://docs.aws.amazon.com/quicksight/latest/APIReference/qs-dev-embedded-dashboards.html">Embedding Amazon QuickSight Dashboards</a> in the <i>Amazon QuickSight API Reference</i>.</p> <p>Currently, you can use <code>GetDashboardEmbedURL</code> only from the server, not from the user’s browser.</p>'
       responses:
         '200':
           description: Success
@@ -3743,7 +3743,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: AWS account ID that contains the dashboard you are embedding.
+          description: The ID for the AWS account that contains the dashboard that you're embedding.
           type: string
           pattern: '^[0-9]{12}$'
           minLength: 12
@@ -3751,7 +3751,7 @@ paths:
         - name: DashboardId
           in: path
           required: true
-          description: 'The ID for the dashboard, also added to IAM policy'
+          description: 'The ID for the dashboard, also added to the IAM policy.'
           type: string
           pattern: '[\w\-]+'
           minLength: 1
@@ -3759,7 +3759,7 @@ paths:
         - name: creds-type
           in: query
           required: true
-          description: The authentication method the user uses to sign in.
+          description: The authentication method that the user uses to sign in.
           type: string
           enum:
             - IAM
@@ -3767,24 +3767,24 @@ paths:
         - name: session-lifetime
           in: query
           required: false
-          description: How many minutes the session is valid. The session lifetime must be between 15 and 600 minutes.
+          description: How many minutes the session is valid. The session lifetime must be 15-600 minutes.
           type: integer
           minimum: 15
           maximum: 600
         - name: undo-redo-disabled
           in: query
           required: false
-          description: 'Remove the undo/redo button on embedded dashboard. The default is FALSE, which enables the undo/redo button.'
+          description: 'Remove the undo/redo button on the embedded dashboard. The default is FALSE, which enables the undo/redo button.'
           type: boolean
         - name: reset-disabled
           in: query
           required: false
-          description: 'Remove the reset button on embedded dashboard. The default is FALSE, which allows the reset button.'
+          description: 'Remove the reset button on the embedded dashboard. The default is FALSE, which enables the reset button.'
           type: boolean
         - name: user-arn
           in: query
           required: false
-          description: '<p>The Amazon QuickSight user''s Amazon Resource Name (ARN), for use with <code>QUICKSIGHT</code> identity type. You can use this for any Amazon QuickSight users in your account (readers, authors, or admins) authenticated as one of the following:</p> <ul> <li> <p>Active Directory (AD) users or group members</p> </li> <li> <p>Invited non-federated users</p> </li> <li> <p>IAM users and IAM role-based sessions authenticated through Federated Single Sign-On using SAML, OpenID Connect, or IAM Federation</p> </li> </ul>'
+          description: '<p>The Amazon QuickSight user''s Amazon Resource Name (ARN), for use with <code>QUICKSIGHT</code> identity type. You can use this for any Amazon QuickSight users in your account (readers, authors, or admins) authenticated as one of the following:</p> <ul> <li> <p>Active Directory (AD) users or group members</p> </li> <li> <p>Invited nonfederated users</p> </li> <li> <p>IAM users and IAM role-based sessions authenticated through Federated Single Sign-On using SAML, OpenID Connect, or IAM federation.</p> </li> </ul>'
           type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
@@ -3797,7 +3797,7 @@ paths:
   '/accounts/{AwsAccountId}/dashboards/{DashboardId}/versions':
     get:
       operationId: ListDashboardVersions
-      description: Lists all the versions of the dashboards in the Quicksight subscription.
+      description: Lists all the versions of the dashboards in the QuickSight subscription.
       responses:
         '200':
           description: Success
@@ -3831,7 +3831,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: AWS account ID that contains the dashboard you are listing.
+          description: The ID of the AWS account that contains the dashboard that you're listing versions for.
           type: string
           pattern: '^[0-9]{12}$'
           minLength: 12
@@ -3877,7 +3877,7 @@ paths:
   '/accounts/{AwsAccountId}/dashboards':
     get:
       operationId: ListDashboards
-      description: Lists dashboards in the AWS account.
+      description: Lists dashboards in an AWS account.
       responses:
         '200':
           description: Success
@@ -3903,7 +3903,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: AWS account ID that contains the dashboards you are listing.
+          description: The ID of the AWS account that contains the dashboards that you're listing.
           type: string
           pattern: '^[0-9]{12}$'
           minLength: 12
@@ -4025,7 +4025,7 @@ paths:
   '/accounts/{AwsAccountId}/namespaces/{Namespace}/iam-policy-assignments':
     get:
       operationId: ListIAMPolicyAssignments
-      description: Lists assignments in current QuickSight account.
+      description: Lists IAM policy assignments in the current Amazon QuickSight account.
       responses:
         '200':
           description: Success
@@ -4059,7 +4059,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: The AWS account ID that contains this IAM policy assignment.
+          description: The ID of the AWS account that contains these IAM policy assignments.
           type: string
           pattern: '^[0-9]{12}$'
           minLength: 12
@@ -4067,7 +4067,7 @@ paths:
         - name: Namespace
           in: path
           required: true
-          description: The namespace for this assignment.
+          description: The namespace for the assignments.
           type: string
           pattern: '^[a-zA-Z0-9._-]*$'
           maxLength: 64
@@ -4090,7 +4090,7 @@ paths:
             type: object
             properties:
               AssignmentStatus:
-                description: The status of the assignment.
+                description: The status of the assignments.
                 type: string
                 enum:
                   - ENABLED
@@ -4107,7 +4107,7 @@ paths:
   '/accounts/{AwsAccountId}/namespaces/{Namespace}/users/{UserName}/iam-policy-assignments':
     get:
       operationId: ListIAMPolicyAssignmentsForUser
-      description: Lists all the assignments and the Amazon Resource Names (ARNs) for the associated IAM policies assigned to the specified user and the group or groups that the user belongs to.
+      description: 'Lists all the IAM policy assignments, including the Amazon Resource Names (ARNs) for the IAM policies assigned to the specified user and group or groups that the user belongs to.'
       responses:
         '200':
           description: Success
@@ -4145,7 +4145,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: The AWS account ID that contains the assignment.
+          description: The ID of the AWS account that contains the assignments.
           type: string
           pattern: '^[0-9]{12}$'
           minLength: 12
@@ -4390,7 +4390,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: AWS account ID that contains the template aliases you are listing.
+          description: The ID of the AWS account that contains the template aliases that you're listing.
           type: string
           pattern: '^[0-9]{12}$'
           minLength: 12
@@ -4436,7 +4436,7 @@ paths:
   '/accounts/{AwsAccountId}/templates/{TemplateId}/versions':
     get:
       operationId: ListTemplateVersions
-      description: Lists all the versions of the templates in the Quicksight account.
+      description: Lists all the versions of the templates in the current Amazon QuickSight account.
       responses:
         '200':
           description: Success
@@ -4470,7 +4470,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: AWS account ID that contains the templates you are listing.
+          description: The ID of the AWS account that contains the templates that you're listing.
           type: string
           pattern: '^[0-9]{12}$'
           minLength: 12
@@ -4516,7 +4516,7 @@ paths:
   '/accounts/{AwsAccountId}/templates':
     get:
       operationId: ListTemplates
-      description: Lists all the templates in the QuickSight account.
+      description: Lists all the templates in the current Amazon QuickSight account.
       responses:
         '200':
           description: Success
@@ -4550,7 +4550,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: AWS account ID that contains the templates you are listing.
+          description: The ID of the AWS account that contains the templates that you're listing.
           type: string
           pattern: '^[0-9]{12}$'
           minLength: 12
@@ -4629,7 +4629,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: 'The AWS Account ID that the user is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.'
+          description: 'The AWS account ID that the user is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.'
           type: string
           pattern: '^[0-9]{12}$'
           minLength: 12
@@ -4923,7 +4923,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: AWS account ID that contains the dashboard you are updating.
+          description: The ID of the AWS account that contains the dashboard that you're updating.
           type: string
           pattern: '^[0-9]{12}$'
           minLength: 12
@@ -4986,7 +4986,7 @@ definitions:
         description: The ID for the dashboard.
       CreationStatus:
         $ref: '#/definitions/ResourceStatus'
-        description: The creation status of the dashboard create request.
+        description: The status of the dashboard creation request.
       Status:
         $ref: '#/definitions/StatusCode'
         description: The HTTP status of the request.
@@ -5021,10 +5021,10 @@ definitions:
     properties:
       Principal:
         $ref: '#/definitions/Principal'
-        description: 'The Amazon Resource Name (ARN) of a QuickSight user or group, or an IAM ARN. If you are using cross-account resource sharing, this is the IAM ARN of an account root. Otherwise, it is the ARN of a QuickSight user or group. .'
+        description: 'The Amazon Resource Name (ARN) of an Amazon QuickSight user or group, or an IAM ARN. If you are using cross-account resource sharing, this is the IAM ARN of an account root. Otherwise, it is the ARN of a QuickSight user or group. .'
       Actions:
         $ref: '#/definitions/ActionList'
-        description: 'The action to grant or revoke permissions on. For example, "quicksight:DescribeDashboard".'
+        description: 'The action to grant or revoke permissions on, for example <code>"quicksight:DescribeDashboard"</code>.'
     description: Permission for the resource.
   DashboardSourceTemplate:
     type: object
@@ -5037,7 +5037,7 @@ definitions:
         description: Dataset references.
       Arn:
         $ref: '#/definitions/Arn'
-        description: The Amazon Resource name (ARN) of the resource.
+        description: The Amazon Resource Name (ARN) of the resource.
     description: Dashboard source template.
   Tag:
     type: object
@@ -5051,7 +5051,7 @@ definitions:
       Value:
         $ref: '#/definitions/TagValue'
         description: Tag value.
-    description: The keys of the key-value pairs for the resource tag or tags assigned to the resource.
+    description: The key or keys of the key-value pairs for the resource tag or tags assigned to the resource.
   AdHocFilteringOption:
     type: object
     properties:
@@ -5065,7 +5065,7 @@ definitions:
       AvailabilityStatus:
         $ref: '#/definitions/DashboardBehavior'
         description: Availability status.
-    description: Export to CSV option.
+    description: Export to .csv option.
   SheetControlsOption:
     type: object
     properties:
@@ -5086,10 +5086,10 @@ definitions:
         description: The ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.
       IngestionArn:
         $ref: '#/definitions/Arn'
-        description: 'The ARN for the ingestion, which is triggered as a result of dataset creation if the import mode is SPICE'
+        description: 'The ARN for the ingestion, which is triggered as a result of dataset creation if the import mode is SPICE.'
       IngestionId:
         $ref: '#/definitions/ResourceId'
-        description: 'The ID of the ingestion, which is triggered as a result of dataset creation if the import mode is SPICE'
+        description: 'The ID of the ingestion, which is triggered as a result of dataset creation if the import mode is SPICE.'
       RequestId:
         $ref: '#/definitions/String'
         description: The AWS request ID for this operation.
@@ -5108,7 +5108,7 @@ definitions:
       S3Source:
         $ref: '#/definitions/S3Source'
         description: A physical table type for as S3 data source.
-    description: A view of a data source. Contains information on the shape of the data in the underlying source. This is a variant type structure. No more than one of the attributes can be non-null for this structure to be valid.
+    description: 'A view of a data source that contains information about the shape of the data in the underlying source. This is a variant type structure. For this structure to be valid, only one of the attributes can be non-null.'
   LogicalTable:
     type: object
     required:
@@ -5124,14 +5124,14 @@ definitions:
       Source:
         $ref: '#/definitions/LogicalTableSource'
         description: Source of this logical table.
-    description: 'A unit that joins and data transformations operate on. A logical table has a source, which can be either a physical table or result of a join. When it points to a physical table, a logical table acts as a mutable copy of that table through transform operations.'
+    description: 'A <i>logical table</i> is a unit that joins and that data transformations operate on. A logical table has a source, which can be either a physical table or result of a join. When a logical table points to a physical table, the logical table acts as a mutable copy of that physical table through transform operations.'
   ColumnGroup:
     type: object
     properties:
       GeoSpatialColumnGroup:
         $ref: '#/definitions/GeoSpatialColumnGroup'
         description: Geospatial column group that denotes a hierarchy.
-    description: Groupings of columns that work together in certain QuickSight features. This is a variant type structure. No more than one of the attributes should be non-null for this structure to be valid.
+    description: 'Groupings of columns that work together in certain Amazon QuickSight features. This is a variant type structure. For this structure to be valid, only one of the attributes can be non-null.'
   Arn:
     type: string
   RowLevelPermissionPolicy:
@@ -5306,7 +5306,7 @@ definitions:
       Database:
         $ref: '#/definitions/Database'
         description: Database.
-    description: RDS parameters.
+    description: Amazon RDS parameters.
   RedshiftParameters:
     type: object
     required:
@@ -5314,17 +5314,17 @@ definitions:
     properties:
       Host:
         $ref: '#/definitions/Host'
-        description: Host. This can be blank if the <code>ClusterId</code> is provided.
+        description: Host. This field can be blank if <code>ClusterId</code> is provided.
       Port:
         $ref: '#/definitions/OptionalPort'
-        description: Port. This can be blank if the <code>ClusterId</code> is provided.
+        description: Port. This field can be blank if the <code>ClusterId</code> is provided.
       Database:
         $ref: '#/definitions/Database'
         description: Database.
       ClusterId:
         $ref: '#/definitions/ClusterId'
-        description: Cluster ID. This can be blank if the <code>Host</code> and <code>Port</code> are provided.
-    description: 'Redshift parameters. The <code>ClusterId</code> field can be blank if <code>Host</code> and <code>Port</code> are both set, and the other way around.'
+        description: Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are provided.
+    description: Amazon Redshift parameters. The <code>ClusterId</code> field can be blank if <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.
   S3Parameters:
     type: object
     required:
@@ -5428,11 +5428,11 @@ definitions:
     properties:
       Username:
         $ref: '#/definitions/Username'
-        description: Username.
+        description: User name.
       Password:
         $ref: '#/definitions/Password'
         description: Password.
-    description: The combination of username and password that are used as credentials.
+    description: The combination of user name and password that are used as credentials.
   Boolean:
     type: boolean
   CreateGroupResponse:
@@ -5467,19 +5467,19 @@ definitions:
     properties:
       AssignmentName:
         $ref: '#/definitions/IAMPolicyAssignmentName'
-        description: The name of the assignment. Must be unique within an AWS account.
+        description: The name of the assignment. This name must be unique within the AWS account.
       AssignmentId:
         $ref: '#/definitions/String'
-        description: An ID for the assignment.
+        description: The ID for the assignment.
       AssignmentStatus:
         $ref: '#/definitions/AssignmentStatus'
-        description: '<p>The status of an assignment:</p> <ul> <li> <p>ENABLED - Anything specified in this assignment is used while creating the data source.</p> </li> <li> <p>DISABLED - This assignment isn''t used while creating the data source.</p> </li> <li> <p>DRAFT - Assignment is an unfinished draft and isn''t used while creating the data source.</p> </li> </ul>'
+        description: '<p>The status of the assignment. Possible values are as follows:</p> <ul> <li> <p> <code>ENABLED</code> - Anything specified in this assignment is used when creating the data source.</p> </li> <li> <p> <code>DISABLED</code> - This assignment isn''t used when creating the data source.</p> </li> <li> <p> <code>DRAFT</code> - This assignment is an unfinished draft and isn''t used when creating the data source.</p> </li> </ul>'
       PolicyArn:
         $ref: '#/definitions/Arn'
-        description: An IAM policy Amazon Resource Name (ARN) that is applied to the QuickSight users and groups specified in this assignment.
+        description: The ARN for the IAM policy that is applied to the QuickSight users and groups specified in this assignment.
       Identities:
         $ref: '#/definitions/IdentityMap'
-        description: QuickSight users and/or groups that are assigned to the IAM policy.
+        description: 'The QuickSight users, groups, or both that the IAM policy is assigned to.'
       RequestId:
         $ref: '#/definitions/String'
         description: The AWS request ID for this operation.
@@ -5514,7 +5514,7 @@ definitions:
     properties:
       Arn:
         $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) for the template.
+        description: The ARN for the template.
       VersionArn:
         $ref: '#/definitions/Arn'
         description: 'The ARN for the template, including the version information of the first version.'
@@ -5538,7 +5538,7 @@ definitions:
     properties:
       Arn:
         $ref: '#/definitions/Arn'
-        description: The Amazon Resource name (ARN) of the resource.
+        description: The Amazon Resource Name (ARN) of the resource.
       DataSetReferences:
         $ref: '#/definitions/DataSetReferenceList'
         description: A structure containing information about the dataset references used as placeholders in the template.
@@ -5550,14 +5550,14 @@ definitions:
     properties:
       Arn:
         $ref: '#/definitions/Arn'
-        description: The Amazon Resource name (ARN) of the resource.
+        description: The Amazon Resource Name (ARN) of the resource.
     description: The source template of the template.
   CreateTemplateAliasResponse:
     type: object
     properties:
       TemplateAlias:
         $ref: '#/definitions/TemplateAlias'
-        description: Information on the template alias.
+        description: Information about the template alias.
       Status:
         $ref: '#/definitions/StatusCode'
         description: The HTTP status of the request.
@@ -5572,7 +5572,7 @@ definitions:
         description: The HTTP status of the request.
       Arn:
         $ref: '#/definitions/Arn'
-        description: The Secure Socket Layer (SSL) properties that apply. of the resource.
+        description: The Secure Socket Layer (SSL) properties that apply for the resource.
       DashboardId:
         $ref: '#/definitions/RestrictiveResourceId'
         description: The ID of the dashboard.
@@ -5662,10 +5662,10 @@ definitions:
         description: The HTTP status of the request.
       TemplateId:
         $ref: '#/definitions/RestrictiveResourceId'
-        description: An ID for the template.
+        description: An ID for the template associated with the deletion.
       AliasName:
         $ref: '#/definitions/AliasName'
-        description: The name of the alias.
+        description: The name for the template alias.
       Arn:
         $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the resource.
@@ -5698,7 +5698,7 @@ definitions:
         description: Information about the dashboard.
       Status:
         $ref: '#/definitions/StatusCode'
-        description: The http status of this request.
+        description: The HTTP status of this request.
       RequestId:
         $ref: '#/definitions/String'
         description: The AWS request ID for this operation.
@@ -5713,7 +5713,7 @@ definitions:
         description: The Amazon Resource Name (ARN) of the dashboard.
       Permissions:
         $ref: '#/definitions/ResourcePermissionList'
-        description: A structure that contains the permissions of the dashboard.
+        description: A structure that contains the permissions for the dashboard.
       Status:
         $ref: '#/definitions/StatusCode'
         description: The HTTP status of the request.
@@ -5822,7 +5822,7 @@ definitions:
     properties:
       Template:
         $ref: '#/definitions/Template'
-        description: The template structure of the object you want to describe.
+        description: The template structure for the object you want to describe.
       Status:
         $ref: '#/definitions/StatusCode'
         description: The HTTP status of the request.
@@ -5873,7 +5873,7 @@ definitions:
     properties:
       EmbedUrl:
         $ref: '#/definitions/EmbeddingUrl'
-        description: 'URL that you can put into your server-side webpage to embed your dashboard. This URL is valid for 5 minutes, and the resulting session is valid for 10 hours. The API provides the URL with an auth_code that enables a single-signon session. '
+        description: 'An URL that you can put into your server-side webpage to embed your dashboard. This URL is valid for 5 minutes, and the resulting session is valid for 10 hours. The API provides the URL with an <code>auth_code</code> value that enables a single sign-on session. '
       Status:
         $ref: '#/definitions/StatusCode'
         description: The HTTP status of the request.
@@ -5904,7 +5904,7 @@ definitions:
     properties:
       DashboardSummaryList:
         $ref: '#/definitions/DashboardSummaryList'
-        description: A structure that contains all of the dashboards shared with the user. Provides basic information about the dashboards.
+        description: A structure that contains all of the dashboards shared with the user. This structure provides basic information about the dashboards.
       NextToken:
         $ref: '#/definitions/String'
         description: 'The token for the next set of results, or null if there are no more results.'
@@ -5994,7 +5994,7 @@ definitions:
     properties:
       ActiveAssignments:
         $ref: '#/definitions/ActiveIAMPolicyAssignmentList'
-        description: Active assignments for this user.
+        description: The active assignments for this user.
       RequestId:
         $ref: '#/definitions/String'
         description: The AWS request ID for this operation.
@@ -6208,10 +6208,10 @@ definitions:
         description: The ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.
       IngestionArn:
         $ref: '#/definitions/Arn'
-        description: 'The ARN for the ingestion, which is triggered as a result of dataset creation if the import mode is SPICE'
+        description: 'The ARN for the ingestion, which is triggered as a result of dataset creation if the import mode is SPICE.'
       IngestionId:
         $ref: '#/definitions/ResourceId'
-        description: 'The ID of the ingestion, which is triggered as a result of dataset creation if the import mode is SPICE'
+        description: 'The ID of the ingestion, which is triggered as a result of dataset creation if the import mode is SPICE.'
       RequestId:
         $ref: '#/definitions/String'
         description: The AWS request ID for this operation.
@@ -6226,7 +6226,7 @@ definitions:
         description: The Amazon Resource Name (ARN) of the dataset.
       DataSetId:
         $ref: '#/definitions/ResourceId'
-        description: The ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.
+        description: The ID for the dataset whose permissions you want to update. This ID is unique per AWS Region for each AWS account.
       RequestId:
         $ref: '#/definitions/String'
         description: The AWS request ID for this operation.
@@ -6289,13 +6289,13 @@ definitions:
         description: The ID of the assignment.
       PolicyArn:
         $ref: '#/definitions/Arn'
-        description: The IAM policy ARN assigned to the QuickSight users and groups specified in this request.
+        description: The ARN for the IAM policy applied to the QuickSight users and groups specified in this assignment.
       Identities:
         $ref: '#/definitions/IdentityMap'
-        description: QuickSight users and/or groups that are assigned to this IAM policy.
+        description: 'The QuickSight users, groups, or both that the IAM policy is assigned to.'
       AssignmentStatus:
         $ref: '#/definitions/AssignmentStatus'
-        description: '<p>The status of the assignment:</p> <ul> <li> <p>ENABLED - Anything specified in this assignment is used while creating the data source.</p> </li> <li> <p>DISABLED - This assignment isn''t used while creating the data source.</p> </li> <li> <p>DRAFT - Assignment is an unfinished draft and isn''t used while creating the data source.</p> </li> </ul>'
+        description: '<p>The status of the assignment. Possible values are as follows:</p> <ul> <li> <p> <code>ENABLED</code> - Anything specified in this assignment is used when creating the data source.</p> </li> <li> <p> <code>DISABLED</code> - This assignment isn''t used when creating the data source.</p> </li> <li> <p> <code>DRAFT</code> - This assignment is an unfinished draft and isn''t used when creating the data source.</p> </li> </ul>'
       RequestId:
         $ref: '#/definitions/String'
         description: The AWS request ID for this operation.
@@ -6313,7 +6313,7 @@ definitions:
         description: The Amazon Resource Name (ARN) for the template.
       VersionArn:
         $ref: '#/definitions/Arn'
-        description: 'The Amazon Resource Name (ARN) for the template, including the version information of the first version.'
+        description: 'The ARN for the template, including the version information of the first version.'
       CreationStatus:
         $ref: '#/definitions/ResourceStatus'
         description: The creation status of the template.
@@ -6460,7 +6460,7 @@ definitions:
         description: Column name.
       ColumnId:
         $ref: '#/definitions/ColumnId'
-        description: 'A unique ID to identify a calculated column. During dataset update, if the column ID of a calculated column matches that of an existing calculated column, QuickSight preserves the existing calculated column.'
+        description: 'A unique ID to identify a calculated column. During a dataset update, if the column ID of a calculated column matches that of an existing calculated column, Amazon QuickSight preserves the existing calculated column.'
       Expression:
         $ref: '#/definitions/Expression'
         description: An expression that defines the calculated column.
@@ -6507,7 +6507,7 @@ definitions:
         description: New column data type.
       Format:
         $ref: '#/definitions/TypeCastFormat'
-        description: 'When casting a column from string to datetime type, you can supply a QuickSight supported format string to denote the source data format.'
+        description: 'When casting a column from string to datetime type, you can supply a string in a format supported by Amazon QuickSight to denote the source data format.'
     description: A transform operation that casts a column to a different type.
   Catalog:
     type: string
@@ -6539,7 +6539,7 @@ definitions:
       Name:
         $ref: '#/definitions/String'
         description: The name of the column group's column schema.
-    description: 'A structure describing the name, datatype, and geographic role of the columns.'
+    description: 'A structure describing the name, data type, and geographic role of the columns.'
   ColumnGroupColumnSchemaList:
     type: array
     items:
@@ -6563,7 +6563,7 @@ definitions:
         description: The name of the column group schema.
       ColumnGroupColumnSchemaList:
         $ref: '#/definitions/ColumnGroupColumnSchemaList'
-        description: A structure containing the list of column group column schemas.
+        description: A structure containing the list of schemas for column group columns.
     description: The column group schema.
   ColumnGroupSchemaList:
     type: array
@@ -6610,7 +6610,7 @@ definitions:
       ColumnGeographicRole:
         $ref: '#/definitions/GeoSpatialDataRole'
         description: A geospatial role for a column.
-    description: A tag for a column in a TagColumnOperation. This is a variant type structure. No more than one of the attributes should be non-null for this structure to be valid.
+    description: 'A tag for a column in a <code>TagColumnOperation</code> structure. This is a variant type structure. For this structure to be valid, only one of the attributes can be non-null.'
   ColumnTagList:
     type: array
     items:
@@ -6680,10 +6680,10 @@ definitions:
     properties:
       AdHocFilteringOption:
         $ref: '#/definitions/AdHocFilteringOption'
-        description: Ad hoc filtering option.
+        description: Ad hoc (one-time) filtering option.
       ExportToCSVOption:
         $ref: '#/definitions/ExportToCSVOption'
-        description: Export to CSV option.
+        description: Export to .csv option.
       SheetControlsOption:
         $ref: '#/definitions/SheetControlsOption'
         description: Sheet controls option.
@@ -6699,13 +6699,13 @@ definitions:
         description: The display name of the dashboard.
       Parameters:
         $ref: '#/definitions/Parameters'
-        description: 'A structure that contains the parameters of the dashboard. These are parameter overrides for a dashboard. A dashboard can have any type of parameters and some parameters might accept multiple values. You could use the following structure to override two string parameters that accept multiple values:'
+        description: 'A structure that contains the parameters of the dashboard. These are parameter overrides for a dashboard. A dashboard can have any type of parameters, and some parameters might accept multiple values. You can use the dashboard permissions structure described following to override two string parameters that accept multiple values. '
       Permissions:
         $ref: '#/definitions/ResourcePermissionList'
-        description: A structure that contains the permissions of the dashboard. You can use this for granting permissions with principal and action information.
+        description: A structure that contains the permissions of the dashboard. You can use this structure for granting permissions with principal and action information.
       SourceEntity:
         $ref: '#/definitions/DashboardSourceEntity'
-        description: '<p>Source entity from which the dashboard is created. The souce entity accepts the Amazon Resource Name (ARN) of the source template or analysis and also references the replacement datasets for the placeholders set when creating the template. The replacement datasets need to follow the same schema as the datasets for which placeholders were created when creating the template. </p> <p>If you are creating a dashboard from a source entity in a different AWS account, use the ARN of the source template.</p>'
+        description: '<p>The source entity from which the dashboard is created. The source entity accepts the Amazon Resource Name (ARN) of the source template or analysis and also references the replacement datasets for the placeholders set when creating the template. The replacement datasets need to follow the same schema as the datasets for which placeholders were created when creating the template. </p> <p>If you are creating a dashboard from a source entity in a different AWS account, use the ARN of the source template.</p>'
       Tags:
         $ref: '#/definitions/TagList'
         description: Contains a map of the key-value pairs for the resource tag or tags assigned to the dashboard.
@@ -6714,7 +6714,7 @@ definitions:
         description: A description for the first version of the dashboard being created.
       DashboardPublishOptions:
         $ref: '#/definitions/DashboardPublishOptions'
-        description: '<p>Publishing options when creating dashboard.</p> <ul> <li> <p>AvailabilityStatus for AdHocFilteringOption - This can be either <code>ENABLED</code> or <code>DISABLED</code>. When This is set to set to <code>DISABLED</code>, QuickSight disables the left filter pane on the published dashboard, which can be used for AdHoc filtering. Enabled by default. </p> </li> <li> <p>AvailabilityStatus for ExportToCSVOption - This can be either <code>ENABLED</code> or <code>DISABLED</code>. The visual option to export data to CSV is disabled when this is set to <code>DISABLED</code>. Enabled by default. </p> </li> <li> <p>VisibilityState for SheetControlsOption - This can be either <code>COLLAPSED</code> or <code>EXPANDED</code>. The sheet controls pane is collapsed by default when set to true. Collapsed by default. </p> </li> </ul>'
+        description: '<p>Options for publishing the dashboard when you create it:</p> <ul> <li> <p> <code>AvailabilityStatus</code> for <code>AdHocFilteringOption</code> - This status can be either <code>ENABLED</code> or <code>DISABLED</code>. When this is set to <code>DISABLED</code>, QuickSight disables the left filter pane on the published dashboard, which can be used for ad hoc (one-time) filtering. This option is <code>ENABLED</code> by default. </p> </li> <li> <p> <code>AvailabilityStatus</code> for <code>ExportToCSVOption</code> - This status can be either <code>ENABLED</code> or <code>DISABLED</code>. The visual option to export data to .csv format isn''t enabled when this is set to <code>DISABLED</code>. This option is <code>ENABLED</code> by default. </p> </li> <li> <p> <code>VisibilityState</code> for <code>SheetControlsOption</code> - This visibility state can be either <code>COLLAPSED</code> or <code>EXPANDED</code>. The sheet controls pane is collapsed by default when set to true. This option is <code>COLLAPSED</code> by default. </p> </li> </ul>'
   ResourceStatus:
     type: string
     enum:
@@ -6755,11 +6755,11 @@ definitions:
     properties:
       Arn:
         $ref: '#/definitions/Arn'
-        description: The Amazon Resource name (ARN) of the permission dataset.
+        description: The Amazon Resource Name (ARN) of the permission dataset.
       PermissionPolicy:
         $ref: '#/definitions/RowLevelPermissionPolicy'
         description: Permission policy.
-    description: Row-level security configuration on the dataset.
+    description: The row-level security configuration for the dataset.
   CreateDataSetRequest:
     type: object
     required:
@@ -6782,7 +6782,7 @@ definitions:
         description: Configures the combination and transformation of the data from the physical tables.
       ImportMode:
         $ref: '#/definitions/DataSetImportMode'
-        description: Indicates whether or not you want to import the data into SPICE.
+        description: Indicates whether you want to import the data into SPICE.
       ColumnGroups:
         $ref: '#/definitions/ColumnGroupList'
         description: 'Groupings of columns that work together in certain QuickSight features. Currently, only geospatial hierarchy is supported.'
@@ -6791,7 +6791,7 @@ definitions:
         description: A list of resource permissions on the dataset.
       RowLevelPermissionDataSet:
         $ref: '#/definitions/RowLevelPermissionDataSet'
-        description: Row-level security configuration on the data you want to create.
+        description: The row-level security configuration for the data that you want to create.
       Tags:
         $ref: '#/definitions/TagList'
         description: Contains a map of the key-value pairs for the resource tag or tags assigned to the dataset.
@@ -6824,13 +6824,13 @@ definitions:
     properties:
       AmazonElasticsearchParameters:
         $ref: '#/definitions/AmazonElasticsearchParameters'
-        description: Amazon Elasticsearch parameters.
+        description: Amazon Elasticsearch Service parameters.
       AthenaParameters:
         $ref: '#/definitions/AthenaParameters'
-        description: Athena parameters.
+        description: Amazon Athena parameters.
       AuroraParameters:
         $ref: '#/definitions/AuroraParameters'
-        description: Aurora MySQL parameters.
+        description: Amazon Aurora MySQL parameters.
       AuroraPostgreSqlParameters:
         $ref: '#/definitions/AuroraPostgreSqlParameters'
         description: Aurora PostgreSQL parameters.
@@ -6854,10 +6854,10 @@ definitions:
         description: Presto parameters.
       RdsParameters:
         $ref: '#/definitions/RdsParameters'
-        description: RDS parameters.
+        description: Amazon RDS parameters.
       RedshiftParameters:
         $ref: '#/definitions/RedshiftParameters'
-        description: Redshift parameters.
+        description: Amazon Redshift parameters.
       S3Parameters:
         $ref: '#/definitions/S3Parameters'
         description: S3 parameters.
@@ -6879,7 +6879,7 @@ definitions:
       TwitterParameters:
         $ref: '#/definitions/TwitterParameters'
         description: Twitter parameters.
-    description: The parameters that QuickSight uses to connect to your underlying source. This is a variant type structure. At most one of the attributes should be non-null for this structure to be valid.
+    description: 'The parameters that Amazon QuickSight uses to connect to your underlying data source. This is a variant type structure. For this structure to be valid, only one of the attributes can be non-null.'
   DataSourceCredentials:
     type: object
     properties:
@@ -6901,7 +6901,7 @@ definitions:
     properties:
       DisableSsl:
         $ref: '#/definitions/Boolean'
-        description: A boolean flag to control whether SSL should be disabled.
+        description: A Boolean option to control whether SSL should be disabled.
     description: Secure Socket Layer (SSL) properties that apply when QuickSight connects to your underlying data source.
   CreateDataSourceRequest:
     type: object
@@ -6958,7 +6958,7 @@ definitions:
     properties:
       Arn:
         $ref: '#/definitions/Arn'
-        description: The Amazon Resource name (ARN) for the group member (user).
+        description: The Amazon Resource Name (ARN) for the group member (user).
       MemberName:
         $ref: '#/definitions/GroupMemberName'
         description: The name of the group member (user).
@@ -6984,7 +6984,7 @@ definitions:
     properties:
       Arn:
         $ref: '#/definitions/Arn'
-        description: The Amazon Resource name (ARN) for the group.
+        description: The Amazon Resource Name (ARN) for the group.
       GroupName:
         $ref: '#/definitions/GroupName'
         description: The name of the group.
@@ -7010,13 +7010,13 @@ definitions:
         description: The name of the assignment. It must be unique within an AWS account.
       AssignmentStatus:
         $ref: '#/definitions/AssignmentStatus'
-        description: '<p>The status of an assignment:</p> <ul> <li> <p>ENABLED - Anything specified in this assignment is used while creating the data source.</p> </li> <li> <p>DISABLED - This assignment isn''t used while creating the data source.</p> </li> <li> <p>DRAFT - Assignment is an unfinished draft and isn''t used while creating the data source.</p> </li> </ul>'
+        description: '<p>The status of the assignment. Possible values are as follows:</p> <ul> <li> <p> <code>ENABLED</code> - Anything specified in this assignment is used when creating the data source.</p> </li> <li> <p> <code>DISABLED</code> - This assignment isn''t used when creating the data source.</p> </li> <li> <p> <code>DRAFT</code> - This assignment is an unfinished draft and isn''t used when creating the data source.</p> </li> </ul>'
       PolicyArn:
         $ref: '#/definitions/Arn'
-        description: An IAM policy Amazon Resource Name (ARN) that you want to apply to the QuickSight users and groups specified in this assignment.
+        description: The ARN for the IAM policy to apply to the QuickSight users and groups specified in this assignment.
       Identities:
         $ref: '#/definitions/IdentityMap'
-        description: QuickSight users and/or groups that you want to assign the policy to.
+        description: 'The QuickSight users, groups, or both that you want to assign the policy to.'
   CreateIngestionRequest:
     type: object
     properties: {}
@@ -7048,7 +7048,7 @@ definitions:
         description: The display name of the template alias.
       Arn:
         $ref: '#/definitions/Arn'
-        description: The ARN of the template alias.
+        description: The Amazon Resource Name (ARN) of the template alias.
       TemplateVersionNumber:
         $ref: '#/definitions/VersionNumber'
         description: The version number of the template alias.
@@ -7081,13 +7081,13 @@ definitions:
         description: 'A list of resource permissions to be set on the template. '
       SourceEntity:
         $ref: '#/definitions/TemplateSourceEntity'
-        description: 'The Amazon Resource Name (ARN) of the source entity from which this template is being created. Templates can be currently created from an analysis or another template. If the ARN is for an analysis, you must include its dataset references. '
+        description: 'The Amazon Resource Name (ARN) of the source entity from which this template is being created. Currently, you can create a template from an analysis or another template. If the ARN is for an analysis, include its dataset references. '
       Tags:
         $ref: '#/definitions/TagList'
         description: Contains a map of the key-value pairs for the resource tag or tags assigned to the resource.
       VersionDescription:
         $ref: '#/definitions/VersionDescription'
-        description: A description of the current template version being created. This API created the first version of the template. Every time UpdateTemplate is called a new version is created. Each version of the template maintains a description of the version in the VersionDescription field.
+        description: 'A description of the current template version being created. This API operation creates the first version of the template. Every time <code>UpdateTemplate</code> is called, a new version is created. Each version of the template maintains a description of the version in the <code>VersionDescription</code> field.'
   Username:
     type: string
     minLength: 1
@@ -7135,7 +7135,7 @@ definitions:
     properties:
       CreatedTime:
         $ref: '#/definitions/Timestamp'
-        description: The time this was created.
+        description: The time that this dashboard version was created.
       Errors:
         $ref: '#/definitions/DashboardErrorList'
         description: Errors.
@@ -7147,7 +7147,7 @@ definitions:
         description: The HTTP status of the request.
       Arn:
         $ref: '#/definitions/Arn'
-        description: The Amazon Resource name (ARN) of the resource.
+        description: The Amazon Resource Name (ARN) of the resource.
       SourceEntityArn:
         $ref: '#/definitions/Arn'
         description: Source entity ARN.
@@ -7166,7 +7166,7 @@ definitions:
         description: Dashboard ID.
       Arn:
         $ref: '#/definitions/Arn'
-        description: The Amazon Resource name (ARN) of the resource.
+        description: The Amazon Resource Name (ARN) of the resource.
       Name:
         $ref: '#/definitions/DashboardName'
         description: A display name for the dataset.
@@ -7175,13 +7175,13 @@ definitions:
         description: Version.
       CreatedTime:
         $ref: '#/definitions/Timestamp'
-        description: The time this was created.
+        description: The time that this dataset was created.
       LastPublishedTime:
         $ref: '#/definitions/Timestamp'
-        description: The last time this was published.
+        description: The last time that this dataset was published.
       LastUpdatedTime:
         $ref: '#/definitions/Timestamp'
-        description: The last time this was updated.
+        description: The last time that this dataset was updated.
     description: Dashboard.
   DashboardErrorType:
     type: string
@@ -7222,25 +7222,25 @@ definitions:
     properties:
       Arn:
         $ref: '#/definitions/Arn'
-        description: The Amazon Resource name (ARN) of the resource.
+        description: The Amazon Resource Name (ARN) of the resource.
       DashboardId:
         $ref: '#/definitions/RestrictiveResourceId'
         description: Dashboard ID.
       Name:
         $ref: '#/definitions/DashboardName'
-        description: A display name for the dataset.
+        description: A display name for the dashboard.
       CreatedTime:
         $ref: '#/definitions/Timestamp'
-        description: The time this was created.
+        description: The time that this dashboard was created.
       LastUpdatedTime:
         $ref: '#/definitions/Timestamp'
-        description: The last time this was updated.
+        description: The last time that this dashboard was updated.
       PublishedVersionNumber:
         $ref: '#/definitions/VersionNumber'
         description: Published version number.
       LastPublishedTime:
         $ref: '#/definitions/Timestamp'
-        description: The last time this was published.
+        description: The last time that this dashboard was published.
     description: Dashboard summary.
   DashboardSummaryList:
     type: array
@@ -7257,10 +7257,10 @@ definitions:
     properties:
       Arn:
         $ref: '#/definitions/Arn'
-        description: The Amazon Resource name (ARN) of the resource.
+        description: The Amazon Resource Name (ARN) of the resource.
       CreatedTime:
         $ref: '#/definitions/Timestamp'
-        description: The time this was created.
+        description: The time that this dashboard version was created.
       VersionNumber:
         $ref: '#/definitions/VersionNumber'
         description: Version number.
@@ -7290,7 +7290,7 @@ definitions:
     properties:
       Arn:
         $ref: '#/definitions/Arn'
-        description: The Amazon Resource name (ARN) of the resource.
+        description: The Amazon Resource Name (ARN) of the resource.
       DataSetId:
         $ref: '#/definitions/ResourceId'
         description: The ID of the dataset.
@@ -7299,10 +7299,10 @@ definitions:
         description: A display name for the dataset.
       CreatedTime:
         $ref: '#/definitions/Timestamp'
-        description: The time this was created.
+        description: The time that this dataset was created.
       LastUpdatedTime:
         $ref: '#/definitions/Timestamp'
-        description: The last time this was updated.
+        description: The last time that this dataset was updated.
       PhysicalTableMap:
         $ref: '#/definitions/PhysicalTableMap'
         description: Declares the physical tables that are available in the underlying data sources.
@@ -7314,16 +7314,16 @@ definitions:
         description: 'The list of columns after all transforms. These columns are available in templates, analyses, and dashboards.'
       ImportMode:
         $ref: '#/definitions/DataSetImportMode'
-        description: Indicates whether or not you want to import the data into SPICE.
+        description: Indicates whether you want to import the data into SPICE.
       ConsumedSpiceCapacityInBytes:
         $ref: '#/definitions/Long'
         description: The amount of SPICE capacity used by this dataset. This is 0 if the dataset isn't imported into SPICE.
       ColumnGroups:
         $ref: '#/definitions/ColumnGroupList'
-        description: 'Groupings of columns that work together in certain QuickSight features. Currently, only geospatial hierarchy is supported.'
+        description: 'Groupings of columns that work together in certain Amazon QuickSight features. Currently, only geospatial hierarchy is supported.'
       RowLevelPermissionDataSet:
         $ref: '#/definitions/RowLevelPermissionDataSet'
-        description: Row-level security configuration on the dataset.
+        description: The row-level security configuration for the dataset.
     description: Dataset.
   DataSetSchema:
     type: object
@@ -7361,14 +7361,14 @@ definitions:
         description: Dataset placeholder.
       DataSetArn:
         $ref: '#/definitions/Arn'
-        description: Dataset ARN.
+        description: Dataset Amazon Resource Name (ARN).
     description: Dataset reference.
   DataSetSummary:
     type: object
     properties:
       Arn:
         $ref: '#/definitions/Arn'
-        description: The Amazon Resource name (ARN) of the dataset.
+        description: The Amazon Resource Name (ARN) of the dataset.
       DataSetId:
         $ref: '#/definitions/ResourceId'
         description: The ID of the dataset.
@@ -7377,16 +7377,16 @@ definitions:
         description: A display name for the dataset.
       CreatedTime:
         $ref: '#/definitions/Timestamp'
-        description: The time this was created.
+        description: The time that this dataset was created.
       LastUpdatedTime:
         $ref: '#/definitions/Timestamp'
-        description: The last time this was updated.
+        description: The last time that this dataset was updated.
       ImportMode:
         $ref: '#/definitions/DataSetImportMode'
-        description: Indicates whether or not you want to import the data into SPICE.
+        description: Indicates whether you want to import the data into SPICE.
       RowLevelPermissionDataSet:
         $ref: '#/definitions/RowLevelPermissionDataSet'
-        description: Row-level security configuration on the dataset.
+        description: The row-level security configuration for the dataset.
     description: Dataset summary.
   DataSetSummaryList:
     type: array
@@ -7401,13 +7401,13 @@ definitions:
       Message:
         $ref: '#/definitions/String'
         description: Error message.
-    description: Error information on data source creation or update.
+    description: Error information for the data source creation or update.
   DataSource:
     type: object
     properties:
       Arn:
         $ref: '#/definitions/Arn'
-        description: The Amazon Resource name (ARN) of the data source.
+        description: The Amazon Resource Name (ARN) of the data source.
       DataSourceId:
         $ref: '#/definitions/ResourceId'
         description: The ID of the data source. This ID is unique per AWS Region for each AWS account.
@@ -7416,19 +7416,19 @@ definitions:
         description: A display name for the data source.
       Type:
         $ref: '#/definitions/DataSourceType'
-        description: The type of the data source. This indicates which database engine the data source connects to.
+        description: The type of the data source. This type indicates which database engine the data source connects to.
       Status:
         $ref: '#/definitions/ResourceStatus'
         description: The HTTP status of the request.
       CreatedTime:
         $ref: '#/definitions/Timestamp'
-        description: The time this was created.
+        description: The time that this data source was created.
       LastUpdatedTime:
         $ref: '#/definitions/Timestamp'
-        description: The last time this was updated.
+        description: The last time that this data source was updated.
       DataSourceParameters:
         $ref: '#/definitions/DataSourceParameters'
-        description: The parameters that QuickSight uses to connect to your underlying source. This is a variant type structure. At most one of the attributes should be non-null for this structure to be valid.
+        description: 'The parameters that Amazon QuickSight uses to connect to your underlying source. This is a variant type structure. For this structure to be valid, only one of the attributes can be non-null.'
       VpcConnectionProperties:
         $ref: '#/definitions/VpcConnectionProperties'
         description: The VPC connection information. You need to use this parameter only when you want QuickSight to use a VPC connection when connecting to your underlying source.
@@ -7554,7 +7554,7 @@ definitions:
     properties:
       AwsAccountId:
         $ref: '#/definitions/AwsAccountId'
-        description: AWS account ID.
+        description: The AWS account ID.
       AssignmentId:
         $ref: '#/definitions/String'
         description: Assignment ID.
@@ -7563,14 +7563,14 @@ definitions:
         description: Assignment name.
       PolicyArn:
         $ref: '#/definitions/Arn'
-        description: Policy Amazon Resource Name (ARN).
+        description: The Amazon Resource Name (ARN) for the IAM policy.
       Identities:
         $ref: '#/definitions/IdentityMap'
         description: Identities.
       AssignmentStatus:
         $ref: '#/definitions/AssignmentStatus'
         description: Assignment status.
-    description: IAM policy assignment.
+    description: An IAM policy assignment.
   DescribeIngestionRequest:
     type: object
     properties: {}
@@ -7583,7 +7583,7 @@ definitions:
     properties:
       Arn:
         $ref: '#/definitions/Arn'
-        description: The Amazon Resource name (ARN) of the resource.
+        description: The Amazon Resource Name (ARN) of the resource.
       IngestionId:
         $ref: '#/definitions/IngestionId'
         description: Ingestion ID.
@@ -7599,20 +7599,20 @@ definitions:
         $ref: '#/definitions/QueueInfo'
       CreatedTime:
         $ref: '#/definitions/timestamp'
-        description: The time this ingestion started.
+        description: The time that this ingestion started.
       IngestionTimeInSeconds:
         $ref: '#/definitions/long'
-        description: 'The time this ingestion took, measured in seconds.'
+        description: 'The time that this ingestion took, measured in seconds.'
       IngestionSizeInBytes:
         $ref: '#/definitions/long'
-        description: Size of the data ingested in bytes.
+        description: 'The size of the data ingested, in bytes.'
       RequestSource:
         $ref: '#/definitions/IngestionRequestSource'
         description: Event source for this ingestion.
       RequestType:
         $ref: '#/definitions/IngestionRequestType'
         description: Type of this ingestion.
-    description: Information on the SPICE ingestion for a dataset.
+    description: Information about the SPICE ingestion for a dataset.
   DescribeTemplateAliasRequest:
     type: object
     properties: {}
@@ -7643,7 +7643,7 @@ definitions:
       CreatedTime:
         $ref: '#/definitions/Timestamp'
         description: Time when this was created.
-    description: <p>A template object. A template is an entity in QuickSight which encapsulates the metadata required to create an analysis that can be used to create dashboard. It adds a layer of abstraction by replacing the dataset associated with the analysis with placeholders. Templates can be used to create dashboards by replacing dataset placeholders with datasets which follow the same schema that was used to create the source analysis and template.</p> <p>You can share templates across AWS accounts by allowing users in other AWS accounts to create a template or a dashboard from an existing template.</p>
+    description: <p>A template object. A <i>template</i> is an entity in QuickSight that encapsulates the metadata required to create an analysis and that you can use to create a dashboard. A template adds a layer of abstraction by using placeholders to replace the dataset associated with the analysis. You can use templates to create dashboards by replacing dataset placeholders with datasets that follow the same schema that was used to create the source analysis and template.</p> <p>You can share templates across AWS accounts by allowing users in other AWS accounts to create a template or a dashboard from an existing template.</p>
   DescribeUserRequest:
     type: object
     properties: {}
@@ -7652,7 +7652,7 @@ definitions:
     properties:
       Arn:
         $ref: '#/definitions/Arn'
-        description: The Amazon Resource name (ARN) for the user.
+        description: The Amazon Resource Name (ARN) for the user.
       UserName:
         $ref: '#/definitions/UserName'
         description: The user's user name.
@@ -7667,7 +7667,7 @@ definitions:
         description: The type of identity authentication used by the user.
       Active:
         $ref: '#/definitions/Boolean'
-        description: 'Active status of user. When you create an Amazon QuickSight user that’s not an IAM user or an AD user, that user is inactive until they sign in and provide a password.'
+        description: 'The active status of user. When you create an Amazon QuickSight user that’s not an IAM user or an Active Directory user, that user is inactive until they sign in and provide a password.'
       PrincipalId:
         $ref: '#/definitions/String'
         description: The principal ID of the user.
@@ -7729,8 +7729,8 @@ definitions:
         description: Error type.
       Message:
         $ref: '#/definitions/string'
-        description: Error essage.
-    description: Error information on a data set SPICE ingestion.
+        description: Error message.
+    description: Error information for the SPICE ingestion of a dataset.
   FileFormat:
     type: string
     enum:
@@ -7747,8 +7747,8 @@ definitions:
     properties:
       ConditionExpression:
         $ref: '#/definitions/Expression'
-        description: An expression that must evaluate to a boolean value. Rows for which the expression is evaluated to true are kept in the dataset.
-    description: A transform operation that filters rows based on some condition.
+        description: An expression that must evaluate to a Boolean value. Rows for which the expression evaluates to true are kept in the dataset.
+    description: A transform operation that filters rows based on a condition.
   GeoSpatialCountryCode:
     type: string
     enum:
@@ -7784,7 +7784,7 @@ definitions:
       AssignmentStatus:
         $ref: '#/definitions/AssignmentStatus'
         description: Assignment status.
-    description: IAM policy assignment Summary.
+    description: IAM policy assignment summary.
   IAMPolicyAssignmentSummaryList:
     type: array
     items:
@@ -7802,7 +7802,7 @@ definitions:
       RowsDropped:
         $ref: '#/definitions/long'
         description: The number of rows that were not ingested.
-    description: Information on rows during a data set SPICE ingestion.
+    description: Information about rows for a data set SPICE ingestion.
   QueueInfo:
     type: object
     required:
@@ -7815,7 +7815,7 @@ definitions:
       QueuedIngestion:
         $ref: '#/definitions/string'
         description: The ID of the ongoing ingestion. The queued ingestion is waiting for the ongoing ingestion to complete.
-    description: Information on queued dataset SPICE ingestion.
+    description: Information about a queued dataset SPICE ingestion.
   timestamp:
     type: string
     format: date-time
@@ -7863,7 +7863,7 @@ definitions:
       Type:
         $ref: '#/definitions/InputColumnDataType'
         description: The data type of the column.
-    description: Metadata on a column that is used as the input of a transform operation.
+    description: Metadata for a column that is used as the input of a transform operation.
   InstanceId:
     type: string
     minLength: 1
@@ -7956,7 +7956,7 @@ definitions:
     properties:
       AssignmentStatus:
         $ref: '#/definitions/AssignmentStatus'
-        description: The status of the assignment.
+        description: The status of the assignments.
   ListIngestionsRequest:
     type: object
     properties: {}
@@ -8016,7 +8016,7 @@ definitions:
       PhysicalTableId:
         $ref: '#/definitions/PhysicalTableId'
         description: Physical table ID.
-    description: Information on the source of a logical table. This is a variant type structure. No more than one of the attributes should be non-null for this structure to be valid.
+    description: 'Information about the source of a logical table. This is a variant type structure. For this structure to be valid, only one of the attributes can be non-null.'
   PhysicalTableId:
     type: string
     pattern: '[0-9a-zA-Z-]*'
@@ -8069,10 +8069,10 @@ definitions:
         description: The Amazon Resource Name (ARN) for the data source.
       Schema:
         $ref: '#/definitions/RelationalTableSchema'
-        description: The schema name. Applies to certain relational database engines.
+        description: The schema name. This name applies to certain relational database engines.
       Name:
         $ref: '#/definitions/RelationalTableName'
-        description: Name of the relational table.
+        description: The name of the relational table.
       InputColumns:
         $ref: '#/definitions/InputColumnList'
         description: The column schema of the table.
@@ -8085,10 +8085,10 @@ definitions:
     properties:
       DataSourceArn:
         $ref: '#/definitions/Arn'
-        description: Data source ARN.
+        description: The amazon Resource Name (ARN) for the data source.
       UploadSettings:
         $ref: '#/definitions/UploadSettings'
-        description: Information on the S3 source file(s) format.
+        description: Information about the format for the S3 source file or files.
       InputColumns:
         $ref: '#/definitions/InputColumnList'
         description: A physical table type for as S3 data source.
@@ -8172,10 +8172,10 @@ definitions:
     properties:
       ColumnName:
         $ref: '#/definitions/ColumnName'
-        description: Name of the column to be renamed.
+        description: The name of the column to be renamed.
       NewColumnName:
         $ref: '#/definitions/ColumnName'
-        description: New name for the column.
+        description: The new name for the column.
     description: A transform operation that renames a column.
   UploadSettings:
     type: object
@@ -8188,14 +8188,14 @@ definitions:
         description: A row number to start reading data from.
       ContainsHeader:
         $ref: '#/definitions/Boolean'
-        description: Whether or not the file(s) has a header row.
+        description: 'Whether the file has a header row, or the files each have a header row.'
       TextQualifier:
         $ref: '#/definitions/TextQualifier'
         description: Text qualifier.
       Delimiter:
         $ref: '#/definitions/Delimiter'
         description: The delimiter between values in the file.
-    description: Information on source file(s) format.
+    description: Information about the format for a source file or files.
   Warehouse:
     type: string
     maxLength: 128
@@ -8252,7 +8252,7 @@ definitions:
     properties:
       CreatedTime:
         $ref: '#/definitions/Timestamp'
-        description: The time this was created.
+        description: The time that this template version was created.
       Errors:
         $ref: '#/definitions/TemplateErrorList'
         description: Errors associated with the template.
@@ -8300,7 +8300,7 @@ definitions:
         description: A summary of a template.
       TemplateId:
         $ref: '#/definitions/RestrictiveResourceId'
-        description: The ID of the template. This is unique per AWS Region for each AWS account.
+        description: The ID of the template. This ID is unique per AWS Region for each AWS account.
       Name:
         $ref: '#/definitions/TemplateName'
         description: A display name for the template.
@@ -8309,10 +8309,10 @@ definitions:
         description: A structure containing a list of version numbers for the template summary.
       CreatedTime:
         $ref: '#/definitions/Timestamp'
-        description: The last time this was created.
+        description: The last time that this template was created.
       LastUpdatedTime:
         $ref: '#/definitions/Timestamp'
-        description: The last time this was updated.
+        description: The last time that this template was updated.
     description: The template summary.
   TemplateVersionSummary:
     type: object
@@ -8325,13 +8325,13 @@ definitions:
         description: The version number of the template version.
       CreatedTime:
         $ref: '#/definitions/Timestamp'
-        description: The time this was created.
+        description: The time that this template version was created.
       Status:
         $ref: '#/definitions/ResourceStatus'
         description: The status of the template version.
       Description:
         $ref: '#/definitions/VersionDescription'
-        description: The desription of the template version.
+        description: The description of the template version.
     description: The template version.
   TextQualifier:
     type: string
@@ -8359,7 +8359,7 @@ definitions:
       TagColumnOperation:
         $ref: '#/definitions/TagColumnOperation'
         description: An operation that tags a column with additional information.
-    description: A data transformation on a logical table. This is a variant type structure. No more than one of the attributes should be non-null for this structure to be valid.
+    description: 'A data transformation on a logical table. This is a variant type structure. For this structure to be valid, only one of the attributes can be non-null.'
   UntagResourceRequest:
     type: object
     properties: {}
@@ -8392,7 +8392,7 @@ definitions:
         description: The display name of the dashboard.
       SourceEntity:
         $ref: '#/definitions/DashboardSourceEntity'
-        description: The template or analysis from which the dashboard is created. The SouceTemplate entity accepts the Arn of the template and also references to replacement datasets for the placeholders set when creating the template. The replacement datasets need to follow the same schema as the datasets for which placeholders were created when creating the template.
+        description: The template or analysis from which the dashboard is created. The <code>SouceTemplate</code> entity accepts the Amazon Resource Name (ARN) of the template and also references to replacement datasets for the placeholders set when creating the template. The replacement datasets need to follow the same schema as the datasets for which placeholders were created when creating the template.
       Parameters:
         $ref: '#/definitions/Parameters'
         description: A structure that contains the parameters of the dashboard.
@@ -8401,7 +8401,7 @@ definitions:
         description: A description for the first version of the dashboard being created.
       DashboardPublishOptions:
         $ref: '#/definitions/DashboardPublishOptions'
-        description: '<p>Publishing options when creating a dashboard.</p> <ul> <li> <p>AvailabilityStatus for AdHocFilteringOption - This can be either <code>ENABLED</code> or <code>DISABLED</code>. When This is set to set to <code>DISABLED</code>, QuickSight disables the left filter pane on the published dashboard, which can be used for AdHoc filtering. Enabled by default. </p> </li> <li> <p>AvailabilityStatus for ExportToCSVOption - This can be either <code>ENABLED</code> or <code>DISABLED</code>. The visual option to export data to CSV is disabled when this is set to <code>DISABLED</code>. Enabled by default. </p> </li> <li> <p>VisibilityState for SheetControlsOption - This can be either <code>COLLAPSED</code> or <code>EXPANDED</code>. The sheet controls pane is collapsed by default when set to true. Collapsed by default. </p> </li> </ul>'
+        description: '<p>Options for publishing the dashboard when you create it:</p> <ul> <li> <p> <code>AvailabilityStatus</code> for <code>AdHocFilteringOption</code> - This status can be either <code>ENABLED</code> or <code>DISABLED</code>. When this is set to <code>DISABLED</code>, QuickSight disables the left filter pane on the published dashboard, which can be used for ad hoc (one-time) filtering. This option is <code>ENABLED</code> by default. </p> </li> <li> <p> <code>AvailabilityStatus</code> for <code>ExportToCSVOption</code> - This status can be either <code>ENABLED</code> or <code>DISABLED</code>. The visual option to export data to .csv format isn''t enabled when this is set to <code>DISABLED</code>. This option is <code>ENABLED</code> by default. </p> </li> <li> <p> <code>VisibilityState</code> for <code>SheetControlsOption</code> - This visibility state can be either <code>COLLAPSED</code> or <code>EXPANDED</code>. The sheet controls pane is collapsed by default when set to true. This option is <code>COLLAPSED</code> by default. </p> </li> </ul>'
   UpdateDataSetPermissionsRequest:
     type: object
     properties:
@@ -8429,13 +8429,13 @@ definitions:
         description: Configures the combination and transformation of the data from the physical tables.
       ImportMode:
         $ref: '#/definitions/DataSetImportMode'
-        description: Indicates whether or not you want to import the data into SPICE.
+        description: Indicates whether you want to import the data into SPICE.
       ColumnGroups:
         $ref: '#/definitions/ColumnGroupList'
         description: 'Groupings of columns that work together in certain QuickSight features. Currently, only geospatial hierarchy is supported.'
       RowLevelPermissionDataSet:
         $ref: '#/definitions/RowLevelPermissionDataSet'
-        description: Row-level security configuration on the data you want to create.
+        description: The row-level security configuration for the data you want to create.
   UpdateDataSourcePermissionsRequest:
     type: object
     properties:
@@ -8476,13 +8476,13 @@ definitions:
     properties:
       AssignmentStatus:
         $ref: '#/definitions/AssignmentStatus'
-        description: '<p>The status of an assignment:</p> <ul> <li> <p>ENABLED - Anything specified in this assignment is used while creating the data source.</p> </li> <li> <p>DISABLED - This assignment isn''t used while creating the data source.</p> </li> <li> <p>DRAFT - Assignment is an unfinished draft and isn''t used while creating the data source.</p> </li> </ul>'
+        description: '<p>The status of the assignment. Possible values are as follows:</p> <ul> <li> <p> <code>ENABLED</code> - Anything specified in this assignment is used when creating the data source.</p> </li> <li> <p> <code>DISABLED</code> - This assignment isn''t used when creating the data source.</p> </li> <li> <p> <code>DRAFT</code> - This assignment is an unfinished draft and isn''t used when creating the data source.</p> </li> </ul>'
       PolicyArn:
         $ref: '#/definitions/Arn'
-        description: An IAM policy Amazon Resource Name (ARN) that will be applied to specified QuickSight users and groups in this assignment.
+        description: The ARN for the IAM policy to apply to the QuickSight users and groups specified in this assignment.
       Identities:
         $ref: '#/definitions/IdentityMap'
-        description: QuickSight users and/or groups that you want to assign to the specified IAM policy.
+        description: 'The QuickSight users, groups, or both that you want to assign the policy to.'
   UpdateTemplateAliasRequest:
     type: object
     required:
@@ -8507,10 +8507,10 @@ definitions:
     properties:
       SourceEntity:
         $ref: '#/definitions/TemplateSourceEntity'
-        description: The source QuickSight entity from which this template is being created. Templates can be currently created from an Analysis or another template.
+        description: The source QuickSight entity from which this template is being updated. You can currently update templates from an Analysis or another template.
       VersionDescription:
         $ref: '#/definitions/VersionDescription'
-        description: A description of the current template version being updated. Every time you cal <code>UpdateTemplate</code> you create a new version. Each version of the template maintains a description of the version in the <code>VersionDescription</code> field.
+        description: 'A description of the current template version that is being updated. Every time you call <code>UpdateTemplate</code>, you create a new version of the template. Each version of the template maintains a description of the version in the <code>VersionDescription</code> field.'
       Name:
         $ref: '#/definitions/TemplateName'
         description: The name for the template.

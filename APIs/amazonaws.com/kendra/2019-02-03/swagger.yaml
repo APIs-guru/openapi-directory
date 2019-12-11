@@ -1361,7 +1361,7 @@ definitions:
         description: An IAM role that gives Amazon Kendra permissions to access your Amazon CloudWatch logs and metrics. This is also the role used when you use the <code>BatchPutDocument</code> operation to index documents from an Amazon S3 bucket.
       ServerSideEncryptionConfiguration:
         $ref: '#/definitions/ServerSideEncryptionConfiguration'
-        description: 'The identifier of the KMS key to use to encrypt data indexed by Amazon Kendra. '
+        description: The identifier of the AWS KMS customer managed key (CMK) to use to encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support asymmetric CMKs.
       Description:
         $ref: '#/definitions/Description'
         description: A description for the index.
@@ -1494,7 +1494,7 @@ definitions:
         description: The Amazon Resource Name (ARN) of the IAM role that gives Amazon Kendra permission to write to your Amazon Cloudwatch logs.
       ServerSideEncryptionConfiguration:
         $ref: '#/definitions/ServerSideEncryptionConfiguration'
-        description: 'The identifier of the KMS key used to encrypt your data. '
+        description: The identifier of the AWS KMS customer master key (CMK) used to encrypt your data. Amazon Kendra doesn't support asymmetric CMKs.
       Status:
         $ref: '#/definitions/IndexStatus'
         description: 'The current status of the index. When the value is <code>ACTIVE</code>, the index is ready for use. If the <code>Status</code> field value is <code>FAILED</code>, the <code>ErrorMessage</code> field contains a message that explains why.'
@@ -1764,7 +1764,7 @@ definitions:
         description: 'The document metadata to update. '
   S3ObjectKey:
     type: string
-    pattern: '^\P{C}*$'
+    pattern: .*
     minLength: 1
     maxLength: 1024
   AccessControlListConfiguration:
@@ -2147,8 +2147,8 @@ definitions:
     properties:
       KmsKeyId:
         $ref: '#/definitions/KmsKeyId'
-        description: The identifier of the KMS key.
-    description: Provides the identifier of the KMS key used to encrypt data indexed by Amazon Kendra.
+        description: The identifier of the AWS KMS customer master key (CMK). Amazon Kendra doesn't support asymmetric CMKs.
+    description: Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support asymmetric CMKs.
   S3DataSourceConfiguration:
     type: object
     required:
@@ -2162,7 +2162,7 @@ definitions:
         description: A list of S3 prefixes for the documents that should be included in the index.
       ExclusionPatterns:
         $ref: '#/definitions/DataSourceInclusionsExclusionsStrings'
-        description: '<p>A list of glob patterns for documents that should not be indexed. If a document that matches an inclusion prefix also matches an exclusion pattern, the document is not indexed.</p> <p>For more information about glob patterns, see <a href="http://wikipedia.org/wiki/Glob_%28programming529">glob (programming)</a> in <i>Wikipedia</i>.</p>'
+        description: '<p>A list of glob patterns for documents that should not be indexed. If a document that matches an inclusion prefix also matches an exclusion pattern, the document is not indexed.</p> <p>For more information about glob patterns, see <a href="http://wikipedia.org/wiki/Glob_%28programming%29">glob (programming)</a> in <i>Wikipedia</i>.</p>'
       DocumentsMetadataConfiguration:
         $ref: '#/definitions/DocumentsMetadataConfiguration'
       AccessControlListConfiguration:
@@ -2193,6 +2193,9 @@ definitions:
       FieldMappings:
         $ref: '#/definitions/DataSourceToIndexFieldMappingList'
         description: 'A list of <code>DataSourceToIndexFieldMapping</code> objects that map Microsoft SharePoint attributes to custom fields in the Amazon Kendra index. You must first create the index fields using the operation before you map SharePoint attributes. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html">Mapping Data Source Fields</a>.'
+      DocumentTitleFieldName:
+        $ref: '#/definitions/DataSourceFieldName'
+        description: The Microsoft SharePoint attribute field that contains the title of the document.
     description: Provides configuration information for connecting to a Microsoft SharePoint data source.
   DatabaseConfiguration:
     type: object
@@ -2735,7 +2738,7 @@ definitions:
       - DESCENDING
   PrincipalName:
     type: string
-    pattern: '^[^''/\[\]:=,;?*\\\u0022\u003C\u003E]*$'
+    pattern: '^\P{C}*$'
     minLength: 1
     maxLength: 200
   PrincipalType:

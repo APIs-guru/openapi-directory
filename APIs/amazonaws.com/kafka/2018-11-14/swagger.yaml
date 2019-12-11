@@ -213,6 +213,7 @@ paths:
               - brokerNodeGroupInfo
               - clusterName
               - configurationInfo
+              - openMonitoring
               - kafkaVersion
               - numberOfBrokerNodes
             properties:
@@ -324,6 +325,19 @@ paths:
                   - DEFAULT
                   - PER_BROKER
                   - PER_TOPIC_PER_BROKER
+              openMonitoring:
+                description: |2-
+
+                              <p>JMX and Node monitoring for the MSK cluster.</p>
+                           
+                type: object
+                properties:
+                  Prometheus:
+                    $ref: '#/definitions/PrometheusInfo'
+                    description: |2-
+
+                                  <p>Prometheus settings.</p>
+                               
               kafkaVersion:
                 description: |2-
 
@@ -1489,6 +1503,93 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/clusters/{clusterArn}/monitoring':
+    put:
+      operationId: UpdateMonitoring
+      description: |2-
+
+                    <p>Updates the monitoring settings for the cluster. You can use this operation to specify which Apache Kafka metrics you want Amazon MSK to send to Amazon CloudWatch. You can also specify settings for open monitoring with Prometheus.</p>
+                 
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateMonitoringResponse'
+        '480':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '484':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: clusterArn
+          in: path
+          required: true
+          description: |2-
+
+                        <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>
+                     
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - currentVersion
+              - openMonitoring
+            properties:
+              currentVersion:
+                description: |2-
+
+                              <p>The version of the MSK cluster to update. Cluster versions aren't simple numbers. You can describe an MSK cluster to find its version. When this update operation is successful, it generates a new cluster version.</p>
+                           
+                type: string
+              enhancedMonitoring:
+                description: |2-
+
+                              <p>Specifies which metrics are gathered for the MSK cluster. This property has three possible values: DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER. For a list of the metrics associated with each of these three levels of monitoring, see <a href="https://docs.aws.amazon.com/msk/latest/developerguide/monitoring.html">Monitoring</a>.</p>
+                           
+                type: string
+                enum:
+                  - DEFAULT
+                  - PER_BROKER
+                  - PER_TOPIC_PER_BROKER
+              openMonitoring:
+                description: |2-
+
+                              <p>JMX and Node monitoring for the MSK cluster.</p>
+                           
+                type: object
+                properties:
+                  Prometheus:
+                    $ref: '#/definitions/PrometheusInfo'
+                    description: |2-
+
+                                  <p>Prometheus settings.</p>
+                               
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   CreateClusterResponse:
     type: object
@@ -1599,6 +1700,25 @@ definitions:
     description: |2-
 
                   <p>The settings for encrypting data in transit.</p>
+               
+  PrometheusInfo:
+    type: object
+    properties:
+      JmxExporter:
+        $ref: '#/definitions/JmxExporterInfo'
+        description: |2-
+
+                      <p>Indicates whether you want to enable or disable the JMX Exporter.</p>
+                   
+      NodeExporter:
+        $ref: '#/definitions/NodeExporterInfo'
+        description: |2-
+
+                      <p>Indicates whether you want to enable or disable the Node Exporter.</p>
+                   
+    description: |2-
+
+                  <p>Prometheus settings.</p>
                
   BadRequestException: {}
   InternalServerErrorException: {}
@@ -1910,6 +2030,21 @@ definitions:
 
                       <p>The Amazon Resource Name (ARN) of the cluster operation.</p>
                    
+  UpdateMonitoringResponse:
+    type: object
+    properties:
+      ClusterArn:
+        $ref: '#/definitions/__string'
+        description: |2-
+
+                      <p>The Amazon Resource Name (ARN) of the cluster.</p>
+                   
+      ClusterOperationArn:
+        $ref: '#/definitions/__string'
+        description: |2-
+
+                      <p>The Amazon Resource Name (ARN) of the cluster operation.</p>
+                   
   __integer:
     type: integer
   BrokerNodeGroupInfo:
@@ -2080,6 +2215,21 @@ definitions:
 
                   <p>Specifies which metrics are gathered for the MSK cluster. This property has three possible values: DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER. For a list of the metrics associated with each of these three levels of monitoring, see <a href="https://docs.aws.amazon.com/msk/latest/developerguide/monitoring.html">Monitoring</a>.</p>
                
+  OpenMonitoring:
+    type: object
+    required:
+      - Prometheus
+    properties:
+      Prometheus:
+        $ref: '#/definitions/Prometheus'
+        description: |2-
+
+                      <p>Prometheus settings.</p>
+                   
+    description: |2-
+
+                  <p>JMX and Node monitoring for the MSK cluster.</p>
+               
   ClusterState:
     type: string
     enum:
@@ -2159,6 +2309,12 @@ definitions:
 
                       <p>Specifies which metrics are gathered for the MSK cluster. This property has three possible values: DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER. For a list of the metrics associated with each of these three levels of monitoring, see <a href="https://docs.aws.amazon.com/msk/latest/developerguide/monitoring.html">Monitoring</a>.</p>
                    
+      OpenMonitoring:
+        $ref: '#/definitions/OpenMonitoring'
+        description: |2-
+
+                      <p>Settings for open monitoring using Prometheus.</p>
+                   
       NumberOfBrokerNodes:
         $ref: '#/definitions/__integer'
         description: |2-
@@ -2226,6 +2382,18 @@ definitions:
         description: |2-
 
                       <p>The number of broker nodes in the cluster.</p>
+                   
+      EnhancedMonitoring:
+        $ref: '#/definitions/EnhancedMonitoring'
+        description: |2-
+
+                      <p>Specifies which Apache Kafka metrics Amazon MSK gathers and sends to Amazon CloudWatch for this cluster.</p>
+                   
+      OpenMonitoring:
+        $ref: '#/definitions/OpenMonitoring'
+        description: |2-
+
+                      <p>The settings for open monitoring.</p>
                    
     description: |2-
 
@@ -2402,6 +2570,21 @@ definitions:
     type: string
     minLength: 1
     maxLength: 64
+  OpenMonitoringInfo:
+    type: object
+    required:
+      - Prometheus
+    properties:
+      Prometheus:
+        $ref: '#/definitions/PrometheusInfo'
+        description: |2-
+
+                      <p>Prometheus settings.</p>
+                   
+    description: |2-
+
+                  <p>JMX and Node monitoring for the MSK cluster.</p>
+               
   __stringMin1Max128:
     type: string
     minLength: 1
@@ -2453,6 +2636,12 @@ definitions:
         description: |2-
 
                       <p>Specifies the level of monitoring for the MSK cluster. The possible values are DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER.</p>
+                   
+      OpenMonitoring:
+        $ref: '#/definitions/OpenMonitoringInfo'
+        description: |2-
+
+                      <p>The settings for open monitoring.</p>
                    
       KafkaVersion:
         $ref: '#/definitions/__stringMin1Max128'
@@ -2589,6 +2778,85 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/BrokerEBSVolumeInfo'
+  NodeExporter:
+    type: object
+    required:
+      - EnabledInBroker
+    properties:
+      EnabledInBroker:
+        $ref: '#/definitions/__boolean'
+        description: |2-
+
+                      <p>Indicates whether you want to enable or disable the Node Exporter.</p>
+                   
+    description: |2-
+
+                  <p>Indicates whether you want to enable or disable the Node Exporter.</p>
+               
+  NodeExporterInfo:
+    type: object
+    required:
+      - EnabledInBroker
+    properties:
+      EnabledInBroker:
+        $ref: '#/definitions/__boolean'
+        description: |2-
+
+                      <p>Indicates whether you want to enable or disable the Node Exporter.</p>
+                   
+    description: |2-
+
+                  <p>Indicates whether you want to enable or disable the Node Exporter.</p>
+               
+  JmxExporter:
+    type: object
+    required:
+      - EnabledInBroker
+    properties:
+      EnabledInBroker:
+        $ref: '#/definitions/__boolean'
+        description: |2-
+
+                      <p>Indicates whether you want to enable or disable the JMX Exporter.</p>
+                   
+    description: |2-
+
+                  <p>Indicates whether you want to enable or disable the JMX Exporter.</p>
+               
+  JmxExporterInfo:
+    type: object
+    required:
+      - EnabledInBroker
+    properties:
+      EnabledInBroker:
+        $ref: '#/definitions/__boolean'
+        description: |2-
+
+                      <p>Indicates whether you want to enable or disable the JMX Exporter.</p>
+                   
+    description: |2-
+
+                  <p>Indicates whether you want to enable or disable the JMX Exporter.</p>
+               
+  Prometheus:
+    type: object
+    properties:
+      JmxExporter:
+        $ref: '#/definitions/JmxExporter'
+        description: |2-
+
+                      <p>Indicates whether you want to enable or disable the JMX Exporter.</p>
+                   
+      NodeExporter:
+        $ref: '#/definitions/NodeExporter'
+        description: |2-
+
+                      <p>Indicates whether you want to enable or disable the Node Exporter.</p>
+                   
+    description: |2-
+
+                  <p>Prometheus settings.</p>
+               
   NodeType:
     type: string
     enum:
@@ -2745,3 +3013,27 @@ definitions:
 
                       <p>The version of the cluster that needs to be updated.</p>
                    
+  UpdateMonitoringRequest:
+    type: object
+    required:
+      - CurrentVersion
+    properties:
+      CurrentVersion:
+        $ref: '#/definitions/__string'
+        description: |2-
+
+                      <p>The version of the MSK cluster to update. Cluster versions aren't simple numbers. You can describe an MSK cluster to find its version. When this update operation is successful, it generates a new cluster version.</p>
+                   
+      EnhancedMonitoring:
+        $ref: '#/definitions/EnhancedMonitoring'
+        description: |2-
+
+                      <p>Specifies which Apache Kafka metrics Amazon MSK gathers and sends to Amazon CloudWatch for this cluster.</p>
+                   
+      OpenMonitoring:
+        $ref: '#/definitions/OpenMonitoringInfo'
+        description: |2-
+
+                      <p>The settings for open monitoring.</p>
+                   
+    description: Request body for UpdateMonitoring.

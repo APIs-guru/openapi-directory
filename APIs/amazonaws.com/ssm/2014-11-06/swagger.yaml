@@ -2551,6 +2551,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonSSM.GetCalendarState':
+    post:
+      operationId: GetCalendarState
+      description: 'Gets the state of the AWS Systems Manager Change Calendar at an optional, specified time. If you specify a time, <code>GetCalendarState</code> returns the state of the calendar at a specific time, and returns the next time that the Change Calendar state will transition. If you do not specify a time, <code>GetCalendarState</code> assumes the current time. Change Calendar entries have two possible states: <code>OPEN</code> or <code>CLOSED</code>. For more information about Systems Manager Change Calendar, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar.html">AWS Systems Manager Change Calendar</a> in the <i>AWS Systems Manager User Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetCalendarStateResponse'
+        '480':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '481':
+          description: InvalidDocument
+          schema:
+            $ref: '#/definitions/InvalidDocument'
+        '482':
+          description: InvalidDocumentType
+          schema:
+            $ref: '#/definitions/InvalidDocumentType'
+        '483':
+          description: UnsupportedCalendarException
+          schema:
+            $ref: '#/definitions/UnsupportedCalendarException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetCalendarStateRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonSSM.GetCalendarState
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AmazonSSM.GetCommandInvocation':
     post:
       operationId: GetCommandInvocation
@@ -6830,7 +6875,7 @@ definitions:
         description: The number of instances with patches installed that aren't defined in the patch baseline.
       InstancesWithInstalledPendingRebootPatches:
         $ref: '#/definitions/InstancesCount'
-        description: The number of instances with patches installed that have not been rebooted after the patch installation. The status of these instances is NON_COMPLIANT.
+        description: 'Reserved for future use. '
       InstancesWithInstalledRejectedPatches:
         $ref: '#/definitions/InstancesCount'
         description: '<p>The number of instances with patches installed that are specified in a RejectedPatches list. Patches with a status of <i>INSTALLED_REJECTED</i> were typically installed before they were added to a RejectedPatches list.</p> <note> <p>If ALLOW_AS_DEPENDENCY is the specified option for RejectedPatchesAction, the value of InstancesWithInstalledRejectedPatches will always be 0 (zero).</p> </note>'
@@ -6945,6 +6990,31 @@ definitions:
       AutomationExecutionId:
         $ref: '#/definitions/AutomationExecutionId'
         description: The unique identifier for an existing automation execution to examine. The execution ID is returned by StartAutomationExecution when the execution of an Automation document is initiated.
+  GetCalendarStateResponse:
+    type: object
+    properties:
+      State:
+        $ref: '#/definitions/CalendarState'
+        description: 'The state of the calendar. An <code>OPEN</code> calendar indicates that actions are allowed to proceed, and a <code>CLOSED</code> calendar indicates that actions are not allowed to proceed.'
+      AtTime:
+        $ref: '#/definitions/ISO8601String'
+        description: 'The time, as an <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> string, that you specified in your command. If you did not specify a time, <code>GetCalendarState</code> uses the current time.'
+      NextTransitionTime:
+        $ref: '#/definitions/ISO8601String'
+        description: 'The time, as an <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> string, that the calendar state will change. If the current calendar state is <code>OPEN</code>, <code>NextTransitionTime</code> indicates when the calendar state changes to <code>CLOSED</code>, and vice-versa.'
+  GetCalendarStateRequest:
+    type: object
+    required:
+      - CalendarNames
+    properties:
+      CalendarNames:
+        $ref: '#/definitions/CalendarNameOrARNList'
+        description: The names or Amazon Resource Names (ARNs) of the Systems Manager documents that represent the calendar entries for which you want to get the state.
+      AtTime:
+        $ref: '#/definitions/ISO8601String'
+        description: '(Optional) The specific time for which you want to get calendar state information, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format. If you do not add <code>AtTime</code>, the current time is assumed.'
+  InvalidDocumentType: {}
+  UnsupportedCalendarException: {}
   GetCommandInvocationResult:
     type: object
     properties:
@@ -10042,6 +10112,17 @@ definitions:
     maxLength: 128
   BatchErrorMessage:
     type: string
+  CalendarNameOrARN:
+    type: string
+  CalendarNameOrARNList:
+    type: array
+    items:
+      $ref: '#/definitions/CalendarNameOrARN'
+  CalendarState:
+    type: string
+    enum:
+      - OPEN
+      - CLOSED
   CommandId:
     type: string
     minLength: 36
@@ -10414,8 +10495,6 @@ definitions:
     maxLength: 100
   ComplianceItemId:
     type: string
-    minLength: 1
-    maxLength: 100
   ComplianceItemTitle:
     type: string
     maxLength: 500
@@ -10691,11 +10770,13 @@ definitions:
       - ApplicationConfiguration
       - ApplicationConfigurationSchema
       - DeploymentStrategy
+      - ChangeCalendar
   DocumentFormat:
     type: string
     enum:
       - YAML
       - JSON
+      - TEXT
   TargetType:
     type: string
     pattern: '^\/[\w\.\-\:\/]*$'
@@ -11567,6 +11648,8 @@ definitions:
         $ref: '#/definitions/AutomationParameterMap'
         description: Detailed information about the Automation step failure.
     description: Information about an Automation failure.
+  ISO8601String:
+    type: string
   StringDateTime:
     type: string
     pattern: '^([\-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24\:?00)([\.,]\d(?!:))?)?(\17[0-5]\d([\.,]\d)?)?([zZ]|([\-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?$'
@@ -12172,7 +12255,7 @@ definitions:
         description: The number of patches not specified in the patch baseline that are installed on the instance.
       InstalledPendingRebootCount:
         $ref: '#/definitions/PatchInstalledPendingRebootCount'
-        description: The number of patches installed since the last time the instance was rebooted.
+        description: Reserved for future use.
       InstalledRejectedCount:
         $ref: '#/definitions/PatchInstalledRejectedCount'
         description: '<p>The number of instances with patches installed that are specified in a RejectedPatches list. Patches with a status of <i>InstalledRejected</i> were typically installed before they were added to a RejectedPatches list.</p> <note> <p>If ALLOW_AS_DEPENDENCY is the specified option for RejectedPatchesAction, the value of InstalledRejectedCount will always be 0 (zero).</p> </note>'
@@ -12199,10 +12282,10 @@ definitions:
         description: 'The type of patching operation that was performed: SCAN (assess patch compliance state) or INSTALL (install missing patches).'
       LastNoRebootInstallOperationTime:
         $ref: '#/definitions/DateTime'
-        description: The time of the last attempt to patch the instance with <code>NoReboot</code> specified as the reboot option.
+        description: 'Reserved for future use. '
       RebootOption:
         $ref: '#/definitions/RebootOption'
-        description: '<p>Indicates the reboot option specified in the patch baseline.</p> <note> <p>Reboot options apply to <code>Install</code> operations only. Reboots are not attempted for Patch Manager <code>Scan</code> operations.</p> </note> <ul> <li> <p> <b>RebootIfNeeded</b>: Patch Manager tries to reboot the instance if it installed any patches, or if any patches are detected with a status of <code>InstalledPendingReboot</code>.</p> </li> <li> <p> <b>NoReboot</b>: Patch Manager attempts to install missing packages without trying to reboot the system. Patches installed with this option are assigned a status of <code>InstalledPendingReboot</code>. These patches might not be in effect until a reboot is performed.</p> </li> </ul>'
+        description: 'Reserved for future use. '
     description: 'Defines the high-level patch compliance state for a managed instance, providing information about the number of installed, missing, not applicable, and failed patches along with metadata about the operation when this information was gathered for the instance.'
   InstancePatchStateFilterKey:
     type: string
