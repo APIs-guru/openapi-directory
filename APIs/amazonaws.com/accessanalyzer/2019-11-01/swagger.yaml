@@ -3,7 +3,7 @@ info:
   version: '2019-11-01'
   x-release: v4
   title: Access Analyzer
-  description: AWS IAM Access Analyzer API Reference
+  description: '<p>AWS IAM Access Analyzer helps identify potential resource-access risks by enabling you to identify any policies that grant access to an external principal. It does this by using logic-based reasoning to analyze resource-based policies in your AWS environment. An external principal can be another AWS account, a root user, an IAM user or role, a federated user, an AWS service, or an anonymous user. This guide describes the AWS IAM Access Analyzer operations that you can call programmatically. For general information about Access Analyzer, see the <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html">AWS IAM Access Analyzer section of the IAM User Guide</a>.</p> <p>To start using Access Analyzer, you first need to create an analyzer.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -163,7 +163,7 @@ paths:
   /analyzer:
     put:
       operationId: CreateAnalyzer
-      description: Creates an analyzer with a zone of trust set to your account.
+      description: Creates an analyzer for your account.
       responses:
         '200':
           description: Success
@@ -210,7 +210,7 @@ paths:
                 minLength: 1
                 maxLength: 255
               archiveRules:
-                description: Specifies the archive rules to add for the analyzer.
+                description: Specifies the archive rules to add for the analyzer. Archive rules automatically archive findings that meet the criteria you define for the rule.
                 type: array
                 items:
                   $ref: '#/definitions/InlineArchiveRule'
@@ -223,7 +223,7 @@ paths:
                 additionalProperties:
                   $ref: '#/definitions/String'
               type:
-                description: The zone of trust for the analyzer. You can create only one analyzer per account per Region.
+                description: The type of analyzer to create. Only ACCOUNT analyzers are supported. You can create only one analyzer per account per Region.
                 type: string
                 enum:
                   - ACCOUNT
@@ -273,14 +273,14 @@ paths:
         - name: type
           in: query
           required: false
-          description: 'The type of analyzer, which corresponds to the zone of trust selected when the analyzer was created.'
+          description: The type of analyzer.
           type: string
           enum:
             - ACCOUNT
   '/analyzer/{analyzerName}/archive-rule':
     put:
       operationId: CreateArchiveRule
-      description: Creates an archive rule for the specified analyzer.
+      description: Creates an archive rule for the specified analyzer. Archive rules automatically archive findings that meet the criteria you define when you create the rule.
       responses:
         '200':
           description: Success
@@ -512,7 +512,7 @@ paths:
         - name: analyzerName
           in: path
           required: true
-          description: The name of the analyzer that was deleted.
+          description: The name of the analyzer that associated with the archive rule to delete.
           type: string
           pattern: '^[A-Za-z][A-Za-z0-9_.-]*$'
           minLength: 1
@@ -585,7 +585,7 @@ paths:
           maxLength: 255
     put:
       operationId: UpdateArchiveRule
-      description: Updates the specified archive rule.
+      description: Updates the criteria and values for the specified archive rule.
       responses:
         '200':
           description: Success
@@ -645,7 +645,7 @@ paths:
   '/analyzed-resource#analyzerArn&resourceArn':
     get:
       operationId: GetAnalyzedResource
-      description: Retrieves information about an analyzed resource.
+      description: Retrieves information about a resource that was analyzed.
       responses:
         '200':
           description: Success
@@ -744,7 +744,7 @@ paths:
   /analyzed-resource:
     post:
       operationId: ListAnalyzedResources
-      description: Retrieves a list of resources that have been analyzed.
+      description: Retrieves a list of resources of the specified type that have been analyzed by the specified analyzer..
       responses:
         '200':
           description: Success
@@ -871,7 +871,7 @@ paths:
                 description: A token used for pagination of results returned.
                 type: string
               sort:
-                description: The sort criteria.
+                description: The criteria used to sort.
                 type: object
                 properties:
                   attributeName:
@@ -900,7 +900,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     put:
       operationId: UpdateFindings
-      description: Updates findings with the new values provided in the request.
+      description: Updates the status for the specified findings.
       responses:
         '200':
           description: Success
@@ -1049,7 +1049,7 @@ paths:
   /resource/scan:
     post:
       operationId: StartResourceScan
-      description: Starts a scan of the policies applied to the specified resource.
+      description: Immediately starts a scan of the policies applied to the specified resource.
       responses:
         '200':
           description: Success
@@ -1165,11 +1165,11 @@ definitions:
     properties:
       filter:
         $ref: '#/definitions/FilterCriteriaMap'
-        description: The criteria for the rule.
+        description: The condition and values for a criterion.
       ruleName:
         $ref: '#/definitions/Name'
         description: The name of the rule.
-    description: An inline archive rule.
+    description: An criterion statement in an archive rule. Each archive rule may have multiple criteria.
   String:
     type: string
   ConflictException: {}
@@ -1193,7 +1193,7 @@ definitions:
       neq:
         $ref: '#/definitions/ValueList'
         description: A "not equals" operator to match for the filter used to create the rule.
-    description: The criteria to use in the filter that defines the rule.
+    description: The criteria to use in the filter that defines the archive rule.
   ResourceNotFoundException: {}
   GetAnalyzedResourceResponse:
     type: object
@@ -1225,7 +1225,7 @@ definitions:
       finding:
         $ref: '#/definitions/Finding'
         description: A <code>finding</code> object that contains finding details.
-    description: The resposne to the request.
+    description: The response to the request.
   ListAnalyzedResourcesResponse:
     type: object
     required:
@@ -1273,7 +1273,7 @@ definitions:
       nextToken:
         $ref: '#/definitions/Token'
         description: A token used for pagination of results returned.
-    description: The resposne to the request.
+    description: The response to the request.
   OrderBy:
     type: string
     enum:
@@ -1293,7 +1293,7 @@ definitions:
   UntagResourceResponse:
     type: object
     properties: {}
-    description: The response tot he request.
+    description: The response to the request.
   FindingId:
     type: string
   ActionList:
@@ -1483,7 +1483,7 @@ definitions:
         description: The name of the analyzer to create.
       archiveRules:
         $ref: '#/definitions/InlineArchiveRulesList'
-        description: Specifies the archive rules to add for the analyzer.
+        description: Specifies the archive rules to add for the analyzer. Archive rules automatically archive findings that meet the criteria you define for the rule.
       clientToken:
         $ref: '#/definitions/String'
         description: A client token.
@@ -1492,7 +1492,7 @@ definitions:
         description: The tags to apply to the analyzer.
       type:
         $ref: '#/definitions/Type'
-        description: The zone of trust for the analyzer. You can create only one analyzer per account per Region.
+        description: The type of analyzer to create. Only ACCOUNT analyzers are supported. You can create only one analyzer per account per Region.
     description: Creates an analyzer.
   CreateArchiveRuleRequest:
     type: object
@@ -1692,7 +1692,7 @@ definitions:
       orderBy:
         $ref: '#/definitions/OrderBy'
         description: 'The sort order, ascending or descending.'
-    description: The sort criteria.
+    description: The criteria used to sort.
   ListFindingsRequest:
     type: object
     required:

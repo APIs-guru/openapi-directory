@@ -45106,6 +45106,9 @@ definitions:
       Type:
         $ref: '#/definitions/String'
         description: ' The type of elastic inference accelerator. The possible values are eia1.medium, eia1.large, and eia1.xlarge. '
+      Count:
+        $ref: '#/definitions/LaunchTemplateElasticInferenceAcceleratorCount'
+        description: ' The number of elastic inference accelerators of given type to be attached to the instance. Only positive values allowed. If not specified defaults to 1. '
     description: ' Describes an elastic inference accelerator. '
   MarketType:
     type: string
@@ -48957,7 +48960,10 @@ definitions:
     properties:
       Type:
         $ref: '#/definitions/String'
-        description: ' The type of elastic inference accelerator. The possible values are <code>eia1.small</code>, <code>eia1.medium</code>, and <code>eia1.large</code>. '
+        description: ' The type of elastic inference accelerator. The possible values are <code>eia1.medium</code>, <code>eia1.large</code>, and <code>eia1.xlarge</code>. '
+      Count:
+        $ref: '#/definitions/ElasticInferenceAcceleratorCount'
+        description: ' The number of elastic inference accelerators of given type to be attached to the instance. Only positive values allowed. If not specified defaults to 1. '
     description: ' Describes an elastic inference accelerator. '
   SpotMarketOptions:
     type: object
@@ -58324,6 +58330,9 @@ definitions:
     type: string
     enum:
       - ATTACHED
+  ElasticInferenceAcceleratorCount:
+    type: integer
+    minimum: 1
   ElasticInferenceAcceleratorAssociation:
     type: object
     properties:
@@ -61250,12 +61259,18 @@ definitions:
         $ref: '#/definitions/Integer'
         description: The number of threads per CPU core.
     description: The CPU options for the instance.
+  LaunchTemplateElasticInferenceAcceleratorCount:
+    type: integer
+    minimum: 1
   LaunchTemplateElasticInferenceAcceleratorResponse:
     type: object
     properties:
       Type:
         $ref: '#/definitions/String'
         description: ' The type of elastic inference accelerator. The possible values are eia1.medium, eia1.large, and eia1.xlarge. '
+      Count:
+        $ref: '#/definitions/Integer'
+        description: ' The number of elastic inference accelerators of given type to be attached to the instance. Only positive values allowed. If not specified defaults to 1. '
     description: ' Describes an elastic inference accelerator. '
   LaunchTemplateElasticInferenceAcceleratorResponseList:
     type: array
