@@ -3,7 +3,7 @@ node_js:
   - 10
 install:
   - npm i --no-optional
-test:
+script:
   - node --max-old-space-size=8192 scripts/collection.js validate -q
 deploy:
   - provider: script
