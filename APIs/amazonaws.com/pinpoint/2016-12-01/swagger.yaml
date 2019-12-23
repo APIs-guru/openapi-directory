@@ -222,7 +222,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetApps
-      description: Retrieves information about all of your applications.
+      description: Retrieves information about all the applications that are associated with your Amazon Pinpoint account.
       responses:
         '200':
           description: Success
@@ -418,7 +418,7 @@ paths:
   '/v1/templates/{template-name}/email':
     post:
       operationId: CreateEmailTemplate
-      description: Creates a message template that you can use in messages that are sent through the email channel.
+      description: Creates a message template for messages that are sent through the email channel.
       responses:
         '201':
           description: Success
@@ -490,7 +490,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     delete:
       operationId: DeleteEmailTemplate
-      description: Deletes a message template that was designed for use in messages that were sent through the email channel.
+      description: Deletes a message template for messages that were sent through the email channel.
       responses:
         '202':
           description: Success
@@ -526,9 +526,14 @@ paths:
           required: true
           description: 'The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.'
           type: string
+        - name: version
+          in: query
+          required: false
+          description: '<p>The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.</p> <p>If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don''t occur.</p> <p>If you don''t specify a value for this parameter, Amazon Pinpoint does the following:</p> <ul><li><p>For a get operation, retrieves information about the active version of the template.</p></li> <li><p>For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn''t used or is set to false.</p></li> <li><p>For a delete operation, deletes the template, including all versions of the template.</p></li></ul>'
+          type: string
     get:
       operationId: GetEmailTemplate
-      description: Retrieves the content and settings for a message template that you can use in messages that are sent through the email channel.
+      description: Retrieves the content and settings of a message template for messages that are sent through the email channel.
       responses:
         '200':
           description: Success
@@ -564,9 +569,14 @@ paths:
           required: true
           description: 'The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.'
           type: string
+        - name: version
+          in: query
+          required: false
+          description: '<p>The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.</p> <p>If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don''t occur.</p> <p>If you don''t specify a value for this parameter, Amazon Pinpoint does the following:</p> <ul><li><p>For a get operation, retrieves information about the active version of the template.</p></li> <li><p>For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn''t used or is set to false.</p></li> <li><p>For a delete operation, deletes the template, including all versions of the template.</p></li></ul>'
+          type: string
     put:
       operationId: UpdateEmailTemplate
-      description: Updates an existing message template that you can use in messages that are sent through the email channel.
+      description: Updates an existing message template for messages that are sent through the email channel.
       responses:
         '202':
           description: Success
@@ -597,10 +607,20 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: create-new-version
+          in: query
+          required: false
+          description: '<p>Specifies whether to save the updates as a new version of the message template. Valid values are: true, save the updates as a new version; and, false, save the updates to the latest existing version of the template.</p><p> If you don''t specify a value for this parameter, Amazon Pinpoint saves the updates to the latest existing version of the template. If you specify a value of true for this parameter, don''t specify a value for the version parameter. Otherwise, an error will occur.</p>'
+          type: boolean
         - name: template-name
           in: path
           required: true
           description: 'The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.'
+          type: string
+        - name: version
+          in: query
+          required: false
+          description: '<p>The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.</p> <p>If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don''t occur.</p> <p>If you don''t specify a value for this parameter, Amazon Pinpoint does the following:</p> <ul><li><p>For a get operation, retrieves information about the active version of the template.</p></li> <li><p>For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn''t used or is set to false.</p></li> <li><p>For a delete operation, deletes the template, including all versions of the template.</p></li></ul>'
           type: string
         - name: body
           in: body
@@ -935,7 +955,7 @@ paths:
                 properties:
                   Activities:
                     $ref: '#/definitions/MapOfActivity'
-                    description: The configuration and other settings for the activities that comprise the journey.
+                    description: 'A map that contains a set of Activity objects, one object for each activity in the journey. For each Activity object, the key is the unique identifier (string) for an activity and the value is the settings for the activity. An activity identifier can contain a maximum of 128 characters. The characters must be alphanumeric characters.'
                   CreationDate:
                     $ref: '#/definitions/__string'
                     description: 'The date, in ISO 8601 format, when the journey was created.'
@@ -962,7 +982,7 @@ paths:
                     description: The schedule settings for the journey.
                   StartActivity:
                     $ref: '#/definitions/__string'
-                    description: The unique identifier for the first activity in the journey.
+                    description: The unique identifier for the first activity in the journey. An activity identifier can contain a maximum of 128 characters. The characters must be alphanumeric characters.
                   StartCondition:
                     $ref: '#/definitions/StartCondition'
                     description: The segment that defines which users are participants in the journey.
@@ -1028,7 +1048,7 @@ paths:
   '/v1/templates/{template-name}/push':
     post:
       operationId: CreatePushTemplate
-      description: Creates a message template that you can use in messages that are sent through a push notification channel.
+      description: Creates a message template for messages that are sent through a push notification channel.
       responses:
         '201':
           description: Success
@@ -1106,7 +1126,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     delete:
       operationId: DeletePushTemplate
-      description: Deletes a message template that was designed for use in messages that were sent through a push notification channel.
+      description: Deletes a message template for messages that were sent through a push notification channel.
       responses:
         '202':
           description: Success
@@ -1142,9 +1162,14 @@ paths:
           required: true
           description: 'The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.'
           type: string
+        - name: version
+          in: query
+          required: false
+          description: '<p>The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.</p> <p>If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don''t occur.</p> <p>If you don''t specify a value for this parameter, Amazon Pinpoint does the following:</p> <ul><li><p>For a get operation, retrieves information about the active version of the template.</p></li> <li><p>For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn''t used or is set to false.</p></li> <li><p>For a delete operation, deletes the template, including all versions of the template.</p></li></ul>'
+          type: string
     get:
       operationId: GetPushTemplate
-      description: Retrieves the content and settings for a message template that you can use in messages that are sent through a push notification channel.
+      description: Retrieves the content and settings of a message template for messages that are sent through a push notification channel.
       responses:
         '200':
           description: Success
@@ -1180,9 +1205,14 @@ paths:
           required: true
           description: 'The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.'
           type: string
+        - name: version
+          in: query
+          required: false
+          description: '<p>The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.</p> <p>If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don''t occur.</p> <p>If you don''t specify a value for this parameter, Amazon Pinpoint does the following:</p> <ul><li><p>For a get operation, retrieves information about the active version of the template.</p></li> <li><p>For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn''t used or is set to false.</p></li> <li><p>For a delete operation, deletes the template, including all versions of the template.</p></li></ul>'
+          type: string
     put:
       operationId: UpdatePushTemplate
-      description: Updates an existing message template that you can use in messages that are sent through a push notification channel.
+      description: Updates an existing message template for messages that are sent through a push notification channel.
       responses:
         '202':
           description: Success
@@ -1213,10 +1243,20 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: create-new-version
+          in: query
+          required: false
+          description: '<p>Specifies whether to save the updates as a new version of the message template. Valid values are: true, save the updates as a new version; and, false, save the updates to the latest existing version of the template.</p><p> If you don''t specify a value for this parameter, Amazon Pinpoint saves the updates to the latest existing version of the template. If you specify a value of true for this parameter, don''t specify a value for the version parameter. Otherwise, an error will occur.</p>'
+          type: boolean
         - name: template-name
           in: path
           required: true
           description: 'The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.'
+          type: string
+        - name: version
+          in: query
+          required: false
+          description: '<p>The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.</p> <p>If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don''t occur.</p> <p>If you don''t specify a value for this parameter, Amazon Pinpoint does the following:</p> <ul><li><p>For a get operation, retrieves information about the active version of the template.</p></li> <li><p>For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn''t used or is set to false.</p></li> <li><p>For a delete operation, deletes the template, including all versions of the template.</p></li></ul>'
           type: string
         - name: body
           in: body
@@ -1376,7 +1416,7 @@ paths:
   '/v1/templates/{template-name}/sms':
     post:
       operationId: CreateSmsTemplate
-      description: Creates a message template that you can use in messages that are sent through the SMS channel.
+      description: Creates a message template for messages that are sent through the SMS channel.
       responses:
         '201':
           description: Success
@@ -1442,7 +1482,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     delete:
       operationId: DeleteSmsTemplate
-      description: Deletes a message template that was designed for use in messages that were sent through the SMS channel.
+      description: Deletes a message template for messages that were sent through the SMS channel.
       responses:
         '202':
           description: Success
@@ -1478,9 +1518,14 @@ paths:
           required: true
           description: 'The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.'
           type: string
+        - name: version
+          in: query
+          required: false
+          description: '<p>The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.</p> <p>If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don''t occur.</p> <p>If you don''t specify a value for this parameter, Amazon Pinpoint does the following:</p> <ul><li><p>For a get operation, retrieves information about the active version of the template.</p></li> <li><p>For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn''t used or is set to false.</p></li> <li><p>For a delete operation, deletes the template, including all versions of the template.</p></li></ul>'
+          type: string
     get:
       operationId: GetSmsTemplate
-      description: Retrieves the content and settings for a message template that you can use in messages that are sent through the SMS channel.
+      description: Retrieves the content and settings of a message template for messages that are sent through the SMS channel.
       responses:
         '200':
           description: Success
@@ -1516,9 +1561,14 @@ paths:
           required: true
           description: 'The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.'
           type: string
+        - name: version
+          in: query
+          required: false
+          description: '<p>The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.</p> <p>If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don''t occur.</p> <p>If you don''t specify a value for this parameter, Amazon Pinpoint does the following:</p> <ul><li><p>For a get operation, retrieves information about the active version of the template.</p></li> <li><p>For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn''t used or is set to false.</p></li> <li><p>For a delete operation, deletes the template, including all versions of the template.</p></li></ul>'
+          type: string
     put:
       operationId: UpdateSmsTemplate
-      description: Updates an existing message template that you can use in messages that are sent through the SMS channel.
+      description: Updates an existing message template for messages that are sent through the SMS channel.
       responses:
         '202':
           description: Success
@@ -1549,10 +1599,20 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: create-new-version
+          in: query
+          required: false
+          description: '<p>Specifies whether to save the updates as a new version of the message template. Valid values are: true, save the updates as a new version; and, false, save the updates to the latest existing version of the template.</p><p> If you don''t specify a value for this parameter, Amazon Pinpoint saves the updates to the latest existing version of the template. If you specify a value of true for this parameter, don''t specify a value for the version parameter. Otherwise, an error will occur.</p>'
+          type: boolean
         - name: template-name
           in: path
           required: true
           description: 'The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.'
+          type: string
+        - name: version
+          in: query
+          required: false
+          description: '<p>The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.</p> <p>If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don''t occur.</p> <p>If you don''t specify a value for this parameter, Amazon Pinpoint does the following:</p> <ul><li><p>For a get operation, retrieves information about the active version of the template.</p></li> <li><p>For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn''t used or is set to false.</p></li> <li><p>For a delete operation, deletes the template, including all versions of the template.</p></li></ul>'
           type: string
         - name: body
           in: body
@@ -1581,7 +1641,7 @@ paths:
   '/v1/templates/{template-name}/voice':
     post:
       operationId: CreateVoiceTemplate
-      description: Creates a message template that you can use in messages that are sent through the voice channel.
+      description: Creates a message template for messages that are sent through the voice channel.
       responses:
         '201':
           description: Success
@@ -1653,7 +1713,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     delete:
       operationId: DeleteVoiceTemplate
-      description: Deletes a message template that was designed for use in messages that were sent through the voice channel.
+      description: Deletes a message template for messages that were sent through the voice channel.
       responses:
         '202':
           description: Success
@@ -1689,9 +1749,14 @@ paths:
           required: true
           description: 'The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.'
           type: string
+        - name: version
+          in: query
+          required: false
+          description: '<p>The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.</p> <p>If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don''t occur.</p> <p>If you don''t specify a value for this parameter, Amazon Pinpoint does the following:</p> <ul><li><p>For a get operation, retrieves information about the active version of the template.</p></li> <li><p>For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn''t used or is set to false.</p></li> <li><p>For a delete operation, deletes the template, including all versions of the template.</p></li></ul>'
+          type: string
     get:
       operationId: GetVoiceTemplate
-      description: Retrieves the content and settings for a message template that you can use in messages that are sent through the voice channel.
+      description: Retrieves the content and settings of a message template for messages that are sent through the voice channel.
       responses:
         '200':
           description: Success
@@ -1727,9 +1792,14 @@ paths:
           required: true
           description: 'The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.'
           type: string
+        - name: version
+          in: query
+          required: false
+          description: '<p>The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.</p> <p>If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don''t occur.</p> <p>If you don''t specify a value for this parameter, Amazon Pinpoint does the following:</p> <ul><li><p>For a get operation, retrieves information about the active version of the template.</p></li> <li><p>For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn''t used or is set to false.</p></li> <li><p>For a delete operation, deletes the template, including all versions of the template.</p></li></ul>'
+          type: string
     put:
       operationId: UpdateVoiceTemplate
-      description: Updates an existing message template that you can use in messages that are sent through the voice channel.
+      description: Updates an existing message template for messages that are sent through the voice channel.
       responses:
         '202':
           description: Success
@@ -1760,10 +1830,20 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: create-new-version
+          in: query
+          required: false
+          description: '<p>Specifies whether to save the updates as a new version of the message template. Valid values are: true, save the updates as a new version; and, false, save the updates to the latest existing version of the template.</p><p> If you don''t specify a value for this parameter, Amazon Pinpoint saves the updates to the latest existing version of the template. If you specify a value of true for this parameter, don''t specify a value for the version parameter. Otherwise, an error will occur.</p>'
+          type: boolean
         - name: template-name
           in: path
           required: true
           description: 'The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.'
+          type: string
+        - name: version
+          in: query
+          required: false
+          description: '<p>The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.</p> <p>If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don''t occur.</p> <p>If you don''t specify a value for this parameter, Amazon Pinpoint does the following:</p> <ul><li><p>For a get operation, retrieves information about the active version of the template.</p></li> <li><p>For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn''t used or is set to false.</p></li> <li><p>For a delete operation, deletes the template, including all versions of the template.</p></li></ul>'
           type: string
         - name: body
           in: body
@@ -3769,7 +3849,7 @@ paths:
                 properties:
                   Activities:
                     $ref: '#/definitions/MapOfActivity'
-                    description: The configuration and other settings for the activities that comprise the journey.
+                    description: 'A map that contains a set of Activity objects, one object for each activity in the journey. For each Activity object, the key is the unique identifier (string) for an activity and the value is the settings for the activity. An activity identifier can contain a maximum of 128 characters. The characters must be alphanumeric characters.'
                   CreationDate:
                     $ref: '#/definitions/__string'
                     description: 'The date, in ISO 8601 format, when the journey was created.'
@@ -3796,7 +3876,7 @@ paths:
                     description: The schedule settings for the journey.
                   StartActivity:
                     $ref: '#/definitions/__string'
-                    description: The unique identifier for the first activity in the journey.
+                    description: The unique identifier for the first activity in the journey. An activity identifier can contain a maximum of 128 characters. The characters must be alphanumeric characters.
                   StartCondition:
                     $ref: '#/definitions/StartCondition'
                     description: The segment that defines which users are participants in the journey.
@@ -4384,7 +4464,7 @@ paths:
         - name: end-time
           in: query
           required: false
-          description: 'The last date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format, for example: 2019-07-19T00:00:00Z for July 19, 2019 and 2019-07-19T20:00:00Z for 8:00 PM July 19, 2019.'
+          description: 'The last date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format and use Coordinated Universal Time (UTC), for example: 2019-07-26T20:00:00Z for 8:00 PM UTC July 26, 2019.'
           type: string
           format: date-time
         - name: kpi-name
@@ -4405,7 +4485,7 @@ paths:
         - name: start-time
           in: query
           required: false
-          description: 'The first date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format, for example: 2019-07-15T00:00:00Z for July 15, 2019 and 2019-07-15T16:00:00Z for 4:00 PM July 15, 2019.'
+          description: 'The first date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format and use Coordinated Universal Time (UTC), for example: 2019-07-19T20:00:00Z for 8:00 PM UTC July 19, 2019. This value should also be fewer than 90 days from the current day.'
           type: string
           format: date-time
     parameters:
@@ -4634,7 +4714,7 @@ paths:
         - name: end-time
           in: query
           required: false
-          description: 'The last date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format, for example: 2019-07-19T00:00:00Z for July 19, 2019 and 2019-07-19T20:00:00Z for 8:00 PM July 19, 2019.'
+          description: 'The last date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format and use Coordinated Universal Time (UTC), for example: 2019-07-26T20:00:00Z for 8:00 PM UTC July 26, 2019.'
           type: string
           format: date-time
         - name: kpi-name
@@ -4655,7 +4735,7 @@ paths:
         - name: start-time
           in: query
           required: false
-          description: 'The first date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format, for example: 2019-07-15T00:00:00Z for July 15, 2019 and 2019-07-15T16:00:00Z for 4:00 PM July 15, 2019.'
+          description: 'The first date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format and use Coordinated Universal Time (UTC), for example: 2019-07-19T20:00:00Z for 8:00 PM UTC July 19, 2019. This value should also be fewer than 90 days from the current day.'
           type: string
           format: date-time
     parameters:
@@ -5328,7 +5408,7 @@ paths:
   '/v1/apps/{application-id}/segments/{segment-id}/versions':
     get:
       operationId: GetSegmentVersions
-      description: 'Retrieves information about the configuration, dimension, and other settings for all versions of a specific segment that''s associated with an application.'
+      description: 'Retrieves information about the configuration, dimension, and other settings for all the versions of a specific segment that''s associated with an application.'
       responses:
         '200':
           description: Success
@@ -5437,6 +5517,68 @@ paths:
                   tags:
                     $ref: '#/definitions/MapOf__string'
                     description: '<p>A string-to-string map of key-value pairs that defines the tags for an application, campaign, journey, message template, or segment. Each of these resources can have a maximum of 50 tags.</p> <p>Each tag consists of a required tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>'
+  '/v1/templates/{template-name}/{template-type}/versions':
+    get:
+      operationId: ListTemplateVersions
+      description: Retrieves information about all the versions of a specific message template.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTemplateVersionsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: next-token
+          in: query
+          required: false
+          description: 'The  string that specifies which page of results to return in a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.'
+          type: string
+        - name: page-size
+          in: query
+          required: false
+          description: 'The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.'
+          type: string
+        - name: template-name
+          in: path
+          required: true
+          description: 'The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.'
+          type: string
+        - name: template-type
+          in: path
+          required: true
+          description: 'The type of channel that the message template is designed for. Valid values are: EMAIL, PUSH, SMS, and VOICE.'
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /v1/templates:
     get:
       operationId: ListTemplates
@@ -5485,7 +5627,7 @@ paths:
         - name: template-type
           in: query
           required: false
-          description: 'The type of message template to include in the results. Valid values are: EMAIL, SMS, PUSH, and VOICE. To include all types of templates in the results, don''t include this parameter in your request.'
+          description: 'The type of message template to include in the results. Valid values are: EMAIL, PUSH, SMS, and VOICE. To include all types of templates in the results, don''t include this parameter in your request.'
           type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
@@ -5928,7 +6070,7 @@ paths:
   '/v1/apps/{application-id}/journeys/{journey-id}/state':
     put:
       operationId: UpdateJourneyState
-      description: Cancels an active journey.
+      description: Cancels (stops) an active journey.
       responses:
         '200':
           description: Success
@@ -5984,6 +6126,73 @@ paths:
                   State:
                     $ref: '#/definitions/State'
                     description: '<p>The status of the journey. Currently, the only supported value is CANCELLED.</p> <p>If you cancel a journey, Amazon Pinpoint continues to perform activities that are currently in progress, until those activities are complete. Amazon Pinpoint also continues to collect and aggregate analytics data for those activities, until they are complete, and any activities that were complete when you cancelled the journey.</p> <p>After you cancel a journey, you can''t add, change, or remove any activities from the journey. In addition, Amazon Pinpoint stops evaluating the journey and doesn''t perform any activities that haven''t started.</p>'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/templates/{template-name}/{template-type}/active-version':
+    put:
+      operationId: UpdateTemplateActiveVersion
+      description: Changes the status of a specific version of a message template to <i>active</i>.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateTemplateActiveVersionResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: template-name
+          in: path
+          required: true
+          description: 'The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.'
+          type: string
+        - name: template-type
+          in: path
+          required: true
+          description: 'The type of channel that the message template is designed for. Valid values are: EMAIL, PUSH, SMS, and VOICE.'
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - TemplateActiveVersionRequest
+            properties:
+              TemplateActiveVersionRequest:
+                description: Specifies which version of a message template to use as the active version of the template.
+                type: object
+                properties:
+                  Version:
+                    $ref: '#/definitions/__string'
+                    description: 'The unique identifier for the version of the message template to use as the active version of the template. If specified, this value must match the identifier for an existing template version. To retrieve a list of versions and version identifiers for a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -6815,6 +7024,13 @@ definitions:
     properties:
       TagsModel:
         $ref: '#/definitions/TagsModel'
+  ListTemplateVersionsResponse:
+    type: object
+    required:
+      - TemplateVersionsResponse
+    properties:
+      TemplateVersionsResponse:
+        $ref: '#/definitions/TemplateVersionsResponse'
   ListTemplatesResponse:
     type: object
     required:
@@ -7017,16 +7233,16 @@ definitions:
         description: 'The locale of the endpoint, in the following format: the ISO 639-1 alpha-2 code, followed by an underscore (_), followed by an ISO 3166-1 alpha-2 value.'
       Make:
         $ref: '#/definitions/__string'
-        description: 'The manufacturer of the endpoint device, such as Apple or Samsung.'
+        description: 'The manufacturer of the endpoint device, such as apple or samsung.'
       Model:
         $ref: '#/definitions/__string'
-        description: 'The model name or number of the endpoint device, such as iPhone.'
+        description: 'The model name or number of the endpoint device, such as iPhone or SM-G900F.'
       ModelVersion:
         $ref: '#/definitions/__string'
         description: The model version of the endpoint device.
       Platform:
         $ref: '#/definitions/__string'
-        description: 'The platform of the endpoint device, such as iOS or Android.'
+        description: 'The platform of the endpoint device, such as ios.'
       PlatformVersion:
         $ref: '#/definitions/__string'
         description: The platform version of the endpoint device.
@@ -7124,6 +7340,13 @@ definitions:
       SMSChannelResponse:
         $ref: '#/definitions/SMSChannelResponse'
   UpdateSmsTemplateResponse:
+    type: object
+    required:
+      - MessageBody
+    properties:
+      MessageBody:
+        $ref: '#/definitions/MessageBody'
+  UpdateTemplateActiveVersionResponse:
     type: object
     required:
       - MessageBody
@@ -7619,10 +7842,10 @@ definitions:
         description: 'The amount of time to wait before determining whether the conditions are met, or the date and time when Amazon Pinpoint determines whether the conditions are met.'
       FalseActivity:
         $ref: '#/definitions/__string'
-        description: The unique identifier for the activity to perform if the condition isn't met.
+        description: The unique identifier for the activity to perform if the conditions aren't met.
       TrueActivity:
         $ref: '#/definitions/__string'
-        description: The unique identifier for the activity to perform if the condition is met.
+        description: The unique identifier for the activity to perform if the conditions are met.
     description: 'Specifies the settings for a yes/no split activity in a journey. This type of activity sends participants down one of two paths in a journey, based on conditions that you specify.'
   EmailMessageActivity:
     type: object
@@ -7636,6 +7859,9 @@ definitions:
       TemplateName:
         $ref: '#/definitions/__string'
         description: The name of the email template to use for the message.
+      TemplateVersion:
+        $ref: '#/definitions/__string'
+        description: '<p>The unique identifier for the version of the email template to use for the message. If specified, this value must match the identifier for an existing template version. To retrieve a list of versions and version identifiers for a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.</p> <p>If you don''t specify a value for this property, Amazon Pinpoint uses the <i>active</i> version of the template. The <i>active</i> version is typically the version of a template that''s been most recently reviewed and approved for use, depending on your workflow. It isn''t necessarily the latest version of a template.</p>'
     description: Specifies the settings for an email activity in a journey. This type of activity sends an email message to participants.
   HoldoutActivity:
     type: object
@@ -7647,7 +7873,7 @@ definitions:
         description: 'The unique identifier for the next activity to perform, after performing the holdout activity.'
       Percentage:
         $ref: '#/definitions/__integer'
-        description: The percentage of participants who shouldn't continue the journey.
+        description: '<p>The percentage of participants who shouldn''t continue the journey.</p> <p>To determine which participants are held out, Amazon Pinpoint applies a probability-based algorithm to the percentage that you specify. Therefore, the actual percentage of participants who are held out may not be equal to the percentage that you specify.</p>'
     description: Specifies the settings for a holdout activity in a journey. This type of activity stops a journey for a specified percentage of participants.
   MultiConditionalSplitActivity:
     type: object
@@ -7657,11 +7883,11 @@ definitions:
         description: 'The paths for the activity, including the conditions for entering each path and the activity to perform for each path.'
       DefaultActivity:
         $ref: '#/definitions/__string'
-        description: The activity to perform by default for any path in the activity.
+        description: The unique identifier for the activity to perform for participants who don't meet any of the conditions specified for other paths in the activity.
       EvaluationWaitTime:
         $ref: '#/definitions/WaitTime'
         description: The amount of time to wait or the date and time when Amazon Pinpoint determines whether the conditions are met.
-    description: 'Specifies the settings for a multivariate split activity in a journey. This type of activity sends participants down one of as many as five paths in a journey, based on conditions that you specify.'
+    description: 'Specifies the settings for a multivariate split activity in a journey. This type of activity sends participants down one of as many as five paths (including a default <i>Else</i> path) in a journey, based on conditions that you specify.'
   RandomSplitActivity:
     type: object
     properties:
@@ -7696,7 +7922,7 @@ definitions:
         description: The settings for a holdout activity. This type of activity stops a journey for a specified percentage of participants.
       MultiCondition:
         $ref: '#/definitions/MultiConditionalSplitActivity'
-        description: 'The settings for a multivariate split activity. This type of activity sends participants down one of as many as five paths in a journey, based on conditions that you specify.'
+        description: 'The settings for a multivariate split activity. This type of activity sends participants down one of as many as five paths (including a default <i>Else</i> path) in a journey, based on conditions that you specify.'
       RandomSplit:
         $ref: '#/definitions/RandomSplitActivity'
         description: 'The settings for a random split activity. This type of activity randomly sends specified percentages of participants down one of as many as five paths in a journey, based on conditions that you specify.'
@@ -8086,7 +8312,7 @@ definitions:
         description: The dimension settings of the event filter for the campaign.
       FilterType:
         $ref: '#/definitions/FilterType'
-        description: 'The type of event that causes the campaign to be sent. Valid values are: SYSTEM, sends the campaign when a system event occurs; and, ENDPOINT, sends the campaign when an endpoint event (<link  linkend="apps-application-id-events">Events resource</link>) occurs.'
+        description: 'The type of event that causes the campaign to be sent. Valid values are: SYSTEM, sends the campaign when a system event occurs; and, ENDPOINT, sends the campaign when an endpoint event (<link  linkend="apps-application-id-events">Events</link> resource) occurs.'
     description: Specifies the settings for events that cause a campaign to be sent.
   Mode:
     type: string
@@ -8126,7 +8352,7 @@ definitions:
         description: The Amazon Resource Name (ARN) of the campaign.
       CreationDate:
         $ref: '#/definitions/__string'
-        description: 'The date, ISO 8601 format, when the campaign was created.'
+        description: 'The date, in ISO 8601 format, when the campaign was created.'
       DefaultState:
         $ref: '#/definitions/CampaignState'
         description: 'The current status of the campaign''s default treatment. This value exists only for campaigns that have more than one treatment, to support A/B testing.'
@@ -8405,7 +8631,6 @@ definitions:
     properties:
       EmailTemplateRequest:
         $ref: '#/definitions/EmailTemplateRequest'
-        description: Creates a new message template that you can use in messages that are sent through the email channel.
   CreateTemplateMessageBody:
     type: object
     properties:
@@ -8591,7 +8816,7 @@ definitions:
     properties:
       Activities:
         $ref: '#/definitions/MapOfActivity'
-        description: The configuration and other settings for the activities that comprise the journey.
+        description: 'A map that contains a set of Activity objects, one object for each activity in the journey. For each Activity object, the key is the unique identifier (string) for an activity and the value is the settings for the activity. An activity identifier can contain a maximum of 128 characters. The characters must be alphanumeric characters.'
       CreationDate:
         $ref: '#/definitions/__string'
         description: 'The date, in ISO 8601 format, when the journey was created.'
@@ -8618,7 +8843,7 @@ definitions:
         description: The schedule settings for the journey.
       StartActivity:
         $ref: '#/definitions/__string'
-        description: The unique identifier for the first activity in the journey.
+        description: The unique identifier for the first activity in the journey. An activity identifier can contain a maximum of 128 characters. The characters must be alphanumeric characters.
       StartCondition:
         $ref: '#/definitions/StartCondition'
         description: The segment that defines which users are participants in the journey.
@@ -8642,7 +8867,7 @@ definitions:
     properties:
       Activities:
         $ref: '#/definitions/MapOfActivity'
-        description: The configuration and other settings for the activities that comprise the journey.
+        description: 'A map that contains a set of Activity objects, one object for each activity in the journey. For each Activity object, the key is the unique identifier (string) for an activity and the value is the settings for the activity.'
       ApplicationId:
         $ref: '#/definitions/__string'
         description: The unique identifier for the application that the journey applies to.
@@ -8681,7 +8906,7 @@ definitions:
         description: The segment that defines which users are participants in the journey.
       State:
         $ref: '#/definitions/State'
-        description: '<p>The current status of the journey. Possible values are:</p> <ul><li><p>DRAFT - The journey is being developed and hasn''t been published yet.</p></li> <li><p>ACTIVE - The journey has been developed and published. Depending on the journey''s schedule, the journey may currently be running or scheduled to start running at a later time. If a journey''s status is ACTIVE, you can''t add, change, or remove activities from it.</p></li> <li><p>COMPLETED - The journey has been published and has finished running. All participants have entered the journey and no participants are waiting to complete the journey or any activities in the journey.</p></li> <li><p>CANCELLED - The journey has been stopped. If a journey''s status is CANCELLED, you can''t add, change, or remove activities or segment settings from the journey.</p></li> <li><p>CLOSED - The journey has been published and has started running. It may have also passed its scheduled end time, or passed its scheduled start time and a refresh frequency hasn''t been specified for it. If a journey''s status is CLOSED, you can''t add participants to it, and no existing participants can enter the journey for the first time. However, any existing participants who are currently waiting to start an activity may resume the journey.</p></li></ul>'
+        description: '<p>The current status of the journey. Possible values are:</p> <ul><li><p>DRAFT - The journey is being developed and hasn''t been published yet.</p></li> <li><p>ACTIVE - The journey has been developed and published. Depending on the journey''s schedule, the journey may currently be running or scheduled to start running at a later time. If a journey''s status is ACTIVE, you can''t add, change, or remove activities from it.</p></li> <li><p>COMPLETED - The journey has been published and has finished running. All participants have entered the journey and no participants are waiting to complete the journey or any activities in the journey.</p></li> <li><p>CANCELLED - The journey has been stopped. If a journey''s status is CANCELLED, you can''t add, change, or remove activities or segment settings from the journey.</p></li> <li><p>CLOSED - The journey has been published and has started running. It may have also passed its scheduled end time, or passed its scheduled start time and a refresh frequency hasn''t been specified for it. If a journey''s status is CLOSED, you can''t add participants to it, and no existing participants can enter the journey for the first time. However, any existing participants who are currently waiting to start an activity may continue the journey.</p></li></ul>'
       tags:
         $ref: '#/definitions/MapOf__string'
         description: A string-to-string map of key-value pairs that identifies the tags that are associated with the journey. Each tag consists of a required tag key and an associated tag value.
@@ -8721,7 +8946,6 @@ definitions:
     properties:
       PushNotificationTemplateRequest:
         $ref: '#/definitions/PushNotificationTemplateRequest'
-        description: Creates a message template that you can use in messages that are sent through a push notification channel.
   WriteSegmentRequest:
     type: object
     properties:
@@ -8814,7 +9038,6 @@ definitions:
     properties:
       SMSTemplateRequest:
         $ref: '#/definitions/SMSTemplateRequest'
-        description: Creates a message template that you can use in messages that are sent through the SMS channel.
   VoiceTemplateRequest:
     type: object
     properties:
@@ -9426,7 +9649,7 @@ definitions:
         description: The Amazon Resource Name (ARN) of the message template.
       CreationDate:
         $ref: '#/definitions/__string'
-        description: The date when the message template was created.
+        description: 'The date, in ISO 8601 format, when the message template was created.'
       DefaultSubstitutions:
         $ref: '#/definitions/__string'
         description: The JSON object that specifies the default values that are used for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable.
@@ -9435,7 +9658,7 @@ definitions:
         description: 'The message body, in HTML format, that''s used in email messages that are based on the message template.'
       LastModifiedDate:
         $ref: '#/definitions/__string'
-        description: The date when the message template was last modified.
+        description: 'The date, in ISO 8601 format, when the message template was last modified.'
       Subject:
         $ref: '#/definitions/__string'
         description: 'The subject line, or title, that''s used in email messages that are based on the message template.'
@@ -9454,6 +9677,9 @@ definitions:
       TextPart:
         $ref: '#/definitions/__string'
         description: 'The message body, in plain text format, that''s used in email messages that are based on the message template.'
+      Version:
+        $ref: '#/definitions/__string'
+        description: 'The unique identifier, as an integer, for the active version of the message template, or the version of the template that you specified by using the version parameter in your request.'
     description: Provides information about the content and settings for a message template that can be used in messages that are sent through the email channel.
   EndpointBatchItem:
     type: object
@@ -10059,8 +10285,8 @@ definitions:
     required:
       - LastModifiedDate
       - CreationDate
-      - TemplateName
       - TemplateType
+      - TemplateName
     properties:
       ADM:
         $ref: '#/definitions/AndroidPushNotificationTemplate'
@@ -10076,7 +10302,7 @@ definitions:
         description: The message template that's used for the Baidu (Baidu Cloud Push) channel. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).
       CreationDate:
         $ref: '#/definitions/__string'
-        description: The date when the message template was created.
+        description: 'The date, in ISO 8601 format, when the message template was created.'
       Default:
         $ref: '#/definitions/DefaultPushNotificationTemplate'
         description: The default message template that's used for push notification channels.
@@ -10088,7 +10314,7 @@ definitions:
         description: 'The message template that''s used for the GCM channel, which is used to send notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).'
       LastModifiedDate:
         $ref: '#/definitions/__string'
-        description: The date when the message template was last modified.
+        description: 'The date, in ISO 8601 format, when the message template was last modified.'
       tags:
         $ref: '#/definitions/MapOf__string'
         description: A string-to-string map of key-value pairs that identifies the tags that are associated with the message template. Each tag consists of a required tag key and an associated tag value.
@@ -10101,6 +10327,9 @@ definitions:
       TemplateType:
         $ref: '#/definitions/TemplateType'
         description: 'The type of channel that the message template is designed for. For a push notification template, this value is PUSH.'
+      Version:
+        $ref: '#/definitions/__string'
+        description: 'The unique identifier, as an integer, for the active version of the message template, or the version of the template that you specified by using the version parameter in your request.'
     description: Provides information about the content and settings for a message template that can be used in messages that are sent through a push notification channel.
   GetSegmentExportJobsRequest:
     type: object
@@ -10154,13 +10383,13 @@ definitions:
         description: The message body that's used in text messages that are based on the message template.
       CreationDate:
         $ref: '#/definitions/__string'
-        description: The date when the message template was created.
+        description: 'The date, in ISO 8601 format, when the message template was created.'
       DefaultSubstitutions:
         $ref: '#/definitions/__string'
         description: The JSON object that specifies the default values that are used for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable.
       LastModifiedDate:
         $ref: '#/definitions/__string'
-        description: The date when the message template was last modified.
+        description: 'The date, in ISO 8601 format, when the message template was last modified.'
       tags:
         $ref: '#/definitions/MapOf__string'
         description: A string-to-string map of key-value pairs that identifies the tags that are associated with the message template. Each tag consists of a required tag key and an associated tag value.
@@ -10173,6 +10402,9 @@ definitions:
       TemplateType:
         $ref: '#/definitions/TemplateType'
         description: 'The type of channel that the message template is designed for. For an SMS template, this value is SMS.'
+      Version:
+        $ref: '#/definitions/__string'
+        description: 'The unique identifier, as an integer, for the active version of the message template, or the version of the template that you specified by using the version parameter in your request.'
     description: Provides information about the content and settings for a message template that can be used in text messages that are sent through the SMS channel.
   GetUserEndpointsRequest:
     type: object
@@ -10199,7 +10431,7 @@ definitions:
         description: 'The text of the script that''s used in messages that are based on the message template, in plain text format.'
       CreationDate:
         $ref: '#/definitions/__string'
-        description: The date when the message template was created.
+        description: 'The date, in ISO 8601 format, when the message template was created.'
       DefaultSubstitutions:
         $ref: '#/definitions/__string'
         description: The JSON object that specifies the default values that are used for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable.
@@ -10208,7 +10440,7 @@ definitions:
         description: 'The code for the language that''s used when synthesizing the text of the script in messages that are based on the message template. For a list of supported languages and the code for each one, see the <a href="https://docs.aws.amazon.com/polly/latest/dg/what-is.html">Amazon Polly Developer Guide</a>.'
       LastModifiedDate:
         $ref: '#/definitions/__string'
-        description: The date when the message template was last modified.
+        description: 'The date, in ISO 8601 format, when the message template was last modified.'
       tags:
         $ref: '#/definitions/MapOf__string'
         description: A string-to-string map of key-value pairs that identifies the tags that are associated with the message template. Each tag consists of a required tag key and an associated tag value.
@@ -10221,6 +10453,9 @@ definitions:
       TemplateType:
         $ref: '#/definitions/TemplateType'
         description: 'The type of channel that the message template is designed for. For a voice template, this value is VOICE.'
+      Version:
+        $ref: '#/definitions/__string'
+        description: 'The unique identifier, as an integer, for the active version of the message template, or the version of the template that you specified by using the version parameter in your request.'
       VoiceId:
         $ref: '#/definitions/__string'
         description: 'The name of the voice that''s used when delivering messages that are based on the message template. For a list of supported voices, see the <a href="https://docs.aws.amazon.com/polly/latest/dg/what-is.html">Amazon Polly Developer Guide</a>.'
@@ -10319,6 +10554,27 @@ definitions:
         $ref: '#/definitions/MapOf__string'
         description: '<p>A string-to-string map of key-value pairs that defines the tags for an application, campaign, journey, message template, or segment. Each of these resources can have a maximum of 50 tags.</p> <p>Each tag consists of a required tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>'
     description: 'Specifies the tags (keys and values) for an application, campaign, journey, message template, or segment.'
+  ListTemplateVersionsRequest:
+    type: object
+    properties: {}
+  TemplateVersionsResponse:
+    type: object
+    required:
+      - Item
+    properties:
+      Item:
+        $ref: '#/definitions/ListOfTemplateVersionResponse'
+        description: 'An array of responses, one for each version of the message template.'
+      Message:
+        $ref: '#/definitions/__string'
+        description: The message that's returned from the API for the request to retrieve information about all the versions of the message template.
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.
+      RequestID:
+        $ref: '#/definitions/__string'
+        description: The unique identifier for the request to retrieve information about all the versions of the message template.
+    description: Provides information about all the versions of a specific message template.
   ListTemplatesRequest:
     type: object
     properties: {}
@@ -10593,7 +10849,7 @@ definitions:
         description: 'The unique identifier for the next activity to perform, after completing the activity for the path.'
       Percentage:
         $ref: '#/definitions/__integer'
-        description: The percentage of participants to send down the activity path.
+        description: '<p>The percentage of participants to send down the activity path.</p> <p>To determine which participants are sent down each path, Amazon Pinpoint applies a probability-based algorithm to the percentages that you specify for the paths. Therefore, the actual percentage of participants who are sent down a path may not be equal to the percentage that you specify.</p>'
     description: Specifies the settings for a path in a random split activity in a journey.
   __blob:
     type: string
@@ -10895,7 +11151,17 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: 'The name of the message template to use for the message. If specified, this value must match the name of an existing message template.'
-    description: Specifies the name of the message template to use for the message.
+      Version:
+        $ref: '#/definitions/__string'
+        description: '<p>The unique identifier for the version of the message template to use for the message. If specified, this value must match the identifier for an existing template version. To retrieve a list of versions and version identifiers for a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.</p> <p>If you don''t specify a value for this property, Amazon Pinpoint uses the <i>active</i> version of the template. The <i>active</i> version is typically the version of a template that''s been most recently reviewed and approved for use, depending on your workflow. It isn''t necessarily the latest version of a template.</p>'
+    description: Specifies the name and version of the message template to use for the message.
+  TemplateActiveVersionRequest:
+    type: object
+    properties:
+      Version:
+        $ref: '#/definitions/__string'
+        description: 'The unique identifier for the version of the message template to use as the active version of the template. If specified, this value must match the identifier for an existing template version. To retrieve a list of versions and version identifiers for a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.'
+    description: Specifies which version of a message template to use as the active version of the template.
   TemplateResponse:
     type: object
     required:
@@ -10909,13 +11175,13 @@ definitions:
         description: The Amazon Resource Name (ARN) of the message template.
       CreationDate:
         $ref: '#/definitions/__string'
-        description: The date when the message template was created.
+        description: 'The date, in ISO 8601 format, when the message template was created.'
       DefaultSubstitutions:
         $ref: '#/definitions/__string'
         description: The JSON object that specifies the default values that are used for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable.
       LastModifiedDate:
         $ref: '#/definitions/__string'
-        description: The date when the message template was last modified.
+        description: 'The date, in ISO 8601 format, when the message template was last modified.'
       tags:
         $ref: '#/definitions/MapOf__string'
         description: A string-to-string map of key-value pairs that identifies the tags that are associated with the message template. Each tag consists of a required tag key and an associated tag value.
@@ -10927,8 +11193,45 @@ definitions:
         description: The name of the message template.
       TemplateType:
         $ref: '#/definitions/TemplateType'
-        description: The type of channel that the message template is designed for.
+        description: 'The type of channel that the message template is designed for. Possible values are: EMAIL, PUSH, SMS, and VOICE.'
+      Version:
+        $ref: '#/definitions/__string'
+        description: 'The unique identifier, as an integer, for the active version of the message template.'
     description: Provides information about a message template that's associated with your Amazon Pinpoint account.
+  TemplateVersionResponse:
+    type: object
+    required:
+      - LastModifiedDate
+      - CreationDate
+      - TemplateName
+      - TemplateType
+    properties:
+      CreationDate:
+        $ref: '#/definitions/__string'
+        description: 'The date, in ISO 8601 format, when the version of the message template was created.'
+      DefaultSubstitutions:
+        $ref: '#/definitions/__string'
+        description: A JSON object that specifies the default values that are used for message variables in the version of the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable.
+      LastModifiedDate:
+        $ref: '#/definitions/__string'
+        description: 'The date, in ISO 8601 format, when the version of the message template was last modified.'
+      TemplateDescription:
+        $ref: '#/definitions/__string'
+        description: The custom description of the version of the message template.
+      TemplateName:
+        $ref: '#/definitions/__string'
+        description: The name of the message template.
+      TemplateType:
+        $ref: '#/definitions/__string'
+        description: 'The type of channel that the message template is designed for. Possible values are: EMAIL, PUSH, SMS, and VOICE.'
+      Version:
+        $ref: '#/definitions/__string'
+        description: The unique identifier for the version of the message template. This value is an integer that Amazon Pinpoint automatically increments and assigns to each new version of a template.
+    description: Provides information about a specific version of a message template.
+  ListOfTemplateVersionResponse:
+    type: array
+    items:
+      $ref: '#/definitions/TemplateVersionResponse'
   ListOfTemplateResponse:
     type: array
     items:
@@ -11095,7 +11398,6 @@ definitions:
     properties:
       PushNotificationTemplateRequest:
         $ref: '#/definitions/PushNotificationTemplateRequest'
-        description: Updates an existing message template that you can use in messages that are sent through a push notification channel.
   UpdateSegmentRequest:
     type: object
     required:
@@ -11117,6 +11419,13 @@ definitions:
     properties:
       SMSTemplateRequest:
         $ref: '#/definitions/SMSTemplateRequest'
+  UpdateTemplateActiveVersionRequest:
+    type: object
+    required:
+      - TemplateActiveVersionRequest
+    properties:
+      TemplateActiveVersionRequest:
+        $ref: '#/definitions/TemplateActiveVersionRequest'
   VoiceChannelRequest:
     type: object
     properties:

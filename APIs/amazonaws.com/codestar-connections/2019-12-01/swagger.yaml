@@ -1,0 +1,425 @@
+swagger: '2.0'
+info:
+  version: '2019-12-01'
+  x-release: v4
+  title: AWS CodeStar connections
+  description: '<p>This AWS CodeStar Connections API Reference provides descriptions and usage examples of the operations and data types for the AWS CodeStar Connections API. You can use the Connections API to work with connections and installations.</p> <p> <i>Connections</i> are configurations that you use to connect AWS resources to external code repositories. Each connection is a resource that can be given to services such as CodePipeline to connect to a third-party repository such as Bitbucket. For example, you can add the connection in CodePipeline so that it triggers your pipeline when a code change is made to your third-party code repository. Each connection is named and associated with a unique ARN that is used to reference the connection.</p> <p>When you create a connection, the console initiates a third-party connection handshake. <i>Installations</i> are the apps that are used to conduct this handshake. For example, the installation for the Bitbucket provider type is the Bitbucket Cloud app. When you create a connection, you can choose an existing installation or create one.</p> <p>You can work with connections by calling:</p> <ul> <li> <p> <a>CreateConnection</a>, which creates a uniquely named connection that can be referenced by services such as CodePipeline.</p> </li> <li> <p> <a>DeleteConnection</a>, which deletes the specified connection.</p> </li> <li> <p> <a>GetConnection</a>, which returns information about the connection, including the connection status.</p> </li> <li> <p> <a>ListConnections</a>, which lists the connections associated with your account.</p> </li> </ul> <p>For information about how to use AWS CodeStar Connections, see the <a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html">AWS CodePipeline User Guide</a>.</p>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: codestar-connections
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/codestar-connections-2019-12-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/codestar-connections/'
+host: codestar-connections.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+x-servers:
+  - url: 'http://codestar-connections.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The AWS CodeStar connections multi-region endpoint
+  - url: 'https://codestar-connections.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The AWS CodeStar connections multi-region endpoint
+  - url: 'http://codestar-connections.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS CodeStar connections endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://codestar-connections.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS CodeStar connections endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  '/#X-Amz-Target=com.amazonaws.codestar.connections.CodeStar_connections_20191201.CreateConnection':
+    post:
+      operationId: CreateConnection
+      description: Creates a connection that can then be given to other AWS services like CodePipeline so that it can access third-party code repositories. The connection is in pending status until the third-party connection handshake is completed from the console.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateConnectionOutput'
+        '480':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateConnectionInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - com.amazonaws.codestar.connections.CodeStar_connections_20191201.CreateConnection
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=com.amazonaws.codestar.connections.CodeStar_connections_20191201.DeleteConnection':
+    post:
+      operationId: DeleteConnection
+      description: The connection to be deleted.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteConnectionOutput'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteConnectionInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - com.amazonaws.codestar.connections.CodeStar_connections_20191201.DeleteConnection
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=com.amazonaws.codestar.connections.CodeStar_connections_20191201.GetConnection':
+    post:
+      operationId: GetConnection
+      description: 'Returns the connection ARN and details such as status, owner, and provider type.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetConnectionOutput'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetConnectionInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - com.amazonaws.codestar.connections.CodeStar_connections_20191201.GetConnection
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=com.amazonaws.codestar.connections.CodeStar_connections_20191201.ListConnections':
+    post:
+      operationId: ListConnections
+      description: Lists the connections associated with your account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListConnectionsOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListConnectionsInput'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - com.amazonaws.codestar.connections.CodeStar_connections_20191201.ListConnections
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  CreateConnectionOutput:
+    type: object
+    required:
+      - ConnectionArn
+    properties:
+      ConnectionArn:
+        $ref: '#/definitions/ConnectionArn'
+        description: <p>The Amazon Resource Name (ARN) of the connection to be created. The ARN is used as the connection reference when the connection is shared between AWS services.</p> <note> <p>The ARN is never reused if the connection is deleted.</p> </note>
+  CreateConnectionInput:
+    type: object
+    required:
+      - ProviderType
+      - ConnectionName
+    properties:
+      ProviderType:
+        $ref: '#/definitions/ProviderType'
+        description: 'The name of the external provider where your third-party code repository is configured. Currently, the valid provider type is Bitbucket.'
+      ConnectionName:
+        $ref: '#/definitions/ConnectionName'
+        description: The name of the connection to be created. The name must be unique in the calling AWS account.
+  LimitExceededException: {}
+  DeleteConnectionOutput:
+    type: object
+    properties: {}
+  DeleteConnectionInput:
+    type: object
+    required:
+      - ConnectionArn
+    properties:
+      ConnectionArn:
+        $ref: '#/definitions/ConnectionArn'
+        description: <p>The Amazon Resource Name (ARN) of the connection to be deleted.</p> <note> <p>The ARN is never reused if the connection is deleted.</p> </note>
+  ResourceNotFoundException: {}
+  GetConnectionOutput:
+    type: object
+    properties:
+      Connection:
+        $ref: '#/definitions/Connection'
+        description: 'The connection details, such as status, owner, and provider type.'
+  GetConnectionInput:
+    type: object
+    required:
+      - ConnectionArn
+    properties:
+      ConnectionArn:
+        $ref: '#/definitions/ConnectionArn'
+        description: The Amazon Resource Name (ARN) of a connection.
+  ListConnectionsOutput:
+    type: object
+    properties:
+      Connections:
+        $ref: '#/definitions/ConnectionList'
+        description: 'A list of connections and the details for each connection, such as status, owner, and provider type.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'A token that can be used in the next <code>ListConnections</code> call. To view all items in the list, continue to call this operation with each subsequent token until no more <code>nextToken</code> values are returned.'
+  ListConnectionsInput:
+    type: object
+    properties:
+      ProviderTypeFilter:
+        $ref: '#/definitions/ProviderType'
+        description: 'Filters the list of connections to those associated with a specified provider, such as Bitbucket.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The token that was returned from the previous <code>ListConnections</code> call, which can be used to return the next set of connections in the list.'
+  AccountId:
+    type: string
+    pattern: '[0-9]{12}'
+    minLength: 12
+    maxLength: 12
+  ConnectionName:
+    type: string
+    minLength: 1
+    maxLength: 32
+  ConnectionArn:
+    type: string
+    pattern: 'arn:aws(-[\w]+)*:.+:.+:[0-9]{12}:.+'
+    minLength: 0
+    maxLength: 256
+  ProviderType:
+    type: string
+    enum:
+      - Bitbucket
+  ConnectionStatus:
+    type: string
+    enum:
+      - PENDING
+      - AVAILABLE
+      - ERROR
+  Connection:
+    type: object
+    properties:
+      ConnectionName:
+        $ref: '#/definitions/ConnectionName'
+        description: The name of the connection. Connection names must be unique in an AWS user account.
+      ConnectionArn:
+        $ref: '#/definitions/ConnectionArn'
+        description: <p>The Amazon Resource Name (ARN) of the connection. The ARN is used as the connection reference when the connection is shared between AWS services.</p> <note> <p>The ARN is never reused if the connection is deleted.</p> </note>
+      ProviderType:
+        $ref: '#/definitions/ProviderType'
+        description: 'The name of the external provider where your third-party code repository is configured. Currently, the valid provider type is Bitbucket.'
+      OwnerAccountId:
+        $ref: '#/definitions/AccountId'
+        description: 'The name of the external provider where your third-party code repository is configured. For Bitbucket, this is the account ID of the owner of the Bitbucket repository.'
+      ConnectionStatus:
+        $ref: '#/definitions/ConnectionStatus'
+        description: 'The current status of the connection. '
+    description: The configuration that allows a service such as CodePipeline to connect to a third-party code repository.
+  ConnectionList:
+    type: array
+    items:
+      $ref: '#/definitions/Connection'
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 50
+  NextToken:
+    type: string
+    pattern: '[a-zA-Z0-9=\-\\/]+'
+    minLength: 1
+    maxLength: 1024

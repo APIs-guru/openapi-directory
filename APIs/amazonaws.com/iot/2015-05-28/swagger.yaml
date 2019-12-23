@@ -2840,6 +2840,13 @@ paths:
                 items:
                   $ref: '#/definitions/Target'
                 minItems: 1
+              protocols:
+                description: 'The protocol used to transfer the OTA update image. Valid values are [HTTP], [MQTT], [HTTP, MQTT]. When both HTTP and MQTT are specified, the target device can choose the protocol.'
+                type: array
+                items:
+                  $ref: '#/definitions/Protocol'
+                minItems: 1
+                maxItems: 2
               targetSelection:
                 description: 'Specifies whether the update will continue to run (CONTINUOUS), or will be complete after all the things specified as targets have completed the update (SNAPSHOT). If continuous, the update may also be run on a thing when a change is detected in a target. For example, an update will run on a thing when the thing is added to a target group, even after the update was completed by all things originally in the group. Valid values: CONTINUOUS | SNAPSHOT.'
                 type: string
@@ -2853,6 +2860,13 @@ paths:
                   maximumPerMinute:
                     $ref: '#/definitions/MaximumPerMinute'
                     description: The maximum number of OTA update job executions started per minute.
+              awsJobPresignedUrlConfig:
+                description: Configuration information for pre-signed URLs. Valid when <code>protocols</code> contains HTTP.
+                type: object
+                properties:
+                  expiresInSec:
+                    $ref: '#/definitions/ExpiresInSeconds'
+                    description: 'How long (in seconds) pre-signed URLs are valid. Valid values are 60 - 3600, the default value is 1800 seconds. Pre-signed URLs are generated when a request for the job document is received.'
               files:
                 description: The files to be streamed by the OTA update.
                 type: array
@@ -11659,10 +11673,17 @@ definitions:
         description: The OTA update status.
   Target:
     type: string
+  Protocol:
+    type: string
+    enum:
+      - MQTT
+      - HTTP
   MaximumPerMinute:
     type: integer
     minimum: 1
     maximum: 1000
+  ExpiresInSeconds:
+    type: integer
   OTAUpdateFile:
     type: object
     properties:
@@ -14625,6 +14646,13 @@ definitions:
         $ref: '#/definitions/MaximumPerMinute'
         description: The maximum number of OTA update job executions started per minute.
     description: Configuration for the rollout of OTA updates.
+  AwsJobPresignedUrlConfig:
+    type: object
+    properties:
+      expiresInSec:
+        $ref: '#/definitions/ExpiresInSeconds'
+        description: 'How long (in seconds) pre-signed URLs are valid. Valid values are 60 - 3600, the default value is 1800 seconds. Pre-signed URLs are generated when a request for the job document is received.'
+    description: Configuration information for pre-signed URLs. Valid when <code>protocols</code> contains HTTP.
   BehaviorName:
     type: string
     pattern: '[a-zA-Z0-9:_-]+'
@@ -15342,6 +15370,12 @@ definitions:
     items:
       $ref: '#/definitions/Target'
     minItems: 1
+  Protocols:
+    type: array
+    items:
+      $ref: '#/definitions/Protocol'
+    minItems: 1
+    maxItems: 2
   OTAUpdateFiles:
     type: array
     items:
@@ -15361,12 +15395,18 @@ definitions:
       targets:
         $ref: '#/definitions/Targets'
         description: The targeted devices to receive OTA updates.
+      protocols:
+        $ref: '#/definitions/Protocols'
+        description: 'The protocol used to transfer the OTA update image. Valid values are [HTTP], [MQTT], [HTTP, MQTT]. When both HTTP and MQTT are specified, the target device can choose the protocol.'
       targetSelection:
         $ref: '#/definitions/TargetSelection'
         description: 'Specifies whether the update will continue to run (CONTINUOUS), or will be complete after all the things specified as targets have completed the update (SNAPSHOT). If continuous, the update may also be run on a thing when a change is detected in a target. For example, an update will run on a thing when the thing is added to a target group, even after the update was completed by all things originally in the group. Valid values: CONTINUOUS | SNAPSHOT.'
       awsJobExecutionsRolloutConfig:
         $ref: '#/definitions/AwsJobExecutionsRolloutConfig'
         description: Configuration for the rollout of OTA updates.
+      awsJobPresignedUrlConfig:
+        $ref: '#/definitions/AwsJobPresignedUrlConfig'
+        description: Configuration information for pre-signed URLs.
       files:
         $ref: '#/definitions/OTAUpdateFiles'
         description: The files to be streamed by the OTA update.
@@ -16571,9 +16611,15 @@ definitions:
       targets:
         $ref: '#/definitions/Targets'
         description: The targets of the OTA update.
+      protocols:
+        $ref: '#/definitions/Protocols'
+        description: 'The protocol used to transfer the OTA update image. Valid values are [HTTP], [MQTT], [HTTP, MQTT]. When both HTTP and MQTT are specified, the target device can choose the protocol.'
       awsJobExecutionsRolloutConfig:
         $ref: '#/definitions/AwsJobExecutionsRolloutConfig'
         description: Configuration for the rollout of OTA updates.
+      awsJobPresignedUrlConfig:
+        $ref: '#/definitions/AwsJobPresignedUrlConfig'
+        description: Configuration information for pre-signed URLs. Valid when <code>protocols</code> contains HTTP.
       targetSelection:
         $ref: '#/definitions/TargetSelection'
         description: 'Specifies whether the OTA update will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the OTA update (SNAPSHOT). If continuous, the OTA update may also be run on a thing when a change is detected in a target. For example, an OTA update will run on a thing when the thing is added to a target group, even after the OTA update was completed by all things originally in the group. '
@@ -17627,10 +17673,10 @@ definitions:
         description: Optional. A unique identifier for this entry that you can define to better track which message caused an error in case of failure. Accepts substitution templates. Defaults to a new UUID.
       assetId:
         $ref: '#/definitions/AssetId'
-        description: The ID of the AWS IoT SiteWise asset. You must specify either a <code>propertyAlias</code> or both an <code>analiasId</code> and a <code>propertyId</code>. Accepts substitution templates.
+        description: The ID of the AWS IoT SiteWise asset. You must specify either a <code>propertyAlias</code> or both an <code>aliasId</code> and a <code>propertyId</code>. Accepts substitution templates.
       propertyId:
         $ref: '#/definitions/AssetPropertyId'
-        description: The ID of the asset's property. You must specify either a <code>propertyAlias</code> or both an <code>analiasId</code> and a <code>propertyId</code>. Accepts substitution templates.
+        description: The ID of the asset's property. You must specify either a <code>propertyAlias</code> or both an <code>aliasId</code> and a <code>propertyId</code>. Accepts substitution templates.
       propertyAlias:
         $ref: '#/definitions/AssetPropertyAlias'
         description: The name of the property alias associated with your asset property. You must specify either a <code>propertyAlias</code> or both an <code>aliasId</code> and a <code>propertyId</code>. Accepts substitution templates.
@@ -18103,7 +18149,7 @@ definitions:
         description: Specifies a test HTTP authorization request.
       mqttContext:
         $ref: '#/definitions/MqttContext'
-        description: Specifies a test MQTT authorization request.&gt;
+        description: Specifies a test MQTT authorization request.
       tlsContext:
         $ref: '#/definitions/TlsContext'
         description: Specifies a test TLS authorization request.

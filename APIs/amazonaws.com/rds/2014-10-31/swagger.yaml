@@ -1348,7 +1348,7 @@ paths:
     get:
       x-aws-operation-name: CopyDBSnapshot
       operationId: GET CopyDBSnapshot
-      description: '<p>Copies the specified DB snapshot. The source DB snapshot must be in the "available" state.</p> <p>You can copy a snapshot from one AWS Region to another. In that case, the AWS Region where you call the <code>CopyDBSnapshot</code> action is the destination AWS Region for the DB snapshot copy. </p> <p>For more information about copying snapshots, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopyDBSnapshot.html">Copying a DB Snapshot</a> in the <i>Amazon RDS User Guide.</i> </p>'
+      description: '<p>Copies the specified DB snapshot. The source DB snapshot must be in the "available" state.</p> <p>You can copy a snapshot from one AWS Region to another. In that case, the AWS Region where you call the <code>CopyDBSnapshot</code> action is the destination AWS Region for the DB snapshot copy. </p> <p>For more information about copying snapshots, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopyDBSnapshot">Copying a DB Snapshot</a> in the <i>Amazon RDS User Guide.</i> </p>'
       responses:
         '200':
           description: Success
@@ -1440,7 +1440,7 @@ paths:
     post:
       x-aws-operation-name: CopyDBSnapshot
       operationId: POST CopyDBSnapshot
-      description: '<p>Copies the specified DB snapshot. The source DB snapshot must be in the "available" state.</p> <p>You can copy a snapshot from one AWS Region to another. In that case, the AWS Region where you call the <code>CopyDBSnapshot</code> action is the destination AWS Region for the DB snapshot copy. </p> <p>For more information about copying snapshots, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopyDBSnapshot.html">Copying a DB Snapshot</a> in the <i>Amazon RDS User Guide.</i> </p>'
+      description: '<p>Copies the specified DB snapshot. The source DB snapshot must be in the "available" state.</p> <p>You can copy a snapshot from one AWS Region to another. In that case, the AWS Region where you call the <code>CopyDBSnapshot</code> action is the destination AWS Region for the DB snapshot copy. </p> <p>For more information about copying snapshots, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopyDBSnapshot">Copying a DB Snapshot</a> in the <i>Amazon RDS User Guide.</i> </p>'
       responses:
         '200':
           description: Success
@@ -12550,6 +12550,11 @@ paths:
           required: false
           description: The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.
           type: integer
+        - name: CertificateRotationRestart
+          in: query
+          required: false
+          description: '<p>A value that indicates whether the DB instance is restarted when you rotate your SSL/TLS certificate.</p> <p>By default, the DB instance is restarted when you rotate your SSL/TLS certificate. The certificate is not updated until the DB instance is restarted.</p> <important> <p>Set this parameter only if you are <i>not</i> using SSL/TLS to connect to the DB instance.</p> </important> <p>If you are using SSL/TLS to connect to the DB instance, follow the appropriate instructions for your DB engine to rotate your SSL/TLS certificate:</p> <ul> <li> <p>For more information about rotating your SSL/TLS certificate for RDS DB engines, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL-certificate-rotation.html"> Rotating Your SSL/TLS Certificate.</a> in the <i>Amazon RDS User Guide.</i> </p> </li> <li> <p>For more information about rotating your SSL/TLS certificate for Aurora DB engines, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL-certificate-rotation.html"> Rotating Your SSL/TLS Certificate</a> in the <i>Amazon Aurora User Guide.</i> </p> </li> </ul>'
+          type: boolean
         - name: Action
           in: query
           required: true
@@ -12870,6 +12875,11 @@ paths:
           required: false
           description: The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.
           type: integer
+        - name: CertificateRotationRestart
+          in: formData
+          required: false
+          description: '<p>A value that indicates whether the DB instance is restarted when you rotate your SSL/TLS certificate.</p> <p>By default, the DB instance is restarted when you rotate your SSL/TLS certificate. The certificate is not updated until the DB instance is restarted.</p> <important> <p>Set this parameter only if you are <i>not</i> using SSL/TLS to connect to the DB instance.</p> </important> <p>If you are using SSL/TLS to connect to the DB instance, follow the appropriate instructions for your DB engine to rotate your SSL/TLS certificate:</p> <ul> <li> <p>For more information about rotating your SSL/TLS certificate for RDS DB engines, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL-certificate-rotation.html"> Rotating Your SSL/TLS Certificate.</a> in the <i>Amazon RDS User Guide.</i> </p> </li> <li> <p>For more information about rotating your SSL/TLS certificate for Aurora DB engines, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL-certificate-rotation.html"> Rotating Your SSL/TLS Certificate</a> in the <i>Amazon Aurora User Guide.</i> </p> </li> </ul>'
+          type: boolean
         - name: Action
           in: query
           required: true
@@ -22443,7 +22453,7 @@ definitions:
         description: The writer endpoint for the RDS DB instance or Aurora DB cluster.
       TrackedClusterId:
         $ref: '#/definitions/String'
-        description: 'The DB cluster identifier when the target represents an Aurora DB cluster. This field is blank when the target represents an '
+        description: The DB cluster identifier when the target represents an Aurora DB cluster. This field is blank when the target represents an RDS DB instance.
       RdsResourceId:
         $ref: '#/definitions/String'
         description: 'The identifier representing the target. It can be the instance identifier for an RDS DB instance, or the cluster identifier for an Aurora DB cluster.'
@@ -24005,6 +24015,9 @@ definitions:
       MaxAllocatedStorage:
         $ref: '#/definitions/IntegerOptional'
         description: The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.
+      CertificateRotationRestart:
+        $ref: '#/definitions/BooleanOptional'
+        description: '<p>A value that indicates whether the DB instance is restarted when you rotate your SSL/TLS certificate.</p> <p>By default, the DB instance is restarted when you rotate your SSL/TLS certificate. The certificate is not updated until the DB instance is restarted.</p> <important> <p>Set this parameter only if you are <i>not</i> using SSL/TLS to connect to the DB instance.</p> </important> <p>If you are using SSL/TLS to connect to the DB instance, follow the appropriate instructions for your DB engine to rotate your SSL/TLS certificate:</p> <ul> <li> <p>For more information about rotating your SSL/TLS certificate for RDS DB engines, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL-certificate-rotation.html"> Rotating Your SSL/TLS Certificate.</a> in the <i>Amazon RDS User Guide.</i> </p> </li> <li> <p>For more information about rotating your SSL/TLS certificate for Aurora DB engines, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL-certificate-rotation.html"> Rotating Your SSL/TLS Certificate</a> in the <i>Amazon Aurora User Guide.</i> </p> </li> </ul>'
     description: <p/>
   ModifyDBParameterGroupMessage:
     type: object

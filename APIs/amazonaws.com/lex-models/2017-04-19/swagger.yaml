@@ -534,6 +534,7 @@ paths:
             type: object
             required:
               - botVersion
+              - conversationLogs
             properties:
               description:
                 description: A description of the alias.
@@ -549,6 +550,16 @@ paths:
               checksum:
                 description: '<p>Identifies a specific revision of the <code>$LATEST</code> version.</p> <p>When you create a new bot alias, leave the <code>checksum</code> field blank. If you specify a checksum you get a <code>BadRequestException</code> exception.</p> <p>When you want to update a bot alias, set the <code>checksum</code> field to the checksum of the most recent revision of the <code>$LATEST</code> version. If you don''t specify the <code> checksum</code> field, or if the checksum does not match the <code>$LATEST</code> version, you get a <code>PreconditionFailedException</code> exception.</p>'
                 type: string
+              conversationLogs:
+                description: Provides the settings needed for conversation logs.
+                type: object
+                properties:
+                  logSettings:
+                    $ref: '#/definitions/LogSettingsRequestList'
+                    description: 'The settings for your conversation logs. You can log the conversation text, conversation audio, or both.'
+                  iamRoleArn:
+                    $ref: '#/definitions/IamRoleArn'
+                    description: 'The Amazon Resource Name (ARN) of an IAM role with permission to write to your CloudWatch Logs for text logs and your S3 bucket for audio logs. For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/conversation-logs.html">Creating Conversation Logs</a>.'
   '/bots/{botName}/aliases/{aliasName}/channels/{name}':
     delete:
       operationId: DeleteBotChannelAssociation
@@ -2512,6 +2523,9 @@ definitions:
       checksum:
         $ref: '#/definitions/String'
         description: Checksum of the bot alias.
+      conversationLogs:
+        $ref: '#/definitions/ConversationLogsResponse'
+        description: The settings that determine how Amazon Lex uses conversation logs for the alias.
   GetBotAliasesResponse:
     type: object
     properties:
@@ -3039,6 +3053,18 @@ definitions:
       checksum:
         $ref: '#/definitions/String'
         description: The checksum for the current version of the alias.
+      conversationLogs:
+        $ref: '#/definitions/ConversationLogsResponse'
+        description: The settings that determine how Amazon Lex uses conversation logs for the alias.
+  LogSettingsRequestList:
+    type: array
+    items:
+      $ref: '#/definitions/LogSettingsRequest'
+  IamRoleArn:
+    type: string
+    pattern: '^arn:[\w\-]+:iam::[\d]{12}:role\/[\w+=,\.@\-]{1,64}$'
+    minLength: 20
+    maxLength: 2048
   PutIntentResponse:
     type: object
     example:
@@ -3207,6 +3233,9 @@ definitions:
       responseCard:
         $ref: '#/definitions/ResponseCard'
         description: ' A set of possible responses for the slot type used by text-based clients. A user chooses an option from the response card, instead of using text to reply. '
+      obfuscationSetting:
+        $ref: '#/definitions/ObfuscationSetting'
+        description: 'Determines whether a slot is obfuscated in conversation logs and stored utterances. When you obfuscate a slot, the value is replaced by the slot name in curly braces ({}). For example, if the slot name is "full_name", obfuscated values are replaced with "{full_name}". For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/how-obfuscate.html"> Slot Obfuscation </a>. '
     description: Identifies the version of a specific slot.
   Utterance:
     type: string
@@ -3368,6 +3397,16 @@ definitions:
     format: date-time
   String:
     type: string
+  ConversationLogsResponse:
+    type: object
+    properties:
+      logSettings:
+        $ref: '#/definitions/LogSettingsResponseList'
+        description: The settings for your conversation logs.
+      iamRoleArn:
+        $ref: '#/definitions/IamRoleArn'
+        description: The Amazon Resource Name (ARN) of the IAM role used to write your logs to CloudWatch Logs or an S3 bucket.
+    description: Contains information about conversation log settings.
   BotAliasMetadata:
     type: object
     properties:
@@ -3392,6 +3431,9 @@ definitions:
       checksum:
         $ref: '#/definitions/String'
         description: Checksum of the bot alias.
+      conversationLogs:
+        $ref: '#/definitions/ConversationLogsResponse'
+        description: Settings that determine how Amazon Lex uses conversation logs for the alias.
     description: Provides information about a bot alias.
   BotAliasMetadataList:
     type: array
@@ -3553,6 +3595,23 @@ definitions:
       - PlainText
       - SSML
       - CustomPayload
+  ConversationLogsRequest:
+    type: object
+    required:
+      - logSettings
+      - iamRoleArn
+    properties:
+      logSettings:
+        $ref: '#/definitions/LogSettingsRequestList'
+        description: 'The settings for your conversation logs. You can log the conversation text, conversation audio, or both.'
+      iamRoleArn:
+        $ref: '#/definitions/IamRoleArn'
+        description: 'The Amazon Resource Name (ARN) of an IAM role with permission to write to your CloudWatch Logs for text logs and your S3 bucket for audio logs. For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/conversation-logs.html">Creating Conversation Logs</a>.'
+    description: Provides the settings needed for conversation logs.
+  LogSettingsResponseList:
+    type: array
+    items:
+      $ref: '#/definitions/LogSettingsResponse'
   Count:
     type: integer
   CreateBotVersionRequest:
@@ -3686,6 +3745,11 @@ definitions:
   DeleteUtterancesRequest:
     type: object
     properties: {}
+  Destination:
+    type: string
+    enum:
+      - CLOUDWATCH_LOGS
+      - S3
   Value:
     type: string
     minLength: 1
@@ -3834,6 +3898,11 @@ definitions:
         $ref: '#/definitions/Version'
         description: The version of the intent.
     description: Provides information about an intent.
+  KmsKeyArn:
+    type: string
+    pattern: '^arn:[\w\-]+:kms:[\w\-]+:[\d]{12}:(?:key\/[\w\-]+|alias\/[a-zA-Z0-9:\/_\-]{1,256})$'
+    minLength: 20
+    maxLength: 2048
   UtteranceData:
     type: object
     properties:
@@ -3867,6 +3936,58 @@ definitions:
         $ref: '#/definitions/ListOfUtterance'
         description: One or more <a>UtteranceData</a> objects that contain information about the utterances that have been made to a bot. The maximum number of object is 100.
     description: Provides a list of utterances that have been made to a specific version of your bot. The list contains a maximum of 100 utterances.
+  LogType:
+    type: string
+    enum:
+      - AUDIO
+      - TEXT
+  ResourceArn:
+    type: string
+    pattern: '^arn:[\w\-]+:(?:logs:[\w\-]+:[\d]{12}:log-group:[\.\-_/#A-Za-z0-9]{1,512}(?::\*)?|s3:::[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9])$'
+    minLength: 1
+    maxLength: 2048
+  LogSettingsRequest:
+    type: object
+    required:
+      - logType
+      - destination
+      - resourceArn
+    properties:
+      logType:
+        $ref: '#/definitions/LogType'
+        description: The type of logging to enable. Text logs are delivered to a CloudWatch Logs log group. Audio logs are delivered to an S3 bucket.
+      destination:
+        $ref: '#/definitions/Destination'
+        description: Where the logs will be delivered. Text logs are delivered to a CloudWatch Logs log group. Audio logs are delivered to an S3 bucket.
+      kmsKeyArn:
+        $ref: '#/definitions/KmsKeyArn'
+        description: The Amazon Resource Name (ARN) of the AWS KMS customer managed key for encrypting audio logs delivered to an S3 bucket. The key does not apply to CloudWatch Logs and is optional for S3 buckets.
+      resourceArn:
+        $ref: '#/definitions/ResourceArn'
+        description: The Amazon Resource Name (ARN) of the CloudWatch Logs log group or S3 bucket where the logs should be delivered.
+    description: Settings used to configure conversation logs.
+  ResourcePrefix:
+    type: string
+    maxLength: 1024
+  LogSettingsResponse:
+    type: object
+    properties:
+      logType:
+        $ref: '#/definitions/LogType'
+        description: The type of logging that is enabled.
+      destination:
+        $ref: '#/definitions/Destination'
+        description: The destination where logs are delivered.
+      kmsKeyArn:
+        $ref: '#/definitions/KmsKeyArn'
+        description: The Amazon Resource Name (ARN) of the key used to encrypt audio logs in an S3 bucket.
+      resourceArn:
+        $ref: '#/definitions/ResourceArn'
+        description: The Amazon Resource Name (ARN) of the CloudWatch Logs log group or S3 bucket where the logs are delivered.
+      resourcePrefix:
+        $ref: '#/definitions/ResourcePrefix'
+        description: '<p>The resource prefix of the S3 object or CloudWatch Logs log entry where logs are delivered. For both S3 and CloudWatch Logs, the prefix is:</p> <p> <code>aws/lex/bot-name/bot-alias/bot-version</code> </p>'
+    description: The settings for conversation logs.
   Message:
     type: object
     required:
@@ -3883,6 +4004,11 @@ definitions:
         $ref: '#/definitions/GroupNumber'
         description: 'Identifies the message group that the message belongs to. When a group is assigned to a message, Amazon Lex returns one message from each group in the response.'
     description: The message object that provides the message text and its type.
+  ObfuscationSetting:
+    type: string
+    enum:
+      - NONE
+      - DEFAULT_OBFUSCATION
   Priority:
     type: integer
     minimum: 0
@@ -3906,6 +4032,9 @@ definitions:
       checksum:
         $ref: '#/definitions/String'
         description: '<p>Identifies a specific revision of the <code>$LATEST</code> version.</p> <p>When you create a new bot alias, leave the <code>checksum</code> field blank. If you specify a checksum you get a <code>BadRequestException</code> exception.</p> <p>When you want to update a bot alias, set the <code>checksum</code> field to the checksum of the most recent revision of the <code>$LATEST</code> version. If you don''t specify the <code> checksum</code> field, or if the checksum does not match the <code>$LATEST</code> version, you get a <code>PreconditionFailedException</code> exception.</p>'
+      conversationLogs:
+        $ref: '#/definitions/ConversationLogsRequest'
+        description: Settings that determine how Amazon Lex uses conversation logs for the alias.
   PutBotRequest:
     type: object
     required:

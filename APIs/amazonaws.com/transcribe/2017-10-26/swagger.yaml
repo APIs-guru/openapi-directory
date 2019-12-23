@@ -205,6 +205,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=Transcribe.CreateVocabularyFilter':
+    post:
+      operationId: CreateVocabularyFilter
+      description: 'Creates a new vocabulary filter that you can use to filter words, such as profane words, from the output of a transcription job.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateVocabularyFilterResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateVocabularyFilterRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Transcribe.CreateVocabularyFilter
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=Transcribe.DeleteTranscriptionJob':
     post:
       operationId: DeleteTranscriptionJob
@@ -279,6 +324,49 @@ paths:
           type: string
           enum:
             - Transcribe.DeleteVocabulary
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=Transcribe.DeleteVocabularyFilter':
+    post:
+      operationId: DeleteVocabularyFilter
+      description: Removes a vocabulary filter.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteVocabularyFilterRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Transcribe.DeleteVocabularyFilter
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -369,6 +457,51 @@ paths:
           type: string
           enum:
             - Transcribe.GetVocabulary
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=Transcribe.GetVocabularyFilter':
+    post:
+      operationId: GetVocabularyFilter
+      description: Returns information about a vocabulary filter.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetVocabularyFilterResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetVocabularyFilterRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Transcribe.GetVocabularyFilter
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -479,6 +612,57 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=Transcribe.ListVocabularyFilters':
+    post:
+      operationId: ListVocabularyFilters
+      description: Gets information about vocabulary filters.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListVocabularyFiltersResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListVocabularyFiltersRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Transcribe.ListVocabularyFilters
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=Transcribe.StartTranscriptionJob':
     post:
       operationId: StartTranscriptionJob
@@ -573,6 +757,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=Transcribe.UpdateVocabularyFilter':
+    post:
+      operationId: UpdateVocabularyFilter
+      description: Updates a vocabulary filter with a new list of filtered words.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateVocabularyFilterResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateVocabularyFilterRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Transcribe.UpdateVocabularyFilter
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   CreateVocabularyResponse:
     type: object
@@ -614,6 +843,36 @@ definitions:
   LimitExceededException: {}
   InternalFailureException: {}
   ConflictException: {}
+  CreateVocabularyFilterResponse:
+    type: object
+    properties:
+      VocabularyFilterName:
+        $ref: '#/definitions/VocabularyFilterName'
+        description: The name of the vocabulary filter.
+      LanguageCode:
+        $ref: '#/definitions/LanguageCode'
+        description: The language code of the words in the collection.
+      LastModifiedTime:
+        $ref: '#/definitions/DateTime'
+        description: The date and time that the vocabulary filter was modified.
+  CreateVocabularyFilterRequest:
+    type: object
+    required:
+      - VocabularyFilterName
+      - LanguageCode
+    properties:
+      VocabularyFilterName:
+        $ref: '#/definitions/VocabularyFilterName'
+        description: The vocabulary filter name. The name must be unique within the account that contains it.
+      LanguageCode:
+        $ref: '#/definitions/LanguageCode'
+        description: The language code of the words in the vocabulary filter. All words in the filter must be in the same language. The vocabulary filter can only be used with transcription jobs in the specified language.
+      Words:
+        $ref: '#/definitions/Words'
+        description: '<p>The words to use in the vocabulary filter. Only use characters from the character set defined for custom vocabularies. For a list of character sets, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary.html#charsets">Character Sets for Custom Vocabularies</a>.</p> <p>If you provide a list of words in the <code>Words</code> parameter, you can''t use the <code>VocabularyFilterFileUri</code> parameter.</p>'
+      VocabularyFilterFileUri:
+        $ref: '#/definitions/Uri'
+        description: '<p>The Amazon S3 location of a text file used as input to create the vocabulary filter. Only use characters from the character set defined for custom vocabularies. For a list of character sets, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary.html#charsets">Character Sets for Custom Vocabularies</a>.</p> <p>The specified file must be less than 50 KB of UTF-8 characters.</p> <p>If you provide the location of a list of words in the <code>VocabularyFilterFileUri</code> parameter, you can''t use the <code>Words</code> parameter.</p>'
   DeleteTranscriptionJobRequest:
     type: object
     required:
@@ -631,6 +890,14 @@ definitions:
         $ref: '#/definitions/VocabularyName'
         description: 'The name of the vocabulary to delete. '
   NotFoundException: {}
+  DeleteVocabularyFilterRequest:
+    type: object
+    required:
+      - VocabularyFilterName
+    properties:
+      VocabularyFilterName:
+        $ref: '#/definitions/VocabularyFilterName'
+        description: The name of the vocabulary filter to remove.
   GetTranscriptionJobResponse:
     type: object
     properties:
@@ -674,6 +941,29 @@ definitions:
       VocabularyName:
         $ref: '#/definitions/VocabularyName'
         description: The name of the vocabulary to return information about. The name is case-sensitive.
+  GetVocabularyFilterResponse:
+    type: object
+    properties:
+      VocabularyFilterName:
+        $ref: '#/definitions/VocabularyFilterName'
+        description: The name of the vocabulary filter.
+      LanguageCode:
+        $ref: '#/definitions/LanguageCode'
+        description: The language code of the words in the vocabulary filter.
+      LastModifiedTime:
+        $ref: '#/definitions/DateTime'
+        description: The date and time that the contents of the vocabulary filter were updated.
+      DownloadUri:
+        $ref: '#/definitions/Uri'
+        description: The URI of the list of words in the vocabulary filter. You can use this URI to get the list of words.
+  GetVocabularyFilterRequest:
+    type: object
+    required:
+      - VocabularyFilterName
+    properties:
+      VocabularyFilterName:
+        $ref: '#/definitions/VocabularyFilterName'
+        description: The name of the vocabulary filter for which to return information.
   ListTranscriptionJobsResponse:
     type: object
     properties:
@@ -728,6 +1018,27 @@ definitions:
       NameContains:
         $ref: '#/definitions/VocabularyName'
         description: 'When specified, the vocabularies returned in the list are limited to vocabularies whose name contains the specified string. The search is case-insensitive, <code>ListVocabularies</code> will return both "vocabularyname" and "VocabularyName" in the response list.'
+  ListVocabularyFiltersResponse:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The <code>ListVocabularyFilters</code> operation returns a page of collections at a time. The maximum size of the page is set by the <code>MaxResults</code> parameter. If there are more jobs in the list than the page size, Amazon Transcribe returns the <code>NextPage</code> token. Include the token in the next request to the <code>ListVocabularyFilters</code> operation to return in the next page of jobs.'
+      VocabularyFilters:
+        $ref: '#/definitions/VocabularyFilters'
+        description: 'The list of vocabulary filters. It will contain at most <code>MaxResults</code> number of filters. If there are more filters, call the <code>ListVocabularyFilters</code> operation again with the <code>NextToken</code> parameter in the request set to the value of the <code>NextToken</code> field in the response.'
+  ListVocabularyFiltersRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If the result of the previous request to <code>ListVocabularyFilters</code> was truncated, include the <code>NextToken</code> to fetch the next set of collections.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of filters to return in the response. If there are fewer results in the list, this response contains only the actual results.'
+      NameContains:
+        $ref: '#/definitions/VocabularyFilterName'
+        description: Filters the response so that it only contains vocabulary filters whose name contains the specified string.
   StartTranscriptionJobResponse:
     type: object
     properties:
@@ -765,6 +1076,9 @@ definitions:
       Settings:
         $ref: '#/definitions/Settings'
         description: A <code>Settings</code> object that provides optional settings for a transcription job.
+      JobExecutionSettings:
+        $ref: '#/definitions/JobExecutionSettings'
+        description: Provides information about how a transcription job is executed. Use this field to indicate that the job can be queued for deferred execution if the concurrency limit is reached and there are no slots available to immediately run the job.
   UpdateVocabularyResponse:
     type: object
     properties:
@@ -798,9 +1112,35 @@ definitions:
       VocabularyFileUri:
         $ref: '#/definitions/Uri'
         description: '<p>The S3 location of the text file that contains the definition of the custom vocabulary. The URI must be in the same region as the API endpoint that you are calling. The general form is </p> <p> <code> https://s3.&lt;aws-region&gt;.amazonaws.com/&lt;bucket-name&gt;/&lt;keyprefix&gt;/&lt;objectkey&gt; </code> </p> <p>For example:</p> <p> <code>https://s3.us-east-1.amazonaws.com/examplebucket/vocab.txt</code> </p> <p>For more information about S3 object names, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys">Object Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p> <p>For more information about custom vocabularies, see <a href="http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary">Custom Vocabularies</a>.</p>'
+  UpdateVocabularyFilterResponse:
+    type: object
+    properties:
+      VocabularyFilterName:
+        $ref: '#/definitions/VocabularyFilterName'
+        description: The name of the updated vocabulary filter.
+      LanguageCode:
+        $ref: '#/definitions/LanguageCode'
+        description: The language code of the words in the vocabulary filter.
+      LastModifiedTime:
+        $ref: '#/definitions/DateTime'
+        description: The date and time that the vocabulary filter was updated.
+  UpdateVocabularyFilterRequest:
+    type: object
+    required:
+      - VocabularyFilterName
+    properties:
+      VocabularyFilterName:
+        $ref: '#/definitions/VocabularyFilterName'
+        description: The name of the vocabulary filter to update.
+      Words:
+        $ref: '#/definitions/Words'
+        description: '<p>The words to use in the vocabulary filter. Only use characters from the character set defined for custom vocabularies. For a list of character sets, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary.html#charsets">Character Sets for Custom Vocabularies</a>.</p> <p>If you provide a list of words in the <code>Words</code> parameter, you can''t use the <code>VocabularyFilterFileUri</code> parameter.</p>'
+      VocabularyFilterFileUri:
+        $ref: '#/definitions/Uri'
+        description: '<p>The Amazon S3 location of a text file used as input to create the vocabulary filter. Only use characters from the character set defined for custom vocabularies. For a list of character sets, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary.html#charsets">Character Sets for Custom Vocabularies</a>.</p> <p>The specified file must be less than 50 KB of UTF-8 characters.</p> <p>If you provide the location of a list of words in the <code>VocabularyFilterFileUri</code> parameter, you can''t use the <code>Words</code> parameter.</p>'
   Boolean:
     type: boolean
-  VocabularyName:
+  VocabularyFilterName:
     type: string
     pattern: '^[0-9a-zA-Z._-]+'
     minLength: 1
@@ -839,26 +1179,39 @@ definitions:
       - ms-MY
       - ja-JP
       - ar-AE
-  Phrases:
+  Words:
     type: array
     items:
-      $ref: '#/definitions/Phrase'
+      $ref: '#/definitions/Word'
+    minItems: 1
   Uri:
     type: string
     pattern: '(s3://|http(s*)://).+'
     minLength: 1
     maxLength: 2000
+  DateTime:
+    type: string
+    format: date-time
+  VocabularyName:
+    type: string
+    pattern: '^[0-9a-zA-Z._-]+'
+    minLength: 1
+    maxLength: 200
+  Phrases:
+    type: array
+    items:
+      $ref: '#/definitions/Phrase'
   VocabularyState:
     type: string
     enum:
       - PENDING
       - READY
       - FAILED
-  DateTime:
-    type: string
-    format: date-time
   FailureReason:
     type: string
+  DataAccessRoleArn:
+    type: string
+    pattern: '^arn:aws:iam::[0-9]{0,63}:role/[A-Za-z0-9:_/+=,@.-]{0,1023}$'
   TranscriptionJobName:
     type: string
     pattern: '^[0-9a-zA-Z._-]+'
@@ -888,6 +1241,9 @@ definitions:
       Transcript:
         $ref: '#/definitions/Transcript'
         description: An object that describes the output of the transcription job.
+      StartTime:
+        $ref: '#/definitions/DateTime'
+        description: A timestamp that shows with the job was started processing.
       CreationTime:
         $ref: '#/definitions/DateTime'
         description: A timestamp that shows when the job was created.
@@ -900,7 +1256,20 @@ definitions:
       Settings:
         $ref: '#/definitions/Settings'
         description: 'Optional settings for the transcription job. Use these settings to turn on speaker recognition, to set the maximum number of speakers that should be identified and to specify a custom vocabulary to use when processing the transcription job.'
+      JobExecutionSettings:
+        $ref: '#/definitions/JobExecutionSettings'
+        description: Provides information about how a transcription job is executed.
     description: 'Describes an asynchronous transcription job that was created with the <code>StartTranscriptionJob</code> operation. '
+  JobExecutionSettings:
+    type: object
+    properties:
+      AllowDeferredExecution:
+        $ref: '#/definitions/Boolean'
+        description: '<p>Indicates whether a job should be queued by Amazon Transcribe when the concurrent execution limit is exceeded. When the <code>AllowDeferredExecution</code> field is true, jobs are queued and will be executed when the number of executing jobs falls below the concurrent execution limit. If the field is false, Amazon Transcribe returns a <code>LimitExceededException</code> exception.</p> <p>If you specify the <code>AllowDeferredExecution</code> field, you must specify the <code>DataAccessRoleArn</code> field.</p>'
+      DataAccessRoleArn:
+        $ref: '#/definitions/DataAccessRoleArn'
+        description: '<p>The Amazon Resource Name (ARN) of a role that has access to the S3 bucket that contains the input files. Amazon Transcribe will assume this role to read queued media files. If you have specified an output S3 bucket for the transcription results, this role should have access to the output bucket as well.</p> <p>If you specify the <code>AllowDeferredExecution</code> field, you must specify the <code>DataAccessRoleArn</code> field.</p>'
+    description: Provides information about when a transcription job should be executed.
   KMSKeyId:
     type: string
     pattern: '^[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,2048}$'
@@ -909,6 +1278,7 @@ definitions:
   TranscriptionJobStatus:
     type: string
     enum:
+      - QUEUED
       - IN_PROGRESS
       - FAILED
       - COMPLETED
@@ -928,6 +1298,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/VocabularyInfo'
+  VocabularyFilters:
+    type: array
+    items:
+      $ref: '#/definitions/VocabularyFilterInfo'
   MaxAlternatives:
     type: integer
     minimum: 2
@@ -968,6 +1342,11 @@ definitions:
     pattern: .+
     minLength: 0
     maxLength: 256
+  VocabularyFilterMethod:
+    type: string
+    enum:
+      - remove
+      - mask
   Settings:
     type: object
     properties:
@@ -989,6 +1368,12 @@ definitions:
       MaxAlternatives:
         $ref: '#/definitions/MaxAlternatives'
         description: 'The number of alternative transcriptions that the service should return. If you specify the <code>MaxAlternatives</code> field, you must set the <code>ShowAlternatives</code> field to true.'
+      VocabularyFilterName:
+        $ref: '#/definitions/VocabularyFilterName'
+        description: The name of the vocabulary filter to use when transcribing the audio. The filter that you specify must have the same language code as the transcription job.
+      VocabularyFilterMethod:
+        $ref: '#/definitions/VocabularyFilterMethod'
+        description: Set to <code>mask</code> to remove filtered text from the transcript and replace it with three asterisks ("***") as placeholder text. Set to <code>remove</code> to remove filtered text from the transcript without using placeholder text.
     description: Provides optional settings for the <code>StartTranscriptionJob</code> operation.
   Transcript:
     type: object
@@ -1006,6 +1391,9 @@ definitions:
       CreationTime:
         $ref: '#/definitions/DateTime'
         description: A timestamp that shows when the job was created.
+      StartTime:
+        $ref: '#/definitions/DateTime'
+        description: A timestamp that shows when the job started processing.
       CompletionTime:
         $ref: '#/definitions/DateTime'
         description: A timestamp that shows when the job was completed.
@@ -1038,3 +1426,20 @@ definitions:
         $ref: '#/definitions/VocabularyState'
         description: The processing state of the vocabulary. If the state is <code>READY</code> you can use the vocabulary in a <code>StartTranscriptionJob</code> request.
     description: 'Provides information about a custom vocabulary. '
+  VocabularyFilterInfo:
+    type: object
+    properties:
+      VocabularyFilterName:
+        $ref: '#/definitions/VocabularyFilterName'
+        description: The name of the vocabulary filter. The name must be unique in the account that holds the filter.
+      LanguageCode:
+        $ref: '#/definitions/LanguageCode'
+        description: The language code of the words in the vocabulary filter.
+      LastModifiedTime:
+        $ref: '#/definitions/DateTime'
+        description: The date and time that the vocabulary was last updated.
+    description: Provides information about a vocabulary filter.
+  Word:
+    type: string
+    minLength: 1
+    maxLength: 256

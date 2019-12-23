@@ -271,10 +271,16 @@ paths:
                 description: Required. Enables connections from applications outside of the VPC that hosts the broker's subnets.
                 type: boolean
               securityGroups:
-                description: 'The list of security groups (1 minimum, 5 maximum) that authorize connections to brokers.'
+                description: 'The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.'
                 type: array
                 items:
                   $ref: '#/definitions/__string'
+              storageType:
+                description: The storage type of the broker.
+                type: string
+                enum:
+                  - EBS
+                  - EFS
               subnetIds:
                 description: 'The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.'
                 type: array
@@ -828,7 +834,7 @@ paths:
                     $ref: '#/definitions/__boolean'
                     description: Enables general logging.
               securityGroups:
-                description: 'The list of security groups (1 minimum, 5 maximum) that authorize connections to brokers.'
+                description: 'The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.'
                 type: array
                 items:
                   $ref: '#/definitions/__string'
@@ -966,6 +972,11 @@ paths:
           in: query
           required: false
           description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
+          type: string
+        - name: storageType
+          in: query
+          required: false
+          description: Filter response by storage type.
           type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
@@ -1374,18 +1385,21 @@ definitions:
       PendingEngineVersion:
         $ref: '#/definitions/__string'
         description: 'The version of the broker engine to upgrade to. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
-      PendingSecurityGroups:
-        $ref: '#/definitions/__listOf__string'
-        description: The list of pending security groups to authorize connections to brokers.
       PendingHostInstanceType:
         $ref: '#/definitions/__string'
         description: 'The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types'
+      PendingSecurityGroups:
+        $ref: '#/definitions/__listOf__string'
+        description: The list of pending security groups to authorize connections to brokers.
       PubliclyAccessible:
         $ref: '#/definitions/__boolean'
         description: Required. Enables connections from applications outside of the VPC that hosts the broker's subnets.
       SecurityGroups:
         $ref: '#/definitions/__listOf__string'
-        description: 'The list of security groups (1 minimum, 5 maximum) that authorize connections to brokers.'
+        description: 'The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.'
+      StorageType:
+        $ref: '#/definitions/BrokerStorageType'
+        description: The broker's storage type.
       SubnetIds:
         $ref: '#/definitions/__listOf__string'
         description: 'The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.'
@@ -1565,7 +1579,7 @@ definitions:
         description: The list of information about logs to be enabled for the specified broker.
       SecurityGroups:
         $ref: '#/definitions/__listOf__string'
-        description: 'The list of security groups (1 minimum, 5 maximum) that authorize connections to brokers.'
+        description: 'The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.'
   UpdateConfigurationResponse:
     type: object
     properties:
@@ -1637,6 +1651,16 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AvailabilityZone'
+  BrokerStorageType:
+    type: string
+    enum:
+      - EBS
+      - EFS
+    description: The storage type of the broker.
+  __listOfDeploymentMode:
+    type: array
+    items:
+      $ref: '#/definitions/DeploymentMode'
   BrokerInstanceOption:
     type: object
     properties:
@@ -1649,6 +1673,12 @@ definitions:
       HostInstanceType:
         $ref: '#/definitions/__string'
         description: The type of broker instance.
+      StorageType:
+        $ref: '#/definitions/BrokerStorageType'
+        description: The broker's storage type.
+      SupportedDeploymentModes:
+        $ref: '#/definitions/__listOfDeploymentMode'
+        description: The list of supported deployment modes.
       SupportedEngineVersions:
         $ref: '#/definitions/__listOf__string'
         description: The list of supported engine versions.
@@ -1858,7 +1888,10 @@ definitions:
         description: Required. Enables connections from applications outside of the VPC that hosts the broker's subnets.
       SecurityGroups:
         $ref: '#/definitions/__listOf__string'
-        description: 'The list of security groups (1 minimum, 5 maximum) that authorize connections to brokers.'
+        description: 'The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.'
+      StorageType:
+        $ref: '#/definitions/BrokerStorageType'
+        description: The broker's storage type.
       SubnetIds:
         $ref: '#/definitions/__listOf__string'
         description: 'The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.'
@@ -2075,7 +2108,7 @@ definitions:
         description: Enables Amazon CloudWatch logging for brokers.
       SecurityGroups:
         $ref: '#/definitions/__listOf__string'
-        description: 'The list of security groups (1 minimum, 5 maximum) that authorize connections to brokers.'
+        description: 'The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.'
     description: Updates the broker using the specified properties.
   UpdateConfigurationRequest:
     type: object
