@@ -8,7 +8,7 @@ script:
 deploy:
   - provider: script
     skip_cleanup: true
-    script: 'git fetch --unshallow && npm run deploy'
+    script: bash ./scripts/deploy.sh
     on:
       branch: master
   - provider: pages
