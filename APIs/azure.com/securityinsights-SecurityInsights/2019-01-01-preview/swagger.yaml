@@ -1192,6 +1192,11 @@ paths:
                         name: john doe
                         objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
                       displayName: My bookmark
+                      incidentInfo:
+                        incidentId: DDA55F97-170B-40B9-B8ED-CBFD05481E7D
+                        relationName: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0018
+                        severity: Low
+                        title: New case 1
                       labels:
                         - Tag1
                         - Tag2
@@ -1283,6 +1288,11 @@ paths:
                     name: john doe
                     objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
                   displayName: My bookmark
+                  incidentInfo:
+                    incidentId: DDA55F97-170B-40B9-B8ED-CBFD05481E7D
+                    relationName: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0018
+                    severity: Low
+                    title: New case 1
                   labels:
                     - Tag1
                     - Tag2
@@ -2995,7 +3005,7 @@ paths:
                 name: e1d3d618-e11f-478b-98e3-bb381539a8e1
                 properties:
                   distinguishedName: Name
-                  friendlyName: Group
+                  friendlyName: Name
                   objectGuid: fb1b8e04-d944-4986-b39a-1ce9adedcd98
                   sid: Sid
                 type: Microsoft.SecurityInsights/entities
@@ -3016,6 +3026,25 @@ paths:
                 properties:
                   friendlyName: 'https://bing.com'
                   url: 'https://bing.com'
+                type: Microsoft.SecurityInsights/entities
+        Get an IoT device entity.:
+          parameters:
+            api-version: 2019-01-01-preview
+            entityId: e1d3d618-e11f-478b-98e3-bb381539a8e1
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/e1d3d618-e11f-478b-98e3-bb381539a8e1
+                kind: IoTDevice
+                name: e1d3d618-e11f-478b-98e3-bb381539a8e1
+                properties:
+                  deviceId: device1
+                  friendlyName: device1
+                  iotHubEntityId: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/8b2d9401-f953-e89d-2583-be9b4975870c
                 type: Microsoft.SecurityInsights/entities
         Get an account entity.:
           parameters:
@@ -3058,7 +3087,7 @@ paths:
                 kind: AzureResource
                 name: e1d3d618-e11f-478b-98e3-bb381539a8e1
                 properties:
-                  friendlyName: Resource
+                  friendlyName: vm1
                   resourceId: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachines/vm1
                 type: Microsoft.SecurityInsights/entities
         Get an ip entity.:
@@ -3654,6 +3683,8 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: AggregationsKind
+    required:
+      - kind
     type: object
   AlertRule:
     allOf:
@@ -3679,6 +3710,8 @@ definitions:
             - value: Scheduled
             - value: MicrosoftSecurityIncidentCreation
             - value: Fusion
+    required:
+      - kind
     type: object
   AlertRuleTemplate:
     allOf:
@@ -3908,6 +3941,10 @@ definitions:
       displayName:
         description: The display name of the bookmark
         type: string
+      incidentInfo:
+        $ref: '#/definitions/IncidentInfo'
+        description: Describes an incident that relates to bookmark
+        type: object
       labels:
         description: List of labels relevant to this bookmark
         items:
@@ -4385,6 +4422,8 @@ definitions:
             - value: AmazonWebServicesCloudTrail
             - value: AzureAdvancedThreatProtection
             - value: MicrosoftDefenderAdvancedThreatProtection
+    required:
+      - kind
     type: object
   DataConnectorList:
     description: List all the data connectors.
@@ -4536,6 +4575,7 @@ definitions:
       - RegistryValue
       - SecurityGroup
       - Url
+      - IoTDevice
       - SecurityAlert
       - Bookmark
     type: string
@@ -4571,6 +4611,8 @@ definitions:
           value: SecurityGroup
         - description: Entity represents url in the system.
           value: Url
+        - description: Entity represents IoT device in the system.
+          value: IoTDevice
         - description: Entity represents security alert in the system.
           value: SecurityAlert
         - description: Entity represents bookmark in the system.
@@ -4592,6 +4634,7 @@ definitions:
       - RegistryValue
       - SecurityGroup
       - URL
+      - IoTDevice
       - SecurityAlert
       - HuntingBookmark
     type: string
@@ -4627,6 +4670,8 @@ definitions:
           value: SecurityGroup
         - description: Entity represents url in the system.
           value: URL
+        - description: Entity represents IoT device in the system.
+          value: IoTDevice
         - description: Entity represents security alert in the system.
           value: SecurityAlert
         - description: Entity represents HuntingBookmark in the system.
@@ -4637,6 +4682,8 @@ definitions:
       kind:
         $ref: '#/definitions/EntityInnerKind'
         description: The kind of the entity.
+    required:
+      - kind
     type: object
   EntityList:
     description: List of all the entities.
@@ -4989,6 +5036,99 @@ definitions:
         readOnly: true
         type: string
     type: object
+  IncidentInfo:
+    description: Describes related incident information for the bookmark
+    properties:
+      incidentId:
+        description: Incident Id
+        type: string
+      relationName:
+        description: Relation Name
+        type: string
+      severity:
+        description: The severity of the incident
+        enum:
+          - Critical
+          - High
+          - Medium
+          - Low
+          - Informational
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: IncidentSeverity
+          values:
+            - description: Critical severity
+              value: Critical
+            - description: High severity
+              value: High
+            - description: Medium severity
+              value: Medium
+            - description: Low severity
+              value: Low
+            - description: Informational severity
+              value: Informational
+      title:
+        description: The title of the incident
+        type: string
+    required:
+      - incidentId
+      - severity
+      - title
+      - relationName
+    type: object
+  IoTDeviceEntity:
+    allOf:
+      - $ref: '#/definitions/Entity'
+    description: Represents an IoT device entity.
+    properties:
+      properties:
+        $ref: '#/definitions/IoTDeviceEntityProperties'
+        description: IoTDevice entity properties
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: IoTDevice
+  IoTDeviceEntityProperties:
+    allOf:
+      - $ref: '#/definitions/EntityCommonProperties'
+    description: IoTDevice entity property bag.
+    properties:
+      deviceId:
+        description: The ID of the IoT Device in the IoT Hub
+        readOnly: true
+        type: string
+      deviceType:
+        description: The type of the device
+        readOnly: true
+        type: string
+      edgeId:
+        description: The ID of the edge device
+        readOnly: true
+        type: string
+      hostEntityId:
+        description: The Host entity id of this device
+        readOnly: true
+        type: string
+      iotHubEntityId:
+        description: The AzureResource entity id of the IoT Hub
+        readOnly: true
+        type: string
+      iotSecurityAgentId:
+        description: The ID of the security agent running on the device
+        format: uuid
+        readOnly: true
+        type: string
+      threatIntelligence:
+        description: A list of TI contexts attached to the IoTDevice entity.
+        items:
+          $ref: '#/definitions/ThreatIntelligence'
+        readOnly: true
+        type: array
+      vendor:
+        description: The vendor of the device
+        readOnly: true
+        type: string
+    type: object
   IpEntity:
     allOf:
       - $ref: '#/definitions/Entity'
@@ -5135,6 +5275,7 @@ definitions:
           - Azure Security Center
           - Azure Advanced Threat Protection
           - Azure Active Directory Identity Protection
+          - Azure Security Center for IoT
         type: string
         x-ms-enum:
           modelAsString: true
@@ -5975,6 +6116,8 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: SettingKind
+    required:
+      - kind
     type: object
   TIDataConnector:
     allOf:

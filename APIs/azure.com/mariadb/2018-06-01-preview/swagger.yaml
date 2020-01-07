@@ -2761,6 +2761,28 @@ definitions:
         readOnly: true
         type: string
     x-ms-azure-resource: true
+  ResourceIdentity:
+    description: Azure Active Directory identity configuration for a resource.
+    properties:
+      principalId:
+        description: The Azure Active Directory principal id.
+        format: uuid
+        readOnly: true
+        type: string
+      tenantId:
+        description: The Azure Active Directory tenant id.
+        format: uuid
+        readOnly: true
+        type: string
+      type:
+        description: The identity type. Set this to 'SystemAssigned' in order to automatically create and assign an Azure Active Directory principal for the resource.
+        enum:
+          - SystemAssigned
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: IdentityType
+    type: object
   SecurityAlertPolicyProperties:
     description: Properties of a security alert policy.
     properties:
@@ -2804,6 +2826,9 @@ definitions:
       - $ref: '#/definitions/TrackedResource'
     description: Represents a server.
     properties:
+      identity:
+        $ref: '#/definitions/ResourceIdentity'
+        description: The Azure Active Directory identity of the server.
       properties:
         $ref: '#/definitions/ServerProperties'
         description: Properties of the server.

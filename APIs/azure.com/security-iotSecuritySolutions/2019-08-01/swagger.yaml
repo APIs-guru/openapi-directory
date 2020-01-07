@@ -184,6 +184,7 @@ paths:
                           recommendationType: IoT_VulnerableTLSCipherSuite
                           status: Enabled
                       status: Enabled
+                      unmaskedIpLoggingStatus: Enabled
                       userDefinedResources:
                         query: where type != "microsoft.devices/iothubs" | where name contains "iot"
                         querySubscriptions:
@@ -261,6 +262,7 @@ paths:
                           recommendationType: IoT_VulnerableTLSCipherSuite
                           status: Enabled
                       status: Enabled
+                      unmaskedIpLoggingStatus: Enabled
                       userDefinedResources:
                         query: where type != "microsoft.devices/iothubs" | where name contains "iot"
                         querySubscriptions:
@@ -331,6 +333,7 @@ paths:
                           recommendationType: IoT_VulnerableTLSCipherSuite
                           status: Enabled
                       status: Enabled
+                      unmaskedIpLoggingStatus: Enabled
                       userDefinedResources:
                         query: where type != "microsoft.devices/iothubs" | where name contains "iot"
                         querySubscriptions:
@@ -465,6 +468,7 @@ paths:
                           recommendationType: IoT_VulnerableTLSCipherSuite
                           status: Enabled
                       status: Enabled
+                      unmaskedIpLoggingStatus: Enabled
                       userDefinedResources:
                         query: where type != "microsoft.devices/iothubs" | where name contains "iot"
                         querySubscriptions:
@@ -545,6 +549,7 @@ paths:
                           recommendationType: IoT_VulnerableTLSCipherSuite
                           status: Enabled
                       status: Enabled
+                      unmaskedIpLoggingStatus: Enabled
                       userDefinedResources:
                         query: where type != "microsoft.devices/iothubs" | where name contains "iot"
                         querySubscriptions:
@@ -741,6 +746,7 @@ paths:
                       recommendationType: IoT_VulnerableTLSCipherSuite
                       status: Enabled
                   status: Enabled
+                  unmaskedIpLoggingStatus: Enabled
                   userDefinedResources:
                     query: where type != "microsoft.devices/iothubs" | where name contains "iot"
                     querySubscriptions:
@@ -887,6 +893,7 @@ paths:
                       recommendationType: IoT_VulnerableTLSCipherSuite
                       status: Enabled
                   status: Enabled
+                  unmaskedIpLoggingStatus: Enabled
                   userDefinedResources:
                     query: where type != "microsoft.devices/iothubs" | where name contains "v2"
                     querySubscriptions:
@@ -970,6 +977,7 @@ paths:
                   - recommendationType: IoT_SharedCredentials
                     status: Disabled
                 status: Enabled
+                unmaskedIpLoggingStatus: Enabled
                 userDefinedResources:
                   query: where type != "microsoft.devices/iothubs" | where name contains "iot"
                   querySubscriptions:
@@ -1044,6 +1052,7 @@ paths:
                       recommendationType: IoT_VulnerableTLSCipherSuite
                       status: Enabled
                   status: Enabled
+                  unmaskedIpLoggingStatus: Enabled
                   userDefinedResources:
                     query: where type != "microsoft.devices/iothubs" | where name contains "iot"
                     querySubscriptions:
@@ -1115,6 +1124,7 @@ paths:
                       recommendationType: IoT_VulnerableTLSCipherSuite
                       status: Enabled
                   status: Enabled
+                  unmaskedIpLoggingStatus: Enabled
                   userDefinedResources:
                     query: where type != "microsoft.devices/iothubs" | where name contains "iot"
                     querySubscriptions:
@@ -1207,6 +1217,21 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: SecuritySolutionStatus
+      unmaskedIpLoggingStatus:
+        default: Disabled
+        description: Unmasked IP address logging status
+        enum:
+          - Disabled
+          - Enabled
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: UnmaskedIpLoggingStatus
+          values:
+            - description: Unmasked IP logging is disabled
+              value: Disabled
+            - description: Unmasked IP logging is enabled
+              value: Enabled
       userDefinedResources:
         $ref: '#/definitions/UserDefinedResourcesProperties'
       workspace:

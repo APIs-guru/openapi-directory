@@ -632,7 +632,7 @@ paths:
                 type: /providers/Microsoft.Management/managementGroups
       x-ms-long-running-operation: true
   '/providers/Microsoft.Management/managementGroups/{groupId}/descendants':
-    post:
+    get:
       description: |
         List all entities that descend from a management group.
       operationId: ManagementGroups_GetDescendants

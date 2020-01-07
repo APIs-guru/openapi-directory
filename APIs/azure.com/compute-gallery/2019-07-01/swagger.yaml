@@ -212,6 +212,56 @@ paths:
                   identifier:
                     uniqueName: '{subscription-id}-MYGALLERYNAME'
                   provisioningState: Succeeded
+    patch:
+      description: Update a Shared Image Gallery.
+      operationId: Galleries_Update
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - description: The name of the Shared Image Gallery. The allowed characters are alphabets and numbers with dots and periods allowed in the middle. The maximum length is 80 characters.
+          in: path
+          name: galleryName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - description: Parameters supplied to the update Shared Image Gallery operation.
+          in: body
+          name: gallery
+          required: true
+          schema:
+            $ref: '#/definitions/GalleryUpdate'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Gallery'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - Galleries
+      x-ms-examples:
+        Update a simple gallery.:
+          parameters:
+            api-version: '2019-07-01'
+            gallery:
+              properties:
+                description: This is the gallery description.
+            galleryName: myGalleryName
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscription-id}'
+          responses:
+            '200':
+              body:
+                location: West US
+                name: myGalleryName
+                properties:
+                  description: This is the gallery description.
+                  identifier:
+                    uniqueName: '{subscription-id}-MYGALLERYNAME'
+                  provisioningState: Updating
+      x-ms-long-running-operation: true
     put:
       description: Create or update a Shared Image Gallery.
       operationId: Galleries_CreateOrUpdate
@@ -426,6 +476,69 @@ paths:
                   privacyStatementUri: 'myPrivacyStatementUri}'
                   releaseNoteUri: myReleaseNoteUri
                   supportedOSType: Windows
+    patch:
+      description: Update a gallery Application Definition.
+      operationId: GalleryApplications_Update
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - description: The name of the Shared Application Gallery in which the Application Definition is to be updated.
+          in: path
+          name: galleryName
+          required: true
+          type: string
+        - description: 'The name of the gallery Application Definition to be updated. The allowed characters are alphabets and numbers with dots, dashes, and periods allowed in the middle. The maximum length is 80 characters.'
+          in: path
+          name: galleryApplicationName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - description: Parameters supplied to the update gallery Application operation.
+          in: body
+          name: galleryApplication
+          required: true
+          schema:
+            $ref: '#/definitions/GalleryApplicationUpdate'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/GalleryApplication'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - GalleryApplications
+      x-ms-examples:
+        Update a simple gallery Application.:
+          parameters:
+            api-version: '2019-07-01'
+            galleryApplication:
+              properties:
+                description: This is the gallery application description.
+                eula: This is the gallery application EULA.
+                privacyStatementUri: 'myPrivacyStatementUri}'
+                releaseNoteUri: myReleaseNoteUri
+                supportedOSType: Windows
+            galleryApplicationName: myGalleryApplicationName
+            galleryName: myGalleryName
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscription-id}'
+          responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName/applications/myGalleryApplicationName'
+                location: West US
+                name: myGalleryApplicationName
+                properties:
+                  description: This is the gallery application description.
+                  eula: This is the gallery application EULA.
+                  privacyStatementUri: 'myPrivacyStatementUri}'
+                  releaseNoteUri: myReleaseNoteUri
+                  supportedOSType: Windows
+                type: Microsoft.Compute/galleries
+      x-ms-long-running-operation: true
     put:
       description: Create or update a gallery Application Definition.
       operationId: GalleryApplications_CreateOrUpdate
@@ -748,6 +861,91 @@ paths:
                         regionalReplicaCount: 1
                         storageAccountType: Standard_LRS
                 type: Microsoft.Compute/galleries/applications/versions
+    patch:
+      description: Update a gallery Application Version.
+      operationId: GalleryApplicationVersions_Update
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - description: The name of the Shared Application Gallery in which the Application Definition resides.
+          in: path
+          name: galleryName
+          required: true
+          type: string
+        - description: The name of the gallery Application Definition in which the Application Version is to be updated.
+          in: path
+          name: galleryApplicationName
+          required: true
+          type: string
+        - description: 'The name of the gallery Application Version to be updated. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>'
+          in: path
+          name: galleryApplicationVersionName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - description: Parameters supplied to the update gallery Application Version operation.
+          in: body
+          name: galleryApplicationVersion
+          required: true
+          schema:
+            $ref: '#/definitions/GalleryApplicationVersionUpdate'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/GalleryApplicationVersion'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - GalleryApplicationVersions
+      x-ms-examples:
+        Update a simple gallery Application Version.:
+          parameters:
+            api-version: '2019-07-01'
+            galleryApplicationName: myGalleryApplicationName
+            galleryApplicationVersion:
+              properties:
+                publishingProfile:
+                  endOfLifeDate: '2019-07-01T07:00:00Z'
+                  replicaCount: 1
+                  source:
+                    fileName: package.zip
+                    mediaLink: 'https://mystorageaccount.blob.core.windows.net/mycontainer/package.zip?{sasKey}'
+                  storageAccountType: Standard_LRS
+                  targetRegions:
+                    - name: West US
+                      regionalReplicaCount: 1
+                      storageAccountType: Standard_LRS
+            galleryApplicationVersionName: 1.0.0
+            galleryName: myGalleryName
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscription-id}'
+          responses:
+            '200':
+              body:
+                id: /subscriptions/01523d7c-60da-455e-adef-521b547922c4/resourceGroups/galleryPsTestRg98/providers/Microsoft.Compute/galleries/galleryPsTestGallery6165/applications/galleryPsTestGalleryApplication7825/versions/1.0.0
+                location: West US
+                name: 1.0.0
+                properties:
+                  provisioningState: Updating
+                  publishingProfile:
+                    enableHealthCheck: false
+                    endOfLifeDate: '2019-07-01T07:00:00+00:00'
+                    excludeFromLatest: false
+                    publishedDate: '2019-06-21T17:13:57.5972568+00:00'
+                    replicaCount: 1
+                    source:
+                      fileName: package.zip
+                      mediaLink: 'https://mystorageaccount.blob.core.windows.net/mycontainer/package.zip?{sasKey}'
+                    storageAccountType: Standard_LRS
+                    targetRegions:
+                      - name: West US
+                        regionalReplicaCount: 1
+                        storageAccountType: Standard_LRS
+                type: Microsoft.Compute/galleries/applications/versions
+      x-ms-long-running-operation: true
     put:
       description: Create or update a gallery Application Version.
       operationId: GalleryApplicationVersions_CreateOrUpdate
@@ -1029,6 +1227,72 @@ paths:
                   osState: Generalized
                   osType: Windows
                   provisioningState: Succeeded
+    patch:
+      description: Update a gallery Image Definition.
+      operationId: GalleryImages_Update
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - description: The name of the Shared Image Gallery in which the Image Definition is to be updated.
+          in: path
+          name: galleryName
+          required: true
+          type: string
+        - description: 'The name of the gallery Image Definition to be updated. The allowed characters are alphabets and numbers with dots, dashes, and periods allowed in the middle. The maximum length is 80 characters.'
+          in: path
+          name: galleryImageName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - description: Parameters supplied to the update gallery image operation.
+          in: body
+          name: galleryImage
+          required: true
+          schema:
+            $ref: '#/definitions/GalleryImageUpdate'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/GalleryImage'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - GalleryImages
+      x-ms-examples:
+        Update a simple gallery image.:
+          parameters:
+            api-version: '2019-07-01'
+            galleryImage:
+              properties:
+                hyperVGeneration: V1
+                identifier:
+                  offer: myOfferName
+                  publisher: myPublisherName
+                  sku: mySkuName
+                osState: Generalized
+                osType: Windows
+            galleryImageName: myGalleryImageName
+            galleryName: myGalleryName
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscription-id}'
+          responses:
+            '200':
+              body:
+                location: West US
+                name: myGalleryImageName
+                properties:
+                  hyperVGeneration: V1
+                  identifier:
+                    offer: myOfferName
+                    publisher: myPublisherName
+                    sku: mySkuName
+                  osState: Generalized
+                  osType: Windows
+                  provisioningState: Updating
+      x-ms-long-running-operation: true
     put:
       description: Create or update a gallery Image Definition.
       operationId: GalleryImages_CreateOrUpdate
@@ -1454,6 +1718,95 @@ paths:
                       sizeInGB: 10
                     source:
                       id: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}'
+    patch:
+      description: Update a gallery Image Version.
+      operationId: GalleryImageVersions_Update
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - description: The name of the Shared Image Gallery in which the Image Definition resides.
+          in: path
+          name: galleryName
+          required: true
+          type: string
+        - description: The name of the gallery Image Definition in which the Image Version is to be updated.
+          in: path
+          name: galleryImageName
+          required: true
+          type: string
+        - description: 'The name of the gallery Image Version to be updated. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>'
+          in: path
+          name: galleryImageVersionName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - description: Parameters supplied to the update gallery Image Version operation.
+          in: body
+          name: galleryImageVersion
+          required: true
+          schema:
+            $ref: '#/definitions/GalleryImageVersionUpdate'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/GalleryImageVersion'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - GalleryImageVersions
+      x-ms-examples:
+        Update a simple Gallery Image Version (Managed Image as source).:
+          parameters:
+            api-version: '2019-07-01'
+            galleryImageName: myGalleryImageName
+            galleryImageVersion:
+              properties:
+                publishingProfile:
+                  targetRegions:
+                    - name: West US
+                      regionalReplicaCount: 1
+                    - name: East US
+                      regionalReplicaCount: 2
+                      storageAccountType: Standard_ZRS
+                storageProfile:
+                  source:
+                    id: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}'
+            galleryImageVersionName: 1.0.0
+            galleryName: myGalleryName
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscription-id}'
+          responses:
+            '200':
+              body:
+                location: West US
+                name: 1.0.0
+                properties:
+                  provisioningState: Updating
+                  publishingProfile:
+                    publishedDate: '2018-01-01T00:00:00Z'
+                    replicaCount: 1
+                    storageAccountType: Standard_LRS
+                    targetRegions:
+                      - name: West US
+                        regionalReplicaCount: 1
+                        storageAccountType: Standard_LRS
+                      - name: East US
+                        regionalReplicaCount: 2
+                        storageAccountType: Standard_ZRS
+                  storageProfile:
+                    dataDiskImages:
+                      - hostCaching: None
+                        lun: 1
+                        sizeInGB: 10
+                    osDiskImage:
+                      hostCaching: ReadOnly
+                      sizeInGB: 10
+                    source:
+                      id: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}'
+      x-ms-long-running-operation: true
     put:
       description: Create or update a gallery Image Version.
       operationId: GalleryImageVersions_CreateOrUpdate
@@ -1756,7 +2109,7 @@ definitions:
         description: The target of the particular error.
         type: string
   CloudError:
-    description: An error response from the Gallery service.
+    description: An error response from the Compute service.
     properties:
       error:
         $ref: '#/definitions/ApiError'
@@ -1828,6 +2181,14 @@ definitions:
           name: OperatingSystemTypes
     required:
       - supportedOSType
+  GalleryApplicationUpdate:
+    allOf:
+      - $ref: '#/definitions/UpdateResource'
+    description: Specifies information about the gallery Application Definition that you want to update.
+    properties:
+      properties:
+        $ref: '#/definitions/GalleryApplicationProperties'
+        x-ms-client-flatten: true
   GalleryApplicationVersion:
     allOf:
       - $ref: '#/definitions/Resource'
@@ -1886,6 +2247,14 @@ definitions:
         $ref: '#/definitions/UserArtifactSource'
     required:
       - source
+  GalleryApplicationVersionUpdate:
+    allOf:
+      - $ref: '#/definitions/UpdateResource'
+    description: Specifies information about the gallery Application Version that you want to update.
+    properties:
+      properties:
+        $ref: '#/definitions/GalleryApplicationVersionProperties'
+        x-ms-client-flatten: true
   GalleryArtifactPublishingProfileBase:
     description: Describes the basic gallery artifact publishing profile.
     properties:
@@ -2079,6 +2448,14 @@ definitions:
       - osType
       - osState
       - identifier
+  GalleryImageUpdate:
+    allOf:
+      - $ref: '#/definitions/UpdateResource'
+    description: Specifies information about the gallery Image Definition that you want to update.
+    properties:
+      properties:
+        $ref: '#/definitions/GalleryImageProperties'
+        x-ms-client-flatten: true
   GalleryImageVersion:
     allOf:
       - $ref: '#/definitions/Resource'
@@ -2140,6 +2517,14 @@ definitions:
         $ref: '#/definitions/GalleryOSDiskImage'
       source:
         $ref: '#/definitions/GalleryArtifactVersionSource'
+  GalleryImageVersionUpdate:
+    allOf:
+      - $ref: '#/definitions/UpdateResource'
+    description: Specifies information about the gallery Image Version that you want to update.
+    properties:
+      properties:
+        $ref: '#/definitions/GalleryImageVersionProperties'
+        x-ms-client-flatten: true
   GalleryList:
     description: The List Galleries operation response.
     properties:
@@ -2177,6 +2562,14 @@ definitions:
         readOnly: true
         title: The current state of the gallery.
         type: string
+  GalleryUpdate:
+    allOf:
+      - $ref: '#/definitions/UpdateResource'
+    description: Specifies information about the Shared Image Gallery that you want to update.
+    properties:
+      properties:
+        $ref: '#/definitions/GalleryProperties'
+        x-ms-client-flatten: true
   ImagePurchasePlan:
     description: Describes the gallery Image Definition purchase plan. This is used by marketplace images.
     properties:
@@ -2320,6 +2713,27 @@ definitions:
           name: StorageAccountType
     required:
       - name
+  UpdateResource:
+    description: The Update Resource model definition.
+    properties:
+      id:
+        description: Resource Id
+        readOnly: true
+        type: string
+      name:
+        description: Resource name
+        readOnly: true
+        type: string
+      tags:
+        additionalProperties:
+          type: string
+        description: Resource tags
+        type: object
+      type:
+        description: Resource type
+        readOnly: true
+        type: string
+    x-ms-azure-resource: true
   UserArtifactSource:
     description: The source image from which the Image Version is going to be created.
     properties:

@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/containerservice/resource-manager/Microsoft.ContainerService/stable/2019-08-01/managedClusters.json'
       version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: containerservice-managedClusters
   x-tags:
@@ -842,6 +842,64 @@ paths:
                   scaleSetPriority: Low
                   vmSize: Standard_DS1_v2
                 type: Microsoft.ContainerService/managedClusters/agentPools
+        Update Agent Pool:
+          parameters:
+            agentPoolName: agentpool1
+            api-version: '2019-08-01'
+            parameters:
+              properties:
+                enableAutoScaling: true
+                maxCount: 2
+                minCount: 2
+                nodeTaints:
+                  - 'Key1=Value1:NoSchedule'
+                orchestratorVersion: ''
+                osType: Linux
+                scaleSetEvictionPolicy: Delete
+                scaleSetPriority: Low
+                vmSize: Standard_DS1_v2
+            resourceGroupName: rg1
+            resourceName: clustername1
+            subscriptionId: subid1
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/agentpool1
+                name: agentpool1
+                properties:
+                  count: 3
+                  enableAutoScaling: true
+                  maxCount: 2
+                  maxPods: 110
+                  minCount: 2
+                  nodeTaints:
+                    - 'Key1=Value1:NoSchedule'
+                  orchestratorVersion: 1.9.6
+                  osType: Linux
+                  provisioningState: Succeeded
+                  scaleSetEvictionPolicy: Delete
+                  scaleSetPriority: Low
+                  vmSize: Standard_DS1_v2
+                type: Microsoft.ContainerService/managedClusters/agentPools
+            '201':
+              body:
+                id: /subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/agentpool1
+                name: agentpool1
+                properties:
+                  count: 3
+                  enableAutoScaling: true
+                  maxCount: 2
+                  maxPods: 110
+                  minCount: 2
+                  nodeTaints:
+                    - 'Key1=Value1:NoSchedule'
+                  orchestratorVersion: 1.9.6
+                  osType: Linux
+                  provisioningState: Updating
+                  scaleSetEvictionPolicy: Delete
+                  scaleSetPriority: Low
+                  vmSize: Standard_DS1_v2
+                type: Microsoft.ContainerService/managedClusters/agentPools
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/agentPools/{agentPoolName}/upgradeProfiles/default':
     get:
@@ -1076,6 +1134,38 @@ paths:
           responses:
             '200': {}
             '202': {}
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/rotateClusterCertificates':
+    post:
+      description: Rotate certificates of a managed cluster.
+      operationId: ManagedClusters_RotateClusterCertificates
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ResourceNameParameter'
+      responses:
+        '202':
+          description: Accepted
+        '204':
+          description: NoContent
+        default:
+          description: 'Error response describing why the operation failed. If the cluster doesn''t exist, 404 (Not found) is returned.'
+          schema:
+            $ref: '#/definitions/CloudError'
+      summary: Rotate certificates of a managed cluster.
+      tags:
+        - ManagedClusters
+      x-ms-examples:
+        Rotate Cluster Certificates:
+          parameters:
+            api-version: '2019-08-01'
+            resourceGroupName: rg1
+            resourceName: clustername1
+            subscriptionId: subid1
+          responses:
+            '202': {}
+            '204': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/upgradeProfiles/default':
     get:
@@ -1732,11 +1822,8 @@ definitions:
           type: string
         type: array
       count:
-        default: 1
-        description: 'Number of agents (VMs) to host docker containers. Allowed values must be in the range of 1 to 100 (inclusive). The default value is 1. '
+        description: Number of agents (VMs) to host docker containers. Allowed values must be in the range of 1 to 100 (inclusive). The default value is 1.
         format: int32
-        maximum: 100
-        minimum: 1
         type: integer
       enableAutoScaling:
         description: Whether to enable auto-scaler
@@ -1789,9 +1876,6 @@ definitions:
       vnetSubnetID:
         $ref: '#/definitions/ContainerServiceVnetSubnetID'
         description: VNet SubnetID specifies the VNet's subnet identifier.
-    required:
-      - vmSize
-      - count
   ManagedClusterIdentity:
     description: Identity for the managed cluster.
     properties:

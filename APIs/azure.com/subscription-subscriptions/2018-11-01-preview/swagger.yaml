@@ -43,14 +43,19 @@ parameters:
     required: true
     type: string
 paths:
-  '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Subscription/createSubscription':
+  '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Subscription/createSubscription':
     post:
-      description: The operation to create a new Azure subscription
+      description: The operation to create a new WebDirect or EA Azure subscription.
       operationId: SubscriptionFactory_CreateSubscription
       parameters:
         - description: The name of the Microsoft Customer Agreement billing account for which you want to create the subscription.
           in: path
           name: billingAccountName
+          required: true
+          type: string
+        - description: The name of the billing profile in the billing account for which you want to create the subscription.
+          in: path
+          name: billingProfileName
           required: true
           type: string
         - description: The name of the invoice section in the billing account for which you want to create the subscription.
@@ -87,22 +92,81 @@ paths:
         createSubscription:
           parameters:
             api-version: 2018-11-01-preview
-            billingAccountName: 12a6eed9-5d39-4103-a5db-2db1db0a8c67
+            billingAccountName: '0aa27f2b-ec7f-5a65-71f6-a5ff0897bd55:ae0dae1e-de9a-41f6-8257-76b055d98372_2019-05-31'
+            billingProfileName: 27VR-HDWX-BG7-TGB
             body:
-              billingProfileId: /providers/Microsoft.Billing/billingAccounts/12a6eed9-5d39-4103-a5db-2db1db0a8c67/billingProfiles/dbcb81c8-cda9-4b01-b9fc-831e6a2e152e
+              billingProfileId: '/providers/Microsoft.Billing/billingAccounts/0aa27f2b-ec7f-5a65-71f6-a5ff0897bd55:ae0dae1e-de9a-41f6-8257-76b055d98372_2019-05-31/billingProfiles/27VR-HDWX-BG7-TGB'
               costCenter: '135366376'
               displayName: Contoso MCA subscription
               owner:
-                objectId: 973034ff-acb7-409c-b731-e789672c7b31
+                objectId: 973034ff-acb7-409c-b731-e789672c7b32
               skuId: '0001'
-            invoiceSectionName: b859d705-1ed7-4769-9d4b-19238e9e8ac2_10_31
+            invoiceSectionName: JGF7-NSBG-PJA-TGB
           responses:
             '200':
               body:
                 subscriptionLink: /subscriptions/d0d6ee57-6530-4fca-93a6-b755a070be35
             '202':
               headers:
-                Location: /providers/Microsoft.Subscription/subscriptionOperations/aeb76128-ebde-4f5a-a9ed-e7bbf2dbc994?api-version=2018-11-01-preview
+                Location: 'https://management.azure.com/providers/Microsoft.Subscription/subscriptionOperations/ODdmYTU0MDktODc5YS00ZTEzLTg2MWItNTQ4ZjYxNzBlOTQw?api-version=2018-03-01-preview'
+                Retry-After: 8
+      x-ms-long-running-operation: true
+  '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}/providers/Microsoft.Subscription/createSubscription':
+    post:
+      description: The operation to create a new CSP subscription.
+      operationId: SubscriptionFactory_CreateCspSubscription
+      parameters:
+        - description: The name of the Microsoft Customer Agreement billing account for which you want to create the subscription.
+          in: path
+          name: billingAccountName
+          required: true
+          type: string
+        - description: The name of the customer.
+          in: path
+          name: customerName
+          required: true
+          type: string
+        - $ref: '#/parameters/apiVersionParameter'
+        - description: The subscription creation parameters.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ModernCspSubscriptionCreationParameters'
+      responses:
+        '200':
+          description: Normal response for a successful query. The response body will contain the data that matches the filters specified in the query parameters.
+          schema:
+            $ref: '#/definitions/SubscriptionCreationResult'
+        '202':
+          description: Accepted. Subscription creation is in progress.
+          headers:
+            Location:
+              description: GET this URL to retrieve the status of the asynchronous operation.
+              type: string
+            Retry-After:
+              description: The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.
+              type: integer
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      x-ms-examples:
+        createSubscription:
+          parameters:
+            api-version: 2018-11-01-preview
+            billingAccountName: '2bc54a6f-8d8a-5be1-5bff-bb4f285f512b:11a72812-d9a4-446e-9a1e-70c8bcadf5c0_2019-05-31'
+            body:
+              displayName: Contoso MCA subscription
+              skuId: '0001'
+            customerName: e33ba30d-3718-4b15-bfaa-5627a57cda6f
+          responses:
+            '200':
+              body:
+                subscriptionLink: /subscriptions/d0d6ee57-6530-4fca-93a6-b755a070be35
+            '202':
+              headers:
+                Location: 'https://management.azure.com/providers/Microsoft.Subscription/subscriptionOperations/MzcwYzI3MDItNjA1MC00NTZkLTgyMTgtZjM0NDcyMjkwMTY0?api-version=2018-03-01-preview'
                 Retry-After: 8
       x-ms-long-running-operation: true
   '/providers/Microsoft.Subscription/subscriptionOperations/{operationId}':
@@ -162,6 +226,24 @@ definitions:
         description: Error message indicating why the operation failed.
         type: string
     type: object
+  ModernCspSubscriptionCreationParameters:
+    description: The parameters required to create a new CSP subscription.
+    properties:
+      displayName:
+        description: The friendly name of the subscription.
+        type: string
+      resellerId:
+        description: 'Reseller ID, basically MPN Id.'
+        type: string
+      serviceProviderId:
+        description: 'Service provider ID, basically MPN Id.'
+        type: string
+      skuId:
+        description: The SKU ID of the Azure plan. Azure plan determines the pricing and service-level agreement of the subscription.  Use 001 for Microsoft Azure Plan and 002 for Microsoft Azure Plan for DevTest.
+        type: string
+    required:
+      - displayName
+      - skuId
   ModernSubscriptionCreationParameters:
     description: The parameters required to create a new subscription.
     properties:

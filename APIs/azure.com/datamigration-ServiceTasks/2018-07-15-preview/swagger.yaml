@@ -140,40 +140,34 @@ definitions:
           description: Output for the service task to check for OCI drivers.
           properties:
             installedDriver:
-              additionalProperties:
-                items:
-                  description: Information about an Oracle OCI driver.
-                  properties:
-                    archiveChecksum:
-                      description: The MD5 Base64 encoded checksum for the driver package.
-                      readOnly: true
-                      type: string
-                    assemblyVersion:
-                      description: Version listed in the OCI assembly 'oci.dll'
-                      readOnly: true
-                      type: string
-                    driverName:
-                      description: The name of the driver package
-                      readOnly: true
-                      type: string
-                    driverSize:
-                      description: The size in bytes of the driver package
-                      readOnly: true
-                      type: string
-                    oracleChecksum:
-                      description: The checksum for the driver package provided by Oracle.
-                      readOnly: true
-                      type: string
-                    supportedOracleVersions:
-                      description: List of Oracle database versions supported by this driver. Only major minor of the version is listed.
-                      items:
-                        type: string
-                      readOnly: true
-                      type: array
-                  type: object
-                type: array
-              description: Information about the installed driver if found and valid.
-              readOnly: true
+              description: Information about an Oracle OCI driver.
+              properties:
+                archiveChecksum:
+                  description: The MD5 Base64 encoded checksum for the driver package.
+                  readOnly: true
+                  type: string
+                assemblyVersion:
+                  description: Version listed in the OCI assembly 'oci.dll'
+                  readOnly: true
+                  type: string
+                driverName:
+                  description: The name of the driver package
+                  readOnly: true
+                  type: string
+                driverSize:
+                  description: The size in bytes of the driver package
+                  readOnly: true
+                  type: string
+                oracleChecksum:
+                  description: The checksum for the driver package provided by Oracle.
+                  readOnly: true
+                  type: string
+                supportedOracleVersions:
+                  description: List of Oracle database versions supported by this driver. Only major minor of the version is listed.
+                  items:
+                    type: string
+                  readOnly: true
+                  type: array
               type: object
             validationErrors:
               description: Validation errors
@@ -348,7 +342,6 @@ definitions:
         type: array
     type: object
     x-ms-discriminator-value: Service.Install.OCI
-  ODataError: {}
   UploadOCIDriverTaskProperties:
     allOf:
       - description: 'Base class for all types of DMS task properties. If task is not supported by current client, this object is returned.'

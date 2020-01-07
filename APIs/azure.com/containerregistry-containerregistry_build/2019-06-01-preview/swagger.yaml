@@ -93,6 +93,8 @@ paths:
             $ref: '#/definitions/SourceUploadDefinition'
         default:
           description: 'Error response describing why the operation failed. If the registry doesn''t exist, 404 (Not found) is returned.'
+          schema:
+            $ref: '#/definitions/ErrorSchema'
       tags:
         - Registries
       x-ms-examples:
@@ -134,6 +136,8 @@ paths:
             $ref: '#/definitions/RunListResult'
         default:
           description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorSchema'
       tags:
         - Runs
       x-ms-examples:
@@ -205,6 +209,8 @@ paths:
             $ref: '#/definitions/Run'
         default:
           description: 'Error response describing why the operation failed. If the registry/run doesn''t exist, 404 (Not found) is returned.'
+          schema:
+            $ref: '#/definitions/ErrorSchema'
       tags:
         - Runs
       x-ms-examples:
@@ -280,6 +286,8 @@ paths:
             $ref: '#/definitions/Run'
         default:
           description: 'Error response describing why the operation failed. If the registry/build doesn''t exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned.'
+          schema:
+            $ref: '#/definitions/ErrorSchema'
       tags:
         - Runs
       x-ms-examples:
@@ -383,6 +391,8 @@ paths:
           description: The request was successfully accepted; the operation will complete asynchronously.
         default:
           description: 'Error response describing why the operation failed. If the registry/run doesn''t exist, 404 (Not found) is returned.'
+          schema:
+            $ref: '#/definitions/ErrorSchema'
       tags:
         - Runs
       x-ms-examples:
@@ -418,6 +428,8 @@ paths:
             $ref: '#/definitions/RunGetLogResult'
         default:
           description: 'Error response describing why the operation failed. If the registry/run doesn''t exist, 404 (Not found) is returned.'
+          schema:
+            $ref: '#/definitions/ErrorSchema'
       tags:
         - Runs
       x-ms-examples:
@@ -456,6 +468,8 @@ paths:
           description: The request was successfully accepted; the operation will complete asynchronously.
         default:
           description: 'Error response describing why the operation failed. If the registry/run doesn''t exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned.'
+          schema:
+            $ref: '#/definitions/ErrorSchema'
       tags:
         - Registries
       x-ms-examples:
@@ -704,6 +718,452 @@ paths:
                 type: Microsoft.ContainerRegistry/registries/run
             '202': {}
       x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/taskRuns':
+    get:
+      description: Lists all the task runs for a specified container registry.
+      operationId: TaskRuns_List
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/RegistryNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The request was successful; the request was well-formed and received properly.
+          schema:
+            $ref: '#/definitions/TaskRunListResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorSchema'
+      tags:
+        - TaskRuns
+      x-ms-examples:
+        TaskRuns_List:
+          parameters:
+            api-version: 2019-06-01-preview
+            registryName: myRegistry
+            resourceGroupName: myResourceGroup
+            subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/taskRuns/myRun
+                    location: WESTUS
+                    name: mytestrun
+                    properties:
+                      provisioningState: Succeeded
+                      runRequest:
+                        credentials: {}
+                        encodedTaskContent: c3RlcHM6IAogIC0gY21kOiB7eyAuVmFsdWVzLmNvbW1hbmQgfX0K
+                        encodedValuesContent: Y29tbWFuZDogYmFzaCBlY2hvIHt7LlJ1bi5SZWdpc3RyeX19Cg==
+                        isArchiveEnabled: true
+                        platform:
+                          architecture: amd64
+                          os: Linux
+                        type: EncodedTaskRunRequest
+                        values: []
+                      runResult:
+                        id: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/runs/yd4
+                        name: yd4
+                        properties:
+                          agentConfiguration:
+                            cpu: 2
+                          createTime: '2019-09-04T17:15:29.2278794+00:00'
+                          finishTime: '2019-09-04T17:15:37.0349516+00:00'
+                          isArchiveEnabled: true
+                          lastUpdatedTime: '2019-09-04T17:15:37+00:00'
+                          platform:
+                            architecture: amd64
+                            os: Linux
+                          provisioningState: Succeeded
+                          runId: yd4
+                          runType: QuickRun
+                          startTime: '2019-09-04T17:15:29.4589616+00:00'
+                          status: Succeeded
+                        type: Microsoft.ContainerRegistry/registries/runs
+                    tags:
+                      key: value
+                    type: Microsoft.ContainerRegistry/registries/TaskRuns
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/taskRuns/{taskRunName}':
+    delete:
+      description: Deletes a specified task run resource.
+      operationId: TaskRuns_Delete
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/RegistryNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - description: The task run name.
+          in: path
+          name: taskRunName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The request was successful; the request was well-formed and received properly.
+        '202':
+          description: The request was successfully accepted; the operation will complete asynchronously.
+        '204':
+          description: No Content - the specified resource was not found.
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorSchema'
+      tags:
+        - TaskRuns
+      x-ms-examples:
+        TaskRuns_Delete:
+          parameters:
+            api-version: 2019-06-01-preview
+            registryName: myRegistry
+            resourceGroupName: myResourceGroup
+            subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
+            taskRunName: myRun
+          responses:
+            '200': {}
+            '202': {}
+            '204': {}
+      x-ms-long-running-operation: true
+    get:
+      description: Gets the detailed information for a given task run.
+      operationId: TaskRuns_Get
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/RegistryNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - description: The run request name.
+          in: path
+          name: taskRunName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The request was successful; the request was well-formed and received properly.
+          schema:
+            $ref: '#/definitions/TaskRun'
+        default:
+          description: 'Error response describing why the operation failed. If the registry/run doesn''t exist, 404 (Not found) is returned.'
+          schema:
+            $ref: '#/definitions/ErrorSchema'
+      tags:
+        - TaskRuns
+      x-ms-examples:
+        TaskRuns_Get:
+          parameters:
+            api-version: 2019-06-01-preview
+            registryName: myRegistry
+            resourceGroupName: myResourceGroup
+            subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
+            taskRunName: myRun
+          responses:
+            '200':
+              body:
+                id: /subscriptions/3647315e-0c5b-4ce4-8739-b071e144b2c9/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/taskRuns/myRun
+                location: WESTUS
+                name: myRun
+                properties:
+                  provisioningState: Succeeded
+                  runRequest:
+                    credentials: {}
+                    encodedTaskContent: c3RlcHM6IAogIC0gY21kOiB7eyAuVmFsdWVzLmNvbW1hbmQgfX0K
+                    encodedValuesContent: Y29tbWFuZDogYmFzaCBlY2hvIHt7LlJ1bi5SZWdpc3RyeX19Cg==
+                    isArchiveEnabled: true
+                    platform:
+                      architecture: amd64
+                      os: Linux
+                    type: EncodedTaskRunRequest
+                    values: []
+                  runResult:
+                    id: /subscriptions/3647315e-0c5b-4ce4-8739-b071e144b2c9/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/runs/yd5
+                    name: yd5
+                    properties:
+                      agentConfiguration:
+                        cpu: 2
+                      createTime: '2019-09-06T17:23:21.9261521+00:00'
+                      finishTime: '2019-09-06T17:23:29.8792157+00:00'
+                      isArchiveEnabled: true
+                      lastUpdatedTime: '2019-09-06T17:23:29+00:00'
+                      platform:
+                        architecture: amd64
+                        os: Linux
+                      provisioningState: Succeeded
+                      runId: yd5
+                      runType: QuickRun
+                      startTime: '2019-09-06T17:23:22.1348714+00:00'
+                      status: Succeeded
+                    type: Microsoft.ContainerRegistry/registries/runs
+                tags:
+                  key: value
+                type: Microsoft.ContainerRegistry/registries/TaskRuns
+    patch:
+      description: Updates a task run with the specified parameters.
+      operationId: TaskRuns_Update
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/RegistryNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - description: The task run name.
+          in: path
+          name: taskRunName
+          required: true
+          type: string
+        - description: The parameters for updating a task run.
+          in: body
+          name: updateParameters
+          required: true
+          schema:
+            $ref: '#/definitions/TaskRunUpdateParameters'
+      responses:
+        '200':
+          description: The request was successful; the request was well-formed and received properly.
+          schema:
+            $ref: '#/definitions/TaskRun'
+        '201':
+          description: The request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource.
+          schema:
+            $ref: '#/definitions/TaskRun'
+        default:
+          description: 'Error response describing why the operation failed. If the registry doesn''t exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned.'
+          schema:
+            $ref: '#/definitions/ErrorSchema'
+      tags:
+        - TaskRuns
+      x-ms-examples:
+        TaskRuns_Update:
+          parameters:
+            api-version: 2019-06-01-preview
+            registryName: myRegistry
+            resourceGroupName: myResourceGroup
+            subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
+            taskRunName: myRun
+            updateParameters:
+              properties:
+                forceUpdateTag: test
+                runRequest:
+                  credentials: {}
+                  encodedTaskContent: c3RlcHM6IAogIC0gY21kOiB7eyAuVmFsdWVzLmNvbW1hbmQgfX0K
+                  encodedValuesContent: Y29tbWFuZDogYmFzaCBlY2hvIHt7LlJ1bi5SZWdpc3RyeX19Cg==
+                  isArchiveEnabled: true
+                  platform:
+                    architecture: amd64
+                    os: Linux
+                  type: EncodedTaskRunRequest
+                  values: []
+          responses:
+            '200':
+              body:
+                id: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/taskRuns/myRun
+                location: WESTUS
+                name: mytestrun
+                properties:
+                  provisioningState: Creating
+                  runRequest:
+                    credentials: {}
+                    encodedTaskContent: c3RlcHM6IAogIC0gY21kOiB7eyAuVmFsdWVzLmNvbW1hbmQgfX0K
+                    encodedValuesContent: Y29tbWFuZDogYmFzaCBlY2hvIHt7LlJ1bi5SZWdpc3RyeX19Cg==
+                    isArchiveEnabled: true
+                    platform:
+                      architecture: amd64
+                      os: Linux
+                    type: EncodedTaskRunRequest
+                    values: []
+                  runResult:
+                    id: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/runs/yd6
+                    name: yd6
+                    properties:
+                      agentConfiguration:
+                        cpu: 2
+                      createTime: '2019-09-06T17:31:34.1184031+00:00'
+                      isArchiveEnabled: true
+                      lastUpdatedTime: '2019-09-06T17:31:34+00:00'
+                      platform:
+                        architecture: amd64
+                        os: Linux
+                      provisioningState: Succeeded
+                      runId: yd6
+                      runType: QuickRun
+                      status: Queued
+                    type: Microsoft.ContainerRegistry/registries/runs
+                tags:
+                  key: value
+                type: Microsoft.ContainerRegistry/registries/TaskRuns
+            '201':
+              body:
+                id: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/taskRuns/myRun
+                location: WESTUS
+                name: mytestrun
+                properties:
+                  provisioningState: Creating
+                  runRequest:
+                    credentials: {}
+                    encodedTaskContent: c3RlcHM6IAogIC0gY21kOiB7eyAuVmFsdWVzLmNvbW1hbmQgfX0K
+                    encodedValuesContent: Y29tbWFuZDogYmFzaCBlY2hvIHt7LlJ1bi5SZWdpc3RyeX19Cg==
+                    isArchiveEnabled: true
+                    platform:
+                      architecture: amd64
+                      os: Linux
+                    type: EncodedTaskRunRequest
+                    values: []
+                  runResult:
+                    id: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/runs/yd6
+                    name: yd6
+                    properties:
+                      agentConfiguration:
+                        cpu: 2
+                      createTime: '2019-09-06T17:31:34.1184031+00:00'
+                      isArchiveEnabled: true
+                      lastUpdatedTime: '2019-09-06T17:31:34+00:00'
+                      platform:
+                        architecture: amd64
+                        os: Linux
+                      provisioningState: Succeeded
+                      runId: yd6
+                      runType: QuickRun
+                      status: Queued
+                    type: Microsoft.ContainerRegistry/registries/runs
+                tags:
+                  key: value
+                type: Microsoft.ContainerRegistry/registries/TaskRuns
+      x-ms-long-running-operation: true
+    put:
+      description: Creates a task run for a container registry with the specified parameters.
+      operationId: TaskRuns_Create
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/RegistryNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - description: The name of task run.
+          in: path
+          name: taskRunName
+          required: true
+          type: string
+        - description: The parameters of a run that needs to scheduled.
+          in: body
+          name: taskRun
+          required: true
+          schema:
+            $ref: '#/definitions/TaskRun'
+      responses:
+        '200':
+          description: The request was successful; the request was well-formed and received properly.
+          schema:
+            $ref: '#/definitions/TaskRun'
+        '201':
+          description: The request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource.
+          schema:
+            $ref: '#/definitions/TaskRun'
+        default:
+          description: 'Error response describing why the operation failed. If the registry doesn''t exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned.'
+          schema:
+            $ref: '#/definitions/ErrorSchema'
+      tags:
+        - TaskRuns
+      x-ms-examples:
+        TaskRuns_Create:
+          parameters:
+            api-version: 2019-06-01-preview
+            registryName: myRegistry
+            resourceGroupName: myResourceGroup
+            subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
+            taskRun:
+              location: westus
+              properties:
+                forceUpdateTag: test
+                runRequest:
+                  credentials: {}
+                  encodedTaskContent: c3RlcHM6IAogIC0gY21kOiB7eyAuVmFsdWVzLmNvbW1hbmQgfX0K
+                  encodedValuesContent: Y29tbWFuZDogYmFzaCBlY2hvIHt7LlJ1bi5SZWdpc3RyeX19Cg==
+                  platform:
+                    architecture: amd64
+                    os: Linux
+                  type: EncodedTaskRunRequest
+                  values: []
+              tags:
+                key: value
+            taskRunName: myRun
+          responses:
+            '200':
+              body:
+                id: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/taskRuns/myRun
+                location: WESTUS
+                name: myrun
+                properties:
+                  provisioningState: Creating
+                  runRequest:
+                    credentials: {}
+                    encodedTaskContent: c3RlcHM6IAogIC0gY21kOiB7eyAuVmFsdWVzLmNvbW1hbmQgfX0K
+                    encodedValuesContent: Y29tbWFuZDogYmFzaCBlY2hvIHt7LlJ1bi5SZWdpc3RyeX19Cg==
+                    isArchiveEnabled: true
+                    platform:
+                      architecture: amd64
+                      os: Linux
+                    type: EncodedTaskRunRequest
+                    values: []
+                  runResult:
+                    id: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/runs/yd5
+                    name: yd5
+                    properties:
+                      agentConfiguration:
+                        cpu: 2
+                      createTime: '2019-09-06T17:23:21.9261521+00:00'
+                      isArchiveEnabled: true
+                      lastUpdatedTime: '2019-09-06T17:23:21+00:00'
+                      platform:
+                        architecture: amd64
+                        os: Linux
+                      provisioningState: Succeeded
+                      runId: yd5
+                      runType: QuickRun
+                      status: Queued
+                    type: Microsoft.ContainerRegistry/registries/runs
+                tags:
+                  key: value
+                type: Microsoft.ContainerRegistry/registries/TaskRuns
+            '201':
+              body:
+                id: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/taskRuns/myRun
+                location: WESTUS
+                name: myrun
+                properties:
+                  provisioningState: Creating
+                  runRequest:
+                    credentials: {}
+                    encodedTaskContent: c3RlcHM6IAogIC0gY21kOiB7eyAuVmFsdWVzLmNvbW1hbmQgfX0K
+                    encodedValuesContent: Y29tbWFuZDogYmFzaCBlY2hvIHt7LlJ1bi5SZWdpc3RyeX19Cg==
+                    isArchiveEnabled: true
+                    platform:
+                      architecture: amd64
+                      os: Linux
+                    type: EncodedTaskRunRequest
+                    values: []
+                  runResult:
+                    id: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/runs/yd5
+                    name: yd5
+                    properties:
+                      agentConfiguration:
+                        cpu: 2
+                      createTime: '2019-09-06T17:23:21.9261521+00:00'
+                      isArchiveEnabled: true
+                      lastUpdatedTime: '2019-09-06T17:23:21+00:00'
+                      platform:
+                        architecture: amd64
+                        os: Linux
+                      provisioningState: Succeeded
+                      runId: yd5
+                      runType: QuickRun
+                      status: Queued
+                    type: Microsoft.ContainerRegistry/registries/runs
+                tags:
+                  key: value
+                type: Microsoft.ContainerRegistry/registries/TaskRuns
+      x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/tasks':
     get:
       description: Lists all the tasks for a specified container registry.
@@ -720,6 +1180,8 @@ paths:
             $ref: '#/definitions/TaskListResult'
         default:
           description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorSchema'
       tags:
         - Tasks
       x-ms-examples:
@@ -809,6 +1271,8 @@ paths:
           description: No Content - the specified resource was not found.
         default:
           description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorSchema'
       tags:
         - Tasks
       x-ms-examples:
@@ -840,6 +1304,8 @@ paths:
             $ref: '#/definitions/Task'
         default:
           description: 'Error response describing why the operation failed. If the registry doesn''t exist, 404 (Not found) is returned.'
+          schema:
+            $ref: '#/definitions/ErrorSchema'
       tags:
         - Tasks
       x-ms-examples:
@@ -934,6 +1400,8 @@ paths:
             $ref: '#/definitions/Task'
         default:
           description: 'Error response describing why the operation failed. If the registry doesn''t exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned.'
+          schema:
+            $ref: '#/definitions/ErrorSchema'
       tags:
         - Tasks
       x-ms-examples:
@@ -1561,6 +2029,8 @@ paths:
             $ref: '#/definitions/Task'
         default:
           description: 'Error response describing why the operation failed. If the registry doesn''t exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned.'
+          schema:
+            $ref: '#/definitions/ErrorSchema'
       tags:
         - Tasks
       x-ms-examples:
@@ -2247,6 +2717,8 @@ paths:
             $ref: '#/definitions/Task'
         default:
           description: 'Error response describing why the operation failed. If the registry doesn''t exist, 404 (Not found) is returned.'
+          schema:
+            $ref: '#/definitions/ErrorSchema'
       tags:
         - Tasks
       x-ms-examples:
@@ -2736,6 +3208,24 @@ definitions:
       - type
     type: object
     x-ms-discriminator-value: EncodedTask
+  Error:
+    description: An error response from the Azure Container Registry service.
+    properties:
+      code:
+        description: error code.
+        type: string
+      message:
+        description: error message.
+        type: string
+    required:
+      - code
+      - message
+  ErrorSchema:
+    description: An error response from the Azure Container Registry service.
+    properties:
+      error:
+        $ref: '#/definitions/Error'
+        description: Azure container registry build API error body.
   FileTaskRunRequest:
     allOf:
       - $ref: '#/definitions/RunRequest'
@@ -3532,6 +4022,69 @@ definitions:
         $ref: '#/definitions/TriggerUpdateParameters'
         description: The properties for updating trigger properties.
     type: object
+  TaskRun:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: "The task run that has the ARM resource and properties. \r\nThe task run will have the information of request and result of a run."
+    properties:
+      identity:
+        $ref: '#/definitions/IdentityProperties'
+        description: Identity for the resource.
+      properties:
+        $ref: '#/definitions/TaskRunProperties'
+        description: 'The properties associated with the task run, i.e., request and result of the run'
+        x-ms-client-flatten: true
+    type: object
+  TaskRunListResult:
+    description: The collection of task runs.
+    properties:
+      nextLink:
+        description: The URI that can be used to request the next set of paged results.
+        type: string
+      value:
+        description: The collection value.
+        items:
+          $ref: '#/definitions/TaskRun'
+        type: array
+    type: object
+  TaskRunProperties:
+    description: The properties of task run.
+    properties:
+      forceUpdateTag:
+        description: How the run should be forced to rerun even if the run request configuration has not changed
+        type: string
+      provisioningState:
+        description: The provisioning state of this task run
+        enum:
+          - Creating
+          - Updating
+          - Deleting
+          - Succeeded
+          - Failed
+          - Canceled
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ProvisioningState
+      runRequest:
+        $ref: '#/definitions/RunRequest'
+        description: The request (parameters) for the run
+      runResult:
+        $ref: '#/definitions/Run'
+        description: The result of this task run
+        readOnly: true
+    type: object
+  TaskRunPropertiesUpdateParameters:
+    description: The properties of a task run update parameters.
+    properties:
+      forceUpdateTag:
+        description: How the run should be forced to rerun even if the run request configuration has not changed
+        type: string
+      runRequest:
+        $ref: '#/definitions/RunRequest'
+        description: The request (parameters) for the new run
+    type: object
   TaskRunRequest:
     allOf:
       - $ref: '#/definitions/RunRequest'
@@ -3548,6 +4101,22 @@ definitions:
       - taskId
     type: object
     x-ms-discriminator-value: TaskRunRequest
+  TaskRunUpdateParameters:
+    description: The parameters for updating a task run.
+    properties:
+      identity:
+        $ref: '#/definitions/IdentityProperties'
+        description: Identity for the resource.
+      properties:
+        $ref: '#/definitions/TaskRunPropertiesUpdateParameters'
+        description: The properties for updating a task run.
+        x-ms-client-flatten: true
+      tags:
+        additionalProperties:
+          type: string
+        description: The ARM resource tags.
+        type: object
+    type: object
   TaskStepProperties:
     description: Base properties for any task step.
     discriminator: type

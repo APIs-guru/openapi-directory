@@ -359,10 +359,10 @@ paths:
         - $ref: '#/parameters/EnvironmentNameParameter'
         - description: Request object that contains the updated information for the environment.
           in: body
-          name: environmentUpdateParameters
+          name: standardEnvironmentUpdateParameters
           required: true
           schema:
-            $ref: '#/definitions/EnvironmentUpdateParameters'
+            $ref: '#/definitions/StandardEnvironmentUpdateParameters'
         - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '200':
@@ -380,11 +380,11 @@ paths:
           parameters:
             api-version: 2018-08-15-preview
             environmentName: env1
-            environmentUpdateParameters:
+            resourceGroupName: rg1
+            standardEnvironmentUpdateParameters:
               sku:
                 capacity: 10
                 name: S1
-            resourceGroupName: rg1
             subscriptionId: subid
           responses:
             '200':
@@ -1453,6 +1453,9 @@ definitions:
       ingress:
         $ref: '#/definitions/IngressEnvironmentStatus'
         description: An object that represents the status of ingress on an environment.
+      warmStorage:
+        $ref: '#/definitions/WarmStorageEnvironmentStatus'
+        description: An object that represents the status of warm storage on an environment.
     readOnly: true
     type: object
   EnvironmentUpdateParameters:
@@ -1744,6 +1747,10 @@ definitions:
         items:
           $ref: '#/definitions/TimeSeriesIdProperty'
         type: array
+      warmStoreConfiguration:
+        $ref: '#/definitions/WarmStoreConfigurationProperties'
+        description: The warm store configuration provides the details to create a warm store cache that will retain a copy of the environment's data available for faster query.
+        x-ms-client-flatten: true
     required:
       - timeSeriesIdProperties
       - storageConfiguration
@@ -1753,11 +1760,10 @@ definitions:
       storageConfiguration:
         $ref: '#/definitions/LongTermStorageConfigurationMutableProperties'
         description: The storage configuration provides the connection details that allows the Time Series Insights service to connect to the customer storage account that is used to store the environment's data.
-      timeSeriesIdProperties:
-        description: The list of event properties which will be used to partition data in the environment.
-        items:
-          $ref: '#/definitions/TimeSeriesIdProperty'
-        type: array
+      warmStoreConfiguration:
+        $ref: '#/definitions/WarmStoreConfigurationProperties'
+        description: The warm store configuration provides the details to create a warm store cache that will retain a copy of the environment's data available for faster query.
+        x-ms-client-flatten: true
     type: object
   LongTermEnvironmentResource:
     allOf:
@@ -1784,6 +1790,10 @@ definitions:
         items:
           $ref: '#/definitions/TimeSeriesIdProperty'
         type: array
+      warmStoreConfiguration:
+        $ref: '#/definitions/WarmStoreConfigurationProperties'
+        description: The warm store configuration provides the details to create a warm store cache that will retain a copy of the environment's data available for faster query.
+        x-ms-client-flatten: true
     required:
       - timeSeriesIdProperties
       - storageConfiguration
@@ -2001,6 +2011,7 @@ definitions:
         enum:
           - S1
           - S2
+          - P1
           - L1
         type: string
         x-ms-enum:
@@ -2130,3 +2141,58 @@ definitions:
         type: object
     required:
       - location
+  WarmStorageEnvironmentStatus:
+    description: An object that represents the status of warm storage on an environment.
+    properties:
+      propertiesUsage:
+        $ref: '#/definitions/WarmStoragePropertiesUsage'
+        description: An object that contains the status of warm storage properties usage.
+        x-ms-client-flatten: true
+    readOnly: true
+    type: object
+  WarmStoragePropertiesUsage:
+    description: An object that contains the status of warm storage properties usage.
+    properties:
+      state:
+        description: 'This string represents the state of warm storage properties usage. It can be "Ok", "Error", "Unknown".'
+        enum:
+          - Ok
+          - Error
+          - Unknown
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: WarmStoragePropertiesState
+      stateDetails:
+        $ref: '#/definitions/WarmStoragePropertiesUsageStateDetails'
+        description: An object that contains the details about warm storage properties usage state.
+        x-ms-client-flatten: true
+    readOnly: true
+    type: object
+  WarmStoragePropertiesUsageStateDetails:
+    description: An object that contains the details about warm storage properties usage state.
+    properties:
+      currentCount:
+        description: A value that represents the number of properties used by the environment for S1/S2 SKU and number of properties used by Warm Store for PAYG SKU
+        format: int32
+        maximum: 10
+        minimum: 1
+        type: integer
+      maxCount:
+        description: A value that represents the maximum number of properties used allowed by the environment for S1/S2 SKU and maximum number of properties allowed by Warm Store for PAYG SKU.
+        format: int32
+        maximum: 10
+        minimum: 1
+        type: integer
+    readOnly: true
+    type: object
+  WarmStoreConfigurationProperties:
+    description: The warm store configuration provides the details to create a warm store cache that will retain a copy of the environment's data available for faster query.
+    properties:
+      dataRetention:
+        description: ISO8601 timespan specifying the number of days the environment's events will be available for query from the warm store.
+        format: duration
+        type: string
+    required:
+      - dataRetention
+    type: object

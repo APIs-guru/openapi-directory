@@ -56,6 +56,11 @@ paths:
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          type: string
       responses:
         '200':
           description: OK
@@ -67,6 +72,107 @@ paths:
       x-ms-examples:
         Lists all available Resource SKUs:
           parameters:
+            api-version: '2019-04-01'
+            subscriptionId: '{subscription-id}'
+          responses:
+            '200':
+              body:
+                nextLink: null
+                value:
+                  - capabilities:
+                      - name: MaxResourceVolumeMB
+                        value: '20480'
+                      - name: OSVhdSizeMB
+                        value: '1047552'
+                      - name: vCPUs
+                        value: '1'
+                      - name: HyperVGenerations
+                        value: V1
+                      - name: MemoryGB
+                        value: '0.75'
+                      - name: MaxDataDiskCount
+                        value: '1'
+                      - name: LowPriorityCapable
+                        value: 'False'
+                      - name: PremiumIO
+                        value: 'False'
+                      - name: vCPUsAvailable
+                        value: '1'
+                      - name: ACUs
+                        value: '50'
+                      - name: vCPUsPerCore
+                        value: '1'
+                      - name: EphemeralOSDiskSupported
+                        value: 'False'
+                      - name: AcceleratedNetworkingEnabled
+                        value: 'False'
+                      - name: RdmaEnabled
+                        value: 'False'
+                      - name: MaxNetworkInterfaces
+                        value: '2'
+                    family: standardA0_A7Family
+                    locationInfo:
+                      - location: westus
+                        zoneDetails:
+                          - capabilities:
+                              - name: UltraSSDAvailable
+                                value: 'True'
+                            name:
+                              - westus-AZ01
+                        zones:
+                          - westus-AZ01
+                    locations:
+                      - westus
+                    name: Standard_A0
+                    resourceType: virtualMachines
+                    size: A0
+                    tier: Standard
+                  - capabilities:
+                      - name: MaxResourceVolumeMB
+                        value: '71680'
+                      - name: OSVhdSizeMB
+                        value: '1047552'
+                      - name: vCPUs
+                        value: '1'
+                      - name: HyperVGenerations
+                        value: V1
+                      - name: MemoryGB
+                        value: '1.75'
+                      - name: MaxDataDiskCount
+                        value: '2'
+                      - name: LowPriorityCapable
+                        value: 'True'
+                      - name: PremiumIO
+                        value: 'False'
+                      - name: vCPUsAvailable
+                        value: '1'
+                      - name: ACUs
+                        value: '100'
+                      - name: vCPUsPerCore
+                        value: '1'
+                      - name: EphemeralOSDiskSupported
+                        value: 'False'
+                      - name: AcceleratedNetworkingEnabled
+                        value: 'False'
+                      - name: RdmaEnabled
+                        value: 'False'
+                      - name: MaxNetworkInterfaces
+                        value: '2'
+                    family: standardA0_A7Family
+                    locationInfo:
+                      - location: westus
+                        zones:
+                          - westus-AZ02
+                          - westus-AZ01
+                    locations:
+                      - westus
+                    name: Standard_A1
+                    resourceType: virtualMachines
+                    size: A1
+                    tier: Standard
+        Lists all available Resource SKUs for the specified region:
+          parameters:
+            $filter: location eq 'westus'
             api-version: '2019-04-01'
             subscriptionId: '{subscription-id}'
           responses:

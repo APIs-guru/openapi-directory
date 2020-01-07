@@ -745,6 +745,58 @@ paths:
             subscriptionId: subid
           responses:
             '200':
+              body:
+                etag: fdf2a6e8-ce83-42cc-8c2d-0ceb11a370ff
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/zzy-test-rg/providers/Microsoft.HDInsight/clusters/cluster1
+                location: East US
+                name: cluster1
+                properties:
+                  clusterDefinition:
+                    blueprint: 'https://blueprints.azurehdinsight.net/hadoop-4.0.1000.1.1910270459.json'
+                    componentVersion:
+                      Hadoop: '3.1'
+                    kind: HADOOP
+                  clusterState: Running
+                  clusterVersion: 4.0.1000.1
+                  computeProfile:
+                    roles:
+                      - hardwareProfile:
+                          vmSize: standard_d12_v2
+                        name: headnode
+                        osProfile:
+                          linuxOperatingSystemProfile:
+                            username: sshuser
+                        targetInstanceCount: 2
+                      - hardwareProfile:
+                          vmSize: standard_d4_v2
+                        name: workernode
+                        osProfile:
+                          linuxOperatingSystemProfile:
+                            username: sshuser
+                        targetInstanceCount: 4
+                      - hardwareProfile:
+                          vmSize: standard_a2_v2
+                        name: zookeepernode
+                        osProfile:
+                          linuxOperatingSystemProfile:
+                            username: sshuser
+                        targetInstanceCount: 3
+                  connectivityEndpoints:
+                    - location: cluster1-ssh.azurehdinsight.net
+                      name: SSH
+                      port: 22
+                      protocol: TCP
+                    - location: cluster1.azurehdinsight.net
+                      name: HTTPS
+                      port: 443
+                      protocol: TCP
+                  createdDate: '2019-11-18T12:25:43.48'
+                  osType: Linux
+                  provisioningState: Succeeded
+                  quotaInfo:
+                    coresUsed: 40
+                  tier: Standard
+                type: Microsoft.HDInsight/clusters
               headers:
                 location: 'https://management.azure.com/subscriptions/subid/providers/Microsoft.HDInsight/pathToOperationResult'
         Create Hadoop cluster with Azure Data Lake Storage Gen 2:
@@ -804,6 +856,58 @@ paths:
             subscriptionId: subid
           responses:
             '200':
+              body:
+                etag: fdf2a6e8-ce83-42cc-8c2d-0ceb11a370ff
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/zzy-test-rg/providers/Microsoft.HDInsight/clusters/cluster1
+                location: East US
+                name: cluster1
+                properties:
+                  clusterDefinition:
+                    blueprint: 'https://blueprints.azurehdinsight.net/hadoop-4.0.1000.1.1910270459.json'
+                    componentVersion:
+                      Hadoop: '3.1'
+                    kind: HADOOP
+                  clusterState: Running
+                  clusterVersion: 4.0.1000.1
+                  computeProfile:
+                    roles:
+                      - hardwareProfile:
+                          vmSize: standard_d12_v2
+                        name: headnode
+                        osProfile:
+                          linuxOperatingSystemProfile:
+                            username: sshuser
+                        targetInstanceCount: 2
+                      - hardwareProfile:
+                          vmSize: standard_d4_v2
+                        name: workernode
+                        osProfile:
+                          linuxOperatingSystemProfile:
+                            username: sshuser
+                        targetInstanceCount: 4
+                      - hardwareProfile:
+                          vmSize: standard_a2_v2
+                        name: zookeepernode
+                        osProfile:
+                          linuxOperatingSystemProfile:
+                            username: sshuser
+                        targetInstanceCount: 3
+                  connectivityEndpoints:
+                    - location: cluster1-ssh.azurehdinsight.net
+                      name: SSH
+                      port: 22
+                      protocol: TCP
+                    - location: cluster1.azurehdinsight.net
+                      name: HTTPS
+                      port: 443
+                      protocol: TCP
+                  createdDate: '2019-11-18T12:25:43.48'
+                  osType: Linux
+                  provisioningState: Succeeded
+                  quotaInfo:
+                    coresUsed: 40
+                  tier: Standard
+                type: Microsoft.HDInsight/clusters
               headers:
                 location: 'https://management.azure.com/subscriptions/subid/providers/Microsoft.HDInsight/pathToOperationResult'
         Create Hadoop on Linux cluster with SSH password:
@@ -863,6 +967,58 @@ paths:
             subscriptionId: subid
           responses:
             '200':
+              body:
+                etag: fdf2a6e8-ce83-42cc-8c2d-0ceb11a370ff
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/zzy-test-rg/providers/Microsoft.HDInsight/clusters/cluster1
+                location: East US
+                name: cluster1
+                properties:
+                  clusterDefinition:
+                    blueprint: 'https://blueprints.azurehdinsight.net/hadoop-4.0.1000.1.1910270459.json'
+                    componentVersion:
+                      Hadoop: '3.1'
+                    kind: HADOOP
+                  clusterState: Running
+                  clusterVersion: 4.0.1000.1
+                  computeProfile:
+                    roles:
+                      - hardwareProfile:
+                          vmSize: standard_d12_v2
+                        name: headnode
+                        osProfile:
+                          linuxOperatingSystemProfile:
+                            username: sshuser
+                        targetInstanceCount: 2
+                      - hardwareProfile:
+                          vmSize: standard_d4_v2
+                        name: workernode
+                        osProfile:
+                          linuxOperatingSystemProfile:
+                            username: sshuser
+                        targetInstanceCount: 4
+                      - hardwareProfile:
+                          vmSize: standard_a2_v2
+                        name: zookeepernode
+                        osProfile:
+                          linuxOperatingSystemProfile:
+                            username: sshuser
+                        targetInstanceCount: 3
+                  connectivityEndpoints:
+                    - location: cluster1-ssh.azurehdinsight.net
+                      name: SSH
+                      port: 22
+                      protocol: TCP
+                    - location: cluster1.azurehdinsight.net
+                      name: HTTPS
+                      port: 443
+                      protocol: TCP
+                  createdDate: '2019-11-18T12:25:43.48'
+                  osType: Linux
+                  provisioningState: Succeeded
+                  quotaInfo:
+                    coresUsed: 40
+                  tier: Standard
+                type: Microsoft.HDInsight/clusters
               headers:
                 location: 'https://management.azure.com/subscriptions/subid/providers/Microsoft.HDInsight/pathToOperationResult'
         Create Hadoop on Linux cluster with SSH public key:
@@ -924,6 +1080,200 @@ paths:
             subscriptionId: subid
           responses:
             '200':
+              body:
+                etag: fdf2a6e8-ce83-42cc-8c2d-0ceb11a370ff
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/zzy-test-rg/providers/Microsoft.HDInsight/clusters/cluster1
+                location: East US
+                name: cluster1
+                properties:
+                  clusterDefinition:
+                    blueprint: 'https://blueprints.azurehdinsight.net/hadoop-4.0.1000.1.1910270459.json'
+                    componentVersion:
+                      Hadoop: '3.1'
+                    kind: HADOOP
+                  clusterState: Running
+                  clusterVersion: 4.0.1000.1
+                  computeProfile:
+                    roles:
+                      - hardwareProfile:
+                          vmSize: standard_d12_v2
+                        name: headnode
+                        osProfile:
+                          linuxOperatingSystemProfile:
+                            username: sshuser
+                        targetInstanceCount: 2
+                      - hardwareProfile:
+                          vmSize: standard_d4_v2
+                        name: workernode
+                        osProfile:
+                          linuxOperatingSystemProfile:
+                            username: sshuser
+                        targetInstanceCount: 4
+                      - hardwareProfile:
+                          vmSize: standard_a2_v2
+                        name: zookeepernode
+                        osProfile:
+                          linuxOperatingSystemProfile:
+                            username: sshuser
+                        targetInstanceCount: 3
+                  connectivityEndpoints:
+                    - location: cluster1-ssh.azurehdinsight.net
+                      name: SSH
+                      port: 22
+                      protocol: TCP
+                    - location: cluster1.azurehdinsight.net
+                      name: HTTPS
+                      port: 443
+                      protocol: TCP
+                  createdDate: '2019-11-18T12:25:43.48'
+                  osType: Linux
+                  provisioningState: Succeeded
+                  quotaInfo:
+                    coresUsed: 40
+                  tier: Standard
+                type: Microsoft.HDInsight/clusters
+              headers:
+                location: 'https://management.azure.com/subscriptions/subid/providers/Microsoft.HDInsight/pathToOperationResult'
+        Create Kafka cluster with Kafka Rest Proxy:
+          parameters:
+            api-version: 2018-06-01-preview
+            clusterName: cluster1
+            parameters:
+              properties:
+                clusterDefinition:
+                  componentVersion:
+                    Kafka: '2.1'
+                  configurations:
+                    gateway:
+                      restAuthCredential.isEnabled: true
+                      restAuthCredential.password: '**********'
+                      restAuthCredential.username: admin
+                  kind: kafka
+                clusterVersion: '4.0'
+                computeProfile:
+                  roles:
+                    - hardwareProfile:
+                        vmSize: Large
+                      name: headnode
+                      osProfile:
+                        linuxOperatingSystemProfile:
+                          password: '**********'
+                          username: sshuser
+                      targetInstanceCount: 2
+                    - dataDisksGroups:
+                        - disksPerNode: 8
+                      hardwareProfile:
+                        vmSize: Large
+                      name: workernode
+                      osProfile:
+                        linuxOperatingSystemProfile:
+                          password: '**********'
+                          username: sshuser
+                      targetInstanceCount: 3
+                    - hardwareProfile:
+                        vmSize: Small
+                      name: zookeepernode
+                      osProfile:
+                        linuxOperatingSystemProfile:
+                          password: '**********'
+                          username: sshuser
+                      targetInstanceCount: 3
+                    - hardwareProfile:
+                        vmSize: Standard_D4_v2
+                      name: kafkamanagementnode
+                      osProfile:
+                        linuxOperatingSystemProfile:
+                          password: '**********'
+                          username: kafkauser
+                      targetInstanceCount: 2
+                kafkaRestProperties:
+                  clientGroupInfo:
+                    groupId: 00000000-0000-0000-0000-111111111111
+                    groupName: Kafka security group name
+                osType: Linux
+                storageProfile:
+                  storageaccounts:
+                    - container: containername
+                      isDefault: true
+                      key: storagekey
+                      name: mystorage.blob.core.windows.net
+                tier: Standard
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                etag: e1266b83-9bda-4797-a906-1bf82c8eb09a
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1
+                location: South Central US
+                name: cluster1
+                properties:
+                  clusterDefinition:
+                    blueprint: 'https://blueprints.azurehdinsight.net/kafka-4.0.1000.1.1911212244.json'
+                    componentVersion:
+                      Kafka: '2.1'
+                    kind: KAFKA
+                  clusterState: Running
+                  clusterVersion: 4.0.1000.1
+                  computeProfile:
+                    roles:
+                      - hardwareProfile:
+                          vmSize: standard_d3_v2
+                        name: headnode
+                        osProfile:
+                          linuxOperatingSystemProfile:
+                            username: sshuser
+                        targetInstanceCount: 2
+                      - dataDisksGroups:
+                          - diskSizeGB: 1023
+                            disksPerNode: 2
+                            storageAccountType: Standard_LRS
+                        hardwareProfile:
+                          vmSize: standard_d3_v2
+                        name: workernode
+                        osProfile:
+                          linuxOperatingSystemProfile:
+                            username: sshuser
+                        targetInstanceCount: 4
+                      - hardwareProfile:
+                          vmSize: standard_d4_v2
+                        name: kafkamanagementnode
+                        osProfile:
+                          linuxOperatingSystemProfile:
+                            username: sshuser
+                        targetInstanceCount: 2
+                      - hardwareProfile:
+                          vmSize: standard_a4_v2
+                        name: zookeepernode
+                        osProfile:
+                          linuxOperatingSystemProfile:
+                            username: sshuser
+                        targetInstanceCount: 3
+                  connectivityEndpoints:
+                    - location: cluster1-ssh.azurehdinsight.net
+                      name: SSH
+                      port: 22
+                      protocol: TCP
+                    - location: cluster1.azurehdinsight.net
+                      name: HTTPS
+                      port: 443
+                      protocol: TCP
+                    - location: cluster1-kafkarest.azurehdinsight.net
+                      name: KafkaRestProxyPublicEndpoint
+                      port: 443
+                      protocol: TCP
+                  createdDate: '2019-11-25T03:43:23.663'
+                  kafkaRestProperties:
+                    clientGroupInfo:
+                      groupId: 00000000-0000-0000-0000-000000000000
+                      groupName: security group name
+                  osType: Linux
+                  provisioningState: Succeeded
+                  quotaInfo:
+                    coresUsed: 52
+                  tier: Standard
+                tags: null
+                type: Microsoft.HDInsight/clusters
               headers:
                 location: 'https://management.azure.com/subscriptions/subid/providers/Microsoft.HDInsight/pathToOperationResult'
         Create Secure Hadoop cluster:
@@ -1014,6 +1364,58 @@ paths:
             subscriptionId: subid
           responses:
             '200':
+              body:
+                etag: fdf2a6e8-ce83-42cc-8c2d-0ceb11a370ff
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/zzy-test-rg/providers/Microsoft.HDInsight/clusters/cluster1
+                location: East US
+                name: cluster1
+                properties:
+                  clusterDefinition:
+                    blueprint: 'https://blueprints.azurehdinsight.net/hadoop-4.0.1000.1.1910270459.json'
+                    componentVersion:
+                      Hadoop: '3.1'
+                    kind: HADOOP
+                  clusterState: Running
+                  clusterVersion: 4.0.1000.1
+                  computeProfile:
+                    roles:
+                      - hardwareProfile:
+                          vmSize: standard_d12_v2
+                        name: headnode
+                        osProfile:
+                          linuxOperatingSystemProfile:
+                            username: sshuser
+                        targetInstanceCount: 2
+                      - hardwareProfile:
+                          vmSize: standard_d4_v2
+                        name: workernode
+                        osProfile:
+                          linuxOperatingSystemProfile:
+                            username: sshuser
+                        targetInstanceCount: 4
+                      - hardwareProfile:
+                          vmSize: standard_a2_v2
+                        name: zookeepernode
+                        osProfile:
+                          linuxOperatingSystemProfile:
+                            username: sshuser
+                        targetInstanceCount: 3
+                  connectivityEndpoints:
+                    - location: cluster1-ssh.azurehdinsight.net
+                      name: SSH
+                      port: 22
+                      protocol: TCP
+                    - location: cluster1.azurehdinsight.net
+                      name: HTTPS
+                      port: 443
+                      protocol: TCP
+                  createdDate: '2019-11-18T12:25:43.48'
+                  osType: Linux
+                  provisioningState: Succeeded
+                  quotaInfo:
+                    coresUsed: 40
+                  tier: Standard
+                type: Microsoft.HDInsight/clusters
               headers:
                 location: 'https://management.azure.com/subscriptions/subid/providers/Microsoft.HDInsight/pathToOperationResult'
         Create Spark on Linux Cluster with SSH password:
@@ -1066,6 +1468,58 @@ paths:
             subscriptionId: subid
           responses:
             '200':
+              body:
+                etag: fdf2a6e8-ce83-42cc-8c2d-0ceb11a370ff
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/zzy-test-rg/providers/Microsoft.HDInsight/clusters/cluster1
+                location: East US
+                name: cluster1
+                properties:
+                  clusterDefinition:
+                    blueprint: 'https://blueprints.azurehdinsight.net/hadoop-4.0.1000.1.1910270459.json'
+                    componentVersion:
+                      Hadoop: '3.1'
+                    kind: HADOOP
+                  clusterState: Running
+                  clusterVersion: 4.0.1000.1
+                  computeProfile:
+                    roles:
+                      - hardwareProfile:
+                          vmSize: standard_d12_v2
+                        name: headnode
+                        osProfile:
+                          linuxOperatingSystemProfile:
+                            username: sshuser
+                        targetInstanceCount: 2
+                      - hardwareProfile:
+                          vmSize: standard_d4_v2
+                        name: workernode
+                        osProfile:
+                          linuxOperatingSystemProfile:
+                            username: sshuser
+                        targetInstanceCount: 4
+                      - hardwareProfile:
+                          vmSize: standard_a2_v2
+                        name: zookeepernode
+                        osProfile:
+                          linuxOperatingSystemProfile:
+                            username: sshuser
+                        targetInstanceCount: 3
+                  connectivityEndpoints:
+                    - location: cluster1-ssh.azurehdinsight.net
+                      name: SSH
+                      port: 22
+                      protocol: TCP
+                    - location: cluster1.azurehdinsight.net
+                      name: HTTPS
+                      port: 443
+                      protocol: TCP
+                  createdDate: '2019-11-18T12:25:43.48'
+                  osType: Linux
+                  provisioningState: Succeeded
+                  quotaInfo:
+                    coresUsed: 40
+                  tier: Standard
+                type: Microsoft.HDInsight/clusters
               headers:
                 location: 'https://management.azure.com/subscriptions/subid/providers/Microsoft.HDInsight/pathToOperationResult'
       x-ms-long-running-operation: true
@@ -1338,6 +1792,15 @@ definitions:
       time:
         description: '24-hour time in the form xx:xx'
         type: string
+  ClientGroupInfo:
+    description: The information of AAD security group.
+    properties:
+      groupId:
+        description: The AAD security group id.
+        type: string
+      groupName:
+        description: The AAD security group name.
+        type: string
   Cluster:
     allOf:
       - $ref: '#/definitions/TrackedResource'
@@ -1384,6 +1847,9 @@ definitions:
       diskEncryptionProperties:
         $ref: '#/definitions/DiskEncryptionProperties'
         description: The disk encryption properties.
+      kafkaRestProperties:
+        $ref: '#/definitions/KafkaRestProperties'
+        description: The cluster kafka rest proxy configuration.
       osType:
         description: The type of operating system.
         enum:
@@ -1468,6 +1934,9 @@ definitions:
         items:
           $ref: '#/definitions/Errors'
         type: array
+      kafkaRestProperties:
+        $ref: '#/definitions/KafkaRestProperties'
+        description: The cluster kafka rest proxy configuration.
       osType:
         description: The type of operating system.
         enum:
@@ -1704,6 +2173,12 @@ definitions:
       vmSize:
         description: The size of the VM
         type: string
+  KafkaRestProperties:
+    description: The kafka rest proxy configuration which contains AAD security group information.
+    properties:
+      clientGroupInfo:
+        $ref: '#/definitions/ClientGroupInfo'
+        description: The information of AAD security group.
   LinuxOperatingSystemProfile:
     description: 'The ssh username, password, and ssh public key.'
     properties:
@@ -1950,7 +2425,7 @@ definitions:
         description: 'The container in the storage account, only to be specified for WASB storage accounts.'
         type: string
       fileSystem:
-        description: 'The filesystem, only to be specified for Azure Data Lake Storage type Gen 2.'
+        description: 'The filesystem, only to be specified for Azure Data Lake Storage Gen 2.'
         type: string
       isDefault:
         description: Whether or not the storage account is the default storage account.

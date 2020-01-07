@@ -39,13 +39,8 @@ definitions:
     description: Output for the service task to check for OCI drivers.
     properties:
       installedDriver:
-        additionalProperties:
-          items:
-            $ref: '#/definitions/OracleOCIDriverInfo'
-          type: array
+        $ref: '#/definitions/OracleOCIDriverInfo'
         description: Information about the installed driver if found and valid.
-        readOnly: true
-        type: object
       validationErrors:
         description: Validation errors
         items:

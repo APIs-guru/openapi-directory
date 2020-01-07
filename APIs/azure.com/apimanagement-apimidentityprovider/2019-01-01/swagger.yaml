@@ -124,6 +124,9 @@ paths:
                               description: Signin Policy Name. Only applies to AAD B2C Identity Provider.
                               minLength: 1
                               type: string
+                            signinTenant:
+                              description: The TenantId to use instead of Common when logging into Active Directory
+                              type: string
                             signupPolicyName:
                               description: Signup Policy Name. Only applies to AAD B2C Identity Provider.
                               minLength: 1
@@ -462,6 +465,9 @@ paths:
                         description: Signin Policy Name. Only applies to AAD B2C Identity Provider.
                         minLength: 1
                         type: string
+                      signinTenant:
+                        description: The TenantId to use instead of Common when logging into Active Directory
+                        type: string
                       signupPolicyName:
                         description: Signup Policy Name. Only applies to AAD B2C Identity Provider.
                         minLength: 1
@@ -547,15 +553,18 @@ paths:
           responses:
             '200':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/identityProviders/aadB2C
-                name: aadB2C
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/identityProviders/AadB2C
+                name: AadB2C
                 properties:
                   allowedTenants:
-                    - samirtestbc.onmicrosoft.com
-                  clientId: 315c8e2b-29fc-413d-822f-4efab7f43c42
-                  clientSecret: SnE4laLjmxc2QKWTPoRxOiwvSnnwMCFN+jLYDpBCUXw=
-                  signinPolicyName: B2C_1_signup-policy
-                  signupPolicyName: B2C_1_Signup_Default
+                    - contosoaadb2c.onmicrosoft.com
+                    - contoso2aadb2c.onmicrosoft.com
+                  authority: login.microsoftonline.com
+                  clientId: f02dafe2-b8b8-48ec-a38e-27e5c16c51e5
+                  clientSecret: XXXXXXX
+                  signinPolicyName: B2C_1_policy-signin
+                  signinTenant: contosoaadb2c.onmicrosoft.com
+                  signupPolicyName: B2C_1_policy-signup
                   type: aadB2C
                 type: Microsoft.ApiManagement/service/identityProviders
     head:
@@ -745,6 +754,9 @@ paths:
                       signinPolicyName:
                         description: Signin Policy Name. Only applies to AAD B2C Identity Provider.
                         minLength: 1
+                        type: string
+                      signinTenant:
+                        description: The TenantId to use instead of Common when logging into Active Directory
                         type: string
                       signupPolicyName:
                         description: Signup Policy Name. Only applies to AAD B2C Identity Provider.
@@ -947,6 +959,9 @@ paths:
                         description: Signin Policy Name. Only applies to AAD B2C Identity Provider.
                         minLength: 1
                         type: string
+                      signinTenant:
+                        description: The TenantId to use instead of Common when logging into Active Directory
+                        type: string
                       signupPolicyName:
                         description: Signup Policy Name. Only applies to AAD B2C Identity Provider.
                         minLength: 1
@@ -1057,6 +1072,9 @@ paths:
                         description: Signin Policy Name. Only applies to AAD B2C Identity Provider.
                         minLength: 1
                         type: string
+                      signinTenant:
+                        description: The TenantId to use instead of Common when logging into Active Directory
+                        type: string
                       signupPolicyName:
                         description: Signup Policy Name. Only applies to AAD B2C Identity Provider.
                         minLength: 1
@@ -1149,6 +1167,9 @@ paths:
                       signinPolicyName:
                         description: Signin Policy Name. Only applies to AAD B2C Identity Provider.
                         minLength: 1
+                        type: string
+                      signinTenant:
+                        description: The TenantId to use instead of Common when logging into Active Directory
                         type: string
                       signupPolicyName:
                         description: Signup Policy Name. Only applies to AAD B2C Identity Provider.

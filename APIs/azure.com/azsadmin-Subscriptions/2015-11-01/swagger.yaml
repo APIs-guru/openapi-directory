@@ -418,8 +418,6 @@ paths:
               body:
                 message: ''
                 nameAvailable: true
-      x-ms-pageable:
-        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/moveSubscriptions':
     post:
       description: Move subscriptions between delegated provider offers.

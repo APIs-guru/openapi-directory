@@ -271,6 +271,9 @@ definitions:
       modifiedDatetimeStart:
         description: 'The start of file''s modified datetime. Type: string (or Expression with resultType string).'
         type: object
+      prefix:
+        description: 'The prefix filter for the Azure Blob name. Type: string (or Expression with resultType string).'
+        type: object
       recursive:
         description: 'If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean).'
         type: object
@@ -494,6 +497,44 @@ definitions:
           $ref: '#/definitions/AzureMLWebServiceFile'
         description: 'Key,Value pairs, mapping the names of Azure ML endpoint''s Web Service Outputs to AzureMLWebServiceFile objects specifying the output Blob locations. This information will be passed in the WebServiceOutputs property of the Azure ML batch execution request.'
         type: object
+  AzureMLExecutePipelineActivity:
+    allOf:
+      - $ref: '#/definitions/ExecutionActivity'
+    description: Azure ML Execute Pipeline activity.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/AzureMLExecutePipelineActivityTypeProperties'
+        description: Azure ML Execute Pipeline activity properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    x-ms-discriminator-value: AzureMLExecutePipeline
+  AzureMLExecutePipelineActivityTypeProperties:
+    description: Azure ML Execute Pipeline activity properties.
+    properties:
+      continueOnStepFailure:
+        description: 'Whether to continue execution of other steps in the PipelineRun if a step fails. This information will be passed in the continueOnStepFailure property of the published pipeline execution request. Type: boolean (or Expression with resultType boolean).'
+        type: object
+      experimentName:
+        description: 'Run history experiment name of the pipeline run. This information will be passed in the ExperimentName property of the published pipeline execution request. Type: string (or Expression with resultType string).'
+        type: object
+      mlParentRunId:
+        description: 'The parent Azure ML Service pipeline run id. This information will be passed in the ParentRunId property of the published pipeline execution request. Type: string (or Expression with resultType string).'
+        type: object
+      mlPipelineId:
+        description: 'ID of the published Azure ML pipeline. Type: string (or Expression with resultType string).'
+        type: object
+      mlPipelineParameters:
+        description: 'Key,Value pairs to be passed to the published Azure ML pipeline endpoint. Keys must match the names of pipeline parameters defined in the published pipeline. Values will be passed in the ParameterAssignments property of the published pipeline execution request. Type: object with key value pairs (or Expression with resultType object).'
+        type: object
+    required:
+      - mlPipelineId
+  AzureMLPipelineParameters:
+    additionalProperties:
+      description: 'Type: string (or Expression with resultType string).'
+      type: object
+    description: 'Key,Value pairs to be passed to the published Azure ML pipeline endpoint. Keys must match the names of pipeline parameters defined in the published pipeline. Values will be passed in the ParameterAssignments property of the published pipeline execution request.'
+    type: object
   AzureMLUpdateResourceActivity:
     allOf:
       - $ref: '#/definitions/ExecutionActivity'
@@ -1164,6 +1205,30 @@ definitions:
         type: object
     required:
       - command
+  DWCopyCommandDefaultValue:
+    description: Default value.
+    properties:
+      columnName:
+        description: 'Column name. Type: object (or Expression with resultType string).'
+        type: object
+      defaultValue:
+        description: 'The default value of the column. Type: object (or Expression with resultType string).'
+        type: object
+    type: object
+  DWCopyCommandSettings:
+    description: DW Copy Command settings.
+    properties:
+      additionalOptions:
+        additionalProperties:
+          type: string
+        description: 'Additional options directly passed to SQL DW in Copy Command. Type: key value pairs (value should be string type) (or Expression with resultType object). Example: "additionalOptions": { "MAXERRORS": "1000", "DATEFORMAT": "''ymd''" }'
+        type: object
+      defaultValues:
+        description: 'Specifies the default values for each target column in SQL DW. The default values in the property overwrite the DEFAULT constraint set in the DB, and identity column cannot have a default value. Type: array of objects (or Expression with resultType array of objects).'
+        items:
+          $ref: '#/definitions/DWCopyCommandDefaultValue'
+        type: array
+    type: object
   DataLakeAnalyticsUSQLActivity:
     allOf:
       - $ref: '#/definitions/ExecutionActivity'
@@ -1576,6 +1641,23 @@ definitions:
   ExecuteDataFlowActivityTypeProperties:
     description: Execute data flow activity properties.
     properties:
+      compute:
+        description: Compute properties for data flow activity.
+        properties:
+          computeType:
+            description: Compute type of the cluster which will execute data flow job.
+            enum:
+              - General
+              - MemoryOptimized
+              - ComputeOptimized
+            type: string
+            x-ms-enum:
+              modelAsString: true
+              name: DataFlowComputeType
+          coreCount:
+            description: 'Core count of the cluster which will execute data flow job. Supported values are: 8, 16, 32, 48, 80, 144 and 272.'
+            type: integer
+        type: object
       dataFlow:
         additionalProperties:
           type: object
@@ -1935,6 +2017,7 @@ definitions:
     additionalProperties:
       type: object
     description: Format read settings.
+    discriminator: type
     properties:
       type:
         description: The read setting type.
@@ -1946,6 +2029,7 @@ definitions:
     additionalProperties:
       type: object
     description: Format write settings.
+    discriminator: type
     properties:
       type:
         description: The write setting type.
@@ -2271,11 +2355,8 @@ definitions:
     description: HDInsight Pig activity properties.
     properties:
       arguments:
-        description: User specified arguments to HDInsightActivity.
-        items:
-          description: 'Type: string (or Expression with resultType string).'
-          type: object
-        type: array
+        description: 'User specified arguments to HDInsightActivity. Type: array (or Expression with resultType array).'
+        type: object
       defines:
         additionalProperties:
           description: 'Type: string (or Expression with resultType string).'
@@ -3297,25 +3378,15 @@ definitions:
         description: Domain for windows authentication.
         type: object
       password:
-        allOf:
-          - description: The base definition of a secret type.
-            discriminator: type
-            properties:
-              type:
-                description: Type of the secret.
-                type: string
-            required:
-              - type
-            type: object
-        description: Azure Data Factory secure string definition. The string value will be masked with asterisks '*' during Get or List API calls.
+        description: The base definition of a secret type.
+        discriminator: type
         properties:
-          value:
-            description: Value of secure string.
+          type:
+            description: Type of the secret.
             type: string
         required:
-          - value
+          - type
         type: object
-        x-ms-discriminator-value: SecureString
       userName:
         description: UseName for windows authentication.
         type: object
@@ -3323,6 +3394,25 @@ definitions:
       - domain
       - userName
       - password
+    type: object
+  SSISChildPackage:
+    description: SSIS embedded child package.
+    properties:
+      packageContent:
+        description: 'Content for embedded child package. Type: string (or Expression with resultType string).'
+        type: object
+      packageLastModifiedDate:
+        description: Last modified date for embedded child package.
+        type: string
+      packageName:
+        description: Name for embedded child package.
+        type: string
+      packagePath:
+        description: 'Path for embedded child package. Type: string (or Expression with resultType string).'
+        type: object
+    required:
+      - packagePath
+      - packageContent
     type: object
   SSISConnectionManager:
     additionalProperties:
@@ -3416,6 +3506,7 @@ definitions:
         enum:
           - SSISDB
           - File
+          - InlinePackage
         type: string
         x-ms-enum:
           modelAsString: true
@@ -3424,8 +3515,6 @@ definitions:
         $ref: '#/definitions/SSISPackageLocationTypeProperties'
         description: SSIS package location properties.
         x-ms-client-flatten: true
-    required:
-      - packagePath
     type: object
   SSISPackageLocationTypeProperties:
     description: SSIS package location properties.
@@ -3433,29 +3522,33 @@ definitions:
       accessCredential:
         $ref: '#/definitions/SSISAccessCredential'
         description: The package access credential.
+      childPackages:
+        description: The embedded child package list.
+        items:
+          $ref: '#/definitions/SSISChildPackage'
+        type: array
       configurationPath:
         description: 'The configuration file of the package execution. Type: string (or Expression with resultType string).'
         type: object
+      packageContent:
+        description: 'The embedded package content. Type: string (or Expression with resultType string).'
+        type: object
+      packageLastModifiedDate:
+        description: The embedded package last modified date.
+        type: string
+      packageName:
+        description: The package name.
+        type: string
       packagePassword:
-        allOf:
-          - description: The base definition of a secret type.
-            discriminator: type
-            properties:
-              type:
-                description: Type of the secret.
-                type: string
-            required:
-              - type
-            type: object
-        description: Azure Data Factory secure string definition. The string value will be masked with asterisks '*' during Get or List API calls.
+        description: The base definition of a secret type.
+        discriminator: type
         properties:
-          value:
-            description: Value of secure string.
+          type:
+            description: Type of the secret.
             type: string
         required:
-          - value
+          - type
         type: object
-        x-ms-discriminator-value: SecureString
     type: object
   SSISPropertyOverride:
     description: SSIS property override.
@@ -3598,6 +3691,13 @@ definitions:
         description: 'SAP ECC OData query. For example, "$top=1". Type: string (or Expression with resultType string).'
         type: object
     type: object
+  SapHanaPartitionSettings:
+    description: The settings that will be leveraged for SAP HANA source partitioning.
+    properties:
+      partitionColumnName:
+        description: 'The name of the column that will be used for proceeding range partitioning. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
   SapHanaSource:
     allOf:
       - $ref: '#/definitions/TabularSource'
@@ -3606,6 +3706,19 @@ definitions:
       packetSize:
         description: 'The packet size of data read from SAP HANA. Type: integer(or Expression with resultType integer).'
         type: object
+      partitionOption:
+        description: The partition mechanism that will be used for SAP HANA read in parallel.
+        enum:
+          - None
+          - PhysicalPartitionsOfTable
+          - SapHanaDynamicRange
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: SapHanaPartitionOption
+      partitionSettings:
+        $ref: '#/definitions/SapHanaPartitionSettings'
+        description: The settings that will be leveraged for SAP HANA source partitioning.
       query:
         description: 'SAP HANA Sql query. Type: string (or Expression with resultType string).'
         type: object
@@ -3729,6 +3842,15 @@ definitions:
         description: 'Sftp wildcardFolderPath. Type: string (or Expression with resultType string).'
         type: object
     type: object
+  SftpWriteSettings:
+    allOf:
+      - $ref: '#/definitions/StoreWriteSettings'
+    description: Sftp write settings.
+    properties:
+      operationTimeout:
+        description: 'Specifies the timeout for writing each chunk to SFTP server. Default value: 01:00:00 (one hour). Type: string (or Expression with resultType string).'
+        type: object
+    type: object
   ShopifySource:
     allOf:
       - $ref: '#/definitions/TabularSource'
@@ -3752,9 +3874,15 @@ definitions:
       - $ref: '#/definitions/CopySink'
     description: A copy activity SQL Data Warehouse sink.
     properties:
+      allowCopyCommand:
+        description: 'Indicates to use Copy Command to copy data into SQL Data Warehouse. Type: boolean (or Expression with resultType boolean).'
+        type: object
       allowPolyBase:
         description: 'Indicates to use PolyBase to copy data into SQL Data Warehouse when applicable. Type: boolean (or Expression with resultType boolean).'
         type: object
+      copyCommandSettings:
+        $ref: '#/definitions/DWCopyCommandSettings'
+        description: Specifies Copy Command related settings when allowCopyCommand is true.
       polyBaseSettings:
         $ref: '#/definitions/PolybaseSettings'
         description: Specifies PolyBase-related settings when allowPolyBase is true.
@@ -3987,6 +4115,7 @@ definitions:
     additionalProperties:
       type: object
     description: Connector read setting.
+    discriminator: type
     properties:
       maxConcurrentConnections:
         description: 'The maximum concurrent connection count for the source data store. Type: integer (or Expression with resultType integer).'
@@ -4039,6 +4168,60 @@ definitions:
     x-ms-enum:
       modelAsString: true
       name: StoredProcedureParameterType
+  SwitchActivity:
+    allOf:
+      - $ref: '#/definitions/ControlActivity'
+    description: This activity evaluates an expression and executes activities under the cases property that correspond to the expression evaluation expected in the equals property.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/SwitchActivityTypeProperties'
+        description: Switch activity properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    x-ms-discriminator-value: Switch
+  SwitchActivityTypeProperties:
+    description: Switch activity properties.
+    properties:
+      cases:
+        description: 'List of cases that correspond to expected values of the ''on'' property. This is an optional property and if not provided, the activity will execute activities provided in defaultActivities.'
+        items:
+          $ref: '#/definitions/SwitchCase'
+          x-ms-client-flatten: true
+        type: array
+      defaultActivities:
+        description: 'List of activities to execute if no case condition is satisfied. This is an optional property and if not provided, the activity will exit without any action.'
+        items:
+          $ref: '#/definitions/Activity'
+        type: array
+      'on':
+        description: Azure Data Factory expression definition.
+        properties:
+          type:
+            description: Expression type.
+            enum:
+              - Expression
+            type: string
+          value:
+            description: Expression value.
+            type: string
+        required:
+          - type
+          - value
+        type: object
+    required:
+      - 'on'
+  SwitchCase:
+    description: Switch cases with have a value and corresponding activities.
+    properties:
+      activities:
+        description: List of activities to execute for satisfied case condition.
+        items:
+          $ref: '#/definitions/Activity'
+        type: array
+      value:
+        description: Expected value that satisfies the expression result of the 'on' property.
+        type: string
   SybaseSource:
     allOf:
       - $ref: '#/definitions/TabularSource'
@@ -4067,6 +4250,9 @@ definitions:
         type: object
       columnMappings:
         description: 'Column mappings. Example: "UserId: MyUserId, Group: MyGroup, Name: MyName" Type: string (or Expression with resultType string). This property will be retired. Please use mappings property.'
+        type: object
+      mapComplexValuesToString:
+        description: 'Whether to map complex (array and object) values to simple strings in json format. Type: boolean (or Expression with resultType boolean).'
         type: object
       mappings:
         description: 'Column mappings with logical types. Tabular->tabular example: [{"source":{"name":"CustomerName","type":"String"},"sink":{"name":"ClientName","type":"String"}},{"source":{"name":"CustomerAddress","type":"String"},"sink":{"name":"ClientAddress","type":"String"}}].  Hierarchical->tabular example: [{"source":{"path":"$.CustomerName","type":"String"},"sink":{"name":"ClientName","type":"String"}},{"source":{"path":"$.CustomerAddress","type":"String"},"sink":{"name":"ClientAddress","type":"String"}}]. Type: object (or Expression with resultType object).'
@@ -4257,45 +4443,25 @@ definitions:
     description: Web activity authentication properties.
     properties:
       password:
-        allOf:
-          - description: The base definition of a secret type.
-            discriminator: type
-            properties:
-              type:
-                description: Type of the secret.
-                type: string
-            required:
-              - type
-            type: object
-        description: Azure Data Factory secure string definition. The string value will be masked with asterisks '*' during Get or List API calls.
+        description: The base definition of a secret type.
+        discriminator: type
         properties:
-          value:
-            description: Value of secure string.
+          type:
+            description: Type of the secret.
             type: string
         required:
-          - value
+          - type
         type: object
-        x-ms-discriminator-value: SecureString
       pfx:
-        allOf:
-          - description: The base definition of a secret type.
-            discriminator: type
-            properties:
-              type:
-                description: Type of the secret.
-                type: string
-            required:
-              - type
-            type: object
-        description: Azure Data Factory secure string definition. The string value will be masked with asterisks '*' during Get or List API calls.
+        description: The base definition of a secret type.
+        discriminator: type
         properties:
-          value:
-            description: Value of secure string.
+          type:
+            description: Type of the secret.
             type: string
         required:
-          - value
+          - type
         type: object
-        x-ms-discriminator-value: SecureString
       resource:
         description: Resource for which Azure Auth token will be requested when using MSI Authentication.
         type: string
@@ -4327,6 +4493,25 @@ definitions:
       body:
         description: 'Represents the payload that will be sent to the endpoint. Required for POST/PUT method, not allowed for GET method Type: string (or Expression with resultType string).'
         type: object
+      connectVia:
+        description: Integration runtime reference type.
+        properties:
+          parameters:
+            additionalProperties:
+              type: object
+            description: An object mapping parameter names to argument values.
+            type: object
+          referenceName:
+            description: Reference integration runtime name.
+            type: string
+          type:
+            description: Type of integration runtime.
+            enum:
+              - IntegrationRuntimeReference
+            type: string
+        required:
+          - type
+          - referenceName
       datasets:
         description: List of datasets passed to web endpoint.
         items:
@@ -4418,6 +4603,9 @@ definitions:
       method:
         $ref: '#/definitions/WebHookActivityMethod'
         description: Rest API method for target endpoint.
+      reportStatusOnCallBack:
+        description: "When set to true, statusCode,\_output\_and\_error\_in\_callback\_request\_body\_will be consumed\_by\_activity.\_The\_activity\_can be marked as failed by\_setting\_statusCode\_>=\_400 in callback request. Default is false. Type: boolean (or Expression with resultType boolean)."
+        type: object
       timeout:
         description: 'The timeout within which the webhook should be called back. If there is no value specified, it defaults to 10 minutes. Type: string. Pattern: ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).'
         type: string

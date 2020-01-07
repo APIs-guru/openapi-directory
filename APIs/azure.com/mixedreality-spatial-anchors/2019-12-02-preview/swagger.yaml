@@ -89,26 +89,26 @@ paths:
         - Resource
         - Proxy
       x-ms-examples:
-        SpatialAnchorsAccountPageBySubscription:
+        List spatial anchors accounts by subscription:
           parameters:
             api-version: 2019-02-28-preview
             resourceType: SpatialAnchorsAccount
-            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+            subscriptionId: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
           responses:
             '200':
               body:
                 nextLink: 'https://aka.ms/&^FDKKAR'
                 value:
-                  - id: /subscriptions/8f8a44e1-1711-4fc4-ae53-8bcc11fc7c3c/resourceGroups/xiangyul/providers/Microsoft.MixedReality/SpatialAnchorsAccounts/alpha
-                    location: Global
-                    name: alpha
+                  - id: /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.MixedReality/SpatialAnchorsAccounts/MyAccount
+                    location: eastus2euap
+                    name: MyAccount
                     properties:
                       accountDomain: mixedreality.azure.com
                       accountId: 5007a881-6fb4-4c93-be52-942e355944a5
                     tags: {}
                     type: Microsoft.MixedReality/SpatialAnchorsAccounts
-                  - id: /subscriptions/8f8a44e1-1711-4fc4-ae53-8bcc11fc7c3c/resourceGroups/xiangyul/providers/Microsoft.MixedReality/SpatialAnchorsAccounts/omega
-                    location: Global
+                  - id: /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.MixedReality/SpatialAnchorsAccounts/omega
+                    location: eastus2euap
                     name: omega
                     properties:
                       accountDomain: mixedreality.azure.com
@@ -170,27 +170,27 @@ paths:
       tags:
         - Resource
       x-ms-examples:
-        ResourceGet:
+        List spatial anchor accounts by resource group:
           parameters:
             api-version: 2019-02-28-preview
-            resourceGroupName: mrsecf
+            resourceGroupName: MyResourceGroup
             resourceType: SpatialAnchorsAccount
-            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+            subscriptionId: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
           responses:
             '200':
               body:
                 nextLink: 'https://aka.ms/&^FDKKAR'
                 value:
-                  - id: /subscriptions/8f8a44e1-1711-4fc4-ae53-8bcc11fc7c3c/resourceGroups/xiangyul/providers/Microsoft.MixedReality/SpatialAnchorsAccounts/alpha
-                    location: Global
-                    name: alpha
+                  - id: /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.MixedReality/SpatialAnchorsAccounts/MyAccount
+                    location: eastus2euap
+                    name: MyAccount
                     properties:
                       accountDomain: mixedreality.azure.com
                       accountId: 5007a881-6fb4-4c93-be52-942e355944a5
                     tags: {}
                     type: Microsoft.MixedReality/SpatialAnchorsAccounts
-                  - id: /subscriptions/8f8a44e1-1711-4fc4-ae53-8bcc11fc7c3c/resourceGroups/xiangyul/providers/Microsoft.MixedReality/SpatialAnchorsAccounts/omega
-                    location: Global
+                  - id: /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.MixedReality/SpatialAnchorsAccounts/omega
+                    location: eastus2euap
                     name: omega
                     properties:
                       accountDomain: mixedreality.azure.com
@@ -261,13 +261,13 @@ paths:
       tags:
         - Resource
       x-ms-examples:
-        ResourceDelete:
+        Delete spatial anchors account:
           parameters:
-            accountName: alpha
+            accountName: MyAccount
             api-version: 2019-02-28-preview
-            resourceGroupName: mrsecf
+            resourceGroupName: MyResourceGroup
             resourceType: SpatialAnchorsAccount
-            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+            subscriptionId: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
           responses:
             '200': {}
             '204': {}
@@ -332,19 +332,19 @@ paths:
       tags:
         - Resource
       x-ms-examples:
-        ResourceGet:
+        Get spatial anchors account:
           parameters:
-            accountName: alpha
+            accountName: MyAccount
             api-version: 2019-02-28-preview
-            resourceGroupName: mrsecf
+            resourceGroupName: MyResourceGroup
             resourceType: SpatialAnchorsAccount
-            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+            subscriptionId: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
           responses:
             '200':
               body:
-                id: /subscriptions/8f8a44e1-1711-4fc4-ae53-8bcc11fc7c3c/resourceGroups/xiangyul/providers/Microsoft.MixedReality/SpatialAnchorsAccounts/alpha
-                location: Global
-                name: alpha
+                id: /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.MixedReality/SpatialAnchorsAccounts/MyAccount
+                location: eastus2euap
+                name: MyAccount
                 properties:
                   accountDomain: mixedreality.azure.com
                   accountId: 5007a881-6fb4-4c93-be52-942e355944a5
@@ -412,23 +412,23 @@ paths:
       tags:
         - Resource
       x-ms-examples:
-        ResourceCreateOrUpdate:
+        Update spatial anchors account:
           parameters:
-            accountName: alpha
+            accountName: MyAccount
             api-version: 2019-02-28-preview
-            resourceGroupName: mrsecf
+            resourceGroupName: MyResourceGroup
             resourceType: SpatialAnchorsAccount
             spatialAnchorsAccount:
               Tags:
                 hero: romeo
                 heroine: juliet
-            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+            subscriptionId: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
           responses:
             '200':
               body:
-                id: /subscriptions/8f8a44e1-1711-4fc4-ae53-8bcc11fc7c3c/resourceGroups/xiangyul/providers/Microsoft.MixedReality/SpatialAnchorsAccounts/alpha
-                location: Global
-                name: alpha
+                id: /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.MixedReality/SpatialAnchorsAccounts/MyAccount
+                location: eastus2euap
+                name: MyAccount
                 properties:
                   accountDomain: mixedreality.azure.com
                   accountId: 5007a881-6fb4-4c93-be52-942e355944a5
@@ -502,21 +502,21 @@ paths:
       tags:
         - Resource
       x-ms-examples:
-        ResourceCreate:
+        Create spatial anchor account:
           parameters:
-            accountName: alpha
+            accountName: MyAccount
             api-version: 2019-02-28-preview
-            resourceGroupName: mrsecf
+            resourceGroupName: MyResourceGroup
             resourceType: SpatialAnchorsAccount
             spatialAnchorsAccount:
-              location: EastUs2
-            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+              location: eastus2euap
+            subscriptionId: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
           responses:
             '200':
               body:
-                id: /subscriptions/8f8a44e1-1711-4fc4-ae53-8bcc11fc7c3c/resourceGroups/xiangyul/providers/Microsoft.MixedReality/SpatialAnchorsAccounts/alpha
-                location: Global
-                name: alpha
+                id: /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.MixedReality/SpatialAnchorsAccounts/MyAccount
+                location: eastus2euap
+                name: MyAccount
                 properties:
                   accountDomain: mixedreality.azure.com
                   accountId: 5007a881-6fb4-4c93-be52-942e355944a5
@@ -524,9 +524,9 @@ paths:
                 type: Microsoft.MixedReality/SpatialAnchorsAccounts
             '201':
               body:
-                id: /subscriptions/8f8a44e1-1711-4fc4-ae53-8bcc11fc7c3c/resourceGroups/xiangyul/providers/Microsoft.MixedReality/SpatialAnchorsAccounts/alpha
-                location: Global
-                name: alpha
+                id: /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.MixedReality/SpatialAnchorsAccounts/MyAccount
+                location: eastus2euap
+                name: MyAccount
                 properties:
                   accountDomain: mixedreality.azure.com
                   accountId: 5007a881-6fb4-4c93-be52-942e355944a5
@@ -604,13 +604,13 @@ paths:
       tags:
         - Key
       x-ms-examples:
-        ResourceGetKey:
+        Get spatial anchor account key:
           parameters:
-            accountName: alpha
+            accountName: MyAccount
             api-version: 2019-02-28-preview
-            resourceGroupName: mrsecf
+            resourceGroupName: MyResourceGroup
             resourceType: SpatialAnchorsAccount
-            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+            subscriptionId: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
           responses:
             '200':
               body:
@@ -712,15 +712,15 @@ paths:
       tags:
         - Key
       x-ms-examples:
-        ResourceRegenerateKey:
+        Regenerate spatial anchors account keys:
           parameters:
-            accountName: alpha
+            accountName: MyAccount
             api-version: 2019-02-28-preview
             regenerate:
               serial: 1
-            resourceGroupName: mrsecf
+            resourceGroupName: MyResourceGroup
             resourceType: SpatialAnchorsAccount
-            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+            subscriptionId: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
           responses:
             '200':
               body:

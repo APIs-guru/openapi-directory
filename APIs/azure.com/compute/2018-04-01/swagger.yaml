@@ -83,6 +83,62 @@ paths:
             $ref: '#/definitions/AvailabilitySetListResult'
       tags:
         - AvailabilitySets
+      x-ms-examples:
+        List availability sets in a subscription.:
+          parameters:
+            $expand: virtualMachines\$ref
+            api-version: '2018-04-01'
+            subscriptionId: '{subscriptionId}'
+          responses:
+            '200':
+              body:
+                value:
+                  - id: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}'
+                    location: australiasoutheast
+                    name: '{availabilitySetName}'
+                    properties:
+                      platformFaultDomainCount: 3
+                      platformUpdateDomainCount: 5
+                      virtualMachines:
+                        - id: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}'
+                    sku:
+                      name: Classic
+                    type: Microsoft.Compute/availabilitySets
+                  - id: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}'
+                    location: australiasoutheast
+                    name: '{availabilitySetName}'
+                    properties:
+                      platformFaultDomainCount: 3
+                      platformUpdateDomainCount: 5
+                      virtualMachines:
+                        - id: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}'
+                    sku:
+                      name: Classic
+                    type: Microsoft.Compute/availabilitySets
+                  - id: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}'
+                    location: westcentralus
+                    name: '{availabilitySetName}'
+                    properties:
+                      platformFaultDomainCount: 3
+                      platformUpdateDomainCount: 5
+                      virtualMachines: []
+                    sku:
+                      name: Classic
+                    tags:
+                      '{tagName}': '{tagValue}'
+                    type: Microsoft.Compute/availabilitySets
+                  - id: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}'
+                    location: westcentralus
+                    name: '{availabilitySetName}'
+                    properties:
+                      platformFaultDomainCount: 3
+                      platformUpdateDomainCount: 5
+                      virtualMachines: []
+                    sku:
+                      name: Classic
+                    tags:
+                      '{tagName}': '{tagValue}'
+                    type: Microsoft.Compute/availabilitySets
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Compute/images':
@@ -8999,6 +9055,9 @@ definitions:
       overprovision:
         description: Specifies whether the Virtual Machine Scale Set should be overprovisioned.
         type: boolean
+      proximityPlacementGroup:
+        $ref: '#/definitions/SubResource'
+        description: 'Specifies information about the proximity placement group that the virtual machine scale set should be assigned to. <br><br>Minimum api-version: 2018-04-01.'
       singlePlacementGroup:
         description: 'When true this limits the scale set to a single placement group, of max size 100 virtual machines.'
         type: boolean

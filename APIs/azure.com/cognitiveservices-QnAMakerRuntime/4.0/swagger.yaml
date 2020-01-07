@@ -400,6 +400,9 @@ definitions:
       question:
         description: User question to query against the knowledge base.
         type: string
+      rankerType:
+        description: Optional field. Set to 'QuestionOnly' for using a question only Ranker.
+        type: string
       scoreThreshold:
         description: Threshold for answers returned based on score.
         type: number

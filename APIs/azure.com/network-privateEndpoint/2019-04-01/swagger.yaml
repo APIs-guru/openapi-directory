@@ -150,7 +150,7 @@ paths:
                             groupIds:
                               - groupIdFromResource
                             privateLinkServiceConnectionState:
-                              actionRequired: None
+                              actionsRequired: None
                               description: Auto-approved
                               status: Approved
                             privateLinkServiceId: /subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls1
@@ -168,7 +168,7 @@ paths:
                             groupIds:
                               - groupIdFromResource
                             privateLinkServiceConnectionState:
-                              actionRequired: None
+                              actionsRequired: None
                               description: Awaiting approval
                               status: Pending
                             privateLinkServiceId: /subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls2
@@ -191,7 +191,7 @@ paths:
                             groupIds:
                               - groupIdFromResource
                             privateLinkServiceConnectionState:
-                              actionRequired: None
+                              actionsRequired: None
                               description: Auto-approved
                               status: Approved
                             privateLinkServiceId: /subscriptions/subId/resourceGroups/rg3/providers/Microsoft.Network/privateLinkServices/testPls3
@@ -329,7 +329,7 @@ paths:
                             groupIds:
                               - groupIdFromResource
                             privateLinkServiceConnectionState:
-                              actionRequired: None
+                              actionsRequired: None
                               description: Auto-approved
                               status: Approved
                             privateLinkServiceId: /subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls1
@@ -347,7 +347,7 @@ paths:
                             groupIds:
                               - groupIdFromResource
                             privateLinkServiceConnectionState:
-                              actionRequired: None
+                              actionsRequired: None
                               description: Awaiting approval
                               status: Pending
                             privateLinkServiceId: /subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls2
@@ -531,7 +531,7 @@ paths:
                         groupIds:
                           - groupIdFromResource
                         privateLinkServiceConnectionState:
-                          actionRequired: None
+                          actionsRequired: None
                           description: Auto-approved
                           status: Approved
                         privateLinkServiceId: /subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls
@@ -558,7 +558,7 @@ paths:
                         groupIds:
                           - groupIdFromResource
                         privateLinkServiceConnectionState:
-                          actionRequired: None
+                          actionsRequired: None
                           description: Awaiting approval
                           status: Pending
                         privateLinkServiceId: /subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls
@@ -675,7 +675,7 @@ paths:
                         groupIds:
                           - groupIdFromResource
                         privateLinkServiceConnectionState:
-                          actionRequired: None
+                          actionsRequired: None
                           description: Auto-approved
                           status: Approved
                         privateLinkServiceId: /subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls
@@ -696,7 +696,7 @@ paths:
                         groupIds:
                           - groupIdFromResource
                         privateLinkServiceConnectionState:
-                          actionRequired: None
+                          actionsRequired: None
                           description: Auto-approved
                           status: Approved
                         privateLinkServiceId: /subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls
@@ -733,7 +733,7 @@ paths:
                         groupIds:
                           - groupIdFromResource
                         privateLinkServiceConnectionState:
-                          actionRequired: None
+                          actionsRequired: None
                           description: Awaiting approval
                           status: Pending
                         privateLinkServiceId: /subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls
@@ -757,7 +757,7 @@ paths:
                         groupIds:
                           - groupIdFromResource
                         privateLinkServiceConnectionState:
-                          actionRequired: None
+                          actionsRequired: None
                           description: Auto-approved
                           status: Approved
                         privateLinkServiceId: /subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls
@@ -874,7 +874,7 @@ definitions:
                 privateLinkServiceConnectionState:
                   description: A collection of information about the state of the connection between service consumer and provider.
                   properties:
-                    actionRequired:
+                    actionsRequired:
                       description: A message indicating if changes on the service provider require any updates on the consumer.
                       type: string
                     description:
@@ -942,7 +942,7 @@ definitions:
                 privateLinkServiceConnectionState:
                   description: A collection of information about the state of the connection between service consumer and provider.
                   properties:
-                    actionRequired:
+                    actionsRequired:
                       description: A message indicating if changes on the service provider require any updates on the consumer.
                       type: string
                     description:
@@ -1017,7 +1017,7 @@ definitions:
           privateLinkServiceConnectionState:
             description: A collection of information about the state of the connection between service consumer and provider.
             properties:
-              actionRequired:
+              actionsRequired:
                 description: A message indicating if changes on the service provider require any updates on the consumer.
                 type: string
               description:
@@ -1059,7 +1059,7 @@ definitions:
       privateLinkServiceConnectionState:
         description: A collection of information about the state of the connection between service consumer and provider.
         properties:
-          actionRequired:
+          actionsRequired:
             description: A message indicating if changes on the service provider require any updates on the consumer.
             type: string
           description:

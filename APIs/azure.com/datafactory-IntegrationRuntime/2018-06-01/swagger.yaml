@@ -479,6 +479,12 @@ definitions:
       type: object
     description: VNet properties for managed integration runtime.
     properties:
+      publicIPs:
+        description: Resource IDs of the public IP addresses that this integration runtime will use.
+        items:
+          description: The ID of the public IP address.
+          type: string
+        type: array
       subnet:
         description: The name of the subnet this integration runtime will join.
         type: string
@@ -504,7 +510,6 @@ definitions:
         type: object
     required:
       - componentName
-      - licenseKey
     type: object
   LinkedIntegrationRuntime:
     description: The linked integration runtime information.

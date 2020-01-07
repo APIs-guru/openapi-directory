@@ -1032,12 +1032,25 @@ definitions:
     additionalProperties: false
     description: Post body schema for CreateKb operation.
     properties:
+      defaultAnswerUsedForExtraction:
+        description: Text string to be used as the answer in any Q-A which has no extracted answer from the document but has a hierarchy. Required when EnableHierarchicalExtraction field is set to True.
+        maxLength: 300
+        minLength: 1
+        type: string
+      enableHierarchicalExtraction:
+        description: Enable hierarchical extraction of Q-A from files and urls. Value to be considered False if this field is not present.
+        type: boolean
       files:
         description: List of files from which to Extract Q-A.
         items:
           $ref: '#/definitions/FileDTO'
         maxLength: 10
         type: array
+      language:
+        description: Language of the knowledgebase.
+        maxLength: 100
+        minLength: 1
+        type: string
       name:
         description: Friendly name for the knowledgebase.
         maxLength: 100
@@ -1104,6 +1117,9 @@ definitions:
     properties:
       installedVersion:
         description: Current version of runtime.
+        type: string
+      language:
+        description: Language setting of runtime.
         type: string
       lastStableVersion:
         description: Latest version of runtime.
@@ -1434,10 +1450,18 @@ definitions:
         allOf:
           - $ref: '#/definitions/CreateKbInputDTO'
         description: An instance of CreateKbInputDTO for add operation
+      defaultAnswerUsedForExtraction:
+        description: Text string to be used as the answer in any Q-A which has no extracted answer from the document but has a hierarchy. Required when EnableHierarchicalExtraction field is set to True.
+        maxLength: 300
+        minLength: 1
+        type: string
       delete:
         allOf:
           - $ref: '#/definitions/DeleteKbContentsDTO'
         description: An instance of DeleteKbContentsDTO for delete Operation
+      enableHierarchicalExtraction:
+        description: Enable hierarchical extraction of Q-A from files and urls. The value set during KB creation will be used if this field is not present.
+        type: boolean
       update:
         allOf:
           - $ref: '#/definitions/UpdateKbContentsDTO'

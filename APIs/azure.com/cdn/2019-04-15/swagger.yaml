@@ -2512,6 +2512,50 @@ definitions:
         readOnly: true
         type: string
     type: object
+  CookiesMatchConditionParameters:
+    description: Defines the parameters for Cookies match conditions
+    properties:
+      '@odata.type':
+        enum:
+          - '#Microsoft.Azure.Cdn.Models.DeliveryRuleCookiesConditionParameters'
+        type: string
+      matchValues:
+        description: The match value for the condition of the delivery rule
+        items:
+          type: string
+        type: array
+      negateCondition:
+        description: Describes if this is negate condition or not
+        type: boolean
+      operator:
+        description: Describes operator to be matched
+        enum:
+          - Any
+          - Equal
+          - Contains
+          - BeginsWith
+          - EndsWith
+          - LessThan
+          - LessThanOrEqual
+          - GreaterThan
+          - GreaterThanOrEqual
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: CookiesOperator
+      selector:
+        description: Name of Cookies to be matched
+        type: string
+      transforms:
+        description: List of transforms
+        items:
+          $ref: '#/definitions/transform'
+        type: array
+    required:
+      - operator
+      - matchValues
+      - selector
+      - '@odata.type'
   CustomDomain:
     allOf:
       - $ref: '#/definitions/ProxyResource'
@@ -2534,6 +2578,16 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: CertificateSource
+      minimumTlsVersion:
+        description: TLS protocol version that will be used for Https
+        enum:
+          - None
+          - TLS10
+          - TLS12
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: minimumTlsVersion
       protocolType:
         description: Defines the TLS extension protocol that is used for secure delivery.
         enum:
@@ -2568,6 +2622,9 @@ definitions:
   CustomDomainProperties:
     description: The JSON object that contains the properties of the custom domain to create.
     properties:
+      customHttpsParameters:
+        $ref: '#/definitions/CustomDomainHttpsParameters'
+        description: Certificate parameters for securing custom HTTPS
       customHttpsProvisioningState:
         description: Provisioning status of Custom Https of the custom domain.
         enum:
@@ -2749,6 +2806,8 @@ definitions:
           - UrlPath
           - UrlFileExtension
           - UrlFileName
+          - HttpVersion
+          - Cookies
           - IsDevice
         type: string
         x-ms-enum:
@@ -2756,6 +2815,28 @@ definitions:
           name: MatchVariable
     required:
       - name
+  DeliveryRuleCookiesCondition:
+    allOf:
+      - $ref: '#/definitions/DeliveryRuleCondition'
+    description: Defines the Cookies condition for the delivery rule.
+    properties:
+      parameters:
+        $ref: '#/definitions/CookiesMatchConditionParameters'
+        description: Defines the parameters for the condition.
+    required:
+      - parameters
+    x-ms-discriminator-value: Cookies
+  DeliveryRuleHttpVersionCondition:
+    allOf:
+      - $ref: '#/definitions/DeliveryRuleCondition'
+    description: Defines the HttpVersion condition for the delivery rule.
+    properties:
+      parameters:
+        $ref: '#/definitions/HttpVersionMatchConditionParameters'
+        description: Defines the parameters for the condition.
+    required:
+      - parameters
+    x-ms-discriminator-value: HttpVersion
   DeliveryRuleIsDeviceCondition:
     allOf:
       - $ref: '#/definitions/DeliveryRuleCondition'
@@ -3123,6 +3204,33 @@ definitions:
     required:
       - headerAction
       - headerName
+      - '@odata.type'
+  HttpVersionMatchConditionParameters:
+    description: Defines the parameters for HttpVersion match conditions
+    properties:
+      '@odata.type':
+        enum:
+          - '#Microsoft.Azure.Cdn.Models.DeliveryRuleHttpVersionConditionParameters'
+        type: string
+      matchValues:
+        description: The match value for the condition of the delivery rule
+        items:
+          type: string
+        type: array
+      negateCondition:
+        description: Describes if this is negate condition or not
+        type: boolean
+      operator:
+        description: Describes operator to be matched
+        enum:
+          - Equal
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: HttpVersionOperator
+    required:
+      - operator
+      - matchValues
       - '@odata.type'
   IpAddressGroup:
     description: CDN Ip address group
@@ -4057,13 +4165,13 @@ definitions:
           - '#Microsoft.Azure.Cdn.Models.DeliveryRuleUrlRewriteActionParameters'
         type: string
       destination:
-        description: Define the relative URL to which the above requests will be rewritten by.
+        description: 'Define the destination path for be used in the rewrite. This will overwrite the source pattern '
         type: string
       preserveUnmatchedPath:
-        description: Whether to preserve unmatched path. Default value is true.
+        description: 'If True, the remaining path after the source pattern will be appended to the new destination path.  '
         type: boolean
       sourcePattern:
-        description: 'define a request URI pattern that identifies the type of requests that may be rewritten. If value is blank, all strings are matched.'
+        description: 'define a request URI pattern that identifies the type of requests that may be rewritten. Currently, source pattern uses a prefix-based match. To match all URL paths, use "/" as the source pattern value. To match only the root directory and re-write this path, use the origin path field'
         type: string
     required:
       - sourcePattern

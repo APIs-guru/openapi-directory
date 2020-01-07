@@ -64,6 +64,106 @@ parameters:
     required: true
     type: string
 paths:
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{virtualMachineName}/providers/Microsoft.RecoveryServices/replicationEligibilityResults':
+    get:
+      description: Validates whether a given VM can be protected or not in which case returns list of errors.
+      operationId: ReplicationEligibilityResults_List
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/SubscriptionId'
+        - description: Virtual Machine name.
+          in: path
+          name: virtualMachineName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ReplicationEligibilityResultsCollection'
+      summary: Gets the validation errors in case the VM is unsuitable for protection.
+      tags:
+        - ReplicationEligibilityResults
+      x-ms-examples:
+        Gets the validation errors in case the VM is unsuitable for protection.:
+          parameters:
+            api-version: '2018-07-10'
+            resourceGroupName: testRg1
+            subscriptionId: d90d145a-4cdd-45a3-b2c4-971d69775278
+            virtualMachineName: testVm2
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/d90d145a-4cdd-45a3-b2c4-971d69775278/resourceGroups/testRg1/providers/Microsoft.Compute/virtualMachines/testVm2/providers/Microsoft.RecoveryServices/replicationEligibilityResults/default
+                    name: default
+                    properties:
+                      clientRequestId: a62c81df-e26e-47ea-ab4b-f1fcc1e5b135
+                      errors:
+                        - code: AzureVmIsNotInDesiredProvisioningState
+                          message: 'Azure virtual machine with Id (/subscriptions/d90d145a-4cdd-45a3-b2c4-971d69775278/resourceGroups/testRg1/providers/Microsoft.Compute/virtualMachines/testVm2) is with provisioning state ''failed''. To enable replication, VM''s provisioning state should be ''succeeded''.'
+                          possibleCauses: Virtual machine is not in desired state.
+                          recommendedAction: |2-
+
+                                  Ensure that the VM's provisioning state is 'succeeded'.
+                                  Refer to https://aka.ms/a2a-vm-state-issues to troubleshoot VM provisioning state issues.
+                                
+                          status: Error
+                        - code: AzureVmIsNotInDesiredPowerState
+                          message: 'Azure virtual machine with Id (/subscriptions/d90d145a-4cdd-45a3-b2c4-971d69775278/resourceGroups/testRg1/providers/Microsoft.Compute/virtualMachines/testVm2) is with power status ''deallocated''. To enable replication, VM''s power status should be ''running''.'
+                          possibleCauses: Virtual machine is not in desired state.
+                          recommendedAction: |2-
+
+                                  Ensure that the VM's power status is 'running'.
+                                  You can check the power status in 'VM > Settings > Properties > Status' in Azure portal.
+                                
+                          status: Error
+                    type: Microsoft.RecoveryServices/replicationEligibilityResults
+      x-ms-long-running-operation: true
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{virtualMachineName}/providers/Microsoft.RecoveryServices/replicationEligibilityResults/default':
+    get:
+      description: Validates whether a given VM can be protected or not in which case returns list of errors.
+      operationId: ReplicationEligibilityResults_Get
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/SubscriptionId'
+        - description: Virtual Machine name.
+          in: path
+          name: virtualMachineName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ReplicationEligibilityResults'
+      summary: Gets the validation errors in case the VM is unsuitable for protection.
+      tags:
+        - ReplicationEligibilityResults
+      x-ms-examples:
+        Gets the validation errors in case the VM is unsuitable for protection.:
+          parameters:
+            api-version: '2018-07-10'
+            resourceGroupName: testRg1
+            subscriptionId: d90d145a-4cdd-45a3-b2c4-971d69775278
+            virtualMachineName: testVm1
+          responses:
+            '200':
+              body:
+                id: /subscriptions/d90d145a-4cdd-45a3-b2c4-971d69775278/resourceGroups/testRg1/providers/Microsoft.Compute/virtualMachines/testVm1/providers/Microsoft.RecoveryServices/replicationEligibilityResults/default
+                name: default
+                properties:
+                  clientRequestId: 7d72ade7-b9f7-4d9b-8a19-15d9728c6190
+                  errors:
+                    - code: A2AOperatingSystemNotSupported
+                      message: The A2A operation could not be completed as the virtual machine is running OS 'ubuntu' with version '18.04' which is not supported for replication.
+                      possibleCauses: OS version not supported.
+                      recommendedAction: 'The virtual machine is running unsupported Operating system. Refer to the documentation for supported OS versions - https://aka.ms/a2a-os-support-matrix.'
+                      status: Error
+                type: Microsoft.RecoveryServices/replicationEligibilityResults
+      x-ms-long-running-operation: true
   '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/operations':
     get:
       description: Operation to return the list of available operations.
@@ -2712,7 +2812,17 @@ paths:
               properties:
                 policyId: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationPolicies/vmwarepolicy1
                 providerSpecificDetails:
+                  dataMoverRunAsAccountId: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.OffAzure/VMwareSites/vmwaresite1/runasaccounts/dataMoverRunAsAccount1
+                  disksToInclude:
+                    - diskId: disk1
+                      isOSDisk: 'true'
+                      logStorageAccountId: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.Storage/storageAccounts/logStorageAccount1
+                      logStorageAccountSasSecretName: logStorageSas
                   instanceType: VMwareCbt
+                  snapshotRunAsAccountId: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.OffAzure/VMwareSites/vmwaresite1/runasaccounts/snapshotRunAsAccount1
+                  targetNetworkId: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.Network/virtualNetworks/virtualNetwork1
+                  targetResourceGroupId: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1
+                  vmwareMachineId: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.OffAzure/VMwareSites/vmwaresite1/machines/virtualmachine1
             migrationItemName: virtualmachine1
             protectionContainerName: vmwareContainer1
             resourceGroupName: resourcegroup1
@@ -2795,6 +2905,7 @@ paths:
               properties:
                 providerSpecificDetails:
                   instanceType: VMwareCbt
+                  performShutdown: 'true'
             migrationItemName: virtualmachine1
             protectionContainerName: vmwareContainer1
             resourceGroupName: resourcegroup1
@@ -2997,6 +3108,8 @@ paths:
               properties:
                 providerSpecificDetails:
                   instanceType: VMwareCbt
+                  networkId: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.Network/virtualNetworks/virtualNetwork1
+                  recoveryPointId: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationFabrics/vmwarefabric1/replicationProtectionContainers/vmwareContainer1/replicationMigrationItems/virtualmachine1/migrationRecoveryPoints/9e737191-317e-43d0-8c83-e32ac3b34686
           responses:
             '200':
               body:
@@ -3772,7 +3885,7 @@ paths:
                   vmDisks:
                     - diskUri: 'https://vmstorage.blob.core.windows.net/vhds/datadisk1.vhd'
                       primaryStagingAzureStorageAccountId: /subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourcegroups/primaryResource/providers/Microsoft.Storage/storageAccounts/vmcachestorage
-                      recoveryAureStorageAccountId: /subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourcegroups/recoveryResource/providers/Microsoft.Storage/storageAccounts/recoverystorage
+                      recoveryAzureStorageAccountId: /subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourcegroups/recoveryResource/providers/Microsoft.Storage/storageAccounts/recoverystorage
             api-version: '2018-07-10'
             fabricName: cloud1
             protectionContainerName: cloud_6d224fc6-f326-5d35-96de-fbf51efb3179
@@ -8865,6 +8978,9 @@ definitions:
       diskType:
         description: The type of disk.
         type: string
+      failoverDiskName:
+        description: The failover name for the managed disk.
+        type: string
       isDiskEncrypted:
         description: A value indicating whether vm has encrypted os disk or not.
         type: boolean
@@ -8887,6 +9003,9 @@ definitions:
       primaryStagingAzureStorageAccountId:
         description: The primary staging storage account.
         type: string
+      recoveryDiskEncryptionSetId:
+        description: The recovery disk encryption set Id.
+        type: string
       recoveryReplicaDiskAccountType:
         description: The replica disk type. Its an optional value and will be same as source disk type if not user provided.
         type: string
@@ -8907,6 +9026,9 @@ definitions:
         type: boolean
       secretIdentifier:
         description: The secret URL / identifier (BEK).
+        type: string
+      tfoDiskName:
+        description: The test failover name for the managed disk.
         type: string
     type: object
   A2AProtectionContainerMappingDetails:
@@ -9080,8 +9202,14 @@ definitions:
       selectedRecoveryAzureNetworkId:
         description: The recovery virtual network.
         type: string
+      selectedTfoAzureNetworkId:
+        description: The test failover virtual network.
+        type: string
       testFailoverRecoveryFabricObjectId:
         description: The test failover fabric object Id.
+        type: string
+      tfoAzureVMName:
+        description: The test failover VM name.
         type: string
       unprotectedDisks:
         description: The list of unprotected disks.
@@ -9229,6 +9357,9 @@ definitions:
       recoveryResourceGroupId:
         description: The target resource group ARM Id (for V2).
         type: string
+      tfoAzureVMName:
+        description: The user given name for test failover VM.
+        type: string
     type: object
     x-ms-discriminator-value: A2A
   A2AVmDiskInputDetails:
@@ -9256,6 +9387,9 @@ definitions:
       primaryStagingAzureStorageAccountId:
         description: The primary staging storage account Arm Id.
         type: string
+      recoveryDiskEncryptionSetId:
+        description: The recovery disk encryption set Id.
+        type: string
       recoveryReplicaDiskAccountType:
         description: The replica disk type. Its an optional value and will be same as source disk type if not user provided.
         type: string
@@ -9275,11 +9409,17 @@ definitions:
       diskId:
         description: The disk Id.
         type: string
+      failoverDiskName:
+        description: The target disk name for unplanned failover operation.
+        type: string
       recoveryReplicaDiskAccountType:
         description: The replica disk type before failover.
         type: string
       recoveryTargetDiskAccountType:
         description: The target disk type before failover.
+        type: string
+      tfoDiskName:
+        description: The target disk name for test failover operation.
         type: string
     type: object
   ASRTask:
@@ -9579,6 +9719,12 @@ definitions:
   AzureVmDiskDetails:
     description: Disk details for E2A provider.
     properties:
+      diskEncryptionSetId:
+        description: The DiskEncryptionSet ARM ID.
+        type: string
+      diskId:
+        description: The disk resource id.
+        type: string
       lunId:
         description: Ordinal\LunId of the disk for the Azure VM.
         type: string
@@ -10208,7 +10354,6 @@ definitions:
     properties:
       instanceType:
         description: Gets the class type.
-        readOnly: true
         type: string
     type: object
   FabricSpecificDetails:
@@ -10746,6 +10891,11 @@ definitions:
       - $ref: '#/definitions/UpdateReplicationProtectedItemProviderInput'
     description: HyperV replica Azure input to update replication protected item.
     properties:
+      diskIdToDiskEncryptionMap:
+        additionalProperties:
+          type: string
+        description: The dictionary of disk resource Id to disk encryption set ARM Id.
+        type: object
       recoveryAzureV1ResourceGroupId:
         description: The recovery Azure resource group Id for classic deployment.
         type: string
@@ -11146,6 +11296,21 @@ definitions:
         type: string
     type: object
     x-ms-discriminator-value: HyperVVirtualMachine
+  IPConfig:
+    description: IP configuration details.
+    properties:
+      lBBackendAddressPoolIds:
+        description: The backend address pools associated with the IP configuration.
+        items:
+          type: string
+        type: array
+      publicIpAddressId:
+        description: The Id of the public IP address associated with the IP configuration.
+        type: string
+      staticIPAddress:
+        description: The static IP address of the IP configuration.
+        type: string
+    type: object
   IdentityProviderDetails:
     description: Identity provider details.
     properties:
@@ -11246,6 +11411,9 @@ definitions:
   InMageAzureV2DiskInputDetails:
     description: Disk input details.
     properties:
+      diskEncryptionSetId:
+        description: The DiskEncryptionSet ARM ID.
+        type: string
       diskId:
         description: The DiskId.
         type: string
@@ -11268,6 +11436,9 @@ definitions:
       - $ref: '#/definitions/EnableProtectionProviderSpecificInput'
     description: VMware Azure specific enable protection input.
     properties:
+      diskEncryptionSetId:
+        description: The DiskEncryptionSet ARM ID.
+        type: string
       diskType:
         description: The DiskType.
         enum:
@@ -13650,8 +13821,6 @@ definitions:
       vaultLocation:
         description: The vault location.
         type: string
-    required:
-      - vaultLocation
     type: object
     x-ms-discriminator-value: HyperVReplicaAzure
   RecoveryPlanInMageAzureV2FailoverInput:
@@ -14114,6 +14283,74 @@ definitions:
       renewCertificateType:
         description: Renew certificate type.
         type: string
+    type: object
+  ReplicationEligibilityResults:
+    description: Replication eligibility results response model.
+    properties:
+      id:
+        description: Gets Unique ARM identifier for this object.
+        readOnly: true
+        type: string
+      name:
+        description: Gets the name of this object.
+        readOnly: true
+        type: string
+      properties:
+        $ref: '#/definitions/ReplicationEligibilityResultsProperties'
+        description: Gets properties model for replication eligibility results API.
+        readOnly: true
+      type:
+        description: Gets the object type.
+        readOnly: true
+        type: string
+    type: object
+  ReplicationEligibilityResultsCollection:
+    description: Replication eligibility results collection response model.
+    properties:
+      value:
+        description: The replication eligibility results details.
+        items:
+          $ref: '#/definitions/ReplicationEligibilityResults'
+        type: array
+        uniqueItems: false
+    type: object
+  ReplicationEligibilityResultsErrorInfo:
+    description: Error model that can be exposed to the user.
+    properties:
+      code:
+        description: The error code.
+        readOnly: true
+        type: string
+      message:
+        description: The error message.
+        readOnly: true
+        type: string
+      possibleCauses:
+        description: The possible causes.
+        readOnly: true
+        type: string
+      recommendedAction:
+        description: The recommended action.
+        readOnly: true
+        type: string
+      status:
+        description: The error status.
+        readOnly: true
+        type: string
+    type: object
+  ReplicationEligibilityResultsProperties:
+    description: Properties model for replication eligibility results API.
+    properties:
+      clientRequestId:
+        description: The client request Id.
+        readOnly: true
+        type: string
+      errors:
+        description: The error details.
+        items:
+          $ref: '#/definitions/ReplicationEligibilityResultsErrorInfo'
+        type: array
+        uniqueItems: false
     type: object
   ReplicationGroupDetails:
     allOf:
@@ -14625,7 +14862,6 @@ definitions:
     properties:
       instanceType:
         description: Gets the Instance type.
-        readOnly: true
         type: string
     type: object
   TargetComputeSize:
@@ -14974,6 +15210,9 @@ definitions:
       selectedSourceNicId:
         description: The selected source nic Id which will be used as the primary nic during failover.
         type: string
+      selectedTfoAzureNetworkId:
+        description: The Azure Network Id for test failover.
+        type: string
       vmNics:
         description: The list of vm nic details.
         items:
@@ -15081,6 +15320,9 @@ definitions:
       enableAcceleratedNetworkingOnRecovery:
         description: A value indicating whether the NIC has accelerated networking enabled.
         type: boolean
+      enableAcceleratedNetworkingOnTfo:
+        description: Whether the test failover NIC has accelerated networking enabled.
+        type: boolean
       ipAddressType:
         description: Ip address type.
         type: string
@@ -15122,6 +15364,20 @@ definitions:
       sourceNicArmId:
         description: The source nic ARM Id.
         type: string
+      tfoIPConfigs:
+        description: The IP configurations to be used by NIC during test failover.
+        items:
+          $ref: '#/definitions/IPConfig'
+        type: array
+      tfoNetworkSecurityGroupId:
+        description: The NSG to be used by NIC during test failover.
+        type: string
+      tfoVMNetworkId:
+        description: The network to be used by NIC during test failover.
+        type: string
+      tfoVMSubnetName:
+        description: The subnet to be used by NIC during test failover.
+        type: string
       vMNetworkName:
         description: VM network name.
         type: string
@@ -15134,6 +15390,9 @@ definitions:
     properties:
       enableAcceleratedNetworkingOnRecovery:
         description: Whether the NIC has accelerated networking enabled.
+        type: boolean
+      enableAcceleratedNetworkingOnTfo:
+        description: Whether the test NIC has accelerated networking enabled.
         type: boolean
       nicId:
         description: The nic Id.
@@ -15157,6 +15416,18 @@ definitions:
         type: string
       selectionType:
         description: Selection type for failover.
+        type: string
+      tfoIPConfigs:
+        description: The IP configurations to be used by NIC during test failover.
+        items:
+          $ref: '#/definitions/IPConfig'
+        type: array
+        uniqueItems: false
+      tfoNetworkSecurityGroupId:
+        description: The NSG to be used by NIC during test failover.
+        type: string
+      tfoVMSubnetName:
+        description: The subnet to be used by NIC during test failover.
         type: string
     type: object
   VMwareCbtContainerCreationInput:

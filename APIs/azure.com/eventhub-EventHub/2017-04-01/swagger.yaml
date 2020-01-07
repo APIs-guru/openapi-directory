@@ -71,6 +71,7 @@ parameters:
   EventHubNameParameter:
     description: The Event Hub name
     in: path
+    maxLength: 50
     minLength: 1
     name: eventHubName
     required: true

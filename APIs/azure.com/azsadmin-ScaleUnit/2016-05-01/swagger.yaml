@@ -46,7 +46,7 @@ parameters:
   ScaleOutScaleUnitParametersInBody:
     description: A list of input data that allows for adding a set of scale unit nodes.
     in: body
-    name: nodeList
+    name: scaleUnitNodeParameters
     required: true
     schema:
       $ref: '#/definitions/ScaleOutScaleUnitParametersList'
@@ -307,11 +307,11 @@ paths:
           parameters:
             api-version: '2016-05-01'
             location: local
-            nodeList:
-              bmcIPv4Address: 192.0.0.1
-              scaleUnitNode: N1S2
             resourceGroupName: System.local
             scaleUnit: S-Cluster
+            scaleUnitNodeParameters:
+              bmcIPv4Address: 192.0.0.1
+              scaleUnitNode: N1S2
             subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
           responses:
             '200': {}

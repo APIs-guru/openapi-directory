@@ -83,7 +83,7 @@ paths:
       tags:
         - Proxy
       x-ms-examples:
-        OperationPage:
+        List available operations:
           parameters:
             api-version: 2019-02-28-preview
           responses:
@@ -175,10 +175,10 @@ paths:
           parameters:
             api-version: 2019-02-28-preview
             checkNameAvailability:
-              name: alpha
+              name: MyAccount
               type: SpatialAnchorsAccount
-            location: Global
-            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+            location: eastus2euap
+            subscriptionId: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
           responses:
             '200':
               body:

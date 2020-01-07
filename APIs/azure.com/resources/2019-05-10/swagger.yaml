@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resources/resource-manager/Microsoft.Resources/stable/2019-05-10/resources.json'
       version: '2.0'
-  x-preferred: true
+  x-preferred: false
   x-providerName: azure.com
   x-serviceName: resources
   x-tags:
@@ -2350,7 +2350,6 @@ definitions:
       properties:
         $ref: '#/definitions/DeploymentPropertiesExtended'
         description: The template deployment properties.
-  ErrorResponse: {}
   ExportTemplateRequest:
     description: Export resource group template request parameters.
     properties:

@@ -43,16 +43,6 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
-  AlertUpdateActionType:
-    description: Type of the action to do on the alert
-    enum:
-      - Dismiss
-      - Reactivate
-    in: path
-    name: alertUpdateActionType
-    required: true
-    type: string
-    x-ms-parameter-location: method
   ODataExpand:
     description: OData expand. Optional.
     in: query
@@ -545,10 +535,10 @@ paths:
                   subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
                   vendorName: Microsoft
                 type: Microsoft.Security/Locations/alerts
-  '/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/alerts/{alertName}/{alertUpdateActionType}':
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/alerts/{alertName}/dismiss':
     post:
       description: Update the alert's state
-      operationId: Alerts_UpdateSubscriptionLevelAlertState
+      operationId: Alerts_UpdateSubscriptionLevelAlertStateToDismiss
       parameters:
         - description: API version for the operation
           in: query
@@ -568,7 +558,64 @@ paths:
           type: string
           x-ms-parameter-location: client
         - $ref: '#/parameters/AlertName'
-        - $ref: '#/parameters/AlertUpdateActionType'
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error response structure.
+            properties:
+              error:
+                description: Error details.
+                properties:
+                  code:
+                    description: An identifier for the error. Codes are invariant and are intended to be consumed programmatically.
+                    readOnly: true
+                    type: string
+                  message:
+                    description: 'A message describing the error, intended to be suitable for display in a user interface.'
+                    readOnly: true
+                    type: string
+                type: object
+                x-ms-external: true
+            type: object
+            x-ms-external: true
+      tags:
+        - Alerts
+      x-ms-examples:
+        Update security alert state on a subscription from a security data location:
+          parameters:
+            alertName: 2518770965529163669_F144EE95-A3E5-42DA-A279-967D115809AA
+            alertUpdateActionType: Dismiss
+            api-version: '2019-01-01'
+            ascLocation: westeurope
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+          responses:
+            '204': {}
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/alerts/{alertName}/reactivate':
+    post:
+      description: Update the alert's state
+      operationId: Alerts_UpdateSubscriptionLevelAlertStateToReactivate
+      parameters:
+        - description: API version for the operation
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: Azure subscription ID
+          in: path
+          name: subscriptionId
+          pattern: '^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$'
+          required: true
+          type: string
+        - description: The location where ASC stores the data of the subscription. can be retrieved from Get locations
+          in: path
+          name: ascLocation
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - $ref: '#/parameters/AlertName'
       responses:
         '204':
           description: No Content
@@ -968,10 +1015,10 @@ paths:
                   subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
                   vendorName: Microsoft
                 type: Microsoft.Security/Locations/alerts
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/alerts/{alertName}/{alertUpdateActionType}':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/alerts/{alertName}/dismiss':
     post:
       description: Update the alert's state
-      operationId: Alerts_UpdateResourceGroupLevelAlertState
+      operationId: Alerts_UpdateResourceGroupLevelAlertStateToDismiss
       parameters:
         - description: API version for the operation
           in: query
@@ -991,7 +1038,74 @@ paths:
           type: string
           x-ms-parameter-location: client
         - $ref: '#/parameters/AlertName'
-        - $ref: '#/parameters/AlertUpdateActionType'
+        - description: The name of the resource group within the user's subscription. The name is case insensitive.
+          in: path
+          maxLength: 90
+          minLength: 1
+          name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error response structure.
+            properties:
+              error:
+                description: Error details.
+                properties:
+                  code:
+                    description: An identifier for the error. Codes are invariant and are intended to be consumed programmatically.
+                    readOnly: true
+                    type: string
+                  message:
+                    description: 'A message describing the error, intended to be suitable for display in a user interface.'
+                    readOnly: true
+                    type: string
+                type: object
+                x-ms-external: true
+            type: object
+            x-ms-external: true
+      tags:
+        - Alerts
+      x-ms-examples:
+        Update security alert state on a resource group from a security data location:
+          parameters:
+            alertName: 2518765996949954086_2325cf9e-42a2-4f72-ae7f-9b863cba2d22
+            alertUpdateActionType: Dismiss
+            api-version: '2019-01-01'
+            ascLocation: westeurope
+            resourceGroupName: myRg2
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+          responses:
+            '204': {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/alerts/{alertName}/reactivate':
+    post:
+      description: Update the alert's state
+      operationId: Alerts_UpdateResourceGroupLevelAlertStateToReactivate
+      parameters:
+        - description: API version for the operation
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: Azure subscription ID
+          in: path
+          name: subscriptionId
+          pattern: '^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$'
+          required: true
+          type: string
+        - description: The location where ASC stores the data of the subscription. can be retrieved from Get locations
+          in: path
+          name: ascLocation
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - $ref: '#/parameters/AlertName'
         - description: The name of the resource group within the user's subscription. The name is case insensitive.
           in: path
           maxLength: 90

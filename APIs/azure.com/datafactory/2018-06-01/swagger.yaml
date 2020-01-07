@@ -1478,6 +1478,7 @@ paths:
             factoryName: exampleFactoryName
             request:
               dataFlow:
+                name: dataflow1
                 properties:
                   type: MappingDataFlow
                   typeProperties:
@@ -1490,7 +1491,8 @@ paths:
                         name: source1
                     transformations: []
               datasets:
-                - properties:
+                - name: dataset1
+                  properties:
                     annotations: []
                     linkedServiceName:
                       referenceName: linkedService5
@@ -1521,7 +1523,8 @@ paths:
                   - rowLimit: 222
                     sourceName: source2
               linkedServices:
-                - properties:
+                - name: linkedService1
+                  properties:
                     annotations: []
                     type: AzureBlobStorage
                     typeProperties:
@@ -1579,6 +1582,7 @@ paths:
             factoryName: exampleFactoryName
             request:
               integrationRuntime:
+                name: ir1
                 properties:
                   type: Managed
                   typeProperties:
@@ -6197,7 +6201,7 @@ definitions:
         description: Core count of the cluster. The value will be overwritten by the same setting in integration runtime if provided.
         type: integer
       integrationRuntime:
-        $ref: '#/definitions/IntegrationRuntimeResource'
+        $ref: '#/definitions/IntegrationRuntimeDebugResource'
         description: Set to use integration runtime setting for data flow debug session.
       timeToLive:
         description: Time to live setting of the cluster in minutes.
@@ -6294,12 +6298,12 @@ definitions:
     description: Request body structure for starting data flow debug session.
     properties:
       dataFlow:
-        $ref: '#/definitions/DataFlowResource'
+        $ref: '#/definitions/DataFlowDebugResource'
         description: Data flow instance.
       datasets:
         description: List of datasets.
         items:
-          $ref: '#/definitions/DatasetResource'
+          $ref: '#/definitions/DatasetDebugResource'
         type: array
       debugSettings:
         description: Data flow debug settings.
@@ -6319,7 +6323,7 @@ definitions:
       linkedServices:
         description: List of linked services.
         items:
-          $ref: '#/definitions/LinkedServiceResource'
+          $ref: '#/definitions/LinkedServiceDebugResource'
         type: array
       sessionId:
         description: The ID of data flow debug session.
@@ -6328,6 +6332,36 @@ definitions:
         $ref: '#/definitions/DataFlowStagingInfo'
         description: Staging info for debug session.
     type: object
+  DataFlowDebugResource:
+    allOf:
+      - $ref: '#/definitions/SubResourceDebugResource'
+    description: Data flow debug resource.
+    properties:
+      properties:
+        description: Azure Data Factory nested object which contains a flow with data movements and transformations.
+        discriminator: type
+        properties:
+          annotations:
+            description: List of tags that can be used for describing the data flow.
+            items:
+              type: object
+            type: array
+          description:
+            description: The description of the data flow.
+            type: string
+          folder:
+            description: 'The folder that this data flow is in. If not specified, Data flow will appear at the root level.'
+            properties:
+              name:
+                description: The name of the folder that this data flow is in.
+                type: string
+            type: object
+          type:
+            description: Type of data flow.
+            type: string
+        type: object
+    required:
+      - properties
   DataFlowDebugSessionInfo:
     additionalProperties:
       type: object
@@ -6445,6 +6479,92 @@ definitions:
       linkedService:
         $ref: '#/definitions/LinkedServiceReference'
         description: Staging linked service reference.
+  DatasetDebugResource:
+    allOf:
+      - $ref: '#/definitions/SubResourceDebugResource'
+    description: Dataset debug resource.
+    properties:
+      properties:
+        additionalProperties:
+          type: object
+        description: 'The Azure Data Factory nested object which identifies data within different data stores, such as tables, files, folders, and documents.'
+        discriminator: type
+        properties:
+          annotations:
+            description: List of tags that can be used for describing the Dataset.
+            items:
+              type: object
+            type: array
+          description:
+            description: Dataset description.
+            type: string
+          folder:
+            description: 'The folder that this Dataset is in. If not specified, Dataset will appear at the root level.'
+            properties:
+              name:
+                description: The name of the folder that this Dataset is in.
+                type: string
+            type: object
+          linkedServiceName:
+            description: Linked service reference type.
+            properties:
+              parameters:
+                additionalProperties:
+                  type: object
+                description: An object mapping parameter names to argument values.
+                type: object
+              referenceName:
+                description: Reference LinkedService name.
+                type: string
+              type:
+                description: Linked service reference type.
+                enum:
+                  - LinkedServiceReference
+                type: string
+            required:
+              - type
+              - referenceName
+          parameters:
+            additionalProperties:
+              description: Definition of a single parameter for an entity.
+              properties:
+                defaultValue:
+                  description: Default value of parameter.
+                  type: object
+                type:
+                  description: Parameter type.
+                  enum:
+                    - Object
+                    - String
+                    - Int
+                    - Float
+                    - Bool
+                    - Array
+                    - SecureString
+                  type: string
+                  x-ms-enum:
+                    modelAsString: true
+                    name: ParameterType
+              required:
+                - type
+              type: object
+            description: Definition of all parameters for an entity.
+            type: object
+          schema:
+            description: 'Columns that define the physical type schema of the dataset. Type: array (or Expression with resultType array), itemType: DatasetSchemaDataElement.'
+            type: object
+          structure:
+            description: 'Columns that define the structure of the dataset. Type: array (or Expression with resultType array), itemType: DatasetDataElement.'
+            type: object
+          type:
+            description: Type of dataset.
+            type: string
+        required:
+          - type
+          - linkedServiceName
+        type: object
+    required:
+      - properties
   DatasetListResponse:
     description: A list of dataset resources.
     properties:
@@ -6788,6 +6908,34 @@ definitions:
       gitHubAccessToken:
         description: GitHub access token.
         type: string
+  IntegrationRuntimeDebugResource:
+    allOf:
+      - $ref: '#/definitions/SubResourceDebugResource'
+    description: Integration runtime debug resource.
+    properties:
+      properties:
+        additionalProperties:
+          type: object
+        description: Azure Data Factory nested object which serves as a compute resource for activities.
+        discriminator: type
+        properties:
+          description:
+            description: Integration runtime description.
+            type: string
+          type:
+            description: The type of integration runtime.
+            enum:
+              - Managed
+              - SelfHosted
+            type: string
+            x-ms-enum:
+              modelAsString: true
+              name: IntegrationRuntimeType
+        required:
+          - type
+        type: object
+    required:
+      - properties
   IntegrationRuntimeListResponse:
     description: A list of integration runtime resources.
     properties:
@@ -6922,6 +7070,78 @@ definitions:
     required:
       - factoryName
     type: object
+  LinkedServiceDebugResource:
+    allOf:
+      - $ref: '#/definitions/SubResourceDebugResource'
+    description: Linked service debug resource.
+    properties:
+      properties:
+        additionalProperties:
+          type: object
+        description: The Azure Data Factory nested object which contains the information and credential which can be used to connect with related store or compute resource.
+        discriminator: type
+        properties:
+          annotations:
+            description: List of tags that can be used for describing the linked service.
+            items:
+              type: object
+            type: array
+          connectVia:
+            description: Integration runtime reference type.
+            properties:
+              parameters:
+                additionalProperties:
+                  type: object
+                description: An object mapping parameter names to argument values.
+                type: object
+              referenceName:
+                description: Reference integration runtime name.
+                type: string
+              type:
+                description: Type of integration runtime.
+                enum:
+                  - IntegrationRuntimeReference
+                type: string
+            required:
+              - type
+              - referenceName
+          description:
+            description: Linked service description.
+            type: string
+          parameters:
+            additionalProperties:
+              description: Definition of a single parameter for an entity.
+              properties:
+                defaultValue:
+                  description: Default value of parameter.
+                  type: object
+                type:
+                  description: Parameter type.
+                  enum:
+                    - Object
+                    - String
+                    - Int
+                    - Float
+                    - Bool
+                    - Array
+                    - SecureString
+                  type: string
+                  x-ms-enum:
+                    modelAsString: true
+                    name: ParameterType
+              required:
+                - type
+              type: object
+            description: Definition of all parameters for an entity.
+            type: object
+          type:
+            description: Type of linked service.
+            type: string
+        required:
+          - type
+        type: object
+    required:
+      - properties
   LinkedServiceListResponse:
     description: A list of linked service resources.
     properties:
@@ -7803,6 +8023,12 @@ definitions:
         readOnly: true
         type: string
     x-ms-azure-resource: true
+  SubResourceDebugResource:
+    description: Azure Data Factory nested debug resource.
+    properties:
+      name:
+        description: The resource name.
+        type: string
   TriggerListResponse:
     description: A list of trigger resources.
     properties:

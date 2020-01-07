@@ -117,6 +117,17 @@ paths:
           name: databaseName
           required: true
           type: string
+        - description: The type of replica to be failed over.
+          enum:
+            - Primary
+            - ReadableSecondary
+          in: query
+          name: replicaType
+          required: false
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: ReplicaType
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ApiVersionParameter'
       responses:
@@ -132,7 +143,7 @@ paths:
 
              * 400 DatabaseFailoverThrottled - There was a recent failover on the database or pool if database belongs in an elastic pool.
 
-             * 400 DatabaseFailoverNotSupported - This database type does not support customer initiated failovers.
+             * 400 DatabaseFailoverNotSupportedOnSKU - This type of customer initiated failover is not supported on the given SKU.
 
              * 409 ManagementServiceDatabaseBusy - Database '{0}' is busy with another operation. Please try your operation later.
 
@@ -144,6 +155,7 @@ paths:
           parameters:
             api-version: 2018-06-01-preview
             databaseName: testDatabase
+            replicaType: Primary
             resourceGroupName: group1
             serverName: testServer
             subscriptionId: 00000000-1111-2222-3333-444444444444

@@ -64,7 +64,7 @@ parameters:
     maxLength: 50
     minLength: 5
     name: scopeMapName
-    pattern: '^[a-zA-Z0-9-]*$'
+    pattern: '^[a-zA-Z0-9-_]*$'
     required: true
     type: string
     x-ms-parameter-location: method
@@ -626,12 +626,11 @@ definitions:
     description: The parameters used to generate credentials for a specified token or user of a container registry.
     properties:
       expiry:
-        default: '9999-12-31T15:59:59.9999999-08:00'
         description: The expiry date of the generated credentials after which the credentials become invalid.
         format: date-time
         type: string
       name:
-        description: Specifies name of the password which should be regenerated if any -- password or password2.
+        description: Specifies name of the password which should be regenerated if any -- password1 or password2.
         enum:
           - password1
           - password2
@@ -697,7 +696,7 @@ definitions:
     description: The properties of a scope map.
     properties:
       actions:
-        description: "The list of scoped permissions for registry artifacts.\r\nE.g. repositories/repository-name/pull, \r\nrepositories/repository-name/delete"
+        description: "The list of scoped permissions for registry artifacts.\r\nE.g. repositories/repository-name/content/read,\r\nrepositories/repository-name/metadata/write"
         items:
           type: string
         type: array
@@ -818,7 +817,7 @@ definitions:
         format: date-time
         type: string
       name:
-        description: The password name "password" or "password2"
+        description: The password name "password1" or "password2"
         enum:
           - password1
           - password2

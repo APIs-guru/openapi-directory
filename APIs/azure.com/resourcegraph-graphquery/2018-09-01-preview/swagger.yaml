@@ -62,73 +62,7 @@ parameters:
     required: true
     type: string
 paths:
-  /providers/Microsoft.ResourceGraph/operations:
-    get:
-      description: Lists all of the available REST API operations.
-      operationId: Operations_List
-      parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-      responses:
-        '200':
-          description: OK. The request has succeeded.
-          schema:
-            description: Result of the request to list Resource Graph operations. It contains a list of operations and a URL link to get the next set of results.
-            properties:
-              nextLink:
-                description: The link used to get the next page of results.
-                type: string
-              value:
-                description: List of Resource Graph operations supported by the Resource Graph resource provider.
-                items:
-                  description: Resource Graph REST API operation definition.
-                  properties:
-                    display:
-                      description: Display metadata associated with the operation.
-                      properties:
-                        description:
-                          description: Description for the operation.
-                          type: string
-                        operation:
-                          description: 'Type of operation: get, read, delete, etc.'
-                          type: string
-                        provider:
-                          description: 'Service provider: Microsoft Resource Graph.'
-                          type: string
-                        resource:
-                          description: Resource on which the operation is performed etc.
-                          type: string
-                    name:
-                      description: 'Operation name: {provider}/{resource}/{operation}'
-                      type: string
-                    origin:
-                      description: The origin of operations.
-                      type: string
-                type: array
-      tags:
-        - Operations
-      x-ms-examples:
-        OperationsList:
-          parameters:
-            api-version: 2018-09-01-preview
-          responses:
-            '200':
-              body:
-                value:
-                  - display:
-                      description: Submits a query on resources within specified subscriptions
-                      operation: Query resources
-                      provider: Microsoft Resource Graph
-                      resource: Resources
-                    name: Microsoft.ResourceGraph/resources/action
-                  - display:
-                      description: Create/Update/Retrieve a query within specified subscription and resource group.
-                      operation: CRUD operations of graph queries
-                      provider: Microsoft Resource Graph
-                      resource: Queries
-                    name: Microsoft.ResourceGraph/queries/action
-      x-ms-pageable:
-        nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.ResourceGraph/queries':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceGraph/queries':
     get:
       description: Get all graph queries defined within a specified subscription and resource group.
       operationId: GraphQuery_List
@@ -180,7 +114,7 @@ paths:
           title: Get a list of saved queries
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.ResourceGraph/queries/{resourceName}':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceGraph/queries/{resourceName}':
     delete:
       description: Delete a graph query.
       operationId: GraphQuery_Delete
@@ -399,7 +333,6 @@ definitions:
         description: KQL query that will be graph.
         type: string
       resultKind:
-        default: basic
         description: Enum indicating a type of graph query.
         enum:
           - basic
@@ -424,15 +357,6 @@ definitions:
       query:
         description: KQL query that will be graph.
         type: string
-      resultKind:
-        default: basic
-        description: Enum indicating a type of graph query.
-        enum:
-          - basic
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: ResultKind
   GraphQueryResource:
     allOf:
       - $ref: '#/definitions/Resource'
@@ -447,7 +371,6 @@ definitions:
     properties:
       eTag:
         description: 'This will be used to handle Optimistic Concurrency. If not present, it will always overwrite the existing resource without checking conflict.'
-        readOnly: true
         type: string
       properties:
         $ref: '#/definitions/GraphQueryPropertiesUpdateParameters'
@@ -463,7 +386,6 @@ definitions:
     properties:
       eTag:
         description: 'This will be used to handle Optimistic Concurrency. If not present, it will always overwrite the existing resource without checking conflict.'
-        readOnly: true
         type: string
       id:
         description: Azure resource Id

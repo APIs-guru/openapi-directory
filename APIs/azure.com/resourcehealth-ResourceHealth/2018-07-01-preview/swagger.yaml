@@ -60,6 +60,15 @@ parameters:
     required: false
     type: string
     x-ms-parameter-location: method
+  IssueNameParameter:
+    description: The name of the emerging issue.
+    enum:
+      - default
+    in: path
+    name: issueName
+    required: true
+    type: string
+    x-ms-parameter-location: method
   ResourceGroupNameParameter:
     description: The name of the resource group.
     in: path
@@ -74,6 +83,154 @@ parameters:
     required: true
     type: string
 paths:
+  /providers/Microsoft.ResourceHealth/emergingIssues:
+    get:
+      description: Lists Azure services' emerging issues.
+      operationId: EmergingIssues_List
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The body contains a list of azure emerging issues.
+          schema:
+            $ref: '#/definitions/emergingIssueListResult'
+        default:
+          description: DefaultErrorResponse
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - EmergingIssues
+      x-ms-examples:
+        GetEmergingIssues:
+          parameters:
+            api-version: 2018-07-01-preview
+          responses:
+            '200':
+              body:
+                nextLink: string
+                value:
+                  - id: /providers/Microsoft.ResourceHealth/emergingissues/default
+                    name: default
+                    properties:
+                      refreshTimestamp: '2019-12-17T09:12:00Z'
+                      statusActiveEvents:
+                        - cloud: Public
+                          description: Virtual Machines case
+                          impacts:
+                            - id: virtual-machines
+                              name: Virtual Machines
+                              regions:
+                                - id: us-central
+                                  name: Central US
+                                - id: us-east
+                                  name: East US
+                          lastModifiedTime: '2019-12-15T08:10:00Z'
+                          published: true
+                          severity: Information
+                          stage: Active
+                          startTime: '2019-12-15T08:06:00Z'
+                          title: Automatic updates to the dial tone page from ACM - SHD event
+                          trackingId: KTTK-TZ8
+                        - cloud: Public
+                          description: 'All Azure SQL service management requests (create, update, delete, etc.) are serviced through the SQL Control Plane infrastructure. Engineers determined that during this issue, the control plane service became unhealthy after receiving a significant increase in internally generated operations and reaching an operational threshold. This led to service management requests becoming unable to complete, which in-turn resulted in timeouts and throttling. Subsequent investigation by engineers determined this issue was due service requests from an internal Azure group that triggered a bug which caused an excessive number of internally generated operations.'
+                          impacts:
+                            - id: sql-database
+                              name: SQL Database
+                              regions:
+                                - id: europe-west
+                                  name: West Europe
+                          lastModifiedTime: '2019-12-16T05:11:00Z'
+                          published: true
+                          severity: Error
+                          stage: Active
+                          startTime: '2019-12-16T05:11:00Z'
+                          title: Azure SQL Database - West Europe
+                          trackingId: 4KHK-LS8
+                      statusBanners:
+                        - cloud: Public
+                          lastModifiedTime: '2019-12-15T08:04:00Z'
+                          message: Testing backup site
+                          title: Automatic updates to the dial tone page from ACM - banner
+                        - cloud: Public
+                          lastModifiedTime: '2019-12-15T10:15:00Z'
+                          message: '<span style="color: #323237; font-family: &quot;Segoe UI&quot;, SegoeUI, &quot;Segoe WP&quot;, Tahoma, Arial, sans-serif; font-size: 16px; background-color: #ffffff">A subset of customers using Storage in West Europe experienced service availability issues. In addition, resources with dependencies on the impacted storage scale units may have experienced downstream impact in the form of availability issues, connection failures, or high latency. Engineers are investigating the root cause.</span>'
+                          title: Storage - West Europe
+                    type: /providers/Microsoft.ResourceHealth/emergingissues
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/providers/Microsoft.ResourceHealth/emergingIssues/{issueName}':
+    get:
+      description: Gets Azure services' emerging issues.
+      operationId: EmergingIssues_Get
+      parameters:
+        - $ref: '#/parameters/IssueNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: 'The body contains properties of azure emerging issues, which includes a list of status banner and status active events.'
+          schema:
+            $ref: '#/definitions/emergingIssuesGetResult'
+        default:
+          description: DefaultErrorResponse
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - EmergingIssues
+      x-ms-examples:
+        GetEmergingIssues:
+          parameters:
+            api-version: 2018-07-01-preview
+            issueName: default
+          responses:
+            '200':
+              body:
+                id: /providers/Microsoft.ResourceHealth/emergingissues/default
+                name: default
+                properties:
+                  refreshTimestamp: '2019-12-17T09:12:00Z'
+                  statusActiveEvents:
+                    - cloud: Public
+                      description: Virtual Machines case
+                      impacts:
+                        - id: virtual-machines
+                          name: Virtual Machines
+                          regions:
+                            - id: us-central
+                              name: Central US
+                            - id: us-east
+                              name: East US
+                      lastModifiedTime: '2019-12-15T08:10:00Z'
+                      published: true
+                      severity: Information
+                      stage: Active
+                      startTime: '2019-12-15T08:06:00Z'
+                      title: Automatic updates to the dial tone page from ACM - SHD event
+                      trackingId: KTTK-TZ8
+                    - cloud: Public
+                      description: 'All Azure SQL service management requests (create, update, delete, etc.) are serviced through the SQL Control Plane infrastructure. Engineers determined that during this issue, the control plane service became unhealthy after receiving a significant increase in internally generated operations and reaching an operational threshold. This led to service management requests becoming unable to complete, which in-turn resulted in timeouts and throttling. Subsequent investigation by engineers determined this issue was due service requests from an internal Azure group that triggered a bug which caused an excessive number of internally generated operations.'
+                      impacts:
+                        - id: sql-database
+                          name: SQL Database
+                          regions:
+                            - id: europe-west
+                              name: West Europe
+                      lastModifiedTime: '2019-12-16T05:11:00Z'
+                      published: true
+                      severity: Error
+                      stage: Active
+                      startTime: '2019-12-16T05:11:00Z'
+                      title: Azure SQL Database - West Europe
+                      trackingId: 4KHK-LS8
+                  statusBanners:
+                    - cloud: Public
+                      lastModifiedTime: '2019-12-15T08:04:00Z'
+                      message: Testing backup site
+                      title: Automatic updates to the dial tone page from ACM - banner
+                    - cloud: Public
+                      lastModifiedTime: '2019-12-15T10:15:00Z'
+                      message: '<span style="color: #323237; font-family: &quot;Segoe UI&quot;, SegoeUI, &quot;Segoe WP&quot;, Tahoma, Arial, sans-serif; font-size: 16px; background-color: #ffffff">A subset of customers using Storage in West Europe experienced service availability issues. In addition, resources with dependencies on the impacted storage scale units may have experienced downstream impact in the form of availability issues, connection failures, or high latency. Engineers are investigating the root cause.</span>'
+                      title: Storage - West Europe
+                type: /providers/Microsoft.ResourceHealth/emergingissues
   /providers/Microsoft.ResourceHealth/metadata:
     get:
       deprecated: false
@@ -938,6 +1095,74 @@ definitions:
         type: array
     required:
       - value
+  emergingIssue:
+    description: On-going emerging issue from azure status.
+    properties:
+      refreshTimestamp:
+        description: Timestamp for when last time refreshed for ongoing emerging issue.
+        format: date-time
+        type: string
+      statusActiveEvents:
+        description: The list of emerging issues of active event type.
+        items:
+          $ref: '#/definitions/statusActiveEvent'
+        type: array
+      statusBanners:
+        description: The list of emerging issues of banner type.
+        items:
+          $ref: '#/definitions/statusBanner'
+        type: array
+    type: object
+  emergingIssueImpact:
+    description: Object of the emerging issue impact on services and regions.
+    properties:
+      id:
+        description: The impacted service id.
+        type: string
+      name:
+        description: The impacted service name.
+        type: string
+      regions:
+        description: The list of impacted regions for corresponding emerging issues.
+        items:
+          $ref: '#/definitions/impactedRegion'
+        type: array
+    type: object
+  emergingIssueListResult:
+    description: The list of emerging issues.
+    properties:
+      nextLink:
+        description: The link used to get the next page of emerging issues.
+        type: string
+      value:
+        description: The list of emerging issues.
+        items:
+          $ref: '#/definitions/emergingIssuesGetResult'
+        type: array
+    type: object
+  emergingIssuesGetResult:
+    allOf:
+      - properties:
+          id:
+            description: 'Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'
+            readOnly: true
+            type: string
+          name:
+            description: The name of the resource
+            readOnly: true
+            type: string
+          type:
+            description: The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.
+            readOnly: true
+            type: string
+        x-ms-azure-resource: true
+    description: The Get EmergingIssues operation response.
+    properties:
+      properties:
+        $ref: '#/definitions/emergingIssue'
+        description: The emerging issue entity properties.
+        x-ms-client-flatten: true
+    type: object
   event:
     allOf:
       - properties:
@@ -1126,6 +1351,15 @@ definitions:
         type: array
       impactedService:
         description: Impacted service name.
+        type: string
+  impactedRegion:
+    description: Object of impacted region.
+    properties:
+      id:
+        description: The impacted region id.
+        type: string
+      name:
+        description: The impacted region name.
         type: string
   impactedResourceListResult:
     description: The List impactedResourceStatus operation response.
@@ -1337,6 +1571,73 @@ definitions:
             description: Current status of the event
             type: string
         type: object
+  statusActiveEvent:
+    description: Active event type of emerging issue.
+    properties:
+      cloud:
+        description: The cloud type of this active event.
+        type: string
+      description:
+        description: The details of active event.
+        type: string
+      impacts:
+        description: The list of emerging issues impacts.
+        items:
+          $ref: '#/definitions/emergingIssueImpact'
+        type: array
+      lastModifiedTime:
+        description: The last time modified on this banner.
+        format: date-time
+        type: string
+      published:
+        description: The boolean value of this active event if published or not.
+        type: boolean
+      severity:
+        description: The severity level of this active event.
+        enum:
+          - Information
+          - Warning
+          - Error
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: SeverityValues
+      stage:
+        description: The stage of this active event.
+        enum:
+          - Active
+          - Resolve
+          - Archived
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: StageValues
+      startTime:
+        description: The impact start time on this active event.
+        format: date-time
+        type: string
+      title:
+        description: The active event title.
+        type: string
+      trackingId:
+        description: The tracking id of this active event.
+        type: string
+  statusBanner:
+    description: Banner type of emerging issue.
+    properties:
+      cloud:
+        description: The cloud type of this banner.
+        type: string
+      lastModifiedTime:
+        description: The last time modified on this banner.
+        format: date-time
+        type: string
+      message:
+        description: The details of banner.
+        type: string
+      title:
+        description: The banner title.
+        type: string
   update:
     description: Update for service health event.
     properties:

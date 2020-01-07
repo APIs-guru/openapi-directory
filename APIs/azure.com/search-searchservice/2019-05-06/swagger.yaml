@@ -3,7 +3,7 @@ schemes:
   - https
 host: azure.local
 info:
-  description: 'Client that can be used to manage and query indexes and documents, as well as manage other resources, on an Azure Search service.'
+  description: 'Client that can be used to manage and query indexes and documents, as well as manage other resources, on a search service.'
   title: SearchServiceClient
   version: '2019-05-06'
   x-apisguru-categories:
@@ -40,7 +40,7 @@ parameters:
     type: string
     x-ms-client-request-id: true
     x-ms-parameter-grouping:
-      name: search-request-options
+      name: request-options
     x-ms-parameter-location: method
   IfMatchParameter:
     description: Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value.
@@ -71,7 +71,7 @@ parameters:
     x-ms-parameter-location: method
   SearchDnsSuffixParameter:
     default: search.windows.net
-    description: The DNS suffix of the Azure Search service. The default is search.windows.net.
+    description: The DNS suffix of the search service. The default is search.windows.net.
     in: path
     name: searchDnsSuffix
     required: true
@@ -79,7 +79,7 @@ parameters:
     x-ms-parameter-location: client
     x-ms-skip-url-encoding: true
   SearchServiceNameParameter:
-    description: The name of the Azure Search service.
+    description: The name of the search service.
     in: path
     name: searchServiceName
     required: true
@@ -89,23 +89,29 @@ parameters:
 paths:
   /datasources:
     get:
-      description: Lists all datasources available for an Azure Search service.
+      description: Lists all datasources available for a search service.
       externalDocs:
         url: 'https://docs.microsoft.com/rest/api/searchservice/List-Data-Sources'
       operationId: DataSources_List
       parameters:
+        - description: 'Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or ''*'' for all properties. The default is all properties.'
+          in: query
+          name: $select
+          required: false
+          type: string
         - $ref: '#/parameters/ClientRequestIdParameter'
         - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '200':
           description: ''
           schema:
-            $ref: '#/definitions/DataSourceListResult'
+            $ref: '#/definitions/ListDataSourcesResult'
       tags:
         - DataSources
       x-ms-examples:
         SearchServiceListDataSources:
           parameters:
+            $select: '*'
             api-version: '2019-05-06'
             searchDnsSuffix: search.windows.net
             searchServiceName: myservice
@@ -128,18 +134,9 @@ paths:
                     description: My Cosmos DB data source.
                     name: mydocdbdatasource
                     type: cosmosdb
-                  - container:
-                      name: mycontainer
-                    credentials:
-                      connectionString: null
-                    dataChangeDetectionPolicy: null
-                    dataDeletionDetectionPolicy: null
-                    description: My Azure Blob data source.
-                    name: myblobdatasource
-                    type: azureblob
       x-ms-request-id: request-id
     post:
-      description: Creates a new Azure Search datasource.
+      description: Creates a new datasource.
       externalDocs:
         url: 'https://docs.microsoft.com/rest/api/searchservice/Create-Data-Source'
       operationId: DataSources_Create
@@ -202,7 +199,7 @@ paths:
       x-ms-request-id: request-id
   '/datasources(''{dataSourceName}'')':
     delete:
-      description: Deletes an Azure Search datasource.
+      description: Deletes a datasource.
       externalDocs:
         url: 'https://docs.microsoft.com/rest/api/searchservice/Delete-Data-Source'
       operationId: DataSources_Delete
@@ -235,7 +232,7 @@ paths:
             '404': {}
       x-ms-request-id: request-id
     get:
-      description: Retrieves a datasource definition from Azure Search.
+      description: Retrieves a datasource definition.
       externalDocs:
         url: 'https://docs.microsoft.com/rest/api/searchservice/Get-Data-Source'
       operationId: DataSources_Get
@@ -281,7 +278,7 @@ paths:
                 type: cosmosdb
       x-ms-request-id: request-id
     put:
-      description: Creates a new Azure Search datasource or updates a datasource if it already exists.
+      description: Creates a new datasource or updates a datasource if it already exists.
       externalDocs:
         url: 'https://docs.microsoft.com/rest/api/searchservice/Update-Data-Source'
       operationId: DataSources_CreateOrUpdate
@@ -375,23 +372,29 @@ paths:
       x-ms-request-id: request-id
   /indexers:
     get:
-      description: Lists all indexers available for an Azure Search service.
+      description: Lists all indexers available for a search service.
       externalDocs:
         url: 'https://docs.microsoft.com/rest/api/searchservice/List-Indexers'
       operationId: Indexers_List
       parameters:
+        - description: 'Selects which top-level properties of the indexers to retrieve. Specified as a comma-separated list of JSON property names, or ''*'' for all properties. The default is all properties.'
+          in: query
+          name: $select
+          required: false
+          type: string
         - $ref: '#/parameters/ClientRequestIdParameter'
         - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '200':
           description: ''
           schema:
-            $ref: '#/definitions/IndexerListResult'
+            $ref: '#/definitions/ListIndexersResult'
       tags:
         - Indexers
       x-ms-examples:
         SearchServiceListIndexers:
           parameters:
+            $select: '*'
             api-version: '2019-05-06'
             searchDnsSuffix: search.windows.net
             searchServiceName: myservice
@@ -437,7 +440,7 @@ paths:
                     targetIndexName: orders
       x-ms-request-id: request-id
     post:
-      description: Creates a new Azure Search indexer.
+      description: Creates a new indexer.
       externalDocs:
         url: 'https://docs.microsoft.com/rest/api/searchservice/Create-Indexer'
       operationId: Indexers_Create
@@ -492,7 +495,7 @@ paths:
       x-ms-request-id: request-id
   '/indexers(''{indexerName}'')':
     delete:
-      description: Deletes an Azure Search indexer.
+      description: Deletes an indexer.
       externalDocs:
         url: 'https://docs.microsoft.com/rest/api/searchservice/Delete-Indexer'
       operationId: Indexers_Delete
@@ -525,7 +528,7 @@ paths:
             '404': {}
       x-ms-request-id: request-id
     get:
-      description: Retrieves an indexer definition from Azure Search.
+      description: Retrieves an indexer definition.
       externalDocs:
         url: 'https://docs.microsoft.com/rest/api/searchservice/Get-Indexer'
       operationId: Indexers_Get
@@ -568,7 +571,7 @@ paths:
                 targetIndexName: orders
       x-ms-request-id: request-id
     put:
-      description: Creates a new Azure Search indexer or updates an indexer if it already exists.
+      description: Creates a new indexer or updates an indexer if it already exists.
       externalDocs:
         url: 'https://docs.microsoft.com/rest/api/searchservice/Create-Indexer'
       operationId: Indexers_CreateOrUpdate
@@ -651,7 +654,7 @@ paths:
       x-ms-request-id: request-id
   '/indexers(''{indexerName}'')/search.reset':
     post:
-      description: Resets the change tracking state associated with an Azure Search indexer.
+      description: Resets the change tracking state associated with an indexer.
       externalDocs:
         url: 'https://docs.microsoft.com/rest/api/searchservice/Reset-Indexer'
       operationId: Indexers_Reset
@@ -680,7 +683,7 @@ paths:
       x-ms-request-id: request-id
   '/indexers(''{indexerName}'')/search.run':
     post:
-      description: Runs an Azure Search indexer on-demand.
+      description: Runs an indexer on-demand.
       externalDocs:
         url: 'https://docs.microsoft.com/rest/api/searchservice/Run-Indexer'
       operationId: Indexers_Run
@@ -800,12 +803,12 @@ paths:
       x-ms-request-id: request-id
   /indexes:
     get:
-      description: Lists all indexes available for an Azure Search service.
+      description: Lists all indexes available for a search service.
       externalDocs:
         url: 'https://docs.microsoft.com/rest/api/searchservice/List-Indexes'
       operationId: Indexes_List
       parameters:
-        - description: 'Selects which properties of the index definitions to retrieve. Specified as a comma-separated list of JSON property names, or ''*'' for all properties. The default is all properties.'
+        - description: 'Selects which top-level properties of the index definitions to retrieve. Specified as a comma-separated list of JSON property names, or ''*'' for all properties. The default is all properties.'
           in: query
           name: $select
           required: false
@@ -816,13 +819,13 @@ paths:
         '200':
           description: ''
           schema:
-            $ref: '#/definitions/IndexListResult'
+            $ref: '#/definitions/ListIndexesResult'
       tags:
         - Indexes
       x-ms-examples:
         SearchServiceListIndexes:
           parameters:
-            $select: name
+            $select: '*'
             api-version: '2019-05-06'
             searchDnsSuffix: search.windows.net
             searchServiceName: myservice
@@ -1044,7 +1047,7 @@ paths:
                     tokenizers: []
       x-ms-request-id: request-id
     post:
-      description: Creates a new Azure Search index.
+      description: Creates a new search index.
       externalDocs:
         url: 'https://docs.microsoft.com/rest/api/searchservice/Create-Index'
       operationId: Indexes_Create
@@ -1320,7 +1323,7 @@ paths:
       x-ms-request-id: request-id
   '/indexes(''{indexName}'')':
     delete:
-      description: Deletes an Azure Search index and all the documents it contains.
+      description: Deletes a search index and all the documents it contains.
       externalDocs:
         url: 'https://docs.microsoft.com/rest/api/searchservice/Delete-Index'
       operationId: Indexes_Delete
@@ -1353,7 +1356,7 @@ paths:
             '404': {}
       x-ms-request-id: request-id
     get:
-      description: Retrieves an index definition from Azure Search.
+      description: Retrieves an index definition.
       externalDocs:
         url: 'https://docs.microsoft.com/rest/api/searchservice/Get-Index'
       operationId: Indexes_Get
@@ -1562,7 +1565,7 @@ paths:
                 tokenizers: []
       x-ms-request-id: request-id
     put:
-      description: Creates a new Azure Search index or updates an index if it already exists.
+      description: Creates a new search index or updates an index if it already exists.
       externalDocs:
         url: 'https://docs.microsoft.com/rest/api/searchservice/Update-Index'
       operationId: Indexes_CreateOrUpdate
@@ -2108,7 +2111,7 @@ paths:
         '200':
           description: ''
           schema:
-            $ref: '#/definitions/IndexGetStatisticsResult'
+            $ref: '#/definitions/GetIndexStatisticsResult'
       tags:
         - Indexes
       x-ms-examples:
@@ -2126,7 +2129,7 @@ paths:
       x-ms-request-id: request-id
   /servicestats:
     get:
-      description: Gets service level statistics for an Azure Search service.
+      description: Gets service level statistics for a search service.
       operationId: GetServiceStatistics
       parameters:
         - $ref: '#/parameters/ClientRequestIdParameter'
@@ -2174,23 +2177,29 @@ paths:
       x-ms-request-id: request-id
   /skillsets:
     get:
-      description: List all cognitive skillsets in an Azure Search service.
+      description: List all skillsets in a search service.
       externalDocs:
         url: 'https://docs.microsoft.com/rest/api/searchservice/list-skillset'
       operationId: Skillsets_List
       parameters:
+        - description: 'Selects which top-level properties of the skillsets to retrieve. Specified as a comma-separated list of JSON property names, or ''*'' for all properties. The default is all properties.'
+          in: query
+          name: $select
+          required: false
+          type: string
         - $ref: '#/parameters/ClientRequestIdParameter'
         - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '200':
           description: The list is successfully returned.
           schema:
-            $ref: '#/definitions/SkillsetListResult'
+            $ref: '#/definitions/ListSkillsetsResult'
       tags:
         - Skillsets
       x-ms-examples:
         SearchServiceListSkillsets:
           parameters:
+            $select: '*'
             api-version: '2019-05-06'
             searchDnsSuffix: search.windows.net
             searchServiceName: myservice
@@ -2274,12 +2283,12 @@ paths:
                         uri: 'https://contoso.example.org'
       x-ms-request-id: request-id
     post:
-      description: Creates a new cognitive skillset in an Azure Search service.
+      description: Creates a new skillset in a search service.
       externalDocs:
         url: 'https://docs.microsoft.com/rest/api/searchservice/create-skillset'
       operationId: Skillsets_Create
       parameters:
-        - description: The skillset containing one or more cognitive skills to create in an Azure Search service.
+        - description: The skillset containing one or more skills to create in a search service.
           in: body
           name: skillset
           required: true
@@ -2440,7 +2449,7 @@ paths:
       x-ms-request-id: request-id
   '/skillsets(''{skillsetName}'')':
     delete:
-      description: Deletes a cognitive skillset in an Azure Search service.
+      description: Deletes a skillset in a search service.
       externalDocs:
         url: 'https://docs.microsoft.com/rest/api/searchservice/delete-skillset'
       operationId: Skillsets_Delete
@@ -2451,6 +2460,8 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/ClientRequestIdParameter'
+        - $ref: '#/parameters/IfMatchParameter'
+        - $ref: '#/parameters/IfNoneMatchParameter'
         - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '204':
@@ -2471,7 +2482,7 @@ paths:
             '404': {}
       x-ms-request-id: request-id
     get:
-      description: Retrieves a cognitive skillset in an Azure Search service.
+      description: Retrieves a skillset in a search service.
       externalDocs:
         url: 'https://docs.microsoft.com/rest/api/searchservice/get-skillset'
       operationId: Skillsets_Get
@@ -2576,7 +2587,7 @@ paths:
                     uri: 'https://contoso.example.org'
       x-ms-request-id: request-id
     put:
-      description: Creates a new cognitive skillset in an Azure Search service or updates the skillset if it already exists.
+      description: Creates a new skillset in a search service or updates the skillset if it already exists.
       externalDocs:
         url: 'https://docs.microsoft.com/rest/api/searchservice/update-skillset'
       operationId: Skillsets_CreateOrUpdate
@@ -2586,13 +2597,15 @@ paths:
           name: skillsetName
           required: true
           type: string
-        - description: The skillset containing one or more cognitive skills to create or update in an Azure Search service.
+        - description: The skillset containing one or more skills to create or update in a search service.
           in: body
           name: skillset
           required: true
           schema:
             $ref: '#/definitions/Skillset'
         - $ref: '#/parameters/ClientRequestIdParameter'
+        - $ref: '#/parameters/IfMatchParameter'
+        - $ref: '#/parameters/IfNoneMatchParameter'
         - $ref: '#/parameters/PreferHeaderParameter'
         - $ref: '#/parameters/ApiVersionParameter'
       responses:
@@ -2828,23 +2841,29 @@ paths:
       x-ms-request-id: request-id
   /synonymmaps:
     get:
-      description: Lists all synonym maps available for an Azure Search service.
+      description: Lists all synonym maps available for a search service.
       externalDocs:
         url: 'https://docs.microsoft.com/rest/api/searchservice/List-Synonym-Maps'
       operationId: SynonymMaps_List
       parameters:
+        - description: 'Selects which top-level properties of the synonym maps to retrieve. Specified as a comma-separated list of JSON property names, or ''*'' for all properties. The default is all properties.'
+          in: query
+          name: $select
+          required: false
+          type: string
         - $ref: '#/parameters/ClientRequestIdParameter'
         - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '200':
           description: ''
           schema:
-            $ref: '#/definitions/SynonymMapListResult'
+            $ref: '#/definitions/ListSynonymMapsResult'
       tags:
         - SynonymMaps
       x-ms-examples:
         SearchServiceListSynonymMaps:
           parameters:
+            $select: '*'
             api-version: '2019-05-06'
             searchDnsSuffix: search.windows.net
             searchServiceName: myservice
@@ -2865,7 +2884,7 @@ paths:
                       toque, hat
       x-ms-request-id: request-id
     post:
-      description: Creates a new Azure Search synonym map.
+      description: Creates a new synonym map.
       externalDocs:
         url: 'https://docs.microsoft.com/rest/api/searchservice/Create-Synonym-Map'
       operationId: SynonymMaps_Create
@@ -2908,7 +2927,7 @@ paths:
       x-ms-request-id: request-id
   '/synonymmaps(''{synonymMapName}'')':
     delete:
-      description: Deletes an Azure Search synonym map.
+      description: Deletes a synonym map.
       externalDocs:
         url: 'https://docs.microsoft.com/rest/api/searchservice/Delete-Synonym-Map'
       operationId: SynonymMaps_Delete
@@ -2941,7 +2960,7 @@ paths:
             '404': {}
       x-ms-request-id: request-id
     get:
-      description: Retrieves a synonym map definition from Azure Search.
+      description: Retrieves a synonym map definition.
       externalDocs:
         url: 'https://docs.microsoft.com/rest/api/searchservice/Get-Synonym-Map'
       operationId: SynonymMaps_Get
@@ -2977,7 +2996,7 @@ paths:
                   Washington, Wash. => WA
       x-ms-request-id: request-id
     put:
-      description: Creates a new Azure Search synonym map or updates a synonym map if it already exists.
+      description: Creates a new synonym map or updates a synonym map if it already exists.
       externalDocs:
         url: 'https://docs.microsoft.com/rest/api/searchservice/Update-Synonym-Map'
       operationId: SynonymMaps_CreateOrUpdate
@@ -3089,7 +3108,7 @@ definitions:
       - '@odata.type'
       - name
   AnalyzerName:
-    description: Defines the names of all text analyzers supported by Azure Search.
+    description: Defines the names of all text analyzers supported by Azure Cognitive Search.
     enum:
       - ar.microsoft
       - ar.lucene
@@ -3188,7 +3207,7 @@ definitions:
       url: 'https://docs.microsoft.com/rest/api/searchservice/Language-support'
     type: string
     x-ms-enum:
-      modelAsString: false
+      modelAsString: true
       name: AnalyzerName
   AsciiFoldingTokenFilter:
     allOf:
@@ -3219,15 +3238,19 @@ definitions:
       - '@odata.type'
       - name
   CharFilterName:
-    description: Defines the names of all character filters supported by Azure Search.
+    description: Defines the names of all character filters supported by Azure Cognitive Search.
     enum:
       - html_strip
     externalDocs:
       url: 'https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search'
     type: string
     x-ms-enum:
-      modelAsString: false
+      modelAsString: true
       name: CharFilterName
+      values:
+        - description: 'A character filter that attempts to strip out HTML constructs. See https://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/charfilter/HTMLStripCharFilter.html'
+          name: HtmlStrip
+          value: html_strip
   CjkBigramTokenFilter:
     allOf:
       - $ref: '#/definitions/TokenFilter'
@@ -3271,7 +3294,7 @@ definitions:
         maximum: 300
         type: integer
     x-ms-discriminator-value: '#Microsoft.Azure.Search.ClassicTokenizer'
-  CognitiveServices:
+  CognitiveServicesAccount:
     description: Abstract base class for describing any cognitive service resource attached to the skillset.
     discriminator: '@odata.type'
     properties:
@@ -3281,9 +3304,9 @@ definitions:
         type: string
     required:
       - '@odata.type'
-  CognitiveServicesByKey:
+  CognitiveServicesAccountKey:
     allOf:
-      - $ref: '#/definitions/CognitiveServices'
+      - $ref: '#/definitions/CognitiveServicesAccount'
     description: A cognitive service resource provisioned with a key that is attached to a skillset.
     properties:
       key:
@@ -3370,10 +3393,10 @@ definitions:
     required:
       - '@odata.type'
   DataContainer:
-    description: Represents information about the entity (such as Azure SQL table or DocumentDb collection) that will be indexed.
+    description: Represents information about the entity (such as Azure SQL table or CosmosDB collection) that will be indexed.
     properties:
       name:
-        description: The name of the table or view (for Azure SQL data source) or collection (for DocumentDB data source) that will be indexed.
+        description: The name of the table or view (for Azure SQL data source) or collection (for CosmosDB data source) that will be indexed.
         type: string
       query:
         description: A query that is applied to this data container. The syntax and meaning of this parameter is datasource-specific. Not supported by Azure SQL datasources.
@@ -3389,7 +3412,7 @@ definitions:
     required:
       - '@odata.type'
   DataSource:
-    description: 'Represents a datasource definition in Azure Search, which can be used to configure an indexer.'
+    description: 'Represents a datasource definition, which can be used to configure an indexer.'
     properties:
       '@odata.etag':
         description: The ETag of the DataSource.
@@ -3431,18 +3454,8 @@ definitions:
         externalDocs:
           url: 'https://docs.microsoft.com/rest/api/searchservice/Create-Data-Source'
         type: string
-  DataSourceListResult:
-    description: 'Response from a List Datasources request. If successful, it includes the full definitions of all datasources.'
-    properties:
-      value:
-        description: The datasources in the Search service.
-        items:
-          $ref: '#/definitions/DataSource'
-        readOnly: true
-        type: array
-        x-ms-client-name: DataSources
   DataSourceType:
-    description: Defines the type of an Azure Search datasource.
+    description: Defines the type of a datasource.
     enum:
       - azuresql
       - cosmosdb
@@ -3450,10 +3463,19 @@ definitions:
       - azuretable
     type: string
     x-ms-enum:
-      modelAsString: false
+      modelAsString: true
       name: DataSourceType
+      values:
+        - name: AzureSql
+          value: azuresql
+        - name: CosmosDb
+          value: cosmosdb
+        - name: AzureBlob
+          value: azureblob
+        - name: AzureTable
+          value: azuretable
   DataType:
-    description: Defines the data type of a field in an Azure Search index.
+    description: Defines the data type of a field in a search index.
     enum:
       - Edm.String
       - Edm.Int32
@@ -3465,11 +3487,11 @@ definitions:
       - Edm.ComplexType
     type: string
     x-ms-enum:
-      modelAsString: false
+      modelAsString: true
       name: DataType
-  DefaultCognitiveServices:
+  DefaultCognitiveServicesAccount:
     allOf:
-      - $ref: '#/definitions/CognitiveServices'
+      - $ref: '#/definitions/CognitiveServicesAccount'
     description: An empty object that represents the default cognitive service resource for a skillset.
     x-ms-discriminator-value: '#Microsoft.Azure.Search.DefaultCognitiveServices'
   DictionaryDecompounderTokenFilter:
@@ -3674,17 +3696,82 @@ definitions:
   EntityRecognitionSkillLanguage:
     description: The language codes supported for input text by EntityRecognitionSkill.
     enum:
-      - de
+      - ar
+      - cs
+      - zh-Hans
+      - zh-Hant
+      - da
+      - nl
       - en
-      - es
+      - fi
       - fr
+      - de
+      - el
+      - hu
       - it
+      - ja
+      - ko
+      - 'no'
+      - pl
+      - pt-PT
+      - pt-BR
+      - ru
+      - es
+      - sv
+      - tr
     type: string
     x-ms-enum:
-      modelAsString: false
+      modelAsString: true
       name: EntityRecognitionSkillLanguage
+      values:
+        - description: Arabic
+          value: ar
+        - description: Czech
+          value: cs
+        - description: Chinese-Simplified
+          value: zh-Hans
+        - description: Chinese-Traditional
+          value: zh-Hant
+        - description: Danish
+          value: da
+        - description: Dutch
+          value: nl
+        - description: English
+          value: en
+        - description: Finnish
+          value: fi
+        - description: French
+          value: fr
+        - description: German
+          value: de
+        - description: Greek
+          value: el
+        - description: Hungarian
+          value: hu
+        - description: Italian
+          value: it
+        - description: Japanese
+          value: ja
+        - description: Korean
+          value: ko
+        - description: Norwegian (Bokmaal)
+          value: 'no'
+        - description: Polish
+          value: pl
+        - description: Portuguese (Portugal)
+          value: pt-PT
+        - description: Portuguese (Brazil)
+          value: pt-BR
+        - description: Russian
+          value: ru
+        - description: Spanish
+          value: es
+        - description: Swedish
+          value: sv
+        - description: Turkish
+          value: tr
   Field:
-    description: 'Represents a field in an index definition in Azure Search, which describes the name, data type, and search behavior of a field.'
+    description: 'Represents a field in an index definition, which describes the name, data type, and search behavior of a field.'
     externalDocs:
       url: 'https://docs.microsoft.com/rest/api/searchservice/Create-Index'
     properties:
@@ -3726,10 +3813,10 @@ definitions:
         externalDocs:
           url: 'https://docs.microsoft.com/rest/api/searchservice/Language-support'
       searchable:
-        description: 'A value indicating whether the field is full-text searchable. This means it will undergo analysis such as word-breaking during indexing. If you set a searchable field to a value like "sunny day", internally it will be split into the individual tokens "sunny" and "day". This enables full-text searches for these terms. Fields of type Edm.String or Collection(Edm.String) are searchable by default. This property must be false for simple fields of other non-string data types, and it must be null for complex fields. Note: searchable fields consume extra space in your index since Azure Search will store an additional tokenized version of the field value for full-text searches. If you want to save space in your index and you don''t need a field to be included in searches, set searchable to false.'
+        description: 'A value indicating whether the field is full-text searchable. This means it will undergo analysis such as word-breaking during indexing. If you set a searchable field to a value like "sunny day", internally it will be split into the individual tokens "sunny" and "day". This enables full-text searches for these terms. Fields of type Edm.String or Collection(Edm.String) are searchable by default. This property must be false for simple fields of other non-string data types, and it must be null for complex fields. Note: searchable fields consume extra space in your index since Azure Cognitive Search will store an additional tokenized version of the field value for full-text searches. If you want to save space in your index and you don''t need a field to be included in searches, set searchable to false.'
         type: boolean
       sortable:
-        description: 'A value indicating whether to enable the field to be referenced in $orderby expressions. By default Azure Search sorts results by score, but in many experiences users will want to sort by fields in the documents. A simple field can be sortable only if it is single-valued (it has a single value in the scope of the parent document). Simple collection fields cannot be sortable, since they are multi-valued. Simple sub-fields of complex collections are also multi-valued, and therefore cannot be sortable. This is true whether it''s an immediate parent field, or an ancestor field, that''s the complex collection. Complex fields cannot be sortable and the sortable property must be null for such fields. The default for sortable is true for single-valued simple fields, false for multi-valued simple fields, and null for complex fields.'
+        description: 'A value indicating whether to enable the field to be referenced in $orderby expressions. By default Azure Cognitive Search sorts results by score, but in many experiences users will want to sort by fields in the documents. A simple field can be sortable only if it is single-valued (it has a single value in the scope of the parent document). Simple collection fields cannot be sortable, since they are multi-valued. Simple sub-fields of complex collections are also multi-valued, and therefore cannot be sortable. This is true whether it''s an immediate parent field, or an ancestor field, that''s the complex collection. Complex fields cannot be sortable and the sortable property must be null for such fields. The default for sortable is true for single-valued simple fields, false for multi-valued simple fields, and null for complex fields.'
         type: boolean
       synonymMaps:
         description: A list of the names of synonym maps to associate with this field. This option can be used only with searchable fields. Currently only one synonym map per field is supported. Assigning a synonym map to a field ensures that query terms targeting that field are expanded at query-time using the rules in the synonym map. This attribute can be changed on existing fields. Must be null or an empty collection for complex fields.
@@ -3800,6 +3887,21 @@ definitions:
         type: string
     required:
       - boostingDuration
+  GetIndexStatisticsResult:
+    description: Statistics for a given index. Statistics are collected periodically and are not guaranteed to always be up-to-date.
+    properties:
+      documentCount:
+        description: The number of documents in the index.
+        format: int64
+        readOnly: true
+        type: integer
+        x-nullable: false
+      storageSize:
+        description: The amount of storage in bytes consumed by the index.
+        format: int64
+        readOnly: true
+        type: integer
+        x-nullable: false
   HighWaterMarkChangeDetectionPolicy:
     allOf:
       - $ref: '#/definitions/DataChangeDetectionPolicy'
@@ -3841,8 +3943,13 @@ definitions:
       - zh
     type: string
     x-ms-enum:
-      modelAsString: false
+      modelAsString: true
       name: ImageAnalysisSkillLanguage
+      values:
+        - description: English
+          value: en
+        - description: Chinese
+          value: zh
   ImageDetail:
     description: A string indicating which domain-specific details to return.
     enum:
@@ -3853,7 +3960,7 @@ definitions:
       modelAsString: false
       name: ImageDetail
   Index:
-    description: 'Represents an index definition in Azure Search, which describes the fields and search behavior of an index.'
+    description: 'Represents a search index definition, which describes the fields and search behavior of an index.'
     properties:
       '@odata.etag':
         description: The ETag of the index.
@@ -3916,33 +4023,8 @@ definitions:
     required:
       - name
       - fields
-  IndexGetStatisticsResult:
-    description: Statistics for a given index. Statistics are collected periodically and are not guaranteed to always be up-to-date.
-    properties:
-      documentCount:
-        description: The number of documents in the index.
-        format: int64
-        readOnly: true
-        type: integer
-        x-nullable: false
-      storageSize:
-        description: The amount of storage in bytes consumed by the index.
-        format: int64
-        readOnly: true
-        type: integer
-        x-nullable: false
-  IndexListResult:
-    description: 'Response from a List Indexes request. If successful, it includes the full definitions of all indexes.'
-    properties:
-      value:
-        description: The indexes in the Search service.
-        items:
-          $ref: '#/definitions/Index'
-        readOnly: true
-        type: array
-        x-ms-client-name: Indexes
   Indexer:
-    description: Represents an Azure Search indexer.
+    description: Represents an indexer.
     externalDocs:
       url: 'https://docs.microsoft.com/rest/api/searchservice/Indexer-operations'
     properties:
@@ -3987,7 +4069,7 @@ definitions:
         $ref: '#/definitions/IndexingSchedule'
         description: The schedule for this indexer.
       skillsetName:
-        description: The name of the cognitive skillset executing with this indexer.
+        description: The name of the skillset executing with this indexer.
         type: string
       targetIndexName:
         description: The name of the index to which this indexer writes data.
@@ -4100,16 +4182,6 @@ definitions:
         format: duration
         readOnly: true
         type: string
-  IndexerListResult:
-    description: 'Response from a List Indexers request. If successful, it includes the full definitions of all indexers.'
-    properties:
-      value:
-        description: The indexers in the Search service.
-        items:
-          $ref: '#/definitions/Indexer'
-        readOnly: true
-        type: array
-        x-ms-client-name: Indexers
   IndexerStatus:
     description: Represents the overall indexer status.
     enum:
@@ -4288,8 +4360,41 @@ definitions:
       - sv
     type: string
     x-ms-enum:
-      modelAsString: false
+      modelAsString: true
       name: KeyPhraseExtractionSkillLanguage
+      values:
+        - description: Danish
+          value: da
+        - description: Dutch
+          value: nl
+        - description: English
+          value: en
+        - description: Finnish
+          value: fi
+        - description: French
+          value: fr
+        - description: German
+          value: de
+        - description: Italian
+          value: it
+        - description: Japanese
+          value: ja
+        - description: Korean
+          value: ko
+        - description: Norwegian (Bokmaal)
+          value: 'no'
+        - description: Polish
+          value: pl
+        - description: Portuguese (Portugal)
+          value: pt-PT
+        - description: Portuguese (Brazil)
+          value: pt-BR
+        - description: Russian
+          value: ru
+        - description: Spanish
+          value: es
+        - description: Swedish
+          value: sv
   KeywordMarkerTokenFilter:
     allOf:
       - $ref: '#/definitions/TokenFilter'
@@ -4381,6 +4486,56 @@ definitions:
         format: int32
         type: integer
     x-ms-discriminator-value: '#Microsoft.Azure.Search.LimitTokenFilter'
+  ListDataSourcesResult:
+    description: 'Response from a List Datasources request. If successful, it includes the full definitions of all datasources.'
+    properties:
+      value:
+        description: The datasources in the Search service.
+        items:
+          $ref: '#/definitions/DataSource'
+        readOnly: true
+        type: array
+        x-ms-client-name: DataSources
+  ListIndexersResult:
+    description: 'Response from a List Indexers request. If successful, it includes the full definitions of all indexers.'
+    properties:
+      value:
+        description: The indexers in the Search service.
+        items:
+          $ref: '#/definitions/Indexer'
+        readOnly: true
+        type: array
+        x-ms-client-name: Indexers
+  ListIndexesResult:
+    description: 'Response from a List Indexes request. If successful, it includes the full definitions of all indexes.'
+    properties:
+      value:
+        description: The indexes in the Search service.
+        items:
+          $ref: '#/definitions/Index'
+        readOnly: true
+        type: array
+        x-ms-client-name: Indexes
+  ListSkillsetsResult:
+    description: 'Response from a list Skillset request. If successful, it includes the full definitions of all skillsets.'
+    properties:
+      value:
+        description: The skillsets defined in the Search service.
+        items:
+          $ref: '#/definitions/Skillset'
+        readOnly: true
+        type: array
+        x-ms-client-name: Skillsets
+  ListSynonymMapsResult:
+    description: 'Response from a List SynonymMaps request. If successful, it includes the full definitions of all synonym maps.'
+    properties:
+      value:
+        description: The synonym maps in the Search service.
+        items:
+          $ref: '#/definitions/SynonymMap'
+        readOnly: true
+        type: array
+        x-ms-client-name: SynonymMaps
   MagnitudeScoringFunction:
     allOf:
       - $ref: '#/definitions/ScoringFunction'
@@ -4656,50 +4811,6 @@ definitions:
       - person
     type: string
     x-ms-external: true
-  NamedEntityRecognitionSkill:
-    allOf:
-      - $ref: '#/definitions/Skill'
-    description: Text analytics named entity recognition. This skill is deprecated in favor of EntityRecognitionSkill.
-    externalDocs:
-      url: 'https://docs.microsoft.com/azure/search/cognitive-search-skill-named-entity-recognition'
-    properties:
-      categories:
-        description: A list of named entity categories.
-        items:
-          $ref: '#/definitions/NamedEntityCategory'
-          x-nullable: false
-        type: array
-      defaultLanguageCode:
-        $ref: '#/definitions/NamedEntityRecognitionSkillLanguage'
-        description: A value indicating which language code to use. Default is en.
-      minimumPrecision:
-        description: A value between 0 and 1 to indicate the confidence of the results.
-        format: double
-        type: number
-        x-nullable: true
-    x-ms-discriminator-value: '#Microsoft.Skills.Text.NamedEntityRecognitionSkill'
-    x-ms-external: true
-  NamedEntityRecognitionSkillLanguage:
-    description: The language codes supported for input text by NamedEntityRecognitionSkill.
-    enum:
-      - ar
-      - cs
-      - da
-      - de
-      - en
-      - es
-      - fi
-      - fr
-      - he
-      - hu
-      - it
-      - ko
-      - pt-br
-      - pt
-    type: string
-    x-ms-enum:
-      modelAsString: false
-      name: NamedEntityRecognitionSkillLanguage
   OcrSkill:
     allOf:
       - $ref: '#/definitions/Skill'
@@ -4750,8 +4861,61 @@ definitions:
       - sk
     type: string
     x-ms-enum:
-      modelAsString: false
+      modelAsString: true
       name: OcrSkillLanguage
+      values:
+        - description: Chinese-Simplified
+          value: zh-Hans
+        - description: Chinese-Traditional
+          value: zh-Hant
+        - description: Czech
+          value: cs
+        - description: Danish
+          value: da
+        - description: Dutch
+          value: nl
+        - description: English
+          value: en
+        - description: Finnish
+          value: fi
+        - description: French
+          value: fr
+        - description: German
+          value: de
+        - description: Greek
+          value: el
+        - description: Hungarian
+          value: hu
+        - description: Italian
+          value: it
+        - description: Japanese
+          value: ja
+        - description: Korean
+          value: ko
+        - description: Norwegian (Bokmaal)
+          value: nb
+        - description: Polish
+          value: pl
+        - description: Portuguese
+          value: pt
+        - description: Russian
+          value: ru
+        - description: Spanish
+          value: es
+        - description: Swedish
+          value: sv
+        - description: Turkish
+          value: tr
+        - description: Arabic
+          value: ar
+        - description: Romanian
+          value: ro
+        - description: 'Serbian (Cyrillic, Serbia)'
+          value: sr-Cyrl
+        - description: 'Serbian (Latin, Serbia)'
+          value: sr-Latn
+        - description: Slovak
+          value: sk
   OutputFieldMappingEntry:
     description: Output field mapping for a skill.
     externalDocs:
@@ -4983,7 +5147,7 @@ definitions:
       url: 'http://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html#field_summary'
     type: string
     x-ms-enum:
-      modelAsString: false
+      modelAsString: true
       name: RegexFlags
   ResourceCounter:
     description: Represents a resource's usage and quota.
@@ -5042,7 +5206,7 @@ definitions:
     x-ms-enum:
       name: ScoringFunctionInterpolation
   ScoringProfile:
-    description: Defines parameters for an Azure Search index that influence scoring in search queries.
+    description: Defines parameters for a search index that influence scoring in search queries.
     externalDocs:
       url: 'https://docs.microsoft.com/rest/api/searchservice/Add-scoring-profiles-to-a-search-index'
     properties:
@@ -5096,8 +5260,39 @@ definitions:
       - tr
     type: string
     x-ms-enum:
-      modelAsString: false
+      modelAsString: true
       name: SentimentSkillLanguage
+      values:
+        - description: Danish
+          value: da
+        - description: Dutch
+          value: nl
+        - description: English
+          value: en
+        - description: Finnish
+          value: fi
+        - description: French
+          value: fr
+        - description: German
+          value: de
+        - description: Greek
+          value: el
+        - description: Italian
+          value: it
+        - description: Norwegian (Bokmaal)
+          value: 'no'
+        - description: Polish
+          value: pl
+        - description: Portuguese (Portugal)
+          value: pt-PT
+        - description: Russian
+          value: ru
+        - description: Spanish
+          value: es
+        - description: Swedish
+          value: sv
+        - description: Turkish
+          value: tr
   ServiceCounters:
     description: Represents service-level resource counters and quotas.
     properties:
@@ -5223,7 +5418,7 @@ definitions:
         description: 'The name of the skill which uniquely identifies it within the skillset. A skill with no name defined will be given a default name of its 1-based index in the skills array, prefixed with the character ''#''.'
         type: string
       outputs:
-        description: 'The output of a skill is either a field in an Azure Search index, or a value that can be consumed as an input by another skill.'
+        description: 'The output of a skill is either a field in a search index, or a value that can be consumed as an input by another skill.'
         items:
           $ref: '#/definitions/OutputFieldMappingEntry'
         type: array
@@ -5232,7 +5427,7 @@ definitions:
       - inputs
       - outputs
   Skillset:
-    description: A list of cognitive skills.
+    description: A list of skills.
     externalDocs:
       url: 'https://docs.microsoft.com/azure/search/cognitive-search-tutorial-blob'
     properties:
@@ -5241,8 +5436,9 @@ definitions:
         type: string
         x-ms-client-name: ETag
       cognitiveServices:
-        $ref: '#/definitions/CognitiveServices'
+        $ref: '#/definitions/CognitiveServicesAccount'
         description: Details about cognitive services to be used when running skills.
+        x-ms-client-name: CognitiveServicesAccount
       description:
         description: The description of the skillset.
         type: string
@@ -5258,16 +5454,6 @@ definitions:
       - name
       - description
       - skills
-  SkillsetListResult:
-    description: 'Response from a list Skillset request. If successful, it includes the full definitions of all skillsets.'
-    properties:
-      value:
-        description: The skillsets defined in the Search service.
-        items:
-          $ref: '#/definitions/Skillset'
-        readOnly: true
-        type: array
-        x-ms-client-name: Skillsets
   SnowballTokenFilter:
     allOf:
       - $ref: '#/definitions/TokenFilter'
@@ -5356,8 +5542,27 @@ definitions:
       - pt
     type: string
     x-ms-enum:
-      modelAsString: false
+      modelAsString: true
       name: SplitSkillLanguage
+      values:
+        - description: Danish
+          value: da
+        - description: German
+          value: de
+        - description: English
+          value: en
+        - description: Spanish
+          value: es
+        - description: Finnish
+          value: fi
+        - description: French
+          value: fr
+        - description: Italian
+          value: it
+        - description: Korean
+          value: ko
+        - description: Portuguese
+          value: pt
   SqlIntegratedChangeTrackingPolicy:
     allOf:
       - $ref: '#/definitions/DataChangeDetectionPolicy'
@@ -5600,7 +5805,7 @@ definitions:
       - searchMode
       - sourceFields
   SynonymMap:
-    description: Represents a synonym map definition in Azure Search.
+    description: Represents a synonym map definition.
     properties:
       '@odata.etag':
         description: The ETag of the synonym map.
@@ -5628,16 +5833,6 @@ definitions:
       - name
       - format
       - synonyms
-  SynonymMapListResult:
-    description: 'Response from a List SynonymMaps request. If successful, it includes the full definitions of all synonym maps.'
-    properties:
-      value:
-        description: The synonym maps in the Search service.
-        items:
-          $ref: '#/definitions/SynonymMap'
-        readOnly: true
-        type: array
-        x-ms-client-name: SynonymMaps
   SynonymTokenFilter:
     allOf:
       - $ref: '#/definitions/TokenFilter'
@@ -5788,8 +5983,135 @@ definitions:
       - yua
     type: string
     x-ms-enum:
-      modelAsString: false
+      modelAsString: true
       name: TextTranslationSkillLanguage
+      values:
+        - description: Afrikaans
+          value: af
+        - description: Arabic
+          value: ar
+        - description: Bangla
+          value: bn
+        - description: Bosnian (Latin)
+          value: bs
+        - description: Bulgarian
+          value: bg
+        - description: Cantonese (Traditional)
+          value: yue
+        - description: Catalan
+          value: ca
+        - description: Chinese Simplified
+          value: zh-Hans
+        - description: Chinese Traditional
+          value: zh-Hant
+        - description: Croatian
+          value: hr
+        - description: Czech
+          value: cs
+        - description: Danish
+          value: da
+        - description: Dutch
+          value: nl
+        - description: English
+          value: en
+        - description: Estonian
+          value: et
+        - description: Fijian
+          value: fj
+        - description: Filipino
+          value: fil
+        - description: Finnish
+          value: fi
+        - description: French
+          value: fr
+        - description: German
+          value: de
+        - description: Greek
+          value: el
+        - description: Haitian Creole
+          value: ht
+        - description: Hebrew
+          value: he
+        - description: Hindi
+          value: hi
+        - description: Hmong Daw
+          value: mww
+        - description: Hungarian
+          value: hu
+        - description: Icelandic
+          value: is
+        - description: Indonesian
+          value: id
+        - description: Italian
+          value: it
+        - description: Japanese
+          value: ja
+        - description: Kiswahili
+          value: sw
+        - description: Klingon
+          value: tlh
+        - description: Korean
+          value: ko
+        - description: Latvian
+          value: lv
+        - description: Lithuanian
+          value: lt
+        - description: Malagasy
+          value: mg
+        - description: Malay
+          value: ms
+        - description: Maltese
+          value: mt
+        - description: Norwegian
+          value: nb
+        - description: Persian
+          value: fa
+        - description: Polish
+          value: pl
+        - description: Portuguese
+          value: pt
+        - description: Queretaro Otomi
+          value: otq
+        - description: Romanian
+          value: ro
+        - description: Russian
+          value: ru
+        - description: Samoan
+          value: sm
+        - description: Serbian (Cyrillic)
+          value: sr-Cyrl
+        - description: Serbian (Latin)
+          value: sr-Latn
+        - description: Slovak
+          value: sk
+        - description: Slovenian
+          value: sl
+        - description: Spanish
+          value: es
+        - description: Swedish
+          value: sv
+        - description: Tahitian
+          value: ty
+        - description: Tamil
+          value: ta
+        - description: Telugu
+          value: te
+        - description: Thai
+          value: th
+        - description: Tongan
+          value: to
+        - description: Turkish
+          value: tr
+        - description: Ukrainian
+          value: uk
+        - description: Urdu
+          value: ur
+        - description: Vietnamese
+          value: vi
+        - description: Welsh
+          value: cy
+        - description: Yucatec Maya
+          value: yua
   TextWeights:
     description: Defines weights on index fields for which matches should boost scoring in search queries.
     properties:
@@ -5831,7 +6153,7 @@ definitions:
       - '@odata.type'
       - name
   TokenFilterName:
-    description: Defines the names of all token filters supported by Azure Search.
+    description: Defines the names of all token filters supported by Azure Cognitive Search.
     enum:
       - arabic_normalization
       - apostrophe
@@ -5871,8 +6193,111 @@ definitions:
       url: 'https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search'
     type: string
     x-ms-enum:
-      modelAsString: false
+      modelAsString: true
       name: TokenFilterName
+      values:
+        - description: 'A token filter that applies the Arabic normalizer to normalize the orthography. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ar/ArabicNormalizationFilter.html'
+          name: ArabicNormalization
+          value: arabic_normalization
+        - description: 'Strips all characters after an apostrophe (including the apostrophe itself). See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/tr/ApostropheFilter.html'
+          name: Apostrophe
+          value: apostrophe
+        - description: 'Converts alphabetic, numeric, and symbolic Unicode characters which are not in the first 127 ASCII characters (the "Basic Latin" Unicode block) into their ASCII equivalents, if such equivalents exist. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/ASCIIFoldingFilter.html'
+          name: AsciiFolding
+          value: asciifolding
+        - description: 'Forms bigrams of CJK terms that are generated from StandardTokenizer. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/cjk/CJKBigramFilter.html'
+          name: CjkBigram
+          value: cjk_bigram
+        - description: 'Normalizes CJK width differences. Folds fullwidth ASCII variants into the equivalent basic Latin, and half-width Katakana variants into the equivalent Kana. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/cjk/CJKWidthFilter.html'
+          name: CjkWidth
+          value: cjk_width
+        - description: 'Removes English possessives, and dots from acronyms. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/standard/ClassicFilter.html'
+          name: Classic
+          value: classic
+        - description: 'Construct bigrams for frequently occurring terms while indexing. Single terms are still indexed too, with bigrams overlaid. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/commongrams/CommonGramsFilter.html'
+          name: CommonGram
+          value: common_grams
+        - description: 'Generates n-grams of the given size(s) starting from the front or the back of an input token. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ngram/EdgeNGramTokenFilter.html'
+          name: EdgeNGram
+          value: edgeNGram_v2
+        - description: 'Removes elisions. For example, "l''avion" (the plane) will be converted to "avion" (plane). See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/util/ElisionFilter.html'
+          name: Elision
+          value: elision
+        - description: 'Normalizes German characters according to the heuristics of the German2 snowball algorithm. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/de/GermanNormalizationFilter.html'
+          name: GermanNormalization
+          value: german_normalization
+        - description: 'Normalizes text in Hindi to remove some differences in spelling variations. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/hi/HindiNormalizationFilter.html'
+          name: HindiNormalization
+          value: hindi_normalization
+        - description: 'Normalizes the Unicode representation of text in Indian languages. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/in/IndicNormalizationFilter.html'
+          name: IndicNormalization
+          value: indic_normalization
+        - description: 'Emits each incoming token twice, once as keyword and once as non-keyword. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/KeywordRepeatFilter.html'
+          name: KeywordRepeat
+          value: keyword_repeat
+        - description: 'A high-performance kstem filter for English. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/en/KStemFilter.html'
+          name: KStem
+          value: kstem
+        - description: 'Removes words that are too long or too short. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/LengthFilter.html'
+          name: Length
+          value: length
+        - description: 'Limits the number of tokens while indexing. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/LimitTokenCountFilter.html'
+          name: Limit
+          value: limit
+        - description: 'Normalizes token text to lower case. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/LowerCaseFilter.htm'
+          name: Lowercase
+          value: lowercase
+        - description: 'Generates n-grams of the given size(s). See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ngram/NGramTokenFilter.html'
+          name: NGram
+          value: nGram_v2
+        - description: 'Applies normalization for Persian. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/fa/PersianNormalizationFilter.html'
+          name: PersianNormalization
+          value: persian_normalization
+        - description: 'Create tokens for phonetic matches. See https://lucene.apache.org/core/4_10_3/analyzers-phonetic/org/apache/lucene/analysis/phonetic/package-tree.html'
+          name: Phonetic
+          value: phonetic
+        - description: 'Uses the Porter stemming algorithm to transform the token stream. See http://tartarus.org/~martin/PorterStemmer'
+          name: PorterStem
+          value: porter_stem
+        - description: 'Reverses the token string. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/reverse/ReverseStringFilter.html'
+          name: Reverse
+          value: reverse
+        - description: 'Normalizes use of the interchangeable Scandinavian characters. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/ScandinavianNormalizationFilter.html'
+          name: ScandinavianNormalization
+          value: scandinavian_normalization
+        - description: 'Folds Scandinavian characters åÅäæÄÆ-&gt;a and öÖøØ-&gt;o. It also discriminates against use of double vowels aa, ae, ao, oe and oo, leaving just the first one. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/ScandinavianFoldingFilter.html'
+          name: ScandinavianFoldingNormalization
+          value: scandinavian_folding
+        - description: 'Creates combinations of tokens as a single token. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/shingle/ShingleFilter.html'
+          name: Shingle
+          value: shingle
+        - description: 'A filter that stems words using a Snowball-generated stemmer. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/snowball/SnowballFilter.html'
+          name: Snowball
+          value: snowball
+        - description: 'Normalizes the Unicode representation of Sorani text. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ckb/SoraniNormalizationFilter.html'
+          name: SoraniNormalization
+          value: sorani_normalization
+        - description: 'Language specific stemming filter. See https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search#TokenFilters'
+          name: Stemmer
+          value: stemmer
+        - description: 'Removes stop words from a token stream. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/StopFilter.html'
+          name: Stopwords
+          value: stopwords
+        - description: 'Trims leading and trailing whitespace from tokens. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/TrimFilter.html'
+          name: Trim
+          value: trim
+        - description: 'Truncates the terms to a specific length. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/TruncateTokenFilter.html'
+          name: Truncate
+          value: truncate
+        - description: 'Filters out tokens with same text as the previous token. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/RemoveDuplicatesTokenFilter.html'
+          name: Unique
+          value: unique
+        - description: 'Normalizes token text to upper case. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/UpperCaseFilter.html'
+          name: Uppercase
+          value: uppercase
+        - description: Splits words into subwords and performs optional transformations on subword groups.
+          name: WordDelimiter
+          value: word_delimiter
   TokenInfo:
     description: Information about a token returned by an analyzer.
     properties:
@@ -5912,7 +6337,7 @@ definitions:
       - '@odata.type'
       - name
   TokenizerName:
-    description: Defines the names of all tokenizers supported by Azure Search.
+    description: Defines the names of all tokenizers supported by Azure Cognitive Search.
     enum:
       - classic
       - edgeNGram
@@ -5931,8 +6356,48 @@ definitions:
       url: 'https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search'
     type: string
     x-ms-enum:
-      modelAsString: false
+      modelAsString: true
       name: TokenizerName
+      values:
+        - description: 'Grammar-based tokenizer that is suitable for processing most European-language documents. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/standard/ClassicTokenizer.html'
+          name: Classic
+          value: classic
+        - description: 'Tokenizes the input from an edge into n-grams of the given size(s). See https://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ngram/EdgeNGramTokenizer.html'
+          name: EdgeNGram
+          value: edgeNGram
+        - description: 'Emits the entire input as a single token. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/KeywordTokenizer.html'
+          name: Keyword
+          value: keyword_v2
+        - description: 'Divides text at non-letters. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/LetterTokenizer.html'
+          name: Letter
+          value: letter
+        - description: 'Divides text at non-letters and converts them to lower case. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/LowerCaseTokenizer.html'
+          name: Lowercase
+          value: lowercase
+        - description: Divides text using language-specific rules.
+          name: MicrosoftLanguageTokenizer
+          value: microsoft_language_tokenizer
+        - description: Divides text using language-specific rules and reduces words to their base forms.
+          name: MicrosoftLanguageStemmingTokenizer
+          value: microsoft_language_stemming_tokenizer
+        - description: 'Tokenizes the input into n-grams of the given size(s). See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ngram/NGramTokenizer.html'
+          name: NGram
+          value: nGram
+        - description: 'Tokenizer for path-like hierarchies. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/path/PathHierarchyTokenizer.html'
+          name: PathHierarchy
+          value: path_hierarchy_v2
+        - description: 'Tokenizer that uses regex pattern matching to construct distinct tokens. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/pattern/PatternTokenizer.html'
+          name: Pattern
+          value: pattern
+        - description: 'Standard Lucene analyzer; Composed of the standard tokenizer, lowercase filter and stop filter. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/standard/StandardTokenizer.html'
+          name: Standard
+          value: standard_v2
+        - description: 'Tokenizes urls and emails as one token. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/standard/UAX29URLEmailTokenizer.html'
+          name: UaxUrlEmail
+          value: uax_url_email
+        - description: 'Divides text at whitespace. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/WhitespaceTokenizer.html'
+          name: Whitespace
+          value: whitespace
   TruncateTokenFilter:
     allOf:
       - $ref: '#/definitions/TokenFilter'

@@ -715,18 +715,18 @@ definitions:
   AzureMLLinkedService:
     allOf:
       - $ref: '#/definitions/LinkedService'
-    description: Azure ML Web Service linked service.
+    description: Azure ML Studio Web Service linked service.
     properties:
       typeProperties:
         $ref: '#/definitions/AzureMLLinkedServiceTypeProperties'
-        description: Azure ML Web Service linked service properties.
+        description: Azure ML Studio Web Service linked service properties.
         x-ms-client-flatten: true
     required:
       - typeProperties
     type: object
     x-ms-discriminator-value: AzureML
   AzureMLLinkedServiceTypeProperties:
-    description: Azure ML Web Service linked service properties.
+    description: Azure ML Studio Web Service linked service properties.
     properties:
       apiKey:
         description: The base definition of a secret type.
@@ -742,10 +742,10 @@ definitions:
         description: 'The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).'
         type: object
       mlEndpoint:
-        description: 'The Batch Execution REST URL for an Azure ML Web Service endpoint. Type: string (or Expression with resultType string).'
+        description: 'The Batch Execution REST URL for an Azure ML Studio Web Service endpoint. Type: string (or Expression with resultType string).'
         type: object
       servicePrincipalId:
-        description: 'The ID of the service principal used to authenticate against the ARM-based updateResourceEndpoint of an Azure ML web service. Type: string (or Expression with resultType string).'
+        description: 'The ID of the service principal used to authenticate against the ARM-based updateResourceEndpoint of an Azure ML Studio web service. Type: string (or Expression with resultType string).'
         type: object
       servicePrincipalKey:
         description: The base definition of a secret type.
@@ -761,11 +761,59 @@ definitions:
         description: 'The name or ID of the tenant to which the service principal belongs. Type: string (or Expression with resultType string).'
         type: object
       updateResourceEndpoint:
-        description: 'The Update Resource REST URL for an Azure ML Web Service endpoint. Type: string (or Expression with resultType string).'
+        description: 'The Update Resource REST URL for an Azure ML Studio Web Service endpoint. Type: string (or Expression with resultType string).'
         type: object
     required:
       - mlEndpoint
       - apiKey
+  AzureMLServiceLinkedService:
+    allOf:
+      - $ref: '#/definitions/LinkedService'
+    description: Azure ML Service linked service.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/AzureMLServiceLinkedServiceTypeProperties'
+        description: Azure ML Service linked service properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: AzureMLService
+  AzureMLServiceLinkedServiceTypeProperties:
+    description: Azure ML Service linked service properties.
+    properties:
+      encryptedCredential:
+        description: 'The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).'
+        type: object
+      mlWorkspaceName:
+        description: 'Azure ML Service workspace name. Type: string (or Expression with resultType string).'
+        type: object
+      resourceGroupName:
+        description: 'Azure ML Service workspace resource group name. Type: string (or Expression with resultType string).'
+        type: object
+      servicePrincipalId:
+        description: 'The ID of the service principal used to authenticate against the endpoint of a published Azure ML Service pipeline. Type: string (or Expression with resultType string).'
+        type: object
+      servicePrincipalKey:
+        description: The base definition of a secret type.
+        discriminator: type
+        properties:
+          type:
+            description: Type of the secret.
+            type: string
+        required:
+          - type
+        type: object
+      subscriptionId:
+        description: 'Azure ML Service workspace subscription ID. Type: string (or Expression with resultType string).'
+        type: object
+      tenant:
+        description: 'The name or ID of the tenant to which the service principal belongs. Type: string (or Expression with resultType string).'
+        type: object
+    required:
+      - subscriptionId
+      - resourceGroupName
+      - mlWorkspaceName
   AzureMariaDBLinkedService:
     allOf:
       - $ref: '#/definitions/LinkedService'
@@ -1430,10 +1478,11 @@ definitions:
     description: Common Data Service for Apps linked service properties.
     properties:
       authenticationType:
-        description: 'The authentication type to connect to Common Data Service for Apps server. ''Office365'' for online scenario, ''Ifd'' for on-premises with Ifd scenario. Type: string (or Expression with resultType string).'
+        description: 'The authentication type to connect to Common Data Service for Apps server. ''Office365'' for online scenario, ''Ifd'' for on-premises with Ifd scenario. ''AADServicePrincipal'' for Server-To-Server authentication in online scenario. Type: string (or Expression with resultType string).'
         enum:
           - Office365
           - Ifd
+          - AADServicePrincipal
         type: string
         x-ms-enum:
           modelAsString: true
@@ -1469,6 +1518,28 @@ definitions:
       port:
         description: 'The port of on-premises Common Data Service for Apps server. The property is required for on-prem and not allowed for online. Default is 443. Type: integer (or Expression with resultType integer), minimum: 0.'
         type: object
+      servicePrincipalCredential:
+        description: The base definition of a secret type.
+        discriminator: type
+        properties:
+          type:
+            description: Type of the secret.
+            type: string
+        required:
+          - type
+        type: object
+      servicePrincipalCredentialType:
+        description: 'The service principal credential type to use in Server-To-Server authentication. ''ServicePrincipalKey'' for key/secret, ''ServicePrincipalCert'' for certificate. Type: string (or Expression with resultType string).'
+        enum:
+          - ServicePrincipalKey
+          - ServicePrincipalCert
+        type: object
+        x-ms-enum:
+          modelAsString: true
+          name: DynamicsServicePrincipalCredentialType
+      servicePrincipalId:
+        description: 'The client ID of the application in Azure Active Directory used for Server-To-Server authentication. Type: string (or Expression with resultType string).'
+        type: object
       serviceUri:
         description: 'The URL to the Microsoft Common Data Service for Apps server. The property is required for on-line and not allowed for on-prem. Type: string (or Expression with resultType string).'
         type: object
@@ -1478,7 +1549,6 @@ definitions:
     required:
       - deploymentType
       - authenticationType
-      - username
   ConcurLinkedService:
     allOf:
       - $ref: '#/definitions/LinkedService'
@@ -1691,11 +1761,17 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: Db2AuthenticationType
+      certificateCommonName:
+        description: 'Certificate Common Name when TLS is enabled. Type: string (or Expression with resultType string).'
+        type: object
       database:
         description: 'Database name for connection. Type: string (or Expression with resultType string).'
         type: object
       encryptedCredential:
         description: 'The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).'
+        type: object
+      packageCollection:
+        description: 'Under where packages are created when querying database. Type: string (or Expression with resultType string).'
         type: object
       password:
         description: The base definition of a secret type.
@@ -1845,10 +1921,11 @@ definitions:
     description: Dynamics CRM linked service properties.
     properties:
       authenticationType:
-        description: 'The authentication type to connect to Dynamics CRM server. ''Office365'' for online scenario, ''Ifd'' for on-premises with Ifd scenario. Type: string (or Expression with resultType string).'
+        description: 'The authentication type to connect to Dynamics CRM server. ''Office365'' for online scenario, ''Ifd'' for on-premises with Ifd scenario, ''AADServicePrincipal'' for Server-To-Server authentication in online scenario. Type: string (or Expression with resultType string).'
         enum:
           - Office365
           - Ifd
+          - AADServicePrincipal
         type: string
         x-ms-enum:
           modelAsString: true
@@ -1884,6 +1961,28 @@ definitions:
       port:
         description: 'The port of on-premises Dynamics CRM server. The property is required for on-prem and not allowed for online. Default is 443. Type: integer (or Expression with resultType integer), minimum: 0.'
         type: object
+      servicePrincipalCredential:
+        description: The base definition of a secret type.
+        discriminator: type
+        properties:
+          type:
+            description: Type of the secret.
+            type: string
+        required:
+          - type
+        type: object
+      servicePrincipalCredentialType:
+        description: 'The service principal credential type to use in Server-To-Server authentication. ''ServicePrincipalKey'' for key/secret, ''ServicePrincipalCert'' for certificate. Type: string (or Expression with resultType string).'
+        enum:
+          - ServicePrincipalKey
+          - ServicePrincipalCert
+        type: object
+        x-ms-enum:
+          modelAsString: true
+          name: DynamicsServicePrincipalCredentialType
+      servicePrincipalId:
+        description: 'The client ID of the application in Azure Active Directory used for Server-To-Server authentication. Type: string (or Expression with resultType string).'
+        type: object
       serviceUri:
         description: 'The URL to the Microsoft Dynamics CRM server. The property is required for on-line and not allowed for on-prem. Type: string (or Expression with resultType string).'
         type: object
@@ -1893,7 +1992,6 @@ definitions:
     required:
       - deploymentType
       - authenticationType
-      - username
   DynamicsLinkedService:
     allOf:
       - $ref: '#/definitions/LinkedService'
@@ -1911,10 +2009,11 @@ definitions:
     description: Dynamics linked service properties.
     properties:
       authenticationType:
-        description: 'The authentication type to connect to Dynamics server. ''Office365'' for online scenario, ''Ifd'' for on-premises with Ifd scenario. Type: string (or Expression with resultType string).'
+        description: 'The authentication type to connect to Dynamics server. ''Office365'' for online scenario, ''Ifd'' for on-premises with Ifd scenario, ''AADServicePrincipal'' for Server-To-Server authentication in online scenario. Type: string (or Expression with resultType string).'
         enum:
           - Office365
           - Ifd
+          - AADServicePrincipal
         type: object
         x-ms-enum:
           modelAsString: true
@@ -1950,6 +2049,28 @@ definitions:
       port:
         description: 'The port of on-premises Dynamics server. The property is required for on-prem and not allowed for online. Default is 443. Type: integer (or Expression with resultType integer), minimum: 0.'
         type: object
+      servicePrincipalCredential:
+        description: The base definition of a secret type.
+        discriminator: type
+        properties:
+          type:
+            description: Type of the secret.
+            type: string
+        required:
+          - type
+        type: object
+      servicePrincipalCredentialType:
+        description: 'The service principal credential type to use in Server-To-Server authentication. ''ServicePrincipalKey'' for key/secret, ''ServicePrincipalCert'' for certificate. Type: string (or Expression with resultType string).'
+        enum:
+          - ServicePrincipalKey
+          - ServicePrincipalCert
+        type: object
+        x-ms-enum:
+          modelAsString: true
+          name: DynamicsServicePrincipalCredentialType
+      servicePrincipalId:
+        description: 'The client ID of the application in Azure Active Directory used for Server-To-Server authentication. Type: string (or Expression with resultType string).'
+        type: object
       serviceUri:
         description: 'The URL to the Microsoft Dynamics server. The property is required for on-line and not allowed for on-prem. Type: string (or Expression with resultType string).'
         type: object
@@ -1959,7 +2080,6 @@ definitions:
     required:
       - deploymentType
       - authenticationType
-      - username
   EloquaLinkedService:
     allOf:
       - $ref: '#/definitions/LinkedService'
@@ -2128,14 +2248,7 @@ definitions:
         description: The Client customer ID of the AdWords account that you want to fetch report data for.
         type: object
       clientId:
-        description: The base definition of a secret type.
-        discriminator: type
-        properties:
-          type:
-            description: Type of the secret.
-            type: string
-        required:
-          - type
+        description: 'The client id of the google application used to acquire the refresh token. Type: string (or Expression with resultType string).'
         type: object
       clientSecret:
         description: The base definition of a secret type.
@@ -2215,14 +2328,7 @@ definitions:
           modelAsString: true
           name: GoogleBigQueryAuthenticationType
       clientId:
-        description: The base definition of a secret type.
-        discriminator: type
-        properties:
-          type:
-            description: Type of the secret.
-            type: string
-        required:
-          - type
+        description: 'The client id of the google application used to acquire the refresh token. Type: string (or Expression with resultType string).'
         type: object
       clientSecret:
         description: The base definition of a secret type.
@@ -3511,14 +3617,7 @@ definitions:
     description: MySQL linked service properties.
     properties:
       connectionString:
-        description: The base definition of a secret type.
-        discriminator: type
-        properties:
-          type:
-            description: Type of the secret.
-            type: string
-        required:
-          - type
+        description: The connection string.
         type: object
       encryptedCredential:
         description: 'The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).'
@@ -4071,14 +4170,7 @@ definitions:
     description: PostgreSQL linked service properties.
     properties:
       connectionString:
-        description: The base definition of a secret type.
-        discriminator: type
-        properties:
-          type:
-            description: Type of the secret.
-            type: string
-        required:
-          - type
+        description: The connection string.
         type: object
       encryptedCredential:
         description: 'The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).'

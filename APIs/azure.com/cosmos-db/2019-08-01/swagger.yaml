@@ -268,12 +268,19 @@ paths:
                         maxIntervalInSeconds: 5
                         maxStalenessPrefix: 100
                       databaseAccountOfferType: Standard
+                      disableKeyBasedMetadataWriteAccess: false
                       documentEndpoint: 'https://ddb1.documents.azure.com:443/'
                       failoverPolicies:
                         - failoverPriority: 0
                           id: ddb1-eastus
                           locationName: East US
                       ipRangeFilter: ''
+                      locations:
+                        - documentEndpoint: 'https://ddb1-eastus.documents.azure.com:443/'
+                          failoverPriority: 0
+                          id: ddb1-eastus
+                          locationName: East US
+                          provisioningState: Succeeded
                       provisioningState: Succeeded
                       readLocations:
                         - documentEndpoint: 'https://ddb1-eastus.documents.azure.com:443/'
@@ -324,12 +331,19 @@ paths:
                         maxIntervalInSeconds: 5
                         maxStalenessPrefix: 100
                       databaseAccountOfferType: Standard
+                      disableKeyBasedMetadataWriteAccess: false
                       documentEndpoint: 'https://ddb1.documents.azure.com:443/'
                       failoverPolicies:
                         - failoverPriority: 0
                           id: ddb1-eastus
                           locationName: East US
                       ipRangeFilter: ''
+                      locations:
+                        - documentEndpoint: 'https://ddb1-eastus.documents.azure.com:443/'
+                          failoverPriority: 0
+                          id: ddb1-eastus
+                          locationName: East US
+                          provisioningState: Succeeded
                       provisioningState: Succeeded
                       readLocations:
                         - documentEndpoint: 'https://ddb1-eastus.documents.azure.com:443/'
@@ -405,6 +419,7 @@ paths:
                     maxIntervalInSeconds: 5
                     maxStalenessPrefix: 100
                   databaseAccountOfferType: Standard
+                  disableKeyBasedMetadataWriteAccess: false
                   documentEndpoint: 'https://ddb1.documents.azure.com:443/'
                   failoverPolicies:
                     - failoverPriority: 0
@@ -412,6 +427,12 @@ paths:
                       locationName: East US
                   ipRangeFilter: ''
                   isVirtualNetworkFilterEnabled: false
+                  locations:
+                    - documentEndpoint: 'https://ddb1-eastus.documents.azure.com:443/'
+                      failoverPriority: 0
+                      id: ddb1-eastus
+                      locationName: East US
+                      provisioningState: Succeeded
                   provisioningState: Succeeded
                   readLocations:
                     - documentEndpoint: 'https://ddb1-eastus.documents.azure.com:443/'
@@ -429,22 +450,22 @@ paths:
                 tags: {}
                 type: Microsoft.DocumentDB/databaseAccounts
     patch:
-      description: Patches the properties of an existing Azure Cosmos DB database account.
-      operationId: DatabaseAccounts_Patch
+      description: Updates the properties of an existing Azure Cosmos DB database account.
+      operationId: DatabaseAccounts_Update
       parameters:
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/resourceGroupNameParameter'
         - $ref: '#/parameters/accountNameParameter'
         - $ref: '#/parameters/apiVersionParameter'
-        - description: The tags parameter to patch for the current database account.
+        - description: The parameters to provide for the current database account.
           in: body
           name: updateParameters
           required: true
           schema:
-            $ref: '#/definitions/DatabaseAccountPatchParameters'
+            $ref: '#/definitions/DatabaseAccountUpdateParameters'
       responses:
         '200':
-          description: The properties of the database account were patched successfully.
+          description: The database account update operation will complete asynchronously.
           schema:
             $ref: '#/definitions/DatabaseAccountGetResults'
       x-ms-examples:
@@ -455,6 +476,17 @@ paths:
             resourceGroupName: rg1
             subscriptionId: subid
             updateParameters:
+              location: westus
+              properties:
+                consistencyPolicy:
+                  defaultConsistencyLevel: BoundedStaleness
+                  maxIntervalInSeconds: 10
+                  maxStalenessPrefix: 200
+                ipRangeFilter: 10.10.10.10
+                isVirtualNetworkFilterEnabled: true
+                virtualNetworkRules:
+                  - id: /subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1
+                    ignoreMissingVNetServiceEndpoint: false
               tags:
                 dept: finance
           responses:
@@ -466,16 +498,24 @@ paths:
                 name: ddb1
                 properties:
                   consistencyPolicy:
-                    defaultConsistencyLevel: Session
-                    maxIntervalInSeconds: 5
-                    maxStalenessPrefix: 100
+                    defaultConsistencyLevel: BoundedStaleness
+                    maxIntervalInSeconds: 10
+                    maxStalenessPrefix: 200
                   databaseAccountOfferType: Standard
+                  disableKeyBasedMetadataWriteAccess: false
                   documentEndpoint: 'https://ddb1.documents.azure.com:443/'
                   failoverPolicies:
                     - failoverPriority: 0
                       id: ddb1-eastus
                       locationName: East US
-                  ipRangeFilter: ''
+                  ipRangeFilter: 10.10.10.10
+                  isVirtualNetworkFilterEnabled: true
+                  locations:
+                    - documentEndpoint: 'https://ddb1-eastus.documents.azure.com:443/'
+                      failoverPriority: 0
+                      id: ddb1-eastus
+                      locationName: East US
+                      provisioningState: Succeeded
                   provisioningState: Succeeded
                   readLocations:
                     - documentEndpoint: 'https://ddb1-eastus.documents.azure.com:443/'
@@ -483,17 +523,21 @@ paths:
                       id: ddb1-eastus
                       locationName: East US
                       provisioningState: Succeeded
+                  virtualNetworkRules:
+                    - id: /subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1
+                      ignoreMissingVNetServiceEndpoint: false
                   writeLocations:
                     - documentEndpoint: 'https://ddb1-eastus.documents.azure.com:443/'
                       failoverPriority: 0
                       id: ddb1-eastus
                       locationName: East US
                       provisioningState: Succeeded
-                tags: {}
+                tags:
+                  dept: finance
                 type: Microsoft.DocumentDB/databaseAccounts
       x-ms-long-running-operation: true
     put:
-      description: Creates or updates an Azure Cosmos DB database account.
+      description: Creates or updates an Azure Cosmos DB database account. The "Update" method is preferred when performing updates on an account.
       operationId: DatabaseAccounts_CreateOrUpdate
       parameters:
         - $ref: '#/parameters/subscriptionIdParameter'
@@ -553,6 +597,7 @@ paths:
                     maxIntervalInSeconds: 10
                     maxStalenessPrefix: 200
                   databaseAccountOfferType: Standard
+                  disableKeyBasedMetadataWriteAccess: false
                   failoverPolicies:
                     - failoverPriority: 0
                       id: ddb1-southcentralus
@@ -562,6 +607,17 @@ paths:
                       locationName: East US
                   ipRangeFilter: 10.10.10.10
                   isVirtualNetworkFilterEnabled: true
+                  locations:
+                    - failoverPriority: 0
+                      id: ddb1-southcentralus
+                      isZoneRedundant: false
+                      locationName: South Central US
+                      provisioningState: Initializing
+                    - failoverPriority: 1
+                      id: ddb1-eastus
+                      isZoneRedundant: false
+                      locationName: East US
+                      provisioningState: Initializing
                   provisioningState: Initializing
                   readLocations:
                     - failoverPriority: 0
@@ -611,11 +667,18 @@ paths:
                     maxIntervalInSeconds: 5
                     maxStalenessPrefix: 100
                   databaseAccountOfferType: Standard
+                  disableKeyBasedMetadataWriteAccess: false
                   failoverPolicies:
                     - failoverPriority: 0
                       id: ddb1-southcentralus
                       locationName: South Central US
                   ipRangeFilter: ''
+                  locations:
+                    - failoverPriority: 0
+                      id: ddb1-southcentralus
+                      isZoneRedundant: false
+                      locationName: South Central US
+                      provisioningState: Initializing
                   provisioningState: Initializing
                   readLocations:
                     - failoverPriority: 0
@@ -661,7 +724,8 @@ paths:
                     location: West US
                     name: keyspaceName
                     properties:
-                      id: keyspaceName
+                      resource:
+                        id: keyspaceName
                     tags: {}
                     type: Microsoft.DocumentDB/databaseAccounts/cassandraKeyspaces
       x-ms-pageable:
@@ -722,10 +786,11 @@ paths:
                 location: West US
                 name: keyspaceName
                 properties:
-                  _etag: '"00005900-0000-0000-0000-56f9a2630000"'
-                  _rid: PD5DALigDgw=
-                  _ts: 1459200611
-                  id: keyspaceName
+                  resource:
+                    _etag: '"00005900-0000-0000-0000-56f9a2630000"'
+                    _rid: PD5DALigDgw=
+                    _ts: 1459200611
+                    id: keyspaceName
                 tags: {}
                 type: Microsoft.DocumentDB/databaseAccounts/cassandraKeyspaces
     put:
@@ -772,7 +837,8 @@ paths:
                 location: West US
                 name: keyspaceName
                 properties:
-                  id: keyspaceName
+                  resource:
+                    id: keyspaceName
                 tags: {}
                 type: Microsoft.DocumentDB/databaseAccounts/cassandraKeyspaces
             '202': {}
@@ -808,17 +874,18 @@ paths:
                     location: West US
                     name: tableName
                     properties:
-                      defaultTtl: 100
-                      id: tableName
-                      schema:
-                        clusterKeys:
-                          - name: columnA
-                            orderBy: Asc
-                        columns:
-                          - name: columnA
-                            type: Ascii
-                        partitionKeys:
-                          - name: columnA
+                      resource:
+                        defaultTtl: 100
+                        id: tableName
+                        schema:
+                          clusterKeys:
+                            - name: columnA
+                              orderBy: Asc
+                          columns:
+                            - name: columnA
+                              type: Ascii
+                          partitionKeys:
+                            - name: columnA
                     tags: {}
                     type: Microsoft.DocumentDB/databaseAccounts/cassandraKeyspaces/cassandraTables
       x-ms-pageable:
@@ -883,20 +950,21 @@ paths:
                 location: West US
                 name: tableName
                 properties:
-                  _etag: '"00005900-0000-0000-0000-56f9a2630000"'
-                  _rid: PD5DALigDgw=
-                  _ts: 1459200611
-                  defaultTtl: 100
-                  id: tableName
-                  schema:
-                    clusterKeys:
-                      - name: columnA
-                        orderBy: Asc
-                    columns:
-                      - name: columnA
-                        type: Ascii
-                    partitionKeys:
-                      - name: columnA
+                  resource:
+                    _etag: '"00005900-0000-0000-0000-56f9a2630000"'
+                    _rid: PD5DALigDgw=
+                    _ts: 1459200611
+                    defaultTtl: 100
+                    id: tableName
+                    schema:
+                      clusterKeys:
+                        - name: columnA
+                          orderBy: Asc
+                      columns:
+                        - name: columnA
+                          type: Ascii
+                      partitionKeys:
+                        - name: columnA
                 tags: {}
                 type: Microsoft.DocumentDB/databaseAccounts/cassandraKeyspaces/cassandraTables
     put:
@@ -955,17 +1023,18 @@ paths:
                 location: West US
                 name: tableName
                 properties:
-                  defaultTtl: 100
-                  id: tableName
-                  schema:
-                    clusterKeys:
-                      - name: columnA
-                        orderBy: Asc
-                    columns:
-                      - name: columnA
-                        type: Ascii
-                    partitionKeys:
-                      - name: columnA
+                  resource:
+                    defaultTtl: 100
+                    id: tableName
+                    schema:
+                      clusterKeys:
+                        - name: columnA
+                          orderBy: Asc
+                      columns:
+                        - name: columnA
+                          type: Ascii
+                      partitionKeys:
+                        - name: columnA
                 tags: {}
                 type: Microsoft.DocumentDB/databaseAccounts/cassandraKeyspaces/cassandraTables
             '202': {}
@@ -1002,9 +1071,13 @@ paths:
                 location: West US
                 name: default
                 properties:
-                  minimumThroughput: '400'
-                  offerReplacePending: 'true'
-                  throughput: 400
+                  resource:
+                    _etag: '"00005900-0000-0000-0000-56f9a2630000"'
+                    _rid: PD5DALigDgw=
+                    _ts: 1459200611
+                    minimumThroughput: '400'
+                    offerReplacePending: 'true'
+                    throughput: 400
                 tags: {}
                 type: Microsoft.DocumentDB/databaseAccounts/cassandraKeyspaces/cassandraTables/throughputSettings
     put:
@@ -1051,9 +1124,13 @@ paths:
                 id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/cassandraKeyspaces/keyspaceName/cassandraTables/tableName/throughputSettings/default
                 name: default
                 properties:
-                  minimumThroughput: '400'
-                  offerReplacePending: 'true'
-                  throughput: 400
+                  resource:
+                    _etag: '"00005900-0000-0000-0000-56f9a2630000"'
+                    _rid: PD5DALigDgw=
+                    _ts: 1459200611
+                    minimumThroughput: '400'
+                    offerReplacePending: 'true'
+                    throughput: 400
                 type: Microsoft.DocumentDB/databaseAccounts/cassandraKeyspaces/cassandraTables/throughputSettings
             '202': {}
       x-ms-long-running-operation: true
@@ -1087,9 +1164,13 @@ paths:
                 location: West US
                 name: default
                 properties:
-                  minimumThroughput: '400'
-                  offerReplacePending: 'true'
-                  throughput: 400
+                  resource:
+                    _etag: '"00005900-0000-0000-0000-56f9a2630000"'
+                    _rid: PD5DALigDgw=
+                    _ts: 1459200611
+                    minimumThroughput: '400'
+                    offerReplacePending: 'true'
+                    throughput: 400
                 tags: {}
                 type: Microsoft.DocumentDB/databaseAccounts/cassandraKeyspaces/throughputSettings
     put:
@@ -1135,9 +1216,13 @@ paths:
                 location: West US
                 name: default
                 properties:
-                  minimumThroughput: '400'
-                  offerReplacePending: 'true'
-                  throughput: 400
+                  resource:
+                    _etag: '"00005900-0000-0000-0000-56f9a2630000"'
+                    _rid: PD5DALigDgw=
+                    _ts: 1459200611
+                    minimumThroughput: '400'
+                    offerReplacePending: 'true'
+                    throughput: 400
                 tags: {}
                 type: Microsoft.DocumentDB/databaseAccounts/cassandraKeyspaces/throughputSettings
             '202': {}
@@ -1638,10 +1723,11 @@ paths:
                     location: West US
                     name: databaseName
                     properties:
-                      _etag: '"00000a00-0000-0000-0000-56672f920000"'
-                      _rid: CqNBAA==
-                      _ts: 1449602962
-                      id: databaseName
+                      resource:
+                        _etag: '"00000a00-0000-0000-0000-56672f920000"'
+                        _rid: CqNBAA==
+                        _ts: 1449602962
+                        id: databaseName
                     tags: {}
                     type: Microsoft.DocumentDB/databaseAccounts/gremlinDatabases
       x-ms-pageable:
@@ -1702,10 +1788,11 @@ paths:
                 location: West US
                 name: databaseName
                 properties:
-                  _etag: '"00000a00-0000-0000-0000-56672f920000"'
-                  _rid: CqNBAA==
-                  _ts: 1449602962
-                  id: databaseName
+                  resource:
+                    _etag: '"00000a00-0000-0000-0000-56672f920000"'
+                    _rid: CqNBAA==
+                    _ts: 1449602962
+                    id: databaseName
                 tags: {}
                 type: Microsoft.DocumentDB/databaseAccounts/gremlinDatabases
     put:
@@ -1752,10 +1839,11 @@ paths:
                 location: West US
                 name: databaseName
                 properties:
-                  _etag: '"00000a00-0000-0000-0000-56672f920000"'
-                  _rid: CqNBAA==
-                  _ts: 1449602962
-                  id: databaseName
+                  resource:
+                    _etag: '"00000a00-0000-0000-0000-56672f920000"'
+                    _rid: CqNBAA==
+                    _ts: 1449602962
+                    id: databaseName
                 tags: {}
                 type: Microsoft.DocumentDB/databaseAccounts/gremlinDatabases
             '202': {}
@@ -1790,35 +1878,36 @@ paths:
                   - id: testgrf
                     name: testgrf
                     properties:
-                      _etag: '"00005900-0000-0000-0000-56f9a2630000"'
-                      _rid: PD5DALigDgw=
-                      _ts: 1459200611
-                      conflictResolutionPolicy:
-                        conflictResolutionPath: /path
-                        mode: LastWriterWins
-                      defaultTtl: 100
-                      id: testgrf
-                      indexingPolicy:
-                        automatic: true
-                        excludedPaths: []
-                        includedPaths:
-                          - indexes:
-                              - dataType: String
-                                kind: Range
-                                precision: -1
-                              - dataType: Number
-                                kind: Range
-                                precision: -1
-                            path: /*
-                        indexingMode: Consistent
-                      partitionKey:
-                        kind: Hash
-                        paths:
-                          - /AccountNumber
-                      uniqueKeyPolicy:
-                        uniqueKeys:
-                          - paths:
-                              - /testPath
+                      resource:
+                        _etag: '"00005900-0000-0000-0000-56f9a2630000"'
+                        _rid: PD5DALigDgw=
+                        _ts: 1459200611
+                        conflictResolutionPolicy:
+                          conflictResolutionPath: /path
+                          mode: LastWriterWins
+                        defaultTtl: 100
+                        id: testgrf
+                        indexingPolicy:
+                          automatic: true
+                          excludedPaths: []
+                          includedPaths:
+                            - indexes:
+                                - dataType: String
+                                  kind: Range
+                                  precision: -1
+                                - dataType: Number
+                                  kind: Range
+                                  precision: -1
+                              path: /*
+                          indexingMode: Consistent
+                        partitionKey:
+                          kind: Hash
+                          paths:
+                            - /AccountNumber
+                        uniqueKeyPolicy:
+                          uniqueKeys:
+                            - paths:
+                                - /testPath
                     type: Microsoft.DocumentDB/databaseAccounts/apis/databases/graphs
       x-ms-pageable:
         nextLinkName: null
@@ -1881,35 +1970,36 @@ paths:
                 id: graphName
                 name: graphName
                 properties:
-                  _etag: '"00005900-0000-0000-0000-56f9a2630000"'
-                  _rid: PD5DALigDgw=
-                  _ts: 1459200611
-                  conflictResolutionPolicy:
-                    conflictResolutionPath: /path
-                    mode: LastWriterWins
-                  defaultTtl: 100
-                  id: graphName
-                  indexingPolicy:
-                    automatic: true
-                    excludedPaths: []
-                    includedPaths:
-                      - indexes:
-                          - dataType: String
-                            kind: Range
-                            precision: -1
-                          - dataType: Number
-                            kind: Range
-                            precision: -1
-                        path: /*
-                    indexingMode: Consistent
-                  partitionKey:
-                    kind: Hash
-                    paths:
-                      - /AccountNumber
-                  uniqueKeyPolicy:
-                    uniqueKeys:
-                      - paths:
-                          - /testPath
+                  resource:
+                    _etag: '"00005900-0000-0000-0000-56f9a2630000"'
+                    _rid: PD5DALigDgw=
+                    _ts: 1459200611
+                    conflictResolutionPolicy:
+                      conflictResolutionPath: /path
+                      mode: LastWriterWins
+                    defaultTtl: 100
+                    id: graphName
+                    indexingPolicy:
+                      automatic: true
+                      excludedPaths: []
+                      includedPaths:
+                        - indexes:
+                            - dataType: String
+                              kind: Range
+                              precision: -1
+                            - dataType: Number
+                              kind: Range
+                              precision: -1
+                          path: /*
+                      indexingMode: Consistent
+                    partitionKey:
+                      kind: Hash
+                      paths:
+                        - /AccountNumber
+                    uniqueKeyPolicy:
+                      uniqueKeys:
+                        - paths:
+                            - /testPath
                 type: Microsoft.DocumentDB/databaseAccounts/apis/databases/graphs
     put:
       description: Create or update an Azure Cosmos DB Gremlin graph
@@ -1982,35 +2072,36 @@ paths:
                 location: West US
                 name: graphName
                 properties:
-                  _etag: '"00005900-0000-0000-0000-56f9a2630000"'
-                  _rid: PD5DALigDgw=
-                  _ts: 1459200611
-                  conflictResolutionPolicy:
-                    conflictResolutionPath: /path
-                    mode: LastWriterWins
-                  defaultTtl: 100
-                  id: graphName
-                  indexingPolicy:
-                    automatic: true
-                    excludedPaths: []
-                    includedPaths:
-                      - indexes:
-                          - dataType: String
-                            kind: Range
-                            precision: -1
-                          - dataType: Number
-                            kind: Range
-                            precision: -1
-                        path: /*
-                    indexingMode: Consistent
-                  partitionKey:
-                    kind: Hash
-                    paths:
-                      - /AccountNumber
-                  uniqueKeyPolicy:
-                    uniqueKeys:
-                      - paths:
-                          - /testPath
+                  resource:
+                    _etag: '"00005900-0000-0000-0000-56f9a2630000"'
+                    _rid: PD5DALigDgw=
+                    _ts: 1459200611
+                    conflictResolutionPolicy:
+                      conflictResolutionPath: /path
+                      mode: LastWriterWins
+                    defaultTtl: 100
+                    id: graphName
+                    indexingPolicy:
+                      automatic: true
+                      excludedPaths: []
+                      includedPaths:
+                        - indexes:
+                            - dataType: String
+                              kind: Range
+                              precision: -1
+                            - dataType: Number
+                              kind: Range
+                              precision: -1
+                          path: /*
+                      indexingMode: Consistent
+                    partitionKey:
+                      kind: Hash
+                      paths:
+                        - /AccountNumber
+                    uniqueKeyPolicy:
+                      uniqueKeys:
+                        - paths:
+                            - /testPath
                 tags: {}
                 type: Microsoft.DocumentDB/databaseAccounts/gremlinDatabases/gremlinGraphs
             '202': {}
@@ -2047,9 +2138,13 @@ paths:
                 location: West US
                 name: default
                 properties:
-                  minimumThroughput: '400'
-                  offerReplacePending: 'true'
-                  throughput: 400
+                  resource:
+                    _etag: '"00005900-0000-0000-0000-56f9a2630000"'
+                    _rid: PD5DALigDgw=
+                    _ts: 1459200611
+                    minimumThroughput: '400'
+                    offerReplacePending: 'true'
+                    throughput: 400
                 tags: {}
                 type: Microsoft.DocumentDB/databaseAccounts/gremlinDatabases/throughputSettings
     put:
@@ -2097,9 +2192,13 @@ paths:
                 location: West US
                 name: default
                 properties:
-                  minimumThroughput: '400'
-                  offerReplacePending: 'true'
-                  throughput: 400
+                  resource:
+                    _etag: '"00005900-0000-0000-0000-56f9a2630000"'
+                    _rid: PD5DALigDgw=
+                    _ts: 1459200611
+                    minimumThroughput: '400'
+                    offerReplacePending: 'true'
+                    throughput: 400
                 tags: {}
                 type: Microsoft.DocumentDB/databaseAccounts/gremlinDatabases/throughputSettings
             '202': {}
@@ -2134,9 +2233,13 @@ paths:
                 location: West US
                 name: default
                 properties:
-                  minimumThroughput: '400'
-                  offerReplacePending: 'true'
-                  throughput: 400
+                  resource:
+                    _etag: '"00005900-0000-0000-0000-56f9a2630000"'
+                    _rid: PD5DALigDgw=
+                    _ts: 1459200611
+                    minimumThroughput: '400'
+                    offerReplacePending: 'true'
+                    throughput: 400
                 tags: {}
                 type: Microsoft.DocumentDB/databaseAccounts/gremlinDatabases/throughputSettings
     put:
@@ -2182,9 +2285,13 @@ paths:
                 location: West US
                 name: default
                 properties:
-                  minimumThroughput: '400'
-                  offerReplacePending: 'true'
-                  throughput: 400
+                  resource:
+                    _etag: '"00005900-0000-0000-0000-56f9a2630000"'
+                    _rid: PD5DALigDgw=
+                    _ts: 1459200611
+                    minimumThroughput: '400'
+                    offerReplacePending: 'true'
+                    throughput: 400
                 tags: {}
                 type: Microsoft.DocumentDB/databaseAccounts/gremlinDatabases/throughputSettings
             '202': {}
@@ -2375,7 +2482,8 @@ paths:
                     location: West US
                     name: databaseName
                     properties:
-                      id: databaseName
+                      resource:
+                        id: databaseName
                     tags: {}
                     type: Microsoft.DocumentDB/databaseAccounts/mongodbDatabases
       x-ms-pageable:
@@ -2436,10 +2544,11 @@ paths:
                 location: West US
                 name: databaseName
                 properties:
-                  _etag: '"00005900-0000-0000-0000-56f9a2630000"'
-                  _rid: PD5DALigDgw=
-                  _ts: 1459200611
-                  id: databaseName
+                  resource:
+                    _etag: '"00005900-0000-0000-0000-56f9a2630000"'
+                    _rid: PD5DALigDgw=
+                    _ts: 1459200611
+                    id: databaseName
                 tags: {}
                 type: Microsoft.DocumentDB/databaseAccounts/mongodbDatabases
     put:
@@ -2486,7 +2595,8 @@ paths:
                 location: West US
                 name: databaseName
                 properties:
-                  id: updatedDatabaseName
+                  resource:
+                    id: updatedDatabaseName
                 tags: {}
                 type: Microsoft.DocumentDB/databaseAccounts/mongodbDatabases
             '202': {}
@@ -2522,16 +2632,17 @@ paths:
                     location: West US
                     name: collectionName
                     properties:
-                      id: testcoll
-                      indexes:
-                        - key:
-                            keys:
-                              - testKey
-                          options:
-                            expireAfterSeconds: 100
-                            unique: true
-                      shardKey:
-                        testKey: Hash
+                      resource:
+                        id: testcoll
+                        indexes:
+                          - key:
+                              keys:
+                                - testKey
+                            options:
+                              expireAfterSeconds: 100
+                              unique: true
+                        shardKey:
+                          testKey: Hash
                     tags: {}
                     type: Microsoft.DocumentDB/databaseAccounts/mongodbDatabases/mongodbCollections
       x-ms-pageable:
@@ -2596,19 +2707,20 @@ paths:
                 location: West US
                 name: collectionName
                 properties:
-                  _etag: '"00005900-0000-0000-0000-56f9a2630000"'
-                  _rid: PD5DALigDgw=
-                  _ts: 1459200611
-                  id: testcoll
-                  indexes:
-                    - key:
-                        keys:
-                          - testKey
-                      options:
-                        expireAfterSeconds: 100
-                        unique: true
-                  shardKey:
-                    testKey: Hash
+                  resource:
+                    _etag: '"00005900-0000-0000-0000-56f9a2630000"'
+                    _rid: PD5DALigDgw=
+                    _ts: 1459200611
+                    id: testcoll
+                    indexes:
+                      - key:
+                          keys:
+                            - testKey
+                        options:
+                          expireAfterSeconds: 100
+                          unique: true
+                    shardKey:
+                      testKey: Hash
                 tags: {}
                 type: Microsoft.DocumentDB/databaseAccounts/mongodbDatabases/mongodbCollections
     put:
@@ -2666,16 +2778,17 @@ paths:
                 location: West US
                 name: collectionName
                 properties:
-                  id: collectionName
-                  indexes:
-                    - key:
-                        keys:
-                          - testKey
-                      options:
-                        expireAfterSeconds: 100
-                        unique: true
-                  shardKey:
-                    testKey: Hash
+                  resource:
+                    id: collectionName
+                    indexes:
+                      - key:
+                          keys:
+                            - testKey
+                        options:
+                          expireAfterSeconds: 100
+                          unique: true
+                    shardKey:
+                      testKey: Hash
                 tags: {}
                 type: Microsoft.DocumentDB/databaseAccounts/mongodbDatabases/mongodbCollections
             '202': {}
@@ -2712,9 +2825,13 @@ paths:
                 location: West US
                 name: default
                 properties:
-                  minimumThroughput: '400'
-                  offerReplacePending: 'true'
-                  throughput: 400
+                  resource:
+                    _etag: '"00005900-0000-0000-0000-56f9a2630000"'
+                    _rid: PD5DALigDgw=
+                    _ts: 1459200611
+                    minimumThroughput: '400'
+                    offerReplacePending: 'true'
+                    throughput: 400
                 tags: {}
                 type: Microsoft.DocumentDB/databaseAccounts/mongodbDatabases/mongodbCollections/throughputSettings
     put:
@@ -2762,9 +2879,13 @@ paths:
                 location: West US
                 name: default
                 properties:
-                  minimumThroughput: '400'
-                  offerReplacePending: 'true'
-                  throughput: 400
+                  resource:
+                    _etag: '"00005900-0000-0000-0000-56f9a2630000"'
+                    _rid: PD5DALigDgw=
+                    _ts: 1459200611
+                    minimumThroughput: '400'
+                    offerReplacePending: 'true'
+                    throughput: 400
                 tags: {}
                 type: Microsoft.DocumentDB/databaseAccounts/mongodbDatabases/mongodbCollections/throughputSettings
             '202': {}
@@ -2799,9 +2920,13 @@ paths:
                 location: West US
                 name: default
                 properties:
-                  minimumThroughput: '400'
-                  offerReplacePending: 'true'
-                  throughput: 400
+                  resource:
+                    _etag: '"00005900-0000-0000-0000-56f9a2630000"'
+                    _rid: PD5DALigDgw=
+                    _ts: 1459200611
+                    minimumThroughput: '400'
+                    offerReplacePending: 'true'
+                    throughput: 400
                 tags: {}
                 type: Microsoft.DocumentDB/databaseAccounts/mongodbDatabases/throughputSettings
     put:
@@ -2847,9 +2972,13 @@ paths:
                 location: West US
                 name: default
                 properties:
-                  minimumThroughput: '400'
-                  offerReplacePending: 'true'
-                  throughput: 400
+                  resource:
+                    _etag: '"00005900-0000-0000-0000-56f9a2630000"'
+                    _rid: PD5DALigDgw=
+                    _ts: 1459200611
+                    minimumThroughput: '400'
+                    offerReplacePending: 'true'
+                    throughput: 400
                 tags: {}
                 type: Microsoft.DocumentDB/databaseAccounts/mongodbDatabases/throughputSettings
             '202': {}
@@ -3383,12 +3512,13 @@ paths:
                     location: West US
                     name: databaseName
                     properties:
-                      _colls: colls/
-                      _etag: '"00000a00-0000-0000-0000-56672f920000"'
-                      _rid: CqNBAA==
-                      _ts: 1449602962
-                      _users: users/
-                      id: databaseName
+                      resource:
+                        _colls: colls/
+                        _etag: '"00000a00-0000-0000-0000-56672f920000"'
+                        _rid: CqNBAA==
+                        _ts: 1449602962
+                        _users: users/
+                        id: databaseName
                     tags: {}
                     type: Microsoft.DocumentDB/databaseAccounts/sqlDatabases
       x-ms-pageable:
@@ -3449,12 +3579,13 @@ paths:
                 location: West US
                 name: databaseName
                 properties:
-                  _colls: colls/
-                  _etag: '"00000a00-0000-0000-0000-56672f920000"'
-                  _rid: CqNBAA==
-                  _ts: 1449602962
-                  _users: users/
-                  id: databaseName
+                  resource:
+                    _colls: colls/
+                    _etag: '"00000a00-0000-0000-0000-56672f920000"'
+                    _rid: CqNBAA==
+                    _ts: 1449602962
+                    _users: users/
+                    id: databaseName
                 tags: {}
                 type: Microsoft.DocumentDB/databaseAccounts/sqlDatabases
     put:
@@ -3501,10 +3632,11 @@ paths:
                 location: West US
                 name: databaseName
                 properties:
-                  _etag: '"00000a00-0000-0000-0000-56672f920000"'
-                  _rid: CqNBAA==
-                  _ts: 1449602962
-                  id: databaseName
+                  resource:
+                    _etag: '"00000a00-0000-0000-0000-56672f920000"'
+                    _rid: CqNBAA==
+                    _ts: 1449602962
+                    id: databaseName
                 tags: {}
                 type: Microsoft.DocumentDB/databaseAccounts/sqlDatabases
             '202': {}
@@ -3540,35 +3672,36 @@ paths:
                     location: West US
                     name: containerName
                     properties:
-                      _etag: '"00005900-0000-0000-0000-56f9a2630000"'
-                      _rid: PD5DALigDgw=
-                      _ts: 1459200611
-                      conflictResolutionPolicy:
-                        conflictResolutionPath: /path
-                        mode: LastWriterWins
-                      defaultTtl: 100
-                      id: testctn
-                      indexingPolicy:
-                        automatic: true
-                        excludedPaths: []
-                        includedPaths:
-                          - indexes:
-                              - dataType: String
-                                kind: Range
-                                precision: -1
-                              - dataType: Number
-                                kind: Range
-                                precision: -1
-                            path: /*
-                        indexingMode: Consistent
-                      partitionKey:
-                        kind: Hash
-                        paths:
-                          - /AccountNumber
-                      uniqueKeyPolicy:
-                        uniqueKeys:
-                          - paths:
-                              - /testPath
+                      resource:
+                        _etag: '"00005900-0000-0000-0000-56f9a2630000"'
+                        _rid: PD5DALigDgw=
+                        _ts: 1459200611
+                        conflictResolutionPolicy:
+                          conflictResolutionPath: /path
+                          mode: LastWriterWins
+                        defaultTtl: 100
+                        id: testctn
+                        indexingPolicy:
+                          automatic: true
+                          excludedPaths: []
+                          includedPaths:
+                            - indexes:
+                                - dataType: String
+                                  kind: Range
+                                  precision: -1
+                                - dataType: Number
+                                  kind: Range
+                                  precision: -1
+                              path: /*
+                          indexingMode: Consistent
+                        partitionKey:
+                          kind: Hash
+                          paths:
+                            - /AccountNumber
+                        uniqueKeyPolicy:
+                          uniqueKeys:
+                            - paths:
+                                - /testPath
                     tags: {}
                     type: Microsoft.DocumentDB/databaseAccounts/sqlDatabases/sqlContainers
       x-ms-pageable:
@@ -3633,35 +3766,36 @@ paths:
                 location: West US
                 name: containerName
                 properties:
-                  _etag: '"00005900-0000-0000-0000-56f9a2630000"'
-                  _rid: PD5DALigDgw=
-                  _ts: 1459200611
-                  conflictResolutionPolicy:
-                    conflictResolutionPath: /path
-                    mode: LastWriterWins
-                  defaultTtl: 100
-                  id: containerName
-                  indexingPolicy:
-                    automatic: true
-                    excludedPaths: []
-                    includedPaths:
-                      - indexes:
-                          - dataType: String
-                            kind: Range
-                            precision: -1
-                          - dataType: Number
-                            kind: Range
-                            precision: -1
-                        path: /*
-                    indexingMode: Consistent
-                  partitionKey:
-                    kind: Hash
-                    paths:
-                      - /AccountNumber
-                  uniqueKeyPolicy:
-                    uniqueKeys:
-                      - paths:
-                          - /testPath
+                  resource:
+                    _etag: '"00005900-0000-0000-0000-56f9a2630000"'
+                    _rid: PD5DALigDgw=
+                    _ts: 1459200611
+                    conflictResolutionPolicy:
+                      conflictResolutionPath: /path
+                      mode: LastWriterWins
+                    defaultTtl: 100
+                    id: containerName
+                    indexingPolicy:
+                      automatic: true
+                      excludedPaths: []
+                      includedPaths:
+                        - indexes:
+                            - dataType: String
+                              kind: Range
+                              precision: -1
+                            - dataType: Number
+                              kind: Range
+                              precision: -1
+                          path: /*
+                      indexingMode: Consistent
+                    partitionKey:
+                      kind: Hash
+                      paths:
+                        - /AccountNumber
+                    uniqueKeyPolicy:
+                      uniqueKeys:
+                        - paths:
+                            - /testPath
                 tags: {}
                 type: Microsoft.DocumentDB/databaseAccounts/sqlDatabases/sqlContainers
     put:
@@ -3735,40 +3869,41 @@ paths:
                 location: West US
                 name: containerName
                 properties:
-                  _etag: '"00005900-0000-0000-0000-56f9a2630000"'
-                  _rid: PD5DALigDgw=
-                  _ts: 1459200611
-                  conflictResolutionPolicy:
-                    conflictResolutionPath: /path
-                    mode: LastWriterWins
-                  defaultTtl: 100
-                  id: containerName
-                  indexingPolicy:
-                    automatic: true
-                    excludedPaths: []
-                    includedPaths:
-                      - indexes:
-                          - dataType: String
-                            kind: Range
-                            precision: -1
-                          - dataType: Number
-                            kind: Range
-                            precision: -1
-                        path: /*
-                    indexingMode: Consistent
-                  partitionKey:
-                    kind: Hash
-                    paths:
-                      - /AccountNumber
-                  uniqueKeyPolicy:
-                    uniqueKeys:
-                      - paths:
-                          - /testPath
+                  resource:
+                    _etag: '"00005900-0000-0000-0000-56f9a2630000"'
+                    _rid: PD5DALigDgw=
+                    _ts: 1459200611
+                    conflictResolutionPolicy:
+                      conflictResolutionPath: /path
+                      mode: LastWriterWins
+                    defaultTtl: 100
+                    id: containerName
+                    indexingPolicy:
+                      automatic: true
+                      excludedPaths: []
+                      includedPaths:
+                        - indexes:
+                            - dataType: String
+                              kind: Range
+                              precision: -1
+                            - dataType: Number
+                              kind: Range
+                              precision: -1
+                          path: /*
+                      indexingMode: Consistent
+                    partitionKey:
+                      kind: Hash
+                      paths:
+                        - /AccountNumber
+                    uniqueKeyPolicy:
+                      uniqueKeys:
+                        - paths:
+                            - /testPath
                 tags: {}
                 type: Microsoft.DocumentDB/databaseAccounts/sqlDatabases/sqlContainers
             '202': {}
       x-ms-long-running-operation: true
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/storedProcedures/':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/storedProcedures':
     get:
       description: Lists the SQL storedProcedure under an existing Azure Cosmos DB database account.
       operationId: SqlResources_ListSqlStoredProcedures
@@ -3800,11 +3935,12 @@ paths:
                   - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/sqlDatabases/databaseName/sqlContainers/containerName/sqlStoredProcedures/storedProcedureName
                     name: testctn
                     properties:
-                      _etag: '"00005900-0000-0000-0000-56f9a2630000"'
-                      _rid: PD5DALigDgw=
-                      _ts: 1459200611
-                      body: body
-                      id: testctn
+                      resource:
+                        _etag: '"00005900-0000-0000-0000-56f9a2630000"'
+                        _rid: PD5DALigDgw=
+                        _ts: 1459200611
+                        body: body
+                        id: testctn
                     type: Microsoft.DocumentDB/databaseAccounts/sqlDatabases/sqlContainers/sqlStoredProcedures
       x-ms-pageable:
         nextLinkName: null
@@ -3871,11 +4007,12 @@ paths:
                 id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/sqlDatabases/databaseName/sqlContainers/containerName/sqlStoredProcedures/storedProcedureName
                 name: storedProcedureName
                 properties:
-                  _etag: '"00005900-0000-0000-0000-56f9a2630000"'
-                  _rid: PD5DALigDgw=
-                  _ts: 1459200611
-                  body: body
-                  id: storedProcedureName
+                  resource:
+                    _etag: '"00005900-0000-0000-0000-56f9a2630000"'
+                    _rid: PD5DALigDgw=
+                    _ts: 1459200611
+                    body: body
+                    id: storedProcedureName
                 type: Microsoft.DocumentDB/databaseAccounts/sqlDatabases/sqlContainers/sqlStoredProcedures
     put:
       description: Create or update an Azure Cosmos DB SQL storedProcedure
@@ -3923,11 +4060,12 @@ paths:
                 id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/sqlDatabases/databaseName/sqlContainers/containerName/sqlStoredProcedures/storedProcedureName
                 name: storedProcedureName
                 properties:
-                  _etag: '"00005900-0000-0000-0000-56f9a2630000"'
-                  _rid: PD5DALigDgw=
-                  _ts: 1459200611
-                  body: body
-                  id: storedProcedureName
+                  resource:
+                    _etag: '"00005900-0000-0000-0000-56f9a2630000"'
+                    _rid: PD5DALigDgw=
+                    _ts: 1459200611
+                    body: body
+                    id: storedProcedureName
                 type: Microsoft.DocumentDB/databaseAccounts/sqlDatabases/sqlContainers/sqlStoredProcedures
             '202': {}
       x-ms-long-running-operation: true
@@ -3963,9 +4101,13 @@ paths:
                 location: West US
                 name: default
                 properties:
-                  minimumThroughput: '400'
-                  offerReplacePending: 'true'
-                  throughput: 400
+                  resource:
+                    _etag: '"00005900-0000-0000-0000-56f9a2630000"'
+                    _rid: PD5DALigDgw=
+                    _ts: 1459200611
+                    minimumThroughput: '400'
+                    offerReplacePending: 'true'
+                    throughput: 400
                 tags: {}
                 type: Microsoft.DocumentDB/databaseAccounts/sqlDatabases/sqlContainers/throughputSettings
     put:
@@ -4013,14 +4155,18 @@ paths:
                 location: West US
                 name: default
                 properties:
-                  minimumThroughput: '400'
-                  offerReplacePending: 'true'
-                  throughput: 400
+                  resource:
+                    _etag: '"00005900-0000-0000-0000-56f9a2630000"'
+                    _rid: PD5DALigDgw=
+                    _ts: 1459200611
+                    minimumThroughput: '400'
+                    offerReplacePending: 'true'
+                    throughput: 400
                 tags: {}
                 type: Microsoft.DocumentDB/databaseAccounts/sqlDatabases/sqlContainers/throughputSettings
             '202': {}
       x-ms-long-running-operation: true
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/triggers/':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/triggers':
     get:
       description: Lists the SQL trigger under an existing Azure Cosmos DB database account.
       operationId: SqlResources_ListSqlTriggers
@@ -4052,13 +4198,14 @@ paths:
                   - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/sqlDatabases/databaseName/sqlContainers/containerName/sqlTriggers/triggerName
                     name: testctn
                     properties:
-                      _etag: '"00005900-0000-0000-0000-56f9a2630000"'
-                      _rid: PD5DALigDgw=
-                      _ts: 1459200611
-                      body: body
-                      id: testctn
-                      triggerOperation: triggerOperation
-                      triggerType: triggerType
+                      resource:
+                        _etag: '"00005900-0000-0000-0000-56f9a2630000"'
+                        _rid: PD5DALigDgw=
+                        _ts: 1459200611
+                        body: body
+                        id: testctn
+                        triggerOperation: triggerOperation
+                        triggerType: triggerType
                     type: Microsoft.DocumentDB/databaseAccounts/sqlDatabases/sqlContainers/sqlTriggers
       x-ms-pageable:
         nextLinkName: null
@@ -4125,13 +4272,14 @@ paths:
                 id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/sqlDatabases/databaseName/sqlContainers/containerName/sqlTriggers/triggerName
                 name: triggerName
                 properties:
-                  _etag: '"00005900-0000-0000-0000-56f9a2630000"'
-                  _rid: PD5DALigDgw=
-                  _ts: 1459200611
-                  body: body
-                  id: triggerName
-                  triggerOperation: triggerOperation
-                  triggerType: triggerType
+                  resource:
+                    _etag: '"00005900-0000-0000-0000-56f9a2630000"'
+                    _rid: PD5DALigDgw=
+                    _ts: 1459200611
+                    body: body
+                    id: triggerName
+                    triggerOperation: triggerOperation
+                    triggerType: triggerType
                 type: Microsoft.DocumentDB/databaseAccounts/sqlDatabases/sqlContainers/sqlTriggers
     put:
       description: Create or update an Azure Cosmos DB SQL trigger
@@ -4181,17 +4329,18 @@ paths:
                 id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/sqlDatabases/databaseName/sqlContainers/containerName/sqlTriggers/triggerName
                 name: triggerName
                 properties:
-                  _etag: '"00005900-0000-0000-0000-56f9a2630000"'
-                  _rid: PD5DALigDgw=
-                  _ts: 1459200611
-                  body: body
-                  id: triggerName
-                  triggerOperation: triggerOperation
-                  triggerType: triggerType
+                  resource:
+                    _etag: '"00005900-0000-0000-0000-56f9a2630000"'
+                    _rid: PD5DALigDgw=
+                    _ts: 1459200611
+                    body: body
+                    id: triggerName
+                    triggerOperation: triggerOperation
+                    triggerType: triggerType
                 type: Microsoft.DocumentDB/databaseAccounts/sqlDatabases/sqlContainers/sqlTriggers
             '202': {}
       x-ms-long-running-operation: true
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/userDefinedFunctions/':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/userDefinedFunctions':
     get:
       description: Lists the SQL userDefinedFunction under an existing Azure Cosmos DB database account.
       operationId: SqlResources_ListSqlUserDefinedFunctions
@@ -4223,11 +4372,12 @@ paths:
                   - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/sqlDatabases/databaseName/sqlContainers/containerName/sqlUserDefinedFunctions/userDefinedFunctionName
                     name: testctn
                     properties:
-                      _etag: '"00005900-0000-0000-0000-56f9a2630000"'
-                      _rid: PD5DALigDgw=
-                      _ts: 1459200611
-                      body: body
-                      id: testctn
+                      resource:
+                        _etag: '"00005900-0000-0000-0000-56f9a2630000"'
+                        _rid: PD5DALigDgw=
+                        _ts: 1459200611
+                        body: body
+                        id: testctn
                     type: Microsoft.DocumentDB/databaseAccounts/sqlDatabases/sqlContainers/sqlUserDefinedFunctions
       x-ms-pageable:
         nextLinkName: null
@@ -4294,11 +4444,12 @@ paths:
                 id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/sqlDatabases/databaseName/sqlContainers/containerName/sqlUserDefinedFunctions/userDefinedFunctionName
                 name: userDefinedFunctionName
                 properties:
-                  _etag: '"00005900-0000-0000-0000-56f9a2630000"'
-                  _rid: PD5DALigDgw=
-                  _ts: 1459200611
-                  body: body
-                  id: userDefinedFunctionName
+                  resource:
+                    _etag: '"00005900-0000-0000-0000-56f9a2630000"'
+                    _rid: PD5DALigDgw=
+                    _ts: 1459200611
+                    body: body
+                    id: userDefinedFunctionName
                 type: Microsoft.DocumentDB/databaseAccounts/sqlDatabases/sqlContainers/sqlUserDefinedFunctions
     put:
       description: Create or update an Azure Cosmos DB SQL userDefinedFunction
@@ -4346,11 +4497,12 @@ paths:
                 id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/sqlDatabases/databaseName/sqlContainers/containerName/sqlUserDefinedFunctions/userDefinedFunctionName
                 name: userDefinedFunctionName
                 properties:
-                  _etag: '"00005900-0000-0000-0000-56f9a2630000"'
-                  _rid: PD5DALigDgw=
-                  _ts: 1459200611
-                  body: body
-                  id: userDefinedFunctionName
+                  resource:
+                    _etag: '"00005900-0000-0000-0000-56f9a2630000"'
+                    _rid: PD5DALigDgw=
+                    _ts: 1459200611
+                    body: body
+                    id: userDefinedFunctionName
                 type: Microsoft.DocumentDB/databaseAccounts/sqlDatabases/sqlContainers/sqlUserDefinedFunctions
             '202': {}
       x-ms-long-running-operation: true
@@ -4384,9 +4536,13 @@ paths:
                 location: West US
                 name: default
                 properties:
-                  minimumThroughput: '400'
-                  offerReplacePending: 'true'
-                  throughput: 400
+                  resource:
+                    _etag: '"00005900-0000-0000-0000-56f9a2630000"'
+                    _rid: PD5DALigDgw=
+                    _ts: 1459200611
+                    minimumThroughput: '400'
+                    offerReplacePending: 'true'
+                    throughput: 400
                 tags: {}
                 type: Microsoft.DocumentDB/databaseAccounts/sqlDatabases/throughputSettings
     put:
@@ -4432,9 +4588,13 @@ paths:
                 location: West US
                 name: default
                 properties:
-                  minimumThroughput: '400'
-                  offerReplacePending: 'true'
-                  throughput: 400
+                  resource:
+                    _etag: '"00005900-0000-0000-0000-56f9a2630000"'
+                    _rid: PD5DALigDgw=
+                    _ts: 1459200611
+                    minimumThroughput: '400'
+                    offerReplacePending: 'true'
+                    throughput: 400
                 tags: {}
                 type: Microsoft.DocumentDB/databaseAccounts/sqlDatabases/throughputSettings
             '202': {}
@@ -4468,7 +4628,8 @@ paths:
                     location: West US
                     name: tableName
                     properties:
-                      id: tableName
+                      resource:
+                        id: tableName
                     tags: {}
                     type: Microsoft.DocumentDB/databaseAccounts/tables
       x-ms-pageable:
@@ -4529,10 +4690,11 @@ paths:
                 location: West US
                 name: tableName
                 properties:
-                  _etag: '"00005900-0000-0000-0000-56f9a2630000"'
-                  _rid: PD5DALigDgw=
-                  _ts: 1459200611
-                  id: tableName
+                  resource:
+                    _etag: '"00005900-0000-0000-0000-56f9a2630000"'
+                    _rid: PD5DALigDgw=
+                    _ts: 1459200611
+                    id: tableName
                 tags: {}
                 type: Microsoft.DocumentDB/databaseAccounts/tables
     put:
@@ -4579,7 +4741,8 @@ paths:
                 location: West US
                 name: tableName
                 properties:
-                  id: tableName
+                  resource:
+                    id: tableName
                 type: Microsoft.DocumentDB/databaseAccounts/tables
             '202': {}
       x-ms-long-running-operation: true
@@ -4613,9 +4776,13 @@ paths:
                 location: West US
                 name: default
                 properties:
-                  minimumThroughput: '400'
-                  offerReplacePending: 'true'
-                  throughput: 400
+                  resource:
+                    _etag: '"00005900-0000-0000-0000-56f9a2630000"'
+                    _rid: PD5DALigDgw=
+                    _ts: 1459200611
+                    minimumThroughput: '400'
+                    offerReplacePending: 'true'
+                    throughput: 400
                 tags: {}
                 type: Microsoft.DocumentDB/databaseAccounts/tables/throughputSettings
     put:
@@ -4661,9 +4828,13 @@ paths:
                 location: West US
                 name: default
                 properties:
-                  minimumThroughput: '400'
-                  offerReplacePending: 'true'
-                  throughput: 400
+                  resource:
+                    _etag: '"00005900-0000-0000-0000-56f9a2630000"'
+                    _rid: PD5DALigDgw=
+                    _ts: 1459200611
+                    minimumThroughput: '400'
+                    offerReplacePending: 'true'
+                    throughput: 400
                 tags: {}
                 type: Microsoft.DocumentDB/databaseAccounts/tables/throughputSettings
             '202': {}
@@ -4768,6 +4939,23 @@ paths:
       x-ms-pageable:
         nextLinkName: null
 definitions:
+  ARMProxyResource:
+    description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
+    properties:
+      id:
+        description: The unique resource identifier of the database account.
+        readOnly: true
+        type: string
+      name:
+        description: The name of the database account.
+        readOnly: true
+        type: string
+      type:
+        description: The type of Azure resource.
+        readOnly: true
+        type: string
+    type: object
+    x-ms-azure-resource: true
   ARMResourceProperties:
     description: The core properties of ARM resources.
     properties:
@@ -4823,10 +5011,12 @@ definitions:
       - options
     type: object
   CassandraKeyspaceGetProperties:
-    allOf:
-      - $ref: '#/definitions/CassandraKeyspaceResource'
-      - $ref: '#/definitions/ExtendedResourceProperties'
     description: The properties of an Azure Cosmos DB Cassandra keyspace
+    properties:
+      resource:
+        allOf:
+          - $ref: '#/definitions/CassandraKeyspaceResource'
+          - $ref: '#/definitions/ExtendedResourceProperties'
     type: object
   CassandraKeyspaceGetResults:
     allOf:
@@ -4908,10 +5098,12 @@ definitions:
       - options
     type: object
   CassandraTableGetProperties:
-    allOf:
-      - $ref: '#/definitions/CassandraTableResource'
-      - $ref: '#/definitions/ExtendedResourceProperties'
     description: The properties of an Azure Cosmos DB Cassandra table
+    properties:
+      resource:
+        allOf:
+          - $ref: '#/definitions/CassandraTableResource'
+          - $ref: '#/definitions/ExtendedResourceProperties'
     type: object
   CassandraTableGetResults:
     allOf:
@@ -4967,6 +5159,26 @@ definitions:
         description: Type of the Cosmos DB Cassandra table column
         type: string
     type: object
+  CompositePath:
+    properties:
+      order:
+        description: Sort order for composite paths.
+        enum:
+          - Ascending
+          - Descending
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: CompositePathSortOrder
+      path:
+        description: The path for which the indexing behavior applies to. Index paths typically start with root and end with wildcard (/path/*)
+        type: string
+    type: object
+  CompositePathList:
+    description: List of composite path
+    items:
+      $ref: '#/definitions/CompositePath'
+    type: array
   ConflictResolutionPolicy:
     description: The conflict resolution policy for the container.
     properties:
@@ -5043,6 +5255,12 @@ definitions:
         items:
           $ref: '#/definitions/Path'
         type: array
+      version:
+        description: Indicates the version of the partition key definition
+        format: int32
+        maximum: 2
+        minimum: 1
+        type: integer
     type: object
   CreateUpdateOptions:
     additionalProperties:
@@ -5099,6 +5317,9 @@ definitions:
       databaseAccountOfferType:
         $ref: '#/definitions/DatabaseAccountOfferType'
         description: The offer type for the database
+      disableKeyBasedMetadataWriteAccess:
+        description: 'Disable write operations on metadata resources (databases, containers, throughput) via account keys'
+        type: boolean
       enableAutomaticFailover:
         description: Enables automatic failover of the write region in the rare event that the region is unavailable due to an outage. Automatic failover will result in a new write region for the account and is chosen based on the failover priorities configured for the account.
         type: boolean
@@ -5146,6 +5367,9 @@ definitions:
         $ref: '#/definitions/DatabaseAccountOfferType'
         description: 'The offer type for the Cosmos DB database account. Default value: Standard.'
         readOnly: true
+      disableKeyBasedMetadataWriteAccess:
+        description: 'Disable write operations on metadata resources (databases, containers, throughput) via account keys'
+        type: boolean
       documentEndpoint:
         description: The connection endpoint for the Cosmos DB database account.
         readOnly: true
@@ -5171,6 +5395,12 @@ definitions:
       isVirtualNetworkFilterEnabled:
         description: Flag to indicate whether to enable/disable Virtual Network ACL rules.
         type: boolean
+      locations:
+        description: An array that contains all of the locations enabled for the Cosmos DB account.
+        items:
+          $ref: '#/definitions/Location'
+        readOnly: true
+        type: array
       provisioningState:
         $ref: '#/definitions/ProvisioningState'
       readLocations:
@@ -5251,24 +5481,6 @@ definitions:
     x-ms-enum:
       modelAsString: false
       name: DatabaseAccountOfferType
-  DatabaseAccountPatchParameters:
-    description: Parameters for patching Azure Cosmos DB database account properties.
-    properties:
-      properties:
-        $ref: '#/definitions/DatabaseAccountPatchProperties'
-        x-ms-client-flatten: true
-      tags:
-        $ref: '#/definitions/Tags'
-    type: object
-  DatabaseAccountPatchProperties:
-    description: Properties to update Azure Cosmos DB database accounts.
-    properties:
-      capabilities:
-        description: List of Cosmos DB capabilities for the account
-        items:
-          $ref: '#/definitions/Capability'
-        type: array
-    type: object
   DatabaseAccountRegenerateKeyParameters:
     description: Parameters to regenerate the keys within the database account.
     properties:
@@ -5285,6 +5497,61 @@ definitions:
           name: KeyKind
     required:
       - keyKind
+    type: object
+  DatabaseAccountUpdateParameters:
+    description: Parameters for patching Azure Cosmos DB database account properties.
+    properties:
+      location:
+        description: The location of the resource group to which the resource belongs.
+        type: string
+      properties:
+        $ref: '#/definitions/DatabaseAccountUpdateProperties'
+        x-ms-client-flatten: true
+      tags:
+        $ref: '#/definitions/Tags'
+    type: object
+  DatabaseAccountUpdateProperties:
+    description: Properties to update Azure Cosmos DB database accounts.
+    properties:
+      capabilities:
+        description: List of Cosmos DB capabilities for the account
+        items:
+          $ref: '#/definitions/Capability'
+        type: array
+      connectorOffer:
+        $ref: '#/definitions/ConnectorOffer'
+        description: The cassandra connector offer type for the Cosmos DB database C* account.
+      consistencyPolicy:
+        $ref: '#/definitions/ConsistencyPolicy'
+        description: The consistency policy for the Cosmos DB account.
+      disableKeyBasedMetadataWriteAccess:
+        description: 'Disable write operations on metadata resources (databases, containers, throughput) via account keys'
+        type: boolean
+      enableAutomaticFailover:
+        description: Enables automatic failover of the write region in the rare event that the region is unavailable due to an outage. Automatic failover will result in a new write region for the account and is chosen based on the failover priorities configured for the account.
+        type: boolean
+      enableCassandraConnector:
+        description: Enables the cassandra connector on the Cosmos DB C* account
+        type: boolean
+      enableMultipleWriteLocations:
+        description: Enables the account to write in multiple locations
+        type: boolean
+      ipRangeFilter:
+        $ref: '#/definitions/IPRangeFilter'
+        description: 'Cosmos DB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. IP addresses/ranges must be comma separated and must not contain any spaces.'
+      isVirtualNetworkFilterEnabled:
+        description: Flag to indicate whether to enable/disable Virtual Network ACL rules.
+        type: boolean
+      locations:
+        description: An array that contains the georeplication locations enabled for the Cosmos DB account.
+        items:
+          $ref: '#/definitions/Location'
+        type: array
+      virtualNetworkRules:
+        description: List of Virtual Network ACL rules configured for the Cosmos DB account.
+        items:
+          $ref: '#/definitions/VirtualNetworkRule'
+        type: array
     type: object
   DatabaseAccountsListResult:
     description: 'The List operation response, that contains the database accounts and their properties.'
@@ -5377,10 +5644,12 @@ definitions:
       - options
     type: object
   GremlinDatabaseGetProperties:
-    allOf:
-      - $ref: '#/definitions/GremlinDatabaseResource'
-      - $ref: '#/definitions/ExtendedResourceProperties'
     description: The properties of an Azure Cosmos DB SQL database
+    properties:
+      resource:
+        allOf:
+          - $ref: '#/definitions/GremlinDatabaseResource'
+          - $ref: '#/definitions/ExtendedResourceProperties'
     type: object
   GremlinDatabaseGetResults:
     allOf:
@@ -5436,10 +5705,12 @@ definitions:
       - options
     type: object
   GremlinGraphGetProperties:
-    allOf:
-      - $ref: '#/definitions/GremlinGraphResource'
-      - $ref: '#/definitions/ExtendedResourceProperties'
     description: The properties of an Azure Cosmos DB Gremlin graph
+    properties:
+      resource:
+        allOf:
+          - $ref: '#/definitions/GremlinGraphResource'
+          - $ref: '#/definitions/ExtendedResourceProperties'
     type: object
   GremlinGraphGetResults:
     allOf:
@@ -5537,6 +5808,11 @@ definitions:
       automatic:
         description: Indicates if the indexing policy is automatic
         type: boolean
+      compositeIndexes:
+        description: List of composite path list
+        items:
+          $ref: '#/definitions/CompositePathList'
+        type: array
       excludedPaths:
         description: List of paths to exclude from indexing
         items:
@@ -5558,6 +5834,11 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: IndexingMode
+      spatialIndexes:
+        description: List of spatial specifics
+        items:
+          $ref: '#/definitions/SpatialSpec'
+        type: array
     type: object
   Key:
     description: A Key.
@@ -5750,10 +6031,12 @@ definitions:
       - options
     type: object
   MongoDBCollectionGetProperties:
-    allOf:
-      - $ref: '#/definitions/MongoDBCollectionResource'
-      - $ref: '#/definitions/ExtendedResourceProperties'
     description: The properties of an Azure Cosmos DB MongoDB collection
+    properties:
+      resource:
+        allOf:
+          - $ref: '#/definitions/MongoDBCollectionResource'
+          - $ref: '#/definitions/ExtendedResourceProperties'
     type: object
   MongoDBCollectionGetResults:
     allOf:
@@ -5817,10 +6100,12 @@ definitions:
       - options
     type: object
   MongoDBDatabaseGetProperties:
-    allOf:
-      - $ref: '#/definitions/MongoDBDatabaseResource'
-      - $ref: '#/definitions/ExtendedResourceProperties'
     description: The properties of an Azure Cosmos DB MongoDB database
+    properties:
+      resource:
+        allOf:
+          - $ref: '#/definitions/MongoDBDatabaseResource'
+          - $ref: '#/definitions/ExtendedResourceProperties'
     type: object
   MongoDBDatabaseGetResults:
     allOf:
@@ -6055,6 +6340,28 @@ definitions:
       type: string
     description: 'The shard key and partition kind pair, only support "Hash" partition kind'
     type: object
+  SpatialSpec:
+    properties:
+      path:
+        description: The path for which the indexing behavior applies to. Index paths typically start with root and end with wildcard (/path/*)
+        type: string
+      types:
+        description: List of path's spatial type
+        items:
+          $ref: '#/definitions/SpatialType'
+        type: array
+    type: object
+  SpatialType:
+    description: Indicates the spatial type of index.
+    enum:
+      - Point
+      - LineString
+      - Polygon
+      - MultiPolygon
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: SpatialType
   SqlContainerCreateUpdateParameters:
     allOf:
       - $ref: '#/definitions/ARMResourceProperties'
@@ -6081,10 +6388,12 @@ definitions:
       - options
     type: object
   SqlContainerGetProperties:
-    allOf:
-      - $ref: '#/definitions/SqlContainerResource'
-      - $ref: '#/definitions/ExtendedResourceProperties'
     description: The properties of an Azure Cosmos DB container
+    properties:
+      resource:
+        allOf:
+          - $ref: '#/definitions/SqlContainerResource'
+          - $ref: '#/definitions/ExtendedResourceProperties'
     type: object
   SqlContainerGetResults:
     allOf:
@@ -6155,17 +6464,19 @@ definitions:
       - options
     type: object
   SqlDatabaseGetProperties:
-    allOf:
-      - $ref: '#/definitions/SqlDatabaseResource'
-      - $ref: '#/definitions/ExtendedResourceProperties'
     description: The properties of an Azure Cosmos DB SQL database
     properties:
-      _colls:
-        description: A system generated property that specified the addressable path of the collections resource.
-        type: string
-      _users:
-        description: A system generated property that specifies the addressable path of the users resource.
-        type: string
+      resource:
+        allOf:
+          - $ref: '#/definitions/SqlDatabaseResource'
+          - $ref: '#/definitions/ExtendedResourceProperties'
+        properties:
+          _colls:
+            description: A system generated property that specified the addressable path of the collections resource.
+            type: string
+          _users:
+            description: A system generated property that specifies the addressable path of the users resource.
+            type: string
     type: object
   SqlDatabaseGetResults:
     allOf:
@@ -6221,10 +6532,12 @@ definitions:
       - options
     type: object
   SqlStoredProcedureGetProperties:
-    allOf:
-      - $ref: '#/definitions/SqlStoredProcedureResource'
-      - $ref: '#/definitions/ExtendedResourceProperties'
     description: The properties of an Azure Cosmos DB StoredProcedure
+    properties:
+      resource:
+        allOf:
+          - $ref: '#/definitions/SqlStoredProcedureResource'
+          - $ref: '#/definitions/ExtendedResourceProperties'
     type: object
   SqlStoredProcedureGetResults:
     allOf:
@@ -6283,10 +6596,12 @@ definitions:
       - options
     type: object
   SqlTriggerGetProperties:
-    allOf:
-      - $ref: '#/definitions/SqlTriggerResource'
-      - $ref: '#/definitions/ExtendedResourceProperties'
     description: The properties of an Azure Cosmos DB trigger
+    properties:
+      resource:
+        allOf:
+          - $ref: '#/definitions/SqlTriggerResource'
+          - $ref: '#/definitions/ExtendedResourceProperties'
     type: object
   SqlTriggerGetResults:
     allOf:
@@ -6366,10 +6681,12 @@ definitions:
       - options
     type: object
   SqlUserDefinedFunctionGetProperties:
-    allOf:
-      - $ref: '#/definitions/SqlUserDefinedFunctionResource'
-      - $ref: '#/definitions/ExtendedResourceProperties'
     description: The properties of an Azure Cosmos DB userDefinedFunction
+    properties:
+      resource:
+        allOf:
+          - $ref: '#/definitions/SqlUserDefinedFunctionResource'
+          - $ref: '#/definitions/ExtendedResourceProperties'
     type: object
   SqlUserDefinedFunctionGetResults:
     allOf:
@@ -6428,10 +6745,12 @@ definitions:
       - options
     type: object
   TableGetProperties:
-    allOf:
-      - $ref: '#/definitions/TableResource'
-      - $ref: '#/definitions/ExtendedResourceProperties'
     description: The properties of an Azure Cosmos Table
+    properties:
+      resource:
+        allOf:
+          - $ref: '#/definitions/TableResource'
+          - $ref: '#/definitions/ExtendedResourceProperties'
     type: object
   TableGetResults:
     allOf:
@@ -6467,9 +6786,12 @@ definitions:
     description: 'Tags are a list of key-value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters. For example, the default experience for a template type is set with "defaultExperience": "Cassandra". Current "defaultExperience" values also include "Table", "Graph", "DocumentDB", and "MongoDB".'
     type: object
   ThroughputSettingsGetProperties:
-    allOf:
-      - $ref: '#/definitions/ThroughputSettingsResource'
     description: The properties of an Azure Cosmos DB resource throughput
+    properties:
+      resource:
+        allOf:
+          - $ref: '#/definitions/ThroughputSettingsResource'
+          - $ref: '#/definitions/ExtendedResourceProperties'
     type: object
   ThroughputSettingsGetResults:
     allOf:

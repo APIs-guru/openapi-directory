@@ -141,7 +141,7 @@ paths:
               body:
                 nextLink: '{baseurl}/subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.ManagedNetwork/managedNetworks?api-version=2019-06-01$skipToken=10'
                 value:
-                  - id: subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.ManagedNetwork/managedNetworks/myManagedNetwork
+                  - id: /subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.ManagedNetwork/managedNetworks/myManagedNetwork
                     location: eastus
                     name: myManagedNetwork
                     properties:
@@ -152,17 +152,17 @@ paths:
                       provisioningState: Succeeded
                       scope:
                         managementGroups:
-                          - id: providers/Microsoft.Management/managementGroups/20000000-0001-0000-0000-000000000000
-                          - id: providers/Microsoft.Management/managementGroups/20000000-0002-0000-0000-000000000000
+                          - id: /providers/Microsoft.Management/managementGroups/20000000-0001-0000-0000-000000000000
+                          - id: /providers/Microsoft.Management/managementGroups/20000000-0002-0000-0000-000000000000
                         subnets:
-                          - id: subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetC/subnets/subnetA
-                          - id: subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetC/subnets/subnetB
+                          - id: /subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetC/subnets/subnetA
+                          - id: /subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetC/subnets/subnetB
                         subscriptions:
                           - id: subscriptionA
                           - id: subscriptionB
                         virtualNetworks:
-                          - id: subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetA
-                          - id: subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetB
+                          - id: /subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetA
+                          - id: /subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetB
                     tags: {}
                     type: Microsoft.ManagedNetwork/managedNetworks
           title: Get Managed Network
@@ -200,7 +200,7 @@ paths:
               body:
                 nextLink: '{baseurl}/subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.ManagedNetwork/managedNetworks?api-version=2019-06-01$skipToken=10'
                 value:
-                  - id: subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.ManagedNetwork/managedNetworks/myManagedNetwork
+                  - id: /subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.ManagedNetwork/managedNetworks/myManagedNetwork
                     location: eastus
                     name: myManagedNetwork
                     properties:
@@ -211,17 +211,17 @@ paths:
                       provisioningState: Succeeded
                       scope:
                         managementGroups:
-                          - id: providers/Microsoft.Management/managementGroups/20000000-0001-0000-0000-000000000000
-                          - id: providers/Microsoft.Management/managementGroups/20000000-0002-0000-0000-000000000000
+                          - id: /providers/Microsoft.Management/managementGroups/20000000-0001-0000-0000-000000000000
+                          - id: /providers/Microsoft.Management/managementGroups/20000000-0002-0000-0000-000000000000
                         subnets:
-                          - id: subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetC/subnets/subnetA
-                          - id: subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetC/subnets/subnetB
+                          - id: /subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetC/subnets/subnetA
+                          - id: /subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetC/subnets/subnetB
                         subscriptions:
                           - id: subscriptionA
                           - id: subscriptionB
                         virtualNetworks:
-                          - id: subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetA
-                          - id: subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetB
+                          - id: /subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetA
+                          - id: /subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetB
                     tags: {}
                     type: Microsoft.ManagedNetwork/managedNetworks
           title: Get Managed Network
@@ -293,7 +293,7 @@ paths:
           responses:
             '200':
               body:
-                id: subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.ManagedNetwork/managedNetworks/myManagedNetwork
+                id: /subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.ManagedNetwork/managedNetworks/myManagedNetwork
                 location: eastus
                 name: myManagedNetwork
                 properties:
@@ -304,17 +304,17 @@ paths:
                   provisioningState: Succeeded
                   scope:
                     managementGroups:
-                      - id: providers/Microsoft.Management/managementGroups/20000000-0001-0000-0000-000000000000
-                      - id: providers/Microsoft.Management/managementGroups/20000000-0002-0000-0000-000000000000
+                      - id: /providers/Microsoft.Management/managementGroups/20000000-0001-0000-0000-000000000000
+                      - id: /providers/Microsoft.Management/managementGroups/20000000-0002-0000-0000-000000000000
                     subnets:
-                      - id: subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetC/subnets/subnetA
-                      - id: subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetC/subnets/subnetB
+                      - id: /subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetC/subnets/subnetA
+                      - id: /subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetC/subnets/subnetB
                     subscriptions:
                       - id: subscriptionA
                       - id: subscriptionB
                     virtualNetworks:
-                      - id: subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetA
-                      - id: subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetB
+                      - id: /subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetA
+                      - id: /subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetB
                 tags: {}
                 type: Microsoft.ManagedNetwork/managedNetworks
           title: Get Managed Network
@@ -359,7 +359,7 @@ paths:
           responses:
             '200':
               body:
-                id: subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.ManagedNetwork/managedNetworks/myManagedNetwork
+                id: /subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.ManagedNetwork/managedNetworks/myManagedNetwork
                 location: eastus
                 name: myManagedNetwork
                 properties:
@@ -370,22 +370,22 @@ paths:
                   provisioningState: Succeeded
                   scope:
                     managementGroups:
-                      - id: providers/Microsoft.Management/managementGroups/20000000-0001-0000-0000-000000000000
-                      - id: providers/Microsoft.Management/managementGroups/20000000-0002-0000-0000-000000000000
+                      - id: /providers/Microsoft.Management/managementGroups/20000000-0001-0000-0000-000000000000
+                      - id: /providers/Microsoft.Management/managementGroups/20000000-0002-0000-0000-000000000000
                     subnets:
-                      - id: subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetC/subnets/subnetA
-                      - id: subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetC/subnets/subnetB
+                      - id: /subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetC/subnets/subnetA
+                      - id: /subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetC/subnets/subnetB
                     subscriptions:
                       - id: subscriptionA
                       - id: subscriptionB
                     virtualNetworks:
-                      - id: subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetA
-                      - id: subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetB
+                      - id: /subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetA
+                      - id: /subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetB
                 tags: {}
                 type: Microsoft.ManagedNetwork/managedNetworks
             '201':
               body:
-                id: subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.ManagedNetwork/managedNetworks/myManagedNetwork
+                id: /subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.ManagedNetwork/managedNetworks/myManagedNetwork
                 location: eastus
                 name: myManagedNetwork
                 properties:
@@ -396,17 +396,17 @@ paths:
                   provisioningState: Succeeded
                   scope:
                     managementGroups:
-                      - id: providers/Microsoft.Management/managementGroups/20000000-0001-0000-0000-000000000000
-                      - id: providers/Microsoft.Management/managementGroups/20000000-0002-0000-0000-000000000000
+                      - id: /providers/Microsoft.Management/managementGroups/20000000-0001-0000-0000-000000000000
+                      - id: /providers/Microsoft.Management/managementGroups/20000000-0002-0000-0000-000000000000
                     subnets:
-                      - id: subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetC/subnets/subnetA
-                      - id: subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetC/subnets/subnetB
+                      - id: /subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetC/subnets/subnetA
+                      - id: /subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetC/subnets/subnetB
                     subscriptions:
                       - id: subscriptionA
                       - id: subscriptionB
                     virtualNetworks:
-                      - id: subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetA
-                      - id: subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetB
+                      - id: /subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetA
+                      - id: /subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetB
                 tags: {}
                 type: Microsoft.ManagedNetwork/managedNetworks
           title: Create/Update Managed Network
@@ -451,17 +451,17 @@ paths:
               properties:
                 scope:
                   managementGroups:
-                    - id: providers/Microsoft.Management/managementGroups/20000000-0001-0000-0000-000000000000
-                    - id: providers/Microsoft.Management/managementGroups/20000000-0002-0000-0000-000000000000
+                    - id: /providers/Microsoft.Management/managementGroups/20000000-0001-0000-0000-000000000000
+                    - id: /providers/Microsoft.Management/managementGroups/20000000-0002-0000-0000-000000000000
                   subnets:
-                    - id: subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetC/subnets/subnetA
-                    - id: subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetC/subnets/subnetB
+                    - id: /subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetC/subnets/subnetA
+                    - id: /subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetC/subnets/subnetB
                   subscriptions:
                     - id: subscriptionA
                     - id: subscriptionB
                   virtualNetworks:
-                    - id: subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetA
-                    - id: subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetB
+                    - id: /subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetA
+                    - id: /subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetB
               tags: {}
             managedNetworkName: myManagedNetwork
             resourceGroupName: myResourceGroup
@@ -469,7 +469,7 @@ paths:
           responses:
             '200':
               body:
-                id: subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.ManagedNetwork/managedNetworks/myManagedNetwork
+                id: /subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.ManagedNetwork/managedNetworks/myManagedNetwork
                 location: eastus
                 name: myManagedNetwork
                 properties:
@@ -480,22 +480,22 @@ paths:
                   provisioningState: Succeeded
                   scope:
                     managementGroups:
-                      - id: providers/Microsoft.Management/managementGroups/20000000-0001-0000-0000-000000000000
-                      - id: providers/Microsoft.Management/managementGroups/20000000-0002-0000-0000-000000000000
+                      - id: /providers/Microsoft.Management/managementGroups/20000000-0001-0000-0000-000000000000
+                      - id: /providers/Microsoft.Management/managementGroups/20000000-0002-0000-0000-000000000000
                     subnets:
-                      - id: subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetC/subnets/subnetA
-                      - id: subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetC/subnets/subnetB
+                      - id: /subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetC/subnets/subnetA
+                      - id: /subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetC/subnets/subnetB
                     subscriptions:
                       - id: subscriptionA
                       - id: subscriptionB
                     virtualNetworks:
-                      - id: subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetA
-                      - id: subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetB
+                      - id: /subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetA
+                      - id: /subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetB
                 tags: {}
                 type: Microsoft.ManagedNetwork/managedNetworks
             '201':
               body:
-                id: subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.ManagedNetwork/managedNetworks/myManagedNetwork
+                id: /subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.ManagedNetwork/managedNetworks/myManagedNetwork
                 location: eastus
                 name: myManagedNetwork
                 properties:
@@ -506,17 +506,17 @@ paths:
                   provisioningState: Succeeded
                   scope:
                     managementGroups:
-                      - id: providers/Microsoft.Management/managementGroups/20000000-0001-0000-0000-000000000000
-                      - id: providers/Microsoft.Management/managementGroups/20000000-0002-0000-0000-000000000000
+                      - id: /providers/Microsoft.Management/managementGroups/20000000-0001-0000-0000-000000000000
+                      - id: /providers/Microsoft.Management/managementGroups/20000000-0002-0000-0000-000000000000
                     subnets:
-                      - id: subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetC/subnets/subnetA
-                      - id: subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetC/subnets/subnetB
+                      - id: /subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetC/subnets/subnetA
+                      - id: /subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetC/subnets/subnetB
                     subscriptions:
                       - id: subscriptionA
                       - id: subscriptionB
                     virtualNetworks:
-                      - id: subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetA
-                      - id: subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetB
+                      - id: /subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetA
+                      - id: /subscriptions/subscriptionC/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/VnetB
                 tags: {}
                 type: Microsoft.ManagedNetwork/managedNetworks
           title: Create/Update Managed Network
@@ -975,10 +975,10 @@ paths:
               body:
                 nextLink: '{baseurl}/subscriptions/subscriptionC/providers/Microsoft.ManagedNetwork/scopeAssignments?api-version=2019-06-01&$skipToken=10'
                 value:
-                  - id: subscriptions/subscriptionC/providers/Microsoft.ManagedNetwork/scopeAssignments/subscriptionCAssignment
+                  - id: /subscriptions/subscriptionC/providers/Microsoft.ManagedNetwork/scopeAssignments/subscriptionCAssignment
                     name: subscriptionCAssignemnt
                     properties:
-                      assignedManagedNetwork: subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.ManagedNetwork/managedNetworks/myManagedNetwork
+                      assignedManagedNetwork: /subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.ManagedNetwork/managedNetworks/myManagedNetwork
                       etag: sadf-asdf-asdf-asdf
                       provisioningState: Succeeded
                     type: Microsoft.ManagedNetwork/scopeAssignment
@@ -1054,10 +1054,10 @@ paths:
           responses:
             '200':
               body:
-                id: subscriptions/subscriptionC/providers/Microsoft.ManagedNetwork/scopeAssignments/subscriptionCAssignment
+                id: /subscriptions/subscriptionC/providers/Microsoft.ManagedNetwork/scopeAssignments/subscriptionCAssignment
                 name: subscriptionCAssignment
                 properties:
-                  assignedManagedNetwork: subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.ManagedNetwork/managedNetworks/myManagedNetwork
+                  assignedManagedNetwork: /subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.ManagedNetwork/managedNetworks/myManagedNetwork
                 type: Microsoft.ManagedNetwork/scopeAssignment
           title: Create/Update Managed Network
     put:
@@ -1070,7 +1070,7 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ScopeAssignment'
-        - description: 'The base resource of the scope assignment to create. The scope can be any REST resource instance. For example, use ''/subscriptions/{subscription-id}/'' for a subscription, ''/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}'' for a resource group, and ''/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider}/{resource-type}/{resource-name}'' for a resource.'
+        - description: 'The base resource of the scope assignment to create. The scope can be any REST resource instance. For example, use ''subscriptions/{subscription-id}'' for a subscription, ''subscriptions/{subscription-id}/resourceGroups/{resource-group-name}'' for a resource group, and ''subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider}/{resource-type}/{resource-name}'' for a resource.'
           in: path
           name: scope
           required: true
@@ -1103,25 +1103,25 @@ paths:
             api-version: '2019-06-01'
             parameters:
               properties:
-                assignedManagedNetwork: subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.ManagedNetwork/managedNetworks/myManagedNetwork
+                assignedManagedNetwork: /subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.ManagedNetwork/managedNetworks/myManagedNetwork
             scope: subscriptions/subscriptionC
             scopeAssignmentName: subscriptionCAssignment
           responses:
             '200':
               body:
-                id: subscriptions/subscriptionC/providers/Microsoft.ManagedNetwork/scopeAssignments/subscriptionCAssignment
+                id: /subscriptions/subscriptionC/providers/Microsoft.ManagedNetwork/scopeAssignments/subscriptionCAssignment
                 name: subscriptionCAssignment
                 properties:
-                  assignedManagedNetwork: subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.ManagedNetwork/managedNetworks/myManagedNetwork
+                  assignedManagedNetwork: /subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.ManagedNetwork/managedNetworks/myManagedNetwork
                   etag: sadf-asdf-asdf-asdf
                   provisioningState: Succeeded
                 type: Microsoft.ManagedNetwork/scopeAssignment
             '201':
               body:
-                id: subscriptions/subscriptionC/providers/Microsoft.ManagedNetwork/scopeAssignments/subscriptionCAssignment
+                id: /subscriptions/subscriptionC/providers/Microsoft.ManagedNetwork/scopeAssignments/subscriptionCAssignment
                 name: subscriptionCAssignment
                 properties:
-                  assignedManagedNetwork: subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.ManagedNetwork/managedNetworks/myManagedNetwork
+                  assignedManagedNetwork: /subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.ManagedNetwork/managedNetworks/myManagedNetwork
                   etag: sadf-asdf-asdf-asdf
                   provisioningState: Succeeded
                 type: Microsoft.ManagedNetwork/scopeAssignment
@@ -1396,7 +1396,7 @@ definitions:
         readOnly: true
         type: string
       provisioningState:
-        description: 'Provisioning state of the ManagedNetwork resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        description: Provisioning state of the ManagedNetwork resource.
         enum:
           - Updating
           - Deleting

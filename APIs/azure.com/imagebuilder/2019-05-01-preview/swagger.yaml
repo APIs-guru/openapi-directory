@@ -145,6 +145,8 @@ paths:
                         sha256Checksum: 120acbca7b3d55465eb9f8ef53ad7365f2997d42d4f83d7cc285bf5c71e1131f
                         sourceUri: 'http://redhat.com/path/to/installation.iso'
                         type: ISO
+                      vmProfile:
+                        vmSize: Standard_D2s_v3
                     type: Microsoft.VirtualMachineImages/imageTemplate
                   - id: '/subscriptions/{subscription-id}/resourceGroups/myOtherResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates/mySecondImageTemplate'
                     location: westus
@@ -167,6 +169,8 @@ paths:
                         sku: 18.04-LTS
                         type: PlatformImage
                         version: 18.04.201902121
+                      vmProfile:
+                        vmSize: Standard_D8s_v3
                     type: Microsoft.VirtualMachineImages/imageTemplate
       x-ms-pageable:
         nextLinkName: nextLink
@@ -198,7 +202,7 @@ paths:
           responses:
             '200':
               body:
-                nextLink: '/subscriptions/{subscription-id}/resourceGroup/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates?api-version=2018-02-01-preview&skip-token=2'
+                nextLink: '/subscriptions/{subscription-id}/resourceGroup/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates?api-version=2019-05-01-preview&skip-token=2'
                 value:
                   - id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates/myImageTemplate'
                     location: westus
@@ -219,6 +223,8 @@ paths:
                         sha256Checksum: 120acbca7b3d55465eb9f8ef53ad7365f2997d42d4f83d7cc285bf5c71e1131f
                         sourceUri: 'http://redhat.com/path/to/installation.iso'
                         type: ISO
+                      vmProfile:
+                        vmSize: Standard_D2s_v3
                     type: Microsoft.VirtualMachineImages/imageTemplate
                   - id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates/myOtherImageTemplate'
                     location: eastus
@@ -245,6 +251,8 @@ paths:
                         sku: 18.04-LTS
                         type: PlatformImage
                         version: 18.04.201902121
+                      vmProfile:
+                        vmSize: Standard_D8s_v3
                     type: Microsoft.VirtualMachineImages/imageTemplate
       x-ms-pageable:
         nextLinkName: nextLink
@@ -334,6 +342,8 @@ paths:
                     sha256Checksum: 120acbca7b3d55465eb9f8ef53ad7365f2997d42d4f83d7cc285bf5c71e1131f
                     sourceUri: 'http://redhat.com/path/to/installation.iso'
                     type: ISO
+                  vmProfile:
+                    vmSize: Standard_D2s_v3
                 type: Microsoft.VirtualMachineImages/imageTemplate
     patch:
       description: Update the tags for this Virtual Machine Image Template
@@ -396,6 +406,8 @@ paths:
                     sha256Checksum: 120acbca7b3d55465eb9f8ef53ad7365f2997d42d4f83d7cc285bf5c71e1131f
                     sourceUri: 'http://redhat.com/path/to/installation.iso'
                     type: ISO
+                  vmProfile:
+                    vmSize: Standard_D2s_v3
                 tags:
                   new-tag: new-value
                 type: Microsoft.VirtualMachineImages/imageTemplate
@@ -433,6 +445,8 @@ paths:
                     sha256Checksum: 120acbca7b3d55465eb9f8ef53ad7365f2997d42d4f83d7cc285bf5c71e1131f
                     sourceUri: 'http://redhat.com/path/to/installation.iso'
                     type: ISO
+                  vmProfile:
+                    vmSize: Standard_D2s_v3
                 tags:
                   new-tag: new-value
                 type: Microsoft.VirtualMachineImages/imageTemplate
@@ -497,6 +511,8 @@ paths:
                 source:
                   imageId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/images/source_image
                   type: ManagedImage
+                vmProfile:
+                  vmSize: Standard_D2s_v3
               tags:
                 imagetemplate_tag1: IT_T1
                 imagetemplate_tag2: IT_T2
@@ -529,6 +545,8 @@ paths:
                   source:
                     imageId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/images/source_image
                     type: ManagedImage
+                  vmProfile:
+                    vmSize: Standard_D2s_v3
                 type: Microsoft.VirtualMachineImages/imageTemplate
             '201':
               body:
@@ -556,6 +574,8 @@ paths:
                   source:
                     imageId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/images/source_image
                     type: ManagedImage
+                  vmProfile:
+                    vmSize: Standard_D2s_v3
                 type: Microsoft.VirtualMachineImages/imageTemplate
         Create an Image Template.:
           parameters:
@@ -578,6 +598,8 @@ paths:
                 source:
                   imageId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/images/source_image
                   type: ManagedImage
+                vmProfile:
+                  vmSize: Standard_D2s_v3
               tags:
                 imagetemplate_tag1: IT_T1
                 imagetemplate_tag2: IT_T2
@@ -604,6 +626,8 @@ paths:
                   source:
                     imageId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/images/source_image
                     type: ManagedImage
+                  vmProfile:
+                    vmSize: Standard_D2s_v3
                 type: Microsoft.VirtualMachineImages/imageTemplate
             '201':
               body:
@@ -625,6 +649,8 @@ paths:
                   source:
                     imageId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/images/source_image
                     type: ManagedImage
+                  vmProfile:
+                    vmSize: Standard_D2s_v3
                 type: Microsoft.VirtualMachineImages/imageTemplate
       x-ms-long-running-operation: true
       x-ms-long-running-operation-options:
@@ -784,14 +810,17 @@ definitions:
   ImageTemplate:
     allOf:
       - $ref: '#/definitions/Resource'
+    description: Image template is an ARM resource managed by Microsoft.VirtualMachineImages provider
     properties:
       identity:
         $ref: '#/definitions/ImageTemplateIdentity'
         description: 'The identity of the image template, if configured.'
       properties:
         $ref: '#/definitions/ImageTemplateProperties'
+        description: The properties of the image template
         x-ms-client-flatten: true
   ImageTemplateCustomizer:
+    description: Describes a unit of image customization
     discriminator: type
     properties:
       name:
@@ -829,6 +858,9 @@ definitions:
     properties:
       destination:
         description: The absolute path to a file (with nested directory structures already created) where the file (from sourceUri) will be uploaded to in the VM
+        type: string
+      sha256Checksum:
+        description: SHA256 checksum of the file provided in the sourceUri field above
         type: string
       sourceUri:
         description: 'The URI of the file to be uploaded for customizing the VM. It can be a github link, SAS URI for Azure Storage, etc'
@@ -876,6 +908,7 @@ definitions:
       - sha256Checksum
     x-ms-discriminator-value: ISO
   ImageTemplateLastRunStatus:
+    description: Describes the latest status of running an image template
     properties:
       endTime:
         description: End time of the last run (UTC)
@@ -892,6 +925,9 @@ definitions:
           - PartiallySucceeded
           - Failed
         type: string
+        x-ms-enum:
+          modelAsString: false
+          name: RunState
       runSubState:
         description: Sub-state of the last run
         enum:
@@ -900,16 +936,21 @@ definitions:
           - Customizing
           - Distributing
         type: string
+        x-ms-enum:
+          modelAsString: false
+          name: RunSubState
       startTime:
         description: Start time of the last run (UTC)
         format: date-time
         type: string
   ImageTemplateListResult:
+    description: The result of List image templates operation
     properties:
       nextLink:
         description: The continuation token.
         type: string
       value:
+        description: An array of image templates
         items:
           $ref: '#/definitions/ImageTemplate'
         type: array
@@ -968,8 +1009,14 @@ definitions:
         items:
           type: string
         type: array
+      runElevated:
+        description: 'If specified, the PowerShell script will be run with elevated privileges'
+        type: boolean
       scriptUri:
         description: 'URI of the PowerShell script to be run for customizing. It can be a github link, SAS URI for Azure Storage, etc'
+        type: string
+      sha256Checksum:
+        description: SHA256 checksum of the power shell script provided in the scriptUri field above
         type: string
       validExitCodes:
         description: 'Valid exit codes for the PowerShell script. [Default: 0]'
@@ -978,9 +1025,10 @@ definitions:
         type: array
     x-ms-discriminator-value: PowerShell
   ImageTemplateProperties:
+    description: Describes the properties of an image template
     properties:
       buildTimeoutInMinutes:
-        description: Maximum duration to wait while building the image template. Omit or specify 0 to use the default (60 minutes).
+        description: Maximum duration to wait while building the image template. Omit or specify 0 to use the default (4 hours).
         maximum: 960
         minimum: 0
         type: integer
@@ -1009,6 +1057,9 @@ definitions:
       source:
         $ref: '#/definitions/ImageTemplateSource'
         description: Specifies the properties used to describe the source image.
+      vmProfile:
+        $ref: '#/definitions/ImageTemplateVmProfile'
+        description: Describes how virtual machine is set up to build images
     required:
       - source
       - distribute
@@ -1036,6 +1087,7 @@ definitions:
         description: Resource Id of the Shared Image Gallery image
         type: string
       replicationRegions:
+        description: A list of regions that the image will be replicated to
         items:
           type: string
         type: array
@@ -1068,8 +1120,12 @@ definitions:
       scriptUri:
         description: 'URI of the shell script to be run for customizing. It can be a github link, SAS URI for Azure Storage, etc'
         type: string
+      sha256Checksum:
+        description: SHA256 checksum of the shell script provided in the scriptUri field
+        type: string
     x-ms-discriminator-value: Shell
   ImageTemplateSource:
+    description: 'Describes a virtual machine image source for building, customizing and distributing'
     discriminator: type
     properties:
       type:
@@ -1094,6 +1150,12 @@ definitions:
     description: Distribute via VHD in a storage account.
     type: object
     x-ms-discriminator-value: VHD
+  ImageTemplateVmProfile:
+    description: 'Describes the virtual machine used to build, customize and capture images'
+    properties:
+      vmSize:
+        description: 'Size of the virtual machine used to build, customize and capture images. Omit or specify empty string to use the default (Standard_D1_v2).'
+        type: string
   InnerError:
     description: Inner error details.
     properties:
@@ -1145,6 +1207,7 @@ definitions:
         type: array
     title: Result of the request to list REST API operations. It contains a list of operations and a URL nextLink to get the next set of results.
   ProvisioningError:
+    description: Describes the error happened when create or update an image template
     properties:
       message:
         description: Verbose error message about the provisioning failure
@@ -1165,6 +1228,9 @@ definitions:
           - ServerError
           - Other
         type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ProvisioningErrorCode
   ProvisioningState:
     description: Provisioning state of the resource
     enum:
@@ -1174,6 +1240,9 @@ definitions:
       - Failed
       - Deleting
     type: string
+    x-ms-enum:
+      modelAsString: false
+      name: ProvisioningState
   Resource:
     description: The Resource model definition.
     properties:
@@ -1210,17 +1279,21 @@ definitions:
     properties:
       properties:
         $ref: '#/definitions/RunOutputProperties'
+        description: The properties of the run output
         x-ms-client-flatten: true
   RunOutputCollection:
+    description: The result of List run outputs operation
     properties:
       nextLink:
         description: The continuation token.
         type: string
       value:
+        description: An array of run outputs
         items:
           $ref: '#/definitions/RunOutput'
         type: array
   RunOutputProperties:
+    description: Describes the properties of a run output
     properties:
       artifactId:
         description: The resource id of the artifact.

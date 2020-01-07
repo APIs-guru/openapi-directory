@@ -337,7 +337,6 @@ definitions:
           - SqlServerVulnerability
           - ContainerRegistryVulnerability
           - ServerVulnerability
-        readOnly: true
         type: string
         x-ms-enum:
           modelAsString: true
@@ -346,33 +345,9 @@ definitions:
             - value: SqlServerVulnerability
             - value: ContainerRegistryVulnerability
             - value: ServerVulnerability
+    required:
+      - assessedResourceType
     type: object
-  AwsResourceDetails:
-    allOf:
-      - $ref: '#/definitions/ResourceDetails'
-    description: Details of the resource that was assessed
-    properties:
-      accountId:
-        description: AWS account ID
-        readOnly: true
-        type: string
-      awsResourceId:
-        description: AWS resource ID. can be ARN or other
-        readOnly: true
-        type: string
-    type: object
-    x-ms-discriminator-value: Aws
-  AzureResourceDetails:
-    allOf:
-      - $ref: '#/definitions/ResourceDetails'
-    description: Details of the resource that was assessed
-    properties:
-      id:
-        description: Azure resource ID of the assessed resource
-        readOnly: true
-        type: string
-    type: object
-    x-ms-discriminator-value: Azure
   CVE:
     description: CVE details
     properties:
@@ -438,24 +413,6 @@ definitions:
         type: array
     type: object
     x-ms-discriminator-value: ContainerRegistryVulnerability
-  ResourceDetails:
-    description: Details of the resource that was assessed
-    discriminator: source
-    properties:
-      source:
-        description: The platform where the assessed resource resides
-        enum:
-          - Azure
-          - Aws
-        readOnly: true
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: Source
-          values:
-            - value: Azure
-            - value: Aws
-    type: object
   SecuritySubAssessment:
     allOf:
       - description: Describes an Azure resource.
@@ -523,7 +480,26 @@ definitions:
         readOnly: true
         type: string
       resourceDetails:
-        $ref: '#/definitions/ResourceDetails'
+        description: Details of the resource that was assessed
+        discriminator: source
+        properties:
+          source:
+            description: The platform where the assessed resource resides
+            enum:
+              - Azure
+              - OnPremise
+            type: string
+            x-ms-enum:
+              modelAsString: true
+              name: source
+              values:
+                - description: Resource is in Azure
+                  value: Azure
+                - description: Resource in an on premise machine connected to Azure cloud
+                  value: OnPremise
+        required:
+          - source
+        type: object
       status:
         $ref: '#/definitions/SubAssessmentStatus'
       timeGenerated:

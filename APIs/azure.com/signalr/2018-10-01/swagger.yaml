@@ -74,6 +74,10 @@ paths:
           description: Success. The response describes the list of operations.
           schema:
             $ref: '#/definitions/OperationList'
+        default:
+          description: An unexpected error occurred during the operation.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       tags:
         - SignalR
       x-ms-examples:
@@ -106,6 +110,10 @@ paths:
           description: Success. The response describes the list of SignalR services in the subscription.
           schema:
             $ref: '#/definitions/SignalRResourceList'
+        default:
+          description: An unexpected error occurred during the operation.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       tags:
         - SignalR
       x-ms-examples:
@@ -169,6 +177,10 @@ paths:
           description: Success. The response describes the name availability.
           schema:
             $ref: '#/definitions/NameAvailability'
+        default:
+          description: An unexpected error occurred during the operation.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       tags:
         - SignalR
       x-ms-examples:
@@ -203,6 +215,10 @@ paths:
           description: Success. The response describe the usage quotas of a subscription in specified region.
           schema:
             $ref: '#/definitions/SignalRUsageList'
+        default:
+          description: An unexpected error occurred during the operation.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       tags:
         - SignalR
       x-ms-examples:
@@ -245,6 +261,10 @@ paths:
           description: Success. The response describes the list of SignalR services in a resourceGroup.
           schema:
             $ref: '#/definitions/SignalRResourceList'
+        default:
+          description: An unexpected error occurred during the operation.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       tags:
         - SignalR
       x-ms-examples:
@@ -300,6 +320,10 @@ paths:
           description: Success. The response describes SignalR service access keys.
           schema:
             $ref: '#/definitions/SignalRKeys'
+        default:
+          description: An unexpected error occurred during the operation.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       tags:
         - SignalR
       x-ms-examples:
@@ -336,6 +360,10 @@ paths:
           description: Created and an async operation is executing in background to make the new key to take effect. The response contains new keys and a Location header to query the async operation result.
           schema:
             $ref: '#/definitions/SignalRKeys'
+        default:
+          description: An unexpected error occurred during the operation.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       tags:
         - SignalR
       x-ms-examples:
@@ -373,6 +401,10 @@ paths:
           description: Accepted. The response indicates the delete operation is performed in the background.
         '204':
           description: Success. The response indicates the resource is already deleted.
+        default:
+          description: An unexpected error occurred during the operation.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       tags:
         - SignalR
       x-ms-examples:
@@ -401,6 +433,10 @@ paths:
           description: Success. The response describes the corresponding SignalR service.
           schema:
             $ref: '#/definitions/SignalRResource'
+        default:
+          description: An unexpected error occurred during the operation.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       tags:
         - SignalR
       x-ms-examples:
@@ -456,11 +492,15 @@ paths:
         - $ref: '#/parameters/SignalRServiceName'
       responses:
         '200':
-          description: Success. The response describes a SignalR service which is not up-to-date.
+          description: Success. The response describes a SignalR service.
           schema:
             $ref: '#/definitions/SignalRResource'
         '202':
           description: Accepted. The response indicates the exiting SignalR service is now updating  and contains a Location header to query the operation result..
+        default:
+          description: An unexpected error occurred during the operation.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       tags:
         - SignalR
       x-ms-examples:
@@ -536,12 +576,20 @@ paths:
         - $ref: '#/parameters/ResourceGroupParameter'
         - $ref: '#/parameters/SignalRServiceName'
       responses:
+        '200':
+          description: Success. The response describes a SignalR service.
+          schema:
+            $ref: '#/definitions/SignalRResource'
         '201':
           description: Created. The response describes the new service and contains a Location header to query the operation result.
           schema:
             $ref: '#/definitions/SignalRResource'
         '202':
           description: Accepted. The response indicates the exiting SignalR service is now updating and contains a Location header to query the operation result..
+        default:
+          description: An unexpected error occurred during the operation.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       tags:
         - SignalR
       x-ms-examples:
@@ -570,6 +618,37 @@ paths:
             resourceName: mySignalRService
             subscriptionId: 00000000-0000-0000-0000-000000000000
           responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/SignalR/mySignalRService
+                location: eastus
+                name: mySignalRService
+                properties:
+                  cors:
+                    allowedOrigins:
+                      - 'https://foo.com'
+                      - 'https://bar.com'
+                  externalIP: 10.0.0.1
+                  features:
+                    - flag: ServiceMode
+                      properties: {}
+                      value: Serverless
+                  hostName: mysignalrservice.service.signalr.net
+                  hostNamePrefix: null
+                  provisioningState: Succeeded
+                  publicPort: 443
+                  serverPort: 443
+                  version: '1.0'
+                sku:
+                  capacity: 1
+                  name: Standard_S1
+                  size: S1
+                  tier: Standard
+                tags:
+                  key1: value1
+                type: Microsoft.SignalRService/SignalR
+              headers:
+                Location: 'https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationResult...'
             '201':
               body:
                 id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/SignalR/mySignalRService
@@ -619,6 +698,10 @@ paths:
           description: Accepted. The response indicates the restart operation is performed in the background.
         '204':
           description: Success. The response indicates the operation is successful and no content will be returned.
+        default:
+          description: An unexpected error occurred during the operation.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       tags:
         - SignalR
       x-ms-examples:
@@ -652,6 +735,44 @@ definitions:
       toBeExportedForShoebox:
         description: A Boolean flag indicating whether this dimension should be included for the shoebox export scenario.
         type: boolean
+    type: object
+  ErrorResponse:
+    description: Contains information about an API error.
+    properties:
+      error:
+        $ref: '#/definitions/ErrorResponseBody'
+        description: Describes a particular API error with an error code and a message.
+    type: object
+  ErrorResponseBody:
+    description: Describes a particular API error with an error code and a message.
+    properties:
+      code:
+        description: "An error code that describes the error condition more precisely than an HTTP status code. \r\nCan be used to programmatically handle specific error cases."
+        type: string
+      details:
+        description: Contains nested errors that are related to this error.
+        items:
+          $ref: '#/definitions/ErrorResponseBody'
+        type: array
+      message:
+        description: A message that describes the error in detail and provides debugging information.
+        type: string
+      target:
+        description: 'The target of the particular error (for example, the name of the property in error).'
+        type: string
+    required:
+      - code
+      - message
+    type: object
+  LogSpecification:
+    description: Specifications of the Logs for Azure Monitoring.
+    properties:
+      displayName:
+        description: Localized friendly display name of the log.
+        type: string
+      name:
+        description: Name of the log.
+        type: string
     type: object
   MetricSpecification:
     description: Specifications of the Metrics for Azure Monitoring.
@@ -824,6 +945,11 @@ definitions:
   ServiceSpecification:
     description: An object that describes a specification.
     properties:
+      logSpecifications:
+        description: Specifications of the Logs for Azure Monitoring.
+        items:
+          $ref: '#/definitions/LogSpecification'
+        type: array
       metricSpecifications:
         description: Specifications of the Metrics for Azure Monitoring.
         items:
@@ -869,9 +995,10 @@ definitions:
     description: 'Feature of a SignalR resource, which controls the SignalR runtime behavior.'
     properties:
       flag:
-        description: Kind of feature. Required.
+        description: "FeatureFlags is the supported features of Azure SignalR service.\r\n- ServiceMode: Flag for backend server for SignalR service. Values allowed: \"Default\": have your own backend server; \"Serverless\": your application doesn't have a backend server; \"Classic\": for backward compatibility. Support both Default and Serverless mode but not recommended; \"PredefinedOnly\": for future use.\r\n- EnableConnectivityLogs: \"true\"/\"false\", to enable/disable the connectivity log category respectively."
         enum:
           - ServiceMode
+          - EnableConnectivityLogs
         type: string
         x-ms-enum:
           modelAsString: true
@@ -882,7 +1009,7 @@ definitions:
         description: Optional properties related to this feature.
         type: object
       value:
-        description: 'Value of the feature flag. See Azure SignalR service document https://docs.microsoft.com/en-us/azure/azure-signalr/ for allowed values.'
+        description: 'Value of the feature flag. See Azure SignalR service document https://docs.microsoft.com/azure/azure-signalr/ for allowed values.'
         maxLength: 128
         minLength: 1
         type: string

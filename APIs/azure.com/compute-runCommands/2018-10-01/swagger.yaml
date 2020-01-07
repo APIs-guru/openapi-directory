@@ -81,56 +81,56 @@ paths:
             '200':
               body:
                 value:
-                  - description: Configure the machine to enable remote PowerShell.
+                  - $schema: 'http://schema.management.azure.com/schemas/2016-11-17/runcommands.json'
+                    description: Configure the machine to enable remote PowerShell.
                     id: EnableRemotePS
                     label: Enable remote PowerShell
                     osType: Windows
-                    schema: 'http://schema.management.azure.com/schemas/2016-11-17/runcommands.json'
-                  - description: 'Shows detailed information for the IP address, subnet mask and default gateway for each adapter bound to TCP/IP.'
+                  - $schema: 'http://schema.management.azure.com/schemas/2016-11-17/runcommands.json'
+                    description: 'Shows detailed information for the IP address, subnet mask and default gateway for each adapter bound to TCP/IP.'
                     id: IPConfig
                     label: List IP configuration
                     osType: Windows
-                    schema: 'http://schema.management.azure.com/schemas/2016-11-17/runcommands.json'
-                  - description: Custom multiline PowerShell script should be defined in script property. Optional parameters can be set in parameters property.
+                  - $schema: 'http://schema.management.azure.com/schemas/2016-11-17/runcommands.json'
+                    description: Custom multiline PowerShell script should be defined in script property. Optional parameters can be set in parameters property.
                     id: RunPowerShellScript
                     label: Executes a PowerShell script
                     osType: Windows
-                    schema: 'http://schema.management.azure.com/schemas/2016-11-17/runcommands.json'
-                  - description: Custom multiline shell script should be defined in script property. Optional parameters can be set in parameters property.
+                  - $schema: 'http://schema.management.azure.com/schemas/2016-11-17/runcommands.json'
+                    description: Custom multiline shell script should be defined in script property. Optional parameters can be set in parameters property.
                     id: RunShellScript
                     label: Executes a Linux shell script
                     osType: Linux
-                    schema: 'http://schema.management.azure.com/schemas/2016-11-17/runcommands.json'
-                  - description: Get the configuration of all network interfaces.
+                  - $schema: 'http://schema.management.azure.com/schemas/2016-11-17/runcommands.json'
+                    description: Get the configuration of all network interfaces.
                     id: ifconfig
                     label: List network configuration
                     osType: Linux
-                    schema: 'http://schema.management.azure.com/schemas/2016-11-17/runcommands.json'
-                  - description: 'Checks if the local Administrator account is disabled, and if so enables it.'
+                  - $schema: 'http://schema.management.azure.com/schemas/2016-11-17/runcommands.json'
+                    description: 'Checks if the local Administrator account is disabled, and if so enables it.'
                     id: EnableAdminAccount
                     label: Enable administrator account
                     osType: Windows
-                    schema: 'http://schema.management.azure.com/schemas/2016-11-17/runcommands.json'
-                  - description: Reset built-in Administrator account password.
+                  - $schema: 'http://schema.management.azure.com/schemas/2016-11-17/runcommands.json'
+                    description: Reset built-in Administrator account password.
                     id: ResetAccountPassword
                     label: Reset built-in Administrator account password
                     osType: Windows
-                    schema: 'http://schema.management.azure.com/schemas/2016-11-17/runcommands.json'
-                  - description: Checks registry settings and domain policy settings. Suggests policy actions if machine is part of a domain or modifies the settings to default values.
+                  - $schema: 'http://schema.management.azure.com/schemas/2016-11-17/runcommands.json'
+                    description: Checks registry settings and domain policy settings. Suggests policy actions if machine is part of a domain or modifies the settings to default values.
                     id: RDPSettings
                     label: Verify RDP Listener Settings
                     osType: Windows
-                    schema: 'http://schema.management.azure.com/schemas/2016-11-17/runcommands.json'
-                  - description: Sets the default or user specified port number for Remote Desktop connections. Enables firewall rule for inbound access to the port.
+                  - $schema: 'http://schema.management.azure.com/schemas/2016-11-17/runcommands.json'
+                    description: Sets the default or user specified port number for Remote Desktop connections. Enables firewall rule for inbound access to the port.
                     id: SetRDPPort
                     label: Set Remote Desktop port
                     osType: Windows
-                    schema: 'http://schema.management.azure.com/schemas/2016-11-17/runcommands.json'
-                  - description: Removes the SSL certificate tied to the RDP listener and restores the RDP listerner security to default. Use this script if you see any issues with the certificate.
+                  - $schema: 'http://schema.management.azure.com/schemas/2016-11-17/runcommands.json'
+                    description: Removes the SSL certificate tied to the RDP listener and restores the RDP listerner security to default. Use this script if you see any issues with the certificate.
                     id: ResetRDPCert
                     label: Restore RDP Authentication mode to defaults
                     osType: Windows
-                    schema: 'http://schema.management.azure.com/schemas/2016-11-17/runcommands.json'
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/runCommands/{commandId}':
@@ -174,12 +174,12 @@ paths:
                 label: Executes a PowerShell script
                 osType: Windows
                 parameters:
-                  - name: arg1
+                  - defaultValue: value1
+                    name: arg1
                     type: string
-                    value: value1
-                  - name: arg2
+                  - defaultValue: value2
+                    name: arg2
                     type: string
-                    value: value2
                 script:
                   - param(
                   - '    [string]$arg1,'

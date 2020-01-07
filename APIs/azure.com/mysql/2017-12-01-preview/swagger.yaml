@@ -990,6 +990,186 @@ paths:
                 type: Microsoft.DBforMySQL/servers
             '202': {}
       x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/Administrators/activeDirectory':
+    delete:
+      description: Deletes AAD Administrator.
+      operationId: ServerAdministrators_Delete
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ServerAdministratorResource'
+        '202':
+          description: Accepted
+          schema:
+            $ref: '#/definitions/ServerAdministratorResource'
+        '204':
+          description: NoContent
+          schema:
+            $ref: '#/definitions/ServerAdministratorResource'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - ServerAdministrators
+      x-ms-examples:
+        ServerAdministratorsDelete:
+          parameters:
+            administratorName: activeDirectory
+            api-version: 2017-12-01-preview
+            resourceGroupName: testrg
+            serverName: mysqltestsvc4
+            subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
+          responses:
+            '200':
+              body: OK
+            '202':
+              body: Accepted
+            '204':
+              body: No Content
+      x-ms-long-running-operation: true
+    get:
+      description: Gets information about a AAD server administrator.
+      operationId: ServerAdministrators_Get
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ServerAdministratorResource'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - ServerAdministrators
+      x-ms-examples:
+        ServerAdministratorGet:
+          parameters:
+            administratorName: activeDirectory
+            api-version: 2017-12-01-preview
+            resourceGroupName: testrg
+            serverName: mysqltestsvc4
+            subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
+          responses:
+            '200':
+              body:
+                id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc4/administrators/activeDirectory
+                name: activeDirectory
+                properties:
+                  administratorType: ActiveDirectory
+                  login: bob@contoso.com
+                  sid: c6b82b90-a647-49cb-8a62-0d2d3cb7ac7c
+                  tenantId: c6b82b90-a647-49cb-8a62-0d2d3cb7ac7c
+                type: Microsoft.DBforMySQL/servers/administrators
+    put:
+      description: Creates or update active directory administrator on an existing server. The update action will overwrite the existing administrator.
+      operationId: ServerAdministrators_CreateOrUpdate
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The required parameters for creating or updating an AAD server administrator.
+          in: body
+          name: properties
+          required: true
+          schema:
+            $ref: '#/definitions/ServerAdministratorResource'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ServerAdministratorResource'
+        '202':
+          description: Accepted
+          schema:
+            $ref: '#/definitions/ServerAdministratorResource'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - ServerAdministrators
+      x-ms-examples:
+        ServerAdministratorCreate:
+          parameters:
+            administratorName: activeDirectory
+            api-version: 2017-12-01-preview
+            properties:
+              properties:
+                administratorType: ActiveDirectory
+                login: bob@contoso.com
+                sid: c6b82b90-a647-49cb-8a62-0d2d3cb7ac7c
+                tenantId: c6b82b90-a647-49cb-8a62-0d2d3cb7ac7c
+            resourceGroupName: testrg
+            serverName: mysqltestsvc4
+            subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
+          responses:
+            '200':
+              body:
+                id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc4/administrators/activeDirectory
+                name: activeDirectory
+                properties:
+                  administratorType: ActiveDirectory
+                  login: bob@contoso.com
+                  sid: c6b82b90-a647-49cb-8a62-0d2d3cb7ac7c
+                  tenantId: c6b82b90-a647-49cb-8a62-0d2d3cb7ac7c
+                type: Microsoft.DBforMySQL/servers/administrators
+            '202':
+              body: Accepted
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/administrators':
+    get:
+      description: Returns a list of server Administrators.
+      operationId: ServerAdministrators_ListByServer
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ServerAdministratorResourceListResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - ServerAdministrators
+      x-ms-examples:
+        get a list of server administrators:
+          parameters:
+            api-version: 2017-12-01-preview
+            resourceGroupName: testrg
+            serverName: mysqltestsvc4
+            subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc4/administrators/activeDirectory
+                    name: ActiveDirectory
+                    properties:
+                      administratorType: ActiveDirectory
+                      login: bob@contoso.com
+                      sid: c6b82b90-a647-49cb-8a62-0d2d3cb7ac7c
+                      tenantId: c6b82b90-a647-49cb-8a62-0d2d3cb7ac7c
+                    type: Microsoft.DBforMySQL/servers/administrators
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/configurations':
     get:
       description: List all the configurations in a given server.
@@ -2759,6 +2939,28 @@ definitions:
         readOnly: true
         type: string
     x-ms-azure-resource: true
+  ResourceIdentity:
+    description: Azure Active Directory identity configuration for a resource.
+    properties:
+      principalId:
+        description: The Azure Active Directory principal id.
+        format: uuid
+        readOnly: true
+        type: string
+      tenantId:
+        description: The Azure Active Directory tenant id.
+        format: uuid
+        readOnly: true
+        type: string
+      type:
+        description: The identity type. Set this to 'SystemAssigned' in order to automatically create and assign an Azure Active Directory principal for the resource.
+        enum:
+          - SystemAssigned
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: IdentityType
+    type: object
   SecurityAlertPolicyProperties:
     description: Properties of a security alert policy.
     properties:
@@ -2802,6 +3004,9 @@ definitions:
       - $ref: '#/definitions/TrackedResource'
     description: Represents a server.
     properties:
+      identity:
+        $ref: '#/definitions/ResourceIdentity'
+        description: The Azure Active Directory identity of the server.
       properties:
         $ref: '#/definitions/ServerProperties'
         description: Properties of the server.
@@ -2809,6 +3014,49 @@ definitions:
       sku:
         $ref: '#/definitions/Sku'
         description: The SKU (pricing tier) of the server.
+  ServerAdministratorProperties:
+    description: The properties of an server Administrator.
+    properties:
+      administratorType:
+        description: The type of administrator.
+        enum:
+          - ActiveDirectory
+        type: string
+        x-ms-enum:
+          name: AdministratorType
+      login:
+        description: The server administrator login value.
+        type: string
+      sid:
+        description: The server administrator Sid (Secure ID).
+        format: uuid
+        type: string
+      tenantId:
+        description: The server Active Directory Administrator tenant id.
+        format: uuid
+        type: string
+    required:
+      - tenantId
+      - administratorType
+      - login
+      - sid
+  ServerAdministratorResource:
+    allOf:
+      - $ref: '#/definitions/ProxyResource'
+    description: Represents a and external administrator to be created.
+    properties:
+      properties:
+        $ref: '#/definitions/ServerAdministratorProperties'
+        description: Properties of the server AAD administrator.
+        x-ms-client-flatten: true
+  ServerAdministratorResourceListResult:
+    description: The response to a list Active Directory Administrators request.
+    properties:
+      value:
+        description: The list of server Active Directory Administrators for the server.
+        items:
+          $ref: '#/definitions/ServerAdministratorResource'
+        type: array
   ServerForCreate:
     description: Represents a server to be created.
     properties:
@@ -3007,6 +3255,7 @@ definitions:
     enum:
       - '5.6'
       - '5.7'
+      - '8.0'
     type: string
     x-ms-enum:
       modelAsString: true

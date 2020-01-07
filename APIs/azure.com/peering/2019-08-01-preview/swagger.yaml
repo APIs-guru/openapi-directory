@@ -200,7 +200,7 @@ paths:
       description: Checks if the peering service provider is present within 1000 miles of customer's location
       operationId: CheckServiceProviderAvailability
       parameters:
-        - description: The CheckServiceProviderAvailabilityInput indicating customer location and service provider.
+        - description: "The CheckServiceProviderAvailabilityInput\r\n            indicating customer location and service provider."
           in: body
           name: checkServiceProviderAvailabilityInput
           required: true
@@ -275,10 +275,10 @@ paths:
             '200':
               body:
                 value:
-                  - id: /subscriptions/subId/providers/Microsoft.Peering/peerings/peeringName
+                  - id: /subscriptions/subId/providers/Microsoft.Peering/peerings/MyPeering
                     kind: Exchange
                     location: centralus
-                    name: peeringName
+                    name: MyPeering
                     properties:
                       exchange:
                         connections:
@@ -347,8 +347,8 @@ paths:
             '200':
               body:
                 value:
-                  - id: /subscriptions/subId/providers/Microsoft.Peering/peerAsns/peerAsnName
-                    name: peerAsnName
+                  - id: /subscriptions/subId/providers/Microsoft.Peering/peerAsns/MyPeerAsn
+                    name: MyPeerAsn
                     properties:
                       peerAsn: 65000
                       peerContactInfo:
@@ -389,7 +389,7 @@ paths:
         Delete a peer ASN:
           parameters:
             api-version: 2019-08-01-preview
-            peerAsnName: peerAsnName
+            peerAsnName: MyPeerAsn
             subscriptionId: subId
           responses:
             '200': {}
@@ -420,13 +420,13 @@ paths:
         Get a peer ASN:
           parameters:
             api-version: 2019-08-01-preview
-            peerAsnName: peerAsnName
+            peerAsnName: MyPeerAsn
             subscriptionId: subId
           responses:
             '200':
               body:
-                id: /subscriptions/subId/providers/Microsoft.Peering/peerAsns/peerAsnName
-                name: peerAsnName
+                id: /subscriptions/subId/providers/Microsoft.Peering/peerAsns/MyPeerAsn
+                name: MyPeerAsn
                 properties:
                   peerAsn: 65000
                   peerContactInfo:
@@ -484,13 +484,13 @@ paths:
                   phone:
                     - +1 (234) 567-8900
                 peerName: Contoso
-            peerAsnName: peerAsnName
+            peerAsnName: MyPeerAsn
             subscriptionId: subId
           responses:
             '200':
               body:
-                id: /subscriptions/subId/providers/Microsoft.Peering/peerAsns/peerAsnName
-                name: peerAsnName
+                id: /subscriptions/subId/providers/Microsoft.Peering/peerAsns/MyPeerAsn
+                name: MyPeerAsn
                 properties:
                   peerAsn: 65000
                   peerContactInfo:
@@ -504,8 +504,8 @@ paths:
                 type: Microsoft.Peering/peerAsns
             '201':
               body:
-                id: /subscriptions/subId/providers/Microsoft.Peering/peerAsns/peerAsnName
-                name: peerAsnName
+                id: /subscriptions/subId/providers/Microsoft.Peering/peerAsns/MyPeerAsn
+                name: MyPeerAsn
                 properties:
                   peerAsn: 65000
                   peerContactInfo:
@@ -763,9 +763,9 @@ paths:
             '200':
               body:
                 value:
-                  - id: /subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peeringServices/peeringServiceName
+                  - id: /subscriptions/subId/resourceGroups/MyResourceGroup/providers/Microsoft.Peering/peeringServices/MyPeeringService
                     location: eastus
-                    name: peeringServiceName
+                    name: MyPeeringService
                     properties:
                       peeringServiceLocation: state1
                       peeringServiceProvider: serviceProvider1
@@ -800,10 +800,10 @@ paths:
             '200':
               body:
                 value:
-                  - id: /subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peerings/peeringName
+                  - id: /subscriptions/subId/resourceGroups/MyResourceGroup/providers/Microsoft.Peering/peerings/MyPeering
                     kind: Exchange
                     location: eastus
-                    name: peeringName
+                    name: MyPeering
                     properties:
                       exchange:
                         connections:
@@ -872,15 +872,15 @@ paths:
         List peering services in a resource group:
           parameters:
             api-version: 2019-08-01-preview
-            resourceGroupName: rgName
+            resourceGroupName: MyResourceGroup
             subscriptionId: subId
           responses:
             '200':
               body:
                 value:
-                  - id: /subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peeringServices/peeringServiceName
+                  - id: /subscriptions/subId/resourceGroups/MyResourceGroup/providers/Microsoft.Peering/peeringServices/MyPeeringService
                     location: eastus
-                    name: peeringServiceName
+                    name: MyPeeringService
                     properties:
                       peeringServiceLocation: state1
                       peeringServiceProvider: serviceProvider1
@@ -920,8 +920,8 @@ paths:
         Delete a peering service:
           parameters:
             api-version: 2019-08-01-preview
-            peeringServiceName: peeringServiceName
-            resourceGroupName: rgName
+            peeringServiceName: MyPeeringService
+            resourceGroupName: MyResourceGroup
             subscriptionId: subId
           responses:
             '200': {}
@@ -957,15 +957,15 @@ paths:
         Get a peering service:
           parameters:
             api-version: 2019-08-01-preview
-            peeringServiceName: peeringServiceName
-            resourceGroupName: rgName
+            peeringServiceName: MyPeeringService
+            resourceGroupName: MyResourceGroup
             subscriptionId: subId
           responses:
             '200':
               body:
-                id: /subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peeringServices/peeringServiceName
+                id: /subscriptions/subId/resourceGroups/MyResourceGroup/providers/Microsoft.Peering/peeringServices/MyPeeringService
                 location: eastus
-                name: peeringServiceName
+                name: MyPeeringService
                 properties:
                   peeringServiceLocation: state1
                   peeringServiceProvider: serviceProvider1
@@ -1008,8 +1008,8 @@ paths:
         Update peering service tags:
           parameters:
             api-version: 2019-08-01-preview
-            peeringServiceName: peeringServiceName
-            resourceGroupName: rgName
+            peeringServiceName: MyPeeringService
+            resourceGroupName: MyResourceGroup
             subscriptionId: subId
             tags:
               tags:
@@ -1018,9 +1018,9 @@ paths:
           responses:
             '200':
               body:
-                id: /subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peeringServices/peeringServiceName
+                id: /subscriptions/subId/resourceGroups/MyResourceGroup/providers/Microsoft.Peering/peeringServices/MyPeeringService
                 location: eastus
-                name: peeringServiceName
+                name: MyPeeringService
                 properties:
                   peeringServiceLocation: state1
                   peeringServiceProvider: serviceProvider1
@@ -1075,15 +1075,15 @@ paths:
               properties:
                 peeringServiceLocation: state1
                 peeringServiceProvider: serviceProvider1
-            peeringServiceName: peeringServiceName
-            resourceGroupName: rgName
+            peeringServiceName: MyPeeringService
+            resourceGroupName: MyResourceGroup
             subscriptionId: subId
           responses:
             '200':
               body:
-                id: /subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peeringServices/peeringServiceName
+                id: /subscriptions/subId/resourceGroups/MyResourceGroup/providers/Microsoft.Peering/peeringServices/MyPeeringService
                 location: eastus
-                name: peeringServiceName
+                name: MyPeeringService
                 properties:
                   peeringServiceLocation: state1
                   peeringServiceProvider: serviceProvider1
@@ -1091,9 +1091,9 @@ paths:
                 type: Microsoft.Peering/peeringServices
             '201':
               body:
-                id: /subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peeringServices/peeringServiceName
+                id: /subscriptions/subId/resourceGroups/MyResourceGroup/providers/Microsoft.Peering/peeringServices/MyPeeringService
                 location: eastus
-                name: peeringServiceName
+                name: MyPeeringService
                 properties:
                   peeringServiceLocation: state1
                   peeringServiceProvider: serviceProvider1
@@ -1131,22 +1131,22 @@ paths:
         List all the prefixes associated with the peering service:
           parameters:
             api-version: 2019-08-01-preview
-            peeringServiceName: peeringServiceName
-            resourceGroupName: rgName
+            peeringServiceName: MyPeeringService
+            resourceGroupName: MyResourceGroup
             subscriptionId: subId
           responses:
             '200':
               body:
                 value:
-                  - id: /subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peeringServices/peeringServiceName/prefixes/peeringServicePrefixName1
-                    name: peeringServicePrefixName1
+                  - id: /subscriptions/subId/resourceGroups/MyResourceGroup/providers/Microsoft.Peering/peeringServices/MyPeeringService/prefixes/MyPeeringServicePrefix1
+                    name: MyPeeringServicePrefix1
                     properties:
                       learnedType: None
                       prefix: 192.168.1.0/24
                       prefixValidationState: Verified
                       provisioningState: Succeeded
-                  - id: /subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peeringServices/peeringServiceName/prefixes/peeringServicePrefixName2
-                    name: peeringServicePrefixName2
+                  - id: /subscriptions/subId/resourceGroups/MyResourceGroup/providers/Microsoft.Peering/peeringServices/MyPeeringService/prefixes/MyPeeringServicePrefix2
+                    name: MyPeeringServicePrefix2
                     properties:
                       learnedType: None
                       prefix: 192.168.2.0/24
@@ -1191,9 +1191,9 @@ paths:
         Delete a prefix associated with the peering service:
           parameters:
             api-version: 2019-08-01-preview
-            peeringServiceName: peeringServiceName
-            prefixName: peeringServicePrefixName
-            resourceGroupName: rgName
+            peeringServiceName: MyPeeringService
+            prefixName: MyPeeringServicePrefix
+            resourceGroupName: MyResourceGroup
             subscriptionId: subId
           responses:
             '200': {}
@@ -1234,15 +1234,15 @@ paths:
         Get a prefix associated with the peering service:
           parameters:
             api-version: 2019-08-01-preview
-            peeringServiceName: peeringServiceName
-            prefixName: peeringServicePrefixName
-            resourceGroupName: rgName
+            peeringServiceName: MyPeeringService
+            prefixName: MyPeeringServicePrefix
+            resourceGroupName: MyResourceGroup
             subscriptionId: subId
           responses:
             '200':
               body:
-                id: /subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peeringServices/peeringServiceName/prefixes/peeringServicePrefixName
-                name: peeringServicePrefixName
+                id: /subscriptions/subId/resourceGroups/MyResourceGroup/providers/Microsoft.Peering/peeringServices/MyPeeringService/prefixes/MyPeeringServicePrefix
+                name: MyPeeringServicePrefix
                 properties:
                   learnedType: None
                   prefix: 192.168.1.0/24
@@ -1294,18 +1294,18 @@ paths:
         Create or update a prefix for the peering service:
           parameters:
             api-version: 2019-08-01-preview
-            peeringServiceName: peeringServiceName
+            peeringServiceName: MyPeeringService
             peeringServicePrefix:
               properties:
                 prefix: 192.168.1.0/24
-            prefixName: peeringServicePrefixName
-            resourceGroupName: rgName
+            prefixName: MyPeeringServicePrefix
+            resourceGroupName: MyResourceGroup
             subscriptionId: subId
           responses:
             '200':
               body:
-                id: /subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peeringServices/peeringServiceName/prefixes/peeringServicePrefixName
-                name: peeringServicePrefixName
+                id: /subscriptions/subId/resourceGroups/MyResourceGroup/providers/Microsoft.Peering/peeringServices/MyPeeringService/prefixes/MyPeeringServicePrefix
+                name: MyPeeringServicePrefix
                 properties:
                   learnedType: None
                   prefix: 192.168.1.0/24
@@ -1313,8 +1313,8 @@ paths:
                   provisioningState: Succeeded
             '201':
               body:
-                id: /subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peeringServices/peeringServiceName/prefixes/peeringServicePrefixName
-                name: peeringServicePrefixName
+                id: /subscriptions/subId/resourceGroups/MyResourceGroup/providers/Microsoft.Peering/peeringServices/MyPeeringService/prefixes/MyPeeringServicePrefix
+                name: MyPeeringServicePrefix
                 properties:
                   learnedType: None
                   prefix: 192.168.1.0/24
@@ -1347,16 +1347,16 @@ paths:
         List peerings in a resource group:
           parameters:
             api-version: 2019-08-01-preview
-            resourceGroupName: rgName
+            resourceGroupName: MyResourceGroup
             subscriptionId: subId
           responses:
             '200':
               body:
                 value:
-                  - id: /subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peerings/peeringName
+                  - id: /subscriptions/subId/resourceGroups/MyResourceGroup/providers/Microsoft.Peering/peerings/MyPeering
                     kind: Exchange
                     location: eastus
-                    name: peeringName
+                    name: MyPeering
                     properties:
                       exchange:
                         connections:
@@ -1430,8 +1430,8 @@ paths:
         Delete a peering:
           parameters:
             api-version: 2019-08-01-preview
-            peeringName: peeringName
-            resourceGroupName: rgName
+            peeringName: MyPeering
+            resourceGroupName: MyResourceGroup
             subscriptionId: subId
           responses:
             '200': {}
@@ -1467,16 +1467,16 @@ paths:
         Get a peering:
           parameters:
             api-version: 2019-08-01-preview
-            peeringName: peeringName
-            resourceGroupName: rgName
+            peeringName: MyPeering
+            resourceGroupName: MyResourceGroup
             subscriptionId: subId
           responses:
             '200':
               body:
-                id: /subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peerings/peeringName
+                id: /subscriptions/subId/resourceGroups/MyResourceGroup/providers/Microsoft.Peering/peerings/MyPeering
                 kind: Exchange
                 location: eastus
-                name: peeringName
+                name: MyPeering
                 properties:
                   exchange:
                     connections:
@@ -1553,8 +1553,8 @@ paths:
         Update peering tags:
           parameters:
             api-version: 2019-08-01-preview
-            peeringName: peeringName
-            resourceGroupName: rgName
+            peeringName: MyPeering
+            resourceGroupName: MyResourceGroup
             subscriptionId: subId
             tags:
               tags:
@@ -1563,10 +1563,10 @@ paths:
           responses:
             '200':
               body:
-                id: /subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peerings/peeringName
+                id: /subscriptions/subId/resourceGroups/MyResourceGroup/providers/Microsoft.Peering/peerings/MyPeering
                 kind: Exchange
                 location: eastus
-                name: peeringName
+                name: MyPeering
                 properties:
                   exchange:
                     connections:
@@ -1685,16 +1685,16 @@ paths:
                 peeringLocation: peeringLocation0
               sku:
                 name: Basic_Direct_Free
-            peeringName: peeringName
-            resourceGroupName: rgName
+            peeringName: MyPeering
+            resourceGroupName: MyResourceGroup
             subscriptionId: subId
           responses:
             '200':
               body:
-                id: /subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peerings/peeringName
+                id: /subscriptions/subId/resourceGroups/MyResourceGroup/providers/Microsoft.Peering/peerings/MyPeering
                 kind: Direct
                 location: eastus
-                name: peeringName
+                name: MyPeering
                 properties:
                   direct:
                     connections:
@@ -1742,10 +1742,10 @@ paths:
                 type: Microsoft.Peering/peerings
             '201':
               body:
-                id: /subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peerings/peeringName
+                id: /subscriptions/subId/resourceGroups/MyResourceGroup/providers/Microsoft.Peering/peerings/MyPeering
                 kind: Direct
                 location: eastus
-                name: peeringName
+                name: MyPeering
                 properties:
                   direct:
                     connections:
@@ -1821,16 +1821,16 @@ paths:
                 peeringLocation: peeringLocation0
               sku:
                 name: Basic_Exchange_Free
-            peeringName: peeringName
-            resourceGroupName: rgName
+            peeringName: MyPeering
+            resourceGroupName: MyResourceGroup
             subscriptionId: subId
           responses:
             '200':
               body:
-                id: /subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peerings/peeringName
+                id: /subscriptions/subId/resourceGroups/MyResourceGroup/providers/Microsoft.Peering/peerings/MyPeering
                 kind: Exchange
                 location: eastus
-                name: peeringName
+                name: MyPeering
                 properties:
                   exchange:
                     connections:
@@ -1872,10 +1872,10 @@ paths:
                 type: Microsoft.Peering/peerings
             '201':
               body:
-                id: /subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peerings/peeringName
+                id: /subscriptions/subId/resourceGroups/MyResourceGroup/providers/Microsoft.Peering/peerings/MyPeering
                 kind: Exchange
                 location: eastus
-                name: peeringName
+                name: MyPeering
                 properties:
                   exchange:
                     connections:

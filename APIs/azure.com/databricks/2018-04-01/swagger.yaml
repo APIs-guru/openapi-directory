@@ -294,6 +294,65 @@ paths:
                 type: Microsoft.Databricks/workspaces
               headers: {}
             '404': {}
+        Get a workspace with custom parameters:
+          parameters:
+            api-version: '2018-04-01'
+            resourceGroupName: rg
+            subscriptionId: subid
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Databricks/workspaces/myWorkspace
+                location: East US 2
+                name: myWorkspace
+                properties:
+                  managedResourceGroupId: /subscriptions/subid/resourceGroups/myManagedRG
+                  parameters:
+                    amlWorkspaceId:
+                      type: String
+                      value: ''
+                    customPrivateSubnetName:
+                      type: String
+                      value: PrivateBob
+                    customPublicSubnetName:
+                      type: String
+                      value: PublicSarah
+                    customVirtualNetworkId:
+                      type: String
+                      value: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/myNetwork
+                    enableNoPublicIp:
+                      type: Bool
+                      value: true
+                    loadBalancerBackendPoolName:
+                      type: String
+                      value: ''
+                    loadBalancerId:
+                      type: String
+                      value: ''
+                    relayNamespaceName:
+                      type: String
+                      value: test
+                    resourceTags:
+                      type: Object
+                      value:
+                        Environment: Production
+                        application: databricks
+                        databricks-environment: 'true'
+                    storageAccountName:
+                      type: String
+                      value: examplesa99
+                    storageAccountSkuName:
+                      type: String
+                      value: Standard_GRS
+                    vnetAddressPrefix:
+                      type: String
+                      value: '10.139'
+                  provisioningState: Created
+                  uiDefinitionUri: 'https://path/to/workspaceCreateUiDefinition.json'
+                type: Microsoft.Databricks/workspaces
+              headers: {}
+            '404': {}
     patch:
       description: Updates a workspace.
       operationId: Workspaces_Update
@@ -336,7 +395,6 @@ paths:
               body:
                 id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Databricks/workspaces/myWorkspace
                 location: East US 2
-                name: myWorkspace
                 properties:
                   managedResourceGroupId: /subscriptions/subid/resourceGroups/myManagedRG
                   parameters: null
@@ -383,7 +441,6 @@ paths:
             api-version: '2018-04-01'
             parameters:
               location: westus
-              name: myWorkspace
               properties:
                 managedResourceGroupId: /subscriptions/subid/resourceGroups/myManagedRG
             resourceGroupName: rg
@@ -394,7 +451,6 @@ paths:
               body:
                 id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Databricks/workspaces/myWorkspace
                 location: East US 2
-                name: myWorkspace
                 properties:
                   managedResourceGroupId: /subscriptions/subid/resourceGroups/myManagedRG
                   parameters: null
@@ -418,6 +474,120 @@ paths:
                   name: skuName
                 tags: null
                 type: Microsoft.Databricks/workspaces
+        Create or update workspace with custom parameters:
+          parameters:
+            api-version: '2018-04-01'
+            parameters:
+              location: westus
+              properties:
+                managedResourceGroupId: /subscriptions/subid/resourceGroups/myManagedRG
+            resourceGroupName: rg
+            subscriptionId: subid
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Databricks/workspaces/myWorkspace
+                location: East US 2
+                properties:
+                  managedResourceGroupId: /subscriptions/subid/resourceGroups/myManagedRG
+                  parameters:
+                    amlWorkspaceId:
+                      type: String
+                      value: 11112222-3333-4444-5555-666677778888
+                    customPrivateSubnetName:
+                      type: String
+                      value: PrivateBob
+                    customPublicSubnetName:
+                      type: String
+                      value: PublicSarah
+                    customVirtualNetworkId:
+                      type: String
+                      value: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/myNetwork
+                    enableNoPublicIp:
+                      type: Bool
+                      value: true
+                    loadBalancerBackendPoolName:
+                      type: String
+                      value: CustomBackendAddressPool
+                    loadBalancerId:
+                      type: String
+                      value: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Network/loadBalancers/lb1
+                    relayNamespaceName:
+                      type: String
+                      value: test
+                    resourceTags:
+                      type: Object
+                      value:
+                        hello: world
+                    storageAccountName:
+                      type: String
+                      value: mysa999
+                    storageAccountSkuName:
+                      type: String
+                      value: Standard_GRS
+                    vnetAddressPrefix:
+                      type: String
+                      value: '10.139'
+                  provisioningState: Created
+                  uiDefinitionUri: 'https://path/to/workspaceCreateUiDefinition.json'
+                sku:
+                  name: skuName
+                tags: null
+                type: Microsoft.Databricks/workspaces
+              headers: {}
+            '201':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Databricks/workspaces/myWorkspace
+                location: East US 2
+                name: myWorkspace
+                properties:
+                  managedResourceGroupId: /subscriptions/subid/resourceGroups/myManagedRG
+                  parameters:
+                    amlWorkspaceId:
+                      type: String
+                      value: 11112222-3333-4444-5555-666677778888
+                    customPrivateSubnetName:
+                      type: String
+                      value: PrivateBob
+                    customPublicSubnetName:
+                      type: String
+                      value: PublicSarah
+                    customVirtualNetworkId:
+                      type: String
+                      value: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/myNetwork
+                    enableNoPublicIp:
+                      type: Bool
+                      value: true
+                    loadBalancerBackendPoolName:
+                      type: String
+                      value: CustomBackendAddressPool
+                    loadBalancerId:
+                      type: String
+                      value: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Network/loadBalancers/lb1
+                    relayNamespaceName:
+                      type: String
+                      value: test
+                    resourceTags:
+                      type: Object
+                      value:
+                        hello: world
+                    storageAccountName:
+                      type: String
+                      value: mysa999
+                    storageAccountSkuName:
+                      type: String
+                      value: Standard_GRS
+                    vnetAddressPrefix:
+                      type: String
+                      value: '10.139'
+                  provisioningState: Created
+                  uiDefinitionUri: 'https://path/to/workspaceCreateUiDefinition.json'
+                sku:
+                  name: skuName
+                tags: null
+                type: Microsoft.Databricks/workspaces
+              headers: {}
       x-ms-long-running-operation: true
 definitions:
   ErrorDetail:
@@ -579,6 +749,89 @@ definitions:
         description: The SKU of the resource.
     required:
       - properties
+  WorkspaceCustomBooleanParameter:
+    description: The value which should be used for this field.
+    properties:
+      type:
+        $ref: '#/definitions/WorkspaceCustomParameterType'
+        description: The type of variable that this is
+      value:
+        description: The value which should be used for this field.
+        type: boolean
+    required:
+      - value
+  WorkspaceCustomObjectParameter:
+    description: The value which should be used for this field.
+    properties:
+      type:
+        $ref: '#/definitions/WorkspaceCustomParameterType'
+        description: The type of variable that this is
+      value:
+        description: The value which should be used for this field.
+        type: object
+    required:
+      - value
+  WorkspaceCustomParameterType:
+    description: Provisioning status of the workspace.
+    enum:
+      - Bool
+      - Object
+      - String
+    readOnly: true
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: CustomParameterType
+  WorkspaceCustomParameters:
+    description: Custom Parameters used for Cluster Creation.
+    properties:
+      amlWorkspaceId:
+        $ref: '#/definitions/WorkspaceCustomStringParameter'
+        description: The Workspace ID of an Azure Machine Learning Workspace
+      customPrivateSubnetName:
+        $ref: '#/definitions/WorkspaceCustomStringParameter'
+        description: The name of the Private Subnet within the Virtual Network
+      customPublicSubnetName:
+        $ref: '#/definitions/WorkspaceCustomStringParameter'
+        description: The name of a Public Subnet within the Virtual Network
+      customVirtualNetworkId:
+        $ref: '#/definitions/WorkspaceCustomStringParameter'
+        description: The ID of a Virtual Network where this Databricks Cluster should be created
+      enableNoPublicIp:
+        $ref: '#/definitions/WorkspaceCustomBooleanParameter'
+        description: Should the Public IP be Disabled?
+      loadBalancerBackendPoolName:
+        $ref: '#/definitions/WorkspaceCustomStringParameter'
+        description: The name of a Backend Address Pool within an Azure Load Balancer
+      loadBalancerId:
+        $ref: '#/definitions/WorkspaceCustomStringParameter'
+        description: The Resource ID of an Azure Load Balancer
+      relayNamespaceName:
+        $ref: '#/definitions/WorkspaceCustomStringParameter'
+        description: The name of an Azure Relay Namespace
+      resourceTags:
+        $ref: '#/definitions/WorkspaceCustomObjectParameter'
+        description: A map of Tags which should be applied to the resources used by this Databricks Cluster.
+      storageAccountName:
+        $ref: '#/definitions/WorkspaceCustomStringParameter'
+        description: The name which should be used for the Storage Account
+      storageAccountSkuName:
+        $ref: '#/definitions/WorkspaceCustomStringParameter'
+        description: The SKU which should be used for this Storage Account
+      vnetAddressPrefix:
+        $ref: '#/definitions/WorkspaceCustomStringParameter'
+        description: 'The first 2 octets of the virtual network /16 address range (e.g., ''10.139'' for the address range 10.139.0.0/16).'
+  WorkspaceCustomStringParameter:
+    description: The Value.
+    properties:
+      type:
+        $ref: '#/definitions/WorkspaceCustomParameterType'
+        description: The type of variable that this is
+      value:
+        description: The value which should be used for this field.
+        type: string
+    required:
+      - value
   WorkspaceListResult:
     description: List of workspaces.
     properties:
@@ -602,8 +855,8 @@ definitions:
         description: The managed resource group Id.
         type: string
       parameters:
-        description: Name and value pairs that define the workspace parameters.
-        type: object
+        $ref: '#/definitions/WorkspaceCustomParameters'
+        description: The workspace's custom parameters.
       provisioningState:
         $ref: '#/definitions/ProvisioningState'
         description: The workspace provisioning state.

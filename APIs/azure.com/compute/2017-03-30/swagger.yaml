@@ -68,6 +68,62 @@ paths:
             $ref: '#/definitions/AvailabilitySetListResult'
       tags:
         - AvailabilitySets
+      x-ms-examples:
+        List availability sets in a subscription.:
+          parameters:
+            $expand: virtualMachines\$ref
+            api-version: '2017-03-30'
+            subscriptionId: '{subscriptionId}'
+          responses:
+            '200':
+              body:
+                value:
+                  - id: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}'
+                    location: australiasoutheast
+                    name: '{availabilitySetName}'
+                    properties:
+                      platformFaultDomainCount: 3
+                      platformUpdateDomainCount: 5
+                      virtualMachines:
+                        - id: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}'
+                    sku:
+                      name: Classic
+                    type: Microsoft.Compute/availabilitySets
+                  - id: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}'
+                    location: australiasoutheast
+                    name: '{availabilitySetName}'
+                    properties:
+                      platformFaultDomainCount: 3
+                      platformUpdateDomainCount: 5
+                      virtualMachines:
+                        - id: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}'
+                    sku:
+                      name: Classic
+                    type: Microsoft.Compute/availabilitySets
+                  - id: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}'
+                    location: westcentralus
+                    name: '{availabilitySetName}'
+                    properties:
+                      platformFaultDomainCount: 3
+                      platformUpdateDomainCount: 5
+                      virtualMachines: []
+                    sku:
+                      name: Classic
+                    tags:
+                      '{tagName}': '{tagValue}'
+                    type: Microsoft.Compute/availabilitySets
+                  - id: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}'
+                    location: westcentralus
+                    name: '{availabilitySetName}'
+                    properties:
+                      platformFaultDomainCount: 3
+                      platformUpdateDomainCount: 5
+                      virtualMachines: []
+                    sku:
+                      name: Classic
+                    tags:
+                      '{tagName}': '{tagValue}'
+                    type: Microsoft.Compute/availabilitySets
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Compute/images':

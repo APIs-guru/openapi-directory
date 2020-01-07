@@ -65,17 +65,47 @@ paths:
               body:
                 value:
                   - display:
+                      description: Gets the list of supported operations
+                      operation: Get Operations
+                      provider: Microsoft Resource Graph
+                      resource: Operation
+                    name: Microsoft.ResourceGraph/operations/read
+                  - display:
                       description: Submits a query on resources within specified subscriptions
                       operation: Query resources
                       provider: Microsoft Resource Graph
                       resource: Resources
-                    name: Microsoft.ResourceGraph/resources/action
+                    name: Microsoft.ResourceGraph/resources/read
                   - display:
-                      description: Create/Update/Retrieve a query within specified subscription and resource group.
-                      operation: CRUD operations of graph queries
+                      description: Lists changes to a resource for a given time interval
+                      operation: Query resource changes
                       provider: Microsoft Resource Graph
-                      resource: Queries
-                    name: Microsoft.ResourceGraph/queries/action
+                      resource: Resource Changes
+                    name: Microsoft.ResourceGraph/resourceChanges/read
+                  - display:
+                      description: Gets the details of the specified resource change
+                      operation: Query resource change details
+                      provider: Microsoft Resource Graph
+                      resource: Resource Change Details
+                    name: Microsoft.ResourceGraph/resourceChangeDetails/read
+                  - display:
+                      description: Gets the specified graph query
+                      operation: Read resource graph queries
+                      provider: Microsoft Resource Graph
+                      resource: Resource Graph Queries
+                    name: Microsoft.ResourceGraph/queries/read
+                  - display:
+                      description: Deletes the specified graph query
+                      operation: Delete resource graph queries
+                      provider: Microsoft Resource Graph
+                      resource: Resource Graph Queries
+                    name: Microsoft.ResourceGraph/queries/delete
+                  - display:
+                      description: Creates/Updates the specified graph query
+                      operation: Create/Update resource graph queries
+                      provider: Microsoft Resource Graph
+                      resource: Resource Graph Queries
+                    name: Microsoft.ResourceGraph/queries/write
       x-ms-pageable:
         nextLinkName: nextLink
   /providers/Microsoft.ResourceGraph/resourceChangeDetails:

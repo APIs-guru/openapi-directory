@@ -65,11 +65,17 @@ paths:
               body:
                 value:
                   - display:
+                      description: Gets the list of supported operations
+                      operation: Get Operations
+                      provider: Microsoft Resource Graph
+                      resource: Operation
+                    name: Microsoft.ResourceGraph/operations/read
+                  - display:
                       description: Submits a query on resources within specified subscriptions
                       operation: Query resources
                       provider: Microsoft Resource Graph
                       resource: Resources
-                    name: Microsoft.ResourceGraph/resources/action
+                    name: Microsoft.ResourceGraph/resources/read
       x-ms-pageable:
         nextLinkName: null
   /providers/Microsoft.ResourceGraph/resources:

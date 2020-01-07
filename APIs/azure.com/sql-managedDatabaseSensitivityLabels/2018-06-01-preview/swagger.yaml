@@ -700,4 +700,15 @@ definitions:
       labelName:
         description: The label name.
         type: string
+      rank:
+        enum:
+          - None
+          - Low
+          - Medium
+          - High
+          - Critical
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: SensitivityLabelRank
     type: object

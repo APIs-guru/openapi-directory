@@ -102,9 +102,10 @@ paths:
                       invitationId: 4256e2cf-0f82-4865-961b-12f83333f487
                       invitationStatus: Accepted
                       location: eastus2
+                      providerEmail: john.smith@microsoft.com
+                      providerName: John Smith
+                      providerTenantName: microsoft
                       respondedAt: '2019-01-15T02:01:51.8953054Z'
-                      sender: John Smith
-                      senderCompanyName: microsoft
                       sentAt: '2019-01-15T01:45:25.6226946Z'
                       shareName: share1
                       termsOfUse: Confidential
@@ -165,8 +166,10 @@ paths:
                   invitationId: 4256e2cf-0f82-4865-961b-12f83333f487
                   invitationStatus: Rejected
                   location: eastus2
+                  providerEmail: john.smith@microsoft.com
+                  providerName: John Smith
+                  providerTenantName: microsoft
                   respondedAt: '2019-01-15T02:01:51.8953054Z'
-                  sender: John Smith
                   sentAt: '2019-01-15T01:45:25.6226946Z'
                   shareName: share1
                   termsOfUse: Confidential
@@ -222,8 +225,10 @@ paths:
                   invitationId: 4256e2cf-0f82-4865-961b-12f83333f487
                   invitationStatus: Accepted
                   location: eastus2
+                  providerEmail: john.smith@microsoft.com
+                  providerName: John Smith
+                  providerTenantName: Microsoft
                   respondedAt: '2019-01-15T02:01:51.8953054Z'
-                  sender: John Smith
                   sentAt: '2019-01-15T01:45:25.6226946Z'
                   shareName: share1
                   termsOfUse: Confidential
@@ -327,7 +332,8 @@ paths:
                     name: Account1
                     properties:
                       createdAt: '2018-11-14T04:47:52.9614956Z'
-                      createdBy: johnsmith@microsoft.com
+                      userEmail: johnsmith@microsoft.com
+                      userName: johnsmith@microsoft.com
                     tags:
                       tag1: Red
                       tag2: White
@@ -339,7 +345,8 @@ paths:
                     name: Account2
                     properties:
                       createdAt: '2018-11-14T04:47:52.9614956Z'
-                      createdBy: johnsmith@microsoft.com
+                      userEmail: johnsmith@microsoft.com
+                      userName: johnsmith@microsoft.com
                     type: Microsoft.DataShare/Accounts
               headers:
                 Date: 'Wed, 13 Sep 2017 17:33:55 GMT'
@@ -391,7 +398,8 @@ paths:
                     name: Account1
                     properties:
                       createdAt: '2018-11-14T04:47:52.9614956Z'
-                      createdBy: johnsmith@microsoft.com
+                      userEmail: johnsmith@microsoft.com
+                      userName: John Smith
                     tags:
                       tag1: Red
                       tag2: White
@@ -403,7 +411,8 @@ paths:
                     name: Account2
                     properties:
                       createdAt: '2018-11-14T04:47:52.9614956Z'
-                      createdBy: johnsmith@microsoft.com
+                      userEmail: johnsmith@microsoft.com
+                      userName: John Smith
                     type: Microsoft.DataShare/Accounts
               headers:
                 Date: 'Wed, 13 Sep 2017 17:33:55 GMT'
@@ -457,7 +466,7 @@ paths:
                 x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
             '202':
               headers:
-                Azure-AsyncOperation: 'https://management.azure.com/subscriptions/d8869ae5-cd9e-413a-b660-104573d8bcee/resourceGroups/testrg/providers/Microsoft.DataShare/accounts/sourceAccount/operationResults/dad6baec-3a39-41df-a469-843a9ee94213?api-version=2018-11-01-preview'
+                Azure-AsyncOperation: 'https://management.azure.com/locations/eastus2/operationResults/dad6baec-3a39-41df-a469-843a9ee94213?api-version=2018-11-01-preview'
                 Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
                 X-Content-Type-Options: nosniff
                 x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
@@ -509,8 +518,9 @@ paths:
                 name: Account1
                 properties:
                   createdAt: '2018-11-14T04:47:52.9614956Z'
-                  createdBy: johnsmith@microsoft.com
                   provisioningState: Succeeded
+                  userEmail: john.smith@microsoft.com
+                  userName: John Smith
                 tags:
                   tag1: Red
                   tag2: White
@@ -568,7 +578,8 @@ paths:
                 name: Account1
                 properties:
                   createdAt: '2018-11-14T04:47:52.9614956Z'
-                  createdBy: johnsmith@microsoft.com
+                  userEmail: johnsmith@microsoft.com
+                  userName: John Smith
                 tags:
                   tag1: Red
                   tag2: White
@@ -633,7 +644,8 @@ paths:
                 name: Account1
                 properties:
                   createdAt: '2018-11-14T04:47:52.9614956Z'
-                  createdBy: johnsmith@microsoft.com
+                  userEmail: johnsmith@microsoft.com
+                  userName: John Smith
                 tags:
                   tag1: Red
                   tag2: White
@@ -653,7 +665,8 @@ paths:
                 name: Account1
                 properties:
                   createdAt: '2018-11-14T04:47:52.9614956Z'
-                  createdBy: johnsmith@microsoft.com
+                  userEmail: johnsmith@microsoft.com
+                  userName: John Smith
                 tags:
                   tag1: Red
                   tag2: White
@@ -705,22 +718,34 @@ paths:
                   - id: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.DataShare/accounts/Account1/sharesubscriptions/ShareSubscription1
                     name: ShareSubscription1
                     properties:
-                      createdAt: '2018-11-14T06:15:15.6818898Z'
-                      createdBy: johnsmith@microsoft.com
-                      invitationId: 12345678-1234-1234-12345678abd
-                      shareSubscriptionStatus: Active
-                    type: Microsoft.DataShare/ShareSubscription
-                  - id: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.DataShare/accounts/Account1/sharesubscriptions/ShareSubscription1
-                    name: ShareSubscription1
-                    properties:
                       createdAt: '2019-01-17T22:32:36.8185016Z'
-                      createdBy: John Smith
                       invitationId: 4256e2cf-0f82-4865-961b-12f83333f487
+                      providerEmail: jack.rose@microsoft.com
+                      providerName: Jack Rose
+                      providerTenantName: Microsoft
                       shareDescription: Some share
                       shareKind: CopyBased
                       shareName: share1
                       shareSubscriptionStatus: Active
                       shareTerms: Confidential
+                      userEmail: john.smith@microsoft.com
+                      userName: John Smith
+                    type: Microsoft.DataShare/ShareSubscription
+                  - id: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.DataShare/accounts/Account1/sharesubscriptions/ShareSubscription1
+                    name: ShareSubscription1
+                    properties:
+                      createdAt: '2019-01-17T22:32:36.8185016Z'
+                      invitationId: 4256e2cf-0f82-4865-961b-12f83333f487
+                      providerEmail: jack.rose@microsoft.com
+                      providerName: Jack Rose
+                      providerTenantName: Microsoft
+                      shareDescription: Some share
+                      shareKind: CopyBased
+                      shareName: share1
+                      shareSubscriptionStatus: Active
+                      shareTerms: Confidential
+                      userEmail: john.smith@microsoft.com
+                      userName: John Smith
                     type: Microsoft.DataShare/ShareSubscription
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
@@ -835,15 +860,18 @@ paths:
                 name: ShareSubscription1
                 properties:
                   createdAt: '2019-01-17T22:32:36.8185016Z'
-                  createdBy: John Smith
                   invitationId: 4256e2cf-0f82-4865-961b-12f83333f487
+                  providerEmail: jack.rose@microsoft.com
+                  providerName: Jack Rose
+                  providerTenantName: Microsoft
                   provisioningState: Succeeded
                   shareDescription: Some share
                   shareKind: CopyBased
                   shareName: share1
-                  shareSenderCompanyName: ShareSenderCompanyName
                   shareSubscriptionStatus: Active
                   shareTerms: Confidential
+                  userEmail: john.smith@microsoft.com
+                  userName: John Smith
                 type: Microsoft.DataShare/ShareSubscription
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
@@ -904,13 +932,17 @@ paths:
                 name: ShareSubscription1
                 properties:
                   createdAt: '2019-01-17T22:32:36.8185016Z'
-                  createdBy: John Smith
                   invitationId: 4256e2cf-0f82-4865-961b-12f83333f487
+                  providerEmail: jack.rose@microsoft.com
+                  providerName: Jack Rose
+                  providerTenantName: Microsoft
                   shareDescription: Some share
                   shareKind: CopyBased
                   shareName: share1
                   shareSubscriptionStatus: Active
                   shareTerms: Confidential
+                  userEmail: john.smith@microsoft.com
+                  userName: John Smith
                 type: Microsoft.DataShare/ShareSubscription
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
@@ -924,13 +956,17 @@ paths:
                 name: ShareSubscription1
                 properties:
                   createdAt: '2019-01-17T22:32:36.8185016Z'
-                  createdBy: John Smith
                   invitationId: 4256e2cf-0f82-4865-961b-12f83333f487
+                  providerEmail: jack.rose@microsoft.com
+                  providerName: Jack Rose
+                  providerTenantName: Microsoft
                   shareDescription: Some share
                   shareKind: CopyBased
                   shareName: share1
                   shareSubscriptionStatus: Active
                   shareTerms: Confidential
+                  userEmail: john.smith@microsoft.com
+                  userName: John Smith
                 type: Microsoft.DataShare/ShareSubscription
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
@@ -986,6 +1022,7 @@ paths:
                     properties:
                       dataSetId: 0b9d4394-8bb3-49a1-aa4f-4be49cd10375
                       dataSetName: input.text
+                      dataSetPath: cars.text
                       dataSetType: Blob
                     type: Microsoft.DataShare/consumerSourceDataSets
               headers:
@@ -1192,6 +1229,7 @@ paths:
                     name: DatasetMapping1
                     properties:
                       containerName: C1
+                      dataSetId: a08f184b-0567-4b11-ba22-a1199336d226
                       filePath: file21
                       resourceGroup: SampleResourceGroup
                       storageAccountName: storage2
@@ -1202,6 +1240,7 @@ paths:
                     name: DatasetMapping1
                     properties:
                       containerName: C1
+                      dataSetId: a08f184b-0567-4b11-ba22-a1199336d227
                       filePath: file21
                       resourceGroup: SampleResourceGroup
                       storageAccountName: storage2
@@ -1317,6 +1356,7 @@ paths:
                 name: DatasetMapping1
                 properties:
                   containerName: C1
+                  dataSetId: a08f184b-0567-4b11-ba22-a1199336d226
                   filePath: file21
                   resourceGroup: SampleResourceGroup
                   storageAccountName: storage2
@@ -1340,7 +1380,7 @@ paths:
           name: shareSubscriptionName
           required: true
           type: string
-        - description: The Id of the source data set being mapped.
+        - description: The name of the data set mapping to be created.
           in: path
           name: dataSetMappingName
           required: true
@@ -1369,13 +1409,123 @@ paths:
       tags:
         - DataSetMapping
       x-ms-examples:
-        DataSetMappings_AdlsGen2File_Create:
+        DataSetMappings_Create:
+          parameters:
+            accountName: Account1
+            api-version: 2018-11-01-preview
+            dataSetMapping:
+              kind: Blob
+              properties:
+                containerName: C1
+                dataSetId: a08f184b-0567-4b11-ba22-a1199336d226
+                filePath: file21
+                resourceGroup: SampleResourceGroup
+                storageAccountName: storage2
+                subscriptionId: 433a8dfd-e5d5-4e77-ad86-90acdc75eb1a
+            dataSetMappingName: DatasetMapping1
+            resourceGroupName: SampleResourceGroup
+            shareSubscriptionName: ShareSubscription1
+            subscriptionId: 433a8dfd-e5d5-4e77-ad86-90acdc75eb1a
+          responses:
+            '200':
+              body:
+                id: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.DataShare/accounts/Account1/shareSubscriptions/ShareSubscription1/dataSetMappings/DatasetMapping1
+                kind: Blob
+                name: DatasetMapping1
+                properties:
+                  containerName: C1
+                  dataSetId: a08f184b-0567-4b11-ba22-a1199336d226
+                  filePath: file21
+                  resourceGroup: SampleResourceGroup
+                  storageAccountName: storage2
+                  subscriptionId: 433a8dfd-e5d5-4e77-ad86-90acdc75eb1a
+                type: Microsoft.DataShare/DataSetMapping
+              headers:
+                Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
+                X-Content-Type-Options: nosniff
+                x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
+                x-ms-ratelimit-remaining-tenant-reads: '14999'
+                x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
+            '201':
+              body:
+                id: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.DataShare/accounts/Account1/shareSubscriptions/ShareSubscription1/dataSetMappings/DatasetMapping1
+                kind: Blob
+                name: DatasetMapping1
+                properties:
+                  containerName: C1
+                  dataSetId: a08f184b-0567-4b11-ba22-a1199336d227
+                  filePath: file21
+                  resourceGroup: SampleResourceGroup
+                  storageAccountName: storage2
+                  subscriptionId: 433a8dfd-e5d5-4e77-ad86-90acdc75eb1a
+                type: Microsoft.DataShare/DataSetMapping
+              headers:
+                Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
+                X-Content-Type-Options: nosniff
+                x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
+                x-ms-ratelimit-remaining-tenant-reads: '14999'
+                x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
+        DataSetMappings_SqlDB_Create:
+          parameters:
+            accountName: Account1
+            api-version: 2018-11-01-preview
+            dataSetMapping:
+              kind: SqlDBTable
+              properties:
+                dataSetId: a08f184b-0567-4b11-ba22-a1199336d226
+                databaseName: Database1
+                schemaName: dbo
+                sqlServerResourceId: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.Sql/servers/Server1
+                tableName: Table1
+            dataSetMappingName: DatasetMapping1
+            resourceGroupName: SampleResourceGroup
+            shareSubscriptionName: ShareSubscription1
+            subscriptionId: 433a8dfd-e5d5-4e77-ad86-90acdc75eb1a
+          responses:
+            '200':
+              body:
+                id: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.DataShare/accounts/Account1/shareSubscriptions/ShareSubscription1/dataSetMappings/DatasetMapping1
+                kind: SqlDBTable
+                name: DatasetMapping1
+                properties:
+                  dataSetId: a08f184b-0567-4b11-ba22-a1199336d226
+                  databaseName: Database1
+                  schemaName: dbo
+                  sqlServerResourceId: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.Sql/servers/Server1
+                  tableName: Table1
+                type: Microsoft.DataShare/DataSetMapping
+              headers:
+                Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
+                X-Content-Type-Options: nosniff
+                x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
+                x-ms-ratelimit-remaining-tenant-reads: '14999'
+                x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
+            '201':
+              body:
+                id: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.DataShare/accounts/Account1/shareSubscriptions/ShareSubscription1/dataSetMappings/DatasetMapping1
+                kind: SqlDBTable
+                name: DatasetMapping1
+                properties:
+                  dataSetId: a08f184b-0567-4b11-ba22-a1199336d226
+                  databaseName: Database1
+                  schemaName: dbo
+                  sqlServerResourceId: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.Sql/servers/Server1
+                  tableName: Table1
+                type: Microsoft.DataShare/DataSetMapping
+              headers:
+                Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
+                X-Content-Type-Options: nosniff
+                x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
+                x-ms-ratelimit-remaining-tenant-reads: '14999'
+                x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
+        DataSetMappings_SqlDWDataSetToAdlsGen2File_Create:
           parameters:
             accountName: Account1
             api-version: 2018-11-01-preview
             dataSetMapping:
               kind: AdlsGen2File
               properties:
+                dataSetId: a08f184b-0567-4b11-ba22-a1199336d226
                 filePath: file21
                 fileSystem: fileSystem
                 outputType: Csv
@@ -1413,114 +1563,13 @@ paths:
                 kind: AdlsGen2File
                 name: DatasetMapping1
                 properties:
+                  dataSetId: a08f184b-0567-4b11-ba22-a1199336d226
                   filePath: file21
                   fileSystem: fileSystem
                   outputType: Csv
                   resourceGroup: SampleResourceGroup
                   storageAccountName: storage2
                   subscriptionId: 433a8dfd-e5d5-4e77-ad86-90acdc75eb1a
-                type: Microsoft.DataShare/DataSetMapping
-              headers:
-                Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
-                X-Content-Type-Options: nosniff
-                x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
-                x-ms-ratelimit-remaining-tenant-reads: '14999'
-                x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
-        DataSetMappings_Create:
-          parameters:
-            accountName: Account1
-            api-version: 2018-11-01-preview
-            dataSetMapping:
-              kind: Blob
-              properties:
-                containerName: C1
-                filePath: file21
-                resourceGroup: SampleResourceGroup
-                storageAccountName: storage2
-                subscriptionId: 433a8dfd-e5d5-4e77-ad86-90acdc75eb1a
-            dataSetMappingName: DatasetMapping1
-            resourceGroupName: SampleResourceGroup
-            shareSubscriptionName: ShareSubscription1
-            subscriptionId: 433a8dfd-e5d5-4e77-ad86-90acdc75eb1a
-          responses:
-            '200':
-              body:
-                id: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.DataShare/accounts/Account1/shareSubscriptions/ShareSubscription1/dataSetMappings/DatasetMapping1
-                kind: Blob
-                name: DatasetMapping1
-                properties:
-                  containerName: C1
-                  dataSetId: a08f184b-0567-4b11-ba22-a1199336d226
-                  filePath: file21
-                  resourceGroup: SampleResourceGroup
-                  storageAccountName: storage2
-                  subscriptionId: 433a8dfd-e5d5-4e77-ad86-90acdc75eb1a
-                type: Microsoft.DataShare/DataSetMapping
-              headers:
-                Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
-                X-Content-Type-Options: nosniff
-                x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
-                x-ms-ratelimit-remaining-tenant-reads: '14999'
-                x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
-            '201':
-              body:
-                id: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.DataShare/accounts/Account1/shareSubscriptions/ShareSubscription1/dataSetMappings/DatasetMapping1
-                kind: Blob
-                name: DatasetMapping1
-                properties:
-                  containerName: C1
-                  filePath: file21
-                  resourceGroup: SampleResourceGroup
-                  storageAccountName: storage2
-                  subscriptionId: 433a8dfd-e5d5-4e77-ad86-90acdc75eb1a
-                type: Microsoft.DataShare/DataSetMapping
-              headers:
-                Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
-                X-Content-Type-Options: nosniff
-                x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
-                x-ms-ratelimit-remaining-tenant-reads: '14999'
-                x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
-        DataSetMappings_SqlDB_Create:
-          parameters:
-            accountName: Account1
-            api-version: 2018-11-01-preview
-            dataSetMapping:
-              kind: SqlDBTable
-              properties:
-                databaseName: Database1
-                sqlServerResourceId: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.Sql/servers/Server1
-                tableName: Table1
-            dataSetMappingName: DatasetMapping1
-            resourceGroupName: SampleResourceGroup
-            shareSubscriptionName: ShareSubscription1
-            subscriptionId: 433a8dfd-e5d5-4e77-ad86-90acdc75eb1a
-          responses:
-            '200':
-              body:
-                id: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.DataShare/accounts/Account1/shareSubscriptions/ShareSubscription1/dataSetMappings/DatasetMapping1
-                kind: SqlDBTable
-                name: DatasetMapping1
-                properties:
-                  dataSetId: a08f184b-0567-4b11-ba22-a1199336d226
-                  databaseName: Database1
-                  sqlServerResourceId: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.Sql/servers/Server1
-                  tableName: Table1
-                type: Microsoft.DataShare/DataSetMapping
-              headers:
-                Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
-                X-Content-Type-Options: nosniff
-                x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
-                x-ms-ratelimit-remaining-tenant-reads: '14999'
-                x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
-            '201':
-              body:
-                id: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.DataShare/accounts/Account1/shareSubscriptions/ShareSubscription1/dataSetMappings/DatasetMapping1
-                kind: SqlDBTable
-                name: DatasetMapping1
-                properties:
-                  databaseName: Database1
-                  sqlServerResourceId: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.Sql/servers/Server1
-                  tableName: Table1
                 type: Microsoft.DataShare/DataSetMapping
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
@@ -1535,7 +1584,9 @@ paths:
             dataSetMapping:
               kind: SqlDWTable
               properties:
+                dataSetId: a08f184b-0567-4b11-ba22-a1199336d226
                 dataWarehouseName: DataWarehouse1
+                schemaName: dbo
                 sqlServerResourceId: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.Sql/servers/Server1
                 tableName: Table1
             dataSetMappingName: DatasetMapping1
@@ -1551,6 +1602,7 @@ paths:
                 properties:
                   dataSetId: a08f184b-0567-4b11-ba22-a1199336d226
                   dataWarehouseName: DataWarehouse1
+                  schemaName: dbo
                   sqlServerResourceId: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.Sql/servers/Server1
                   tableName: Table1
                 type: Microsoft.DataShare/DataSetMapping
@@ -1566,7 +1618,9 @@ paths:
                 kind: SqlDWTable
                 name: DatasetMapping1
                 properties:
+                  dataSetId: a08f184b-0567-4b11-ba22-a1199336d226
                   dataWarehouseName: DataWarehouse1
+                  schemaName: dbo
                   sqlServerResourceId: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.Sql/servers/Server1
                   tableName: Table1
                 type: Microsoft.DataShare/DataSetMapping
@@ -1746,6 +1800,7 @@ paths:
                     startTime: '2018-11-14T04:47:52.9614956Z'
                     status: Completed
                     synchronizationId: runId
+                    synchronizationMode: Incremental
               headers:
                 Date: 'Wed, 13 Sep 2017 17:33:55 GMT'
                 X-Content-Type-Options: nosniff
@@ -1806,6 +1861,7 @@ paths:
                       recurrenceInterval: Day
                       synchronizationMode: Incremental
                       synchronizationTime: '2018-11-14T04:47:52.9614956Z'
+                      userName: John Smith
                     type: Microsoft.DataShare/Trigger
               headers:
                 Date: 'Wed, 13 Sep 2017 17:33:55 GMT'
@@ -1937,6 +1993,7 @@ paths:
                   synchronizationMode: Incremental
                   synchronizationTime: '2018-11-14T04:47:52.9614956Z'
                   triggerStatus: Active
+                  userName: John Smith
                 type: Microsoft.DataShare/Trigger
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
@@ -2011,6 +2068,7 @@ paths:
                   synchronizationMode: Incremental
                   synchronizationTime: '2018-11-14T04:47:52.9614956Z'
                   triggerStatus: Active
+                  userName: John Smith
                 type: Microsoft.DataShare/Trigger
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
@@ -2029,6 +2087,7 @@ paths:
                   synchronizationMode: Incremental
                   synchronizationTime: '2018-11-14T04:47:52.9614956Z'
                   triggerStatus: Active
+                  userName: John Smith
                 type: Microsoft.DataShare/Trigger
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
@@ -2079,19 +2138,21 @@ paths:
                     name: Share1
                     properties:
                       createdAt: '2018-11-14T06:15:15.6818898Z'
-                      createdBy: johnsmith@microsoft.com
                       description: share description
                       shareKind: CopyBased
                       terms: Confidential
+                      userEmail: johnsmith@microsoft.com
+                      userName: John Smith
                     type: Microsoft.DataShare/Share
                   - id: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.DataShare/accounts/Account1/shares/Share1
                     name: Share1
                     properties:
                       createdAt: '2018-11-14T06:15:15.6818898Z'
-                      createdBy: johnsmith@microsoft.com
                       description: share description
                       shareKind: CopyBased
                       terms: Confidential
+                      userEmail: johnsmith@microsoft.com
+                      userName: John Smith
                     type: Microsoft.DataShare/Share
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
@@ -2206,10 +2267,11 @@ paths:
                 name: Share1
                 properties:
                   createdAt: '2018-11-14T06:15:15.6818898Z'
-                  createdBy: johnsmith@microsoft.com
                   description: share description
                   shareKind: CopyBased
                   terms: Confidential
+                  userEmail: johnsmith@microsoft.com
+                  userName: John Smith
                 type: Microsoft.DataShare/Share
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
@@ -2272,10 +2334,11 @@ paths:
                 name: Share1
                 properties:
                   createdAt: '2018-11-14T06:15:15.6818898Z'
-                  createdBy: johnsmith@microsoft.com
                   description: share description
                   shareKind: CopyBased
                   terms: Confidential
+                  userEmail: johnsmith@microsoft.com
+                  userName: John Smith
                 type: Microsoft.DataShare/Share
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
@@ -2289,10 +2352,11 @@ paths:
                 name: Share1
                 properties:
                   createdAt: '2018-11-14T06:15:15.6818898Z'
-                  createdBy: johnsmith@microsoft.com
                   description: share description
                   shareKind: CopyBased
                   terms: Confidential
+                  userEmail: johnsmith@microsoft.com
+                  userName: John Smith
                 type: Microsoft.DataShare/Share
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
@@ -2393,6 +2457,8 @@ paths:
       responses:
         '200':
           description: Success
+        '202':
+          description: Accepted
         '204':
           description: Success
         default:
@@ -2419,6 +2485,15 @@ paths:
                 x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
                 x-ms-ratelimit-remaining-tenant-reads: '14999'
                 x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
+            '202':
+              headers:
+                Azure-AsyncOperation: 'https://management.azure.com/subscriptions/d8869ae5-cd9e-413a-b660-104573d8bcee/resourceGroups/SampleResourceGroup/providers/Microsoft.DataShare/accounts/Account1/shares/Share1/operationResults/dad6baec-3a39-41df-a469-843a9ee94213?api-version=2018-11-01-preview'
+                Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
+                X-Content-Type-Options: nosniff
+                x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
+                x-ms-long-running-operation: true
+                x-ms-ratelimit-remaining-tenant-reads: '14999'
+                x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
             '204':
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
@@ -2426,6 +2501,7 @@ paths:
                 x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
                 x-ms-ratelimit-remaining-tenant-reads: '14999'
                 x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
+      x-ms-long-running-operation: true
     get:
       description: Get a DataSet in a share
       operationId: DataSets_Get
@@ -2544,7 +2620,7 @@ paths:
           responses:
             '200':
               body:
-                id: '/subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/testrg/providers/Microsoft.DataShare/accounts/{{accountName}}/shares/share1/datasets/dataset1new'
+                id: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.DataShare/accounts/Account1/shares/Share1/datasets/Dataset1
                 kind: Blob
                 name: null
                 properties:
@@ -2579,6 +2655,96 @@ paths:
                 x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
                 x-ms-ratelimit-remaining-tenant-reads: '14999'
                 x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
+        DataSets_KustoCluster_Create:
+          parameters:
+            accountName: Account1
+            api-version: 2018-11-01-preview
+            dataSet:
+              kind: KustoCluster
+              properties:
+                kustoClusterResourceId: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.Kusto/clusters/Cluster1
+            dataSetName: Dataset1
+            resourceGroupName: SampleResourceGroup
+            shareName: Share1
+            subscriptionId: 433a8dfd-e5d5-4e77-ad86-90acdc75eb1a
+          responses:
+            '200':
+              body:
+                id: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.DataShare/accounts/Account1/shares/Share1/datasets/Dataset1
+                kind: KustoCluster
+                name: null
+                properties:
+                  dataSetId: a08f184b-0567-4b11-ba22-a1199336d226
+                  kustoClusterResourceId: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.Kusto/clusters/Cluster1
+                  location: West US 2
+                type: Microsoft.DataShare/DataSets
+              headers:
+                Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
+                X-Content-Type-Options: nosniff
+                x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
+                x-ms-ratelimit-remaining-tenant-reads: '14999'
+                x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
+            '201':
+              body:
+                id: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.DataShare/accounts/Account1/shares/Share1/datasets/Dataset1
+                kind: KustoCluster
+                name: Dataset1
+                properties:
+                  dataSetId: a08f184b-0567-4b11-ba22-a1199336d226
+                  kustoClusterResourceId: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.Kusto/clusters/Cluster1
+                  location: West US 2
+                type: Microsoft.DataShare/DataSet
+              headers:
+                Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
+                X-Content-Type-Options: nosniff
+                x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
+                x-ms-ratelimit-remaining-tenant-reads: '14999'
+                x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
+        DataSets_KustoDatabase_Create:
+          parameters:
+            accountName: Account1
+            api-version: 2018-11-01-preview
+            dataSet:
+              kind: KustoDatabase
+              properties:
+                kustoDatabaseResourceId: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.Kusto/clusters/Cluster1/databases/Database1
+            dataSetName: Dataset1
+            resourceGroupName: SampleResourceGroup
+            shareName: Share1
+            subscriptionId: 433a8dfd-e5d5-4e77-ad86-90acdc75eb1a
+          responses:
+            '200':
+              body:
+                id: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.DataShare/accounts/Account1/shares/Share1/datasets/Dataset1
+                kind: KustoDatabase
+                name: null
+                properties:
+                  dataSetId: a08f184b-0567-4b11-ba22-a1199336d226
+                  kustoDatabaseResourceId: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.Kusto/clusters/Cluster1/databases/Database1
+                  location: West US 2
+                type: Microsoft.DataShare/DataSets
+              headers:
+                Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
+                X-Content-Type-Options: nosniff
+                x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
+                x-ms-ratelimit-remaining-tenant-reads: '14999'
+                x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
+            '201':
+              body:
+                id: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.DataShare/accounts/Account1/shares/Share1/datasets/Dataset1
+                kind: KustoDatabase
+                name: Dataset1
+                properties:
+                  dataSetId: a08f184b-0567-4b11-ba22-a1199336d226
+                  kustoDatabaseResourceId: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.Kusto/clusters/Cluster1/databases/Database1
+                  location: West US 2
+                type: Microsoft.DataShare/DataSet
+              headers:
+                Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
+                X-Content-Type-Options: nosniff
+                x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
+                x-ms-ratelimit-remaining-tenant-reads: '14999'
+                x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
         DataSets_SqlDBTable_Create:
           parameters:
             accountName: Account1
@@ -2587,6 +2753,7 @@ paths:
               kind: SqlDBTable
               properties:
                 databaseName: SqlDB1
+                schemaName: dbo
                 sqlServerResourceId: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.Sql/servers/Server1
                 tableName: Table1
             dataSetName: Dataset1
@@ -2602,6 +2769,7 @@ paths:
                 properties:
                   dataSetId: a08f184b-0567-4b11-ba22-a1199336d226
                   databaseName: SqlDB1
+                  schemaName: dbo
                   sqlServerResourceId: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.Sql/servers/Server1
                   tableName: Table1
                 type: Microsoft.DataShare/DataSets
@@ -2619,6 +2787,7 @@ paths:
                 properties:
                   dataSetId: a08f184b-0567-4b11-ba22-a1199336d226
                   databaseName: SqlDB1
+                  schemaName: dbo
                   sqlServerResourceId: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.Sql/servers/Server1
                   tableName: Table1
                 type: Microsoft.DataShare/DataSet
@@ -2636,6 +2805,7 @@ paths:
               kind: SqlDWTable
               properties:
                 dataWarehouseName: DataWarehouse1
+                schemaName: dbo
                 sqlServerResourceId: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.Sql/servers/Server1
                 tableName: Table1
             dataSetName: Dataset1
@@ -2651,6 +2821,7 @@ paths:
                 properties:
                   dataSetId: a08f184b-0567-4b11-ba22-a1199336d226
                   dataWarehouseName: DataWarehouse1
+                  schemaName: dbo
                   sqlServerResourceId: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.Sql/servers/Server1
                   tableName: Table1
                 type: Microsoft.DataShare/DataSets
@@ -2668,6 +2839,7 @@ paths:
                 properties:
                   dataSetId: a08f184b-0567-4b11-ba22-a1199336d226
                   dataWarehouseName: DataWarehouse1
+                  schemaName: dbo
                   sqlServerResourceId: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.Sql/servers/Server1
                   tableName: Table1
                 type: Microsoft.DataShare/DataSet
@@ -2724,9 +2896,10 @@ paths:
                     name: ancd
                     properties:
                       invitationStatus: Accepted
-                      sender: John Smith
                       sentAt: '2018-11-26T22:33:24.5785265Z'
                       targetEmail: johnsmith@microsoft.com
+                      userEmail: johnsmith@microsoft.com
+                      userName: John Smith
                     type: Microsoft.DataShare/Invitation
               headers:
                 Date: 'Wed, 13 Sep 2017 17:33:55 GMT'
@@ -2838,9 +3011,10 @@ paths:
                 properties:
                   invitationStatus: Pending
                   respondedAt: null
-                  sender: John Smith
                   sentAt: '2018-11-26T22:33:24.5785265Z'
                   targetEmail: receiver@microsoft.com
+                  userEmail: johnsmith@microsoft.com
+                  userName: John Smith
                 type: Microsoft.DataShare/Invitation1
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
@@ -2908,9 +3082,10 @@ paths:
                 properties:
                   invitationStatus: Pending
                   respondedAt: null
-                  sender: John Smith
                   sentAt: '2018-11-26T22:33:24.5785265Z'
                   targetEmail: receiver@microsoft.com
+                  userEmail: johnsmith@microsoft.com
+                  userName: John Smith
                 type: Microsoft.DataShare/Invitation1
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
@@ -2925,9 +3100,10 @@ paths:
                 properties:
                   invitationStatus: Pending
                   respondedAt: null
-                  sender: John Smith
                   sentAt: '2018-11-26T22:33:24.5785265Z'
                   targetEmail: receiver@microsoft.com
+                  userEmail: johnsmith@microsoft.com
+                  userName: John Smith
                 type: Microsoft.DataShare/Invitation1
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
@@ -3044,14 +3220,15 @@ paths:
             '200':
               body:
                 value:
-                  - company: nda
+                  - consumerName: abc@yahoo.com
+                    consumerTenantName: nda
                     durationMs: 2000
                     endTime: '2018-11-14T04:47:52.9614956Z'
                     message: nda
-                    recipient: abc@yahoo.com
                     startTime: '2018-11-14T04:47:52.9614956Z'
                     status: Completed
                     synchronizationId: runId
+                    synchronizationMode: Incremental
               headers:
                 Date: 'Wed, 13 Sep 2017 17:33:55 GMT'
                 X-Content-Type-Options: nosniff
@@ -3106,12 +3283,14 @@ paths:
                   - id: providers/Microsoft.DataShare/consumerInvitations/4256e2cf-0f82-4865-961b-12f83333f487
                     name: invitation1
                     properties:
-                      company: Microsoft
+                      consumerEmail: john.smith@microsoft.com
+                      consumerName: John Smith
+                      consumerTenantName: Microsoft
                       createdAt: '2018-12-13T08:52:42.6224087Z'
-                      createdBy: John Smith
+                      providerEmail: john.smith@microsoft.com
+                      providerName: John Smith
                       shareSubscriptionStatus: Active
                       sharedAt: '2018-12-13T08:45:40.9005877Z'
-                      sharedBy: John Smith
                     type: Microsoft.DataShare/shareSubscripitons
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
@@ -3167,12 +3346,14 @@ paths:
                 id: providers/Microsoft.DataShare/consumerInvitations/4256e2cf-0f82-4865-961b-12f83333f487
                 name: invitation1
                 properties:
-                  company: Microsoft
+                  consumerEmail: john.smith@microsoft.com
+                  consumerName: John Smith
+                  consumerTenantName: Microsoft
                   createdAt: '2018-12-13T08:52:42.6224087Z'
-                  createdBy: John Smith
+                  providerEmail: john.smith@microsoft.com
+                  providerName: John Smith
                   shareSubscriptionStatus: Active
                   sharedAt: '2018-12-13T08:45:40.9005877Z'
-                  sharedBy: John Smith
                 type: Microsoft.DataShare/shareSubscripitons
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
@@ -3226,12 +3407,14 @@ paths:
                 id: providers/Microsoft.DataShare/consumerInvitations/4256e2cf-0f82-4865-961b-12f83333f487
                 name: invitation1
                 properties:
-                  company: Microsoft
+                  consumerEmail: john.smith@microsoft.com
+                  consumerName: John Smith
+                  consumerTenantName: Microsoft
                   createdAt: '2018-12-13T08:52:42.6224087Z'
-                  createdBy: John Smith
+                  providerEmail: john.smith@microsoft.com
+                  providerName: John Smith
                   shareSubscriptionStatus: Active
                   sharedAt: '2018-12-13T08:45:40.9005877Z'
-                  sharedBy: John Smith
                 type: Microsoft.DataShare/shareSubscripitons
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
@@ -3289,12 +3472,14 @@ paths:
                 id: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/testrg/providers/Microsoft.DataShare/accounts/account1/shares/share1/providerShareSubscripitons/4256e2cf-0f82-4865-961b-12f83333f487
                 name: providerShareSubscripiton
                 properties:
-                  company: Microsoft
+                  consumerEmail: john.smith@microsoft.com
+                  consumerName: John Smith
+                  consumerTenantName: Microsoft
                   createdAt: '2018-12-13T08:52:42.6224087Z'
-                  createdBy: John Smith
+                  providerEmail: john.smith@microsoft.com
+                  providerName: John Smith
                   shareSubscriptionStatus: Revoked
                   sharedAt: '2018-12-13T08:45:40.9005877Z'
-                  sharedBy: John Smith
                 type: Microsoft.DataShare/providerShareSubscripitons
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
@@ -3307,12 +3492,13 @@ paths:
                 id: /subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/testrg/providers/Microsoft.DataShare/accounts/account1/shares/share1/providerShareSubscripitons/4256e2cf-0f82-4865-961b-12f83333f487
                 name: providerShareSubscripiton
                 properties:
-                  company: Microsoft
+                  consumerEmail: john.smith@microsoft.com
+                  consumerName: John Smith
+                  consumerTenantName: Microsoft
                   createdAt: '2018-12-13T08:52:42.6224087Z'
-                  createdBy: John Smith
+                  providerName: John Smith
                   shareSubscriptionStatus: Revoked
                   sharedAt: '2018-12-13T08:45:40.9005877Z'
-                  sharedBy: John Smith
                 type: Microsoft.DataShare/providerShareSubscripitons
               headers:
                 Azure-AsyncOperation: 'https://management.azure.com/subscriptions/d8869ae5-cd9e-413a-b660-104573d8bcee/resourceGroups/testrg/providers/Microsoft.DataShare/accounts/consumerAccount/shares/shareSub1/operationResults/dad6baec-3a39-41df-a469-843a9ee94213?api-version=2018-11-01-preview'
@@ -3374,6 +3560,7 @@ paths:
                     properties:
                       recurrenceInterval: Day
                       synchronizationTime: '2018-11-14T04:47:52.9614956Z'
+                      userName: John Smith
                     type: Microsoft.DataShare/SyncrhonizationSetting
               headers:
                 Date: 'Wed, 13 Sep 2017 17:33:55 GMT'
@@ -3503,6 +3690,7 @@ paths:
                   provisioningState: Succeeded
                   recurrenceInterval: Day
                   synchronizationTime: '2018-11-14T04:47:52.9614956Z'
+                  userName: John Smith
                 type: Microsoft.DataShare/SyncrhonizationSetting
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
@@ -3574,6 +3762,7 @@ paths:
                   provisioningState: Succeeded
                   recurrenceInterval: Day
                   synchronizationTime: '2018-11-14T04:47:52.9614956Z'
+                  userName: John Smith
                 type: Microsoft.DataShare/SyncrhonizationSetting
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
@@ -3590,6 +3779,7 @@ paths:
                   provisioningState: Succeeded
                   recurrenceInterval: Day
                   synchronizationTime: '2018-11-14T04:47:52.9614956Z'
+                  userName: John Smith
                 type: Microsoft.DataShare/SyncrhonizationSetting
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:32 GMT'
@@ -3602,14 +3792,15 @@ definitions:
   ADLSGen1FileDataSet:
     allOf:
       - $ref: '#/definitions/DataSet'
-    description: An ADLS Gen 1 file dataset.
+    description: An ADLS Gen 1 file data set.
     properties:
       properties:
         $ref: '#/definitions/ADLSGen1FileProperties'
-        description: ADLS Gen 1 file dataset properties.
+        description: ADLS Gen 1 file data set properties.
         x-ms-client-flatten: true
     required:
       - properties
+      - kind
     type: object
     x-ms-discriminator-value: AdlsGen1File
   ADLSGen1FileProperties:
@@ -3644,14 +3835,15 @@ definitions:
   ADLSGen1FolderDataSet:
     allOf:
       - $ref: '#/definitions/DataSet'
-    description: An ADLS Gen 1 folder dataset.
+    description: An ADLS Gen 1 folder data set.
     properties:
       properties:
         $ref: '#/definitions/ADLSGen1FolderProperties'
-        description: ADLS Gen 1 folder  dataset properties.
+        description: ADLS Gen 1 folder data set properties.
         x-ms-client-flatten: true
     required:
       - properties
+      - kind
     type: object
     x-ms-discriminator-value: AdlsGen1Folder
   ADLSGen1FolderProperties:
@@ -3682,40 +3874,43 @@ definitions:
   ADLSGen2FileDataSet:
     allOf:
       - $ref: '#/definitions/DataSet'
-    description: An ADLS Gen 2 file dataset.
+    description: An ADLS Gen 2 file data set.
     properties:
       properties:
         $ref: '#/definitions/ADLSGen2FileProperties'
-        description: ADLS Gen 2 file dataset properties.
+        description: ADLS Gen 2 file data set properties.
         x-ms-client-flatten: true
     required:
       - properties
+      - kind
     type: object
     x-ms-discriminator-value: AdlsGen2File
   ADLSGen2FileDataSetMapping:
     allOf:
       - $ref: '#/definitions/DataSetMapping'
-    description: An ADLS Gen2 file dataset mapping.
+    description: An ADLS Gen2 file data set mapping.
     properties:
       properties:
         $ref: '#/definitions/ADLSGen2FileDataSetMappingProperties'
-        description: ADLS Gen2 file dataset mapping properties.
+        description: ADLS Gen2 file data set mapping properties.
         x-ms-client-flatten: true
     required:
       - properties
+      - kind
     type: object
     x-ms-discriminator-value: AdlsGen2File
   ADLSGen2FileDataSetMappingProperties:
-    description: ADLS Gen 2 file dataset mapping property bag.
+    description: ADLS Gen 2 file data set mapping property bag.
     properties:
       dataSetId:
-        description: Gets the id of source dataset.
+        description: The id of the source data set.
         type: string
       dataSetMappingStatus:
-        description: Gets the status of the dataset mapping.
+        description: Gets the status of the data set mapping.
         enum:
           - Ok
           - Broken
+        readOnly: true
         type: string
         x-ms-enum:
           modelAsString: true
@@ -3735,6 +3930,19 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: outputType
+      provisioningState:
+        description: Provisioning state of the data set mapping.
+        enum:
+          - Succeeded
+          - Creating
+          - Deleting
+          - Moving
+          - Failed
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: provisioningState
       resourceGroup:
         description: Resource group of storage account.
         type: string
@@ -3750,6 +3958,7 @@ definitions:
       - subscriptionId
       - resourceGroup
       - storageAccountName
+      - dataSetId
     type: object
   ADLSGen2FileProperties:
     description: Properties of the ADLS Gen2 file data set.
@@ -3783,40 +3992,43 @@ definitions:
   ADLSGen2FileSystemDataSet:
     allOf:
       - $ref: '#/definitions/DataSet'
-    description: An ADLS Gen 2 file system dataset.
+    description: An ADLS Gen 2 file system data set.
     properties:
       properties:
         $ref: '#/definitions/ADLSGen2FileSystemProperties'
-        description: ADLS Gen 2 file system dataset properties.
+        description: ADLS Gen 2 file system data set properties.
         x-ms-client-flatten: true
     required:
       - properties
+      - kind
     type: object
     x-ms-discriminator-value: AdlsGen2FileSystem
   ADLSGen2FileSystemDataSetMapping:
     allOf:
       - $ref: '#/definitions/DataSetMapping'
-    description: An ADLS Gen2 file system dataset mapping.
+    description: An ADLS Gen2 file system data set mapping.
     properties:
       properties:
         $ref: '#/definitions/ADLSGen2FileSystemDataSetMappingProperties'
-        description: ADLS Gen2 file system dataset mapping properties.
+        description: ADLS Gen2 file system data set mapping properties.
         x-ms-client-flatten: true
     required:
       - properties
+      - kind
     type: object
     x-ms-discriminator-value: AdlsGen2FileSystem
   ADLSGen2FileSystemDataSetMappingProperties:
-    description: ADLS Gen 2 file system dataset mapping property bag.
+    description: ADLS Gen 2 file system data set mapping property bag.
     properties:
       dataSetId:
-        description: Gets the id of source dataset.
+        description: The id of the source data set.
         type: string
       dataSetMappingStatus:
-        description: Gets the status of the dataset mapping.
+        description: Gets the status of the data set mapping.
         enum:
           - Ok
           - Broken
+        readOnly: true
         type: string
         x-ms-enum:
           modelAsString: true
@@ -3824,6 +4036,19 @@ definitions:
       fileSystem:
         description: The file system name.
         type: string
+      provisioningState:
+        description: Provisioning state of the data set mapping.
+        enum:
+          - Succeeded
+          - Creating
+          - Deleting
+          - Moving
+          - Failed
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: provisioningState
       resourceGroup:
         description: Resource group of storage account.
         type: string
@@ -3838,6 +4063,7 @@ definitions:
       - subscriptionId
       - resourceGroup
       - storageAccountName
+      - dataSetId
     type: object
   ADLSGen2FileSystemProperties:
     description: Properties of the ADLS Gen2 file system data set.
@@ -3867,40 +4093,43 @@ definitions:
   ADLSGen2FolderDataSet:
     allOf:
       - $ref: '#/definitions/DataSet'
-    description: An ADLS Gen 2 folder dataset.
+    description: An ADLS Gen 2 folder data set.
     properties:
       properties:
         $ref: '#/definitions/ADLSGen2FolderProperties'
-        description: ADLS Gen 2 folder dataset properties.
+        description: ADLS Gen 2 folder data set properties.
         x-ms-client-flatten: true
     required:
       - properties
+      - kind
     type: object
     x-ms-discriminator-value: AdlsGen2Folder
   ADLSGen2FolderDataSetMapping:
     allOf:
       - $ref: '#/definitions/DataSetMapping'
-    description: An ADLS Gen2 folder dataset mapping.
+    description: An ADLS Gen2 folder data set mapping.
     properties:
       properties:
         $ref: '#/definitions/ADLSGen2FolderDataSetMappingProperties'
-        description: ADLS Gen2 folder dataset mapping properties.
+        description: ADLS Gen2 folder data set mapping properties.
         x-ms-client-flatten: true
     required:
       - properties
+      - kind
     type: object
     x-ms-discriminator-value: AdlsGen2Folder
   ADLSGen2FolderDataSetMappingProperties:
-    description: ADLS Gen 2 folder dataset mapping property bag.
+    description: ADLS Gen 2 folder data set mapping property bag.
     properties:
       dataSetId:
-        description: Gets the id of source dataset.
+        description: The id of the source data set.
         type: string
       dataSetMappingStatus:
-        description: Gets the status of the dataset mapping.
+        description: Gets the status of the data set mapping.
         enum:
           - Ok
           - Broken
+        readOnly: true
         type: string
         x-ms-enum:
           modelAsString: true
@@ -3911,6 +4140,19 @@ definitions:
       folderPath:
         description: Folder path within the file system.
         type: string
+      provisioningState:
+        description: Provisioning state of the data set mapping.
+        enum:
+          - Succeeded
+          - Creating
+          - Deleting
+          - Moving
+          - Failed
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: provisioningState
       resourceGroup:
         description: Resource group of storage account.
         type: string
@@ -3926,6 +4168,7 @@ definitions:
       - subscriptionId
       - resourceGroup
       - storageAccountName
+      - dataSetId
     type: object
   ADLSGen2FolderProperties:
     description: Properties of the ADLS Gen2 folder data set.
@@ -3994,10 +4237,6 @@ definitions:
         format: date-time
         readOnly: true
         type: string
-      createdBy:
-        description: Name of the user who created the account.
-        readOnly: true
-        type: string
       provisioningState:
         description: Provisioning state of the Account
         enum:
@@ -4011,6 +4250,14 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: provisioningState
+      userEmail:
+        description: Email of the user who created the resource
+        readOnly: true
+        type: string
+      userName:
+        description: Name of the user who created the resource
+        readOnly: true
+        type: string
     type: object
   AccountUpdateParameters:
     description: Update parameters for accounts
@@ -4024,47 +4271,63 @@ definitions:
   BlobContainerDataSet:
     allOf:
       - $ref: '#/definitions/DataSet'
-    description: An Azure storage blob container dataset.
+    description: An Azure storage blob container data set.
     properties:
       properties:
         $ref: '#/definitions/BlobContainerProperties'
-        description: Blob container dataset properties.
+        description: Blob container data set properties.
         x-ms-client-flatten: true
     required:
       - properties
+      - kind
     type: object
     x-ms-discriminator-value: Container
   BlobContainerDataSetMapping:
     allOf:
       - $ref: '#/definitions/DataSetMapping'
-    description: A Blob container dataset mapping.
+    description: A Blob container data set mapping.
     properties:
       properties:
         $ref: '#/definitions/BlobContainerMappingProperties'
-        description: Blob container dataset mapping properties.
+        description: Blob container data set mapping properties.
         x-ms-client-flatten: true
     required:
       - properties
+      - kind
     type: object
     x-ms-discriminator-value: Container
   BlobContainerMappingProperties:
-    description: Azure storage Blob container dataset mapping property bag.
+    description: Azure storage Blob container data set mapping property bag.
     properties:
       containerName:
         description: BLOB Container name.
         type: string
       dataSetId:
-        description: Gets the id of source dataset.
+        description: The id of the source data set.
         type: string
       dataSetMappingStatus:
-        description: Gets the status of the dataset mapping.
+        description: Gets the status of the data set mapping.
         enum:
           - Ok
           - Broken
+        readOnly: true
         type: string
         x-ms-enum:
           modelAsString: true
           name: dataSetMappingStatus
+      provisioningState:
+        description: Provisioning state of the data set mapping.
+        enum:
+          - Succeeded
+          - Creating
+          - Deleting
+          - Moving
+          - Failed
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: provisioningState
       resourceGroup:
         description: Resource group of storage account.
         type: string
@@ -4079,6 +4342,7 @@ definitions:
       - subscriptionId
       - resourceGroup
       - storageAccountName
+      - dataSetId
     type: object
   BlobContainerProperties:
     description: Properties of the BLOB container data set.
@@ -4108,69 +4372,74 @@ definitions:
   BlobDataSet:
     allOf:
       - $ref: '#/definitions/DataSet'
-    description: An Azure storage blob dataset.
+    description: An Azure storage blob data set.
     properties:
       properties:
         $ref: '#/definitions/BlobProperties'
-        description: Blob dataset properties.
+        description: Blob data set properties.
         x-ms-client-flatten: true
     required:
       - properties
+      - kind
     type: object
     x-ms-discriminator-value: Blob
   BlobDataSetMapping:
     allOf:
       - $ref: '#/definitions/DataSetMapping'
-    description: A Blob dataset mapping.
+    description: A Blob data set mapping.
     properties:
       properties:
         $ref: '#/definitions/BlobMappingProperties'
-        description: Blob dataset mapping properties.
+        description: Blob data set mapping properties.
         x-ms-client-flatten: true
     required:
       - properties
+      - kind
     type: object
     x-ms-discriminator-value: Blob
   BlobFolderDataSet:
     allOf:
       - $ref: '#/definitions/DataSet'
-    description: An Azure storage blob folder dataset.
+    description: An Azure storage blob folder data set.
     properties:
       properties:
         $ref: '#/definitions/BlobFolderProperties'
-        description: Blob folder dataset properties.
+        description: Blob folder data set properties.
         x-ms-client-flatten: true
     required:
       - properties
+      - kind
     type: object
     x-ms-discriminator-value: BlobFolder
   BlobFolderDataSetMapping:
     allOf:
       - $ref: '#/definitions/DataSetMapping'
-    description: A Blob folder dataset mapping.
+    description: A Blob folder data set mapping.
     properties:
       properties:
         $ref: '#/definitions/BlobFolderMappingProperties'
-        description: Blob folder dataset mapping properties.
+        description: Blob folder data set mapping properties.
         x-ms-client-flatten: true
     required:
       - properties
+      - kind
     type: object
     x-ms-discriminator-value: BlobFolder
   BlobFolderMappingProperties:
-    description: Azure storage Blob folder dataset mapping property bag.
+    description: Azure storage Blob folder data set mapping property bag.
     properties:
       containerName:
         description: Container that has the file path.
         type: string
       dataSetId:
-        description: Gets the id of source dataset.
+        description: The id of the source data set.
         type: string
       dataSetMappingStatus:
-        description: Gets the status of the dataset mapping.
+        description: Gets the status of the data set mapping.
         enum:
           - Ok
           - Broken
+        readOnly: true
         type: string
         x-ms-enum:
           modelAsString: true
@@ -4178,6 +4447,19 @@ definitions:
       prefix:
         description: Prefix for blob folder
         type: string
+      provisioningState:
+        description: Provisioning state of the data set mapping.
+        enum:
+          - Succeeded
+          - Creating
+          - Deleting
+          - Moving
+          - Failed
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: provisioningState
       resourceGroup:
         description: Resource group of storage account.
         type: string
@@ -4193,6 +4475,7 @@ definitions:
       - subscriptionId
       - resourceGroup
       - storageAccountName
+      - dataSetId
     type: object
   BlobFolderProperties:
     description: Properties of the blob folder data set.
@@ -4224,19 +4507,20 @@ definitions:
       - storageAccountName
     type: object
   BlobMappingProperties:
-    description: Azure storage Blob dataset mapping property bag.
+    description: Azure storage Blob data set mapping property bag.
     properties:
       containerName:
         description: Container that has the file path.
         type: string
       dataSetId:
-        description: Gets the id of source dataset.
+        description: The id of the source data set.
         type: string
       dataSetMappingStatus:
-        description: Gets the status of the dataset mapping.
+        description: Gets the status of the data set mapping.
         enum:
           - Ok
           - Broken
+        readOnly: true
         type: string
         x-ms-enum:
           modelAsString: true
@@ -4253,6 +4537,19 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: outputType
+      provisioningState:
+        description: Provisioning state of the data set mapping.
+        enum:
+          - Succeeded
+          - Creating
+          - Deleting
+          - Moving
+          - Failed
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: provisioningState
       resourceGroup:
         description: Resource group of storage account.
         type: string
@@ -4268,6 +4565,7 @@ definitions:
       - subscriptionId
       - resourceGroup
       - storageAccountName
+      - dataSetId
     type: object
   BlobProperties:
     description: Properties of the blob data set.
@@ -4356,17 +4654,21 @@ definitions:
         description: invitation location
         readOnly: true
         type: string
+      providerEmail:
+        description: Email of the provider who created the resource
+        readOnly: true
+        type: string
+      providerName:
+        description: Name of the provider who created the resource
+        readOnly: true
+        type: string
+      providerTenantName:
+        description: Tenant name of the provider who created the resource
+        readOnly: true
+        type: string
       respondedAt:
         description: The time the recipient responded to the invitation.
         format: date-time
-        readOnly: true
-        type: string
-      sender:
-        description: Gets the name of the sender.
-        readOnly: true
-        type: string
-      senderCompanyName:
-        description: Gets the company name of the sender.
         readOnly: true
         type: string
       sentAt:
@@ -4380,6 +4682,14 @@ definitions:
         type: string
       termsOfUse:
         description: Terms of use shared when the invitation was created
+        readOnly: true
+        type: string
+      userEmail:
+        description: Email of the user who created the resource
+        readOnly: true
+        type: string
+      userName:
+        description: Name of the user who created the resource
         readOnly: true
         type: string
     required:
@@ -4417,12 +4727,20 @@ definitions:
         description: DataSet Id
         readOnly: true
         type: string
+      dataSetLocation:
+        description: Location of the data set.
+        readOnly: true
+        type: string
       dataSetName:
         description: DataSet name
         readOnly: true
         type: string
+      dataSetPath:
+        description: DataSet path
+        readOnly: true
+        type: string
       dataSetType:
-        description: Type of dataSet
+        description: Type of data set
         enum:
           - Blob
           - Container
@@ -4432,6 +4750,8 @@ definitions:
           - AdlsGen2File
           - AdlsGen1Folder
           - AdlsGen1File
+          - KustoCluster
+          - KustoDatabase
           - SqlDBTable
           - SqlDWTable
         readOnly: true
@@ -4447,7 +4767,7 @@ definitions:
     discriminator: kind
     properties:
       kind:
-        description: Kind of dataset.
+        description: Kind of data set.
         enum:
           - Blob
           - Container
@@ -4457,12 +4777,16 @@ definitions:
           - AdlsGen2File
           - AdlsGen1Folder
           - AdlsGen1File
+          - KustoCluster
+          - KustoDatabase
           - SqlDBTable
           - SqlDWTable
         type: string
         x-ms-enum:
           modelAsString: true
           name: kind
+    required:
+      - kind
     type: object
   DataSetList:
     description: List response for get DataSets
@@ -4482,11 +4806,11 @@ definitions:
   DataSetMapping:
     allOf:
       - $ref: '#/definitions/ProxyDto'
-    description: A dataset mapping data transfer object.
+    description: A data set mapping data transfer object.
     discriminator: kind
     properties:
       kind:
-        description: Kind of dataset mapping.
+        description: Kind of data set mapping.
         enum:
           - Blob
           - Container
@@ -4494,12 +4818,16 @@ definitions:
           - AdlsGen2FileSystem
           - AdlsGen2Folder
           - AdlsGen2File
+          - KustoCluster
+          - KustoDatabase
           - SqlDBTable
           - SqlDWTable
         type: string
         x-ms-enum:
           modelAsString: true
           name: kind
+    required:
+      - kind
     type: object
   DataSetMappingList:
     description: List response for get DataSetMappings
@@ -4651,10 +4979,6 @@ definitions:
         format: date-time
         readOnly: true
         type: string
-      sender:
-        description: Gets the name of the sender.
-        readOnly: true
-        type: string
       sentAt:
         description: Gets the time at which the invitation was sent.
         format: date-time
@@ -4669,6 +4993,210 @@ definitions:
       targetObjectId:
         description: "The target user or application Id that invitation is being sent to.\r\nMust be specified along TargetActiveDirectoryId. This enables sending\r\ninvitations to specific users or applications in an AD tenant."
         type: string
+      userEmail:
+        description: Email of the user who created the resource
+        readOnly: true
+        type: string
+      userName:
+        description: Name of the user who created the resource
+        readOnly: true
+        type: string
+    type: object
+  KustoClusterDataSet:
+    allOf:
+      - $ref: '#/definitions/DataSet'
+    description: A kusto cluster data set.
+    properties:
+      properties:
+        $ref: '#/definitions/KustoClusterDataSetProperties'
+        description: Kusto cluster data set properties.
+        x-ms-client-flatten: true
+    required:
+      - properties
+      - kind
+    type: object
+    x-ms-discriminator-value: KustoCluster
+  KustoClusterDataSetMapping:
+    allOf:
+      - $ref: '#/definitions/DataSetMapping'
+    description: A Kusto cluster data set mapping
+    properties:
+      properties:
+        $ref: '#/definitions/KustoClusterDataSetMappingProperties'
+        description: Kusto cluster data set mapping properties.
+        x-ms-client-flatten: true
+    required:
+      - properties
+      - kind
+    type: object
+    x-ms-discriminator-value: KustoCluster
+  KustoClusterDataSetMappingProperties:
+    description: Properties of the Kusto cluster data set mapping
+    properties:
+      dataSetId:
+        description: The id of the source data set.
+        type: string
+      dataSetMappingStatus:
+        description: Gets the status of the data set mapping.
+        enum:
+          - Ok
+          - Broken
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: dataSetMappingStatus
+      kustoClusterResourceId:
+        description: Resource id of the sink kusto cluster.
+        type: string
+      location:
+        description: Location of the sink kusto cluster.
+        readOnly: true
+        type: string
+      provisioningState:
+        description: Provisioning state of the data set mapping.
+        enum:
+          - Succeeded
+          - Creating
+          - Deleting
+          - Moving
+          - Failed
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: provisioningState
+    required:
+      - kustoClusterResourceId
+      - dataSetId
+    type: object
+  KustoClusterDataSetProperties:
+    description: Properties of the kusto cluster data set.
+    properties:
+      dataSetId:
+        description: Unique id for identifying a data set resource
+        readOnly: true
+        type: string
+      kustoClusterResourceId:
+        description: Resource id of the kusto cluster.
+        type: string
+      location:
+        description: Location of the kusto cluster.
+        readOnly: true
+        type: string
+      provisioningState:
+        description: Provisioning state of the kusto cluster data set.
+        enum:
+          - Succeeded
+          - Creating
+          - Deleting
+          - Moving
+          - Failed
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: provisioningState
+    required:
+      - kustoClusterResourceId
+    type: object
+  KustoDatabaseDataSet:
+    allOf:
+      - $ref: '#/definitions/DataSet'
+    description: A kusto database data set.
+    properties:
+      properties:
+        $ref: '#/definitions/KustoDatabaseDataSetProperties'
+        description: Kusto database data set properties.
+        x-ms-client-flatten: true
+    required:
+      - properties
+      - kind
+    type: object
+    x-ms-discriminator-value: KustoDatabase
+  KustoDatabaseDataSetMapping:
+    allOf:
+      - $ref: '#/definitions/DataSetMapping'
+    description: A Kusto database data set mapping
+    properties:
+      properties:
+        $ref: '#/definitions/KustoDatabaseDataSetMappingProperties'
+        description: Kusto database data set mapping properties.
+        x-ms-client-flatten: true
+    required:
+      - properties
+      - kind
+    type: object
+    x-ms-discriminator-value: KustoDatabase
+  KustoDatabaseDataSetMappingProperties:
+    description: Properties of the Kusto database data set mapping
+    properties:
+      dataSetId:
+        description: The id of the source data set.
+        type: string
+      dataSetMappingStatus:
+        description: Gets the status of the data set mapping.
+        enum:
+          - Ok
+          - Broken
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: dataSetMappingStatus
+      kustoClusterResourceId:
+        description: Resource id of the sink kusto cluster.
+        type: string
+      location:
+        description: Location of the sink kusto cluster.
+        readOnly: true
+        type: string
+      provisioningState:
+        description: Provisioning state of the data set mapping.
+        enum:
+          - Succeeded
+          - Creating
+          - Deleting
+          - Moving
+          - Failed
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: provisioningState
+    required:
+      - kustoClusterResourceId
+      - dataSetId
+    type: object
+  KustoDatabaseDataSetProperties:
+    description: Properties of the kusto database data set.
+    properties:
+      dataSetId:
+        description: Unique id for identifying a data set resource
+        readOnly: true
+        type: string
+      kustoDatabaseResourceId:
+        description: Resource id of the kusto database.
+        type: string
+      location:
+        description: Location of the kusto cluster.
+        readOnly: true
+        type: string
+      provisioningState:
+        description: Provisioning state of the kusto database data set.
+        enum:
+          - Succeeded
+          - Creating
+          - Deleting
+          - Moving
+          - Failed
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: provisioningState
+    required:
+      - kustoDatabaseResourceId
     type: object
   OperationList:
     description: List response for get operations.
@@ -4858,8 +5386,16 @@ definitions:
   ProviderShareSubscriptionProperties:
     description: Provider share subscription properties
     properties:
-      company:
-        description: Company name
+      consumerEmail:
+        description: Email of the consumer who created the share subscription
+        readOnly: true
+        type: string
+      consumerName:
+        description: Name of the consumer who created the share subscription
+        readOnly: true
+        type: string
+      consumerTenantName:
+        description: Tenant name of the consumer who created the share subscription
         readOnly: true
         type: string
       createdAt:
@@ -4867,8 +5403,12 @@ definitions:
         format: date-time
         readOnly: true
         type: string
-      createdBy:
-        description: Created by
+      providerEmail:
+        description: Email of the provider who created the share
+        readOnly: true
+        type: string
+      providerName:
+        description: Name of the provider who created the share
         readOnly: true
         type: string
       shareSubscriptionObjectId:
@@ -4890,10 +5430,6 @@ definitions:
       sharedAt:
         description: Shared at
         format: date-time
-        readOnly: true
-        type: string
-      sharedBy:
-        description: Shared by
         readOnly: true
         type: string
     type: object
@@ -4940,6 +5476,8 @@ definitions:
         $ref: '#/definitions/ScheduledSourceShareSynchronizationSettingProperties'
         description: Properties of scheduled synchronization
         x-ms-client-flatten: true
+    required:
+      - kind
     type: object
     x-ms-discriminator-value: ScheduleBased
   ScheduledSynchronizationSetting:
@@ -4953,6 +5491,7 @@ definitions:
         x-ms-client-flatten: true
     required:
       - properties
+      - kind
     type: object
     x-ms-discriminator-value: ScheduleBased
   ScheduledSynchronizationSettingProperties:
@@ -4961,10 +5500,6 @@ definitions:
       createdAt:
         description: Time at which the synchronization setting was created.
         format: date-time
-        readOnly: true
-        type: string
-      createdBy:
-        description: Name of the user who created the synchronization setting.
         readOnly: true
         type: string
       provisioningState:
@@ -4993,6 +5528,10 @@ definitions:
         description: Synchronization time
         format: date-time
         type: string
+      userName:
+        description: Name of the user who created the synchronization setting.
+        readOnly: true
+        type: string
     required:
       - recurrenceInterval
       - synchronizationTime
@@ -5008,6 +5547,7 @@ definitions:
         x-ms-client-flatten: true
     required:
       - properties
+      - kind
     type: object
     x-ms-discriminator-value: ScheduleBased
   ScheduledTriggerProperties:
@@ -5016,10 +5556,6 @@ definitions:
       createdAt:
         description: Time at which the trigger was created.
         format: date-time
-        readOnly: true
-        type: string
-      createdBy:
-        description: Name of the user who created the trigger.
         readOnly: true
         type: string
       provisioningState:
@@ -5068,6 +5604,10 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: triggerStatus
+      userName:
+        description: Name of the user who created the trigger.
+        readOnly: true
+        type: string
     required:
       - recurrenceInterval
       - synchronizationTime
@@ -5105,10 +5645,6 @@ definitions:
         format: date-time
         readOnly: true
         type: string
-      createdBy:
-        description: Name of the user who created the share.
-        readOnly: true
-        type: string
       description:
         description: Share description.
         type: string
@@ -5129,12 +5665,21 @@ definitions:
         description: Share kind.
         enum:
           - CopyBased
+          - InPlace
         type: string
         x-ms-enum:
           modelAsString: true
           name: shareKind
       terms:
         description: Share terms.
+        type: string
+      userEmail:
+        description: Email of the user who created the resource
+        readOnly: true
+        type: string
+      userName:
+        description: Name of the user who created the resource
+        readOnly: true
         type: string
     type: object
   ShareSubscription:
@@ -5172,12 +5717,20 @@ definitions:
         format: date-time
         readOnly: true
         type: string
-      createdBy:
-        description: The user who created the share subscription.
-        readOnly: true
-        type: string
       invitationId:
         description: The invitation id.
+        type: string
+      providerEmail:
+        description: Email of the provider who created the resource
+        readOnly: true
+        type: string
+      providerName:
+        description: Name of the provider who created the resource
+        readOnly: true
+        type: string
+      providerTenantName:
+        description: Tenant name of the provider who created the resource
+        readOnly: true
         type: string
       provisioningState:
         description: Provisioning state of the share subscription
@@ -5200,6 +5753,7 @@ definitions:
         description: Kind of share
         enum:
           - CopyBased
+          - InPlace
         readOnly: true
         type: string
         x-ms-enum:
@@ -5207,14 +5761,6 @@ definitions:
           name: shareKind
       shareName:
         description: Name of the share
-        readOnly: true
-        type: string
-      shareSender:
-        description: Sender of the share
-        readOnly: true
-        type: string
-      shareSenderCompanyName:
-        description: Company name of the share sender
         readOnly: true
         type: string
       shareSubscriptionStatus:
@@ -5231,6 +5777,14 @@ definitions:
           name: shareSubscriptionStatus
       shareTerms:
         description: Terms of a share
+        readOnly: true
+        type: string
+      userEmail:
+        description: Email of the user who created the resource
+        readOnly: true
+        type: string
+      userName:
+        description: Name of the user who created the resource
         readOnly: true
         type: string
     required:
@@ -5265,6 +5819,16 @@ definitions:
       synchronizationId:
         description: Synchronization id
         type: string
+      synchronizationMode:
+        description: Synchronization Mode
+        enum:
+          - Incremental
+          - FullSync
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: synchronizationMode
     required:
       - synchronizationId
     type: object
@@ -5286,8 +5850,14 @@ definitions:
   ShareSynchronization:
     description: A ShareSynchronization data transfer object.
     properties:
-      company:
-        description: Company name
+      consumerEmail:
+        description: Email of the user who created the synchronization
+        type: string
+      consumerName:
+        description: Name of the user who created the synchronization
+        type: string
+      consumerTenantName:
+        description: Tenant name of the consumer who created the synchronization
         type: string
       durationMs:
         description: synchronization duration
@@ -5300,9 +5870,6 @@ definitions:
       message:
         description: message of synchronization
         type: string
-      recipient:
-        description: Recipient id
-        type: string
       startTime:
         description: start time of synchronization
         format: date-time
@@ -5313,6 +5880,16 @@ definitions:
       synchronizationId:
         description: Synchronization id
         type: string
+      synchronizationMode:
+        description: Synchronization mode
+        enum:
+          - Incremental
+          - FullSync
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: synchronizationMode
     type: object
   ShareSynchronizationList:
     description: List response for get ShareSynchronization.
@@ -5337,11 +5914,12 @@ definitions:
         description: Kind of synchronization
         enum:
           - ScheduleBased
-        readOnly: true
         type: string
         x-ms-enum:
           modelAsString: true
           name: kind
+    required:
+      - kind
     type: object
   SourceShareSynchronizationSettingList:
     description: List response for get source share Synchronization settings
@@ -5361,44 +5939,64 @@ definitions:
   SqlDBTableDataSet:
     allOf:
       - $ref: '#/definitions/DataSet'
-    description: A SQL DB table dataset.
+    description: A SQL DB table data set.
     properties:
       properties:
         $ref: '#/definitions/SqlDBTableProperties'
-        description: SQL DB table dataset properties.
+        description: SQL DB table data set properties.
         x-ms-client-flatten: true
+    required:
+      - kind
     type: object
     x-ms-discriminator-value: SqlDBTable
   SqlDBTableDataSetMapping:
     allOf:
       - $ref: '#/definitions/DataSetMapping'
-    description: A SQL DB Table dataset mapping.
+    description: A SQL DB Table data set mapping.
     properties:
       properties:
         $ref: '#/definitions/SqlDBTableDataSetMappingProperties'
-        description: Sql DB dataset mapping properties.
+        description: Sql DB data set mapping properties.
         x-ms-client-flatten: true
     required:
       - properties
+      - kind
     type: object
     x-ms-discriminator-value: SqlDBTable
   SqlDBTableDataSetMappingProperties:
     description: Properties of the SQL DB table data set mapping.
     properties:
       dataSetId:
-        description: Gets the id of source dataset.
+        description: The id of the source data set.
         type: string
       dataSetMappingStatus:
-        description: Gets the status of the dataset mapping.
+        description: Gets the status of the data set mapping.
         enum:
           - Ok
           - Broken
+        readOnly: true
         type: string
         x-ms-enum:
           modelAsString: true
           name: dataSetMappingStatus
       databaseName:
         description: DatabaseName name of the sink data set
+        type: string
+      provisioningState:
+        description: Provisioning state of the data set mapping.
+        enum:
+          - Succeeded
+          - Creating
+          - Deleting
+          - Moving
+          - Failed
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: provisioningState
+      schemaName:
+        description: Schema of the table. Default value is dbo.
         type: string
       sqlServerResourceId:
         description: Resource id of SQL server
@@ -5409,7 +6007,9 @@ definitions:
     required:
       - databaseName
       - tableName
+      - schemaName
       - sqlServerResourceId
+      - dataSetId
     type: object
   SqlDBTableProperties:
     description: Properties of the SQL DB table data set.
@@ -5421,54 +6021,82 @@ definitions:
       databaseName:
         description: Database name of the source data set
         type: string
+      schemaName:
+        description: Schema of the table. Default value is dbo.
+        type: string
       sqlServerResourceId:
         description: Resource id of SQL server
         type: string
       tableName:
         description: SQL DB table name.
         type: string
+    required:
+      - databaseName
+      - tableName
+      - schemaName
+      - sqlServerResourceId
     type: object
   SqlDWTableDataSet:
     allOf:
       - $ref: '#/definitions/DataSet'
-    description: A SQL DW table dataset.
+    description: A SQL DW table data set.
     properties:
       properties:
         $ref: '#/definitions/SqlDWTableProperties'
-        description: SQL DW table dataset properties.
+        description: SQL DW table data set properties.
         x-ms-client-flatten: true
+    required:
+      - kind
     type: object
     x-ms-discriminator-value: SqlDWTable
   SqlDWTableDataSetMapping:
     allOf:
       - $ref: '#/definitions/DataSetMapping'
-    description: A SQL DW Table dataset mapping.
+    description: A SQL DW Table data set mapping.
     properties:
       properties:
         $ref: '#/definitions/SqlDWTableDataSetMappingProperties'
-        description: Sql DW dataset mapping properties.
+        description: Sql DW data set mapping properties.
         x-ms-client-flatten: true
     required:
       - properties
+      - kind
     type: object
     x-ms-discriminator-value: SqlDWTable
   SqlDWTableDataSetMappingProperties:
     description: Properties of the SQL DW table data set mapping.
     properties:
       dataSetId:
-        description: Gets the id of source dataset.
+        description: The id of the source data set.
         type: string
       dataSetMappingStatus:
-        description: Gets the status of the dataset mapping.
+        description: Gets the status of the data set mapping.
         enum:
           - Ok
           - Broken
+        readOnly: true
         type: string
         x-ms-enum:
           modelAsString: true
           name: dataSetMappingStatus
       dataWarehouseName:
         description: DataWarehouse name of the source data set
+        type: string
+      provisioningState:
+        description: Provisioning state of the data set mapping.
+        enum:
+          - Succeeded
+          - Creating
+          - Deleting
+          - Moving
+          - Failed
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: provisioningState
+      schemaName:
+        description: Schema of the table. Default value is dbo.
         type: string
       sqlServerResourceId:
         description: Resource id of SQL server
@@ -5479,7 +6107,9 @@ definitions:
     required:
       - dataWarehouseName
       - tableName
+      - schemaName
       - sqlServerResourceId
+      - dataSetId
     type: object
   SqlDWTableProperties:
     description: Properties of the SQL DW table data set.
@@ -5491,22 +6121,30 @@ definitions:
       dataWarehouseName:
         description: DataWarehouse name of the source data set
         type: string
+      schemaName:
+        description: Schema of the table. Default value is dbo.
+        type: string
       sqlServerResourceId:
         description: Resource id of SQL server
         type: string
       tableName:
         description: SQL DW table name.
         type: string
+    required:
+      - dataWarehouseName
+      - tableName
+      - schemaName
+      - sqlServerResourceId
     type: object
   SynchronizationDetails:
-    description: Synchronization details at dataset level
+    description: Synchronization details at data set level
     properties:
       dataSetId:
-        description: id of dataSet
+        description: Id of data set
         readOnly: true
         type: string
       dataSetType:
-        description: type of DataSet
+        description: Type of the data set
         enum:
           - Blob
           - Container
@@ -5516,6 +6154,8 @@ definitions:
           - AdlsGen2File
           - AdlsGen1Folder
           - AdlsGen1File
+          - KustoCluster
+          - KustoDatabase
           - SqlDBTable
           - SqlDWTable
         readOnly: true
@@ -5524,55 +6164,55 @@ definitions:
           modelAsString: true
           name: dataSetType
       durationMs:
-        description: duration of dataset level copy
+        description: Duration of data set level copy
         format: int32
         readOnly: true
         type: integer
       endTime:
-        description: End time of dataset level copy
+        description: End time of data set level copy
         format: date-time
         readOnly: true
         type: string
       filesRead:
-        description: The number of files read from the source dataset.
+        description: The number of files read from the source data set
         format: int64
         readOnly: true
         type: integer
       filesWritten:
-        description: The number of files written into the sink dataset.
+        description: The number of files written into the sink data set
         format: int64
         readOnly: true
         type: integer
       message:
-        description: Error Message if any
+        description: Error message if any
         readOnly: true
         type: string
       name:
-        description: name of dataSet
+        description: Name of the data set
         readOnly: true
         type: string
       rowsCopied:
-        description: The number of files copied into the sink dataset.
+        description: The number of files copied into the sink data set
         format: int64
         readOnly: true
         type: integer
       rowsRead:
-        description: The number of rows read from the source dataset.
+        description: The number of rows read from the source data set.
         format: int64
         readOnly: true
         type: integer
       sizeRead:
-        description: The size of the data read from the source dataset in bytes.
+        description: The size of the data read from the source data set in bytes
         format: int64
         readOnly: true
         type: integer
       sizeWritten:
-        description: The size of the data written into the sink dataset in bytes.
+        description: The size of the data written into the sink data set in bytes
         format: int64
         readOnly: true
         type: integer
       startTime:
-        description: start time of dataset level copy
+        description: Start time of data set level copy
         format: date-time
         readOnly: true
         type: string
@@ -5581,7 +6221,7 @@ definitions:
         readOnly: true
         type: string
       vCore:
-        description: The vCore units consumed for the dataset synchronization.
+        description: The vCore units consumed for the data set synchronization
         format: int64
         readOnly: true
         type: integer
@@ -5615,6 +6255,8 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: kind
+    required:
+      - kind
     type: object
   SynchronizationSettingList:
     description: List response for get Synchronization settings
@@ -5658,6 +6300,8 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: kind
+    required:
+      - kind
     type: object
   TriggerList:
     description: List response for get triggers

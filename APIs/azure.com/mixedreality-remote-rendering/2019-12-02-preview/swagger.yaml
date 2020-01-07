@@ -89,25 +89,25 @@ paths:
         - Resource
         - Proxy
       x-ms-examples:
-        RemoteRenderingAccountPageBySubscription:
+        List remote rendering accounts by subscription:
           parameters:
             api-version: 2019-02-28-preview
             resourceType: RemoteRenderingAccount
-            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+            subscriptionId: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
           responses:
             '200':
               body:
                 nextLink: 'https://aka.ms/&^FDKKAR'
                 value:
-                  - id: /subscriptions/8f8a44e1-1711-4fc4-ae53-8bcc11fc7c3c/resourceGroups/xiangyul/providers/Microsoft.MixedReality/RemoteRenderingAccounts/alpha
-                    location: Global
-                    name: alpha
+                  - id: /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.MixedReality/RemoteRenderingAccounts/MyAccount
+                    location: eastus2euap
+                    name: MyAccount
                     properties:
                       accountId: 5007a881-6fb4-4c93-be52-942e355944a5
                     tags: {}
                     type: Microsoft.MixedReality/RemoteRenderingAccounts
-                  - id: /subscriptions/8f8a44e1-1711-4fc4-ae53-8bcc11fc7c3c/resourceGroups/xiangyul/providers/Microsoft.MixedReality/RemoteRenderingAccounts/omega
-                    location: Global
+                  - id: /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.MixedReality/RemoteRenderingAccounts/omega
+                    location: eastus2euap
                     name: omega
                     properties:
                       accountId: 5007a881-6fb4-4c93-be52-942e355944a5
@@ -168,26 +168,26 @@ paths:
       tags:
         - Resource
       x-ms-examples:
-        ResourceGet:
+        List remote rendering accounts by resource group:
           parameters:
             api-version: 2019-02-28-preview
-            resourceGroupName: mrsecf
+            resourceGroupName: MyResourceGroup
             resourceType: RemoteRenderingAccount
-            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+            subscriptionId: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
           responses:
             '200':
               body:
                 nextLink: 'https://aka.ms/&^FDKKAR'
                 value:
-                  - id: /subscriptions/8f8a44e1-1711-4fc4-ae53-8bcc11fc7c3c/resourceGroups/xiangyul/providers/Microsoft.MixedReality/RemoteRenderingAccounts/alpha
-                    location: Global
-                    name: alpha
+                  - id: /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.MixedReality/RemoteRenderingAccounts/MyAccount
+                    location: eastus2euap
+                    name: MyAccount
                     properties:
                       accountId: 5007a881-6fb4-4c93-be52-942e355944a5
                     tags: {}
                     type: Microsoft.MixedReality/RemoteRenderingAccounts
-                  - id: /subscriptions/8f8a44e1-1711-4fc4-ae53-8bcc11fc7c3c/resourceGroups/xiangyul/providers/Microsoft.MixedReality/RemoteRenderingAccounts/omega
-                    location: Global
+                  - id: /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.MixedReality/RemoteRenderingAccounts/omega
+                    location: eastus2euap
                     name: omega
                     properties:
                       accountId: 5007a881-6fb4-4c93-be52-942e355944a5
@@ -257,13 +257,13 @@ paths:
       tags:
         - Resource
       x-ms-examples:
-        ResourceDelete:
+        Delete remote rendering account:
           parameters:
-            accountName: alpha
+            accountName: MyAccount
             api-version: 2019-02-28-preview
-            resourceGroupName: mrsecf
+            resourceGroupName: MyResourceGroup
             resourceType: RemoteRenderingAccount
-            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+            subscriptionId: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
           responses:
             '200': {}
             '204': {}
@@ -328,19 +328,19 @@ paths:
       tags:
         - Resource
       x-ms-examples:
-        ResourceGet:
+        Get remote rendering account:
           parameters:
-            accountName: alpha
+            accountName: MyAccount
             api-version: 2019-02-28-preview
-            resourceGroupName: mrsecf
+            resourceGroupName: MyResourceGroup
             resourceType: RemoteRenderingAccount
-            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+            subscriptionId: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
           responses:
             '200':
               body:
-                id: /subscriptions/8f8a44e1-1711-4fc4-ae53-8bcc11fc7c3c/resourceGroups/xiangyul/providers/Microsoft.MixedReality/RemoteRenderingAccounts/alpha
-                location: Global
-                name: alpha
+                id: /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.MixedReality/RemoteRenderingAccounts/MyAccount
+                location: eastus2euap
+                name: MyAccount
                 properties:
                   accountId: 5007a881-6fb4-4c93-be52-942e355944a5
                 tags: {}
@@ -407,23 +407,23 @@ paths:
       tags:
         - Resource
       x-ms-examples:
-        ResourceCreateOrUpdate:
+        Update remote rendering account:
           parameters:
-            accountName: alpha
+            accountName: MyAccount
             api-version: 2019-02-28-preview
             remoteRenderingAccount:
               Tags:
                 hero: romeo
                 heroine: juliet
-            resourceGroupName: mrsecf
+            resourceGroupName: MyResourceGroup
             resourceType: RemoteRenderingAccount
-            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+            subscriptionId: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
           responses:
             '200':
               body:
-                id: /subscriptions/8f8a44e1-1711-4fc4-ae53-8bcc11fc7c3c/resourceGroups/xiangyul/providers/Microsoft.MixedReality/RemoteRenderingAccounts/alpha
-                location: Global
-                name: alpha
+                id: /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.MixedReality/RemoteRenderingAccounts/MyAccount
+                location: eastus2euap
+                name: MyAccount
                 properties:
                   accountId: 5007a881-6fb4-4c93-be52-942e355944a5
                 tags:
@@ -496,30 +496,30 @@ paths:
       tags:
         - Resource
       x-ms-examples:
-        ResourceCreate:
+        Create remote rendering account:
           parameters:
-            accountName: alpha
+            accountName: MyAccount
             api-version: 2019-02-28-preview
             remoteRenderingAccount:
-              location: EastUs2
-            resourceGroupName: mrsecf
+              location: eastus2euap
+            resourceGroupName: MyResourceGroup
             resourceType: RemoteRenderingAccount
-            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+            subscriptionId: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
           responses:
             '200':
               body:
-                id: /subscriptions/8f8a44e1-1711-4fc4-ae53-8bcc11fc7c3c/resourceGroups/xiangyul/providers/Microsoft.MixedReality/RemoteRenderingAccounts/alpha
-                location: Global
-                name: alpha
+                id: /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.MixedReality/RemoteRenderingAccounts/MyAccount
+                location: MyAccount
+                name: MyAccount
                 properties:
                   accountId: 5007a881-6fb4-4c93-be52-942e355944a5
                 tags: {}
                 type: Microsoft.MixedReality/RemoteRenderingAccounts
             '201':
               body:
-                id: /subscriptions/8f8a44e1-1711-4fc4-ae53-8bcc11fc7c3c/resourceGroups/xiangyul/providers/Microsoft.MixedReality/RemoteRenderingAccounts/alpha
-                location: Global
-                name: alpha
+                id: /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.MixedReality/RemoteRenderingAccounts/MyAccount
+                location: eastus2euap
+                name: MyAccount
                 properties:
                   accountId: 5007a881-6fb4-4c93-be52-942e355944a5
                 tags: {}
@@ -596,13 +596,13 @@ paths:
       tags:
         - Key
       x-ms-examples:
-        ResourceGetKey:
+        Get remote rendering account key:
           parameters:
-            accountName: alpha
+            accountName: MyAccount
             api-version: 2019-02-28-preview
-            resourceGroupName: mrsecf
+            resourceGroupName: MyResourceGroup
             resourceType: RemoteRenderingAccount
-            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+            subscriptionId: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
           responses:
             '200':
               body:
@@ -704,15 +704,15 @@ paths:
       tags:
         - Key
       x-ms-examples:
-        ResourceRegenerateKey:
+        Regenerate remote rendering account keys:
           parameters:
-            accountName: alpha
+            accountName: MyAccount
             api-version: 2019-02-28-preview
             regenerate:
               serial: 1
-            resourceGroupName: mrsecf
+            resourceGroupName: MyResourceGroup
             resourceType: RemoteRenderingAccount
-            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+            subscriptionId: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
           responses:
             '200':
               body:

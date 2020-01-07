@@ -215,6 +215,7 @@ paths:
                   - 'UPDATE on database::TestDatabaseName by public'
                 isAzureMonitorTargetEnabled: true
                 isStorageSecondaryKeyInUse: false
+                queueDelayMs: 4000
                 retentionDays: 6
                 state: Enabled
                 storageAccountAccessKey: sdlfkjabc+sdlfkjsdlkfsjdfLDKFTERLKFDFKLjsdfksjdflsdkfD2342309432849328476458/3RSD==
@@ -236,9 +237,9 @@ paths:
                     - 'UPDATE on database::TestDatabaseName by public'
                   isAzureMonitorTargetEnabled: true
                   isStorageSecondaryKeyInUse: false
+                  queueDelayMs: 4000
                   retentionDays: 0
                   state: Enabled
-                  storageAccountAccessKey: ''
                   storageAccountSubscriptionId: 00000000-1234-0000-5678-000000000000
                   storageEndpoint: 'https://mystorage.blob.core.windows.net'
                 type: Microsoft.Sql/servers/databases/auditingSettings
@@ -254,9 +255,9 @@ paths:
                     - 'UPDATE on database::TestDatabaseName by public'
                   isAzureMonitorTargetEnabled: true
                   isStorageSecondaryKeyInUse: false
+                  queueDelayMs: 4000
                   retentionDays: 0
                   state: Enabled
-                  storageAccountAccessKey: ''
                   storageAccountSubscriptionId: 00000000-1234-0000-5678-000000000000
                   storageEndpoint: 'https://mystorage.blob.core.windows.net'
                 type: Microsoft.Sql/servers/databases/auditingSettings
@@ -288,7 +289,6 @@ paths:
                   isStorageSecondaryKeyInUse: false
                   retentionDays: 0
                   state: Enabled
-                  storageAccountAccessKey: ''
                   storageAccountSubscriptionId: 00000000-0000-0000-0000-000000000000
                   storageEndpoint: 'https://mystorage.blob.core.windows.net'
                 type: Microsoft.Sql/servers/databases/auditingSettings
@@ -306,7 +306,6 @@ paths:
                   isStorageSecondaryKeyInUse: false
                   retentionDays: 0
                   state: Enabled
-                  storageAccountAccessKey: ''
                   storageAccountSubscriptionId: 00000000-0000-0000-0000-000000000000
                   storageEndpoint: 'https://mystorage.blob.core.windows.net'
                 type: Microsoft.Sql/servers/databases/auditingSettings

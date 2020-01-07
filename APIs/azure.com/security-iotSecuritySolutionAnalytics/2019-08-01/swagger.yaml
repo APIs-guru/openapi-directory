@@ -362,6 +362,13 @@ paths:
                       remediationSteps: ''
                       reportedSeverity: Low
                       systemSource: Devices
+                      topDevicesList:
+                        - alertsCount: 45
+                          deviceId: testDevice1
+                          lastOccurrence: '10:42'
+                        - alertsCount: 30
+                          deviceId: testDevice2
+                          lastOccurrence: '15:42'
                       vendorName: Microsoft
                     type: Microsoft.Security/IoTSecurityAggregatedAlert
                   - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/MyGroup/providers/Microsoft.Security/IoTSecuritySolutions/Locations/eastus/default/IoT_Bruteforce_Success/2019-02-02
@@ -378,6 +385,13 @@ paths:
                       remediationSteps: ''
                       reportedSeverity: Low
                       systemSource: Devices
+                      topDevicesList:
+                        - alertsCount: 12321
+                          deviceId: testDevice1
+                          lastOccurrence: '10:42'
+                        - alertsCount: 455
+                          deviceId: testDevice2
+                          lastOccurrence: '15:42'
                       vendorName: Microsoft
                     type: Microsoft.Security/IoTSecurityAggregatedAlert
       x-ms-pageable:
@@ -461,6 +475,13 @@ paths:
                   remediationSteps: ''
                   reportedSeverity: Low
                   systemSource: Devices
+                  topDevicesList:
+                    - alertsCount: 100
+                      deviceId: testDevice1
+                      lastOccurrence: '10:42'
+                    - alertsCount: 80
+                      deviceId: testDevice2
+                      lastOccurrence: '15:42'
                   vendorName: Microsoft
                 type: Microsoft.Security/IoTSecurityAggregatedAlert
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/analyticsModels/default/aggregatedAlerts/{aggregatedAlertName}/dismiss':
@@ -805,6 +826,24 @@ definitions:
         description: 'The type of the alerted resource (Azure, Non-Azure).'
         readOnly: true
         type: string
+      topDevicesList:
+        description: '10 devices with the highest number of occurrences of this alert type, on this day.'
+        items:
+          properties:
+            alertsCount:
+              description: Number of alerts raised for this device.
+              readOnly: true
+              type: integer
+            deviceId:
+              description: Name of the device.
+              readOnly: true
+              type: string
+            lastOccurrence:
+              description: 'Most recent time this alert was raised for this device, on this day.'
+              readOnly: true
+              type: string
+        readOnly: true
+        type: array
       vendorName:
         description: Name of the organization that raised the alert.
         readOnly: true

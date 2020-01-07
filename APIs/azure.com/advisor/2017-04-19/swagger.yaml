@@ -668,11 +668,8 @@ paths:
             recommendationId: recommendationId
             resourceUri: resourceUri
             suppressionContract:
-              id: /resourceUri/providers/Microsoft.Advisor/recommendations/recommendationId/suppressions/suppressionName1
-              name: suppressionName1
               properties:
                 ttl: '07:00:00:00'
-              type: Microsoft.Advisor/suppressions
           responses:
             '200':
               body:
@@ -844,6 +841,7 @@ definitions:
           - Security
           - Performance
           - Cost
+          - OperationalExcellence
         type: string
         x-ms-enum:
           modelAsString: true

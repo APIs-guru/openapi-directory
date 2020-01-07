@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/billing/resource-manager/Microsoft.Billing/preview/2019-10-01-preview/billing.json'
       version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: billing
   x-tags:
@@ -102,6 +102,13 @@ parameters:
     description: Enrollment Account Id.
     in: path
     name: enrollmentAccountName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  instructionNameParameter:
+    description: Instruction Name.
+    in: path
+    name: instructionName
     required: true
     type: string
     x-ms-parameter-location: method
@@ -1107,6 +1114,7 @@ paths:
             parameters:
               properties:
                 displayName: BillingProfile11
+                invoiceEmailOptIn: true
                 poNumber: ABC12345
           responses:
             '200':
@@ -1849,7 +1857,7 @@ paths:
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/transfers':
     get:
       description: Lists all transfer's details initiated from given invoice section.
-      operationId: PartnerTransfersTransfers_List
+      operationId: PartnerTransfers_List
       parameters:
         - $ref: '#/parameters/billingAccountNameParameter'
         - $ref: '#/parameters/billingProfileNameParameter'
@@ -1985,6 +1993,137 @@ paths:
                   lastModifiedTime: '2018-10-10T17:32:28Z'
                   recipientEmailId: user@contoso.com
                   transferStatus: InProgress
+  '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/instructions':
+    get:
+      description: Lists the instructions by billing profile id.
+      externalDocs:
+        url: 'https://docs.microsoft.com/en-us/rest/api/billing/'
+      operationId: Instructions_ListByBillingProfile
+      parameters:
+        - $ref: '#/parameters/billingAccountNameParameter'
+        - $ref: '#/parameters/billingProfileNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/InstructionListResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Instructions
+      x-ms-examples:
+        InstructionsListByBillingProfile:
+          parameters:
+            api-version: 2019-10-01-preview
+            billingAccountName: '{billingAccountName}'
+            billingProfileName: '{billingProfileName}'
+          responses:
+            '200':
+              body:
+                value:
+                  - id: '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/instructions/TO1:CLIN001'
+                    name: 'TO1:CLIN001'
+                    properties:
+                      amount: 5000
+                      endDate: '2020-12-30T21:26:47.997Z'
+                      startDate: '2019-12-30T21:26:47.997Z'
+                    type: Microsoft.Billing/billingAccounts/billingProfiles/instructions
+                  - id: '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/instructions/TO1:CLIN002'
+                    name: 'TO1:CLIN002'
+                    properties:
+                      amount: 2000
+                      endDate: '2020-12-30T21:26:47.997Z'
+                      startDate: '2019-12-30T21:26:47.997Z'
+                    type: Microsoft.Billing/billingAccounts/billingProfiles/instructions
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/instructions/{instructionName}':
+    get:
+      description: Get the instruction by name.
+      operationId: Instructions_Get
+      parameters:
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/billingAccountNameParameter'
+        - $ref: '#/parameters/billingProfileNameParameter'
+        - $ref: '#/parameters/instructionNameParameter'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/Instruction'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Instructions
+      x-ms-examples:
+        Instruction:
+          parameters:
+            api-version: 2019-10-01-preview
+            billingAccountName: '{billingAccountName}'
+            billingProfileName: '{billingProfileName}'
+            instructionName: '{instructionName}'
+          responses:
+            '200':
+              body:
+                id: '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/instructions/{instructionName}'
+                name: '{instructionName}'
+                properties:
+                  amount: 5000
+                  endDate: '2020-12-30T21:26:47.997Z'
+                  startDate: '2019-12-30T21:26:47.997Z'
+                type: Microsoft.Billing/billingAccounts/billingProfiles/instructions
+    put:
+      description: The operation to create or update a instruction.
+      operationId: Instructions_Put
+      parameters:
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/billingAccountNameParameter'
+        - $ref: '#/parameters/billingProfileNameParameter'
+        - $ref: '#/parameters/instructionNameParameter'
+        - description: The new instruction.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/Instruction'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/Instruction'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Instructions
+      x-ms-examples:
+        PutInstruction:
+          parameters:
+            api-version: 2019-10-01-preview
+            billingAccountName: '{billingAccountName}'
+            billingProfileName: '{billingProfileName}'
+            instructionName: '{instructionName}'
+            parameters:
+              properties:
+                amount: 5000
+                endDate: '2020-12-30T21:26:47.997Z'
+                startDate: '2019-12-30T21:26:47.997Z'
+          responses:
+            '200':
+              body:
+                id: '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/instructions/{instructionName}'
+                name: '{instructionName}'
+                properties:
+                  amount: 5000
+                  endDate: '2020-12-30T21:26:47.997Z'
+                  startDate: '2019-12-30T21:26:47.997Z'
+                type: Microsoft.Billing/billingAccounts/billingProfiles/instructions
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections':
     get:
       description: Lists all invoice sections for a user which he has access to.
@@ -3237,12 +3376,12 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
         - description: Start date
           in: query
-          name: startDate
+          name: periodStartDate
           required: true
           type: string
         - description: End date
           in: query
-          name: endDate
+          name: periodEndDate
           required: true
           type: string
         - description: 'May be used to filter by transaction kind. The filter supports ''eq'', ''lt'', ''gt'', ''le'', ''ge'', and ''and''. It does not currently support ''ne'', ''or'', or ''not''. Tag filter is a key value pair string where key and value is separated by a colon (:).'
@@ -3268,9 +3407,9 @@ paths:
             api-version: 2019-10-01-preview
             billingAccountName: '{billingAccountName}'
             billingProfileName: '{billingProfileName}'
-            endDate: '2018-05-30'
             invoiceSectionName: '{invoiceSectionName}'
-            startDate: '2018-04-01'
+            periodEndDate: '2018-05-30'
+            periodStartDate: '2018-04-01'
           responses:
             '200':
               body:
@@ -3322,9 +3461,9 @@ paths:
             api-version: 2019-10-01-preview
             billingAccountName: '{billingAccountName}'
             billingProfileName: '{billingProfileName}'
-            endDate: '2018-05-30'
             invoiceSectionName: '{invoiceSectionName}'
-            startDate: '2018-04-01'
+            periodEndDate: '2018-05-30'
+            periodStartDate: '2018-04-01'
           responses:
             '200':
               body:
@@ -3810,7 +3949,7 @@ paths:
                 properties:
                   marketplacePurchases: AllAllowed
                   reservationPurchases: Allowed
-                  viewCharges: SubscriptionOwner
+                  viewCharges: Allowed
                 type: Microsoft.Billing/billingAccounts/billingProfiles/policies
     put:
       description: The operation to update a policy.
@@ -3845,18 +3984,18 @@ paths:
             eTag: '"1d34d012214157f"'
             parameters:
               properties:
-                marketplacePurchases: FreeAllowed
+                marketplacePurchases: OnlyFreeAllowed
                 reservationPurchases: NotAllowed
-                viewCharges: SubscriptionOwner
+                viewCharges: Allowed
           responses:
             '200':
               body:
                 id: '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/policies/default'
                 name: default
                 properties:
-                  marketplacePurchases: FreeAllowed
+                  marketplacePurchases: OnlyFreeAllowed
                   reservationPurchases: NotAllowed
-                  viewCharges: SubscriptionOwner
+                  viewCharges: Allowed
                 type: Microsoft.Billing/billingAccounts/billingProfiles/policies
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/pricesheet/default/download':
     post:
@@ -3920,12 +4059,12 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
         - description: Start date
           in: query
-          name: startDate
+          name: periodStartDate
           required: true
           type: string
         - description: End date
           in: query
-          name: endDate
+          name: periodEndDate
           required: true
           type: string
         - description: 'May be used to filter by transaction kind. The filter supports ''eq'', ''lt'', ''gt'', ''le'', ''ge'', and ''and''. It does not currently support ''ne'', ''or'', or ''not''. Tag filter is a key value pair string where key and value is separated by a colon (:).'
@@ -3951,8 +4090,8 @@ paths:
             api-version: 2019-10-01-preview
             billingAccountName: '{billingAccountName}'
             billingProfileName: '{billingProfileName}'
-            endDate: '2018-05-30'
-            startDate: '2018-04-01'
+            periodEndDate: '2018-05-30'
+            periodStartDate: '2018-04-01'
           responses:
             '200':
               body:
@@ -4004,8 +4143,8 @@ paths:
             api-version: 2019-10-01-preview
             billingAccountName: '{billingAccountName}'
             billingProfileName: '{billingProfileName}'
-            endDate: '2018-05-30'
-            startDate: '2018-04-01'
+            periodEndDate: '2018-05-30'
+            periodStartDate: '2018-04-01'
           responses:
             '200':
               body:
@@ -4060,12 +4199,12 @@ paths:
         - $ref: '#/parameters/transactionNameParameter'
         - description: Start date
           in: query
-          name: startDate
+          name: periodStartDate
           required: true
           type: string
         - description: End date
           in: query
-          name: endDate
+          name: periodEndDate
           required: true
           type: string
         - $ref: '#/parameters/apiVersionParameter'
@@ -4086,8 +4225,8 @@ paths:
             api-version: 2019-10-01-preview
             billingAccountName: '{billingAccountName}'
             billingProfileName: '{billingProfileName}'
-            endDate: '2018-05-30'
-            startDate: '2018-04-01'
+            periodEndDate: '2018-05-30'
+            periodStartDate: '2018-04-01'
             transactionName: '{transactionName}'
           responses:
             '200':
@@ -4511,6 +4650,157 @@ paths:
                     type: Microsoft.Billing/billingSubscriptions
       x-ms-pageable:
         nextLinkName: nextLink
+  '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/{billingSubscriptionName}/invoices':
+    get:
+      description: Lists invoices by billing subscriptions name.
+      externalDocs:
+        url: 'https://docs.microsoft.com/en-us/rest/api/billing/'
+      operationId: Invoices_ListByBillingSubscription
+      parameters:
+        - $ref: '#/parameters/billingAccountNameParameter'
+        - $ref: '#/parameters/billingSubscriptionNameParameter'
+        - description: Invoice period start date.
+          in: query
+          name: periodStartDate
+          required: true
+          type: string
+        - description: Invoice period end date.
+          in: query
+          name: periodEndDate
+          required: true
+          type: string
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/InvoiceListResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Invoices
+      x-ms-examples:
+        BillingSubscriptionsListByBillingAccount:
+          parameters:
+            api-version: 2019-10-01-preview
+            billingAccountName: '{billingAccountName}'
+            billingSubscriptionName: '{billingSubscriptionName}'
+            periodEndDate: '2018-06-30'
+            periodStartDate: '2018-01-01'
+          responses:
+            '200':
+              body:
+                value:
+                  - id: 'providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/11000000-0000-0000-0000-000000000000/invoices/1383723'
+                    name: '1383723'
+                    properties:
+                      amountDue:
+                        currency: USD
+                        value: 2000
+                      dueDate: '2018-01-16T17:32:28Z'
+                      invoiceDate: '2018-01-01T17:32:28Z'
+                      invoicePeriodEndDate: '2018-01-15T17:32:28Z'
+                      invoicePeriodStartDate: '2018-01-01T17:32:28Z'
+                      invoiceType: AzureServices
+                      purchaseOrderNumber: '123456'
+                      status: Due
+                    type: Microsoft.Billing/billingAccounts/billingSubscriptions/invoices
+                  - id: 'providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/11000000-0000-0000-0000-000000000000/invoices/1383724'
+                    name: '1383724'
+                    properties:
+                      amountDue:
+                        currency: USD
+                        value: 2000
+                      billedAmount:
+                        currency: USD
+                        value: 2000
+                      billingProfileDisplayName: Contoso Operations Billing
+                      billingProfileId: '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/11000000-0000-0000-0000-000000000000'
+                      documents:
+                        - kind: Invoice
+                          url: 'https://management.azure.com/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/11000000-0000-0000-0000-000000000000/invoices/1383724/download'
+                      dueDate: '2018-03-01T17:32:28Z'
+                      invoiceDate: '2018-02-01T17:32:28Z'
+                      invoicePeriodEndDate: '2018-02-30T17:32:28Z'
+                      invoicePeriodStartDate: '2018-02-01T17:32:28Z'
+                      invoiceType: AzureMarketplace
+                      payments:
+                        - amount:
+                            currency: USD
+                            value: 2000
+                          date: '2018-01-14T17:32:28Z'
+                          paymentMethodFamily: CreditCard
+                          paymentMethodType: visa
+                          paymentType: credited
+                      purchaseOrderNumber: '123456'
+                      status: PastDue
+                    type: Microsoft.Billing/billingAccounts/billingSubscriptions/invoices
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/{billingSubscriptionName}/invoices/{invoiceName}':
+    get:
+      description: Gets the invoice by name.
+      externalDocs:
+        url: 'https://docs.microsoft.com/en-us/rest/api/billing/'
+      operationId: Invoices_GetById
+      parameters:
+        - $ref: '#/parameters/billingAccountNameParameter'
+        - $ref: '#/parameters/billingSubscriptionNameParameter'
+        - $ref: '#/parameters/invoiceNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/Invoice'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Invoices
+      x-ms-examples:
+        BillingSubscriptionsListByBillingAccount:
+          parameters:
+            api-version: 2019-10-01-preview
+            billingAccountName: '{billingAccountName}'
+            billingSubscriptionName: '{billingSubscriptionName}'
+            invoiceName: '{invoiceName}'
+          responses:
+            '200':
+              body:
+                id: 'providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/11000000-0000-0000-0000-000000000000/invoices/1383724'
+                name: '1383724'
+                properties:
+                  amountDue:
+                    currency: USD
+                    value: 2000
+                  billedAmount:
+                    currency: USD
+                    value: 2000
+                  billingProfileDisplayName: Contoso Operations Billing
+                  billingProfileId: '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/11000000-0000-0000-0000-000000000000'
+                  documents:
+                    - kind: Invoice
+                      url: 'https://management.azure.com/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/11000000-0000-0000-0000-000000000000/invoices/1383724/download'
+                  dueDate: '2018-03-01T17:32:28Z'
+                  invoiceDate: '2018-02-01T17:32:28Z'
+                  invoicePeriodEndDate: '2018-02-30T17:32:28Z'
+                  invoicePeriodStartDate: '2018-02-01T17:32:28Z'
+                  invoiceType: AzureMarketplace
+                  payments:
+                    - amount:
+                        currency: USD
+                        value: 2000
+                      date: '2018-01-14T17:32:28Z'
+                      paymentMethodFamily: CreditCard
+                      paymentMethodType: visa
+                      paymentType: credited
+                  purchaseOrderNumber: '123456'
+                  status: PastDue
+                type: Microsoft.Billing/billingAccounts/billingSubscriptions/invoices
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/createBillingRoleAssignment':
     post:
       description: The operation to add a role assignment to a billing account.
@@ -5101,12 +5391,12 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
         - description: Start date
           in: query
-          name: startDate
+          name: periodStartDate
           required: true
           type: string
         - description: End date
           in: query
-          name: endDate
+          name: periodEndDate
           required: true
           type: string
         - description: 'May be used to filter by transaction kind. The filter supports ''eq'', ''lt'', ''gt'', ''le'', ''ge'', and ''and''. It does not currently support ''ne'', ''or'', or ''not''. Tag filter is a key value pair string where key and value is separated by a colon (:).'
@@ -5132,8 +5422,8 @@ paths:
             api-version: 2019-10-01-preview
             billingAccountName: '{billingAccountName}'
             customerName: '{customerName}'
-            endDate: '2018-05-30'
-            startDate: '2018-04-01'
+            periodEndDate: '2018-05-30'
+            periodStartDate: '2018-04-01'
           responses:
             '200':
               body:
@@ -5185,8 +5475,8 @@ paths:
             api-version: 2018-11-01-preview
             billingAccountName: '{billingAccountName}'
             customerName: '{customerName}'
-            endDate: '2018-05-30'
-            startDate: '2018-04-01'
+            periodEndDate: '2018-05-30'
+            periodStartDate: '2018-04-01'
           responses:
             '200':
               body:
@@ -5892,12 +6182,12 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
         - description: Start date
           in: query
-          name: startDate
+          name: periodStartDate
           required: true
           type: string
         - description: End date
           in: query
-          name: endDate
+          name: periodEndDate
           required: true
           type: string
         - description: 'May be used to filter by transaction kind. The filter supports ''eq'', ''lt'', ''gt'', ''le'', ''ge'', and ''and''. It does not currently support ''ne'', ''or'', or ''not''. Tag filter is a key value pair string where key and value is separated by a colon (:).'
@@ -5922,8 +6212,8 @@ paths:
             $filter: properties/kind eq 'Reservation'
             api-version: 2019-10-01-preview
             billingAccountName: '{billingAccountName}'
-            endDate: '2018-05-30'
-            startDate: '2018-04-01'
+            periodEndDate: '2018-05-30'
+            periodStartDate: '2018-04-01'
           responses:
             '200':
               body:
@@ -5974,8 +6264,8 @@ paths:
           parameters:
             api-version: 2019-10-01-preview
             billingAccountName: '{billingAccountName}'
-            endDate: '2018-05-30'
-            startDate: '2018-04-01'
+            periodEndDate: '2018-05-30'
+            periodStartDate: '2018-04-01'
           responses:
             '200':
               body:
@@ -6650,6 +6940,7 @@ definitions:
           - MicrosoftCustomerAgreement
           - EnterpriseAgreement
           - MicrosoftOnlineServicesProgram
+          - MicrosoftPartnerAgreement
         readOnly: true
         type: string
         x-ms-enum:
@@ -6792,7 +7083,6 @@ definitions:
         type: integer
       invoiceEmailOptIn:
         description: If the billing profile is opted in to receive invoices via email.
-        readOnly: true
         type: boolean
       invoiceSections:
         description: The invoice sections associated to the billing profile.
@@ -6949,9 +7239,10 @@ definitions:
         readOnly: true
         type: string
       permissions:
-        $ref: '#/definitions/BillingPermissionsListResult'
         description: The billingPermissions the role has
-        x-ms-client-flatten: true
+        items:
+          $ref: '#/definitions/BillingPermissionsProperties'
+        type: array
       roleName:
         description: The name of the role
         readOnly: true
@@ -7384,6 +7675,47 @@ definitions:
         description: Request parameters to initiate transfer.
         x-ms-client-flatten: true
     type: object
+  Instruction:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: A instruction resource.
+    properties:
+      properties:
+        $ref: '#/definitions/InstructionProperties'
+        description: A billing instruction.
+        x-ms-client-flatten: true
+    type: object
+  InstructionListResult:
+    description: Result of listing instructions.
+    properties:
+      nextLink:
+        description: The link (url) to the next page of results.
+        readOnly: true
+        type: string
+      value:
+        description: The list of instructions.
+        items:
+          $ref: '#/definitions/Instruction'
+        readOnly: true
+        type: array
+  InstructionProperties:
+    description: A billing instruction used during invoice generation.
+    properties:
+      amount:
+        description: The amount budgeted for this billing instruction.
+        type: number
+      endDate:
+        description: The date this billing instruction is no longer in effect.
+        format: date-time
+        type: string
+      startDate:
+        description: The date this billing instruction goes into effect.
+        format: date-time
+        type: string
+    required:
+      - amount
+      - startDate
+      - endDate
   Invoice:
     allOf:
       - $ref: '#/definitions/Resource'
@@ -7452,6 +7784,16 @@ definitions:
         format: date-time
         readOnly: true
         type: string
+      invoiceType:
+        description: Invoice type.
+        enum:
+          - AzureService
+          - AzureMarketplace
+          - AzureSupport
+        readOnly: true
+        x-ms-enum:
+          modelAsString: true
+          name: InvoiceType
       payments:
         description: List of payments.
         items:
@@ -7731,7 +8073,7 @@ definitions:
         description: 'The marketplace purchases are free, allowed or not allowed.'
         enum:
           - AllAllowed
-          - FreeAllowed
+          - OnlyFreeAllowed
           - NotAllowed
         type: string
         x-ms-enum:
@@ -7749,8 +8091,8 @@ definitions:
       viewCharges:
         description: Who can view charges.
         enum:
-          - None
-          - SubscriptionOwner
+          - Allowed
+          - NotAllowed
         type: string
         x-ms-enum:
           modelAsString: true

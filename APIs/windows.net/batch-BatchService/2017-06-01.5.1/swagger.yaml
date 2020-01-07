@@ -394,8 +394,7 @@ paths:
             client-request-id: 00000000-0000-0000-0000-000000000000
             ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
           responses:
-            '201':
-              body: ''
+            '201': {}
       x-ms-request-id: request-id
   '/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})':
     delete:
@@ -482,8 +481,7 @@ paths:
             thumbprint: 0123456789abcdef0123456789abcdef01234567
             thumbprintAlgorithm: sha1
           responses:
-            '202':
-              body: ''
+            '202': {}
       x-ms-request-id: request-id
     get:
       description: Gets information about the specified certificate.
@@ -682,8 +680,7 @@ paths:
             thumbprint: 0123456789abcdef0123456789abcdef01234567
             thumbprintAlgorithm: sha1
           responses:
-            '204':
-              body: ''
+            '204': {}
       x-ms-request-id: request-id
   /jobs:
     get:
@@ -905,8 +902,7 @@ paths:
               priority: 0
             ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
           responses:
-            '201':
-              body: ''
+            '201': {}
         Add a complex job:
           parameters:
             api-version: 2017-06-01.5.1
@@ -984,8 +980,7 @@ paths:
               priority: 100
             ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
           responses:
-            '201':
-              body: ''
+            '201': {}
       x-ms-request-id: request-id
   '/jobs/{jobId}':
     delete:
@@ -1353,8 +1348,7 @@ paths:
               priority: 100
             ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
           responses:
-            '200':
-              body: ''
+            '200': {}
       x-ms-request-id: request-id
     put:
       description: 'This fully replaces all the updatable properties of the job. For example, if the job has constraints associated with it and if constraints is not specified with this request, then the Batch service will remove the existing constraints.'
@@ -1480,8 +1474,7 @@ paths:
               priority: 100
             ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
           responses:
-            '200':
-              body: ''
+            '200': {}
       x-ms-request-id: request-id
   '/jobs/{jobId}/addtaskcollection':
     post:
@@ -1747,8 +1740,7 @@ paths:
             jobId: jobId
             ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
           responses:
-            '202':
-              body: ''
+            '202': {}
       x-ms-request-id: request-id
   '/jobs/{jobId}/enable':
     post:
@@ -1862,8 +1854,7 @@ paths:
             jobId: jobId
             ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
           responses:
-            '202':
-              body: ''
+            '202': {}
       x-ms-request-id: request-id
   '/jobs/{jobId}/jobpreparationandreleasetaskstatus':
     get:
@@ -2327,8 +2318,7 @@ paths:
               commandLine: cmd /c echo task1
               id: task1
           responses:
-            '201':
-              body: ''
+            '201': {}
         Add a task with exit conditions:
           parameters:
             api-version: 2017-06-01.5.1
@@ -2349,8 +2339,7 @@ paths:
                   elevationLevel: nonAdmin
                   scope: task
           responses:
-            '201':
-              body: ''
+            '201': {}
       x-ms-request-id: request-id
   '/jobs/{jobId}/tasks/{taskId}':
     delete:
@@ -2458,8 +2447,7 @@ paths:
             ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
             taskId: taskId
           responses:
-            '200':
-              body: ''
+            '200': {}
       x-ms-request-id: request-id
     get:
       description: 'For multi-instance tasks, information such as affinityId, executionInfo and nodeInfo refer to the primary task. Use the list subtasks API to retrieve information about subtasks.'
@@ -2746,8 +2734,7 @@ paths:
                 maxWallClockTime: PT1H
                 retentionTime: PT1H
           responses:
-            '200':
-              body: ''
+            '200': {}
       x-ms-request-id: request-id
   '/jobs/{jobId}/tasks/{taskId}/files':
     get:
@@ -2969,8 +2956,7 @@ paths:
             recursive: false
             taskId: task1
           responses:
-            '200':
-              body: ''
+            '200': {}
       x-ms-request-id: request-id
     get:
       description: Returns the content of the specified task file.
@@ -3223,12 +3209,12 @@ paths:
             taskId: taskId
           responses:
             '200':
-              Content-Length: '17'
-              Content-Type: application/octet-stream
-              Last-Modified: 'Fri, 17 Feb 2017 00:00:00 GMT'
-              body: ''
-              ocp-batch-file-isdirectory: 'false'
-              ocp-creation-time: 'Fri, 17 Feb 2017 00:00:00 GMT'
+              headers:
+                Content-Length: '17'
+                Content-Type: application/octet-stream
+                Last-Modified: 'Fri, 17 Feb 2017 00:00:00 GMT'
+                ocp-batch-file-isdirectory: 'false'
+                ocp-creation-time: 'Fri, 17 Feb 2017 00:00:00 GMT'
       x-ms-request-id: request-id
   '/jobs/{jobId}/tasks/{taskId}/reactivate':
     post:
@@ -3348,8 +3334,7 @@ paths:
             ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
             taskId: taskId
           responses:
-            '204':
-              body: ''
+            '204': {}
       x-ms-request-id: request-id
   '/jobs/{jobId}/tasks/{taskId}/subtasksinfo':
     get:
@@ -3593,8 +3578,7 @@ paths:
             ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
             taskId: taskId
           responses:
-            '204':
-              body: ''
+            '204': {}
       x-ms-request-id: request-id
   '/jobs/{jobId}/terminate':
     post:
@@ -3716,8 +3700,7 @@ paths:
               terminateReason: User supplied termination reason
             ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
           responses:
-            '202':
-              body: ''
+            '202': {}
       x-ms-request-id: request-id
   /jobschedules:
     get:
@@ -3963,8 +3946,7 @@ paths:
                 recurrenceInterval: PT5M
             ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
           responses:
-            '201':
-              body: ''
+            '201': {}
         Add a complex JobScheduleAdd:
           parameters:
             api-version: 2017-06-01.5.1
@@ -4048,8 +4030,7 @@ paths:
                 startWindow: PT1M
             ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
           responses:
-            '201':
-              body: ''
+            '201': {}
       x-ms-request-id: request-id
   '/jobschedules/{jobScheduleId}':
     delete:
@@ -4151,8 +4132,7 @@ paths:
             jobScheduleId: jobScheduleId
             ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
           responses:
-            '202':
-              body: ''
+            '202': {}
       x-ms-request-id: request-id
     get:
       description: Gets information about the specified job schedule.
@@ -4534,8 +4514,7 @@ paths:
                 doNotRunUntil: '2025-01-01T12:30:00Z'
             ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
           responses:
-            '200':
-              body: ''
+            '200': {}
       x-ms-request-id: request-id
     put:
       description: 'This fully replaces all the updatable properties of the job schedule. For example, if the schedule property is not specified with this request, then the Batch service will remove the existing schedule. Changes to a job schedule only impact jobs created by the schedule after the update has taken place; currently running jobs are unaffected.'
@@ -4665,8 +4644,7 @@ paths:
                 doNotRunUntil: '2025-01-01T12:30:00Z'
             ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
           responses:
-            '200':
-              body: ''
+            '200': {}
       x-ms-request-id: request-id
   '/jobschedules/{jobScheduleId}/disable':
     post:
@@ -4780,8 +4758,7 @@ paths:
             jobScheduleId: jobScheduleId
             ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
           responses:
-            '204':
-              body: ''
+            '204': {}
       x-ms-request-id: request-id
   '/jobschedules/{jobScheduleId}/enable':
     post:
@@ -4894,8 +4871,7 @@ paths:
             jobScheduleId: jobScheduleId
             ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
           responses:
-            '204':
-              body: ''
+            '204': {}
       x-ms-request-id: request-id
   '/jobschedules/{jobScheduleId}/jobs':
     get:
@@ -5116,8 +5092,7 @@ paths:
             jobScheduleId: jobScheduleId
             ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
           responses:
-            '202':
-              body: ''
+            '202': {}
       x-ms-request-id: request-id
   /lifetimejobstats:
     get:
@@ -5815,8 +5790,7 @@ paths:
             ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
             poolId: poolId
           responses:
-            '202':
-              body: ''
+            '202': {}
       x-ms-request-id: request-id
     get:
       description: Gets information about the specified pool.
@@ -6386,8 +6360,7 @@ paths:
               autoScaleFormula: $TargetDedicated=0
             poolId: poolId
           responses:
-            '200':
-              body: ''
+            '200': {}
       x-ms-request-id: request-id
   '/pools/{poolId}/evaluateautoscale':
     post:
@@ -6902,8 +6875,7 @@ paths:
             ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
             poolId: poolId
           responses:
-            '200':
-              body: ''
+            '200': {}
       x-ms-request-id: request-id
   '/pools/{poolId}/nodes/{nodeId}/enablescheduling':
     post:
@@ -6993,8 +6965,7 @@ paths:
             ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
             poolId: poolId
           responses:
-            '200':
-              body: ''
+            '200': {}
       x-ms-request-id: request-id
   '/pools/{poolId}/nodes/{nodeId}/files':
     get:
@@ -7219,8 +7190,7 @@ paths:
             poolId: poolId
             recursive: false
           responses:
-            '200':
-              body: ''
+            '200': {}
       x-ms-request-id: request-id
     get:
       description: Returns the content of the specified compute node file.
@@ -7473,12 +7443,12 @@ paths:
             poolId: poolId
           responses:
             '200':
-              Content-Length: '17'
-              Content-Type: application/octet-stream
-              Last-Modified: 'Fri, 17 Feb 2017 00:00:00 GMT'
-              body: ''
-              ocp-batch-file-isdirectory: 'false'
-              ocp-creation-time: 'Fri, 17 Feb 2017 00:00:00 GMT'
+              headers:
+                Content-Length: '17'
+                Content-Type: application/octet-stream
+                Last-Modified: 'Fri, 17 Feb 2017 00:00:00 GMT'
+                ocp-batch-file-isdirectory: 'false'
+                ocp-creation-time: 'Fri, 17 Feb 2017 00:00:00 GMT'
       x-ms-request-id: request-id
   '/pools/{poolId}/nodes/{nodeId}/rdp':
     get:
@@ -7655,8 +7625,7 @@ paths:
             ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
             poolId: poolId
           responses:
-            '202':
-              body: ''
+            '202': {}
       x-ms-request-id: request-id
   '/pools/{poolId}/nodes/{nodeId}/reimage':
     post:
@@ -7754,8 +7723,7 @@ paths:
             ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
             poolId: poolId
           responses:
-            '202':
-              body: ''
+            '202': {}
       x-ms-request-id: request-id
   '/pools/{poolId}/nodes/{nodeId}/remoteloginsettings':
     get:
@@ -7948,8 +7916,7 @@ paths:
               name: userName
               password: Password
           responses:
-            '201':
-              body: ''
+            '201': {}
       x-ms-request-id: request-id
   '/pools/{poolId}/nodes/{nodeId}/users/{userName}':
     delete:
@@ -8033,8 +8000,7 @@ paths:
             poolId: poolId
             userName: userName
           responses:
-            '200':
-              body: ''
+            '200': {}
       x-ms-request-id: request-id
     put:
       description: 'This operation replaces of all the updatable properties of the account. For example, if the expiryTime element is not specified, the current value is replaced with the default value, not left unmodified. You can update a user account on a node only when it is in the idle or running state.'
@@ -8138,8 +8104,7 @@ paths:
             poolId: poolId
             userName: userName
           responses:
-            '200':
-              body: ''
+            '200': {}
       x-ms-request-id: request-id
   '/pools/{poolId}/removenodes':
     post:
@@ -8263,8 +8228,7 @@ paths:
             ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
             poolId: poolId
           responses:
-            '202':
-              body: ''
+            '202': {}
       x-ms-request-id: request-id
   '/pools/{poolId}/resize':
     post:
@@ -8387,8 +8351,7 @@ paths:
               targetDedicatedNodes: 1
               targetLowPriorityNodes: 0
           responses:
-            '202':
-              body: ''
+            '202': {}
       x-ms-request-id: request-id
   '/pools/{poolId}/stopresize':
     post:
@@ -8502,8 +8465,7 @@ paths:
             ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
             poolId: poolId
           responses:
-            '202':
-              body: ''
+            '202': {}
       x-ms-request-id: request-id
   '/pools/{poolId}/updateproperties':
     post:
@@ -8599,8 +8561,7 @@ paths:
               startTask:
                 commandLine: /bin/bash -c 'echo start task'
           responses:
-            '204':
-              body: ''
+            '204': {}
       x-ms-request-id: request-id
   '/pools/{poolId}/upgradeos':
     post:

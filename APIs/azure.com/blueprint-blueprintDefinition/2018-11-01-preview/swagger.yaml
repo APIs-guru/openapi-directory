@@ -2217,30 +2217,22 @@ definitions:
         maxLength: 256
         type: string
       strongType:
-        description: StrongType for UI to render rich experience during blueprint assignment.
+        description: 'StrongType for UI to render rich experience during blueprint assignment. Supported strong types are resourceType, principalId and location.'
         maxLength: 64
         type: string
     type: object
   ParameterValue:
-    allOf:
-      - $ref: '#/definitions/ParameterValueBase'
-    description: Value for the specified parameter.
+    description: Value for the specified parameter. Can be either 'value' or 'reference' but not both.
     properties:
+      reference:
+        $ref: '#/definitions/SecretValueReference'
+        description: Parameter value as reference type.
       value:
-        description: Actual value.
-    required:
-      - value
-    type: object
-  ParameterValueBase:
-    description: Base class for ParameterValue.
-    properties:
-      description:
-        description: Optional property. Establishes ParameterValueBase as a BaseClass.
-        type: string
+        description: Parameter value as value type.
     type: object
   ParameterValueCollection:
     additionalProperties:
-      $ref: '#/definitions/ParameterValueBase'
+      $ref: '#/definitions/ParameterValue'
       description: Key/Value pair of parameter fulfillment.
     description: A dictionary for parameters and their corresponding values.
     properties: {}
@@ -2435,17 +2427,6 @@ definitions:
     required:
       - roleDefinitionId
       - principalIds
-    type: object
-  SecretReferenceParameterValue:
-    allOf:
-      - $ref: '#/definitions/ParameterValueBase'
-    description: 'The reference to a secret, if the parameter should be protected.'
-    properties:
-      reference:
-        $ref: '#/definitions/SecretValueReference'
-        description: Specifies the reference.
-    required:
-      - reference
     type: object
   SecretValueReference:
     description: Reference to a Key Vault secret.

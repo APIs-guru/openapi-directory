@@ -16,7 +16,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/netapp/resource-manager/Microsoft.NetApp/stable/2019-07-01/netapp.json'
       version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: netapp
   x-tags:
@@ -281,7 +281,7 @@ paths:
         Accounts_Get:
           parameters:
             accountName: accountName
-            api-version: '2019-05-01'
+            api-version: '2019-07-01'
             resourceGroupName: resourceGroup
             subscriptionId: subscriptionId
           responses:
@@ -1867,7 +1867,6 @@ definitions:
       protocolTypes:
         description: Set of protocol types
         example:
-          - NFSv3
           - NFSv4.1
         items:
           type: string

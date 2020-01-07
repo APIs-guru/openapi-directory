@@ -303,7 +303,7 @@ paths:
           description: A successful call results in each valid document getting a sentiment score between 0 and 1
           schema:
             $ref: '#/definitions/SentimentBatchResult'
-        '500':
+        default:
           description: Error Response
           schema:
             $ref: '#/definitions/ErrorResponse'
@@ -496,17 +496,6 @@ definitions:
         description: (Optional) if showStats=true was specified in the request this field will contain information about the document payload.
     type: object
   LanguageBatchInput:
-    example:
-      documents:
-        - countryHint: en
-          id: '1'
-          text: Hello world. This is some input text that I love.
-        - countryHint: fr
-          id: '2'
-          text: Bonjour tout le monde
-        - countryHint: es
-          id: '3'
-          text: La carretera estaba atascada. Había mucho tráfico el día de ayer.
     properties:
       documents:
         items:
@@ -579,17 +568,6 @@ definitions:
         type: number
     type: object
   MultiLanguageBatchInput:
-    example:
-      documents:
-        - id: '1'
-          language: en
-          text: Hello world. This is some input text that I love.
-        - id: '2'
-          language: fr
-          text: Bonjour tout le monde
-        - id: '3'
-          language: es
-          text: La carretera estaba atascada. Había mucho tráfico el día de ayer.
     properties:
       documents:
         items:

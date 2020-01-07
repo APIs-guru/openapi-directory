@@ -192,14 +192,16 @@ paths:
               body:
                 value:
                   - id: /subscriptions/9ad61516-995c-4873-a21f-7e44904f0ed2/resourcegroups/System.local/providers/Microsoft.Storage.Admin/storageaccounts/0180624c67694706a4066782d83057a5
+                    kind: StorageV2
                     location: local
                     name: 0180624c67694706a4066782d83057a5
                     properties:
+                      accessTier: Cool
                       accountId: 0180624c67694706a4066782d83057a5
                       accountStatus: Active
                       accountType: Standard_LRS
                       creationTime: '2018-01-17T02:10:27.41'
-                      permissions: Full
+                      healthState: Healthy
                       primaryEndpoints:
                         blob: 'https://adminkvlclproddata004.blob.local.azurestack.external/'
                         queue: 'https://adminkvlclproddata004.queue.local.azurestack.external/'
@@ -211,9 +213,9 @@ paths:
                       tenantStorageAccountName: adminkvlclproddata004
                       tenantSubscriptionId: 9ad61516-995c-4873-a21f-7e44904f0ed2
                       tenantViewId: /subscriptions/9ad61516-995c-4873-a21f-7e44904f0ed2/resourcegroups/system.local.adminkeyvault/providers/Microsoft.Storage/storageaccounts/adminkvlclproddata004
-                      wacInternalState: Active
                     type: Microsoft.Storage.Admin/storageaccounts
                   - id: /subscriptions/9ad61516-995c-4873-a21f-7e44904f0ed2/resourcegroups/System.local/providers/Microsoft.Storage.Admin/storageaccounts/04106a84393f4a12ab8efdbc0a69bb65
+                    kind: Storage
                     location: local
                     name: 04106a84393f4a12ab8efdbc0a69bb65
                     properties:
@@ -221,7 +223,7 @@ paths:
                       accountStatus: Active
                       accountType: Standard_LRS
                       creationTime: '2018-01-17T02:10:27.847'
-                      permissions: Full
+                      healthState: Healthy
                       primaryEndpoints:
                         blob: 'https://adminkvlclproddata005.blob.local.azurestack.external/'
                         queue: 'https://adminkvlclproddata005.queue.local.azurestack.external/'
@@ -233,9 +235,9 @@ paths:
                       tenantStorageAccountName: adminkvlclproddata005
                       tenantSubscriptionId: 9ad61516-995c-4873-a21f-7e44904f0ed2
                       tenantViewId: /subscriptions/9ad61516-995c-4873-a21f-7e44904f0ed2/resourcegroups/system.local.adminkeyvault/providers/Microsoft.Storage/storageaccounts/adminkvlclproddata005
-                      wacInternalState: Active
                     type: Microsoft.Storage.Admin/storageaccounts
                   - id: /subscriptions/9ad61516-995c-4873-a21f-7e44904f0ed2/resourcegroups/System.local/providers/Microsoft.Storage.Admin/storageaccounts/06e296e00b284f5cb5708dfabd6ad74c
+                    kind: Storage
                     location: local
                     name: 06e296e00b284f5cb5708dfabd6ad74c
                     properties:
@@ -243,7 +245,7 @@ paths:
                       accountStatus: Active
                       accountType: Standard_LRS
                       creationTime: '2018-01-17T02:10:12.47'
-                      permissions: Full
+                      healthState: Healthy
                       primaryEndpoints:
                         blob: 'https://wasphealthaccount.blob.local.azurestack.external/'
                         queue: 'https://wasphealthaccount.queue.local.azurestack.external/'
@@ -255,9 +257,9 @@ paths:
                       tenantStorageAccountName: wasphealthaccount
                       tenantSubscriptionId: 9ad61516-995c-4873-a21f-7e44904f0ed2
                       tenantViewId: /subscriptions/9ad61516-995c-4873-a21f-7e44904f0ed2/resourcegroups/system.local/providers/Microsoft.Storage/storageaccounts/wasphealthaccount
-                      wacInternalState: Active
                     type: Microsoft.Storage.Admin/storageaccounts
                   - id: /subscriptions/9ad61516-995c-4873-a21f-7e44904f0ed2/resourcegroups/System.local/providers/Microsoft.Storage.Admin/storageaccounts/0a6b4f6b1de14cc08aa1fefadcc481eb
+                    kind: Storage
                     location: local
                     name: 0a6b4f6b1de14cc08aa1fefadcc481eb
                     properties:
@@ -265,7 +267,7 @@ paths:
                       accountStatus: Active
                       accountType: Standard_LRS
                       creationTime: '2018-01-17T02:10:02.527'
-                      permissions: Full
+                      healthState: Healthy
                       primaryEndpoints:
                         blob: 'https://frphealthaccount.blob.local.azurestack.external/'
                         queue: 'https://frphealthaccount.queue.local.azurestack.external/'
@@ -277,9 +279,9 @@ paths:
                       tenantStorageAccountName: frphealthaccount
                       tenantSubscriptionId: 9ad61516-995c-4873-a21f-7e44904f0ed2
                       tenantViewId: /subscriptions/9ad61516-995c-4873-a21f-7e44904f0ed2/resourcegroups/system.local/providers/Microsoft.Storage/storageaccounts/frphealthaccount
-                      wacInternalState: Active
                     type: Microsoft.Storage.Admin/storageaccounts
                   - id: /subscriptions/9ad61516-995c-4873-a21f-7e44904f0ed2/resourcegroups/System.local/providers/Microsoft.Storage.Admin/storageaccounts/0d724e3f75004e48948c1bfa0b4a964a
+                    kind: Storage
                     location: local
                     name: 0d724e3f75004e48948c1bfa0b4a964a
                     properties:
@@ -287,7 +289,7 @@ paths:
                       accountStatus: Active
                       accountType: Standard_LRS
                       creationTime: '2018-01-17T01:56:29.467'
-                      permissions: Full
+                      healthState: Healthy
                       primaryEndpoints:
                         blob: 'https://systemgallery.blob.local.azurestack.external/'
                         queue: 'https://systemgallery.queue.local.azurestack.external/'
@@ -299,9 +301,9 @@ paths:
                       tenantStorageAccountName: systemgallery
                       tenantSubscriptionId: 9ad61516-995c-4873-a21f-7e44904f0ed2
                       tenantViewId: /subscriptions/9ad61516-995c-4873-a21f-7e44904f0ed2/resourcegroups/system.local/providers/Microsoft.Storage/storageaccounts/systemgallery
-                      wacInternalState: Active
                     type: Microsoft.Storage.Admin/storageaccounts
                   - id: /subscriptions/9ad61516-995c-4873-a21f-7e44904f0ed2/resourcegroups/System.local/providers/Microsoft.Storage.Admin/storageaccounts/0dda0879146341178603ba151d7da010
+                    kind: Storage
                     location: local
                     name: 0dda0879146341178603ba151d7da010
                     properties:
@@ -309,7 +311,7 @@ paths:
                       accountStatus: Active
                       accountType: Standard_LRS
                       creationTime: '2018-01-17T02:10:23.84'
-                      permissions: Full
+                      healthState: Healthy
                       primaryEndpoints:
                         blob: 'https://nrpeventsaccount.blob.local.azurestack.external/'
                         queue: 'https://nrpeventsaccount.queue.local.azurestack.external/'
@@ -321,9 +323,9 @@ paths:
                       tenantStorageAccountName: nrpeventsaccount
                       tenantSubscriptionId: 9ad61516-995c-4873-a21f-7e44904f0ed2
                       tenantViewId: /subscriptions/9ad61516-995c-4873-a21f-7e44904f0ed2/resourcegroups/system.local/providers/Microsoft.Storage/storageaccounts/nrpeventsaccount
-                      wacInternalState: Active
                     type: Microsoft.Storage.Admin/storageaccounts
                   - id: /subscriptions/9ad61516-995c-4873-a21f-7e44904f0ed2/resourcegroups/System.local/providers/Microsoft.Storage.Admin/storageaccounts/15612011f6094654abcb6031a4394ef5
+                    kind: Storage
                     location: local
                     name: 15612011f6094654abcb6031a4394ef5
                     properties:
@@ -331,7 +333,7 @@ paths:
                       accountStatus: Active
                       accountType: Standard_LRS
                       creationTime: '2018-01-17T02:10:36.193'
-                      permissions: Full
+                      healthState: Healthy
                       primaryEndpoints:
                         blob: 'https://kvrphealthaccount.blob.local.azurestack.external/'
                         queue: 'https://kvrphealthaccount.queue.local.azurestack.external/'
@@ -343,9 +345,9 @@ paths:
                       tenantStorageAccountName: kvrphealthaccount
                       tenantSubscriptionId: 9ad61516-995c-4873-a21f-7e44904f0ed2
                       tenantViewId: /subscriptions/9ad61516-995c-4873-a21f-7e44904f0ed2/resourcegroups/system.local/providers/Microsoft.Storage/storageaccounts/kvrphealthaccount
-                      wacInternalState: Active
                     type: Microsoft.Storage.Admin/storageaccounts
                   - id: /subscriptions/9ad61516-995c-4873-a21f-7e44904f0ed2/resourcegroups/System.local/providers/Microsoft.Storage.Admin/storageaccounts/17829fa81c154239ad8a6fae05f44793
+                    kind: Storage
                     location: local
                     name: 17829fa81c154239ad8a6fae05f44793
                     properties:
@@ -353,7 +355,7 @@ paths:
                       accountStatus: Active
                       accountType: Standard_LRS
                       creationTime: '2018-01-17T02:10:15.38'
-                      permissions: Full
+                      healthState: Healthy
                       primaryEndpoints:
                         blob: 'https://srpusageaccount.blob.local.azurestack.external/'
                         queue: 'https://srpusageaccount.queue.local.azurestack.external/'
@@ -365,7 +367,6 @@ paths:
                       tenantStorageAccountName: srpusageaccount
                       tenantSubscriptionId: 9ad61516-995c-4873-a21f-7e44904f0ed2
                       tenantViewId: /subscriptions/9ad61516-995c-4873-a21f-7e44904f0ed2/resourcegroups/system.local/providers/Microsoft.Storage/storageaccounts/srpusageaccount
-                      wacInternalState: Active
                     type: Microsoft.Storage.Admin/storageaccounts
       x-ms-pageable:
         nextLinkName: '@odata.nextLink'
@@ -434,6 +435,7 @@ paths:
             '200':
               body:
                 id: /subscriptions/9ad61516-995c-4873-a21f-7e44904f0ed2/resourcegroups/System.local/providers/Microsoft.Storage.Admin/storageaccounts/f93c9df9e7af487fbda484a9201d9c18
+                kind: Storage
                 location: local
                 name: f93c9df9e7af487fbda484a9201d9c18
                 properties:
@@ -441,7 +443,7 @@ paths:
                   accountStatus: Active
                   accountType: Standard_LRS
                   creationTime: '2018-01-17T01:56:30.983'
-                  permissions: Full
+                  healthState: Healthy
                   primaryEndpoints:
                     blob: 'https://authprod.blob.local.azurestack.external/'
                     queue: 'https://authprod.queue.local.azurestack.external/'
@@ -453,7 +455,6 @@ paths:
                   tenantStorageAccountName: authprod
                   tenantSubscriptionId: 9ad61516-995c-4873-a21f-7e44904f0ed2
                   tenantViewId: /subscriptions/9ad61516-995c-4873-a21f-7e44904f0ed2/resourcegroups/system.local/providers/Microsoft.Storage/storageaccounts/authprod
-                  wacInternalState: Active
                 type: Microsoft.Storage.Admin/storageaccounts
   '/subscriptions/{subscriptionId}/providers/Microsoft.Storage.Admin/locations/{location}/storageaccounts/{accountId}/undelete':
     post:
@@ -570,6 +571,10 @@ definitions:
         x-ms-azure-resource: true
     description: Properties of the storage account.
     properties:
+      kind:
+        $ref: '#/definitions/StorageAccountKind'
+        description: Indicates the type of storage account
+        readOnly: true
       properties:
         $ref: '#/definitions/StorageAccountProperties'
         description: Properties of the storage account.
@@ -582,6 +587,36 @@ definitions:
         readOnly: true
         type: object
     type: object
+  StorageAccountAccessTier:
+    description: Access tier for storage account
+    enum:
+      - Hot
+      - Cool
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: StorageAccountAccessTier
+  StorageAccountHealthState:
+    description: Health state for storage account
+    enum:
+      - Healthy
+      - Suspended
+      - OverQuota
+      - SuspendedAndOverQuota
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: StorageAccountHealthState
+  StorageAccountKind:
+    description: The kind of storage account
+    enum:
+      - Storage
+      - StorageV2
+      - BlobStorage
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: StorageAccountKind
   StorageAccountList:
     description: Pageable list of storage accounts.
     properties:
@@ -599,6 +634,10 @@ definitions:
   StorageAccountProperties:
     description: Properties of a storage account.
     properties:
+      accessTier:
+        $ref: '#/definitions/StorageAccountAccessTier'
+        description: Required for storage accounts where kind = BlobStorage.
+        readOnly: true
       accountId:
         description: 'Internal storage account ID, which is not visible to tenant.'
         readOnly: true
@@ -610,10 +649,6 @@ definitions:
         $ref: '#/definitions/StorageAccountType'
         description: Storage account type.
         readOnly: true
-      alternateName:
-        description: Alternative storage account name being used during undelete operation.
-        readOnly: true
-        type: string
       creationTime:
         description: The creation date and time of storage account in UTC.
         readOnly: true
@@ -631,9 +666,9 @@ definitions:
         description: The fault domain for the storage account.
         readOnly: true
         type: string
-      permissions:
-        $ref: '#/definitions/WacAccountPermissions'
-        description: The permissions on the storage account.
+      healthState:
+        $ref: '#/definitions/StorageAccountHealthState'
+        description: The internal health state for storage account.
         readOnly: true
       primaryEndpoints:
         additionalProperties:
@@ -672,17 +707,12 @@ definitions:
         description: Resource URI of storage account from tenant view.
         readOnly: true
         type: string
-      wacInternalState:
-        $ref: '#/definitions/WacAccountStates'
-        description: The internal state of storage account in WAC.
-        readOnly: true
     type: object
   StorageAccountState:
     description: Storage account state.
     enum:
       - Creating
       - Succeeded
-      - Suspended
     readOnly: true
     type: string
     x-ms-enum:
@@ -761,30 +791,3 @@ definitions:
         readOnly: true
         type: string
     type: object
-  WacAccountPermissions:
-    description: Current operation being performed on Storage Account
-    enum:
-      - Empty
-      - None
-      - Read
-      - Delete
-      - Write
-      - Full
-    type: string
-    x-ms-enum:
-      modelAsString: true
-      name: WacAccountPermissions
-  WacAccountStates:
-    description: Current operation being performed on Storage Account
-    enum:
-      - None
-      - Active
-      - Deleted
-      - AboveQuota
-      - Suspended
-      - All
-      - GcReadyState
-    type: string
-    x-ms-enum:
-      modelAsString: true
-      name: WacAccountStates

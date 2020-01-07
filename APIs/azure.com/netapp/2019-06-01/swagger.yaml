@@ -16,7 +16,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/netapp/resource-manager/Microsoft.NetApp/stable/2019-06-01/netapp.json'
       version: '2.0'
-  x-preferred: true
+  x-preferred: false
   x-providerName: azure.com
   x-serviceName: netapp
   x-tags:
@@ -148,7 +148,7 @@ paths:
       x-ms-examples:
         CheckFilePathAvailability:
           parameters:
-            api-version: '2019-05-01'
+            api-version: '2019-06-01'
             body:
               name: my-exact-filepth
               resourceGroup: myrg
@@ -185,7 +185,7 @@ paths:
       x-ms-examples:
         CheckNameAvailability:
           parameters:
-            api-version: '2019-05-01'
+            api-version: '2019-06-01'
             body:
               name: accName
               resourceGroup: myrg
@@ -217,7 +217,7 @@ paths:
       x-ms-examples:
         Accounts_List:
           parameters:
-            api-version: '2019-05-01'
+            api-version: '2019-06-01'
             resourceGroupName: resourceGroup
             subscriptionId: subscriptionId
           responses:
@@ -252,7 +252,7 @@ paths:
         Accounts_Delete:
           parameters:
             accountName: accountName
-            api-version: '2019-05-01'
+            api-version: '2019-06-01'
             resourceGroupName: resourceGroup
             subscriptionId: subscriptionId
           responses:
@@ -281,7 +281,7 @@ paths:
         Accounts_Get:
           parameters:
             accountName: accountName
-            api-version: '2019-05-01'
+            api-version: '2019-06-01'
             resourceGroupName: resourceGroup
             subscriptionId: subscriptionId
           responses:
@@ -320,7 +320,7 @@ paths:
         Accounts_Update:
           parameters:
             accountName: accountName
-            api-version: '2019-05-01'
+            api-version: '2019-06-01'
             body: {}
             resourceGroupName: resourceGroup
             subscriptionId: subscriptionId
@@ -365,7 +365,7 @@ paths:
         Accounts_CreateOrUpdate:
           parameters:
             accountName: accountName
-            api-version: '2019-05-01'
+            api-version: '2019-06-01'
             body:
               location: eastus
             resourceGroupName: resourceGroup
@@ -406,7 +406,7 @@ paths:
         Pools_List:
           parameters:
             accountName: accountName
-            api-version: '2019-05-01'
+            api-version: '2019-06-01'
             resourceGroupName: resourceGroup
             subscriptionId: subscriptionId
           responses:
@@ -445,7 +445,7 @@ paths:
         Pools_Delete:
           parameters:
             accountName: accountName
-            api-version: '2019-05-01'
+            api-version: '2019-06-01'
             poolName: poolName
             resourceGroupName: resourceGroup
             subscriptionId: subscriptionId
@@ -476,7 +476,7 @@ paths:
         Pools_Get:
           parameters:
             accountName: accountName
-            api-version: '2019-05-01'
+            api-version: '2019-06-01'
             poolName: poolName
             resourceGroupName: resourceGroup
             subscriptionId: subscriptionId
@@ -520,7 +520,7 @@ paths:
         Pools_Update:
           parameters:
             accountName: accountName
-            api-version: '2019-05-01'
+            api-version: '2019-06-01'
             body: {}
             poolName: poolName
             resourceGroupName: resourceGroup
@@ -570,7 +570,7 @@ paths:
         Pools_CreateOrUpdate:
           parameters:
             accountName: accountName
-            api-version: '2019-05-01'
+            api-version: '2019-06-01'
             body:
               location: eastus
               properties:
@@ -622,7 +622,7 @@ paths:
         Volumes_List:
           parameters:
             accountName: accountName
-            api-version: '2019-05-01'
+            api-version: '2019-06-01'
             poolName: poolName
             resourceGroupName: resourceGroup
             subscriptionId: subscriptionId
@@ -665,7 +665,7 @@ paths:
         Volumes_Delete:
           parameters:
             accountName: accountName
-            api-version: '2019-05-01'
+            api-version: '2019-06-01'
             poolName: poolName
             resourceGroupName: resourceGroup
             subscriptionId: subscriptionId
@@ -698,7 +698,7 @@ paths:
         Volumes_Get:
           parameters:
             accountName: accountName
-            api-version: '2019-05-01'
+            api-version: '2019-06-01'
             poolName: poolName
             resourceGroupName: resourceGroup
             subscriptionId: subscriptionId
@@ -746,7 +746,7 @@ paths:
         Volumes_Update:
           parameters:
             accountName: accountName
-            api-version: '2019-05-01'
+            api-version: '2019-06-01'
             body: {}
             poolName: poolName
             resourceGroupName: resourceGroup
@@ -800,7 +800,7 @@ paths:
         Volumes_CreateOrUpdate:
           parameters:
             accountName: accountName
-            api-version: '2019-05-01'
+            api-version: '2019-06-01'
             body:
               location: eastus
               properties:
@@ -860,7 +860,7 @@ paths:
         MountTargets_List:
           parameters:
             accountName: accountName
-            api-version: '2019-05-01'
+            api-version: '2019-06-01'
             poolName: poolName
             resourceGroupName: resourceGroup
             subscriptionId: subscriptionId
@@ -908,7 +908,7 @@ paths:
         Snapshots_List:
           parameters:
             accountName: accountName
-            api-version: '2019-05-01'
+            api-version: '2019-06-01'
             poolName: poolName
             resourceGroupName: resourceGroup
             subscriptionId: subscriptionId
@@ -953,7 +953,7 @@ paths:
         Snapshots_Delete:
           parameters:
             accountName: accountName
-            api-version: '2019-05-01'
+            api-version: '2019-06-01'
             poolName: poolName
             resourceGroupName: resourceGroup
             snapshotName: snapshotName
@@ -989,7 +989,7 @@ paths:
         Snapshots_Get:
           parameters:
             accountName: accountName
-            api-version: '2019-05-01'
+            api-version: '2019-06-01'
             poolName: poolName
             resourceGroupName: resourceGroup
             snapshotName: snapshotName
@@ -1037,7 +1037,7 @@ paths:
         Snapshots_Update:
           parameters:
             accountName: accountName
-            api-version: '2019-05-01'
+            api-version: '2019-06-01'
             body: {}
             poolName: poolName
             resourceGroupName: resourceGroup
@@ -1087,7 +1087,7 @@ paths:
         Snapshots_Create:
           parameters:
             accountName: accountName
-            api-version: '2019-05-01'
+            api-version: '2019-06-01'
             body:
               location: eastus
             poolName: poolName
@@ -1366,7 +1366,7 @@ definitions:
         description: Allows NFSv3 protocol
         type: boolean
       nfsv4:
-        description: Allows NFSv4 protocol
+        description: 'Deprecated: Will use the NFSv4.1 protocol, please use swagger version 2019-07-01 or later'
         type: boolean
       ruleIndex:
         description: Order index

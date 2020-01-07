@@ -319,6 +319,8 @@ paths:
                 id: /subscriptions/21a9967a-e8a9-4656-a70b-96ff1c4d05a0/resourceGroups/myResourceGroup/providers/Microsoft.Maps/accounts/myMapsAccount
                 location: global
                 name: myMapsAccount
+                properties:
+                  x-ms-client-id: string
                 sku:
                   name: S0
                   tier: Standard
@@ -367,6 +369,8 @@ paths:
                 id: /subscriptions/21a9967a-e8a9-4656-a70b-96ff1c4d05a0/resourceGroups/myResourceGroup/providers/Microsoft.Maps/accounts/myMapsAccount
                 location: global
                 name: myMapsAccount
+                properties:
+                  x-ms-client-id: string
                 sku:
                   name: S0
                   tier: Standard
@@ -420,6 +424,8 @@ paths:
                 id: /subscriptions/21a9967a-e8a9-4656-a70b-96ff1c4d05a0/resourceGroups/myResourceGroup/providers/Microsoft.Maps/accounts/myMapsAccount
                 location: global
                 name: myMapsAccount
+                properties:
+                  x-ms-client-id: string
                 sku:
                   name: S0
                   tier: Standard
@@ -431,6 +437,8 @@ paths:
                 id: /subscriptions/21a9967a-e8a9-4656-a70b-96ff1c4d05a0/resourceGroups/myResourceGroup/providers/Microsoft.Maps/accounts/myMapsAccount
                 location: global
                 name: myMapsAccount
+                properties:
+                  x-ms-client-id: string
                 sku:
                   name: S0
                   tier: Standard
@@ -558,6 +566,10 @@ definitions:
         description: The location of the resource.
         readOnly: true
         type: string
+      properties:
+        $ref: '#/definitions/MapsAccountProperties'
+        description: The map account properties.
+        readOnly: true
       sku:
         $ref: '#/definitions/Sku'
         description: The SKU of this account.
@@ -603,6 +615,12 @@ definitions:
         readOnly: true
         type: string
     type: object
+  MapsAccountProperties:
+    description: Additional Map account properties
+    properties:
+      x-ms-client-id:
+        description: A unique identifier for the maps account
+        type: string
   MapsAccountUpdateParameters:
     description: Parameters used to update an existing Maps Account.
     properties:

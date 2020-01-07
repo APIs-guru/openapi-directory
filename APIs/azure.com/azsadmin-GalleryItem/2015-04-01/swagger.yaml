@@ -45,7 +45,7 @@ parameters:
   GalleryItemUriPayloadParameter:
     description: The URI to the gallery item JSON file.
     in: body
-    name: galleryItemUri
+    name: galleryItemUriPayload
     required: true
     schema:
       $ref: '#/definitions/GalleryItemUriPayload'
@@ -1635,7 +1635,7 @@ paths:
         uploads a provider gallery item to the storage:
           parameters:
             api-version: '2016-05-01'
-            galleryItemUri: 'https://github.com/Azure/AzureStack-Tools/raw/master/ComputeAdmin/microsoft.vmss.1.3.6.azpkg'
+            galleryItemUriPayload: 'https://github.com/Azure/AzureStack-Tools/raw/master/ComputeAdmin/microsoft.vmss.1.3.6.azpkg'
             subscriptionId: 0ff0bbbe-d68d-4314-8f68-80a808b5a6ec
           responses:
             '200':

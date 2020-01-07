@@ -63,7 +63,7 @@ parameters:
     name: regionId
     required: true
     type: string
-    x-ms-parameter-location: client
+    x-ms-parameter-location: method
   resourceGroupName:
     description: The name of the resource group
     in: path
@@ -79,28 +79,30 @@ parameters:
     type: string
 tags:
   - description: Subscription life cycle
-    name: subscription
+    name: Subscription
   - description: Virtual machine resource operations
-    name: virtualMachine
+    name: VirtualMachines
   - description: Virtual networks functions
-    name: virtualNetwork
+    name: VirtualNetwork
   - description: VM templates functions
-    name: virtualMachineTemplate
+    name: VirtualMachineTemplates
   - description: available operations function
-    name: operations
+    name: Operations
   - description: Resource pools operations
-    name: resourcePool
+    name: ResourcePools
   - description: dedicated cloud nodes operations
-    name: dedicatedCloudNode
+    name: DedicatedCloudNodes
   - description: Azure Service object operations
-    name: azureService
+    name: AzureService
   - description: operations related to availability and usage
-    name: availability-usage
+    name: AvailabilityUsages
+  - description: Customization policies operations
+    name: CustomizationPolicies
 paths:
   /providers/Microsoft.VMwareCloudSimple/operations:
     get:
       description: Return list of operations
-      operationId: availableOperations_List
+      operationId: Operations_List
       parameters:
         - $ref: '#/parameters/api-version'
       responses:
@@ -109,12 +111,12 @@ paths:
           schema:
             $ref: '#/definitions/AvailableOperationsListResponse'
         default:
-          description: BadRequest
+          description: General Error
           schema:
             $ref: '#/definitions/CSRPError'
       summary: Implements list of available operations
       tags:
-        - operations
+        - Operations
       x-ms-examples:
         ListOperations:
           parameters:
@@ -136,7 +138,7 @@ paths:
   '/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/dedicatedCloudNodes':
     get:
       description: Returns list of dedicate cloud nodes within subscription
-      operationId: dedicatedCloudNode_ListBySubscription
+      operationId: DedicatedCloudNodes_ListBySubscription
       parameters:
         - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/api-version'
@@ -159,12 +161,12 @@ paths:
           schema:
             $ref: '#/definitions/DedicatedCloudNodeListResponse'
         default:
-          description: BadRequest
+          description: General Error
           schema:
             $ref: '#/definitions/CSRPError'
       summary: Implements list of dedicated cloud nodes within subscription method
       tags:
-        - dedicatedCloudNode
+        - DedicatedCloudNodes
       x-ms-examples:
         ListDedicatedCloudNodes:
           parameters:
@@ -182,6 +184,7 @@ paths:
                       availabilityZoneName: Availability Zone 1
                       cloudRackName: cloud_rack_1
                       created: '2019-05-21T07:32:12.134Z'
+                      nodesCount: 0
                       placementGroupId: n2
                       placementGroupName: Placement Group 2
                       privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
@@ -202,6 +205,7 @@ paths:
                       availabilityZoneId: az1
                       availabilityZoneName: Availability Zone 1
                       created: '2019-05-22T11:57:43.891Z'
+                      nodesCount: 0
                       placementGroupId: n1
                       placementGroupName: Placement Group 1
                       purchaseId: eb9d2e22-c787-4723-aa4f-3760b53a0a4d
@@ -217,7 +221,7 @@ paths:
   '/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/dedicatedCloudServices':
     get:
       description: Returns list of dedicated cloud services within a subscription
-      operationId: dedicatedCloudService_ListBySubscription
+      operationId: DedicatedCloudServices_ListBySubscription
       parameters:
         - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/api-version'
@@ -240,12 +244,12 @@ paths:
           schema:
             $ref: '#/definitions/DedicatedCloudServiceListResponse'
         default:
-          description: BadRequest
+          description: General Error
           schema:
             $ref: '#/definitions/CSRPError'
       summary: Implements list of dedicatedCloudService objects within subscription method
       tags:
-        - dedicatedCloudService
+        - DedicatedCloudServices
       x-ms-examples:
         ListDedicatedCloudServices:
           parameters:
@@ -276,7 +280,7 @@ paths:
   '/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/availabilities':
     get:
       description: Returns list of available resources in region
-      operationId: skusAvailabilityWithinRegion_List
+      operationId: SkusAvailability_List
       parameters:
         - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/regionId'
@@ -291,12 +295,12 @@ paths:
           schema:
             $ref: '#/definitions/SkuAvailabilityListResponse'
         default:
-          description: BadRequest
+          description: General Error
           schema:
             $ref: '#/definitions/CSRPError'
       summary: Implements SkuAvailability List method
       tags:
-        - availability-usage
+        - AvailabilityUsages
       x-ms-examples:
         ListAvailabilities:
           parameters:
@@ -307,27 +311,31 @@ paths:
             '200':
               body:
                 value:
-                  - currentValue: 1
-                    limit: 5
-                    name:
-                      localizedValue: CS28-Node
-                      value: general
-                    unit: Count
-                  - currentValue: 0
-                    limit: 5
-                    name:
-                      localizedValue: CS36-Node
-                      value: large
-                    unit: Count
+                  - dedicatedAvailabilityZoneId: az1
+                    dedicatedAvailabilityZoneName: Availability Zone 1
+                    dedicatedPlacementGroupId: n1
+                    dedicatedPlacementGroupName: Placement Group 1
+                    limit: 0
+                    resourceType: Microsoft.VMwareCloudSimple/dedicatedCloudNodes
+                    skuId: general
+                    skuName: CS28-Node
+                  - dedicatedAvailabilityZoneId: az1
+                    dedicatedAvailabilityZoneName: Availability Zone 1
+                    dedicatedPlacementGroupId: n1
+                    dedicatedPlacementGroupName: Placement Group 1
+                    limit: 0
+                    resourceType: Microsoft.VMwareCloudSimple/dedicatedCloudNodes
+                    skuId: large
+                    skuName: CS36-Node
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/operationResults/{operationId}':
     get:
       description: Return an async operation
-      operationId: getOperationResultByRegion
+      operationId: Operations_Get
       parameters:
-        - $ref: '#/parameters/api-version'
         - $ref: '#/parameters/subscriptionId'
+        - $ref: '#/parameters/api-version'
         - $ref: '#/parameters/regionId'
         - $ref: '#/parameters/referer'
         - description: operation id
@@ -350,7 +358,7 @@ paths:
         '204':
           description: No Content
         default:
-          description: BadRequest
+          description: General Error
           headers:
             Content-Type:
               default: application/json
@@ -359,7 +367,7 @@ paths:
             $ref: '#/definitions/CSRPError'
       summary: Implements get of async operation
       tags:
-        - operation
+        - Operations
       x-ms-examples:
         GetFailedOperationResult:
           parameters:
@@ -401,7 +409,7 @@ paths:
   '/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds':
     get:
       description: Returns list of private clouds in particular region
-      operationId: PrivateCloudByRegion_List
+      operationId: PrivateClouds_List
       parameters:
         - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/regionId'
@@ -412,12 +420,12 @@ paths:
           schema:
             $ref: '#/definitions/PrivateCloudList'
         default:
-          description: BadRequest
+          description: General Error
           schema:
             $ref: '#/definitions/CSRPError'
       summary: Implements private cloud list GET method
       tags:
-        - privateCloud
+        - PrivateClouds
       x-ms-examples:
         ListPrivateCloudInLocation:
           parameters:
@@ -460,7 +468,7 @@ paths:
   '/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds/{pcName}':
     get:
       description: Returns private cloud by its name
-      operationId: getPrivateCloud
+      operationId: PrivateClouds_Get
       parameters:
         - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/pcName'
@@ -472,12 +480,12 @@ paths:
           schema:
             $ref: '#/definitions/PrivateCloud'
         default:
-          description: BadRequest
+          description: General Error
           schema:
             $ref: '#/definitions/CSRPError'
       summary: Implements private cloud GET method
       tags:
-        - privateCloud
+        - PrivateClouds
       x-ms-examples:
         GetPrivateCloud:
           parameters:
@@ -594,10 +602,145 @@ paths:
                         privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
                       type: Microsoft.VMwareCloudSimple/virtualNetworks
                 type: Microsoft.VMwareCloudSimple/privateClouds
+  '/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds/{pcName}/customizationPolicies':
+    get:
+      description: Returns list of customization policies in region for private cloud
+      operationId: customizationPolicies_List
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - $ref: '#/parameters/regionId'
+        - $ref: '#/parameters/pcName'
+        - $ref: '#/parameters/api-version'
+        - description: The filter to apply on the list operation. only type is allowed here as a filter e.g. $filter=type eq 'xxxx'
+          in: query
+          name: $filter
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/CustomizationPoliciesListResponse'
+        default:
+          description: General Error
+          schema:
+            $ref: '#/definitions/CSRPError'
+      summary: Implements get of customization policies list
+      tags:
+        - customizationPolicies
+      x-ms-examples:
+        ListCustomizationPolicies:
+          parameters:
+            api-version: '2019-04-01'
+            pcName: myPrivateCloud
+            regionId: myResourceGroup
+            subscriptionId: '{subscription-id}'
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/b85c4986-56ae-4ebd-b5c5-a1595ca3dab1/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/foobar/customizationpolicies/Linux1
+                    location: westus2
+                    name: Linux1
+                    properties:
+                      privateCloudId: /subscriptions/b85c4986-56ae-4ebd-b5c5-a1595ca3dab1/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/foobar
+                      specification:
+                        identity:
+                          hostName:
+                            type: USER_DEFINED
+                          type: LINUX
+                          userData:
+                            isPasswordPredefined: false
+                        nicSettings:
+                          - adapter:
+                              gateway: null
+                              ip:
+                                type: USER_DEFINED
+                      type: LINUX
+                      version: '1568102823'
+                    type: Microsoft.VMwareCloudSimple/customizationPolicies
+                  - id: /subscriptions/b85c4986-56ae-4ebd-b5c5-a1595ca3dab1/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/foobar/customizationpolicies/Linux2
+                    location: westus2
+                    name: Linux2
+                    properties:
+                      privateCloudId: /subscriptions/b85c4986-56ae-4ebd-b5c5-a1595ca3dab1/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/foobar
+                      specification:
+                        identity:
+                          hostName:
+                            type: VIRTUAL_MACHINE_NAME
+                          type: LINUX
+                          userData:
+                            isPasswordPredefined: false
+                        nicSettings:
+                          - adapter:
+                              gateway: null
+                              ip:
+                                type: DHCP_IP
+                      type: LINUX
+                      version: '1568102846'
+                    type: Microsoft.VMwareCloudSimple/customizationPolicies
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds/{pcName}/customizationPolicies/{customizationPolicyName}':
+    get:
+      description: Returns customization policy by its name
+      operationId: customizationPolicies_Get
+      parameters:
+        - $ref: '#/parameters/api-version'
+        - $ref: '#/parameters/subscriptionId'
+        - $ref: '#/parameters/regionId'
+        - $ref: '#/parameters/pcName'
+        - description: customization policy name
+          in: path
+          name: customizationPolicyName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/CustomizationPolicy'
+        default:
+          description: General Error
+          schema:
+            $ref: '#/definitions/CSRPError'
+      summary: Implements get of customization policy
+      tags:
+        - customizationPolicies
+      x-ms-examples:
+        GetCustomizationPolicy:
+          parameters:
+            api-version: '2019-04-01'
+            customizationPolicyName: Linux1
+            pcName: myPrivateCloud
+            regionId: myResourceGroup
+            subscriptionId: '{subscription-id}'
+          responses:
+            '200':
+              body:
+                id: /subscriptions/b85c4986-56ae-4ebd-b5c5-a1595ca3dab1/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/foobar/customizationpolicies/Linux1
+                location: westus2
+                name: Linux1
+                properties:
+                  privateCloudId: /subscriptions/b85c4986-56ae-4ebd-b5c5-a1595ca3dab1/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/foobar
+                  specification:
+                    identity:
+                      hostName:
+                        type: USER_DEFINED
+                      type: LINUX
+                      userData:
+                        isPasswordPredefined: false
+                    nicSettings:
+                      - adapter:
+                          gateway: null
+                          ip:
+                            type: USER_DEFINED
+                  type: LINUX
+                  version: '1568102823'
+                type: Microsoft.VMwareCloudSimple/customizationPolicies
   '/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds/{pcName}/resourcePools':
     get:
       description: Returns list of resource pools in region for private cloud
-      operationId: resourcePoolsByPC_List
+      operationId: ResourcePools_List
       parameters:
         - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/regionId'
@@ -609,12 +752,12 @@ paths:
           schema:
             $ref: '#/definitions/ResourcePoolsListResponse'
         default:
-          description: BadRequest
+          description: General Error
           schema:
             $ref: '#/definitions/CSRPError'
       summary: Implements get of resource pools list
       tags:
-        - resourcePool
+        - ResourcePools
       x-ms-examples:
         ListResourcePools:
           parameters:
@@ -638,10 +781,10 @@ paths:
   '/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds/{pcName}/resourcePools/{resourcePoolName}':
     get:
       description: Returns resource pool templates by its name
-      operationId: resourcePoolByPC_get
+      operationId: ResourcePools_Get
       parameters:
-        - $ref: '#/parameters/api-version'
         - $ref: '#/parameters/subscriptionId'
+        - $ref: '#/parameters/api-version'
         - $ref: '#/parameters/regionId'
         - $ref: '#/parameters/pcName'
         - description: resource pool id (vsphereId)
@@ -655,12 +798,12 @@ paths:
           schema:
             $ref: '#/definitions/ResourcePool'
         default:
-          description: BadRequest
+          description: General Error
           schema:
             $ref: '#/definitions/CSRPError'
       summary: Implements get of resource pool
       tags:
-        - resourcePool
+        - ResourcePools
       x-ms-examples:
         GetResourcePool:
           parameters:
@@ -682,7 +825,7 @@ paths:
   '/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds/{pcName}/virtualMachineTemplates':
     get:
       description: Returns list of virtual machine templates in region for private cloud
-      operationId: virtualMachineTemplatesByPC_List
+      operationId: VirtualMachineTemplates_List
       parameters:
         - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/api-version'
@@ -699,12 +842,12 @@ paths:
           schema:
             $ref: '#/definitions/VirtualMachineTemplateListResponse'
         default:
-          description: BadRequest
+          description: General Error
           schema:
             $ref: '#/definitions/CSRPError'
       summary: Implements list of available VM templates
       tags:
-        - virtualMachineTemplate
+        - VirtualMachineTemplates
       x-ms-examples:
         ListVirtualMachineTemplates:
           parameters:
@@ -756,7 +899,7 @@ paths:
   '/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds/{pcName}/virtualMachineTemplates/{virtualMachineTemplateName}':
     get:
       description: Returns virtual machine templates by its name
-      operationId: virtualMachineTemplateByPC_Get
+      operationId: VirtualMachineTemplates_Get
       parameters:
         - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/regionId'
@@ -773,12 +916,12 @@ paths:
           schema:
             $ref: '#/definitions/VirtualMachineTemplate'
         default:
-          description: BadRequest
+          description: General Error
           schema:
             $ref: '#/definitions/CSRPError'
       summary: Implements virtual machine template GET method
       tags:
-        - virtualMachineTemplate
+        - VirtualMachineTemplates
       x-ms-examples:
         GetVirtualMachineTemplate:
           parameters:
@@ -827,7 +970,7 @@ paths:
   '/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds/{pcName}/virtualNetworks':
     get:
       description: Return list of virtual networks in location for private cloud
-      operationId: virtualNetworksByPC_List
+      operationId: VirtualNetworks_List
       parameters:
         - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/regionId'
@@ -844,12 +987,12 @@ paths:
           schema:
             $ref: '#/definitions/VirtualNetworkListResponse'
         default:
-          description: BadRequest
+          description: General Error
           schema:
             $ref: '#/definitions/CSRPError'
       summary: Implements list available virtual networks within a subscription method
       tags:
-        - virtualNetwork
+        - VirtualNetworks
       x-ms-examples:
         ListVirtualNetworks:
           parameters:
@@ -902,7 +1045,7 @@ paths:
   '/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds/{pcName}/virtualNetworks/{virtualNetworkName}':
     get:
       description: Return virtual network by its name
-      operationId: virtualNetworkByPC_Get
+      operationId: VirtualNetworks_Get
       parameters:
         - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/regionId'
@@ -919,12 +1062,12 @@ paths:
           schema:
             $ref: '#/definitions/VirtualNetwork'
         default:
-          description: BadRequest
+          description: General Error
           schema:
             $ref: '#/definitions/CSRPError'
       summary: Implements virtual network GET method
       tags:
-        - virtualNetwork
+        - VirtualNetworks
       x-ms-examples:
         GetVirtualNetwork:
           parameters:
@@ -946,7 +1089,7 @@ paths:
   '/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/usages':
     get:
       description: Returns list of usage in region
-      operationId: UsagesWithinRegion_List
+      operationId: Usages_List
       parameters:
         - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/regionId'
@@ -961,12 +1104,12 @@ paths:
           schema:
             $ref: '#/definitions/UsageListResponse'
         default:
-          description: BadRequest
+          description: General Error
           schema:
             $ref: '#/definitions/CSRPError'
       summary: Implements Usages List method
       tags:
-        - availability-usage
+        - AvailabilityUsages
       x-ms-examples:
         ListUsages:
           parameters:
@@ -977,28 +1120,24 @@ paths:
             '200':
               body:
                 value:
-                  - dedicatedAvailabilityZoneId: az1
-                    dedicatedAvailabilityZoneName: Availability Zone 1
-                    dedicatedPlacementGroupId: n1
-                    dedicatedPlacementGroupName: Placement Group 1
-                    limit: 0
-                    resourceType: Microsoft.VMwareCloudSimple/dedicatedCloudNodes
-                    skuId: general
-                    skuName: CS28-Node
-                  - dedicatedAvailabilityZoneId: az1
-                    dedicatedAvailabilityZoneName: Availability Zone 1
-                    dedicatedPlacementGroupId: n1
-                    dedicatedPlacementGroupName: Placement Group 1
-                    limit: 0
-                    resourceType: Microsoft.VMwareCloudSimple/dedicatedCloudNodes
-                    skuId: large
-                    skuName: CS36-Node
+                  - currentValue: 1
+                    limit: 5
+                    name:
+                      localizedValue: CS28-Node
+                      value: general
+                    unit: Count
+                  - currentValue: 0
+                    limit: 5
+                    name:
+                      localizedValue: CS36-Node
+                      value: large
+                    unit: Count
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/virtualMachines':
     get:
       description: Returns list virtual machine within subscription
-      operationId: virtualMachine_ListBySubscription
+      operationId: VirtualMachines_ListBySubscription
       parameters:
         - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/api-version'
@@ -1021,12 +1160,12 @@ paths:
           schema:
             $ref: '#/definitions/VirtualMachineListResponse'
         default:
-          description: BadRequest
+          description: General Error
           schema:
             $ref: '#/definitions/CSRPError'
       summary: Implements list virtual machine within subscription method
       tags:
-        - virtualMachine
+        - VirtualMachines
       x-ms-examples:
         ListVirtualMachines:
           parameters:
@@ -1156,7 +1295,7 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareCloudSimple/dedicatedCloudNodes':
     get:
       description: Returns list of dedicate cloud nodes within resource group
-      operationId: dedicatedCloudNode_ListByResourceGroup
+      operationId: DedicatedCloudNodes_ListByResourceGroup
       parameters:
         - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/resourceGroupName'
@@ -1180,12 +1319,12 @@ paths:
           schema:
             $ref: '#/definitions/DedicatedCloudNodeListResponse'
         default:
-          description: BadRequest
+          description: General Error
           schema:
             $ref: '#/definitions/CSRPError'
       summary: Implements list of dedicated cloud nodes within RG method
       tags:
-        - dedicatedCloudNode
+        - DedicatedCloudNodes
       x-ms-examples:
         ListRGDedicatedCloudNodes:
           parameters:
@@ -1204,11 +1343,12 @@ paths:
                       availabilityZoneName: Availability Zone 1
                       cloudRackName: cloud_rack_1
                       created: '2019-05-21T07:32:12.134Z'
+                      nodesCount: 0
                       placementGroupId: n2
                       placementGroupName: Placement Group 2
                       privateCloudId: private_cloud_id
                       privateCloudName: private_cloud_name
-                      purchaseId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
+                      purchaseId: 225fadec-3bbe-4e61-a119-ff102da67d0d
                       skuDescription:
                         id: general
                         name: CS28-Node
@@ -1225,6 +1365,7 @@ paths:
                       availabilityZoneName: Availability Zone 1
                       cloudRackName: cloud_rack_1
                       created: '2019-05-21T07:32:12.114Z'
+                      nodesCount: 0
                       placementGroupId: n2
                       placementGroupName: Placement Group 2
                       privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
@@ -1246,6 +1387,7 @@ paths:
                       availabilityZoneName: Availability Zone 1
                       cloudRackName: cloud_rack_1
                       created: '2019-05-08T09:35:47.961Z'
+                      nodesCount: 0
                       placementGroupId: n2
                       placementGroupName: Placement Group 2
                       privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
@@ -1264,14 +1406,14 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareCloudSimple/dedicatedCloudNodes/{dedicatedCloudNodeName}':
     delete:
       description: Delete dedicated cloud node
-      operationId: dedicatedCloudNode_Delete
+      operationId: DedicatedCloudNodes_Delete
       parameters:
         - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/resourceGroupName'
         - description: dedicated cloud node name
           in: path
           name: dedicatedCloudNodeName
-          pattern: '^[-a-zA-Z0-9]+$'
+          pattern: '^[a-zA-Z0-9]([-_.a-zA-Z0-9]*[a-zA-Z0-9])?$'
           required: true
           type: string
         - $ref: '#/parameters/api-version'
@@ -1279,7 +1421,7 @@ paths:
         '204':
           description: no content. resource does not exist and the request is well formed
         default:
-          description: BadRequest
+          description: General Error
           headers:
             Content-Type:
               default: application/json
@@ -1288,7 +1430,7 @@ paths:
             $ref: '#/definitions/CSRPError'
       summary: Implements dedicated cloud node DELETE method
       tags:
-        - dedicatedCloudNode
+        - DedicatedCloudNodes
       x-ms-examples:
         DeleteDedicatedCloudNode:
           parameters:
@@ -1300,28 +1442,29 @@ paths:
             '204': {}
     get:
       description: Returns dedicated cloud node
-      operationId: dedicatedCloudNode_Get
+      operationId: DedicatedCloudNodes_Get
       parameters:
         - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/resourceGroupName'
         - description: dedicated cloud node name
           in: path
           name: dedicatedCloudNodeName
-          pattern: '^[-a-zA-Z0-9]+$'
+          pattern: '^[a-zA-Z0-9]([-_.a-zA-Z0-9]*[a-zA-Z0-9])?$'
           required: true
           type: string
+        - $ref: '#/parameters/api-version'
       responses:
         '200':
           description: successful operation
           schema:
             $ref: '#/definitions/DedicatedCloudNode'
         default:
-          description: BadRequest
+          description: General Error
           schema:
             $ref: '#/definitions/CSRPError'
       summary: Implements dedicated cloud node GET method
       tags:
-        - dedicatedCloudNode
+        - DedicatedCloudNodes
       x-ms-examples:
         GetDedicatedCloudNode:
           parameters:
@@ -1340,6 +1483,7 @@ paths:
                   availabilityZoneName: Availability Zone 1
                   cloudRackName: cloud_rack_1
                   created: '2019-05-21T07:32:12.114Z'
+                  nodesCount: 0
                   placementGroupId: n2
                   placementGroupName: Placement Group 2
                   privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
@@ -1355,14 +1499,14 @@ paths:
                 type: Microsoft.VMwareCloudSimple/dedicatedCloudNodes
     patch:
       description: Patches dedicated node properties
-      operationId: dedicatedCloudNode_Update
+      operationId: DedicatedCloudNodes_Update
       parameters:
         - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/resourceGroupName'
         - description: dedicated cloud node name
           in: path
           name: dedicatedCloudNodeName
-          pattern: '^[-a-zA-Z0-9]+$'
+          pattern: '^[a-zA-Z0-9]([-_.a-zA-Z0-9]*[a-zA-Z0-9])?$'
           required: true
           type: string
         - description: Patch Dedicated Cloud Node request
@@ -1378,12 +1522,12 @@ paths:
           schema:
             $ref: '#/definitions/DedicatedCloudNode'
         default:
-          description: BadRequest
+          description: General Error
           schema:
             $ref: '#/definitions/CSRPError'
       summary: Implements dedicated cloud node PATCH method
       tags:
-        - dedicatedCloudNode
+        - DedicatedCloudNodes
       x-ms-examples:
         PatchDedicatedCloudNode:
           parameters:
@@ -1404,6 +1548,7 @@ paths:
                 properties:
                   availabilityZoneId: az1
                   created: '2019-05-21T13:43:26.441Z'
+                  nodesCount: 0
                   placementGroupId: n1
                   purchaseId: 56acbd46-3d36-4bbf-9b08-57c30fdf6932
                   skuDescription:
@@ -1415,7 +1560,7 @@ paths:
                 type: Microsoft.VMwareCloudSimple/dedicatedCloudNodes
     put:
       description: Returns dedicated cloud node by its name
-      operationId: dedicatedCloudNode_CreateOrUpdate
+      operationId: DedicatedCloudNodes_CreateOrUpdate
       parameters:
         - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/resourceGroupName'
@@ -1423,7 +1568,7 @@ paths:
         - description: dedicated cloud node name
           in: path
           name: dedicatedCloudNodeName
-          pattern: '^[-a-zA-Z0-9]+$'
+          pattern: '^[a-zA-Z0-9]([-_.a-zA-Z0-9]*[a-zA-Z0-9])?$'
           required: true
           type: string
         - description: Create Dedicated Cloud Node request
@@ -1446,12 +1591,12 @@ paths:
           schema:
             $ref: '#/definitions/DedicatedCloudNode'
         default:
-          description: BadRequest
+          description: General Error
           schema:
             $ref: '#/definitions/CSRPError'
       summary: Implements dedicated cloud node PUT method
       tags:
-        - dedicatedCloudNode
+        - DedicatedCloudNodes
       x-ms-examples:
         CreateDedicatedCloudNode:
           parameters:
@@ -1481,6 +1626,7 @@ paths:
                 properties:
                   availabilityZoneId: az1
                   created: '2019-05-21T13:43:26.441Z'
+                  nodesCount: 0
                   placementGroupId: n1
                   provisioningState: Accepted
                   purchaseId: 56acbd46-3d36-4bbf-9b08-57c30fdf6932
@@ -1494,8 +1640,8 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareCloudSimple/dedicatedCloudServices':
     get:
-      description: Returns list of dedicated cloud service within resource group
-      operationId: dedicatedCloudService_ListByResourceGroup
+      description: Returns list of dedicated cloud services within a resource group
+      operationId: DedicatedCloudServices_ListByResourceGroup
       parameters:
         - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/resourceGroupName'
@@ -1519,12 +1665,12 @@ paths:
           schema:
             $ref: '#/definitions/DedicatedCloudServiceListResponse'
         default:
-          description: BadRequest
+          description: General Error
           schema:
             $ref: '#/definitions/CSRPError'
       summary: Implements list of dedicatedCloudService objects within RG method
       tags:
-        - dedicatedCloudService
+        - DedicatedCloudServices
       x-ms-examples:
         ListRGDedicatedCloudServices:
           parameters:
@@ -1556,7 +1702,7 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareCloudSimple/dedicatedCloudServices/{dedicatedCloudServiceName}':
     delete:
       description: Delete dedicate cloud service
-      operationId: dedicatedCloudService_Delete
+      operationId: DedicatedCloudServices_Delete
       parameters:
         - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/resourceGroupName'
@@ -1570,7 +1716,7 @@ paths:
         '204':
           description: no content. resource does not exist and the request is well formed
         default:
-          description: BadRequest
+          description: General Error
           headers:
             Content-Type:
               default: application/json
@@ -1579,7 +1725,7 @@ paths:
             $ref: '#/definitions/CSRPError'
       summary: Implements dedicatedCloudService DELETE method
       tags:
-        - dedicatedCloudService
+        - DedicatedCloudServices
       x-ms-examples:
         DeleteDedicatedCloudService:
           parameters:
@@ -1592,7 +1738,7 @@ paths:
       x-ms-long-running-operation: true
     get:
       description: Returns Dedicate Cloud Service
-      operationId: dedicatedCloudService_Get
+      operationId: DedicatedCloudServices_Get
       parameters:
         - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/resourceGroupName'
@@ -1608,12 +1754,12 @@ paths:
           schema:
             $ref: '#/definitions/DedicatedCloudService'
         default:
-          description: BadRequest
+          description: General Error
           schema:
             $ref: '#/definitions/CSRPError'
       summary: Implements dedicatedCloudService GET method
       tags:
-        - dedicatedCloudService
+        - DedicatedCloudServices
       x-ms-examples:
         GetDedicatedCloudService:
           parameters:
@@ -1640,7 +1786,7 @@ paths:
                 type: Microsoft.VMwareCloudSimple/dedicatedCloudServices
     patch:
       description: Patch dedicated cloud service's properties
-      operationId: dedicatedCloudService_Update
+      operationId: DedicatedCloudServices_Update
       parameters:
         - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/resourceGroupName'
@@ -1662,12 +1808,12 @@ paths:
           schema:
             $ref: '#/definitions/DedicatedCloudService'
         default:
-          description: BadRequest
+          description: General Error
           schema:
             $ref: '#/definitions/CSRPError'
       summary: Implements dedicatedCloudService PATCH method
       tags:
-        - dedicatedCloudService
+        - DedicatedCloudServices
       x-ms-examples:
         PatchDedicatedService:
           parameters:
@@ -1693,14 +1839,14 @@ paths:
                 type: Microsoft.VMwareCloudSimple/dedicatedCloudServices
     put:
       description: Create dedicate cloud service
-      operationId: dedicatedCloudService_CreateOrUpdate
+      operationId: DedicatedCloudServices_CreateOrUpdate
       parameters:
         - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/resourceGroupName'
         - description: dedicated cloud Service name
           in: path
           name: dedicatedCloudServiceName
-          pattern: '^[-a-zA-Z0-9]+$'
+          pattern: '^[a-zA-Z0-9]([-_.a-zA-Z0-9]*[a-zA-Z0-9])?$'
           required: true
           type: string
         - description: Create Dedicated Cloud Service request
@@ -1716,12 +1862,12 @@ paths:
           schema:
             $ref: '#/definitions/DedicatedCloudService'
         default:
-          description: BadRequest
+          description: General Error
           schema:
             $ref: '#/definitions/CSRPError'
       summary: Implements dedicated cloud service PUT method
       tags:
-        - dedicatedCloudService
+        - DedicatedCloudServices
       x-ms-examples:
         CreateDedicatedCloudService:
           parameters:
@@ -1747,7 +1893,7 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareCloudSimple/virtualMachines':
     get:
       description: Returns list of virtual machine within resource group
-      operationId: virtualMachine_ListByResourceGroup
+      operationId: VirtualMachines_ListByResourceGroup
       parameters:
         - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/resourceGroupName'
@@ -1771,12 +1917,12 @@ paths:
           schema:
             $ref: '#/definitions/VirtualMachineListResponse'
         default:
-          description: BadRequest
+          description: General Error
           schema:
             $ref: '#/definitions/CSRPError'
       summary: Implements list virtual machine within RG method
       tags:
-        - virtualMachine
+        - VirtualMachines
       x-ms-examples:
         ListRGVirtualMachines:
           parameters:
@@ -1869,7 +2015,7 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareCloudSimple/virtualMachines/{virtualMachineName}':
     delete:
       description: Delete virtual machine
-      operationId: virtualMachine_Delete
+      operationId: VirtualMachines_Delete
       parameters:
         - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/resourceGroupName'
@@ -1893,7 +2039,7 @@ paths:
         '204':
           description: no content. resource does not exist and the request is well formed
         default:
-          description: BadRequest
+          description: General Error
           headers:
             Content-Type:
               default: application/json
@@ -1902,7 +2048,7 @@ paths:
             $ref: '#/definitions/CSRPError'
       summary: Implements virtual machine DELETE method
       tags:
-        - virtualMachine
+        - VirtualMachines
       x-ms-examples:
         DeleteVirtualMachine:
           parameters:
@@ -1917,7 +2063,7 @@ paths:
       x-ms-long-running-operation: true
     get:
       description: Get virtual machine
-      operationId: virtualMachine_Get
+      operationId: VirtualMachines_Get
       parameters:
         - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/resourceGroupName'
@@ -1933,12 +2079,12 @@ paths:
           schema:
             $ref: '#/definitions/VirtualMachine'
         default:
-          description: BadRequest
+          description: General Error
           schema:
             $ref: '#/definitions/CSRPError'
       summary: Implements virtual machine GET method
       tags:
-        - virtualMachine
+        - VirtualMachines
       x-ms-examples:
         GetVirtualMachine:
           parameters:
@@ -2005,7 +2151,7 @@ paths:
                 type: Microsoft.VMwareCloudSimple/virtualMachines
     patch:
       description: Patch virtual machine properties
-      operationId: virtualMachine_Update
+      operationId: VirtualMachines_Update
       parameters:
         - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/resourceGroupName'
@@ -2027,12 +2173,12 @@ paths:
           schema:
             $ref: '#/definitions/VirtualMachine'
         default:
-          description: BadRequest
+          description: General Error
           schema:
             $ref: '#/definitions/CSRPError'
       summary: Implements virtual machine PATCH method
       tags:
-        - virtualMachine
+        - VirtualMachines
       x-ms-examples:
         PatchVirtualMachine:
           parameters:
@@ -2088,7 +2234,7 @@ paths:
       x-ms-long-running-operation: true
     put:
       description: Create Or Update Virtual Machine
-      operationId: virtualMachine_CreateOrUpdate
+      operationId: VirtualMachines_CreateOrUpdate
       parameters:
         - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/resourceGroupName'
@@ -2096,7 +2242,7 @@ paths:
         - description: virtual machine name
           in: path
           name: virtualMachineName
-          pattern: '^[-a-zA-Z0-9]+$'
+          pattern: '^[a-zA-Z0-9]([-_.a-zA-Z0-9]*[a-zA-Z0-9])?$'
           required: true
           type: string
         - description: Create or Update Virtual Machine request
@@ -2122,12 +2268,12 @@ paths:
           schema:
             $ref: '#/definitions/VirtualMachine'
         default:
-          description: BadRequest
+          description: General Error
           schema:
             $ref: '#/definitions/CSRPError'
       summary: Implements virtual machine PUT method
       tags:
-        - virtualMachine
+        - VirtualMachines
       x-ms-examples:
         CreateVirtualMachine:
           parameters:
@@ -2145,8 +2291,6 @@ paths:
                     independenceMode: persistent
                     totalSize: 10485760
                     virtualDiskId: '2000'
-                guestOS: Other (32-bit)
-                guestOSType: other
                 nics:
                   - network:
                       id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-19'
@@ -2229,7 +2373,7 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareCloudSimple/virtualMachines/{virtualMachineName}/start':
     post:
       description: Power on virtual machine
-      operationId: virtualMachine_Start
+      operationId: VirtualMachines_Start
       parameters:
         - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/resourceGroupName'
@@ -2253,7 +2397,7 @@ paths:
             Retry-After:
               type: integer
         default:
-          description: BadRequest
+          description: General Error
           headers:
             Content-Type:
               default: application/json
@@ -2262,7 +2406,7 @@ paths:
             $ref: '#/definitions/CSRPError'
       summary: Implements a start method for a virtual machine
       tags:
-        - virtualMachine
+        - VirtualMachines
       x-ms-examples:
         StartVirtualMachine:
           parameters:
@@ -2279,7 +2423,7 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareCloudSimple/virtualMachines/{virtualMachineName}/stop':
     post:
       description: 'Power off virtual machine, options: shutdown, poweroff, and suspend'
-      operationId: virtualMachine_Stop
+      operationId: VirtualMachines_Stop
       parameters:
         - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/resourceGroupName'
@@ -2320,7 +2464,7 @@ paths:
             Retry-After:
               type: integer
         default:
-          description: BadRequest
+          description: General Error
           headers:
             Content-Type:
               default: application/json
@@ -2329,7 +2473,7 @@ paths:
             $ref: '#/definitions/CSRPError'
       summary: 'Implements shutdown, poweroff, and suspend method for a virtual machine'
       tags:
-        - virtualMachine
+        - VirtualMachines
       x-ms-examples:
         StopInBodyVirtualMachine:
           parameters:
@@ -2486,6 +2630,152 @@ definitions:
       target:
         description: Error's target
         type: string
+  CustomizationHostName:
+    description: Host name model
+    properties:
+      name:
+        description: Hostname
+        type: string
+      type:
+        description: Type of host name
+        enum:
+          - USER_DEFINED
+          - PREFIX_BASED
+          - FIXED
+          - VIRTUAL_MACHINE_NAME
+          - CUSTOM_NAME
+        type: string
+    type: object
+  CustomizationIPAddress:
+    properties:
+      argument:
+        description: Argument when Custom ip type is selected
+        type: string
+      ipAddress:
+        description: Defined Ip Address when Fixed ip type is selected
+        type: string
+      type:
+        description: Customization Specification ip type
+        enum:
+          - CUSTOM
+          - DHCP_IP
+          - FIXED_IP
+          - USER_DEFINED
+        type: string
+    type: object
+  CustomizationIPSettings:
+    properties:
+      gateway:
+        description: The list of gateways
+        items:
+          type: string
+        type: array
+      ip:
+        $ref: '#/definitions/CustomizationIPAddress'
+        description: Ip address customization settings
+      subnetMask:
+        description: Adapter subnet mask
+        type: string
+    type: object
+  CustomizationIdentity:
+    properties:
+      data:
+        description: Windows Text Identity. Prepared data
+        type: string
+      hostName:
+        $ref: '#/definitions/CustomizationHostName'
+        description: Virtual machine host name settings
+      type:
+        description: Identity type
+        enum:
+          - WINDOWS_TEXT
+          - WINDOWS
+          - LINUX
+        type: string
+      userData:
+        description: Windows Identity. User data customization
+        properties:
+          isPasswordPredefined:
+            default: false
+            description: Is password predefined in customization policy
+            type: boolean
+        type: object
+    type: object
+  CustomizationNicSetting:
+    properties:
+      adapter:
+        $ref: '#/definitions/CustomizationIPSettings'
+        description: The list of adapters' settings
+      macAddress:
+        description: NIC mac address
+        type: string
+    type: object
+  CustomizationPoliciesListResponse:
+    description: List of customization polices response model
+    properties:
+      nextLink:
+        description: Link for next list of the Customization policy
+        type: string
+      value:
+        description: List of the customization policies
+        items:
+          $ref: '#/definitions/CustomizationPolicy'
+        type: array
+  CustomizationPolicy:
+    description: The virtual machine customization policy
+    properties:
+      id:
+        description: Customization policy azure id
+        type: string
+      location:
+        description: Azure region
+        type: string
+      name:
+        description: Customization policy name
+        readOnly: true
+        type: string
+      properties:
+        $ref: '#/definitions/CustomizationPolicyProperties'
+        description: Customization Policy properties
+        x-ms-client-flatten: true
+      type:
+        readOnly: true
+        type: string
+    type: object
+  CustomizationPolicyProperties:
+    description: The properties of Customization policy
+    properties:
+      description:
+        description: Policy description
+        type: string
+      privateCloudId:
+        description: The Private cloud id
+        type: string
+      specification:
+        $ref: '#/definitions/CustomizationSpecification'
+        description: Detailed customization policy specification
+      type:
+        description: The type of customization (Linux or Windows)
+        enum:
+          - LINUX
+          - WINDOWS
+        type: string
+      version:
+        description: Policy version
+        type: string
+    type: object
+  CustomizationSpecification:
+    description: The specification for Customization Policy
+    properties:
+      identity:
+        $ref: '#/definitions/CustomizationIdentity'
+        description: Customization Identity. It contains data about user and hostname
+      nicSettings:
+        description: Network interface settings
+        items:
+          $ref: '#/definitions/CustomizationNicSetting'
+        type: array
+    type: object
   DedicatedCloudNode:
     description: Dedicated cloud node model
     properties:
@@ -2501,7 +2791,7 @@ definitions:
           - create
       name:
         description: '{dedicatedCloudNodeName}'
-        pattern: '^[-a-zA-Z0-9]+$'
+        pattern: '^[a-zA-Z0-9]([-_.a-zA-Z0-9]*[a-zA-Z0-9])?$'
         readOnly: true
         type: string
       properties:
@@ -2614,7 +2904,7 @@ definitions:
           - create
       name:
         description: '{dedicatedCloudServiceName}'
-        pattern: '^[-a-zA-Z0-9]+$'
+        pattern: '^[a-zA-Z0-9]([-_.a-zA-Z0-9]*[a-zA-Z0-9])?$'
         readOnly: true
         type: string
       properties:
@@ -2662,12 +2952,68 @@ definitions:
           name: OnboardingStatus
       nodes:
         description: total nodes purchased
+        readOnly: true
         type: integer
       serviceURL:
         description: link to a service management web portal
+        readOnly: true
         type: string
     required:
       - gatewaySubnet
+  GuestOSCustomization:
+    description: Guest OS Customization properties
+    properties:
+      dnsServers:
+        description: List of dns servers to use
+        items:
+          $ref: '#/definitions/IPV4Address'
+        type: array
+      hostName:
+        description: Virtual Machine hostname
+        type: string
+      password:
+        description: Password for login
+        type: string
+      policyId:
+        description: id of customization policy
+        type: string
+      username:
+        description: Username for login
+        type: string
+  GuestOSNICCustomization:
+    description: Guest OS nic customization
+    properties:
+      allocation:
+        description: IP address allocation method
+        enum:
+          - static
+          - dynamic
+        type: string
+      dnsServers:
+        description: List of dns servers to use
+        items:
+          $ref: '#/definitions/IPV4Address'
+        type: array
+      gateway:
+        description: Gateway addresses assigned to nic
+        items:
+          $ref: '#/definitions/IPV4Address'
+        type: array
+      ipAddress:
+        $ref: '#/definitions/IPV4Address'
+        description: Static ip address for nic
+      mask:
+        $ref: '#/definitions/IPV4Address'
+        description: Network mask for nic
+      primaryWinsServer:
+        $ref: '#/definitions/IPV4Address'
+        description: primary WINS server for Windows
+      secondaryWinsServer:
+        $ref: '#/definitions/IPV4Address'
+        description: secondary WINS server for Windows
+  IPV4Address:
+    pattern: '^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])[.]){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$'
+    type: string
   OperationError:
     description: Operation error model
     properties:
@@ -2839,6 +3185,7 @@ definitions:
         type: string
       location:
         description: Azure region
+        readOnly: true
         type: string
       name:
         description: '{ResourcePoolName}'
@@ -3067,7 +3414,7 @@ definitions:
           - create
       name:
         description: '{virtualMachineName}'
-        pattern: '^[-a-zA-Z0-9]+$'
+        pattern: '^[a-zA-Z0-9]([-_.a-zA-Z0-9]*[a-zA-Z0-9])?$'
         readOnly: true
         type: string
       properties:
@@ -3107,6 +3454,9 @@ definitions:
           $ref: '#/definitions/VirtualDiskController'
         readOnly: true
         type: array
+      customization:
+        $ref: '#/definitions/GuestOSCustomization'
+        description: Virtual machine properties
       disks:
         description: The list of Virtual Disks
         items:
@@ -3125,6 +3475,7 @@ definitions:
         type: string
       guestOS:
         description: The name of Guest OS
+        readOnly: true
         type: string
       guestOSType:
         description: The Guest OS type
@@ -3132,6 +3483,7 @@ definitions:
           - linux
           - windows
           - other
+        readOnly: true
         type: string
         x-ms-enum:
           modelAsString: false
@@ -3145,7 +3497,7 @@ definitions:
         description: The number of CPU cores
         type: integer
       password:
-        description: Password for login
+        description: Password for login. Deprecated - use customization property
         type: string
       privateCloudId:
         description: Private Cloud Id
@@ -3179,7 +3531,7 @@ definitions:
         description: Virtual Machine Template Id
         type: string
       username:
-        description: Username for login
+        description: Username for login. Deprecated - use customization property
         type: string
       vSphereNetworks:
         description: The list of Virtual VSphere Networks
@@ -3198,8 +3550,6 @@ definitions:
       - numberOfCores
       - amountOfRam
       - privateCloudId
-      - guestOS
-      - guestOSType
   VirtualMachineStopMode:
     description: List of virtual machine stop modes
     properties:
@@ -3271,9 +3621,11 @@ definitions:
         type: boolean
       guestOS:
         description: The Guest OS
+        readOnly: true
         type: string
       guestOSType:
         description: The Guest OS types
+        readOnly: true
         type: string
       nics:
         description: The list of Virtual NICs
@@ -3306,8 +3658,6 @@ definitions:
         type: string
     required:
       - privateCloudId
-      - guestOS
-      - guestOSType
   VirtualNetwork:
     description: Virtual network model
     properties:
@@ -3320,6 +3670,7 @@ definitions:
         type: string
       location:
         description: Azure region
+        readOnly: true
         type: string
       name:
         description: '{VirtualNetworkName}'
@@ -3356,6 +3707,9 @@ definitions:
   VirtualNic:
     description: Virtual NIC model
     properties:
+      customization:
+        $ref: '#/definitions/GuestOSNICCustomization'
+        description: guest OS customization for nic
       ipAddresses:
         description: NIC ip address
         items:
@@ -3366,7 +3720,7 @@ definitions:
         type: string
       network:
         $ref: '#/definitions/VirtualNetwork'
-        description: The list of Virtual Networks
+        description: Virtual Network
       nicType:
         description: NIC type
         enum:
@@ -3392,3 +3746,4 @@ definitions:
         type: string
     required:
       - nicType
+      - network

@@ -2286,7 +2286,7 @@ paths:
           in: query
           name: deleteMetrics
           type: boolean
-        - description: 'Specify true if the App Service plan will be empty after app deletion and you want to delete the empty App Service plan. By default, the empty App Service plan is not deleted.'
+        - description: 'Specify false if you want to keep empty App Service plan. By default, empty App Service plan is deleted.'
           in: query
           name: deleteEmptyServerFarm
           type: boolean
@@ -12389,7 +12389,7 @@ paths:
           schema:
             $ref: '#/definitions/FunctionEnvelope'
         '404':
-          description: 'Function with an name of {functionName} is not running.'
+          description: 'Function with a name of {functionName} does not exist.'
       summary: 'Get function information by its ID for web site, or a deployment slot.'
       tags:
         - WebApps
@@ -12470,6 +12470,193 @@ paths:
       tags:
         - WebApps
       x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions/{functionName}/keys/{keyName}':
+    delete:
+      description: Delete a function secret.
+      operationId: WebApps_DeleteFunctionSecret
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - description: Site name.
+          in: path
+          name: name
+          required: true
+          type: string
+        - description: The name of the function.
+          in: path
+          name: functionName
+          required: true
+          type: string
+        - description: The name of the key.
+          in: path
+          name: keyName
+          required: true
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '204':
+          description: Key was deleted.
+        '404':
+          description: Key was not found.
+      summary: Delete a function secret.
+      tags:
+        - WebApps
+    put:
+      description: Add or update a function secret.
+      operationId: WebApps_CreateOrUpdateFunctionSecret
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - description: Site name.
+          in: path
+          name: name
+          required: true
+          type: string
+        - description: The name of the function.
+          in: path
+          name: functionName
+          required: true
+          type: string
+        - description: The name of the key.
+          in: path
+          name: keyName
+          required: true
+          type: string
+        - description: The key to create or update
+          in: body
+          name: key
+          required: true
+          schema:
+            $ref: '#/definitions/KeyInfo'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: Key was updated.
+          schema:
+            $ref: '#/definitions/KeyInfo'
+        '201':
+          description: Key was created.
+          schema:
+            $ref: '#/definitions/KeyInfo'
+        default:
+          description: App Service error response.
+          schema:
+            description: App Service error response.
+            properties:
+              error:
+                description: Error model.
+                properties:
+                  code:
+                    description: Standardized string to programmatically identify the error.
+                    readOnly: true
+                    type: string
+                  details:
+                    items:
+                      description: Detailed errors.
+                      properties:
+                        code:
+                          description: Standardized string to programmatically identify the error.
+                          readOnly: true
+                          type: string
+                        message:
+                          description: Detailed error description and debugging information.
+                          readOnly: true
+                          type: string
+                        target:
+                          description: Detailed error description and debugging information.
+                          readOnly: true
+                          type: string
+                      readOnly: true
+                    type: array
+                  innererror:
+                    description: More information to debug error.
+                    readOnly: true
+                    type: string
+                  message:
+                    description: Detailed error description and debugging information.
+                    readOnly: true
+                    type: string
+                  target:
+                    description: Detailed error description and debugging information.
+                    readOnly: true
+                    type: string
+                readOnly: true
+                type: object
+            type: object
+      summary: Add or update a function secret.
+      tags:
+        - WebApps
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions/{functionName}/listkeys':
+    post:
+      description: 'Get function keys for a function in a web site, or a deployment slot.'
+      operationId: WebApps_ListFunctionKeys
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - description: Site name.
+          in: path
+          name: name
+          required: true
+          type: string
+        - description: Function name.
+          in: path
+          name: functionName
+          required: true
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: Function keys returned.
+          schema:
+            $ref: '#/definitions/StringDictionary'
+        default:
+          description: App Service error response.
+          schema:
+            description: App Service error response.
+            properties:
+              error:
+                description: Error model.
+                properties:
+                  code:
+                    description: Standardized string to programmatically identify the error.
+                    readOnly: true
+                    type: string
+                  details:
+                    items:
+                      description: Detailed errors.
+                      properties:
+                        code:
+                          description: Standardized string to programmatically identify the error.
+                          readOnly: true
+                          type: string
+                        message:
+                          description: Detailed error description and debugging information.
+                          readOnly: true
+                          type: string
+                        target:
+                          description: Detailed error description and debugging information.
+                          readOnly: true
+                          type: string
+                      readOnly: true
+                    type: array
+                  innererror:
+                    description: More information to debug error.
+                    readOnly: true
+                    type: string
+                  message:
+                    description: Detailed error description and debugging information.
+                    readOnly: true
+                    type: string
+                  target:
+                    description: Detailed error description and debugging information.
+                    readOnly: true
+                    type: string
+                readOnly: true
+                type: object
+            type: object
+      summary: 'Get function keys for a function in a web site, or a deployment slot.'
+      tags:
+        - WebApps
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions/{functionName}/listsecrets':
     post:
       description: 'Get function secrets for a function in a web site, or a deployment slot.'
@@ -12539,6 +12726,316 @@ paths:
                 type: object
             type: object
       summary: 'Get function secrets for a function in a web site, or a deployment slot.'
+      tags:
+        - WebApps
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/host/default/listkeys':
+    post:
+      description: Get host secrets for a function app.
+      operationId: WebApps_ListHostKeys
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - description: Site name.
+          in: path
+          name: name
+          required: true
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: Host secrets returned.
+          schema:
+            $ref: '#/definitions/HostKeys'
+        default:
+          description: App Service error response.
+          schema:
+            description: App Service error response.
+            properties:
+              error:
+                description: Error model.
+                properties:
+                  code:
+                    description: Standardized string to programmatically identify the error.
+                    readOnly: true
+                    type: string
+                  details:
+                    items:
+                      description: Detailed errors.
+                      properties:
+                        code:
+                          description: Standardized string to programmatically identify the error.
+                          readOnly: true
+                          type: string
+                        message:
+                          description: Detailed error description and debugging information.
+                          readOnly: true
+                          type: string
+                        target:
+                          description: Detailed error description and debugging information.
+                          readOnly: true
+                          type: string
+                      readOnly: true
+                    type: array
+                  innererror:
+                    description: More information to debug error.
+                    readOnly: true
+                    type: string
+                  message:
+                    description: Detailed error description and debugging information.
+                    readOnly: true
+                    type: string
+                  target:
+                    description: Detailed error description and debugging information.
+                    readOnly: true
+                    type: string
+                readOnly: true
+                type: object
+            type: object
+      summary: Get host secrets for a function app.
+      tags:
+        - WebApps
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/host/default/listsyncstatus':
+    post:
+      description: This is to allow calling via powershell and ARM template.
+      operationId: WebApps_ListSyncStatus
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - description: Name of the app.
+          in: path
+          name: name
+          required: true
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: App Service error response.
+          schema:
+            description: App Service error response.
+            properties:
+              error:
+                description: Error model.
+                properties:
+                  code:
+                    description: Standardized string to programmatically identify the error.
+                    readOnly: true
+                    type: string
+                  details:
+                    items:
+                      description: Detailed errors.
+                      properties:
+                        code:
+                          description: Standardized string to programmatically identify the error.
+                          readOnly: true
+                          type: string
+                        message:
+                          description: Detailed error description and debugging information.
+                          readOnly: true
+                          type: string
+                        target:
+                          description: Detailed error description and debugging information.
+                          readOnly: true
+                          type: string
+                      readOnly: true
+                    type: array
+                  innererror:
+                    description: More information to debug error.
+                    readOnly: true
+                    type: string
+                  message:
+                    description: Detailed error description and debugging information.
+                    readOnly: true
+                    type: string
+                  target:
+                    description: Detailed error description and debugging information.
+                    readOnly: true
+                    type: string
+                readOnly: true
+                type: object
+            type: object
+      summary: This is to allow calling via powershell and ARM template.
+      tags:
+        - WebApps
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/host/default/sync':
+    post:
+      description: Syncs function trigger metadata to the management database
+      operationId: WebApps_SyncFunctions
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - description: Name of the app.
+          in: path
+          name: name
+          required: true
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '204':
+          description: No Content
+      summary: Syncs function trigger metadata to the management database
+      tags:
+        - WebApps
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/host/default/{keyType}/{keyName}':
+    delete:
+      description: Delete a host level secret.
+      operationId: WebApps_DeleteHostSecret
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - description: Site name.
+          in: path
+          name: name
+          required: true
+          type: string
+        - description: The type of host key.
+          in: path
+          name: keyType
+          required: true
+          type: string
+        - description: The name of the key.
+          in: path
+          name: keyName
+          required: true
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '204':
+          description: Key was deleted.
+        '404':
+          description: Key was not found.
+        default:
+          description: App Service error response.
+          schema:
+            description: App Service error response.
+            properties:
+              error:
+                description: Error model.
+                properties:
+                  code:
+                    description: Standardized string to programmatically identify the error.
+                    readOnly: true
+                    type: string
+                  details:
+                    items:
+                      description: Detailed errors.
+                      properties:
+                        code:
+                          description: Standardized string to programmatically identify the error.
+                          readOnly: true
+                          type: string
+                        message:
+                          description: Detailed error description and debugging information.
+                          readOnly: true
+                          type: string
+                        target:
+                          description: Detailed error description and debugging information.
+                          readOnly: true
+                          type: string
+                      readOnly: true
+                    type: array
+                  innererror:
+                    description: More information to debug error.
+                    readOnly: true
+                    type: string
+                  message:
+                    description: Detailed error description and debugging information.
+                    readOnly: true
+                    type: string
+                  target:
+                    description: Detailed error description and debugging information.
+                    readOnly: true
+                    type: string
+                readOnly: true
+                type: object
+            type: object
+      summary: Delete a host level secret.
+      tags:
+        - WebApps
+    put:
+      description: Add or update a host level secret.
+      operationId: WebApps_CreateOrUpdateHostSecret
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - description: Site name.
+          in: path
+          name: name
+          required: true
+          type: string
+        - description: The type of host key.
+          in: path
+          name: keyType
+          required: true
+          type: string
+        - description: The name of the key.
+          in: path
+          name: keyName
+          required: true
+          type: string
+        - description: The key to create or update
+          in: body
+          name: key
+          required: true
+          schema:
+            $ref: '#/definitions/KeyInfo'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: Key was updated.
+          schema:
+            $ref: '#/definitions/KeyInfo'
+        '201':
+          description: Key was created.
+          schema:
+            $ref: '#/definitions/KeyInfo'
+        default:
+          description: App Service error response.
+          schema:
+            description: App Service error response.
+            properties:
+              error:
+                description: Error model.
+                properties:
+                  code:
+                    description: Standardized string to programmatically identify the error.
+                    readOnly: true
+                    type: string
+                  details:
+                    items:
+                      description: Detailed errors.
+                      properties:
+                        code:
+                          description: Standardized string to programmatically identify the error.
+                          readOnly: true
+                          type: string
+                        message:
+                          description: Detailed error description and debugging information.
+                          readOnly: true
+                          type: string
+                        target:
+                          description: Detailed error description and debugging information.
+                          readOnly: true
+                          type: string
+                      readOnly: true
+                    type: array
+                  innererror:
+                    description: More information to debug error.
+                    readOnly: true
+                    type: string
+                  message:
+                    description: Detailed error description and debugging information.
+                    readOnly: true
+                    type: string
+                  target:
+                    description: Detailed error description and debugging information.
+                    readOnly: true
+                    type: string
+                readOnly: true
+                type: object
+            type: object
+      summary: Add or update a host level secret.
       tags:
         - WebApps
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/hostNameBindings':
@@ -28625,7 +29122,7 @@ paths:
           name: name
           required: true
           type: string
-        - description: 'Name of the deployment slot. If a slot is not specified, the API deletes a deployment for the production slot.'
+        - description: Name of the deployment slot.
           in: path
           name: slot
           required: true
@@ -28731,7 +29228,7 @@ paths:
           name: functionName
           required: true
           type: string
-        - description: 'Name of the deployment slot. If a slot is not specified, the API deletes a deployment for the production slot.'
+        - description: Name of the deployment slot.
           in: path
           name: slot
           required: true
@@ -28761,7 +29258,7 @@ paths:
           name: functionName
           required: true
           type: string
-        - description: 'Name of the deployment slot. If a slot is not specified, the API deletes a deployment for the production slot.'
+        - description: Name of the deployment slot.
           in: path
           name: slot
           required: true
@@ -28774,7 +29271,7 @@ paths:
           schema:
             $ref: '#/definitions/FunctionEnvelope'
         '404':
-          description: 'Function with an name of {functionName} is not running.'
+          description: 'Function with a name of {functionName} does not exist.'
       summary: 'Get function information by its ID for web site, or a deployment slot.'
       tags:
         - WebApps
@@ -28793,7 +29290,7 @@ paths:
           name: functionName
           required: true
           type: string
-        - description: 'Name of the deployment slot. If a slot is not specified, the API deletes a deployment for the production slot.'
+        - description: Name of the deployment slot.
           in: path
           name: slot
           required: true
@@ -28860,6 +29357,208 @@ paths:
       tags:
         - WebApps
       x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/functions/{functionName}/keys/{keyName}':
+    delete:
+      description: Delete a function secret.
+      operationId: WebApps_DeleteFunctionSecretSlot
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - description: Site name.
+          in: path
+          name: name
+          required: true
+          type: string
+        - description: The name of the function.
+          in: path
+          name: functionName
+          required: true
+          type: string
+        - description: The name of the key.
+          in: path
+          name: keyName
+          required: true
+          type: string
+        - description: Name of the deployment slot.
+          in: path
+          name: slot
+          required: true
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '204':
+          description: Key was deleted.
+        '404':
+          description: Key was not found.
+      summary: Delete a function secret.
+      tags:
+        - WebApps
+    put:
+      description: Add or update a function secret.
+      operationId: WebApps_CreateOrUpdateFunctionSecretSlot
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - description: Site name.
+          in: path
+          name: name
+          required: true
+          type: string
+        - description: The name of the function.
+          in: path
+          name: functionName
+          required: true
+          type: string
+        - description: The name of the key.
+          in: path
+          name: keyName
+          required: true
+          type: string
+        - description: Name of the deployment slot.
+          in: path
+          name: slot
+          required: true
+          type: string
+        - description: The key to create or update
+          in: body
+          name: key
+          required: true
+          schema:
+            $ref: '#/definitions/KeyInfo'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: Key was updated.
+          schema:
+            $ref: '#/definitions/KeyInfo'
+        '201':
+          description: Key was created.
+          schema:
+            $ref: '#/definitions/KeyInfo'
+        default:
+          description: App Service error response.
+          schema:
+            description: App Service error response.
+            properties:
+              error:
+                description: Error model.
+                properties:
+                  code:
+                    description: Standardized string to programmatically identify the error.
+                    readOnly: true
+                    type: string
+                  details:
+                    items:
+                      description: Detailed errors.
+                      properties:
+                        code:
+                          description: Standardized string to programmatically identify the error.
+                          readOnly: true
+                          type: string
+                        message:
+                          description: Detailed error description and debugging information.
+                          readOnly: true
+                          type: string
+                        target:
+                          description: Detailed error description and debugging information.
+                          readOnly: true
+                          type: string
+                      readOnly: true
+                    type: array
+                  innererror:
+                    description: More information to debug error.
+                    readOnly: true
+                    type: string
+                  message:
+                    description: Detailed error description and debugging information.
+                    readOnly: true
+                    type: string
+                  target:
+                    description: Detailed error description and debugging information.
+                    readOnly: true
+                    type: string
+                readOnly: true
+                type: object
+            type: object
+      summary: Add or update a function secret.
+      tags:
+        - WebApps
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/functions/{functionName}/listkeys':
+    post:
+      description: 'Get function keys for a function in a web site, or a deployment slot.'
+      operationId: WebApps_ListFunctionKeysSlot
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - description: Site name.
+          in: path
+          name: name
+          required: true
+          type: string
+        - description: Function name.
+          in: path
+          name: functionName
+          required: true
+          type: string
+        - description: Name of the deployment slot.
+          in: path
+          name: slot
+          required: true
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: Function keys returned.
+          schema:
+            $ref: '#/definitions/StringDictionary'
+        default:
+          description: App Service error response.
+          schema:
+            description: App Service error response.
+            properties:
+              error:
+                description: Error model.
+                properties:
+                  code:
+                    description: Standardized string to programmatically identify the error.
+                    readOnly: true
+                    type: string
+                  details:
+                    items:
+                      description: Detailed errors.
+                      properties:
+                        code:
+                          description: Standardized string to programmatically identify the error.
+                          readOnly: true
+                          type: string
+                        message:
+                          description: Detailed error description and debugging information.
+                          readOnly: true
+                          type: string
+                        target:
+                          description: Detailed error description and debugging information.
+                          readOnly: true
+                          type: string
+                      readOnly: true
+                    type: array
+                  innererror:
+                    description: More information to debug error.
+                    readOnly: true
+                    type: string
+                  message:
+                    description: Detailed error description and debugging information.
+                    readOnly: true
+                    type: string
+                  target:
+                    description: Detailed error description and debugging information.
+                    readOnly: true
+                    type: string
+                readOnly: true
+                type: object
+            type: object
+      summary: 'Get function keys for a function in a web site, or a deployment slot.'
+      tags:
+        - WebApps
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/functions/{functionName}/listsecrets':
     post:
       description: 'Get function secrets for a function in a web site, or a deployment slot.'
@@ -28876,7 +29575,7 @@ paths:
           name: functionName
           required: true
           type: string
-        - description: 'Name of the deployment slot. If a slot is not specified, the API deletes a deployment for the production slot.'
+        - description: Name of the deployment slot.
           in: path
           name: slot
           required: true
@@ -28934,6 +29633,386 @@ paths:
                 type: object
             type: object
       summary: 'Get function secrets for a function in a web site, or a deployment slot.'
+      tags:
+        - WebApps
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/host/default/listkeys':
+    post:
+      description: Get host secrets for a function app.
+      operationId: WebApps_ListHostKeysSlot
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - description: Site name.
+          in: path
+          name: name
+          required: true
+          type: string
+        - description: Name of the deployment slot.
+          in: path
+          name: slot
+          required: true
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: Host secrets returned.
+          schema:
+            $ref: '#/definitions/HostKeys'
+        default:
+          description: App Service error response.
+          schema:
+            description: App Service error response.
+            properties:
+              error:
+                description: Error model.
+                properties:
+                  code:
+                    description: Standardized string to programmatically identify the error.
+                    readOnly: true
+                    type: string
+                  details:
+                    items:
+                      description: Detailed errors.
+                      properties:
+                        code:
+                          description: Standardized string to programmatically identify the error.
+                          readOnly: true
+                          type: string
+                        message:
+                          description: Detailed error description and debugging information.
+                          readOnly: true
+                          type: string
+                        target:
+                          description: Detailed error description and debugging information.
+                          readOnly: true
+                          type: string
+                      readOnly: true
+                    type: array
+                  innererror:
+                    description: More information to debug error.
+                    readOnly: true
+                    type: string
+                  message:
+                    description: Detailed error description and debugging information.
+                    readOnly: true
+                    type: string
+                  target:
+                    description: Detailed error description and debugging information.
+                    readOnly: true
+                    type: string
+                readOnly: true
+                type: object
+            type: object
+      summary: Get host secrets for a function app.
+      tags:
+        - WebApps
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/host/default/listsyncstatus':
+    post:
+      description: This is to allow calling via powershell and ARM template.
+      operationId: WebApps_ListSyncStatusSlot
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - description: Name of the app.
+          in: path
+          name: name
+          required: true
+          type: string
+        - description: Name of the deployment slot.
+          in: path
+          name: slot
+          required: true
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: App Service error response.
+          schema:
+            description: App Service error response.
+            properties:
+              error:
+                description: Error model.
+                properties:
+                  code:
+                    description: Standardized string to programmatically identify the error.
+                    readOnly: true
+                    type: string
+                  details:
+                    items:
+                      description: Detailed errors.
+                      properties:
+                        code:
+                          description: Standardized string to programmatically identify the error.
+                          readOnly: true
+                          type: string
+                        message:
+                          description: Detailed error description and debugging information.
+                          readOnly: true
+                          type: string
+                        target:
+                          description: Detailed error description and debugging information.
+                          readOnly: true
+                          type: string
+                      readOnly: true
+                    type: array
+                  innererror:
+                    description: More information to debug error.
+                    readOnly: true
+                    type: string
+                  message:
+                    description: Detailed error description and debugging information.
+                    readOnly: true
+                    type: string
+                  target:
+                    description: Detailed error description and debugging information.
+                    readOnly: true
+                    type: string
+                readOnly: true
+                type: object
+            type: object
+      summary: This is to allow calling via powershell and ARM template.
+      tags:
+        - WebApps
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/host/default/sync':
+    post:
+      description: Syncs function trigger metadata to the management database
+      operationId: WebApps_SyncFunctionsSlot
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - description: Name of the app.
+          in: path
+          name: name
+          required: true
+          type: string
+        - description: Name of the deployment slot.
+          in: path
+          name: slot
+          required: true
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: App Service error response.
+          schema:
+            description: App Service error response.
+            properties:
+              error:
+                description: Error model.
+                properties:
+                  code:
+                    description: Standardized string to programmatically identify the error.
+                    readOnly: true
+                    type: string
+                  details:
+                    items:
+                      description: Detailed errors.
+                      properties:
+                        code:
+                          description: Standardized string to programmatically identify the error.
+                          readOnly: true
+                          type: string
+                        message:
+                          description: Detailed error description and debugging information.
+                          readOnly: true
+                          type: string
+                        target:
+                          description: Detailed error description and debugging information.
+                          readOnly: true
+                          type: string
+                      readOnly: true
+                    type: array
+                  innererror:
+                    description: More information to debug error.
+                    readOnly: true
+                    type: string
+                  message:
+                    description: Detailed error description and debugging information.
+                    readOnly: true
+                    type: string
+                  target:
+                    description: Detailed error description and debugging information.
+                    readOnly: true
+                    type: string
+                readOnly: true
+                type: object
+            type: object
+      summary: Syncs function trigger metadata to the management database
+      tags:
+        - WebApps
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/host/default/{keyType}/{keyName}':
+    delete:
+      description: Delete a host level secret.
+      operationId: WebApps_DeleteHostSecretSlot
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - description: Site name.
+          in: path
+          name: name
+          required: true
+          type: string
+        - description: The type of host key.
+          in: path
+          name: keyType
+          required: true
+          type: string
+        - description: The name of the key.
+          in: path
+          name: keyName
+          required: true
+          type: string
+        - description: Name of the deployment slot.
+          in: path
+          name: slot
+          required: true
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '204':
+          description: Key was deleted.
+        '404':
+          description: Key was not found.
+        default:
+          description: App Service error response.
+          schema:
+            description: App Service error response.
+            properties:
+              error:
+                description: Error model.
+                properties:
+                  code:
+                    description: Standardized string to programmatically identify the error.
+                    readOnly: true
+                    type: string
+                  details:
+                    items:
+                      description: Detailed errors.
+                      properties:
+                        code:
+                          description: Standardized string to programmatically identify the error.
+                          readOnly: true
+                          type: string
+                        message:
+                          description: Detailed error description and debugging information.
+                          readOnly: true
+                          type: string
+                        target:
+                          description: Detailed error description and debugging information.
+                          readOnly: true
+                          type: string
+                      readOnly: true
+                    type: array
+                  innererror:
+                    description: More information to debug error.
+                    readOnly: true
+                    type: string
+                  message:
+                    description: Detailed error description and debugging information.
+                    readOnly: true
+                    type: string
+                  target:
+                    description: Detailed error description and debugging information.
+                    readOnly: true
+                    type: string
+                readOnly: true
+                type: object
+            type: object
+      summary: Delete a host level secret.
+      tags:
+        - WebApps
+    put:
+      description: Add or update a host level secret.
+      operationId: WebApps_CreateOrUpdateHostSecretSlot
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - description: Site name.
+          in: path
+          name: name
+          required: true
+          type: string
+        - description: The type of host key.
+          in: path
+          name: keyType
+          required: true
+          type: string
+        - description: The name of the key.
+          in: path
+          name: keyName
+          required: true
+          type: string
+        - description: Name of the deployment slot.
+          in: path
+          name: slot
+          required: true
+          type: string
+        - description: The key to create or update
+          in: body
+          name: key
+          required: true
+          schema:
+            $ref: '#/definitions/KeyInfo'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: Key was updated.
+          schema:
+            $ref: '#/definitions/KeyInfo'
+        '201':
+          description: Key was created.
+          schema:
+            $ref: '#/definitions/KeyInfo'
+        default:
+          description: App Service error response.
+          schema:
+            description: App Service error response.
+            properties:
+              error:
+                description: Error model.
+                properties:
+                  code:
+                    description: Standardized string to programmatically identify the error.
+                    readOnly: true
+                    type: string
+                  details:
+                    items:
+                      description: Detailed errors.
+                      properties:
+                        code:
+                          description: Standardized string to programmatically identify the error.
+                          readOnly: true
+                          type: string
+                        message:
+                          description: Detailed error description and debugging information.
+                          readOnly: true
+                          type: string
+                        target:
+                          description: Detailed error description and debugging information.
+                          readOnly: true
+                          type: string
+                      readOnly: true
+                    type: array
+                  innererror:
+                    description: More information to debug error.
+                    readOnly: true
+                    type: string
+                  message:
+                    description: Detailed error description and debugging information.
+                    readOnly: true
+                    type: string
+                  target:
+                    description: Detailed error description and debugging information.
+                    readOnly: true
+                    type: string
+                readOnly: true
+                type: object
+            type: object
+      summary: Add or update a host level secret.
       tags:
         - WebApps
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/hostNameBindings':
@@ -30971,7 +32050,7 @@ paths:
           name: name
           required: true
           type: string
-        - description: 'Name of the deployment slot. If a slot is not specified, the API will restore a backup of the production slot.'
+        - description: Name of the deployment slot.
           in: path
           name: slot
           required: true
@@ -34693,7 +35772,7 @@ paths:
         - WebApps
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/syncfunctiontriggers':
     post:
-      description: Syncs function trigger metadata to the scale controller
+      description: Syncs function trigger metadata to the management database
       operationId: WebApps_SyncFunctionTriggersSlot
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
@@ -34702,7 +35781,7 @@ paths:
           name: name
           required: true
           type: string
-        - description: 'Name of the deployment slot. If a slot is not specified, the API will restore a backup of the production slot.'
+        - description: Name of the deployment slot.
           in: path
           name: slot
           required: true
@@ -34712,7 +35791,7 @@ paths:
       responses:
         '204':
           description: No Content
-      summary: Syncs function trigger metadata to the scale controller
+      summary: Syncs function trigger metadata to the management database
       tags:
         - WebApps
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/triggeredwebjobs':
@@ -37265,7 +38344,7 @@ paths:
         - WebApps
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/syncfunctiontriggers':
     post:
-      description: Syncs function trigger metadata to the scale controller
+      description: Syncs function trigger metadata to the management database
       operationId: WebApps_SyncFunctionTriggers
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
@@ -37279,7 +38358,7 @@ paths:
       responses:
         '204':
           description: No Content
-      summary: Syncs function trigger metadata to the scale controller
+      summary: Syncs function trigger metadata to the management database
       tags:
         - WebApps
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/triggeredwebjobs':
@@ -39834,7 +40913,6 @@ definitions:
         description: 'True if configuration is enabled, false if it is disabled and null if configuration is not set.'
         type: boolean
     type: object
-  ErrorEntity: {}
   FileSystemApplicationLogsConfig:
     description: Application logs to file system configuration.
     properties:
@@ -39895,7 +40973,7 @@ definitions:
             readOnly: true
             type: string
         x-ms-azure-resource: true
-    description: Web Job Information.
+    description: Function information.
     properties:
       properties:
         description: FunctionEnvelope resource specific properties
@@ -39917,6 +40995,15 @@ definitions:
           href:
             description: Function URI.
             type: string
+          invoke_url_template:
+            description: The invocation URL
+            type: string
+          isDisabled:
+            description: Value indicating whether the function is disabled
+            type: boolean
+          language:
+            description: The function language
+            type: string
           script_href:
             description: Script URI.
             type: string
@@ -39928,6 +41015,9 @@ definitions:
             type: string
           test_data:
             description: Test data used when testing via the Azure Portal.
+            type: string
+          test_data_href:
+            description: Test data URI.
             type: string
         x-ms-client-flatten: true
     type: object
@@ -39978,6 +41068,23 @@ definitions:
             description: Trigger URL.
             type: string
         x-ms-client-flatten: true
+    type: object
+  HostKeys:
+    description: Functions host level keys.
+    properties:
+      functionKeys:
+        additionalProperties:
+          type: string
+        description: Host level function keys.
+        type: object
+      masterKey:
+        description: Secret key.
+        type: string
+      systemKeys:
+        additionalProperties:
+          type: string
+        description: System keys.
+        type: object
     type: object
   HostNameBinding:
     allOf:
@@ -40107,6 +41214,16 @@ definitions:
       fileSystem:
         $ref: '#/definitions/FileSystemHttpLogsConfig'
         description: Http logs to file system configuration.
+    type: object
+  KeyInfo:
+    description: Function key info.
+    properties:
+      name:
+        description: Key name
+        type: string
+      value:
+        description: Key value
+        type: string
     type: object
   MSDeploy:
     allOf:

@@ -144,7 +144,10 @@ paths:
             resourceGroupName: rg1
             subscriptionId: subid
           responses:
-            '200': {}
+            '200':
+              body:
+                clusterMonitoringEnabled: true
+                workspaceId: id
     put:
       description: Enables the Operations Management Suite (OMS) on the HDInsight cluster.
       operationId: Extension_EnableMonitoring
@@ -269,7 +272,10 @@ paths:
             resourceGroupName: rg1
             subscriptionId: subid
           responses:
-            '200': {}
+            '200':
+              body:
+                primaryKey: key
+                workspaceId: id
     put:
       description: Creates an HDInsight cluster extension.
       operationId: Extension_Create

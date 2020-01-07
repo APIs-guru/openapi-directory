@@ -1367,12 +1367,12 @@ paths:
             '200':
               body:
                 - billingPlans:
-                    - P1Y:
-                        - Upfront
-                        - Monthly
-                    - P3Y:
-                        - Upfront
-                        - Monthly
+                    P1Y:
+                      - Upfront
+                      - Monthly
+                    P3Y:
+                      - Upfront
+                      - Monthly
                   locations:
                     - eastus
                   name: Standard_DS5_v2
@@ -1553,18 +1553,12 @@ definitions:
   Catalog:
     properties:
       billingPlans:
+        additionalProperties:
+          items:
+            $ref: '#/definitions/ReservationBillingPlan'
+          type: array
         description: The billing plan options available for this SKU.
-        items:
-          additionalProperties:
-            items:
-              $ref: '#/definitions/ReservationBillingPlan'
-            type: array
-          properties:
-            name:
-              $ref: '#/definitions/ReservationTerm'
-              description: The term for the billing SKU is available for.
-          type: object
-        type: array
+        type: object
       locations:
         items:
           description: 'The set of locations that the SKU is available. If not specified, the SKU is available in all locations.'

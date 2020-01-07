@@ -152,7 +152,6 @@ paths:
               body:
                 value:
                   - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/managedInstances/managedInstance/administrators/ActiveDirectory
-                    location: southeastasia
                     name: ActiveDirectory
                     properties:
                       administratorType: ActiveDirectory
@@ -170,10 +169,14 @@ paths:
         - $ref: '#/parameters/ResourceGroupParameter'
         - $ref: '#/parameters/ManagedInstanceNameParameter'
         - description: The administrator name.
+          enum:
+            - ActiveDirectory
           in: path
           name: administratorName
           required: true
           type: string
+          x-ms-enum:
+            name: AdministratorName
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ApiVersionParameter'
       responses:
@@ -249,10 +252,14 @@ paths:
         - $ref: '#/parameters/ResourceGroupParameter'
         - $ref: '#/parameters/ManagedInstanceNameParameter'
         - description: The administrator name.
+          enum:
+            - ActiveDirectory
           in: path
           name: administratorName
           required: true
           type: string
+          x-ms-enum:
+            name: AdministratorName
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ApiVersionParameter'
       responses:
@@ -297,7 +304,6 @@ paths:
             '200':
               body:
                 id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/managedInstances/managedInstance/administrators/ActiveDirectory
-                location: southeastasia
                 name: ActiveDirectory
                 properties:
                   administratorType: ActiveDirectory
@@ -312,10 +318,14 @@ paths:
         - $ref: '#/parameters/ResourceGroupParameter'
         - $ref: '#/parameters/ManagedInstanceNameParameter'
         - description: The requested administrator name.
+          enum:
+            - ActiveDirectory
           in: path
           name: administratorName
           required: true
           type: string
+          x-ms-enum:
+            name: AdministratorName
         - description: The requested administrator parameters.
           in: body
           name: parameters
@@ -402,7 +412,6 @@ paths:
             '200':
               body:
                 id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/managedInstances/managedInstance/administrators/ActiveDirectory
-                location: southeastasia
                 name: ActiveDirectory
                 properties:
                   administratorType: ActiveDirectory
@@ -413,7 +422,6 @@ paths:
             '201':
               body:
                 id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/managedInstances/managedInstance/administrators/ActiveDirectory
-                location: southeastasia
                 name: ActiveDirectory
                 properties:
                   administratorType: ActiveDirectory
@@ -439,7 +447,6 @@ paths:
             '200':
               body:
                 id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/managedInstances/managedInstance/administrators/ActiveDirectory
-                location: southeastasia
                 name: ActiveDirectory
                 properties:
                   administratorType: ActiveDirectory
@@ -450,7 +457,6 @@ paths:
             '201':
               body:
                 id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/managedInstances/managedInstance/administrators/ActiveDirectory
-                location: southeastasia
                 name: ActiveDirectory
                 properties:
                   administratorType: ActiveDirectory

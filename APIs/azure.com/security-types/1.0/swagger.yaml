@@ -111,6 +111,17 @@ definitions:
   AscLocationProperties:
     description: An empty set of properties
     type: object
+  AzureResourceDetails:
+    allOf:
+      - $ref: '#/definitions/ResourceDetails'
+    description: Details of the Azure resource that was assessed
+    properties:
+      id:
+        description: Azure resource Id of the assessed resource
+        readOnly: true
+        type: string
+    type: object
+    x-ms-discriminator-value: Azure
   CloudError:
     description: Error response structure.
     properties:
@@ -133,6 +144,13 @@ definitions:
         type: string
     type: object
     x-ms-external: true
+  ETag:
+    description: Entity tag is used for comparing two or more entities from the same requested resource.
+    properties:
+      etag:
+        description: Entity tag is used for comparing two or more entities from the same requested resource.
+        type: string
+    type: object
   Kind:
     description: Describes an Azure resource with kind
     properties:
@@ -148,6 +166,30 @@ definitions:
         readOnly: true
         type: string
     type: object
+  OnPremiseResourceDetails:
+    allOf:
+      - $ref: '#/definitions/ResourceDetails'
+    description: Details of the On Premise resource that was assessed
+    properties:
+      machineName:
+        description: The name of the machine
+        type: string
+      sourceComputerId:
+        description: The oms agent Id installed on the machine
+        type: string
+      vmuuid:
+        description: The unique Id of the machine
+        type: string
+      workspaceId:
+        description: Azure resource Id of the workspace the machine is attached to
+        type: string
+    required:
+      - workspaceId
+      - vmuuid
+      - sourceComputerId
+      - machineName
+    type: object
+    x-ms-discriminator-value: OnPremise
   Resource:
     description: Describes an Azure resource.
     properties:
@@ -165,3 +207,42 @@ definitions:
         type: string
     type: object
     x-ms-azure-resource: true
+  ResourceDetails:
+    description: Details of the resource that was assessed
+    discriminator: source
+    properties:
+      source:
+        description: The platform where the assessed resource resides
+        enum:
+          - Azure
+          - OnPremise
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: source
+          values:
+            - description: Resource is in Azure
+              value: Azure
+            - description: Resource in an on premise machine connected to Azure cloud
+              value: OnPremise
+    required:
+      - source
+    type: object
+  Tags:
+    description: A list of key value pairs that describe the resource.
+    properties:
+      tags:
+        additionalProperties:
+          type: string
+        description: A list of key value pairs that describe the resource.
+        type: object
+    type: object
+  TrackedResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+      - $ref: '#/definitions/Location'
+      - $ref: '#/definitions/Kind'
+      - $ref: '#/definitions/ETag'
+      - $ref: '#/definitions/Tags'
+    description: Describes an Azure tracked resource.
+    type: object

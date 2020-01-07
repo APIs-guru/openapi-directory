@@ -255,6 +255,7 @@ paths:
                   - BATCH_COMPLETED_GROUP
                 isAzureMonitorTargetEnabled: true
                 isStorageSecondaryKeyInUse: false
+                queueDelayMs: 4000
                 retentionDays: 6
                 state: Enabled
                 storageAccountAccessKey: sdlfkjabc+sdlfkjsdlkfsjdfLDKFTERLKFDFKLjsdfksjdflsdkfD2342309432849328476458/3RSD==
@@ -275,6 +276,7 @@ paths:
                     - BATCH_COMPLETED_GROUP
                   isAzureMonitorTargetEnabled: true
                   isStorageSecondaryKeyInUse: false
+                  queueDelayMs: 4000
                   retentionDays: 6
                   state: Enabled
                   storageAccountSubscriptionId: 00000000-1234-0000-5678-000000000000
@@ -510,7 +512,6 @@ paths:
                   isStorageSecondaryKeyInUse: false
                   retentionDays: 0
                   state: Enabled
-                  storageAccountAccessKey: ''
                   storageAccountSubscriptionId: 00000000-0000-0000-0000-000000000000
                 type: Microsoft.Sql/servers/databases/auditingSettings
             '201':
@@ -527,7 +528,6 @@ paths:
                   isStorageSecondaryKeyInUse: false
                   retentionDays: 0
                   state: Enabled
-                  storageAccountAccessKey: ''
                   storageAccountSubscriptionId: 00000000-0000-0000-0000-000000000000
                 type: Microsoft.Sql/servers/databases/auditingSettings
         Create or update a database's blob auditing policy with all parameters:
@@ -543,6 +543,7 @@ paths:
                   - 'UPDATE on database::TestDatabaseName by public'
                 isAzureMonitorTargetEnabled: true
                 isStorageSecondaryKeyInUse: false
+                queueDelayMs: 4000
                 retentionDays: 6
                 state: Enabled
                 storageAccountAccessKey: sdlfkjabc+sdlfkjsdlkfsjdfLDKFTERLKFDFKLjsdfksjdflsdkfD2342309432849328476458/3RSD==
@@ -564,9 +565,9 @@ paths:
                     - 'UPDATE on database::TestDatabaseName by public'
                   isAzureMonitorTargetEnabled: true
                   isStorageSecondaryKeyInUse: false
+                  queueDelayMs: 4000
                   retentionDays: 0
                   state: Enabled
-                  storageAccountAccessKey: ''
                   storageAccountSubscriptionId: 00000000-1234-0000-5678-000000000000
                   storageEndpoint: 'https://mystorage.blob.core.windows.net'
                 type: Microsoft.Sql/servers/databases/auditingSettings
@@ -582,9 +583,9 @@ paths:
                     - 'UPDATE on database::TestDatabaseName by public'
                   isAzureMonitorTargetEnabled: true
                   isStorageSecondaryKeyInUse: false
+                  queueDelayMs: 4000
                   retentionDays: 0
                   state: Enabled
-                  storageAccountAccessKey: ''
                   storageAccountSubscriptionId: 00000000-1234-0000-5678-000000000000
                   storageEndpoint: 'https://mystorage.blob.core.windows.net'
                 type: Microsoft.Sql/servers/databases/auditingSettings
@@ -616,7 +617,6 @@ paths:
                   isStorageSecondaryKeyInUse: false
                   retentionDays: 0
                   state: Enabled
-                  storageAccountAccessKey: ''
                   storageAccountSubscriptionId: 00000000-0000-0000-0000-000000000000
                   storageEndpoint: 'https://mystorage.blob.core.windows.net'
                 type: Microsoft.Sql/servers/databases/auditingSettings
@@ -634,7 +634,6 @@ paths:
                   isStorageSecondaryKeyInUse: false
                   retentionDays: 0
                   state: Enabled
-                  storageAccountAccessKey: ''
                   storageAccountSubscriptionId: 00000000-0000-0000-0000-000000000000
                   storageEndpoint: 'https://mystorage.blob.core.windows.net'
                 type: Microsoft.Sql/servers/databases/auditingSettings
@@ -1132,6 +1131,10 @@ definitions:
       isStorageSecondaryKeyInUse:
         description: Specifies whether storageAccountAccessKey value is the storage's secondary key.
         type: boolean
+      queueDelayMs:
+        description: "Specifies the amount of time in milliseconds that can elapse before audit actions are forced to be processed.\r\nThe default minimum value is 1000 (1 second). The maximum is 2,147,483,647."
+        format: int32
+        type: integer
       retentionDays:
         description: Specifies the number of days to keep in the audit logs in the storage account.
         format: int32
@@ -1156,7 +1159,7 @@ definitions:
         format: uuid
         type: string
       storageEndpoint:
-        description: 'Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). If state is Enabled, storageEndpoint is required.'
+        description: 'Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). If state is Enabled, storageEndpoint or isAzureMonitorTargetEnabled is required.'
         type: string
     required:
       - state
@@ -1207,6 +1210,10 @@ definitions:
       predicateExpression:
         description: Specifies condition of where clause when creating an audit.
         type: string
+      queueDelayMs:
+        description: "Specifies the amount of time in milliseconds that can elapse before audit actions are forced to be processed.\r\nThe default minimum value is 1000 (1 second). The maximum is 2,147,483,647."
+        format: int32
+        type: integer
       retentionDays:
         description: Specifies the number of days to keep in the audit logs in the storage account.
         format: int32
@@ -1231,7 +1238,7 @@ definitions:
         format: uuid
         type: string
       storageEndpoint:
-        description: 'Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). If state is Enabled, storageEndpoint is required.'
+        description: 'Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). If state is Enabled, storageEndpoint or isAzureMonitorTargetEnabled is required.'
         type: string
     required:
       - state
@@ -1282,6 +1289,10 @@ definitions:
       predicateExpression:
         description: Specifies condition of where clause when creating an audit.
         type: string
+      queueDelayMs:
+        description: "Specifies the amount of time in milliseconds that can elapse before audit actions are forced to be processed.\r\nThe default minimum value is 1000 (1 second). The maximum is 2,147,483,647."
+        format: int32
+        type: integer
       retentionDays:
         description: Specifies the number of days to keep in the audit logs in the storage account.
         format: int32
@@ -1306,7 +1317,7 @@ definitions:
         format: uuid
         type: string
       storageEndpoint:
-        description: 'Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). If state is Enabled, storageEndpoint is required.'
+        description: 'Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). If state is Enabled, storageEndpoint or isAzureMonitorTargetEnabled is required.'
         type: string
     required:
       - state
@@ -1368,6 +1379,10 @@ definitions:
       isStorageSecondaryKeyInUse:
         description: Specifies whether storageAccountAccessKey value is the storage's secondary key.
         type: boolean
+      queueDelayMs:
+        description: "Specifies the amount of time in milliseconds that can elapse before audit actions are forced to be processed.\r\nThe default minimum value is 1000 (1 second). The maximum is 2,147,483,647."
+        format: int32
+        type: integer
       retentionDays:
         description: Specifies the number of days to keep in the audit logs in the storage account.
         format: int32
@@ -1392,7 +1407,7 @@ definitions:
         format: uuid
         type: string
       storageEndpoint:
-        description: 'Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). If state is Enabled, storageEndpoint is required.'
+        description: 'Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). If state is Enabled, storageEndpoint or isAzureMonitorTargetEnabled is required.'
         type: string
     required:
       - state

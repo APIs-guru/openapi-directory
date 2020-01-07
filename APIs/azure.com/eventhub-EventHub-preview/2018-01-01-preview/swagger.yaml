@@ -2931,11 +2931,20 @@ definitions:
       properties:
         description: Namespace properties supplied for create namespace operation.
         properties:
+          clusterArmId:
+            description: Cluster ARM ID of the Namespace.
+            type: string
           createdAt:
             description: The time the Namespace was created.
             format: date-time
             readOnly: true
             type: string
+          encryption:
+            $ref: '#/definitions/Encryption'
+            description: Properties of BYOK Encryption description
+          identity:
+            $ref: '#/definitions/Identity'
+            description: Properties of BYOK Identity description
           isAutoInflateEnabled:
             description: Value that indicates whether AutoInflate is enabled for eventhub namespace.
             type: boolean
@@ -2998,6 +3007,22 @@ definitions:
         items:
           $ref: '#/definitions/EHNamespace'
         type: array
+  Encryption:
+    description: Properties to configure Encryption
+    properties:
+      keySource:
+        default: Microsoft.KeyVault
+        description: Enumerates the possible value of keySource for Encryption
+        enum:
+          - Microsoft.KeyVault
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: keySource
+      keyVaultProperties:
+        $ref: '#/definitions/KeyVaultProperties'
+        description: Properties of KeyVault
+    x-ms-client-flatten: true
   ErrorResponse:
     description: Error response that indicates the service is not able to process the incoming request. The reason is provided in the error message.
     properties:
@@ -3008,6 +3033,25 @@ definitions:
         description: Error message indicating why the operation failed.
         type: string
     type: object
+  Identity:
+    description: Properties to configure Identity for Bring your Own Keys
+    properties:
+      principalId:
+        description: ObjectId from the KeyVault
+        type: string
+      tenantId:
+        description: TenantId from the KeyVault
+        type: string
+      type:
+        default: SystemAssigned
+        description: 'Enumerates the possible value Identity type, which currently supports only ''SystemAssigned'''
+        enum:
+          - SystemAssigned
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: IdentityType
+    x-ms-client-flatten: true
   IpFilterRule:
     allOf:
       - $ref: '#/definitions/Resource'
@@ -3043,6 +3087,15 @@ definitions:
         items:
           $ref: '#/definitions/IpFilterRule'
         type: array
+  KeyVaultProperties:
+    description: Properties to configure keyVault Properties
+    properties:
+      keyName:
+        description: Name of the Key from KeyVault
+        type: string
+      keyVaultUri:
+        description: Uri of KeyVault
+        type: string
   NWRuleSetIpRules:
     description: The response from the List namespace operation.
     properties:

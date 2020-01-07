@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resources/resource-manager/Microsoft.Resources/stable/2019-08-01/resources.json'
       version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: resources
   x-tags:
@@ -205,7 +205,7 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/Deployment'
+            $ref: '#/definitions/ScopedDeployment'
         - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '200':
@@ -407,7 +407,7 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/Deployment'
+            $ref: '#/definitions/ScopedDeployment'
         - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '200':
@@ -575,7 +575,7 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/Deployment'
+            $ref: '#/definitions/ScopedDeployment'
         - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '200':
@@ -771,7 +771,7 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/Deployment'
+            $ref: '#/definitions/ScopedDeployment'
         - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '200':
@@ -1284,7 +1284,7 @@ paths:
           pattern: '^[-\w\._\(\)]+$'
           required: true
           type: string
-        - description: 'The filter to apply on the operation.<br><br>The properties you can use for eq (equals) or ne (not equals) are: location, resourceType, name, resourceGroup, identity, identity/principalId, plan, plan/publisher, plan/product, plan/name, plan/version, and plan/promotionCode.<br><br>For example, to filter by a resource type, use: $filter=resourceType eq ''Microsoft.Network/virtualNetworks''<br><br>You can use substringof(value, property) in the filter. The properties you can use for substring are: name and resourceGroup.<br><br>For example, to get all resources with ''demo'' anywhere in the name, use: $filter=substringof(''demo'', name)<br><br>You can link more than one substringof together by adding and/or operators.<br><br>You can filter by tag names and values. For example, to filter for a tag name and value, use $filter=tagName eq ''tag1'' and tagValue eq ''Value1''<br><br>You can use some properties together when filtering. The combinations you can use are: substringof and/or resourceType, plan and plan/publisher and plan/name, identity and identity/principalId.'
+        - description: 'The filter to apply on the operation.<br><br>The properties you can use for eq (equals) or ne (not equals) are: location, resourceType, name, resourceGroup, identity, identity/principalId, plan, plan/publisher, plan/product, plan/name, plan/version, and plan/promotionCode.<br><br>For example, to filter by a resource type, use: $filter=resourceType eq ''Microsoft.Network/virtualNetworks''<br><br>You can use substringof(value, property) in the filter. The properties you can use for substring are: name and resourceGroup.<br><br>For example, to get all resources with ''demo'' anywhere in the name, use: $filter=substringof(''demo'', name)<br><br>You can link more than one substringof together by adding and/or operators.<br><br>You can filter by tag names and values. For example, to filter for a tag name and value, use $filter=tagName eq ''tag1'' and tagValue eq ''Value1''. When you filter by a tag name and value, the tags for each resource are not returned in the results.<br><br>You can use some properties together when filtering. The combinations you can use are: substringof and/or resourceType, plan and plan/publisher and plan/name, identity and identity/principalId.'
           in: query
           name: $filter
           required: false
@@ -2238,11 +2238,7 @@ paths:
           name: resourceName
           required: true
           type: string
-        - description: The API version to use for the operation.
-          in: query
-          name: api-version
-          required: true
-          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
@@ -2292,11 +2288,7 @@ paths:
           name: resourceName
           required: true
           type: string
-        - description: The API version to use for the operation.
-          in: query
-          name: api-version
-          required: true
-          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
@@ -2343,11 +2335,7 @@ paths:
           name: resourceName
           required: true
           type: string
-        - description: The API version to use for the operation.
-          in: query
-          name: api-version
-          required: true
-          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '204':
@@ -2394,11 +2382,7 @@ paths:
           name: resourceName
           required: true
           type: string
-        - description: The API version to use for the operation.
-          in: query
-          name: api-version
-          required: true
-          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
         - description: Parameters for updating the resource.
           in: body
           name: parameters
@@ -2454,11 +2438,7 @@ paths:
           name: resourceName
           required: true
           type: string
-        - description: The API version to use for the operation.
-          in: query
-          name: api-version
-          required: true
-          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
         - description: Parameters for creating or updating the resource.
           in: body
           name: parameters
@@ -2489,7 +2469,7 @@ paths:
       description: Get all the resources in a subscription.
       operationId: Resources_List
       parameters:
-        - description: 'The filter to apply on the operation.<br><br>The properties you can use for eq (equals) or ne (not equals) are: location, resourceType, name, resourceGroup, identity, identity/principalId, plan, plan/publisher, plan/product, plan/name, plan/version, and plan/promotionCode.<br><br>For example, to filter by a resource type, use: $filter=resourceType eq ''Microsoft.Network/virtualNetworks''<br><br>You can use substringof(value, property) in the filter. The properties you can use for substring are: name and resourceGroup.<br><br>For example, to get all resources with ''demo'' anywhere in the name, use: $filter=substringof(''demo'', name)<br><br>You can link more than one substringof together by adding and/or operators.<br><br>You can filter by tag names and values. For example, to filter for a tag name and value, use $filter=tagName eq ''tag1'' and tagValue eq ''Value1''<br><br>You can use some properties together when filtering. The combinations you can use are: substringof and/or resourceType, plan and plan/publisher and plan/name, identity and identity/principalId.'
+        - description: 'The filter to apply on the operation.<br><br>The properties you can use for eq (equals) or ne (not equals) are: location, resourceType, name, resourceGroup, identity, identity/principalId, plan, plan/publisher, plan/product, plan/name, plan/version, and plan/promotionCode.<br><br>For example, to filter by a resource type, use: $filter=resourceType eq ''Microsoft.Network/virtualNetworks''<br><br>You can use substringof(value, property) in the filter. The properties you can use for substring are: name and resourceGroup.<br><br>For example, to get all resources with ''demo'' anywhere in the name, use: $filter=substringof(''demo'', name)<br><br>You can link more than one substringof together by adding and/or operators.<br><br>You can filter by tag names and values. For example, to filter for a tag name and value, use $filter=tagName eq ''tag1'' and tagValue eq ''Value1''. When you filter by a tag name and value, the tags for each resource are not returned in the results.<br><br>You can use some properties together when filtering. The combinations you can use are: substringof and/or resourceType, plan and plan/publisher and plan/name, identity and identity/principalId.'
           in: query
           name: $filter
           required: false
@@ -2662,11 +2642,7 @@ paths:
           required: true
           type: string
           x-ms-skip-url-encoding: true
-        - description: The API version to use for the operation.
-          in: query
-          name: api-version
-          required: true
-          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '200':
           description: OK
@@ -2691,11 +2667,7 @@ paths:
           required: true
           type: string
           x-ms-skip-url-encoding: true
-        - description: The API version to use for the operation.
-          in: query
-          name: api-version
-          required: true
-          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '200':
           description: OK - Returns information about the resource.
@@ -2717,11 +2689,7 @@ paths:
           required: true
           type: string
           x-ms-skip-url-encoding: true
-        - description: The API version to use for the operation.
-          in: query
-          name: api-version
-          required: true
-          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '204':
           description: No Content
@@ -2743,11 +2711,7 @@ paths:
           required: true
           type: string
           x-ms-skip-url-encoding: true
-        - description: The API version to use for the operation.
-          in: query
-          name: api-version
-          required: true
-          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
         - description: Update resource parameters.
           in: body
           name: parameters
@@ -2778,11 +2742,7 @@ paths:
           required: true
           type: string
           x-ms-skip-url-encoding: true
-        - description: The API version to use for the operation.
-          in: query
-          name: api-version
-          required: true
-          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
         - description: Create or update resource parameters.
           in: body
           name: parameters
@@ -3512,7 +3472,6 @@ definitions:
         x-ms-enum:
           modelAsString: false
           name: WhatIfResultFormat
-  ErrorResponse: {}
   ExportTemplateRequest:
     description: Export resource group template request parameters.
     properties:
@@ -3950,6 +3909,18 @@ definitions:
       targetResourceGroup:
         description: The target resource group.
         type: string
+  ScopedDeployment:
+    description: Deployment operation parameters.
+    properties:
+      location:
+        description: The location to store the deployment data.
+        type: string
+      properties:
+        $ref: '#/definitions/DeploymentProperties'
+        description: The deployment properties.
+    required:
+      - location
+      - properties
   Sku:
     description: SKU for the resource.
     properties:

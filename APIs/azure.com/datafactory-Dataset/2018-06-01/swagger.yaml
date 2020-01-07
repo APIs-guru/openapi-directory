@@ -725,6 +725,7 @@ definitions:
     additionalProperties:
       type: object
     description: Dataset location.
+    discriminator: type
     properties:
       fileName:
         description: 'Specify the file name of dataset. Type: string (or Expression with resultType string).'
@@ -1524,6 +1525,15 @@ definitions:
       location:
         $ref: '#/definitions/DatasetLocation'
         description: The location of the ORC data storage.
+      orcCompressionCodec:
+        enum:
+          - none
+          - zlib
+          - snappy
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: orcCompressionCodec
     required:
       - location
   OrcFormat:

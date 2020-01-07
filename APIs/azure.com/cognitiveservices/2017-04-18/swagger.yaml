@@ -397,7 +397,7 @@ paths:
   '/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/locations/{location}/checkSkuAvailability':
     post:
       description: Check available SKUs.
-      operationId: CheckSkuAvailability_List
+      operationId: CheckSkuAvailability
       parameters:
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/apiVersionParameter'
@@ -2063,6 +2063,8 @@ paths:
       responses:
         '200':
           description: A 200 (OK) should be returned if the object exists and was deleted successfully;
+        '202':
+          description: HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.
         '204':
           description: a 204 (NoContent) should be used if the resource does not exist and the request is well formed.
         default:
@@ -2080,6 +2082,7 @@ paths:
             subscriptionId: f9b96b36-1f5e-4021-8959-51527e26e6d3
           responses:
             '200': {}
+            '202': {}
             '204': {}
     get:
       description: Returns a Cognitive Services account specified by the parameters.
@@ -2155,16 +2158,19 @@ paths:
           type: string
         - description: The parameters to provide for the created account.
           in: body
-          name: parameters
+          name: account
           required: true
           schema:
-            $ref: '#/definitions/CognitiveServicesAccountUpdateParameters'
-          x-ms-client-flatten: true
+            $ref: '#/definitions/CognitiveServicesAccount'
         - $ref: '#/parameters/apiVersionParameter'
         - $ref: '#/parameters/subscriptionIdParameter'
       responses:
         '200':
           description: 'The resource provider should return 200 (OK) to indicate that the operation completed successfully. '
+          schema:
+            $ref: '#/definitions/CognitiveServicesAccount'
+        '202':
+          description: HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.
           schema:
             $ref: '#/definitions/CognitiveServicesAccount'
         default:
@@ -2176,15 +2182,29 @@ paths:
       x-ms-examples:
         Update Account:
           parameters:
-            accountName: bingSearch
-            api-version: '2017-04-18'
-            parameters:
+            account:
               sku:
                 name: S2
+            accountName: bingSearch
+            api-version: '2017-04-18'
             resourceGroupName: bvttest
             subscriptionId: f9b96b36-1f5e-4021-8959-51527e26e6d3
           responses:
             '200':
+              body:
+                etag: W/"datetime'2017-04-10T07%3A46%3A21.5618831Z'"
+                id: /subscriptions/f9b96b36-1f5e-4021-8959-51527e26e6d3/resourceGroups/bvttest/providers/Microsoft.CognitiveServices/accounts/bingSearch
+                kind: Bing.Search
+                location: global
+                name: bingSearch
+                properties:
+                  endpoint: 'https://api.cognitive.microsoft.com/bing/v5.0'
+                  internalId: ceebe1e8e40f44e69554c1a759de4cf9
+                  provisioningState: Succeeded
+                sku:
+                  name: S2
+                type: Microsoft.CognitiveServices/accounts
+            '202':
               body:
                 etag: W/"datetime'2017-04-10T07%3A46%3A21.5618831Z'"
                 id: /subscriptions/f9b96b36-1f5e-4021-8959-51527e26e6d3/resourceGroups/bvttest/providers/Microsoft.CognitiveServices/accounts/bingSearch
@@ -2217,10 +2237,10 @@ paths:
           type: string
         - description: The parameters to provide for the created account.
           in: body
-          name: parameters
+          name: account
           required: true
           schema:
-            $ref: '#/definitions/CognitiveServicesAccountCreateParameters'
+            $ref: '#/definitions/CognitiveServicesAccount'
         - $ref: '#/parameters/apiVersionParameter'
         - $ref: '#/parameters/subscriptionIdParameter'
       responses:
@@ -2232,6 +2252,10 @@ paths:
           description: 'If resource is created successfully, the service should return 201 (OK).'
           schema:
             $ref: '#/definitions/CognitiveServicesAccount'
+        '202':
+          description: HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.
+          schema:
+            $ref: '#/definitions/CognitiveServicesAccount'
         default:
           description: Error response describing why the operation failed
           schema:
@@ -2241,14 +2265,14 @@ paths:
       x-ms-examples:
         Create Account:
           parameters:
-            accountName: testCreate1
-            api-version: '2017-04-18'
-            parameters:
+            account:
               kind: Emotion
               location: West US
               properties: {}
               sku:
                 name: S0
+            accountName: testCreate1
+            api-version: '2017-04-18'
             resourceGroupName: felixwa-01
             subscriptionId: f9b96b36-1f5e-4021-8959-51527e26e6d3
           responses:
@@ -2267,6 +2291,20 @@ paths:
                   name: S0
                 type: Microsoft.CognitiveServices/accounts
             '201':
+              body:
+                etag: W/"datetime'2017-04-10T07%3A57%3A48.4582781Z'"
+                id: /subscriptions/f9b96b36-1f5e-4021-8959-51527e26e6d3/resourceGroups/felixwa-01/providers/Microsoft.CognitiveServices/accounts/testCreate1
+                kind: Emotion
+                location: West US
+                name: testCreate1
+                properties:
+                  endpoint: 'https://westus.api.cognitive.microsoft.com/emotion/v1.0'
+                  internalId: 9dc1c5b9bb95486aa63899acdaebd9a0
+                  provisioningState: Succeeded
+                sku:
+                  name: S0
+                type: Microsoft.CognitiveServices/accounts
+            '202':
               body:
                 etag: W/"datetime'2017-04-10T07%3A57%3A48.4582781Z'"
                 id: /subscriptions/f9b96b36-1f5e-4021-8959-51527e26e6d3/resourceGroups/felixwa-01/providers/Microsoft.CognitiveServices/accounts/testCreate1
@@ -2562,14 +2600,15 @@ definitions:
     properties:
       etag:
         description: Entity Tag
+        readOnly: true
         type: string
       id:
         description: The id of the created account
         readOnly: true
         type: string
       kind:
-        description: Type of cognitive service account.
-        type: string
+        $ref: '#/definitions/CognitiveServicesAccountKind'
+        description: The Kind of the resource.
       location:
         description: The location of the resource
         type: string
@@ -2580,7 +2619,6 @@ definitions:
       properties:
         $ref: '#/definitions/CognitiveServicesAccountProperties'
         description: Properties of Cognitive Services account.
-        x-ms-client-flatten: true
       sku:
         $ref: '#/definitions/Sku'
         description: The SKU of Cognitive Services account.
@@ -2595,31 +2633,25 @@ definitions:
         type: string
     type: object
     x-ms-azure-resource: true
-  CognitiveServicesAccountCreateParameters:
-    description: The parameters to provide for the account.
+  CognitiveServicesAccountApiProperties:
+    description: The api properties for special APIs.
     properties:
-      kind:
-        $ref: '#/definitions/CognitiveServicesAccountKind'
-        description: Required. Gets or sets the Kind of the resource.
-      location:
-        description: 'Required. Gets or sets the location of the resource. This will be one of the supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.). The geo region of a resource cannot be changed once it is created, but if an identical geo region is specified on update the request will succeed.'
+      eventHubConnectionString:
+        description: (Personalization Only) The flag to enable statistics of Bing Search.
+        maxLength: 1000
+        pattern: '^( *)Endpoint=sb://(.*);( *)SharedAccessKeyName=(.*);( *)SharedAccessKey=(.*)$'
         type: string
-      properties:
-        description: Must exist in the request. Must be an empty object. Must not be null.
-        type: object
-      sku:
-        $ref: '#/definitions/Sku'
-        description: Required. Gets or sets the SKU of the resource.
-      tags:
-        additionalProperties:
-          type: string
-        description: Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters.
-        type: object
-    required:
-      - sku
-      - kind
-      - location
-      - properties
+      qnaRuntimeEndpoint:
+        description: (QnAMaker Only) The runtime endpoint of QnAMaker.
+        type: string
+      statisticsEnabled:
+        description: (Bing Search Only) The flag to enable statistics of Bing Search.
+        type: boolean
+      storageAccountConnectionString:
+        description: (Personalization Only) The storage account connection string.
+        maxLength: 1000
+        pattern: ^(( *)DefaultEndpointsProtocol=(http|https)( *);( *))?AccountName=(.*)AccountKey=(.*)EndpointSuffix=(.*)$
+        type: string
   CognitiveServicesAccountEnumerateSkusResult:
     description: The list of cognitive services accounts operation response.
     properties:
@@ -2656,14 +2688,19 @@ definitions:
   CognitiveServicesAccountProperties:
     description: Properties of Cognitive Services account.
     properties:
+      apiProperties:
+        $ref: '#/definitions/CognitiveServicesAccountApiProperties'
+        description: The api properties for special APIs.
       customSubDomainName:
         description: Optional subdomain name used for token-based authentication.
         type: string
       endpoint:
         description: Endpoint of the created account.
+        readOnly: true
         type: string
       internalId:
         description: The internal identifier.
+        readOnly: true
         type: string
       networkAcls:
         $ref: '#/definitions/NetworkRuleSet'
@@ -2682,20 +2719,6 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: ProvisioningState
-  CognitiveServicesAccountUpdateParameters:
-    description: The parameters to provide for the account.
-    properties:
-      properties:
-        description: Additional properties for Account. Only provided fields will be updated.
-        type: object
-      sku:
-        $ref: '#/definitions/Sku'
-        description: Gets or sets the SKU of the resource.
-      tags:
-        additionalProperties:
-          type: string
-        description: Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters.
-        type: object
   CognitiveServicesResourceAndSku:
     description: Cognitive Services resource type and SKU.
     properties:
@@ -2745,15 +2768,6 @@ definitions:
   NetworkRuleSet:
     description: A set of rules governing the network accessibility.
     properties:
-      bypass:
-        description: Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'.  If not specified the default is 'AzureServices'.
-        enum:
-          - AzureServices
-          - None
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: NetworkRuleBypassOptions
       defaultAction:
         description: The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated.
         enum:

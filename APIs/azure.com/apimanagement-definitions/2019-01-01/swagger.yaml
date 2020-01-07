@@ -1841,6 +1841,9 @@ definitions:
         description: Signin Policy Name. Only applies to AAD B2C Identity Provider.
         minLength: 1
         type: string
+      signinTenant:
+        description: The TenantId to use instead of Common when logging into Active Directory
+        type: string
       signupPolicyName:
         description: Signup Policy Name. Only applies to AAD B2C Identity Provider.
         minLength: 1

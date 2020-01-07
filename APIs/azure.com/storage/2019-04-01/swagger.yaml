@@ -4673,6 +4673,15 @@ paths:
             monitor: 'true'
             parameters:
               properties:
+                azureFilesIdentityBasedAuthentication:
+                  activeDirectoryProperties:
+                    azureStorageSid: S-1-5-21-2400535526-2334094090-2402026252-0012
+                    domainGuid: aebfc118-9fa9-4732-a21f-d98e41a77ae1
+                    domainName: adtest.com
+                    domainSid: S-1-5-21-2400535526-2334094090-2402026252
+                    forestName: adtest.com
+                    netBiosDomainName: adtest.com
+                  directoryServiceOptions: AD
                 networkAcls:
                   defaultAction: Allow
             resourceGroupName: res9407
@@ -4685,6 +4694,15 @@ paths:
                 location: eastus2(stage)
                 name: sto8596
                 properties:
+                  azureFilesIdentityBasedAuthentication:
+                    activeDirectoryProperties:
+                      azureStorageSid: S-1-5-21-2400535526-2334094090-2402026252-0012
+                      domainGuid: aebfc118-9fa9-4732-a21f-d98e41a77ae1
+                      domainName: adtest.com
+                      domainSid: S-1-5-21-2400535526-2334094090-2402026252
+                      forestName: adtest.com
+                      netBiosDomainName: adtest.com
+                    directoryServiceOptions: AD
                   creationTime: '2017-06-01T02:42:41.7633306Z'
                   isHnsEnabled: true
                   networkAcls:
@@ -4937,7 +4955,7 @@ paths:
         final-state-via: location
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys':
     post:
-      description: Lists the access keys for the specified storage account.
+      description: Lists the access keys or Kerberos keys (if active directory enabled) for the specified storage account.
       operationId: StorageAccounts_ListKeys
       parameters:
         - $ref: '#/parameters/ResourceGroupName'
@@ -4954,6 +4972,15 @@ paths:
           name: subscriptionId
           required: true
           type: string
+        - description: Specifies type of the key to be listed. Possible value is kerb.
+          enum:
+            - kerb
+          in: query
+          name: $expand
+          required: false
+          type: string
+          x-ms-enum:
+            name: ListKeyExpand
       responses:
         '200':
           description: OK -- list of keys retrieved and returned successfully.
@@ -5180,12 +5207,12 @@ paths:
                 type: Microsoft.Storage/storageAccounts/managementPolicies
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey':
     post:
-      description: Regenerates one of the access keys for the specified storage account.
+      description: Regenerates one of the access keys or Kerberos keys for the specified storage account.
       operationId: StorageAccounts_RegenerateKey
       parameters:
         - $ref: '#/parameters/ResourceGroupName'
         - $ref: '#/parameters/StorageAccountName'
-        - description: Specifies name of the key which should be regenerated -- key1 or key2.
+        - description: 'Specifies name of the key which should be regenerated -- key1, key2, kerb1, kerb2.'
           in: body
           name: regenerateKey
           required: true
@@ -5211,6 +5238,28 @@ paths:
       tags:
         - StorageAccounts
       x-ms-examples:
+        StorageAccountRegenerateKerbKey:
+          parameters:
+            accountName: sto3539
+            api-version: '2019-04-01'
+            monitor: 'true'
+            regenerateKey:
+              keyName: kerb1
+            resourceGroupName: res4167
+            subscriptionId: '{subscription-id}'
+          responses:
+            '200':
+              body:
+                keys:
+                  - keyName: key1
+                    permissions: Full
+                    value: 7xl+yQ4MrVpZCHspveCfy4f8jgTY1wv42gHO8k4bAX+EPvN4hY5uPau/bpofgeye+K9FtgvjkadkLISPfOxlMw==
+                  - keyName: key2
+                    permissions: Full
+                    value: uC+kyJ9/gT81E/+9I1Go4xtOe8sW5rdIm3n6PNIyQ5kGO5OpFq69aWnrn3jLeFIyItzpln9P392U0353RYKvbg==
+                  - keyName: kerb1
+                    permissions: Full
+                    value: 34EzDQuCw1lYBXCGioUybN9dCWSLLzQPdAbYRcLhM957Fy/6IlO/SkaeR9QXKhVgCt8anDq4wYmDcaZ5VXr2Tg==
         StorageAccountRegenerateKey:
           parameters:
             accountName: sto3539
@@ -5344,14 +5393,46 @@ definitions:
       - signedResourceTypes
       - signedPermission
       - signedExpiry
+  ActiveDirectoryProperties:
+    description: Settings properties for Active Directory (AD).
+    properties:
+      azureStorageSid:
+        description: Specifies the security identifier (SID) for Azure Storage.
+        type: string
+      domainGuid:
+        description: Specifies the domain GUID.
+        type: string
+      domainName:
+        description: Specifies the primary domain that the AD DNS server is authoritative for.
+        type: string
+      domainSid:
+        description: Specifies the security identifier (SID).
+        type: string
+      forestName:
+        description: Specifies the Active Directory forest to get.
+        type: string
+      netBiosDomainName:
+        description: Specifies the NetBIOS domain name.
+        type: string
+    required:
+      - domainName
+      - netBiosDomainName
+      - forestName
+      - domainGuid
+      - domainSid
+      - azureStorageSid
   AzureFilesIdentityBasedAuthentication:
     description: Settings for Azure Files identity based authentication.
     properties:
+      activeDirectoryProperties:
+        $ref: '#/definitions/ActiveDirectoryProperties'
+        description: Required if choose AD.
       directoryServiceOptions:
         description: Indicates the directory service used.
         enum:
           - None
           - AADDS
+          - AD
         type: string
         x-ms-enum:
           modelAsString: true
@@ -6390,7 +6471,7 @@ definitions:
     description: The parameters used to regenerate the storage account key.
     properties:
       keyName:
-        description: 'The name of storage keys that want to be regenerated, possible values are key1, key2.'
+        description: 'The name of storage keys that want to be regenerated, possible values are key1, key2, kerb1, kerb2.'
         type: string
     required:
       - keyName

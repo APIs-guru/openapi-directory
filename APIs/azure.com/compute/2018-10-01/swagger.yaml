@@ -83,6 +83,62 @@ paths:
             $ref: '#/definitions/AvailabilitySetListResult'
       tags:
         - AvailabilitySets
+      x-ms-examples:
+        List availability sets in a subscription.:
+          parameters:
+            $expand: virtualMachines\$ref
+            api-version: '2018-10-01'
+            subscriptionId: '{subscriptionId}'
+          responses:
+            '200':
+              body:
+                value:
+                  - id: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}'
+                    location: australiasoutheast
+                    name: '{availabilitySetName}'
+                    properties:
+                      platformFaultDomainCount: 3
+                      platformUpdateDomainCount: 5
+                      virtualMachines:
+                        - id: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}'
+                    sku:
+                      name: Classic
+                    type: Microsoft.Compute/availabilitySets
+                  - id: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}'
+                    location: australiasoutheast
+                    name: '{availabilitySetName}'
+                    properties:
+                      platformFaultDomainCount: 3
+                      platformUpdateDomainCount: 5
+                      virtualMachines:
+                        - id: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}'
+                    sku:
+                      name: Classic
+                    type: Microsoft.Compute/availabilitySets
+                  - id: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}'
+                    location: westcentralus
+                    name: '{availabilitySetName}'
+                    properties:
+                      platformFaultDomainCount: 3
+                      platformUpdateDomainCount: 5
+                      virtualMachines: []
+                    sku:
+                      name: Classic
+                    tags:
+                      '{tagName}': '{tagValue}'
+                    type: Microsoft.Compute/availabilitySets
+                  - id: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}'
+                    location: westcentralus
+                    name: '{availabilitySetName}'
+                    properties:
+                      platformFaultDomainCount: 3
+                      platformUpdateDomainCount: 5
+                      virtualMachines: []
+                    sku:
+                      name: Classic
+                    tags:
+                      '{tagName}': '{tagValue}'
+                    type: Microsoft.Compute/availabilitySets
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Compute/images':
@@ -2748,6 +2804,161 @@ paths:
                                     - id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/loadBalancers/myLb/backendAddressPools/lbBackendPool'
                                   loadBalancerInboundNatPools:
                                     - id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/loadBalancers/myLb/inboundNatPools/lbNatPool'
+                                  privateIPAddressVersion: IPv4
+                                  subnet:
+                                    id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet'
+                            primary: true
+                    osProfile:
+                      adminUsername: '{your-username}'
+                      computerNamePrefix: '{vmss-name}'
+                      secrets: []
+                      windowsConfiguration:
+                        enableAutomaticUpdates: true
+                        provisionVMAgent: true
+                    storageProfile:
+                      imageReference:
+                        offer: WindowsServer
+                        publisher: MicrosoftWindowsServer
+                        sku: 2016-Datacenter
+                        version: latest
+                      osDisk:
+                        caching: ReadWrite
+                        createOption: FromImage
+                        managedDisk:
+                          storageAccountType: Standard_LRS
+                sku:
+                  capacity: 3
+                  name: Standard_D1_v2
+                  tier: Standard
+                type: Microsoft.Compute/virtualMachineScaleSets
+        Create a scale set with automatic repairs enabled:
+          parameters:
+            api-version: '2018-10-01'
+            parameters:
+              location: westus
+              properties:
+                automaticRepairsPolicy:
+                  enabled: true
+                  gracePeriod: PT30M
+                overprovision: true
+                upgradePolicy:
+                  mode: Manual
+                virtualMachineProfile:
+                  networkProfile:
+                    networkInterfaceConfigurations:
+                      - name: '{vmss-name}'
+                        properties:
+                          enableIPForwarding: true
+                          ipConfigurations:
+                            - name: '{vmss-name}'
+                              properties:
+                                subnet:
+                                  id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{existing-virtual-network-name}/subnets/{existing-subnet-name}'
+                          primary: true
+                  osProfile:
+                    adminPassword: '{your-password}'
+                    adminUsername: '{your-username}'
+                    computerNamePrefix: '{vmss-name}'
+                  storageProfile:
+                    imageReference:
+                      offer: WindowsServer
+                      publisher: MicrosoftWindowsServer
+                      sku: 2016-Datacenter
+                      version: latest
+                    osDisk:
+                      caching: ReadWrite
+                      createOption: FromImage
+                      managedDisk:
+                        storageAccountType: Standard_LRS
+              sku:
+                capacity: 3
+                name: Standard_D1_v2
+                tier: Standard
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscription-id}'
+            vmScaleSetName: '{vmss-name}'
+          responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}'
+                location: westus
+                name: '{vmss-name}'
+                properties:
+                  automaticRepairsPolicy:
+                    enabled: true
+                    gracePeriod: PT30M
+                  overprovision: true
+                  provisioningState: Creating
+                  singlePlacementGroup: true
+                  uniqueId: d053ec5a-8da6-495f-ab13-38216503c6d7
+                  upgradePolicy:
+                    mode: Manual
+                  virtualMachineProfile:
+                    networkProfile:
+                      networkInterfaceConfigurations:
+                        - name: '{vmss-name}'
+                          properties:
+                            dnsSettings:
+                              dnsServers: []
+                            enableAcceleratedNetworking: false
+                            enableIPForwarding: true
+                            ipConfigurations:
+                              - name: '{vmss-name}'
+                                properties:
+                                  privateIPAddressVersion: IPv4
+                                  subnet:
+                                    id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet'
+                            primary: true
+                    osProfile:
+                      adminUsername: '{your-username}'
+                      computerNamePrefix: '{vmss-name}'
+                      secrets: []
+                      windowsConfiguration:
+                        enableAutomaticUpdates: true
+                        provisionVMAgent: true
+                    storageProfile:
+                      imageReference:
+                        offer: WindowsServer
+                        publisher: MicrosoftWindowsServer
+                        sku: 2016-Datacenter
+                        version: latest
+                      osDisk:
+                        caching: ReadWrite
+                        createOption: FromImage
+                        managedDisk:
+                          storageAccountType: Standard_LRS
+                sku:
+                  capacity: 3
+                  name: Standard_D1_v2
+                  tier: Standard
+                type: Microsoft.Compute/virtualMachineScaleSets
+            '201':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}'
+                location: westus
+                name: '{vmss-name}'
+                properties:
+                  automaticRepairsPolicy:
+                    enabled: true
+                    gracePeriod: PT30M
+                  overprovision: true
+                  provisioningState: Creating
+                  singlePlacementGroup: true
+                  uniqueId: d053ec5a-8da6-495f-ab13-38216503c6d7
+                  upgradePolicy:
+                    mode: Manual
+                  virtualMachineProfile:
+                    networkProfile:
+                      networkInterfaceConfigurations:
+                        - name: '{vmss-name}'
+                          properties:
+                            dnsSettings:
+                              dnsServers: []
+                            enableAcceleratedNetworking: false
+                            enableIPForwarding: true
+                            ipConfigurations:
+                              - name: '{vmss-name}'
+                                properties:
                                   privateIPAddressVersion: IPv4
                                   subnet:
                                     id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet'
@@ -6998,6 +7209,15 @@ definitions:
         type: boolean
     required:
       - automaticOSUpgradeSupported
+  AutomaticRepairsPolicy:
+    description: Specifies the configuration parameters for automatic repairs on the virtual machine scale set.
+    properties:
+      enabled:
+        description: Specifies whether automatic repairs should be enabled on the virtual machine scale set. The default value is false.
+        type: boolean
+      gracePeriod:
+        description: 'The amount of time for which automatic repairs are suspended due to a state change on VM. The grace time starts after the state change has completed. This helps avoid premature or accidental repairs. The time duration should be specified in ISO 8601 format. The minimum allowed grace period is 30 minutes (PT30M), which is also the default value.'
+        type: string
   AvailabilitySet:
     allOf:
       - $ref: '#/definitions/Resource'
@@ -9212,6 +9432,9 @@ definitions:
   VirtualMachineScaleSetProperties:
     description: Describes the properties of a Virtual Machine Scale Set.
     properties:
+      automaticRepairsPolicy:
+        $ref: '#/definitions/AutomaticRepairsPolicy'
+        description: Policy for automatic repairs.
       doNotRunExtensionsOnOverprovisionedVMs:
         description: 'When Overprovision is enabled, extensions are launched only on the requested number of VMs which are finally kept. This property will hence ensure that the extensions do not run on the extra overprovisioned VMs.'
         type: boolean
@@ -9504,9 +9727,18 @@ definitions:
   VirtualMachineScaleSetUpdateProperties:
     description: Describes the properties of a Virtual Machine Scale Set.
     properties:
+      automaticRepairsPolicy:
+        $ref: '#/definitions/AutomaticRepairsPolicy'
+        description: Policy for automatic repairs.
+      doNotRunExtensionsOnOverprovisionedVMs:
+        description: 'When Overprovision is enabled, extensions are launched only on the requested number of VMs which are finally kept. This property will hence ensure that the extensions do not run on the extra overprovisioned VMs.'
+        type: boolean
       overprovision:
         description: Specifies whether the Virtual Machine Scale Set should be overprovisioned.
         type: boolean
+      proximityPlacementGroup:
+        $ref: '#/definitions/SubResource'
+        description: 'Specifies information about the proximity placement group that the virtual machine scale set should be assigned to. <br><br>Minimum api-version: 2018-04-01.'
       singlePlacementGroup:
         description: 'When true this limits the scale set to a single placement group, of max size 100 virtual machines.'
         type: boolean

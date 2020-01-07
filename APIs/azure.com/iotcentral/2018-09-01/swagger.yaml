@@ -265,7 +265,7 @@ paths:
           parameters:
             api-version: '2018-09-01'
             operationInputs:
-              name: myIoTCentralApp
+              name: myiotcentralapp
               type: IoTApps
             subscriptionId: 00000000-0000-0000-0000-000000000000
           responses:
@@ -313,7 +313,7 @@ paths:
           parameters:
             api-version: '2018-09-01'
             operationInputs:
-              name: myIoTCentralApp
+              name: myiotcentralapp
               type: IoTApps
             subscriptionId: 00000000-0000-0000-0000-000000000000
           responses:
@@ -521,7 +521,8 @@ paths:
         Apps_Update:
           parameters:
             AppPatch:
-              displayName: My IoT Central App 2
+              properties:
+                displayName: My IoT Central App 2
             api-version: '2018-09-01'
             resourceGroupName: resRg
             resourceName: myIoTCentralApp
@@ -592,12 +593,13 @@ paths:
         Apps_CreateOrUpdate:
           parameters:
             App:
-              displayName: My IoT Central App
               location: westus
+              properties:
+                displayName: My IoT Central App
+                subdomain: my-iot-central-app
+                template: iotc-default@1.0.0
               sku:
                 name: F1
-              subdomain: my-iot-central-app
-              template: iotc-default@1.0.0
             api-version: '2018-09-01'
             resourceGroupName: resRg
             resourceName: myIoTCentralApp
@@ -737,6 +739,9 @@ definitions:
         enum:
           - F1
           - S1
+          - ST0
+          - ST1
+          - ST2
         type: string
         x-ms-enum:
           modelAsString: true
