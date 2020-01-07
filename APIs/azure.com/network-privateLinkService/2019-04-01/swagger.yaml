@@ -1097,6 +1097,8 @@ definitions:
       privateLinkServiceAlias:
         description: The alias of the private link service.
         type: string
+  FrontendIPConfigurationPropertiesFormat: {}
+  NetworkInterfacePropertiesFormat: {}
   PrivateEndpointConnection:
     allOf:
       - description: Reference to another subresource.
@@ -1173,6 +1175,7 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: ProvisioningState
+  PrivateEndpointProperties: {}
   PrivateLinkService:
     allOf:
       - description: Common resource representation.
@@ -1435,3 +1438,4 @@ definitions:
         items:
           type: string
         type: array
+  SubnetPropertiesFormat: {}

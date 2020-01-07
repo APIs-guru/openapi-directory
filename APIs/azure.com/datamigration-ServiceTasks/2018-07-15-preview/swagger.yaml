@@ -342,6 +342,7 @@ definitions:
         type: array
     type: object
     x-ms-discriminator-value: Service.Install.OCI
+  ODataError: {}
   UploadOCIDriverTaskProperties:
     allOf:
       - description: 'Base class for all types of DMS task properties. If task is not supported by current client, this object is returned.'
