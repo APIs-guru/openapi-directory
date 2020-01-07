@@ -915,9 +915,9 @@ function fixSpec(swagger, errors) {
         else {
           if ((typeof value === 'string') && (value == newValue) && (value.startsWith('#/definitions/'))) {
             console.warn(error.code,value);
-            let ptr = value.replace('#/definitions/','');
+            let ptr = value.replace('#/','/');
             //swagger.definitions[decodeURI(ptr)] = {};
-            jp.set(swagger, value, {});
+            jp.set(swagger, ptr, {});
             fixed = true;
           }
           else if (value.startsWith('./')) {
