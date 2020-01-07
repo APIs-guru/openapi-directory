@@ -240,7 +240,7 @@ function updateCollection(dir, command) {
           origin = origin.pop();
         var source = origin.url;
         var cacheEntry = getCacheEntry(source);
-        if ((cacheEntry.skip && !command.force) || (origin['x-apisguru-direct'])) {
+        if ((cacheEntry.skip && !command.force) || (origin['x-apisguru-driver'] == 'external')) {
           console.log('SKIP '+source);
           return null;
         }
@@ -333,7 +333,7 @@ function validatePreferred(specs) {
   _.each(specs, function (swagger) {
     var id = util.getApiId(swagger);
     var version = swagger.info.version;
-    var spath = util.getSwaggerPath(swagger);
+    var spath = util.getSwaggerPath(swagger,swagger.openapi ? 'openapi.yaml' : 'swagger.yaml');
     preferred[id] = preferred[id] || {};
     preferred[id][swagger.info.version] = swagger.info['x-preferred'];
     if (Object.keys(swagger.paths).length<1)
@@ -572,7 +572,7 @@ function writeSpec(source, format, exPatch, command) {
       if (validation.remotesResolved) {
         context.swagger = validation.remotesResolved;
       }
-      else if (!format.startsWith('openapi')) {
+      else if (!swagger.openapi) {
         console.warn('No remotesResolved returned');
       }
 
@@ -899,6 +899,11 @@ function fixSpec(swagger, errors) {
         else
           newValue = value;
 
+        if (swagger.openapi) {
+          console.warn('Fixing unresolvable errors not fully implemented for OpenAPI3');
+          break;
+        }
+
         if (!swagger.definitions)
           swagger.definitions = {};
 
@@ -911,7 +916,8 @@ function fixSpec(swagger, errors) {
           if ((typeof value === 'string') && (value == newValue) && (value.startsWith('#/definitions/'))) {
             console.warn(error.code,value);
             let ptr = value.replace('#/definitions/','');
-            swagger.definitions[decodeURI(ptr)] = {};
+            //swagger.definitions[decodeURI(ptr)] = {};
+            jp.set(swagger, value, {});
             fixed = true;
           }
           else if (value.startsWith('./')) {
@@ -921,7 +927,6 @@ function fixSpec(swagger, errors) {
           else {
             console.warn(swagger.info.title);
             console.warn(path,typeof value,value,newValue);
-
           }
         }
         break;
@@ -1186,28 +1191,32 @@ function removeEmpty(obj) {
 
 function convertToSwagger(spec,exPatch,command) {
   let target = 'swagger_2';
-  if (spec.format === 'openapi_3') target = spec.format;
+  if (spec.format !== 'swagger_2') target = 'openapi_3';
   return spec.convertTo(target)
     .then(swagger => {
+      if (_.isUndefined(swagger.spec.info))
+        swagger.spec.info = { title: 'API' };
+      if ((_.isUndefined(swagger.spec.info.version)) || (swagger.spec.info.version == ''))
+        swagger.spec.info.version = '1.0.0'
       _.merge(swagger.spec.info, {
         'x-providerName': parseHost(swagger.spec, command.host||exPatch.info["x-providerName"])
       });
-    if (typeof swagger.spec.info['x-origin'] == 'undefined')
+      if (typeof swagger.spec.info['x-origin'] == 'undefined')
         swagger.spec.info['x-origin'] = [];
-    if (!Array.isArray(swagger.spec.info['x-origin']))
+      if (!Array.isArray(swagger.spec.info['x-origin']))
         swagger.spec.info['x-origin'] = [swagger.spec.info['x-origin']];
       var newOrigin = {
         format: spec.formatName,
         version: spec.getFormatVersion(),
         url: spec.source
       };
-      if ((newOrigin.format !== 'swagger') || (newOrigin.version !== '2.0')) {
+      if ((newOrigin.format !== 'openapi') && ((newOrigin.format !== 'swagger') || (newOrigin.version !== '2.0'))) {
         newOrigin.converter = {
           url: 'https://github.com/lucybot/api-spec-converter',
           version: converterVersion
         };
       }
-    if (!_.isEqual(_.last(swagger.spec.info['x-origin']),newOrigin))
+      if (!_.isEqual(_.last(swagger.spec.info['x-origin']),newOrigin))
         swagger.spec.info['x-origin'].push(newOrigin);
       return swagger.spec;
     });

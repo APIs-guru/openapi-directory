@@ -7,7 +7,7 @@ var _ = require('lodash');
 var util = require('../util');
 
 module.exports = function () {
-  var files = util.listGitHubFiles('adyen', 'adyen-openapi', 'master', 'specs/3.0/*.json');
+  var files = util.listGitHubFiles('adyen', 'adyen-openapi', 'master', 'specs/json/*.json');
   return _.map(files, filename => {
     return {
       info: {
