@@ -1,0 +1,33 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://api.tisane.ai/'
+info:
+  contact:
+    x-twitter: TisaneLabs
+  title: Tisane Text Analysis API
+  version: 1.0.0
+  x-apisguru-categories:
+    - text
+  x-logo:
+    url: 'https://twitter.com/TisaneLabs/profile_image?size=original'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.7.31
+      format: wadl
+      url: 'https://dev.tisane.ai/docs/services/5a3b6668a3511b11cc292655/export?DocumentFormat=WADL'
+      version: '1.0'
+  x-providerName: tisane.ai
+paths:
+  /languages:
+    get:
+      responses:
+        '200':
+          description: Successful Response
+    parameters: []
+  /parse:
+    parameters: []
+    post:
+      responses:
+        '200':
+          description: Successful Response

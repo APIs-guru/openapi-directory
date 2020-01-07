@@ -129,9 +129,9 @@ paths:
   /v2/ads:
     get:
       description: |-
-        **Not** for use by NPR One clients (for whom sponsorship is already integrated into the Listening Service), this endpoint is designed to be used by our other client applications to request sponsorship on behalf of a user. Sponsorship units are returned in the form of DAAST XML. It is worth noting that this endpoint attempts to always return XML, even in the case of exceptions.
+        **Not** for use by NPR One clients (for whom sponsorship is already integrated into the Listening Service), this endpoint is designed to be used by our other client applications to request sponsorship on behalf of a user. Sponsorship units are returned in the form of VAST XML. It is worth noting that this endpoint attempts to always return XML, even in the case of exceptions.
 
-        The default behavior of this endpoint is asynchronous; on an initial request, a call to our external sponsorship provider is placed on a queue, which is typically processed within 3 minutes. Once the sponsorship call is received and processed, the returned sponsorship units are placed in a cache on our server for the current user. Subsequent calls to this endpoint will return DAAST sponsorship units from this cache until tracking information is submitted, which removes the ad from the cache and will automatically request additional ads asynchronously if there are fewer than a certain number remaining in the cache.
+        The default behavior of this endpoint is asynchronous; on an initial request, a call to our external sponsorship provider is placed on a queue, which is typically processed within 3 minutes. Once the sponsorship call is received and processed, the returned sponsorship units are placed in a cache on our server for the current user. Subsequent calls to this endpoint will return VAST sponsorship units from this cache until tracking information is submitted, which removes the ad from the cache and will automatically request additional ads asynchronously if there are fewer than a certain number remaining in the cache.
 
         For development purposes, it's worth noting that there is currently no way to clear a user's cache without submitting some form of tracking.
       operationId: getAds
@@ -153,9 +153,9 @@ paths:
           type: integer
       responses:
         '200':
-          description: 'Request completed successfully; a DAAST XML document is returned. Note that this response will only be returned if either `force=true` was passed in the querystring, or a call to get sponsorship was previously made, and ads now exist in the cache for this user; otherwise, the 202 response is returned.'
+          description: 'Request completed successfully; a VAST XML document is returned. Note that this response will only be returned if either `force=true` was passed in the querystring, or a call to get sponsorship was previously made, and ads now exist in the cache for this user; otherwise, the 202 response is returned.'
           schema:
-            $ref: '#/definitions/DAASTXml'
+            $ref: '#/definitions/VASTXml'
         '202':
           description: Request accepted. Check back later for actual ads.
         '400':
@@ -166,7 +166,7 @@ paths:
           description: A server error
           schema:
             $ref: '#/definitions/ErrorXmlDocument'
-      summary: Request DAAST sponsorship units
+      summary: Request VAST sponsorship units
       tags:
         - sponsorship
     post:
@@ -197,7 +197,7 @@ paths:
           description: A server error
           schema:
             $ref: '#/definitions/Error'
-      summary: Record tracking data for DAAST sponsorship units
+      summary: Record tracking data for VAST sponsorship units
       tags:
         - sponsorship
 definitions:
@@ -222,7 +222,7 @@ definitions:
     description: All the information needed for the Sponsorship Service to send back tracking information to our external sponsorship provider
     properties:
       adId:
-        description: 'The DAAST Ad node `id` attribute value, (e.g. AdswizzAd12345)'
+        description: 'The VAST Ad node `id` attribute value, (e.g. AdswizzAd12345)'
         type: string
       event:
         default: start
@@ -386,21 +386,6 @@ definitions:
     type: object
     xml:
       name: Creative
-  DAASTXml:
-    description: 'Please visit <a href=''http://www.iab.net/DAAST'' target=''_blank''>http://www.iab.net/DAAST</a> for more information on the DAAST XML specification.'
-    properties:
-      Ad:
-        $ref: '#/definitions/AdXml'
-      version:
-        default: '1.0'
-        type: string
-        xml:
-          attribute: true
-    required:
-      - version
-    type: object
-    xml:
-      name: DAAST
   Error:
     description: A serialized version of any error encountered when processing this request
     properties:
@@ -438,7 +423,7 @@ definitions:
             type: object
     description: A Collection.doc+JSON representation of an error result from an API call
   ErrorXmlDocument:
-    description: One or more errors represented in a DAAST XML document
+    description: One or more errors represented in a VAST XML document
     properties:
       error:
         items:
@@ -459,7 +444,7 @@ definitions:
       - error
     type: object
     xml:
-      name: DAAST
+      name: VAST
   ImpressionXml:
     properties:
       id:
@@ -591,3 +576,18 @@ definitions:
               $ref: '#/definitions/AdTrackingDocument'
             type: array
     description: All information relevant to a user who has requested sponsorship or submitted tracking information
+  VASTXml:
+    description: 'Please visit <a href=''https://www.iab.com/guidelines/digital-video-ad-serving-template-vast/'' target=''_blank''>https://www.iab.com/guidelines/digital-video-ad-serving-template-vast/</a> for more information on the VAST XML specification.'
+    properties:
+      Ad:
+        $ref: '#/definitions/AdXml'
+      version:
+        default: '1.0'
+        type: string
+        xml:
+          attribute: true
+    required:
+      - version
+    type: object
+    xml:
+      name: VAST

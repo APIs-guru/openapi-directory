@@ -44,6 +44,31 @@ parameters:
     name: dataset_id
     required: true
     type: string
+  exclude:
+    collectionFormat: multi
+    description: |
+      An array of filter on **facet** value.
+
+      This request will exclude the defined facet value.
+      For example city:Paris or modified:2019/12
+    in: query
+    items:
+      type: string
+    name: exclude
+    required: false
+    type: array
+  facet:
+    collectionFormat: multi
+    description: |
+      An array of facets names
+
+      A facet is a field used for filtering and exploration.
+      To use a field as a facet, you have to configure it in your back office.
+    in: query
+    items:
+      type: string
+    name: facet
+    type: array
   file_id:
     in: path
     name: file_id
@@ -100,6 +125,21 @@ parameters:
     name: record_id
     required: true
     type: string
+  refine:
+    collectionFormat: multi
+    description: |
+      An array of filter on **facet** value.
+
+      This request will be refined on the defined facet value.
+      Refining with a facet is equivalent to selecting an entry in the left navigation panel.
+
+      For example city:Paris or modified:2019/12
+    in: query
+    items:
+      type: string
+    name: refine
+    required: false
+    type: array
   reuse_id:
     in: path
     name: reuse_id
@@ -379,6 +419,8 @@ paths:
         - $ref: '#/parameters/source'
         - $ref: '#/parameters/where'
         - $ref: '#/parameters/search'
+        - $ref: '#/parameters/refine'
+        - $ref: '#/parameters/exclude'
         - $ref: '#/parameters/rows'
         - $ref: '#/parameters/start'
         - $ref: '#/parameters/sort'
@@ -689,6 +731,35 @@ paths:
       tags:
         - export dataset
         - ods
+  '/{source}/datasets/{dataset_id}/facets':
+    get:
+      description: |
+        Enumerate facets values for records and return a list of values for each facet.
+        Can be used to implement guided navigation in large result sets.
+      operationId: getRecordsFacets
+      parameters:
+        - $ref: '#/parameters/source'
+        - $ref: '#/parameters/dataset_id'
+        - $ref: '#/parameters/facet'
+        - $ref: '#/parameters/refine'
+        - $ref: '#/parameters/exclude'
+        - $ref: '#/parameters/where'
+        - $ref: '#/parameters/search'
+        - $ref: '#/parameters/timezone'
+      responses:
+        '200':
+          description: Facets enumeration
+          schema:
+            properties:
+              facets:
+                items:
+                  $ref: '#/definitions/facet_enumeration'
+                type: array
+            type: object
+      tags:
+        - dataset
+        - facet
+        - ods
   '/{source}/datasets/{dataset_id}/feedback':
     put:
       description: |
@@ -747,6 +818,8 @@ paths:
         - $ref: '#/parameters/dataset_id'
         - $ref: '#/parameters/where'
         - $ref: '#/parameters/search'
+        - $ref: '#/parameters/refine'
+        - $ref: '#/parameters/exclude'
         - $ref: '#/parameters/rows'
         - $ref: '#/parameters/start'
         - $ref: '#/parameters/sort'
@@ -1045,6 +1118,34 @@ paths:
       tags:
         - export catalog
         - ods
+  '/{source}/facets':
+    get:
+      description: |
+        Enumerate facets values for datasets and return a list of values for each facet.
+        Can be used to implement guided navigation in large result sets.
+      operationId: getDatasetsFacets
+      parameters:
+        - $ref: '#/parameters/source'
+        - $ref: '#/parameters/facet'
+        - $ref: '#/parameters/refine'
+        - $ref: '#/parameters/exclude'
+        - $ref: '#/parameters/where'
+        - $ref: '#/parameters/search'
+        - $ref: '#/parameters/timezone'
+      responses:
+        '200':
+          description: Facets enumeration
+          schema:
+            properties:
+              facets:
+                items:
+                  $ref: '#/definitions/facet_enumeration'
+                type: array
+            type: object
+      tags:
+        - catalog
+        - facet
+        - ods
   '/{source}/metadata_templates':
     get:
       description: |
@@ -1171,6 +1272,28 @@ definitions:
     items:
       $ref: '#/definitions/dataset'
     type: array
+  facet_enumeration:
+    properties:
+      facets:
+        items:
+          $ref: '#/definitions/facet_value_enumeration'
+        type: array
+      name:
+        type: string
+    type: object
+  facet_value_enumeration:
+    properties:
+      count:
+        type: integer
+      facets:
+        items:
+          $ref: '#/definitions/facet_value_enumeration'
+        type: array
+      name:
+        type: string
+      value:
+        type: string
+    type: object
   link:
     properties:
       href:

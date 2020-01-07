@@ -80,7 +80,7 @@ info:
     url: 'https://rebilly.github.io/RebillyAPI/rb_apiLogo.svg'
   x-origin:
     - format: swagger
-      url: 'http://rebilly.github.io/RebillyAPI/swagger.json'
+      url: 'http://rebilly.github.io/RebillyAPI/openapi.json'
       version: '2.0'
   x-providerName: rebilly.com
 consumes:
@@ -308,7 +308,7 @@ tags:
       schedule.
     name: Plans
   - description: |
-      A product describes what you sell (goods or services).  
+      A product describes what you sell (goods or services).
       A product determines how what you sell appears on invoices and receipts.
       The pricing for products is set in Plans.  One product can have many
       plans.
@@ -11348,7 +11348,7 @@ definitions:
       Products include digital goods, services, and physical goods.
       Products appear on invoice line items. If you set a tax category identifier,
       taxes will be calculated upon invoice generation.  If it is shippable,
-      shipping will be calculated upon invoice generation.  Pricing and 
+      shipping will be calculated upon invoice generation.  Pricing and
       variations are set within Plans.
     properties:
       _links:

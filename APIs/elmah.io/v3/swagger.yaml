@@ -146,6 +146,48 @@ paths:
       summary: Fetch a deployment by its ID.
       tags:
         - Deployments
+  '/v3/heartbeats/{logId}/{id}':
+    post:
+      consumes:
+        - application/json-patch+json
+        - application/json
+        - text/json
+        - application/*+json
+      operationId: Heartbeats_Create
+      parameters:
+        - description: The ID of the heartbeat check.
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The ID of the log containing the heartbeat check.
+          in: path
+          name: logId
+          required: true
+          type: string
+        - description: The details of the heartbeat.
+          in: body
+          name: heartbeat
+          required: false
+          schema:
+            $ref: '#/definitions/CreateHeartbeat'
+      produces: []
+      responses:
+        '200':
+          description: Heartbeat was created.
+        '400':
+          description: Model not valid.
+        '401':
+          description: API key not valid or no access to resource.
+        '402':
+          description: Tried to call the heartbeats API without heartbeats enabled or trial expired.
+        '404':
+          description: The specified log or heartbeat was not found.
+        '429':
+          description: A maximum of 500 requests per minute and 3600 requests per hour are permitted
+      summary: Create a new heartbeat.
+      tags:
+        - Heartbeats
   /v3/logs:
     get:
       consumes: []
@@ -571,6 +613,21 @@ definitions:
     properties:
       location:
         description: The location of the created deployment.
+        type: string
+    type: object
+  CreateHeartbeat:
+    properties:
+      application:
+        description: "Optional string to identify which application logged this message. You can use this if you have multiple applications and services logging to the same log.\r\nIf not set, the application name \"Heartbeats\" will be set on all log messages generated from this heartbeat."
+        type: string
+      reason:
+        description: If result is "Degraded" or "Unhealthy" you can use this property to specify why.
+        type: string
+      result:
+        description: 'The result of this heartbeat. Can be "Healthy, "Degraded", or "Unhealthy". Defaults to "Healthy"'
+        type: string
+      version:
+        description: "Optional string to identify which version of your application logged this message. If not specified, any errors, warnings, or information messages will get\r\nthe newest version number created through deployment tracking as with normal log messages."
         type: string
     type: object
   CreateLog:

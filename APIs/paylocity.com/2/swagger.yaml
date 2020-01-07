@@ -2436,6 +2436,12 @@ definitions:
             type:
               - number
               - 'null'
+          deductionsAmount:
+            description: 'Box 4(b) on form W4 (year 2020 or later): Deductions amount. <br  />Decimal (12,2)'
+            type: number
+          dependentsAmount:
+            description: 'Box 3 on form W4 (year 2020 or later): Total dependents amount. <br  />Decimal (12,2)'
+            type: number
           exemptions:
             description: 'Federal tax exemptions value. <br  />Decimal (12,2)'
             type:
@@ -2446,6 +2452,12 @@ definitions:
             type:
               - string
               - 'null'
+          higherRate:
+            description: 'Box 2(c) on form W4 (year 2020 or later): Multiple Jobs or Spouse Works. <br  />Boolean'
+            type: boolean
+          otherIncomeAmount:
+            description: 'Box 4(a) on form W4 (year 2020 or later): Other income amount. <br  />Decimal (12,2)'
+            type: number
           percentage:
             description: 'Tax percentage. <br  />Decimal (12,2)'
             type:
@@ -2456,6 +2468,9 @@ definitions:
             type:
               - string
               - 'null'
+          w4FormYear:
+            description: The federal W4 form year <br  />Integer
+            type: integer
         type: object
       firstName:
         description: 'Employee first name. <br  />Max length: 40'
@@ -3803,6 +3818,12 @@ definitions:
               type:
                 - number
                 - 'null'
+            deductionsAmount:
+              description: 'Box 4(b) on form W4 (year 2020 or later): Deductions amount. <br  />Decimal (12,2)'
+              type: number
+            dependentsAmount:
+              description: 'Box 3 on form W4 (year 2020 or later): Total dependents amount. <br  />Decimal (12,2)'
+              type: number
             exemptions:
               description: 'Federal tax exemptions value. <br  />Decimal (12,2)'
               type:
@@ -3813,6 +3834,12 @@ definitions:
               type:
                 - string
                 - 'null'
+            higherRate:
+              description: 'Box 2(c) on form W4 (year 2020 or later): Multiple Jobs or Spouse Works. <br  />Boolean'
+              type: boolean
+            otherIncomeAmount:
+              description: 'Box 4(a) on form W4 (year 2020 or later): Other income amount. <br  />Decimal (12,2)'
+              type: number
             percentage:
               description: 'Tax percentage. <br  />Decimal (12,2)'
               type:
@@ -3823,6 +3850,9 @@ definitions:
               type:
                 - string
                 - 'null'
+            w4FormYear:
+              description: The federal W4 form year <br  />Integer
+              type: integer
           type: object
         maxItems: 1
         type: array

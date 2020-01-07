@@ -1600,6 +1600,36 @@ paths:
       summary: Return a Map of species type keys available in RGD
       tags:
         - Lookup
+  '/maps/chr/{chromosome}/{mapKey}':
+    get:
+      operationId: getChromosomeByAssemblyUsingGET
+      parameters:
+        - description: chromosome
+          in: path
+          name: chromosome
+          required: true
+          type: string
+        - description: mapKey
+          format: int32
+          in: path
+          name: mapKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Chromosome'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Return a list of chromosomes
+      tags:
+        - Chromosome
+        - Map
   '/maps/chr/{mapKey}':
     get:
       operationId: getChromosomesByAssemblyUsingGET
@@ -2884,6 +2914,34 @@ definitions:
         type: string
     title: AnnotationRequest
     type: object
+  Chromosome:
+    properties:
+      chromosome:
+        type: string
+      contigCount:
+        format: int32
+        type: integer
+      gapCount:
+        format: int32
+        type: integer
+      gapLength:
+        format: int32
+        type: integer
+      genbankId:
+        type: string
+      mapKey:
+        format: int32
+        type: integer
+      ordinalNumber:
+        format: int32
+        type: integer
+      refseqId:
+        type: string
+      seqLength:
+        format: int32
+        type: integer
+    title: Chromosome
+    type: object
   EnrichmentGeneRequest:
     properties:
       accId:
@@ -2913,6 +2971,14 @@ definitions:
       agrDescription:
         type: string
       description:
+        type: string
+      ensemblFullName:
+        type: string
+      ensemblGeneSymbol:
+        type: string
+      ensemblGeneType:
+        type: string
+      geneSource:
         type: string
       key:
         format: int32

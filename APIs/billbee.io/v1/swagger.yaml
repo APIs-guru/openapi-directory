@@ -111,6 +111,120 @@ paths:
       summary: Gets a list of all connected cloud storage devices
       tags:
         - CloudStorage
+  /api/v1/customer-addresses:
+    get:
+      consumes: []
+      operationId: CustomerAddresses_GetAll
+      parameters:
+        - description: The current page to request starting with 1 (default is 1)
+          format: int32
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: The page size for the result list. Values between 1 and 250 are allowed. (default is 50)
+          format: int32
+          in: query
+          name: pageSize
+          required: false
+          type: integer
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiModel]]'
+      summary: Get a list of all customer addresses
+      tags:
+        - CustomerAddresses
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: CustomerAddresses_Create
+      parameters:
+        - in: body
+          name: model
+          required: true
+          schema:
+            $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiModel'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiModel]'
+      summary: Creates a new customer address
+      tags:
+        - CustomerAddresses
+  '/api/v1/customer-addresses/{id}':
+    get:
+      consumes: []
+      operationId: CustomerAddresses_GetOne
+      parameters:
+        - description: The id of the address to query
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiModel]'
+      summary: Queries a single customer address by id
+      tags:
+        - CustomerAddresses
+    put:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: CustomerAddresses_Update
+      parameters:
+        - in: body
+          name: model
+          required: true
+          schema:
+            $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiModel'
+        - description: The id of the address
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiModel]'
+      summary: Updates a customer address by id
+      tags:
+        - CustomerAddresses
   /api/v1/customers:
     get:
       consumes: []
@@ -506,7 +620,7 @@ paths:
           description: OK
           schema:
             type: object
-      summary: Get a list of all events optionally filtered by date
+      summary: Get a list of all events optionally filtered by date. This request is extra throttled to 2 calls per page per hour.
       tags:
         - Events
   /api/v1/layouts:
@@ -696,7 +810,7 @@ paths:
           description: OK
           schema:
             type: object
-      summary: Create an delivery note for an existing order
+      summary: Create an delivery note for an existing order. This request is extra throttled by order and api key to a maximum of 2 per 2 hours.
       tags:
         - Orders
         - DeliveryNote
@@ -736,7 +850,7 @@ paths:
           description: OK
           schema:
             type: object
-      summary: Create an invoice for an existing order
+      summary: Create an invoice for an existing order. This request is extra throttled by order and api key to a maximum of 2 per 2 hours.
       tags:
         - Orders
         - Invoice
@@ -1498,6 +1612,27 @@ paths:
       tags:
         - Products
   '/api/v1/products/{id}':
+    delete:
+      consumes: []
+      operationId: Article_DeleteArticle
+      parameters:
+        - description: The id of the Product
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+      summary: Deletes a product
+      tags:
+        - Products
     get:
       consumes: []
       operationId: Article_GetArticle
@@ -2440,10 +2575,12 @@ definitions:
         type: integer
     type: object
   Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiModel:
+    description: Container for passing address data
     properties:
       AddressAddition:
         type: string
       AddressType:
+        description: The type of the address
         enum:
           - 1
           - 2
@@ -2452,10 +2589,13 @@ definitions:
       City:
         type: string
       Company:
+        description: The name of the company
         type: string
       CountryCode:
+        description: The ISO2 code of the country
         type: string
       CustomerId:
+        description: The internal Billbee id of the customer the address belongs to
         format: int32
         type: integer
       Email:
@@ -2467,11 +2607,13 @@ definitions:
       Housenumber:
         type: string
       Id:
+        description: The internal Billbee ID of the address record. Can be null if a new address is created
         format: int32
         type: integer
       LastName:
         type: string
       Name2:
+        description: Optionally an additional name field
         type: string
       State:
         type: string
@@ -2730,6 +2872,7 @@ definitions:
           - 109
           - 110
           - 111
+          - 112
         format: int32
         type: integer
       PaymentReference:
@@ -3502,6 +3645,7 @@ definitions:
           - 23
           - 24
           - 25
+          - 26
         format: int32
         type: integer
       ErrorMessage:
@@ -3543,6 +3687,7 @@ definitions:
           - 23
           - 24
           - 25
+          - 26
         format: int32
         type: integer
       ErrorMessage:
@@ -3584,6 +3729,7 @@ definitions:
           - 23
           - 24
           - 25
+          - 26
         format: int32
         type: integer
       ErrorMessage:
@@ -3625,6 +3771,7 @@ definitions:
           - 23
           - 24
           - 25
+          - 26
         format: int32
         type: integer
       ErrorMessage:
@@ -3666,6 +3813,7 @@ definitions:
           - 23
           - 24
           - 25
+          - 26
         format: int32
         type: integer
       ErrorMessage:
@@ -3707,6 +3855,7 @@ definitions:
           - 23
           - 24
           - 25
+          - 26
         format: int32
         type: integer
       ErrorMessage:
@@ -3748,6 +3897,7 @@ definitions:
           - 23
           - 24
           - 25
+          - 26
         format: int32
         type: integer
       ErrorMessage:
@@ -3787,6 +3937,7 @@ definitions:
           - 23
           - 24
           - 25
+          - 26
         format: int32
         type: integer
       ErrorMessage:
@@ -3824,6 +3975,7 @@ definitions:
           - 23
           - 24
           - 25
+          - 26
         format: int32
         type: integer
       ErrorMessage:
@@ -3861,6 +4013,7 @@ definitions:
           - 23
           - 24
           - 25
+          - 26
         format: int32
         type: integer
       ErrorMessage:
@@ -3898,6 +4051,7 @@ definitions:
           - 23
           - 24
           - 25
+          - 26
         format: int32
         type: integer
       ErrorMessage:
@@ -3935,6 +4089,7 @@ definitions:
           - 23
           - 24
           - 25
+          - 26
         format: int32
         type: integer
       ErrorMessage:
@@ -3972,6 +4127,7 @@ definitions:
           - 23
           - 24
           - 25
+          - 26
         format: int32
         type: integer
       ErrorMessage:
@@ -4009,6 +4165,7 @@ definitions:
           - 23
           - 24
           - 25
+          - 26
         format: int32
         type: integer
       ErrorMessage:
@@ -4046,6 +4203,7 @@ definitions:
           - 23
           - 24
           - 25
+          - 26
         format: int32
         type: integer
       ErrorMessage:
@@ -4083,6 +4241,7 @@ definitions:
           - 23
           - 24
           - 25
+          - 26
         format: int32
         type: integer
       ErrorMessage:
@@ -4120,6 +4279,7 @@ definitions:
           - 23
           - 24
           - 25
+          - 26
         format: int32
         type: integer
       ErrorMessage:
@@ -4157,6 +4317,7 @@ definitions:
           - 23
           - 24
           - 25
+          - 26
         format: int32
         type: integer
       ErrorMessage:
@@ -4194,6 +4355,7 @@ definitions:
           - 23
           - 24
           - 25
+          - 26
         format: int32
         type: integer
       ErrorMessage:
@@ -4233,6 +4395,7 @@ definitions:
           - 23
           - 24
           - 25
+          - 26
         format: int32
         type: integer
       ErrorMessage:
@@ -4272,6 +4435,7 @@ definitions:
           - 23
           - 24
           - 25
+          - 26
         format: int32
         type: integer
       ErrorMessage:
@@ -4311,6 +4475,7 @@ definitions:
           - 23
           - 24
           - 25
+          - 26
         format: int32
         type: integer
       ErrorMessage:

@@ -30,6 +30,8 @@ tags:
   - name: search
   - name: parse
   - name: lookup
+  - name: rationale
+  - name: red_flags
   - name: triage
   - name: suggest
 paths:
@@ -37,7 +39,12 @@ paths:
     get:
       description: Returns a list of all available conditions.
       operationId: getAllConditions
-      parameters: []
+      parameters:
+        - description: enable 5-level triage values
+          in: query
+          name: enable_triage_5
+          required: false
+          type: boolean
       responses:
         '200':
           description: successful operation
@@ -58,6 +65,11 @@ paths:
           name: id
           required: true
           type: string
+        - description: enable 5-level triage values
+          in: query
+          name: enable_triage_5
+          required: false
+          type: boolean
       responses:
         '200':
           description: successful operation
@@ -212,11 +224,65 @@ paths:
       summary: Find mentions of observations in given text
       tags:
         - parse
+  /rationale:
+    post:
+      consumes:
+        - application/json
+      description: Returns rationale behind the question asked by the system.
+      operationId: getRationale
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/RationaleRequest'
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/RationaleResponse'
+      summary: Query diagnostic engine for question rationale
+      tags:
+        - rationale
+  /red_flags:
+    post:
+      consumes:
+        - application/json
+      description: Suggests possible red flag symptoms based on provided patient information.
+      operationId: getRedFlags
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DiagnosisRequest'
+        - default: 8
+          description: maximum number of results
+          format: int32
+          in: query
+          name: max_results
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            items:
+              $ref: '#/definitions/SuggestResult'
+            type: array
+      summary: Query the diagnostic engine for possible red flag symptoms
+      tags:
+        - red_flags
   /risk_factors:
     get:
       description: Returns a list of all available risk factors.
       operationId: getAllRiskFactors
-      parameters: []
+      parameters:
+        - description: enable 5-level triage values
+          in: query
+          name: enable_triage_5
+          required: false
+          type: boolean
       responses:
         '200':
           description: successful operation
@@ -237,6 +303,11 @@ paths:
           name: id
           required: true
           type: string
+        - description: enable 5-level triage values
+          in: query
+          name: enable_triage_5
+          required: false
+          type: boolean
       responses:
         '200':
           description: successful operation
@@ -331,7 +402,12 @@ paths:
     get:
       description: Returns a list of all available symptoms.
       operationId: getAllSymptoms
-      parameters: []
+      parameters:
+        - description: enable 5-level triage values
+          in: query
+          name: enable_triage_5
+          required: false
+          type: boolean
       responses:
         '200':
           description: successful operation
@@ -352,6 +428,11 @@ paths:
           name: id
           required: true
           type: string
+        - description: enable 5-level triage values
+          in: query
+          name: enable_triage_5
+          required: false
+          type: boolean
       responses:
         '200':
           description: successful operation
@@ -463,7 +544,9 @@ definitions:
         type: string
       triage_level:
         enum:
+          - emergency_ambulance
           - emergency
+          - consultation_24
           - consultation
           - self_care
         type: string
@@ -518,7 +601,9 @@ definitions:
         type: string
       triage_level:
         enum:
+          - emergency_ambulance
           - emergency
+          - consultation_24
           - consultation
           - self_care
         type: string
@@ -531,8 +616,7 @@ definitions:
   DiagnosisRequest:
     properties:
       age:
-        format: int32
-        type: integer
+        type: object
       evaluated_at:
         description: time when diagnosis was evaluated in ISO 8601 format
         type: string
@@ -610,8 +694,7 @@ definitions:
   ExplanationRequest:
     properties:
       age:
-        format: int32
-        type: integer
+        type: object
       evaluated_at:
         description: time when diagnosis was evaluated in ISO 8601 format
         type: string
@@ -877,6 +960,71 @@ definitions:
       - id
       - name
     type: object
+  RationaleParam:
+    properties:
+      common_name:
+        description: observation or condition common name
+        type: string
+      id:
+        description: observation or condition id
+        type: string
+      name:
+        description: observation or condition name
+        type: string
+    required:
+      - id
+      - name
+    type: object
+  RationaleRequest:
+    properties:
+      age:
+        type: object
+      evaluated_at:
+        description: time when diagnosis was evaluated in ISO 8601 format
+        type: string
+      evidence:
+        items:
+          $ref: '#/definitions/Evidence'
+        type: array
+      extras:
+        additionalProperties:
+          type: object
+        type: object
+      sex:
+        enum:
+          - male
+          - female
+        type: string
+    required:
+      - age
+      - sex
+    type: object
+  RationaleResponse:
+    properties:
+      condition_params:
+        description: condition params
+        items:
+          $ref: '#/definitions/RationaleParam'
+        type: array
+      observation_params:
+        description: observation params
+        items:
+          $ref: '#/definitions/RationaleParam'
+        type: array
+      type:
+        description: type
+        enum:
+          - r0
+          - r1
+          - r2
+          - r3
+          - r4
+          - r5
+          - r6
+        type: string
+    required:
+      - type
+    type: object
   RiskFactor_Details:
     properties:
       category:
@@ -972,8 +1120,7 @@ definitions:
   SuggestRequest:
     properties:
       age:
-        format: int32
-        type: integer
+        type: object
       evaluated_at:
         description: time when diagnosis was evaluated in ISO 8601 format
         type: string
@@ -1105,13 +1252,32 @@ definitions:
     type: object
   TriageResponse:
     properties:
+      root_cause:
+        enum:
+          - r1
+          - r2
+          - r3
+          - r4
+          - r5
+          - r6
+          - r7
+          - r8
+          - r9
+          - r10
+          - r11
+          - r12
+        type: string
       serious:
         items:
           $ref: '#/definitions/SeriousObservation'
         type: array
+      teleconsultation_applicable:
+        type: boolean
       triage_level:
         enum:
+          - emergency_ambulance
           - emergency
+          - consultation_24
           - consultation
           - self_care
         type: string

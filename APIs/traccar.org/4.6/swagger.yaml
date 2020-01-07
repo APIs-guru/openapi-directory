@@ -1200,7 +1200,8 @@ definitions:
       longitude:
         type: number
       network:
-        type: string
+        additionalProperties: true
+        type: object
       outdated:
         type: boolean
       protocol:

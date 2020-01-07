@@ -434,6 +434,9 @@ definitions:
         items:
           type: string
         type: array
+      serviceId:
+        description: 'Some unique identifier for the user''s organization''s primary service, or null if the org has no services'
+        type: string
       smallLogo:
         description: Station logo image url
         type: string

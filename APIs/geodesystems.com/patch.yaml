@@ -1,9 +1,10 @@
 info:
   description: 'Search for data in lots of places - manage your documents, photos and critical business knowledge - communicate and coordinate with blogs, interactive wikis, and data integration dashboards.'
-  title: RAMADDA
   x-logo:
     url: 'https://geodesystems.com/repository/images/geodesystems.png'
-securityDefinitions:
-  basic:
-    description: Basic HTTP Authentication
-    type: basic
+components:
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic
+      description: Basic HTTP Authentication

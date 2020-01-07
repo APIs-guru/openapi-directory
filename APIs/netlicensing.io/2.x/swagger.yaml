@@ -4,7 +4,7 @@ schemes:
 host: go.netlicensing.io
 basePath: /core/v2/rest
 info:
-  description: 'The Labs64 <a href=''https://www.labs64.de/confluence/x/pwCo'' target=''_blank''>NetLicensing RESTful API</a> gives you access to NetLicensing’s core features.<br/><br/><strong>Authentication</strong><br/>You authenticate to the NetLicensing API by providing your account credentials or simply use our demo account - <code>demo:demo</code><br/><br/>Find out more about Labs64 NetLicensing at <a href=''https://netlicensing.io'' target=''_blank''>netlicensing.io</a>'
+  description: 'The Labs64 <a href=''https://netlicensing.io/wiki/restful-api'' target=''_blank''>NetLicensing RESTful API</a> gives you access to NetLicensing’s core features.<br/><br/><strong>Authentication</strong><br/>You authenticate to the NetLicensing API by providing your account credentials or simply use our demo account - <code>demo:demo</code><br/><br/>Find out more about Labs64 NetLicensing at <a href=''https://netlicensing.io'' target=''_blank''>netlicensing.io</a>'
   termsOfService: 'https://www.labs64.com/legal/terms-of-service/netlicensing'
   title: Labs64 NetLicensing RESTful API Test Center
   version: 2.x
@@ -32,47 +32,47 @@ tags:
   - description: Product operations
     externalDocs:
       description: Product Services
-      url: 'https://www.labs64.de/confluence/x/qACo'
+      url: 'https://netlicensing.io/wiki/product-services'
     name: Product
   - description: Product Module operations
     externalDocs:
       description: Product Module Services
-      url: 'https://www.labs64.de/confluence/x/qwCo'
+      url: 'https://netlicensing.io/wiki/product-module-services'
     name: Product Module
   - description: License Template operations
     externalDocs:
       description: License Template Services
-      url: 'https://www.labs64.de/confluence/x/rQCo'
+      url: 'https://netlicensing.io/wiki/license-template-services'
     name: License Template
   - description: Licensee operations
     externalDocs:
       description: Licensee Services
-      url: 'https://www.labs64.de/confluence/x/qQCo'
+      url: 'https://netlicensing.io/wiki/licensee-services'
     name: Licensee
   - description: License operations
     externalDocs:
       description: License Services
-      url: 'https://www.labs64.de/confluence/x/rACo'
+      url: 'https://netlicensing.io/wiki/license-services'
     name: License
   - description: Transaction operations
     externalDocs:
       description: Transaction Services
-      url: 'https://www.labs64.de/confluence/x/qgCo'
+      url: 'https://netlicensing.io/wiki/transaction-services'
     name: Transaction
   - description: Token operations
     externalDocs:
       description: Token Services
-      url: 'https://www.labs64.de/confluence/x/rwCo'
+      url: 'https://netlicensing.io/wiki/token-services'
     name: Token
   - description: Payment Method operations
     externalDocs:
       description: Payment Method Services
-      url: 'https://www.labs64.de/confluence/x/sACo'
+      url: 'https://netlicensing.io/wiki/payment-method-services'
     name: Payment Method
   - description: Utility operations
     externalDocs:
       description: Utility Services
-      url: 'https://www.labs64.de/confluence/x/rgCo'
+      url: 'https://netlicensing.io/wiki/utility-services'
     name: Utility
 paths:
   /license:
@@ -400,7 +400,7 @@ paths:
           name: active
           required: true
           type: boolean
-        - description: Licensee Secret for Licensee.
+        - description: (Deprecated. Use 'Node-Locked' licensing model instead) Licensee Secret for Licensee.
           in: formData
           name: licenseeSecret
           required: false
@@ -515,7 +515,7 @@ paths:
           name: name
           required: false
           type: string
-        - description: Licensee Secret for Licensee.
+        - description: (Deprecated. Use 'Node-Locked' licensing model instead) Licensee Secret for Licensee.
           in: formData
           name: licenseeSecret
           required: false
@@ -602,7 +602,17 @@ paths:
           name: licenseeName
           required: false
           type: string
-        - description: Licensee Secret key for Licensee
+        - description: '''Node-Locked'' licensing model: product module number'
+          in: formData
+          name: productModuleNumber
+          required: false
+          type: string
+        - description: '''Node-Locked'' licensing model: specifies unique secret'
+          in: formData
+          name: nodeSecret
+          required: false
+          type: string
+        - description: (Deprecated. Use 'Node-Locked' licensing model instead) Licensee Secret key for Licensee
           in: formData
           name: licenseeSecret
           required: false

@@ -356,7 +356,7 @@ paths:
   /api/Estimate:
     get:
       consumes: []
-      description: 'EstimateStatusCode values are: "Draft", "Sent", "Late", "Paid", "Partial", "Void"'
+      description: 'EstimateStatusCode values are: "Draft", "Sent", "Accepted", "Converted", "Expired", "Rejected"'
       operationId: Estimate_Get
       parameters:
         - format: date-time
@@ -396,6 +396,32 @@ paths:
         - oauth2:
             - read_financials
       summary: Gets list of Estimates
+      tags:
+        - Estimate
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: Estimate_Post
+      parameters:
+        - description: ''
+          in: body
+          name: model
+          required: true
+          schema:
+            $ref: '#/definitions/NewEstimate'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/EstimateDetails'
+      security:
+        - oauth2:
+            - write_financials
+      summary: Create a new draft Estimate
       tags:
         - Estimate
   '/api/Estimate/{id}':
@@ -466,6 +492,11 @@ paths:
           name: isInvoiced
           required: false
           type: boolean
+        - format: int64
+          in: query
+          name: ExpenseReimbursementIDFK
+          required: false
+          type: integer
         - description: Number of items per page (max 1000)
           format: int32
           in: query
@@ -547,6 +578,72 @@ paths:
       summary: Gets an Expense Entry by Expense ID
       tags:
         - Expense
+  /api/FixedAmount:
+    get:
+      consumes: []
+      operationId: FixedAmount_Get
+      parameters:
+        - format: date-time
+          in: query
+          name: UpdatedAfter
+          required: false
+          type: string
+        - format: date-time
+          in: query
+          name: EntryDateFrom
+          required: false
+          type: string
+        - format: date-time
+          in: query
+          name: EntryDateTo
+          required: false
+          type: string
+        - description: (Optional) The ProjectID of a Project to filter Fixed Amounts for
+          format: int32
+          in: query
+          name: ProjectID
+          required: false
+          type: integer
+        - description: (Optional) The TaskID of a Task to filter Fixed Amounts for
+          format: int32
+          in: query
+          name: TaskID
+          required: false
+          type: integer
+        - in: query
+          name: isInvoiced
+          required: false
+          type: boolean
+        - description: Number of items per page (max 1000)
+          format: int32
+          in: query
+          name: pageSize
+          required: false
+          type: integer
+        - description: Page to display. Starts from 1.
+          format: int32
+          in: query
+          name: pageNumber
+          required: false
+          type: integer
+        - description: 'Optional sorting instruction. Currently possible values: "DateUpdated", "DateCreated", "DateUpdated desc", "DateCreated desc","EntryDate", "EntryDate desc", "StartTimeLocal","StartTimeLocal desc", "TimeSheetEntryID", "TimeSheetEntryID desc"'
+          in: query
+          name: Sort
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/FixedAmountList'
+        '401':
+          description: Unauthorized
+      security:
+        - oauth2:
+            - read_financials
+      summary: Gets list of Fixed Amounts
+      tags:
+        - FixedAmount
   /api/Inventory:
     get:
       consumes: []
@@ -862,6 +959,45 @@ paths:
       summary: Create a Project
       tags:
         - Project
+  /api/Project/Lookup:
+    get:
+      consumes: []
+      operationId: ProjectLookup
+      parameters:
+        - description: Number of items per page (max 1000)
+          format: int32
+          in: query
+          name: pageSize
+          required: false
+          type: integer
+        - description: Page to display. Starts from 1.
+          format: int32
+          in: query
+          name: pageNumber
+          required: false
+          type: integer
+        - description: Filter to the projects that the supplied UserID can add timesheets to
+          format: int32
+          in: query
+          name: TimesheetUserID
+          required: false
+          type: integer
+        - description: Search string to match against Project title and Customer name
+          in: query
+          name: search
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ProjectDropdownList'
+      security:
+        - oauth2:
+            - read_projects
+      summary: Gets minimal list of active Projects for the current user
+      tags:
+        - Project
   '/api/Project/{id}':
     get:
       consumes: []
@@ -888,9 +1024,38 @@ paths:
       summary: Gets Project by Project ID
       tags:
         - Project
+  /api/ProjectMember:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      description: 'the Amount columns for Cost, Budget, Rates should be specified as a decimal. Financial amounts assume the currency of the Customer company. Budget units depend on the Budget method set on the Project.'
+      operationId: ProjectMember_Post
+      parameters:
+        - description: ''
+          in: body
+          name: model
+          required: true
+          schema:
+            $ref: '#/definitions/NewProjectMember'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ProjectMemberDetails'
+      security:
+        - oauth2:
+            - write_projects
+      summary: Assign a user as a Member of a Project
+      tags:
+        - ProjectMember
   /api/ProjectTimesheetCategory:
     get:
       consumes: []
+      description: 'The default sort order is by isBillable desc, Name asc'
       operationId: ProjectTimesheetCategory_Get
       parameters:
         - description: Get categories filtered by ProjectID
@@ -1140,6 +1305,27 @@ paths:
       tags:
         - Section
   /api/Task:
+    delete:
+      consumes: []
+      operationId: Task_Delete
+      parameters:
+        - description: ''
+          format: int64
+          in: query
+          name: TaskID
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+      security:
+        - oauth2:
+            - write_projects
+      summary: Delete a Task
+      tags:
+        - Task
     get:
       consumes: []
       operationId: Task_Get
@@ -1242,6 +1428,51 @@ paths:
         - oauth2:
             - write_projects
       summary: Update a Task.
+      tags:
+        - Task
+  /api/Task/Lookup:
+    get:
+      consumes: []
+      description: Groups Tasks by Section. Default sort is by Section Title followed by Task Title
+      operationId: TaskLookup
+      parameters:
+        - description: Number of items per page (max 1000)
+          format: int32
+          in: query
+          name: pageSize
+          required: false
+          type: integer
+        - description: Page to display. Starts from 1.
+          format: int32
+          in: query
+          name: pageNumber
+          required: false
+          type: integer
+        - description: (optional) The ProjectID to use when filtering Tasks
+          format: int32
+          in: query
+          name: projectID
+          required: false
+          type: integer
+        - description: (optional) true/false to hide completed tasks. Defaults false
+          in: query
+          name: hideCompleted
+          required: false
+          type: boolean
+        - description: (optional) Search string to match against Task title. Performs begins-with match
+          in: query
+          name: search
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TaskDropdownList'
+      security:
+        - oauth2:
+            - read_projects
+      summary: Gets minimal list of Tasks for the current user
       tags:
         - Task
   '/api/Task/{id}':
@@ -1536,6 +1767,67 @@ paths:
       summary: Submit Timesheets for Approval.
       tags:
         - TimesheetSubmission
+  /api/TimesheetSummary:
+    get:
+      consumes: []
+      operationId: TimesheetSummary_Get
+      parameters:
+        - collectionFormat: multi
+          description: '(Optional) Combine one, two or three levels of Grouping. Combine these possible grouping values: "Customer", "Project", "Category", "User", "Task", "Year", "Month", "Day", "Week".'
+          in: query
+          items:
+            type: string
+          name: model.groupBy
+          required: false
+          type: array
+        - description: '(Required) Filter for timesheets greater or equal to the specified date. e.g. 2019-01-25. You can optionally include a time component, otherwise it assumes 00:00'
+          format: date-time
+          in: query
+          name: model.entryDateFrom
+          required: false
+          type: string
+        - description: '(Required) Filter for timesheets with an entry date smaller or equal to the specified  date. e.g. 2019-01-25. You can optionally include a time component, otherwise it assumes 00:00'
+          format: date-time
+          in: query
+          name: model.entryDateTo
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: '(Optional) Defaults to the current user. Provide one or more UserIDs of Users whose timesheets should be retrieved. If the current user doesn''t have impersonation rights, then they will only see their own data.'
+          in: query
+          items:
+            format: int32
+            type: integer
+          name: model.userID
+          required: false
+          type: array
+        - description: (Optional) Filter by Project
+          format: int32
+          in: query
+          name: model.projectID
+          required: false
+          type: integer
+        - description: (Optional) Filter by the billable status of Timesheets.
+          in: query
+          name: model.isBillable
+          required: false
+          type: boolean
+        - description: (Optional) Filter for timesheets by whether they have been Invoiced or not.
+          in: query
+          name: model.isInvoiced
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TimesheetSummaryResult'
+      security:
+        - oauth2:
+            - read_timesheets
+      summary: Gets Basic Summary of Timesheet Statistics
+      tags:
+        - TimesheetSummary
   /api/TimesheetTimer:
     get:
       consumes: []
@@ -2231,6 +2523,9 @@ definitions:
       ExpenseID:
         format: int64
         type: integer
+      ExpenseReimbursementIDFK:
+        format: int64
+        type: integer
       ExpenseReimbursementStatusCode:
         type: string
       ExpenseReportIDFK:
@@ -2277,6 +2572,59 @@ definitions:
       Expenses:
         items:
           $ref: '#/definitions/ExpenseDetails'
+        type: array
+      PageNumber:
+        format: int32
+        type: integer
+      PageSize:
+        format: int32
+        type: integer
+      TotalCount:
+        format: int32
+        type: integer
+    type: object
+  FixedAmountDetails:
+    properties:
+      Amount:
+        format: double
+        type: number
+      DateCreated:
+        format: date-time
+        type: string
+      DateUpdated:
+        format: date-time
+        type: string
+      FixedAmountID:
+        format: int32
+        type: integer
+      InventoryItemIDFK:
+        format: int64
+        type: integer
+      InventoryItemName:
+        type: string
+      Notes:
+        type: string
+      ProjectIDFK:
+        format: int32
+        type: integer
+      ProjectTitle:
+        type: string
+      TaskIDFK:
+        format: int32
+        type: integer
+      TaskTitle:
+        type: string
+      UpdatedByUserIDFK:
+        format: int32
+        type: integer
+      isInvoiced:
+        type: boolean
+    type: object
+  FixedAmountList:
+    properties:
+      FixedAmounts:
+        items:
+          $ref: '#/definitions/FixedAmountDetails'
         type: array
       PageNumber:
         format: int32
@@ -2555,6 +2903,107 @@ definitions:
       - Firstname
       - Lastname
     type: object
+  NewEstimate:
+    description: New Estimate to be created
+    properties:
+      CompanyIDFK:
+        description: If left blank then you must specify Company Name.
+        format: int32
+        type: integer
+      CompanyName:
+        description: 'If left blank then you must specify Company ID. Specified Name will be used to match existing customer record. If not matched then it will be used to create a new customer. First Name, Last Name and Email will only be used if it is a new company. If the Company name appears multiple times we will check the email address to find a matching company. If email address doesn''t identify a matching company then the Estimate creation will be rejected.'
+        type: string
+      CurrencyCode:
+        description: Expects ISO Standard 3 character currency code. If left blank the currency will default to account's currency in general setting. For existing companies this field will be ignored and the Estimate will use the currency of the customer. For new customers if the currency is not specified then account currency will be used otherwise the specified currency will be used.
+        type: string
+      CustomerPONumber:
+        description: Plain UTF8 text. 100 characters max
+        type: string
+      DateIssued:
+        description: If not specified it will use today's date. The date should be specified as local date.
+        format: date-time
+        type: string
+      DueDate:
+        description: It will be auto calculated based on the payment term and issue date. Due Date must be greater than or equal to Issue Date. If the Due Date is specified then Payment Terms will be set to -1 (Custom)
+        format: date-time
+        type: string
+      Email:
+        description: Specified value will be used to create a new customer contact only if a new customer is being created.
+        type: string
+      EstimateNumber:
+        description: Pass any string. If left blank it will use the next number in the auto incrementing sequence. If an integer is passed then the largest integer will be use as the seed to auto generate the next Estimate number in the sequence.
+        type: string
+      EstimatePrefix:
+        description: A prefix for the Estimate number. e.g. 'INV'. If left blank it will be set to the account default. Max length 20 characters.
+        type: string
+      EstimateTaxConfigCode:
+        description: 'Possible values are (EX --- Tax Exclusive, INC --- Tax Inclusive). If left empty it will use the account default.'
+        type: string
+      ExchangeRate:
+        description: Exchange rate is only valid for Estimates in currency other than default account currency. If not specified it will get the market rate based on the Date Issued.
+        format: double
+        type: number
+      Firstname:
+        description: Specified value will be used to create a new customer contact only if a new customer is being created.
+        type: string
+      InvoiceTemplateIDFK:
+        description: If left blank the account default Estimate template will be used.
+        format: int32
+        type: integer
+      Lastname:
+        description: Specified value will be used to create a new customer contact only if a new customer is being created.
+        type: string
+      LineItems:
+        items:
+          $ref: '#/definitions/NewEstimateLineItem'
+        type: array
+      Notes:
+        description: Plain UTF8 text. (no HTML). Max 2000 characters
+        type: string
+      Subject:
+        description: Plain UTF8 text. (no HTML). 255 characters max
+        type: string
+    type: object
+  NewEstimateLineItem:
+    description: Line item to be added to new Estimate
+    properties:
+      Description:
+        description: Plain UTF8 text. (no HTML)
+        type: string
+      Discount:
+        description: Enter 10.5 to give a 10.5% discount
+        format: double
+        type: number
+      InventoryItemIDFK:
+        description: If not specified then Inventory Item Name must be specified.
+        format: int32
+        type: integer
+      InventoryItemName:
+        description: If not specified then Inventory item ID must be specified. If specified and not matched to any existing inventory items then a new inventory item will be created. Max 200 characters.
+        type: string
+      Quantity:
+        description: The quantity for the line item
+        format: double
+        type: number
+      TaxIDFK:
+        description: If specified then it must match an existing Tax ID. If not specified then Tax Name and Tax Percent must be specified.
+        format: int32
+        type: integer
+      TaxName:
+        description: Must be specified if the Tax ID is blank. If the Tax Name is specified it will be matched to an existing Tax Name or else a new Tax will be created.
+        type: string
+      TaxPercent:
+        description: The Tax Percent will only be used if a new tax is being created.
+        format: double
+        type: number
+      UnitPrice:
+        description: The unit price for the lineitem.
+        format: double
+        type: number
+    required:
+      - Quantity
+      - UnitPrice
+    type: object
   NewExpense:
     properties:
       Amount:
@@ -2654,6 +3103,7 @@ definitions:
         format: date-time
         type: string
       Email:
+        description: Specified value will be used to create a new customer contact only if a new customer is being created.
         type: string
       ExchangeRate:
         description: Exchange rate is only valid for invoices in currency other than default account currency. If not specified it will get the market rate based on the Date Issued.
@@ -2719,6 +3169,7 @@ definitions:
         format: double
         type: number
       TaxIDFK:
+        description: If specified then it must match an existing Tax ID. If not specified then Tax Name and Tax Percent must be specified.
         format: int32
         type: integer
       TaxName:
@@ -2787,6 +3238,45 @@ definitions:
         description: The Avaza Invoice TransactionID that is having a payment amount allocated to it.
         format: int64
         type: integer
+    type: object
+  NewProjectMember:
+    properties:
+      BudgetAmount:
+        description: Optional
+        format: double
+        type: number
+      CostAmount:
+        description: 'Optional. If not provided, defaults to the User''s default Cost Amount.'
+        format: double
+        type: number
+      ProjectIDFK:
+        description: Required. The ProjectID
+        format: int32
+        type: integer
+      RateAmount:
+        description: 'Optional. If not provided, defaults to the User''s default Rate Amount.'
+        format: double
+        type: number
+      UserIDFK:
+        description: Required. The UserID to assign
+        format: int32
+        type: integer
+      canCommentOnTasks:
+        type: boolean
+      canCreateTasks:
+        type: boolean
+      canDeleteTasks:
+        type: boolean
+      canUpdateTasks:
+        type: boolean
+      isProjectManager:
+        type: boolean
+      isTimesheetAllowed:
+        type: boolean
+      isTimesheetApprovalRequired:
+        type: boolean
+      isTimesheetApprover:
+        type: boolean
     type: object
   NewProjectModel:
     properties:
@@ -3018,6 +3508,15 @@ definitions:
         format: int32
         type: integer
     type: object
+  ProjectCompanyGroup:
+    properties:
+      CompanyName:
+        type: string
+      projects:
+        items:
+          $ref: '#/definitions/ProjectDropdownSelection'
+        type: array
+    type: object
   ProjectDetails:
     properties:
       BudgetAmount:
@@ -3091,6 +3590,32 @@ definitions:
         type: boolean
       isTaskRequiredOnTimesheet:
         type: boolean
+    type: object
+  ProjectDropdownList:
+    properties:
+      PageSize:
+        description: Current page size
+        format: int32
+        type: integer
+      companies:
+        description: List of Projects grouped by Customer Name
+        items:
+          $ref: '#/definitions/ProjectCompanyGroup'
+        type: array
+      hasMore:
+        description: More records probably exist
+        type: boolean
+      pageNumber:
+        description: Current page number (1 based)
+        format: int32
+        type: integer
+    type: object
+  ProjectDropdownSelection:
+    properties:
+      ProjectID:
+        type: string
+      Title:
+        type: string
     type: object
   ProjectList:
     properties:
@@ -3514,6 +4039,32 @@ definitions:
       isCompleteStatus:
         type: boolean
     type: object
+  TaskDropdownList:
+    properties:
+      PageSize:
+        description: Current page size
+        format: int32
+        type: integer
+      hasMore:
+        description: More records probably exist
+        type: boolean
+      pageNumber:
+        description: Current page number (1 based)
+        format: int32
+        type: integer
+      sections:
+        description: List of Task grouped by Section
+        items:
+          $ref: '#/definitions/TaskSectionGroup'
+        type: array
+    type: object
+  TaskDropdownSelection:
+    properties:
+      TaskID:
+        type: string
+      Title:
+        type: string
+    type: object
   TaskList:
     properties:
       PageNumber:
@@ -3529,6 +4080,15 @@ definitions:
       TotalCount:
         format: int32
         type: integer
+    type: object
+  TaskSectionGroup:
+    properties:
+      SectionTitle:
+        type: string
+      tasks:
+        items:
+          $ref: '#/definitions/TaskDropdownSelection'
+        type: array
     type: object
   TaskStatusDetails:
     properties:
@@ -3706,6 +4266,83 @@ definitions:
         format: int32
         type: integer
     type: object
+  TimesheetSummaryGroup:
+    properties:
+      BillableHours:
+        format: double
+        type: number
+      GroupData:
+        items:
+          $ref: '#/definitions/TimesheetSummaryGroup'
+        type: array
+      GroupID:
+        type: string
+      GroupName:
+        type: string
+      TotalHours:
+        format: double
+        type: number
+    type: object
+  TimesheetSummaryRequest:
+    properties:
+      EntryDateFrom:
+        description: '(Required) Filter for timesheets greater or equal to the specified date. e.g. 2019-01-25. You can optionally include a time component, otherwise it assumes 00:00'
+        format: date-time
+        type: string
+      EntryDateTo:
+        description: '(Required) Filter for timesheets with an entry date smaller or equal to the specified  date. e.g. 2019-01-25. You can optionally include a time component, otherwise it assumes 00:00'
+        format: date-time
+        type: string
+      GroupBy:
+        description: '(Optional) Combine one, two or three levels of Grouping. Combine these possible grouping values: "Customer", "Project", "Category", "User", "Task", "Year", "Month", "Day", "Week".'
+        items:
+          type: string
+        type: array
+      ProjectID:
+        description: (Optional) Filter by Project
+        format: int32
+        type: integer
+      UserID:
+        description: '(Optional) Defaults to the current user. Provide one or more UserIDs of Users whose timesheets should be retrieved. If the current user doesn''t have impersonation rights, then they will only see their own data.'
+        items:
+          format: int32
+          type: integer
+        type: array
+      isBillable:
+        description: (Optional) Filter by the billable status of Timesheets.
+        type: boolean
+      isInvoiced:
+        description: (Optional) Filter for timesheets by whether they have been Invoiced or not.
+        type: boolean
+    type: object
+  TimesheetSummaryResult:
+    properties:
+      BillableHours:
+        format: double
+        type: number
+      EntryDateFrom:
+        format: date-time
+        type: string
+      EntryDateTo:
+        format: date-time
+        type: string
+      GroupData:
+        items:
+          $ref: '#/definitions/TimesheetSummaryGroup'
+        type: array
+      GroupingLevels:
+        items:
+          type: string
+        type: array
+      TotalHours:
+        format: double
+        type: number
+      UserID:
+        items:
+          format: int32
+          type: integer
+        type: array
+    type: object
   UpdateCompany:
     properties:
       BillingAddress:
@@ -3846,6 +4483,9 @@ definitions:
       FridayAvailableHours:
         format: double
         type: number
+      IANATimezone:
+        description: IANA tz database timezone name
+        type: string
       Lastname:
         type: string
       Mobile:
@@ -3875,6 +4515,7 @@ definitions:
         format: double
         type: number
       TimeZone:
+        description: Windows Timezone ID
         type: string
       TuesdayAvailableHours:
         format: double

@@ -2371,6 +2371,44 @@ paths:
       summary: Update a Promotion.
       tags:
         - Promotions
+  /shipping_methods.json:
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+      responses:
+        '200':
+          description: An array of Shipping Methods
+          schema:
+            items:
+              $ref: '#/definitions/ShippingMethod'
+            type: array
+      summary: Retrieve all Store's Shipping Methods.
+      tags:
+        - Shipping Methods
+  '/shipping_methods/{id}.json':
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Id of the Shipping Method
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ShippingMethod'
+        '404':
+          description: ShippingMethod Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Retrieve a single Shipping Method.
+      tags:
+        - Shipping Methods
   /store/info.json:
     get:
       parameters:
@@ -3299,6 +3337,10 @@ definitions:
         description: Price of the product
         format: float
         type: number
+      shipping_required:
+        default: true
+        description: False if the product is digital
+        type: boolean
       sku:
         description: Stock Keeping Unit of the product
         type: string
@@ -3702,6 +3744,32 @@ definitions:
       surname:
         description: Surname of the Customer's Shipping Address
         type: string
+  ShippingMethod:
+    properties:
+      shipping_method:
+        $ref: '#/definitions/ShippingMethodFields'
+    type: object
+  ShippingMethodFields:
+    properties:
+      id:
+        description: Unique identifier of the Shipping Method
+        format: int32
+        type: integer
+      name:
+        description: Name of the Shipping Method
+        type: string
+      type:
+        description: Type of the Shipping Method
+        enum:
+          - free
+          - tables
+          - correiosbr
+          - correos_chile
+          - chilexpress
+          - flat
+          - ups
+        type: string
+    type: object
   StatusInvalid:
     properties:
       message:

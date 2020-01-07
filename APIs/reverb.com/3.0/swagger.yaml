@@ -396,6 +396,38 @@ paths:
           description: Unexpected error
       tags:
         - csps
+  /csps/find:
+    get:
+      description: Show comparison shopping page
+      parameters:
+        - description: ID of the comparison shopping page
+          in: query
+          name: id
+          required: false
+          type: string
+        - description: Slug of the comparison shopping page
+          in: query
+          name: slug
+          required: false
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Show comparison shopping page
+      tags:
+        - csps
+  '/csps/{id}':
+    get:
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      tags:
+        - csps
   '/curated_sets/{slug}':
     get:
       parameters:

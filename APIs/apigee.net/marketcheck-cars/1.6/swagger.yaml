@@ -363,6 +363,12 @@ paths:
           name: include_sold
           required: false
           type: boolean
+        - default: US
+          description: Country for which to fetch MDS
+          in: query
+          name: country
+          required: false
+          type: string
       responses:
         '200':
           description: Provides Market Days supply for year make model or trim combination
@@ -402,6 +408,17 @@ paths:
           in: query
           name: car_type
           required: true
+          type: string
+        - default: us
+          description: Country for which the sales records are to be searched
+          enum:
+            - us
+            - ca
+            - US
+            - CA
+          in: query
+          name: country
+          required: false
           type: string
       responses:
         '200':
@@ -479,6 +496,17 @@ paths:
           format: string
           in: query
           name: vin
+          required: false
+          type: string
+        - default: us
+          description: Country for which the sales records are to be searched
+          enum:
+            - us
+            - ca
+            - US
+            - CA
+          in: query
+          name: country
           required: false
           type: string
       responses:
@@ -2701,7 +2729,7 @@ paths:
   '/vin/{vin}/specs':
     get:
       description: Get the basic information on specifications for a car identified by a valid VIN
-      operationId: decode
+      operationId: decodeEPI
       parameters:
         - $ref: '#/parameters/api_key'
         - description: VIN to decode

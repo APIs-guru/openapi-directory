@@ -288,6 +288,16 @@ responses:
       items:
         $ref: '#/definitions/PullRequest'
       type: array
+  Reaction:
+    description: Reaction
+    schema:
+      $ref: '#/definitions/Reaction'
+  ReactionList:
+    description: ReactionList
+    schema:
+      items:
+        $ref: '#/definitions/Reaction'
+      type: array
   Reference:
     description: Reference
     schema:
@@ -335,6 +345,16 @@ responses:
     schema:
       items:
         $ref: '#/definitions/Status'
+      type: array
+  StopWatch:
+    description: StopWatch
+    schema:
+      $ref: '#/definitions/StopWatch'
+  StopWatchList:
+    description: StopWatchList
+    schema:
+      items:
+        $ref: '#/definitions/StopWatch'
       type: array
   Tag:
     description: Tag
@@ -412,12 +432,21 @@ responses:
         type: string
       url:
         type: string
+  invalidTopicsError:
+    description: APIInvalidTopicsError is error format response to invalid topics
+    headers:
+      invalidTopics:
+        items:
+          type: string
+        type: array
+      message:
+        type: string
   notFound:
     description: APINotFound is a not found empty response
   parameterBodies:
     description: parameterBodies
     schema:
-      $ref: '#/definitions/RepoTopicOptions'
+      $ref: '#/definitions/EditReactionOption'
   redirect:
     description: APIRedirect is a redirect response
   validationError:
@@ -477,6 +506,8 @@ paths:
       responses:
         '201':
           $ref: '#/responses/User'
+        '400':
+          $ref: '#/responses/error'
         '403':
           $ref: '#/responses/forbidden'
         '422':
@@ -636,6 +667,10 @@ paths:
           $ref: '#/responses/Repository'
         '403':
           $ref: '#/responses/forbidden'
+        '404':
+          $ref: '#/responses/notFound'
+        '409':
+          $ref: '#/responses/error'
         '422':
           $ref: '#/responses/validationError'
       summary: Create a repository on behalf a user
@@ -958,6 +993,8 @@ paths:
       responses:
         '204':
           description: user is a member
+        '302':
+          description: 'redirection to /orgs/{org}/public_members/{username}'
         '404':
           description: user is not a member
       summary: Check if a user is a member of an organization
@@ -999,6 +1036,8 @@ paths:
       responses:
         '204':
           $ref: '#/responses/empty'
+        '403':
+          $ref: '#/responses/forbidden'
       summary: Conceal a user's membership
       tags:
         - organization
@@ -1041,6 +1080,8 @@ paths:
       responses:
         '204':
           description: membership publicized
+        '403':
+          $ref: '#/responses/forbidden'
       summary: Publicize a user's membership
       tags:
         - organization
@@ -1097,9 +1138,86 @@ paths:
       responses:
         '201':
           $ref: '#/responses/Team'
+        '422':
+          $ref: '#/responses/validationError'
       summary: Create a team
       tags:
         - organization
+  '/orgs/{org}/teams/search':
+    get:
+      operationId: teamSearch
+      parameters:
+        - description: name of the organization
+          in: path
+          name: org
+          required: true
+          type: string
+        - description: keywords to search
+          in: query
+          name: q
+          type: string
+        - description: include search within team description (defaults to true)
+          in: query
+          name: include_desc
+          type: boolean
+        - description: limit size of results
+          in: query
+          name: limit
+          type: integer
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: SearchResults of a successful search
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: '#/definitions/Team'
+                type: array
+              ok:
+                type: boolean
+            type: object
+      summary: Search for teams within an organization
+      tags:
+        - organization
+  /repos/issues/search:
+    get:
+      operationId: issueSearchIssues
+      parameters:
+        - description: whether issue is open or closed
+          in: query
+          name: state
+          type: string
+        - description: comma separated list of labels. Fetch only issues that have any of this labels. Non existent labels are discarded
+          in: query
+          name: labels
+          type: string
+        - description: page number of requested issues
+          in: query
+          name: page
+          type: integer
+        - description: search string
+          in: query
+          name: q
+          type: string
+        - description: repository to prioritize in the results
+          format: int64
+          in: query
+          name: priority_repo_id
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/IssueList'
+      summary: Search for issues across the repositories that the user has access to
+      tags:
+        - issue
   /repos/migrate:
     post:
       consumes:
@@ -1115,6 +1233,10 @@ paths:
       responses:
         '201':
           $ref: '#/responses/Repository'
+        '403':
+          $ref: '#/responses/forbidden'
+        '422':
+          $ref: '#/responses/validationError'
       summary: Migrate a remote git repository
       tags:
         - repository
@@ -1139,6 +1261,11 @@ paths:
           in: query
           name: uid
           type: integer
+        - description: repo owner to prioritize in the results
+          format: int64
+          in: query
+          name: priority_owner_id
+          type: integer
         - description: search only for repos that the user with the given id has starred
           format: int64
           in: query
@@ -1147,6 +1274,10 @@ paths:
         - description: include private repositories this user has access to (defaults to true)
           in: query
           name: private
+          type: boolean
+        - description: include template repositories this user has access to (defaults to true)
+          in: query
+          name: template
           type: boolean
         - description: page number of results to return (1-based)
           in: query
@@ -1281,6 +1412,8 @@ paths:
       responses:
         '200':
           description: success
+        '404':
+          $ref: '#/responses/notFound'
       summary: Get an archive of a repository
       tags:
         - repository
@@ -1330,7 +1463,7 @@ paths:
       responses:
         '200':
           $ref: '#/responses/Branch'
-      summary: Retrieve a specific branch from a repository
+      summary: 'Retrieve a specific branch from a repository, including its effective branch protection'
       tags:
         - repository
   '/repos/{owner}/{repo}/collaborators':
@@ -1379,6 +1512,8 @@ paths:
       responses:
         '204':
           $ref: '#/responses/empty'
+        '422':
+          $ref: '#/responses/validationError'
       summary: Delete a collaborator from a repository
       tags:
         - repository
@@ -1406,7 +1541,9 @@ paths:
         '204':
           $ref: '#/responses/empty'
         '404':
-          $ref: '#/responses/empty'
+          $ref: '#/responses/notFound'
+        '422':
+          $ref: '#/responses/validationError'
       summary: Check if a user is a collaborator of a repository
       tags:
         - repository
@@ -1437,6 +1574,8 @@ paths:
       responses:
         '204':
           $ref: '#/responses/empty'
+        '422':
+          $ref: '#/responses/validationError'
       summary: Add a collaborator to a repository
       tags:
         - repository
@@ -1502,6 +1641,8 @@ paths:
       responses:
         '200':
           $ref: '#/responses/Status'
+        '400':
+          $ref: '#/responses/error'
       summary: 'Get a commit''s combined status, by branch/tag/commit reference'
       tags:
         - repository
@@ -1685,6 +1826,8 @@ paths:
       responses:
         '200':
           description: success
+        '404':
+          $ref: '#/responses/notFound'
       summary: Get the EditorConfig definitions of a file in a repository
       tags:
         - repository
@@ -1732,6 +1875,10 @@ paths:
       responses:
         '202':
           $ref: '#/responses/Repository'
+        '403':
+          $ref: '#/responses/forbidden'
+        '422':
+          $ref: '#/responses/validationError'
       summary: Fork a repository
       tags:
         - repository
@@ -1759,6 +1906,8 @@ paths:
       responses:
         '200':
           $ref: '#/responses/GitBlobResponse'
+        '400':
+          $ref: '#/responses/error'
       summary: Gets the blob of a repository.
       tags:
         - repository
@@ -1868,6 +2017,8 @@ paths:
       responses:
         '200':
           $ref: '#/responses/AnnotatedTag'
+        '400':
+          $ref: '#/responses/error'
       summary: Gets the tag object of an annotated tag (not lightweight tags)
       tags:
         - repository
@@ -1907,6 +2058,8 @@ paths:
       responses:
         '200':
           $ref: '#/responses/GitTreeResponse'
+        '400':
+          $ref: '#/responses/error'
       summary: Gets the tree of a repository.
       tags:
         - repository
@@ -2124,6 +2277,8 @@ paths:
       responses:
         '200':
           $ref: '#/responses/Hook'
+        '404':
+          $ref: '#/responses/notFound'
       summary: Get a hook
       tags:
         - repository
@@ -2248,6 +2403,12 @@ paths:
       responses:
         '201':
           $ref: '#/responses/Issue'
+        '403':
+          $ref: '#/responses/forbidden'
+        '412':
+          $ref: '#/responses/error'
+        '422':
+          $ref: '#/responses/validationError'
       summary: 'Create an issue. If using deadline only the date will be taken into account, and time of day ignored.'
       tags:
         - issue
@@ -2300,6 +2461,8 @@ paths:
       responses:
         '204':
           $ref: '#/responses/empty'
+        '403':
+          $ref: '#/responses/forbidden'
       summary: Delete a comment
       tags:
         - issue
@@ -2336,38 +2499,11 @@ paths:
       summary: Edit a comment
       tags:
         - issue
-  '/repos/{owner}/{repo}/issues/{id}/times':
-    get:
-      operationId: issueTrackedTimes
-      parameters:
-        - description: owner of the repo
-          in: path
-          name: owner
-          required: true
-          type: string
-        - description: name of the repo
-          in: path
-          name: repo
-          required: true
-          type: string
-        - description: index of the issue
-          format: int64
-          in: path
-          name: id
-          required: true
-          type: integer
-      produces:
-        - application/json
-      responses:
-        '200':
-          $ref: '#/responses/TrackedTimeList'
-      summary: List an issue's tracked times
-      tags:
-        - issue
-    post:
+  '/repos/{owner}/{repo}/issues/comments/{id}/reactions':
+    delete:
       consumes:
         - application/json
-      operationId: issueAddTime
+      operationId: issueDeleteCommentReaction
       parameters:
         - description: owner of the repo
           in: path
@@ -2379,26 +2515,92 @@ paths:
           name: repo
           required: true
           type: string
-        - description: index of the issue to add tracked time to
+        - description: id of the comment to edit
           format: int64
           in: path
           name: id
           required: true
           type: integer
         - in: body
-          name: body
+          name: content
           schema:
-            $ref: '#/definitions/AddTimeOption'
+            $ref: '#/definitions/EditReactionOption'
       produces:
         - application/json
       responses:
         '200':
-          $ref: '#/responses/TrackedTime'
-        '400':
-          $ref: '#/responses/error'
+          $ref: '#/responses/empty'
         '403':
-          $ref: '#/responses/error'
-      summary: Add a tracked time to a issue
+          $ref: '#/responses/forbidden'
+      summary: Remove a reaction from a comment of an issue
+      tags:
+        - issue
+    get:
+      consumes:
+        - application/json
+      operationId: issueGetCommentReactions
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: id of the comment to edit
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/ReactionList'
+        '403':
+          $ref: '#/responses/forbidden'
+      summary: Get a list of reactions from a comment of an issue
+      tags:
+        - issue
+    post:
+      consumes:
+        - application/json
+      operationId: issuePostCommentReaction
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: id of the comment to edit
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+        - in: body
+          name: content
+          schema:
+            $ref: '#/definitions/EditReactionOption'
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/Reaction'
+        '201':
+          $ref: '#/responses/Reaction'
+        '403':
+          $ref: '#/responses/forbidden'
+      summary: Add a reaction to a comment of an issue
       tags:
         - issue
   '/repos/{owner}/{repo}/issues/{index}':
@@ -2426,6 +2628,8 @@ paths:
       responses:
         '200':
           $ref: '#/responses/Issue'
+        '404':
+          $ref: '#/responses/notFound'
       summary: Get an issue
       tags:
         - issue
@@ -2459,6 +2663,12 @@ paths:
       responses:
         '201':
           $ref: '#/responses/Issue'
+        '403':
+          $ref: '#/responses/forbidden'
+        '404':
+          $ref: '#/responses/notFound'
+        '412':
+          $ref: '#/responses/error'
       summary: 'Edit an issue. If using deadline only the date will be taken into account, and time of day ignored.'
       tags:
         - issue
@@ -2524,6 +2734,8 @@ paths:
       responses:
         '201':
           $ref: '#/responses/Comment'
+        '403':
+          $ref: '#/responses/forbidden'
       summary: Add a comment to an issue
       tags:
         - issue
@@ -2556,6 +2768,8 @@ paths:
       responses:
         '204':
           $ref: '#/responses/empty'
+        '403':
+          $ref: '#/responses/forbidden'
       summary: Delete a comment
       tags:
         - issue
@@ -2595,6 +2809,10 @@ paths:
       responses:
         '200':
           $ref: '#/responses/Comment'
+        '204':
+          $ref: '#/responses/empty'
+        '403':
+          $ref: '#/responses/forbidden'
       summary: Edit a comment
       tags:
         - issue
@@ -2630,9 +2848,9 @@ paths:
         '201':
           $ref: '#/responses/IssueDeadline'
         '403':
-          description: Not repo writer
+          $ref: '#/responses/forbidden'
         '404':
-          description: Issue not found
+          $ref: '#/responses/notFound'
       summary: 'Set an issue deadline. If set to null, the deadline is deleted. If using deadline only the date will be taken into account, and time of day ignored.'
       tags:
         - issue
@@ -2661,6 +2879,8 @@ paths:
       responses:
         '204':
           $ref: '#/responses/empty'
+        '403':
+          $ref: '#/responses/forbidden'
       summary: Remove all labels from an issue
       tags:
         - issue
@@ -2723,6 +2943,8 @@ paths:
       responses:
         '200':
           $ref: '#/responses/LabelList'
+        '403':
+          $ref: '#/responses/forbidden'
       summary: Add a label to an issue
       tags:
         - issue
@@ -2756,6 +2978,8 @@ paths:
       responses:
         '200':
           $ref: '#/responses/LabelList'
+        '403':
+          $ref: '#/responses/forbidden'
       summary: Replace an issue's labels
       tags:
         - issue
@@ -2790,7 +3014,151 @@ paths:
       responses:
         '204':
           $ref: '#/responses/empty'
+        '403':
+          $ref: '#/responses/forbidden'
+        '422':
+          $ref: '#/responses/validationError'
       summary: Remove a label from an issue
+      tags:
+        - issue
+  '/repos/{owner}/{repo}/issues/{index}/reactions':
+    delete:
+      consumes:
+        - application/json
+      operationId: issueDeleteIssueReaction
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: index of the issue
+          format: int64
+          in: path
+          name: index
+          required: true
+          type: integer
+        - in: body
+          name: content
+          schema:
+            $ref: '#/definitions/EditReactionOption'
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/empty'
+        '403':
+          $ref: '#/responses/forbidden'
+      summary: Remove a reaction from an issue
+      tags:
+        - issue
+    get:
+      consumes:
+        - application/json
+      operationId: issueGetIssueReactions
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: index of the issue
+          format: int64
+          in: path
+          name: index
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/ReactionList'
+        '403':
+          $ref: '#/responses/forbidden'
+      summary: Get a list reactions of an issue
+      tags:
+        - issue
+    post:
+      consumes:
+        - application/json
+      operationId: issuePostIssueReaction
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: index of the issue
+          format: int64
+          in: path
+          name: index
+          required: true
+          type: integer
+        - in: body
+          name: content
+          schema:
+            $ref: '#/definitions/EditReactionOption'
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/Reaction'
+        '201':
+          $ref: '#/responses/Reaction'
+        '403':
+          $ref: '#/responses/forbidden'
+      summary: Add a reaction to an issue
+      tags:
+        - issue
+  '/repos/{owner}/{repo}/issues/{index}/stopwatch/delete':
+    delete:
+      consumes:
+        - application/json
+      operationId: issueDeleteStopWatch
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: index of the issue to stop the stopwatch on
+          format: int64
+          in: path
+          name: index
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+        '403':
+          description: 'Not repo writer, user does not have rights to toggle stopwatch'
+        '404':
+          $ref: '#/responses/notFound'
+        '409':
+          description: Cannot cancel a non existent stopwatch
+      summary: Delete an issue's existing stopwatch.
       tags:
         - issue
   '/repos/{owner}/{repo}/issues/{index}/stopwatch/start':
@@ -2823,7 +3191,7 @@ paths:
         '403':
           description: 'Not repo writer, user does not have rights to toggle stopwatch'
         '404':
-          description: Issue not found
+          $ref: '#/responses/notFound'
         '409':
           description: Cannot start a stopwatch again if it already exists
       summary: Start stopwatch on an issue.
@@ -2833,7 +3201,7 @@ paths:
     post:
       consumes:
         - application/json
-      operationId: issueStopWatch
+      operationId: issueStopStopWatch
       parameters:
         - description: owner of the repo
           in: path
@@ -2859,10 +3227,259 @@ paths:
         '403':
           description: 'Not repo writer, user does not have rights to toggle stopwatch'
         '404':
-          description: Issue not found
+          $ref: '#/responses/notFound'
         '409':
           description: Cannot stop a non existent stopwatch
       summary: Stop an issue's existing stopwatch.
+      tags:
+        - issue
+  '/repos/{owner}/{repo}/issues/{index}/subscriptions':
+    get:
+      consumes:
+        - application/json
+      operationId: issueSubscriptions
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: index of the issue
+          format: int64
+          in: path
+          name: index
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/UserList'
+        '404':
+          $ref: '#/responses/notFound'
+      summary: Get users who subscribed on an issue.
+      tags:
+        - issue
+  '/repos/{owner}/{repo}/issues/{index}/subscriptions/{user}':
+    delete:
+      consumes:
+        - application/json
+      operationId: issueDeleteSubscription
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: index of the issue
+          format: int64
+          in: path
+          name: index
+          required: true
+          type: integer
+        - description: user witch unsubscribe
+          in: path
+          name: user
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '201':
+          $ref: '#/responses/empty'
+        '304':
+          description: User can only subscribe itself if he is no admin
+        '404':
+          $ref: '#/responses/notFound'
+      summary: Unsubscribe user from issue
+      tags:
+        - issue
+    put:
+      consumes:
+        - application/json
+      operationId: issueAddSubscription
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: index of the issue
+          format: int64
+          in: path
+          name: index
+          required: true
+          type: integer
+        - description: user to subscribe
+          in: path
+          name: user
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '201':
+          $ref: '#/responses/empty'
+        '304':
+          description: User can only subscribe itself if he is no admin
+        '404':
+          $ref: '#/responses/notFound'
+      summary: Subscribe user to issue
+      tags:
+        - issue
+  '/repos/{owner}/{repo}/issues/{index}/times':
+    delete:
+      consumes:
+        - application/json
+      operationId: issueResetTime
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: index of the issue to add tracked time to
+          format: int64
+          in: path
+          name: index
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+        '400':
+          $ref: '#/responses/error'
+        '403':
+          $ref: '#/responses/error'
+      summary: Reset a tracked time of an issue
+      tags:
+        - issue
+    get:
+      operationId: issueTrackedTimes
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: index of the issue
+          format: int64
+          in: path
+          name: index
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/TrackedTimeList'
+        '404':
+          $ref: '#/responses/notFound'
+      summary: List an issue's tracked times
+      tags:
+        - issue
+    post:
+      consumes:
+        - application/json
+      operationId: issueAddTime
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: index of the issue
+          format: int64
+          in: path
+          name: index
+          required: true
+          type: integer
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AddTimeOption'
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/TrackedTime'
+        '400':
+          $ref: '#/responses/error'
+        '403':
+          $ref: '#/responses/forbidden'
+      summary: Add tracked time to a issue
+      tags:
+        - issue
+  '/repos/{owner}/{repo}/issues/{index}/times/{id}':
+    delete:
+      consumes:
+        - application/json
+      operationId: issueDeleteTime
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: index of the issue
+          format: int64
+          in: path
+          name: index
+          required: true
+          type: integer
+        - description: id of time to delete
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+        '400':
+          $ref: '#/responses/error'
+        '403':
+          $ref: '#/responses/error'
+      summary: Delete specific tracked time
       tags:
         - issue
   '/repos/{owner}/{repo}/keys':
@@ -2919,6 +3536,8 @@ paths:
       responses:
         '201':
           $ref: '#/responses/DeployKey'
+        '422':
+          $ref: '#/responses/validationError'
       summary: Add a key to a repository
       tags:
         - repository
@@ -2945,6 +3564,8 @@ paths:
       responses:
         '204':
           $ref: '#/responses/empty'
+        '403':
+          $ref: '#/responses/forbidden'
       summary: Delete a key from a repository
       tags:
         - repository
@@ -3268,6 +3889,8 @@ paths:
       responses:
         '200':
           $ref: '#/responses/empty'
+        '403':
+          $ref: '#/responses/forbidden'
       summary: Sync a mirrored repository
       tags:
         - repository
@@ -3353,6 +3976,10 @@ paths:
       responses:
         '201':
           $ref: '#/responses/PullRequest'
+        '409':
+          $ref: '#/responses/error'
+        '422':
+          $ref: '#/responses/validationError'
       summary: Create a pull request
       tags:
         - repository
@@ -3414,7 +4041,13 @@ paths:
       responses:
         '201':
           $ref: '#/responses/PullRequest'
-      summary: Update a pull request
+        '403':
+          $ref: '#/responses/forbidden'
+        '412':
+          $ref: '#/responses/error'
+        '422':
+          $ref: '#/responses/validationError'
+      summary: 'Update a pull request. If using deadline only the date will be taken into account, and time of day ignored.'
       tags:
         - repository
   '/repos/{owner}/{repo}/pulls/{index}/merge':
@@ -3477,6 +4110,8 @@ paths:
           $ref: '#/responses/empty'
         '405':
           $ref: '#/responses/empty'
+        '409':
+          $ref: '#/responses/error'
       summary: Merge a pull request
       tags:
         - repository
@@ -3504,6 +4139,8 @@ paths:
       responses:
         '200':
           description: success
+        '404':
+          $ref: '#/responses/notFound'
       summary: Get a file from a repository
       tags:
         - repository
@@ -3561,6 +4198,8 @@ paths:
       responses:
         '201':
           $ref: '#/responses/Release'
+        '409':
+          $ref: '#/responses/error'
       summary: Create a release
       tags:
         - repository
@@ -3713,6 +4352,8 @@ paths:
       responses:
         '201':
           $ref: '#/responses/Attachment'
+        '400':
+          $ref: '#/responses/error'
       summary: Create a release attachment
       tags:
         - repository
@@ -3822,6 +4463,30 @@ paths:
       summary: Edit a release attachment
       tags:
         - repository
+  '/repos/{owner}/{repo}/signing-key.gpg':
+    get:
+      operationId: repoSigningKey
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+      produces:
+        - text/plain
+      responses:
+        '200':
+          description: GPG armored public key
+          schema:
+            type: string
+      summary: Get signing-key.gpg for given repository
+      tags:
+        - repository
   '/repos/{owner}/{repo}/stargazers':
     get:
       operationId: repoListStargazers
@@ -3892,6 +4557,8 @@ paths:
       responses:
         '200':
           $ref: '#/responses/StatusList'
+        '400':
+          $ref: '#/responses/error'
       summary: Get a commit's statuses
       tags:
         - repository
@@ -3920,8 +4587,10 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/StatusList'
+        '201':
+          $ref: '#/responses/Status'
+        '400':
+          $ref: '#/responses/error'
       summary: Create a commit status
       tags:
         - repository
@@ -4046,6 +4715,8 @@ paths:
       responses:
         '200':
           $ref: '#/responses/TrackedTimeList'
+        '400':
+          $ref: '#/responses/error'
       summary: List a repo's tracked times
       tags:
         - repository
@@ -4073,6 +4744,8 @@ paths:
       responses:
         '200':
           $ref: '#/responses/TrackedTimeList'
+        '400':
+          $ref: '#/responses/error'
       summary: List a user's tracked times in a repo
       tags:
         - user
@@ -4120,6 +4793,8 @@ paths:
       responses:
         '204':
           $ref: '#/responses/empty'
+        '422':
+          $ref: '#/responses/invalidTopicsError'
       summary: Replace list of topics for a repository
       tags:
         - repository
@@ -4147,6 +4822,8 @@ paths:
       responses:
         '204':
           $ref: '#/responses/empty'
+        '422':
+          $ref: '#/responses/invalidTopicsError'
       summary: Delete a topic from a repository
       tags:
         - repository
@@ -4173,6 +4850,8 @@ paths:
       responses:
         '204':
           $ref: '#/responses/empty'
+        '422':
+          $ref: '#/responses/invalidTopicsError'
       summary: Add a topic to a repository
       tags:
         - repository
@@ -4194,6 +4873,19 @@ paths:
       summary: Get a repository by id
       tags:
         - repository
+  /signing-key.gpg:
+    get:
+      operationId: getSigningKey
+      produces:
+        - text/plain
+      responses:
+        '200':
+          description: GPG armored public key
+          schema:
+            type: string
+      summary: Get default signing-key.gpg
+      tags:
+        - miscellaneous
   '/teams/{id}':
     delete:
       operationId: orgDeleteTeam
@@ -4287,6 +4979,8 @@ paths:
       responses:
         '204':
           $ref: '#/responses/empty'
+        '404':
+          $ref: '#/responses/notFound'
       summary: Remove a team member
       tags:
         - organization
@@ -4309,6 +5003,8 @@ paths:
       responses:
         '200':
           $ref: '#/responses/User'
+        '404':
+          $ref: '#/responses/notFound'
       summary: List a particular member of team
       tags:
         - organization
@@ -4331,6 +5027,8 @@ paths:
       responses:
         '204':
           $ref: '#/responses/empty'
+        '404':
+          $ref: '#/responses/notFound'
       summary: Add a team member
       tags:
         - organization
@@ -4378,6 +5076,8 @@ paths:
       responses:
         '204':
           $ref: '#/responses/empty'
+        '403':
+          $ref: '#/responses/forbidden'
       summary: Remove a repository from a team
       tags:
         - organization
@@ -4405,6 +5105,8 @@ paths:
       responses:
         '204':
           $ref: '#/responses/empty'
+        '403':
+          $ref: '#/responses/forbidden'
       summary: Add a repository to a team
       tags:
         - organization
@@ -4422,6 +5124,8 @@ paths:
       responses:
         '200':
           $ref: '#/responses/TopicListResponse'
+        '403':
+          $ref: '#/responses/forbidden'
       summary: search topics via keyword
       tags:
         - repository
@@ -4474,6 +5178,8 @@ paths:
       responses:
         '201':
           $ref: '#/responses/EmailList'
+        '422':
+          $ref: '#/responses/validationError'
       summary: Add email addresses
       tags:
         - user
@@ -4802,6 +5508,19 @@ paths:
         '204':
           $ref: '#/responses/empty'
       summary: Star the given repo
+      tags:
+        - user
+  /user/stopwatches:
+    get:
+      consumes:
+        - application/json
+      operationId: userGetStopWatches
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/StopWatchList'
+      summary: Get list of all existing stopwatches
       tags:
         - user
   /user/subscriptions:
@@ -5191,11 +5910,19 @@ definitions:
   AddTimeOption:
     description: AddTimeOption options for adding time to an issue
     properties:
+      created:
+        format: date-time
+        type: string
+        x-go-name: Created
       time:
         description: time in seconds
         format: int64
         type: integer
         x-go-name: Time
+      user_name:
+        description: User who spent the time (optional)
+        type: string
+        x-go-name: User
     required:
       - time
     type: object
@@ -5272,9 +5999,30 @@ definitions:
     properties:
       commit:
         $ref: '#/definitions/PayloadCommit'
+      enable_status_check:
+        type: boolean
+        x-go-name: EnableStatusCheck
       name:
         type: string
         x-go-name: Name
+      protected:
+        type: boolean
+        x-go-name: Protected
+      required_approvals:
+        format: int64
+        type: integer
+        x-go-name: RequiredApprovals
+      status_check_contexts:
+        items:
+          type: string
+        type: array
+        x-go-name: StatusCheckContexts
+      user_can_merge:
+        type: boolean
+        x-go-name: UserCanMerge
+      user_can_push:
+        type: boolean
+        x-go-name: UserCanPush
     type: object
     x-go-package: code.gitea.io/gitea/modules/structs
   Comment:
@@ -5338,6 +6086,19 @@ definitions:
         type: string
         x-go-name: URL
     title: Commit contains information generated from a Git commit.
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
+  CommitDateOptions:
+    description: CommitDateOptions store dates for GIT_AUTHOR_DATE and GIT_COMMITTER_DATE
+    properties:
+      author:
+        format: date-time
+        type: string
+        x-go-name: Author
+      committer:
+        format: date-time
+        type: string
+        x-go-name: Committer
     type: object
     x-go-package: code.gitea.io/gitea/modules/structs
   CommitMeta:
@@ -5446,6 +6207,8 @@ definitions:
         description: content must be base64 encoded
         type: string
         x-go-name: Content
+      dates:
+        $ref: '#/definitions/CommitDateOptions'
       message:
         description: 'message (optional) for the commit of this file. if not supplied, a default message will be used'
         type: string
@@ -5490,10 +6253,7 @@ definitions:
         type: string
         x-go-name: BranchFilter
       config:
-        additionalProperties:
-          type: string
-        type: object
-        x-go-name: Config
+        $ref: '#/definitions/CreateHookOptionConfig'
       events:
         items:
           type: string
@@ -5501,15 +6261,26 @@ definitions:
         x-go-name: Events
       type:
         enum:
+          - dingtalk
+          - discord
           - gitea
           - gogs
+          - msteams
           - slack
-          - discord
+          - telegram
         type: string
         x-go-name: Type
     required:
       - type
       - config
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
+  CreateHookOptionConfig:
+    additionalProperties:
+      type: string
+    description: |-
+      CreateHookOptionConfig has all config options in it
+      required are "content_type" and "url" Required
     type: object
     x-go-package: code.gitea.io/gitea/modules/structs
   CreateIssueCommentOption:
@@ -5774,9 +6545,15 @@ definitions:
   CreateTeamOption:
     description: CreateTeamOption options for creating a team
     properties:
+      can_create_org_repo:
+        type: boolean
+        x-go-name: CanCreateOrgRepo
       description:
         type: string
         x-go-name: Description
+      includes_all_repositories:
+        type: boolean
+        x-go-name: IncludesAllRepositories
       name:
         type: string
         x-go-name: Name
@@ -5863,6 +6640,8 @@ definitions:
         x-go-name: BranchName
       committer:
         $ref: '#/definitions/Identity'
+      dates:
+        $ref: '#/definitions/CommitDateOptions'
       message:
         description: 'message (optional) for the commit of this file. if not supplied, a default message will be used'
         type: string
@@ -5999,6 +6778,9 @@ definitions:
       title:
         type: string
         x-go-name: Title
+      unset_due_date:
+        type: boolean
+        x-go-name: RemoveDeadline
     type: object
     x-go-package: code.gitea.io/gitea/modules/structs
   EditLabelOption:
@@ -6095,6 +6877,17 @@ definitions:
       title:
         type: string
         x-go-name: Title
+      unset_due_date:
+        type: boolean
+        x-go-name: RemoveDeadline
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
+  EditReactionOption:
+    description: EditReactionOption contain the reaction type
+    properties:
+      content:
+        type: string
+        x-go-name: Reaction
     type: object
     x-go-package: code.gitea.io/gitea/modules/structs
   EditReleaseOption:
@@ -6151,6 +6944,10 @@ definitions:
         description: a short description of the repository.
         type: string
         x-go-name: Description
+      external_tracker:
+        $ref: '#/definitions/ExternalTracker'
+      external_wiki:
+        $ref: '#/definitions/ExternalWiki'
       has_issues:
         description: either `true` to enable issues for this repository or `false` to disable them.
         type: boolean
@@ -6167,6 +6964,8 @@ definitions:
         description: 'either `true` to ignore whitespace for conflicts, or `false` to not ignore whitespace. `has_pull_requests` must be `true`.'
         type: boolean
         x-go-name: IgnoreWhitespaceConflicts
+      internal_tracker:
+        $ref: '#/definitions/InternalTracker'
       name:
         description: name of the repository
         type: string
@@ -6179,6 +6978,10 @@ definitions:
           owners and a non-owner tries to change the value of private.
         type: boolean
         x-go-name: Private
+      template:
+        description: either `true` to make this repository a template or `false` to make it a normal repository
+        type: boolean
+        x-go-name: Template
       website:
         description: a URL with more information about the repository.
         type: string
@@ -6188,9 +6991,15 @@ definitions:
   EditTeamOption:
     description: EditTeamOption options for editing a team
     properties:
+      can_create_org_repo:
+        type: boolean
+        x-go-name: CanCreateOrgRepo
       description:
         type: string
         x-go-name: Description
+      includes_all_repositories:
+        type: boolean
+        x-go-name: IncludesAllRepositories
       name:
         type: string
         x-go-name: Name
@@ -6286,6 +7095,32 @@ definitions:
       verified:
         type: boolean
         x-go-name: Verified
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
+  ExternalTracker:
+    description: ExternalTracker represents settings for external tracker
+    properties:
+      external_tracker_format:
+        description: 'External Issue Tracker URL Format. Use the placeholders {user}, {repo} and {index} for the username, repository name and issue index.'
+        type: string
+        x-go-name: ExternalTrackerFormat
+      external_tracker_style:
+        description: 'External Issue Tracker Number Format, either `numeric` or `alphanumeric`'
+        type: string
+        x-go-name: ExternalTrackerStyle
+      external_tracker_url:
+        description: URL of external issue tracker.
+        type: string
+        x-go-name: ExternalTrackerURL
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
+  ExternalWiki:
+    description: ExternalWiki represents setting for external wiki
+    properties:
+      external_wiki_url:
+        description: URL of external wiki.
+        type: string
+        x-go-name: ExternalWikiURL
     type: object
     x-go-package: code.gitea.io/gitea/modules/structs
   FileCommitResponse:
@@ -6557,6 +7392,23 @@ definitions:
         x-go-name: Name
     type: object
     x-go-package: code.gitea.io/gitea/modules/structs
+  InternalTracker:
+    description: InternalTracker represents settings for internal tracker
+    properties:
+      allow_only_contributors_to_track_time:
+        description: Let only contributors track time (Built-in issue tracker)
+        type: boolean
+        x-go-name: AllowOnlyContributorsToTrackTime
+      enable_issue_dependencies:
+        description: Enable dependencies for issues and pull requests (Built-in issue tracker)
+        type: boolean
+        x-go-name: EnableIssueDependencies
+      enable_time_tracker:
+        description: Enable time tracking (Built-in issue tracker)
+        type: boolean
+        x-go-name: EnableTimeTracker
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
   Issue:
     description: Issue represents an issue in a repository
     properties:
@@ -6610,6 +7462,8 @@ definitions:
         x-go-name: OriginalAuthorID
       pull_request:
         $ref: '#/definitions/PullRequestMeta'
+      repository:
+        $ref: '#/definitions/RepositoryMeta'
       state:
         $ref: '#/definitions/StateType'
       title:
@@ -6907,6 +7761,8 @@ definitions:
       signature:
         type: string
         x-go-name: Signature
+      signer:
+        $ref: '#/definitions/PayloadUser'
       verified:
         type: boolean
         x-go-name: Verified
@@ -7078,6 +7934,20 @@ definitions:
         x-go-name: Merged
     type: object
     x-go-package: code.gitea.io/gitea/modules/structs
+  Reaction:
+    description: Reaction contain one reaction
+    properties:
+      content:
+        type: string
+        x-go-name: Reaction
+      created_at:
+        format: date-time
+        type: string
+        x-go-name: Created
+      user:
+        $ref: '#/definitions/User'
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
   Reference:
     properties:
       object:
@@ -7207,6 +8077,10 @@ definitions:
       empty:
         type: boolean
         x-go-name: Empty
+      external_tracker:
+        $ref: '#/definitions/ExternalTracker'
+      external_wiki:
+        $ref: '#/definitions/ExternalWiki'
       fork:
         type: boolean
         x-go-name: Fork
@@ -7236,6 +8110,8 @@ definitions:
       ignore_whitespace_conflicts:
         type: boolean
         x-go-name: IgnoreWhitespaceConflicts
+      internal_tracker:
+        $ref: '#/definitions/InternalTracker'
       mirror:
         type: boolean
         x-go-name: Mirror
@@ -7246,6 +8122,10 @@ definitions:
         format: int64
         type: integer
         x-go-name: OpenIssues
+      open_pr_counter:
+        format: int64
+        type: integer
+        x-go-name: OpenPulls
       original_url:
         type: string
         x-go-name: OriginalURL
@@ -7258,6 +8138,10 @@ definitions:
       private:
         type: boolean
         x-go-name: Private
+      release_counter:
+        format: int64
+        type: integer
+        x-go-name: Releases
       size:
         format: int64
         type: integer
@@ -7269,6 +8153,9 @@ definitions:
         format: int64
         type: integer
         x-go-name: Stars
+      template:
+        type: boolean
+        x-go-name: Template
       updated_at:
         format: date-time
         type: string
@@ -7280,6 +8167,21 @@ definitions:
       website:
         type: string
         x-go-name: Website
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
+  RepositoryMeta:
+    description: RepositoryMeta basic repository information
+    properties:
+      full_name:
+        type: string
+        x-go-name: FullName
+      id:
+        format: int64
+        type: integer
+        x-go-name: ID
+      name:
+        type: string
+        x-go-name: Name
     type: object
     x-go-package: code.gitea.io/gitea/modules/structs
   SearchResults:
@@ -7346,6 +8248,19 @@ definitions:
       It can be "pending", "success", "error", "failure", and "warning"
     type: string
     x-go-package: code.gitea.io/gitea/modules/structs
+  StopWatch:
+    description: StopWatch represent a running stopwatch
+    properties:
+      created:
+        format: date-time
+        type: string
+        x-go-name: Created
+      issue_index:
+        format: int64
+        type: integer
+        x-go-name: IssueIndex
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
   Tag:
     description: Tag represents a repository tag
     properties:
@@ -7368,6 +8283,9 @@ definitions:
   Team:
     description: Team represents a team in an organization
     properties:
+      can_create_org_repo:
+        type: boolean
+        x-go-name: CanCreateOrgRepo
       description:
         type: string
         x-go-name: Description
@@ -7375,6 +8293,9 @@ definitions:
         format: int64
         type: integer
         x-go-name: ID
+      includes_all_repositories:
+        type: boolean
+        x-go-name: IncludesAllRepositories
       name:
         type: string
         x-go-name: Name
@@ -7454,7 +8375,10 @@ definitions:
         format: int64
         type: integer
         x-go-name: ID
+      issue:
+        $ref: '#/definitions/Issue'
       issue_id:
+        description: deprecated (only for backwards compatibility)
         format: int64
         type: integer
         x-go-name: IssueID
@@ -7464,9 +8388,13 @@ definitions:
         type: integer
         x-go-name: Time
       user_id:
+        description: deprecated (only for backwards compatibility)
         format: int64
         type: integer
         x-go-name: UserID
+      user_name:
+        type: string
+        x-go-name: UserName
     type: object
     x-go-package: code.gitea.io/gitea/modules/structs
   UpdateFileOptions:
@@ -7486,6 +8414,8 @@ definitions:
         description: content must be base64 encoded
         type: string
         x-go-name: Content
+      dates:
+        $ref: '#/definitions/CommitDateOptions'
       from_path:
         description: from_path (optional) is the path of the original file which will be moved/renamed to the path in the URL
         type: string

@@ -70,7 +70,7 @@ paths:
           name: distanceMiles
           required: false
           type: integer
-        - description: Return only the districts that include given location (nearLatitdue/nearLongitude) or (nearAddress) in its attendance boundary (Enterprise API level only)
+        - description: Return only the districts that include given location (nearLatitude/nearLongitude) or (boundaryAddress) in its attendance boundary (Enterprise API level only)
           in: query
           name: isInBoundaryOnly
           required: false
@@ -325,7 +325,7 @@ paths:
           name: isTitleI
           required: false
           type: boolean
-        - description: 'True = return only Title I schoolwide schools, False = return only non-Title I Schoolwide schools (optional) (Pro, Enterprise API levels only)'
+        - description: 'True = return only Title I school-wide schools, False = return only non-Title I school-wide schools (optional) (Pro, Enterprise API levels only)'
           in: query
           name: isTitleISchoolwide
           required: false
@@ -353,7 +353,7 @@ paths:
           name: distanceMiles
           required: false
           type: integer
-        - description: Return only the schools that include given location (nearLatitdue/nearLongitude) or (nearAddress) in its attendance boundary (Enterprise API level only)
+        - description: Return only the schools that include given location (nearLatitude/nearLongitude) or (boundaryAddress) in its attendance boundary (Enterprise API level only)
           in: query
           name: isInBoundaryOnly
           required: false
@@ -394,7 +394,7 @@ paths:
           name: perPage
           required: false
           type: integer
-        - description: 'Sort list. Values are: schoolname, distance, rank. For descending order, preceed with ''-'' i.e. -schoolname (optional, default: schoolname)'
+        - description: 'Sort list. Values are: schoolname, distance, rank. For descending order, precede with ''-'' i.e. -schoolname (optional, default: schoolname)'
           in: query
           name: sortBy
           required: false

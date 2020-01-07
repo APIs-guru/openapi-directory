@@ -389,7 +389,7 @@ paths:
           schema:
             $ref: '#/definitions/CallBroadcast'
       responses:
-        '201':
+        '200':
           description: successful operation
           schema:
             $ref: '#/definitions/ResourceId'
@@ -675,7 +675,7 @@ paths:
           schema:
             $ref: '#/definitions/BatchRequest'
       responses:
-        '201':
+        '200':
           description: successful operation
           schema:
             $ref: '#/definitions/ResourceId'
@@ -1015,6 +1015,66 @@ paths:
       x-sample-js-url: /js/calls/stopVoiceBroadcast.js
       x-sample-php-url: /php/calls/stopVoiceBroadcast.php
       x-sample-python-url: /python/calls/stopVoiceBroadcast.py
+  '/calls/broadcasts/{id}/toggleRecipientsStatus':
+    post:
+      description: This operation lets the user to disable/enable undialed recipients in created broadcast
+      operationId: toggleCallBroadcastRecipientsStatus
+      parameters:
+        - description: An id of a voice broadcast
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+        - default: false
+          description: Flag which indicate what to do with calls (true will enable call in DISABLED status and vice versa)
+          in: query
+          name: enable
+          required: false
+          type: boolean
+        - description: List of Recipient objects. By recipient we mean either phone number or contact id.
+          in: body
+          name: body
+          required: false
+          schema:
+            items:
+              $ref: '#/definitions/Recipient'
+            type: array
+      responses:
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      security:
+        - basicAuth: []
+      summary: Disable/enable undialed recipients in broadcast
+      tags:
+        - calls
+      x-sample-csharp-url: /csharp/calls/toggleCallBroadcastRecipientsStatus.cs
+      x-sample-curl-request-url: /curl/calls/toggleCallBroadcastRecipientsStatus.sh
+      x-sample-curl-response-url: /curl/calls/toggleCallBroadcastRecipientsStatus.json
+      x-sample-description-url: /description/calls/toggleCallBroadcastRecipientsStatus.md
+      x-sample-go-url: /go/calls/toggleCallBroadcastRecipientsStatus.go
+      x-sample-java-url: /java/calls/toggleCallBroadcastRecipientsStatus.java
+      x-sample-js-url: /js/calls/toggleCallBroadcastRecipientsStatus.js
+      x-sample-php-url: /php/calls/toggleCallBroadcastRecipientsStatus.php
+      x-sample-python-url: /python/calls/toggleCallBroadcastRecipientsStatus.py
   '/calls/recordings/{id}':
     get:
       description: Returns metadata of recording of a particular call. Metadata contains a link to a MP3 recording
@@ -2279,7 +2339,7 @@ paths:
         '200':
           description: successful operation
           schema:
-            $ref: '#/definitions/ItemList'
+            $ref: '#/definitions/ItemListUniversalDoNotContact'
         '400':
           description: Bad request
           schema:
@@ -5360,7 +5420,7 @@ paths:
         '200':
           description: successful operation
           schema:
-            $ref: '#/definitions/Page'
+            $ref: '#/definitions/PageNumberOrder'
         '400':
           description: Bad request
           schema:
@@ -5406,8 +5466,13 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/KeywordPurchaseRequest'
+        - description: 'Limit fields received in response. E.g. fields: id, name or fields items (id, name), see more at [partial response](https://developers.callfire.com/docs.html#partial-response) page.'
+          in: query
+          name: fields
+          required: false
+          type: string
       responses:
-        '201':
+        '200':
           description: successful operation
           schema:
             $ref: '#/definitions/ResourceId'
@@ -5462,7 +5527,7 @@ paths:
           required: false
           type: string
       responses:
-        '201':
+        '200':
           description: successful operation
           schema:
             $ref: '#/definitions/ResourceId'
@@ -5682,7 +5747,7 @@ paths:
       x-sample-php-url: /php/texts/findTexts.php
       x-sample-python-url: /python/texts/findTexts.py
     post:
-      description: Use the /texts API to send individual texts quickly. By default all texts are going out from CallFire's dedicated short code 67076
+      description: 'Use the /texts API to send individual texts quickly. By default all texts are going out from CallFire''s dedicated short code. Example: 67076, 818818 etc'
       operationId: sendTexts
       parameters:
         - description: 'Limit fields received in response. E.g. fields: id, name or fields items (id, name), see more at [partial response](https://developers.callfire.com/docs.html#partial-response) page.'
@@ -5832,7 +5897,7 @@ paths:
           schema:
             $ref: '#/definitions/TextAutoReply'
       responses:
-        '201':
+        '200':
           description: successful operation
           schema:
             $ref: '#/definitions/ResourceId'
@@ -6086,7 +6151,7 @@ paths:
           schema:
             $ref: '#/definitions/TextBroadcast'
       responses:
-        '201':
+        '200':
           description: successful operation
           schema:
             $ref: '#/definitions/ResourceId'
@@ -6372,7 +6437,7 @@ paths:
           schema:
             $ref: '#/definitions/BatchRequest'
       responses:
-        '201':
+        '200':
           description: successful operation
           schema:
             $ref: '#/definitions/ResourceId'
@@ -6712,6 +6777,66 @@ paths:
       x-sample-js-url: /js/texts/getTextBroadcastTexts.js
       x-sample-php-url: /php/texts/getTextBroadcastTexts.php
       x-sample-python-url: /python/texts/getTextBroadcastTexts.py
+  '/texts/broadcasts/{id}/toggleRecipientsStatus':
+    post:
+      description: This operation lets the user to disable/enable undialed contacts in created broadcast
+      operationId: toggleTextBroadcastRecipientsStatus
+      parameters:
+        - description: An id of a text broadcast
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+        - default: false
+          description: Flag which indicate what to do with texts (true will enable texts in DISABLED status and vice versa)
+          in: query
+          name: enable
+          required: false
+          type: boolean
+        - description: List of Recipient objects. By recipient we mean either phone number or contact id.
+          in: body
+          name: body
+          required: false
+          schema:
+            items:
+              $ref: '#/definitions/Recipient'
+            type: array
+      responses:
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      security:
+        - basicAuth: []
+      summary: Disable/enable undialed recipients in broadcast
+      tags:
+        - texts
+      x-sample-csharp-url: /csharp/texts/toggleTextBroadcastRecipientsStatus.cs
+      x-sample-curl-request-url: /curl/texts/toggleTextBroadcastRecipientsStatus.sh
+      x-sample-curl-response-url: /curl/texts/toggleTextBroadcastRecipientsStatus.json
+      x-sample-description-url: /description/texts/toggleTextBroadcastRecipientsStatus.md
+      x-sample-go-url: /go/texts/toggleTextBroadcastRecipientsStatus.go
+      x-sample-java-url: /java/texts/toggleTextBroadcastRecipientsStatus.java
+      x-sample-js-url: /js/texts/toggleTextBroadcastRecipientsStatus.js
+      x-sample-php-url: /php/texts/toggleTextBroadcastRecipientsStatus.php
+      x-sample-python-url: /python/texts/toggleTextBroadcastRecipientsStatus.py
   '/texts/{id}':
     get:
       description: Returns a single Text instance for a given text id
@@ -6866,7 +6991,7 @@ paths:
           schema:
             $ref: '#/definitions/Webhook'
       responses:
-        '201':
+        '200':
           description: successful operation
           schema:
             $ref: '#/definitions/ResourceId'
@@ -6918,7 +7043,7 @@ paths:
         '200':
           description: successful operation
           schema:
-            $ref: '#/definitions/ItemList'
+            $ref: '#/definitions/ItemListWebhookResource'
         '400':
           description: Bad request
           schema:
@@ -7496,6 +7621,7 @@ definitions:
       lastModified:
         description: 'The time when a given resource was updated, formatted in unix time milliseconds (read only). Example: 1473781817000 for Sat, 05 Jan 1985 14:03:37 GMT '
         format: int64
+        readOnly: true
         type: integer
       localTimeRestriction:
         $ref: '#/definitions/LocalTimeRestriction'
@@ -7547,6 +7673,7 @@ definitions:
           - BLOCKED_SUSPICIOUS
           - DECLINED
           - APPROVED
+        readOnly: true
         type: string
     type: object
   CallBroadcastPage:
@@ -8337,6 +8464,24 @@ definitions:
           type: object
         type: array
     type: object
+  ItemListUniversalDoNotContact:
+    description: '~'
+    properties:
+      items:
+        description: '~'
+        items:
+          $ref: '#/definitions/UniversalDoNotContact'
+        type: array
+    type: object
+  ItemListWebhookResource:
+    description: '~'
+    properties:
+      items:
+        description: '~'
+        items:
+          $ref: '#/definitions/WebhookResource'
+        type: array
+    type: object
   IvrInboundConfig:
     description: '~'
     properties:
@@ -8665,6 +8810,7 @@ definitions:
           - ACTIVE
           - RELEASED
           - UNAVAILABLE
+        readOnly: true
         type: string
       textFeatureStatus:
         description: 'A status of a text feature. Available values: DISABLED, ENABLED'
@@ -8704,6 +8850,7 @@ definitions:
       created:
         description: 'The time when the given resource was created, formatted in unix time milliseconds (read only). Example: 1473781817000'
         format: int64
+        readOnly: true
         type: integer
       id:
         description: An id of an order
@@ -8730,6 +8877,7 @@ definitions:
           - APPROVE_TIER_ONE
           - APPROVE_TIER_TWO
           - REJECTED
+        readOnly: true
         type: string
       tollFreeNumbers:
         $ref: '#/definitions/NumberOrderItem'
@@ -8737,6 +8885,7 @@ definitions:
       totalCost:
         description: A total cost of an order
         format: float
+        readOnly: true
         type: number
     type: object
   NumberOrderItem:
@@ -8746,6 +8895,7 @@ definitions:
         description: 'List of fulfilled items, e.g. phone numbers, keywords'
         items:
           type: string
+        readOnly: true
         type: array
       ordered:
         description: A total number of items bought within a single order item
@@ -8754,6 +8904,7 @@ definitions:
       unitCost:
         description: A cost of unit
         format: float
+        readOnly: true
         type: number
     type: object
   NumberPurchaseRequest:
@@ -8804,6 +8955,27 @@ definitions:
         type: integer
       totalCount:
         description: Total count of available results. -1 if unknown
+        format: int32
+        type: integer
+    type: object
+  PageNumberOrder:
+    description: '~'
+    properties:
+      items:
+        description: '~'
+        items:
+          $ref: '#/definitions/NumberOrder'
+        type: array
+      limit:
+        description: '~'
+        format: int32
+        type: integer
+      offset:
+        description: '~'
+        format: int32
+        type: integer
+      totalCount:
+        description: '~'
         format: int32
         type: integer
     type: object
@@ -9112,6 +9284,7 @@ definitions:
       lastModified:
         description: 'A time when the given resource was updated, formatted in unix time milliseconds (read only). Example: 1473781817000'
         format: int64
+        readOnly: true
         type: integer
       localTimeRestriction:
         $ref: '#/definitions/LocalTimeRestriction'
@@ -9161,6 +9334,7 @@ definitions:
           - BLOCKED_SUSPICIOUS
           - DECLINED
           - APPROVED
+        readOnly: true
         type: string
     type: object
   TextBroadcastPage:
@@ -9335,6 +9509,28 @@ definitions:
           - FEMALE2
           - SPANISH1
           - FRENCHCANADIAN1
+        type: string
+    type: object
+  UniversalDoNotContact:
+    description: Represents a Universal (platform-wide) Do-Not-Contact object for a given phone number. Shows whether inbound/outbound actions are allowed for a given number.
+    properties:
+      fromNumber:
+        description: 'Optional source number in E.164 format (11-digit). Example: 12132000384'
+        type: string
+      inboundCall:
+        description: If toNumber can receive calls or If toNumber can call fromNumber.
+        type: boolean
+      inboundText:
+        description: If toNumber can receive texts or If toNumber can text fromNumber.
+        type: boolean
+      outboundCall:
+        description: If toNumber can send calls or If fromNumber can call toNumber.
+        type: boolean
+      outboundText:
+        description: If toNumber can send texts or If fromNumber can text toNumber.
+        type: boolean
+      toNumber:
+        description: 'destination DNC number in E.164 format (11-digit). Example: 12132000384'
         type: string
     type: object
   UpdateContactListRequest:

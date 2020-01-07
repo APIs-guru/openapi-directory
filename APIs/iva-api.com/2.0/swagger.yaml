@@ -25,11 +25,6 @@ externalDocs:
   url: 'https://developer.iva-api.com/docs/v2/getting-started'
 consumes:
   - application/json
-produces:
-  - application/json
-  - application/xml
-  - text/csv
-  - text/html
 securityDefinitions:
   ApiKeyHeader:
     description: Authorize requests passing your apiKey in HTTP header.
@@ -67,6 +62,7 @@ tags:
   - name: Movies
   - name: My
   - name: People
+  - name: Reports
   - name: Rev
   - name: SDKs
   - name: Shows
@@ -76,330 +72,6 @@ tags:
   - name: Videos
   - name: XroadMedia
 paths:
-  /Analytics/City/:
-    get:
-      deprecated: false
-      description: 'No required parameters, DateValue defaults to Today..'
-      operationId: GetAnalyticsViewersByCity
-      parameters:
-        - description: Report Tag filter.
-          in: query
-          name: ReportTag
-          required: false
-          type: string
-        - description: Report start date
-          format: date-time
-          in: query
-          name: Start
-          required: false
-          type: string
-          x-nullable: false
-        - description: Report end date
-          format: date-time
-          in: query
-          name: End
-          required: false
-          type: string
-          x-nullable: false
-        - description: Days spanned by report
-          enum:
-            - today
-            - yesterday
-            - two_days_ago
-            - last_7_days
-            - last_14_days
-            - last_28_days
-            - last_60_days
-            - last_90_days
-            - last_365_days
-          in: query
-          name: DateValue
-          required: false
-          type: string
-        - description: Number of records returned from top of response
-          format: int32
-          in: query
-          name: Limit
-          required: false
-          type: integer
-          x-nullable: false
-      responses:
-        '200':
-          description: OK.
-          schema:
-            items:
-              $ref: '#/definitions/CityResponse'
-            title: List<CityResponse>
-            type: array
-        '204':
-          description: No content.
-        '400':
-          description: Bad request.
-        '401':
-          description: Unauthorized.
-        '403':
-          description: Forbidden. The subscription key does not have permission to access this method.
-        '404':
-          description: Not found. The item you requested could not be found or has been deleted.
-        '409':
-          description: Conflict.
-        '429':
-          description: Too many requests.
-        '500':
-          description: Internal server error.
-        '503':
-          description: Service unavailable.
-      security:
-        - ApiKeyHeader: []
-          ApiKeyQuery: []
-      summary: Viewers by City.
-      tags:
-        - Analytics
-    parameters:
-      - $ref: '#/parameters/Accept'
-  /Analytics/Country/:
-    get:
-      deprecated: false
-      description: 'No required parameters, DateValue defaults to Today.'
-      operationId: GetAnalyticsViewersByCountry
-      parameters:
-        - description: Report Tag filter.
-          in: query
-          name: ReportTag
-          required: false
-          type: string
-        - description: Report start date
-          format: date-time
-          in: query
-          name: Start
-          required: false
-          type: string
-          x-nullable: false
-        - description: Report end date
-          format: date-time
-          in: query
-          name: End
-          required: false
-          type: string
-          x-nullable: false
-        - description: Days spanned by report
-          enum:
-            - today
-            - yesterday
-            - two_days_ago
-            - last_7_days
-            - last_14_days
-            - last_28_days
-            - last_60_days
-            - last_90_days
-            - last_365_days
-          in: query
-          name: DateValue
-          required: false
-          type: string
-        - description: Number of records returned from top of response.
-          format: int32
-          in: query
-          name: Limit
-          required: false
-          type: integer
-          x-nullable: false
-      responses:
-        '200':
-          description: OK.
-          schema:
-            items:
-              $ref: '#/definitions/AnalyticsCountryResponse'
-            title: List<AnalyticsCountryResponse>
-            type: array
-        '204':
-          description: No content.
-        '400':
-          description: Bad request.
-        '401':
-          description: Unauthorized.
-        '403':
-          description: Forbidden. The subscription key does not have permission to access this method.
-        '404':
-          description: Not found. The item you requested could not be found or has been deleted.
-        '409':
-          description: Conflict.
-        '429':
-          description: Too many requests.
-        '500':
-          description: Internal server error.
-        '503':
-          description: Service unavailable.
-      security:
-        - ApiKeyHeader: []
-          ApiKeyQuery: []
-      summary: Viewers by Country.
-      tags:
-        - Analytics
-    parameters:
-      - $ref: '#/parameters/Accept'
-  /Analytics/EngagementActions/:
-    get:
-      deprecated: false
-      description: 'No required parameters, DateValue defaults to Today.'
-      operationId: GetAnalyticEngagementActions
-      parameters:
-        - description: Report Tag filter.
-          in: query
-          name: ReportTag
-          required: false
-          type: string
-        - description: Report start date
-          format: date-time
-          in: query
-          name: Start
-          required: false
-          type: string
-          x-nullable: false
-        - description: Report end date
-          format: date-time
-          in: query
-          name: End
-          required: false
-          type: string
-          x-nullable: false
-        - description: Days spanned by report
-          enum:
-            - today
-            - yesterday
-            - two_days_ago
-            - last_7_days
-            - last_14_days
-            - last_28_days
-            - last_60_days
-            - last_90_days
-            - last_365_days
-          in: query
-          name: DateValue
-          required: false
-          type: string
-        - description: Number of records returned from top of response
-          format: int32
-          in: query
-          name: Limit
-          required: false
-          type: integer
-          x-nullable: false
-      responses:
-        '200':
-          description: OK.
-          schema:
-            items:
-              $ref: '#/definitions/EngagementActionsResponse'
-            title: List<EngagementActionsResponse>
-            type: array
-        '204':
-          description: No content.
-        '400':
-          description: Bad request.
-        '401':
-          description: Unauthorized.
-        '403':
-          description: Forbidden. The subscription key does not have permission to access this method.
-        '404':
-          description: Not found. The item you requested could not be found or has been deleted.
-        '409':
-          description: Conflict.
-        '429':
-          description: Too many requests.
-        '500':
-          description: Internal server error.
-        '503':
-          description: Service unavailable.
-      security:
-        - ApiKeyHeader: []
-          ApiKeyQuery: []
-      summary: Visits by IP.
-      tags:
-        - Analytics
-    parameters:
-      - $ref: '#/parameters/Accept'
-  /Analytics/EngagementTimes/:
-    get:
-      deprecated: false
-      description: 'No required parameters, DateValue defaults to Today.'
-      operationId: GetAnalyticsEngagementTimes
-      parameters:
-        - description: Report Tag filter.
-          in: query
-          name: ReportTag
-          required: false
-          type: string
-        - description: Report start date
-          format: date-time
-          in: query
-          name: Start
-          required: false
-          type: string
-          x-nullable: false
-        - description: Report end date
-          format: date-time
-          in: query
-          name: End
-          required: false
-          type: string
-          x-nullable: false
-        - description: Days spanned by report
-          enum:
-            - today
-            - yesterday
-            - two_days_ago
-            - last_7_days
-            - last_14_days
-            - last_28_days
-            - last_60_days
-            - last_90_days
-            - last_365_days
-          in: query
-          name: DateValue
-          required: false
-          type: string
-        - description: Number of records returned from top of response
-          format: int32
-          in: query
-          name: Limit
-          required: false
-          type: integer
-          x-nullable: false
-      responses:
-        '200':
-          description: OK.
-          schema:
-            items:
-              $ref: '#/definitions/EngagementTimesResponse'
-            title: List<EngagementTimesResponse>
-            type: array
-        '204':
-          description: No content.
-        '400':
-          description: Bad request.
-        '401':
-          description: Unauthorized.
-        '403':
-          description: Forbidden. The subscription key does not have permission to access this method.
-        '404':
-          description: Not found. The item you requested could not be found or has been deleted.
-        '409':
-          description: Conflict.
-        '429':
-          description: Too many requests.
-        '500':
-          description: Internal server error.
-        '503':
-          description: Service unavailable.
-      security:
-        - ApiKeyHeader: []
-          ApiKeyQuery: []
-      summary: View count by Frequency.
-      tags:
-        - Analytics
-    parameters:
-      - $ref: '#/parameters/Accept'
   /Analytics/GBUsage/:
     get:
       deprecated: false
@@ -437,6 +109,11 @@ paths:
           required: false
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -468,685 +145,6 @@ paths:
         - Analytics
     parameters:
       - $ref: '#/parameters/Accept'
-  /Analytics/MostActive/:
-    get:
-      deprecated: false
-      description: 'No required parameters, DateValue defaults to Today.'
-      operationId: GetAnalyticsMostActive
-      parameters:
-        - description: Report Tag filter.
-          in: query
-          name: ReportTag
-          required: false
-          type: string
-        - description: Days spanned by report
-          enum:
-            - today
-            - yesterday
-            - two_days_ago
-            - last_7_days
-            - last_14_days
-            - last_28_days
-            - last_60_days
-            - last_90_days
-            - last_365_days
-          in: query
-          name: DateValue
-          required: false
-          type: string
-        - description: Number of records returned from top of response
-          format: int32
-          in: query
-          name: Limit
-          required: false
-          type: integer
-          x-nullable: false
-      responses:
-        '200':
-          description: OK.
-          schema:
-            items:
-              $ref: '#/definitions/MostActiveResponse'
-            title: List<MostActiveResponse>
-            type: array
-        '204':
-          description: No content.
-        '400':
-          description: Bad request.
-        '401':
-          description: Unauthorized.
-        '403':
-          description: Forbidden. The subscription key does not have permission to access this method.
-        '404':
-          description: Not found. The item you requested could not be found or has been deleted.
-        '409':
-          description: Conflict.
-        '429':
-          description: Too many requests.
-        '500':
-          description: Internal server error.
-        '503':
-          description: Service unavailable.
-      security:
-        - ApiKeyHeader: []
-          ApiKeyQuery: []
-      summary: Most Active Visitors by IP.
-      tags:
-        - Analytics
-    parameters:
-      - $ref: '#/parameters/Accept'
-  /Analytics/PlatformHardware/:
-    get:
-      deprecated: false
-      description: 'No required parameters, DateValue defaults to Today.'
-      operationId: GetAnalyticsViewersByPlatformHardware
-      parameters:
-        - description: Report Tag filter.
-          in: query
-          name: ReportTag
-          required: false
-          type: string
-        - description: Report start date
-          format: date-time
-          in: query
-          name: Start
-          required: false
-          type: string
-          x-nullable: false
-        - description: Report end date
-          format: date-time
-          in: query
-          name: End
-          required: false
-          type: string
-          x-nullable: false
-        - description: Days spanned by report
-          enum:
-            - today
-            - yesterday
-            - two_days_ago
-            - last_7_days
-            - last_14_days
-            - last_28_days
-            - last_60_days
-            - last_90_days
-            - last_365_days
-          in: query
-          name: DateValue
-          required: false
-          type: string
-        - description: Number of records returned from top of response
-          format: int32
-          in: query
-          name: Limit
-          required: false
-          type: integer
-          x-nullable: false
-      responses:
-        '200':
-          description: OK.
-          schema:
-            items:
-              $ref: '#/definitions/PlatformHardwareResponse'
-            title: List<PlatformHardwareResponse>
-            type: array
-        '204':
-          description: No content.
-        '400':
-          description: Bad request.
-        '401':
-          description: Unauthorized.
-        '403':
-          description: Forbidden. The subscription key does not have permission to access this method.
-        '404':
-          description: Not found. The item you requested could not be found or has been deleted.
-        '409':
-          description: Conflict.
-        '429':
-          description: Too many requests.
-        '500':
-          description: Internal server error.
-        '503':
-          description: Service unavailable.
-      security:
-        - ApiKeyHeader: []
-          ApiKeyQuery: []
-      summary: Viewers by Platform Hardware.
-      tags:
-        - Analytics
-    parameters:
-      - $ref: '#/parameters/Accept'
-  /Analytics/PlatformOS/:
-    get:
-      deprecated: false
-      description: 'No required parameters, DateValue defaults to Today.'
-      operationId: GetAnalyticsViewersByPlatformOS
-      parameters:
-        - description: Report Tag filter.
-          in: query
-          name: ReportTag
-          required: false
-          type: string
-        - description: Report start date
-          format: date-time
-          in: query
-          name: Start
-          required: false
-          type: string
-          x-nullable: false
-        - description: Report end date
-          format: date-time
-          in: query
-          name: End
-          required: false
-          type: string
-          x-nullable: false
-        - description: Days spanned by report
-          enum:
-            - today
-            - yesterday
-            - two_days_ago
-            - last_7_days
-            - last_14_days
-            - last_28_days
-            - last_60_days
-            - last_90_days
-            - last_365_days
-          in: query
-          name: DateValue
-          required: false
-          type: string
-        - description: Number of records returned from top of response
-          format: int32
-          in: query
-          name: Limit
-          required: false
-          type: integer
-          x-nullable: false
-      responses:
-        '200':
-          description: OK.
-          schema:
-            items:
-              $ref: '#/definitions/PlatformOSResponse'
-            title: List<PlatformOSResponse>
-            type: array
-        '204':
-          description: No content.
-        '400':
-          description: Bad request.
-        '401':
-          description: Unauthorized.
-        '403':
-          description: Forbidden. The subscription key does not have permission to access this method.
-        '404':
-          description: Not found. The item you requested could not be found or has been deleted.
-        '409':
-          description: Conflict.
-        '429':
-          description: Too many requests.
-        '500':
-          description: Internal server error.
-        '503':
-          description: Service unavailable.
-      security:
-        - ApiKeyHeader: []
-          ApiKeyQuery: []
-      summary: Viewers by Platform OS.
-      tags:
-        - Analytics
-    parameters:
-      - $ref: '#/parameters/Accept'
-  /Analytics/RecentVisitors/:
-    get:
-      deprecated: false
-      description: 'No required parameters, DateValue defaults to Today.'
-      operationId: GetAnalyticsRecentVisitors
-      parameters:
-        - description: Report Tag filter.
-          in: query
-          name: ReportTag
-          required: false
-          type: string
-        - description: Number of records returned from top of response
-          format: int32
-          in: query
-          name: Limit
-          required: false
-          type: integer
-          x-nullable: false
-      responses:
-        '200':
-          description: OK.
-          schema:
-            items:
-              $ref: '#/definitions/RecentVisitorsResponse'
-            title: List<RecentVisitorsResponse>
-            type: array
-        '204':
-          description: No content.
-        '400':
-          description: Bad request.
-        '401':
-          description: Unauthorized.
-        '403':
-          description: Forbidden. The subscription key does not have permission to access this method.
-        '404':
-          description: Not found. The item you requested could not be found or has been deleted.
-        '409':
-          description: Conflict.
-        '429':
-          description: Too many requests.
-        '500':
-          description: Internal server error.
-        '503':
-          description: Service unavailable.
-      security:
-        - ApiKeyHeader: []
-          ApiKeyQuery: []
-      summary: Most Recent Visitors by Time.
-      tags:
-        - Analytics
-    parameters:
-      - $ref: '#/parameters/Accept'
-  /Analytics/Summary/:
-    get:
-      deprecated: false
-      description: Requires a valid Customer ID.
-      operationId: GetAnalyticsSummary
-      parameters:
-        - description: Report Tag filter.
-          in: query
-          name: ReportTag
-          required: false
-          type: string
-        - description: Days spanned by report
-          enum:
-            - today
-            - yesterday
-            - two_days_ago
-            - last_7_days
-            - last_14_days
-            - last_28_days
-            - last_60_days
-            - last_90_days
-            - last_365_days
-          in: query
-          name: DateValue
-          required: false
-          type: string
-      responses:
-        '200':
-          description: OK.
-          schema:
-            $ref: '#/definitions/SummaryResponse'
-        '204':
-          description: No content.
-        '400':
-          description: Bad request.
-        '401':
-          description: Unauthorized.
-        '403':
-          description: Forbidden. The subscription key does not have permission to access this method.
-        '404':
-          description: Not found. The item you requested could not be found or has been deleted.
-        '409':
-          description: Conflict.
-        '429':
-          description: Too many requests.
-        '500':
-          description: Internal server error.
-        '503':
-          description: Service unavailable.
-      security:
-        - ApiKeyHeader: []
-          ApiKeyQuery: []
-      summary: 'Summary of views, viewers, etc.'
-      tags:
-        - Analytics
-    parameters:
-      - $ref: '#/parameters/Accept'
-  /Analytics/TitleReport/:
-    get:
-      deprecated: false
-      description: Requires a valid published ID.
-      operationId: GetAnalyticsTitleReport
-      parameters:
-        - description: Title published ID.
-          in: query
-          name: PublishedId
-          required: true
-          type: string
-        - description: Report start date
-          format: date-time
-          in: query
-          name: Start
-          required: false
-          type: string
-          x-nullable: false
-        - description: Report end date
-          format: date-time
-          in: query
-          name: End
-          required: false
-          type: string
-          x-nullable: false
-      responses:
-        '200':
-          description: OK.
-          schema:
-            items:
-              $ref: '#/definitions/TitleReportResponse'
-            title: List<TitleReportResponse>
-            type: array
-        '204':
-          description: No content.
-        '400':
-          description: Bad request.
-        '401':
-          description: Unauthorized.
-        '403':
-          description: Forbidden. The subscription key does not have permission to access this method.
-        '404':
-          description: Not found. The item you requested could not be found or has been deleted.
-        '409':
-          description: Conflict.
-        '429':
-          description: Too many requests.
-        '500':
-          description: Internal server error.
-        '503':
-          description: Service unavailable.
-      security:
-        - ApiKeyHeader: []
-          ApiKeyQuery: []
-      summary: Title Report by Video ID.
-      tags:
-        - Analytics
-    parameters:
-      - $ref: '#/parameters/Accept'
-  /Analytics/VideoLog/:
-    get:
-      deprecated: false
-      description: 'No required parameters, DateValue defaults to Today.'
-      operationId: GetAnalyticsViewsByVideoLog
-      parameters:
-        - description: Report Tag filter.
-          in: query
-          name: ReportTag
-          required: false
-          type: string
-        - description: Report start date
-          format: date-time
-          in: query
-          name: Start
-          required: false
-          type: string
-          x-nullable: false
-        - description: Report end date
-          format: date-time
-          in: query
-          name: End
-          required: false
-          type: string
-          x-nullable: false
-        - description: Days spanned by report
-          enum:
-            - today
-            - yesterday
-            - two_days_ago
-            - last_7_days
-            - last_14_days
-            - last_28_days
-            - last_60_days
-            - last_90_days
-            - last_365_days
-          in: query
-          name: DateValue
-          required: false
-          type: string
-        - description: Number of records returned from top of response
-          format: int32
-          in: query
-          name: Limit
-          required: false
-          type: integer
-          x-nullable: false
-      responses:
-        '200':
-          description: OK.
-          schema:
-            items:
-              $ref: '#/definitions/VideoLogResponse'
-            title: List<VideoLogResponse>
-            type: array
-        '204':
-          description: No content.
-        '400':
-          description: Bad request.
-        '401':
-          description: Unauthorized.
-        '403':
-          description: Forbidden. The subscription key does not have permission to access this method.
-        '404':
-          description: Not found. The item you requested could not be found or has been deleted.
-        '409':
-          description: Conflict.
-        '429':
-          description: Too many requests.
-        '500':
-          description: Internal server error.
-        '503':
-          description: Service unavailable.
-      security:
-        - ApiKeyHeader: []
-          ApiKeyQuery: []
-      summary: Views by Video.
-      tags:
-        - Analytics
-    parameters:
-      - $ref: '#/parameters/Accept'
-  /Analytics/Viewers/:
-    get:
-      deprecated: false
-      description: Optional DateValue for length of report.
-      operationId: GetAnalyticsViewers
-      parameters:
-        - description: Report Tag filter.
-          in: query
-          name: ReportTag
-          required: false
-          type: string
-        - description: Days spanned by report
-          enum:
-            - today
-            - yesterday
-            - two_days_ago
-            - last_7_days
-            - last_14_days
-            - last_28_days
-            - last_60_days
-            - last_90_days
-            - last_365_days
-          in: query
-          name: DateValue
-          required: false
-          type: string
-      responses:
-        '200':
-          description: OK.
-          schema:
-            items:
-              $ref: '#/definitions/ViewersResponse'
-            title: List<ViewersResponse>
-            type: array
-        '204':
-          description: No content.
-        '400':
-          description: Bad request.
-        '401':
-          description: Unauthorized.
-        '403':
-          description: Forbidden. The subscription key does not have permission to access this method.
-        '404':
-          description: Not found. The item you requested could not be found or has been deleted.
-        '409':
-          description: Conflict.
-        '429':
-          description: Too many requests.
-        '500':
-          description: Internal server error.
-        '503':
-          description: Service unavailable.
-      security:
-        - ApiKeyHeader: []
-          ApiKeyQuery: []
-      summary: Viewers by Day.
-      tags:
-        - Analytics
-    parameters:
-      - $ref: '#/parameters/Accept'
-  /Analytics/Views/:
-    get:
-      deprecated: false
-      description: Optional DateValue for length of report.
-      operationId: GetAnalyticsViews
-      parameters:
-        - description: Report Tag filter.
-          in: query
-          name: ReportTag
-          required: false
-          type: string
-        - description: Days spanned by report
-          enum:
-            - today
-            - yesterday
-            - two_days_ago
-            - last_7_days
-            - last_14_days
-            - last_28_days
-            - last_60_days
-            - last_90_days
-            - last_365_days
-          in: query
-          name: DateValue
-          required: false
-          type: string
-      responses:
-        '200':
-          description: OK.
-          schema:
-            items:
-              $ref: '#/definitions/ViewsResponse'
-            title: List<ViewsResponse>
-            type: array
-        '204':
-          description: No content.
-        '400':
-          description: Bad request.
-        '401':
-          description: Unauthorized.
-        '403':
-          description: Forbidden. The subscription key does not have permission to access this method.
-        '404':
-          description: Not found. The item you requested could not be found or has been deleted.
-        '409':
-          description: Conflict.
-        '429':
-          description: Too many requests.
-        '500':
-          description: Internal server error.
-        '503':
-          description: Service unavailable.
-      security:
-        - ApiKeyHeader: []
-          ApiKeyQuery: []
-      summary: Views by Day.
-      tags:
-        - Analytics
-    parameters:
-      - $ref: '#/parameters/Accept'
-  /Analytics/WebBrowsers/:
-    get:
-      deprecated: false
-      description: 'No required parameters, DateValue defaults to Today.'
-      operationId: GetAnalyticsViewersByWebBrowsers
-      parameters:
-        - description: Report Tag filter.
-          in: query
-          name: ReportTag
-          required: false
-          type: string
-        - description: Report start date
-          format: date-time
-          in: query
-          name: Start
-          required: false
-          type: string
-          x-nullable: false
-        - description: Report end date
-          format: date-time
-          in: query
-          name: End
-          required: false
-          type: string
-          x-nullable: false
-        - description: Days spanned by report
-          enum:
-            - today
-            - yesterday
-            - two_days_ago
-            - last_7_days
-            - last_14_days
-            - last_28_days
-            - last_60_days
-            - last_90_days
-            - last_365_days
-          in: query
-          name: DateValue
-          required: false
-          type: string
-        - description: Number of records returned from top of response
-          format: int32
-          in: query
-          name: Limit
-          required: false
-          type: integer
-          x-nullable: false
-      responses:
-        '200':
-          description: OK.
-          schema:
-            items:
-              $ref: '#/definitions/WebBrowsersResponse'
-            title: List<WebBrowsersResponse>
-            type: array
-        '204':
-          description: No content.
-        '400':
-          description: Bad request.
-        '401':
-          description: Unauthorized.
-        '403':
-          description: Forbidden. The subscription key does not have permission to access this method.
-        '404':
-          description: Not found. The item you requested could not be found or has been deleted.
-        '409':
-          description: Conflict.
-        '429':
-          description: Too many requests.
-        '500':
-          description: Internal server error.
-        '503':
-          description: Service unavailable.
-      security:
-        - ApiKeyHeader: []
-          ApiKeyQuery: []
-      summary: Viewers by Web Browser.
-      tags:
-        - Analytics
-    parameters:
-      - $ref: '#/parameters/Accept'
   /Celebrity/RankedSearch/:
     get:
       deprecated: false
@@ -1156,6 +154,11 @@ paths:
         - in: query
           name: StartsWith
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -1346,6 +349,12 @@ paths:
           name: ImageViolence
           required: false
           type: array
+        - description: Filter results with a minimum Rating greater than or equal to this value. (0 to 100)
+          format: int32
+          in: query
+          name: Minimum_IvaRating
+          required: false
+          type: integer
         - collectionFormat: multi
           description: People with image sexuality scores.
           in: query
@@ -1469,6 +478,16 @@ paths:
           required: false
           type: boolean
           x-nullable: false
+        - description: SortBy
+          in: query
+          name: SortBy
+          required: false
+          type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -1657,6 +676,12 @@ paths:
           name: ImageViolence
           required: false
           type: array
+        - description: Filter results with a minimum Rating greater than or equal to this value. (0 to 100)
+          format: int32
+          in: formData
+          name: Minimum_IvaRating
+          required: false
+          type: integer
         - collectionFormat: multi
           description: People with image sexuality scores.
           in: formData
@@ -1780,6 +805,16 @@ paths:
           required: false
           type: boolean
           x-nullable: false
+        - description: SortBy
+          in: formData
+          name: SortBy
+          required: false
+          type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -1836,6 +871,11 @@ paths:
           required: true
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -1897,6 +937,11 @@ paths:
           required: true
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -1958,6 +1003,11 @@ paths:
           required: true
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -2019,6 +1069,11 @@ paths:
           required: true
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -2080,6 +1135,11 @@ paths:
           required: true
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -2143,6 +1203,11 @@ paths:
           required: true
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -2204,6 +1269,11 @@ paths:
           required: true
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -2265,6 +1335,11 @@ paths:
           required: true
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -2326,6 +1401,11 @@ paths:
           required: true
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -2387,6 +1467,11 @@ paths:
           required: true
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -2448,6 +1533,11 @@ paths:
           required: true
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -2502,6 +1592,11 @@ paths:
           required: true
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -2556,6 +1651,11 @@ paths:
           required: true
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -2610,6 +1710,11 @@ paths:
           required: true
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -2664,6 +1769,11 @@ paths:
           required: true
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -2718,6 +1828,11 @@ paths:
           required: false
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -2772,6 +1887,11 @@ paths:
           required: true
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -2812,6 +1932,11 @@ paths:
       description: 'List of Countries, ISO codes and Country IDs used throughout the API.'
       operationId: GetCountries
       parameters: []
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -2852,6 +1977,11 @@ paths:
       description: List of filter options available in data demo.
       operationId: GetDataDemoFilters
       parameters: []
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -2889,6 +2019,11 @@ paths:
       description: Provider enumerator has values added regularly.  Update your SDK to refresh these values.
       operationId: GetCommonEnumerators
       parameters: []
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -2926,6 +2061,11 @@ paths:
       description: 'A list of image types available in the IVA database. **EX: Poster**'
       operationId: GetImageTypes
       parameters: []
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -2966,6 +2106,11 @@ paths:
       description: Returns a list of languages used in the API as well as the ISO code and language ID.
       operationId: GetLanguages
       parameters: []
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -3006,6 +2151,11 @@ paths:
       description: No parameters.
       operationId: GetOriginatingNetworks
       parameters: []
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -3060,6 +2210,11 @@ paths:
           required: true
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -3100,6 +2255,11 @@ paths:
       description: List of Trend Sources.
       operationId: GetTrendSources
       parameters: []
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -3140,6 +2300,11 @@ paths:
       description: Returns a list of the types of videos that can be associated to a title.
       operationId: GetVideoTypes
       parameters: []
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -3231,6 +2396,11 @@ paths:
           name: Prefix
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -3280,7 +2450,7 @@ paths:
           format: int64
           in: query
           name: EntertainmentId
-          required: true
+          required: false
           type: integer
         - description: Title of Program to be matched.
           in: query
@@ -3353,6 +2523,11 @@ paths:
           required: false
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -3401,7 +2576,7 @@ paths:
           format: int64
           in: formData
           name: EntertainmentId
-          required: true
+          required: false
           type: integer
         - description: Title of Program to be matched.
           in: formData
@@ -3474,6 +2649,11 @@ paths:
           required: false
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -3559,6 +2739,8 @@ paths:
               - AtomTickets
               - YouTubePremium
               - DCUniverse
+              - AppleTvPlus
+              - DisneyPlus
             type: string
             x-nullable: false
           name: Providers
@@ -3637,6 +2819,14 @@ paths:
           items:
             type: string
           name: Genres
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: List of themes (movie and show).
+          in: query
+          items:
+            type: string
+          name: Themes
           required: false
           type: array
         - collectionFormat: multi
@@ -3778,6 +2968,7 @@ paths:
               - Availabilities
               - Genres
               - ProgramTrends
+              - Themes
               - Subjects
               - FilmingLocations
               - NarrativeLocations
@@ -4047,6 +3238,11 @@ paths:
           name: MicroGenres
           required: false
           type: array
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -4135,6 +3331,8 @@ paths:
               - AtomTickets
               - YouTubePremium
               - DCUniverse
+              - AppleTvPlus
+              - DisneyPlus
             type: string
             x-nullable: false
           name: Providers
@@ -4213,6 +3411,14 @@ paths:
           items:
             type: string
           name: Genres
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: List of themes (movie and show).
+          in: formData
+          items:
+            type: string
+          name: Themes
           required: false
           type: array
         - collectionFormat: multi
@@ -4354,6 +3560,7 @@ paths:
               - Availabilities
               - Genres
               - ProgramTrends
+              - Themes
               - Subjects
               - FilmingLocations
               - NarrativeLocations
@@ -4623,6 +3830,11 @@ paths:
           name: MicroGenres
           required: false
           type: array
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -4672,6 +3884,11 @@ paths:
           required: true
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -4726,6 +3943,11 @@ paths:
           required: true
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -4780,6 +4002,11 @@ paths:
           required: true
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -4834,6 +4061,11 @@ paths:
           required: true
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -4888,6 +4120,11 @@ paths:
           required: true
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -4942,6 +4179,11 @@ paths:
           required: true
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -4996,6 +4238,11 @@ paths:
           required: true
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -5050,6 +4297,11 @@ paths:
           required: true
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -5104,6 +4356,11 @@ paths:
           required: true
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -5152,6 +4409,11 @@ paths:
           name: country
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -5201,6 +4463,11 @@ paths:
           name: state
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -5283,6 +4550,11 @@ paths:
           required: false
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -5335,6 +4607,11 @@ paths:
           required: true
           type: string
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -5438,6 +4715,11 @@ paths:
           name: TheaterChainCodes
           required: false
           type: array
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -5526,6 +4808,11 @@ paths:
           name: EndDisplayDate
           required: false
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -5677,6 +4964,11 @@ paths:
           required: false
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -5728,6 +5020,11 @@ paths:
           required: true
           type: string
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -5801,6 +5098,11 @@ paths:
           required: false
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -5851,6 +5153,11 @@ paths:
           name: IdProvider
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -5913,6 +5220,11 @@ paths:
           name: EndDateTime
           required: false
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -5976,6 +5288,11 @@ paths:
           name: EndDisplayDate
           required: false
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -6049,6 +5366,11 @@ paths:
           name: Includes
           required: false
           type: array
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -6120,6 +5442,11 @@ paths:
           name: Includes
           required: false
           type: array
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -6188,6 +5515,11 @@ paths:
           name: Includes
           required: false
           type: array
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -6228,6 +5560,11 @@ paths:
         - in: query
           name: StartsWith
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -6289,6 +5626,11 @@ paths:
           name: Includes
           required: false
           type: array
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -6338,6 +5680,11 @@ paths:
           name: ApiKey
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -6387,6 +5734,11 @@ paths:
           name: ApiKey
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -6436,6 +5788,11 @@ paths:
           name: ApiKey
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -6485,6 +5842,11 @@ paths:
           name: ApiKey
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -6534,6 +5896,11 @@ paths:
           name: FilePath
           required: false
           type: array
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -6584,6 +5951,11 @@ paths:
           name: FilePath
           required: false
           type: array
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -6636,11 +6008,16 @@ paths:
           required: false
           type: boolean
           x-nullable: false
-        - description: Image url expiration in minutes. Default = 60
+        - description: Image url expiration in minutes. Default = 60. Maximum is 1440.
           in: query
           name: ExpirationMinutes
           required: false
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -6693,11 +6070,16 @@ paths:
           required: false
           type: boolean
           x-nullable: false
-        - description: Image url expiration in minutes. Default = 60
+        - description: Image url expiration in minutes. Default = 60. Maximum is 1440.
           in: query
           name: ExpirationMinutes
           required: false
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -6742,6 +6124,11 @@ paths:
           required: true
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -6793,6 +6180,11 @@ paths:
           required: false
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -6868,6 +6260,11 @@ paths:
           name: Includes
           required: false
           type: array
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -6908,6 +6305,11 @@ paths:
         `Use to get the Id of the ID type to use with /Find/Movie.`
       operationId: GetMovieAlternateIdTypes
       parameters: []
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -6986,6 +6388,11 @@ paths:
           name: Includes
           required: false
           type: array
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -7064,6 +6471,11 @@ paths:
           name: Includes
           required: false
           type: array
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -7161,6 +6573,11 @@ paths:
           name: StringDistance
           required: false
           type: integer
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -7256,6 +6673,11 @@ paths:
           name: StringDistance
           required: false
           type: integer
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -7291,6 +6713,11 @@ paths:
       description: Returns all Movie Certifications used in a movie response with the Releases object.
       operationId: GetMovieCertifications
       parameters: []
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -7331,6 +6758,11 @@ paths:
       description: List of all movie genres used in the API.
       operationId: GetMovieGenres
       parameters: []
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -7371,6 +6803,11 @@ paths:
       description: 'Release type refers to the release. **EX: Theatrical, Home Video, etc.**'
       operationId: GetMovieReleaseTypes
       parameters: []
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -7478,6 +6915,11 @@ paths:
           required: false
           type: string
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -7546,6 +6988,11 @@ paths:
           name: Includes
           required: false
           type: array
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -7597,6 +7044,11 @@ paths:
           name: Title
           required: false
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -7650,6 +7102,11 @@ paths:
           name: Title
           required: false
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -7699,6 +7156,11 @@ paths:
           required: false
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -7743,6 +7205,11 @@ paths:
           required: true
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -7824,6 +7291,11 @@ paths:
           name: ExpirationDate
           required: false
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -7897,6 +7369,11 @@ paths:
           name: ExpirationDate
           required: false
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -7946,6 +7423,11 @@ paths:
           required: false
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -7990,6 +7472,11 @@ paths:
           required: true
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -8055,6 +7542,11 @@ paths:
           name: Includes
           required: false
           type: array
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -8095,6 +7587,11 @@ paths:
         - in: query
           name: StartsWith
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -8156,6 +7653,11 @@ paths:
           name: Includes
           required: false
           type: array
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -8199,6 +7701,11 @@ paths:
           required: true
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -8228,6 +7735,22 @@ paths:
       summary: Get a Person's Filmography.
       tags:
         - People
+    parameters:
+      - $ref: '#/parameters/Accept'
+  /Reports/VideoDetailReport:
+    get:
+      deprecated: false
+      operationId: GetVideoDetailReportVideoDetailReport_Get
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/VideoDetailReport'
+      tags:
+        - private
     parameters:
       - $ref: '#/parameters/Accept'
   /Rev/Orders:
@@ -8273,6 +7796,11 @@ paths:
           required: false
           type: boolean
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -8322,6 +7850,11 @@ paths:
           required: false
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -8386,6 +7919,11 @@ paths:
           required: true
           type: string
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -8474,6 +8012,11 @@ paths:
           required: true
           type: boolean
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -8552,6 +8095,11 @@ paths:
           name: Includes
           required: false
           type: array
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -8589,6 +8137,11 @@ paths:
       description: 'Alternate Id types refer to the 3rd party ID sets IVA data has matched.  **Ex: IMDB**'
       operationId: GetShowAlternateIdTypes
       parameters: []
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -8694,6 +8247,11 @@ paths:
           name: StringDistance
           required: false
           type: integer
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -8797,6 +8355,11 @@ paths:
           name: StringDistance
           required: false
           type: integer
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -8832,6 +8395,11 @@ paths:
       description: Release types refer to the type of release and are used in the releases object for a show.
       operationId: GetShowReleaseTypes
       parameters: []
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -8935,6 +8503,11 @@ paths:
           required: false
           type: string
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -8986,6 +8559,11 @@ paths:
           required: true
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -9044,6 +8622,11 @@ paths:
           required: true
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -9105,6 +8688,11 @@ paths:
           name: Includes
           required: false
           type: array
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -9167,6 +8755,11 @@ paths:
           name: Includes
           required: false
           type: array
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -9204,6 +8797,11 @@ paths:
       description: List of Show Certifications and definitions.
       operationId: GetShowCertifications
       parameters: []
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -9244,6 +8842,11 @@ paths:
       description: Returns a list of all the show genres used in the IVA database.
       operationId: GetShowGenres
       parameters: []
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -9318,6 +8921,11 @@ paths:
           name: Includes
           required: false
           type: array
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -9387,6 +8995,11 @@ paths:
           name: Includes
           required: false
           type: array
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -9462,6 +9075,11 @@ paths:
           name: Includes
           required: false
           type: array
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -9506,6 +9124,11 @@ paths:
           required: true
           type: string
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -9579,6 +9202,11 @@ paths:
           name: Includes
           required: false
           type: array
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -9622,6 +9250,11 @@ paths:
         - in: query
           name: Id
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -9667,6 +9300,11 @@ paths:
           name: TvMediaApiKey
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -9711,6 +9349,11 @@ paths:
           name: TvMediaApiKey
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -9755,6 +9398,11 @@ paths:
           name: TvMediaApiKey
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -9799,6 +9447,11 @@ paths:
           name: TvMediaApiKey
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -10021,6 +9674,11 @@ paths:
           name: Detail
           required: false
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -10070,6 +9728,11 @@ paths:
           name: LeagueID
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -10142,6 +9805,11 @@ paths:
           name: Detail
           required: false
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -10187,6 +9855,11 @@ paths:
           name: TvMediaApiKey
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -10236,6 +9909,11 @@ paths:
           name: CountryID
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -10290,6 +9968,11 @@ paths:
           name: RegionID
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -10372,6 +10055,11 @@ paths:
           name: Detail
           required: false
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -10453,6 +10141,11 @@ paths:
           name: Detail
           required: false
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -10510,6 +10203,11 @@ paths:
           name: Detail
           required: false
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -10724,6 +10422,11 @@ paths:
           name: Detail
           required: false
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -10941,6 +10644,11 @@ paths:
           name: Detail
           required: false
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -11158,6 +10866,11 @@ paths:
           name: Detail
           required: false
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -11210,6 +10923,11 @@ paths:
           name: Detail
           required: false
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -11262,6 +10980,11 @@ paths:
           required: true
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -11478,6 +11201,11 @@ paths:
           name: Detail
           required: false
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -11530,6 +11258,11 @@ paths:
           required: true
           type: integer
           x-nullable: false
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -11754,6 +11487,11 @@ paths:
           name: Detail
           required: false
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -11941,6 +11679,11 @@ paths:
           name: AdaptiveMinimumFragmentLength
           required: false
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -11999,6 +11742,11 @@ paths:
           name: Type
           required: false
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/csv
+        - text/html
       responses:
         '200':
           description: OK.
@@ -12199,23 +11947,6 @@ definitions:
         x-nullable: false
     title: AllShowsResponse
     type: object
-  AnalyticsCountryResponse:
-    description: AnalyticsCountryResponse
-    properties:
-      Country:
-        type: string
-      CountryCode:
-        type: string
-      Percentage:
-        format: double
-        type: number
-        x-nullable: false
-      Viewers:
-        format: int32
-        type: integer
-        x-nullable: false
-    title: AnalyticsCountryResponse
-    type: object
   Artwork:
     description: Artwork
     properties:
@@ -12288,23 +12019,6 @@ definitions:
         type: integer
         x-nullable: false
     title: ChartPersonItem
-    type: object
-  CityResponse:
-    description: CityResponse
-    properties:
-      City:
-        type: string
-      CountryCode:
-        type: string
-      Percentage:
-        format: double
-        type: number
-        x-nullable: false
-      Viewers:
-        format: int32
-        type: integer
-        x-nullable: false
-    title: CityResponse
     type: object
   CommonEnumerators:
     description: CommonEnumerators
@@ -12575,6 +12289,10 @@ definitions:
         items:
           $ref: '#/definitions/NameValueFilter'
         type: array
+      Themes:
+        items:
+          $ref: '#/definitions/NameValueFilter'
+        type: array
       TrendBrands:
         items:
           $ref: '#/definitions/NameValueFilter'
@@ -12816,6 +12534,10 @@ definitions:
         items:
           $ref: '#/definitions/ProgramPersonImage'
         type: array
+      IvaRating:
+        description: IVA Rating for Person.
+        format: int32
+        type: integer
       Modified:
         description: Datetime Person was last modified.
         format: date-time
@@ -12983,6 +12705,11 @@ definitions:
         items:
           type: string
         type: array
+      Themes:
+        description: List of themes.
+        items:
+          type: string
+        type: array
       TimeStamp:
         description: Last time object was updated or changed.
         format: date-time
@@ -13101,28 +12828,6 @@ definitions:
         format: int32
         type: integer
     title: DiscoverShow
-    type: object
-  EngagementActionsResponse:
-    description: EngagementActionsResponse
-    properties:
-      Frequency:
-        format: int32
-        type: integer
-        x-nullable: false
-      Views:
-        type: string
-    title: EngagementActionsResponse
-    type: object
-  EngagementTimesResponse:
-    description: EngagementTimesResponse
-    properties:
-      Duration:
-        type: string
-      Frequency:
-        format: int32
-        type: integer
-        x-nullable: false
-    title: EngagementTimesResponse
     type: object
   EntertainmentConnection:
     description: EntertainmentConnection
@@ -14857,12 +14562,12 @@ definitions:
         type: integer
         x-nullable: false
       GB:
-        format: int64
-        type: integer
+        format: double
+        type: number
         x-nullable: false
       ImageServiceGB:
-        format: int64
-        type: integer
+        format: double
+        type: number
         x-nullable: false
       ImageServiceRequests:
         format: int32
@@ -14882,8 +14587,8 @@ definitions:
       MonthlyStorageInMinutes:
         type: string
       TotalGB:
-        format: int64
-        type: integer
+        format: double
+        type: number
         x-nullable: false
     title: GBUsageResponse
     type: object
@@ -15499,42 +15204,6 @@ definitions:
         x-nullable: false
     title: GetAllShows
     type: object
-  GetAnalyticsCountry:
-    description: GetAnalyticsCountry
-    properties:
-      DateValue:
-        description: Days spanned by report
-        enum:
-          - today
-          - yesterday
-          - two_days_ago
-          - last_7_days
-          - last_14_days
-          - last_28_days
-          - last_60_days
-          - last_90_days
-          - last_365_days
-        type: string
-      End:
-        description: Report end date
-        format: date-time
-        type: string
-        x-nullable: false
-      Limit:
-        description: Number of records returned from top of response.
-        format: int32
-        type: integer
-        x-nullable: false
-      ReportTag:
-        description: Report Tag filter.
-        type: string
-      Start:
-        description: Report start date
-        format: date-time
-        type: string
-        x-nullable: false
-    title: GetAnalyticsCountry
-    type: object
   GetCelebrityRanked:
     description: GetCelebrityRanked
     properties:
@@ -15629,42 +15298,6 @@ definitions:
         x-nullable: false
     title: GetChartShowsPopular
     type: object
-  GetCity:
-    description: GetCity
-    properties:
-      DateValue:
-        description: Days spanned by report
-        enum:
-          - today
-          - yesterday
-          - two_days_ago
-          - last_7_days
-          - last_14_days
-          - last_28_days
-          - last_60_days
-          - last_90_days
-          - last_365_days
-        type: string
-      End:
-        description: Report end date
-        format: date-time
-        type: string
-        x-nullable: false
-      Limit:
-        description: Number of records returned from top of response
-        format: int32
-        type: integer
-        x-nullable: false
-      ReportTag:
-        description: Report Tag filter.
-        type: string
-      Start:
-        description: Report start date
-        format: date-time
-        type: string
-        x-nullable: false
-    title: GetCity
-    type: object
   GetCommonEnumerators:
     description: GetCommonEnumerators
     properties: {}
@@ -15707,78 +15340,6 @@ definitions:
     description: GetDbShowReleaseTypes
     properties: {}
     title: GetDbShowReleaseTypes
-    type: object
-  GetEngagementActions:
-    description: GetEngagementActions
-    properties:
-      DateValue:
-        description: Days spanned by report
-        enum:
-          - today
-          - yesterday
-          - two_days_ago
-          - last_7_days
-          - last_14_days
-          - last_28_days
-          - last_60_days
-          - last_90_days
-          - last_365_days
-        type: string
-      End:
-        description: Report end date
-        format: date-time
-        type: string
-        x-nullable: false
-      Limit:
-        description: Number of records returned from top of response
-        format: int32
-        type: integer
-        x-nullable: false
-      ReportTag:
-        description: Report Tag filter.
-        type: string
-      Start:
-        description: Report start date
-        format: date-time
-        type: string
-        x-nullable: false
-    title: GetEngagementActions
-    type: object
-  GetEngagementTimes:
-    description: GetEngagementTimes
-    properties:
-      DateValue:
-        description: Days spanned by report
-        enum:
-          - today
-          - yesterday
-          - two_days_ago
-          - last_7_days
-          - last_14_days
-          - last_28_days
-          - last_60_days
-          - last_90_days
-          - last_365_days
-        type: string
-      End:
-        description: Report end date
-        format: date-time
-        type: string
-        x-nullable: false
-      Limit:
-        description: Number of records returned from top of response
-        format: int32
-        type: integer
-        x-nullable: false
-      ReportTag:
-        description: Report Tag filter.
-        type: string
-      Start:
-        description: Report start date
-        format: date-time
-        type: string
-        x-nullable: false
-    title: GetEngagementTimes
     type: object
   GetEpisode:
     description: GetEpisode
@@ -16501,7 +16062,7 @@ definitions:
     description: GetImageRedirect
     properties:
       ExpirationMinutes:
-        description: Image url expiration in minutes. Default = 60
+        description: Image url expiration in minutes. Default = 60. Maximum is 1440.
         type: string
       FilePath:
         description: Filepath of Image.
@@ -16588,32 +16149,6 @@ definitions:
     required:
       - Id
     title: GetMetacriticTv
-    type: object
-  GetMostActive:
-    description: GetMostActive
-    properties:
-      DateValue:
-        description: Days spanned by report
-        enum:
-          - today
-          - yesterday
-          - two_days_ago
-          - last_7_days
-          - last_14_days
-          - last_28_days
-          - last_60_days
-          - last_90_days
-          - last_365_days
-        type: string
-      Limit:
-        description: Number of records returned from top of response
-        format: int32
-        type: integer
-        x-nullable: false
-      ReportTag:
-        description: Report Tag filter.
-        type: string
-    title: GetMostActive
     type: object
   GetMovie:
     description: GetMovie
@@ -16889,91 +16424,6 @@ definitions:
         type: string
     title: GetPersonRanked
     type: object
-  GetPlatformHardware:
-    description: GetPlatformHardware
-    properties:
-      DateValue:
-        description: Days spanned by report
-        enum:
-          - today
-          - yesterday
-          - two_days_ago
-          - last_7_days
-          - last_14_days
-          - last_28_days
-          - last_60_days
-          - last_90_days
-          - last_365_days
-        type: string
-      End:
-        description: Report end date
-        format: date-time
-        type: string
-        x-nullable: false
-      Limit:
-        description: Number of records returned from top of response
-        format: int32
-        type: integer
-        x-nullable: false
-      ReportTag:
-        description: Report Tag filter.
-        type: string
-      Start:
-        description: Report start date
-        format: date-time
-        type: string
-        x-nullable: false
-    title: GetPlatformHardware
-    type: object
-  GetPlatformOS:
-    description: GetPlatformOS
-    properties:
-      DateValue:
-        description: Days spanned by report
-        enum:
-          - today
-          - yesterday
-          - two_days_ago
-          - last_7_days
-          - last_14_days
-          - last_28_days
-          - last_60_days
-          - last_90_days
-          - last_365_days
-        type: string
-      End:
-        description: Report end date
-        format: date-time
-        type: string
-        x-nullable: false
-      Limit:
-        description: Number of records returned from top of response
-        format: int32
-        type: integer
-        x-nullable: false
-      ReportTag:
-        description: Report Tag filter.
-        type: string
-      Start:
-        description: Report start date
-        format: date-time
-        type: string
-        x-nullable: false
-    title: GetPlatformOS
-    type: object
-  GetRecentVisitors:
-    description: GetRecentVisitors
-    properties:
-      Limit:
-        description: Number of records returned from top of response
-        format: int32
-        type: integer
-        x-nullable: false
-      ReportTag:
-        description: Report Tag filter.
-        type: string
-    title: GetRecentVisitors
-    type: object
   GetRevCaptionAttachmentContent:
     description: GetRevCaptionAttachmentContent
     properties:
@@ -17125,7 +16575,7 @@ definitions:
     description: GetScreenCaptureRedirect
     properties:
       ExpirationMinutes:
-        description: Image url expiration in minutes. Default = 60
+        description: Image url expiration in minutes. Default = 60. Maximum is 1440.
         type: string
       FilePath:
         description: Filepath of Image.
@@ -17354,27 +16804,6 @@ definitions:
     properties: {}
     title: GetShowGenres
     type: object
-  GetSummary:
-    description: GetSummary
-    properties:
-      DateValue:
-        description: Days spanned by report
-        enum:
-          - today
-          - yesterday
-          - two_days_ago
-          - last_7_days
-          - last_14_days
-          - last_28_days
-          - last_60_days
-          - last_90_days
-          - last_365_days
-        type: string
-      ReportTag:
-        description: Report Tag filter.
-        type: string
-    title: GetSummary
-    type: object
   GetTags:
     description: GetTags
     properties:
@@ -17437,26 +16866,6 @@ definitions:
       - Skip
       - Take
     title: GetTheatricalMovies
-    type: object
-  GetTitleReport:
-    description: GetTitleReport
-    properties:
-      End:
-        description: Report end date
-        format: date-time
-        type: string
-        x-nullable: false
-      PublishedId:
-        description: Title published ID.
-        type: string
-      Start:
-        description: Report start date
-        format: date-time
-        type: string
-        x-nullable: false
-    required:
-      - PublishedId
-    title: GetTitleReport
     type: object
   GetTmdbMovieIds:
     description: GetTmdbMovieIds
@@ -18632,41 +18041,10 @@ definitions:
       - Expires
     title: GetVideo
     type: object
-  GetVideoLog:
-    description: GetVideoLog
-    properties:
-      DateValue:
-        description: Days spanned by report
-        enum:
-          - today
-          - yesterday
-          - two_days_ago
-          - last_7_days
-          - last_14_days
-          - last_28_days
-          - last_60_days
-          - last_90_days
-          - last_365_days
-        type: string
-      End:
-        description: Report end date
-        format: date-time
-        type: string
-        x-nullable: false
-      Limit:
-        description: Number of records returned from top of response
-        format: int32
-        type: integer
-        x-nullable: false
-      ReportTag:
-        description: Report Tag filter.
-        type: string
-      Start:
-        description: Report start date
-        format: date-time
-        type: string
-        x-nullable: false
-    title: GetVideoLog
+  GetVideoDetailReport:
+    description: GetVideoDetailReport
+    properties: {}
+    title: GetVideoDetailReport
     type: object
   GetVideoTypes:
     description: GetVideoTypes
@@ -18679,84 +18057,6 @@ definitions:
       Id:
         type: string
     title: GetVideosById
-    type: object
-  GetViewers:
-    description: GetViewers
-    properties:
-      DateValue:
-        description: Days spanned by report
-        enum:
-          - today
-          - yesterday
-          - two_days_ago
-          - last_7_days
-          - last_14_days
-          - last_28_days
-          - last_60_days
-          - last_90_days
-          - last_365_days
-        type: string
-      ReportTag:
-        description: Report Tag filter.
-        type: string
-    title: GetViewers
-    type: object
-  GetViews:
-    description: GetViews
-    properties:
-      DateValue:
-        description: Days spanned by report
-        enum:
-          - today
-          - yesterday
-          - two_days_ago
-          - last_7_days
-          - last_14_days
-          - last_28_days
-          - last_60_days
-          - last_90_days
-          - last_365_days
-        type: string
-      ReportTag:
-        description: Report Tag filter.
-        type: string
-    title: GetViews
-    type: object
-  GetWebBrowsers:
-    description: GetWebBrowsers
-    properties:
-      DateValue:
-        description: Days spanned by report
-        enum:
-          - today
-          - yesterday
-          - two_days_ago
-          - last_7_days
-          - last_14_days
-          - last_28_days
-          - last_60_days
-          - last_90_days
-          - last_365_days
-        type: string
-      End:
-        description: Report end date
-        format: date-time
-        type: string
-        x-nullable: false
-      Limit:
-        description: Number of records returned from top of response
-        format: int32
-        type: integer
-        x-nullable: false
-      ReportTag:
-        description: Report Tag filter.
-        type: string
-      Start:
-        description: Report start date
-        format: date-time
-        type: string
-        x-nullable: false
-    title: GetWebBrowsers
     type: object
   GetWebediaMovieIds:
     description: GetWebediaMovieIds
@@ -19318,11 +18618,6 @@ definitions:
         type: string
     title: LanguageResponse
     type: object
-  List_AnalyticsCountryResponse_:
-    items:
-      $ref: '#/definitions/AnalyticsCountryResponse'
-    title: List<AnalyticsCountryResponse>
-    type: array
   List_CelebrityRankedResponse_:
     items:
       $ref: '#/definitions/CelebrityRankedResponse'
@@ -19338,11 +18633,6 @@ definitions:
       $ref: '#/definitions/ChartPersonItem'
     title: List<ChartPersonItem>
     type: array
-  List_CityResponse_:
-    items:
-      $ref: '#/definitions/CityResponse'
-    title: List<CityResponse>
-    type: array
   List_CompanyResponse_:
     items:
       $ref: '#/definitions/CompanyResponse'
@@ -19357,16 +18647,6 @@ definitions:
     items:
       $ref: '#/definitions/DbShowCertification'
     title: List<DbShowCertification>
-    type: array
-  List_EngagementActionsResponse_:
-    items:
-      $ref: '#/definitions/EngagementActionsResponse'
-    title: List<EngagementActionsResponse>
-    type: array
-  List_EngagementTimesResponse_:
-    items:
-      $ref: '#/definitions/EngagementTimesResponse'
-    title: List<EngagementTimesResponse>
     type: array
   List_EpisodeChangeHistoryResponse_:
     items:
@@ -19397,11 +18677,6 @@ definitions:
     items:
       $ref: '#/definitions/LanguageResponse'
     title: List<LanguageResponse>
-    type: array
-  List_MostActiveResponse_:
-    items:
-      $ref: '#/definitions/MostActiveResponse'
-    title: List<MostActiveResponse>
     type: array
   List_MovieAlternateIdTypeResponse_:
     items:
@@ -19463,25 +18738,10 @@ definitions:
       $ref: '#/definitions/PersonRankedResponse'
     title: List<PersonRankedResponse>
     type: array
-  List_PlatformHardwareResponse_:
-    items:
-      $ref: '#/definitions/PlatformHardwareResponse'
-    title: List<PlatformHardwareResponse>
-    type: array
-  List_PlatformOSResponse_:
-    items:
-      $ref: '#/definitions/PlatformOSResponse'
-    title: List<PlatformOSResponse>
-    type: array
   List_ProgramVideo_:
     items:
       $ref: '#/definitions/ProgramVideo'
     title: List<ProgramVideo>
-    type: array
-  List_RecentVisitorsResponse_:
-    items:
-      $ref: '#/definitions/RecentVisitorsResponse'
-    title: List<RecentVisitorsResponse>
     type: array
   List_SearchEntertainmentAutoCompleteResponse_:
     items:
@@ -19532,11 +18792,6 @@ definitions:
     items:
       $ref: '#/definitions/TagResponse'
     title: List<TagResponse>
-    type: array
-  List_TitleReportResponse_:
-    items:
-      $ref: '#/definitions/TitleReportResponse'
-    title: List<TitleReportResponse>
     type: array
   List_TrendSourceResponse_:
     items:
@@ -19593,30 +18848,10 @@ definitions:
       $ref: '#/definitions/TvMediaTeamResponse'
     title: List<TvMediaTeamResponse>
     type: array
-  List_VideoLogResponse_:
-    items:
-      $ref: '#/definitions/VideoLogResponse'
-    title: List<VideoLogResponse>
-    type: array
   List_VideoTypeResponse_:
     items:
       $ref: '#/definitions/VideoTypeResponse'
     title: List<VideoTypeResponse>
-    type: array
-  List_ViewersResponse_:
-    items:
-      $ref: '#/definitions/ViewersResponse'
-    title: List<ViewersResponse>
-    type: array
-  List_ViewsResponse_:
-    items:
-      $ref: '#/definitions/ViewsResponse'
-    title: List<ViewsResponse>
-    type: array
-  List_WebBrowsersResponse_:
-    items:
-      $ref: '#/definitions/WebBrowsersResponse'
-    title: List<WebBrowsersResponse>
     type: array
   MatchToEntertainmentMovie:
     description: MatchToEntertainmentMovie
@@ -19743,7 +18978,6 @@ definitions:
         type: integer
     required:
       - ProgramType
-      - EntertainmentId
     title: MatchToEntertainmentProgram
     type: object
   MatchToEntertainmentProgramResponse:
@@ -19769,6 +19003,11 @@ definitions:
       Success:
         description: Status of match operation.
         type: boolean
+        x-nullable: false
+      Took:
+        description: Elastic search time elapsed.
+        format: int64
+        type: integer
         x-nullable: false
     title: MatchToEntertainmentProgramResponse
     type: object
@@ -20073,17 +19312,6 @@ definitions:
         type: number
     title: MetacriticTvResponseProductUserscore
     type: object
-  MostActiveResponse:
-    description: MostActiveResponse
-    properties:
-      UserIpAddress:
-        type: string
-      Visits:
-        format: int32
-        type: integer
-        x-nullable: false
-    title: MostActiveResponse
-    type: object
   Movie:
     description: Movie
     properties:
@@ -20184,6 +19412,11 @@ definitions:
         description: List of tags associated with Movie.
         items:
           $ref: '#/definitions/MovieTag'
+        type: array
+      Themes:
+        description: List of themes associated with Movie.
+        items:
+          $ref: '#/definitions/MovieTheme'
         type: array
       TimeStamp:
         description: Time of last change to overall object.
@@ -20581,6 +19814,11 @@ definitions:
         items:
           $ref: '#/definitions/MovieTag'
         type: array
+      Themes:
+        description: List of themes associated with Movie.
+        items:
+          $ref: '#/definitions/MovieTheme'
+        type: array
       TimeStamp:
         description: Time of last change to overall object.
         format: date-time
@@ -20634,6 +19872,19 @@ definitions:
         type: integer
         x-nullable: false
     title: MovieTag
+    type: object
+  MovieTheme:
+    description: MovieTheme
+    properties:
+      Name:
+        description: Name of the Theme.
+        type: string
+      ThemeId:
+        description: ID of the Theme.
+        format: int32
+        type: integer
+        x-nullable: false
+    title: MovieTheme
     type: object
   MovieVideo:
     description: MovieVideo
@@ -21377,36 +20628,6 @@ definitions:
         x-nullable: false
     title: PersonTag
     type: object
-  PlatformHardwareResponse:
-    description: PlatformHardwareResponse
-    properties:
-      DeviceType:
-        type: string
-      Percentage:
-        format: double
-        type: number
-        x-nullable: false
-      Viewers:
-        format: int32
-        type: integer
-        x-nullable: false
-    title: PlatformHardwareResponse
-    type: object
-  PlatformOSResponse:
-    description: PlatformOSResponse
-    properties:
-      OS_Name:
-        type: string
-      Percentage:
-        format: double
-        type: number
-        x-nullable: false
-      Viewers:
-        format: int32
-        type: integer
-        x-nullable: false
-    title: PlatformOSResponse
-    type: object
   Program:
     description: Program
     properties:
@@ -21680,23 +20901,6 @@ definitions:
       Type:
         type: string
     title: ProgramVideo
-    type: object
-  RecentVisitorsResponse:
-    description: RecentVisitorsResponse
-    properties:
-      Collector_Tstamp:
-        format: date-time
-        type: string
-        x-nullable: false
-      Referrer:
-        type: string
-      User_IpAddress:
-        type: string
-      Views:
-        format: int32
-        type: integer
-        x-nullable: false
-    title: RecentVisitorsResponse
     type: object
   Recommendation:
     description: Recommendation
@@ -21984,6 +21188,10 @@ definitions:
         description: People with images greater than or equal to image width.
         format: int32
         type: integer
+      Minimum_IvaRating:
+        description: Filter results with a minimum Rating greater than or equal to this value. (0 to 100)
+        format: int32
+        type: integer
       ModifiedRecordsSince:
         description: Filter results based on timestamp.  Returns >= value timestamp (UTC) provided.
         format: date-time
@@ -21999,6 +21207,14 @@ definitions:
         format: int32
         type: integer
         x-nullable: false
+      SortBy:
+        description: SortBy
+        enum:
+          - NOT_SET
+          - Relevance
+          - TimeStamp
+          - IvaRating
+        type: string
       SortByTimeStamp:
         description: Sort results based on last modified descending.  Default is sorted by _score
         type: boolean
@@ -22111,6 +21327,7 @@ definitions:
           - Availabilities
           - Genres
           - ProgramTrends
+          - Themes
           - Subjects
           - FilmingLocations
           - NarrativeLocations
@@ -22219,6 +21436,8 @@ definitions:
           - AtomTickets
           - YouTubePremium
           - DCUniverse
+          - AppleTvPlus
+          - DisneyPlus
         items:
           type: string
           x-nullable: false
@@ -22296,6 +21515,11 @@ definitions:
         format: int32
         type: integer
         x-nullable: false
+      Themes:
+        description: List of themes (movie and show).
+        items:
+          type: string
+        type: array
       Title:
         description: Title search.
         type: string
@@ -23380,6 +22604,11 @@ definitions:
         items:
           $ref: '#/definitions/Tag'
         type: array
+      Themes:
+        description: List of themes associated with Show.
+        items:
+          $ref: '#/definitions/ShowTheme'
+        type: array
       TimeStamp:
         description: Time of last change to overall object.
         format: date-time
@@ -23788,6 +23017,11 @@ definitions:
         items:
           $ref: '#/definitions/Tag'
         type: array
+      Themes:
+        description: List of themes associated with Show.
+        items:
+          $ref: '#/definitions/ShowTheme'
+        type: array
       TimeStamp:
         description: Time of last change to overall object.
         format: date-time
@@ -23827,6 +23061,19 @@ definitions:
         type: number
         x-nullable: false
     title: ShowResult
+    type: object
+  ShowTheme:
+    description: ShowTheme
+    properties:
+      Name:
+        description: Name of the Theme.
+        type: string
+      ThemeId:
+        description: ID of the Theme.
+        format: int32
+        type: integer
+        x-nullable: false
+    title: ShowTheme
     type: object
   ShowVideo:
     description: ShowVideo
@@ -24071,27 +23318,6 @@ definitions:
         type: string
     title: Station
     type: object
-  SummaryResponse:
-    description: SummaryResponse
-    properties:
-      AverageViews:
-        format: float
-        type: number
-        x-nullable: false
-      UniqueViewers:
-        format: int32
-        type: integer
-        x-nullable: false
-      Viewers:
-        format: int32
-        type: integer
-        x-nullable: false
-      Views:
-        format: int32
-        type: integer
-        x-nullable: false
-    title: SummaryResponse
-    type: object
   Tag:
     description: Tag
     properties:
@@ -24143,27 +23369,6 @@ definitions:
       DateTimeString:
         type: string
     title: TestDateTimeResponse
-    type: object
-  TitleReportResponse:
-    description: TitleReportResponse
-    properties:
-      Day:
-        format: date-time
-        type: string
-        x-nullable: false
-      PublishedId:
-        format: int32
-        type: integer
-        x-nullable: false
-      Viewers:
-        format: int32
-        type: integer
-        x-nullable: false
-      Views:
-        format: int32
-        type: integer
-        x-nullable: false
-    title: TitleReportResponse
     type: object
   TrendSourceResponse:
     description: TrendSourceResponse
@@ -24737,32 +23942,90 @@ definitions:
         type: string
     title: UpdateMyVideo
     type: object
-  VideoLogResponse:
-    description: VideoLogResponse
+  VideoDetailReport:
+    description: VideoDetailReport
     properties:
-      Percentage:
-        format: double
-        type: number
-        x-nullable: false
-      UniqueViewers:
+      EpisodeHDVideo:
         format: int32
         type: integer
         x-nullable: false
-      VideoPublishedId:
+      EpisodesRelated:
         format: int32
         type: integer
         x-nullable: false
-      VideoTitle:
-        type: string
-      Viewers:
+      EpisodesTrailers:
         format: int32
         type: integer
         x-nullable: false
-      Views:
+      GameTotal:
         format: int32
         type: integer
         x-nullable: false
-    title: VideoLogResponse
+      GamesRelated:
+        format: int32
+        type: integer
+        x-nullable: false
+      GamesTrailers:
+        format: int32
+        type: integer
+        x-nullable: false
+      MovieHdVideo:
+        format: int32
+        type: integer
+        x-nullable: false
+      MovieInternational:
+        format: int32
+        type: integer
+        x-nullable: false
+      MovieRelated:
+        format: int32
+        type: integer
+        x-nullable: false
+      MovieTrailers:
+        format: int32
+        type: integer
+        x-nullable: false
+      MoviesTotal:
+        format: int32
+        type: integer
+        x-nullable: false
+      SeasonHDVideo:
+        format: int32
+        type: integer
+        x-nullable: false
+      SeasonsRelated:
+        format: int32
+        type: integer
+        x-nullable: false
+      SeasonsTrailers:
+        format: int32
+        type: integer
+        x-nullable: false
+      SeriesRelated:
+        format: int32
+        type: integer
+        x-nullable: false
+      SeriesTrailers:
+        format: int32
+        type: integer
+        x-nullable: false
+      ShowHDVideo:
+        format: int32
+        type: integer
+        x-nullable: false
+      TVHd:
+        format: int32
+        type: integer
+        x-nullable: false
+      TVTotal:
+        format: int32
+        type: integer
+        x-nullable: false
+      Total:
+        format: int32
+        type: integer
+        x-nullable: false
+    title: VideoDetailReport
     type: object
   VideoResponse:
     description: VideoResponse
@@ -24804,47 +24067,6 @@ definitions:
         description: Type of VideoType.
         type: string
     title: VideoTypeResponse
-    type: object
-  ViewersResponse:
-    description: ViewersResponse
-    properties:
-      Day:
-        format: date-time
-        type: string
-        x-nullable: false
-      Viewers:
-        format: int32
-        type: integer
-        x-nullable: false
-    title: ViewersResponse
-    type: object
-  ViewsResponse:
-    description: ViewsResponse
-    properties:
-      Day:
-        format: date-time
-        type: string
-        x-nullable: false
-      Views:
-        format: int32
-        type: integer
-        x-nullable: false
-    title: ViewsResponse
-    type: object
-  WebBrowsersResponse:
-    description: WebBrowsersResponse
-    properties:
-      Browser:
-        type: string
-      Percentage:
-        format: double
-        type: number
-        x-nullable: false
-      Viewers:
-        format: int32
-        type: integer
-        x-nullable: false
-    title: WebBrowsersResponse
     type: object
   XRoadMediaRecommendationResponse:
     description: XRoadMediaRecommendationResponse

@@ -2114,8 +2114,8 @@ definitions:
         readOnly: true
         type: string
       import_keywords_data_by_country:
-        readOnly: true
-        type: string
+        default: true
+        type: boolean
       name:
         readOnly: true
         type: string
@@ -2195,8 +2195,8 @@ definitions:
         readOnly: true
         type: string
       import_keywords_data_by_country:
-        readOnly: true
-        type: string
+        default: true
+        type: boolean
       name:
         readOnly: true
         type: string
@@ -2957,6 +2957,9 @@ definitions:
       date_created:
         readOnly: true
         type: string
+      has_actionboard:
+        readOnly: true
+        type: string
       has_crawl:
         readOnly: true
         type: string
@@ -2964,6 +2967,9 @@ definitions:
         readOnly: true
         type: string
       has_logs:
+        readOnly: true
+        type: string
+      last_actionboard_revision:
         readOnly: true
         type: string
       last_crawls_revisions:
@@ -3027,17 +3033,20 @@ definitions:
       date_last_successful_revision:
         readOnly: true
         type: string
+      last_revision_status:
+        readOnly: true
+        type: string
+      runnable:
+        readOnly: true
+        type: string
       segments:
         readOnly: true
         type: string
       stats:
         readOnly: true
         type: string
-      url:
-        type: string
     required:
       - datasource
-      - url
     type: object
   ProjectSavedFilter:
     description: Project's saved UrlFilter

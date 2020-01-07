@@ -138,6 +138,50 @@ paths:
       tags:
         - articles
       x-subcategory: Private Article
+  /account/articles/export:
+    get:
+      description: Return status on all reports generated for the account from the oauth credentials
+      operationId: account_article_report
+      parameters:
+        - description: A group ID to filter by
+          format: int64
+          in: query
+          name: group_id
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: OK. An array of account report entries
+          schema:
+            items:
+              $ref: '#/definitions/AccountReport'
+            type: array
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      security:
+        - OAuth2:
+            - all
+      summary: Account Article Report
+      tags:
+        - articles
+    post:
+      description: Initiate a new Article Report for this Account
+      operationId: account_article_report_generate
+      responses:
+        '200':
+          description: OK. AccountReport created.
+          schema:
+            $ref: '#/definitions/AccountReport'
+        '500':
+          description: Internal Server Error
+      security:
+        - OAuth2:
+            - all
+      summary: Initiate a new Report
+      tags:
+        - articles
   /account/articles/search:
     post:
       description: Returns a list of private articles filtered by the search parameters
@@ -1254,7 +1298,6 @@ paths:
             - modified_date
             - views
             - shares
-            - downloads
             - cites
           in: query
           name: order
@@ -2886,14 +2929,11 @@ paths:
           required: false
           type: integer
         - default: published_date
-          description: The field by which to order. Default varies by endpoint/resource.
+          description: The field by which to order.
           enum:
             - published_date
             - modified_date
             - views
-            - shares
-            - downloads
-            - cites
           in: query
           name: order
           required: false
@@ -2980,7 +3020,7 @@ paths:
           name: search
           required: false
           schema:
-            $ref: '#/definitions/CommonSearch'
+            $ref: '#/definitions/ProjectsSearch'
       responses:
         '200':
           description: OK. An array of projects
@@ -4160,7 +4200,6 @@ paths:
             - modified_date
             - views
             - shares
-            - downloads
             - cites
           in: query
           name: order
@@ -4555,9 +4594,6 @@ paths:
             - published_date
             - modified_date
             - views
-            - shares
-            - downloads
-            - cites
           in: query
           name: order
           required: false
@@ -4614,7 +4650,7 @@ paths:
           name: search
           required: false
           schema:
-            $ref: '#/definitions/CommonSearch'
+            $ref: '#/definitions/ProjectsSearch'
       responses:
         '200':
           description: OK. An array of projects
@@ -4835,6 +4871,37 @@ definitions:
     properties: {}
     type: object
     x-tag: institutions
+  AccountReport:
+    properties:
+      account_id:
+        description: The ID of the account which generated this report.
+        format: int64
+        type: integer
+      created_date:
+        description: Date when the AccountReport was requested
+        example: '2017-05-15T15:12:26Z'
+        type: string
+      download_url:
+        description: The download link for the generated XLSX
+        example: 'https://some.com/storage/path/123/report-456.xlsx'
+        format: url
+        type: string
+      group_id:
+        description: 'The group ID that was used to filter the report, if any.'
+        format: int64
+        type: integer
+      id:
+        description: A unique ID for the AccountRecord
+        format: int64
+        type: integer
+      status:
+        description: Status of the report
+        enum:
+          - missing
+          - pending
+          - done
+        type: string
+    type: object
   AccountUpdate:
     properties:
       group_id:
@@ -4877,20 +4944,8 @@ definitions:
         format: int64
         type: integer
       published_date:
-        description: Publishing date
+        description: Posted date
         example: '2015-12-31T23:59:59.000Z'
-        type:
-          - string
-          - 'null'
-      resource_doi:
-        description: Article DOI
-        example: 10.5072/FK2.developmentfigshare.2000005
-        type:
-          - string
-          - 'null'
-      resource_title:
-        description: Article resource title
-        example: first article
         type:
           - string
           - 'null'
@@ -4900,7 +4955,7 @@ definitions:
         format: url
         type: string
       timeline:
-        $ref: '#/definitions/TimelineUpdate'
+        $ref: '#/definitions/Timeline'
         description: Various timeline dates
         type: object
       title:
@@ -4958,6 +5013,18 @@ definitions:
         items:
           $ref: '#/definitions/PublicFile'
         type: array
+      resource_doi:
+        description: Article DOI
+        example: 10.5072/FK2.developmentfigshare.2000005
+        type:
+          - string
+          - 'null'
+      resource_title:
+        description: Article resource title
+        example: first article
+        type:
+          - string
+          - 'null'
     type: object
     x-tag: articles
   ArticleCompletePrivate:
@@ -5148,7 +5215,7 @@ definitions:
         example: file
         type: string
       is_embargoed:
-        description: Confidentiality status
+        description: Embargo status
         example: true
         type: boolean
     type: object
@@ -5178,6 +5245,17 @@ definitions:
         example: 1
         format: int64
         type: integer
+      order:
+        description: The field by which to order
+        enum:
+          - published_date
+          - modified_date
+          - views
+          - shares
+          - downloads
+          - cites
+        example: published_date
+        type: string
       resource_doi:
         description: Only return articles with this resource_doi
         example: 10.6084/m9.figshare.1407024
@@ -5576,6 +5654,10 @@ definitions:
         items:
           type: string
         type: array
+      timeline:
+        $ref: '#/definitions/Timeline'
+        description: Various timeline dates
+        type: object
       version:
         description: Collection version
         example: 1
@@ -5690,6 +5772,10 @@ definitions:
         items:
           type: string
         type: array
+      timeline:
+        $ref: '#/definitions/TimelineUpdate'
+        description: Various timeline dates
+        type: object
       title:
         description: Title of article
         example: Test article title
@@ -5739,6 +5825,16 @@ definitions:
       handle:
         description: Only return collections with this handle
         example: 10084/figshare.1407024
+        type: string
+      order:
+        description: The field by which to order.
+        enum:
+          - published_date
+          - modified_date
+          - views
+          - shares
+          - cites
+        example: published_date
         type: string
       resource_doi:
         description: Only return collections with this resource_doi
@@ -5853,6 +5949,10 @@ definitions:
         items:
           type: string
         type: array
+      timeline:
+        $ref: '#/definitions/TimelineUpdate'
+        description: Various timeline dates
+        type: object
       title:
         description: Title of article
         example: Test article title
@@ -5905,18 +6005,6 @@ definitions:
         maximum: 5000
         minimum: 0
         type: integer
-      order:
-        default: published_date
-        description: The field by which to order. Default varies by endpoint/resource.
-        enum:
-          - published_date
-          - modified_date
-          - views
-          - shares
-          - downloads
-          - cites
-        example: published_date
-        type: string
       order_direction:
         default: desc
         description: Direction of ordering
@@ -6829,6 +6917,21 @@ definitions:
         type: string
     type: object
     x-tag: projects
+  ProjectsSearch:
+    allOf:
+      - $ref: '#/definitions/CommonSearch'
+    properties:
+      order:
+        default: published_date
+        description: The field by which to order.
+        enum:
+          - published_date
+          - modified_date
+          - views
+        example: published_date
+        type: string
+    type: object
+    x-tag: projects
   PublicFile:
     properties:
       computed_md5:
@@ -7082,6 +7185,8 @@ x-additional-descriptions:
         title: Example Upload on figshare
       - content: description_upload_output
         title: Output of Script
+      - content: description_upload_bash
+        title: Upload Bash Script
     title: Upload files
   - position: bottom
     subsections:

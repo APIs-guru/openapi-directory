@@ -853,24 +853,26 @@ paths:
     get:
       consumes: []
       deprecated: false
-      operationId: AlbumApi_GetTracksFormatted
+      operationId: AlbumApi_GetTracksFields
       parameters:
-        - description: Album ID.
-          format: int32
+        - format: int32
           in: path
           name: id
           required: true
           type: integer
         - collectionFormat: multi
-          description: 'Field to be included, for example "featvocalists" or "url". Can be specified multiple times.'
           in: query
           items:
             type: string
           name: field
           required: false
           type: array
-        - description: Language preference.
-          enum:
+        - format: int32
+          in: query
+          name: discNumber
+          required: false
+          type: integer
+        - enum:
             - Default
             - Japanese
             - Romaji
@@ -897,7 +899,6 @@ paths:
                 type: string
               type: object
             type: array
-      summary: Gets tracks for an album formatted using the CSV format string.
       tags:
         - AlbumApi
   '/api/albums/{id}/user-collections':
@@ -2774,6 +2775,20 @@ paths:
           name: query
           required: false
           type: string
+        - collectionFormat: multi
+          description: Filter by one or more tag Ids (optional).
+          in: query
+          items:
+            format: int32
+            type: integer
+          name: tagId
+          required: false
+          type: array
+        - description: 'Include child tags, if the tags being filtered by have any.'
+          in: query
+          name: childTags
+          required: false
+          type: boolean
         - description: 'Match mode for list name (optional, defaults to Auto).'
           enum:
             - Auto
@@ -3266,6 +3281,12 @@ paths:
           format: int32
           in: query
           name: releaseEventId
+          required: false
+          type: integer
+        - description: Filter by parent song. By default there is no filtering.
+          format: int32
+          in: query
+          name: parentSongId
           required: false
           type: integer
         - description: Filter by entry status (optional).
@@ -5394,6 +5415,15 @@ paths:
           name: query
           required: false
           type: string
+        - collectionFormat: multi
+          description: Filter by tag Id (optional). This filter can be specified multiple times.
+          in: query
+          items:
+            format: int32
+            type: integer
+          name: tagId
+          required: false
+          type: array
         - description: Filter by artist type.
           enum:
             - Unknown
@@ -5938,6 +5968,42 @@ paths:
       summary: Gets a specific user's rating for a song.
       tags:
         - UserApi
+  '/api/users/{id}/reports':
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      operationId: UserApi_PostReport
+      parameters:
+        - format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+        - in: body
+          name: model
+          required: true
+          schema:
+            $ref: '#/definitions/CreateReportModel'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - text/javascript
+        - application/javascript
+        - application/json-p
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: boolean
+      tags:
+        - UserApi
   '/api/users/{id}/settings/{settingName}':
     post:
       consumes:
@@ -5979,19 +6045,28 @@ paths:
       deprecated: false
       operationId: UserApi_GetSongLists
       parameters:
-        - description: User whose song lists are to be loaded.
-          format: int32
+        - format: int32
           in: path
           name: id
           required: true
           type: integer
-        - description: Song list name query (optional).
-          in: query
+        - in: query
           name: query
           required: false
           type: string
-        - description: 'Match mode for song name (optional, defaults to Auto).'
-          enum:
+        - collectionFormat: multi
+          in: query
+          items:
+            format: int32
+            type: integer
+          name: tagId
+          required: false
+          type: array
+        - in: query
+          name: childTags
+          required: false
+          type: boolean
+        - enum:
             - Auto
             - Partial
             - StartsWith
@@ -6001,25 +6076,21 @@ paths:
           name: nameMatchMode
           required: false
           type: string
-        - description: 'First item to be retrieved (optional, defaults to 0).'
-          format: int32
+        - format: int32
           in: query
           name: start
           required: false
           type: integer
-        - description: 'Maximum number of results to be loaded (optional, defaults to 10, maximum of 50).'
-          format: int32
+        - format: int32
           in: query
           name: maxResults
           required: false
           type: integer
-        - description: 'Whether to load total number of items (optional, default to false).'
-          in: query
+        - in: query
           name: getTotalCount
           required: false
           type: boolean
-        - description: 'Sort option for the song lists. Possible values are None, Name, Date, CreateDate. Default is Name.'
-          enum:
+        - enum:
             - None
             - Name
             - Date
@@ -6028,8 +6099,7 @@ paths:
           name: sort
           required: false
           type: string
-        - description: List of optional fields.
-          enum:
+        - enum:
             - None
             - Description
             - MainPicture
@@ -6050,7 +6120,6 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/PartialFindResult[SongListForApiContract]'
-      summary: Gets a list of song lists for a user.
       tags:
         - UserApi
 definitions:
@@ -6712,6 +6781,18 @@ definitions:
         format: int32
         type: integer
       message:
+        type: string
+    type: object
+  CreateReportModel:
+    properties:
+      reason:
+        type: string
+      reportType:
+        enum:
+          - MaliciousIP
+          - Spamming
+          - RemovePermissions
+          - Other
         type: string
     type: object
   DiscussionFolderContract:

@@ -2455,6 +2455,39 @@ paths:
       summary: 'Gets all disruptions for the specified StopPointId, plus disruptions for any child Naptan records it may have.'
       tags:
         - StopPoint
+  '/StopPoint/{id}/ArrivalDepartures':
+    get:
+      deprecated: false
+      operationId: StopPoint_ArrivalDepartures
+      parameters:
+        - description: 'A StopPoint id (station naptan code e.g. 940GZZLUASL, you can use /StopPoint/Search/{query} endpoint to find a stop point id from a station name)'
+          in: path
+          name: id
+          required: true
+          type: string
+        - collectionFormat: multi
+          description: 'A comma-separated list of line ids e.g. tfl-rail, london-overground'
+          in: query
+          items:
+            type: string
+          name: lineIds
+          required: true
+          type: array
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Tfl.Api.Presentation.Entities.ArrivalDeparture'
+            type: array
+      summary: Gets the list of arrival and departure predictions for the given stop point id (overground and tfl rail only)
+      tags:
+        - StopPoint
   '/StopPoint/{id}/Arrivals':
     get:
       deprecated: false
@@ -3166,6 +3199,61 @@ definitions:
         type: string
       value:
         type: string
+    type: object
+  Tfl.Api.Presentation.Entities.ArrivalDeparture:
+    description: DTO to capture the prediction details
+    properties:
+      cause:
+        description: Reason for cancellation or delay
+        type: string
+      departureStatus:
+        description: Status of departure
+        enum:
+          - OnTime
+          - Delayed
+          - Cancelled
+          - NotStoppingAtStation
+        type: string
+      destinationName:
+        description: Name of the destination
+        type: string
+      destinationNaptanId:
+        description: Naptan Identifier for the prediction's destination
+        type: string
+      estimatedTimeOfArrival:
+        description: Estimated time of arrival
+        format: date-time
+        type: string
+      estimatedTimeOfDeparture:
+        description: Estimated time of arrival
+        format: date-time
+        type: string
+      minutesAndSecondsToArrival:
+        description: Estimated time of arrival
+        type: string
+      minutesAndSecondsToDeparture:
+        description: Estimated time of arrival
+        type: string
+      naptanId:
+        description: Identifier for the prediction
+        type: string
+      platformName:
+        description: 'Platform name (for bus, this is the stop letter)'
+        type: string
+      scheduledTimeOfArrival:
+        description: Estimated time of arrival
+        format: date-time
+        type: string
+      scheduledTimeOfDeparture:
+        description: Estimated time of arrival
+        format: date-time
+        type: string
+      stationName:
+        description: Station name
+        type: string
+      timing:
+        $ref: '#/definitions/Tfl.Api.Presentation.Entities.PredictionTiming'
+        description: Keep the original timestamp from MongoDb fo debugging purposes
     type: object
   Tfl.Api.Presentation.Entities.Bay:
     properties:

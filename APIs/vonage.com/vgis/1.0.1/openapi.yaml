@@ -1,19 +1,19 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://api.vonage.com/vgis'
+  - url: 'https://api.vonage.com/t/vbc.prod/vis/v1'
 info:
   contact:
     email: gunifydevops@vonage.com
     name: VGIS
     url: 'https://integrate.vonage.com'
-  description: Vonage Integration Suite
+  description: |
+    The Vonage Integration Suite API enables call control and webhooks for call events.
+
+    Your application must subscribe to the VonageIntegrationSuite API suite to use this API.
   title: Vonage Integration Suite
   version: 1.0.1
   x-origin:
-    - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.31
-      format: openapi
+    - format: openapi
       url: 'https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/vonage-business-cloud/vgis.yml'
       version: '3.0'
   x-providerName: vonage.com
@@ -1071,7 +1071,7 @@ components:
       properties:
         id:
           description: Unique identifier of the account
-          example: 123456
+          example: 257073
           type: integer
         name:
           description: Name of the account
@@ -1319,7 +1319,7 @@ components:
       properties:
         accountId:
           description: Unique identifier of the user's account
-          example: 123456
+          example: 257073
           type: integer
         acountLabel:
           description: The name of the user's account
@@ -1339,7 +1339,7 @@ components:
           type: string
         id:
           description: Unique identifier of the user
-          example: 123456
+          example: 522078
           type: integer
         lastName:
           description: Last name of the user
@@ -1392,7 +1392,7 @@ components:
       properties:
         accountId:
           description: Unique identifier of the account
-          example: 123456
+          example: 257073
           type: string
         createdAt:
           description: Created time for the webhook
@@ -1413,7 +1413,7 @@ components:
           type: string
         id:
           description: Unique identifier for the webhook
-          example: 123456
+          example: 184094
           type: string
         metadataPolicy:
           description: Metadata policy for the webhook
@@ -1473,7 +1473,7 @@ components:
           type: string
         userId:
           description: Unique identifier of the user
-          example: 123456
+          example: 522078
           type: string
       type: object
     WebhookCreate:

@@ -3,17 +3,17 @@ servers:
   - url: 'https://api.vonage.com/t/vbc.prod/reports'
 info:
   contact:
-    name: Report API
+    name: Vonage Business Cloud Support
     url: 'https://businesssupport.vonage.com/contactus'
-  description: Retrieve call logs for your account.
+  description: |
+    The Vonage Business Cloud Reports API enables you to retrieve call logs for your account.
+
+    Your application must subscribe to the Reports API suite to use this API.
   termsOfService: 'https://www.vonage.com/business/legal-policy-center/business-cloud/tos'
   title: Reports
   version: 1.0.0
   x-origin:
-    - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.31
-      format: openapi
+    - format: openapi
       url: 'https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/vonage-business-cloud/reports.yml'
       version: '3.0'
   x-providerName: vonage.com
@@ -117,8 +117,8 @@ paths:
 components:
   parameters:
     AccountID:
-      description: The account ID
-      example: 123456
+      description: The Vonage Business Cloud account ID
+      example: 913874
       in: path
       name: account_id
       required: true

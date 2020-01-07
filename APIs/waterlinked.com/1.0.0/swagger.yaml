@@ -636,8 +636,8 @@ definitions:
   CreatePoiPayload:
     description: A list of all POI
     example:
-      depth: 0.768439233512868
-      icon: Fugit quis vero in deleniti qui nihil.
+      depth: 0.5399978780328414
+      icon: Quis vero in deleniti qui nihil.
       id: 6536865564212348000
       lat: 0.9848439086783396
       lng: 0.983923109918765
@@ -646,12 +646,12 @@ definitions:
     properties:
       depth:
         description: Depth of POI
-        example: 0.768439233512868
+        example: 0.5399978780328414
         format: double
         type: number
       icon:
         description: Icon of POI
-        example: Fugit quis vero in deleniti qui nihil.
+        example: Quis vero in deleniti qui nihil.
         type: string
       id:
         description: Unique POI id
@@ -688,22 +688,27 @@ definitions:
   ModifyConfigPayload:
     description: Configuration parameters
     example:
+      antenna_enabled: true
       channel: 13
-      compass: static
-      environment: reflective
-      external_pps_enabled: false
-      gps: onboard
+      compass: external
+      environment: openwater
+      external_pps_enabled: true
+      gps: external
       imu_vehicle_enabled: false
-      locator_type: u1
+      locator_type: p1
       range_max_x: 50
       range_max_y: 50
       range_max_z: 50
-      range_min_x: 50
-      range_min_y: 50
+      range_min_x: -50
+      range_min_y: -50
       static_lat: 63.422
       static_lon: 10.424
       static_orientation: 42
     properties:
+      antenna_enabled:
+        description: Enable use of antenna
+        example: true
+        type: boolean
       channel:
         description: Channel to use
         example: 13
@@ -716,18 +721,18 @@ definitions:
           - onboard
           - static
           - external
-        example: static
+        example: external
         type: string
       environment:
         description: Environment setting
         enum:
           - reflective
           - openwater
-        example: reflective
+        example: openwater
         type: string
       external_pps_enabled:
         description: Enable external PPS input to master
-        example: false
+        example: true
         type: boolean
       gps:
         description: GPS provider setting
@@ -735,7 +740,7 @@ definitions:
           - onboard
           - static
           - external
-        example: onboard
+        example: external
         type: string
       imu_vehicle_enabled:
         description: Enable IMU input from vehicle
@@ -749,7 +754,7 @@ definitions:
           - s1
           - p1
           - u1
-        example: u1
+        example: p1
         type: string
       range_max_x:
         description: Max range (meters)
@@ -771,13 +776,13 @@ definitions:
         type: number
       range_min_x:
         description: Max range (meters)
-        example: 50
+        example: -50
         maximum: 0
         minimum: -100
         type: number
       range_min_y:
         description: Max range (meters)
-        example: 50
+        example: -50
         maximum: 0
         minimum: -100
         type: number
@@ -1040,8 +1045,8 @@ definitions:
   UpdatePoiPayload:
     description: A list of all POI
     example:
-      depth: 0.768439233512868
-      icon: Fugit quis vero in deleniti qui nihil.
+      depth: 0.5399978780328414
+      icon: Quis vero in deleniti qui nihil.
       id: 6536865564212348000
       lat: 0.9848439086783396
       lng: 0.983923109918765
@@ -1050,12 +1055,12 @@ definitions:
     properties:
       depth:
         description: Depth of POI
-        example: 0.768439233512868
+        example: 0.5399978780328414
         format: double
         type: number
       icon:
         description: Icon of POI
-        example: Fugit quis vero in deleniti qui nihil.
+        example: Quis vero in deleniti qui nihil.
         type: string
       id:
         description: Unique POI id
@@ -1159,22 +1164,27 @@ definitions:
   WaterlinkedConfiguration:
     description: Configuration parameters (default view)
     example:
+      antenna_enabled: true
       channel: 13
-      compass: static
-      environment: reflective
-      external_pps_enabled: false
-      gps: onboard
+      compass: external
+      environment: openwater
+      external_pps_enabled: true
+      gps: external
       imu_vehicle_enabled: false
-      locator_type: u1
+      locator_type: p1
       range_max_x: 50
       range_max_y: 50
       range_max_z: 50
-      range_min_x: 50
-      range_min_y: 50
+      range_min_x: -50
+      range_min_y: -50
       static_lat: 63.422
       static_lon: 10.424
       static_orientation: 42
     properties:
+      antenna_enabled:
+        description: Enable use of antenna
+        example: true
+        type: boolean
       channel:
         description: Channel to use
         example: 13
@@ -1187,18 +1197,18 @@ definitions:
           - onboard
           - static
           - external
-        example: static
+        example: external
         type: string
       environment:
         description: Environment setting
         enum:
           - reflective
           - openwater
-        example: reflective
+        example: openwater
         type: string
       external_pps_enabled:
         description: Enable external PPS input to master
-        example: false
+        example: true
         type: boolean
       gps:
         description: GPS provider setting
@@ -1206,7 +1216,7 @@ definitions:
           - onboard
           - static
           - external
-        example: onboard
+        example: external
         type: string
       imu_vehicle_enabled:
         description: Enable IMU input from vehicle
@@ -1220,7 +1230,7 @@ definitions:
           - s1
           - p1
           - u1
-        example: u1
+        example: p1
         type: string
       range_max_x:
         description: Max range (meters)
@@ -1242,13 +1252,13 @@ definitions:
         type: number
       range_min_x:
         description: Max range (meters)
-        example: 50
+        example: -50
         maximum: 0
         minimum: -100
         type: number
       range_min_y:
         description: Max range (meters)
-        example: 50
+        example: -50
         maximum: 0
         minimum: -100
         type: number
@@ -1339,8 +1349,8 @@ definitions:
   WaterlinkedPoi:
     description: A list of all POI (default view)
     example:
-      depth: 0.768439233512868
-      icon: Fugit quis vero in deleniti qui nihil.
+      depth: 0.5399978780328414
+      icon: Quis vero in deleniti qui nihil.
       id: 6536865564212348000
       lat: 0.9848439086783396
       lng: 0.983923109918765
@@ -1349,12 +1359,12 @@ definitions:
     properties:
       depth:
         description: Depth of POI
-        example: 0.768439233512868
+        example: 0.5399978780328414
         format: double
         type: number
       icon:
         description: Icon of POI
-        example: Fugit quis vero in deleniti qui nihil.
+        example: Quis vero in deleniti qui nihil.
         type: string
       id:
         description: Unique POI id
@@ -1391,22 +1401,22 @@ definitions:
   WaterlinkedPoiCollection:
     description: WaterlinkedPoiCollection is the media type for an array of WaterlinkedPoi (default view)
     example:
-      - depth: 0.768439233512868
-        icon: Fugit quis vero in deleniti qui nihil.
+      - depth: 0.5399978780328414
+        icon: Quis vero in deleniti qui nihil.
         id: 6536865564212348000
         lat: 0.9848439086783396
         lng: 0.983923109918765
         name: Molestias laboriosam quasi aut ex omnis reprehenderit.
         visible: false
-      - depth: 0.768439233512868
-        icon: Fugit quis vero in deleniti qui nihil.
+      - depth: 0.5399978780328414
+        icon: Quis vero in deleniti qui nihil.
         id: 6536865564212348000
         lat: 0.9848439086783396
         lng: 0.983923109918765
         name: Molestias laboriosam quasi aut ex omnis reprehenderit.
         visible: false
-      - depth: 0.768439233512868
-        icon: Fugit quis vero in deleniti qui nihil.
+      - depth: 0.5399978780328414
+        icon: Quis vero in deleniti qui nihil.
         id: 6536865564212348000
         lat: 0.9848439086783396
         lng: 0.983923109918765

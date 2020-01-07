@@ -1413,9 +1413,7 @@ definitions:
           - MeterFamilyTypeLandisGyrModule
           - MeterFamilyTypeFnnOpticalModule
           - MeterFamilyTypeSmartMe3PhaseMeter80AV2WiFi
-          - MeterFamilyTypeSmartMe3PhaseMeter32AV2WiFi
           - MeterFamilyTypeSmartMe3PhaseMeter80AGprs
-          - MeterFamilyTypeSmartMe3PhaseMeter32AGprs
           - MeterFamilyTypeSmartMe1PhaseMeter80AV2WiFi
           - MeterFamilyTypeSmartMe1PhaseMeter32AV2WiFi
           - MeterFamilyTypeSmartMe1PhaseMeter80AGprs
@@ -1424,6 +1422,10 @@ definitions:
           - MeterFamilyTypeRestApiMeter
           - MeterFamilyTypeVirtualBillingMeter
         type: string
+      FlowRate:
+        description: The current flow rate (e.g. m3/h)
+        format: double
+        type: number
       Id:
         description: The ID of the device
         type: string
@@ -2059,9 +2061,17 @@ definitions:
         description: The ID of the User
         format: int64
         type: integer
+      IdAsString:
+        description: The ID of the user as string
+        type: string
       IsAdmin:
         description: Flag if this User is an Admin User
         type: boolean
+      Permissions:
+        description: Additional Permissions
+        items:
+          type: string
+        type: array
       Username:
         description: The Username of the User
         type: string
