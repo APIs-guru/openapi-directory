@@ -2755,6 +2755,9 @@ definitions:
       Classes:
         $ref: '#/definitions/ListOfClasses'
         description: 'The classes used by the document being analyzed. These are used for multi-class trained models. Individual classes are mutually exclusive and each document is expected to have only a single class assigned to it. For example, an animal can be a dog or a cat, but not both at the same time. '
+      Labels:
+        $ref: '#/definitions/ListOfLabels'
+        description: 'The labels used the document being analyzed. These are used for multi-label trained models. Individual labels represent different categories that are related in some manner and are not multually exclusive. For example, a movie can be just an action movie, or it can be an action movie, a science fiction movie, and a comedy, all at the same time. '
   ClassifyDocumentRequest:
     type: object
     required:
@@ -2809,6 +2812,9 @@ definitions:
       VpcConfig:
         $ref: '#/definitions/VpcConfig'
         description: 'Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your custom classifier. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC</a>. '
+      Mode:
+        $ref: '#/definitions/DocumentClassifierMode'
+        description: 'Indicates the mode in which the classifier will be trained. The classifier can be trained in multi-class mode, which identifies one and only one class for each document, or multi-label mode, which identifies one or more labels for each document. In multi-label mode, multiple labels for an individual document are separated by a delimiter. The default delimiter between labels is a pipe (|).'
   ResourceInUseException: {}
   TooManyTagsException: {}
   TooManyRequestsException: {}
@@ -3900,6 +3906,18 @@ definitions:
       F1Score:
         $ref: '#/definitions/Double'
         description: 'A measure of how accurate the classifier results are for the test data. It is derived from the <code>Precision</code> and <code>Recall</code> values. The <code>F1Score</code> is the harmonic average of the two scores. The highest score is 1, and the worst score is 0. '
+      MicroPrecision:
+        $ref: '#/definitions/Double'
+        description: 'A measure of the usefulness of the recognizer results in the test data. High precision means that the recognizer returned substantially more relevant results than irrelevant ones. Unlike the Precision metric which comes from averaging the precision of all available labels, this is based on the overall score of all precision scores added together.'
+      MicroRecall:
+        $ref: '#/definitions/Double'
+        description: 'A measure of how complete the classifier results are for the test data. High recall means that the classifier returned most of the relevant results. Specifically, this indicates how many of the correct categories in the text that the model can predict. It is a percentage of correct categories in the text that can found. Instead of averaging the recall scores of all labels (as with Recall), micro Recall is based on the overall score of all recall scores added together.'
+      MicroF1Score:
+        $ref: '#/definitions/Double'
+        description: 'A measure of how accurate the classifier results are for the test data. It is a combination of the <code>Micro Precision</code> and <code>Micro Recall</code> values. The <code>Micro F1Score</code> is the harmonic mean of the two scores. The highest score is 1, and the worst score is 0.'
+      HammingLoss:
+        $ref: '#/definitions/Double'
+        description: Indicates the fraction of labels that are incorrectly predicted. Also seen as the fraction of wrong labels compared to the total number of labels. Scores closer to zero are better.
     description: Describes the result metrics for the test data associated with an documentation classifier.
   ClassifierMetadata:
     type: object
@@ -3925,6 +3943,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/DocumentClass'
+  ListOfLabels:
+    type: array
+    items:
+      $ref: '#/definitions/DocumentLabel'
   ClientRequestTokenString:
     type: string
     pattern: '^[a-zA-Z0-9-]+$'
@@ -3967,6 +3989,9 @@ definitions:
       S3Uri:
         $ref: '#/definitions/S3Uri'
         description: '<p>The Amazon S3 URI for the input data. The S3 bucket must be in the same region as the API endpoint that you are calling. The URI can point to a single input file or it can provide the prefix for a collection of input files.</p> <p>For example, if you use the URI <code>S3://bucketName/prefix</code>, if the prefix is a single file, Amazon Comprehend uses that file as input. If more than one file begins with the prefix, Amazon Comprehend uses all of them as input.</p>'
+      LabelDelimiter:
+        $ref: '#/definitions/LabelDelimiter'
+        description: 'Indicates the delimiter used to separate each label for training a multi-label classifier. The default delimiter between labels is a pipe (|). You can use a different character as a delimiter (if it''s an allowed character) by specifying it under Delimiter for labels. If the training documents use a delimiter other than the default or the delimiter you specify, the labels on that line will be combined to make a single unique label, such as LABELLABELLABEL.'
     description: '<p>The input properties for training a document classifier. </p> <p>For more information on how the input file is formatted, see <a>how-document-classification-training-data</a>. </p>'
   DocumentClassifierOutputDataConfig:
     type: object
@@ -3994,6 +4019,11 @@ definitions:
         $ref: '#/definitions/Subnets'
         description: 'The ID for each subnet being used in your private VPC. This subnet is a subset of the a range of IPv4 addresses used by the VPC and is specific to a given availability zone in the VPC’s region. This ID number is preceded by "subnet-", for instance: "subnet-04ccf456919e69055". For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html">VPCs and Subnets</a>. '
     description: ' Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for the job. For For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC</a>. '
+  DocumentClassifierMode:
+    type: string
+    enum:
+      - MULTI_CLASS
+      - MULTI_LABEL
   DocumentClassifierArn:
     type: string
     pattern: 'arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:document-classifier/[a-zA-Z0-9](-*[a-zA-Z0-9])*'
@@ -4114,6 +4144,9 @@ definitions:
       VpcConfig:
         $ref: '#/definitions/VpcConfig'
         description: ' Configuration parameters for a private Virtual Private Cloud (VPC) containing the resources you are using for your custom classifier. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC</a>. '
+      Mode:
+        $ref: '#/definitions/DocumentClassifierMode'
+        description: Indicates the mode in which the specific classifier was trained. This also indicates the format of input documents and the format of the confusion matrix. Each classifier can only be trained in one mode and this cannot be changed once the classifier is trained.
     description: Provides information about a document classifier.
   DominantLanguageDetectionJobProperties:
     type: object
@@ -4487,10 +4520,25 @@ definitions:
     type: string
     pattern: 's3://[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9](/.*)?'
     maxLength: 1024
+  LabelDelimiter:
+    type: string
+    pattern: '^[ ~!@#$%^*\-_+=|\\:;\t>?/]$'
+    minLength: 1
+    maxLength: 1
   DocumentClassifierPropertiesList:
     type: array
     items:
       $ref: '#/definitions/DocumentClassifierProperties'
+  DocumentLabel:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: The name of the label.
+      Score:
+        $ref: '#/definitions/Float'
+        description: The confidence score that Amazon Comprehend has this label correctly attributed.
+    description: Specifies one of the label or labels that categorize the document being analyzed.
   DominantLanguage:
     type: object
     properties:

@@ -472,9 +472,22 @@ paths:
           schema:
             type: object
             required:
+              - authorization
               - channelId
               - id
             properties:
+              authorization:
+                description: CDN Authorization credentials
+                type: object
+                properties:
+                  CdnIdentifierSecret:
+                    description: |
+                      The Amazon Resource Name (ARN) for the secret in Secrets Manager that your Content Distribution Network (CDN) uses for authorization to access your endpoint.
+                    $ref: '#/definitions/__string'
+                  SecretsRoleArn:
+                    description: |
+                      The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.
+                    $ref: '#/definitions/__string'
               channelId:
                 description: |
                   The ID of the Channel that the OriginEndpoint will be associated with.
@@ -979,7 +992,21 @@ paths:
           required: true
           schema:
             type: object
+            required:
+              - authorization
             properties:
+              authorization:
+                description: CDN Authorization credentials
+                type: object
+                properties:
+                  CdnIdentifierSecret:
+                    description: |
+                      The Amazon Resource Name (ARN) for the secret in Secrets Manager that your Content Distribution Network (CDN) uses for authorization to access your endpoint.
+                    $ref: '#/definitions/__string'
+                  SecretsRoleArn:
+                    description: |
+                      The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.
+                    $ref: '#/definitions/__string'
               cmafPackage:
                 description: A Common Media Application Format (CMAF) packaging configuration.
                 type: object
@@ -1436,6 +1463,8 @@ definitions:
       Arn:
         description: The Amazon Resource Name (ARN) assigned to the OriginEndpoint.
         $ref: '#/definitions/__string'
+      Authorization:
+        $ref: '#/definitions/Authorization'
       ChannelId:
         description: The ID of the Channel the OriginEndpoint is associated with.
         $ref: '#/definitions/__string'
@@ -1678,6 +1707,8 @@ definitions:
       Arn:
         description: The Amazon Resource Name (ARN) assigned to the OriginEndpoint.
         $ref: '#/definitions/__string'
+      Authorization:
+        $ref: '#/definitions/Authorization'
       ChannelId:
         description: The ID of the Channel the OriginEndpoint is associated with.
         $ref: '#/definitions/__string'
@@ -1808,6 +1839,8 @@ definitions:
       Arn:
         description: The Amazon Resource Name (ARN) assigned to the OriginEndpoint.
         $ref: '#/definitions/__string'
+      Authorization:
+        $ref: '#/definitions/Authorization'
       ChannelId:
         description: The ID of the Channel the OriginEndpoint is associated with.
         $ref: '#/definitions/__string'
@@ -1863,6 +1896,21 @@ definitions:
       - PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY
       - DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY
     type: string
+  Authorization:
+    required:
+      - SecretsRoleArn
+      - CdnIdentifierSecret
+    type: object
+    properties:
+      CdnIdentifierSecret:
+        description: |
+          The Amazon Resource Name (ARN) for the secret in Secrets Manager that your Content Distribution Network (CDN) uses for authorization to access your endpoint.
+        $ref: '#/definitions/__string'
+      SecretsRoleArn:
+        description: |
+          The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.
+        $ref: '#/definitions/__string'
+    description: CDN Authorization credentials
   HlsIngest:
     type: object
     properties:
@@ -2163,6 +2211,8 @@ definitions:
       - ChannelId
     type: object
     properties:
+      Authorization:
+        $ref: '#/definitions/Authorization'
       ChannelId:
         description: |
           The ID of the Channel that the OriginEndpoint will be associated with.
@@ -2426,6 +2476,8 @@ definitions:
       Arn:
         description: The Amazon Resource Name (ARN) assigned to the OriginEndpoint.
         $ref: '#/definitions/__string'
+      Authorization:
+        $ref: '#/definitions/Authorization'
       ChannelId:
         description: The ID of the Channel the OriginEndpoint is associated with.
         $ref: '#/definitions/__string'
@@ -2503,6 +2555,8 @@ definitions:
   UpdateOriginEndpointRequest:
     type: object
     properties:
+      Authorization:
+        $ref: '#/definitions/Authorization'
       CmafPackage:
         $ref: '#/definitions/CmafPackageCreateOrUpdateParameters'
       DashPackage:
