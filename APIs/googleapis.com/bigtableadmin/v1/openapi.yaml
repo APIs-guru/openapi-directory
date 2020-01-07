@@ -1,0 +1,374 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://bigtableadmin.googleapis.com/'
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: Administer your Cloud Bigtable tables and instances.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
+  title: Cloud Bigtable Admin
+  version: v1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.7.31
+      format: google
+      url: 'https://bigtableadmin.googleapis.com/$discovery/rest?version=v1'
+      version: v1
+  x-preferred: false
+  x-providerName: googleapis.com
+  x-serviceName: bigtableadmin
+externalDocs:
+  url: 'https://cloud.google.com/bigtable/'
+tags: []
+paths: {}
+components:
+  parameters:
+    _.xgafv:
+      description: V1 error format.
+      in: query
+      name: $.xgafv
+      schema:
+        enum:
+          - '1'
+          - '2'
+        type: string
+    access_token:
+      description: OAuth access token.
+      in: query
+      name: access_token
+      schema:
+        type: string
+    alt:
+      description: Data format for response.
+      in: query
+      name: alt
+      schema:
+        default: json
+        enum:
+          - json
+          - media
+          - proto
+        type: string
+    callback:
+      description: JSONP
+      in: query
+      name: callback
+      schema:
+        type: string
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        default: true
+        type: boolean
+    quotaUser:
+      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    uploadType:
+      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      in: query
+      name: uploadType
+      schema:
+        type: string
+    upload_protocol:
+      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      in: query
+      name: upload_protocol
+      schema:
+        type: string
+  schemas:
+    Cluster:
+      description: |-
+        A resizable group of nodes in a particular cloud location, capable
+        of serving all Tables in the parent
+        Instance.
+      properties:
+        defaultStorageType:
+          description: |-
+            (`CreationOnly`)
+            The type of storage used by this cluster to serve its
+            parent instance's tables, unless explicitly overridden.
+          enum:
+            - STORAGE_TYPE_UNSPECIFIED
+            - SSD
+            - HDD
+          type: string
+        location:
+          description: |-
+            (`CreationOnly`)
+            The location where this cluster's nodes and storage reside. For best
+            performance, clients should be located as close as possible to this
+            cluster. Currently only zones are supported, so values should be of the
+            form `projects/<project>/locations/<zone>`.
+          type: string
+        name:
+          description: |-
+            (`OutputOnly`)
+            The unique name of the cluster. Values are of the form
+            `projects/<project>/instances/<instance>/clusters/a-z*`.
+          type: string
+        serveNodes:
+          description: |-
+            The number of nodes allocated to this cluster. More nodes enable higher
+            throughput and more consistent performance.
+          format: int32
+          type: integer
+        state:
+          description: |-
+            (`OutputOnly`)
+            The current state of the cluster.
+          enum:
+            - STATE_NOT_KNOWN
+            - READY
+            - CREATING
+            - RESIZING
+            - DISABLED
+          type: string
+      type: object
+    CreateClusterMetadata:
+      description: The metadata for the Operation returned by CreateCluster.
+      properties:
+        finishTime:
+          description: The time at which the operation failed or was completed successfully.
+          format: google-datetime
+          type: string
+        originalRequest:
+          $ref: '#/components/schemas/CreateClusterRequest'
+          description: The request that prompted the initiation of this CreateCluster operation.
+        requestTime:
+          description: The time at which the original request was received.
+          format: google-datetime
+          type: string
+        tables:
+          additionalProperties:
+            $ref: '#/components/schemas/TableProgress'
+          description: |-
+            Keys: the full `name` of each table that existed in the instance when
+            CreateCluster was first called, i.e.
+            `projects/<project>/instances/<instance>/tables/<table>`. Any table added
+            to the instance by a later API call will be created in the new cluster by
+            that API call, not this one.
+
+            Values: information on how much of a table's data has been copied to the
+            newly-created cluster so far.
+          type: object
+      type: object
+    CreateClusterRequest:
+      description: Request message for BigtableInstanceAdmin.CreateCluster.
+      properties:
+        cluster:
+          $ref: '#/components/schemas/Cluster'
+          description: |-
+            The cluster to be created.
+            Fields marked `OutputOnly` must be left blank.
+        clusterId:
+          description: |-
+            The ID to be used when referring to the new cluster within its instance,
+            e.g., just `mycluster` rather than
+            `projects/myproject/instances/myinstance/clusters/mycluster`.
+          type: string
+        parent:
+          description: |-
+            The unique name of the instance in which to create the new cluster.
+            Values are of the form
+            `projects/<project>/instances/<instance>`.
+          type: string
+      type: object
+    CreateInstanceMetadata:
+      description: The metadata for the Operation returned by CreateInstance.
+      properties:
+        finishTime:
+          description: The time at which the operation failed or was completed successfully.
+          format: google-datetime
+          type: string
+        originalRequest:
+          $ref: '#/components/schemas/CreateInstanceRequest'
+          description: The request that prompted the initiation of this CreateInstance operation.
+        requestTime:
+          description: The time at which the original request was received.
+          format: google-datetime
+          type: string
+      type: object
+    CreateInstanceRequest:
+      description: Request message for BigtableInstanceAdmin.CreateInstance.
+      properties:
+        clusters:
+          additionalProperties:
+            $ref: '#/components/schemas/Cluster'
+          description: |-
+            The clusters to be created within the instance, mapped by desired
+            cluster ID, e.g., just `mycluster` rather than
+            `projects/myproject/instances/myinstance/clusters/mycluster`.
+            Fields marked `OutputOnly` must be left blank.
+            Currently, at most four clusters can be specified.
+          type: object
+        instance:
+          $ref: '#/components/schemas/Instance'
+          description: |-
+            The instance to create.
+            Fields marked `OutputOnly` must be left blank.
+        instanceId:
+          description: |-
+            The ID to be used when referring to the new instance within its project,
+            e.g., just `myinstance` rather than
+            `projects/myproject/instances/myinstance`.
+          type: string
+        parent:
+          description: |-
+            The unique name of the project in which to create the new instance.
+            Values are of the form `projects/<project>`.
+          type: string
+      type: object
+    Instance:
+      description: |-
+        A collection of Bigtable Tables and
+        the resources that serve them.
+        All tables in an instance are served from all
+        Clusters in the instance.
+      properties:
+        displayName:
+          description: |-
+            The descriptive name for this instance as it appears in UIs.
+            Can be changed at any time, but should be kept globally unique
+            to avoid confusion.
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: |-
+            Labels are a flexible and lightweight mechanism for organizing cloud
+            resources into groups that reflect a customer's organizational needs and
+            deployment strategies. They can be used to filter resources and aggregate
+            metrics.
+
+            * Label keys must be between 1 and 63 characters long and must conform to
+              the regular expression: `\p{Ll}\p{Lo}{0,62}`.
+            * Label values must be between 0 and 63 characters long and must conform to
+              the regular expression: `[\p{Ll}\p{Lo}\p{N}_-]{0,63}`.
+            * No more than 64 labels can be associated with a given resource.
+            * Keys and values must both be under 128 bytes.
+          type: object
+        name:
+          description: |-
+            (`OutputOnly`)
+            The unique name of the instance. Values are of the form
+            `projects/<project>/instances/a-z+[a-z0-9]`.
+          type: string
+        state:
+          description: |-
+            (`OutputOnly`)
+            The current state of the instance.
+          enum:
+            - STATE_NOT_KNOWN
+            - READY
+            - CREATING
+          type: string
+        type:
+          description: The type of the instance. Defaults to `PRODUCTION`.
+          enum:
+            - TYPE_UNSPECIFIED
+            - PRODUCTION
+            - DEVELOPMENT
+          type: string
+      type: object
+    PartialUpdateInstanceRequest:
+      description: Request message for BigtableInstanceAdmin.PartialUpdateInstance.
+      properties:
+        instance:
+          $ref: '#/components/schemas/Instance'
+          description: The Instance which will (partially) replace the current value.
+        updateMask:
+          description: |-
+            The subset of Instance fields which should be replaced.
+            Must be explicitly set.
+          format: google-fieldmask
+          type: string
+      type: object
+    TableProgress:
+      description: Progress info for copying a table's data to the new cluster.
+      properties:
+        estimatedCopiedBytes:
+          description: |-
+            Estimate of the number of bytes copied so far for this table.
+            This will eventually reach 'estimated_size_bytes' unless the table copy
+            is CANCELLED.
+          format: int64
+          type: string
+        estimatedSizeBytes:
+          description: Estimate of the size of the table to be copied.
+          format: int64
+          type: string
+        state:
+          enum:
+            - STATE_UNSPECIFIED
+            - PENDING
+            - COPYING
+            - COMPLETED
+            - CANCELLED
+          type: string
+      type: object
+    UpdateAppProfileMetadata:
+      description: The metadata for the Operation returned by UpdateAppProfile.
+      properties: {}
+      type: object
+    UpdateClusterMetadata:
+      description: The metadata for the Operation returned by UpdateCluster.
+      properties:
+        finishTime:
+          description: The time at which the operation failed or was completed successfully.
+          format: google-datetime
+          type: string
+        originalRequest:
+          $ref: '#/components/schemas/Cluster'
+          description: The request that prompted the initiation of this UpdateCluster operation.
+        requestTime:
+          description: The time at which the original request was received.
+          format: google-datetime
+          type: string
+      type: object
+    UpdateInstanceMetadata:
+      description: The metadata for the Operation returned by UpdateInstance.
+      properties:
+        finishTime:
+          description: The time at which the operation failed or was completed successfully.
+          format: google-datetime
+          type: string
+        originalRequest:
+          $ref: '#/components/schemas/PartialUpdateInstanceRequest'
+          description: The request that prompted the initiation of this UpdateInstance operation.
+        requestTime:
+          description: The time at which the original request was received.
+          format: google-datetime
+          type: string
+      type: object

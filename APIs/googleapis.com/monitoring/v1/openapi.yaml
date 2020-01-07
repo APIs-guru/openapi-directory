@@ -1,0 +1,916 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://monitoring.googleapis.com/'
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: 'Manages your Stackdriver Monitoring data and configurations. Most projects must be associated with a Stackdriver account, with a few exceptions as noted on the individual method pages. The table entries below are presented in alphabetical order, not in order of common use. For explanations of the concepts found in the table entries, read the Stackdriver Monitoring documentation.'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
+  title: Stackdriver Monitoring
+  version: v1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - monitoring
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.7.31
+      format: google
+      url: 'https://monitoring.googleapis.com/$discovery/rest?version=v1'
+      version: v1
+  x-preferred: false
+  x-providerName: googleapis.com
+  x-serviceName: monitoring
+externalDocs:
+  url: 'https://cloud.google.com/monitoring/api/'
+tags:
+  - name: projects
+paths:
+  '/v1/{name}':
+    delete:
+      description: 'Deletes an existing custom dashboard.This method requires the monitoring.dashboards.delete permission on the specified dashboard. For more information, see Google Cloud IAM (https://cloud.google.com/iam).'
+      operationId: monitoring.projects.dashboards.delete
+      parameters:
+        - description: 'The resource name of the Dashboard. The format is "projects/{project_id_or_number}/dashboards/{dashboard_id}".'
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Empty'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring.write'
+      tags:
+        - projects
+    get:
+      description: 'Fetches a specific dashboard.This method requires the monitoring.dashboards.get permission on the specified dashboard. For more information, see Google Cloud IAM (https://cloud.google.com/iam).'
+      operationId: monitoring.projects.dashboards.get
+      parameters:
+        - description: 'The resource name of the Dashboard. The format is one of "dashboards/{dashboard_id}" (for system dashboards) or "projects/{project_id_or_number}/dashboards/{dashboard_id}" (for custom dashboards).'
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Dashboard'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring.read'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+    patch:
+      description: 'Replaces an existing custom dashboard with a new definition.This method requires the monitoring.dashboards.update permission on the specified dashboard. For more information, see Google Cloud IAM (https://cloud.google.com/iam).'
+      operationId: monitoring.projects.dashboards.patch
+      parameters:
+        - description: The resource name of the dashboard.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Dashboard'
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Dashboard'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring.write'
+      tags:
+        - projects
+  '/v1/{parent}/dashboards':
+    get:
+      description: 'Lists the existing dashboards.This method requires the monitoring.dashboards.list permission on the specified project. For more information, see Google Cloud IAM (https://cloud.google.com/iam).'
+      operationId: monitoring.projects.dashboards.list
+      parameters:
+        - description: 'The scope of the dashboards to list. A project scope must be specified in the form of "projects/{project_id_or_number}".'
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+        - description: 'A positive number that is the maximum number of results to return. If unspecified, a default of 1000 is used.'
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListDashboardsResponse'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring.read'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+    post:
+      description: 'Creates a new custom dashboard.This method requires the monitoring.dashboards.create permission on the specified project. For more information, see Google Cloud IAM (https://cloud.google.com/iam).'
+      operationId: monitoring.projects.dashboards.create
+      parameters:
+        - description: 'The project on which to execute the request. The format is "projects/{project_id_or_number}". The {project_id_or_number} must match the dashboard resource name.'
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Dashboard'
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Dashboard'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring.write'
+      tags:
+        - projects
+components:
+  parameters:
+    _.xgafv:
+      description: V1 error format.
+      in: query
+      name: $.xgafv
+      schema:
+        enum:
+          - '1'
+          - '2'
+        type: string
+    access_token:
+      description: OAuth access token.
+      in: query
+      name: access_token
+      schema:
+        type: string
+    alt:
+      description: Data format for response.
+      in: query
+      name: alt
+      schema:
+        default: json
+        enum:
+          - json
+          - media
+          - proto
+        type: string
+    callback:
+      description: JSONP
+      in: query
+      name: callback
+      schema:
+        type: string
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        default: true
+        type: boolean
+    quotaUser:
+      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    uploadType:
+      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      in: query
+      name: uploadType
+      schema:
+        type: string
+    upload_protocol:
+      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      in: query
+      name: upload_protocol
+      schema:
+        type: string
+  requestBodies:
+    Dashboard:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Dashboard'
+  schemas:
+    Aggregation:
+      description: 'Describes how to combine multiple time series to provide different views of the data. Aggregation consists of an alignment step on individual time series (alignment_period and per_series_aligner) followed by an optional reduction step of the data across the aligned time series (cross_series_reducer and group_by_fields). For more details, see Aggregation.'
+      properties:
+        alignmentPeriod:
+          description: 'The alignment period for per-time series alignment. If present, alignmentPeriod must be at least 60 seconds. After per-time series alignment, each time series will contain data points only on the period boundaries. If perSeriesAligner is not specified or equals ALIGN_NONE, then this field is ignored. If perSeriesAligner is specified and does not equal ALIGN_NONE, then this field must be defined; otherwise an error is returned.'
+          format: google-duration
+          type: string
+        crossSeriesReducer:
+          description: 'The approach to be used to combine time series. Not all reducer functions may be applied to all time series, depending on the metric type and the value type of the original time series. Reduction may change the metric type of value type of the time series.Time series data must be aligned in order to perform cross-time series reduction. If crossSeriesReducer is specified, then perSeriesAligner must be specified and not equal ALIGN_NONE and alignmentPeriod must be specified; otherwise, an error is returned.'
+          enum:
+            - REDUCE_NONE
+            - REDUCE_MEAN
+            - REDUCE_MIN
+            - REDUCE_MAX
+            - REDUCE_SUM
+            - REDUCE_STDDEV
+            - REDUCE_COUNT
+            - REDUCE_COUNT_TRUE
+            - REDUCE_COUNT_FALSE
+            - REDUCE_FRACTION_TRUE
+            - REDUCE_PERCENTILE_99
+            - REDUCE_PERCENTILE_95
+            - REDUCE_PERCENTILE_50
+            - REDUCE_PERCENTILE_05
+          type: string
+        groupByFields:
+          description: 'The set of fields to preserve when crossSeriesReducer is specified. The groupByFields determine how the time series are partitioned into subsets prior to applying the aggregation function. Each subset contains time series that have the same value for each of the grouping fields. Each individual time series is a member of exactly one subset. The crossSeriesReducer is applied to each subset of time series. It is not possible to reduce across different resource types, so this field implicitly contains resource.type. Fields not specified in groupByFields are aggregated away. If groupByFields is not specified and all the time series have the same resource type, then the time series are aggregated into a single output time series. If crossSeriesReducer is not defined, this field is ignored.'
+          items:
+            type: string
+          type: array
+        perSeriesAligner:
+          description: 'The approach to be used to align individual time series. Not all alignment functions may be applied to all time series, depending on the metric type and value type of the original time series. Alignment may change the metric type or the value type of the time series.Time series data must be aligned in order to perform cross-time series reduction. If crossSeriesReducer is specified, then perSeriesAligner must be specified and not equal ALIGN_NONE and alignmentPeriod must be specified; otherwise, an error is returned.'
+          enum:
+            - ALIGN_NONE
+            - ALIGN_DELTA
+            - ALIGN_RATE
+            - ALIGN_INTERPOLATE
+            - ALIGN_NEXT_OLDER
+            - ALIGN_MIN
+            - ALIGN_MAX
+            - ALIGN_MEAN
+            - ALIGN_COUNT
+            - ALIGN_SUM
+            - ALIGN_STDDEV
+            - ALIGN_COUNT_TRUE
+            - ALIGN_COUNT_FALSE
+            - ALIGN_FRACTION_TRUE
+            - ALIGN_PERCENTILE_99
+            - ALIGN_PERCENTILE_95
+            - ALIGN_PERCENTILE_50
+            - ALIGN_PERCENTILE_05
+            - ALIGN_PERCENT_CHANGE
+          type: string
+      type: object
+    Axis:
+      description: A chart axis.
+      properties:
+        label:
+          description: The label of the axis.
+          type: string
+        scale:
+          description: 'The axis scale. By default, a linear scale is used.'
+          enum:
+            - SCALE_UNSPECIFIED
+            - LINEAR
+            - LOG10
+          type: string
+      type: object
+    ChartOptions:
+      description: Options to control visual rendering of a chart.
+      properties:
+        mode:
+          description: The chart mode.
+          enum:
+            - MODE_UNSPECIFIED
+            - COLOR
+            - X_RAY
+            - STATS
+          type: string
+      type: object
+    Column:
+      description: Defines the layout properties and content for a column.
+      properties:
+        weight:
+          description: 'The relative weight of this column. The column weight is used to adjust the width of columns on the screen (relative to peers). Greater the weight, greater the width of the column on the screen. If omitted, a value of 1 is used while rendering.'
+          format: int64
+          type: string
+        widgets:
+          description: The display widgets arranged vertically in this column.
+          items:
+            $ref: '#/components/schemas/Widget'
+          type: array
+      type: object
+    ColumnLayout:
+      description: A simplified layout that divides the available space into vertical columns and arranges a set of widgets vertically in each column.
+      properties:
+        columns:
+          description: The columns of content to display.
+          items:
+            $ref: '#/components/schemas/Column'
+          type: array
+      type: object
+    Dashboard:
+      description: A Google Stackdriver dashboard. Dashboards define the content and layout of pages in the Stackdriver web application.
+      properties:
+        columnLayout:
+          $ref: '#/components/schemas/ColumnLayout'
+          description: The content is divided into equally spaced columns and the widgets are arranged vertically.
+        displayName:
+          description: 'The mutable, human-readable name.'
+          type: string
+        etag:
+          description: 'etag is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. An etag is returned in the response to GetDashboard, and users are expected to put that etag in the request to UpdateDashboard to ensure that their change will be applied to the same version of the Dashboard configuration. The field should not be passed during dashboard creation.'
+          type: string
+        gridLayout:
+          $ref: '#/components/schemas/GridLayout'
+          description: Content is arranged with a basic layout that re-flows a simple list of informational elements like widgets or tiles.
+        name:
+          description: The resource name of the dashboard.
+          type: string
+        rowLayout:
+          $ref: '#/components/schemas/RowLayout'
+          description: The content is divided into equally spaced rows and the widgets are arranged horizontally.
+      type: object
+    DataSet:
+      description: Groups a time series query definition with charting options.
+      properties:
+        legendTemplate:
+          description: 'A template string for naming TimeSeries in the resulting data set. This should be a string with interpolations of the form ${label_name}, which will resolve to the label''s value.'
+          type: string
+        minAlignmentPeriod:
+          description: 'Optional. The lower bound on data point frequency for this data set, implemented by specifying the minimum alignment period to use in a time series query For example, if the data is published once every 10 minutes, the min_alignment_period should be at least 10 minutes. It would not make sense to fetch and align data at one minute intervals.'
+          format: google-duration
+          type: string
+        plotType:
+          description: How this data should be plotted on the chart.
+          enum:
+            - PLOT_TYPE_UNSPECIFIED
+            - LINE
+            - STACKED_AREA
+            - STACKED_BAR
+            - HEATMAP
+          type: string
+        timeSeriesQuery:
+          $ref: '#/components/schemas/TimeSeriesQuery'
+          description: Fields for querying time series data from the Stackdriver metrics API.
+      type: object
+    DroppedLabels:
+      description: 'A set of (label, value) pairs which were dropped during aggregation, attached to google.api.Distribution.Exemplars in google.api.Distribution values during aggregation.These values are used in combination with the label values that remain on the aggregated Distribution timeseries to construct the full label set for the exemplar values. The resulting full label set may be used to identify the specific task/job/instance (for example) which may be contributing to a long-tail, while allowing the storage savings of only storing aggregated distribution values for a large group.Note that there are no guarantees on ordering of the labels from exemplar-to-exemplar and from distribution-to-distribution in the same stream, and there may be duplicates. It is up to clients to resolve any ambiguities.'
+      properties:
+        label:
+          additionalProperties:
+            type: string
+          description: 'Map from label to its value, for all labels dropped in any aggregation.'
+          type: object
+      type: object
+    Empty:
+      description: |-
+        A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance:
+        service Foo {
+          rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+        }
+        The JSON representation for Empty is empty JSON object {}.
+      properties: {}
+      type: object
+    Field:
+      description: A single field of a message type.
+      properties:
+        cardinality:
+          description: The field cardinality.
+          enum:
+            - CARDINALITY_UNKNOWN
+            - CARDINALITY_OPTIONAL
+            - CARDINALITY_REQUIRED
+            - CARDINALITY_REPEATED
+          type: string
+        defaultValue:
+          description: The string value of the default value of this field. Proto2 syntax only.
+          type: string
+        jsonName:
+          description: The field JSON name.
+          type: string
+        kind:
+          description: The field type.
+          enum:
+            - TYPE_UNKNOWN
+            - TYPE_DOUBLE
+            - TYPE_FLOAT
+            - TYPE_INT64
+            - TYPE_UINT64
+            - TYPE_INT32
+            - TYPE_FIXED64
+            - TYPE_FIXED32
+            - TYPE_BOOL
+            - TYPE_STRING
+            - TYPE_GROUP
+            - TYPE_MESSAGE
+            - TYPE_BYTES
+            - TYPE_UINT32
+            - TYPE_ENUM
+            - TYPE_SFIXED32
+            - TYPE_SFIXED64
+            - TYPE_SINT32
+            - TYPE_SINT64
+          type: string
+        name:
+          description: The field name.
+          type: string
+        number:
+          description: The field number.
+          format: int32
+          type: integer
+        oneofIndex:
+          description: 'The index of the field type in Type.oneofs, for message or enumeration types. The first type has index 1; zero means the type is not in the list.'
+          format: int32
+          type: integer
+        options:
+          description: The protocol buffer options.
+          items:
+            $ref: '#/components/schemas/Option'
+          type: array
+        packed:
+          description: Whether to use alternative packed wire representation.
+          type: boolean
+        typeUrl:
+          description: 'The field type URL, without the scheme, for message or enumeration types. Example: "type.googleapis.com/google.protobuf.Timestamp".'
+          type: string
+      type: object
+    GaugeView:
+      description: A gauge chart shows where the current value sits within a pre-defined range. The upper and lower bounds should define the possible range of values for the scorecard's query (inclusive).
+      properties:
+        lowerBound:
+          description: The lower bound for this gauge chart. The value of the chart should always be greater than or equal to this.
+          format: double
+          type: number
+        upperBound:
+          description: The upper bound for this gauge chart. The value of the chart should always be less than or equal to this.
+          format: double
+          type: number
+      type: object
+    GridLayout:
+      description: A basic layout divides the available space into vertical columns of equal width and arranges a list of widgets using a row-first strategy.
+      properties:
+        columns:
+          description: 'The number of columns into which the view''s width is divided. If omitted or set to zero, a system default will be used while rendering.'
+          format: int64
+          type: string
+        widgets:
+          description: The informational elements that are arranged into the columns row-first.
+          items:
+            $ref: '#/components/schemas/Widget'
+          type: array
+      type: object
+    ListDashboardsResponse:
+      description: The ListDashboards request.
+      properties:
+        dashboards:
+          description: The list of requested dashboards.
+          items:
+            $ref: '#/components/schemas/Dashboard'
+          type: array
+        nextPageToken:
+          description: 'If there are more results than have been returned, then this field is set to a non-empty value. To see the additional results, use that value as pageToken in the next call to this method.'
+          type: string
+      type: object
+    Option:
+      description: 'A protocol buffer option, which can be attached to a message, field, enumeration, etc.'
+      properties:
+        name:
+          description: 'The option''s name. For protobuf built-in options (options defined in descriptor.proto), this is the short name. For example, "map_entry". For custom options, it should be the fully-qualified name. For example, "google.api.http".'
+          type: string
+        value:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: 'The option''s value packed in an Any message. If the value is a primitive, the corresponding wrapper type defined in google/protobuf/wrappers.proto should be used. If the value is an enum, it should be stored as an int32 value using the google.protobuf.Int32Value type.'
+          type: object
+      type: object
+    PickTimeSeriesFilter:
+      description: 'Describes a ranking-based time series filter. Each input time series is ranked with an aligner. The filter lets through up to num_time_series time series, selecting them based on the relative ranking.'
+      properties:
+        direction:
+          description: How to use the ranking to select time series that pass through the filter.
+          enum:
+            - DIRECTION_UNSPECIFIED
+            - TOP
+            - BOTTOM
+          type: string
+        numTimeSeries:
+          description: How many time series to return.
+          format: int32
+          type: integer
+        rankingMethod:
+          description: rankingMethod is applied to each time series independently to produce the value which will be used to compare the time series to other time series.
+          enum:
+            - METHOD_UNSPECIFIED
+            - METHOD_MEAN
+            - METHOD_MAX
+            - METHOD_MIN
+            - METHOD_SUM
+            - METHOD_LATEST
+          type: string
+      type: object
+    RatioPart:
+      description: Describes a query to build the numerator or denominator of a TimeSeriesFilterRatio.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/Aggregation'
+          description: 'By default, the raw time series data is returned. Use this field to combine multiple time series for different views of the data.'
+        filter:
+          description: 'Required. The monitoring filter that identifies the metric types, resources, and projects to query.'
+          type: string
+      type: object
+    Row:
+      description: Defines the layout properties and content for a row.
+      properties:
+        weight:
+          description: 'The relative weight of this row. The row weight is used to adjust the height of rows on the screen (relative to peers). Greater the weight, greater the height of the row on the screen. If omitted, a value of 1 is used while rendering.'
+          format: int64
+          type: string
+        widgets:
+          description: The display widgets arranged horizontally in this row.
+          items:
+            $ref: '#/components/schemas/Widget'
+          type: array
+      type: object
+    RowLayout:
+      description: A simplified layout that divides the available space into rows and arranges a set of widgets horizontally in each row.
+      properties:
+        rows:
+          description: The rows of content to display.
+          items:
+            $ref: '#/components/schemas/Row'
+          type: array
+      type: object
+    Scorecard:
+      description: 'A widget showing the latest value of a metric, and how this value relates to one or more thresholds.'
+      properties:
+        gaugeView:
+          $ref: '#/components/schemas/GaugeView'
+          description: Will cause the scorecard to show a gauge chart.
+        sparkChartView:
+          $ref: '#/components/schemas/SparkChartView'
+          description: Will cause the scorecard to show a spark chart.
+        thresholds:
+          description: 'The thresholds used to determine the state of the scorecard given the time series'' current value. For an actual value x, the scorecard is in a danger state if x is less than or equal to a danger threshold that triggers below, or greater than or equal to a danger threshold that triggers above. Similarly, if x is above/below a warning threshold that triggers above/below, then the scorecard is in a warning state - unless x also puts it in a danger state. (Danger trumps warning.)As an example, consider a scorecard with the following four thresholds: {  value: 90,  category: ''DANGER'',  trigger: ''ABOVE'', }, {  value: 70,  category: ''WARNING'',  trigger: ''ABOVE'', }, {  value: 10,  category: ''DANGER'',  trigger: ''BELOW'', }, {  value: 20,  category: ''WARNING'',  trigger: ''BELOW'', }Then: values less than or equal to 10 would put the scorecard in a DANGER state, values greater than 10 but less than or equal to 20 a WARNING state, values strictly between 20 and 70 an OK state, values greater than or equal to 70 but less than 90 a WARNING state, and values greater than or equal to 90 a DANGER state.'
+          items:
+            $ref: '#/components/schemas/Threshold'
+          type: array
+        timeSeriesQuery:
+          $ref: '#/components/schemas/TimeSeriesQuery'
+          description: Fields for querying time series data from the Stackdriver metrics API.
+      type: object
+    SourceContext:
+      description: 'SourceContext represents information about the source of a protobuf element, like the file in which it is defined.'
+      properties:
+        fileName:
+          description: 'The path-qualified name of the .proto file that contained the associated protobuf element. For example: "google/protobuf/source_context.proto".'
+          type: string
+      type: object
+    SpanContext:
+      description: 'The context of a span, attached to google.api.Distribution.Exemplars in google.api.Distribution values during aggregation.It contains the name of a span with format:  projects/PROJECT_ID/traces/TRACE_ID/spans/SPAN_ID'
+      properties:
+        spanName:
+          description: |-
+            The resource name of the span in the following format:
+            projects/[PROJECT_ID]/traces/[TRACE_ID]/spans/[SPAN_ID]
+            TRACE_ID is a unique identifier for a trace within a project; it is a 32-character hexadecimal encoding of a 16-byte array.SPAN_ID is a unique identifier for a span within a trace; it is a 16-character hexadecimal encoding of an 8-byte array.
+          type: string
+      type: object
+    SparkChartView:
+      description: 'A sparkChart is a small chart suitable for inclusion in a table-cell or inline in text. This message contains the configuration for a sparkChart to show up on a Scorecard, showing recent trends of the scorecard''s timeseries.'
+      properties:
+        minAlignmentPeriod:
+          description: 'The lower bound on data point frequency in the chart implemented by specifying the minimum alignment period to use in a time series query. For example, if the data is published once every 10 minutes it would not make sense to fetch and align data at one minute intervals. This field is optional and exists only as a hint.'
+          format: google-duration
+          type: string
+        sparkChartType:
+          description: The type of sparkchart to show in this chartView.
+          enum:
+            - SPARK_CHART_TYPE_UNSPECIFIED
+            - SPARK_LINE
+            - SPARK_BAR
+          type: string
+      type: object
+    StatisticalTimeSeriesFilter:
+      description: A filter that ranks streams based on their statistical relation to other streams in a request.
+      properties:
+        numTimeSeries:
+          description: How many time series to output.
+          format: int32
+          type: integer
+        rankingMethod:
+          description: 'rankingMethod is applied to a set of time series, and then the produced value for each individual time series is used to compare a given time series to others. These are methods that cannot be applied stream-by-stream, but rather require the full context of a request to evaluate time series.'
+          enum:
+            - METHOD_UNSPECIFIED
+            - METHOD_CLUSTER_OUTLIER
+          type: string
+      type: object
+    Text:
+      description: A widget that displays textual content.
+      properties:
+        content:
+          description: The text content to be displayed.
+          type: string
+        format:
+          description: How the text content is formatted.
+          enum:
+            - FORMAT_UNSPECIFIED
+            - MARKDOWN
+            - RAW
+          type: string
+      type: object
+    Threshold:
+      description: Defines a threshold for categorizing time series values.
+      properties:
+        color:
+          description: The state color for this threshold. Color is not allowed in a XyChart.
+          enum:
+            - COLOR_UNSPECIFIED
+            - YELLOW
+            - RED
+          type: string
+        direction:
+          description: The direction for the current threshold. Direction is not allowed in a XyChart.
+          enum:
+            - DIRECTION_UNSPECIFIED
+            - ABOVE
+            - BELOW
+          type: string
+        label:
+          description: A label for the threshold.
+          type: string
+        value:
+          description: The value of the threshold. The value should be defined in the native scale of the metric.
+          format: double
+          type: number
+      type: object
+    TimeSeriesFilter:
+      description: A filter that defines a subset of time series data that is displayed in a widget. Time series data is fetched using the ListTimeSeries method.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/Aggregation'
+          description: 'By default, the raw time series data is returned. Use this field to combine multiple time series for different views of the data.'
+        filter:
+          description: 'Required. The monitoring filter that identifies the metric types, resources, and projects to query.'
+          type: string
+        pickTimeSeriesFilter:
+          $ref: '#/components/schemas/PickTimeSeriesFilter'
+          description: Ranking based time series filter.
+        statisticalTimeSeriesFilter:
+          $ref: '#/components/schemas/StatisticalTimeSeriesFilter'
+          description: Statistics based time series filter.
+      type: object
+    TimeSeriesFilterRatio:
+      description: A pair of time series filters that define a ratio computation. The output time series is the pair-wise division of each aligned element from the numerator and denominator time series.
+      properties:
+        denominator:
+          $ref: '#/components/schemas/RatioPart'
+          description: The denominator of the ratio.
+        numerator:
+          $ref: '#/components/schemas/RatioPart'
+          description: The numerator of the ratio.
+        pickTimeSeriesFilter:
+          $ref: '#/components/schemas/PickTimeSeriesFilter'
+          description: Ranking based time series filter.
+        secondaryAggregation:
+          $ref: '#/components/schemas/Aggregation'
+          description: Apply a second aggregation after the ratio is computed.
+        statisticalTimeSeriesFilter:
+          $ref: '#/components/schemas/StatisticalTimeSeriesFilter'
+          description: Statistics based time series filter.
+      type: object
+    TimeSeriesQuery:
+      description: TimeSeriesQuery collects the set of supported methods for querying time series data from the Stackdriver metrics API.
+      properties:
+        timeSeriesFilter:
+          $ref: '#/components/schemas/TimeSeriesFilter'
+          description: Filter parameters to fetch time series.
+        timeSeriesFilterRatio:
+          $ref: '#/components/schemas/TimeSeriesFilterRatio'
+          description: Parameters to fetch a ratio between two time series filters.
+        unitOverride:
+          description: 'The unit of data contained in fetched time series. If non-empty, this unit will override any unit that accompanies fetched data. The format is the same as the unit field in MetricDescriptor.'
+          type: string
+      type: object
+    Type:
+      description: A protocol buffer message type.
+      properties:
+        fields:
+          description: The list of fields.
+          items:
+            $ref: '#/components/schemas/Field'
+          type: array
+        name:
+          description: The fully qualified message name.
+          type: string
+        oneofs:
+          description: The list of types appearing in oneof definitions in this type.
+          items:
+            type: string
+          type: array
+        options:
+          description: The protocol buffer options.
+          items:
+            $ref: '#/components/schemas/Option'
+          type: array
+        sourceContext:
+          $ref: '#/components/schemas/SourceContext'
+          description: The source context.
+        syntax:
+          description: The source syntax.
+          enum:
+            - SYNTAX_PROTO2
+            - SYNTAX_PROTO3
+          type: string
+      type: object
+    Widget:
+      description: Widget contains a single dashboard component and configuration of how to present the component in the dashboard.
+      properties:
+        blank:
+          $ref: '#/components/schemas/Empty'
+          description: A blank space.
+        scorecard:
+          $ref: '#/components/schemas/Scorecard'
+          description: A scorecard summarizing time series data.
+        text:
+          $ref: '#/components/schemas/Text'
+          description: A raw string or markdown displaying textual content.
+        title:
+          description: Optional. The title of the widget.
+          type: string
+        xyChart:
+          $ref: '#/components/schemas/XyChart'
+          description: A chart of time series data.
+      type: object
+    XyChart:
+      description: A chart that displays data on a 2D (X and Y axes) plane.
+      properties:
+        chartOptions:
+          $ref: '#/components/schemas/ChartOptions'
+          description: Display options for the chart.
+        dataSets:
+          description: The data displayed in this chart.
+          items:
+            $ref: '#/components/schemas/DataSet'
+          type: array
+        thresholds:
+          description: Threshold lines drawn horizontally across the chart.
+          items:
+            $ref: '#/components/schemas/Threshold'
+          type: array
+        timeshiftDuration:
+          description: 'The duration used to display a comparison chart. A comparison chart simultaneously shows values from two similar-length time periods (e.g., week-over-week metrics). The duration must be positive, and it can only be applied to charts with data sets of LINE plot type.'
+          format: google-duration
+          type: string
+        xAxis:
+          $ref: '#/components/schemas/Axis'
+          description: The properties applied to the X axis.
+        yAxis:
+          $ref: '#/components/schemas/Axis'
+          description: The properties applied to the Y axis.
+      type: object
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      flows:
+        implicit:
+          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          scopes:
+            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+            'https://www.googleapis.com/auth/monitoring': View and write monitoring data for all of your Google and third-party Cloud and API projects
+            'https://www.googleapis.com/auth/monitoring.read': View monitoring data for all of your Google Cloud and third-party projects
+            'https://www.googleapis.com/auth/monitoring.write': Publish metric data to your Google Cloud projects
+      type: oauth2
+    Oauth2c:
+      description: Oauth 2.0 accessCode authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          scopes:
+            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+            'https://www.googleapis.com/auth/monitoring': View and write monitoring data for all of your Google and third-party Cloud and API projects
+            'https://www.googleapis.com/auth/monitoring.read': View monitoring data for all of your Google Cloud and third-party projects
+            'https://www.googleapis.com/auth/monitoring.write': Publish metric data to your Google Cloud projects
+          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+      type: oauth2
