@@ -191,7 +191,7 @@ paths:
                 items:
                   $ref: '#/definitions/TraceId'
               NextToken:
-                description: Pagination token. Not used.
+                description: Pagination token.
                 type: string
         - name: NextToken
           type: string
@@ -502,7 +502,7 @@ paths:
             type: object
             properties:
               NextToken:
-                description: Pagination token. Not used.
+                description: Pagination token.
                 type: string
                 minLength: 1
                 maxLength: 100
@@ -544,7 +544,7 @@ paths:
             type: object
             properties:
               NextToken:
-                description: Pagination token. Not used.
+                description: Pagination token.
                 type: string
         - name: NextToken
           type: string
@@ -584,7 +584,7 @@ paths:
             type: object
             properties:
               NextToken:
-                description: Pagination token. Not used.
+                description: Pagination token.
                 type: string
         - name: NextToken
           type: string
@@ -642,7 +642,7 @@ paths:
   /ServiceGraph:
     post:
       operationId: GetServiceGraph
-      description: 'Retrieves a document that describes services that process incoming requests, and downstream services that they call as a result. Root services process incoming requests and make calls to downstream services. Root services are applications that use the AWS X-Ray SDK. Downstream services can be other applications, AWS resources, HTTP web APIs, or SQL databases.'
+      description: 'Retrieves a document that describes services that process incoming requests, and downstream services that they call as a result. Root services process incoming requests and make calls to downstream services. Root services are applications that use the <a href="https://docs.aws.amazon.com/xray/index.html">AWS X-Ray SDK</a>. Downstream services can be other applications, AWS resources, HTTP web APIs, or SQL databases.'
       responses:
         '200':
           description: Success
@@ -685,7 +685,7 @@ paths:
                 minLength: 1
                 maxLength: 400
               NextToken:
-                description: Pagination token. Not used.
+                description: Pagination token.
                 type: string
         - name: NextToken
           type: string
@@ -754,7 +754,7 @@ paths:
                 description: Aggregation period in seconds.
                 type: integer
               NextToken:
-                description: Pagination token. Not used.
+                description: Pagination token.
                 type: string
         - name: NextToken
           type: string
@@ -801,7 +801,7 @@ paths:
                 items:
                   $ref: '#/definitions/TraceId'
               NextToken:
-                description: Pagination token. Not used.
+                description: Pagination token.
                 type: string
         - name: NextToken
           type: string
@@ -819,7 +819,7 @@ paths:
   /TraceSummaries:
     post:
       operationId: GetTraceSummaries
-      description: '<p>Retrieves IDs and metadata for traces available for a specified time frame using an optional filter. To get the full traces, pass the trace IDs to <code>BatchGetTraces</code>.</p> <p>A filter expression can target traced requests that hit specific service nodes or edges, have errors, or come from a known user. For example, the following filter expression targets traces that pass through <code>api.example.com</code>:</p> <p> <code>service("api.example.com")</code> </p> <p>This filter expression finds traces that have an annotation named <code>account</code> with the value <code>12345</code>:</p> <p> <code>annotation.account = "12345"</code> </p> <p>For a full list of indexed fields and keywords that you can use in filter expressions, see <a href="https://docs.aws.amazon.com/xray/latest/devguide/xray-console-filters.html">Using Filter Expressions</a> in the <i>AWS X-Ray Developer Guide</i>.</p>'
+      description: '<p>Retrieves IDs and annotations for traces available for a specified time frame using an optional filter. To get the full traces, pass the trace IDs to <code>BatchGetTraces</code>.</p> <p>A filter expression can target traced requests that hit specific service nodes or edges, have errors, or come from a known user. For example, the following filter expression targets traces that pass through <code>api.example.com</code>:</p> <p> <code>service("api.example.com")</code> </p> <p>This filter expression finds traces that have an annotation named <code>account</code> with the value <code>12345</code>:</p> <p> <code>annotation.account = "12345"</code> </p> <p>For a full list of indexed fields and keywords that you can use in filter expressions, see <a href="https://docs.aws.amazon.com/xray/latest/devguide/xray-console-filters.html">Using Filter Expressions</a> in the <i>AWS X-Ray Developer Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -916,7 +916,7 @@ paths:
               - Type
             properties:
               KeyId:
-                description: '<p>An AWS KMS customer master key (CMK) in one of the following formats:</p> <ul> <li> <p> <b>Alias</b> - The name of the key. For example, <code>alias/MyKey</code>.</p> </li> <li> <p> <b>Key ID</b> - The KMS key ID of the key. For example, <code>ae4aa6d49-a4d8-9df9-a475-4ff6d7898456</code>.</p> </li> <li> <p> <b>ARN</b> - The full Amazon Resource Name of the key ID or alias. For example, <code>arn:aws:kms:us-east-2:123456789012:key/ae4aa6d49-a4d8-9df9-a475-4ff6d7898456</code>. Use this format to specify a key in a different account.</p> </li> </ul> <p>Omit this key if you set <code>Type</code> to <code>NONE</code>.</p>'
+                description: '<p>An AWS KMS customer master key (CMK) in one of the following formats:</p> <ul> <li> <p> <b>Alias</b> - The name of the key. For example, <code>alias/MyKey</code>.</p> </li> <li> <p> <b>Key ID</b> - The KMS key ID of the key. For example, <code>ae4aa6d49-a4d8-9df9-a475-4ff6d7898456</code>. AWS X-Ray does not support asymmetric CMKs.</p> </li> <li> <p> <b>ARN</b> - The full Amazon Resource Name of the key ID or alias. For example, <code>arn:aws:kms:us-east-2:123456789012:key/ae4aa6d49-a4d8-9df9-a475-4ff6d7898456</code>. Use this format to specify a key in a different account.</p> </li> </ul> <p>Omit this key if you set <code>Type</code> to <code>NONE</code>.</p>'
                 type: string
                 minLength: 1
                 maxLength: 3000
@@ -988,7 +988,7 @@ paths:
   /TraceSegments:
     post:
       operationId: PutTraceSegments
-      description: '<p>Uploads segment documents to AWS X-Ray. The X-Ray SDK generates segment documents and sends them to the X-Ray daemon, which uploads them in batches. A segment document can be a completed segment, an in-progress segment, or an array of subsegments.</p> <p>Segments must include the following fields. For the full segment document schema, see <a href="https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html">AWS X-Ray Segment Documents</a> in the <i>AWS X-Ray Developer Guide</i>.</p> <p class="title"> <b>Required Segment Document Fields</b> </p> <ul> <li> <p> <code>name</code> - The name of the service that handled the request.</p> </li> <li> <p> <code>id</code> - A 64-bit identifier for the segment, unique among segments in the same trace, in 16 hexadecimal digits.</p> </li> <li> <p> <code>trace_id</code> - A unique identifier that connects all segments and subsegments originating from a single client request.</p> </li> <li> <p> <code>start_time</code> - Time the segment or subsegment was created, in floating point seconds in epoch time, accurate to milliseconds. For example, <code>1480615200.010</code> or <code>1.480615200010E9</code>.</p> </li> <li> <p> <code>end_time</code> - Time the segment or subsegment was closed. For example, <code>1480615200.090</code> or <code>1.480615200090E9</code>. Specify either an <code>end_time</code> or <code>in_progress</code>.</p> </li> <li> <p> <code>in_progress</code> - Set to <code>true</code> instead of specifying an <code>end_time</code> to record that a segment has been started, but is not complete. Send an in progress segment when your application receives a request that will take a long time to serve, to trace the fact that the request was received. When the response is sent, send the complete segment to overwrite the in-progress segment.</p> </li> </ul> <p>A <code>trace_id</code> consists of three numbers separated by hyphens. For example, 1-58406520-a006649127e371903a2de979. This includes:</p> <p class="title"> <b>Trace ID Format</b> </p> <ul> <li> <p>The version number, i.e. <code>1</code>.</p> </li> <li> <p>The time of the original request, in Unix epoch time, in 8 hexadecimal digits. For example, 10:00AM December 2nd, 2016 PST in epoch time is <code>1480615200</code> seconds, or <code>58406520</code> in hexadecimal.</p> </li> <li> <p>A 96-bit identifier for the trace, globally unique, in 24 hexadecimal digits.</p> </li> </ul>'
+      description: '<p>Uploads segment documents to AWS X-Ray. The <a href="https://docs.aws.amazon.com/xray/index.html">X-Ray SDK</a> generates segment documents and sends them to the X-Ray daemon, which uploads them in batches. A segment document can be a completed segment, an in-progress segment, or an array of subsegments.</p> <p>Segments must include the following fields. For the full segment document schema, see <a href="https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html">AWS X-Ray Segment Documents</a> in the <i>AWS X-Ray Developer Guide</i>.</p> <p class="title"> <b>Required Segment Document Fields</b> </p> <ul> <li> <p> <code>name</code> - The name of the service that handled the request.</p> </li> <li> <p> <code>id</code> - A 64-bit identifier for the segment, unique among segments in the same trace, in 16 hexadecimal digits.</p> </li> <li> <p> <code>trace_id</code> - A unique identifier that connects all segments and subsegments originating from a single client request.</p> </li> <li> <p> <code>start_time</code> - Time the segment or subsegment was created, in floating point seconds in epoch time, accurate to milliseconds. For example, <code>1480615200.010</code> or <code>1.480615200010E9</code>.</p> </li> <li> <p> <code>end_time</code> - Time the segment or subsegment was closed. For example, <code>1480615200.090</code> or <code>1.480615200090E9</code>. Specify either an <code>end_time</code> or <code>in_progress</code>.</p> </li> <li> <p> <code>in_progress</code> - Set to <code>true</code> instead of specifying an <code>end_time</code> to record that a segment has been started, but is not complete. Send an in progress segment when your application receives a request that will take a long time to serve, to trace the fact that the request was received. When the response is sent, send the complete segment to overwrite the in-progress segment.</p> </li> </ul> <p>A <code>trace_id</code> consists of three numbers separated by hyphens. For example, 1-58406520-a006649127e371903a2de979. This includes:</p> <p class="title"> <b>Trace ID Format</b> </p> <ul> <li> <p>The version number, i.e. <code>1</code>.</p> </li> <li> <p>The time of the original request, in Unix epoch time, in 8 hexadecimal digits. For example, 10:00AM December 2nd, 2016 PST in epoch time is <code>1480615200</code> seconds, or <code>58406520</code> in hexadecimal.</p> </li> <li> <p>A 96-bit identifier for the trace, globally unique, in 24 hexadecimal digits.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -1155,7 +1155,7 @@ definitions:
         description: Trace IDs of requests that haven't been processed.
       NextToken:
         $ref: '#/definitions/String'
-        description: Pagination token. Not used.
+        description: Pagination token.
   TraceId:
     type: string
     minLength: 1
@@ -1248,7 +1248,7 @@ definitions:
         description: The collection of all active groups.
       NextToken:
         $ref: '#/definitions/String'
-        description: Pagination token. Not used.
+        description: Pagination token.
   GetSamplingRulesResult:
     type: object
     properties:
@@ -1257,7 +1257,7 @@ definitions:
         description: Rule definitions and metadata.
       NextToken:
         $ref: '#/definitions/String'
-        description: Pagination token. Not used.
+        description: Pagination token.
   GetSamplingStatisticSummariesResult:
     type: object
     properties:
@@ -1266,7 +1266,7 @@ definitions:
         description: Information about the number of requests instrumented for each sampling rule.
       NextToken:
         $ref: '#/definitions/String'
-        description: Pagination token. Not used.
+        description: Pagination token.
   GetSamplingTargetsResult:
     type: object
     properties:
@@ -1324,7 +1324,7 @@ definitions:
         description: 'A flag indicating whether the group''s filter expression has been consistent, or if the returned service graph may show traces from an older version of the group''s filter expression.'
       NextToken:
         $ref: '#/definitions/String'
-        description: Pagination token. Not used.
+        description: Pagination token.
   GetTimeSeriesServiceStatisticsResult:
     type: object
     properties:
@@ -1336,7 +1336,7 @@ definitions:
         description: 'A flag indicating whether or not a group''s filter expression has been consistent, or if a returned aggregation may show statistics from an older version of the group''s filter expression.'
       NextToken:
         $ref: '#/definitions/String'
-        description: Pagination token. Not used.
+        description: Pagination token.
   GetTraceGraphResult:
     type: object
     properties:
@@ -1345,13 +1345,13 @@ definitions:
         description: The services that have processed one of the specified requests.
       NextToken:
         $ref: '#/definitions/String'
-        description: Pagination token. Not used.
+        description: Pagination token.
   GetTraceSummariesResult:
     type: object
     properties:
       TraceSummaries:
         $ref: '#/definitions/TraceSummaryList'
-        description: Trace IDs and metadata for traces that were found in the specified time frame.
+        description: Trace IDs and annotations for traces that were found in the specified time frame.
       ApproximateTime:
         $ref: '#/definitions/Timestamp'
         description: The start time of this page of results.
@@ -1521,7 +1521,7 @@ definitions:
         description: Specify the trace IDs of requests for which to retrieve segments.
       NextToken:
         $ref: '#/definitions/String'
-        description: Pagination token. Not used.
+        description: Pagination token.
   TraceList:
     type: array
     items:
@@ -1917,7 +1917,7 @@ definitions:
     properties:
       NextToken:
         $ref: '#/definitions/GetGroupsNextToken'
-        description: Pagination token. Not used.
+        description: Pagination token.
   GroupSummaryList:
     type: array
     items:
@@ -1927,7 +1927,7 @@ definitions:
     properties:
       NextToken:
         $ref: '#/definitions/String'
-        description: Pagination token. Not used.
+        description: Pagination token.
   SamplingRuleRecordList:
     type: array
     items:
@@ -1937,7 +1937,7 @@ definitions:
     properties:
       NextToken:
         $ref: '#/definitions/String'
-        description: Pagination token. Not used.
+        description: Pagination token.
   SamplingStatisticSummaryList:
     type: array
     items:
@@ -1983,7 +1983,7 @@ definitions:
         description: The ARN of a group to generate a graph based on.
       NextToken:
         $ref: '#/definitions/String'
-        description: Pagination token. Not used.
+        description: Pagination token.
   ServiceList:
     type: array
     items:
@@ -2014,7 +2014,7 @@ definitions:
         description: Aggregation period in seconds.
       NextToken:
         $ref: '#/definitions/String'
-        description: Pagination token. Not used.
+        description: Pagination token.
   TimeSeriesServiceStatisticsList:
     type: array
     items:
@@ -2029,7 +2029,7 @@ definitions:
         description: Trace IDs of requests for which to generate a service graph.
       NextToken:
         $ref: '#/definitions/String'
-        description: Pagination token. Not used.
+        description: Pagination token.
   TimeRangeType:
     type: string
     enum:
@@ -2137,7 +2137,7 @@ definitions:
     properties:
       KeyId:
         $ref: '#/definitions/EncryptionKeyId'
-        description: '<p>An AWS KMS customer master key (CMK) in one of the following formats:</p> <ul> <li> <p> <b>Alias</b> - The name of the key. For example, <code>alias/MyKey</code>.</p> </li> <li> <p> <b>Key ID</b> - The KMS key ID of the key. For example, <code>ae4aa6d49-a4d8-9df9-a475-4ff6d7898456</code>.</p> </li> <li> <p> <b>ARN</b> - The full Amazon Resource Name of the key ID or alias. For example, <code>arn:aws:kms:us-east-2:123456789012:key/ae4aa6d49-a4d8-9df9-a475-4ff6d7898456</code>. Use this format to specify a key in a different account.</p> </li> </ul> <p>Omit this key if you set <code>Type</code> to <code>NONE</code>.</p>'
+        description: '<p>An AWS KMS customer master key (CMK) in one of the following formats:</p> <ul> <li> <p> <b>Alias</b> - The name of the key. For example, <code>alias/MyKey</code>.</p> </li> <li> <p> <b>Key ID</b> - The KMS key ID of the key. For example, <code>ae4aa6d49-a4d8-9df9-a475-4ff6d7898456</code>. AWS X-Ray does not support asymmetric CMKs.</p> </li> <li> <p> <b>ARN</b> - The full Amazon Resource Name of the key ID or alias. For example, <code>arn:aws:kms:us-east-2:123456789012:key/ae4aa6d49-a4d8-9df9-a475-4ff6d7898456</code>. Use this format to specify a key in a different account.</p> </li> </ul> <p>Omit this key if you set <code>Type</code> to <code>NONE</code>.</p>'
       Type:
         $ref: '#/definitions/EncryptionType'
         description: The type of encryption. Set to <code>KMS</code> to use your own key for encryption. Set to <code>NONE</code> for default encryption.
@@ -2491,10 +2491,10 @@ definitions:
         description: 'The length of time in seconds between the start and end times of the root segment. If the service performs work asynchronously, the response time measures the time before the response is sent to the user, while the duration measures the amount of time before the last traced activity completes.'
       HasFault:
         $ref: '#/definitions/NullableBoolean'
-        description: One or more of the segment documents has a 500 series error.
+        description: The root segment document has a 500 series error.
       HasError:
         $ref: '#/definitions/NullableBoolean'
-        description: One or more of the segment documents has a 400 series error.
+        description: The root segment document has a 400 series error.
       HasThrottle:
         $ref: '#/definitions/NullableBoolean'
         description: One or more of the segment documents has a 429 throttling error.

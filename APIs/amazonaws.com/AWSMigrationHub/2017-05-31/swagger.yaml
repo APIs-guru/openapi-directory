@@ -697,6 +697,65 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSMigrationHub.ListApplicationStates':
+    post:
+      operationId: ListApplicationStates
+      description: 'Lists all the migration statuses for your applications. If you use the optional <code>ApplicationIds</code> parameter, only the migration statuses for those applications will be returned.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListApplicationStatesResult'
+        '480':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '484':
+          description: HomeRegionNotSetException
+          schema:
+            $ref: '#/definitions/HomeRegionNotSetException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListApplicationStatesRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSMigrationHub.ListApplicationStates
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AWSMigrationHub.ListCreatedArtifacts':
     post:
       operationId: ListCreatedArtifacts
@@ -1315,6 +1374,27 @@ definitions:
       DryRun:
         $ref: '#/definitions/DryRun'
         description: Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.
+  ListApplicationStatesResult:
+    type: object
+    properties:
+      ApplicationStateList:
+        $ref: '#/definitions/ApplicationStateList'
+        description: A list of Applications that exist in Application Discovery Service.
+      NextToken:
+        $ref: '#/definitions/Token'
+        description: 'If a <code>NextToken</code> was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>NextToken</code>.'
+  ListApplicationStatesRequest:
+    type: object
+    properties:
+      ApplicationIds:
+        $ref: '#/definitions/ApplicationIds'
+        description: The configurationIds from the Application Discovery Service that uniquely identifies your applications.
+      NextToken:
+        $ref: '#/definitions/Token'
+        description: 'If a <code>NextToken</code> was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>NextToken</code>.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: Maximum number of results to be returned per page.
   ListCreatedArtifactsResult:
     type: object
     properties:
@@ -1485,12 +1565,40 @@ definitions:
     type: string
     minLength: 1
     maxLength: 1600
+  ApplicationIds:
+    type: array
+    items:
+      $ref: '#/definitions/ApplicationId'
+    minItems: 1
+    maxItems: 100
   ApplicationStatus:
     type: string
     enum:
       - NOT_STARTED
       - IN_PROGRESS
       - COMPLETED
+  UpdateDateTime:
+    type: string
+    format: date-time
+  ApplicationState:
+    type: object
+    properties:
+      ApplicationId:
+        $ref: '#/definitions/ApplicationId'
+        description: The configurationId from the Application Discovery Service that uniquely identifies an application.
+      ApplicationStatus:
+        $ref: '#/definitions/ApplicationStatus'
+        description: The current status of an application.
+      LastUpdatedTime:
+        $ref: '#/definitions/UpdateDateTime'
+        description: The timestamp when the application status was last updated.
+    description: 'The state of an application discovered through Migration Hub import, the AWS Agentless Discovery Connector, or the AWS Application Discovery Agent.'
+  ApplicationStateList:
+    type: array
+    items:
+      $ref: '#/definitions/ApplicationState'
+    minItems: 0
+    maxItems: 1000
   ProgressUpdateStream:
     type: string
     pattern: '[^/:|\000-\037]+'
@@ -1543,9 +1651,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/CreatedArtifact'
-  UpdateDateTime:
-    type: string
-    format: date-time
   MigrationTask:
     type: object
     properties:
@@ -1594,6 +1699,10 @@ definitions:
     maxItems: 100
   Token:
     type: string
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 100
   MaxResultsCreatedArtifacts:
     type: integer
     minimum: 1
@@ -1602,10 +1711,6 @@ definitions:
     type: integer
     minimum: 1
     maximum: 10
-  MaxResults:
-    type: integer
-    minimum: 1
-    maximum: 100
   ResourceName:
     type: string
     minLength: 1
