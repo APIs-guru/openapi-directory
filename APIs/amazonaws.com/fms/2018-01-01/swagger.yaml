@@ -674,6 +674,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSFMS_20180101.ListTagsForResource':
+    post:
+      operationId: ListTagsForResource
+      description: 'Retrieves the list of tags for the specified AWS resource. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidOperationException
+          schema:
+            $ref: '#/definitions/InvalidOperationException'
+        '482':
+          description: InternalErrorException
+          schema:
+            $ref: '#/definitions/InternalErrorException'
+        '483':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTagsForResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSFMS_20180101.ListTagsForResource
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AWSFMS_20180101.PutNotificationChannel':
     post:
       operationId: PutNotificationChannel
@@ -758,6 +803,100 @@ paths:
           type: string
           enum:
             - AWSFMS_20180101.PutPolicy
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSFMS_20180101.TagResource':
+    post:
+      operationId: TagResource
+      description: Adds one or more tags to an AWS resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TagResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidOperationException
+          schema:
+            $ref: '#/definitions/InvalidOperationException'
+        '482':
+          description: InternalErrorException
+          schema:
+            $ref: '#/definitions/InternalErrorException'
+        '483':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '484':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TagResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSFMS_20180101.TagResource
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSFMS_20180101.UntagResource':
+    post:
+      operationId: UntagResource
+      description: Removes one or more tags from an AWS resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UntagResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidOperationException
+          schema:
+            $ref: '#/definitions/InvalidOperationException'
+        '482':
+          description: InternalErrorException
+          schema:
+            $ref: '#/definitions/InternalErrorException'
+        '483':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UntagResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSFMS_20180101.UntagResource
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -954,6 +1093,20 @@ definitions:
         $ref: '#/definitions/PaginationMaxResults'
         description: 'Specifies the number of <code>PolicySummary</code> objects that you want AWS Firewall Manager to return for this request. If you have more <code>PolicySummary</code> objects than the number that you specify for <code>MaxResults</code>, the response includes a <code>NextToken</code> value that you can use to get another batch of <code>PolicySummary</code> objects.'
   LimitExceededException: {}
+  ListTagsForResourceResponse:
+    type: object
+    properties:
+      TagList:
+        $ref: '#/definitions/TagList'
+        description: The tags associated with the resource.
+  ListTagsForResourceRequest:
+    type: object
+    required:
+      - ResourceArn
+    properties:
+      ResourceArn:
+        $ref: '#/definitions/ResourceArn'
+        description: 'The Amazon Resource Name (ARN) of the resource to return tags for. The Firewall Manager policy is the only AWS resource that supports tagging, so this ARN is a policy ARN..'
   PutNotificationChannelRequest:
     type: object
     required:
@@ -983,6 +1136,39 @@ definitions:
       Policy:
         $ref: '#/definitions/Policy'
         description: The details of the AWS Firewall Manager policy to be created.
+      TagList:
+        $ref: '#/definitions/TagList'
+        description: The tags to add to the AWS resource.
+  TagResourceResponse:
+    type: object
+    properties: {}
+  TagResourceRequest:
+    type: object
+    required:
+      - ResourceArn
+      - TagList
+    properties:
+      ResourceArn:
+        $ref: '#/definitions/ResourceArn'
+        description: 'The Amazon Resource Name (ARN) of the resource. The Firewall Manager policy is the only AWS resource that supports tagging, so this ARN is a policy ARN.'
+      TagList:
+        $ref: '#/definitions/TagList'
+        description: The tags to add to the resource.
+  UntagResourceResponse:
+    type: object
+    properties: {}
+  UntagResourceRequest:
+    type: object
+    required:
+      - ResourceArn
+      - TagKeys
+    properties:
+      ResourceArn:
+        $ref: '#/definitions/ResourceArn'
+        description: 'The Amazon Resource Name (ARN) of the resource. The Firewall Manager policy is the only AWS resource that supports tagging, so this ARN is a policy ARN.'
+      TagKeys:
+        $ref: '#/definitions/TagKeyList'
+        description: 'The keys of the tags to remove from the resource. '
   AWSAccountId:
     type: string
     pattern: '^[0-9]+$'
@@ -1176,6 +1362,7 @@ definitions:
     type: string
     pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
     minLength: 1
+    maxLength: 4096
   PaginationMaxResults:
     type: integer
     minimum: 1
@@ -1206,6 +1393,12 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/PolicySummary'
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    minItems: 0
+    maxItems: 200
   ManagedServiceData:
     type: string
     minLength: 1
@@ -1289,12 +1482,12 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: Indicates if the policy should be automatically applied to new resources.
     description: 'Details of the AWS Firewall Manager policy. '
-  TagKey:
+  ResourceTagKey:
     type: string
     pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
     minLength: 1
     maxLength: 128
-  TagValue:
+  ResourceTagValue:
     type: string
     pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
     maxLength: 256
@@ -1304,9 +1497,38 @@ definitions:
       - Key
     properties:
       Key:
-        $ref: '#/definitions/TagKey'
+        $ref: '#/definitions/ResourceTagKey'
         description: The resource tag key.
       Value:
-        $ref: '#/definitions/TagValue'
+        $ref: '#/definitions/ResourceTagValue'
         description: The resource tag value.
     description: 'The resource tags that AWS Firewall Manager uses to determine if a particular resource should be included or excluded from the AWS Firewall Manager policy. Tags enable you to categorize your AWS resources in different ways, for example, by purpose, owner, or environment. Each tag consists of a key and an optional value. Firewall Manager combines the tags with "AND" so that, if you add more than one tag to a policy scope, a resource must have all the specified tags to be included or excluded. For more information, see <a href="https://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/tag-editor.html">Working with Tag Editor</a>.'
+  TagKey:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 1
+    maxLength: 128
+  TagValue:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 0
+    maxLength: 256
+  Tag:
+    type: object
+    required:
+      - Key
+      - Value
+    properties:
+      Key:
+        $ref: '#/definitions/TagKey'
+        description: 'Part of the key:value pair that defines a tag. You can use a tag key to describe a category of information, such as "customer." Tag keys are case-sensitive.'
+      Value:
+        $ref: '#/definitions/TagValue'
+        description: 'Part of the key:value pair that defines a tag. You can use a tag value to describe a specific value within a category, such as "companyA" or "companyB." Tag values are case-sensitive. '
+    description: 'A collection of key:value pairs associated with an AWS resource. The key:value pair can be anything you define. Typically, the tag key represents a category (such as "environment") and the tag value represents a specific value within that category (such as "test," "development," or "production"). You can add up to 50 tags to each AWS resource. '
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+    minItems: 0
+    maxItems: 200
