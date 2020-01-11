@@ -345,6 +345,77 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/accounts/{accountId}#operation=associate-signin-delegate-groups':
+    post:
+      operationId: AssociateSigninDelegateGroupsWithAccount
+      description: Associates the specified sign-in delegate groups with the specified Amazon Chime account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AssociateSigninDelegateGroupsWithAccountResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: The Amazon Chime account ID.
+          type: string
+          pattern: .*\S.*
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - SigninDelegateGroups
+            properties:
+              SigninDelegateGroups:
+                description: The sign-in delegate groups.
+                type: array
+                items:
+                  $ref: '#/definitions/SigninDelegateGroup'
+        - name: operation
+          in: query
+          required: true
+          type: string
+          enum:
+            - associate-signin-delegate-groups
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/meetings/{meetingId}/attendees#operation=batch-create':
     post:
       operationId: BatchCreateAttendee
@@ -446,10 +517,14 @@ paths:
           schema:
             $ref: '#/definitions/ForbiddenException'
         '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
           description: ServiceUnavailableException
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
-        '485':
+        '486':
           description: ServiceFailureException
           schema:
             $ref: '#/definitions/ServiceFailureException'
@@ -563,7 +638,7 @@ paths:
   '/accounts/{accountId}/users#operation=suspend':
     post:
       operationId: BatchSuspendUser
-      description: '<p>Suspends up to 50 users from a <code>Team</code> or <code>EnterpriseLWA</code> Amazon Chime account. For more information about different account types, see <a href="https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html">Managing Your Amazon Chime Accounts</a> in the <i>Amazon Chime Administration Guide</i>.</p> <p>Users suspended from a <code>Team</code> account are dissasociated from the account, but they can continue to use Amazon Chime as free users. To remove the suspension from suspended <code>Team</code> account users, invite them to the <code>Team</code> account again. You can use the <a>InviteUsers</a> action to do so.</p> <p>Users suspended from an <code>EnterpriseLWA</code> account are immediately signed out of Amazon Chime and can no longer sign in. To remove the suspension from suspended <code>EnterpriseLWA</code> account users, use the <a>BatchUnsuspendUser</a> action. </p> <p>To sign out users without suspending them, use the <a>LogoutUser</a> action.</p>'
+      description: '<p>Suspends up to 50 users from a <code>Team</code> or <code>EnterpriseLWA</code> Amazon Chime account. For more information about different account types, see <a href="https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html">Managing Your Amazon Chime Accounts</a> in the <i>Amazon Chime Administration Guide</i>.</p> <p>Users suspended from a <code>Team</code> account are disassociated from the account, but they can continue to use Amazon Chime as free users. To remove the suspension from suspended <code>Team</code> account users, invite them to the <code>Team</code> account again. You can use the <a>InviteUsers</a> action to do so.</p> <p>Users suspended from an <code>EnterpriseLWA</code> account are immediately signed out of Amazon Chime and can no longer sign in. To remove the suspension from suspended <code>EnterpriseLWA</code> account users, use the <a>BatchUnsuspendUser</a> action. </p> <p>To sign out users without suspending them, use the <a>LogoutUser</a> action.</p>'
       responses:
         '200':
           description: Success
@@ -885,6 +960,14 @@ paths:
           type: string
           pattern: .+@.+\..+
           format: password
+        - name: user-type
+          in: query
+          required: false
+          description: The user type.
+          type: string
+          enum:
+            - PrivateUser
+            - SharedDevice
         - name: max-results
           in: query
           required: false
@@ -1213,6 +1296,10 @@ paths:
           description: NotFoundException
           schema:
             $ref: '#/definitions/NotFoundException'
+        '487':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
       parameters:
         - name: accountId
           in: path
@@ -1276,6 +1363,10 @@ paths:
           description: NotFoundException
           schema:
             $ref: '#/definitions/NotFoundException'
+        '486':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
       parameters:
         - name: accountId
           in: path
@@ -1365,7 +1456,7 @@ paths:
                 maxLength: 64
                 format: password
               MediaRegion:
-                description: 'The Region in which to create the meeting. Available values: <code>us-east-1</code>, <code>us-west-2</code>.'
+                description: 'The Region in which to create the meeting. Available values: <code>ap-northeast-1</code>, <code>ap-southeast-1</code>, <code>ap-southeast-2</code>, <code>ca-central-1</code>, <code>eu-central-1</code>, <code>eu-north-1</code>, <code>eu-west-1</code>, <code>eu-west-2</code>, <code>eu-west-3</code>, <code>sa-east-1</code>, <code>us-east-1</code>, <code>us-east-2</code>, <code>us-west-1</code>, <code>us-west-2</code>.'
                 type: string
               NotificationsConfiguration:
                 description: The configuration for resource targets to receive notifications when Amazon Chime SDK meeting and attendee events occur.
@@ -1595,10 +1686,14 @@ paths:
           schema:
             $ref: '#/definitions/ResourceLimitExceededException'
         '485':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '486':
           description: ServiceUnavailableException
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
-        '486':
+        '487':
           description: ServiceFailureException
           schema:
             $ref: '#/definitions/ServiceFailureException'
@@ -1661,10 +1756,14 @@ paths:
           schema:
             $ref: '#/definitions/UnauthorizedClientException'
         '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
           description: ServiceUnavailableException
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
-        '485':
+        '486':
           description: ServiceFailureException
           schema:
             $ref: '#/definitions/ServiceFailureException'
@@ -1736,10 +1835,14 @@ paths:
           schema:
             $ref: '#/definitions/ResourceLimitExceededException'
         '486':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '487':
           description: ServiceUnavailableException
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
-        '487':
+        '488':
           description: ServiceFailureException
           schema:
             $ref: '#/definitions/ServiceFailureException'
@@ -1784,7 +1887,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListRoomMemberships
-      description: 'Lists the membership details for the specified room, such as member IDs, member email addresses, and member names.'
+      description: 'Lists the membership details for the specified room, such as the members'' IDs, email addresses, and names.'
       responses:
         '200':
           description: Success
@@ -1807,10 +1910,14 @@ paths:
           schema:
             $ref: '#/definitions/UnauthorizedClientException'
         '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
           description: ServiceUnavailableException
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
-        '485':
+        '486':
           description: ServiceFailureException
           schema:
             $ref: '#/definitions/ServiceFailureException'
@@ -1849,6 +1956,88 @@ paths:
           in: query
           description: Pagination token
           required: false
+  '/accounts/{accountId}/users#operation=create':
+    post:
+      operationId: CreateUser
+      description: Creates a user under the specified Amazon Chime account.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateUserResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '484':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '485':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '486':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: The Amazon Chime account ID.
+          type: string
+          pattern: .*\S.*
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              Username:
+                description: The user name.
+                type: string
+              Email:
+                description: The user's email address.
+                type: string
+                pattern: .+@.+\..+
+                format: password
+              UserType:
+                description: The user type.
+                type: string
+                enum:
+                  - PrivateUser
+                  - SharedDevice
+        - name: operation
+          in: query
+          required: true
+          type: string
+          enum:
+            - create
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /voice-connectors:
     post:
       operationId: CreateVoiceConnector
@@ -2790,10 +2979,14 @@ paths:
           schema:
             $ref: '#/definitions/UnauthorizedClientException'
         '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
           description: ServiceUnavailableException
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
-        '485':
+        '486':
           description: ServiceFailureException
           schema:
             $ref: '#/definitions/ServiceFailureException'
@@ -2820,7 +3013,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetRoom
-      description: 'Retrieves room details, such as name.'
+      description: 'Retrieves room details, such as the room name.'
       responses:
         '200':
           description: Success
@@ -2843,10 +3036,14 @@ paths:
           schema:
             $ref: '#/definitions/UnauthorizedClientException'
         '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
           description: ServiceUnavailableException
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
-        '485':
+        '486':
           description: ServiceFailureException
           schema:
             $ref: '#/definitions/ServiceFailureException'
@@ -2888,10 +3085,14 @@ paths:
           schema:
             $ref: '#/definitions/UnauthorizedClientException'
         '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
           description: ServiceUnavailableException
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
-        '485':
+        '486':
           description: ServiceFailureException
           schema:
             $ref: '#/definitions/ServiceFailureException'
@@ -2942,10 +3143,14 @@ paths:
           schema:
             $ref: '#/definitions/ForbiddenException'
         '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
           description: ServiceUnavailableException
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
-        '485':
+        '486':
           description: ServiceFailureException
           schema:
             $ref: '#/definitions/ServiceFailureException'
@@ -2978,7 +3183,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
       operationId: UpdateRoomMembership
-      description: 'Updates room membership details, such as member role. The member role designates whether the member is a chat room administrator or a general chat room member. Member role can only be updated for user IDs.'
+      description: 'Updates room membership details, such as the member role. The member role designates whether the member is a chat room administrator or a general chat room member. The member role can be updated only for user IDs.'
       responses:
         '200':
           description: Success
@@ -3001,10 +3206,14 @@ paths:
           schema:
             $ref: '#/definitions/ForbiddenException'
         '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
           description: ServiceUnavailableException
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
-        '485':
+        '486':
           description: ServiceFailureException
           schema:
             $ref: '#/definitions/ServiceFailureException'
@@ -4101,6 +4310,78 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/accounts/{accountId}#operation=disassociate-signin-delegate-groups':
+    post:
+      operationId: DisassociateSigninDelegateGroupsFromAccount
+      description: Disassociates the specified sign-in delegate groups from the specified Amazon Chime account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DisassociateSigninDelegateGroupsFromAccountResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: The Amazon Chime account ID.
+          type: string
+          pattern: .*\S.*
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - GroupNames
+            properties:
+              GroupNames:
+                description: The sign-in delegate group names.
+                type: array
+                items:
+                  $ref: '#/definitions/String'
+                minItems: 1
+        - name: operation
+          in: query
+          required: true
+          type: string
+          enum:
+            - disassociate-signin-delegate-groups
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/accounts/{accountId}/settings':
     get:
       operationId: GetAccountSettings
@@ -4251,6 +4532,10 @@ paths:
           description: BadRequestException
           schema:
             $ref: '#/definitions/BadRequestException'
+        '486':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
       parameters:
         - name: accountId
           in: path
@@ -4304,6 +4589,10 @@ paths:
           description: NotFoundException
           schema:
             $ref: '#/definitions/NotFoundException'
+        '486':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
       parameters:
         - name: accountId
           in: path
@@ -4679,6 +4968,22 @@ paths:
                   - Plus
                   - Pro
                   - ProTrial
+              UserType:
+                description: The user type.
+                type: string
+                enum:
+                  - PrivateUser
+                  - SharedDevice
+              AlexaForBusinessMetadata:
+                description: 'The Alexa for Business metadata associated with an Amazon Chime user, used to integrate Alexa for Business with a device.'
+                type: object
+                properties:
+                  IsAlexaForBusinessEnabled:
+                    $ref: '#/definitions/Boolean'
+                    description: Starts or stops Alexa for Business.
+                  AlexaForBusinessRoomArn:
+                    $ref: '#/definitions/SensitiveString'
+                    description: The ARN of the room resource.
   '/accounts/{accountId}/users/{userId}/settings':
     get:
       operationId: GetUserSettings
@@ -5015,6 +5320,12 @@ paths:
                 items:
                   $ref: '#/definitions/EmailAddress'
                 maxItems: 50
+              UserType:
+                description: The user type.
+                type: string
+                enum:
+                  - PrivateUser
+                  - SharedDevice
         - name: operation
           in: query
           required: true
@@ -5346,6 +5657,10 @@ paths:
           description: NotFoundException
           schema:
             $ref: '#/definitions/NotFoundException'
+        '486':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
       parameters:
         - name: accountId
           in: path
@@ -5619,6 +5934,16 @@ definitions:
       PhoneNumberErrors:
         $ref: '#/definitions/PhoneNumberErrorList'
         description: 'If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and error messages.'
+  AssociateSigninDelegateGroupsWithAccountResponse:
+    type: object
+    properties: {}
+  SigninDelegateGroup:
+    type: object
+    properties:
+      GroupName:
+        $ref: '#/definitions/NonEmptyString'
+        description: The group name.
+    description: An Active Directory (AD) group whose members are granted permission to act as delegates.
   BatchCreateAttendeeResponse:
     type: object
     properties:
@@ -5715,6 +6040,12 @@ definitions:
       LicenseType:
         $ref: '#/definitions/License'
         description: The user license type.
+      UserType:
+        $ref: '#/definitions/UserType'
+        description: The user type.
+      AlexaForBusinessMetadata:
+        $ref: '#/definitions/AlexaForBusinessMetadata'
+        description: The Alexa for Business metadata.
     description: 'The user ID and user fields to update, used with the <a>BatchUpdateUser</a> action.'
   CreateAccountResponse:
     type: object
@@ -5765,6 +6096,11 @@ definitions:
         $ref: '#/definitions/RoomMembership'
         description: The room membership details.
   ConflictException: {}
+  CreateUserResponse:
+    type: object
+    properties:
+      User:
+        $ref: '#/definitions/User'
   CreateVoiceConnectorResponse:
     type: object
     properties:
@@ -5812,6 +6148,9 @@ definitions:
       PhoneNumberErrors:
         $ref: '#/definitions/PhoneNumberErrorList'
         description: 'If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and error messages.'
+  DisassociateSigninDelegateGroupsFromAccountResponse:
+    type: object
+    properties: {}
   GetAccountResponse:
     type: object
     properties:
@@ -6227,6 +6566,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/License'
+  SigninDelegateGroupList:
+    type: array
+    items:
+      $ref: '#/definitions/SigninDelegateGroup'
   Account:
     type: object
     required:
@@ -6255,6 +6598,9 @@ definitions:
       SupportedLicenses:
         $ref: '#/definitions/LicenseList'
         description: Supported licenses for the Amazon Chime account.
+      SigninDelegateGroups:
+        $ref: '#/definitions/SigninDelegateGroupList'
+        description: The sign-in delegate groups associated with the account.
     description: The Amazon Chime account details. An AWS account can have multiple Amazon Chime accounts.
   AccountList:
     type: array
@@ -6275,6 +6621,16 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Setting that allows meeting participants to choose the <b>Call me at a phone number</b> option. For more information, see <a href="https://docs.aws.amazon.com/chime/latest/ug/chime-join-meeting.html">Join a Meeting without the Amazon Chime App</a>.'
     description: 'Settings related to the Amazon Chime account. This includes settings that start or stop remote control of shared screens, or start or stop the dial-out option in the Amazon Chime web application. For more information about these settings, see <a href="https://docs.aws.amazon.com/chime/latest/ag/policies.html">Use the Policies Page</a> in the <i>Amazon Chime Administration Guide</i>.'
+  AlexaForBusinessMetadata:
+    type: object
+    properties:
+      IsAlexaForBusinessEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Starts or stops Alexa for Business.
+      AlexaForBusinessRoomArn:
+        $ref: '#/definitions/SensitiveString'
+        description: The ARN of the room resource.
+    description: 'The Alexa for Business metadata associated with an Amazon Chime user, used to integrate Alexa for Business with a device.'
   AssociatePhoneNumberWithUserRequest:
     type: object
     required:
@@ -6311,6 +6667,14 @@ definitions:
       ForceAssociate:
         $ref: '#/definitions/NullableBoolean'
         description: 'If true, associates the provided phone numbers with the provided Amazon Chime Voice Connector and removes any previously existing associations. If false, does not associate any phone numbers that have previously existing associations.'
+  AssociateSigninDelegateGroupsWithAccountRequest:
+    type: object
+    required:
+      - SigninDelegateGroups
+    properties:
+      SigninDelegateGroups:
+        $ref: '#/definitions/SigninDelegateGroupList'
+        description: The sign-in delegate groups.
   ExternalUserIdType:
     type: string
     minLength: 2
@@ -6565,7 +6929,7 @@ definitions:
         description: Reserved.
       MediaRegion:
         $ref: '#/definitions/String'
-        description: 'The Region in which to create the meeting. Available values: <code>us-east-1</code>, <code>us-west-2</code>.'
+        description: 'The Region in which to create the meeting. Available values: <code>ap-northeast-1</code>, <code>ap-southeast-1</code>, <code>ap-southeast-2</code>, <code>ca-central-1</code>, <code>eu-central-1</code>, <code>eu-north-1</code>, <code>eu-west-1</code>, <code>eu-west-2</code>, <code>eu-west-3</code>, <code>sa-east-1</code>, <code>us-east-1</code>, <code>us-east-2</code>, <code>us-west-1</code>, <code>us-west-2</code>.'
       NotificationsConfiguration:
         $ref: '#/definitions/MeetingNotificationConfiguration'
         description: The configuration for resource targets to receive notifications when meeting and attendee events occur.
@@ -6580,7 +6944,7 @@ definitions:
         description: The media placement for the meeting.
       MediaRegion:
         $ref: '#/definitions/String'
-        description: 'The Region in which to create the meeting. Available values: <code>us-east-1</code>, <code>us-west-2</code>.'
+        description: 'The Region in which to create the meeting. Available values: <code>ap-northeast-1</code>, <code>ap-southeast-1</code>, <code>ap-southeast-2</code>, <code>ca-central-1</code>, <code>eu-central-1</code>, <code>eu-north-1</code>, <code>eu-west-1</code>, <code>eu-west-2</code>, <code>eu-west-3</code>, <code>sa-east-1</code>, <code>us-east-1</code>, <code>us-east-2</code>, <code>us-west-1</code>, <code>us-west-2</code>.'
     description: A meeting created using the Amazon Chime SDK.
   PhoneNumberProductType:
     type: string
@@ -6688,6 +7052,68 @@ definitions:
         $ref: '#/definitions/Iso8601Timestamp'
         description: 'The room update timestamp, in ISO 8601 format.'
     description: The Amazon Chime chat room details.
+  UserType:
+    type: string
+    enum:
+      - PrivateUser
+      - SharedDevice
+  CreateUserRequest:
+    type: object
+    properties:
+      Username:
+        $ref: '#/definitions/String'
+        description: The user name.
+      Email:
+        $ref: '#/definitions/EmailAddress'
+        description: The user's email address.
+      UserType:
+        $ref: '#/definitions/UserType'
+        description: The user type.
+  User:
+    type: object
+    required:
+      - UserId
+    properties:
+      UserId:
+        $ref: '#/definitions/String'
+        description: The user ID.
+      AccountId:
+        $ref: '#/definitions/String'
+        description: The Amazon Chime account ID.
+      PrimaryEmail:
+        $ref: '#/definitions/EmailAddress'
+        description: The primary email address of the user.
+      PrimaryProvisionedNumber:
+        $ref: '#/definitions/SensitiveString'
+        description: The primary phone number associated with the user.
+      DisplayName:
+        $ref: '#/definitions/SensitiveString'
+        description: The display name of the user.
+      LicenseType:
+        $ref: '#/definitions/License'
+        description: The license type for the user.
+      UserType:
+        $ref: '#/definitions/UserType'
+        description: The user type.
+      UserRegistrationStatus:
+        $ref: '#/definitions/RegistrationStatus'
+        description: The user registration status.
+      UserInvitationStatus:
+        $ref: '#/definitions/InviteStatus'
+        description: The user invite status.
+      RegisteredOn:
+        $ref: '#/definitions/Iso8601Timestamp'
+        description: 'Date and time when the user is registered, in ISO 8601 format.'
+      InvitedOn:
+        $ref: '#/definitions/Iso8601Timestamp'
+        description: 'Date and time when the user is invited to the Amazon Chime account, in ISO 8601 format.'
+      AlexaForBusinessMetadata:
+        $ref: '#/definitions/AlexaForBusinessMetadata'
+        description: The Alexa for Business metadata.
+      PersonalPIN:
+        $ref: '#/definitions/String'
+        description: The user's personal meeting PIN.
+    description: The user on the Amazon Chime account.
   VoiceConnectorGroupName:
     type: string
     minLength: 1
@@ -6840,6 +7266,14 @@ definitions:
       E164PhoneNumbers:
         $ref: '#/definitions/E164PhoneNumberList'
         description: 'List of phone numbers, in E.164 format.'
+  DisassociateSigninDelegateGroupsFromAccountRequest:
+    type: object
+    required:
+      - GroupNames
+    properties:
+      GroupNames:
+        $ref: '#/definitions/NonEmptyStringList'
+        description: The sign-in delegate group names.
   EmailStatus:
     type: string
     enum:
@@ -6953,45 +7387,6 @@ definitions:
   GetUserRequest:
     type: object
     properties: {}
-  User:
-    type: object
-    required:
-      - UserId
-    properties:
-      UserId:
-        $ref: '#/definitions/String'
-        description: The user ID.
-      AccountId:
-        $ref: '#/definitions/String'
-        description: The Amazon Chime account ID.
-      PrimaryEmail:
-        $ref: '#/definitions/EmailAddress'
-        description: The primary email address of the user.
-      PrimaryProvisionedNumber:
-        $ref: '#/definitions/SensitiveString'
-        description: The primary phone number associated with the user.
-      DisplayName:
-        $ref: '#/definitions/SensitiveString'
-        description: The display name of the user.
-      LicenseType:
-        $ref: '#/definitions/License'
-        description: The license type for the user.
-      UserRegistrationStatus:
-        $ref: '#/definitions/RegistrationStatus'
-        description: The user registration status.
-      UserInvitationStatus:
-        $ref: '#/definitions/InviteStatus'
-        description: The user invite status.
-      RegisteredOn:
-        $ref: '#/definitions/Iso8601Timestamp'
-        description: 'Date and time when the user is registered, in ISO 8601 format.'
-      InvitedOn:
-        $ref: '#/definitions/Iso8601Timestamp'
-        description: 'Date and time when the user is invited to the Amazon Chime account, in ISO 8601 format.'
-      PersonalPIN:
-        $ref: '#/definitions/String'
-        description: The user's personal meeting PIN.
-    description: The user on the Amazon Chime account.
   GetUserSettingsRequest:
     type: object
     properties: {}
@@ -7122,6 +7517,9 @@ definitions:
       UserEmailList:
         $ref: '#/definitions/UserEmailList'
         description: The user email addresses to which to send the email invitation.
+      UserType:
+        $ref: '#/definitions/UserType'
+        description: The user type.
   ProfileServiceMaxResults:
     type: integer
     minimum: 1
@@ -7543,6 +7941,12 @@ definitions:
       LicenseType:
         $ref: '#/definitions/License'
         description: The user license type to update. This must be a supported license type for the Amazon Chime account that the user belongs to.
+      UserType:
+        $ref: '#/definitions/UserType'
+        description: The user type.
+      AlexaForBusinessMetadata:
+        $ref: '#/definitions/AlexaForBusinessMetadata'
+        description: The Alexa for Business metadata.
   UpdateUserSettingsRequest:
     type: object
     required:

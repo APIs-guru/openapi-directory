@@ -853,6 +853,10 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/CreatePresignedDomainUrlResponse'
+        '480':
+          description: ResourceNotFound
+          schema:
+            $ref: '#/definitions/ResourceNotFound'
       parameters:
         - name: body
           in: body
@@ -1065,7 +1069,7 @@ paths:
   '/#X-Amz-Target=SageMaker.CreateTrialComponent':
     post:
       operationId: CreateTrialComponent
-      description: '<p>Creates a <i>trial component</i>, which is a stage of a machine learning <i>trial</i>. A trial is composed of one or more trial components. A trial component can be used in multiple trials.</p> <p>Trial components include pre-processing jobs, training jobs, and batch transform jobs.</p> <p>When you use Amazon SageMaker Studio or the Amazon SageMaker Python SDK, all experiments, trials, and trial components are automatically tracked, logged, and indexed. When you use the AWS SDK for Python (Boto), you must use the logging APIs provided by the SDK.</p> <p>You can add tags to a trial component and then use the <a>Search</a> API to search for the tags.</p> <note> <p>You can create a trial component through a direct call to the <code>CreateTrialComponent</code> API. However, you can''t specify the <code>Source</code> property of the component in the request, therefore, the component isn''t associated with an Amazon SageMaker job. You must use Amazon SageMaker Studio, the Amazon SageMaker Python SDK, or the AWS SDK for Python (Boto) to create the component with a valid <code>Source</code> property.</p> </note>'
+      description: '<p>Creates a <i>trial component</i>, which is a stage of a machine learning <i>trial</i>. A trial is composed of one or more trial components. A trial component can be used in multiple trials.</p> <p>Trial components include pre-processing jobs, training jobs, and batch transform jobs.</p> <p>When you use Amazon SageMaker Studio or the Amazon SageMaker Python SDK, all experiments, trials, and trial components are automatically tracked, logged, and indexed. When you use the AWS SDK for Python (Boto), you must use the logging APIs provided by the SDK.</p> <p>You can add tags to a trial component and then use the <a>Search</a> API to search for the tags.</p> <note> <p> <code>CreateTrialComponent</code> can only be invoked from within an Amazon SageMaker managed environment. This includes Amazon SageMaker training jobs, processing jobs, transform jobs, and Amazon SageMaker notebooks. A call to <code>CreateTrialComponent</code> from outside one of these environments results in an error.</p> </note>'
       responses:
         '200':
           description: Success
@@ -3669,6 +3673,10 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/ListTrialComponentsResponse'
+        '480':
+          description: ResourceNotFound
+          schema:
+            $ref: '#/definitions/ResourceNotFound'
       parameters:
         - name: body
           in: body
@@ -3708,6 +3716,10 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/ListTrialsResponse'
+        '480':
+          description: ResourceNotFound
+          schema:
+            $ref: '#/definitions/ResourceNotFound'
       parameters:
         - name: body
           in: body
@@ -3848,7 +3860,7 @@ paths:
   '/#X-Amz-Target=SageMaker.Search':
     post:
       operationId: Search
-      description: '<p>Finds Amazon SageMaker resources that match a search query. Matching resource objects are returned as a list of <code>SearchResult</code> objects in the response. You can sort the search results by any resource property in a ascending or descending order.</p> <p>You can query against the following value types: numerical, text, Booleans, and timestamps.</p>'
+      description: '<p>Finds Amazon SageMaker resources that match a search query. Matching resource objects are returned as a list of <code>SearchResult</code> objects in the response. You can sort the search results by any resource property in a ascending or descending order.</p> <p>You can query against the following value types: numeric, text, Boolean, and timestamp.</p>'
       responses:
         '200':
           description: Success
@@ -4936,7 +4948,7 @@ definitions:
         description: 'A list of key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what">Using Cost Allocation Tags</a> in the <i> AWS Billing and Cost Management User Guide</i>. '
       KmsKeyId:
         $ref: '#/definitions/KmsKeyId'
-        description: '<p>The Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint.</p> <note> <p>Certain Nitro-based instances include local storage, dependent on the instance type. Local storage volumes are encrypted using a hardware module on the instance. You can''t request a <code>KmsKeyId</code> when using an instance type with local storage. If any of the models that you specify in the <code>ProductionVariants</code> parameter use nitro-based instances with local storage, do not specify a value for the <code>KmsKeyId</code> parameter. If you specify a value for <code>KmsKeyId</code> when using any nitro-based instances with local storage, the call to <code>CreateEndpointConfig</code> fails.</p> <p>For a list of instance types that support local instance storage, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes">Instance Store Volumes</a>.</p> <p>For more information about local instance storage encryption, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html">SSD Instance Store Volumes</a>.</p> </note>'
+        description: '<p>The Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint.</p> <p>The KmsKeyId can be any of the following formats: </p> <ul> <li> <p>// KMS Key ID </p> <p> <code>"1234abcd-12ab-34cd-56ef-1234567890ab" </code> </p> </li> <li> <p>// Amazon Resource Name (ARN) (ARN) of a KMS Key </p> <p>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</p> </li> <li> <p>// KMS Key Alias</p> <p>"alias/ExampleAlias" </p> </li> <li> <p>// Amazon Resource Name (ARN) of a KMS Key Alias </p> <p> <code>"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias" </code> </p> </li> </ul> <p>The KMS key policy must grant permission to the IAM role that you specify in your <code>CreateEndpoint</code>, <code>UpdateEndpoint</code> requests. For more information, refer to the AWS Key Management Service section<a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html"> Using Key Policies in AWS KMS </a> </p> <note> <p>Certain Nitro-based instances include local storage, dependent on the instance type. Local storage volumes are encrypted using a hardware module on the instance. You can''t request a <code>KmsKeyId</code> when using an instance type with local storage. If any of the models that you specify in the <code>ProductionVariants</code> parameter use nitro-based instances with local storage, do not specify a value for the <code>KmsKeyId</code> parameter. If you specify a value for <code>KmsKeyId</code> when using any nitro-based instances with local storage, the call to <code>CreateEndpointConfig</code> fails.</p> <p>For a list of instance types that support local instance storage, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes">Instance Store Volumes</a>.</p> <p>For more information about local instance storage encryption, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html">SSD Instance Store Volumes</a>.</p> </note>'
   CreateExperimentResponse:
     type: object
     properties:
@@ -5130,7 +5142,7 @@ definitions:
         description: 'A <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/API_VpcConfig.html">VpcConfig</a> object that specifies the VPC that you want your model to connect to. Control access to and from your model container by configuring the VPC. <code>VpcConfig</code> is used in hosting services and in batch transform. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html">Protect Endpoints by Using an Amazon Virtual Private Cloud</a> and <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/batch-vpc.html">Protect Data in Batch Transform Jobs by Using an Amazon Virtual Private Cloud</a>.'
       EnableNetworkIsolation:
         $ref: '#/definitions/Boolean'
-        description: <p>Isolates the model container. No inbound or outbound network calls can be made to or from the model container.</p> <note> <p>The Semantic Segmentation built-in algorithm does not support network isolation.</p> </note>
+        description: Isolates the model container. No inbound or outbound network calls can be made to or from the model container.
   CreateModelPackageOutput:
     type: object
     required:
@@ -5396,7 +5408,7 @@ definitions:
         description: 'An array of key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>. '
       EnableNetworkIsolation:
         $ref: '#/definitions/Boolean'
-        description: '<p>Isolates the training container. No inbound or outbound network calls can be made, except for calls between peers within a training cluster for distributed training. If you enable network isolation for training jobs that are configured to use a VPC, Amazon SageMaker downloads and uploads customer data and model artifacts through the specified VPC, but the training container does not have network access.</p> <note> <p>The Semantic Segmentation built-in algorithm does not support network isolation.</p> </note>'
+        description: 'Isolates the training container. No inbound or outbound network calls can be made, except for calls between peers within a training cluster for distributed training. If you enable network isolation for training jobs that are configured to use a VPC, Amazon SageMaker downloads and uploads customer data and model artifacts through the specified VPC, but the training container does not have network access.'
       EnableInterContainerTrafficEncryption:
         $ref: '#/definitions/Boolean'
         description: 'To encrypt all communications between ML compute instances in distributed training, choose <code>True</code>. Encryption provides greater security for distributed training, but training might take longer. How long it takes depends on the amount of communication between compute instances, especially if you use a deep learning algorithm in distributed training. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/train-encrypt.html">Protect Communications Between ML Compute Instances in a Distributed Training Job</a>.'
@@ -6477,7 +6489,7 @@ definitions:
         description: The Amazon Resource Name (ARN) of the model.
       EnableNetworkIsolation:
         $ref: '#/definitions/Boolean'
-        description: '<p>If <code>True</code>, no inbound or outbound network calls can be made to or from the model container.</p> <note> <p>The Semantic Segmentation built-in algorithm does not support network isolation.</p> </note>'
+        description: 'If <code>True</code>, no inbound or outbound network calls can be made to or from the model container.'
   DescribeModelInput:
     type: object
     required:
@@ -6859,7 +6871,7 @@ definitions:
         description: 'A collection of <code>MetricData</code> objects that specify the names, values, and dates and times that the training algorithm emitted to Amazon CloudWatch.'
       EnableNetworkIsolation:
         $ref: '#/definitions/Boolean'
-        description: '<p>If you want to allow inbound or outbound network calls, except for calls between peers within a training cluster for distributed training, choose <code>True</code>. If you enable network isolation for training jobs that are configured to use a VPC, Amazon SageMaker downloads and uploads customer data and model artifacts through the specified VPC, but the training container does not have network access.</p> <note> <p>The Semantic Segmentation built-in algorithm does not support network isolation.</p> </note>'
+        description: 'If you want to allow inbound or outbound network calls, except for calls between peers within a training cluster for distributed training, choose <code>True</code>. If you enable network isolation for training jobs that are configured to use a VPC, Amazon SageMaker downloads and uploads customer data and model artifacts through the specified VPC, but the training container does not have network access.'
       EnableInterContainerTrafficEncryption:
         $ref: '#/definitions/Boolean'
         description: 'To encrypt all communications between ML compute instances in distributed training, choose <code>True</code>. Encryption provides greater security for distributed training, but training might take longer. How long it takes depends on the amount of communication between compute instances, especially if you use a deep learning algorithms in distributed training.'
@@ -7160,7 +7172,7 @@ definitions:
     properties:
       Resource:
         $ref: '#/definitions/ResourceType'
-        description: The name of the Amazon SageMaker resource to Search for. The only valid <code>Resource</code> value is <code>TrainingJob</code>.
+        description: The name of the Amazon SageMaker resource to Search for.
       SuggestionQuery:
         $ref: '#/definitions/SuggestionQuery'
         description: Limits the property names that are included in the response.
@@ -7521,7 +7533,7 @@ definitions:
         description: 'If the previous call to <code>ListExperiments</code> didn''t return the full set of experiments, the call returns a token for getting the next set of experiments.'
       MaxResults:
         $ref: '#/definitions/MaxResults'
-        description: The maximum number of experiments to return in the response.
+        description: The maximum number of experiments to return in the response. The default value is 10.
   ListFlowDefinitionsResponse:
     type: object
     required:
@@ -8190,6 +8202,12 @@ definitions:
   ListTrialComponentsRequest:
     type: object
     properties:
+      ExperimentName:
+        $ref: '#/definitions/ExperimentEntityName'
+        description: 'A filter that returns only components that are part of the specified experiment. If you specify <code>ExperimentName</code>, you can''t specify <code>TrialName</code>.'
+      TrialName:
+        $ref: '#/definitions/ExperimentEntityName'
+        description: 'A filter that returns only components that are part of the specified trial. If you specify <code>TrialName</code>, you can''t specify <code>ExperimentName</code>.'
       SourceArn:
         $ref: '#/definitions/String256'
         description: A filter that returns only components that have the specified source Amazon Resource Name (ARN).
@@ -8207,7 +8225,7 @@ definitions:
         description: The sort order. The default value is <code>Descending</code>.
       MaxResults:
         $ref: '#/definitions/MaxResults'
-        description: The maximum number of components to return in the response.
+        description: The maximum number of components to return in the response. The default value is 10.
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'If the previous call to <code>ListTrialComponents</code> didn''t return the full set of components, the call returns a token for getting the next set of components.'
@@ -8240,7 +8258,7 @@ definitions:
         description: The sort order. The default value is <code>Descending</code>.
       MaxResults:
         $ref: '#/definitions/MaxResults'
-        description: The maximum number of trials to return in the response.
+        description: The maximum number of trials to return in the response. The default value is 10.
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'If the previous call to <code>ListTrials</code> didn''t return the full set of trials, the call returns a token for getting the next set of trials.'
@@ -8347,7 +8365,7 @@ definitions:
     properties:
       Resource:
         $ref: '#/definitions/ResourceType'
-        description: 'The name of the Amazon SageMaker resource to search for. Currently, the only valid <code>Resource</code> value is <code>TrainingJob</code>.'
+        description: The name of the Amazon SageMaker resource to search for.
       SearchExpression:
         $ref: '#/definitions/SearchExpression'
         description: 'A Boolean conditional statement. Resource objects must satisfy this condition to be included in search results. You must provide at least one subexpression, filter, or nested filter. The maximum number of recursive <code>SubExpressions</code>, <code>NestedFilters</code>, and <code>Filters</code> that can be included in a <code>SearchExpression</code> object is 50.'
@@ -8817,7 +8835,7 @@ definitions:
         description: A list of metric definition objects. Each object specifies the metric name and regular expressions used to parse algorithm logs. Amazon SageMaker publishes each metric to Amazon CloudWatch.
       EnableSageMakerMetricsTimeSeries:
         $ref: '#/definitions/Boolean'
-        description: '<p>To generate and save time-series metrics during training, set to <code>true</code>. The default is <code>false</code> and time-series metrics aren''t generated except in the following cases:</p> <ul> <li> <p>You use one of the Amazon SageMaker built-in algorithms</p> </li> <li> <p>You use one of the following prebuilt Amazon SageMaker Docker images:</p> <ul> <li> <p>Tensorflow</p> </li> <li> <p>MXNet</p> </li> <li> <p>PyTorch</p> </li> </ul> </li> <li> <p>You specify at least one <a>MetricDefinition</a> </p> </li> </ul>'
+        description: '<p>To generate and save time-series metrics during training, set to <code>true</code>. The default is <code>false</code> and time-series metrics aren''t generated except in the following cases:</p> <ul> <li> <p>You use one of the Amazon SageMaker built-in algorithms</p> </li> <li> <p>You use one of the following <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/pre-built-containers-frameworks-deep-learning.html">Prebuilt Amazon SageMaker Docker Images</a>:</p> <ul> <li> <p>Tensorflow (version &gt;= 1.15)</p> </li> <li> <p>MXNet (version &gt;= 1.6)</p> </li> <li> <p>PyTorch (version &gt;= 1.3)</p> </li> </ul> </li> <li> <p>You specify at least one <a>MetricDefinition</a> </p> </li> </ul>'
     description: '<p>Specifies the training algorithm to use in a <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateTrainingJob.html">CreateTrainingJob</a> request.</p> <p>For more information about algorithms provided by Amazon SageMaker, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html">Algorithms</a>. For information about using your own algorithms, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html">Using Your Own Algorithms with Amazon SageMaker</a>. </p>'
   AlgorithmStatus:
     type: string
@@ -9949,7 +9967,7 @@ definitions:
     properties:
       CollectionName:
         $ref: '#/definitions/CollectionName'
-        description: The name of the tensor collection.
+        description: The name of the tensor collection. The name must be unique relative to other rule configuration names.
       CollectionParameters:
         $ref: '#/definitions/CollectionParameters'
         description: 'Parameter values for the tensor collection. The allowed parameters are <code>"name"</code>, <code>"include_regex"</code>, <code>"reduction_config"</code>, <code>"save_config"</code>, <code>"tensor_names"</code>, and <code>"save_histogram"</code>.'
@@ -10522,7 +10540,7 @@ definitions:
         description: 'Specifies a limit to how long a model hyperparameter training job can run. It also specifies how long you are willing to wait for a managed spot training job to complete. When the job reaches the a limit, Amazon SageMaker ends the training job. Use this API to cap model training costs.'
       EnableNetworkIsolation:
         $ref: '#/definitions/Boolean'
-        description: '<p>Isolates the training container. No inbound or outbound network calls can be made, except for calls between peers within a training cluster for distributed training. If network isolation is used for training jobs that are configured to use a VPC, Amazon SageMaker downloads and uploads customer data and model artifacts through the specified VPC, but the training container does not have network access.</p> <note> <p>The Semantic Segmentation built-in algorithm does not support network isolation.</p> </note>'
+        description: 'Isolates the training container. No inbound or outbound network calls can be made, except for calls between peers within a training cluster for distributed training. If network isolation is used for training jobs that are configured to use a VPC, Amazon SageMaker downloads and uploads customer data and model artifacts through the specified VPC, but the training container does not have network access.'
       EnableInterContainerTrafficEncryption:
         $ref: '#/definitions/Boolean'
         description: 'To encrypt all communications between ML compute instances in distributed training, choose <code>True</code>. Encryption provides greater security for distributed training, but training might take longer. How long it takes depends on the amount of communication between compute instances, especially if you use a deep learning algorithm in distributed training.'
@@ -10652,10 +10670,10 @@ definitions:
         description: The amount of time that a worker has to complete a task.
       TaskAvailabilityLifetimeInSeconds:
         $ref: '#/definitions/TaskAvailabilityLifetimeInSeconds'
-        description: 'The length of time that a task remains available for labeling by human workers. <b>If you choose the Amazon Mechanical Turk workforce, the maximum is 12 hours (43200)</b>. For private and vendor workforces, the maximum is as listed.'
+        description: 'The length of time that a task remains available for labeling by human workers. <b>If you choose the Amazon Mechanical Turk workforce, the maximum is 12 hours (43200)</b>. The default value is 864000 seconds (1 day). For private and vendor workforces, the maximum is as listed.'
       MaxConcurrentTaskCount:
         $ref: '#/definitions/MaxConcurrentTaskCount'
-        description: Defines the maximum number of data objects that can be labeled by human workers at the same time. Also referred to as batch size. Each object may have more than one worker at one time.
+        description: Defines the maximum number of data objects that can be labeled by human workers at the same time. Also referred to as batch size. Each object may have more than one worker at one time. The default value is 1000 objects.
       AnnotationConsolidationConfig:
         $ref: '#/definitions/AnnotationConsolidationConfig'
         description: Configures how labels are consolidated across human workers.
@@ -11046,7 +11064,7 @@ definitions:
         description: 'The number of ML compute instances to use in the transform job. For distributed transform jobs, specify a value greater than 1. The default value is <code>1</code>.'
       VolumeKmsKeyId:
         $ref: '#/definitions/KmsKeyId'
-        description: '<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt model data on the storage volume attached to the ML compute instance(s) that run the batch transform job. The <code>VolumeKmsKeyId</code> can be any of the following formats:</p> <ul> <li> <p>// KMS Key ID</p> <p> <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>// Amazon Resource Name (ARN) of a KMS Key</p> <p> <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> </ul>'
+        description: '<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt model data on the storage volume attached to the ML compute instance(s) that run the batch transform job. The <code>VolumeKmsKeyId</code> can be any of the following formats:</p> <ul> <li> <p>// KMS Key ID</p> <p> <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>// Amazon Resource Name (ARN) of a KMS Key</p> <p> <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p> // KMS Key Alias </p> <p> <code> "alias/ExampleAlias"</code> </p> </li> <li> <p> // Amazon Resource Name (ARN) (ARN) of a KMS Key Alias</p> <p> <code> "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"</code> </p> </li> </ul>'
     description: 'Describes the resources, including ML instance types and ML instance count, to use for transform job.'
   DataProcessing:
     type: object
@@ -11287,7 +11305,7 @@ definitions:
         description: The name of the rule configuration. It must be unique relative to other rule configuration names.
       LocalPath:
         $ref: '#/definitions/DirectoryPath'
-        description: Path to local storage location for rules. Defaults to <code>/opt/ml/processing/output/rule/</code>.
+        description: Path to local storage location for output of rules. Defaults to <code>/opt/ml/processing/output/rule/</code>.
       S3OutputPath:
         $ref: '#/definitions/S3Uri'
         description: Path to Amazon S3 storage location for rules.
@@ -11299,7 +11317,7 @@ definitions:
         description: The instance type to deploy for a training job.
       VolumeSizeInGB:
         $ref: '#/definitions/OptionalVolumeSizeInGB'
-        description: 'The size, in GB, of the ML storage volume attached to the notebook instance.'
+        description: 'The size, in GB, of the ML storage volume attached to the processing instance.'
       RuleParameters:
         $ref: '#/definitions/RuleParameters'
         description: ' Runtime configuration for rule container.'
@@ -12267,6 +12285,7 @@ definitions:
     type: string
     enum:
       - TENSORFLOW
+      - KERAS
       - MXNET
       - ONNX
       - PYTORCH
@@ -12283,8 +12302,8 @@ definitions:
     properties:
       PropertyNameQuery:
         $ref: '#/definitions/PropertyNameQuery'
-        description: A type of <code>SuggestionQuery</code>. Defines a property name hint. Only property names that match the specified hint are included in the response.
-    description: Limits the property names that are included in the response.
+        description: Defines a property name hint. Only property names that begin with the specified hint are included in the response.
+    description: Specified in the <a>GetSearchSuggestions</a> request. Limits the property names that are included in the response.
   PropertyNameSuggestionList:
     type: array
     items:
@@ -12367,7 +12386,7 @@ definitions:
     maximum: 28800
   TaskAvailabilityLifetimeInSeconds:
     type: integer
-    minimum: 1
+    minimum: 60
     maximum: 864000
   MaxConcurrentTaskCount:
     type: integer
@@ -13430,7 +13449,7 @@ definitions:
     properties:
       NestedPropertyName:
         $ref: '#/definitions/ResourcePropertyName'
-        description: 'The name of the property to use in the nested filters. The value must match a listed property name, such as <code>InputDataConfig</code> .'
+        description: 'The name of the property to use in the nested filters. The value must match a listed property name, such as <code>InputDataConfig</code>.'
       Filters:
         $ref: '#/definitions/FilterList'
         description: 'A list of filters. Each filter acts on a property. Filters must contain at least one <code>Filters</code> value. For example, a <code>NestedFilters</code> call might include a filter on the <code>PropertyName</code> parameter of the <code>InputDataConfig</code> property: <code>InputDataConfig.DataSource.S3DataSource.S3Uri</code>.'
@@ -13847,8 +13866,8 @@ definitions:
     properties:
       PropertyNameHint:
         $ref: '#/definitions/PropertyNameHint'
-        description: 'Text that is part of a property''s name. The property names of hyperparameter, metric, and tag key names that begin with the specified text in the <code>PropertyNameHint</code>.'
-    description: A type of <code>SuggestionQuery</code>. A suggestion query for retrieving property names that match the specified hint.
+        description: Text that begins a property's name.
+    description: Part of the <code>SuggestionQuery</code> type. Specifies a hint for retrieving property names that begin with the specified text.
   PropertyNameSuggestion:
     type: object
     properties:

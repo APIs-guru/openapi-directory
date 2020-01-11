@@ -1271,6 +1271,21 @@ definitions:
   RegionDisabledException: {}
   AssumeRoleWithSAMLResponse:
     type: object
+    example:
+      AssumedRoleUser:
+        Arn: 'arn:aws:sts::123456789012:assumed-role/TestSaml'
+        AssumedRoleId: 'ARO456EXAMPLE789:TestSaml'
+      Audience: 'https://signin.aws.amazon.com/saml'
+      Credentials:
+        AccessKeyId: ASIAV3ZUEFP6EXAMPLE
+        Expiration: '2019-11-01T20:26:47Z'
+        SecretAccessKey: 8P+SQvWIuLnKhh8d++jpw0nNmQRBZvNEXAMPLEKEY
+        SessionToken: IQoJb3JpZ2luX2VjEOz////////////////////wEXAMPLEtMSJHMEUCIDoKK3JH9uGQE1z0sINr5M4jk+Na8KHDcCYRVjJCZEvOAiEA3OvJGtw1EcViOleS2vhs8VdCKFJQWPQrmGdeehM4IC1NtBmUpp2wUE8phUZampKsburEDy0KPkyQDYwT7WZ0wq5VSXDvp75YU9HFvlRd8Tx6q6fE8YQcHNVXAkiY9q6d+xo0rKwT38xVqr7ZD0u0iPPkUL64lIZbqBAz+scqKmlzm8FDrypNC9Yjc8fPOLn9FX9KSYvKTr4rvx3iSIlTJabIQwj2ICCR/oLxBA==
+      Issuer: 'https://integ.example.com/idp/shibboleth'
+      NameQualifier: SbdGOnUkh1i4+EXAMPLExL/jEvs=
+      PackedPolicySize: 6
+      Subject: SamlExample
+      SubjectType: transient
     properties:
       Credentials:
         $ref: '#/definitions/Credentials'

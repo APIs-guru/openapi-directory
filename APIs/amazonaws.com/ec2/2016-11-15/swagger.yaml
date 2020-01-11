@@ -16857,6 +16857,13 @@ paths:
           required: false
           description: The token for the next page of results.
           type: string
+        - name: Filter
+          in: query
+          required: false
+          description: '<p>One or more filters.</p> <ul> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> </ul>'
+          type: array
+          items:
+            type: string
         - name: Action
           in: query
           required: true
@@ -16911,6 +16918,13 @@ paths:
           required: false
           description: The token for the next page of results.
           type: string
+        - name: Filter
+          in: formData
+          required: false
+          description: '<p>One or more filters.</p> <ul> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> </ul>'
+          type: array
+          items:
+            type: string
         - name: Action
           in: query
           required: true
@@ -52030,6 +52044,9 @@ definitions:
       EgressOnlyInternetGatewayId:
         $ref: '#/definitions/EgressOnlyInternetGatewayId'
         description: The ID of the egress-only internet gateway.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags assigned to the egress-only internet gateway.
     description: Describes an egress-only internet gateway.
   LaunchTemplateAndOverridesResponse:
     type: object
@@ -52687,6 +52704,9 @@ definitions:
       State:
         $ref: '#/definitions/String'
         description: The state of the association.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags assigned to the association.
     description: Describes an association between a local gateway route table and a VPC.
   CreateNatGatewayRequest:
     type: object
@@ -55405,6 +55425,9 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token for the next page of results.
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: '<p>One or more filters.</p> <ul> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> </ul>'
   EgressOnlyInternetGatewayList:
     type: array
     items:
@@ -61810,6 +61833,9 @@ definitions:
       State:
         $ref: '#/definitions/String'
         description: The state of the local gateway.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags assigned to the local gateway.
     description: Describes a local gateway.
   LocalGatewayRouteType:
     type: string
@@ -61843,6 +61869,9 @@ definitions:
       State:
         $ref: '#/definitions/String'
         description: The state of the local gateway route table.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags assigned to the local gateway route table.
     description: Describes a local gateway route table.
   LocalGatewayRouteTableVirtualInterfaceGroupAssociation:
     type: object
@@ -61862,6 +61891,9 @@ definitions:
       State:
         $ref: '#/definitions/String'
         description: The state of the association.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags assigned to the association.
     description: Describes an association between a local gateway route table and a virtual interface group.
   LocalGatewayVirtualInterface:
     type: object
@@ -61887,6 +61919,9 @@ definitions:
       PeerBgpAsn:
         $ref: '#/definitions/Integer'
         description: The peer BGP ASN.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags assigned to the virtual interface.
     description: Describes a local gateway virtual interface.
   LocalGatewayVirtualInterfaceGroup:
     type: object
@@ -61900,6 +61935,9 @@ definitions:
       LocalGatewayId:
         $ref: '#/definitions/String'
         description: The ID of the local gateway.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags assigned to the virtual interface group.
     description: Describes a local gateway virtual interface group.
   MaxIpv4AddrPerInterface:
     type: integer
