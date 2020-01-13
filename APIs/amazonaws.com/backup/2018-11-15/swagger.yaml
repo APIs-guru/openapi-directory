@@ -162,7 +162,7 @@ paths:
   /backup/plans/:
     put:
       operationId: CreateBackupPlan
-      description: '<p>Backup plans are documents that contain information that AWS Backup uses to schedule tasks that create recovery points of resources.</p> <p>If you call <code>CreateBackupPlan</code> with a plan that already exists, the existing <code>backupPlanId</code> is returned.</p>'
+      description: '<p>Backup plans are documents that contain information that AWS Backup uses to schedule tasks that create recovery points of resources.</p> <p>If you call <code>CreateBackupPlan</code> with a plan that already exists, an <code>AlreadyExistsException</code> is returned.</p>'
       responses:
         '200':
           description: Success
@@ -278,7 +278,7 @@ paths:
   '/backup/plans/{backupPlanId}/selections/':
     put:
       operationId: CreateBackupSelection
-      description: '<p>Creates a JSON document that specifies a set of resources to assign to a backup plan. Resources can be included by specifying patterns for a <code>ListOfTags</code> and selected <code>Resources</code>. </p> <p>For example, consider the following patterns:</p> <ul> <li> <p> <code>Resources: "arn:aws:ec2:region:account-id:volume/volume-id"</code> </p> </li> <li> <p> <code>ConditionKey:"department"</code> </p> <p> <code>ConditionValue:"finance"</code> </p> <p> <code>ConditionType:"StringEquals"</code> </p> </li> <li> <p> <code>ConditionKey:"importance"</code> </p> <p> <code>ConditionValue:"critical"</code> </p> <p> <code>ConditionType:"StringEquals"</code> </p> </li> </ul> <p>Using these patterns would back up all Amazon Elastic Block Store (Amazon EBS) volumes that are tagged as <code>"department=finance"</code>, <code>"importance=critical"</code>, in addition to an EBS volume with the specified volume Id.</p> <p>Resources and conditions are additive in that all resources that match the pattern are selected. This shouldn''t be confused with a logical AND, where all conditions must match. The matching patterns are logically ''put together using the OR operator. In other words, all patterns that match are selected for backup.</p>'
+      description: '<p>Creates a JSON document that specifies a set of resources to assign to a backup plan. Resources can be included by specifying patterns for a <code>ListOfTags</code> and selected <code>Resources</code>. </p> <p>For example, consider the following patterns:</p> <ul> <li> <p> <code>Resources: "arn:aws:ec2:region:account-id:volume/volume-id"</code> </p> </li> <li> <p> <code>ConditionKey:"department"</code> </p> <p> <code>ConditionValue:"finance"</code> </p> <p> <code>ConditionType:"STRINGEQUALS"</code> </p> </li> <li> <p> <code>ConditionKey:"importance"</code> </p> <p> <code>ConditionValue:"critical"</code> </p> <p> <code>ConditionType:"STRINGEQUALS"</code> </p> </li> </ul> <p>Using these patterns would back up all Amazon Elastic Block Store (Amazon EBS) volumes that are tagged as <code>"department=finance"</code>, <code>"importance=critical"</code>, in addition to an EBS volume with the specified volume Id.</p> <p>Resources and conditions are additive in that all resources that match the pattern are selected. This shouldn''t be confused with a logical AND, where all conditions must match. The matching patterns are logically ''put together using the OR operator. In other words, all patterns that match are selected for backup.</p>'
       responses:
         '200':
           description: Success
@@ -330,10 +330,10 @@ paths:
                     description: 'The ARN of the IAM role that AWS Backup uses to authenticate when restoring the target resource; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
                   Resources:
                     $ref: '#/definitions/ResourceArns'
-                    description: 'An array of strings that either contain Amazon Resource Names (ARNs) or match patterns such as "<code>arn:aws:ec2:us-east-1:123456789012:volume/*</code>" of resources to assign to a backup plan.'
+                    description: An array of strings that contain Amazon Resource Names (ARNs) of resources to assign to a backup plan.
                   ListOfTags:
                     $ref: '#/definitions/ListOfTags'
-                    description: 'An array of conditions used to specify a set of resources to assign to a backup plan; for example, <code>"StringEquals": {"ec2:ResourceTag/Department": "accounting"</code>.'
+                    description: 'An array of conditions used to specify a set of resources to assign to a backup plan; for example, <code>"STRINGEQUALS": {"ec2:ResourceTag/Department": "accounting"</code>.'
               CreatorRequestId:
                 description: A unique string that identifies the request and allows failed requests to be retried without the risk of executing the operation twice.
                 type: string
@@ -1036,7 +1036,7 @@ paths:
             type: object
             properties:
               Lifecycle:
-                description: Contains an array of <code>Transition</code> objects specifying how long in days before a recovery point transitions to cold storage or is deleted.
+                description: '<p>Contains an array of <code>Transition</code> objects specifying how long in days before a recovery point transitions to cold storage or is deleted.</p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, on the console, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p>'
                 type: object
                 properties:
                   MoveToColdStorageAfterDays:
@@ -1044,7 +1044,7 @@ paths:
                     description: Specifies the number of days after creation that a recovery point is moved to cold storage.
                   DeleteAfterDays:
                     $ref: '#/definitions/Long'
-                    description: Specifies the number of days after creation that a recovery point is deleted. Must be greater than <code>MoveToColdStorageAfterDays</code>.
+                    description: Specifies the number of days after creation that a recovery point is deleted. Must be greater than 90 days plus <code>MoveToColdStorageAfterDays</code>.
   '/backup-jobs/{backupJobId}':
     get:
       operationId: DescribeBackupJob
@@ -1120,6 +1120,45 @@ paths:
           required: true
           description: Uniquely identifies a request to AWS Backup to back up a resource.
           type: string
+  '/copy-jobs/{copyJobId}':
+    get:
+      operationId: DescribeCopyJob
+      description: Returns metadata associated with creating a copy of a resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeCopyJobOutput'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '482':
+          description: MissingParameterValueException
+          schema:
+            $ref: '#/definitions/MissingParameterValueException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: copyJobId
+          in: path
+          required: true
+          description: Uniquely identifies a request to AWS Backup to copy a resource.
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/resources/{resourceArn}':
     get:
       operationId: DescribeProtectedResource
@@ -1376,7 +1415,7 @@ paths:
   '/backup-vaults/{backupVaultName}/recovery-points/{recoveryPointArn}/restore-metadata':
     get:
       operationId: GetRecoveryPointRestoreMetadata
-      description: '<p>Returns two sets of metadata key-value pairs. The first set lists the metadata that the recovery point was created with. The second set lists the metadata key-value pairs that are required to restore the recovery point.</p> <p>These sets can be the same, or the restore metadata set can contain different values if the target service to be restored has changed since the recovery point was created and now requires additional or different information in order to be restored.</p>'
+      description: Returns a set of metadata key-value pairs that were used to create the backup.
       responses:
         '200':
           description: Success
@@ -1453,6 +1492,10 @@ paths:
           schema:
             $ref: '#/definitions/InvalidParameterValueException'
         '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
           description: ServiceUnavailableException
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
@@ -1509,7 +1552,7 @@ paths:
         - name: resourceType
           in: query
           required: false
-          description: '<p>Returns only backup jobs for the specified resources:</p> <ul> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>SGW</code> for AWS Storage Gateway</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>DDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> </ul>'
+          description: '<p>Returns only backup jobs for the specified resources:</p> <ul> <li> <p> <code>DynamoDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>Storage Gateway</code> for AWS Storage Gateway</p> </li> </ul>'
           type: string
           pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
         - name: MaxResults
@@ -1685,6 +1728,92 @@ paths:
           type: integer
           minimum: 1
           maximum: 1000
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /copy-jobs/:
+    get:
+      operationId: ListCopyJobs
+      description: Returns metadata about your copy jobs.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListCopyJobsOutput'
+        '480':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '481':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: nextToken
+          in: query
+          required: false
+          description: 'The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token. '
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of items to be returned.
+          type: integer
+          minimum: 1
+          maximum: 1000
+        - name: resourceArn
+          in: query
+          required: false
+          description: 'Returns only copy jobs that match the specified resource Amazon Resource Name (ARN). '
+          type: string
+        - name: state
+          in: query
+          required: false
+          description: Returns only copy jobs that are in the specified state.
+          type: string
+          enum:
+            - CREATED
+            - RUNNING
+            - COMPLETED
+            - FAILED
+        - name: createdBefore
+          in: query
+          required: false
+          description: Returns only copy jobs that were created before the specified date.
+          type: string
+          format: date-time
+        - name: createdAfter
+          in: query
+          required: false
+          description: Returns only copy jobs that were created after the specified date.
+          type: string
+          format: date-time
+        - name: resourceType
+          in: query
+          required: false
+          description: '<p>Returns only backup jobs for the specified resources:</p> <ul> <li> <p> <code>DynamoDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>Storage Gateway</code> for AWS Storage Gateway</p> </li> </ul>'
+          type: string
+          pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
+        - name: destinationVaultArn
+          in: query
+          required: false
+          description: 'An Amazon Resource Name (ARN) that uniquely identifies a source backup vault to copy from; for example, arn:aws:backup:us-east-1:123456789012:vault:aBackupVault. '
+          type: string
         - name: MaxResults
           type: string
           in: query
@@ -2070,7 +2199,7 @@ paths:
                 description: 'Specifies the IAM role ARN used to create the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
                 type: string
               IdempotencyToken:
-                description: 'A customer chosen string that can be used to distinguish between calls to <code>StartBackupJob</code>. Idempotency tokens time out after one hour. Therefore, if you call <code>StartBackupJob</code> multiple times with the same idempotency token within one hour, AWS Backup recognizes that you are requesting only one backup job and initiates only one. If you change the idempotency token for each call, AWS Backup recognizes that you are requesting to start multiple backups.'
+                description: A customer chosen string that can be used to distinguish between calls to <code>StartBackupJob</code>.
                 type: string
               StartWindowMinutes:
                 description: The amount of time in minutes before beginning a backup.
@@ -2079,7 +2208,7 @@ paths:
                 description: The amount of time AWS Backup attempts a backup before canceling the job and returning an error.
                 type: integer
               Lifecycle:
-                description: Contains an array of <code>Transition</code> objects specifying how long in days before a recovery point transitions to cold storage or is deleted.
+                description: '<p>Contains an array of <code>Transition</code> objects specifying how long in days before a recovery point transitions to cold storage or is deleted.</p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, on the console, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p>'
                 type: object
                 properties:
                   MoveToColdStorageAfterDays:
@@ -2087,12 +2216,87 @@ paths:
                     description: Specifies the number of days after creation that a recovery point is moved to cold storage.
                   DeleteAfterDays:
                     $ref: '#/definitions/Long'
-                    description: Specifies the number of days after creation that a recovery point is deleted. Must be greater than <code>MoveToColdStorageAfterDays</code>.
+                    description: Specifies the number of days after creation that a recovery point is deleted. Must be greater than 90 days plus <code>MoveToColdStorageAfterDays</code>.
               RecoveryPointTags:
                 description: 'To help organize your resources, you can assign your own metadata to the resources that you create. Each tag is a key-value pair.'
                 type: object
                 additionalProperties:
                   $ref: '#/definitions/TagValue'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /copy-jobs:
+    put:
+      operationId: StartCopyJob
+      description: Starts a job to create a one-time copy of the specified resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartCopyJobOutput'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '482':
+          description: MissingParameterValueException
+          schema:
+            $ref: '#/definitions/MissingParameterValueException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - RecoveryPointArn
+              - SourceBackupVaultName
+              - DestinationBackupVaultArn
+              - IamRoleArn
+            properties:
+              RecoveryPointArn:
+                description: 'An ARN that uniquely identifies a recovery point to use for the copy job; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45. '
+                type: string
+              SourceBackupVaultName:
+                description: 'The name of a logical source container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens. &gt;'
+                type: string
+                pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
+              DestinationBackupVaultArn:
+                description: 'An Amazon Resource Name (ARN) that uniquely identifies a destination backup vault to copy to; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.'
+                type: string
+              IamRoleArn:
+                description: 'Specifies the IAM role ARN used to copy the target recovery point; for example, arn:aws:iam::123456789012:role/S3Access.'
+                type: string
+              IdempotencyToken:
+                description: A customer chosen string that can be used to distinguish between calls to <code>StartCopyJob</code>.
+                type: string
+              Lifecycle:
+                description: '<p>Contains an array of <code>Transition</code> objects specifying how long in days before a recovery point transitions to cold storage or is deleted.</p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, on the console, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p>'
+                type: object
+                properties:
+                  MoveToColdStorageAfterDays:
+                    $ref: '#/definitions/Long'
+                    description: Specifies the number of days after creation that a recovery point is moved to cold storage.
+                  DeleteAfterDays:
+                    $ref: '#/definitions/Long'
+                    description: Specifies the number of days after creation that a recovery point is deleted. Must be greater than 90 days plus <code>MoveToColdStorageAfterDays</code>.
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -2141,7 +2345,7 @@ paths:
                 description: 'An ARN that uniquely identifies a recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
                 type: string
               Metadata:
-                description: A set of metadata key-value pairs. Lists the metadata that the recovery point was created with.
+                description: '<p>A set of metadata key-value pairs. Contains information, such as a resource name, required to restore a recovery point.</p> <p> You can get configuration metadata about a resource at the time it was backed-up by calling <code>GetRecoveryPointRestoreMetadata</code>. However, values in addition to those provided by <code>GetRecoveryPointRestoreMetadata</code> might be required to restore a resource. For example, you might need to provide a new resource name if the original already exists.</p> <p>You need to specify specific metadata to restore an Amazon Elastic File System (Amazon EFS) instance:</p> <ul> <li> <p> <code>file-system-id</code>: ID of the Amazon EFS file system that is backed up by AWS Backup. Returned in <code>GetRecoveryPointRestoreMetadata</code>.</p> </li> <li> <p> <code>Encrypted</code>: A Boolean value that, if true, specifies that the file system is encrypted. If <code>KmsKeyId</code> is specified, <code>Encrypted</code> must be set to <code>true</code>.</p> </li> <li> <p> <code>KmsKeyId</code>: Specifies the AWS KMS key that is used to encrypt the restored file system.</p> </li> <li> <p> <code>PerformanceMode</code>: Specifies the throughput mode of the file system.</p> </li> <li> <p> <code>CreationToken</code>: A user-supplied value that ensures the uniqueness (idempotency) of the request.</p> </li> <li> <p> <code>newFileSystem</code>: A Boolean value that, if true, specifies that the recovery point is restored to a new Amazon EFS file system.</p> </li> </ul>'
                 type: object
                 additionalProperties:
                   $ref: '#/definitions/MetadataValue'
@@ -2149,10 +2353,10 @@ paths:
                 description: 'The Amazon Resource Name (ARN) of the IAM role that AWS Backup uses to create the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
                 type: string
               IdempotencyToken:
-                description: 'A customer chosen string that can be used to distinguish between calls to <code>StartRestoreJob</code>. Idempotency tokens time out after one hour. Therefore, if you call <code>StartRestoreJob</code> multiple times with the same idempotency token within one hour, AWS Backup recognizes that you are requesting only one restore job and initiates only one. If you change the idempotency token for each call, AWS Backup recognizes that you are requesting to start multiple restores. '
+                description: A customer chosen string that can be used to distinguish between calls to <code>StartRestoreJob</code>.
                 type: string
               ResourceType:
-                description: '<p>Starts a job to restore a recovery point for one of the following resources:</p> <ul> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>SGW</code> for AWS Storage Gateway</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>DDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> </ul>'
+                description: '<p>Starts a job to restore a recovery point for one of the following resources:</p> <ul> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>Storage Gateway</code> for AWS Storage Gateway</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>DDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> </ul>'
                 type: string
                 pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
     parameters:
@@ -2426,6 +2630,12 @@ definitions:
       NumberOfRecoveryPoints:
         $ref: '#/definitions/long'
         description: The number of recovery points that are stored in a backup vault.
+  DescribeCopyJobOutput:
+    type: object
+    properties:
+      CopyJob:
+        $ref: '#/definitions/CopyJob'
+        description: Contains detailed information about a copy job.
   DescribeProtectedResourceOutput:
     type: object
     properties:
@@ -2578,7 +2788,7 @@ definitions:
     properties:
       BackupSelection:
         $ref: '#/definitions/BackupSelection'
-        description: '<p>Specifies the body of a request to assign a set of resources to a backup plan.</p> <p>It includes an array of resources, an optional array of patterns to exclude resources, an optional role to provide access to the AWS service that the resource belongs to, and an optional array of tags used to identify a set of resources.</p>'
+        description: Specifies the body of a request to assign a set of resources to a backup plan.
       SelectionId:
         $ref: '#/definitions/string'
         description: Uniquely identifies the body of a request to assign a set of resources to a backup plan.
@@ -2629,13 +2839,13 @@ definitions:
         description: 'An ARN that uniquely identifies a recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
       RestoreMetadata:
         $ref: '#/definitions/Metadata'
-        description: A set of metadata key-value pairs that lists the metadata key-value pairs that are required to restore the recovery point.
+        description: The set of metadata key-value pairs that describes the original configuration of the backed-up resource. These values vary depending on the service that is being restored.
   GetSupportedResourceTypesOutput:
     type: object
     properties:
       ResourceTypes:
         $ref: '#/definitions/ResourceTypes'
-        description: '<p>Contains a string with the supported AWS resource types:</p> <ul> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>SGW</code> for AWS Storage Gateway</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>DDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> </ul>'
+        description: '<p>Contains a string with the supported AWS resource types:</p> <ul> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>Storage Gateway</code> for AWS Storage Gateway</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>DDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> </ul>'
   ListBackupJobsOutput:
     type: object
     properties:
@@ -2690,6 +2900,15 @@ definitions:
       NextToken:
         $ref: '#/definitions/string'
         description: 'The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
+  ListCopyJobsOutput:
+    type: object
+    properties:
+      CopyJobs:
+        $ref: '#/definitions/CopyJobsList'
+        description: 'An array of structures containing metadata about your copy jobs returned in JSON format. '
+      NextToken:
+        $ref: '#/definitions/string'
+        description: 'The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token. '
   ListProtectedResourcesOutput:
     type: object
     properties:
@@ -2740,8 +2959,16 @@ definitions:
     enum:
       - BACKUP_JOB_STARTED
       - BACKUP_JOB_COMPLETED
+      - BACKUP_JOB_SUCCESSFUL
+      - BACKUP_JOB_FAILED
+      - BACKUP_JOB_EXPIRED
       - RESTORE_JOB_STARTED
       - RESTORE_JOB_COMPLETED
+      - RESTORE_JOB_SUCCESSFUL
+      - RESTORE_JOB_FAILED
+      - COPY_JOB_STARTED
+      - COPY_JOB_SUCCESSFUL
+      - COPY_JOB_FAILED
       - RECOVERY_POINT_MODIFIED
       - BACKUP_PLAN_CREATED
       - BACKUP_PLAN_MODIFIED
@@ -2759,6 +2986,15 @@ definitions:
         description: 'The date and time that a backup job is started, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
   Long:
     type: integer
+  StartCopyJobOutput:
+    type: object
+    properties:
+      CopyJobId:
+        $ref: '#/definitions/string'
+        description: Uniquely identifies a request to AWS Backup to copy a resource.
+      CreationDate:
+        $ref: '#/definitions/timestamp'
+        description: 'The date and time that a backup job is started, in Unix format and Coordinated Universal Time (UTC). The value of CreationDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM. &gt;'
   StartRestoreJobOutput:
     type: object
     properties:
@@ -2991,12 +3227,16 @@ definitions:
         description: Specifies the number of days after creation that a recovery point is moved to cold storage.
       DeleteAfterDays:
         $ref: '#/definitions/Long'
-        description: Specifies the number of days after creation that a recovery point is deleted. Must be greater than <code>MoveToColdStorageAfterDays</code>.
-    description: Contains an array of <code>Transition</code> objects specifying how long in days before a recovery point transitions to cold storage or is deleted.
+        description: Specifies the number of days after creation that a recovery point is deleted. Must be greater than 90 days plus <code>MoveToColdStorageAfterDays</code>.
+    description: '<p>Contains an array of <code>Transition</code> objects specifying how long in days before a recovery point transitions to cold storage or is deleted.</p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, on the console, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p>'
   Tags:
     type: object
     additionalProperties:
       $ref: '#/definitions/TagValue'
+  CopyActions:
+    type: array
+    items:
+      $ref: '#/definitions/CopyAction'
   BackupRule:
     type: object
     required:
@@ -3027,6 +3267,9 @@ definitions:
       RuleId:
         $ref: '#/definitions/string'
         description: Uniquely identifies a rule that is used to schedule the backup of a selection of resources.
+      CopyActions:
+        $ref: '#/definitions/CopyActions'
+        description: 'An array of <code>CopyAction</code> objects, which contains the details of the copy operation.'
     description: Specifies a scheduled task used to back up a selection of resources.
   BackupRuleInput:
     type: object
@@ -3055,6 +3298,9 @@ definitions:
       RecoveryPointTags:
         $ref: '#/definitions/Tags'
         description: 'To help organize your resources, you can assign your own metadata to the resources that you create. Each tag is a key-value pair.'
+      CopyActions:
+        $ref: '#/definitions/CopyActions'
+        description: 'An array of <code>CopyAction</code> objects, which contains the details of the copy operation.'
     description: Specifies a scheduled task used to back up a selection of resources.
   BackupSelection:
     type: object
@@ -3070,10 +3316,10 @@ definitions:
         description: 'The ARN of the IAM role that AWS Backup uses to authenticate when restoring the target resource; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
       Resources:
         $ref: '#/definitions/ResourceArns'
-        description: 'An array of strings that either contain Amazon Resource Names (ARNs) or match patterns such as "<code>arn:aws:ec2:us-east-1:123456789012:volume/*</code>" of resources to assign to a backup plan.'
+        description: An array of strings that contain Amazon Resource Names (ARNs) of resources to assign to a backup plan.
       ListOfTags:
         $ref: '#/definitions/ListOfTags'
-        description: 'An array of conditions used to specify a set of resources to assign to a backup plan; for example, <code>"StringEquals": {"ec2:ResourceTag/Department": "accounting"</code>.'
+        description: 'An array of conditions used to specify a set of resources to assign to a backup plan; for example, <code>"STRINGEQUALS": {"ec2:ResourceTag/Department": "accounting"</code>.'
     description: Used to specify a set of resources to a backup plan.
   BackupSelectionsListMember:
     type: object
@@ -3162,14 +3408,81 @@ definitions:
     properties:
       ConditionType:
         $ref: '#/definitions/ConditionType'
-        description: 'An operation, such as <code>StringEquals</code>, that is applied to a key-value pair used to filter resources in a selection.'
+        description: 'An operation, such as <code>STRINGEQUALS</code>, that is applied to a key-value pair used to filter resources in a selection.'
       ConditionKey:
         $ref: '#/definitions/ConditionKey'
         description: 'The key in a key-value pair. For example, in <code>"ec2:ResourceTag/Department": "accounting"</code>, <code>"ec2:ResourceTag/Department"</code> is the key.'
       ConditionValue:
         $ref: '#/definitions/ConditionValue'
         description: 'The value in a key-value pair. For example, in <code>"ec2:ResourceTag/Department": "accounting"</code>, <code>"accounting"</code> is the value.'
-    description: 'Contains an array of triplets made up of a condition type (such as <code>StringEquals</code>), a key, and a value. Conditions are used to filter resources in a selection that is assigned to a backup plan.'
+    description: 'Contains an array of triplets made up of a condition type (such as <code>STRINGEQUALS</code>), a key, and a value. Conditions are used to filter resources in a selection that is assigned to a backup plan.'
+  CopyAction:
+    type: object
+    required:
+      - DestinationBackupVaultArn
+    properties:
+      Lifecycle:
+        $ref: '#/definitions/Lifecycle'
+      DestinationBackupVaultArn:
+        $ref: '#/definitions/ARN'
+        description: 'An Amazon Resource Name (ARN) that uniquely identifies the destination backup vault for the copied backup. For example, arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.'
+    description: The details of the copy operation.
+  CopyJobState:
+    type: string
+    enum:
+      - CREATED
+      - RUNNING
+      - COMPLETED
+      - FAILED
+  CopyJob:
+    type: object
+    properties:
+      CopyJobId:
+        $ref: '#/definitions/string'
+        description: Uniquely identifies a request to AWS Backup to copy a resource.
+      SourceBackupVaultArn:
+        $ref: '#/definitions/ARN'
+        description: 'An Amazon Resource Name (ARN) that uniquely identifies a source copy vault; for example, arn:aws:backup:us-east-1:123456789012:vault:aBackupVault. '
+      SourceRecoveryPointArn:
+        $ref: '#/definitions/ARN'
+        description: 'An ARN that uniquely identifies a source recovery point; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45. '
+      DestinationBackupVaultArn:
+        $ref: '#/definitions/ARN'
+        description: 'An Amazon Resource Name (ARN) that uniquely identifies a destination copy vault; for example, arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.'
+      DestinationRecoveryPointArn:
+        $ref: '#/definitions/ARN'
+        description: 'An ARN that uniquely identifies a destination recovery point; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45. '
+      ResourceArn:
+        $ref: '#/definitions/ARN'
+        description: 'The type of AWS resource to be copied; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. '
+      CreationDate:
+        $ref: '#/definitions/timestamp'
+        description: 'The date and time a copy job is created, in Unix format and Coordinated Universal Time (UTC). The value of CreationDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM. '
+      CompletionDate:
+        $ref: '#/definitions/timestamp'
+        description: 'The date and time a job to create a copy job is completed, in Unix format and Coordinated Universal Time (UTC). The value of CompletionDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM. '
+      State:
+        $ref: '#/definitions/CopyJobState'
+        description: The current state of a resource recovery point.
+      StatusMessage:
+        $ref: '#/definitions/string'
+        description: A detailed message explaining the status of the job that to copy a resource.
+      BackupSizeInBytes:
+        $ref: '#/definitions/Long'
+        description: 'The size, in bytes, of a copy job.'
+      IamRoleArn:
+        $ref: '#/definitions/IAMRoleArn'
+        description: 'Specifies the IAM role ARN used to copy the target recovery point; for example, arn:aws:iam::123456789012:role/S3Access.'
+      CreatedBy:
+        $ref: '#/definitions/RecoveryPointCreator'
+      ResourceType:
+        $ref: '#/definitions/ResourceType'
+        description: 'The type of AWS resource to be copied; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. '
+    description: Contains detailed information about a copy job.
+  CopyJobsList:
+    type: array
+    items:
+      $ref: '#/definitions/CopyJob'
   CreateBackupPlanInput:
     type: object
     required:
@@ -3191,7 +3504,7 @@ definitions:
     properties:
       BackupSelection:
         $ref: '#/definitions/BackupSelection'
-        description: '<p>Specifies the body of a request to assign a set of resources to a backup plan.</p> <p>It includes an array of resources, an optional array of patterns to exclude resources, an optional role to provide access to the AWS service the resource belongs to, and an optional array of tags used to identify a set of resources.</p>'
+        description: Specifies the body of a request to assign a set of resources to a backup plan.
       CreatorRequestId:
         $ref: '#/definitions/string'
         description: A unique string that identifies the request and allows failed requests to be retried without the risk of executing the operation twice.
@@ -3229,6 +3542,9 @@ definitions:
     type: object
     properties: {}
   DescribeBackupVaultInput:
+    type: object
+    properties: {}
+  DescribeCopyJobInput:
     type: object
     properties: {}
   DescribeProtectedResourceInput:
@@ -3324,6 +3640,9 @@ definitions:
     type: object
     properties: {}
   ListBackupVaultsInput:
+    type: object
+    properties: {}
+  ListCopyJobsInput:
     type: object
     properties: {}
   ListProtectedResourcesInput:
@@ -3519,7 +3838,7 @@ definitions:
         description: 'Specifies the IAM role ARN used to create the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
       IdempotencyToken:
         $ref: '#/definitions/string'
-        description: 'A customer chosen string that can be used to distinguish between calls to <code>StartBackupJob</code>. Idempotency tokens time out after one hour. Therefore, if you call <code>StartBackupJob</code> multiple times with the same idempotency token within one hour, AWS Backup recognizes that you are requesting only one backup job and initiates only one. If you change the idempotency token for each call, AWS Backup recognizes that you are requesting to start multiple backups.'
+        description: A customer chosen string that can be used to distinguish between calls to <code>StartBackupJob</code>.
       StartWindowMinutes:
         $ref: '#/definitions/WindowMinutes'
         description: The amount of time in minutes before beginning a backup.
@@ -3532,6 +3851,31 @@ definitions:
       RecoveryPointTags:
         $ref: '#/definitions/Tags'
         description: 'To help organize your resources, you can assign your own metadata to the resources that you create. Each tag is a key-value pair.'
+  StartCopyJobInput:
+    type: object
+    required:
+      - RecoveryPointArn
+      - SourceBackupVaultName
+      - DestinationBackupVaultArn
+      - IamRoleArn
+    properties:
+      RecoveryPointArn:
+        $ref: '#/definitions/ARN'
+        description: 'An ARN that uniquely identifies a recovery point to use for the copy job; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45. '
+      SourceBackupVaultName:
+        $ref: '#/definitions/BackupVaultName'
+        description: 'The name of a logical source container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens. &gt;'
+      DestinationBackupVaultArn:
+        $ref: '#/definitions/ARN'
+        description: 'An Amazon Resource Name (ARN) that uniquely identifies a destination backup vault to copy to; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.'
+      IamRoleArn:
+        $ref: '#/definitions/IAMRoleArn'
+        description: 'Specifies the IAM role ARN used to copy the target recovery point; for example, arn:aws:iam::123456789012:role/S3Access.'
+      IdempotencyToken:
+        $ref: '#/definitions/string'
+        description: A customer chosen string that can be used to distinguish between calls to <code>StartCopyJob</code>.
+      Lifecycle:
+        $ref: '#/definitions/Lifecycle'
   StartRestoreJobInput:
     type: object
     required:
@@ -3544,16 +3888,16 @@ definitions:
         description: 'An ARN that uniquely identifies a recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
       Metadata:
         $ref: '#/definitions/Metadata'
-        description: A set of metadata key-value pairs. Lists the metadata that the recovery point was created with.
+        description: '<p>A set of metadata key-value pairs. Contains information, such as a resource name, required to restore a recovery point.</p> <p> You can get configuration metadata about a resource at the time it was backed-up by calling <code>GetRecoveryPointRestoreMetadata</code>. However, values in addition to those provided by <code>GetRecoveryPointRestoreMetadata</code> might be required to restore a resource. For example, you might need to provide a new resource name if the original already exists.</p> <p>You need to specify specific metadata to restore an Amazon Elastic File System (Amazon EFS) instance:</p> <ul> <li> <p> <code>file-system-id</code>: ID of the Amazon EFS file system that is backed up by AWS Backup. Returned in <code>GetRecoveryPointRestoreMetadata</code>.</p> </li> <li> <p> <code>Encrypted</code>: A Boolean value that, if true, specifies that the file system is encrypted. If <code>KmsKeyId</code> is specified, <code>Encrypted</code> must be set to <code>true</code>.</p> </li> <li> <p> <code>KmsKeyId</code>: Specifies the AWS KMS key that is used to encrypt the restored file system.</p> </li> <li> <p> <code>PerformanceMode</code>: Specifies the throughput mode of the file system.</p> </li> <li> <p> <code>CreationToken</code>: A user-supplied value that ensures the uniqueness (idempotency) of the request.</p> </li> <li> <p> <code>newFileSystem</code>: A Boolean value that, if true, specifies that the recovery point is restored to a new Amazon EFS file system.</p> </li> </ul>'
       IamRoleArn:
         $ref: '#/definitions/IAMRoleArn'
         description: 'The Amazon Resource Name (ARN) of the IAM role that AWS Backup uses to create the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
       IdempotencyToken:
         $ref: '#/definitions/string'
-        description: 'A customer chosen string that can be used to distinguish between calls to <code>StartRestoreJob</code>. Idempotency tokens time out after one hour. Therefore, if you call <code>StartRestoreJob</code> multiple times with the same idempotency token within one hour, AWS Backup recognizes that you are requesting only one restore job and initiates only one. If you change the idempotency token for each call, AWS Backup recognizes that you are requesting to start multiple restores. '
+        description: A customer chosen string that can be used to distinguish between calls to <code>StartRestoreJob</code>.
       ResourceType:
         $ref: '#/definitions/ResourceType'
-        description: '<p>Starts a job to restore a recovery point for one of the following resources:</p> <ul> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>SGW</code> for AWS Storage Gateway</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>DDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> </ul>'
+        description: '<p>Starts a job to restore a recovery point for one of the following resources:</p> <ul> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>Storage Gateway</code> for AWS Storage Gateway</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>DDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> </ul>'
   StopBackupJobInput:
     type: object
     properties: {}
