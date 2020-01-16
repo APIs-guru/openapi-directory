@@ -1651,6 +1651,58 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/standards/controls/{StandardsSubscriptionArn}':
+    get:
+      operationId: DescribeStandardsControls
+      description: '<p>Returns a list of compliance standards controls.</p> <p>For each control, the results include information about whether it is currently enabled, the severity, and a link to remediation information.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeStandardsControlsResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: InvalidAccessException
+          schema:
+            $ref: '#/definitions/InvalidAccessException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: StandardsSubscriptionArn
+          in: path
+          required: true
+          description: The ARN of a resource that represents your subscription to a supported standard.
+          type: string
+          pattern: .*\S.*
+        - name: NextToken
+          in: query
+          required: false
+          description: 'For requests to get the next page of results, the pagination token that was returned with the previous set of results. The initial request does not include a pagination token.'
+          type: string
+        - name: MaxResults
+          in: query
+          required: false
+          description: The maximum number of compliance standard controls to return.
+          type: integer
+          minimum: 1
+          maximum: 100
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/productSubscriptions/{ProductSubscriptionArn}':
     delete:
       operationId: DisableImportFindingsForProduct
@@ -2955,6 +3007,62 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/standards/control/{StandardsControlArn}':
+    patch:
+      operationId: UpdateStandardsControl
+      description: Used to control whether an individual compliance standard control is enabled or disabled.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateStandardsControlResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: InvalidAccessException
+          schema:
+            $ref: '#/definitions/InvalidAccessException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: StandardsControlArn
+          in: path
+          required: true
+          description: The ARN of the compliance standard control to enable or disable.
+          type: string
+          pattern: .*\S.*
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              ControlStatus:
+                description: The updated status of the compliance standard control.
+                type: string
+                enum:
+                  - ENABLED
+                  - DISABLED
+              DisabledReason:
+                description: A description of the reason why you are disabling a compliance standard control.
+                type: string
+                pattern: .*\S.*
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   AcceptInvitationResponse:
     type: object
@@ -3235,6 +3343,15 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The token that is required for pagination.
+  DescribeStandardsControlsResponse:
+    type: object
+    properties:
+      Controls:
+        $ref: '#/definitions/StandardsControls'
+        description: A list of compliance standards controls.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If there are more compliance standards control remaining in the results, then this is the pagination token to use to request the next page of compliance standard controls.'
   DisableImportFindingsForProductResponse:
     type: object
     properties: {}
@@ -3387,6 +3504,9 @@ definitions:
     type: object
     properties: {}
   UpdateInsightResponse:
+    type: object
+    properties: {}
+  UpdateStandardsControlResponse:
     type: object
     properties: {}
   AcceptInvitationRequest:
@@ -4350,6 +4470,11 @@ definitions:
         $ref: '#/definitions/NonEmptyString'
         description: The date and time when the container started.
     description: Container details related to a finding.
+  ControlStatus:
+    type: string
+    enum:
+      - ENABLED
+      - DISABLED
   CreateActionTargetRequest:
     type: object
     required:
@@ -4475,6 +4600,13 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Product'
+  DescribeStandardsControlsRequest:
+    type: object
+    properties: {}
+  StandardsControls:
+    type: array
+    items:
+      $ref: '#/definitions/StandardsControl'
   DisableImportFindingsForProductRequest:
     type: object
     properties: {}
@@ -4958,11 +5090,49 @@ definitions:
         $ref: '#/definitions/NonEmptyString'
         description: The reason that the account wasn't be processed.
     description: Details about the account that wasn't processed.
+  SeverityRating:
+    type: string
+    enum:
+      - LOW
+      - MEDIUM
+      - HIGH
+      - CRITICAL
   SortOrder:
     type: string
     enum:
       - asc
       - desc
+  StandardsControl:
+    type: object
+    properties:
+      StandardsControlArn:
+        $ref: '#/definitions/NonEmptyString'
+        description: The ARN of the compliance standard control.
+      ControlStatus:
+        $ref: '#/definitions/ControlStatus'
+        description: The current status of the compliance standard control. Indicates whether the control is enabled or disabled. Security Hub does not check against disabled controls.
+      DisabledReason:
+        $ref: '#/definitions/NonEmptyString'
+        description: The reason provided for the most recent change in status for the control.
+      ControlStatusUpdatedAt:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time that the status of the compliance standard control was most recently updated.
+      ControlId:
+        $ref: '#/definitions/NonEmptyString'
+        description: The identifier of the compliance standard control.
+      Title:
+        $ref: '#/definitions/NonEmptyString'
+        description: The title of the compliance standard control.
+      Description:
+        $ref: '#/definitions/NonEmptyString'
+        description: The longer description of the compliance standard control. Provides information about what the control is checking for.
+      RemediationUrl:
+        $ref: '#/definitions/NonEmptyString'
+        description: A link to remediation information for the control in the Security Hub user documentation
+      SeverityRating:
+        $ref: '#/definitions/SeverityRating'
+        description: <p>The severity of findings generated from this compliance standard control.</p> <p>The finding severity is based on an assessment of how easy it would be to compromise AWS resources if the compliance issue is detected.</p>
+    description: Details for an individual compliance standard control.
   StandardsInputParameterMap:
     type: object
     additionalProperties:
@@ -5108,3 +5278,12 @@ definitions:
       GroupByAttribute:
         $ref: '#/definitions/NonEmptyString'
         description: The updated <code>GroupBy</code> attribute that defines this insight.
+  UpdateStandardsControlRequest:
+    type: object
+    properties:
+      ControlStatus:
+        $ref: '#/definitions/ControlStatus'
+        description: The updated status of the compliance standard control.
+      DisabledReason:
+        $ref: '#/definitions/NonEmptyString'
+        description: A description of the reason why you are disabling a compliance standard control.
