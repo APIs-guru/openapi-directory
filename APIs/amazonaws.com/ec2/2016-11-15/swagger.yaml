@@ -4325,6 +4325,11 @@ paths:
           enum:
             - tcp
             - udp
+        - name: VpnPort
+          in: query
+          required: false
+          description: '<p>The port number to assign to the Client VPN endpoint for TCP and UDP traffic.</p> <p>Valid Values: <code>443</code> | <code>1194</code> </p> <p>Default Value: <code>443</code> </p>'
+          type: integer
         - name: Description
           in: query
           required: false
@@ -4432,6 +4437,11 @@ paths:
           enum:
             - tcp
             - udp
+        - name: VpnPort
+          in: formData
+          required: false
+          description: '<p>The port number to assign to the Client VPN endpoint for TCP and UDP traffic.</p> <p>Valid Values: <code>443</code> | <code>1194</code> </p> <p>Default Value: <code>443</code> </p>'
+          type: integer
         - name: Description
           in: formData
           required: false
@@ -32693,6 +32703,11 @@ paths:
             Information about the DNS server to be used.
             Indicates whether DNS servers should be used. Specify <code>False</code> to delete the existing DNS servers.
           type: string
+        - name: VpnPort
+          in: query
+          required: false
+          description: '<p>The port number to assign to the Client VPN endpoint for TCP and UDP traffic.</p> <p>Valid Values: <code>443</code> | <code>1194</code> </p> <p>Default Value: <code>443</code> </p>'
+          type: integer
         - name: Description
           in: query
           required: false
@@ -32780,6 +32795,11 @@ paths:
             Information about the DNS server to be used.
             Indicates whether DNS servers should be used. Specify <code>False</code> to delete the existing DNS servers.
           type: string
+        - name: VpnPort
+          in: formData
+          required: false
+          description: '<p>The port number to assign to the Client VPN endpoint for TCP and UDP traffic.</p> <p>Valid Values: <code>443</code> | <code>1194</code> </p> <p>Default Value: <code>443</code> </p>'
+          type: integer
         - name: Description
           in: formData
           required: false
@@ -51393,6 +51413,9 @@ definitions:
       TransportProtocol:
         $ref: '#/definitions/TransportProtocol'
         description: The transport protocol used by the Client VPN endpoint.
+      VpnPort:
+        $ref: '#/definitions/Integer'
+        description: The port number for the Client VPN endpoint.
       AssociatedTargetNetworks:
         $ref: '#/definitions/AssociatedTargetNetworkSet'
         description: 'Information about the associated target networks. A target network is a subnet in a VPC.This property is deprecated. To view the target networks associated with a Client VPN endpoint, call DescribeClientVpnTargetNetworks and inspect the clientVpnTargetNetworks response element.'
@@ -51845,6 +51868,9 @@ definitions:
       TransportProtocol:
         $ref: '#/definitions/TransportProtocol'
         description: '<p>The transport protocol to be used by the VPN session.</p> <p>Default value: <code>udp</code> </p>'
+      VpnPort:
+        $ref: '#/definitions/Integer'
+        description: '<p>The port number to assign to the Client VPN endpoint for TCP and UDP traffic.</p> <p>Valid Values: <code>443</code> | <code>1194</code> </p> <p>Default Value: <code>443</code> </p>'
       Description:
         $ref: '#/definitions/String'
         description: A brief description of the Client VPN endpoint.
@@ -51874,7 +51900,7 @@ definitions:
         $ref: '#/definitions/String'
         description: '<p>The IPv4 address range, in CIDR notation, of the route destination. For example:</p> <ul> <li> <p>To add a route for Internet access, enter <code>0.0.0.0/0</code> </p> </li> <li> <p>To add a route for a peered VPC, enter the peered VPC''s IPv4 CIDR range</p> </li> <li> <p>To add a route for an on-premises network, enter the AWS Site-to-Site VPN connection''s IPv4 CIDR range</p> </li> </ul> <p>Route address ranges cannot overlap with the CIDR range specified for client allocation.</p>'
       TargetVpcSubnetId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SubnetId'
         description: The ID of the subnet through which you want to route traffic. The specified subnet must be an existing target network of the Client VPN endpoint.
       Description:
         $ref: '#/definitions/String'
@@ -54333,7 +54359,7 @@ definitions:
         $ref: '#/definitions/ClientVpnEndpointId'
         description: The ID of the Client VPN endpoint from which the route is to be deleted.
       TargetVpcSubnetId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SubnetId'
         description: The ID of the target subnet used by the route.
       DestinationCidrBlock:
         $ref: '#/definitions/String'
@@ -62083,6 +62109,9 @@ definitions:
       DnsServers:
         $ref: '#/definitions/DnsServersOptionsModifyStructure'
         description: Information about the DNS servers to be used by Client VPN connections. A Client VPN endpoint can have up to two DNS servers.
+      VpnPort:
+        $ref: '#/definitions/Integer'
+        description: '<p>The port number to assign to the Client VPN endpoint for TCP and UDP traffic.</p> <p>Valid Values: <code>443</code> | <code>1194</code> </p> <p>Default Value: <code>443</code> </p>'
       Description:
         $ref: '#/definitions/String'
         description: A brief description of the Client VPN endpoint.
