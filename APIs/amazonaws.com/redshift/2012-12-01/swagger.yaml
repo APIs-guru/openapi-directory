@@ -624,7 +624,7 @@ paths:
     get:
       x-aws-operation-name: BatchModifyClusterSnapshots
       operationId: GET BatchModifyClusterSnapshots
-      description: Modifies the settings for a list of snapshots.
+      description: Modifies the settings for a set of cluster snapshots.
       responses:
         '200':
           description: Success
@@ -679,7 +679,7 @@ paths:
     post:
       x-aws-operation-name: BatchModifyClusterSnapshots
       operationId: POST BatchModifyClusterSnapshots
-      description: Modifies the settings for a list of snapshots.
+      description: Modifies the settings for a set of cluster snapshots.
       responses:
         '200':
           description: Success
@@ -727,7 +727,7 @@ paths:
     get:
       x-aws-operation-name: CancelResize
       operationId: GET CancelResize
-      description: Cancels a resize operation.
+      description: Cancels a resize operation for a cluster.
       responses:
         '200':
           description: Success
@@ -778,7 +778,7 @@ paths:
     post:
       x-aws-operation-name: CancelResize
       operationId: POST CancelResize
-      description: Cancels a resize operation.
+      description: Cancels a resize operation for a cluster.
       responses:
         '200':
           description: Success
@@ -955,7 +955,7 @@ paths:
     get:
       x-aws-operation-name: CreateCluster
       operationId: GET CreateCluster
-      description: '<p>Creates a new cluster.</p> <p>To create a cluster in Virtual Private Cloud (VPC), you must provide a cluster subnet group name. The cluster subnet group identifies the subnets of your VPC that Amazon Redshift uses when creating the cluster. For more information about managing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
+      description: '<p>Creates a new cluster with the specified parameters.</p> <p>To create a cluster in Virtual Private Cloud (VPC), you must provide a cluster subnet group name. The cluster subnet group identifies the subnets of your VPC that Amazon Redshift uses when creating the cluster. For more information about managing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1102,7 +1102,7 @@ paths:
         - name: AvailabilityZone
           in: query
           required: false
-          description: '<p>The EC2 Availability Zone (AZ) in which you want Amazon Redshift to provision the cluster. For example, if you have several EC2 instances running in a specific Availability Zone, then you might want the cluster to be provisioned in the same zone in order to decrease network latency.</p> <p>Default: A random, system-chosen Availability Zone in the region that is specified by the endpoint.</p> <p>Example: <code>us-east-1d</code> </p> <p>Constraint: The specified Availability Zone must be in the same region as the current endpoint.</p>'
+          description: '<p>The EC2 Availability Zone (AZ) in which you want Amazon Redshift to provision the cluster. For example, if you have several EC2 instances running in a specific Availability Zone, then you might want the cluster to be provisioned in the same zone in order to decrease network latency.</p> <p>Default: A random, system-chosen Availability Zone in the region that is specified by the endpoint.</p> <p>Example: <code>us-east-2d</code> </p> <p>Constraint: The specified Availability Zone must be in the same region as the current endpoint.</p>'
           type: string
         - name: PreferredMaintenanceWindow
           in: query
@@ -1231,7 +1231,7 @@ paths:
     post:
       x-aws-operation-name: CreateCluster
       operationId: POST CreateCluster
-      description: '<p>Creates a new cluster.</p> <p>To create a cluster in Virtual Private Cloud (VPC), you must provide a cluster subnet group name. The cluster subnet group identifies the subnets of your VPC that Amazon Redshift uses when creating the cluster. For more information about managing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
+      description: '<p>Creates a new cluster with the specified parameters.</p> <p>To create a cluster in Virtual Private Cloud (VPC), you must provide a cluster subnet group name. The cluster subnet group identifies the subnets of your VPC that Amazon Redshift uses when creating the cluster. For more information about managing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1378,7 +1378,7 @@ paths:
         - name: AvailabilityZone
           in: formData
           required: false
-          description: '<p>The EC2 Availability Zone (AZ) in which you want Amazon Redshift to provision the cluster. For example, if you have several EC2 instances running in a specific Availability Zone, then you might want the cluster to be provisioned in the same zone in order to decrease network latency.</p> <p>Default: A random, system-chosen Availability Zone in the region that is specified by the endpoint.</p> <p>Example: <code>us-east-1d</code> </p> <p>Constraint: The specified Availability Zone must be in the same region as the current endpoint.</p>'
+          description: '<p>The EC2 Availability Zone (AZ) in which you want Amazon Redshift to provision the cluster. For example, if you have several EC2 instances running in a specific Availability Zone, then you might want the cluster to be provisioned in the same zone in order to decrease network latency.</p> <p>Default: A random, system-chosen Availability Zone in the region that is specified by the endpoint.</p> <p>Example: <code>us-east-2d</code> </p> <p>Constraint: The specified Availability Zone must be in the same region as the current endpoint.</p>'
           type: string
         - name: PreferredMaintenanceWindow
           in: formData
@@ -2130,7 +2130,7 @@ paths:
         - name: SourceType
           in: query
           required: false
-          description: '<p>The type of source that will be generating the events. For example, if you want to be notified of events generated by a cluster, you would set this parameter to cluster. If this value is not specified, events are returned for all Amazon Redshift objects in your AWS account. You must specify a source type in order to specify source IDs.</p> <p>Valid values: cluster, cluster-parameter-group, cluster-security-group, and cluster-snapshot.</p>'
+          description: '<p>The type of source that will be generating the events. For example, if you want to be notified of events generated by a cluster, you would set this parameter to cluster. If this value is not specified, events are returned for all Amazon Redshift objects in your AWS account. You must specify a source type in order to specify source IDs.</p> <p>Valid values: cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot, and scheduled-action.</p>'
           type: string
         - name: SourceIds
           in: query
@@ -2250,7 +2250,7 @@ paths:
         - name: SourceType
           in: formData
           required: false
-          description: '<p>The type of source that will be generating the events. For example, if you want to be notified of events generated by a cluster, you would set this parameter to cluster. If this value is not specified, events are returned for all Amazon Redshift objects in your AWS account. You must specify a source type in order to specify source IDs.</p> <p>Valid values: cluster, cluster-parameter-group, cluster-security-group, and cluster-snapshot.</p>'
+          description: '<p>The type of source that will be generating the events. For example, if you want to be notified of events generated by a cluster, you would set this parameter to cluster. If this value is not specified, events are returned for all Amazon Redshift objects in your AWS account. You must specify a source type in order to specify source IDs.</p> <p>Valid values: cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot, and scheduled-action.</p>'
           type: string
         - name: SourceIds
           in: formData
@@ -2889,7 +2889,7 @@ paths:
     get:
       x-aws-operation-name: CreateSnapshotSchedule
       operationId: GET CreateSnapshotSchedule
-      description: Creates a new snapshot schedule.
+      description: Creates a snapshot schedule with the rate of every 12 hours.
       responses:
         '200':
           description: Success
@@ -2973,7 +2973,7 @@ paths:
     post:
       x-aws-operation-name: CreateSnapshotSchedule
       operationId: POST CreateSnapshotSchedule
-      description: Creates a new snapshot schedule.
+      description: Creates a snapshot schedule with the rate of every 12 hours.
       responses:
         '200':
           description: Success
@@ -3050,7 +3050,7 @@ paths:
     get:
       x-aws-operation-name: CreateTags
       operationId: GET CreateTags
-      description: '<p>Adds one or more tags to a specified resource.</p> <p>A resource can have up to 50 tags. If you try to create more than 50 tags for a resource, you will receive an error and the attempt will fail.</p> <p>If you specify a key that already exists for the resource, the value for that key will be updated with the new value.</p>'
+      description: '<p>Adds tags to a cluster.</p> <p>A resource can have up to 50 tags. If you try to create more than 50 tags for a resource, you will receive an error and the attempt will fail.</p> <p>If you specify a key that already exists for the resource, the value for that key will be updated with the new value.</p>'
       responses:
         '200':
           description: Success
@@ -3070,7 +3070,7 @@ paths:
         - name: ResourceName
           in: query
           required: true
-          description: 'The Amazon Resource Name (ARN) to which you want to add the tag or tags. For example, <code>arn:aws:redshift:us-east-1:123456789:cluster:t1</code>. '
+          description: 'The Amazon Resource Name (ARN) to which you want to add the tag or tags. For example, <code>arn:aws:redshift:us-east-2:123456789:cluster:t1</code>. '
           type: string
         - name: Tags
           in: query
@@ -3102,7 +3102,7 @@ paths:
     post:
       x-aws-operation-name: CreateTags
       operationId: POST CreateTags
-      description: '<p>Adds one or more tags to a specified resource.</p> <p>A resource can have up to 50 tags. If you try to create more than 50 tags for a resource, you will receive an error and the attempt will fail.</p> <p>If you specify a key that already exists for the resource, the value for that key will be updated with the new value.</p>'
+      description: '<p>Adds tags to a cluster.</p> <p>A resource can have up to 50 tags. If you try to create more than 50 tags for a resource, you will receive an error and the attempt will fail.</p> <p>If you specify a key that already exists for the resource, the value for that key will be updated with the new value.</p>'
       responses:
         '200':
           description: Success
@@ -3122,7 +3122,7 @@ paths:
         - name: ResourceName
           in: formData
           required: true
-          description: 'The Amazon Resource Name (ARN) to which you want to add the tag or tags. For example, <code>arn:aws:redshift:us-east-1:123456789:cluster:t1</code>. '
+          description: 'The Amazon Resource Name (ARN) to which you want to add the tag or tags. For example, <code>arn:aws:redshift:us-east-2:123456789:cluster:t1</code>. '
           type: string
         - name: Tags
           in: formData
@@ -3147,7 +3147,7 @@ paths:
     get:
       x-aws-operation-name: DeleteCluster
       operationId: GET DeleteCluster
-      description: '<p>Deletes a previously provisioned cluster. A successful response from the web service indicates that the request was received correctly. Use <a>DescribeClusters</a> to monitor the status of the deletion. The delete operation cannot be canceled or reverted once submitted. For more information about managing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p> <p>If you want to shut down the cluster and retain it for future use, set <i>SkipFinalClusterSnapshot</i> to <code>false</code> and specify a name for <i>FinalClusterSnapshotIdentifier</i>. You can later restore this snapshot to resume using the cluster. If a final cluster snapshot is requested, the status of the cluster will be "final-snapshot" while the snapshot is being taken, then it''s "deleting" once Amazon Redshift begins deleting the cluster. </p> <p> For more information about managing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
+      description: '<p>Deletes a previously provisioned cluster without its final snapshot being created. A successful response from the web service indicates that the request was received correctly. Use <a>DescribeClusters</a> to monitor the status of the deletion. The delete operation cannot be canceled or reverted once submitted. For more information about managing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p> <p>If you want to shut down the cluster and retain it for future use, set <i>SkipFinalClusterSnapshot</i> to <code>false</code> and specify a name for <i>FinalClusterSnapshotIdentifier</i>. You can later restore this snapshot to resume using the cluster. If a final cluster snapshot is requested, the status of the cluster will be "final-snapshot" while the snapshot is being taken, then it''s "deleting" once Amazon Redshift begins deleting the cluster. </p> <p> For more information about managing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -3217,7 +3217,7 @@ paths:
     post:
       x-aws-operation-name: DeleteCluster
       operationId: POST DeleteCluster
-      description: '<p>Deletes a previously provisioned cluster. A successful response from the web service indicates that the request was received correctly. Use <a>DescribeClusters</a> to monitor the status of the deletion. The delete operation cannot be canceled or reverted once submitted. For more information about managing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p> <p>If you want to shut down the cluster and retain it for future use, set <i>SkipFinalClusterSnapshot</i> to <code>false</code> and specify a name for <i>FinalClusterSnapshotIdentifier</i>. You can later restore this snapshot to resume using the cluster. If a final cluster snapshot is requested, the status of the cluster will be "final-snapshot" while the snapshot is being taken, then it''s "deleting" once Amazon Redshift begins deleting the cluster. </p> <p> For more information about managing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
+      description: '<p>Deletes a previously provisioned cluster without its final snapshot being created. A successful response from the web service indicates that the request was received correctly. Use <a>DescribeClusters</a> to monitor the status of the deletion. The delete operation cannot be canceled or reverted once submitted. For more information about managing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p> <p>If you want to shut down the cluster and retain it for future use, set <i>SkipFinalClusterSnapshot</i> to <code>false</code> and specify a name for <i>FinalClusterSnapshotIdentifier</i>. You can later restore this snapshot to resume using the cluster. If a final cluster snapshot is requested, the status of the cluster will be "final-snapshot" while the snapshot is being taken, then it''s "deleting" once Amazon Redshift begins deleting the cluster. </p> <p> For more information about managing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -4052,7 +4052,7 @@ paths:
     get:
       x-aws-operation-name: DeleteTags
       operationId: GET DeleteTags
-      description: Deletes a tag or tags from a resource. You must provide the ARN of the resource from which you want to delete the tag or tags.
+      description: Deletes tags from a resource. You must provide the ARN of the resource from which you want to delete the tag or tags.
       responses:
         '200':
           description: Success
@@ -4068,7 +4068,7 @@ paths:
         - name: ResourceName
           in: query
           required: true
-          description: 'The Amazon Resource Name (ARN) from which you want to remove the tag or tags. For example, <code>arn:aws:redshift:us-east-1:123456789:cluster:t1</code>. '
+          description: 'The Amazon Resource Name (ARN) from which you want to remove the tag or tags. For example, <code>arn:aws:redshift:us-east-2:123456789:cluster:t1</code>. '
           type: string
         - name: TagKeys
           in: query
@@ -4100,7 +4100,7 @@ paths:
     post:
       x-aws-operation-name: DeleteTags
       operationId: POST DeleteTags
-      description: Deletes a tag or tags from a resource. You must provide the ARN of the resource from which you want to delete the tag or tags.
+      description: Deletes tags from a resource. You must provide the ARN of the resource from which you want to delete the tag or tags.
       responses:
         '200':
           description: Success
@@ -4116,7 +4116,7 @@ paths:
         - name: ResourceName
           in: formData
           required: true
-          description: 'The Amazon Resource Name (ARN) from which you want to remove the tag or tags. For example, <code>arn:aws:redshift:us-east-1:123456789:cluster:t1</code>. '
+          description: 'The Amazon Resource Name (ARN) from which you want to remove the tag or tags. For example, <code>arn:aws:redshift:us-east-2:123456789:cluster:t1</code>. '
           type: string
         - name: TagKeys
           in: formData
@@ -5414,7 +5414,7 @@ paths:
         - name: SourceType
           in: query
           required: false
-          description: '<p>The source type, such as cluster or parameter group, to which the described event categories apply.</p> <p>Valid values: cluster, cluster-snapshot, cluster-parameter-group, and cluster-security-group.</p>'
+          description: '<p>The source type, such as cluster or parameter group, to which the described event categories apply.</p> <p>Valid values: cluster, cluster-snapshot, cluster-parameter-group, cluster-security-group, and scheduled-action.</p>'
           type: string
         - name: Action
           in: query
@@ -5449,7 +5449,7 @@ paths:
         - name: SourceType
           in: formData
           required: false
-          description: '<p>The source type, such as cluster or parameter group, to which the described event categories apply.</p> <p>Valid values: cluster, cluster-snapshot, cluster-parameter-group, and cluster-security-group.</p>'
+          description: '<p>The source type, such as cluster or parameter group, to which the described event categories apply.</p> <p>Valid values: cluster, cluster-snapshot, cluster-parameter-group, cluster-security-group, and scheduled-action.</p>'
           type: string
         - name: Action
           in: query
@@ -7010,7 +7010,7 @@ paths:
     get:
       x-aws-operation-name: DescribeStorage
       operationId: GET DescribeStorage
-      description: Returns the total amount of snapshot usage and provisioned storage in megabytes.
+      description: Returns account level backups storage size and provisional storage.
       responses:
         '200':
           description: Success
@@ -7040,7 +7040,7 @@ paths:
     post:
       x-aws-operation-name: DescribeStorage
       operationId: POST DescribeStorage
-      description: Returns the total amount of snapshot usage and provisioned storage in megabytes.
+      description: Returns account level backups storage size and provisional storage.
       responses:
         '200':
           description: Success
@@ -7190,7 +7190,7 @@ paths:
         - name: ResourceName
           in: query
           required: false
-          description: 'The Amazon Resource Name (ARN) for which you want to describe the tag or tags. For example, <code>arn:aws:redshift:us-east-1:123456789:cluster:t1</code>. '
+          description: 'The Amazon Resource Name (ARN) for which you want to describe the tag or tags. For example, <code>arn:aws:redshift:us-east-2:123456789:cluster:t1</code>. '
           type: string
         - name: ResourceType
           in: query
@@ -7262,7 +7262,7 @@ paths:
         - name: ResourceName
           in: formData
           required: false
-          description: 'The Amazon Resource Name (ARN) for which you want to describe the tag or tags. For example, <code>arn:aws:redshift:us-east-1:123456789:cluster:t1</code>. '
+          description: 'The Amazon Resource Name (ARN) for which you want to describe the tag or tags. For example, <code>arn:aws:redshift:us-east-2:123456789:cluster:t1</code>. '
           type: string
         - name: ResourceType
           in: formData
@@ -8053,7 +8053,7 @@ paths:
     get:
       x-aws-operation-name: ModifyCluster
       operationId: GET ModifyCluster
-      description: '<p>Modifies the settings for a cluster. For example, you can add another security or parameter group, update the preferred maintenance window, or change the master user password. Resetting a cluster password or modifying the security groups associated with a cluster do not need a reboot. However, modifying a parameter group requires a reboot for parameters to take effect. For more information about managing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p> <p>You can also change node type and the number of nodes to scale up or down the cluster. When resizing a cluster, you must specify both the number of nodes and the node type even if one of the parameters does not change.</p>'
+      description: '<p>Modifies the settings for a cluster.</p> <p>You can also change node type and the number of nodes to scale up or down the cluster. When resizing a cluster, you must specify both the number of nodes and the node type even if one of the parameters does not change.</p> <p>You can add another security or parameter group, or change the master user password. Resetting a cluster password or modifying the security groups associated with a cluster do not need a reboot. However, modifying a parameter group requires a reboot for parameters to take effect. For more information about managing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -8149,12 +8149,12 @@ paths:
         - name: NodeType
           in: query
           required: false
-          description: '<p>The new node type of the cluster. If you specify a new node type, you must also specify the number of nodes parameter.</p> <p>When you submit your request to resize a cluster, Amazon Redshift sets access permissions for the cluster to read-only. After Amazon Redshift provisions a new cluster according to your resize requirements, there will be a temporary outage while the old cluster is deleted and your connection is switched to the new cluster. When the new connection is complete, the original access permissions for the cluster are restored. You can use <a>DescribeResize</a> to track the progress of the resize request. </p> <p>Valid Values: <code>ds2.xlarge</code> | <code>ds2.8xlarge</code> | <code>dc1.large</code> | <code>dc1.8xlarge</code> | <code>dc2.large</code> | <code>dc2.8xlarge</code> | <code>ra3.16xlarge</code> </p>'
+          description: '<p>The new node type of the cluster. If you specify a new node type, you must also specify the number of nodes parameter.</p> <p> For more information about resizing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html">Resizing Clusters in Amazon Redshift</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p> <p>Valid Values: <code>ds2.xlarge</code> | <code>ds2.8xlarge</code> | <code>dc1.large</code> | <code>dc1.8xlarge</code> | <code>dc2.large</code> | <code>dc2.8xlarge</code> | <code>ra3.16xlarge</code> </p>'
           type: string
         - name: NumberOfNodes
           in: query
           required: false
-          description: '<p>The new number of nodes of the cluster. If you specify a new number of nodes, you must also specify the node type parameter.</p> <p>When you submit your request to resize a cluster, Amazon Redshift sets access permissions for the cluster to read-only. After Amazon Redshift provisions a new cluster according to your resize requirements, there will be a temporary outage while the old cluster is deleted and your connection is switched to the new cluster. When the new connection is complete, the original access permissions for the cluster are restored. You can use <a>DescribeResize</a> to track the progress of the resize request. </p> <p>Valid Values: Integer greater than <code>0</code>.</p>'
+          description: '<p>The new number of nodes of the cluster. If you specify a new number of nodes, you must also specify the node type parameter.</p> <p> For more information about resizing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html">Resizing Clusters in Amazon Redshift</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p> <p>Valid Values: Integer greater than <code>0</code>.</p>'
           type: integer
         - name: ClusterSecurityGroups
           in: query
@@ -8243,7 +8243,7 @@ paths:
         - name: Encrypted
           in: query
           required: false
-          description: 'Indicates whether the cluster is encrypted. If the cluster is encrypted and you provide a value for the <code>KmsKeyId</code> parameter, we will encrypt the cluster with the provided <code>KmsKeyId</code>. If you don''t provide a <code>KmsKeyId</code>, we will encrypt with the default key. In the China region we will use legacy encryption if you specify that the cluster is encrypted.'
+          description: '<p>Indicates whether the cluster is encrypted. If the value is encrypted (true) and you provide a value for the <code>KmsKeyId</code> parameter, we encrypt the cluster with the provided <code>KmsKeyId</code>. If you don''t provide a <code>KmsKeyId</code>, we encrypt with the default key. In the China region we use legacy encryption if you specify that the cluster is encrypted.</p> <p>If the value is not encrypted (false), then the cluster is decrypted. </p>'
           type: boolean
         - name: KmsKeyId
           in: query
@@ -8273,7 +8273,7 @@ paths:
     post:
       x-aws-operation-name: ModifyCluster
       operationId: POST ModifyCluster
-      description: '<p>Modifies the settings for a cluster. For example, you can add another security or parameter group, update the preferred maintenance window, or change the master user password. Resetting a cluster password or modifying the security groups associated with a cluster do not need a reboot. However, modifying a parameter group requires a reboot for parameters to take effect. For more information about managing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p> <p>You can also change node type and the number of nodes to scale up or down the cluster. When resizing a cluster, you must specify both the number of nodes and the node type even if one of the parameters does not change.</p>'
+      description: '<p>Modifies the settings for a cluster.</p> <p>You can also change node type and the number of nodes to scale up or down the cluster. When resizing a cluster, you must specify both the number of nodes and the node type even if one of the parameters does not change.</p> <p>You can add another security or parameter group, or change the master user password. Resetting a cluster password or modifying the security groups associated with a cluster do not need a reboot. However, modifying a parameter group requires a reboot for parameters to take effect. For more information about managing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -8369,12 +8369,12 @@ paths:
         - name: NodeType
           in: formData
           required: false
-          description: '<p>The new node type of the cluster. If you specify a new node type, you must also specify the number of nodes parameter.</p> <p>When you submit your request to resize a cluster, Amazon Redshift sets access permissions for the cluster to read-only. After Amazon Redshift provisions a new cluster according to your resize requirements, there will be a temporary outage while the old cluster is deleted and your connection is switched to the new cluster. When the new connection is complete, the original access permissions for the cluster are restored. You can use <a>DescribeResize</a> to track the progress of the resize request. </p> <p>Valid Values: <code>ds2.xlarge</code> | <code>ds2.8xlarge</code> | <code>dc1.large</code> | <code>dc1.8xlarge</code> | <code>dc2.large</code> | <code>dc2.8xlarge</code> | <code>ra3.16xlarge</code> </p>'
+          description: '<p>The new node type of the cluster. If you specify a new node type, you must also specify the number of nodes parameter.</p> <p> For more information about resizing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html">Resizing Clusters in Amazon Redshift</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p> <p>Valid Values: <code>ds2.xlarge</code> | <code>ds2.8xlarge</code> | <code>dc1.large</code> | <code>dc1.8xlarge</code> | <code>dc2.large</code> | <code>dc2.8xlarge</code> | <code>ra3.16xlarge</code> </p>'
           type: string
         - name: NumberOfNodes
           in: formData
           required: false
-          description: '<p>The new number of nodes of the cluster. If you specify a new number of nodes, you must also specify the node type parameter.</p> <p>When you submit your request to resize a cluster, Amazon Redshift sets access permissions for the cluster to read-only. After Amazon Redshift provisions a new cluster according to your resize requirements, there will be a temporary outage while the old cluster is deleted and your connection is switched to the new cluster. When the new connection is complete, the original access permissions for the cluster are restored. You can use <a>DescribeResize</a> to track the progress of the resize request. </p> <p>Valid Values: Integer greater than <code>0</code>.</p>'
+          description: '<p>The new number of nodes of the cluster. If you specify a new number of nodes, you must also specify the node type parameter.</p> <p> For more information about resizing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html">Resizing Clusters in Amazon Redshift</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p> <p>Valid Values: Integer greater than <code>0</code>.</p>'
           type: integer
         - name: ClusterSecurityGroups
           in: formData
@@ -8463,7 +8463,7 @@ paths:
         - name: Encrypted
           in: formData
           required: false
-          description: 'Indicates whether the cluster is encrypted. If the cluster is encrypted and you provide a value for the <code>KmsKeyId</code> parameter, we will encrypt the cluster with the provided <code>KmsKeyId</code>. If you don''t provide a <code>KmsKeyId</code>, we will encrypt with the default key. In the China region we will use legacy encryption if you specify that the cluster is encrypted.'
+          description: '<p>Indicates whether the cluster is encrypted. If the value is encrypted (true) and you provide a value for the <code>KmsKeyId</code> parameter, we encrypt the cluster with the provided <code>KmsKeyId</code>. If you don''t provide a <code>KmsKeyId</code>, we encrypt with the default key. In the China region we use legacy encryption if you specify that the cluster is encrypted.</p> <p>If the value is not encrypted (false), then the cluster is decrypted. </p>'
           type: boolean
         - name: KmsKeyId
           in: formData
@@ -8690,7 +8690,7 @@ paths:
     get:
       x-aws-operation-name: ModifyClusterMaintenance
       operationId: GET ModifyClusterMaintenance
-      description: 'Modifies the maintenance settings of a cluster. For example, you can defer a maintenance window. You can also update or cancel a deferment. '
+      description: Modifies the maintenance settings of a cluster.
       responses:
         '200':
           description: Success
@@ -8756,7 +8756,7 @@ paths:
     post:
       x-aws-operation-name: ModifyClusterMaintenance
       operationId: POST ModifyClusterMaintenance
-      description: 'Modifies the maintenance settings of a cluster. For example, you can defer a maintenance window. You can also update or cancel a deferment. '
+      description: Modifies the maintenance settings of a cluster.
       responses:
         '200':
           description: Success
@@ -8908,7 +8908,7 @@ paths:
     get:
       x-aws-operation-name: ModifyClusterSnapshot
       operationId: GET ModifyClusterSnapshot
-      description: Modifies the settings for a snapshot.
+      description: <p>Modifies the settings for a snapshot.</p> <p>This exanmple modifies the manual retention period setting for a cluster snapshot.</p>
       responses:
         '200':
           description: Success
@@ -8965,7 +8965,7 @@ paths:
     post:
       x-aws-operation-name: ModifyClusterSnapshot
       operationId: POST ModifyClusterSnapshot
-      description: Modifies the settings for a snapshot.
+      description: <p>Modifies the settings for a snapshot.</p> <p>This exanmple modifies the manual retention period setting for a cluster snapshot.</p>
       responses:
         '200':
           description: Success
@@ -9309,7 +9309,7 @@ paths:
         - name: SourceType
           in: query
           required: false
-          description: '<p>The type of source that will be generating the events. For example, if you want to be notified of events generated by a cluster, you would set this parameter to cluster. If this value is not specified, events are returned for all Amazon Redshift objects in your AWS account. You must specify a source type in order to specify source IDs.</p> <p>Valid values: cluster, cluster-parameter-group, cluster-security-group, and cluster-snapshot.</p>'
+          description: '<p>The type of source that will be generating the events. For example, if you want to be notified of events generated by a cluster, you would set this parameter to cluster. If this value is not specified, events are returned for all Amazon Redshift objects in your AWS account. You must specify a source type in order to specify source IDs.</p> <p>Valid values: cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot, and scheduled-action.</p>'
           type: string
         - name: SourceIds
           in: query
@@ -9414,7 +9414,7 @@ paths:
         - name: SourceType
           in: formData
           required: false
-          description: '<p>The type of source that will be generating the events. For example, if you want to be notified of events generated by a cluster, you would set this parameter to cluster. If this value is not specified, events are returned for all Amazon Redshift objects in your AWS account. You must specify a source type in order to specify source IDs.</p> <p>Valid values: cluster, cluster-parameter-group, cluster-security-group, and cluster-snapshot.</p>'
+          description: '<p>The type of source that will be generating the events. For example, if you want to be notified of events generated by a cluster, you would set this parameter to cluster. If this value is not specified, events are returned for all Amazon Redshift objects in your AWS account. You must specify a source type in order to specify source IDs.</p> <p>Valid values: cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot, and scheduled-action.</p>'
           type: string
         - name: SourceIds
           in: formData
@@ -9456,7 +9456,7 @@ paths:
     get:
       x-aws-operation-name: ModifyScheduledAction
       operationId: GET ModifyScheduledAction
-      description: 'Modify a scheduled action. '
+      description: 'Modifies a scheduled action. '
       responses:
         '200':
           description: Success
@@ -9549,7 +9549,7 @@ paths:
     post:
       x-aws-operation-name: ModifyScheduledAction
       operationId: POST ModifyScheduledAction
-      description: 'Modify a scheduled action. '
+      description: 'Modifies a scheduled action. '
       responses:
         '200':
           description: Success
@@ -10451,7 +10451,7 @@ paths:
         - name: AvailabilityZone
           in: query
           required: false
-          description: '<p>The Amazon EC2 Availability Zone in which to restore the cluster.</p> <p>Default: A random, system-chosen Availability Zone.</p> <p>Example: <code>us-east-1a</code> </p>'
+          description: '<p>The Amazon EC2 Availability Zone in which to restore the cluster.</p> <p>Default: A random, system-chosen Availability Zone.</p> <p>Example: <code>us-east-2a</code> </p>'
           type: string
         - name: AllowVersionUpgrade
           in: query
@@ -10717,7 +10717,7 @@ paths:
         - name: AvailabilityZone
           in: formData
           required: false
-          description: '<p>The Amazon EC2 Availability Zone in which to restore the cluster.</p> <p>Default: A random, system-chosen Availability Zone.</p> <p>Example: <code>us-east-1a</code> </p>'
+          description: '<p>The Amazon EC2 Availability Zone in which to restore the cluster.</p> <p>Default: A random, system-chosen Availability Zone.</p> <p>Example: <code>us-east-2a</code> </p>'
           type: string
         - name: AllowVersionUpgrade
           in: formData
@@ -13080,7 +13080,7 @@ definitions:
         description: <p>The name of a cluster subnet group to be associated with this cluster.</p> <p>If this parameter is not provided the resulting cluster will be deployed outside virtual private cloud (VPC).</p>
       AvailabilityZone:
         $ref: '#/definitions/String'
-        description: '<p>The EC2 Availability Zone (AZ) in which you want Amazon Redshift to provision the cluster. For example, if you have several EC2 instances running in a specific Availability Zone, then you might want the cluster to be provisioned in the same zone in order to decrease network latency.</p> <p>Default: A random, system-chosen Availability Zone in the region that is specified by the endpoint.</p> <p>Example: <code>us-east-1d</code> </p> <p>Constraint: The specified Availability Zone must be in the same region as the current endpoint.</p>'
+        description: '<p>The EC2 Availability Zone (AZ) in which you want Amazon Redshift to provision the cluster. For example, if you have several EC2 instances running in a specific Availability Zone, then you might want the cluster to be provisioned in the same zone in order to decrease network latency.</p> <p>Default: A random, system-chosen Availability Zone in the region that is specified by the endpoint.</p> <p>Example: <code>us-east-2d</code> </p> <p>Constraint: The specified Availability Zone must be in the same region as the current endpoint.</p>'
       PreferredMaintenanceWindow:
         $ref: '#/definitions/String'
         description: '<p>The weekly time range (in UTC) during which automated cluster maintenance can occur.</p> <p> Format: <code>ddd:hh24:mi-ddd:hh24:mi</code> </p> <p> Default: A 30-minute window selected at random from an 8-hour block of time per region, occurring on a random day of the week. For more information about the time blocks for each region, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-maintenance-windows">Maintenance Windows</a> in Amazon Redshift Cluster Management Guide.</p> <p>Valid Days: Mon | Tue | Wed | Thu | Fri | Sat | Sun</p> <p>Constraints: Minimum 30-minute window.</p>'
@@ -13243,7 +13243,7 @@ definitions:
         description: The Amazon Resource Name (ARN) of the Amazon SNS topic used to transmit the event notifications. The ARN is created by Amazon SNS when you create a topic and subscribe to it.
       SourceType:
         $ref: '#/definitions/String'
-        description: '<p>The type of source that will be generating the events. For example, if you want to be notified of events generated by a cluster, you would set this parameter to cluster. If this value is not specified, events are returned for all Amazon Redshift objects in your AWS account. You must specify a source type in order to specify source IDs.</p> <p>Valid values: cluster, cluster-parameter-group, cluster-security-group, and cluster-snapshot.</p>'
+        description: '<p>The type of source that will be generating the events. For example, if you want to be notified of events generated by a cluster, you would set this parameter to cluster. If this value is not specified, events are returned for all Amazon Redshift objects in your AWS account. You must specify a source type in order to specify source IDs.</p> <p>Valid values: cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot, and scheduled-action.</p>'
       SourceIds:
         $ref: '#/definitions/SourceIdsList'
         description: '<p>A list of one or more identifiers of Amazon Redshift source objects. All of the objects must be of the same type as was specified in the source type parameter. The event subscription will return only events generated by the specified objects. If not specified, then events are returned for all objects within the source type specified.</p> <p>Example: my-cluster-1, my-cluster-2</p> <p>Example: my-snapshot-20131010</p>'
@@ -13280,7 +13280,7 @@ definitions:
         description: The date and time the Amazon Redshift event notification subscription was created.
       SourceType:
         $ref: '#/definitions/String'
-        description: 'The source type of the events returned the Amazon Redshift event notification, such as cluster, or cluster-snapshot.'
+        description: 'The source type of the events returned by the Amazon Redshift event notification, such as cluster, cluster-snapshot, cluster-parameter-group, cluster-security-group, or scheduled-action. '
       SourceIdsList:
         $ref: '#/definitions/SourceIdsList'
         description: A list of the sources that publish events to the Amazon Redshift event notification subscription.
@@ -13473,7 +13473,7 @@ definitions:
     properties:
       ResourceName:
         $ref: '#/definitions/String'
-        description: 'The Amazon Resource Name (ARN) to which you want to add the tag or tags. For example, <code>arn:aws:redshift:us-east-1:123456789:cluster:t1</code>. '
+        description: 'The Amazon Resource Name (ARN) to which you want to add the tag or tags. For example, <code>arn:aws:redshift:us-east-2:123456789:cluster:t1</code>. '
       Tags:
         $ref: '#/definitions/TagList'
         description: 'One or more name/value pairs to add as tags to the specified resource. Each tag name is passed in with the parameter <code>Key</code> and the corresponding value is passed in with the parameter <code>Value</code>. The <code>Key</code> and <code>Value</code> parameters are separated by a comma (,). Separate multiple tags with a space. For example, <code>--tags "Key"="owner","Value"="admin" "Key"="environment","Value"="test" "Key"="version","Value"="1.0"</code>. '
@@ -13625,7 +13625,7 @@ definitions:
     properties:
       ResourceName:
         $ref: '#/definitions/String'
-        description: 'The Amazon Resource Name (ARN) from which you want to remove the tag or tags. For example, <code>arn:aws:redshift:us-east-1:123456789:cluster:t1</code>. '
+        description: 'The Amazon Resource Name (ARN) from which you want to remove the tag or tags. For example, <code>arn:aws:redshift:us-east-2:123456789:cluster:t1</code>. '
       TagKeys:
         $ref: '#/definitions/TagKeyList'
         description: The tag key that you want to delete.
@@ -13838,7 +13838,7 @@ definitions:
     properties:
       SourceType:
         $ref: '#/definitions/String'
-        description: '<p>The source type, such as cluster or parameter group, to which the described event categories apply.</p> <p>Valid values: cluster, cluster-snapshot, cluster-parameter-group, and cluster-security-group.</p>'
+        description: '<p>The source type, such as cluster or parameter group, to which the described event categories apply.</p> <p>Valid values: cluster, cluster-snapshot, cluster-parameter-group, cluster-security-group, and scheduled-action.</p>'
     description: <p/>
   DescribeEventSubscriptionsMessage:
     type: object
@@ -14120,7 +14120,7 @@ definitions:
     properties:
       ResourceName:
         $ref: '#/definitions/String'
-        description: 'The Amazon Resource Name (ARN) for which you want to describe the tag or tags. For example, <code>arn:aws:redshift:us-east-1:123456789:cluster:t1</code>. '
+        description: 'The Amazon Resource Name (ARN) for which you want to describe the tag or tags. For example, <code>arn:aws:redshift:us-east-2:123456789:cluster:t1</code>. '
       ResourceType:
         $ref: '#/definitions/String'
         description: '<p>The type of resource with which you want to view tags. Valid resource types are: </p> <ul> <li> <p>Cluster</p> </li> <li> <p>CIDR/IP</p> </li> <li> <p>EC2 security group</p> </li> <li> <p>Snapshot</p> </li> <li> <p>Cluster security group</p> </li> <li> <p>Subnet group</p> </li> <li> <p>HSM connection</p> </li> <li> <p>HSM certificate</p> </li> <li> <p>Parameter group</p> </li> <li> <p>Snapshot copy grant</p> </li> </ul> <p>For more information about Amazon Redshift resource types and constructing ARNs, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-overview.html#redshift-iam-access-control-specify-actions">Specifying Policy Elements: Actions, Effects, Resources, and Principals</a> in the Amazon Redshift Cluster Management Guide. </p>'
@@ -14451,10 +14451,10 @@ definitions:
         description: '<p>The new cluster type.</p> <p>When you submit your cluster resize request, your existing cluster goes into a read-only mode. After Amazon Redshift provisions a new cluster based on your resize requirements, there will be outage for a period while the old cluster is deleted and your connection is switched to the new cluster. You can use <a>DescribeResize</a> to track the progress of the resize request. </p> <p>Valid Values: <code> multi-node | single-node </code> </p>'
       NodeType:
         $ref: '#/definitions/String'
-        description: '<p>The new node type of the cluster. If you specify a new node type, you must also specify the number of nodes parameter.</p> <p>When you submit your request to resize a cluster, Amazon Redshift sets access permissions for the cluster to read-only. After Amazon Redshift provisions a new cluster according to your resize requirements, there will be a temporary outage while the old cluster is deleted and your connection is switched to the new cluster. When the new connection is complete, the original access permissions for the cluster are restored. You can use <a>DescribeResize</a> to track the progress of the resize request. </p> <p>Valid Values: <code>ds2.xlarge</code> | <code>ds2.8xlarge</code> | <code>dc1.large</code> | <code>dc1.8xlarge</code> | <code>dc2.large</code> | <code>dc2.8xlarge</code> | <code>ra3.16xlarge</code> </p>'
+        description: '<p>The new node type of the cluster. If you specify a new node type, you must also specify the number of nodes parameter.</p> <p> For more information about resizing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html">Resizing Clusters in Amazon Redshift</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p> <p>Valid Values: <code>ds2.xlarge</code> | <code>ds2.8xlarge</code> | <code>dc1.large</code> | <code>dc1.8xlarge</code> | <code>dc2.large</code> | <code>dc2.8xlarge</code> | <code>ra3.16xlarge</code> </p>'
       NumberOfNodes:
         $ref: '#/definitions/IntegerOptional'
-        description: '<p>The new number of nodes of the cluster. If you specify a new number of nodes, you must also specify the node type parameter.</p> <p>When you submit your request to resize a cluster, Amazon Redshift sets access permissions for the cluster to read-only. After Amazon Redshift provisions a new cluster according to your resize requirements, there will be a temporary outage while the old cluster is deleted and your connection is switched to the new cluster. When the new connection is complete, the original access permissions for the cluster are restored. You can use <a>DescribeResize</a> to track the progress of the resize request. </p> <p>Valid Values: Integer greater than <code>0</code>.</p>'
+        description: '<p>The new number of nodes of the cluster. If you specify a new number of nodes, you must also specify the node type parameter.</p> <p> For more information about resizing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html">Resizing Clusters in Amazon Redshift</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p> <p>Valid Values: Integer greater than <code>0</code>.</p>'
       ClusterSecurityGroups:
         $ref: '#/definitions/ClusterSecurityGroupNameList'
         description: '<p>A list of cluster security groups to be authorized on this cluster. This change is asynchronously applied as soon as possible.</p> <p>Security groups currently associated with the cluster, and not in the list of groups to apply, will be revoked from the cluster.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 255 alphanumeric characters or hyphens</p> </li> <li> <p>First character must be a letter</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens</p> </li> </ul>'
@@ -14505,7 +14505,7 @@ definitions:
         description: 'The name for the maintenance track that you want to assign for the cluster. This name change is asynchronous. The new track name stays in the <code>PendingModifiedValues</code> for the cluster until the next maintenance window. When the maintenance track changes, the cluster is switched to the latest cluster release available for the maintenance track. At this point, the maintenance track name is applied.'
       Encrypted:
         $ref: '#/definitions/BooleanOptional'
-        description: 'Indicates whether the cluster is encrypted. If the cluster is encrypted and you provide a value for the <code>KmsKeyId</code> parameter, we will encrypt the cluster with the provided <code>KmsKeyId</code>. If you don''t provide a <code>KmsKeyId</code>, we will encrypt with the default key. In the China region we will use legacy encryption if you specify that the cluster is encrypted.'
+        description: '<p>Indicates whether the cluster is encrypted. If the value is encrypted (true) and you provide a value for the <code>KmsKeyId</code> parameter, we encrypt the cluster with the provided <code>KmsKeyId</code>. If you don''t provide a <code>KmsKeyId</code>, we encrypt with the default key. In the China region we use legacy encryption if you specify that the cluster is encrypted.</p> <p>If the value is not encrypted (false), then the cluster is decrypted. </p>'
       KmsKeyId:
         $ref: '#/definitions/String'
         description: The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster.
@@ -14580,7 +14580,7 @@ definitions:
         description: The Amazon Resource Name (ARN) of the SNS topic to be used by the event notification subscription.
       SourceType:
         $ref: '#/definitions/String'
-        description: '<p>The type of source that will be generating the events. For example, if you want to be notified of events generated by a cluster, you would set this parameter to cluster. If this value is not specified, events are returned for all Amazon Redshift objects in your AWS account. You must specify a source type in order to specify source IDs.</p> <p>Valid values: cluster, cluster-parameter-group, cluster-security-group, and cluster-snapshot.</p>'
+        description: '<p>The type of source that will be generating the events. For example, if you want to be notified of events generated by a cluster, you would set this parameter to cluster. If this value is not specified, events are returned for all Amazon Redshift objects in your AWS account. You must specify a source type in order to specify source IDs.</p> <p>Valid values: cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot, and scheduled-action.</p>'
       SourceIds:
         $ref: '#/definitions/SourceIdsList'
         description: '<p>A list of one or more identifiers of Amazon Redshift source objects. All of the objects must be of the same type as was specified in the source type parameter. The event subscription will return only events generated by the specified objects. If not specified, then events are returned for all objects within the source type specified.</p> <p>Example: my-cluster-1, my-cluster-2</p> <p>Example: my-snapshot-20131010</p>'
@@ -14831,7 +14831,7 @@ definitions:
         description: '<p>The port number on which the cluster accepts connections.</p> <p>Default: The same port as the original cluster.</p> <p>Constraints: Must be between <code>1115</code> and <code>65535</code>.</p>'
       AvailabilityZone:
         $ref: '#/definitions/String'
-        description: '<p>The Amazon EC2 Availability Zone in which to restore the cluster.</p> <p>Default: A random, system-chosen Availability Zone.</p> <p>Example: <code>us-east-1a</code> </p>'
+        description: '<p>The Amazon EC2 Availability Zone in which to restore the cluster.</p> <p>Default: A random, system-chosen Availability Zone.</p> <p>Example: <code>us-east-2a</code> </p>'
       AllowVersionUpgrade:
         $ref: '#/definitions/BooleanOptional'
         description: '<p>If <code>true</code>, major version upgrades can be applied during the maintenance window to the Amazon Redshift engine that is running on the cluster. </p> <p>Default: <code>true</code> </p>'
@@ -15124,7 +15124,7 @@ definitions:
         description: The tag for the resource.
       ResourceName:
         $ref: '#/definitions/String'
-        description: 'The Amazon Resource Name (ARN) with which the tag is associated, for example: <code>arn:aws:redshift:us-east-1:123456789:cluster:t1</code>.'
+        description: 'The Amazon Resource Name (ARN) with which the tag is associated, for example: <code>arn:aws:redshift:us-east-2:123456789:cluster:t1</code>.'
       ResourceType:
         $ref: '#/definitions/String'
         description: '<p>The type of resource with which the tag is associated. Valid resource types are: </p> <ul> <li> <p>Cluster</p> </li> <li> <p>CIDR/IP</p> </li> <li> <p>EC2 security group</p> </li> <li> <p>Snapshot</p> </li> <li> <p>Cluster security group</p> </li> <li> <p>Subnet group</p> </li> <li> <p>HSM connection</p> </li> <li> <p>HSM certificate</p> </li> <li> <p>Parameter group</p> </li> </ul> <p>For more information about Amazon Redshift resource types and constructing ARNs, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-overview.html#redshift-iam-access-control-specify-actions">Constructing an Amazon Redshift Amazon Resource Name (ARN)</a> in the Amazon Redshift Cluster Management Guide. </p>'

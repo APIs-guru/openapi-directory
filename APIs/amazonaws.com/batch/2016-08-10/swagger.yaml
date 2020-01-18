@@ -253,7 +253,7 @@ paths:
                     description: 'The type of compute environment: <code>EC2</code> or <code>SPOT</code>.'
                   allocationStrategy:
                     $ref: '#/definitions/CRAllocationStrategy'
-                    description: 'The allocation strategy to use for the compute resource in case not enough instances of the best fitting instance type can be allocated. This could be due to availability of the instance type in the region or <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html">Amazon EC2 service limits</a>. If this is not specified, the default is <code>BEST_FIT</code>, which will use only the best fitting instance type, waiting for additional capacity if it''s not available. This allocation strategy keeps costs lower but can limit scaling. <code>BEST_FIT_PROGRESSIVE</code> will select an additional instance type that is large enough to meet the requirements of the jobs in the queue, with a preference for an instance type with a lower cost. <code>SPOT_CAPACITY_OPTIMIZED</code> is only available for Spot Instance compute resources and will select an additional instance type that is large enough to meet the requirements of the jobs in the queue, with a preference for an instance type that is less likely to be interrupted.'
+                    description: 'The allocation strategy to use for the compute resource in case not enough instances of the best fitting instance type can be allocated. This could be due to availability of the instance type in the region or <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html">Amazon EC2 service limits</a>. If this is not specified, the default is <code>BEST_FIT</code>, which will use only the best fitting instance type, waiting for additional capacity if it''s not available. This allocation strategy keeps costs lower but can limit scaling. If you are using Spot Fleets with <code>BEST_FIT</code> then the Spot Fleet IAM Role must be specified. <code>BEST_FIT_PROGRESSIVE</code> will select additional instance types that are large enough to meet the requirements of the jobs in the queue, with a preference for instance types with a lower cost per vCPU. <code>SPOT_CAPACITY_OPTIMIZED</code> is only available for Spot Instance compute resources and will select additional instance types that are large enough to meet the requirements of the jobs in the queue, with a preference for instance types that are less likely to be interrupted. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/allocation-strategies.html ">Allocation Strategies</a> in the <i>AWS Batch User Guide</i>.'
                   minvCpus:
                     $ref: '#/definitions/Integer'
                     description: The minimum number of Amazon EC2 vCPUs that an environment should maintain (even if the compute environment is <code>DISABLED</code>).
@@ -292,7 +292,7 @@ paths:
                     description: 'The maximum percentage that a Spot Instance price can be when compared with the On-Demand price for that instance type before instances are launched. For example, if your maximum percentage is 20%, then the Spot price must be below 20% of the current On-Demand price for that Amazon EC2 instance. You always pay the lowest (market) price and never more than your maximum percentage. If you leave this field empty, the default value is 100% of the On-Demand price.'
                   spotIamFleetRole:
                     $ref: '#/definitions/String'
-                    description: 'The Amazon Resource Name (ARN) of the Amazon EC2 Spot Fleet IAM role applied to a <code>SPOT</code> compute environment. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/spot_fleet_IAM_role.html">Amazon EC2 Spot Fleet Role</a> in the <i>AWS Batch User Guide</i>.'
+                    description: 'The Amazon Resource Name (ARN) of the Amazon EC2 Spot Fleet IAM role applied to a <code>SPOT</code> compute environment. This role is required if the allocation strategy set to <code>BEST_FIT</code> or if the allocation strategy is not specified. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/spot_fleet_IAM_role.html">Amazon EC2 Spot Fleet Role</a> in the <i>AWS Batch User Guide</i>.'
                   launchTemplate:
                     $ref: '#/definitions/LaunchTemplateSpecification'
                     description: 'The launch template to use for your compute resources. Any other compute resource parameters that you specify in a <a>CreateComputeEnvironment</a> API operation override the same parameters in the launch template. You must specify either the launch template ID or launch template name in the request, but not both. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/launch-templates.html">Launch Template Support</a> in the <i>AWS Batch User Guide</i>.'
@@ -437,7 +437,7 @@ paths:
   /v1/deregisterjobdefinition:
     post:
       operationId: DeregisterJobDefinition
-      description: Deregisters an AWS Batch job definition.
+      description: Deregisters an AWS Batch job definition. Job definitions will be permanently deleted after 180 days.
       responses:
         '200':
           description: Success
@@ -916,7 +916,7 @@ paths:
                 items:
                   $ref: '#/definitions/JobDependency'
               jobDefinition:
-                description: 'The job definition used by this job. This value can be either a <code>name:revision</code> or the Amazon Resource Name (ARN) for the job definition.'
+                description: 'The job definition used by this job. This value can be one of <code>name</code>, <code>name:revision</code>, or the Amazon Resource Name (ARN) for the job definition. If <code>name</code> is specified without a revision then the latest active revision is used.'
                 type: string
               parameters:
                 description: Additional parameters passed to the job that replace parameter substitution placeholders that are set in the job definition. Parameters are specified as a key and value pair mapping. Parameters in a <code>SubmitJob</code> request override any corresponding parameter defaults from the job definition.
@@ -1595,7 +1595,7 @@ definitions:
         description: 'The type of compute environment: <code>EC2</code> or <code>SPOT</code>.'
       allocationStrategy:
         $ref: '#/definitions/CRAllocationStrategy'
-        description: 'The allocation strategy to use for the compute resource in case not enough instances of the best fitting instance type can be allocated. This could be due to availability of the instance type in the region or <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html">Amazon EC2 service limits</a>. If this is not specified, the default is <code>BEST_FIT</code>, which will use only the best fitting instance type, waiting for additional capacity if it''s not available. This allocation strategy keeps costs lower but can limit scaling. <code>BEST_FIT_PROGRESSIVE</code> will select an additional instance type that is large enough to meet the requirements of the jobs in the queue, with a preference for an instance type with a lower cost. <code>SPOT_CAPACITY_OPTIMIZED</code> is only available for Spot Instance compute resources and will select an additional instance type that is large enough to meet the requirements of the jobs in the queue, with a preference for an instance type that is less likely to be interrupted.'
+        description: 'The allocation strategy to use for the compute resource in case not enough instances of the best fitting instance type can be allocated. This could be due to availability of the instance type in the region or <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html">Amazon EC2 service limits</a>. If this is not specified, the default is <code>BEST_FIT</code>, which will use only the best fitting instance type, waiting for additional capacity if it''s not available. This allocation strategy keeps costs lower but can limit scaling. If you are using Spot Fleets with <code>BEST_FIT</code> then the Spot Fleet IAM Role must be specified. <code>BEST_FIT_PROGRESSIVE</code> will select additional instance types that are large enough to meet the requirements of the jobs in the queue, with a preference for instance types with a lower cost per vCPU. <code>SPOT_CAPACITY_OPTIMIZED</code> is only available for Spot Instance compute resources and will select additional instance types that are large enough to meet the requirements of the jobs in the queue, with a preference for instance types that are less likely to be interrupted. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/allocation-strategies.html ">Allocation Strategies</a> in the <i>AWS Batch User Guide</i>.'
       minvCpus:
         $ref: '#/definitions/Integer'
         description: The minimum number of Amazon EC2 vCPUs that an environment should maintain (even if the compute environment is <code>DISABLED</code>).
@@ -1634,7 +1634,7 @@ definitions:
         description: 'The maximum percentage that a Spot Instance price can be when compared with the On-Demand price for that instance type before instances are launched. For example, if your maximum percentage is 20%, then the Spot price must be below 20% of the current On-Demand price for that Amazon EC2 instance. You always pay the lowest (market) price and never more than your maximum percentage. If you leave this field empty, the default value is 100% of the On-Demand price.'
       spotIamFleetRole:
         $ref: '#/definitions/String'
-        description: 'The Amazon Resource Name (ARN) of the Amazon EC2 Spot Fleet IAM role applied to a <code>SPOT</code> compute environment. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/spot_fleet_IAM_role.html">Amazon EC2 Spot Fleet Role</a> in the <i>AWS Batch User Guide</i>.'
+        description: 'The Amazon Resource Name (ARN) of the Amazon EC2 Spot Fleet IAM role applied to a <code>SPOT</code> compute environment. This role is required if the allocation strategy set to <code>BEST_FIT</code> or if the allocation strategy is not specified. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/spot_fleet_IAM_role.html">Amazon EC2 Spot Fleet Role</a> in the <i>AWS Batch User Guide</i>.'
       launchTemplate:
         $ref: '#/definitions/LaunchTemplateSpecification'
         description: 'The launch template to use for your compute resources. Any other compute resource parameters that you specify in a <a>CreateComputeEnvironment</a> API operation override the same parameters in the launch template. You must specify either the launch template ID or launch template name in the request, but not both. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/launch-templates.html">Launch Template Support</a> in the <i>AWS Batch User Guide</i>.'
@@ -2175,7 +2175,7 @@ definitions:
         description: 'The Unix timestamp (in seconds and milliseconds) for when the job was stopped (when the job transitioned from the <code>RUNNING</code> state to a terminal state, such as <code>SUCCEEDED</code> or <code>FAILED</code>).'
       dependsOn:
         $ref: '#/definitions/JobDependencyList'
-        description: A list of job names or IDs on which this job depends.
+        description: A list of job IDs on which this job depends.
       jobDefinition:
         $ref: '#/definitions/String'
         description: The job definition that is used by this job.
@@ -2429,7 +2429,7 @@ definitions:
         description: 'A list of dependencies for the job. A job can depend upon a maximum of 20 jobs. You can specify a <code>SEQUENTIAL</code> type dependency without specifying a job ID for array jobs so that each child array job completes sequentially, starting at index 0. You can also specify an <code>N_TO_N</code> type dependency with a job ID for array jobs. In that case, each index child of this job must wait for the corresponding index child of each dependency to complete before it can begin.'
       jobDefinition:
         $ref: '#/definitions/String'
-        description: 'The job definition used by this job. This value can be either a <code>name:revision</code> or the Amazon Resource Name (ARN) for the job definition.'
+        description: 'The job definition used by this job. This value can be one of <code>name</code>, <code>name:revision</code>, or the Amazon Resource Name (ARN) for the job definition. If <code>name</code> is specified without a revision then the latest active revision is used.'
       parameters:
         $ref: '#/definitions/ParametersMap'
         description: Additional parameters passed to the job that replace parameter substitution placeholders that are set in the job definition. Parameters are specified as a key and value pair mapping. Parameters in a <code>SubmitJob</code> request override any corresponding parameter defaults from the job definition.

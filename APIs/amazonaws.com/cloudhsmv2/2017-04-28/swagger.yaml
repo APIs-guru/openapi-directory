@@ -3,7 +3,7 @@ info:
   version: '2017-04-28'
   x-release: v4
   title: AWS CloudHSM V2
-  description: 'For more information about AWS CloudHSM, see <a href="http://aws.amazon.com/cloudhsm/">AWS CloudHSM</a> and the <a href="http://docs.aws.amazon.com/cloudhsm/latest/userguide/">AWS CloudHSM User Guide</a>.'
+  description: 'For more information about AWS CloudHSM, see <a href="http://aws.amazon.com/cloudhsm/">AWS CloudHSM</a> and the <a href="https://docs.aws.amazon.com/cloudhsm/latest/userguide/">AWS CloudHSM User Guide</a>.'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -170,25 +170,29 @@ paths:
           schema:
             $ref: '#/definitions/CopyBackupToRegionResponse'
         '480':
-          description: CloudHsmInternalFailureException
-          schema:
-            $ref: '#/definitions/CloudHsmInternalFailureException'
-        '481':
-          description: CloudHsmServiceException
-          schema:
-            $ref: '#/definitions/CloudHsmServiceException'
-        '482':
-          description: CloudHsmResourceNotFoundException
-          schema:
-            $ref: '#/definitions/CloudHsmResourceNotFoundException'
-        '483':
-          description: CloudHsmInvalidRequestException
-          schema:
-            $ref: '#/definitions/CloudHsmInvalidRequestException'
-        '484':
           description: CloudHsmAccessDeniedException
           schema:
             $ref: '#/definitions/CloudHsmAccessDeniedException'
+        '481':
+          description: CloudHsmInternalFailureException
+          schema:
+            $ref: '#/definitions/CloudHsmInternalFailureException'
+        '482':
+          description: CloudHsmInvalidRequestException
+          schema:
+            $ref: '#/definitions/CloudHsmInvalidRequestException'
+        '483':
+          description: CloudHsmResourceNotFoundException
+          schema:
+            $ref: '#/definitions/CloudHsmResourceNotFoundException'
+        '484':
+          description: CloudHsmServiceException
+          schema:
+            $ref: '#/definitions/CloudHsmServiceException'
+        '485':
+          description: CloudHsmTagException
+          schema:
+            $ref: '#/definitions/CloudHsmTagException'
       parameters:
         - name: body
           in: body
@@ -219,25 +223,29 @@ paths:
           schema:
             $ref: '#/definitions/CreateClusterResponse'
         '480':
-          description: CloudHsmInternalFailureException
-          schema:
-            $ref: '#/definitions/CloudHsmInternalFailureException'
-        '481':
-          description: CloudHsmServiceException
-          schema:
-            $ref: '#/definitions/CloudHsmServiceException'
-        '482':
-          description: CloudHsmResourceNotFoundException
-          schema:
-            $ref: '#/definitions/CloudHsmResourceNotFoundException'
-        '483':
-          description: CloudHsmInvalidRequestException
-          schema:
-            $ref: '#/definitions/CloudHsmInvalidRequestException'
-        '484':
           description: CloudHsmAccessDeniedException
           schema:
             $ref: '#/definitions/CloudHsmAccessDeniedException'
+        '481':
+          description: CloudHsmInternalFailureException
+          schema:
+            $ref: '#/definitions/CloudHsmInternalFailureException'
+        '482':
+          description: CloudHsmInvalidRequestException
+          schema:
+            $ref: '#/definitions/CloudHsmInvalidRequestException'
+        '483':
+          description: CloudHsmResourceNotFoundException
+          schema:
+            $ref: '#/definitions/CloudHsmResourceNotFoundException'
+        '484':
+          description: CloudHsmServiceException
+          schema:
+            $ref: '#/definitions/CloudHsmServiceException'
+        '485':
+          description: CloudHsmTagException
+          schema:
+            $ref: '#/definitions/CloudHsmTagException'
       parameters:
         - name: body
           in: body
@@ -310,32 +318,32 @@ paths:
   '/#X-Amz-Target=BaldrApiService.DeleteBackup':
     post:
       operationId: DeleteBackup
-      description: 'Deletes a specified AWS CloudHSM backup. A backup can be restored up to 7 days after the DeleteBackup request. For more information on restoring a backup, see <a>RestoreBackup</a> '
+      description: 'Deletes a specified AWS CloudHSM backup. A backup can be restored up to 7 days after the DeleteBackup request is made. For more information on restoring a backup, see <a>RestoreBackup</a>.'
       responses:
         '200':
           description: Success
           schema:
             $ref: '#/definitions/DeleteBackupResponse'
         '480':
-          description: CloudHsmInternalFailureException
-          schema:
-            $ref: '#/definitions/CloudHsmInternalFailureException'
-        '481':
-          description: CloudHsmServiceException
-          schema:
-            $ref: '#/definitions/CloudHsmServiceException'
-        '482':
-          description: CloudHsmResourceNotFoundException
-          schema:
-            $ref: '#/definitions/CloudHsmResourceNotFoundException'
-        '483':
-          description: CloudHsmInvalidRequestException
-          schema:
-            $ref: '#/definitions/CloudHsmInvalidRequestException'
-        '484':
           description: CloudHsmAccessDeniedException
           schema:
             $ref: '#/definitions/CloudHsmAccessDeniedException'
+        '481':
+          description: CloudHsmInternalFailureException
+          schema:
+            $ref: '#/definitions/CloudHsmInternalFailureException'
+        '482':
+          description: CloudHsmInvalidRequestException
+          schema:
+            $ref: '#/definitions/CloudHsmInvalidRequestException'
+        '483':
+          description: CloudHsmResourceNotFoundException
+          schema:
+            $ref: '#/definitions/CloudHsmResourceNotFoundException'
+        '484':
+          description: CloudHsmServiceException
+          schema:
+            $ref: '#/definitions/CloudHsmServiceException'
       parameters:
         - name: body
           in: body
@@ -366,25 +374,29 @@ paths:
           schema:
             $ref: '#/definitions/DeleteClusterResponse'
         '480':
-          description: CloudHsmInternalFailureException
-          schema:
-            $ref: '#/definitions/CloudHsmInternalFailureException'
-        '481':
-          description: CloudHsmServiceException
-          schema:
-            $ref: '#/definitions/CloudHsmServiceException'
-        '482':
-          description: CloudHsmResourceNotFoundException
-          schema:
-            $ref: '#/definitions/CloudHsmResourceNotFoundException'
-        '483':
-          description: CloudHsmInvalidRequestException
-          schema:
-            $ref: '#/definitions/CloudHsmInvalidRequestException'
-        '484':
           description: CloudHsmAccessDeniedException
           schema:
             $ref: '#/definitions/CloudHsmAccessDeniedException'
+        '481':
+          description: CloudHsmInternalFailureException
+          schema:
+            $ref: '#/definitions/CloudHsmInternalFailureException'
+        '482':
+          description: CloudHsmInvalidRequestException
+          schema:
+            $ref: '#/definitions/CloudHsmInvalidRequestException'
+        '483':
+          description: CloudHsmResourceNotFoundException
+          schema:
+            $ref: '#/definitions/CloudHsmResourceNotFoundException'
+        '484':
+          description: CloudHsmServiceException
+          schema:
+            $ref: '#/definitions/CloudHsmServiceException'
+        '485':
+          description: CloudHsmTagException
+          schema:
+            $ref: '#/definitions/CloudHsmTagException'
       parameters:
         - name: body
           in: body
@@ -464,25 +476,29 @@ paths:
           schema:
             $ref: '#/definitions/DescribeBackupsResponse'
         '480':
-          description: CloudHsmInternalFailureException
-          schema:
-            $ref: '#/definitions/CloudHsmInternalFailureException'
-        '481':
-          description: CloudHsmServiceException
-          schema:
-            $ref: '#/definitions/CloudHsmServiceException'
-        '482':
-          description: CloudHsmResourceNotFoundException
-          schema:
-            $ref: '#/definitions/CloudHsmResourceNotFoundException'
-        '483':
-          description: CloudHsmInvalidRequestException
-          schema:
-            $ref: '#/definitions/CloudHsmInvalidRequestException'
-        '484':
           description: CloudHsmAccessDeniedException
           schema:
             $ref: '#/definitions/CloudHsmAccessDeniedException'
+        '481':
+          description: CloudHsmInternalFailureException
+          schema:
+            $ref: '#/definitions/CloudHsmInternalFailureException'
+        '482':
+          description: CloudHsmInvalidRequestException
+          schema:
+            $ref: '#/definitions/CloudHsmInvalidRequestException'
+        '483':
+          description: CloudHsmResourceNotFoundException
+          schema:
+            $ref: '#/definitions/CloudHsmResourceNotFoundException'
+        '484':
+          description: CloudHsmServiceException
+          schema:
+            $ref: '#/definitions/CloudHsmServiceException'
+        '485':
+          description: CloudHsmTagException
+          schema:
+            $ref: '#/definitions/CloudHsmTagException'
       parameters:
         - name: body
           in: body
@@ -523,21 +539,25 @@ paths:
           schema:
             $ref: '#/definitions/DescribeClustersResponse'
         '480':
+          description: CloudHsmAccessDeniedException
+          schema:
+            $ref: '#/definitions/CloudHsmAccessDeniedException'
+        '481':
           description: CloudHsmInternalFailureException
           schema:
             $ref: '#/definitions/CloudHsmInternalFailureException'
-        '481':
-          description: CloudHsmServiceException
-          schema:
-            $ref: '#/definitions/CloudHsmServiceException'
         '482':
           description: CloudHsmInvalidRequestException
           schema:
             $ref: '#/definitions/CloudHsmInvalidRequestException'
         '483':
-          description: CloudHsmAccessDeniedException
+          description: CloudHsmServiceException
           schema:
-            $ref: '#/definitions/CloudHsmAccessDeniedException'
+            $ref: '#/definitions/CloudHsmServiceException'
+        '484':
+          description: CloudHsmTagException
+          schema:
+            $ref: '#/definitions/CloudHsmTagException'
       parameters:
         - name: body
           in: body
@@ -578,25 +598,25 @@ paths:
           schema:
             $ref: '#/definitions/InitializeClusterResponse'
         '480':
-          description: CloudHsmInternalFailureException
-          schema:
-            $ref: '#/definitions/CloudHsmInternalFailureException'
-        '481':
-          description: CloudHsmServiceException
-          schema:
-            $ref: '#/definitions/CloudHsmServiceException'
-        '482':
-          description: CloudHsmResourceNotFoundException
-          schema:
-            $ref: '#/definitions/CloudHsmResourceNotFoundException'
-        '483':
-          description: CloudHsmInvalidRequestException
-          schema:
-            $ref: '#/definitions/CloudHsmInvalidRequestException'
-        '484':
           description: CloudHsmAccessDeniedException
           schema:
             $ref: '#/definitions/CloudHsmAccessDeniedException'
+        '481':
+          description: CloudHsmInternalFailureException
+          schema:
+            $ref: '#/definitions/CloudHsmInternalFailureException'
+        '482':
+          description: CloudHsmInvalidRequestException
+          schema:
+            $ref: '#/definitions/CloudHsmInvalidRequestException'
+        '483':
+          description: CloudHsmResourceNotFoundException
+          schema:
+            $ref: '#/definitions/CloudHsmResourceNotFoundException'
+        '484':
+          description: CloudHsmServiceException
+          schema:
+            $ref: '#/definitions/CloudHsmServiceException'
       parameters:
         - name: body
           in: body
@@ -627,25 +647,29 @@ paths:
           schema:
             $ref: '#/definitions/ListTagsResponse'
         '480':
-          description: CloudHsmInternalFailureException
-          schema:
-            $ref: '#/definitions/CloudHsmInternalFailureException'
-        '481':
-          description: CloudHsmServiceException
-          schema:
-            $ref: '#/definitions/CloudHsmServiceException'
-        '482':
-          description: CloudHsmResourceNotFoundException
-          schema:
-            $ref: '#/definitions/CloudHsmResourceNotFoundException'
-        '483':
-          description: CloudHsmInvalidRequestException
-          schema:
-            $ref: '#/definitions/CloudHsmInvalidRequestException'
-        '484':
           description: CloudHsmAccessDeniedException
           schema:
             $ref: '#/definitions/CloudHsmAccessDeniedException'
+        '481':
+          description: CloudHsmInternalFailureException
+          schema:
+            $ref: '#/definitions/CloudHsmInternalFailureException'
+        '482':
+          description: CloudHsmInvalidRequestException
+          schema:
+            $ref: '#/definitions/CloudHsmInvalidRequestException'
+        '483':
+          description: CloudHsmResourceNotFoundException
+          schema:
+            $ref: '#/definitions/CloudHsmResourceNotFoundException'
+        '484':
+          description: CloudHsmServiceException
+          schema:
+            $ref: '#/definitions/CloudHsmServiceException'
+        '485':
+          description: CloudHsmTagException
+          schema:
+            $ref: '#/definitions/CloudHsmTagException'
       parameters:
         - name: body
           in: body
@@ -679,32 +703,32 @@ paths:
   '/#X-Amz-Target=BaldrApiService.RestoreBackup':
     post:
       operationId: RestoreBackup
-      description: 'Restores a specified AWS CloudHSM backup that is in the <code>PENDING_DELETION</code> state. For more information on deleting a backup, see <a>DeleteBackup</a>.'
+      description: 'Restores a specified AWS CloudHSM backup that is in the <code>PENDING_DELETION</code> state. For mor information on deleting a backup, see <a>DeleteBackup</a>.'
       responses:
         '200':
           description: Success
           schema:
             $ref: '#/definitions/RestoreBackupResponse'
         '480':
-          description: CloudHsmInternalFailureException
-          schema:
-            $ref: '#/definitions/CloudHsmInternalFailureException'
-        '481':
-          description: CloudHsmServiceException
-          schema:
-            $ref: '#/definitions/CloudHsmServiceException'
-        '482':
-          description: CloudHsmResourceNotFoundException
-          schema:
-            $ref: '#/definitions/CloudHsmResourceNotFoundException'
-        '483':
-          description: CloudHsmInvalidRequestException
-          schema:
-            $ref: '#/definitions/CloudHsmInvalidRequestException'
-        '484':
           description: CloudHsmAccessDeniedException
           schema:
             $ref: '#/definitions/CloudHsmAccessDeniedException'
+        '481':
+          description: CloudHsmInternalFailureException
+          schema:
+            $ref: '#/definitions/CloudHsmInternalFailureException'
+        '482':
+          description: CloudHsmInvalidRequestException
+          schema:
+            $ref: '#/definitions/CloudHsmInvalidRequestException'
+        '483':
+          description: CloudHsmResourceNotFoundException
+          schema:
+            $ref: '#/definitions/CloudHsmResourceNotFoundException'
+        '484':
+          description: CloudHsmServiceException
+          schema:
+            $ref: '#/definitions/CloudHsmServiceException'
       parameters:
         - name: body
           in: body
@@ -735,25 +759,29 @@ paths:
           schema:
             $ref: '#/definitions/TagResourceResponse'
         '480':
-          description: CloudHsmInternalFailureException
-          schema:
-            $ref: '#/definitions/CloudHsmInternalFailureException'
-        '481':
-          description: CloudHsmServiceException
-          schema:
-            $ref: '#/definitions/CloudHsmServiceException'
-        '482':
-          description: CloudHsmResourceNotFoundException
-          schema:
-            $ref: '#/definitions/CloudHsmResourceNotFoundException'
-        '483':
-          description: CloudHsmInvalidRequestException
-          schema:
-            $ref: '#/definitions/CloudHsmInvalidRequestException'
-        '484':
           description: CloudHsmAccessDeniedException
           schema:
             $ref: '#/definitions/CloudHsmAccessDeniedException'
+        '481':
+          description: CloudHsmInternalFailureException
+          schema:
+            $ref: '#/definitions/CloudHsmInternalFailureException'
+        '482':
+          description: CloudHsmInvalidRequestException
+          schema:
+            $ref: '#/definitions/CloudHsmInvalidRequestException'
+        '483':
+          description: CloudHsmResourceNotFoundException
+          schema:
+            $ref: '#/definitions/CloudHsmResourceNotFoundException'
+        '484':
+          description: CloudHsmServiceException
+          schema:
+            $ref: '#/definitions/CloudHsmServiceException'
+        '485':
+          description: CloudHsmTagException
+          schema:
+            $ref: '#/definitions/CloudHsmTagException'
       parameters:
         - name: body
           in: body
@@ -784,25 +812,29 @@ paths:
           schema:
             $ref: '#/definitions/UntagResourceResponse'
         '480':
-          description: CloudHsmInternalFailureException
-          schema:
-            $ref: '#/definitions/CloudHsmInternalFailureException'
-        '481':
-          description: CloudHsmServiceException
-          schema:
-            $ref: '#/definitions/CloudHsmServiceException'
-        '482':
-          description: CloudHsmResourceNotFoundException
-          schema:
-            $ref: '#/definitions/CloudHsmResourceNotFoundException'
-        '483':
-          description: CloudHsmInvalidRequestException
-          schema:
-            $ref: '#/definitions/CloudHsmInvalidRequestException'
-        '484':
           description: CloudHsmAccessDeniedException
           schema:
             $ref: '#/definitions/CloudHsmAccessDeniedException'
+        '481':
+          description: CloudHsmInternalFailureException
+          schema:
+            $ref: '#/definitions/CloudHsmInternalFailureException'
+        '482':
+          description: CloudHsmInvalidRequestException
+          schema:
+            $ref: '#/definitions/CloudHsmInvalidRequestException'
+        '483':
+          description: CloudHsmResourceNotFoundException
+          schema:
+            $ref: '#/definitions/CloudHsmResourceNotFoundException'
+        '484':
+          description: CloudHsmServiceException
+          schema:
+            $ref: '#/definitions/CloudHsmServiceException'
+        '485':
+          description: CloudHsmTagException
+          schema:
+            $ref: '#/definitions/CloudHsmTagException'
       parameters:
         - name: body
           in: body
@@ -842,11 +874,14 @@ definitions:
       BackupId:
         $ref: '#/definitions/BackupId'
         description: 'The ID of the backup that will be copied to the destination region. '
-  CloudHsmInternalFailureException: {}
-  CloudHsmServiceException: {}
-  CloudHsmResourceNotFoundException: {}
-  CloudHsmInvalidRequestException: {}
+      TagList:
+        $ref: '#/definitions/TagList'
   CloudHsmAccessDeniedException: {}
+  CloudHsmInternalFailureException: {}
+  CloudHsmInvalidRequestException: {}
+  CloudHsmResourceNotFoundException: {}
+  CloudHsmServiceException: {}
+  CloudHsmTagException: {}
   CreateClusterResponse:
     type: object
     properties:
@@ -868,6 +903,8 @@ definitions:
       SourceBackupId:
         $ref: '#/definitions/BackupId'
         description: 'The identifier (ID) of the cluster backup to restore. Use this value to restore the cluster from a backup instead of creating a new cluster. To find the backup ID, use <a>DescribeBackups</a>.'
+      TagList:
+        $ref: '#/definitions/TagList'
   CreateHsmResponse:
     type: object
     properties:
@@ -963,6 +1000,7 @@ definitions:
         description: <p>One or more filters to limit the items returned in the response.</p> <p>Use the <code>backupIds</code> filter to return only the specified backups. Specify backups by their backup identifier (ID).</p> <p>Use the <code>sourceBackupIds</code> filter to return only the backups created from a source backup. The <code>sourceBackupID</code> of a source backup is returned by the <a>CopyBackupToRegion</a> operation.</p> <p>Use the <code>clusterIds</code> filter to return only the backups for the specified clusters. Specify clusters by their cluster identifier (ID).</p> <p>Use the <code>states</code> filter to return only backups that match the specified state.</p>
       SortAscending:
         $ref: '#/definitions/Boolean'
+        description: Designates whether or not to sort the return backups by ascending chronological order of generation.
   DescribeClustersResponse:
     type: object
     properties:
@@ -1008,7 +1046,7 @@ definitions:
         description: The cluster certificate issued (signed) by your issuing certificate authority (CA). The certificate must be in PEM format and can contain a maximum of 5000 characters.
       TrustAnchor:
         $ref: '#/definitions/Cert'
-        description: The issuing certificate of the issuing certificate authority (CA) that issued (signed) the cluster certificate. This can be a root (self-signed) certificate or a certificate chain that begins with the certificate that issued the cluster certificate and ends with a root certificate. The certificate or certificate chain must be in PEM format and can contain a maximum of 5000 characters.
+        description: 'The issuing certificate of the issuing certificate authority (CA) that issued (signed) the cluster certificate. You must use a self-signed certificate. The certificate used to sign the HSM CSR must be directly available, and thus must be the root certificate. The certificate must be in PEM format and can contain a maximum of 5000 characters.'
   ListTagsResponse:
     type: object
     required:
@@ -1026,7 +1064,7 @@ definitions:
       - ResourceId
     properties:
       ResourceId:
-        $ref: '#/definitions/ClusterId'
+        $ref: '#/definitions/ResourceId'
         description: 'The cluster identifier (ID) for the cluster whose tags you are getting. To find the cluster ID, use <a>DescribeClusters</a>.'
       NextToken:
         $ref: '#/definitions/NextToken'
@@ -1058,7 +1096,7 @@ definitions:
       - TagList
     properties:
       ResourceId:
-        $ref: '#/definitions/ClusterId'
+        $ref: '#/definitions/ResourceId'
         description: 'The cluster identifier (ID) for the cluster that you are tagging. To find the cluster ID, use <a>DescribeClusters</a>.'
       TagList:
         $ref: '#/definitions/TagList'
@@ -1073,7 +1111,7 @@ definitions:
       - TagKeyList
     properties:
       ResourceId:
-        $ref: '#/definitions/ClusterId'
+        $ref: '#/definitions/ResourceId'
         description: 'The cluster identifier (ID) for the cluster whose tags you are removing. To find the cluster ID, use <a>DescribeClusters</a>.'
       TagKeyList:
         $ref: '#/definitions/TagKeyList'
@@ -1097,6 +1135,12 @@ definitions:
   Region:
     type: string
     pattern: '[a-z]{2}(-(gov))?-(east|west|north|south|central){1,2}-\d'
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    minItems: 1
+    maxItems: 50
   Backup:
     type: object
     required:
@@ -1116,16 +1160,22 @@ definitions:
         description: The date and time when the backup was created.
       CopyTimestamp:
         $ref: '#/definitions/Timestamp'
+        description: The date and time when the backup was copied from a source backup.
       SourceRegion:
         $ref: '#/definitions/Region'
+        description: The AWS region that contains the source backup from which the new backup was copied.
       SourceBackup:
         $ref: '#/definitions/BackupId'
+        description: The identifier (ID) of the source backup from which the new backup was copied.
       SourceCluster:
         $ref: '#/definitions/ClusterId'
+        description: The identifier (ID) of the cluster containing the source backup from which the new backup was copied. .
       DeleteTimestamp:
         $ref: '#/definitions/Timestamp'
         description: The date and time when the backup will be permanently deleted.
-    description: Contains information about a backup of an AWS CloudHSM cluster.
+      TagList:
+        $ref: '#/definitions/TagList'
+    description: 'Contains information about a backup of an AWS CloudHSM cluster. All backup objects contain the BackupId, BackupState, ClusterId, and CreateTimestamp parameters. Backups that were copied into a destination region additionally contain the CopyTimestamp, SourceBackup, SourceCluster, and SourceRegion paramters. A backup that is pending deletion will include the DeleteTimestamp parameter.'
   BackupPolicy:
     type: string
     enum:
@@ -1172,7 +1222,7 @@ definitions:
     maxLength: 32
   SecurityGroup:
     type: string
-    pattern: 'sg-[0-9a-fA-F]'
+    pattern: 'sg-[0-9a-fA-F]{8,17}'
   ClusterState:
     type: string
     enum:
@@ -1231,13 +1281,15 @@ definitions:
         description: A description of the cluster's state.
       SubnetMapping:
         $ref: '#/definitions/ExternalSubnetMapping'
-        description: A map of the cluster's subnets and their corresponding Availability Zones.
+        description: A map from availability zone to the cluster’s subnet in that availability zone.
       VpcId:
         $ref: '#/definitions/VpcId'
         description: The identifier (ID) of the virtual private cloud (VPC) that contains the cluster.
       Certificates:
         $ref: '#/definitions/Certificates'
         description: Contains one or more certificates or a certificate signing request (CSR).
+      TagList:
+        $ref: '#/definitions/TagList'
     description: Contains information about an AWS CloudHSM cluster.
   Clusters:
     type: array
@@ -1248,12 +1300,17 @@ definitions:
     properties:
       CreateTimestamp:
         $ref: '#/definitions/Timestamp'
+        description: The date and time when both the source backup was created.
       SourceRegion:
         $ref: '#/definitions/Region'
+        description: The AWS region that contains the source backup from which the new backup was copied.
       SourceBackup:
         $ref: '#/definitions/BackupId'
+        description: The identifier (ID) of the source backup from which the new backup was copied.
       SourceCluster:
         $ref: '#/definitions/ClusterId'
+        description: The identifier (ID) of the cluster containing the source backup from which the new backup was copied.
+    description: Contains information about the backup that will be copied and created by the <a>CopyBackupToRegion</a> operation.
   SubnetIds:
     type: array
     items:
@@ -1334,12 +1391,9 @@ definitions:
       - DELETED
   String:
     type: string
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-    minItems: 1
-    maxItems: 50
+  ResourceId:
+    type: string
+    pattern: '(?:cluster|backup)-[2-7a-zA-Z]{11,16}'
   TagKey:
     type: string
     pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'

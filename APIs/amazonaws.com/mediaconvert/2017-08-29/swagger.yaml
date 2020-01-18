@@ -1970,6 +1970,9 @@ definitions:
   ContainerSettings:
     type: object
     properties:
+      CmfcSettings:
+        $ref: '#/definitions/CmfcSettings'
+        description: Settings for MP4 segments in CMAF
       Container:
         $ref: '#/definitions/ContainerType'
         description: 'Container for this output. Some containers require a container settings object. If not specified, the default object will be created.'
@@ -2003,7 +2006,7 @@ definitions:
         description: 'The anti-alias filter is automatically applied to all outputs. The service no longer accepts the value DISABLED for AntiAlias. If you specify that in your job, the service will ignore the setting.'
       CodecSettings:
         $ref: '#/definitions/VideoCodecSettings'
-        description: 'Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * FRAME_CAPTURE, FrameCaptureSettings'
+        description: 'Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * FRAME_CAPTURE, FrameCaptureSettings * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings'
       ColorMetadata:
         $ref: '#/definitions/ColorMetadata'
         description: 'Choose Insert (INSERT) for this setting to include color metadata in this output. Choose Ignore (IGNORE) to exclude color metadata from this output. If you don''t specify a value, the service sets this to Insert by default.'
@@ -2390,7 +2393,7 @@ definitions:
     enum:
       - DISCARD
       - REMAP_TO_LUMA
-    description: Ignore this setting unless this input is a QuickTime animation. Specify which part of this input MediaConvert uses for your outputs. Leave this setting set to DISCARD in order to delete the alpha channel and preserve the video. Use REMAP_TO_LUMA for this setting to delete the video and map the alpha channel to the luma channel of your outputs.
+    description: 'Ignore this setting unless this input is a QuickTime animation with an alpha channel. Use this setting to create separate Key and Fill outputs. In each output, specify which part of the input MediaConvert uses. Leave this setting at the default value DISCARD to delete the alpha channel and preserve the video. Set it to REMAP_TO_LUMA to delete the video and map the alpha channel to the luma channel of your outputs.'
   AncillaryConvert608To708:
     type: string
     enum:
@@ -2439,6 +2442,7 @@ definitions:
     enum:
       - AAC
       - MP2
+      - MP3
       - WAV
       - AIFF
       - AC3
@@ -2581,6 +2585,25 @@ definitions:
         $ref: '#/definitions/__integerMin32000Max48000'
         description: Sample rate in hz.
     description: Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value MP2.
+  Mp3Settings:
+    type: object
+    properties:
+      Bitrate:
+        $ref: '#/definitions/__integerMin16000Max320000'
+        description: Specify the average bitrate in bits per second.
+      Channels:
+        $ref: '#/definitions/__integerMin1Max2'
+        description: 'Specify the number of channels in this output audio track. Choosing Mono on the console gives you 1 output channel; choosing Stereo gives you 2. In the API, valid values are 1 and 2.'
+      RateControlMode:
+        $ref: '#/definitions/Mp3RateControlMode'
+        description: Specify whether the service encodes this MP3 audio output with a constant bitrate (CBR) or a variable bitrate (VBR).
+      SampleRate:
+        $ref: '#/definitions/__integerMin22050Max48000'
+        description: Sample rate in hz.
+      VbrQuality:
+        $ref: '#/definitions/__integerMin0Max9'
+        description: Required when you set Bitrate control mode (rateControlMode) to VBR. Specify the audio quality of this MP3 output from 0 (highest quality) to 9 (lowest quality).
+    description: 'Required when you set Codec, under AudioDescriptions>CodecSettings, to the value MP3.'
   WavSettings:
     type: object
     properties:
@@ -2621,10 +2644,13 @@ definitions:
       Mp2Settings:
         $ref: '#/definitions/Mp2Settings'
         description: Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value MP2.
+      Mp3Settings:
+        $ref: '#/definitions/Mp3Settings'
+        description: 'Required when you set Codec, under AudioDescriptions>CodecSettings, to the value MP3.'
       WavSettings:
         $ref: '#/definitions/WavSettings'
         description: Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value WAV.
-    description: 'Audio codec settings (CodecSettings) under (AudioDescriptions) contains the group of settings related to audio encoding. The settings in this group vary depending on the value that you choose for Audio codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AAC, AacSettings * MP2, Mp2Settings * WAV, WavSettings * AIFF, AiffSettings * AC3, Ac3Settings * EAC3, Eac3Settings * EAC3_ATMOS, Eac3AtmosSettings'
+    description: 'Audio codec settings (CodecSettings) under (AudioDescriptions) contains the group of settings related to audio encoding. The settings in this group vary depending on the value that you choose for Audio codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AAC, AacSettings * MP2, Mp2Settings * MP3, Mp3Settings * WAV, WavSettings * AIFF, AiffSettings * AC3, Ac3Settings * EAC3, Eac3Settings * EAC3_ATMOS, Eac3AtmosSettings'
   AudioDefaultSelection:
     type: string
     enum:
@@ -2900,7 +2926,7 @@ definitions:
         description: 'When set to FOLLOW_INPUT, if the input contains an ISO 639 audio_type, then that value is passed through to the output. If the input contains no ISO 639 audio_type, the value in Audio Type is included in the output. Otherwise the value in Audio Type is included in the output. Note that this field and audioType are both ignored if audioDescriptionBroadcasterMix is set to BROADCASTER_MIXED_AD.'
       CodecSettings:
         $ref: '#/definitions/AudioCodecSettings'
-        description: 'Audio codec settings (CodecSettings) under (AudioDescriptions) contains the group of settings related to audio encoding. The settings in this group vary depending on the value that you choose for Audio codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AAC, AacSettings * MP2, Mp2Settings * WAV, WavSettings * AIFF, AiffSettings * AC3, Ac3Settings * EAC3, Eac3Settings * EAC3_ATMOS, Eac3AtmosSettings'
+        description: 'Audio codec settings (CodecSettings) under (AudioDescriptions) contains the group of settings related to audio encoding. The settings in this group vary depending on the value that you choose for Audio codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AAC, AacSettings * MP2, Mp2Settings * MP3, Mp3Settings * WAV, WavSettings * AIFF, AiffSettings * AC3, Ac3Settings * EAC3, Eac3Settings * EAC3_ATMOS, Eac3AtmosSettings'
       CustomLanguageCode:
         $ref: '#/definitions/__stringPatternAZaZ23AZaZ'
         description: 'Specify the language for this audio output track. The service puts this language code into your output audio track when you set Language code control (AudioLanguageCodeControl) to Use configured (USE_CONFIGURED). The service also uses your specified custom language code when you set Language code control (AudioLanguageCodeControl) to Follow input (FOLLOW_INPUT), but your input file doesn''t specify a language code. For all outputs, you can use an ISO 639-2 or ISO 639-3 code. For streaming outputs, you can also use any other code in the full RFC-5646 specification. Streaming outputs are those that are in one of the following output groups: CMAF, DASH ISO, Apple HLS, or Microsoft Smooth Streaming.'
@@ -3642,6 +3668,12 @@ definitions:
       - DISABLED
       - ENABLED
     description: 'When set to ENABLED, an Apple HLS manifest will be generated for this output.'
+  CmafWriteSegmentTimelineInRepresentation:
+    type: string
+    enum:
+      - ENABLED
+      - DISABLED
+    description: 'When you enable Precise segment duration in DASH manifests (writeSegmentTimelineInRepresentation), your DASH manifest shows precise segment durations. The segment duration information appears inside the SegmentTimeline element, inside SegmentTemplate at the Representation level. When this feature isn''t enabled, the segment durations in your DASH manifest are approximate. The segment duration information appears in the duration attribute of the SegmentTemplate element.'
   CmafGroupSettings:
     type: object
     properties:
@@ -3699,7 +3731,32 @@ definitions:
       WriteHlsManifest:
         $ref: '#/definitions/CmafWriteHLSManifest'
         description: 'When set to ENABLED, an Apple HLS manifest will be generated for this output.'
+      WriteSegmentTimelineInRepresentation:
+        $ref: '#/definitions/CmafWriteSegmentTimelineInRepresentation'
+        description: 'When you enable Precise segment duration in DASH manifests (writeSegmentTimelineInRepresentation), your DASH manifest shows precise segment durations. The segment duration information appears inside the SegmentTimeline element, inside SegmentTemplate at the Representation level. When this feature isn''t enabled, the segment durations in your DASH manifest are approximate. The segment duration information appears in the duration attribute of the SegmentTemplate element.'
     description: 'Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to CMAF_GROUP_SETTINGS. Each output in a CMAF Output Group may only contain a single video, audio, or caption output.'
+  CmfcScte35Esam:
+    type: string
+    enum:
+      - INSERT
+      - NONE
+    description: Use this setting only when you specify SCTE-35 markers from ESAM. Choose INSERT to put SCTE-35 markers in this output at the insertion points that you specify in an ESAM XML document. Provide the document in the setting SCC XML (sccXml).
+  CmfcScte35Source:
+    type: string
+    enum:
+      - PASSTHROUGH
+      - NONE
+    description: Ignore this setting unless you have SCTE-35 markers in your input video file. Choose Passthrough (PASSTHROUGH) if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None (NONE) if you don't want those SCTE-35 markers in this output.
+  CmfcSettings:
+    type: object
+    properties:
+      Scte35Esam:
+        $ref: '#/definitions/CmfcScte35Esam'
+        description: Use this setting only when you specify SCTE-35 markers from ESAM. Choose INSERT to put SCTE-35 markers in this output at the insertion points that you specify in an ESAM XML document. Provide the document in the setting SCC XML (sccXml).
+      Scte35Source:
+        $ref: '#/definitions/CmfcScte35Source'
+        description: Ignore this setting unless you have SCTE-35 markers in your input video file. Choose Passthrough (PASSTHROUGH) if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None (NONE) if you don't want those SCTE-35 markers in this output.
+    description: Settings for MP4 segments in CMAF
   __integerMin1Max100:
     type: integer
     minimum: 1
@@ -4010,6 +4067,9 @@ definitions:
       CslgAtom:
         $ref: '#/definitions/Mp4CslgAtom'
         description: 'When enabled, file composition times will start at zero, composition times in the ''ctts'' (composition time to sample) box for B-frames will be negative, and a ''cslg'' (composition shift least greatest) box will be included per 14496-1 amendment 1. This improves compatibility with Apple players and tools.'
+      CttsVersion:
+        $ref: '#/definitions/__integerMin0Max1'
+        description: 'Ignore this setting unless compliance to the CTTS box version specification matters in your workflow. Specify a value of 1 to set your CTTS box version to 1 and make your output compliant with the specification. When you specify a value of 1, you must also set CSLG atom (cslgAtom) to the value INCLUDE. Keep the default value 0 to set your CTTS box version to 0. This can provide backward compatibility for some players and packagers.'
       FreeSpaceBox:
         $ref: '#/definitions/Mp4FreeSpaceBox'
         description: Inserts a free-space box immediately after the moov box.
@@ -6198,7 +6258,7 @@ definitions:
     properties:
       AlphaBehavior:
         $ref: '#/definitions/AlphaBehavior'
-        description: Ignore this setting unless this input is a QuickTime animation. Specify which part of this input MediaConvert uses for your outputs. Leave this setting set to DISCARD in order to delete the alpha channel and preserve the video. Use REMAP_TO_LUMA for this setting to delete the video and map the alpha channel to the luma channel of your outputs.
+        description: 'Ignore this setting unless this input is a QuickTime animation with an alpha channel. Use this setting to create separate Key and Fill outputs. In each output, specify which part of the input MediaConvert uses. Leave this setting at the default value DISCARD to delete the alpha channel and preserve the video. Set it to REMAP_TO_LUMA to delete the video and map the alpha channel to the luma channel of your outputs.'
       ColorSpace:
         $ref: '#/definitions/ColorSpace'
         description: 'If your input video has accurate color space metadata, or if you don''t know about color space, leave this set to the default value Follow (FOLLOW). The service will automatically detect your input color space. If your input video has metadata indicating the wrong color space, specify the accurate color space here. If your input video is HDR 10 and the SMPTE ST 2086 Mastering Display Color Volume static metadata isn''t present in your video stream, or if that metadata is present but not accurate, choose Force HDR 10 (FORCE_HDR10) here and specify correct values in the input HDR 10 metadata (Hdr10Metadata) settings. For more information about MediaConvert HDR jobs, see https://docs.aws.amazon.com/console/mediaconvert/hdr.'
@@ -6753,6 +6813,24 @@ definitions:
     type: integer
     minimum: 32000
     maximum: 48000
+  Mp3RateControlMode:
+    type: string
+    enum:
+      - CBR
+      - VBR
+    description: Specify whether the service encodes this MP3 audio output with a constant bitrate (CBR) or a variable bitrate (VBR).
+  __integerMin16000Max320000:
+    type: integer
+    minimum: 16000
+    maximum: 320000
+  __integerMin22050Max48000:
+    type: integer
+    minimum: 22050
+    maximum: 48000
+  __integerMin0Max9:
+    type: integer
+    minimum: 0
+    maximum: 9
   Mp4CslgAtom:
     type: string
     enum:
@@ -6771,6 +6849,10 @@ definitions:
       - PROGRESSIVE_DOWNLOAD
       - NORMAL
     description: 'If set to PROGRESSIVE_DOWNLOAD, the MOOV atom is relocated to the beginning of the archive as required for progressive downloading. Otherwise it is placed normally at the end.'
+  __integerMin0Max1:
+    type: integer
+    minimum: 0
+    maximum: 1
   MpdCaptionContainerType:
     type: string
     enum:
@@ -7681,7 +7763,7 @@ definitions:
       ProresSettings:
         $ref: '#/definitions/ProresSettings'
         description: Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the value PRORES.
-    description: 'Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * FRAME_CAPTURE, FrameCaptureSettings'
+    description: 'Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * FRAME_CAPTURE, FrameCaptureSettings * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings'
   __integerMin0Max15:
     type: integer
     minimum: 0
