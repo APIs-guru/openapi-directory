@@ -5720,6 +5720,9 @@ definitions:
     enum:
       - ONLINE
       - OFFLINE
+  ConnectionStatusUpdatedTime:
+    type: string
+    format: date-time
   ContactName:
     type: string
     pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
@@ -6096,6 +6099,9 @@ definitions:
       ConnectionStatus:
         $ref: '#/definitions/ConnectionStatus'
         description: 'The latest available information about the connection status of a device. '
+      ConnectionStatusUpdatedTime:
+        $ref: '#/definitions/ConnectionStatusUpdatedTime'
+        description: The time (in epoch) when the device connection status changed.
     description: Detailed information about a device's status.
   DeviceNetworkProfileInfo:
     type: object
@@ -6144,6 +6150,9 @@ definitions:
         $ref: '#/definitions/DeviceNetworkProfileInfo'
         description: Detailed information about a device's network profile.
     description: A device with attributes.
+  DeviceDataCreatedTime:
+    type: string
+    format: date-time
   DeviceData:
     type: object
     properties:
@@ -6183,6 +6192,9 @@ definitions:
       DeviceStatusInfo:
         $ref: '#/definitions/DeviceStatusInfo'
         description: Detailed information about a device's status.
+      CreatedTime:
+        $ref: '#/definitions/DeviceDataCreatedTime'
+        description: The time (in epoch) when the device data was created.
     description: Device attributes.
   DeviceDataList:
     type: array

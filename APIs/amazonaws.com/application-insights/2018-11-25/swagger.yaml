@@ -856,6 +856,57 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=EC2WindowsBarleyService.ListConfigurationHistory':
+    post:
+      operationId: ListConfigurationHistory
+      description: '<p> Lists the INFO, WARN, and ERROR events for periodic configuration updates performed by Application Insights. Examples of events represented are: </p> <ul> <li> <p>INFO: creating a new alarm or updating an alarm threshold.</p> </li> <li> <p>WARN: alarm not created due to insufficient data points used to predict thresholds.</p> </li> <li> <p>ERROR: alarm not created due to permission errors or exceeding quotas. </p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListConfigurationHistoryResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListConfigurationHistoryRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - EC2WindowsBarleyService.ListConfigurationHistory
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=EC2WindowsBarleyService.ListLogPatternSets':
     post:
       operationId: ListLogPatternSets
@@ -1611,6 +1662,36 @@ definitions:
       NextToken:
         $ref: '#/definitions/PaginationToken'
         description: The token to request the next page of results.
+  ListConfigurationHistoryResponse:
+    type: object
+    properties:
+      EventList:
+        $ref: '#/definitions/ConfigurationEventList'
+        description: ' The list of configuration events and their corresponding details. '
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'The <code>NextToken</code> value to include in a future <code>ListConfigurationHistory</code> request. When the results of a <code>ListConfigurationHistory</code> request exceed <code>MaxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
+  ListConfigurationHistoryRequest:
+    type: object
+    properties:
+      ResourceGroupName:
+        $ref: '#/definitions/ResourceGroupName'
+        description: 'Resource group to which the application belongs. '
+      StartTime:
+        $ref: '#/definitions/StartTime'
+        description: 'The start time of the event. '
+      EndTime:
+        $ref: '#/definitions/EndTime'
+        description: The end time of the event.
+      EventStatus:
+        $ref: '#/definitions/ConfigurationEventStatus'
+        description: 'The status of the configuration update event. Possible values include INFO, WARN, and ERROR.'
+      MaxResults:
+        $ref: '#/definitions/MaxEntities'
+        description: ' The maximum number of results returned by <code>ListConfigurationHistory</code> in paginated output. When this parameter is used, <code>ListConfigurationHistory</code> returns only <code>MaxResults</code> in a single page along with a <code>NextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListConfigurationHistory</code> request with the returned <code>NextToken</code> value. If this parameter is not used, then <code>ListConfigurationHistory</code> returns all results. '
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: The <code>NextToken</code> value returned from a previous paginated <code>ListConfigurationHistory</code> request where <code>MaxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>NextToken</code> value. This value is <code>null</code> when there are no more results to return.
   ListLogPatternSetsResponse:
     type: object
     properties:
@@ -1911,7 +1992,7 @@ definitions:
         description: ' Indicates whether Application Insights will create opsItems for any problem detected by Application Insights for an application. '
       Remarks:
         $ref: '#/definitions/Remarks'
-        description: The issues on the user side that block Application Insights from successfully monitoring an application.
+        description: '<p>The issues on the user side that block Application Insights from successfully monitoring an application. Example remarks include:</p> <ul> <li> <p>“Configuring application, detected 1 Errors, 3 Warnings”</p> </li> <li> <p>“Configuring application, detected 1 Unconfigured Components”</p> </li> </ul>'
     description: Describes the status of the application.
   ApplicationInfoList:
     type: array
@@ -1921,6 +2002,53 @@ definitions:
     type: string
     minLength: 1
     maxLength: 10000
+  ConfigurationEventMonitoredResourceARN:
+    type: string
+  ConfigurationEventStatus:
+    type: string
+    enum:
+      - INFO
+      - WARN
+      - ERROR
+  ConfigurationEventResourceType:
+    type: string
+    enum:
+      - CLOUDWATCH_ALARM
+      - CLOUDFORMATION
+      - SSM_ASSOCIATION
+  ConfigurationEventTime:
+    type: string
+    format: date-time
+  ConfigurationEventDetail:
+    type: string
+  ConfigurationEventResourceName:
+    type: string
+  ConfigurationEvent:
+    type: object
+    properties:
+      MonitoredResourceARN:
+        $ref: '#/definitions/ConfigurationEventMonitoredResourceARN'
+        description: ' The resource monitored by Application Insights. '
+      EventStatus:
+        $ref: '#/definitions/ConfigurationEventStatus'
+        description: ' The status of the configuration update event. Possible values include INFO, WARN, and ERROR. '
+      EventResourceType:
+        $ref: '#/definitions/ConfigurationEventResourceType'
+        description: ' The resource type that Application Insights attempted to configure, for example, CLOUDWATCH_ALARM. '
+      EventTime:
+        $ref: '#/definitions/ConfigurationEventTime'
+        description: ' The timestamp of the event. '
+      EventDetail:
+        $ref: '#/definitions/ConfigurationEventDetail'
+        description: ' The details of the event in plain text. '
+      EventResourceName:
+        $ref: '#/definitions/ConfigurationEventResourceName'
+        description: ' The name of the resource Application Insights attempted to configure. '
+    description: ' The event information. '
+  ConfigurationEventList:
+    type: array
+    items:
+      $ref: '#/definitions/ConfigurationEvent'
   TagList:
     type: array
     items:
@@ -2086,6 +2214,9 @@ definitions:
     maximum: 40
   PaginationToken:
     type: string
+  StartTime:
+    type: string
+    format: date-time
   LogPatternSetList:
     type: array
     items:
@@ -2094,9 +2225,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/LogPattern'
-  StartTime:
-    type: string
-    format: date-time
   ProblemList:
     type: array
     items:

@@ -565,7 +565,7 @@ paths:
     get:
       x-aws-operation-name: AdvertiseByoipCidr
       operationId: GET AdvertiseByoipCidr
-      description: '<p>Advertises an IPv4 address range that is provisioned for use with your AWS resources through bring your own IP addresses (BYOIP).</p> <p>You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time.</p> <p>We recommend that you stop advertising the BYOIP CIDR from other locations when you advertise it from AWS. To minimize down time, you can configure your AWS resources to use an address from a BYOIP CIDR before it is advertised, and then simultaneously stop advertising it from the current location and start advertising it through AWS.</p> <p>It can take a few minutes before traffic to the specified addresses starts routing to AWS because of BGP propagation delays.</p> <p>To stop advertising the BYOIP CIDR, use <a>WithdrawByoipCidr</a>.</p>'
+      description: '<p>Advertises an IPv4 or IPv6 address range that is provisioned for use with your AWS resources through bring your own IP addresses (BYOIP).</p> <p>You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time.</p> <p>We recommend that you stop advertising the BYOIP CIDR from other locations when you advertise it from AWS. To minimize down time, you can configure your AWS resources to use an address from a BYOIP CIDR before it is advertised, and then simultaneously stop advertising it from the current location and start advertising it through AWS.</p> <p>It can take a few minutes before traffic to the specified addresses starts routing to AWS because of BGP propagation delays.</p> <p>To stop advertising the BYOIP CIDR, use <a>WithdrawByoipCidr</a>.</p>'
       responses:
         '200':
           description: Success
@@ -575,7 +575,7 @@ paths:
         - name: Cidr
           in: query
           required: true
-          description: 'The IPv4 address range, in CIDR notation. This must be the exact range that you provisioned. You can''t advertise only a portion of the provisioned range.'
+          description: 'The address range, in CIDR notation. This must be the exact range that you provisioned. You can''t advertise only a portion of the provisioned range.'
           type: string
         - name: DryRun
           in: query
@@ -605,7 +605,7 @@ paths:
     post:
       x-aws-operation-name: AdvertiseByoipCidr
       operationId: POST AdvertiseByoipCidr
-      description: '<p>Advertises an IPv4 address range that is provisioned for use with your AWS resources through bring your own IP addresses (BYOIP).</p> <p>You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time.</p> <p>We recommend that you stop advertising the BYOIP CIDR from other locations when you advertise it from AWS. To minimize down time, you can configure your AWS resources to use an address from a BYOIP CIDR before it is advertised, and then simultaneously stop advertising it from the current location and start advertising it through AWS.</p> <p>It can take a few minutes before traffic to the specified addresses starts routing to AWS because of BGP propagation delays.</p> <p>To stop advertising the BYOIP CIDR, use <a>WithdrawByoipCidr</a>.</p>'
+      description: '<p>Advertises an IPv4 or IPv6 address range that is provisioned for use with your AWS resources through bring your own IP addresses (BYOIP).</p> <p>You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time.</p> <p>We recommend that you stop advertising the BYOIP CIDR from other locations when you advertise it from AWS. To minimize down time, you can configure your AWS resources to use an address from a BYOIP CIDR before it is advertised, and then simultaneously stop advertising it from the current location and start advertising it through AWS.</p> <p>It can take a few minutes before traffic to the specified addresses starts routing to AWS because of BGP propagation delays.</p> <p>To stop advertising the BYOIP CIDR, use <a>WithdrawByoipCidr</a>.</p>'
       responses:
         '200':
           description: Success
@@ -615,7 +615,7 @@ paths:
         - name: Cidr
           in: formData
           required: true
-          description: 'The IPv4 address range, in CIDR notation. This must be the exact range that you provisioned. You can''t advertise only a portion of the provisioned range.'
+          description: 'The address range, in CIDR notation. This must be the exact range that you provisioned. You can''t advertise only a portion of the provisioned range.'
           type: string
         - name: DryRun
           in: formData
@@ -1915,7 +1915,7 @@ paths:
     get:
       x-aws-operation-name: AssociateVpcCidrBlock
       operationId: GET AssociateVpcCidrBlock
-      description: '<p>Associates a CIDR block with your VPC. You can associate a secondary IPv4 CIDR block, or you can associate an Amazon-provided IPv6 CIDR block. The IPv6 CIDR block size is fixed at /56.</p> <p>For more information about associating CIDR blocks with your VPC and applicable restrictions, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#VPC_Sizing">VPC and Subnet Sizing</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
+      description: '<p>Associates a CIDR block with your VPC. You can associate a secondary IPv4 CIDR block, an Amazon-provided IPv6 CIDR block, or an IPv6 CIDR block from an IPv6 address pool that you provisioned through bring your own IP addresses (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html">BYOIP</a>). The IPv6 CIDR block size is fixed at /56.</p> <p>For more information about associating CIDR blocks with your VPC and applicable restrictions, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#VPC_Sizing">VPC and Subnet Sizing</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1936,6 +1936,16 @@ paths:
           in: query
           required: true
           description: The ID of the VPC.
+          type: string
+        - name: Ipv6Pool
+          in: query
+          required: false
+          description: The ID of an IPv6 address pool from which to allocate the IPv6 CIDR block.
+          type: string
+        - name: Ipv6CidrBlock
+          in: query
+          required: false
+          description: '<p>An IPv6 CIDR block from the IPv6 address pool. You must also specify <code>Ipv6Pool</code> in the request.</p> <p>To let Amazon choose the IPv6 CIDR block for you, omit this parameter.</p>'
           type: string
         - name: Ipv6CidrBlockNetworkBorderGroup
           in: query
@@ -1965,7 +1975,7 @@ paths:
     post:
       x-aws-operation-name: AssociateVpcCidrBlock
       operationId: POST AssociateVpcCidrBlock
-      description: '<p>Associates a CIDR block with your VPC. You can associate a secondary IPv4 CIDR block, or you can associate an Amazon-provided IPv6 CIDR block. The IPv6 CIDR block size is fixed at /56.</p> <p>For more information about associating CIDR blocks with your VPC and applicable restrictions, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#VPC_Sizing">VPC and Subnet Sizing</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
+      description: '<p>Associates a CIDR block with your VPC. You can associate a secondary IPv4 CIDR block, an Amazon-provided IPv6 CIDR block, or an IPv6 CIDR block from an IPv6 address pool that you provisioned through bring your own IP addresses (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html">BYOIP</a>). The IPv6 CIDR block size is fixed at /56.</p> <p>For more information about associating CIDR blocks with your VPC and applicable restrictions, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#VPC_Sizing">VPC and Subnet Sizing</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1986,6 +1996,16 @@ paths:
           in: formData
           required: true
           description: The ID of the VPC.
+          type: string
+        - name: Ipv6Pool
+          in: formData
+          required: false
+          description: The ID of an IPv6 address pool from which to allocate the IPv6 CIDR block.
+          type: string
+        - name: Ipv6CidrBlock
+          in: formData
+          required: false
+          description: '<p>An IPv6 CIDR block from the IPv6 address pool. You must also specify <code>Ipv6Pool</code> in the request.</p> <p>To let Amazon choose the IPv6 CIDR block for you, omit this parameter.</p>'
           type: string
         - name: Ipv6CidrBlockNetworkBorderGroup
           in: formData
@@ -10338,7 +10358,7 @@ paths:
     get:
       x-aws-operation-name: CreateVpc
       operationId: GET CreateVpc
-      description: '<p>Creates a VPC with the specified IPv4 CIDR block. The smallest VPC you can create uses a /28 netmask (16 IPv4 addresses), and the largest uses a /16 netmask (65,536 IPv4 addresses). For more information about how large to make your VPC, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html">Your VPC and Subnets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>You can optionally request an Amazon-provided IPv6 CIDR block for the VPC. The IPv6 CIDR block uses a /56 prefix length, and is allocated from Amazon''s pool of IPv6 addresses. You cannot choose the IPv6 range for your VPC.</p> <p>By default, each instance you launch in the VPC has the default DHCP options, which include only a default DNS server that we provide (AmazonProvidedDNS). For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html">DHCP Options Sets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>You can specify the instance tenancy value for the VPC when you create it. You can''t change this value for the VPC after you create it. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html">Dedicated Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
+      description: '<p>Creates a VPC with the specified IPv4 CIDR block. The smallest VPC you can create uses a /28 netmask (16 IPv4 addresses), and the largest uses a /16 netmask (65,536 IPv4 addresses). For more information about how large to make your VPC, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html">Your VPC and Subnets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>You can optionally request an IPv6 CIDR block for the VPC. You can request an Amazon-provided IPv6 CIDR block from Amazon''s pool of IPv6 addresses, or an IPv6 CIDR block from an IPv6 address pool that you provisioned through bring your own IP addresses (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html">BYOIP</a>).</p> <p>By default, each instance you launch in the VPC has the default DHCP options, which include only a default DNS server that we provide (AmazonProvidedDNS). For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html">DHCP Options Sets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>You can specify the instance tenancy value for the VPC when you create it. You can''t change this value for the VPC after you create it. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html">Dedicated Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -10355,6 +10375,16 @@ paths:
           required: false
           description: 'Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IP addresses, or the size of the CIDR block.'
           type: boolean
+        - name: Ipv6Pool
+          in: query
+          required: false
+          description: The ID of an IPv6 address pool from which to allocate the IPv6 CIDR block.
+          type: string
+        - name: Ipv6CidrBlock
+          in: query
+          required: false
+          description: '<p>The IPv6 CIDR block from the IPv6 address pool. You must also specify <code>Ipv6Pool</code> in the request.</p> <p>To let Amazon choose the IPv6 CIDR block for you, omit this parameter.</p>'
+          type: string
         - name: DryRun
           in: query
           required: false
@@ -10397,7 +10427,7 @@ paths:
     post:
       x-aws-operation-name: CreateVpc
       operationId: POST CreateVpc
-      description: '<p>Creates a VPC with the specified IPv4 CIDR block. The smallest VPC you can create uses a /28 netmask (16 IPv4 addresses), and the largest uses a /16 netmask (65,536 IPv4 addresses). For more information about how large to make your VPC, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html">Your VPC and Subnets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>You can optionally request an Amazon-provided IPv6 CIDR block for the VPC. The IPv6 CIDR block uses a /56 prefix length, and is allocated from Amazon''s pool of IPv6 addresses. You cannot choose the IPv6 range for your VPC.</p> <p>By default, each instance you launch in the VPC has the default DHCP options, which include only a default DNS server that we provide (AmazonProvidedDNS). For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html">DHCP Options Sets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>You can specify the instance tenancy value for the VPC when you create it. You can''t change this value for the VPC after you create it. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html">Dedicated Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
+      description: '<p>Creates a VPC with the specified IPv4 CIDR block. The smallest VPC you can create uses a /28 netmask (16 IPv4 addresses), and the largest uses a /16 netmask (65,536 IPv4 addresses). For more information about how large to make your VPC, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html">Your VPC and Subnets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>You can optionally request an IPv6 CIDR block for the VPC. You can request an Amazon-provided IPv6 CIDR block from Amazon''s pool of IPv6 addresses, or an IPv6 CIDR block from an IPv6 address pool that you provisioned through bring your own IP addresses (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html">BYOIP</a>).</p> <p>By default, each instance you launch in the VPC has the default DHCP options, which include only a default DNS server that we provide (AmazonProvidedDNS). For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html">DHCP Options Sets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>You can specify the instance tenancy value for the VPC when you create it. You can''t change this value for the VPC after you create it. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html">Dedicated Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -10414,6 +10444,16 @@ paths:
           required: false
           description: 'Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IP addresses, or the size of the CIDR block.'
           type: boolean
+        - name: Ipv6Pool
+          in: formData
+          required: false
+          description: The ID of an IPv6 address pool from which to allocate the IPv6 CIDR block.
+          type: string
+        - name: Ipv6CidrBlock
+          in: formData
+          required: false
+          description: '<p>The IPv6 CIDR block from the IPv6 address pool. You must also specify <code>Ipv6Pool</code> in the request.</p> <p>To let Amazon choose the IPv6 CIDR block for you, omit this parameter.</p>'
+          type: string
         - name: DryRun
           in: formData
           required: false
@@ -14795,7 +14835,7 @@ paths:
         - name: Cidr
           in: query
           required: true
-          description: 'The public IPv4 address range, in CIDR notation. The prefix must be the same prefix that you specified when you provisioned the address range.'
+          description: 'The address range, in CIDR notation. The prefix must be the same prefix that you specified when you provisioned the address range.'
           type: string
         - name: DryRun
           in: query
@@ -14835,7 +14875,7 @@ paths:
         - name: Cidr
           in: formData
           required: true
-          description: 'The public IPv4 address range, in CIDR notation. The prefix must be the same prefix that you specified when you provisioned the address range.'
+          description: 'The address range, in CIDR notation. The prefix must be the same prefix that you specified when you provisioned the address range.'
           type: string
         - name: DryRun
           in: formData
@@ -15572,7 +15612,7 @@ paths:
     get:
       x-aws-operation-name: DescribeByoipCidrs
       operationId: GET DescribeByoipCidrs
-      description: '<p>Describes the IP address ranges that were specified in calls to <a>ProvisionByoipCidr</a>.</p> <p>To describe the address pools that were created when you provisioned the address ranges, use <a>DescribePublicIpv4Pools</a>.</p>'
+      description: '<p>Describes the IP address ranges that were specified in calls to <a>ProvisionByoipCidr</a>.</p> <p>To describe the address pools that were created when you provisioned the address ranges, use <a>DescribePublicIpv4Pools</a> or <a>DescribeIpv6Pools</a>.</p>'
       responses:
         '200':
           description: Success
@@ -15619,7 +15659,7 @@ paths:
     post:
       x-aws-operation-name: DescribeByoipCidrs
       operationId: POST DescribeByoipCidrs
-      description: '<p>Describes the IP address ranges that were specified in calls to <a>ProvisionByoipCidr</a>.</p> <p>To describe the address pools that were created when you provisioned the address ranges, use <a>DescribePublicIpv4Pools</a>.</p>'
+      description: '<p>Describes the IP address ranges that were specified in calls to <a>ProvisionByoipCidr</a>.</p> <p>To describe the address pools that were created when you provisioned the address ranges, use <a>DescribePublicIpv4Pools</a> or <a>DescribeIpv6Pools</a>.</p>'
       responses:
         '200':
           description: Success
@@ -19864,6 +19904,121 @@ paths:
           type: string
           enum:
             - DescribeInternetGateways
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2016-11-15'
+  '/#Action=DescribeIpv6Pools':
+    get:
+      x-aws-operation-name: DescribeIpv6Pools
+      operationId: GET DescribeIpv6Pools
+      description: Describes your IPv6 address pools.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeIpv6PoolsResult'
+      parameters:
+        - name: PoolId
+          in: query
+          required: false
+          description: The IDs of the IPv6 address pools.
+          type: array
+          items:
+            type: string
+        - name: NextToken
+          in: query
+          required: false
+          description: The token for the next page of results.
+          type: string
+        - name: MaxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+          type: integer
+          minimum: 1
+          maximum: 1000
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          type: boolean
+        - name: Filter
+          in: query
+          required: false
+          description: '<p>One or more filters.</p> <ul> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> </ul>'
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeIpv6Pools
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2016-11-15'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DescribeIpv6Pools
+      operationId: POST DescribeIpv6Pools
+      description: Describes your IPv6 address pools.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeIpv6PoolsResult'
+      parameters:
+        - name: PoolId
+          in: formData
+          required: false
+          description: The IDs of the IPv6 address pools.
+          type: array
+          items:
+            type: string
+        - name: NextToken
+          in: formData
+          required: false
+          description: The token for the next page of results.
+          type: string
+        - name: MaxResults
+          in: formData
+          required: false
+          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+          type: integer
+          minimum: 1
+          maximum: 1000
+        - name: DryRun
+          in: formData
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          type: boolean
+        - name: Filter
+          in: formData
+          required: false
+          description: '<p>One or more filters.</p> <ul> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> </ul>'
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeIpv6Pools
         - name: Version
           in: query
           required: true
@@ -27577,7 +27732,7 @@ paths:
         - name: Filter
           in: query
           required: false
-          description: '<p>One or more filters.</p> <ul> <li> <p> <code>cidr</code> - The primary IPv4 CIDR block of the VPC. The CIDR block you specify must exactly match the VPC''s CIDR block for information to be returned for the VPC. Must contain the slash followed by one or two digits (for example, <code>/28</code>).</p> </li> <li> <p> <code>cidr-block-association.cidr-block</code> - An IPv4 CIDR block associated with the VPC.</p> </li> <li> <p> <code>cidr-block-association.association-id</code> - The association ID for an IPv4 CIDR block associated with the VPC.</p> </li> <li> <p> <code>cidr-block-association.state</code> - The state of an IPv4 CIDR block associated with the VPC.</p> </li> <li> <p> <code>dhcp-options-id</code> - The ID of a set of DHCP options.</p> </li> <li> <p> <code>ipv6-cidr-block-association.ipv6-cidr-block</code> - An IPv6 CIDR block associated with the VPC.</p> </li> <li> <p> <code>ipv6-cidr-block-association.association-id</code> - The association ID for an IPv6 CIDR block associated with the VPC.</p> </li> <li> <p> <code>ipv6-cidr-block-association.state</code> - The state of an IPv6 CIDR block associated with the VPC.</p> </li> <li> <p> <code>isDefault</code> - Indicates whether the VPC is the default VPC.</p> </li> <li> <p> <code>owner-id</code> - The ID of the AWS account that owns the VPC.</p> </li> <li> <p> <code>state</code> - The state of the VPC (<code>pending</code> | <code>available</code>).</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC.</p> </li> </ul>'
+          description: '<p>One or more filters.</p> <ul> <li> <p> <code>cidr</code> - The primary IPv4 CIDR block of the VPC. The CIDR block you specify must exactly match the VPC''s CIDR block for information to be returned for the VPC. Must contain the slash followed by one or two digits (for example, <code>/28</code>).</p> </li> <li> <p> <code>cidr-block-association.cidr-block</code> - An IPv4 CIDR block associated with the VPC.</p> </li> <li> <p> <code>cidr-block-association.association-id</code> - The association ID for an IPv4 CIDR block associated with the VPC.</p> </li> <li> <p> <code>cidr-block-association.state</code> - The state of an IPv4 CIDR block associated with the VPC.</p> </li> <li> <p> <code>dhcp-options-id</code> - The ID of a set of DHCP options.</p> </li> <li> <p> <code>ipv6-cidr-block-association.ipv6-cidr-block</code> - An IPv6 CIDR block associated with the VPC.</p> </li> <li> <p> <code>ipv6-cidr-block-association.ipv6-pool</code> - The ID of the IPv6 address pool from which the IPv6 CIDR block is allocated.</p> </li> <li> <p> <code>ipv6-cidr-block-association.association-id</code> - The association ID for an IPv6 CIDR block associated with the VPC.</p> </li> <li> <p> <code>ipv6-cidr-block-association.state</code> - The state of an IPv6 CIDR block associated with the VPC.</p> </li> <li> <p> <code>isDefault</code> - Indicates whether the VPC is the default VPC.</p> </li> <li> <p> <code>owner-id</code> - The ID of the AWS account that owns the VPC.</p> </li> <li> <p> <code>state</code> - The state of the VPC (<code>pending</code> | <code>available</code>).</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC.</p> </li> </ul>'
           type: array
           items:
             type: string
@@ -27638,7 +27793,7 @@ paths:
         - name: Filter
           in: formData
           required: false
-          description: '<p>One or more filters.</p> <ul> <li> <p> <code>cidr</code> - The primary IPv4 CIDR block of the VPC. The CIDR block you specify must exactly match the VPC''s CIDR block for information to be returned for the VPC. Must contain the slash followed by one or two digits (for example, <code>/28</code>).</p> </li> <li> <p> <code>cidr-block-association.cidr-block</code> - An IPv4 CIDR block associated with the VPC.</p> </li> <li> <p> <code>cidr-block-association.association-id</code> - The association ID for an IPv4 CIDR block associated with the VPC.</p> </li> <li> <p> <code>cidr-block-association.state</code> - The state of an IPv4 CIDR block associated with the VPC.</p> </li> <li> <p> <code>dhcp-options-id</code> - The ID of a set of DHCP options.</p> </li> <li> <p> <code>ipv6-cidr-block-association.ipv6-cidr-block</code> - An IPv6 CIDR block associated with the VPC.</p> </li> <li> <p> <code>ipv6-cidr-block-association.association-id</code> - The association ID for an IPv6 CIDR block associated with the VPC.</p> </li> <li> <p> <code>ipv6-cidr-block-association.state</code> - The state of an IPv6 CIDR block associated with the VPC.</p> </li> <li> <p> <code>isDefault</code> - Indicates whether the VPC is the default VPC.</p> </li> <li> <p> <code>owner-id</code> - The ID of the AWS account that owns the VPC.</p> </li> <li> <p> <code>state</code> - The state of the VPC (<code>pending</code> | <code>available</code>).</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC.</p> </li> </ul>'
+          description: '<p>One or more filters.</p> <ul> <li> <p> <code>cidr</code> - The primary IPv4 CIDR block of the VPC. The CIDR block you specify must exactly match the VPC''s CIDR block for information to be returned for the VPC. Must contain the slash followed by one or two digits (for example, <code>/28</code>).</p> </li> <li> <p> <code>cidr-block-association.cidr-block</code> - An IPv4 CIDR block associated with the VPC.</p> </li> <li> <p> <code>cidr-block-association.association-id</code> - The association ID for an IPv4 CIDR block associated with the VPC.</p> </li> <li> <p> <code>cidr-block-association.state</code> - The state of an IPv4 CIDR block associated with the VPC.</p> </li> <li> <p> <code>dhcp-options-id</code> - The ID of a set of DHCP options.</p> </li> <li> <p> <code>ipv6-cidr-block-association.ipv6-cidr-block</code> - An IPv6 CIDR block associated with the VPC.</p> </li> <li> <p> <code>ipv6-cidr-block-association.ipv6-pool</code> - The ID of the IPv6 address pool from which the IPv6 CIDR block is allocated.</p> </li> <li> <p> <code>ipv6-cidr-block-association.association-id</code> - The association ID for an IPv6 CIDR block associated with the VPC.</p> </li> <li> <p> <code>ipv6-cidr-block-association.state</code> - The state of an IPv6 CIDR block associated with the VPC.</p> </li> <li> <p> <code>isDefault</code> - Indicates whether the VPC is the default VPC.</p> </li> <li> <p> <code>owner-id</code> - The ID of the AWS account that owns the VPC.</p> </li> <li> <p> <code>state</code> - The state of the VPC (<code>pending</code> | <code>available</code>).</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC.</p> </li> </ul>'
           type: array
           items:
             type: string
@@ -30218,6 +30373,103 @@ paths:
           type: string
           enum:
             - ExportTransitGatewayRoutes
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2016-11-15'
+  '/#Action=GetAssociatedIpv6PoolCidrs':
+    get:
+      x-aws-operation-name: GetAssociatedIpv6PoolCidrs
+      operationId: GET GetAssociatedIpv6PoolCidrs
+      description: Gets information about the IPv6 CIDR block associations for a specified IPv6 address pool.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetAssociatedIpv6PoolCidrsResult'
+      parameters:
+        - name: PoolId
+          in: query
+          required: true
+          description: The ID of the IPv6 address pool.
+          type: string
+        - name: NextToken
+          in: query
+          required: false
+          description: The token for the next page of results.
+          type: string
+        - name: MaxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+          type: integer
+          minimum: 1
+          maximum: 1000
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          type: boolean
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - GetAssociatedIpv6PoolCidrs
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2016-11-15'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: GetAssociatedIpv6PoolCidrs
+      operationId: POST GetAssociatedIpv6PoolCidrs
+      description: Gets information about the IPv6 CIDR block associations for a specified IPv6 address pool.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetAssociatedIpv6PoolCidrsResult'
+      parameters:
+        - name: PoolId
+          in: formData
+          required: true
+          description: The ID of the IPv6 address pool.
+          type: string
+        - name: NextToken
+          in: formData
+          required: false
+          description: The token for the next page of results.
+          type: string
+        - name: MaxResults
+          in: formData
+          required: false
+          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+          type: integer
+          minimum: 1
+          maximum: 1000
+        - name: DryRun
+          in: formData
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          type: boolean
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - GetAssociatedIpv6PoolCidrs
         - name: Version
           in: query
           required: true
@@ -37505,7 +37757,7 @@ paths:
     get:
       x-aws-operation-name: ProvisionByoipCidr
       operationId: GET ProvisionByoipCidr
-      description: '<p>Provisions an address range for use with your AWS resources through bring your own IP addresses (BYOIP) and creates a corresponding address pool. After the address range is provisioned, it is ready to be advertised using <a>AdvertiseByoipCidr</a>.</p> <p>AWS verifies that you own the address range and are authorized to advertise it. You must ensure that the address range is registered to you and that you created an RPKI ROA to authorize Amazon ASNs 16509 and 14618 to advertise the address range. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html">Bring Your Own IP Addresses (BYOIP)</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Provisioning an address range is an asynchronous operation, so the call returns immediately, but the address range is not ready to use until its status changes from <code>pending-provision</code> to <code>provisioned</code>. To monitor the status of an address range, use <a>DescribeByoipCidrs</a>. To allocate an Elastic IP address from your address pool, use <a>AllocateAddress</a> with either the specific address from the address pool or the ID of the address pool.</p>'
+      description: '<p>Provisions an IPv4 or IPv6 address range for use with your AWS resources through bring your own IP addresses (BYOIP) and creates a corresponding address pool. After the address range is provisioned, it is ready to be advertised using <a>AdvertiseByoipCidr</a>.</p> <p>AWS verifies that you own the address range and are authorized to advertise it. You must ensure that the address range is registered to you and that you created an RPKI ROA to authorize Amazon ASNs 16509 and 14618 to advertise the address range. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html">Bring Your Own IP Addresses (BYOIP)</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Provisioning an address range is an asynchronous operation, so the call returns immediately, but the address range is not ready to use until its status changes from <code>pending-provision</code> to <code>provisioned</code>. To monitor the status of an address range, use <a>DescribeByoipCidrs</a>. To allocate an Elastic IP address from your IPv4 address pool, use <a>AllocateAddress</a> with either the specific address from the address pool or the ID of the address pool.</p>'
       responses:
         '200':
           description: Success
@@ -37515,7 +37767,7 @@ paths:
         - name: Cidr
           in: query
           required: true
-          description: 'The public IPv4 address range, in CIDR notation. The most specific prefix that you can specify is /24. The address range cannot overlap with another address range that you''ve brought to this or another Region.'
+          description: 'The public IPv4 or IPv6 address range, in CIDR notation. The most specific IPv4 prefix that you can specify is /24. The most specific IPv6 prefix you can specify is /56. The address range cannot overlap with another address range that you''ve brought to this or another Region.'
           type: string
         - name: CidrAuthorizationContext.Message
           in: query
@@ -37529,6 +37781,11 @@ paths:
             Provides authorization for Amazon to bring a specific IP address range to a specific AWS account using bring your own IP addresses (BYOIP). For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#prepare-for-byoip">Prepare to Bring Your Address Range to Your AWS Account</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.
             The signed authorization message for the prefix and account.
           type: string
+        - name: PubliclyAdvertisable
+          in: query
+          required: false
+          description: '<p>(IPv6 only) Indicate whether the address range will be publicly advertised to the internet.</p> <p>Default: true</p>'
+          type: boolean
         - name: Description
           in: query
           required: false
@@ -37562,7 +37819,7 @@ paths:
     post:
       x-aws-operation-name: ProvisionByoipCidr
       operationId: POST ProvisionByoipCidr
-      description: '<p>Provisions an address range for use with your AWS resources through bring your own IP addresses (BYOIP) and creates a corresponding address pool. After the address range is provisioned, it is ready to be advertised using <a>AdvertiseByoipCidr</a>.</p> <p>AWS verifies that you own the address range and are authorized to advertise it. You must ensure that the address range is registered to you and that you created an RPKI ROA to authorize Amazon ASNs 16509 and 14618 to advertise the address range. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html">Bring Your Own IP Addresses (BYOIP)</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Provisioning an address range is an asynchronous operation, so the call returns immediately, but the address range is not ready to use until its status changes from <code>pending-provision</code> to <code>provisioned</code>. To monitor the status of an address range, use <a>DescribeByoipCidrs</a>. To allocate an Elastic IP address from your address pool, use <a>AllocateAddress</a> with either the specific address from the address pool or the ID of the address pool.</p>'
+      description: '<p>Provisions an IPv4 or IPv6 address range for use with your AWS resources through bring your own IP addresses (BYOIP) and creates a corresponding address pool. After the address range is provisioned, it is ready to be advertised using <a>AdvertiseByoipCidr</a>.</p> <p>AWS verifies that you own the address range and are authorized to advertise it. You must ensure that the address range is registered to you and that you created an RPKI ROA to authorize Amazon ASNs 16509 and 14618 to advertise the address range. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html">Bring Your Own IP Addresses (BYOIP)</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Provisioning an address range is an asynchronous operation, so the call returns immediately, but the address range is not ready to use until its status changes from <code>pending-provision</code> to <code>provisioned</code>. To monitor the status of an address range, use <a>DescribeByoipCidrs</a>. To allocate an Elastic IP address from your IPv4 address pool, use <a>AllocateAddress</a> with either the specific address from the address pool or the ID of the address pool.</p>'
       responses:
         '200':
           description: Success
@@ -37572,7 +37829,7 @@ paths:
         - name: Cidr
           in: formData
           required: true
-          description: 'The public IPv4 address range, in CIDR notation. The most specific prefix that you can specify is /24. The address range cannot overlap with another address range that you''ve brought to this or another Region.'
+          description: 'The public IPv4 or IPv6 address range, in CIDR notation. The most specific IPv4 prefix that you can specify is /24. The most specific IPv6 prefix you can specify is /56. The address range cannot overlap with another address range that you''ve brought to this or another Region.'
           type: string
         - name: CidrAuthorizationContext.Message
           in: formData
@@ -37586,6 +37843,11 @@ paths:
             Provides authorization for Amazon to bring a specific IP address range to a specific AWS account using bring your own IP addresses (BYOIP). For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#prepare-for-byoip">Prepare to Bring Your Address Range to Your AWS Account</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.
             The signed authorization message for the prefix and account.
           type: string
+        - name: PubliclyAdvertisable
+          in: formData
+          required: false
+          description: '<p>(IPv6 only) Indicate whether the address range will be publicly advertised to the internet.</p> <p>Default: true</p>'
+          type: boolean
         - name: Description
           in: formData
           required: false
@@ -44122,7 +44384,7 @@ paths:
     get:
       x-aws-operation-name: WithdrawByoipCidr
       operationId: GET WithdrawByoipCidr
-      description: '<p>Stops advertising an IPv4 address range that is provisioned as an address pool.</p> <p>You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time.</p> <p>It can take a few minutes before traffic to the specified addresses stops routing to AWS because of BGP propagation delays.</p>'
+      description: '<p>Stops advertising an address range that is provisioned as an address pool.</p> <p>You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time.</p> <p>It can take a few minutes before traffic to the specified addresses stops routing to AWS because of BGP propagation delays.</p>'
       responses:
         '200':
           description: Success
@@ -44132,7 +44394,7 @@ paths:
         - name: Cidr
           in: query
           required: true
-          description: 'The public IPv4 address range, in CIDR notation.'
+          description: 'The address range, in CIDR notation.'
           type: string
         - name: DryRun
           in: query
@@ -44162,7 +44424,7 @@ paths:
     post:
       x-aws-operation-name: WithdrawByoipCidr
       operationId: POST WithdrawByoipCidr
-      description: '<p>Stops advertising an IPv4 address range that is provisioned as an address pool.</p> <p>You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time.</p> <p>It can take a few minutes before traffic to the specified addresses stops routing to AWS because of BGP propagation delays.</p>'
+      description: '<p>Stops advertising an address range that is provisioned as an address pool.</p> <p>You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time.</p> <p>It can take a few minutes before traffic to the specified addresses stops routing to AWS because of BGP propagation delays.</p>'
       responses:
         '200':
           description: Success
@@ -44172,7 +44434,7 @@ paths:
         - name: Cidr
           in: formData
           required: true
-          description: 'The public IPv4 address range, in CIDR notation.'
+          description: 'The address range, in CIDR notation.'
           type: string
         - name: DryRun
           in: formData
@@ -46772,6 +47034,15 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+  DescribeIpv6PoolsResult:
+    type: object
+    properties:
+      Ipv6Pools:
+        $ref: '#/definitions/Ipv6PoolSet'
+        description: Information about the IPv6 address pools.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
   DescribeKeyPairsResult:
     type: object
     example:
@@ -47967,6 +48238,15 @@ definitions:
       S3Location:
         $ref: '#/definitions/String'
         description: 'The URL of the exported file in Amazon S3. For example, s3://<i>bucket_name</i>/VPCTransitGateway/TransitGatewayRouteTables/<i>file_name</i>.'
+  GetAssociatedIpv6PoolCidrsResult:
+    type: object
+    properties:
+      Ipv6CidrAssociations:
+        $ref: '#/definitions/Ipv6CidrAssociationSet'
+        description: Information about the IPv6 CIDR block associations.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
   GetCapacityReservationUsageResult:
     type: object
     properties:
@@ -48764,7 +49044,7 @@ definitions:
     properties:
       ByoipCidr:
         $ref: '#/definitions/ByoipCidr'
-        description: Information about the address pool.
+        description: Information about the address range.
   PurchaseHostReservationResult:
     type: object
     properties:
@@ -49770,7 +50050,7 @@ definitions:
     properties:
       Cidr:
         $ref: '#/definitions/String'
-        description: 'The IPv4 address range, in CIDR notation. This must be the exact range that you provisioned. You can''t advertise only a portion of the provisioned range.'
+        description: 'The address range, in CIDR notation. This must be the exact range that you provisioned. You can''t advertise only a portion of the provisioned range.'
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
@@ -49779,7 +50059,7 @@ definitions:
     properties:
       Cidr:
         $ref: '#/definitions/String'
-        description: 'The public IPv4 address range, in CIDR notation.'
+        description: 'The address range, in CIDR notation.'
       Description:
         $ref: '#/definitions/String'
         description: The description of the address range.
@@ -50235,6 +50515,12 @@ definitions:
       VpcId:
         $ref: '#/definitions/VpcId'
         description: The ID of the VPC.
+      Ipv6Pool:
+        $ref: '#/definitions/String'
+        description: The ID of an IPv6 address pool from which to allocate the IPv6 CIDR block.
+      Ipv6CidrBlock:
+        $ref: '#/definitions/String'
+        description: '<p>An IPv6 CIDR block from the IPv6 address pool. You must also specify <code>Ipv6Pool</code> in the request.</p> <p>To let Amazon choose the IPv6 CIDR block for you, omit this parameter.</p>'
       Ipv6CidrBlockNetworkBorderGroup:
         $ref: '#/definitions/String'
         description: <p>The name of the location from which we advertise the IPV6 CIDR block. Use this parameter to limit the CiDR block to this location.</p> <p> You must set <code>AmazonProvidedIpv6CidrBlock</code> to <code>true</code> to use this parameter.</p> <p> You can have one IPv6 CIDR block association per network border group.</p>
@@ -50250,6 +50536,9 @@ definitions:
       Ipv6CidrBlockState:
         $ref: '#/definitions/VpcCidrBlockState'
         description: Information about the state of the CIDR block.
+      Ipv6Pool:
+        $ref: '#/definitions/String'
+        description: The ID of the IPv6 address pool from which the IPv6 CIDR block is allocated.
       NetworkBorderGroup:
         $ref: '#/definitions/String'
         description: The name of the location from which we advertise the IPV6 CIDR block.
@@ -54159,6 +54448,12 @@ definitions:
       AmazonProvidedIpv6CidrBlock:
         $ref: '#/definitions/Boolean'
         description: 'Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IP addresses, or the size of the CIDR block.'
+      Ipv6Pool:
+        $ref: '#/definitions/String'
+        description: The ID of an IPv6 address pool from which to allocate the IPv6 CIDR block.
+      Ipv6CidrBlock:
+        $ref: '#/definitions/String'
+        description: '<p>The IPv6 CIDR block from the IPv6 address pool. You must also specify <code>Ipv6Pool</code> in the request.</p> <p>To let Amazon choose the IPv6 CIDR block for you, omit this parameter.</p>'
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
@@ -55061,7 +55356,7 @@ definitions:
     properties:
       Cidr:
         $ref: '#/definitions/String'
-        description: 'The public IPv4 address range, in CIDR notation. The prefix must be the same prefix that you specified when you provisioned the address range.'
+        description: 'The address range, in CIDR notation. The prefix must be the same prefix that you specified when you provisioned the address range.'
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
@@ -56288,6 +56583,32 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/InternetGateway'
+  Ipv6PoolMaxResults:
+    type: integer
+    minimum: 1
+    maximum: 1000
+  DescribeIpv6PoolsRequest:
+    type: object
+    properties:
+      PoolIds:
+        $ref: '#/definitions/ValueStringList'
+        description: The IDs of the IPv6 address pools.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next page of results.
+      MaxResults:
+        $ref: '#/definitions/Ipv6PoolMaxResults'
+        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: '<p>One or more filters.</p> <ul> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> </ul>'
+  Ipv6PoolSet:
+    type: array
+    items:
+      $ref: '#/definitions/Ipv6Pool'
   KeyNameStringList:
     type: array
     items:
@@ -57999,7 +58320,7 @@ definitions:
     properties:
       Filters:
         $ref: '#/definitions/FilterList'
-        description: '<p>One or more filters.</p> <ul> <li> <p> <code>cidr</code> - The primary IPv4 CIDR block of the VPC. The CIDR block you specify must exactly match the VPC''s CIDR block for information to be returned for the VPC. Must contain the slash followed by one or two digits (for example, <code>/28</code>).</p> </li> <li> <p> <code>cidr-block-association.cidr-block</code> - An IPv4 CIDR block associated with the VPC.</p> </li> <li> <p> <code>cidr-block-association.association-id</code> - The association ID for an IPv4 CIDR block associated with the VPC.</p> </li> <li> <p> <code>cidr-block-association.state</code> - The state of an IPv4 CIDR block associated with the VPC.</p> </li> <li> <p> <code>dhcp-options-id</code> - The ID of a set of DHCP options.</p> </li> <li> <p> <code>ipv6-cidr-block-association.ipv6-cidr-block</code> - An IPv6 CIDR block associated with the VPC.</p> </li> <li> <p> <code>ipv6-cidr-block-association.association-id</code> - The association ID for an IPv6 CIDR block associated with the VPC.</p> </li> <li> <p> <code>ipv6-cidr-block-association.state</code> - The state of an IPv6 CIDR block associated with the VPC.</p> </li> <li> <p> <code>isDefault</code> - Indicates whether the VPC is the default VPC.</p> </li> <li> <p> <code>owner-id</code> - The ID of the AWS account that owns the VPC.</p> </li> <li> <p> <code>state</code> - The state of the VPC (<code>pending</code> | <code>available</code>).</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC.</p> </li> </ul>'
+        description: '<p>One or more filters.</p> <ul> <li> <p> <code>cidr</code> - The primary IPv4 CIDR block of the VPC. The CIDR block you specify must exactly match the VPC''s CIDR block for information to be returned for the VPC. Must contain the slash followed by one or two digits (for example, <code>/28</code>).</p> </li> <li> <p> <code>cidr-block-association.cidr-block</code> - An IPv4 CIDR block associated with the VPC.</p> </li> <li> <p> <code>cidr-block-association.association-id</code> - The association ID for an IPv4 CIDR block associated with the VPC.</p> </li> <li> <p> <code>cidr-block-association.state</code> - The state of an IPv4 CIDR block associated with the VPC.</p> </li> <li> <p> <code>dhcp-options-id</code> - The ID of a set of DHCP options.</p> </li> <li> <p> <code>ipv6-cidr-block-association.ipv6-cidr-block</code> - An IPv6 CIDR block associated with the VPC.</p> </li> <li> <p> <code>ipv6-cidr-block-association.ipv6-pool</code> - The ID of the IPv6 address pool from which the IPv6 CIDR block is allocated.</p> </li> <li> <p> <code>ipv6-cidr-block-association.association-id</code> - The association ID for an IPv6 CIDR block associated with the VPC.</p> </li> <li> <p> <code>ipv6-cidr-block-association.state</code> - The state of an IPv6 CIDR block associated with the VPC.</p> </li> <li> <p> <code>isDefault</code> - Indicates whether the VPC is the default VPC.</p> </li> <li> <p> <code>owner-id</code> - The ID of the AWS account that owns the VPC.</p> </li> <li> <p> <code>state</code> - The state of the VPC (<code>pending</code> | <code>available</code>).</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC.</p> </li> </ul>'
       VpcIds:
         $ref: '#/definitions/VpcIdStringList'
         description: '<p>One or more VPC IDs.</p> <p>Default: Describes all your VPCs.</p>'
@@ -59453,6 +59774,27 @@ definitions:
     description: Describes the FPGAs for the instance type.
   FreeTierEligibleFlag:
     type: boolean
+  GetAssociatedIpv6PoolCidrsRequest:
+    type: object
+    required:
+      - PoolId
+    properties:
+      PoolId:
+        $ref: '#/definitions/String'
+        description: The ID of the IPv6 address pool.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next page of results.
+      MaxResults:
+        $ref: '#/definitions/Ipv6PoolMaxResults'
+        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+  Ipv6CidrAssociationSet:
+    type: array
+    items:
+      $ref: '#/definitions/Ipv6CidrAssociation'
   GetCapacityReservationUsageRequestMaxResults:
     type: integer
     minimum: 1
@@ -61418,6 +61760,16 @@ definitions:
       $ref: '#/definitions/String'
   Ipv6Address:
     type: string
+  Ipv6CidrAssociation:
+    type: object
+    properties:
+      Ipv6Cidr:
+        $ref: '#/definitions/String'
+        description: The IPv6 CIDR block.
+      AssociatedResource:
+        $ref: '#/definitions/String'
+        description: The resource that's associated with the IPv6 CIDR block.
+    description: Describes an IPv6 CIDR block association.
   Ipv6CidrBlock:
     type: object
     properties:
@@ -61431,6 +61783,26 @@ definitions:
       $ref: '#/definitions/Ipv6CidrBlock'
   Ipv6Flag:
     type: boolean
+  PoolCidrBlocksSet:
+    type: array
+    items:
+      $ref: '#/definitions/PoolCidrBlock'
+  Ipv6Pool:
+    type: object
+    properties:
+      PoolId:
+        $ref: '#/definitions/String'
+        description: The ID of the address pool.
+      Description:
+        $ref: '#/definitions/String'
+        description: The description for the address pool.
+      PoolCidrBlocks:
+        $ref: '#/definitions/PoolCidrBlocksSet'
+        description: The CIDR blocks for the address pool.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: Any tags for the address pool.
+    description: Describes an IPv6 address pool.
   Ipv6Range:
     type: object
     properties:
@@ -63433,6 +63805,13 @@ definitions:
       - cluster
       - partition
       - spread
+  PoolCidrBlock:
+    type: object
+    properties:
+      Cidr:
+        $ref: '#/definitions/String'
+        description: The CIDR block.
+    description: Describes a CIDR block for an address pool.
   PrefixList:
     type: object
     properties:
@@ -63570,10 +63949,13 @@ definitions:
     properties:
       Cidr:
         $ref: '#/definitions/String'
-        description: 'The public IPv4 address range, in CIDR notation. The most specific prefix that you can specify is /24. The address range cannot overlap with another address range that you''ve brought to this or another Region.'
+        description: 'The public IPv4 or IPv6 address range, in CIDR notation. The most specific IPv4 prefix that you can specify is /24. The most specific IPv6 prefix you can specify is /56. The address range cannot overlap with another address range that you''ve brought to this or another Region.'
       CidrAuthorizationContext:
         $ref: '#/definitions/CidrAuthorizationContext'
         description: A signed document that proves that you are authorized to bring the specified IP address range to Amazon using BYOIP.
+      PubliclyAdvertisable:
+        $ref: '#/definitions/Boolean'
+        description: '<p>(IPv6 only) Indicate whether the address range will be publicly advertised to the internet.</p> <p>Default: true</p>'
       Description:
         $ref: '#/definitions/String'
         description: A description for the address range and the address pool.
@@ -63589,7 +63971,7 @@ definitions:
     properties:
       PoolId:
         $ref: '#/definitions/String'
-        description: The ID of the IPv4 address pool.
+        description: The ID of the address pool.
       Description:
         $ref: '#/definitions/String'
         description: A description of the address pool.
@@ -63602,7 +63984,7 @@ definitions:
       TotalAvailableAddressCount:
         $ref: '#/definitions/Integer'
         description: The total number of available addresses.
-    description: Describes an address pool.
+    description: Describes an IPv4 address pool.
   PublicIpv4PoolRange:
     type: object
     properties:
@@ -66673,7 +67055,7 @@ definitions:
     properties:
       Cidr:
         $ref: '#/definitions/String'
-        description: 'The public IPv4 address range, in CIDR notation.'
+        description: 'The address range, in CIDR notation.'
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'

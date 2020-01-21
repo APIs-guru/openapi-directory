@@ -4285,6 +4285,12 @@ definitions:
         $ref: '#/definitions/AnomalyDetectorMetricTimezone'
         description: '<p>The time zone to use for the metric. This is useful to enable the model to automatically account for daylight savings time changes if the metric is sensitive to such time changes.</p> <p>To specify a time zone, use the name of the time zone as specified in the standard tz database. For more information, see <a href="https://en.wikipedia.org/wiki/Tz_database">tz database</a>.</p>'
     description: 'The configuration specifies details about how the anomaly detection model is to be trained, including time ranges to exclude from use for training the model and the time zone to use for the metric.'
+  AnomalyDetectorStateValue:
+    type: string
+    enum:
+      - PENDING_TRAINING
+      - TRAINED_INSUFFICIENT_DATA
+      - TRAINED
   AnomalyDetector:
     type: object
     properties:
@@ -4303,6 +4309,9 @@ definitions:
       Configuration:
         $ref: '#/definitions/AnomalyDetectorConfiguration'
         description: 'The configuration specifies details about how the anomaly detection model is to be trained, including time ranges to exclude from use for training the model, and the time zone to use for the metric.'
+      StateValue:
+        $ref: '#/definitions/AnomalyDetectorStateValue'
+        description: 'The current status of the anomaly detector''s training. The possible values are <code>TRAINED | PENDING_TRAINING | TRAINED_INSUFFICIENT_DATA</code> '
     description: An anomaly detection model associated with a particular CloudWatch metric and statistic. You can use the model to display a band of expected normal values when the metric is graphed.
   AnomalyDetectors:
     type: array
