@@ -229,7 +229,7 @@ paths:
                 type: string
                 maxLength: 128
               key:
-                description: The input attribute key used to identify a device or system to create a detector (an instance of the detector model) and then to route each input received to the appropriate detector (instance). This parameter uses a JSON-path expression to specify the attribute-value pair in the message payload of each input that is used to identify the device associated with the input.
+                description: The input attribute key used to identify a device or system in order to create a detector (an instance of the detector model) and then to route each input received to the appropriate detector (instance). This parameter uses a JSON-path expression to specify the attribute-value pair in the message payload of each input that is used to identify the device associated with the input.
                 type: string
                 pattern: '^((`[\w\- ]+`)|([\w\-]+))(\.((`[\w- ]+`)|([\w\-]+)))*$'
                 minLength: 1
@@ -245,7 +245,7 @@ paths:
                 items:
                   $ref: '#/definitions/Tag'
               evaluationMethod:
-                description: 'When set to <code>SERIAL</code>, variables are updated and event conditions evaluated in the order that the events are defined. When set to <code>BATCH</code>, variables are updated and events performed only after all event conditions are evaluated.'
+                description: 'Information about the order in which events are evaluated and how actions are executed. '
                 type: string
                 enum:
                   - BATCH
@@ -565,7 +565,7 @@ paths:
                 minLength: 1
                 maxLength: 2048
               evaluationMethod:
-                description: 'When set to <code>SERIAL</code>, variables are updated and event conditions evaluated in the order that the events are defined. When set to <code>BATCH</code>, variables are updated and events performed only after all event conditions are evaluated.'
+                description: 'Information about the order in which events are evaluated and how actions are executed. '
                 type: string
                 enum:
                   - BATCH
@@ -1237,8 +1237,8 @@ definitions:
     properties:
       functionArn:
         $ref: '#/definitions/AmazonResourceName'
-        description: The ARN of the AWS Lambda function which is executed.
-    description: 'Calls an AWS Lambda function, passing in information about the detector model instance and the event which triggered the action.'
+        description: The ARN of the Lambda function that is executed.
+    description: 'Calls a Lambda function, passing in information about the detector model instance and the event that triggered the action.'
   IotEventsAction:
     type: object
     required:
@@ -1247,7 +1247,7 @@ definitions:
       inputName:
         $ref: '#/definitions/InputName'
         description: The name of the AWS IoT Events input where the data is sent.
-    description: 'Sends an IoT Events input, passing in information about the detector model instance and the event which triggered the action.'
+    description: 'Sends an AWS IoT Events input, passing in information about the detector model instance and the event that triggered the action.'
   SqsAction:
     type: object
     required:
@@ -1255,11 +1255,11 @@ definitions:
     properties:
       queueUrl:
         $ref: '#/definitions/QueueUrl'
-        description: The URL of the Amazon SQS queue where the data is written.
+        description: The URL of the SQS queue where the data is written.
       useBase64:
         $ref: '#/definitions/UseBase64'
         description: 'Set this to TRUE if you want the data to be Base-64 encoded before it is written to the queue. Otherwise, set this to FALSE.'
-    description: Sends information about the detector model instance and the event which triggered the action to an Amazon SQS queue.
+    description: Sends information about the detector model instance and the event that triggered the action to an Amazon SQS queue.
   FirehoseAction:
     type: object
     required:
@@ -1271,7 +1271,7 @@ definitions:
       separator:
         $ref: '#/definitions/FirehoseSeparator'
         description: 'A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: ''\n'' (newline), ''\t'' (tab), ''\r\n'' (Windows newline), '','' (comma).'
-    description: Sends information about the detector model instance and the event which triggered the action to a Kinesis Data Firehose delivery stream.
+    description: Sends information about the detector model instance and the event that triggered the action to a Kinesis Data Firehose delivery stream.
   Action:
     type: object
     properties:
@@ -1295,16 +1295,16 @@ definitions:
         description: Information needed to reset the timer.
       lambda:
         $ref: '#/definitions/LambdaAction'
-        description: 'Calls an AWS Lambda function, passing in information about the detector model instance and the event which triggered the action.'
+        description: 'Calls a Lambda function, passing in information about the detector model instance and the event that triggered the action.'
       iotEvents:
         $ref: '#/definitions/IotEventsAction'
-        description: 'Sends an IoT Events input, passing in information about the detector model instance and the event which triggered the action.'
+        description: 'Sends an IoT Events input, passing in information about the detector model instance and the event that triggered the action.'
       sqs:
         $ref: '#/definitions/SqsAction'
-        description: Sends information about the detector model instance and the event which triggered the action to an Amazon SQS queue.
+        description: Sends information about the detector model instance and the event that triggered the action to an Amazon SQS queue.
       firehose:
         $ref: '#/definitions/FirehoseAction'
-        description: Sends information about the detector model instance and the event which triggered the action to a Kinesis Data Firehose delivery stream.
+        description: Sends information about the detector model instance and the event that triggered the action to a Kinesis Data Firehose delivery stream.
     description: An action to be performed when the <code>"condition"</code> is TRUE.
   Actions:
     type: array
@@ -1379,7 +1379,7 @@ definitions:
         description: A brief description of the detector model.
       key:
         $ref: '#/definitions/AttributeJsonPath'
-        description: The input attribute key used to identify a device or system to create a detector (an instance of the detector model) and then to route each input received to the appropriate detector (instance). This parameter uses a JSON-path expression to specify the attribute-value pair in the message payload of each input that is used to identify the device associated with the input.
+        description: The input attribute key used to identify a device or system in order to create a detector (an instance of the detector model) and then to route each input received to the appropriate detector (instance). This parameter uses a JSON-path expression to specify the attribute-value pair in the message payload of each input that is used to identify the device associated with the input.
       roleArn:
         $ref: '#/definitions/AmazonResourceName'
         description: The ARN of the role that grants permission to AWS IoT Events to perform its operations.
@@ -1388,7 +1388,7 @@ definitions:
         description: Metadata that can be used to manage the detector model.
       evaluationMethod:
         $ref: '#/definitions/EvaluationMethod'
-        description: 'When set to <code>SERIAL</code>, variables are updated and event conditions evaluated in the order that the events are defined. When set to <code>BATCH</code>, variables are updated and events performed only after all event conditions are evaluated.'
+        description: 'Information about the order in which events are evaluated and how actions are executed. '
   DetectorModelConfiguration:
     type: object
     properties:
@@ -1418,10 +1418,10 @@ definitions:
         description: The status of the detector model.
       key:
         $ref: '#/definitions/AttributeJsonPath'
-        description: The input attribute key used to identify a device or system to create a detector (an instance of the detector model) and then to route each input received to the appropriate detector (instance). This parameter uses a JSON-path expression to specify the attribute-value pair in the message payload of each input that is used to identify the device associated with the input.
+        description: The input attribute key used to identify a device or system in order to create a detector (an instance of the detector model) and then to route each input received to the appropriate detector (instance). This parameter uses a JSON-path expression to specify the attribute-value pair in the message payload of each input that is used to identify the device associated with the input.
       evaluationMethod:
         $ref: '#/definitions/EvaluationMethod'
-        description: 'When set to <code>SERIAL</code>, variables are updated and event conditions evaluated in the order that the events are defined. When set to <code>BATCH</code>, variables are updated and events performed only after all event conditions are evaluated.'
+        description: 'Information about the order in which events are evaluated and how actions are executed. '
     description: Information about how the detector model is configured.
   InputName:
     type: string
@@ -1622,7 +1622,7 @@ definitions:
         description: The status of the detector model version.
       evaluationMethod:
         $ref: '#/definitions/EvaluationMethod'
-        description: 'When set to <code>SERIAL</code>, variables are updated and event conditions evaluated in the order that the events are defined. When set to <code>BATCH</code>, variables are updated and events performed only after all event conditions are evaluated.'
+        description: 'Information about the order in which events are evaluated and how actions are executed. '
     description: Information about the detector model version.
   DetectorModelVersionSummaries:
     type: array
@@ -1835,7 +1835,7 @@ definitions:
         description: The ARN of the role that grants permission to AWS IoT Events to perform its operations.
       evaluationMethod:
         $ref: '#/definitions/EvaluationMethod'
-        description: 'When set to <code>SERIAL</code>, variables are updated and event conditions evaluated in the order that the events are defined. When set to <code>BATCH</code>, variables are updated and events performed only after all event conditions are evaluated.'
+        description: 'Information about the order in which events are evaluated and how actions are executed. '
   UpdateInputRequest:
     type: object
     required:
