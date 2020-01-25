@@ -271,6 +271,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=FmrsService.CreateLocationFsxWindows':
+    post:
+      operationId: CreateLocationFsxWindows
+      description: Creates an endpoint for an Amazon FSx for Windows file system.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateLocationFsxWindowsResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateLocationFsxWindowsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.CreateLocationFsxWindows
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=FmrsService.CreateLocationNfs':
     post:
       operationId: CreateLocationNfs
@@ -596,6 +633,43 @@ paths:
           type: string
           enum:
             - FmrsService.DescribeLocationEfs
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=FmrsService.DescribeLocationFsxWindows':
+    post:
+      operationId: DescribeLocationFsxWindows
+      description: 'Returns metadata, such as the path information about an Amazon FSx for Windows location.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeLocationFsxWindowsResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeLocationFsxWindowsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.DescribeLocationFsxWindows
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1269,7 +1343,7 @@ definitions:
       - Ec2Config
     properties:
       Subdirectory:
-        $ref: '#/definitions/Subdirectory'
+        $ref: '#/definitions/EfsSubdirectory'
         description: '<p>A subdirectory in the location’s path. This subdirectory in the EFS file system is used to read data from the EFS source location or write data to the EFS destination. By default, AWS DataSync uses the root directory.</p> <note> <p> <code>Subdirectory</code> must be specified with forward slashes. For example <code>/path/to/folder</code>.</p> </note>'
       EfsFilesystemArn:
         $ref: '#/definitions/EfsFilesystemArn'
@@ -1281,6 +1355,41 @@ definitions:
         $ref: '#/definitions/TagList'
         description: 'The key-value pair that represents a tag that you want to add to the resource. The value can be an empty string. This value helps you manage, filter, and search for your resources. We recommend that you create a name tag for your location.'
     description: CreateLocationEfsRequest
+  CreateLocationFsxWindowsResponse:
+    type: object
+    properties:
+      LocationArn:
+        $ref: '#/definitions/LocationArn'
+        description: The Amazon Resource Name (ARN) of the FSx for Windows file system location that is created.
+  CreateLocationFsxWindowsRequest:
+    type: object
+    required:
+      - FsxFilesystemArn
+      - SecurityGroupArns
+      - User
+      - Password
+    properties:
+      Subdirectory:
+        $ref: '#/definitions/FsxWindowsSubdirectory'
+        description: A subdirectory in the location’s path. This subdirectory in the Amazon FSx for Windows file system is used to read data from the Amazon FSx for Windows source location or write data to the FSx for Windows destination.
+      FsxFilesystemArn:
+        $ref: '#/definitions/FsxFilesystemArn'
+        description: The Amazon Resource Name (ARN) for the FSx for Windows file system.
+      SecurityGroupArns:
+        $ref: '#/definitions/Ec2SecurityGroupArnList'
+        description: The Amazon Resource Names (ARNs) of the security groups that are to use to configure the FSx for Windows file system.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: 'The key-value pair that represents a tag that you want to add to the resource. The value can be an empty string. This value helps you manage, filter, and search for your resources. We recommend that you create a name tag for your location.'
+      User:
+        $ref: '#/definitions/SmbUser'
+        description: The user who has the permissions to access files and folders in the FSx for Windows file system.
+      Domain:
+        $ref: '#/definitions/SmbDomain'
+        description: The name of the Windows domain that the FSx for Windows server belongs to.
+      Password:
+        $ref: '#/definitions/SmbPassword'
+        description: The password of the user who has the permissions to access files and folders in the FSx for Windows file system.
   CreateLocationNfsResponse:
     type: object
     properties:
@@ -1296,7 +1405,7 @@ definitions:
       - OnPremConfig
     properties:
       Subdirectory:
-        $ref: '#/definitions/NonEmptySubdirectory'
+        $ref: '#/definitions/NfsSubdirectory'
         description: '<p>The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination. The NFS path should be a path that''s exported by the NFS server, or a subdirectory of that path. The path should be such that it can be mounted by other NFS clients in your network. </p> <p>To see all the paths exported by your NFS server. run "<code>showmount -e nfs-server-name</code>" from an NFS client that has access to your server. You can specify any directory that appears in the results, and any subdirectory of that directory. Ensure that the NFS export is accessible without Kerberos authentication. </p> <p>To transfer all the data in the folder you specified, DataSync needs to have permissions to read all the data. To ensure this, either configure the NFS export with <code>no_root_squash,</code> or ensure that the permissions for all of the files that you want DataSync allow read access for all users. Doing either enables the agent to read the files. For the agent to access directories, you must additionally enable all execute access.</p> <p>For information about NFS export configuration, see 18.7. The /etc/exports Configuration File in the Red Hat Enterprise Linux documentation.</p>'
       ServerHostname:
         $ref: '#/definitions/ServerHostname'
@@ -1325,7 +1434,7 @@ definitions:
       - S3Config
     properties:
       Subdirectory:
-        $ref: '#/definitions/Subdirectory'
+        $ref: '#/definitions/S3Subdirectory'
         description: A subdirectory in the Amazon S3 bucket. This subdirectory in Amazon S3 is used to read data from the S3 source location or write data to the S3 destination.
       S3BucketArn:
         $ref: '#/definitions/S3BucketArn'
@@ -1356,7 +1465,7 @@ definitions:
       - AgentArns
     properties:
       Subdirectory:
-        $ref: '#/definitions/NonEmptySubdirectory'
+        $ref: '#/definitions/SmbSubdirectory'
         description: '<p>The subdirectory in the SMB file system that is used to read data from the SMB source location or write data to the SMB destination. The SMB path should be a path that''s exported by the SMB server, or a subdirectory of that path. The path should be such that it can be mounted by other SMB clients in your network.</p> <note> <p> <code>Subdirectory</code> must be specified with forward slashes. For example <code>/path/to/folder</code>.</p> </note> <p>To transfer all the data in the folder you specified, DataSync needs to have permissions to mount the SMB share, as well as to access all the data in that share. To ensure this, either ensure that the user/password specified belongs to the user who can mount the share, and who has the appropriate permissions for all of the files and directories that you want DataSync to access, or use credentials of a member of the Backup Operators group to mount the share. Doing either enables the agent to access the data. For the agent to access directories, you must additionally enable all execute access.</p>'
       ServerHostname:
         $ref: '#/definitions/ServerHostname'
@@ -1512,6 +1621,35 @@ definitions:
         $ref: '#/definitions/LocationArn'
         description: The Amazon Resource Name (ARN) of the EFS location to describe.
     description: DescribeLocationEfsRequest
+  DescribeLocationFsxWindowsResponse:
+    type: object
+    properties:
+      LocationArn:
+        $ref: '#/definitions/LocationArn'
+        description: The Amazon resource Name (ARN) of the FSx for Windows location that was described.
+      LocationUri:
+        $ref: '#/definitions/LocationUri'
+        description: The URL of the FSx for Windows location that was described.
+      SecurityGroupArns:
+        $ref: '#/definitions/Ec2SecurityGroupArnList'
+        description: The Amazon Resource Names (ARNs) of the security groups that are configured for the for the FSx for Windows file system.
+      CreationTime:
+        $ref: '#/definitions/Time'
+        description: The time that the FSx for Windows location was created.
+      User:
+        $ref: '#/definitions/SmbUser'
+        description: The user who has the permissions to access files and folders in the FSx for Windows file system.
+      Domain:
+        $ref: '#/definitions/SmbDomain'
+        description: The name of the Windows domain that the FSx for Windows server belongs to.
+  DescribeLocationFsxWindowsRequest:
+    type: object
+    required:
+      - LocationArn
+    properties:
+      LocationArn:
+        $ref: '#/definitions/LocationArn'
+        description: The Amazon Resource Name (ARN) of the FSx for Windows location to describe.
   DescribeLocationNfsResponse:
     type: object
     properties:
@@ -1941,7 +2079,7 @@ definitions:
       $ref: '#/definitions/AgentListEntry'
   TagValue:
     type: string
-    pattern: '^[a-zA-Z0-9\s+=._:/-]+$'
+    pattern: '^[a-zA-Z0-9\s+=._:@/-]+$'
     minLength: 1
     maxLength: 256
   AgentStatus:
@@ -1982,7 +2120,7 @@ definitions:
       $ref: '#/definitions/Ec2SecurityGroupArn'
     minItems: 1
     maxItems: 1
-  Subdirectory:
+  EfsSubdirectory:
     type: string
     pattern: '^[a-zA-Z0-9_\-\+\./\(\)\p{Zs}]*$'
     maxLength: 4096
@@ -2007,7 +2145,34 @@ definitions:
     type: string
     pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$'
     maxLength: 128
-  NonEmptySubdirectory:
+  FsxWindowsSubdirectory:
+    type: string
+    pattern: '^[a-zA-Z0-9_\-\+\./\(\)\$\p{Zs}]+$'
+    maxLength: 4096
+  FsxFilesystemArn:
+    type: string
+    pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):fsx:[a-z\-0-9]*:[0-9]{12}:file-system/fs-.*$'
+    maxLength: 128
+  Ec2SecurityGroupArnList:
+    type: array
+    items:
+      $ref: '#/definitions/Ec2SecurityGroupArn'
+    minItems: 1
+    maxItems: 5
+  SmbUser:
+    type: string
+    pattern: '^[^\x5B\x5D\\/:;|=,+*?]{1,104}$'
+    maxLength: 104
+  SmbDomain:
+    type: string
+    pattern: '^([A-Za-z0-9]+[A-Za-z0-9-.]*)*[A-Za-z0-9-]*[A-Za-z0-9]$'
+    maxLength: 253
+  SmbPassword:
+    type: string
+    pattern: '^.{0,104}$'
+    maxLength: 104
+    format: password
+  NfsSubdirectory:
     type: string
     pattern: '^[a-zA-Z0-9_\-\+\./\(\)\p{Zs}]+$'
     maxLength: 4096
@@ -2031,6 +2196,10 @@ definitions:
         $ref: '#/definitions/NfsVersion'
         description: '<p>The specific NFS version that you want DataSync to use to mount your NFS share. If the server refuses to use the version specified, the sync will fail. If you don''t specify a version, DataSync defaults to <code>AUTOMATIC</code>. That is, DataSync automatically selects a version based on negotiation with the NFS server.</p> <p>You can specify the following NFS versions:</p> <ul> <li> <p> <b> <a href="https://tools.ietf.org/html/rfc1813">NFSv3</a> </b> - stateless protocol version that allows for asynchronous writes on the server.</p> </li> <li> <p> <b> <a href="https://tools.ietf.org/html/rfc3530">NFSv4.0</a> </b> - stateful, firewall-friendly protocol version that supports delegations and pseudo filesystems.</p> </li> <li> <p> <b> <a href="https://tools.ietf.org/html/rfc5661">NFSv4.1</a> </b> - stateful protocol version that supports sessions, directory delegations, and parallel data processing. Version 4.1 also includes all features available in version 4.0.</p> </li> </ul>'
     description: Represents the mount options that are available for DataSync to access an NFS location.
+  S3Subdirectory:
+    type: string
+    pattern: '^[a-zA-Z0-9_\-\+\./\(\)\p{Zs}]*$'
+    maxLength: 4096
   S3BucketArn:
     type: string
     pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):s3:::([^/]*)$'
@@ -2053,19 +2222,10 @@ definitions:
         $ref: '#/definitions/IamRoleArn'
         description: 'The Amazon S3 bucket to access. This bucket is used as a parameter in the <a>CreateLocationS3</a> operation. '
     description: '<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that is used to access an Amazon S3 bucket.</p> <p>For detailed information about using such a role, see Creating a Location for Amazon S3 in the <i>AWS DataSync User Guide</i>.</p>'
-  SmbUser:
+  SmbSubdirectory:
     type: string
-    pattern: '^[^\x5B\x5D\\/:;|=,+*?]{1,104}$'
-    maxLength: 104
-  SmbDomain:
-    type: string
-    pattern: '^([A-Za-z0-9]+[A-Za-z0-9-.]*)*[A-Za-z0-9-]*[A-Za-z0-9]$'
-    maxLength: 253
-  SmbPassword:
-    type: string
-    pattern: '^.{0,104}$'
-    maxLength: 104
-    format: password
+    pattern: '^[a-zA-Z0-9_\-\+\./\(\)\$\p{Zs}]+$'
+    maxLength: 4096
   SmbMountOptions:
     type: object
     properties:
@@ -2113,6 +2273,9 @@ definitions:
       TaskQueueing:
         $ref: '#/definitions/TaskQueueing'
         description: '<p>A value that determines whether tasks should be queued before executing the tasks. If set to <code>ENABLED</code>, the tasks will be queued. The default is <code>ENABLED</code>.</p> <p>If you use the same agent to run multiple tasks you can enable the tasks to run in series. For more information see <a>queue-task-execution</a>.</p>'
+      LogLevel:
+        $ref: '#/definitions/LogLevel'
+        description: 'A value that determines the type of logs DataSync will deliver to your AWS CloudWatch Logs file. If set to <code>OFF</code>, no logs will be delivered. <code>BASIC</code> will deliver a few logs per transfer operation and <code>TRANSFER</code> will deliver a verbose log that contains logs for every file that is transferred.'
     description: '<p>Represents the options that are available to control the behavior of a <a>StartTaskExecution</a> operation. Behavior includes preserving metadata such as user ID (UID), group ID (GID), and file permissions, and also overwriting files in the destination, data integrity verification, and so on.</p> <p>A task has a set of default options associated with it. If you don''t specify an option in <a>StartTaskExecution</a>, the default value is used. You can override the defaults options on each task execution by specifying an overriding <code>Options</code> value to <a>StartTaskExecution</a>.</p>'
   FilterList:
     type: array
@@ -2160,8 +2323,8 @@ definitions:
     description: 'The VPC endpoint, subnet and security group that an agent uses to access IP addresses in a VPC (Virtual Private Cloud).'
   LocationUri:
     type: string
-    pattern: '^(efs|nfs|s3|smb)://[a-zA-Z0-9.\-]+$'
-    maxLength: 4355
+    pattern: '^(efs|nfs|s3|smb|fsxw)://[a-zA-Z0-9.\-]+$'
+    maxLength: 4356
   TaskExecutionStatus:
     type: string
     enum:
@@ -2234,12 +2397,6 @@ definitions:
     type: string
     pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\-0-9]*:[0-9]{12}:subnet/.*$'
     maxLength: 128
-  Ec2SecurityGroupArnList:
-    type: array
-    items:
-      $ref: '#/definitions/Ec2SecurityGroupArn'
-    minItems: 1
-    maxItems: 5
   Ec2SecurityGroupArn:
     type: string
     pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\-0-9]*:[0-9]{12}:security-group/.*$'
@@ -2314,6 +2471,12 @@ definitions:
         $ref: '#/definitions/LocationUri'
         description: '<p>Represents a list of URLs of a location. <code>LocationUri</code> returns an array that contains a list of locations when the <a>ListLocations</a> operation is called.</p> <p>Format: <code>TYPE://GLOBAL_ID/SUBDIR</code>.</p> <p>TYPE designates the type of location. Valid values: NFS | EFS | S3.</p> <p>GLOBAL_ID is the globally unique identifier of the resource that backs the location. An example for EFS is <code>us-east-2.fs-abcd1234</code>. An example for Amazon S3 is the bucket name, such as <code>myBucket</code>. An example for NFS is a valid IPv4 address or a host name compliant with Domain Name Service (DNS).</p> <p>SUBDIR is a valid file system path, delimited by forward slashes as is the *nix convention. For NFS and Amazon EFS, it''s the export path to mount the location. For Amazon S3, it''s the prefix path that you mount to and treat as the root of the location.</p> <p/>'
     description: Represents a single entry in a list of locations. <code>LocationListEntry</code> returns an array that contains a list of locations when the <a>ListLocations</a> operation is called.
+  LogLevel:
+    type: string
+    enum:
+      - 'OFF'
+      - BASIC
+      - TRANSFER
   Mtime:
     type: string
     enum:
