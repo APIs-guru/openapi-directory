@@ -311,6 +311,10 @@ paths:
           description: OrganizationStateException
           schema:
             $ref: '#/definitions/OrganizationStateException'
+        '488':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
       parameters:
         - name: body
           in: body
@@ -1524,6 +1528,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkMailService.ListTagsForResource':
+    post:
+      operationId: ListTagsForResource
+      description: Lists the tags applied to an Amazon WorkMail organization resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTagsForResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.ListTagsForResource
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=WorkMailService.ListUsers':
     post:
       operationId: ListUsers
@@ -1754,6 +1791,80 @@ paths:
           type: string
           enum:
             - WorkMailService.ResetPassword
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkMailService.TagResource':
+    post:
+      operationId: TagResource
+      description: Applies the specified tags to the specified Amazon WorkMail organization resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TagResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: TooManyTagsException
+          schema:
+            $ref: '#/definitions/TooManyTagsException'
+        '482':
+          description: OrganizationStateException
+          schema:
+            $ref: '#/definitions/OrganizationStateException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TagResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.TagResource
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkMailService.UntagResource':
+    post:
+      operationId: UntagResource
+      description: Untags the specified tags from the specified Amazon WorkMail organization resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UntagResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UntagResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.UntagResource
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -2026,6 +2137,7 @@ definitions:
   EmailAddressInUseException: {}
   MailDomainNotFoundException: {}
   MailDomainStateException: {}
+  LimitExceededException: {}
   CreateGroupResponse:
     type: object
     properties:
@@ -2253,6 +2365,9 @@ definitions:
       ErrorMessage:
         $ref: '#/definitions/String'
         description: (Optional) The error message indicating if unexpected behavior was encountered with regards to the organization.
+      ARN:
+        $ref: '#/definitions/AmazonResourceName'
+        description: The Amazon Resource Name (ARN) of the organization.
   DescribeOrganizationRequest:
     type: object
     required:
@@ -2281,7 +2396,7 @@ definitions:
         description: The booking options for the described resource.
       State:
         $ref: '#/definitions/EntityState'
-        description: 'The state of the resource: enabled (registered to Amazon WorkMail) or disabled (deregistered or never registered to WorkMail).'
+        description: 'The state of the resource: enabled (registered to Amazon WorkMail), disabled (deregistered or never registered to WorkMail), or deleted.'
       EnabledDate:
         $ref: '#/definitions/Timestamp'
         description: 'The date and time when a resource was enabled for WorkMail, in UNIX epoch time format.'
@@ -2570,6 +2685,21 @@ definitions:
       MaxResults:
         $ref: '#/definitions/MaxResults'
         description: The maximum number of results to return in a single call.
+  ListTagsForResourceResponse:
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: A list of tag key-value pairs.
+  ListTagsForResourceRequest:
+    type: object
+    required:
+      - ResourceARN
+    properties:
+      ResourceARN:
+        $ref: '#/definitions/AmazonResourceName'
+        description: The resource ARN.
+  ResourceNotFoundException: {}
   ListUsersResponse:
     type: object
     properties:
@@ -2655,6 +2785,37 @@ definitions:
       Password:
         $ref: '#/definitions/Password'
         description: The new password for the user.
+  TagResourceResponse:
+    type: object
+    properties: {}
+  TagResourceRequest:
+    type: object
+    required:
+      - ResourceARN
+      - Tags
+    properties:
+      ResourceARN:
+        $ref: '#/definitions/AmazonResourceName'
+        description: The resource ARN.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tag key-value pairs.
+  TooManyTagsException: {}
+  UntagResourceResponse:
+    type: object
+    properties: {}
+  UntagResourceRequest:
+    type: object
+    required:
+      - ResourceARN
+      - TagKeys
+    properties:
+      ResourceARN:
+        $ref: '#/definitions/AmazonResourceName'
+        description: The resource ARN.
+      TagKeys:
+        $ref: '#/definitions/TagKeyList'
+        description: The tag keys.
   UpdateMailboxQuotaResponse:
     type: object
     properties: {}
@@ -2724,6 +2885,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/EmailAddress'
+  AmazonResourceName:
+    type: string
+    minLength: 1
+    maxLength: 1011
   OrganizationId:
     type: string
     pattern: '^m-[0-9a-f]{32}$'
@@ -2876,6 +3041,12 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Resource'
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    minItems: 0
+    maxItems: 50
   Users:
     type: array
     items:
@@ -2970,6 +3141,33 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: The date indicating when the resource was disabled from Amazon WorkMail use.
     description: The representation of a resource.
+  TagKey:
+    type: string
+    minLength: 1
+    maxLength: 128
+  TagValue:
+    type: string
+    minLength: 0
+    maxLength: 256
+  Tag:
+    type: object
+    required:
+      - Key
+      - Value
+    properties:
+      Key:
+        $ref: '#/definitions/TagKey'
+        description: The key of the tag.
+      Value:
+        $ref: '#/definitions/TagValue'
+        description: The value of the tag.
+    description: Describes a tag applied to a resource.
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+    minItems: 0
+    maxItems: 50
   User:
     type: object
     properties:

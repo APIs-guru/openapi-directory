@@ -1043,6 +1043,69 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /v1/kafka-versions:
+    get:
+      operationId: ListKafkaVersions
+      description: |2-
+
+                    <p>Returns a list of Kafka versions.</p>
+                 
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListKafkaVersionsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: |2-
+
+                        <p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>
+          type: integer
+          minimum: 1
+          maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: |2-
+
+                        <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. To get the next batch, provide this token in your next request.</p>
+          type: string
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/v1/clusters/{clusterArn}/nodes':
     get:
       operationId: ListNodes
@@ -1938,6 +2001,13 @@ definitions:
                       <p>The paginated results marker. When the result of a ListConfigurations operation is truncated, the call returns NextToken in the response. 
                          To get another batch of configurations, provide this token in your next request.</p>
                    
+  ListKafkaVersionsResponse:
+    type: object
+    properties:
+      KafkaVersions:
+        $ref: '#/definitions/__listOfKafkaVersion'
+      NextToken:
+        $ref: '#/definitions/__string'
   ListNodesResponse:
     type: object
     properties:
@@ -2242,6 +2312,13 @@ definitions:
 
                   <p>The state of a Kafka cluster.</p>
                
+  StateInfo:
+    type: object
+    properties:
+      Code:
+        $ref: '#/definitions/__string'
+      Message:
+        $ref: '#/definitions/__string'
   __mapOf__string:
     type: object
     additionalProperties:
@@ -2327,6 +2404,8 @@ definitions:
 
                       <p>The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.</p>
                    
+      StateInfo:
+        $ref: '#/definitions/StateInfo'
       Tags:
         $ref: '#/definitions/__mapOf__string'
         description: |2-
@@ -2732,6 +2811,18 @@ definitions:
   GetBootstrapBrokersRequest:
     type: object
     properties: {}
+  KafkaVersionStatus:
+    type: string
+    enum:
+      - ACTIVE
+      - DEPRECATED
+  KafkaVersion:
+    type: object
+    properties:
+      Version:
+        $ref: '#/definitions/__string'
+      Status:
+        $ref: '#/definitions/KafkaVersionStatus'
   MaxResults:
     type: integer
     minimum: 1
@@ -2764,6 +2855,13 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Configuration'
+  ListKafkaVersionsRequest:
+    type: object
+    properties: {}
+  __listOfKafkaVersion:
+    type: array
+    items:
+      $ref: '#/definitions/KafkaVersion'
   ListNodesRequest:
     type: object
     properties: {}
