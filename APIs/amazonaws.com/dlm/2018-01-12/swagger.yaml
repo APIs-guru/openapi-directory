@@ -196,7 +196,7 @@ paths:
               ExecutionRoleArn:
                 description: The Amazon Resource Name (ARN) of the IAM role used to run the operations specified by the lifecycle policy.
                 type: string
-                pattern: 'arn:aws:iam::\d+:role/.*'
+                pattern: 'arn:aws(-[a-z]{1,3}){0,2}:iam::\d+:role/.*'
                 minLength: 0
                 maxLength: 2048
               Description:
@@ -217,7 +217,7 @@ paths:
                 properties:
                   PolicyType:
                     $ref: '#/definitions/PolicyTypeValues'
-                    description: This field determines the valid target resource types and actions a policy can manage. This field defaults to EBS_SNAPSHOT_MANAGEMENT if not present.
+                    description: The valid target resource types and actions a policy can manage. The default is EBS_SNAPSHOT_MANAGEMENT.
                   ResourceTypes:
                     $ref: '#/definitions/ResourceTypeValuesList'
                     description: The resource type.
@@ -229,7 +229,7 @@ paths:
                     description: The schedule of policy-defined actions.
                   Parameters:
                     $ref: '#/definitions/Parameters'
-                    description: 'A set of optional parameters that can be provided by the policy. '
+                    description: 'A set of optional parameters for the policy. '
               Tags:
                 description: The tags to apply to the lifecycle policy during creation.
                 type: object
@@ -401,7 +401,7 @@ paths:
           required: true
           description: The Amazon Resource Name (ARN) of the resource.
           type: string
-          pattern: '^arn:aws:dlm:[A-Za-z0-9_/.-]{0,63}:\d+:policy/[0-9A-Za-z_-]{1,128}$'
+          pattern: '^arn:aws(-[a-z]{1,3}){0,2}:dlm:[A-Za-z0-9_/.-]{0,63}:\d+:policy/[0-9A-Za-z_-]{1,128}$'
           minLength: 0
           maxLength: 2048
     parameters:
@@ -438,7 +438,7 @@ paths:
           required: true
           description: The Amazon Resource Name (ARN) of the resource.
           type: string
-          pattern: '^arn:aws:dlm:[A-Za-z0-9_/.-]{0,63}:\d+:policy/[0-9A-Za-z_-]{1,128}$'
+          pattern: '^arn:aws(-[a-z]{1,3}){0,2}:dlm:[A-Za-z0-9_/.-]{0,63}:\d+:policy/[0-9A-Za-z_-]{1,128}$'
           minLength: 0
           maxLength: 2048
         - name: body
@@ -483,7 +483,7 @@ paths:
           required: true
           description: The Amazon Resource Name (ARN) of the resource.
           type: string
-          pattern: '^arn:aws:dlm:[A-Za-z0-9_/.-]{0,63}:\d+:policy/[0-9A-Za-z_-]{1,128}$'
+          pattern: '^arn:aws(-[a-z]{1,3}){0,2}:dlm:[A-Za-z0-9_/.-]{0,63}:\d+:policy/[0-9A-Za-z_-]{1,128}$'
           minLength: 0
           maxLength: 2048
         - name: tagKeys
@@ -544,7 +544,7 @@ paths:
               ExecutionRoleArn:
                 description: The Amazon Resource Name (ARN) of the IAM role used to run the operations specified by the lifecycle policy.
                 type: string
-                pattern: 'arn:aws:iam::\d+:role/.*'
+                pattern: 'arn:aws(-[a-z]{1,3}){0,2}:iam::\d+:role/.*'
                 minLength: 0
                 maxLength: 2048
               State:
@@ -565,7 +565,7 @@ paths:
                 properties:
                   PolicyType:
                     $ref: '#/definitions/PolicyTypeValues'
-                    description: This field determines the valid target resource types and actions a policy can manage. This field defaults to EBS_SNAPSHOT_MANAGEMENT if not present.
+                    description: The valid target resource types and actions a policy can manage. The default is EBS_SNAPSHOT_MANAGEMENT.
                   ResourceTypes:
                     $ref: '#/definitions/ResourceTypeValuesList'
                     description: The resource type.
@@ -577,7 +577,7 @@ paths:
                     description: The schedule of policy-defined actions.
                   Parameters:
                     $ref: '#/definitions/Parameters'
-                    description: 'A set of optional parameters that can be provided by the policy. '
+                    description: 'A set of optional parameters for the policy. '
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -620,8 +620,8 @@ definitions:
     properties:
       ExcludeBootVolume:
         $ref: '#/definitions/ExcludeBootVolume'
-        description: 'When executing an EBS Snapshot Management – Instance policy, execute all CreateSnapshots calls with the <code>excludeBootVolume</code> set to the supplied field. Defaults to false. Only valid for EBS Snapshot Management – Instance policies.'
-    description: Optional parameters that can be added to the policy. The set of valid parameters depends on the combination of <code>policyType</code> and <code>resourceType</code> values.
+        description: '[EBS Snapshot Management – Instance policies only] Indicates whether to exclude the root volume from snapshots created using <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSnapshots.html">CreateSnapshots</a>. The default is false.'
+    description: Specifies optional parameters to add to a policy. The set of valid parameters depends on the combination of policy type and resource type.
   TagValue:
     type: string
     pattern: '[\p{all}]*'
@@ -706,7 +706,7 @@ definitions:
     maximum: 1000
   ExecutionRoleArn:
     type: string
-    pattern: 'arn:aws:iam::\d+:role/.*'
+    pattern: 'arn:aws(-[a-z]{1,3}){0,2}:iam::\d+:role/.*'
     minLength: 0
     maxLength: 2048
   PolicyDescription:
@@ -724,7 +724,7 @@ definitions:
     properties:
       PolicyType:
         $ref: '#/definitions/PolicyTypeValues'
-        description: This field determines the valid target resource types and actions a policy can manage. This field defaults to EBS_SNAPSHOT_MANAGEMENT if not present.
+        description: The valid target resource types and actions a policy can manage. The default is EBS_SNAPSHOT_MANAGEMENT.
       ResourceTypes:
         $ref: '#/definitions/ResourceTypeValuesList'
         description: The resource type.
@@ -736,7 +736,7 @@ definitions:
         description: The schedule of policy-defined actions.
       Parameters:
         $ref: '#/definitions/Parameters'
-        description: 'A set of optional parameters that can be provided by the policy. '
+        description: 'A set of optional parameters for the policy. '
     description: Specifies the configuration of a lifecycle policy.
   TagMap:
     type: object
@@ -946,7 +946,7 @@ definitions:
     format: date-time
   PolicyArn:
     type: string
-    pattern: '^arn:aws:dlm:[A-Za-z0-9_/.-]{0,63}:\d+:policy/[0-9A-Za-z_-]{1,128}$'
+    pattern: '^arn:aws(-[a-z]{1,3}){0,2}:dlm:[A-Za-z0-9_/.-]{0,63}:\d+:policy/[0-9A-Za-z_-]{1,128}$'
     minLength: 0
     maxLength: 2048
   LifecyclePolicySummary:
@@ -991,13 +991,13 @@ definitions:
     items:
       $ref: '#/definitions/Tag'
     minItems: 0
-    maxItems: 50
+    maxItems: 45
   VariableTagsList:
     type: array
     items:
       $ref: '#/definitions/Tag'
     minItems: 0
-    maxItems: 50
+    maxItems: 45
   Schedule:
     type: object
     properties:
@@ -1025,7 +1025,7 @@ definitions:
       CrossRegionCopyRules:
         $ref: '#/definitions/CrossRegionCopyRules'
         description: The rule for cross-Region snapshot copies.
-    description: Specifies a schedule.
+    description: Specifies a backup schedule.
   String:
     type: string
     pattern: '[\p{all}]*'
