@@ -2209,7 +2209,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/definitions/EnumerationValue'
-                minItems: 1
+                minItems: 0
                 maxItems: 10000
               checksum:
                 description: '<p>Identifies a specific revision of the <code>$LATEST</code> version.</p> <p>When you create a new slot type, leave the <code>checksum</code> field blank. If you specify a checksum you get a <code>BadRequestException</code> exception.</p> <p>When you want to update a slot type, set the <code>checksum</code> field to the checksum of the most recent revision of the <code>$LATEST</code> version. If you don''t specify the <code> checksum</code> field, or if the checksum does not match the <code>$LATEST</code> version, you get a <code>PreconditionFailedException</code> exception.</p>'
@@ -2223,6 +2223,19 @@ paths:
               createVersion:
                 description: 'When set to <code>true</code> a new numbered version of the slot type is created. This is the same as calling the <code>CreateSlotTypeVersion</code> operation. If you do not specify <code>createVersion</code>, the default is <code>false</code>.'
                 type: boolean
+              parentSlotTypeSignature:
+                description: '<p>The built-in slot type used as the parent of the slot type. When you define a parent slot type, the new slot type has all of the same configuration as the parent.</p> <p>Only <code>AMAZON.AlphaNumeric</code> is supported.</p>'
+                type: string
+                pattern: '^((AMAZON\.)_?|[A-Za-z]_?)+'
+                minLength: 1
+                maxLength: 100
+              slotTypeConfigurations:
+                description: Configuration information that extends the parent built-in slot type. The configuration is added to the settings for the parent slot type.
+                type: array
+                items:
+                  $ref: '#/definitions/SlotTypeConfiguration'
+                minItems: 0
+                maxItems: 10
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -2420,6 +2433,12 @@ definitions:
       valueSelectionStrategy:
         $ref: '#/definitions/SlotValueSelectionStrategy'
         description: 'The strategy that Amazon Lex uses to determine the value of the slot. For more information, see <a>PutSlotType</a>.'
+      parentSlotTypeSignature:
+        $ref: '#/definitions/CustomOrBuiltinSlotTypeName'
+        description: The built-in slot type used a the parent of the slot type.
+      slotTypeConfigurations:
+        $ref: '#/definitions/SlotTypeConfigurations'
+        description: Configuration information that extends the parent built-in slot type.
   ResourceInUseException: {}
   GetBotResponse:
     type: object
@@ -2872,6 +2891,12 @@ definitions:
       valueSelectionStrategy:
         $ref: '#/definitions/SlotValueSelectionStrategy'
         description: 'The strategy that Amazon Lex uses to determine the value of the slot. For more information, see <a>PutSlotType</a>.'
+      parentSlotTypeSignature:
+        $ref: '#/definitions/CustomOrBuiltinSlotTypeName'
+        description: The built-in slot type used as a parent for the slot type.
+      slotTypeConfigurations:
+        $ref: '#/definitions/SlotTypeConfigurations'
+        description: Configuration information that extends the parent built-in slot type.
   GetSlotTypeVersionsResponse:
     type: object
     properties:
@@ -3336,6 +3361,12 @@ definitions:
       createVersion:
         $ref: '#/definitions/Boolean'
         description: ' <code>True</code> if a new version of the slot type was created. If the <code>createVersion</code> field was not specified in the request, the <code>createVersion</code> field is set to false in the response.'
+      parentSlotTypeSignature:
+        $ref: '#/definitions/CustomOrBuiltinSlotTypeName'
+        description: The built-in slot type used as the parent of the slot type.
+      slotTypeConfigurations:
+        $ref: '#/definitions/SlotTypeConfigurations'
+        description: Configuration information that extends the parent built-in slot type.
   EnumerationValue:
     type: object
     required:
@@ -3348,6 +3379,13 @@ definitions:
         $ref: '#/definitions/SynonymList'
         description: Additional values related to the slot type value.
     description: '<p>Each slot type can have a set of values. Each enumeration value represents a value the slot type can take. </p> <p>For example, a pizza ordering bot could have a slot type that specifies the type of crust that the pizza should have. The slot type could include the values </p> <ul> <li> <p>thick</p> </li> <li> <p>thin</p> </li> <li> <p>stuffed</p> </li> </ul>'
+  SlotTypeConfiguration:
+    type: object
+    properties:
+      regexConfiguration:
+        $ref: '#/definitions/SlotTypeRegexConfiguration'
+        description: A regular expression used to validate the value of a slot.
+    description: Provides configuration information for a slot type.
   StartImportResponse:
     type: object
     properties:
@@ -3697,7 +3735,7 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/EnumerationValue'
-    minItems: 1
+    minItems: 0
     maxItems: 10000
   SlotValueSelectionStrategy:
     type: string
@@ -3709,6 +3747,12 @@ definitions:
     pattern: '^((AMAZON\.)_?|[A-Za-z]_?)+'
     minLength: 1
     maxLength: 100
+  SlotTypeConfigurations:
+    type: array
+    items:
+      $ref: '#/definitions/SlotTypeConfiguration'
+    minItems: 0
+    maxItems: 10
   DeleteBotAliasRequest:
     type: object
     properties: {}
@@ -4134,6 +4178,16 @@ definitions:
       createVersion:
         $ref: '#/definitions/Boolean'
         description: 'When set to <code>true</code> a new numbered version of the slot type is created. This is the same as calling the <code>CreateSlotTypeVersion</code> operation. If you do not specify <code>createVersion</code>, the default is <code>false</code>.'
+      parentSlotTypeSignature:
+        $ref: '#/definitions/CustomOrBuiltinSlotTypeName'
+        description: '<p>The built-in slot type used as the parent of the slot type. When you define a parent slot type, the new slot type has all of the same configuration as the parent.</p> <p>Only <code>AMAZON.AlphaNumeric</code> is supported.</p>'
+      slotTypeConfigurations:
+        $ref: '#/definitions/SlotTypeConfigurations'
+        description: Configuration information that extends the parent built-in slot type. The configuration is added to the settings for the parent slot type.
+  RegexPattern:
+    type: string
+    minLength: 1
+    maxLength: 100
   SlotName:
     type: string
     pattern: '^([A-Za-z](-|_|.)?)+$'
@@ -4150,6 +4204,15 @@ definitions:
       $ref: '#/definitions/Utterance'
     minItems: 0
     maxItems: 10
+  SlotTypeRegexConfiguration:
+    type: object
+    required:
+      - pattern
+    properties:
+      pattern:
+        $ref: '#/definitions/RegexPattern'
+        description: '<p>A regular expression used to validate the value of a slot. </p> <p>Use a standard regular expression. Amazon Lex supports the following characters in the regular expression:</p> <ul> <li> <p>A-Z, a-z</p> </li> <li> <p>0-9</p> </li> <li> <p>Unicode characters ("\ u&lt;Unicode&gt;")</p> </li> </ul> <p>Represent Unicode characters with four digits, for example "\u0041" or "\u005A".</p> <p>The following regular expression operators are not supported:</p> <ul> <li> <p>Infinite repeaters: *, +, or {x,} with no upper bound.</p> </li> <li> <p>Wild card (.)</p> </li> </ul>'
+    description: Provides a regular expression used to validate the value of a slot.
   SlotTypeMetadata:
     type: object
     properties:

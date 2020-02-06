@@ -834,6 +834,9 @@ paths:
                 type: array
                 items:
                   $ref: '#/definitions/AdditionalAuthenticationProvider'
+              xrayEnabled:
+                description: A flag indicating whether to enable X-Ray tracing for the <code>GraphqlApi</code>.
+                type: boolean
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1769,6 +1772,9 @@ paths:
                 type: array
                 items:
                   $ref: '#/definitions/AdditionalAuthenticationProvider'
+              xrayEnabled:
+                description: A flag indicating whether to enable X-Ray tracing for the <code>GraphqlApi</code>.
+                type: boolean
   '/v1/apis/{apiId}/types/{typeName}/resolvers/{fieldName}':
     delete:
       operationId: DeleteResolver
@@ -2832,6 +2838,7 @@ definitions:
       lambdaConflictHandlerArn:
         $ref: '#/definitions/String'
         description: The Arn for the Lambda function to use as the Conflict Handler.
+    description: The <code>LambdaConflictHandlerConfig</code> object when configuring LAMBDA as the Conflict Handler.
   CachingKeys:
     type: array
     items:
@@ -2874,6 +2881,7 @@ definitions:
     properties:
       apiCache:
         $ref: '#/definitions/ApiCache'
+        description: The <code>ApiCache</code> object.
     description: Represents the output of a <code>GetApiCache</code> operation.
   GetDataSourceResponse:
     type: object
@@ -3140,6 +3148,7 @@ definitions:
       status:
         $ref: '#/definitions/ApiCacheStatus'
         description: '<p>The cache instance status.</p> <ul> <li> <p> <b>AVAILABLE</b>: The instance is available for use.</p> </li> <li> <p> <b>CREATING</b>: The instance is currently creating.</p> </li> <li> <p> <b>DELETING</b>: The instance is currently deleting.</p> </li> <li> <p> <b>MODIFYING</b>: The instance is currently modifying.</p> </li> <li> <p> <b>FAILED</b>: The instance has failed creation.</p> </li> </ul>'
+    description: The <code>ApiCache</code> object.
   ApiKey:
     type: object
     properties:
@@ -3490,6 +3499,9 @@ definitions:
       additionalAuthenticationProviders:
         $ref: '#/definitions/AdditionalAuthenticationProviders'
         description: A list of additional authentication providers for the <code>GraphqlApi</code> API.
+      xrayEnabled:
+        $ref: '#/definitions/Boolean'
+        description: A flag indicating whether to enable X-Ray tracing for the <code>GraphqlApi</code>.
   GraphqlApi:
     type: object
     properties:
@@ -3523,6 +3535,9 @@ definitions:
       additionalAuthenticationProviders:
         $ref: '#/definitions/AdditionalAuthenticationProviders'
         description: A list of additional authentication providers for the <code>GraphqlApi</code> API.
+      xrayEnabled:
+        $ref: '#/definitions/Boolean'
+        description: A flag representing whether X-Ray tracing is enabled for this <code>GraphqlApi</code>.
     description: Describes a GraphQL API.
   ResolverKind:
     type: string
@@ -3905,6 +3920,9 @@ definitions:
       additionalAuthenticationProviders:
         $ref: '#/definitions/AdditionalAuthenticationProviders'
         description: A list of additional authentication providers for the <code>GraphqlApi</code> API.
+      xrayEnabled:
+        $ref: '#/definitions/Boolean'
+        description: A flag indicating whether to enable X-Ray tracing for the <code>GraphqlApi</code>.
   UpdateResolverRequest:
     type: object
     required:
