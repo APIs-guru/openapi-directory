@@ -305,6 +305,54 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /cancelSimulationJobBatch:
+    post:
+      operationId: CancelSimulationJobBatch
+      description: 'Cancels a simulation job batch. When you cancel a simulation job batch, you are also cancelling all of the active simulation jobs created as part of the batch. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CancelSimulationJobBatchResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - batch
+            properties:
+              batch:
+                description: The id of the batch to cancel.
+                type: string
+                pattern: 'arn:.*'
+                minLength: 1
+                maxLength: 1224
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /createDeploymentJob:
     post:
       operationId: CreateDeploymentJob
@@ -588,15 +636,15 @@ paths:
                 items:
                   $ref: '#/definitions/SourceConfig'
               robotSoftwareSuite:
-                description: Information about a robot software suite.
+                description: Information about a robot software suite (ROS distribution).
                 type: object
                 properties:
                   name:
                     $ref: '#/definitions/RobotSoftwareSuiteType'
-                    description: The name of the robot software suite.
+                    description: The name of the robot software suite (ROS distribution).
                   version:
                     $ref: '#/definitions/RobotSoftwareSuiteVersionType'
-                    description: The version of the robot software suite.
+                    description: The version of the robot software suite (ROS distribution).
               tags:
                 description: A map that contains tag keys and tag values that are attached to the robot application.
                 type: object
@@ -737,15 +785,15 @@ paths:
                     $ref: '#/definitions/SimulationSoftwareSuiteVersionType'
                     description: The version of the simulation software suite.
               robotSoftwareSuite:
-                description: Information about a robot software suite.
+                description: Information about a robot software suite (ROS distribution).
                 type: object
                 properties:
                   name:
                     $ref: '#/definitions/RobotSoftwareSuiteType'
-                    description: The name of the robot software suite.
+                    description: The name of the robot software suite (ROS distribution).
                   version:
                     $ref: '#/definitions/RobotSoftwareSuiteVersionType'
-                    description: The version of the robot software suite.
+                    description: The version of the robot software suite (ROS distribution).
               renderingEngine:
                 description: Information about a rendering engine.
                 type: object
@@ -931,7 +979,7 @@ paths:
                 minItems: 1
                 maxItems: 1
               dataSources:
-                description: <p>The data sources for the simulation job.</p> <note> <p>There is a limit of 100 files and a combined size of 25GB for all <code>DataSourceConfig</code> objects. </p> </note>
+                description: <p>Specify data sources to mount read-only files from S3 into your simulation. These files are available under <code>/opt/robomaker/datasources/data_source_name</code>. </p> <note> <p>There is a limit of 100 files and a combined size of 25GB for all <code>DataSourceConfig</code> objects. </p> </note>
                 type: array
                 items:
                   $ref: '#/definitions/DataSourceConfig'
@@ -1508,10 +1556,54 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /describeSimulationJobBatch:
+    post:
+      operationId: DescribeSimulationJobBatch
+      description: Describes a simulation job batch.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeSimulationJobBatchResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - batch
+            properties:
+              batch:
+                description: The id of the batch to describe.
+                type: string
+                pattern: 'arn:.*'
+                minLength: 1
+                maxLength: 1224
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /listDeploymentJobs:
     post:
       operationId: ListDeploymentJobs
-      description: <p>Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs. </p> <note> <p> </p> </note>
+      description: 'Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs. '
       responses:
         '200':
           description: Success
@@ -1548,13 +1640,13 @@ paths:
                 minItems: 1
                 maxItems: 1
               nextToken:
-                description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListDeploymentJobs</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+                description: 'The <code>nextToken</code> value returned from a previous paginated <code>ListDeploymentJobs</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. '
                 type: string
                 pattern: '[a-zA-Z0-9_.\-\/+=]*'
                 minLength: 1
                 maxLength: 2048
               maxResults:
-                description: 'The maximum number of deployment job results returned by <code>ListDeploymentJobs</code> in paginated output. When this parameter is used, <code>ListDeploymentJobs</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListDeploymentJobs</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListDeploymentJobs</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+                description: 'When this parameter is used, <code>ListDeploymentJobs</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListDeploymentJobs</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 200. If this parameter is not used, then <code>ListDeploymentJobs</code> returns up to 200 results and a <code>nextToken</code> value if applicable. '
                 type: integer
         - name: maxResults
           type: string
@@ -1613,7 +1705,7 @@ paths:
                 minLength: 1
                 maxLength: 2048
               maxResults:
-                description: 'The maximum number of deployment job results returned by <code>ListFleets</code> in paginated output. When this parameter is used, <code>ListFleets</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListFleets</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListFleets</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+                description: 'When this parameter is used, <code>ListFleets</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListFleets</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 200. If this parameter is not used, then <code>ListFleets</code> returns up to 200 results and a <code>nextToken</code> value if applicable. '
                 type: integer
               filters:
                 description: '<p>Optional filters to limit results.</p> <p>The filter name <code>name</code> is supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters.</p>'
@@ -1673,13 +1765,13 @@ paths:
                 type: string
                 pattern: ALL
               nextToken:
-                description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListRobotApplications</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+                description: 'The <code>nextToken</code> value returned from a previous paginated <code>ListRobotApplications</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. '
                 type: string
                 pattern: '[a-zA-Z0-9_.\-\/+=]*'
                 minLength: 1
                 maxLength: 2048
               maxResults:
-                description: 'The maximum number of deployment job results returned by <code>ListRobotApplications</code> in paginated output. When this parameter is used, <code>ListRobotApplications</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListRobotApplications</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListRobotApplications</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+                description: 'When this parameter is used, <code>ListRobotApplications</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListRobotApplications</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListRobotApplications</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
                 type: integer
               filters:
                 description: '<p>Optional filters to limit results.</p> <p>The filter name <code>name</code> is supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters.</p>'
@@ -1739,13 +1831,13 @@ paths:
             type: object
             properties:
               nextToken:
-                description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListRobots</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+                description: 'The <code>nextToken</code> value returned from a previous paginated <code>ListRobots</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. '
                 type: string
                 pattern: '[a-zA-Z0-9_.\-\/+=]*'
                 minLength: 1
                 maxLength: 2048
               maxResults:
-                description: 'The maximum number of deployment job results returned by <code>ListRobots</code> in paginated output. When this parameter is used, <code>ListRobots</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListRobots</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListRobots</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+                description: 'When this parameter is used, <code>ListRobots</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListRobots</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 200. If this parameter is not used, then <code>ListRobots</code> returns up to 200 results and a <code>nextToken</code> value if applicable. '
                 type: integer
               filters:
                 description: '<p>Optional filters to limit results.</p> <p>The filter names <code>status</code> and <code>fleetName</code> are supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters, but they must be for the same named item. For example, if you are looking for items with the status <code>Registered</code> or the status <code>Available</code>.</p>'
@@ -1805,16 +1897,74 @@ paths:
                 type: string
                 pattern: ALL
               nextToken:
-                description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListSimulationApplications</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+                description: 'The <code>nextToken</code> value returned from a previous paginated <code>ListSimulationApplications</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. '
                 type: string
                 pattern: '[a-zA-Z0-9_.\-\/+=]*'
                 minLength: 1
                 maxLength: 2048
               maxResults:
-                description: 'The maximum number of deployment job results returned by <code>ListSimulationApplications</code> in paginated output. When this parameter is used, <code>ListSimulationApplications</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListSimulationApplications</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListSimulationApplications</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+                description: 'When this parameter is used, <code>ListSimulationApplications</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListSimulationApplications</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListSimulationApplications</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
                 type: integer
               filters:
                 description: '<p>Optional list of filters to limit results.</p> <p>The filter name <code>name</code> is supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters.</p>'
+                type: array
+                items:
+                  $ref: '#/definitions/Filter'
+                minItems: 1
+                maxItems: 1
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /listSimulationJobBatches:
+    post:
+      operationId: ListSimulationJobBatches
+      description: 'Returns a list simulation job batches. You can optionally provide filters to retrieve specific simulation batch jobs. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListSimulationJobBatchesResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              nextToken:
+                description: 'The <code>nextToken</code> value returned from a previous paginated <code>ListSimulationJobBatches</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. '
+                type: string
+                pattern: '[a-zA-Z0-9_.\-\/+=]*'
+                minLength: 1
+                maxLength: 2048
+              maxResults:
+                description: 'When this parameter is used, <code>ListSimulationJobBatches</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListSimulationJobBatches</code> request with the returned <code>nextToken</code> value. '
+                type: integer
+              filters:
+                description: Optional filters to limit results.
                 type: array
                 items:
                   $ref: '#/definitions/Filter'
@@ -1873,7 +2023,7 @@ paths:
                 minLength: 1
                 maxLength: 2048
               maxResults:
-                description: 'The maximum number of deployment job results returned by <code>ListSimulationJobs</code> in paginated output. When this parameter is used, <code>ListSimulationJobs</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListSimulationJobs</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListSimulationJobs</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+                description: 'When this parameter is used, <code>ListSimulationJobs</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListSimulationJobs</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 1000. If this parameter is not used, then <code>ListSimulationJobs</code> returns up to 1000 results and a <code>nextToken</code> value if applicable. '
                 type: integer
               filters:
                 description: '<p>Optional filters to limit results.</p> <p>The filter names <code>status</code> and <code>simulationApplicationName</code> and <code>robotApplicationName</code> are supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters, but they must be for the same named item. For example, if you are looking for items with the status <code>Preparing</code> or the status <code>Running</code>.</p>'
@@ -2101,6 +2251,81 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /startSimulationJobBatch:
+    post:
+      operationId: StartSimulationJobBatch
+      description: 'Starts a new simulation job batch. The batch is defined using one or more <code>SimulationJobRequest</code> objects. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartSimulationJobBatchResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: IdempotentParameterMismatchException
+          schema:
+            $ref: '#/definitions/IdempotentParameterMismatchException'
+        '484':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - createSimulationJobRequests
+            properties:
+              clientRequestToken:
+                description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                type: string
+                pattern: '[a-zA-Z0-9_\-=]*'
+                minLength: 1
+                maxLength: 64
+              batchPolicy:
+                description: Information about the batch policy.
+                type: object
+                properties:
+                  timeoutInSeconds:
+                    $ref: '#/definitions/BatchTimeoutInSeconds'
+                    description: '<p>The amount of time, in seconds, to wait for the batch to complete. </p> <p>If a batch times out, and there are pending requests that were failing due to an internal failure (like <code>InternalServiceError</code>), they will be moved to the failed list and the batch status will be <code>Failed</code>. If the pending requests were failing for any other reason, the failed pending requests will be moved to the failed list and the batch status will be <code>TimedOut</code>. </p>'
+                  maxConcurrency:
+                    $ref: '#/definitions/MaxConcurrency'
+                    description: '<p>The number of active simulation jobs create as part of the batch that can be in an active state at the same time. </p> <p>Active states include: <code>Pending</code>,<code>Preparing</code>, <code>Running</code>, <code>Restarting</code>, <code>RunningFailed</code> and <code>Terminating</code>. All other states are terminal states. </p>'
+              createSimulationJobRequests:
+                description: A list of simulation job requests to create in the batch.
+                type: array
+                items:
+                  $ref: '#/definitions/SimulationJobRequest'
+                minItems: 1
+              tags:
+                description: A map that contains tag keys and tag values that are attached to the deployment job batch.
+                type: object
+                minProperties: 0
+                maxProperties: 50
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /syncDeploymentJob:
     post:
       operationId: SyncDeploymentJob
@@ -2269,15 +2494,15 @@ paths:
                 items:
                   $ref: '#/definitions/SourceConfig'
               robotSoftwareSuite:
-                description: Information about a robot software suite.
+                description: Information about a robot software suite (ROS distribution).
                 type: object
                 properties:
                   name:
                     $ref: '#/definitions/RobotSoftwareSuiteType'
-                    description: The name of the robot software suite.
+                    description: The name of the robot software suite (ROS distribution).
                   version:
                     $ref: '#/definitions/RobotSoftwareSuiteVersionType'
-                    description: The version of the robot software suite.
+                    description: The version of the robot software suite (ROS distribution).
               currentRevisionId:
                 description: The revision id for the robot application.
                 type: string
@@ -2355,15 +2580,15 @@ paths:
                     $ref: '#/definitions/SimulationSoftwareSuiteVersionType'
                     description: The version of the simulation software suite.
               robotSoftwareSuite:
-                description: Information about a robot software suite.
+                description: Information about a robot software suite (ROS distribution).
                 type: object
                 properties:
                   name:
                     $ref: '#/definitions/RobotSoftwareSuiteType'
-                    description: The name of the robot software suite.
+                    description: The name of the robot software suite (ROS distribution).
                   version:
                     $ref: '#/definitions/RobotSoftwareSuiteVersionType'
-                    description: The version of the robot software suite.
+                    description: The version of the robot software suite (ROS distribution).
               renderingEngine:
                 description: Information about a rendering engine.
                 type: object
@@ -2411,6 +2636,9 @@ definitions:
     type: object
     properties: {}
   CancelSimulationJobResponse:
+    type: object
+    properties: {}
+  CancelSimulationJobBatchResponse:
     type: object
     properties: {}
   CreateDeploymentJobResponse:
@@ -2544,7 +2772,7 @@ definitions:
         description: The sources of the robot application.
       robotSoftwareSuite:
         $ref: '#/definitions/RobotSoftwareSuite'
-        description: The robot software suite used by the robot application.
+        description: The robot software suite (ROS distribution) used by the robot application.
       lastUpdatedAt:
         $ref: '#/definitions/LastUpdatedAt'
         description: 'The time, in milliseconds since the epoch, when the robot application was last updated.'
@@ -2595,7 +2823,7 @@ definitions:
         description: The sources of the robot application.
       robotSoftwareSuite:
         $ref: '#/definitions/RobotSoftwareSuite'
-        description: The robot software suite used by the robot application.
+        description: The robot software suite (ROS distribution) used by the robot application.
       lastUpdatedAt:
         $ref: '#/definitions/LastUpdatedAt'
         description: 'The time, in milliseconds since the epoch, when the robot application was last updated.'
@@ -2622,7 +2850,7 @@ definitions:
         description: The simulation software suite used by the simulation application.
       robotSoftwareSuite:
         $ref: '#/definitions/RobotSoftwareSuite'
-        description: Information about the robot software suite.
+        description: Information about the robot software suite (ROS distribution).
       renderingEngine:
         $ref: '#/definitions/RenderingEngine'
         description: The rendering engine for the simulation application.
@@ -2670,7 +2898,7 @@ definitions:
         description: The simulation software suite used by the simulation application.
       robotSoftwareSuite:
         $ref: '#/definitions/RobotSoftwareSuite'
-        description: Information about the robot software suite.
+        description: Information about the robot software suite (ROS distribution).
       renderingEngine:
         $ref: '#/definitions/RenderingEngine'
         description: The rendering engine for the simulation application.
@@ -2941,7 +3169,7 @@ definitions:
         description: The sources of the robot application.
       robotSoftwareSuite:
         $ref: '#/definitions/RobotSoftwareSuite'
-        description: The robot software suite used by the robot application.
+        description: The robot software suite (ROS distribution) used by the robot application.
       revisionId:
         $ref: '#/definitions/RevisionId'
         description: The revision id of the robot application.
@@ -2971,7 +3199,7 @@ definitions:
         description: The simulation software suite used by the simulation application.
       robotSoftwareSuite:
         $ref: '#/definitions/RobotSoftwareSuite'
-        description: Information about the robot software suite.
+        description: Information about the robot software suite (ROS distribution).
       renderingEngine:
         $ref: '#/definitions/RenderingEngine'
         description: The rendering engine for the simulation application.
@@ -3047,6 +3275,45 @@ definitions:
       networkInterface:
         $ref: '#/definitions/NetworkInterface'
         description: The network interface information for the simulation job.
+  DescribeSimulationJobBatchResponse:
+    type: object
+    properties:
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the batch.
+      status:
+        $ref: '#/definitions/SimulationJobBatchStatus'
+        description: '<p>The status of the batch.</p> <dl> <dt>Pending</dt> <dd> <p>The simulation job batch request is pending.</p> </dd> <dt>InProgress</dt> <dd> <p>The simulation job batch is in progress. </p> </dd> <dt>Failed</dt> <dd> <p>The simulation job batch failed. One or more simulation job requests could not be completed due to an internal failure (like <code>InternalServiceError</code>). See <code>failureCode</code> and <code>failureReason</code> for more information.</p> </dd> <dt>Completed</dt> <dd> <p>The simulation batch job completed. A batch is complete when (1) there are no pending simulation job requests in the batch and none of the failed simulation job requests are due to <code>InternalServiceError</code> and (2) when all created simulation jobs have reached a terminal state (for example, <code>Completed</code> or <code>Failed</code>). </p> </dd> <dt>Canceled</dt> <dd> <p>The simulation batch job was cancelled.</p> </dd> <dt>Canceling</dt> <dd> <p>The simulation batch job is being cancelled.</p> </dd> <dt>Completing</dt> <dd> <p>The simulation batch job is completing.</p> </dd> <dt>TimingOut</dt> <dd> <p>The simulation job batch is timing out.</p> <p>If a batch timing out, and there are pending requests that were failing due to an internal failure (like <code>InternalServiceError</code>), the batch status will be <code>Failed</code>. If there are no such failing request, the batch status will be <code>TimedOut</code>. </p> </dd> <dt>TimedOut</dt> <dd> <p>The simulation batch job timed out.</p> </dd> </dl>'
+      lastUpdatedAt:
+        $ref: '#/definitions/LastUpdatedAt'
+        description: 'The time, in milliseconds since the epoch, when the simulation job batch was last updated.'
+      createdAt:
+        $ref: '#/definitions/CreatedAt'
+        description: 'The time, in milliseconds since the epoch, when the simulation job batch was created.'
+      clientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+      batchPolicy:
+        $ref: '#/definitions/BatchPolicy'
+        description: The batch policy.
+      failureCode:
+        $ref: '#/definitions/SimulationJobBatchErrorCode'
+        description: The failure code of the simulation job batch.
+      failureReason:
+        $ref: '#/definitions/GenericString'
+        description: The reason the simulation job batch failed.
+      failedRequests:
+        $ref: '#/definitions/FailedCreateSimulationJobRequests'
+        description: 'A list of failed create simulation job requests. The request failed to be created into a simulation job. Failed requests do not have a simulation job ID. '
+      pendingRequests:
+        $ref: '#/definitions/CreateSimulationJobRequests'
+        description: A list of pending simulation job requests. These requests have not yet been created into simulation jobs.
+      createdRequests:
+        $ref: '#/definitions/SimulationJobSummaries'
+        description: A list of created simulation job summaries.
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: A map that contains tag keys and tag values that are attached to the simulation job batch.
   ListDeploymentJobsResponse:
     type: object
     properties:
@@ -3102,6 +3369,15 @@ definitions:
       nextToken:
         $ref: '#/definitions/PaginationToken'
         description: 'The <code>nextToken</code> value to include in a future <code>ListSimulationApplications</code> request. When the results of a <code>ListRobot</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
+  ListSimulationJobBatchesResponse:
+    type: object
+    properties:
+      simulationJobBatchSummaries:
+        $ref: '#/definitions/SimulationJobBatchSummaries'
+        description: A list of simulation job batch summaries.
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'The <code>nextToken</code> value to include in a future <code>ListSimulationJobBatches</code> request. When the results of a <code>ListSimulationJobBatches</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
   ListSimulationJobsResponse:
     type: object
     required:
@@ -3131,6 +3407,82 @@ definitions:
   RestartSimulationJobResponse:
     type: object
     properties: {}
+  StartSimulationJobBatchResponse:
+    type: object
+    properties:
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (arn) of the batch.
+      status:
+        $ref: '#/definitions/SimulationJobBatchStatus'
+        description: '<p>The status of the simulation job batch.</p> <dl> <dt>Pending</dt> <dd> <p>The simulation job batch request is pending.</p> </dd> <dt>InProgress</dt> <dd> <p>The simulation job batch is in progress. </p> </dd> <dt>Failed</dt> <dd> <p>The simulation job batch failed. One or more simulation job requests could not be completed due to an internal failure (like <code>InternalServiceError</code>). See <code>failureCode</code> and <code>failureReason</code> for more information.</p> </dd> <dt>Completed</dt> <dd> <p>The simulation batch job completed. A batch is complete when (1) there are no pending simulation job requests in the batch and none of the failed simulation job requests are due to <code>InternalServiceError</code> and (2) when all created simulation jobs have reached a terminal state (for example, <code>Completed</code> or <code>Failed</code>). </p> </dd> <dt>Canceled</dt> <dd> <p>The simulation batch job was cancelled.</p> </dd> <dt>Canceling</dt> <dd> <p>The simulation batch job is being cancelled.</p> </dd> <dt>Completing</dt> <dd> <p>The simulation batch job is completing.</p> </dd> <dt>TimingOut</dt> <dd> <p>The simulation job batch is timing out.</p> <p>If a batch timing out, and there are pending requests that were failing due to an internal failure (like <code>InternalServiceError</code>), the batch status will be <code>Failed</code>. If there are no such failing request, the batch status will be <code>TimedOut</code>. </p> </dd> <dt>TimedOut</dt> <dd> <p>The simulation batch job timed out.</p> </dd> </dl>'
+      createdAt:
+        $ref: '#/definitions/CreatedAt'
+        description: 'The time, in milliseconds since the epoch, when the simulation job batch was created.'
+      clientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+      batchPolicy:
+        $ref: '#/definitions/BatchPolicy'
+        description: The batch policy.
+      failureCode:
+        $ref: '#/definitions/SimulationJobBatchErrorCode'
+        description: The failure code if the simulation job batch failed.
+      failureReason:
+        $ref: '#/definitions/GenericString'
+        description: The reason the simulation job batch failed.
+      failedRequests:
+        $ref: '#/definitions/FailedCreateSimulationJobRequests'
+        description: 'A list of failed simulation job requests. The request failed to be created into a simulation job. Failed requests do not have a simulation job ID. '
+      pendingRequests:
+        $ref: '#/definitions/CreateSimulationJobRequests'
+        description: A list of pending simulation job requests. These requests have not yet been created into simulation jobs.
+      createdRequests:
+        $ref: '#/definitions/SimulationJobSummaries'
+        description: A list of created simulation job request summaries.
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: A map that contains tag keys and tag values that are attached to the deployment job batch.
+  BatchTimeoutInSeconds:
+    type: integer
+  MaxConcurrency:
+    type: integer
+  SimulationJobRequest:
+    type: object
+    required:
+      - maxJobDurationInSeconds
+    properties:
+      outputLocation:
+        $ref: '#/definitions/OutputLocation'
+      loggingConfig:
+        $ref: '#/definitions/LoggingConfig'
+      maxJobDurationInSeconds:
+        $ref: '#/definitions/JobDuration'
+        description: 'The maximum simulation job duration in seconds. The value must be 8 days (691,200 seconds) or less.'
+      iamRole:
+        $ref: '#/definitions/IamRole'
+        description: 'The IAM role name that allows the simulation instance to call the AWS APIs that are specified in its associated policies on your behalf. This is how credentials are passed in to your simulation job. '
+      failureBehavior:
+        $ref: '#/definitions/FailureBehavior'
+        description: <p>The failure behavior the simulation job.</p> <dl> <dt>Continue</dt> <dd> <p>Restart the simulation job in the same host instance.</p> </dd> <dt>Fail</dt> <dd> <p>Stop the simulation job and terminate the instance.</p> </dd> </dl>
+      useDefaultApplications:
+        $ref: '#/definitions/BoxedBoolean'
+        description: Boolean indicating whether to use default simulation tool applications.
+      robotApplications:
+        $ref: '#/definitions/RobotApplicationConfigs'
+        description: The robot applications to use in the simulation job.
+      simulationApplications:
+        $ref: '#/definitions/SimulationApplicationConfigs'
+        description: The simulation applications to use in the simulation job.
+      dataSources:
+        $ref: '#/definitions/DataSourceConfigs'
+        description: <p>Specify data sources to mount read-only files from S3 into your simulation. These files are available under <code>/opt/robomaker/datasources/data_source_name</code>. </p> <note> <p>There is a limit of 100 files and a combined size of 25GB for all <code>DataSourceConfig</code> objects. </p> </note>
+      vpcConfig:
+        $ref: '#/definitions/VPCConfig'
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: A map that contains tag keys and tag values that are attached to the simulation job request.
+    description: Information about a simulation job request.
   SyncDeploymentJobResponse:
     type: object
     properties:
@@ -3186,7 +3538,7 @@ definitions:
         description: The sources of the robot application.
       robotSoftwareSuite:
         $ref: '#/definitions/RobotSoftwareSuite'
-        description: The robot software suite used by the robot application.
+        description: The robot software suite (ROS distribution) used by the robot application.
       lastUpdatedAt:
         $ref: '#/definitions/LastUpdatedAt'
         description: 'The time, in milliseconds since the epoch, when the robot application was last updated.'
@@ -3213,7 +3565,7 @@ definitions:
         description: The simulation software suite used by the simulation application.
       robotSoftwareSuite:
         $ref: '#/definitions/RobotSoftwareSuite'
-        description: Information about the robot software suite.
+        description: Information about the robot software suite (ROS distribution).
       renderingEngine:
         $ref: '#/definitions/RenderingEngine'
         description: The rendering engine for the simulation application.
@@ -3247,6 +3599,16 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/SimulationJob'
+  BatchPolicy:
+    type: object
+    properties:
+      timeoutInSeconds:
+        $ref: '#/definitions/BatchTimeoutInSeconds'
+        description: '<p>The amount of time, in seconds, to wait for the batch to complete. </p> <p>If a batch times out, and there are pending requests that were failing due to an internal failure (like <code>InternalServiceError</code>), they will be moved to the failed list and the batch status will be <code>Failed</code>. If the pending requests were failing for any other reason, the failed pending requests will be moved to the failed list and the batch status will be <code>TimedOut</code>. </p>'
+      maxConcurrency:
+        $ref: '#/definitions/MaxConcurrency'
+        description: '<p>The number of active simulation jobs create as part of the batch that can be in an active state at the same time. </p> <p>Active states include: <code>Pending</code>,<code>Preparing</code>, <code>Running</code>, <code>Restarting</code>, <code>RunningFailed</code> and <code>Terminating</code>. All other states are terminal states. </p>'
+    description: Information about the batch policy.
   CancelDeploymentJobRequest:
     type: object
     required:
@@ -3255,6 +3617,14 @@ definitions:
       job:
         $ref: '#/definitions/Arn'
         description: The deployment job ARN to cancel.
+  CancelSimulationJobBatchRequest:
+    type: object
+    required:
+      - batch
+    properties:
+      batch:
+        $ref: '#/definitions/Arn'
+        description: The id of the batch to cancel.
   CancelSimulationJobRequest:
     type: object
     required:
@@ -3383,11 +3753,11 @@ definitions:
     properties:
       name:
         $ref: '#/definitions/RobotSoftwareSuiteType'
-        description: The name of the robot software suite.
+        description: The name of the robot software suite (ROS distribution).
       version:
         $ref: '#/definitions/RobotSoftwareSuiteVersionType'
-        description: The version of the robot software suite.
-    description: Information about a robot software suite.
+        description: The version of the robot software suite (ROS distribution).
+    description: Information about a robot software suite (ROS distribution).
   CreateRobotApplicationRequest:
     type: object
     required:
@@ -3403,7 +3773,7 @@ definitions:
         description: The sources of the robot application.
       robotSoftwareSuite:
         $ref: '#/definitions/RobotSoftwareSuite'
-        description: The robot software suite used by the robot application.
+        description: The robot software suite (ROS distribuition) used by the robot application.
       tags:
         $ref: '#/definitions/TagMap'
         description: A map that contains tag keys and tag values that are attached to the robot application.
@@ -3498,7 +3868,7 @@ definitions:
         description: The simulation software suite used by the simulation application.
       robotSoftwareSuite:
         $ref: '#/definitions/RobotSoftwareSuite'
-        description: The robot software suite of the simulation application.
+        description: The robot software suite (ROS distribution) used by the simulation application.
       renderingEngine:
         $ref: '#/definitions/RenderingEngine'
         description: The rendering engine for the simulation application.
@@ -3612,13 +3982,18 @@ definitions:
         description: The simulation application to use in the simulation job.
       dataSources:
         $ref: '#/definitions/DataSourceConfigs'
-        description: <p>The data sources for the simulation job.</p> <note> <p>There is a limit of 100 files and a combined size of 25GB for all <code>DataSourceConfig</code> objects. </p> </note>
+        description: <p>Specify data sources to mount read-only files from S3 into your simulation. These files are available under <code>/opt/robomaker/datasources/data_source_name</code>. </p> <note> <p>There is a limit of 100 files and a combined size of 25GB for all <code>DataSourceConfig</code> objects. </p> </note>
       tags:
         $ref: '#/definitions/TagMap'
         description: A map that contains tag keys and tag values that are attached to the simulation job.
       vpcConfig:
         $ref: '#/definitions/VPCConfig'
         description: 'If your simulation job accesses resources in a VPC, you provide this parameter identifying the list of security group IDs and subnet IDs. These must belong to the same VPC. You must provide at least one security group and one subnet ID. '
+  CreateSimulationJobRequests:
+    type: array
+    items:
+      $ref: '#/definitions/SimulationJobRequest'
+    minItems: 1
   SimulationJobStatus:
     type: string
     enum:
@@ -3652,10 +4027,14 @@ definitions:
       - InvalidBundleRobotApplication
       - InvalidBundleSimulationApplication
       - InvalidS3Resource
+      - LimitExceeded
       - MismatchedEtag
       - RobotApplicationVersionMismatchedEtag
       - SimulationApplicationVersionMismatchedEtag
       - ResourceNotFound
+      - RequestThrottled
+      - BatchTimedOut
+      - BatchCanceled
       - InvalidInput
       - WrongRegionS3Bucket
       - WrongRegionS3Output
@@ -3898,6 +4277,40 @@ definitions:
       applicationVersion:
         $ref: '#/definitions/Version'
         description: The version of the simulation application to describe.
+  DescribeSimulationJobBatchRequest:
+    type: object
+    required:
+      - batch
+    properties:
+      batch:
+        $ref: '#/definitions/Arn'
+        description: The id of the batch to describe.
+  SimulationJobBatchStatus:
+    type: string
+    enum:
+      - Pending
+      - InProgress
+      - Failed
+      - Completed
+      - Canceled
+      - Canceling
+      - Completing
+      - TimingOut
+      - TimedOut
+  SimulationJobBatchErrorCode:
+    type: string
+    enum:
+      - InternalServiceError
+  FailedCreateSimulationJobRequests:
+    type: array
+    items:
+      $ref: '#/definitions/FailedCreateSimulationJobRequest'
+  SimulationJobSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/SimulationJobSummary'
+    minItems: 0
+    maxItems: 100
   DescribeSimulationJobRequest:
     type: object
     required:
@@ -3929,6 +4342,25 @@ definitions:
     pattern: .*
     minLength: 1
     maxLength: 1024
+  FailedAt:
+    type: string
+    format: date-time
+  FailedCreateSimulationJobRequest:
+    type: object
+    properties:
+      request:
+        $ref: '#/definitions/SimulationJobRequest'
+        description: The simulation job request.
+      failureReason:
+        $ref: '#/definitions/GenericString'
+        description: The failure reason of the simulation job request.
+      failureCode:
+        $ref: '#/definitions/SimulationJobErrorCode'
+        description: The failure code.
+      failedAt:
+        $ref: '#/definitions/FailedAt'
+        description: 'The time, in milliseconds since the epoch, when the simulation job batch failed.'
+    description: Information about a failed create simulation job request.
   FilterValues:
     type: array
     items:
@@ -3971,6 +4403,8 @@ definitions:
     maxItems: 200
   GenericInteger:
     type: integer
+  Integer:
+    type: integer
   PortForwardingConfig:
     type: object
     properties:
@@ -4012,10 +4446,10 @@ definitions:
         description: '<p>Optional filters to limit results.</p> <p>The filter names <code>status</code> and <code>fleetName</code> are supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters, but they must be for the same named item. For example, if you are looking for items with the status <code>InProgress</code> or the status <code>Pending</code>.</p>'
       nextToken:
         $ref: '#/definitions/PaginationToken'
-        description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListDeploymentJobs</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+        description: 'The <code>nextToken</code> value returned from a previous paginated <code>ListDeploymentJobs</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. '
       maxResults:
         $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of deployment job results returned by <code>ListDeploymentJobs</code> in paginated output. When this parameter is used, <code>ListDeploymentJobs</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListDeploymentJobs</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListDeploymentJobs</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+        description: 'When this parameter is used, <code>ListDeploymentJobs</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListDeploymentJobs</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 200. If this parameter is not used, then <code>ListDeploymentJobs</code> returns up to 200 results and a <code>nextToken</code> value if applicable. '
   ListFleetsRequest:
     type: object
     properties:
@@ -4024,7 +4458,7 @@ definitions:
         description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListFleets</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
       maxResults:
         $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of deployment job results returned by <code>ListFleets</code> in paginated output. When this parameter is used, <code>ListFleets</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListFleets</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListFleets</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+        description: 'When this parameter is used, <code>ListFleets</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListFleets</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 200. If this parameter is not used, then <code>ListFleets</code> returns up to 200 results and a <code>nextToken</code> value if applicable. '
       filters:
         $ref: '#/definitions/Filters'
         description: '<p>Optional filters to limit results.</p> <p>The filter name <code>name</code> is supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters.</p>'
@@ -4039,10 +4473,10 @@ definitions:
         description: The version qualifier of the robot application.
       nextToken:
         $ref: '#/definitions/PaginationToken'
-        description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListRobotApplications</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+        description: 'The <code>nextToken</code> value returned from a previous paginated <code>ListRobotApplications</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. '
       maxResults:
         $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of deployment job results returned by <code>ListRobotApplications</code> in paginated output. When this parameter is used, <code>ListRobotApplications</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListRobotApplications</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListRobotApplications</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+        description: 'When this parameter is used, <code>ListRobotApplications</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListRobotApplications</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListRobotApplications</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
       filters:
         $ref: '#/definitions/Filters'
         description: '<p>Optional filters to limit results.</p> <p>The filter name <code>name</code> is supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters.</p>'
@@ -4057,10 +4491,10 @@ definitions:
     properties:
       nextToken:
         $ref: '#/definitions/PaginationToken'
-        description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListRobots</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+        description: 'The <code>nextToken</code> value returned from a previous paginated <code>ListRobots</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. '
       maxResults:
         $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of deployment job results returned by <code>ListRobots</code> in paginated output. When this parameter is used, <code>ListRobots</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListRobots</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListRobots</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+        description: 'When this parameter is used, <code>ListRobots</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListRobots</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 200. If this parameter is not used, then <code>ListRobots</code> returns up to 200 results and a <code>nextToken</code> value if applicable. '
       filters:
         $ref: '#/definitions/Filters'
         description: '<p>Optional filters to limit results.</p> <p>The filter names <code>status</code> and <code>fleetName</code> are supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters, but they must be for the same named item. For example, if you are looking for items with the status <code>Registered</code> or the status <code>Available</code>.</p>'
@@ -4072,10 +4506,10 @@ definitions:
         description: The version qualifier of the simulation application.
       nextToken:
         $ref: '#/definitions/PaginationToken'
-        description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListSimulationApplications</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+        description: 'The <code>nextToken</code> value returned from a previous paginated <code>ListSimulationApplications</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. '
       maxResults:
         $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of deployment job results returned by <code>ListSimulationApplications</code> in paginated output. When this parameter is used, <code>ListSimulationApplications</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListSimulationApplications</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListSimulationApplications</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+        description: 'When this parameter is used, <code>ListSimulationApplications</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListSimulationApplications</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListSimulationApplications</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
       filters:
         $ref: '#/definitions/Filters'
         description: '<p>Optional list of filters to limit results.</p> <p>The filter name <code>name</code> is supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters.</p>'
@@ -4085,6 +4519,22 @@ definitions:
       $ref: '#/definitions/SimulationApplicationSummary'
     minItems: 0
     maxItems: 100
+  ListSimulationJobBatchesRequest:
+    type: object
+    properties:
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'The <code>nextToken</code> value returned from a previous paginated <code>ListSimulationJobBatches</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. '
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'When this parameter is used, <code>ListSimulationJobBatches</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListSimulationJobBatches</code> request with the returned <code>nextToken</code> value. '
+      filters:
+        $ref: '#/definitions/Filters'
+        description: Optional filters to limit results.
+  SimulationJobBatchSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/SimulationJobBatchSummary'
   ListSimulationJobsRequest:
     type: object
     properties:
@@ -4093,22 +4543,17 @@ definitions:
         description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListSimulationJobs</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
       maxResults:
         $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of deployment job results returned by <code>ListSimulationJobs</code> in paginated output. When this parameter is used, <code>ListSimulationJobs</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListSimulationJobs</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListSimulationJobs</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+        description: 'When this parameter is used, <code>ListSimulationJobs</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListSimulationJobs</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 1000. If this parameter is not used, then <code>ListSimulationJobs</code> returns up to 1000 results and a <code>nextToken</code> value if applicable. '
       filters:
         $ref: '#/definitions/Filters'
         description: '<p>Optional filters to limit results.</p> <p>The filter names <code>status</code> and <code>simulationApplicationName</code> and <code>robotApplicationName</code> are supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters, but they must be for the same named item. For example, if you are looking for items with the status <code>Preparing</code> or the status <code>Running</code>.</p>'
-  SimulationJobSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/SimulationJobSummary'
-    minItems: 0
-    maxItems: 100
   ListTagsForResourceRequest:
     type: object
     properties: {}
   NonEmptyString:
     type: string
     minLength: 1
+    maxLength: 255
   NonSystemPort:
     type: integer
     minimum: 1024
@@ -4242,7 +4687,7 @@ definitions:
         description: 'The time, in milliseconds since the epoch, when the robot application was last updated.'
       robotSoftwareSuite:
         $ref: '#/definitions/RobotSoftwareSuite'
-        description: Information about a robot software suite.
+        description: Information about a robot software suite (ROS distribution).
     description: Summary information for a robot application.
   RobotDeployment:
     type: object
@@ -4302,7 +4747,7 @@ definitions:
         description: 'The time, in milliseconds since the epoch, when the simulation application was last updated.'
       robotSoftwareSuite:
         $ref: '#/definitions/RobotSoftwareSuite'
-        description: Information about a robot software suite.
+        description: Information about a robot software suite (ROS distribution).
       simulationSoftwareSuite:
         $ref: '#/definitions/SimulationSoftwareSuite'
         description: Information about a simulation software suite.
@@ -4371,6 +4816,31 @@ definitions:
         $ref: '#/definitions/NetworkInterface'
         description: Information about a network interface.
     description: Information about a simulation job.
+  SimulationJobBatchSummary:
+    type: object
+    properties:
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the batch.
+      lastUpdatedAt:
+        $ref: '#/definitions/LastUpdatedAt'
+        description: 'The time, in milliseconds since the epoch, when the simulation job batch was last updated.'
+      createdAt:
+        $ref: '#/definitions/CreatedAt'
+        description: 'The time, in milliseconds since the epoch, when the simulation job batch was created.'
+      status:
+        $ref: '#/definitions/SimulationJobBatchStatus'
+        description: '<p>The status of the simulation job batch.</p> <dl> <dt>Pending</dt> <dd> <p>The simulation job batch request is pending.</p> </dd> <dt>InProgress</dt> <dd> <p>The simulation job batch is in progress. </p> </dd> <dt>Failed</dt> <dd> <p>The simulation job batch failed. One or more simulation job requests could not be completed due to an internal failure (like <code>InternalServiceError</code>). See <code>failureCode</code> and <code>failureReason</code> for more information.</p> </dd> <dt>Completed</dt> <dd> <p>The simulation batch job completed. A batch is complete when (1) there are no pending simulation job requests in the batch and none of the failed simulation job requests are due to <code>InternalServiceError</code> and (2) when all created simulation jobs have reached a terminal state (for example, <code>Completed</code> or <code>Failed</code>). </p> </dd> <dt>Canceled</dt> <dd> <p>The simulation batch job was cancelled.</p> </dd> <dt>Canceling</dt> <dd> <p>The simulation batch job is being cancelled.</p> </dd> <dt>Completing</dt> <dd> <p>The simulation batch job is completing.</p> </dd> <dt>TimingOut</dt> <dd> <p>The simulation job batch is timing out.</p> <p>If a batch timing out, and there are pending requests that were failing due to an internal failure (like <code>InternalServiceError</code>), the batch status will be <code>Failed</code>. If there are no such failing request, the batch status will be <code>TimedOut</code>. </p> </dd> <dt>TimedOut</dt> <dd> <p>The simulation batch job timed out.</p> </dd> </dl>'
+      failedRequestCount:
+        $ref: '#/definitions/Integer'
+        description: The number of failed simulation job requests.
+      pendingRequestCount:
+        $ref: '#/definitions/Integer'
+        description: The number of pending simulation job requests.
+      createdRequestCount:
+        $ref: '#/definitions/Integer'
+        description: The number of created simulation job requests.
+    description: Information about a simulation job batch.
   SimulationJobSummary:
     type: object
     properties:
@@ -4412,6 +4882,23 @@ definitions:
         $ref: '#/definitions/Architecture'
         description: The taget processor architecture for the application.
     description: Information about a source.
+  StartSimulationJobBatchRequest:
+    type: object
+    required:
+      - createSimulationJobRequests
+    properties:
+      clientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+      batchPolicy:
+        $ref: '#/definitions/BatchPolicy'
+        description: The batch policy.
+      createSimulationJobRequests:
+        $ref: '#/definitions/CreateSimulationJobRequests'
+        description: A list of simulation job requests to create in the batch.
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: A map that contains tag keys and tag values that are attached to the deployment job batch.
   SyncDeploymentJobRequest:
     type: object
     required:
@@ -4454,7 +4941,7 @@ definitions:
         description: The sources of the robot application.
       robotSoftwareSuite:
         $ref: '#/definitions/RobotSoftwareSuite'
-        description: The robot software suite used by the robot application.
+        description: The robot software suite (ROS distribution) used by the robot application.
       currentRevisionId:
         $ref: '#/definitions/RevisionId'
         description: The revision id for the robot application.
@@ -4477,7 +4964,7 @@ definitions:
         description: The simulation software suite used by the simulation application.
       robotSoftwareSuite:
         $ref: '#/definitions/RobotSoftwareSuite'
-        description: Information about the robot software suite.
+        description: Information about the robot software suite (ROS distribution).
       renderingEngine:
         $ref: '#/definitions/RenderingEngine'
         description: The rendering engine for the simulation application.
