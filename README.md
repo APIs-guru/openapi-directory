@@ -65,6 +65,7 @@ Existing integrations
  - [https://cenit.io](https://cenit.io/directory?spec=swagger) - Data integration platform
  - [commandcar](https://github.com/tikalk/commandcar#installing-from-api-models) - Curl on steroids
  - [Material Swagger UI Hub](https://darosh.github.io/angular-swagger-ui-material/hub/) - testing and exploring hub for Material Swagger UI demo
+ - [HTTP Toolkit](https://httptoolkit.tech/) Beautiful & open-source tools to debug, test and develop with HTTP(S)
  - [Paw](https://paw.cloud/) - The most powerful HTTP client for Mac - You can import definitions and directly play with the APIs, [see how](https://paw.cloud/docs/examples/search-apis)
  - [Bitscoop](https://bitscoop.com/) - A better way to create and maintain integrations
  - [WinSwag](https://github.com/SvenEV/WinSwag) - A UWP app for loading Swagger definitions and exploring REST APIs
