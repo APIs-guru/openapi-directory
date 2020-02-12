@@ -7080,7 +7080,7 @@ definitions:
         description: The identity provider type.
       ProviderDetails:
         $ref: '#/definitions/ProviderDetailsType'
-        description: 'The identity provider details, such as <code>MetadataURL</code> and <code>MetadataFile</code>.'
+        description: '<p>The identity provider details. The following list describes the provider detail keys for each identity provider type.</p> <ul> <li> <p>For Google, Facebook and Login with Amazon:</p> <ul> <li> <p>client_id</p> </li> <li> <p>client_secret</p> </li> <li> <p>authorize_scopes</p> </li> </ul> </li> <li> <p>For Sign in with Apple:</p> <ul> <li> <p>client_id</p> </li> <li> <p>team_id</p> </li> <li> <p>key_id</p> </li> <li> <p>private_key</p> </li> <li> <p>authorize_scopes</p> </li> </ul> </li> <li> <p>For OIDC providers:</p> <ul> <li> <p>client_id</p> </li> <li> <p>client_secret</p> </li> <li> <p>attributes_request_method</p> </li> <li> <p>oidc_issuer</p> </li> <li> <p>authorize_scopes</p> </li> <li> <p>authorize_url <i>if not available from discovery URL specified by oidc_issuer key</i> </p> </li> <li> <p>token_url <i>if not available from discovery URL specified by oidc_issuer key</i> </p> </li> <li> <p>attributes_url <i>if not available from discovery URL specified by oidc_issuer key</i> </p> </li> <li> <p>jwks_uri <i>if not available from discovery URL specified by oidc_issuer key</i> </p> </li> <li> <p>authorize_scopes</p> </li> </ul> </li> <li> <p>For SAML providers:</p> <ul> <li> <p>MetadataFile OR MetadataURL</p> </li> <li> <p>IDPSignOut <i>optional</i> </p> </li> </ul> </li> </ul>'
       AttributeMapping:
         $ref: '#/definitions/AttributeMappingType'
         description: A mapping of identity provider attributes to standard and custom user pool attributes.
@@ -7208,6 +7208,9 @@ definitions:
       UserPoolAddOns:
         $ref: '#/definitions/UserPoolAddOnsType'
         description: Used to enable advanced security risk detection. Set the key <code>AdvancedSecurityMode</code> to the value "AUDIT".
+      UsernameConfiguration:
+        $ref: '#/definitions/UsernameConfigurationType'
+        description: 'You can choose to set case sensitivity on the username input for the selected sign-in option. For example, when this is set to <code>False</code>, users will be able to sign in using either "username" or "Username". This configuration is immutable once it has been set. For more information, see .'
       AccountRecoverySetting:
         $ref: '#/definitions/AccountRecoverySettingType'
         description: '<p>Use this setting to define which verified available method a user can use to recover their password when they call <code>ForgotPassword</code>. It allows you to define a preferred method when a user has more than one method available. With this setting, SMS does not qualify for a valid password recovery mechanism if the user also has SMS MFA enabled. In the absence of this setting, Cognito uses the legacy behavior to determine the recovery method where SMS is preferred over email.</p> <note> <p>Starting February 1, 2020, the value of <code>AccountRecoverySetting</code> will default to <code>verified_email</code> first and <code>verified_phone_number</code> as the second option for newly created user pools if no value is provided.</p> </note>'
@@ -7261,19 +7264,19 @@ definitions:
         description: '<p>The default redirect URI. Must be in the <code>CallbackURLs</code> list.</p> <p>A redirect URI must:</p> <ul> <li> <p>Be an absolute URI.</p> </li> <li> <p>Be registered with the authorization server.</p> </li> <li> <p>Not include a fragment component.</p> </li> </ul> <p>See <a href="https://tools.ietf.org/html/rfc6749#section-3.1.2">OAuth 2.0 - Redirection Endpoint</a>.</p> <p>Amazon Cognito requires HTTPS over HTTP except for http://localhost for testing purposes only.</p> <p>App callback URLs such as myapp://example are also supported.</p>'
       AllowedOAuthFlows:
         $ref: '#/definitions/OAuthFlowsType'
-        description: '<p>Set to <code>code</code> to initiate a code grant flow, which provides an authorization code as the response. This code can be exchanged for access tokens with the token endpoint.</p> <p>Set to <code>token</code> to specify that the client should get the access token (and, optionally, ID token, based on scopes) directly.</p>'
+        description: '<p>The allowed OAuth flows.</p> <p>Set to <code>code</code> to initiate a code grant flow, which provides an authorization code as the response. This code can be exchanged for access tokens with the token endpoint.</p> <p>Set to <code>implicit</code> to specify that the client should get the access token (and, optionally, ID token, based on scopes) directly.</p> <p>Set to <code>client_credentials</code> to specify that the client should get the access token (and, optionally, ID token, based on scopes) from the token endpoint using a combination of client and client_secret.</p>'
       AllowedOAuthScopes:
         $ref: '#/definitions/ScopeListType'
-        description: 'A list of allowed <code>OAuth</code> scopes. Currently supported values are <code>"phone"</code>, <code>"email"</code>, <code>"openid"</code>, and <code>"Cognito"</code>. In addition to these values, custom scopes created in Resource Servers are also supported.'
+        description: 'The allowed OAuth scopes. Possible values provided by OAuth are: <code>phone</code>, <code>email</code>, <code>openid</code>, and <code>profile</code>. Possible values provided by AWS are: <code>aws.cognito.signin.user.admin</code>. Custom scopes created in Resource Servers are also supported.'
       AllowedOAuthFlowsUserPoolClient:
         $ref: '#/definitions/BooleanType'
-        description: Set to <code>True</code> if the client is allowed to follow the OAuth protocol when interacting with Cognito user pools.
+        description: Set to true if the client is allowed to follow the OAuth protocol when interacting with Cognito user pools.
       AnalyticsConfiguration:
         $ref: '#/definitions/AnalyticsConfigurationType'
         description: The Amazon Pinpoint analytics configuration for collecting metrics for this user pool.
       PreventUserExistenceErrors:
         $ref: '#/definitions/PreventUserExistenceErrorTypes'
-        description: '<p>Use this setting to choose which errors and responses are returned by Cognito APIs during authentication, account confirmation, and password recovery when the user does not exist in the user pool. When set to <code>ENABLED</code> and the user does not exist, authentication returns an error indicating either the username or password was incorrect, and account confirmation and password recovery return a response indicating a code was sent to a simulated destination. When set to <code>LEGACY</code>, those APIs will return a <code>UserNotFoundException</code> exception if the user does not exist in the user pool.</p> <p>Valid values include:</p> <ul> <li> <p> <code>ENABLED</code> - This prevents user existence-related errors.</p> </li> <li> <p> <code>LEGACY</code> - This represents the old behavior of Cognito where user existence related errors are not prevented.</p> </li> </ul> <p>This setting affects the behavior of following APIs:</p> <ul> <li> <p> <a>AdminInitiateAuth</a> </p> </li> <li> <p> <a>AdminRespondToAuthChallenge</a> </p> </li> <li> <p> <a>InitiateAuth</a> </p> </li> <li> <p> <a>RespondToAuthChallenge</a> </p> </li> <li> <p> <a>ForgotPassword</a> </p> </li> <li> <p> <a>ConfirmForgotPassword</a> </p> </li> <li> <p> <a>ConfirmSignUp</a> </p> </li> <li> <p> <a>ResendConfirmationCode</a> </p> </li> </ul> <note> <p>After January 1st 2020, the value of <code>PreventUserExistenceErrors</code> will default to <code>ENABLED</code> for newly created user pool clients if no value is provided.</p> </note>'
+        description: '<p>Use this setting to choose which errors and responses are returned by Cognito APIs during authentication, account confirmation, and password recovery when the user does not exist in the user pool. When set to <code>ENABLED</code> and the user does not exist, authentication returns an error indicating either the username or password was incorrect, and account confirmation and password recovery return a response indicating a code was sent to a simulated destination. When set to <code>LEGACY</code>, those APIs will return a <code>UserNotFoundException</code> exception if the user does not exist in the user pool.</p> <p>Valid values include:</p> <ul> <li> <p> <code>ENABLED</code> - This prevents user existence-related errors.</p> </li> <li> <p> <code>LEGACY</code> - This represents the old behavior of Cognito where user existence related errors are not prevented.</p> </li> </ul> <p>This setting affects the behavior of following APIs:</p> <ul> <li> <p> <a>AdminInitiateAuth</a> </p> </li> <li> <p> <a>AdminRespondToAuthChallenge</a> </p> </li> <li> <p> <a>InitiateAuth</a> </p> </li> <li> <p> <a>RespondToAuthChallenge</a> </p> </li> <li> <p> <a>ForgotPassword</a> </p> </li> <li> <p> <a>ConfirmForgotPassword</a> </p> </li> <li> <p> <a>ConfirmSignUp</a> </p> </li> <li> <p> <a>ResendConfirmationCode</a> </p> </li> </ul> <note> <p>After February 15th 2020, the value of <code>PreventUserExistenceErrors</code> will default to <code>ENABLED</code> for newly created user pool clients if no value is provided.</p> </note>'
     description: Represents the request to create a user pool client.
   ScopeDoesNotExistException: {}
   InvalidOAuthFlowException: {}
@@ -8631,19 +8634,19 @@ definitions:
         description: '<p>The default redirect URI. Must be in the <code>CallbackURLs</code> list.</p> <p>A redirect URI must:</p> <ul> <li> <p>Be an absolute URI.</p> </li> <li> <p>Be registered with the authorization server.</p> </li> <li> <p>Not include a fragment component.</p> </li> </ul> <p>See <a href="https://tools.ietf.org/html/rfc6749#section-3.1.2">OAuth 2.0 - Redirection Endpoint</a>.</p> <p>Amazon Cognito requires HTTPS over HTTP except for http://localhost for testing purposes only.</p> <p>App callback URLs such as myapp://example are also supported.</p>'
       AllowedOAuthFlows:
         $ref: '#/definitions/OAuthFlowsType'
-        description: 'Set to <code>code</code> to initiate a code grant flow, which provides an authorization code as the response. This code can be exchanged for access tokens with the token endpoint.'
+        description: '<p>The allowed OAuth flows.</p> <p>Set to <code>code</code> to initiate a code grant flow, which provides an authorization code as the response. This code can be exchanged for access tokens with the token endpoint.</p> <p>Set to <code>implicit</code> to specify that the client should get the access token (and, optionally, ID token, based on scopes) directly.</p> <p>Set to <code>client_credentials</code> to specify that the client should get the access token (and, optionally, ID token, based on scopes) from the token endpoint using a combination of client and client_secret.</p>'
       AllowedOAuthScopes:
         $ref: '#/definitions/ScopeListType'
-        description: 'A list of allowed <code>OAuth</code> scopes. Currently supported values are <code>"phone"</code>, <code>"email"</code>, <code>"openid"</code>, and <code>"Cognito"</code>. In addition to these values, custom scopes created in Resource Servers are also supported.'
+        description: 'The allowed OAuth scopes. Possible values provided by OAuth are: <code>phone</code>, <code>email</code>, <code>openid</code>, and <code>profile</code>. Possible values provided by AWS are: <code>aws.cognito.signin.user.admin</code>. Custom scopes created in Resource Servers are also supported.'
       AllowedOAuthFlowsUserPoolClient:
         $ref: '#/definitions/BooleanType'
-        description: Set to TRUE if the client is allowed to follow the OAuth protocol when interacting with Cognito user pools.
+        description: Set to true if the client is allowed to follow the OAuth protocol when interacting with Cognito user pools.
       AnalyticsConfiguration:
         $ref: '#/definitions/AnalyticsConfigurationType'
         description: The Amazon Pinpoint analytics configuration for collecting metrics for this user pool.
       PreventUserExistenceErrors:
         $ref: '#/definitions/PreventUserExistenceErrorTypes'
-        description: '<p>Use this setting to choose which errors and responses are returned by Cognito APIs during authentication, account confirmation, and password recovery when the user does not exist in the user pool. When set to <code>ENABLED</code> and the user does not exist, authentication returns an error indicating either the username or password was incorrect, and account confirmation and password recovery return a response indicating a code was sent to a simulated destination. When set to <code>LEGACY</code>, those APIs will return a <code>UserNotFoundException</code> exception if the user does not exist in the user pool.</p> <p>Valid values include:</p> <ul> <li> <p> <code>ENABLED</code> - This prevents user existence-related errors.</p> </li> <li> <p> <code>LEGACY</code> - This represents the old behavior of Cognito where user existence related errors are not prevented.</p> </li> </ul> <p>This setting affects the behavior of following APIs:</p> <ul> <li> <p> <a>AdminInitiateAuth</a> </p> </li> <li> <p> <a>AdminRespondToAuthChallenge</a> </p> </li> <li> <p> <a>InitiateAuth</a> </p> </li> <li> <p> <a>RespondToAuthChallenge</a> </p> </li> <li> <p> <a>ForgotPassword</a> </p> </li> <li> <p> <a>ConfirmForgotPassword</a> </p> </li> <li> <p> <a>ConfirmSignUp</a> </p> </li> <li> <p> <a>ResendConfirmationCode</a> </p> </li> </ul> <note> <p>After January 1st 2020, the value of <code>PreventUserExistenceErrors</code> will default to <code>ENABLED</code> for newly created user pool clients if no value is provided.</p> </note>'
+        description: '<p>Use this setting to choose which errors and responses are returned by Cognito APIs during authentication, account confirmation, and password recovery when the user does not exist in the user pool. When set to <code>ENABLED</code> and the user does not exist, authentication returns an error indicating either the username or password was incorrect, and account confirmation and password recovery return a response indicating a code was sent to a simulated destination. When set to <code>LEGACY</code>, those APIs will return a <code>UserNotFoundException</code> exception if the user does not exist in the user pool.</p> <p>Valid values include:</p> <ul> <li> <p> <code>ENABLED</code> - This prevents user existence-related errors.</p> </li> <li> <p> <code>LEGACY</code> - This represents the old behavior of Cognito where user existence related errors are not prevented.</p> </li> </ul> <p>This setting affects the behavior of following APIs:</p> <ul> <li> <p> <a>AdminInitiateAuth</a> </p> </li> <li> <p> <a>AdminRespondToAuthChallenge</a> </p> </li> <li> <p> <a>InitiateAuth</a> </p> </li> <li> <p> <a>RespondToAuthChallenge</a> </p> </li> <li> <p> <a>ForgotPassword</a> </p> </li> <li> <p> <a>ConfirmForgotPassword</a> </p> </li> <li> <p> <a>ConfirmSignUp</a> </p> </li> <li> <p> <a>ResendConfirmationCode</a> </p> </li> </ul> <note> <p>After February 15th 2020, the value of <code>PreventUserExistenceErrors</code> will default to <code>ENABLED</code> for newly created user pool clients if no value is provided.</p> </note>'
     description: Represents the request to update the user pool client.
   UpdateUserPoolDomainResponse:
     type: object
@@ -8990,7 +8993,7 @@ definitions:
   AuthParametersType:
     type: object
     additionalProperties:
-      $ref: '#/definitions/StringType'
+      $ref: '#/definitions/AuthParametersValueType'
   AnalyticsMetadataType:
     type: object
     properties:
@@ -9305,6 +9308,9 @@ definitions:
         $ref: '#/definitions/EventFeedbackType'
         description: 'A flag specifying the user feedback captured at the time of an event request is good or bad. '
     description: The authentication event type.
+  AuthParametersValueType:
+    type: string
+    format: password
   IntegerType:
     type: integer
   NewDeviceMetadataType:
@@ -9538,7 +9544,7 @@ definitions:
         description: The identity provider type.
       ProviderDetails:
         $ref: '#/definitions/ProviderDetailsType'
-        description: 'The identity provider details, such as <code>MetadataURL</code> and <code>MetadataFile</code>.'
+        description: '<p>The identity provider details. The following list describes the provider detail keys for each identity provider type.</p> <ul> <li> <p>For Google, Facebook and Login with Amazon:</p> <ul> <li> <p>client_id</p> </li> <li> <p>client_secret</p> </li> <li> <p>authorize_scopes</p> </li> </ul> </li> <li> <p>For Sign in with Apple:</p> <ul> <li> <p>client_id</p> </li> <li> <p>team_id</p> </li> <li> <p>key_id</p> </li> <li> <p>private_key</p> </li> <li> <p>authorize_scopes</p> </li> </ul> </li> <li> <p>For OIDC providers:</p> <ul> <li> <p>client_id</p> </li> <li> <p>client_secret</p> </li> <li> <p>attributes_request_method</p> </li> <li> <p>oidc_issuer</p> </li> <li> <p>authorize_scopes</p> </li> <li> <p>authorize_url <i>if not available from discovery URL specified by oidc_issuer key</i> </p> </li> <li> <p>token_url <i>if not available from discovery URL specified by oidc_issuer key</i> </p> </li> <li> <p>attributes_url <i>if not available from discovery URL specified by oidc_issuer key</i> </p> </li> <li> <p>jwks_uri <i>if not available from discovery URL specified by oidc_issuer key</i> </p> </li> <li> <p>authorize_scopes</p> </li> </ul> </li> <li> <p>For SAML providers:</p> <ul> <li> <p>MetadataFile OR MetadataURL</p> </li> <li> <p>IDPSignOut <i>optional</i> </p> </li> </ul> </li> </ul>'
       AttributeMapping:
         $ref: '#/definitions/AttributeMappingType'
         description: A mapping of identity provider attributes to standard and custom user pool attributes.
@@ -9714,19 +9720,19 @@ definitions:
         description: '<p>The default redirect URI. Must be in the <code>CallbackURLs</code> list.</p> <p>A redirect URI must:</p> <ul> <li> <p>Be an absolute URI.</p> </li> <li> <p>Be registered with the authorization server.</p> </li> <li> <p>Not include a fragment component.</p> </li> </ul> <p>See <a href="https://tools.ietf.org/html/rfc6749#section-3.1.2">OAuth 2.0 - Redirection Endpoint</a>.</p> <p>Amazon Cognito requires HTTPS over HTTP except for http://localhost for testing purposes only.</p> <p>App callback URLs such as myapp://example are also supported.</p>'
       AllowedOAuthFlows:
         $ref: '#/definitions/OAuthFlowsType'
-        description: '<p>Set to <code>code</code> to initiate a code grant flow, which provides an authorization code as the response. This code can be exchanged for access tokens with the token endpoint.</p> <p>Set to <code>token</code> to specify that the client should get the access token (and, optionally, ID token, based on scopes) directly.</p>'
+        description: '<p>The allowed OAuth flows.</p> <p>Set to <code>code</code> to initiate a code grant flow, which provides an authorization code as the response. This code can be exchanged for access tokens with the token endpoint.</p> <p>Set to <code>implicit</code> to specify that the client should get the access token (and, optionally, ID token, based on scopes) directly.</p> <p>Set to <code>client_credentials</code> to specify that the client should get the access token (and, optionally, ID token, based on scopes) from the token endpoint using a combination of client and client_secret.</p>'
       AllowedOAuthScopes:
         $ref: '#/definitions/ScopeListType'
-        description: 'A list of allowed <code>OAuth</code> scopes. Currently supported values are <code>"phone"</code>, <code>"email"</code>, <code>"openid"</code>, and <code>"Cognito"</code>. In addition to these values, custom scopes created in Resource Servers are also supported.'
+        description: 'The allowed OAuth scopes. Possible values provided by OAuth are: <code>phone</code>, <code>email</code>, <code>openid</code>, and <code>profile</code>. Possible values provided by AWS are: <code>aws.cognito.signin.user.admin</code>. Custom scopes created in Resource Servers are also supported.'
       AllowedOAuthFlowsUserPoolClient:
         $ref: '#/definitions/BooleanType'
-        description: Set to TRUE if the client is allowed to follow the OAuth protocol when interacting with Cognito user pools.
+        description: Set to true if the client is allowed to follow the OAuth protocol when interacting with Cognito user pools.
       AnalyticsConfiguration:
         $ref: '#/definitions/AnalyticsConfigurationType'
         description: The Amazon Pinpoint analytics configuration for the user pool client.
       PreventUserExistenceErrors:
         $ref: '#/definitions/PreventUserExistenceErrorTypes'
-        description: '<p>Use this setting to choose which errors and responses are returned by Cognito APIs during authentication, account confirmation, and password recovery when the user does not exist in the user pool. When set to <code>ENABLED</code> and the user does not exist, authentication returns an error indicating either the username or password was incorrect, and account confirmation and password recovery return a response indicating a code was sent to a simulated destination. When set to <code>LEGACY</code>, those APIs will return a <code>UserNotFoundException</code> exception if the user does not exist in the user pool.</p> <p>Valid values include:</p> <ul> <li> <p> <code>ENABLED</code> - This prevents user existence-related errors.</p> </li> <li> <p> <code>LEGACY</code> - This represents the old behavior of Cognito where user existence related errors are not prevented.</p> </li> </ul> <p>This setting affects the behavior of following APIs:</p> <ul> <li> <p> <a>AdminInitiateAuth</a> </p> </li> <li> <p> <a>AdminRespondToAuthChallenge</a> </p> </li> <li> <p> <a>InitiateAuth</a> </p> </li> <li> <p> <a>RespondToAuthChallenge</a> </p> </li> <li> <p> <a>ForgotPassword</a> </p> </li> <li> <p> <a>ConfirmForgotPassword</a> </p> </li> <li> <p> <a>ConfirmSignUp</a> </p> </li> <li> <p> <a>ResendConfirmationCode</a> </p> </li> </ul> <note> <p>After January 1st 2020, the value of <code>PreventUserExistenceErrors</code> will default to <code>ENABLED</code> for newly created user pool clients if no value is provided.</p> </note>'
+        description: '<p>Use this setting to choose which errors and responses are returned by Cognito APIs during authentication, account confirmation, and password recovery when the user does not exist in the user pool. When set to <code>ENABLED</code> and the user does not exist, authentication returns an error indicating either the username or password was incorrect, and account confirmation and password recovery return a response indicating a code was sent to a simulated destination. When set to <code>LEGACY</code>, those APIs will return a <code>UserNotFoundException</code> exception if the user does not exist in the user pool.</p> <p>Valid values include:</p> <ul> <li> <p> <code>ENABLED</code> - This prevents user existence-related errors.</p> </li> <li> <p> <code>LEGACY</code> - This represents the old behavior of Cognito where user existence related errors are not prevented.</p> </li> </ul> <p>This setting affects the behavior of following APIs:</p> <ul> <li> <p> <a>AdminInitiateAuth</a> </p> </li> <li> <p> <a>AdminRespondToAuthChallenge</a> </p> </li> <li> <p> <a>InitiateAuth</a> </p> </li> <li> <p> <a>RespondToAuthChallenge</a> </p> </li> <li> <p> <a>ForgotPassword</a> </p> </li> <li> <p> <a>ConfirmForgotPassword</a> </p> </li> <li> <p> <a>ConfirmSignUp</a> </p> </li> <li> <p> <a>ResendConfirmationCode</a> </p> </li> </ul> <note> <p>After February 15th 2020, the value of <code>PreventUserExistenceErrors</code> will default to <code>ENABLED</code> for newly created user pool clients if no value is provided.</p> </note>'
     description: Contains information about a user pool client.
   DomainType:
     type: string
@@ -9899,6 +9905,15 @@ definitions:
         $ref: '#/definitions/AdvancedSecurityModeType'
         description: The advanced security mode.
     description: The user pool add-ons type.
+  UsernameConfigurationType:
+    type: object
+    required:
+      - CaseSensitive
+    properties:
+      CaseSensitive:
+        $ref: '#/definitions/WrappedBooleanType'
+        description: '<p>Specifies whether username case sensitivity will be applied for all users in the user pool through Cognito APIs.</p> <p>Valid values include:</p> <ul> <li> <p> <b> <code>True</code> </b>: Enables case sensitivity for all username input. When this option is set to <code>True</code>, users must sign in using the exact capitalization of their given username. For example, “UserName”. This is the default value.</p> </li> <li> <p> <b> <code>False</code> </b>: Enables case insensitivity for all username input. For example, when this option is set to <code>False</code>, users will be able to sign in using either "username" or "Username". This option also enables both <code>preferred_username</code> and <code>email</code> alias to be case insensitive, in addition to the <code>username</code> attribute.</p> </li> </ul>'
+    description: 'The username configuration type. '
   UserPoolType:
     type: object
     properties:
@@ -9986,6 +10001,9 @@ definitions:
       UserPoolAddOns:
         $ref: '#/definitions/UserPoolAddOnsType'
         description: The user pool add-ons.
+      UsernameConfiguration:
+        $ref: '#/definitions/UsernameConfigurationType'
+        description: 'You can choose to enable case sensitivity on the username input for the selected sign-in option. For example, when this is set to <code>False</code>, users will be able to sign in using either "username" or "Username". This configuration is immutable once it has been set. For more information, see .'
       Arn:
         $ref: '#/definitions/ArnType'
         description: The Amazon Resource Name (ARN) for the user pool.
@@ -10009,7 +10027,7 @@ definitions:
         description: The attribute data type.
       DeveloperOnlyAttribute:
         $ref: '#/definitions/BooleanType'
-        description: Specifies whether the attribute type is developer only.
+        description: '<note> <p>We recommend that you use <a href="https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UserPoolClientType.html#CognitoUserPools-Type-UserPoolClientType-WriteAttributes">WriteAttributes</a> in the user pool client to control how attributes can be mutated for new use cases instead of using <code>DeveloperOnlyAttribute</code>.</p> </note> <p>Specifies whether the attribute type is developer only. This attribute can only be modified by an administrator. Users will not be able to modify this attribute using their access token. For example, <code>DeveloperOnlyAttribute</code> can be modified using the API but cannot be updated using the API.</p>'
       Mutable:
         $ref: '#/definitions/BooleanType'
         description: '<p>Specifies whether the value of the attribute can be changed.</p> <p>For any user pool attribute that''s mapped to an identity provider attribute, you must set this parameter to <code>true</code>. Amazon Cognito updates mapped attributes when users sign in to your application through an identity provider. If an attribute is immutable, Amazon Cognito throws an error when it attempts to update the attribute. For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html">Specifying Identity Provider Attribute Mappings for Your User Pool</a>.</p>'
@@ -10528,6 +10546,8 @@ definitions:
     enum:
       - phone_number
       - email
+  WrappedBooleanType:
+    type: boolean
   VerifiedAttributeType:
     type: string
     enum:
