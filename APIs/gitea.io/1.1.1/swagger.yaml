@@ -104,6 +104,16 @@ responses:
       items:
         $ref: '#/definitions/Branch'
       type: array
+  BranchProtection:
+    description: BranchProtection
+    schema:
+      $ref: '#/definitions/BranchProtection'
+  BranchProtectionList:
+    description: BranchProtectionList
+    schema:
+      items:
+        $ref: '#/definitions/BranchProtection'
+      type: array
   Comment:
     description: Comment
     schema:
@@ -257,6 +267,20 @@ responses:
     schema:
       items:
         $ref: '#/definitions/Milestone'
+      type: array
+  NotificationCount:
+    description: Number of unread notifications
+    schema:
+      $ref: '#/definitions/NotificationCount'
+  NotificationThread:
+    description: NotificationThread
+    schema:
+      $ref: '#/definitions/NotificationThread'
+  NotificationThreadList:
+    description: NotificationThreadList
+    schema:
+      items:
+        $ref: '#/definitions/NotificationThread'
       type: array
   Organization:
     description: Organization
@@ -446,7 +470,7 @@ responses:
   parameterBodies:
     description: parameterBodies
     schema:
-      $ref: '#/definitions/EditReactionOption'
+      $ref: '#/definitions/EditBranchProtectionOption'
   redirect:
     description: APIRedirect is a redirect response
   validationError:
@@ -482,6 +506,15 @@ paths:
   /admin/users:
     get:
       operationId: adminGetAllUsers
+      parameters:
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -673,7 +706,7 @@ paths:
           $ref: '#/responses/error'
         '422':
           $ref: '#/responses/validationError'
-      summary: Create a repository on behalf a user
+      summary: Create a repository on behalf of a user
       tags:
         - admin
   /markdown:
@@ -718,11 +751,122 @@ paths:
       summary: Render raw markdown as HTML
       tags:
         - miscellaneous
+  /notifications:
+    get:
+      consumes:
+        - application/json
+      operationId: notifyGetList
+      parameters:
+        - description: 'If true, show notifications marked as read. Default value is false'
+          in: query
+          name: all
+          type: string
+        - description: Only show notifications updated after the given time. This is a timestamp in RFC 3339 format
+          format: date-time
+          in: query
+          name: since
+          type: string
+        - description: Only show notifications updated before the given time. This is a timestamp in RFC 3339 format
+          format: date-time
+          in: query
+          name: before
+          type: string
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/NotificationThreadList'
+      summary: List users's notification threads
+      tags:
+        - notification
+    put:
+      consumes:
+        - application/json
+      operationId: notifyReadList
+      parameters:
+        - description: Describes the last point that notifications were checked. Anything updated since this time will not be updated.
+          format: date-time
+          in: query
+          name: last_read_at
+          type: string
+      produces:
+        - application/json
+      responses:
+        '205':
+          $ref: '#/responses/empty'
+      summary: Mark notification threads as read
+      tags:
+        - notification
+  /notifications/new:
+    get:
+      operationId: notifyNewAvailable
+      responses:
+        '200':
+          $ref: '#/responses/NotificationCount'
+        '204':
+          description: No unread notification
+      summary: Check if unread notifications exist
+      tags:
+        - notification
+  '/notifications/threads/{id}':
+    get:
+      consumes:
+        - application/json
+      operationId: notifyGetThread
+      parameters:
+        - description: id of notification thread
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/NotificationThread'
+        '403':
+          $ref: '#/responses/forbidden'
+        '404':
+          $ref: '#/responses/notFound'
+      summary: Get notification thread by ID
+      tags:
+        - notification
+    patch:
+      consumes:
+        - application/json
+      operationId: notifyReadThread
+      parameters:
+        - description: id of notification thread
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '205':
+          $ref: '#/responses/empty'
+        '403':
+          $ref: '#/responses/forbidden'
+        '404':
+          $ref: '#/responses/notFound'
+      summary: Mark notification thread as read by ID
+      tags:
+        - notification
   '/org/{org}/repos':
     post:
       consumes:
         - application/json
-      operationId: createOrgRepo
+      deprecated: true
+      operationId: createOrgRepoDeprecated
       parameters:
         - description: name of organization
           in: path
@@ -746,6 +890,25 @@ paths:
       tags:
         - organization
   /orgs:
+    get:
+      operationId: orgGetAll
+      parameters:
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/OrganizationList'
+      summary: Get list of organizations
+      tags:
+        - organization
     post:
       consumes:
         - application/json
@@ -833,6 +996,14 @@ paths:
           name: org
           required: true
           type: string
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -947,6 +1118,14 @@ paths:
           name: org
           required: true
           type: string
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -1009,6 +1188,14 @@ paths:
           name: org
           required: true
           type: string
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -1094,12 +1281,46 @@ paths:
           name: org
           required: true
           type: string
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
         '200':
           $ref: '#/responses/RepositoryList'
       summary: List an organization's repos
+      tags:
+        - organization
+    post:
+      consumes:
+        - application/json
+      operationId: createOrgRepo
+      parameters:
+        - description: name of organization
+          in: path
+          name: org
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateRepoOption'
+      produces:
+        - application/json
+      responses:
+        '201':
+          $ref: '#/responses/Repository'
+        '403':
+          $ref: '#/responses/forbidden'
+        '404':
+          $ref: '#/responses/notFound'
+      summary: Create a repository in an organization
       tags:
         - organization
   '/orgs/{org}/teams':
@@ -1111,6 +1332,14 @@ paths:
           name: org
           required: true
           type: string
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -1160,13 +1389,13 @@ paths:
           in: query
           name: include_desc
           type: boolean
-        - description: limit size of results
-          in: query
-          name: limit
-          type: integer
         - description: page number of results to return (1-based)
           in: query
           name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
           type: integer
       produces:
         - application/json
@@ -1197,10 +1426,6 @@ paths:
           in: query
           name: labels
           type: string
-        - description: page number of requested issues
-          in: query
-          name: page
-          type: integer
         - description: search string
           in: query
           name: q
@@ -1209,6 +1434,14 @@ paths:
           format: int64
           in: query
           name: priority_repo_id
+          type: integer
+        - description: filter by type (issues / pulls) if set
+          in: query
+          name: type
+          type: string
+        - description: page number of requested issues
+          in: query
+          name: page
           type: integer
       produces:
         - application/json
@@ -1279,14 +1512,6 @@ paths:
           in: query
           name: template
           type: boolean
-        - description: page number of results to return (1-based)
-          in: query
-          name: page
-          type: integer
-        - description: 'page size of results, maximum page size is 50'
-          in: query
-          name: limit
-          type: integer
         - description: 'type of repository to search for. Supported values are "fork", "source", "mirror" and "collaborative"'
           in: query
           name: mode
@@ -1303,6 +1528,14 @@ paths:
           in: query
           name: order
           type: string
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -1417,6 +1650,154 @@ paths:
       summary: Get an archive of a repository
       tags:
         - repository
+  '/repos/{owner}/{repo}/branch_protections':
+    get:
+      operationId: repoListBranchProtection
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/BranchProtectionList'
+      summary: List branch protections for a repository
+      tags:
+        - repository
+    post:
+      consumes:
+        - application/json
+      operationId: repoCreateBranchProtection
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateBranchProtectionOption'
+      produces:
+        - application/json
+      responses:
+        '201':
+          $ref: '#/responses/BranchProtection'
+        '403':
+          $ref: '#/responses/forbidden'
+        '404':
+          $ref: '#/responses/notFound'
+        '422':
+          $ref: '#/responses/validationError'
+      summary: Create a branch protections for a repository
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/branch_protections/{name}':
+    delete:
+      operationId: repoDeleteBranchProtection
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: name of protected branch
+          in: path
+          name: name
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+        '404':
+          $ref: '#/responses/notFound'
+      summary: Delete a specific branch protection for the repository
+      tags:
+        - repository
+    get:
+      operationId: repoGetBranchProtection
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: name of protected branch
+          in: path
+          name: name
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/BranchProtection'
+        '404':
+          $ref: '#/responses/notFound'
+      summary: Get a specific branch protection for the repository
+      tags:
+        - repository
+    patch:
+      consumes:
+        - application/json
+      operationId: repoEditBranchProtection
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: name of protected branch
+          in: path
+          name: name
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EditBranchProtectionOption'
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/BranchProtection'
+        '404':
+          $ref: '#/responses/notFound'
+        '422':
+          $ref: '#/responses/validationError'
+      summary: Edit a branch protections for a repository. Only fields that are set will be changed
+      tags:
+        - repository
   '/repos/{owner}/{repo}/branches':
     get:
       operationId: repoListBranches
@@ -1480,6 +1861,14 @@ paths:
           name: repo
           required: true
           type: string
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -1597,9 +1986,13 @@ paths:
           in: query
           name: sha
           type: string
-        - description: page number of requested commits
+        - description: page number of results to return (1-based)
           in: query
           name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
           type: integer
       produces:
         - application/json
@@ -1845,6 +2238,14 @@ paths:
           name: repo
           required: true
           type: string
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -2077,6 +2478,14 @@ paths:
           name: repo
           required: true
           type: string
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -2363,14 +2772,22 @@ paths:
           in: query
           name: labels
           type: string
-        - description: page number of requested issues
-          in: query
-          name: page
-          type: integer
         - description: search string
           in: query
           name: q
           type: string
+        - description: filter by type (issues / pulls) if set
+          in: query
+          name: type
+          type: string
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -2427,9 +2844,23 @@ paths:
           required: true
           type: string
         - description: 'if provided, only comments updated since the provided time are returned.'
+          format: date-time
           in: query
           name: since
           type: string
+        - description: 'if provided, only comments updated before the provided time are returned.'
+          format: date-time
+          in: query
+          name: before
+          type: string
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -2463,7 +2894,44 @@ paths:
           $ref: '#/responses/empty'
         '403':
           $ref: '#/responses/forbidden'
+        '404':
+          $ref: '#/responses/notFound'
       summary: Delete a comment
+      tags:
+        - issue
+    get:
+      consumes:
+        - application/json
+      operationId: issueGetComment
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: id of the comment
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/Comment'
+        '204':
+          $ref: '#/responses/empty'
+        '403':
+          $ref: '#/responses/forbidden'
+        '404':
+          $ref: '#/responses/notFound'
+      summary: Get a comment
       tags:
         - issue
     patch:
@@ -2496,6 +2964,12 @@ paths:
       responses:
         '200':
           $ref: '#/responses/Comment'
+        '204':
+          $ref: '#/responses/empty'
+        '403':
+          $ref: '#/responses/forbidden'
+        '404':
+          $ref: '#/responses/notFound'
       summary: Edit a comment
       tags:
         - issue
@@ -2693,8 +3167,14 @@ paths:
           required: true
           type: integer
         - description: 'if provided, only comments updated since the specified time are returned.'
+          format: date-time
           in: query
           name: since
+          type: string
+        - description: 'if provided, only comments updated before the provided time are returned.'
+          format: date-time
+          in: query
+          name: before
           type: string
       produces:
         - application/json
@@ -2770,6 +3250,8 @@ paths:
           $ref: '#/responses/empty'
         '403':
           $ref: '#/responses/forbidden'
+        '404':
+          $ref: '#/responses/notFound'
       summary: Delete a comment
       tags:
         - issue
@@ -2813,6 +3295,8 @@ paths:
           $ref: '#/responses/empty'
         '403':
           $ref: '#/responses/forbidden'
+        '404':
+          $ref: '#/responses/notFound'
       summary: Edit a comment
       tags:
         - issue
@@ -3078,6 +3562,14 @@ paths:
           name: index
           required: true
           type: integer
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -3255,6 +3747,14 @@ paths:
           name: index
           required: true
           type: integer
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -3372,7 +3872,7 @@ paths:
         '400':
           $ref: '#/responses/error'
         '403':
-          $ref: '#/responses/error'
+          $ref: '#/responses/forbidden'
       summary: Reset a tracked time of an issue
       tags:
         - issue
@@ -3394,6 +3894,24 @@ paths:
           in: path
           name: index
           required: true
+          type: integer
+        - description: Only show times updated after the given time. This is a timestamp in RFC 3339 format
+          format: date-time
+          in: query
+          name: since
+          type: string
+        - description: Only show times updated before the given time. This is a timestamp in RFC 3339 format
+          format: date-time
+          in: query
+          name: before
+          type: string
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
           type: integer
       produces:
         - application/json
@@ -3478,7 +3996,7 @@ paths:
         '400':
           $ref: '#/responses/error'
         '403':
-          $ref: '#/responses/error'
+          $ref: '#/responses/forbidden'
       summary: Delete specific tracked time
       tags:
         - issue
@@ -3504,6 +4022,14 @@ paths:
           in: query
           name: fingerprint
           type: string
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -3610,6 +4136,14 @@ paths:
           name: repo
           required: true
           type: string
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -3642,6 +4176,8 @@ paths:
       responses:
         '201':
           $ref: '#/responses/Label'
+        '422':
+          $ref: '#/responses/validationError'
       summary: Create a label
       tags:
         - issue
@@ -3728,6 +4264,8 @@ paths:
       responses:
         '200':
           $ref: '#/responses/Label'
+        '422':
+          $ref: '#/responses/validationError'
       summary: Update a label
       tags:
         - issue
@@ -3749,6 +4287,14 @@ paths:
           in: query
           name: state
           type: string
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -3894,6 +4440,80 @@ paths:
       summary: Sync a mirrored repository
       tags:
         - repository
+  '/repos/{owner}/{repo}/notifications':
+    get:
+      consumes:
+        - application/json
+      operationId: notifyGetRepoList
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: 'If true, show notifications marked as read. Default value is false'
+          in: query
+          name: all
+          type: string
+        - description: Only show notifications updated after the given time. This is a timestamp in RFC 3339 format
+          format: date-time
+          in: query
+          name: since
+          type: string
+        - description: Only show notifications updated before the given time. This is a timestamp in RFC 3339 format
+          format: date-time
+          in: query
+          name: before
+          type: string
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/NotificationThreadList'
+      summary: List users's notification threads on a specific repo
+      tags:
+        - notification
+    put:
+      consumes:
+        - application/json
+      operationId: notifyReadRepoList
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: Describes the last point that notifications were checked. Anything updated since this time will not be updated.
+          format: date-time
+          in: query
+          name: last_read_at
+          type: string
+      produces:
+        - application/json
+      responses:
+        '205':
+          $ref: '#/responses/empty'
+      summary: Mark notification threads as read on a specific repo
+      tags:
+        - notification
   '/repos/{owner}/{repo}/pulls':
     get:
       operationId: repoListPullRequests
@@ -3908,10 +4528,6 @@ paths:
           name: repo
           required: true
           type: string
-        - description: Page number
-          in: query
-          name: page
-          type: integer
         - description: 'State of pull request: open or closed (optional)'
           enum:
             - closed
@@ -3944,6 +4560,14 @@ paths:
             type: integer
           name: labels
           type: array
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -4008,6 +4632,8 @@ paths:
       responses:
         '200':
           $ref: '#/responses/PullRequest'
+        '404':
+          $ref: '#/responses/notFound'
       summary: Get a pull request
       tags:
         - repository
@@ -4158,13 +4784,17 @@ paths:
           name: repo
           required: true
           type: string
-        - description: page wants to load
-          in: query
-          name: page
-          type: integer
         - description: items count every page wants to load
           in: query
           name: per_page
+          type: integer
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
           type: integer
       produces:
         - application/json
@@ -4501,6 +5131,14 @@ paths:
           name: repo
           required: true
           type: string
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -4528,10 +5166,6 @@ paths:
           name: sha
           required: true
           type: string
-        - description: page number of results
-          in: query
-          name: page
-          type: integer
         - description: type of sort
           enum:
             - oldest
@@ -4552,6 +5186,14 @@ paths:
           in: query
           name: state
           type: string
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -4608,6 +5250,14 @@ paths:
           name: repo
           required: true
           type: string
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -4710,6 +5360,28 @@ paths:
           name: repo
           required: true
           type: string
+        - description: optional filter by user
+          in: query
+          name: user
+          type: string
+        - description: Only show times updated after the given time. This is a timestamp in RFC 3339 format
+          format: date-time
+          in: query
+          name: since
+          type: string
+        - description: Only show times updated before the given time. This is a timestamp in RFC 3339 format
+          format: date-time
+          in: query
+          name: before
+          type: string
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -4717,11 +5389,14 @@ paths:
           $ref: '#/responses/TrackedTimeList'
         '400':
           $ref: '#/responses/error'
+        '403':
+          $ref: '#/responses/forbidden'
       summary: List a repo's tracked times
       tags:
         - repository
   '/repos/{owner}/{repo}/times/{user}':
     get:
+      deprecated: true
       operationId: userTrackedTimes
       parameters:
         - description: owner of the repo
@@ -4746,9 +5421,11 @@ paths:
           $ref: '#/responses/TrackedTimeList'
         '400':
           $ref: '#/responses/error'
+        '403':
+          $ref: '#/responses/forbidden'
       summary: List a user's tracked times in a repo
       tags:
-        - user
+        - repository
   '/repos/{owner}/{repo}/topics':
     get:
       operationId: repoListTopics
@@ -4763,6 +5440,14 @@ paths:
           name: repo
           required: true
           type: string
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -4853,6 +5538,40 @@ paths:
         '422':
           $ref: '#/responses/invalidTopicsError'
       summary: Add a topic to a repository
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/transfer':
+    post:
+      operationId: repoTransfer
+      parameters:
+        - description: owner of the repo to transfer
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo to transfer
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: Transfer Options
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/TransferRepoOption'
+      produces:
+        - application/json
+      responses:
+        '202':
+          $ref: '#/responses/Repository'
+        '403':
+          $ref: '#/responses/forbidden'
+        '404':
+          $ref: '#/responses/notFound'
+        '422':
+          $ref: '#/responses/validationError'
+      summary: Transfer a repo ownership
       tags:
         - repository
   '/repositories/{id}':
@@ -4951,6 +5670,14 @@ paths:
           name: id
           required: true
           type: integer
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -5042,6 +5769,14 @@ paths:
           name: id
           required: true
           type: integer
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -5119,6 +5854,14 @@ paths:
           name: q
           required: true
           type: string
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -5186,6 +5929,15 @@ paths:
   /user/followers:
     get:
       operationId: userCurrentListFollowers
+      parameters:
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -5197,6 +5949,15 @@ paths:
   /user/following:
     get:
       operationId: userCurrentListFollowing
+      parameters:
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -5253,6 +6014,15 @@ paths:
   /user/gpg_keys:
     get:
       operationId: userCurrentListGPGKeys
+      parameters:
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -5327,6 +6097,14 @@ paths:
           in: query
           name: fingerprint
           type: string
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -5398,6 +6176,15 @@ paths:
   /user/orgs:
     get:
       operationId: orgListCurrentUserOrgs
+      parameters:
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -5409,6 +6196,15 @@ paths:
   /user/repos:
     get:
       operationId: userCurrentListRepos
+      parameters:
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -5442,6 +6238,15 @@ paths:
   /user/starred:
     get:
       operationId: userCurrentListStarred
+      parameters:
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -5515,6 +6320,15 @@ paths:
       consumes:
         - application/json
       operationId: userGetStopWatches
+      parameters:
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -5526,6 +6340,15 @@ paths:
   /user/subscriptions:
     get:
       operationId: userCurrentListSubscriptions
+      parameters:
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -5537,6 +6360,15 @@ paths:
   /user/teams:
     get:
       operationId: userListTeams
+      parameters:
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -5548,6 +6380,17 @@ paths:
   /user/times:
     get:
       operationId: userCurrentTrackedTimes
+      parameters:
+        - description: Only show times updated after the given time. This is a timestamp in RFC 3339 format
+          format: date-time
+          in: query
+          name: since
+          type: string
+        - description: Only show times updated before the given time. This is a timestamp in RFC 3339 format
+          format: date-time
+          in: query
+          name: before
+          type: string
       produces:
         - application/json
       responses:
@@ -5569,7 +6412,11 @@ paths:
           in: query
           name: uid
           type: integer
-        - description: maximum number of users to return
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
           in: query
           name: limit
           type: integer
@@ -5640,6 +6487,14 @@ paths:
           name: username
           required: true
           type: string
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -5657,6 +6512,14 @@ paths:
           name: username
           required: true
           type: string
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -5674,6 +6537,14 @@ paths:
           name: username
           required: true
           type: string
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -5714,6 +6585,14 @@ paths:
           in: query
           name: fingerprint
           type: string
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -5731,6 +6610,14 @@ paths:
           name: username
           required: true
           type: string
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -5748,6 +6635,14 @@ paths:
           name: username
           required: true
           type: string
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -5765,6 +6660,14 @@ paths:
           name: username
           required: true
           type: string
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -5782,6 +6685,14 @@ paths:
           name: username
           required: true
           type: string
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -5799,6 +6710,14 @@ paths:
           name: username
           required: true
           type: string
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -5999,6 +6918,9 @@ definitions:
     properties:
       commit:
         $ref: '#/definitions/PayloadCommit'
+      effective_branch_protection_name:
+        type: string
+        x-go-name: EffectiveBranchProtectionName
       enable_status_check:
         type: boolean
         x-go-name: EnableStatusCheck
@@ -6023,6 +6945,88 @@ definitions:
       user_can_push:
         type: boolean
         x-go-name: UserCanPush
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
+  BranchProtection:
+    description: BranchProtection represents a branch protection for a repository
+    properties:
+      approvals_whitelist_teams:
+        items:
+          type: string
+        type: array
+        x-go-name: ApprovalsWhitelistTeams
+      approvals_whitelist_username:
+        items:
+          type: string
+        type: array
+        x-go-name: ApprovalsWhitelistUsernames
+      block_on_rejected_reviews:
+        type: boolean
+        x-go-name: BlockOnRejectedReviews
+      branch_name:
+        type: string
+        x-go-name: BranchName
+      created_at:
+        format: date-time
+        type: string
+        x-go-name: Created
+      dismiss_stale_approvals:
+        type: boolean
+        x-go-name: DismissStaleApprovals
+      enable_approvals_whitelist:
+        type: boolean
+        x-go-name: EnableApprovalsWhitelist
+      enable_merge_whitelist:
+        type: boolean
+        x-go-name: EnableMergeWhitelist
+      enable_push:
+        type: boolean
+        x-go-name: EnablePush
+      enable_push_whitelist:
+        type: boolean
+        x-go-name: EnablePushWhitelist
+      enable_status_check:
+        type: boolean
+        x-go-name: EnableStatusCheck
+      merge_whitelist_teams:
+        items:
+          type: string
+        type: array
+        x-go-name: MergeWhitelistTeams
+      merge_whitelist_usernames:
+        items:
+          type: string
+        type: array
+        x-go-name: MergeWhitelistUsernames
+      push_whitelist_deploy_keys:
+        type: boolean
+        x-go-name: PushWhitelistDeployKeys
+      push_whitelist_teams:
+        items:
+          type: string
+        type: array
+        x-go-name: PushWhitelistTeams
+      push_whitelist_usernames:
+        items:
+          type: string
+        type: array
+        x-go-name: PushWhitelistUsernames
+      require_signed_commits:
+        type: boolean
+        x-go-name: RequireSignedCommits
+      required_approvals:
+        format: int64
+        type: integer
+        x-go-name: RequiredApprovals
+      status_check_contexts:
+        items:
+          type: string
+        type: array
+        x-go-name: StatusCheckContexts
+      updated_at:
+        format: date-time
+        type: string
+        x-go-name: Updated
     type: object
     x-go-package: code.gitea.io/gitea/modules/structs
   Comment:
@@ -6179,6 +7183,80 @@ definitions:
         x-go-name: URL
     type: object
     x-go-package: code.gitea.io/gitea/modules/structs
+  CreateBranchProtectionOption:
+    description: CreateBranchProtectionOption options for creating a branch protection
+    properties:
+      approvals_whitelist_teams:
+        items:
+          type: string
+        type: array
+        x-go-name: ApprovalsWhitelistTeams
+      approvals_whitelist_username:
+        items:
+          type: string
+        type: array
+        x-go-name: ApprovalsWhitelistUsernames
+      block_on_rejected_reviews:
+        type: boolean
+        x-go-name: BlockOnRejectedReviews
+      branch_name:
+        type: string
+        x-go-name: BranchName
+      dismiss_stale_approvals:
+        type: boolean
+        x-go-name: DismissStaleApprovals
+      enable_approvals_whitelist:
+        type: boolean
+        x-go-name: EnableApprovalsWhitelist
+      enable_merge_whitelist:
+        type: boolean
+        x-go-name: EnableMergeWhitelist
+      enable_push:
+        type: boolean
+        x-go-name: EnablePush
+      enable_push_whitelist:
+        type: boolean
+        x-go-name: EnablePushWhitelist
+      enable_status_check:
+        type: boolean
+        x-go-name: EnableStatusCheck
+      merge_whitelist_teams:
+        items:
+          type: string
+        type: array
+        x-go-name: MergeWhitelistTeams
+      merge_whitelist_usernames:
+        items:
+          type: string
+        type: array
+        x-go-name: MergeWhitelistUsernames
+      push_whitelist_deploy_keys:
+        type: boolean
+        x-go-name: PushWhitelistDeployKeys
+      push_whitelist_teams:
+        items:
+          type: string
+        type: array
+        x-go-name: PushWhitelistTeams
+      push_whitelist_usernames:
+        items:
+          type: string
+        type: array
+        x-go-name: PushWhitelistUsernames
+      require_signed_commits:
+        type: boolean
+        x-go-name: RequireSignedCommits
+      required_approvals:
+        format: int64
+        type: integer
+        x-go-name: RequiredApprovals
+      status_check_contexts:
+        items:
+          type: string
+        type: array
+        x-go-name: StatusCheckContexts
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
   CreateEmailOption:
     description: CreateEmailOption options when creating email addresses
     properties:
@@ -6268,6 +7346,7 @@ definitions:
           - msteams
           - slack
           - telegram
+          - feishu
         type: string
         x-go-name: Type
     required:
@@ -6698,6 +7777,77 @@ definitions:
       name:
         type: string
         x-go-name: Name
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
+  EditBranchProtectionOption:
+    description: EditBranchProtectionOption options for editing a branch protection
+    properties:
+      approvals_whitelist_teams:
+        items:
+          type: string
+        type: array
+        x-go-name: ApprovalsWhitelistTeams
+      approvals_whitelist_username:
+        items:
+          type: string
+        type: array
+        x-go-name: ApprovalsWhitelistUsernames
+      block_on_rejected_reviews:
+        type: boolean
+        x-go-name: BlockOnRejectedReviews
+      dismiss_stale_approvals:
+        type: boolean
+        x-go-name: DismissStaleApprovals
+      enable_approvals_whitelist:
+        type: boolean
+        x-go-name: EnableApprovalsWhitelist
+      enable_merge_whitelist:
+        type: boolean
+        x-go-name: EnableMergeWhitelist
+      enable_push:
+        type: boolean
+        x-go-name: EnablePush
+      enable_push_whitelist:
+        type: boolean
+        x-go-name: EnablePushWhitelist
+      enable_status_check:
+        type: boolean
+        x-go-name: EnableStatusCheck
+      merge_whitelist_teams:
+        items:
+          type: string
+        type: array
+        x-go-name: MergeWhitelistTeams
+      merge_whitelist_usernames:
+        items:
+          type: string
+        type: array
+        x-go-name: MergeWhitelistUsernames
+      push_whitelist_deploy_keys:
+        type: boolean
+        x-go-name: PushWhitelistDeployKeys
+      push_whitelist_teams:
+        items:
+          type: string
+        type: array
+        x-go-name: PushWhitelistTeams
+      push_whitelist_usernames:
+        items:
+          type: string
+        type: array
+        x-go-name: PushWhitelistUsernames
+      require_signed_commits:
+        type: boolean
+        x-go-name: RequireSignedCommits
+      required_approvals:
+        format: int64
+        type: integer
+        x-go-name: RequiredApprovals
+      status_check_contexts:
+        items:
+          type: string
+        type: array
+        x-go-name: StatusCheckContexts
     type: object
     x-go-package: code.gitea.io/gitea/modules/structs
   EditDeadlineOption:
@@ -7438,6 +8588,9 @@ definitions:
         format: date-time
         type: string
         x-go-name: Deadline
+      html_url:
+        type: string
+        x-go-name: HTMLURL
       id:
         format: int64
         type: integer
@@ -7566,6 +8719,9 @@ definitions:
         type: string
       MergeTitleField:
         type: string
+      force_merge:
+        type: boolean
+        x-go-name: ForceMerge
     required:
       - Do
     type: object
@@ -7654,6 +8810,58 @@ definitions:
       title:
         type: string
         x-go-name: Title
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
+  NotificationCount:
+    description: NotificationCount number of unread notifications
+    properties:
+      new:
+        format: int64
+        type: integer
+        x-go-name: New
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
+  NotificationSubject:
+    description: NotificationSubject contains the notification subject (Issue/Pull/Commit)
+    properties:
+      latest_comment_url:
+        type: string
+        x-go-name: LatestCommentURL
+      title:
+        type: string
+        x-go-name: Title
+      type:
+        type: string
+        x-go-name: Type
+      url:
+        type: string
+        x-go-name: URL
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
+  NotificationThread:
+    description: NotificationThread expose Notification on API
+    properties:
+      id:
+        format: int64
+        type: integer
+        x-go-name: ID
+      pinned:
+        type: boolean
+        x-go-name: Pinned
+      repository:
+        $ref: '#/definitions/Repository'
+      subject:
+        $ref: '#/definitions/NotificationSubject'
+      unread:
+        type: boolean
+        x-go-name: Unread
+      updated_at:
+        format: date-time
+        type: string
+        x-go-name: UpdatedAt
+      url:
+        type: string
+        x-go-name: URL
     type: object
     x-go-package: code.gitea.io/gitea/modules/structs
   Organization:
@@ -8182,6 +9390,9 @@ definitions:
       name:
         type: string
         x-go-name: Name
+      owner:
+        type: string
+        x-go-name: Owner
     type: object
     x-go-package: code.gitea.io/gitea/modules/structs
   SearchResults:
@@ -8395,6 +9606,23 @@ definitions:
       user_name:
         type: string
         x-go-name: UserName
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
+  TransferRepoOption:
+    description: TransferRepoOption options when transfer a repository's ownership
+    properties:
+      new_owner:
+        type: string
+        x-go-name: NewOwner
+      team_ids:
+        description: ID of the team or teams to add to the repository. Teams can only be added to organization-owned repositories.
+        items:
+          format: int64
+          type: integer
+        type: array
+        x-go-name: TeamIDs
+    required:
+      - new_owner
     type: object
     x-go-package: code.gitea.io/gitea/modules/structs
   UpdateFileOptions:
