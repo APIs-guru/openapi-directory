@@ -669,7 +669,7 @@ paths:
     get:
       x-aws-operation-name: CopyDBClusterSnapshot
       operationId: GET CopyDBClusterSnapshot
-      description: '<p>Copies a snapshot of a DB cluster.</p> <p>To copy a DB cluster snapshot from a shared manual DB cluster snapshot, <code>SourceDBClusterSnapshotIdentifier</code> must be the Amazon Resource Name (ARN) of the shared DB cluster snapshot.</p> <p>You can''t copy from one AWS Region to another.</p>'
+      description: '<p>Copies a snapshot of a DB cluster.</p> <p>To copy a DB cluster snapshot from a shared manual DB cluster snapshot, <code>SourceDBClusterSnapshotIdentifier</code> must be the Amazon Resource Name (ARN) of the shared DB cluster snapshot.</p>'
       responses:
         '200':
           description: Success
@@ -755,7 +755,7 @@ paths:
     post:
       x-aws-operation-name: CopyDBClusterSnapshot
       operationId: POST CopyDBClusterSnapshot
-      description: '<p>Copies a snapshot of a DB cluster.</p> <p>To copy a DB cluster snapshot from a shared manual DB cluster snapshot, <code>SourceDBClusterSnapshotIdentifier</code> must be the Amazon Resource Name (ARN) of the shared DB cluster snapshot.</p> <p>You can''t copy from one AWS Region to another.</p>'
+      description: '<p>Copies a snapshot of a DB cluster.</p> <p>To copy a DB cluster snapshot from a shared manual DB cluster snapshot, <code>SourceDBClusterSnapshotIdentifier</code> must be the Amazon Resource Name (ARN) of the shared DB cluster snapshot.</p>'
       responses:
         '200':
           description: Success
@@ -955,7 +955,7 @@ paths:
     get:
       x-aws-operation-name: CreateDBCluster
       operationId: GET CreateDBCluster
-      description: <p>Creates a new Amazon Neptune DB cluster.</p> <p>You can use the <code>ReplicationSourceIdentifier</code> parameter to create the DB cluster as a Read Replica of another DB cluster or Amazon Neptune DB instance.</p>
+      description: '<p>Creates a new Amazon Neptune DB cluster.</p> <p>You can use the <code>ReplicationSourceIdentifier</code> parameter to create the DB cluster as a Read Replica of another DB cluster or Amazon Neptune DB instance.</p> <p>Note that when you create a new cluster using <code>CreateDBCluster</code> directly, deletion protection is disabled by default (when you create a new production cluster in the console, deletion protection is enabled by default). You can only delete a DB cluster if its <code>DeletionProtection</code> field is set to <code>false</code>.</p>'
       responses:
         '200':
           description: Success
@@ -1148,7 +1148,7 @@ paths:
         - name: DeletionProtection
           in: query
           required: false
-          description: 'A value that indicates whether the DB cluster has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. By default, deletion protection is disabled. '
+          description: 'A value that indicates whether the DB cluster has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. By default, deletion protection is enabled.'
           type: boolean
         - name: Action
           in: query
@@ -1173,7 +1173,7 @@ paths:
     post:
       x-aws-operation-name: CreateDBCluster
       operationId: POST CreateDBCluster
-      description: <p>Creates a new Amazon Neptune DB cluster.</p> <p>You can use the <code>ReplicationSourceIdentifier</code> parameter to create the DB cluster as a Read Replica of another DB cluster or Amazon Neptune DB instance.</p>
+      description: '<p>Creates a new Amazon Neptune DB cluster.</p> <p>You can use the <code>ReplicationSourceIdentifier</code> parameter to create the DB cluster as a Read Replica of another DB cluster or Amazon Neptune DB instance.</p> <p>Note that when you create a new cluster using <code>CreateDBCluster</code> directly, deletion protection is disabled by default (when you create a new production cluster in the console, deletion protection is enabled by default). You can only delete a DB cluster if its <code>DeletionProtection</code> field is set to <code>false</code>.</p>'
       responses:
         '200':
           description: Success
@@ -1366,7 +1366,7 @@ paths:
         - name: DeletionProtection
           in: formData
           required: false
-          description: 'A value that indicates whether the DB cluster has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. By default, deletion protection is disabled. '
+          description: 'A value that indicates whether the DB cluster has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. By default, deletion protection is enabled.'
           type: boolean
         - name: Action
           in: query
@@ -1924,7 +1924,7 @@ paths:
         - name: DeletionProtection
           in: query
           required: false
-          description: '<p>A value that indicates whether the DB instance has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. By default, deletion protection is disabled. </p> <p>You can enable or disable deletion protection for the DB cluster. For more information, see <a>CreateDBCluster</a>. DB instances in a DB cluster can be deleted even when deletion protection is enabled for the DB cluster. </p>'
+          description: '<p>A value that indicates whether the DB instance has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. By default, deletion protection is disabled. See <a href="https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-instances-delete.html">Deleting a DB Instance</a>.</p> <p>DB instances in a DB cluster can be deleted even when deletion protection is enabled in their parent DB cluster.</p>'
           type: boolean
         - name: Action
           in: query
@@ -2249,7 +2249,7 @@ paths:
         - name: DeletionProtection
           in: formData
           required: false
-          description: '<p>A value that indicates whether the DB instance has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. By default, deletion protection is disabled. </p> <p>You can enable or disable deletion protection for the DB cluster. For more information, see <a>CreateDBCluster</a>. DB instances in a DB cluster can be deleted even when deletion protection is enabled for the DB cluster. </p>'
+          description: '<p>A value that indicates whether the DB instance has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. By default, deletion protection is disabled. See <a href="https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-instances-delete.html">Deleting a DB Instance</a>.</p> <p>DB instances in a DB cluster can be deleted even when deletion protection is enabled in their parent DB cluster.</p>'
           type: boolean
         - name: Action
           in: query
@@ -2712,7 +2712,7 @@ paths:
     get:
       x-aws-operation-name: DeleteDBCluster
       operationId: GET DeleteDBCluster
-      description: 'The DeleteDBCluster action deletes a previously provisioned DB cluster. When you delete a DB cluster, all automated backups for that DB cluster are deleted and can''t be recovered. Manual DB cluster snapshots of the specified DB cluster are not deleted.'
+      description: '<p>The DeleteDBCluster action deletes a previously provisioned DB cluster. When you delete a DB cluster, all automated backups for that DB cluster are deleted and can''t be recovered. Manual DB cluster snapshots of the specified DB cluster are not deleted.</p> <p>Note that the DB Cluster cannot be deleted if deletion protection is enabled. To delete it, you must first set its <code>DeletionProtection</code> field to <code>False</code>.</p>'
       responses:
         '200':
           description: Success
@@ -2777,7 +2777,7 @@ paths:
     post:
       x-aws-operation-name: DeleteDBCluster
       operationId: POST DeleteDBCluster
-      description: 'The DeleteDBCluster action deletes a previously provisioned DB cluster. When you delete a DB cluster, all automated backups for that DB cluster are deleted and can''t be recovered. Manual DB cluster snapshots of the specified DB cluster are not deleted.'
+      description: '<p>The DeleteDBCluster action deletes a previously provisioned DB cluster. When you delete a DB cluster, all automated backups for that DB cluster are deleted and can''t be recovered. Manual DB cluster snapshots of the specified DB cluster are not deleted.</p> <p>Note that the DB Cluster cannot be deleted if deletion protection is enabled. To delete it, you must first set its <code>DeletionProtection</code> field to <code>False</code>.</p>'
       responses:
         '200':
           description: Success
@@ -2989,7 +2989,7 @@ paths:
     get:
       x-aws-operation-name: DeleteDBInstance
       operationId: GET DeleteDBInstance
-      description: '<p>The DeleteDBInstance action deletes a previously provisioned DB instance. When you delete a DB instance, all automated backups for that instance are deleted and can''t be recovered. Manual DB snapshots of the DB instance to be deleted by <code>DeleteDBInstance</code> are not deleted.</p> <p> If you request a final DB snapshot the status of the Amazon Neptune DB instance is <code>deleting</code> until the DB snapshot is created. The API action <code>DescribeDBInstance</code> is used to monitor the status of this operation. The action can''t be canceled or reverted once submitted.</p> <p>Note that when a DB instance is in a failure state and has a status of <code>failed</code>, <code>incompatible-restore</code>, or <code>incompatible-network</code>, you can only delete it when the <code>SkipFinalSnapshot</code> parameter is set to <code>true</code>.</p> <p>You can''t delete a DB instance if it is the only instance in the DB cluster.</p>'
+      description: '<p>The DeleteDBInstance action deletes a previously provisioned DB instance. When you delete a DB instance, all automated backups for that instance are deleted and can''t be recovered. Manual DB snapshots of the DB instance to be deleted by <code>DeleteDBInstance</code> are not deleted.</p> <p> If you request a final DB snapshot the status of the Amazon Neptune DB instance is <code>deleting</code> until the DB snapshot is created. The API action <code>DescribeDBInstance</code> is used to monitor the status of this operation. The action can''t be canceled or reverted once submitted.</p> <p>Note that when a DB instance is in a failure state and has a status of <code>failed</code>, <code>incompatible-restore</code>, or <code>incompatible-network</code>, you can only delete it when the <code>SkipFinalSnapshot</code> parameter is set to <code>true</code>.</p> <p>You can''t delete a DB instance if it is the only instance in the DB cluster, or if it has deletion protection enabled.</p>'
       responses:
         '200':
           description: Success
@@ -3054,7 +3054,7 @@ paths:
     post:
       x-aws-operation-name: DeleteDBInstance
       operationId: POST DeleteDBInstance
-      description: '<p>The DeleteDBInstance action deletes a previously provisioned DB instance. When you delete a DB instance, all automated backups for that instance are deleted and can''t be recovered. Manual DB snapshots of the DB instance to be deleted by <code>DeleteDBInstance</code> are not deleted.</p> <p> If you request a final DB snapshot the status of the Amazon Neptune DB instance is <code>deleting</code> until the DB snapshot is created. The API action <code>DescribeDBInstance</code> is used to monitor the status of this operation. The action can''t be canceled or reverted once submitted.</p> <p>Note that when a DB instance is in a failure state and has a status of <code>failed</code>, <code>incompatible-restore</code>, or <code>incompatible-network</code>, you can only delete it when the <code>SkipFinalSnapshot</code> parameter is set to <code>true</code>.</p> <p>You can''t delete a DB instance if it is the only instance in the DB cluster.</p>'
+      description: '<p>The DeleteDBInstance action deletes a previously provisioned DB instance. When you delete a DB instance, all automated backups for that instance are deleted and can''t be recovered. Manual DB snapshots of the DB instance to be deleted by <code>DeleteDBInstance</code> are not deleted.</p> <p> If you request a final DB snapshot the status of the Amazon Neptune DB instance is <code>deleting</code> until the DB snapshot is created. The API action <code>DescribeDBInstance</code> is used to monitor the status of this operation. The action can''t be canceled or reverted once submitted.</p> <p>Note that when a DB instance is in a failure state and has a status of <code>failed</code>, <code>incompatible-restore</code>, or <code>incompatible-network</code>, you can only delete it when the <code>SkipFinalSnapshot</code> parameter is set to <code>true</code>.</p> <p>You can''t delete a DB instance if it is the only instance in the DB cluster, or if it has deletion protection enabled.</p>'
       responses:
         '200':
           description: Success
@@ -3785,7 +3785,7 @@ paths:
     get:
       x-aws-operation-name: DescribeDBClusters
       operationId: GET DescribeDBClusters
-      description: Returns information about provisioned DB clusters. This API supports pagination.
+      description: '<p>Returns information about provisioned DB clusters, and supports pagination.</p> <note> <p>This operation can also return information for Amazon RDS clusters and Amazon DocDB clusters.</p> </note>'
       responses:
         '200':
           description: Success
@@ -3804,7 +3804,7 @@ paths:
         - name: Filters
           in: query
           required: false
-          description: '<p>A filter that specifies one or more DB clusters to describe.</p> <p>Supported filters:</p> <ul> <li> <p> <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB clusters identified by these ARNs.</p> </li> </ul>'
+          description: '<p>A filter that specifies one or more DB clusters to describe.</p> <p>Supported filters:</p> <ul> <li> <p> <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB clusters identified by these ARNs.</p> </li> <li> <p> <code>engine</code> - Accepts an engine name (such as <code>neptune</code>), and restricts the results list to DB clusters created by that engine.</p> </li> </ul> <p>For example, to invoke this API from the AWS CLI and filter so that only Neptune DB clusters are returned, you could use the following command:</p>'
           type: array
           items:
             type: string
@@ -3841,7 +3841,7 @@ paths:
     post:
       x-aws-operation-name: DescribeDBClusters
       operationId: POST DescribeDBClusters
-      description: Returns information about provisioned DB clusters. This API supports pagination.
+      description: '<p>Returns information about provisioned DB clusters, and supports pagination.</p> <note> <p>This operation can also return information for Amazon RDS clusters and Amazon DocDB clusters.</p> </note>'
       responses:
         '200':
           description: Success
@@ -3860,7 +3860,7 @@ paths:
         - name: Filters
           in: formData
           required: false
-          description: '<p>A filter that specifies one or more DB clusters to describe.</p> <p>Supported filters:</p> <ul> <li> <p> <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB clusters identified by these ARNs.</p> </li> </ul>'
+          description: '<p>A filter that specifies one or more DB clusters to describe.</p> <p>Supported filters:</p> <ul> <li> <p> <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB clusters identified by these ARNs.</p> </li> <li> <p> <code>engine</code> - Accepts an engine name (such as <code>neptune</code>), and restricts the results list to DB clusters created by that engine.</p> </li> </ul> <p>For example, to invoke this API from the AWS CLI and filter so that only Neptune DB clusters are returned, you could use the following command:</p>'
           type: array
           items:
             type: string
@@ -4037,7 +4037,7 @@ paths:
     get:
       x-aws-operation-name: DescribeDBInstances
       operationId: GET DescribeDBInstances
-      description: Returns information about provisioned instances. This API supports pagination.
+      description: '<p>Returns information about provisioned instances, and supports pagination.</p> <note> <p>This operation can also return information for Amazon RDS instances and Amazon DocDB instances.</p> </note>'
       responses:
         '200':
           description: Success
@@ -4056,7 +4056,7 @@ paths:
         - name: Filters
           in: query
           required: false
-          description: '<p>A filter that specifies one or more DB instances to describe.</p> <p>Supported filters:</p> <ul> <li> <p> <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB instances associated with the DB clusters identified by these ARNs.</p> </li> <li> <p> <code>db-instance-id</code> - Accepts DB instance identifiers and DB instance Amazon Resource Names (ARNs). The results list will only include information about the DB instances identified by these ARNs.</p> </li> </ul>'
+          description: '<p>A filter that specifies one or more DB instances to describe.</p> <p>Supported filters:</p> <ul> <li> <p> <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB instances associated with the DB clusters identified by these ARNs.</p> </li> <li> <p> <code>engine</code> - Accepts an engine name (such as <code>neptune</code>), and restricts the results list to DB instances created by that engine.</p> </li> </ul> <p>For example, to invoke this API from the AWS CLI and filter so that only Neptune DB instances are returned, you could use the following command:</p>'
           type: array
           items:
             type: string
@@ -4093,7 +4093,7 @@ paths:
     post:
       x-aws-operation-name: DescribeDBInstances
       operationId: POST DescribeDBInstances
-      description: Returns information about provisioned instances. This API supports pagination.
+      description: '<p>Returns information about provisioned instances, and supports pagination.</p> <note> <p>This operation can also return information for Amazon RDS instances and Amazon DocDB instances.</p> </note>'
       responses:
         '200':
           description: Success
@@ -4112,7 +4112,7 @@ paths:
         - name: Filters
           in: formData
           required: false
-          description: '<p>A filter that specifies one or more DB instances to describe.</p> <p>Supported filters:</p> <ul> <li> <p> <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB instances associated with the DB clusters identified by these ARNs.</p> </li> <li> <p> <code>db-instance-id</code> - Accepts DB instance identifiers and DB instance Amazon Resource Names (ARNs). The results list will only include information about the DB instances identified by these ARNs.</p> </li> </ul>'
+          description: '<p>A filter that specifies one or more DB instances to describe.</p> <p>Supported filters:</p> <ul> <li> <p> <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB instances associated with the DB clusters identified by these ARNs.</p> </li> <li> <p> <code>engine</code> - Accepts an engine name (such as <code>neptune</code>), and restricts the results list to DB instances created by that engine.</p> </li> </ul> <p>For example, to invoke this API from the AWS CLI and filter so that only Neptune DB instances are returned, you could use the following command:</p>'
           type: array
           items:
             type: string
@@ -5668,7 +5668,7 @@ paths:
         - name: DeletionProtection
           in: query
           required: false
-          description: 'A value that indicates whether the DB cluster has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. By default, deletion protection is disabled. '
+          description: 'A value that indicates whether the DB cluster has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. By default, deletion protection is disabled.'
           type: boolean
         - name: Action
           in: query
@@ -5830,7 +5830,7 @@ paths:
         - name: DeletionProtection
           in: formData
           required: false
-          description: 'A value that indicates whether the DB cluster has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. By default, deletion protection is disabled. '
+          description: 'A value that indicates whether the DB cluster has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. By default, deletion protection is disabled.'
           type: boolean
         - name: Action
           in: query
@@ -6335,7 +6335,7 @@ paths:
         - name: DeletionProtection
           in: query
           required: false
-          description: 'A value that indicates whether the DB instance has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. By default, deletion protection is disabled. '
+          description: 'A value that indicates whether the DB instance has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. By default, deletion protection is disabled. See <a href="https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-instances-delete.html">Deleting a DB Instance</a>.'
           type: boolean
         - name: Action
           in: query
@@ -6629,7 +6629,7 @@ paths:
         - name: DeletionProtection
           in: formData
           required: false
-          description: 'A value that indicates whether the DB instance has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. By default, deletion protection is disabled. '
+          description: 'A value that indicates whether the DB instance has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. By default, deletion protection is disabled. See <a href="https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-instances-delete.html">Deleting a DB Instance</a>.'
           type: boolean
         - name: Action
           in: query
@@ -8397,6 +8397,180 @@ paths:
           type: string
           enum:
             - '2014-10-31'
+  '/#Action=StartDBCluster':
+    get:
+      x-aws-operation-name: StartDBCluster
+      operationId: GET StartDBCluster
+      description: 'Starts an Amazon Neptune DB cluster that was stopped using the AWS console, the AWS CLI stop-db-cluster command, or the StopDBCluster API.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartDBClusterResult'
+        '480':
+          description: DBClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/DBClusterNotFoundFault'
+        '481':
+          description: InvalidDBClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBClusterStateFault'
+        '482':
+          description: InvalidDBInstanceStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBInstanceStateFault'
+      parameters:
+        - name: DBClusterIdentifier
+          in: query
+          required: true
+          description: The DB cluster identifier of the Neptune DB cluster to be started. This parameter is stored as a lowercase string.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - StartDBCluster
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2014-10-31'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: StartDBCluster
+      operationId: POST StartDBCluster
+      description: 'Starts an Amazon Neptune DB cluster that was stopped using the AWS console, the AWS CLI stop-db-cluster command, or the StopDBCluster API.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartDBClusterResult'
+        '480':
+          description: DBClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/DBClusterNotFoundFault'
+        '481':
+          description: InvalidDBClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBClusterStateFault'
+        '482':
+          description: InvalidDBInstanceStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBInstanceStateFault'
+      parameters:
+        - name: DBClusterIdentifier
+          in: formData
+          required: true
+          description: The DB cluster identifier of the Neptune DB cluster to be started. This parameter is stored as a lowercase string.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - StartDBCluster
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2014-10-31'
+  '/#Action=StopDBCluster':
+    get:
+      x-aws-operation-name: StopDBCluster
+      operationId: GET StopDBCluster
+      description: '<p>Stops an Amazon Neptune DB cluster. When you stop a DB cluster, Neptune retains the DB cluster''s metadata, including its endpoints and DB parameter groups.</p> <p>Neptune also retains the transaction logs so you can do a point-in-time restore if necessary.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StopDBClusterResult'
+        '480':
+          description: DBClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/DBClusterNotFoundFault'
+        '481':
+          description: InvalidDBClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBClusterStateFault'
+        '482':
+          description: InvalidDBInstanceStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBInstanceStateFault'
+      parameters:
+        - name: DBClusterIdentifier
+          in: query
+          required: true
+          description: The DB cluster identifier of the Neptune DB cluster to be stopped. This parameter is stored as a lowercase string.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - StopDBCluster
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2014-10-31'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: StopDBCluster
+      operationId: POST StopDBCluster
+      description: '<p>Stops an Amazon Neptune DB cluster. When you stop a DB cluster, Neptune retains the DB cluster''s metadata, including its endpoints and DB parameter groups.</p> <p>Neptune also retains the transaction logs so you can do a point-in-time restore if necessary.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StopDBClusterResult'
+        '480':
+          description: DBClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/DBClusterNotFoundFault'
+        '481':
+          description: InvalidDBClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBClusterStateFault'
+        '482':
+          description: InvalidDBInstanceStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBInstanceStateFault'
+      parameters:
+        - name: DBClusterIdentifier
+          in: formData
+          required: true
+          description: The DB cluster identifier of the Neptune DB cluster to be stopped. This parameter is stored as a lowercase string.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - StopDBCluster
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2014-10-31'
 definitions:
   DBClusterNotFoundFault: {}
   DBClusterRoleAlreadyExistsFault: {}
@@ -8816,6 +8990,16 @@ definitions:
     properties:
       DBCluster:
         $ref: '#/definitions/DBCluster'
+  StartDBClusterResult:
+    type: object
+    properties:
+      DBCluster:
+        $ref: '#/definitions/DBCluster'
+  StopDBClusterResult:
+    type: object
+    properties:
+      DBCluster:
+        $ref: '#/definitions/DBCluster'
   AddRoleToDBClusterMessage:
     type: object
     required:
@@ -9031,7 +9215,7 @@ definitions:
         description: Provides the list of EC2 Availability Zones that instances in the DB cluster snapshot can be restored in.
       DBClusterSnapshotIdentifier:
         $ref: '#/definitions/String'
-        description: Specifies the identifier for the DB cluster snapshot.
+        description: '<p>Specifies the identifier for a DB cluster snapshot. Must match the identifier of an existing snapshot.</p> <p>After you restore a DB cluster using a <code>DBClusterSnapshotIdentifier</code>, you must specify the same <code>DBClusterSnapshotIdentifier</code> for any future updates to the DB cluster. When you specify this property for an update, the DB cluster is not restored from the snapshot again, and the data in the database is not changed.</p> <p>However, if you don''t specify the <code>DBClusterSnapshotIdentifier</code>, an empty DB cluster is created, and the original DB cluster is deleted. If you specify a property that is different from the previous snapshot restore property, the DB cluster is restored from the snapshot specified by the <code>DBClusterSnapshotIdentifier</code>, and the original DB cluster is deleted.</p>'
       DBClusterIdentifier:
         $ref: '#/definitions/String'
         description: Specifies the DB cluster identifier of the DB cluster that this DB cluster snapshot was created from.
@@ -9205,7 +9389,7 @@ definitions:
         description: The list of log types that need to be enabled for exporting to CloudWatch Logs.
       DeletionProtection:
         $ref: '#/definitions/BooleanOptional'
-        description: 'A value that indicates whether the DB cluster has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. By default, deletion protection is disabled. '
+        description: 'A value that indicates whether the DB cluster has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. By default, deletion protection is enabled.'
   CreateDBClusterParameterGroupMessage:
     type: object
     required:
@@ -9338,7 +9522,7 @@ definitions:
         description: A list of log types that this DB cluster is configured to export to CloudWatch Logs.
       DeletionProtection:
         $ref: '#/definitions/BooleanOptional'
-        description: 'Indicates if the DB cluster has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. '
+        description: Indicates whether or not the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled.
     description: <p>Contains the details of an Amazon Neptune DB cluster.</p> <p>This data type is used as a response element in the <a>DescribeDBClusters</a> action.</p>
   CreateDBClusterSnapshotMessage:
     type: object
@@ -9494,7 +9678,7 @@ definitions:
         description: The list of log types that need to be enabled for exporting to CloudWatch Logs.
       DeletionProtection:
         $ref: '#/definitions/BooleanOptional'
-        description: '<p>A value that indicates whether the DB instance has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. By default, deletion protection is disabled. </p> <p>You can enable or disable deletion protection for the DB cluster. For more information, see <a>CreateDBCluster</a>. DB instances in a DB cluster can be deleted even when deletion protection is enabled for the DB cluster. </p>'
+        description: '<p>A value that indicates whether the DB instance has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. By default, deletion protection is disabled. See <a href="https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-instances-delete.html">Deleting a DB Instance</a>.</p> <p>DB instances in a DB cluster can be deleted even when deletion protection is enabled in their parent DB cluster.</p>'
   DBInstance:
     type: object
     properties:
@@ -9656,7 +9840,7 @@ definitions:
         description: A list of log types that this DB instance is configured to export to CloudWatch Logs.
       DeletionProtection:
         $ref: '#/definitions/BooleanOptional'
-        description: 'Indicates if the DB instance has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. '
+        description: 'Indicates whether or not the DB instance has deletion protection enabled. The instance can''t be deleted when deletion protection is enabled. See <a href="https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-instances-delete.html">Deleting a DB Instance</a>.'
     description: <p>Contains the details of an Amazon Neptune DB instance.</p> <p>This data type is used as a response element in the <a>DescribeDBInstances</a> action.</p>
   CreateDBParameterGroupMessage:
     type: object
@@ -10203,7 +10387,7 @@ definitions:
         description: '<p>The user-supplied DB cluster identifier. If this parameter is specified, information from only the specific DB cluster is returned. This parameter isn''t case-sensitive.</p> <p>Constraints:</p> <ul> <li> <p>If supplied, must match an existing DBClusterIdentifier.</p> </li> </ul>'
       Filters:
         $ref: '#/definitions/FilterList'
-        description: '<p>A filter that specifies one or more DB clusters to describe.</p> <p>Supported filters:</p> <ul> <li> <p> <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB clusters identified by these ARNs.</p> </li> </ul>'
+        description: '<p>A filter that specifies one or more DB clusters to describe.</p> <p>Supported filters:</p> <ul> <li> <p> <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB clusters identified by these ARNs.</p> </li> <li> <p> <code>engine</code> - Accepts an engine name (such as <code>neptune</code>), and restricts the results list to DB clusters created by that engine.</p> </li> </ul> <p>For example, to invoke this API from the AWS CLI and filter so that only Neptune DB clusters are returned, you could use the following command:</p>'
       MaxRecords:
         $ref: '#/definitions/IntegerOptional'
         description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.</p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
@@ -10248,7 +10432,7 @@ definitions:
         description: '<p>The user-supplied instance identifier. If this parameter is specified, information from only the specific DB instance is returned. This parameter isn''t case-sensitive.</p> <p>Constraints:</p> <ul> <li> <p>If supplied, must match the identifier of an existing DBInstance.</p> </li> </ul>'
       Filters:
         $ref: '#/definitions/FilterList'
-        description: '<p>A filter that specifies one or more DB instances to describe.</p> <p>Supported filters:</p> <ul> <li> <p> <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB instances associated with the DB clusters identified by these ARNs.</p> </li> <li> <p> <code>db-instance-id</code> - Accepts DB instance identifiers and DB instance Amazon Resource Names (ARNs). The results list will only include information about the DB instances identified by these ARNs.</p> </li> </ul>'
+        description: '<p>A filter that specifies one or more DB instances to describe.</p> <p>Supported filters:</p> <ul> <li> <p> <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB instances associated with the DB clusters identified by these ARNs.</p> </li> <li> <p> <code>engine</code> - Accepts an engine name (such as <code>neptune</code>), and restricts the results list to DB instances created by that engine.</p> </li> </ul> <p>For example, to invoke this API from the AWS CLI and filter so that only Neptune DB instances are returned, you could use the following command:</p>'
       MaxRecords:
         $ref: '#/definitions/IntegerOptional'
         description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.</p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
@@ -10631,7 +10815,7 @@ definitions:
         description: '<p>The version number of the database engine. Currently, setting this parameter has no effect. To upgrade your database engine to the most recent release, use the <a>ApplyPendingMaintenanceAction</a> API.</p> <p>For a list of valid engine versions, see <a>CreateDBInstance</a>, or call <a>DescribeDBEngineVersions</a>.</p>'
       DeletionProtection:
         $ref: '#/definitions/BooleanOptional'
-        description: 'A value that indicates whether the DB cluster has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. By default, deletion protection is disabled. '
+        description: 'A value that indicates whether the DB cluster has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. By default, deletion protection is disabled.'
   ModifyDBClusterParameterGroupMessage:
     type: object
     required:
@@ -10777,7 +10961,7 @@ definitions:
         description: The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB instance or DB cluster.
       DeletionProtection:
         $ref: '#/definitions/BooleanOptional'
-        description: 'A value that indicates whether the DB instance has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. By default, deletion protection is disabled. '
+        description: 'A value that indicates whether the DB instance has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. By default, deletion protection is disabled. See <a href="https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-instances-delete.html">Deleting a DB Instance</a>.'
   ModifyDBParameterGroupMessage:
     type: object
     required:
@@ -11149,6 +11333,22 @@ definitions:
       DeletionProtection:
         $ref: '#/definitions/BooleanOptional'
         description: 'A value that indicates whether the DB cluster has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. By default, deletion protection is disabled. '
+  StartDBClusterMessage:
+    type: object
+    required:
+      - DBClusterIdentifier
+    properties:
+      DBClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: The DB cluster identifier of the Neptune DB cluster to be started. This parameter is stored as a lowercase string.
+  StopDBClusterMessage:
+    type: object
+    required:
+      - DBClusterIdentifier
+    properties:
+      DBClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: The DB cluster identifier of the Neptune DB cluster to be stopped. This parameter is stored as a lowercase string.
   Subnet:
     type: object
     properties:

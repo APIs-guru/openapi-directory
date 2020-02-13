@@ -518,6 +518,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkMailService.DeleteAccessControlRule':
+    post:
+      operationId: DeleteAccessControlRule
+      description: Deletes an access control rule for the specified WorkMail organization.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteAccessControlRuleResponse'
+        '480':
+          description: OrganizationNotFoundException
+          schema:
+            $ref: '#/definitions/OrganizationNotFoundException'
+        '481':
+          description: OrganizationStateException
+          schema:
+            $ref: '#/definitions/OrganizationStateException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteAccessControlRuleRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.DeleteAccessControlRule
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=WorkMailService.DeleteAlias':
     post:
       operationId: DeleteAlias
@@ -1106,6 +1143,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkMailService.GetAccessControlEffect':
+    post:
+      operationId: GetAccessControlEffect
+      description: 'Gets the effects of an organization''s access control rules as they apply to a specified IPv4 address, access protocol action, or user ID. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetAccessControlEffectResponse'
+        '480':
+          description: EntityNotFoundException
+          schema:
+            $ref: '#/definitions/EntityNotFoundException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: OrganizationNotFoundException
+          schema:
+            $ref: '#/definitions/OrganizationNotFoundException'
+        '483':
+          description: OrganizationStateException
+          schema:
+            $ref: '#/definitions/OrganizationStateException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetAccessControlEffectRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.GetAccessControlEffect
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=WorkMailService.GetMailboxDetails':
     post:
       operationId: GetMailboxDetails
@@ -1139,6 +1221,43 @@ paths:
           type: string
           enum:
             - WorkMailService.GetMailboxDetails
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkMailService.ListAccessControlRules':
+    post:
+      operationId: ListAccessControlRules
+      description: Lists the access control rules for the specified organization.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListAccessControlRulesResponse'
+        '480':
+          description: OrganizationNotFoundException
+          schema:
+            $ref: '#/definitions/OrganizationNotFoundException'
+        '481':
+          description: OrganizationStateException
+          schema:
+            $ref: '#/definitions/OrganizationStateException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListAccessControlRulesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.ListAccessControlRules
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1612,6 +1731,55 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkMailService.PutAccessControlRule':
+    post:
+      operationId: PutAccessControlRule
+      description: 'Adds a new access control rule for the specified organization. The rule allows or denies access to the organization for the specified IPv4 addresses, access protocol actions, and user IDs. Adding a new rule with the same name as an existing rule replaces the older rule.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutAccessControlRuleResponse'
+        '480':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: EntityNotFoundException
+          schema:
+            $ref: '#/definitions/EntityNotFoundException'
+        '483':
+          description: OrganizationNotFoundException
+          schema:
+            $ref: '#/definitions/OrganizationNotFoundException'
+        '484':
+          description: OrganizationStateException
+          schema:
+            $ref: '#/definitions/OrganizationStateException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutAccessControlRuleRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.PutAccessControlRule
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=WorkMailService.PutMailboxPermissions':
     post:
       operationId: PutMailboxPermissions
@@ -1664,7 +1832,7 @@ paths:
   '/#X-Amz-Target=WorkMailService.RegisterToWorkMail':
     post:
       operationId: RegisterToWorkMail
-      description: '<p>Registers an existing and disabled user, group, or resource for Amazon WorkMail use by associating a mailbox and calendaring capabilities. It performs no change if the user, group, or resource is enabled and fails if the user, group, or resource is deleted. This operation results in the accumulation of costs. For more information, see <a href="https://aws.amazon.com//workmail/pricing">Pricing</a>. The equivalent console functionality for this operation is <i>Enable</i>. </p> <p>Users can either be created by calling the <a>CreateUser</a> API operation or they can be synchronized from your directory. For more information, see <a>DeregisterFromWorkMail</a>.</p>'
+      description: '<p>Registers an existing and disabled user, group, or resource for Amazon WorkMail use by associating a mailbox and calendaring capabilities. It performs no change if the user, group, or resource is enabled and fails if the user, group, or resource is deleted. This operation results in the accumulation of costs. For more information, see <a href="https://aws.amazon.com/workmail/pricing">Pricing</a>. The equivalent console functionality for this operation is <i>Enable</i>. </p> <p>Users can either be created by calling the <a>CreateUser</a> API operation or they can be synchronized from your directory. For more information, see <a>DeregisterFromWorkMail</a>.</p>'
       responses:
         '200':
           description: Success
@@ -2207,6 +2375,20 @@ definitions:
         $ref: '#/definitions/Password'
         description: The password for the new user.
   InvalidPasswordException: {}
+  DeleteAccessControlRuleResponse:
+    type: object
+    properties: {}
+  DeleteAccessControlRuleRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: The identifier for the organization.
+      Name:
+        $ref: '#/definitions/AccessControlRuleName'
+        description: The name of the access control rule.
   DeleteAliasResponse:
     type: object
     properties: {}
@@ -2492,6 +2674,35 @@ definitions:
       MemberId:
         $ref: '#/definitions/WorkMailIdentifier'
         description: The identifier for the member to be removed to the group.
+  GetAccessControlEffectResponse:
+    type: object
+    properties:
+      Effect:
+        $ref: '#/definitions/AccessControlRuleEffect'
+        description: The rule effect.
+      MatchedRules:
+        $ref: '#/definitions/AccessControlRuleNameList'
+        description: 'The rules that match the given parameters, resulting in an effect.'
+  GetAccessControlEffectRequest:
+    type: object
+    required:
+      - OrganizationId
+      - IpAddress
+      - Action
+      - UserId
+    properties:
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: The identifier for the organization.
+      IpAddress:
+        $ref: '#/definitions/IpAddress'
+        description: The IPv4 address.
+      Action:
+        $ref: '#/definitions/AccessControlRuleAction'
+        description: 'The access protocol action. Valid values include <code>ActiveSync</code>, <code>AutoDiscover</code>, <code>EWS</code>, <code>IMAP</code>, <code>SMTP</code>, <code>WindowsOutlook</code>, and <code>WebMail</code>.'
+      UserId:
+        $ref: '#/definitions/WorkMailIdentifier'
+        description: The user ID.
   GetMailboxDetailsResponse:
     type: object
     properties:
@@ -2513,6 +2724,20 @@ definitions:
       UserId:
         $ref: '#/definitions/WorkMailIdentifier'
         description: The identifier for the user whose mailbox details are being requested.
+  ListAccessControlRulesResponse:
+    type: object
+    properties:
+      Rules:
+        $ref: '#/definitions/AccessControlRulesList'
+        description: The access control rules.
+  ListAccessControlRulesRequest:
+    type: object
+    required:
+      - OrganizationId
+    properties:
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: The identifier for the organization.
   ListAliasesResponse:
     type: object
     properties:
@@ -2723,6 +2948,47 @@ definitions:
       MaxResults:
         $ref: '#/definitions/MaxResults'
         description: The maximum number of results to return in a single call.
+  PutAccessControlRuleResponse:
+    type: object
+    properties: {}
+  PutAccessControlRuleRequest:
+    type: object
+    required:
+      - Name
+      - Effect
+      - Description
+      - OrganizationId
+    properties:
+      Name:
+        $ref: '#/definitions/AccessControlRuleName'
+        description: The rule name.
+      Effect:
+        $ref: '#/definitions/AccessControlRuleEffect'
+        description: The rule effect.
+      Description:
+        $ref: '#/definitions/AccessControlRuleDescription'
+        description: The rule description.
+      IpRanges:
+        $ref: '#/definitions/IpRangeList'
+        description: IPv4 CIDR ranges to include in the rule.
+      NotIpRanges:
+        $ref: '#/definitions/IpRangeList'
+        description: IPv4 CIDR ranges to exclude from the rule.
+      Actions:
+        $ref: '#/definitions/ActionsList'
+        description: 'Access protocol actions to include in the rule. Valid values include <code>ActiveSync</code>, <code>AutoDiscover</code>, <code>EWS</code>, <code>IMAP</code>, <code>SMTP</code>, <code>WindowsOutlook</code>, and <code>WebMail</code>.'
+      NotActions:
+        $ref: '#/definitions/ActionsList'
+        description: 'Access protocol actions to exclude from the rule. Valid values include <code>ActiveSync</code>, <code>AutoDiscover</code>, <code>EWS</code>, <code>IMAP</code>, <code>SMTP</code>, <code>WindowsOutlook</code>, and <code>WebMail</code>.'
+      UserIds:
+        $ref: '#/definitions/UserIdList'
+        description: User IDs to include in the rule.
+      NotUserIds:
+        $ref: '#/definitions/UserIdList'
+        description: User IDs to exclude from the rule.
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: The identifier of the organization.
   PutMailboxPermissionsResponse:
     type: object
     properties: {}
@@ -2876,6 +3142,96 @@ definitions:
         $ref: '#/definitions/BookingOptions'
         description: The resource's booking options to be updated.
   InvalidConfigurationException: {}
+  AccessControlRuleName:
+    type: string
+    pattern: '[a-zA-Z0-9_-]+'
+    minLength: 1
+    maxLength: 64
+  AccessControlRuleEffect:
+    type: string
+    enum:
+      - ALLOW
+      - DENY
+  AccessControlRuleDescription:
+    type: string
+    pattern: '[\u0020-\u00FF]+'
+    minLength: 0
+    maxLength: 255
+  IpRangeList:
+    type: array
+    items:
+      $ref: '#/definitions/IpRange'
+    minItems: 0
+    maxItems: 10
+  ActionsList:
+    type: array
+    items:
+      $ref: '#/definitions/AccessControlRuleAction'
+    minItems: 0
+    maxItems: 10
+  UserIdList:
+    type: array
+    items:
+      $ref: '#/definitions/WorkMailIdentifier'
+    minItems: 0
+    maxItems: 10
+  Timestamp:
+    type: string
+    format: date-time
+  AccessControlRule:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/AccessControlRuleName'
+        description: The rule name.
+      Effect:
+        $ref: '#/definitions/AccessControlRuleEffect'
+        description: The rule effect.
+      Description:
+        $ref: '#/definitions/AccessControlRuleDescription'
+        description: The rule description.
+      IpRanges:
+        $ref: '#/definitions/IpRangeList'
+        description: IPv4 CIDR ranges to include in the rule.
+      NotIpRanges:
+        $ref: '#/definitions/IpRangeList'
+        description: IPv4 CIDR ranges to exclude from the rule.
+      Actions:
+        $ref: '#/definitions/ActionsList'
+        description: 'Access protocol actions to include in the rule. Valid values include <code>ActiveSync</code>, <code>AutoDiscover</code>, <code>EWS</code>, <code>IMAP</code>, <code>SMTP</code>, <code>WindowsOutlook</code>, and <code>WebMail</code>.'
+      NotActions:
+        $ref: '#/definitions/ActionsList'
+        description: 'Access protocol actions to exclude from the rule. Valid values include <code>ActiveSync</code>, <code>AutoDiscover</code>, <code>EWS</code>, <code>IMAP</code>, <code>SMTP</code>, <code>WindowsOutlook</code>, and <code>WebMail</code>.'
+      UserIds:
+        $ref: '#/definitions/UserIdList'
+        description: User IDs to include in the rule.
+      NotUserIds:
+        $ref: '#/definitions/UserIdList'
+        description: User IDs to exclude from the rule.
+      DateCreated:
+        $ref: '#/definitions/Timestamp'
+        description: The date that the rule was created.
+      DateModified:
+        $ref: '#/definitions/Timestamp'
+        description: The date that the rule was modified.
+    description: A rule that controls access to an Amazon WorkMail organization.
+  AccessControlRuleAction:
+    type: string
+    pattern: '[a-zA-Z]+'
+    minLength: 1
+    maxLength: 64
+  AccessControlRuleNameList:
+    type: array
+    items:
+      $ref: '#/definitions/AccessControlRuleName'
+    minItems: 0
+    maxItems: 10
+  AccessControlRulesList:
+    type: array
+    items:
+      $ref: '#/definitions/AccessControlRule'
+    minItems: 0
+    maxItems: 10
   EmailAddress:
     type: string
     pattern: '[a-zA-Z0-9._%+-]{1,64}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
@@ -2966,9 +3322,6 @@ definitions:
       - ENABLED
       - DISABLED
       - DELETED
-  Timestamp:
-    type: string
-    format: date-time
   OrganizationName:
     type: string
     pattern: '^(?!d-)([\da-zA-Z]+)([-]*[\da-zA-Z])*'
@@ -2980,6 +3333,11 @@ definitions:
       - USER
       - RESOURCE
       - SYSTEM_USER
+  IpAddress:
+    type: string
+    pattern: '^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$'
+    minLength: 1
+    maxLength: 15
   MailboxQuota:
     type: integer
     minimum: 1
@@ -3013,6 +3371,11 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Group'
+  IpRange:
+    type: string
+    pattern: '^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])/([0-9]|[12][0-9]|3[0-2])$'
+    minLength: 1
+    maxLength: 18
   NextToken:
     type: string
     minLength: 1

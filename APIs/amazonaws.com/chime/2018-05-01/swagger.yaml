@@ -494,7 +494,7 @@ paths:
   '/accounts/{accountId}/rooms/{roomId}/memberships#operation=batch-create':
     post:
       operationId: BatchCreateRoomMembership
-      description: Adds up to 50 members to a chat room. Members can be either users or bots. The member role designates whether the member is a chat room administrator or a general chat room member.
+      description: Adds up to 50 members to a chat room in an Amazon Chime Enterprise account. Members can be either users or bots. The member role designates whether the member is a chat room administrator or a general chat room member.
       responses:
         '201':
           description: Success
@@ -1659,7 +1659,7 @@ paths:
   '/accounts/{accountId}/rooms':
     post:
       operationId: CreateRoom
-      description: Creates a chat room for the specified Amazon Chime account.
+      description: Creates a chat room for the specified Amazon Chime Enterprise account.
       responses:
         '201':
           description: Success
@@ -1733,7 +1733,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListRooms
-      description: 'Lists the room details for the specified Amazon Chime account. Optionally, filter the results by a member ID (user ID or bot ID) to see a list of rooms that the member belongs to.'
+      description: 'Lists the room details for the specified Amazon Chime Enterprise account. Optionally, filter the results by a member ID (user ID or bot ID) to see a list of rooms that the member belongs to.'
       responses:
         '200':
           description: Success
@@ -1804,7 +1804,7 @@ paths:
   '/accounts/{accountId}/rooms/{roomId}/memberships':
     post:
       operationId: CreateRoomMembership
-      description: Adds a member to a chat room. A member can be either a user or a bot. The member role designates whether the member is a chat room administrator or a general chat room member.
+      description: Adds a member to a chat room in an Amazon Chime Enterprise account. A member can be either a user or a bot. The member role designates whether the member is a chat room administrator or a general chat room member.
       responses:
         '201':
           description: Success
@@ -1887,7 +1887,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListRoomMemberships
-      description: 'Lists the membership details for the specified room, such as the members'' IDs, email addresses, and names.'
+      description: 'Lists the membership details for the specified room in an Amazon Chime Enterprise account, such as the members'' IDs, email addresses, and names.'
       responses:
         '200':
           description: Success
@@ -2169,7 +2169,7 @@ paths:
   /voice-connector-groups:
     post:
       operationId: CreateVoiceConnectorGroup
-      description: <p>Creates an Amazon Chime Voice Connector group under the administrator's AWS account. You can associate up to three existing Amazon Chime Voice Connectors with the Amazon Chime Voice Connector group by including <code>VoiceConnectorItems</code> in the request.</p> <p>You can include Amazon Chime Voice Connectors from different AWS Regions in your group. This creates a fault tolerant mechanism for fallback in case of availability events.</p>
+      description: <p>Creates an Amazon Chime Voice Connector group under the administrator's AWS account. You can associate Amazon Chime Voice Connectors with the Amazon Chime Voice Connector group by including <code>VoiceConnectorItems</code> in the request.</p> <p>You can include Amazon Chime Voice Connectors from different AWS Regions in your group. This creates a fault tolerant mechanism for fallback in case of availability events.</p>
       responses:
         '201':
           description: Success
@@ -2958,7 +2958,7 @@ paths:
   '/accounts/{accountId}/rooms/{roomId}':
     delete:
       operationId: DeleteRoom
-      description: Deletes a chat room.
+      description: Deletes a chat room in an Amazon Chime Enterprise account.
       responses:
         '204':
           description: Success
@@ -3013,7 +3013,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetRoom
-      description: 'Retrieves room details, such as the room name.'
+      description: 'Retrieves room details, such as the room name, for a room in an Amazon Chime Enterprise account.'
       responses:
         '200':
           description: Success
@@ -3062,7 +3062,7 @@ paths:
           pattern: .*\S.*
     post:
       operationId: UpdateRoom
-      description: 'Updates room details, such as the room name.'
+      description: 'Updates room details, such as the room name, for a room in an Amazon Chime Enterprise account.'
       responses:
         '200':
           description: Success
@@ -3122,7 +3122,7 @@ paths:
   '/accounts/{accountId}/rooms/{roomId}/memberships/{memberId}':
     delete:
       operationId: DeleteRoomMembership
-      description: Removes a member from a chat room.
+      description: Removes a member from a chat room in an Amazon Chime Enterprise account.
       responses:
         '204':
           description: Success
@@ -3183,7 +3183,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
       operationId: UpdateRoomMembership
-      description: 'Updates room membership details, such as the member role. The member role designates whether the member is a chat room administrator or a general chat room member. The member role can be updated only for user IDs.'
+      description: 'Updates room membership details, such as the member role, for a room in an Amazon Chime Enterprise account. The member role designates whether the member is a chat room administrator or a general chat room member. The member role can be updated only for user IDs.'
       responses:
         '200':
           description: Success
@@ -4030,7 +4030,7 @@ paths:
                 properties:
                   CpsLimit:
                     $ref: '#/definitions/CpsLimit'
-                    description: The limit on calls per second. Max value based on account service limit. Default value of 1.
+                    description: The limit on calls per second. Max value based on account service quota. Default value of 1.
                   DefaultPhoneNumber:
                     $ref: '#/definitions/E164PhoneNumber'
                     description: The default caller ID phone number.
@@ -7464,7 +7464,7 @@ definitions:
     properties:
       CpsLimit:
         $ref: '#/definitions/CpsLimit'
-        description: The limit on calls per second. Max value based on account service limit. Default value of 1.
+        description: The limit on calls per second. Max value based on account service quota. Default value of 1.
       DefaultPhoneNumber:
         $ref: '#/definitions/E164PhoneNumber'
         description: The default caller ID phone number.

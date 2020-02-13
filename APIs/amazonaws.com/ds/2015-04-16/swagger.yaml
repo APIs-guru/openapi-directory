@@ -3599,7 +3599,7 @@ definitions:
         description: The identifier of the directory.
       Type:
         $ref: '#/definitions/LDAPSType'
-        description: 'The type of LDAP security the customer wants to enable, either server or client. Currently supports only <code>Client</code>, (the default).'
+        description: The type of LDAP security to enable. Currently only the value <code>Client</code> is supported.
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The type of next token used for pagination.
@@ -3698,7 +3698,7 @@ definitions:
         description: The identifier of the directory.
       Type:
         $ref: '#/definitions/LDAPSType'
-        description: 'The type of LDAP security that the customer wants to enable. The security can be either server or client, but currently only the default <code>Client</code> is supported.'
+        description: The type of LDAP security to enable. Currently only the value <code>Client</code> is supported.
   InvalidLDAPSStatusException: {}
   DisableRadiusResult:
     type: object
@@ -3746,7 +3746,7 @@ definitions:
         description: The identifier of the directory.
       Type:
         $ref: '#/definitions/LDAPSType'
-        description: 'The type of LDAP security the customer wants to enable. The security can be either server or client, but currently only the default <code>Client</code> is supported.'
+        description: The type of LDAP security to enable. Currently only the value <code>Client</code> is supported.
   NoAvailableCertificateException: {}
   EnableRadiusResult:
     type: object
@@ -4350,6 +4350,9 @@ definitions:
       State:
         $ref: '#/definitions/CertificateState'
         description: The state of the certificate.
+      ExpiryDateTime:
+        $ref: '#/definitions/CertificateExpiryDateTime'
+        description: The date and time when the certificate will expire.
     description: Contains general information about a certificate.
   CertificatesInfo:
     type: array

@@ -434,6 +434,19 @@ paths:
                   TLSSecurityPolicy:
                     $ref: '#/definitions/TLSSecurityPolicy'
                     description: 'Specify the TLS security policy that needs to be applied to the HTTPS endpoint of Elasticsearch domain. <br/> It can be one of the following values: <ul> <li><b>Policy-Min-TLS-1-0-2019-07: </b> TLS security policy which supports TLSv1.0 and higher.</li> <li><b>Policy-Min-TLS-1-2-2019-07: </b> TLS security policy which supports only TLSv1.2</li> </ul> '
+              AdvancedSecurityOptions:
+                description: 'Specifies the advanced security configuration: whether advanced security is enabled, whether the internal database option is enabled, master username and password (if internal database is enabled), and master user ARN (if IAM is enabled).'
+                type: object
+                properties:
+                  Enabled:
+                    $ref: '#/definitions/Boolean'
+                    description: True if advanced security is enabled.
+                  InternalUserDatabaseEnabled:
+                    $ref: '#/definitions/Boolean'
+                    description: True if the internal user database is enabled.
+                  MasterUserOptions:
+                    $ref: '#/definitions/MasterUserOptions'
+                    description: 'Credentials for the master user: username and password, ARN, or both.'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -739,6 +752,19 @@ paths:
                   TLSSecurityPolicy:
                     $ref: '#/definitions/TLSSecurityPolicy'
                     description: 'Specify the TLS security policy that needs to be applied to the HTTPS endpoint of Elasticsearch domain. <br/> It can be one of the following values: <ul> <li><b>Policy-Min-TLS-1-0-2019-07: </b> TLS security policy which supports TLSv1.0 and higher.</li> <li><b>Policy-Min-TLS-1-2-2019-07: </b> TLS security policy which supports only TLSv1.2</li> </ul> '
+              AdvancedSecurityOptions:
+                description: 'Specifies the advanced security configuration: whether advanced security is enabled, whether the internal database option is enabled, master username and password (if internal database is enabled), and master user ARN (if IAM is enabled).'
+                type: object
+                properties:
+                  Enabled:
+                    $ref: '#/definitions/Boolean'
+                    description: True if advanced security is enabled.
+                  InternalUserDatabaseEnabled:
+                    $ref: '#/definitions/Boolean'
+                    description: True if the internal user database is enabled.
+                  MasterUserOptions:
+                    $ref: '#/definitions/MasterUserOptions'
+                    description: 'Credentials for the master user: username and password, ARN, or both.'
   /2015-01-01/es/domain-info:
     post:
       operationId: DescribeElasticsearchDomains
@@ -1744,6 +1770,19 @@ definitions:
     enum:
       - Policy-Min-TLS-1-0-2019-07
       - Policy-Min-TLS-1-2-2019-07
+  MasterUserOptions:
+    type: object
+    properties:
+      MasterUserARN:
+        $ref: '#/definitions/ARN'
+        description: ARN for the master user (if IAM is enabled).
+      MasterUserName:
+        $ref: '#/definitions/Username'
+        description: 'The master user''s username, which is stored in the Amazon Elasticsearch Service domain''s internal database.'
+      MasterUserPassword:
+        $ref: '#/definitions/Password'
+        description: 'The master user''s password, which is stored in the Amazon Elasticsearch Service domain''s internal database.'
+    description: 'Credentials for the master user: username and password, ARN, or both.'
   DisabledOperationException: {}
   InvalidTypeException: {}
   ResourceAlreadyExistsException: {}
@@ -2011,6 +2050,42 @@ definitions:
         $ref: '#/definitions/OptionStatus'
         description: ' Specifies the status of <code>OptionStatus</code> for advanced options for the specified Elasticsearch domain.'
     description: '<p> Status of the advanced options for the specified Elasticsearch domain. Currently, the following advanced options are available:</p> <ul> <li>Option to allow references to indices in an HTTP request body. Must be <code>false</code> when configuring access to individual sub-resources. By default, the value is <code>true</code>. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options" target="_blank">Configuration Advanced Options</a> for more information.</li> <li>Option to specify the percentage of heap space that is allocated to field data. By default, this setting is unbounded.</li> </ul> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options">Configuring Advanced Options</a>.</p>'
+  AdvancedSecurityOptions:
+    type: object
+    properties:
+      Enabled:
+        $ref: '#/definitions/Boolean'
+        description: True if advanced security is enabled.
+      InternalUserDatabaseEnabled:
+        $ref: '#/definitions/Boolean'
+        description: True if the internal user database is enabled.
+    description: 'Specifies the advanced security configuration: whether advanced security is enabled, whether the internal database option is enabled.'
+  AdvancedSecurityOptionsInput:
+    type: object
+    properties:
+      Enabled:
+        $ref: '#/definitions/Boolean'
+        description: True if advanced security is enabled.
+      InternalUserDatabaseEnabled:
+        $ref: '#/definitions/Boolean'
+        description: True if the internal user database is enabled.
+      MasterUserOptions:
+        $ref: '#/definitions/MasterUserOptions'
+        description: 'Credentials for the master user: username and password, ARN, or both.'
+    description: 'Specifies the advanced security configuration: whether advanced security is enabled, whether the internal database option is enabled, master username and password (if internal database is enabled), and master user ARN (if IAM is enabled).'
+  AdvancedSecurityOptionsStatus:
+    type: object
+    required:
+      - Options
+      - Status
+    properties:
+      Options:
+        $ref: '#/definitions/AdvancedSecurityOptions'
+        description: ' Specifies advanced security options for the specified Elasticsearch domain.'
+      Status:
+        $ref: '#/definitions/OptionStatus'
+        description: ' Status of the advanced security options for the specified Elasticsearch domain.'
+    description: ' Specifies the status of advanced security options for the specified Elasticsearch domain.'
   CancelElasticsearchServiceSoftwareUpdateRequest:
     type: object
     required:
@@ -2239,6 +2314,9 @@ definitions:
       DomainEndpointOptions:
         $ref: '#/definitions/DomainEndpointOptions'
         description: Options to specify configuration that will be applied to the domain endpoint.
+      AdvancedSecurityOptions:
+        $ref: '#/definitions/AdvancedSecurityOptionsInput'
+        description: Specifies advanced security options.
   ElasticsearchDomainStatus:
     type: object
     required:
@@ -2312,6 +2390,9 @@ definitions:
       DomainEndpointOptions:
         $ref: '#/definitions/DomainEndpointOptions'
         description: The current status of the Elasticsearch domain's endpoint options.
+      AdvancedSecurityOptions:
+        $ref: '#/definitions/AdvancedSecurityOptions'
+        description: The current status of the Elasticsearch domain's advanced security options.
     description: The current status of an Elasticsearch domain.
   DeleteElasticsearchDomainRequest:
     type: object
@@ -2371,6 +2452,9 @@ definitions:
       DomainEndpointOptions:
         $ref: '#/definitions/DomainEndpointOptionsStatus'
         description: Specifies the <code>DomainEndpointOptions</code> for the Elasticsearch domain.
+      AdvancedSecurityOptions:
+        $ref: '#/definitions/AdvancedSecurityOptionsStatus'
+        description: 'Specifies <code>AdvancedSecurityOptions</code> for the domain. '
     description: The configuration of an Elasticsearch domain.
   DescribeElasticsearchDomainRequest:
     type: object
@@ -2693,6 +2777,14 @@ definitions:
       - SEARCH_SLOW_LOGS
       - ES_APPLICATION_LOGS
     description: 'Type of Log File, it can be one of the following: <ul> <li>INDEX_SLOW_LOGS: Index slow logs contain insert requests that took more time than configured index query log threshold to execute.</li> <li>SEARCH_SLOW_LOGS: Search slow logs contain search queries that took more time than configured search query log threshold to execute.</li> <li>ES_APPLICATION_LOGS: Elasticsearch application logs contain information about errors and warnings raised during the operation of the service and can be useful for troubleshooting.</li> </ul> '
+  Username:
+    type: string
+    minLength: 1
+    format: password
+  Password:
+    type: string
+    minLength: 8
+    format: password
   OptionState:
     type: string
     enum:
@@ -2913,6 +3005,9 @@ definitions:
       DomainEndpointOptions:
         $ref: '#/definitions/DomainEndpointOptions'
         description: Options to specify configuration that will be applied to the domain endpoint.
+      AdvancedSecurityOptions:
+        $ref: '#/definitions/AdvancedSecurityOptionsInput'
+        description: Specifies advanced security options.
     description: Container for the parameters to the <code><a>UpdateElasticsearchDomain</a></code> operation. Specifies the type and number of instances in the domain cluster.
   UpgradeElasticsearchDomainRequest:
     type: object
