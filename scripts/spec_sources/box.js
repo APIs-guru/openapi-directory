@@ -16,7 +16,7 @@ function serviceName(filename) {
 }
 
 module.exports = function () {
-  var files = util.listGitHubFiles('box', 'box-openapi', 'master', '*/*.json');
+  var files = util.listGitHubFiles('box', 'box-openapi', 'master', 'content/openapi.yml');
   return _.map(files, filename => {
     return {
       info: {

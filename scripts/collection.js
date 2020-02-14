@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// @ts-nocheck
 'use strict';
 
 const assert = require('assert');
@@ -16,7 +17,6 @@ const parseDomain = require('parse-domain');
 const jsonPatch = require('json-merge-patch');
 const jiff = require('jiff');
 const YAML = require('js-yaml');
-const Promise = require('bluebird');
 const recurse = require('reftools/lib/recurse.js').recurse;
 
 const makeRequest = require('makeRequest');
@@ -274,12 +274,13 @@ function checkPreferred(dir, command) {
   validatePreferred(specs);
 }
 
-function validateCollection(dir, command) {
+async function validateCollection(dir, command) {
   var specs = util.getSpecs(dir);
 
   validatePreferred(specs);
 
-  Promise.mapSeries(_.toPairs(specs), ([filename, swagger]) => {
+  for (const filename in specs) {
+    const swagger = specs[filename];
     console.error('======================== ' + filename + ' ================');
     //assert(!_.isEmpty(swagger.paths), 'Definition should have operations');
     if (_.isEmpty(swagger.paths)) {
@@ -297,7 +298,7 @@ function validateCollection(dir, command) {
     let f = validateSwagger;
     if (command.fix) f = validateAndFix;
 
-    return f(swagger, source)
+    await f(swagger, source)
       .then(({errors, localWarnings}) => {
         if (localWarnings) {
           if (command.quiet) {
@@ -324,7 +325,7 @@ function validateCollection(dir, command) {
           }
         }
       });
-  }).done();
+  }
 }
 
 function validatePreferred(specs) {
@@ -572,7 +573,7 @@ function writeSpec(source, format, exPatch, command) {
       if (validation.remotesResolved) {
         context.swagger = validation.remotesResolved;
       }
-      else if (!swagger.openapi) {
+      else if (!context.swagger.openapi) {
         console.warn('No remotesResolved returned');
       }
 

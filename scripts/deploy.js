@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// @ts-nocheck
 'use strict';
 
 var fs = require('fs');
@@ -8,7 +9,7 @@ var assert = require('assert');
 var _ = require('lodash');
 var URI = require('urijs');
 var sh = require('shelljs');
-var Promise = require('bluebird');
+//var Promise = require('bluebird');
 var MimeLookup = require('mime-lookup');
 var MIME = new MimeLookup(require('mime-db'));
 

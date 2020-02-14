@@ -1,4 +1,5 @@
 'use strict';
+// @ts-check
 
 var assert = require('assert');
 var Path = require('path');
@@ -11,7 +12,6 @@ var URI = require('urijs');
 var sh = require('shelljs');
 var YAML = require('js-yaml');
 var editor = require('editor');
-var Promise = require('bluebird');
 var mkdirp = require('mkdirp').sync;
 var sanitize = require('sanitize-filename');
 var sortobject = require('deep-sort-object');

@@ -1,10 +1,11 @@
 'use strict';
+// @ts-check
 
 const utilLib = require('util');
 
 var assert = require('assert');
 var _ = require('lodash');
-var Promise = require('bluebird');
+//var Promise = require('bluebird');
 
 var util = require('../util');
 
@@ -22,15 +23,21 @@ var specSources = {
   'box.com': require('./box'),
   'fantasydata.net': require('./fantasydata'),
   'adyen.com': require('./adyen'),
-  'nexmo.com': require('./nexmo')
+  'nexmo.com': require('./nexmo'),
+  'interzoid.com': require('./interzoid')
 };
 var catalogProviders = _.keys(specSources);
 
 var blackListedUrls = util.readYaml(__dirname + '/blacklist.yaml');
 
+function providerName(info) {
+  if (info.hasOwnProperty('x-providerName')) return info['x-providerName'];
+  return 'interzoid.com';
+}
+
 exports.getLeads = function (specs) {
   var specsByProvider = _(specs).values()
-    .groupBy(swagger => swagger.info['x-providerName']).value();
+    .groupBy(swagger => providerName(swagger.info)).value();
 
   var urlLeads = _(specsByProvider).omit(catalogProviders)
     .values().flatten()
