@@ -9,7 +9,6 @@ var assert = require('assert');
 var _ = require('lodash');
 var URI = require('urijs');
 var sh = require('shelljs');
-//var Promise = require('bluebird');
 var MimeLookup = require('mime-lookup');
 var MIME = new MimeLookup(require('mime-db'));
 
@@ -47,18 +46,17 @@ util.saveYaml(deployDir('swagger.yaml'), apisGuruSwagger);
 
 var specs = util.getSpecs('APIs/');
 buildApiList(specs)
-  .then(function (apiList) {
-    console.log('Generated list for ' + _.size(apiList) + ' API specs.');
-    util.saveJson(deployDir('list.json'), apiList);
+.then(function (apiList) {
+  console.log('Generated list for ' + _.size(apiList) + ' API specs.');
+  util.saveJson(deployDir('list.json'), apiList);
 
-    var metrics = {
-      numSpecs: _.size(specs),
-      numAPIs: _.size(apiList),
-      numEndpoints: _(specs).map('paths').map(_.size).sum()
-    };
-    util.saveJson(deployDir('metrics.json'), metrics);
-  })
-  .done();
+  var metrics = {
+    numSpecs: _.size(specs),
+    numAPIs: _.size(apiList),
+    numEndpoints: _(specs).map('paths').map(_.size).sum()
+  };
+  util.saveJson(deployDir('metrics.json'), metrics);
+});
 
 function cacheLogo(url) {
   assert(url.indexOf('#') === -1);
@@ -79,28 +77,26 @@ function cacheLogo(url) {
     });
 }
 
-function buildApiList(specs) {
-  return Promise.coroutine(function* () {
-    var apiList = {};
-    var cachedLogo = {};
+async function buildApiList(specs) {
+  var apiList = {};
+  var cachedLogo = {};
 
-    for (var filename in specs) {
-      var swagger = specs[filename];
+  for (var filename in specs) {
+    var swagger = specs[filename];
 
-      var logoUrl = _.get(swagger, 'info["x-logo"].url');
-      if (logoUrl) {
-        if ((!cachedLogo[logoUrl]) && (logoUrl.indexOf('apitore.com')<0))
-          cachedLogo[logoUrl] = yield cacheLogo(logoUrl);
-        if (cachedLogo[logoUrl])
-          swagger.info['x-logo'].url = cachedLogo[logoUrl];
-      }
-
-      _.defaults(swagger.info, {'x-preferred': true});
-
-      addSwagger(apiList, swagger, filename);
+    var logoUrl = _.get(swagger, 'info["x-logo"].url');
+    if (logoUrl) {
+      if ((!cachedLogo[logoUrl]) && (logoUrl.indexOf('apitore.com')<0))
+        cachedLogo[logoUrl] = await cacheLogo(logoUrl);
+      if (cachedLogo[logoUrl])
+        swagger.info['x-logo'].url = cachedLogo[logoUrl];
     }
-    return apiList;
-  })();
+
+    _.defaults(swagger.info, {'x-preferred': true});
+
+    addSwagger(apiList, swagger, filename);
+  }
+  return apiList;
 }
 
 function addSwagger(apiList, swagger, filename) {
