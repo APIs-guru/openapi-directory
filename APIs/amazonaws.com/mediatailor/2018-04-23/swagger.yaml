@@ -341,6 +341,10 @@ paths:
               Name:
                 description: The identifier for the playback configuration.
                 type: string
+              PersonalizationThresholdSeconds:
+                description: The maximum duration of underfilled ad time (in seconds) allowed in an ad break.
+                type: integer
+                minimum: 1
               SlateAdUrl:
                 description: 'The URL for a high-quality video asset to transcode and use to fill in time that''s not used by ads. AWS Elemental MediaTailor shows the slate to fill in gaps in media content. Configuring the slate is optional for non-VPAID configurations. For VPAID, the slate is required because MediaTailor provides it in the slots that are designated for dynamic ad content. The slate must be a high-quality asset that contains both audio and video. '
                 type: string
@@ -420,6 +424,9 @@ definitions:
       Name:
         description: The identifier for the playback configuration.
         $ref: '#/definitions/__string'
+      PersonalizationThresholdSeconds:
+        description: The maximum duration of underfilled ad time (in seconds) allowed in an ad break.
+        $ref: '#/definitions/__integerMin1'
       PlaybackConfigurationArn:
         description: 'The Amazon Resource Name (ARN) for the playback configuration. '
         $ref: '#/definitions/__string'
@@ -484,6 +491,9 @@ definitions:
       Name:
         description: The identifier for the playback configuration.
         $ref: '#/definitions/__string'
+      PersonalizationThresholdSeconds:
+        description: The maximum duration of underfilled ad time (in seconds) allowed in an ad break.
+        $ref: '#/definitions/__integerMin1'
       PlaybackConfigurationArn:
         description: 'The Amazon Resource Name (ARN) for the playback configuration. '
         $ref: '#/definitions/__string'
@@ -570,6 +580,9 @@ definitions:
         $ref: '#/definitions/__integer'
         description: 'The maximum allowed duration for the pre-roll ad avail. AWS Elemental MediaTailor won''t play pre-roll ads to exceed this duration, regardless of the total duration of ads that the ADS returns.'
     description: The configuration for pre-roll ad insertion.
+  __integerMin1:
+    type: integer
+    minimum: 1
   __mapOf__string:
     type: object
     additionalProperties:
@@ -624,6 +637,9 @@ definitions:
       TranscodeProfileName:
         description: The name that is used to associate this playback configuration with a custom transcode profile. This overrides the dynamic transcoding defaults of MediaTailor. Use this only if you have already set up custom profiles with the help of AWS Support.
         $ref: '#/definitions/__string'
+      PersonalizationThresholdSeconds:
+        description: The maximum duration of underfilled ad time (in seconds) allowed in an ad break.
+        $ref: '#/definitions/__integerMin1'
       VideoContentSourceUrl:
         description: 'The URL prefix for the master playlist for the stream, minus the asset ID. The maximum length is 512 characters.'
         $ref: '#/definitions/__string'
@@ -646,6 +662,9 @@ definitions:
       Name:
         description: The identifier for the playback configuration.
         $ref: '#/definitions/__string'
+      PersonalizationThresholdSeconds:
+        description: The maximum duration of underfilled ad time (in seconds) allowed in an ad break.
+        $ref: '#/definitions/__integerMin1'
       SlateAdUrl:
         description: 'The URL for a high-quality video asset to transcode and use to fill in time that''s not used by ads. AWS Elemental MediaTailor shows the slate to fill in gaps in media content. Configuring the slate is optional for non-VPAID configurations. For VPAID, the slate is required because MediaTailor provides it in the slots that are designated for dynamic ad content. The slate must be a high-quality asset that contains both audio and video. '
         $ref: '#/definitions/__string'

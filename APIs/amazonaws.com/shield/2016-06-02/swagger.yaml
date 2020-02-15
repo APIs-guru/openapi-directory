@@ -274,6 +274,55 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSShield_20160616.AssociateHealthCheck':
+    post:
+      operationId: AssociateHealthCheck
+      description: '<p>Adds health-based detection to the Shield Advanced protection for a resource. Shield Advanced health-based detection uses the health of your AWS resource to improve responsiveness and accuracy in attack detection and mitigation. </p> <p>You define the health check in Route 53 and then associate it with your Shield Advanced protection. For more information, see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/ddos-overview.html#ddos-advanced-health-check-option">Shield Advanced Health-Based Detection</a> in the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/">AWS WAF and AWS Shield Developer Guide</a>. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AssociateHealthCheckResponse'
+        '480':
+          description: InternalErrorException
+          schema:
+            $ref: '#/definitions/InternalErrorException'
+        '481':
+          description: LimitsExceededException
+          schema:
+            $ref: '#/definitions/LimitsExceededException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '484':
+          description: OptimisticLockException
+          schema:
+            $ref: '#/definitions/OptimisticLockException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AssociateHealthCheckRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSShield_20160616.AssociateHealthCheck
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AWSShield_20160616.CreateProtection':
     post:
       operationId: CreateProtection
@@ -738,6 +787,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSShield_20160616.DisassociateHealthCheck':
+    post:
+      operationId: DisassociateHealthCheck
+      description: '<p>Removes health-based detection from the Shield Advanced protection for a resource. Shield Advanced health-based detection uses the health of your AWS resource to improve responsiveness and accuracy in attack detection and mitigation. </p> <p>You define the health check in Route 53 and then associate or disassociate it with your Shield Advanced protection. For more information, see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/ddos-overview.html#ddos-advanced-health-check-option">Shield Advanced Health-Based Detection</a> in the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/">AWS WAF and AWS Shield Developer Guide</a>. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DisassociateHealthCheckResponse'
+        '480':
+          description: InternalErrorException
+          schema:
+            $ref: '#/definitions/InternalErrorException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: OptimisticLockException
+          schema:
+            $ref: '#/definitions/OptimisticLockException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DisassociateHealthCheckRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSShield_20160616.DisassociateHealthCheck
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AWSShield_20160616.GetSubscriptionState':
     post:
       operationId: GetSubscriptionState
@@ -978,6 +1072,21 @@ definitions:
       RoleArn:
         $ref: '#/definitions/RoleArn'
         description: '<p>The Amazon Resource Name (ARN) of the role the DRT will use to access your AWS account.</p> <p>Prior to making the <code>AssociateDRTRole</code> request, you must attach the <a href="https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSShieldDRTAccessPolicy">AWSShieldDRTAccessPolicy</a> managed policy to this role. For more information see <a href=" https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html">Attaching and Detaching IAM Policies</a>.</p>'
+  AssociateHealthCheckResponse:
+    type: object
+    properties: {}
+  AssociateHealthCheckRequest:
+    type: object
+    required:
+      - ProtectionId
+      - HealthCheckArn
+    properties:
+      ProtectionId:
+        $ref: '#/definitions/ProtectionId'
+        description: 'The unique identifier (ID) for the <a>Protection</a> object to add the health check association to. '
+      HealthCheckArn:
+        $ref: '#/definitions/HealthCheckArn'
+        description: The Amazon Resource Name (ARN) of the health check to associate with the protection.
   CreateProtectionResponse:
     type: object
     properties:
@@ -1099,6 +1208,21 @@ definitions:
   DisassociateDRTRoleRequest:
     type: object
     properties: {}
+  DisassociateHealthCheckResponse:
+    type: object
+    properties: {}
+  DisassociateHealthCheckRequest:
+    type: object
+    required:
+      - ProtectionId
+      - HealthCheckArn
+    properties:
+      ProtectionId:
+        $ref: '#/definitions/ProtectionId'
+        description: 'The unique identifier (ID) for the <a>Protection</a> object to remove the health check association from. '
+      HealthCheckArn:
+        $ref: '#/definitions/HealthCheckArn'
+        description: The Amazon Resource Name (ARN) of the health check that is associated with the protection.
   GetSubscriptionStateResponse:
     type: object
     required:
@@ -1182,6 +1306,16 @@ definitions:
   RoleArn:
     type: string
     pattern: '^arn:aws:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
+    minLength: 1
+    maxLength: 2048
+  ProtectionId:
+    type: string
+    pattern: '[a-zA-Z0-9\\-]*'
+    minLength: 1
+    maxLength: 36
+  HealthCheckArn:
+    type: string
+    pattern: '^arn:aws:route53:::healthcheck/\S{36}$'
     minLength: 1
     maxLength: 2048
   AttackId:
@@ -1347,11 +1481,6 @@ definitions:
     pattern: '[ a-zA-Z0-9_\\.\\-]*'
     minLength: 1
     maxLength: 128
-  ProtectionId:
-    type: string
-    pattern: '[a-zA-Z0-9\\-]*'
-    minLength: 1
-    maxLength: 36
   LogBucketList:
     type: array
     items:
@@ -1376,6 +1505,9 @@ definitions:
       ResourceArn:
         $ref: '#/definitions/ResourceArn'
         description: The ARN (Amazon Resource Name) of the AWS resource that is protected.
+      HealthCheckIds:
+        $ref: '#/definitions/HealthCheckIds'
+        description: 'The unique identifier (ID) for the Route 53 health check that''s associated with the protection. '
     description: An object that represents a resource that is under DDoS protection.
   Subscription:
     type: object
@@ -1421,6 +1553,12 @@ definitions:
     enum:
       - ACTIVE
       - INACTIVE
+  HealthCheckId:
+    type: string
+  HealthCheckIds:
+    type: array
+    items:
+      $ref: '#/definitions/HealthCheckId'
   Integer:
     type: integer
   Limit:

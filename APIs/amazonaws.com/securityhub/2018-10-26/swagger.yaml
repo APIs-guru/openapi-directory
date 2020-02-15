@@ -3,7 +3,7 @@ info:
   version: '2018-10-26'
   x-release: v4
   title: AWS SecurityHub
-  description: '<p>Security Hub provides you with a comprehensive view of the security state of your AWS environment and resources. It also provides you with the compliance status of your environment based on CIS AWS Foundations compliance checks. Security Hub collects security data from AWS accounts, services, and integrated third-party products and helps you analyze security trends in your environment to identify the highest priority security issues. For more information about Security Hub, see the <i> <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html">AWS Security Hub User Guide</a> </i>.</p> <p>When you use operations in the Security Hub API, the requests are executed only in the AWS Region that is currently active or in the specific AWS Region that you specify in your request. Any configuration or settings change that results from the operation is applied only to that Region. To make the same change in other Regions, execute the same command for each Region to apply the change to.</p> <p>For example, if your Region is set to <code>us-west-2</code>, when you use <code>CreateMembers</code> to add a member account to Security Hub, the association of the member account with the master account is created only in the <code>us-west-2</code> Region. Security Hub must be enabled for the member account in the same Region that the invitation was sent from.</p> <p>The following throttling limits apply to using Security Hub API operations.</p> <ul> <li> <p> <code>GetFindings</code> - <code>RateLimit</code> of 3 requests per second. <code>BurstLimit</code> of 6 requests per second.</p> </li> <li> <p> <code>UpdateFindings</code> - <code>RateLimit</code> of 1 request per second. <code>BurstLimit</code> of 5 requests per second.</p> </li> <li> <p>All other operations - <code>RateLimit</code> of 10 request per second. <code>BurstLimit</code> of 30 requests per second.</p> </li> </ul>'
+  description: '<p>Security Hub provides you with a comprehensive view of the security state of your AWS environment and resources. It also provides you with the compliance status of your environment based on controls from supported standards. Security Hub collects security data from AWS accounts, services, and integrated third-party products and helps you analyze security trends in your environment to identify the highest priority security issues. For more information about Security Hub, see the <i> <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html">AWS Security Hub User Guide</a> </i>.</p> <p>When you use operations in the Security Hub API, the requests are executed only in the AWS Region that is currently active or in the specific AWS Region that you specify in your request. Any configuration or settings change that results from the operation is applied only to that Region. To make the same change in other Regions, execute the same command for each Region to apply the change to.</p> <p>For example, if your Region is set to <code>us-west-2</code>, when you use <code> <a>CreateMembers</a> </code> to add a member account to Security Hub, the association of the member account with the master account is created only in the <code>us-west-2</code> Region. Security Hub must be enabled for the member account in the same Region that the invitation was sent from.</p> <p>The following throttling limits apply to using Security Hub API operations.</p> <ul> <li> <p> <code> <a>GetFindings</a> </code> - <code>RateLimit</code> of 3 requests per second. <code>BurstLimit</code> of 6 requests per second.</p> </li> <li> <p> <code> <a>UpdateFindings</a> </code> - <code>RateLimit</code> of 1 request per second. <code>BurstLimit</code> of 5 requests per second.</p> </li> <li> <p>All other operations - <code>RateLimit</code> of 10 requests per second. <code>BurstLimit</code> of 30 requests per second.</p> </li> </ul>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -247,7 +247,7 @@ paths:
   /standards/deregister:
     post:
       operationId: BatchDisableStandards
-      description: '<p>Disables the standards specified by the provided <code>StandardsSubscriptionArns</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html">Standards Supported in AWS Security Hub</a>.</p>'
+      description: '<p>Disables the standards specified by the provided <code>StandardsSubscriptionArns</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html">Compliance Standards</a> section of the <i>AWS Security Hub User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -296,7 +296,7 @@ paths:
   /standards/register:
     post:
       operationId: BatchEnableStandards
-      description: '<p>Enables the standards specified by the provided <code>standardsArn</code>.</p> <p>In this release, only CIS AWS Foundations standards are supported.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html">Standards Supported in AWS Security Hub</a>.</p>'
+      description: '<p>Enables the standards specified by the provided <code>StandardsArn</code>. To obtain the ARN for a standard, use the <code> <a>DescribeStandards</a> </code> operation.</p> <p>For more information, see the <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html">Compliance Standards</a> section of the <i>AWS Security Hub User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -328,7 +328,7 @@ paths:
               - StandardsSubscriptionRequests
             properties:
               StandardsSubscriptionRequests:
-                description: '<p>The list of standards compliance checks to enable.</p> <important> <p>In this release, Security Hub supports only the CIS AWS Foundations standard.</p> <p>The ARN for the standard is <code>arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0</code>.</p> </important>'
+                description: The list of standards compliance checks to enable.
                 type: array
                 items:
                   $ref: '#/definitions/StandardsSubscriptionRequest'
@@ -718,7 +718,7 @@ paths:
                     description: The details of a resource that doesn't have a specific subfield for the resource type defined.
                   ComplianceStatus:
                     $ref: '#/definitions/StringFilterList'
-                    description: 'Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard (for example, CIS AWS Foundations). Contains compliance-related finding details.'
+                    description: 'Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains compliance-related finding details.'
                   VerificationState:
                     $ref: '#/definitions/StringFilterList'
                     description: The veracity of a finding.
@@ -761,7 +761,7 @@ paths:
   /members:
     post:
       operationId: CreateMembers
-      description: '<p>Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the master account. To successfully create a member, you must use this action from an account that already has Security Hub enabled. To enable Security Hub, you can use the <a>EnableSecurityHub</a> operation.</p> <p>After you use <code>CreateMembers</code> to create member account associations in Security Hub, you must use the <a>InviteMembers</a> operation to invite the accounts to enable Security Hub and become member accounts in Security Hub.</p> <p>If the account owner accepts the invitation, the account becomes a member account in Security Hub, and a permission policy is added that permits the master account to view the findings generated in the member account. When Security Hub is enabled in the invited account, findings start to be sent to both the member and master accounts.</p> <p>To remove the association between the master and member accounts, use the <a>DisassociateFromMasterAccount</a> or <a>DisassociateMembers</a> operation.</p>'
+      description: '<p>Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the master account. To successfully create a member, you must use this action from an account that already has Security Hub enabled. To enable Security Hub, you can use the <code> <a>EnableSecurityHub</a> </code> operation.</p> <p>After you use <code>CreateMembers</code> to create member account associations in Security Hub, you must use the <code> <a>InviteMembers</a> </code> operation to invite the accounts to enable Security Hub and become member accounts in Security Hub.</p> <p>If the account owner accepts the invitation, the account becomes a member account in Security Hub, and a permission policy is added that permits the master account to view the findings generated in the member account. When Security Hub is enabled in the invited account, findings start to be sent to both the member and master accounts.</p> <p>To remove the association between the master and member accounts, use the <code> <a>DisassociateFromMasterAccount</a> </code> or <code> <a>DisassociateMembers</a> </code> operation.</p>'
       responses:
         '200':
           description: Success
@@ -835,7 +835,7 @@ paths:
         - name: OnlyAssociated
           in: query
           required: false
-          description: '<p>Specifies which member accounts to include in the response based on their relationship status with the master account. The default value is <code>TRUE</code>.</p> <p>If <code>onlyAssociated</code> is set to <code>TRUE</code>, the response includes member accounts whose relationship status with the master is set to <code>ENABLED</code> or <code>DISABLED</code>.</p> <p>If <code>onlyAssociated</code> is set to <code>FALSE</code>, the response includes all existing member accounts. </p>'
+          description: '<p>Specifies which member accounts to include in the response based on their relationship status with the master account. The default value is <code>TRUE</code>.</p> <p>If <code>OnlyAssociated</code> is set to <code>TRUE</code>, the response includes member accounts whose relationship status with the master is set to <code>ENABLED</code> or <code>DISABLED</code>.</p> <p>If <code>OnlyAssociated</code> is set to <code>FALSE</code>, the response includes all existing member accounts. </p>'
           type: boolean
         - name: MaxResults
           in: query
@@ -847,7 +847,7 @@ paths:
         - name: NextToken
           in: query
           required: false
-          description: 'Paginates results. On your first call to the <code>ListMembers</code> operation, set the value of this parameter to <code>NULL</code>. For subsequent calls to the operation, to continue listing data, set <code>nextToken</code> in the request to the value of <code>nextToken</code> from the previous response.'
+          description: '<p>The token that is required for pagination. On your first call to the <code>ListMembers</code> operation, set the value of this parameter to <code>NULL</code>.</p> <p>For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.</p>'
           type: string
   /invitations/decline:
     post:
@@ -1299,7 +1299,7 @@ paths:
                     description: The details of a resource that doesn't have a specific subfield for the resource type defined.
                   ComplianceStatus:
                     $ref: '#/definitions/StringFilterList'
-                    description: 'Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard (for example, CIS AWS Foundations). Contains compliance-related finding details.'
+                    description: 'Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains compliance-related finding details.'
                   VerificationState:
                     $ref: '#/definitions/StringFilterList'
                     description: The veracity of a finding.
@@ -1469,7 +1469,7 @@ paths:
                 items:
                   $ref: '#/definitions/NonEmptyString'
               NextToken:
-                description: The token that is required for pagination.
+                description: '<p>The token that is required for pagination. On your first call to the <code>DescribeActionTargets</code> operation, set the value of this parameter to <code>NULL</code>.</p> <p>For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.</p>'
                 type: string
               MaxResults:
                 description: The maximum number of results to return.
@@ -1565,7 +1565,7 @@ paths:
       parameters: []
     post:
       operationId: EnableSecurityHub
-      description: '<p>Enables Security Hub for your account in the current Region or the Region you specify in the request.</p> <p>Enabling Security Hub also enables the CIS AWS Foundations standard.</p> <p>When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from AWS Config, Amazon GuardDuty, Amazon Inspector, and Amazon Macie.</p> <p>To learn more, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html">Setting Up AWS Security Hub</a>.</p>'
+      description: '<p>Enables Security Hub for your account in the current Region or the Region you specify in the request.</p> <p>When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from AWS Config, Amazon GuardDuty, Amazon Inspector, and Amazon Macie.</p> <p>When you use the <code>EnableSecurityHub</code> operation to enable Security Hub, you also automatically enable the CIS AWS Foundations standard. You do not enable the Payment Card Industry Data Security Standard (PCI DSS) standard. To enable a standard, use the <code> <a>BatchEnableStandards</a> </code> operation. To disable a standard, use the <code> <a>BatchDisableStandards</a> </code> operation.</p> <p>To learn more, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html">Setting Up AWS Security Hub</a> in the <i>AWS Security Hub User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1634,12 +1634,54 @@ paths:
         - name: NextToken
           in: query
           required: false
-          description: The token that is required for pagination.
+          description: '<p>The token that is required for pagination. On your first call to the <code>DescribeProducts</code> operation, set the value of this parameter to <code>NULL</code>.</p> <p>For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.</p>'
           type: string
         - name: MaxResults
           in: query
           required: false
           description: The maximum number of results to return.
+          type: integer
+          minimum: 1
+          maximum: 100
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /standards:
+    get:
+      operationId: DescribeStandards
+      description: '<p>Returns a list of the available standards in Security Hub.</p> <p>For each standard, the results include the standard ARN, the name, and a description. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeStandardsResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: InvalidAccessException
+          schema:
+            $ref: '#/definitions/InvalidAccessException'
+      parameters:
+        - name: NextToken
+          in: query
+          required: false
+          description: '<p>The token that is required for pagination. On your first call to the <code>DescribeStandards</code> operation, set the value of this parameter to <code>NULL</code>.</p> <p>For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.</p>'
+          type: string
+        - name: MaxResults
+          in: query
+          required: false
+          description: The maximum number of standards to return.
           type: integer
           minimum: 1
           maximum: 100
@@ -1686,7 +1728,7 @@ paths:
         - name: NextToken
           in: query
           required: false
-          description: 'For requests to get the next page of results, the pagination token that was returned with the previous set of results. The initial request does not include a pagination token.'
+          description: '<p>The token that is required for pagination. On your first call to the <code>DescribeStandardsControls</code> operation, set the value of this parameter to <code>NULL</code>.</p> <p>For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.</p>'
           type: string
         - name: MaxResults
           in: query
@@ -1908,7 +1950,7 @@ paths:
         - name: NextToken
           in: query
           required: false
-          description: 'Paginates results. On your first call to the <code>ListEnabledProductsForImport</code> operation, set the value of this parameter to <code>NULL</code>. For subsequent calls to the operation, to continue listing data, set <code>nextToken</code> in the request to the value of <code>NextToken</code> from the previous response.'
+          description: '<p>The token that is required for pagination. On your first call to the <code>ListEnabledProductsForImport</code> operation, set the value of this parameter to <code>NULL</code>.</p> <p>For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.</p>'
           type: string
         - name: MaxResults
           in: query
@@ -1957,13 +1999,23 @@ paths:
                 minItems: 1
                 maxItems: 25
               NextToken:
-                description: '<p>Paginates results. On your first call to the <code>GetEnabledStandards</code> operation, set the value of this parameter to <code>NULL</code>.</p> <p>For subsequent calls to the operation, to continue listing data, set <code>nextToken</code> in the request to the value of <code>nextToken</code> from the previous response.</p>'
+                description: '<p>The token that is required for pagination. On your first call to the <code>GetEnabledStandards</code> operation, set the value of this parameter to <code>NULL</code>.</p> <p>For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.</p>'
                 type: string
               MaxResults:
                 description: The maximum number of results to return in the response.
                 type: integer
                 minimum: 1
                 maximum: 100
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -2229,7 +2281,7 @@ paths:
                     description: The details of a resource that doesn't have a specific subfield for the resource type defined.
                   ComplianceStatus:
                     $ref: '#/definitions/StringFilterList'
-                    description: 'Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard (for example, CIS AWS Foundations). Contains compliance-related finding details.'
+                    description: 'Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains compliance-related finding details.'
                   VerificationState:
                     $ref: '#/definitions/StringFilterList'
                     description: The veracity of a finding.
@@ -2263,7 +2315,7 @@ paths:
                 items:
                   $ref: '#/definitions/SortCriterion'
               NextToken:
-                description: '<p>Paginates results. On your first call to the <code>GetFindings</code> operation, set the value of this parameter to <code>NULL</code>.</p> <p>For subsequent calls to the operation, to continue listing data, set <code>nextToken</code> in the request to the value of <code>nextToken</code> from the previous response.</p>'
+                description: '<p>The token that is required for pagination. On your first call to the <code>GetFindings</code> operation, set the value of this parameter to <code>NULL</code>.</p> <p>For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.</p>'
                 type: string
               MaxResults:
                 description: The maximum number of findings to return.
@@ -2551,7 +2603,7 @@ paths:
                     description: The details of a resource that doesn't have a specific subfield for the resource type defined.
                   ComplianceStatus:
                     $ref: '#/definitions/StringFilterList'
-                    description: 'Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard (for example, CIS AWS Foundations). Contains compliance-related finding details.'
+                    description: 'Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains compliance-related finding details.'
                   VerificationState:
                     $ref: '#/definitions/StringFilterList'
                     description: The veracity of a finding.
@@ -2681,7 +2733,7 @@ paths:
                 items:
                   $ref: '#/definitions/NonEmptyString'
               NextToken:
-                description: 'Paginates results. On your first call to the <code>GetInsights</code> operation, set the value of this parameter to <code>NULL</code>. For subsequent calls to the operation, to continue listing data, set <code>nextToken</code> in the request to the value of <code>nextToken</code> from the previous response.'
+                description: '<p>The token that is required for pagination. On your first call to the <code>GetInsights</code> operation, set the value of this parameter to <code>NULL</code>.</p> <p>For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.</p>'
                 type: string
               MaxResults:
                 description: The maximum number of items to return in the response.
@@ -2794,7 +2846,7 @@ paths:
   /members/invite:
     post:
       operationId: InviteMembers
-      description: '<p>Invites other AWS accounts to become member accounts for the Security Hub master account that the invitation is sent from.</p> <p>Before you can use this action to invite a member, you must first use the <a>CreateMembers</a> action to create the member account in Security Hub.</p> <p>When the account owner accepts the invitation to become a member account and enables Security Hub, the master account can view the findings generated from the member account.</p>'
+      description: '<p>Invites other AWS accounts to become member accounts for the Security Hub master account that the invitation is sent from.</p> <p>Before you can use this action to invite a member, you must first use the <code> <a>CreateMembers</a> </code> action to create the member account in Security Hub.</p> <p>When the account owner accepts the invitation to become a member account and enables Security Hub, the master account can view the findings generated from the member account.</p>'
       responses:
         '200':
           description: Success
@@ -2876,7 +2928,7 @@ paths:
         - name: NextToken
           in: query
           required: false
-          description: 'Paginates results. On your first call to the <code>ListInvitations</code> operation, set the value of this parameter to <code>NULL</code>. For subsequent calls to the operation, to continue listing data, set <code>nextToken</code> in the request to the value of <code>NextToken</code> from the previous response. '
+          description: '<p>The token that is required for pagination. On your first call to the <code>ListInvitations</code> operation, set the value of this parameter to <code>NULL</code>.</p> <p>For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.</p>'
           type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
@@ -3094,7 +3146,7 @@ definitions:
     properties:
       StandardsArn:
         $ref: '#/definitions/NonEmptyString'
-        description: '<p>The ARN of the standard that you want to enable.</p> <important> <p>In this release, Security Hub only supports the CIS AWS Foundations standard. </p> <p>Its ARN is <code>arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0</code>.</p> </important>'
+        description: 'The ARN of the standard that you want to enable. To view the list of available standards and their ARNs, use the <code> <a>DescribeStandards</a> </code> operation.'
       StandardsInput:
         $ref: '#/definitions/StandardsInputParameterMap'
         description: A key-value pair of input for the standard.
@@ -3204,7 +3256,7 @@ definitions:
         description: A set of resource data types that describe the resources that the finding refers to.
       Compliance:
         $ref: '#/definitions/Compliance'
-        description: 'This data type is exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard (for example, CIS AWS Foundations). Contains compliance-related finding details.'
+        description: 'This data type is exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains compliance-related finding details.'
       VerificationState:
         $ref: '#/definitions/VerificationState'
         description: 'Indicates the veracity of a finding. '
@@ -3322,7 +3374,7 @@ definitions:
         description: 'A list of <code>ActionTarget</code> objects. Each object includes the <code>ActionTargetArn</code>, <code>Description</code>, and <code>Name</code> of a custom action target available in Security Hub.'
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: The token that is required for pagination.
+        description: The pagination token to use to request the next page of results.
   DescribeHubResponse:
     type: object
     properties:
@@ -3342,7 +3394,16 @@ definitions:
         description: 'A list of products, including details for each product.'
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: The token that is required for pagination.
+        description: The pagination token to use to request the next page of results.
+  DescribeStandardsResponse:
+    type: object
+    properties:
+      Standards:
+        $ref: '#/definitions/Standards'
+        description: A list of available standards.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token to use to request the next page of results.
   DescribeStandardsControlsResponse:
     type: object
     properties:
@@ -3351,7 +3412,7 @@ definitions:
         description: A list of compliance standards controls.
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: 'If there are more compliance standards control remaining in the results, then this is the pagination token to use to request the next page of compliance standard controls.'
+        description: The pagination token to use to request the next page of results.
   DisableImportFindingsForProductResponse:
     type: object
     properties: {}
@@ -3385,7 +3446,7 @@ definitions:
         description: The list of <code>StandardsSubscriptions</code> objects that include information about the enabled standards.
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: The token that is required for pagination.
+        description: The pagination token to use to request the next page of results.
   GetFindingsResponse:
     type: object
     required:
@@ -3396,7 +3457,7 @@ definitions:
         description: The findings that matched the filters specified in the request.
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: The token that is required for pagination.
+        description: The pagination token to use to request the next page of results.
   SortCriterion:
     type: object
     properties:
@@ -3425,7 +3486,7 @@ definitions:
         description: The insights returned by the operation.
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: The token that is required for pagination.
+        description: The pagination token to use to request the next page of results.
   GetInvitationsCountResponse:
     type: object
     properties:
@@ -3461,7 +3522,7 @@ definitions:
         description: 'The list of ARNs for the resources that represent your subscriptions to products. '
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: The token that is required for pagination.
+        description: The pagination token to use to request the next page of results.
   ListInvitationsResponse:
     type: object
     properties:
@@ -3470,7 +3531,7 @@ definitions:
         description: The details of the invitations returned by the operation.
       NextToken:
         $ref: '#/definitions/NonEmptyString'
-        description: The token that is required for pagination.
+        description: The pagination token to use to request the next page of results.
   ListMembersResponse:
     type: object
     properties:
@@ -3479,7 +3540,7 @@ definitions:
         description: Member details returned by the operation.
       NextToken:
         $ref: '#/definitions/NonEmptyString'
-        description: The token that is required for pagination.
+        description: The pagination token to use to request the next page of results.
   ListTagsForResourceResponse:
     type: object
     properties:
@@ -4496,7 +4557,7 @@ definitions:
       RelatedRequirements:
         $ref: '#/definitions/RelatedRequirementsList'
         description: List of requirements that are related to a standards control.
-    description: '<p>Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard (for example, CIS AWS Foundations). Contains compliance-related finding details.</p> <p>Values include the following:</p> <ul> <li> <p>Allowed values are the following:</p> <ul> <li> <p> <code>PASSED</code> - Compliance check passed for all evaluated resources.</p> </li> <li> <p> <code>WARNING</code> - Some information is missing or this check is not supported given your configuration.</p> </li> <li> <p> <code>FAILED</code> - Compliance check failed for at least one evaluated resource.</p> </li> <li> <p> <code>NOT_AVAILABLE</code> - Check could not be performed due to a service outage, API error, or because the result of the AWS Config evaluation was <code>NOT_APPLICABLE</code>. If the AWS Config evaluation result was <code> NOT_APPLICABLE</code>, then after 3 days, Security Hub automatically archives the finding.</p> </li> </ul> </li> </ul>'
+    description: '<p>Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains compliance-related finding details.</p> <p>Values include the following:</p> <ul> <li> <p>Allowed values are the following:</p> <ul> <li> <p> <code>PASSED</code> - Compliance check passed for all evaluated resources.</p> </li> <li> <p> <code>WARNING</code> - Some information is missing or this check is not supported given your configuration.</p> </li> <li> <p> <code>FAILED</code> - Compliance check failed for at least one evaluated resource.</p> </li> <li> <p> <code>NOT_AVAILABLE</code> - Check could not be performed due to a service outage, API error, or because the result of the AWS Config evaluation was <code>NOT_APPLICABLE</code>. If the AWS Config evaluation result was <code> NOT_APPLICABLE</code>, then after 3 days, Security Hub automatically archives the finding.</p> </li> </ul> </li> </ul>'
   VerificationState:
     type: string
     enum:
@@ -4762,7 +4823,7 @@ definitions:
         description: The details of a resource that doesn't have a specific subfield for the resource type defined.
       ComplianceStatus:
         $ref: '#/definitions/StringFilterList'
-        description: 'Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard (for example, CIS AWS Foundations). Contains compliance-related finding details.'
+        description: 'Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains compliance-related finding details.'
       VerificationState:
         $ref: '#/definitions/StringFilterList'
         description: The veracity of a finding.
@@ -4932,7 +4993,7 @@ definitions:
     properties:
       StandardsSubscriptionRequests:
         $ref: '#/definitions/StandardsSubscriptionRequests'
-        description: '<p>The list of standards compliance checks to enable.</p> <important> <p>In this release, Security Hub supports only the CIS AWS Foundations standard.</p> <p>The ARN for the standard is <code>arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0</code>.</p> </important>'
+        description: The list of standards compliance checks to enable.
   BatchImportFindingsRequest:
     type: object
     required:
@@ -5092,7 +5153,7 @@ definitions:
         description: A list of custom action target ARNs for the custom action targets to retrieve.
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: The token that is required for pagination.
+        description: '<p>The token that is required for pagination. On your first call to the <code>DescribeActionTargets</code> operation, set the value of this parameter to <code>NULL</code>.</p> <p>For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.</p>'
       MaxResults:
         $ref: '#/definitions/MaxResults'
         description: The maximum number of results to return.
@@ -5113,6 +5174,13 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/StandardsControl'
+  DescribeStandardsRequest:
+    type: object
+    properties: {}
+  Standards:
+    type: array
+    items:
+      $ref: '#/definitions/Standard'
   DisableImportFindingsForProductRequest:
     type: object
     properties: {}
@@ -5156,7 +5224,7 @@ definitions:
         description: The list of the standards subscription ARNs for the standards to retrieve.
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: '<p>Paginates results. On your first call to the <code>GetEnabledStandards</code> operation, set the value of this parameter to <code>NULL</code>.</p> <p>For subsequent calls to the operation, to continue listing data, set <code>nextToken</code> in the request to the value of <code>nextToken</code> from the previous response.</p>'
+        description: '<p>The token that is required for pagination. On your first call to the <code>GetEnabledStandards</code> operation, set the value of this parameter to <code>NULL</code>.</p> <p>For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.</p>'
       MaxResults:
         $ref: '#/definitions/MaxResults'
         description: The maximum number of results to return in the response.
@@ -5175,7 +5243,7 @@ definitions:
         description: The finding attributes used to sort the list of returned findings.
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: '<p>Paginates results. On your first call to the <code>GetFindings</code> operation, set the value of this parameter to <code>NULL</code>.</p> <p>For subsequent calls to the operation, to continue listing data, set <code>nextToken</code> in the request to the value of <code>nextToken</code> from the previous response.</p>'
+        description: '<p>The token that is required for pagination. On your first call to the <code>GetFindings</code> operation, set the value of this parameter to <code>NULL</code>.</p> <p>For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.</p>'
       MaxResults:
         $ref: '#/definitions/MaxResults'
         description: The maximum number of findings to return.
@@ -5207,7 +5275,7 @@ definitions:
         description: The ARNs of the insights to describe.
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: 'Paginates results. On your first call to the <code>GetInsights</code> operation, set the value of this parameter to <code>NULL</code>. For subsequent calls to the operation, to continue listing data, set <code>nextToken</code> in the request to the value of <code>nextToken</code> from the previous response.'
+        description: '<p>The token that is required for pagination. On your first call to the <code>GetInsights</code> operation, set the value of this parameter to <code>NULL</code>.</p> <p>For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.</p>'
       MaxResults:
         $ref: '#/definitions/MaxResults'
         description: The maximum number of items to return in the response.
@@ -5629,6 +5697,19 @@ definitions:
     enum:
       - asc
       - desc
+  Standard:
+    type: object
+    properties:
+      StandardsArn:
+        $ref: '#/definitions/NonEmptyString'
+        description: The ARN of a standard.
+      Name:
+        $ref: '#/definitions/NonEmptyString'
+        description: The name of the standard.
+      Description:
+        $ref: '#/definitions/NonEmptyString'
+        description: A description of the standard.
+    description: Provides information about a specific standard.
   StandardsControl:
     type: object
     properties:
@@ -5655,10 +5736,13 @@ definitions:
         description: The longer description of the compliance standard control. Provides information about what the control is checking for.
       RemediationUrl:
         $ref: '#/definitions/NonEmptyString'
-        description: A link to remediation information for the control in the Security Hub user documentation
+        description: A link to remediation information for the control in the Security Hub user documentation.
       SeverityRating:
         $ref: '#/definitions/SeverityRating'
         description: <p>The severity of findings generated from this compliance standard control.</p> <p>The finding severity is based on an assessment of how easy it would be to compromise AWS resources if the compliance issue is detected.</p>
+      RelatedRequirements:
+        $ref: '#/definitions/RelatedRequirementsList'
+        description: The list of requirements that are related to this control.
     description: Details for an individual compliance standard control.
   StandardsInputParameterMap:
     type: object
@@ -5685,7 +5769,7 @@ definitions:
         description: The ARN of a resource that represents your subscription to a supported standard.
       StandardsArn:
         $ref: '#/definitions/NonEmptyString'
-        description: '<p>The ARN of a standard.</p> <p>In this release, Security Hub supports only the CIS AWS Foundations standard, which uses the following ARN: <code>arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0.</code> </p>'
+        description: The ARN of a standard.
       StandardsInput:
         $ref: '#/definitions/StandardsInputParameterMap'
         description: A key-value pair of input for the standard.
