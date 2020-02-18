@@ -924,7 +924,7 @@ paths:
   '/#X-Amz-Target=RekognitionService.DetectFaces':
     post:
       operationId: DetectFaces
-      description: '<p>Detects faces within an image that is provided as input.</p> <p> <code>DetectFaces</code> detects the 100 largest faces in the image. For each face detected, the operation returns face details. These details include a bounding box of the face, a confidence value (that the bounding box contains a face), and a fixed set of attributes such as facial landmarks (for example, coordinates of eye and mouth), presence of beard, sunglasses, and so on. </p> <p>The face-detection algorithm is most effective on frontal faces. For non-frontal or obscured faces, the algorithm might not detect the faces or might detect faces with lower confidence. </p> <p>You pass the input image either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file. </p> <note> <p>This is a stateless API operation. That is, the operation does not persist any data.</p> </note> <p>This operation requires permissions to perform the <code>rekognition:DetectFaces</code> action. </p>'
+      description: '<p>Detects faces within an image that is provided as input.</p> <p> <code>DetectFaces</code> detects the 100 largest faces in the image. For each face detected, the operation returns face details. These details include a bounding box of the face, a confidence value (that the bounding box contains a face), and a fixed set of attributes such as facial landmarks (for example, coordinates of eye and mouth), presence of beard, sunglasses, and so on. </p> <p>The face-detection algorithm is most effective on frontal faces. For non-frontal or obscured faces, the algorithm might not detect the faces or might detect faces with lower confidence. </p> <p>You pass the input image either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file. </p> <note> <p>This is a stateless API operation. That is, the operation does not persist any data.</p> </note> <p>This operation requires permissions to perform the <code>rekognition:DetectFaces</code> action. </p>'
       responses:
         '200':
           description: Success
@@ -1616,6 +1616,73 @@ paths:
           type: string
           enum:
             - RekognitionService.GetPersonTracking
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=RekognitionService.GetTextDetection':
+    post:
+      operationId: GetTextDetection
+      description: '<p>Gets the text detection results of a Amazon Rekognition Video analysis started by <a>StartTextDetection</a>.</p> <p>Text detection with Amazon Rekognition Video is an asynchronous operation. You start text detection by calling <a>StartTextDetection</a> which returns a job identifier (<code>JobId</code>) When the text detection operation finishes, Amazon Rekognition publishes a completion status to the Amazon Simple Notification Service topic registered in the initial call to <code>StartTextDetection</code>. To get the results of the text detection operation, first check that the status value published to the Amazon SNS topic is <code>SUCCEEDED</code>. if so, call <code>GetTextDetection</code> and pass the job identifier (<code>JobId</code>) from the initial call of <code>StartLabelDetection</code>.</p> <p> <code>GetTextDetection</code> returns an array of detected text (<code>TextDetections</code>) sorted by the time the text was detected, up to 50 words per frame of video.</p> <p>Each element of the array includes the detected text, the precentage confidence in the acuracy of the detected text, the time the text was detected, bounding box information for where the text was located, and unique identifiers for words and their lines.</p> <p>Use MaxResults parameter to limit the number of text detections returned. If there are more results than specified in <code>MaxResults</code>, the value of <code>NextToken</code> in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call <code>GetTextDetection</code> and populate the <code>NextToken</code> request parameter with the token value returned from the previous call to <code>GetTextDetection</code>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetTextDetectionResponse'
+        '480':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '482':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '483':
+          description: InvalidPaginationTokenException
+          schema:
+            $ref: '#/definitions/InvalidPaginationTokenException'
+        '484':
+          description: ProvisionedThroughputExceededException
+          schema:
+            $ref: '#/definitions/ProvisionedThroughputExceededException'
+        '485':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '486':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetTextDetectionRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - RekognitionService.GetTextDetection
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -2581,6 +2648,71 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=RekognitionService.StartTextDetection':
+    post:
+      operationId: StartTextDetection
+      description: '<p>Starts asynchronous detection of text in a stored video.</p> <p>Amazon Rekognition Video can detect text in a video stored in an Amazon S3 bucket. Use <a>Video</a> to specify the bucket name and the filename of the video. <code>StartTextDetection</code> returns a job identifier (<code>JobId</code>) which you use to get the results of the operation. When text detection is finished, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic that you specify in <code>NotificationChannel</code>.</p> <p>To get the results of the text detection operation, first check that the status value published to the Amazon SNS topic is <code>SUCCEEDED</code>. if so, call <a>GetTextDetection</a> and pass the job identifier (<code>JobId</code>) from the initial call to <code>StartTextDetection</code>. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartTextDetectionResponse'
+        '480':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '481':
+          description: IdempotentParameterMismatchException
+          schema:
+            $ref: '#/definitions/IdempotentParameterMismatchException'
+        '482':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '483':
+          description: InvalidS3ObjectException
+          schema:
+            $ref: '#/definitions/InvalidS3ObjectException'
+        '484':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '485':
+          description: VideoTooLargeException
+          schema:
+            $ref: '#/definitions/VideoTooLargeException'
+        '486':
+          description: ProvisionedThroughputExceededException
+          schema:
+            $ref: '#/definitions/ProvisionedThroughputExceededException'
+        '487':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '488':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StartTextDetectionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - RekognitionService.StartTextDetection
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=RekognitionService.StopProjectVersion':
     post:
       operationId: StopProjectVersion
@@ -3156,6 +3288,9 @@ definitions:
       TextDetections:
         $ref: '#/definitions/TextDetectionList'
         description: An array of text that was detected in the input image.
+      TextModelVersion:
+        $ref: '#/definitions/String'
+        description: The model version used to detect text.
   DetectTextRequest:
     type: object
     required:
@@ -3164,6 +3299,9 @@ definitions:
       Image:
         $ref: '#/definitions/Image'
         description: '<p>The input image as base64-encoded bytes or an Amazon S3 object. If you use the AWS CLI to call Amazon Rekognition operations, you can''t pass image bytes. </p> <p>If you are using an AWS SDK to call Amazon Rekognition, you might not need to base64-encode image bytes passed using the <code>Bytes</code> field. For more information, see Images in the Amazon Rekognition developer guide.</p>'
+      Filters:
+        $ref: '#/definitions/DetectTextFilters'
+        description: Optional parameters that let you set the criteria that the text must meet to be included in your response.
   GetCelebrityInfoResponse:
     type: object
     properties:
@@ -3394,6 +3532,40 @@ definitions:
       SortBy:
         $ref: '#/definitions/PersonTrackingSortBy'
         description: 'Sort to use for elements in the <code>Persons</code> array. Use <code>TIMESTAMP</code> to sort array elements by the time persons are detected. Use <code>INDEX</code> to sort by the tracked persons. If you sort by <code>INDEX</code>, the array elements for each person are sorted by detection confidence. The default sort is by <code>TIMESTAMP</code>.'
+  GetTextDetectionResponse:
+    type: object
+    properties:
+      JobStatus:
+        $ref: '#/definitions/VideoJobStatus'
+        description: Current status of the text detection job.
+      StatusMessage:
+        $ref: '#/definitions/StatusMessage'
+        description: 'If the job fails, <code>StatusMessage</code> provides a descriptive error message.'
+      VideoMetadata:
+        $ref: '#/definitions/VideoMetadata'
+      TextDetections:
+        $ref: '#/definitions/TextDetectionResults'
+        description: 'An array of text detected in the video. Each element contains the detected text, the time in milliseconds from the start of the video that the text was detected, and where it was detected on the screen.'
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'If the response is truncated, Amazon Rekognition Video returns this token that you can use in the subsequent request to retrieve the next set of text.'
+      TextModelVersion:
+        $ref: '#/definitions/String'
+        description: Version number of the text detection model that was used to detect text.
+  GetTextDetectionRequest:
+    type: object
+    required:
+      - JobId
+    properties:
+      JobId:
+        $ref: '#/definitions/JobId'
+        description: Job identifier for the label detection operation for which you want results returned. You get the job identifer from an initial call to <code>StartTextDetection</code>.
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: Maximum number of results to return per paginated call. The largest value you can specify is 1000.
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'If the previous response was incomplete (because there are more labels to retrieve), Amazon Rekognition Video returns a pagination token in the response. You can use this pagination token to retrieve the next set of text.'
   IndexFacesResponse:
     type: object
     example:
@@ -3994,6 +4166,30 @@ definitions:
       Name:
         $ref: '#/definitions/StreamProcessorName'
         description: The name of the stream processor to start processing.
+  StartTextDetectionResponse:
+    type: object
+    properties:
+      JobId:
+        $ref: '#/definitions/JobId'
+        description: Identifier for the text detection job. Use <code>JobId</code> to identify the job in a subsequent call to <code>GetTextDetection</code>.
+  StartTextDetectionRequest:
+    type: object
+    required:
+      - Video
+    properties:
+      Video:
+        $ref: '#/definitions/Video'
+      ClientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: 'Idempotent token used to identify the start request. If you use the same token with multiple <code>StartTextDetection</code> requests, the same <code>JobId</code> is returned. Use <code>ClientRequestToken</code> to prevent the same job from being accidentaly started more than once.'
+      NotificationChannel:
+        $ref: '#/definitions/NotificationChannel'
+      JobTag:
+        $ref: '#/definitions/JobTag'
+        description: 'An identifier returned in the completion status published by your Amazon Simple Notification Service topic. For example, you can use <code>JobTag</code> to group related jobs and identify them in the completion notification.'
+      Filters:
+        $ref: '#/definitions/StartTextDetectionFilters'
+        description: Optional parameters that let you set criteria the text must meet to be included in your response.
   StopProjectVersionResponse:
     type: object
     properties:
@@ -4093,6 +4289,16 @@ definitions:
         $ref: '#/definitions/Float'
         description: Top coordinate of the bounding box as a ratio of overall image height.
     description: '<p>Identifies the bounding box around the label, face, or text. The <code>left</code> (x-coordinate) and <code>top</code> (y-coordinate) are coordinates representing the top and left sides of the bounding box. Note that the upper-left corner of the image is the origin (0,0). </p> <p>The <code>top</code> and <code>left</code> values returned are ratios of the overall image size. For example, if the input image is 700x200 pixels, and the top-left coordinate of the bounding box is 350x50 pixels, the API returns a <code>left</code> value of 0.5 (350/700) and a <code>top</code> value of 0.25 (50/200).</p> <p>The <code>width</code> and <code>height</code> values represent the dimensions of the bounding box as a ratio of the overall image dimension. For example, if the input image is 700x200 pixels, and the bounding box width is 70 pixels, the width returned is 0.1. </p> <note> <p> The bounding box coordinates can have negative values. For example, if Amazon Rekognition is able to detect a face that is at the image edge and is only partially visible, the service can return coordinates that are outside the image bounds and, depending on the image edge, you might get negative values or values greater than 1 for the <code>left</code> or <code>top</code> values. </p> </note>'
+  BoundingBoxHeight:
+    type: number
+    format: float
+    minimum: 0
+    maximum: 1
+  BoundingBoxWidth:
+    type: number
+    format: float
+    minimum: 0
+    maximum: 1
   Urls:
     type: array
     items:
@@ -4573,6 +4779,34 @@ definitions:
         $ref: '#/definitions/HumanLoopActivationConditionsEvaluationResults'
         description: 'Shows the result of condition evaluations, including those conditions which activated a human review.'
     description: 'Shows the results of the human in the loop evaluation. If there is no HumanLoopArn, the input did not trigger human review.'
+  DetectionFilter:
+    type: object
+    properties:
+      MinConfidence:
+        $ref: '#/definitions/Percent'
+        description: Sets confidence of word detection. Words with detection confidence below this will be excluded from the result. Values should be between 0.5 and 1 as Text in Video will not return any result below 0.5.
+      MinBoundingBoxHeight:
+        $ref: '#/definitions/BoundingBoxHeight'
+        description: Sets the minimum height of the word bounding box. Words with bounding box heights lesser than this value will be excluded from the result. Value is relative to the video frame height.
+      MinBoundingBoxWidth:
+        $ref: '#/definitions/BoundingBoxWidth'
+        description: Sets the minimum width of the word bounding box. Words with bounding boxes widths lesser than this value will be excluded from the result. Value is relative to the video frame width.
+    description: A set of parameters that allow you to filter out certain results from your returned results.
+  RegionsOfInterest:
+    type: array
+    items:
+      $ref: '#/definitions/RegionOfInterest'
+    minItems: 0
+    maxItems: 10
+  DetectTextFilters:
+    type: object
+    properties:
+      WordFilter:
+        $ref: '#/definitions/DetectionFilter'
+      RegionsOfInterest:
+        $ref: '#/definitions/RegionsOfInterest'
+        description: ' A Filter focusing on a certain area of the image. Uses a <code>BoundingBox</code> object to set the region of the image.'
+    description: 'A set of optional parameters that you can use to set the criteria that the text must meet to be included in your response. <code>WordFilter</code> looks at a word’s height, width, and minimum confidence. <code>RegionOfInterest</code> lets you set a specific region of the image to look for text in. '
   TextDetectionList:
     type: array
     items:
@@ -4782,7 +5016,7 @@ definitions:
         description: The ID of a collection that contains faces that you want to search for.
       FaceMatchThreshold:
         $ref: '#/definitions/Percent'
-        description: Minimum face match confidence score that must be met to return a result for a recognized face. Default is 70. 0 is the lowest confidence. 100 is the highest confidence.
+        description: Minimum face match confidence score that must be met to return a result for a recognized face. Default is 80. 0 is the lowest confidence. 100 is the highest confidence.
     description: Input face recognition parameters for an Amazon Rekognition stream processor. <code>FaceRecognitionSettings</code> is a request parameter for <a>CreateStreamProcessor</a>.
   FaceSearchSortBy:
     type: string
@@ -4864,6 +5098,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/PersonDetection'
+  TextDetectionResults:
+    type: array
+    items:
+      $ref: '#/definitions/TextDetectionResult'
   S3Object:
     type: object
     properties:
@@ -5224,6 +5462,13 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Reason'
+  RegionOfInterest:
+    type: object
+    properties:
+      BoundingBox:
+        $ref: '#/definitions/BoundingBox'
+        description: The box representing a region of interest on screen.
+    description: '<p>Specifies a location within the frame that Rekognition checks for text. Uses a <code>BoundingBox</code> object to set a region of the screen.</p> <p>A word is included in the region if the word is more than half in that region. If there is more than one region, the word will be compared with all regions of the screen. Any word more than half in a region is kept in the results.</p>'
   S3ObjectName:
     type: string
     minLength: 1
@@ -5239,6 +5484,16 @@ definitions:
         $ref: '#/definitions/S3Object'
         description: The Amazon S3 bucket name and file name for the video.
     description: 'Video file stored in an Amazon S3 bucket. Amazon Rekognition video start operations such as <a>StartLabelDetection</a> use <code>Video</code> to specify a video for analysis. The supported file formats are .mp4, .mov and .avi.'
+  StartTextDetectionFilters:
+    type: object
+    properties:
+      WordFilter:
+        $ref: '#/definitions/DetectionFilter'
+        description: 'Filters focusing on qualities of the text, such as confidence or size.'
+      RegionsOfInterest:
+        $ref: '#/definitions/RegionsOfInterest'
+        description: Filter focusing on a certain area of the frame. Uses a <code>BoundingBox</code> object to set the region of the screen.
+    description: 'Set of optional parameters that let you set the criteria text must meet to be included in your response. <code>WordFilter</code> looks at a word''s height, width and minimum confidence. <code>RegionOfInterest</code> lets you set a specific region of the screen to look for text in.'
   StreamProcessor:
     type: object
     properties:
@@ -5276,6 +5531,16 @@ definitions:
         $ref: '#/definitions/Geometry'
         description: The location of the detected text on the image. Includes an axis aligned coarse bounding box surrounding the text and a finer grain polygon for more accurate spatial information.
     description: '<p>Information about a word or line of text detected by <a>DetectText</a>.</p> <p>The <code>DetectedText</code> field contains the text that Amazon Rekognition detected in the image. </p> <p>Every word and line has an identifier (<code>Id</code>). Each word belongs to a line and has a parent identifier (<code>ParentId</code>) that identifies the line of text in which the word appears. The word <code>Id</code> is also an index for the word within a line of words. </p> <p>For more information, see Detecting Text in the Amazon Rekognition Developer Guide.</p>'
+  TextDetectionResult:
+    type: object
+    properties:
+      Timestamp:
+        $ref: '#/definitions/Timestamp'
+        description: 'The time, in milliseconds from the start of the video, that the text was detected.'
+      TextDetection:
+        $ref: '#/definitions/TextDetection'
+        description: Details about text detected in a video.
+    description: 'Information about text detected in a video. Incudes the detected text, the time in milliseconds from the start of the video that the text was detected, and where it was detected on the screen.'
   UnindexedFace:
     type: object
     properties:

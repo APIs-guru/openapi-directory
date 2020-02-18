@@ -1915,7 +1915,7 @@ paths:
     get:
       x-aws-operation-name: AssociateVpcCidrBlock
       operationId: GET AssociateVpcCidrBlock
-      description: '<p>Associates a CIDR block with your VPC. You can associate a secondary IPv4 CIDR block, an Amazon-provided IPv6 CIDR block, or an IPv6 CIDR block from an IPv6 address pool that you provisioned through bring your own IP addresses (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html">BYOIP</a>). The IPv6 CIDR block size is fixed at /56.</p> <p>For more information about associating CIDR blocks with your VPC and applicable restrictions, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#VPC_Sizing">VPC and Subnet Sizing</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
+      description: '<p>Associates a CIDR block with your VPC. You can associate a secondary IPv4 CIDR block, an Amazon-provided IPv6 CIDR block, or an IPv6 CIDR block from an IPv6 address pool that you provisioned through bring your own IP addresses (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html">BYOIP</a>). The IPv6 CIDR block size is fixed at /56.</p> <p>You must specify one of the following in the request: an IPv4 CIDR block, an IPv6 pool, or an Amazon-provided IPv6 CIDR block.</p> <p>For more information about associating CIDR blocks with your VPC and applicable restrictions, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#VPC_Sizing">VPC and Subnet Sizing</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1937,6 +1937,11 @@ paths:
           required: true
           description: The ID of the VPC.
           type: string
+        - name: Ipv6CidrBlockNetworkBorderGroup
+          in: query
+          required: false
+          description: <p>The name of the location from which we advertise the IPV6 CIDR block. Use this parameter to limit the CiDR block to this location.</p> <p> You must set <code>AmazonProvidedIpv6CidrBlock</code> to <code>true</code> to use this parameter.</p> <p> You can have one IPv6 CIDR block association per network border group.</p>
+          type: string
         - name: Ipv6Pool
           in: query
           required: false
@@ -1946,11 +1951,6 @@ paths:
           in: query
           required: false
           description: '<p>An IPv6 CIDR block from the IPv6 address pool. You must also specify <code>Ipv6Pool</code> in the request.</p> <p>To let Amazon choose the IPv6 CIDR block for you, omit this parameter.</p>'
-          type: string
-        - name: Ipv6CidrBlockNetworkBorderGroup
-          in: query
-          required: false
-          description: <p>The name of the location from which we advertise the IPV6 CIDR block. Use this parameter to limit the CiDR block to this location.</p> <p> You must set <code>AmazonProvidedIpv6CidrBlock</code> to <code>true</code> to use this parameter.</p> <p> You can have one IPv6 CIDR block association per network border group.</p>
           type: string
         - name: Action
           in: query
@@ -1975,7 +1975,7 @@ paths:
     post:
       x-aws-operation-name: AssociateVpcCidrBlock
       operationId: POST AssociateVpcCidrBlock
-      description: '<p>Associates a CIDR block with your VPC. You can associate a secondary IPv4 CIDR block, an Amazon-provided IPv6 CIDR block, or an IPv6 CIDR block from an IPv6 address pool that you provisioned through bring your own IP addresses (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html">BYOIP</a>). The IPv6 CIDR block size is fixed at /56.</p> <p>For more information about associating CIDR blocks with your VPC and applicable restrictions, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#VPC_Sizing">VPC and Subnet Sizing</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
+      description: '<p>Associates a CIDR block with your VPC. You can associate a secondary IPv4 CIDR block, an Amazon-provided IPv6 CIDR block, or an IPv6 CIDR block from an IPv6 address pool that you provisioned through bring your own IP addresses (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html">BYOIP</a>). The IPv6 CIDR block size is fixed at /56.</p> <p>You must specify one of the following in the request: an IPv4 CIDR block, an IPv6 pool, or an Amazon-provided IPv6 CIDR block.</p> <p>For more information about associating CIDR blocks with your VPC and applicable restrictions, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#VPC_Sizing">VPC and Subnet Sizing</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1997,6 +1997,11 @@ paths:
           required: true
           description: The ID of the VPC.
           type: string
+        - name: Ipv6CidrBlockNetworkBorderGroup
+          in: formData
+          required: false
+          description: <p>The name of the location from which we advertise the IPV6 CIDR block. Use this parameter to limit the CiDR block to this location.</p> <p> You must set <code>AmazonProvidedIpv6CidrBlock</code> to <code>true</code> to use this parameter.</p> <p> You can have one IPv6 CIDR block association per network border group.</p>
+          type: string
         - name: Ipv6Pool
           in: formData
           required: false
@@ -2006,11 +2011,6 @@ paths:
           in: formData
           required: false
           description: '<p>An IPv6 CIDR block from the IPv6 address pool. You must also specify <code>Ipv6Pool</code> in the request.</p> <p>To let Amazon choose the IPv6 CIDR block for you, omit this parameter.</p>'
-          type: string
-        - name: Ipv6CidrBlockNetworkBorderGroup
-          in: formData
-          required: false
-          description: <p>The name of the location from which we advertise the IPV6 CIDR block. Use this parameter to limit the CiDR block to this location.</p> <p> You must set <code>AmazonProvidedIpv6CidrBlock</code> to <code>true</code> to use this parameter.</p> <p> You can have one IPv6 CIDR block association per network border group.</p>
           type: string
         - name: Action
           in: query
@@ -28756,6 +28756,11 @@ paths:
           required: true
           description: The ID of the route table.
           type: string
+        - name: DryRun
+          in: query
+          required: false
+          description: ''
+          type: boolean
         - name: Action
           in: query
           required: true
@@ -28794,6 +28799,11 @@ paths:
           required: true
           description: The ID of the route table.
           type: string
+        - name: DryRun
+          in: formData
+          required: false
+          description: ''
+          type: boolean
         - name: Action
           in: query
           required: true
@@ -29798,6 +29808,11 @@ paths:
           required: true
           description: 'The ID of the route table. The routing table must be associated with the same VPC that the virtual private gateway is attached to. '
           type: string
+        - name: DryRun
+          in: query
+          required: false
+          description: ''
+          type: boolean
         - name: Action
           in: query
           required: true
@@ -29836,6 +29851,11 @@ paths:
           required: true
           description: 'The ID of the route table. The routing table must be associated with the same VPC that the virtual private gateway is attached to. '
           type: string
+        - name: DryRun
+          in: formData
+          required: false
+          description: ''
+          type: boolean
         - name: Action
           in: query
           required: true
@@ -44539,7 +44559,7 @@ definitions:
         $ref: '#/definitions/String'
         description: The ID of the successful exchange.
     description: The result of the exchange and whether it was <code>successful</code>.
-  String:
+  ReservationId:
     type: string
   TargetConfigurationRequest:
     type: object
@@ -44550,7 +44570,7 @@ definitions:
         $ref: '#/definitions/Integer'
         description: The number of instances the Covertible Reserved Instance offering can be applied to. This parameter is reserved and cannot be specified in a request
       OfferingId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ReservedInstancesOfferingId'
         description: The Convertible Reserved Instance offering ID.
     description: Details about the target configuration.
   AcceptTransitGatewayPeeringAttachmentResult:
@@ -44571,6 +44591,8 @@ definitions:
       Unsuccessful:
         $ref: '#/definitions/UnsuccessfulItemSet'
         description: 'Information about the interface endpoints that were not accepted, if applicable.'
+  VpcEndpointId:
+    type: string
   AcceptVpcPeeringConnectionResult:
     type: object
     properties:
@@ -44633,6 +44655,8 @@ definitions:
       SecurityGroupIds:
         $ref: '#/definitions/ClientVpnSecurityGroupIdSet'
         description: The IDs of the applied security groups.
+  String:
+    type: string
   AssignIpv6AddressesResult:
     type: object
     properties:
@@ -44882,6 +44906,8 @@ definitions:
         $ref: '#/definitions/CancelSpotFleetRequestsErrorSet'
         description: Information about the Spot Fleet requests that are not successfully canceled.
     description: Contains the output of CancelSpotFleetRequests.
+  SpotFleetRequestId:
+    type: string
   CancelSpotInstanceRequestsResult:
     type: object
     example:
@@ -44893,6 +44919,8 @@ definitions:
         $ref: '#/definitions/CancelledSpotInstanceRequestList'
         description: One or more Spot Instance requests.
     description: Contains the output of CancelSpotInstanceRequests.
+  SpotInstanceRequestId:
+    type: string
   ConfirmProductInstanceResult:
     type: object
     example:
@@ -45094,6 +45122,8 @@ definitions:
       Unsuccessful:
         $ref: '#/definitions/UnsuccessfulItemSet'
         description: Information about the flow logs that could not be created successfully.
+  FlowLogResourceId:
+    type: string
   CreateFpgaImageResult:
     type: object
     properties:
@@ -45184,6 +45214,8 @@ definitions:
       LaunchTemplate:
         $ref: '#/definitions/LaunchTemplate'
         description: Information about the launch template.
+  KernelId:
+    type: string
   LaunchTemplateIamInstanceProfileSpecificationRequest:
     type: object
     properties:
@@ -45202,6 +45234,8 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/LaunchTemplateInstanceNetworkInterfaceSpecificationRequest'
+  ImageId:
+    type: string
   InstanceType:
     type: string
     enum:
@@ -45476,6 +45510,8 @@ definitions:
       - inf1.2xlarge
       - inf1.6xlarge
       - inf1.24xlarge
+  KeyPairName:
+    type: string
   LaunchTemplatesMonitoringRequest:
     type: object
     properties:
@@ -45493,10 +45529,10 @@ definitions:
         $ref: '#/definitions/String'
         description: The affinity setting for an instance on a Dedicated Host.
       GroupName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/PlacementGroupName'
         description: The name of the placement group for the instance.
       HostId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/DedicatedHostId'
         description: The ID of the Dedicated Host for the instance.
       Tenancy:
         $ref: '#/definitions/Tenancy'
@@ -45511,6 +45547,8 @@ definitions:
         $ref: '#/definitions/Integer'
         description: The number of the partition the instance should launch in. Valid only if the placement group strategy is set to <code>partition</code>.
     description: Describes the placement of an instance.
+  RamdiskId:
+    type: string
   ShutdownBehavior:
     type: string
     enum:
@@ -45531,11 +45569,11 @@ definitions:
   SecurityGroupIdStringList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/SecurityGroupId'
   SecurityGroupStringList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/SecurityGroupName'
   LaunchTemplateInstanceMarketOptionsRequest:
     type: object
     properties:
@@ -45643,7 +45681,7 @@ definitions:
         $ref: '#/definitions/InstanceIpv6AddressListRequest'
         description: One or more specific IPv6 addresses from the IPv6 CIDR block range of your subnet. You can't use this option if you're specifying a number of IPv6 addresses.
       NetworkInterfaceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/NetworkInterfaceId'
         description: The ID of the network interface.
       PrivateIpAddress:
         $ref: '#/definitions/String'
@@ -45655,9 +45693,13 @@ definitions:
         $ref: '#/definitions/Integer'
         description: The number of secondary private IPv4 addresses to assign to a network interface.
       SubnetId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SubnetId'
         description: The ID of the subnet for the network interface.
     description: The parameters for a network interface.
+  PlacementGroupName:
+    type: string
+  DedicatedHostId:
+    type: string
   Tenancy:
     type: string
     enum:
@@ -45695,6 +45737,10 @@ definitions:
         $ref: '#/definitions/LaunchTemplateElasticInferenceAcceleratorCount'
         description: '<p> The number of elastic inference accelerators to attach to the instance. </p> <p>Default: 1</p>'
     description: ' Describes an elastic inference accelerator. '
+  SecurityGroupId:
+    type: string
+  SecurityGroupName:
+    type: string
   MarketType:
     type: string
     enum:
@@ -45727,7 +45773,7 @@ definitions:
     type: object
     properties:
       CapacityReservationId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/CapacityReservationId'
         description: The ID of the Capacity Reservation.
     description: Describes a target Capacity Reservation.
   LaunchTemplateLicenseConfigurationRequest:
@@ -45988,6 +46034,8 @@ definitions:
       Snapshots:
         $ref: '#/definitions/SnapshotSet'
         description: List of snapshots.
+  InstanceId:
+    type: string
   CreateSpotDatafeedSubscriptionResult:
     type: object
     example:
@@ -46015,6 +46063,8 @@ definitions:
       Subnet:
         $ref: '#/definitions/Subnet'
         description: Information about the subnet.
+  TaggableResourceId:
+    type: string
   Tag:
     type: object
     properties:
@@ -46129,6 +46179,8 @@ definitions:
       TransitGatewayVpcAttachment:
         $ref: '#/definitions/TransitGatewayVpcAttachment'
         description: Information about the VPC attachment.
+  SubnetId:
+    type: string
   Ipv6SupportValue:
     type: string
     enum:
@@ -46217,6 +46269,8 @@ definitions:
         $ref: '#/definitions/String'
         description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
     description: Contains the output of CreateVpcEndpoint.
+  RouteTableId:
+    type: string
   CreateVpcEndpointConnectionNotificationResult:
     type: object
     properties:
@@ -46343,6 +46397,8 @@ definitions:
       Unsuccessful:
         $ref: '#/definitions/UnsuccessfulItemSet'
         description: Information about the flow logs that could not be deleted successfully.
+  VpcFlowLogId:
+    type: string
   DeleteFpgaImageResult:
     type: object
     properties:
@@ -46486,6 +46542,8 @@ definitions:
       Unsuccessful:
         $ref: '#/definitions/UnsuccessfulItemSet'
         description: 'Information about the service configurations that were not deleted, if applicable.'
+  VpcEndpointServiceId:
+    type: string
   DeleteVpcEndpointsResult:
     type: object
     properties:
@@ -46511,6 +46569,8 @@ definitions:
       DeregisteredMulticastGroupMembers:
         $ref: '#/definitions/TransitGatewayMulticastDeregisteredGroupMembers'
         description: Information about the deregistered members.
+  NetworkInterfaceId:
+    type: string
   DeregisterTransitGatewayMulticastGroupSourcesResult:
     type: object
     properties:
@@ -46609,6 +46669,8 @@ definitions:
       BundleTasks:
         $ref: '#/definitions/BundleTaskList'
         description: Information about the bundle tasks.
+  BundleId:
+    type: string
   DescribeByoipCidrsResult:
     type: object
     properties:
@@ -46663,6 +46725,8 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+  ClientVpnEndpointId:
+    type: string
   DescribeClientVpnRoutesResult:
     type: object
     properties:
@@ -46696,6 +46760,8 @@ definitions:
       ConversionTasks:
         $ref: '#/definitions/DescribeConversionTaskList'
         description: Information about the conversion tasks.
+  ConversionTaskId:
+    type: string
   DescribeCustomerGatewaysResult:
     type: object
     example:
@@ -46710,6 +46776,8 @@ definitions:
         $ref: '#/definitions/CustomerGatewayList'
         description: Information about one or more customer gateways.
     description: Contains the output of DescribeCustomerGateways.
+  CustomerGatewayId:
+    type: string
   DescribeDhcpOptionsResult:
     type: object
     example:
@@ -46727,6 +46795,8 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+  DhcpOptionsId:
+    type: string
   DescribeEgressOnlyInternetGatewaysResult:
     type: object
     properties:
@@ -46750,6 +46820,8 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+  ElasticGpuId:
+    type: string
   DescribeExportImageTasksResult:
     type: object
     properties:
@@ -46759,6 +46831,8 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The token to use to get the next page of results. This value is <code>null</code> when there are no more results to return.
+  ExportImageTaskId:
+    type: string
   DescribeExportTasksResult:
     type: object
     properties:
@@ -46837,6 +46911,8 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+  FpgaImageId:
+    type: string
   DescribeHostReservationOfferingsResult:
     type: object
     properties:
@@ -46855,6 +46931,8 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+  HostReservationId:
+    type: string
   DescribeHostsResult:
     type: object
     properties:
@@ -46881,6 +46959,8 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+  IamInstanceProfileAssociationId:
+    type: string
   DescribeIdFormatResult:
     type: object
     properties:
@@ -46963,6 +47043,8 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to get the next page of results. This value is <code>null</code> when there are no more results to return.
+  ImportImageTaskId:
+    type: string
   DescribeImportSnapshotTasksResult:
     type: object
     properties:
@@ -46972,6 +47054,8 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to get the next page of results. This value is <code>null</code> when there are no more results to return.
+  ImportSnapshotTaskId:
+    type: string
   InstanceAttribute:
     type: object
     example:
@@ -47115,6 +47199,8 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+  InternetGatewayId:
+    type: string
   DescribeIpv6PoolsResult:
     type: object
     properties:
@@ -47124,6 +47210,8 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+  Ipv6PoolEc2Id:
+    type: string
   DescribeKeyPairsResult:
     type: object
     example:
@@ -47134,6 +47222,8 @@ definitions:
       KeyPairs:
         $ref: '#/definitions/KeyPairList'
         description: Information about the key pairs.
+  KeyPairId:
+    type: string
   DescribeLaunchTemplateVersionsResult:
     type: object
     example:
@@ -47195,6 +47285,8 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+  LaunchTemplateId:
+    type: string
   LaunchTemplateName:
     type: string
     pattern: '[a-zA-Z0-9\(\)\.\-/_]+'
@@ -47209,6 +47301,8 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+  LocalGatewayRouteTableVirtualInterfaceGroupAssociationId:
+    type: string
   DescribeLocalGatewayRouteTableVpcAssociationsResult:
     type: object
     properties:
@@ -47218,6 +47312,8 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+  LocalGatewayRouteTableVpcAssociationId:
+    type: string
   DescribeLocalGatewayRouteTablesResult:
     type: object
     properties:
@@ -47227,6 +47323,8 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+  LocalGatewayRoutetableId:
+    type: string
   DescribeLocalGatewayVirtualInterfaceGroupsResult:
     type: object
     properties:
@@ -47236,6 +47334,8 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+  LocalGatewayVirtualInterfaceGroupId:
+    type: string
   DescribeLocalGatewayVirtualInterfacesResult:
     type: object
     properties:
@@ -47245,6 +47345,8 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+  LocalGatewayVirtualInterfaceId:
+    type: string
   DescribeLocalGatewaysResult:
     type: object
     properties:
@@ -47254,6 +47356,8 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+  LocalGatewayId:
+    type: string
   DescribeMovingAddressesResult:
     type: object
     example:
@@ -47288,6 +47392,8 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+  NatGatewayId:
+    type: string
   DescribeNetworkAclsResult:
     type: object
     example:
@@ -47318,6 +47424,8 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+  NetworkAclId:
+    type: string
   DescribeNetworkInterfaceAttributeResult:
     type: object
     example:
@@ -47351,6 +47459,8 @@ definitions:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results.
     description: Contains the output for DescribeNetworkInterfacePermissions.
+  NetworkInterfacePermissionId:
+    type: string
   DescribeNetworkInterfacesResult:
     type: object
     example:
@@ -47407,6 +47517,8 @@ definitions:
       PlacementGroups:
         $ref: '#/definitions/PlacementGroupList'
         description: Information about the placement groups.
+  PlacementGroupId:
+    type: string
   DescribePrefixListsResult:
     type: object
     properties:
@@ -47416,6 +47528,8 @@ definitions:
       PrefixLists:
         $ref: '#/definitions/PrefixListSet'
         description: All available prefix lists.
+  PrefixListResourceId:
+    type: string
   DescribePrincipalIdFormatResult:
     type: object
     properties:
@@ -47434,6 +47548,8 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+  Ipv4PoolEc2Id:
+    type: string
   DescribeRegionsResult:
     type: object
     example:
@@ -47488,6 +47604,8 @@ definitions:
         $ref: '#/definitions/ReservedInstancesModificationList'
         description: The Reserved Instance modification information.
     description: Contains the output of DescribeReservedInstancesModifications.
+  ReservedInstancesModificationId:
+    type: string
   DescribeReservedInstancesOfferingsResult:
     type: object
     properties:
@@ -47498,6 +47616,8 @@ definitions:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
     description: Contains the output of DescribeReservedInstancesOfferings.
+  ReservedInstancesOfferingId:
+    type: string
   DescribeRouteTablesResult:
     type: object
     example:
@@ -47591,6 +47711,8 @@ definitions:
         $ref: '#/definitions/ScheduledInstanceSet'
         description: Information about the Scheduled Instances.
     description: Contains the output of DescribeScheduledInstances.
+  ScheduledInstanceId:
+    type: string
   DescribeSecurityGroupReferencesResult:
     type: object
     example:
@@ -47647,6 +47769,8 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: 'The <code>NextToken</code> value to include in a future <code>DescribeSnapshots</code> request. When the results of a <code>DescribeSnapshots</code> request exceed <code>MaxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
+  SnapshotId:
+    type: string
   DescribeSpotDatafeedSubscriptionResult:
     type: object
     example:
@@ -47874,6 +47998,8 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. The value is <code>null</code> when there are no more results to return.
+  TrafficMirrorFilterId:
+    type: string
   DescribeTrafficMirrorSessionsResult:
     type: object
     properties:
@@ -47883,6 +48009,8 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. The value is <code>null</code> when there are no more results to return.
+  TrafficMirrorSessionId:
+    type: string
   DescribeTrafficMirrorTargetsResult:
     type: object
     properties:
@@ -47892,6 +48020,8 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. The value is <code>null</code> when there are no more results to return.
+  TrafficMirrorTargetId:
+    type: string
   DescribeTransitGatewayAttachmentsResult:
     type: object
     properties:
@@ -47901,6 +48031,8 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+  TransitGatewayAttachmentId:
+    type: string
   DescribeTransitGatewayMulticastDomainsResult:
     type: object
     properties:
@@ -47946,6 +48078,8 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+  TransitGatewayId:
+    type: string
   DescribeVolumeAttributeResult:
     type: object
     example:
@@ -48031,6 +48165,8 @@ definitions:
       Vpcs:
         $ref: '#/definitions/VpcClassicLinkList'
         description: The ClassicLink status of one or more VPCs.
+  VpcId:
+    type: string
   DescribeVpcClassicLinkDnsSupportResult:
     type: object
     properties:
@@ -48108,6 +48244,8 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+  VpcPeeringConnectionId:
+    type: string
   DescribeVpcsResult:
     type: object
     example:
@@ -48135,6 +48273,8 @@ definitions:
         $ref: '#/definitions/VpnConnectionList'
         description: Information about one or more VPN connections.
     description: Contains the output of DescribeVpnConnections.
+  VpnConnectionId:
+    type: string
   DescribeVpnGatewaysResult:
     type: object
     properties:
@@ -48142,6 +48282,8 @@ definitions:
         $ref: '#/definitions/VpnGatewayList'
         description: Information about one or more virtual private gateways.
     description: Contains the output of DescribeVpnGateways.
+  VpnGatewayId:
+    type: string
   DetachClassicLinkVpcResult:
     type: object
     properties:
@@ -48424,8 +48566,6 @@ definitions:
       TotalUpfrontPrice:
         $ref: '#/definitions/String'
         description: The potential total upfront price. This is billed immediately.
-  DedicatedHostId:
-    type: string
   GetLaunchTemplateDataResult:
     type: object
     example:
@@ -48613,7 +48753,7 @@ definitions:
         $ref: '#/definitions/String'
         description: '<p>The format of the disk image being imported.</p> <p>Valid values: <code>VHD</code> | <code>VMDK</code> | <code>OVA</code> </p>'
       SnapshotId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SnapshotId'
         description: The ID of the EBS snapshot to be used for importing the snapshot.
       Url:
         $ref: '#/definitions/String'
@@ -48825,6 +48965,8 @@ definitions:
       Return:
         $ref: '#/definitions/Boolean'
         description: 'Returns <code>true</code> if the request succeeds; otherwise, it returns an error.'
+  CapacityReservationId:
+    type: string
   ModifyInstanceCreditSpecificationResult:
     type: object
     properties:
@@ -48838,7 +48980,7 @@ definitions:
     type: object
     properties:
       InstanceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/InstanceId'
         description: The ID of the instance.
       CpuCredits:
         $ref: '#/definitions/String'
@@ -48878,6 +49020,8 @@ definitions:
       LaunchTemplate:
         $ref: '#/definitions/LaunchTemplate'
         description: Information about the launch template.
+  NetworkInterfaceAttachmentId:
+    type: string
   ModifyReservedInstancesResult:
     type: object
     properties:
@@ -49442,6 +49586,14 @@ definitions:
         $ref: '#/definitions/SpotInstanceRequestList'
         description: One or more Spot Instance requests.
     description: Contains the output of RequestSpotInstances.
+  RequestSpotLaunchSpecificationSecurityGroupIdList:
+    type: array
+    items:
+      $ref: '#/definitions/SecurityGroupId'
+  RequestSpotLaunchSpecificationSecurityGroupList:
+    type: array
+    items:
+      $ref: '#/definitions/SecurityGroupName'
   BlockDeviceMappingList:
     type: array
     items:
@@ -49670,13 +49822,13 @@ definitions:
         $ref: '#/definitions/String'
         description: The Availability Zone.
       GroupName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/PlacementGroupName'
         description: The name of the placement group.
     description: Describes the placement for a Scheduled Instance.
   ScheduledInstancesSecurityGroupIdSet:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/SecurityGroupId'
   ScheduledInstancesBlockDeviceMapping:
     type: object
     properties:
@@ -49718,7 +49870,7 @@ definitions:
         $ref: '#/definitions/ScheduledInstancesIpv6AddressList'
         description: The specific IPv6 addresses from the subnet range.
       NetworkInterfaceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/NetworkInterfaceId'
         description: The ID of the network interface.
       PrivateIpAddress:
         $ref: '#/definitions/String'
@@ -49730,7 +49882,7 @@ definitions:
         $ref: '#/definitions/Integer'
         description: The number of secondary private IPv4 addresses.
       SubnetId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SubnetId'
         description: The ID of the subnet.
     description: Describes a network interface for a Scheduled Instance.
   SearchLocalGatewayRoutesResult:
@@ -49861,7 +50013,7 @@ definitions:
   ReservedInstanceIdSet:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/ReservationId'
   TargetConfigurationRequestSet:
     type: array
     items:
@@ -49887,7 +50039,7 @@ definitions:
       - TransitGatewayAttachmentId
     properties:
       TransitGatewayAttachmentId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayAttachmentId'
         description: The ID of the transit gateway attachment.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -49923,7 +50075,7 @@ definitions:
       - TransitGatewayAttachmentId
     properties:
       TransitGatewayAttachmentId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayAttachmentId'
         description: The ID of the attachment.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -49959,8 +50111,10 @@ definitions:
         $ref: '#/definitions/TagList'
         description: The tags for the VPC attachment.
     description: Describes a VPC attachment.
-  ServiceId:
-    type: string
+  VpcEndpointIdList:
+    type: array
+    items:
+      $ref: '#/definitions/VpcEndpointId'
   AcceptVpcEndpointConnectionsRequest:
     type: object
     required:
@@ -49971,17 +50125,15 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       ServiceId:
-        $ref: '#/definitions/ServiceId'
+        $ref: '#/definitions/VpcEndpointServiceId'
         description: The ID of the VPC endpoint service.
       VpcEndpointIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/VpcEndpointIdList'
         description: The IDs of one or more interface VPC endpoints.
   UnsuccessfulItemSet:
     type: array
     items:
       $ref: '#/definitions/UnsuccessfulItem'
-  VpcPeeringConnectionId:
-    type: string
   AcceptVpcPeeringConnectionRequest:
     type: object
     properties:
@@ -50270,10 +50422,6 @@ definitions:
     enum:
       - 'on'
       - 'off'
-  ClientVpnEndpointId:
-    type: string
-  VpcId:
-    type: string
   ClientVpnSecurityGroupIdSet:
     type: array
     items:
@@ -50311,8 +50459,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/String'
-  NetworkInterfaceId:
-    type: string
   AssignIpv6AddressesRequest:
     type: object
     required:
@@ -50360,8 +50506,6 @@ definitions:
         $ref: '#/definitions/String'
         description: The private IP address assigned to the network interface.
     description: Describes the private IP addresses assigned to a network interface.
-  InstanceId:
-    type: string
   AssociateAddressRequest:
     type: object
     properties:
@@ -50386,8 +50530,6 @@ definitions:
       PrivateIpAddress:
         $ref: '#/definitions/String'
         description: '[EC2-VPC] The primary or secondary private IP address to associate with the Elastic IP address. If no private IP address is specified, the Elastic IP address is associated with the primary private IP address.'
-  SubnetId:
-    type: string
   AssociateClientVpnTargetNetworkRequest:
     type: object
     required:
@@ -50464,6 +50606,8 @@ definitions:
         $ref: '#/definitions/DateTime'
         description: The time the IAM instance profile was associated with the instance.
     description: Describes an association between an IAM instance profile and an instance.
+  RouteGatewayId:
+    type: string
   AssociateRouteTableRequest:
     type: object
     required:
@@ -50473,13 +50617,13 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       RouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/RouteTableId'
         description: The ID of the route table.
       SubnetId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SubnetId'
         description: The ID of the subnet.
       GatewayId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/RouteGatewayId'
         description: The ID of the internet gateway or virtual private gateway.
   RouteTableAssociationState:
     type: object
@@ -50516,14 +50660,16 @@ definitions:
         $ref: '#/definitions/SubnetCidrBlockState'
         description: Information about the state of the CIDR block.
     description: Describes an IPv6 CIDR block associated with a subnet.
+  TransitGatewayMulticastDomainId:
+    type: string
   AssociateTransitGatewayMulticastDomainRequest:
     type: object
     properties:
       TransitGatewayMulticastDomainId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayMulticastDomainId'
         description: The ID of the transit gateway multicast domain.
       TransitGatewayAttachmentId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayAttachmentId'
         description: The ID of the transit gateway attachment to associate with the transit gateway multicast domain.
       SubnetIds:
         $ref: '#/definitions/ValueStringList'
@@ -50550,6 +50696,8 @@ definitions:
         $ref: '#/definitions/SubnetAssociationList'
         description: The subnets associated with the multicast domain.
     description: Describes the multicast domain associations.
+  TransitGatewayRouteTableId:
+    type: string
   AssociateTransitGatewayRouteTableRequest:
     type: object
     required:
@@ -50557,10 +50705,10 @@ definitions:
       - TransitGatewayAttachmentId
     properties:
       TransitGatewayRouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayRouteTableId'
         description: The ID of the transit gateway route table.
       TransitGatewayAttachmentId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayAttachmentId'
         description: The ID of the attachment.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -50569,10 +50717,10 @@ definitions:
     type: object
     properties:
       TransitGatewayRouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayRouteTableId'
         description: The ID of the transit gateway route table.
       TransitGatewayAttachmentId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayAttachmentId'
         description: The ID of the attachment.
       ResourceId:
         $ref: '#/definitions/String'
@@ -50598,15 +50746,15 @@ definitions:
       VpcId:
         $ref: '#/definitions/VpcId'
         description: The ID of the VPC.
-      Ipv6Pool:
+      Ipv6CidrBlockNetworkBorderGroup:
         $ref: '#/definitions/String'
+        description: <p>The name of the location from which we advertise the IPV6 CIDR block. Use this parameter to limit the CiDR block to this location.</p> <p> You must set <code>AmazonProvidedIpv6CidrBlock</code> to <code>true</code> to use this parameter.</p> <p> You can have one IPv6 CIDR block association per network border group.</p>
+      Ipv6Pool:
+        $ref: '#/definitions/Ipv6PoolEc2Id'
         description: The ID of an IPv6 address pool from which to allocate the IPv6 CIDR block.
       Ipv6CidrBlock:
         $ref: '#/definitions/String'
         description: '<p>An IPv6 CIDR block from the IPv6 address pool. You must also specify <code>Ipv6Pool</code> in the request.</p> <p>To let Amazon choose the IPv6 CIDR block for you, omit this parameter.</p>'
-      Ipv6CidrBlockNetworkBorderGroup:
-        $ref: '#/definitions/String'
-        description: <p>The name of the location from which we advertise the IPV6 CIDR block. Use this parameter to limit the CiDR block to this location.</p> <p> You must set <code>AmazonProvidedIpv6CidrBlock</code> to <code>true</code> to use this parameter.</p> <p> You can have one IPv6 CIDR block association per network border group.</p>
   VpcIpv6CidrBlockAssociation:
     type: object
     properties:
@@ -50619,12 +50767,12 @@ definitions:
       Ipv6CidrBlockState:
         $ref: '#/definitions/VpcCidrBlockState'
         description: Information about the state of the CIDR block.
-      Ipv6Pool:
-        $ref: '#/definitions/String'
-        description: The ID of the IPv6 address pool from which the IPv6 CIDR block is allocated.
       NetworkBorderGroup:
         $ref: '#/definitions/String'
         description: The name of the location from which we advertise the IPV6 CIDR block.
+      Ipv6Pool:
+        $ref: '#/definitions/String'
+        description: The ID of the IPv6 address pool from which the IPv6 CIDR block is allocated.
     description: Describes an IPv6 CIDR block associated with a VPC.
   VpcCidrBlockAssociation:
     type: object
@@ -50660,7 +50808,7 @@ definitions:
   AssociationIdList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/IamInstanceProfileAssociationId'
   AssociationStatusCode:
     type: string
     enum:
@@ -50692,8 +50840,6 @@ definitions:
       VpcId:
         $ref: '#/definitions/VpcId'
         description: The ID of a ClassicLink-enabled VPC.
-  InternetGatewayId:
-    type: string
   AttachInternetGatewayRequest:
     type: object
     required:
@@ -50748,8 +50894,6 @@ definitions:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
-  VpnGatewayId:
-    type: string
   AttachVpnGatewayRequest:
     type: object
     required:
@@ -50873,7 +51017,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       GroupId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SecurityGroupId'
         description: The ID of the security group.
       IpPermissions:
         $ref: '#/definitions/IpPermissionList'
@@ -50906,10 +51050,10 @@ definitions:
         $ref: '#/definitions/Integer'
         description: '<p>The start of port range for the TCP and UDP protocols, or an ICMP type number. For the ICMP type number, use <code>-1</code> to specify all types. If you specify all ICMP types, you must specify all codes.</p> <p>Alternatively, use a set of IP permissions to specify multiple rules and a description for the rule.</p>'
       GroupId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SecurityGroupId'
         description: 'The ID of the security group. You must specify either the security group ID or the security group name in the request. For security groups in a nondefault VPC, you must specify the security group ID.'
       GroupName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SecurityGroupName'
         description: '[EC2-Classic, default VPC] The name of the security group. You must specify either the security group ID or the security group name in the request.'
       IpPermissions:
         $ref: '#/definitions/IpPermissionList'
@@ -51068,12 +51212,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/BlockDeviceMapping'
-  BundleId:
-    type: string
   BundleIdStringList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/BundleId'
   Storage:
     type: object
     properties:
@@ -51185,8 +51327,6 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
     description: Contains the parameters for CancelBundleTask.
-  CapacityReservationId:
-    type: string
   CancelCapacityReservationRequest:
     type: object
     required:
@@ -51198,8 +51338,6 @@ definitions:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
-  ConversionTaskId:
-    type: string
   CancelConversionRequest:
     type: object
     required:
@@ -51277,6 +51415,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/CancelSpotFleetRequestsErrorItem'
+  SpotFleetRequestIdList:
+    type: array
+    items:
+      $ref: '#/definitions/SpotFleetRequestId'
   CancelSpotFleetRequestsRequest:
     type: object
     required:
@@ -51287,7 +51429,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       SpotFleetRequestIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/SpotFleetRequestIdList'
         description: The IDs of the Spot Fleet requests.
       TerminateInstances:
         $ref: '#/definitions/Boolean'
@@ -51321,7 +51463,7 @@ definitions:
   SpotInstanceRequestIdList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/SpotInstanceRequestId'
   CancelSpotInstanceRequestsRequest:
     type: object
     required:
@@ -51803,6 +51945,10 @@ definitions:
         $ref: '#/definitions/TagList'
         description: Any tags assigned to the Client VPN endpoint.
     description: Describes a Client VPN endpoint.
+  ClientVpnEndpointIdList:
+    type: array
+    items:
+      $ref: '#/definitions/ClientVpnEndpointId'
   ClientVpnEndpointStatusCode:
     type: string
     enum:
@@ -51876,17 +52022,19 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/CoipAddressUsage'
+  CoipPoolId:
+    type: string
   CoipPool:
     type: object
     properties:
       PoolId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/CoipPoolId'
         description: The ID of the address pool.
       PoolCidrs:
         $ref: '#/definitions/ValueStringList'
         description: The address ranges of the address pool.
       LocalGatewayRouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/LocalGatewayRoutetableId'
         description: The ID of the local gateway route table.
       Tags:
         $ref: '#/definitions/TagList'
@@ -51975,7 +52123,7 @@ definitions:
   ConversionIdStringList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/ConversionTaskId'
   ImportInstanceTaskDetails:
     type: object
     properties:
@@ -52053,7 +52201,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       SourceFpgaImageId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/FpgaImageId'
         description: The ID of the source AFI.
       Description:
         $ref: '#/definitions/String'
@@ -52117,7 +52265,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'To encrypt a copy of an unencrypted snapshot if encryption by default is not enabled, enable encryption using this parameter. Otherwise, omit this parameter. Encrypted snapshots are encrypted, even if you omit this parameter and encryption by default is not enabled. You cannot set this parameter to false. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
       KmsKeyId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/KmsKeyId'
         description: '<p>The identifier of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use for Amazon EBS encryption. If this parameter is not specified, your AWS managed CMK for EBS is used. If <code>KmsKeyId</code> is specified, the encrypted state must be <code>true</code>.</p> <p>You can specify the CMK using any of the following:</p> <ul> <li> <p>Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.</p> </li> <li> <p>Key alias. For example, alias/ExampleAlias.</p> </li> <li> <p>Key ARN. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:key/<i>abcd1234-a123-456a-a12b-a123b4cd56ef</i>.</p> </li> <li> <p>Alias ARN. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:alias/<i>ExampleAlias</i>.</p> </li> </ul> <p>AWS authenticates the CMK asynchronously. Therefore, if you specify an ID, alias, or ARN that is not valid, the action can appear to complete, but eventually fails.</p>'
       PresignedUrl:
         $ref: '#/definitions/String'
@@ -52683,6 +52831,10 @@ definitions:
       TagSpecifications:
         $ref: '#/definitions/TagSpecificationList'
         description: 'The key-value pair for tagging the EC2 Fleet request on creation. The value for <code>ResourceType</code> must be <code>fleet</code>, otherwise the fleet request fails. To tag instances at launch, specify the tags in the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#create-launch-template">launch template</a>. For information about tagging after launch, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-resources">Tagging Your Resources</a>. '
+  FlowLogResourceIds:
+    type: array
+    items:
+      $ref: '#/definitions/FlowLogResourceId'
   FlowLogsResourceType:
     type: string
     enum:
@@ -52720,7 +52872,7 @@ definitions:
         $ref: '#/definitions/String'
         description: '<p>The name of a new or existing CloudWatch Logs log group where Amazon EC2 publishes your flow logs.</p> <p>If you specify <code>LogDestinationType</code> as <code>s3</code>, do not specify <code>DeliverLogsPermissionArn</code> or <code>LogGroupName</code>.</p>'
       ResourceIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/FlowLogResourceIds'
         description: '<p>The ID of the subnet, network interface, or VPC for which you want to create a flow log.</p> <p>Constraints: Maximum of 1000 resources</p>'
       ResourceType:
         $ref: '#/definitions/FlowLogsResourceType'
@@ -52886,15 +53038,13 @@ definitions:
         $ref: '#/definitions/TagList'
         description: Any tags assigned to the internet gateway.
     description: Describes an internet gateway.
-  KeyPairName:
-    type: string
   CreateKeyPairRequest:
     type: object
     required:
       - KeyName
     properties:
       KeyName:
-        $ref: '#/definitions/KeyPairName'
+        $ref: '#/definitions/String'
         description: '<p>A unique name for the key pair.</p> <p>Constraints: Up to 255 ASCII characters</p>'
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -52906,7 +53056,7 @@ definitions:
     type: object
     properties:
       KernelId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/KernelId'
         description: '<p>The ID of the kernel.</p> <important> <p>We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html">User Provided Kernels</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> </important>'
       EbsOptimized:
         $ref: '#/definitions/Boolean'
@@ -52921,13 +53071,13 @@ definitions:
         $ref: '#/definitions/LaunchTemplateInstanceNetworkInterfaceSpecificationRequestList'
         description: 'One or more network interfaces. If you specify a network interface, you must specify any security groups and subnets as part of the network interface.'
       ImageId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ImageId'
         description: The ID of the AMI.
       InstanceType:
         $ref: '#/definitions/InstanceType'
         description: 'The instance type. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html">Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
       KeyName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/KeyPairName'
         description: '<p>The name of the key pair. You can create a key pair using <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateKeyPair.html">CreateKeyPair</a> or <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportKeyPair.html">ImportKeyPair</a>.</p> <important> <p>If you do not specify a key pair, you can''t connect to the instance unless you choose an AMI that is configured to allow users another way to log in.</p> </important>'
       Monitoring:
         $ref: '#/definitions/LaunchTemplatesMonitoringRequest'
@@ -52936,7 +53086,7 @@ definitions:
         $ref: '#/definitions/LaunchTemplatePlacementRequest'
         description: The placement for the instance.
       RamDiskId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/RamdiskId'
         description: '<p>The ID of the RAM disk.</p> <important> <p>We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html">User Provided Kernels</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> </important>'
       DisableApiTermination:
         $ref: '#/definitions/Boolean'
@@ -53033,8 +53183,6 @@ definitions:
         $ref: '#/definitions/TagList'
         description: The tags for the launch template.
     description: Describes a launch template.
-  LaunchTemplateId:
-    type: string
   CreateLaunchTemplateVersionRequest:
     type: object
     required:
@@ -53100,10 +53248,10 @@ definitions:
         $ref: '#/definitions/String'
         description: The CIDR range used for destination matches. Routing decisions are based on the most specific match.
       LocalGatewayRouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/LocalGatewayRoutetableId'
         description: The ID of the local gateway route table.
       LocalGatewayVirtualInterfaceGroupId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/LocalGatewayVirtualInterfaceGroupId'
         description: The ID of the virtual interface group.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -53115,7 +53263,7 @@ definitions:
         $ref: '#/definitions/String'
         description: The CIDR block used for destination matches.
       LocalGatewayVirtualInterfaceGroupId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/LocalGatewayVirtualInterfaceGroupId'
         description: The ID of the virtual interface group.
       Type:
         $ref: '#/definitions/LocalGatewayRouteType'
@@ -53124,7 +53272,7 @@ definitions:
         $ref: '#/definitions/LocalGatewayRouteState'
         description: The state of the route.
       LocalGatewayRouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/LocalGatewayRoutetableId'
         description: The ID of the local gateway route table.
     description: Describes a route for a local gateway route table.
   CreateLocalGatewayRouteTableVpcAssociationRequest:
@@ -53134,10 +53282,10 @@ definitions:
       - VpcId
     properties:
       LocalGatewayRouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/LocalGatewayRoutetableId'
         description: The ID of the local gateway route table.
       VpcId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpcId'
         description: The ID of the VPC.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -53146,7 +53294,7 @@ definitions:
     type: object
     properties:
       LocalGatewayRouteTableVpcAssociationId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/LocalGatewayRouteTableVpcAssociationId'
         description: The ID of the association.
       LocalGatewayRouteTableId:
         $ref: '#/definitions/String'
@@ -53226,8 +53374,6 @@ definitions:
         $ref: '#/definitions/Integer'
         description: The ICMP type. A value of -1 means all types.
     description: Describes the ICMP type and code.
-  NetworkAclId:
-    type: string
   PortRange:
     type: object
     properties:
@@ -53525,17 +53671,9 @@ definitions:
         $ref: '#/definitions/PriceScheduleSpecificationList'
         description: A list specifying the price of the Standard Reserved Instance for each month remaining in the Reserved Instance term.
       ReservedInstancesId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ReservationId'
         description: The ID of the active Standard Reserved Instance.
     description: Contains the parameters for CreateReservedInstancesListing.
-  RouteTableGatewayId:
-    type: string
-  NatGatewayId:
-    type: string
-  TransitGatewayId:
-    type: string
-  RouteTableId:
-    type: string
   CreateRouteRequest:
     type: object
     required:
@@ -53554,7 +53692,7 @@ definitions:
         $ref: '#/definitions/EgressOnlyInternetGatewayId'
         description: '[IPv6 traffic only] The ID of an egress-only internet gateway.'
       GatewayId:
-        $ref: '#/definitions/RouteTableGatewayId'
+        $ref: '#/definitions/RouteGatewayId'
         description: The ID of an internet gateway or virtual private gateway attached to your VPC.
       InstanceId:
         $ref: '#/definitions/InstanceId'
@@ -53566,7 +53704,7 @@ definitions:
         $ref: '#/definitions/TransitGatewayId'
         description: The ID of a transit gateway.
       LocalGatewayId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/LocalGatewayId'
         description: The ID of the local gateway.
       NetworkInterfaceId:
         $ref: '#/definitions/NetworkInterfaceId'
@@ -53652,7 +53790,7 @@ definitions:
     type: object
     properties:
       InstanceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/InstanceId'
         description: The instance to specify which volumes should be snapshotted.
       ExcludeBootVolume:
         $ref: '#/definitions/Boolean'
@@ -53746,7 +53884,7 @@ definitions:
   ResourceIdList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/TaggableResourceId'
   CreateTagsRequest:
     type: object
     required:
@@ -53799,8 +53937,6 @@ definitions:
         $ref: '#/definitions/TagList'
         description: The tags assigned to the Traffic Mirror filter.
     description: Describes the Traffic Mirror filter.
-  TrafficMirrorFilterId:
-    type: string
   TrafficDirection:
     type: string
     enum:
@@ -53904,8 +54040,6 @@ definitions:
         $ref: '#/definitions/String'
         description: The description of the Traffic Mirror rule.
     description: Describes the Traffic Mirror rule.
-  TrafficMirrorTargetId:
-    type: string
   CreateTrafficMirrorSessionRequest:
     type: object
     required:
@@ -54030,7 +54164,7 @@ definitions:
       - TransitGatewayId
     properties:
       TransitGatewayId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayId'
         description: The ID of the transit gateway.
       TagSpecifications:
         $ref: '#/definitions/TagSpecificationList'
@@ -54066,7 +54200,7 @@ definitions:
       - PeerRegion
     properties:
       TransitGatewayId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayId'
         description: The ID of the transit gateway.
       PeerTransitGatewayId:
         $ref: '#/definitions/String'
@@ -54161,10 +54295,10 @@ definitions:
         $ref: '#/definitions/String'
         description: The CIDR range used for destination matches. Routing decisions are based on the most specific match.
       TransitGatewayRouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayRouteTableId'
         description: The ID of the transit gateway route table.
       TransitGatewayAttachmentId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayAttachmentId'
         description: The ID of the attachment.
       Blackhole:
         $ref: '#/definitions/Boolean'
@@ -54194,7 +54328,7 @@ definitions:
       - TransitGatewayId
     properties:
       TransitGatewayId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayId'
         description: The ID of the transit gateway.
       TagSpecifications:
         $ref: '#/definitions/TagSpecificationList'
@@ -54227,6 +54361,10 @@ definitions:
         $ref: '#/definitions/TagList'
         description: Any tags assigned to the route table.
     description: Describes a transit gateway route table.
+  TransitGatewaySubnetIdList:
+    type: array
+    items:
+      $ref: '#/definitions/SubnetId'
   CreateTransitGatewayVpcAttachmentRequestOptions:
     type: object
     properties:
@@ -54245,13 +54383,13 @@ definitions:
       - SubnetIds
     properties:
       TransitGatewayId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayId'
         description: The ID of the transit gateway.
       VpcId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpcId'
         description: The ID of the VPC.
       SubnetIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/TransitGatewaySubnetIdList'
         description: 'The IDs of one or more subnets. You can specify only one subnet per Availability Zone. You must specify at least one subnet, but we recommend that you specify two subnets for better availability. The transit gateway uses one IP address from each specified subnet.'
       Options:
         $ref: '#/definitions/CreateTransitGatewayVpcAttachmentRequestOptions'
@@ -54276,8 +54414,6 @@ definitions:
         $ref: '#/definitions/CreateVolumePermissionList'
         description: Removes the specified AWS account ID or group from the list.
     description: Describes modifications to the list of create volume permissions for a volume.
-  SnapshotId:
-    type: string
   VolumeType:
     type: string
     enum:
@@ -54324,8 +54460,6 @@ definitions:
       MultiAttachEnabled:
         $ref: '#/definitions/Boolean'
         description: 'Specifies whether to enable Amazon EBS Multi-Attach. If you enable Multi-Attach, you can attach the volume to up to 16 <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances">Nitro-based instances</a> in the same Availability Zone. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volumes-multi.html"> Amazon EBS Multi-Attach</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
-  VpcEndpointId:
-    type: string
   CreateVpcEndpointConnectionNotificationRequest:
     type: object
     required:
@@ -54336,7 +54470,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       ServiceId:
-        $ref: '#/definitions/ServiceId'
+        $ref: '#/definitions/VpcEndpointServiceId'
         description: The ID of the endpoint service.
       VpcEndpointId:
         $ref: '#/definitions/VpcEndpointId'
@@ -54355,6 +54489,18 @@ definitions:
     enum:
       - Interface
       - Gateway
+  VpcEndpointRouteTableIdList:
+    type: array
+    items:
+      $ref: '#/definitions/RouteTableId'
+  VpcEndpointSubnetIdList:
+    type: array
+    items:
+      $ref: '#/definitions/SubnetId'
+  VpcEndpointSecurityGroupIdList:
+    type: array
+    items:
+      $ref: '#/definitions/SecurityGroupId'
   CreateVpcEndpointRequest:
     type: object
     required:
@@ -54377,13 +54523,13 @@ definitions:
         $ref: '#/definitions/String'
         description: 'A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON format. If this parameter is not specified, we attach a default policy that allows full access to the service.'
       RouteTableIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/VpcEndpointRouteTableIdList'
         description: (Gateway endpoint) One or more route table IDs.
       SubnetIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/VpcEndpointSubnetIdList'
         description: (Interface endpoint) The ID of one or more subnets in which to create an endpoint network interface.
       SecurityGroupIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/VpcEndpointSecurityGroupIdList'
         description: (Interface endpoint) The ID of one or more security groups to associate with the endpoint network interface.
       ClientToken:
         $ref: '#/definitions/String'
@@ -54543,7 +54689,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IP addresses, or the size of the CIDR block.'
       Ipv6Pool:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/Ipv6PoolEc2Id'
         description: The ID of an IPv6 address pool from which to allocate the IPv6 CIDR block.
       Ipv6CidrBlock:
         $ref: '#/definitions/String'
@@ -54557,8 +54703,6 @@ definitions:
       Ipv6CidrBlockNetworkBorderGroup:
         $ref: '#/definitions/String'
         description: <p>The name of the location from which we advertise the IPV6 CIDR block. Use this parameter to limit the address to this location.</p> <p> You must set <code>AmazonProvidedIpv6CidrBlock</code> to <code>true</code> to use this parameter.</p>
-  CustomerGatewayId:
-    type: string
   VpnConnectionOptionsSpecification:
     type: object
     properties:
@@ -54637,8 +54781,6 @@ definitions:
         $ref: '#/definitions/VgwTelemetryList'
         description: Information about the VPN tunnel.
     description: Describes a VPN connection.
-  VpnConnectionId:
-    type: string
   CreateVpnConnectionRouteRequest:
     type: object
     required:
@@ -54707,7 +54849,7 @@ definitions:
   CustomerGatewayIdStringList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/CustomerGatewayId'
   CustomerGatewayList:
     type: array
     items:
@@ -54768,8 +54910,6 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
     description: Contains the parameters for DeleteCustomerGateway.
-  DhcpOptionsId:
-    type: string
   DeleteDhcpOptionsRequest:
     type: object
     required:
@@ -54869,6 +55009,10 @@ definitions:
       TerminateInstances:
         $ref: '#/definitions/Boolean'
         description: Indicates whether to terminate instances for an EC2 Fleet if it is deleted successfully.
+  FlowLogIdList:
+    type: array
+    items:
+      $ref: '#/definitions/VpcFlowLogId'
   DeleteFlowLogsRequest:
     type: object
     required:
@@ -54878,10 +55022,8 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       FlowLogIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/FlowLogIdList'
         description: '<p>One or more flow log IDs.</p> <p>Constraint: Maximum of 1000 flow log IDs.</p>'
-  FpgaImageId:
-    type: string
   DeleteFpgaImageRequest:
     type: object
     required:
@@ -55005,7 +55147,7 @@ definitions:
         $ref: '#/definitions/String'
         description: The CIDR range for the route. This must match the CIDR for the route exactly.
       LocalGatewayRouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/LocalGatewayRoutetableId'
         description: The ID of the local gateway route table.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -55016,7 +55158,7 @@ definitions:
       - LocalGatewayRouteTableVpcAssociationId
     properties:
       LocalGatewayRouteTableVpcAssociationId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/LocalGatewayRouteTableVpcAssociationId'
         description: The ID of the association.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -55065,7 +55207,7 @@ definitions:
       - NetworkInterfacePermissionId
     properties:
       NetworkInterfacePermissionId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/NetworkInterfacePermissionId'
         description: The ID of the network interface permission.
       Force:
         $ref: '#/definitions/Boolean'
@@ -55095,7 +55237,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       GroupName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/PlacementGroupName'
         description: The name of the placement group.
   DeleteQueuedReservedInstancesErrorCode:
     type: string
@@ -55116,7 +55258,7 @@ definitions:
   DeleteQueuedReservedInstancesIdList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/ReservationId'
     minItems: 1
     maxItems: 100
   DeleteQueuedReservedInstancesRequest:
@@ -55164,16 +55306,16 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       RouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/RouteTableId'
         description: The ID of the route table.
   DeleteSecurityGroupRequest:
     type: object
     properties:
       GroupId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SecurityGroupId'
         description: The ID of the security group. Required for a nondefault VPC.
       GroupName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SecurityGroupName'
         description: '[EC2-Classic, default VPC] The name of the security group. You can specify either the security group name or the security group ID.'
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -55245,8 +55387,6 @@ definitions:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
-  TrafficMirrorSessionId:
-    type: string
   DeleteTrafficMirrorSessionRequest:
     type: object
     required:
@@ -55275,7 +55415,7 @@ definitions:
       - TransitGatewayMulticastDomainId
     properties:
       TransitGatewayMulticastDomainId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayMulticastDomainId'
         description: The ID of the transit gateway multicast domain.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -55286,7 +55426,7 @@ definitions:
       - TransitGatewayAttachmentId
     properties:
       TransitGatewayAttachmentId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayAttachmentId'
         description: The ID of the transit gateway peering attachment.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -55297,7 +55437,7 @@ definitions:
       - TransitGatewayId
     properties:
       TransitGatewayId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayId'
         description: The ID of the transit gateway.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -55309,7 +55449,7 @@ definitions:
       - DestinationCidrBlock
     properties:
       TransitGatewayRouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayRouteTableId'
         description: The ID of the transit gateway route table.
       DestinationCidrBlock:
         $ref: '#/definitions/String'
@@ -55323,7 +55463,7 @@ definitions:
       - TransitGatewayRouteTableId
     properties:
       TransitGatewayRouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayRouteTableId'
         description: The ID of the transit gateway route table.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -55334,7 +55474,7 @@ definitions:
       - TransitGatewayAttachmentId
     properties:
       TransitGatewayAttachmentId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayAttachmentId'
         description: The ID of the attachment.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -55361,6 +55501,10 @@ definitions:
       ConnectionNotificationIds:
         $ref: '#/definitions/ValueStringList'
         description: One or more notification IDs.
+  VpcEndpointServiceIdList:
+    type: array
+    items:
+      $ref: '#/definitions/VpcEndpointServiceId'
   DeleteVpcEndpointServiceConfigurationsRequest:
     type: object
     required:
@@ -55370,7 +55514,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       ServiceIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/VpcEndpointServiceIdList'
         description: The IDs of one or more services.
   DeleteVpcEndpointsRequest:
     type: object
@@ -55381,7 +55525,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       VpcEndpointIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/VpcEndpointIdList'
         description: One or more VPC endpoint IDs.
     description: Contains the parameters for DeleteVpcEndpoints.
   DeleteVpcPeeringConnectionRequest:
@@ -55454,8 +55598,6 @@ definitions:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
-  ImageId:
-    type: string
   DeregisterImageRequest:
     type: object
     required:
@@ -55468,17 +55610,21 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
     description: Contains the parameters for DeregisterImage.
+  TransitGatewayNetworkInterfaceIdList:
+    type: array
+    items:
+      $ref: '#/definitions/NetworkInterfaceId'
   DeregisterTransitGatewayMulticastGroupMembersRequest:
     type: object
     properties:
       TransitGatewayMulticastDomainId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayMulticastDomainId'
         description: The ID of the transit gateway multicast domain.
       GroupIpAddress:
         $ref: '#/definitions/String'
         description: The IP address assigned to the transit gateway multicast group.
       NetworkInterfaceIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/TransitGatewayNetworkInterfaceIdList'
         description: The IDs of the group members' network interfaces.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -55500,13 +55646,13 @@ definitions:
     type: object
     properties:
       TransitGatewayMulticastDomainId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayMulticastDomainId'
         description: The ID of the transit gateway multicast domain.
       GroupIpAddress:
         $ref: '#/definitions/String'
         description: The IP address assigned to the transit gateway multicast group.
       NetworkInterfaceIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/TransitGatewayNetworkInterfaceIdList'
         description: The IDs of the group sources' network interfaces.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -55653,7 +55799,7 @@ definitions:
   InstanceIdStringList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/InstanceId'
   DescribeClassicLinkInstancesRequest:
     type: object
     properties:
@@ -55682,7 +55828,7 @@ definitions:
       - ClientVpnEndpointId
     properties:
       ClientVpnEndpointId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ClientVpnEndpointId'
         description: The ID of the Client VPN endpoint.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -55706,7 +55852,7 @@ definitions:
       - ClientVpnEndpointId
     properties:
       ClientVpnEndpointId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ClientVpnEndpointId'
         description: The ID of the Client VPN endpoint.
       Filters:
         $ref: '#/definitions/FilterList'
@@ -55728,7 +55874,7 @@ definitions:
     type: object
     properties:
       ClientVpnEndpointIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/ClientVpnEndpointIdList'
         description: The ID of the Client VPN endpoint.
       MaxResults:
         $ref: '#/definitions/DescribeClientVpnEndpointMaxResults'
@@ -55756,7 +55902,7 @@ definitions:
       - ClientVpnEndpointId
     properties:
       ClientVpnEndpointId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ClientVpnEndpointId'
         description: The ID of the Client VPN endpoint.
       Filters:
         $ref: '#/definitions/FilterList'
@@ -55780,7 +55926,7 @@ definitions:
       - ClientVpnEndpointId
     properties:
       ClientVpnEndpointId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ClientVpnEndpointId'
         description: The ID of the Client VPN endpoint.
       AssociationIds:
         $ref: '#/definitions/ValueStringList'
@@ -55852,7 +55998,7 @@ definitions:
   DhcpOptionsIdStringList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/DhcpOptionsId'
   DescribeDhcpOptionsRequest:
     type: object
     properties:
@@ -55912,7 +56058,7 @@ definitions:
   ElasticGpuIdSet:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/ElasticGpuId'
   DescribeElasticGpusRequest:
     type: object
     properties:
@@ -55942,7 +56088,7 @@ definitions:
   ExportImageTaskIdList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/ExportImageTaskId'
   DescribeExportImageTasksRequest:
     type: object
     properties:
@@ -56182,7 +56328,7 @@ definitions:
         $ref: '#/definitions/FilterList'
         description: '<p>One or more filters.</p> <ul> <li> <p> <code>deliver-log-status</code> - The status of the logs delivery (<code>SUCCESS</code> | <code>FAILED</code>).</p> </li> <li> <p> <code>log-destination-type</code> - The type of destination to which the flow log publishes data. Possible destination types include <code>cloud-watch-logs</code> and <code>S3</code>.</p> </li> <li> <p> <code>flow-log-id</code> - The ID of the flow log.</p> </li> <li> <p> <code>log-group-name</code> - The name of the log group.</p> </li> <li> <p> <code>resource-id</code> - The ID of the VPC, subnet, or network interface.</p> </li> <li> <p> <code>traffic-type</code> - The type of traffic (<code>ACCEPT</code> | <code>REJECT</code> | <code>ALL</code>).</p> </li> </ul>'
       FlowLogIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/FlowLogIdList'
         description: '<p>One or more flow log IDs.</p> <p>Constraint: Maximum of 1000 flow log IDs.</p>'
       MaxResults:
         $ref: '#/definitions/Integer'
@@ -56211,7 +56357,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       FpgaImageId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/FpgaImageId'
         description: The ID of the AFI.
       Attribute:
         $ref: '#/definitions/FpgaImageAttributeName'
@@ -56242,7 +56388,7 @@ definitions:
   FpgaImageIdList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/FpgaImageId'
   OwnerStringList:
     type: array
     items:
@@ -56276,6 +56422,8 @@ definitions:
     type: integer
     minimum: 5
     maximum: 500
+  OfferingId:
+    type: string
   DescribeHostReservationOfferingsRequest:
     type: object
     properties:
@@ -56295,7 +56443,7 @@ definitions:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results.
       OfferingId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/OfferingId'
         description: The ID of the reservation offering.
   HostOfferingSet:
     type: array
@@ -56304,7 +56452,7 @@ definitions:
   HostReservationIdSet:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/HostReservationId'
   DescribeHostReservationsRequest:
     type: object
     properties:
@@ -56327,7 +56475,7 @@ definitions:
   RequestHostIdList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/DedicatedHostId'
   DescribeHostsRequest:
     type: object
     properties:
@@ -56407,7 +56555,7 @@ definitions:
         $ref: '#/definitions/ImageAttributeName'
         description: '<p>The AMI attribute.</p> <p> <b>Note</b>: Depending on your account privileges, the <code>blockDeviceMapping</code> attribute may return a <code>Client.AuthFailure</code> error. If this happens, use <a>DescribeImages</a> to get information about the block device mapping for the AMI.</p>'
       ImageId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ImageId'
         description: The ID of the AMI.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -56420,7 +56568,7 @@ definitions:
   ImageIdStringList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/ImageId'
   DescribeImagesRequest:
     type: object
     properties:
@@ -56446,7 +56594,7 @@ definitions:
   ImportTaskIdList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/ImportImageTaskId'
   DescribeImportImageTasksRequest:
     type: object
     properties:
@@ -56469,6 +56617,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ImportImageTask'
+  ImportSnapshotTaskIdList:
+    type: array
+    items:
+      $ref: '#/definitions/ImportSnapshotTaskId'
   DescribeImportSnapshotTasksRequest:
     type: object
     properties:
@@ -56479,7 +56631,7 @@ definitions:
         $ref: '#/definitions/FilterList'
         description: The filters.
       ImportTaskIds:
-        $ref: '#/definitions/ImportTaskIdList'
+        $ref: '#/definitions/ImportSnapshotTaskIdList'
         description: A list of import snapshot task IDs.
       MaxResults:
         $ref: '#/definitions/Integer'
@@ -56521,7 +56673,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       InstanceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/InstanceId'
         description: The ID of the instance.
   DescribeInstanceCreditSpecificationsMaxResults:
     type: integer
@@ -56655,6 +56807,10 @@ definitions:
     type: integer
     minimum: 5
     maximum: 1000
+  InternetGatewayIdList:
+    type: array
+    items:
+      $ref: '#/definitions/InternetGatewayId'
   DescribeInternetGatewaysRequest:
     type: object
     properties:
@@ -56665,7 +56821,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       InternetGatewayIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/InternetGatewayIdList'
         description: '<p>One or more internet gateway IDs.</p> <p>Default: Describes all your internet gateways.</p>'
       NextToken:
         $ref: '#/definitions/String'
@@ -56677,6 +56833,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/InternetGateway'
+  Ipv6PoolIdList:
+    type: array
+    items:
+      $ref: '#/definitions/Ipv6PoolEc2Id'
   Ipv6PoolMaxResults:
     type: integer
     minimum: 1
@@ -56685,7 +56845,7 @@ definitions:
     type: object
     properties:
       PoolIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/Ipv6PoolIdList'
         description: The IDs of the IPv6 address pools.
       NextToken:
         $ref: '#/definitions/NextToken'
@@ -56706,11 +56866,11 @@ definitions:
   KeyNameStringList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/KeyPairName'
   KeyPairIdStringList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/KeyPairId'
   DescribeKeyPairsRequest:
     type: object
     properties:
@@ -56737,7 +56897,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       LaunchTemplateId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/LaunchTemplateId'
         description: The ID of the launch template. You must specify either the launch template ID or launch template name in the request.
       LaunchTemplateName:
         $ref: '#/definitions/LaunchTemplateName'
@@ -56768,6 +56928,10 @@ definitions:
     type: integer
     minimum: 1
     maximum: 200
+  LaunchTemplateIdStringList:
+    type: array
+    items:
+      $ref: '#/definitions/LaunchTemplateId'
   LaunchTemplateNameStringList:
     type: array
     items:
@@ -56779,7 +56943,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       LaunchTemplateIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/LaunchTemplateIdStringList'
         description: One or more launch template IDs.
       LaunchTemplateNames:
         $ref: '#/definitions/LaunchTemplateNameStringList'
@@ -56800,7 +56964,7 @@ definitions:
   LocalGatewayRouteTableVirtualInterfaceGroupAssociationIdSet:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/LocalGatewayRouteTableVirtualInterfaceGroupAssociationId'
   LocalGatewayMaxResults:
     type: integer
     minimum: 5
@@ -56830,7 +56994,7 @@ definitions:
   LocalGatewayRouteTableVpcAssociationIdSet:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/LocalGatewayRouteTableVpcAssociationId'
   DescribeLocalGatewayRouteTableVpcAssociationsRequest:
     type: object
     properties:
@@ -56856,7 +57020,7 @@ definitions:
   LocalGatewayRouteTableIdSet:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/LocalGatewayRoutetableId'
   DescribeLocalGatewayRouteTablesRequest:
     type: object
     properties:
@@ -56882,7 +57046,7 @@ definitions:
   LocalGatewayVirtualInterfaceGroupIdSet:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/LocalGatewayVirtualInterfaceGroupId'
   DescribeLocalGatewayVirtualInterfaceGroupsRequest:
     type: object
     properties:
@@ -56908,7 +57072,7 @@ definitions:
   LocalGatewayVirtualInterfaceIdSet:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/LocalGatewayVirtualInterfaceId'
   DescribeLocalGatewayVirtualInterfacesRequest:
     type: object
     properties:
@@ -56934,7 +57098,7 @@ definitions:
   LocalGatewayIdSet:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/LocalGatewayId'
   DescribeLocalGatewaysRequest:
     type: object
     properties:
@@ -56987,6 +57151,10 @@ definitions:
     type: integer
     minimum: 5
     maximum: 1000
+  NatGatewayIdStringList:
+    type: array
+    items:
+      $ref: '#/definitions/NatGatewayId'
   DescribeNatGatewaysRequest:
     type: object
     properties:
@@ -56997,7 +57165,7 @@ definitions:
         $ref: '#/definitions/DescribeNatGatewaysMaxResults'
         description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
       NatGatewayIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/NatGatewayIdStringList'
         description: One or more NAT gateway IDs.
       NextToken:
         $ref: '#/definitions/String'
@@ -57010,6 +57178,10 @@ definitions:
     type: integer
     minimum: 5
     maximum: 1000
+  NetworkAclIdStringList:
+    type: array
+    items:
+      $ref: '#/definitions/NetworkAclId'
   DescribeNetworkAclsRequest:
     type: object
     properties:
@@ -57020,7 +57192,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       NetworkAclIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/NetworkAclIdStringList'
         description: '<p>One or more network ACL IDs.</p> <p>Default: Describes all your network ACLs.</p>'
       NextToken:
         $ref: '#/definitions/String'
@@ -57051,7 +57223,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       NetworkInterfaceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/NetworkInterfaceId'
         description: The ID of the network interface.
     description: Contains the parameters for DescribeNetworkInterfaceAttribute.
   NetworkInterfaceAttachment:
@@ -57086,7 +57258,7 @@ definitions:
   NetworkInterfacePermissionIdList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/NetworkInterfacePermissionId'
   DescribeNetworkInterfacePermissionsRequest:
     type: object
     properties:
@@ -57114,7 +57286,7 @@ definitions:
   NetworkInterfaceIdList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/NetworkInterfaceId'
   DescribeNetworkInterfacesRequest:
     type: object
     properties:
@@ -57141,11 +57313,11 @@ definitions:
   PlacementGroupStringList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/PlacementGroupName'
   PlacementGroupIdStringList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/PlacementGroupId'
   DescribePlacementGroupsRequest:
     type: object
     properties:
@@ -57165,6 +57337,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/PlacementGroup'
+  PrefixListResourceIdStringList:
+    type: array
+    items:
+      $ref: '#/definitions/PrefixListResourceId'
   DescribePrefixListsRequest:
     type: object
     properties:
@@ -57181,7 +57357,7 @@ definitions:
         $ref: '#/definitions/String'
         description: The token for the next page of results.
       PrefixListIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/PrefixListResourceIdStringList'
         description: One or more prefix list IDs.
   PrefixListSet:
     type: array
@@ -57214,6 +57390,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/PrincipalIdFormat'
+  PublicIpv4PoolIdStringList:
+    type: array
+    items:
+      $ref: '#/definitions/Ipv4PoolEc2Id'
   PoolMaxResults:
     type: integer
     minimum: 1
@@ -57222,7 +57402,7 @@ definitions:
     type: object
     properties:
       PoolIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/PublicIpv4PoolIdStringList'
         description: The IDs of the address pools.
       NextToken:
         $ref: '#/definitions/NextToken'
@@ -57267,16 +57447,16 @@ definitions:
         $ref: '#/definitions/FilterList'
         description: <p>One or more filters.</p> <ul> <li> <p> <code>reserved-instances-id</code> - The ID of the Reserved Instances.</p> </li> <li> <p> <code>reserved-instances-listing-id</code> - The ID of the Reserved Instances listing.</p> </li> <li> <p> <code>status</code> - The status of the Reserved Instance listing (<code>pending</code> | <code>active</code> | <code>cancelled</code> | <code>closed</code>).</p> </li> <li> <p> <code>status-message</code> - The reason for the status.</p> </li> </ul>
       ReservedInstancesId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ReservationId'
         description: One or more Reserved Instance IDs.
       ReservedInstancesListingId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ReservedInstancesListingId'
         description: One or more Reserved Instance listing IDs.
     description: Contains the parameters for DescribeReservedInstancesListings.
   ReservedInstancesModificationIdStringList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/ReservedInstancesModificationId'
   DescribeReservedInstancesModificationsRequest:
     type: object
     properties:
@@ -57309,7 +57489,7 @@ definitions:
   ReservedInstancesOfferingIdStringList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/ReservedInstancesOfferingId'
   OfferingTypeValues:
     type: string
     enum:
@@ -57375,7 +57555,7 @@ definitions:
   ReservedInstancesIdStringList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/ReservationId'
   DescribeReservedInstancesRequest:
     type: object
     properties:
@@ -57403,6 +57583,10 @@ definitions:
     type: integer
     minimum: 5
     maximum: 100
+  RouteTableIdStringList:
+    type: array
+    items:
+      $ref: '#/definitions/RouteTableId'
   DescribeRouteTablesRequest:
     type: object
     properties:
@@ -57413,7 +57597,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       RouteTableIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/RouteTableIdStringList'
         description: '<p>One or more route table IDs.</p> <p>Default: Describes all your route tables.</p>'
       NextToken:
         $ref: '#/definitions/String'
@@ -57499,7 +57683,7 @@ definitions:
   ScheduledInstanceIdRequestSet:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/ScheduledInstanceId'
   SlotStartTimeRangeRequest:
     type: object
     properties:
@@ -57539,7 +57723,7 @@ definitions:
   GroupIds:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/SecurityGroupId'
   DescribeSecurityGroupReferencesRequest:
     type: object
     required:
@@ -57562,7 +57746,7 @@ definitions:
   GroupNameStringList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/SecurityGroupName'
   DescribeSecurityGroupsRequest:
     type: object
     properties:
@@ -57603,7 +57787,7 @@ definitions:
         $ref: '#/definitions/SnapshotAttributeName'
         description: The snapshot attribute you would like to view.
       SnapshotId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SnapshotId'
         description: The ID of the EBS snapshot.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -57619,7 +57803,7 @@ definitions:
   SnapshotIdStringList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/SnapshotId'
   DescribeSnapshotsRequest:
     type: object
     properties:
@@ -57674,7 +57858,7 @@ definitions:
         $ref: '#/definitions/String'
         description: The token for the next set of results.
       SpotFleetRequestId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SpotFleetRequestId'
         description: The ID of the Spot Fleet request.
     description: Contains the parameters for DescribeSpotFleetInstances.
   DescribeSpotFleetRequestHistoryMaxResults:
@@ -57707,7 +57891,7 @@ definitions:
         $ref: '#/definitions/String'
         description: The token for the next set of results.
       SpotFleetRequestId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SpotFleetRequestId'
         description: The ID of the Spot Fleet request.
       StartTime:
         $ref: '#/definitions/DateTime'
@@ -57730,7 +57914,7 @@ definitions:
         $ref: '#/definitions/String'
         description: The token for the next set of results.
       SpotFleetRequestIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/SpotFleetRequestIdList'
         description: The IDs of the Spot Fleet requests.
     description: Contains the parameters for DescribeSpotFleetRequests.
   SpotFleetRequestConfigSet:
@@ -57839,7 +58023,7 @@ definitions:
   SubnetIdStringList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/SubnetId'
   DescribeSubnetsRequest:
     type: object
     properties:
@@ -57881,6 +58065,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/TagDescription'
+  TrafficMirrorFilterIdList:
+    type: array
+    items:
+      $ref: '#/definitions/TrafficMirrorFilterId'
   TrafficMirroringMaxResults:
     type: integer
     minimum: 5
@@ -57889,7 +58077,7 @@ definitions:
     type: object
     properties:
       TrafficMirrorFilterIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/TrafficMirrorFilterIdList'
         description: The ID of the Traffic Mirror filter.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -57907,11 +58095,15 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/TrafficMirrorFilter'
+  TrafficMirrorSessionIdList:
+    type: array
+    items:
+      $ref: '#/definitions/TrafficMirrorSessionId'
   DescribeTrafficMirrorSessionsRequest:
     type: object
     properties:
       TrafficMirrorSessionIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/TrafficMirrorSessionIdList'
         description: The ID of the Traffic Mirror session.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -57929,11 +58121,15 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/TrafficMirrorSession'
+  TrafficMirrorTargetIdList:
+    type: array
+    items:
+      $ref: '#/definitions/TrafficMirrorTargetId'
   DescribeTrafficMirrorTargetsRequest:
     type: object
     properties:
       TrafficMirrorTargetIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/TrafficMirrorTargetIdList'
         description: The ID of the Traffic Mirror targets.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -57954,7 +58150,7 @@ definitions:
   TransitGatewayAttachmentIdStringList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/TransitGatewayAttachmentId'
   TransitGatewayMaxResults:
     type: integer
     minimum: 5
@@ -58080,7 +58276,7 @@ definitions:
   TransitGatewayIdStringList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/TransitGatewayId'
   DescribeTransitGatewaysRequest:
     type: object
     properties:
@@ -58224,7 +58420,7 @@ definitions:
   VpcClassicLinkIdList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/VpcId'
   DescribeVpcClassicLinkDnsSupportRequest:
     type: object
     properties:
@@ -58260,7 +58456,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       ConnectionNotificationId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ConnectionNotificationId'
         description: The ID of the notification.
       Filters:
         $ref: '#/definitions/FilterList'
@@ -58297,7 +58493,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       ServiceIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/VpcEndpointServiceIdList'
         description: The IDs of one or more services.
       Filters:
         $ref: '#/definitions/FilterList'
@@ -58321,7 +58517,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       ServiceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpcEndpointServiceId'
         description: The ID of the service.
       Filters:
         $ref: '#/definitions/FilterList'
@@ -58362,7 +58558,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       VpcEndpointIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/VpcEndpointIdList'
         description: One or more endpoint IDs.
       Filters:
         $ref: '#/definitions/FilterList'
@@ -58382,6 +58578,10 @@ definitions:
     type: integer
     minimum: 5
     maximum: 1000
+  VpcPeeringConnectionIdList:
+    type: array
+    items:
+      $ref: '#/definitions/VpcPeeringConnectionId'
   DescribeVpcPeeringConnectionsRequest:
     type: object
     properties:
@@ -58392,7 +58592,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       VpcPeeringConnectionIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/VpcPeeringConnectionIdList'
         description: '<p>One or more VPC peering connection IDs.</p> <p>Default: Describes all your VPC peering connections.</p>'
       NextToken:
         $ref: '#/definitions/String'
@@ -58411,7 +58611,7 @@ definitions:
   VpcIdStringList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/VpcId'
   DescribeVpcsRequest:
     type: object
     properties:
@@ -58437,7 +58637,7 @@ definitions:
   VpnConnectionIdStringList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/VpnConnectionId'
   DescribeVpnConnectionsRequest:
     type: object
     properties:
@@ -58458,7 +58658,7 @@ definitions:
   VpnGatewayIdStringList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/VpnGatewayId'
   DescribeVpnGatewaysRequest:
     type: object
     properties:
@@ -58506,8 +58706,6 @@ definitions:
       VpcId:
         $ref: '#/definitions/VpcId'
         description: The ID of the VPC.
-  NetworkInterfaceAttachmentId:
-    type: string
   DetachNetworkInterfaceRequest:
     type: object
     required:
@@ -58689,10 +58887,10 @@ definitions:
       - TransitGatewayAttachmentId
     properties:
       TransitGatewayRouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayRouteTableId'
         description: The ID of the propagation route table.
       TransitGatewayAttachmentId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayAttachmentId'
         description: The ID of the attachment.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -58701,7 +58899,7 @@ definitions:
     type: object
     properties:
       TransitGatewayAttachmentId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayAttachmentId'
         description: The ID of the attachment.
       ResourceId:
         $ref: '#/definitions/String'
@@ -58728,6 +58926,8 @@ definitions:
       RouteTableId:
         $ref: '#/definitions/RouteTableId'
         description: The ID of the route table.
+      DryRun:
+        $ref: '#/definitions/Boolean'
     description: Contains the parameters for DisableVgwRoutePropagation.
   DisableVpcClassicLinkDnsSupportRequest:
     type: object
@@ -58781,7 +58981,7 @@ definitions:
       - AssociationId
     properties:
       AssociationId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/IamInstanceProfileAssociationId'
         description: The ID of the IAM instance profile association.
   RouteTableAssociationId:
     type: string
@@ -58810,10 +59010,10 @@ definitions:
     type: object
     properties:
       TransitGatewayMulticastDomainId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayMulticastDomainId'
         description: The ID of the transit gateway multicast domain.
       TransitGatewayAttachmentId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayAttachmentId'
         description: The ID of the attachment.
       SubnetIds:
         $ref: '#/definitions/ValueStringList'
@@ -58828,10 +59028,10 @@ definitions:
       - TransitGatewayAttachmentId
     properties:
       TransitGatewayRouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayRouteTableId'
         description: The ID of the transit gateway route table.
       TransitGatewayAttachmentId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayAttachmentId'
         description: The ID of the attachment.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -59225,10 +59425,10 @@ definitions:
       - TransitGatewayAttachmentId
     properties:
       TransitGatewayRouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayRouteTableId'
         description: The ID of the propagation route table.
       TransitGatewayAttachmentId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayAttachmentId'
         description: The ID of the attachment.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -59245,6 +59445,8 @@ definitions:
       RouteTableId:
         $ref: '#/definitions/RouteTableId'
         description: 'The ID of the route table. The routing table must be associated with the same VPC that the virtual private gateway is attached to. '
+      DryRun:
+        $ref: '#/definitions/Boolean'
     description: Contains the parameters for EnableVgwRoutePropagation.
   EnableVolumeIORequest:
     type: object
@@ -59432,7 +59634,7 @@ definitions:
       - S3Bucket
     properties:
       TransitGatewayRouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayRouteTableId'
         description: The ID of the route table.
       Filters:
         $ref: '#/definitions/FilterList'
@@ -59622,7 +59824,7 @@ definitions:
     type: object
     properties:
       LaunchTemplateId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/LaunchTemplateId'
         description: The ID of the launch template.
       LaunchTemplateName:
         $ref: '#/definitions/LaunchTemplateName'
@@ -59678,7 +59880,7 @@ definitions:
         $ref: '#/definitions/String'
         description: The maximum price per unit hour that you are willing to pay for a Spot Instance.
       SubnetId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SubnetId'
         description: 'The IDs of the subnets in which to launch the instances. Separate multiple subnet IDs using commas (for example, <code>subnet-1234abcdeexample1, subnet-0987cdef6example2</code>). A request of type <code>instant</code> can have only one subnet ID.'
       AvailabilityZone:
         $ref: '#/definitions/String'
@@ -59880,7 +60082,7 @@ definitions:
       - PoolId
     properties:
       PoolId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/Ipv6PoolEc2Id'
         description: The ID of the IPv6 address pool.
       NextToken:
         $ref: '#/definitions/NextToken'
@@ -59926,7 +60128,7 @@ definitions:
       - PoolId
     properties:
       PoolId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/CoipPoolId'
         description: The ID of the address pool.
       Filters:
         $ref: '#/definitions/FilterList'
@@ -60011,8 +60213,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/DedicatedHostId'
-  OfferingId:
-    type: string
   GetHostReservationPurchasePreviewRequest:
     type: object
     required:
@@ -60175,7 +60375,7 @@ definitions:
       - TransitGatewayAttachmentId
     properties:
       TransitGatewayAttachmentId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayAttachmentId'
         description: The ID of the attachment.
       Filters:
         $ref: '#/definitions/FilterList'
@@ -60197,7 +60397,7 @@ definitions:
     type: object
     properties:
       TransitGatewayMulticastDomainId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayMulticastDomainId'
         description: The ID of the transit gateway multicast domain.
       Filters:
         $ref: '#/definitions/FilterList'
@@ -60221,7 +60421,7 @@ definitions:
       - TransitGatewayRouteTableId
     properties:
       TransitGatewayRouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayRouteTableId'
         description: The ID of the transit gateway route table.
       Filters:
         $ref: '#/definitions/FilterList'
@@ -60245,7 +60445,7 @@ definitions:
       - TransitGatewayRouteTableId
     properties:
       TransitGatewayRouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayRouteTableId'
         description: The ID of the transit gateway route table.
       Filters:
         $ref: '#/definitions/FilterList'
@@ -60944,7 +61144,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       KeyName:
-        $ref: '#/definitions/KeyPairName'
+        $ref: '#/definitions/String'
         description: A unique name for the key pair.
       PublicKeyMaterial:
         $ref: '#/definitions/Blob'
@@ -61919,8 +62119,6 @@ definitions:
         $ref: '#/definitions/String'
         description: '<p>A description for the security group rule that references this IPv6 address range.</p> <p>Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=&amp;;{}!$*</p>'
     description: '[EC2-VPC only] Describes an IPv6 range.'
-  KernelId:
-    type: string
   SensitiveUserData:
     type: string
     format: password
@@ -62021,10 +62219,10 @@ definitions:
         $ref: '#/definitions/Integer'
         description: 'The number of I/O operations per second (IOPS) that the volume supports. '
       KmsKeyId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/KmsKeyId'
         description: The ARN of the AWS Key Management Service (AWS KMS) CMK used for encryption.
       SnapshotId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SnapshotId'
         description: The ID of the snapshot.
       VolumeSize:
         $ref: '#/definitions/Integer'
@@ -62069,7 +62267,7 @@ definitions:
         $ref: '#/definitions/String'
         description: The ARN of the symmetric AWS Key Management Service (AWS KMS) CMK used for encryption.
       SnapshotId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SnapshotId'
         description: The ID of the snapshot.
       VolumeSize:
         $ref: '#/definitions/Integer'
@@ -62223,7 +62421,7 @@ definitions:
         $ref: '#/definitions/InstanceIpv6AddressList'
         description: The IPv6 addresses for the network interface.
       NetworkInterfaceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/NetworkInterfaceId'
         description: The ID of the network interface.
       PrivateIpAddress:
         $ref: '#/definitions/String'
@@ -62235,7 +62433,7 @@ definitions:
         $ref: '#/definitions/Integer'
         description: The number of secondary private IPv4 addresses for the network interface.
       SubnetId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SubnetId'
         description: The ID of the subnet for the network interface.
     description: Describes a network interface.
   LaunchTemplateInstanceNetworkInterfaceSpecificationList:
@@ -62307,7 +62505,7 @@ definitions:
     type: object
     properties:
       LaunchTemplateId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/LaunchTemplateId'
         description: The ID of the launch template.
       LaunchTemplateName:
         $ref: '#/definitions/String'
@@ -62418,7 +62616,7 @@ definitions:
     type: object
     properties:
       LocalGatewayId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/LocalGatewayId'
         description: The ID of the local gateway.
       OutpostArn:
         $ref: '#/definitions/String'
@@ -62457,7 +62655,7 @@ definitions:
         $ref: '#/definitions/String'
         description: The ID of the local gateway route table.
       LocalGatewayId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/LocalGatewayId'
         description: The ID of the local gateway.
       OutpostArn:
         $ref: '#/definitions/String'
@@ -62473,16 +62671,16 @@ definitions:
     type: object
     properties:
       LocalGatewayRouteTableVirtualInterfaceGroupAssociationId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/LocalGatewayRouteTableVirtualInterfaceGroupAssociationId'
         description: The ID of the association.
       LocalGatewayVirtualInterfaceGroupId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/LocalGatewayVirtualInterfaceGroupId'
         description: The ID of the virtual interface group.
       LocalGatewayId:
         $ref: '#/definitions/String'
         description: The ID of the local gateway.
       LocalGatewayRouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/LocalGatewayId'
         description: The ID of the local gateway route table.
       State:
         $ref: '#/definitions/String'
@@ -62495,7 +62693,7 @@ definitions:
     type: object
     properties:
       LocalGatewayVirtualInterfaceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/LocalGatewayVirtualInterfaceId'
         description: The ID of the virtual interface.
       LocalGatewayId:
         $ref: '#/definitions/String'
@@ -62523,7 +62721,7 @@ definitions:
     type: object
     properties:
       LocalGatewayVirtualInterfaceGroupId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/LocalGatewayVirtualInterfaceGroupId'
         description: The ID of the virtual interface group.
       LocalGatewayVirtualInterfaceIds:
         $ref: '#/definitions/LocalGatewayVirtualInterfaceIdSet'
@@ -62898,7 +63096,7 @@ definitions:
       - InstanceId
     properties:
       InstanceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/InstanceId'
         description: The ID of the instance.
       HttpTokens:
         $ref: '#/definitions/HttpTokensState'
@@ -62912,8 +63110,6 @@ definitions:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
-  PlacementGroupName:
-    type: string
   ModifyInstancePlacementRequest:
     type: object
     required:
@@ -62962,7 +63158,7 @@ definitions:
     type: object
     properties:
       AttachmentId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/NetworkInterfaceAttachmentId'
         description: The ID of the network interface attachment.
       DeleteOnTermination:
         $ref: '#/definitions/Boolean'
@@ -63038,8 +63234,6 @@ definitions:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
-  SpotFleetRequestId:
-    type: string
   ModifySpotFleetRequestRequest:
     type: object
     required:
@@ -63190,13 +63384,13 @@ definitions:
       - TransitGatewayAttachmentId
     properties:
       TransitGatewayAttachmentId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayAttachmentId'
         description: The ID of the attachment.
       AddSubnetIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/TransitGatewaySubnetIdList'
         description: The IDs of one or more subnets to add. You can specify at most one subnet per Availability Zone.
       RemoveSubnetIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/TransitGatewaySubnetIdList'
         description: The IDs of one or more subnets to remove.
       Options:
         $ref: '#/definitions/ModifyTransitGatewayVpcAttachmentRequestOptions'
@@ -63327,22 +63521,22 @@ definitions:
         $ref: '#/definitions/String'
         description: A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON format.
       AddRouteTableIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/VpcEndpointRouteTableIdList'
         description: (Gateway endpoint) One or more route tables IDs to associate with the endpoint.
       RemoveRouteTableIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/VpcEndpointRouteTableIdList'
         description: (Gateway endpoint) One or more route table IDs to disassociate from the endpoint.
       AddSubnetIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/VpcEndpointSubnetIdList'
         description: (Interface endpoint) One or more subnet IDs in which to serve the endpoint.
       RemoveSubnetIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/VpcEndpointSubnetIdList'
         description: (Interface endpoint) One or more subnets IDs in which to remove the endpoint.
       AddSecurityGroupIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/VpcEndpointSecurityGroupIdList'
         description: (Interface endpoint) One or more security group IDs to associate with the network interface.
       RemoveSecurityGroupIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/VpcEndpointSecurityGroupIdList'
         description: (Interface endpoint) One or more security group IDs to disassociate from the network interface.
       PrivateDnsEnabled:
         $ref: '#/definitions/Boolean'
@@ -63357,7 +63551,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       ServiceId:
-        $ref: '#/definitions/ServiceId'
+        $ref: '#/definitions/VpcEndpointServiceId'
         description: The ID of the service.
       PrivateDnsName:
         $ref: '#/definitions/String'
@@ -63383,7 +63577,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       ServiceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/VpcEndpointServiceId'
         description: The ID of the service.
       AddAllowedPrincipals:
         $ref: '#/definitions/ValueStringList'
@@ -64184,7 +64378,7 @@ definitions:
         $ref: '#/definitions/Integer'
         description: The number of Reserved Instances to purchase.
       ReservedInstancesOfferingId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ReservedInstancesOfferingId'
         description: The ID of the Reserved Instance offering to purchase.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -64264,8 +64458,6 @@ definitions:
         $ref: '#/definitions/Integer'
         description: The total number of hours for a single instance for the entire term.
     description: Describes a Scheduled Instance.
-  RamdiskId:
-    type: string
   ReasonCodesList:
     type: array
     items:
@@ -64361,13 +64553,13 @@ definitions:
     type: object
     properties:
       TransitGatewayMulticastDomainId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayMulticastDomainId'
         description: The ID of the transit gateway multicast domain.
       GroupIpAddress:
         $ref: '#/definitions/String'
         description: The IP address assigned to the transit gateway multicast group.
       NetworkInterfaceIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/TransitGatewayNetworkInterfaceIdList'
         description: The group members' network interface IDs to register with the transit gateway multicast group.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -64389,13 +64581,13 @@ definitions:
     type: object
     properties:
       TransitGatewayMulticastDomainId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayMulticastDomainId'
         description: The ID of the transit gateway multicast domain.
       GroupIpAddress:
         $ref: '#/definitions/String'
         description: The IP address assigned to the transit gateway multicast group.
       NetworkInterfaceIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/TransitGatewayNetworkInterfaceIdList'
         description: The group sources' network interface IDs to register with the transit gateway multicast group.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -64419,7 +64611,7 @@ definitions:
       - TransitGatewayAttachmentId
     properties:
       TransitGatewayAttachmentId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayAttachmentId'
         description: The ID of the transit gateway peering attachment.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -64430,7 +64622,7 @@ definitions:
       - TransitGatewayAttachmentId
     properties:
       TransitGatewayAttachmentId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayAttachmentId'
         description: The ID of the attachment.
       DryRun:
         $ref: '#/definitions/Boolean'
@@ -64445,10 +64637,10 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       ServiceId:
-        $ref: '#/definitions/ServiceId'
+        $ref: '#/definitions/VpcEndpointServiceId'
         description: The ID of the service.
       VpcEndpointIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/VpcEndpointIdList'
         description: The IDs of one or more VPC endpoints.
   RejectVpcPeeringConnectionRequest:
     type: object
@@ -64494,7 +64686,7 @@ definitions:
         $ref: '#/definitions/IamInstanceProfileSpecification'
         description: The IAM instance profile.
       AssociationId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/IamInstanceProfileAssociationId'
         description: The ID of the existing IAM instance profile association.
   ReplaceNetworkAclAssociationRequest:
     type: object
@@ -64568,7 +64760,7 @@ definitions:
         $ref: '#/definitions/EgressOnlyInternetGatewayId'
         description: '[IPv6 traffic only] The ID of an egress-only internet gateway.'
       GatewayId:
-        $ref: '#/definitions/RouteTableGatewayId'
+        $ref: '#/definitions/RouteGatewayId'
         description: The ID of an internet gateway or virtual private gateway.
       InstanceId:
         $ref: '#/definitions/InstanceId'
@@ -64583,7 +64775,7 @@ definitions:
         $ref: '#/definitions/TransitGatewayId'
         description: The ID of a transit gateway.
       LocalGatewayId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/LocalGatewayId'
         description: The ID of the local gateway.
       NetworkInterfaceId:
         $ref: '#/definitions/NetworkInterfaceId'
@@ -64619,10 +64811,10 @@ definitions:
         $ref: '#/definitions/String'
         description: The CIDR range used for the destination match. Routing decisions are based on the most specific match.
       TransitGatewayRouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayRouteTableId'
         description: The ID of the route table.
       TransitGatewayAttachmentId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayAttachmentId'
         description: The ID of the attachment.
       Blackhole:
         $ref: '#/definitions/Boolean'
@@ -64755,10 +64947,10 @@ definitions:
     type: object
     properties:
       SecurityGroupIds:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/RequestSpotLaunchSpecificationSecurityGroupIdList'
         description: One or more security group IDs.
       SecurityGroups:
-        $ref: '#/definitions/ValueStringList'
+        $ref: '#/definitions/RequestSpotLaunchSpecificationSecurityGroupList'
         description: 'One or more security groups. When requesting instances in a VPC, you must specify the IDs of the security groups. When requesting instances in EC2-Classic, you can specify the names or the IDs of the security groups.'
       AddressingType:
         $ref: '#/definitions/String'
@@ -64773,16 +64965,16 @@ definitions:
         $ref: '#/definitions/IamInstanceProfileSpecification'
         description: The IAM instance profile.
       ImageId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ImageId'
         description: The ID of the AMI.
       InstanceType:
         $ref: '#/definitions/InstanceType'
         description: The instance type.
       KernelId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/KernelId'
         description: The ID of the kernel.
       KeyName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/KeyPairName'
         description: The name of the key pair.
       Monitoring:
         $ref: '#/definitions/RunInstancesMonitoringEnabled'
@@ -64794,10 +64986,10 @@ definitions:
         $ref: '#/definitions/SpotPlacement'
         description: The placement information for the instance.
       RamdiskId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/RamdiskId'
         description: The ID of the RAM disk.
       SubnetId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SubnetId'
         description: 'The IDs of the subnets in which to launch the instance. To specify multiple subnets, separate them using commas; for example, "subnet-1234abcdeexample1, subnet-0987cdef6example2".'
       UserData:
         $ref: '#/definitions/String'
@@ -65194,7 +65386,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       GroupId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SecurityGroupId'
         description: The ID of the security group.
       IpPermissions:
         $ref: '#/definitions/IpPermissionList'
@@ -65227,10 +65419,10 @@ definitions:
         $ref: '#/definitions/Integer'
         description: 'The start of port range for the TCP and UDP protocols, or an ICMP type number. For the ICMP type number, use <code>-1</code> to specify all ICMP types.'
       GroupId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SecurityGroupId'
         description: 'The ID of the security group. You must specify either the security group ID or the security group name in the request. For security groups in a nondefault VPC, you must specify the security group ID.'
       GroupName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SecurityGroupName'
         description: '[EC2-Classic, default VPC] The name of the security group. You must specify either the security group ID or the security group name in the request.'
       IpPermissions:
         $ref: '#/definitions/IpPermissionList'
@@ -65375,7 +65567,7 @@ definitions:
         $ref: '#/definitions/String'
         description: '<p>The ID of the kernel.</p> <important> <p>We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html"> PV-GRUB</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> </important>'
       KeyName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/KeyPairName'
         description: '<p>The name of the key pair. You can create a key pair using <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateKeyPair.html">CreateKeyPair</a> or <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportKeyPair.html">ImportKeyPair</a>.</p> <important> <p>If you do not specify a key pair, you can''t connect to the instance unless you choose an AMI that is configured to allow users another way to log in.</p> </important>'
       MaxCount:
         $ref: '#/definitions/Integer'
@@ -65479,16 +65671,16 @@ definitions:
         $ref: '#/definitions/ScheduledInstancesIamInstanceProfile'
         description: The IAM instance profile.
       ImageId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ImageId'
         description: The ID of the Amazon Machine Image (AMI).
       InstanceType:
         $ref: '#/definitions/String'
         description: The instance type.
       KernelId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/KernelId'
         description: The ID of the kernel.
       KeyName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/KeyPairName'
         description: The name of the key pair.
       Monitoring:
         $ref: '#/definitions/ScheduledInstancesMonitoring'
@@ -65500,20 +65692,18 @@ definitions:
         $ref: '#/definitions/ScheduledInstancesPlacement'
         description: The placement information.
       RamdiskId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/RamdiskId'
         description: The ID of the RAM disk.
       SecurityGroupIds:
         $ref: '#/definitions/ScheduledInstancesSecurityGroupIdSet'
         description: The IDs of the security groups.
       SubnetId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SubnetId'
         description: The ID of the subnet in which to launch the instances.
       UserData:
         $ref: '#/definitions/String'
         description: The base64-encoded MIME user data.
     description: '<p>Describes the launch specification for a Scheduled Instance.</p> <p>If you are launching the Scheduled Instance in EC2-VPC, you must specify the ID of the subnet. You can specify the subnet using either <code>SubnetId</code> or <code>NetworkInterface</code>.</p>'
-  ScheduledInstanceId:
-    type: string
   RunScheduledInstancesRequest:
     type: object
     required:
@@ -65611,7 +65801,7 @@ definitions:
         $ref: '#/definitions/Integer'
         description: '<p>The number of I/O operations per second (IOPS) that the volume supports. For io1 volumes, this represents the number of IOPS that are provisioned for the volume. For <code>gp2</code> volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information about <code>gp2</code> baseline performance, I/O credits, and bursting, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Constraint: Range is 100-20000 IOPS for <code>io1</code> volumes and 100-10000 IOPS for <code>gp2</code> volumes.</p> <p>Condition: This parameter is required for requests to create <code>io1</code>volumes; it is not used in requests to create <code>gp2</code>, <code>st1</code>, <code>sc1</code>, or <code>standard</code> volumes.</p>'
       SnapshotId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SnapshotId'
         description: The ID of the snapshot.
       VolumeSize:
         $ref: '#/definitions/Integer'
@@ -65638,7 +65828,7 @@ definitions:
       - Filters
     properties:
       LocalGatewayRouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/LocalGatewayRoutetableId'
         description: The ID of the local gateway route table.
       Filters:
         $ref: '#/definitions/FilterList'
@@ -65656,7 +65846,7 @@ definitions:
     type: object
     properties:
       TransitGatewayMulticastDomainId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayMulticastDomainId'
         description: The ID of the transit gateway multicast domain.
       Filters:
         $ref: '#/definitions/FilterList'
@@ -65681,7 +65871,7 @@ definitions:
       - Filters
     properties:
       TransitGatewayRouteTableId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/TransitGatewayRouteTableId'
         description: The ID of the transit gateway route table.
       Filters:
         $ref: '#/definitions/FilterList'
@@ -65989,7 +66179,7 @@ definitions:
         $ref: '#/definitions/SpotInstanceStateFault'
         description: 'The fault codes for the Spot Instance request, if any.'
       InstanceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/InstanceId'
         description: 'The instance ID, if an instance has been launched to fulfill the Spot Instance request.'
       LaunchGroup:
         $ref: '#/definitions/String'
@@ -66125,7 +66315,7 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       ServiceId:
-        $ref: '#/definitions/ServiceId'
+        $ref: '#/definitions/VpcEndpointServiceId'
         description: The ID of the endpoint service.
   State:
     type: string
@@ -66777,10 +66967,10 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       GroupId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SecurityGroupId'
         description: 'The ID of the security group. You must specify either the security group ID or the security group name in the request. For security groups in a nondefault VPC, you must specify the security group ID.'
       GroupName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SecurityGroupName'
         description: '[Default VPC] The name of the security group. You must specify either the security group ID or the security group name in the request.'
       IpPermissions:
         $ref: '#/definitions/IpPermissionList'
@@ -66794,10 +66984,10 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       GroupId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SecurityGroupId'
         description: 'The ID of the security group. You must specify either the security group ID or the security group name in the request. For security groups in a nondefault VPC, you must specify the security group ID.'
       GroupName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SecurityGroupName'
         description: '[EC2-Classic, default VPC] The name of the security group. You must specify either the security group ID or the security group name in the request.'
       IpPermissions:
         $ref: '#/definitions/IpPermissionList'

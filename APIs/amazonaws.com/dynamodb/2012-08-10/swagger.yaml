@@ -2559,7 +2559,7 @@ definitions:
         description: The first global table name that this operation will evaluate.
       Limit:
         $ref: '#/definitions/PositiveIntegerObject'
-        description: The maximum number of table names to return.
+        description: '<p>The maximum number of table names to return, if the parameter is not specified DynamoDB defaults to 100.</p> <p>If the number of global tables DynamoDB finds reaches this limit, it stops the operation and returns the table names collected up to that point, with a table name in the <code>LastEvaluatedGlobalTableName</code> to apply in a subsequent operation to the <code>ExclusiveStartGlobalTableName</code> parameter.</p>'
       RegionName:
         $ref: '#/definitions/RegionName'
         description: Lists the global tables in a specific Region.
@@ -2774,6 +2774,9 @@ definitions:
       ProvisionedThroughputOverride:
         $ref: '#/definitions/ProvisionedThroughput'
         description: Provisioned throughput settings for the restored table.
+      SSESpecificationOverride:
+        $ref: '#/definitions/SSESpecification'
+        description: The new server-side encryption settings for the restored table.
   TableAlreadyExistsException: {}
   RestoreTableToPointInTimeOutput:
     type: object
@@ -2784,9 +2787,11 @@ definitions:
   RestoreTableToPointInTimeInput:
     type: object
     required:
-      - SourceTableName
       - TargetTableName
     properties:
+      SourceTableArn:
+        $ref: '#/definitions/TableArn'
+        description: The DynamoDB table that will be restored. This value is an Amazon Resource Name (ARN).
       SourceTableName:
         $ref: '#/definitions/TableName'
         description: Name of the source table that is being restored.
@@ -2811,6 +2816,9 @@ definitions:
       ProvisionedThroughputOverride:
         $ref: '#/definitions/ProvisionedThroughput'
         description: Provisioned throughput settings for the restored table.
+      SSESpecificationOverride:
+        $ref: '#/definitions/SSESpecification'
+        description: The new server-side encryption settings for the restored table.
   InvalidRestoreTimeException: {}
   PointInTimeRecoveryUnavailableException: {}
   ScanOutput:
