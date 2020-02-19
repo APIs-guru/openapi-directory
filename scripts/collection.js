@@ -91,8 +91,6 @@ converter.ResourceReaders.url = function (url) {
         result[1] = {}; //util.exec('git show '+cacheEntry.gitHash.trim());
       }
       else {
-        //fs.writeFileSync('../metadata/tmp', result[1], 'utf8');
-        //cacheEntry.gitHash = util.exec('git hash-object -w ../metadata/tmp').trim();
         resolverContext.anyDiff = true;
       }
       for (var h in result[0].headers) {
@@ -534,7 +532,10 @@ function writeSpec(source, format, exPatch, command) {
     etag: !command.slow
   };
 
-  return converter.getSpec(source, format)
+  let src = source;
+  if (source.startsWith('file:')) src = url.fileURLToPath(source);
+
+  return converter.getSpec(src, format)
     .then(spec => {
       context.spec = spec;
       if (resolverContext.called && !resolverContext.anyDiff)

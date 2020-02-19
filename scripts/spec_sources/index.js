@@ -5,7 +5,6 @@ const utilLib = require('util');
 
 var assert = require('assert');
 var _ = require('lodash');
-//var Promise = require('bluebird');
 
 var util = require('../util');
 

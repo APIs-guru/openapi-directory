@@ -20,6 +20,7 @@ info:
       version: '2.0'
   x-providerName: github.com
   x-unofficialSpec: true
+  x-preferred: false
 externalDocs:
   url: 'https://developer.github.com/v3/'
 consumes:
@@ -5350,7 +5351,7 @@ paths:
     delete:
       description: |
         Delete a Reference
-        Example: Deleting a branch: DELETE /repos/octocat/Hello-World/git/refs/heads/feature-a 
+        Example: Deleting a branch: DELETE /repos/octocat/Hello-World/git/refs/heads/feature-a
         Example: Deleting a tag:        DELETE /repos/octocat/Hello-World/git/refs/tags/v1.0
       parameters:
         - description: Name of repository owner.
