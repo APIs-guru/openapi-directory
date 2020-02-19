@@ -233,7 +233,9 @@ function updateCollection(dir, command) {
       }
       return leadPairs;
     })
-    .each(([filename, lead]) => {
+    .then(leadPairs => {
+      leadPairs.forEach(e => {
+      const [ filename, lead] = e; // urgh!
       if (lead) {
         var origin = _.cloneDeep(util.getOrigin(lead));
         if (Array.isArray(origin))
@@ -259,8 +261,10 @@ function updateCollection(dir, command) {
             }
           });
       }
+      return lead;
+      })
     })
-    .done(function(){
+    .then(function(){
       console.log('Finishing successfully');
       fs.writeFileSync(pathLib.join(__dirname,'../metadata/httpCache.yaml'),YAML.safeDump(httpCache, {lineWidth:-1}),'utf8');
       if (newBlackList.length) {

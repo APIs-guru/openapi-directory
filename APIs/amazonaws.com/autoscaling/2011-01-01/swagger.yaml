@@ -976,7 +976,7 @@ paths:
         - name: MaxInstanceLifetime
           in: query
           required: false
-          description: '<p>The maximum amount of time, in seconds, that an instance can be in service.</p> <p>Valid Range: Minimum value of 604800.</p>'
+          description: '<p>The maximum amount of time, in seconds, that an instance can be in service.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html">Replacing Auto Scaling Instances Based on Maximum Instance Lifetime</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>Valid Range: Minimum value of 604800.</p>'
           type: integer
         - name: Action
           in: query
@@ -1183,7 +1183,7 @@ paths:
         - name: MaxInstanceLifetime
           in: formData
           required: false
-          description: '<p>The maximum amount of time, in seconds, that an instance can be in service.</p> <p>Valid Range: Minimum value of 604800.</p>'
+          description: '<p>The maximum amount of time, in seconds, that an instance can be in service.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html">Replacing Auto Scaling Instances Based on Maximum Instance Lifetime</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>Valid Range: Minimum value of 604800.</p>'
           type: integer
         - name: Action
           in: query
@@ -5117,6 +5117,11 @@ paths:
             Represents a target tracking scaling policy configuration to use with Amazon EC2 Auto Scaling.
             Indicates whether scaling in by the target tracking scaling policy is disabled. If scaling in is disabled, the target tracking scaling policy doesn't remove instances from the Auto Scaling group. Otherwise, the target tracking scaling policy can remove instances from the Auto Scaling group. The default is <code>false</code>.
           type: string
+        - name: Enabled
+          in: query
+          required: false
+          description: ''
+          type: boolean
         - name: Action
           in: query
           required: true
@@ -5255,6 +5260,11 @@ paths:
             Represents a target tracking scaling policy configuration to use with Amazon EC2 Auto Scaling.
             Indicates whether scaling in by the target tracking scaling policy is disabled. If scaling in is disabled, the target tracking scaling policy doesn't remove instances from the Auto Scaling group. Otherwise, the target tracking scaling policy can remove instances from the Auto Scaling group. The default is <code>false</code>.
           type: string
+        - name: Enabled
+          in: formData
+          required: false
+          description: ''
+          type: boolean
         - name: Action
           in: query
           required: true
@@ -6317,7 +6327,7 @@ paths:
         - name: MaxInstanceLifetime
           in: query
           required: false
-          description: '<p>The maximum amount of time, in seconds, that an instance can be in service.</p> <p>Valid Range: Minimum value of 604800.</p>'
+          description: '<p>The maximum amount of time, in seconds, that an instance can be in service.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html">Replacing Auto Scaling Instances Based on Maximum Instance Lifetime</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>Valid Range: Minimum value of 604800.</p>'
           type: integer
         - name: Action
           in: query
@@ -6484,7 +6494,7 @@ paths:
         - name: MaxInstanceLifetime
           in: formData
           required: false
-          description: '<p>The maximum amount of time, in seconds, that an instance can be in service.</p> <p>Valid Range: Minimum value of 604800.</p>'
+          description: '<p>The maximum amount of time, in seconds, that an instance can be in service.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html">Replacing Auto Scaling Instances Based on Maximum Instance Lifetime</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>Valid Range: Minimum value of 604800.</p>'
           type: integer
         - name: Action
           in: query
@@ -7795,7 +7805,7 @@ definitions:
         description: 'The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling group uses to call other AWS services on your behalf. By default, Amazon EC2 Auto Scaling uses a service-linked role named AWSServiceRoleForAutoScaling, which it creates if it does not exist. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-service-linked-role.html">Service-Linked Roles</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.'
       MaxInstanceLifetime:
         $ref: '#/definitions/MaxInstanceLifetime'
-        description: '<p>The maximum amount of time, in seconds, that an instance can be in service.</p> <p>Valid Range: Minimum value of 604800.</p>'
+        description: '<p>The maximum amount of time, in seconds, that an instance can be in service.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html">Replacing Auto Scaling Instances Based on Maximum Instance Lifetime</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>Valid Range: Minimum value of 604800.</p>'
   SecurityGroups:
     type: array
     items:
@@ -8439,7 +8449,7 @@ definitions:
         description: '<p>The instance type.</p> <p>For information about available instance types, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#AvailableInstanceTypes">Available Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide.</i> </p>'
       WeightedCapacity:
         $ref: '#/definitions/XmlStringMaxLen32'
-        description: '<p>The number of capacity units, which gives the instance type a proportional weight to other instance types. For example, larger instance types are generally weighted more than smaller instance types. These are the same units that you chose to set the desired capacity in terms of instances, or a performance attribute such as vCPUs, memory, or I/O.</p> <p>Valid Range: Minimum value of 1. Maximum value of 999.</p>'
+        description: '<p>The number of capacity units, which gives the instance type a proportional weight to other instance types. For example, larger instance types are generally weighted more than smaller instance types. These are the same units that you chose to set the desired capacity in terms of instances, or a performance attribute such as vCPUs, memory, or I/O.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-weighting.html">Instance Weighting for Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>Valid Range: Minimum value of 1. Maximum value of 999.</p>'
     description: Describes an override for a launch template.
   LifecycleTransition:
     type: string
@@ -8642,6 +8652,8 @@ definitions:
         $ref: '#/definitions/DisableScaleIn'
         description: 'Indicates whether scaling in by the target tracking scaling policy is disabled. If scaling in is disabled, the target tracking scaling policy doesn''t remove instances from the Auto Scaling group. Otherwise, the target tracking scaling policy can remove instances from the Auto Scaling group. The default is <code>false</code>.'
     description: Represents a target tracking scaling policy configuration to use with Amazon EC2 Auto Scaling.
+  ScalingPolicyEnabled:
+    type: boolean
   PutScalingPolicyType:
     type: object
     required:
@@ -8684,6 +8696,8 @@ definitions:
       TargetTrackingConfiguration:
         $ref: '#/definitions/TargetTrackingConfiguration'
         description: '<p>A target tracking scaling policy. Includes support for predefined or customized metrics.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_TargetTrackingConfiguration.html">TargetTrackingConfiguration</a> in the <i>Amazon EC2 Auto Scaling API Reference</i>.</p> <p>Conditional: If you specify <code>TargetTrackingScaling</code> for the policy type, you must specify this parameter. (Not used with any other policy type.) </p>'
+      Enabled:
+        $ref: '#/definitions/ScalingPolicyEnabled'
   PutScheduledUpdateGroupActionType:
     type: object
     required:
@@ -8780,6 +8794,8 @@ definitions:
       TargetTrackingConfiguration:
         $ref: '#/definitions/TargetTrackingConfiguration'
         description: A target tracking scaling policy.
+      Enabled:
+        $ref: '#/definitions/ScalingPolicyEnabled'
     description: Describes a scaling policy.
   ScalingProcessQuery:
     type: object
@@ -8984,4 +9000,4 @@ definitions:
         description: 'The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling group uses to call other AWS services on your behalf. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-service-linked-role.html">Service-Linked Roles</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.'
       MaxInstanceLifetime:
         $ref: '#/definitions/MaxInstanceLifetime'
-        description: '<p>The maximum amount of time, in seconds, that an instance can be in service.</p> <p>Valid Range: Minimum value of 604800.</p>'
+        description: '<p>The maximum amount of time, in seconds, that an instance can be in service.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html">Replacing Auto Scaling Instances Based on Maximum Instance Lifetime</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>Valid Range: Minimum value of 604800.</p>'
