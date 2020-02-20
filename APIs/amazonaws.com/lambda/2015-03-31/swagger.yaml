@@ -800,6 +800,7 @@ paths:
                   - nodejs4.3-edge
                   - go1.x
                   - ruby2.5
+                  - ruby2.7
                   - provided
               Role:
                 description: The Amazon Resource Name (ARN) of the function's execution role.
@@ -1502,7 +1503,7 @@ paths:
           maxLength: 128
     put:
       operationId: PutFunctionEventInvokeConfig
-      description: '<p>Configures options for <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html">asynchronous invocation</a> on a function, version, or alias.</p> <p>By default, Lambda retries an asynchronous invocation twice if the function returns an error. It retains events in a queue for up to six hours. When an event fails all processing attempts or stays in the asynchronous invocation queue for too long, Lambda discards it. To retain discarded events, configure a dead-letter queue with <a>UpdateFunctionConfiguration</a>.</p>'
+      description: '<p>Configures options for <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html">asynchronous invocation</a> on a function, version, or alias. If a configuration already exists for a function, version, or alias, this operation overwrites it. If you exclude any settings, they are removed. To set one option without affecting existing settings for other options, use <a>PutFunctionEventInvokeConfig</a>.</p> <p>By default, Lambda retries an asynchronous invocation twice if the function returns an error. It retains events in a queue for up to six hours. When an event fails all processing attempts or stays in the asynchronous invocation queue for too long, Lambda discards it. To retain discarded events, configure a dead-letter queue with <a>UpdateFunctionConfiguration</a>.</p> <p>To send an invocation record to a queue, topic, function, or event bus, specify a <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-async-destinations">destination</a>. You can configure separate destinations for successful invocations (on-success) and events that fail all processing attempts (on-failure). You can configure destinations in addition to or instead of a dead-letter queue.</p>'
       responses:
         '200':
           description: Success
@@ -1892,7 +1893,7 @@ paths:
   '/2019-09-30/functions/{FunctionName}/concurrency':
     get:
       operationId: GetFunctionConcurrency
-      description: 'Returns details about the concurrency configuration for a function. To set a concurrency limit for a function, use <a>PutFunctionConcurrency</a>.'
+      description: 'Returns details about the reserved concurrency configuration for a function. To set a concurrency limit for a function, use <a>PutFunctionConcurrency</a>.'
       responses:
         '200':
           description: Success
@@ -2090,6 +2091,7 @@ paths:
                   - nodejs4.3-edge
                   - go1.x
                   - ruby2.5
+                  - ruby2.7
                   - provided
               DeadLetterConfig:
                 description: 'The <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq">dead-letter queue</a> for failed asynchronous invocations.'
@@ -2434,7 +2436,7 @@ paths:
   /2015-03-31/functions/:
     get:
       operationId: ListFunctions
-      description: '<p>Returns a list of Lambda functions, with the version-specific configuration of each.</p> <p>Set <code>FunctionVersion</code> to <code>ALL</code> to include all published versions of each function in addition to the unpublished version. To get more information about a function or version, use <a>GetFunction</a>.</p>'
+      description: '<p>Returns a list of Lambda functions, with the version-specific configuration of each. Lambda returns up to 50 functions per call.</p> <p>Set <code>FunctionVersion</code> to <code>ALL</code> to include all published versions of each function in addition to the unpublished version. To get more information about a function or version, use <a>GetFunction</a>.</p>'
       responses:
         '200':
           description: Success
@@ -2474,7 +2476,7 @@ paths:
         - name: MaxItems
           in: query
           required: false
-          description: Specify a value between 1 and 50 to limit the number of functions in the response.
+          description: The maximum number of functions to return.
           type: integer
           minimum: 1
           maximum: 10000
@@ -2536,6 +2538,7 @@ paths:
             - nodejs4.3-edge
             - go1.x
             - ruby2.5
+            - ruby2.7
             - provided
         - name: LayerName
           in: path
@@ -2687,6 +2690,7 @@ paths:
             - nodejs4.3-edge
             - go1.x
             - ruby2.5
+            - ruby2.7
             - provided
         - name: Marker
           in: query
@@ -2857,7 +2861,7 @@ paths:
   '/2015-03-31/functions/{FunctionName}/versions':
     get:
       operationId: ListVersionsByFunction
-      description: 'Returns a list of <a href="https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html">versions</a>, with the version-specific configuration of each. '
+      description: 'Returns a list of <a href="https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html">versions</a>, with the version-specific configuration of each. Lambda returns up to 50 versions per call.'
       responses:
         '200':
           description: Success
@@ -2896,7 +2900,7 @@ paths:
         - name: MaxItems
           in: query
           required: false
-          description: Limit the number of versions that are returned.
+          description: The maximum number of versions to return.
           type: integer
           minimum: 1
           maximum: 10000
@@ -3534,7 +3538,7 @@ definitions:
         LastModified: '2016-11-21T19:49:20.006+0000'
         MemorySize: 128
         Role: 'arn:aws:iam::123456789012:role/lambda_basic_execution'
-        Runtime: nodejs8.10
+        Runtime: nodejs12.x
         Timeout: 3
         Version: $LATEST
         VpcConfig:
@@ -3822,6 +3826,7 @@ definitions:
       - nodejs4.3-edge
       - go1.x
       - ruby2.5
+      - ruby2.7
       - provided
   Concurrency:
     type: object
