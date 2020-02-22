@@ -2652,7 +2652,7 @@ paths:
                 description: ' The policy to apply. '
                 type: string
                 minLength: 1
-                maxLength: 1024
+                maxLength: 30000
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -2720,7 +2720,7 @@ paths:
                 description: ' The policy to apply. '
                 type: string
                 minLength: 1
-                maxLength: 1024
+                maxLength: 30000
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -2788,7 +2788,7 @@ paths:
                 description: ' The policy to apply. '
                 type: string
                 minLength: 1
-                maxLength: 1024
+                maxLength: 30000
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -3458,7 +3458,7 @@ definitions:
         $ref: '#/definitions/NonEmptyString'
         description: ' The request ID that uniquely identifies this request. '
       policy:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/ResourcePolicyDocument'
         description: ' The component policy. '
   ResourceNotFoundException: {}
   GetDistributionConfigurationResponse:
@@ -3495,7 +3495,7 @@ definitions:
         $ref: '#/definitions/NonEmptyString'
         description: ' The request ID that uniquely identifies this request. '
       policy:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/ResourcePolicyDocument'
         description: ' The image policy object. '
   GetImageRecipeResponse:
     type: object
@@ -3513,7 +3513,7 @@ definitions:
         $ref: '#/definitions/NonEmptyString'
         description: ' The request ID that uniquely identifies this request. '
       policy:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/ResourcePolicyDocument'
         description: ' The image recipe policy object. '
   GetInfrastructureConfigurationResponse:
     type: object
@@ -4414,6 +4414,10 @@ definitions:
   GetComponentPolicyRequest:
     type: object
     properties: {}
+  ResourcePolicyDocument:
+    type: string
+    minLength: 1
+    maxLength: 30000
   GetComponentRequest:
     type: object
     properties: {}
@@ -4963,7 +4967,7 @@ definitions:
         $ref: '#/definitions/ComponentBuildVersionArn'
         description: ' The Amazon Resource Name (ARN) of the component that this policy should be applied to. '
       policy:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/ResourcePolicyDocument'
         description: ' The policy to apply. '
   PutImagePolicyRequest:
     type: object
@@ -4975,7 +4979,7 @@ definitions:
         $ref: '#/definitions/ImageBuildVersionArn'
         description: ' The Amazon Resource Name (ARN) of the image that this policy should be applied to. '
       policy:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/ResourcePolicyDocument'
         description: ' The policy to apply. '
   PutImageRecipePolicyRequest:
     type: object
@@ -4987,7 +4991,7 @@ definitions:
         $ref: '#/definitions/ImageRecipeArn'
         description: ' The Amazon Resource Name (ARN) of the image recipe that this policy should be applied to. '
       policy:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/ResourcePolicyDocument'
         description: ' The policy to apply. '
   StartImagePipelineExecutionRequest:
     type: object

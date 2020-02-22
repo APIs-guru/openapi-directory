@@ -456,6 +456,7 @@ paths:
                 enum:
                   - EC2
                   - Fargate
+                  - Lambda
               planTypes:
                 description: The plan type.
                 type: array
@@ -750,11 +751,13 @@ definitions:
     enum:
       - EC2
       - Fargate
+      - Lambda
   SavingsPlanRateServiceCode:
     type: string
     enum:
       - AmazonEC2
       - AmazonECS
+      - AWSLambda
   SavingsPlanRateUsageType:
     type: string
     pattern: '^[a-zA-Z0-9_ \/.:-]+$'
@@ -1268,6 +1271,8 @@ definitions:
     type: string
     enum:
       - Hrs
+      - Lambda-GB-Second
+      - Request
   SavingsPlanOfferingRatePropertyList:
     type: array
     items:

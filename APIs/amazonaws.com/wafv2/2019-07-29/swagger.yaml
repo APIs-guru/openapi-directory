@@ -163,7 +163,7 @@ paths:
   '/#X-Amz-Target=AWSWAF_20190729.AssociateWebACL':
     post:
       operationId: AssociateWebACL
-      description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>Associates a Web ACL with a regional application resource, to protect the resource. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>For AWS CloudFront, you can associate the Web ACL by providing the <code>Id</code> of the <a>WebACL</a> to the CloudFront API call <code>UpdateDistribution</code>. For information, see <a href="https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html">UpdateDistribution</a>.</p>'
+      description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>Associates a Web ACL with a regional application resource, to protect the resource. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>For AWS CloudFront, you can associate the Web ACL by providing the <code>ARN</code> of the <a>WebACL</a> to the CloudFront API call <code>UpdateDistribution</code>. For information, see <a href="https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html">UpdateDistribution</a>.</p>'
       responses:
         '200':
           description: Success
@@ -238,6 +238,10 @@ paths:
           description: WAFUnavailableEntityException
           schema:
             $ref: '#/definitions/WAFUnavailableEntityException'
+        '486':
+          description: WAFSubscriptionNotFoundException
+          schema:
+            $ref: '#/definitions/WAFSubscriptionNotFoundException'
       parameters:
         - name: body
           in: body
@@ -318,7 +322,7 @@ paths:
   '/#X-Amz-Target=AWSWAF_20190729.CreateRegexPatternSet':
     post:
       operationId: CreateRegexPatternSet
-      description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>Creates a <a>RegexPatternSet</a> per the specifications provided.</p>'
+      description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>Creates a <a>RegexPatternSet</a>, which you reference in a <a>RegexPatternSetReferenceStatement</a>, to have AWS WAF inspect a web request component for the specified patterns.</p>'
       responses:
         '200':
           description: Success
@@ -413,6 +417,10 @@ paths:
           description: WAFTagOperationInternalErrorException
           schema:
             $ref: '#/definitions/WAFTagOperationInternalErrorException'
+        '488':
+          description: WAFSubscriptionNotFoundException
+          schema:
+            $ref: '#/definitions/WAFSubscriptionNotFoundException'
       parameters:
         - name: body
           in: body
@@ -482,6 +490,10 @@ paths:
           description: WAFTagOperationInternalErrorException
           schema:
             $ref: '#/definitions/WAFTagOperationInternalErrorException'
+        '490':
+          description: WAFSubscriptionNotFoundException
+          schema:
+            $ref: '#/definitions/WAFSubscriptionNotFoundException'
       parameters:
         - name: body
           in: body
@@ -528,10 +540,14 @@ paths:
           schema:
             $ref: '#/definitions/WAFOptimisticLockException'
         '484':
+          description: WAFAssociatedItemException
+          schema:
+            $ref: '#/definitions/WAFAssociatedItemException'
+        '485':
           description: WAFTagOperationException
           schema:
             $ref: '#/definitions/WAFTagOperationException'
-        '485':
+        '486':
           description: WAFTagOperationInternalErrorException
           schema:
             $ref: '#/definitions/WAFTagOperationInternalErrorException'
@@ -622,10 +638,14 @@ paths:
           schema:
             $ref: '#/definitions/WAFOptimisticLockException'
         '484':
+          description: WAFAssociatedItemException
+          schema:
+            $ref: '#/definitions/WAFAssociatedItemException'
+        '485':
           description: WAFTagOperationException
           schema:
             $ref: '#/definitions/WAFTagOperationException'
-        '485':
+        '486':
           description: WAFTagOperationInternalErrorException
           schema:
             $ref: '#/definitions/WAFTagOperationInternalErrorException'
@@ -675,10 +695,14 @@ paths:
           schema:
             $ref: '#/definitions/WAFOptimisticLockException'
         '484':
+          description: WAFAssociatedItemException
+          schema:
+            $ref: '#/definitions/WAFAssociatedItemException'
+        '485':
           description: WAFTagOperationException
           schema:
             $ref: '#/definitions/WAFTagOperationException'
-        '485':
+        '486':
           description: WAFTagOperationInternalErrorException
           schema:
             $ref: '#/definitions/WAFTagOperationInternalErrorException'
@@ -807,7 +831,7 @@ paths:
   '/#X-Amz-Target=AWSWAF_20190729.DisassociateWebACL':
     post:
       operationId: DisassociateWebACL
-      description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>Disassociates a Web ACL from a regional application resource. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>For AWS CloudFront, you can disassociate the Web ACL by providing an empty <code>WebACLId</code> in the CloudFront API call <code>UpdateDistribution</code>. For information, see <a href="https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html">UpdateDistribution</a>.</p>'
+      description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>Disassociates a Web ACL from a regional application resource. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>For AWS CloudFront, you can disassociate the Web ACL by providing an empty web ACL ARN in the CloudFront API call <code>UpdateDistribution</code>. For information, see <a href="https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html">UpdateDistribution</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1176,7 +1200,7 @@ paths:
   '/#X-Amz-Target=AWSWAF_20190729.ListAvailableManagedRuleGroups':
     post:
       operationId: ListAvailableManagedRuleGroups
-      description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>Retrieves an array of managed rule groups that are available for you to use. This list includes all AWS managed rule groups and the AWS Marketplace managed rule groups that you''re subscribed to.</p>'
+      description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>Retrieves an array of managed rule groups that are available for you to use. This list includes all AWS Managed Rules rule groups and the AWS Marketplace managed rule groups that you''re subscribed to.</p>'
       responses:
         '200':
           description: Success
@@ -1779,6 +1803,10 @@ paths:
           description: WAFUnavailableEntityException
           schema:
             $ref: '#/definitions/WAFUnavailableEntityException'
+        '487':
+          description: WAFSubscriptionNotFoundException
+          schema:
+            $ref: '#/definitions/WAFSubscriptionNotFoundException'
       parameters:
         - name: body
           in: body
@@ -1840,6 +1868,10 @@ paths:
           description: WAFUnavailableEntityException
           schema:
             $ref: '#/definitions/WAFUnavailableEntityException'
+        '488':
+          description: WAFSubscriptionNotFoundException
+          schema:
+            $ref: '#/definitions/WAFSubscriptionNotFoundException'
       parameters:
         - name: body
           in: body
@@ -1875,7 +1907,7 @@ definitions:
         description: The Amazon Resource Name (ARN) of the Web ACL that you want to associate with the resource.
       ResourceArn:
         $ref: '#/definitions/ResourceArn'
-        description: '<p>The Amazon Resource Name (ARN) of the resource to associate with the web ACL. </p> <p>The ARN must be in one of the following formats:</p> <ul> <li> <p>For a CloudFront distribution: <code>arn:aws:cloudfront::<i>account-id</i>:distribution/<i>distribution-id</i> </code> </p> </li> <li> <p>For an Application Load Balancer: <code>arn:aws:elasticloadbalancing: <i>region</i>:<i>account-id</i>:loadbalancer/app/<i>load-balancer-name</i> /<i>load-balancer-id</i> </code> </p> </li> <li> <p>For an Amazon API Gateway stage: <code>arn:aws:apigateway:<i>region</i> ::/restapis/<i>api-id</i>/stages/<i>stage-name</i> </code> </p> </li> </ul>'
+        description: '<p>The Amazon Resource Name (ARN) of the resource to associate with the web ACL. </p> <p>The ARN must be in one of the following formats:</p> <ul> <li> <p>For an Application Load Balancer: <code>arn:aws:elasticloadbalancing:<i>region</i>:<i>account-id</i>:loadbalancer/app/<i>load-balancer-name</i>/<i>load-balancer-id</i> </code> </p> </li> <li> <p>For an Amazon API Gateway stage: <code>arn:aws:apigateway:<i>region</i>::/restapis/<i>api-id</i>/stages/<i>stage-name</i> </code> </p> </li> </ul>'
   WAFInternalErrorException: {}
   WAFInvalidParameterException: {}
   WAFNonexistentItemException: {}
@@ -1900,6 +1932,7 @@ definitions:
         description: 'An array of <a>Rule</a> that you''re configuring to use in a rule group or web ACL. '
   WAFLimitsExceededException: {}
   WAFInvalidResourceException: {}
+  WAFSubscriptionNotFoundException: {}
   CreateIPSetResponse:
     type: object
     properties:
@@ -2057,6 +2090,7 @@ definitions:
       LockToken:
         $ref: '#/definitions/LockToken'
         description: 'A token used for optimistic locking. AWS WAF returns a token to your get and list requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like update and delete. AWS WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another get, and use the new token returned by that operation. '
+  WAFAssociatedItemException: {}
   DeleteLoggingConfigurationResponse:
     type: object
     properties: {}
@@ -2137,7 +2171,6 @@ definitions:
       LockToken:
         $ref: '#/definitions/LockToken'
         description: 'A token used for optimistic locking. AWS WAF returns a token to your get and list requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like update and delete. AWS WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another get, and use the new token returned by that operation. '
-  WAFAssociatedItemException: {}
   DescribeManagedRuleGroupResponse:
     type: object
     properties:
@@ -2173,7 +2206,7 @@ definitions:
     properties:
       ResourceArn:
         $ref: '#/definitions/ResourceArn'
-        description: '<p>The Amazon Resource Name (ARN) of the resource to disassociate from the web ACL. </p> <p>The ARN must be in one of the following formats:</p> <ul> <li> <p>For a CloudFront distribution: <code>arn:aws:cloudfront::<i>account-id</i>:distribution/<i>distribution-id</i> </code> </p> </li> <li> <p>For an Application Load Balancer: <code>arn:aws:elasticloadbalancing: <i>region</i>:<i>account-id</i>:loadbalancer/app/<i>load-balancer-name</i> /<i>load-balancer-id</i> </code> </p> </li> <li> <p>For an Amazon API Gateway stage: <code>arn:aws:apigateway:<i>region</i> ::/restapis/<i>api-id</i>/stages/<i>stage-name</i> </code> </p> </li> </ul>'
+        description: '<p>The Amazon Resource Name (ARN) of the resource to disassociate from the web ACL. </p> <p>The ARN must be in one of the following formats:</p> <ul> <li> <p>For an Application Load Balancer: <code>arn:aws:elasticloadbalancing:<i>region</i>:<i>account-id</i>:loadbalancer/app/<i>load-balancer-name</i>/<i>load-balancer-id</i> </code> </p> </li> <li> <p>For an Amazon API Gateway stage: <code>arn:aws:apigateway:<i>region</i>::/restapis/<i>api-id</i>/stages/<i>stage-name</i> </code> </p> </li> </ul>'
   GetIPSetResponse:
     type: object
     properties:
@@ -2735,11 +2768,11 @@ definitions:
   AllQueryArguments:
     type: object
     properties: {}
-    description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>All query arguments of a web request. </p>'
+    description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>All query arguments of a web request. </p> <p>This is used only to indicate the web request component for AWS WAF to inspect, in the <a>FieldToMatch</a> specification. </p>'
   AllowAction:
     type: object
     properties: {}
-    description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>Specifies that AWS WAF should allow requests.</p>'
+    description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>Specifies that AWS WAF should allow requests.</p> <p>This is used only in the context of other settings, for example to specify values for <a>RuleAction</a> and web ACL <a>DefaultAction</a>. </p>'
   Statements:
     type: array
     items:
@@ -2761,11 +2794,11 @@ definitions:
   BlockAction:
     type: object
     properties: {}
-    description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>Specifies that AWS WAF should block requests.</p>'
+    description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>Specifies that AWS WAF should block requests.</p> <p>This is used only in the context of other settings, for example to specify values for <a>RuleAction</a> and web ACL <a>DefaultAction</a>. </p>'
   Body:
     type: object
     properties: {}
-    description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>The body of a web request. This immediately follows the request headers.</p>'
+    description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>The body of a web request. This immediately follows the request headers.</p> <p>This is used only to indicate the web request component for AWS WAF to inspect, in the <a>FieldToMatch</a> specification. </p>'
   Boolean:
     type: boolean
   SearchString:
@@ -2778,7 +2811,7 @@ definitions:
         description: 'Inspect a single header. Provide the name of the header to inspect, for example, <code>User-Agent</code> or <code>Referer</code>. This setting isn''t case sensitive.'
       SingleQueryArgument:
         $ref: '#/definitions/SingleQueryArgument'
-        description: 'Inspect a single query argument. Provide the name of the query argument to inspect, such as <i>UserName</i> or <i>SalesRegion</i>. The name can be up to 30 characters long and isn''t case sensitive. '
+        description: '<p>Inspect a single query argument. Provide the name of the query argument to inspect, such as <i>UserName</i> or <i>SalesRegion</i>. The name can be up to 30 characters long and isn''t case sensitive. </p> <p>This is used only to indicate the web request component for AWS WAF to inspect, in the <a>FieldToMatch</a> specification. </p>'
       AllQueryArguments:
         $ref: '#/definitions/AllQueryArguments'
         description: 'Inspect all query arguments. '
@@ -2790,7 +2823,7 @@ definitions:
         description: 'Inspect the query string. This is the part of a URL that appears after a <code>?</code> character, if any.'
       Body:
         $ref: '#/definitions/Body'
-        description: '<p>Inspect the request body, which immediately follows the request headers. This is the part of a request that contains any additional data that you want to send to your web server as the HTTP request body, such as data from a form. </p> <p>Note that only the first 8 KB (8192 bytes) of the request body are forwarded to AWS WAF for inspection. If you don''t need to inspect more than 8 KB, you can guarantee that you don''t allow additional bytes in by combining a statement that inspects the body of the web request, such as <a>ByteMatchStatement</a> or <a>RegexPatternSetReferenceStatement</a>, with a <a>SizeConstraintStatement</a> that enforces an 8 KB size limit on the body of the request. AWS WAF doesn''t support inspecting the entire contents of web requests whose bodies exceed the 8 KB limit.</p>'
+        description: '<p>Inspect the request body, which immediately follows the request headers. This is the part of a request that contains any additional data that you want to send to your web server as the HTTP request body, such as data from a form. </p> <p>Note that only the first 8 KB (8192 bytes) of the request body are forwarded to AWS WAF for inspection by the underlying host service. If you don''t need to inspect more than 8 KB, you can guarantee that you don''t allow additional bytes in by combining a statement that inspects the body of the web request, such as <a>ByteMatchStatement</a> or <a>RegexPatternSetReferenceStatement</a>, with a <a>SizeConstraintStatement</a> that enforces an 8 KB size limit on the body of the request. AWS WAF doesn''t support inspecting the entire contents of web requests whose bodies exceed the 8 KB limit.</p>'
       Method:
         $ref: '#/definitions/Method'
         description: 'Inspect the HTTP method. The method indicates the type of operation that the request is asking the origin to perform. '
@@ -2856,7 +2889,7 @@ definitions:
   CountAction:
     type: object
     properties: {}
-    description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>Specifies that AWS WAF should count requests.</p>'
+    description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>Specifies that AWS WAF should count requests.</p> <p>This is used only in the context of other settings, for example to specify values for <a>RuleAction</a> and web ACL <a>DefaultAction</a>. </p>'
   Country:
     type: string
   CountryCode:
@@ -3228,7 +3261,7 @@ definitions:
       Allow:
         $ref: '#/definitions/AllowAction'
         description: Specifies that AWS WAF should allow requests by default.
-    description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>In a <code>WebACL</code>, this is the action that you want AWS WAF to perform when a web request doesn''t match any of the rules in the <code>WebACL</code>. The default action must be a terminating action, so count is not allowed.</p>'
+    description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>In a <a>WebACL</a>, this is the action that you want AWS WAF to perform when a web request doesn''t match any of the rules in the <code>WebACL</code>. The default action must be a terminating action, so count is not allowed.</p>'
   WebACLSummary:
     type: object
     properties:
@@ -3288,7 +3321,7 @@ definitions:
       Name:
         $ref: '#/definitions/FieldToMatchData'
         description: The name of the query header to inspect.
-    description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>One of the headers in a web request, identified by name, for example, <code>User-Agent</code> or <code>Referer</code>. This setting isn''t case sensitive.</p>'
+    description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>One of the headers in a web request, identified by name, for example, <code>User-Agent</code> or <code>Referer</code>. This setting isn''t case sensitive.</p> <p>This is used only to indicate the web request component for AWS WAF to inspect, in the <a>FieldToMatch</a> specification. </p>'
   SingleQueryArgument:
     type: object
     required:
@@ -3301,15 +3334,15 @@ definitions:
   UriPath:
     type: object
     properties: {}
-    description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>The path component of the URI of a web request. This is the part of a web request that identifies a resource, for example, <code>/images/daily-ad.jpg</code>.</p>'
+    description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>The path component of the URI of a web request. This is the part of a web request that identifies a resource, for example, <code>/images/daily-ad.jpg</code>.</p> <p>This is used only to indicate the web request component for AWS WAF to inspect, in the <a>FieldToMatch</a> specification. </p>'
   QueryString:
     type: object
     properties: {}
-    description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>The query string of a web request. This is the part of a URL that appears after a <code>?</code> character, if any.</p>'
+    description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>The query string of a web request. This is the part of a URL that appears after a <code>?</code> character, if any.</p> <p>This is used only to indicate the web request component for AWS WAF to inspect, in the <a>FieldToMatch</a> specification. </p>'
   Method:
     type: object
     properties: {}
-    description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>The HTTP method of a web request. The method indicates the type of operation that the request is asking the origin to perform. </p>'
+    description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>The HTTP method of a web request. The method indicates the type of operation that the request is asking the origin to perform. </p> <p>This is used only to indicate the web request component for AWS WAF to inspect, in the <a>FieldToMatch</a> specification. </p>'
   FieldToMatchData:
     type: string
     pattern: .*\S.*
@@ -3639,12 +3672,12 @@ definitions:
         description: 'The name of the managed rule group. You use this, along with the vendor name, to identify the rule group.'
       Description:
         $ref: '#/definitions/EntityDescription'
-        description: 'The description of the managed rule group, provided by AWS or the AWS Marketplace seller who manages it.'
-    description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>High-level information about a managed rule group, returned by <a>ListAvailableManagedRuleGroups</a>. This provides information like the name and vendor name, that you provide when you add a <a>ManagedRuleGroupStatement</a> to a web ACL. Managed rule groups include AWS managed rule groups, which are free of charge to AWS WAF customers, and AWS Marketplace managed rule groups, which you can subscribe to through AWS Marketplace. </p>'
+        description: 'The description of the managed rule group, provided by AWS Managed Rules or the AWS Marketplace seller who manages it.'
+    description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>High-level information about a managed rule group, returned by <a>ListAvailableManagedRuleGroups</a>. This provides information like the name and vendor name, that you provide when you add a <a>ManagedRuleGroupStatement</a> to a web ACL. Managed rule groups include AWS Managed Rules rule groups, which are free of charge to AWS WAF customers, and AWS Marketplace managed rule groups, which you can subscribe to through AWS Marketplace. </p>'
   NoneAction:
     type: object
     properties: {}
-    description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>Specifies that AWS WAF should do nothing. This is generally used to try out a rule without performing any actions. You set the <code>OverrideAction</code> on the <a>Rule</a>, and override the actions that are set at the statement level. </p>'
+    description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>Specifies that AWS WAF should do nothing. This is generally used to try out a rule without performing any actions. You set the <code>OverrideAction</code> on the <a>Rule</a>. </p> <p>This is used only in the context of other settings, for example to specify values for <a>RuleAction</a> and web ACL <a>DefaultAction</a>. </p>'
   Statement:
     type: object
     properties:
