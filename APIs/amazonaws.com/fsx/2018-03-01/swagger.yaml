@@ -357,14 +357,18 @@ paths:
           schema:
             $ref: '#/definitions/InvalidNetworkSettings'
         '486':
+          description: InvalidPerUnitStorageThroughput
+          schema:
+            $ref: '#/definitions/InvalidPerUnitStorageThroughput'
+        '487':
           description: ServiceLimitExceeded
           schema:
             $ref: '#/definitions/ServiceLimitExceeded'
-        '487':
+        '488':
           description: InternalServerError
           schema:
             $ref: '#/definitions/InternalServerError'
-        '488':
+        '489':
           description: MissingFileSystemConfiguration
           schema:
             $ref: '#/definitions/MissingFileSystemConfiguration'
@@ -1052,13 +1056,13 @@ definitions:
         description: (Optional) A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent creation. This string is automatically filled on your behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS SDK.
       FileSystemType:
         $ref: '#/definitions/FileSystemType'
-        description: The type of Amazon FSx file system to create.
+        description: 'The type of Amazon FSx file system to create, either <code>WINDOWS</code> or <code>LUSTRE</code>.'
       StorageCapacity:
         $ref: '#/definitions/StorageCapacity'
-        description: '<p>The storage capacity of the file system being created.</p> <p>For Windows file systems, valid values are 32 GiB - 65,536 GiB.</p> <p>For Lustre file systems, valid values are 1,200, 2,400, 3,600, then continuing in increments of 3600 GiB.</p>'
+        description: '<p>The storage capacity of the file system being created.</p> <p>For Windows file systems, valid values are 32 GiB - 65,536 GiB.</p> <p>For <code>SCRATCH_1</code> Lustre file systems, valid values are 1,200, 2,400, 3,600, then continuing in increments of 3600 GiB. For <code>SCRATCH_2</code> and <code>PERSISTENT_1</code> file systems, valid values are 1200, 2400, then continuing in increments of 2400 GiB.</p>'
       SubnetIds:
         $ref: '#/definitions/SubnetIds'
-        description: '<p>Specifies the IDs of the subnets that the file system will be accessible from. For Windows <code>MULTI_AZ_1</code> file system deployment types, provide exactly two subnet IDs, one for the preferred file server and one for the standy file server. You specify one of these subnets as the preferred subnet using the <code>WindowsConfiguration &gt; PreferredSubnetID</code> property.</p> <p>For Windows <code>SINGLE_AZ_1</code> file system deployment types and Lustre file systems, provide exactly one subnet ID. The file server is launched in that subnet''s Availability Zone.</p>'
+        description: '<p>Specifies the IDs of the subnets that the file system will be accessible from. For Windows <code>MULTI_AZ_1</code> file system deployment types, provide exactly two subnet IDs, one for the preferred file server and one for the standby file server. You specify one of these subnets as the preferred subnet using the <code>WindowsConfiguration &gt; PreferredSubnetID</code> property.</p> <p>For Windows <code>SINGLE_AZ_1</code> file system deployment types and Lustre file systems, provide exactly one subnet ID. The file server is launched in that subnet''s Availability Zone.</p>'
       SecurityGroupIds:
         $ref: '#/definitions/SecurityGroupIds'
         description: A list of IDs specifying the security groups to apply to all network interfaces created for file system access. This list isn't returned in later requests to describe the file system.
@@ -1077,6 +1081,7 @@ definitions:
   InvalidImportPath: {}
   InvalidExportPath: {}
   InvalidNetworkSettings: {}
+  InvalidPerUnitStorageThroughput: {}
   MissingFileSystemConfiguration: {}
   CreateFileSystemFromBackupResponse:
     type: object
@@ -1485,7 +1490,7 @@ definitions:
   KmsKeyId:
     type: string
     pattern: '^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[89aAbB][a-fA-F0-9]{3}-[a-fA-F0-9]{12}|arn:aws[a-z-]{0,7}:kms:[a-z]{2}-[a-z-]{4,}-\d+:\d{12}:(key|alias)\/([a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[89aAbB][a-fA-F0-9]{3}-[a-fA-F0-9]{12}|[a-zA-Z0-9:\/_-]+)|alias\/[a-zA-Z0-9:\/_-]+$'
-    description: 'The ID of the AWS Key Management Service (AWS KMS) key used to encrypt the file system''s data for an Amazon FSx for Windows File Server file system at rest. Amazon FSx for Lustre does not support KMS encryption. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html">Encrypt</a> in the <i>AWS Key Management Service API Reference</i>.'
+    description: 'The ID of the AWS Key Management Service (AWS KMS) key used to encrypt the file system''s data for Amazon FSx for Windows File Server file systems and Amazon FSx for Lustre <code>PERSISTENT_1</code> file systems at rest. In either case, if not specified, the Amazon FSx managed key is used. The Amazon FSx for Lustre <code>SCRATCH_1</code> and <code>SCRATCH_2</code> file systems are always encrypted at rest using Amazon FSx managed keys. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html">Encrypt</a> in the <i>AWS Key Management Service API Reference</i>.'
     minLength: 1
     maxLength: 2048
   ResourceARN:
@@ -1538,7 +1543,7 @@ definitions:
         description: The DNS name for the file system.
       KmsKeyId:
         $ref: '#/definitions/KmsKeyId'
-        description: 'The ID of the AWS Key Management Service (AWS KMS) key used to encrypt the file system''s data for an Amazon FSx for Windows File Server file system. Amazon FSx for Lustre does not support KMS encryption. '
+        description: 'The ID of the AWS Key Management Service (AWS KMS) key used to encrypt the file system''s data for Amazon FSx for Windows File Server file systems and persistent Amazon FSx for Lustre file systems at rest. In either case, if not specified, the Amazon FSx managed key is used. The scratch Amazon FSx for Lustre file systems are always encrypted at rest using Amazon FSx managed keys. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html">Encrypt</a> in the <i>AWS Key Management Service API Reference</i>.'
       ResourceARN:
         $ref: '#/definitions/ResourceARN'
         description: The Amazon Resource Name (ARN) for the file system resource.
@@ -1759,7 +1764,7 @@ definitions:
         description: The number of days to retain automatic backups. The default is to retain backups for 7 days. Setting this value to 0 disables the creation of automatic backups. The maximum retention period for backups is 35 days.
       CopyTagsToBackups:
         $ref: '#/definitions/Flag'
-        description: 'A boolean flag indicating whether tags for the file system should be copied to backups. This value defaults to false. If it''s set to true, all tags for the file system are copied to all automatic and user-initiated backups where the user doesn''t specify tags. If this value is true, and you specify one or more tags, only the specified tags are copied to backups.'
+        description: 'A boolean flag indicating whether tags for the file system should be copied to backups. This value defaults to false. If it''s set to true, all tags for the file system are copied to all automatic and user-initiated backups where the user doesn''t specify tags. If this value is true, and you specify one or more tags, only the specified tags are copied to backups. If you specify one or more tags when creating a user-initiated backup, no tags are copied from the file system, regardless of this value.'
     description: The configuration object for the Microsoft Windows file system used in <code>CreateFileSystem</code> and <code>CreateFileSystemFromBackup</code> operations.
   WeeklyTime:
     type: string
@@ -1771,6 +1776,16 @@ definitions:
     type: integer
     minimum: 1
     maximum: 512000
+  LustreDeploymentType:
+    type: string
+    enum:
+      - SCRATCH_1
+      - SCRATCH_2
+      - PERSISTENT_1
+  PerUnitStorageThroughput:
+    type: integer
+    minimum: 50
+    maximum: 200
   CreateFileSystemLustreConfiguration:
     type: object
     properties:
@@ -1785,7 +1800,13 @@ definitions:
         description: '<p>(Optional) The path in Amazon S3 where the root of your Amazon FSx file system is exported. The path must use the same Amazon S3 bucket as specified in ImportPath. You can provide an optional prefix to which new and changed data is to be exported from your Amazon FSx for Lustre file system. If an <code>ExportPath</code> value is not provided, Amazon FSx sets a default export path, <code>s3://import-bucket/FSxLustre[creation-timestamp]</code>. The timestamp is in UTC format, for example <code>s3://import-bucket/FSxLustre20181105T222312Z</code>.</p> <p>The Amazon S3 export bucket must be the same as the import bucket specified by <code>ImportPath</code>. If you only specify a bucket name, such as <code>s3://import-bucket</code>, you get a 1:1 mapping of file system objects to S3 bucket objects. This mapping means that the input data in S3 is overwritten on export. If you provide a custom prefix in the export path, such as <code>s3://import-bucket/[custom-optional-prefix]</code>, Amazon FSx exports the contents of your file system to that export prefix in the Amazon S3 bucket.</p>'
       ImportedFileChunkSize:
         $ref: '#/definitions/Megabytes'
-        description: '<p>(Optional) For files imported from a data repository, this value determines the stripe count and maximum amount of data per file (in MiB) stored on a single physical disk. The maximum number of disks that a single file can be striped across is limited by the total number of disks that make up the file system.</p> <p>The chunk size default is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB (500 GiB). Amazon S3 objects have a maximum size of 5 TB.</p>'
+        description: '<p>(Optional) For files imported from a data repository, this value determines the stripe count and maximum amount of data per file (in MiB) stored on a single physical disk. The maximum number of disks that a single file can be striped across is limited by the total number of disks that make up the file system.</p> <p>The default chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB (500 GiB). Amazon S3 objects have a maximum size of 5 TB.</p>'
+      DeploymentType:
+        $ref: '#/definitions/LustreDeploymentType'
+        description: '<p>(Optional) Choose <code>SCRATCH_1</code> and <code>SCRATCH_2</code> deployment types when you need temporary storage and shorter-term processing of data. The <code>SCRATCH_2</code> deployment type provides in-transit encryption of data and higher burst throughput capacity than <code>SCRATCH_1</code>.</p> <p>Choose <code>PERSISTENT_1</code> deployment type for longer-term storage and workloads and encryption of data in transit. To learn more about deployment types, see <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/lustre-deployment-types.html"> FSx for Lustre Deployment Options</a>.</p> <p>Encryption of data in-transit is automatically enabled when you access a <code>SCRATCH_2</code> or <code>PERSISTENT_1</code> file system from Amazon EC2 instances that <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/data- protection.html">support this feature</a>. (Default = <code>SCRATCH_1</code>) </p> <p>Encryption of data in-transit for <code>SCRATCH_2</code> and <code>PERSISTENT_1</code> deployment types is supported when accessed from supported instance types in supported AWS Regions. To learn more, <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/encryption-in-transit-fsxl.html">Encrypting Data in Transit</a>.</p>'
+      PerUnitStorageThroughput:
+        $ref: '#/definitions/PerUnitStorageThroughput'
+        description: '<p> (Optional) For the <code>PERSISTENT_1</code> deployment type, describes the amount of read and write throughput for each 1 tebibyte of storage, in MB/s/TiB. File system throughput capacity is calculated by multiplying ﬁle system storage capacity (TiB) by the PerUnitStorageThroughput (MB/s/TiB). For a 2.4 TiB ﬁle system, provisioning 50 MB/s/TiB of PerUnitStorageThroughput yields 120 MB/s of ﬁle system throughput. You pay for the amount of throughput that you provision. (Default = 200 MB/s/TiB) </p> <p>Valid values are 50, 100, 200.</p>'
     description: The Lustre configuration for the file system being created. This value is required if <code>FileSystemType</code> is set to <code>LUSTRE</code>.
   FileSystemType:
     type: string
@@ -2083,7 +2104,7 @@ definitions:
         description: The number of days to retain automatic backups. Setting this to 0 disables automatic backups. You can retain automatic backups for a maximum of 35 days.
       CopyTagsToBackups:
         $ref: '#/definitions/Flag'
-        description: 'A boolean flag indicating whether tags on the file system should be copied to backups. This value defaults to false. If it''s set to true, all tags on the file system are copied to all automatic backups and any user-initiated backups where the user doesn''t specify any tags. If this value is true, and you specify one or more tags, only the specified tags are copied to backups.'
+        description: 'A boolean flag indicating whether tags on the file system should be copied to backups. This value defaults to false. If it''s set to true, all tags on the file system are copied to all automatic backups and any user-initiated backups where the user doesn''t specify any tags. If this value is true, and you specify one or more tags, only the specified tags are copied to backups. If you specify one or more tags when creating a user-initiated backup, no tags are copied from the file system, regardless of this value.'
     description: The configuration for this Microsoft Windows file system.
   LustreFileSystemConfiguration:
     type: object
@@ -2093,6 +2114,15 @@ definitions:
         description: The UTC time that you want to begin your weekly maintenance window.
       DataRepositoryConfiguration:
         $ref: '#/definitions/DataRepositoryConfiguration'
+      DeploymentType:
+        $ref: '#/definitions/LustreDeploymentType'
+        description: The deployment type of the FSX for Lustre file system.
+      PerUnitStorageThroughput:
+        $ref: '#/definitions/PerUnitStorageThroughput'
+        description: ' Per unit storage throughput represents the megabytes per second of read or write throughput per 1 tebibyte of storage provisioned. File system throughput capacity is equal to Storage capacity (TiB) * PerUnitStorageThroughput (MB/s/TiB). This option is only valid for <code>PERSISTENT_1</code> deployment types. Valid values are 50, 100, 200. '
+      MountName:
+        $ref: '#/definitions/LustreFileSystemMountName'
+        description: '<p>You use the <code>MountName</code> value when mounting the file system.</p> <p>For the <code>SCRATCH_1</code> deployment type, this value is always "<code>fsx</code>". For <code>SCRATCH_2</code> and <code>PERSISTENT_1</code> deployment types, this value is a string that is unique within an AWS Region. </p>'
     description: The configuration for the Amazon FSx for Lustre file system.
   FileSystemAdministratorsGroupName:
     type: string
@@ -2139,6 +2169,11 @@ definitions:
     description: The value for a filter.
     minLength: 1
     maxLength: 128
+  LustreFileSystemMountName:
+    type: string
+    pattern: '^([A-Za-z0-9_-]{1,8})$'
+    minLength: 1
+    maxLength: 8
   NetworkInterfaceId:
     type: string
     pattern: '^(eni-[0-9a-f]{8,})$'

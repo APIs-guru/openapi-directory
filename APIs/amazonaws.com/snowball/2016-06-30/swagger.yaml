@@ -992,7 +992,7 @@ definitions:
         description: 'The <code>RoleARN</code> that you want to associate with this cluster. <code>RoleArn</code> values are created by using the <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html">CreateRole</a> API action in AWS Identity and Access Management (IAM).'
       SnowballType:
         $ref: '#/definitions/SnowballType'
-        description: 'The type of AWS Snowball device to use for this cluster. Currently, the only supported device type for cluster jobs is <code>EDGE</code>.'
+        description: '<p>The type of AWS Snowball device to use for this cluster. Currently, the only supported device type for cluster jobs is <code>EDGE</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html">Snowball Edge Device Options</a> in the Snowball Edge Developer Guide.</p>'
       ShippingOption:
         $ref: '#/definitions/ShippingOption'
         description: '<p>The shipping speed for each node in this cluster. This speed doesn''t dictate how soon you''ll get each Snowball Edge device, rather it represents how quickly each device moves to its destination while in transit. Regional shipping speeds are as follows:</p> <ul> <li> <p>In Australia, you have access to express shipping. Typically, devices shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snowball Edges shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, Snowball Edges are delivered in one to seven days.</p> </li> <li> <p>In the US, you have access to one-day shipping and two-day shipping.</p> </li> </ul>'
@@ -1002,6 +1002,9 @@ definitions:
       ForwardingAddressId:
         $ref: '#/definitions/AddressId'
         description: The forwarding address ID for a cluster. This field is not supported in most regions.
+      TaxDocuments:
+        $ref: '#/definitions/TaxDocuments'
+        description: The tax documents required in your AWS Region.
   InvalidInputCombinationException: {}
   Ec2RequestFailedException: {}
   CreateJobResult:
@@ -1047,10 +1050,13 @@ definitions:
         description: 'The ID of a cluster. If you''re creating a job for a node in a cluster, you need to provide only this <code>clusterId</code> value. The other job attributes are inherited from the cluster.'
       SnowballType:
         $ref: '#/definitions/SnowballType'
-        description: 'The type of AWS Snowball device to use for this job. Currently, the only supported device type for cluster jobs is <code>EDGE</code>.'
+        description: '<p>The type of AWS Snowball device to use for this job. Currently, the only supported device type for cluster jobs is <code>EDGE</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html">Snowball Edge Device Options</a> in the Snowball Edge Developer Guide.</p>'
       ForwardingAddressId:
         $ref: '#/definitions/AddressId'
         description: The forwarding address ID for a job. This field is not supported in most regions.
+      TaxDocuments:
+        $ref: '#/definitions/TaxDocuments'
+        description: The tax documents required in your AWS Region.
   ClusterLimitExceededException: {}
   DescribeAddressResult:
     type: object
@@ -1594,6 +1600,13 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: Any change in job state will trigger a notification for this job.
     description: '<p>The Amazon Simple Notification Service (Amazon SNS) notification settings associated with a specific job. The <code>Notification</code> object is returned as a part of the response syntax of the <code>DescribeJob</code> action in the <code>JobMetadata</code> data type.</p> <p>When the notification settings are defined during job creation, you can choose to notify based on a specific set of job states using the <code>JobStatesToNotify</code> array of strings, or you can specify that you want to have Amazon SNS notifications sent out for all job states with <code>NotifyAll</code> set to true.</p>'
+  TaxDocuments:
+    type: object
+    properties:
+      IND:
+        $ref: '#/definitions/INDTaxDocuments'
+        description: The tax documents required in AWS Regions in India.
+    description: The tax documents required in your AWS Region.
   ClusterMetadata:
     type: object
     properties:
@@ -1617,7 +1630,7 @@ definitions:
         description: 'The type of job for this cluster. Currently, the only job type supported for clusters is <code>LOCAL_USE</code>.'
       SnowballType:
         $ref: '#/definitions/SnowballType'
-        description: 'The type of AWS Snowball device to use for this cluster. Currently, the only supported device type for cluster jobs is <code>EDGE</code>.'
+        description: '<p>The type of AWS Snowball device to use for this cluster. Currently, the only supported device type for cluster jobs is <code>EDGE</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html">Snowball Edge Device Options</a> in the Snowball Edge Developer Guide.</p>'
       CreationDate:
         $ref: '#/definitions/Timestamp'
         description: The creation date for this cluster.
@@ -1636,6 +1649,9 @@ definitions:
       ForwardingAddressId:
         $ref: '#/definitions/AddressId'
         description: 'The ID of the address that you want a cluster shipped to, after it will be shipped to its primary address. This field is not supported in most regions.'
+      TaxDocuments:
+        $ref: '#/definitions/TaxDocuments'
+        description: The tax documents required in your AWS Region.
     description: Contains metadata about a specific cluster.
   CompatibleImage:
     type: object
@@ -1735,6 +1751,9 @@ definitions:
       ForwardingAddressId:
         $ref: '#/definitions/AddressId'
         description: 'The ID of the address that you want a job shipped to, after it will be shipped to its primary address. This field is not supported in most regions.'
+      TaxDocuments:
+        $ref: '#/definitions/TaxDocuments'
+        description: The metadata associated with the tax documents required in your AWS Region.
     description: 'Contains information about a specific job including shipping information, job status, and other important metadata. This information is returned as a part of the response syntax of the <code>DescribeJob</code> action.'
   JobMetadataList:
     type: array
@@ -1770,8 +1789,18 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/EventTriggerDefinition'
+  GSTIN:
+    type: string
+    pattern: '\d{2}[A-Z]{5}\d{4}[A-Z]{1}[A-Z\d]{1}[Z]{1}[A-Z\d]{1}'
   Integer:
     type: integer
+  INDTaxDocuments:
+    type: object
+    properties:
+      GSTIN:
+        $ref: '#/definitions/GSTIN'
+        description: The Goods and Services Tax (GST) documents required in AWS Regions in India.
+    description: The tax documents required in AWS Regions in India.
   JobState:
     type: string
     enum:

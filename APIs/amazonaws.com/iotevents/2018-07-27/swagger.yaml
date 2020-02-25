@@ -3,7 +3,7 @@ info:
   version: '2018-07-27'
   x-release: v4
   title: AWS IoT Events
-  description: 'AWS IoT Events monitors your equipment or device fleets for failures or changes in operation, and triggers actions when such events occur. AWS IoT Events API commands enable you to create, read, update and delete inputs and detector models, and to list their versions.'
+  description: 'AWS IoT Events monitors your equipment or device fleets for failures or changes in operation, and triggers actions when such events occur. You can use AWS IoT Events API commands to create, read, update, and delete inputs and detector models, and to list their versions.'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -229,7 +229,7 @@ paths:
                 type: string
                 maxLength: 128
               key:
-                description: The input attribute key used to identify a device or system in order to create a detector (an instance of the detector model) and then to route each input received to the appropriate detector (instance). This parameter uses a JSON-path expression to specify the attribute-value pair in the message payload of each input that is used to identify the device associated with the input.
+                description: The input attribute key used to identify a device or system to create a detector (an instance of the detector model) and then to route each input received to the appropriate detector (instance). This parameter uses a JSON-path expression in the message payload of each input to specify the attribute-value pair that is used to identify the device associated with the input.
                 type: string
                 pattern: '^((`[\w\- ]+`)|([\w\-]+))(\.((`[\w- ]+`)|([\w\-]+)))*$'
                 minLength: 1
@@ -350,7 +350,7 @@ paths:
                 properties:
                   attributes:
                     $ref: '#/definitions/Attributes'
-                    description: 'The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the AWS IoT Events system using <code>BatchPutMessage</code>. Each such message contains a JSON payload, and those attributes (and their paired values) specified here are available for use in the <code>"condition"</code> expressions used by detectors that monitor this input. '
+                    description: 'The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the AWS IoT Events system using <code>BatchPutMessage</code>. Each such message contains a JSON payload, and those attributes (and their paired values) specified here are available for use in the <code>condition</code> expressions used by detectors that monitor this input. '
               tags:
                 description: Metadata that can be used to manage the input.
                 type: array
@@ -453,7 +453,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: DescribeDetectorModel
-      description: 'Describes a detector model. If the <code>"version"</code> parameter is not specified, information about the latest version is returned.'
+      description: 'Describes a detector model. If the <code>version</code> parameter is not specified, information about the latest version is returned.'
       responses:
         '200':
           description: Success
@@ -716,7 +716,7 @@ paths:
                 properties:
                   attributes:
                     $ref: '#/definitions/Attributes'
-                    description: 'The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the AWS IoT Events system using <code>BatchPutMessage</code>. Each such message contains a JSON payload, and those attributes (and their paired values) specified here are available for use in the <code>"condition"</code> expressions used by detectors that monitor this input. '
+                    description: 'The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the AWS IoT Events system using <code>BatchPutMessage</code>. Each such message contains a JSON payload, and those attributes (and their paired values) specified here are available for use in the <code>condition</code> expressions used by detectors that monitor this input. '
   /logging:
     get:
       operationId: DescribeLoggingOptions
@@ -761,7 +761,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     put:
       operationId: PutLoggingOptions
-      description: '<p>Sets or updates the AWS IoT Events logging options.</p> <p>If you update the value of any <code>"loggingOptions"</code> field, it takes up to one minute for the change to take effect. Also, if you change the policy attached to the role you specified in the <code>"roleArn"</code> field (for example, to correct an invalid policy) it takes up to five minutes for that change to take effect.</p>'
+      description: '<p>Sets or updates the AWS IoT Events logging options.</p> <p>If you update the value of any <code>loggingOptions</code> field, it takes up to one minute for the change to take effect. If you change the policy attached to the role you specified in the <code>roleArn</code> field (for example, to correct an invalid policy), it takes up to five minutes for that change to take effect.</p>'
       responses:
         '200':
           description: Success
@@ -1197,8 +1197,8 @@ definitions:
     properties:
       mqttTopic:
         $ref: '#/definitions/MQTTTopic'
-        description: The MQTT topic of the message.
-    description: Information required to publish the MQTT message via the AWS IoT message broker.
+        description: The MQTT topic of the message. You can use a string expression that includes variables (<code>$variable.&lt;variable-name&gt;</code>) and input values (<code>$input.&lt;input-name&gt;.&lt;path-to-datum&gt;</code>) as the topic string.
+    description: Information required to publish the MQTT message through the AWS IoT message broker.
   SetTimerAction:
     type: object
     required:
@@ -1210,7 +1210,7 @@ definitions:
         description: The name of the timer.
       seconds:
         $ref: '#/definitions/Seconds'
-        description: The number of seconds until the timer expires. The minimum value is 60 seconds to ensure accuracy.
+        description: 'The number of seconds until the timer expires. The minimum value is 60 seconds to ensure accuracy. The maximum value is 31622400 seconds. '
     description: Information needed to set the timer.
   ClearTimerAction:
     type: object
@@ -1258,7 +1258,7 @@ definitions:
         description: The URL of the SQS queue where the data is written.
       useBase64:
         $ref: '#/definitions/UseBase64'
-        description: 'Set this to TRUE if you want the data to be Base-64 encoded before it is written to the queue. Otherwise, set this to FALSE.'
+        description: 'Set this to TRUE if you want the data to be base-64 encoded before it is written to the queue. Otherwise, set this to FALSE.'
     description: Sends information about the detector model instance and the event that triggered the action to an Amazon SQS queue.
   FirehoseAction:
     type: object
@@ -1271,7 +1271,7 @@ definitions:
       separator:
         $ref: '#/definitions/FirehoseSeparator'
         description: 'A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: ''\n'' (newline), ''\t'' (tab), ''\r\n'' (Windows newline), '','' (comma).'
-    description: Sends information about the detector model instance and the event that triggered the action to a Kinesis Data Firehose delivery stream.
+    description: Sends information about the detector model instance and the event that triggered the action to an Amazon Kinesis Data Firehose delivery stream.
   Action:
     type: object
     properties:
@@ -1298,14 +1298,14 @@ definitions:
         description: 'Calls a Lambda function, passing in information about the detector model instance and the event that triggered the action.'
       iotEvents:
         $ref: '#/definitions/IotEventsAction'
-        description: 'Sends an IoT Events input, passing in information about the detector model instance and the event that triggered the action.'
+        description: 'Sends an AWS IoT Events input, passing in information about the detector model instance and the event that triggered the action.'
       sqs:
         $ref: '#/definitions/SqsAction'
         description: Sends information about the detector model instance and the event that triggered the action to an Amazon SQS queue.
       firehose:
         $ref: '#/definitions/FirehoseAction'
-        description: Sends information about the detector model instance and the event that triggered the action to a Kinesis Data Firehose delivery stream.
-    description: An action to be performed when the <code>"condition"</code> is TRUE.
+        description: Sends information about the detector model instance and the event that triggered the action to an Amazon Kinesis Data Firehose delivery stream.
+    description: An action to be performed when the <code>condition</code> is TRUE.
   Actions:
     type: array
     items:
@@ -1322,8 +1322,8 @@ definitions:
     properties:
       jsonPath:
         $ref: '#/definitions/AttributeJsonPath'
-        description: '<p>An expression that specifies an attribute-value pair in a JSON structure. Use this to specify an attribute from the JSON payload that is made available by the input. Inputs are derived from messages sent to the AWS IoT Events system (<code>BatchPutMessage</code>). Each such message contains a JSON payload, and the attribute (and its paired value) specified here are available for use in the <code>"condition"</code> expressions used by detectors. </p> <p>Syntax: <code>&lt;field-name&gt;.&lt;field-name&gt;...</code> </p>'
-    description: 'The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the AWS IoT Events system using <code>BatchPutMessage</code>. Each such message contains a JSON payload, and those attributes (and their paired values) specified here are available for use in the <code>condition</code> expressions used by detectors. '
+        description: '<p>An expression that specifies an attribute-value pair in a JSON structure. Use this to specify an attribute from the JSON payload that is made available by the input. Inputs are derived from messages sent to AWS IoT Events (<code>BatchPutMessage</code>). Each such message contains a JSON payload. The attribute (and its paired value) specified here are available for use in the <code>condition</code> expressions used by detectors. </p> <p>Syntax: <code>&lt;field-name&gt;.&lt;field-name&gt;...</code> </p>'
+    description: 'The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the AWS IoT Events system using <code>BatchPutMessage</code>. Each such message contains a JSON payload. Those attributes (and their paired values) specified here are available for use in the <code>condition</code> expressions used by detectors. '
   TimerName:
     type: string
     minLength: 1
@@ -1379,7 +1379,7 @@ definitions:
         description: A brief description of the detector model.
       key:
         $ref: '#/definitions/AttributeJsonPath'
-        description: The input attribute key used to identify a device or system in order to create a detector (an instance of the detector model) and then to route each input received to the appropriate detector (instance). This parameter uses a JSON-path expression to specify the attribute-value pair in the message payload of each input that is used to identify the device associated with the input.
+        description: The input attribute key used to identify a device or system to create a detector (an instance of the detector model) and then to route each input received to the appropriate detector (instance). This parameter uses a JSON-path expression in the message payload of each input to specify the attribute-value pair that is used to identify the device associated with the input.
       roleArn:
         $ref: '#/definitions/AmazonResourceName'
         description: The ARN of the role that grants permission to AWS IoT Events to perform its operations.
@@ -1418,7 +1418,7 @@ definitions:
         description: The status of the detector model.
       key:
         $ref: '#/definitions/AttributeJsonPath'
-        description: The input attribute key used to identify a device or system in order to create a detector (an instance of the detector model) and then to route each input received to the appropriate detector (instance). This parameter uses a JSON-path expression to specify the attribute-value pair in the message payload of each input that is used to identify the device associated with the input.
+        description: The input attribute key used to identify a device or system to create a detector (an instance of the detector model) and then to route each input received to the appropriate detector (instance). This parameter uses a JSON-path expression in the message payload of each input to specify the attribute-value pair that is used to identify the device associated with the input.
       evaluationMethod:
         $ref: '#/definitions/EvaluationMethod'
         description: 'Information about the order in which events are evaluated and how actions are executed. '
@@ -1438,7 +1438,7 @@ definitions:
     properties:
       attributes:
         $ref: '#/definitions/Attributes'
-        description: 'The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the AWS IoT Events system using <code>BatchPutMessage</code>. Each such message contains a JSON payload, and those attributes (and their paired values) specified here are available for use in the <code>"condition"</code> expressions used by detectors that monitor this input. '
+        description: 'The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the AWS IoT Events system using <code>BatchPutMessage</code>. Each such message contains a JSON payload, and those attributes (and their paired values) specified here are available for use in the <code>condition</code> expressions used by detectors that monitor this input. '
     description: The definition of the input.
   CreateInputRequest:
     type: object
@@ -1641,11 +1641,11 @@ definitions:
         description: The name of the event.
       condition:
         $ref: '#/definitions/Condition'
-        description: '[Optional] The Boolean expression that when TRUE causes the <code>"actions"</code> to be performed. If not present, the actions are performed (=TRUE); if the expression result is not a Boolean value, the actions are NOT performed (=FALSE).'
+        description: 'Optional. The Boolean expression that, when TRUE, causes the <code>actions</code> to be performed. If not present, the actions are performed (=TRUE). If the expression result is not a Boolean value, the actions are not performed (=FALSE).'
       actions:
         $ref: '#/definitions/Actions'
         description: The actions to be performed.
-    description: Specifies the <code>"actions"</code> to be performed when the <code>"condition"</code> evaluates to TRUE.
+    description: Specifies the <code>actions</code> to be performed when the <code>condition</code> evaluates to TRUE.
   Events:
     type: array
     items:
@@ -1715,15 +1715,15 @@ definitions:
     properties:
       events:
         $ref: '#/definitions/Events'
-        description: Specifies the actions that are performed when the state is entered and the <code>"condition"</code> is TRUE.
+        description: Specifies the actions that are performed when the state is entered and the <code>condition</code> is TRUE.
     description: 'When entering this state, perform these <code>actions</code> if the <code>condition</code> is TRUE.'
   OnExitLifecycle:
     type: object
     properties:
       events:
         $ref: '#/definitions/Events'
-        description: Specifies the <code>"actions"</code> that are performed when the state is exited and the <code>"condition"</code> is TRUE.
-    description: 'When exiting this state, perform these <code>"actions"</code> if the specified <code>"condition"</code> is TRUE.'
+        description: Specifies the <code>actions</code> that are performed when the state is exited and the <code>condition</code> is TRUE.
+    description: 'When exiting this state, perform these <code>actions</code> if the specified <code>condition</code> is TRUE.'
   TransitionEvents:
     type: array
     items:
@@ -1733,11 +1733,11 @@ definitions:
     properties:
       events:
         $ref: '#/definitions/Events'
-        description: Specifies the actions performed when the <code>"condition"</code> evaluates to TRUE.
+        description: Specifies the actions performed when the <code>condition</code> evaluates to TRUE.
       transitionEvents:
         $ref: '#/definitions/TransitionEvents'
-        description: 'Specifies the actions performed, and the next state entered, when a <code>"condition"</code> evaluates to TRUE.'
-    description: Specifies the actions performed when the <code>"condition"</code> evaluates to TRUE.
+        description: 'Specifies the actions performed, and the next state entered, when a <code>condition</code> evaluates to TRUE.'
+    description: Specifies the actions performed when the <code>condition</code> evaluates to TRUE.
   PutLoggingOptionsRequest:
     type: object
     required:
@@ -1771,13 +1771,13 @@ definitions:
         description: The name of the state.
       onInput:
         $ref: '#/definitions/OnInputLifecycle'
-        description: 'When an input is received and the <code>"condition"</code> is TRUE, perform the specified <code>"actions"</code>.'
+        description: 'When an input is received and the <code>condition</code> is TRUE, perform the specified <code>actions</code>.'
       onEnter:
         $ref: '#/definitions/OnEnterLifecycle'
-        description: 'When entering this state, perform these <code>"actions"</code> if the <code>"condition"</code> is TRUE.'
+        description: 'When entering this state, perform these <code>actions</code> if the <code>condition</code> is TRUE.'
       onExit:
         $ref: '#/definitions/OnExitLifecycle'
-        description: 'When exiting this state, perform these <code>"actions"</code> if the specified <code>"condition"</code> is TRUE.'
+        description: 'When exiting this state, perform these <code>actions</code> if the specified <code>condition</code> is TRUE.'
     description: Information that defines a state of a detector.
   TagValue:
     type: string
@@ -1807,14 +1807,14 @@ definitions:
         description: The name of the transition event.
       condition:
         $ref: '#/definitions/Condition'
-        description: '[Required] A Boolean expression that when TRUE causes the actions to be performed and the <code>"nextState"</code> to be entered.'
+        description: Required. A Boolean expression that when TRUE causes the actions to be performed and the <code>nextState</code> to be entered.
       actions:
         $ref: '#/definitions/Actions'
         description: The actions to be performed.
       nextState:
         $ref: '#/definitions/StateName'
         description: The next state to enter.
-    description: Specifies the actions performed and the next state entered when a <code>"condition"</code> evaluates to TRUE.
+    description: Specifies the actions performed and the next state entered when a <code>condition</code> evaluates to TRUE.
   UntagResourceRequest:
     type: object
     properties: {}

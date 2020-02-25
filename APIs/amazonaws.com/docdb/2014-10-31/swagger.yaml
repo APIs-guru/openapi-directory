@@ -1047,7 +1047,7 @@ paths:
         - name: DBClusterParameterGroupName
           in: query
           required: true
-          description: '<p>The name of the cluster parameter group.</p> <p>Constraints:</p> <ul> <li> <p>Must match the name of an existing <code>DBClusterParameterGroup</code>.</p> </li> </ul> <note> <p>This value is stored as a lowercase string.</p> </note>'
+          description: '<p>The name of the cluster parameter group.</p> <p>Constraints:</p> <ul> <li> <p>Must not match the name of an existing <code>DBClusterParameterGroup</code>.</p> </li> </ul> <note> <p>This value is stored as a lowercase string.</p> </note>'
           type: string
         - name: DBParameterGroupFamily
           in: query
@@ -1107,7 +1107,7 @@ paths:
         - name: DBClusterParameterGroupName
           in: formData
           required: true
-          description: '<p>The name of the cluster parameter group.</p> <p>Constraints:</p> <ul> <li> <p>Must match the name of an existing <code>DBClusterParameterGroup</code>.</p> </li> </ul> <note> <p>This value is stored as a lowercase string.</p> </note>'
+          description: '<p>The name of the cluster parameter group.</p> <p>Constraints:</p> <ul> <li> <p>Must not match the name of an existing <code>DBClusterParameterGroup</code>.</p> </li> </ul> <note> <p>This value is stored as a lowercase string.</p> </note>'
           type: string
         - name: DBParameterGroupFamily
           in: formData
@@ -2140,7 +2140,7 @@ paths:
     get:
       x-aws-operation-name: DescribeCertificates
       operationId: GET DescribeCertificates
-      description: 'Returns a list of certificate authority (CA) certificates provided by Amazon DocumentDB for this AWS account. For certain management features such as cluster and instance lifecycle management, Amazon DocumentDB leverages operational technology that is shared with Amazon RDS and Amazon Neptune. Use the <code>filterName=engine,Values=docdb</code> filter parameter to return only Amazon DocumentDB clusters.'
+      description: Returns a list of certificate authority (CA) certificates provided by Amazon DocumentDB for this AWS account.
       responses:
         '200':
           description: Success
@@ -2196,7 +2196,7 @@ paths:
     post:
       x-aws-operation-name: DescribeCertificates
       operationId: POST DescribeCertificates
-      description: 'Returns a list of certificate authority (CA) certificates provided by Amazon DocumentDB for this AWS account. For certain management features such as cluster and instance lifecycle management, Amazon DocumentDB leverages operational technology that is shared with Amazon RDS and Amazon Neptune. Use the <code>filterName=engine,Values=docdb</code> filter parameter to return only Amazon DocumentDB clusters.'
+      description: Returns a list of certificate authority (CA) certificates provided by Amazon DocumentDB for this AWS account.
       responses:
         '200':
           description: Success
@@ -2681,7 +2681,7 @@ paths:
     get:
       x-aws-operation-name: DescribeDBClusters
       operationId: GET DescribeDBClusters
-      description: Returns information about provisioned Amazon DocumentDB clusters. This API operation supports pagination.
+      description: 'Returns information about provisioned Amazon DocumentDB clusters. This API operation supports pagination. For certain management features such as cluster and instance lifecycle management, Amazon DocumentDB leverages operational technology that is shared with Amazon RDS and Amazon Neptune. Use the <code>filterName=engine,Values=docdb</code> filter parameter to return only Amazon DocumentDB clusters.'
       responses:
         '200':
           description: Success
@@ -2737,7 +2737,7 @@ paths:
     post:
       x-aws-operation-name: DescribeDBClusters
       operationId: POST DescribeDBClusters
-      description: Returns information about provisioned Amazon DocumentDB clusters. This API operation supports pagination.
+      description: 'Returns information about provisioned Amazon DocumentDB clusters. This API operation supports pagination. For certain management features such as cluster and instance lifecycle management, Amazon DocumentDB leverages operational technology that is shared with Amazon RDS and Amazon Neptune. Use the <code>filterName=engine,Values=docdb</code> filter parameter to return only Amazon DocumentDB clusters.'
       responses:
         '200':
           description: Success
@@ -6536,7 +6536,7 @@ definitions:
     properties:
       DBClusterParameterGroupName:
         $ref: '#/definitions/String'
-        description: '<p>The name of the cluster parameter group.</p> <p>Constraints:</p> <ul> <li> <p>Must match the name of an existing <code>DBClusterParameterGroup</code>.</p> </li> </ul> <note> <p>This value is stored as a lowercase string.</p> </note>'
+        description: '<p>The name of the cluster parameter group.</p> <p>Constraints:</p> <ul> <li> <p>Must not match the name of an existing <code>DBClusterParameterGroup</code>.</p> </li> </ul> <note> <p>This value is stored as a lowercase string.</p> </note>'
       DBParameterGroupFamily:
         $ref: '#/definitions/String'
         description: The cluster parameter group family name.
