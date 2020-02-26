@@ -1213,6 +1213,7 @@ definitions:
         description: <p>A list of all of the currently assigned <code>VersionStage</code> staging labels and the <code>VersionId</code> that each is attached to. Staging labels are used to keep track of the different versions during the rotation process.</p> <note> <p>A version that does not have any staging labels attached is considered deprecated and subject to deletion. Such versions are not included in this list.</p> </note>
       OwningService:
         $ref: '#/definitions/OwningServiceType'
+        description: Returns the name of the service that created this secret.
   DescribeSecretRequest:
     type: object
     required:
@@ -1674,12 +1675,12 @@ definitions:
   SecretBinaryType:
     type: string
     minLength: 0
-    maxLength: 10240
+    maxLength: 65536
     format: password
   SecretStringType:
     type: string
     minLength: 0
-    maxLength: 10240
+    maxLength: 65536
     format: password
   TagListType:
     type: array
@@ -1798,7 +1799,7 @@ definitions:
         description: 'The ARN or alias of the AWS KMS customer master key (CMK) that''s used to encrypt the <code>SecretString</code> and <code>SecretBinary</code> fields in each version of the secret. If you don''t provide a key, then Secrets Manager defaults to encrypting the secret fields with the default KMS CMK (the one named <code>awssecretsmanager</code>) for this account.'
       RotationEnabled:
         $ref: '#/definitions/RotationEnabledType'
-        description: 'Indicated whether automatic, scheduled rotation is enabled for this secret.'
+        description: 'Indicates whether automatic, scheduled rotation is enabled for this secret.'
       RotationLambdaARN:
         $ref: '#/definitions/RotationLambdaARNType'
         description: The ARN of an AWS Lambda function that's invoked by Secrets Manager to rotate and expire the secret either automatically per the schedule or manually by a call to <a>RotateSecret</a>.
@@ -1825,6 +1826,7 @@ definitions:
         description: <p>A list of all of the currently assigned <code>SecretVersionStage</code> staging labels and the <code>SecretVersionId</code> that each is attached to. Staging labels are used to keep track of the different versions during the rotation process.</p> <note> <p>A version that does not have any <code>SecretVersionStage</code> is considered deprecated and subject to deletion. Such versions are not included in this list.</p> </note>
       OwningService:
         $ref: '#/definitions/OwningServiceType'
+        description: Returns the name of the service that created the secret.
     description: 'A structure that contains the details about a secret. It does not include the encrypted <code>SecretString</code> and <code>SecretBinary</code> values. To get those values, use the <a>GetSecretValue</a> operation.'
   SecretVersionsListEntry:
     type: object

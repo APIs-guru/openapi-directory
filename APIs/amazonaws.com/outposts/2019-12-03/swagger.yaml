@@ -272,6 +272,47 @@ paths:
           minimum: 1
           maximum: 1000
   '/outposts/{OutpostId}':
+    delete:
+      operationId: DeleteOutpost
+      description: Deletes the Outpost.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteOutpostOutput'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '483':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: OutpostId
+          in: path
+          required: true
+          description: The ID of the Outpost.
+          type: string
+          pattern: '^(arn:aws([a-z-]+)?:outposts:[a-z\d-]+:\d{12}:outpost/)?op-[a-f0-9]{17}$'
+          minLength: 1
+          maxLength: 180
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetOutpost
       description: Gets information about the specified Outpost.
@@ -305,6 +346,40 @@ paths:
           pattern: '^(arn:aws([a-z-]+)?:outposts:[a-z\d-]+:\d{12}:outpost/)?op-[a-f0-9]{17}$'
           minLength: 1
           maxLength: 180
+  '/sites/{SiteId}':
+    delete:
+      operationId: DeleteSite
+      description: Deletes the site.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteSiteOutput'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '483':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: SiteId
+          in: path
+          required: true
+          description: The ID of the site.
+          type: string
+          pattern: 'os-[a-f0-9]{17}'
+          minLength: 1
+          maxLength: 255
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -426,6 +501,12 @@ definitions:
   AccessDeniedException: {}
   InternalServerException: {}
   ServiceQuotaExceededException: {}
+  DeleteOutpostOutput:
+    type: object
+    properties: {}
+  DeleteSiteOutput:
+    type: object
+    properties: {}
   GetOutpostOutput:
     type: object
     properties:
@@ -534,6 +615,12 @@ definitions:
     description: The ID of the Outpost.
     minLength: 1
     maxLength: 180
+  DeleteOutpostInput:
+    type: object
+    properties: {}
+  DeleteSiteInput:
+    type: object
+    properties: {}
   GetOutpostInput:
     type: object
     properties: {}

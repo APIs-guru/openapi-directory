@@ -215,6 +215,7 @@ paths:
               - configurationInfo
               - openMonitoring
               - kafkaVersion
+              - loggingInfo
               - numberOfBrokerNodes
             properties:
               brokerNodeGroupInfo:
@@ -346,6 +347,12 @@ paths:
                 type: string
                 minLength: 1
                 maxLength: 128
+              loggingInfo:
+                description: ''
+                type: object
+                properties:
+                  BrokerLogs:
+                    $ref: '#/definitions/BrokerLogs'
               numberOfBrokerNodes:
                 description: |2-
 
@@ -1615,6 +1622,7 @@ paths:
             required:
               - currentVersion
               - openMonitoring
+              - loggingInfo
             properties:
               currentVersion:
                 description: |2-
@@ -1645,6 +1653,12 @@ paths:
 
                                   <p>Prometheus settings.</p>
                                
+              loggingInfo:
+                description: ''
+                type: object
+                properties:
+                  BrokerLogs:
+                    $ref: '#/definitions/BrokerLogs'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1783,6 +1797,15 @@ definitions:
 
                   <p>Prometheus settings.</p>
                
+  BrokerLogs:
+    type: object
+    properties:
+      CloudWatchLogs:
+        $ref: '#/definitions/CloudWatchLogs'
+      Firehose:
+        $ref: '#/definitions/Firehose'
+      S3:
+        $ref: '#/definitions/S3'
   BadRequestException: {}
   InternalServerErrorException: {}
   UnauthorizedException: {}
@@ -2117,6 +2140,35 @@ definitions:
                    
   __integer:
     type: integer
+  CloudWatchLogs:
+    type: object
+    required:
+      - Enabled
+    properties:
+      Enabled:
+        $ref: '#/definitions/__boolean'
+      LogGroup:
+        $ref: '#/definitions/__string'
+  Firehose:
+    type: object
+    required:
+      - Enabled
+    properties:
+      DeliveryStream:
+        $ref: '#/definitions/__string'
+      Enabled:
+        $ref: '#/definitions/__boolean'
+  S3:
+    type: object
+    required:
+      - Enabled
+    properties:
+      Bucket:
+        $ref: '#/definitions/__string'
+      Enabled:
+        $ref: '#/definitions/__boolean'
+      Prefix:
+        $ref: '#/definitions/__string'
   BrokerNodeGroupInfo:
     type: object
     required:
@@ -2253,6 +2305,8 @@ definitions:
 
                   <p>Client-broker encryption in transit setting.</p>
                
+  __boolean:
+    type: boolean
   __timestampIso8601:
     type: string
     format: date-time
@@ -2300,6 +2354,13 @@ definitions:
 
                   <p>JMX and Node monitoring for the MSK cluster.</p>
                
+  LoggingInfo:
+    type: object
+    required:
+      - BrokerLogs
+    properties:
+      BrokerLogs:
+        $ref: '#/definitions/BrokerLogs'
   ClusterState:
     type: string
     enum:
@@ -2392,6 +2453,8 @@ definitions:
 
                       <p>Settings for open monitoring using Prometheus.</p>
                    
+      LoggingInfo:
+        $ref: '#/definitions/LoggingInfo'
       NumberOfBrokerNodes:
         $ref: '#/definitions/__integer'
         description: |2-
@@ -2474,6 +2537,8 @@ definitions:
 
                       <p>The settings for open monitoring.</p>
                    
+      LoggingInfo:
+        $ref: '#/definitions/LoggingInfo'
     description: |2-
 
                   <p>Information about cluster attributes that can be updated via update APIs.</p>
@@ -2728,6 +2793,8 @@ definitions:
 
                       <p>The version of Apache Kafka.</p>
                    
+      LoggingInfo:
+        $ref: '#/definitions/LoggingInfo'
       NumberOfBrokerNodes:
         $ref: '#/definitions/__integerMin1Max15'
         description: |2-
@@ -2806,8 +2873,6 @@ definitions:
 
                   <p>Contains information about the EBS storage volumes attached to Kafka broker nodes.</p>
                
-  __boolean:
-    type: boolean
   GetBootstrapBrokersRequest:
     type: object
     properties: {}
@@ -3134,4 +3199,6 @@ definitions:
 
                       <p>The settings for open monitoring.</p>
                    
+      LoggingInfo:
+        $ref: '#/definitions/LoggingInfo'
     description: Request body for UpdateMonitoring.
