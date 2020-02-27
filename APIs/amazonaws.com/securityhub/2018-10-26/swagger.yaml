@@ -3,7 +3,7 @@ info:
   version: '2018-10-26'
   x-release: v4
   title: AWS SecurityHub
-  description: '<p>Security Hub provides you with a comprehensive view of the security state of your AWS environment and resources. It also provides you with the compliance status of your environment based on controls from supported standards. Security Hub collects security data from AWS accounts, services, and integrated third-party products and helps you analyze security trends in your environment to identify the highest priority security issues. For more information about Security Hub, see the <i> <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html">AWS Security Hub User Guide</a> </i>.</p> <p>When you use operations in the Security Hub API, the requests are executed only in the AWS Region that is currently active or in the specific AWS Region that you specify in your request. Any configuration or settings change that results from the operation is applied only to that Region. To make the same change in other Regions, execute the same command for each Region to apply the change to.</p> <p>For example, if your Region is set to <code>us-west-2</code>, when you use <code> <a>CreateMembers</a> </code> to add a member account to Security Hub, the association of the member account with the master account is created only in the <code>us-west-2</code> Region. Security Hub must be enabled for the member account in the same Region that the invitation was sent from.</p> <p>The following throttling limits apply to using Security Hub API operations.</p> <ul> <li> <p> <code> <a>GetFindings</a> </code> - <code>RateLimit</code> of 3 requests per second. <code>BurstLimit</code> of 6 requests per second.</p> </li> <li> <p> <code> <a>UpdateFindings</a> </code> - <code>RateLimit</code> of 1 request per second. <code>BurstLimit</code> of 5 requests per second.</p> </li> <li> <p>All other operations - <code>RateLimit</code> of 10 requests per second. <code>BurstLimit</code> of 30 requests per second.</p> </li> </ul>'
+  description: '<p>Security Hub provides you with a comprehensive view of the security state of your AWS environment and resources. It also provides you with the readiness status of your environment based on controls from supported security standards. Security Hub collects security data from AWS accounts, services, and integrated third-party products and helps you analyze security trends in your environment to identify the highest priority security issues. For more information about Security Hub, see the <i> <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html">AWS Security Hub User Guide</a> </i>.</p> <p>When you use operations in the Security Hub API, the requests are executed only in the AWS Region that is currently active or in the specific AWS Region that you specify in your request. Any configuration or settings change that results from the operation is applied only to that Region. To make the same change in other Regions, execute the same command for each Region to apply the change to.</p> <p>For example, if your Region is set to <code>us-west-2</code>, when you use <code> <a>CreateMembers</a> </code> to add a member account to Security Hub, the association of the member account with the master account is created only in the <code>us-west-2</code> Region. Security Hub must be enabled for the member account in the same Region that the invitation was sent from.</p> <p>The following throttling limits apply to using Security Hub API operations.</p> <ul> <li> <p> <code> <a>GetFindings</a> </code> - <code>RateLimit</code> of 3 requests per second. <code>BurstLimit</code> of 6 requests per second.</p> </li> <li> <p> <code> <a>UpdateFindings</a> </code> - <code>RateLimit</code> of 1 request per second. <code>BurstLimit</code> of 5 requests per second.</p> </li> <li> <p>All other operations - <code>RateLimit</code> of 10 requests per second. <code>BurstLimit</code> of 30 requests per second.</p> </li> </ul>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -247,7 +247,7 @@ paths:
   /standards/deregister:
     post:
       operationId: BatchDisableStandards
-      description: '<p>Disables the standards specified by the provided <code>StandardsSubscriptionArns</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html">Compliance Standards</a> section of the <i>AWS Security Hub User Guide</i>.</p>'
+      description: '<p>Disables the standards specified by the provided <code>StandardsSubscriptionArns</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html">Security Standards</a> section of the <i>AWS Security Hub User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -296,7 +296,7 @@ paths:
   /standards/register:
     post:
       operationId: BatchEnableStandards
-      description: '<p>Enables the standards specified by the provided <code>StandardsArn</code>. To obtain the ARN for a standard, use the <code> <a>DescribeStandards</a> </code> operation.</p> <p>For more information, see the <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html">Compliance Standards</a> section of the <i>AWS Security Hub User Guide</i>.</p>'
+      description: '<p>Enables the standards specified by the provided <code>StandardsArn</code>. To obtain the ARN for a standard, use the <code> <a>DescribeStandards</a> </code> operation.</p> <p>For more information, see the <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html">Security Standards</a> section of the <i>AWS Security Hub User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -328,7 +328,7 @@ paths:
               - StandardsSubscriptionRequests
             properties:
               StandardsSubscriptionRequests:
-                description: The list of standards compliance checks to enable.
+                description: The list of standards checks to enable.
                 type: array
                 items:
                   $ref: '#/definitions/StandardsSubscriptionRequest'
@@ -718,7 +718,7 @@ paths:
                     description: The details of a resource that doesn't have a specific subfield for the resource type defined.
                   ComplianceStatus:
                     $ref: '#/definitions/StringFilterList'
-                    description: 'Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains compliance-related finding details.'
+                    description: 'Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains security standard-related finding details.'
                   VerificationState:
                     $ref: '#/definitions/StringFilterList'
                     description: The veracity of a finding.
@@ -1299,7 +1299,7 @@ paths:
                     description: The details of a resource that doesn't have a specific subfield for the resource type defined.
                   ComplianceStatus:
                     $ref: '#/definitions/StringFilterList'
-                    description: 'Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains compliance-related finding details.'
+                    description: 'Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains security standard-related finding details.'
                   VerificationState:
                     $ref: '#/definitions/StringFilterList'
                     description: The veracity of a finding.
@@ -1696,7 +1696,7 @@ paths:
   '/standards/controls/{StandardsSubscriptionArn}':
     get:
       operationId: DescribeStandardsControls
-      description: '<p>Returns a list of compliance standards controls.</p> <p>For each control, the results include information about whether it is currently enabled, the severity, and a link to remediation information.</p>'
+      description: '<p>Returns a list of security standards controls.</p> <p>For each control, the results include information about whether it is currently enabled, the severity, and a link to remediation information.</p>'
       responses:
         '200':
           description: Success
@@ -1733,7 +1733,7 @@ paths:
         - name: MaxResults
           in: query
           required: false
-          description: The maximum number of compliance standard controls to return.
+          description: The maximum number of security standard controls to return.
           type: integer
           minimum: 1
           maximum: 100
@@ -2281,7 +2281,7 @@ paths:
                     description: The details of a resource that doesn't have a specific subfield for the resource type defined.
                   ComplianceStatus:
                     $ref: '#/definitions/StringFilterList'
-                    description: 'Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains compliance-related finding details.'
+                    description: 'Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains security standard-related finding details.'
                   VerificationState:
                     $ref: '#/definitions/StringFilterList'
                     description: The veracity of a finding.
@@ -2603,7 +2603,7 @@ paths:
                     description: The details of a resource that doesn't have a specific subfield for the resource type defined.
                   ComplianceStatus:
                     $ref: '#/definitions/StringFilterList'
-                    description: 'Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains compliance-related finding details.'
+                    description: 'Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains security standard-related finding details.'
                   VerificationState:
                     $ref: '#/definitions/StringFilterList'
                     description: The veracity of a finding.
@@ -3062,7 +3062,7 @@ paths:
   '/standards/control/{StandardsControlArn}':
     patch:
       operationId: UpdateStandardsControl
-      description: Used to control whether an individual compliance standard control is enabled or disabled.
+      description: Used to control whether an individual security standard control is enabled or disabled.
       responses:
         '200':
           description: Success
@@ -3088,7 +3088,7 @@ paths:
         - name: StandardsControlArn
           in: path
           required: true
-          description: The ARN of the compliance standard control to enable or disable.
+          description: The ARN of the security standard control to enable or disable.
           type: string
           pattern: .*\S.*
         - name: body
@@ -3098,13 +3098,13 @@ paths:
             type: object
             properties:
               ControlStatus:
-                description: The updated status of the compliance standard control.
+                description: The updated status of the security standard control.
                 type: string
                 enum:
                   - ENABLED
                   - DISABLED
               DisabledReason:
-                description: A description of the reason why you are disabling a compliance standard control.
+                description: A description of the reason why you are disabling a security standard control.
                 type: string
                 pattern: .*\S.*
     parameters:
@@ -3256,7 +3256,7 @@ definitions:
         description: A set of resource data types that describe the resources that the finding refers to.
       Compliance:
         $ref: '#/definitions/Compliance'
-        description: 'This data type is exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains compliance-related finding details.'
+        description: 'This data type is exclusive to findings that are generated as the result of a check run against a specific rule in a supported security standard, such as CIS AWS Foundations. Contains security standard-related finding details.'
       VerificationState:
         $ref: '#/definitions/VerificationState'
         description: 'Indicates the veracity of a finding. '
@@ -3272,7 +3272,7 @@ definitions:
       Note:
         $ref: '#/definitions/Note'
         description: A user-defined note added to a finding.
-    description: '<p>Provides consistent format for the contents of the Security Hub-aggregated findings. <code>AwsSecurityFinding</code> format enables you to share findings between AWS security services and third-party solutions, and compliance checks.</p> <note> <p>A finding is a potential security issue generated either by AWS services (Amazon GuardDuty, Amazon Inspector, and Amazon Macie) or by the integrated third-party solutions and compliance checks.</p> </note>'
+    description: '<p>Provides consistent format for the contents of the Security Hub-aggregated findings. <code>AwsSecurityFinding</code> format enables you to share findings between AWS security services and third-party solutions, and security standards checks.</p> <note> <p>A finding is a potential security issue generated either by AWS services (Amazon GuardDuty, Amazon Inspector, and Amazon Macie) or by the integrated third-party solutions and standards checks.</p> </note>'
   CreateActionTargetResponse:
     type: object
     required:
@@ -3409,7 +3409,7 @@ definitions:
     properties:
       Controls:
         $ref: '#/definitions/StandardsControls'
-        description: A list of compliance standards controls.
+        description: A list of security standards controls.
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The pagination token to use to request the next page of results.
@@ -4334,7 +4334,7 @@ definitions:
         description: The version number.
       CompatibleRuntimes:
         $ref: '#/definitions/NonEmptyStringList'
-        description: '<p>The layer''s compatible runtimes. Maximum number of 5 items.</p> <p>Valid values: <code>nodejs8.10</code> | <code>nodejs10.x</code> | <code>nodejs12.x</code> | <code>java8</code> | <code>java11</code> | <code>python2.7</code> | <code>python3.6</code> | <code>python3.7</code> | <code>python3.8</code> | <code>dotnetcore1.0</code> | <code>dotnetcore2.1</code> | <code>go1.x</code> | <code>ruby2.5</code> | <code>provided</code> </p>'
+        description: '<p>The layer''s compatible runtimes. Maximum number of 5 items.</p> <p>Valid values: <code>nodejs10.x</code> | <code>nodejs12.x</code> | <code>java8</code> | <code>java11</code> | <code>python2.7</code> | <code>python3.6</code> | <code>python3.7</code> | <code>python3.8</code> | <code>dotnetcore1.0</code> | <code>dotnetcore2.1</code> | <code>go1.x</code> | <code>ruby2.5</code> | <code>provided</code> </p>'
       CreatedDate:
         $ref: '#/definitions/NonEmptyString'
         description: 'The date that the version was created, in ISO 8601 format. For example, 2018-11-27T15:10:45.123+0000. '
@@ -4553,11 +4553,11 @@ definitions:
     properties:
       Status:
         $ref: '#/definitions/ComplianceStatus'
-        description: The result of a compliance check.
+        description: The result of a standards check.
       RelatedRequirements:
         $ref: '#/definitions/RelatedRequirementsList'
         description: List of requirements that are related to a standards control.
-    description: '<p>Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains compliance-related finding details.</p> <p>Values include the following:</p> <ul> <li> <p>Allowed values are the following:</p> <ul> <li> <p> <code>PASSED</code> - Compliance check passed for all evaluated resources.</p> </li> <li> <p> <code>WARNING</code> - Some information is missing or this check is not supported given your configuration.</p> </li> <li> <p> <code>FAILED</code> - Compliance check failed for at least one evaluated resource.</p> </li> <li> <p> <code>NOT_AVAILABLE</code> - Check could not be performed due to a service outage, API error, or because the result of the AWS Config evaluation was <code>NOT_APPLICABLE</code>. If the AWS Config evaluation result was <code> NOT_APPLICABLE</code>, then after 3 days, Security Hub automatically archives the finding.</p> </li> </ul> </li> </ul>'
+    description: '<p>Exclusive to findings that are generated as the result of a check run against a specific rule in a supported security standard, such as CIS AWS Foundations. Contains security standard-related finding details.</p> <p>Values include the following:</p> <ul> <li> <p>Allowed values are the following:</p> <ul> <li> <p> <code>PASSED</code> - Standards check passed for all evaluated resources.</p> </li> <li> <p> <code>WARNING</code> - Some information is missing or this check is not supported given your configuration.</p> </li> <li> <p> <code>FAILED</code> - Standards check failed for at least one evaluated resource.</p> </li> <li> <p> <code>NOT_AVAILABLE</code> - Check could not be performed due to a service outage, API error, or because the result of the AWS Config evaluation was <code>NOT_APPLICABLE</code>. If the AWS Config evaluation result was <code> NOT_APPLICABLE</code>, then after 3 days, Security Hub automatically archives the finding.</p> </li> </ul> </li> </ul>'
   VerificationState:
     type: string
     enum:
@@ -4823,7 +4823,7 @@ definitions:
         description: The details of a resource that doesn't have a specific subfield for the resource type defined.
       ComplianceStatus:
         $ref: '#/definitions/StringFilterList'
-        description: 'Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains compliance-related finding details.'
+        description: 'Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains security standard-related finding details.'
       VerificationState:
         $ref: '#/definitions/StringFilterList'
         description: The veracity of a finding.
@@ -4993,7 +4993,7 @@ definitions:
     properties:
       StandardsSubscriptionRequests:
         $ref: '#/definitions/StandardsSubscriptionRequests'
-        description: The list of standards compliance checks to enable.
+        description: The list of standards checks to enable.
   BatchImportFindingsRequest:
     type: object
     required:
@@ -5372,6 +5372,15 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/InsightResultValue'
+  IntegrationType:
+    type: string
+    enum:
+      - SEND_FINDINGS_TO_SECURITY_HUB
+      - RECEIVE_FINDINGS_FROM_SECURITY_HUB
+  IntegrationTypeList:
+    type: array
+    items:
+      $ref: '#/definitions/IntegrationType'
   Timestamp:
     type: string
     format: date-time
@@ -5556,6 +5565,9 @@ definitions:
       Categories:
         $ref: '#/definitions/CategoryList'
         description: The categories assigned to the product.
+      IntegrationTypes:
+        $ref: '#/definitions/IntegrationTypeList'
+        description: <p>The types of integration that the product supports. Available values are the following.</p> <ul> <li> <p> <code>SEND_FINDINGS_TO_SECURITY_HUB</code> - Indicates that the integration sends findings to Security Hub.</p> </li> <li> <p> <code>RECEIVE_FINDINGS_FROM_SECURITY_HUB</code> - Indicates that the integration receives findings from Security Hub.</p> </li> </ul>
       MarketplaceUrl:
         $ref: '#/definitions/NonEmptyString'
         description: The URL for the page that contains more information about the product.
@@ -5715,35 +5727,35 @@ definitions:
     properties:
       StandardsControlArn:
         $ref: '#/definitions/NonEmptyString'
-        description: The ARN of the compliance standard control.
+        description: The ARN of the security standard control.
       ControlStatus:
         $ref: '#/definitions/ControlStatus'
-        description: The current status of the compliance standard control. Indicates whether the control is enabled or disabled. Security Hub does not check against disabled controls.
+        description: The current status of the security standard control. Indicates whether the control is enabled or disabled. Security Hub does not check against disabled controls.
       DisabledReason:
         $ref: '#/definitions/NonEmptyString'
         description: The reason provided for the most recent change in status for the control.
       ControlStatusUpdatedAt:
         $ref: '#/definitions/Timestamp'
-        description: The date and time that the status of the compliance standard control was most recently updated.
+        description: The date and time that the status of the security standard control was most recently updated.
       ControlId:
         $ref: '#/definitions/NonEmptyString'
-        description: The identifier of the compliance standard control.
+        description: The identifier of the security standard control.
       Title:
         $ref: '#/definitions/NonEmptyString'
-        description: The title of the compliance standard control.
+        description: The title of the security standard control.
       Description:
         $ref: '#/definitions/NonEmptyString'
-        description: The longer description of the compliance standard control. Provides information about what the control is checking for.
+        description: The longer description of the security standard control. Provides information about what the control is checking for.
       RemediationUrl:
         $ref: '#/definitions/NonEmptyString'
         description: A link to remediation information for the control in the Security Hub user documentation.
       SeverityRating:
         $ref: '#/definitions/SeverityRating'
-        description: <p>The severity of findings generated from this compliance standard control.</p> <p>The finding severity is based on an assessment of how easy it would be to compromise AWS resources if the compliance issue is detected.</p>
+        description: <p>The severity of findings generated from this security standard control.</p> <p>The finding severity is based on an assessment of how easy it would be to compromise AWS resources if the issue is detected.</p>
       RelatedRequirements:
         $ref: '#/definitions/RelatedRequirementsList'
         description: The list of requirements that are related to this control.
-    description: Details for an individual compliance standard control.
+    description: Details for an individual security standard control.
   StandardsInputParameterMap:
     type: object
     additionalProperties:
@@ -5894,10 +5906,10 @@ definitions:
     properties:
       ControlStatus:
         $ref: '#/definitions/ControlStatus'
-        description: The updated status of the compliance standard control.
+        description: The updated status of the security standard control.
       DisabledReason:
         $ref: '#/definitions/NonEmptyString'
-        description: A description of the reason why you are disabling a compliance standard control.
+        description: A description of the reason why you are disabling a security standard control.
   WafExcludedRule:
     type: object
     properties:
