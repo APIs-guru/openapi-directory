@@ -1,0 +1,501 @@
+openapi: 3.0.0
+info:
+  version: '2019-11-02'
+  x-release: v4
+  title: Amazon Elastic Block Store
+  description: '<p>You can use the Amazon Elastic Block Store (EBS) direct APIs to directly read the data on your EBS snapshots, and identify the difference between two snapshots. You can view the details of blocks in an EBS snapshot, compare the block difference between two snapshots, and directly access the data in a snapshot. If you’re an independent software vendor (ISV) who offers backup services for EBS, the EBS direct APIs make it easier and more cost-effective to track incremental changes on your EBS volumes via EBS snapshots. This can be done without having to create new volumes from EBS snapshots.</p> <p>This API reference provides detailed information about the actions, data types, parameters, and errors of the EBS direct APIs. For more information about the elements that make up the EBS direct APIs, and examples of how to use them effectively, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-accessing-snapshot.html">Accessing the Contents of an EBS Snapshot</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For more information about the supported AWS Regions, endpoints, and service quotas for the EBS direct APIs, see <a href="https://docs.aws.amazon.com/general/latest/gr/ebs-service.html">Amazon Elastic Block Store Endpoints and Quotas</a> in the <i>AWS General Reference</i>.</p>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: ebs
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/ebs-2019-11-02.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/ebs/'
+servers:
+  - url: 'http://ebs.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Amazon EBS multi-region endpoint
+  - url: 'https://ebs.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Amazon EBS multi-region endpoint
+  - url: 'http://ebs.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon EBS endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://ebs.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon EBS endpoint for China (Beijing) and China (Ningxia)
+paths:
+  '/snapshots/{snapshotId}/blocks/{blockIndex}#blockToken':
+    get:
+      operationId: GetSnapshotBlock
+      description: Returns the data in a block in an Amazon Elastic Block Store snapshot.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSnapshotBlockResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: snapshotId
+          in: path
+          required: true
+          description: The ID of the snapshot containing the block from which to get data.
+          schema:
+            type: string
+            pattern: '^snap-[0-9a-f]+$'
+            minLength: 1
+            maxLength: 64
+        - name: blockIndex
+          in: path
+          required: true
+          description: <p>The block index of the block from which to get data.</p> <p>Obtain the <code>BlockIndex</code> by running the <code>ListChangedBlocks</code> or <code>ListSnapshotBlocks</code> operations.</p>
+          schema:
+            type: integer
+        - name: blockToken
+          in: query
+          required: true
+          description: <p>The block token of the block from which to get data.</p> <p>Obtain the <code>BlockToken</code> by running the <code>ListChangedBlocks</code> or <code>ListSnapshotBlocks</code> operations.</p>
+          schema:
+            type: string
+            pattern: '^[A-Za-z0-9+/=]+$'
+            maxLength: 256
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/snapshots/{secondSnapshotId}/changedblocks':
+    get:
+      operationId: ListChangedBlocks
+      description: Returns the block indexes and block tokens for blocks that are different between two Amazon Elastic Block Store snapshots of the same volume/snapshot lineage.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListChangedBlocksResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: firstSnapshotId
+          in: query
+          required: false
+          description: '<p>The ID of the first snapshot to use for the comparison.</p> <important> <p>The <code>FirstSnapshotID</code> parameter must be specified with a <code>SecondSnapshotId</code> parameter; otherwise, an error occurs.</p> </important>'
+          schema:
+            type: string
+            pattern: '^snap-[0-9a-f]+$'
+            minLength: 1
+            maxLength: 64
+        - name: secondSnapshotId
+          in: path
+          required: true
+          description: '<p>The ID of the second snapshot to use for the comparison.</p> <important> <p>The <code>SecondSnapshotId</code> parameter must be specified with a <code>FirstSnapshotID</code> parameter; otherwise, an error occurs.</p> </important>'
+          schema:
+            type: string
+            pattern: '^snap-[0-9a-f]+$'
+            minLength: 1
+            maxLength: 64
+        - name: pageToken
+          in: query
+          required: false
+          description: The token to request the next page of results.
+          schema:
+            type: string
+            pattern: '^[A-Za-z0-9+/=]+$'
+            maxLength: 256
+        - name: maxResults
+          in: query
+          required: false
+          description: The number of results to return.
+          schema:
+            type: integer
+            minimum: 100
+            maximum: 10000
+        - name: startingBlockIndex
+          in: query
+          required: false
+          description: <p>The block index from which the comparison should start.</p> <p>The list in the response will start from this block index or the next valid block index in the snapshots.</p>
+          schema:
+            type: integer
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/snapshots/{snapshotId}/blocks':
+    get:
+      operationId: ListSnapshotBlocks
+      description: Returns the block indexes and block tokens for blocks in an Amazon Elastic Block Store snapshot.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSnapshotBlocksResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: snapshotId
+          in: path
+          required: true
+          description: The ID of the snapshot from which to get block indexes and block tokens.
+          schema:
+            type: string
+            pattern: '^snap-[0-9a-f]+$'
+            minLength: 1
+            maxLength: 64
+        - name: pageToken
+          in: query
+          required: false
+          description: The token to request the next page of results.
+          schema:
+            type: string
+            pattern: '^[A-Za-z0-9+/=]+$'
+            maxLength: 256
+        - name: maxResults
+          in: query
+          required: false
+          description: The number of results to return.
+          schema:
+            type: integer
+            minimum: 100
+            maximum: 10000
+        - name: startingBlockIndex
+          in: query
+          required: false
+          description: The block index from which the list should start. The list in the response will start from this block index or the next valid block index in the snapshot.
+          schema:
+            type: integer
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    GetSnapshotBlockResponse:
+      type: object
+      properties:
+        BlockData:
+          $ref: '#/components/schemas/BlockData'
+          description: The data content of the block.
+    ValidationException: {}
+    ResourceNotFoundException: {}
+    ListChangedBlocksResponse:
+      type: object
+      properties:
+        ChangedBlocks:
+          $ref: '#/components/schemas/ChangedBlocks'
+          description: An array of objects containing information about the changed blocks.
+        ExpiryTime:
+          $ref: '#/components/schemas/TimeStamp'
+          description: The time when the <code>BlockToken</code> expires.
+        VolumeSize:
+          $ref: '#/components/schemas/VolumeSize'
+          description: The size of the volume in GB.
+        BlockSize:
+          $ref: '#/components/schemas/BlockSize'
+          description: The size of the block.
+        NextToken:
+          $ref: '#/components/schemas/PageToken'
+          description: The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+    ListSnapshotBlocksResponse:
+      type: object
+      properties:
+        Blocks:
+          $ref: '#/components/schemas/Blocks'
+          description: An array of objects containing information about the blocks.
+        ExpiryTime:
+          $ref: '#/components/schemas/TimeStamp'
+          description: The time when the <code>BlockToken</code> expires.
+        VolumeSize:
+          $ref: '#/components/schemas/VolumeSize'
+          description: The size of the volume in GB.
+        BlockSize:
+          $ref: '#/components/schemas/BlockSize'
+          description: The size of the block.
+        NextToken:
+          $ref: '#/components/schemas/PageToken'
+          description: The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+    BlockIndex:
+      type: integer
+    BlockToken:
+      type: string
+      pattern: '^[A-Za-z0-9+/=]+$'
+      maxLength: 256
+    Block:
+      type: object
+      properties:
+        BlockIndex:
+          $ref: '#/components/schemas/BlockIndex'
+          description: The block index.
+        BlockToken:
+          $ref: '#/components/schemas/BlockToken'
+          description: The block token for the block index.
+      description: A block of data in an Amazon Elastic Block Store snapshot.
+    BlockData:
+      type: string
+      format: password
+    BlockSize:
+      type: integer
+    Blocks:
+      type: array
+      items:
+        $ref: '#/components/schemas/Block'
+    ChangedBlock:
+      type: object
+      properties:
+        BlockIndex:
+          $ref: '#/components/schemas/BlockIndex'
+          description: The block index.
+        FirstBlockToken:
+          $ref: '#/components/schemas/BlockToken'
+          description: The block token for the block index of the <code>FirstSnapshotId</code> specified in the <code>ListChangedBlocks</code> operation. This value is absent if the first snapshot does not have the changed block that is on the second snapshot.
+        SecondBlockToken:
+          $ref: '#/components/schemas/BlockToken'
+          description: The block token for the block index of the <code>SecondSnapshotId</code> specified in the <code>ListChangedBlocks</code> operation.
+      description: A block of data in an Amazon Elastic Block Store snapshot that is different from another snapshot of the same volume/snapshot lineage.
+    ChangedBlocks:
+      type: array
+      items:
+        $ref: '#/components/schemas/ChangedBlock'
+    Checksum:
+      type: string
+      maxLength: 64
+    ChecksumAlgorithm:
+      type: string
+      enum:
+        - SHA256
+      maxLength: 32
+    DataLength:
+      type: integer
+    SnapshotId:
+      type: string
+      pattern: '^snap-[0-9a-f]+$'
+      minLength: 1
+      maxLength: 64
+    GetSnapshotBlockRequest:
+      type: object
+      title: GetSnapshotBlockRequest
+      properties: {}
+    PageToken:
+      type: string
+      pattern: '^[A-Za-z0-9+/=]+$'
+      maxLength: 256
+    MaxResults:
+      type: integer
+      minimum: 100
+      maximum: 10000
+    ListChangedBlocksRequest:
+      type: object
+      title: ListChangedBlocksRequest
+      properties: {}
+    TimeStamp:
+      type: string
+      format: date-time
+    VolumeSize:
+      type: integer
+    ListSnapshotBlocksRequest:
+      type: object
+      title: ListSnapshotBlocksRequest
+      properties: {}
+security:
+  - hmac: []

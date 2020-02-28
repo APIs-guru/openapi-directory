@@ -1,0 +1,818 @@
+openapi: 3.0.0
+info:
+  version: '2018-09-07'
+  x-release: v4
+  title: Amazon Connect Participant Service
+  description: '<p>Amazon Connect is a cloud-based contact center solution that makes it easy to set up and manage a customer contact center and provide reliable customer engagement at any scale.</p> <p>Amazon Connect enables customer contacts through voice or chat.</p> <p>The APIs described here are used by chat participants, such as agents and customers.</p>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: connectparticipant
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/connectparticipant-2018-09-07.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/connect/'
+servers:
+  - url: 'http://participant.connect.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Amazon Connect Participant multi-region endpoint
+  - url: 'https://participant.connect.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Amazon Connect Participant multi-region endpoint
+  - url: 'http://participant.connect.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon Connect Participant endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://participant.connect.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon Connect Participant endpoint for China (Beijing) and China (Ningxia)
+paths:
+  '/participant/connection#X-Amz-Bearer':
+    post:
+      operationId: CreateParticipantConnection
+      description: '<p>Creates the participant''s connection. Note that ParticipantToken is used for invoking this API instead of ConnectionToken.</p> <p>The participant token is valid for the lifetime of the participant – until the they are part of a contact.</p> <p>The response URL for <code>WEBSOCKET</code> Type has a connect expiry timeout of 100s. Clients must manually connect to the returned websocket URL and subscribe to the desired topic. </p> <p>For chat, you need to publish the following on the established websocket connection:</p> <p> <code>{"topic":"aws/subscribe","content":{"topics":["aws/chat"]}}</code> </p> <p>Upon websocket URL expiry, as specified in the response ConnectionExpiry parameter, clients need to call this API again to obtain a new websocket URL and perform the same steps as before.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateParticipantConnectionResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: X-Amz-Bearer
+          in: header
+          required: true
+          description: 'Participant Token as obtained from <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContactResponse.html">StartChatContact</a> API response.'
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1000
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Type
+              properties:
+                Type:
+                  description: Type of connection information required.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ConnectionType'
+                  minItems: 1
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/participant/disconnect#X-Amz-Bearer':
+    post:
+      operationId: DisconnectParticipant
+      description: Disconnects a participant. Note that ConnectionToken is used for invoking this API instead of ParticipantToken.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisconnectParticipantResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: X-Amz-Bearer
+          in: header
+          required: true
+          description: The authentication token associated with the participant's connection.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1000
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ClientToken:
+                  description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                  type: string
+                  maxLength: 500
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/participant/transcript#X-Amz-Bearer':
+    post:
+      operationId: GetTranscript
+      description: Retrieves a transcript of the session. Note that ConnectionToken is used for invoking this API instead of ParticipantToken.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTranscriptResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: X-Amz-Bearer
+          in: header
+          required: true
+          description: The authentication token associated with the participant's connection.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1000
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ContactId:
+                  description: The contactId from the current contact chain for which transcript is needed.
+                  type: string
+                  minLength: 1
+                  maxLength: 256
+                MaxResults:
+                  description: 'The maximum number of results to return in the page. Default: 10. '
+                  type: integer
+                  minimum: 0
+                  maximum: 100
+                NextToken:
+                  description: The pagination token. Use the value returned previously in the next subsequent request to retrieve the next set of results.
+                  type: string
+                  minLength: 1
+                  maxLength: 1000
+                ScanDirection:
+                  description: 'The direction from StartPosition from which to retrieve message. Default: BACKWARD when no StartPosition is provided, FORWARD with StartPosition. '
+                  type: string
+                  enum:
+                    - FORWARD
+                    - BACKWARD
+                SortOrder:
+                  description: 'The sort order for the records. Default: DESCENDING.'
+                  type: string
+                  enum:
+                    - DESCENDING
+                    - ASCENDING
+                StartPosition:
+                  description: 'A filtering option for where to start. For example, if you sent 100 messages, start with message 50. '
+                  type: object
+                  properties:
+                    Id:
+                      $ref: '#/components/schemas/ChatItemId'
+                      description: 'The ID of the message or event where to start. '
+                    AbsoluteTime:
+                      $ref: '#/components/schemas/Instant'
+                      description: '<p>The time in ISO format where to start.</p> <p>It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>'
+                    MostRecent:
+                      $ref: '#/components/schemas/MostRecent'
+                      description: 'The start position of the most recent message where you want to start. '
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/participant/event#X-Amz-Bearer':
+    post:
+      operationId: SendEvent
+      description: Sends an event. Note that ConnectionToken is used for invoking this API instead of ParticipantToken.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendEventResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: X-Amz-Bearer
+          in: header
+          required: true
+          description: The authentication token associated with the participant's connection.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1000
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ContentType
+              properties:
+                ContentType:
+                  description: '<p>The content type of the request. Supported types are:</p> <ul> <li> <p>application/vnd.amazonaws.connect.event.typing</p> </li> <li> <p>application/vnd.amazonaws.connect.event.connection.acknowledged</p> </li> </ul>'
+                  type: string
+                  minLength: 1
+                  maxLength: 100
+                Content:
+                  description: 'The content of the event to be sent (for example, message text). This is not yet supported.'
+                  type: string
+                  minLength: 1
+                  maxLength: 1024
+                ClientToken:
+                  description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                  type: string
+                  maxLength: 500
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/participant/message#X-Amz-Bearer':
+    post:
+      operationId: SendMessage
+      description: Sends a message. Note that ConnectionToken is used for invoking this API instead of ParticipantToken.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendMessageResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: X-Amz-Bearer
+          in: header
+          required: true
+          description: The authentication token associated with the connection.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1000
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ContentType
+                - Content
+              properties:
+                ContentType:
+                  description: The type of the content. Supported types are text/plain.
+                  type: string
+                  minLength: 1
+                  maxLength: 100
+                Content:
+                  description: The content of the message.
+                  type: string
+                  minLength: 1
+                  maxLength: 1024
+                ClientToken:
+                  description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                  type: string
+                  maxLength: 500
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    CreateParticipantConnectionResponse:
+      type: object
+      properties:
+        Websocket:
+          $ref: '#/components/schemas/Websocket'
+          description: Creates the participant's websocket connection.
+        ConnectionCredentials:
+          $ref: '#/components/schemas/ConnectionCredentials'
+          description: Creates the participant's connection credentials. The authentication token associated with the participant's connection.
+    ConnectionType:
+      type: string
+      enum:
+        - WEBSOCKET
+        - CONNECTION_CREDENTIALS
+    AccessDeniedException: {}
+    InternalServerException: {}
+    ThrottlingException: {}
+    ValidationException: {}
+    DisconnectParticipantResponse:
+      type: object
+      properties: {}
+    GetTranscriptResponse:
+      type: object
+      properties:
+        InitialContactId:
+          $ref: '#/components/schemas/ContactId'
+          description: 'The initial contact ID for the contact. '
+        Transcript:
+          $ref: '#/components/schemas/Transcript'
+          description: The list of messages in the session.
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: The pagination token. Use the value returned previously in the next subsequent request to retrieve the next set of results.
+    ChatItemId:
+      type: string
+      minLength: 1
+      maxLength: 256
+    Instant:
+      type: string
+      minLength: 1
+      maxLength: 100
+    MostRecent:
+      type: integer
+      minimum: 0
+      maximum: 100
+    SendEventResponse:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/ChatItemId'
+          description: The ID of the response.
+        AbsoluteTime:
+          $ref: '#/components/schemas/Instant'
+          description: '<p>The time when the event was sent.</p> <p>It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>'
+    SendMessageResponse:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/ChatItemId'
+          description: The ID of the message.
+        AbsoluteTime:
+          $ref: '#/components/schemas/Instant'
+          description: '<p>The time when the message was sent.</p> <p>It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>'
+    ChatContent:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    ChatContentType:
+      type: string
+      minLength: 1
+      maxLength: 100
+    ChatItemType:
+      type: string
+      enum:
+        - MESSAGE
+        - EVENT
+        - CONNECTION_ACK
+    ClientToken:
+      type: string
+      maxLength: 500
+    ParticipantToken:
+      type: string
+      minLength: 1
+      maxLength: 1000
+    ISO8601Datetime:
+      type: string
+    ConnectionCredentials:
+      type: object
+      properties:
+        ConnectionToken:
+          $ref: '#/components/schemas/ParticipantToken'
+          description: The connection token.
+        Expiry:
+          $ref: '#/components/schemas/ISO8601Datetime'
+          description: '<p>The expiration of the token.</p> <p>It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>'
+      description: 'Connection credentials. '
+    ConnectionTypeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConnectionType'
+      minItems: 1
+    ContactId:
+      type: string
+      minLength: 1
+      maxLength: 256
+    CreateParticipantConnectionRequest:
+      type: object
+      required:
+        - Type
+      title: CreateParticipantConnectionRequest
+      properties:
+        Type:
+          $ref: '#/components/schemas/ConnectionTypeList'
+          description: Type of connection information required.
+    Websocket:
+      type: object
+      properties:
+        Url:
+          $ref: '#/components/schemas/PreSignedConnectionUrl'
+          description: The URL of the websocket.
+        ConnectionExpiry:
+          $ref: '#/components/schemas/ISO8601Datetime'
+          description: '<p>The URL expiration timestamp in ISO date format.</p> <p>It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>'
+      description: The websocket for the participant's connection.
+    DisconnectParticipantRequest:
+      type: object
+      title: DisconnectParticipantRequest
+      properties:
+        ClientToken:
+          $ref: '#/components/schemas/ClientToken'
+          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+    DisplayName:
+      type: string
+      minLength: 1
+      maxLength: 256
+    MaxResults:
+      type: integer
+      minimum: 0
+      maximum: 100
+    NextToken:
+      type: string
+      minLength: 1
+      maxLength: 1000
+    ScanDirection:
+      type: string
+      enum:
+        - FORWARD
+        - BACKWARD
+    SortKey:
+      type: string
+      enum:
+        - DESCENDING
+        - ASCENDING
+    StartPosition:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/ChatItemId'
+          description: 'The ID of the message or event where to start. '
+        AbsoluteTime:
+          $ref: '#/components/schemas/Instant'
+          description: '<p>The time in ISO format where to start.</p> <p>It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>'
+        MostRecent:
+          $ref: '#/components/schemas/MostRecent'
+          description: 'The start position of the most recent message where you want to start. '
+      description: 'A filtering option for where to start. For example, if you sent 100 messages, start with message 50. '
+    GetTranscriptRequest:
+      type: object
+      title: GetTranscriptRequest
+      properties:
+        ContactId:
+          $ref: '#/components/schemas/ContactId'
+          description: The contactId from the current contact chain for which transcript is needed.
+        MaxResults:
+          $ref: '#/components/schemas/MaxResults'
+          description: 'The maximum number of results to return in the page. Default: 10. '
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: The pagination token. Use the value returned previously in the next subsequent request to retrieve the next set of results.
+        ScanDirection:
+          $ref: '#/components/schemas/ScanDirection'
+          description: 'The direction from StartPosition from which to retrieve message. Default: BACKWARD when no StartPosition is provided, FORWARD with StartPosition. '
+        SortOrder:
+          $ref: '#/components/schemas/SortKey'
+          description: 'The sort order for the records. Default: DESCENDING.'
+        StartPosition:
+          $ref: '#/components/schemas/StartPosition'
+          description: A filtering option for where to start.
+    Transcript:
+      type: array
+      items:
+        $ref: '#/components/schemas/Item'
+    ParticipantId:
+      type: string
+      minLength: 1
+      maxLength: 256
+    ParticipantRole:
+      type: string
+      enum:
+        - AGENT
+        - CUSTOMER
+        - SYSTEM
+    Item:
+      type: object
+      properties:
+        AbsoluteTime:
+          $ref: '#/components/schemas/Instant'
+          description: '<p>The time when the message or event was sent.</p> <p>It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>'
+        Content:
+          $ref: '#/components/schemas/ChatContent'
+          description: The content of the message or event.
+        ContentType:
+          $ref: '#/components/schemas/ChatContentType'
+          description: The type of content of the item.
+        Id:
+          $ref: '#/components/schemas/ChatItemId'
+          description: The ID of the item.
+        Type:
+          $ref: '#/components/schemas/ChatItemType'
+          description: 'Type of the item: message or event. '
+        ParticipantId:
+          $ref: '#/components/schemas/ParticipantId'
+          description: The ID of the sender in the session.
+        DisplayName:
+          $ref: '#/components/schemas/DisplayName'
+          description: The chat display name of the sender.
+        ParticipantRole:
+          $ref: '#/components/schemas/ParticipantRole'
+          description: 'The role of the sender. For example, is it a customer, agent, or system.'
+      description: 'An item - message or event - that has been sent. '
+    PreSignedConnectionUrl:
+      type: string
+      minLength: 1
+      maxLength: 2000
+    SendEventRequest:
+      type: object
+      required:
+        - ContentType
+      title: SendEventRequest
+      properties:
+        ContentType:
+          $ref: '#/components/schemas/ChatContentType'
+          description: '<p>The content type of the request. Supported types are:</p> <ul> <li> <p>application/vnd.amazonaws.connect.event.typing</p> </li> <li> <p>application/vnd.amazonaws.connect.event.connection.acknowledged</p> </li> </ul>'
+        Content:
+          $ref: '#/components/schemas/ChatContent'
+          description: 'The content of the event to be sent (for example, message text). This is not yet supported.'
+        ClientToken:
+          $ref: '#/components/schemas/ClientToken'
+          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+    SendMessageRequest:
+      type: object
+      required:
+        - ContentType
+        - Content
+      title: SendMessageRequest
+      properties:
+        ContentType:
+          $ref: '#/components/schemas/ChatContentType'
+          description: The type of the content. Supported types are text/plain.
+        Content:
+          $ref: '#/components/schemas/ChatContent'
+          description: The content of the message.
+        ClientToken:
+          $ref: '#/components/schemas/ClientToken'
+          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+security:
+  - hmac: []

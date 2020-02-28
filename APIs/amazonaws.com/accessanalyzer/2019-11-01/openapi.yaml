@@ -1,0 +1,2044 @@
+openapi: 3.0.0
+info:
+  version: '2019-11-01'
+  x-release: v4
+  title: Access Analyzer
+  description: '<p>AWS IAM Access Analyzer helps identify potential resource-access risks by enabling you to identify any policies that grant access to an external principal. It does this by using logic-based reasoning to analyze resource-based policies in your AWS environment. An external principal can be another AWS account, a root user, an IAM user or role, a federated user, an AWS service, or an anonymous user. This guide describes the AWS IAM Access Analyzer operations that you can call programmatically. For general information about Access Analyzer, see the <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html">AWS IAM Access Analyzer section of the IAM User Guide</a>.</p> <p>To start using Access Analyzer, you first need to create an analyzer.</p>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: accessanalyzer
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/accessanalyzer-2019-11-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/access-analyzer/'
+servers:
+  - url: 'http://access-analyzer.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Access Analyzer multi-region endpoint
+  - url: 'https://access-analyzer.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Access Analyzer multi-region endpoint
+  - url: 'http://access-analyzer.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Access Analyzer endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://access-analyzer.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Access Analyzer endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  /analyzer:
+    put:
+      operationId: CreateAnalyzer
+      description: Creates an analyzer for your account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAnalyzerResponse'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - analyzerName
+                - type
+              properties:
+                analyzerName:
+                  description: The name of the analyzer to create.
+                  type: string
+                  pattern: '^[A-Za-z][A-Za-z0-9_.-]*$'
+                  minLength: 1
+                  maxLength: 255
+                archiveRules:
+                  description: Specifies the archive rules to add for the analyzer. Archive rules automatically archive findings that meet the criteria you define for the rule.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/InlineArchiveRule'
+                clientToken:
+                  description: A client token.
+                  type: string
+                tags:
+                  description: The tags to apply to the analyzer.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/String'
+                type:
+                  description: The type of analyzer to create. Only ACCOUNT analyzers are supported. You can create only one analyzer per account per Region.
+                  type: string
+                  enum:
+                    - ACCOUNT
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListAnalyzers
+      description: Retrieves a list of analyzers.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAnalyzersResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to return in the response.
+          schema:
+            type: integer
+        - name: nextToken
+          in: query
+          required: false
+          description: A token used for pagination of results returned.
+          schema:
+            type: string
+        - name: type
+          in: query
+          required: false
+          description: The type of analyzer.
+          schema:
+            type: string
+            enum:
+              - ACCOUNT
+  '/analyzer/{analyzerName}/archive-rule':
+    put:
+      operationId: CreateArchiveRule
+      description: Creates an archive rule for the specified analyzer. Archive rules automatically archive findings that meet the criteria you define when you create the rule.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: analyzerName
+          in: path
+          required: true
+          description: The name of the created analyzer.
+          schema:
+            type: string
+            pattern: '^[A-Za-z][A-Za-z0-9_.-]*$'
+            minLength: 1
+            maxLength: 255
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - filter
+                - ruleName
+              properties:
+                clientToken:
+                  description: A client token.
+                  type: string
+                filter:
+                  description: The criteria for the rule.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/Criterion'
+                ruleName:
+                  description: The name of the rule to create.
+                  type: string
+                  pattern: '^[A-Za-z][A-Za-z0-9_.-]*$'
+                  minLength: 1
+                  maxLength: 255
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListArchiveRules
+      description: Retrieves a list of archive rules created for the specified analyzer.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListArchiveRulesResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: analyzerName
+          in: path
+          required: true
+          description: The name of the analyzer to retrieve rules from.
+          schema:
+            type: string
+            pattern: '^[A-Za-z][A-Za-z0-9_.-]*$'
+            minLength: 1
+            maxLength: 255
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to return in the request.
+          schema:
+            type: integer
+        - name: nextToken
+          in: query
+          required: false
+          description: A token used for pagination of results returned.
+          schema:
+            type: string
+  '/analyzer/{analyzerName}':
+    delete:
+      operationId: DeleteAnalyzer
+      description: 'Deletes the specified analyzer. When you delete an analyzer, Access Analyzer is disabled for the account in the current or specific Region. All findings that were generated by the analyzer are deleted. You cannot undo this action.'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: analyzerName
+          in: path
+          required: true
+          description: The name of the analyzer to delete.
+          schema:
+            type: string
+            pattern: '^[A-Za-z][A-Za-z0-9_.-]*$'
+            minLength: 1
+            maxLength: 255
+        - name: clientToken
+          in: query
+          required: false
+          description: A client token.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetAnalyzer
+      description: Retrieves information about the specified analyzer.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAnalyzerResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: analyzerName
+          in: path
+          required: true
+          description: The name of the analyzer retrieved.
+          schema:
+            type: string
+            pattern: '^[A-Za-z][A-Za-z0-9_.-]*$'
+            minLength: 1
+            maxLength: 255
+  '/analyzer/{analyzerName}/archive-rule/{ruleName}':
+    delete:
+      operationId: DeleteArchiveRule
+      description: Deletes the specified archive rule.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: analyzerName
+          in: path
+          required: true
+          description: The name of the analyzer that associated with the archive rule to delete.
+          schema:
+            type: string
+            pattern: '^[A-Za-z][A-Za-z0-9_.-]*$'
+            minLength: 1
+            maxLength: 255
+        - name: clientToken
+          in: query
+          required: false
+          description: A client token.
+          schema:
+            type: string
+        - name: ruleName
+          in: path
+          required: true
+          description: The name of the rule to delete.
+          schema:
+            type: string
+            pattern: '^[A-Za-z][A-Za-z0-9_.-]*$'
+            minLength: 1
+            maxLength: 255
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetArchiveRule
+      description: Retrieves information about an archive rule.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetArchiveRuleResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: analyzerName
+          in: path
+          required: true
+          description: The name of the analyzer to retrieve rules from.
+          schema:
+            type: string
+            pattern: '^[A-Za-z][A-Za-z0-9_.-]*$'
+            minLength: 1
+            maxLength: 255
+        - name: ruleName
+          in: path
+          required: true
+          description: The name of the rule to retrieve.
+          schema:
+            type: string
+            pattern: '^[A-Za-z][A-Za-z0-9_.-]*$'
+            minLength: 1
+            maxLength: 255
+    put:
+      operationId: UpdateArchiveRule
+      description: Updates the criteria and values for the specified archive rule.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: analyzerName
+          in: path
+          required: true
+          description: The name of the analyzer to update the archive rules for.
+          schema:
+            type: string
+            pattern: '^[A-Za-z][A-Za-z0-9_.-]*$'
+            minLength: 1
+            maxLength: 255
+        - name: ruleName
+          in: path
+          required: true
+          description: The name of the rule to update.
+          schema:
+            type: string
+            pattern: '^[A-Za-z][A-Za-z0-9_.-]*$'
+            minLength: 1
+            maxLength: 255
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - filter
+              properties:
+                clientToken:
+                  description: A client token.
+                  type: string
+                filter:
+                  description: A filter to match for the rules to update. Only rules that match the filter are updated.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/Criterion'
+  '/analyzed-resource#analyzerArn&resourceArn':
+    get:
+      operationId: GetAnalyzedResource
+      description: Retrieves information about a resource that was analyzed.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAnalyzedResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: analyzerArn
+          in: query
+          required: true
+          description: The ARN of the analyzer to retrieve information from.
+          schema:
+            type: string
+            pattern: '^[^:]*:[^:]*:[^:]*:[^:]*:[^:]*:analyzer/.{1,255}$'
+        - name: resourceArn
+          in: query
+          required: true
+          description: The ARN of the resource to retrieve information about.
+          schema:
+            type: string
+            pattern: 'arn:[^:]*:[^:]*:[^:]*:[^:]*:.*$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/finding/{id}#analyzerArn':
+    get:
+      operationId: GetFinding
+      description: Retrieves information about the specified finding.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetFindingResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: analyzerArn
+          in: query
+          required: true
+          description: The ARN of the analyzer that generated the finding.
+          schema:
+            type: string
+            pattern: '^[^:]*:[^:]*:[^:]*:[^:]*:[^:]*:analyzer/.{1,255}$'
+        - name: id
+          in: path
+          required: true
+          description: The ID of the finding to retrieve.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /analyzed-resource:
+    post:
+      operationId: ListAnalyzedResources
+      description: Retrieves a list of resources of the specified type that have been analyzed by the specified analyzer..
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAnalyzedResourcesResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - analyzerArn
+              properties:
+                analyzerArn:
+                  description: The ARN of the analyzer to retrieve a list of analyzed resources from.
+                  type: string
+                  pattern: '^[^:]*:[^:]*:[^:]*:[^:]*:[^:]*:analyzer/.{1,255}$'
+                maxResults:
+                  description: The maximum number of results to return in the response.
+                  type: integer
+                nextToken:
+                  description: A token used for pagination of results returned.
+                  type: string
+                resourceType:
+                  description: The type of resource.
+                  type: string
+                  enum:
+                    - 'AWS::IAM::Role'
+                    - 'AWS::KMS::Key'
+                    - 'AWS::Lambda::Function'
+                    - 'AWS::Lambda::LayerVersion'
+                    - 'AWS::S3::Bucket'
+                    - 'AWS::SQS::Queue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /finding:
+    post:
+      operationId: ListFindings
+      description: Retrieves a list of findings generated by the specified analyzer.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListFindingsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - analyzerArn
+              properties:
+                analyzerArn:
+                  description: The ARN of the analyzer to retrieve findings from.
+                  type: string
+                  pattern: '^[^:]*:[^:]*:[^:]*:[^:]*:[^:]*:analyzer/.{1,255}$'
+                filter:
+                  description: A filter to match for the findings to return.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/Criterion'
+                maxResults:
+                  description: The maximum number of results to return in the response.
+                  type: integer
+                nextToken:
+                  description: A token used for pagination of results returned.
+                  type: string
+                sort:
+                  description: The criteria used to sort.
+                  type: object
+                  properties:
+                    attributeName:
+                      $ref: '#/components/schemas/String'
+                      description: The name of the attribute to sort on.
+                    orderBy:
+                      $ref: '#/components/schemas/OrderBy'
+                      description: 'The sort order, ascending or descending.'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: UpdateFindings
+      description: Updates the status for the specified findings.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - analyzerArn
+                - status
+              properties:
+                analyzerArn:
+                  description: The ARN of the analyzer that generated the findings to update.
+                  type: string
+                  pattern: '^[^:]*:[^:]*:[^:]*:[^:]*:[^:]*:analyzer/.{1,255}$'
+                clientToken:
+                  description: A client token.
+                  type: string
+                ids:
+                  description: The IDs of the findings to update.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/FindingId'
+                resourceArn:
+                  description: The ARN of the resource identified in the finding.
+                  type: string
+                  pattern: 'arn:[^:]*:[^:]*:[^:]*:[^:]*:.*$'
+                status:
+                  description: The state represents the action to take to update the finding Status. Use <code>ARCHIVE</code> to change an Active finding to an Archived finding. Use <code>ACTIVE</code> to change an Archived finding to an Active finding.
+                  type: string
+                  enum:
+                    - ACTIVE
+                    - ARCHIVED
+  '/tags/{resourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: Retrieves a list of tags applied to the specified resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The ARN of the resource to retrieve tags from.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: Adds a tag to the specified resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The ARN of the resource to add the tag to.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tags
+              properties:
+                tags:
+                  description: The tags to add to the resource.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/String'
+  /resource/scan:
+    post:
+      operationId: StartResourceScan
+      description: Immediately starts a scan of the policies applied to the specified resource.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - analyzerArn
+                - resourceArn
+              properties:
+                analyzerArn:
+                  description: The ARN of the analyzer to use to scan the policies applied to the specified resource.
+                  type: string
+                  pattern: '^[^:]*:[^:]*:[^:]*:[^:]*:[^:]*:analyzer/.{1,255}$'
+                resourceArn:
+                  description: The ARN of the resource to scan.
+                  type: string
+                  pattern: 'arn:[^:]*:[^:]*:[^:]*:[^:]*:.*$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Removes a tag from the specified resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The ARN of the resource to remove the tag from.
+          schema:
+            type: string
+        - name: tagKeys
+          in: query
+          required: true
+          description: The key for the tag to add.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/String'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    CreateAnalyzerResponse:
+      type: object
+      properties:
+        arn:
+          $ref: '#/components/schemas/AnalyzerArn'
+          description: The ARN of the analyzer that was created by the request.
+      description: The response to the request to create an analyzer.
+    InlineArchiveRule:
+      type: object
+      required:
+        - filter
+        - ruleName
+      properties:
+        filter:
+          $ref: '#/components/schemas/FilterCriteriaMap'
+          description: The condition and values for a criterion.
+        ruleName:
+          $ref: '#/components/schemas/Name'
+          description: The name of the rule.
+      description: An criterion statement in an archive rule. Each archive rule may have multiple criteria.
+    String:
+      type: string
+    ConflictException: {}
+    ValidationException: {}
+    InternalServerException: {}
+    ServiceQuotaExceededException: {}
+    ThrottlingException: {}
+    AccessDeniedException: {}
+    Criterion:
+      type: object
+      properties:
+        contains:
+          $ref: '#/components/schemas/ValueList'
+          description: A "contains" operator to match for the filter used to create the rule.
+        eq:
+          $ref: '#/components/schemas/ValueList'
+          description: An "equals" operator to match for the filter used to create the rule.
+        exists:
+          $ref: '#/components/schemas/Boolean'
+          description: 'An "exists" operator to match for the filter used to create the rule. '
+        neq:
+          $ref: '#/components/schemas/ValueList'
+          description: A "not equals" operator to match for the filter used to create the rule.
+      description: The criteria to use in the filter that defines the archive rule.
+    ResourceNotFoundException: {}
+    GetAnalyzedResourceResponse:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/AnalyzedResource'
+          description: An <code>AnalyedResource</code> object that contains information that Access Analyzer found when it analyzed the resource.
+      description: The response to the request.
+    GetAnalyzerResponse:
+      type: object
+      required:
+        - analyzer
+      properties:
+        analyzer:
+          $ref: '#/components/schemas/AnalyzerSummary'
+          description: An <code>AnalyzerSummary</code> object that contains information about the analyzer.
+      description: The response to the request.
+    GetArchiveRuleResponse:
+      type: object
+      required:
+        - archiveRule
+      properties:
+        archiveRule:
+          $ref: '#/components/schemas/ArchiveRuleSummary'
+      description: The response to the request.
+    GetFindingResponse:
+      type: object
+      properties:
+        finding:
+          $ref: '#/components/schemas/Finding'
+          description: A <code>finding</code> object that contains finding details.
+      description: The response to the request.
+    ListAnalyzedResourcesResponse:
+      type: object
+      required:
+        - analyzedResources
+      properties:
+        analyzedResources:
+          $ref: '#/components/schemas/AnalyzedResourcesList'
+          description: A list of resources that were analyzed.
+        nextToken:
+          $ref: '#/components/schemas/Token'
+          description: A token used for pagination of results returned.
+      description: The response to the request.
+    ListAnalyzersResponse:
+      type: object
+      required:
+        - analyzers
+      properties:
+        analyzers:
+          $ref: '#/components/schemas/AnalyzersList'
+          description: The analyzers retrieved.
+        nextToken:
+          $ref: '#/components/schemas/Token'
+          description: A token used for pagination of results returned.
+      description: The response to the request.
+    ListArchiveRulesResponse:
+      type: object
+      required:
+        - archiveRules
+      properties:
+        archiveRules:
+          $ref: '#/components/schemas/ArchiveRulesList'
+          description: A list of archive rules created for the specified analyzer.
+        nextToken:
+          $ref: '#/components/schemas/Token'
+          description: A token used for pagination of results returned.
+      description: The response to the request.
+    ListFindingsResponse:
+      type: object
+      required:
+        - findings
+      properties:
+        findings:
+          $ref: '#/components/schemas/FindingsList'
+          description: 'A list of findings retrieved from the analyzer that match the filter criteria specified, if any.'
+        nextToken:
+          $ref: '#/components/schemas/Token'
+          description: A token used for pagination of results returned.
+      description: The response to the request.
+    OrderBy:
+      type: string
+      enum:
+        - ASC
+        - DESC
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        tags:
+          $ref: '#/components/schemas/TagsMap'
+          description: The tags that are applied to the specified resource.
+      description: The response to the request.
+    TagResourceResponse:
+      type: object
+      properties: {}
+      description: The response to the request.
+    UntagResourceResponse:
+      type: object
+      properties: {}
+      description: The response to the request.
+    FindingId:
+      type: string
+    ActionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    Timestamp:
+      type: string
+      format: date-time
+    Boolean:
+      type: boolean
+    ResourceArn:
+      type: string
+      pattern: 'arn:[^:]*:[^:]*:[^:]*:[^:]*:.*$'
+    ResourceType:
+      type: string
+      enum:
+        - 'AWS::IAM::Role'
+        - 'AWS::KMS::Key'
+        - 'AWS::Lambda::Function'
+        - 'AWS::Lambda::LayerVersion'
+        - 'AWS::S3::Bucket'
+        - 'AWS::SQS::Queue'
+    SharedViaList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    FindingStatus:
+      type: string
+      enum:
+        - ACTIVE
+        - ARCHIVED
+        - RESOLVED
+    AnalyzedResource:
+      type: object
+      required:
+        - analyzedAt
+        - createdAt
+        - isPublic
+        - resourceArn
+        - resourceType
+        - updatedAt
+      properties:
+        actions:
+          $ref: '#/components/schemas/ActionList'
+          description: The actions that an external principal is granted permission to use by the policy that generated the finding.
+        analyzedAt:
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the resource was analyzed.
+        createdAt:
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the finding was created.
+        error:
+          $ref: '#/components/schemas/String'
+          description: An error message.
+        isPublic:
+          $ref: '#/components/schemas/Boolean'
+          description: Indicates whether the policy that generated the finding grants public access to the resource.
+        resourceArn:
+          $ref: '#/components/schemas/ResourceArn'
+          description: The ARN of the resource that was analyzed.
+        resourceType:
+          $ref: '#/components/schemas/ResourceType'
+          description: The type of the resource that was analyzed.
+        sharedVia:
+          $ref: '#/components/schemas/SharedViaList'
+          description: Indicates how the access that generated the finding is granted.
+        status:
+          $ref: '#/components/schemas/FindingStatus'
+          description: The current status of the finding generated from the analyzed resource.
+        updatedAt:
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the finding was updated.
+      description: Contains details about the analyzed resource.
+    AnalyzedResourceSummary:
+      type: object
+      required:
+        - resourceArn
+        - resourceType
+      properties:
+        resourceArn:
+          $ref: '#/components/schemas/ResourceArn'
+          description: The ARN of the analyzed resource.
+        resourceType:
+          $ref: '#/components/schemas/ResourceType'
+          description: The type of resource that was analyzed.
+      description: Contains the ARN of the analyzed resource.
+    AnalyzedResourcesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalyzedResourceSummary'
+    AnalyzerArn:
+      type: string
+      pattern: '^[^:]*:[^:]*:[^:]*:[^:]*:[^:]*:analyzer/.{1,255}$'
+    Name:
+      type: string
+      pattern: '^[A-Za-z][A-Za-z0-9_.-]*$'
+      minLength: 1
+      maxLength: 255
+    TagsMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/String'
+    Type:
+      type: string
+      enum:
+        - ACCOUNT
+    AnalyzerSummary:
+      type: object
+      required:
+        - arn
+        - createdAt
+        - name
+        - type
+      properties:
+        arn:
+          $ref: '#/components/schemas/AnalyzerArn'
+          description: The ARN of the analyzer.
+        createdAt:
+          $ref: '#/components/schemas/Timestamp'
+          description: A timestamp for the time at which the analyzer was created.
+        lastResourceAnalyzed:
+          $ref: '#/components/schemas/String'
+          description: The resource that was most recently analyzed by the analyzer.
+        lastResourceAnalyzedAt:
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the most recently analyzed resource was analyzed.
+        name:
+          $ref: '#/components/schemas/Name'
+          description: The name of the analyzer.
+        tags:
+          $ref: '#/components/schemas/TagsMap'
+          description: The tags added to the analyzer.
+        type:
+          $ref: '#/components/schemas/Type'
+          description: 'The type of analyzer, which corresponds to the zone of trust chosen for the analyzer.'
+      description: Contains information about the analyzer.
+    AnalyzersList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalyzerSummary'
+    FilterCriteriaMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/Criterion'
+    ArchiveRuleSummary:
+      type: object
+      required:
+        - createdAt
+        - filter
+        - ruleName
+        - updatedAt
+      properties:
+        createdAt:
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the archive rule was created.
+        filter:
+          $ref: '#/components/schemas/FilterCriteriaMap'
+          description: A filter used to define the archive rule.
+        ruleName:
+          $ref: '#/components/schemas/Name'
+          description: The name of the archive rule.
+        updatedAt:
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the archive rule was last updated.
+      description: Contains information about an archive rule.
+    ArchiveRulesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ArchiveRuleSummary'
+    ConditionKeyMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/String'
+    InlineArchiveRulesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/InlineArchiveRule'
+    CreateAnalyzerRequest:
+      type: object
+      required:
+        - analyzerName
+        - type
+      title: CreateAnalyzerRequest
+      properties:
+        analyzerName:
+          $ref: '#/components/schemas/Name'
+          description: The name of the analyzer to create.
+        archiveRules:
+          $ref: '#/components/schemas/InlineArchiveRulesList'
+          description: Specifies the archive rules to add for the analyzer. Archive rules automatically archive findings that meet the criteria you define for the rule.
+        clientToken:
+          $ref: '#/components/schemas/String'
+          description: A client token.
+        tags:
+          $ref: '#/components/schemas/TagsMap'
+          description: The tags to apply to the analyzer.
+        type:
+          $ref: '#/components/schemas/Type'
+          description: The type of analyzer to create. Only ACCOUNT analyzers are supported. You can create only one analyzer per account per Region.
+      description: Creates an analyzer.
+    CreateArchiveRuleRequest:
+      type: object
+      required:
+        - filter
+        - ruleName
+      title: CreateArchiveRuleRequest
+      properties:
+        clientToken:
+          $ref: '#/components/schemas/String'
+          description: A client token.
+        filter:
+          $ref: '#/components/schemas/FilterCriteriaMap'
+          description: The criteria for the rule.
+        ruleName:
+          $ref: '#/components/schemas/Name'
+          description: The name of the rule to create.
+      description: Creates an archive rule.
+    ValueList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+      minItems: 1
+      maxItems: 20
+    DeleteAnalyzerRequest:
+      type: object
+      title: DeleteAnalyzerRequest
+      properties: {}
+      description: Deletes an analyzer.
+    DeleteArchiveRuleRequest:
+      type: object
+      title: DeleteArchiveRuleRequest
+      properties: {}
+      description: Deletes an archive rule.
+    PrincipalMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/String'
+    Finding:
+      type: object
+      required:
+        - analyzedAt
+        - condition
+        - createdAt
+        - id
+        - resourceType
+        - status
+        - updatedAt
+      properties:
+        action:
+          $ref: '#/components/schemas/ActionList'
+          description: The action in the analyzed policy statement that an external principal has permission to use.
+        analyzedAt:
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the resource was analyzed.
+        condition:
+          $ref: '#/components/schemas/ConditionKeyMap'
+          description: The condition in the analyzed policy statement that resulted in a finding.
+        createdAt:
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the finding was generated.
+        error:
+          $ref: '#/components/schemas/String'
+          description: An error.
+        id:
+          $ref: '#/components/schemas/FindingId'
+          description: The ID of the finding.
+        isPublic:
+          $ref: '#/components/schemas/Boolean'
+          description: Indicates whether the policy that generated the finding allows public access to the resource.
+        principal:
+          $ref: '#/components/schemas/PrincipalMap'
+          description: The external principal that access to a resource within the zone of trust.
+        resource:
+          $ref: '#/components/schemas/String'
+          description: The resource that an external principal has access to.
+        resourceType:
+          $ref: '#/components/schemas/ResourceType'
+          description: The type of the resource reported in the finding.
+        status:
+          $ref: '#/components/schemas/FindingStatus'
+          description: The current status of the finding.
+        updatedAt:
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the finding was updated.
+      description: Contains information about a finding.
+    FindingIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FindingId'
+    FindingStatusUpdate:
+      type: string
+      enum:
+        - ACTIVE
+        - ARCHIVED
+    FindingSummary:
+      type: object
+      required:
+        - analyzedAt
+        - condition
+        - createdAt
+        - id
+        - resourceType
+        - status
+        - updatedAt
+      properties:
+        action:
+          $ref: '#/components/schemas/ActionList'
+          description: The action in the analyzed policy statement that an external principal has permission to use.
+        analyzedAt:
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the resource-based policy that generated the finding was analyzed.
+        condition:
+          $ref: '#/components/schemas/ConditionKeyMap'
+          description: The condition in the analyzed policy statement that resulted in a finding.
+        createdAt:
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the finding was created.
+        error:
+          $ref: '#/components/schemas/String'
+          description: The error that resulted in an Error finding.
+        id:
+          $ref: '#/components/schemas/FindingId'
+          description: The ID of the finding.
+        isPublic:
+          $ref: '#/components/schemas/Boolean'
+          description: Indicates whether the finding reports a resource that has a policy that allows public access.
+        principal:
+          $ref: '#/components/schemas/PrincipalMap'
+          description: The external principal that has access to a resource within the zone of trust.
+        resource:
+          $ref: '#/components/schemas/String'
+          description: The resource that the external principal has access to.
+        resourceType:
+          $ref: '#/components/schemas/ResourceType'
+          description: The type of the resource that the external principal has access to.
+        status:
+          $ref: '#/components/schemas/FindingStatus'
+          description: The status of the finding.
+        updatedAt:
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the finding was most recently updated.
+      description: Contains information about a finding.
+    FindingsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FindingSummary'
+    GetAnalyzedResourceRequest:
+      type: object
+      title: GetAnalyzedResourceRequest
+      properties: {}
+      description: Retrieves an analyzed resource.
+    GetAnalyzerRequest:
+      type: object
+      title: GetAnalyzerRequest
+      properties: {}
+      description: Retrieves an analyzer.
+    GetArchiveRuleRequest:
+      type: object
+      title: GetArchiveRuleRequest
+      properties: {}
+      description: Retrieves an archive rule.
+    GetFindingRequest:
+      type: object
+      title: GetFindingRequest
+      properties: {}
+      description: Retrieves a finding.
+    Integer:
+      type: integer
+    Token:
+      type: string
+    ListAnalyzedResourcesRequest:
+      type: object
+      required:
+        - analyzerArn
+      title: ListAnalyzedResourcesRequest
+      properties:
+        analyzerArn:
+          $ref: '#/components/schemas/AnalyzerArn'
+          description: The ARN of the analyzer to retrieve a list of analyzed resources from.
+        maxResults:
+          $ref: '#/components/schemas/Integer'
+          description: The maximum number of results to return in the response.
+        nextToken:
+          $ref: '#/components/schemas/Token'
+          description: A token used for pagination of results returned.
+        resourceType:
+          $ref: '#/components/schemas/ResourceType'
+          description: The type of resource.
+      description: Retrieves a list of resources that have been analyzed.
+    ListAnalyzersRequest:
+      type: object
+      title: ListAnalyzersRequest
+      properties: {}
+      description: Retrieves a list of analyzers.
+    ListArchiveRulesRequest:
+      type: object
+      title: ListArchiveRulesRequest
+      properties: {}
+      description: Retrieves a list of archive rules created for the specified analyzer.
+    SortCriteria:
+      type: object
+      properties:
+        attributeName:
+          $ref: '#/components/schemas/String'
+          description: The name of the attribute to sort on.
+        orderBy:
+          $ref: '#/components/schemas/OrderBy'
+          description: 'The sort order, ascending or descending.'
+      description: The criteria used to sort.
+    ListFindingsRequest:
+      type: object
+      required:
+        - analyzerArn
+      title: ListFindingsRequest
+      properties:
+        analyzerArn:
+          $ref: '#/components/schemas/AnalyzerArn'
+          description: The ARN of the analyzer to retrieve findings from.
+        filter:
+          $ref: '#/components/schemas/FilterCriteriaMap'
+          description: A filter to match for the findings to return.
+        maxResults:
+          $ref: '#/components/schemas/Integer'
+          description: The maximum number of results to return in the response.
+        nextToken:
+          $ref: '#/components/schemas/Token'
+          description: A token used for pagination of results returned.
+        sort:
+          $ref: '#/components/schemas/SortCriteria'
+          description: The sort order for the findings returned.
+      description: Retrieves a list of findings generated by the specified analyzer.
+    ListTagsForResourceRequest:
+      type: object
+      title: ListTagsForResourceRequest
+      properties: {}
+      description: Retrieves a list of tags applied to the specified resource.
+    StartResourceScanRequest:
+      type: object
+      required:
+        - analyzerArn
+        - resourceArn
+      title: StartResourceScanRequest
+      properties:
+        analyzerArn:
+          $ref: '#/components/schemas/AnalyzerArn'
+          description: The ARN of the analyzer to use to scan the policies applied to the specified resource.
+        resourceArn:
+          $ref: '#/components/schemas/ResourceArn'
+          description: The ARN of the resource to scan.
+      description: Starts a scan of the policies applied to the specified resource.
+    TagKeys:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    TagResourceRequest:
+      type: object
+      required:
+        - tags
+      title: TagResourceRequest
+      properties:
+        tags:
+          $ref: '#/components/schemas/TagsMap'
+          description: The tags to add to the resource.
+      description: Adds a tag to the specified resource.
+    UntagResourceRequest:
+      type: object
+      title: UntagResourceRequest
+      properties: {}
+      description: Removes a tag from the specified resource.
+    UpdateArchiveRuleRequest:
+      type: object
+      required:
+        - filter
+      title: UpdateArchiveRuleRequest
+      properties:
+        clientToken:
+          $ref: '#/components/schemas/String'
+          description: A client token.
+        filter:
+          $ref: '#/components/schemas/FilterCriteriaMap'
+          description: A filter to match for the rules to update. Only rules that match the filter are updated.
+      description: Updates the specified archive rule.
+    UpdateFindingsRequest:
+      type: object
+      required:
+        - analyzerArn
+        - status
+      title: UpdateFindingsRequest
+      properties:
+        analyzerArn:
+          $ref: '#/components/schemas/AnalyzerArn'
+          description: The ARN of the analyzer that generated the findings to update.
+        clientToken:
+          $ref: '#/components/schemas/String'
+          description: A client token.
+        ids:
+          $ref: '#/components/schemas/FindingIdList'
+          description: The IDs of the findings to update.
+        resourceArn:
+          $ref: '#/components/schemas/ResourceArn'
+          description: The ARN of the resource identified in the finding.
+        status:
+          $ref: '#/components/schemas/FindingStatusUpdate'
+          description: The state represents the action to take to update the finding Status. Use <code>ARCHIVE</code> to change an Active finding to an Archived finding. Use <code>ACTIVE</code> to change an Archived finding to an Active finding.
+      description: Updates findings with the new values provided in the request.
+security:
+  - hmac: []

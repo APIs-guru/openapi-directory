@@ -1,0 +1,2431 @@
+openapi: 3.0.0
+info:
+  version: '2017-11-27'
+  x-release: v4
+  title: AmazonMQ
+  description: 'Amazon MQ is a managed message broker service for Apache ActiveMQ that makes it easy to set up and operate message brokers in the cloud. A message broker allows software applications and components to communicate using various programming languages, operating systems, and formal messaging protocols.'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: mq
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/mq-2017-11-27.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/mq/'
+servers:
+  - url: 'http://mq.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The AmazonMQ multi-region endpoint
+  - url: 'https://mq.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The AmazonMQ multi-region endpoint
+  - url: 'http://mq.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AmazonMQ endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://mq.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AmazonMQ endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  /v1/brokers:
+    post:
+      operationId: CreateBroker
+      description: 'Creates a broker. Note: This API is asynchronous.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateBrokerResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                autoMinorVersionUpgrade:
+                  description: 'Required. Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.'
+                  type: boolean
+                brokerName:
+                  description: 'Required. The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.'
+                  type: string
+                configuration:
+                  description: A list of information about the configuration.
+                  type: object
+                  properties:
+                    Id:
+                      $ref: '#/components/schemas/__string'
+                      description: Required. The unique ID that Amazon MQ generates for the configuration.
+                    Revision:
+                      $ref: '#/components/schemas/__integer'
+                      description: The revision number of the configuration.
+                creatorRequestId:
+                  description: 'The unique ID that the requester receives for the created broker. Amazon MQ passes your ID with the API action. Note: We recommend using a Universally Unique Identifier (UUID) for the creatorRequestId. You may omit the creatorRequestId if your application doesn''t require idempotency.'
+                  type: string
+                deploymentMode:
+                  description: The deployment mode of the broker.
+                  type: string
+                  enum:
+                    - SINGLE_INSTANCE
+                    - ACTIVE_STANDBY_MULTI_AZ
+                encryptionOptions:
+                  description: Encryption options for the broker.
+                  type: object
+                  properties:
+                    KmsKeyId:
+                      $ref: '#/components/schemas/__string'
+                      description: 'The customer master key (CMK) to use for the AWS Key Management Service (KMS). This key is used to encrypt your data at rest. If not provided, Amazon MQ will use a default CMK to encrypt your data.'
+                    UseAwsOwnedKey:
+                      $ref: '#/components/schemas/__boolean'
+                      description: Enables the use of an AWS owned CMK using AWS Key Management Service (KMS).
+                engineType:
+                  description: 'The type of broker engine. Note: Currently, Amazon MQ supports only ActiveMQ.'
+                  type: string
+                  enum:
+                    - ACTIVEMQ
+                engineVersion:
+                  description: 'Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
+                  type: string
+                hostInstanceType:
+                  description: Required. The broker's instance type.
+                  type: string
+                logs:
+                  description: The list of information about logs to be enabled for the specified broker.
+                  type: object
+                  properties:
+                    Audit:
+                      $ref: '#/components/schemas/__boolean'
+                      description: Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged.
+                    General:
+                      $ref: '#/components/schemas/__boolean'
+                      description: Enables general logging.
+                maintenanceWindowStartTime:
+                  description: The scheduled time period relative to UTC during which Amazon MQ begins to apply pending updates or patches to the broker.
+                  type: object
+                  properties:
+                    DayOfWeek:
+                      $ref: '#/components/schemas/DayOfWeek'
+                      description: Required. The day of the week.
+                    TimeOfDay:
+                      $ref: '#/components/schemas/__string'
+                      description: 'Required. The time, in 24-hour format.'
+                    TimeZone:
+                      $ref: '#/components/schemas/__string'
+                      description: 'The time zone, UTC by default, in either the Country/City format, or the UTC offset format.'
+                publiclyAccessible:
+                  description: Required. Enables connections from applications outside of the VPC that hosts the broker's subnets.
+                  type: boolean
+                securityGroups:
+                  description: 'The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/__string'
+                storageType:
+                  description: The storage type of the broker.
+                  type: string
+                  enum:
+                    - EBS
+                    - EFS
+                subnetIds:
+                  description: 'The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/__string'
+                tags:
+                  description: Create tags when creating the broker.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/__string'
+                users:
+                  description: 'Required. The list of ActiveMQ users (persons or applications) who can access queues and topics. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/User'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListBrokers
+      description: Returns a list of all brokers.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListBrokersResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of brokers that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
+          schema:
+            type: string
+  /v1/configurations:
+    post:
+      operationId: CreateConfiguration
+      description: Creates a new configuration for the specified configuration name. Amazon MQ uses the default configuration (the engine type and version).
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateConfigurationResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                engineType:
+                  description: 'The type of broker engine. Note: Currently, Amazon MQ supports only ActiveMQ.'
+                  type: string
+                  enum:
+                    - ACTIVEMQ
+                engineVersion:
+                  description: 'Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
+                  type: string
+                name:
+                  description: 'Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.'
+                  type: string
+                tags:
+                  description: Create tags when creating the configuration.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/__string'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListConfigurations
+      description: Returns a list of all configurations.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListConfigurationsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of configurations that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
+          schema:
+            type: string
+  '/v1/tags/{resource-arn}':
+    post:
+      operationId: CreateTags
+      description: Add a tag to a resource.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+      parameters:
+        - name: resource-arn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource tag.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tags:
+                  description: The key-value pair for the resource tag.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/__string'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListTags
+      description: Lists tags for a resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+      parameters:
+        - name: resource-arn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource tag.
+          schema:
+            type: string
+  '/v1/brokers/{broker-id}/users/{username}':
+    post:
+      operationId: CreateUser
+      description: Creates an ActiveMQ user.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateUserResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+      parameters:
+        - name: broker-id
+          in: path
+          required: true
+          description: The unique ID that Amazon MQ generates for the broker.
+          schema:
+            type: string
+        - name: username
+          in: path
+          required: true
+          description: 'The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                consoleAccess:
+                  description: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
+                  type: boolean
+                groups:
+                  description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/__string'
+                password:
+                  description: 'Required. The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.'
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteUser
+      description: Deletes an ActiveMQ user.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteUserResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+      parameters:
+        - name: broker-id
+          in: path
+          required: true
+          description: The unique ID that Amazon MQ generates for the broker.
+          schema:
+            type: string
+        - name: username
+          in: path
+          required: true
+          description: 'The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+          schema:
+            type: string
+    get:
+      operationId: DescribeUser
+      description: Returns information about an ActiveMQ user.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeUserResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+      parameters:
+        - name: broker-id
+          in: path
+          required: true
+          description: The unique ID that Amazon MQ generates for the broker.
+          schema:
+            type: string
+        - name: username
+          in: path
+          required: true
+          description: 'The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+          schema:
+            type: string
+    put:
+      operationId: UpdateUser
+      description: Updates the information for an ActiveMQ user.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateUserResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+      parameters:
+        - name: broker-id
+          in: path
+          required: true
+          description: The unique ID that Amazon MQ generates for the broker.
+          schema:
+            type: string
+        - name: username
+          in: path
+          required: true
+          description: 'Required. The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                consoleAccess:
+                  description: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
+                  type: boolean
+                groups:
+                  description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/__string'
+                password:
+                  description: 'The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.'
+                  type: string
+  '/v1/brokers/{broker-id}':
+    delete:
+      operationId: DeleteBroker
+      description: 'Deletes a broker. Note: This API is asynchronous.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteBrokerResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+      parameters:
+        - name: broker-id
+          in: path
+          required: true
+          description: 'The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.'
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeBroker
+      description: Returns information about the specified broker.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeBrokerResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+      parameters:
+        - name: broker-id
+          in: path
+          required: true
+          description: 'The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.'
+          schema:
+            type: string
+    put:
+      operationId: UpdateBroker
+      description: Adds a pending configuration change to a broker.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateBrokerResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+      parameters:
+        - name: broker-id
+          in: path
+          required: true
+          description: 'The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.'
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                autoMinorVersionUpgrade:
+                  description: 'Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.'
+                  type: boolean
+                configuration:
+                  description: A list of information about the configuration.
+                  type: object
+                  properties:
+                    Id:
+                      $ref: '#/components/schemas/__string'
+                      description: Required. The unique ID that Amazon MQ generates for the configuration.
+                    Revision:
+                      $ref: '#/components/schemas/__integer'
+                      description: The revision number of the configuration.
+                engineVersion:
+                  description: 'The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
+                  type: string
+                hostInstanceType:
+                  description: 'The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types'
+                  type: string
+                logs:
+                  description: The list of information about logs to be enabled for the specified broker.
+                  type: object
+                  properties:
+                    Audit:
+                      $ref: '#/components/schemas/__boolean'
+                      description: Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged.
+                    General:
+                      $ref: '#/components/schemas/__boolean'
+                      description: Enables general logging.
+                securityGroups:
+                  description: 'The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/__string'
+  '/v1/tags/{resource-arn}#tagKeys':
+    delete:
+      operationId: DeleteTags
+      description: Removes a tag from a resource.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+      parameters:
+        - name: resource-arn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource tag.
+          schema:
+            type: string
+        - name: tagKeys
+          in: query
+          required: true
+          description: An array of tag keys to delete
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/__string'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /v1/broker-engine-types:
+    get:
+      operationId: DescribeBrokerEngineTypes
+      description: Describe available engine types and versions.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeBrokerEngineTypesResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+      parameters:
+        - name: engineType
+          in: query
+          required: false
+          description: Filter response by engine type.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of engine types that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /v1/broker-instance-options:
+    get:
+      operationId: DescribeBrokerInstanceOptions
+      description: Describe available broker instance options.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeBrokerInstanceOptionsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+      parameters:
+        - name: engineType
+          in: query
+          required: false
+          description: Filter response by engine type.
+          schema:
+            type: string
+        - name: hostInstanceType
+          in: query
+          required: false
+          description: Filter response by host instance type.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of instance options that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
+          schema:
+            type: string
+        - name: storageType
+          in: query
+          required: false
+          description: Filter response by storage type.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/configurations/{configuration-id}':
+    get:
+      operationId: DescribeConfiguration
+      description: Returns information about the specified configuration.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeConfigurationResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+      parameters:
+        - name: configuration-id
+          in: path
+          required: true
+          description: The unique ID that Amazon MQ generates for the configuration.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: UpdateConfiguration
+      description: Updates the specified configuration.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateConfigurationResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+      parameters:
+        - name: configuration-id
+          in: path
+          required: true
+          description: The unique ID that Amazon MQ generates for the configuration.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  description: Required. The base64-encoded XML configuration.
+                  type: string
+                description:
+                  description: The description of the configuration.
+                  type: string
+  '/v1/configurations/{configuration-id}/revisions/{configuration-revision}':
+    get:
+      operationId: DescribeConfigurationRevision
+      description: Returns the specified configuration revision for the specified configuration.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeConfigurationRevisionResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+      parameters:
+        - name: configuration-id
+          in: path
+          required: true
+          description: The unique ID that Amazon MQ generates for the configuration.
+          schema:
+            type: string
+        - name: configuration-revision
+          in: path
+          required: true
+          description: The revision of the configuration.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/configurations/{configuration-id}/revisions':
+    get:
+      operationId: ListConfigurationRevisions
+      description: Returns a list of all revisions for the specified configuration.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListConfigurationRevisionsResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+      parameters:
+        - name: configuration-id
+          in: path
+          required: true
+          description: The unique ID that Amazon MQ generates for the configuration.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of configurations that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/brokers/{broker-id}/users':
+    get:
+      operationId: ListUsers
+      description: Returns a list of all ActiveMQ users.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListUsersResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+      parameters:
+        - name: broker-id
+          in: path
+          required: true
+          description: The unique ID that Amazon MQ generates for the broker.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of ActiveMQ users that can be returned per page (20 by default). This value must be an integer from 5 to 100.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/brokers/{broker-id}/reboot':
+    post:
+      operationId: RebootBroker
+      description: 'Reboots a broker. Note: This API is asynchronous.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RebootBrokerResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+      parameters:
+        - name: broker-id
+          in: path
+          required: true
+          description: The unique ID that Amazon MQ generates for the broker.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    CreateBrokerResponse:
+      type: object
+      properties:
+        BrokerArn:
+          $ref: '#/components/schemas/__string'
+          description: The Amazon Resource Name (ARN) of the broker.
+        BrokerId:
+          $ref: '#/components/schemas/__string'
+          description: The unique ID that Amazon MQ generates for the broker.
+    __string:
+      type: string
+    __integer:
+      type: integer
+    __boolean:
+      type: boolean
+    DayOfWeek:
+      type: string
+      enum:
+        - MONDAY
+        - TUESDAY
+        - WEDNESDAY
+        - THURSDAY
+        - FRIDAY
+        - SATURDAY
+        - SUNDAY
+    User:
+      type: object
+      properties:
+        ConsoleAccess:
+          $ref: '#/components/schemas/__boolean'
+          description: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
+        Groups:
+          $ref: '#/components/schemas/__listOf__string'
+          description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+        Password:
+          $ref: '#/components/schemas/__string'
+          description: 'Required. The password of the ActiveMQ user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.'
+        Username:
+          $ref: '#/components/schemas/__string'
+          description: 'Required. The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+      description: An ActiveMQ user associated with the broker.
+    BadRequestException: {}
+    UnauthorizedException: {}
+    InternalServerErrorException: {}
+    ConflictException: {}
+    ForbiddenException: {}
+    CreateConfigurationResponse:
+      type: object
+      properties:
+        Arn:
+          $ref: '#/components/schemas/__string'
+          description: Required. The Amazon Resource Name (ARN) of the configuration.
+        Created:
+          $ref: '#/components/schemas/__timestampIso8601'
+          description: Required. The date and time of the configuration.
+        Id:
+          $ref: '#/components/schemas/__string'
+          description: Required. The unique ID that Amazon MQ generates for the configuration.
+        LatestRevision:
+          $ref: '#/components/schemas/ConfigurationRevision'
+          description: The latest revision of the configuration.
+        Name:
+          $ref: '#/components/schemas/__string'
+          description: 'Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.'
+    NotFoundException: {}
+    CreateUserResponse:
+      type: object
+      properties: {}
+    DeleteBrokerResponse:
+      type: object
+      properties:
+        BrokerId:
+          $ref: '#/components/schemas/__string'
+          description: The unique ID that Amazon MQ generates for the broker.
+    DeleteUserResponse:
+      type: object
+      properties: {}
+    DescribeBrokerResponse:
+      type: object
+      properties:
+        AutoMinorVersionUpgrade:
+          $ref: '#/components/schemas/__boolean'
+          description: 'Required. Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.'
+        BrokerArn:
+          $ref: '#/components/schemas/__string'
+          description: The Amazon Resource Name (ARN) of the broker.
+        BrokerId:
+          $ref: '#/components/schemas/__string'
+          description: The unique ID that Amazon MQ generates for the broker.
+        BrokerInstances:
+          $ref: '#/components/schemas/__listOfBrokerInstance'
+          description: A list of information about allocated brokers.
+        BrokerName:
+          $ref: '#/components/schemas/__string'
+          description: 'The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.'
+        BrokerState:
+          $ref: '#/components/schemas/BrokerState'
+          description: The status of the broker.
+        Configurations:
+          $ref: '#/components/schemas/Configurations'
+          description: The list of all revisions for the specified configuration.
+        Created:
+          $ref: '#/components/schemas/__timestampIso8601'
+          description: The time when the broker was created.
+        DeploymentMode:
+          $ref: '#/components/schemas/DeploymentMode'
+          description: Required. The deployment mode of the broker.
+        EncryptionOptions:
+          $ref: '#/components/schemas/EncryptionOptions'
+          description: Encryption options for the broker.
+        EngineType:
+          $ref: '#/components/schemas/EngineType'
+          description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.'
+        EngineVersion:
+          $ref: '#/components/schemas/__string'
+          description: 'The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
+        HostInstanceType:
+          $ref: '#/components/schemas/__string'
+          description: The broker's instance type.
+        Logs:
+          $ref: '#/components/schemas/LogsSummary'
+          description: The list of information about logs currently enabled and pending to be deployed for the specified broker.
+        MaintenanceWindowStartTime:
+          $ref: '#/components/schemas/WeeklyStartTime'
+          description: The parameters that determine the WeeklyStartTime.
+        PendingEngineVersion:
+          $ref: '#/components/schemas/__string'
+          description: 'The version of the broker engine to upgrade to. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
+        PendingHostInstanceType:
+          $ref: '#/components/schemas/__string'
+          description: 'The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types'
+        PendingSecurityGroups:
+          $ref: '#/components/schemas/__listOf__string'
+          description: The list of pending security groups to authorize connections to brokers.
+        PubliclyAccessible:
+          $ref: '#/components/schemas/__boolean'
+          description: Required. Enables connections from applications outside of the VPC that hosts the broker's subnets.
+        SecurityGroups:
+          $ref: '#/components/schemas/__listOf__string'
+          description: 'The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.'
+        StorageType:
+          $ref: '#/components/schemas/BrokerStorageType'
+          description: The broker's storage type.
+        SubnetIds:
+          $ref: '#/components/schemas/__listOf__string'
+          description: 'The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.'
+        Tags:
+          $ref: '#/components/schemas/__mapOf__string'
+          description: The list of all tags associated with this broker.
+        Users:
+          $ref: '#/components/schemas/__listOfUserSummary'
+          description: The list of all ActiveMQ usernames for the specified broker.
+    DescribeBrokerEngineTypesResponse:
+      type: object
+      properties:
+        BrokerEngineTypes:
+          $ref: '#/components/schemas/__listOfBrokerEngineType'
+          description: List of available engine types and versions.
+        MaxResults:
+          $ref: '#/components/schemas/__integerMin5Max100'
+          description: Required. The maximum number of engine types that can be returned per page (20 by default). This value must be an integer from 5 to 100.
+        NextToken:
+          $ref: '#/components/schemas/__string'
+          description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
+    DescribeBrokerInstanceOptionsResponse:
+      type: object
+      properties:
+        BrokerInstanceOptions:
+          $ref: '#/components/schemas/__listOfBrokerInstanceOption'
+          description: List of available broker instance options.
+        MaxResults:
+          $ref: '#/components/schemas/__integerMin5Max100'
+          description: Required. The maximum number of instance options that can be returned per page (20 by default). This value must be an integer from 5 to 100.
+        NextToken:
+          $ref: '#/components/schemas/__string'
+          description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
+    DescribeConfigurationResponse:
+      type: object
+      properties:
+        Arn:
+          $ref: '#/components/schemas/__string'
+          description: Required. The ARN of the configuration.
+        Created:
+          $ref: '#/components/schemas/__timestampIso8601'
+          description: Required. The date and time of the configuration revision.
+        Description:
+          $ref: '#/components/schemas/__string'
+          description: Required. The description of the configuration.
+        EngineType:
+          $ref: '#/components/schemas/EngineType'
+          description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.'
+        EngineVersion:
+          $ref: '#/components/schemas/__string'
+          description: 'Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
+        Id:
+          $ref: '#/components/schemas/__string'
+          description: Required. The unique ID that Amazon MQ generates for the configuration.
+        LatestRevision:
+          $ref: '#/components/schemas/ConfigurationRevision'
+          description: Required. The latest revision of the configuration.
+        Name:
+          $ref: '#/components/schemas/__string'
+          description: 'Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.'
+        Tags:
+          $ref: '#/components/schemas/__mapOf__string'
+          description: The list of all tags associated with this configuration.
+    DescribeConfigurationRevisionResponse:
+      type: object
+      properties:
+        ConfigurationId:
+          $ref: '#/components/schemas/__string'
+          description: Required. The unique ID that Amazon MQ generates for the configuration.
+        Created:
+          $ref: '#/components/schemas/__timestampIso8601'
+          description: Required. The date and time of the configuration.
+        Data:
+          $ref: '#/components/schemas/__string'
+          description: Required. The base64-encoded XML configuration.
+        Description:
+          $ref: '#/components/schemas/__string'
+          description: The description of the configuration.
+    DescribeUserResponse:
+      type: object
+      properties:
+        BrokerId:
+          $ref: '#/components/schemas/__string'
+          description: Required. The unique ID that Amazon MQ generates for the broker.
+        ConsoleAccess:
+          $ref: '#/components/schemas/__boolean'
+          description: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
+        Groups:
+          $ref: '#/components/schemas/__listOf__string'
+          description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+        Pending:
+          $ref: '#/components/schemas/UserPendingChanges'
+          description: The status of the changes pending for the ActiveMQ user.
+        Username:
+          $ref: '#/components/schemas/__string'
+          description: 'Required. The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+    ListBrokersResponse:
+      type: object
+      properties:
+        BrokerSummaries:
+          $ref: '#/components/schemas/__listOfBrokerSummary'
+          description: A list of information about all brokers.
+        NextToken:
+          $ref: '#/components/schemas/__string'
+          description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
+    ListConfigurationRevisionsResponse:
+      type: object
+      properties:
+        ConfigurationId:
+          $ref: '#/components/schemas/__string'
+          description: The unique ID that Amazon MQ generates for the configuration.
+        MaxResults:
+          $ref: '#/components/schemas/__integer'
+          description: The maximum number of configuration revisions that can be returned per page (20 by default). This value must be an integer from 5 to 100.
+        NextToken:
+          $ref: '#/components/schemas/__string'
+          description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
+        Revisions:
+          $ref: '#/components/schemas/__listOfConfigurationRevision'
+          description: The list of all revisions for the specified configuration.
+    ListConfigurationsResponse:
+      type: object
+      properties:
+        Configurations:
+          $ref: '#/components/schemas/__listOfConfiguration'
+          description: The list of all revisions for the specified configuration.
+        MaxResults:
+          $ref: '#/components/schemas/__integer'
+          description: The maximum number of configurations that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
+        NextToken:
+          $ref: '#/components/schemas/__string'
+          description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
+    ListTagsResponse:
+      type: object
+      properties:
+        Tags:
+          $ref: '#/components/schemas/__mapOf__string'
+          description: The key-value pair for the resource tag.
+    ListUsersResponse:
+      type: object
+      properties:
+        BrokerId:
+          $ref: '#/components/schemas/__string'
+          description: Required. The unique ID that Amazon MQ generates for the broker.
+        MaxResults:
+          $ref: '#/components/schemas/__integerMin5Max100'
+          description: Required. The maximum number of ActiveMQ users that can be returned per page (20 by default). This value must be an integer from 5 to 100.
+        NextToken:
+          $ref: '#/components/schemas/__string'
+          description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
+        Users:
+          $ref: '#/components/schemas/__listOfUserSummary'
+          description: Required. The list of all ActiveMQ usernames for the specified broker.
+    RebootBrokerResponse:
+      type: object
+      properties: {}
+    UpdateBrokerResponse:
+      type: object
+      properties:
+        AutoMinorVersionUpgrade:
+          $ref: '#/components/schemas/__boolean'
+          description: The new value of automatic upgrades to new minor version for brokers.
+        BrokerId:
+          $ref: '#/components/schemas/__string'
+          description: Required. The unique ID that Amazon MQ generates for the broker.
+        Configuration:
+          $ref: '#/components/schemas/ConfigurationId'
+          description: The ID of the updated configuration.
+        EngineVersion:
+          $ref: '#/components/schemas/__string'
+          description: 'The version of the broker engine to upgrade to. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
+        HostInstanceType:
+          $ref: '#/components/schemas/__string'
+          description: 'The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types'
+        Logs:
+          $ref: '#/components/schemas/Logs'
+          description: The list of information about logs to be enabled for the specified broker.
+        SecurityGroups:
+          $ref: '#/components/schemas/__listOf__string'
+          description: 'The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.'
+    UpdateConfigurationResponse:
+      type: object
+      properties:
+        Arn:
+          $ref: '#/components/schemas/__string'
+          description: Required. The Amazon Resource Name (ARN) of the configuration.
+        Created:
+          $ref: '#/components/schemas/__timestampIso8601'
+          description: Required. The date and time of the configuration.
+        Id:
+          $ref: '#/components/schemas/__string'
+          description: Required. The unique ID that Amazon MQ generates for the configuration.
+        LatestRevision:
+          $ref: '#/components/schemas/ConfigurationRevision'
+          description: The latest revision of the configuration.
+        Name:
+          $ref: '#/components/schemas/__string'
+          description: 'Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.'
+        Warnings:
+          $ref: '#/components/schemas/__listOfSanitizationWarning'
+          description: The list of the first 20 warnings about the configuration XML elements or attributes that were sanitized.
+    UpdateUserResponse:
+      type: object
+      properties: {}
+    AvailabilityZone:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/__string'
+          description: Id for the availability zone.
+      description: Name of the availability zone.
+    EngineType:
+      type: string
+      enum:
+        - ACTIVEMQ
+      description: 'The type of broker engine. Note: Currently, Amazon MQ supports only ActiveMQ.'
+    __listOfEngineVersion:
+      type: array
+      items:
+        $ref: '#/components/schemas/EngineVersion'
+    BrokerEngineType:
+      type: object
+      properties:
+        EngineType:
+          $ref: '#/components/schemas/EngineType'
+          description: The type of broker engine.
+        EngineVersions:
+          $ref: '#/components/schemas/__listOfEngineVersion'
+          description: The list of engine versions.
+      description: Types of broker engines.
+    __listOf__string:
+      type: array
+      items:
+        $ref: '#/components/schemas/__string'
+    BrokerInstance:
+      type: object
+      properties:
+        ConsoleURL:
+          $ref: '#/components/schemas/__string'
+          description: The URL of the broker's ActiveMQ Web Console.
+        Endpoints:
+          $ref: '#/components/schemas/__listOf__string'
+          description: The broker's wire-level protocol endpoints.
+        IpAddress:
+          $ref: '#/components/schemas/__string'
+          description: The IP address of the Elastic Network Interface (ENI) attached to the broker.
+      description: Returns information about all brokers.
+    __listOfAvailabilityZone:
+      type: array
+      items:
+        $ref: '#/components/schemas/AvailabilityZone'
+    BrokerStorageType:
+      type: string
+      enum:
+        - EBS
+        - EFS
+      description: The storage type of the broker.
+    __listOfDeploymentMode:
+      type: array
+      items:
+        $ref: '#/components/schemas/DeploymentMode'
+    BrokerInstanceOption:
+      type: object
+      properties:
+        AvailabilityZones:
+          $ref: '#/components/schemas/__listOfAvailabilityZone'
+          description: The list of available az.
+        EngineType:
+          $ref: '#/components/schemas/EngineType'
+          description: The type of broker engine.
+        HostInstanceType:
+          $ref: '#/components/schemas/__string'
+          description: The type of broker instance.
+        StorageType:
+          $ref: '#/components/schemas/BrokerStorageType'
+          description: The broker's storage type.
+        SupportedDeploymentModes:
+          $ref: '#/components/schemas/__listOfDeploymentMode'
+          description: The list of supported deployment modes.
+        SupportedEngineVersions:
+          $ref: '#/components/schemas/__listOf__string'
+          description: The list of supported engine versions.
+      description: Option for host instance type.
+    BrokerState:
+      type: string
+      enum:
+        - CREATION_IN_PROGRESS
+        - CREATION_FAILED
+        - DELETION_IN_PROGRESS
+        - RUNNING
+        - REBOOT_IN_PROGRESS
+      description: The status of the broker.
+    __timestampIso8601:
+      type: string
+      format: date-time
+    DeploymentMode:
+      type: string
+      enum:
+        - SINGLE_INSTANCE
+        - ACTIVE_STANDBY_MULTI_AZ
+      description: The deployment mode of the broker.
+    BrokerSummary:
+      type: object
+      properties:
+        BrokerArn:
+          $ref: '#/components/schemas/__string'
+          description: The Amazon Resource Name (ARN) of the broker.
+        BrokerId:
+          $ref: '#/components/schemas/__string'
+          description: The unique ID that Amazon MQ generates for the broker.
+        BrokerName:
+          $ref: '#/components/schemas/__string'
+          description: 'The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.'
+        BrokerState:
+          $ref: '#/components/schemas/BrokerState'
+          description: The status of the broker.
+        Created:
+          $ref: '#/components/schemas/__timestampIso8601'
+          description: The time when the broker was created.
+        DeploymentMode:
+          $ref: '#/components/schemas/DeploymentMode'
+          description: Required. The deployment mode of the broker.
+        HostInstanceType:
+          $ref: '#/components/schemas/__string'
+          description: The broker's instance type.
+      description: The Amazon Resource Name (ARN) of the broker.
+    ChangeType:
+      type: string
+      enum:
+        - CREATE
+        - UPDATE
+        - DELETE
+      description: The type of change pending for the ActiveMQ user.
+    ConfigurationRevision:
+      type: object
+      properties:
+        Created:
+          $ref: '#/components/schemas/__timestampIso8601'
+          description: Required. The date and time of the configuration revision.
+        Description:
+          $ref: '#/components/schemas/__string'
+          description: The description of the configuration revision.
+        Revision:
+          $ref: '#/components/schemas/__integer'
+          description: Required. The revision number of the configuration.
+      description: Returns information about the specified configuration revision.
+    __mapOf__string:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/__string'
+    Configuration:
+      type: object
+      properties:
+        Arn:
+          $ref: '#/components/schemas/__string'
+          description: Required. The ARN of the configuration.
+        Created:
+          $ref: '#/components/schemas/__timestampIso8601'
+          description: Required. The date and time of the configuration revision.
+        Description:
+          $ref: '#/components/schemas/__string'
+          description: Required. The description of the configuration.
+        EngineType:
+          $ref: '#/components/schemas/EngineType'
+          description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.'
+        EngineVersion:
+          $ref: '#/components/schemas/__string'
+          description: 'Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
+        Id:
+          $ref: '#/components/schemas/__string'
+          description: Required. The unique ID that Amazon MQ generates for the configuration.
+        LatestRevision:
+          $ref: '#/components/schemas/ConfigurationRevision'
+          description: Required. The latest revision of the configuration.
+        Name:
+          $ref: '#/components/schemas/__string'
+          description: 'Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.'
+        Tags:
+          $ref: '#/components/schemas/__mapOf__string'
+          description: The list of all tags associated with this configuration.
+      description: Returns information about all configurations.
+    ConfigurationId:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/__string'
+          description: Required. The unique ID that Amazon MQ generates for the configuration.
+        Revision:
+          $ref: '#/components/schemas/__integer'
+          description: The revision number of the configuration.
+      description: A list of information about the configuration.
+    __listOfConfigurationId:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConfigurationId'
+    Configurations:
+      type: object
+      properties:
+        Current:
+          $ref: '#/components/schemas/ConfigurationId'
+          description: The current configuration of the broker.
+        History:
+          $ref: '#/components/schemas/__listOfConfigurationId'
+          description: The history of configurations applied to the broker.
+        Pending:
+          $ref: '#/components/schemas/ConfigurationId'
+          description: The pending configuration of the broker.
+      description: Broker configuration information
+    EncryptionOptions:
+      type: object
+      required:
+        - UseAwsOwnedKey
+      properties:
+        KmsKeyId:
+          $ref: '#/components/schemas/__string'
+          description: 'The customer master key (CMK) to use for the AWS Key Management Service (KMS). This key is used to encrypt your data at rest. If not provided, Amazon MQ will use a default CMK to encrypt your data.'
+        UseAwsOwnedKey:
+          $ref: '#/components/schemas/__boolean'
+          description: Enables the use of an AWS owned CMK using AWS Key Management Service (KMS).
+      description: Encryption options for the broker.
+    Logs:
+      type: object
+      properties:
+        Audit:
+          $ref: '#/components/schemas/__boolean'
+          description: Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged.
+        General:
+          $ref: '#/components/schemas/__boolean'
+          description: Enables general logging.
+      description: The list of information about logs to be enabled for the specified broker.
+    WeeklyStartTime:
+      type: object
+      properties:
+        DayOfWeek:
+          $ref: '#/components/schemas/DayOfWeek'
+          description: Required. The day of the week.
+        TimeOfDay:
+          $ref: '#/components/schemas/__string'
+          description: 'Required. The time, in 24-hour format.'
+        TimeZone:
+          $ref: '#/components/schemas/__string'
+          description: 'The time zone, UTC by default, in either the Country/City format, or the UTC offset format.'
+      description: The scheduled time period relative to UTC during which Amazon MQ begins to apply pending updates or patches to the broker.
+    __listOfUser:
+      type: array
+      items:
+        $ref: '#/components/schemas/User'
+    CreateBrokerRequest:
+      type: object
+      title: CreateBrokerRequest
+      properties:
+        AutoMinorVersionUpgrade:
+          $ref: '#/components/schemas/__boolean'
+          description: 'Required. Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.'
+        BrokerName:
+          $ref: '#/components/schemas/__string'
+          description: 'Required. The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.'
+        Configuration:
+          $ref: '#/components/schemas/ConfigurationId'
+          description: A list of information about the configuration.
+        CreatorRequestId:
+          $ref: '#/components/schemas/__string'
+          description: 'The unique ID that the requester receives for the created broker. Amazon MQ passes your ID with the API action. Note: We recommend using a Universally Unique Identifier (UUID) for the creatorRequestId. You may omit the creatorRequestId if your application doesn''t require idempotency.'
+        DeploymentMode:
+          $ref: '#/components/schemas/DeploymentMode'
+          description: Required. The deployment mode of the broker.
+        EncryptionOptions:
+          $ref: '#/components/schemas/EncryptionOptions'
+          description: Encryption options for the broker.
+        EngineType:
+          $ref: '#/components/schemas/EngineType'
+          description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.'
+        EngineVersion:
+          $ref: '#/components/schemas/__string'
+          description: 'Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
+        HostInstanceType:
+          $ref: '#/components/schemas/__string'
+          description: Required. The broker's instance type.
+        Logs:
+          $ref: '#/components/schemas/Logs'
+          description: Enables Amazon CloudWatch logging for brokers.
+        MaintenanceWindowStartTime:
+          $ref: '#/components/schemas/WeeklyStartTime'
+          description: The parameters that determine the WeeklyStartTime.
+        PubliclyAccessible:
+          $ref: '#/components/schemas/__boolean'
+          description: Required. Enables connections from applications outside of the VPC that hosts the broker's subnets.
+        SecurityGroups:
+          $ref: '#/components/schemas/__listOf__string'
+          description: 'The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.'
+        StorageType:
+          $ref: '#/components/schemas/BrokerStorageType'
+          description: The broker's storage type.
+        SubnetIds:
+          $ref: '#/components/schemas/__listOf__string'
+          description: 'The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.'
+        Tags:
+          $ref: '#/components/schemas/__mapOf__string'
+          description: Create tags when creating the broker.
+        Users:
+          $ref: '#/components/schemas/__listOfUser'
+          description: 'Required. The list of ActiveMQ users (persons or applications) who can access queues and topics. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+      description: Creates a broker using the specified properties.
+    CreateConfigurationRequest:
+      type: object
+      title: CreateConfigurationRequest
+      properties:
+        EngineType:
+          $ref: '#/components/schemas/EngineType'
+          description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.'
+        EngineVersion:
+          $ref: '#/components/schemas/__string'
+          description: 'Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
+        Name:
+          $ref: '#/components/schemas/__string'
+          description: 'Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.'
+        Tags:
+          $ref: '#/components/schemas/__mapOf__string'
+          description: Create tags when creating the configuration.
+      description: Creates a new configuration for the specified configuration name. Amazon MQ uses the default configuration (the engine type and version).
+    CreateTagsRequest:
+      type: object
+      title: CreateTagsRequest
+      properties:
+        Tags:
+          $ref: '#/components/schemas/__mapOf__string'
+          description: The key-value pair for the resource tag.
+      description: A map of the key-value pairs for the resource tag.
+    CreateUserRequest:
+      type: object
+      title: CreateUserRequest
+      properties:
+        ConsoleAccess:
+          $ref: '#/components/schemas/__boolean'
+          description: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
+        Groups:
+          $ref: '#/components/schemas/__listOf__string'
+          description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+        Password:
+          $ref: '#/components/schemas/__string'
+          description: 'Required. The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.'
+      description: Creates a new ActiveMQ user.
+    DeleteBrokerRequest:
+      type: object
+      title: DeleteBrokerRequest
+      properties: {}
+    DeleteTagsRequest:
+      type: object
+      title: DeleteTagsRequest
+      properties: {}
+    DeleteUserRequest:
+      type: object
+      title: DeleteUserRequest
+      properties: {}
+    MaxResults:
+      type: integer
+      minimum: 1
+      maximum: 100
+    DescribeBrokerEngineTypesRequest:
+      type: object
+      title: DescribeBrokerEngineTypesRequest
+      properties: {}
+    __listOfBrokerEngineType:
+      type: array
+      items:
+        $ref: '#/components/schemas/BrokerEngineType'
+    __integerMin5Max100:
+      type: integer
+      minimum: 5
+      maximum: 100
+    DescribeBrokerInstanceOptionsRequest:
+      type: object
+      title: DescribeBrokerInstanceOptionsRequest
+      properties: {}
+    __listOfBrokerInstanceOption:
+      type: array
+      items:
+        $ref: '#/components/schemas/BrokerInstanceOption'
+    DescribeBrokerRequest:
+      type: object
+      title: DescribeBrokerRequest
+      properties: {}
+    __listOfBrokerInstance:
+      type: array
+      items:
+        $ref: '#/components/schemas/BrokerInstance'
+    LogsSummary:
+      type: object
+      properties:
+        Audit:
+          $ref: '#/components/schemas/__boolean'
+          description: Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged.
+        AuditLogGroup:
+          $ref: '#/components/schemas/__string'
+          description: The location of the CloudWatch Logs log group where audit logs are sent.
+        General:
+          $ref: '#/components/schemas/__boolean'
+          description: Enables general logging.
+        GeneralLogGroup:
+          $ref: '#/components/schemas/__string'
+          description: The location of the CloudWatch Logs log group where general logs are sent.
+        Pending:
+          $ref: '#/components/schemas/PendingLogs'
+          description: The list of information about logs pending to be deployed for the specified broker.
+      description: The list of information about logs currently enabled and pending to be deployed for the specified broker.
+    __listOfUserSummary:
+      type: array
+      items:
+        $ref: '#/components/schemas/UserSummary'
+    DescribeConfigurationRequest:
+      type: object
+      title: DescribeConfigurationRequest
+      properties: {}
+    DescribeConfigurationRevisionRequest:
+      type: object
+      title: DescribeConfigurationRevisionRequest
+      properties: {}
+    DescribeUserRequest:
+      type: object
+      title: DescribeUserRequest
+      properties: {}
+    UserPendingChanges:
+      type: object
+      properties:
+        ConsoleAccess:
+          $ref: '#/components/schemas/__boolean'
+          description: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
+        Groups:
+          $ref: '#/components/schemas/__listOf__string'
+          description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+        PendingChange:
+          $ref: '#/components/schemas/ChangeType'
+          description: Required. The type of change pending for the ActiveMQ user.
+      description: Returns information about the status of the changes pending for the ActiveMQ user.
+    EngineVersion:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/__string'
+          description: Id for the version.
+      description: Id of the engine version.
+    ListBrokersRequest:
+      type: object
+      title: ListBrokersRequest
+      properties: {}
+    __listOfBrokerSummary:
+      type: array
+      items:
+        $ref: '#/components/schemas/BrokerSummary'
+    ListConfigurationRevisionsRequest:
+      type: object
+      title: ListConfigurationRevisionsRequest
+      properties: {}
+    __listOfConfigurationRevision:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConfigurationRevision'
+    ListConfigurationsRequest:
+      type: object
+      title: ListConfigurationsRequest
+      properties: {}
+    __listOfConfiguration:
+      type: array
+      items:
+        $ref: '#/components/schemas/Configuration'
+    ListTagsRequest:
+      type: object
+      title: ListTagsRequest
+      properties: {}
+    ListUsersRequest:
+      type: object
+      title: ListUsersRequest
+      properties: {}
+    PendingLogs:
+      type: object
+      properties:
+        Audit:
+          $ref: '#/components/schemas/__boolean'
+          description: Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged.
+        General:
+          $ref: '#/components/schemas/__boolean'
+          description: Enables general logging.
+      description: The list of information about logs to be enabled for the specified broker.
+    RebootBrokerRequest:
+      type: object
+      title: RebootBrokerRequest
+      properties: {}
+    SanitizationWarningReason:
+      type: string
+      enum:
+        - DISALLOWED_ELEMENT_REMOVED
+        - DISALLOWED_ATTRIBUTE_REMOVED
+        - INVALID_ATTRIBUTE_VALUE_REMOVED
+      description: The reason for which the XML elements or attributes were sanitized.
+    SanitizationWarning:
+      type: object
+      properties:
+        AttributeName:
+          $ref: '#/components/schemas/__string'
+          description: The name of the XML attribute that has been sanitized.
+        ElementName:
+          $ref: '#/components/schemas/__string'
+          description: The name of the XML element that has been sanitized.
+        Reason:
+          $ref: '#/components/schemas/SanitizationWarningReason'
+          description: Required. The reason for which the XML elements or attributes were sanitized.
+      description: Returns information about the XML element or attribute that was sanitized in the configuration.
+    UpdateBrokerRequest:
+      type: object
+      title: UpdateBrokerRequest
+      properties:
+        AutoMinorVersionUpgrade:
+          $ref: '#/components/schemas/__boolean'
+          description: 'Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.'
+        Configuration:
+          $ref: '#/components/schemas/ConfigurationId'
+          description: A list of information about the configuration.
+        EngineVersion:
+          $ref: '#/components/schemas/__string'
+          description: 'The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
+        HostInstanceType:
+          $ref: '#/components/schemas/__string'
+          description: 'The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types'
+        Logs:
+          $ref: '#/components/schemas/Logs'
+          description: Enables Amazon CloudWatch logging for brokers.
+        SecurityGroups:
+          $ref: '#/components/schemas/__listOf__string'
+          description: 'The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.'
+      description: Updates the broker using the specified properties.
+    UpdateConfigurationRequest:
+      type: object
+      title: UpdateConfigurationRequest
+      properties:
+        Data:
+          $ref: '#/components/schemas/__string'
+          description: Required. The base64-encoded XML configuration.
+        Description:
+          $ref: '#/components/schemas/__string'
+          description: The description of the configuration.
+      description: Updates the specified configuration.
+    __listOfSanitizationWarning:
+      type: array
+      items:
+        $ref: '#/components/schemas/SanitizationWarning'
+    UpdateUserRequest:
+      type: object
+      title: UpdateUserRequest
+      properties:
+        ConsoleAccess:
+          $ref: '#/components/schemas/__boolean'
+          description: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
+        Groups:
+          $ref: '#/components/schemas/__listOf__string'
+          description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+        Password:
+          $ref: '#/components/schemas/__string'
+          description: 'The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.'
+      description: Updates the information for an ActiveMQ user.
+    UserSummary:
+      type: object
+      properties:
+        PendingChange:
+          $ref: '#/components/schemas/ChangeType'
+          description: The type of change pending for the ActiveMQ user.
+        Username:
+          $ref: '#/components/schemas/__string'
+          description: 'Required. The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+      description: Returns a list of all ActiveMQ users.
+security:
+  - hmac: []

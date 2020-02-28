@@ -1,0 +1,2970 @@
+openapi: 3.0.0
+info:
+  version: '2015-10-07'
+  x-release: v4
+  title: Amazon CloudWatch Events
+  description: '<p>Amazon EventBridge helps you to respond to state changes in your AWS resources. When your resources change state, they automatically send events into an event stream. You can create rules that match selected events in the stream and route them to targets to take action. You can also use rules to take action on a predetermined schedule. For example, you can configure rules to:</p> <ul> <li> <p>Automatically invoke an AWS Lambda function to update DNS entries when an event notifies you that Amazon EC2 instance enters the running state.</p> </li> <li> <p>Direct specific API records from AWS CloudTrail to an Amazon Kinesis data stream for detailed analysis of potential security or availability risks.</p> </li> <li> <p>Periodically invoke a built-in target to create a snapshot of an Amazon EBS volume.</p> </li> </ul> <p>For more information about the features of Amazon EventBridge, see the <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide">Amazon EventBridge User Guide</a>.</p>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: events
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/events-2015-10-07.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/events/'
+servers:
+  - url: 'http://events.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Amazon CloudWatch Events multi-region endpoint
+  - url: 'https://events.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Amazon CloudWatch Events multi-region endpoint
+  - url: 'http://events.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon CloudWatch Events endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://events.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon CloudWatch Events endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  '/#X-Amz-Target=AWSEvents.ActivateEventSource':
+    post:
+      operationId: ActivateEventSource
+      description: 'Activates a partner event source that has been deactivated. Once activated, your matching event bus will start receiving events from the event source.'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '482':
+          description: InvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidStateException'
+        '483':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActivateEventSourceRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.ActivateEventSource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSEvents.CreateEventBus':
+    post:
+      operationId: CreateEventBus
+      description: 'Creates a new event bus within your account. This can be a custom event bus which you can use to receive events from your custom applications and services, or it can be a partner event bus which can be matched to a partner event source.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateEventBusResponse'
+        '480':
+          description: ResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidStateException'
+        '483':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '484':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '485':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEventBusRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.CreateEventBus
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSEvents.CreatePartnerEventSource':
+    post:
+      operationId: CreatePartnerEventSource
+      description: '<p>Called by an SaaS partner to create a partner event source. This operation is not used by AWS customers.</p> <p>Each partner event source can be used by one AWS account to create a matching partner event bus in that AWS account. A SaaS partner must create one partner event source for each AWS account that wants to receive those event types. </p> <p>A partner event source creates events based on resources within the SaaS partner''s service or application.</p> <p>An AWS account that creates a partner event bus that matches the partner event source can use that event bus to receive events from the partner, and then process them using AWS Events rules and targets.</p> <p>Partner event source names follow this format:</p> <p> <code> <i>partner_name</i>/<i>event_namespace</i>/<i>event_name</i> </code> </p> <p> <i>partner_name</i> is determined during partner registration and identifies the partner to AWS customers. <i>event_namespace</i> is determined by the partner and is a way for the partner to categorize their events. <i>event_name</i> is determined by the partner, and should uniquely identify an event-generating resource within the partner system. The combination of <i>event_namespace</i> and <i>event_name</i> should help AWS customers decide whether to create an event bus to receive these events.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatePartnerEventSourceResponse'
+        '480':
+          description: ResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '482':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePartnerEventSourceRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.CreatePartnerEventSource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSEvents.DeactivateEventSource':
+    post:
+      operationId: DeactivateEventSource
+      description: '<p>You can use this operation to temporarily stop receiving events from the specified partner event source. The matching event bus is not deleted. </p> <p>When you deactivate a partner event source, the source goes into PENDING state. If it remains in PENDING state for more than two weeks, it is deleted.</p> <p>To activate a deactivated partner event source, use <a>ActivateEventSource</a>.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '482':
+          description: InvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidStateException'
+        '483':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeactivateEventSourceRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.DeactivateEventSource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSEvents.DeleteEventBus':
+    post:
+      operationId: DeleteEventBus
+      description: Deletes the specified custom event bus or partner event bus. All rules associated with this event bus need to be deleted. You can't delete your account's default event bus.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '481':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteEventBusRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.DeleteEventBus
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSEvents.DeletePartnerEventSource':
+    post:
+      operationId: DeletePartnerEventSource
+      description: '<p>This operation is used by SaaS partners to delete a partner event source. This operation is not used by AWS customers.</p> <p>When you delete an event source, the status of the corresponding partner event bus in the AWS customer account becomes DELETED.</p> <p/>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '481':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeletePartnerEventSourceRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.DeletePartnerEventSource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSEvents.DeleteRule':
+    post:
+      operationId: DeleteRule
+      description: '<p>Deletes the specified rule.</p> <p>Before you can delete the rule, you must remove all targets, using <a>RemoveTargets</a>.</p> <p>When you delete a rule, incoming events might continue to match to the deleted rule. Allow a short period of time for changes to take effect.</p> <p>Managed rules are rules created and managed by another AWS service on your behalf. These rules are created by those other AWS services to support functionality in those services. You can delete these rules using the <code>Force</code> option, but you should do so only if you are sure the other service is not still using that rule.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '481':
+          description: ManagedRuleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManagedRuleException'
+        '482':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRuleRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.DeleteRule
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSEvents.DescribeEventBus':
+    post:
+      operationId: DescribeEventBus
+      description: '<p>Displays details about an event bus in your account. This can include the external AWS accounts that are permitted to write events to your default event bus, and the associated policy. For custom event buses and partner event buses, it displays the name, ARN, policy, state, and creation time.</p> <p> To enable your account to receive events from other accounts on its default event bus, use <a>PutPermission</a>.</p> <p>For more information about partner event buses, see <a>CreateEventBus</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeEventBusResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeEventBusRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.DescribeEventBus
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSEvents.DescribeEventSource':
+    post:
+      operationId: DescribeEventSource
+      description: This operation lists details about a partner event source that is shared with your account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeEventSourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeEventSourceRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.DescribeEventSource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSEvents.DescribePartnerEventSource':
+    post:
+      operationId: DescribePartnerEventSource
+      description: 'An SaaS partner can use this operation to list details about a partner event source that they have created. AWS customers do not use this operation. Instead, AWS customers can use <a>DescribeEventSource</a> to see details about a partner event source that is shared with them.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribePartnerEventSourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribePartnerEventSourceRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.DescribePartnerEventSource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSEvents.DescribeRule':
+    post:
+      operationId: DescribeRule
+      description: '<p>Describes the specified rule.</p> <p>DescribeRule does not list the targets of a rule. To see the targets associated with a rule, use <a>ListTargetsByRule</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeRuleResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeRuleRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.DescribeRule
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSEvents.DisableRule':
+    post:
+      operationId: DisableRule
+      description: '<p>Disables the specified rule. A disabled rule won''t match any events, and won''t self-trigger if it has a schedule expression.</p> <p>When you disable a rule, incoming events might continue to match to the disabled rule. Allow a short period of time for changes to take effect.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '482':
+          description: ManagedRuleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManagedRuleException'
+        '483':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisableRuleRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.DisableRule
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSEvents.EnableRule':
+    post:
+      operationId: EnableRule
+      description: '<p>Enables the specified rule. If the rule does not exist, the operation fails.</p> <p>When you enable a rule, incoming events might not immediately start matching to a newly enabled rule. Allow a short period of time for changes to take effect.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '482':
+          description: ManagedRuleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManagedRuleException'
+        '483':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnableRuleRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.EnableRule
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSEvents.ListEventBuses':
+    post:
+      operationId: ListEventBuses
+      description: 'Lists all the event buses in your account, including the default event bus, custom event buses, and partner event buses.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListEventBusesResponse'
+        '480':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListEventBusesRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.ListEventBuses
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSEvents.ListEventSources':
+    post:
+      operationId: ListEventSources
+      description: 'You can use this to see all the partner event sources that have been shared with your AWS account. For more information about partner event sources, see <a>CreateEventBus</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListEventSourcesResponse'
+        '480':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListEventSourcesRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.ListEventSources
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSEvents.ListPartnerEventSourceAccounts':
+    post:
+      operationId: ListPartnerEventSourceAccounts
+      description: An SaaS partner can use this operation to display the AWS account ID that a particular partner event source name is associated with. This operation is not used by AWS customers.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPartnerEventSourceAccountsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListPartnerEventSourceAccountsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.ListPartnerEventSourceAccounts
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSEvents.ListPartnerEventSources':
+    post:
+      operationId: ListPartnerEventSources
+      description: An SaaS partner can use this operation to list all the partner event source names that they have created. This operation is not used by AWS customers.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPartnerEventSourcesResponse'
+        '480':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListPartnerEventSourcesRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.ListPartnerEventSources
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSEvents.ListRuleNamesByTarget':
+    post:
+      operationId: ListRuleNamesByTarget
+      description: Lists the rules for the specified target. You can see which of the rules in Amazon EventBridge can invoke a specific target in your account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRuleNamesByTargetResponse'
+        '480':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListRuleNamesByTargetRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.ListRuleNamesByTarget
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSEvents.ListRules':
+    post:
+      operationId: ListRules
+      description: '<p>Lists your Amazon EventBridge rules. You can either list all the rules or you can provide a prefix to match to the rule names.</p> <p>ListRules does not list the targets of a rule. To see the targets associated with a rule, use <a>ListTargetsByRule</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRulesResponse'
+        '480':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListRulesRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.ListRules
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSEvents.ListTagsForResource':
+    post:
+      operationId: ListTagsForResource
+      description: 'Displays the tags associated with an EventBridge resource. In EventBridge, rules and event buses can be tagged.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTagsForResourceRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.ListTagsForResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSEvents.ListTargetsByRule':
+    post:
+      operationId: ListTargetsByRule
+      description: Lists the targets assigned to the specified rule.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTargetsByRuleResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTargetsByRuleRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.ListTargetsByRule
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSEvents.PutEvents':
+    post:
+      operationId: PutEvents
+      description: Sends custom events to Amazon EventBridge so that they can be matched to rules.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutEventsResponse'
+        '480':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutEventsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.PutEvents
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSEvents.PutPartnerEvents':
+    post:
+      operationId: PutPartnerEvents
+      description: This is used by SaaS partners to write events to a customer's partner event bus. AWS customers do not use this operation.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutPartnerEventsResponse'
+        '480':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutPartnerEventsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.PutPartnerEvents
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSEvents.PutPermission':
+    post:
+      operationId: PutPermission
+      description: '<p>Running <code>PutPermission</code> permits the specified AWS account or AWS organization to put events to the specified <i>event bus</i>. CloudWatch Events rules in your account are triggered by these events arriving to an event bus in your account. </p> <p>For another account to send events to your account, that external account must have an EventBridge rule with your account''s event bus as a target.</p> <p>To enable multiple AWS accounts to put events to your event bus, run <code>PutPermission</code> once for each of these accounts. Or, if all the accounts are members of the same AWS organization, you can run <code>PutPermission</code> once specifying <code>Principal</code> as "*" and specifying the AWS organization ID in <code>Condition</code>, to grant permissions to all accounts in that organization.</p> <p>If you grant permissions using an organization, then accounts in that organization must specify a <code>RoleArn</code> with proper permissions when they use <code>PutTarget</code> to add your account''s event bus as a target. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html">Sending and Receiving Events Between AWS Accounts</a> in the <i>Amazon EventBridge User Guide</i>.</p> <p>The permission policy on the default event bus cannot exceed 10 KB in size.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: PolicyLengthExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PolicyLengthExceededException'
+        '482':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '483':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutPermissionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.PutPermission
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSEvents.PutRule':
+    post:
+      operationId: PutRule
+      description: '<p>Creates or updates the specified rule. Rules are enabled by default, or based on value of the state. You can disable a rule using <a>DisableRule</a>.</p> <p>A single rule watches for events from a single event bus. Events generated by AWS services go to your account''s default event bus. Events generated by SaaS partner services or applications go to the matching partner event bus. If you have custom applications or services, you can specify whether their events go to your default event bus or a custom event bus that you have created. For more information, see <a>CreateEventBus</a>.</p> <p>If you are updating an existing rule, the rule is replaced with what you specify in this <code>PutRule</code> command. If you omit arguments in <code>PutRule</code>, the old values for those arguments are not kept. Instead, they are replaced with null values.</p> <p>When you create or update a rule, incoming events might not immediately start matching to new or updated rules. Allow a short period of time for changes to take effect.</p> <p>A rule must contain at least an EventPattern or ScheduleExpression. Rules with EventPatterns are triggered when a matching event is observed. Rules with ScheduleExpressions self-trigger based on the given schedule. A rule can have both an EventPattern and a ScheduleExpression, in which case the rule triggers on matching events as well as on a schedule.</p> <p>When you initially create a rule, you can optionally assign one or more tags to the rule. Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only rules with certain tag values. To use the <code>PutRule</code> operation and assign tags, you must have both the <code>events:PutRule</code> and <code>events:TagResource</code> permissions.</p> <p>If you are updating an existing rule, any tags you specify in the <code>PutRule</code> operation are ignored. To update the tags of an existing rule, use <a>TagResource</a> and <a>UntagResource</a>.</p> <p>Most services in AWS treat : or / as the same character in Amazon Resource Names (ARNs). However, EventBridge uses an exact match in event patterns and rules. Be sure to use the correct ARN characters when creating event patterns so that they match the ARN syntax in the event you want to match.</p> <p>In EventBridge, it is possible to create rules that lead to infinite loops, where a rule is fired repeatedly. For example, a rule might detect that ACLs have changed on an S3 bucket, and trigger software to change them to the desired state. If the rule is not written carefully, the subsequent change to the ACLs fires the rule again, creating an infinite loop.</p> <p>To prevent this, write the rules so that the triggered actions do not re-fire the same rule. For example, your rule could fire only if ACLs are found to be in a bad state, instead of after any change. </p> <p>An infinite loop can quickly cause higher than expected charges. We recommend that you use budgeting, which alerts you when charges exceed your specified limit. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/budgets-managing-costs.html">Managing Your Costs with Budgets</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutRuleResponse'
+        '480':
+          description: InvalidEventPatternException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidEventPatternException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '483':
+          description: ManagedRuleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManagedRuleException'
+        '484':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutRuleRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.PutRule
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSEvents.PutTargets':
+    post:
+      operationId: PutTargets
+      description: '<p>Adds the specified targets to the specified rule, or updates the targets if they are already associated with the rule.</p> <p>Targets are the resources that are invoked when a rule is triggered.</p> <p>You can configure the following as targets for Events:</p> <ul> <li> <p>EC2 instances</p> </li> <li> <p>SSM Run Command</p> </li> <li> <p>SSM Automation</p> </li> <li> <p>AWS Lambda functions</p> </li> <li> <p>Data streams in Amazon Kinesis Data Streams</p> </li> <li> <p>Data delivery streams in Amazon Kinesis Data Firehose</p> </li> <li> <p>Amazon ECS tasks</p> </li> <li> <p>AWS Step Functions state machines</p> </li> <li> <p>AWS Batch jobs</p> </li> <li> <p>AWS CodeBuild projects</p> </li> <li> <p>Pipelines in AWS CodePipeline</p> </li> <li> <p>Amazon Inspector assessment templates</p> </li> <li> <p>Amazon SNS topics</p> </li> <li> <p>Amazon SQS queues, including FIFO queues</p> </li> <li> <p>The default event bus of another AWS account</p> </li> </ul> <p>Creating rules with built-in targets is supported only in the AWS Management Console. The built-in targets are <code>EC2 CreateSnapshot API call</code>, <code>EC2 RebootInstances API call</code>, <code>EC2 StopInstances API call</code>, and <code>EC2 TerminateInstances API call</code>. </p> <p>For some target types, <code>PutTargets</code> provides target-specific parameters. If the target is a Kinesis data stream, you can optionally specify which shard the event goes to by using the <code>KinesisParameters</code> argument. To invoke a command on multiple EC2 instances with one rule, you can use the <code>RunCommandParameters</code> field.</p> <p>To be able to make API calls against the resources that you own, Amazon CloudWatch Events needs the appropriate permissions. For AWS Lambda and Amazon SNS resources, EventBridge relies on resource-based policies. For EC2 instances, Kinesis data streams, and AWS Step Functions state machines, EventBridge relies on IAM roles that you specify in the <code>RoleARN</code> argument in <code>PutTargets</code>. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html">Authentication and Access Control</a> in the <i>Amazon EventBridge User Guide</i>.</p> <p>If another AWS account is in the same region and has granted you permission (using <code>PutPermission</code>), you can send events to that account. Set that account''s event bus as a target of the rules in your account. To send the matched events to the other account, specify that account''s event bus as the <code>Arn</code> value when you run <code>PutTargets</code>. If your account sends events to another account, your account is charged for each sent event. Each event sent to another account is charged as a custom event. The account receiving the event is not charged. For more information, see <a href="https://aws.amazon.com/cloudwatch/pricing/">Amazon CloudWatch Pricing</a>.</p> <note> <p> <code>Input</code>, <code>InputPath</code>, and <code>InputTransformer</code> are not available with <code>PutTarget</code> if the target is an event bus of a different AWS account.</p> </note> <p>If you are setting the event bus of another account as the target, and that account granted permission to your account through an organization instead of directly by the account ID, then you must specify a <code>RoleArn</code> with proper permissions in the <code>Target</code> structure. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html">Sending and Receiving Events Between AWS Accounts</a> in the <i>Amazon EventBridge User Guide</i>.</p> <p>For more information about enabling cross-account events, see <a>PutPermission</a>.</p> <p> <b>Input</b>, <b>InputPath</b>, and <b>InputTransformer</b> are mutually exclusive and optional parameters of a target. When a rule is triggered due to a matched event:</p> <ul> <li> <p>If none of the following arguments are specified for a target, then the entire event is passed to the target in JSON format (unless the target is Amazon EC2 Run Command or Amazon ECS task, in which case nothing from the event is passed to the target).</p> </li> <li> <p>If <b>Input</b> is specified in the form of valid JSON, then the matched event is overridden with this constant.</p> </li> <li> <p>If <b>InputPath</b> is specified in the form of JSONPath (for example, <code>$.detail</code>), then only the part of the event specified in the path is passed to the target (for example, only the detail part of the event is passed).</p> </li> <li> <p>If <b>InputTransformer</b> is specified, then one or more specified JSONPaths are extracted from the event and used as values in a template that you specify as the input to the target.</p> </li> </ul> <p>When you specify <code>InputPath</code> or <code>InputTransformer</code>, you must use JSON dot notation, not bracket notation.</p> <p>When you add targets to a rule and the associated rule triggers soon after, new or updated targets might not be immediately invoked. Allow a short period of time for changes to take effect.</p> <p>This action can partially fail if too many requests are made at the same time. If that happens, <code>FailedEntryCount</code> is non-zero in the response and each entry in <code>FailedEntries</code> provides the ID of the failed target and the error code.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutTargetsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ManagedRuleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManagedRuleException'
+        '484':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutTargetsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.PutTargets
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSEvents.RemovePermission':
+    post:
+      operationId: RemovePermission
+      description: Revokes the permission of another AWS account to be able to put events to the specified event bus. Specify the account to revoke by the <code>StatementId</code> value that you associated with the account when you granted it permission with <code>PutPermission</code>. You can find the <code>StatementId</code> by using <a>DescribeEventBus</a>.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '482':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemovePermissionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.RemovePermission
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSEvents.RemoveTargets':
+    post:
+      operationId: RemoveTargets
+      description: '<p>Removes the specified targets from the specified rule. When the rule is triggered, those targets are no longer be invoked.</p> <p>When you remove a target, when the associated rule triggers, removed targets might continue to be invoked. Allow a short period of time for changes to take effect.</p> <p>This action can partially fail if too many requests are made at the same time. If that happens, <code>FailedEntryCount</code> is non-zero in the response and each entry in <code>FailedEntries</code> provides the ID of the failed target and the error code.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RemoveTargetsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '482':
+          description: ManagedRuleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManagedRuleException'
+        '483':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoveTargetsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.RemoveTargets
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSEvents.TagResource':
+    post:
+      operationId: TagResource
+      description: '<p>Assigns one or more tags (key-value pairs) to the specified EventBridge resource. Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values. In EventBridge, rules and event buses can be tagged.</p> <p>Tags don''t have any semantic meaning to AWS and are interpreted strictly as strings of characters.</p> <p>You can use the <code>TagResource</code> action with a resource that already has tags. If you specify a new tag key, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag.</p> <p>You can associate as many as 50 tags with a resource.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '482':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '483':
+          description: ManagedRuleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManagedRuleException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagResourceRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.TagResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSEvents.TestEventPattern':
+    post:
+      operationId: TestEventPattern
+      description: '<p>Tests whether the specified event pattern matches the provided event.</p> <p>Most services in AWS treat : or / as the same character in Amazon Resource Names (ARNs). However, EventBridge uses an exact match in event patterns and rules. Be sure to use the correct ARN characters when creating event patterns so that they match the ARN syntax in the event you want to match.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestEventPatternResponse'
+        '480':
+          description: InvalidEventPatternException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidEventPatternException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestEventPatternRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.TestEventPattern
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSEvents.UntagResource':
+    post:
+      operationId: UntagResource
+      description: 'Removes one or more tags from the specified EventBridge resource. In CloudWatch Events, rules and event buses can be tagged.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '482':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '483':
+          description: ManagedRuleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManagedRuleException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UntagResourceRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.UntagResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    ActivateEventSourceRequest:
+      type: object
+      required:
+        - Name
+      title: ActivateEventSourceRequest
+      properties:
+        Name:
+          $ref: '#/components/schemas/EventSourceName'
+          description: The name of the partner event source to activate.
+    ResourceNotFoundException: {}
+    ConcurrentModificationException: {}
+    InvalidStateException: {}
+    InternalException: {}
+    CreateEventBusResponse:
+      type: object
+      properties:
+        EventBusArn:
+          $ref: '#/components/schemas/String'
+          description: The ARN of the new event bus.
+    CreateEventBusRequest:
+      type: object
+      required:
+        - Name
+      title: CreateEventBusRequest
+      properties:
+        Name:
+          $ref: '#/components/schemas/EventBusName'
+          description: '<p>The name of the new event bus. </p> <p>Event bus names cannot contain the / character. You can''t use the name <code>default</code> for a custom event bus, as this name is already used for your account''s default event bus.</p> <p>If this is a partner event bus, the name must exactly match the name of the partner event source that this event bus is matched to.</p>'
+        EventSourceName:
+          $ref: '#/components/schemas/EventSourceName'
+          description: 'If you are creating a partner event bus, this specifies the partner event source that the new event bus will be matched with.'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+          description: Tags to associate with the event bus.
+    ResourceAlreadyExistsException: {}
+    LimitExceededException: {}
+    CreatePartnerEventSourceResponse:
+      type: object
+      properties:
+        EventSourceArn:
+          $ref: '#/components/schemas/String'
+          description: The ARN of the partner event source.
+    CreatePartnerEventSourceRequest:
+      type: object
+      required:
+        - Name
+        - Account
+      title: CreatePartnerEventSourceRequest
+      properties:
+        Name:
+          $ref: '#/components/schemas/EventSourceName'
+          description: The name of the partner event source. This name must be unique and must be in the format <code> <i>partner_name</i>/<i>event_namespace</i>/<i>event_name</i> </code>. The AWS account that wants to use this partner event source must create a partner event bus with a name that matches the name of the partner event source.
+        Account:
+          $ref: '#/components/schemas/AccountId'
+          description: The AWS account ID that is permitted to create a matching partner event bus for this partner event source.
+    DeactivateEventSourceRequest:
+      type: object
+      required:
+        - Name
+      title: DeactivateEventSourceRequest
+      properties:
+        Name:
+          $ref: '#/components/schemas/EventSourceName'
+          description: The name of the partner event source to deactivate.
+    DeleteEventBusRequest:
+      type: object
+      required:
+        - Name
+      title: DeleteEventBusRequest
+      properties:
+        Name:
+          $ref: '#/components/schemas/EventBusName'
+          description: The name of the event bus to delete.
+    DeletePartnerEventSourceRequest:
+      type: object
+      required:
+        - Name
+        - Account
+      title: DeletePartnerEventSourceRequest
+      properties:
+        Name:
+          $ref: '#/components/schemas/EventSourceName'
+          description: The name of the event source to delete.
+        Account:
+          $ref: '#/components/schemas/AccountId'
+          description: The AWS account ID of the AWS customer that the event source was created for.
+    DeleteRuleRequest:
+      type: object
+      required:
+        - Name
+      title: DeleteRuleRequest
+      properties:
+        Name:
+          $ref: '#/components/schemas/RuleName'
+          description: The name of the rule.
+        EventBusName:
+          $ref: '#/components/schemas/EventBusName'
+          description: 'The event bus associated with the rule. If you omit this, the default event bus is used.'
+        Force:
+          $ref: '#/components/schemas/Boolean'
+          description: 'If this is a managed rule, created by an AWS service on your behalf, you must specify <code>Force</code> as <code>True</code> to delete the rule. This parameter is ignored for rules that are not managed rules. You can check whether a rule is a managed rule by using <code>DescribeRule</code> or <code>ListRules</code> and checking the <code>ManagedBy</code> field of the response.'
+    ManagedRuleException: {}
+    DescribeEventBusResponse:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/String'
+          description: 'The name of the event bus. Currently, this is always <code>default</code>.'
+        Arn:
+          $ref: '#/components/schemas/String'
+          description: The Amazon Resource Name (ARN) of the account permitted to write events to the current account.
+        Policy:
+          $ref: '#/components/schemas/String'
+          description: The policy that enables the external account to send events to your account.
+    DescribeEventBusRequest:
+      type: object
+      title: DescribeEventBusRequest
+      properties:
+        Name:
+          $ref: '#/components/schemas/EventBusName'
+          description: 'The name of the event bus to show details for. If you omit this, the default event bus is displayed.'
+    DescribeEventSourceResponse:
+      type: object
+      properties:
+        Arn:
+          $ref: '#/components/schemas/String'
+          description: The ARN of the partner event source.
+        CreatedBy:
+          $ref: '#/components/schemas/String'
+          description: The name of the SaaS partner that created the event source.
+        CreationTime:
+          $ref: '#/components/schemas/Timestamp'
+          description: The date and time that the event source was created.
+        ExpirationTime:
+          $ref: '#/components/schemas/Timestamp'
+          description: The date and time that the event source will expire if you do not create a matching event bus.
+        Name:
+          $ref: '#/components/schemas/String'
+          description: The name of the partner event source.
+        State:
+          $ref: '#/components/schemas/EventSourceState'
+          description: 'The state of the event source. If it is ACTIVE, you have already created a matching event bus for this event source, and that event bus is active. If it is PENDING, either you haven''t yet created a matching event bus, or that event bus is deactivated. If it is DELETED, you have created a matching event bus, but the event source has since been deleted.'
+    DescribeEventSourceRequest:
+      type: object
+      required:
+        - Name
+      title: DescribeEventSourceRequest
+      properties:
+        Name:
+          $ref: '#/components/schemas/EventSourceName'
+          description: The name of the partner event source to display the details of.
+    DescribePartnerEventSourceResponse:
+      type: object
+      properties:
+        Arn:
+          $ref: '#/components/schemas/String'
+          description: The ARN of the event source.
+        Name:
+          $ref: '#/components/schemas/String'
+          description: The name of the event source.
+    DescribePartnerEventSourceRequest:
+      type: object
+      required:
+        - Name
+      title: DescribePartnerEventSourceRequest
+      properties:
+        Name:
+          $ref: '#/components/schemas/EventSourceName'
+          description: The name of the event source to display.
+    DescribeRuleResponse:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/RuleName'
+          description: The name of the rule.
+        Arn:
+          $ref: '#/components/schemas/RuleArn'
+          description: The Amazon Resource Name (ARN) of the rule.
+        EventPattern:
+          $ref: '#/components/schemas/EventPattern'
+          description: 'The event pattern. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html">Events and Event Patterns</a> in the <i>Amazon EventBridge User Guide</i>.'
+        ScheduleExpression:
+          $ref: '#/components/schemas/ScheduleExpression'
+          description: 'The scheduling expression. For example, "cron(0 20 * * ? *)", "rate(5 minutes)".'
+        State:
+          $ref: '#/components/schemas/RuleState'
+          description: Specifies whether the rule is enabled or disabled.
+        Description:
+          $ref: '#/components/schemas/RuleDescription'
+          description: The description of the rule.
+        RoleArn:
+          $ref: '#/components/schemas/RoleArn'
+          description: The Amazon Resource Name (ARN) of the IAM role associated with the rule.
+        ManagedBy:
+          $ref: '#/components/schemas/ManagedBy'
+          description: 'If this is a managed rule, created by an AWS service on your behalf, this field displays the principal name of the AWS service that created the rule.'
+        EventBusName:
+          $ref: '#/components/schemas/EventBusName'
+          description: The event bus associated with the rule.
+    DescribeRuleRequest:
+      type: object
+      required:
+        - Name
+      title: DescribeRuleRequest
+      properties:
+        Name:
+          $ref: '#/components/schemas/RuleName'
+          description: The name of the rule.
+        EventBusName:
+          $ref: '#/components/schemas/EventBusName'
+          description: 'The event bus associated with the rule. If you omit this, the default event bus is used.'
+    DisableRuleRequest:
+      type: object
+      required:
+        - Name
+      title: DisableRuleRequest
+      properties:
+        Name:
+          $ref: '#/components/schemas/RuleName'
+          description: The name of the rule.
+        EventBusName:
+          $ref: '#/components/schemas/EventBusName'
+          description: 'The event bus associated with the rule. If you omit this, the default event bus is used.'
+    EnableRuleRequest:
+      type: object
+      required:
+        - Name
+      title: EnableRuleRequest
+      properties:
+        Name:
+          $ref: '#/components/schemas/RuleName'
+          description: The name of the rule.
+        EventBusName:
+          $ref: '#/components/schemas/EventBusName'
+          description: 'The event bus associated with the rule. If you omit this, the default event bus is used.'
+    ListEventBusesResponse:
+      type: object
+      properties:
+        EventBuses:
+          $ref: '#/components/schemas/EventBusList'
+          description: This list of event buses.
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: A token you can use in a subsequent operation to retrieve the next set of results.
+    ListEventBusesRequest:
+      type: object
+      title: ListEventBusesRequest
+      properties:
+        NamePrefix:
+          $ref: '#/components/schemas/EventBusName'
+          description: Specifying this limits the results to only those event buses with names that start with the specified prefix.
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: The token returned by a previous call to retrieve the next set of results.
+        Limit:
+          $ref: '#/components/schemas/LimitMax100'
+          description: Specifying this limits the number of results returned by this operation. The operation also returns a NextToken which you can use in a subsequent operation to retrieve the next set of results.
+    ListEventSourcesResponse:
+      type: object
+      properties:
+        EventSources:
+          $ref: '#/components/schemas/EventSourceList'
+          description: The list of event sources.
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: A token you can use in a subsequent operation to retrieve the next set of results.
+    ListEventSourcesRequest:
+      type: object
+      title: ListEventSourcesRequest
+      properties:
+        NamePrefix:
+          $ref: '#/components/schemas/EventSourceNamePrefix'
+          description: Specifying this limits the results to only those partner event sources with names that start with the specified prefix.
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: The token returned by a previous call to retrieve the next set of results.
+        Limit:
+          $ref: '#/components/schemas/LimitMax100'
+          description: Specifying this limits the number of results returned by this operation. The operation also returns a NextToken which you can use in a subsequent operation to retrieve the next set of results.
+    ListPartnerEventSourceAccountsResponse:
+      type: object
+      properties:
+        PartnerEventSourceAccounts:
+          $ref: '#/components/schemas/PartnerEventSourceAccountList'
+          description: The list of partner event sources returned by the operation.
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: A token you can use in a subsequent operation to retrieve the next set of results.
+    ListPartnerEventSourceAccountsRequest:
+      type: object
+      required:
+        - EventSourceName
+      title: ListPartnerEventSourceAccountsRequest
+      properties:
+        EventSourceName:
+          $ref: '#/components/schemas/EventSourceName'
+          description: The name of the partner event source to display account information about.
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: The token returned by a previous call to this operation. Specifying this retrieves the next set of results.
+        Limit:
+          $ref: '#/components/schemas/LimitMax100'
+          description: Specifying this limits the number of results returned by this operation. The operation also returns a NextToken which you can use in a subsequent operation to retrieve the next set of results.
+    ListPartnerEventSourcesResponse:
+      type: object
+      properties:
+        PartnerEventSources:
+          $ref: '#/components/schemas/PartnerEventSourceList'
+          description: The list of partner event sources returned by the operation.
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: A token you can use in a subsequent operation to retrieve the next set of results.
+    ListPartnerEventSourcesRequest:
+      type: object
+      required:
+        - NamePrefix
+      title: ListPartnerEventSourcesRequest
+      properties:
+        NamePrefix:
+          $ref: '#/components/schemas/PartnerEventSourceNamePrefix'
+          description: 'If you specify this, the results are limited to only those partner event sources that start with the string you specify.'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: The token returned by a previous call to this operation. Specifying this retrieves the next set of results.
+        Limit:
+          $ref: '#/components/schemas/LimitMax100'
+          description: pecifying this limits the number of results returned by this operation. The operation also returns a NextToken which you can use in a subsequent operation to retrieve the next set of results.
+    ListRuleNamesByTargetResponse:
+      type: object
+      properties:
+        RuleNames:
+          $ref: '#/components/schemas/RuleNameList'
+          description: The names of the rules that can invoke the given target.
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: 'Indicates whether there are additional results to retrieve. If there are no more results, the value is null.'
+    ListRuleNamesByTargetRequest:
+      type: object
+      required:
+        - TargetArn
+      title: ListRuleNamesByTargetRequest
+      properties:
+        TargetArn:
+          $ref: '#/components/schemas/TargetArn'
+          description: The Amazon Resource Name (ARN) of the target resource.
+        EventBusName:
+          $ref: '#/components/schemas/EventBusName'
+          description: Limits the results to show only the rules associated with the specified event bus.
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: The token returned by a previous call to retrieve the next set of results.
+        Limit:
+          $ref: '#/components/schemas/LimitMax100'
+          description: The maximum number of results to return.
+    ListRulesResponse:
+      type: object
+      properties:
+        Rules:
+          $ref: '#/components/schemas/RuleResponseList'
+          description: The rules that match the specified criteria.
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: 'Indicates whether there are additional results to retrieve. If there are no more results, the value is null.'
+    ListRulesRequest:
+      type: object
+      title: ListRulesRequest
+      properties:
+        NamePrefix:
+          $ref: '#/components/schemas/RuleName'
+          description: The prefix matching the rule name.
+        EventBusName:
+          $ref: '#/components/schemas/EventBusName'
+          description: Limits the results to show only the rules associated with the specified event bus.
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: The token returned by a previous call to retrieve the next set of results.
+        Limit:
+          $ref: '#/components/schemas/LimitMax100'
+          description: The maximum number of results to return.
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        Tags:
+          $ref: '#/components/schemas/TagList'
+          description: The list of tag keys and values associated with the resource you specified
+    ListTagsForResourceRequest:
+      type: object
+      required:
+        - ResourceARN
+      title: ListTagsForResourceRequest
+      properties:
+        ResourceARN:
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the EventBridge resource for which you want to view tags.
+    ListTargetsByRuleResponse:
+      type: object
+      properties:
+        Targets:
+          $ref: '#/components/schemas/TargetList'
+          description: The targets assigned to the rule.
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: 'Indicates whether there are additional results to retrieve. If there are no more results, the value is null.'
+    ListTargetsByRuleRequest:
+      type: object
+      required:
+        - Rule
+      title: ListTargetsByRuleRequest
+      properties:
+        Rule:
+          $ref: '#/components/schemas/RuleName'
+          description: The name of the rule.
+        EventBusName:
+          $ref: '#/components/schemas/EventBusName'
+          description: 'The event bus associated with the rule. If you omit this, the default event bus is used.'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: The token returned by a previous call to retrieve the next set of results.
+        Limit:
+          $ref: '#/components/schemas/LimitMax100'
+          description: The maximum number of results to return.
+    PutEventsResponse:
+      type: object
+      properties:
+        FailedEntryCount:
+          $ref: '#/components/schemas/Integer'
+          description: The number of failed entries.
+        Entries:
+          $ref: '#/components/schemas/PutEventsResultEntryList'
+          description: 'The successfully and unsuccessfully ingested events results. If the ingestion was successful, the entry has the event ID in it. Otherwise, you can use the error code and error message to identify the problem with the entry.'
+    PutEventsRequest:
+      type: object
+      required:
+        - Entries
+      title: PutEventsRequest
+      properties:
+        Entries:
+          $ref: '#/components/schemas/PutEventsRequestEntryList'
+          description: 'The entry that defines an event in your system. You can specify several parameters for the entry such as the source and type of the event, resources associated with the event, and so on.'
+    PutPartnerEventsResponse:
+      type: object
+      properties:
+        FailedEntryCount:
+          $ref: '#/components/schemas/Integer'
+          description: The number of events from this operation that could not be written to the partner event bus.
+        Entries:
+          $ref: '#/components/schemas/PutPartnerEventsResultEntryList'
+          description: The list of events from this operation that were successfully written to the partner event bus.
+    PutPartnerEventsRequest:
+      type: object
+      required:
+        - Entries
+      title: PutPartnerEventsRequest
+      properties:
+        Entries:
+          $ref: '#/components/schemas/PutPartnerEventsRequestEntryList'
+          description: The list of events to write to the event bus.
+    PutPermissionRequest:
+      type: object
+      required:
+        - Action
+        - Principal
+        - StatementId
+      title: PutPermissionRequest
+      properties:
+        EventBusName:
+          $ref: '#/components/schemas/NonPartnerEventBusName'
+          description: 'The event bus associated with the rule. If you omit this, the default event bus is used.'
+        Action:
+          $ref: '#/components/schemas/Action'
+          description: 'The action that you are enabling the other account to perform. Currently, this must be <code>events:PutEvents</code>.'
+        Principal:
+          $ref: '#/components/schemas/Principal'
+          description: '<p>The 12-digit AWS account ID that you are permitting to put events to your default event bus. Specify "*" to permit any account to put events to your default event bus.</p> <p>If you specify "*" without specifying <code>Condition</code>, avoid creating rules that may match undesirable events. To create more secure rules, make sure that the event pattern for each rule contains an <code>account</code> field with a specific account ID from which to receive events. Rules with an account field do not match any events sent from other accounts.</p>'
+        StatementId:
+          $ref: '#/components/schemas/StatementId'
+          description: 'An identifier string for the external account that you are granting permissions to. If you later want to revoke the permission for this external account, specify this <code>StatementId</code> when you run <a>RemovePermission</a>.'
+        Condition:
+          $ref: '#/components/schemas/Condition'
+          description: '<p>This parameter enables you to limit the permission to accounts that fulfill a certain condition, such as being a member of a certain AWS organization. For more information about AWS Organizations, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html">What Is AWS Organizations</a> in the <i>AWS Organizations User Guide</i>.</p> <p>If you specify <code>Condition</code> with an AWS organization ID, and specify "*" as the value for <code>Principal</code>, you grant permission to all the accounts in the named organization.</p> <p>The <code>Condition</code> is a JSON string which must contain <code>Type</code>, <code>Key</code>, and <code>Value</code> fields.</p>'
+    PolicyLengthExceededException: {}
+    PutRuleResponse:
+      type: object
+      properties:
+        RuleArn:
+          $ref: '#/components/schemas/RuleArn'
+          description: The Amazon Resource Name (ARN) of the rule.
+    PutRuleRequest:
+      type: object
+      required:
+        - Name
+      title: PutRuleRequest
+      properties:
+        Name:
+          $ref: '#/components/schemas/RuleName'
+          description: The name of the rule that you are creating or updating.
+        ScheduleExpression:
+          $ref: '#/components/schemas/ScheduleExpression'
+          description: 'The scheduling expression. For example, "cron(0 20 * * ? *)" or "rate(5 minutes)".'
+        EventPattern:
+          $ref: '#/components/schemas/EventPattern'
+          description: 'The event pattern. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html">Events and Event Patterns</a> in the <i>Amazon EventBridge User Guide</i>.'
+        State:
+          $ref: '#/components/schemas/RuleState'
+          description: Indicates whether the rule is enabled or disabled.
+        Description:
+          $ref: '#/components/schemas/RuleDescription'
+          description: A description of the rule.
+        RoleArn:
+          $ref: '#/components/schemas/RoleArn'
+          description: The Amazon Resource Name (ARN) of the IAM role associated with the rule.
+        Tags:
+          $ref: '#/components/schemas/TagList'
+          description: The list of key-value pairs to associate with the rule.
+        EventBusName:
+          $ref: '#/components/schemas/EventBusName'
+          description: 'The event bus to associate with this rule. If you omit this, the default event bus is used.'
+    InvalidEventPatternException: {}
+    PutTargetsResponse:
+      type: object
+      properties:
+        FailedEntryCount:
+          $ref: '#/components/schemas/Integer'
+          description: The number of failed entries.
+        FailedEntries:
+          $ref: '#/components/schemas/PutTargetsResultEntryList'
+          description: The failed target entries.
+    PutTargetsRequest:
+      type: object
+      required:
+        - Rule
+        - Targets
+      title: PutTargetsRequest
+      properties:
+        Rule:
+          $ref: '#/components/schemas/RuleName'
+          description: The name of the rule.
+        EventBusName:
+          $ref: '#/components/schemas/EventBusName'
+          description: 'The name of the event bus associated with the rule. If you omit this, the default event bus is used.'
+        Targets:
+          $ref: '#/components/schemas/TargetList'
+          description: The targets to update or add to the rule.
+    RemovePermissionRequest:
+      type: object
+      required:
+        - StatementId
+      title: RemovePermissionRequest
+      properties:
+        StatementId:
+          $ref: '#/components/schemas/StatementId'
+          description: The statement ID corresponding to the account that is no longer allowed to put events to the default event bus.
+        EventBusName:
+          $ref: '#/components/schemas/NonPartnerEventBusName'
+          description: 'The name of the event bus to revoke permissions for. If you omit this, the default event bus is used.'
+    RemoveTargetsResponse:
+      type: object
+      properties:
+        FailedEntryCount:
+          $ref: '#/components/schemas/Integer'
+          description: The number of failed entries.
+        FailedEntries:
+          $ref: '#/components/schemas/RemoveTargetsResultEntryList'
+          description: The failed target entries.
+    RemoveTargetsRequest:
+      type: object
+      required:
+        - Rule
+        - Ids
+      title: RemoveTargetsRequest
+      properties:
+        Rule:
+          $ref: '#/components/schemas/RuleName'
+          description: The name of the rule.
+        EventBusName:
+          $ref: '#/components/schemas/EventBusName'
+          description: The name of the event bus associated with the rule.
+        Ids:
+          $ref: '#/components/schemas/TargetIdList'
+          description: The IDs of the targets to remove from the rule.
+        Force:
+          $ref: '#/components/schemas/Boolean'
+          description: 'If this is a managed rule, created by an AWS service on your behalf, you must specify <code>Force</code> as <code>True</code> to remove targets. This parameter is ignored for rules that are not managed rules. You can check whether a rule is a managed rule by using <code>DescribeRule</code> or <code>ListRules</code> and checking the <code>ManagedBy</code> field of the response.'
+    TagResourceResponse:
+      type: object
+      properties: {}
+    TagResourceRequest:
+      type: object
+      required:
+        - ResourceARN
+        - Tags
+      title: TagResourceRequest
+      properties:
+        ResourceARN:
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the EventBridge resource that you're adding tags to.
+        Tags:
+          $ref: '#/components/schemas/TagList'
+          description: The list of key-value pairs to associate with the resource.
+    TestEventPatternResponse:
+      type: object
+      properties:
+        Result:
+          $ref: '#/components/schemas/Boolean'
+          description: Indicates whether the event matches the event pattern.
+    TestEventPatternRequest:
+      type: object
+      required:
+        - EventPattern
+        - Event
+      title: TestEventPatternRequest
+      properties:
+        EventPattern:
+          $ref: '#/components/schemas/EventPattern'
+          description: 'The event pattern. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html">Events and Event Patterns</a> in the <i>Amazon EventBridge User Guide</i>.'
+        Event:
+          $ref: '#/components/schemas/String'
+          description: 'The event, in JSON format, to test against the event pattern.'
+    UntagResourceResponse:
+      type: object
+      properties: {}
+    UntagResourceRequest:
+      type: object
+      required:
+        - ResourceARN
+        - TagKeys
+      title: UntagResourceRequest
+      properties:
+        ResourceARN:
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the EventBridge resource from which you are removing tags.
+        TagKeys:
+          $ref: '#/components/schemas/TagKeyList'
+          description: The list of tag keys to remove from the resource.
+    AccountId:
+      type: string
+      pattern: '\d{12}'
+      minLength: 12
+      maxLength: 12
+    Action:
+      type: string
+      pattern: 'events:[a-zA-Z]+'
+      minLength: 1
+      maxLength: 64
+    EventSourceName:
+      type: string
+      pattern: 'aws\.partner(/[\.\-_A-Za-z0-9]+){2,}'
+      minLength: 1
+      maxLength: 256
+    Arn:
+      type: string
+      minLength: 1
+      maxLength: 1600
+    AssignPublicIp:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
+    StringList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    AwsVpcConfiguration:
+      type: object
+      required:
+        - Subnets
+      properties:
+        Subnets:
+          $ref: '#/components/schemas/StringList'
+          description: Specifies the subnets associated with the task. These subnets must all be in the same VPC. You can specify as many as 16 subnets.
+        SecurityGroups:
+          $ref: '#/components/schemas/StringList'
+          description: 'Specifies the security groups associated with the task. These security groups must all be in the same VPC. You can specify as many as five security groups. If you do not specify a security group, the default security group for the VPC is used.'
+        AssignPublicIp:
+          $ref: '#/components/schemas/AssignPublicIp'
+          description: Specifies whether the task's elastic network interface receives a public IP address. You can specify <code>ENABLED</code> only when <code>LaunchType</code> in <code>EcsParameters</code> is set to <code>FARGATE</code>.
+      description: 'This structure specifies the VPC subnets and security groups for the task, and whether a public IP address is to be used. This structure is relevant only for ECS tasks that use the <code>awsvpc</code> network mode.'
+    Integer:
+      type: integer
+    BatchArrayProperties:
+      type: object
+      properties:
+        Size:
+          $ref: '#/components/schemas/Integer'
+          description: 'The size of the array, if this is an array batch job. Valid values are integers between 2 and 10,000.'
+      description: 'The array properties for the submitted job, such as the size of the array. The array size can be between 2 and 10,000. If you specify array properties for a job, it becomes an array job. This parameter is used only if the target is an AWS Batch job.'
+    String:
+      type: string
+    BatchRetryStrategy:
+      type: object
+      properties:
+        Attempts:
+          $ref: '#/components/schemas/Integer'
+          description: 'The number of times to attempt to retry, if the job fails. Valid values are 1–10.'
+      description: 'The retry strategy to use for failed jobs, if the target is an AWS Batch job. If you specify a retry strategy here, it overrides the retry strategy defined in the job definition.'
+    BatchParameters:
+      type: object
+      required:
+        - JobDefinition
+        - JobName
+      properties:
+        JobDefinition:
+          $ref: '#/components/schemas/String'
+          description: The ARN or name of the job definition to use if the event target is an AWS Batch job. This job definition must already exist.
+        JobName:
+          $ref: '#/components/schemas/String'
+          description: 'The name to use for this execution of the job, if the target is an AWS Batch job.'
+        ArrayProperties:
+          $ref: '#/components/schemas/BatchArrayProperties'
+          description: 'The array properties for the submitted job, such as the size of the array. The array size can be between 2 and 10,000. If you specify array properties for a job, it becomes an array job. This parameter is used only if the target is an AWS Batch job.'
+        RetryStrategy:
+          $ref: '#/components/schemas/BatchRetryStrategy'
+          description: 'The retry strategy to use for failed jobs, if the target is an AWS Batch job. The retry strategy is the number of times to retry the failed job execution. Valid values are 1–10. When you specify a retry strategy here, it overrides the retry strategy defined in the job definition.'
+      description: The custom parameters to be used when the target is an AWS Batch job.
+    Boolean:
+      type: boolean
+    Condition:
+      type: object
+      required:
+        - Type
+        - Key
+        - Value
+      properties:
+        Type:
+          $ref: '#/components/schemas/String'
+          description: Specifies the type of condition. Currently the only supported value is <code>StringEquals</code>.
+        Key:
+          $ref: '#/components/schemas/String'
+          description: 'Specifies the key for the condition. Currently the only supported key is <code>aws:PrincipalOrgID</code>.'
+        Value:
+          $ref: '#/components/schemas/String'
+          description: 'Specifies the value for the key. Currently, this must be the ID of the organization.'
+      description: '<p>A JSON string which you can use to limit the event bus permissions you are granting to only accounts that fulfill the condition. Currently, the only supported condition is membership in a certain AWS organization. The string must contain <code>Type</code>, <code>Key</code>, and <code>Value</code> fields. The <code>Value</code> field specifies the ID of the AWS organization. Following is an example value for <code>Condition</code>:</p> <p> <code>''{"Type" : "StringEquals", "Key": "aws:PrincipalOrgID", "Value": "o-1234567890"}''</code> </p>'
+    EventBusName:
+      type: string
+      pattern: '[/\.\-_A-Za-z0-9]+'
+      minLength: 1
+      maxLength: 256
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+    RuleName:
+      type: string
+      pattern: '[\.\-_A-Za-z0-9]+'
+      minLength: 1
+      maxLength: 64
+    Timestamp:
+      type: string
+      format: date-time
+    EventSourceState:
+      type: string
+      enum:
+        - PENDING
+        - ACTIVE
+        - DELETED
+    RuleArn:
+      type: string
+      minLength: 1
+      maxLength: 1600
+    EventPattern:
+      type: string
+    ScheduleExpression:
+      type: string
+      maxLength: 256
+    RuleState:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
+    RuleDescription:
+      type: string
+      maxLength: 512
+    RoleArn:
+      type: string
+      minLength: 1
+      maxLength: 1600
+    ManagedBy:
+      type: string
+      minLength: 1
+      maxLength: 128
+    LimitMin1:
+      type: integer
+      minimum: 1
+    LaunchType:
+      type: string
+      enum:
+        - EC2
+        - FARGATE
+    NetworkConfiguration:
+      type: object
+      properties:
+        awsvpcConfiguration:
+          $ref: '#/components/schemas/AwsVpcConfiguration'
+          description: 'Use this structure to specify the VPC subnets and security groups for the task, and whether a public IP address is to be used. This structure is relevant only for ECS tasks that use the <code>awsvpc</code> network mode.'
+      description: This structure specifies the network configuration for an ECS task.
+    EcsParameters:
+      type: object
+      required:
+        - TaskDefinitionArn
+      properties:
+        TaskDefinitionArn:
+          $ref: '#/components/schemas/Arn'
+          description: 'The ARN of the task definition to use if the event target is an Amazon ECS task. '
+        TaskCount:
+          $ref: '#/components/schemas/LimitMin1'
+          description: The number of tasks to create based on <code>TaskDefinition</code>. The default is 1.
+        LaunchType:
+          $ref: '#/components/schemas/LaunchType'
+          description: 'Specifies the launch type on which your task is running. The launch type that you specify here must match one of the launch type (compatibilities) of the target task. The <code>FARGATE</code> value is supported only in the Regions where AWS Fargate with Amazon ECS is supported. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS-Fargate.html">AWS Fargate on Amazon ECS</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
+        NetworkConfiguration:
+          $ref: '#/components/schemas/NetworkConfiguration'
+          description: '<p>Use this structure if the ECS task uses the <code>awsvpc</code> network mode. This structure specifies the VPC subnets and security groups associated with the task, and whether a public IP address is to be used. This structure is required if <code>LaunchType</code> is <code>FARGATE</code> because the <code>awsvpc</code> mode is required for Fargate tasks.</p> <p>If you specify <code>NetworkConfiguration</code> when the target ECS task does not use the <code>awsvpc</code> network mode, the task fails.</p>'
+        PlatformVersion:
+          $ref: '#/components/schemas/String'
+          description: '<p>Specifies the platform version for the task. Specify only the numeric portion of the platform version, such as <code>1.1.0</code>.</p> <p>This structure is used only if <code>LaunchType</code> is <code>FARGATE</code>. For more information about valid platform versions, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html">AWS Fargate Platform Versions</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>'
+        Group:
+          $ref: '#/components/schemas/String'
+          description: Specifies an ECS task group for the task. The maximum length is 255 characters.
+      description: The custom parameters to be used when the target is an Amazon ECS task.
+    ErrorCode:
+      type: string
+    ErrorMessage:
+      type: string
+    EventBus:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/String'
+          description: The name of the event bus.
+        Arn:
+          $ref: '#/components/schemas/String'
+          description: The ARN of the event bus.
+        Policy:
+          $ref: '#/components/schemas/String'
+          description: 'The permissions policy of the event bus, describing which other AWS accounts can write events to this event bus.'
+      description: An event bus receives events from a source and routes them to rules associated with that event bus. Your account's default event bus receives rules from AWS services. A custom event bus can receive rules from AWS services as well as your custom applications and services. A partner event bus receives events from an event source created by an SaaS partner. These events come from the partners services or applications.
+    EventBusList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EventBus'
+    EventId:
+      type: string
+    EventResource:
+      type: string
+    EventResourceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EventResource'
+    EventSource:
+      type: object
+      properties:
+        Arn:
+          $ref: '#/components/schemas/String'
+          description: The ARN of the event source.
+        CreatedBy:
+          $ref: '#/components/schemas/String'
+          description: The name of the partner that created the event source.
+        CreationTime:
+          $ref: '#/components/schemas/Timestamp'
+          description: The date and time the event source was created.
+        ExpirationTime:
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time that the event source will expire, if the AWS account doesn''t create a matching event bus for it.'
+        Name:
+          $ref: '#/components/schemas/String'
+          description: The name of the event source.
+        State:
+          $ref: '#/components/schemas/EventSourceState'
+          description: 'The state of the event source. If it is ACTIVE, you have already created a matching event bus for this event source, and that event bus is active. If it is PENDING, either you haven''t yet created a matching event bus, or that event bus is deactivated. If it is DELETED, you have created a matching event bus, but the event source has since been deleted.'
+      description: 'A partner event source is created by an SaaS partner. If a customer creates a partner event bus that matches this event source, that AWS account can receive events from the partner''s applications or services.'
+    EventSourceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EventSource'
+    EventSourceNamePrefix:
+      type: string
+      pattern: '[/\.\-_A-Za-z0-9]+'
+      minLength: 1
+      maxLength: 256
+    EventTime:
+      type: string
+      format: date-time
+    TransformerPaths:
+      type: object
+      maxProperties: 10
+      additionalProperties:
+        $ref: '#/components/schemas/TargetInputPath'
+    TransformerInput:
+      type: string
+      minLength: 1
+      maxLength: 8192
+    InputTransformer:
+      type: object
+      required:
+        - InputTemplate
+      properties:
+        InputPathsMap:
+          $ref: '#/components/schemas/TransformerPaths'
+          description: '<p>Map of JSON paths to be extracted from the event. You can then insert these in the template in <code>InputTemplate</code> to produce the output you want to be sent to the target.</p> <p> <code>InputPathsMap</code> is an array key-value pairs, where each value is a valid JSON path. You can have as many as 10 key-value pairs. You must use JSON dot notation, not bracket notation.</p> <p>The keys cannot start with "AWS." </p>'
+        InputTemplate:
+          $ref: '#/components/schemas/TransformerInput'
+          description: '<p>Input template where you specify placeholders that will be filled with the values of the keys from <code>InputPathsMap</code> to customize the data sent to the target. Enclose each <code>InputPathsMaps</code> value in brackets: &lt;<i>value</i>&gt; The InputTemplate must be valid JSON.</p> <p>If <code>InputTemplate</code> is a JSON object (surrounded by curly braces), the following restrictions apply:</p> <ul> <li> <p>The placeholder cannot be used as an object key.</p> </li> <li> <p>Object values cannot include quote marks.</p> </li> </ul> <p>The following example shows the syntax for using <code>InputPathsMap</code> and <code>InputTemplate</code>.</p> <p> <code> "InputTransformer":</code> </p> <p> <code>{</code> </p> <p> <code>"InputPathsMap": {"instance": "$.detail.instance","status": "$.detail.status"},</code> </p> <p> <code>"InputTemplate": "&lt;instance&gt; is in state &lt;status&gt;"</code> </p> <p> <code>}</code> </p> <p>To have the <code>InputTemplate</code> include quote marks within a JSON string, escape each quote marks with a slash, as in the following example:</p> <p> <code> "InputTransformer":</code> </p> <p> <code>{</code> </p> <p> <code>"InputPathsMap": {"instance": "$.detail.instance","status": "$.detail.status"},</code> </p> <p> <code>"InputTemplate": "&lt;instance&gt; is in state \"&lt;status&gt;\""</code> </p> <p> <code>}</code> </p>'
+      description: Contains the parameters needed for you to provide custom input to a target based on one or more pieces of data extracted from the event.
+    InputTransformerPathKey:
+      type: string
+      pattern: '[A-Za-z0-9\_\-]+'
+      minLength: 1
+      maxLength: 256
+    TargetPartitionKeyPath:
+      type: string
+      maxLength: 256
+    KinesisParameters:
+      type: object
+      required:
+        - PartitionKeyPath
+      properties:
+        PartitionKeyPath:
+          $ref: '#/components/schemas/TargetPartitionKeyPath'
+          description: 'The JSON path to be extracted from the event and used as the partition key. For more information, see <a href="https://docs.aws.amazon.com/streams/latest/dev/key-concepts.html#partition-key">Amazon Kinesis Streams Key Concepts</a> in the <i>Amazon Kinesis Streams Developer Guide</i>.'
+      description: 'This object enables you to specify a JSON path to extract from the event and use as the partition key for the Amazon Kinesis data stream, so that you can control the shard to which the event goes. If you do not include this parameter, the default is to use the <code>eventId</code> as the partition key.'
+    LimitMax100:
+      type: integer
+      minimum: 1
+      maximum: 100
+    NextToken:
+      type: string
+      minLength: 1
+      maxLength: 2048
+    PartnerEventSourceAccountList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PartnerEventSourceAccount'
+    PartnerEventSourceNamePrefix:
+      type: string
+      pattern: 'aws\.partner/[\.\-_A-Za-z0-9]+/[/\.\-_A-Za-z0-9]*'
+      minLength: 1
+      maxLength: 256
+    PartnerEventSourceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PartnerEventSource'
+    TargetArn:
+      type: string
+      minLength: 1
+      maxLength: 1600
+    RuleNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RuleName'
+    RuleResponseList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Rule'
+    TargetList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Target'
+      minItems: 1
+      maxItems: 100
+    MessageGroupId:
+      type: string
+    NonPartnerEventBusName:
+      type: string
+      pattern: '[\.\-_A-Za-z0-9]+'
+      minLength: 1
+      maxLength: 256
+    PartnerEventSource:
+      type: object
+      properties:
+        Arn:
+          $ref: '#/components/schemas/String'
+          description: The ARN of the partner event source.
+        Name:
+          $ref: '#/components/schemas/String'
+          description: The name of the partner event source.
+      description: 'A partner event source is created by an SaaS partner. If a customer creates a partner event bus that matches this event source, that AWS account can receive events from the partner''s applications or services.'
+    PartnerEventSourceAccount:
+      type: object
+      properties:
+        Account:
+          $ref: '#/components/schemas/AccountId'
+          description: The AWS account ID that the partner event source was offered to.
+        CreationTime:
+          $ref: '#/components/schemas/Timestamp'
+          description: The date and time the event source was created.
+        ExpirationTime:
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time that the event source will expire, if the AWS account doesn''t create a matching event bus for it.'
+        State:
+          $ref: '#/components/schemas/EventSourceState'
+          description: 'The state of the event source. If it is ACTIVE, you have already created a matching event bus for this event source, and that event bus is active. If it is PENDING, either you haven''t yet created a matching event bus, or that event bus is deactivated. If it is DELETED, you have created a matching event bus, but the event source has since been deleted.'
+      description: The AWS account that a partner event source has been offered to.
+    Principal:
+      type: string
+      pattern: '(\d{12}|\*)'
+      minLength: 1
+      maxLength: 12
+    PutEventsRequestEntryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PutEventsRequestEntry'
+      minItems: 1
+      maxItems: 10
+    PutEventsRequestEntry:
+      type: object
+      properties:
+        Time:
+          $ref: '#/components/schemas/EventTime'
+          description: 'The time stamp of the event, per <a href="https://www.rfc-editor.org/rfc/rfc3339.txt">RFC3339</a>. If no time stamp is provided, the time stamp of the <a>PutEvents</a> call is used.'
+        Source:
+          $ref: '#/components/schemas/String'
+          description: The source of the event.
+        Resources:
+          $ref: '#/components/schemas/EventResourceList'
+          description: 'AWS resources, identified by Amazon Resource Name (ARN), which the event primarily concerns. Any number, including zero, may be present.'
+        DetailType:
+          $ref: '#/components/schemas/String'
+          description: Free-form string used to decide what fields to expect in the event detail.
+        Detail:
+          $ref: '#/components/schemas/String'
+          description: A valid JSON string. There is no other schema imposed. The JSON string may contain fields and nested subobjects.
+        EventBusName:
+          $ref: '#/components/schemas/NonPartnerEventBusName'
+          description: The event bus that will receive the event. Only the rules that are associated with this event bus will be able to match the event.
+      description: Represents an event to be submitted.
+    PutEventsResultEntryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PutEventsResultEntry'
+    PutEventsResultEntry:
+      type: object
+      properties:
+        EventId:
+          $ref: '#/components/schemas/EventId'
+          description: The ID of the event.
+        ErrorCode:
+          $ref: '#/components/schemas/ErrorCode'
+          description: The error code that indicates why the event submission failed.
+        ErrorMessage:
+          $ref: '#/components/schemas/ErrorMessage'
+          description: The error message that explains why the event submission failed.
+      description: Represents an event that failed to be submitted.
+    PutPartnerEventsRequestEntryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PutPartnerEventsRequestEntry'
+      minItems: 1
+      maxItems: 20
+    PutPartnerEventsRequestEntry:
+      type: object
+      properties:
+        Time:
+          $ref: '#/components/schemas/EventTime'
+          description: The date and time of the event.
+        Source:
+          $ref: '#/components/schemas/EventSourceName'
+          description: The event source that is generating the evntry.
+        Resources:
+          $ref: '#/components/schemas/EventResourceList'
+          description: 'AWS resources, identified by Amazon Resource Name (ARN), which the event primarily concerns. Any number, including zero, may be present.'
+        DetailType:
+          $ref: '#/components/schemas/String'
+          description: A free-form string used to decide what fields to expect in the event detail.
+        Detail:
+          $ref: '#/components/schemas/String'
+          description: A valid JSON string. There is no other schema imposed. The JSON string may contain fields and nested subobjects.
+      description: The details about an event generated by an SaaS partner.
+    PutPartnerEventsResultEntryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PutPartnerEventsResultEntry'
+    PutPartnerEventsResultEntry:
+      type: object
+      properties:
+        EventId:
+          $ref: '#/components/schemas/EventId'
+          description: The ID of the event.
+        ErrorCode:
+          $ref: '#/components/schemas/ErrorCode'
+          description: The error code that indicates why the event submission failed.
+        ErrorMessage:
+          $ref: '#/components/schemas/ErrorMessage'
+          description: The error message that explains why the event submission failed.
+      description: 'Represents an event that a partner tried to generate, but failed.'
+    StatementId:
+      type: string
+      pattern: '[a-zA-Z0-9-_]+'
+      minLength: 1
+      maxLength: 64
+    PutTargetsResultEntryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PutTargetsResultEntry'
+    TargetId:
+      type: string
+      pattern: '[\.\-_A-Za-z0-9]+'
+      minLength: 1
+      maxLength: 64
+    PutTargetsResultEntry:
+      type: object
+      properties:
+        TargetId:
+          $ref: '#/components/schemas/TargetId'
+          description: The ID of the target.
+        ErrorCode:
+          $ref: '#/components/schemas/ErrorCode'
+          description: 'The error code that indicates why the target addition failed. If the value is <code>ConcurrentModificationException</code>, too many requests were made at the same time.'
+        ErrorMessage:
+          $ref: '#/components/schemas/ErrorMessage'
+          description: The error message that explains why the target addition failed.
+      description: Represents a target that failed to be added to a rule.
+    TargetIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TargetId'
+      minItems: 1
+      maxItems: 100
+    RemoveTargetsResultEntryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RemoveTargetsResultEntry'
+    RemoveTargetsResultEntry:
+      type: object
+      properties:
+        TargetId:
+          $ref: '#/components/schemas/TargetId'
+          description: The ID of the target.
+        ErrorCode:
+          $ref: '#/components/schemas/ErrorCode'
+          description: 'The error code that indicates why the target removal failed. If the value is <code>ConcurrentModificationException</code>, too many requests were made at the same time.'
+        ErrorMessage:
+          $ref: '#/components/schemas/ErrorMessage'
+          description: The error message that explains why the target removal failed.
+      description: Represents a target that failed to be removed from a rule.
+    Rule:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/RuleName'
+          description: The name of the rule.
+        Arn:
+          $ref: '#/components/schemas/RuleArn'
+          description: The Amazon Resource Name (ARN) of the rule.
+        EventPattern:
+          $ref: '#/components/schemas/EventPattern'
+          description: 'The event pattern of the rule. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html">Events and Event Patterns</a> in the <i>Amazon EventBridge User Guide</i>.'
+        State:
+          $ref: '#/components/schemas/RuleState'
+          description: The state of the rule.
+        Description:
+          $ref: '#/components/schemas/RuleDescription'
+          description: The description of the rule.
+        ScheduleExpression:
+          $ref: '#/components/schemas/ScheduleExpression'
+          description: 'The scheduling expression. For example, "cron(0 20 * * ? *)", "rate(5 minutes)".'
+        RoleArn:
+          $ref: '#/components/schemas/RoleArn'
+          description: The Amazon Resource Name (ARN) of the role that is used for target invocation.
+        ManagedBy:
+          $ref: '#/components/schemas/ManagedBy'
+          description: 'If the rule was created on behalf of your account by an AWS service, this field displays the principal name of the service that created the rule.'
+        EventBusName:
+          $ref: '#/components/schemas/EventBusName'
+          description: The event bus associated with the rule.
+      description: Contains information about a rule in Amazon EventBridge.
+    RunCommandTargets:
+      type: array
+      items:
+        $ref: '#/components/schemas/RunCommandTarget'
+      minItems: 1
+      maxItems: 5
+    RunCommandParameters:
+      type: object
+      required:
+        - RunCommandTargets
+      properties:
+        RunCommandTargets:
+          $ref: '#/components/schemas/RunCommandTargets'
+          description: 'Currently, we support including only one RunCommandTarget block, which specifies either an array of InstanceIds or a tag.'
+      description: 'This parameter contains the criteria (either InstanceIds or a tag) used to specify which EC2 instances are to be sent the command. '
+    RunCommandTargetKey:
+      type: string
+      pattern: '^[\p{L}\p{Z}\p{N}_.:/=+\-@]*$'
+      minLength: 1
+      maxLength: 128
+    RunCommandTargetValues:
+      type: array
+      items:
+        $ref: '#/components/schemas/RunCommandTargetValue'
+      minItems: 1
+      maxItems: 50
+    RunCommandTarget:
+      type: object
+      required:
+        - Key
+        - Values
+      properties:
+        Key:
+          $ref: '#/components/schemas/RunCommandTargetKey'
+          description: 'Can be either <code>tag:</code> <i>tag-key</i> or <code>InstanceIds</code>.'
+        Values:
+          $ref: '#/components/schemas/RunCommandTargetValues'
+          description: 'If <code>Key</code> is <code>tag:</code> <i>tag-key</i>, <code>Values</code> is a list of tag values. If <code>Key</code> is <code>InstanceIds</code>, <code>Values</code> is a list of Amazon EC2 instance IDs.'
+      description: 'Information about the EC2 instances that are to be sent the command, specified as key-value pairs. Each <code>RunCommandTarget</code> block can include only one key, but this key may specify multiple values.'
+    RunCommandTargetValue:
+      type: string
+      minLength: 1
+      maxLength: 256
+    SqsParameters:
+      type: object
+      properties:
+        MessageGroupId:
+          $ref: '#/components/schemas/MessageGroupId'
+          description: The FIFO message group ID to use as the target.
+      description: This structure includes the custom parameter to be used when the target is an SQS FIFO queue.
+    TagKey:
+      type: string
+      minLength: 1
+      maxLength: 128
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    Tag:
+      type: object
+      required:
+        - Key
+        - Value
+      properties:
+        Key:
+          $ref: '#/components/schemas/TagKey'
+          description: A string you can use to assign a value. The combination of tag keys and values can help you organize and categorize your resources.
+        Value:
+          $ref: '#/components/schemas/TagValue'
+          description: The value for the specified tag key.
+      description: 'A key-value pair associated with an AWS resource. In EventBridge, rules and event buses support tagging.'
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+    TargetInput:
+      type: string
+      maxLength: 8192
+    TargetInputPath:
+      type: string
+      maxLength: 256
+    Target:
+      type: object
+      required:
+        - Id
+        - Arn
+      properties:
+        Id:
+          $ref: '#/components/schemas/TargetId'
+          description: The ID of the target.
+        Arn:
+          $ref: '#/components/schemas/TargetArn'
+          description: The Amazon Resource Name (ARN) of the target.
+        RoleArn:
+          $ref: '#/components/schemas/RoleArn'
+          description: 'The Amazon Resource Name (ARN) of the IAM role to be used for this target when the rule is triggered. If one rule triggers multiple targets, you can use a different IAM role for each target.'
+        Input:
+          $ref: '#/components/schemas/TargetInput'
+          description: 'Valid JSON text passed to the target. In this case, nothing from the event itself is passed to the target. For more information, see <a href="http://www.rfc-editor.org/rfc/rfc7159.txt">The JavaScript Object Notation (JSON) Data Interchange Format</a>.'
+        InputPath:
+          $ref: '#/components/schemas/TargetInputPath'
+          description: 'The value of the JSONPath that is used for extracting part of the matched event when passing it to the target. You must use JSON dot notation, not bracket notation. For more information about JSON paths, see <a href="http://goessner.net/articles/JsonPath/">JSONPath</a>.'
+        InputTransformer:
+          $ref: '#/components/schemas/InputTransformer'
+          description: Settings to enable you to provide custom input to a target based on certain event data. You can extract one or more key-value pairs from the event and then use that data to send customized input to the target.
+        KinesisParameters:
+          $ref: '#/components/schemas/KinesisParameters'
+          description: 'The custom parameter you can use to control the shard assignment, when the target is a Kinesis data stream. If you do not include this parameter, the default is to use the <code>eventId</code> as the partition key.'
+        RunCommandParameters:
+          $ref: '#/components/schemas/RunCommandParameters'
+          description: Parameters used when you are using the rule to invoke Amazon EC2 Run Command.
+        EcsParameters:
+          $ref: '#/components/schemas/EcsParameters'
+          description: 'Contains the Amazon ECS task definition and task count to be used, if the event target is an Amazon ECS task. For more information about Amazon ECS tasks, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html">Task Definitions </a> in the <i>Amazon EC2 Container Service Developer Guide</i>.'
+        BatchParameters:
+          $ref: '#/components/schemas/BatchParameters'
+          description: 'If the event target is an AWS Batch job, this contains the job definition, job name, and other parameters. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/jobs.html">Jobs</a> in the <i>AWS Batch User Guide</i>.'
+        SqsParameters:
+          $ref: '#/components/schemas/SqsParameters'
+          description: '<p>Contains the message group ID to use when the target is a FIFO queue.</p> <p>If you specify an SQS FIFO queue as a target, the queue must have content-based deduplication enabled.</p>'
+      description: '<p>Targets are the resources to be invoked when a rule is triggered. For a complete list of services and resources that can be set as a target, see <a>PutTargets</a>.</p> <p>If you are setting the event bus of another account as the target, and that account granted permission to your account through an organization instead of directly by the account ID, then you must specify a <code>RoleArn</code> with proper permissions in the <code>Target</code> structure. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html">Sending and Receiving Events Between AWS Accounts</a> in the <i>Amazon EventBridge User Guide</i>.</p>'
+security:
+  - hmac: []

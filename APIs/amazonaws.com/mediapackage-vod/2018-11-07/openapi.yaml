@@ -1,0 +1,1642 @@
+openapi: 3.0.0
+info:
+  version: '2018-11-07'
+  x-release: v4
+  title: AWS Elemental MediaPackage VOD
+  description: AWS Elemental MediaPackage VOD
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: mediapackage-vod
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/mediapackage-vod-2018-11-07.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/mediapackage-vod/'
+servers:
+  - url: 'http://mediapackage-vod.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The MediaPackage Vod multi-region endpoint
+  - url: 'https://mediapackage-vod.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The MediaPackage Vod multi-region endpoint
+  - url: 'http://mediapackage-vod.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The MediaPackage Vod endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://mediapackage-vod.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The MediaPackage Vod endpoint for China (Beijing) and China (Ningxia)
+paths:
+  /assets:
+    post:
+      operationId: CreateAsset
+      description: Creates a new MediaPackage VOD Asset resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAssetResponse'
+        '480':
+          description: UnprocessableEntityException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+                - packagingGroupId
+                - sourceArn
+                - sourceRoleArn
+              properties:
+                id:
+                  description: The unique identifier for the Asset.
+                  type: string
+                packagingGroupId:
+                  description: The ID of the PackagingGroup for the Asset.
+                  type: string
+                resourceId:
+                  description: The resource ID to include in SPEKE key requests.
+                  type: string
+                sourceArn:
+                  description: ARN of the source object in S3.
+                  type: string
+                sourceRoleArn:
+                  description: The IAM role ARN used to access the source S3 bucket.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListAssets
+      description: Returns a collection of MediaPackage VOD Asset resources.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAssetsResponse'
+        '480':
+          description: UnprocessableEntityException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: Upper bound on number of records to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+        - name: nextToken
+          in: query
+          required: false
+          description: A token used to resume pagination from the end of a previous request.
+          schema:
+            type: string
+        - name: packagingGroupId
+          in: query
+          required: false
+          description: Returns Assets associated with the specified PackagingGroup.
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+  /packaging_configurations:
+    post:
+      operationId: CreatePackagingConfiguration
+      description: Creates a new MediaPackage VOD PackagingConfiguration resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatePackagingConfigurationResponse'
+        '480':
+          description: UnprocessableEntityException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+                - packagingGroupId
+              properties:
+                cmafPackage:
+                  description: A CMAF packaging configuration.
+                  type: object
+                  properties:
+                    Encryption:
+                      $ref: '#/components/schemas/CmafEncryption'
+                    HlsManifests:
+                      description: A list of HLS manifest configurations.
+                      $ref: '#/components/schemas/__listOfHlsManifest'
+                    SegmentDurationSeconds:
+                      description: |
+                        Duration (in seconds) of each fragment. Actual fragments will be
+                        rounded to the nearest multiple of the source fragment duration.
+                      $ref: '#/components/schemas/__integer'
+                dashPackage:
+                  description: A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
+                  type: object
+                  properties:
+                    DashManifests:
+                      description: A list of DASH manifest configurations.
+                      $ref: '#/components/schemas/__listOfDashManifest'
+                    Encryption:
+                      $ref: '#/components/schemas/DashEncryption'
+                    PeriodTriggers:
+                      description: |
+                        A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH)
+                        Media Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not
+                        be partitioned into more than one period. If the list contains "ADS", new periods will be created where
+                        the Asset contains SCTE-35 ad markers.
+                      $ref: '#/components/schemas/__listOf__PeriodTriggersElement'
+                    SegmentDurationSeconds:
+                      description: |
+                        Duration (in seconds) of each segment. Actual segments will be
+                        rounded to the nearest multiple of the source segment duration.
+                      $ref: '#/components/schemas/__integer'
+                    SegmentTemplateFormat:
+                      description: 'Determines the type of SegmentTemplate included in the Media Presentation Description (MPD).  When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs.  When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is included in each SegmentTemplate, with $Number$ media URLs.'
+                      $ref: '#/components/schemas/SegmentTemplateFormat'
+                hlsPackage:
+                  description: An HTTP Live Streaming (HLS) packaging configuration.
+                  type: object
+                  properties:
+                    Encryption:
+                      $ref: '#/components/schemas/HlsEncryption'
+                    HlsManifests:
+                      description: A list of HLS manifest configurations.
+                      $ref: '#/components/schemas/__listOfHlsManifest'
+                    SegmentDurationSeconds:
+                      description: |
+                        Duration (in seconds) of each fragment. Actual fragments will be
+                        rounded to the nearest multiple of the source fragment duration.
+                      $ref: '#/components/schemas/__integer'
+                    UseAudioRenditionGroup:
+                      description: 'When enabled, audio streams will be placed in rendition groups in the output.'
+                      $ref: '#/components/schemas/__boolean'
+                id:
+                  description: The ID of the PackagingConfiguration.
+                  type: string
+                mssPackage:
+                  description: A Microsoft Smooth Streaming (MSS) PackagingConfiguration.
+                  type: object
+                  properties:
+                    Encryption:
+                      $ref: '#/components/schemas/MssEncryption'
+                    MssManifests:
+                      description: A list of MSS manifest configurations.
+                      $ref: '#/components/schemas/__listOfMssManifest'
+                    SegmentDurationSeconds:
+                      description: The duration (in seconds) of each segment.
+                      $ref: '#/components/schemas/__integer'
+                packagingGroupId:
+                  description: The ID of a PackagingGroup.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListPackagingConfigurations
+      description: Returns a collection of MediaPackage VOD PackagingConfiguration resources.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPackagingConfigurationsResponse'
+        '480':
+          description: UnprocessableEntityException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: Upper bound on number of records to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+        - name: nextToken
+          in: query
+          required: false
+          description: A token used to resume pagination from the end of a previous request.
+          schema:
+            type: string
+        - name: packagingGroupId
+          in: query
+          required: false
+          description: Returns MediaPackage VOD PackagingConfigurations associated with the specified PackagingGroup.
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+  /packaging_groups:
+    post:
+      operationId: CreatePackagingGroup
+      description: Creates a new MediaPackage VOD PackagingGroup resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatePackagingGroupResponse'
+        '480':
+          description: UnprocessableEntityException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  description: The ID of the PackagingGroup.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListPackagingGroups
+      description: Returns a collection of MediaPackage VOD PackagingGroup resources.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPackagingGroupsResponse'
+        '480':
+          description: UnprocessableEntityException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: Upper bound on number of records to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+        - name: nextToken
+          in: query
+          required: false
+          description: A token used to resume pagination from the end of a previous request.
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+  '/assets/{id}':
+    delete:
+      operationId: DeleteAsset
+      description: Deletes an existing MediaPackage VOD Asset resource.
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteAssetResponse'
+        '480':
+          description: UnprocessableEntityException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the MediaPackage VOD Asset resource to delete.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeAsset
+      description: Returns a description of a MediaPackage VOD Asset resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeAssetResponse'
+        '480':
+          description: UnprocessableEntityException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of an MediaPackage VOD Asset resource.
+          schema:
+            type: string
+  '/packaging_configurations/{id}':
+    delete:
+      operationId: DeletePackagingConfiguration
+      description: Deletes a MediaPackage VOD PackagingConfiguration resource.
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletePackagingConfigurationResponse'
+        '480':
+          description: UnprocessableEntityException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the MediaPackage VOD PackagingConfiguration resource to delete.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribePackagingConfiguration
+      description: Returns a description of a MediaPackage VOD PackagingConfiguration resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribePackagingConfigurationResponse'
+        '480':
+          description: UnprocessableEntityException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of a MediaPackage VOD PackagingConfiguration resource.
+          schema:
+            type: string
+  '/packaging_groups/{id}':
+    delete:
+      operationId: DeletePackagingGroup
+      description: Deletes a MediaPackage VOD PackagingGroup resource.
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletePackagingGroupResponse'
+        '480':
+          description: UnprocessableEntityException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the MediaPackage VOD PackagingGroup resource to delete.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribePackagingGroup
+      description: Returns a description of a MediaPackage VOD PackagingGroup resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribePackagingGroupResponse'
+        '480':
+          description: UnprocessableEntityException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of a MediaPackage VOD PackagingGroup resource.
+          schema:
+            type: string
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    CreateAssetResponse:
+      type: object
+      properties:
+        Arn:
+          description: The ARN of the Asset.
+          $ref: '#/components/schemas/__string'
+        CreatedAt:
+          description: The time the Asset was initially submitted for Ingest.
+          $ref: '#/components/schemas/__string'
+        EgressEndpoints:
+          description: The list of egress endpoints available for the Asset.
+          $ref: '#/components/schemas/__listOfEgressEndpoint'
+        Id:
+          description: The unique identifier for the Asset.
+          $ref: '#/components/schemas/__string'
+        PackagingGroupId:
+          description: The ID of the PackagingGroup for the Asset.
+          $ref: '#/components/schemas/__string'
+        ResourceId:
+          description: The resource ID to include in SPEKE key requests.
+          $ref: '#/components/schemas/__string'
+        SourceArn:
+          description: ARN of the source object in S3.
+          $ref: '#/components/schemas/__string'
+        SourceRoleArn:
+          description: The IAM role_arn used to access the source S3 bucket.
+          $ref: '#/components/schemas/__string'
+    UnprocessableEntityException: {}
+    InternalServerErrorException: {}
+    ForbiddenException: {}
+    NotFoundException: {}
+    ServiceUnavailableException: {}
+    TooManyRequestsException: {}
+    CreatePackagingConfigurationResponse:
+      type: object
+      properties:
+        Arn:
+          description: The ARN of the PackagingConfiguration.
+          $ref: '#/components/schemas/__string'
+        CmafPackage:
+          $ref: '#/components/schemas/CmafPackage'
+        DashPackage:
+          $ref: '#/components/schemas/DashPackage'
+        HlsPackage:
+          $ref: '#/components/schemas/HlsPackage'
+        Id:
+          description: The ID of the PackagingConfiguration.
+          $ref: '#/components/schemas/__string'
+        MssPackage:
+          $ref: '#/components/schemas/MssPackage'
+        PackagingGroupId:
+          description: The ID of a PackagingGroup.
+          $ref: '#/components/schemas/__string'
+    CmafEncryption:
+      required:
+        - SpekeKeyProvider
+      type: object
+      properties:
+        SpekeKeyProvider:
+          $ref: '#/components/schemas/SpekeKeyProvider'
+      description: A CMAF encryption configuration.
+    __listOfHlsManifest:
+      type: array
+      items:
+        $ref: '#/components/schemas/HlsManifest'
+    __integer:
+      type: integer
+    __listOfDashManifest:
+      type: array
+      items:
+        $ref: '#/components/schemas/DashManifest'
+    DashEncryption:
+      required:
+        - SpekeKeyProvider
+      type: object
+      properties:
+        SpekeKeyProvider:
+          $ref: '#/components/schemas/SpekeKeyProvider'
+      description: A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.
+    __listOf__PeriodTriggersElement:
+      type: array
+      items:
+        $ref: '#/components/schemas/__PeriodTriggersElement'
+    SegmentTemplateFormat:
+      enum:
+        - NUMBER_WITH_TIMELINE
+        - TIME_WITH_TIMELINE
+        - NUMBER_WITH_DURATION
+      type: string
+    HlsEncryption:
+      required:
+        - SpekeKeyProvider
+      type: object
+      properties:
+        ConstantInitializationVector:
+          description: |
+            A constant initialization vector for encryption (optional).
+            When not specified the initialization vector will be periodically rotated.
+          $ref: '#/components/schemas/__string'
+        EncryptionMethod:
+          description: The encryption method to use.
+          $ref: '#/components/schemas/EncryptionMethod'
+        SpekeKeyProvider:
+          $ref: '#/components/schemas/SpekeKeyProvider'
+      description: An HTTP Live Streaming (HLS) encryption configuration.
+    __boolean:
+      type: boolean
+    MssEncryption:
+      required:
+        - SpekeKeyProvider
+      type: object
+      properties:
+        SpekeKeyProvider:
+          $ref: '#/components/schemas/SpekeKeyProvider'
+      description: A Microsoft Smooth Streaming (MSS) encryption configuration.
+    __listOfMssManifest:
+      type: array
+      items:
+        $ref: '#/components/schemas/MssManifest'
+    CreatePackagingGroupResponse:
+      type: object
+      properties:
+        Arn:
+          description: The ARN of the PackagingGroup.
+          $ref: '#/components/schemas/__string'
+        DomainName:
+          description: The fully qualified domain name for Assets in the PackagingGroup.
+          $ref: '#/components/schemas/__string'
+        Id:
+          description: The ID of the PackagingGroup.
+          $ref: '#/components/schemas/__string'
+    DeleteAssetResponse:
+      type: object
+      properties: {}
+    DeletePackagingConfigurationResponse:
+      type: object
+      properties: {}
+    DeletePackagingGroupResponse:
+      type: object
+      properties: {}
+    DescribeAssetResponse:
+      type: object
+      properties:
+        Arn:
+          description: The ARN of the Asset.
+          $ref: '#/components/schemas/__string'
+        CreatedAt:
+          description: The time the Asset was initially submitted for Ingest.
+          $ref: '#/components/schemas/__string'
+        EgressEndpoints:
+          description: The list of egress endpoints available for the Asset.
+          $ref: '#/components/schemas/__listOfEgressEndpoint'
+        Id:
+          description: The unique identifier for the Asset.
+          $ref: '#/components/schemas/__string'
+        PackagingGroupId:
+          description: The ID of the PackagingGroup for the Asset.
+          $ref: '#/components/schemas/__string'
+        ResourceId:
+          description: The resource ID to include in SPEKE key requests.
+          $ref: '#/components/schemas/__string'
+        SourceArn:
+          description: ARN of the source object in S3.
+          $ref: '#/components/schemas/__string'
+        SourceRoleArn:
+          description: The IAM role_arn used to access the source S3 bucket.
+          $ref: '#/components/schemas/__string'
+    DescribePackagingConfigurationResponse:
+      type: object
+      properties:
+        Arn:
+          description: The ARN of the PackagingConfiguration.
+          $ref: '#/components/schemas/__string'
+        CmafPackage:
+          $ref: '#/components/schemas/CmafPackage'
+        DashPackage:
+          $ref: '#/components/schemas/DashPackage'
+        HlsPackage:
+          $ref: '#/components/schemas/HlsPackage'
+        Id:
+          description: The ID of the PackagingConfiguration.
+          $ref: '#/components/schemas/__string'
+        MssPackage:
+          $ref: '#/components/schemas/MssPackage'
+        PackagingGroupId:
+          description: The ID of a PackagingGroup.
+          $ref: '#/components/schemas/__string'
+    DescribePackagingGroupResponse:
+      type: object
+      properties:
+        Arn:
+          description: The ARN of the PackagingGroup.
+          $ref: '#/components/schemas/__string'
+        DomainName:
+          description: The fully qualified domain name for Assets in the PackagingGroup.
+          $ref: '#/components/schemas/__string'
+        Id:
+          description: The ID of the PackagingGroup.
+          $ref: '#/components/schemas/__string'
+    ListAssetsResponse:
+      type: object
+      properties:
+        Assets:
+          description: A list of MediaPackage VOD Asset resources.
+          $ref: '#/components/schemas/__listOfAssetShallow'
+        NextToken:
+          description: A token that can be used to resume pagination from the end of the collection.
+          $ref: '#/components/schemas/__string'
+    ListPackagingConfigurationsResponse:
+      type: object
+      properties:
+        NextToken:
+          description: A token that can be used to resume pagination from the end of the collection.
+          $ref: '#/components/schemas/__string'
+        PackagingConfigurations:
+          description: A list of MediaPackage VOD PackagingConfiguration resources.
+          $ref: '#/components/schemas/__listOfPackagingConfiguration'
+    ListPackagingGroupsResponse:
+      type: object
+      properties:
+        NextToken:
+          description: A token that can be used to resume pagination from the end of the collection.
+          $ref: '#/components/schemas/__string'
+        PackagingGroups:
+          description: A list of MediaPackage VOD PackagingGroup resources.
+          $ref: '#/components/schemas/__listOfPackagingGroup'
+    AdMarkers:
+      enum:
+        - NONE
+        - SCTE35_ENHANCED
+        - PASSTHROUGH
+      type: string
+    __string:
+      type: string
+    AssetShallow:
+      type: object
+      properties:
+        Arn:
+          description: The ARN of the Asset.
+          $ref: '#/components/schemas/__string'
+        CreatedAt:
+          description: The time the Asset was initially submitted for Ingest.
+          $ref: '#/components/schemas/__string'
+        Id:
+          description: The unique identifier for the Asset.
+          $ref: '#/components/schemas/__string'
+        PackagingGroupId:
+          description: The ID of the PackagingGroup for the Asset.
+          $ref: '#/components/schemas/__string'
+        ResourceId:
+          description: The resource ID to include in SPEKE key requests.
+          $ref: '#/components/schemas/__string'
+        SourceArn:
+          description: ARN of the source object in S3.
+          $ref: '#/components/schemas/__string'
+        SourceRoleArn:
+          description: The IAM role ARN used to access the source S3 bucket.
+          $ref: '#/components/schemas/__string'
+      description: A MediaPackage VOD Asset resource.
+    SpekeKeyProvider:
+      required:
+        - SystemIds
+        - Url
+        - RoleArn
+      type: object
+      properties:
+        RoleArn:
+          description: |
+            An Amazon Resource Name (ARN) of an IAM role that AWS Elemental
+            MediaPackage will assume when accessing the key provider service.
+          $ref: '#/components/schemas/__string'
+        SystemIds:
+          description: The system IDs to include in key requests.
+          $ref: '#/components/schemas/__listOf__string'
+        Url:
+          description: The URL of the external key provider service.
+          $ref: '#/components/schemas/__string'
+      description: A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
+    CmafPackage:
+      required:
+        - HlsManifests
+      type: object
+      properties:
+        Encryption:
+          $ref: '#/components/schemas/CmafEncryption'
+        HlsManifests:
+          description: A list of HLS manifest configurations.
+          $ref: '#/components/schemas/__listOfHlsManifest'
+        SegmentDurationSeconds:
+          description: |
+            Duration (in seconds) of each fragment. Actual fragments will be
+            rounded to the nearest multiple of the source fragment duration.
+          $ref: '#/components/schemas/__integer'
+      description: A CMAF packaging configuration.
+    CreateAssetRequest:
+      required:
+        - SourceArn
+        - Id
+        - PackagingGroupId
+        - SourceRoleArn
+      type: object
+      title: CreateAssetRequest
+      properties:
+        Id:
+          description: The unique identifier for the Asset.
+          $ref: '#/components/schemas/__string'
+        PackagingGroupId:
+          description: The ID of the PackagingGroup for the Asset.
+          $ref: '#/components/schemas/__string'
+        ResourceId:
+          description: The resource ID to include in SPEKE key requests.
+          $ref: '#/components/schemas/__string'
+        SourceArn:
+          description: ARN of the source object in S3.
+          $ref: '#/components/schemas/__string'
+        SourceRoleArn:
+          description: The IAM role ARN used to access the source S3 bucket.
+          $ref: '#/components/schemas/__string'
+      description: A new MediaPackage VOD Asset configuration.
+    __listOfEgressEndpoint:
+      type: array
+      items:
+        $ref: '#/components/schemas/EgressEndpoint'
+    DashPackage:
+      required:
+        - DashManifests
+      type: object
+      properties:
+        DashManifests:
+          description: A list of DASH manifest configurations.
+          $ref: '#/components/schemas/__listOfDashManifest'
+        Encryption:
+          $ref: '#/components/schemas/DashEncryption'
+        PeriodTriggers:
+          description: |
+            A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH)
+            Media Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not
+            be partitioned into more than one period. If the list contains "ADS", new periods will be created where
+            the Asset contains SCTE-35 ad markers.
+          $ref: '#/components/schemas/__listOf__PeriodTriggersElement'
+        SegmentDurationSeconds:
+          description: |
+            Duration (in seconds) of each segment. Actual segments will be
+            rounded to the nearest multiple of the source segment duration.
+          $ref: '#/components/schemas/__integer'
+        SegmentTemplateFormat:
+          description: 'Determines the type of SegmentTemplate included in the Media Presentation Description (MPD).  When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs.  When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is included in each SegmentTemplate, with $Number$ media URLs.'
+          $ref: '#/components/schemas/SegmentTemplateFormat'
+      description: A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
+    HlsPackage:
+      required:
+        - HlsManifests
+      type: object
+      properties:
+        Encryption:
+          $ref: '#/components/schemas/HlsEncryption'
+        HlsManifests:
+          description: A list of HLS manifest configurations.
+          $ref: '#/components/schemas/__listOfHlsManifest'
+        SegmentDurationSeconds:
+          description: |
+            Duration (in seconds) of each fragment. Actual fragments will be
+            rounded to the nearest multiple of the source fragment duration.
+          $ref: '#/components/schemas/__integer'
+        UseAudioRenditionGroup:
+          description: 'When enabled, audio streams will be placed in rendition groups in the output.'
+          $ref: '#/components/schemas/__boolean'
+      description: An HTTP Live Streaming (HLS) packaging configuration.
+    MssPackage:
+      required:
+        - MssManifests
+      type: object
+      properties:
+        Encryption:
+          $ref: '#/components/schemas/MssEncryption'
+        MssManifests:
+          description: A list of MSS manifest configurations.
+          $ref: '#/components/schemas/__listOfMssManifest'
+        SegmentDurationSeconds:
+          description: The duration (in seconds) of each segment.
+          $ref: '#/components/schemas/__integer'
+      description: A Microsoft Smooth Streaming (MSS) PackagingConfiguration.
+    CreatePackagingConfigurationRequest:
+      required:
+        - Id
+        - PackagingGroupId
+      type: object
+      title: CreatePackagingConfigurationRequest
+      properties:
+        CmafPackage:
+          $ref: '#/components/schemas/CmafPackage'
+        DashPackage:
+          $ref: '#/components/schemas/DashPackage'
+        HlsPackage:
+          $ref: '#/components/schemas/HlsPackage'
+        Id:
+          description: The ID of the PackagingConfiguration.
+          $ref: '#/components/schemas/__string'
+        MssPackage:
+          $ref: '#/components/schemas/MssPackage'
+        PackagingGroupId:
+          description: The ID of a PackagingGroup.
+          $ref: '#/components/schemas/__string'
+      description: A new MediaPackage VOD PackagingConfiguration resource configuration.
+    CreatePackagingGroupRequest:
+      required:
+        - Id
+      type: object
+      title: CreatePackagingGroupRequest
+      properties:
+        Id:
+          description: The ID of the PackagingGroup.
+          $ref: '#/components/schemas/__string'
+      description: A new MediaPackage VOD PackagingGroup resource configuration.
+    ManifestLayout:
+      enum:
+        - FULL
+        - COMPACT
+      type: string
+    Profile:
+      enum:
+        - NONE
+        - HBBTV_1_5
+      type: string
+    StreamSelection:
+      type: object
+      properties:
+        MaxVideoBitsPerSecond:
+          description: The maximum video bitrate (bps) to include in output.
+          $ref: '#/components/schemas/__integer'
+        MinVideoBitsPerSecond:
+          description: The minimum video bitrate (bps) to include in output.
+          $ref: '#/components/schemas/__integer'
+        StreamOrder:
+          description: A directive that determines the order of streams in the output.
+          $ref: '#/components/schemas/StreamOrder'
+      description: A StreamSelection configuration.
+    DashManifest:
+      type: object
+      properties:
+        ManifestLayout:
+          description: 'Determines the position of some tags in the Media Presentation Description (MPD).  When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation.  When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.'
+          $ref: '#/components/schemas/ManifestLayout'
+        ManifestName:
+          description: An optional string to include in the name of the manifest.
+          $ref: '#/components/schemas/__string'
+        MinBufferTimeSeconds:
+          description: Minimum duration (in seconds) that a player will buffer media before starting the presentation.
+          $ref: '#/components/schemas/__integer'
+        Profile:
+          description: 'The Dynamic Adaptive Streaming over HTTP (DASH) profile type.  When set to "HBBTV_1_5", HbbTV 1.5 compliant output is enabled.'
+          $ref: '#/components/schemas/Profile'
+        StreamSelection:
+          $ref: '#/components/schemas/StreamSelection'
+      description: A DASH manifest configuration.
+    DeleteAssetRequest:
+      type: object
+      title: DeleteAssetRequest
+      properties: {}
+    DeletePackagingConfigurationRequest:
+      type: object
+      title: DeletePackagingConfigurationRequest
+      properties: {}
+    DeletePackagingGroupRequest:
+      type: object
+      title: DeletePackagingGroupRequest
+      properties: {}
+    DescribeAssetRequest:
+      type: object
+      title: DescribeAssetRequest
+      properties: {}
+    DescribePackagingConfigurationRequest:
+      type: object
+      title: DescribePackagingConfigurationRequest
+      properties: {}
+    DescribePackagingGroupRequest:
+      type: object
+      title: DescribePackagingGroupRequest
+      properties: {}
+    EgressEndpoint:
+      type: object
+      properties:
+        PackagingConfigurationId:
+          description: The ID of the PackagingConfiguration being applied to the Asset.
+          $ref: '#/components/schemas/__string'
+        Url:
+          description: The URL of the parent manifest for the repackaged Asset.
+          $ref: '#/components/schemas/__string'
+      description: The endpoint URL used to access an Asset using one PackagingConfiguration.
+    EncryptionMethod:
+      enum:
+        - AES_128
+        - SAMPLE_AES
+      type: string
+    HlsManifest:
+      type: object
+      properties:
+        AdMarkers:
+          description: |
+            This setting controls how ad markers are included in the packaged OriginEndpoint.
+            "NONE" will omit all SCTE-35 ad markers from the output.
+            "PASSTHROUGH" causes the manifest to contain a copy of the SCTE-35 ad
+            markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest.
+            "SCTE35_ENHANCED" generates ad markers and blackout tags based on SCTE-35
+            messages in the input source.
+          $ref: '#/components/schemas/AdMarkers'
+        IncludeIframeOnlyStream:
+          description: 'When enabled, an I-Frame only stream will be included in the output.'
+          $ref: '#/components/schemas/__boolean'
+        ManifestName:
+          description: An optional string to include in the name of the manifest.
+          $ref: '#/components/schemas/__string'
+        ProgramDateTimeIntervalSeconds:
+          description: |
+            The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag
+            inserted into manifests. Additionally, when an interval is specified
+            ID3Timed Metadata messages will be generated every 5 seconds using the
+            ingest time of the content.
+            If the interval is not specified, or set to 0, then
+            no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no
+            ID3Timed Metadata messages will be generated. Note that irrespective
+            of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input,
+            it will be passed through to HLS output.
+          $ref: '#/components/schemas/__integer'
+        RepeatExtXKey:
+          description: 'When enabled, the EXT-X-KEY tag will be repeated in output manifests.'
+          $ref: '#/components/schemas/__boolean'
+        StreamSelection:
+          $ref: '#/components/schemas/StreamSelection'
+      description: An HTTP Live Streaming (HLS) manifest configuration.
+    MaxResults:
+      type: integer
+      minimum: 1
+      maximum: 1000
+    ListAssetsRequest:
+      type: object
+      title: ListAssetsRequest
+      properties: {}
+    __listOfAssetShallow:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssetShallow'
+    ListPackagingConfigurationsRequest:
+      type: object
+      title: ListPackagingConfigurationsRequest
+      properties: {}
+    __listOfPackagingConfiguration:
+      type: array
+      items:
+        $ref: '#/components/schemas/PackagingConfiguration'
+    ListPackagingGroupsRequest:
+      type: object
+      title: ListPackagingGroupsRequest
+      properties: {}
+    __listOfPackagingGroup:
+      type: array
+      items:
+        $ref: '#/components/schemas/PackagingGroup'
+    MssManifest:
+      type: object
+      properties:
+        ManifestName:
+          description: An optional string to include in the name of the manifest.
+          $ref: '#/components/schemas/__string'
+        StreamSelection:
+          $ref: '#/components/schemas/StreamSelection'
+      description: A Microsoft Smooth Streaming (MSS) manifest configuration.
+    PackagingConfiguration:
+      type: object
+      properties:
+        Arn:
+          description: The ARN of the PackagingConfiguration.
+          $ref: '#/components/schemas/__string'
+        CmafPackage:
+          $ref: '#/components/schemas/CmafPackage'
+        DashPackage:
+          $ref: '#/components/schemas/DashPackage'
+        HlsPackage:
+          $ref: '#/components/schemas/HlsPackage'
+        Id:
+          description: The ID of the PackagingConfiguration.
+          $ref: '#/components/schemas/__string'
+        MssPackage:
+          $ref: '#/components/schemas/MssPackage'
+        PackagingGroupId:
+          description: The ID of a PackagingGroup.
+          $ref: '#/components/schemas/__string'
+      description: A MediaPackage VOD PackagingConfiguration resource.
+    PackagingGroup:
+      type: object
+      properties:
+        Arn:
+          description: The ARN of the PackagingGroup.
+          $ref: '#/components/schemas/__string'
+        DomainName:
+          description: The fully qualified domain name for Assets in the PackagingGroup.
+          $ref: '#/components/schemas/__string'
+        Id:
+          description: The ID of the PackagingGroup.
+          $ref: '#/components/schemas/__string'
+      description: A MediaPackage VOD PackagingGroup resource.
+    __listOf__string:
+      type: array
+      items:
+        $ref: '#/components/schemas/__string'
+    StreamOrder:
+      enum:
+        - ORIGINAL
+        - VIDEO_BITRATE_ASCENDING
+        - VIDEO_BITRATE_DESCENDING
+      type: string
+    __PeriodTriggersElement:
+      enum:
+        - ADS
+      type: string
+security:
+  - hmac: []

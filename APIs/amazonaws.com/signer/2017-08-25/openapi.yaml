@@ -1,0 +1,1451 @@
+openapi: 3.0.0
+info:
+  version: '2017-08-25'
+  x-release: v4
+  title: AWS Signer
+  description: 'With code signing for IoT, you can sign code that you create for any IoT device that is supported by Amazon Web Services (AWS). Code signing is available through <a href="http://docs.aws.amazon.com/freertos/latest/userguide/">Amazon FreeRTOS</a> and <a href="http://docs.aws.amazon.com/iot/latest/developerguide/">AWS IoT Device Management</a>, and integrated with <a href="http://docs.aws.amazon.com/acm/latest/userguide/">AWS Certificate Manager (ACM)</a>. In order to sign code, you import a third-party code signing certificate with ACM that is used to sign updates in Amazon FreeRTOS and AWS IoT Device Management. For general information about using code signing, see the <a href="http://docs.aws.amazon.com/signer/latest/developerguide/Welcome.html">Code Signing for IoT Developer Guide</a>.'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: signer
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/signer-2017-08-25.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/signer/'
+servers:
+  - url: 'http://signer.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The signer multi-region endpoint
+  - url: 'https://signer.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The signer multi-region endpoint
+  - url: 'http://signer.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The signer endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://signer.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The signer endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  '/signing-profiles/{profileName}':
+    delete:
+      operationId: CancelSigningProfile
+      description: 'Changes the state of an <code>ACTIVE</code> signing profile to <code>CANCELED</code>. A canceled profile is still viewable with the <code>ListSigningProfiles</code> operation, but it cannot perform new signing jobs, and is deleted two years after cancelation.'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+      parameters:
+        - name: profileName
+          in: path
+          required: true
+          description: The name of the signing profile to be canceled.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_]{2,}'
+            minLength: 2
+            maxLength: 20
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetSigningProfile
+      description: Returns information on a specific signing profile.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSigningProfileResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+      parameters:
+        - name: profileName
+          in: path
+          required: true
+          description: The name of the target signing profile.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_]{2,}'
+            minLength: 2
+            maxLength: 20
+    put:
+      operationId: PutSigningProfile
+      description: 'Creates a signing profile. A signing profile is a code signing template that can be used to carry out a pre-defined signing job. For more information, see <a href="http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html">http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html</a> '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutSigningProfileResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+      parameters:
+        - name: profileName
+          in: path
+          required: true
+          description: The name of the signing profile to be created.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_]{2,}'
+            minLength: 2
+            maxLength: 20
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - signingMaterial
+                - platformId
+              properties:
+                signingMaterial:
+                  description: The ACM certificate that is used to sign your code.
+                  type: object
+                  properties:
+                    certificateArn:
+                      $ref: '#/components/schemas/CertificateArn'
+                      description: The Amazon Resource Name (ARN) of the certificates that is used to sign your code.
+                platformId:
+                  description: The ID of the signing profile to be created.
+                  type: string
+                overrides:
+                  description: Any overrides that are applied to the signing configuration of a code signing platform.
+                  type: object
+                  properties:
+                    signingConfiguration:
+                      $ref: '#/components/schemas/SigningConfigurationOverrides'
+                      description: A signing configuration that overrides the default encryption or hash algorithm of a signing job.
+                signingParameters:
+                  description: Map of key-value pairs for signing. These can include any information that you want to use during signing.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/SigningParameterValue'
+                tags:
+                  description: Tags to be associated with the signing profile being created.
+                  type: object
+                  minProperties: 1
+                  maxProperties: 200
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+  '/signing-jobs/{jobId}':
+    get:
+      operationId: DescribeSigningJob
+      description: 'Returns information about a specific code signing job. You specify the job by using the <code>jobId</code> value that is returned by the <a>StartSigningJob</a> operation. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeSigningJobResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          description: The ID of the signing job on input.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/signing-platforms/{platformId}':
+    get:
+      operationId: GetSigningPlatform
+      description: Returns information on a specific signing platform.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSigningPlatformResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+      parameters:
+        - name: platformId
+          in: path
+          required: true
+          description: The ID of the target signing platform.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /signing-jobs:
+    get:
+      operationId: ListSigningJobs
+      description: 'Lists all your signing jobs. You can use the <code>maxResults</code> parameter to limit the number of signing jobs that are returned in the response. If additional jobs remain to be listed, code signing returns a <code>nextToken</code> value. Use this value in subsequent calls to <code>ListSigningJobs</code> to fetch the remaining values. You can continue calling <code>ListSigningJobs</code> with your <code>maxResults</code> parameter and with new values that code signing returns in the <code>nextToken</code> parameter until all of your signing jobs have been returned. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSigningJobsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+      parameters:
+        - name: status
+          in: query
+          required: false
+          description: A status value with which to filter your results.
+          schema:
+            type: string
+            enum:
+              - InProgress
+              - Failed
+              - Succeeded
+        - name: platformId
+          in: query
+          required: false
+          description: The ID of microcontroller platform that you specified for the distribution of your code image.
+          schema:
+            type: string
+        - name: requestedBy
+          in: query
+          required: false
+          description: The IAM principal that requested the signing job.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: 'Specifies the maximum number of items to return in the response. Use this parameter when paginating results. If additional items exist beyond the number you specify, the <code>nextToken</code> element is set in the response. Use the <code>nextToken</code> value in a subsequent request to retrieve additional items. '
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 25
+        - name: nextToken
+          in: query
+          required: false
+          description: 'String for specifying the next set of paginated results to return. After you receive a response with truncated results, use this parameter in a subsequent request. Set it to the value of <code>nextToken</code> from the response that you just received.'
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: StartSigningJob
+      description: '<p>Initiates a signing job to be performed on the code provided. Signing jobs are viewable by the <code>ListSigningJobs</code> operation for two years after they are performed. Note the following requirements: </p> <ul> <li> <p> You must create an Amazon S3 source bucket. For more information, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html">Create a Bucket</a> in the <i>Amazon S3 Getting Started Guide</i>. </p> </li> <li> <p>Your S3 source bucket must be version enabled.</p> </li> <li> <p>You must create an S3 destination bucket. Code signing uses your S3 destination bucket to write your signed code.</p> </li> <li> <p>You specify the name of the source and destination buckets when calling the <code>StartSigningJob</code> operation.</p> </li> <li> <p>You must also specify a request token that identifies your request to code signing.</p> </li> </ul> <p>You can call the <a>DescribeSigningJob</a> and the <a>ListSigningJobs</a> actions after you call <code>StartSigningJob</code>.</p> <p>For a Java example that shows how to use this action, see <a href="http://docs.aws.amazon.com/acm/latest/userguide/">http://docs.aws.amazon.com/acm/latest/userguide/</a> </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartSigningJobResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - source
+                - destination
+                - clientRequestToken
+              properties:
+                source:
+                  description: An <code>S3Source</code> object that contains information about the S3 bucket where you saved your unsigned code.
+                  type: object
+                  properties:
+                    s3:
+                      $ref: '#/components/schemas/S3Source'
+                      description: The <code>S3Source</code> object.
+                destination:
+                  description: Points to an <code>S3Destination</code> object that contains information about your S3 bucket.
+                  type: object
+                  properties:
+                    s3:
+                      $ref: '#/components/schemas/S3Destination'
+                      description: The <code>S3Destination</code> object.
+                profileName:
+                  description: The name of the signing profile.
+                  type: string
+                  pattern: '^[a-zA-Z0-9_]{2,}'
+                  minLength: 2
+                  maxLength: 20
+                clientRequestToken:
+                  description: String that identifies the signing request. All calls after the first that use this token return the same response as the first call.
+                  type: string
+  /signing-platforms:
+    get:
+      operationId: ListSigningPlatforms
+      description: 'Lists all signing platforms available in code signing that match the request parameters. If additional jobs remain to be listed, code signing returns a <code>nextToken</code> value. Use this value in subsequent calls to <code>ListSigningJobs</code> to fetch the remaining values. You can continue calling <code>ListSigningJobs</code> with your <code>maxResults</code> parameter and with new values that code signing returns in the <code>nextToken</code> parameter until all of your signing jobs have been returned.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSigningPlatformsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+      parameters:
+        - name: category
+          in: query
+          required: false
+          description: The category type of a signing platform.
+          schema:
+            type: string
+        - name: partner
+          in: query
+          required: false
+          description: Any partner entities connected to a signing platform.
+          schema:
+            type: string
+        - name: target
+          in: query
+          required: false
+          description: The validation template that is used by the target signing platform.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to be returned by this operation.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 25
+        - name: nextToken
+          in: query
+          required: false
+          description: 'Value for specifying the next set of paginated results to return. After you receive a response with truncated results, use this parameter in a subsequent request. Set it to the value of <code>nextToken</code> from the response that you just received.'
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /signing-profiles:
+    get:
+      operationId: ListSigningProfiles
+      description: 'Lists all available signing profiles in your AWS account. Returns only profiles with an <code>ACTIVE</code> status unless the <code>includeCanceled</code> request field is set to <code>true</code>. If additional jobs remain to be listed, code signing returns a <code>nextToken</code> value. Use this value in subsequent calls to <code>ListSigningJobs</code> to fetch the remaining values. You can continue calling <code>ListSigningJobs</code> with your <code>maxResults</code> parameter and with new values that code signing returns in the <code>nextToken</code> parameter until all of your signing jobs have been returned.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSigningProfilesResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+      parameters:
+        - name: includeCanceled
+          in: query
+          required: false
+          description: Designates whether to include profiles with the status of <code>CANCELED</code>.
+          schema:
+            type: boolean
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of profiles to be returned.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 25
+        - name: nextToken
+          in: query
+          required: false
+          description: 'Value for specifying the next set of paginated results to return. After you receive a response with truncated results, use this parameter in a subsequent request. Set it to the value of <code>nextToken</code> from the response that you just received.'
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: Returns a list of the tags associated with a signing profile resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) for the signing profile.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: Adds one or more tags to a signing profile. Tags are labels that you can use to identify and organize your AWS resources. Each tag consists of a key and an optional value. You specify the signing profile using its Amazon Resource Name (ARN). You specify the tag by using a key-value pair.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: Amazon Resource Name (ARN) for the signing profile.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tags
+              properties:
+                tags:
+                  description: One or more tags to be associated with the signing profile.
+                  type: object
+                  minProperties: 1
+                  maxProperties: 200
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+  '/tags/{resourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Remove one or more tags from a signing profile. Specify a list of tag keys to remove the tags.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '480':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: Amazon Resource Name (ARN) for the signing profile .
+          schema:
+            type: string
+        - name: tagKeys
+          in: query
+          required: true
+          description: A list of tag keys to be removed from the signing profile .
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TagKey'
+            minItems: 1
+            maxItems: 200
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    ResourceNotFoundException: {}
+    AccessDeniedException: {}
+    ThrottlingException: {}
+    InternalServiceErrorException: {}
+    DescribeSigningJobResponse:
+      type: object
+      properties:
+        jobId:
+          $ref: '#/components/schemas/JobId'
+          description: The ID of the signing job on output.
+        source:
+          $ref: '#/components/schemas/Source'
+          description: The object that contains the name of your S3 bucket or your raw code.
+        signingMaterial:
+          $ref: '#/components/schemas/SigningMaterial'
+          description: Amazon Resource Name (ARN) of your code signing certificate.
+        platformId:
+          $ref: '#/components/schemas/PlatformId'
+          description: The microcontroller platform to which your signed code image will be distributed.
+        profileName:
+          $ref: '#/components/schemas/ProfileName'
+          description: The name of the profile that initiated the signing operation.
+        overrides:
+          $ref: '#/components/schemas/SigningPlatformOverrides'
+          description: A list of any overrides that were applied to the signing operation.
+        signingParameters:
+          $ref: '#/components/schemas/SigningParameters'
+          description: 'Map of user-assigned key-value pairs used during signing. These values contain any information that you specified for use in your signing job. '
+        createdAt:
+          $ref: '#/components/schemas/CreatedAt'
+          description: Date and time that the signing job was created.
+        completedAt:
+          $ref: '#/components/schemas/CompletedAt'
+          description: Date and time that the signing job was completed.
+        requestedBy:
+          $ref: '#/components/schemas/RequestedBy'
+          description: The IAM principal that requested the signing job.
+        status:
+          $ref: '#/components/schemas/SigningStatus'
+          description: Status of the signing job.
+        statusReason:
+          $ref: '#/components/schemas/StatusReason'
+          description: String value that contains the status reason.
+        signedObject:
+          $ref: '#/components/schemas/SignedObject'
+          description: Name of the S3 bucket where the signed code image is saved by code signing.
+    GetSigningPlatformResponse:
+      type: object
+      properties:
+        platformId:
+          $ref: '#/components/schemas/PlatformId'
+          description: The ID of the target signing platform.
+        displayName:
+          $ref: '#/components/schemas/DisplayName'
+          description: The display name of the target signing platform.
+        partner:
+          $ref: '#/components/schemas/String'
+          description: A list of partner entities that use the target signing platform.
+        target:
+          $ref: '#/components/schemas/String'
+          description: The validation template that is used by the target signing platform.
+        category:
+          $ref: '#/components/schemas/Category'
+          description: The category type of the target signing platform.
+        signingConfiguration:
+          $ref: '#/components/schemas/SigningConfiguration'
+          description: A list of configurations applied to the target platform at signing.
+        signingImageFormat:
+          $ref: '#/components/schemas/SigningImageFormat'
+          description: The format of the target platform's signing image.
+        maxSizeInMB:
+          $ref: '#/components/schemas/MaxSizeInMB'
+          description: The maximum size (in MB) of the payload that can be signed by the target platform.
+    GetSigningProfileResponse:
+      type: object
+      properties:
+        profileName:
+          $ref: '#/components/schemas/ProfileName'
+          description: The name of the target signing profile.
+        signingMaterial:
+          $ref: '#/components/schemas/SigningMaterial'
+          description: The ARN of the certificate that the target profile uses for signing operations.
+        platformId:
+          $ref: '#/components/schemas/PlatformId'
+          description: The ID of the platform that is used by the target signing profile.
+        overrides:
+          $ref: '#/components/schemas/SigningPlatformOverrides'
+          description: A list of overrides applied by the target signing profile for signing operations.
+        signingParameters:
+          $ref: '#/components/schemas/SigningParameters'
+          description: A map of key-value pairs for signing operations that is attached to the target signing profile.
+        status:
+          $ref: '#/components/schemas/SigningProfileStatus'
+          description: The status of the target signing profile.
+        arn:
+          $ref: '#/components/schemas/string'
+          description: The Amazon Resource Name (ARN) for the signing profile.
+        tags:
+          $ref: '#/components/schemas/TagMap'
+          description: A list of tags associated with the signing profile.
+    ListSigningJobsResponse:
+      type: object
+      properties:
+        jobs:
+          $ref: '#/components/schemas/SigningJobs'
+          description: A list of your signing jobs.
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: String for specifying the next set of paginated results.
+    ValidationException: {}
+    ListSigningPlatformsResponse:
+      type: object
+      properties:
+        platforms:
+          $ref: '#/components/schemas/SigningPlatforms'
+          description: A list of all platforms that match the request parameters.
+        nextToken:
+          $ref: '#/components/schemas/String'
+          description: Value for specifying the next set of paginated results to return.
+    ListSigningProfilesResponse:
+      type: object
+      properties:
+        profiles:
+          $ref: '#/components/schemas/SigningProfiles'
+          description: A list of profiles that are available in the AWS account. This includes profiles with the status of <code>CANCELED</code> if the <code>includeCanceled</code> parameter is set to <code>true</code>.
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: Value for specifying the next set of paginated results to return.
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        tags:
+          $ref: '#/components/schemas/TagMap'
+          description: A list of tags associated with the signing profile.
+    BadRequestException: {}
+    NotFoundException: {}
+    PutSigningProfileResponse:
+      type: object
+      properties:
+        arn:
+          $ref: '#/components/schemas/string'
+          description: The Amazon Resource Name (ARN) of the signing profile created.
+    CertificateArn:
+      type: string
+    SigningConfigurationOverrides:
+      type: object
+      properties:
+        encryptionAlgorithm:
+          $ref: '#/components/schemas/EncryptionAlgorithm'
+          description: A specified override of the default encryption algorithm that is used in a code signing job.
+        hashAlgorithm:
+          $ref: '#/components/schemas/HashAlgorithm'
+          description: A specified override of the default hash algorithm that is used in a code signing job.
+      description: A signing configuration that overrides the default encryption or hash algorithm of a signing job.
+    SigningParameterValue:
+      type: string
+    TagValue:
+      type: string
+      maxLength: 256
+    StartSigningJobResponse:
+      type: object
+      properties:
+        jobId:
+          $ref: '#/components/schemas/JobId'
+          description: The ID of your signing job.
+    S3Source:
+      type: object
+      required:
+        - bucketName
+        - key
+        - version
+      properties:
+        bucketName:
+          $ref: '#/components/schemas/BucketName'
+          description: Name of the S3 bucket.
+        key:
+          $ref: '#/components/schemas/Key'
+          description: Key name of the bucket object that contains your unsigned code.
+        version:
+          $ref: '#/components/schemas/Version'
+          description: Version of your source image in your version enabled S3 bucket.
+      description: Information about the S3 bucket where you saved your unsigned code.
+    S3Destination:
+      type: object
+      properties:
+        bucketName:
+          $ref: '#/components/schemas/BucketName'
+          description: Name of the S3 bucket.
+        prefix:
+          $ref: '#/components/schemas/Prefix'
+          description: An Amazon S3 prefix that you can use to limit responses to those that begin with the specified prefix.
+      description: The name and prefix of the S3 bucket where code signing saves your signed objects.
+    TagResourceResponse:
+      type: object
+      properties: {}
+    UntagResourceResponse:
+      type: object
+      properties: {}
+    TagKey:
+      type: string
+      pattern: '^(?!aws:)[a-zA-Z+-=._:/]+$'
+      minLength: 1
+      maxLength: 128
+    key:
+      type: string
+    BucketName:
+      type: string
+    ProfileName:
+      type: string
+      pattern: '^[a-zA-Z0-9_]{2,}'
+      minLength: 2
+      maxLength: 20
+    CancelSigningProfileRequest:
+      type: object
+      title: CancelSigningProfileRequest
+      properties: {}
+    Category:
+      type: string
+      enum:
+        - AWSIoT
+    ClientRequestToken:
+      type: string
+    CompletedAt:
+      type: string
+      format: date-time
+    CreatedAt:
+      type: string
+      format: date-time
+    JobId:
+      type: string
+    DescribeSigningJobRequest:
+      type: object
+      title: DescribeSigningJobRequest
+      properties: {}
+    Source:
+      type: object
+      properties:
+        s3:
+          $ref: '#/components/schemas/S3Source'
+          description: The <code>S3Source</code> object.
+      description: An <code>S3Source</code> object that contains information about the S3 bucket where you saved your unsigned code.
+    SigningMaterial:
+      type: object
+      required:
+        - certificateArn
+      properties:
+        certificateArn:
+          $ref: '#/components/schemas/CertificateArn'
+          description: The Amazon Resource Name (ARN) of the certificates that is used to sign your code.
+      description: The ACM certificate that is used to sign your code.
+    PlatformId:
+      type: string
+    SigningPlatformOverrides:
+      type: object
+      properties:
+        signingConfiguration:
+          $ref: '#/components/schemas/SigningConfigurationOverrides'
+          description: A signing configuration that overrides the default encryption or hash algorithm of a signing job.
+      description: Any overrides that are applied to the signing configuration of a code signing platform.
+    SigningParameters:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/SigningParameterValue'
+    RequestedBy:
+      type: string
+    SigningStatus:
+      type: string
+      enum:
+        - InProgress
+        - Failed
+        - Succeeded
+    StatusReason:
+      type: string
+    SignedObject:
+      type: object
+      properties:
+        s3:
+          $ref: '#/components/schemas/S3SignedObject'
+          description: The <code>S3SignedObject</code>.
+      description: Points to an <code>S3SignedObject</code> object that contains information about your signed code image.
+    Destination:
+      type: object
+      properties:
+        s3:
+          $ref: '#/components/schemas/S3Destination'
+          description: The <code>S3Destination</code> object.
+      description: Points to an <code>S3Destination</code> object that contains information about your S3 bucket.
+    DisplayName:
+      type: string
+    EncryptionAlgorithm:
+      type: string
+      enum:
+        - RSA
+        - ECDSA
+    EncryptionAlgorithms:
+      type: array
+      items:
+        $ref: '#/components/schemas/EncryptionAlgorithm'
+    EncryptionAlgorithmOptions:
+      type: object
+      required:
+        - allowedValues
+        - defaultValue
+      properties:
+        allowedValues:
+          $ref: '#/components/schemas/EncryptionAlgorithms'
+          description: The set of accepted encryption algorithms that are allowed in a code signing job.
+        defaultValue:
+          $ref: '#/components/schemas/EncryptionAlgorithm'
+          description: The default encryption algorithm that is used by a code signing job.
+      description: The encryption algorithm options that are available to a code signing job.
+    GetSigningPlatformRequest:
+      type: object
+      title: GetSigningPlatformRequest
+      properties: {}
+    String:
+      type: string
+    SigningConfiguration:
+      type: object
+      required:
+        - encryptionAlgorithmOptions
+        - hashAlgorithmOptions
+      properties:
+        encryptionAlgorithmOptions:
+          $ref: '#/components/schemas/EncryptionAlgorithmOptions'
+          description: The encryption algorithm options that are available for a code signing job.
+        hashAlgorithmOptions:
+          $ref: '#/components/schemas/HashAlgorithmOptions'
+          description: The hash algorithm options that are available for a a code signing job.
+      description: The configuration of a code signing operation.
+    SigningImageFormat:
+      type: object
+      required:
+        - supportedFormats
+        - defaultFormat
+      properties:
+        supportedFormats:
+          $ref: '#/components/schemas/ImageFormats'
+          description: The supported formats of a code signing signing image.
+        defaultFormat:
+          $ref: '#/components/schemas/ImageFormat'
+          description: The default format of a code signing signing image.
+      description: The image format of a code signing platform or profile.
+    MaxSizeInMB:
+      type: integer
+    GetSigningProfileRequest:
+      type: object
+      title: GetSigningProfileRequest
+      properties: {}
+    SigningProfileStatus:
+      type: string
+      enum:
+        - Active
+        - Canceled
+    string:
+      type: string
+    TagMap:
+      type: object
+      minProperties: 1
+      maxProperties: 200
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
+    HashAlgorithm:
+      type: string
+      enum:
+        - SHA1
+        - SHA256
+    HashAlgorithms:
+      type: array
+      items:
+        $ref: '#/components/schemas/HashAlgorithm'
+    HashAlgorithmOptions:
+      type: object
+      required:
+        - allowedValues
+        - defaultValue
+      properties:
+        allowedValues:
+          $ref: '#/components/schemas/HashAlgorithms'
+          description: The set of accepted hash algorithms allowed in a code signing job.
+        defaultValue:
+          $ref: '#/components/schemas/HashAlgorithm'
+          description: The default hash algorithm that is used in a code signing job.
+      description: The hash algorithms that are available to a code signing job.
+    ImageFormat:
+      type: string
+      enum:
+        - JSON
+    ImageFormats:
+      type: array
+      items:
+        $ref: '#/components/schemas/ImageFormat'
+    Key:
+      type: string
+    MaxResults:
+      type: integer
+      minimum: 1
+      maximum: 25
+    NextToken:
+      type: string
+    ListSigningJobsRequest:
+      type: object
+      title: ListSigningJobsRequest
+      properties: {}
+    SigningJobs:
+      type: array
+      items:
+        $ref: '#/components/schemas/SigningJob'
+    ListSigningPlatformsRequest:
+      type: object
+      title: ListSigningPlatformsRequest
+      properties: {}
+    SigningPlatforms:
+      type: array
+      items:
+        $ref: '#/components/schemas/SigningPlatform'
+    bool:
+      type: boolean
+    ListSigningProfilesRequest:
+      type: object
+      title: ListSigningProfilesRequest
+      properties: {}
+    SigningProfiles:
+      type: array
+      items:
+        $ref: '#/components/schemas/SigningProfile'
+    ListTagsForResourceRequest:
+      type: object
+      title: ListTagsForResourceRequest
+      properties: {}
+    Prefix:
+      type: string
+    PutSigningProfileRequest:
+      type: object
+      required:
+        - signingMaterial
+        - platformId
+      title: PutSigningProfileRequest
+      properties:
+        signingMaterial:
+          $ref: '#/components/schemas/SigningMaterial'
+          description: The AWS Certificate Manager certificate that will be used to sign code with the new signing profile.
+        platformId:
+          $ref: '#/components/schemas/PlatformId'
+          description: The ID of the signing profile to be created.
+        overrides:
+          $ref: '#/components/schemas/SigningPlatformOverrides'
+          description: A subfield of <code>platform</code>. This specifies any different configuration options that you want to apply to the chosen platform (such as a different <code>hash-algorithm</code> or <code>signing-algorithm</code>).
+        signingParameters:
+          $ref: '#/components/schemas/SigningParameters'
+          description: Map of key-value pairs for signing. These can include any information that you want to use during signing.
+        tags:
+          $ref: '#/components/schemas/TagMap'
+          description: Tags to be associated with the signing profile being created.
+    S3SignedObject:
+      type: object
+      properties:
+        bucketName:
+          $ref: '#/components/schemas/BucketName'
+          description: Name of the S3 bucket.
+        key:
+          $ref: '#/components/schemas/key'
+          description: Key name that uniquely identifies a signed code image in your bucket.
+      description: The S3 bucket name and key where code signing saved your signed code image.
+    Version:
+      type: string
+    SigningJob:
+      type: object
+      properties:
+        jobId:
+          $ref: '#/components/schemas/JobId'
+          description: The ID of the signing job.
+        source:
+          $ref: '#/components/schemas/Source'
+          description: A <code>Source</code> that contains information about a signing job's code image source.
+        signedObject:
+          $ref: '#/components/schemas/SignedObject'
+          description: A <code>SignedObject</code> structure that contains information about a signing job's signed code image.
+        signingMaterial:
+          $ref: '#/components/schemas/SigningMaterial'
+          description: A <code>SigningMaterial</code> object that contains the Amazon Resource Name (ARN) of the certificate used for the signing job.
+        createdAt:
+          $ref: '#/components/schemas/CreatedAt'
+          description: The date and time that the signing job was created.
+        status:
+          $ref: '#/components/schemas/SigningStatus'
+          description: The status of the signing job.
+      description: Contains information about a signing job.
+    SigningParameterKey:
+      type: string
+    SigningPlatform:
+      type: object
+      properties:
+        platformId:
+          $ref: '#/components/schemas/String'
+          description: The ID of a code signing; platform.
+        displayName:
+          $ref: '#/components/schemas/String'
+          description: The display name of a code signing platform.
+        partner:
+          $ref: '#/components/schemas/String'
+          description: Any partner entities linked to a code signing platform.
+        target:
+          $ref: '#/components/schemas/String'
+          description: The types of targets that can be signed by a code signing platform.
+        category:
+          $ref: '#/components/schemas/Category'
+          description: The category of a code signing platform.
+        signingConfiguration:
+          $ref: '#/components/schemas/SigningConfiguration'
+          description: The configuration of a code signing platform. This includes the designated hash algorithm and encryption algorithm of a signing platform.
+        signingImageFormat:
+          $ref: '#/components/schemas/SigningImageFormat'
+        maxSizeInMB:
+          $ref: '#/components/schemas/MaxSizeInMB'
+          description: The maximum size (in MB) of code that can be signed by a code signing platform.
+      description: Contains information about the signing configurations and parameters that is used to perform a code signing job.
+    SigningProfile:
+      type: object
+      properties:
+        profileName:
+          $ref: '#/components/schemas/ProfileName'
+          description: The name of the signing profile.
+        signingMaterial:
+          $ref: '#/components/schemas/SigningMaterial'
+          description: The ACM certificate that is available for use by a signing profile.
+        platformId:
+          $ref: '#/components/schemas/PlatformId'
+          description: The ID of a platform that is available for use by a signing profile.
+        signingParameters:
+          $ref: '#/components/schemas/SigningParameters'
+          description: The parameters that are available for use by a code signing user.
+        status:
+          $ref: '#/components/schemas/SigningProfileStatus'
+          description: The status of a code signing profile.
+        arn:
+          $ref: '#/components/schemas/string'
+          description: Amazon Resource Name (ARN) for the signing profile.
+        tags:
+          $ref: '#/components/schemas/TagMap'
+          description: A list of tags associated with the signing profile.
+      description: Contains information about the ACM certificates and code signing configuration parameters that can be used by a given code signing user.
+    StartSigningJobRequest:
+      type: object
+      required:
+        - source
+        - destination
+        - clientRequestToken
+      title: StartSigningJobRequest
+      properties:
+        source:
+          $ref: '#/components/schemas/Source'
+          description: The S3 bucket that contains the object to sign or a BLOB that contains your raw code.
+        destination:
+          $ref: '#/components/schemas/Destination'
+          description: The S3 bucket in which to save your signed object. The destination contains the name of your bucket and an optional prefix.
+        profileName:
+          $ref: '#/components/schemas/ProfileName'
+          description: The name of the signing profile.
+        clientRequestToken:
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: String that identifies the signing request. All calls after the first that use this token return the same response as the first call.
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 1
+      maxItems: 200
+    TagResourceRequest:
+      type: object
+      required:
+        - tags
+      title: TagResourceRequest
+      properties:
+        tags:
+          $ref: '#/components/schemas/TagMap'
+          description: One or more tags to be associated with the signing profile.
+    UntagResourceRequest:
+      type: object
+      title: UntagResourceRequest
+      properties: {}
+security:
+  - hmac: []
