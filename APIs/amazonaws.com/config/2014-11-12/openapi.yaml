@@ -621,6 +621,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RemediationInProgressException'
+        '482':
+          description: InsufficientPermissionsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsufficientPermissionsException'
       requestBody:
         required: true
         content:
@@ -3685,6 +3691,75 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=StarlingDoveService.SelectAggregateResourceConfig':
+    post:
+      operationId: SelectAggregateResourceConfig
+      description: '<p>Accepts a structured query language (SQL) SELECT command and an aggregator to query configuration state of AWS resources across multiple accounts and regions, performs the corresponding search, and returns resource configurations matching the properties.</p> <p>For more information about query components, see the <a href="https://docs.aws.amazon.com/config/latest/developerguide/query-components.html"> <b>Query Components</b> </a> section in the AWS Config Developer Guide.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SelectAggregateResourceConfigResponse'
+        '480':
+          description: InvalidExpressionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidExpressionException'
+        '481':
+          description: NoSuchConfigurationAggregatorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoSuchConfigurationAggregatorException'
+        '482':
+          description: InvalidLimitException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidLimitException'
+        '483':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SelectAggregateResourceConfigRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - StarlingDoveService.SelectAggregateResourceConfig
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=StarlingDoveService.SelectResourceConfig':
     post:
       operationId: SelectResourceConfig
@@ -4124,7 +4199,7 @@ components:
       title: DeleteConfigRuleRequest
       properties:
         ConfigRuleName:
-          $ref: '#/components/schemas/StringWithCharLimit64'
+          $ref: '#/components/schemas/ConfigRuleName'
           description: The name of the AWS Config rule that you want to delete.
       description: <p/>
     NoSuchConfigRuleException: {}
@@ -4236,6 +4311,7 @@ components:
           description: The type of a resource.
     NoSuchRemediationConfigurationException: {}
     RemediationInProgressException: {}
+    InsufficientPermissionsException: {}
     DeleteRemediationExceptionsResponse:
       type: object
       properties:
@@ -5339,7 +5415,6 @@ components:
           $ref: '#/components/schemas/TagsList'
           description: An array of tag object.
     MaxNumberOfConfigRulesExceededException: {}
-    InsufficientPermissionsException: {}
     PutConfigurationAggregatorResponse:
       type: object
       properties:
@@ -5599,6 +5674,39 @@ components:
           $ref: '#/components/schemas/RetentionPeriodInDays'
           description: '<p>Number of days AWS Config stores your historical information.</p> <note> <p>Currently, only applicable to the configuration item history.</p> </note>'
     MaxNumberOfRetentionConfigurationsExceededException: {}
+    SelectAggregateResourceConfigResponse:
+      type: object
+      properties:
+        Results:
+          $ref: '#/components/schemas/Results'
+          description: Returns the results for the SQL query.
+        QueryInfo:
+          $ref: '#/components/schemas/QueryInfo'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: 'The nextToken string returned in a previous request that you use to request the next page of results in a paginated response. '
+    SelectAggregateResourceConfigRequest:
+      type: object
+      required:
+        - Expression
+        - ConfigurationAggregatorName
+      title: SelectAggregateResourceConfigRequest
+      properties:
+        Expression:
+          $ref: '#/components/schemas/Expression'
+          description: 'The SQL query SELECT command. '
+        ConfigurationAggregatorName:
+          $ref: '#/components/schemas/ConfigurationAggregatorName'
+          description: The name of the configuration aggregator.
+        Limit:
+          $ref: '#/components/schemas/Limit'
+          description: 'The maximum number of query results returned on each page. '
+        MaxResults:
+          $ref: '#/components/schemas/Limit'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: 'The nextToken string returned in a previous request that you use to request the next page of results in a paginated response. '
+    InvalidExpressionException: {}
     SelectResourceConfigResponse:
       type: object
       properties:
@@ -5626,7 +5734,6 @@ components:
         NextToken:
           $ref: '#/components/schemas/NextToken'
           description: 'The <code>nextToken</code> string returned in a previous request that you use to request the next page of results in a paginated response. '
-    InvalidExpressionException: {}
     StartConfigRulesEvaluationResponse:
       type: object
       properties: {}
@@ -5895,6 +6002,7 @@ components:
         - 'AWS::EC2::VPCEndpointService'
         - 'AWS::EC2::FlowLog'
         - 'AWS::EC2::VPCPeeringConnection'
+        - 'AWS::Elasticsearch::Domain'
         - 'AWS::IAM::Group'
         - 'AWS::IAM::Policy'
         - 'AWS::IAM::Role'
@@ -5902,13 +6010,10 @@ components:
         - 'AWS::ElasticLoadBalancingV2::LoadBalancer'
         - 'AWS::ACM::Certificate'
         - 'AWS::RDS::DBInstance'
-        - 'AWS::RDS::DBParameterGroup'
-        - 'AWS::RDS::DBOptionGroup'
         - 'AWS::RDS::DBSubnetGroup'
         - 'AWS::RDS::DBSecurityGroup'
         - 'AWS::RDS::DBSnapshot'
         - 'AWS::RDS::DBCluster'
-        - 'AWS::RDS::DBClusterParameterGroup'
         - 'AWS::RDS::DBClusterSnapshot'
         - 'AWS::RDS::EventSubscription'
         - 'AWS::S3::Bucket'
@@ -5939,30 +6044,32 @@ components:
         - 'AWS::WAFRegional::WebACL'
         - 'AWS::CloudFront::Distribution'
         - 'AWS::CloudFront::StreamingDistribution'
-        - 'AWS::Lambda::Alias'
         - 'AWS::Lambda::Function'
         - 'AWS::ElasticBeanstalk::Application'
         - 'AWS::ElasticBeanstalk::ApplicationVersion'
         - 'AWS::ElasticBeanstalk::Environment'
-        - 'AWS::MobileHub::Project'
+        - 'AWS::WAFv2::WebACL'
+        - 'AWS::WAFv2::RuleGroup'
+        - 'AWS::WAFv2::IPSet'
+        - 'AWS::WAFv2::RegexPatternSet'
+        - 'AWS::WAFv2::ManagedRuleSet'
         - 'AWS::XRay::EncryptionConfig'
         - 'AWS::SSM::AssociationCompliance'
         - 'AWS::SSM::PatchCompliance'
         - 'AWS::Shield::Protection'
         - 'AWS::ShieldRegional::Protection'
         - 'AWS::Config::ResourceCompliance'
-        - 'AWS::LicenseManager::LicenseConfiguration'
-        - 'AWS::ApiGateway::DomainName'
-        - 'AWS::ApiGateway::Method'
         - 'AWS::ApiGateway::Stage'
         - 'AWS::ApiGateway::RestApi'
-        - 'AWS::ApiGatewayV2::DomainName'
         - 'AWS::ApiGatewayV2::Stage'
         - 'AWS::ApiGatewayV2::Api'
         - 'AWS::CodePipeline::Pipeline'
         - 'AWS::ServiceCatalog::CloudFormationProvisionedProduct'
         - 'AWS::ServiceCatalog::CloudFormationProduct'
         - 'AWS::ServiceCatalog::Portfolio'
+        - 'AWS::SQS::Queue'
+        - 'AWS::KMS::Key'
+        - 'AWS::QLDB::Ledger'
     ResourceName:
       type: string
     AggregateResourceIdentifier:
@@ -6061,7 +6168,7 @@ components:
     AmazonResourceName:
       type: string
       minLength: 1
-      maxLength: 256
+      maxLength: 1000
     Annotation:
       type: string
       minLength: 0
@@ -6346,13 +6453,13 @@ components:
         - Source
       properties:
         ConfigRuleName:
-          $ref: '#/components/schemas/StringWithCharLimit64'
+          $ref: '#/components/schemas/ConfigRuleName'
           description: The name that you assign to the AWS Config rule. The name is required if you are adding a new rule.
         ConfigRuleArn:
-          $ref: '#/components/schemas/String'
+          $ref: '#/components/schemas/StringWithCharLimit256'
           description: The Amazon Resource Name (ARN) of the AWS Config rule.
         ConfigRuleId:
-          $ref: '#/components/schemas/String'
+          $ref: '#/components/schemas/StringWithCharLimit64'
           description: The ID of the AWS Config rule.
         Description:
           $ref: '#/components/schemas/EmptiableStringWithCharLimit256'
@@ -6411,7 +6518,7 @@ components:
       type: object
       properties:
         ConfigRuleName:
-          $ref: '#/components/schemas/StringWithCharLimit64'
+          $ref: '#/components/schemas/ConfigRuleName'
           description: The name of the AWS Config rule.
         ConfigRuleArn:
           $ref: '#/components/schemas/String'
@@ -6434,6 +6541,8 @@ components:
         FirstActivatedTime:
           $ref: '#/components/schemas/Date'
           description: The time that you first activated the AWS Config rule.
+        LastDeactivatedTime:
+          $ref: '#/components/schemas/Date'
         LastErrorCode:
           $ref: '#/components/schemas/String'
           description: The error code that AWS Config returned when the rule last failed.
@@ -7170,7 +7279,7 @@ components:
       type: object
       properties:
         ConfigRuleName:
-          $ref: '#/components/schemas/StringWithCharLimit64'
+          $ref: '#/components/schemas/ConfigRuleName'
           description: The name of the AWS Config rule that was used in the evaluation.
         ResourceType:
           $ref: '#/components/schemas/StringWithCharLimit256'
@@ -7760,7 +7869,7 @@ components:
     ReevaluateConfigRuleNames:
       type: array
       items:
-        $ref: '#/components/schemas/StringWithCharLimit64'
+        $ref: '#/components/schemas/ConfigRuleName'
       minItems: 1
       maxItems: 25
     RelatedEvent:

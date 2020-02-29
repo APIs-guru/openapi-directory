@@ -317,6 +317,7 @@ paths:
                  <code>/metrics</code>.</p>
                  <p>If your route matches a request, you can distribute traffic to one or more target
                  virtual nodes with relative weighting.</p>
+                 <p>For more information about routes, see <a href="https://docs.aws.amazon.com//app-mesh/latest/userguide/routes.html">Routes</a>.</p>
       responses:
         '200':
           description: Success
@@ -415,10 +416,10 @@ paths:
                   properties:
                     grpcRoute:
                       $ref: '#/components/schemas/GrpcRoute'
-                      description: An object that represents the specification of a GRPC route.
+                      description: An object that represents the specification of a gRPC route.
                     http2Route:
                       $ref: '#/components/schemas/HttpRoute'
-                      description: An object that represents the specification of an HTTP2 route.
+                      description: An object that represents the specification of an HTTP/2 route.
                     httpRoute:
                       $ref: '#/components/schemas/HttpRoute'
                       description: An object that represents the specification of an HTTP route.
@@ -561,6 +562,7 @@ paths:
                        <code>APPMESH_VIRTUAL_NODE_NAME</code> with the
                        <code>APPMESH_VIRTUAL_NODE_CLUSTER</code> environment variable.</p>
                  </note>
+                 <p>For more information about virtual nodes, see <a href="https://docs.aws.amazon.com//app-mesh/latest/userguide/virtual_nodes.html">Virtual Nodes</a>.</p>
       responses:
         '200':
           description: Success
@@ -644,13 +646,16 @@ paths:
                   description: An object that represents the specification of a virtual node.
                   type: object
                   properties:
+                    backendDefaults:
+                      $ref: '#/components/schemas/BackendDefaults'
+                      description: A reference to an object that represents the defaults for backends.
                     backends:
                       $ref: '#/components/schemas/Backends'
                       description: The backends that the virtual node is expected to send outbound traffic to.
                     listeners:
                       $ref: '#/components/schemas/Listeners'
                       description: |-
-                        The listeners that the virtual node is expected to receive inbound traffic from.
+                        The listener that the virtual node is expected to receive inbound traffic from.
                                  You can specify one listener.
                     logging:
                       $ref: '#/components/schemas/Logging'
@@ -659,7 +664,8 @@ paths:
                       $ref: '#/components/schemas/ServiceDiscovery'
                       description: |-
                         The service discovery information for the virtual node. If your virtual node does not
-                                 expect ingress traffic, you can omit this parameter.
+                                 expect ingress traffic, you can omit this parameter. If you specify a <code>listener</code>,
+                                 then you must specify service discovery information.
                 tags:
                   description: |-
                     Optional metadata that you can apply to the virtual node to assist with categorization
@@ -775,6 +781,7 @@ paths:
                  <p>Virtual routers handle traffic for one or more virtual services within your mesh. After
                  you create your virtual router, create and associate routes for your virtual router that
                  direct incoming requests to different virtual nodes.</p>
+                 <p>For more information about virtual routers, see <a href="https://docs.aws.amazon.com//app-mesh/latest/userguide/virtual_routers.html">Virtual Routers</a>.</p>
       responses:
         '200':
           description: Success
@@ -978,6 +985,7 @@ paths:
                  service by its <code>virtualServiceName</code>, and those requests are routed to the
                  virtual node or virtual router that is specified as the provider for the virtual
                  service.</p>
+                 <p>For more information about virtual services, see <a href="https://docs.aws.amazon.com//app-mesh/latest/userguide/virtual_services.html">Virtual Services</a>.</p>
       responses:
         '200':
           description: Success
@@ -1637,10 +1645,10 @@ paths:
                   properties:
                     grpcRoute:
                       $ref: '#/components/schemas/GrpcRoute'
-                      description: An object that represents the specification of a GRPC route.
+                      description: An object that represents the specification of a gRPC route.
                     http2Route:
                       $ref: '#/components/schemas/HttpRoute'
-                      description: An object that represents the specification of an HTTP2 route.
+                      description: An object that represents the specification of an HTTP/2 route.
                     httpRoute:
                       $ref: '#/components/schemas/HttpRoute'
                       description: An object that represents the specification of an HTTP route.
@@ -1889,13 +1897,16 @@ paths:
                   description: An object that represents the specification of a virtual node.
                   type: object
                   properties:
+                    backendDefaults:
+                      $ref: '#/components/schemas/BackendDefaults'
+                      description: A reference to an object that represents the defaults for backends.
                     backends:
                       $ref: '#/components/schemas/Backends'
                       description: The backends that the virtual node is expected to send outbound traffic to.
                     listeners:
                       $ref: '#/components/schemas/Listeners'
                       description: |-
-                        The listeners that the virtual node is expected to receive inbound traffic from.
+                        The listener that the virtual node is expected to receive inbound traffic from.
                                  You can specify one listener.
                     logging:
                       $ref: '#/components/schemas/Logging'
@@ -1904,7 +1915,8 @@ paths:
                       $ref: '#/components/schemas/ServiceDiscovery'
                       description: |-
                         The service discovery information for the virtual node. If your virtual node does not
-                                 expect ingress traffic, you can omit this parameter.
+                                 expect ingress traffic, you can omit this parameter. If you specify a <code>listener</code>,
+                                 then you must specify service discovery information.
   '/v20190125/meshes/{meshName}/virtualRouters/{virtualRouterName}':
     delete:
       operationId: DeleteVirtualRouter
@@ -2758,7 +2770,7 @@ components:
         retryPolicy:
           $ref: '#/components/schemas/GrpcRetryPolicy'
           description: An object that represents a retry policy.
-      description: An object that represents a GRPC route type.
+      description: An object that represents a gRPC route type.
     HttpRoute:
       type: object
       required:
@@ -2774,7 +2786,7 @@ components:
         retryPolicy:
           $ref: '#/components/schemas/HttpRetryPolicy'
           description: An object that represents a retry policy.
-      description: An object that represents an HTTP or HTTP2 route type.
+      description: An object that represents an HTTP or HTTP/2 route type.
     RoutePriority:
       type: integer
       minimum: 0
@@ -2797,12 +2809,17 @@ components:
           $ref: '#/components/schemas/VirtualNodeData'
           description: The full description of your virtual node following the create call.
       description: ''
+    BackendDefaults:
+      type: object
+      properties:
+        clientPolicy:
+          $ref: '#/components/schemas/ClientPolicy'
+          description: A reference to an object that represents a client policy.
+      description: An object that represents the default properties for a backend.
     Backends:
       type: array
       items:
         $ref: '#/components/schemas/Backend'
-      minItems: 0
-      maxItems: 25
     Listeners:
       type: array
       items:
@@ -3125,135 +3142,12 @@ components:
         portMapping:
           $ref: '#/components/schemas/PortMapping'
       description: An object that represents a virtual router listener.
-    String:
-      type: string
-    ResourceName:
-      type: string
-      minLength: 1
-      maxLength: 255
-    VirtualNodeSpec:
-      type: object
-      properties:
-        backends:
-          $ref: '#/components/schemas/Backends'
-          description: The backends that the virtual node is expected to send outbound traffic to.
-        listeners:
-          $ref: '#/components/schemas/Listeners'
-          description: |-
-            The listeners that the virtual node is expected to receive inbound traffic from.
-                     You can specify one listener.
-        logging:
-          $ref: '#/components/schemas/Logging'
-          description: The inbound and outbound access logging information for the virtual node.
-        serviceDiscovery:
-          $ref: '#/components/schemas/ServiceDiscovery'
-          description: |-
-            The service discovery information for the virtual node. If your virtual node does not
-                     expect ingress traffic, you can omit this parameter.
-      description: An object that represents the specification of a virtual node.
-    UpdateVirtualNodeInput:
-      type: object
-      required:
-        - spec
-      title: UpdateVirtualNodeInput
-      properties:
-        clientToken:
-          $ref: '#/components/schemas/String'
-          description: |-
-            Unique, case-sensitive identifier that you provide to ensure the idempotency of the
-            request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
-        spec:
-          $ref: '#/components/schemas/VirtualNodeSpec'
-          description: The new virtual node specification to apply. This overwrites the existing data.
-      description: ''
-    DeleteMeshInput:
-      type: object
-      title: DeleteMeshInput
-      properties: {}
-      description: ''
-    TcpRetryPolicyEvent:
-      type: string
-      enum:
-        - connection-error
-    TcpRetryPolicyEvents:
-      type: array
-      items:
-        $ref: '#/components/schemas/TcpRetryPolicyEvent'
-      minItems: 1
-      maxItems: 1
-    VirtualServiceSpec:
-      type: object
-      properties:
-        provider:
-          $ref: '#/components/schemas/VirtualServiceProvider'
-          description: |-
-            The App Mesh object that is acting as the provider for a virtual service. You can specify
-                     a single virtual node or virtual router.
-      description: An object that represents the specification of a virtual service.
-    TagList:
-      type: array
-      items:
-        $ref: '#/components/schemas/TagRef'
-      minItems: 0
-      maxItems: 50
-    ServiceName:
-      type: string
-    CreateVirtualServiceInput:
-      type: object
-      required:
-        - spec
-        - virtualServiceName
-      title: CreateVirtualServiceInput
-      properties:
-        clientToken:
-          $ref: '#/components/schemas/String'
-          description: |-
-            Unique, case-sensitive identifier that you provide to ensure the idempotency of the
-            request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
-        spec:
-          $ref: '#/components/schemas/VirtualServiceSpec'
-          description: The virtual service specification to apply.
-        tags:
-          $ref: '#/components/schemas/TagList'
-          description: |-
-            Optional metadata that you can apply to the virtual service to assist with
-                     categorization and organization. Each tag consists of a key and an optional value, both of
-                     which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have
-                        a maximum length of 256 characters.
-        virtualServiceName:
-          $ref: '#/components/schemas/ServiceName'
-          description: The name to use for the virtual service.
-      description: ''
     VirtualRouterStatusCode:
       type: string
       enum:
         - ACTIVE
         - DELETED
         - INACTIVE
-    VirtualRouterSpec:
-      type: object
-      properties:
-        listeners:
-          $ref: '#/components/schemas/VirtualRouterListeners'
-          description: |-
-            The listeners that the virtual router is expected to receive inbound traffic from.
-                     You can specify one listener.
-      description: An object that represents the specification of a virtual router.
-    UpdateVirtualRouterInput:
-      type: object
-      required:
-        - spec
-      title: UpdateVirtualRouterInput
-      properties:
-        clientToken:
-          $ref: '#/components/schemas/String'
-          description: |-
-            Unique, case-sensitive identifier that you provide to ensure the idempotency of the
-            request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
-        spec:
-          $ref: '#/components/schemas/VirtualRouterSpec'
-          description: The new virtual router specification to apply. This overwrites the existing data.
-      description: ''
     TagKeyList:
       type: array
       items:
@@ -3285,6 +3179,12 @@ components:
           $ref: '#/components/schemas/DurationValue'
           description: A number of time units.
       description: An object that represents a duration of time.
+    TcpRetryPolicyEvents:
+      type: array
+      items:
+        $ref: '#/components/schemas/TcpRetryPolicyEvent'
+      minItems: 1
+      maxItems: 1
     GrpcRetryPolicy:
       type: object
       required:
@@ -3329,17 +3229,6 @@ components:
           $ref: '#/components/schemas/TcpRetryPolicyEvents'
           description: Specify a valid value.
       description: 'An object that represents a retry policy. Specify at least one value for at least one of the types of <code>RetryEvents</code>, a value for <code>maxRetries</code>, and a value for <code>perRetryTimeout</code>.'
-    TagsLimit:
-      type: integer
-      minimum: 1
-      maximum: 50
-    Arn:
-      type: string
-    ListTagsForResourceInput:
-      type: object
-      title: ListTagsForResourceInput
-      properties: {}
-      description: ''
     VirtualNodeData:
       type: object
       required:
@@ -3372,14 +3261,6 @@ components:
           $ref: '#/components/schemas/FileAccessLog'
           description: The file object to send virtual node access logs to.
       description: An object that represents the access logging information for a virtual node.
-    GrpcRetryPolicyEvent:
-      type: string
-      enum:
-        - cancelled
-        - deadline-exceeded
-        - internal
-        - resource-exhausted
-        - unavailable
     Long:
       type: integer
     VirtualRouterData:
@@ -3407,70 +3288,14 @@ components:
           $ref: '#/components/schemas/ResourceName'
           description: The name of the virtual router.
       description: An object that represents a virtual router returned by a describe operation.
-    MeshData:
-      type: object
-      required:
-        - meshName
-        - metadata
-        - spec
-        - status
-      properties:
-        meshName:
-          $ref: '#/components/schemas/ResourceName'
-          description: The name of the service mesh.
-        metadata:
-          $ref: '#/components/schemas/ResourceMetadata'
-          description: The associated metadata for the service mesh.
-        spec:
-          $ref: '#/components/schemas/MeshSpec'
-          description: The associated specification for the service mesh.
-        status:
-          $ref: '#/components/schemas/MeshStatus'
-          description: The status of the service mesh.
-      description: An object that represents a service mesh returned by a describe operation.
-    DeleteVirtualRouterInput:
-      type: object
-      title: DeleteVirtualRouterInput
-      properties: {}
-      description: ''
+    String:
+      type: string
     VirtualRouterList:
       type: array
       items:
         $ref: '#/components/schemas/VirtualRouterRef'
-    DescribeRouteInput:
-      type: object
-      title: DescribeRouteInput
-      properties: {}
-      description: ''
-    RouteData:
-      type: object
-      required:
-        - meshName
-        - metadata
-        - routeName
-        - spec
-        - status
-        - virtualRouterName
-      properties:
-        meshName:
-          $ref: '#/components/schemas/ResourceName'
-          description: The name of the service mesh that the route resides in.
-        metadata:
-          $ref: '#/components/schemas/ResourceMetadata'
-          description: The associated metadata for the route.
-        routeName:
-          $ref: '#/components/schemas/ResourceName'
-          description: The name of the route.
-        spec:
-          $ref: '#/components/schemas/RouteSpec'
-          description: The specifications of the route.
-        status:
-          $ref: '#/components/schemas/RouteStatus'
-          description: The status of the route.
-        virtualRouterName:
-          $ref: '#/components/schemas/ResourceName'
-          description: The virtual router that the route is associated with.
-      description: An object that represents a route returned by a describe operation.
+    Arn:
+      type: string
     Timestamp:
       type: string
       format: date-time
@@ -3501,6 +3326,926 @@ components:
             The version of the resource. Resources are created at version 1, and this version is
                      incremented each time that they're updated.
       description: An object that represents metadata for a resource.
+    RouteList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RouteRef'
+    ClientPolicy:
+      type: object
+      properties:
+        tls:
+          $ref: '#/components/schemas/ClientPolicyTls'
+          description: A reference to an object that represents a Transport Layer Security (TLS) client policy.
+      description: An object that represents a client policy.
+    ServiceName:
+      type: string
+    VirtualServiceBackend:
+      type: object
+      required:
+        - virtualServiceName
+      properties:
+        clientPolicy:
+          $ref: '#/components/schemas/ClientPolicy'
+          description: A reference to an object that represents the client policy for a backend.
+        virtualServiceName:
+          $ref: '#/components/schemas/ServiceName'
+          description: The name of the virtual service that is acting as a virtual node backend.
+      description: An object that represents a virtual service backend for a virtual node.
+    GrpcRouteMetadata:
+      type: object
+      required:
+        - name
+      properties:
+        invert:
+          $ref: '#/components/schemas/Boolean'
+          description: Specify <code>True</code> to match anything except the match criteria. The default value is <code>False</code>.
+        match:
+          $ref: '#/components/schemas/GrpcRouteMetadataMatchMethod'
+          description: An object that represents the data to match from the request.
+        name:
+          $ref: '#/components/schemas/HeaderName'
+          description: The name of the route.
+      description: An object that represents the match metadata for the route.
+    GrpcRouteMetadataList:
+      type: array
+      items:
+        $ref: '#/components/schemas/GrpcRouteMetadata'
+      minItems: 1
+      maxItems: 10
+    ListenerTlsMode:
+      type: string
+      enum:
+        - DISABLED
+        - PERMISSIVE
+        - STRICT
+    HealthCheckThreshold:
+      type: integer
+      minimum: 2
+      maximum: 10
+    HealthCheckIntervalMillis:
+      type: integer
+      minimum: 5000
+      maximum: 300000
+    PortNumber:
+      type: integer
+      minimum: 1
+      maximum: 65535
+    PortProtocol:
+      type: string
+      enum:
+        - grpc
+        - http
+        - http2
+        - tcp
+    HealthCheckTimeoutMillis:
+      type: integer
+      minimum: 2000
+      maximum: 60000
+    HealthCheckPolicy:
+      type: object
+      required:
+        - healthyThreshold
+        - intervalMillis
+        - protocol
+        - timeoutMillis
+        - unhealthyThreshold
+      properties:
+        healthyThreshold:
+          $ref: '#/components/schemas/HealthCheckThreshold'
+          description: |-
+            The number of consecutive successful health checks that must occur before declaring
+                     listener healthy.
+        intervalMillis:
+          $ref: '#/components/schemas/HealthCheckIntervalMillis'
+          description: The time period in milliseconds between each health check execution.
+        path:
+          $ref: '#/components/schemas/String'
+          description: |-
+            The destination path for the health check request. This value is only used if the specified 
+                     protocol is HTTP or HTTP/2. For any other protocol, this value is ignored.
+        port:
+          $ref: '#/components/schemas/PortNumber'
+          description: |-
+            The destination port for the health check request. This port must match the port defined
+                     in the <a>PortMapping</a> for the listener.
+        protocol:
+          $ref: '#/components/schemas/PortProtocol'
+          description: 'The protocol for the health check request. If you specify <code>grpc</code>, then your service must conform to the <a href="https://github.com/grpc/grpc/blob/master/doc/health-checking.md">GRPC Health Checking Protocol</a>.'
+        timeoutMillis:
+          $ref: '#/components/schemas/HealthCheckTimeoutMillis'
+          description: |-
+            The amount of time to wait when receiving a response from the health check, in
+                     milliseconds.
+        unhealthyThreshold:
+          $ref: '#/components/schemas/HealthCheckThreshold'
+          description: |-
+            The number of consecutive failed health checks that must occur before declaring a
+                     virtual node unhealthy. 
+      description: An object that represents the health check policy for a virtual node's listener.
+    EgressFilterType:
+      type: string
+      enum:
+        - ALLOW_ALL
+        - DROP_ALL
+    VirtualServiceRef:
+      type: object
+      required:
+        - arn
+        - meshName
+        - virtualServiceName
+      properties:
+        arn:
+          $ref: '#/components/schemas/Arn'
+          description: The full Amazon Resource Name (ARN) for the virtual service.
+        meshName:
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service mesh that the virtual service resides in.
+        virtualServiceName:
+          $ref: '#/components/schemas/ServiceName'
+          description: The name of the virtual service.
+      description: An object that represents a virtual service returned by a list operation.
+    VirtualServiceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/VirtualServiceRef'
+    ClientPolicyTls:
+      type: object
+      required:
+        - validation
+      properties:
+        enforce:
+          $ref: '#/components/schemas/Boolean'
+          description: 'Whether the policy is enforced. The default is <code>True</code>, if a value isn''t specified.'
+        ports:
+          $ref: '#/components/schemas/PortSet'
+          description: The range of ports that the policy is enforced for.
+        validation:
+          $ref: '#/components/schemas/TlsValidationContext'
+          description: A reference to an object that represents a TLS validation context.
+      description: An object that represents a Transport Layer Security (TLS) client policy.
+    Boolean:
+      type: boolean
+    HttpRetryPolicyEvent:
+      type: string
+      minLength: 1
+      maxLength: 25
+    VirtualServiceData:
+      type: object
+      required:
+        - meshName
+        - metadata
+        - spec
+        - status
+        - virtualServiceName
+      properties:
+        meshName:
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service mesh that the virtual service resides in.
+        metadata:
+          $ref: '#/components/schemas/ResourceMetadata'
+        spec:
+          $ref: '#/components/schemas/VirtualServiceSpec'
+          description: The specifications of the virtual service.
+        status:
+          $ref: '#/components/schemas/VirtualServiceStatus'
+          description: The current status of the virtual service.
+        virtualServiceName:
+          $ref: '#/components/schemas/ServiceName'
+          description: The name of the virtual service.
+      description: An object that represents a virtual service returned by a describe operation.
+    CertificateAuthorityArns:
+      type: array
+      items:
+        $ref: '#/components/schemas/Arn'
+      minItems: 1
+      maxItems: 3
+    AwsCloudMapName:
+      type: string
+      pattern: '((?=^.{1,127}$)^([a-zA-Z0-9_][a-zA-Z0-9-_]{0,61}[a-zA-Z0-9_]|[a-zA-Z0-9])(.([a-zA-Z0-9_][a-zA-Z0-9-_]{0,61}[a-zA-Z0-9_]|[a-zA-Z0-9]))*$)|(^.$)'
+      minLength: 1
+      maxLength: 1024
+    RouteData:
+      type: object
+      required:
+        - meshName
+        - metadata
+        - routeName
+        - spec
+        - status
+        - virtualRouterName
+      properties:
+        meshName:
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service mesh that the route resides in.
+        metadata:
+          $ref: '#/components/schemas/ResourceMetadata'
+          description: The associated metadata for the route.
+        routeName:
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the route.
+        spec:
+          $ref: '#/components/schemas/RouteSpec'
+          description: The specifications of the route.
+        status:
+          $ref: '#/components/schemas/RouteStatus'
+          description: The status of the route.
+        virtualRouterName:
+          $ref: '#/components/schemas/ResourceName'
+          description: The virtual router that the route is associated with.
+      description: An object that represents a route returned by a describe operation.
+    Hostname:
+      type: string
+    DnsServiceDiscovery:
+      type: object
+      required:
+        - hostname
+      properties:
+        hostname:
+          $ref: '#/components/schemas/Hostname'
+          description: 'Specifies the DNS service discovery hostname for the virtual node. '
+      description: |-
+        An object that represents the DNS service discovery information for your virtual
+                 node.
+    ResourceName:
+      type: string
+      minLength: 1
+      maxLength: 255
+    DeleteRouteInput:
+      type: object
+      title: DeleteRouteInput
+      properties: {}
+      description: ''
+    VirtualNodeSpec:
+      type: object
+      properties:
+        backendDefaults:
+          $ref: '#/components/schemas/BackendDefaults'
+          description: A reference to an object that represents the defaults for backends.
+        backends:
+          $ref: '#/components/schemas/Backends'
+          description: The backends that the virtual node is expected to send outbound traffic to.
+        listeners:
+          $ref: '#/components/schemas/Listeners'
+          description: |-
+            The listener that the virtual node is expected to receive inbound traffic from.
+                     You can specify one listener.
+        logging:
+          $ref: '#/components/schemas/Logging'
+          description: The inbound and outbound access logging information for the virtual node.
+        serviceDiscovery:
+          $ref: '#/components/schemas/ServiceDiscovery'
+          description: |-
+            The service discovery information for the virtual node. If your virtual node does not
+                     expect ingress traffic, you can omit this parameter. If you specify a <code>listener</code>,
+                     then you must specify service discovery information.
+      description: An object that represents the specification of a virtual node.
+    VirtualNodeStatus:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          $ref: '#/components/schemas/VirtualNodeStatusCode'
+          description: The current status of the virtual node.
+      description: An object that represents the current status of the virtual node.
+    TcpRetryPolicyEvent:
+      type: string
+      enum:
+        - connection-error
+    Backend:
+      type: object
+      properties:
+        virtualService:
+          $ref: '#/components/schemas/VirtualServiceBackend'
+          description: 'Specifies a virtual service to use as a backend for a virtual node. '
+      description: |-
+        An object that represents the backends that a virtual node is expected to send outbound
+                 traffic to. 
+    ListMeshesLimit:
+      type: integer
+      minimum: 1
+      maximum: 100
+    ListMeshesInput:
+      type: object
+      title: ListMeshesInput
+      properties: {}
+      description: ''
+    VirtualRouterSpec:
+      type: object
+      properties:
+        listeners:
+          $ref: '#/components/schemas/VirtualRouterListeners'
+          description: |-
+            The listeners that the virtual router is expected to receive inbound traffic from.
+                     You can specify one listener.
+      description: An object that represents the specification of a virtual router.
+    VirtualRouterStatus:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          $ref: '#/components/schemas/VirtualRouterStatusCode'
+          description: The current status of the virtual router.
+      description: 'An object that represents the status of a virtual router. '
+    MeshSpec:
+      type: object
+      properties:
+        egressFilter:
+          $ref: '#/components/schemas/EgressFilter'
+          description: The egress filter rules for the service mesh.
+      description: An object that represents the specification of a service mesh.
+    UpdateMeshInput:
+      type: object
+      title: UpdateMeshInput
+      properties:
+        clientToken:
+          $ref: '#/components/schemas/String'
+          description: |-
+            Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+            request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+        spec:
+          $ref: '#/components/schemas/MeshSpec'
+          description: The service mesh specification to apply.
+      description: ''
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagRef'
+      minItems: 0
+      maxItems: 50
+    CreateVirtualRouterInput:
+      type: object
+      required:
+        - spec
+        - virtualRouterName
+      title: CreateVirtualRouterInput
+      properties:
+        clientToken:
+          $ref: '#/components/schemas/String'
+          description: |-
+            Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+            request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+        spec:
+          $ref: '#/components/schemas/VirtualRouterSpec'
+          description: The virtual router specification to apply.
+        tags:
+          tags:
+            - not-preview
+          $ref: '#/components/schemas/TagList'
+          description: |-
+            Optional metadata that you can apply to the virtual router to assist with categorization
+                     and organization. Each tag consists of a key and an optional value, both of which you
+                     define. Tag keys can have a maximum character length of 128 characters, and tag values can have
+                        a maximum length of 256 characters.
+        virtualRouterName:
+          $ref: '#/components/schemas/ResourceName'
+          description: The name to use for the virtual router.
+      description: ''
+    MeshData:
+      type: object
+      required:
+        - meshName
+        - metadata
+        - spec
+        - status
+      properties:
+        meshName:
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service mesh.
+        metadata:
+          $ref: '#/components/schemas/ResourceMetadata'
+          description: The associated metadata for the service mesh.
+        spec:
+          $ref: '#/components/schemas/MeshSpec'
+          description: The associated specification for the service mesh.
+        status:
+          $ref: '#/components/schemas/MeshStatus'
+          description: The status of the service mesh.
+      description: An object that represents a service mesh returned by a describe operation.
+    VirtualServiceStatusCode:
+      type: string
+      enum:
+        - ACTIVE
+        - DELETED
+        - INACTIVE
+    VirtualServiceStatus:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          $ref: '#/components/schemas/VirtualServiceStatusCode'
+          description: The current status of the virtual service.
+      description: An object that represents the status of a virtual service.
+    ListenerTlsAcmCertificate:
+      type: object
+      required:
+        - certificateArn
+      properties:
+        certificateArn:
+          $ref: '#/components/schemas/Arn'
+          description: 'The Amazon Resource Name (ARN) for the certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href="https://docs.aws.amazon.com//app-mesh/latest/userguide/virtual-node-tls.html#virtual-node-tls-prerequisites">TLS Encryption</a>.'
+      description: An object that represents an AWS Certicate Manager (ACM) certificate.
+    ListenerTlsFileCertificate:
+      type: object
+      required:
+        - certificateChain
+        - privateKey
+      properties:
+        certificateChain:
+          $ref: '#/components/schemas/FilePath'
+          description: The certificate chain for the certificate.
+        privateKey:
+          $ref: '#/components/schemas/FilePath'
+          description: The private key for a certificate stored on the file system of the virtual node that the proxy is running on.
+      description: 'An object that represents a local file certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href="https://docs.aws.amazon.com//app-mesh/latest/userguide/virtual-node-tls.html#virtual-node-tls-prerequisites">TLS Encryption</a>.'
+    ListenerTlsCertificate:
+      type: object
+      properties:
+        acm:
+          $ref: '#/components/schemas/ListenerTlsAcmCertificate'
+          description: A reference to an object that represents an AWS Certicate Manager (ACM) certificate.
+        file:
+          $ref: '#/components/schemas/ListenerTlsFileCertificate'
+          description: A reference to an object that represents a local file certificate.
+      description: An object that represents a listener's Transport Layer Security (TLS) certificate.
+    AwsCloudMapInstanceAttributeKey:
+      type: string
+      pattern: '^[a-zA-Z0-9!-~]+$'
+      minLength: 1
+      maxLength: 255
+    MeshList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MeshRef'
+    PortSet:
+      type: array
+      items:
+        $ref: '#/components/schemas/PortNumber'
+    HttpMethod:
+      type: string
+      enum:
+        - CONNECT
+        - DELETE
+        - GET
+        - HEAD
+        - OPTIONS
+        - PATCH
+        - POST
+        - PUT
+        - TRACE
+    MeshRef:
+      type: object
+      required:
+        - arn
+        - meshName
+      properties:
+        arn:
+          $ref: '#/components/schemas/Arn'
+          description: The full Amazon Resource Name (ARN) of the service mesh.
+        meshName:
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service mesh.
+      description: An object that represents a service mesh returned by a list operation.
+    TlsValidationContextAcmTrust:
+      type: object
+      required:
+        - certificateAuthorityArns
+      properties:
+        certificateAuthorityArns:
+          $ref: '#/components/schemas/CertificateAuthorityArns'
+          description: One or more ACM Amazon Resource Name (ARN)s.
+      description: An object that represents a TLS validation context trust for an AWS Certicate Manager (ACM) certificate.
+    TlsValidationContextFileTrust:
+      type: object
+      required:
+        - certificateChain
+      properties:
+        certificateChain:
+          $ref: '#/components/schemas/FilePath'
+          description: The certificate trust chain for a certificate stored on the file system of the virtual node that the proxy is running on.
+      description: An object that represents a Transport Layer Security (TLS) validation context trust for a local file.
+    TlsValidationContextTrust:
+      type: object
+      properties:
+        acm:
+          $ref: '#/components/schemas/TlsValidationContextAcmTrust'
+          description: A reference to an object that represents a TLS validation context trust for an AWS Certicate Manager (ACM) certificate.
+        file:
+          $ref: '#/components/schemas/TlsValidationContextFileTrust'
+          description: An object that represents a TLS validation context trust for a local file.
+      description: An object that represents a Transport Layer Security (TLS) validation context trust.
+    AwsCloudMapInstanceAttributeValue:
+      type: string
+      pattern: '^([a-zA-Z0-9!-~][ ta-zA-Z0-9!-~]*){0,1}[a-zA-Z0-9!-~]{0,1}$'
+      minLength: 1
+      maxLength: 1024
+    PercentInt:
+      type: integer
+      minimum: 0
+      maximum: 100
+    WeightedTarget:
+      type: object
+      required:
+        - virtualNode
+        - weight
+      properties:
+        virtualNode:
+          $ref: '#/components/schemas/ResourceName'
+          description: The virtual node to associate with the weighted target.
+        weight:
+          $ref: '#/components/schemas/PercentInt'
+          description: The relative weight of the weighted target.
+      description: |-
+        An object that represents a target and its relative weight. Traffic is distributed across
+                 targets according to their relative weight. For example, a weighted target with a relative
+                 weight of 50 receives five times as much traffic as one with a relative weight of
+                 10. The total weight for all targets combined must be less than or equal to 100.
+    RouteRef:
+      type: object
+      required:
+        - arn
+        - meshName
+        - routeName
+        - virtualRouterName
+      properties:
+        arn:
+          $ref: '#/components/schemas/Arn'
+          description: The full Amazon Resource Name (ARN) for the route.
+        meshName:
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service mesh that the route resides in.
+        routeName:
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the route.
+        virtualRouterName:
+          $ref: '#/components/schemas/ResourceName'
+          description: The virtual router that the route is associated with.
+      description: An object that represents a route returned by a list operation.
+    DeleteVirtualNodeInput:
+      type: object
+      title: DeleteVirtualNodeInput
+      properties: {}
+      description: ''
+    RouteSpec:
+      type: object
+      properties:
+        grpcRoute:
+          $ref: '#/components/schemas/GrpcRoute'
+          description: An object that represents the specification of a gRPC route.
+        http2Route:
+          $ref: '#/components/schemas/HttpRoute'
+          description: An object that represents the specification of an HTTP/2 route.
+        httpRoute:
+          $ref: '#/components/schemas/HttpRoute'
+          description: An object that represents the specification of an HTTP route.
+        priority:
+          $ref: '#/components/schemas/RoutePriority'
+          description: |-
+            The priority for the route. Routes are matched based on the specified value, where 0 is
+                     the highest priority.
+        tcpRoute:
+          $ref: '#/components/schemas/TcpRoute'
+          description: An object that represents the specification of a TCP route.
+      description: An object that represents a route specification. Specify one route type.
+    RouteStatus:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          $ref: '#/components/schemas/RouteStatusCode'
+          description: The current status for the route.
+      description: An object that represents the current status of a route.
+    RouteStatusCode:
+      type: string
+      enum:
+        - ACTIVE
+        - DELETED
+        - INACTIVE
+    HeaderName:
+      type: string
+      minLength: 1
+      maxLength: 50
+    GrpcRetryPolicyEvent:
+      type: string
+      enum:
+        - cancelled
+        - deadline-exceeded
+        - internal
+        - resource-exhausted
+        - unavailable
+    HeaderMatch:
+      type: string
+      minLength: 1
+      maxLength: 255
+    MatchRange:
+      type: object
+      required:
+        - end
+        - start
+      properties:
+        end:
+          $ref: '#/components/schemas/Long'
+          description: The end of the range.
+        start:
+          $ref: '#/components/schemas/Long'
+          description: The start of the range.
+      description: 'An object that represents the range of values to match on. The first character of the range is included in the range, though the last character is not. For example, if the range specified were 1-100, only values 1-99 would be matched.'
+    HeaderMatchMethod:
+      type: object
+      properties:
+        exact:
+          $ref: '#/components/schemas/HeaderMatch'
+          description: The value sent by the client must match the specified value exactly.
+        prefix:
+          $ref: '#/components/schemas/HeaderMatch'
+          description: The value sent by the client must begin with the specified characters.
+        range:
+          $ref: '#/components/schemas/MatchRange'
+          description: An object that represents the range of values to match on.
+        regex:
+          $ref: '#/components/schemas/HeaderMatch'
+          description: The value sent by the client must include the specified characters.
+        suffix:
+          $ref: '#/components/schemas/HeaderMatch'
+          description: The value sent by the client must end with the specified characters.
+      description: |-
+        An object that represents the method and value to match with the header value sent in a
+                 request. Specify one match method.
+    DurationValue:
+      type: integer
+      minimum: 0
+    TagResourceInput:
+      type: object
+      required:
+        - tags
+      title: TagResourceInput
+      properties:
+        tags:
+          $ref: '#/components/schemas/TagList'
+          description: |-
+            The tags to add to the resource. A tag is an array of key-value pairs.
+                     Tag keys can have a maximum character length of 128 characters, and tag values can have
+                        a maximum length of 256 characters.
+      description: ''
+    VirtualNodeServiceProvider:
+      type: object
+      required:
+        - virtualNodeName
+      properties:
+        virtualNodeName:
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the virtual node that is acting as a service provider.
+      description: An object that represents a virtual node service provider.
+    VirtualRouterServiceProvider:
+      type: object
+      required:
+        - virtualRouterName
+      properties:
+        virtualRouterName:
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the virtual router that is acting as a service provider.
+      description: An object that represents a virtual node service provider.
+    MethodName:
+      type: string
+      minLength: 1
+      maxLength: 50
+    GrpcRouteMatch:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/GrpcRouteMetadataList'
+          description: An object that represents the data to match from the request.
+        methodName:
+          $ref: '#/components/schemas/MethodName'
+          description: 'The method name to match from the request. If you specify a name, you must also specify a <code>serviceName</code>.'
+        serviceName:
+          $ref: '#/components/schemas/ServiceName'
+          description: The fully qualified domain name for the service to match from the request.
+      description: An object that represents the criteria for determining a request match.
+    AwsCloudMapInstanceAttributes:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsCloudMapInstanceAttribute'
+    AwsCloudMapServiceDiscovery:
+      type: object
+      required:
+        - namespaceName
+        - serviceName
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AwsCloudMapInstanceAttributes'
+          description: |-
+            A string map that contains attributes with values that you can use to filter instances
+                     by any custom attribute that you specified when you registered the instance. Only instances
+                     that match all of the specified key/value pairs will be returned.
+        namespaceName:
+          $ref: '#/components/schemas/AwsCloudMapName'
+          description: The name of the AWS Cloud Map namespace to use.
+        serviceName:
+          $ref: '#/components/schemas/AwsCloudMapName'
+          description: The name of the AWS Cloud Map service to use.
+      description: |-
+        An object that represents the AWS Cloud Map service discovery information for your virtual
+                 node.
+    MeshStatusCode:
+      type: string
+      enum:
+        - ACTIVE
+        - DELETED
+        - INACTIVE
+    MeshStatus:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/MeshStatusCode'
+          description: The current mesh status.
+      description: An object that represents the status of a service mesh.
+    CreateVirtualNodeInput:
+      type: object
+      required:
+        - spec
+        - virtualNodeName
+      title: CreateVirtualNodeInput
+      properties:
+        clientToken:
+          $ref: '#/components/schemas/String'
+          description: |-
+            Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+            request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+        spec:
+          $ref: '#/components/schemas/VirtualNodeSpec'
+          description: The virtual node specification to apply.
+        tags:
+          tags:
+            - not-preview
+          $ref: '#/components/schemas/TagList'
+          description: |-
+            Optional metadata that you can apply to the virtual node to assist with categorization
+                     and organization. Each tag consists of a key and an optional value, both of which you
+                     define. Tag keys can have a maximum character length of 128 characters, and tag values can have
+                        a maximum length of 256 characters.
+        virtualNodeName:
+          $ref: '#/components/schemas/ResourceName'
+          description: The name to use for the virtual node.
+      description: ''
+    FilePath:
+      type: string
+      minLength: 1
+      maxLength: 255
+    FileAccessLog:
+      type: object
+      required:
+        - path
+      properties:
+        path:
+          $ref: '#/components/schemas/FilePath'
+          description: |-
+            <p>The file path to write access logs to. You can use <code>/dev/stdout</code> to send
+                     access logs to standard out and configure your Envoy container to use a log driver, such as
+                        <code>awslogs</code>, to export the access logs to a log storage service such as Amazon
+                     CloudWatch Logs. You can also specify a path in the Envoy container's file system to write
+                     the files to disk.</p>
+                     <note>
+                        <p>The Envoy process must have write permissions to the path that you specify here.
+                        Otherwise, Envoy fails to bootstrap properly.</p>
+                     </note>
+      description: An object that represents an access log file.
+    DeleteVirtualServiceInput:
+      type: object
+      title: DeleteVirtualServiceInput
+      properties: {}
+      description: ''
+    TlsValidationContext:
+      type: object
+      required:
+        - trust
+      properties:
+        trust:
+          $ref: '#/components/schemas/TlsValidationContextTrust'
+          description: A reference to an object that represents a TLS validation context trust.
+      description: An object that represents a Transport Layer Security (TLS) validation context.
+    TagsLimit:
+      type: integer
+      minimum: 1
+      maximum: 50
+    UpdateVirtualNodeInput:
+      type: object
+      required:
+        - spec
+      title: UpdateVirtualNodeInput
+      properties:
+        clientToken:
+          $ref: '#/components/schemas/String'
+          description: |-
+            Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+            request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+        spec:
+          $ref: '#/components/schemas/VirtualNodeSpec'
+          description: The new virtual node specification to apply. This overwrites the existing data.
+      description: ''
+    ListenerTls:
+      type: object
+      required:
+        - certificate
+        - mode
+      properties:
+        certificate:
+          $ref: '#/components/schemas/ListenerTlsCertificate'
+          description: A reference to an object that represents a listener's TLS certificate.
+        mode:
+          $ref: '#/components/schemas/ListenerTlsMode'
+          description: |-
+            <p>Specify one of the following modes.</p>
+                     <ul>
+                        <li>
+                           <p>
+                              <b/>STRICT – Listener only accepts connections with TLS enabled. </p>
+                        </li>
+                        <li>
+                           <p>
+                              <b/>PERMISSIVE – Listener accepts connections with or without TLS enabled.</p>
+                        </li>
+                        <li>
+                           <p>
+                              <b/>DISABLED –  Listener only accepts connections without TLS. </p>
+                        </li>
+                     </ul>
+      description: An object that represents the Transport Layer Security (TLS) properties for a listener.
+    DeleteMeshInput:
+      type: object
+      title: DeleteMeshInput
+      properties: {}
+      description: ''
+    VirtualServiceSpec:
+      type: object
+      properties:
+        provider:
+          $ref: '#/components/schemas/VirtualServiceProvider'
+          description: |-
+            The App Mesh object that is acting as the provider for a virtual service. You can specify
+                     a single virtual node or virtual router.
+      description: An object that represents the specification of a virtual service.
+    CreateVirtualServiceInput:
+      type: object
+      required:
+        - spec
+        - virtualServiceName
+      title: CreateVirtualServiceInput
+      properties:
+        clientToken:
+          $ref: '#/components/schemas/String'
+          description: |-
+            Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+            request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+        spec:
+          $ref: '#/components/schemas/VirtualServiceSpec'
+          description: The virtual service specification to apply.
+        tags:
+          tags:
+            - not-preview
+          $ref: '#/components/schemas/TagList'
+          description: |-
+            Optional metadata that you can apply to the virtual service to assist with
+                     categorization and organization. Each tag consists of a key and an optional value, both of
+                     which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have
+                        a maximum length of 256 characters.
+        virtualServiceName:
+          $ref: '#/components/schemas/ServiceName'
+          description: The name to use for the virtual service.
+      description: ''
+    UpdateVirtualRouterInput:
+      type: object
+      required:
+        - spec
+      title: UpdateVirtualRouterInput
+      properties:
+        clientToken:
+          $ref: '#/components/schemas/String'
+          description: |-
+            Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+            request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+        spec:
+          $ref: '#/components/schemas/VirtualRouterSpec'
+          description: The new virtual router specification to apply. This overwrites the existing data.
+      description: ''
+    ListTagsForResourceInput:
+      type: object
+      title: ListTagsForResourceInput
+      properties: {}
+      description: ''
+    DeleteVirtualRouterInput:
+      type: object
+      title: DeleteVirtualRouterInput
+      properties: {}
+      description: ''
+    DescribeRouteInput:
+      type: object
+      title: DescribeRouteInput
+      properties: {}
+      description: ''
     Listener:
       type: object
       required:
@@ -3512,36 +4257,10 @@ components:
         portMapping:
           $ref: '#/components/schemas/PortMapping'
           description: The port mapping information for the listener.
+        tls:
+          $ref: '#/components/schemas/ListenerTls'
+          description: A reference to an object that represents the Transport Layer Security (TLS) properties for a listener.
       description: An object that represents a listener for a virtual node.
-    Backend:
-      type: object
-      properties:
-        virtualService:
-          $ref: '#/components/schemas/VirtualServiceBackend'
-          description: 'Specifies a virtual service to use as a backend for a virtual node. '
-      description: |-
-        An object that represents the backends that a virtual node is expected to send outbound
-                 traffic to. 
-    PortProtocol:
-      type: string
-      enum:
-        - grpc
-        - http
-        - http2
-        - tcp
-    RouteList:
-      type: array
-      items:
-        $ref: '#/components/schemas/RouteRef'
-    VirtualServiceBackend:
-      type: object
-      required:
-        - virtualServiceName
-      properties:
-        virtualServiceName:
-          $ref: '#/components/schemas/ServiceName'
-          description: The name of the virtual service that is acting as a virtual node backend.
-      description: An object that represents a virtual service backend for a virtual node.
     VirtualNodeStatusCode:
       type: string
       enum:
@@ -3565,39 +4284,6 @@ components:
             The new virtual service specification to apply. This overwrites the existing
                      data.
       description: ''
-    HealthCheckThreshold:
-      type: integer
-      minimum: 2
-      maximum: 10
-    PercentInt:
-      type: integer
-      minimum: 0
-      maximum: 100
-    GrpcRouteMetadata:
-      type: object
-      required:
-        - name
-      properties:
-        invert:
-          $ref: '#/components/schemas/Boolean'
-          description: Specify <code>True</code> to match anything except the match criteria. The default value is <code>False</code>.
-        match:
-          $ref: '#/components/schemas/GrpcRouteMetadataMatchMethod'
-          description: An object that represents the data to match from the request.
-        name:
-          $ref: '#/components/schemas/HeaderName'
-          description: The name of the route.
-      description: An object that represents the match metadata for the route.
-    GrpcRouteMetadataList:
-      type: array
-      items:
-        $ref: '#/components/schemas/GrpcRouteMetadata'
-      minItems: 1
-      maxItems: 10
-    MethodName:
-      type: string
-      minLength: 1
-      maxLength: 50
     TagValue:
       type: string
       minLength: 0
@@ -3626,94 +4312,6 @@ components:
       title: ListRoutesInput
       properties: {}
       description: ''
-    HealthCheckIntervalMillis:
-      type: integer
-      minimum: 5000
-      maximum: 300000
-    PortNumber:
-      type: integer
-      minimum: 1
-      maximum: 65535
-    HealthCheckTimeoutMillis:
-      type: integer
-      minimum: 2000
-      maximum: 60000
-    HealthCheckPolicy:
-      type: object
-      required:
-        - healthyThreshold
-        - intervalMillis
-        - protocol
-        - timeoutMillis
-        - unhealthyThreshold
-      properties:
-        healthyThreshold:
-          $ref: '#/components/schemas/HealthCheckThreshold'
-          description: |-
-            The number of consecutive successful health checks that must occur before declaring
-                     listener healthy.
-        intervalMillis:
-          $ref: '#/components/schemas/HealthCheckIntervalMillis'
-          description: The time period in milliseconds between each health check execution.
-        path:
-          $ref: '#/components/schemas/String'
-          description: |-
-            The destination path for the health check request. This is required only if the
-                     specified protocol is HTTP. If the protocol is TCP, this parameter is ignored.
-        port:
-          $ref: '#/components/schemas/PortNumber'
-          description: |-
-            The destination port for the health check request. This port must match the port defined
-                     in the <a>PortMapping</a> for the listener.
-        protocol:
-          $ref: '#/components/schemas/PortProtocol'
-          description: The protocol for the health check request.
-        timeoutMillis:
-          $ref: '#/components/schemas/HealthCheckTimeoutMillis'
-          description: |-
-            The amount of time to wait when receiving a response from the health check, in
-                     milliseconds.
-        unhealthyThreshold:
-          $ref: '#/components/schemas/HealthCheckThreshold'
-          description: |-
-            The number of consecutive failed health checks that must occur before declaring a
-                     virtual node unhealthy. 
-      description: An object that represents the health check policy for a virtual node's listener.
-    VirtualServiceRef:
-      type: object
-      required:
-        - arn
-        - meshName
-        - virtualServiceName
-      properties:
-        arn:
-          $ref: '#/components/schemas/Arn'
-          description: The full Amazon Resource Name (ARN) for the virtual service.
-        meshName:
-          $ref: '#/components/schemas/ResourceName'
-          description: The name of the service mesh that the virtual service resides in.
-        virtualServiceName:
-          $ref: '#/components/schemas/ServiceName'
-          description: The name of the virtual service.
-      description: An object that represents a virtual service returned by a list operation.
-    EgressFilterType:
-      type: string
-      enum:
-        - ALLOW_ALL
-        - DROP_ALL
-    VirtualServiceList:
-      type: array
-      items:
-        $ref: '#/components/schemas/VirtualServiceRef'
-    VirtualNodeStatus:
-      type: object
-      required:
-        - status
-      properties:
-        status:
-          $ref: '#/components/schemas/VirtualNodeStatusCode'
-          description: The current status of the virtual node.
-      description: An object that represents the current status of the virtual node.
     VirtualRouterRef:
       type: object
       required:
@@ -3731,66 +4329,6 @@ components:
           $ref: '#/components/schemas/ResourceName'
           description: The name of the virtual router.
       description: An object that represents a virtual router returned by a list operation.
-    VirtualServiceStatus:
-      type: object
-      required:
-        - status
-      properties:
-        status:
-          $ref: '#/components/schemas/VirtualServiceStatusCode'
-          description: The current status of the virtual service.
-      description: An object that represents the status of a virtual service.
-    VirtualServiceData:
-      type: object
-      required:
-        - meshName
-        - metadata
-        - spec
-        - status
-        - virtualServiceName
-      properties:
-        meshName:
-          $ref: '#/components/schemas/ResourceName'
-          description: The name of the service mesh that the virtual service resides in.
-        metadata:
-          $ref: '#/components/schemas/ResourceMetadata'
-        spec:
-          $ref: '#/components/schemas/VirtualServiceSpec'
-          description: The specifications of the virtual service.
-        status:
-          $ref: '#/components/schemas/VirtualServiceStatus'
-          description: The current status of the virtual service.
-        virtualServiceName:
-          $ref: '#/components/schemas/ServiceName'
-          description: The name of the virtual service.
-      description: An object that represents a virtual service returned by a describe operation.
-    Boolean:
-      type: boolean
-    HeaderMatchMethod:
-      type: object
-      properties:
-        exact:
-          $ref: '#/components/schemas/HeaderMatch'
-          description: The value sent by the client must match the specified value exactly.
-        prefix:
-          $ref: '#/components/schemas/HeaderMatch'
-          description: The value sent by the client must begin with the specified characters.
-        range:
-          $ref: '#/components/schemas/MatchRange'
-          description: An object that represents the range of values to match on.
-        regex:
-          $ref: '#/components/schemas/HeaderMatch'
-          description: The value sent by the client must include the specified characters.
-        suffix:
-          $ref: '#/components/schemas/HeaderMatch'
-          description: The value sent by the client must end with the specified characters.
-      description: |-
-        An object that represents the method and value to match with the header value sent in a
-                 request. Specify one match method.
-    HeaderName:
-      type: string
-      minLength: 1
-      maxLength: 50
     HttpRouteHeader:
       type: object
       required:
@@ -3806,14 +4344,6 @@ components:
           $ref: '#/components/schemas/HeaderName'
           description: A name for the HTTP header in the client request that will be matched on.
       description: An object that represents the HTTP header in the request.
-    HttpRetryPolicyEvent:
-      type: string
-      minLength: 1
-      maxLength: 25
-    FilePath:
-      type: string
-      minLength: 1
-      maxLength: 255
     AwsCloudMapInstanceAttribute:
       type: object
       required:
@@ -3833,10 +4363,6 @@ components:
       description: |-
         An object that represents the AWS Cloud Map attribute information for your virtual
                  node.
-    AwsCloudMapInstanceAttributes:
-      type: array
-      items:
-        $ref: '#/components/schemas/AwsCloudMapInstanceAttribute'
     VirtualNodeRef:
       type: object
       required:
@@ -3854,13 +4380,6 @@ components:
           $ref: '#/components/schemas/ResourceName'
           description: The name of the virtual node.
       description: An object that represents a virtual node returned by a list operation.
-    MeshSpec:
-      type: object
-      properties:
-        egressFilter:
-          $ref: '#/components/schemas/EgressFilter'
-          description: The egress filter rules for the service mesh.
-      description: An object that represents the specification of a service mesh.
     CreateMeshInput:
       type: object
       required:
@@ -3879,6 +4398,8 @@ components:
           $ref: '#/components/schemas/MeshSpec'
           description: The service mesh specification to apply.
         tags:
+          tags:
+            - not-preview
           $ref: '#/components/schemas/TagList'
           description: |-
             Optional metadata that you can apply to the service mesh to assist with categorization
@@ -3895,28 +4416,6 @@ components:
           $ref: '#/components/schemas/WeightedTargets'
           description: An object that represents the targets that traffic is routed to when a request matches the route.
       description: An object that represents the action to take if a match is determined.
-    AwsCloudMapName:
-      type: string
-      pattern: '((?=^.{1,127}$)^([a-zA-Z0-9_][a-zA-Z0-9-_]{0,61}[a-zA-Z0-9_]|[a-zA-Z0-9])(.([a-zA-Z0-9_][a-zA-Z0-9-_]{0,61}[a-zA-Z0-9_]|[a-zA-Z0-9]))*$)|(^.$)'
-      minLength: 1
-      maxLength: 1024
-    HeaderMatch:
-      type: string
-      minLength: 1
-      maxLength: 255
-    MatchRange:
-      type: object
-      required:
-        - end
-        - start
-      properties:
-        end:
-          $ref: '#/components/schemas/Long'
-          description: The end of the range.
-        start:
-          $ref: '#/components/schemas/Long'
-          description: The start of the range.
-      description: 'An object that represents the range of values to match on. The first character of the range is included in the range, though the last character is not. For example, if the range specified were 1-100, only values 1-99 would be matched.'
     GrpcRouteMetadataMatchMethod:
       type: object
       properties:
@@ -3936,19 +4435,6 @@ components:
           $ref: '#/components/schemas/HeaderMatch'
           description: The value sent by the client must end with the specified characters.
       description: An object that represents the match method. Specify one of the match values.
-    Hostname:
-      type: string
-    DnsServiceDiscovery:
-      type: object
-      required:
-        - hostname
-      properties:
-        hostname:
-          $ref: '#/components/schemas/Hostname'
-          description: 'Specifies the DNS service discovery hostname for the virtual node. '
-      description: |-
-        An object that represents the DNS service discovery information for your virtual
-                 node.
     DescribeVirtualServiceInput:
       type: object
       title: DescribeVirtualServiceInput
@@ -3958,34 +4444,10 @@ components:
       type: integer
       minimum: 1
       maximum: 100
-    DeleteRouteInput:
-      type: object
-      title: DeleteRouteInput
-      properties: {}
-      description: ''
-    AwsCloudMapInstanceAttributeKey:
-      type: string
-      pattern: '^[a-zA-Z0-9!-~]+$'
-      minLength: 1
-      maxLength: 255
-    AwsCloudMapInstanceAttributeValue:
-      type: string
-      pattern: '^([a-zA-Z0-9!-~][ ta-zA-Z0-9!-~]*){0,1}[a-zA-Z0-9!-~]{0,1}$'
-      minLength: 1
-      maxLength: 1024
     ListVirtualRoutersLimit:
       type: integer
       minimum: 1
       maximum: 100
-    ListMeshesLimit:
-      type: integer
-      minimum: 1
-      maximum: 100
-    ListMeshesInput:
-      type: object
-      title: ListMeshesInput
-      properties: {}
-      description: ''
     TcpRouteAction:
       type: object
       required:
@@ -4004,28 +4466,6 @@ components:
       title: ListVirtualRoutersInput
       properties: {}
       description: ''
-    VirtualRouterStatus:
-      type: object
-      required:
-        - status
-      properties:
-        status:
-          $ref: '#/components/schemas/VirtualRouterStatusCode'
-          description: The current status of the virtual router.
-      description: 'An object that represents the status of a virtual router. '
-    UpdateMeshInput:
-      type: object
-      title: UpdateMeshInput
-      properties:
-        clientToken:
-          $ref: '#/components/schemas/String'
-          description: |-
-            Unique, case-sensitive identifier that you provide to ensure the idempotency of the
-            request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
-        spec:
-          $ref: '#/components/schemas/MeshSpec'
-          description: The service mesh specification to apply.
-      description: ''
     DurationUnit:
       type: string
       enum:
@@ -4036,50 +4476,6 @@ components:
       title: ListVirtualServicesInput
       properties: {}
       description: ''
-    CreateVirtualRouterInput:
-      type: object
-      required:
-        - spec
-        - virtualRouterName
-      title: CreateVirtualRouterInput
-      properties:
-        clientToken:
-          $ref: '#/components/schemas/String'
-          description: |-
-            Unique, case-sensitive identifier that you provide to ensure the idempotency of the
-            request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
-        spec:
-          $ref: '#/components/schemas/VirtualRouterSpec'
-          description: The virtual router specification to apply.
-        tags:
-          $ref: '#/components/schemas/TagList'
-          description: |-
-            Optional metadata that you can apply to the virtual router to assist with categorization
-                     and organization. Each tag consists of a key and an optional value, both of which you
-                     define. Tag keys can have a maximum character length of 128 characters, and tag values can have
-                        a maximum length of 256 characters.
-        virtualRouterName:
-          $ref: '#/components/schemas/ResourceName'
-          description: The name to use for the virtual router.
-      description: ''
-    FileAccessLog:
-      type: object
-      required:
-        - path
-      properties:
-        path:
-          $ref: '#/components/schemas/FilePath'
-          description: |-
-            <p>The file path to write access logs to. You can use <code>/dev/stdout</code> to send
-                     access logs to standard out and configure your Envoy container to use a log driver, such as
-                        <code>awslogs</code>, to export the access logs to a log storage service such as Amazon
-                     CloudWatch Logs. You can also specify a path in the Envoy container's file system to write
-                     the files to disk.</p>
-                     <note>
-                        <p>The Envoy process must have write permissions to the path that you specify here.
-                        Otherwise, Envoy fails to bootstrap properly.</p>
-                     </note>
-      description: An object that represents an access log file.
     ListVirtualNodesLimit:
       type: integer
       minimum: 1
@@ -4089,31 +4485,6 @@ components:
       title: ListVirtualNodesInput
       properties: {}
       description: ''
-    VirtualServiceStatusCode:
-      type: string
-      enum:
-        - ACTIVE
-        - DELETED
-        - INACTIVE
-    MeshList:
-      type: array
-      items:
-        $ref: '#/components/schemas/MeshRef'
-    HttpMethod:
-      type: string
-      enum:
-        - CONNECT
-        - DELETE
-        - GET
-        - HEAD
-        - OPTIONS
-        - PATCH
-        - POST
-        - PUT
-        - TRACE
-    DurationValue:
-      type: integer
-      minimum: 0
     HttpRouteHeaders:
       type: array
       items:
@@ -4151,138 +4522,11 @@ components:
       description: |-
         An object that represents the requirements for a route to match HTTP requests for a virtual
                  router.
-    MeshRef:
-      type: object
-      required:
-        - arn
-        - meshName
-      properties:
-        arn:
-          $ref: '#/components/schemas/Arn'
-          description: The full Amazon Resource Name (ARN) of the service mesh.
-        meshName:
-          $ref: '#/components/schemas/ResourceName'
-          description: The name of the service mesh.
-      description: An object that represents a service mesh returned by a list operation.
-    MeshStatusCode:
-      type: string
-      enum:
-        - ACTIVE
-        - DELETED
-        - INACTIVE
-    MeshStatus:
-      type: object
-      properties:
-        status:
-          $ref: '#/components/schemas/MeshStatusCode'
-          description: The current mesh status.
-      description: An object that represents the status of a service mesh.
-    WeightedTarget:
-      type: object
-      required:
-        - virtualNode
-        - weight
-      properties:
-        virtualNode:
-          $ref: '#/components/schemas/ResourceName'
-          description: The virtual node to associate with the weighted target.
-        weight:
-          $ref: '#/components/schemas/PercentInt'
-          description: The relative weight of the weighted target.
-      description: |-
-        An object that represents a target and its relative weight. Traffic is distributed across
-                 targets according to their relative weight. For example, a weighted target with a relative
-                 weight of 50 receives five times as much traffic as one with a relative weight of
-                 10. The total weight for all targets combined must be less than or equal to 100.
     DescribeVirtualNodeInput:
       type: object
       title: DescribeVirtualNodeInput
       properties: {}
       description: ''
-    RouteStatusCode:
-      type: string
-      enum:
-        - ACTIVE
-        - DELETED
-        - INACTIVE
-    RouteStatus:
-      type: object
-      required:
-        - status
-      properties:
-        status:
-          $ref: '#/components/schemas/RouteStatusCode'
-          description: The current status for the route.
-      description: An object that represents the current status of a route.
-    RouteRef:
-      type: object
-      required:
-        - arn
-        - meshName
-        - routeName
-        - virtualRouterName
-      properties:
-        arn:
-          $ref: '#/components/schemas/Arn'
-          description: The full Amazon Resource Name (ARN) for the route.
-        meshName:
-          $ref: '#/components/schemas/ResourceName'
-          description: The name of the service mesh that the route resides in.
-        routeName:
-          $ref: '#/components/schemas/ResourceName'
-          description: The name of the route.
-        virtualRouterName:
-          $ref: '#/components/schemas/ResourceName'
-          description: The virtual router that the route is associated with.
-      description: An object that represents a route returned by a list operation.
-    GrpcRouteMatch:
-      type: object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/GrpcRouteMetadataList'
-          description: An object that represents the data to match from the request.
-        methodName:
-          $ref: '#/components/schemas/MethodName'
-          description: 'The method name to match from the request. If you specify a name, you must also specify a <code>serviceName</code>.'
-        serviceName:
-          $ref: '#/components/schemas/ServiceName'
-          description: The fully qualified domain name for the service to match from the request.
-      description: An object that represents the criteria for determining a request match.
-    DeleteVirtualNodeInput:
-      type: object
-      title: DeleteVirtualNodeInput
-      properties: {}
-      description: ''
-    RouteSpec:
-      type: object
-      properties:
-        grpcRoute:
-          $ref: '#/components/schemas/GrpcRoute'
-          description: An object that represents the specification of a GRPC route.
-        http2Route:
-          $ref: '#/components/schemas/HttpRoute'
-          description: An object that represents the specification of an HTTP2 route.
-        httpRoute:
-          $ref: '#/components/schemas/HttpRoute'
-          description: An object that represents the specification of an HTTP route.
-        priority:
-          $ref: '#/components/schemas/RoutePriority'
-          description: |-
-            The priority for the route. Routes are matched based on the specified value, where 0 is
-                     the highest priority.
-        tcpRoute:
-          $ref: '#/components/schemas/TcpRoute'
-          description: An object that represents the specification of a TCP route.
-      description: An object that represents a route specification. Specify one route type.
-    VirtualNodeServiceProvider:
-      type: object
-      required:
-        - virtualNodeName
-      properties:
-        virtualNodeName:
-          $ref: '#/components/schemas/ResourceName'
-          description: The name of the virtual node that is acting as a service provider.
-      description: An object that represents a virtual node service provider.
     HttpRetryPolicy:
       type: object
       required:
@@ -4329,19 +4573,6 @@ components:
       title: DescribeVirtualRouterInput
       properties: {}
       description: ''
-    TagResourceInput:
-      type: object
-      required:
-        - tags
-      title: TagResourceInput
-      properties:
-        tags:
-          $ref: '#/components/schemas/TagList'
-          description: |-
-            The tags to add to the resource. A tag is an array of key-value pairs.
-                     Tag keys can have a maximum character length of 128 characters, and tag values can have
-                        a maximum length of 256 characters.
-      description: ''
     CreateRouteInput:
       type: object
       required:
@@ -4361,6 +4592,8 @@ components:
           $ref: '#/components/schemas/RouteSpec'
           description: The route specification to apply.
         tags:
+          tags:
+            - not-preview
           $ref: '#/components/schemas/TagList'
           description: |-
             Optional metadata that you can apply to the route to assist with categorization and
@@ -4368,36 +4601,6 @@ components:
                      Tag keys can have a maximum character length of 128 characters, and tag values can have
                         a maximum length of 256 characters.
       description: ''
-    VirtualRouterServiceProvider:
-      type: object
-      required:
-        - virtualRouterName
-      properties:
-        virtualRouterName:
-          $ref: '#/components/schemas/ResourceName'
-          description: The name of the virtual router that is acting as a service provider.
-      description: An object that represents a virtual node service provider.
-    AwsCloudMapServiceDiscovery:
-      type: object
-      required:
-        - namespaceName
-        - serviceName
-      properties:
-        attributes:
-          $ref: '#/components/schemas/AwsCloudMapInstanceAttributes'
-          description: |-
-            A string map that contains attributes with values that you can use to filter instances
-                     by any custom attribute that you specified when you registered the instance. Only instances
-                     that match all of the specified key/value pairs will be returned.
-        namespaceName:
-          $ref: '#/components/schemas/AwsCloudMapName'
-          description: The name of the AWS Cloud Map namespace to use.
-        serviceName:
-          $ref: '#/components/schemas/AwsCloudMapName'
-          description: The name of the AWS Cloud Map service to use.
-      description: |-
-        An object that represents the AWS Cloud Map service discovery information for your virtual
-                 node.
     UpdateRouteInput:
       type: object
       required:
@@ -4413,40 +4616,9 @@ components:
           $ref: '#/components/schemas/RouteSpec'
           description: The new route specification to apply. This overwrites the existing data.
       description: ''
-    CreateVirtualNodeInput:
-      type: object
-      required:
-        - spec
-        - virtualNodeName
-      title: CreateVirtualNodeInput
-      properties:
-        clientToken:
-          $ref: '#/components/schemas/String'
-          description: |-
-            Unique, case-sensitive identifier that you provide to ensure the idempotency of the
-            request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
-        spec:
-          $ref: '#/components/schemas/VirtualNodeSpec'
-          description: The virtual node specification to apply.
-        tags:
-          $ref: '#/components/schemas/TagList'
-          description: |-
-            Optional metadata that you can apply to the virtual node to assist with categorization
-                     and organization. Each tag consists of a key and an optional value, both of which you
-                     define. Tag keys can have a maximum character length of 128 characters, and tag values can have
-                        a maximum length of 256 characters.
-        virtualNodeName:
-          $ref: '#/components/schemas/ResourceName'
-          description: The name to use for the virtual node.
-      description: ''
     DescribeMeshInput:
       type: object
       title: DescribeMeshInput
-      properties: {}
-      description: ''
-    DeleteVirtualServiceInput:
-      type: object
-      title: DeleteVirtualServiceInput
       properties: {}
       description: ''
     UntagResourceInput:

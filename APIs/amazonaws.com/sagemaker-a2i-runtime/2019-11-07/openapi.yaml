@@ -3,7 +3,7 @@ info:
   version: '2019-11-07'
   x-release: v4
   title: Amazon Augmented AI Runtime
-  description: '<p>Amazon Augmented AI (Augmented AI) (Preview) is a service that adds human judgment to any machine learning application. Human reviewers can take over when an AI application can''t evaluate data with a high degree of confidence.</p> <p>From fraudulent bank transaction identification to document processing to image analysis, machine learning models can be trained to make decisions as well as or better than a human. Nevertheless, some decisions require contextual interpretation, such as when you need to decide whether an image is appropriate for a given audience. Content moderation guidelines are nuanced and highly dependent on context, and they vary between countries. When trying to apply AI in these situations, you can be forced to choose between "ML only" systems with unacceptably high error rates or "human only" systems that are expensive and difficult to scale, and that slow down decision making.</p> <p>This API reference includes information about API actions and data types you can use to interact with Augmented AI programmatically. </p> <p>You can create a flow definition against the Augmented AI API. Provide the Amazon Resource Name (ARN) of a flow definition to integrate AI service APIs, such as <code>Textract.AnalyzeDocument</code> and <code>Rekognition.DetectModerationLabels</code>. These AI services, in turn, invoke the <a>StartHumanLoop</a> API, which evaluates conditions under which humans will be invoked. If humans are required, Augmented AI creates a human loop. Results of human work are available asynchronously in Amazon Simple Storage Service (Amazon S3). You can use Amazon CloudWatch Events to detect human work results.</p> <p>You can find additional Augmented AI API documentation in the following reference guides: <a href="https://aws.amazon.com/rekognition/latest/dg/API_Reference.html">Amazon Rekognition</a>, <a href="https://aws.amazon.com/sagemaker/latest/dg/API_Reference.html">Amazon SageMaker</a>, and <a href="https://aws.amazon.com/textract/latest/dg/API_Reference.html">Amazon Textract</a>.</p>'
+  description: '<p>Amazon Augmented AI (Augmented AI) (Preview) is a service that adds human judgment to any machine learning application. Human reviewers can take over when an AI application can''t evaluate data with a high degree of confidence.</p> <p>From fraudulent bank transaction identification to document processing to image analysis, machine learning models can be trained to make decisions as well as or better than a human. Nevertheless, some decisions require contextual interpretation, such as when you need to decide whether an image is appropriate for a given audience. Content moderation guidelines are nuanced and highly dependent on context, and they vary between countries. When trying to apply AI in these situations, you can be forced to choose between "ML only" systems with unacceptably high error rates or "human only" systems that are expensive and difficult to scale, and that slow down decision making.</p> <p>This API reference includes information about API actions and data types you can use to interact with Augmented AI programmatically. </p> <p>You can create a flow definition against the Augmented AI API. Provide the Amazon Resource Name (ARN) of a flow definition to integrate AI service APIs, such as <code>Textract.AnalyzeDocument</code> and <code>Rekognition.DetectModerationLabels</code>. These AI services, in turn, invoke the <a>StartHumanLoop</a> API, which evaluates conditions under which humans will be invoked. If humans are required, Augmented AI creates a human loop. Results of human work are available asynchronously in Amazon Simple Storage Service (Amazon S3). You can use Amazon CloudWatch Events to detect human work results.</p> <p>You can find additional Augmented AI API documentation in the following reference guides: <a href="https://docs.aws.amazon.com/rekognition/latest/dg/API_Reference.html">Amazon Rekognition</a>, <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/API_Reference.html">Amazon SageMaker</a>, and <a href="https://docs.aws.amazon.com/textract/latest/dg/API_Reference.html">Amazon Textract</a>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -104,6 +104,7 @@ servers:
           - cn-northwest-1
         default: cn-north-1
     description: The Amazon Augmented AI Runtime endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 paths:
   '/human-loops/{HumanLoopName}':
     delete:
@@ -196,16 +197,16 @@ paths:
         - name: HumanLoopName
           in: path
           required: true
-          description: The name of the human loop.
+          description: The unique name of the human loop.
           schema:
             type: string
             pattern: '^[a-z0-9](-*[a-z0-9])*$'
             minLength: 1
             maxLength: 63
-  /human-loops:
+  '/human-loops#FlowDefinitionArn':
     get:
       operationId: ListHumanLoops
-      description: 'Returns information about human loops, given the specified parameters.'
+      description: 'Returns information about human loops, given the specified parameters. If a human loop was deleted, it will not be included.'
       responses:
         '200':
           description: Success
@@ -235,17 +236,25 @@ paths:
         - name: CreationTimeAfter
           in: query
           required: false
-          description: '(Optional) The timestamp of the date when you want the human loops to begin. For example, <code>1551000000</code>.'
+          description: '(Optional) The timestamp of the date when you want the human loops to begin in ISO 8601 format. For example, <code>2020-02-24</code>.'
           schema:
             type: string
             format: date-time
         - name: CreationTimeBefore
           in: query
           required: false
-          description: '(Optional) The timestamp of the date before which you want the human loops to begin. For example, <code>1550000000</code>.'
+          description: '(Optional) The timestamp of the date before which you want the human loops to begin in ISO 8601 format. For example, <code>2020-02-24</code>.'
           schema:
             type: string
             format: date-time
+        - name: FlowDefinitionArn
+          in: query
+          required: true
+          description: The Amazon Resource Name (ARN) of a flow definition.
+          schema:
+            type: string
+            pattern: 'arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:flow-definition/.*'
+            maxLength: 1024
         - name: SortOrder
           in: query
           required: false
@@ -279,6 +288,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /human-loops:
     post:
       operationId: StartHumanLoop
       description: 'Starts a human loop, provided that at least one activation condition is met.'
@@ -313,6 +323,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
       parameters: []
       requestBody:
         required: true
@@ -337,19 +353,27 @@ paths:
                   pattern: 'arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:flow-definition/.*'
                   maxLength: 1024
                 HumanLoopInput:
-                  description: An object containing the input.
+                  description: An object containing the human loop input in JSON format.
                   type: object
                   properties:
                     InputContent:
                       $ref: '#/components/schemas/InputContent'
-                      description: Serialized input from the human loop.
+                      description: Serialized input from the human loop. The input must be a string representation of a file in JSON format.
                 DataAttributes:
                   description: Attributes of the data specified by the customer. Use these to describe the data to be labeled.
                   type: object
                   properties:
                     ContentClassifiers:
                       $ref: '#/components/schemas/ContentClassifiers'
-                      description: Declares that your content is free of personally identifiable information or adult content. Amazon SageMaker may restrict the Amazon Mechanical Turk workers that can view your task based on this information.
+                      description: <p>Declares that your content is free of personally identifiable information or adult content.</p> <p>Amazon SageMaker can restrict the Amazon Mechanical Turk workers who can view your task based on this information.</p>
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /human-loops/stop:
     post:
       operationId: StopHumanLoop
@@ -471,16 +495,15 @@ components:
     DescribeHumanLoopResponse:
       type: object
       required:
-        - CreationTimestamp
+        - CreationTime
         - HumanLoopStatus
         - HumanLoopName
         - HumanLoopArn
         - FlowDefinitionArn
-        - HumanLoopInput
       properties:
-        CreationTimestamp:
+        CreationTime:
           $ref: '#/components/schemas/Timestamp'
-          description: The timestamp when Amazon Augmented AI created the human loop.
+          description: The creation time when Amazon Augmented AI created the human loop.
         FailureReason:
           $ref: '#/components/schemas/String'
           description: The reason why a human loop has failed. The failure reason is returned when the human loop status is <code>Failed</code>.
@@ -499,11 +522,8 @@ components:
         FlowDefinitionArn:
           $ref: '#/components/schemas/FlowDefinitionArn'
           description: The Amazon Resource Name (ARN) of the flow definition.
-        HumanLoopInput:
-          $ref: '#/components/schemas/HumanLoopInputContent'
-          description: An object containing information about the human loop input.
         HumanLoopOutput:
-          $ref: '#/components/schemas/HumanLoopOutputContent'
+          $ref: '#/components/schemas/HumanLoopOutput'
           description: An object containing information about the output of the human loop.
     ListHumanLoopsResponse:
       type: object
@@ -522,9 +542,6 @@ components:
         HumanLoopArn:
           $ref: '#/components/schemas/HumanLoopArn'
           description: The Amazon Resource Name (ARN) of the human loop.
-        HumanLoopActivationResults:
-          $ref: '#/components/schemas/HumanLoopActivationResults'
-          description: An object containing information about the human loop activation.
     InputContent:
       type: string
       maxLength: 4194304
@@ -534,11 +551,10 @@ components:
         $ref: '#/components/schemas/ContentClassifier'
       maxItems: 256
     ServiceQuotaExceededException: {}
+    ConflictException: {}
     StopHumanLoopResponse:
       type: object
       properties: {}
-    Boolean:
-      type: boolean
     ContentClassifier:
       type: string
       enum:
@@ -578,44 +594,36 @@ components:
       type: string
       pattern: 'arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:flow-definition/.*'
       maxLength: 1024
-    HumanLoopInputContent:
-      type: object
-      required:
-        - InputContent
-      properties:
-        InputContent:
-          $ref: '#/components/schemas/InputContent'
-          description: Serialized input from the human loop.
-      description: An object containing the input.
-    HumanLoopOutputContent:
+    HumanLoopOutput:
       type: object
       required:
         - OutputS3Uri
       properties:
         OutputS3Uri:
           $ref: '#/components/schemas/String'
-          description: 'The location of the Amazon S3 object where Amazon Augmented AI stores your human loop output. The output is stored at the following location: <code>s3://S3OutputPath/HumanLoopName/CreationTime/output.json</code>.'
+          description: The location of the Amazon S3 object where Amazon Augmented AI stores your human loop output.
       description: Information about where the human output will be stored.
     FailureReason:
       type: string
       maxLength: 1024
-    HumanLoopActivationReason:
+    HumanLoopDataAttributes:
       type: object
+      required:
+        - ContentClassifiers
       properties:
-        ConditionsMatched:
-          $ref: '#/components/schemas/Boolean'
-          description: True if the specified conditions were matched to trigger the human loop.
-      description: 'Contains information about why a human loop was triggered. If at least one activation reason is evaluated to be true, the human loop is activated.'
-    HumanLoopActivationResults:
+        ContentClassifiers:
+          $ref: '#/components/schemas/ContentClassifiers'
+          description: <p>Declares that your content is free of personally identifiable information or adult content.</p> <p>Amazon SageMaker can restrict the Amazon Mechanical Turk workers who can view your task based on this information.</p>
+      description: Attributes of the data specified by the customer. Use these to describe the data to be labeled.
+    HumanLoopInput:
       type: object
+      required:
+        - InputContent
       properties:
-        HumanLoopActivationReason:
-          $ref: '#/components/schemas/HumanLoopActivationReason'
-          description: An object containing information about why a human loop was triggered.
-        HumanLoopActivationConditionsEvaluationResults:
-          $ref: '#/components/schemas/String'
-          description: 'A copy of the human loop activation conditions of the flow definition, augmented with the results of evaluating those conditions on the input provided to the <code>StartHumanLoop</code> operation.'
-      description: Information about the corresponding flow definition's human loop activation condition evaluation. Null if <code>StartHumanLoop</code> was invoked directly.
+        InputContent:
+          $ref: '#/components/schemas/InputContent'
+          description: Serialized input from the human loop. The input must be a string representation of a file in JSON format.
+      description: An object containing the human loop input in JSON format.
     HumanLoopSummary:
       type: object
       properties:
@@ -639,15 +647,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/HumanLoopSummary'
-    HumanReviewDataAttributes:
-      type: object
-      required:
-        - ContentClassifiers
-      properties:
-        ContentClassifiers:
-          $ref: '#/components/schemas/ContentClassifiers'
-          description: Declares that your content is free of personally identifiable information or adult content. Amazon SageMaker may restrict the Amazon Mechanical Turk workers that can view your task based on this information.
-      description: Attributes of the data specified by the customer. Use these to describe the data to be labeled.
     SortOrder:
       type: string
       enum:
@@ -680,10 +679,10 @@ components:
           $ref: '#/components/schemas/FlowDefinitionArn'
           description: The Amazon Resource Name (ARN) of the flow definition.
         HumanLoopInput:
-          $ref: '#/components/schemas/HumanLoopInputContent'
+          $ref: '#/components/schemas/HumanLoopInput'
           description: An object containing information about the human loop.
         DataAttributes:
-          $ref: '#/components/schemas/HumanReviewDataAttributes'
+          $ref: '#/components/schemas/HumanLoopDataAttributes'
           description: Attributes of the data specified by the customer.
     StopHumanLoopRequest:
       type: object

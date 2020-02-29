@@ -3,7 +3,7 @@ info:
   version: '2019-07-18'
   x-release: v4
   title: Amazon CodeGuru Profiler
-  description: Example service documentation.
+  description: This section provides documentation for the Amazon CodeGuru Profiler API operations.
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -109,7 +109,7 @@ paths:
   '/profilingGroups/{profilingGroupName}/configureAgent':
     post:
       operationId: ConfigureAgent
-      description: Provides the configuration to use for an agent of the profiling group.
+      description: <p/>
       responses:
         '200':
           description: Success
@@ -145,11 +145,10 @@ paths:
         - name: profilingGroupName
           in: path
           required: true
-          description: ''
+          description: <p/>
           schema:
             type: string
             pattern: '^[\w-]+$'
-            description: The name of the profiling group.
             minLength: 1
             maxLength: 255
       requestBody:
@@ -160,7 +159,7 @@ paths:
               type: object
               properties:
                 fleetInstanceId:
-                  description: 'Identifier of the instance of compute fleet being profiled by the agent. For instance, host name in EC2, task id for ECS, function name for AWS Lambda'
+                  description: <p/>
                   type: string
                   pattern: '^[\w-.:/]+$'
                   minLength: 1
@@ -176,7 +175,7 @@ paths:
   '/profilingGroups#clientToken':
     post:
       operationId: CreateProfilingGroup
-      description: Create a profiling group.
+      description: Creates a profiling group.
       responses:
         '201':
           description: Success
@@ -218,11 +217,10 @@ paths:
         - name: clientToken
           in: query
           required: true
-          description: ''
+          description: '<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p> <p>This parameter specifies a unique identifier for the new profiling group that helps ensure idempotency.</p>'
           schema:
             type: string
             pattern: '^[\w-]+$'
-            description: Client token for the request.
             minLength: 1
             maxLength: 64
       requestBody:
@@ -235,12 +233,12 @@ paths:
                 - profilingGroupName
               properties:
                 agentOrchestrationConfig:
-                  description: Configuration to orchestrate agents to create and report agent profiles of the profiling group. Agents are orchestrated if they follow the agent orchestration protocol.
+                  description: <p/>
                   type: object
                   properties:
                     profilingEnabled:
                       $ref: '#/components/schemas/Boolean'
-                      description: If the agents should be enabled to create and report profiles.
+                      description: <p/>
                 profilingGroupName:
                   description: The name of the profiling group.
                   type: string
@@ -258,7 +256,7 @@ paths:
   '/profilingGroups/{profilingGroupName}':
     delete:
       operationId: DeleteProfilingGroup
-      description: Delete a profiling group.
+      description: Deletes a profiling group.
       responses:
         '204':
           description: Success
@@ -294,11 +292,10 @@ paths:
         - name: profilingGroupName
           in: path
           required: true
-          description: ''
+          description: The profiling group name to delete.
           schema:
             type: string
             pattern: '^[\w-]+$'
-            description: The name of the profiling group.
             minLength: 1
             maxLength: 255
     parameters:
@@ -311,7 +308,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: DescribeProfilingGroup
-      description: Describe a profiling group.
+      description: Describes a profiling group.
       responses:
         '200':
           description: Success
@@ -347,16 +344,15 @@ paths:
         - name: profilingGroupName
           in: path
           required: true
-          description: ''
+          description: The profiling group name.
           schema:
             type: string
             pattern: '^[\w-]+$'
-            description: The name of the profiling group.
             minLength: 1
             maxLength: 255
     put:
       operationId: UpdateProfilingGroup
-      description: Update a profiling group.
+      description: Updates a profiling group.
       responses:
         '200':
           description: Success
@@ -398,11 +394,10 @@ paths:
         - name: profilingGroupName
           in: path
           required: true
-          description: ''
+          description: The name of the profiling group to update.
           schema:
             type: string
             pattern: '^[\w-]+$'
-            description: The name of the profiling group.
             minLength: 1
             maxLength: 255
       requestBody:
@@ -415,16 +410,16 @@ paths:
                 - agentOrchestrationConfig
               properties:
                 agentOrchestrationConfig:
-                  description: Configuration to orchestrate agents to create and report agent profiles of the profiling group. Agents are orchestrated if they follow the agent orchestration protocol.
+                  description: <p/>
                   type: object
                   properties:
                     profilingEnabled:
                       $ref: '#/components/schemas/Boolean'
-                      description: If the agents should be enabled to create and report profiles.
+                      description: <p/>
   '/profilingGroups/{profilingGroupName}/profile':
     get:
       operationId: GetProfile
-      description: 'Get the aggregated profile of a profiling group for the specified time range. If the requested time range does not align with the available aggregated profiles, it will be expanded to attain alignment. If aggregated profiles are available only for part of the period requested, the profile is returned from the earliest available to the latest within the requested time range. For instance, if the requested time range is from 00:00 to 00:20 and the available profiles are from 00:15 to 00:25, then the returned profile will be from 00:15 to 00:20.'
+      description: '<p>Gets the aggregated profile of a profiling group for the specified time range. If the requested time range does not align with the available aggregated profiles, it is expanded to attain alignment. If aggregated profiles are available only for part of the period requested, the profile is returned from the earliest available to the latest within the requested time range. </p> <p>For example, if the requested time range is from 00:00 to 00:20 and the available profiles are from 00:15 to 00:25, the returned profile will be from 00:15 to 00:20. </p> <p>You must specify exactly two of the following parameters: <code>startTime</code>, <code>period</code>, and <code>endTime</code>. </p>'
       responses:
         '200':
           description: Success
@@ -460,48 +455,45 @@ paths:
         - name: Accept
           in: header
           required: false
-          description: The format of the profile to return. Supports application/json or application/x-amzn-ion. Defaults to application/x-amzn-ion.
+          description: 'The format of the profile to return. You can choose <code>application/json</code> or the default <code>application/x-amzn-ion</code>. '
           schema:
             type: string
         - name: endTime
           in: query
           required: false
-          description: The end time of the profile to get. Either period or endTime must be specified. Must be greater than start and the overall time range to be in the past and not larger than a week.
+          description: '<p/> <p>You must specify exactly two of the following parameters: <code>startTime</code>, <code>period</code>, and <code>endTime</code>. </p>'
           schema:
             type: string
             format: date-time
         - name: maxDepth
           in: query
           required: false
-          description: ''
+          description: The maximum depth of the graph.
           schema:
             type: integer
-            description: Limit the max depth of the profile.
             minimum: 1
             maximum: 10000
         - name: period
           in: query
           required: false
-          description: 'The period of the profile to get. Exactly two of <code>startTime</code>, <code>period</code> and <code>endTime</code> must be specified. Must be positive and the overall time range to be in the past and not larger than a week.'
+          description: '<p>The period of the profile to get. The time range must be in the past and not longer than one week. </p> <p>You must specify exactly two of the following parameters: <code>startTime</code>, <code>period</code>, and <code>endTime</code>. </p>'
           schema:
             type: string
-            description: 'Periods of time represented using <a href="https://en.wikipedia.org/wiki/ISO_8601#Durations">ISO 8601 format</a>.'
             minLength: 1
             maxLength: 64
         - name: profilingGroupName
           in: path
           required: true
-          description: ''
+          description: The name of the profiling group to get.
           schema:
             type: string
             pattern: '^[\w-]+$'
-            description: The name of the profiling group.
             minLength: 1
             maxLength: 255
         - name: startTime
           in: query
           required: false
-          description: The start time of the profile to get.
+          description: '<p>The start time of the profile to get.</p> <p>You must specify exactly two of the following parameters: <code>startTime</code>, <code>period</code>, and <code>endTime</code>. </p>'
           schema:
             type: string
             format: date-time
@@ -552,33 +544,31 @@ paths:
         - name: endTime
           in: query
           required: true
-          description: The end time of the time range to list profiles until.
+          description: The end time of the time range from which to list the profiles.
           schema:
             type: string
             format: date-time
         - name: maxResults
           in: query
           required: false
-          description: ''
+          description: 'The maximum number of profile time results returned by <code>ListProfileTimes</code> in paginated output. When this parameter is used, <code>ListProfileTimes</code> only returns <code>maxResults</code> results in a single page with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListProfileTimes</code> request with the returned <code>nextToken</code> value. '
           schema:
             type: integer
-            description: Upper bound on the number of results to list in a single call.
             minimum: 1
             maximum: 1000
         - name: nextToken
           in: query
           required: false
-          description: ''
+          description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListProfileTimes</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
           schema:
             type: string
             pattern: '^[\w-]+$'
-            description: Token for paginating results.
             minLength: 1
             maxLength: 64
         - name: orderBy
           in: query
           required: false
-          description: The order (ascending or descending by start time of the profile) to list the profiles by. Defaults to TIMESTAMP_DESCENDING.
+          description: 'The order (ascending or descending by start time of the profile) to use when listing profiles. Defaults to <code>TIMESTAMP_DESCENDING</code>. '
           schema:
             type: string
             enum:
@@ -587,28 +577,26 @@ paths:
         - name: period
           in: query
           required: true
-          description: The aggregation period to list the profiles for.
+          description: The aggregation period.
           schema:
             type: string
             enum:
               - P1D
               - PT1H
               - PT5M
-            description: 'Periods of time used for aggregation of profiles, represented using ISO 8601 format.'
         - name: profilingGroupName
           in: path
           required: true
-          description: ''
+          description: The name of the profiling group.
           schema:
             type: string
             pattern: '^[\w-]+$'
-            description: The name of the profiling group.
             minLength: 1
             maxLength: 255
         - name: startTime
           in: query
           required: true
-          description: The start time of the time range to list the profiles from.
+          description: The start time of the time range from which to list the profiles.
           schema:
             type: string
             format: date-time
@@ -623,7 +611,7 @@ paths:
   /profilingGroups:
     get:
       operationId: ListProfilingGroups
-      description: List profiling groups in the account.
+      description: Lists profiling groups.
       responses:
         '200':
           description: Success
@@ -647,26 +635,24 @@ paths:
         - name: includeDescription
           in: query
           required: false
-          description: 'If set to true, returns the full description of the profiling groups instead of the names. Defaults to false.'
+          description: A Boolean value indicating whether to include a description.
           schema:
             type: boolean
         - name: maxResults
           in: query
           required: false
-          description: ''
+          description: 'The maximum number of profiling groups results returned by <code>ListProfilingGroups</code> in paginated output. When this parameter is used, <code>ListProfilingGroups</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListProfilingGroups</code> request with the returned <code>nextToken</code> value. '
           schema:
             type: integer
-            description: Upper bound on the number of results to list in a single call.
             minimum: 1
             maximum: 1000
         - name: nextToken
           in: query
           required: false
-          description: ''
+          description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListProfilingGroups</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
           schema:
             type: string
             pattern: '^[\w-]+$'
-            description: Token for paginating results.
             minLength: 1
             maxLength: 64
     parameters:
@@ -680,7 +666,7 @@ paths:
   '/profilingGroups/{profilingGroupName}/agentProfile#Content-Type':
     post:
       operationId: PostAgentProfile
-      description: Submit profile collected by an agent belonging to a profiling group for aggregation.
+      description: <p/>
       responses:
         '204':
           description: Success
@@ -716,27 +702,25 @@ paths:
         - name: Content-Type
           in: header
           required: true
-          description: The content type of the agent profile in the payload. Recommended to send the profile gzipped with content-type application/octet-stream. Other accepted values are application/x-amzn-ion and application/json for unzipped Ion and JSON respectively.
+          description: <p/>
           schema:
             type: string
         - name: profileToken
           in: query
           required: false
-          description: Client generated token to deduplicate the agent profile during aggregation.
+          description: <p/>
           schema:
             type: string
             pattern: '^[\w-]+$'
-            description: Client token for the request.
             minLength: 1
             maxLength: 64
         - name: profilingGroupName
           in: path
           required: true
-          description: ''
+          description: <p/>
           schema:
             type: string
             pattern: '^[\w-]+$'
-            description: The name of the profiling group.
             minLength: 1
             maxLength: 255
       requestBody:
@@ -749,7 +733,7 @@ paths:
                 - agentProfile
               properties:
                 agentProfile:
-                  description: The profile collected by an agent for a time range.
+                  description: <p/>
                   type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -818,8 +802,8 @@ components:
       properties:
         configuration:
           $ref: '#/components/schemas/AgentConfiguration'
-          description: The configuration for the agent to use.
-      description: Response for ConfigureAgent operation.
+          description: <p/>
+      description: The structure representing the configureAgentResponse.
     InternalServerException: {}
     ValidationException: {}
     ThrottlingException: {}
@@ -831,7 +815,8 @@ components:
       properties:
         profilingGroup:
           $ref: '#/components/schemas/ProfilingGroupDescription'
-      description: Response for CreateProfilingGroup operation.
+          description: Information about the new profiling group
+      description: The structure representing the createProfilingGroupResponse.
     Boolean:
       type: boolean
     ServiceQuotaExceededException: {}
@@ -839,7 +824,7 @@ components:
     DeleteProfilingGroupResponse:
       type: object
       properties: {}
-      description: Response for DeleteProfilingGroup operation.
+      description: The structure representing the deleteProfilingGroupResponse.
     DescribeProfilingGroupResponse:
       type: object
       required:
@@ -847,7 +832,8 @@ components:
       properties:
         profilingGroup:
           $ref: '#/components/schemas/ProfilingGroupDescription'
-      description: Response for DescribeProfilingGroup operation.
+          description: Information about a profiling group.
+      description: The structure representing the describeProfilingGroupResponse.
     GetProfileResponse:
       type: object
       required:
@@ -855,7 +841,8 @@ components:
       properties:
         profile:
           $ref: '#/components/schemas/AggregatedProfile'
-      description: Response for GetProfile operation.
+          description: Information about the profile.
+      description: The structure representing the getProfileResponse.
     ListProfileTimesResponse:
       type: object
       required:
@@ -863,10 +850,11 @@ components:
       properties:
         nextToken:
           $ref: '#/components/schemas/PaginationToken'
+          description: 'The <code>nextToken</code> value to include in a future <code>ListProfileTimes</code> request. When the results of a <code>ListProfileTimes</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
         profileTimes:
           $ref: '#/components/schemas/ProfileTimes'
-          description: List of start times of the available profiles for the aggregation period in the specified time range.
-      description: Response for ListProfileTimes operation.
+          description: 'The list of start times of the available profiles for the aggregation period in the specified time range. '
+      description: The structure representing the listProfileTimesResponse.
     ListProfilingGroupsResponse:
       type: object
       required:
@@ -874,15 +862,18 @@ components:
       properties:
         nextToken:
           $ref: '#/components/schemas/PaginationToken'
+          description: 'The <code>nextToken</code> value to include in a future <code>ListProfilingGroups</code> request. When the results of a <code>ListProfilingGroups</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
         profilingGroupNames:
           $ref: '#/components/schemas/ProfilingGroupNames'
+          description: Information about profiling group names.
         profilingGroups:
           $ref: '#/components/schemas/ProfilingGroupDescriptions'
-      description: Response for ListProfilingGroups operation.
+          description: Information about profiling groups.
+      description: The structure representing the listProfilingGroupsResponse.
     PostAgentProfileResponse:
       type: object
       properties: {}
-      description: Response for PostAgentProfile operation.
+      description: The structure representing the postAgentProfileResponse.
     UpdateProfilingGroupResponse:
       type: object
       required:
@@ -890,7 +881,8 @@ components:
       properties:
         profilingGroup:
           $ref: '#/components/schemas/ProfilingGroupDescription'
-      description: Response for UpdateProfilingGroup operation.
+          description: Updated information about the profiling group.
+      description: The structure representing the updateProfilingGroupResponse.
     Integer:
       type: integer
     AgentConfiguration:
@@ -901,11 +893,11 @@ components:
       properties:
         periodInSeconds:
           $ref: '#/components/schemas/Integer'
-          description: Specifies the period to follow the configuration (to profile or not) and call back to get a new configuration.
+          description: <p/>
         shouldProfile:
           $ref: '#/components/schemas/Boolean'
-          description: Specifies if the profiling should be enabled by the agent.
-      description: The configuration for the agent to use.
+          description: <p/>
+      description: <p/>
     AgentOrchestrationConfig:
       type: object
       required:
@@ -913,21 +905,18 @@ components:
       properties:
         profilingEnabled:
           $ref: '#/components/schemas/Boolean'
-          description: If the agents should be enabled to create and report profiles.
-      description: Configuration to orchestrate agents to create and report agent profiles of the profiling group. Agents are orchestrated if they follow the agent orchestration protocol.
+          description: <p/>
+      description: <p/>
     AgentProfile:
       type: string
-      description: The profile collected by an agent for a time range.
     AggregatedProfile:
       type: string
-      description: The profile representing the aggregation of agent profiles of the profiling group for a time range.
     AggregationPeriod:
       type: string
       enum:
         - P1D
         - PT1H
         - PT5M
-      description: 'Periods of time used for aggregation of profiles, represented using ISO 8601 format.'
     Timestamp:
       type: string
       format: date-time
@@ -936,27 +925,24 @@ components:
       properties:
         period:
           $ref: '#/components/schemas/AggregationPeriod'
-          description: The aggregation period of the aggregated profile.
+          description: The time period.
         start:
           $ref: '#/components/schemas/Timestamp'
-          description: The start time of the aggregated profile.
-      description: The time range of an aggregated profile.
+          description: The start time.
+      description: Information about the time range of the latest available aggregated profile.
     ClientToken:
       type: string
       pattern: '^[\w-]+$'
-      description: Client token for the request.
       minLength: 1
       maxLength: 64
     FleetInstanceId:
       type: string
       pattern: '^[\w-.:/]+$'
-      description: 'Identifier of the instance of compute fleet being profiled by the agent. For instance, host name in EC2, task id for ECS, function name for AWS Lambda'
       minLength: 1
       maxLength: 255
     ProfilingGroupName:
       type: string
       pattern: '^[\w-]+$'
-      description: The name of the profiling group.
       minLength: 1
       maxLength: 255
     ConfigureAgentRequest:
@@ -965,7 +951,8 @@ components:
       properties:
         fleetInstanceId:
           $ref: '#/components/schemas/FleetInstanceId'
-      description: Request for ConfigureAgent operation.
+          description: <p/>
+      description: The structure representing the configureAgentRequest.
     CreateProfilingGroupRequest:
       type: object
       required:
@@ -974,63 +961,65 @@ components:
       properties:
         agentOrchestrationConfig:
           $ref: '#/components/schemas/AgentOrchestrationConfig'
+          description: The agent orchestration configuration.
         profilingGroupName:
           $ref: '#/components/schemas/ProfilingGroupName'
-      description: Request for CreateProfilingGroup operation.
+          description: The name of the profiling group.
+      description: The structure representing the createProfiliingGroupRequest.
     ProfilingGroupDescription:
       type: object
       properties:
         agentOrchestrationConfig:
           $ref: '#/components/schemas/AgentOrchestrationConfig'
+          description: <p/>
         arn:
           $ref: '#/components/schemas/ProfilingGroupArn'
+          description: The Amazon Resource Name (ARN) identifying the profiling group.
         createdAt:
           $ref: '#/components/schemas/Timestamp'
-          description: The timestamp of when the profiling group was created.
+          description: 'The time, in milliseconds since the epoch, when the profiling group was created.'
         name:
           $ref: '#/components/schemas/ProfilingGroupName'
+          description: The name of the profiling group.
         profilingStatus:
           $ref: '#/components/schemas/ProfilingStatus'
+          description: The status of the profiling group.
         updatedAt:
           $ref: '#/components/schemas/Timestamp'
-          description: The timestamp of when the profiling group was last updated.
+          description: 'The time, in milliseconds since the epoch, when the profiling group was last updated.'
       description: The description of a profiling group.
     DeleteProfilingGroupRequest:
       type: object
       title: DeleteProfilingGroupRequest
       properties: {}
-      description: Request for DeleteProfilingGroup operation.
+      description: The structure representing the deleteProfilingGroupRequest.
     DescribeProfilingGroupRequest:
       type: object
       title: DescribeProfilingGroupRequest
       properties: {}
-      description: Request for DescribeProfilingGroup operation.
+      description: The structure representing the describeProfilingGroupRequest.
     String:
       type: string
     MaxDepth:
       type: integer
-      description: Limit the max depth of the profile.
       minimum: 1
       maximum: 10000
     Period:
       type: string
-      description: 'Periods of time represented using <a href="https://en.wikipedia.org/wiki/ISO_8601#Durations">ISO 8601 format</a>.'
       minLength: 1
       maxLength: 64
     GetProfileRequest:
       type: object
       title: GetProfileRequest
       properties: {}
-      description: Request for GetProfile operation.
+      description: The structure representing the getProfileRequest.
     MaxResults:
       type: integer
-      description: Upper bound on the number of results to list in a single call.
       minimum: 1
       maximum: 1000
     PaginationToken:
       type: string
       pattern: '^[\w-]+$'
-      description: Token for paginating results.
       minLength: 1
       maxLength: 64
     OrderBy:
@@ -1042,25 +1031,22 @@ components:
       type: object
       title: ListProfileTimesRequest
       properties: {}
-      description: Request for ListProfileTimes operation.
+      description: The structure representing the listProfileTimesRequest.
     ProfileTimes:
       type: array
-      description: List of profile times.
       items:
         $ref: '#/components/schemas/ProfileTime'
     ListProfilingGroupsRequest:
       type: object
       title: ListProfilingGroupsRequest
       properties: {}
-      description: Request for ListProfilingGroups operation.
+      description: The structure representing the listProfilingGroupsRequest.
     ProfilingGroupNames:
       type: array
-      description: List of profiling group names.
       items:
         $ref: '#/components/schemas/ProfilingGroupName'
     ProfilingGroupDescriptions:
       type: array
-      description: List of profiling group descriptions.
       items:
         $ref: '#/components/schemas/ProfilingGroupDescription'
     PostAgentProfileRequest:
@@ -1071,30 +1057,30 @@ components:
       properties:
         agentProfile:
           $ref: '#/components/schemas/AgentProfile'
-      description: Request for PostAgentProfile operation.
+          description: <p/>
+      description: The structure representing the postAgentProfileRequest.
     ProfileTime:
       type: object
       properties:
         start:
           $ref: '#/components/schemas/Timestamp'
           description: The start time of the profile.
-      description: 'Periods of time used for aggregation of profiles, represented using ISO 8601 format.'
+      description: Information about the profile time.
     ProfilingGroupArn:
       type: string
-      description: The ARN of the profiling group.
     ProfilingStatus:
       type: object
       properties:
         latestAgentOrchestratedAt:
           $ref: '#/components/schemas/Timestamp'
-          description: Timestamp of when the last interaction of the agent with configureAgent API for orchestration.
+          description: 'The time, in milliseconds since the epoch, when the latest agent was orchestrated.'
         latestAgentProfileReportedAt:
           $ref: '#/components/schemas/Timestamp'
-          description: Timestamp of when the latest agent profile was successfully reported.
+          description: 'The time, in milliseconds since the epoch, when the latest agent was reported..'
         latestAggregatedProfile:
           $ref: '#/components/schemas/AggregatedProfileTime'
-          description: The time range of latest aggregated profile available.
-      description: The status of profiling of a profiling group.
+          description: The latest aggregated profile
+      description: Information about the profiling status.
     UpdateProfilingGroupRequest:
       type: object
       required:
@@ -1103,7 +1089,7 @@ components:
       properties:
         agentOrchestrationConfig:
           $ref: '#/components/schemas/AgentOrchestrationConfig'
-          description: Remote configuration to configure the agents of the profiling group.
-      description: Request for UpdateProfilingGroup operation.
+          description: <p/>
+      description: The structure representing the updateProfilingGroupRequest.
 security:
   - hmac: []

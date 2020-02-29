@@ -5929,6 +5929,106 @@ paths:
                   type: string
                   pattern: '[\u0020-\u00FF]+'
                   minLength: 1
+  '/accounts/{AwsAccountId}/search/dashboards':
+    post:
+      operationId: SearchDashboards
+      description: 'Searchs for dashboards that belong to a user. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchDashboardsResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: UnsupportedUserEditionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUserEditionException'
+        '484':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '485':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: 'The ID of the AWS account that contains the user whose dashboards you''re searching for. '
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Filters
+              properties:
+                Filters:
+                  description: 'The filters to apply to the search. Currently, you can search only by user name. For example, <code>"Filters": [ { "Name": "QUICKSIGHT_USER", "Operator": "StringEquals", "Value": "arn:aws:quicksight:us-east-1:1:user/default/UserName1" } ]</code> '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/DashboardSearchFilter'
+                  maxItems: 1
+                NextToken:
+                  description: 'The token for the next set of results, or null if there are no more results.'
+                  type: string
+                MaxResults:
+                  description: The maximum number of results to be returned per request.
+                  type: integer
+                  minimum: 1
+                  maximum: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/resources/{ResourceArn}/tags#keys':
     delete:
       operationId: UntagResource
@@ -7298,6 +7398,36 @@ components:
         Status:
           $ref: '#/components/schemas/StatusCode'
           description: The HTTP status of the request.
+    SearchDashboardsResponse:
+      type: object
+      properties:
+        DashboardSummaryList:
+          $ref: '#/components/schemas/DashboardSummaryList'
+          description: The list of dashboards owned by the user specified in <code>Filters</code> in your request.
+        NextToken:
+          $ref: '#/components/schemas/String'
+          description: 'The token for the next set of results, or null if there are no more results.'
+        Status:
+          $ref: '#/components/schemas/StatusCode'
+          description: The HTTP status of the request.
+        RequestId:
+          $ref: '#/components/schemas/String'
+          description: The AWS request ID for this operation.
+    DashboardSearchFilter:
+      type: object
+      required:
+        - Operator
+      properties:
+        Operator:
+          $ref: '#/components/schemas/FilterOperator'
+          description: 'The comparison operator that you want to use as a filter. For example, <code>"Operator": "StringEquals"</code>.'
+        Name:
+          $ref: '#/components/schemas/DashboardFilterAttribute'
+          description: 'The name of the value that you want to use as a filter. For example, <code>"Name": "QUICKSIGHT_USER"</code>. '
+        Value:
+          $ref: '#/components/schemas/String'
+          description: 'The value of the named item, in this case <code>QUICKSIGHT_USER</code>, that you want to use as a filter. For example, <code>"Value": "arn:aws:quicksight:us-east-1:1:user/default/UserName1"</code>. '
+      description: 'A filter that you apply when searching for dashboards. '
     TagResourceResponse:
       type: object
       properties:
@@ -8399,6 +8529,19 @@ components:
       items:
         $ref: '#/components/schemas/DashboardError'
       minItems: 1
+    DashboardFilterAttribute:
+      type: string
+      enum:
+        - QUICKSIGHT_USER
+    FilterOperator:
+      type: string
+      enum:
+        - StringEquals
+    DashboardSearchFilterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DashboardSearchFilter'
+      maxItems: 1
     DataSetReferenceList:
       type: array
       items:
@@ -9423,6 +9566,21 @@ components:
           $ref: '#/components/schemas/Delimiter'
           description: The delimiter between values in the file.
       description: Information about the format for a source file or files.
+    SearchDashboardsRequest:
+      type: object
+      required:
+        - Filters
+      title: SearchDashboardsRequest
+      properties:
+        Filters:
+          $ref: '#/components/schemas/DashboardSearchFilterList'
+          description: 'The filters to apply to the search. Currently, you can search only by user name. For example, <code>"Filters": [ { "Name": "QUICKSIGHT_USER", "Operator": "StringEquals", "Value": "arn:aws:quicksight:us-east-1:1:user/default/UserName1" } ]</code> '
+        NextToken:
+          $ref: '#/components/schemas/String'
+          description: 'The token for the next set of results, or null if there are no more results.'
+        MaxResults:
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of results to be returned per request.
     Warehouse:
       type: string
       maxLength: 128
