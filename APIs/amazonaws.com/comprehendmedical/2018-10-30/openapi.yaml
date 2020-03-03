@@ -293,7 +293,7 @@ paths:
   '/#X-Amz-Target=ComprehendMedical_20181030.DetectEntitiesV2':
     post:
       operationId: DetectEntitiesV2
-      description: '<p>Inspects the clinical text for a variety of medical entities and returns specific information about them such as entity category, location, and confidence score on that information.</p> <p>The <code>DetectEntitiesV2</code> operation replaces the <a>DetectEntities</a> operation. This new action uses a different model for determining the entities in your medical text and changes the way that some entities are returned in the output. You should use the <code>DetectEntitiesV2</code> operation in all new applications.</p> <p>The <code>DetectEntitiesV2</code> operation returns the <code>Acuity</code> and <code>Direction</code> entities as attributes instead of types. </p>'
+      description: '<p>Inspects the clinical text for a variety of medical entities and returns specific information about them such as entity category, location, and confidence score on that information. Amazon Comprehend Medical only detects medical entities in English language texts.</p> <p>The <code>DetectEntitiesV2</code> operation replaces the <a>DetectEntities</a> operation. This new action uses a different model for determining the entities in your medical text and changes the way that some entities are returned in the output. You should use the <code>DetectEntitiesV2</code> operation in all new applications.</p> <p>The <code>DetectEntitiesV2</code> operation returns the <code>Acuity</code> and <code>Direction</code> entities as attributes instead of types. </p>'
       responses:
         '200':
           description: Success
@@ -362,7 +362,7 @@ paths:
   '/#X-Amz-Target=ComprehendMedical_20181030.DetectPHI':
     post:
       operationId: DetectPHI
-      description: ' Inspects the clinical text for protected health information (PHI) entities and entity category, location, and confidence score on that information.'
+      description: ' Inspects the clinical text for protected health information (PHI) entities and returns the entity category, location, and confidence score for each entity. Amazon Comprehend Medical only detects entities in English language texts.'
       responses:
         '200':
           description: Success
@@ -431,7 +431,7 @@ paths:
   '/#X-Amz-Target=ComprehendMedical_20181030.InferICD10CM':
     post:
       operationId: InferICD10CM
-      description: InferICD10CM detects medical conditions as entities listed in a patient record and links those entities to normalized concept identifiers in the ICD-10-CM knowledge base from the Centers for Disease Control.
+      description: InferICD10CM detects medical conditions as entities listed in a patient record and links those entities to normalized concept identifiers in the ICD-10-CM knowledge base from the Centers for Disease Control. Amazon Comprehend Medical only detects medical entities in English language texts.
       responses:
         '200':
           description: Success
@@ -500,7 +500,7 @@ paths:
   '/#X-Amz-Target=ComprehendMedical_20181030.InferRxNorm':
     post:
       operationId: InferRxNorm
-      description: InferRxNorm detects medications as entities listed in a patient record and links to the normalized concept identifiers in the RxNorm database from the National Library of Medicine.
+      description: InferRxNorm detects medications as entities listed in a patient record and links to the normalized concept identifiers in the RxNorm database from the National Library of Medicine. Amazon Comprehend Medical only detects medical entities in English language texts.
       responses:
         '200':
           description: Success
@@ -1289,14 +1289,49 @@ components:
         - DIRECTION
         - QUALITY
         - QUANTITY
+        - TIME_EXPRESSION
+        - TIME_TO_MEDICATION_NAME
+        - TIME_TO_DX_NAME
+        - TIME_TO_TEST_NAME
+        - TIME_TO_PROCEDURE_NAME
+        - TIME_TO_TREATMENT_NAME
     Float:
       type: number
       format: float
+    RelationshipType:
+      type: string
+      enum:
+        - EVERY
+        - WITH_DOSAGE
+        - ADMINISTERED_VIA
+        - FOR
+        - NEGATIVE
+        - OVERLAP
+        - DOSAGE
+        - ROUTE_OR_MODE
+        - FORM
+        - FREQUENCY
+        - DURATION
+        - STRENGTH
+        - RATE
+        - ACUITY
+        - TEST_VALUE
+        - TEST_UNITS
+        - DIRECTION
     Integer:
       type: integer
     String:
       type: string
       minLength: 1
+    EntityType:
+      type: string
+      enum:
+        - MEDICATION
+        - MEDICAL_CONDITION
+        - PROTECTED_HEALTH_INFORMATION
+        - TEST_TREATMENT_PROCEDURE
+        - ANATOMY
+        - TIME_EXPRESSION
     TraitList:
       type: array
       items:
@@ -1313,6 +1348,9 @@ components:
         RelationshipScore:
           $ref: '#/components/schemas/Float'
           description: ' The level of confidence that Amazon Comprehend Medical has that this attribute is correctly related to this entity. '
+        RelationshipType:
+          $ref: '#/components/schemas/RelationshipType'
+          description: 'The type of relationship between the entity and attribute. Type for the relationship is <code>OVERLAP</code>, indicating that the entity occurred at the same time as the <code>Date_Expression</code>. '
         Id:
           $ref: '#/components/schemas/Integer'
           description: ' The numeric identifier for this attribute. This is a monotonically increasing id unique within this response rather than a global unique identifier. '
@@ -1325,6 +1363,9 @@ components:
         Text:
           $ref: '#/components/schemas/String'
           description: ' The segment of input text extracted as this attribute.'
+        Category:
+          $ref: '#/components/schemas/EntityType'
+          description: ' The category of attribute. '
         Traits:
           $ref: '#/components/schemas/TraitList'
           description: ' Contextual information for this attribute. '
@@ -1399,7 +1440,7 @@ components:
         S3Key:
           $ref: '#/components/schemas/S3Key'
           description: The path to the input data files in the S3 bucket.
-      description: The input properties for an entities detection job
+      description: The input properties for an entities detection job.
     OutputDataConfig:
       type: object
       required:
@@ -1490,14 +1531,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/UnmappedAttribute'
-    EntityType:
-      type: string
-      enum:
-        - MEDICATION
-        - MEDICAL_CONDITION
-        - PROTECTED_HEALTH_INFORMATION
-        - TEST_TREATMENT_PROCEDURE
-        - ANATOMY
     Entity:
       type: object
       properties:
