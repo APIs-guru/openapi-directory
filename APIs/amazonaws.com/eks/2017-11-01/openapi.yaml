@@ -219,6 +219,12 @@ paths:
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
+                encryptionConfig:
+                  description: The encryption configuration for the cluster.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/EncryptionConfig'
+                  maxItems: 1
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1648,6 +1654,16 @@ components:
     TagValue:
       type: string
       maxLength: 256
+    EncryptionConfig:
+      type: object
+      properties:
+        resources:
+          $ref: '#/components/schemas/StringList'
+          description: Specifies the resources to be encrypted. The only supported value is "secrets".
+        provider:
+          $ref: '#/components/schemas/Provider'
+          description: AWS Key Management Service (AWS KMS) customer master key (CMK). Either the ARN or the alias can be used.
+      description: The encryption configuration for the cluster.
     ResourceInUseException: {}
     ResourceLimitExceededException: {}
     InvalidParameterException: {}
@@ -1922,6 +1938,11 @@ components:
       maxProperties: 50
       additionalProperties:
         $ref: '#/components/schemas/TagValue'
+    EncryptionConfigList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EncryptionConfig'
+      maxItems: 1
     Cluster:
       type: object
       properties:
@@ -1967,6 +1988,9 @@ components:
         tags:
           $ref: '#/components/schemas/TagMap'
           description: 'The metadata that you apply to the cluster to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Cluster tags do not propagate to any other resources associated with the cluster. '
+        encryptionConfig:
+          $ref: '#/components/schemas/EncryptionConfigList'
+          description: The encryption configuration for the cluster.
       description: An object representing an Amazon EKS cluster.
     ClusterName:
       type: string
@@ -2021,6 +2045,9 @@ components:
         tags:
           $ref: '#/components/schemas/TagMap'
           description: 'The metadata to apply to the cluster to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define.'
+        encryptionConfig:
+          $ref: '#/components/schemas/EncryptionConfigList'
+          description: The encryption configuration for the cluster.
     FargateProfileSelectors:
       type: array
       items:
@@ -2262,6 +2289,13 @@ components:
           $ref: '#/components/schemas/ErrorDetails'
           description: Any errors associated with a <code>Failed</code> update.
       description: An object representing an asynchronous update.
+    Provider:
+      type: object
+      properties:
+        keyArn:
+          $ref: '#/components/schemas/String'
+          description: 'Amazon Resource Name (ARN) or alias of the customer master key (CMK). The CMK must be symmetric, created in the same region as the cluster, and if the CMK was created in a different account, the user must have access to the CMK. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-modifying-external-accounts.html">Allowing Users in Other Accounts to Use a CMK</a> in the <i>AWS Key Management Service Developer Guide</i>.'
+      description: Identifies the AWS Key Management Service (AWS KMS) customer master key (CMK) used to encrypt the secrets.
     ErrorCode:
       type: string
       enum:

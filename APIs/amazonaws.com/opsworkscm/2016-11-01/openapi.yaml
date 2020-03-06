@@ -1910,12 +1910,12 @@ components:
       description: 'An event that is related to the server, such as the start of maintenance or backup. '
     TagKey:
       type: string
-      pattern: '^([\p{L}\p{Z}\p{N}_.:\/=+\\\-@]*)$'
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
       minLength: 1
       maxLength: 128
     TagValue:
       type: string
-      pattern: '^([\p{L}\p{Z}\p{N}_.:\/=+\\\-@]*)$'
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
       minLength: 0
       maxLength: 256
     Tag:

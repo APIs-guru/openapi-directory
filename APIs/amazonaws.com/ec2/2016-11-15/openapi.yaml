@@ -1099,7 +1099,7 @@ paths:
     get:
       x-aws-operation-name: AssociateClientVpnTargetNetwork
       operationId: GET AssociateClientVpnTargetNetwork
-      description: Associates a target network with a Client VPN endpoint. A target network is a subnet in a VPC. You can associate multiple subnets from the same VPC with a Client VPN endpoint. You can associate only one subnet in each Availability Zone. We recommend that you associate at least two subnets to provide Availability Zone redundancy.
+      description: '<p>Associates a target network with a Client VPN endpoint. A target network is a subnet in a VPC. You can associate multiple subnets from the same VPC with a Client VPN endpoint. You can associate only one subnet in each Availability Zone. We recommend that you associate at least two subnets to provide Availability Zone redundancy.</p> <p>If you specified a VPC when you created the Client VPN endpoint or if you have previous subnet associations, the specified subnet must be in the same VPC. To specify a subnet that''s in a different VPC, you must first modify the Client VPN endpoint (<a>ModifyClientVpnEndpoint</a>) and change the VPC that''s associated with it.</p>'
       responses:
         '200':
           description: Success
@@ -1154,7 +1154,7 @@ paths:
     post:
       x-aws-operation-name: AssociateClientVpnTargetNetwork
       operationId: POST AssociateClientVpnTargetNetwork
-      description: Associates a target network with a Client VPN endpoint. A target network is a subnet in a VPC. You can associate multiple subnets from the same VPC with a Client VPN endpoint. You can associate only one subnet in each Availability Zone. We recommend that you associate at least two subnets to provide Availability Zone redundancy.
+      description: '<p>Associates a target network with a Client VPN endpoint. A target network is a subnet in a VPC. You can associate multiple subnets from the same VPC with a Client VPN endpoint. You can associate only one subnet in each Availability Zone. We recommend that you associate at least two subnets to provide Availability Zone redundancy.</p> <p>If you specified a VPC when you created the Client VPN endpoint or if you have previous subnet associations, the specified subnet must be in the same VPC. To specify a subnet that''s in a different VPC, you must first modify the Client VPN endpoint (<a>ModifyClientVpnEndpoint</a>) and change the VPC that''s associated with it.</p>'
       responses:
         '200':
           description: Success
@@ -3738,6 +3738,20 @@ paths:
             type: array
             items:
               $ref: '#/components/schemas/TagSpecification'
+        - name: SecurityGroupId
+          in: query
+          required: false
+          description: The IDs of one or more security groups to apply to the target network. You must also specify the ID of the VPC that contains the security groups.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/String'
+        - name: VpcId
+          in: query
+          required: false
+          description: 'The ID of the VPC to associate with the Client VPN endpoint. If no security group IDs are specified in the request, the default security group for the VPC is applied.'
+          schema:
+            type: string
         - name: Action
           in: query
           required: true
@@ -12075,7 +12089,7 @@ paths:
     get:
       x-aws-operation-name: DeleteVpnGateway
       operationId: GET DeleteVpnGateway
-      description: 'Deletes the specified virtual private gateway. We recommend that before you delete a virtual private gateway, you detach it from the VPC and delete the VPN connection. Note that you don''t need to delete the virtual private gateway if you plan to delete and recreate the VPN connection between your VPC and your network.'
+      description: Deletes the specified virtual private gateway. You must first detach the virtual private gateway from the VPC. Note that you don't need to delete the virtual private gateway if you plan to delete and recreate the VPN connection between your VPC and your network.
       responses:
         '200':
           description: Success
@@ -12117,7 +12131,7 @@ paths:
     post:
       x-aws-operation-name: DeleteVpnGateway
       operationId: POST DeleteVpnGateway
-      description: 'Deletes the specified virtual private gateway. We recommend that before you delete a virtual private gateway, you detach it from the VPC and delete the VPN connection. Note that you don''t need to delete the virtual private gateway if you plan to delete and recreate the VPN connection between your VPC and your network.'
+      description: Deletes the specified virtual private gateway. You must first detach the virtual private gateway from the VPC. Note that you don't need to delete the virtual private gateway if you plan to delete and recreate the VPN connection between your VPC and your network.
       responses:
         '200':
           description: Success
@@ -21114,7 +21128,7 @@ paths:
         - name: Filter
           in: query
           required: false
-          description: '<p>The filters.</p> <ul> <li> <p> <code>key</code> - The tag key.</p> </li> <li> <p> <code>resource-id</code> - The ID of the resource.</p> </li> <li> <p> <code>resource-type</code> - The resource type (<code>customer-gateway</code> | <code>dedicated-host</code> | <code>dhcp-options</code> | <code>elastic-ip</code> | <code>fleet</code> | <code>fpga-image</code> | <code>image</code> | <code>instance</code> | <code>host-reservation</code> | <code>internet-gateway</code> | <code>launch-template</code> | <code>natgateway</code> | <code>network-acl</code> | <code>network-interface</code> | <code>reserved-instances</code> | <code>route-table</code> | <code>security-group</code> | <code>snapshot</code> | <code>spot-instances-request</code> | <code>subnet</code> | <code>volume</code> | <code>vpc</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>).</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of the tag. For example, specify "tag:Owner" for the filter name and "TeamA" for the filter value to find resources with the tag "Owner=TeamA".</p> </li> <li> <p> <code>value</code> - The tag value.</p> </li> </ul>'
+          description: '<p>The filters.</p> <ul> <li> <p> <code>key</code> - The tag key.</p> </li> <li> <p> <code>resource-id</code> - The ID of the resource.</p> </li> <li> <p> <code>resource-type</code> - The resource type (<code>customer-gateway</code> | <code>dedicated-host</code> | <code>dhcp-options</code> | <code>elastic-ip</code> | <code>fleet</code> | <code>fpga-image</code> | <code>image</code> | <code>instance</code> | <code>host-reservation</code> | <code>internet-gateway</code> | <code>launch-template</code> | <code>natgateway</code> | <code>network-acl</code> | <code>network-interface</code> | <code>placement-group</code> | <code>reserved-instances</code> | <code>route-table</code> | <code>security-group</code> | <code>snapshot</code> | <code>spot-instances-request</code> | <code>subnet</code> | <code>volume</code> | <code>vpc</code> | <code>vpc-endpoint</code> | <code>vpc-endpoint-service</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>).</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of the tag. For example, specify "tag:Owner" for the filter name and "TeamA" for the filter value to find resources with the tag "Owner=TeamA".</p> </li> <li> <p> <code>value</code> - The tag value.</p> </li> </ul>'
           schema:
             type: array
             items:
@@ -24356,7 +24370,7 @@ paths:
         - name: DryRun
           in: query
           required: false
-          description: ''
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
           schema:
             type: boolean
         - name: Action
@@ -25340,7 +25354,7 @@ paths:
         - name: DryRun
           in: query
           required: false
-          description: ''
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
           schema:
             type: boolean
         - name: Action
@@ -28006,7 +28020,7 @@ paths:
     get:
       x-aws-operation-name: ModifyClientVpnEndpoint
       operationId: GET ModifyClientVpnEndpoint
-      description: 'Modifies the specified Client VPN endpoint. You can only modify an endpoint''s server certificate information, client connection logging information, DNS server, and description. Modifying the DNS server resets existing client connections.'
+      description: Modifies the specified Client VPN endpoint. Modifying the DNS server resets existing client connections.
       responses:
         '200':
           description: Success
@@ -28079,6 +28093,20 @@ paths:
           description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
           schema:
             type: boolean
+        - name: SecurityGroupId
+          in: query
+          required: false
+          description: The IDs of one or more security groups to apply to the target network.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/String'
+        - name: VpcId
+          in: query
+          required: false
+          description: The ID of the VPC to associate with the Client VPN endpoint.
+          schema:
+            type: string
         - name: Action
           in: query
           required: true
@@ -28104,7 +28132,7 @@ paths:
     post:
       x-aws-operation-name: ModifyClientVpnEndpoint
       operationId: POST ModifyClientVpnEndpoint
-      description: 'Modifies the specified Client VPN endpoint. You can only modify an endpoint''s server certificate information, client connection logging information, DNS server, and description. Modifying the DNS server resets existing client connections.'
+      description: Modifies the specified Client VPN endpoint. Modifying the DNS server resets existing client connections.
       responses:
         '200':
           description: Success
@@ -31399,7 +31427,7 @@ paths:
     get:
       x-aws-operation-name: ModifyVpnConnection
       operationId: GET ModifyVpnConnection
-      description: '<p>Modifies the target gateway of an AWS Site-to-Site VPN connection. The following migration options are available:</p> <ul> <li> <p>An existing virtual private gateway to a new virtual private gateway</p> </li> <li> <p>An existing virtual private gateway to a transit gateway</p> </li> <li> <p>An existing transit gateway to a new transit gateway</p> </li> <li> <p>An existing transit gateway to a virtual private gateway</p> </li> </ul> <p>Before you perform the migration to the new gateway, you must configure the new gateway. Use <a>CreateVpnGateway</a> to create a virtual private gateway, or <a>CreateTransitGateway</a> to create a transit gateway.</p> <p>This step is required when you migrate from a virtual private gateway with static routes to a transit gateway. </p> <p>You must delete the static routes before you migrate to the new gateway.</p> <p>Keep a copy of the static route before you delete it. You will need to add back these routes to the transit gateway after the VPN connection migration is complete.</p> <p>After you migrate to the new gateway, you might need to modify your VPC route table. Use <a>CreateRoute</a> and <a>DeleteRoute</a> to make the changes described in <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/modify-vpn-target.html#step-update-routing">VPN Gateway Target Modification Required VPC Route Table Updates</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p> <p> When the new gateway is a transit gateway, modify the transit gateway route table to allow traffic between the VPC and the AWS Site-to-Site VPN connection. Use <a>CreateTransitGatewayRoute</a> to add the routes.</p> <p> If you deleted VPN static routes, you must add the static routes to the transit gateway route table.</p> <p>After you perform this operation, the AWS VPN endpoint''s IP addresses on the AWS side and the tunnel options remain intact. Your s2slong; connection will be temporarily unavailable for approximately 10 minutes while we provision the new endpoints </p>'
+      description: '<p>Modifies the target gateway of an AWS Site-to-Site VPN connection. The following migration options are available:</p> <ul> <li> <p>An existing virtual private gateway to a new virtual private gateway</p> </li> <li> <p>An existing virtual private gateway to a transit gateway</p> </li> <li> <p>An existing transit gateway to a new transit gateway</p> </li> <li> <p>An existing transit gateway to a virtual private gateway</p> </li> </ul> <p>Before you perform the migration to the new gateway, you must configure the new gateway. Use <a>CreateVpnGateway</a> to create a virtual private gateway, or <a>CreateTransitGateway</a> to create a transit gateway.</p> <p>This step is required when you migrate from a virtual private gateway with static routes to a transit gateway. </p> <p>You must delete the static routes before you migrate to the new gateway.</p> <p>Keep a copy of the static route before you delete it. You will need to add back these routes to the transit gateway after the VPN connection migration is complete.</p> <p>After you migrate to the new gateway, you might need to modify your VPC route table. Use <a>CreateRoute</a> and <a>DeleteRoute</a> to make the changes described in <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/modify-vpn-target.html#step-update-routing">VPN Gateway Target Modification Required VPC Route Table Updates</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p> <p> When the new gateway is a transit gateway, modify the transit gateway route table to allow traffic between the VPC and the AWS Site-to-Site VPN connection. Use <a>CreateTransitGatewayRoute</a> to add the routes.</p> <p> If you deleted VPN static routes, you must add the static routes to the transit gateway route table.</p> <p>After you perform this operation, the AWS VPN endpoint''s IP addresses on the AWS side and the tunnel options remain intact. Your AWS Site-to-Site VPN connection will be temporarily unavailable for a brief period while we provision the new endpoints.</p>'
       responses:
         '200':
           description: Success
@@ -31460,7 +31488,7 @@ paths:
     post:
       x-aws-operation-name: ModifyVpnConnection
       operationId: POST ModifyVpnConnection
-      description: '<p>Modifies the target gateway of an AWS Site-to-Site VPN connection. The following migration options are available:</p> <ul> <li> <p>An existing virtual private gateway to a new virtual private gateway</p> </li> <li> <p>An existing virtual private gateway to a transit gateway</p> </li> <li> <p>An existing transit gateway to a new transit gateway</p> </li> <li> <p>An existing transit gateway to a virtual private gateway</p> </li> </ul> <p>Before you perform the migration to the new gateway, you must configure the new gateway. Use <a>CreateVpnGateway</a> to create a virtual private gateway, or <a>CreateTransitGateway</a> to create a transit gateway.</p> <p>This step is required when you migrate from a virtual private gateway with static routes to a transit gateway. </p> <p>You must delete the static routes before you migrate to the new gateway.</p> <p>Keep a copy of the static route before you delete it. You will need to add back these routes to the transit gateway after the VPN connection migration is complete.</p> <p>After you migrate to the new gateway, you might need to modify your VPC route table. Use <a>CreateRoute</a> and <a>DeleteRoute</a> to make the changes described in <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/modify-vpn-target.html#step-update-routing">VPN Gateway Target Modification Required VPC Route Table Updates</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p> <p> When the new gateway is a transit gateway, modify the transit gateway route table to allow traffic between the VPC and the AWS Site-to-Site VPN connection. Use <a>CreateTransitGatewayRoute</a> to add the routes.</p> <p> If you deleted VPN static routes, you must add the static routes to the transit gateway route table.</p> <p>After you perform this operation, the AWS VPN endpoint''s IP addresses on the AWS side and the tunnel options remain intact. Your s2slong; connection will be temporarily unavailable for approximately 10 minutes while we provision the new endpoints </p>'
+      description: '<p>Modifies the target gateway of an AWS Site-to-Site VPN connection. The following migration options are available:</p> <ul> <li> <p>An existing virtual private gateway to a new virtual private gateway</p> </li> <li> <p>An existing virtual private gateway to a transit gateway</p> </li> <li> <p>An existing transit gateway to a new transit gateway</p> </li> <li> <p>An existing transit gateway to a virtual private gateway</p> </li> </ul> <p>Before you perform the migration to the new gateway, you must configure the new gateway. Use <a>CreateVpnGateway</a> to create a virtual private gateway, or <a>CreateTransitGateway</a> to create a transit gateway.</p> <p>This step is required when you migrate from a virtual private gateway with static routes to a transit gateway. </p> <p>You must delete the static routes before you migrate to the new gateway.</p> <p>Keep a copy of the static route before you delete it. You will need to add back these routes to the transit gateway after the VPN connection migration is complete.</p> <p>After you migrate to the new gateway, you might need to modify your VPC route table. Use <a>CreateRoute</a> and <a>DeleteRoute</a> to make the changes described in <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/modify-vpn-target.html#step-update-routing">VPN Gateway Target Modification Required VPC Route Table Updates</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p> <p> When the new gateway is a transit gateway, modify the transit gateway route table to allow traffic between the VPC and the AWS Site-to-Site VPN connection. Use <a>CreateTransitGatewayRoute</a> to add the routes.</p> <p> If you deleted VPN static routes, you must add the static routes to the transit gateway route table.</p> <p>After you perform this operation, the AWS VPN endpoint''s IP addresses on the AWS side and the tunnel options remain intact. Your AWS Site-to-Site VPN connection will be temporarily unavailable for a brief period while we provision the new endpoints.</p>'
       responses:
         '200':
           description: Success
@@ -36973,7 +37001,7 @@ components:
       properties:
         ResourceType:
           $ref: '#/components/schemas/ResourceType'
-          description: '<p>The type of resource to tag. Currently, the resource types that support tagging on creation are: <code>capacity-reservation</code> | <code>client-vpn-endpoint</code> | <code>dedicated-host</code> | <code>fleet</code> | <code>fpga-image</code> | <code>instance</code> | <code>key-pair</code> | <code>launch-template</code> | <code>placement-group</code> | <code>snapshot</code> | <code>traffic-mirror-filter</code> | <code>traffic-mirror-session</code> | <code>traffic-mirror-target</code> | <code>transit-gateway</code> | <code>transit-gateway-attachment</code> | <code>transit-gateway-route-table</code> | <code>volume</code>.</p> <p>To tag a resource after it has been created, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html">CreateTags</a>.</p>'
+          description: '<p>The type of resource to tag. Currently, the resource types that support tagging on creation are: <code>capacity-reservation</code> | <code>client-vpn-endpoint</code> | <code>dedicated-host</code> | <code>fleet</code> | <code>fpga-image</code> | <code>instance</code> | <code>key-pair</code> | <code>launch-template</code> | <code>spot-fleet-request</code> | <code>placement-group</code> | <code>snapshot</code> | <code>traffic-mirror-filter</code> | <code>traffic-mirror-session</code> | <code>traffic-mirror-target</code> | <code>transit-gateway</code> | <code>transit-gateway-attachment</code> | <code>transit-gateway-route-table</code> | <code>vpc-endpoint</code> (for interface VPC endpoints)| <code>vpc-endpoint-service</code> (for gateway VPC endpoints) | <code>volume</code> | <code>vpc-flow-log</code>.</p> <p>To tag a resource after it has been created, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html">CreateTags</a>.</p>'
         Tags:
           $ref: '#/components/schemas/TagList'
           description: The tags to apply to the resource.
@@ -43930,6 +43958,12 @@ components:
         Tags:
           $ref: '#/components/schemas/TagList'
           description: Any tags assigned to the Client VPN endpoint.
+        SecurityGroupIds:
+          $ref: '#/components/schemas/ClientVpnSecurityGroupIdSet'
+          description: The IDs of the security groups for the target network.
+        VpcId:
+          $ref: '#/components/schemas/VpcId'
+          description: The ID of the VPC.
       description: Describes a Client VPN endpoint.
     ClientVpnEndpointIdList:
       type: array
@@ -44397,6 +44431,12 @@ components:
         TagSpecifications:
           $ref: '#/components/schemas/TagSpecificationList'
           description: The tags to apply to the Client VPN endpoint during creation.
+        SecurityGroupIds:
+          $ref: '#/components/schemas/ClientVpnSecurityGroupIdSet'
+          description: The IDs of one or more security groups to apply to the target network. You must also specify the ID of the VPC that contains the security groups.
+        VpcId:
+          $ref: '#/components/schemas/VpcId'
+          description: 'The ID of the VPC to associate with the Client VPN endpoint. If no security group IDs are specified in the request, the default security group for the VPC is applied.'
     CreateClientVpnRouteRequest:
       type: object
       required:
@@ -50247,7 +50287,7 @@ components:
           description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
         Filters:
           $ref: '#/components/schemas/FilterList'
-          description: '<p>The filters.</p> <ul> <li> <p> <code>key</code> - The tag key.</p> </li> <li> <p> <code>resource-id</code> - The ID of the resource.</p> </li> <li> <p> <code>resource-type</code> - The resource type (<code>customer-gateway</code> | <code>dedicated-host</code> | <code>dhcp-options</code> | <code>elastic-ip</code> | <code>fleet</code> | <code>fpga-image</code> | <code>image</code> | <code>instance</code> | <code>host-reservation</code> | <code>internet-gateway</code> | <code>launch-template</code> | <code>natgateway</code> | <code>network-acl</code> | <code>network-interface</code> | <code>reserved-instances</code> | <code>route-table</code> | <code>security-group</code> | <code>snapshot</code> | <code>spot-instances-request</code> | <code>subnet</code> | <code>volume</code> | <code>vpc</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>).</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of the tag. For example, specify "tag:Owner" for the filter name and "TeamA" for the filter value to find resources with the tag "Owner=TeamA".</p> </li> <li> <p> <code>value</code> - The tag value.</p> </li> </ul>'
+          description: '<p>The filters.</p> <ul> <li> <p> <code>key</code> - The tag key.</p> </li> <li> <p> <code>resource-id</code> - The ID of the resource.</p> </li> <li> <p> <code>resource-type</code> - The resource type (<code>customer-gateway</code> | <code>dedicated-host</code> | <code>dhcp-options</code> | <code>elastic-ip</code> | <code>fleet</code> | <code>fpga-image</code> | <code>image</code> | <code>instance</code> | <code>host-reservation</code> | <code>internet-gateway</code> | <code>launch-template</code> | <code>natgateway</code> | <code>network-acl</code> | <code>network-interface</code> | <code>placement-group</code> | <code>reserved-instances</code> | <code>route-table</code> | <code>security-group</code> | <code>snapshot</code> | <code>spot-instances-request</code> | <code>subnet</code> | <code>volume</code> | <code>vpc</code> | <code>vpc-endpoint</code> | <code>vpc-endpoint-service</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>).</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of the tag. For example, specify "tag:Owner" for the filter name and "TeamA" for the filter value to find resources with the tag "Owner=TeamA".</p> </li> <li> <p> <code>value</code> - The tag value.</p> </li> </ul>'
         MaxResults:
           $ref: '#/components/schemas/Integer'
           description: 'The maximum number of results to return in a single call. This value can be between 5 and 1000. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
@@ -51156,6 +51196,7 @@ components:
           description: The ID of the route table.
         DryRun:
           $ref: '#/components/schemas/Boolean'
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       description: Contains the parameters for DisableVgwRoutePropagation.
     DisableVpcClassicLinkDnsSupportRequest:
       type: object
@@ -51689,6 +51730,7 @@ components:
           description: 'The ID of the route table. The routing table must be associated with the same VPC that the virtual private gateway is attached to. '
         DryRun:
           $ref: '#/components/schemas/Boolean'
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       description: Contains the parameters for EnableVgwRoutePropagation.
     EnableVolumeIORequest:
       type: object
@@ -55298,6 +55340,12 @@ components:
         DryRun:
           $ref: '#/components/schemas/Boolean'
           description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+        SecurityGroupIds:
+          $ref: '#/components/schemas/ClientVpnSecurityGroupIdSet'
+          description: The IDs of one or more security groups to apply to the target network.
+        VpcId:
+          $ref: '#/components/schemas/VpcId'
+          description: The ID of the VPC to associate with the Client VPN endpoint.
     ModifyDefaultCreditSpecificationRequest:
       type: object
       required:
