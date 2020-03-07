@@ -191,6 +191,8 @@ paths:
                   description: '<p>Labels to improve discovery of apps in search results.</p><p>Minimum length=1. Maximum length=127. Maximum number of labels: 10</p><p>Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";</p>'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/__string'
                 licenseBody:
                   description: |-
@@ -462,6 +464,8 @@ paths:
                      this parameter for an application that requires capabilities, the call will fail.</p>
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/__string'
                 changeSetName:
                   description: |-
@@ -484,11 +488,15 @@ paths:
                      </i> API.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/__string'
                 parameterOverrides:
                   description: A list of parameter values for the parameters of the application.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/ParameterValue'
                 resourceTypes:
                   description: |-
@@ -496,6 +504,8 @@ paths:
                      </i> API.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/__string'
                 rollbackConfiguration:
                   description: |-
@@ -530,6 +540,8 @@ paths:
                      </i> API.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Tag'
                 templateId:
                   description: '<p>The UUID returned by CreateCloudFormationTemplate.</p><p>Pattern: [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}</p>'
@@ -795,6 +807,8 @@ paths:
                   description: '<p>Labels to improve discovery of apps in search results.</p><p>Minimum length=1. Maximum length=127. Maximum number of labels: 10</p><p>Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";</p>'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/__string'
                 readmeBody:
                   description: <p>A text readme file in Markdown language that contains a more detailed description of the application and how it works.</p><p>Maximum size 5 MB</p>
@@ -922,6 +936,8 @@ paths:
                   description: An array of policy statements applied to the application.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/ApplicationPolicyStatement'
   '/applications/{applicationId}/templates/{templateId}':
     get:
@@ -1352,6 +1368,8 @@ components:
     __listOfRollbackTrigger:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RollbackTrigger'
     Tag:
       type: object
@@ -1598,6 +1616,8 @@ components:
     __listOf__string:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/__string'
     ApplicationSummary:
       type: object
@@ -1790,14 +1810,20 @@ components:
     __listOfParameterDefinition:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ParameterDefinition'
     __listOfCapability:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Capability'
     __listOfParameterValue:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ParameterValue'
     RollbackConfiguration:
       type: object
@@ -1818,6 +1844,8 @@ components:
     __listOfTag:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
     CreateCloudFormationChangeSetRequest:
       type: object
@@ -1930,6 +1958,8 @@ components:
     __listOfApplicationPolicyStatement:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ApplicationPolicyStatement'
     GetApplicationRequest:
       type: object
@@ -1950,6 +1980,8 @@ components:
     __listOfApplicationDependencySummary:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ApplicationDependencySummary'
     ListApplicationVersionsRequest:
       type: object
@@ -1958,6 +1990,8 @@ components:
     __listOfVersionSummary:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/VersionSummary'
     ListApplicationsRequest:
       type: object
@@ -1966,6 +2000,8 @@ components:
     __listOfApplicationSummary:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ApplicationSummary'
     ParameterDefinition:
       type: object

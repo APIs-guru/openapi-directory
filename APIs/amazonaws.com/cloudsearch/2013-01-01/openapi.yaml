@@ -1642,6 +1642,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/StandardName'
         - name: Deployed
           in: query
@@ -2049,6 +2051,8 @@ paths:
             type: array
             description: A list of domain names.
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/DomainName'
         - name: Action
           in: query
@@ -2163,6 +2167,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/StandardName'
         - name: Deployed
           in: query
@@ -2289,6 +2295,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/DynamicFieldName'
         - name: Deployed
           in: query
@@ -2645,6 +2653,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/StandardName'
         - name: Deployed
           in: query
@@ -4245,6 +4255,8 @@ components:
       type: array
       description: A list of the analysis schemes configured for a domain.
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AnalysisSchemeStatus'
     MultiAZ:
       type: boolean
@@ -4273,6 +4285,8 @@ components:
       type: array
       description: A list of field names.
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/FieldName'
     CreateDomainRequest:
       type: object
@@ -4545,6 +4559,8 @@ components:
     StandardNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StandardName'
     DescribeAnalysisSchemesRequest:
       type: object
@@ -4605,6 +4621,8 @@ components:
       type: array
       description: A list of domain names.
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DomainName'
     DescribeDomainsRequest:
       type: object
@@ -4618,6 +4636,8 @@ components:
       type: array
       description: A list that contains the status of each requested domain.
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DomainStatus'
     DescribeExpressionsRequest:
       type: object
@@ -4639,10 +4659,14 @@ components:
       type: array
       description: Contains the status of multiple expressions.
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ExpressionStatus'
     DynamicFieldNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DynamicFieldName'
     DescribeIndexFieldsRequest:
       type: object
@@ -4664,6 +4688,8 @@ components:
       type: array
       description: Contains the status of multiple index fields.
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/IndexFieldStatus'
     DescribeScalingParametersRequest:
       type: object
@@ -4718,6 +4744,8 @@ components:
       type: array
       description: Contains the status of multiple suggesters.
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SuggesterStatus'
     SuggesterFuzzyMatching:
       type: string

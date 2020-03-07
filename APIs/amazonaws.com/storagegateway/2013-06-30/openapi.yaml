@@ -5869,6 +5869,8 @@ components:
     Tags:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
     GatewayARN:
       type: string
@@ -5888,6 +5890,8 @@ components:
     DiskIds:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DiskId'
     ResourceARN:
       type: string
@@ -6043,6 +6047,8 @@ components:
     CachediSCSIVolumes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CachediSCSIVolume'
     ChapInfo:
       type: object
@@ -6063,6 +6069,8 @@ components:
     ChapCredentials:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ChapInfo'
     ChapSecret:
       type: string
@@ -6127,6 +6135,8 @@ components:
       type: array
       description: 'The list of clients that are allowed to access the file gateway. The list must contain either valid IP addresses or valid CIDR blocks. '
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/IPV4AddressCIDR'
       minItems: 1
       maxItems: 100
@@ -6143,6 +6153,8 @@ components:
     FileShareUserList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/FileShareUser'
       minItems: 0
       maxItems: 100
@@ -6174,6 +6186,8 @@ components:
       type: array
       description: 'The Amazon Resource Name (ARN) of each of the tapes you want to list. If you don''t specify a tape ARN, the response lists all tapes in both your VTL and VTS.'
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TapeARN'
     DayOfMonth:
       type: integer
@@ -6192,6 +6206,8 @@ components:
     VolumeARNs:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/VolumeARN'
     GatewayId:
       type: string
@@ -6204,6 +6220,8 @@ components:
     GatewayNetworkInterfaces:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/NetworkInterface'
     NextUpdateAvailabilityDate:
       type: string
@@ -6236,16 +6254,22 @@ components:
     FileShareARNList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/FileShareARN'
       minItems: 1
       maxItems: 10
     NFSFileShareInfoList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/NFSFileShareInfo'
     SMBFileShareInfoList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SMBFileShareInfo'
     DomainName:
       type: string
@@ -6269,6 +6293,8 @@ components:
     StorediSCSIVolumes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StorediSCSIVolume'
     Marker:
       type: string
@@ -6280,22 +6306,32 @@ components:
     TapeArchives:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TapeArchive'
     TapeRecoveryPointInfos:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TapeRecoveryPointInfo'
     Tapes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tape'
     VTLDeviceARNs:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/VTLDeviceARN'
     VTLDevices:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/VTLDevice'
     DeviceType:
       type: string
@@ -6328,6 +6364,8 @@ components:
       type: array
       description: A list of values that represents attributes of a local disk.
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DiskAttribute'
       minItems: 0
       maxItems: 10
@@ -6364,6 +6402,8 @@ components:
     Disks:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Disk'
     DomainUserName:
       type: string
@@ -6412,6 +6452,8 @@ components:
     FileShareInfoList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/FileShareInfo'
     FileShareUser:
       type: string
@@ -6424,6 +6466,8 @@ components:
     FolderList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Folder'
       minItems: 1
       maxItems: 50
@@ -6472,6 +6516,8 @@ components:
     Gateways:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/GatewayInfo'
     Host:
       type: string
@@ -6479,6 +6525,8 @@ components:
     Hosts:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Host'
     Initiator:
       type: string
@@ -6487,6 +6535,8 @@ components:
     Initiators:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Initiator'
     OrganizationalUnit:
       type: string
@@ -6500,14 +6550,20 @@ components:
       type: array
       description: 'An array of <a>TapeInfo</a> objects, where each object describes an a single tape. If there not tapes in the tape library or VTS, then the <code>TapeInfos</code> is an empty array.'
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TapeInfo'
     VolumeRecoveryPointInfos:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/VolumeRecoveryPointInfo'
     VolumeInfos:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/VolumeInfo'
     LocalConsolePassword:
       type: string
@@ -6581,6 +6637,8 @@ components:
     TagKeys:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKey'
     SMBFileShareInfo:
       type: object

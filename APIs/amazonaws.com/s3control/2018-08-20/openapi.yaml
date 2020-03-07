@@ -400,6 +400,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/JobStatus'
         - name: nextToken
           in: query
@@ -1262,6 +1264,8 @@ components:
     AccessPointList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AccessPoint'
     AccountId:
       type: string
@@ -1534,6 +1538,8 @@ components:
     JobFailureList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/JobFailure'
     JobTerminationDate:
       type: string
@@ -1602,6 +1608,8 @@ components:
     JobListDescriptorList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/JobListDescriptor'
     JobManifestFieldName:
       type: string
@@ -1613,6 +1621,8 @@ components:
     JobManifestFieldList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/JobManifestFieldName'
     JobManifestFormat:
       type: string
@@ -1643,6 +1653,8 @@ components:
     JobStatusList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/JobStatus'
     KmsKeyArnString:
       type: string
@@ -1705,6 +1717,8 @@ components:
     S3GrantList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/S3Grant'
     S3AccessControlList:
       type: object
@@ -1789,6 +1803,8 @@ components:
     S3TagSet:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/S3Tag'
     S3StorageClass:
       type: string

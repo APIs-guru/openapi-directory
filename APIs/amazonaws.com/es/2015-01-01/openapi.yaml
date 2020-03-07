@@ -154,6 +154,8 @@ paths:
                   description: 'A list of <code>Tag</code> '
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Tag'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -850,6 +852,8 @@ paths:
                   description: A list of Elasticsearch domain names.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/DomainName'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -1721,6 +1725,8 @@ paths:
                   description: Specifies the <code>TagKey</code> list which you want to remove from the Elasticsearch domain.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/String'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -2038,6 +2044,8 @@ components:
     StringList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     UserPoolId:
       type: string
@@ -2301,6 +2309,8 @@ components:
       type: array
       description: 'A list of <code>Tag</code> '
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
     AddTagsRequest:
       type: object
@@ -2321,6 +2331,8 @@ components:
     LimitValueList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LimitValue'
     AdditionalLimit:
       type: object
@@ -2335,6 +2347,8 @@ components:
     AdditionalLimitList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AdditionalLimit'
     AdvancedOptions:
       type: object
@@ -2469,6 +2483,8 @@ components:
     CompatibleElasticsearchVersionsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CompatibleVersionsMap'
     ElasticsearchVersionString:
       type: string
@@ -2476,6 +2492,8 @@ components:
       type: array
       description: 'List of supported elastic search versions. '
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ElasticsearchVersionString'
     ElasticsearchClusterConfig:
       type: object
@@ -2773,6 +2791,8 @@ components:
       type: array
       description: A list of Elasticsearch domain names.
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DomainName'
     DescribeElasticsearchDomainsRequest:
       type: object
@@ -2788,6 +2808,8 @@ components:
       type: array
       description: A list that contains the status of each requested Elasticsearch domain.
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ElasticsearchDomainStatus'
     DescribeElasticsearchInstanceTypeLimitsRequest:
       type: object
@@ -2817,6 +2839,8 @@ components:
     ReservedElasticsearchInstanceOfferingList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ReservedElasticsearchInstanceOffering'
     DescribeReservedElasticsearchInstancesRequest:
       type: object
@@ -2826,6 +2850,8 @@ components:
     ReservedElasticsearchInstanceList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ReservedElasticsearchInstance'
     DomainEndpointOptionsStatus:
       type: object
@@ -2855,6 +2881,8 @@ components:
       type: array
       description: ' Contains the list of Elasticsearch domain information.'
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DomainInfo'
     Double:
       type: number
@@ -2987,6 +3015,8 @@ components:
       type: array
       description: ' List of instance types supported by Amazon Elasticsearch service. '
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ESPartitionInstanceType'
     GetCompatibleElasticsearchVersionsRequest:
       type: object
@@ -3001,6 +3031,8 @@ components:
     UpgradeHistoryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/UpgradeHistory'
     GetUpgradeStatusRequest:
       type: object
@@ -3055,12 +3087,16 @@ components:
     Issues:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Issue'
     LimitValue:
       type: string
     StorageTypeList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StorageType'
     Limits:
       type: object
@@ -3151,6 +3187,8 @@ components:
     RecurringChargeList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RecurringCharge'
     RemoveTagsRequest:
       type: object
@@ -3265,6 +3303,8 @@ components:
     StorageTypeLimitList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StorageTypeLimit'
     StorageType:
       type: object
@@ -3351,6 +3391,8 @@ components:
     UpgradeStepsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/UpgradeStepItem'
     UpgradeHistory:
       type: object

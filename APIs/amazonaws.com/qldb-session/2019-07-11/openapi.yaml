@@ -330,6 +330,8 @@ components:
     StatementParameters:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ValueHolder'
     ExecuteStatementRequest:
       type: object
@@ -405,6 +407,8 @@ components:
     ValueHolders:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ValueHolder'
     SessionToken:
       type: string

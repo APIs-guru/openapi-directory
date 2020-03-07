@@ -201,6 +201,8 @@ paths:
                   description: Attributes on the facet that you are adding to the object.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/AttributeKeyAndValue'
                 ObjectReference:
                   description: The reference that identifies an object.
@@ -782,6 +784,8 @@ paths:
                   description: A set of attributes that are associated with the typed link.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/AttributeNameAndValue'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -873,6 +877,8 @@ paths:
                   description: A list of operations that are part of the batch.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/BatchReadOperation'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -961,6 +967,8 @@ paths:
                   description: A list of operations that are part of the batch.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/BatchWriteOperation'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -1157,6 +1165,8 @@ paths:
                   description: The attributes that are associated with the <a>Facet</a>.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/FacetAttribute'
                 ObjectType:
                   description: '<p>Specifies whether a given object created from this facet is of type node, leaf node, policy or index.</p> <ul> <li> <p>Node: Can have multiple children but one parent.</p> </li> </ul> <ul> <li> <p>Leaf node: Cannot have children but can have multiple parents.</p> </li> </ul> <ul> <li> <p>Policy: Allows you to store a policy document and policy type. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies">Policies</a>.</p> </li> </ul> <ul> <li> <p>Index: Can be created with the Index API.</p> </li> </ul>'
@@ -1272,6 +1282,8 @@ paths:
                   description: Specifies the attributes that should be indexed on. Currently only a single attribute is supported.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/AttributeKey'
                 IsUnique:
                   description: Indicates whether the attribute that is being indexed has unique values or not.
@@ -1394,11 +1406,15 @@ paths:
                   description: A list of schema facets to be associated with the object. Do not provide minor version components. See <a>SchemaFacet</a> for details.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/SchemaFacet'
                 ObjectAttributeList:
                   description: The attribute map whose attribute ARN contains the key and attribute value as the map value.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/AttributeKeyAndValue'
                 ParentReference:
                   description: The reference that identifies an object.
@@ -2931,6 +2947,8 @@ paths:
                   description: 'List of attributes that need to be updated in a given schema <a>Facet</a>. Each attribute is followed by <code>AttributeAction</code>, which specifies the type of update operation to perform. '
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/FacetAttributeUpdate'
                 ObjectType:
                   description: The object type that is associated with the facet. See <a>CreateFacetRequest$ObjectType</a> for more details.
@@ -3042,6 +3060,8 @@ paths:
                   description: A list of attribute names whose values will be retrieved.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/AttributeName'
                 ConsistencyLevel:
                   description: The consistency level at which to retrieve the attributes on a typed link.
@@ -3170,6 +3190,8 @@ paths:
                   description: List of attribute names whose values will be retrieved.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/AttributeName'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -4243,6 +4265,8 @@ paths:
                   description: 'Provides range filters for multiple attributes. When providing ranges to typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range.'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/TypedLinkAttributeRange'
                 FilterTypedLink:
                   description: Identifies the schema Amazon Resource Name (ARN) and facet name for the typed link.
@@ -4393,6 +4417,8 @@ paths:
                   description: Specifies the ranges of indexed values that you want to query.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/ObjectAttributeRange'
                 IndexReference:
                   description: The reference that identifies an object.
@@ -5153,6 +5179,8 @@ paths:
                   description: 'Provides range filters for multiple attributes. When providing ranges to typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range.'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/TypedLinkAttributeRange'
                 FilterTypedLink:
                   description: Identifies the schema Amazon Resource Name (ARN) and facet name for the typed link.
@@ -6123,6 +6151,8 @@ paths:
                   description: A list of tag key-value pairs.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Tag'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -6209,6 +6239,8 @@ paths:
                   description: Keys of the tag that need to be removed from the resource.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/TagKey'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -6320,6 +6352,8 @@ paths:
                   description: The attributes update structure.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/LinkAttributeUpdate'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -6428,6 +6462,8 @@ paths:
                   description: The attributes update structure.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/ObjectAttributeUpdate'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -6623,11 +6659,15 @@ paths:
                   description: Attributes update structure.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/TypedLinkFacetAttributeUpdate'
                 IdentityAttributeOrder:
                   description: 'The order of identity attributes for the facet, from most significant to least significant. The ability to filter typed links considers the order that the attributes are defined on the typed link facet. When providing ranges to a typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range. Filters are interpreted in the order of the attributes on the typed link facet, not the order in which they are supplied to any API calls. For more information about identity attributes, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/AttributeName'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -7267,10 +7307,14 @@ components:
     TypedLinkAttributeDefinitionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TypedLinkAttributeDefinition'
     AttributeNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AttributeName'
     DeleteDirectoryResponse:
       type: object
@@ -7381,6 +7425,8 @@ components:
     AttributeNameAndValueList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AttributeNameAndValue'
     DisableDirectoryResponse:
       type: object
@@ -7822,6 +7868,8 @@ components:
     AttributeKeyAndValueList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AttributeKeyAndValue'
     AddFacetToObjectRequest:
       type: object
@@ -7851,6 +7899,8 @@ components:
     Arns:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Arn'
     LinkName:
       type: string
@@ -7966,6 +8016,8 @@ components:
     AttributeKeyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AttributeKey'
     BatchAddFacetToObject:
       type: object
@@ -8113,6 +8165,8 @@ components:
     SchemaFacetList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SchemaFacet'
     BatchCreateObject:
       type: object
@@ -8315,6 +8369,8 @@ components:
     IndexAttachmentList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/IndexAttachment'
     BatchListAttachedIndicesResponse:
       type: object
@@ -8329,6 +8385,8 @@ components:
     TypedLinkAttributeRangeList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TypedLinkAttributeRange'
     BatchListIncomingTypedLinks:
       type: object
@@ -8354,6 +8412,8 @@ components:
     TypedLinkSpecifierList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TypedLinkSpecifier'
     BatchListIncomingTypedLinksResponse:
       type: object
@@ -8368,6 +8428,8 @@ components:
     ObjectAttributeRangeList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ObjectAttributeRange'
     BatchListIndex:
       type: object
@@ -8472,6 +8534,8 @@ components:
     PathToObjectIdentifiersList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PathToObjectIdentifiers'
     BatchListObjectParentPathsResponse:
       type: object
@@ -8501,6 +8565,8 @@ components:
     ObjectIdentifierList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ObjectIdentifier'
     BatchListObjectPoliciesResponse:
       type: object
@@ -8586,6 +8652,8 @@ components:
     PolicyToPathList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PolicyToPath'
     BatchLookupPolicyResponse:
       type: object
@@ -8628,6 +8696,8 @@ components:
     BatchReadOperationList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/BatchReadOperation'
     BatchReadSuccessfulResponse:
       type: object
@@ -8685,6 +8755,8 @@ components:
     BatchReadOperationResponseList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/BatchReadOperationResponse'
     ConsistencyLevel:
       type: string
@@ -8720,6 +8792,8 @@ components:
     LinkAttributeUpdateList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LinkAttributeUpdate'
     BatchUpdateLinkAttributes:
       type: object
@@ -8741,6 +8815,8 @@ components:
     ObjectAttributeUpdateList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ObjectAttributeUpdate'
     BatchUpdateObjectAttributes:
       type: object
@@ -8786,6 +8862,8 @@ components:
     BatchWriteOperationList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/BatchWriteOperation'
     BatchWriteOperationResponse:
       type: object
@@ -8839,6 +8917,8 @@ components:
     BatchWriteOperationResponseList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/BatchWriteOperationResponse'
     BatchWriteRequest:
       type: object
@@ -8872,6 +8952,8 @@ components:
     FacetAttributeList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/FacetAttribute'
     ObjectType:
       type: string
@@ -9087,6 +9169,8 @@ components:
     DirectoryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Directory'
     DisableDirectoryRequest:
       type: object
@@ -9162,10 +9246,14 @@ components:
     FacetAttributeUpdateList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/FacetAttributeUpdate'
     FacetNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/FacetName'
     GetAppliedSchemaVersionRequest:
       type: object
@@ -9544,6 +9632,8 @@ components:
     TagList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
     ListTypedLinkFacetAttributesRequest:
       type: object
@@ -9573,6 +9663,8 @@ components:
     TypedLinkNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TypedLinkName'
     LookupPolicyRequest:
       type: object
@@ -9650,6 +9742,8 @@ components:
     PolicyAttachmentList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PolicyAttachment'
     PolicyToPath:
       type: object
@@ -9748,6 +9842,8 @@ components:
     TagKeyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKey'
     TagResourceRequest:
       type: object
@@ -9791,6 +9887,8 @@ components:
     TypedLinkFacetAttributeUpdateList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TypedLinkFacetAttributeUpdate'
     UntagResourceRequest:
       type: object

@@ -362,6 +362,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/__string'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -623,6 +625,8 @@ components:
     __listOfPlaybackConfigurations:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PlaybackConfiguration'
     ListTagsForResourceRequest:
       type: object
@@ -723,6 +727,8 @@ components:
     __listOf__string:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/__string'
     UntagResourceRequest:
       type: object

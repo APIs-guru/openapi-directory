@@ -2660,6 +2660,8 @@ components:
     TagList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
       maxItems: 100
     EntityId:
@@ -2775,6 +2777,8 @@ components:
     BatchPredictions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/BatchPrediction'
     ComparatorValue:
       type: string
@@ -3014,10 +3018,14 @@ components:
     DataSources:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DataSource'
     TagKeyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKey'
       maxItems: 100
     SortOrder:
@@ -3048,6 +3056,8 @@ components:
     Evaluations:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Evaluation'
     MLModelFilterVariable:
       type: string
@@ -3065,6 +3075,8 @@ components:
     MLModels:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MLModel'
     DetailsAttributes:
       type: string
@@ -3095,6 +3107,8 @@ components:
     EDPSecurityGroupIds:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EDPSecurityGroupId'
     EDPServiceRole:
       type: string

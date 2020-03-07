@@ -478,6 +478,8 @@ components:
     AccountListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AccountInfo'
     ExpirationTimestampType:
       type: integer
@@ -516,6 +518,8 @@ components:
     RoleListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RoleInfo'
     ListAccountsRequest:
       type: object

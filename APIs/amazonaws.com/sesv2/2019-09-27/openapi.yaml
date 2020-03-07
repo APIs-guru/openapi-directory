@@ -204,6 +204,8 @@ paths:
                   description: An array of objects that define the tags (keys and values) that you want to associate with the configuration set.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Tag'
                 SuppressionOptions:
                   description: An object that contains information about the suppression list preferences for your account.
@@ -441,6 +443,8 @@ paths:
                   description: An object that defines the tags (keys and values) that you want to associate with the pool.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Tag'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -584,6 +588,8 @@ paths:
                   description: An array of objects that define the tags (keys and values) that you want to associate with the predictive inbox placement test.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Tag'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -651,6 +657,8 @@ paths:
                   description: An array of objects that define the tags (keys and values) that you want to associate with the email identity.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Tag'
                 DkimSigningAttributes:
                   description: An object that contains information about the tokens used for setting up Bring Your Own DKIM (BYODKIM).
@@ -1202,6 +1210,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/BlacklistItemName'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -1408,6 +1418,8 @@ paths:
                   description: 'An object that contains information about the Deliverability dashboard subscription for a verified domain that you use to send email and currently has an active Deliverability dashboard subscription. If a Deliverability dashboard subscription is active for a domain, you gain access to reputation, inbox placement, and other metrics for the domain.'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/DomainDeliverabilityTrackingOption'
   '/v2/email/deliverability-dashboard/test-reports/{ReportId}':
     get:
@@ -1713,6 +1725,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/SuppressionListReason'
         - name: StartDate
           in: query
@@ -1953,6 +1967,8 @@ paths:
                   description: '<p>A list that contains the reasons that email addresses will be automatically added to the suppression list for your account. This list can contain any or all of the following:</p> <ul> <li> <p> <code>COMPLAINT</code> – Amazon SES adds an email address to the suppression list for your account when a message sent to that address results in a complaint.</p> </li> <li> <p> <code>BOUNCE</code> – Amazon SES adds an email address to the suppression list for your account when a message sent to that address results in a hard bounce.</p> </li> </ul>'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/SuppressionListReason'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -2181,6 +2197,8 @@ paths:
                   description: '<p>A list that contains the reasons that email addresses are automatically added to the suppression list for your account. This list can contain any or all of the following:</p> <ul> <li> <p> <code>COMPLAINT</code> – Amazon SES adds an email address to the suppression list for your account when a message sent to that address results in a complaint.</p> </li> <li> <p> <code>BOUNCE</code> – Amazon SES adds an email address to the suppression list for your account when a message sent to that address results in a hard bounce.</p> </li> </ul>'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/SuppressionListReason'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -2686,6 +2704,8 @@ paths:
                   description: 'The "Reply-to" email addresses for the message. When the recipient replies to the message, each Reply-to address receives the reply.'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/EmailAddress'
                 FeedbackForwardingEmailAddress:
                   description: The address that you want bounce and complaint notifications to be sent to.
@@ -2707,6 +2727,8 @@ paths:
                   description: A list of message tags.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/MessageTag'
                 ConfigurationSetName:
                   description: '<p>The name of a configuration set.</p> <p> <i>Configuration sets</i> are groups of rules that you can apply to the emails you send. You apply a configuration set to an email by including a reference to the configuration set in the headers of the email. When you apply a configuration set to an email, all of the rules in that configuration set are applied to the email.</p>'
@@ -2772,6 +2794,8 @@ paths:
                   description: A list of the tags that you want to add to the resource. A tag consists of a required tag key (<code>Key</code>) and an associated tag value (<code>Value</code>). The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Tag'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -2830,6 +2854,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/TagKey'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -2929,6 +2955,8 @@ components:
     SuppressionListReasons:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SuppressionListReason'
     AlreadyExistsException: {}
     NotFoundException: {}
@@ -2943,6 +2971,8 @@ components:
     EventTypes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EventType'
     KinesisFirehoseDestination:
       type: object
@@ -3431,6 +3461,8 @@ components:
     EmailAddressList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EmailAddress'
     EmailAddress:
       type: string
@@ -3483,6 +3515,8 @@ components:
     BlacklistEntries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/BlacklistEntry'
     RblName:
       type: string
@@ -3496,6 +3530,8 @@ components:
     BlacklistItemNames:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/BlacklistItemName'
     BlacklistReport:
       type: object
@@ -3530,6 +3566,8 @@ components:
     CloudWatchDimensionConfigurations:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CloudWatchDimensionConfiguration'
     DimensionName:
       type: string
@@ -3567,6 +3605,8 @@ components:
     ConfigurationSetNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ConfigurationSetName'
     MessageData:
       type: string
@@ -3648,6 +3688,8 @@ components:
     TagList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
     SuppressionOptions:
       type: object
@@ -3814,6 +3856,8 @@ components:
     DomainIspPlacements:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DomainIspPlacement'
     DailyVolume:
       type: object
@@ -3831,6 +3875,8 @@ components:
     DailyVolumes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DailyVolume'
     Ip:
       type: string
@@ -3867,6 +3913,8 @@ components:
       type: array
       description: A list of dedicated IP addresses that are associated with your AWS account.
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DedicatedIp'
     DeleteConfigurationSetEventDestinationRequest:
       type: object
@@ -3928,6 +3976,8 @@ components:
     DeliverabilityTestReports:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DeliverabilityTestReport'
     Destination:
       type: object
@@ -3954,6 +4004,8 @@ components:
     DnsTokenList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DnsToken'
     DkimSigningAttributesOrigin:
       type: string
@@ -3971,6 +4023,8 @@ components:
     IpList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Ip'
     Volume:
       type: integer
@@ -3982,6 +4036,8 @@ components:
     Esps:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Esp'
     DomainDeliverabilityCampaign:
       type: object
@@ -4033,6 +4089,8 @@ components:
       type: array
       description: <p/>
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DomainDeliverabilityCampaign'
     InboxPlacementTrackingOption:
       type: object
@@ -4048,6 +4106,8 @@ components:
       type: array
       description: 'An object that contains information about the Deliverability dashboard subscription for a verified domain that you use to send email and currently has an active Deliverability dashboard subscription. If a Deliverability dashboard subscription is active for a domain, you gain access to reputation, inbox placement, and other metrics for the domain.'
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DomainDeliverabilityTrackingOption'
     IspName:
       type: string
@@ -4104,6 +4164,8 @@ components:
     EventDestinations:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EventDestination'
     EventType:
       type: string
@@ -4207,6 +4269,8 @@ components:
     IspPlacements:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/IspPlacement'
     MessageContent:
       type: string
@@ -4297,10 +4361,14 @@ components:
     IdentityInfoList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/IdentityInfo'
     IspNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/IspName'
     IspPlacement:
       type: object
@@ -4326,6 +4394,8 @@ components:
       type: array
       description: A list of dedicated IP pools that are associated with your AWS account.
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PoolName'
     ListDeliverabilityTestReportsRequest:
       type: object
@@ -4350,6 +4420,8 @@ components:
     SuppressedDestinationSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SuppressedDestinationSummary'
     ListTagsForResourceRequest:
       type: object
@@ -4382,6 +4454,8 @@ components:
       type: array
       description: A list of message tags.
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MessageTag'
     OutboundMessageId:
       type: string
@@ -4609,6 +4683,8 @@ components:
     TagKeyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKey'
     TagResourceRequest:
       type: object

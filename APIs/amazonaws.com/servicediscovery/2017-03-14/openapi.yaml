@@ -1785,6 +1785,8 @@ components:
     HttpInstanceSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/HttpInstanceSummary'
     RoutingPolicy:
       type: string
@@ -1794,6 +1796,8 @@ components:
     DnsRecordList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DnsRecord'
     DnsConfigChange:
       type: object
@@ -1852,6 +1856,8 @@ components:
     FilterValues:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/FilterValue'
     Instance:
       type: object
@@ -1871,6 +1877,8 @@ components:
     InstanceIdList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourceId'
       minItems: 1
     NextToken:
@@ -1993,30 +2001,44 @@ components:
     InstanceSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InstanceSummary'
     NamespaceFilters:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/NamespaceFilter'
     NamespaceSummariesList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/NamespaceSummary'
     OperationFilters:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/OperationFilter'
     OperationSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/OperationSummary'
     ServiceFilters:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ServiceFilter'
     ServiceSummariesList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ServiceSummary'
     Message:
       type: string

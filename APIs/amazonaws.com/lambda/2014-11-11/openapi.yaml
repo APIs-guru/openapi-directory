@@ -975,6 +975,8 @@ components:
     EventSourceList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EventSourceConfiguration'
     FunctionArn:
       type: string
@@ -1013,6 +1015,8 @@ components:
     FunctionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/FunctionConfiguration'
     GetEventSourceRequest:
       type: object

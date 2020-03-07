@@ -2325,6 +2325,8 @@ components:
     AgentArnList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AgentArn'
       minItems: 1
       maxItems: 64
@@ -2344,6 +2346,8 @@ components:
     AgentList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AgentListEntry'
     TagValue:
       type: string
@@ -2370,6 +2374,8 @@ components:
     TagList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagListEntry'
       minItems: 0
       maxItems: 55
@@ -2379,12 +2385,16 @@ components:
     PLSubnetArnList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Ec2SubnetArn'
       minItems: 1
       maxItems: 1
     PLSecurityGroupArnList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Ec2SecurityGroupArn'
       minItems: 1
       maxItems: 1
@@ -2424,6 +2434,8 @@ components:
     Ec2SecurityGroupArnList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Ec2SecurityGroupArn'
       minItems: 1
       maxItems: 5
@@ -2548,6 +2560,8 @@ components:
     FilterList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/FilterRule'
       minItems: 0
       maxItems: 1
@@ -2647,10 +2661,14 @@ components:
     SourceNetworkInterfaceArns:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/NetworkInterfaceArn'
     DestinationNetworkInterfaceArns:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/NetworkInterfaceArn'
     string:
       type: string
@@ -2716,6 +2734,8 @@ components:
     LocationList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LocationListEntry'
     TaggableResourceArn:
       type: string
@@ -2724,10 +2744,14 @@ components:
     TaskExecutionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TaskExecutionListEntry'
     TaskList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TaskListEntry'
     LocationListEntry:
       type: object
@@ -2819,6 +2843,8 @@ components:
     TagKeyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKey'
       minItems: 1
       maxItems: 50

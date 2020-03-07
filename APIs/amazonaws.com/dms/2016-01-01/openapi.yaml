@@ -4218,10 +4218,14 @@ components:
     AccountQuotaList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AccountQuota'
     TagList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
     ResourcePendingMaintenanceActions:
       type: object
@@ -4254,6 +4258,8 @@ components:
     AvailabilityZonesList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     Boolean:
       type: boolean
@@ -4303,6 +4309,8 @@ components:
     CertificateList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Certificate'
     CompressionTypeValue:
       type: string
@@ -4334,6 +4342,8 @@ components:
     ConnectionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Connection'
     ReplicationEndpointTypeValue:
       type: string
@@ -4663,10 +4673,14 @@ components:
     EventCategoriesList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     SourceIdsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     EventSubscription:
       type: object
@@ -4702,6 +4716,8 @@ components:
     VpcSecurityGroupIdList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     ReplicationInstance:
       type: object
@@ -4781,6 +4797,8 @@ components:
     SubnetIdentifierList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     ReplicationSubnetGroup:
       type: object
@@ -4870,22 +4888,32 @@ components:
     FilterList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Filter'
     SupportedEndpointTypeList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SupportedEndpointType'
     EndpointList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Endpoint'
     EventCategoryGroupList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EventCategoryGroup'
     EventSubscriptionsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EventSubscription'
     SourceType:
       type: string
@@ -4894,14 +4922,20 @@ components:
     EventList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Event'
     OrderableReplicationInstanceList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/OrderableReplicationInstance'
     PendingMaintenanceActions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourcePendingMaintenanceActions'
     RefreshSchemasStatus:
       type: object
@@ -4925,30 +4959,44 @@ components:
     ReplicationInstanceTaskLogsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ReplicationInstanceTaskLog'
     ReplicationInstanceList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ReplicationInstance'
     ReplicationSubnetGroups:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ReplicationSubnetGroup'
     ReplicationTaskAssessmentResultList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ReplicationTaskAssessmentResult'
     ReplicationTaskList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ReplicationTask'
     SchemaList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     TableStatisticsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TableStatistics'
     EncodingTypeValue:
       type: string
@@ -4993,6 +5041,8 @@ components:
     FilterValueList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     Filter:
       type: object
@@ -5012,6 +5062,8 @@ components:
     KeyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     MessageFormatValue:
       type: string
@@ -5087,6 +5139,8 @@ components:
     PendingMaintenanceActionDetails:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PendingMaintenanceAction'
     RefreshSchemasStatusTypeValue:
       type: string
@@ -5102,10 +5156,14 @@ components:
     TableListToReload:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TableToReload'
     VpcSecurityGroupMembershipList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/VpcSecurityGroupMembership'
     ReplicationPendingModifiedValues:
       type: object
@@ -5126,10 +5184,14 @@ components:
     ReplicationInstancePublicIpAddressList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     ReplicationInstancePrivateIpAddressList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     ReplicationInstanceTaskLog:
       type: object
@@ -5147,6 +5209,8 @@ components:
     SubnetList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Subnet'
     ReplicationTaskStats:
       type: object

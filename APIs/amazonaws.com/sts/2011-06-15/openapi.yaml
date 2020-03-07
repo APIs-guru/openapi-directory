@@ -131,6 +131,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/PolicyDescriptorType'
         - name: Policy
           in: query
@@ -156,6 +158,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Tag'
             maxItems: 50
         - name: TransitiveTagKeys
@@ -165,6 +169,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/tagKeyType'
             maxItems: 50
         - name: ExternalId
@@ -347,6 +353,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/PolicyDescriptorType'
         - name: Policy
           in: query
@@ -550,6 +558,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/PolicyDescriptorType'
         - name: Policy
           in: query
@@ -946,6 +956,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/PolicyDescriptorType'
         - name: DurationSeconds
           in: query
@@ -962,6 +974,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Tag'
             maxItems: 50
         - name: Action
@@ -1406,6 +1420,8 @@ components:
     policyDescriptorListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PolicyDescriptorType'
     sessionPolicyDocumentType:
       type: string
@@ -1419,11 +1435,15 @@ components:
     tagListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
       maxItems: 50
     tagKeyListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/tagKeyType'
       maxItems: 50
     externalIdType:

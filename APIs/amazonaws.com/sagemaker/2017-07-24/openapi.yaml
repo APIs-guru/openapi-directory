@@ -9765,6 +9765,8 @@ components:
     TagList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
       minItems: 0
       maxItems: 50
@@ -9776,6 +9778,8 @@ components:
     AdditionalCodeRepositoryNamesOrUrls:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CodeRepositoryNameOrUrl'
       maxItems: 3
     AlgorithmArn:
@@ -9805,6 +9809,8 @@ components:
     MetricDefinitionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MetricDefinition'
       minItems: 0
       maxItems: 40
@@ -9842,6 +9848,8 @@ components:
     AlgorithmStatusItemList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AlgorithmStatusItem'
     AlgorithmStatusDetails:
       type: object
@@ -9917,6 +9925,8 @@ components:
     AlgorithmSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AlgorithmSummary'
     TrainingJobDefinition:
       type: object
@@ -9994,6 +10004,8 @@ components:
     AlgorithmValidationProfiles:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AlgorithmValidationProfile'
       minItems: 1
       maxItems: 1
@@ -10117,6 +10129,8 @@ components:
     AppList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AppDetails'
     AppSortKey:
       type: string
@@ -10129,12 +10143,16 @@ components:
     ContainerEntrypoint:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ContainerEntrypointString'
       minItems: 1
       maxItems: 100
     ContainerArguments:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ContainerArgument'
       minItems: 1
       maxItems: 100
@@ -10179,6 +10197,8 @@ components:
     AttributeNames:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AttributeName'
       maxItems: 16
     AuthMode:
@@ -10215,6 +10235,8 @@ components:
     CandidateSteps:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AutoMLCandidateStep'
     CandidateStatus:
       type: string
@@ -10227,6 +10249,8 @@ components:
     AutoMLContainerDefinitions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AutoMLContainerDefinition'
       maxItems: 5
     Timestamp:
@@ -10310,6 +10334,8 @@ components:
     AutoMLCandidates:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AutoMLCandidate'
     AutoMLDataSource:
       type: object
@@ -10389,6 +10415,8 @@ components:
     AutoMLInputDataConfig:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AutoMLChannel'
       minItems: 1
       maxItems: 20
@@ -10543,6 +10571,8 @@ components:
     AutoMLJobSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AutoMLJobSummary'
     AutoMLMaxResults:
       type: integer
@@ -10633,12 +10663,16 @@ components:
     CsvContentTypes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CsvContentType'
       minItems: 1
       maxItems: 10
     JsonContentTypes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/JsonContentType'
       minItems: 1
       maxItems: 10
@@ -10669,6 +10703,8 @@ components:
     CaptureOptionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CaptureOption'
       minItems: 1
       maxItems: 2
@@ -10684,6 +10720,8 @@ components:
     ParameterValues:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ParameterValue'
       minItems: 1
       maxItems: 20
@@ -10712,6 +10750,8 @@ components:
     CategoricalParameterRanges:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CategoricalParameterRange'
       minItems: 0
       maxItems: 20
@@ -10785,14 +10825,20 @@ components:
     ContentTypes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ContentType'
     CompressionTypes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CompressionType'
     InputModes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TrainingInputMode'
       minItems: 1
     ChannelSpecification:
@@ -10824,6 +10870,8 @@ components:
     ChannelSpecifications:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ChannelSpecification'
       minItems: 1
       maxItems: 8
@@ -10851,6 +10899,8 @@ components:
     Cidrs:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Cidr'
     CodeRepositoryArn:
       type: string
@@ -10921,6 +10971,8 @@ components:
     CodeRepositorySummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CodeRepositorySummary'
     CognitoClientId:
       type: string
@@ -10978,6 +11030,8 @@ components:
     CollectionConfigurations:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CollectionConfiguration'
       minItems: 0
       maxItems: 20
@@ -11035,6 +11089,8 @@ components:
     CompilationJobSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CompilationJobSummary'
     TargetDevice:
       type: string
@@ -11104,6 +11160,8 @@ components:
     ContainerDefinitionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ContainerDefinition'
       maxItems: 5
     ContainerEntrypointString:
@@ -11118,6 +11176,8 @@ components:
     ContentClassifiers:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ContentClassifier'
       maxItems: 256
     ParameterValue:
@@ -11167,6 +11227,8 @@ components:
     ContinuousParameterRanges:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ContinuousParameterRange'
       minItems: 0
       maxItems: 20
@@ -11314,6 +11376,8 @@ components:
     Subnets:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SubnetId'
       minItems: 1
       maxItems: 16
@@ -11335,6 +11399,8 @@ components:
     ProductionVariantList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ProductionVariant'
       minItems: 1
       maxItems: 10
@@ -11559,6 +11625,8 @@ components:
     HyperParameterTrainingJobDefinitions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/HyperParameterTrainingJobDefinition'
       minItems: 1
       maxItems: 10
@@ -11800,6 +11868,8 @@ components:
     SecurityGroupIds:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SecurityGroupId'
       maxItems: 5
     NotebookInstanceLifecycleConfigName:
@@ -11818,6 +11888,8 @@ components:
     NotebookInstanceAcceleratorTypes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/NotebookInstanceAcceleratorType'
     RootAccess:
       type: string
@@ -11827,6 +11899,8 @@ components:
     NotebookInstanceLifecycleConfigList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/NotebookInstanceLifecycleHook'
       maxItems: 1
     NotebookInstanceLifecycleConfigArn:
@@ -11846,6 +11920,8 @@ components:
     ProcessingInputs:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ProcessingInput'
       minItems: 0
       maxItems: 10
@@ -11929,6 +12005,8 @@ components:
     InputDataConfig:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Channel'
       minItems: 1
       maxItems: 20
@@ -11985,6 +12063,8 @@ components:
     DebugRuleConfigurations:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DebugRuleConfiguration'
       minItems: 0
       maxItems: 20
@@ -12127,6 +12207,8 @@ components:
     MemberDefinitions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MemberDefinition'
       minItems: 1
       maxItems: 10
@@ -12363,6 +12445,8 @@ components:
     DebugRuleEvaluationStatuses:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DebugRuleEvaluationStatus'
       minItems: 0
       maxItems: 20
@@ -12376,6 +12460,8 @@ components:
     TagKeyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKey'
       minItems: 1
       maxItems: 50
@@ -12397,6 +12483,8 @@ components:
     DeployedImages:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DeployedImage'
     ProductId:
       type: string
@@ -12438,6 +12526,8 @@ components:
     ProductionVariantSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ProductionVariantSummary'
       minItems: 1
     EndpointStatus:
@@ -12757,10 +12847,14 @@ components:
     SecondaryStatusTransitions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SecondaryStatusTransition'
     FinalMetricDataList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MetricData'
       minItems: 0
       maxItems: 40
@@ -12790,6 +12884,8 @@ components:
     TrialComponentMetricSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TrialComponentMetricSummary'
     TrialSource:
       type: object
@@ -12903,6 +12999,8 @@ components:
     DesiredWeightAndCapacityList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DesiredWeightAndCapacity'
       minItems: 1
     DetailedModelPackageStatus:
@@ -12952,6 +13050,8 @@ components:
     DomainList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DomainDetails'
     DoubleParameterValue:
       type: number
@@ -12985,6 +13085,8 @@ components:
     EndpointConfigSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EndpointConfigSummary'
     ProcessingLocalPath:
       type: string
@@ -13057,6 +13159,8 @@ components:
     EndpointSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EndpointSummary'
     EnvironmentArn:
       type: string
@@ -13142,6 +13246,8 @@ components:
     ExperimentSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ExperimentSummary'
     FileSystemAccessMode:
       type: string
@@ -13197,6 +13303,8 @@ components:
     FilterList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Filter'
       minItems: 1
       maxItems: 20
@@ -13272,6 +13380,8 @@ components:
     FlowDefinitionSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/FlowDefinitionSummary'
     FlowDefinitionTaskAvailabilityLifetimeInSeconds:
       type: integer
@@ -13294,6 +13404,8 @@ components:
     FlowDefinitionTaskKeywords:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/FlowDefinitionTaskKeyword'
       minItems: 1
       maxItems: 5
@@ -13332,6 +13444,8 @@ components:
     PropertyNameSuggestionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PropertyNameSuggestion'
     GitConfigUrl:
       type: string
@@ -13388,6 +13502,8 @@ components:
     TaskKeywords:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TaskKeyword'
       minItems: 1
       maxItems: 5
@@ -13437,6 +13553,8 @@ components:
     HumanTaskUiSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/HumanTaskUiSummary'
     HyperParameterAlgorithmSpecification:
       type: object
@@ -13511,6 +13629,8 @@ components:
     HyperParameterSpecifications:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/HyperParameterSpecification'
       minItems: 0
       maxItems: 100
@@ -13548,6 +13668,8 @@ components:
     HyperParameterTrainingJobSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/HyperParameterTrainingJobSummary'
     HyperParameterTuningJobStrategyType:
       type: string
@@ -13585,6 +13707,8 @@ components:
     HyperParameterTuningJobObjectives:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/HyperParameterTuningJobObjective'
     HyperParameterTuningJobSortByOptions:
       type: string
@@ -13637,10 +13761,14 @@ components:
     HyperParameterTuningJobSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/HyperParameterTuningJobSummary'
     ParentHyperParameterTuningJobs:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ParentHyperParameterTuningJob'
       minItems: 1
       maxItems: 5
@@ -13656,21 +13784,29 @@ components:
     ModelPackageContainerDefinitionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ModelPackageContainerDefinition'
       minItems: 1
       maxItems: 1
     TransformInstanceTypes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TransformInstanceType'
       minItems: 1
     RealtimeInferenceInstanceTypes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ProductionVariantInstanceType'
     ResponseMIMETypes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResponseMIMEType'
     IntegerParameterRange:
       type: object
@@ -13708,6 +13844,8 @@ components:
     IntegerParameterRanges:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/IntegerParameterRange'
       minItems: 0
       maxItems: 20
@@ -13815,6 +13953,8 @@ components:
     LabelingJobForWorkteamSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LabelingJobForWorkteamSummary'
     MaxHumanLabeledObjectCount:
       type: integer
@@ -13875,6 +14015,8 @@ components:
     LabelingJobSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LabelingJobSummary'
     MaxResults:
       type: integer
@@ -13931,6 +14073,8 @@ components:
     ModelPackageSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ModelPackageSummary'
     ModelSortKey:
       type: string
@@ -13944,6 +14088,8 @@ components:
     ModelSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ModelSummary'
     MonitoringExecutionSortKey:
       type: string
@@ -13954,6 +14100,8 @@ components:
     MonitoringExecutionSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MonitoringExecutionSummary'
     MonitoringScheduleSortKey:
       type: string
@@ -13964,6 +14112,8 @@ components:
     MonitoringScheduleSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MonitoringScheduleSummary'
     NotebookInstanceLifecycleConfigSortKey:
       type: string
@@ -13983,6 +14133,8 @@ components:
     NotebookInstanceLifecycleConfigSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/NotebookInstanceLifecycleConfigSummary'
     NotebookInstanceSortKey:
       type: string
@@ -14002,14 +14154,20 @@ components:
     NotebookInstanceSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/NotebookInstanceSummary'
     ProcessingJobSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ProcessingJobSummary'
     SubscribedWorkteams:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SubscribedWorkteam'
     ListTagsMaxResults:
       type: integer
@@ -14024,10 +14182,14 @@ components:
     TrainingJobSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TrainingJobSummary'
     TransformJobSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TransformJobSummary'
     TrialComponentKey256:
       type: string
@@ -14036,6 +14198,8 @@ components:
     ListTrialComponentKey256:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TrialComponentKey256'
     SortTrialComponentsBy:
       type: string
@@ -14045,6 +14209,8 @@ components:
     TrialComponentSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TrialComponentSummary'
     SortTrialsBy:
       type: string
@@ -14054,6 +14220,8 @@ components:
     TrialSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TrialSummary'
     UserProfileSortKey:
       type: string
@@ -14063,6 +14231,8 @@ components:
     UserProfileList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/UserProfileDetails'
     ListWorkteamsSortByOptions:
       type: string
@@ -14072,6 +14242,8 @@ components:
     Workteams:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Workteam'
     MaxNumberOfTrainingJobs:
       type: integer
@@ -14138,6 +14310,8 @@ components:
     ModelPackageStatusItemList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ModelPackageStatusItem'
     ModelPackageStatusItem:
       type: object
@@ -14195,6 +14369,8 @@ components:
     ModelPackageValidationProfiles:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ModelPackageValidationProfile'
       minItems: 1
       maxItems: 1
@@ -14218,6 +14394,8 @@ components:
     MonitoringContainerArguments:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ContainerArgument'
       minItems: 1
       maxItems: 50
@@ -14315,6 +14493,8 @@ components:
     MonitoringInputs:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MonitoringInput'
       minItems: 1
       maxItems: 1
@@ -14417,6 +14597,8 @@ components:
     MonitoringOutputs:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MonitoringOutput'
       minItems: 1
       maxItems: 1
@@ -14482,6 +14664,8 @@ components:
     NestedFiltersList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/NestedFilters'
       minItems: 1
       maxItems: 20
@@ -14598,6 +14782,8 @@ components:
     Parents:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Parent'
     ProcessingClusterConfig:
       type: object
@@ -14733,6 +14919,8 @@ components:
     ProcessingOutputs:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ProcessingOutput'
       minItems: 0
       maxItems: 10
@@ -14749,6 +14937,8 @@ components:
     ProductListings:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     ProductionVariantInstanceType:
       type: string
@@ -14925,6 +15115,8 @@ components:
     RenderingErrorList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RenderingError'
     TaskInput:
       type: string
@@ -15013,6 +15205,8 @@ components:
     SearchExpressionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SearchExpression'
       minItems: 1
       maxItems: 20
@@ -15249,6 +15443,8 @@ components:
     SearchResultsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SearchRecord'
     StatusMessage:
       type: string
@@ -15305,6 +15501,8 @@ components:
     SourceAlgorithmList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SourceAlgorithm'
       minItems: 1
       maxItems: 1
@@ -15386,6 +15584,8 @@ components:
     TrainingInstanceTypes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TrainingInstanceType'
     TrainingJobStatusCounter:
       type: integer
@@ -15512,6 +15712,8 @@ components:
     TrialComponentSimpleSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TrialComponentSimpleSummary'
     TrialComponentSourceDetail:
       type: object
@@ -15678,6 +15880,8 @@ components:
     VariantPropertyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/VariantProperty'
       minItems: 0
       maxItems: 3
@@ -15718,6 +15922,8 @@ components:
     VpcSecurityGroupIds:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SecurityGroupId'
       minItems: 1
       maxItems: 5

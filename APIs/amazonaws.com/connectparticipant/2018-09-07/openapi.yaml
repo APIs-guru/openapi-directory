@@ -162,6 +162,8 @@ paths:
                   description: Type of connection information required.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/ConnectionType'
                   minItems: 1
     parameters:
@@ -648,6 +650,8 @@ components:
     ConnectionTypeList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ConnectionType'
       minItems: 1
     ContactId:
@@ -740,6 +744,8 @@ components:
     Transcript:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Item'
     ParticipantId:
       type: string

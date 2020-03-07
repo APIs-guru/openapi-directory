@@ -667,6 +667,8 @@ components:
       type: array
       description: An array of EventDestination objects. Each EventDestination object includes ARNs and other information that define an event destination.
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EventType'
     SnsDestination:
       type: object
@@ -754,6 +756,8 @@ components:
       type: array
       description: An array that contains all of the configuration sets in your Amazon Pinpoint account in the current AWS Region.
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/WordCharactersWithDelimiters'
     __string:
       type: string
@@ -820,6 +824,8 @@ components:
       type: array
       description: An array of EventDestination objects. Each EventDestination object includes ARNs and other information that define an event destination.
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EventDestination'
     EventType:
       type: string

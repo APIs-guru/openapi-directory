@@ -179,6 +179,8 @@ paths:
                   description: A list of outputs that you want to add.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/AddOutputRequest'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -253,6 +255,8 @@ paths:
                   description: The entitlements that you want to grant on a flow.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/GrantEntitlementRequest'
                 name:
                   description: The name of the flow.
@@ -261,6 +265,8 @@ paths:
                   description: The outputs that you want to add to this flow.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/AddOutputRequest'
                 source:
                   description: The settings for the source of the flow.
@@ -553,6 +559,8 @@ paths:
                   description: The list of entitlements that you want to grant.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/GrantEntitlementRequest'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -859,6 +867,8 @@ paths:
                   description: 'The range of IP addresses that should be allowed to initiate output requests to this flow. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/__string'
                 description:
                   description: A description of the output. This description appears only on the AWS Elemental MediaConnect console and will not be seen by the end user.
@@ -1093,6 +1103,8 @@ paths:
                   description: The AWS account IDs that you want to share your content with. The receiving accounts (subscribers) will be allowed to create their own flow using your content as the source.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/__string'
   '/v1/flows/start/{flowArn}':
     post:
@@ -1257,6 +1269,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/__string'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -1707,6 +1721,8 @@ components:
     __listOfAddOutputRequest:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AddOutputRequest'
     AddFlowOutputsRequest:
       type: object
@@ -1721,14 +1737,20 @@ components:
     __listOfOutput:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Output'
     __listOf__string:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/__string'
     __listOfGrantEntitlementRequest:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/GrantEntitlementRequest'
     SetSourceRequest:
       type: object
@@ -1880,6 +1902,8 @@ components:
     __listOfEntitlement:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Entitlement'
     Source:
       type: object
@@ -1939,6 +1963,8 @@ components:
     __listOfListedEntitlement:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ListedEntitlement'
     ListFlowsRequest:
       type: object
@@ -1947,6 +1973,8 @@ components:
     __listOfListedFlow:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ListedFlow'
     ListTagsForResourceRequest:
       type: object

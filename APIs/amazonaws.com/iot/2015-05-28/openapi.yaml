@@ -384,6 +384,8 @@ paths:
                   description: A list of thing group ARNs that define the targets of the job.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/TargetArn'
                   minItems: 1
                 comment:
@@ -1871,6 +1873,8 @@ paths:
                   description: Metadata which can be used to manage the billing group.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Tag'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -2259,6 +2263,8 @@ paths:
                   description: The ARNs of the certificates that AWS IoT passes to the device during the TLS handshake. Currently you can specify only one certificate ARN. This value is not required for AWS-managed domains.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/AcmCertificateArn'
                   minItems: 0
                   maxItems: 1
@@ -2586,6 +2592,8 @@ paths:
                   description: Metadata which can be used to manage the dynamic thing group.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Tag'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -2806,6 +2814,8 @@ paths:
                   description: A list of things and thing groups to which the job should be sent.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/TargetArn'
                   minItems: 1
                 documentSource:
@@ -2866,6 +2876,8 @@ paths:
                   description: Metadata which can be used to manage the job.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Tag'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -3210,6 +3222,8 @@ paths:
                   description: Metadata that can be used to manage the mitigation action.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Tag'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -3465,12 +3479,16 @@ paths:
                   description: The targeted devices to receive OTA updates.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Target'
                   minItems: 1
                 protocols:
                   description: 'The protocol used to transfer the OTA update image. Valid values are [HTTP], [MQTT], [HTTP, MQTT]. When both HTTP and MQTT are specified, the target device can choose the protocol.'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Protocol'
                   minItems: 1
                   maxItems: 2
@@ -3498,6 +3516,8 @@ paths:
                   description: The files to be streamed by the OTA update.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/OTAUpdateFile'
                   minItems: 1
                   maxItems: 50
@@ -3515,6 +3535,8 @@ paths:
                   description: Metadata which can be used to manage updates.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Tag'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -4153,6 +4175,8 @@ paths:
                   description: '<p>Metadata which can be used to manage the fleet provisioning template.</p> <note> <p>For URI Request parameters use format: ...key1=value1&amp;key2=value2...</p> <p>For the CLI command-line parameter use format: &amp;&amp;tags "key1=value1&amp;key2=value2..."</p> <p>For the cli-input-json file use format: "tags": "key1=value1&amp;key2=value2..."</p> </note>'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Tag'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -4733,11 +4757,15 @@ paths:
                   description: 'Which checks are performed during the scheduled audit. Checks must be enabled for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code> to select which checks are enabled.)'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/AuditCheckName'
                 tags:
                   description: Metadata that can be used to manage the scheduled audit.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Tag'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -4913,6 +4941,8 @@ paths:
                   description: 'Which checks are performed during the scheduled audit. Checks must be enabled for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code> to select which checks are enabled.)'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/AuditCheckName'
   '/security-profiles/{securityProfileName}':
     post:
@@ -4975,6 +5005,8 @@ paths:
                   description: 'Specifies the behaviors that, when violated by a device (thing), cause an alert.'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Behavior'
                   maxItems: 100
                 alertTargets:
@@ -4986,11 +5018,15 @@ paths:
                   description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here.'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/BehaviorMetric'
                 tags:
                   description: Metadata that can be used to manage the security profile.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Tag'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -5166,6 +5202,8 @@ paths:
                   description: 'Specifies the behaviors that, when violated by a device (thing), cause an alert.'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Behavior'
                   maxItems: 100
                 alertTargets:
@@ -5177,6 +5215,8 @@ paths:
                   description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here.'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/BehaviorMetric'
                 deleteBehaviors:
                   description: 'If true, delete all <code>behaviors</code> defined for this security profile. If any <code>behaviors</code> are defined in the current invocation, an exception occurs.'
@@ -5275,6 +5315,8 @@ paths:
                   description: The files to stream.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/StreamFile'
                   minItems: 1
                   maxItems: 50
@@ -5287,6 +5329,8 @@ paths:
                   description: Metadata which can be used to manage streams.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Tag'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -5486,6 +5530,8 @@ paths:
                   description: The files associated with the stream.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/StreamFile'
                   minItems: 1
                   maxItems: 50
@@ -5881,6 +5927,8 @@ paths:
                   description: Metadata which can be used to manage the thing group.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Tag'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -6134,6 +6182,8 @@ paths:
                   description: Metadata which can be used to manage the thing type.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Tag'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -9289,6 +9339,8 @@ paths:
                   description: The percentile groups returned.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Percent'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -13400,6 +13452,8 @@ paths:
                   description: 'Which checks are performed during the audit. The checks you specify must be enabled for your account or an exception occurs. Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks, including those that are enabled or <code>UpdateAccountAuditConfiguration</code> to select which checks are enabled.'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/AuditCheckName'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -13525,6 +13579,8 @@ paths:
                   description: The new or modified tags for the resource.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Tag'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -13613,6 +13669,8 @@ paths:
                   description: A list of authorization info objects. Simulating authorization will create a response for each <code>authInfo</code> object in the list.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/AuthInfo'
                   minItems: 1
                   maxItems: 10
@@ -13620,11 +13678,15 @@ paths:
                   description: 'When testing custom authorization, the policies specified here are treated as if they are attached to the principal being authorized.'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/PolicyName'
                 policyNamesToSkip:
                   description: 'When testing custom authorization, the policies specified here are treated as if they are not attached to the principal being authorized.'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/PolicyName'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -13903,6 +13965,8 @@ paths:
                   description: A list of the keys of the tags to be removed from the resource.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/TagKey'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -14045,11 +14109,15 @@ paths:
                   description: The groups to which the thing will be added.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/ThingGroupName'
                 thingGroupsToRemove:
                   description: The groups from which the thing will be removed.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/ThingGroupName'
                 overrideDynamicGroups:
                   description: 'Override dynamic thing groups with static thing groups when 10-group limit is reached. If a thing belongs to 10 thing groups, and one or more of those groups are dynamic thing groups, adding a thing to a static group removes the thing from the last dynamic group.'
@@ -14105,6 +14173,8 @@ paths:
                   description: 'Specifies the behaviors that, when violated by a device (thing), cause an alert.'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Behavior'
                   maxItems: 100
     parameters:
@@ -14388,6 +14458,8 @@ components:
     AbortCriteriaList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AbortCriteria'
       minItems: 1
     InProgressTimeoutInMinutes:
@@ -14739,6 +14811,8 @@ components:
     SearchableAttributes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AttributeName'
     SQL:
       type: string
@@ -14747,6 +14821,8 @@ components:
     ActionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Action'
       minItems: 0
       maxItems: 10
@@ -16045,6 +16121,8 @@ components:
     FindingIds:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/FindingId'
       minItems: 1
       maxItems: 25
@@ -16055,6 +16133,8 @@ components:
     MitigationActionNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MitigationActionName'
       minItems: 1
       maxItems: 5
@@ -16234,6 +16314,8 @@ components:
     Fields:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Field'
     ThingGroupIndexingMode:
       type: string
@@ -16786,6 +16868,8 @@ components:
     ActiveViolations:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ActiveViolation'
     BillingGroupName:
       type: string
@@ -16843,12 +16927,16 @@ components:
     ThingGroupNames:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ThingGroupName'
       minItems: 1
       maxItems: 10
     AdditionalMetricsToRetainList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/BehaviorMetric'
     AdditionalParameterMap:
       type: object
@@ -16875,6 +16963,8 @@ components:
     Policies:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Policy'
     Allowed:
       type: object
@@ -16960,11 +17050,15 @@ components:
     AssetPropertyValueList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AssetPropertyValue'
       minItems: 1
     JobTargets:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TargetArn'
       minItems: 1
     JobId:
@@ -17092,6 +17186,8 @@ components:
     ReasonForNonComplianceCodes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ReasonForNonComplianceCode'
       minItems: 1
       maxItems: 25
@@ -17127,6 +17223,8 @@ components:
     RelatedResources:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RelatedResource'
     ReasonForNonCompliance:
       type: string
@@ -17169,6 +17267,8 @@ components:
     AuditFindings:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AuditFinding'
     AuditFrequency:
       type: string
@@ -17231,6 +17331,8 @@ components:
     AuditMitigationActionExecutionMetadataList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AuditMitigationActionExecutionMetadata'
     AuditMitigationActionsTaskStatus:
       type: string
@@ -17255,6 +17357,8 @@ components:
     AuditMitigationActionsTaskMetadataList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AuditMitigationActionsTaskMetadata'
     TaskStatisticsForAuditCheck:
       type: object
@@ -17328,6 +17432,8 @@ components:
     AuditTaskMetadataList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AuditTaskMetadata'
     AuthDecision:
       type: string
@@ -17338,10 +17444,14 @@ components:
     Resources:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Resource'
     AuthInfos:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AuthInfo'
       minItems: 1
       maxItems: 10
@@ -17358,6 +17468,8 @@ components:
     MissingContextValues:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MissingContextValue'
     AuthResult:
       type: object
@@ -17381,6 +17493,8 @@ components:
     AuthResults:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AuthResult'
     AuthorizerArn:
       type: string
@@ -17459,6 +17573,8 @@ components:
     Authorizers:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AuthorizerSummary'
     AutoRegistrationStatus:
       type: string
@@ -17544,6 +17660,8 @@ components:
     Behaviors:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Behavior'
       maxItems: 100
     BillingGroupId:
@@ -17574,6 +17692,8 @@ components:
     BillingGroupNameAndArnList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/GroupNameAndArn'
     BillingGroupProperties:
       type: object
@@ -17673,6 +17793,8 @@ components:
     CACertificates:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CACertificate'
     CancelAuditMitigationActionsTaskRequest:
       type: object
@@ -17833,6 +17955,8 @@ components:
     Certificates:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Certificate'
     ChannelName:
       type: string
@@ -17844,6 +17968,8 @@ components:
     Cidrs:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Cidr'
     ClearDefaultAuthorizerRequest:
       type: object
@@ -17965,6 +18091,8 @@ components:
     TagList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
     CreateBillingGroupRequest:
       type: object
@@ -17998,6 +18126,8 @@ components:
     ServerCertificateArns:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AcmCertificateArn'
       minItems: 0
       maxItems: 1
@@ -18216,17 +18346,23 @@ components:
     Targets:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Target'
       minItems: 1
     Protocols:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Protocol'
       minItems: 1
       maxItems: 2
     OTAUpdateFiles:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/OTAUpdateFile'
       minItems: 1
       maxItems: 50
@@ -18398,6 +18534,8 @@ components:
     TargetAuditCheckNames:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AuditCheckName'
     ScheduledAuditName:
       type: string
@@ -18465,6 +18603,8 @@ components:
     StreamFiles:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StreamFile'
       minItems: 1
       maxItems: 50
@@ -18805,6 +18945,8 @@ components:
     MitigationActionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MitigationAction'
     DescribeAuditTaskRequest:
       type: object
@@ -18881,6 +19023,8 @@ components:
     ServerCertificates:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ServerCertificateSummary'
     DomainConfigurationStatus:
       type: string
@@ -19263,6 +19407,8 @@ components:
     DomainConfigurations:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DomainConfigurationSummary'
     TableName:
       type: string
@@ -19308,6 +19454,8 @@ components:
     EffectivePolicies:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EffectivePolicy'
     ElasticsearchEndpoint:
       type: string
@@ -19576,6 +19724,8 @@ components:
     PercentList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Percent'
     GetPercentilesRequest:
       type: object
@@ -19601,6 +19751,8 @@ components:
     Percentiles:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PercentPair'
     GetPolicyRequest:
       type: object
@@ -19731,6 +19883,8 @@ components:
     HeaderList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/HttpActionHeader'
       minItems: 0
       maxItems: 100
@@ -19802,6 +19956,8 @@ components:
     IndexNamesList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/IndexName'
     InputName:
       type: string
@@ -19813,6 +19969,8 @@ components:
     PutAssetPropertyValueEntryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PutAssetPropertyValueEntry'
       minItems: 1
     IsAuthenticated:
@@ -19907,6 +20065,8 @@ components:
     JobExecutionSummaryForJobList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/JobExecutionSummaryForJob'
     JobExecutionSummaryForThing:
       type: object
@@ -19921,10 +20081,14 @@ components:
     JobExecutionSummaryForThingList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/JobExecutionSummaryForThing'
     ProcessingTargetNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ProcessingTargetName'
     SucceededThings:
       type: integer
@@ -19967,6 +20131,8 @@ components:
     JobSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/JobSummary'
     JsonDocument:
       type: string
@@ -20138,6 +20304,8 @@ components:
     MitigationActionIdentifierList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MitigationActionIdentifier'
     ListOTAUpdatesRequest:
       type: object
@@ -20146,6 +20314,8 @@ components:
     OTAUpdatesSummary:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/OTAUpdateSummary'
     ListOutgoingCertificatesRequest:
       type: object
@@ -20155,6 +20325,8 @@ components:
     OutgoingCertificates:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/OutgoingCertificate'
     ListPoliciesRequest:
       type: object
@@ -20169,6 +20341,8 @@ components:
     Principals:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PrincipalArn'
     ListPolicyVersionsRequest:
       type: object
@@ -20178,6 +20352,8 @@ components:
     PolicyVersions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PolicyVersion'
     ListPrincipalPoliciesRequest:
       type: object
@@ -20192,6 +20368,8 @@ components:
     ThingNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ThingName'
     ListProvisioningTemplateVersionsRequest:
       type: object
@@ -20200,6 +20378,8 @@ components:
     ProvisioningTemplateVersionListing:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ProvisioningTemplateVersionSummary'
     ListProvisioningTemplatesRequest:
       type: object
@@ -20208,6 +20388,8 @@ components:
     ProvisioningTemplateListing:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ProvisioningTemplateSummary'
     ListRoleAliasesRequest:
       type: object
@@ -20216,6 +20398,8 @@ components:
     RoleAliases:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RoleAlias'
     ListScheduledAuditsRequest:
       type: object
@@ -20224,6 +20408,8 @@ components:
     ScheduledAuditMetadataList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ScheduledAuditMetadata'
     ListSecurityProfilesForTargetRequest:
       type: object
@@ -20232,6 +20418,8 @@ components:
     SecurityProfileTargetMappings:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SecurityProfileTargetMapping'
     ListSecurityProfilesRequest:
       type: object
@@ -20240,6 +20428,8 @@ components:
     SecurityProfileIdentifiers:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SecurityProfileIdentifier'
     ListStreamsRequest:
       type: object
@@ -20248,6 +20438,8 @@ components:
     StreamsSummary:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StreamSummary'
     ResourceArn:
       type: string
@@ -20262,6 +20454,8 @@ components:
     PolicyTargets:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PolicyTarget'
     ListTargetsForSecurityProfileRequest:
       type: object
@@ -20270,6 +20464,8 @@ components:
     SecurityProfileTargets:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SecurityProfileTarget'
     ListThingGroupsForThingRequest:
       type: object
@@ -20278,6 +20474,8 @@ components:
     ThingGroupNameAndArnList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/GroupNameAndArn'
     RecursiveWithoutDefault:
       type: boolean
@@ -20302,6 +20500,8 @@ components:
     S3FileUrlList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/S3FileUrl'
     ListThingRegistrationTasksRequest:
       type: object
@@ -20310,6 +20510,8 @@ components:
     TaskIdList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TaskId'
     ListThingTypesRequest:
       type: object
@@ -20319,6 +20521,8 @@ components:
     ThingTypeList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ThingTypeDefinition'
     ListThingsInBillingGroupRequest:
       type: object
@@ -20336,6 +20540,8 @@ components:
     ThingAttributeList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ThingAttribute'
     TopicRuleDestinationMaxResults:
       type: integer
@@ -20348,6 +20554,8 @@ components:
     TopicRuleDestinationSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TopicRuleDestinationSummary'
     Topic:
       type: string
@@ -20363,6 +20571,8 @@ components:
     TopicRuleList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TopicRuleListItem'
     SkyfallMaxResults:
       type: integer
@@ -20375,6 +20585,8 @@ components:
     LogTargetConfigurations:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LogTargetConfiguration'
     ListViolationEventsRequest:
       type: object
@@ -20383,6 +20595,8 @@ components:
     ViolationEvents:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ViolationEvent'
     LogTarget:
       type: object
@@ -20435,6 +20649,8 @@ components:
     Ports:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Port'
     Minimum:
       type: number
@@ -20574,10 +20790,14 @@ components:
     PolicyDocuments:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PolicyDocument'
     PolicyNames:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PolicyName'
     PolicyTemplateName:
       type: string
@@ -20863,10 +21083,14 @@ components:
     ThingDocumentList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ThingDocument'
     ThingGroupDocumentList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ThingGroupDocument'
     Seconds:
       type: integer
@@ -21083,6 +21307,8 @@ components:
     TagKeyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKey'
     TagResourceRequest:
       type: object
@@ -21191,6 +21417,8 @@ components:
     ThingGroupNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ThingGroupName'
     ThingDocument:
       type: object
@@ -21239,6 +21467,8 @@ components:
     ThingGroupList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ThingGroupName'
     ThingTypeDefinition:
       type: object
@@ -21608,6 +21838,8 @@ components:
     ValidationErrors:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ValidationError'
     ValidationError:
       type: object

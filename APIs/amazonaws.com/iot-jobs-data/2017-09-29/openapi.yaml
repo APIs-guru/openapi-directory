@@ -595,6 +595,8 @@ components:
     JobExecutionSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/JobExecutionSummary'
     IncludeExecutionState:
       type: boolean

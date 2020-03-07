@@ -11331,6 +11331,8 @@ components:
     ApprovalList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Approval'
     ApprovalRuleId:
       type: string
@@ -11463,18 +11465,26 @@ components:
     ApprovalRuleTemplateNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ApprovalRuleTemplateName'
     ApprovalRulesList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ApprovalRule'
     ApprovalRulesNotSatisfiedList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ApprovalRuleName'
     ApprovalRulesSatisfiedList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ApprovalRuleName'
     ApprovalStateChangedEventMetadata:
       type: object
@@ -11513,10 +11523,14 @@ components:
     BatchAssociateApprovalRuleTemplateWithRepositoriesErrorsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/BatchAssociateApprovalRuleTemplateWithRepositoriesError'
     RepositoryNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RepositoryName'
     Path:
       type: string
@@ -11544,6 +11558,8 @@ components:
     BatchDescribeMergeConflictsErrors:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/BatchDescribeMergeConflictsError'
     CommitName:
       type: string
@@ -11558,6 +11574,8 @@ components:
     FilePaths:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Path'
     ConflictDetailLevelTypeEnum:
       type: string
@@ -11576,6 +11594,8 @@ components:
     Conflicts:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Conflict'
     ObjectId:
       type: string
@@ -11595,6 +11615,8 @@ components:
     BatchDisassociateApprovalRuleTemplateFromRepositoriesErrorsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/BatchDisassociateApprovalRuleTemplateFromRepositoriesError'
     BatchGetCommitsError:
       type: object
@@ -11612,22 +11634,32 @@ components:
     BatchGetCommitsErrorsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/BatchGetCommitsError'
     CommitIdsInputList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ObjectId'
     CommitObjectsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Commit'
     RepositoryMetadataList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RepositoryMetadata'
     RepositoryNotFoundList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RepositoryName'
     Mode:
       type: string
@@ -11663,6 +11695,8 @@ components:
     BranchNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/BranchName'
     CapitalBoolean:
       type: boolean
@@ -11715,6 +11749,8 @@ components:
     Comments:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Comment'
     Location:
       type: object
@@ -11757,6 +11793,8 @@ components:
     CommentsForComparedCommitData:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CommentsForComparedCommit'
     PullRequestId:
       type: string
@@ -11791,10 +11829,14 @@ components:
     CommentsForPullRequestData:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CommentsForPullRequest'
     ParentList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ObjectId'
     UserInfo:
       type: object
@@ -11871,6 +11913,8 @@ components:
     MergeHunks:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MergeHunk'
     Conflict:
       type: object
@@ -11955,18 +11999,26 @@ components:
     ConflictMetadataList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ConflictMetadata'
     ReplaceContentEntries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ReplaceContentEntry'
     DeleteFileEntries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DeleteFileEntry'
     SetFileModeEntries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SetFileModeEntry'
     ConflictResolution:
       type: object
@@ -11990,10 +12042,14 @@ components:
     PutFileEntries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PutFileEntry'
     FilesMetadata:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/FileMetadata'
     Title:
       type: string
@@ -12004,6 +12060,8 @@ components:
     TargetList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Target'
     PullRequest:
       type: object
@@ -12111,6 +12169,8 @@ components:
     PullRequestEventList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PullRequestEvent'
     Difference:
       type: object
@@ -12128,6 +12188,8 @@ components:
     DifferenceList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Difference'
     Evaluation:
       type: object
@@ -12178,6 +12240,8 @@ components:
     FileList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/File'
     FileMetadata:
       type: object
@@ -12210,6 +12274,8 @@ components:
     FolderList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Folder'
     blob:
       type: string
@@ -12220,22 +12286,30 @@ components:
     SymbolicLinkList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SymbolicLink'
     SubModuleList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SubModule'
     IsMergeable:
       type: boolean
     MergeOptions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MergeOptionTypeEnum'
     RepositoryTriggersConfigurationId:
       type: string
     RepositoryTriggersList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RepositoryTrigger'
     HunkContent:
       type: string
@@ -12255,6 +12329,8 @@ components:
     PullRequestIdList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PullRequestId'
     SortByEnum:
       type: string
@@ -12269,6 +12345,8 @@ components:
     RepositoryNameIdPairList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RepositoryNameIdPair'
     ResourceArn:
       type: string
@@ -12334,6 +12412,8 @@ components:
     PullRequestTargetList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PullRequestTarget'
     PullRequestCreatedEventMetadata:
       type: object
@@ -12524,6 +12604,8 @@ components:
     RepositoryTriggerEventList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RepositoryTriggerEventEnum'
     RepositoryTrigger:
       type: object
@@ -12570,10 +12652,14 @@ components:
     RepositoryTriggerExecutionFailureList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RepositoryTriggerExecutionFailure'
     RepositoryTriggerNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RepositoryTriggerName'
     SetFileModeEntry:
       type: object
@@ -12624,6 +12710,8 @@ components:
     TagKeysList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKey'
     TagValue:
       type: string

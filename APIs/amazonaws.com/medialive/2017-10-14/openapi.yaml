@@ -427,6 +427,8 @@ paths:
                   description: Placeholder documentation for __listOfOutputDestination
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/OutputDestination'
                 encoderSettings:
                   description: Encoder Settings
@@ -463,6 +465,8 @@ paths:
                   description: Placeholder documentation for __listOfInputAttachment
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/InputAttachment'
                 inputSpecification:
                   description: Placeholder documentation for InputSpecification
@@ -645,16 +649,22 @@ paths:
                   description: Placeholder documentation for __listOfInputDestinationRequest
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/InputDestinationRequest'
                 inputSecurityGroups:
                   description: Placeholder documentation for __listOf__string
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/__string'
                 mediaConnectFlows:
                   description: Placeholder documentation for __listOfMediaConnectFlowRequest
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/MediaConnectFlowRequest'
                 name:
                   description: Placeholder documentation for __string
@@ -669,6 +679,8 @@ paths:
                   description: Placeholder documentation for __listOfInputSourceRequest
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/InputSourceRequest'
                 tags:
                   description: Placeholder documentation for Tags
@@ -851,6 +863,8 @@ paths:
                   description: Placeholder documentation for __listOfInputWhitelistRuleCidr
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/InputWhitelistRuleCidr'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -1011,6 +1025,8 @@ paths:
                   description: Placeholder documentation for __listOf__string
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/__string'
                 multiplexSettings:
                   description: Contains configuration for a Multiplex event
@@ -1622,6 +1638,8 @@ paths:
                   description: Placeholder documentation for __listOfOutputDestination
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/OutputDestination'
                 encoderSettings:
                   description: Encoder Settings
@@ -1658,6 +1676,8 @@ paths:
                   description: Placeholder documentation for __listOfInputAttachment
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/InputAttachment'
                 inputSpecification:
                   description: Placeholder documentation for InputSpecification
@@ -1893,16 +1913,22 @@ paths:
                   description: Placeholder documentation for __listOfInputDestinationRequest
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/InputDestinationRequest'
                 inputSecurityGroups:
                   description: Placeholder documentation for __listOf__string
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/__string'
                 mediaConnectFlows:
                   description: Placeholder documentation for __listOfMediaConnectFlowRequest
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/MediaConnectFlowRequest'
                 name:
                   description: Placeholder documentation for __string
@@ -1914,6 +1940,8 @@ paths:
                   description: Placeholder documentation for __listOfInputSourceRequest
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/InputSourceRequest'
   '/prod/inputSecurityGroups/{inputSecurityGroupId}':
     delete:
@@ -2120,6 +2148,8 @@ paths:
                   description: Placeholder documentation for __listOfInputWhitelistRuleCidr
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/InputWhitelistRuleCidr'
   '/prod/multiplexes/{multiplexId}':
     delete:
@@ -2848,6 +2878,8 @@ paths:
             type: array
             description: Placeholder documentation for __listOf__string
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/__string'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -3723,6 +3755,8 @@ paths:
                   description: Placeholder documentation for __listOfOutputDestination
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/OutputDestination'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -3798,11 +3832,15 @@ components:
       type: array
       description: Placeholder documentation for __listOfScheduleAction
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ScheduleAction'
     __listOf__string:
       type: array
       description: Placeholder documentation for __listOf__string
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/__string'
     BadRequestException: {}
     UnprocessableEntityException: {}
@@ -3838,6 +3876,8 @@ components:
       type: array
       description: Placeholder documentation for __listOfAudioDescription
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AudioDescription'
     AvailBlanking:
       type: object
@@ -3879,6 +3919,8 @@ components:
       type: array
       description: Placeholder documentation for __listOfCaptionDescription
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CaptionDescription'
     GlobalConfiguration:
       type: object
@@ -3920,6 +3962,8 @@ components:
       type: array
       description: Placeholder documentation for __listOfOutputGroup
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/OutputGroup'
     TimecodeConfig:
       type: object
@@ -3941,6 +3985,8 @@ components:
       type: array
       description: Placeholder documentation for __listOfVideoDescription
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/VideoDescription'
     InputAttachment:
       type: object
@@ -5188,6 +5234,8 @@ components:
       type: array
       description: Placeholder documentation for __listOfInputChannelLevel
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InputChannelLevel'
     __integerMin0Max7:
       type: integer
@@ -6023,11 +6071,15 @@ components:
       type: array
       description: Placeholder documentation for __listOfOutputDestination
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/OutputDestination'
     __listOfChannelEgressEndpoint:
       type: array
       description: Placeholder documentation for __listOfChannelEgressEndpoint
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ChannelEgressEndpoint'
     EncoderSettings:
       type: object
@@ -6069,6 +6121,8 @@ components:
       type: array
       description: Placeholder documentation for __listOfInputAttachment
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InputAttachment'
     InputSpecification:
       type: object
@@ -6096,6 +6150,8 @@ components:
       type: array
       description: Placeholder documentation for __listOfPipelineDetail
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PipelineDetail'
     ChannelState:
       type: string
@@ -6264,16 +6320,22 @@ components:
       type: array
       description: Placeholder documentation for __listOfInputDestinationRequest
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InputDestinationRequest'
     __listOfMediaConnectFlowRequest:
       type: array
       description: Placeholder documentation for __listOfMediaConnectFlowRequest
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MediaConnectFlowRequest'
     __listOfInputSourceRequest:
       type: array
       description: Placeholder documentation for __listOfInputSourceRequest
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InputSourceRequest'
     InputType:
       type: string
@@ -6399,6 +6461,8 @@ components:
       type: array
       description: Placeholder documentation for __listOfInputWhitelistRuleCidr
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InputWhitelistRuleCidr'
     CreateInputSecurityGroupRequest:
       type: object
@@ -6630,6 +6694,8 @@ components:
       type: array
       description: Placeholder documentation for __listOfMultiplexOutputDestination
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MultiplexOutputDestination'
     MultiplexState:
       type: string
@@ -6719,6 +6785,8 @@ components:
       type: array
       description: Placeholder documentation for __listOfInputDestination
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InputDestination'
     InputClass:
       type: string
@@ -6739,11 +6807,15 @@ components:
       type: array
       description: Placeholder documentation for __listOfMediaConnectFlow
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MediaConnectFlow'
     __listOfInputSource:
       type: array
       description: Placeholder documentation for __listOfInputSource
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InputSource'
     InputState:
       type: string
@@ -6771,6 +6843,8 @@ components:
       type: array
       description: Placeholder documentation for __listOfInputWhitelistRule
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InputWhitelistRule'
     DescribeMultiplexProgramRequest:
       type: object
@@ -7954,11 +8028,15 @@ components:
       type: array
       description: Placeholder documentation for __listOfHlsAdMarkers
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/HlsAdMarkers'
     __listOfCaptionLanguageMapping:
       type: array
       description: Placeholder documentation for __listOfCaptionLanguageMapping
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CaptionLanguageMapping'
     __stringMin32Max32:
       type: string
@@ -8500,11 +8578,15 @@ components:
       type: array
       description: Placeholder documentation for __listOfAudioSelector
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AudioSelector'
     __listOfCaptionSelector:
       type: array
       description: Placeholder documentation for __listOfCaptionSelector
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CaptionSelector'
     NetworkInputSettings:
       type: object
@@ -8599,6 +8681,8 @@ components:
       type: array
       description: Placeholder documentation for __listOfChannelSummary
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ChannelSummary'
     ListInputSecurityGroupsRequest:
       type: object
@@ -8609,6 +8693,8 @@ components:
       type: array
       description: Placeholder documentation for __listOfInputSecurityGroup
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InputSecurityGroup'
     ListInputsRequest:
       type: object
@@ -8619,6 +8705,8 @@ components:
       type: array
       description: Placeholder documentation for __listOfInput
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Input'
     ListMultiplexProgramsRequest:
       type: object
@@ -8629,6 +8717,8 @@ components:
       type: array
       description: Placeholder documentation for __listOfMultiplexProgramSummary
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MultiplexProgramSummary'
     ListMultiplexesRequest:
       type: object
@@ -8639,6 +8729,8 @@ components:
       type: array
       description: Placeholder documentation for __listOfMultiplexSummary
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MultiplexSummary'
     ListOfferingsRequest:
       type: object
@@ -8649,6 +8741,8 @@ components:
       type: array
       description: Placeholder documentation for __listOfOffering
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Offering'
     ListReservationsRequest:
       type: object
@@ -8659,6 +8753,8 @@ components:
       type: array
       description: Placeholder documentation for __listOfReservation
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Reservation'
     ListTagsForResourceRequest:
       type: object
@@ -9103,6 +9199,8 @@ components:
       type: array
       description: Placeholder documentation for __listOf__integer
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/__integer'
     __stringMax256:
       type: string
@@ -9270,11 +9368,15 @@ components:
       type: array
       description: Placeholder documentation for __listOfMediaPackageOutputDestinationSettings
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MediaPackageOutputDestinationSettings'
     __listOfOutputDestinationSettings:
       type: array
       description: Placeholder documentation for __listOfOutputDestinationSettings
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/OutputDestinationSettings'
     OutputDestinationSettings:
       type: object
@@ -9320,6 +9422,8 @@ components:
       type: array
       description: Placeholder documentation for __listOfOutput
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Output'
     OutputGroup:
       type: object
@@ -9415,6 +9519,8 @@ components:
       type: array
       description: Placeholder documentation for __listOfPipelinePauseStateSettings
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PipelinePauseStateSettings'
     PauseStateScheduleActionSettings:
       type: object
@@ -9534,6 +9640,8 @@ components:
       type: array
       description: Placeholder documentation for __listOfAudioChannelMapping
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AudioChannelMapping'
     __integerMin1Max8:
       type: integer
@@ -9916,6 +10024,8 @@ components:
       type: array
       description: Placeholder documentation for __listOfScte35Descriptor
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Scte35Descriptor'
     StartChannelRequest:
       type: object

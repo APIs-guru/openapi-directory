@@ -3163,6 +3163,8 @@ components:
     ActionConfigurationPropertyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ActionConfigurationProperty'
       maxItems: 10
     ActionConfigurationQueryableValue:
@@ -3215,10 +3217,14 @@ components:
     OutputArtifactList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/OutputArtifact'
     InputArtifactList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InputArtifact'
     RoleArn:
       type: string
@@ -3419,6 +3425,8 @@ components:
     ActionExecutionDetailList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ActionExecutionDetail'
     ActionExecutionFilter:
       type: object
@@ -3434,6 +3442,8 @@ components:
     ArtifactDetailList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ArtifactDetail'
     ActionExecutionResult:
       type: object
@@ -3514,6 +3524,8 @@ components:
     ActionStateList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ActionState'
     ActionTypeSettings:
       type: object
@@ -3575,6 +3587,8 @@ components:
     ActionTypeList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ActionType'
     UrlTemplate:
       type: string
@@ -3664,6 +3678,8 @@ components:
     ArtifactList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Artifact'
     ArtifactLocationType:
       type: string
@@ -3711,6 +3727,8 @@ components:
     ArtifactRevisionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ArtifactRevision'
     ArtifactStoreType:
       type: string
@@ -3792,6 +3810,8 @@ components:
     TagList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
     PipelineDeclaration:
       type: object
@@ -3984,6 +4004,8 @@ components:
     StageStateList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StageState'
     ThirdPartyJobDetails:
       type: object
@@ -4073,6 +4095,8 @@ components:
     JobList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Job'
     JsonPath:
       type: string
@@ -4094,10 +4118,14 @@ components:
     PipelineExecutionSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PipelineExecutionSummary'
     PipelineList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PipelineSummary'
     ResourceArn:
       type: string
@@ -4175,6 +4203,8 @@ components:
     WebhookList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ListWebhookItem'
     MatchEquals:
       type: string
@@ -4210,6 +4240,8 @@ components:
     PipelineStageDeclarationList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StageDeclaration'
     PipelineExecutionStatus:
       type: string
@@ -4223,6 +4255,8 @@ components:
     SourceRevisionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SourceRevision'
     StopExecutionTrigger:
       type: object
@@ -4297,6 +4331,8 @@ components:
     ThirdPartyJobList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ThirdPartyJob'
     String:
       type: string
@@ -4337,10 +4373,14 @@ components:
     StageActionDeclarationList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ActionDeclaration'
     StageBlockerDeclarationList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/BlockerDeclaration'
     StageExecutionStatus:
       type: string
@@ -4422,6 +4462,8 @@ components:
     TagKeyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKey'
     ThirdPartyJob:
       type: object
@@ -4488,6 +4530,8 @@ components:
     WebhookFilters:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/WebhookFilterRule'
       maxItems: 5
     WebhookFilterRule:

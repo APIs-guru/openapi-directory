@@ -1692,6 +1692,8 @@ components:
     AZList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AZ'
     String:
       type: string
@@ -1699,6 +1701,8 @@ components:
     TagList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
     Boolean:
       type: boolean
@@ -1719,6 +1723,8 @@ components:
     ClientList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ClientArn'
     ClientToken:
       type: string
@@ -1768,6 +1774,8 @@ components:
       type: array
       description: Contains a list of ARNs that identify the HSMs.
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/HsmArn'
     Timestamp:
       type: string
@@ -1775,6 +1783,8 @@ components:
     PartitionSerialList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PartitionSerial'
     HsmSerialNumber:
       type: string
@@ -1798,10 +1808,14 @@ components:
     PartitionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PartitionArn'
     HapgList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/HapgArn'
     PaginationToken:
       type: string
@@ -1815,6 +1829,8 @@ components:
     TagKeyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKey'
     TagKey:
       type: string

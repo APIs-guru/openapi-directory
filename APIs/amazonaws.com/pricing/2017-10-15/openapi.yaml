@@ -526,6 +526,8 @@ components:
     AttributeNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     AttributeValue:
       type: object
@@ -537,6 +539,8 @@ components:
     AttributeValueList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AttributeValue'
     BoxedInteger:
       type: integer
@@ -545,6 +549,8 @@ components:
     ServiceList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Service'
     errorMessage:
       type: string
@@ -572,10 +578,14 @@ components:
     Filters:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Filter'
     PriceList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PriceListItemJSON'
     PriceListItemJSON:
       type: string

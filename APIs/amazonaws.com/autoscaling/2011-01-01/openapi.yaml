@@ -140,6 +140,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/XmlStringMaxLen19'
         - name: AutoScalingGroupName
           in: query
@@ -252,6 +254,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/XmlStringMaxLen511'
         - name: Action
           in: query
@@ -359,6 +363,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/XmlStringMaxLen255'
         - name: Action
           in: query
@@ -460,6 +466,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/ResourceName'
         - name: Action
           in: query
@@ -567,6 +575,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/ScheduledUpdateGroupActionRequest'
         - name: Action
           in: query
@@ -880,6 +890,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/XmlStringMaxLen255'
             minItems: 1
         - name: LoadBalancerNames
@@ -889,6 +901,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/XmlStringMaxLen255'
         - name: TargetGroupARNs
           in: query
@@ -897,6 +911,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/XmlStringMaxLen511'
         - name: HealthCheckType
           in: query
@@ -938,6 +954,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/XmlStringMaxLen1600'
         - name: NewInstancesProtectedFromScaleIn
           in: query
@@ -952,6 +970,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/LifecycleHookSpecification'
         - name: Tags
           in: query
@@ -960,6 +980,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Tag'
         - name: ServiceLinkedRoleARN
           in: query
@@ -1110,6 +1132,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/XmlString'
         - name: ClassicLinkVPCId
           in: query
@@ -1127,6 +1151,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/XmlStringMaxLen255'
         - name: UserData
           in: query
@@ -1179,6 +1205,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/BlockDeviceMapping'
         - name: InstanceMonitoring
           in: query
@@ -1336,6 +1364,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Tag'
         - name: Action
           in: query
@@ -2010,6 +2040,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Tag'
         - name: Action
           in: query
@@ -2250,6 +2282,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/ResourceName'
         - name: NextToken
           in: query
@@ -2373,6 +2407,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/XmlStringMaxLen19'
         - name: MaxRecords
           in: query
@@ -2569,6 +2605,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/ResourceName'
         - name: NextToken
           in: query
@@ -2768,6 +2806,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/AsciiStringMaxLen255'
             maxItems: 50
         - name: Action
@@ -3134,6 +3174,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/ResourceName'
         - name: NextToken
           in: query
@@ -3272,6 +3314,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/ResourceName'
         - name: PolicyTypes
           in: query
@@ -3280,6 +3324,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/XmlStringMaxLen64'
         - name: NextToken
           in: query
@@ -3409,6 +3455,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/XmlString'
         - name: AutoScalingGroupName
           in: query
@@ -3623,6 +3671,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/ResourceName'
         - name: StartTime
           in: query
@@ -3760,6 +3810,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Filter'
         - name: NextToken
           in: query
@@ -3950,6 +4002,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/XmlStringMaxLen19'
         - name: AutoScalingGroupName
           in: query
@@ -4060,6 +4114,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/XmlStringMaxLen511'
         - name: Action
           in: query
@@ -4155,6 +4211,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/XmlStringMaxLen255'
         - name: Action
           in: query
@@ -4246,6 +4304,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/XmlStringMaxLen255'
         - name: Action
           in: query
@@ -4333,6 +4393,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/XmlStringMaxLen255'
         - name: Granularity
           in: query
@@ -4424,6 +4486,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/XmlStringMaxLen19'
         - name: AutoScalingGroupName
           in: query
@@ -4645,6 +4709,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/XmlStringMaxLen19'
         - name: AutoScalingGroupName
           in: query
@@ -4919,6 +4985,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/XmlStringMaxLen255'
         - name: Action
           in: query
@@ -5095,6 +5163,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/StepAdjustment'
         - name: EstimatedInstanceWarmup
           in: query
@@ -5511,6 +5581,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/XmlStringMaxLen255'
         - name: Action
           in: query
@@ -5802,6 +5874,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/XmlStringMaxLen19'
         - name: AutoScalingGroupName
           in: query
@@ -5920,6 +5994,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/XmlStringMaxLen255'
         - name: Action
           in: query
@@ -6194,6 +6270,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/XmlStringMaxLen255'
             minItems: 1
         - name: HealthCheckType
@@ -6236,6 +6314,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/XmlStringMaxLen1600'
         - name: NewInstancesProtectedFromScaleIn
           in: query
@@ -7104,6 +7184,8 @@ components:
     Activities:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Activity'
     XmlStringMaxLen1023:
       type: string
@@ -7133,6 +7215,8 @@ components:
     ActivityIds:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/XmlString'
     AdjustmentType:
       type: object
@@ -7144,6 +7228,8 @@ components:
     AdjustmentTypes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AdjustmentType'
     Alarm:
       type: object
@@ -7158,12 +7244,16 @@ components:
     Alarms:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Alarm'
     AssociatePublicIpAddress:
       type: boolean
     InstanceIds:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/XmlStringMaxLen19'
     AttachInstancesQuery:
       type: object
@@ -7180,6 +7270,8 @@ components:
     TargetGroupARNs:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/XmlStringMaxLen511'
     AttachLoadBalancerTargetGroupsType:
       type: object
@@ -7197,6 +7289,8 @@ components:
     LoadBalancerNames:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/XmlStringMaxLen255'
     AttachLoadBalancersType:
       type: object
@@ -7245,6 +7339,8 @@ components:
     AvailabilityZones:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/XmlStringMaxLen255'
       minItems: 1
     XmlStringMaxLen32:
@@ -7257,10 +7353,14 @@ components:
     Instances:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Instance'
     SuspendedProcesses:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SuspendedProcess'
     XmlStringMaxLen2047:
       type: string
@@ -7270,14 +7370,20 @@ components:
     EnabledMetrics:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EnabledMetric'
     TagDescriptionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagDescription'
     TerminationPolicies:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/XmlStringMaxLen1600'
     InstanceProtected:
       type: boolean
@@ -7377,6 +7483,8 @@ components:
     AutoScalingGroupNames:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourceName'
     MaxRecords:
       type: integer
@@ -7396,6 +7504,8 @@ components:
     AutoScalingGroups:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AutoScalingGroup'
     AutoScalingInstanceDetails:
       type: object
@@ -7441,18 +7551,26 @@ components:
     AutoScalingInstances:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AutoScalingInstanceDetails'
     AutoScalingNotificationTypes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/XmlStringMaxLen255'
     FailedScheduledUpdateGroupActionRequests:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/FailedScheduledUpdateGroupActionRequest'
     ScheduledActionNames:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourceName'
     BatchDeleteScheduledActionType:
       type: object
@@ -7470,6 +7588,8 @@ components:
     ScheduledUpdateGroupActionRequests:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ScheduledUpdateGroupActionRequest'
     BatchPutScheduledUpdateGroupActionType:
       type: object
@@ -7527,10 +7647,14 @@ components:
     BlockDeviceMappings:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/BlockDeviceMapping'
     ClassicLinkVPCSecurityGroups:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/XmlStringMaxLen255'
     LifecycleActionToken:
       type: string
@@ -7564,10 +7688,14 @@ components:
     LifecycleHookSpecifications:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LifecycleHookSpecification'
     Tags:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
     CreateAutoScalingGroupType:
       type: object
@@ -7646,6 +7774,8 @@ components:
     SecurityGroups:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/XmlString'
     XmlStringUserData:
       type: string
@@ -7740,6 +7870,8 @@ components:
     MetricDimensions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MetricDimension'
     MetricStatistic:
       type: string
@@ -7849,10 +7981,14 @@ components:
     LifecycleHooks:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LifecycleHook'
     LifecycleHookNames:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AsciiStringMaxLen255'
       maxItems: 50
     DescribeLifecycleHooksType:
@@ -7885,6 +8021,8 @@ components:
     LoadBalancerTargetGroupStates:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LoadBalancerTargetGroupState'
     DescribeLoadBalancersRequest:
       type: object
@@ -7904,18 +8042,26 @@ components:
     LoadBalancerStates:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LoadBalancerState'
     MetricCollectionTypes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MetricCollectionType'
     MetricGranularityTypes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MetricGranularityType'
     NotificationConfigurations:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/NotificationConfiguration'
     DescribeNotificationConfigurationsType:
       type: object
@@ -7933,10 +8079,14 @@ components:
     PolicyNames:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourceName'
     PolicyTypes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/XmlStringMaxLen64'
     DescribePoliciesType:
       type: object
@@ -7998,6 +8148,8 @@ components:
     Filters:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Filter'
     DescribeTagsType:
       type: object
@@ -8059,6 +8211,8 @@ components:
     Metrics:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/XmlStringMaxLen255'
     DisableMetricsCollectionQuery:
       type: object
@@ -8169,6 +8323,8 @@ components:
     Values:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/XmlString'
     GlobalTimeout:
       type: integer
@@ -8315,6 +8471,8 @@ components:
     LaunchConfigurationNames:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourceName'
     LaunchConfigurationNamesType:
       type: object
@@ -8332,10 +8490,14 @@ components:
     LaunchConfigurations:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LaunchConfiguration'
     Overrides:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LaunchTemplateOverrides'
     LaunchTemplateOverrides:
       type: object
@@ -8464,12 +8626,16 @@ components:
     ScalingPolicies:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ScalingPolicy'
     PolicyIncrement:
       type: integer
     ProcessNames:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/XmlStringMaxLen255'
     ProcessType:
       type: object
@@ -8483,6 +8649,8 @@ components:
     Processes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ProcessType'
     PropagateAtLaunch:
       type: boolean
@@ -8539,6 +8707,8 @@ components:
     StepAdjustments:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StepAdjustment'
     TargetTrackingConfiguration:
       type: object
@@ -8723,6 +8893,8 @@ components:
     ScheduledUpdateGroupActions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ScheduledUpdateGroupAction'
     ScheduledUpdateGroupAction:
       type: object

@@ -10758,6 +10758,8 @@ components:
     RecoveryMechanismsType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RecoveryOptionType'
       minItems: 1
       maxItems: 2
@@ -10847,6 +10849,8 @@ components:
     CustomAttributesListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SchemaAttributeType'
       minItems: 1
       maxItems: 25
@@ -10900,6 +10904,8 @@ components:
     AttributeListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AttributeType'
     PasswordType:
       type: string
@@ -10917,6 +10923,8 @@ components:
     DeliveryMediumListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DeliveryMediumType'
     UserType:
       type: object
@@ -10946,6 +10954,8 @@ components:
     AttributeNameListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AttributeNameType'
     StringType:
       type: string
@@ -11002,10 +11012,14 @@ components:
     MFAOptionListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MFAOptionType'
     UserMFASettingListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StringType'
     ClientIdType:
       type: string
@@ -11112,6 +11126,8 @@ components:
     DeviceListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DeviceType'
     PaginationKey:
       type: string
@@ -11120,10 +11136,14 @@ components:
     GroupListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/GroupType'
     AuthEventsType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AuthEventType'
     ChallengeResponsesType:
       type: object
@@ -11179,6 +11199,8 @@ components:
     AliasAttributesListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AliasAttributeType'
     HexStringType:
       type: string
@@ -11277,6 +11299,8 @@ components:
     ChallengeResponseListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ChallengeResponseType'
     EventContextDataType:
       type: object
@@ -11359,6 +11383,8 @@ components:
     BlockedIPRangeListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StringType'
       maxItems: 20
     CSSType:
@@ -11373,6 +11399,8 @@ components:
     CallbackURLsListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RedirectUrlType'
       minItems: 0
       maxItems: 100
@@ -11408,6 +11436,8 @@ components:
     ClientPermissionListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ClientPermissionType'
     ClientSecretType:
       type: string
@@ -11431,6 +11461,8 @@ components:
     CodeDeliveryDetailsListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CodeDeliveryDetailsType'
     DeliveryMediumType:
       type: string
@@ -11459,6 +11491,8 @@ components:
     EventFiltersType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EventFilterType'
     CompromisedCredentialsRiskConfigurationType:
       type: object
@@ -11507,6 +11541,8 @@ components:
     HttpHeaderList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/HttpHeader'
     DescriptionType:
       type: string
@@ -11560,6 +11596,8 @@ components:
     IdpIdentifiersListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/IdpIdentifierType'
       minItems: 0
       maxItems: 50
@@ -11604,6 +11642,8 @@ components:
     ResourceServerScopeListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourceServerScopeType'
       maxItems: 100
     ResourceServerType:
@@ -11679,26 +11719,36 @@ components:
     ExplicitAuthFlowsListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ExplicitAuthFlowsType'
     SupportedIdentityProvidersListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ProviderNameType'
     LogoutURLsListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RedirectUrlType'
       minItems: 0
       maxItems: 100
     OAuthFlowsType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/OAuthFlowType'
       minItems: 0
       maxItems: 3
     ScopeListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ScopeType'
       maxItems: 50
     PreventUserExistenceErrorTypes:
@@ -11830,10 +11880,14 @@ components:
     VerifiedAttributesListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/VerifiedAttributeType'
     UsernameAttributesListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/UsernameAttributeType'
     SmsVerificationMessageType:
       type: string
@@ -11926,6 +11980,8 @@ components:
     SchemaAttributesListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SchemaAttributeType'
       minItems: 1
       maxItems: 50
@@ -12221,6 +12277,8 @@ components:
     ListOfStringTypes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StringType'
     IdpIdentifierType:
       type: string
@@ -12294,6 +12352,8 @@ components:
     ProvidersListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ProviderDescription'
       minItems: 0
       maxItems: 50
@@ -12304,6 +12364,8 @@ components:
     ResourceServersListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourceServerType'
     PoolQueryLimitType:
       type: integer
@@ -12312,6 +12374,8 @@ components:
     UserImportJobsListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/UserImportJobType'
       minItems: 1
       maxItems: 50
@@ -12322,18 +12386,26 @@ components:
     UserPoolClientListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/UserPoolClientDescription'
     UserPoolListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/UserPoolDescriptionType'
     UsersListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/UserType'
     SearchedAttributeNamesListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AttributeNameType'
     UserFilterType:
       type: string
@@ -12489,6 +12561,8 @@ components:
     SkippedIPRangeListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StringType'
       maxItems: 20
     StringAttributeConstraintsType:
@@ -12527,6 +12601,8 @@ components:
     UserPoolTagsListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKeysType'
     UserImportJobStatusType:
       type: string

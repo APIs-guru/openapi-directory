@@ -225,6 +225,8 @@ paths:
                   description: The identifier of the security profile for the user.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/SecurityProfileId'
                   minItems: 1
                   maxItems: 10
@@ -626,12 +628,16 @@ paths:
                   description: '<p>The grouping applied to the metrics returned. For example, when grouped by <code>QUEUE</code>, the metrics returned apply to each queue rather than aggregated for all queues. If you group by <code>CHANNEL</code>, you should include a Channels filter. The only supported channel is <code>VOICE</code>.</p> <p>If no <code>Grouping</code> is included in the request, a summary of metrics is returned.</p>'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Grouping'
                   maxItems: 2
                 CurrentMetrics:
                   description: '<p>The metrics to retrieve. Specify the name and unit for each metric. The following metrics are available:</p> <dl> <dt>AGENTS_AFTER_CONTACT_WORK</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_AVAILABLE</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_ERROR</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_NON_PRODUCTIVE</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_ON_CALL</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_ON_CONTACT</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_ONLINE</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_STAFFED</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>CONTACTS_IN_QUEUE</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>CONTACTS_SCHEDULED</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>OLDEST_CONTACT_AGE</dt> <dd> <p>Unit: SECONDS</p> </dd> <dt>SLOTS_ACTIVE</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>SLOTS_AVAILABLE</dt> <dd> <p>Unit: COUNT</p> </dd> </dl>'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/CurrentMetric'
                 NextToken:
                   description: <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p> <p>The token expires after 5 minutes from the time it is created. Subsequent requests that use the token must use the same request parameters as the request that generated the token.</p>
@@ -809,12 +815,16 @@ paths:
                   description: '<p>The grouping applied to the metrics returned. For example, when results are grouped by queue, the metrics returned are grouped by queue. The values returned apply to the metrics for each queue rather than aggregated for all queues.</p> <p>The only supported grouping is <code>QUEUE</code>.</p> <p>If no grouping is specified, a summary of metrics for all queues is returned.</p>'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Grouping'
                   maxItems: 2
                 HistoricalMetrics:
                   description: '<p>The metrics to retrieve. Specify the name, unit, and statistic for each metric. The following historical metrics are available:</p> <dl> <dt>ABANDON_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>AFTER_CONTACT_WORK_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>API_CONTACTS_HANDLED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CALLBACK_CONTACTS_HANDLED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_ABANDONED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_AGENT_HUNG_UP_FIRST</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_CONSULTED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_HANDLED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_HANDLED_INCOMING</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_HANDLED_OUTBOUND</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_HOLD_ABANDONS</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_MISSED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_QUEUED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_TRANSFERRED_IN</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_TRANSFERRED_IN_FROM_QUEUE</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_TRANSFERRED_OUT</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_TRANSFERRED_OUT_FROM_QUEUE</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>HANDLE_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>HOLD_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>INTERACTION_AND_HOLD_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>INTERACTION_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>OCCUPANCY</dt> <dd> <p>Unit: PERCENT</p> <p>Statistic: AVG</p> </dd> <dt>QUEUE_ANSWER_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>QUEUED_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: MAX</p> </dd> <dt>SERVICE_LEVEL</dt> <dd> <p>Unit: PERCENT</p> <p>Statistic: AVG</p> <p>Threshold: Only "Less than" comparisons are supported, with the following service level thresholds: 15, 20, 25, 30, 45, 60, 90, 120, 180, 240, 300, 600</p> </dd> </dl>'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/HistoricalMetric'
                 NextToken:
                   description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
@@ -889,6 +899,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/ContactFlowType'
             maxItems: 10
         - name: nextToken
@@ -1066,6 +1078,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/PhoneNumberType'
             maxItems: 2
         - name: phoneNumberCountryCodes
@@ -1075,6 +1089,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/PhoneNumberCountryCode'
             maxItems: 10
         - name: nextToken
@@ -1168,6 +1184,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/QueueType'
             maxItems: 2
         - name: nextToken
@@ -1972,6 +1990,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/TagKey'
             minItems: 1
             maxItems: 50
@@ -2427,6 +2447,8 @@ paths:
                   description: The identifiers of the security profiles for the user.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/SecurityProfileId'
                   minItems: 1
                   maxItems: 10
@@ -2572,12 +2594,16 @@ components:
     Queues:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/QueueId'
       minItems: 1
       maxItems: 100
     Channels:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Channel'
       maxItems: 1
     Grouping:
@@ -3078,10 +3104,14 @@ components:
     ContactFlowSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ContactFlowSummary'
     ContactFlowTypes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ContactFlowType'
       maxItems: 10
     ContactId:
@@ -3127,6 +3157,8 @@ components:
     SecurityProfileIds:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SecurityProfileId'
       minItems: 1
       maxItems: 10
@@ -3243,6 +3275,8 @@ components:
     CurrentMetricDataCollections:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CurrentMetricData'
     Dimensions:
       type: object
@@ -3267,10 +3301,14 @@ components:
     CurrentMetricResults:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CurrentMetricResult'
     CurrentMetrics:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CurrentMetric'
     DeleteUserRequest:
       type: object
@@ -3387,6 +3425,8 @@ components:
     Groupings:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Grouping'
       maxItems: 2
     NextToken:
@@ -3424,6 +3464,8 @@ components:
     HistoricalMetrics:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/HistoricalMetric'
     GetMetricDataRequest:
       type: object
@@ -3458,6 +3500,8 @@ components:
     HistoricalMetricResults:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/HistoricalMetricResult'
     HierarchyGroupName:
       type: string
@@ -3498,6 +3542,8 @@ components:
     HierarchyGroupSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/HierarchyGroupSummary'
     HierarchyLevelName:
       type: string
@@ -3572,6 +3618,8 @@ components:
     HistoricalMetricDataCollections:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/HistoricalMetricData'
     HistoricalMetricResult:
       type: object
@@ -3603,6 +3651,8 @@ components:
     HoursOfOperationSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/HoursOfOperationSummary'
     MaxResult1000:
       type: integer
@@ -3619,11 +3669,15 @@ components:
     PhoneNumberTypes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PhoneNumberType'
       maxItems: 2
     PhoneNumberCountryCodes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PhoneNumberCountryCode'
       maxItems: 10
     ListPhoneNumbersRequest:
@@ -3633,10 +3687,14 @@ components:
     PhoneNumberSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PhoneNumberSummary'
     QueueTypes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/QueueType'
       maxItems: 2
     ListQueuesRequest:
@@ -3646,6 +3704,8 @@ components:
     QueueSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/QueueSummary'
     ListRoutingProfilesRequest:
       type: object
@@ -3654,6 +3714,8 @@ components:
     RoutingProfileSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RoutingProfileSummary'
     ListSecurityProfilesRequest:
       type: object
@@ -3662,6 +3724,8 @@ components:
     SecurityProfileSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SecurityProfileSummary'
     ListTagsForResourceRequest:
       type: object
@@ -3678,6 +3742,8 @@ components:
     UserSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/UserSummary'
     ParticipantDetails:
       type: object
@@ -3842,6 +3908,8 @@ components:
     TagKeyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKey'
       minItems: 1
       maxItems: 50

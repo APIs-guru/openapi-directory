@@ -1934,6 +1934,8 @@ components:
     TagListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
     CreatedDateType:
       type: string
@@ -2012,6 +2014,8 @@ components:
     SecretVersionStagesType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SecretVersionStageType'
       minItems: 1
       maxItems: 20
@@ -2026,10 +2030,14 @@ components:
     SecretVersionsListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SecretVersionsListEntry'
     SecretListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SecretListEntry'
     SecretListEntry:
       type: object
@@ -2114,6 +2122,8 @@ components:
     TagKeyListType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKeyType'
 security:
   - hmac: []

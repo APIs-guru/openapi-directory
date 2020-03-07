@@ -145,6 +145,8 @@ paths:
                   description: An array of Event JSON objects
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Event'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -284,6 +286,8 @@ components:
     EventListDefinition:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Event'
     Long:
       type: integer

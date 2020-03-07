@@ -233,6 +233,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/ResourceToSkip'
         - name: ClientRequestToken
           in: query
@@ -369,6 +371,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Parameter'
         - name: Capabilities
           in: query
@@ -377,6 +381,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Capability'
         - name: ResourceTypes
           in: query
@@ -385,6 +391,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/ResourceType'
         - name: RoleARN
           in: query
@@ -415,6 +423,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/NotificationARN'
             maxItems: 5
         - name: Tags
@@ -424,6 +434,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Tag'
             maxItems: 50
         - name: ChangeSetName
@@ -468,6 +480,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/ResourceToImport'
             maxItems: 200
         - name: Action
@@ -606,6 +620,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Parameter'
         - name: DisableRollback
           in: query
@@ -641,6 +657,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/NotificationARN'
             maxItems: 5
         - name: Capabilities
@@ -650,6 +668,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Capability'
         - name: ResourceTypes
           in: query
@@ -658,6 +678,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/ResourceType'
         - name: RoleARN
           in: query
@@ -700,6 +722,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Tag'
             maxItems: 50
         - name: ClientRequestToken
@@ -856,6 +880,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Account'
         - name: DeploymentTargets
           in: query
@@ -878,6 +904,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Region'
         - name: ParameterOverrides
           in: query
@@ -886,6 +914,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Parameter'
         - name: OperationPreferences
           in: query
@@ -1075,6 +1105,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Parameter'
         - name: Capabilities
           in: query
@@ -1083,6 +1115,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Capability'
         - name: Tags
           in: query
@@ -1091,6 +1125,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Tag'
             maxItems: 50
         - name: AdministrationRoleARN
@@ -1336,6 +1372,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/LogicalResourceId'
         - name: RoleARN
           in: query
@@ -1465,6 +1503,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Account'
         - name: DeploymentTargets
           in: query
@@ -1487,6 +1527,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Region'
         - name: OperationPreferences
           in: query
@@ -2382,6 +2424,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/StackResourceDriftStatus'
             minItems: 1
             maxItems: 4
@@ -3064,6 +3108,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/LogicalResourceId'
             minItems: 1
             maxItems: 200
@@ -3376,6 +3422,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Parameter'
         - name: Action
           in: query
@@ -4640,6 +4688,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/StackStatus'
         - name: Action
           in: query
@@ -5903,6 +5953,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Parameter'
         - name: Capabilities
           in: query
@@ -5911,6 +5963,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Capability'
         - name: ResourceTypes
           in: query
@@ -5919,6 +5973,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/ResourceType'
         - name: RoleARN
           in: query
@@ -5965,6 +6021,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/NotificationARN'
             maxItems: 5
         - name: Tags
@@ -5974,6 +6032,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Tag'
             maxItems: 50
         - name: ClientRequestToken
@@ -6113,6 +6173,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Account'
         - name: DeploymentTargets
           in: query
@@ -6135,6 +6197,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Region'
         - name: ParameterOverrides
           in: query
@@ -6143,6 +6207,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Parameter'
         - name: OperationPreferences
           in: query
@@ -6356,6 +6422,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Parameter'
         - name: Capabilities
           in: query
@@ -6364,6 +6432,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Capability'
         - name: Tags
           in: query
@@ -6372,6 +6442,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Tag'
             maxItems: 50
         - name: OperationPreferences
@@ -6467,6 +6539,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Account'
         - name: Regions
           in: query
@@ -6475,6 +6549,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Region'
         - name: Action
           in: query
@@ -6825,6 +6901,8 @@ components:
     RollbackTriggers:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RollbackTrigger'
       maxItems: 5
     MonitoringTimeInMinutes:
@@ -6885,10 +6963,14 @@ components:
     AccountList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Account'
     OrganizationalUnitIdList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/OrganizationalUnitId'
     Region:
       type: string
@@ -6896,6 +6978,8 @@ components:
     RegionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Region'
     FailureToleranceCount:
       type: integer
@@ -7500,12 +7584,16 @@ components:
     AccountLimitList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AccountLimit'
     AllowedValue:
       type: string
     AllowedValues:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AllowedValue'
     Arn:
       type: string
@@ -7548,6 +7636,8 @@ components:
     Capabilities:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Capability'
     CapabilitiesReason:
       type: string
@@ -7657,6 +7747,8 @@ components:
     ChangeSetSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ChangeSetSummary'
     StackId:
       type: string
@@ -7693,6 +7785,8 @@ components:
     Changes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Change'
     ClientToken:
       type: string
@@ -7709,6 +7803,8 @@ components:
     ResourcesToSkip:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourceToSkip'
     ContinueUpdateRollbackInput:
       type: object
@@ -7741,10 +7837,14 @@ components:
     Parameters:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Parameter'
     ResourceTypes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourceType'
     RollbackConfiguration:
       type: object
@@ -7759,16 +7859,22 @@ components:
     NotificationARNs:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/NotificationARN'
       maxItems: 5
     Tags:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
       maxItems: 50
     ResourcesToImport:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourceToImport'
       maxItems: 200
     CreateChangeSetInput:
@@ -8035,6 +8141,8 @@ components:
     RetainResources:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LogicalResourceId'
     DeleteStackInput:
       type: object
@@ -8210,6 +8318,8 @@ components:
     StackEvents:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StackEvent'
     DescribeStackInstanceInput:
       type: object
@@ -8265,6 +8375,8 @@ components:
     StackResourceDriftStatusFilters:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StackResourceDriftStatus'
       minItems: 1
       maxItems: 4
@@ -8289,6 +8401,8 @@ components:
     StackResourceDrifts:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StackResourceDrift'
     DescribeStackResourceInput:
       type: object
@@ -8365,6 +8479,8 @@ components:
     StackResources:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StackResource'
     DescribeStackSetInput:
       type: object
@@ -8491,6 +8607,8 @@ components:
     Stacks:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Stack'
     TypeArn:
       type: string
@@ -8566,6 +8684,8 @@ components:
     LogicalResourceIds:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LogicalResourceId'
       minItems: 1
       maxItems: 200
@@ -8719,6 +8839,8 @@ components:
     Exports:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Export'
     FailedStackInstancesCount:
       type: integer
@@ -8755,6 +8877,8 @@ components:
     StageList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TemplateStage'
     GetTemplateSummaryInput:
       type: object
@@ -8776,6 +8900,8 @@ components:
     ParameterDeclarations:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ParameterDeclaration'
     Version:
       type: string
@@ -8784,10 +8910,14 @@ components:
     TransformsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TransformName'
     ResourceIdentifierSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourceIdentifierSummary'
     HandlerErrorCode:
       type: string
@@ -8809,6 +8939,8 @@ components:
     Imports:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StackName'
     InProgressStackInstancesCount:
       type: integer
@@ -8881,6 +9013,8 @@ components:
     StackInstanceSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StackInstanceSummary'
     ListStackResourcesInput:
       type: object
@@ -8898,6 +9032,8 @@ components:
     StackResourceSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StackResourceSummary'
     ListStackSetOperationResultsInput:
       type: object
@@ -8921,6 +9057,8 @@ components:
     StackSetOperationResultSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StackSetOperationResultSummary'
     ListStackSetOperationsInput:
       type: object
@@ -8940,6 +9078,8 @@ components:
     StackSetOperationSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StackSetOperationSummary'
     StackSetStatus:
       type: string
@@ -8962,10 +9102,14 @@ components:
     StackSetSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StackSetSummary'
     StackStatusFilter:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StackStatus'
     ListStacksInput:
       type: object
@@ -8981,6 +9125,8 @@ components:
     StackSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StackSummary'
     ListTypeRegistrationsInput:
       type: object
@@ -9007,6 +9153,8 @@ components:
     RegistrationTokenList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RegistrationToken'
     ListTypeVersionsInput:
       type: object
@@ -9033,6 +9181,8 @@ components:
     TypeVersionSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TypeVersionSummary'
     ListTypesInput:
       type: object
@@ -9056,6 +9206,8 @@ components:
     TypeSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TypeSummary'
     NoEcho:
       type: boolean
@@ -9092,6 +9244,8 @@ components:
     Outputs:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Output'
     ParameterKey:
       type: string
@@ -9146,6 +9300,8 @@ components:
     PhysicalResourceIdContext:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PhysicalResourceIdContextKeyValuePair'
       maxItems: 5
     Value:
@@ -9180,6 +9336,8 @@ components:
     PropertyDifferences:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PropertyDifference'
     PropertyName:
       type: string
@@ -9278,10 +9436,14 @@ components:
     Scope:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourceAttribute'
     ResourceChangeDetails:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourceChangeDetail'
     ResourceTargetDefinition:
       type: object
@@ -9342,6 +9504,8 @@ components:
     ResourceIdentifiers:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourceIdentifierPropertyKey'
     ResourceProperties:
       type: string
@@ -9949,6 +10113,8 @@ components:
     TemplateParameters:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TemplateParameter'
     TransformName:
       type: string

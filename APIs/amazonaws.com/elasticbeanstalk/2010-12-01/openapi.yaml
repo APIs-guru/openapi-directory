@@ -420,6 +420,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/VersionLabel'
         - name: Action
           in: query
@@ -541,6 +543,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Tag'
         - name: Action
           in: query
@@ -747,6 +751,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Tag'
         - name: Action
           in: query
@@ -924,6 +930,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/ConfigurationOptionSetting'
         - name: Tags
           in: query
@@ -932,6 +940,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Tag'
         - name: Action
           in: query
@@ -1092,6 +1102,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Tag'
         - name: VersionLabel
           in: query
@@ -1128,6 +1140,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/ConfigurationOptionSetting'
         - name: OptionsToRemove
           in: query
@@ -1136,6 +1150,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/OptionSpecification'
         - name: Action
           in: query
@@ -1274,6 +1290,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/ConfigurationOptionSetting'
         - name: Tags
           in: query
@@ -1282,6 +1300,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Tag'
         - name: Action
           in: query
@@ -2044,6 +2064,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/VersionLabel'
         - name: MaxRecords
           in: query
@@ -2132,6 +2154,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/ApplicationName'
         - name: Action
           in: query
@@ -2248,6 +2272,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/OptionSpecification'
         - name: Action
           in: query
@@ -2456,6 +2482,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/EnvironmentHealthAttribute'
         - name: Action
           in: query
@@ -2855,6 +2883,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/EnvironmentId'
         - name: EnvironmentNames
           in: query
@@ -2863,6 +2893,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/EnvironmentName'
         - name: IncludeDeleted
           in: query
@@ -3159,6 +3191,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/InstancesHealthAttribute'
         - name: NextToken
           in: query
@@ -3422,6 +3456,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/PlatformFilter'
         - name: MaxRecords
           in: query
@@ -4450,6 +4486,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/ConfigurationOptionSetting'
         - name: OptionsToRemove
           in: query
@@ -4458,6 +4496,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/OptionSpecification'
         - name: Action
           in: query
@@ -4638,6 +4678,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/ConfigurationOptionSetting'
         - name: OptionsToRemove
           in: query
@@ -4646,6 +4688,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/OptionSpecification'
         - name: Action
           in: query
@@ -4764,6 +4808,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Tag'
         - name: TagsToRemove
           in: query
@@ -4772,6 +4818,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/TagKey'
         - name: Action
           in: query
@@ -4908,6 +4956,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/ConfigurationOptionSetting'
         - name: Action
           in: query
@@ -5883,10 +5933,14 @@ components:
     VersionLabelsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/VersionLabel'
     ConfigurationTemplateNamesList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ConfigurationTemplateName'
     ApplicationResourceLifecycleConfig:
       type: object
@@ -5929,6 +5983,8 @@ components:
     ApplicationDescriptionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ApplicationDescription'
     NullableInteger:
       type: integer
@@ -5997,6 +6053,8 @@ components:
     ApplicationNamesList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ApplicationName'
     ApplicationVersionArn:
       type: string
@@ -6072,6 +6130,8 @@ components:
     ApplicationVersionDescriptionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ApplicationVersionDescription'
     Token:
       type: string
@@ -6137,6 +6197,8 @@ components:
     AutoScalingGroupList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AutoScalingGroup'
     SolutionStackDescription:
       type: object
@@ -6151,12 +6213,16 @@ components:
     AvailableSolutionStackDetailsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SolutionStackDescription'
     SolutionStackName:
       type: string
     AvailableSolutionStackNamesList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SolutionStackName'
     BoxedBoolean:
       type: boolean
@@ -6227,6 +6293,8 @@ components:
     Causes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Cause'
     DNSCnamePrefix:
       type: string
@@ -6255,6 +6323,8 @@ components:
     VersionLabels:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/VersionLabel'
     ComposeEnvironmentsMessage:
       type: object
@@ -6294,6 +6364,8 @@ components:
     ConfigurationOptionPossibleValues:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ConfigurationOptionPossibleValue'
     OptionRestrictionMinValue:
       type: integer
@@ -6351,6 +6423,8 @@ components:
     ConfigurationOptionDescriptionsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ConfigurationOptionDescription'
     ConfigurationOptionPossibleValue:
       type: string
@@ -6363,20 +6437,28 @@ components:
     ConfigurationOptionSettingsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ConfigurationOptionSetting'
     PlatformArn:
       type: string
     ConfigurationSettingsDescriptionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ConfigurationSettingsDescription'
     ValidationMessagesList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ValidationMessage'
     Tags:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
     CreateApplicationMessage:
       type: object
@@ -6493,6 +6575,8 @@ components:
     OptionsSpecifierList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/OptionSpecification'
     CreateEnvironmentMessage:
       type: object
@@ -6616,6 +6700,8 @@ components:
     CustomAmiList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CustomAmi'
     TerminateEnvForce:
       type: boolean
@@ -6797,6 +6883,8 @@ components:
     EnvironmentHealthAttributes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EnvironmentHealthAttribute'
     DescribeEnvironmentHealthRequest:
       type: object
@@ -6872,6 +6960,8 @@ components:
     ManagedActionHistoryItems:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ManagedActionHistoryItem'
       minItems: 1
       maxItems: 100
@@ -6892,6 +6982,8 @@ components:
     ManagedActions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ManagedAction'
       minItems: 1
       maxItems: 100
@@ -6909,10 +7001,14 @@ components:
     EnvironmentIdList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EnvironmentId'
     EnvironmentNamesList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EnvironmentName'
     IncludeDeleted:
       type: boolean
@@ -7009,6 +7105,8 @@ components:
     InstancesHealthAttributes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InstancesHealthAttribute'
     NextToken:
       type: string
@@ -7034,6 +7132,8 @@ components:
     InstanceHealthList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SingleInstanceHealth'
     DescribePlatformVersionRequest:
       type: object
@@ -7136,10 +7236,14 @@ components:
     EnvironmentLinks:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EnvironmentLink'
     EnvironmentDescriptionsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EnvironmentDescription'
     EnvironmentInfoType:
       type: string
@@ -7170,6 +7274,8 @@ components:
     EnvironmentInfoDescriptionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EnvironmentInfoDescription'
     EnvironmentLink:
       type: object
@@ -7184,26 +7290,38 @@ components:
     InstanceList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Instance'
     LaunchConfigurationList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LaunchConfiguration'
     LaunchTemplateList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LaunchTemplate'
     LoadBalancerList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LoadBalancer'
     TriggerList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Trigger'
     QueueList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Queue'
     EnvironmentResourceDescription:
       type: object
@@ -7285,6 +7403,8 @@ components:
     EventDescriptionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EventDescription'
     FailureType:
       type: string
@@ -7367,6 +7487,8 @@ components:
     PlatformFilters:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PlatformFilter'
     PlatformMaxRecords:
       type: integer
@@ -7387,6 +7509,8 @@ components:
     PlatformSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PlatformSummary'
     ResourceArn:
       type: string
@@ -7415,6 +7539,8 @@ components:
     LoadAverage:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LoadAverageValue'
     LoadBalancer:
       type: object
@@ -7426,6 +7552,8 @@ components:
     LoadBalancerListenersDescription:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Listener'
     Maintainer:
       type: string
@@ -7502,18 +7630,26 @@ components:
     PlatformProgrammingLanguages:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PlatformProgrammingLanguage'
     PlatformFrameworks:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PlatformFramework'
     SupportedTierList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SupportedTier'
     SupportedAddonList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SupportedAddon'
     PlatformFilterType:
       type: string
@@ -7522,6 +7658,8 @@ components:
     PlatformFilterValueList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PlatformFilterValue'
     PlatformFilterValue:
       type: string
@@ -7592,6 +7730,8 @@ components:
     TagList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
     RestartAppServerMessage:
       type: object
@@ -7633,6 +7773,8 @@ components:
     SolutionStackFileTypeList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/FileTypeExtension'
     SupportedAddon:
       type: string
@@ -7662,6 +7804,8 @@ components:
     TagKeyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKey'
     TerminateEnvironmentResources:
       type: boolean

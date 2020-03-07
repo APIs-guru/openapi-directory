@@ -213,6 +213,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/ProviderType'
             minItems: 1
             maxItems: 3
@@ -223,6 +225,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/RepositoryAssociationState'
             minItems: 1
             maxItems: 3
@@ -233,6 +237,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Name'
             minItems: 1
             maxItems: 3
@@ -243,6 +249,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Owner'
             minItems: 1
             maxItems: 3
@@ -566,24 +574,32 @@ components:
     ProviderTypes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ProviderType'
       minItems: 1
       maxItems: 3
     RepositoryAssociationStates:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RepositoryAssociationState'
       minItems: 1
       maxItems: 3
     Names:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Name'
       minItems: 1
       maxItems: 3
     Owners:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Owner'
       minItems: 1
       maxItems: 3
@@ -602,6 +618,8 @@ components:
     RepositoryAssociationSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RepositoryAssociationSummary'
     StateReason:
       type: string

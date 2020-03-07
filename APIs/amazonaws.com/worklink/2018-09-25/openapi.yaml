@@ -1995,11 +1995,15 @@ paths:
                   description: The subnets used for X-ENI connections from Amazon WorkLink rendering containers.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/SubnetId'
                 SecurityGroupIds:
                   description: The security groups associated with access to the provided subnets.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/SecurityGroupId'
                   maxItems: 5
     parameters:
@@ -2739,10 +2743,14 @@ components:
     SubnetIds:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SubnetId'
     SecurityGroupIds:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SecurityGroupId'
       maxItems: 5
     DescribeDevicePolicyConfigurationRequest:
@@ -2881,6 +2889,8 @@ components:
     DeviceSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DeviceSummary'
     DisassociateDomainRequest:
       type: object
@@ -2944,6 +2954,8 @@ components:
     DomainSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DomainSummary'
     FleetSummary:
       type: object
@@ -2973,6 +2985,8 @@ components:
     FleetSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/FleetSummary'
     NextToken:
       type: string
@@ -3040,6 +3054,8 @@ components:
     WebsiteAuthorizationProvidersSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/WebsiteAuthorizationProviderSummary'
     ListWebsiteCertificateAuthoritiesRequest:
       type: object
@@ -3059,6 +3075,8 @@ components:
     WebsiteCaSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/WebsiteCaSummary'
     RestoreDomainAccessRequest:
       type: object

@@ -3309,10 +3309,14 @@ components:
     TagList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
     TagKeyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKey'
     UpdateCloudFrontOriginAccessIdentityResult:
       type: object
@@ -3346,6 +3350,8 @@ components:
     SignerList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Signer'
     ActiveTrustedSigners:
       type: object
@@ -3366,10 +3372,14 @@ components:
     AliasList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/string'
     MethodsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Method'
     CachedMethods:
       type: object
@@ -3402,6 +3412,8 @@ components:
     AwsAccountNumberList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/string'
     ForwardedValues:
       type: object
@@ -3491,6 +3503,8 @@ components:
     CacheBehaviorList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CacheBehavior'
     CertificateSource:
       type: string
@@ -3530,6 +3544,8 @@ components:
     CloudFrontOriginAccessIdentitySummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CloudFrontOriginAccessIdentitySummary'
     CloudFrontOriginAccessIdentityList:
       type: object
@@ -3578,6 +3594,8 @@ components:
     CookieNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/string'
     CookieNames:
       type: object
@@ -3830,10 +3848,14 @@ components:
     CustomErrorResponseList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CustomErrorResponse'
     OriginCustomHeadersList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/OriginCustomHeader'
     CustomHeaders:
       type: object
@@ -3917,6 +3939,8 @@ components:
     DistributionSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DistributionSummary'
     DistributionList:
       type: object
@@ -4058,6 +4082,8 @@ components:
     LocationList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/string'
     GeoRestriction:
       type: object
@@ -4113,10 +4139,14 @@ components:
     HeaderList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/string'
     InvalidationSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InvalidationSummary'
     InvalidationList:
       type: object
@@ -4164,6 +4194,8 @@ components:
     KeyPairIdList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/string'
     KeyPairIds:
       type: object
@@ -4190,6 +4222,8 @@ components:
     LambdaFunctionAssociationList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LambdaFunctionAssociation'
     ListCloudFrontOriginAccessIdentitiesRequest:
       type: object
@@ -4319,19 +4353,27 @@ components:
     OriginList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Origin'
       minItems: 1
     SslProtocolsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SslProtocol'
     PathList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/string'
     QueryStringCacheKeysList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/string'
     SSLSupportMethod:
       type: string
@@ -4358,6 +4400,8 @@ components:
     StreamingDistributionSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StreamingDistributionSummary'
     StreamingDistributionSummary:
       type: object

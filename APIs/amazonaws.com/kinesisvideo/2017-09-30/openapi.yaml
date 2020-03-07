@@ -184,6 +184,8 @@ paths:
                   description: A set of tags (key/value pairs) that you want to associate with this channel.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Tag'
                   minItems: 0
                   maxItems: 50
@@ -1070,6 +1072,8 @@ paths:
                   description: A list of tags to associate with the specified signaling channel. Each tag is a key-value pair.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Tag'
                   minItems: 1
                   maxItems: 50
@@ -1221,6 +1225,8 @@ paths:
                   description: A list of the keys of the tags that you want to remove.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/TagKey'
                   minItems: 1
                   maxItems: 50
@@ -1299,6 +1305,8 @@ paths:
                   description: A list of the keys of the tags that you want to remove.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/TagKey'
                   minItems: 1
                   maxItems: 50
@@ -1716,6 +1724,8 @@ components:
     ListOfProtocols:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ChannelProtocol'
       minItems: 1
       maxItems: 5
@@ -1869,6 +1879,8 @@ components:
     ChannelInfoList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ChannelInfo'
     ChannelNameCondition:
       type: object
@@ -1888,6 +1900,8 @@ components:
     TagOnCreateList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
       minItems: 0
       maxItems: 50
@@ -2076,6 +2090,8 @@ components:
     ResourceEndpointList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourceEndpointListItem'
     ListStreamsInputLimit:
       type: integer
@@ -2125,6 +2141,8 @@ components:
     StreamInfoList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StreamInfo'
     ListTagsForResourceInput:
       type: object
@@ -2166,12 +2184,16 @@ components:
     TagKeyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKey'
       minItems: 1
       maxItems: 50
     TagList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
       minItems: 1
       maxItems: 50

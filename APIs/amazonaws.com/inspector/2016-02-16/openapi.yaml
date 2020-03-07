@@ -3532,12 +3532,16 @@ components:
     AddRemoveAttributesFindingArnList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Arn'
       minItems: 1
       maxItems: 10
     UserAttributeList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Attribute'
       minItems: 0
       maxItems: 10
@@ -3552,12 +3556,16 @@ components:
     AgentHealthList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AgentHealth'
       minItems: 0
       maxItems: 10
     AgentHealthCodeList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AgentHealthCode'
       minItems: 0
       maxItems: 10
@@ -3596,6 +3604,8 @@ components:
     AgentIdList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AgentId'
       minItems: 0
       maxItems: 99
@@ -3656,6 +3666,8 @@ components:
     AgentPreviewList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AgentPreview'
       minItems: 0
       maxItems: 100
@@ -3668,6 +3680,8 @@ components:
     AssessmentRulesPackageArnList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Arn'
       minItems: 1
       maxItems: 50
@@ -3703,12 +3717,16 @@ components:
     AssessmentRunStateChangeList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AssessmentRunStateChange'
       minItems: 0
       maxItems: 50
     AssessmentRunNotificationList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AssessmentRunNotification'
       minItems: 0
       maxItems: 50
@@ -3786,6 +3804,8 @@ components:
     TelemetryMetadataList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TelemetryMetadata'
       minItems: 0
       maxItems: 5000
@@ -3823,6 +3843,8 @@ components:
     AssessmentRunAgentList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AssessmentRunAgent'
       minItems: 0
       maxItems: 500
@@ -3833,6 +3855,8 @@ components:
     AssessmentRunStateList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AssessmentRunState'
       minItems: 0
       maxItems: 50
@@ -3849,6 +3873,8 @@ components:
     FilterRulesPackageArnList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Arn'
       minItems: 0
       maxItems: 50
@@ -3892,6 +3918,8 @@ components:
     AssessmentRunList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AssessmentRun'
       minItems: 0
       maxItems: 10
@@ -3987,6 +4015,8 @@ components:
     AssessmentTargetList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AssessmentTarget'
       minItems: 0
       maxItems: 10
@@ -3997,6 +4027,8 @@ components:
     AssessmentTemplateRulesPackageArnList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Arn'
       minItems: 0
       maxItems: 50
@@ -4056,6 +4088,8 @@ components:
     AssessmentTemplateList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AssessmentTemplate'
       minItems: 0
       maxItems: 10
@@ -4065,16 +4099,22 @@ components:
     Ipv4AddressList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Ipv4Address'
       minItems: 0
       maxItems: 50
     Tags:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
     NetworkInterfaces:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/NetworkInterface'
     AssetAttributes:
       type: object
@@ -4133,24 +4173,32 @@ components:
     AttributeList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Attribute'
       minItems: 0
       maxItems: 50
     AutoScalingGroupList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AutoScalingGroup'
       minItems: 0
       maxItems: 20
     BatchDescribeArnList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Arn'
       minItems: 1
       maxItems: 10
     BatchDescribeExclusionsArnList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Arn'
       minItems: 1
       maxItems: 100
@@ -4160,6 +4208,8 @@ components:
     ResourceGroupTags:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourceGroupTag'
       minItems: 1
       maxItems: 10
@@ -4176,18 +4226,24 @@ components:
     FindingList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Finding'
       minItems: 0
       maxItems: 100
     ResourceGroupList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourceGroup'
       minItems: 0
       maxItems: 10
     RulesPackageList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RulesPackage'
       minItems: 0
       maxItems: 10
@@ -4207,6 +4263,8 @@ components:
     EventSubscriptionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EventSubscription'
       minItems: 1
       maxItems: 50
@@ -4217,6 +4275,8 @@ components:
     ScopeList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Scope'
       minItems: 1
     Exclusion:
@@ -4274,6 +4334,8 @@ components:
     ExclusionPreviewList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ExclusionPreview'
       minItems: 0
       maxItems: 100
@@ -4406,12 +4468,16 @@ components:
     RuleNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RuleName'
       minItems: 0
       maxItems: 50
     SeverityList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Severity'
       minItems: 0
       maxItems: 50
@@ -4476,16 +4542,22 @@ components:
     Ipv6Addresses:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Text'
     ListParentArnList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Arn'
       minItems: 0
       maxItems: 50
     ListReturnedArnList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Arn'
       minItems: 0
       maxItems: 100
@@ -4494,12 +4566,16 @@ components:
     SubscriptionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Subscription'
       minItems: 0
       maxItems: 50
     TagList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
       minItems: 0
       maxItems: 10
@@ -4512,10 +4588,14 @@ components:
     PrivateIpAddresses:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PrivateIp'
     SecurityGroups:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SecurityGroup'
     NetworkInterface:
       type: object
@@ -4570,6 +4650,8 @@ components:
     UserAttributeKeyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AttributeKey'
       minItems: 0
       maxItems: 10

@@ -2367,16 +2367,22 @@ components:
     AgentConfigurationStatusList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AgentConfigurationStatus'
     AgentId:
       type: string
     AgentIds:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AgentId'
     AgentNetworkInfoList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AgentNetworkInfo'
     AgentStatus:
       type: string
@@ -2434,16 +2440,22 @@ components:
     AgentsInfo:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AgentInfo'
     ApplicationId:
       type: string
     ApplicationIdsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ApplicationId'
     ConfigurationIdList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ConfigurationId'
     ImportTaskIdentifier:
       type: string
@@ -2471,10 +2483,14 @@ components:
     BatchDeleteImportDataErrorList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/BatchDeleteImportDataError'
     ToDeleteIdentifierList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ImportTaskIdentifier'
       minItems: 1
       maxItems: 10
@@ -2528,10 +2544,14 @@ components:
     ConfigurationTagSet:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ConfigurationTag'
     Configurations:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Configuration'
     ConfigurationsDownloadUrl:
       type: string
@@ -2592,14 +2612,20 @@ components:
     ContinuousExportDescriptions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ContinuousExportDescription'
     ContinuousExportIds:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ConfigurationsExportId'
     TagSet:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
     Integer:
       type: integer
@@ -2676,6 +2702,8 @@ components:
     Filters:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Filter'
     NextToken:
       type: string
@@ -2686,6 +2714,8 @@ components:
     DescribeConfigurationsAttributes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DescribeConfigurationsAttribute'
     DescribeContinuousExportsMaxResults:
       type: integer
@@ -2694,14 +2724,20 @@ components:
     ExportIds:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ConfigurationsExportId'
     ExportsInfo:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ExportInfo'
     ExportFilters:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ExportFilter'
     ImportTaskFilter:
       type: object
@@ -2716,6 +2752,8 @@ components:
     DescribeImportTasksFilterList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ImportTaskFilter'
     DescribeImportTasksMaxResults:
       type: integer
@@ -2724,10 +2762,14 @@ components:
     ImportTaskList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ImportTask'
     TagFilters:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagFilter'
     ExportDataFormat:
       type: string
@@ -2737,12 +2779,16 @@ components:
     ExportDataFormats:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ExportDataFormat'
     FilterName:
       type: string
     FilterValues:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/FilterValue'
     ExportFilter:
       type: object
@@ -2902,6 +2948,8 @@ components:
     ImportTaskFilterValueList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ImportTaskFilterValue'
       minItems: 1
       maxItems: 100
@@ -2912,10 +2960,14 @@ components:
     OrderByList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/OrderByElement'
     NeighborDetailsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/NeighborConnectionDetail'
     NeighborConnectionDetail:
       type: object

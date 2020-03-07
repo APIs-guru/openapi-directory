@@ -253,6 +253,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/String'
         - name: maxResults
           in: query
@@ -551,6 +553,8 @@ paths:
                   description: The tags to apply to the resource during creation.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Tag'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -614,6 +618,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/String'
         - name: siteId
           in: query
@@ -709,6 +715,8 @@ paths:
                   description: The tags to apply to the resource during creation.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Tag'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -766,6 +774,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/String'
         - name: maxResults
           in: query
@@ -889,6 +899,8 @@ paths:
                   description: The tags to apply to the resource during creation.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Tag'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -952,6 +964,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/String'
         - name: siteId
           in: query
@@ -1084,6 +1098,8 @@ paths:
                   description: The tags to apply to the resource during creation.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Tag'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -1147,6 +1163,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/String'
         - name: maxResults
           in: query
@@ -2038,6 +2056,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/String'
         - name: maxResults
           in: query
@@ -2266,6 +2286,8 @@ paths:
                   description: The tags to apply to the specified resource.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Tag'
   '/tags/{resourceArn}#tagKeys':
     delete:
@@ -2328,6 +2350,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/TagKey'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -2685,6 +2709,8 @@ components:
     TagList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
     CreateDeviceRequest:
       type: object
@@ -2902,6 +2928,8 @@ components:
     CustomerGatewayAssociationList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CustomerGatewayAssociation'
     DateTime:
       type: string
@@ -2942,6 +2970,8 @@ components:
     StringList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     MaxResults:
       type: integer
@@ -2954,6 +2984,8 @@ components:
     GlobalNetworkList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/GlobalNetwork'
     DeviceState:
       type: string
@@ -2965,6 +2997,8 @@ components:
     DeviceList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Device'
     DisassociateCustomerGatewayRequest:
       type: object
@@ -2989,6 +3023,8 @@ components:
     LinkAssociationList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LinkAssociation'
     GetLinksRequest:
       type: object
@@ -2997,6 +3033,8 @@ components:
     LinkList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Link'
     GetSitesRequest:
       type: object
@@ -3005,6 +3043,8 @@ components:
     SiteList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Site'
     GetTransitGatewayRegistrationsRequest:
       type: object
@@ -3013,6 +3053,8 @@ components:
     TransitGatewayRegistrationList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TransitGatewayRegistration'
     GlobalNetworkState:
       type: string
@@ -3062,6 +3104,8 @@ components:
     TagKeyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKey'
     TagResourceRequest:
       type: object

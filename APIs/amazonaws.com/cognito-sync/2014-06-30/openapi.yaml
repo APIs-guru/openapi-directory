@@ -428,6 +428,8 @@ paths:
                   description: A list of patch operations.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/RecordPatch'
                 SyncSessionToken:
                   description: The SyncSessionToken returned by a previous call to ListRecords for this dataset and identity.
@@ -1698,6 +1700,8 @@ components:
     ApplicationArnList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ApplicationArn'
     AssumeRoleArn:
       type: string
@@ -1873,6 +1877,8 @@ components:
     DatasetList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Dataset'
     DeleteDatasetRequest:
       type: object
@@ -1966,6 +1972,8 @@ components:
     IdentityPoolUsageList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/IdentityPoolUsage'
     Integer:
       type: integer
@@ -1991,10 +1999,14 @@ components:
     RecordList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Record'
     MergedDatasetNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     Operation:
       type: string
@@ -2042,6 +2054,8 @@ components:
     RecordPatchList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RecordPatch'
     RegisterDeviceRequest:
       type: object

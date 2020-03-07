@@ -388,6 +388,8 @@ paths:
                   description: An array of filter objects.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Filter'
                   minItems: 1
                   maxItems: 8
@@ -500,6 +502,8 @@ paths:
                   description: 'An array of filter objects. Each filter object contains two attributes, <code>filterName</code> and <code>filterValues</code>.'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Filter'
                   minItems: 1
                   maxItems: 8
@@ -606,6 +610,8 @@ paths:
                   description: Array of <code>change</code> object.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Change'
                   minItems: 1
                   maxItems: 20
@@ -864,6 +870,8 @@ components:
     ChangeSetDescription:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ChangeSummary'
     ChangeSetName:
       type: string
@@ -898,6 +906,8 @@ components:
     ChangeSetSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ChangeSetSummaryListItem'
     DateTimeISO8601:
       type: string
@@ -915,10 +925,14 @@ components:
     ResourceIdList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourceId'
     ErrorDetailList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ErrorDetail'
     ClientRequestToken:
       type: string
@@ -970,6 +984,8 @@ components:
     EntitySummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EntitySummary'
     ErrorDetail:
       type: object
@@ -989,12 +1005,16 @@ components:
     ValueList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StringValue'
       minItems: 1
       maxItems: 10
     FilterList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Filter'
       minItems: 1
       maxItems: 8
@@ -1066,6 +1086,8 @@ components:
     RequestedChangeList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Change'
       minItems: 1
       maxItems: 20

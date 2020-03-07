@@ -149,6 +149,8 @@ paths:
                   description: 'A list of items (itemId''s) to rank. If an item was not included in the training dataset, the item is appended to the end of the reranked list. The maximum is 500.'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/ItemID'
                 userId:
                   description: The user for which you want the campaign to provide a personalized ranking.
@@ -321,6 +323,8 @@ components:
     InputList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ItemID'
     UserID:
       type: string
@@ -348,6 +352,8 @@ components:
     ItemList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PredictedItem'
     NumResults:
       type: integer

@@ -149,6 +149,8 @@ paths:
                   description: A list of event data from the session.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Event'
                   minItems: 1
                   maxItems: 10
@@ -247,6 +249,8 @@ components:
     EventList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Event'
       minItems: 1
       maxItems: 10

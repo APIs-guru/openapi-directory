@@ -3008,6 +3008,8 @@ components:
     TagList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
       minItems: 0
       maxItems: 50
@@ -3104,6 +3106,8 @@ components:
     DependencyRevisions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DependencyRevision'
     GreengrassDeploymentId:
       type: string
@@ -3149,6 +3153,8 @@ components:
     EntityDescriptions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EntityDescription'
     EntityFilterName:
       type: string
@@ -3160,6 +3166,8 @@ components:
     EntityFilterValues:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EntityFilterValue'
     EntityFilter:
       type: object
@@ -3176,10 +3184,14 @@ components:
     EntityFilters:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EntityFilter'
     EntityTypes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EntityType'
     FlowExecutionEventType:
       type: string
@@ -3226,6 +3238,8 @@ components:
     FlowExecutionMessages:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/FlowExecutionMessage'
     FlowExecutionStatus:
       type: string
@@ -3259,6 +3273,8 @@ components:
     FlowExecutionSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/FlowExecutionSummary'
     FlowTemplateDescription:
       type: object
@@ -3280,6 +3296,8 @@ components:
     FlowTemplateFilterValues:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/FlowTemplateFilterValue'
     FlowTemplateFilter:
       type: object
@@ -3300,14 +3318,20 @@ components:
     FlowTemplateFilters:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/FlowTemplateFilter'
     FlowTemplateSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/FlowTemplateSummary'
     Urns:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Urn'
       minItems: 0
       maxItems: 25
@@ -3368,6 +3392,8 @@ components:
     SystemTemplateSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SystemTemplateSummary'
     UploadId:
       type: string
@@ -3382,6 +3408,8 @@ components:
     StringList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     GreengrassGroupId:
       type: string
@@ -3394,18 +3422,26 @@ components:
     SystemInstanceFilters:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SystemInstanceFilter'
     SystemInstanceSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SystemInstanceSummary'
     SystemTemplateFilters:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SystemTemplateFilter'
     Things:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Thing'
     SyncWithPublicNamespace:
       type: boolean
@@ -3429,6 +3465,8 @@ components:
     SystemInstanceFilterValues:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SystemInstanceFilterValue'
     SystemInstanceFilter:
       type: object
@@ -3449,6 +3487,8 @@ components:
     SystemTemplateFilterValues:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SystemTemplateFilterValue'
     SystemTemplateFilter:
       type: object
@@ -3491,6 +3531,8 @@ components:
     TagKeyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKey'
       minItems: 1
       maxItems: 50

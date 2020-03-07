@@ -439,6 +439,8 @@ components:
     Blocks:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Block'
     ChangedBlock:
       type: object
@@ -456,6 +458,8 @@ components:
     ChangedBlocks:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ChangedBlock'
     Checksum:
       type: string

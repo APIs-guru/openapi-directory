@@ -8567,6 +8567,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/__string'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -8922,6 +8924,8 @@ components:
     ListOfWriteTreatmentResource:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/WriteTreatmentResource'
     __integer:
       type: integer
@@ -9792,6 +9796,8 @@ components:
     ListOf__string:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/__string'
     SendMessagesResponse:
       type: object
@@ -10015,6 +10021,8 @@ components:
     ListOfEndpointBatchItem:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EndpointBatchItem'
     UpdateGcmChannelResponse:
       type: object
@@ -10544,6 +10552,8 @@ components:
     ListOfActivityResponse:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ActivityResponse'
     ActivitiesResponse:
       type: object
@@ -10809,6 +10819,8 @@ components:
     ListOfApplicationResponse:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ApplicationResponse'
     ApplicationsResponse:
       type: object
@@ -10958,6 +10970,8 @@ components:
     ListOfResultRow:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResultRow'
     CampaignDateRangeKpiResponse:
       type: object
@@ -11046,6 +11060,8 @@ components:
     ListOfTreatmentResource:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TreatmentResource'
     CampaignState:
       type: object
@@ -11165,6 +11181,8 @@ components:
     ListOfCampaignResponse:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CampaignResponse'
     CampaignsResponse:
       type: object
@@ -11225,6 +11243,8 @@ components:
     ListOfSimpleCondition:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SimpleCondition'
     Operator:
       type: string
@@ -12686,6 +12706,8 @@ components:
     ListOfEndpointResponse:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EndpointResponse'
     Session:
       type: object
@@ -12893,6 +12915,8 @@ components:
     ListOfExportJobResponse:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ExportJobResponse'
     ExportJobsResponse:
       type: object
@@ -13422,6 +13446,8 @@ components:
     ListOfImportJobResponse:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ImportJobResponse'
     Include:
       type: string
@@ -13453,6 +13479,8 @@ components:
     ListOfJourneyResponse:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/JourneyResponse'
     JourneysResponse:
       type: object
@@ -13473,6 +13501,8 @@ components:
     ListOfRecommenderConfigurationResponse:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RecommenderConfigurationResponse'
     ListTagsForResourceRequest:
       type: object
@@ -13676,6 +13706,8 @@ components:
     ListOfMultiConditionalBranch:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MultiConditionalBranch'
     NumberValidateRequest:
       type: object
@@ -13778,6 +13810,8 @@ components:
     ListOfRandomSplitEntry:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RandomSplitEntry'
     RandomSplitEntry:
       type: object
@@ -13827,6 +13861,8 @@ components:
     ListOfResultRowValue:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResultRowValue'
     ResultRow:
       type: object
@@ -13922,10 +13958,14 @@ components:
     ListOfSegmentDimensions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SegmentDimensions'
     ListOfSegmentReference:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SegmentReference'
     SourceType:
       type: string
@@ -13958,6 +13998,8 @@ components:
     ListOfSegmentGroup:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SegmentGroup'
     MapOf__integer:
       type: object
@@ -14011,6 +14053,8 @@ components:
     ListOfSegmentResponse:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SegmentResponse'
     SendMessagesRequest:
       type: object
@@ -14173,10 +14217,14 @@ components:
     ListOfTemplateVersionResponse:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TemplateVersionResponse'
     ListOfTemplateResponse:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TemplateResponse'
     TreatmentResource:
       type: object

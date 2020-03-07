@@ -2789,6 +2789,8 @@ components:
     AttributeList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Attribute'
       minItems: 0
       maxItems: 50
@@ -2816,6 +2818,8 @@ components:
     AuthorizationDataList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AuthorizationData'
     RegistryId:
       type: string
@@ -2828,36 +2832,50 @@ components:
     BatchedOperationLayerDigestList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/BatchedOperationLayerDigest'
       minItems: 1
       maxItems: 100
     LayerList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Layer'
     LayerFailureList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LayerFailure'
     ImageIdentifierList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ImageIdentifier'
       minItems: 1
       maxItems: 100
     ImageFailureList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ImageFailure'
     MediaTypeList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MediaType'
       minItems: 1
       maxItems: 100
     ImageList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Image'
     BatchedOperationLayerDigest:
       type: string
@@ -2869,6 +2887,8 @@ components:
     LayerDigestList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LayerDigest'
       minItems: 1
       maxItems: 100
@@ -2878,6 +2898,8 @@ components:
     TagList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
     ImageTagMutability:
       type: string
@@ -2989,16 +3011,22 @@ components:
     ImageDetailList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ImageDetail'
     RepositoryNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RepositoryName'
       minItems: 1
       maxItems: 100
     RepositoryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Repository'
     FindingDescription:
       type: string
@@ -3023,6 +3051,8 @@ components:
     GetAuthorizationTokenRegistryIdList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RegistryId'
       minItems: 1
       maxItems: 10
@@ -3049,6 +3079,8 @@ components:
     LifecyclePolicyPreviewResultList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LifecyclePolicyPreviewResult'
     LifecyclePolicyPreviewSummary:
       type: object
@@ -3089,6 +3121,8 @@ components:
     ImageTagList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ImageTag'
     ImageSizeInBytes:
       type: integer
@@ -3185,6 +3219,8 @@ components:
     ImageScanFindingList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ImageScanFinding'
     ScanTimestamp:
       type: string
@@ -3307,6 +3343,8 @@ components:
     TagKeyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKey'
 security:
   - hmac: []

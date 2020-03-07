@@ -1035,6 +1035,8 @@ components:
     ProfileTimes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ProfileTime'
     ListProfilingGroupsRequest:
       type: object
@@ -1044,10 +1046,14 @@ components:
     ProfilingGroupNames:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ProfilingGroupName'
     ProfilingGroupDescriptions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ProfilingGroupDescription'
     PostAgentProfileRequest:
       type: object

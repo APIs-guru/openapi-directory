@@ -1350,6 +1350,8 @@ components:
     TagList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
       minItems: 1
       maxItems: 50
@@ -1395,6 +1397,8 @@ components:
     Backups:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Backup'
     Boolean:
       type: boolean
@@ -1424,6 +1428,8 @@ components:
     Hsms:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Hsm'
     HsmType:
       type: string
@@ -1506,6 +1512,8 @@ components:
     Clusters:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Cluster'
     DestinationBackup:
       type: object
@@ -1526,6 +1534,8 @@ components:
     SubnetIds:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SubnetId'
       minItems: 1
       maxItems: 10
@@ -1592,6 +1602,8 @@ components:
     Strings:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     HsmState:
       type: string
@@ -1632,6 +1644,8 @@ components:
     TagKeyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKey'
       minItems: 1
       maxItems: 50

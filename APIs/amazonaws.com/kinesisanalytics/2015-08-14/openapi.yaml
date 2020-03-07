@@ -1915,18 +1915,26 @@ components:
     InputDescriptions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InputDescription'
     OutputDescriptions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/OutputDescription'
     ReferenceDataSourceDescriptions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ReferenceDataSourceDescription'
     CloudWatchLoggingOptionDescriptions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CloudWatchLoggingOptionDescription'
     ApplicationDetail:
       type: object
@@ -1993,22 +2001,32 @@ components:
     ApplicationSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ApplicationSummary'
     InputUpdates:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InputUpdate'
     OutputUpdates:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/OutputUpdate'
     ReferenceDataSourceUpdates:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ReferenceDataSourceUpdate'
     CloudWatchLoggingOptionUpdates:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CloudWatchLoggingOptionUpdate'
     ApplicationUpdate:
       type: object
@@ -2099,18 +2117,26 @@ components:
     CloudWatchLoggingOptions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CloudWatchLoggingOption'
     Inputs:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Input'
     Outputs:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Output'
     Tags:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
       minItems: 1
       maxItems: 200
@@ -2171,14 +2197,20 @@ components:
     ParsedInputRecords:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ParsedInputRecord'
     ProcessedInputRecords:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ProcessedInputRecord'
     RawInputRecords:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RawInputRecord'
     FileKey:
       type: string
@@ -2191,6 +2223,8 @@ components:
     InAppStreamNames:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InAppStreamName'
     InAppTableName:
       type: string
@@ -2245,6 +2279,8 @@ components:
     InputConfigurations:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InputConfiguration'
     InputProcessingConfigurationDescription:
       type: object
@@ -2375,6 +2411,8 @@ components:
     RecordColumns:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RecordColumn'
       minItems: 1
       maxItems: 1000
@@ -2625,6 +2663,8 @@ components:
     ParsedInputRecord:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ParsedInputRecordField'
     ProcessedInputRecord:
       type: string
@@ -2761,6 +2801,8 @@ components:
     TagKeys:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKey'
       minItems: 1
       maxItems: 200

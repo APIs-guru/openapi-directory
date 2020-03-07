@@ -438,6 +438,8 @@ components:
     ConnectionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Connection'
     MaxResults:
       type: integer

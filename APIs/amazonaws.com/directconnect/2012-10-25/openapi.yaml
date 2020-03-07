@@ -3855,6 +3855,8 @@ components:
     RouteFilterPrefixList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RouteFilterPrefix'
     DirectConnectGatewayAssociation:
       type: object
@@ -3908,6 +3910,8 @@ components:
     TagList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
       minItems: 1
     NewPrivateVirtualInterfaceAllocation:
@@ -4049,6 +4053,8 @@ components:
     AvailablePortSpeeds:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PortSpeed'
     AwsDevice:
       type: string
@@ -4109,6 +4115,8 @@ components:
     BGPPeerList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/BGPPeer'
     BooleanFlag:
       type: boolean
@@ -4160,6 +4168,8 @@ components:
     ConnectionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Connection'
     Count:
       type: integer
@@ -4372,26 +4382,38 @@ components:
     DirectConnectGatewayAssociationProposalList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DirectConnectGatewayAssociationProposal'
     DirectConnectGatewayAssociationList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DirectConnectGatewayAssociation'
     DirectConnectGatewayAttachmentList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DirectConnectGatewayAttachment'
     DirectConnectGatewayList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DirectConnectGateway'
     ResourceArnList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourceArn'
     ResourceTagList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourceTag'
     DirectConnectGatewayState:
       type: string
@@ -4461,6 +4483,8 @@ components:
     InterconnectList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Interconnect'
     LagState:
       type: string
@@ -4475,12 +4499,16 @@ components:
     LagList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Lag'
     LoaContent:
       type: string
     ProviderList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ProviderName'
     Location:
       type: object
@@ -4501,6 +4529,8 @@ components:
     LocationList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Location'
     LocationName:
       type: string
@@ -4554,6 +4584,8 @@ components:
     TagKeyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKey'
     VirtualGatewayState:
       type: string
@@ -4570,12 +4602,16 @@ components:
     VirtualGatewayList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/VirtualGateway'
     VirtualInterfaceType:
       type: string
     VirtualInterfaceList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/VirtualInterface'
 security:
   - hmac: []

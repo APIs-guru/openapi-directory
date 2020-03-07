@@ -464,6 +464,8 @@ components:
     HomeRegionControls:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/HomeRegionControl'
       maxItems: 100
     RequestedTime:

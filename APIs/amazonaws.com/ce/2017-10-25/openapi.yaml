@@ -1807,6 +1807,8 @@ components:
     CostCategoryRulesList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CostCategoryRule'
       minItems: 1
       maxItems: 500
@@ -1854,6 +1856,8 @@ components:
     CostCategoryReferencesList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CostCategoryReference'
     CostCategoryValue:
       type: string
@@ -1898,6 +1902,8 @@ components:
     Values:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Value'
     CostCategoryValues:
       type: object
@@ -1976,6 +1982,8 @@ components:
     ReservationCoverageGroups:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ReservationCoverageGroup'
     CoverageByTime:
       type: object
@@ -2011,12 +2019,16 @@ components:
     CoveragesByTime:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CoverageByTime'
     GenericString:
       type: string
     TagValuesList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagValues'
     ResourceDetails:
       type: object
@@ -2124,6 +2136,8 @@ components:
     DimensionValuesWithAttributesList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DimensionValuesWithAttributes'
     GenericBoolean:
       type: boolean
@@ -2259,6 +2273,8 @@ components:
     Expressions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Expression'
     TagValues:
       type: object
@@ -2289,6 +2305,8 @@ components:
     ForecastResultsByTime:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ForecastResult'
     Granularity:
       type: string
@@ -2299,16 +2317,22 @@ components:
     MetricNames:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MetricName'
     GroupDefinitions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/GroupDefinition'
     NextPageToken:
       type: string
     ResultsByTime:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResultByTime'
     Metric:
       type: string
@@ -2381,10 +2405,14 @@ components:
     ReservationPurchaseRecommendations:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ReservationPurchaseRecommendation'
     UtilizationsByTime:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/UtilizationByTime'
     ReservationAggregates:
       type: object
@@ -2464,6 +2492,8 @@ components:
     RightsizingRecommendationList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RightsizingRecommendation'
     MaxResults:
       type: integer
@@ -2471,6 +2501,8 @@ components:
     SavingsPlansCoverages:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SavingsPlansCoverage'
     SupportedSavingsPlansType:
       type: string
@@ -2512,6 +2544,8 @@ components:
     SavingsPlansUtilizationDetails:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SavingsPlansUtilizationDetail'
     SavingsPlansUtilizationAggregates:
       type: object
@@ -2531,16 +2565,22 @@ components:
     SavingsPlansUtilizationsByTime:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SavingsPlansUtilizationByTime'
     TagKey:
       type: string
     TagList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Entity'
     Keys:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Key'
     Metrics:
       type: object
@@ -2577,6 +2617,8 @@ components:
     Groups:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Group'
     RDSInstanceDetails:
       type: object
@@ -2658,6 +2700,8 @@ components:
     TargetInstancesList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TargetInstance'
     ModifyRecommendationDetail:
       type: object
@@ -2707,6 +2751,8 @@ components:
     ReservationPurchaseRecommendationDetails:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ReservationPurchaseRecommendationDetail'
     ReservationPurchaseRecommendationSummary:
       type: object
@@ -2826,6 +2872,8 @@ components:
     ReservationUtilizationGroups:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ReservationUtilizationGroup'
     ResultByTime:
       type: object
@@ -2936,6 +2984,8 @@ components:
     SavingsPlansPurchaseRecommendationDetailList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SavingsPlansPurchaseRecommendationDetail'
     SavingsPlansPurchaseRecommendationSummary:
       type: object

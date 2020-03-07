@@ -3798,6 +3798,8 @@ components:
     AttributeDefinitions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AttributeDefinition'
     AttributeValue:
       type: object
@@ -3843,6 +3845,8 @@ components:
     AttributeNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AttributeName'
       minItems: 1
     AttributeValueUpdate:
@@ -3868,14 +3872,20 @@ components:
     StringSetAttributeValue:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StringAttributeValue'
     NumberSetAttributeValue:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/NumberAttributeValue'
     BinarySetAttributeValue:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/BinaryAttributeValue'
     MapAttributeValue:
       type: object
@@ -3884,6 +3894,8 @@ components:
     ListAttributeValue:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AttributeValue'
     NullAttributeValue:
       type: boolean
@@ -3892,6 +3904,8 @@ components:
     AttributeValueList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AttributeValue'
     AutoScalingPolicyName:
       type: string
@@ -3929,6 +3943,8 @@ components:
     AutoScalingPolicyDescriptionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AutoScalingPolicyDescription'
     AutoScalingTargetTrackingScalingPolicyConfigurationUpdate:
       type: object
@@ -4177,6 +4193,8 @@ components:
     BackupSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/BackupSummary'
     TableName:
       type: string
@@ -4219,6 +4237,8 @@ components:
     ConsumedCapacityMultiple:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ConsumedCapacity'
     KeysAndAttributes:
       type: object
@@ -4244,6 +4264,8 @@ components:
     ItemList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AttributeMap'
     BatchWriteItemRequestMap:
       type: object
@@ -4263,6 +4285,8 @@ components:
     WriteRequests:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/WriteRequest'
       minItems: 1
       maxItems: 25
@@ -4451,6 +4475,8 @@ components:
     ContributorInsightsRuleList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ContributorInsightsRule'
     ContributorInsightsStatus:
       type: string
@@ -4476,6 +4502,8 @@ components:
     ContributorInsightsSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ContributorInsightsSummary'
     IndexName:
       type: string
@@ -4485,6 +4513,8 @@ components:
     KeySchema:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/KeySchemaElement'
       minItems: 1
       maxItems: 2
@@ -4534,6 +4564,8 @@ components:
     ReplicaList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Replica'
     GlobalTableDescription:
       type: object
@@ -4577,6 +4609,8 @@ components:
     ReplicaGlobalSecondaryIndexList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ReplicaGlobalSecondaryIndex'
       minItems: 1
     CreateReplicationGroupMemberAction:
@@ -4600,10 +4634,14 @@ components:
     LocalSecondaryIndexList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LocalSecondaryIndex'
     GlobalSecondaryIndexList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/GlobalSecondaryIndex'
     StreamSpecification:
       type: object
@@ -4633,6 +4671,8 @@ components:
     TagList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
     TableDescription:
       type: object
@@ -4800,10 +4840,14 @@ components:
     Endpoints:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Endpoint'
     ReplicaSettingsDescriptionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ReplicaSettingsDescription'
     TableAutoScalingDescription:
       type: object
@@ -4924,6 +4968,8 @@ components:
     GlobalSecondaryIndexAutoScalingUpdateList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/GlobalSecondaryIndexAutoScalingUpdate'
       minItems: 1
     IndexStatus:
@@ -4986,6 +5032,8 @@ components:
     GlobalSecondaryIndexDescriptionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/GlobalSecondaryIndexDescription'
     GlobalSecondaryIndexInfo:
       type: object
@@ -5032,10 +5080,14 @@ components:
     GlobalSecondaryIndexUpdateList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/GlobalSecondaryIndexUpdate'
     GlobalSecondaryIndexes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/GlobalSecondaryIndexInfo'
     GlobalTable:
       type: object
@@ -5052,6 +5104,8 @@ components:
     ReplicaDescriptionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ReplicaDescription'
     GlobalTableStatus:
       type: string
@@ -5078,12 +5132,16 @@ components:
     GlobalTableGlobalSecondaryIndexSettingsUpdateList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/GlobalTableGlobalSecondaryIndexSettingsUpdate'
       minItems: 1
       maxItems: 20
     GlobalTableList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/GlobalTable'
     Integer:
       type: integer
@@ -5094,10 +5152,14 @@ components:
     ItemCollectionSizeEstimateRange:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ItemCollectionSizeEstimateBound'
     ItemCollectionMetricsMultiple:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ItemCollectionMetrics'
     ItemCollectionSizeEstimateBound:
       type: number
@@ -5115,6 +5177,8 @@ components:
     ItemResponseList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ItemResponse'
       minItems: 1
       maxItems: 25
@@ -5129,6 +5193,8 @@ components:
     KeyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Key'
       minItems: 1
       maxItems: 100
@@ -5171,6 +5237,8 @@ components:
     TableNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TableName'
     ResourceArnString:
       type: string
@@ -5218,6 +5286,8 @@ components:
     LocalSecondaryIndexDescriptionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LocalSecondaryIndexDescription'
     LocalSecondaryIndexInfo:
       type: object
@@ -5235,6 +5305,8 @@ components:
     LocalSecondaryIndexes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LocalSecondaryIndexInfo'
     NonKeyAttributeName:
       type: string
@@ -5243,6 +5315,8 @@ components:
     NonKeyAttributeNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/NonKeyAttributeName'
       minItems: 1
       maxItems: 20
@@ -5324,6 +5398,8 @@ components:
     ReplicaGlobalSecondaryIndexAutoScalingDescriptionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ReplicaGlobalSecondaryIndexAutoScalingDescription'
     ReplicaStatus:
       type: string
@@ -5353,10 +5429,14 @@ components:
     ReplicaAutoScalingDescriptionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ReplicaAutoScalingDescription'
     ReplicaGlobalSecondaryIndexAutoScalingUpdateList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ReplicaGlobalSecondaryIndexAutoScalingUpdate'
     ReplicaAutoScalingUpdate:
       type: object
@@ -5375,6 +5455,8 @@ components:
     ReplicaAutoScalingUpdateList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ReplicaAutoScalingUpdate'
       minItems: 1
     ReplicaStatusDescription:
@@ -5384,6 +5466,8 @@ components:
     ReplicaGlobalSecondaryIndexDescriptionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ReplicaGlobalSecondaryIndexDescription'
     ReplicaDescription:
       type: object
@@ -5482,6 +5566,8 @@ components:
     ReplicaGlobalSecondaryIndexSettingsDescriptionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ReplicaGlobalSecondaryIndexSettingsDescription'
     ReplicaGlobalSecondaryIndexSettingsUpdate:
       type: object
@@ -5501,6 +5587,8 @@ components:
     ReplicaGlobalSecondaryIndexSettingsUpdateList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ReplicaGlobalSecondaryIndexSettingsUpdate'
       minItems: 1
       maxItems: 20
@@ -5555,6 +5643,8 @@ components:
     ReplicaSettingsUpdateList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ReplicaSettingsUpdate'
       minItems: 1
       maxItems: 50
@@ -5571,6 +5661,8 @@ components:
     ReplicaUpdateList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ReplicaUpdate'
     UpdateReplicationGroupMemberAction:
       type: object
@@ -5606,6 +5698,8 @@ components:
     ReplicationGroupUpdateList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ReplicationGroupUpdate'
       minItems: 1
     RestoreInProgress:
@@ -5718,6 +5812,8 @@ components:
     TagKeyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKeyString'
     TimeToLiveAttributeName:
       type: string
@@ -5757,6 +5853,8 @@ components:
     TransactGetItemList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TransactGetItem'
       minItems: 1
       maxItems: 25
@@ -5808,6 +5906,8 @@ components:
     TransactWriteItemList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TransactWriteItem'
       minItems: 1
       maxItems: 25

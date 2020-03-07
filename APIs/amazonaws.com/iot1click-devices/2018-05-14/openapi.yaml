@@ -776,6 +776,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/__string'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -1095,6 +1097,8 @@ components:
     __listOfDeviceMethod:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DeviceMethod'
     InitiateDeviceClaimRequest:
       type: object
@@ -1124,6 +1128,8 @@ components:
     __listOfDeviceEvent:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DeviceEvent'
     ListDevicesRequest:
       type: object
@@ -1132,6 +1138,8 @@ components:
     __listOfDeviceDescription:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DeviceDescription'
     ListTagsForResourceRequest:
       type: object
@@ -1158,6 +1166,8 @@ components:
     __listOf__string:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/__string'
     UntagResourceRequest:
       type: object

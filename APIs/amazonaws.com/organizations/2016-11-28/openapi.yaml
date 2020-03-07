@@ -5368,6 +5368,8 @@ components:
     Accounts:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Account'
     ActionType:
       type: string
@@ -5405,6 +5407,8 @@ components:
     Children:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Child'
     CreateAccountFailureReason:
       type: string
@@ -5464,10 +5468,14 @@ components:
     CreateAccountStates:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CreateAccountState'
     CreateAccountStatuses:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CreateAccountStatus'
     OrganizationFeatureSet:
       type: string
@@ -5605,6 +5613,8 @@ components:
     EnabledServicePrincipals:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EnabledServicePrincipal'
     GenericArn:
       type: string
@@ -5615,6 +5625,8 @@ components:
     HandshakeParties:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/HandshakeParty'
     HandshakeState:
       type: string
@@ -5628,6 +5640,8 @@ components:
     HandshakeResources:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/HandshakeResource'
     HandshakeFilter:
       type: object
@@ -5697,6 +5711,8 @@ components:
     Handshakes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Handshake'
     NextToken:
       type: string
@@ -5707,18 +5723,26 @@ components:
     OrganizationalUnits:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/OrganizationalUnit'
     Parents:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Parent'
     Policies:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PolicySummary'
     Roots:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Root'
     TaggableResourceId:
       type: string
@@ -5726,10 +5750,14 @@ components:
     Tags:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
     PolicyTargets:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PolicyTargetSummary'
     OrganizationId:
       type: string
@@ -5740,6 +5768,8 @@ components:
     PolicyTypes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PolicyTypeSummary'
     OrganizationalUnitArn:
       type: string
@@ -5859,6 +5889,8 @@ components:
     TagKeys:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKey'
 security:
   - hmac: []

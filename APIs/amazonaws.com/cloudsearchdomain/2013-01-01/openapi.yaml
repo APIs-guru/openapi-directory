@@ -478,6 +478,8 @@ components:
     BucketList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Bucket'
     BucketInfo:
       type: object
@@ -505,6 +507,8 @@ components:
     DocumentServiceWarnings:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DocumentServiceWarning'
     Double:
       type: number
@@ -552,6 +556,8 @@ components:
     FieldValue:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     Fields:
       type: object
@@ -584,6 +590,8 @@ components:
     HitList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Hit'
     Hits:
       type: object
@@ -647,6 +655,8 @@ components:
     Suggestions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SuggestionMatch'
     SuggestModel:
       type: object

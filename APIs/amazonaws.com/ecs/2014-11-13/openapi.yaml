@@ -4823,6 +4823,8 @@ components:
     AttachmentDetails:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/KeyValuePair'
     Attachment:
       type: object
@@ -4866,10 +4868,14 @@ components:
     AttachmentStateChanges:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AttachmentStateChange'
     Attachments:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Attachment'
     TargetType:
       type: string
@@ -4896,6 +4902,8 @@ components:
     Attributes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Attribute'
     ManagedScaling:
       type: object
@@ -4936,6 +4944,8 @@ components:
     StringList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     AwsVpcConfiguration:
       type: object
@@ -4965,6 +4975,8 @@ components:
     Tags:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
       minItems: 0
       maxItems: 50
@@ -4994,6 +5006,8 @@ components:
     CapacityProviderFieldList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CapacityProviderField'
     CapacityProviderStrategyItem:
       type: object
@@ -5013,6 +5027,8 @@ components:
     CapacityProviderStrategy:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CapacityProviderStrategyItem'
     CapacityProviderStrategyItemWeight:
       type: integer
@@ -5025,16 +5041,22 @@ components:
     CapacityProviders:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CapacityProvider'
     Integer:
       type: integer
     Statistics:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/KeyValuePair'
     ClusterSettings:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ClusterSetting'
     Cluster:
       type: object
@@ -5092,6 +5114,8 @@ components:
     ClusterFieldList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ClusterField'
     ClusterSettingName:
       type: string
@@ -5110,6 +5134,8 @@ components:
     Clusters:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Cluster'
     Compatibility:
       type: string
@@ -5119,6 +5145,8 @@ components:
     CompatibilityList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Compatibility'
     Connectivity:
       type: string
@@ -5128,10 +5156,14 @@ components:
     NetworkBindings:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/NetworkBinding'
     NetworkInterfaces:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/NetworkInterface'
     HealthStatus:
       type: string
@@ -5142,6 +5174,8 @@ components:
     GpuIds:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     Container:
       type: object
@@ -5214,18 +5248,26 @@ components:
     PortMappingList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PortMapping'
     EnvironmentVariables:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/KeyValuePair'
     MountPointList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MountPoint'
     VolumeFromList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/VolumeFrom'
     LinuxParameters:
       type: object
@@ -5255,14 +5297,20 @@ components:
     SecretList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Secret'
     ContainerDependencies:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ContainerDependency'
     HostEntryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/HostEntry'
     DockerLabelsMap:
       type: object
@@ -5271,6 +5319,8 @@ components:
     UlimitList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Ulimit'
     LogConfiguration:
       type: object
@@ -5311,10 +5361,14 @@ components:
     SystemControls:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SystemControl'
     ResourceRequirements:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourceRequirement'
     FirelensConfiguration:
       type: object
@@ -5449,6 +5503,8 @@ components:
     ContainerDefinitions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ContainerDefinition'
     ContainerDependency:
       type: object
@@ -5481,6 +5537,8 @@ components:
     Resources:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Resource'
     Timestamp:
       type: string
@@ -5547,6 +5605,8 @@ components:
     ContainerInstanceFieldList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ContainerInstanceField'
     ContainerInstanceStatus:
       type: string
@@ -5559,6 +5619,8 @@ components:
     ContainerInstances:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ContainerInstance'
     ContainerOverride:
       type: object
@@ -5588,6 +5650,8 @@ components:
     ContainerOverrides:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ContainerOverride'
     ContainerStateChange:
       type: object
@@ -5617,18 +5681,26 @@ components:
     ContainerStateChanges:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ContainerStateChange'
     Containers:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Container'
     LoadBalancers:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LoadBalancer'
     ServiceRegistries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ServiceRegistry'
     LaunchType:
       type: string
@@ -5648,10 +5720,14 @@ components:
     PlacementConstraints:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PlacementConstraint'
     PlacementStrategies:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PlacementStrategy'
     NetworkConfiguration:
       type: object
@@ -5923,6 +5999,8 @@ components:
     Deployments:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Deployment'
     TaskDefinition:
       type: object
@@ -5988,34 +6066,50 @@ components:
     Failures:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Failure'
     ServiceFieldList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ServiceField'
     Services:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Service'
     TaskDefinitionFieldList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TaskDefinitionField'
     TaskSetFieldList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TaskSetField'
     TaskSets:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TaskSet'
     TaskFieldList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TaskField'
     Tasks:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Task'
     DesiredStatus:
       type: string
@@ -6026,6 +6120,8 @@ components:
     DeviceCgroupPermissions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DeviceCgroupPermission'
     Device:
       type: object
@@ -6051,6 +6147,8 @@ components:
     DevicesList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Device'
     Scope:
       type: string
@@ -6163,10 +6261,14 @@ components:
     InferenceAcceleratorOverrides:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InferenceAcceleratorOverride'
     InferenceAccelerators:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InferenceAccelerator'
     IpcMode:
       type: string
@@ -6187,10 +6289,14 @@ components:
     TmpfsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tmpfs'
     Settings:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Setting'
     TaskDefinitionFamilyStatus:
       type: string
@@ -6362,6 +6468,8 @@ components:
     PlatformDevices:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PlatformDevice'
     PortMapping:
       type: object
@@ -6383,6 +6491,8 @@ components:
     ProxyConfigurationProperties:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/KeyValuePair'
     ProxyConfiguration:
       type: object
@@ -6402,14 +6512,20 @@ components:
     VolumeList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Volume'
     TaskDefinitionPlacementConstraints:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TaskDefinitionPlacementConstraint'
     RequiresAttributes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Attribute'
     Resource:
       type: object
@@ -6493,6 +6609,8 @@ components:
     ServiceEvents:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ServiceEvent'
     ServiceEvent:
       type: object
@@ -6668,6 +6786,8 @@ components:
     TagKeys:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKey'
     TaskStopCode:
       type: string

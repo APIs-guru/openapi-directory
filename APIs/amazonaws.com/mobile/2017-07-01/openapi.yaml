@@ -940,6 +940,8 @@ components:
       type: array
       description: ' Developer desktop or mobile app or website platforms. '
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Platform'
     BundleDetails:
       type: object
@@ -961,6 +963,8 @@ components:
       type: array
       description: ' A list of bundles. '
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/BundleDetails'
     ConsoleUrl:
       type: string
@@ -1022,6 +1026,8 @@ components:
       type: array
       description: ' List of AWS resources associated with a project. '
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Resource'
     DescribeBundleRequest:
       type: object
@@ -1083,6 +1089,8 @@ components:
       type: array
       description: ' List of projects. '
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ProjectSummary'
     ProjectState:
       type: string

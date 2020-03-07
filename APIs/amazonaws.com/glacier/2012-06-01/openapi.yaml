@@ -1980,6 +1980,8 @@ paths:
                   description: A list of tag keys. Each corresponding tag is removed from the vault.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/string'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -2533,10 +2535,14 @@ components:
     DataRetrievalRulesList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DataRetrievalRule'
     NotificationEventList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/string'
     RequestTimeoutException: {}
     UploadMultipartPartOutput:
@@ -2568,6 +2574,8 @@ components:
     AccessControlPolicyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Grant'
     ActionCode:
       type: string
@@ -2921,6 +2929,8 @@ components:
     JobList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/GlacierJobDescription'
     ListJobsInput:
       type: object
@@ -2935,6 +2945,8 @@ components:
     UploadsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/UploadListElement'
     ListPartsInput:
       type: object
@@ -2944,6 +2956,8 @@ components:
     PartList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PartListElement'
     ListProvisionedCapacityInput:
       type: object
@@ -2952,6 +2966,8 @@ components:
     ProvisionedCapacityList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ProvisionedCapacityDescription'
     ListTagsForVaultInput:
       type: object
@@ -2966,6 +2982,8 @@ components:
     VaultList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DescribeVaultOutput'
     S3Location:
       type: object
@@ -3032,6 +3050,8 @@ components:
     TagKeyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/string'
     RemoveTagsFromVaultInput:
       type: object

@@ -1294,6 +1294,8 @@ components:
       type: array
       description: 'List of <code>Attribute</code> names. If attribute names are not specified then all attributes will be returned. If some attributes are not found, they will not appear in the result.'
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AttributeName'
       minItems: 1
     AttributeValueUpdate:
@@ -1318,19 +1320,27 @@ components:
     StringSetAttributeValue:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StringAttributeValue'
     NumberSetAttributeValue:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/NumberAttributeValue'
     BinarySetAttributeValue:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/BinaryAttributeValue'
     AttributeValueList:
       type: array
       description: 'A list of attribute values to be used with a comparison operator for a scan or query operation. For comparisons that require more than one value, such as a <code>BETWEEN</code> comparison, the AttributeValueList contains two attribute values and the comparison operator.'
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AttributeValue'
     BatchGetRequestMap:
       type: object
@@ -1366,6 +1376,8 @@ components:
     ItemList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AttributeMap'
     ConsumedCapacityUnits:
       type: number
@@ -1385,6 +1397,8 @@ components:
     WriteRequests:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/WriteRequest'
       minItems: 1
       maxItems: 25
@@ -1529,6 +1543,8 @@ components:
     KeyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Key'
       minItems: 1
       maxItems: 100
@@ -1563,6 +1579,8 @@ components:
     TableNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TableName'
     Long:
       type: integer

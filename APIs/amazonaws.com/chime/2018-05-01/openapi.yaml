@@ -246,6 +246,8 @@ paths:
                   description: 'List of phone numbers, in E.164 format.'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/E164PhoneNumber'
                 ForceAssociate:
                   description: 'If true, associates the provided phone numbers with the provided Amazon Chime Voice Connector and removes any previously existing associations. If false, does not associate any phone numbers that have previously existing associations.'
@@ -343,6 +345,8 @@ paths:
                   description: 'List of phone numbers, in E.164 format.'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/E164PhoneNumber'
                 ForceAssociate:
                   description: 'If true, associates the provided phone numbers with the provided Amazon Chime Voice Connector Group and removes any previously existing associations. If false, does not associate any phone numbers that have previously existing associations.'
@@ -436,6 +440,8 @@ paths:
                   description: The sign-in delegate groups.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/SigninDelegateGroup'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -532,6 +538,8 @@ paths:
                   description: The request containing the attendees to create.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/CreateAttendeeRequestItem'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -629,6 +637,8 @@ paths:
                   description: The list of membership items.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/MembershipItem'
                   maxItems: 50
     parameters:
@@ -713,6 +723,8 @@ paths:
                   description: List of phone number IDs.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/String'
                   minItems: 1
     parameters:
@@ -804,6 +816,8 @@ paths:
                   description: The request containing the user IDs to suspend.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/NonEmptyString'
                   maxItems: 50
     parameters:
@@ -895,6 +909,8 @@ paths:
                   description: The request containing the user IDs to unsuspend.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/NonEmptyString'
                   maxItems: 50
     parameters:
@@ -979,6 +995,8 @@ paths:
                   description: The request containing the phone number IDs and product types or calling names to update.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/UpdatePhoneNumberRequestItem'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -1062,6 +1080,8 @@ paths:
                   description: The request containing the user IDs and details to update.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/UpdateUserRequestItem'
                   maxItems: 20
     parameters:
@@ -1952,6 +1972,8 @@ paths:
                   description: 'List of phone numbers, in E.164 format.'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/E164PhoneNumber'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -2767,6 +2789,8 @@ paths:
                   description: The Amazon Chime Voice Connectors to route inbound calls to.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/VoiceConnectorItem'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -4544,6 +4568,8 @@ paths:
                   description: The <code>VoiceConnectorItems</code> to associate with the group.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/VoiceConnectorItem'
   '/voice-connectors/{voiceConnectorId}/origination':
     delete:
@@ -5247,6 +5273,8 @@ paths:
                   description: 'The RFC2617 compliant username associated with the SIP credentials, in US-ASCII format.'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/SensitiveString'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -5416,6 +5444,8 @@ paths:
                   description: 'List of phone numbers, in E.164 format.'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/E164PhoneNumber'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -5504,6 +5534,8 @@ paths:
                   description: 'List of phone numbers, in E.164 format.'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/E164PhoneNumber'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -5594,6 +5626,8 @@ paths:
                   description: The sign-in delegate group names.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/String'
                   minItems: 1
     parameters:
@@ -6834,6 +6868,8 @@ paths:
                   description: The user email addresses to which to send the email invitation.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/EmailAddress'
                   maxItems: 50
                 UserType:
@@ -7200,6 +7236,8 @@ paths:
                   description: The termination SIP credentials.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Credential'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -8135,6 +8173,8 @@ components:
     OriginationRouteList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/OriginationRoute'
     PutVoiceConnectorStreamingConfigurationResponse:
       type: object
@@ -8157,10 +8197,14 @@ components:
     CallingRegionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CallingRegion'
     StringList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     Credential:
       type: object
@@ -8283,10 +8327,14 @@ components:
     LicenseList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/License'
     SigninDelegateGroupList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SigninDelegateGroup'
     Account:
       type: object
@@ -8323,6 +8371,8 @@ components:
     AccountList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Account'
     AccountName:
       type: string
@@ -8361,6 +8411,8 @@ components:
     E164PhoneNumberList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/E164PhoneNumber'
     NullableBoolean:
       type: boolean
@@ -8377,6 +8429,8 @@ components:
     PhoneNumberErrorList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PhoneNumberError'
     AssociatePhoneNumbersWithVoiceConnectorRequest:
       type: object
@@ -8426,6 +8480,8 @@ components:
     AttendeeList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Attendee'
     CreateAttendeeError:
       type: object
@@ -8443,10 +8499,14 @@ components:
     BatchCreateAttendeeErrorList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CreateAttendeeError'
     CreateAttendeeRequestItemList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CreateAttendeeRequestItem'
     BatchCreateAttendeeRequest:
       type: object
@@ -8460,6 +8520,8 @@ components:
     MembershipItemList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MembershipItem'
       maxItems: 50
     BatchCreateRoomMembershipRequest:
@@ -8474,10 +8536,14 @@ components:
     MemberErrorList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MemberError'
     NonEmptyStringList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
       minItems: 1
     BatchDeletePhoneNumberRequest:
@@ -8492,6 +8558,8 @@ components:
     UserIdList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/NonEmptyString'
       maxItems: 50
     BatchSuspendUserRequest:
@@ -8506,6 +8574,8 @@ components:
     UserErrorList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/UserError'
     BatchUnsuspendUserRequest:
       type: object
@@ -8519,6 +8589,8 @@ components:
     UpdatePhoneNumberRequestItemList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/UpdatePhoneNumberRequestItem'
     BatchUpdatePhoneNumberRequest:
       type: object
@@ -8532,6 +8604,8 @@ components:
     UpdateUserRequestItemList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/UpdateUserRequestItem'
       maxItems: 20
     BatchUpdateUserRequest:
@@ -8581,6 +8655,8 @@ components:
     BotList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Bot'
     BusinessCallingSettings:
       type: object
@@ -8858,6 +8934,8 @@ components:
     VoiceConnectorItemList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/VoiceConnectorItem'
     CreateVoiceConnectorGroupRequest:
       type: object
@@ -8943,6 +9021,8 @@ components:
     CredentialList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Credential'
     DeleteAccountRequest:
       type: object
@@ -8991,6 +9071,8 @@ components:
     SensitiveStringList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SensitiveString'
     DeleteVoiceConnectorTerminationCredentialsRequest:
       type: object
@@ -9277,10 +9359,14 @@ components:
     InviteList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Invite'
     UserEmailList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EmailAddress'
       maxItems: 50
     InviteUsersRequest:
@@ -9322,6 +9408,8 @@ components:
     MeetingList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Meeting'
     ListPhoneNumberOrdersRequest:
       type: object
@@ -9330,6 +9418,8 @@ components:
     PhoneNumberOrderList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PhoneNumberOrder'
     PhoneNumberStatus:
       type: string
@@ -9356,6 +9446,8 @@ components:
     PhoneNumberList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PhoneNumber'
     ListRoomMembershipsRequest:
       type: object
@@ -9364,6 +9456,8 @@ components:
     RoomMembershipList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RoomMembership'
     ListRoomsRequest:
       type: object
@@ -9372,6 +9466,8 @@ components:
     RoomList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Room'
     ListUsersRequest:
       type: object
@@ -9380,6 +9476,8 @@ components:
     UserList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/User'
     ListVoiceConnectorGroupsRequest:
       type: object
@@ -9388,6 +9486,8 @@ components:
     VoiceConnectorGroupList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/VoiceConnectorGroup'
     ListVoiceConnectorTerminationCredentialsRequest:
       type: object
@@ -9400,6 +9500,8 @@ components:
     VoiceConnectorList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/VoiceConnector'
     LogoutUserRequest:
       type: object
@@ -9490,6 +9592,8 @@ components:
     OrderedPhoneNumberList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/OrderedPhoneNumber'
     Port:
       type: integer
@@ -9557,6 +9661,8 @@ components:
     PhoneNumberAssociationList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PhoneNumberAssociation'
     PhoneNumberAssociation:
       type: object

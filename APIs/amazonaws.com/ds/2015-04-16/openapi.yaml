@@ -5132,6 +5132,8 @@ components:
     IpRoutes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/IpRoute'
     UpdateSecurityGroupForDirectoryControllers:
       type: boolean
@@ -5141,6 +5143,8 @@ components:
     Tags:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
     AddedDateTime:
       type: string
@@ -5168,12 +5172,16 @@ components:
     Attributes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Attribute'
     AvailabilityZone:
       type: string
     AvailabilityZones:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AvailabilityZone'
     SchemaExtensionId:
       type: string
@@ -5245,6 +5253,8 @@ components:
     CertificatesInfo:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CertificateInfo'
     CidrIp:
       type: string
@@ -5252,6 +5262,8 @@ components:
     CidrIps:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CidrIp'
     CloudOnlyDirectoriesLimitReached:
       type: boolean
@@ -5289,6 +5301,8 @@ components:
     DnsIpAddrs:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/IpAddr'
     ReplicationScope:
       type: string
@@ -5310,6 +5324,8 @@ components:
     ConditionalForwarders:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ConditionalForwarder'
     DirectoryName:
       type: string
@@ -5442,11 +5458,15 @@ components:
     RemoteDomainNames:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RemoteDomainName'
     DirectoryIds:
       type: array
       description: A list of directory identifiers.
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DirectoryId'
     NextToken:
       type: string
@@ -5457,22 +5477,32 @@ components:
       type: array
       description: A list of directory descriptions.
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DirectoryDescription'
     DomainControllerIds:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DomainControllerId'
     DomainControllers:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DomainController'
     TopicNames:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TopicName'
     EventTopics:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EventTopic'
     LDAPSType:
       type: string
@@ -5485,28 +5515,40 @@ components:
     LDAPSSettingsInfo:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LDAPSSettingInfo'
     SharedDirectories:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SharedDirectory'
     SnapshotIds:
       type: array
       description: A list of directory snapshot identifiers.
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SnapshotId'
     Snapshots:
       type: array
       description: A list of descriptions of directory snapshots.
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Snapshot'
     TrustIds:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TrustId'
     Trusts:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Trust'
     DesiredNumberOfDomainControllers:
       type: integer
@@ -5517,6 +5559,8 @@ components:
     SubnetIds:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SubnetId'
     UserName:
       type: string
@@ -5528,6 +5572,8 @@ components:
     IpAddrs:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/IpAddr'
     DirectoryConnectSettingsDescription:
       type: object
@@ -5927,6 +5973,8 @@ components:
     IpRoutesInfo:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/IpRouteInfo'
     LDAPSStatus:
       type: string
@@ -5957,10 +6005,14 @@ components:
     LogSubscriptions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LogSubscription'
     SchemaExtensionsInfo:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SchemaExtensionInfo'
     SubscriptionCreatedDateTime:
       type: string
@@ -6002,6 +6054,8 @@ components:
     Servers:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Server'
     RadiusTimeout:
       type: integer
@@ -6017,6 +6071,8 @@ components:
     TagKeys:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKey'
     RequestId:
       type: string

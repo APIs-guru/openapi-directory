@@ -2638,48 +2638,66 @@ components:
     BuildIds:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/NonEmptyString'
       minItems: 1
       maxItems: 100
     BuildsNotDeleted:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/BuildNotDeleted'
     Builds:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Build'
     ProjectNames:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/NonEmptyString'
       minItems: 1
       maxItems: 100
     Projects:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Project'
     ReportGroupArns:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/NonEmptyString'
       minItems: 1
       maxItems: 100
     ReportGroups:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ReportGroup'
       minItems: 1
       maxItems: 100
     ReportArns:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/NonEmptyString'
       minItems: 1
       maxItems: 100
     Reports:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Report'
       minItems: 1
       maxItems: 100
@@ -2707,6 +2725,8 @@ components:
     BuildPhases:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/BuildPhase'
     ProjectSource:
       type: object
@@ -2744,12 +2764,16 @@ components:
     ProjectSources:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ProjectSource'
       minItems: 0
       maxItems: 12
     ProjectSecondarySourceVersions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ProjectSourceVersion'
       minItems: 0
       maxItems: 12
@@ -2778,6 +2802,8 @@ components:
     BuildArtifactsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/BuildArtifacts'
       minItems: 0
       maxItems: 12
@@ -2884,14 +2910,20 @@ components:
     ExportedEnvironmentVariables:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ExportedEnvironmentVariable'
     BuildReportArns:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     ProjectFileSystemLocations:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ProjectFileSystemLocation'
     Build:
       type: object
@@ -3016,6 +3048,8 @@ components:
     PhaseContexts:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PhaseContext'
     BuildPhase:
       type: object
@@ -3123,6 +3157,8 @@ components:
     ProjectArtifactsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ProjectArtifacts'
       minItems: 0
       maxItems: 12
@@ -3133,6 +3169,8 @@ components:
     TagList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
       minItems: 0
       maxItems: 50
@@ -3262,6 +3300,8 @@ components:
     FilterGroups:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/FilterGroup'
     Webhook:
       type: object
@@ -3303,10 +3343,14 @@ components:
     TestCases:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TestCase'
     ImageVersions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     EnvironmentImage:
       type: object
@@ -3324,6 +3368,8 @@ components:
     EnvironmentImages:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EnvironmentImage'
     LanguageType:
       type: string
@@ -3351,6 +3397,8 @@ components:
     EnvironmentLanguages:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EnvironmentLanguage'
     PlatformType:
       type: string
@@ -3372,6 +3420,8 @@ components:
     EnvironmentPlatforms:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EnvironmentPlatform'
     EnvironmentType:
       type: string
@@ -3405,6 +3455,8 @@ components:
     EnvironmentVariables:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EnvironmentVariable'
     ExportedEnvironmentVariable:
       type: object
@@ -3439,6 +3491,8 @@ components:
     FilterGroup:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/WebhookFilter'
     GitCloneDepth:
       type: integer
@@ -3504,12 +3558,16 @@ components:
     ProjectArns:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/NonEmptyString'
       minItems: 1
       maxItems: 100
     SourceCredentialsInfos:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SourceCredentialsInfo'
     S3LogsConfig:
       type: object
@@ -3549,6 +3607,8 @@ components:
     ProjectCacheModes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CacheMode'
     RegistryCredential:
       type: object
@@ -3715,6 +3775,8 @@ components:
     SecurityGroupIds:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/NonEmptyString'
       maxItems: 5
     SourceAuthType:
@@ -3737,6 +3799,8 @@ components:
     Subnets:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/NonEmptyString'
       maxItems: 16
     ValueInput:

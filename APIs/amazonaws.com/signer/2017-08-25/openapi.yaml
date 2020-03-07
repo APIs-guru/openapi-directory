@@ -146,7 +146,7 @@ paths:
             type: string
             pattern: '^[a-zA-Z0-9_]{2,}'
             minLength: 2
-            maxLength: 20
+            maxLength: 64
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -198,7 +198,7 @@ paths:
             type: string
             pattern: '^[a-zA-Z0-9_]{2,}'
             minLength: 2
-            maxLength: 20
+            maxLength: 64
     put:
       operationId: PutSigningProfile
       description: 'Creates a signing profile. A signing profile is a code signing template that can be used to carry out a pre-defined signing job. For more information, see <a href="http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html">http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html</a> '
@@ -248,7 +248,7 @@ paths:
             type: string
             pattern: '^[a-zA-Z0-9_]{2,}'
             minLength: 2
-            maxLength: 20
+            maxLength: 64
       requestBody:
         required: true
         content:
@@ -267,7 +267,7 @@ paths:
                       $ref: '#/components/schemas/CertificateArn'
                       description: The Amazon Resource Name (ARN) of the certificates that is used to sign your code.
                 platformId:
-                  description: The ID of the signing profile to be created.
+                  description: The ID of the signing platform to be created.
                   type: string
                 overrides:
                   description: Any overrides that are applied to the signing configuration of a code signing platform.
@@ -276,13 +276,16 @@ paths:
                     signingConfiguration:
                       $ref: '#/components/schemas/SigningConfigurationOverrides'
                       description: A signing configuration that overrides the default encryption or hash algorithm of a signing job.
+                    signingImageFormat:
+                      $ref: '#/components/schemas/ImageFormat'
+                      description: 'A signed image is a JSON object. When overriding the default signing platform configuration, a customer can select either of two signing formats, <code>JSONEmbedded</code> or <code>JSONDetached</code>. (A third format value, <code>JSON</code>, is reserved for future use.) With <code>JSONEmbedded</code>, the signing image has the payload embedded in it. With <code>JSONDetached</code>, the payload is not be embedded in the signing image.'
                 signingParameters:
                   description: Map of key-value pairs for signing. These can include any information that you want to use during signing.
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/SigningParameterValue'
                 tags:
-                  description: Tags to be associated with the signing profile being created.
+                  description: Tags to be associated with the signing profile that is being created.
                   type: object
                   minProperties: 1
                   maxProperties: 200
@@ -527,7 +530,7 @@ paths:
                   type: string
                   pattern: '^[a-zA-Z0-9_]{2,}'
                   minLength: 2
-                  maxLength: 20
+                  maxLength: 64
                 clientRequestToken:
                   description: String that identifies the signing request. All calls after the first that use this token return the same response as the first call.
                   type: string
@@ -711,7 +714,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: TagResource
-      description: Adds one or more tags to a signing profile. Tags are labels that you can use to identify and organize your AWS resources. Each tag consists of a key and an optional value. You specify the signing profile using its Amazon Resource Name (ARN). You specify the tag by using a key-value pair.
+      description: 'Adds one or more tags to a signing profile. Tags are labels that you can use to identify and organize your AWS resources. Each tag consists of a key and an optional value. To specify the signing profile, use its Amazon Resource Name (ARN). To specify the tag, use a key-value pair.'
       responses:
         '200':
           description: Success
@@ -741,7 +744,7 @@ paths:
         - name: resourceArn
           in: path
           required: true
-          description: Amazon Resource Name (ARN) for the signing profile.
+          description: The Amazon Resource Name (ARN) for the signing profile.
           schema:
             type: string
       requestBody:
@@ -763,7 +766,7 @@ paths:
   '/tags/{resourceArn}#tagKeys':
     delete:
       operationId: UntagResource
-      description: Remove one or more tags from a signing profile. Specify a list of tag keys to remove the tags.
+      description: 'Removes one or more tags from a signing profile. To remove the tags, specify a list of tag keys.'
       responses:
         '200':
           description: Success
@@ -793,16 +796,18 @@ paths:
         - name: resourceArn
           in: path
           required: true
-          description: Amazon Resource Name (ARN) for the signing profile .
+          description: The Amazon Resource Name (ARN) for the signing profile.
           schema:
             type: string
         - name: tagKeys
           in: query
           required: true
-          description: A list of tag keys to be removed from the signing profile .
+          description: A list of tag keys to be removed from the signing profile.
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/TagKey'
             minItems: 1
             maxItems: 200
@@ -881,7 +886,7 @@ components:
           description: The object that contains the name of your S3 bucket or your raw code.
         signingMaterial:
           $ref: '#/components/schemas/SigningMaterial'
-          description: Amazon Resource Name (ARN) of your code signing certificate.
+          description: The Amazon Resource Name (ARN) of your code signing certificate.
         platformId:
           $ref: '#/components/schemas/PlatformId'
           description: The microcontroller platform to which your signed code image will be distributed.
@@ -1020,6 +1025,12 @@ components:
           $ref: '#/components/schemas/HashAlgorithm'
           description: A specified override of the default hash algorithm that is used in a code signing job.
       description: A signing configuration that overrides the default encryption or hash algorithm of a signing job.
+    ImageFormat:
+      type: string
+      enum:
+        - JSON
+        - JSONEmbedded
+        - JSONDetached
     SigningParameterValue:
       type: string
     TagValue:
@@ -1077,7 +1088,7 @@ components:
       type: string
       pattern: '^[a-zA-Z0-9_]{2,}'
       minLength: 2
-      maxLength: 20
+      maxLength: 64
     CancelSigningProfileRequest:
       type: object
       title: CancelSigningProfileRequest
@@ -1124,6 +1135,9 @@ components:
         signingConfiguration:
           $ref: '#/components/schemas/SigningConfigurationOverrides'
           description: A signing configuration that overrides the default encryption or hash algorithm of a signing job.
+        signingImageFormat:
+          $ref: '#/components/schemas/ImageFormat'
+          description: 'A signed image is a JSON object. When overriding the default signing platform configuration, a customer can select either of two signing formats, <code>JSONEmbedded</code> or <code>JSONDetached</code>. (A third format value, <code>JSON</code>, is reserved for future use.) With <code>JSONEmbedded</code>, the signing image has the payload embedded in it. With <code>JSONDetached</code>, the payload is not be embedded in the signing image.'
       description: Any overrides that are applied to the signing configuration of a code signing platform.
     SigningParameters:
       type: object
@@ -1163,6 +1177,8 @@ components:
     EncryptionAlgorithms:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EncryptionAlgorithm'
     EncryptionAlgorithmOptions:
       type: object
@@ -1194,7 +1210,7 @@ components:
           description: The encryption algorithm options that are available for a code signing job.
         hashAlgorithmOptions:
           $ref: '#/components/schemas/HashAlgorithmOptions'
-          description: The hash algorithm options that are available for a a code signing job.
+          description: The hash algorithm options that are available for a code signing job.
       description: The configuration of a code signing operation.
     SigningImageFormat:
       type: object
@@ -1204,10 +1220,10 @@ components:
       properties:
         supportedFormats:
           $ref: '#/components/schemas/ImageFormats'
-          description: The supported formats of a code signing signing image.
+          description: The supported formats of a code signing image.
         defaultFormat:
           $ref: '#/components/schemas/ImageFormat'
-          description: The default format of a code signing signing image.
+          description: The default format of a code signing image.
       description: The image format of a code signing platform or profile.
     MaxSizeInMB:
       type: integer
@@ -1236,6 +1252,8 @@ components:
     HashAlgorithms:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/HashAlgorithm'
     HashAlgorithmOptions:
       type: object
@@ -1250,13 +1268,11 @@ components:
           $ref: '#/components/schemas/HashAlgorithm'
           description: The default hash algorithm that is used in a code signing job.
       description: The hash algorithms that are available to a code signing job.
-    ImageFormat:
-      type: string
-      enum:
-        - JSON
     ImageFormats:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ImageFormat'
     Key:
       type: string
@@ -1273,6 +1289,8 @@ components:
     SigningJobs:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SigningJob'
     ListSigningPlatformsRequest:
       type: object
@@ -1281,6 +1299,8 @@ components:
     SigningPlatforms:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SigningPlatform'
     bool:
       type: boolean
@@ -1291,6 +1311,8 @@ components:
     SigningProfiles:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SigningProfile'
     ListTagsForResourceRequest:
       type: object
@@ -1310,7 +1332,7 @@ components:
           description: The AWS Certificate Manager certificate that will be used to sign code with the new signing profile.
         platformId:
           $ref: '#/components/schemas/PlatformId'
-          description: The ID of the signing profile to be created.
+          description: The ID of the signing platform to be created.
         overrides:
           $ref: '#/components/schemas/SigningPlatformOverrides'
           description: A subfield of <code>platform</code>. This specifies any different configuration options that you want to apply to the chosen platform (such as a different <code>hash-algorithm</code> or <code>signing-algorithm</code>).
@@ -1319,7 +1341,7 @@ components:
           description: Map of key-value pairs for signing. These can include any information that you want to use during signing.
         tags:
           $ref: '#/components/schemas/TagMap'
-          description: Tags to be associated with the signing profile being created.
+          description: Tags to be associated with the signing profile that is being created.
     S3SignedObject:
       type: object
       properties:
@@ -1382,7 +1404,7 @@ components:
         maxSizeInMB:
           $ref: '#/components/schemas/MaxSizeInMB'
           description: The maximum size (in MB) of code that can be signed by a code signing platform.
-      description: Contains information about the signing configurations and parameters that is used to perform a code signing job.
+      description: Contains information about the signing configurations and parameters that are used to perform a code signing job.
     SigningProfile:
       type: object
       properties:
@@ -1403,7 +1425,7 @@ components:
           description: The status of a code signing profile.
         arn:
           $ref: '#/components/schemas/string'
-          description: Amazon Resource Name (ARN) for the signing profile.
+          description: The Amazon Resource Name (ARN) for the signing profile.
         tags:
           $ref: '#/components/schemas/TagMap'
           description: A list of tags associated with the signing profile.
@@ -1431,6 +1453,8 @@ components:
     TagKeyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKey'
       minItems: 1
       maxItems: 200

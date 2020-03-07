@@ -1511,6 +1511,8 @@ components:
     BudgetedAndActualAmountsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/BudgetedAndActualAmounts'
     BudgetPerformanceHistory:
       type: object
@@ -1548,6 +1550,8 @@ components:
       type: array
       description: ' A list of budgets.'
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Budget'
     ComparisonOperator:
       type: string
@@ -1559,6 +1563,8 @@ components:
     DimensionValues:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/GenericString'
     NullableBoolean:
       type: boolean
@@ -1566,6 +1572,8 @@ components:
       type: array
       description: ' A list of notifications, each with a list of subscribers.'
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/NotificationWithSubscribers'
       maxItems: 5
     Notification:
@@ -1595,6 +1603,8 @@ components:
       type: array
       description: ' A list of subscribers.'
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Subscriber'
       minItems: 1
       maxItems: 11
@@ -1626,6 +1636,8 @@ components:
       type: array
       description: ' A list of notifications.'
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Notification'
     NotificationType:
       type: string

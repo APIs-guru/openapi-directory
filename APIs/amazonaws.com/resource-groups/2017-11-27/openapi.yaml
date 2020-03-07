@@ -724,6 +724,8 @@ paths:
                   description: The keys of the tags to be removed.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/TagKey'
   '/groups/{GroupName}/resource-identifiers-list':
     post:
@@ -828,6 +830,8 @@ paths:
                   description: '<p>Filters, formatted as ResourceFilter objects, that you want to apply to a ListGroupResources operation.</p> <ul> <li> <p> <code>resource-type</code> - Filter resources by their type. Specify up to five resource types in the format AWS::ServiceCode::ResourceType. For example, AWS::EC2::Instance, or AWS::S3::Bucket.</p> </li> </ul>'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/ResourceFilter'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -919,6 +923,8 @@ paths:
                   description: '<p>Filters, formatted as GroupFilter objects, that you want to apply to a ListGroups operation.</p> <ul> <li> <p> <code>resource-type</code> - Filter groups by resource type. Specify up to five resource types in the format AWS::ServiceCode::ResourceType. For example, AWS::EC2::Instance, or AWS::S3::Bucket.</p> </li> </ul>'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/GroupFilter'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -1341,12 +1347,16 @@ components:
     GroupFilterValues:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/GroupFilterValue'
       minItems: 1
       maxItems: 5
     GroupFilterList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/GroupFilter'
     GroupFilterValue:
       type: string
@@ -1366,14 +1376,20 @@ components:
     GroupIdentifierList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/GroupIdentifier'
     GroupList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Group'
     ResourceFilterList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourceFilter'
     MaxResults:
       type: integer
@@ -1394,10 +1410,14 @@ components:
     ResourceIdentifierList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourceIdentifier'
     QueryErrorList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/QueryError'
     ListGroupsInput:
       type: object
@@ -1433,6 +1453,8 @@ components:
     ResourceFilterValues:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourceFilterValue'
       minItems: 1
       maxItems: 5
@@ -1481,6 +1503,8 @@ components:
     TagKeyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKey'
     UntagInput:
       type: object

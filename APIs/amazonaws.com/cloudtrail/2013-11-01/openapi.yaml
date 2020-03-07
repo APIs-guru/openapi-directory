@@ -2244,6 +2244,8 @@ components:
       type: array
       description: A list of tags.
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
     Boolean:
       type: boolean
@@ -2252,6 +2254,8 @@ components:
     DataResourceValues:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     DataResource:
       type: object
@@ -2266,6 +2270,8 @@ components:
     DataResources:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DataResource'
     Date:
       type: string
@@ -2273,15 +2279,21 @@ components:
     TrailNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     TrailList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Trail'
     ResourceList:
       type: array
       description: A list of resources referenced by the event returned.
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Resource'
     Event:
       type: object
@@ -2327,6 +2339,8 @@ components:
     ExcludeManagementEventSources:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     EventSelector:
       type: object
@@ -2347,14 +2361,20 @@ components:
     EventSelectors:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EventSelector'
     EventsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Event'
     InsightSelectors:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InsightSelector'
     Trail:
       type: object
@@ -2423,18 +2443,26 @@ components:
     PublicKeyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PublicKey'
     ResourceIdList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     ResourceTagList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourceTag'
     Trails:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TrailInfo'
     LookupAttributeKey:
       type: string
@@ -2463,6 +2491,8 @@ components:
     LookupAttributesList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LookupAttribute'
     MaxResults:
       type: integer

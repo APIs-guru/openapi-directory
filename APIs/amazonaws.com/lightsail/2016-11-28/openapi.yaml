@@ -10881,6 +10881,8 @@ components:
     AddOnList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AddOn'
     AddOnType:
       type: string
@@ -10908,6 +10910,8 @@ components:
     AddOnRequestList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AddOnRequest'
     ResourceName:
       type: string
@@ -11056,10 +11060,14 @@ components:
     ContactProtocolsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ContactProtocol'
     NotificationTriggerList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AlarmState'
     boolean:
       type: boolean
@@ -11130,14 +11138,20 @@ components:
     AlarmsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Alarm'
     OperationList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Operation'
     ResourceNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourceName'
     AttachedDisk:
       type: object
@@ -11152,10 +11166,14 @@ components:
     AttachedDiskList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AttachedDisk'
     DiskMapList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DiskMap'
     AttachedDiskMap:
       type: object
@@ -11190,6 +11208,8 @@ components:
     AutoSnapshotDetailsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AutoSnapshotDetails'
     AvailabilityZone:
       type: object
@@ -11204,6 +11224,8 @@ components:
     AvailabilityZoneList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AvailabilityZone'
     Base64:
       type: string
@@ -11260,6 +11282,8 @@ components:
     BlueprintList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Blueprint'
     float:
       type: number
@@ -11267,6 +11291,8 @@ components:
     InstancePlatformList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InstancePlatform'
     Bundle:
       type: object
@@ -11308,6 +11334,8 @@ components:
     BundleList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Bundle'
     PortInfo:
       type: object
@@ -11371,6 +11399,8 @@ components:
     CloudFormationStackRecordSourceInfoList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CloudFormationStackRecordSourceInfo'
     DestinationInfo:
       type: object
@@ -11413,6 +11443,8 @@ components:
     CloudFormationStackRecordList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CloudFormationStackRecord'
     CloudFormationStackRecordSourceType:
       type: string
@@ -11479,6 +11511,8 @@ components:
     ContactMethodsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ContactMethod'
     RegionName:
       type: string
@@ -11500,6 +11534,8 @@ components:
     InstanceEntryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InstanceEntry'
     StringMax256:
       type: string
@@ -11508,6 +11544,8 @@ components:
     TagList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
     DomainName:
       type: string
@@ -11537,6 +11575,8 @@ components:
     StringList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/string'
     KeyPair:
       type: object
@@ -11573,6 +11613,8 @@ components:
     DomainNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DomainName'
     SensitiveString:
       type: string
@@ -11661,10 +11703,14 @@ components:
     DiskInfoList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DiskInfo'
     DiskList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Disk'
     DiskMap:
       type: object
@@ -11742,10 +11788,14 @@ components:
     DiskSnapshotList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DiskSnapshot'
     DomainEntryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DomainEntry'
     Domain:
       type: object
@@ -11786,6 +11836,8 @@ components:
     DomainList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Domain'
     ExportSnapshotRecordSourceInfo:
       type: object
@@ -11846,6 +11898,8 @@ components:
     ExportSnapshotRecordList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ExportSnapshotRecord'
     ExportSnapshotRecordSourceType:
       type: string
@@ -11919,14 +11973,20 @@ components:
     MetricStatisticList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MetricStatistic'
     MetricDatapointList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MetricDatapoint'
     InstancePortStateList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InstancePortState'
     Instance:
       type: object
@@ -12047,6 +12107,8 @@ components:
     InstanceSnapshotList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InstanceSnapshot'
     InstanceState:
       type: object
@@ -12061,10 +12123,14 @@ components:
     InstanceList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Instance'
     KeyPairList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/KeyPair'
     LoadBalancerMetricName:
       type: string
@@ -12136,30 +12202,44 @@ components:
     LoadBalancerTlsCertificateList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LoadBalancerTlsCertificate'
     LoadBalancerList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LoadBalancer'
     RegionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Region'
     RelationalDatabaseBlueprintList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RelationalDatabaseBlueprint'
     RelationalDatabaseBundleList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RelationalDatabaseBundle'
     RelationalDatabaseEventList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RelationalDatabaseEvent'
     LogEventList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LogEvent'
     RelationalDatabasePasswordVersion:
       type: string
@@ -12179,6 +12259,8 @@ components:
     RelationalDatabaseParameterList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RelationalDatabaseParameter'
     RelationalDatabase:
       type: object
@@ -12314,10 +12396,14 @@ components:
     RelationalDatabaseSnapshotList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RelationalDatabaseSnapshot'
     RelationalDatabaseList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RelationalDatabase'
     StaticIp:
       type: object
@@ -12353,6 +12439,8 @@ components:
     StaticIpList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StaticIp'
     HostKeyAttributes:
       type: object
@@ -12382,6 +12470,8 @@ components:
     HostKeysList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/HostKeyAttributes'
     IpAddress:
       type: string
@@ -12492,6 +12582,8 @@ components:
     InstanceHealthSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InstanceHealthSummary'
     MonthlyTransfer:
       type: object
@@ -12503,6 +12595,8 @@ components:
     InstancePortInfoList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InstancePortInfo'
     NetworkProtocol:
       type: string
@@ -12583,10 +12677,14 @@ components:
     PortList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Port'
     LoadBalancerTlsCertificateSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LoadBalancerTlsCertificateSummary'
     LoadBalancerConfigurationOptions:
       type: object
@@ -12612,6 +12710,8 @@ components:
     LoadBalancerTlsCertificateDomainValidationRecordList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LoadBalancerTlsCertificateDomainValidationRecord'
     LoadBalancerTlsCertificateFailureReason:
       type: string
@@ -12742,6 +12842,8 @@ components:
     LoadBalancerTlsCertificateDomainValidationOptionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LoadBalancerTlsCertificateDomainValidationOption'
     LoadBalancerTlsCertificateDomainValidationRecord:
       type: object
@@ -12899,6 +13001,8 @@ components:
     PendingMaintenanceActionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PendingMaintenanceAction'
     PendingModifiedRelationalDatabaseValues:
       type: object
@@ -12916,6 +13020,8 @@ components:
     PortInfoList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PortInfo'
     Region:
       type: object
@@ -13080,6 +13186,8 @@ components:
     TagKeyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKey'
 security:
   - hmac: []

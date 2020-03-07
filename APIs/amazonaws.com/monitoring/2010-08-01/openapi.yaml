@@ -128,6 +128,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/AlarmName'
             maxItems: 100
         - name: Action
@@ -246,6 +248,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Dimension'
             maxItems: 10
         - name: Stat
@@ -369,6 +373,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/DashboardName'
         - name: Action
           in: query
@@ -473,6 +479,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/InsightRuleName'
         - name: Action
           in: query
@@ -573,6 +581,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/AlarmType'
         - name: HistoryItemType
           in: query
@@ -718,6 +728,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/AlarmName'
             maxItems: 100
         - name: AlarmNamePrefix
@@ -735,6 +747,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/AlarmType'
         - name: ChildrenOfAlarmName
           in: query
@@ -911,6 +925,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Dimension'
             maxItems: 10
         - name: Period
@@ -1075,6 +1091,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Dimension'
             maxItems: 10
         - name: Action
@@ -1268,6 +1286,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/AlarmName'
             maxItems: 100
         - name: Action
@@ -1351,6 +1371,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/InsightRuleName'
         - name: Action
           in: query
@@ -1433,6 +1455,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/AlarmName'
             maxItems: 100
         - name: Action
@@ -1522,6 +1546,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/InsightRuleName'
         - name: Action
           in: query
@@ -1776,6 +1802,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/InsightRuleMetricName'
         - name: OrderBy
           in: query
@@ -1883,6 +1911,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/MetricDataQuery'
         - name: StartTime
           in: query
@@ -2051,6 +2081,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Dimension'
             maxItems: 10
         - name: StartTime
@@ -2081,6 +2113,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Statistic'
             minItems: 1
             maxItems: 5
@@ -2091,6 +2125,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/ExtendedStatistic'
             minItems: 1
             maxItems: 10
@@ -2440,6 +2476,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/DimensionFilter'
             maxItems: 10
         - name: NextToken
@@ -2690,6 +2728,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Dimension'
             maxItems: 10
         - name: Stat
@@ -2817,6 +2857,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/ResourceName'
             maxItems: 5
         - name: AlarmDescription
@@ -2850,6 +2892,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/ResourceName'
             maxItems: 5
         - name: OKActions
@@ -2859,6 +2903,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/ResourceName'
             maxItems: 5
         - name: Tags
@@ -2868,6 +2914,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Tag'
         - name: Action
           in: query
@@ -3199,6 +3247,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/ResourceName'
             maxItems: 5
         - name: AlarmActions
@@ -3208,6 +3258,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/ResourceName'
             maxItems: 5
         - name: InsufficientDataActions
@@ -3217,6 +3269,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/ResourceName'
             maxItems: 5
         - name: MetricName
@@ -3262,6 +3316,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Dimension'
             maxItems: 10
         - name: Period
@@ -3363,6 +3419,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/MetricDataQuery'
         - name: Tags
           in: query
@@ -3371,6 +3429,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Tag'
         - name: ThresholdMetricId
           in: query
@@ -3484,6 +3544,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/MetricDatum'
         - name: Action
           in: query
@@ -3726,6 +3788,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Tag'
         - name: Action
           in: query
@@ -3856,6 +3920,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/TagKey'
         - name: Action
           in: query
@@ -4235,6 +4301,8 @@ components:
     AnomalyDetectorExcludedTimeRanges:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Range'
     AnomalyDetectorMetricTimezone:
       type: string
@@ -4367,6 +4435,8 @@ components:
     AlarmHistoryItems:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AlarmHistoryItem'
     AlarmNamePrefix:
       type: string
@@ -4375,6 +4445,8 @@ components:
     AlarmNames:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AlarmName'
       maxItems: 100
     AlarmRule:
@@ -4384,6 +4456,8 @@ components:
     AlarmTypes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AlarmType'
     AmazonResourceName:
       type: string
@@ -4401,6 +4475,8 @@ components:
     Dimensions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Dimension'
       maxItems: 10
     Stat:
@@ -4459,6 +4535,8 @@ components:
     AnomalyDetectors:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AnomalyDetector'
     PartialFailure:
       type: object
@@ -4479,6 +4557,8 @@ components:
     BatchFailures:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PartialFailure'
     ComparisonOperator:
       type: string
@@ -4493,6 +4573,8 @@ components:
     ResourceList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourceName'
       maxItems: 5
     StateReason:
@@ -4555,6 +4637,8 @@ components:
     CompositeAlarms:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CompositeAlarm'
     DatapointValue:
       type: number
@@ -4562,6 +4646,8 @@ components:
     Counts:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DatapointValue'
     DashboardArn:
       type: string
@@ -4586,6 +4672,8 @@ components:
     DashboardEntries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DashboardEntry'
     LastModified:
       type: string
@@ -4597,6 +4685,8 @@ components:
     DashboardNames:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DashboardName'
     DataPath:
       type: string
@@ -4615,6 +4705,8 @@ components:
     DashboardValidationMessages:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DashboardValidationMessage'
     StandardUnit:
       type: string
@@ -4681,10 +4773,14 @@ components:
     DatapointValues:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DatapointValue'
     Datapoints:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Datapoint'
     DatapointsToAlarm:
       type: integer
@@ -4730,6 +4826,8 @@ components:
     InsightRuleNames:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InsightRuleName'
     DeleteInsightRulesInput:
       type: object
@@ -4813,6 +4911,8 @@ components:
     MetricAlarms:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MetricAlarm'
     DescribeAlarmsInput:
       type: object
@@ -4884,6 +4984,8 @@ components:
     InsightRules:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InsightRule'
     DimensionName:
       type: string
@@ -4896,6 +4998,8 @@ components:
     DimensionFilters:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DimensionFilter'
       maxItems: 10
     DisableAlarmActionsInput:
@@ -4946,6 +5050,8 @@ components:
     ExtendedStatistics:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ExtendedStatistic'
       minItems: 1
       maxItems: 10
@@ -4969,6 +5075,8 @@ components:
     InsightRuleMetricList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InsightRuleMetricName'
     InsightRuleOrderBy:
       type: string
@@ -5008,6 +5116,8 @@ components:
     InsightRuleContributorKeyLabels:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InsightRuleContributorKeyLabel'
     InsightRuleAggregationStatistic:
       type: string
@@ -5019,14 +5129,20 @@ components:
     InsightRuleContributors:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InsightRuleContributor'
     InsightRuleMetricDatapoints:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InsightRuleMetricDatapoint'
     MetricDataQueries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MetricDataQuery'
     GetMetricDataMaxDatapoints:
       type: integer
@@ -5059,14 +5175,20 @@ components:
     MetricDataResults:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MetricDataResult'
     MetricDataResultMessages:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MessageData'
     Statistics:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Statistic'
       minItems: 1
       maxItems: 5
@@ -5163,10 +5285,14 @@ components:
     InsightRuleContributorKeys:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InsightRuleContributorKey'
     InsightRuleContributorDatapoints:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InsightRuleContributorDatapoint'
     InsightRuleContributor:
       type: object
@@ -5261,6 +5387,8 @@ components:
     Metrics:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Metric'
     ListTagsForResourceInput:
       type: object
@@ -5274,6 +5402,8 @@ components:
     TagList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
     MessageDataCode:
       type: string
@@ -5401,6 +5531,8 @@ components:
     MetricData:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MetricDatum'
     MetricStat:
       type: object
@@ -5431,6 +5563,8 @@ components:
     Timestamps:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Timestamp'
     StatusCode:
       type: string
@@ -5484,6 +5618,8 @@ components:
     Values:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DatapointValue'
     StorageResolution:
       type: integer
@@ -5685,6 +5821,8 @@ components:
     TagKeyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKey'
     TagResourceInput:
       type: object

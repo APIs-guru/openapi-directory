@@ -2982,6 +2982,8 @@ components:
     ArnList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Arn'
       maxItems: 100
     MetricName:
@@ -3110,6 +3112,8 @@ components:
     BatchInferenceJobs:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/BatchInferenceJobSummary'
       maxItems: 100
     Boolean:
@@ -3194,6 +3198,8 @@ components:
     Campaigns:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CampaignSummary'
       maxItems: 100
     ParameterName:
@@ -3202,6 +3208,8 @@ components:
     CategoricalValues:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CategoricalValue'
       maxItems: 100
     CategoricalHyperParameterRange:
@@ -3217,6 +3225,8 @@ components:
     CategoricalHyperParameterRanges:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CategoricalHyperParameterRange'
       maxItems: 100
     CategoricalValue:
@@ -3246,6 +3256,8 @@ components:
     ContinuousHyperParameterRanges:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ContinuousHyperParameterRange'
       maxItems: 100
     KmsKeyArn:
@@ -3376,6 +3388,8 @@ components:
     DatasetGroups:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DatasetGroupSummary'
       maxItems: 100
     DatasetImportJob:
@@ -3434,6 +3448,8 @@ components:
     DatasetImportJobs:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DatasetImportJobSummary'
       maxItems: 100
     DatasetSchema:
@@ -3496,6 +3512,8 @@ components:
     Datasets:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DatasetSummary'
       maxItems: 100
     Tunable:
@@ -3516,6 +3534,8 @@ components:
     DefaultCategoricalHyperParameterRanges:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DefaultCategoricalHyperParameterRange'
       maxItems: 100
     DefaultContinuousHyperParameterRange:
@@ -3537,11 +3557,15 @@ components:
     DefaultContinuousHyperParameterRanges:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DefaultContinuousHyperParameterRange'
       maxItems: 100
     DefaultIntegerHyperParameterRanges:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DefaultIntegerHyperParameterRange'
       maxItems: 100
     IntegerMinValue:
@@ -3760,6 +3784,8 @@ components:
     EventTrackers:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EventTrackerSummary'
       maxItems: 100
     EventValueThreshold:
@@ -3844,6 +3870,8 @@ components:
     IntegerHyperParameterRanges:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/IntegerHyperParameterRange'
       maxItems: 100
     IntegerHyperParameterRange:
@@ -3873,21 +3901,29 @@ components:
     Recipes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RecipeSummary'
       maxItems: 100
     Schemas:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DatasetSchemaSummary'
       maxItems: 100
     SolutionVersions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SolutionVersionSummary'
       maxItems: 100
     Solutions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SolutionSummary'
       maxItems: 100
     MetricValue:

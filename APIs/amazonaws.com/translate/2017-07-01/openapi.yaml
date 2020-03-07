@@ -933,6 +933,8 @@ components:
     TermList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Term'
     AppliedTerminology:
       type: object
@@ -947,6 +949,8 @@ components:
     AppliedTerminologyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AppliedTerminology'
     BoundedLengthString:
       type: string
@@ -1164,6 +1168,8 @@ components:
     LanguageCodeStringList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LanguageCodeString'
     NextToken:
       type: string
@@ -1176,6 +1182,8 @@ components:
     TerminologyPropertiesList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TerminologyProperties'
     TextTranslationJobFilter:
       type: object
@@ -1196,6 +1204,8 @@ components:
     TextTranslationJobPropertiesList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TextTranslationJobProperties'
     OutputDataConfig:
       type: object
@@ -1209,10 +1219,14 @@ components:
     ResourceNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourceName'
     TargetLanguageCodeStringList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LanguageCodeString'
       minItems: 1
       maxItems: 1

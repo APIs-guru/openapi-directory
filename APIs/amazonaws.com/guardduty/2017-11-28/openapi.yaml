@@ -238,6 +238,8 @@ paths:
                   description: IDs of the findings that you want to archive.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/FindingId'
                   minItems: 0
                   maxItems: 50
@@ -701,6 +703,8 @@ paths:
                   description: A list of account ID and email address pairs of the accounts that you want to associate with the master GuardDuty account.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/AccountDetail'
                   minItems: 1
                   maxItems: 50
@@ -947,6 +951,8 @@ paths:
                   description: Types of sample findings to generate.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/FindingType'
                   minItems: 0
                   maxItems: 50
@@ -1141,6 +1147,8 @@ paths:
                   description: A list of account IDs of the AWS accounts that sent invitations to the current member account that you want to decline invitations from.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/AccountId'
                   minItems: 1
                   maxItems: 50
@@ -1600,6 +1608,8 @@ paths:
                   description: A list of account IDs of the AWS accounts that sent invitations to the current member account that you want to delete invitations from.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/AccountId'
                   minItems: 1
                   maxItems: 50
@@ -1656,6 +1666,8 @@ paths:
                   description: A list of account IDs of the GuardDuty member accounts that you want to delete.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/AccountId'
                   minItems: 1
                   maxItems: 50
@@ -2029,6 +2041,8 @@ paths:
                   description: A list of account IDs of the GuardDuty member accounts that you want to disassociate from master.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/AccountId'
                   minItems: 1
                   maxItems: 50
@@ -2085,6 +2099,8 @@ paths:
                   description: IDs of the findings that you want to retrieve.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/FindingId'
                   minItems: 0
                   maxItems: 50
@@ -2151,6 +2167,8 @@ paths:
                   description: Types of finding statistics to retrieve.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/FindingStatisticType'
                   minItems: 0
                   maxItems: 10
@@ -2246,6 +2264,8 @@ paths:
                   description: A list of account IDs of the GuardDuty member accounts that you want to describe.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/AccountId'
                   minItems: 1
                   maxItems: 50
@@ -2302,6 +2322,8 @@ paths:
                   description: A list of account IDs of the accounts that you want to invite to GuardDuty as members.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/AccountId'
                   minItems: 1
                   maxItems: 50
@@ -2591,6 +2613,8 @@ paths:
                   description: A list of account IDs of the GuardDuty member accounts to start monitoring.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/AccountId'
                   minItems: 1
                   maxItems: 50
@@ -2647,6 +2671,8 @@ paths:
                   description: A list of account IDs of the GuardDuty member accounts whose findings you want the master account to stop monitoring.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/AccountId'
                   minItems: 1
                   maxItems: 50
@@ -2703,6 +2729,8 @@ paths:
                   description: IDs of the findings to unarchive.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/FindingId'
                   minItems: 0
                   maxItems: 50
@@ -2752,6 +2780,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/TagKey'
             minItems: 1
             maxItems: 200
@@ -2809,6 +2839,8 @@ paths:
                   description: IDs of the findings that you want to mark as useful or not useful.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/FindingId'
                   minItems: 0
                   maxItems: 50
@@ -3383,12 +3415,16 @@ components:
     AccountDetails:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AccountDetail'
       minItems: 1
       maxItems: 50
     AccountIds:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AccountId'
       minItems: 1
       maxItems: 50
@@ -3475,6 +3511,8 @@ components:
     FindingIds:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/FindingId'
       minItems: 0
       maxItems: 50
@@ -3529,20 +3567,28 @@ components:
     Eq:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     Neq:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     Integer:
       type: integer
     Equals:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     NotEquals:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     Long:
       type: integer
@@ -3748,6 +3794,8 @@ components:
     UnprocessedAccounts:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/UnprocessedAccount'
       minItems: 0
       maxItems: 50
@@ -3786,6 +3834,8 @@ components:
     FindingTypes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/FindingType'
       minItems: 0
       maxItems: 50
@@ -3914,10 +3964,14 @@ components:
     Destinations:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Destination'
     DetectorIds:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DetectorId'
       minItems: 0
       maxItems: 50
@@ -3947,6 +4001,8 @@ components:
     ThreatIntelligenceDetails:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ThreatIntelligenceDetail'
     Evidence:
       type: object
@@ -3963,6 +4019,8 @@ components:
     FilterNames:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/FilterName'
       minItems: 0
       maxItems: 50
@@ -4074,6 +4132,8 @@ components:
     FindingStatisticTypes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/FindingStatisticType'
       minItems: 0
       maxItems: 10
@@ -4087,6 +4147,8 @@ components:
     Findings:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Finding'
       minItems: 0
       maxItems: 50
@@ -4194,6 +4256,8 @@ components:
     Members:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Member'
       minItems: 0
       maxItems: 50
@@ -4229,14 +4293,20 @@ components:
     NetworkInterfaces:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/NetworkInterface'
     ProductCodes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ProductCode'
     Tags:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
     InstanceDetails:
       type: object
@@ -4262,6 +4332,9 @@ components:
         InstanceType:
           $ref: '#/components/schemas/String'
           description: The type of the EC2 instance.
+        OutpostArn:
+          $ref: '#/components/schemas/String'
+          description: The Amazon Resource Name (ARN) of the AWS Outpost. Only applicable to AWS Outposts instances.
         LaunchTime:
           $ref: '#/components/schemas/String'
           description: The launch time of the EC2 instance.
@@ -4297,6 +4370,8 @@ components:
     Invitations:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Invitation'
       minItems: 0
       maxItems: 50
@@ -4318,12 +4393,16 @@ components:
     IpSetIds:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
       minItems: 0
       maxItems: 50
     Ipv6Addresses:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     MaxResults:
       type: integer
@@ -4343,7 +4422,7 @@ components:
       properties:
         FindingCriteria:
           $ref: '#/components/schemas/FindingCriteria'
-          description: '<p>Represents the criteria used for querying findings. Valid values include:</p> <ul> <li> <p>JSON field name</p> </li> <li> <p>accountId</p> </li> <li> <p>region</p> </li> <li> <p>confidence</p> </li> <li> <p>id</p> </li> <li> <p>resource.accessKeyDetails.accessKeyId</p> </li> <li> <p>resource.accessKeyDetails.principalId</p> </li> <li> <p>resource.accessKeyDetails.userName</p> </li> <li> <p>resource.accessKeyDetails.userType</p> </li> <li> <p>resource.instanceDetails.iamInstanceProfile.id</p> </li> <li> <p>resource.instanceDetails.imageId</p> </li> <li> <p>resource.instanceDetails.instanceId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.ipv6Addresses</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicDnsName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicIp</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.subnetId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.vpcId</p> </li> <li> <p>resource.instanceDetails.tags.key</p> </li> <li> <p>resource.instanceDetails.tags.value</p> </li> <li> <p>resource.resourceType</p> </li> <li> <p>service.action.actionType</p> </li> <li> <p>service.action.awsApiCallAction.api</p> </li> <li> <p>service.action.awsApiCallAction.callerType</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.awsApiCallAction.serviceName</p> </li> <li> <p>service.action.dnsRequestAction.domain</p> </li> <li> <p>service.action.networkConnectionAction.blocked</p> </li> <li> <p>service.action.networkConnectionAction.connectionDirection</p> </li> <li> <p>service.action.networkConnectionAction.localPortDetails.port</p> </li> <li> <p>service.action.networkConnectionAction.protocol</p> </li> <li> <p>service.action.networkConnectionAction.localIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.networkConnectionAction.remotePortDetails.port</p> </li> <li> <p>service.additionalInfo.threatListName</p> </li> <li> <p>service.archived</p> <p>When this attribute is set to ''true'', only archived findings are listed. When it''s set to ''false'', only unarchived findings are listed. When this attribute is not set, all existing findings are listed.</p> </li> <li> <p>service.resourceRole</p> </li> <li> <p>severity</p> </li> <li> <p>type</p> </li> <li> <p>updatedAt</p> <p>Type: Timestamp in Unix Epoch millisecond format: 1486685375000</p> </li> </ul>'
+          description: '<p>Represents the criteria used for querying findings. Valid values include:</p> <ul> <li> <p>JSON field name</p> </li> <li> <p>accountId</p> </li> <li> <p>region</p> </li> <li> <p>confidence</p> </li> <li> <p>id</p> </li> <li> <p>resource.accessKeyDetails.accessKeyId</p> </li> <li> <p>resource.accessKeyDetails.principalId</p> </li> <li> <p>resource.accessKeyDetails.userName</p> </li> <li> <p>resource.accessKeyDetails.userType</p> </li> <li> <p>resource.instanceDetails.iamInstanceProfile.id</p> </li> <li> <p>resource.instanceDetails.imageId</p> </li> <li> <p>resource.instanceDetails.instanceId</p> </li> <li> <p>resource.instanceDetails.outpostArn</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.ipv6Addresses</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicDnsName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicIp</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.subnetId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.vpcId</p> </li> <li> <p>resource.instanceDetails.tags.key</p> </li> <li> <p>resource.instanceDetails.tags.value</p> </li> <li> <p>resource.resourceType</p> </li> <li> <p>service.action.actionType</p> </li> <li> <p>service.action.awsApiCallAction.api</p> </li> <li> <p>service.action.awsApiCallAction.callerType</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.awsApiCallAction.serviceName</p> </li> <li> <p>service.action.dnsRequestAction.domain</p> </li> <li> <p>service.action.networkConnectionAction.blocked</p> </li> <li> <p>service.action.networkConnectionAction.connectionDirection</p> </li> <li> <p>service.action.networkConnectionAction.localPortDetails.port</p> </li> <li> <p>service.action.networkConnectionAction.protocol</p> </li> <li> <p>service.action.networkConnectionAction.localIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.networkConnectionAction.remotePortDetails.port</p> </li> <li> <p>service.additionalInfo.threatListName</p> </li> <li> <p>service.archived</p> <p>When this attribute is set to ''true'', only archived findings are listed. When it''s set to ''false'', only unarchived findings are listed. When this attribute is not set, all existing findings are listed.</p> </li> <li> <p>service.resourceRole</p> </li> <li> <p>severity</p> </li> <li> <p>type</p> </li> <li> <p>updatedAt</p> <p>Type: Timestamp in Unix Epoch millisecond format: 1486685375000</p> </li> </ul>'
         SortCriteria:
           $ref: '#/components/schemas/SortCriteria'
           description: Represents the criteria used for sorting findings.
@@ -4380,6 +4459,8 @@ components:
     ThreatIntelSetIds:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
       minItems: 0
       maxItems: 50
@@ -4444,10 +4525,14 @@ components:
     PrivateIpAddresses:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PrivateIpAddressDetails'
     SecurityGroups:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SecurityGroup'
     NetworkInterface:
       type: object
@@ -4502,6 +4587,8 @@ components:
     PortProbeDetails:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PortProbeDetail'
     PortProbeDetail:
       type: object
@@ -4577,6 +4664,8 @@ components:
     TagKeyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKey'
       minItems: 1
       maxItems: 200
@@ -4592,6 +4681,8 @@ components:
     ThreatNames:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     ThreatIntelligenceDetail:
       type: object

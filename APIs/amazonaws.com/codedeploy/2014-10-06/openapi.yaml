@@ -4725,10 +4725,14 @@ components:
     TagList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
     InstanceNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InstanceName'
     AdditionalDeploymentStatusInfo:
       type: string
@@ -4748,6 +4752,8 @@ components:
     AlarmList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Alarm'
     AlarmConfiguration:
       type: object
@@ -4824,10 +4830,14 @@ components:
     ApplicationsInfoList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ApplicationInfo'
     ApplicationsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ApplicationName'
     Arn:
       type: string
@@ -4836,6 +4846,8 @@ components:
     AutoRollbackEventsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AutoRollbackEvent'
     AutoRollbackConfiguration:
       type: object
@@ -4870,58 +4882,84 @@ components:
     AutoScalingGroupList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AutoScalingGroup'
     AutoScalingGroupNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AutoScalingGroupName'
     RevisionLocationList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RevisionLocation'
     ErrorMessage:
       type: string
     RevisionInfoList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RevisionInfo'
     DeploymentGroupsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DeploymentGroupName'
     DeploymentGroupInfoList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DeploymentGroupInfo'
     DeploymentId:
       type: string
     InstancesList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InstanceId'
     InstanceSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InstanceSummary'
     TargetIdList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TargetId'
     DeploymentTargetList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DeploymentTarget'
     DeploymentsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DeploymentId'
     DeploymentsInfoList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DeploymentInfo'
     InstanceInfoList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InstanceInfo'
     BlueInstanceTerminationOption:
       type: object
@@ -5021,16 +5059,22 @@ components:
     EC2TagFilterList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EC2TagFilter'
     TagFilterList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagFilter'
     Role:
       type: string
     TriggerConfigList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TriggerConfig'
     DeploymentStyle:
       type: object
@@ -5065,6 +5109,8 @@ components:
     ECSServiceList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ECSService'
     OnPremisesTagSet:
       type: object
@@ -5140,6 +5186,8 @@ components:
     DeploymentConfigsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DeploymentConfigName'
     DeploymentCreator:
       type: string
@@ -5288,6 +5336,8 @@ components:
     DeploymentStatusMessageList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ErrorMessage'
     DeploymentInfo:
       type: object
@@ -5389,6 +5439,8 @@ components:
     DeploymentStatusList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DeploymentStatus'
     DeploymentType:
       type: string
@@ -5551,6 +5603,8 @@ components:
     EC2TagSetList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EC2TagFilterList'
     ECSClusterName:
       type: string
@@ -5576,6 +5630,8 @@ components:
     LifecycleEventList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LifecycleEvent'
     TargetStatus:
       type: string
@@ -5590,6 +5646,8 @@ components:
     ECSTaskSetList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ECSTaskSet'
     ECSTaskSetIdentifier:
       type: string
@@ -5652,6 +5710,8 @@ components:
     ELBInfoList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ELBInfo'
     ETag:
       type: string
@@ -5696,6 +5756,8 @@ components:
     FilterValueList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/FilterValue'
     GenericRevisionInfo:
       type: object
@@ -5769,6 +5831,8 @@ components:
     GitHubAccountTokenNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/GitHubAccountTokenName'
     Repository:
       type: string
@@ -5808,6 +5872,8 @@ components:
     InstanceStatusList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InstanceStatus'
     InstanceType:
       type: string
@@ -5817,6 +5883,8 @@ components:
     InstanceTypeList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InstanceType'
     LambdaFunctionAlias:
       type: string
@@ -5916,14 +5984,20 @@ components:
     ListenerArnList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ListenerArn'
     TargetGroupInfoList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TargetGroupInfo'
     TargetGroupPairInfoList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TargetGroupPairInfo'
     Message:
       type: string
@@ -5939,6 +6013,8 @@ components:
     OnPremisesTagSetList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagFilterList'
     Percentage:
       type: integer
@@ -6028,6 +6104,8 @@ components:
     TagKeyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Key'
     TargetFilterName:
       type: string
@@ -6091,6 +6169,8 @@ components:
     TriggerEventTypeList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TriggerEventType'
     TriggerConfig:
       type: object

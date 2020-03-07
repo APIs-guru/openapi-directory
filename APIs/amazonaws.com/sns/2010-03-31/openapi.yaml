@@ -158,6 +158,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/delegate'
         - name: ActionName
           in: query
@@ -166,6 +168,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/action'
         - name: Action
           in: query
@@ -866,6 +870,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Tag'
         - name: Action
           in: query
@@ -1606,6 +1612,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/String'
         - name: Action
           in: query
@@ -4198,6 +4206,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/Tag'
         - name: Action
           in: query
@@ -4488,6 +4498,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/TagKey'
         - name: Action
           in: query
@@ -4866,6 +4878,8 @@ components:
     ActionsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/action'
     topicARN:
       type: string
@@ -4874,6 +4888,8 @@ components:
     DelegatesList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/delegate'
     AddPermissionInput:
       type: object
@@ -4990,6 +5006,8 @@ components:
     TagList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
     CreateTopicInput:
       type: object
@@ -5069,6 +5087,8 @@ components:
     ListString:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     GetSMSAttributesInput:
       type: object
@@ -5118,6 +5138,8 @@ components:
     ListOfEndpoints:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Endpoint'
     PlatformApplication:
       type: object
@@ -5132,6 +5154,8 @@ components:
     ListOfPlatformApplications:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PlatformApplication'
     string:
       type: string
@@ -5146,6 +5170,8 @@ components:
     PhoneNumberList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PhoneNumber'
     ListPlatformApplicationsInput:
       type: object
@@ -5173,6 +5199,8 @@ components:
     SubscriptionsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Subscription'
     ListSubscriptionsInput:
       type: object
@@ -5201,6 +5229,8 @@ components:
     TopicsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Topic'
     MessageAttributeMap:
       type: object
@@ -5395,6 +5425,8 @@ components:
     TagKeyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKey'
     TagResourceRequest:
       type: object

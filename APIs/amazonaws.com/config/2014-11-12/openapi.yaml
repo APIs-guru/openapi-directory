@@ -5821,6 +5821,8 @@ components:
     AccountAggregationSourceAccountList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AccountId'
       minItems: 1
     Boolean:
@@ -5828,6 +5830,8 @@ components:
     AggregatorRegionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
       minItems: 1
     AccountAggregationSource:
@@ -5851,6 +5855,8 @@ components:
     AccountAggregationSourceList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AccountAggregationSource'
       minItems: 0
       maxItems: 1
@@ -5892,6 +5898,8 @@ components:
     AggregateComplianceByConfigRuleList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AggregateComplianceByConfigRule'
     StringWithCharLimit256:
       type: string
@@ -5923,6 +5931,8 @@ components:
     AggregateComplianceCountList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AggregateComplianceCount'
     EvaluationResultIdentifier:
       type: object
@@ -5972,6 +5982,8 @@ components:
     AggregateEvaluationResultList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AggregateEvaluationResult'
     ResourceId:
       type: string
@@ -6137,10 +6149,14 @@ components:
     AggregatedSourceStatusList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AggregatedSourceStatus'
     AggregatedSourceStatusTypeList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AggregatedSourceStatusType'
       minItems: 1
     AggregationAuthorization:
@@ -6162,6 +6178,8 @@ components:
     AggregationAuthorizationList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AggregationAuthorization'
     AllSupported:
       type: boolean
@@ -6256,6 +6274,8 @@ components:
     BaseConfigurationItems:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/BaseConfigurationItem'
     BaseResourceId:
       type: string
@@ -6269,16 +6289,22 @@ components:
     ResourceIdentifiersList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AggregateResourceIdentifier'
       minItems: 1
       maxItems: 100
     UnprocessedResourceIdentifierList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AggregateResourceIdentifier'
     ResourceKeys:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourceKey'
       minItems: 1
       maxItems: 100
@@ -6318,6 +6344,8 @@ components:
     ComplianceByConfigRules:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ComplianceByConfigRule'
     ComplianceByResource:
       type: object
@@ -6335,12 +6363,16 @@ components:
     ComplianceByResources:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ComplianceByResource'
     Integer:
       type: integer
     ComplianceResourceTypes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StringWithCharLimit256'
       minItems: 0
       maxItems: 100
@@ -6357,10 +6389,14 @@ components:
     ComplianceSummariesByResourceType:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ComplianceSummaryByResourceType'
     ComplianceTypes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ComplianceType'
       minItems: 0
       maxItems: 3
@@ -6556,16 +6592,22 @@ components:
     ConfigRuleEvaluationStatusList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ConfigRuleEvaluationStatus'
     ConfigRuleNames:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ConfigRuleName'
       minItems: 0
       maxItems: 25
     ConfigRules:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ConfigRule'
     ConfigSnapshotDeliveryProperties:
       type: object
@@ -6633,10 +6675,14 @@ components:
     ConfigurationAggregatorList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ConfigurationAggregator'
     ConfigurationAggregatorNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ConfigurationAggregatorName'
       minItems: 0
       maxItems: 10
@@ -6649,10 +6695,14 @@ components:
     RelatedEventList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RelatedEvent'
     RelationshipList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Relationship'
     ConfigurationItem:
       type: object
@@ -6715,6 +6765,8 @@ components:
     ConfigurationItemList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ConfigurationItem'
     RecorderName:
       type: string
@@ -6749,10 +6801,14 @@ components:
     ConfigurationRecorderList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ConfigurationRecorder'
     ConfigurationRecorderNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RecorderName'
     RecorderStatus:
       type: string
@@ -6791,6 +6847,8 @@ components:
     ConfigurationRecorderStatusList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ConfigurationRecorderStatus'
     ConformancePackArn:
       type: string
@@ -6799,6 +6857,8 @@ components:
     ConformancePackConfigRuleNames:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StringWithCharLimit64'
       minItems: 0
       maxItems: 10
@@ -6820,6 +6880,8 @@ components:
     ConformancePackComplianceResourceIds:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StringWithCharLimit256'
       minItems: 0
       maxItems: 5
@@ -6844,6 +6906,8 @@ components:
     ConformancePackComplianceSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ConformancePackComplianceSummary'
       minItems: 1
       maxItems: 5
@@ -6862,6 +6926,8 @@ components:
     ConformancePackInputParameters:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ConformancePackInputParameter'
       minItems: 0
       maxItems: 60
@@ -6901,6 +6967,8 @@ components:
     ConformancePackDetailList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ConformancePackDetail'
       minItems: 0
       maxItems: 25
@@ -6967,12 +7035,16 @@ components:
     ConformancePackNamesList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ConformancePackName'
       minItems: 0
       maxItems: 25
     ConformancePackNamesToSummarizeList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ConformancePackName'
       minItems: 1
       maxItems: 5
@@ -6989,12 +7061,16 @@ components:
     ConformancePackRuleComplianceList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ConformancePackRuleCompliance'
       minItems: 0
       maxItems: 1000
     ConformancePackRuleEvaluationResultsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ConformancePackEvaluationResult'
       minItems: 0
       maxItems: 100
@@ -7052,6 +7128,8 @@ components:
     ConformancePackStatusDetailsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ConformancePackStatusDetail'
       minItems: 0
       maxItems: 25
@@ -7072,12 +7150,16 @@ components:
     RemediationExceptionResourceKeys:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RemediationExceptionResourceKey'
       minItems: 1
       maxItems: 100
     FailedDeleteRemediationExceptionsBatches:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/FailedDeleteRemediationExceptionsBatch'
     ResourceTypeString:
       type: string
@@ -7110,10 +7192,14 @@ components:
     DeliveryChannelList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DeliveryChannel'
     DeliveryChannelNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ChannelName'
     DeliveryChannelStatus:
       type: object
@@ -7134,6 +7220,8 @@ components:
     DeliveryChannelStatusList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DeliveryChannelStatus'
     GroupByAPILimit:
       type: integer
@@ -7160,30 +7248,42 @@ components:
     OrganizationConfigRuleNames:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StringWithCharLimit64'
       minItems: 0
       maxItems: 25
     OrganizationConfigRuleStatuses:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/OrganizationConfigRuleStatus'
     OrganizationConfigRules:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/OrganizationConfigRule'
     OrganizationConformancePackNames:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/OrganizationConformancePackName'
       minItems: 0
       maxItems: 25
     OrganizationConformancePackStatuses:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/OrganizationConformancePackStatus'
     OrganizationConformancePacks:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/OrganizationConformancePack'
     DescribePendingAggregationRequestsLimit:
       type: integer
@@ -7192,36 +7292,50 @@ components:
     PendingAggregationRequestList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PendingAggregationRequest'
     RemediationConfigurations:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RemediationConfiguration'
       minItems: 0
       maxItems: 25
     RemediationExceptions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RemediationException'
       minItems: 0
       maxItems: 25
     RemediationExecutionStatuses:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RemediationExecutionStatus'
     RetentionConfigurationNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RetentionConfigurationName'
       minItems: 0
       maxItems: 1
     RetentionConfigurationList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RetentionConfiguration'
     DiscoveredResourceIdentifierList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AggregateResourceIdentifier'
     EarlierTime:
       type: string
@@ -7291,10 +7405,14 @@ components:
     EvaluationResults:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EvaluationResult'
     Evaluations:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Evaluation'
       minItems: 0
       maxItems: 100
@@ -7305,6 +7423,8 @@ components:
     ExcludedAccounts:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AccountId'
       minItems: 0
       maxItems: 1000
@@ -7352,6 +7472,8 @@ components:
     FailedRemediationBatches:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/FailedRemediationBatch'
     FailedRemediationExceptionBatch:
       type: object
@@ -7366,6 +7488,8 @@ components:
     FailedRemediationExceptionBatches:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/FailedRemediationExceptionBatch'
     FieldName:
       type: string
@@ -7379,6 +7503,8 @@ components:
     FieldInfoList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/FieldInfo'
     ResourceCountFilters:
       type: object
@@ -7404,10 +7530,14 @@ components:
     GroupedResourceCountList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/GroupedResourceCount'
     ResourceTypes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StringWithCharLimit256'
       minItems: 0
       maxItems: 20
@@ -7418,6 +7548,8 @@ components:
     ResourceCounts:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourceCount'
     StatusDetailFilters:
       type: object
@@ -7432,6 +7564,8 @@ components:
     OrganizationConfigRuleDetailedStatus:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MemberAccountStatus'
     OrganizationResourceDetailedStatusFilters:
       type: object
@@ -7446,6 +7580,8 @@ components:
     OrganizationConformancePackDetailedStatuses:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/OrganizationConformancePackDetailedStatus'
     LaterTime:
       type: string
@@ -7484,14 +7620,20 @@ components:
     ResourceIdList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourceId'
     ResourceIdentifierList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourceIdentifier'
     TagList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
       minItems: 1
       maxItems: 50
@@ -7674,6 +7816,8 @@ components:
     OrganizationConfigRuleTriggerTypes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/OrganizationConfigRuleTriggerType'
     OrganizationConformancePack:
       type: object
@@ -7788,6 +7932,8 @@ components:
     ResourceTypesScope:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StringWithCharLimit256'
       minItems: 0
       maxItems: 100
@@ -7821,6 +7967,8 @@ components:
     TagsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
       minItems: 0
       maxItems: 50
@@ -7865,10 +8013,14 @@ components:
     ResourceTypeList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourceType'
     ReevaluateConfigRuleNames:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ConfigRuleName'
       minItems: 1
       maxItems: 25
@@ -8002,6 +8154,8 @@ components:
     RemediationExecutionSteps:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RemediationExecutionStep'
     RemediationExecutionStatus:
       type: object
@@ -8110,10 +8264,14 @@ components:
     Results:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     SourceDetails:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SourceDetail'
       minItems: 0
       maxItems: 25
@@ -8133,6 +8291,8 @@ components:
     StaticParameterValues:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StringWithCharLimit256'
       minItems: 0
       maxItems: 25
@@ -8161,6 +8321,8 @@ components:
     TagKeyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKey'
       minItems: 1
       maxItems: 50

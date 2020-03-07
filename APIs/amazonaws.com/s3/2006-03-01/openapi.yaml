@@ -5041,6 +5041,8 @@ components:
     CompletedPartList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CompletedPart'
       xml:
         wrapped: false
@@ -5121,6 +5123,8 @@ components:
     ObjectIdentifierList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ObjectIdentifier'
       xml:
         wrapped: false
@@ -5811,6 +5815,8 @@ components:
     Grants:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Grant'
     Owner:
       type: object
@@ -5847,12 +5853,16 @@ components:
     CORSRules:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CORSRule'
       xml:
         wrapped: false
     ServerSideEncryptionRules:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ServerSideEncryptionRule'
       xml:
         wrapped: false
@@ -5886,6 +5896,8 @@ components:
     InventoryOptionalFields:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InventoryOptionalField'
     InventorySchedule:
       type: object
@@ -5899,12 +5911,16 @@ components:
     Rules:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Rule'
       xml:
         wrapped: false
     LifecycleRules:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LifecycleRule'
       xml:
         wrapped: false
@@ -5991,18 +6007,24 @@ components:
     TopicConfigurationList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TopicConfiguration'
       xml:
         wrapped: false
     QueueConfigurationList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/QueueConfiguration'
       xml:
         wrapped: false
     LambdaFunctionConfigurationList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LambdaFunctionConfiguration'
       xml:
         wrapped: false
@@ -6011,6 +6033,8 @@ components:
     ReplicationRules:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ReplicationRule'
       xml:
         wrapped: false
@@ -6022,6 +6046,8 @@ components:
     TagSet:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
     MFADelete:
       type: string
@@ -6066,6 +6092,8 @@ components:
     RoutingRules:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RoutingRule'
     PutObjectOutput:
       type: object
@@ -6345,6 +6373,8 @@ components:
     AllowedHeaders:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AllowedHeader'
       xml:
         wrapped: false
@@ -6353,6 +6383,8 @@ components:
     AllowedMethods:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AllowedMethod'
       xml:
         wrapped: false
@@ -6361,6 +6393,8 @@ components:
     AllowedOrigins:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AllowedOrigin'
       xml:
         wrapped: false
@@ -6397,6 +6431,8 @@ components:
     AnalyticsConfigurationList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AnalyticsConfiguration'
       xml:
         wrapped: false
@@ -6491,6 +6527,8 @@ components:
     Buckets:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Bucket'
     BypassGovernanceRetention:
       type: boolean
@@ -6512,6 +6550,8 @@ components:
     ExposeHeaders:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ExposeHeader'
       xml:
         wrapped: false
@@ -6591,6 +6631,8 @@ components:
     EventList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Event'
       xml:
         wrapped: false
@@ -6608,6 +6650,8 @@ components:
     CommonPrefixList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CommonPrefix'
       xml:
         wrapped: false
@@ -6948,6 +6992,8 @@ components:
     DeleteMarkers:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DeleteMarkerEntry'
       xml:
         wrapped: false
@@ -6964,12 +7010,16 @@ components:
     DeletedObjects:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DeletedObject'
       xml:
         wrapped: false
     Errors:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Error'
       xml:
         wrapped: false
@@ -7168,6 +7218,8 @@ components:
       type: array
       description: A list of containers for the key-value pair that defines the criteria for the filter rule.
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/FilterRule'
       xml:
         wrapped: false
@@ -7539,6 +7591,8 @@ components:
     InventoryConfigurationList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InventoryConfiguration'
       xml:
         wrapped: false
@@ -7687,12 +7741,16 @@ components:
     TransitionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Transition'
       xml:
         wrapped: false
     NoncurrentVersionTransitionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/NoncurrentVersionTransition'
       xml:
         wrapped: false
@@ -7761,6 +7819,8 @@ components:
     MetricsConfigurationList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MetricsConfiguration'
       xml:
         wrapped: false
@@ -7779,6 +7839,8 @@ components:
     MultipartUploadList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MultipartUpload'
       xml:
         wrapped: false
@@ -7793,6 +7855,8 @@ components:
     ObjectVersionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ObjectVersion'
       xml:
         wrapped: false
@@ -7809,6 +7873,8 @@ components:
     ObjectList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Object'
       xml:
         wrapped: false
@@ -7831,6 +7897,8 @@ components:
     Parts:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Part'
       xml:
         wrapped: false
@@ -7845,6 +7913,8 @@ components:
     TargetGrants:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TargetGrant'
     TargetPrefix:
       type: string
@@ -8616,6 +8686,8 @@ components:
     UserMetadata:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MetadataEntry'
     ScanRange:
       type: object

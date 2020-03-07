@@ -2340,6 +2340,8 @@ components:
     StringList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     AwsVpcConfiguration:
       type: object
@@ -2420,6 +2422,8 @@ components:
     TagList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
     RuleName:
       type: string
@@ -2519,6 +2523,8 @@ components:
     EventBusList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EventBus'
     EventId:
       type: string
@@ -2527,6 +2533,8 @@ components:
     EventResourceList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EventResource'
     EventSource:
       type: object
@@ -2553,6 +2561,8 @@ components:
     EventSourceList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EventSource'
     EventSourceNamePrefix:
       type: string
@@ -2611,6 +2621,8 @@ components:
     PartnerEventSourceAccountList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PartnerEventSourceAccount'
     PartnerEventSourceNamePrefix:
       type: string
@@ -2620,6 +2632,8 @@ components:
     PartnerEventSourceList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PartnerEventSource'
     TargetArn:
       type: string
@@ -2628,14 +2642,20 @@ components:
     RuleNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RuleName'
     RuleResponseList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Rule'
     TargetList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Target'
       minItems: 1
       maxItems: 100
@@ -2680,6 +2700,8 @@ components:
     PutEventsRequestEntryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PutEventsRequestEntry'
       minItems: 1
       maxItems: 10
@@ -2708,6 +2730,8 @@ components:
     PutEventsResultEntryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PutEventsResultEntry'
     PutEventsResultEntry:
       type: object
@@ -2725,6 +2749,8 @@ components:
     PutPartnerEventsRequestEntryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PutPartnerEventsRequestEntry'
       minItems: 1
       maxItems: 20
@@ -2750,6 +2776,8 @@ components:
     PutPartnerEventsResultEntryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PutPartnerEventsResultEntry'
     PutPartnerEventsResultEntry:
       type: object
@@ -2772,6 +2800,8 @@ components:
     PutTargetsResultEntryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PutTargetsResultEntry'
     TargetId:
       type: string
@@ -2794,12 +2824,16 @@ components:
     TargetIdList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TargetId'
       minItems: 1
       maxItems: 100
     RemoveTargetsResultEntryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RemoveTargetsResultEntry'
     RemoveTargetsResultEntry:
       type: object
@@ -2848,6 +2882,8 @@ components:
     RunCommandTargets:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RunCommandTarget'
       minItems: 1
       maxItems: 5
@@ -2868,6 +2904,8 @@ components:
     RunCommandTargetValues:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RunCommandTargetValue'
       minItems: 1
       maxItems: 50
@@ -2919,6 +2957,8 @@ components:
     TagKeyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKey'
     TargetInput:
       type: string

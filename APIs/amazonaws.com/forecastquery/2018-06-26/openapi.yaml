@@ -305,6 +305,8 @@ components:
     TimeSeries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DataPoint'
     Statistic:
       type: string

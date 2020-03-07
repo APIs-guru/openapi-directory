@@ -1380,6 +1380,8 @@ components:
     Words:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Word'
       minItems: 1
     Uri:
@@ -1398,6 +1400,8 @@ components:
     Phrases:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Phrase'
     VocabularyState:
       type: string
@@ -1494,14 +1498,20 @@ components:
     TranscriptionJobSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TranscriptionJobSummary'
     Vocabularies:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/VocabularyInfo'
     VocabularyFilters:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/VocabularyFilterInfo'
     MaxAlternatives:
       type: integer

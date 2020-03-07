@@ -1021,6 +1021,8 @@ components:
     affectedAccountsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/accountId'
     OrganizationAffectedEntitiesErrorItem:
       type: object
@@ -1041,10 +1043,14 @@ components:
     DescribeAffectedEntitiesForOrganizationFailedSet:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/OrganizationAffectedEntitiesErrorItem'
     OrganizationEntityFiltersList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EventAccountFilter'
       minItems: 1
       maxItems: 10
@@ -1056,6 +1062,8 @@ components:
     EntityList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AffectedEntity'
     EntityFilter:
       type: object
@@ -1084,12 +1092,16 @@ components:
     EventArnsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/eventArn'
       minItems: 1
       maxItems: 50
     EntityAggregateList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EntityAggregate'
     EventFilter:
       type: object
@@ -1141,6 +1153,8 @@ components:
     EventAggregateList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EventAggregate'
     EventDetailsErrorItem:
       type: object
@@ -1158,6 +1172,8 @@ components:
     DescribeEventDetailsFailedSet:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EventDetailsErrorItem'
     OrganizationEventDetailsErrorItem:
       type: object
@@ -1178,16 +1194,22 @@ components:
     DescribeEventDetailsForOrganizationFailedSet:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/OrganizationEventDetailsErrorItem'
     OrganizationEventDetailFiltersList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EventAccountFilter'
       minItems: 1
       maxItems: 10
     DescribeEventDetailsForOrganizationSuccessfulSet:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/OrganizationEventDetails'
     OrganizationEventDetails:
       type: object
@@ -1206,12 +1228,16 @@ components:
     eventArnList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/eventArn'
       minItems: 1
       maxItems: 10
     DescribeEventDetailsSuccessfulSet:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EventDetails'
     EventDetails:
       type: object
@@ -1242,6 +1268,8 @@ components:
     EventTypeList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EventType'
     OrganizationEventFilter:
       type: object
@@ -1280,10 +1308,14 @@ components:
     OrganizationEventList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/OrganizationEvent'
     EventList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Event'
     healthServiceAccessStatusForOrganization:
       type: string
@@ -1302,29 +1334,39 @@ components:
     entityArnList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/entityArn'
       minItems: 1
       maxItems: 100
     entityValueList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/entityValue'
       minItems: 1
       maxItems: 100
     dateTimeRangeList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DateTimeRange'
       minItems: 1
       maxItems: 10
     tagFilter:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/tagSet'
       maxItems: 50
     entityStatusCodeList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/entityStatusCode'
       minItems: 1
       maxItems: 3
@@ -1440,34 +1482,46 @@ components:
     eventTypeList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/eventType'
       minItems: 1
       maxItems: 10
     serviceList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/service'
       minItems: 1
       maxItems: 10
     regionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/region'
       minItems: 1
       maxItems: 10
     availabilityZones:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/availabilityZone'
     eventTypeCategoryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/eventTypeCategory'
       minItems: 1
       maxItems: 10
     eventStatusCodeList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/eventStatusCode'
       minItems: 1
       maxItems: 6
@@ -1487,12 +1541,16 @@ components:
     EventTypeCategoryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/eventTypeCategory'
       minItems: 1
       maxItems: 10
     EventTypeCodeList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/eventTypeCode'
       minItems: 1
       maxItems: 10
@@ -1530,6 +1588,8 @@ components:
     awsAccountIdsList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/accountId'
       minItems: 1
       maxItems: 50

@@ -829,6 +829,8 @@ components:
     TagKeyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKey'
     ComplianceStatus:
       type: boolean
@@ -880,28 +882,38 @@ components:
     TargetIdFilterList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TargetId'
       minItems: 1
       maxItems: 100
     RegionFilterList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Region'
       minItems: 1
       maxItems: 100
     ResourceTypeFilterList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AmazonResourceType'
     TagKeyFilterList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKey'
       minItems: 1
       maxItems: 50
     GroupBy:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/GroupByAttribute'
     MaxResultsGetComplianceSummary:
       type: integer
@@ -915,10 +927,14 @@ components:
     SummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Summary'
     TagFilterList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagFilter'
       minItems: 0
       maxItems: 50
@@ -931,6 +947,8 @@ components:
     ResourceTagMappingList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourceTagMapping'
     TagKey:
       type: string
@@ -940,6 +958,8 @@ components:
     TagValuesOutputList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagValue'
     GroupByAttribute:
       type: string
@@ -964,12 +984,16 @@ components:
     ResourceARNList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourceARN'
       minItems: 1
       maxItems: 20
     TagList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
     ResourceTagMapping:
       type: object
@@ -1043,6 +1067,8 @@ components:
     TagValueList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagValue'
       minItems: 0
       maxItems: 20
@@ -1059,6 +1085,8 @@ components:
     TagKeyListForUntag:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKey'
       minItems: 1
       maxItems: 50

@@ -1741,10 +1741,14 @@ components:
     InviteActionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InviteAction'
     RemoveActionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RemoveAction'
     DeleteMemberOutput:
       type: object
@@ -2222,6 +2226,8 @@ components:
     InvitationList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Invitation'
     PrincipalString:
       type: string
@@ -2268,6 +2274,8 @@ components:
     MemberSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MemberSummary'
     NetworkStatus:
       type: string
@@ -2288,6 +2296,8 @@ components:
     NetworkSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/NetworkSummary'
     NodeStatus:
       type: string
@@ -2309,6 +2319,8 @@ components:
     NodeSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/NodeSummary'
     ListProposalVotesInput:
       type: object
@@ -2317,6 +2329,8 @@ components:
     ProposalVoteList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/VoteSummary'
     ListProposalsInput:
       type: object
@@ -2325,6 +2339,8 @@ components:
     ProposalSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ProposalSummary'
     MemberFrameworkAttributes:
       type: object

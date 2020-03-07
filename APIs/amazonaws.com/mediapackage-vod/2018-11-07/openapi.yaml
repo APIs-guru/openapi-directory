@@ -1087,12 +1087,16 @@ components:
     __listOfHlsManifest:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/HlsManifest'
     __integer:
       type: integer
     __listOfDashManifest:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DashManifest'
     DashEncryption:
       required:
@@ -1105,6 +1109,8 @@ components:
     __listOf__PeriodTriggersElement:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/__PeriodTriggersElement'
     SegmentTemplateFormat:
       enum:
@@ -1141,6 +1147,8 @@ components:
     __listOfMssManifest:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MssManifest'
     CreatePackagingGroupResponse:
       type: object
@@ -1345,6 +1353,8 @@ components:
     __listOfEgressEndpoint:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EgressEndpoint'
     DashPackage:
       required:
@@ -1564,6 +1574,8 @@ components:
     __listOfAssetShallow:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AssetShallow'
     ListPackagingConfigurationsRequest:
       type: object
@@ -1572,6 +1584,8 @@ components:
     __listOfPackagingConfiguration:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PackagingConfiguration'
     ListPackagingGroupsRequest:
       type: object
@@ -1580,6 +1594,8 @@ components:
     __listOfPackagingGroup:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PackagingGroup'
     MssManifest:
       type: object
@@ -1627,6 +1643,8 @@ components:
     __listOf__string:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/__string'
     StreamOrder:
       enum:

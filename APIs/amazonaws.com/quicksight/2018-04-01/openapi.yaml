@@ -442,6 +442,8 @@ paths:
                   description: A structure that contains the permissions of the dashboard. You can use this structure for granting permissions with principal and action information.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/ResourcePermission'
                   minItems: 1
                   maxItems: 64
@@ -456,6 +458,8 @@ paths:
                   description: Contains a map of the key-value pairs for the resource tag or tags assigned to the dashboard.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Tag'
                   minItems: 1
                   maxItems: 200
@@ -885,6 +889,8 @@ paths:
                   description: 'Groupings of columns that work together in certain QuickSight features. Currently, only geospatial hierarchy is supported.'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/ColumnGroup'
                   minItems: 1
                   maxItems: 8
@@ -892,6 +898,8 @@ paths:
                   description: A list of resource permissions on the dataset.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/ResourcePermission'
                   minItems: 1
                   maxItems: 64
@@ -909,6 +917,8 @@ paths:
                   description: Contains a map of the key-value pairs for the resource tag or tags assigned to the dataset.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Tag'
                   minItems: 1
                   maxItems: 200
@@ -1181,6 +1191,8 @@ paths:
                   description: A list of resource permissions on the data source.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/ResourcePermission'
                   minItems: 1
                   maxItems: 64
@@ -1202,6 +1214,8 @@ paths:
                   description: Contains a map of the key-value pairs for the resource tag or tags assigned to the data source.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Tag'
                   minItems: 1
                   maxItems: 200
@@ -1878,6 +1892,8 @@ paths:
                   description: 'A list of resource permissions to be set on the template. '
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/ResourcePermission'
                   minItems: 1
                   maxItems: 64
@@ -1895,6 +1911,8 @@ paths:
                   description: Contains a map of the key-value pairs for the resource tag or tags assigned to the resource.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Tag'
                   minItems: 1
                   maxItems: 200
@@ -2731,6 +2749,8 @@ paths:
                   description: 'Groupings of columns that work together in certain QuickSight features. Currently, only geospatial hierarchy is supported.'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/ColumnGroup'
                   minItems: 1
                   maxItems: 8
@@ -3835,6 +3855,8 @@ paths:
                   description: The permissions that you want to grant on this resource.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/ResourcePermission'
                   minItems: 1
                   maxItems: 100
@@ -3842,6 +3864,8 @@ paths:
                   description: The permissions that you want to revoke from this resource.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/ResourcePermission'
                   minItems: 1
                   maxItems: 100
@@ -3983,6 +4007,8 @@ paths:
                   description: The resource permissions that you want to grant to the dataset.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/ResourcePermission'
                   minItems: 1
                   maxItems: 64
@@ -3990,6 +4016,8 @@ paths:
                   description: The resource permissions that you want to revoke from the dataset.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/ResourcePermission'
                   minItems: 1
                   maxItems: 64
@@ -4131,6 +4159,8 @@ paths:
                   description: A list of resource permissions that you want to grant on the data source.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/ResourcePermission'
                   minItems: 1
                   maxItems: 64
@@ -4138,6 +4168,8 @@ paths:
                   description: A list of resource permissions that you want to revoke on the data source.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/ResourcePermission'
                   minItems: 1
                   maxItems: 64
@@ -4472,6 +4504,8 @@ paths:
                   description: 'A list of resource permissions to be granted on the template. '
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/ResourcePermission'
                   minItems: 1
                   maxItems: 100
@@ -4479,6 +4513,8 @@ paths:
                   description: 'A list of resource permissions to be revoked from the template. '
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/ResourcePermission'
                   minItems: 1
                   maxItems: 100
@@ -5334,6 +5370,8 @@ paths:
                   description: Contains a map of the key-value pairs for the resource tag or tags assigned to the resource.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Tag'
                   minItems: 1
                   maxItems: 200
@@ -6011,6 +6049,8 @@ paths:
                   description: 'The filters to apply to the search. Currently, you can search only by user name. For example, <code>"Filters": [ { "Name": "QUICKSIGHT_USER", "Operator": "StringEquals", "Value": "arn:aws:quicksight:us-east-1:1:user/default/UserName1" } ]</code> '
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/DashboardSearchFilter'
                   maxItems: 1
                 NextToken:
@@ -6084,6 +6124,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/TagKey'
             minItems: 1
             maxItems: 200
@@ -6273,21 +6315,29 @@ components:
     StringParameterList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/StringParameter'
       maxItems: 100
     IntegerParameterList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/IntegerParameter'
       maxItems: 100
     DecimalParameterList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DecimalParameter'
       maxItems: 100
     DateTimeParameterList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DateTimeParameter'
       maxItems: 100
     ResourcePermission:
@@ -6766,6 +6816,8 @@ components:
     IdentityNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/IdentityName'
     ConcurrentUpdatingException: {}
     CreateIngestionResponse:
@@ -7677,6 +7729,8 @@ components:
     ActionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
       minItems: 1
       maxItems: 16
@@ -7697,6 +7751,8 @@ components:
     ActiveIAMPolicyAssignmentList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ActiveIAMPolicyAssignment'
     DashboardBehavior:
       type: string
@@ -7775,6 +7831,8 @@ components:
     CalculatedColumnList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CalculatedColumn'
       minItems: 1
       maxItems: 128
@@ -7851,11 +7909,15 @@ components:
     ColumnGroupColumnSchemaList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ColumnGroupColumnSchema'
       maxItems: 500
     ColumnGroupList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ColumnGroup'
       minItems: 1
       maxItems: 8
@@ -7876,11 +7938,15 @@ components:
     ColumnGroupSchemaList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ColumnGroupSchema'
       maxItems: 500
     ColumnList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ColumnName'
       minItems: 1
       maxItems: 16
@@ -7900,6 +7966,8 @@ components:
     ColumnSchemaList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ColumnSchema'
       maxItems: 500
     GeoSpatialDataRole:
@@ -7922,6 +7990,8 @@ components:
     ColumnTagList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ColumnTag'
       minItems: 1
       maxItems: 16
@@ -7963,6 +8033,8 @@ components:
     ResourcePermissionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourcePermission'
       minItems: 1
       maxItems: 64
@@ -7976,6 +8048,8 @@ components:
     TagList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
       minItems: 1
       maxItems: 200
@@ -8424,6 +8498,8 @@ components:
     InputColumnList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InputColumn'
       minItems: 1
       maxItems: 2048
@@ -8527,6 +8603,8 @@ components:
     DashboardErrorList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DashboardError'
       minItems: 1
     DashboardFilterAttribute:
@@ -8540,11 +8618,15 @@ components:
     DashboardSearchFilterList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DashboardSearchFilter'
       maxItems: 1
     DataSetReferenceList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DataSetReference'
       minItems: 1
     DashboardSummary:
@@ -8575,6 +8657,8 @@ components:
     DashboardSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DashboardSummary'
       maxItems: 100
     DashboardUIState:
@@ -8607,11 +8691,15 @@ components:
     DashboardVersionSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DashboardVersionSummary'
       maxItems: 100
     OutputColumnList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/OutputColumn'
     Long:
       type: integer
@@ -8678,6 +8766,8 @@ components:
     DataSetConfigurationList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DataSetConfiguration'
       maxItems: 30
     DataSetReference:
@@ -8721,6 +8811,8 @@ components:
     DataSetSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DataSetSummary'
     DataSourceErrorInfo:
       type: object
@@ -8781,10 +8873,14 @@ components:
     DataSourceList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DataSource'
     TimestampList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Timestamp'
     DateTimeParameter:
       type: object
@@ -8802,6 +8898,8 @@ components:
     DoubleList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Double'
     DecimalParameter:
       type: object
@@ -9124,10 +9222,14 @@ components:
     GroupList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Group'
     GroupMemberList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/GroupMember'
     IAMPolicyAssignmentSummary:
       type: object
@@ -9142,6 +9244,8 @@ components:
     IAMPolicyAssignmentSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/IAMPolicyAssignmentSummary'
     IdentityName:
       type: string
@@ -9194,6 +9298,8 @@ components:
     Ingestions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Ingestion'
     InputColumnDataType:
       type: string
@@ -9225,6 +9331,8 @@ components:
     LongList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Long'
     IntegerParameter:
       type: object
@@ -9334,6 +9442,8 @@ components:
     TemplateAliasList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TemplateAlias'
       maxItems: 100
     ListTemplateVersionsRequest:
@@ -9343,6 +9453,8 @@ components:
     TemplateVersionSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TemplateVersionSummary'
       maxItems: 100
     ListTemplatesRequest:
@@ -9352,6 +9464,8 @@ components:
     TemplateSummaryList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TemplateSummary'
       maxItems: 100
     ListUserGroupsRequest:
@@ -9365,6 +9479,8 @@ components:
     UserList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/User'
     LogicalTableAlias:
       type: string
@@ -9373,6 +9489,8 @@ components:
     TransformOperationList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TransformOperation'
       minItems: 1
       maxItems: 2048
@@ -9472,6 +9590,8 @@ components:
     ProjectedColumnList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
       minItems: 1
       maxItems: 2000
@@ -9587,6 +9707,8 @@ components:
     StringList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     StringParameter:
       type: object
@@ -9621,6 +9743,8 @@ components:
     TagKeyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKey'
       minItems: 1
       maxItems: 200
@@ -9676,6 +9800,8 @@ components:
     TemplateErrorList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TemplateError'
       minItems: 1
     TemplateSummary:
@@ -9753,6 +9879,8 @@ components:
     UpdateResourcePermissionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourcePermission'
       minItems: 1
       maxItems: 100

@@ -410,6 +410,8 @@ paths:
                   description: 'A list of references to connectors in this version, with their corresponding configuration settings.'
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Connector'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -572,6 +574,8 @@ paths:
                   description: A list of cores in the core definition version.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Core'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -830,6 +834,8 @@ paths:
                   description: A list of devices in the definition version.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Device'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -1001,6 +1007,8 @@ paths:
                   description: A list of Lambda functions in this function definition version.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Function'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -1432,6 +1440,8 @@ paths:
                   description: A list of loggers.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Logger'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -1594,6 +1604,8 @@ paths:
                   description: A list of resources.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Resource'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -1706,6 +1718,8 @@ paths:
                   description: The ARNs of the targets (IoT things or IoT thing groups) that this update will be applied to.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/__string'
                 UpdateTargetsArchitecture:
                   description: The architecture of the cores which are the targets of an update.
@@ -1849,6 +1863,8 @@ paths:
                   description: A list of subscriptions.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Subscription'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -2707,6 +2723,8 @@ paths:
                   description: A list of connectivity info.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/ConnectivityInfo'
   '/greengrass/definition/connectors/{ConnectorDefinitionId}/versions/{ConnectorDefinitionVersionId}':
     get:
@@ -3497,6 +3515,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/__string'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -3599,6 +3619,8 @@ components:
     __listOfConnector:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Connector'
     __string:
       type: string
@@ -3660,6 +3682,8 @@ components:
     __listOfCore:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Core'
     CreateCoreDefinitionVersionResponse:
       type: object
@@ -3732,6 +3756,8 @@ components:
     __listOfDevice:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Device'
     CreateDeviceDefinitionVersionResponse:
       type: object
@@ -3801,6 +3827,8 @@ components:
     __listOfFunction:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Function'
     CreateFunctionDefinitionVersionResponse:
       type: object
@@ -3912,6 +3940,8 @@ components:
     __listOfLogger:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Logger'
     CreateLoggerDefinitionVersionResponse:
       type: object
@@ -3979,6 +4009,8 @@ components:
     __listOfResource:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Resource'
     CreateResourceDefinitionVersionResponse:
       type: object
@@ -4051,6 +4083,8 @@ components:
     __listOfSubscription:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Subscription'
     CreateSubscriptionDefinitionVersionResponse:
       type: object
@@ -4911,6 +4945,8 @@ components:
       type: array
       description: A list of error details.
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ErrorDetail'
     BulkDeploymentResult:
       type: object
@@ -4943,6 +4979,8 @@ components:
     BulkDeploymentResults:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/BulkDeploymentResult'
     BulkDeploymentStatus:
       type: string
@@ -4957,6 +4995,8 @@ components:
     BulkDeployments:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/BulkDeployment'
     __mapOf__string:
       type: object
@@ -5246,6 +5286,8 @@ components:
       type: array
       description: The ARNs of the targets (IoT things or IoT thing groups) that this update will be applied to.
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/__string'
     UpdateTargetsArchitecture:
       type: string
@@ -5394,6 +5436,8 @@ components:
     Deployments:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Deployment'
     DisassociateRoleFromGroupRequest:
       type: object
@@ -5470,6 +5514,8 @@ components:
     __listOfResourceAccessPolicy:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourceAccessPolicy'
     FunctionIsolationMode:
       type: string
@@ -5502,6 +5548,8 @@ components:
     __listOfConnectivityInfo:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ConnectivityInfo'
     GetConnectorDefinitionRequest:
       type: object
@@ -5643,6 +5691,8 @@ components:
     __listOfVersionInformation:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/VersionInformation'
     ListConnectorDefinitionsRequest:
       type: object
@@ -5651,6 +5701,8 @@ components:
     __listOfDefinitionInformation:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DefinitionInformation'
     ListCoreDefinitionVersionsRequest:
       type: object
@@ -5687,6 +5739,8 @@ components:
     __listOfGroupCertificateAuthorityProperties:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/GroupCertificateAuthorityProperties'
     ListGroupVersionsRequest:
       type: object
@@ -5699,6 +5753,8 @@ components:
     __listOfGroupInformation:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/GroupInformation'
     ListLoggerDefinitionVersionsRequest:
       type: object
@@ -5864,6 +5920,8 @@ components:
     __listOf__string:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/__string'
     StartBulkDeploymentRequest:
       type: object

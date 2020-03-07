@@ -206,6 +206,8 @@ paths:
                   description: Metadata that can be used to manage the detector model.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Tag'
                 evaluationMethod:
                   description: 'Information about the order in which events are evaluated and how actions are executed. '
@@ -343,6 +345,8 @@ paths:
                   description: Metadata that can be used to manage the input.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Tag'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -1129,6 +1133,8 @@ paths:
                   description: The new or modified tags for the resource.
                   type: array
                   items:
+                    xml:
+                      name: member
                     $ref: '#/components/schemas/Tag'
   '/tags#resourceArn&tagKeys':
     delete:
@@ -1187,6 +1193,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: member
               $ref: '#/components/schemas/TagKey'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -1257,6 +1265,8 @@ components:
     States:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/State'
       minItems: 1
     StateName:
@@ -1292,6 +1302,8 @@ components:
     Attributes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Attribute'
       minItems: 1
       maxItems: 200
@@ -1369,6 +1381,8 @@ components:
     DetectorDebugOptions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DetectorDebugOption'
       minItems: 1
     TagResourceResponse:
@@ -1534,6 +1548,8 @@ components:
     Actions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Action'
     AttributeJsonPath:
       type: string
@@ -1580,6 +1596,8 @@ components:
     Tags:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
     EvaluationMethod:
       type: string
@@ -1827,6 +1845,8 @@ components:
     DetectorModelSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DetectorModelSummary'
     DetectorModelVersionSummary:
       type: object
@@ -1859,6 +1879,8 @@ components:
     DetectorModelVersionSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DetectorModelVersionSummary'
     EventName:
       type: string
@@ -1881,6 +1903,8 @@ components:
     Events:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Event'
     FirehoseSeparator:
       type: string
@@ -1919,6 +1943,8 @@ components:
     InputSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/InputSummary'
     MQTTTopic:
       type: string
@@ -1963,6 +1989,8 @@ components:
     TransitionEvents:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TransitionEvent'
     OnInputLifecycle:
       type: object
@@ -2023,6 +2051,8 @@ components:
     TagKeys:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKey'
     TagResourceRequest:
       type: object

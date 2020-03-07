@@ -4854,10 +4854,14 @@ components:
     AgentVersions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/AgentVersion'
     DataSources:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/DataSource'
     AppType:
       type: string
@@ -4894,6 +4898,8 @@ components:
     Strings:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     Boolean:
       type: boolean
@@ -4920,6 +4926,8 @@ components:
     EnvironmentVariables:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EnvironmentVariable'
     App:
       type: object
@@ -4977,6 +4985,8 @@ components:
     Apps:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/App'
     Architecture:
       type: string
@@ -5060,6 +5070,8 @@ components:
     BlockDeviceMappings:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/BlockDeviceMapping'
     ChefConfiguration:
       type: object
@@ -5084,6 +5096,8 @@ components:
       type: array
       description: Describes the Amazon CloudWatch logs configuration for a layer.
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/CloudWatchLogsLogStream'
     CloudWatchLogsConfiguration:
       type: object
@@ -5279,6 +5293,8 @@ components:
     Commands:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Command'
     DeploymentCommand:
       type: object
@@ -5314,6 +5330,8 @@ components:
     VolumeConfigurations:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/VolumeConfiguration'
     Recipes:
       type: object
@@ -5422,30 +5440,44 @@ components:
     Deployments:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Deployment'
     EcsClusters:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EcsCluster'
     ElasticIps:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ElasticIp'
     ElasticLoadBalancers:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ElasticLoadBalancer'
     Instances:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Instance'
     Layers:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Layer'
     LoadBasedAutoScalingConfigurations:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LoadBasedAutoScalingConfiguration'
     SelfUserProfile:
       type: object
@@ -5466,22 +5498,32 @@ components:
     OperatingSystems:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/OperatingSystem'
     Permissions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Permission'
     RaidArrays:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RaidArray'
     RdsDbInstances:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RdsDbInstance'
     ServiceErrors:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ServiceError'
     Parameters:
       type: object
@@ -5512,18 +5554,26 @@ components:
     Stacks:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Stack'
     TimeBasedAutoScalingConfigurations:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TimeBasedAutoScalingConfiguration'
     UserProfiles:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/UserProfile'
     Volumes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Volume'
     VolumeType:
       type: string
@@ -5994,6 +6044,8 @@ components:
     OperatingSystemConfigurationManagers:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/OperatingSystemConfigurationManager'
     OperatingSystem:
       type: object
@@ -6256,6 +6308,8 @@ components:
     TagKeys:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKey'
     TagValue:
       type: string

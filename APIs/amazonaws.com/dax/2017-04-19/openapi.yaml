@@ -2061,6 +2061,8 @@ components:
     AvailabilityZoneList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     ChangeType:
       type: string
@@ -2082,10 +2084,14 @@ components:
     NodeIdentifierList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     NodeList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Node'
     NotificationConfiguration:
       type: object
@@ -2100,6 +2106,8 @@ components:
     SecurityGroupMembershipList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SecurityGroupMembership'
     ParameterGroupStatus:
       type: object
@@ -2179,20 +2187,28 @@ components:
     ClusterList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Cluster'
     ClusterNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     Integer:
       type: integer
     SecurityGroupIdentifierList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     TagList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
     SSESpecification:
       type: object
@@ -2216,6 +2232,8 @@ components:
     SubnetIdentifierList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     SubnetGroup:
       type: object
@@ -2236,6 +2254,8 @@ components:
     ParameterList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Parameter'
     SourceType:
       type: string
@@ -2249,22 +2269,32 @@ components:
     EventList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Event'
     ParameterGroupNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     ParameterGroupList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ParameterGroup'
     SubnetGroupNameList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     SubnetGroupList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SubnetGroup'
     Event:
       type: object
@@ -2291,6 +2321,8 @@ components:
     KeyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/String'
     Node:
       type: object
@@ -2327,6 +2359,8 @@ components:
     NodeTypeSpecificValueList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/NodeTypeSpecificValue'
     ParameterType:
       type: string
@@ -2380,6 +2414,8 @@ components:
     ParameterNameValueList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ParameterNameValue'
     SSEStatus:
       type: string
@@ -2413,6 +2449,8 @@ components:
     SubnetList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Subnet'
     Tag:
       type: object

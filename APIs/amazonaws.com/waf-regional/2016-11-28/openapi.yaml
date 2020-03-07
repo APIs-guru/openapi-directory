@@ -6948,6 +6948,8 @@ components:
     ExcludedRules:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ExcludedRule'
     ActivatedRule:
       type: object
@@ -6977,6 +6979,8 @@ components:
     ActivatedRules:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ActivatedRule'
     ResourceArn:
       type: string
@@ -6989,6 +6993,8 @@ components:
     ByteMatchTuples:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ByteMatchTuple'
     ByteMatchSet:
       type: object
@@ -7022,6 +7028,8 @@ components:
     ByteMatchSetSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ByteMatchSetSummary'
     ChangeAction:
       type: string
@@ -7065,6 +7073,8 @@ components:
     ByteMatchSetUpdates:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ByteMatchSetUpdate'
       minItems: 1
     ByteMatchTargetString:
@@ -7163,6 +7173,8 @@ components:
     TagList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
       minItems: 1
     RateBasedRule:
@@ -7622,6 +7634,8 @@ components:
     GeoMatchConstraints:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/GeoMatchConstraint'
     GeoMatchSetSummary:
       type: object
@@ -7639,6 +7653,8 @@ components:
     GeoMatchSetSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/GeoMatchSetSummary'
     GeoMatchSetUpdate:
       type: object
@@ -7656,6 +7672,8 @@ components:
     GeoMatchSetUpdates:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/GeoMatchSetUpdate'
       minItems: 1
     LoggingConfiguration:
@@ -7683,6 +7701,8 @@ components:
     ManagedKeys:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ManagedKey'
     GetSampledRequestsMaxItems:
       type: integer
@@ -7704,6 +7724,8 @@ components:
     SampledHTTPRequests:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SampledHTTPRequest'
     PopulationSize:
       type: integer
@@ -7737,6 +7759,8 @@ components:
     HTTPHeaders:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/HTTPHeader'
     HTTPMethod:
       type: string
@@ -7771,6 +7795,8 @@ components:
     IPSetDescriptors:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/IPSetDescriptor'
     IPSetDescriptorType:
       type: string
@@ -7808,6 +7834,8 @@ components:
     IPSetSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/IPSetSummary'
     IPSetUpdate:
       type: object
@@ -7825,6 +7853,8 @@ components:
     IPSetUpdates:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/IPSetUpdate'
       minItems: 1
     PaginationLimit:
@@ -7834,18 +7864,26 @@ components:
     LoggingConfigurations:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/LoggingConfiguration'
     RuleSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RuleSummary'
     RegexMatchSetSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RegexMatchSetSummary'
     RegexPatternSetSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RegexPatternSetSummary'
     ResourceType:
       type: string
@@ -7855,22 +7893,32 @@ components:
     ResourceArns:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourceArn'
     RuleGroupSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RuleGroupSummary'
     SizeConstraintSetSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SizeConstraintSetSummary'
     SqlInjectionMatchSetSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SqlInjectionMatchSetSummary'
     SubscribedRuleGroupSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SubscribedRuleGroupSummary'
     TagInfoForResource:
       type: object
@@ -7882,20 +7930,28 @@ components:
     WebACLSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/WebACLSummary'
     XssMatchSetSummaries:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/XssMatchSetSummary'
     LogDestinationConfigs:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ResourceArn'
       minItems: 1
       maxItems: 1
     RedactedFields:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/FieldToMatch'
     ManagedKey:
       type: string
@@ -7931,10 +7987,14 @@ components:
     Predicates:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Predicate'
     RegexMatchTuples:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RegexMatchTuple'
     RegexMatchSetSummary:
       type: object
@@ -7982,11 +8042,15 @@ components:
     RegexMatchSetUpdates:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RegexMatchSetUpdate'
       minItems: 1
     RegexPatternStrings:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RegexPatternString'
       maxItems: 10
     RegexPatternSetSummary:
@@ -8021,6 +8085,8 @@ components:
     RegexPatternSetUpdates:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RegexPatternSetUpdate'
       minItems: 1
     RuleGroupSummary:
@@ -8052,6 +8118,8 @@ components:
     RuleGroupUpdates:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RuleGroupUpdate'
       minItems: 1
     RuleSummary:
@@ -8083,6 +8151,8 @@ components:
     RuleUpdates:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/RuleUpdate'
     SampleWeight:
       type: integer
@@ -8140,6 +8210,8 @@ components:
     SizeConstraints:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SizeConstraint'
     SizeConstraintSetSummary:
       type: object
@@ -8170,11 +8242,15 @@ components:
     SizeConstraintSetUpdates:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SizeConstraintSetUpdate'
       minItems: 1
     SqlInjectionMatchTuples:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SqlInjectionMatchTuple'
     SqlInjectionMatchSetSummary:
       type: object
@@ -8218,6 +8294,8 @@ components:
     SqlInjectionMatchSetUpdates:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/SqlInjectionMatchSetUpdate'
       minItems: 1
     SubscribedRuleGroupSummary:
@@ -8255,15 +8333,21 @@ components:
     TagKeyList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagKey'
       minItems: 1
     WebACLUpdates:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/WebACLUpdate'
     XssMatchSetUpdates:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/XssMatchSetUpdate'
       minItems: 1
     WafActionType:
@@ -8293,6 +8377,8 @@ components:
     XssMatchTuples:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/XssMatchTuple'
     XssMatchSetSummary:
       type: object

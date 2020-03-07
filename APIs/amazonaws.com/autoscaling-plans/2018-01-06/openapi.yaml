@@ -664,6 +664,8 @@ components:
     TagFilters:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TagFilter'
     ApplicationSource:
       type: object
@@ -678,6 +680,8 @@ components:
     ApplicationSources:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ApplicationSource'
     Cooldown:
       type: integer
@@ -689,6 +693,8 @@ components:
     ScalingInstructions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ScalingInstruction'
     ScalingPlanVersion:
       type: integer
@@ -699,6 +705,8 @@ components:
     MetricDimensions:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/MetricDimension'
     MetricStatistic:
       type: string
@@ -775,6 +783,8 @@ components:
     Datapoints:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Datapoint'
     MaxResults:
       type: integer
@@ -783,14 +793,20 @@ components:
     ScalingPlanResources:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ScalingPlanResource'
     ScalingPlanNames:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ScalingPlanName'
     ScalingPlans:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ScalingPlan'
     DisableDynamicScaling:
       type: boolean
@@ -920,6 +936,8 @@ components:
     TargetTrackingConfigurations:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/TargetTrackingConfiguration'
     ScheduledActionBufferTime:
       type: integer
@@ -1030,6 +1048,8 @@ components:
     ScalingPolicies:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ScalingPolicy'
     ScalingStatusCode:
       type: string
@@ -1123,6 +1143,8 @@ components:
     TagValues:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/XmlStringMaxLen256'
     TagFilter:
       type: object

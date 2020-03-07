@@ -1804,6 +1804,8 @@ components:
     ParameterValueList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ParameterValue'
     timestamp:
       type: string
@@ -1811,6 +1813,8 @@ components:
     tagList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Tag'
       minItems: 0
       maxItems: 10
@@ -1824,16 +1828,22 @@ components:
     idList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/id'
     boolean:
       type: boolean
     PipelineObjectList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PipelineObject'
     PipelineDescriptionList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PipelineDescription'
     longString:
       type: string
@@ -1868,6 +1878,8 @@ components:
     ParameterObjectList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ParameterObject'
     InstanceIdentity:
       type: object
@@ -1884,6 +1896,8 @@ components:
     pipelineList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/PipelineIdName'
     OperatorType:
       type: string
@@ -1896,6 +1910,8 @@ components:
     stringList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/string'
     Operator:
       type: object
@@ -1933,6 +1949,8 @@ components:
     ParameterAttributeList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ParameterAttribute'
     ParameterObject:
       type: object
@@ -1963,6 +1981,8 @@ components:
     fieldList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Field'
     PipelineDescription:
       type: object
@@ -2037,15 +2057,21 @@ components:
     ValidationErrors:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ValidationError'
     ValidationWarnings:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ValidationWarning'
     SelectorList:
       type: array
       description: The list of Selectors that define queries on individual fields.
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Selector'
     Query:
       type: object
@@ -2100,6 +2126,8 @@ components:
     validationMessages:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/validationMessage'
     ValidationError:
       type: object

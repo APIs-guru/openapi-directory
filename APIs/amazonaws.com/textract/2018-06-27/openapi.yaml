@@ -882,6 +882,8 @@ components:
     FeatureTypes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/FeatureType'
     HumanLoopConfig:
       type: object
@@ -909,6 +911,8 @@ components:
     BlockList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Block'
     HumanLoopActivationOutput:
       type: object
@@ -959,10 +963,14 @@ components:
     RelationshipList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Relationship'
     EntityTypes:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/EntityType'
     SelectionStatus:
       type: string
@@ -1044,6 +1052,8 @@ components:
     ContentClassifiers:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/ContentClassifier'
       maxItems: 256
     ImageBlob:
@@ -1088,6 +1098,8 @@ components:
     Polygon:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Point'
     JobId:
       type: string
@@ -1112,6 +1124,8 @@ components:
     Warnings:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/Warning'
     StatusMessage:
       type: string
@@ -1124,6 +1138,8 @@ components:
     HumanLoopActivationReasons:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/HumanLoopActivationReason'
       minItems: 1
     HumanLoopActivationReason:
@@ -1143,6 +1159,8 @@ components:
     IdList:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/NonEmptyString'
     JobTag:
       type: string
@@ -1175,6 +1193,8 @@ components:
     Pages:
       type: array
       items:
+        xml:
+          name: member
         $ref: '#/components/schemas/UInteger'
     Point:
       type: object
