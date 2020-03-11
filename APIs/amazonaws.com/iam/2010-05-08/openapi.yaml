@@ -1674,8 +1674,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/clientIDType'
         - name: ThumbprintList
           in: query
@@ -1685,8 +1683,6 @@ paths:
             type: array
             description: Contains a list of thumbprints of identity provider server certificates.
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/thumbprintType'
         - name: Action
           in: query
@@ -2183,8 +2179,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Tag'
             maxItems: 50
         - name: Action
@@ -2747,8 +2741,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Tag'
             maxItems: 50
         - name: Action
@@ -6577,8 +6569,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/EntityType'
         - name: MaxItems
           in: query
@@ -6852,8 +6842,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/policyDocumentType'
         - name: Action
           in: query
@@ -6955,8 +6943,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/policyDocumentType'
         - name: Action
           in: query
@@ -10977,8 +10963,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/serviceNamespaceType'
             minItems: 1
             maxItems: 200
@@ -14044,8 +14028,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/policyDocumentType'
         - name: PermissionsBoundaryPolicyInputList
           in: query
@@ -14054,8 +14036,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/policyDocumentType'
         - name: ActionNames
           in: query
@@ -14064,8 +14044,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/ActionNameType'
         - name: ResourceArns
           in: query
@@ -14074,8 +14052,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/ResourceNameType'
         - name: ResourcePolicy
           in: query
@@ -14109,8 +14085,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/ContextEntry'
         - name: ResourceHandlingOption
           in: query
@@ -14261,8 +14235,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/policyDocumentType'
         - name: PermissionsBoundaryPolicyInputList
           in: query
@@ -14271,8 +14243,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/policyDocumentType'
         - name: ActionNames
           in: query
@@ -14281,8 +14251,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/ActionNameType'
         - name: ResourceArns
           in: query
@@ -14291,8 +14259,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/ResourceNameType'
         - name: ResourcePolicy
           in: query
@@ -14326,8 +14292,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/ContextEntry'
         - name: ResourceHandlingOption
           in: query
@@ -14492,8 +14456,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Tag'
             maxItems: 50
         - name: Action
@@ -14630,8 +14592,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Tag'
             maxItems: 50
         - name: Action
@@ -14756,8 +14716,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/tagKeyType'
             maxItems: 50
         - name: Action
@@ -14870,8 +14828,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/tagKeyType'
             maxItems: 50
         - name: Action
@@ -15684,8 +15640,6 @@ paths:
             type: array
             description: Contains a list of thumbprints of identity provider server certificates.
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/thumbprintType'
         - name: Action
           in: query
@@ -18612,8 +18566,6 @@ components:
     AccessDetails:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AccessDetail'
     userNameType:
       type: string
@@ -18693,8 +18645,6 @@ components:
     ActionNameListType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ActionNameType'
     arnType:
       type: string
@@ -18763,8 +18713,6 @@ components:
     ArnListType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/arnType'
     AttachGroupPolicyRequest:
       type: object
@@ -18864,8 +18812,6 @@ components:
     ContextKeyValueListType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ContextKeyValueType'
     ContextKeyTypeEnum:
       type: string
@@ -18885,14 +18831,10 @@ components:
     ContextEntryListType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ContextEntry'
     ContextKeyNamesResultListType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ContextKeyNameType'
     ContextKeyValueType:
       type: string
@@ -19042,15 +18984,11 @@ components:
     clientIDListType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/clientIDType'
     thumbprintListType:
       type: array
       description: Contains a list of thumbprints of identity provider server certificates.
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/thumbprintType'
     CreateOpenIDConnectProviderRequest:
       type: object
@@ -19174,8 +19112,6 @@ components:
     tagListType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
       maxItems: 50
     CreateRoleRequest:
@@ -19706,8 +19642,6 @@ components:
     RoleUsageListType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RoleUsageType'
     DeletionTaskFailureReasonType:
       type: object
@@ -19867,8 +19801,6 @@ components:
     StatementListType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Statement'
     OrganizationsDecisionDetail:
       type: object
@@ -19887,8 +19819,6 @@ components:
     ResourceSpecificResultListType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResourceSpecificResult'
     EvaluationResult:
       type: object
@@ -19927,8 +19857,6 @@ components:
     EvaluationResultsListType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EvaluationResult'
     ReportStateType:
       type: string
@@ -19978,8 +19906,6 @@ components:
     entityListType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EntityType'
     maxItemsType:
       type: integer
@@ -20006,26 +19932,18 @@ components:
     userDetailListType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/UserDetail'
     groupDetailListType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/GroupDetail'
     roleDetailListType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RoleDetail'
     ManagedPolicyDetailListType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ManagedPolicyDetail'
     responseMarkerType:
       type: string
@@ -20070,8 +19988,6 @@ components:
     SimulationPolicyListType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/policyDocumentType'
     GetContextKeysForCustomPolicyRequest:
       type: object
@@ -20132,8 +20048,6 @@ components:
       type: array
       description: <p>Contains a list of users.</p> <p>This data type is used as a response element in the <a>GetGroup</a> and <a>ListUsers</a> operations. </p>
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/User'
     GetInstanceProfileRequest:
       type: object
@@ -20339,8 +20253,6 @@ components:
     ServicesLastAccessed:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ServiceLastAccessed'
     GetServiceLastAccessedDetailsWithEntitiesRequest:
       type: object
@@ -20364,8 +20276,6 @@ components:
     entityDetailsListType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EntityDetails'
     GetServiceLinkedRoleDeletionStatusRequest:
       type: object
@@ -20399,14 +20309,10 @@ components:
     policyDetailListType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PolicyDetail'
     attachedPoliciesListType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AttachedPolicy'
     GroupDetail:
       type: object
@@ -20436,8 +20342,6 @@ components:
       type: array
       description: <p>Contains a list of IAM roles.</p> <p>This data type is used as a response element in the <a>ListRoles</a> operation.</p>
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Role'
     LineNumber:
       type: integer
@@ -20458,8 +20362,6 @@ components:
       type: array
       description: <p>Contains a list of access key metadata.</p> <p>This data type is used as a response element in the <a>ListAccessKeys</a> operation.</p>
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AccessKeyMetadata'
     ListAccountAliasesRequest:
       type: object
@@ -20474,8 +20376,6 @@ components:
     accountAliasListType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/accountAliasType'
     ListAttachedGroupPoliciesRequest:
       type: object
@@ -20564,20 +20464,14 @@ components:
     PolicyGroupListType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PolicyGroup'
     PolicyUserListType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PolicyUser'
     PolicyRoleListType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PolicyRole'
     ListGroupPoliciesRequest:
       type: object
@@ -20598,8 +20492,6 @@ components:
       type: array
       description: <p>Contains a list of policy names.</p> <p>This data type is used as a response element in the <a>ListPolicies</a> operation.</p>
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/policyNameType'
     ListGroupsForUserRequest:
       type: object
@@ -20620,8 +20512,6 @@ components:
       type: array
       description: <p>Contains a list of IAM groups.</p> <p>This data type is used as a response element in the <a>ListGroups</a> operation.</p>
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Group'
     pathPrefixType:
       type: string
@@ -20660,8 +20550,6 @@ components:
       type: array
       description: Contains a list of instance profiles.
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InstanceProfile'
     ListInstanceProfilesRequest:
       type: object
@@ -20693,8 +20581,6 @@ components:
       type: array
       description: <p>Contains a list of MFA devices.</p> <p>This data type is used as a response element in the <a>ListMFADevices</a> and <a>ListVirtualMFADevices</a> operations. </p>
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MFADevice'
     ListOpenIDConnectProvidersRequest:
       type: object
@@ -20704,14 +20590,10 @@ components:
       type: array
       description: Contains a list of IAM OpenID Connect providers.
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/OpenIDConnectProviderListEntry'
     policyGrantingServiceAccessListType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PolicyGrantingServiceAccess'
     ListPoliciesGrantingServiceAccessEntry:
       type: object
@@ -20726,8 +20608,6 @@ components:
     serviceNamespaceListType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/serviceNamespaceType'
       minItems: 1
       maxItems: 200
@@ -20750,8 +20630,6 @@ components:
     listPolicyGrantingServiceAccessResponseListType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ListPoliciesGrantingServiceAccessEntry'
     policyScopeType:
       type: string
@@ -20784,8 +20662,6 @@ components:
     policyListType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Policy'
     ListPolicyVersionsRequest:
       type: object
@@ -20805,8 +20681,6 @@ components:
     policyDocumentVersionListType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PolicyVersion'
     ListRolePoliciesRequest:
       type: object
@@ -20858,8 +20732,6 @@ components:
     SAMLProviderListType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SAMLProviderListEntry'
     ListSSHPublicKeysRequest:
       type: object
@@ -20877,8 +20749,6 @@ components:
     SSHPublicKeyListType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SSHPublicKeyMetadata'
     ListServerCertificatesRequest:
       type: object
@@ -20896,8 +20766,6 @@ components:
     serverCertificateMetadataListType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ServerCertificateMetadata'
     ListServiceSpecificCredentialsRequest:
       type: object
@@ -20912,8 +20780,6 @@ components:
     ServiceSpecificCredentialsListType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ServiceSpecificCredentialMetadata'
     ListSigningCertificatesRequest:
       type: object
@@ -20932,8 +20798,6 @@ components:
       type: array
       description: <p>Contains a list of signing certificates.</p> <p>This data type is used as a response element in the <a>ListSigningCertificates</a> operation.</p>
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SigningCertificate'
     ListUserPoliciesRequest:
       type: object
@@ -21000,8 +20864,6 @@ components:
     virtualMFADeviceListType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/VirtualMFADevice'
     MFADevice:
       type: object
@@ -21313,8 +21175,6 @@ components:
     ResourceNameListType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResourceNameType'
     ResourceSpecificResult:
       type: object
@@ -21745,8 +21605,6 @@ components:
     tagKeyListType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/tagKeyType'
       maxItems: 50
     UntagRoleRequest:
@@ -22055,8 +21913,6 @@ components:
     groupNameListType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/groupNameType'
     UserDetail:
       type: object

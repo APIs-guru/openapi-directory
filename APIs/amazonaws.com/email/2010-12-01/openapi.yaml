@@ -2264,8 +2264,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/ConfigurationSetAttribute'
         - name: Action
           in: query
@@ -2677,8 +2675,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Identity'
         - name: Action
           in: query
@@ -2753,8 +2749,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Identity'
         - name: Action
           in: query
@@ -2829,8 +2823,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Identity'
         - name: Action
           in: query
@@ -2911,8 +2903,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/PolicyName'
         - name: Action
           in: query
@@ -2987,8 +2977,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Identity'
         - name: Action
           in: query
@@ -4111,8 +4099,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/ReceiptRuleName'
         - name: Action
           in: query
@@ -4242,8 +4228,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/BouncedRecipientInfo'
         - name: BounceSenderArn
           in: query
@@ -4378,8 +4362,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Address'
         - name: ReturnPath
           in: query
@@ -4406,8 +4388,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/MessageTag'
         - name: Template
           in: query
@@ -4435,8 +4415,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/BulkEmailDestination'
         - name: Action
           in: query
@@ -4761,8 +4739,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Address'
         - name: ReturnPath
           in: query
@@ -4789,8 +4765,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/MessageTag'
         - name: ConfigurationSetName
           in: query
@@ -4937,8 +4911,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Address'
         - name: RawMessage
           in: query
@@ -4978,8 +4950,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/MessageTag'
         - name: ConfigurationSetName
           in: query
@@ -5149,8 +5119,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Address'
         - name: ReturnPath
           in: query
@@ -5177,8 +5145,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/MessageTag'
         - name: ConfigurationSetName
           in: query
@@ -7300,8 +7266,6 @@ components:
     EventTypes:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EventType'
     KinesisFirehoseDestination:
       type: object
@@ -7383,14 +7347,10 @@ components:
     RecipientsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Recipient'
     ReceiptActionsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ReceiptAction'
     InvalidSnsTopicException: {}
     InvalidS3ConfigurationException: {}
@@ -7829,8 +7789,6 @@ components:
     ExtensionFieldList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ExtensionField'
     BouncedRecipientInfo:
       type: object
@@ -7913,8 +7871,6 @@ components:
     AddressList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Address'
     Content:
       type: object
@@ -8132,8 +8088,6 @@ components:
     BouncedRecipientInfoList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BouncedRecipientInfo'
     Destination:
       type: object
@@ -8151,8 +8105,6 @@ components:
     MessageTagList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MessageTag'
     TemplateData:
       type: string
@@ -8160,8 +8112,6 @@ components:
     BulkEmailDestinationList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BulkEmailDestination'
     BulkEmailStatus:
       type: string
@@ -8200,8 +8150,6 @@ components:
     BulkEmailDestinationStatusList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BulkEmailDestinationStatus'
     Charset:
       type: string
@@ -8226,8 +8174,6 @@ components:
     CloudWatchDimensionConfigurations:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CloudWatchDimensionConfiguration'
     DimensionName:
       type: string
@@ -8268,14 +8214,10 @@ components:
     ConfigurationSetAttributeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ConfigurationSetAttribute'
     ConfigurationSets:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ConfigurationSet'
     MessageData:
       type: string
@@ -8521,8 +8463,6 @@ components:
     CustomVerificationEmailTemplates:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CustomVerificationEmailTemplate'
     DeleteConfigurationSetEventDestinationRequest:
       type: object
@@ -8671,8 +8611,6 @@ components:
     ReceiptRulesList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ReceiptRule'
     DescribeConfigurationSetRequest:
       type: object
@@ -8690,8 +8628,6 @@ components:
     EventDestinations:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EventDestination'
     ReputationOptions:
       type: object
@@ -8807,8 +8743,6 @@ components:
     IdentityList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Identity'
     GetIdentityDkimAttributesRequest:
       type: object
@@ -8851,8 +8785,6 @@ components:
     PolicyNameList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PolicyName'
     GetIdentityPoliciesRequest:
       type: object
@@ -8898,8 +8830,6 @@ components:
     SendDataPointList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SendDataPoint'
     GetTemplateRequest:
       type: object
@@ -8921,8 +8851,6 @@ components:
     VerificationTokenList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/VerificationToken'
     MailFromDomainName:
       type: string
@@ -9082,8 +9010,6 @@ components:
     ReceiptFilterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ReceiptFilter'
     ListReceiptRuleSetsRequest:
       type: object
@@ -9096,8 +9022,6 @@ components:
     ReceiptRuleSetsLists:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ReceiptRuleSetMetadata'
     ListTemplatesRequest:
       type: object
@@ -9112,8 +9036,6 @@ components:
     TemplateMetadataList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TemplateMetadata'
     Message:
       type: object
@@ -9283,8 +9205,6 @@ components:
     ReceiptRuleNamesList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ReceiptRuleName'
     Timestamp:
       type: string

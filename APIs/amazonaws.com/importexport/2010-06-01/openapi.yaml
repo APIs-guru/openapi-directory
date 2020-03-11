@@ -649,8 +649,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/GenericString'
         - name: name
           in: query
@@ -1812,8 +1810,6 @@ components:
       type: array
       description: A collection of artifacts.
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Artifact'
     ErrorMessage:
       type: string
@@ -1894,8 +1890,6 @@ components:
     JobIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/GenericString'
     name:
       type: string
@@ -2011,8 +2005,6 @@ components:
       type: array
       description: A list container for Jobs returned by the ListJobs operation.
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Job'
     MaxJobs:
       type: integer

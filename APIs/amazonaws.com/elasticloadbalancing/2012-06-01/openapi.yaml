@@ -150,8 +150,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/AccessPointName'
         - name: Tags
           in: query
@@ -160,8 +158,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Tag'
             minItems: 1
         - name: Action
@@ -279,8 +275,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/SecurityGroupId'
         - name: Action
           in: query
@@ -403,8 +397,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/SubnetId'
         - name: Action
           in: query
@@ -958,8 +950,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Listener'
         - name: AvailabilityZones
           in: query
@@ -968,8 +958,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/AvailabilityZone'
         - name: Subnets
           in: query
@@ -978,8 +966,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/SubnetId'
         - name: SecurityGroups
           in: query
@@ -988,8 +974,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/SecurityGroupId'
         - name: Scheme
           in: query
@@ -1004,8 +988,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Tag'
             minItems: 1
         - name: Action
@@ -1189,8 +1171,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Listener'
         - name: Action
           in: query
@@ -1343,8 +1323,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/PolicyAttribute'
         - name: Action
           in: query
@@ -1533,8 +1511,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/AccessPointPort'
         - name: Action
           in: query
@@ -1735,8 +1711,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Instance'
         - name: Action
           in: query
@@ -1921,8 +1895,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Instance'
         - name: Action
           in: query
@@ -2123,8 +2095,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/PolicyName'
         - name: Action
           in: query
@@ -2217,8 +2187,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/PolicyTypeName'
         - name: Action
           in: query
@@ -2311,8 +2279,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/AccessPointName'
         - name: Marker
           in: query
@@ -2425,8 +2391,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/AccessPointName'
             minItems: 1
             maxItems: 20
@@ -2527,8 +2491,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/SubnetId'
         - name: Action
           in: query
@@ -2633,8 +2595,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/AvailabilityZone'
         - name: Action
           in: query
@@ -2733,8 +2693,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/AvailabilityZone'
         - name: Action
           in: query
@@ -2964,8 +2922,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Instance'
         - name: Action
           in: query
@@ -3058,8 +3014,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/AccessPointName'
         - name: Tags
           in: query
@@ -3068,8 +3022,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/TagKeyOnly'
             minItems: 1
         - name: Action
@@ -3325,8 +3277,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/PolicyName'
         - name: Action
           in: query
@@ -3455,8 +3405,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/PolicyName'
         - name: Action
           in: query
@@ -4032,8 +3980,6 @@ components:
     AdditionalAttributes:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AdditionalAttribute'
       maxItems: 10
     RegisterEndPointsOutput:
@@ -4083,8 +4029,6 @@ components:
     AvailabilityZones:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AvailabilityZone'
     AddAvailabilityZonesInput:
       type: object
@@ -4103,14 +4047,10 @@ components:
     LoadBalancerNames:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AccessPointName'
     TagList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
       minItems: 1
     AddTagsInput:
@@ -4158,16 +4098,12 @@ components:
     AppCookieStickinessPolicies:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AppCookieStickinessPolicy'
     CookieName:
       type: string
     SecurityGroups:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SecurityGroupId'
     ApplySecurityGroupsToLoadBalancerInput:
       type: object
@@ -4186,8 +4122,6 @@ components:
     Subnets:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SubnetId'
     AttachLoadBalancerToSubnetsInput:
       type: object
@@ -4216,8 +4150,6 @@ components:
     PolicyNames:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PolicyName'
     BackendServerDescription:
       type: object
@@ -4232,8 +4164,6 @@ components:
     BackendServerDescriptions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BackendServerDescription'
     Cardinality:
       type: string
@@ -4289,8 +4219,6 @@ components:
     Listeners:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Listener'
     LoadBalancerScheme:
       type: string
@@ -4377,8 +4305,6 @@ components:
     PolicyAttributes:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PolicyAttribute'
     CreateLoadBalancerPolicyInput:
       type: object
@@ -4421,8 +4347,6 @@ components:
     Ports:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AccessPointPort'
     DeleteLoadBalancerListenerInput:
       type: object
@@ -4455,8 +4379,6 @@ components:
     Instances:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Instance'
     DeregisterEndPointsInput:
       type: object
@@ -4495,8 +4417,6 @@ components:
     LoadBalancerDescriptions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/LoadBalancerDescription'
     DescribeAccountLimitsInput:
       type: object
@@ -4511,8 +4431,6 @@ components:
     Limits:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Limit'
     DescribeEndPointStateInput:
       type: object
@@ -4530,8 +4448,6 @@ components:
     InstanceStates:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InstanceState'
     DescribeLoadBalancerAttributesInput:
       type: object
@@ -4576,14 +4492,10 @@ components:
     PolicyDescriptions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PolicyDescription'
     PolicyTypeNames:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PolicyTypeName'
     DescribeLoadBalancerPolicyTypesInput:
       type: object
@@ -4596,14 +4508,10 @@ components:
     PolicyTypeDescriptions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PolicyTypeDescription'
     LoadBalancerNamesMax20:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AccessPointName'
       minItems: 1
       maxItems: 20
@@ -4620,8 +4528,6 @@ components:
     TagDescriptions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagDescription'
     Description:
       type: string
@@ -4676,8 +4582,6 @@ components:
     LBCookieStickinessPolicies:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/LBCookieStickinessPolicy'
     Name:
       type: string
@@ -4710,8 +4614,6 @@ components:
     ListenerDescriptions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ListenerDescription'
     Policies:
       type: object
@@ -4817,8 +4719,6 @@ components:
     PolicyAttributeDescriptions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PolicyAttributeDescription'
     PolicyAttributeTypeDescription:
       type: object
@@ -4842,8 +4742,6 @@ components:
     PolicyAttributeTypeDescriptions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PolicyAttributeTypeDescription'
     PolicyDescription:
       type: object
@@ -4902,8 +4800,6 @@ components:
     TagKeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKeyOnly'
       minItems: 1
     RemoveTagsInput:

@@ -156,8 +156,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Certificate'
         - name: Action
           in: query
@@ -274,8 +272,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/ResourceArn'
         - name: Tags
           in: query
@@ -284,8 +280,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Tag'
             minItems: 1
         - name: Action
@@ -514,8 +508,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Certificate'
         - name: DefaultActions
           in: query
@@ -524,8 +516,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Action'
         - name: Action
           in: query
@@ -780,8 +770,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/SubnetId'
         - name: SubnetMappings
           in: query
@@ -790,8 +778,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/SubnetMapping'
         - name: SecurityGroups
           in: query
@@ -800,8 +786,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/SecurityGroupId'
         - name: Scheme
           in: query
@@ -819,8 +803,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Tag'
             minItems: 1
         - name: Type
@@ -1082,8 +1064,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/RuleCondition'
         - name: Priority
           in: query
@@ -1100,8 +1080,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Action'
         - name: Action
           in: query
@@ -1873,8 +1851,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/TargetDescription'
         - name: Action
           in: query
@@ -2163,8 +2139,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/ListenerArn'
         - name: Marker
           in: query
@@ -2367,8 +2341,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/LoadBalancerArn'
         - name: Names
           in: query
@@ -2377,8 +2349,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/LoadBalancerName'
         - name: Marker
           in: query
@@ -2503,8 +2473,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/RuleArn'
         - name: Marker
           in: query
@@ -2617,8 +2585,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/SslPolicyName'
         - name: Marker
           in: query
@@ -2737,8 +2703,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/ResourceArn'
         - name: Action
           in: query
@@ -2939,8 +2903,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/TargetGroupArn'
         - name: Names
           in: query
@@ -2949,8 +2911,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/TargetGroupName'
         - name: Marker
           in: query
@@ -3081,8 +3041,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/TargetDescription'
         - name: Action
           in: query
@@ -3304,8 +3262,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Certificate'
         - name: DefaultActions
           in: query
@@ -3314,8 +3270,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Action'
         - name: Action
           in: query
@@ -3504,8 +3458,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/LoadBalancerAttribute'
             maxItems: 20
         - name: Action
@@ -3665,8 +3617,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/RuleCondition'
         - name: Actions
           in: query
@@ -3675,8 +3625,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Action'
         - name: Action
           in: query
@@ -4009,8 +3957,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/TargetGroupAttribute'
         - name: Action
           in: query
@@ -4127,8 +4073,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/TargetDescription'
         - name: Action
           in: query
@@ -4245,8 +4189,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Certificate'
         - name: Action
           in: query
@@ -4363,8 +4305,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/ResourceArn'
         - name: TagKeys
           in: query
@@ -4373,8 +4313,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/TagKey'
         - name: Action
           in: query
@@ -4614,8 +4552,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/RulePriorityPair'
         - name: Action
           in: query
@@ -4732,8 +4668,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/SecurityGroupId'
         - name: Action
           in: query
@@ -4868,8 +4802,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/SubnetId'
         - name: SubnetMappings
           in: query
@@ -4878,8 +4810,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/SubnetMapping'
         - name: Action
           in: query
@@ -5848,14 +5778,10 @@ components:
     Actions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Action'
     CertificateList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Certificate'
     AddListenerCertificatesInput:
       type: object
@@ -5873,14 +5799,10 @@ components:
     ResourceArns:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResourceArn'
     TagList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
       minItems: 1
     AddTagsInput:
@@ -5963,8 +5885,6 @@ components:
     LoadBalancerAddresses:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/LoadBalancerAddress'
     AvailabilityZone:
       type: object
@@ -5982,8 +5902,6 @@ components:
     AvailabilityZones:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AvailabilityZone'
     CanonicalHostedZoneId:
       type: string
@@ -6008,8 +5926,6 @@ components:
     Ciphers:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Cipher'
     ConditionFieldName:
       type: string
@@ -6057,26 +5973,18 @@ components:
     Listeners:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Listener'
     Subnets:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SubnetId'
     SubnetMappings:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SubnetMapping'
     SecurityGroups:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SecurityGroupId'
     LoadBalancerSchemeEnum:
       type: string
@@ -6126,14 +6034,10 @@ components:
     LoadBalancers:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/LoadBalancer'
     RuleConditionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RuleCondition'
     RulePriority:
       type: integer
@@ -6163,8 +6067,6 @@ components:
     Rules:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Rule'
     VpcId:
       type: string
@@ -6254,8 +6156,6 @@ components:
     TargetGroups:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TargetGroup'
     CreatedTime:
       type: string
@@ -6301,8 +6201,6 @@ components:
     TargetDescriptions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TargetDescription'
     DeregisterTargetsInput:
       type: object
@@ -6336,8 +6234,6 @@ components:
     Limits:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Limit'
     DescribeListenerCertificatesInput:
       type: object
@@ -6357,8 +6253,6 @@ components:
     ListenerArns:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ListenerArn'
     DescribeListenersInput:
       type: object
@@ -6388,21 +6282,15 @@ components:
     LoadBalancerAttributes:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/LoadBalancerAttribute'
       maxItems: 20
     LoadBalancerArns:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/LoadBalancerArn'
     LoadBalancerNames:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/LoadBalancerName'
     DescribeLoadBalancersInput:
       type: object
@@ -6423,8 +6311,6 @@ components:
     RuleArns:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RuleArn'
     DescribeRulesInput:
       type: object
@@ -6445,8 +6331,6 @@ components:
     SslPolicyNames:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SslPolicyName'
     DescribeSSLPoliciesInput:
       type: object
@@ -6464,8 +6348,6 @@ components:
     SslPolicies:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SslPolicy'
     DescribeTagsInput:
       type: object
@@ -6479,8 +6361,6 @@ components:
     TagDescriptions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagDescription'
     DescribeTargetGroupAttributesInput:
       type: object
@@ -6494,20 +6374,14 @@ components:
     TargetGroupAttributes:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TargetGroupAttribute'
     TargetGroupArns:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TargetGroupArn'
     TargetGroupNames:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TargetGroupName'
     DescribeTargetGroupsInput:
       type: object
@@ -6543,8 +6417,6 @@ components:
     TargetHealthDescriptions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TargetHealthDescription'
     Description:
       type: string
@@ -6562,8 +6434,6 @@ components:
     TargetGroupList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TargetGroupTuple'
     TargetGroupStickinessConfig:
       type: object
@@ -6578,8 +6448,6 @@ components:
     ListOfString:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/StringValue'
     HostHeaderConditionConfig:
       type: object
@@ -6844,8 +6712,6 @@ components:
     QueryStringKeyValuePairList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/QueryStringKeyValuePair'
     QueryStringConditionConfig:
       type: object
@@ -6915,8 +6781,6 @@ components:
     TagKeys:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKey'
     RemoveTagsInput:
       type: object
@@ -6962,8 +6826,6 @@ components:
     RulePriorityList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RulePriorityPair'
     SetIpAddressTypeInput:
       type: object
@@ -7031,8 +6893,6 @@ components:
     SslProtocols:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SslProtocol'
     SslProtocol:
       type: string

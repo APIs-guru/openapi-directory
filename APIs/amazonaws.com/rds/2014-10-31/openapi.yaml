@@ -503,8 +503,6 @@ paths:
             type: array
             description: 'A list of tags. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide.</i> '
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Tag'
         - name: Action
           in: query
@@ -1105,8 +1103,6 @@ paths:
             type: array
             description: 'A list of tags. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide.</i> '
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Tag'
         - name: Action
           in: query
@@ -1266,8 +1262,6 @@ paths:
             type: array
             description: 'A list of tags. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide.</i> '
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Tag'
         - name: SourceRegion
           in: query
@@ -1421,8 +1415,6 @@ paths:
             type: array
             description: 'A list of tags. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide.</i> '
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Tag'
         - name: Action
           in: query
@@ -1564,8 +1556,6 @@ paths:
             type: array
             description: 'A list of tags. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide.</i> '
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Tag'
         - name: CopyTags
           in: query
@@ -1731,8 +1721,6 @@ paths:
             type: array
             description: 'A list of tags. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide.</i> '
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Tag'
         - name: Action
           in: query
@@ -2059,8 +2047,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: BackupRetentionPeriod
           in: query
@@ -2099,8 +2085,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: DBSubnetGroupName
           in: query
@@ -2170,8 +2154,6 @@ paths:
             type: array
             description: 'A list of tags. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide.</i> '
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Tag'
         - name: StorageEncrypted
           in: query
@@ -2210,8 +2192,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: EngineMode
           in: query
@@ -2519,8 +2499,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: ExcludedMembers
           in: query
@@ -2529,8 +2507,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: Tags
           in: query
@@ -2540,8 +2516,6 @@ paths:
             type: array
             description: 'A list of tags. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide.</i> '
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Tag'
         - name: Action
           in: query
@@ -2683,8 +2657,6 @@ paths:
             type: array
             description: 'A list of tags. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide.</i> '
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Tag'
         - name: Action
           in: query
@@ -2814,8 +2786,6 @@ paths:
             type: array
             description: 'A list of tags. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide.</i> '
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Tag'
         - name: Action
           in: query
@@ -3076,8 +3046,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: VpcSecurityGroupIds
           in: query
@@ -3086,8 +3054,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: AvailabilityZone
           in: query
@@ -3187,8 +3153,6 @@ paths:
             type: array
             description: 'A list of tags. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide.</i> '
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Tag'
         - name: DBClusterIdentifier
           in: query
@@ -3299,8 +3263,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: ProcessorFeatures
           in: query
@@ -3309,8 +3271,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/ProcessorFeature'
         - name: DeletionProtection
           in: query
@@ -3692,8 +3652,6 @@ paths:
             type: array
             description: 'A list of tags. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide.</i> '
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Tag'
         - name: DBSubnetGroupName
           in: query
@@ -3708,8 +3666,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: StorageType
           in: query
@@ -3778,8 +3734,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: ProcessorFeatures
           in: query
@@ -3788,8 +3742,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/ProcessorFeature'
         - name: UseDefaultProcessorFeatures
           in: query
@@ -4039,8 +3991,6 @@ paths:
             type: array
             description: 'A list of tags. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide.</i> '
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Tag'
         - name: Action
           in: query
@@ -4159,8 +4109,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/UserAuthConfig'
         - name: RoleArn
           in: query
@@ -4175,8 +4123,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: VpcSecurityGroupIds
           in: query
@@ -4185,8 +4131,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: RequireTLS
           in: query
@@ -4214,8 +4158,6 @@ paths:
             type: array
             description: 'A list of tags. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide.</i> '
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Tag'
         - name: Action
           in: query
@@ -4339,8 +4281,6 @@ paths:
             type: array
             description: 'A list of tags. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide.</i> '
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Tag'
         - name: Action
           in: query
@@ -4470,8 +4410,6 @@ paths:
             type: array
             description: 'A list of tags. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide.</i> '
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Tag'
         - name: Action
           in: query
@@ -4612,8 +4550,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: Tags
           in: query
@@ -4623,8 +4559,6 @@ paths:
             type: array
             description: 'A list of tags. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide.</i> '
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Tag'
         - name: Action
           in: query
@@ -4789,8 +4723,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: SourceIds
           in: query
@@ -4799,8 +4731,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: Enabled
           in: query
@@ -4816,8 +4746,6 @@ paths:
             type: array
             description: 'A list of tags. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide.</i> '
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Tag'
         - name: Action
           in: query
@@ -5127,8 +5055,6 @@ paths:
             type: array
             description: 'A list of tags. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide.</i> '
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Tag'
         - name: Action
           in: query
@@ -6873,8 +6799,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: DBClusterIdentifiers
           in: query
@@ -6883,8 +6807,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: Action
           in: query
@@ -7061,8 +6983,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Filter'
         - name: MaxRecords
           in: query
@@ -7167,8 +7087,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Filter'
         - name: MaxRecords
           in: query
@@ -7297,8 +7215,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Filter'
         - name: MaxRecords
           in: query
@@ -7415,8 +7331,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Filter'
         - name: MaxRecords
           in: query
@@ -7521,8 +7435,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Filter'
         - name: MaxRecords
           in: query
@@ -7633,8 +7545,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Filter'
         - name: MaxRecords
           in: query
@@ -7835,8 +7745,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Filter'
         - name: MaxRecords
           in: query
@@ -7953,8 +7861,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Filter'
         - name: MaxRecords
           in: query
@@ -8083,8 +7989,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Filter'
         - name: MaxRecords
           in: query
@@ -8225,8 +8129,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Filter'
         - name: MaxRecords
           in: query
@@ -8343,8 +8245,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Filter'
         - name: MaxRecords
           in: query
@@ -8479,8 +8379,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Filter'
         - name: MaxRecords
           in: query
@@ -8597,8 +8495,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Filter'
         - name: MaxRecords
           in: query
@@ -8721,8 +8617,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Filter'
         - name: MaxRecords
           in: query
@@ -8839,8 +8733,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Filter'
         - name: Marker
           in: query
@@ -8977,8 +8869,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Filter'
         - name: Marker
           in: query
@@ -9133,8 +9023,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Filter'
         - name: Marker
           in: query
@@ -9271,8 +9159,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Filter'
         - name: MaxRecords
           in: query
@@ -9485,8 +9371,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Filter'
         - name: MaxRecords
           in: query
@@ -9621,8 +9505,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Filter'
         - name: MaxRecords
           in: query
@@ -9733,8 +9615,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Filter'
         - name: MaxRecords
           in: query
@@ -9827,8 +9707,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Filter'
         - name: MaxRecords
           in: query
@@ -9933,8 +9811,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Filter'
         - name: Action
           in: query
@@ -10021,8 +9897,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Filter'
         - name: MaxRecords
           in: query
@@ -10166,8 +10040,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: Filters
           in: query
@@ -10176,8 +10048,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Filter'
         - name: MaxRecords
           in: query
@@ -10294,8 +10164,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Filter'
         - name: Marker
           in: query
@@ -10412,8 +10280,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Filter'
         - name: MaxRecords
           in: query
@@ -10530,8 +10396,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Filter'
         - name: MaxRecords
           in: query
@@ -10648,8 +10512,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Filter'
         - name: MaxRecords
           in: query
@@ -10760,8 +10622,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Filter'
         - name: Marker
           in: query
@@ -10908,8 +10768,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Filter'
         - name: MaxRecords
           in: query
@@ -11020,8 +10878,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Filter'
         - name: Marker
           in: query
@@ -11168,8 +11024,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Filter'
         - name: MaxRecords
           in: query
@@ -11316,8 +11170,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Filter'
         - name: MaxRecords
           in: query
@@ -11440,8 +11292,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Filter'
         - name: Action
           in: query
@@ -11996,8 +11846,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Filter'
         - name: Action
           in: query
@@ -12408,8 +12256,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: Port
           in: query
@@ -12725,8 +12571,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: ExcludedMembers
           in: query
@@ -12735,8 +12579,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: Action
           in: query
@@ -12859,8 +12701,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Parameter'
         - name: Action
           in: query
@@ -12977,8 +12817,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: ValuesToRemove
           in: query
@@ -12987,8 +12825,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: Action
           in: query
@@ -13207,8 +13043,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: VpcSecurityGroupIds
           in: query
@@ -13217,8 +13051,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: ApplyImmediately
           in: query
@@ -13421,8 +13253,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/ProcessorFeature'
         - name: UseDefaultProcessorFeatures
           in: query
@@ -13641,8 +13471,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Parameter'
         - name: Action
           in: query
@@ -13759,8 +13587,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/UserAuthConfig'
         - name: RequireTLS
           in: query
@@ -13793,8 +13619,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: Action
           in: query
@@ -14156,8 +13980,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: ValuesToRemove
           in: query
@@ -14166,8 +13988,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: Action
           in: query
@@ -14302,8 +14122,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: Action
           in: query
@@ -14462,8 +14280,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: Enabled
           in: query
@@ -14706,8 +14522,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/OptionConfiguration'
         - name: OptionsToRemove
           in: query
@@ -14716,8 +14530,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: ApplyImmediately
           in: query
@@ -15051,8 +14863,6 @@ paths:
             type: array
             description: 'A list of tags. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide.</i> '
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Tag'
         - name: Action
           in: query
@@ -15307,8 +15117,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: DBClusterIdentifiers
           in: query
@@ -15317,8 +15125,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: Action
           in: query
@@ -15901,8 +15707,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: Action
           in: query
@@ -16015,8 +15819,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Parameter'
         - name: Action
           in: query
@@ -16127,8 +15929,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Parameter'
         - name: Action
           in: query
@@ -16299,8 +16099,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: BackupRetentionPeriod
           in: query
@@ -16339,8 +16137,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: DBSubnetGroupName
           in: query
@@ -16404,8 +16200,6 @@ paths:
             type: array
             description: 'A list of tags. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide.</i> '
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Tag'
         - name: StorageEncrypted
           in: query
@@ -16468,8 +16262,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: DeletionProtection
           in: query
@@ -16766,8 +16558,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: DBClusterIdentifier
           in: query
@@ -16824,8 +16614,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: Tags
           in: query
@@ -16835,8 +16623,6 @@ paths:
             type: array
             description: 'A list of tags. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide.</i> '
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Tag'
         - name: KmsKeyId
           in: query
@@ -16863,8 +16649,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: EngineMode
           in: query
@@ -17269,8 +17053,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: Tags
           in: query
@@ -17280,8 +17062,6 @@ paths:
             type: array
             description: 'A list of tags. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide.</i> '
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Tag'
         - name: KmsKeyId
           in: query
@@ -17308,8 +17088,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: DBClusterParameterGroupName
           in: query
@@ -17727,8 +17505,6 @@ paths:
             type: array
             description: 'A list of tags. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide.</i> '
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Tag'
         - name: StorageType
           in: query
@@ -17755,8 +17531,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: Domain
           in: query
@@ -17789,8 +17563,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: ProcessorFeatures
           in: query
@@ -17799,8 +17571,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/ProcessorFeature'
         - name: UseDefaultProcessorFeatures
           in: query
@@ -18157,8 +17927,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: VpcSecurityGroupIds
           in: query
@@ -18167,8 +17935,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: AvailabilityZone
           in: query
@@ -18262,8 +18028,6 @@ paths:
             type: array
             description: 'A list of tags. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide.</i> '
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Tag'
         - name: StorageType
           in: query
@@ -18362,8 +18126,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: ProcessorFeatures
           in: query
@@ -18372,8 +18134,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/ProcessorFeature'
         - name: UseDefaultProcessorFeatures
           in: query
@@ -18798,8 +18558,6 @@ paths:
             type: array
             description: 'A list of tags. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide.</i> '
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Tag'
         - name: StorageType
           in: query
@@ -18826,8 +18584,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: Domain
           in: query
@@ -18854,8 +18610,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: ProcessorFeatures
           in: query
@@ -18864,8 +18618,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/ProcessorFeature'
         - name: UseDefaultProcessorFeatures
           in: query
@@ -19795,8 +19547,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
         - name: Action
           in: query
@@ -21193,8 +20943,6 @@ components:
     LogTypeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     DBClusterParameterGroupNameMessage:
       type: object
@@ -21274,8 +21022,6 @@ components:
     StringList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     ModifyDBSnapshotResult:
       type: object
@@ -21470,8 +21216,6 @@ components:
     AccountQuotaList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AccountQuota'
     Long:
       type: integer
@@ -21585,8 +21329,6 @@ components:
       type: array
       description: 'A list of tags. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide.</i> '
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
     AddTagsToResourceMessage:
       type: object
@@ -21638,8 +21380,6 @@ components:
     AttributeValueList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     AuthScheme:
       type: string
@@ -21702,14 +21442,10 @@ components:
     AvailabilityZoneList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AvailabilityZone'
     AvailabilityZones:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     AvailableProcessorFeature:
       type: object
@@ -21727,8 +21463,6 @@ components:
     AvailableProcessorFeatureList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AvailableProcessorFeature'
     TStamp:
       type: string
@@ -21795,8 +21529,6 @@ components:
     CertificateList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Certificate'
     CharacterSet:
       type: object
@@ -22252,8 +21984,6 @@ components:
     VpcSecurityGroupIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     LongOptional:
       type: integer
@@ -22583,14 +22313,10 @@ components:
     DBSecurityGroupNameList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     ProcessorFeatureList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ProcessorFeature'
     CreateDBInstanceMessage:
       type: object
@@ -23044,8 +22770,6 @@ components:
     UserAuthConfigList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/UserAuthConfig'
     CreateDBProxyRequest:
       type: object
@@ -23169,8 +22893,6 @@ components:
     SubnetIdentifierList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     CreateDBSubnetGroupMessage:
       type: object
@@ -23218,14 +22940,10 @@ components:
     EventCategoriesList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     SourceIdsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     CreateEventSubscriptionMessage:
       type: object
@@ -23364,38 +23082,26 @@ components:
     CustomAvailabilityZoneList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CustomAvailabilityZone'
     DBClusterOptionGroupMemberships:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DBClusterOptionGroupStatus'
     ReadReplicaIdentifierList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     DBClusterMemberList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DBClusterMember'
     VpcSecurityGroupMembershipList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/VpcSecurityGroupMembership'
     DBClusterRoles:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DBClusterRole'
     ScalingConfigurationInfo:
       type: object
@@ -23420,26 +23126,18 @@ components:
       type: array
       description: List of Active Directory Domain membership records associated with a DB instance or cluster.
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DomainMembership'
     DBClusterBacktrackList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DBClusterBacktrack'
     DBClusterEndpointList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DBClusterEndpoint'
     DBClusterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DBCluster'
     DBClusterMember:
       type: object
@@ -23470,14 +23168,10 @@ components:
     ParametersList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Parameter'
     DBClusterParameterGroupList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DBClusterParameterGroup'
     DBClusterRole:
       type: object
@@ -23505,8 +23199,6 @@ components:
     DBClusterSnapshotAttributeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DBClusterSnapshotAttribute'
     DBClusterSnapshotAttributesResult:
       type: object
@@ -23521,38 +23213,26 @@ components:
     DBClusterSnapshotList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DBClusterSnapshot'
     SupportedCharacterSetsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CharacterSet'
     ValidUpgradeTargetList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/UpgradeTarget'
     SupportedTimezonesList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Timezone'
     EngineModeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     FeatureNameList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     DBEngineVersion:
       type: object
@@ -23606,8 +23286,6 @@ components:
     DBEngineVersionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DBEngineVersion'
     Endpoint:
       type: object
@@ -23625,14 +23303,10 @@ components:
     DBSecurityGroupMembershipList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DBSecurityGroupMembership'
     DBParameterGroupStatusList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DBParameterGroupStatus'
     PendingModifiedValues:
       type: object
@@ -23685,32 +23359,22 @@ components:
     ReadReplicaDBInstanceIdentifierList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     ReadReplicaDBClusterIdentifierList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     OptionGroupMembershipList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/OptionGroupMembership'
     DBInstanceStatusInfoList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DBInstanceStatusInfo'
     DBInstanceRoles:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DBInstanceRole'
     RestoreWindow:
       type: object
@@ -23798,14 +23462,10 @@ components:
     DBInstanceAutomatedBackupList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DBInstanceAutomatedBackup'
     DBInstanceList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DBInstance'
     DBInstanceRole:
       type: object
@@ -23839,8 +23499,6 @@ components:
     DBParameterGroupList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DBParameterGroup'
     DBParameterGroupStatus:
       type: object
@@ -23864,14 +23522,10 @@ components:
     UserAuthConfigInfoList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/UserAuthConfigInfo'
     DBProxyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DBProxy'
     TargetType:
       type: string
@@ -23932,14 +23586,10 @@ components:
     EC2SecurityGroupList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EC2SecurityGroup'
     IPRangeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/IPRange'
     DBSecurityGroupMembership:
       type: object
@@ -23954,8 +23604,6 @@ components:
     DBSecurityGroups:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DBSecurityGroup'
     DBSnapshotAttribute:
       type: object
@@ -23970,8 +23618,6 @@ components:
     DBSnapshotAttributeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DBSnapshotAttribute'
     DBSnapshotAttributesResult:
       type: object
@@ -23986,20 +23632,14 @@ components:
     DBSnapshotList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DBSnapshot'
     SubnetList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Subnet'
     DBSubnetGroups:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DBSubnetGroup'
     DeleteCustomAvailabilityZoneMessage:
       type: object
@@ -24197,8 +23837,6 @@ components:
     FilterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Filter'
     DescribeCertificatesMessage:
       type: object
@@ -24459,8 +24097,6 @@ components:
     DescribeDBLogFilesList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DescribeDBLogFilesDetails'
     DescribeDBLogFilesMessage:
       type: object
@@ -24572,8 +24208,6 @@ components:
     TargetGroupList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DBProxyTargetGroup'
     DescribeDBProxyTargetsRequest:
       type: object
@@ -24599,8 +24233,6 @@ components:
     TargetList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DBProxyTarget'
     DescribeDBSecurityGroupsMessage:
       type: object
@@ -25084,8 +24716,6 @@ components:
     DoubleRangeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DoubleRange'
     DownloadDBLogFilePortionMessage:
       type: object
@@ -25158,26 +24788,18 @@ components:
     EventCategoriesMapList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EventCategoriesMap'
     EventList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Event'
     EventSubscriptionsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EventSubscription'
     ExportTasksList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ExportTask'
     FailoverDBClusterMessage:
       type: object
@@ -25195,26 +24817,18 @@ components:
     FilterValueList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     GlobalClusterMemberList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/GlobalClusterMember'
     GlobalClusterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/GlobalCluster'
     ReadersArnList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     GlobalClusterMember:
       type: object
@@ -25279,14 +24893,10 @@ components:
     InstallationMediaList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InstallationMedia'
     KeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     ListTagsForResourceMessage:
       type: object
@@ -25314,8 +24924,6 @@ components:
     MinimumEngineVersionPerAllowedValueList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MinimumEngineVersionPerAllowedValue'
     ModifyCertificatesMessage:
       type: object
@@ -25759,14 +25367,10 @@ components:
     OptionConfigurationList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/OptionConfiguration'
     OptionNamesList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     ModifyOptionGroupMessage:
       type: object
@@ -25790,8 +25394,6 @@ components:
     OptionSettingConfigurationList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/OptionSetting'
     Option:
       type: object
@@ -25827,14 +25429,10 @@ components:
     OptionSettingsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/OptionSetting'
     OptionsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Option'
     OptionGroupMembership:
       type: object
@@ -25849,26 +25447,18 @@ components:
     OptionsDependedOn:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     OptionsConflictsWith:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     OptionGroupOptionSettingsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/OptionGroupOptionSetting'
     OptionGroupOptionVersionsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/OptionVersion'
     OptionGroupOption:
       type: object
@@ -25964,14 +25554,10 @@ components:
       type: array
       description: List of available option group options.
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/OptionGroupOption'
     OptionGroupsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/OptionGroup'
     OptionSetting:
       type: object
@@ -26083,8 +25669,6 @@ components:
     OrderableDBInstanceOptionsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/OrderableDBInstanceOption'
     PendingCloudwatchLogsExports:
       type: object
@@ -26121,14 +25705,10 @@ components:
     PendingMaintenanceActionDetails:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PendingMaintenanceAction'
     PendingMaintenanceActions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResourcePendingMaintenanceActions'
     PromoteReadReplicaDBClusterMessage:
       type: object
@@ -26242,8 +25822,6 @@ components:
     RangeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Range'
     RebootDBInstanceMessage:
       type: object
@@ -26271,8 +25849,6 @@ components:
     RecurringChargeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RecurringCharge'
     RegisterDBProxyTargetsRequest:
       type: object
@@ -26366,8 +25942,6 @@ components:
     ReservedDBInstanceList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ReservedDBInstance'
     ReservedDBInstancesOffering:
       type: object
@@ -26406,8 +25980,6 @@ components:
     ReservedDBInstancesOfferingList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ReservedDBInstancesOffering'
     ResetDBClusterParameterGroupMessage:
       type: object
@@ -27054,8 +26626,6 @@ components:
     SourceRegionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SourceRegion'
     StartActivityStreamRequest:
       type: object
@@ -27222,8 +26792,6 @@ components:
     ValidStorageOptionsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ValidStorageOptions'
     ValidStorageOptions:
       type: object

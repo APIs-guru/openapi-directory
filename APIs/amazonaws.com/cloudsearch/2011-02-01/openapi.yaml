@@ -1137,8 +1137,6 @@ paths:
             type: array
             description: A list of domain names.
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/DomainName'
         - name: Action
           in: query
@@ -1258,8 +1256,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/FieldName'
         - name: Action
           in: query
@@ -1386,8 +1382,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/FieldName'
         - name: Action
           in: query
@@ -2938,8 +2932,6 @@ components:
     SourceAttributeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SourceAttribute'
     InvalidTypeException:
       type: object
@@ -3382,8 +3374,6 @@ components:
       type: array
       description: A list of domain names.
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DomainName'
     DescribeDomainsRequest:
       type: object
@@ -3396,14 +3386,10 @@ components:
       type: array
       description: The current status of all of your search domains.
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DomainStatus'
     FieldNameList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FieldName'
     DescribeIndexFieldsRequest:
       type: object
@@ -3419,8 +3405,6 @@ components:
     IndexFieldStatusList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/IndexFieldStatus'
     DescribeRankExpressionsRequest:
       type: object
@@ -3436,8 +3420,6 @@ components:
     RankExpressionStatusList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RankExpressionStatus'
     DescribeServiceAccessPoliciesRequest:
       type: object

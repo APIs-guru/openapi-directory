@@ -134,8 +134,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
             xml:
               wrapped: false
@@ -146,8 +144,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
             xml:
               wrapped: false
@@ -386,8 +382,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/ChangeMessageVisibilityBatchRequestEntry'
             xml:
               wrapped: false
@@ -758,8 +752,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/DeleteMessageBatchRequestEntry'
             xml:
               wrapped: false
@@ -966,8 +958,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/QueueAttributeName'
             xml:
               wrapped: false
@@ -1528,8 +1518,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/QueueAttributeName'
             xml:
               wrapped: false
@@ -1540,8 +1528,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/MessageAttributeName'
             xml:
               wrapped: false
@@ -1945,8 +1931,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/SendMessageBatchRequestEntry'
             xml:
               wrapped: false
@@ -2266,8 +2250,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/TagKey'
             xml:
               wrapped: false
@@ -2652,16 +2634,12 @@ components:
     AWSAccountIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
       xml:
         wrapped: false
     ActionNameList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
       xml:
         wrapped: false
@@ -2690,8 +2668,6 @@ components:
     AttributeNameList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/QueueAttributeName'
       xml:
         wrapped: false
@@ -2720,8 +2696,6 @@ components:
     BatchResultErrorEntryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BatchResultErrorEntry'
       xml:
         wrapped: false
@@ -2730,14 +2704,10 @@ components:
     BinaryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Binary'
     ChangeMessageVisibilityBatchRequestEntryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ChangeMessageVisibilityBatchRequestEntry'
       xml:
         wrapped: false
@@ -2760,8 +2730,6 @@ components:
     ChangeMessageVisibilityBatchResultEntryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ChangeMessageVisibilityBatchResultEntry'
       xml:
         wrapped: false
@@ -2822,8 +2790,6 @@ components:
     DeleteMessageBatchRequestEntryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DeleteMessageBatchRequestEntry'
       xml:
         wrapped: false
@@ -2844,8 +2810,6 @@ components:
     DeleteMessageBatchResultEntryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DeleteMessageBatchResultEntry'
       xml:
         wrapped: false
@@ -2921,8 +2885,6 @@ components:
     QueueUrlList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
       xml:
         wrapped: false
@@ -2983,16 +2945,12 @@ components:
     MessageAttributeNameList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MessageAttributeName'
       xml:
         wrapped: false
     StringList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     MessageBodySystemAttributeMap:
       type: object
@@ -3003,8 +2961,6 @@ components:
     MessageList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Message'
       xml:
         wrapped: false
@@ -3078,8 +3034,6 @@ components:
     SendMessageBatchRequestEntryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SendMessageBatchRequestEntry'
       xml:
         wrapped: false
@@ -3100,8 +3054,6 @@ components:
     SendMessageBatchResultEntryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SendMessageBatchResultEntry'
       xml:
         wrapped: false
@@ -3177,8 +3129,6 @@ components:
     TagKeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKey'
       xml:
         wrapped: false
